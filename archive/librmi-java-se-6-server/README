@@ -1,0 +1,108 @@
+Remote Method Invocation Java SE 6 Server
+
+Erik Dominikus
+2012-11-26
+
+Standalone Server
+
+    Quick Start
+
+        To start the server,
+    
+            sh start.sh NAME HOST PORT CLASS...
+    
+        To stop, use JConsole to invoke the MXBean's "stop" method.
+        See the "Management" section below for more details.
+        If you don't really care, just send SIGINT (Ctrl-C).
+    
+        NAME must be unique.
+        This name will be a part of the name of the MXBean instance
+        registered to local MBean server.
+    
+        HOST is the host name or IP address of the interface
+        on which the server will listen.
+        Put "0.0.0.0" to listen on all interfaces.
+    
+        PORT is the IP port on which the server will listen.
+        We recommend a value not less than 1024.
+    
+        CLASS... is zero or more names of your servlet classes.
+        The first class corresponds to the class of object 0,
+        the second class to the class of object 1, and so on.
+        Each class must be a public class
+        and must have a public zero-argument constructor.
+        
+        Example:
+        
+            sh start.sh test localhost 1024 id.web.edom.rmi.example.EchoServlet
+
+    Invocation
+
+        java -cp CLASSPATH
+            -Dname=NAME
+            -Dport=PORT
+            [-Dhost=HOST]
+            [-DmaxConnections=MAXCONNECTIONS]
+            [-Dtimeout=TIMEOUT]
+            id.web.edom.rmi.server.RmiServer
+            NAME
+            CLASS...
+
+        NAME is the name that will registered to local MBean server.
+        See the "Management" section below.
+
+        PORT is the Internet Protocol port to use.
+        We recommend that the port be not less than 1024.
+
+        HOST is the Internet Protocol address of the interface
+        on which the server will accept incoming connections.
+        Absence of this argument or a value of "0.0.0.0"
+        means that the server will listen on all interfaces.
+
+        MAXCONNECTIONS is the maximum number
+        of simultaneous active connections.
+
+        TIMEOUT is the transput timeout in milliseconds.
+        If a connection is idle for at least this duration,
+        that connection will be closed.
+
+        CLASS... are zero or more servlet classes.
+
+    Management
+
+        The server registers a MXBean in the local MBean server.
+        The name used to register that bean is
+        "id.web.edom:type=RmiServer,name=NAME"
+        where NAME is the name given in the command line.
+
+        You can use JConsole to interact with that bean.
+        Usually JConsole can be started
+        by entering "jconsole" in the terminal.
+        With JConsole, you can get some statistics such as uptime,
+        or perform some operations such as stopping the server.
+
+        Nevertheless, any JMX agent that can connect to the local MBean server should do.
+
+
+    Memory Usage
+    
+        If
+
+        F is the maximum frame size
+        Q is the maximum queue length
+        C is the maximum simultaneous open connections
+        
+        then the server should be provided at least F * Q * C bytes of memory.
+        
+        Example:
+        
+        F = 4 KiB
+        Q = 4
+        C = 65536
+        
+        requires at least 1 GiB.
+        However, this is only for managing connections;
+        the execution of methods require additional memory
+        depending on the method.
+        
+        OutOfMemoryError will terminate the server.
