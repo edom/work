@@ -1,0 +1,100 @@
+Remote Method Invocation Base
+
+Erik Dominikus
+2012-11-26
+
+librmi-java
+
+    This is the base subset of the library.
+    This base subset must be able to run on Java 3.
+
+librmi-java                 base subset
+librmi-java-se-6            base subset for Java SE 6
+librmi-java-se-6-server     library for Java SE 6 server
+librmi-java-se-6-client     library for Java SE 6 client
+
+Overview
+
+    Symmetric (both endpoints are the same).
+
+    Pipelining (concurrent calls).
+
+    Binary (as opposed to text) for speed.
+
+    Both endpoints are the same.
+
+    Endpoints exchange frames.
+
+    Remote Procedure Call is RMI whose Object Number is always zero.
+    
+    Typically you use librmi-java and librmi-javase.
+
+Similar
+
+    Java RMI uses Java Serialization.
+
+Limitations
+
+    Object number must always be zero.
+
+    No exported object can declare overloaded methods.
+
+    There is no way to pass null.
+
+    Maximum frame length is artificially limited.
+
+Frame Format
+
+    Byte order is big-endian.
+
+    Bytes   Bit     Description
+
+    0-3             Length of the rest of this frame
+                    (that is, not including this field).
+                    The minimum value for this field is 12
+                    since the minimum frame size including the length is 16 bytes.
+
+    4-7             Sequence Number.
+                    Caller generates this.
+
+    8       7       Frame Type.
+
+                    0       call
+                    1       return
+
+            6-0     Reserved. Set to zero.
+
+    9               Protocol Version.
+                    Set to zero.
+
+    10-11           Method Number (for Call).
+                    Status (for Return).
+
+    12-15           Object Number (for Call).
+                    Reserved (for Return).
+                    Reserved must be zero.
+
+                    This is not yet implemented.
+                    This must be set to zero.        
+
+    16-n            Arguments.
+
+
+Special Method Numbers
+
+    hexadecimal     signature
+
+    8000            void ping ();
+                    a no-operation that tests whether the other end is still alive.
+
+    FFFF            Type getRemoteInterface (); (TODO)
+    FFFF            int lookup (String name, Class<?>[] parameterTypes) throws NoSuchMethodException;
+
+
+Serialization
+
+    Do not rely on the serialization format.
+    It can change without notice.
+
+    Serialization is limited and is not as complete as the serialization
+    that comes with Java SE.
