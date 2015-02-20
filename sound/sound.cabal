@@ -1,0 +1,82 @@
+name:               sound
+version:            0.0.0
+license:            BSD3
+license-file:       LICENSE
+author:             Erik Dominikus
+maintainer:         haskell@edom.web.id
+copyright:          (c) 2015 Erik Dominikus
+build-type:         Simple
+cabal-version:      >= 1.10
+description:
+    The documentation of "Sound" has an overview.
+    .
+    See also the source code of "Sound.Example".
+    .
+    Do not import modules whose name begins with @Sound.Internal@.
+    Those modules are here for documentation completeness only.
+
+library
+    exposed-modules:     
+        Sound.Example
+        Sound
+        Sound.Abstract
+        Sound.Amplitude
+        Sound.Buffer
+        Sound.Compile
+        Sound.Endo
+        Sound.ExampleFail
+        Sound.Filter
+        Sound.Fm
+        Sound.Fourier
+        Sound.Function
+        Sound.GenBody
+        Sound.GenPtr
+        Sound.Generator
+        Sound.GeneratorContinuation
+        Sound.GeneratorMonadic
+        Sound.Hint
+        Sound.InfList
+        Sound.Int
+        Sound.Io
+        Sound.Io.Au
+        Sound.Io.Snd
+        Sound.IoFail
+        Sound.IoPtr
+        Sound.IoSox
+        Sound.List
+        Sound.Midi
+        Sound.Pair
+        Sound.Perform
+        Sound.Portaudio
+        Sound.Procedural
+        Sound.Ptr
+        Sound.Ramp
+        Sound.Sample
+        Sound.Step
+        Sound.Stream
+        Sound.StreamVector
+        Sound.Sync
+        Sound.Table
+        Sound.Tempo
+        Sound.Time
+        Unstable
+    ghc-options:
+        -Wall
+    hs-source-dirs:
+        src
+    build-depends:
+        base >= 4
+        , array
+        , attoparsec
+        , attoparsec-binary
+        , bytestring
+        , cereal
+        , portaudio
+        , process
+        , random
+        , system-fileio
+        , system-filepath
+        , transformers
+        , vector
+    default-language:
+        Haskell98
