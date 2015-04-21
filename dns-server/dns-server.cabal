@@ -1,0 +1,58 @@
+name: dns-server
+version: 0.0.0
+description:
+    Forward DNS queries to web services.
+    .
+    Only a small part of DNS.
+    .
+    No security.
+    .
+    No encryption.
+    .
+    No caching.
+    .
+    No multi-processing.
+    .
+    Do not use for critical applications.
+    .
+    Should only listen on localhost.
+homepage: https://github.com/edom/dns-server
+license: BSD3
+license-file: LICENSE
+author: Erik Dominikus
+maintainer: haskell@edom.web.id
+copyright: (C) 2015 Erik Dominikus
+category: Network
+build-type: Simple
+cabal-version: >= 1.10
+tested-with:
+    GHC == 7.6.3
+
+library
+    ghc-options:
+        -Wall
+    exposed-modules:
+        DNS
+        DNS.Lens.Inside
+        DNS.Server
+        DNS.Web
+        Lens.Inside
+    build-depends:
+        base >= 4.6
+        , aeson >= 0.7
+        , bytestring >= 0.10
+        , dns >= 1.4
+        , http-client >= 0.4
+        , iproute >= 1.3
+        , network >= 2.5
+    default-language:
+        Haskell98
+
+executable dns-server
+    main-is: Main.hs
+    hs-source-dirs: dns-server
+    build-depends:
+        base >= 4
+        , dns-server
+    default-language:
+        Haskell98
