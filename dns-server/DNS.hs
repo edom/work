@@ -47,7 +47,7 @@ server config = do
             packet <- DS.recvFrom socket
             let request = DS._payload packet
             -- print request -- debug
-            response <- W.lookupA manager request
+            response <- W.query manager request
             DS.sendTo socket packet { DS._payload = maybe id SV.answerMinTtl answerMinTtl response }
     where
         port = C.port config
