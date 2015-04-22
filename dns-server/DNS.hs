@@ -9,7 +9,6 @@ where
 import Control.Applicative
 import Control.Concurrent
 import Control.Monad
-import qualified Text.Read as R
 import qualified System.Environment as EN
 import qualified System.IO.Error as IE
 
@@ -17,9 +16,10 @@ import qualified Network.HTTP.Client as H
 
 import qualified Network.Socket as S
 
-import DNS.Server
-import DNS.Web
+import qualified DNS.Config as C
+import qualified DNS.Server as SV
 import qualified DNS.Socket as DS
+import qualified DNS.Web as W
 
 -- | For testing with GHCI. Pressing Enter should terminate the server.
 interactiveMain :: IO ()
@@ -34,16 +34,10 @@ main = S.withSocketsDo actualMain
 actualMain :: IO ()
 actualMain = do
     args <- EN.getArgs
-    server $ case args of
-        strPort : _ -> maybe defPort intPort $ R.readMaybe strPort
-        _ -> defPort
-    where
-        defPort = 1053
-        intPort :: Int -> S.PortNumber
-        intPort = fromIntegral
+    either (IE.ioError . IE.userError) server $ C.fromArgs args
 
-server :: S.PortNumber -> IO ()
-server port = do
+server :: C.Config -> IO ()
+server config = do
     socket <- DS.newUdpSocket
     udpBindAddress <- S.SockAddrInet port <$> S.inet_addr "127.0.0.1"
     S.bind socket udpBindAddress
@@ -53,9 +47,11 @@ server port = do
             packet <- DS.recvFrom socket
             let request = DS._payload packet
             -- print request -- debug
-            response <- lookupA manager request
-            DS.sendTo socket packet { DS._payload = answerMinTtl 86400 $ response }
+            response <- W.lookupA manager request
+            DS.sendTo socket packet { DS._payload = maybe id SV.answerMinTtl answerMinTtl response }
     where
+        port = C.port config
+        answerMinTtl = C.answerMinTtl config
         -- FIXME wireshark shows that http-client closes the connection (ignoring Connection: keep-alive)
         managerSettings = H.defaultManagerSettings
             {
