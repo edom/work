@@ -13,6 +13,7 @@ module Lens.Inside
     , (^.)
     , (.>)
     , (=$)
+    , (=<$>)
     , (=:)
 )
 where
@@ -92,6 +93,11 @@ infixr 9 .>
 (=$) :: Inside s b -> (s -> s) -> (b -> b)
 (=$) = modify
 infixr 2 =$
+
+-- | Infix 'modify' whose containee type is a 'Functor'-ed type. Right-associate. Precedence 2.
+(=<$>) :: (Functor f) => Inside (f s) b -> (s -> s) -> (b -> b)
+inside =<$> endo = inside =$ fmap endo
+infixr 2 =<$>
 
 -- | Infix 'set'. Right-associate. Precedence 2.
 (=:) :: Inside s b -> s -> (b -> b)
