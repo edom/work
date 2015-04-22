@@ -1,9 +1,14 @@
 module DNS.Server
 (
-    respond
+    getQuestion
+    -- * Responding
+    , respond
+    , noError
     , servFail
+    -- * Manipulation
     , answerMinTtl
-    , getQuestion
+    , setAnswer
+    , setAuthority
 )
 where
 
@@ -19,7 +24,7 @@ import Lens.Inside
 -- NXDOMAIN not implemented
 
 {- |
-Transform the packet into a response with no answers.
+Transform the packet into a response.
 -}
 respond :: D.DNSFormat -> D.DNSFormat
 respond =
@@ -27,6 +32,9 @@ respond =
         (qOrR =: D.QR_Response
         >>> authAnswer =: False
         >>> recAvailable =: True)
+
+noError :: D.DNSFormat -> D.DNSFormat
+noError = respond >>> header. flags . rcode =: D.NoErr
 
 {- |
 Transform the packet into a Server Failure response packet.
@@ -50,3 +58,13 @@ getQuestion request = do
     case questions_ of
         question_ : [] -> Right question_
         _ -> Left "we only support QDCount = 1"
+
+setAnswer :: [D.RR D.RDATA] -> D.DNSFormat -> D.DNSFormat
+setAnswer recs =
+    answer =: recs
+    >>> header . anCount =: length recs
+
+setAuthority :: [D.RR D.RDATA] -> D.DNSFormat -> D.DNSFormat
+setAuthority recs =
+    authority =: recs
+    >>> header . arCount =: length recs

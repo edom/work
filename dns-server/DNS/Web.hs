@@ -21,9 +21,7 @@ import qualified Network.DNS as D
 
 import qualified Network.HTTP.Client as H
 
-import qualified DNS.Lens.Inside as L
 import DNS.Server
-import Lens.Inside
 
 checkEither :: Either String a -> IO a
 checkEither = either (IE.ioError . IE.userError) return
@@ -38,14 +36,9 @@ query manager request =
         checkEither $ flip JT.parseEither object $ \ x -> do
             an <- x J..: "answer" >>= mapM mkRr
             ar <- (maybe [] id <$> x J..:? "authority") >>= mapM mkRr
-            return $
-                L.header =$
-                    (L.anCount =: length an
-                    >>> L.arCount =: length ar
-                    >>> L.flags =$ L.rcode =: D.NoErr)
-                >>> L.answer =: an
-                >>> L.authority =: ar
-                $ respond request
+            return
+                $ noError >>> setAnswer an >>> setAuthority ar
+                $ request
     where
         showHttpException :: H.HttpException -> String
         showHttpException = show
