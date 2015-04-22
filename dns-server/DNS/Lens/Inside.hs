@@ -15,6 +15,8 @@ module DNS.Lens.Inside
     , authAnswer
     , recAvailable
     , rcode
+    -- * Records
+    , ttl
 )
 where
 
@@ -57,3 +59,6 @@ answer = mkWithSet D.answer (\ x y -> y { D.answer = x })
 
 authority :: Inside [D.RR D.RDATA] D.DNSFormat
 authority = mkWithSet D.authority (\ x y -> y { D.authority = x })
+
+ttl :: Inside Int (D.RR a)
+ttl = mkWithSet D.rrttl (\ x y -> y { D.rrttl = x })

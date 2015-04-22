@@ -2,6 +2,7 @@ module DNS.Server
 (
     respond
     , servFail
+    , answerMinTtl
     , getQuestion
 )
 where
@@ -32,6 +33,10 @@ Transform the packet into a Server Failure response packet.
 -}
 servFail :: D.DNSFormat -> D.DNSFormat
 servFail = respond >>> header . flags . rcode =: D.ServFail
+
+-- | Ensure that each answer has a TTL not lower than the given minimum.
+answerMinTtl :: Int -> D.DNSFormat -> D.DNSFormat
+answerMinTtl minTtl = answer =<$> ttl =: minTtl
 
 {- |
 <http://maradns.samiam.org/multiple.qdcount.html Only support queries with QDCount = 1>.

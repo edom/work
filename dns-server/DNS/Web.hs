@@ -64,9 +64,6 @@ lookupA manager request =
     where
         showHttpException :: H.HttpException -> String
         showHttpException = show
-        mbMinTtl = Nothing
-        -- mbMinTtl = Just 86400
-        getTtl a = maybe (a J..: "ttl") pure mbMinTtl
         mkRr a = do
             strType <- a J..: "type"
             rtype <- either fail return $ readType strType
@@ -74,7 +71,7 @@ lookupA manager request =
             D.ResourceRecord
                 <$> (BSC.pack <$> a J..: "name")
                 <*> pure rtype
-                <*> getTtl a
+                <*> a J..: "ttl"
                 <*> a J..: "rdlength"
                 <*> either fail pure (case rtype of
                         D.A -> D.RD_A <$> R.readEither rdata
