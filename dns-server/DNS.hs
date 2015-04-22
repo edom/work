@@ -13,16 +13,13 @@ import qualified Text.Read as R
 import qualified System.Environment as EN
 import qualified System.IO.Error as IE
 
-import qualified Data.ByteString.Lazy as BSL
-
-import qualified Network.Socket as S
-import qualified Network.Socket.ByteString as SB
-
-import qualified Network.DNS as D
-
 import qualified Network.HTTP.Client as H
 
+import qualified Network.Socket as S
+
+import DNS.Server
 import DNS.Web
+import qualified DNS.Socket as DS
 
 -- | For testing with GHCI. Pressing Enter should terminate the server.
 interactiveMain :: IO ()
@@ -33,26 +30,6 @@ interactiveMain = S.withSocketsDo $ do
 
 main :: IO ()
 main = S.withSocketsDo actualMain
-
-newUdpSocket :: IO S.Socket
-newUdpSocket = do
-    socket <- S.socket S.AF_INET S.Datagram S.defaultProtocol
-    S.setSocketOption socket S.ReuseAddr 1
-    return socket
-
-data Packet
-    = MkPacket
-    {
-        _qPeer :: S.SockAddr
-        , _qPayload :: D.DNSFormat
-    }
-    deriving (Show)
-
-recvPacketFrom :: S.Socket -> IO Packet
-recvPacketFrom socket = do
-    (bsRequest, peerAddress) <- SB.recvFrom socket 512
-    either (IE.ioError . IE.userError) (return . MkPacket peerAddress)
-        $ D.decode $ BSL.fromStrict bsRequest
 
 actualMain :: IO ()
 actualMain = do
@@ -67,18 +44,17 @@ actualMain = do
 
 server :: S.PortNumber -> IO ()
 server port = do
-    socket <- newUdpSocket
+    socket <- DS.newUdpSocket
     udpBindAddress <- S.SockAddrInet port <$> S.inet_addr "127.0.0.1"
     S.bind socket udpBindAddress
     putStrLn $ "DNS server bound to UDP " ++ show udpBindAddress
     H.withManager managerSettings $ \ manager -> do
         forever $ flip IE.catchIOError print $ do
-            packet <- recvPacketFrom socket
-            let request = _qPayload packet
-                peerAddress = _qPeer packet
+            packet <- DS.recvFrom socket
+            let request = DS._payload packet
             -- print request -- debug
             response <- lookupA manager request
-            SB.sendAllTo socket (BSL.toStrict $ D.encode response) peerAddress
+            DS.sendTo socket packet { DS._payload = answerMinTtl 86400 $ response }
     where
         -- FIXME wireshark shows that http-client closes the connection (ignoring Connection: keep-alive)
         managerSettings = H.defaultManagerSettings
