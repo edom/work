@@ -2,6 +2,8 @@ Forward DNS queries to web services.
 
 Only a small part of DNS.
 
+No recursion.
+
 No security.
 
 No encryption.

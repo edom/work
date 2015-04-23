@@ -31,7 +31,7 @@ respond =
     header . flags =$
         (qOrR =: D.QR_Response
         >>> authAnswer =: False
-        >>> recAvailable =: True)
+        >>> recAvailable =: False)
 
 noError :: D.DNSFormat -> D.DNSFormat
 noError = respond >>> header. flags . rcode =: D.NoErr
