@@ -57,7 +57,7 @@ mkRr a = do
                 D.A -> D.RD_A <$> R.readEither rdata
                 D.NS -> return $ D.RD_NS $ BSC.pack rdata
                 D.CNAME -> return $ D.RD_CNAME $ BSC.pack rdata
-                _ -> Left $ "unknown type:" ++ strType
+                _ -> Left $ "mkRr: unknown type:" ++ strType
                 )
 
 restQuery :: H.Manager -> D.Question -> IO J.Object
@@ -76,11 +76,11 @@ restQuery manager question = do
         urlpart_ = case qtype of
             D.A -> Right "a"
             D.NS -> Right "ns"
-            _ -> Left $ "unsupported question type: " ++ show qtype
+            _ -> Left $ "restQuery: unsupported question type: " ++ show qtype
 
 readType :: String -> Either String D.TYPE
 readType x = case x of
     "A" -> return D.A
     "NS" -> return D.NS
     "CNAME" -> return D.CNAME
-    _ -> Left $ "unknown type: " ++ x
+    _ -> Left $ "readType: unknown type: " ++ x
