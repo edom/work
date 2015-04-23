@@ -21,10 +21,8 @@ import qualified Network.DNS as D
 
 import qualified Network.HTTP.Client as H
 
+import DNS.Error
 import DNS.Server
-
-checkEither :: Either String a -> IO a
-checkEither = either (IE.ioError . IE.userError) return
 
 query :: H.Manager -> D.DNSFormat -> IO D.DNSFormat
 query manager request =
