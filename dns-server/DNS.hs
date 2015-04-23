@@ -14,6 +14,8 @@ import qualified System.IO.Error as IE
 
 import qualified Network.HTTP.Client as H
 
+import qualified Network.DNS as D
+
 import qualified Network.Socket as S
 
 import qualified DNS.Config as C
@@ -46,7 +48,7 @@ server config = do
         forever $ flip IE.catchIOError print $ do
             packet <- DS.recvFrom socket
             let request = DS._payload packet
-            -- print request -- debug
+            print $ D.question $ request -- debug
             response <- W.query manager request
             DS.sendTo socket packet { DS._payload = maybe id SV.answerMinTtl answerMinTtl response }
     where
