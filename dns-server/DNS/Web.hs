@@ -56,6 +56,7 @@ mkRr a = do
         <*> either fail pure (case rtype of
                 D.A -> D.RD_A <$> R.readEither rdata
                 D.NS -> return $ D.RD_NS $ BSC.pack rdata
+                D.CNAME -> return $ D.RD_CNAME $ BSC.pack rdata
                 _ -> Left $ "unknown type:" ++ strType
                 )
 
@@ -77,4 +78,5 @@ readType :: String -> Either String D.TYPE
 readType x = case x of
     "A" -> return D.A
     "NS" -> return D.NS
+    "CNAME" -> return D.CNAME
     _ -> Left $ "unknown type: " ++ x
