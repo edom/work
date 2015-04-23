@@ -63,10 +63,14 @@ mkRr a = do
 restQuery :: H.Manager -> D.Question -> IO J.Object
 restQuery manager question = do
     urlpart <- either (IE.ioError . IE.userError) return urlpart_
-    httpRequest <- H.parseUrl $ "http://api.statdns.com/" ++ BSC.unpack domain ++ "/" ++ urlpart
+    httpRequest <-
+        H.parseUrl ("http://" ++ address ++ "/" ++ BSC.unpack domain ++ "/" ++ urlpart)
+        >>= \ r -> return r { H.requestHeaders = ("Host", host) : H.requestHeaders r }
     H.withResponse httpRequest manager $ \ response ->
         H.brRead (H.responseBody response) >>= checkEither . J.eitherDecodeStrict'
     where
+        address = "46.19.32.179"
+        host = "api.statdns.com"
         domain = D.qname question
         qtype = D.qtype question
         urlpart_ = case qtype of
