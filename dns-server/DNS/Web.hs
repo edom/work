@@ -66,7 +66,11 @@ restQuery manager question = do
         H.parseUrl ("http://" ++ address ++ "/" ++ BSC.unpack domain ++ "/" ++ urlpart)
         >>= \ r -> return r { H.requestHeaders = ("Host", host) : H.requestHeaders r }
     H.withResponse httpRequest manager $ \ response ->
-        H.brRead (H.responseBody response) >>= checkEither . J.eitherDecodeStrict'
+        -- FIXME This doesn't check response Content-Length.
+        -- This will use up memory if the response is large.
+        -- TODO Reject responses without Content-Length.
+        -- TODO Reject responses with large Content-Length.
+        H.brConsume (H.responseBody response) >>= checkEither . J.eitherDecodeStrict' . BSC.concat
     where
         address = "46.19.32.179"
         host = "api.statdns.com"
