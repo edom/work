@@ -1,14 +1,15 @@
 module DNS.Server
 (
     getQuestion
-    -- * Responding
-    , respond
+    -- * Replying
+    , applyReply
     , noError
     , servFail
-    -- * Manipulation
+    , Reply
+    -- * Reply manipulation
     , answerMinTtl
-    , setAnswer
-    , setAuthority
+    , answer
+    , authority
 )
 where
 
@@ -18,8 +19,37 @@ import Prelude hiding ((.))
 
 import qualified Network.DNS as D
 
-import DNS.Lens.Inside
+import qualified DNS.Lens.Inside as L
 import Lens.Inside
+
+data Reply
+    = MkReply
+    {
+        _rcode :: D.RCODE
+        , _answer :: [D.RR D.RDATA]
+        , _authority :: [D.RR D.RDATA]
+    }
+    deriving (Show)
+
+emptyReply :: Reply
+emptyReply = MkReply
+    {
+        _rcode = D.NoErr
+        , _answer = []
+        , _authority = []
+    }
+
+applyReply :: Reply -> D.DNSFormat -> D.DNSFormat
+applyReply r =
+    respond
+    >>> L.answer =: an
+    >>> L.authority =: ar
+    >>> L.header =$
+            (L.anCount =: length an
+            >>> L.arCount =: length ar)
+    where
+        an = _answer r
+        ar = _authority r
 
 -- NXDOMAIN not implemented
 
@@ -28,23 +58,26 @@ Transform the packet into a response.
 -}
 respond :: D.DNSFormat -> D.DNSFormat
 respond =
-    header . flags =$
-        (qOrR =: D.QR_Response
-        >>> authAnswer =: False
-        >>> recAvailable =: False)
+    L.header . L.flags =$
+        (L.qOrR =: D.QR_Response
+        >>> L.authAnswer =: False
+        >>> L.recAvailable =: False)
 
-noError :: D.DNSFormat -> D.DNSFormat
-noError = respond >>> header. flags . rcode =: D.NoErr
+noError :: Reply
+noError = emptyReply { _rcode = D.NoErr }
 
-{- |
-Transform the packet into a Server Failure response packet.
--}
-servFail :: D.DNSFormat -> D.DNSFormat
-servFail = respond >>> header . flags . rcode =: D.ServFail
+servFail :: Reply
+servFail = emptyReply { _rcode = D.ServFail }
 
 -- | Ensure that each answer has a TTL not lower than the given minimum.
-answerMinTtl :: Int -> D.DNSFormat -> D.DNSFormat
-answerMinTtl minTtl = answer =<$> ttl =: minTtl
+answerMinTtl :: Int -> Reply -> Reply
+answerMinTtl minTtl = answer =<$> L.ttl =: minTtl
+
+answer :: Inside [D.RR D.RDATA] Reply
+answer = mkWithSet _answer (\ x y -> y { _answer = x })
+
+authority :: Inside [D.RR D.RDATA] Reply
+authority = mkWithSet _authority (\ x y -> y { _authority = x })
 
 {- |
 <http://maradns.samiam.org/multiple.qdcount.html Only support queries with QDCount = 1>.
@@ -52,19 +85,9 @@ answerMinTtl minTtl = answer =<$> ttl =: minTtl
 getQuestion :: D.DNSFormat -> Either String D.Question
 getQuestion request = do
     let
-        qr = request ^. header . flags . qOrR
-        questions_ = request ^. question
+        qr = request ^. L.header . L.flags . L.qOrR
+        questions_ = request ^. L.question
     unless (qr == D.QR_Query) $ Left "expecting a query"
     case questions_ of
         question_ : [] -> Right question_
         _ -> Left "we only support QDCount = 1"
-
-setAnswer :: [D.RR D.RDATA] -> D.DNSFormat -> D.DNSFormat
-setAnswer recs =
-    answer =: recs
-    >>> header . anCount =: length recs
-
-setAuthority :: [D.RR D.RDATA] -> D.DNSFormat -> D.DNSFormat
-setAuthority recs =
-    authority =: recs
-    >>> header . arCount =: length recs

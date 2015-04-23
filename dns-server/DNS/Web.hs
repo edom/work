@@ -23,20 +23,21 @@ import qualified Network.HTTP.Client as H
 
 import DNS.Error
 import DNS.Server
+import Lens.Inside
 
-query :: H.Manager -> D.DNSFormat -> IO D.DNSFormat
-query manager request =
-    flip IE.catchIOError (\ e -> print e >> return (servFail request)) $
-    E.handle (\ e -> putStrLn (showHttpException e) >> return (servFail request)) $ do
-        question <- checkEither $ getQuestion request
+query :: H.Manager -> D.Question -> IO Reply
+query manager question =
+    flip IE.catchIOError (\ e -> print e >> return servFail) $
+    E.handle (\ e -> putStrLn (showHttpException e) >> return servFail) $ do
         object <- restQuery manager question
         -- print object -- debug
         checkEither $ flip JT.parseEither object $ \ x -> do
             an <- x J..: "answer" >>= mapM mkRr
             ar <- (maybe [] id <$> x J..:? "authority") >>= mapM mkRr
-            return
-                $ noError >>> setAnswer an >>> setAuthority ar
-                $ request
+            return $
+                answer =: an
+                >>> authority =: ar
+                $ noError
     where
         showHttpException :: H.HttpException -> String
         showHttpException = show
