@@ -1,12 +1,14 @@
 module DNS.Socket
 (
     newUdpSocket
+    , newBoundUdpSocket
     , recvFrom
     , sendTo
     , Packet(..)
 )
 where
 
+import Control.Applicative
 import qualified System.IO.Error as IE
 
 import qualified Data.ByteString.Lazy as BSL
@@ -21,6 +23,13 @@ newUdpSocket :: IO S.Socket
 newUdpSocket = do
     socket <- S.socket S.AF_INET S.Datagram S.defaultProtocol
     S.setSocketOption socket S.ReuseAddr 1
+    return socket
+
+newBoundUdpSocket :: String -> S.PortNumber -> IO S.Socket
+newBoundUdpSocket host port = do
+    socket <- newUdpSocket
+    udpBindAddress <- S.SockAddrInet port <$> S.inet_addr host
+    S.bind socket udpBindAddress
     return socket
 
 recvFrom :: S.Socket -> IO Packet
