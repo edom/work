@@ -5,6 +5,7 @@ module DNS.Server
     , applyReply
     , noError
     , servFail
+    , nameError
     , Reply
     -- * Reply manipulation
     , answerMinTtl
@@ -71,6 +72,9 @@ noError = emptyReply { _rcode = D.NoErr }
 
 servFail :: Reply
 servFail = emptyReply { _rcode = D.ServFail }
+
+nameError :: Reply
+nameError = emptyReply { _rcode = D.NameErr }
 
 -- | Ensure that each answer has a TTL not lower than the given minimum.
 answerMinTtl :: Int -> Reply -> Reply
