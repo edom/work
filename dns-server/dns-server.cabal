@@ -1,5 +1,5 @@
 name: dns-server
-version: 0.0.1
+version: 0.1.0
 description:
     Forward DNS queries to web services.
     .
@@ -39,9 +39,9 @@ library
         DNS.Error
         DNS.Lens.Inside
         DNS.Main
+        DNS.Resolve.Web
         DNS.Server
         DNS.Socket
-        DNS.Web
         Lens.Inside
     build-depends:
         base >= 4.6

@@ -25,9 +25,9 @@ import qualified Data.Time as T
 
 import DNS.Error
 import qualified DNS.Config as C
+import qualified DNS.Resolve.Web as W
 import qualified DNS.Server as SV
 import qualified DNS.Socket as DS
-import qualified DNS.Web as W
 
 timed :: IO a -> IO (T.NominalDiffTime, a)
 timed action = do

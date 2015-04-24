@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 -- | DNS resolution using <http://www.statdns.com/api/ StatDNS REST DNS API>.
-module DNS.Web
+module DNS.Resolve.Web
 (
     query
 )
