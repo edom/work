@@ -45,8 +45,11 @@ applyReply r =
     >>> L.answer =: an
     >>> L.authority =: ar
     >>> L.header =$
-            (L.anCount =: length an
-            >>> L.arCount =: length ar)
+            (
+            L.anCount =: length an
+            >>> L.arCount =: length ar
+            >>> L.flags =$ L.rcode =: _rcode r
+            )
     where
         an = _answer r
         ar = _authority r
