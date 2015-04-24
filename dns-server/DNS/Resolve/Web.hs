@@ -24,8 +24,9 @@ import qualified Network.HTTP.Client as H
 import DNS.Error
 import DNS.Server
 import Lens.Inside
+import qualified DNS.Resolve as DR
 
-query :: H.Manager -> D.Question -> IO Reply
+query :: H.Manager -> DR.Resolver IO
 query manager question =
     flip IE.catchIOError (\ e -> print e >> return servFail) $
     E.handle (\ e -> putStrLn (showHttpException e) >> return servFail) $ do
