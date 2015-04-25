@@ -1,9 +1,13 @@
 module DNS.Socket
 (
+    -- * Creation
     newUdpSocket
     , newBoundUdpSocket
+    -- * Input
     , recvFrom
+    -- * Output
     , sendTo
+    -- * Types
     , Packet(..)
 )
 where
@@ -25,7 +29,8 @@ newUdpSocket = do
     S.setSocketOption socket S.ReuseAddr 1
     return socket
 
-newBoundUdpSocket :: String -> S.PortNumber -> IO S.Socket
+-- | 'newUdpSocket' and 'S.bind' the socket to the address.
+newBoundUdpSocket :: Ip4String -> S.PortNumber -> IO S.Socket
 newBoundUdpSocket host port = do
     socket <- newUdpSocket
     udpBindAddress <- S.SockAddrInet port <$> S.inet_addr host
