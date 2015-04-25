@@ -10,7 +10,7 @@ module DNS.Resolve
     -- * Making records
     , a
     , ns
-    -- * Resolver combinators
+    -- * Running
     , onceSocket
     -- * Types
     , Fqdn
