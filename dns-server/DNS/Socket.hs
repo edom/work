@@ -3,6 +3,7 @@ module DNS.Socket
     -- * Creation
     newUdpSocket
     , newBoundUdpSocket
+    , Ip4String
     -- * Input
     , recvFrom
     -- * Output
@@ -36,6 +37,15 @@ newBoundUdpSocket host port = do
     udpBindAddress <- S.SockAddrInet port <$> S.inet_addr host
     S.bind socket udpBindAddress
     return socket
+
+{- |
+A string representing an IPv4 address.
+
+Example:
+
+@\"192.168.0.1\"@
+-}
+type Ip4String = String
 
 recvFrom :: S.Socket -> IO Packet
 recvFrom socket = do

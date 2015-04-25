@@ -14,7 +14,6 @@ module DNS.Resolve
     -- * Types
     , Fqdn
     , Record
-    , Ip4String
 )
 where
 
@@ -75,10 +74,7 @@ static records question =
         qtype = D.qtype question
         answer = filter (\ r -> D.rrname r == qname && D.rrtype r == qtype) records
 
--- | Example: \"192.168.0.1\".
-type Ip4String = String
-
-a :: Fqdn -> Ip4String -> Either String Record
+a :: Fqdn -> DS.Ip4String -> Either String Record
 a fqdn ip4string =
     either
         (\ msg -> Left $ "a " ++ BSC.unpack fqdn ++ " " ++ ip4string ++ ": " ++ msg)
