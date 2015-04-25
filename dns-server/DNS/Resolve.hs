@@ -18,6 +18,9 @@ module DNS.Resolve
 where
 
 import Control.Applicative
+import Text.Printf
+import qualified Data.Time as T
+import qualified System.IO.Error as IE
 import qualified Text.Read as R
 
 import qualified Data.ByteString.Char8 as BSC
@@ -44,12 +47,24 @@ nameError = const $ pure S.nameError
 
 -- | Use the resolver to answer queries from the socket once.
 onceSocket :: NS.Socket -> Resolver IO -> IO ()
-onceSocket socket logic = do
+onceSocket socket resolve = do
     packet <- DS.recvFrom socket
     let payload = DS._payload packet
     question <- E.checkEither $ S.getQuestion payload
-    reply <- logic question
-    DS.sendTo socket packet { DS._payload = S.applyReply reply payload }
+    flip IE.catchIOError (\ e -> putStrLn (show question) >> print e) $ do
+        (ps, reply) <- timed $ resolve question
+        putStrLn $ showQuestion question ++ printf " %.0f ms" (realToFrac ps * 1000 :: Double) -- debug
+        DS.sendTo socket packet { DS._payload = S.applyReply reply payload }
+    where
+        showQuestion q = show (D.qtype q) ++ " " ++ BSC.unpack (D.qname q)
+
+timed :: IO a -> IO (T.NominalDiffTime, a)
+timed action = do
+    t <- T.getCurrentTime
+    x <- action
+    u <- T.getCurrentTime
+    let d = T.diffUTCTime u t -- picoseconds
+    return (d, x)
 
 -- Zonemap = Map String [Record]
 

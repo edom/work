@@ -9,33 +9,18 @@ where
 import Control.Applicative
 import Control.Concurrent
 import Control.Monad
-import Text.Printf
 import qualified System.Environment as EN
 import qualified System.IO.Error as IE
 
-import qualified Data.ByteString.Char8 as BSC
-
 import qualified Network.HTTP.Client as H
-
-import qualified Network.DNS as D
 
 import qualified Network.Socket as S
 
-import qualified Data.Time as T
-
-import DNS.Error
 import qualified DNS.Config as C
+import qualified DNS.Resolve as R
 import qualified DNS.Resolve.Web as W
 import qualified DNS.Server as SV
 import qualified DNS.Socket as DS
-
-timed :: IO a -> IO (T.NominalDiffTime, a)
-timed action = do
-    t <- T.getCurrentTime
-    x <- action
-    u <- T.getCurrentTime
-    let d = T.diffUTCTime u t -- picoseconds
-    return (d, x)
 
 -- | For testing with GHCI. Pressing Enter should terminate the server.
 interactiveMain :: IO ()
@@ -58,15 +43,8 @@ server config = do
     udpBindAddress <- S.getSocketName socket
     putStrLn $ "DNS server bound to UDP " ++ show udpBindAddress
     H.withManager managerSettings $ \ manager -> do
-        forever $ flip IE.catchIOError print $ do
-            packet <- DS.recvFrom socket
-            let request = DS._payload packet
-            question <- checkEither $ SV.getQuestion request
-            flip IE.catchIOError (\ e -> putStrLn (show question) >> print e) $ do
-                (ps, reply) <- timed $ maybe id SV.answerMinTtl answerMinTtl <$> W.query manager question
-                putStrLn $ showQuestion question ++ printf " %.0f ms" (realToFrac ps * 1000 :: Double) -- debug
-                let response = SV.applyReply reply request
-                DS.sendTo socket packet { DS._payload = response }
+        let resolve question = maybe id SV.answerMinTtl answerMinTtl <$> W.query manager question
+        forever $ flip IE.catchIOError print $ R.onceSocket socket resolve
     where
         port = C.port config
         answerMinTtl = C.answerMinTtl config
@@ -77,4 +55,3 @@ server config = do
                 , H.managerResponseTimeout = Just 10000000 -- microseconds
                 , H.managerIdleConnectionCount = 1
             }
-        showQuestion q = show (D.qtype q) ++ " " ++ BSC.unpack (D.qname q)
