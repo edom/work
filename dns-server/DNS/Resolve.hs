@@ -9,6 +9,7 @@ module DNS.Resolve
     , nameError
     -- * Making records
     , a
+    , ns
     -- * Resolver combinators
     , onceSocket
     -- * Types
@@ -103,3 +104,15 @@ a fqdn ip4string =
             }
         )
         (R.readEither ip4string)
+
+-- | @ns a b@ represents that @b@ is a name server of @a@.
+ns :: Fqdn -> Fqdn -> Record
+ns fqdn nsfqdn =
+    D.ResourceRecord
+    {
+        D.rrname = fqdn
+        , D.rrtype = D.NS
+        , D.rrttl = 0
+        , D.rdlen = BSC.length nsfqdn
+        , D.rdata = D.RD_NS nsfqdn
+    }
