@@ -6,7 +6,6 @@ module DNS.Main
 )
 where
 
-import Control.Applicative
 import Control.Concurrent
 import Control.Monad
 import qualified System.Environment as EN
@@ -43,7 +42,7 @@ server config = do
     udpBindAddress <- S.getSocketName socket
     putStrLn $ "DNS server bound to UDP " ++ show udpBindAddress
     H.withManager managerSettings $ \ manager -> do
-        let resolve question = maybe id SV.answerMinTtl answerMinTtl <$> W.query manager question
+        let resolve = R.mapResolver (maybe id SV.answerMinTtl answerMinTtl) $ W.query manager
         forever $ flip IE.catchIOError print $ R.onceSocket socket resolve
     where
         port = C.port config

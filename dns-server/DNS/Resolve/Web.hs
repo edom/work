@@ -27,21 +27,23 @@ import Lens.Inside
 import qualified DNS.Resolve as DR
 
 query :: H.Manager -> DR.Resolver IO
-query manager question =
-    flip IE.catchIOError (\ e -> print e >> return servFail) $
-    E.handle (\ e -> putStrLn (showHttpException e) >> return servFail) $ do
-        object <- restQuery manager question
-        -- print object -- debug
-        checkEither $ flip JT.parseEither object $ \ x -> do
-            an <- x J..: "answer" >>= mapM mkRr
-            ar <- (maybe [] id <$> x J..:? "authority") >>= mapM mkRr
-            return $
-                answer =: an
-                >>> authority =: ar
-                $ noError
+query manager = DR.mkResolver resolve
     where
-        showHttpException :: H.HttpException -> String
-        showHttpException = show
+        resolve question =
+            flip IE.catchIOError (\ e -> print e >> return servFail) $
+            E.handle (\ e -> putStrLn (showHttpException e) >> return servFail) $ do
+                object <- restQuery manager question
+                -- print object -- debug
+                checkEither $ flip JT.parseEither object $ \ x -> do
+                    an <- x J..: "answer" >>= mapM mkRr
+                    ar <- (maybe [] id <$> x J..:? "authority") >>= mapM mkRr
+                    return $
+                        answer =: an
+                        >>> authority =: ar
+                        $ noError
+            where
+                showHttpException :: H.HttpException -> String
+                showHttpException = show
 
 mkRr :: J.Object -> JT.Parser (D.RR D.RDATA)
 mkRr a = do

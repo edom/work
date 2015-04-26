@@ -3,6 +3,9 @@ module DNS.Resolve
 (
     -- * Resolvers
     Resolver
+    , mkResolver
+    , runResolver
+    , mapResolver
     , static
     -- * Trivial resolvers
     , servFail
@@ -36,15 +39,24 @@ import qualified DNS.Socket as DS
 
 import Lens.Inside
 
-type Resolver m = D.Question -> m S.Reply
+newtype Resolver m = MkResolver { _runResolver :: D.Question -> m S.Reply }
+
+mkResolver :: (D.Question -> m S.Reply) -> Resolver m
+mkResolver = MkResolver
+
+runResolver :: Resolver m -> D.Question -> m S.Reply
+runResolver = _runResolver
+
+mapResolver :: (Functor m) => (S.Reply -> S.Reply) -> Resolver m -> Resolver m
+mapResolver f x = mkResolver $ fmap f . runResolver x
 
 -- | Always gives SERVFAIL.
 servFail :: (Applicative m) => Resolver m
-servFail = const $ pure S.servFail
+servFail = mkResolver $ const $ pure S.servFail
 
 -- | Always gives NXDOMAIN.
 nameError :: (Applicative m) => Resolver m
-nameError = const $ pure S.nameError
+nameError = mkResolver $ const $ pure S.nameError
 
 -- | Use the resolver to answer queries from the socket once.
 onceSocket :: NS.Socket -> Resolver IO -> IO ()
@@ -53,7 +65,7 @@ onceSocket socket resolve = do
     let payload = DS._payload packet
     question <- E.checkEither $ S.getQuestion payload
     flip IE.catchIOError (\ e -> putStrLn (show question) >> print e) $ do
-        (ps, reply) <- timed $ resolve question
+        (ps, reply) <- timed $ runResolver resolve question
         putStrLn $ showQuestion question ++ printf " %.0f ms" (realToFrac ps * 1000 :: Double) -- debug
         DS.sendTo socket packet { DS._payload = S.applyReply reply payload }
     where
@@ -79,16 +91,18 @@ type Record = D.RR D.RDATA
 Resolve questions using the given list of resource records.
 -}
 static :: (Applicative m) => [Record] -> Resolver m
-static records question =
-    case answer of
-        [] -> pure S.nameError
-        _ -> pure $
-            ($ S.noError) $
-                S.answer =: answer
+static records = mkResolver resolve
     where
-        qname = D.qname question
-        qtype = D.qtype question
-        answer = filter (\ r -> D.rrname r == qname && D.rrtype r == qtype) records
+        resolve question =
+            case answer of
+                [] -> pure S.nameError
+                _ -> pure $
+                    ($ S.noError) $
+                        S.answer =: answer
+            where
+                qname = D.qname question
+                qtype = D.qtype question
+                answer = filter (\ r -> D.rrname r == qname && D.rrtype r == qtype) records
 
 a :: Fqdn -> DS.Ip4String -> Either String Record
 a fqdn ip4string =
