@@ -4,8 +4,8 @@ module DNS.Resolve
     -- * Resolvers
     Resolver
     , mkResolver
-    , runResolver
     , mapResolver
+    -- * Static
     , static
     -- * Trivial resolvers
     , servFail
@@ -14,6 +14,7 @@ module DNS.Resolve
     , a
     , ns
     -- * Running
+    , runResolver
     , onceSocket
     -- * Types
     , Fqdn
