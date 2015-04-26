@@ -10,6 +10,8 @@ module DNS.Resolve
     -- * Trivial resolvers
     , servFail
     , nameError
+    -- * Conditional
+    , whenQ
     -- * Making records
     , a
     , ns
@@ -63,6 +65,13 @@ runResolver = _runResolver
 
 mapResolver :: (Functor m) => (S.Reply -> S.Reply) -> Resolver m -> Resolver m
 mapResolver f x = mkResolver $ fmap f . runResolver x
+
+whenQ :: (Monad m) => (D.Question -> Bool) -> Resolver m -> Resolver m
+whenQ pre x = mkResolver resolve
+    where
+        resolve q
+            | pre q = runResolver x q
+            | otherwise = return mempty
 
 -- | Always gives SERVFAIL.
 servFail :: (Applicative m) => Resolver m
