@@ -7,6 +7,7 @@ module DNS.Server
     , servFail
     , nameError
     , Reply
+    , isNoError
     -- * Reply manipulation
     , answerMinTtl
     , answer
@@ -16,6 +17,7 @@ where
 
 import Control.Category ((.), (>>>))
 import Control.Monad
+import Data.Monoid
 import Prelude hiding ((.))
 
 import qualified Network.DNS as D
@@ -31,6 +33,21 @@ data Reply
         , _authority :: [D.RR D.RDATA]
     }
     deriving (Show)
+
+-- | True iff the response code is 'D.NoErr'.
+isNoError :: Reply -> Bool
+isNoError x = case _rcode x of
+    D.NoErr -> True
+    _ -> False
+
+{- |
+The monoid operation result is the leftmost operand satisfying 'isNoError'.
+-}
+instance Monoid Reply where
+    mempty = MkReply D.NotImpl [] []
+    mappend x y
+        | isNoError x = x
+        | otherwise = y
 
 emptyReply :: Reply
 emptyReply = MkReply
