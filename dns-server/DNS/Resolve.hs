@@ -22,6 +22,7 @@ module DNS.Resolve
 where
 
 import Control.Applicative
+import Data.Monoid
 import Text.Printf
 import qualified Data.Time as T
 import qualified System.IO.Error as IE
@@ -40,6 +41,18 @@ import qualified DNS.Socket as DS
 import Lens.Inside
 
 newtype Resolver m = MkResolver { _runResolver :: D.Question -> m S.Reply }
+
+{- |
+This works similarly to the 'Monoid' instance of 'S.Reply':
+keep trying until 'S.isNoError' is satisfied or the operands are exhausted.
+-}
+instance (Monad m) => Monoid (Resolver m) where
+    mempty = mkResolver $ const $ return mempty
+    mappend x y = mkResolver $ \ q -> do
+        u <- runResolver x q
+        if S.isNoError u
+            then return u
+            else runResolver y q
 
 mkResolver :: (D.Question -> m S.Reply) -> Resolver m
 mkResolver = MkResolver
