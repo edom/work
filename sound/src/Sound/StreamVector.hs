@@ -1,4 +1,5 @@
 {-# LANGUAGE BangPatterns #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 
 module Sound.StreamVector
 (
@@ -27,6 +28,7 @@ import qualified Data.Complex as Cp
 import qualified Data.Vector.Generic as Vg
 import qualified Data.Vector.Unboxed as Vu
 
+import Sound.Class
 import Sound.InfList
 import Sound.Time
 
@@ -72,15 +74,15 @@ vsUnsafeIndex :: (Vu.Unbox a) => Vslice a -> Int -> a
 vsUnsafeIndex s k =
     Vu.unsafeIndex (_vsvector s) (_vsoffset s + _vsstride s * k)
 
-{-# DEPRECATED lfromv "use 'lvappend' and 'lrepeat'" #-}
+{-# DEPRECATED lfromv "use 'lvappend' and 'point'" #-}
 lfromv :: (Vu.Unbox a) => a -> Vu.Vector a -> L a
-lfromv pad vec = lvappend vec (lrepeat pad)
+lfromv pad vec = lvappend vec (point pad)
 {-
     loop vec
     where
         loop v =
             if Vu.null v
-                then lrepeat pad
+                then point pad
                 else MkL (Vu.head v) (loop (Vu.tail v))
 -}
 

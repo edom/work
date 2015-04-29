@@ -10,7 +10,6 @@ module Sound.InfList
     , lcons
     , ldelay
     , ldelays
-    , lrepeat
     , lcycle
     , literate
     , lgenerate
@@ -102,8 +101,21 @@ instance Functor L where
 instance Point L where
     point = lrepeat
 
-instance Zip L where
+instance Zip2 L where
     zip2 = lzip2
+
+{- |
+@
+lzip2 f \< x0, x1, ... \> \< y0, y1, ... \> = \< f x0 y0, f x1 y1, ... \>
+@
+-}
+lzip2 :: (a -> b -> c) -> L a -> L b -> L c
+lzip2 f =
+    loop
+    where
+        loop (MkL xh xt) (MkL yh yt) =
+            MkL (f xh yh) (loop xt yt)
+{-# INLINE lzip2 #-}
 
 -- | This is similar to the 'Applicative' instance of 'ZipList'.
 instance Applicative L where
@@ -322,19 +334,6 @@ lmap f =
 
 {- |
 @
-lzip2 f \< x0, x1, ... \> \< y0, y1, ... \> = \< f x0 y0, f x1 y1, ... \>
-@
--}
-lzip2 :: (a -> b -> c) -> L a -> L b -> L c
-lzip2 f =
-    loop
-    where
-        loop (MkL xh xt) (MkL yh yt) =
-            MkL (f xh yh) (loop xt yt)
-{-# INLINE lzip2 #-}
-
-{- |
-@
 lzip3 f \< x0, x1, ... \> \< y0, y1, ... \> \< z0, z1, ... \> = \< f x0 y0 z0, f x1 y1 z1, ... \>
 @
 -}
@@ -535,7 +534,7 @@ ltakeadd n x y = 'ltakemap' n x ('zip2' ('+') y)
 @
 -}
 ltakeadd :: (Num a) => Int -> L a -> L a -> L a
-ltakeadd n x y = ltakemap n x (lzip2 (+) y)
+ltakeadd n x y = ltakemap n x (zip2 (+) y)
 
 {- |
 @ltakeappend n x y@ is a stream

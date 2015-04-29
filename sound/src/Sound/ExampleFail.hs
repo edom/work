@@ -30,7 +30,7 @@ import qualified Sound.Portaudio as Pa
 
 -- | All zeroes.
 silence :: L Double
-silence = lrepeat 0
+silence = point 0
 {-# INLINE silence #-}
 
 eSilence :: Endo Double

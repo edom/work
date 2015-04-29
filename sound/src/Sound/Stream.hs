@@ -39,7 +39,7 @@ srepeat :: a -> Stream a
 srepeat x = MkStream (\ u -> MkP u u) x
 {-# INLINE srepeat #-}
 
-instance Zip Stream where
+instance Zip2 Stream where
     zip2 f (MkStream stepx statx) (MkStream stepy staty) = MkStream step (MkP statx staty)
         where
             step (MkP sx sy) = 

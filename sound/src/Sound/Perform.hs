@@ -12,13 +12,12 @@ module Sound.Perform
     , Duration
     , Freq
     , note
-    , seq
+    , sqn
     , par
 )
 where
 
-import Prelude hiding (seq)
-
+import Sound.Class
 import Sound.Fm
 import Sound.InfList
 import Sound.Table
@@ -50,7 +49,7 @@ perform tun ins =
     where
         loop com =
             case com of
-                MkNote n d -> brate >>= \ r -> ins (fromRate $ _unRate r) (lrepeat $ tun $ fromIntegral n) >>= blwrite_ (bbeat d)
+                MkNote n d -> brate >>= \ r -> ins (fromRate $ _unRate r) (point $ tun $ fromIntegral n) >>= blwrite_ (bbeat d)
                 Seq h t -> loop h >> loop t
                 _ -> return ()
 
@@ -64,8 +63,8 @@ data Com
 note :: NoteNumber Int -> Duration Rational -> Com
 note = MkNote
 
-seq :: Com -> Com -> Com
-seq = Seq
+sqn :: Com -> Com -> Com
+sqn = Seq
 
 par :: Com -> Com -> Com
 par = Par

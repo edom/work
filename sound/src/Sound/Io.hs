@@ -14,7 +14,6 @@ module Sound.Io
     , bshPut
     , writingFile
     -- * Types
-    , Count
     , ChunkSampleCount
     -- * Error
     , ioUserError
@@ -84,8 +83,6 @@ slurp = Bs.readFile
 -- | Convert a 'Double' (8-byte float) sample to a 'Int16' (2-byte int) sample.
 conf8i2 :: Double -> Int16
 conf8i2 = truncate . (32767 *)
-
-type Count = Int
 
 {- |
 'Bs.hPut' from "Data.ByteString".
