@@ -8,8 +8,6 @@ module Sound.Io
     , getFileSize
     -- * General strict byte-string input
     , slurp
-    -- * Convert sample type
-    , conf8i2
     -- * Handle
     , bshPut
     , writingFile
@@ -79,10 +77,6 @@ getFileSize path = do
 -- | Read the entire file into memory.
 slurp :: FilePath -> IO Bs.ByteString
 slurp = Bs.readFile
-
--- | Convert a 'Double' (8-byte float) sample to a 'Int16' (2-byte int) sample.
-conf8i2 :: Double -> Int16
-conf8i2 = truncate . (32767 *)
 
 {- |
 'Bs.hPut' from "Data.ByteString".

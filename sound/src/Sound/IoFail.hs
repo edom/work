@@ -4,12 +4,9 @@
 -- | Failed experiments.
 module Sound.IoFail
 (
-    -- * Convert sample type
-    lconf8i2
-    , rlconf8i2
     -- * Input
     -- ** Memory
-    , pvreadau
+    pvreadau
     , rvreadau
     -- ** File
     , pvreadfileau
@@ -233,9 +230,3 @@ writeStreamInChunks chunkSize handle =
                         bshPut handle chunk
                         >> loop (count - chunkSize) rest
 {-# INLINE writeStreamInChunks #-}
-
-lconf8i2 :: L Double -> L Int16
-lconf8i2 = fmap conf8i2
-
-rlconf8i2 :: RL Double -> RL Int16
-rlconf8i2 = rlmap conf8i2

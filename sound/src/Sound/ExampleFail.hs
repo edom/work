@@ -121,7 +121,7 @@ trypa =
         Pa.withDefStream $ \ stm -> do
             Pa.start stm
             _ <- Pa.getWriteAvail stm
-            Pa.writel stm (round (secondToSample p 2 :: Double)) $ lconf8i2 testsig
+            Pa.writel stm (round (secondToSample p 2 :: Double)) $ convert testsig
             Pa.stop stm
         return ()
     where

@@ -43,6 +43,8 @@ module Sound.Class
     , Aprep(..)
     -- * Trans
     , Trans(..)
+    -- * Convert
+    , Convert(..)
     -- * Reexports
     , module Prelude
     , module Control.Applicative
@@ -273,8 +275,7 @@ Laws:
 'fmap' f '.' 'trans' = 'fmap' f
 @
 -}
-class Trans f g where
-    trans :: f a -> g a
+class Trans f g where trans :: f a -> g a
 
 instance Trans f (Aprep f) where trans = Rest
 -- instance Trans Stream L where trans = flip decons cons
@@ -334,3 +335,8 @@ type Master a = a
 
 -- | Something being controlled by a 'Master'.
 type Slave a = a
+
+-- | Sample conversion.
+class Convert a b where convert :: a -> b
+instance Convert Double Int16 where convert = truncate . (32767 *)
+instance (Convert a b, Functor f) => Convert (f a) (f b) where convert = fmap convert
