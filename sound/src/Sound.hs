@@ -13,7 +13,6 @@ module Sound
     , module Data.Int
     -- * Input, output, and conversion
     , module Sound.Io.Snd
-    , module Sound.GenPtr
     , module Sound.Io
     , module Sound.IoPtr
     , module Sound.Portaudio
@@ -27,7 +26,6 @@ module Sound
     -- * Loop body abstraction ladder
     , module Sound.Endo
     -- * Stream abstraction ladder, signal description and manipulation, additive synthesis
-    , module Sound.Generator
     , module Sound.GeneratorContinuation
     -- * Unclear
     , module Sound.Buffer
@@ -89,8 +87,6 @@ import Sound.Fourier
 import Sound.Fm
 import Sound.Function
 import Sound.GenBody
-import Sound.GenPtr
-import Sound.Generator
 import Sound.GeneratorContinuation
 import Sound.Hint
 import Sound.InfList

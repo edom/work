@@ -15,8 +15,6 @@ module Sound.Time
     , LogicalTime
     , SampleNumber
     -- * Tempo
-    , gTickNumber
-    , gmTickNumber
     , TickPerSample
     -- * Type hints
     , Beat
@@ -42,8 +40,6 @@ where
 
 import qualified Control.Applicative as Ca
 
-import Sound.Generator
-import Sound.GeneratorMonadic
 import Sound.Hint
 
 {- |
@@ -67,16 +63,6 @@ The tick is a quantum (the smallest logical time unit).
 Each logical time quantity is an integral multiple of the tick.
 -}
 type LogicalTime a = a
-
-{- |
--}
-gTickNumber :: (Num a) => G s (TickPerSample a) -> G (P s a) (SampleNumber a)
-gTickNumber = gscanl (+) 0
-{-# INLINE gTickNumber #-}
-
-gmTickNumber :: (Monad m, Num a) => Gm s m (TickPerSample a) -> Gm (P s a) m (SampleNumber a)
-gmTickNumber = gmScanl (\ !a !b -> return $! a + b) 0
-{-# INLINE gmTickNumber #-}
 
 type TickPerSample a = a
 
