@@ -1,4 +1,5 @@
 {-# LANGUAGE BangPatterns #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 
 {- |
 'Internal' is big so compiling it takes time;
@@ -57,11 +58,11 @@ where
 import qualified Control.Monad.Trans.Cont as Mc
 import qualified Control.Monad.Trans.State.Strict as Ms
 
-import Control.Applicative (Applicative, pure, (<*>), liftA2)
 import Control.Monad ((>=>))
 import Control.Monad.Trans.Cont
 
 import Data.Functor.Identity
+import Sound.Class
 import Sound.InfList
 import Sound.Int
 import Sound.Time
@@ -284,7 +285,7 @@ btick t =
         let
             lookupStream = _bstticksam s
             currentSample = _bstsamno s
-            targetSample = lhead (ldrop t lookupStream)
+            targetSample = head (ldrop t lookupStream)
         in
             targetSample - currentSample
 
