@@ -1,14 +1,12 @@
 {-# OPTIONS_GHC -fno-warn-dodgy-exports #-}
 {-# LANGUAGE BangPatterns #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 
 module Sound
 (
     -- * Reexports
     -- $reexports
-    module Prelude
-    , module Control.Applicative
-    , module Control.Category
-    , module Control.Monad
+    module Control.Monad
     , module Data.Complex
     , module Data.Int
     -- * Input, output, and conversion
@@ -68,12 +66,10 @@ module Sound
 )
 where
 
-import Prelude hiding (id, seq, (.))
 import Data.Complex
 import Data.Int
 
 import Control.Applicative
-import Control.Category
 import Control.Monad
 
 import Sound.Abstract
@@ -104,7 +100,7 @@ import Sound.Portaudio ()
 import Sound.Ptr
 import Sound.Ramp
 import Sound.Sample
-import Sound.Stream ()
+import Sound.Stream
 import Sound.StreamVector
 import Sound.Table
 import Sound.Tempo
