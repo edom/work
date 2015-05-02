@@ -44,6 +44,8 @@ instance Decons Stream
 instance DeconsM m Stream where deconsM = decons
 instance Consume Stream
 instance Fill Stream
+instance Unfold Stream where unfold o e s = MkStream e o s
+instance FromList Stream where fromList = fromList_unfold
 
 instance Zip2 Stream where
     zip2 f (MkStream { _se = ex, _so = ox, _ss = sx }) (MkStream { _se = ey, _so = oy, _ss = sy }) =

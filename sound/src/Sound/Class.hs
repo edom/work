@@ -18,11 +18,20 @@ module Sound.Class
     , Head(..)
     -- ** Tail
     , Tail(..)
-    -- ** Cons
+    -- ** Unfold
+    , Unfold(..)
+    -- ** FromList
+    , FromList(..)
+    , fromList_cons
+    , fromList_unfold
+    , headWithDef
+    , tailOrEmpty
+    -- ** Take
+    , Take(..)
+    , TakeF(..)
+    -- ** Cons, Decons, DeconsM
     , Cons(..)
-    -- ** Decons
     , Decons(..)
-    -- ** DeconsM
     , DeconsM(..)
     -- ** Consume
     , Consume(..)
@@ -55,7 +64,7 @@ where
 import Control.Applicative
 import Control.Category hiding ((.))
 import Foreign
-import Prelude hiding (curry, fst, head, id, snd, scanl, tail, uncurry, (.))
+import Prelude hiding (curry, fst, head, id, snd, scanl, tail, take, uncurry, (.))
 import qualified Prelude as P
 
 import Sound.Buffer
@@ -133,10 +142,116 @@ This generalizes the 'P.tail' in "Prelude".
     -}
     tail :: f a -> f a
 
+{- |
+Can be generated from output mapper, next-state function, and seed.
+
+Laws:
+
+@
+'decons' ('unfold' o e s) f = f (o s) ('unfold' o e (e s))
+@
+
+@
+'head' ('unfold' o e s) f = o s
+@
+
+@
+'tail' ('unfold' o e s) f = 'unfold' o e (e s)
+@
+-}
+class Unfold f where
+    unfold :: (s -> a) -> (s -> s) -> s -> f a
+
+instance Unfold [] where
+    unfold o e =
+        loop
+        where
+            loop s = o s : loop (e s)
+    {-# INLINE unfold #-}
+
+class Take f g where take :: Int -> f a -> g a
+
+instance Take f (TakeF f) where take = MkTakeF
+instance Take [] [] where take = P.take
+instance (Point f) => Point (TakeF f) where point = MkTakeF 1 . point
+instance (Functor f) => Functor (TakeF f) where fmap f (MkTakeF n x) = MkTakeF n (fmap f x)
+
+instance (Applicative f) => Applicative (TakeF f) where
+    pure = MkTakeF 1 . pure
+    (MkTakeF m f) <*> (MkTakeF n x) = MkTakeF (min m n) (f <*> x)
+
+data TakeF f a
+    = MkTakeF Int (f a)
+
+instance (Decons f) => Trans (TakeF f) [] where
+    trans =
+        loop
+        where
+            loop (MkTakeF 0 _) = []
+            loop (MkTakeF n x) = decons x $ \ h t -> h : loop (MkTakeF (n - 1) t)
+
+{- |
+If you have 'Point' and 'Cons', or if you have 'Unfold',
+then you get 'FromList' for free.
+
+Laws:
+
+@
+'fromList' z = 'unfold' ('headWithDef' z) 'tailOrEmpty'
+@
+
+@
+'fromList' z [] = 'point' z
+@
+
+@
+'fromList' z (x:y) = 'cons' x ('fromList' z y)
+@
+-}
+class FromList f where
+    -- | The first argument is the value to be used if the list is empty.
+    fromList :: a -> [a] -> f a
+
+instance FromList [] where fromList = flip const
+
+fromList_unfold :: (Unfold f) => a -> [a] -> f a
+fromList_unfold z = unfold (headWithDef z) tailOrEmpty
+
+headWithDef :: a -> [a] -> a
+headWithDef x [] = x
+headWithDef _ (x:_) = x
+
+tailOrEmpty :: [a] -> [a]
+tailOrEmpty [] = []
+tailOrEmpty (_:x) = x
+
+fromList_cons :: (Point f, Cons f) => a -> [a] -> f a
+fromList_cons z =
+    loop
+    where
+        loop lst =
+            case lst of
+                [] -> point z
+                h:t -> cons h (loop t)
+
+{- |
+Laws:
+
+If f satisfies 'Cons' and 'Decons',
+
+@
+'decons' ('cons' x y) f = f x y
+@
+-}
 class Cons f where cons :: a -> f a -> f a
 
 instance Cons [] where cons = (:)
 
+{- |
+If f is an instance of 'Decons',
+its 'DeconsM' m instance is trivial.
+See 'DeconsM'.
+-}
 class (Head f, Tail f) => Decons f where
     {- |
 @
@@ -147,6 +262,15 @@ class (Head f, Tail f) => Decons f where
     decons x f = f (head x) (tail x)
     {-# INLINE decons #-}
 
+{- |
+Law:
+
+If f is already an instance of 'Decons',
+
+@
+deconsM = decons
+@
+-}
 class DeconsM m f where
     deconsM :: f a -> (a -> f a -> m b) -> m b
 
@@ -172,6 +296,7 @@ class (Consume f) => Fill f where
     {-# INLINE fill #-}
     fill_ :: (Storable a) => Buffer Ptr a -> f a -> IO ()
     fill_ b x = fill b x >> return ()
+    {-# INLINE fill_ #-}
 
 type Consumer a = Index Int -> a -> IO ()
 type Index a = a

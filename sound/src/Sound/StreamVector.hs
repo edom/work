@@ -37,10 +37,10 @@ lcyclev cylen z =
     lcycle cylen . lfromv z
 
 vfroml :: (Vg.Vector v a) => Int -> L a -> v a
-vfroml n s = Vg.fromList $ ltakelist n s
+vfroml n s = Vg.fromList $ take n s
 
 vfromsl :: (Vg.Vector v a) => SL Int a -> v a
-vfromsl s = Vg.fromList (ltakelist (_slcount s) (_unslice s))
+vfromsl s = Vg.fromList (take (_slcount s) (_unslice s))
 
 vfromsrl :: (Vg.Vector v a) => SRL Int a -> v a
 vfromsrl = vfromsl . smap unrated

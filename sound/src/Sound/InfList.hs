@@ -38,9 +38,7 @@ module Sound.InfList
     -- * Substreams
     , ldrop
     , ldropwhile
-    , lfromlist
     , listfroml
-    , ltakelist
     -- * Monad
     , lmapM_
     , lmapMc_
@@ -98,11 +96,18 @@ instance Zip2 L where zip2 = lzip2
 instance Head L where head (MkL x _) = x
 instance Tail L where tail (MkL _ x) = x
 instance Cons L where cons = MkL
+instance Take L [] where take n = take n . listfroml
+instance FromList L where fromList = fromList_cons
 instance Decons L
 instance DeconsM m L where deconsM = decons
 instance Consume L
 instance Fill L
 instance HardSync L
+instance Unfold L where
+    unfold o e =
+        loop
+        where
+            loop s = MkL (o s) (loop (e s))
 
 -- | This is similar to the 'Applicative' instance of 'ZipList'.
 instance Applicative L where
@@ -587,32 +592,12 @@ ldropwhile cond =
 
 -- * List conversion
 
--- | Extend the list infinitely with the given element.
-lfromlist :: a -> [a] -> L a
-lfromlist z =
-    loop
-    where
-        loop lst =
-            case lst of
-                [] -> lrepeat z
-                h : t -> MkL h (loop t)
-
 {- |
 Turn a stream into an infinite list.
 -}
 listfroml :: L a -> [a]
 listfroml (MkL h t) =
     h : listfroml t
-
-{- |
-Extract the first @n@ elements of a stream, where @n@ is the first argument.
-
-@
-ltakelist n x = 'take' n ('listfroml' x)
-@
--}
-ltakelist :: Int -> L a -> [a]
-ltakelist n = take n . listfroml
 
 lmapM_ :: (Monad m) => (a -> m b) -> Int -> L a -> m ()
 lmapM_ k n_ x_ =
