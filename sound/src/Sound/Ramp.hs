@@ -1,16 +1,17 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module Sound.Ramp
 (
     -- * Functions
     ramplin
     , rampexp
-    -- * Streams
-    , lramplin
-    , lrampexp
+    -- * Unfolds
+    , uramplin
+    , urampexp
 )
 where
 
+import Sound.Class
 import Sound.Hint
-import Sound.InfList
 import Sound.Sample
 
 {- |
@@ -51,13 +52,13 @@ rampexp x0 y0 x1 y1 =
 {-# INLINE rampexp #-}
 
 -- | The sampling of 'ramplin'.
-lramplin :: (Fractional a) => StepSize a -> a -> a -> a -> a -> L a
-lramplin p t0 v0 t1 v1 =
-    lsample p (ramplin t0 v0 t1 v1)
-{-# INLINE lramplin #-}
+uramplin :: (Unfold f, Fractional a) => StepSize a -> a -> a -> a -> a -> f a
+uramplin p t0 v0 t1 v1 =
+    sample p (ramplin t0 v0 t1 v1)
+{-# INLINE uramplin #-}
 
 -- | The sampling of 'rampexp'.
-lrampexp :: (Floating a) => StepSize a -> a -> a -> a -> a -> L a
-lrampexp p t0 v0 t1 v1 =
-    lsample p (rampexp t0 v0 t1 v1)
-{-# INLINE lrampexp #-}
+urampexp :: (Unfold f, Floating a) => StepSize a -> a -> a -> a -> a -> f a
+urampexp p t0 v0 t1 v1 =
+    sample p (rampexp t0 v0 t1 v1)
+{-# INLINE urampexp #-}

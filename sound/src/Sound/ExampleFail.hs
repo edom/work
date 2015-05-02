@@ -71,7 +71,7 @@ sineSweep per =
     ltfm per tab fre
     where
         tab = tsin 12
-        fre = lrampexp per 0 20 10 20000
+        fre = urampexp per 0 20 10 20000
 {-# INLINE sineSweep #-}
 
 sineSweepRawFile :: IO ()
