@@ -1,5 +1,6 @@
 {-# LANGUAGE BangPatterns #-}
 {-# LANGUAGE ExistentialQuantification #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {- |
 This module is similar to "Data.List".
 -}
@@ -7,6 +8,7 @@ module Sound.Stream
 (
     -- * Construction
     Stream
+    , StreamM
 )
 where
 
@@ -19,32 +21,51 @@ import Sound.Pair
 data Stream a =
     forall s. MkStream
     {
-        _sstep :: !(s -> P a s)
-        , _sstate :: !s
+        _se :: !(s -> s) -- state endofunction
+        , _so :: !(s -> a) -- output mapper
+        , _ss :: !s -- state
     }
 
 instance Point Stream where
-    point = srepeat
+    point x = MkStream { _se = id, _so = id, _ss = x }
     {-# INLINE point #-}
 
 instance Functor Stream where
-    fmap f (MkStream y x) = MkStream (pmap0 f . y) x
+    fmap f (MkStream e o s) = MkStream e (f . o) s
     {-# INLINE fmap #-}
 
 instance Applicative Stream where
     pure = point
     (<*>) = zip2 ($)
 
-srepeat :: a -> Stream a
-srepeat x = MkStream (\ u -> MkP u u) x
-{-# INLINE srepeat #-}
+instance Head Stream where head (MkStream _ o s) = o s
+instance Tail Stream where tail (MkStream e o s) = MkStream e o (e s)
+instance Decons Stream
+instance DeconsM m Stream where deconsM = decons
+instance Consume Stream
+instance Fill Stream
 
 instance Zip2 Stream where
-    zip2 f (MkStream stepx statx) (MkStream stepy staty) = MkStream step (MkP statx staty)
+    zip2 f (MkStream { _se = ex, _so = ox, _ss = sx }) (MkStream { _se = ey, _so = oy, _ss = sy }) =
+        MkStream { _se = e, _so = o, _ss = s }
         where
-            step (MkP sx sy) = 
-                MkP (f a b) (MkP sx' sy')
-                where
-                    MkP a sx' = stepx sx
-                    MkP b sy' = stepy sy
+            s = MkP sx sy
+            e (MkP u v) = MkP (ex u) (ey v)
+            o (MkP u v) = f (ox u) (oy v)
     {-# INLINE zip2 #-}
+
+data StreamM m a =
+    forall s. MkStreamM
+    {
+        _te :: !(s -> m s) -- state endofunction
+        , _to :: !(s -> m a) -- output mapper
+        , _ts :: !s -- state
+    }
+
+instance (Point m) => Point (StreamM m) where
+    point x = MkStreamM { _te = point, _to = point, _ts = x }
+    {-# INLINE point #-}
+
+instance (Functor m) => Functor (StreamM m) where
+    fmap f (MkStreamM { _te = e, _to = o, _ts = s }) = MkStreamM { _te = e, _to = fmap f . o, _ts = s }
+    {-# INLINE fmap #-}
