@@ -29,8 +29,6 @@ module Sound
     -- * Stream abstraction ladder, signal description and manipulation, additive synthesis
     , module Sound.Generator
     , module Sound.GeneratorContinuation
-    -- * Hard sync
-    , module Sound.Sync
     -- * Unclear
     , module Sound.Buffer
     , module Sound.Pair
@@ -112,7 +110,6 @@ import Sound.Ramp
 import Sound.Sample
 import Sound.Stream ()
 import Sound.StreamVector
-import Sound.Sync
 import Sound.Table
 import Sound.Tempo
 import Sound.Time
