@@ -1,10 +1,14 @@
+{-# LANGUAGE BangPatterns #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 -- | Integration.
-
 module Sound.Int
 (
     -- * Integration
-    int
-    , lint
+    Integrable(..)
+    -- * Arrow-style
+    , aint
+    -- * Scan-style
+    , sint
     , rlint
     -- * Hints
     , Inp
@@ -13,28 +17,28 @@ module Sound.Int
 )
 where
 
+import Control.Arrow
+
+import Sound.Class
 import Sound.InfList
 import Sound.Hint
 import Sound.Time
 
-int :: (Num n) => StepSize n -> (Inp n, Sta n) -> (Out n, Sta n)
-int d (x, y) = (y, y + x * d)
-{-# INLINE int #-}
+class Integrable f where
+    int :: (Num n) => StepSize n -> f n -> f n
 
-{- |
-Numerically integrate the stream using Euler's method.
+aint :: (Arrow a, Num n, Pair p) => StepSize n -> a (p (Inp n) (Sta n)) (p (Out n) (Sta n))
+aint !d = arr $ uncurry $ \ !x !y -> mkPair y (y + x * d)
+{-# INLINE aint #-}
 
-The first parameter is the step size.
--}
-lint :: (Num a) => a -> L a -> L a
-lint d =
-    lscanl (\ y x -> y + x * d) 0
-{-# INLINE lint #-}
+sint :: (Num a, Scan f) => StepSize a -> f a -> f a
+sint !dx = scanl (\ !y !fx -> y + fx * dx) 0
+{-# INLINE sint #-}
 
 -- | Numerical integral.
 rlint :: (Fractional a) => RL a -> RL a
 rlint x =
-    rated r . lint d . unrated $ x
+    rated r . sint d . unrated $ x
     where
         r = rate x
         d = recip . fromIntegral . _unRate $ r

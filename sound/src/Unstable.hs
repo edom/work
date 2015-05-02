@@ -268,7 +268,7 @@ blwritezip :: Build (L c) Int -> (a -> b -> c) -> L a -> L b -> Build (L c) (L a
 blwritezip bn f x y = bn >>= \ n -> badvsam_ n >> bcont (lczip n f x y . curry)
 
 blint :: (Fractional a) => L a -> Build r (L a)
-blint x = fmap (\ r -> lint (ratedt r) x) brate
+blint x = fmap (\ r -> sint (ratedt r) x) brate
 
 -- | Literal constants do not need this due to @('Num' a) => 'Num' ('Build' r a)@.
 bsam :: Int -> Build r Int

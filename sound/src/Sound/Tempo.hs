@@ -37,7 +37,7 @@ Tick is the smallest subdivision of beat.
 You can build the spb tempo signal the same way you build sound signals: using 'Build'.
 -}
 ltempos :: (Fractional a) => TickPerBeat (Rate Int) -> L (Spb a) -> L (Second a)
-ltempos tpb_ = lint (ratedt tpb_)
+ltempos tpb_ = sint (ratedt tpb_)
 
 rltempos :: (Fractional a) => RL (Spb a) -> RL (Second a)
 rltempos = rlint
