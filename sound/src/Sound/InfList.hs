@@ -1,4 +1,5 @@
 {-# LANGUAGE BangPatterns #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 module Sound.InfList
 (
     -- * Construction
@@ -17,9 +18,6 @@ module Sound.InfList
     -- * Scans
     , lscanl
     , lunfoldr
-    , ldecons
-    , lhead
-    , ltail
     , lzip3
     , lcmap
     , lcid
@@ -95,27 +93,17 @@ data L a
     deriving (Read, Show)
 
 -- | This is similar to the 'Functor' instance of '[]'.
-instance Functor L where
-    fmap = lmap
-
-instance Point L where
-    point = lrepeat
-
-instance Zip2 L where
-    zip2 = lzip2
-
-{- |
-@
-lzip2 f \< x0, x1, ... \> \< y0, y1, ... \> = \< f x0 y0, f x1 y1, ... \>
-@
--}
-lzip2 :: (a -> b -> c) -> L a -> L b -> L c
-lzip2 f =
-    loop
-    where
-        loop (MkL xh xt) (MkL yh yt) =
-            MkL (f xh yh) (loop xt yt)
-{-# INLINE lzip2 #-}
+instance Functor L where fmap = lmap
+instance Point L where point = lrepeat
+instance Zip2 L where zip2 = lzip2
+instance Head L where head (MkL x _) = x
+instance Tail L where tail (MkL _ x) = x
+instance Cons L where cons = MkL
+instance Decons L
+instance DeconsM m L where deconsM = decons
+instance Consume L
+instance Fill L
+instance HardSync L
 
 -- | This is similar to the 'Applicative' instance of 'ZipList'.
 instance Applicative L where
@@ -153,6 +141,19 @@ instance (Floating a) => Floating (L a) where
     asinh = fmap asinh
     atanh = fmap atanh
     acosh = fmap acosh
+
+{- |
+@
+lzip2 f \< x0, x1, ... \> \< y0, y1, ... \> = \< f x0 y0, f x1 y1, ... \>
+@
+-}
+lzip2 :: (a -> b -> c) -> L a -> L b -> L c
+lzip2 f =
+    loop
+    where
+        loop (MkL xh xt) (MkL yh yt) =
+            MkL (f xh yh) (loop xt yt)
+{-# INLINE lzip2 #-}
 
 lat :: Int -> L a -> a
 lat = loop
@@ -299,22 +300,6 @@ lunfoldr !fs !fa =
 {-# INLINE lunfoldr #-}
 
 -- * Deconstruction
-
-{- |
-@
-ldecons x f = f ('lhead' x) ('ltail' x)
-@
--}
-ldecons :: L a -> (a -> L a -> b) -> b
-ldecons (MkL h t) f = f h t
-
--- | Get the first element of the stream.
-lhead :: L a -> a
-lhead (MkL x _) = x
-
--- | Get the stream without the first element.
-ltail :: L a -> L a
-ltail (MkL _ x) = x
 
 -- * Transformation
 
@@ -588,7 +573,7 @@ ldrop :: Int -> L a -> L a
 ldrop =
     loop
     where
-        loop n x | n > 0 = loop (n - 1) (ltail x)
+        loop n x | n > 0 = loop (n - 1) (tail x)
         loop _ x = x
 
 -- | Discard all first elements of the stream that satisfy the predicate.
