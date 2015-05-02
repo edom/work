@@ -2,6 +2,7 @@ module Sound.Example
 (
     module Sound
     , silence
+    , sine
     , sweep
     , whiteNoise
 )
@@ -19,6 +20,20 @@ silence :: IO ()
 silence = do
     writingFile "/tmp/silence.raw" $ \ handle -> do
         S.writeBody_ handle (S.MkSampleCount 1048576) (point 0 :: Stream Double)
+
+sine :: IO ()
+sine =
+    writingFile path $ \ handle -> do
+        S.writeBody_ handle (S.MkSampleCount nsam) sig
+    where
+        sr = 44100 :: Int
+        period = recip $ realToFrac sr :: Double
+        path = "/tmp/sine.raw"
+        nsam = 30 * sr
+        sig :: Stream Double
+        sig = sfm period tab fre
+        tab = tsin 4
+        fre = point 256
 
 -- | This writes 30 seconds of exponential sine sweep from 20 Hz to 20000 Hz.
 sweep :: IO ()
