@@ -39,7 +39,6 @@ module Sound.InfList
     , ldrop
     , ldropwhile
     , lfromlist
-    , lfromilist
     , listfroml
     , ltakelist
     -- * Monad
@@ -587,14 +586,6 @@ ldropwhile cond =
                 else s
 
 -- * List conversion
-
--- | Turn an infinite list into a stream.
-lfromilist :: [a] -> L a
-lfromilist =
-    loop
-    where
-        loop x =
-            MkL (head x) (loop $ tail x)
 
 -- | Extend the list infinitely with the given element.
 lfromlist :: a -> [a] -> L a
