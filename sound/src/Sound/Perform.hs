@@ -39,7 +39,7 @@ defaultTuning n = 2 ** (n / 12)
 type Instrument a = Precision Int Double -> Freq (L a) -> Build (L a) (L a)
 sineInstrument :: Instrument Double
 sineInstrument p f =
-    return (ltfm (_prPeriod p) t f)
+    return (sfm (_prPeriod p) t f)
     where
         t = tsin 12
 

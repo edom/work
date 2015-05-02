@@ -68,7 +68,7 @@ silenceFile =
 -- | 10-second exponential chirp from 20 to 20,000 Hz.
 sineSweep :: StepSize Double -> L Double
 sineSweep per =
-    ltfm per tab fre
+    sfm per tab fre
     where
         tab = tsin 12
         fre = urampexp per 0 20 10 20000
@@ -85,7 +85,7 @@ sineSweepRawFile =
 
 testsig :: L Double
 testsig =
-    ltfm (_prPeriod p) t j
+    sfm (_prPeriod p) t j
     where
         t = tsin 12
         p = fromRate (44100 :: Int)

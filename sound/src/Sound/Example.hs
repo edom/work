@@ -30,8 +30,8 @@ sweep =
         period = recip $ realToFrac sr :: Double
         path = "/tmp/sweep.raw"
         nsam = 30 * sr
-        sig :: L Double
-        sig = ltfm period tab fre
+        sig :: Stream Double
+        sig = sfm period tab fre
         tab = tsin 12
         fre = urampexp period 0 20 10 20000
 
@@ -42,4 +42,5 @@ whiteNoise =
     where
         path = "/tmp/whitenoise.raw"
         gen = mkStdGen 0
-        sig = randomSamples gen :: Stream Double
+        sig :: Stream Double
+        sig = randomSamples gen
