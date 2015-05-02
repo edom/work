@@ -1,4 +1,5 @@
 {-# LANGUAGE BangPatterns #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 
 -- | Failed experiments.
 module Sound.IoFail
@@ -19,7 +20,6 @@ module Sound.IoFail
     -- ** Handle
     , hWriteRaw
     , ehWriteRaw
-    , ghWriteRaw
     , lhWriteRaw
     , vhwrite
     , writeStreamInChunks
@@ -32,8 +32,6 @@ module Sound.IoFail
     -- * Other
     , lPokeArray
     , withLArray
-    , gPokeArrayR
-    , gPokeArrayC
 )
 where
 
@@ -46,8 +44,9 @@ import qualified Data.Serialize as Se
 import qualified Data.Vector.Unboxed as Vu
 import qualified Data.Vector.Storable as Vs
 
+import Sound.Abstract
+import Sound.Class
 import Sound.Endo
-import Sound.Generator
 import Sound.InfList
 import Sound.IoPtr
 import Sound.Time
@@ -113,7 +112,7 @@ into big-endian 64-bit floats.
 bsAuBody n x ~ bsAuBodyC n x const
 @
 -}
-bsAuBody :: Count -> L Double -> Bs.ByteString
+bsAuBody :: Count Int -> L Double -> Bs.ByteString
 bsAuBody n x =
     Se.runPut $ ltakemapM_ Se.putFloat64be n x
 {-# INLINE bsAuBody #-}
@@ -121,7 +120,7 @@ bsAuBody n x =
 {- |
 This is 'bsAuBody' that allows manipulating the rest of the stream.
 -}
-bsAuBodyC :: Count -> L Double -> (Bs.ByteString -> L Double -> a) -> a
+bsAuBodyC :: Count Int -> L Double -> (Bs.ByteString -> L Double -> a) -> a
 bsAuBodyC n x c =
     -- lcfoldl n (\ m s -> m >> Se.putFloat64be s) m0 x $ \ m t -> c (Se.runPut m) t
     -- lcfoldlM n (\ m s -> m >> Se.putFloat64be s) () x $ \ m t -> c (Se.runPut m) t
@@ -132,28 +131,23 @@ bsAuBodyC n x c =
 {-# INLINE bsAuBodyC #-}
 
 -- | This is used for benchmarking.
-hWriteRaw :: Handle -> Count -> L Double -> IO ()
+hWriteRaw :: Handle -> Count Int -> L Double -> IO ()
 hWriteRaw handle count stream@(MkL !_ _) =
     Bs.hPut handle (Se.runPut (ltakemapM_ Se.putFloat64le count stream))
 {-# INLINE hWriteRaw #-}
 
-eWriteRawFile :: FilePath -> Count -> Endo s -> (s -> Double) -> s -> IO ()
+eWriteRawFile :: FilePath -> Count Int -> Endo s -> (s -> Double) -> s -> IO ()
 eWriteRawFile path count step extract initium =
     withBinaryFile path WriteMode $ \ handle ->
         ehWriteRaw handle count step extract initium
 {-# INLINE eWriteRawFile #-}
 
-ehWriteRaw :: Handle -> Count -> Endo s -> (s -> Double) -> s -> IO ()
+ehWriteRaw :: Handle -> Count Int -> Endo s -> (s -> Double) -> s -> IO ()
 ehWriteRaw handle count step extract initium =
     Bs.hPut handle (Se.runPut (emapM__ (Se.putFloat64le . extract) step count initium))
 {-# INLINE ehWriteRaw #-}
 
-ghWriteRaw :: Handle -> Count -> G s Double -> IO ()
-ghWriteRaw handle count gen =
-    Bs.hPut handle (Se.runPut (gmapM_ Se.putFloat64le count gen))
-{-# INLINE ghWriteRaw #-}
-
-lhWriteRaw :: Handle -> Count -> L Double -> IO ()
+lhWriteRaw :: Handle -> Count Int -> L Double -> IO ()
 lhWriteRaw handle count gen =
     Bs.hPut handle (Se.runPut (lmapM_ Se.putFloat64le count gen))
 {-# INLINE lhWriteRaw #-}
@@ -183,35 +177,35 @@ lPokeArray ptr = limapM_ (pokeElemOff ptr)
 {-# INLINE lPokeArray #-}
 
 withLArray :: (Storable a) => Int -> L a -> (Ptr a -> IO r) -> IO r
-withLArray count gen consume =
+withLArray count gen consume_ =
     allocaArray count $ \ ptr ->
         lPokeArray ptr count gen
-        >> consume ptr
+        >> consume_ ptr
 {-# INLINE withLArray #-}
 
 -- | This is used for benchmarking.
-writeRawFile :: FilePath -> Count -> L Double -> IO ()
+writeRawFile :: FilePath -> Count Int -> L Double -> IO ()
 writeRawFile path count stream =
     let
         !byteCount = 8 * count
-        consume handle =
+        consume_ handle =
             withLArray count stream $ \ !ptr ->
                 hPutBuf handle ptr byteCount
     in
-        withBinaryFile path WriteMode consume
+        withBinaryFile path WriteMode consume_
 {-# INLINE writeRawFile #-}
 
 {- |
 This should be the fastest way to dump some generator samples to a file.
 -}
-lWriteRawFile :: FilePath -> Count -> L Double -> IO ()
+lWriteRawFile :: FilePath -> Count Int -> L Double -> IO ()
 lWriteRawFile path count gen =
     withBinaryFile path WriteMode $ \ handle ->
         withLArray count gen $ \ ptr ->
             hPutBuf handle ptr (8 * count)
 {-# INLINE lWriteRawFile #-}
 
-writeAuFile :: FilePath -> Word32 -> Count -> L Double -> IO ()
+writeAuFile :: FilePath -> Word32 -> Count Int -> L Double -> IO ()
 writeAuFile path rate_ count stream =
     withBinaryFile path WriteMode $ \ handle -> do
         bshPut handle $ A.header rate_ (fromIntegral count)
@@ -226,7 +220,7 @@ writeAuFile path rate_ count stream =
 into chunks of @m@ samples each,
 and writes the chunks to the handle @h@.
 -}
-writeStreamInChunks :: ChunkSampleCount -> Handle -> Count -> L Double -> IO ()
+writeStreamInChunks :: ChunkSampleCount -> Handle -> Count Int -> L Double -> IO ()
 writeStreamInChunks chunkSize handle =
     loop
     where
@@ -245,11 +239,3 @@ lconf8i2 = fmap conf8i2
 
 rlconf8i2 :: RL Double -> RL Int16
 rlconf8i2 = rlmap conf8i2
-
-gPokeArrayR :: (Storable a) => Ptr a -> Int -> G s a -> IO s
-gPokeArrayR ptr = gimapM_R (pokeElemOff ptr)
-{-# INLINE gPokeArrayR #-}
-
-gPokeArrayC :: (Storable a) => Ptr a -> Int -> G s a -> (G s a -> IO r) -> IO r
-gPokeArrayC ptr = gimapM_C (pokeElemOff ptr)
-{-# INLINE gPokeArrayC #-}
