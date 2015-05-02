@@ -42,6 +42,7 @@ module Sound.Class
     , Fill(..)
     -- ** Scan
     , Scan(..)
+    , scanl_cons
     -- ** Zip2
     , Zip2(..)
     -- * HardSync
@@ -302,14 +303,32 @@ type Consumer a = Index Int -> a -> IO ()
 type Index a = a
 type Count a = a
 
+{- |
+If you have 'Cons' and 'Decons', you get 'Scan' for free.
+
+@
+@
+-}
 class Scan f where
     {- |
 This generalizes the 'P.scanl' in "Prelude".
-    -}
-    scanl :: (b -> a -> b) -> b -> f a -> f b
 
-instance Scan [] where
-    scanl = P.scanl
+@
+scanl (+) 0 \< 1, 2, 3, 4, ... \> = \< 0, 1, 3, 6, 10, ... \>
+@
+    -}
+    scanl :: (a -> e -> a) -> a -> f e -> f a
+
+instance Scan [] where scanl = P.scanl
+
+scanl_cons :: (Cons f, Decons f) => (a -> e -> a) -> a -> f e -> f a
+scanl_cons f =
+    loop
+    where
+        loop a x =
+            decons x $ \ h t ->
+                cons a (loop (f a h) t)
+{-# INLINE scanl_cons #-}
 
 {- |
 If f is an instance of 'Point' and 'Applicative',

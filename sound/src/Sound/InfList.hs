@@ -16,7 +16,6 @@ module Sound.InfList
     , lgenerate
     , lnat
     -- * Scans
-    , lscanl
     , lunfoldr
     , lzip3
     , lcmap
@@ -98,6 +97,7 @@ instance Tail L where tail (MkL _ x) = x
 instance Cons L where cons = MkL
 instance Take L [] where take n = take n . listfroml
 instance FromList L where fromList = fromList_cons
+instance Scan L where scanl = scanl_cons
 instance Decons L
 instance DeconsM m L where deconsM = decons
 instance Consume L
@@ -108,6 +108,7 @@ instance Unfold L where
         loop
         where
             loop s = MkL (o s) (loop (e s))
+    {-# INLINE unfold #-}
 
 -- | This is similar to the 'Applicative' instance of 'ZipList'.
 instance Applicative L where
@@ -266,18 +267,6 @@ lnat = \< 0, 1, 2, ... \>
 -}
 lnat :: (Num a) => L a
 lnat = literate (1 +) 0
-
-{- |
-@
-lscanl (+) 0 \< 1, 2, 3, 4, ... \> = \< 0, 1, 3, 6, 10, ... \>
-@
--}
-lscanl :: (a -> b -> a) -> a -> L b -> L a
-lscanl f =
-    loop
-    where
-        loop acc (MkL h t) =
-            MkL acc (loop (f acc h) t)
 
 -- ** Unfolding
 

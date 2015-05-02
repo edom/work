@@ -47,6 +47,11 @@ instance Fill Stream
 instance Unfold Stream where unfold o e s = MkStream e o s
 instance FromList Stream where fromList = fromList_unfold
 
+instance Scan Stream where
+    scanl f a (MkStream e o s) =
+        MkStream (uncurry (\ a_ s_ -> MkP (f a_ (o s_)) (e s_))) fst (MkP a s)
+    {-# INLINE scanl #-}
+
 instance Zip2 Stream where
     zip2 f (MkStream { _se = ex, _so = ox, _ss = sx }) (MkStream { _se = ey, _so = oy, _ss = sy }) =
         MkStream { _se = e, _so = o, _ss = s }
