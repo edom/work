@@ -1,7 +1,4 @@
 {-# LANGUAGE BangPatterns #-}
-{-# LANGUAGE Safe #-}
-{-# OPTIONS_GHC -fwarn-unsafe #-}
-
 -- | Strict pair.
 module Sound.Pair
 (
@@ -23,12 +20,19 @@ module Sound.Pair
 )
 where
 
+import Sound.Class
+
 {- |
 Strict tuple.
 -}
 data P a b
     = MkP a b
     deriving (Read, Show, Eq, Ord)
+
+instance Pair P where
+    mkPair = MkP
+    uncurry f (MkP x y) = f x y
+    {-# INLINE uncurry #-}
 
 infixr 1 `MkP`
 infixr 1 `mkP`
