@@ -13,6 +13,7 @@ module Sound.Buffer
     , bufUnsafePeek
     -- * Creation
     , allocaBuffer
+    , bufWithForeignPtr
     , withForeignBuffer
     , _bufCast
     , bufCast
@@ -58,6 +59,11 @@ allocaBuffer :: (Storable a) => ElemCount a -> (Buffer Ptr a -> IO b) -> IO b
 allocaBuffer count consume =
     allocaArray count $ \ p ->
         consume (MkBuffer p 0 count)
+
+bufWithForeignPtr :: ElemCount e -> ElemCount e -> ForeignPtr e -> (Buffer Ptr e -> IO r) -> IO r
+bufWithForeignPtr siz cap fpt act = do
+    withForeignPtr fpt $ \ ptr -> do
+        act $ MkBuffer ptr siz cap
 
 withForeignBuffer :: Buffer ForeignPtr a -> (Buffer Ptr a -> IO r) -> IO r
 withForeignBuffer buf consume =
