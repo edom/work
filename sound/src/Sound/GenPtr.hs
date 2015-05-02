@@ -3,8 +3,7 @@
 -- | Combination of "Sound.GeneratorMonadic" and "Sound.Ptr"
 module Sound.GenPtr
 (
-    module Sound.GeneratorMonadic
-    , module Sound.IoPtr
+    module Sound.IoPtr
     -- * Buffer-backed generators
     , gmFromPtr
     , gmFromPtrC
@@ -17,7 +16,7 @@ module Sound.GenPtr
 )
 where
 
-import Sound.GeneratorMonadic
+import Sound.Abstract
 import Sound.IoPtr
 
 gmFromPtr :: (Storable a) => Ptr a -> ElemCount a -> Gm Int IO a

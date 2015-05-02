@@ -29,7 +29,6 @@ module Sound
     -- * Stream abstraction ladder, signal description and manipulation, additive synthesis
     , module Sound.Generator
     , module Sound.GeneratorContinuation
-    , module Sound.GeneratorMonadic
     -- * Hard sync
     , module Sound.Sync
     -- * Unclear
@@ -95,7 +94,6 @@ import Sound.GenBody
 import Sound.GenPtr
 import Sound.Generator
 import Sound.GeneratorContinuation
-import Sound.GeneratorMonadic
 import Sound.Hint
 import Sound.InfList
 import Sound.Int
