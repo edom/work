@@ -6,12 +6,9 @@ module Sound.Ramp
     -- * Streams
     , lramplin
     , lrampexp
-    , gramplin
-    , grampexp
 )
 where
 
-import Sound.Generator
 import Sound.Hint
 import Sound.InfList
 import Sound.Sample
@@ -64,13 +61,3 @@ lrampexp :: (Floating a) => StepSize a -> a -> a -> a -> a -> L a
 lrampexp p t0 v0 t1 v1 =
     lsample p (rampexp t0 v0 t1 v1)
 {-# INLINE lrampexp #-}
-
-gramplin :: (Floating t) => StepSize t -> t -> t -> t -> t -> G t t
-gramplin p t0 v0 t1 v1 =
-    gsample p (ramplin t0 v0 t1 v1)
-{-# INLINE gramplin #-}
-
-grampexp :: (Floating t) => StepSize t -> t -> t -> t -> t -> G t t
-grampexp p t0 v0 t1 v1 =
-    gsample p (rampexp t0 v0 t1 v1)
-{-# INLINE grampexp #-}

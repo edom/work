@@ -2,11 +2,9 @@
 module Sound.Sample
 (
     lsample
-    , gsample
 )
 where
 
-import Sound.Generator
 import Sound.Hint
 import Sound.InfList
 
@@ -18,8 +16,3 @@ lsample :: (Num t) => StepSize t -> (t -> a) -> L a
 lsample !p !f =
     lunfoldr (p +) f 0
 {-# INLINE lsample #-}
-
-gsample :: (Num t) => StepSize t -> (t -> a) -> G t a
-gsample !p !f =
-    MkG 0 (p +) f
-{-# INLINE gsample #-}
