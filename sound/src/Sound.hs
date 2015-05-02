@@ -16,19 +16,13 @@ module Sound
     , module Sound.Portaudio
     -- * Abstraction ladder
     , module Sound.Class
-    , module Sound.Abstract
+    , module Sound.Pair
     , module Sound.Compile
     , module Sound.InfList
     , module Sound.List
-    , module Sound.GenBody
-    -- * Loop body abstraction ladder
-    , module Sound.Endo
-    -- * Stream abstraction ladder, signal description and manipulation, additive synthesis
-    , module Sound.GeneratorContinuation
-    -- * Unclear
+    -- * Buffer
     , module Sound.Buffer
-    , module Sound.Pair
-    , module Sound.Function
+    , module Sound.Ptr
     -- * Time, tempo
     , module Sound.Time
     , module Sound.Tempo
@@ -51,20 +45,21 @@ module Sound
     , module Sound.Perform
     -- * MIDI input
     , module Sound.Midi
-    -- * Low-level operations
-    , module Sound.Ptr
     -- * Error handling, type hints
     , module Sound.Hint
+    -- * Filters: zeros and poles
+    , module Sound.Filter
+    -- * Unclear
+    , module Sound.Function
     -- * Failed experiments
+    , module Sound.Abstract
+    , module Sound.Endo
+    , module Sound.GenBody
+    , module Sound.GeneratorContinuation
     , module Sound.IoFail
     , module Sound.IoSox
     , module Sound.Stream
     , module Sound.StreamVector
-    -- * Signal description and operations
-    -- ** Filters: zeros and poles
-    , module Sound.Filter
-    -- ** Waveshaping
-    -- $waveshaping
 )
 where
 
@@ -124,8 +119,4 @@ with '.' and 'id' from "Control.Category".
 This module hides 'P.seq' from "Prelude".
 
 This module reexports everything else from all modules listed here.
--}
-
-{- $waveshaping
-Waveshaping is just function application or composition.
 -}
