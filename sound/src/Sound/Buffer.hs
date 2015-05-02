@@ -8,7 +8,10 @@ module Sound.Buffer
 (
     -- * Buffer
     Buffer(..)
+    , bufPtr
+    , bufCap
     , bufUnsafePeek
+    -- * Creation
     , allocaBuffer
     , withForeignBuffer
     , _bufCast
@@ -37,6 +40,12 @@ data Buffer p a
         , _bc :: !(ElemCount a)     -- ^ capacity
     }
     deriving (Show)
+
+bufPtr :: Buffer p a -> p a
+bufPtr = _bp
+
+bufCap :: Buffer p a -> ElemCount a
+bufCap = _bc
 
 {- |
 Unsafe.
