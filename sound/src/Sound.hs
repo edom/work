@@ -37,8 +37,10 @@ module Sound
     -- * Decibels, contours, envelopes, limiting, clamping
     , module Sound.Amplitude
     , module Sound.Ramp
-    -- * Wavetable, noise
+    -- * Wavetable
     , module Sound.Table
+    -- * White noise
+    , module Sound.Random
     -- * Fourier transform
     , module Sound.Fourier
     -- * Frequency modulation
@@ -99,6 +101,7 @@ import Sound.Perform
 import Sound.Portaudio ()
 import Sound.Ptr
 import Sound.Ramp
+import Sound.Random
 import Sound.Sample
 import Sound.Stream
 import Sound.StreamVector

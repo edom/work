@@ -129,7 +129,7 @@ trypa =
         p = fromRate (44100 :: Int)
 
 rd :: Tab Double
-rd = trandoms 12 $ mkgen 0
+rd = trandoms 12 $ mkStdGen 0
 
 vu :: Vu.Vector Double
 vu = vconvolve (vfromlist [0,1,1]) (vfromlist [1,2,3,4,5])

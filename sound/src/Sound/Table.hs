@@ -34,30 +34,13 @@ module Sound.Table
     , tconvolve
     -- * Types
     , tmap
-    -- * Random (white noise)
-    , Gen
-    , mkgen
-    , lrandom
-    , lrandomrange
-    , lrandoms
-    , rlrandom
-    , rlrandoms
-    , vrandom
-    , vrandoms
-    , trandoms
-    , vwhitespectrum
-    , twhitespectrum
 )
 where
 
 import qualified Data.Bits as B
-import qualified Data.Complex as Cp
 
 import qualified Data.Vector.Unboxed as Vu
 
-import qualified System.Random as Ran
-
-import Sound.InfList
 import Sound.Ramp
 import Sound.StreamVector
 import Sound.Time
@@ -241,55 +224,3 @@ vconvolve x y =
 
 tconvolve :: (Num a, Vu.Unbox a) => Vu.Vector a -> Tab a -> Tab a
 tconvolve x (MkTab y) = MkTab $ vconvolve x y
-
-rlrandom :: (Ran.Random a) => Rate Int -> Gen -> RL a
-rlrandom r = rated r . lrandom
-
-rlrandoms :: (Ran.Random a, Fractional a, Vu.Unbox a) => Rate Int -> Gen -> RL a
-rlrandoms r = rated r . lrandoms
-
-{- |
-If @a@ is a 'Fractional', each element in the result
-will be between 0 and 1, including 0, but not including 1.
--}
-lrandom :: (Ran.Random a) => Gen -> L a
-lrandom = lfromilist . Ran.randoms
-
-vrandom :: (Ran.Random a, Vu.Unbox a) => Int -> Gen -> Vu.Vector a
-vrandom size gen = vfromlist $ take size $ Ran.randoms gen
-
-vrandoms :: (Ran.Random a, Fractional a, Vu.Unbox a) => Int -> Gen -> Vu.Vector a
-vrandoms size gen = Vu.map (\ x -> x + x - 1) . vfromlist $ take size $ Ran.randoms gen
-
--- | Random sample values (random numbers between -1 and 1).
-lrandoms :: (Ran.Random a, Fractional a) => Gen -> L a
-lrandoms = fmap (\ x -> x + x - 1) . lrandom
-
-trandoms :: (Ran.Random a, Fractional a, Vu.Unbox a) => Lgsize -> Gen -> Tab a
-trandoms lgsize gen =
-    MkTab $ Vu.fromList (ltakelist n $ lrandoms gen)
-    where
-        n = B.shiftL 1 lgsize
-
--- | The size must be even.
-vwhitespectrum :: (Ran.Random a, RealFloat a, Vu.Unbox a) => Int -> Gen -> Vu.Vector (Cp.Complex a)
-vwhitespectrum n gen =
-    vfromlist $ 0 : map (\ x -> Cp.cis (2 * pi * x)) (tail phases ++ reverse phases)
-    where
-        -- x k = x ((n - k) mod n); k = 0, 1, 2, ... n - 1
-        phases = take h $ Ran.randoms gen
-        h = div n 2
-
-twhitespectrum :: (Ran.Random a, RealFloat a, Vu.Unbox a) => Lgsize -> Gen -> Tab (Cp.Complex a)
-twhitespectrum lgsize gen =
-    MkTab $ vwhitespectrum size gen
-    where
-        size = B.shiftL 1 lgsize
-
-type Gen = Ran.StdGen
-
-mkgen :: Int -> Gen
-mkgen = Ran.mkStdGen
-
-lrandomrange :: (Ran.Random a) => Min a -> Max a -> Gen -> L a
-lrandomrange mi ma gen = lfromilist $ Ran.randomRs (mi, ma) gen
