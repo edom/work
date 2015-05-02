@@ -3,6 +3,7 @@ module Sound.Example
     module Sound
     , silence
     , sweep
+    , whiteNoise
 )
 where
 
@@ -33,3 +34,12 @@ sweep =
         sig = ltfm period tab fre
         tab = tsin 12
         fre = lrampexp period 0 20 10 20000
+
+whiteNoise :: IO ()
+whiteNoise =
+    writingFile path $ \ handle -> do
+        S.writeBody_ handle (S.MkSampleCount 1048576) sig
+    where
+        path = "/tmp/whitenoise.raw"
+        gen = mkStdGen 0
+        sig = randomSamples gen :: Stream Double
