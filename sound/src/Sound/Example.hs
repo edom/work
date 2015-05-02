@@ -11,23 +11,19 @@ import Prelude ()
 import Control.Arrow
 import Control.Monad
 import Sound
-import qualified Sound.Step as B
 import qualified Sound.Io.Snd as S
-
-z :: Double
-z = 0
 
 -- | This writes 1048576 zero samples to \/tmp\/silence.raw.
 silence :: IO ()
 silence = do
     writingFile "/tmp/silence.raw" $ \ handle -> do
-        S.writeBody (B.const z) handle (S.MkSampleCount 1048576) ()
+        S.writeBody_ handle (S.MkSampleCount 1048576) (point 0 :: Stream Double)
 
 -- | This writes 30 seconds of exponential sine sweep from 20 Hz to 20000 Hz.
 sweep :: IO ()
 sweep =
     writingFile path $ \ handle -> do
-        S.writeBody_ B.stream handle (S.MkSampleCount nsam) sig
+        S.writeBody_ handle (S.MkSampleCount nsam) sig
     where
         sr = 44100 :: Int
         period = recip $ realToFrac sr :: Double
