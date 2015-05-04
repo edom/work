@@ -10,6 +10,7 @@ module Sound.Buffer
     Buffer(..)
     , bufPtr
     , bufCap
+    , bufSizeBytes
     , bufUnsafePeek
     -- * Creation
     , allocaBuffer
@@ -47,6 +48,15 @@ bufPtr = _bp
 
 bufCap :: Buffer p a -> ElemCount a
 bufCap = _bc
+
+_bufElemType :: Buffer p a -> a
+_bufElemType = undefined
+
+bufElemSizeBytes :: (Storable a) => Buffer p a -> Int
+bufElemSizeBytes = sizeOf . _bufElemType
+
+bufSizeBytes :: (Storable a) => Buffer p a -> Int
+bufSizeBytes b = _bs b * bufElemSizeBytes b
 
 {- |
 Unsafe.
