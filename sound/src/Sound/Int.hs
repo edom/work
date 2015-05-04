@@ -8,6 +8,7 @@ module Sound.Int
     -- * Arrow-style
     , aint
     -- * Scan-style
+    , sintc
     , sint
     , rlint
     -- * Hints
@@ -31,8 +32,13 @@ aint :: (Arrow a, Num n, Pair p) => StepSize n -> a (p (Inp n) (Sta n)) (p (Out 
 aint !d = arr $ uncurry $ \ !x !y -> mkPair y (y + x * d)
 {-# INLINE aint #-}
 
+-- | Resumable integration.
+sintc :: (Num a, Scan f) => StepSize a -> a -> f a -> f a
+sintc !dx = scanl (\ !y !fx -> y + fx * dx)
+{-# INLINE sintc #-}
+
 sint :: (Num a, Scan f) => StepSize a -> f a -> f a
-sint !dx = scanl (\ !y !fx -> y + fx * dx) 0
+sint !dx = sintc dx 0
 {-# INLINE sint #-}
 
 -- | Numerical integral.

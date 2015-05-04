@@ -116,14 +116,13 @@ testsig =
                 <<< h 1000 <<< h 6900
 
 trypa :: IO ()
-trypa =
-    Pa.run $ do
-        Pa.withDefStream $ \ stm -> do
-            Pa.start stm
-            _ <- Pa.getWriteAvail stm
-            Pa.writel stm (round (secondToSample p 2 :: Double)) $ convert testsig
-            Pa.stop stm
-        return ()
+trypa = do
+    Pa.withDefStream $ \ stm -> do
+        Pa.start stm
+        _ <- Pa.getWriteAvail stm
+        Pa.write stm $ MkTakeF (round (secondToSample p 2 :: Double)) (convert <$> testsig)
+        Pa.stop stm
+    return ()
     where
         p :: Precision Int Double
         p = fromRate (44100 :: Int)

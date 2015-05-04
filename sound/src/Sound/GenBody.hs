@@ -10,7 +10,6 @@ module Sound.GenBody
     -- * Deconstruction
     , gbmAt
     , gbmAtManual
-    , Start(..)
     -- * Combination
     , gbmZipM2
     , gbmAdd

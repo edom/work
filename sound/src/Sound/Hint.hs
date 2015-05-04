@@ -29,6 +29,10 @@ module Sound.Hint
     , Ratio
 
     , StepSize
+
+    -- * Reexports
+
+    , Ioe.IOError
 )
 where
 

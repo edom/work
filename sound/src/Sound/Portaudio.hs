@@ -1,9 +1,9 @@
+{-# LANGUAGE NoImplicitPrelude #-}
+
 module Sound.Portaudio
 (
-    -- * IO type wrapper
-    Pa
-    , io
-    , run
+    -- * Initialization and termination
+    withPortaudio
     -- * Opening streams
     , withDefStream
     , start
@@ -11,16 +11,15 @@ module Sound.Portaudio
     -- * Carefree output
     , playsrl
     -- * Output
-    , write
-    , writev
-    , writevs
-    , writel
+    , Write(..)
     , writesrl
     , getWriteAvail
+    -- * Reexports
+    , P.Stream
 )
 where
 
-import Data.Int (Int16)
+import Foreign
 
 import qualified Foreign as F
 import qualified Foreign.C as Fc
@@ -30,42 +29,32 @@ import qualified Data.Vector.Unboxed as Vu
 
 import qualified Sound.PortAudio as P
 
+import Sound.Buffer
+import Sound.Class
 import Sound.InfList
 import Sound.Hint
 import Sound.StreamVector
 
--- | 'Pa' is 'IO' for PortAudio.
-newtype Pa a = MkPa { _runPa :: IO (Either P.Error a) }
-
-instance Functor Pa where
-    fmap f = MkPa . fmap (fmap f) . _runPa
-instance Monad Pa where
-    return = MkPa . return . Right
-    (>>=) m k =
-        MkPa $ _runPa m >>= either (return . Left) (_runPa . k)
-
--- | Embed an action.
-io :: IO a -> Pa a
-io = MkPa . fmap Right
-
 {- |
+Must use this.
+
 Extract the action.
-Throw an 'Ioe.IOError' as soon as there is an error.
+Throw an 'IOError' as soon as there is an error.
 -}
-run :: Pa a -> IO a
-run x = ioioe $ P.withPortAudio (_runPa x)
+withPortaudio :: IO a -> IO a
+withPortaudio = ioioe . P.withPortAudio . fmap Right
 
 -- | This opens a stream with default parameters and passes it to the function.
-withDefStream :: (P.Stream Int16 Int16 -> Pa a) -> Pa a
+withDefStream :: (P.Stream Int16 Int16 -> IO a) -> IO a
 withDefStream action =
-    MkPa $ P.withDefaultStream
+    ioioe $ P.withDefaultStream
         numInChan
         numOutChan
         samrat
         (Just framPerBuf)
         mbCallback
         mbFinalCallback
-        (_runPa . action)
+        (fmap Right . action)
     where
         numInChan = 0
         numOutChan = 1
@@ -75,53 +64,65 @@ withDefStream action =
         mbFinalCallback = Nothing
 
 -- | Use this on the stream before you write to it.
-start :: P.Stream i o -> Pa ()
-start = MkPa . fmap nmbei . P.startStream
+start :: P.Stream i o -> IO ()
+start = ioioe . fmap nmbei . P.startStream
 
 -- | Use this after you no longer use the stream before you close the stream.
-stop :: P.Stream i o -> Pa ()
-stop = MkPa . fmap nmbei . P.stopStream
+stop :: P.Stream i o -> IO ()
+stop = ioioe . fmap nmbei . P.stopStream
 
--- * Output
+class Write o b where
+    write :: P.Stream i o -> b o -> IO ()
+
+instance (Storable o) => Write o (Buffer ForeignPtr) where
+    write s b = ioioe . fmap nmbei $ P.writeStream s (fromIntegral $ _bs b) (bufPtr b)
+
+instance (Storable o) => Write o (Buffer Ptr) where
+    write s b = do
+        fp <- newForeignPtr_ $ bufPtr b
+        write s b { _bp = fp }
+
+instance (Storable o, Fill f) => Write o (TakeF f) where
+    write s (MkTakeF n x) =
+        allocaBuffer n $ \ buf -> do
+            _ <- fill buf x
+            write s buf { _bs = n }
+
+instance (Storable o) => Write o Vs.Vector where
+    write s b =
+        writeRaw s (fromIntegral len) fp
+        where
+            (fp, len) = Vs.unsafeToForeignPtr0 b
+
+instance (Storable o, Vu.Unbox o) => Write o Vu.Vector where
+    write s = write s . utos
+        where
+            utos :: (Storable a, Vu.Unbox a) => Vu.Vector a -> Vs.Vector a
+            utos = Vu.convert
 
 {- |
 Write the samples to the stream.
 
 This blocks if the number of samples exceed the number returned by 'getWriteAvail'.
 -}
-write :: P.Stream i o -> Fc.CULong -> F.ForeignPtr o -> Pa ()
-write s n b = MkPa . fmap nmbei $ P.writeStream s n b
-
--- | 'write' for unboxed 'Vu.Vector'.
-writev :: (Vs.Storable o, Vu.Unbox o) => P.Stream i o -> Vu.Vector o -> Pa ()
-writev s =
-    writevs s . Vu.convert
-
--- | 'write' for storable 'Vs.Vector'.
-writevs :: (Vs.Storable o) => P.Stream i o -> Vs.Vector o -> Pa ()
-writevs s b =
-    write s (fromIntegral len) fp
-    where
-        (fp, len) = Vs.unsafeToForeignPtr0 b
-
-writel :: (Vu.Unbox o, Vs.Storable o) => P.Stream i o -> Int -> L o -> Pa ()
-writel s n x =
-    writev s (vfroml n x)
+writeRaw :: P.Stream i o -> Fc.CULong -> F.ForeignPtr o -> IO ()
+writeRaw s n b = ioioe . fmap nmbei $ P.writeStream s n b
 
 -- | 'write' for a sliced rated stream.
-writesrl :: (Vu.Unbox o, Vs.Storable o) => P.Stream i o -> SRL Int o -> Pa ()
-writesrl s x =
-    writev s (vfromsrl x)
+writesrl :: (Vu.Unbox o, Vs.Storable o) => P.Stream i o -> SRL Int o -> IO ()
+writesrl s x = write s $ unboxed $ vfromsrl x
+    where
+        unboxed :: Vu.Vector a -> Vu.Vector a
+        unboxed = id
 
 -- | Open a stream, play the signal, close the stream.
 playsrl :: SRL Int Int16 -> IO ()
 playsrl x =
-    run $
-        withDefStream $ \ s -> do
-            start s
-            writesrl s x
-            stop s
+    withDefStream $ \ s -> do
+        start s
+        writesrl s x
+        stop s
 
 -- | Get the number of samples that can be written to the stream without blocking.
-getWriteAvail :: P.Stream i o -> Pa Int
-getWriteAvail = MkPa . P.writeAvailable
+getWriteAvail :: P.Stream i o -> IO Int
+getWriteAvail = ioioe . P.writeAvailable
