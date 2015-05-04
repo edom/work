@@ -46,6 +46,12 @@ instance Consume Stream
 instance Fill Stream
 instance Unfold Stream where unfold o e s = MkStream e o s
 instance FromList Stream where fromList = fromList_unfold
+instance Drop Stream where
+    drop n (MkStream e o s) = MkStream e o (c n e s)
+        where
+            c k _ _ | k < 0 = error "Drop Stream drop: negative"
+            c 0 _ x = x
+            c k f x = c (k - 1) f (f x)
 
 instance Scan Stream where
     scanl f a (MkStream e o s) =

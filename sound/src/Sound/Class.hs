@@ -18,6 +18,8 @@ module Sound.Class
     , Head(..)
     -- ** Tail
     , Tail(..)
+    -- ** Drop
+    , Drop(..)
     -- ** Unfold
     , Unfold(..)
     -- ** FromList
@@ -65,7 +67,7 @@ where
 import Control.Applicative
 import Control.Category hiding ((.))
 import Foreign
-import Prelude hiding (curry, fst, head, id, snd, scanl, tail, take, uncurry, (.))
+import Prelude hiding (curry, drop, fst, head, id, snd, scanl, tail, take, uncurry, (.))
 import qualified Prelude as P
 
 import Sound.Buffer
@@ -142,6 +144,11 @@ class Tail f where
 This generalizes the 'P.tail' in "Prelude".
     -}
     tail :: f a -> f a
+
+class Drop f where
+    drop :: Int -> f a -> f a
+
+instance Drop [] where drop = P.drop
 
 {- |
 Can be generated from output mapper, next-state function, and seed.
@@ -422,6 +429,9 @@ Laws:
 class Trans f g where trans :: f a -> g a
 
 instance Trans f (Aprep f) where trans = Rest
+instance Trans (Either e) Maybe where trans = either (const Nothing) point
+instance Trans (Either String) IO where trans = either (ioError . userError) point
+instance Trans Maybe IO where trans = maybe (ioError $ userError "Trans Maybe IO: Nothing") point
 -- instance Trans Stream L where trans = flip decons cons
 -- instance Trans L Stream where trans = flip decons cons
 
