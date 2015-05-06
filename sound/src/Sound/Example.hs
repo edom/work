@@ -32,7 +32,7 @@ sine =
         nsam = 30 * sr
         sig :: Stream Double
         sig = sfm period tab fre
-        tab = tsin 4
+        tab = tsin 12
         fre = point 256
 
 -- | This writes 30 seconds of exponential sine sweep from 20 Hz to 20000 Hz.
