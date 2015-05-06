@@ -12,3 +12,4 @@ This project follows the Package Versioning Policy
     * sine wave with exponential frequency sweep
     * PortAudio output sine wave
     * wxWidgets adjustable-frequency sine wave generator
+    * convert raw to wav using sox
