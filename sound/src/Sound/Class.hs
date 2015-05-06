@@ -61,11 +61,13 @@ module Sound.Class
     , module Prelude
     , module Control.Applicative
     , module Control.Category
+    , module Data.Monoid
 )
 where
 
 import Control.Applicative
 import Control.Category hiding ((.))
+import Data.Monoid hiding (Endo)
 import Foreign
 import Prelude hiding (curry, drop, fst, head, id, scanl, snd, tail, take, uncurry, (.))
 import qualified Prelude as P
