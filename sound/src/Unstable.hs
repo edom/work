@@ -99,18 +99,18 @@ rlcid :: Int -> RL a -> (RL a -> RL a) -> RL a
 rlcid n x c =
     rated r (lcid n (unrated x) (unrated . c . rated r))
     where
-        r = rate x
+        r = rateOf x
 rlczip :: Int -> (a -> b -> c) -> RL a -> RL b -> (RL a -> RL b -> RL c) -> RL c
 rlczip n f x y c =
     rated r (lczip n f (unrated x) (unrated y) (\ a b -> unrated (c (rated r a) (rated r b))))
     where
-        r = rate x `ror` rate y
+        r = rateOf x `ror` rateOf y
 crlzip :: Int -> (a -> b -> c) -> RL a -> RL b -> Cont (RL c) (RL a, RL b)
 crlzip n f x y = cont (\ c -> rlczip n f x y (curry c))
 crlzips :: T -> (a -> b -> c) -> RL a -> RL b -> Cont (RL c) (RL a, RL b)
 crlzips t f x y = crlzip n f x y
     where
-        r = rate x `ror` rate y
+        r = rateOf x `ror` rateOf y
         n = round (t * fromIntegral (_unRate r))
 clmap :: Int -> (a -> b) -> L a -> Cont (L b) (L a)
 clmap n f x = cont (lcmap n f x)
@@ -129,7 +129,7 @@ crlpass n x = cont (rlcid n x)
 crlpasss :: T -> RL a -> Cont (RL a) (RL a)
 crlpasss t x = crlpass n x
     where
-        r = rate x
+        r = rateOf x
         n = round (t * fromIntegral (_unRate r))
 -- | This is 'crlpasss' but without three same letters in a row.
 crlthrus :: T -> RL a -> Cont (RL a) (RL a)

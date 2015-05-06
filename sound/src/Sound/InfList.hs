@@ -725,7 +725,7 @@ rltakes :: Second Double -> RL a -> SRL Int a
 rltakes t x =
     rltake n x
     where
-        r = _unRate $ rate x
+        r = _unRate $ rateOf x
         n = round $ fromIntegral r * t
 
 ltime :: Rate Int -> (L Double)
@@ -749,20 +749,20 @@ rltakezipmap :: (a -> a -> a) -> Int -> RL a -> RL a -> (RL a -> RL a) -> RL a
 rltakezipmap z n x y c =
     rated r (ltakezipmap z n (unrated x) (unrated y) (unrated . c . rated r))
     where
-        r = rate x `ror` rate y
+        r = rateOf x `ror` rateOf y
 
 rltakezipmaps :: (a -> a -> a) -> T -> RL a -> RL a -> (RL a -> RL a) -> RL a
 rltakezipmaps z t x y =
     rltakezipmap z n x y
     where
-        r = rate x `ror` rate y
+        r = rateOf x `ror` rateOf y
         n = round (t * fromIntegral (_unRate r))
 
 rltakemap :: Int -> RL a -> (RL a -> RL a) -> RL a
 rltakemap n x_ f =
     rmap (\ x -> ltakemap n x (unrated . f . rated r)) x_
     where
-        r = rate x_
+        r = rateOf x_
 
 rltakeadd :: (Num a) => Int -> RL a -> RL a -> RL a
 rltakeadd n = rlift2 (ltakeadd n)
@@ -770,7 +770,7 @@ rltakeadd n = rlift2 (ltakeadd n)
 rltakeadds :: (Num a) => T -> RL a -> RL a -> RL a
 rltakeadds s x y = rltakeadd n x y
     where
-        r = rate x `ror` rate y
+        r = rateOf x `ror` rateOf y
         n = round (s * fromIntegral (_unRate r))
 
 -- | This is like 'ltakeappend' but this has the duration in seconds instead of sample count.
@@ -779,5 +779,5 @@ rltakeappends time first second =
     MkRated r x
     where
         n = round (fromIntegral (_unRate r) * time)
-        r = rate first `ror` rate second
+        r = rateOf first `ror` rateOf second
         x = ltakeappend n (unrated first) (unrated second)

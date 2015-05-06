@@ -72,7 +72,7 @@ applytempo spb =
     -- applytempo :: (Fractional a, Ord a) => RL (Spb a) -> L (Beat a) -> L (Second a)
     loop 0 (unrated $ rltempos spb)
     where
-        r = _unRate $ rate spb
+        r = _unRate $ rateOf spb
         loop tick ss@(MkL sh st) bs@(MkL bh bt) =
             let
                 b = fromIntegral (tick :: Int) / fromIntegral r

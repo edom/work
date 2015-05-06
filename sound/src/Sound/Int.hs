@@ -46,7 +46,7 @@ rlint :: (Fractional a) => RL a -> RL a
 rlint x =
     rated r . sint d . unrated $ x
     where
-        r = rate x
+        r = rateOf x
         d = recip . fromIntegral . _unRate $ r
 {-# INLINE rlint #-}
 

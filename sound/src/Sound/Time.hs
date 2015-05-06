@@ -32,7 +32,7 @@ module Sound.Time
     , mkRate
     , ror
     , ratedt
-    , rate
+    , rateOf
     , unrated
     , T
 )
@@ -190,8 +190,8 @@ ratedt :: (Real a, Fractional b) => Rate a -> b
 ratedt (MkRate x) = recip (realToFrac x)
 
 -- | Get the rate.
-rate :: Rated a -> Rate Int
-rate = _rate
+rateOf :: Rated a -> Rate Int
+rateOf = _rate
 
 -- | Extract the content.
 unrated :: Rated a -> a
