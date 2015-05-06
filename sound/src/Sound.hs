@@ -13,6 +13,8 @@ module Sound
     , module Sound.Io.Snd
     , module Sound.Io
     , module Sound.IoPtr
+    , module Sound.Sox
+    , module Sound.IoSox
     , module Sound.Portaudio
     -- * Abstraction ladder
     , module Sound.Class
@@ -57,7 +59,6 @@ module Sound
     , module Sound.GenBody
     , module Sound.GeneratorContinuation
     , module Sound.IoFail
-    , module Sound.IoSox
     , module Sound.Stream
     , module Sound.StreamVector
 )
@@ -98,6 +99,7 @@ import Sound.Ptr
 import Sound.Ramp
 import Sound.Random
 import Sound.Sample
+import Sound.Sox hiding (Rate)
 import Sound.Stream
 import Sound.StreamVector
 import Sound.Table
