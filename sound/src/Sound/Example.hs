@@ -3,6 +3,7 @@ module Sound.Example
     module Sound
     , silence
     , sine
+    , sineWav
     , sweep
     , whiteNoise
     , portaudio
@@ -38,6 +39,14 @@ sine =
         sig = sfm period tab fre
         tab = tsin 12
         fre = point 256
+
+sineWav :: IO ()
+sineWav = do
+    sine
+    void $ independentSox $ mkArgs [operand inpFmt "/tmp/sine.raw"] (operand outFmt "/tmp/sine.wav") []
+    where
+        inpFmt = fileType raw <> encoding floatingPoint <> bits 64 <> channels 1 <> rate 44100
+        outFmt = fileType wav <> encoding signedInteger <> bits 16
 
 -- | This writes 30 seconds of exponential sine sweep from 20 Hz to 20000 Hz.
 sweep :: IO ()
