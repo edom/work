@@ -5,8 +5,8 @@ module Sound.Class
     -- * Pair
     Pair(..)
     , curry
-    , fst
-    , snd
+    , proj0
+    , proj1
     , mapFst
     , mapSnd
     -- * Semicategory
@@ -67,7 +67,7 @@ where
 import Control.Applicative
 import Control.Category hiding ((.))
 import Foreign
-import Prelude hiding (curry, drop, fst, head, id, snd, scanl, tail, take, uncurry, (.))
+import Prelude hiding (curry, drop, fst, head, id, scanl, snd, tail, take, uncurry, (.))
 import qualified Prelude as P
 
 import Sound.Buffer
@@ -76,7 +76,7 @@ import Sound.Buffer
 If f is an instance of 'Pair', then it is an instance of 'Semicategory':
 
 @
-x '.' y = 'mkPair' ('fst' y) ('snd' x)
+x '.' y = 'mkPair' ('proj0' y) ('proj1' x)
 @
 
 Laws:
@@ -86,15 +86,15 @@ Laws:
 @
 
 @
-'uncurry' f x = f ('fst' x) ('snd' x)
+'uncurry' f x = f ('proj0' x) ('proj1' x)
 @
 
 @
-'fst' = 'uncurry' 'const'
+'proj0' = 'uncurry' 'const'
 @
 
 @
-'snd' = 'uncurry' ('flip' 'const')
+'proj1' = 'uncurry' ('flip' 'const')
 @
 -}
 class Pair f where
@@ -106,11 +106,11 @@ class Pair f where
 curry :: (Pair f) => (f a b -> c) -> a -> b -> c
 curry f x y = f (mkPair x y)
 
-fst :: (Pair f) => f a b -> a
-fst = uncurry const
+proj0 :: (Pair f) => f a b -> a
+proj0 = uncurry const
 
-snd :: (Pair f) => f a b -> b
-snd = uncurry (flip const)
+proj1 :: (Pair f) => f a b -> b
+proj1 = uncurry (flip const)
 
 mapFst :: (Pair f) => (a -> c) -> f a b -> f c b
 mapFst f = uncurry (\ x y -> mkPair (f x) y)
@@ -130,7 +130,7 @@ instance Pair (,) where
     {-# INLINE uncurry #-}
 
 instance Semicategory (,) where
-    x . y = mkPair (fst y) (snd x)
+    x . y = mkPair (proj0 y) (proj1 x)
     {-# INLINE (.) #-}
 
 class Head f where

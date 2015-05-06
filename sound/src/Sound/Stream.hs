@@ -55,7 +55,7 @@ instance Drop Stream where
 
 instance Scan Stream where
     scanl f a (MkStream e o s) =
-        MkStream (uncurry (\ a_ s_ -> MkP (f a_ (o s_)) (e s_))) fst (MkP a s)
+        MkStream (uncurry (\ a_ s_ -> MkP (f a_ (o s_)) (e s_))) proj0 (MkP a s)
     {-# INLINE scanl #-}
 
 instance Zip2 Stream where
