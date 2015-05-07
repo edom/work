@@ -314,9 +314,6 @@ type Count a = a
 
 {- |
 If you have 'Cons' and 'Decons', you get 'Scan' for free.
-
-@
-@
 -}
 class Scan f where
     {- |
