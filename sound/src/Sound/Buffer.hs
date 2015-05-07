@@ -9,6 +9,7 @@ module Sound.Buffer
     -- * Buffer
     Buffer(..)
     , bufPtr
+    , bufSiz
     , bufCap
     , bufSizeBytes
     -- * Creation
@@ -44,6 +45,9 @@ data Buffer p a
 
 bufPtr :: Buffer p a -> p a
 bufPtr = _bp
+
+bufSiz :: Buffer p a -> ElemCount a
+bufSiz = _bs
 
 bufCap :: Buffer p a -> ElemCount a
 bufCap = _bc
