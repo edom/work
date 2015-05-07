@@ -4,6 +4,10 @@ module Sound.Ptr
 (
     module Data.Word
     , ElemCount
+    -- * Reading
+    , PeekElemOff(..)
+    -- * Writing
+    , PokeElemOff(..)
     -- * List-like Ptr
     , ptrMap
     , ptrMapM
@@ -36,15 +40,16 @@ module Sound.Ptr
     , withForeignPtr
     , ForeignPtr
     , Ptr
-    , Storable(..)
+    , Storable(sizeOf, peekByteOff, pokeByteOff)
 )
 where
 
+import qualified Foreign as F
 import Foreign
     (
         ForeignPtr
         , Ptr
-        , Storable(..)
+        , Storable
         , allocaArray
         , allocaBytes
         , castForeignPtr
@@ -161,3 +166,23 @@ mallocForeignPtrIntArray = mallocForeignPtrArray
 mallocForeignPtrDoubleArray :: ElemCount Double -> IO (ForeignPtr Double)
 mallocForeignPtrDoubleArray = mallocForeignPtrArray
 {-# INLINE mallocForeignPtrDoubleArray #-}
+
+class PeekElemOff f a where
+    {- |
+    Get from the buffer the element at the index
+    without checking bounds.
+    -}
+    peekElemOff :: f a -> Int -> IO a
+
+instance (Storable a) => PeekElemOff Ptr a where
+    peekElemOff = F.peekElemOff
+
+class PokeElemOff f a where
+    {- |
+    Put into the buffer an element at the index
+    without checking bounds.
+    -}
+    pokeElemOff :: f a -> Int -> a -> IO ()
+
+instance (Storable a) => PokeElemOff Ptr a where
+    pokeElemOff = F.pokeElemOff

@@ -11,7 +11,6 @@ module Sound.Buffer
     , bufPtr
     , bufCap
     , bufSizeBytes
-    , bufUnsafePeek
     -- * Creation
     , allocaBuffer
     , bufWithForeignPtr
@@ -58,12 +57,9 @@ bufElemSizeBytes = sizeOf . _bufElemType
 bufSizeBytes :: (Storable a) => Buffer p a -> Int
 bufSizeBytes b = _bs b * bufElemSizeBytes b
 
-{- |
-Unsafe.
--}
-bufUnsafePeek :: (Storable a) => Buffer Ptr a -> (Int -> IO a)
-bufUnsafePeek (MkBuffer p _ _) i = peekElemOff p i
-{-# INLINE bufUnsafePeek #-}
+instance (PeekElemOff p a) => PeekElemOff (Buffer p) a where
+    peekElemOff (MkBuffer p _ _) i = peekElemOff p i
+    {-# INLINE peekElemOff #-}
 
 allocaBuffer :: (Storable a) => ElemCount a -> (Buffer Ptr a -> IO b) -> IO b
 allocaBuffer count consume =
