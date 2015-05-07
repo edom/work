@@ -8,6 +8,7 @@ module Sound.Buffer
 (
     -- * Buffer
     Buffer(..)
+    -- * Properties
     , bufPtr
     , bufSiz
     , bufCap
@@ -16,9 +17,11 @@ module Sound.Buffer
     , allocaBuffer
     , bufWithForeignPtr
     , withForeignBuffer
+    -- * Casting
     , _bufCast
     , bufCast
     , bufForeignCast
+    -- * Storable.sizeOf helpers
     , bufElemType
     , bufElemSize
 )
@@ -27,12 +30,13 @@ where
 import Sound.Ptr
 
 {- |
-
-Array.
+A buffer is an array.
 
 [@p@]
-Could be either 'Ptr' or 'ForeignPtr'.
+Either 'Ptr' or 'ForeignPtr'.
 
+[@a@]
+Element type.
 -}
 data Buffer p a
     = MkBuffer
