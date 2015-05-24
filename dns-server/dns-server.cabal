@@ -58,6 +58,9 @@ library
         Haskell98
 
 executable dns-server
+    ghc-options:
+        -rtsopts
+        -threaded
     main-is: Main.hs
     hs-source-dirs: dns-server
     build-depends:

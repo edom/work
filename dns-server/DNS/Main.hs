@@ -8,6 +8,7 @@ where
 
 import Control.Concurrent
 import Control.Monad
+import qualified Control.Concurrent as Con
 import qualified System.Environment as EN
 import qualified System.IO.Error as IE
 
@@ -16,6 +17,7 @@ import qualified Network.HTTP.Client as H
 import qualified Network.Socket as S
 
 import qualified DNS.Config as C
+import qualified DNS.Log as L
 import qualified DNS.Resolve as R
 import qualified DNS.Resolve.Web as W
 import qualified DNS.Server as SV
@@ -38,12 +40,17 @@ actualMain = do
 
 server :: C.Config -> IO ()
 server config = do
+    logchan <- Con.newChan
     socket <- DS.newBoundUdpSocket "127.0.0.1" port
     udpBindAddress <- S.getSocketName socket
     putStrLn $ "DNS server bound to UDP " ++ show udpBindAddress
+    _ <- forkIO $ forever $ Con.readChan logchan >>= putStrLn
+        -- XXX if this thread dies (such as by writeChan logchan (error "boo")), logchan queue grows unbounded
     H.withManager managerSettings $ \ manager -> do
         let resolve = R.mapResolver (maybe id SV.answerMinTtl answerMinTtl) $ W.query manager
-        forever $ flip IE.catchIOError print $ R.onceSocket socket resolve
+        forever $
+            flip IE.catchIOError print $ R.onceSocket socket (L.chan logchan) resolve
+            >> return ()
     where
         port = C.port config
         answerMinTtl = C.answerMinTtl config
