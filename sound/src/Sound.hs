@@ -57,7 +57,6 @@ module Sound
     , module Sound.Abstract
     , module Sound.Endo
     , module Sound.GenBody
-    , module Sound.GeneratorContinuation
     , module Sound.IoFail
     , module Sound.Stream
     , module Sound.StreamVector
@@ -81,7 +80,6 @@ import Sound.Fourier
 import Sound.Fm
 import Sound.Function
 import Sound.GenBody
-import Sound.GeneratorContinuation
 import Sound.Hint
 import Sound.InfList
 import Sound.Int
