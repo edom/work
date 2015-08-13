@@ -9,8 +9,6 @@ module Sound.ExampleFail
     , silence
     , silenceRawFile
     , silenceFile
-    , eSilence
-    , eSilenceRawFile
     , sineSweep
     , sineSweepRawFile
     , srl
@@ -34,9 +32,6 @@ silence :: L Double
 silence = point 0
 {-# INLINE silence #-}
 
-eSilence :: Endo Double
-eSilence _ = 0
-
 -- | Write 'silence' to @/tmp/silence.raw@.
 silenceRawFile :: IO ()
 silenceRawFile =
@@ -45,16 +40,6 @@ silenceRawFile =
         prec = fromRate (44100 :: Int) :: Precision Int Double
         path = "/tmp/silence.raw"
         nsam = round (secondToSample prec 10 :: Double)
-
-eSilenceRawFile :: IO ()
-eSilenceRawFile =
-    eWriteRawFile path nsam eSilence extract initium
-    where
-        prec = fromRate (44100 :: Int) :: Precision Int Double
-        path = "/tmp/silence.raw"
-        nsam = round (secondToSample prec 10 :: Double)
-        extract = id
-        initium = 0
 
 -- | Write 'silence' to @/tmp/silence.au@.
 silenceFile :: IO ()

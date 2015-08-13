@@ -16,7 +16,6 @@ module Sound.IoFail
     , bsAuBodyC
     -- ** Handle
     , hWriteRaw
-    , ehWriteRaw
     , lhWriteRaw
     , vhwrite
     , writeStreamInChunks
@@ -25,7 +24,6 @@ module Sound.IoFail
     , vwritefileraw
     , writeAuFile
     , lWriteRawFile
-    , eWriteRawFile
     -- * Other
     , lPokeArray
     , withLArray
@@ -43,7 +41,6 @@ import qualified Data.Vector.Storable as Vs
 
 import Sound.Abstract
 import Sound.Class
-import Sound.Endo
 import Sound.InfList
 import Sound.IoPtr
 import Sound.Time
@@ -132,17 +129,6 @@ hWriteRaw :: Handle -> Count Int -> L Double -> IO ()
 hWriteRaw handle count stream@(MkL !_ _) =
     Bs.hPut handle (Se.runPut (ltakemapM_ Se.putFloat64le count stream))
 {-# INLINE hWriteRaw #-}
-
-eWriteRawFile :: FilePath -> Count Int -> Endo s -> (s -> Double) -> s -> IO ()
-eWriteRawFile path count step extract initium =
-    withBinaryFile path WriteMode $ \ handle ->
-        ehWriteRaw handle count step extract initium
-{-# INLINE eWriteRawFile #-}
-
-ehWriteRaw :: Handle -> Count Int -> Endo s -> (s -> Double) -> s -> IO ()
-ehWriteRaw handle count step extract initium =
-    Bs.hPut handle (Se.runPut (emapM__ (Se.putFloat64le . extract) step count initium))
-{-# INLINE ehWriteRaw #-}
 
 lhWriteRaw :: Handle -> Count Int -> L Double -> IO ()
 lhWriteRaw handle count gen =

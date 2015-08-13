@@ -53,7 +53,6 @@ module Sound
     , module Sound.Function
     -- * Failed experiments
     , module Sound.Abstract
-    , module Sound.Endo
     , module Sound.GenBody
     , module Sound.IoFail
     , module Sound.StreamVector
@@ -71,7 +70,6 @@ import Sound.Amplitude
 import Sound.Buffer
 import Sound.Class
 import Sound.Compile
-import Sound.Endo
 import Sound.Filter
 import Sound.Fm
 import Sound.Function
