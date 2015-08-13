@@ -1,84 +1,181 @@
 {-# LANGUAGE BangPatterns #-}
 {-# LANGUAGE ExistentialQuantification #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {- |
 This module is similar to "Data.List".
+
+When a good producer meets a good consumer,
+GHC can inline them and eliminate the Stream data constructor,
+unboxing the state.
+
+Performance notes:
+
+* If you make a stream with a big state, you may need @-fmax-worker-args=32@ or higher.
+
+* If you bind a stream to a name, sometimes you may need to @\{\-\# INLINE \#\-\}@ it.
 -}
 module Sound.Stream
 (
     -- * Construction
     Stream
-    , StreamM
+    , mmap
+    , unfold
+    , munfold
+    , repeat
+    , iterate
+    , zip2
+    , sine
+    , intMod1
+    , fm
+    , cons
+    -- * Consumption
+    , takeMapM_
+    , consumeS
 )
 where
 
 import Control.Applicative
+import Prelude (($), (.), Functor(..)
+    , Num(..), Fractional(..), Floating(..)
+    , IO, Bool(..), Double, Monad(..), Ord(..), Int)
+import qualified Prelude as P
 
-import Sound.Class
-import Sound.Pair
+import qualified Control.DeepSeq as D
+import qualified Control.Monad as M
+import qualified Foreign as F
 
--- | An infinite sequence of values of one type.
-data Stream a =
-    forall s. MkStream
+import qualified Sound.Procedural as T
+
+data Stream m a =
+    forall s. (D.NFData s) => MkStream
     {
-        _se :: !(s -> s) -- state endofunction
-        , _so :: !(s -> a) -- output mapper
-        , _ss :: !s -- state
+        _ts :: !s -- ^ state
+        , _te :: !(s -> m s) -- ^ state endofunction
+        , _to :: !(s -> m a) -- ^ output mapper
     }
 
-instance Point Stream where
-    point x = MkStream { _se = id, _so = id, _ss = x }
-    {-# INLINE point #-}
-
-instance Functor Stream where
-    fmap f (MkStream e o s) = MkStream e (f . o) s
+instance (Functor m) => Functor (Stream m) where
+    fmap f (MkStream s e o) = MkStream s e (fmap f . o)
     {-# INLINE fmap #-}
 
-instance Applicative Stream where
-    pure = point
-    (<*>) = zip2 ($)
+instance (Applicative m, Num a) => Num (Stream m a) where
+    (+) = zip2 (+)
+    (*) = zip2 (*)
+    (-) = zip2 (-)
+    negate = fmap negate
+    abs = fmap abs
+    signum = fmap signum
+    fromInteger = repeat . fromInteger
+    {-# INLINE (+) #-}
+    {-# INLINE (*) #-}
+    {-# INLINE (-) #-}
+    {-# INLINE negate #-}
+    {-# INLINE abs #-}
+    {-# INLINE signum #-}
+    {-# INLINE fromInteger #-}
 
-instance Head Stream where head (MkStream _ o s) = o s
-instance Tail Stream where tail (MkStream e o s) = MkStream e o (e s)
-instance Decons Stream
-instance DeconsM m Stream where deconsM = decons
-instance Consume Stream
-instance Fill Stream
-instance Unfold Stream where unfold o e s = MkStream e o s
-instance FromList Stream where fromList = fromList_unfold
-instance Drop Stream where
-    drop n (MkStream e o s) = MkStream e o (c n e s)
-        where
-            c k _ _ | k < 0 = error "Drop Stream drop: negative"
-            c 0 _ x = x
-            c k f x = c (k - 1) f (f x)
+instance (Fractional a, Applicative m) => Fractional (Stream m a) where
+    {-# SPECIALIZE instance Fractional (Stream IO Double) #-}
+    (/) = zip2 (/)
+    recip = fmap recip
+    fromRational x = case fromRational x of !y -> MkStream () pure (\ _ -> pure y)
+    {-# INLINE (/) #-}
+    {-# INLINE recip #-}
+    {-# INLINE fromRational #-}
 
-instance Scan Stream where
-    scanl f a (MkStream e o s) =
-        MkStream (uncurry (\ a_ s_ -> MkP (f a_ (o s_)) (e s_))) proj0 (MkP a s)
-    {-# INLINE scanl #-}
+unfold :: (Applicative m, D.NFData s) => s -> (s -> s) -> (s -> a) -> Stream m a
+unfold seed endo out = MkStream seed (pure . endo) (pure . out)
 
-instance Zip2 Stream where
-    zip2 f (MkStream { _se = ex, _so = ox, _ss = sx }) (MkStream { _se = ey, _so = oy, _ss = sy }) =
-        MkStream { _se = e, _so = o, _ss = s }
-        where
-            s = MkP sx sy
-            e (MkP u v) = MkP (ex u) (ey v)
-            o (MkP u v) = f (ox u) (oy v)
-    {-# INLINE zip2 #-}
+munfold :: (D.NFData s) => s -> (s -> m s) -> (s -> m a) -> Stream m a
+munfold = MkStream
 
-data StreamM m a =
-    forall s. MkStreamM
-    {
-        _te :: !(s -> m s) -- state endofunction
-        , _to :: !(s -> m a) -- output mapper
-        , _ts :: !s -- state
-    }
+repeat :: (Applicative m) => a -> Stream m a
+repeat x = munfold () pure out
+    where
+        out _ = pure x
 
-instance (Point m) => Point (StreamM m) where
-    point x = MkStreamM { _te = point, _to = point, _ts = x }
-    {-# INLINE point #-}
+iterate :: (D.NFData a, Applicative m) => a -> (a -> a) -> Stream m a
+iterate x f = munfold x (pure . f) pure
 
-instance (Functor m) => Functor (StreamM m) where
-    fmap f (MkStreamM { _te = e, _to = o, _ts = s }) = MkStreamM { _te = e, _to = fmap f . o, _ts = s }
-    {-# INLINE fmap #-}
+{-# INLINE zip2 #-}
+zip2 :: (Applicative m) => (a -> b -> c) -> Stream m a -> Stream m b -> Stream m c
+zip2 f (MkStream s0 e0 o0) (MkStream s1 e1 o1) = MkStream s2 e2 o2
+    where
+        s2 = (s0, s1)
+        e2 (s, t) = (,) <$> e0 s <*> e1 t
+        o2 (s, t) = f <$> o0 s <*> o1 t
+
+{-# INLINE sine #-}
+sine :: (Floating a, Applicative m) => a -> a -> Stream m a
+sine !rate !freq =
+    fun <$> iterate z (1 +)
+    where
+        z :: Int
+        !z = 0
+        !w = 2 * P.pi * freq / rate
+        fun !i = P.sin $ w * P.fromIntegral i
+
+{-# INLINE intMod1 #-}
+intMod1 :: (D.NFData a, Ord a, Fractional a, Applicative m) => a -> Stream m a -> Stream m a
+intMod1 !rate (MkStream s0 e0 o0) = MkStream s1 e1 o1
+    where
+        !dt = P.recip rate
+        s1 = (0, s0)
+        e1 (a, s) = (,) <$> fmap (fun a) (o0 s) <*> e0 s
+        o1 (a, _) = pure a
+        fun a x =
+            if y >= 1
+                then y - 1
+                else y
+            where
+                y = a + x * dt
+
+{-# INLINE fm #-}
+fm :: (F.Storable a, D.NFData a, P.RealFrac a) => a -> T.Table a -> Stream IO a -> Stream IO a
+fm rate table freq = mmap (T.unsafeTlookup table) $ intMod1 rate freq
+
+{- |
+This is one-cell delay line.
+
+This cannot be used recursively.
+For example, this compiles into an infinite loop,
+contrary to what you might expect:
+
+@
+y = 0.75 * x + 0.25 * cons 0 y
+@
+-}
+cons :: (Applicative m, D.NFData a) => a -> Stream m a -> Stream m a
+cons first (MkStream s0 e0 o0) = MkStream s1 e1 o1
+    where
+        s1 = (first, s0)
+        e1 (_, s) = (,) <$> o0 s <*> e0 s
+        o1 (x, _) = pure x
+
+mmap :: (Monad m) => (a -> m b) -> Stream m a -> Stream m b
+mmap k (MkStream s e o) = MkStream s e (o M.>=> k)
+
+{- |
+@
+takeMapM_ n k s ~ 'P.take' n ('P.mapM_' k s)
+@
+-}
+takeMapM_ :: (Monad m) => Int -> (a -> m b) -> Stream m a -> m ()
+takeMapM_ !n !k (MkStream s0 e o) = loop 0 s0
+    where
+        loop !i !s =
+            D.deepseq s $ do
+                M.when (i < n) $ do
+                    !t <- e s
+                    !x <- o s
+                    !_ <- k x
+                    loop (i + 1) t
+
+{-# INLINE consumeS #-}
+consumeS :: (F.Storable a) => Stream IO a -> (a -> IO Bool) -> IO ()
+consumeS (MkStream s0 e o) act = loop s0
+    where
+        loop !s = do
+            !a <- o s
+            !cont <- act a
+            s' <- e s
+            M.when cont $ loop s'

@@ -26,6 +26,7 @@ import qualified Prelude as P
 import qualified Data.Vector.Unboxed as Vu
 
 import Sound
+import Sound.StreamOld
 import qualified Sound.Portaudio as Pa
 
 -- | All zeroes.

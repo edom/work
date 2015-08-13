@@ -56,7 +56,6 @@ module Sound
     , module Sound.Endo
     , module Sound.GenBody
     , module Sound.IoFail
-    , module Sound.Stream
     , module Sound.StreamVector
 )
 where
@@ -95,7 +94,6 @@ import Sound.Ramp
 import Sound.Random
 import Sound.Sample
 import Sound.Sox hiding (Rate)
-import Sound.Stream
 import Sound.StreamVector
 import Sound.Table
 import Sound.Tempo
