@@ -37,8 +37,6 @@ module Sound
     , module Sound.Table
     -- * White noise
     , module Sound.Random
-    -- * Fourier transform
-    , module Sound.Fourier
     -- * Frequency modulation
     , module Sound.Fm
     -- * Integration
@@ -76,7 +74,6 @@ import Sound.Class
 import Sound.Compile
 import Sound.Endo
 import Sound.Filter
-import Sound.Fourier
 import Sound.Fm
 import Sound.Function
 import Sound.GenBody
