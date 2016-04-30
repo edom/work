@@ -157,27 +157,40 @@ class Transform a b where
 
 -- explicit to implicit
 
-instance Transform (E.ExceptT String IO a) (IO a) where
-    transform = E.runExceptT M.>=> either throw return
-
-instance Transform (IO (Either String a)) (IO a) where
-    transform = M.join . fmap (either throw return)
-
--- | overlappable
-instance {-# OVERLAPPABLE #-} (Show e) => Transform (IO (Either e a)) (IO a) where
-    transform = M.join . fmap (either (throw . show) return)
-
-instance Transform (Either String a) (IO a) where
-    transform = either throw return
+-- Either e a -> IO a
 
 -- | overlappable
 instance {-# OVERLAPPABLE #-} (Show e) => Transform (Either e a) (IO a) where
     transform = either (throw . show) return
 
+instance Transform (Either String a) (IO a) where
+    transform = either throw return
+
+-- IO (Either e a) -> IO a
+
+-- | overlappable
+instance {-# OVERLAPPABLE #-} (Show e) => Transform (IO (Either e a)) (IO a) where
+    transform = M.join . fmap (either (throw . show) return)
+
+instance Transform (IO (Either String a)) (IO a) where
+    transform = M.join . fmap (either throw return)
+
+-- ExceptT e IO a -> IO a
+
+instance {-# OVERLAPPABLE #-} (Show e) => Transform (E.ExceptT e IO a) (IO a) where
+    transform = E.runExceptT M.>=> either (throw . show) return
+
+instance Transform (E.ExceptT String IO a) (IO a) where
+    transform = E.runExceptT M.>=> either throw return
+
 -- implicit to explicit
+
+-- IO a -> IO (Either String a)
 
 instance Transform (IO a) (IO (Either String a)) where
     transform = try
+
+-- IO a -> ExceptT String IO a
 
 instance Transform (IO a) (E.ExceptT String IO a) where
     transform = E.ExceptT . try
