@@ -1,5 +1,6 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {- |
 This module has its own /internal exception type/ that it hides from you.
@@ -47,8 +48,15 @@ This uses 'Ex.throwIO' (not 'Ex.throw') from "Control.Exception".
 
 This throws an exception whose type is this module's internal exception type.
 -}
-throw :: String -> IO a
-throw = Ex.throwIO . Ei.Mk_exc
+class Throw e where
+    throw :: e -> IO a
+
+-- | overlappable
+instance {-# OVERLAPPABLE #-} (Show e) => Throw e where
+    throw = Ex.throwIO . Ei.Mk_exc . show
+
+instance Throw String where
+    throw = Ex.throwIO . Ei.Mk_exc
 
 -- * Rethrowing
 
