@@ -1,3 +1,9 @@
+This package pragmatically provides:
+
+* error handling
+* logging
+* multitasking (concurrency and parallelism)
+
 There is often only one sensible way of handling errors:
 barge out to the nearest handler and log a helpful message.
 
