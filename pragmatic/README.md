@@ -1,3 +1,11 @@
+# The goal of this project
+
+There should be only one way to do everything.
+
+This project aims to standardize the way of doing things.
+
+# About this package
+
 This package pragmatically provides:
 
 * command line argument/option parsing
@@ -19,3 +27,24 @@ from working with each other smoothly:
 much glue code would need to be written just
 to translate a package's error handling style to another's;
 this just adds noise.
+
+# Standards
+
+* Ubuntu, Linux
+* wget
+
+* bytestring, text
+* containers
+
+* optparse-applicative
+* process
+
+* wai
+* snap
+* digestive-functors
+
+# Dependencies
+
+```
+libbz2-dev
+```
