@@ -1,5 +1,6 @@
 This package pragmatically provides:
 
+* command line argument/option parsing
 * error handling
 * logging
 * multitasking (concurrency and parallelism)
