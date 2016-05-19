@@ -30,19 +30,23 @@ import qualified Data.Serialize as Se
 
 import qualified Data.ByteString.UTF8 as Bu
 
+import qualified Jvm_arch as A
+import qualified Jvm_decode as D
 import qualified Jvm_io as Z
+import qualified Jvm_prepare as P
 import qualified Jvm_state as S
 
-import Jvm_state
+import Jvm_arch
     (
-        Class(..)
-        , Frame(..)
-        , Instruction(..)
-        , State(..)
-        , Status(..)
+        J(..)
+        , S(..)
+        , State
+        , Status
+        , Instruction
+        , is_ready
+        , lift
+        , Class(..)
         , Value(..)
-        , f_new
-        , s_new
     )
 
 -- * Architecture
@@ -50,15 +54,13 @@ import Jvm_state
 {- $
 "Jvm_io": parse a 'Bs.ByteString' as found on disk, memory, network.
 
-"Jvm_parse": execute a 'S.Class'.
-
 Some types have the same names.
 
-There are two 'Monad's: 'S.S' and 'J'.
+There are two 'Monad's: S and J.
 
-'J' is an extension of 'S.S' that allows 'IO'.
+J is an extension of S that allows 'IO'.
 
-Bytecode execution happens mostly in 'S.S'.
+Bytecode execution happens mostly in S.
 -}
 
 -- * Calling Java code from Haskell
@@ -83,7 +85,7 @@ run = step >> run
 Fetch and decode the next instruction, and increment pc accordingly.
 -}
 decode :: J Instruction
-decode = lift S.decode
+decode = lift D.decode
 
 {- |
 Remove the top frame from the frame stack,
@@ -104,7 +106,7 @@ push :: Value -> J ()
 push = lift . S.push
 
 stop :: Status -> J a
-stop r = modify (S.stop_raw r) >> Mk_j (\ s -> return (s, Nothing))
+stop = lift . A.stop
 
 load :: Int -> J Value
 load = lift . S.load
@@ -112,61 +114,16 @@ load = lift . S.load
 store :: Int -> Value -> J ()
 store n v = lift (S.store n v)
 
-lift :: S.S a -> J a
-lift x = Mk_j $ return . S.un_s x
-
--- * J Monad: instruction decoding etc
-
-newtype J a = Mk_j { un_j :: State -> IO (State, Maybe a) }
-
-get_state :: J State
-get_state = Mk_j $ \ s -> return (s, Just s)
-
-put_state :: State -> J ()
-put_state s = Mk_j $ \ _ -> return (s, Just ())
-
-exec :: J a -> State -> IO State
-exec comp init_state = fst <$> un_j comp init_state
-
-modify :: (State -> State) -> J ()
-modify f = Mk_j $ \ s -> return (f s, Just ())
-
-instance Functor J where
-    fmap f m = Mk_j $ \ s ->
-        fmap
-            (\ (s, e) -> (s, fmap f e))
-            (un_j m s)
-
-instance Applicative J where
-    pure = return
-    (<*>) = M.ap
-
-instance Monad J where
-    return a = Mk_j $ \ s -> return (s, Just a)
-    (>>=) m k = Mk_j $ \ s_0 -> do
-        case S.is_ready s_0 of
-            False ->
-                return (s_0, Nothing)
-            True -> do
-                (s_1, ma) <- un_j m s_0
-                case S.is_ready s_1 of
-                    False -> return (s_1, Nothing)
-                    True -> case ma of
-                        Nothing -> return (s_1, Nothing)
-                        Just a -> un_j (k a) s_1
-
 -- * Testing
 
 testload :: IO ()
 testload = do
     let clspath = "Hello.class"
     Right cls <- Z.load_class_file clspath
-    print cls
-    Right rcl <- return $ S.resolve_class cls
-    print rcl
+    Right rcl <- return $ P.resolve_class cls
     M.forM_ (c_methods rcl) $ \ m -> do
         let (s, i) = S.disassemble rcl m
-        print $ s_status s
+        print $ A.s_status s
         print i
 
 jvm :: IO ()
@@ -185,11 +142,11 @@ jvm = do
         [x] -> return x
         x -> io_error $ "too many main methods: " ++ show x
     -}
-    let init_state = (s_new (f_new cls entry_point))
+    let init_state = (A.s_new (A.f_new cls entry_point))
             {
-                s_classes = [jls, cls]
+                A.s_classes = [jls, cls]
             }
-    final_state <- flip exec init_state $ do
+    final_state <- flip A.exec init_state $ do
         store 0 (Integer 5)
         store 1 (Integer 4)
         run
