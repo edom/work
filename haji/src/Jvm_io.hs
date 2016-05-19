@@ -1,5 +1,8 @@
 {- |
 Class file parsing.
+
+The concern of this module is the binary representation of classes,
+not the execution.
 -}
 module Jvm_io
 where
@@ -28,6 +31,9 @@ import qualified Data.ByteString.UTF8 as Bu
 
 -- * Parse class files
 
+{- |
+Deserialize the binary representation from disk.
+-}
 load_class_file :: FilePath -> IO (Either String Class)
 load_class_file = fmap parse_class . slurp
 
@@ -53,6 +59,7 @@ parse_class =
                         8 -> P_string <$> u2
                         9 -> P_fieldref <$> u2 <*> u2
                         10 -> P_methodref <$> u2 <*> u2
+                        11 -> P_interfacemethodref <$> u2 <*> u2
                         12 -> P_nameandtype <$> u2 <*> u2
                         _ -> fail $ "constant pool entry has invalid tag: " ++ show tag
             access <- u2
@@ -77,25 +84,46 @@ parse_class =
 
 -- * Access constant pool
 
-cp_get_utf8 :: Class -> Word16 -> Either String Bs.ByteString
+{- $
+
+Every function in this section follows this pattern:
+
+@
+cp_get_/something/ :: Class -> Cp_index -> Either String /sometype/
+@
+
+-}
+
+cp_get_utf8 :: Class -> Cp_index -> Either String Bs.ByteString
 cp_get_utf8 c i = do
     e <- cp_get c i
     case e of
         P_utf8 a -> Right a
         _ -> Left "not a UTF8"
 
-cp_get_class :: Class -> Word16 -> Either String Word16
+cp_get_nameandtype :: Class -> Cp_index -> Either String (Word16, Word16)
+cp_get_nameandtype c i = do
+    e <- cp_get c i
+    case e of
+        P_nameandtype a b -> Right (a, b)
+        _ -> Left "not a NameAndType"
+
+cp_get_class :: Class -> Cp_index -> Either String Word16
 cp_get_class c i = do
     e <- cp_get c i
     case e of
         P_class a -> Right a
         _ -> Left "not a Class"
 
+cp_get :: Class -> Cp_index -> Either String Constant
+cp_get c i = maybe (Left "invalid constant pool index") Right $ at (c_pool c) (fromIntegral i - 1)
+
 {- |
 The first constant pool entry has index 1.
 -}
-cp_get :: Class -> Word16 -> Either String Pool_entry
-cp_get c i = maybe (Left "invalid constant pool index") Right $ at (c_pool c) (fromIntegral i - 1)
+type Cp_index = Word16
+
+-- * List functions
 
 at :: [a] -> Int -> Maybe a
 at [] _ = Nothing
@@ -114,7 +142,7 @@ data Code
         , cd_handlers :: [Handler]
         , cd_attributes :: [Attribute]
     }
-    deriving (Read, Show)
+    deriving (Read, Show, Eq)
 
 {- |
 The input is the attribute content.
@@ -158,7 +186,7 @@ data Handler
         , h_handler_pc :: Word16
         , h_catch_type :: Word16
     }
-    deriving (Read, Show)
+    deriving (Read, Show, Eq)
 
 -- * Parse signature
 
@@ -225,7 +253,7 @@ data Signature
         s_arg_types :: [Type]
         , s_return_type :: Return_type
     }
-    deriving (Read, Show)
+    deriving (Read, Show, Eq)
 
 type Return_type = Maybe Type
 
@@ -233,12 +261,13 @@ type Parser a = P.Parsec String () a
 
 -- * Types
 
-data Pool_entry
+data Constant
     = P_utf8 Bs.ByteString
     | P_class Word16
     | P_string Word16
     | P_fieldref Word16 Word16
     | P_methodref Word16 Word16
+    | P_interfacemethodref Word16 Word16
     | P_nameandtype Word16 Word16
     deriving (Read, Show)
 
@@ -248,7 +277,7 @@ data Attribute
         a_name :: Word16
         , a_content :: Bs.ByteString
     }
-    deriving (Read, Show)
+    deriving (Read, Show, Eq)
 
 data Field_info
     = Mk_field_info
@@ -275,7 +304,7 @@ data Class
     {
         c_minor :: Word16
         , c_major :: Word16
-        , c_pool :: [Pool_entry]
+        , c_pool :: [Constant]
         , c_access :: Word16
         , c_this :: Word16
         , c_super :: Word16

@@ -39,66 +39,45 @@ import Jvm_state
         , Frame(..)
         , Instruction(..)
         , State(..)
-        , Reason(..)
+        , Status(..)
         , Value(..)
         , f_new
         , s_new
-        , s_code
     )
+
+-- * Architecture
+
+{- $
+"Jvm_io": parse a 'Bs.ByteString' as found on disk, memory, network.
+
+"Jvm_parse": execute a 'S.Class'.
+
+Some types have the same names.
+
+There are two 'Monad's: 'S.S' and 'J'.
+
+'J' is an extension of 'S.S' that allows 'IO'.
+
+Bytecode execution happens mostly in 'S.S'.
+-}
+
+-- * Calling Java code from Haskell
+
+-- * Writing Java @native@ methods in Haskell
+
+-- * Implementing Java interface in Haskell
+
+-- * Calling Haskell code from Java
 
 -- * Bytecode execution or interpretation
 
 step :: J ()
-step = do
-    ins <- decode
-    -- XXX should use vector (or Map Int) instead of list
-    case ins of
-        Nop -> return ()
-        -- Lload i -> get_local i >>= push
-        Getstatic c -> error "NOT IMPLEMENTED GETSTATIC"
-            -- get_const c >>= push -- FIXME typecheck
-        Iconst_m1 -> iconst (negate 1)
-        Iconst_0 -> iconst 0
-        Iconst_1 -> iconst 1
-        Iconst_2 -> iconst 2
-        Iconst_3 -> iconst 3
-        Iconst_4 -> iconst 4
-        Iconst_5 -> iconst 5
-        If_icmpge ofs -> do
-            -- XXX
-            x <- pop
-            y <- pop
-            -- let success = x >= y
-            error "NOT IMPLEMENTED" -- MUST READ INSTRUCTION STREAM AS BYTE ARRAY
-        -- Iload im -> get_local im >>= push
-        -- Istore im -> pop >>= istore im
-        Return -> leave
-        _ -> stop $ Unknown_instruction $ show ins
-    where
-        iconst :: Int32 -> J ()
-        iconst v = push (Integer v)
-
-        istore :: Int -> Value -> J ()
-        istore i v = modify $ \ s ->
-            let
-                frame = s_frame s
-                local = f_local frame
-                filler = Integer 0
-            in
-                s { s_frame = frame { f_local = replace filler i v local } }
-        replace :: a -> Int -> a -> [a] -> [a]
-        replace filler index x [] | index <= 0 = [x]
-        replace filler index x (_ : z) | index <= 0 = x : z
-        replace filler index x [] = filler : replace filler (index - 1) x []
-        replace filler index x (y : z) = y : replace filler (index - 1) x z
+step = lift S.step
 
 run :: J ()
 run = step >> run
 
 -- * Virtual machine primitives
-
-fetch :: J Word8
-fetch = lift S.fetch
 
 {- |
 Fetch and decode the next instruction, and increment pc accordingly.
@@ -114,28 +93,27 @@ and replace the current frame with that.
 If the stack is empty, this stops the machine.
 -}
 leave :: J ()
-leave = modify S.leave
+leave = lift S.leave
 
 -- | Pop value from operand stack.
 pop :: J Value
-pop = Mk_j $ return . S.pop
+pop = lift S.pop
 
 -- | Push value to operand stack.
 push :: Value -> J ()
-push = modify . S.push
+push = lift . S.push
 
-stop :: Reason -> J a
+stop :: Status -> J a
 stop r = modify (S.stop_raw r) >> Mk_j (\ s -> return (s, Nothing))
+
+load :: Int -> J Value
+load = lift . S.load
+
+store :: Int -> Value -> J ()
+store n v = lift (S.store n v)
 
 lift :: S.S a -> J a
 lift x = Mk_j $ return . S.un_s x
-
-get_local :: Int -> J Value
-get_local i = do
-    s <- get_state
-    case f_local (s_frame s) `Z.at` i of
-        Nothing -> stop Invalid_local_index
-        Just v -> return v
 
 -- * J Monad: instruction decoding etc
 
@@ -166,12 +144,12 @@ instance Applicative J where
 instance Monad J where
     return a = Mk_j $ \ s -> return (s, Just a)
     (>>=) m k = Mk_j $ \ s_0 -> do
-        case s_running s_0 of
+        case S.is_ready s_0 of
             False ->
                 return (s_0, Nothing)
             True -> do
                 (s_1, ma) <- un_j m s_0
-                case s_running s_1 of
+                case S.is_ready s_1 of
                     False -> return (s_1, Nothing)
                     True -> case ma of
                         Nothing -> return (s_1, Nothing)
@@ -188,34 +166,35 @@ testload = do
     print rcl
     M.forM_ (c_methods rcl) $ \ m -> do
         let (s, i) = S.disassemble rcl m
-        print $ s_stop_reason s
+        print $ s_status s
         print i
 
 jvm :: IO ()
 jvm = do
     let clspath = "Hello.class"
+    e_jls <- S.load_class_file "jre/lib/rt/java/lang/System.class"
+    let
+        -- Left er = e_jls
+        Right jls = e_jls
+    -- print er
     Right cls <- S.load_class_file clspath
-    main_method <- case filter S.is_main (c_methods cls) of
+    let [entry_point] = [ m | m <- c_methods cls, S.name_is "test" m ]
+    {-
+    entry_point <- case filter S.is_main (c_methods cls) of
         [] -> io_error "has no static main (String[]) method"
         [x] -> return x
         x -> io_error $ "too many main methods: " ++ show x
-    let init_state = s_new (f_new cls main_method)
-    final_state <- exec run init_state
-    putStrLn $ pretty final_state
+    -}
+    let init_state = (s_new (f_new cls entry_point))
+            {
+                s_classes = [jls, cls]
+            }
+    final_state <- flip exec init_state $ do
+        store 0 (Integer 5)
+        store 1 (Integer 4)
+        run
+    putStrLn $ S.dump final_state
     return ()
     where
         io_error :: String -> IO a
         io_error = Ie.ioError . Ie.userError
-        pretty :: State -> String
-        pretty state =
-            unlines $
-                [
-                    "running = " ++ show (s_running state)
-                    , "stop_reason = " ++ show (s_stop_reason state)
-                    , "pc = " ++ show (f_pc frame)
-                    , "method = " ++ show method
-                ]
-            where
-                frame = s_frame state
-                method = f_method frame
-                pc = f_pc frame
