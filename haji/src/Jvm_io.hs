@@ -1,10 +1,5 @@
 {- |
 Class file parsing.
-
-The concern of this module is the binary representation of classes,
-not the execution.
-
-This is the lowest layer of this JVM implementation.
 -}
 module Jvm_io
 where
@@ -30,6 +25,15 @@ import qualified Data.Serialize as Se
 import qualified Text.Parsec as P
 
 import qualified Data.ByteString.UTF8 as Bu
+
+import qualified List as Li
+
+import Jvm_type
+    (
+        Type(..)
+        , Return_type
+        , Signature(..)
+    )
 
 -- * Parse class files
 
@@ -118,20 +122,12 @@ cp_get_class c i = do
         _ -> Left "not a Class"
 
 cp_get :: Class -> Cp_index -> Either String Constant
-cp_get c i = maybe (Left "invalid constant pool index") Right $ at (c_pool c) (fromIntegral i - 1)
+cp_get c i = maybe (Left "invalid constant pool index") Right $ Li.at (c_pool c) (fromIntegral i - 1)
 
 {- |
 The first constant pool entry has index 1.
 -}
 type Cp_index = Word16
-
--- * List functions
-
-at :: [a] -> Int -> Maybe a
-at [] _ = Nothing
-at _ i | i < 0 = Nothing
-at (x : _) 0 = Just x
-at (_ : y) i = at y (i - 1)
 
 -- * Parse Code attribute content
 
@@ -235,29 +231,6 @@ method_type =
         return_type =
             Just <$> field_type
             <|> Nothing <$ P.char 'V'
-
-data Type
-    = Byte
-    | Char
-    | Double
-    | Float
-    | Int
-    | Long
-    | Instance String -- ^ class name
-    | Short
-    | Bool
-    | Array Type
-    deriving (Read, Show, Eq)
-
-data Signature
-    = Mk_signature
-    {
-        s_arg_types :: [Type]
-        , s_return_type :: Return_type
-    }
-    deriving (Read, Show, Eq)
-
-type Return_type = Maybe Type
 
 type Parser a = P.Parsec String () a
 

@@ -27,9 +27,13 @@ import qualified Data.ByteString as Bs
 
 import qualified Data.ByteString.UTF8 as Bu
 
-import qualified Jvm_io as Z
-
--- import Jvm_prepare -- XXX
+import Jvm_io (Code(..))
+import Jvm_value (Value(..))
+import Jvm_type
+    (
+        Signature(..)
+        , Type(..)
+    )
 
 -- * S Monad, like J but without IO
 
@@ -153,13 +157,13 @@ data Status
     | Decode_error Word8
     | Unknown_instruction Instruction
     | Need_io -- ^ usually requested by a native method
-    | Expecting_type Z.Type -- ^ expected-type actual-value ; value has wrong type
+    | Expecting_type Type -- ^ expected-type actual-value ; value has wrong type
     | Expecting_fieldref
     | Expecting_methodref
     | Class_not_found Class_name
     | Field_not_found Class_name Fieldref
     | Field_not_initialized Class_name Fieldref
-    | Method_not_found Class_name Method_name Z.Signature
+    | Method_not_found Class_name Method_name Signature
     | Invalid_tableswitch String
     | Invalid_lookupswitch String
     | Invalid_reserved Int Word8
@@ -419,8 +423,8 @@ An inhabitant of this type is an entry in a constant pool that has been resolved
 data Constant
     = C_class Bs.ByteString
     | C_string Bs.ByteString
-    | C_fieldref Class_name Field_name Z.Type
-    | C_methodref Class_name Method_name Z.Signature
+    | C_fieldref Class_name Field_name Type
+    | C_methodref Class_name Method_name Signature
     | C_resolved
     deriving (Read, Show, Eq)
 
@@ -441,7 +445,7 @@ data Field
     {
         f_access :: Word16
         , f_name :: Field_name
-        , f_type :: Z.Type
+        , f_type :: Type
     }
     deriving (Read, Show, Eq)
 
@@ -450,38 +454,16 @@ data Method
     {
         m_access :: Word16
         , m_name :: Method_name
-        , m_signature :: Z.Signature
+        , m_signature :: Signature
         , m_body :: Body
     }
 
 data Body
     = Missing -- ^ no body
-    | Bytecode Z.Code -- ^ JVM bytecode
+    | Bytecode Code -- ^ JVM bytecode
     | Native (S Value) -- ^ native without 'IO'
     | Native_io (J Value) -- ^ native with 'IO'
 
 data Fieldref
-    = Mk_fieldref Field_name Z.Type
-    deriving (Read, Show, Eq)
-
--- * Value
-
--- | An inhabitant of this type is an element in the operand stack.
-data Value
-    = Padding -- ^ This should follow a Long and a Double, just to make the indexes right
-    | Null -- ^ can we use Null for Padding?
-    | Byte Int8 -- FIXME Word8 or Int8?
-    | Short Int16
-    | Integer Int32
-    | Long Int64
-    | Float Float
-    | Double Double
-    | Instance Class_name (Maybe Object)
-    deriving (Read, Show, Eq)
-
-data Object
-    = Mk_object
-    {
-        o_fields :: [(Bs.ByteString, Value)]
-    }
+    = Mk_fieldref Field_name Type
     deriving (Read, Show, Eq)

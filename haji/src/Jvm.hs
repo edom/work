@@ -46,8 +46,8 @@ import Jvm_arch
         , is_ready
         , lift
         , Class(..)
-        , Value(..)
     )
+import qualified Jvm_value as V
 
 -- * Architecture
 
@@ -63,14 +63,6 @@ J is an extension of S that allows 'IO'.
 Bytecode execution happens mostly in S.
 -}
 
--- * Calling Java code from Haskell
-
--- * Writing Java @native@ methods in Haskell
-
--- * Implementing Java interface in Haskell
-
--- * Calling Haskell code from Java
-
 -- * Bytecode execution or interpretation
 
 step :: J ()
@@ -78,41 +70,6 @@ step = lift S.step
 
 run :: J ()
 run = step >> run
-
--- * Virtual machine primitives
-
-{- |
-Fetch and decode the next instruction, and increment pc accordingly.
--}
-decode :: J Instruction
-decode = lift D.decode
-
-{- |
-Remove the top frame from the frame stack,
-and replace the current frame with that.
-(Pop the frame stack.)
-
-If the stack is empty, this stops the machine.
--}
-leave :: J ()
-leave = lift S.leave
-
--- | Pop value from operand stack.
-pop :: J Value
-pop = lift S.pop
-
--- | Push value to operand stack.
-push :: Value -> J ()
-push = lift . S.push
-
-stop :: Status -> J a
-stop = lift . A.stop
-
-load :: Int -> J Value
-load = lift . S.load
-
-store :: Int -> Value -> J ()
-store n v = lift (S.store n v)
 
 -- * Testing
 
@@ -147,8 +104,8 @@ jvm = do
                 A.s_classes = [jls, cls]
             }
     final_state <- flip A.exec init_state $ do
-        store 0 (Integer 5)
-        store 1 (Integer 4)
+        S.store 0 (V.Integer 5)
+        S.store 1 (V.Integer 4)
         run
     putStrLn $ S.dump final_state
     return ()
