@@ -428,9 +428,9 @@ dump state =
             , ""
                 ++ bool (is_public method) "" "public "
                 ++ bool (is_static method) "" "static "
-                ++ pretty_return_type (T.s_return_type signature)
+                ++ T.pretty_return_type (T.s_return_type signature)
                 ++ " " ++ Bu.toString (m_name method)
-                ++ " (" ++ L.intercalate ", " (map pretty_type $ T.s_arg_types signature) ++ ")"
+                ++ " (" ++ L.intercalate ", " (map T.pretty_type $ T.s_arg_types signature) ++ ")"
             , ""
             , disassembly
             , ""
@@ -445,15 +445,6 @@ dump state =
         method = f_method frame
         pc = f_pc frame
         signature = m_signature method
-        pretty_type t = case t of
-            T.Byte -> "byte"
-            T.Short -> "short"
-            T.Int -> "int"
-            T.Long -> "long"
-            T.Array u -> pretty_type u ++ "[]"
-            T.Instance c -> c
-            _ -> show t
-        pretty_return_type = maybe "void" pretty_type
         disassembly =
             unlines $ zipWith (\ n i -> align n ++ "    " ++ i) numbers instructions
             where
