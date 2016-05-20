@@ -152,7 +152,7 @@ execute instruction =
             -- XXX
             x <- pop >>= want_integer
             y <- pop >>= want_integer
-            let success = x >= y
+            let success = y >= x
             -- The offset is calculated from the beginning of the If instruction.
             M.when success $ add_pc (ofs - 3)
         Iinc i_ c ->
