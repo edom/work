@@ -118,6 +118,7 @@ execute instruction =
         Iconst_4 -> iconst 4
         Iconst_5 -> iconst 5
         Bipush b -> push (V.Integer $ fromIntegral b)
+        Sipush s -> push (V.Integer $ fromIntegral s)
         -- TODO check type
         Iload_0 -> load 0 >>= push
         Iload_1 -> load 1 >>= push
