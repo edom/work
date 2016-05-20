@@ -1,0 +1,44 @@
+name: haji
+version: 0.0.0
+synopsis: Java bytecode interpreter
+description: See README.md
+homepage: https://github.com/edom/haji
+license: BSD3
+license-file: LICENSE
+author: Erik Dominikus
+maintainer: software@spacetimecat.com
+copyright: 2016 Erik Dominikus
+category:
+    Java
+build-type: Simple
+cabal-version: >=1.10
+
+library
+    default-language: Haskell2010
+    hs-source-dirs: src
+    exposed-modules:
+        Jvm
+        Jvm_io
+        Jvm_state
+    build-depends:
+        base < 5
+        , bytestring
+        , cereal
+        , containers
+        , parsec
+        , text
+        , time
+        , transformers
+        , utf8-string
+
+executable haji
+    default-language: Haskell2010
+    hs-source-dirs: app
+    main-is: Main.hs
+    build-depends:
+        base
+        , haji
+
+source-repository head
+    type: git
+    location: https://github.com/edom/haji
