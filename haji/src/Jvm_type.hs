@@ -29,20 +29,24 @@ data Signature
     }
     deriving (Read, Show, Eq)
 
-type Return_type = Maybe Type
+type Return_type = Type
 
 -- * Pretty-printing types
 
 pretty_type :: Type -> String
 pretty_type t = case t of
     Byte -> "byte"
+    Char -> "char"
+    Double -> "double"
+    Float -> "float"
     Short -> "short"
     Int -> "int"
     Long -> "long"
+    Void -> "void"
     Null -> "null"
+    Bool -> "boolean"
     Array u -> pretty_type u ++ "[]"
     Instance c -> c
-    _ -> show t
 
 pretty_return_type :: Return_type -> String
-pretty_return_type = maybe "void" pretty_type
+pretty_return_type = pretty_type

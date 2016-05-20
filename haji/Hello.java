@@ -26,7 +26,17 @@ public class Hello
 
     public static int test2 (int a, int b)
     {
-        return a - b;
+        int r = test3(a);
+        for (int i = 0; i < 10; ++i)
+        {
+            r -= b;
+        }
+        return r;
+    }
+
+    public static int test3 (int a)
+    {
+        return a + 10;
     }
 
     public static int test_switch (int i)
@@ -42,5 +52,10 @@ public class Hello
             default:
                 return 0;
         }
+    }
+
+    public static int call_this_from_haskell (int i, int j)
+    {
+        return 100 * i;
     }
 }

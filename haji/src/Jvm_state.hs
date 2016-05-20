@@ -66,11 +66,16 @@ is_static m = m_access m .&. 0x0008 /= 0
 is_public :: Method -> Bool
 is_public m = m_access m .&. 0x0001 /= 0
 
+is_native :: Method -> Bool
+is_native m = m_access m .&. 0x0100 /= 0
+
 -- * Bytecode execution
 
 -- ** Executing an instruction
 
 {- |
+The smallest execution step.
+
 Decode the next instruction and execute it.
 
 The program counter is incremented accordingly.
@@ -89,7 +94,7 @@ step = do
             decode >>= execute
         Native e ->
             case T.s_return_type (m_signature m) of
-                Nothing ->
+                T.Void ->
                     e >> leave
                 _ -> do
                     r <- e
@@ -97,6 +102,32 @@ step = do
                     push r
         Native_io _ ->
             stop Need_io
+
+{- |
+This runs the method until it returns,
+and then this returns that method's return value.
+-}
+step_until_returned :: S Value
+step_until_returned = do
+    state <- get
+    depth <- get_depth
+    let
+        rtype = T.s_return_type . m_signature . f_method . s_frame $ state
+        loop = do
+            step
+            d <- get_depth
+            if d >= depth
+                then loop
+                else pop_return_value rtype
+    loop
+    where
+        get_depth = length . s_frames <$> get
+
+pop_return_value :: T.Type -> S Value
+pop_return_value t = case t of
+    T.Int -> pop
+    T.Void -> return V.Padding
+    _ -> stop (Not_implemented $ "pop_return_value: " ++ show t)
 
 execute :: Instruction -> S ()
 execute instruction =
@@ -192,10 +223,6 @@ execute instruction =
 
         pop_integer = pop >>= want_integer
 
-        enter_static clas method args = do
-            enter (f_new clas method)
-            M.zipWithM_ (\ i v -> store i v) [0..] args
-
         add_pc_if :: Bool -> Int16 -> S ()
         add_pc_if cond ofs = M.when cond $ add_pc ofs
 
@@ -246,11 +273,26 @@ set_static_field class_name fref value = modify $ \ s ->
         set c | c_name c == class_name = c { c_static = Li.kv_upsert fref value (c_static c) }
         set c = c
 
-class Jvm_1 m where
+-- * Finding and loading classes, getting fields and methods
+
+class (Monad m) => Jvm_1 m where
     load_class :: Class_name -> m Class
     get_field :: Class -> Field_name -> T.Type -> m Field
     get_method :: Class -> Method_name -> T.Signature -> m Method
+
+    {- |
+Push the frame to the frame stack.
+    -}
     enter :: Frame -> m ()
+
+    enter_static :: Class -> Method -> [Value] -> m ()
+    enter_static clas method args = do
+        enter (f_new clas method)
+        set_arguments args
+
+    set_arguments :: [Value] -> m ()
+    set_arguments =
+        M.zipWithM_ (\ i v -> store i v) [0..]
 
     {- |
 Remove the top frame from the frame stack,
@@ -426,9 +468,12 @@ dump state =
             , ""
             , "pc: " ++ show (f_pc frame)
             , ""
+            , "class " ++ Bu.toString (c_name clas)
+            , ""
             , ""
                 ++ bool (is_public method) "" "public "
                 ++ bool (is_static method) "" "static "
+                ++ bool (is_native method) "" "native "
                 ++ T.pretty_return_type (T.s_return_type signature)
                 ++ " " ++ Bu.toString (m_name method)
                 ++ " (" ++ L.intercalate ", " (map T.pretty_type $ T.s_arg_types signature) ++ ")"

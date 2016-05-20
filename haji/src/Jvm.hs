@@ -30,12 +30,6 @@ import qualified Data.Serialize as Se
 
 import qualified Data.ByteString.UTF8 as Bu
 
-import qualified Jvm_arch as A
-import qualified Jvm_decode as D
-import qualified Jvm_io as Z
-import qualified Jvm_prepare as P
-import qualified Jvm_state as S
-
 import Jvm_arch
     (
         J(..)
@@ -47,6 +41,15 @@ import Jvm_arch
         , lift
         , Class(..)
     )
+
+import qualified Jvm_arch as A
+import qualified Jvm_build as B
+import qualified Jvm_decode as D
+import qualified Jvm_interop as O
+import qualified Jvm_io as Z
+import qualified Jvm_prepare as P
+import qualified Jvm_state as S
+import qualified Jvm_type as T
 import qualified Jvm_value as V
 
 -- * Architecture
@@ -90,23 +93,27 @@ jvm = do
     let
         -- Left er = e_jls
         Right jls = e_jls
+        bo = B.bootstrap $ do
+            return V.Null
     -- print er
     Right cls <- S.load_class_file clspath
-    let [entry_point] = [ m | m <- c_methods cls, S.name_is "test" m ]
+    let [entry_point] = [ m | m <- c_methods bo, S.name_is "<main>" m ]
+    -- let [entry_point] = [ m | m <- c_methods cls, S.name_is "test" m ]
     {-
     entry_point <- case filter S.is_main (c_methods cls) of
         [] -> io_error "has no static main (String[]) method"
         [x] -> return x
         x -> io_error $ "too many main methods: " ++ show x
     -}
-    let init_state = (A.s_new (A.f_new cls entry_point))
+    let init_state = (A.s_new (A.f_new bo entry_point))
             {
-                A.s_classes = [jls, cls]
+                A.s_classes = [bo, jls, cls]
             }
-    final_state <- flip A.exec init_state $ do
+    final_state <- return $ flip A.exec init_state $ do
         S.store 0 (V.Integer 5)
         S.store 1 (V.Integer 4)
-        run
+        -- run
+        O.call_static "Hello" T.Int "test2" [T.Int, T.Int] [V.Integer 200, V.Integer 100] >>= S.push
     putStrLn $ S.dump final_state
     return ()
     where

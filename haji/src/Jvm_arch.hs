@@ -111,8 +111,11 @@ instance Monad_state J where
 lift :: S a -> J a
 lift x = Mk_j $ return . un_s x
 
-exec :: J a -> State -> IO State
-exec comp init_state = fst <$> un_j comp init_state
+exec :: S a -> State -> State
+exec comp init_state = fst $ un_s comp init_state
+
+exec_io :: J a -> State -> IO State
+exec_io comp init_state = fst <$> un_j comp init_state
 
 -- * State and Frame
 
@@ -167,7 +170,7 @@ data Status
     | Invalid_tableswitch String
     | Invalid_lookupswitch String
     | Invalid_reserved Int Word8
-    | Not_implemented
+    | Not_implemented String
     deriving (Read, Show, Eq)
 
 {- |

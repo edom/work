@@ -229,8 +229,8 @@ method_type =
     <*> return_type
     where
         return_type =
-            Just <$> field_type
-            <|> Nothing <$ P.char 'V'
+            field_type
+            <|> Void <$ P.char 'V'
 
 type Parser a = P.Parsec String () a
 
