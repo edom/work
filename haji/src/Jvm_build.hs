@@ -39,10 +39,12 @@ class_ name build =
     Ms.execState build $ Mk_class
         {
             c_name = Bu.fromString name
+            , c_super = Nothing
             , c_fields = []
             , c_methods = []
             , c_pool = []
             , c_static = []
+            , c_initialized = False
         }
 
 -- * Adding Java @native@ methods implemented in Haskell
@@ -87,15 +89,18 @@ type Method_name = String
 
 -- * Bootstrap class
 
-bootstrap :: S V.Value -> Class
-bootstrap main =
-    class_ "<bootstrap>" $ do
-        native Public T.Void "<main>" [] main
+class Bootstrap m where
+    bootstrap :: m V.Value -> Class
 
-bootstrap_io :: J V.Value -> Class
-bootstrap_io main =
-    class_ "<bootstrap>" $ do
-        native_io Public T.Void "<main>" [] main
+instance Bootstrap S where
+    bootstrap main =
+        class_ "<bootstrap>" $ do
+            native Public T.Void "<main>" [] main
+
+instance Bootstrap J where
+    bootstrap main =
+        class_ "<bootstrap>" $ do
+            native_io Public T.Void "<main>" [] main
 
 -- * Access
 

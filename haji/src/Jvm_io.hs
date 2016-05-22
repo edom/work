@@ -10,7 +10,13 @@ import Control.Applicative
     )
 
 import qualified Control.Monad as M
+import qualified Debug.Trace as Dbg
 
+import Data.Int
+    (
+        Int32
+        , Int64
+    )
 import Data.Word
     (
         Word8
@@ -38,13 +44,10 @@ import Jvm_type
 -- * Parse class files
 
 {- |
-Deserialize the binary representation from disk.
+The 'FilePath' argument is used for error reporting.
 -}
-load_class_file :: FilePath -> IO (Either String Class)
-load_class_file = fmap parse_class . slurp
-
-parse_class :: Bs.ByteString -> Either String Class
-parse_class =
+parse_class :: FilePath -> Bs.ByteString -> Either String Class
+parse_class path =
     Se.runGet grammar
     where
         grammar = do
@@ -52,22 +55,42 @@ parse_class =
             M.unless (magic == 0xcafebabe) $ fail "bad magic"
             minor <- u2
             major <- u2
+            -- "In retrospect, making 8-byte constants take two constant pool entries was a poor choice."
+            -- https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.5
             pool <- do
                 n <- fromIntegral <$> u2
-                -- valid constant pool index range is from 1 to (n - 1) inclusive
-                M.replicateM (n - 1) $ do
-                    tag <- u1
-                    case tag of
-                        1 -> do
-                            count <- fromIntegral <$> u2
-                            P_utf8 <$> Se.getByteString count
-                        7 -> P_class <$> u2
-                        8 -> P_string <$> u2
-                        9 -> P_fieldref <$> u2 <*> u2
-                        10 -> P_methodref <$> u2 <*> u2
-                        11 -> P_interfacemethodref <$> u2 <*> u2
-                        12 -> P_nameandtype <$> u2 <*> u2
-                        _ -> fail $ "constant pool entry has invalid tag: " ++ show tag
+                let
+                    count = n - 1
+                    loop result i | i >= count = return (reverse result)
+                    loop result i = do
+                        tag <- u1
+                        let
+                            mem_index = i + 1
+                            one = fmap (\ x -> [x])
+                            two = fmap (\ x -> [P_unused, x]) -- reversed
+                            -- P_unused is not stored on disk, but is present on memory.
+                        new_entries <- case tag of
+                            1 -> do
+                                count <- fromIntegral <$> u2
+                                one $ P_utf8 <$> Se.getByteString count
+                            3 -> one $ P_integer <$> s4
+                            4 -> one $ P_float <$> f4
+                            5 -> two $ P_long <$> s8
+                            6 -> two $ P_double <$> f8
+                            7 -> one $ P_class <$> u2
+                            8 -> one $ P_string <$> u2
+                            9 -> one $ P_fieldref <$> u2 <*> u2
+                            10 -> one $ P_methodref <$> u2 <*> u2
+                            11 -> one $ P_interfacemethodref <$> u2 <*> u2
+                            12 -> one $ P_nameandtype <$> u2 <*> u2
+                            _ -> fail $ path ++ ": constant pool entry #" ++ show mem_index ++ " (D" ++ show i ++ ") has invalid tag: " ++ show tag
+                        let
+                            new_i = i + length new_entries
+                            -- Choose one.
+                            -- trace u = Dbg.trace ("#" ++ show mem_index ++ " (D" ++ show i ++ "): " ++ show new_entries) u
+                            trace = id
+                        trace $ new_i `seq` loop (new_entries ++ result) new_i
+                loop [] 0
             access <- u2
             this <- u2
             super <- u2
@@ -84,6 +107,10 @@ parse_class =
                     Mk_method_info <$> u2 <*> u2 <*> u2 <*> g_attributes
             attrs <- g_attributes
             return $ Mk_class minor major pool access this super ifaces fields methods attrs
+        f8 = Se.getFloat64be
+        f4 = Se.getFloat32be
+        s8 = Se.getInt64be
+        s4 = Se.getInt32be
         u4 = Se.getWord32be
         u2 = Se.getWord16be
         u1 = Se.getWord8
@@ -120,6 +147,13 @@ cp_get_class c i = do
     case e of
         P_class a -> Right a
         _ -> Left "not a Class"
+
+cp_get_integer :: Class -> Cp_index -> Either String Int32
+cp_get_integer c i = do
+    e <- cp_get c i
+    case e of
+        P_integer a -> Right a
+        _ -> Left "not an Integer"
 
 cp_get :: Class -> Cp_index -> Either String Constant
 cp_get c i = maybe (Left "invalid constant pool index") Right $ Li.at (c_pool c) (fromIntegral i - 1)
@@ -217,7 +251,7 @@ field_type =
     <|> Float <$ P.char 'F'
     <|> Int <$ P.char 'I'
     <|> Long <$ P.char 'J'
-    <|> Instance <$> (P.char 'L' *> P.manyTill P.anyChar (P.char ';'))
+    <|> Instance <$> (Bu.fromString <$> (P.char 'L' *> P.manyTill P.anyChar (P.char ';')))
     <|> Short <$ P.char 'S'
     <|> Bool <$ P.char 'Z'
     <|> Array <$ P.char '[' <*> field_type
@@ -238,12 +272,17 @@ type Parser a = P.Parsec String () a
 
 data Constant
     = P_utf8 Bs.ByteString
+    | P_integer Int32
+    | P_float Float
+    | P_long Int64
+    | P_double Double
     | P_class Word16
     | P_string Word16
     | P_fieldref Word16 Word16
     | P_methodref Word16 Word16
     | P_interfacemethodref Word16 Word16
     | P_nameandtype Word16 Word16
+    | P_unused -- ^ second slot of 8-byte constant
     deriving (Read, Show)
 
 data Attribute

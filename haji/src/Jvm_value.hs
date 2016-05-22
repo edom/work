@@ -4,8 +4,13 @@ This module should be imported qualified because some names clash with those in 
 module Jvm_value
 where
 
+import qualified Data.Char as Ch
+
 import qualified Data.ByteString as Bs
 
+import qualified Data.ByteString.UTF8 as Bu
+
+import Data.IORef (IORef)
 import Data.Int
     (
         Int8
@@ -21,31 +26,63 @@ import Data.Word
     )
 import qualified GHC.Float as Gf
 
+import Jvm_member
+    (
+        Field_ref
+    )
+
+import qualified Jvm_type as T
+
 -- * Value
 
 -- | An inhabitant of this type is an element in the operand stack.
 data Value
     = Padding -- ^ This should follow a Long and a Double, just to make the indexes right
     | Null -- ^ can we use Null for Padding?
+    | Bool Word8
+    | Char Word16 -- ^ Java char is 16-bit unsigned integer
     | Byte Int8 -- FIXME Word8 or Int8?
     | Short Int16
     | Integer Int32
     | Long Int64
     | Float Float
     | Double Double
-    | Instance Class_name (Maybe Object)
-    deriving (Read, Show, Eq)
+    | Instance Class_name (IORef [(Field_ref, Value)]) -- ^ embrace the 'IO' for instance field values
+    | Array T.Type Int32 (IORef [Value])
+
+-- TODO use ForeignPtr for Array?
+
+pretty :: Value -> String
+pretty v = case v of
+    Padding -> "<padding>"
+    Null -> "null"
+    Byte a -> "byte " ++ show a
+    Short a -> "short " ++ show a
+    Integer a -> "int " ++ show a
+    Long a -> "long " ++ show a
+    Float a -> "float " ++ show a
+    Double a -> "double " ++ show a
+    Instance c _ -> "instanceof " ++ Bu.toString c
+    Array t n _ -> T.pretty t ++ "[" ++ show n ++ "]"
+
+is_category_2 :: Value -> Bool
+is_category_2 v = case v of
+    Long _ -> True
+    Double _ -> True
+    _ -> False
+
+is_null :: Value -> Bool
+is_null Null = True
+is_null _ = False
 
 type Class_name = Bs.ByteString
 
--- * Instance data
+-- * Char
 
-data Object
-    = Mk_object
-    {
-        o_fields :: [(Bs.ByteString, Value)]
-    }
-    deriving (Read, Show, Eq)
+-- XXX This may truncate the Int?
+-- XXX This is grossly inefficient?
+jchar_list_from_string :: String -> [Value]
+jchar_list_from_string = map (Char . fromIntegral . Ch.ord)
 
 -- * Marshalling
 

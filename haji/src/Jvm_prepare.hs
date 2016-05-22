@@ -42,15 +42,22 @@ resolve_class :: Z.Class -> Either String Class
 resolve_class c = do
     Mk_class
     <$> name
+    <*> super
     <*> fields
     <*> methods
     <*> pool
     <*> pure []
+    <*> pure False
     where
 
         name =
             Z.cp_get_class c (Z.c_this c)
             >>= Z.cp_get_utf8 c
+
+        super =
+            case Z.c_super c of
+                0 -> Right Nothing
+                s -> Just <$> (Z.cp_get_class c s >>= Z.cp_get_utf8 c)
 
         fields =
             M.forM (Z.c_fields c) $ \ f -> do
@@ -87,7 +94,11 @@ resolve_class c = do
 
         resolve_entry e = case e of
             Z.P_utf8 a -> Right $ C_string a
-            Z.P_class i -> C_string <$> Z.cp_get_utf8 c i
+            Z.P_integer a -> Right $ C_integer a
+            Z.P_float a -> Right $ C_float a
+            Z.P_long a -> Right $ C_long a
+            Z.P_double a -> Right $ C_double a
+            Z.P_class i -> C_class <$> Z.cp_get_utf8 c i
             Z.P_string i -> C_string <$> Z.cp_get_utf8 c i
             Z.P_fieldref i_c i_nt -> do
                 cname <- Z.cp_get_class c i_c >>= Z.cp_get_utf8 c
@@ -101,5 +112,11 @@ resolve_class c = do
                 mname <- Z.cp_get_utf8 c i_mname
                 mtype <- Z.cp_get_utf8 c i_mtype >>= Z.parse_method_type
                 return $ C_methodref cname mname mtype
-            Z.P_interfacemethodref i_c i_nt -> Right C_resolved -- FIXME
+            Z.P_interfacemethodref i_c i_nt -> do -- FIXME this is duplicate
+                cname <- Z.cp_get_class c i_c >>= Z.cp_get_utf8 c
+                (i_mname, i_mtype) <- Z.cp_get_nameandtype c i_nt
+                mname <- Z.cp_get_utf8 c i_mname
+                mtype <- Z.cp_get_utf8 c i_mtype >>= Z.parse_method_type
+                return $ C_methodref cname mname mtype
             Z.P_nameandtype _ _ -> Right C_resolved
+            Z.P_unused -> Right C_resolved

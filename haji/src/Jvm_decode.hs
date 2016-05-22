@@ -30,21 +30,24 @@ import qualified Data.ByteString.Unsafe as Bsu
 import Jvm_arch
     (
         State(..)
+        , Stateful
         , Status(..)
         , Frame(..)
-        , Instruction(..)
         , S(..)
         , J(..)
         , Pc
     )
+import Jvm_instruction
+    (
+        Instruction(..)
+    )
 import qualified Jvm_arch as A
+import qualified Jvm_type as T
 import qualified Jvm_io as Z
 
 -- * Decoding JVM bytecode into instructions
 
-class Fetch m where
-    -- | Halt processing with the given reason.
-    stop :: Status -> m a
+class (Stateful m) => Fetch m where
     -- | Get the program counter that points to the byte that will be 'fetch'ed.
     get_pc :: m Pc
     -- | Get the byte pointed by the program counter, and increment the program counter.
@@ -52,31 +55,27 @@ class Fetch m where
 
 instance Fetch S where
 
-    stop = A.stop
-
-    get_pc = f_pc . s_frame <$> A.get
+    get_pc = f_pc <$> A.get_frame
 
     fetch = do
-        s <- A.get
+        frame <- A.get_frame
         let
-            frame = s_frame s
             pc = f_pc frame
             ipc = fromIntegral pc :: Int -- FIXME what if pc doesn't fit in an Int?
-            body = A.m_body . f_method . s_frame $ s
+            body = A.m_body $ f_method frame
         case body of
-            A.Missing -> stop Method_lacks_Code
+            A.Missing -> A.stop Method_lacks_Code
             A.Bytecode code_ -> do
                 let code = Z.cd_code code_
                 case () of
                     _ | ipc < Bs.length code -> do
-                        A.put s { s_frame = frame { f_pc = pc + 1 } }
+                        A.replace_frame frame { f_pc = pc + 1 }
                         return (Bsu.unsafeIndex code ipc)
                     _ ->
-                        stop (Invalid_pc pc)
-            _ -> stop Method_body_not_fetchable
+                        A.stop (Invalid_pc pc)
+            _ -> A.stop Method_body_not_fetchable
 
 instance Fetch J where
-    stop = A.stop
     get_pc = A.lift get_pc
     fetch = A.lift fetch
 
@@ -265,7 +264,7 @@ decode = do
             low <- s4
             high <- s4
             let count = fromIntegral (high - low + 1) -- XXX
-            M.unless (low <= high) $ stop (Invalid_tableswitch "high > low")
+            M.unless (low <= high) $ A.stop (Invalid_tableswitch "high > low")
             Tableswitch def low high <$> M.replicateM count s4
         172 -> return Ireturn
         173 -> return Lreturn
@@ -283,6 +282,7 @@ decode = do
         185 -> Invokeinterface <$> u2 <*> u1 <* mbz 4
         186 -> Invokedynamic <$> u2 <* mbz 3 <* mbz 4
         187 -> New <$> u2
+        188 -> Newarray <$> u1
         189 -> Anewarray <$> u2
         190 -> return Arraylength
         191 -> return Athrow
@@ -297,12 +297,12 @@ decode = do
         202 -> return Breakpoint
         254 -> return Impdep1
         255 -> return Impdep2
-        _ -> stop (Decode_error op)
+        _ -> A.stop (Decode_error op)
     where
-        -- must be zero
+        -- mbz = must be zero
         mbz n = u1 >>= \ a -> if a == 0
             then return ()
-            else stop (Invalid_reserved n a)
+            else A.stop (Invalid_reserved n a)
         -- XXX this aligns with respect to the beginning of code[]
         align4 = do
             p <- get_pc
@@ -331,3 +331,18 @@ decode = do
         as_int32 x = x :: Int32
         as_int16 x = x :: Int16
         -- XXX where is the documentation for fromIntegral?
+
+{- |
+This helps decoding the byte parameter of the 'Newarray' instruction.
+-}
+type_from_newarray_byte :: (A.Stateful m) => Word8 -> m T.Type
+type_from_newarray_byte a = case a of
+    4 -> return T.Bool
+    5 -> return T.Char
+    6 -> return T.Float
+    7 -> return T.Double
+    8 -> return T.Byte
+    9 -> return T.Short
+    10 -> return T.Int
+    11 -> return T.Long
+    _ -> A.stop (Invalid_newarray_type a)
