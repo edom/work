@@ -29,7 +29,9 @@ def_value :: Type -> Value
 def_value t = case t of
     T.Void -> V.Padding
     T.Null -> V.Null
+    T.Bool -> V.Bool 0
     T.Byte -> V.Byte 0
+    T.Char -> V.Char 0
     T.Short -> V.Short 0
     T.Int -> V.Integer 0
     T.Long -> V.Long 0

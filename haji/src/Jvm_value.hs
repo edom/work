@@ -57,6 +57,8 @@ pretty v = case v of
     Padding -> "<padding>"
     Null -> "null"
     Byte a -> "byte " ++ show a
+    Bool a -> "bool " ++ show a
+    Char a -> "char " ++ show a
     Short a -> "short " ++ show a
     Integer a -> "int " ++ show a
     Long a -> "long " ++ show a
@@ -83,6 +85,12 @@ type Class_name = Bs.ByteString
 -- XXX This is grossly inefficient?
 jchar_list_from_string :: String -> [Value]
 jchar_list_from_string = map (Char . fromIntegral . Ch.ord)
+
+string_from_jchar_list :: [Value] -> String
+string_from_jchar_list = map (Ch.chr . unchar)
+    where
+        unchar (Char x) = fromIntegral x
+        unchar _ = 0 -- XXX
 
 -- * Marshalling
 
@@ -128,3 +136,9 @@ instance To_java Int32 where to_java = Integer
 instance To_java Int64 where to_java = Long
 instance To_java Float where to_java = Float
 instance To_java Double where to_java = Double
+
+{-
+class Marshal m a where
+    from_java :: m a
+    to_java :: a -> m Value
+-}

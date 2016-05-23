@@ -71,8 +71,8 @@ parse_class path =
                             -- P_unused is not stored on disk, but is present on memory.
                         new_entries <- case tag of
                             1 -> do
-                                count <- fromIntegral <$> u2
-                                one $ P_utf8 <$> Se.getByteString count
+                                num <- fromIntegral <$> u2
+                                one $ P_utf8 <$> Se.getByteString num
                             3 -> one $ P_integer <$> s4
                             4 -> one $ P_float <$> f4
                             5 -> two $ P_long <$> s8

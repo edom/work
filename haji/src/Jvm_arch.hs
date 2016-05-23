@@ -162,20 +162,10 @@ pop = do
             replace_frame frame { f_stack = y }
             return x
 
-push_return_value :: (Stateful m) => Type -> Value -> m ()
-push_return_value rtype val =
-    case rtype of
-        T.Void -> return ()
-        T.Int -> push val
-        T.Long -> push val
-        _ -> stop (Not_implemented $ "Jvm_arch.push_return_value: " ++ show rtype)
-
 pop_return_value :: (Stateful m) => Type -> m Value
 pop_return_value t = case t of
     T.Void -> return V.Padding
-    T.Int -> pop
-    T.Long -> pop
-    _ -> stop (Not_implemented $ "Jvm_arch.pop_return_value: " ++ show t)
+    _ -> pop
 
 -- * Manipulating frame stack
 
@@ -391,7 +381,7 @@ data Status
     | Decode_error Word8
     | Unknown_instruction Instruction
     | Need_io -- ^ usually requested by a native method
-    | Expecting_type Type -- ^ expected-type actual-value ; value has wrong type
+    | Type_should_be Type Type -- ^ actual-type expected-type
     | Expecting_fieldref
     | Expecting_methodref
     | Expecting_class_name
@@ -457,6 +447,16 @@ data Binding
         b_class_name :: Class_name
         , b_method :: Method
     }
+
+-- FIXME handle static/instance?
+bind :: (Stateful m) => Class_name -> Type -> Method_name -> [Type] -> J Value -> m ()
+bind cname rtype mname atypes body = modify $ \ s ->
+    s
+        {
+            s_native_bindings = Mk_binding cname method : s_native_bindings s
+        }
+    where
+        method = Mk_method 0 mname (Mk_signature atypes rtype) (Native_io body)
 
 -- * Types suitable for execution
 
@@ -560,7 +560,7 @@ instance Stateful S where
 instance Functor J where
     fmap f m = Mk_j $ \ s ->
         fmap
-            (\ (s, e) -> (s, fmap f e))
+            (\ (t, e) -> (t, fmap f e))
             (un_j m s)
 
 instance Applicative J where

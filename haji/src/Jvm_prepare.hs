@@ -41,7 +41,7 @@ Those two @Class@es differ.
 resolve_class :: Z.Class -> Either String Class
 resolve_class c = do
     Mk_class
-    <$> name
+    <$> class_name
     <*> super
     <*> fields
     <*> methods
@@ -50,7 +50,7 @@ resolve_class c = do
     <*> pure False
     where
 
-        name =
+        class_name =
             Z.cp_get_class c (Z.c_this c)
             >>= Z.cp_get_utf8 c
 
@@ -68,11 +68,11 @@ resolve_class c = do
 
         methods =
             M.forM (Z.c_methods c) $ \ m -> do
-                name <- Z.cp_get_utf8 c (Z.mi_name m)
+                method_name <- Z.cp_get_utf8 c (Z.mi_name m)
                 type_ <- Z.cp_get_utf8 c (Z.mi_descriptor m) >>= Z.parse_method_type
                 attrs <- mapM resolve_attribute (Z.mi_attributes m)
                 let
-                    contents = [ c | Mk_attribute name c <- attrs
+                    contents = [ content | Mk_attribute name content <- attrs
                         , name == Bu.fromString "Code" ]
                     mb_content = case contents of
                         x : _ -> Just x
@@ -80,7 +80,7 @@ resolve_class c = do
                 body <- case mb_content of
                     Nothing -> Right Missing
                     Just content -> Bytecode <$> Z.parse_code_attr_content content
-                return $ Mk_method (Z.mi_access m) name type_ body
+                return $ Mk_method (Z.mi_access m) method_name type_ body
 
         resolve_attribute :: Z.Attribute -> Either String Attribute
         resolve_attribute a =

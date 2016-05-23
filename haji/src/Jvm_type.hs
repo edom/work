@@ -35,6 +35,14 @@ data Signature
 
 type Return_type = Type
 
+-- * Instance types
+
+_Object :: Type
+_Object = Instance (Bu.fromString "java/lang/Object")
+
+_String :: Type
+_String = Instance (Bu.fromString "java/lang/String")
+
 -- * Pretty-printing types
 
 pretty :: Type -> String

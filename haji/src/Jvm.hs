@@ -25,9 +25,17 @@ import Data.Word
         , Word16
         , Word32
     )
+import Foreign
+    (
+        Ptr
+        , alloca
+        , castPtr
+    )
+
 import Control.Monad.IO.Class (MonadIO, liftIO)
 
 import qualified Control.Monad as M
+import qualified Foreign as F
 import qualified System.IO.Error as Ie
 
 import qualified Data.ByteString as Bs
@@ -62,6 +70,7 @@ import qualified Jvm_load as L
 import qualified Jvm_prepare as P
 import qualified Jvm_state as S
 import qualified Jvm_type as T
+import qualified Jvm_type_system as U
 import qualified Jvm_value as V
 
 -- * Architecture
@@ -91,12 +100,73 @@ runvm option = do
         -- TODO implement Nothing and Just From_jar
         let Just (From_class_path main_class_name) = o_main_class option
         main_class <- E.load_and_init_class (Bu.fromString main_class_name)
+        A.bind (Bu.fromString "java/lang/Class")
+            T.Bool (Bu.fromString "desiredAssertionStatus0") [T.Instance (Bu.fromString "java/lang/Class")] $ do
+                return $ V.Bool 0
+        A.bind (Bu.fromString "java/lang/Float")
+            T.Int (Bu.fromString "floatToRawIntBits") [T.Float] $ do
+                V.Float x <- A.load 0 -- FIXME
+                fmap V.Integer $ liftIO $ alloca $ \ p -> do
+                    F.poke p x
+                    F.peek (castPtr p) -- FIXME
+        A.bind (Bu.fromString "java/lang/Double")
+            T.Long (Bu.fromString "doubleToRawLongBits") [T.Double] $ do
+                V.Double x <- A.load 0 -- FIXME
+                fmap V.Long $ liftIO $ alloca $ \ p -> do
+                    F.poke p x
+                    F.peek (castPtr p) -- FIXME
+        A.bind (Bu.fromString "java/lang/Class")
+            (T.Instance (Bu.fromString "java/lang/Class")) (Bu.fromString "getPrimitiveClass") [T.Instance (Bu.fromString "java/lang/String")] $ do
+                a0 <- A.load 0
+                V.Array _ n r <- O.call "java/lang/String" (T.Array T.Char) "toCharArray" [] [a0]
+                input <- V.string_from_jchar_list . take (fromIntegral n) <$> A.read_ioref r
+                case input of
+                    "int" -> return V.Null -- FIXME
+                    "float" -> return V.Null -- FIXME
+                    "double" -> return V.Null -- FIXME
+                    _ -> A.stop (A.Not_implemented $ "java.lang.Class:getPrimitiveClass: " ++ input)
+        A.bind (Bu.fromString "Hello")
+            T.Void (Bu.fromString "println") [T._Object] $ do
+                obj <- A.load 0 -- FIXME
+                case obj of
+                    V.Instance t r -> do
+                        fieldvals <- A.read_ioref r
+                        liftIO $ putStrLn $ show t ++ "\n" ++ unlines (map (\ (f, v) -> show f ++ " = " ++ V.pretty v) fieldvals)
+                    _ ->
+                        liftIO $ putStrLn $ V.pretty obj
+                return V.Padding
+        A.bind (Bu.fromString "sun/misc/VM") -- XXX
+            T.Void (Bu.fromString "initialize") [] $ do
+                return V.Padding
+        let _Object = T.Instance (Bu.fromString "java/lang/Object")
+        A.bind (Bu.fromString "java/lang/System")
+            T.Void (Bu.fromString "arraycopy") [_Object, T.Int, _Object, T.Int, T.Int] $ do
+                -- FIXME
+                src@(V.Array _ _ rs) <- A.load 0
+                V.Integer src_begin_ <- A.load 1
+                dst@(V.Array dst_elem_type dst_length_ rd) <- A.load 2
+                V.Integer dst_begin_ <- A.load 3
+                V.Integer count_ <- A.load 4
+                let
+                    src_begin = fromIntegral src_begin_
+                    dst_begin = fromIntegral dst_begin_
+                    dst_length = fromIntegral dst_length_
+                    count = fromIntegral count_
+                asrc <- A.read_ioref rs
+                A.modify_ioref rd $ \ adst ->
+                    let
+                        xadst = adst ++ repeat (U.def_value dst_elem_type)
+                    in
+                        take dst_begin xadst
+                        ++ take count (drop src_begin (asrc ++ repeat (U.def_value dst_elem_type)))
+                        ++ take (dst_length - (dst_begin + count)) (drop (dst_begin + count) xadst)
+                return $ V.Bool 0
         O.call main_class_name
             -- DEBUG T.Void "main" [T.Array (T.Instance (Bu.fromString "java/lang/String"))]
             T.Void "main" []
             []
     where
-        main_class_name = o_main_class option
+
         init_state = A.s_new
             {
                 A.s_classpath = o_classpath option
@@ -209,7 +279,7 @@ option_def = Mk_option
 
 list :: String -> IO ()
 list cname = do
-    flip A.exec_io state $ do
+    M.void $ flip A.exec_io state $ do
         c <- L.load_class (Bu.fromString cname)
         A.j_lift_io $ putStrLn $ flip concatMap (A.c_methods c) $ \ m ->
             Bu.toString (A.m_name m) ++ " " ++ show (A.m_signature m) ++ "\n"

@@ -22,8 +22,8 @@ import qualified Jvm_type as T
 -- * Disassembling bytecode
 
 disassemble :: Class -> Method -> S [(Pc, Instruction)]
-disassemble c m = do
-    begin_call c m []
+disassemble cls m = do
+    begin_call cls m []
     loop
     where
         with_def :: a -> S a -> S a

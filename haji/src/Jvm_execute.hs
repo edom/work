@@ -8,6 +8,8 @@ import Data.Bits
     (
         (.&.)
         , (.|.)
+        , xor
+        , shiftL
         , shiftR
         , unsafeShiftL
     )
@@ -143,20 +145,20 @@ step = do
                     Native e -> do
                         val <- execute_native e
                         leave
-                        push_return_value rtype val
+                        push val
                     Native_io e -> do
                         val <- execute_native_io e
                         leave
-                        push_return_value rtype val
+                        push val
         Bytecode _ -> decode >>= execute
         Native e -> do
             val <- execute_native e
             leave
-            push_return_value rtype val
+            push val
         Native_io e -> do
             val <- execute_native_io e
             leave
-            push_return_value rtype val
+            push val
 
 {- |
 This runs the method until it returns,
@@ -200,6 +202,11 @@ execute instruction =
         Iconst_5 -> iconst 5
         Lconst_0 -> lconst 0
         Lconst_1 -> lconst 1
+        Fconst_0 -> fconst 0
+        Fconst_1 -> fconst 1
+        Fconst_2 -> fconst 1
+        Dconst_0 -> dconst 0
+        Dconst_1 -> dconst 1
         Bipush b -> push (V.Integer $ fromIntegral b)
         Sipush s -> push (V.Integer $ fromIntegral s)
         Ldc c -> C.get (fromIntegral c) >>= constant_to_value >>= push
@@ -219,10 +226,26 @@ execute instruction =
         Lload_1 -> load 1 >>= push
         Lload_2 -> load 2 >>= push
         Lload_3 -> load 3 >>= push
+        Fload_0 -> load 0 >>= push
+        Fload_1 -> load 1 >>= push
+        Fload_2 -> load 2 >>= push
+        Fload_3 -> load 3 >>= push
+        Dload_0 -> load 0 >>= push
+        Dload_1 -> load 1 >>= push
+        Dload_2 -> load 2 >>= push
+        Dload_3 -> load 3 >>= push
         Aload_0 -> load 0 >>= push
         Aload_1 -> load 1 >>= push
         Aload_2 -> load 2 >>= push
         Aload_3 -> load 3 >>= push
+        Iaload -> xaload
+        Laload -> xaload
+        Faload -> xaload
+        Daload -> xaload
+        Aaload -> xaload
+        Baload -> xaload
+        Caload -> xaload
+        Saload -> xaload
         -- Lload i -> get_local i >>= push
         -- TODO check type first
         Istore n -> pop >>= store (fromIntegral n)
@@ -243,41 +266,124 @@ execute instruction =
         Astore_1 -> pop >>= store 1
         Astore_2 -> pop >>= store 2
         Astore_3 -> pop >>= store 3
+        Castore -> do
+            -- FIXME
+            value <- pop
+            V.Integer index_ <- pop
+            V.Array T.Char n r <- pop
+            A.modify_ioref r (Li.replace (U.def_value T.Char) (fromIntegral index_) value)
+        Iastore -> do
+            -- FIXME
+            value <- pop
+            V.Integer index_ <- pop
+            V.Array T.Int n r <- pop
+            A.modify_ioref r (Li.replace (U.def_value T.Char) (fromIntegral index_) value)
+        {-
         Iastore -> do
             value_ <- pop
             index_ <- pop
             array_ <- pop
             index <- case value_ of
                 V.Integer a -> return (fromIntegral a :: Int) -- XXX
-                _ -> stop (Expecting_type T.Int)
+                _ -> stop (Type_should_be (U.type_of value_) T.Int)
             case array_ of
                 V.Array elemtype@T.Int capacity ioref ->
                     case () of
                         _ | not (0 <= index && index < fromIntegral capacity) -> stop Array_index_out_of_bounds
                         _ -> modify_ioref ioref (Li.replace (U.def_value elemtype) index value_)
+                V.Null -> stop Unexpected_null
                 _ -> stop Expecting_array
-        Iadd -> add want_integer V.Integer
-        Ladd -> do
-            -- TODO find out if pop pops category-2 values correctly
-            b <- pop >>= want_long
-            a <- pop >>= want_long
-            push $ V.Long $ a + b
-        Fadd -> add want_float V.Float
-        Dadd -> do
-            b <- pop >>= want_double
-            a <- pop >>= want_double
-            push $ V.Double $ a + b
+        -}
         Pop -> pop >> return ()
         Pop2 -> pop >> return ()
         Dup -> peek >>= push
-        Isub -> (subtract <$> pop_integer <*> pop_integer) >>= push . V.Integer
+        Iadd -> binop (+) want_integer V.Integer
+        Ladd -> binop (+) want_long V.Long
+        Fadd -> binop (+) want_float V.Float
+        Dadd -> binop (+) want_double V.Double
+        Isub -> binop (-) want_integer V.Integer
+        Lsub -> binop (-) want_long V.Long
+        Fsub -> binop (-) want_float V.Float
+        Dsub -> binop (-) want_double V.Double
+        Imul -> binop (*) want_integer V.Integer
+        Lmul -> binop (*) want_long V.Long
+        Fmul -> binop (*) want_float V.Float
+        Dmul -> binop (*) want_double V.Double
+        Ishl -> do
+            value2 <- fromIntegral <$> pop_integer
+            value1 <- pop_integer
+            push $ V.Integer $ value1 `shiftL` value2
+        Iushr -> do
+            value2 <- fromIntegral <$> pop_integer
+            value1 <- pop_integer
+            -- XXX shiftR is not well-defined if value2 is negative
+            push $ V.Integer $ fromIntegral $ (fromIntegral value1 :: Word32) `shiftR` value2
         Lushr -> do
             value2 <- pop_integer
             value1 <- pop_long
             -- XXX shiftR is not well-defined if value2 is negative
             let result = fromIntegral ((fromIntegral value1 :: Word64) `shiftR` (fromIntegral value2 :: Int)) :: Int64
             push (V.Long result)
+        Iand -> binop (.&.) want_integer V.Integer
+        Land -> binop (.&.) want_long V.Long
+        Ior -> binop (.|.) want_integer V.Integer
+        Lor -> binop (.|.) want_long V.Long
+        Ixor -> binop xor want_integer V.Integer
+        Lxor -> binop xor want_long V.Long
+        Iinc i_ c ->
+            let
+                i = fromIntegral i_
+            in
+                load i
+                >>= want_integer
+                >>= store i . V.Integer . (fromIntegral c +)
+        I2l -> pop_integer >>= push . V.Long . fromIntegral
+        I2f -> pop_integer >>= push . V.Float . fromIntegral
         L2i -> pop_long >>= push . V.Integer . fromIntegral
+        F2i -> do
+            x <- pop_float
+            push $ V.Integer $ case () of
+                _ | isNaN x -> 0
+                _ -> truncate x -- TODO test if this rounds towards zero
+        Lcmp -> do
+            value2 <- pop_long
+            value1 <- pop_long
+            push $ V.Integer $ case () of
+                _ | value1 < value2 -> negate 1
+                _ | value1 > value2 -> 1
+                _ -> 0
+        Fcmpl -> do
+            value2 <- pop_float
+            value1 <- pop_float
+            push $ V.Integer $ case () of
+                _ | isNaN value1 || isNaN value2 -> negate 1
+                _ | value1 < value2 -> negate 1
+                _ | value1 > value2 -> 1
+                _ -> 0
+        Fcmpg -> do
+            value2 <- pop_float
+            value1 <- pop_float
+            push $ V.Integer $ case () of
+                _ | isNaN value1 || isNaN value2 -> 1
+                _ | value1 < value2 -> negate 1
+                _ | value1 > value2 -> 1
+                _ -> 0
+        Dcmpl -> do
+            value2 <- pop_double
+            value1 <- pop_double
+            push $ V.Integer $ case () of
+                _ | isNaN value1 || isNaN value2 -> negate 1
+                _ | value1 < value2 -> negate 1
+                _ | value1 > value2 -> 1
+                _ -> 0
+        Dcmpg -> do
+            value2 <- pop_double
+            value1 <- pop_double
+            push $ V.Integer $ case () of
+                _ | isNaN value1 || isNaN value2 -> 1
+                _ | value1 < value2 -> negate 1
+                _ | value1 > value2 -> 1
+                _ -> 0
         Ifeq ofs -> if_ (==) ofs
         Ifne ofs -> if_ (/=) ofs
         Iflt ofs -> if_ (<) ofs
@@ -290,13 +396,6 @@ execute instruction =
         If_icmpge ofs -> if_icmp (>=) ofs
         If_icmpgt ofs -> if_icmp (>) ofs
         If_icmple ofs -> if_icmp (<=) ofs
-        Iinc i_ c ->
-            let
-                i = fromIntegral i_
-            in
-                load i
-                >>= want_integer
-                >>= store i . V.Integer . (fromIntegral c +)
         -- Iload im -> get_local im >>= push
         -- Istore im -> pop >>= store im
         Getstatic c -> do
@@ -318,14 +417,11 @@ execute instruction =
             ins <- pop
             write_instance_field ins (Mk_field_ref fname ftype) val
         Goto ofs -> add_pc (ofs - 3)
-        Ireturn -> do
-            x <- pop_integer
-            leave
-            push (V.Integer x)
-        Lreturn -> do
-            x <- pop_long
-            leave
-            push (V.Long x)
+        Ireturn -> xreturn
+        Lreturn -> xreturn
+        Freturn -> xreturn
+        Dreturn -> xreturn
+        Areturn -> xreturn
         Return -> leave
         Invokestatic c -> do
             (mcls, mname, msig) <- C.get_method_ref c
@@ -384,37 +480,69 @@ execute instruction =
             v <- pop
             add_pc_if (not $ V.is_null v) (ofs - 3)
         _ -> stop $ Unknown_instruction instruction
+
     where
-        add want mkval =
-            ((+) <$> (pop >>= want) <*> (pop >>= want)) >>= push . mkval
+
+        xaload = do
+            index <- pop_integer
+            (t, n, r) <- pop_array
+            M.unless (0 <= index && index < n) $ stop Array_index_out_of_bounds
+            list <- read_ioref r
+            push $ maybe (U.def_value t) id (list `Li.at` fromIntegral index)
+
+        xreturn = do
+            x <- pop
+            leave
+            push x
+
+        binop op want mkval = do
+            value2 <- pop >>= want
+            value1 <- pop >>= want
+            push $ mkval $ op value1 value2
+
         -- The offset in control instructions is relative to the beginning of the instruction.
         if_ cmp ofs = do
-            i <- pop_integer
+            v <- pop
+            i <- case v of
+                V.Bool x -> return $ fromIntegral x -- XXX sign or zero extend?
+                V.Byte x -> return $ fromIntegral x -- XXX sign or zero extend?
+                V.Short x -> return $ fromIntegral x
+                V.Integer x -> return x
+                _ -> stop (Type_should_be (U.type_of v) T.Int)
             add_pc_if (cmp i 0) (ofs - 3)
         if_icmp cmp ofs = do
             x <- pop >>= want_integer
             y <- pop >>= want_integer
             M.when (cmp y x) $ add_pc (ofs - 3)
-        lconst = push . V.Long
         iconst = push . V.Integer
+        lconst = push . V.Long
+        fconst = push . V.Float
+        dconst = push . V.Double
         add_pc ofs = modify_frame $ \ frame ->
             frame { f_pc = f_pc frame + fromIntegral (fromIntegral ofs :: Pc_offset) }
         add_pc_if cond ofs = M.when cond $ add_pc (ofs :: Int16)
 
         pop_integer = pop >>= want_integer
         pop_long = pop >>= want_long
+        pop_float = pop >>= want_float
+        pop_double = pop >>= want_double
+        pop_array = pop >>= want_array
+
+        want_array (V.Array t n x) = return (t, n, x)
+        want_array V.Null = stop Unexpected_null
+        want_array v = stop Expecting_array
 
         want_integer (V.Integer x) = return x
-        want_integer v = stop (Expecting_type T.Int)
+        want_integer v = stop (Type_should_be (U.type_of v) T.Int)
 
         want_long (V.Long x) = return x
-        want_long v = stop (Expecting_type T.Long)
+        want_long v = stop (Type_should_be (U.type_of v) T.Long)
 
         want_float (V.Float x) = return x
-        want_float v = stop (Expecting_type T.Float)
+        want_float v = stop (Type_should_be (U.type_of v) T.Float)
 
         want_double (V.Double x) = return x
-        want_double v = stop (Expecting_type T.Double)
+        want_double v = stop (Type_should_be (U.type_of v) T.Double)
 
 -- init_instance :: V.Value -> [V.Value] ->
 
@@ -483,7 +611,7 @@ new_String :: (Execute m) => String -> m Value
 new_String str = do
     cha <- new_char_array str
     ins <- new cname
-    call cname (Bu.fromString "<init>")
+    _ <- call cname (Bu.fromString "<init>")
         (T.Mk_signature [T.Array T.Char, T.Int, T.Int] T.Void)
         [ins, cha, V.Integer 0, V.Integer (fromIntegral $ length str)]
     return ins
@@ -494,7 +622,7 @@ new_String str = do
 new_Class :: (Execute m) => m Value
 new_Class = do
     ins <- new cname
-    call cname (Bu.fromString "<init>")
+    _ <- call cname (Bu.fromString "<init>")
         (T.Mk_signature [T.Instance (Bu.fromString "java/lang/ClassLoader")] T.Void)
         [ins, V.Null] -- XXX
     return ins
