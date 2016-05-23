@@ -1,36 +1,42 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Hello
 {
-    /*
-    public interface Printer
-    {
-        void print (String s);
-    }
-
-    private final Printer p;
-
-    public Hello (Printer p)
-    {
-        this.p = p;
-    }
-    */
-
-    public static native void println (int x);
-    public static native void println (long x);
-    public static native void println (String x);
+    private static native void println (int x);
+    private static native void println (long x);
+    private static native void println (Object x);
+    // private static native void println (String x);
 
     private static long getLong ()
     {
         return 3345L;
     }
 
+    static class V0 { public long m () { return 12345L; } }
+    static class V1 extends V0 { }
+    static long invokevirtual ()
+    {
+        final V1 v = new V1();
+        return v.m();
+    }
+
     public static void main ()
     {
+        println(invokevirtual());
+        /*
+        final List<Integer> a = new ArrayList<>();
+        a.add(0);
+        a.add(1);
+        a.add(2);
+        println(a);
+        */
         // println(System.nanoTime());
         // println(123);
         // println(getLong());
         // new Hello();
         // println("Hello world");
-        System.out.println("hello world");
+        // System.out.println("hello world");
         // System.out.println("hello world");
         // new Hello().add(0L, 1L);
     }
