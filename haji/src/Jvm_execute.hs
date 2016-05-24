@@ -60,6 +60,7 @@ import Jvm_member
     )
 import Jvm_prepare -- XXX
 import Jvm_value (Value)
+import Jvm_type (Signature)
 import qualified Jvm_arch as A
 import qualified Jvm_constant as C
 import qualified Jvm_decode as D
@@ -90,6 +91,21 @@ init_class cls = do
                 (Bu.fromString "<clinit>")
                 (T.Mk_signature [] T.Void)
 
+resolve_method :: (Execute m) => Class -> Method_name -> Signature -> m (Class, Method)
+resolve_method orig_cls mname msig = loop orig_cls
+    where
+        loop cls = do
+            -- FIXME 5.4.3.3
+            m0 <- find_method cls mname msig
+            case m0 of
+                Just m -> return (cls, m)
+                Nothing -> do
+                    case c_super cls of
+                        Just sup -> do
+                            s <- load_and_init_class sup
+                            loop s
+                        Nothing -> stop (Method_not_found (c_name orig_cls) mname msig)
+
 {- |
 Load, initialize, and register the class
 and all its superclasses (but not interfaces).
@@ -98,21 +114,25 @@ In this module, you should use this function
 instead of using 'L.load_class' directly.
 -}
 load_and_init_class :: (Execute m) => A.Class_name -> m Class
-load_and_init_class name = do
-    -- Should we also load, initialize, and register the class's interfaces?
-    cls <- L.load_class name
-    case A.c_initialized cls of
-        True ->
-            return cls
-        _ -> do
-            -- XXX: should we have Uninitialized, Initializing, and Initialized?
-            case c_super cls of
-                Nothing -> return ()
-                Just super -> load_and_init_class super >> return ()
-            let cls1 = cls { A.c_initialized = True }
-            A.add_loaded_class cls1
-            init_class cls1
-            A.get_loaded_class name
+load_and_init_class = loop 0
+    where
+        max_depth = 32
+        loop d _ | d >= max_depth = stop (Hierarchy_too_deep d)
+        loop d name = do
+            -- Should we also load, initialize, and register the class's interfaces?
+            cls <- L.load_class name
+            case A.c_initialized cls of
+                True ->
+                    return cls
+                _ -> do
+                    -- XXX: should we have Uninitialized, Initializing, and Initialized?
+                    case c_super cls of
+                        Nothing -> return ()
+                        Just super -> loop (d + 1) super >> return ()
+                    let cls1 = cls { A.c_initialized = True }
+                    A.add_loaded_class cls1
+                    init_class cls1
+                    A.get_loaded_class name
 
 -- * Bytecode execution
 
@@ -442,12 +462,13 @@ execute instruction =
             -- TODO native
         Invokevirtual c -> do
             -- FIXME
-            (mcls, mname, msig) <- C.get_method_ref c
-            target_class <- load_and_init_class mcls
-            target_method <- get_method target_class mname msig
+            (_, mname, msig) <- C.get_method_ref c
             let nargs = 1 + length (T.s_arg_types msig)
-            args <- reverse <$> M.replicateM nargs pop
-            begin_call target_class target_method args
+            -- XXX
+            this@(V.Instance cname _) : args <- reverse <$> M.replicateM nargs pop
+            origin_class <- load_and_init_class cname
+            (target_class, target_method) <- resolve_method origin_class mname msig
+            begin_call target_class target_method (this : args)
         Invokespecial c -> do
             -- FIXME
             (mcls, mname, msig) <- C.get_method_ref c
@@ -471,6 +492,21 @@ execute instruction =
                 V.Array _ n _ -> push (V.Integer n)
                 V.Null -> stop Unexpected_null
                 _ -> stop Expecting_array
+        Athrow -> do
+            -- XXX
+            val <- pop
+            let msg = T.pretty (U.type_of val)
+            stop (Unhandled_exception msg)
+        Instanceof c -> do
+            sup <- C.get_class_name c
+            obj <- pop
+            val <- case obj of
+                V.Null -> return 0
+                V.Instance cls _ -> do
+                    boolify <$> is_subclass_of cls sup
+                -- TODO implement https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.instanceof
+                _ -> return 0
+            push $ V.Integer val
         Monitorenter -> return () -- TODO implement
         Monitorexit -> return () -- TODO implement
         Ifnull ofs -> do
@@ -482,6 +518,17 @@ execute instruction =
         _ -> stop $ Unknown_instruction instruction
 
     where
+
+        is_subclass_of name0 name1 | name0 == name1 = return True
+        is_subclass_of name0 name1 = do
+            cls0 <- load_and_init_class name0
+            case c_super cls0 of
+                Nothing -> return False
+                Just sup0 -> is_subclass_of sup0 name1
+            -- TODO c_interfaces
+
+        boolify False = 0
+        boolify True = 1
 
         xaload = do
             index <- pop_integer

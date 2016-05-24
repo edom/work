@@ -59,6 +59,7 @@ import Jvm_instruction
     (
         Instruction
     )
+import Jvm_member (Field_ref, fr_type, fr_name)
 
 import qualified Jvm_arch as A
 import qualified Jvm_build as B
@@ -97,12 +98,10 @@ This returns the final state of the virtual machine.
 runvm :: Option -> IO A.State
 runvm option = do
     flip A.exec_io init_state $ do
-        -- TODO implement Nothing and Just From_jar
-        let Just (From_class_path main_class_name) = o_main_class option
-        main_class <- E.load_and_init_class (Bu.fromString main_class_name)
         A.bind (Bu.fromString "java/lang/Class")
             T.Bool (Bu.fromString "desiredAssertionStatus0") [T.Instance (Bu.fromString "java/lang/Class")] $ do
-                return $ V.Bool 0
+                -- return $ V.Bool 0
+                return $ V.Bool 1 -- XXX
         A.bind (Bu.fromString "java/lang/Float")
             T.Int (Bu.fromString "floatToRawIntBits") [T.Float] $ do
                 V.Float x <- A.load 0 -- FIXME
@@ -131,16 +130,16 @@ runvm option = do
                 case obj of
                     V.Instance t r -> do
                         fieldvals <- A.read_ioref r
-                        liftIO $ putStrLn $ show t ++ "\n" ++ unlines (map (\ (f, v) -> show f ++ " = " ++ V.pretty v) fieldvals)
+                        fieldshows <- liftIO $ mapM (\ (f, v) -> (,) (T.pretty (fr_type f) ++ " " ++ Bu.toString (fr_name f)) <$> V.pretty_io v) fieldvals
+                        liftIO $ putStrLn $ show t ++ "\n" ++ unlines (map (\ (f, v) -> f ++ " = " ++ v) fieldshows)
                     _ ->
                         liftIO $ putStrLn $ V.pretty obj
                 return V.Padding
         A.bind (Bu.fromString "sun/misc/VM") -- XXX
             T.Void (Bu.fromString "initialize") [] $ do
                 return V.Padding
-        let _Object = T.Instance (Bu.fromString "java/lang/Object")
         A.bind (Bu.fromString "java/lang/System")
-            T.Void (Bu.fromString "arraycopy") [_Object, T.Int, _Object, T.Int, T.Int] $ do
+            T.Void (Bu.fromString "arraycopy") [T._Object, T.Int, T._Object, T.Int, T.Int] $ do
                 -- FIXME
                 src@(V.Array _ _ rs) <- A.load 0
                 V.Integer src_begin_ <- A.load 1
@@ -161,6 +160,9 @@ runvm option = do
                         ++ take count (drop src_begin (asrc ++ repeat (U.def_value dst_elem_type)))
                         ++ take (dst_length - (dst_begin + count)) (drop (dst_begin + count) xadst)
                 return $ V.Bool 0
+        -- TODO implement Nothing and Just From_jar
+        let Just (From_class_path main_class_name) = o_main_class option
+        main_class <- E.load_and_init_class (Bu.fromString main_class_name)
         O.call main_class_name
             -- DEBUG T.Void "main" [T.Array (T.Instance (Bu.fromString "java/lang/String"))]
             T.Void "main" []

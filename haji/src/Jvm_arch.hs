@@ -388,6 +388,7 @@ data Status
     | Expecting_string
     | Expecting_instance
     | Expecting_array
+    | Hierarchy_too_deep Int
     | Array_index_out_of_bounds
     | Unexpected_null
     | Failed_loading_class Class_name Message
@@ -400,6 +401,7 @@ data Status
     | Invalid_tableswitch Message
     | Invalid_lookupswitch Message
     | Invalid_reserved Int Word8
+    | Unhandled_exception Message
     | Not_implemented Message
     deriving (Read, Show, Eq)
 
@@ -539,6 +541,7 @@ instance Applicative S where
     (<*>) = M.ap
 
 instance Monad S where
+    fail = stop . Not_implemented
     return x = Mk_s $ \ s -> (s, Just x)
     (>>=) w k = Mk_s $ \ s0 ->
         let
@@ -568,6 +571,7 @@ instance Applicative J where
     (<*>) = M.ap
 
 instance Monad J where
+    fail = stop . Not_implemented
     return a = Mk_j $ \ s -> return (s, Just a)
     (>>=) m k = Mk_j $ \ s_0 -> do
         case is_ready s_0 of

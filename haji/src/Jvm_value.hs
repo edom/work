@@ -5,12 +5,13 @@ module Jvm_value
 where
 
 import qualified Data.Char as Ch
+import qualified Data.List as List
 
 import qualified Data.ByteString as Bs
 
 import qualified Data.ByteString.UTF8 as Bu
 
-import Data.IORef (IORef)
+import Data.IORef (IORef, readIORef)
 import Data.Int
     (
         Int8
@@ -66,6 +67,17 @@ pretty v = case v of
     Double a -> "double " ++ show a
     Instance c _ -> "instanceof " ++ Bu.toString c
     Array t n _ -> T.pretty t ++ "[" ++ show n ++ "]"
+
+pretty_io :: Value -> IO String
+pretty_io v = case v of
+    Array T.Char n r -> do
+        content <- string_from_jchar_list <$> readIORef r
+        return $ pretty v ++ " " ++ show content
+    Array t n r -> do
+        content <- readIORef r
+        texts <- mapM pretty_io content
+        return $ pretty v ++ " [" ++ List.intercalate ", " texts ++ "]"
+    _ -> return (pretty v)
 
 is_category_2 :: Value -> Bool
 is_category_2 v = case v of
