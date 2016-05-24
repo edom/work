@@ -19,6 +19,23 @@ stack haddock
 
 # Demo
 
+Do this once:
+
+```
+cd <PROJECT-PATH>
+( mkdir -p jre/lib/rt; cd jre/lib/rt; jar xf <PATH-TO-RT-JAR> )
+```
+
+where `<PROJECT-PATH>` is the path to the `haji` directory and `<PATH-TO-RT-JAR>` is the path to `rt.jar`.
+This assumes that you have installed a Java Runtime Environment like OpenJDK JRE.
+To find where `rt.jar` is, you can use `locate`:
+
+```
+locate '*/rt.jar'
+```
+
+Then try running `Hello.class`:
+
 ```
 javac Hello.java
 stack ghci
