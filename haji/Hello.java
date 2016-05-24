@@ -3,27 +3,60 @@ import java.util.List;
 
 public class Hello
 {
-    private static native void println (int x);
-    private static native void println (long x);
-    private static native void println (Object x);
-    // private static native void println (String x);
 
     private static long getLong ()
     {
         return 3345L;
     }
 
-    static class V0 { public long m () { return 12345L; } }
+    static class V0 { public long m () { return 1L; } }
     static class V1 extends V0 { }
-    static long invokevirtual ()
+
+    static boolean invokevirtual_0 ()
+    {
+        final V0 v = new V1();
+        return v.m() == 1L;
+    }
+
+    static boolean invokevirtual_1 ()
     {
         final V1 v = new V1();
-        return v.m();
+        return v.m() == 1L;
+    }
+
+    static class V2 { public long m () { return 2L; } }
+    static class V3 extends V2 { public long m () { return 3L; } }
+
+    static boolean invokevirtual_2 ()
+    {
+        final V2 v = new V3();
+        return v.m() == 3L;
+    }
+
+    static boolean invokevirtual_3 ()
+    {
+        final V3 v = new V3();
+        return v.m() == 3L;
+    }
+
+    // private static native void println (int x);
+    private static native void println (long x);
+    private static native void println (Object x);
+    // private static native void println (String x);
+
+    // private static void println (long x) { System.out.println(x); }
+
+    public static void main (String[] args)
+    {
+        main();
     }
 
     public static void main ()
     {
-        println(invokevirtual());
+        assert invokevirtual_0();
+        assert invokevirtual_1();
+        assert invokevirtual_2();
+        assert invokevirtual_3();
         /*
         final List<Integer> a = new ArrayList<>();
         a.add(0);
