@@ -35,8 +35,6 @@ import qualified Text.Read as Tr
 
 import qualified Control.Monad.Trans.Writer as W
 
-import qualified Text.Parsec as P
-
 import Prelude hiding (read)
 
 {- $usage
