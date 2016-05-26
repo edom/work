@@ -24,6 +24,10 @@ import Data.Word
         , Word32
     )
 
+import Data.ByteString (ByteString)
+
+import Data.Serialize (Get)
+
 import qualified Data.ByteString as Bs
 
 import qualified Data.Serialize as Se
@@ -46,7 +50,7 @@ import Jvm_type
 {- |
 The 'FilePath' argument is used for error reporting.
 -}
-parse_class :: FilePath -> Bs.ByteString -> Either String Class
+parse_class :: FilePath -> ByteString -> Either String Class
 parse_class path =
     Se.runGet grammar
     where
@@ -55,56 +59,13 @@ parse_class path =
             M.unless (magic == 0xcafebabe) $ fail "bad magic"
             minor <- u2
             major <- u2
-            -- "In retrospect, making 8-byte constants take two constant pool entries was a poor choice."
-            -- https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.5
-            pool <- do
-                n <- fromIntegral <$> u2
-                let
-                    count = n - 1
-                    loop result i | i >= count = return (reverse result)
-                    loop result i = do
-                        tag <- u1
-                        let
-                            mem_index = i + 1
-                            one = fmap (\ x -> [x])
-                            two = fmap (\ x -> [P_unused, x]) -- reversed
-                            -- P_unused is not stored on disk, but is present on memory.
-                        new_entries <- case tag of
-                            1 -> do
-                                num <- fromIntegral <$> u2
-                                one $ P_utf8 <$> Se.getByteString num
-                            3 -> one $ P_integer <$> s4
-                            4 -> one $ P_float <$> f4
-                            5 -> two $ P_long <$> s8
-                            6 -> two $ P_double <$> f8
-                            7 -> one $ P_class <$> u2
-                            8 -> one $ P_string <$> u2
-                            9 -> one $ P_fieldref <$> u2 <*> u2
-                            10 -> one $ P_methodref <$> u2 <*> u2
-                            11 -> one $ P_interfacemethodref <$> u2 <*> u2
-                            12 -> one $ P_nameandtype <$> u2 <*> u2
-                            _ -> fail $ path ++ ": constant pool entry #" ++ show mem_index ++ " (D" ++ show i ++ ") has invalid tag: " ++ show tag
-                        let
-                            new_i = i + length new_entries
-                            -- Choose one.
-                            -- trace u = Dbg.trace ("#" ++ show mem_index ++ " (D" ++ show i ++ "): " ++ show new_entries) u
-                            trace = id
-                        trace $ new_i `seq` loop (new_entries ++ result) new_i
-                loop [] 0
+            pool <- g_pool
             access <- u2
             this <- u2
             super <- u2
-            ifaces <- do
-                count <- fromIntegral <$> u2
-                M.replicateM count u2
-            fields <- do
-                count <- fromIntegral <$> u2
-                M.replicateM count $
-                    Mk_field_info <$> u2 <*> u2 <*> u2 <*> g_attributes
-            methods <- do
-                count <- fromIntegral <$> u2
-                M.replicateM count $
-                    Mk_method_info <$> u2 <*> u2 <*> u2 <*> g_attributes
+            ifaces <- array_of u2
+            fields <- array_of $ Mk_field_info <$> u2 <*> u2 <*> u2 <*> g_attributes
+            methods <- array_of $ Mk_method_info <$> u2 <*> u2 <*> u2 <*> g_attributes
             attrs <- g_attributes
             return $ Mk_class minor major pool access this super ifaces fields methods attrs
         f8 = Se.getFloat64be
@@ -114,6 +75,49 @@ parse_class path =
         u4 = Se.getWord32be
         u2 = Se.getWord16be
         u1 = Se.getWord8
+        -- "In retrospect, making 8-byte constants take two constant pool entries was a poor choice."
+        -- https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.5
+        g_pool = do
+            n <- fromIntegral <$> u2
+            let
+                count = n - 1
+                loop result i | i >= count = return (reverse result)
+                loop result i = do
+                    tag <- u1
+                    let
+                        mem_index = i + 1
+                        one = fmap (\ x -> [x])
+                        two = fmap (\ x -> [P_unused, x]) -- reversed
+                        -- P_unused is not stored on disk, but is present on memory.
+                    new_entries <- case tag of
+                        1 -> one $ P_utf8 <$> g_string u2
+                        3 -> one $ P_integer <$> s4
+                        4 -> one $ P_float <$> f4
+                        5 -> two $ P_long <$> s8
+                        6 -> two $ P_double <$> f8
+                        7 -> one $ P_class <$> u2
+                        8 -> one $ P_string <$> u2
+                        9 -> one $ P_fieldref <$> u2 <*> u2
+                        10 -> one $ P_methodref <$> u2 <*> u2
+                        11 -> one $ P_interfacemethodref <$> u2 <*> u2
+                        12 -> one $ P_nameandtype <$> u2 <*> u2
+                        _ -> fail $ path ++ ": constant pool entry #" ++ show mem_index ++ " (D" ++ show i ++ ") has invalid tag: " ++ show tag
+                    let
+                        new_i = i + length new_entries
+                        -- For debugging, uncomment the first definition of 'trace' and comment the second one.
+                        -- trace u = Dbg.trace ("#" ++ show mem_index ++ " (D" ++ show i ++ "): " ++ show new_entries) u
+                        trace = id
+                    trace $ new_i `seq` loop (new_entries ++ result) new_i
+            loop [] 0
+
+g_string :: (Integral a) => Get a -> Get ByteString
+g_string get_length =
+    get_length >>= Se.getByteString . fromIntegral
+
+array_of :: Get a -> Get [a]
+array_of body = do
+    count <- fromIntegral <$> Se.getWord16be
+    M.replicateM count body
 
 -- * Access constant pool
 
@@ -127,7 +131,7 @@ cp_get_/something/ :: Class -> Cp_index -> Either String /sometype/
 
 -}
 
-cp_get_utf8 :: Class -> Cp_index -> Either String Bs.ByteString
+cp_get_utf8 :: Class -> Cp_index -> Either String ByteString
 cp_get_utf8 c i = do
     e <- cp_get c i
     case e of
@@ -170,7 +174,7 @@ data Code
     {
         cd_max_stack :: Word16
         , cd_max_local :: Word16
-        , cd_code :: Bs.ByteString
+        , cd_code :: ByteString
         , cd_handlers :: [Handler]
         , cd_attributes :: [Attribute]
     }
@@ -180,16 +184,14 @@ data Code
 The input is the attribute content.
 It does not include the 6-byte attribute header (name and size).
 -}
-parse_code_attr_content :: Bs.ByteString -> Either String Code
+parse_code_attr_content :: ByteString -> Either String Code
 parse_code_attr_content =
     Se.runGet grammar
     where
         grammar = do
             max_stack <- u2
             max_local <- u2
-            code <- do
-                code_length <- fromIntegral <$> u4
-                Se.getByteString code_length -- XXX can be too big
+            code <- g_string u4 -- XXX can be too big
             handlers <- do
                 count <- fromIntegral <$> u2
                 M.replicateM count $ Mk_handler <$> u2 <*> u2 <*> u2 <*> u2
@@ -199,13 +201,9 @@ parse_code_attr_content =
         u2 = Se.getWord16be
         u1 = Se.getWord8
 
-g_attributes :: Se.Get [Attribute]
-g_attributes = do
-    n <- fromIntegral <$> u2
-    M.replicateM n $ do
-        name <- u2
-        count <- fromIntegral <$> u4
-        Mk_attribute name <$> Se.getByteString count
+g_attributes :: Get [Attribute]
+g_attributes =
+    array_of $ Mk_attribute <$> u2 <*> g_string u4
     where
         u4 = Se.getWord32be
         u2 = Se.getWord16be
@@ -225,20 +223,20 @@ data Handler
 {- |
 The input is a UTF-8 bytestring.
 -}
-parse_field_type :: Bs.ByteString -> Either String Type
+parse_field_type :: ByteString -> Either String Type
 parse_field_type =
     either (Left . show) Right . P.parse field_type "" . Bu.toString
 
 {- |
 The input is a UTF-8 bytestring.
 -}
-parse_method_type :: Bs.ByteString -> Either String Signature
+parse_method_type :: ByteString -> Either String Signature
 parse_method_type =
     either (Left . show) Right . P.parse method_type "" . Bu.toString
 
 -- * Low-level IO
 
-slurp :: FilePath -> IO Bs.ByteString
+slurp :: FilePath -> IO ByteString
 slurp = Bs.readFile
 
 -- * Signature parsers
@@ -271,7 +269,7 @@ type Parser a = P.Parsec String () a
 -- * Types
 
 data Constant
-    = P_utf8 Bs.ByteString
+    = P_utf8 ByteString
     | P_integer Int32
     | P_float Float
     | P_long Int64
@@ -289,7 +287,7 @@ data Attribute
     = Mk_attribute
     {
         a_name :: Word16
-        , a_content :: Bs.ByteString
+        , a_content :: ByteString
     }
     deriving (Read, Show, Eq)
 
