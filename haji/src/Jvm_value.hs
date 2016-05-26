@@ -36,7 +36,12 @@ import qualified Jvm_type as T
 
 -- * Value
 
--- | An inhabitant of this type is an element in the operand stack.
+{- |
+An inhabitant of this type represents things that Java variables can hold.
+
+From execution point of view, an inhabitant of this type represents
+an element of an operand stack or of a local variable array.
+-}
 data Value
     = Padding -- ^ This should follow a Long and a Double, just to make the indexes right
     | Null -- ^ can we use Null for Padding?
@@ -51,8 +56,15 @@ data Value
     | Instance Class_name (IORef [(Field_ref, Value)]) -- ^ embrace the 'IO' for instance field values
     | Array T.Type Int32 (IORef [Value])
 
+type Class_name = Bs.ByteString
+
 -- TODO use ForeignPtr for Array?
 
+-- * Pretty-printing
+
+{- |
+If the input is an instance, this does not read its field values.
+-}
 pretty :: Value -> String
 pretty v = case v of
     Padding -> "<padding>"
@@ -68,6 +80,11 @@ pretty v = case v of
     Instance c _ -> "instanceof " ++ Bu.toString c
     Array t n _ -> T.pretty t ++ "[" ++ show n ++ "]"
 
+{- |
+If the input is an instance, this also reads its field values.
+
+This returns the string; this does not print the string yet.
+-}
 pretty_io :: Value -> IO String
 pretty_io v = case v of
     Array T.Char n r -> do
@@ -79,19 +96,7 @@ pretty_io v = case v of
         return $ pretty v ++ " [" ++ List.intercalate ", " texts ++ "]"
     _ -> return (pretty v)
 
-is_category_2 :: Value -> Bool
-is_category_2 v = case v of
-    Long _ -> True
-    Double _ -> True
-    _ -> False
-
-is_null :: Value -> Bool
-is_null Null = True
-is_null _ = False
-
-type Class_name = Bs.ByteString
-
--- * Char
+-- * Marshalling strings
 
 -- XXX This may truncate the Int?
 -- XXX This is grossly inefficient?
@@ -103,6 +108,47 @@ string_from_jchar_list = map (Ch.chr . unchar)
     where
         unchar (Char x) = fromIntegral x
         unchar _ = 0 -- XXX
+
+-- * Checking values
+
+{- |
+A value is a category-2 value iff it takes 8 bytes.
+-}
+is_category_2 :: Value -> Bool
+is_category_2 v = case v of
+    Long _ -> True
+    Double _ -> True
+    _ -> False
+
+{- |
+Only 'Null' satisfies this predicate.
+-}
+is_null :: Value -> Bool
+is_null Null = True
+is_null _ = False
+
+-- * Converting Java 'Value's to Haskell values
+
+{- $
+For the other way around (converting Haskell values to Java 'Value's),
+just use the 'Value' constructors ('Integer', 'Long', and so on).
+-}
+
+integer :: Value -> Maybe Int32
+integer (Integer x) = return x
+integer v = Nothing
+
+long :: Value -> Maybe Int64
+long (Long x) = return x
+long v = Nothing
+
+float :: Value -> Maybe Float
+float (Float x) = return x
+float v = Nothing
+
+double :: Value -> Maybe Double
+double (Double x) = return x
+double v = Nothing
 
 -- * Marshalling
 

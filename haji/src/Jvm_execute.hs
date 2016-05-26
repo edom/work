@@ -305,7 +305,7 @@ execute instruction =
             array_ <- pop
             index <- case value_ of
                 V.Integer a -> return (fromIntegral a :: Int) -- XXX
-                _ -> stop (Type_should_be (U.type_of value_) T.Int)
+                _ -> stop (Type_must_be (U.type_of value_) T.Int)
             case array_ of
                 V.Array elemtype@T.Int capacity ioref ->
                     case () of
@@ -555,7 +555,7 @@ execute instruction =
                 V.Byte x -> return $ fromIntegral x -- XXX sign or zero extend?
                 V.Short x -> return $ fromIntegral x
                 V.Integer x -> return x
-                _ -> stop (Type_should_be (U.type_of v) T.Int)
+                _ -> stop (Type_must_be (U.type_of v) T.Int)
             add_pc_if (cmp i 0) (ofs - 3)
         if_icmp cmp ofs = do
             x <- pop >>= want_integer
@@ -579,17 +579,12 @@ execute instruction =
         want_array V.Null = stop Unexpected_null
         want_array v = stop Expecting_array
 
-        want_integer (V.Integer x) = return x
-        want_integer v = stop (Type_should_be (U.type_of v) T.Int)
+        want_integer v = maybe (v `type_must_be` T.Int) return (V.integer v)
+        want_long v = maybe (v `type_must_be` T.Long) return (V.long v)
+        want_float v = maybe (v `type_must_be` T.Float) return (V.float v)
+        want_double v = maybe (v `type_must_be` T.Double) return (V.double v)
 
-        want_long (V.Long x) = return x
-        want_long v = stop (Type_should_be (U.type_of v) T.Long)
-
-        want_float (V.Float x) = return x
-        want_float v = stop (Type_should_be (U.type_of v) T.Float)
-
-        want_double (V.Double x) = return x
-        want_double v = stop (Type_should_be (U.type_of v) T.Double)
+        type_must_be v t = stop (Type_must_be (U.type_of v) t)
 
 -- init_instance :: V.Value -> [V.Value] ->
 

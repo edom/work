@@ -381,7 +381,7 @@ data Status
     | Decode_error Word8
     | Unknown_instruction Instruction
     | Need_io -- ^ usually requested by a native method
-    | Type_should_be Type Type -- ^ actual-type expected-type
+    | Type_must_be Type Type -- ^ actual-type expected-type
     | Expecting_fieldref
     | Expecting_methodref
     | Expecting_class_name
