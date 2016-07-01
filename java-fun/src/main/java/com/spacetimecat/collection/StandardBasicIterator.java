@@ -2,6 +2,9 @@ package com.spacetimecat.collection;
 
 /**
  * <p>This wraps a {@link java.util.Iterator}.</p>
+ *
+ * <p>The underlying Iterator cannot return null because
+ * BasicIterator uses null to mean that there are no more things.</p>
  */
 final class StandardBasicIterator<A> implements BasicIterator<A>
 {
@@ -16,6 +19,8 @@ final class StandardBasicIterator<A> implements BasicIterator<A>
     public A next ()
     {
         if (!i.hasNext()) { return null; }
-        return i.next();
+        final A a = i.next();
+        if (a == null) { throw new NullPointerException("this iterator forbids nulls"); }
+        return a;
     }
 }
