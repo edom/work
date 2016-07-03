@@ -1,14 +1,14 @@
 package com.spacetimecat.collection;
 
-import com.spacetimecat.function.Function2;
+import com.spacetimecat.function.BasicFunction2;
 
-public final class ZipBasicIterable<A, B, C> implements BasicIterable<C>
+final class ZipBasicIterable<A, B, C> implements BasicIterable<C>
 {
     private final BasicIterable<A> ia;
     private final BasicIterable<B> ib;
-    private final Function2<A, B, C> f;
+    private final BasicFunction2<A, B, C> f;
 
-    public ZipBasicIterable (BasicIterable<A> ia, BasicIterable<B> ib, Function2<A, B, C> f)
+    public ZipBasicIterable (BasicIterable<A> ia, BasicIterable<B> ib, BasicFunction2<A, B, C> f)
     {
         this.ia = ia;
         this.ib = ib;

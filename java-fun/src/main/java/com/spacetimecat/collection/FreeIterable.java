@@ -1,51 +1,53 @@
 package com.spacetimecat.collection;
 
-import com.spacetimecat.function.Function1;
-import com.spacetimecat.function.Function2;
-import com.spacetimecat.function.Procedure1;
-
-import java.util.Arrays;
+import com.spacetimecat.function.BasicFunction1;
+import com.spacetimecat.function.BasicFunction2;
+import com.spacetimecat.function.BasicPredicate1;
+import com.spacetimecat.function.BasicProcedure1;
 
 /**
  * <p>If you have a {@link BasicIterable}, this gives you an {@link Iterable} for free.</p>
- * @param <A>
+ * @param <A> element type
  */
-public final class FreeIterable<A> implements Iterable<A>
+final class FreeIterable<A> implements Iterable<A>
 {
     private final BasicIterable<A> bi;
 
-    public FreeIterable (BasicIterable<A> bi)
+    FreeIterable (BasicIterable<A> bi)
     {
         this.bi = bi;
     }
 
-    public static <A> FreeIterable<A> from (java.lang.Iterable<A> i)
-    {
-        return new FreeIterable(new StandardBasicIterable(i));
-    }
-
-    public static <A> FreeIterable<A> from (A... as)
-    {
-        return from(Arrays.asList(as));
-    }
-
     @Override
-    public Iterable<A> forEach (Procedure1<A> f)
+    public Iterable<A> forEach (BasicProcedure1<A> f)
     {
-        new FreeIterator<>(bi.iterator()).forEach(f);
+        iterator().forEach(f);
         return this;
     }
 
     @Override
-    public <B> Iterable<B> map (Function1<A, B> f)
+    public <B> Iterable<B> map (BasicFunction1<A, B> f)
     {
-        return new FreeIterable<>(new MappedBasicIterable<>(this, f));
+        return new FreeIterable<>(new MappedBasicIterable<>(bi, f));
     }
 
     @Override
-    public <B, C> Iterable<C> zip (BasicIterable<B> bs, Function2<A, B, C> f)
+    public <B, C> Iterable<C> zip (BasicIterable<B> bs, BasicFunction2<A, B, C> f)
     {
-        return new FreeIterable<>(new ZipBasicIterable<>(this, bs, f));
+        return new FreeIterable<>(new ZipBasicIterable<>(bi, bs, f));
+    }
+
+    @Override
+    public Iterable<A> filter (BasicPredicate1<A> p)
+    {
+        return new FreeIterable<>(new FilteredBasicIterable<>(bi, p));
+    }
+
+    @Override
+    public Iterable<A> dumpTo (java.util.Collection<A> target)
+    {
+        iterator().dumpTo(target);
+        return this;
     }
 
     @Override
@@ -55,8 +57,26 @@ public final class FreeIterable<A> implements Iterable<A>
     }
 
     @Override
-    public <B> B fold (B e, Function2<B, A, B> f)
+    public <B> B fold (B e, BasicFunction2<B, A, B> f)
     {
-        return new FreeIterator<>(bi.iterator()).fold(e, f);
+        return iterator().fold(e, f);
+    }
+
+    @Override
+    public A at (int i)
+    {
+        return iterator().at(i);
+    }
+
+    @Override
+    public A at (Integer i)
+    {
+        return at(i.intValue());
+    }
+
+    @Override
+    public java.util.List<A> toNewStdList ()
+    {
+        return iterator().toNewStdList();
     }
 }

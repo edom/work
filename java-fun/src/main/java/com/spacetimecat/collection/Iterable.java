@@ -1,17 +1,45 @@
 package com.spacetimecat.collection;
 
-import com.spacetimecat.function.Function1;
-import com.spacetimecat.function.Function2;
-import com.spacetimecat.function.Procedure1;
+import com.spacetimecat.function.BasicFunction1;
+import com.spacetimecat.function.BasicFunction2;
+import com.spacetimecat.function.BasicPredicate1;
+import com.spacetimecat.function.BasicProcedure1;
 
-public interface Iterable<A> extends BasicIterable<A>, Foldable<A>
+/**
+ * <p>Make {@link Iterator}s.</p>
+ *
+ * <p>An iterable can be thought as a lazy list.</p>
+ *
+ * @param <A> element type
+ */
+public interface Iterable<A> extends
+    BasicIterable<A>
+    , Dumpable<A>
+    , ToNewStdList<A>
+    , Filterable<A>
+    , Foldable<A>
+    , IntegerIndexed<A>
+    , Mappable
 {
+    @Override
+    Iterator<A> iterator ();
+
     /**
+     * Call the procedure for each element.
+     *
+     * @param f procedure taking an element
+     *
      * @return this
      */
-    Iterable<A> forEach (Procedure1<A> f);
+    Iterable<A> forEach (BasicProcedure1<A> f);
 
-    <B> Iterable<B> map (Function1<A, B> f);
+    <B> Iterable<B> map (BasicFunction1<A, B> f);
 
-    <B, C> Iterable<C> zip (BasicIterable<B> bs, Function2<A, B, C> f);
+    <B, C> Iterable<C> zip (BasicIterable<B> bs, BasicFunction2<A, B, C> f);
+
+    @Override
+    Iterable<A> filter (BasicPredicate1<A> p);
+
+    @Override
+    Iterable<A> dumpTo (java.util.Collection<A> target);
 }

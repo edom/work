@@ -5,7 +5,7 @@ package com.spacetimecat;
  *
  * <p>An {@link UncheckedException} must have a {@link #getCause() cause}.</p>
  */
-public final class UncheckedException extends RuntimeException
+public class UncheckedException extends RuntimeException
 {
     public UncheckedException (String message, Throwable cause)
     {

@@ -1,15 +1,14 @@
 package com.spacetimecat.collection;
 
-import com.spacetimecat.function.Function1;
-import com.spacetimecat.function.Function2;
-import com.spacetimecat.function.Procedure1;
+import com.spacetimecat.function.BasicFunction1;
+import com.spacetimecat.function.BasicProcedure1;
 
 final class MappedBasicIterator<A, B> implements BasicIterator<B>
 {
     private final BasicIterator<A> bi;
-    private final Function1<A, B> f;
+    private final BasicFunction1<A, B> f;
 
-    MappedBasicIterator (BasicIterator<A> bi, Function1<A, B> f)
+    MappedBasicIterator (BasicIterator<A> bi, BasicFunction1<A, B> f)
     {
         this.bi = bi;
         this.f = f;
@@ -20,31 +19,31 @@ final class MappedBasicIterator<A, B> implements BasicIterator<B>
     {
         final A a = bi.next();
         if (a == null) { return null; }
-        return f.call(a);
+        return f.at(a);
     }
 
-    private static <A, B> Procedure1<A> then (final Function1<A, B> f, final Procedure1<B> g)
+    private static <A, B> BasicProcedure1<A> then (final BasicFunction1<A, B> f, final BasicProcedure1<B> g)
     {
-        return new Procedure1<A>()
+        return new BasicProcedure1<A>()
         {
             @Override
             public void call (A a)
             {
-                final B b = f.call(a);
+                final B b = f.at(a);
                 g.call(b);
             }
         };
     }
 
-    private static <A, B, C> Function1<A, C> then (final Function1<A, B> f, final Function1<B, C> g)
+    private static <A, B, C> BasicFunction1<A, C> then (final BasicFunction1<A, B> f, final BasicFunction1<B, C> g)
     {
-        return new Function1<A, C>()
+        return new BasicFunction1<A, C>()
         {
             @Override
-            public C call (A a)
+            public C at (A a)
             {
-                final B b = f.call(a);
-                return g.call(b);
+                final B b = f.at(a);
+                return g.at(b);
             }
         };
     }
