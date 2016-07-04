@@ -41,5 +41,5 @@ public interface Iterable<A> extends
     Iterable<A> filter (BasicPredicate1<A> p);
 
     @Override
-    Iterable<A> dumpTo (java.util.Collection<A> target);
+    Iterable<A> dumpTo (java.util.Collection<? super A> target);
 }

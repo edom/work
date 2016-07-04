@@ -89,7 +89,7 @@ public interface Iterator<A> extends
     Iterator<A> filter (BasicPredicate1<A> p);
 
     @Override
-    Iterator<A> dumpTo (java.util.Collection<A> target);
+    Iterator<A> dumpTo (java.util.Collection<? super A> target);
 
     @Override
     <B> Iterator<B> scan (B e, BasicFunction2<B, A, B> f);

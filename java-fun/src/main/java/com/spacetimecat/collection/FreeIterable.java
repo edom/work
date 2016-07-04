@@ -44,7 +44,7 @@ final class FreeIterable<A> implements Iterable<A>
     }
 
     @Override
-    public Iterable<A> dumpTo (java.util.Collection<A> target)
+    public Iterable<A> dumpTo (java.util.Collection<? super A> target)
     {
         iterator().dumpTo(target);
         return this;

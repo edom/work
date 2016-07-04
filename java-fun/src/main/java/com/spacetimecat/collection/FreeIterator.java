@@ -98,7 +98,7 @@ class FreeIterator<A> implements Iterator<A>
     }
 
     @Override
-    public Iterator<A> dumpTo (java.util.Collection<A> target)
+    public Iterator<A> dumpTo (java.util.Collection<? super A> target)
     {
         return forEach(target::add);
     }

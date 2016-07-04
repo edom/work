@@ -1,9 +1,7 @@
 package com.spacetimecat.collection;
 
-import java.util.Collection;
-
 /**
- * <p>Can be {@link #dumpTo(Collection) dumped} to standard {@link java.util.Collection}s.</p>
+ * <p>Can be {@link #dumpTo(java.util.Collection) dumped} to standard {@link java.util.Collection}s.</p>
  *
  * @param <A> element type
  */
@@ -16,5 +14,5 @@ public interface Dumpable<A>
      *
      * @return this
      */
-    Dumpable<A> dumpTo (java.util.Collection<A> target);
+    Dumpable<A> dumpTo (java.util.Collection<? super A> target);
 }
