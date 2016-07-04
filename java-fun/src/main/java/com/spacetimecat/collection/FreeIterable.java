@@ -63,6 +63,12 @@ final class FreeIterable<A> implements Iterable<A>
     }
 
     @Override
+    public A findAny (BasicPredicate1<? super A> p)
+    {
+        return iterator().findAny(p);
+    }
+
+    @Override
     public Iterator<A> iterator ()
     {
         return new FreeIterator<>(bi.iterator());

@@ -48,4 +48,6 @@ public interface Iterable<A> extends
     Iterable<A> dumpTo (java.util.Collection<? super A> target);
 
     boolean isEmpty ();
+
+    A findAny (BasicPredicate1<? super A> p);
 }
