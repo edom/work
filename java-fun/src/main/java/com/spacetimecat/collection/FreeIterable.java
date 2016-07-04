@@ -38,7 +38,7 @@ final class FreeIterable<A> implements Iterable<A>
     }
 
     @Override
-    public Iterable<A> filter (BasicPredicate1<A> p)
+    public Iterable<A> filter (BasicPredicate1<? super A> p)
     {
         return new FreeIterable<>(new FilteredBasicIterable<>(bi, p));
     }

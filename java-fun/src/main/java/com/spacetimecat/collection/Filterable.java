@@ -16,5 +16,5 @@ public interface Filterable<A>
      * @param p the predicate
      * @return a view of p-satisfying elements
      */
-    Filterable<A> filter (BasicPredicate1<A> p);
+    Filterable<A> filter (BasicPredicate1<? super A> p);
 }

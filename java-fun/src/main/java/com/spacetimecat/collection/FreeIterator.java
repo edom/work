@@ -92,7 +92,7 @@ class FreeIterator<A> implements Iterator<A>
     }
 
     @Override
-    public Iterator<A> filter (BasicPredicate1<A> p)
+    public Iterator<A> filter (BasicPredicate1<? super A> p)
     {
         return new FreeIterator<>(new FilteredBasicIterator<>(bi, p));
     }

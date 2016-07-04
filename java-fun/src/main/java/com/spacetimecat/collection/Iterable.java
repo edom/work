@@ -38,7 +38,7 @@ public interface Iterable<A> extends
     <B, C> Iterable<C> zip (BasicIterable<B> bs, BasicFunction2<A, B, C> f);
 
     @Override
-    Iterable<A> filter (BasicPredicate1<A> p);
+    Iterable<A> filter (BasicPredicate1<? super A> p);
 
     @Override
     Iterable<A> dumpTo (java.util.Collection<? super A> target);
