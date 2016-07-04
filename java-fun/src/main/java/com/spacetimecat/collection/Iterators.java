@@ -49,6 +49,16 @@ public final class Iterators
         return from(System::nanoTime);
     }
 
+    /**
+     * <p>An iterator whose {@link Iterator#next() next} resets the count.</p>
+     * <p>Not thread-safe.</p>
+     * @return an {@link Iterator}
+     */
+    public static Iterator<Long> nanoStopwatch ()
+    {
+        return from(new BasicIteratorNanoStopwatch());
+    }
+
     public static <A> BasicIterator<A> parallelize (ExecutorService es, BasicIterator<Callable<A>> bi)
     {
         return new ImplicitFutureIterator<>(new FreeIterator<>(bi).map(es::submit));
