@@ -12,7 +12,7 @@ import com.spacetimecat.objmap.BasicUnpackRow;
  * <p>This does <em>not</em> automatically {@link RowIterator#close()}
  * the underlying {@link java.sql.ResultSet} if there are no more inputs.</p>
  *
- * <p>Use {@link #with(BasicFunction1)} to ensure that resources are properly freed.</p>
+ * <p>Use {@link Bracket#with(BasicFunction1)} to ensure that resources are properly freed.</p>
  *
  * @see java.sql.ResultSet
  * @see BasicUnpackRow
@@ -30,11 +30,12 @@ public interface RowIterator<A> extends
     @Override
     void close () throws UncheckedException;
 
-    RowIterator<A> with (BasicProcedure1<RowIterator<A>> f);
+    RowIterator<A> with (BasicProcedure1<? super RowIterator<A>> f);
 
     /**
      * <p>Pass this to f, and {@link #close() close} this after f returns,
      * even if f throws something.</p>
+     * @param f
      */
-    <B> B with (BasicFunction1<RowIterator<A>, B> f);
+    <B> B with (BasicFunction1<? super RowIterator<A>, B> f);
 }
