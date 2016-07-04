@@ -24,6 +24,8 @@ public interface Iterable<A> extends
     @Override
     Iterator<A> iterator ();
 
+    Iterable<A> append (BasicIterable<? extends A> that);
+
     /**
      * Call the procedure for each element.
      *
@@ -34,6 +36,8 @@ public interface Iterable<A> extends
     Iterable<A> forEach (BasicProcedure1<A> f);
 
     <B> Iterable<B> map (BasicFunction1<A, B> f);
+
+    <B> Iterable<B> flatMap (BasicFunction1<? super A, BasicIterable<B>> f);
 
     <B, C> Iterable<C> zip (BasicIterable<B> bs, BasicFunction2<A, B, C> f);
 

@@ -94,6 +94,12 @@ class FreeIterator<A> implements Iterator<A>
     }
 
     @Override
+    public <B> Iterator<B> flatMap (BasicFunction1<? super A, BasicIterator<B>> f)
+    {
+        return new FreeIterator<>(new BasicIteratorFlattening<>(new MappedBasicIterator<>(bi, f)));
+    }
+
+    @Override
     public Iterator<A> filter (BasicPredicate1<? super A> p)
     {
         return new FreeIterator<>(new FilteredBasicIterator<>(bi, p));

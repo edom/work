@@ -32,6 +32,12 @@ final class FreeIterable<A> implements Iterable<A>
     }
 
     @Override
+    public <B> Iterable<B> flatMap (BasicFunction1<? super A, BasicIterable<B>> f)
+    {
+        return new FreeIterable<>(new BasicIterableFlattening<>(new MappedBasicIterable<>(bi, f)));
+    }
+
+    @Override
     public <B, C> Iterable<C> zip (BasicIterable<B> bs, BasicFunction2<A, B, C> f)
     {
         return new FreeIterable<>(new ZipBasicIterable<>(bi, bs, f));
@@ -54,6 +60,12 @@ final class FreeIterable<A> implements Iterable<A>
     public Iterator<A> iterator ()
     {
         return new FreeIterator<>(bi.iterator());
+    }
+
+    @Override
+    public Iterable<A> append (BasicIterable<? extends A> that)
+    {
+        return new FreeIterable<>(new BasicIterableAppending<>(bi, that));
     }
 
     @Override

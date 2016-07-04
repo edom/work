@@ -28,5 +28,11 @@ public class Test
             System.out.println(i.iterator().any(a -> a <= 9));
             System.out.println(i.iterator().any(a -> a < 0));
         }
+
+        {
+            final Iterable<Integer> ii = Iterables.from(0, 1, 2).flatMap(i -> Iterables.from(i, i, i));
+            ii.forEach(System.out::println);
+            ii.forEach(System.out::println);
+        }
     }
 }

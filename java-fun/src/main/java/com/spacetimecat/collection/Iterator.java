@@ -85,6 +85,8 @@ public interface Iterator<A> extends
 
     <B, C> Iterator<C> zip (BasicIterator<B> that, BasicFunction2<A, B, C> f);
 
+    <B> Iterator<B> flatMap (BasicFunction1<? super A, BasicIterator<B>> f);
+
     @Override
     Iterator<A> filter (BasicPredicate1<? super A> p);
 
