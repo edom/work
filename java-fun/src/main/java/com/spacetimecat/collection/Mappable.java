@@ -5,11 +5,11 @@ import com.spacetimecat.function.BasicFunction1;
 /**
  * <p>If {@code C<A>} implements {@link Mappable},
  * then {@code C<A>} should have a method with the signature
- * {@code <B> C<B> map (BasicFunction1<A, B>)}.</p>
+ * {@code <B> C<B> map (BasicFunction1<? super A, B>)}.</p>
  *
  * <p>If {@code C<A>} implements {@link Mappable},
  * then {@code C<A>} may also have a method with the signature
- * {@code <B> C<B> mapEager (BasicFunction1<A, B>)}.</p>
+ * {@code <B> C<B> mapEager (BasicFunction1<? super A, B>)}.</p>
  *
  * <p>This aspires to be the Functor type class in Haskell,
  * but the type system of Java is not expressive enough for this,
