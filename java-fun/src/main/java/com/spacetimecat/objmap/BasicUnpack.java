@@ -1,7 +1,5 @@
 package com.spacetimecat.objmap;
 
-import java.sql.ResultSet;
-
 /**
  * <p>This transforms a packed representation {@code P}
  * to unpacked representation {@code A}.</p>
