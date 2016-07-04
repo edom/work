@@ -26,7 +26,7 @@ final class FreeIterable<A> implements Iterable<A>
     }
 
     @Override
-    public <B> Iterable<B> map (BasicFunction1<A, B> f)
+    public <B> Iterable<B> map (BasicFunction1<? super A, B> f)
     {
         return new FreeIterable<>(new MappedBasicIterable<>(bi, f));
     }
