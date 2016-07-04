@@ -29,21 +29,23 @@ class FreeIterator<A> implements Iterator<A>
     @Override
     public boolean all (BasicPredicate1<? super A> p)
     {
-        boolean b = true;
         A a;
-        do { a = bi.next(); }
-        while (a != null && (b &= p.at(a)));
-        return b;
+        while ((a = bi.next()) != null)
+        {
+            if (!p.at(a)) { return false; }
+        }
+        return true;
     }
 
     @Override
     public boolean any (BasicPredicate1<? super A> p)
     {
-        boolean b = false;
         A a;
-        do { a = bi.next(); }
-        while (a != null && !(b |= p.at(a)));
-        return b;
+        while ((a = bi.next()) != null)
+        {
+            if (p.at(a)) { return true; }
+        }
+        return false;
     }
 
     @Override
