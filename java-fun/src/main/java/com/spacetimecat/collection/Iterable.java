@@ -49,4 +49,11 @@ public interface Iterable<A> extends
     boolean isEmpty ();
 
     A findAny (BasicPredicate1<? super A> p);
+
+    /**
+     * <p>Compute every elements right now.</p>
+     * <p>Do not call this if the iterable is very large or infinite.</p>
+     * @return a view
+     */
+    Iterable<A> eager ();
 }

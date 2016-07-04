@@ -72,6 +72,12 @@ final class FreeIterable<A> implements Iterable<A>
     }
 
     @Override
+    public Iterable<A> eager ()
+    {
+        return Iterables.from(toNewStdList());
+    }
+
+    @Override
     public Iterator<A> iterator ()
     {
         return new FreeIterator<>(bi.iterator());
