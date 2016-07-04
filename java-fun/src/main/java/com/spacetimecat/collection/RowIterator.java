@@ -35,7 +35,7 @@ public interface RowIterator<A> extends
     /**
      * <p>Pass this to f, and {@link #close() close} this after f returns,
      * even if f throws something.</p>
-     * @param f
+     * @param f uses this object
      */
     <B> B with (BasicFunction1<? super RowIterator<A>, B> f);
 }
