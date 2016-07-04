@@ -134,4 +134,6 @@ public interface Iterator<A> extends
      * @see java.util.Optional
      */
     <B> CallableIterator<B> mapToCallable (BasicFunction1<A, Callable<B>> f);
+
+    A findAny (BasicPredicate1<? super A> p);
 }

@@ -137,6 +137,12 @@ class FreeIterator<A> implements Iterator<A>
     }
 
     @Override
+    public A findAny (BasicPredicate1<? super A> p)
+    {
+        return filter(p).next();
+    }
+
+    @Override
     public A next ()
     {
         return bi.next();
