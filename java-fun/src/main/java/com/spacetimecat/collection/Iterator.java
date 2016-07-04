@@ -46,7 +46,7 @@ public interface Iterator<A> extends
      * @param that the elements that will come after this iterator is exhausted
      * @return a view
      */
-    Iterator<A> append (BasicIterator<A> that);
+    Iterator<A> append (BasicIterator<? extends A> that);
 
     /**
      * <p>Suppress duplicate elements.</p>

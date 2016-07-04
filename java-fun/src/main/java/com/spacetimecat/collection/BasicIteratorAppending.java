@@ -2,10 +2,10 @@ package com.spacetimecat.collection;
 
 final class BasicIteratorAppending<A> implements BasicIterator<A>
 {
-    private final BasicIterator<A> a;
-    private final BasicIterator<A> b;
+    private final BasicIterator<? extends A> a;
+    private final BasicIterator<? extends A> b;
 
-    BasicIteratorAppending (BasicIterator<A> a, BasicIterator<A> b)
+    BasicIteratorAppending (BasicIterator<? extends A> a, BasicIterator<? extends A> b)
     {
         this.a = a;
         this.b = b;

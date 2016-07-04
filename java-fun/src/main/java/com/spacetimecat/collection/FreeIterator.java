@@ -47,7 +47,7 @@ class FreeIterator<A> implements Iterator<A>
     }
 
     @Override
-    public Iterator<A> append (BasicIterator<A> that)
+    public Iterator<A> append (BasicIterator<? extends A> that)
     {
         return new FreeIterator<>(new BasicIteratorAppending<>(bi, that));
     }
