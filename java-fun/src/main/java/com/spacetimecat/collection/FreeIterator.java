@@ -27,7 +27,7 @@ class FreeIterator<A> implements Iterator<A>
     }
 
     @Override
-    public boolean all (BasicPredicate1<A> p)
+    public boolean all (BasicPredicate1<? super A> p)
     {
         boolean b = true;
         A a;
@@ -37,7 +37,7 @@ class FreeIterator<A> implements Iterator<A>
     }
 
     @Override
-    public boolean any (BasicPredicate1<A> p)
+    public boolean any (BasicPredicate1<? super A> p)
     {
         boolean b = false;
         A a;

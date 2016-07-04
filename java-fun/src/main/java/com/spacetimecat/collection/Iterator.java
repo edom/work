@@ -37,9 +37,9 @@ public interface Iterator<A> extends
     , Mappable
     , Scan<A>
 {
-    boolean all (BasicPredicate1<A> p);
+    boolean all (BasicPredicate1<? super A> p);
 
-    boolean any (BasicPredicate1<A> p);
+    boolean any (BasicPredicate1<? super A> p);
 
     /**
      * <p>A view where this and that are concatenated.</p>
