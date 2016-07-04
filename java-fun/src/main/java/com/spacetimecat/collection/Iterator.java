@@ -77,11 +77,11 @@ public interface Iterator<A> extends
     /**
      * <p>A view of what would be if f were applied to each remaining element.</p>
      * <p>This does not call f immediately.</p>
-     * @param f mapping function
      * @param <B> result element type
+     * @param f mapping function
      * @return a view
      */
-    <B> Iterator<B> map (BasicFunction1<A, B> f);
+    <B> Iterator<B> map (BasicFunction1<? super A, B> f);
 
     <B, C> Iterator<C> zip (BasicIterator<B> that, BasicFunction2<A, B, C> f);
 

@@ -80,7 +80,7 @@ class FreeIterator<A> implements Iterator<A>
     }
 
     @Override
-    public <B> Iterator<B> map (BasicFunction1<A, B> f)
+    public <B> Iterator<B> map (BasicFunction1<? super A, B> f)
     {
         return new FreeIterator<>(new MappedBasicIterator<>(this, f));
     }

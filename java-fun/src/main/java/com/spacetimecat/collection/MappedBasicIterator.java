@@ -6,9 +6,9 @@ import com.spacetimecat.function.BasicProcedure1;
 final class MappedBasicIterator<A, B> implements BasicIterator<B>
 {
     private final BasicIterator<A> bi;
-    private final BasicFunction1<A, B> f;
+    private final BasicFunction1<? super A, B> f;
 
-    MappedBasicIterator (BasicIterator<A> bi, BasicFunction1<A, B> f)
+    MappedBasicIterator (BasicIterator<A> bi, BasicFunction1<? super A, B> f)
     {
         this.bi = bi;
         this.f = f;
