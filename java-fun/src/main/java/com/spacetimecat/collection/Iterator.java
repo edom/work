@@ -92,7 +92,7 @@ public interface Iterator<A> extends
     Iterator<A> dumpTo (java.util.Collection<? super A> target);
 
     @Override
-    <B> Iterator<B> scan (B e, BasicFunction2<B, A, B> f);
+    <B> Iterator<B> scan (B e, BasicFunction2<B, ? super A, B> f);
 
     /**
      * <p>Get the last element in this iterator.</p>

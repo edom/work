@@ -161,7 +161,7 @@ class FreeIterator<A> implements Iterator<A>
     }
 
     @Override
-    public <B> Iterator<B> scan (B e, BasicFunction2<B, A, B> f)
+    public <B> Iterator<B> scan (B e, BasicFunction2<B, ? super A, B> f)
     {
         return new FreeIterator<>(new ScanningBasicIterator<>(e, f, bi));
     }

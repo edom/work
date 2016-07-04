@@ -5,10 +5,10 @@ import com.spacetimecat.function.BasicFunction2;
 final class ScanningBasicIterator<A, B> implements BasicIterator<B>
 {
     private B e;
-    private final BasicFunction2<B, A, B> f;
+    private final BasicFunction2<B, ? super A, B> f;
     private final BasicIterator<A> bi;
 
-    public ScanningBasicIterator (B e, BasicFunction2<B, A, B> f, BasicIterator<A> bi)
+    public ScanningBasicIterator (B e, BasicFunction2<B, ? super A, B> f, BasicIterator<A> bi)
     {
         if (e == null) { throw new NullPointerException(); }
         this.e = e;

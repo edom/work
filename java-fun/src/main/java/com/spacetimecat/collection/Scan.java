@@ -22,5 +22,5 @@ public interface Scan<A>
      * where a0, a1, ... is the sequence of elements
      * produced by the original iterator.
      */
-    <B> BasicIterator<B> scan (B e, BasicFunction2<B, A, B> f);
+    <B> BasicIterator<B> scan (B e, BasicFunction2<B, ? super A, B> f);
 }
