@@ -1,9 +1,6 @@
 package com.spacetimecat.collection;
 
-import com.spacetimecat.function.BasicFunction1;
-import com.spacetimecat.function.BasicFunction2;
-import com.spacetimecat.function.BasicPredicate1;
-import com.spacetimecat.function.BasicProcedure1;
+import com.spacetimecat.function.*;
 
 /**
  * <p>If you have a {@link BasicIterable}, this gives you an {@link Iterable} for free.</p>
