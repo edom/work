@@ -116,7 +116,7 @@ class FreeIterator<A> implements Iterator<A>
     }
 
     @Override
-    public <B> Iterator<B> mapEager (BasicFunction1<A, B> f)
+    public <B> Iterator<B> mapEager (BasicFunction1<? super A, B> f)
     {
         final List<B> list = map(f).toNewStdList();
         return new FreeIterator<>(new BasicIteratorFromJavaUtil<>(list.iterator()));

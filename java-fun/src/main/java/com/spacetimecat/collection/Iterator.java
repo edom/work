@@ -111,11 +111,11 @@ public interface Iterator<A> extends
      * and returns a view of that storage.</p>
      * <p>If this iterator does not end,
      * this method should eventually throw an {@link OutOfMemoryError}.</p>
-     * @param f mapping function
      * @param <B> result element type
+     * @param f mapping function
      * @return a view
      */
-    <B> Iterator<B> mapEager (BasicFunction1<A, B> f);
+    <B> Iterator<B> mapEager (BasicFunction1<? super A, B> f);
 
     /**
      * <p>This is like {@link #mapEager(BasicFunction1)},
