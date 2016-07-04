@@ -39,6 +39,16 @@ public final class Iterators
         return new FreeRowIterator<>(new BasicIteratorFromJdbc<>(rd, m, rs));
     }
 
+    public static Iterator<Long> currentTimeMillis ()
+    {
+        return from(System::currentTimeMillis);
+    }
+
+    public static Iterator<Long> nanoTime ()
+    {
+        return from(System::nanoTime);
+    }
+
     public static <A> BasicIterator<A> parallelize (ExecutorService es, BasicIterator<Callable<A>> bi)
     {
         return new ImplicitFutureIterator<>(new FreeIterator<>(bi).map(es::submit));
