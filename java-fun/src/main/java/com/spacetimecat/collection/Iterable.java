@@ -46,4 +46,6 @@ public interface Iterable<A> extends
 
     @Override
     Iterable<A> dumpTo (java.util.Collection<? super A> target);
+
+    boolean isEmpty ();
 }

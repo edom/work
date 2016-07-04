@@ -57,6 +57,12 @@ final class FreeIterable<A> implements Iterable<A>
     }
 
     @Override
+    public boolean isEmpty ()
+    {
+        return iterator().next() == null;
+    }
+
+    @Override
     public Iterator<A> iterator ()
     {
         return new FreeIterator<>(bi.iterator());
