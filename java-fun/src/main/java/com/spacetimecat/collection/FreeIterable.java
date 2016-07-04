@@ -38,6 +38,12 @@ final class FreeIterable<A> implements Iterable<A>
     }
 
     @Override
+    public <K, V> BasicDumpableMap<K, V> mapToBasicDumpableMap (BasicFunction1<? super A, Tuple2<K, V>> f)
+    {
+        return new BasicMapCachingFromAssocListIterator<>(map(f).iterator());
+    }
+
+    @Override
     public <B, C> Iterable<C> zip (BasicIterable<B> bs, BasicFunction2<A, B, C> f)
     {
         return new FreeIterable<>(new ZipBasicIterable<>(bi, bs, f));

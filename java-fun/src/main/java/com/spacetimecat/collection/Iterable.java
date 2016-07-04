@@ -39,6 +39,8 @@ public interface Iterable<A> extends
 
     <B> Iterable<B> flatMap (BasicFunction1<? super A, BasicIterable<B>> f);
 
+    <K, V> BasicDumpableMap<K, V> mapToBasicDumpableMap (BasicFunction1<? super A, Tuple2<K, V>> f);
+
     <B, C> Iterable<C> zip (BasicIterable<B> bs, BasicFunction2<A, B, C> f);
 
     @Override
