@@ -69,7 +69,7 @@ class FreeIterator<A> implements Iterator<A>
     }
 
     @Override
-    public Iterator<A> forEach (BasicProcedure1<A> f)
+    public Iterator<A> forEach (BasicProcedure1<? super A> f)
     {
         A a;
         while ((a = bi.next()) != null)

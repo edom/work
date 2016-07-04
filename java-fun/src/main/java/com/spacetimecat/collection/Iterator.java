@@ -72,7 +72,7 @@ public interface Iterator<A> extends
      *
      * @return this, although it might be useless because this method exhausts this iterator
      */
-    Iterator<A> forEach (BasicProcedure1<A> f);
+    Iterator<A> forEach (BasicProcedure1<? super A> f);
 
     /**
      * <p>A view of what would be if f were applied to each remaining element.</p>
