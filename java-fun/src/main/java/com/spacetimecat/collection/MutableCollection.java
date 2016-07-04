@@ -7,5 +7,5 @@ public interface MutableCollection<A> extends
     @Override
     MutableCollection<A> add (A a);
 
-    MutableCollection<A> addAll (java.util.Collection<A> that);
+    MutableCollection<A> addAll (java.util.Collection<? extends A> that);
 }
