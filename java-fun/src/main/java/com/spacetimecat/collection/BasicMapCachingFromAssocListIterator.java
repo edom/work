@@ -47,4 +47,12 @@ final class BasicMapCachingFromAssocListIterator<K, V> implements BasicDumpableM
         target.putAll(cache);
         return this;
     }
+
+    @Override
+    public Map<K, V> toNewStdMap ()
+    {
+        final Map<K, V> target = new HashMap<>();
+        dumpTo(target);
+        return target;
+    }
 }
