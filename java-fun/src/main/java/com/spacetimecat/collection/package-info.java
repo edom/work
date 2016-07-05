@@ -17,14 +17,29 @@
  *
  * <h2>Common usage</h2>
  *
- * <p>The interface {@link com.spacetimecat.collection.Iterator}
- * is probably the most important interface for the users of this package.</p>
+ * <h3>Working with Iterables and Iterators</h3>
+ *
+ * <p>
+ *     When someone hands you an {@link com.spacetimecat.collection.Iterable Iterable}
+ *     or an {@link com.spacetimecat.collection.Iterator Iterator},
+ *     you can chain method calls.
+ *     See the documentations for those types.
+ * </p>
+ *
+ * <p>
+ *     Most operations are lazy; they describe what to do,
+ *     but they do not do it immediately.
+ * </p>
+ *
+ * <p>
+ *     Iterators are used for their side effects.
+ * </p>
  *
  * <p>The interfaces
  * {@link com.spacetimecat.collection.Iterable}
  * and {@link com.spacetimecat.collection.Iterator}
  * are designed for the convenience of the users of this library.
- * You might not even need to know the other interfaces.</p>
+ * </p>
  *
  * <p>To obtain an {@link com.spacetimecat.collection.Iterable},
  * use any static methods of the factory class
