@@ -1,7 +1,6 @@
 package com.spacetimecat;
 
 import com.spacetimecat.collection.BasicCollection;
-import com.spacetimecat.collection.Mutables;
 
 /**
  * <p>A collection of {@link AutoCloseable} resources, and a concise way of closing them.</p>
