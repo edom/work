@@ -32,7 +32,9 @@ public interface Iterator<A> extends
     , Dumpable<A>
     , ToNewStdList<A>
     , Filterable<A>
+    , FindAny<A>
     , Foldable<A>
+    , ForEach<A>
     , IntegerIndexed<A>
     , Mappable
     , Scan<A>
@@ -72,6 +74,7 @@ public interface Iterator<A> extends
      *
      * @return this, although it might be useless because this method exhausts this iterator
      */
+    @Override
     Iterator<A> forEach (BasicProcedure1<? super A> f);
 
     /**
@@ -134,6 +137,4 @@ public interface Iterator<A> extends
      * @see java.util.Optional
      */
     <B> CallableIterator<B> mapToCallable (BasicFunction1<A, Callable<B>> f);
-
-    A findAny (BasicPredicate1<? super A> p);
 }

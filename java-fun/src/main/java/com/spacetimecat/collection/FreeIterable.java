@@ -16,7 +16,7 @@ final class FreeIterable<A> implements Iterable<A>
     }
 
     @Override
-    public Iterable<A> forEach (BasicProcedure1<A> f)
+    public Iterable<A> forEach (BasicProcedure1<? super A> f)
     {
         iterator().forEach(f);
         return this;

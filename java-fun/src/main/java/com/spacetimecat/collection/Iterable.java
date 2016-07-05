@@ -14,7 +14,9 @@ public interface Iterable<A> extends
     , Dumpable<A>
     , ToNewStdList<A>
     , Filterable<A>
+    , FindAny<A>
     , Foldable<A>
+    , ForEach<A>
     , IntegerIndexed<A>
     , Mappable
 {
@@ -23,14 +25,8 @@ public interface Iterable<A> extends
 
     Iterable<A> append (BasicIterable<? extends A> that);
 
-    /**
-     * Call the procedure for each element.
-     *
-     * @param f procedure taking an element
-     *
-     * @return this
-     */
-    Iterable<A> forEach (BasicProcedure1<A> f);
+    @Override
+    Iterable<A> forEach (BasicProcedure1<? super A> f);
 
     <B> Iterable<B> map (BasicFunction1<? super A, B> f);
 
@@ -47,8 +43,6 @@ public interface Iterable<A> extends
     Iterable<A> dumpTo (java.util.Collection<? super A> target);
 
     boolean isEmpty ();
-
-    A findAny (BasicPredicate1<? super A> p);
 
     /**
      * <p>Compute every elements right now.</p>
