@@ -23,7 +23,7 @@ public final class Limbos
         }
         catch (Throwable t)
         {
-            return limbo.closeAndThrow(t);
+            return limbo.closeAndThrowUnchecked(t);
         }
     }
 
@@ -38,7 +38,7 @@ public final class Limbos
         }
         catch (Throwable t)
         {
-            return limbo.closeAndThrow(t);
+            return limbo.closeAndThrowUnchecked(t);
         }
     }
 }

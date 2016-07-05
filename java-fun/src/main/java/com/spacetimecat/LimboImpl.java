@@ -21,7 +21,7 @@ final class LimboImpl implements Limbo
     }
 
     @Override
-    public <A> A closeAndThrow (Throwable cause)
+    public <A> A closeAndThrowUnchecked (Throwable cause)
     {
         if (cause == null) { throw new NullPointerException(); }
         for (int i = rs.size() - 1; i >= 0; --i)

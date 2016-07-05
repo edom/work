@@ -19,12 +19,12 @@ public interface CloseableLimbo extends AutoCloseable
      *
      * @return this always throws an exception
      */
-    <A> A closeAndThrow (Throwable t);
+    <A> A closeAndThrowUnchecked (Throwable t);
 
     /**
      * <p>Close all resources.</p>
      *
-     * <p>Like {@link #closeAndThrow(Throwable)} but outside a catch block.</p>
+     * <p>Like {@link #closeAndThrowUnchecked(Throwable)} but outside a catch block.</p>
      */
     @Override
     void close ();
