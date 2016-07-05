@@ -8,7 +8,7 @@ import com.spacetimecat.function.BasicProcedure1;
  */
 public interface Bracket<R>
 {
-    R withProcedure (BasicProcedure1<? super R> f);
+    R with_ (BasicProcedure1<? super R> f);
 
     /**
      * <p>Call f with this, and clean up after f returns, even if f throws an exception.</p>
@@ -16,5 +16,5 @@ public interface Bracket<R>
      * @param <B> the type of the return value
      * @return what f returns
      */
-    <B> B withFunction (BasicFunction1<? super R, B> f);
+    <B> B with (BasicFunction1<? super R, B> f);
 }
