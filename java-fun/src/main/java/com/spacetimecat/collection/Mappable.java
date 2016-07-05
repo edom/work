@@ -3,21 +3,22 @@ package com.spacetimecat.collection;
 import com.spacetimecat.function.BasicFunction1;
 
 /**
- * <p>If {@code C<A>} implements {@link Mappable},
- * then {@code C<A>} should have a method with the signature
- * {@code <B> C<B> map (BasicFunction1<? super A, B>)}.</p>
- *
- * <p>If {@code C<A>} implements {@link Mappable},
- * then {@code C<A>} may also have a method with the signature
- * {@code <B> C<B> mapEager (BasicFunction1<? super A, B>)}.</p>
- *
- * <p>This aspires to be the Functor type class in Haskell,
- * but the type system of Java is not expressive enough for this,
- * so {@link Mappable} is just a marker interface,
- * and we depend on the programmers to honor the convention.</p>
- *
- * @see BasicFunction1
+ * <p>
+ *     Function from A to B transforms {@code Mappable<A>} to {@code Mappable<B>}.
+ * </p>
  */
-public interface Mappable
+public interface Mappable<A>
 {
+    /**
+     * <p>
+     *     A view of what would be if {@code f} were applied to each element.
+     * </p>
+     * <p>
+     *     This does not call f immediately.
+     * </p>
+     * @param <B> result element type
+     * @param f mapping function
+     * @return a view
+     */
+    <B> Mappable<B> map (BasicFunction1<? super A, B> f);
 }

@@ -18,7 +18,7 @@ public interface Iterable<A> extends
     , Foldable<A>
     , ForEach<A>
     , IntegerIndexed<A>
-    , Mappable
+    , Mappable<A>
 {
     @Override
     Iterator<A> iterator ();
@@ -28,6 +28,7 @@ public interface Iterable<A> extends
     @Override
     Iterable<A> forEach (BasicProcedure1<? super A> f);
 
+    @Override
     <B> Iterable<B> map (BasicFunction1<? super A, B> f);
 
     <B> Iterable<B> flatMap (BasicFunction1<? super A, BasicIterable<B>> f);

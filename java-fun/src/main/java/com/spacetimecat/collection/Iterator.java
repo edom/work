@@ -37,7 +37,7 @@ public interface Iterator<A> extends
     , Foldable<A>
     , ForEach<A>
     , IntegerIndexed<A>
-    , Mappable
+    , Mappable<A>
     , Scan<A>
 {
     boolean all (BasicPredicate1<? super A> p);
@@ -85,6 +85,7 @@ public interface Iterator<A> extends
      * @param f mapping function
      * @return a view
      */
+    @Override
     <B> Iterator<B> map (BasicFunction1<? super A, B> f);
 
     <B, C> Iterator<C> zip (BasicIterator<B> that, BasicFunction2<A, B, C> f);
