@@ -1,11 +1,15 @@
 package com.spacetimecat.objmap;
 
 import com.spacetimecat.Limbos;
-import com.spacetimecat.MutableLimbo;
-import com.spacetimecat.collection.*;
+import com.spacetimecat.collection.Iterator;
+import com.spacetimecat.collection.Iterators;
+import com.spacetimecat.function.BasicCheckedFunction1;
 
 import javax.sql.DataSource;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 final class FreeConnectedDao<T> implements ConnectedDao<T>
 {
@@ -21,38 +25,30 @@ final class FreeConnectedDao<T> implements ConnectedDao<T>
     }
 
     @Override
-    public RowIterator<T> findAll (String keyColumn, Object key)
+    public <R> R findAll (String keyColumn, Object key, BasicCheckedFunction1<? super Iterator<T>, R> use)
     {
-        final MutableLimbo limbo = Limbos.open();
-        final String sql = ssp.sqlSelectPrefix() + " WHERE " + keyColumn + " = ?";
-        try
+        return Limbos.with(limbo ->
         {
+            final String sql = ssp.sqlSelectPrefix() + " WHERE " + keyColumn + " = ?";
             final Connection c = limbo.register(db.getConnection());
             final PreparedStatement s = limbo.register(c.prepareStatement(sql));
             s.setObject(1, key);
             final ResultSet r = limbo.register(s.executeQuery());
-            return Iterators.from(bur, limbo.immutable(), r);
-        }
-        catch (SQLException e)
-        {
-            return limbo.closeAndThrow(new ReadException(e));
-        }
+            final Iterator<T> it = Iterators.from(bur, r);
+            return use.at(it);
+        });
     }
 
     @Override
-    public RowIterator<T> queryRawSql (String rawSql)
+    public <R> R queryRawSql (String rawSql, BasicCheckedFunction1<? super Iterator<T>, R> use)
     {
-        final MutableLimbo limbo = Limbos.open();
-        try
+        return Limbos.with(limbo ->
         {
             final Connection c = limbo.register(db.getConnection());
             final Statement s = limbo.register(c.createStatement());
             final ResultSet r = limbo.register(s.executeQuery(rawSql));
-            return Iterators.from(bur, limbo.immutable(), r);
-        }
-        catch (SQLException e)
-        {
-            return limbo.closeAndThrow(new ReadException(e));
-        }
+            final Iterator<T> it = Iterators.from(bur, r);
+            return use.at(it);
+        });
     }
 }

@@ -3,21 +3,15 @@ package com.spacetimecat;
 import java.util.ArrayList;
 import java.util.List;
 
-final class MutableLimboImpl implements MutableLimbo
+final class LimboImpl implements Limbo
 {
     private final List<AutoCloseable> rs = new ArrayList<>();
 
     @Override
-    public MutableLimbo add (AutoCloseable resource)
+    public Limbo add (AutoCloseable resource)
     {
         rs.add(resource);
         return this;
-    }
-
-    @Override
-    public Limbo immutable ()
-    {
-        return new LimboFacade(this);
     }
 
     public <B extends AutoCloseable> B register (B resource)

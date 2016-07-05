@@ -2,6 +2,7 @@ package com.spacetimecat.collection;
 
 import com.spacetimecat.Limbo;
 import com.spacetimecat.Limbos;
+import com.spacetimecat.MutableLimbo;
 import com.spacetimecat.objmap.BasicUnpackRow;
 
 import java.sql.ResultSet;
@@ -28,15 +29,10 @@ public final class Iterators
         return new FreeIterator<>(new BasicIteratorFromJavaUtil<>(i));
     }
 
-    public static <A> RowIterator<A> from (BasicUnpackRow<A> bur, ResultSet rs)
+    public static <A> Iterator<A> from (BasicUnpackRow<A> bur, ResultSet rs)
     {
         final Limbo m = Limbos.open().add(rs);
-        return new FreeRowIterator<>(new BasicIteratorFromJdbc<>(bur, m, rs));
-    }
-
-    public static <A> RowIterator<A> from (BasicUnpackRow<A> rd, Limbo m, ResultSet rs)
-    {
-        return new FreeRowIterator<>(new BasicIteratorFromJdbc<>(rd, m, rs));
+        return new FreeIterator<>(new BasicIteratorFromJdbc<>(bur, rs));
     }
 
     public static Iterator<Long> currentTimeMillis ()

@@ -1,6 +1,7 @@
 package com.spacetimecat.objmap;
 
-import com.spacetimecat.collection.RowIterator;
+import com.spacetimecat.collection.Iterator;
+import com.spacetimecat.function.BasicCheckedFunction1;
 
 /**
  * <p>Each instance of this can deserialize the result of
@@ -14,11 +15,11 @@ public interface QueryRawSql<T>
      *
      * <p>The SQL code must produce exactly one {@link java.sql.ResultSet}.</p>
      *
-     * <p>Remember to {@link RowIterator#close()} the returned iterator.</p>
-     *
      * @param rawSql SQL code
+     * @param use what to do with the rows
+     * @param <R> the return type of {@code use} and this method
      *
-     * @return a view that has to be closed later
+     * @return the return value of {@code use}
      */
-    RowIterator<T> queryRawSql (String rawSql);
+    <R> R queryRawSql (String rawSql, BasicCheckedFunction1<? super Iterator<T>, R> use);
 }

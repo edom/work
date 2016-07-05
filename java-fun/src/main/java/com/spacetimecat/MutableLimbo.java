@@ -10,14 +10,9 @@ import com.spacetimecat.collection.HasImmutableFacade;
  */
 public interface MutableLimbo extends
     BasicMutableCollection<AutoCloseable>
-    , HasImmutableFacade<AutoCloseable>
-    , Limbo
 {
     @Override
     MutableLimbo add (AutoCloseable resource);
-
-    @Override
-    Limbo immutable ();
 
     /**
      * <p>This is {@link #add(AutoCloseable) add},
