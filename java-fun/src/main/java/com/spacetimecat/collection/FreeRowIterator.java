@@ -21,7 +21,7 @@ final class FreeRowIterator<A> extends FreeIterator<A> implements RowIterator<A>
     }
 
     @Override
-    public RowIterator<A> with (BasicProcedure1<? super RowIterator<A>> f)
+    public RowIterator<A> withProcedure (BasicProcedure1<? super RowIterator<A>> f)
     {
         try
         {
@@ -35,7 +35,7 @@ final class FreeRowIterator<A> extends FreeIterator<A> implements RowIterator<A>
     }
 
     @Override
-    public <B> B with (BasicFunction1<? super RowIterator<A>, B> f)
+    public <B> B withFunction (BasicFunction1<? super RowIterator<A>, B> f)
     {
         try
         {
