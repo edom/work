@@ -114,5 +114,23 @@
  *
  * <p>We accept the fact that Java is an imperative language.
  * We design this library with usability by Java programmers in mind.</p>
+ *
+ * <h2>If you come from functional programming</h2>
+ *
+ * <p>
+ *     We can translate a function {@code fun : A -> B -> ... -> Y -> Z} to any of these Java code fragments:
+ * </p>
+ * <pre>
+ *     interface A
+ *     {
+ *          Z fun (B b, ..., Y y);
+ *     }
+ * </pre>
+ * <pre>
+ *     class A
+ *     {
+ *          static Z fun (A a, B b, ..., Y y);
+ *     }
+ * </pre>
  */
 package com.spacetimecat.collection;
