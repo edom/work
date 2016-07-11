@@ -6,5 +6,5 @@ public interface CollectibleIterator<A>
      * <p>Dump the rest of this iterator to a list.</p>
      * @return a view of that list
      */
-    Iterable<A> collectEager ();
+    FiniteIterable<A> collectEager ();
 }

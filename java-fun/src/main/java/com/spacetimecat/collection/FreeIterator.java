@@ -181,7 +181,7 @@ class FreeIterator<A> implements Iterator<A>
     }
 
     @Override
-    public Iterable<A> collectEager ()
+    public FiniteIterable<A> collectEager ()
     {
         return Iterables.from(toNewStdList());
     }

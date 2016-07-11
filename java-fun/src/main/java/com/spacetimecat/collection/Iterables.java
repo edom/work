@@ -6,12 +6,17 @@ public final class Iterables
 {
     private Iterables () {}
 
-    public static <A> Iterable<A> from (java.lang.Iterable<A> i)
+    public static <A> Iterable<A> fromInfinite (java.lang.Iterable<A> i)
     {
         return new FreeIterable(new BasicIterableFromJavaLang(i));
     }
 
-    public static <A> Iterable<A> from (A... as)
+    public static <A> FiniteIterable<A> from (java.lang.Iterable<A> i)
+    {
+        return new FreeFiniteIterable<>(new BasicIterableFromJavaLang<>(i));
+    }
+
+    public static <A> FiniteIterable<A> from (A... as)
     {
         return from(Arrays.asList(as));
     }
@@ -26,9 +31,9 @@ public final class Iterables
      * @return an {@link Iterable} representation;
      * the integers are not generated immediately
      */
-    public static Iterable<Integer> risingIntegerSequence (int incBegin, int excEnd, int increment)
+    public static FiniteIterable<Integer> risingIntegerSequence (int incBegin, int excEnd, int increment)
     {
-        return new FreeIterable<>(new RisingIntegerSequence(incBegin, excEnd, increment));
+        return new FreeFiniteIterable<>(new RisingIntegerSequence(incBegin, excEnd, increment));
     }
 
 }

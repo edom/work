@@ -1,6 +1,6 @@
 package com.spacetimecat.collection;
 
-final class BasicIterableFromJavaLang<A> implements BasicIterable<A>
+final class BasicIterableFromJavaLang<A> implements BasicFiniteIterable<A>
 {
     private final java.lang.Iterable<A> i;
 
@@ -10,7 +10,7 @@ final class BasicIterableFromJavaLang<A> implements BasicIterable<A>
     }
 
     @Override
-    public BasicIterator<A> iterator ()
+    public BasicFiniteIterator<A> iterator ()
     {
         return new BasicIteratorFromJavaUtil<>(i.iterator());
     }

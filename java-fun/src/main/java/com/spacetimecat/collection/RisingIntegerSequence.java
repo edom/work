@@ -1,6 +1,6 @@
 package com.spacetimecat.collection;
 
-final class RisingIntegerSequence implements BasicIterable<Integer>
+final class RisingIntegerSequence implements BasicFiniteIterable<Integer>
 {
     private final int begin;
     private final int end;
@@ -14,12 +14,12 @@ final class RisingIntegerSequence implements BasicIterable<Integer>
     }
 
     @Override
-    public BasicIterator<Integer> iterator ()
+    public BasicFiniteIterator<Integer> iterator ()
     {
         return new Iterator_(begin);
     }
 
-    class Iterator_ implements BasicIterator<Integer>
+    class Iterator_ implements BasicFiniteIterator<Integer>
     {
         private int next;
 

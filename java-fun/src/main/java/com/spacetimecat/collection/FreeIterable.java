@@ -6,7 +6,7 @@ import com.spacetimecat.function.*;
  * <p>If you have a {@link BasicIterable}, this gives you an {@link Iterable} for free.</p>
  * @param <A> element type
  */
-final class FreeIterable<A> implements Iterable<A>
+class FreeIterable<A> implements Iterable<A>
 {
     private final BasicIterable<A> bi;
 
@@ -72,7 +72,7 @@ final class FreeIterable<A> implements Iterable<A>
     }
 
     @Override
-    public Iterable<A> eager ()
+    public FiniteIterable<A> eager ()
     {
         return Iterables.from(toNewStdList());
     }

@@ -49,5 +49,5 @@ public interface Iterable<A> extends
      * <p>Do not call this if the iterable is very large or infinite.</p>
      * @return a view
      */
-    Iterable<A> eager ();
+    FiniteIterable<A> eager ();
 }
