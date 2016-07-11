@@ -179,4 +179,10 @@ class FreeIterator<A> implements Iterator<A>
     {
         return new FreeIterator<>(new ScanningBasicIterator<>(e, f, bi));
     }
+
+    @Override
+    public Iterable<A> collectEager ()
+    {
+        return Iterables.from(toNewStdList());
+    }
 }

@@ -29,6 +29,7 @@ import java.util.concurrent.Callable;
  */
 public interface Iterator<A> extends
     BasicIterator<A>
+    , CollectibleIterator<A>
     , Dumpable<A>
     , ToNewStdList<A>
     , Filterable<A>
