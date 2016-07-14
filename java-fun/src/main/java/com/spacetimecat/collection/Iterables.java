@@ -6,6 +6,11 @@ public final class Iterables
 {
     private Iterables () {}
 
+    public static <A> FiniteIterable<A> empty ()
+    {
+        return from();
+    }
+
     public static <A> Iterable<A> fromInfinite (java.lang.Iterable<A> i)
     {
         return new FreeIterable(new BasicIterableFromJavaLang(i));
