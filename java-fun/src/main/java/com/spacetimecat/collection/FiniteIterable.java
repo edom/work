@@ -1,6 +1,7 @@
 package com.spacetimecat.collection;
 
 import com.spacetimecat.function.BasicFunction1;
+import com.spacetimecat.function.BasicPredicate1;
 
 /**
  * <p>An {@link Iterable} that will end.</p>
@@ -24,4 +25,7 @@ public interface FiniteIterable<A> extends
     <B> FiniteIterable<B> map (BasicFunction1<? super A, B> f);
 
     <B> FiniteIterable<B> flatMapFinite (BasicFunction1<? super A, BasicFiniteIterable<B>> f);
+
+    @Override
+    FiniteIterable<A> filter (BasicPredicate1<? super A> p);
 }
