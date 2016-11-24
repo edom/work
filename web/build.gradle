@@ -1,0 +1,38 @@
+allprojects {
+
+    apply plugin: 'java'
+    apply plugin: 'idea'
+
+    repositories {
+        jcenter()
+    }
+
+}
+
+project('web-example') {
+    dependencies {
+        compile parent.project('web-server')
+        compile parent.project('web-servlet')
+        compile parent.project('web-view')
+    }
+}
+
+project('web-server') {
+    dependencies {
+        def jettyVersion = "9.3.14.v20161028"
+        compile "org.eclipse.jetty:jetty-server:${jettyVersion}"
+        compile "org.eclipse.jetty:jetty-servlet:${jettyVersion}"
+    }
+}
+
+project('web-servlet') {
+    dependencies {
+        compile "javax.servlet:javax.servlet-api:3.1.0"
+    }
+}
+
+project('web-view') {
+    dependencies {
+        compile "org.jsoup:jsoup:1.10.1"
+    }
+}

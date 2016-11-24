@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+body
+, input
+, button
+{
+    font-family: sans-serif;
+    font-size: 12pt;
+}
+body
+{
+    margin: 2em auto;
+    max-width: 40em;
+}
+p
+{
+    margin: 1em 0em;
+}
+.greeting .name
+{
+    font-weight: bold;
+}
+    </style>
+</head>
+<body>
+    <h1><a href="/">Home</a></h1>
+    <p class="greeting">Greetings, <span class="name">(name)</span>.</p>
+    <form method="post" action="/greet">
+        <label>
+            <span>Name</span>
+            <input name="name">
+        </label>
+        <input type="submit" value="Greet">
+    </form>
+    <form class="todo" method="post">
+        <h1>Things to do</h1>
+        <input name="item">
+        <button formaction="/todo/add">Add item</button>
+        <ul></ul>
+        <input type="hidden" name="name">
+    </form>
+</body>
+</html>
