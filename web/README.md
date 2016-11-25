@@ -22,10 +22,16 @@ This means avoiding annotations and reflection.
 * When in doubt, choose simplicity.
 * Testing is not a substitute for programmer competence.
 * If you need to use a debugger, the code is probably not simple enough.
+* Progressive enhancement instead of graceful degradation.
 
 ## Design
 
-* The server manipulates HTML DOM.
+The template is plain HTML file.
+People can use web browser to view the template.
+People only need to understand HTML to edit the template.
+
+The server parses the HTML template into DOM, manipulates the DOM,
+renders it back to HTML, and sends it to the client.
 
 ## Legal matter
 
