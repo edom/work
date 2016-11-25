@@ -1,5 +1,8 @@
 allprojects {
 
+    group = 'com.spacetimecat.web'
+    version = '0.0.0-SNAPSHOT'
+
     apply plugin: 'java'
     apply plugin: 'idea'
 
@@ -7,6 +10,14 @@ allprojects {
         jcenter()
     }
 
+    apply plugin: 'maven'
+
+}
+
+dependencies {
+    compile project('web-server')
+    compile project('web-servlet')
+    compile project('web-view')
 }
 
 project('web-example') {
