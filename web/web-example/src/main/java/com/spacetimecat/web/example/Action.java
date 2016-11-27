@@ -1,9 +1,9 @@
 package com.spacetimecat.web.example;
 
-import com.spacetimecat.web.servlet.NotFoundException;
-import com.spacetimecat.web.servlet.Param;
-import com.spacetimecat.web.servlet.Request;
-import com.spacetimecat.web.servlet.Response;
+import com.spacetimecat.web.http.NotFoundException;
+import com.spacetimecat.web.http.MediaType;
+import com.spacetimecat.web.http.param.Param;
+import com.spacetimecat.web.servlet.*;
 import com.spacetimecat.web.view.Selection2;
 import org.jsoup.nodes.Document;
 
@@ -28,7 +28,7 @@ final class Action
     {
         initState("name");
 
-        final Param<String> name = request.getParameter("name");
+        final Param<String> name = request.parameters().get("name");
         if (name.exists())
         {
             new Selection2(document.select(".greeting .name")).setText(name.optional());
@@ -43,15 +43,23 @@ final class Action
     {
         final String method = request.getMethod();
         final String path = request.getPathInfo();
-        if (method.equals("GET"))
+        final MediaType mediaType = request.negotiation().offer(
+            MediaType.TEXT_HTML
+            , MediaType.APPLICATION_JSON
+        ).strict();
+        if (mediaType.isRoughlyEqualTo(MediaType.TEXT_HTML))
         {
-            if (path.equals("/")) { index(); return; }
-            throw new NotFoundException();
-        }
-        if (method.equals("POST"))
-        {
-            if (path.equals("/greet")) { greet(); return; }
-            if (path.equals("/todo/add")) { addTodo(); return; }
+            if (method.equals("GET"))
+            {
+                if (path.equals("/")) { index(); return; }
+                throw new NotFoundException();
+            }
+            if (method.equals("POST"))
+            {
+                if (path.equals("/greet")) { greet(); return; }
+                if (path.equals("/todo/add")) { addTodo(); return; }
+                throw new NotFoundException();
+            }
             throw new NotFoundException();
         }
         throw new NotFoundException();
@@ -64,7 +72,7 @@ final class Action
 
     private void initState (String name)
     {
-        request.getParameter(name).ifExistsDo(value ->
+        request.parameters().get(name).ifExistsDo(value ->
         {
             final String cssQuery = String.format((Locale) null, "input[name=%s]", name);
             new Selection2(document.select(cssQuery)).setValue(value);
@@ -77,17 +85,17 @@ final class Action
 
     private void greet ()
     {
-        request.getParameter("name").required();
+        request.parameters().require("name");
     }
 
     private void addTodo ()
     {
-        final String item = request.getParameter("item").required();
+        final String item = request.parameters().get("item").required();
         todoList.add(item);
     }
 
-    String html ()
+    Entity html ()
     {
-        return document.html();
+        return DefaultEntity.textHtml(document.html());
     }
 }

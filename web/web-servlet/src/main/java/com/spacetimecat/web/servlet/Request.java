@@ -1,13 +1,16 @@
 package com.spacetimecat.web.servlet;
 
+import com.spacetimecat.web.http.negotiation.Negotiation;
+import com.spacetimecat.web.http.param.Parameters;
+import com.spacetimecat.web.http.param.Param;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class Request
+public final class Request
 {
     private final HttpServletRequest request;
 
@@ -16,18 +19,22 @@ public class Request
         this.request = request;
     }
 
-    public final Param<String> getParameter (String name)
+    public Parameters parameters ()
     {
-        final String value = request.getParameter(name);
-        return new Param<>(name, value);
+        return new ServletParameters(request);
     }
 
-    public final String getMethod ()
+    public Negotiation negotiation ()
+    {
+        return Negotiation.withAcceptHeader(request.getHeader("Accept"));
+    }
+
+    public String getMethod ()
     {
         return request.getMethod();
     }
 
-    public final String getPathInfo ()
+    public String getPathInfo ()
     {
         return request.getPathInfo();
     }

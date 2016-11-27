@@ -1,4 +1,6 @@
-allprojects {
+apply plugin: 'idea'
+
+subprojects {
 
     group = 'com.spacetimecat.web'
     version = '0.0.0-SNAPSHOT'
@@ -14,18 +16,49 @@ allprojects {
 
 }
 
-dependencies {
-    compile project('web-server')
-    compile project('web-servlet')
-    compile project('web-view')
+project('web-all') {
+    dependencies {
+        compile parent.project('web-http')
+        compile parent.project('web-http-server')
+        compile parent.project('web-io')
+        compile parent.project('web-server')
+        compile parent.project('web-servlet')
+        compile parent.project('web-servlet-json')
+        compile parent.project('web-view')
+    }
 }
 
 project('web-example') {
     dependencies {
-        compile parent.project('web-server')
-        compile parent.project('web-servlet')
-        compile parent.project('web-view')
+        compile parent.project('web-all')
     }
+}
+
+project('web-example-http-server') {
+    dependencies {
+        compile parent.project('web-http-server')
+    }
+}
+
+project('web-example-json-api') {
+    dependencies {
+        compile parent.project('web-all')
+    }
+}
+
+project('web-http') {
+    dependencies {
+        compile parent.project('web-io')
+    }
+}
+
+project('web-http-server') {
+    dependencies {
+        compile parent.project('web-http')
+    }
+}
+
+project('web-io') {
 }
 
 project('web-server') {
@@ -38,7 +71,15 @@ project('web-server') {
 
 project('web-servlet') {
     dependencies {
+        compile parent.project('web-http')
         compile "javax.servlet:javax.servlet-api:3.1.0"
+    }
+}
+
+project('web-servlet-json') {
+    dependencies {
+        compile parent.project('web-servlet')
+        compile "org.glassfish:javax.json:1.0.4"
     }
 }
 

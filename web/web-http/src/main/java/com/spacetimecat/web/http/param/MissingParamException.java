@@ -1,4 +1,6 @@
-package com.spacetimecat.web.servlet;
+package com.spacetimecat.web.http.param;
+
+import com.spacetimecat.web.http.BadRequestException;
 
 public final class MissingParamException extends BadRequestException
 {

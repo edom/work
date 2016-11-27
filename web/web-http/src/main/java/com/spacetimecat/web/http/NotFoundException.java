@@ -1,5 +1,10 @@
-package com.spacetimecat.web.servlet;
+package com.spacetimecat.web.http;
 
+/**
+ * <p>
+ *     404 not found.
+ * </p>
+ */
 public class NotFoundException extends HttpException
 {
     public NotFoundException ()

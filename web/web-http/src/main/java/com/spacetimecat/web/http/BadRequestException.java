@@ -1,5 +1,10 @@
-package com.spacetimecat.web.servlet;
+package com.spacetimecat.web.http;
 
+/**
+ * <p>
+ *     400 bad request.
+ * </p>
+ */
 public class BadRequestException extends HttpException
 {
     public BadRequestException ()

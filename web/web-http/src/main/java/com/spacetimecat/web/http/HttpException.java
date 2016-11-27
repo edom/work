@@ -1,4 +1,4 @@
-package com.spacetimecat.web.servlet;
+package com.spacetimecat.web.http;
 
 public class HttpException extends RuntimeException
 {

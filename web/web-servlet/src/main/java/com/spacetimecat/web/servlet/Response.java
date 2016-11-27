@@ -1,8 +1,11 @@
 package com.spacetimecat.web.servlet;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.function.Consumer;
 
-public class Response
+public final class Response
 {
     private final HttpServletResponse response;
 
@@ -11,8 +14,15 @@ public class Response
         this.response = response;
     }
 
-    public final void addCookie (Cookie2 cookie)
+    public void addCookie (Cookie2 cookie)
     {
         response.addCookie(cookie.encode());
+    }
+
+    public void sendOk (String contentType, Consumer<OutputStream> bodyWriter) throws IOException
+    {
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType(contentType);
+        bodyWriter.accept(response.getOutputStream());
     }
 }

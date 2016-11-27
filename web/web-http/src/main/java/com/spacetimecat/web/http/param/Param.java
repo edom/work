@@ -1,4 +1,4 @@
-package com.spacetimecat.web.servlet;
+package com.spacetimecat.web.http.param;
 
 import java.util.function.Consumer;
 import java.util.function.Function;

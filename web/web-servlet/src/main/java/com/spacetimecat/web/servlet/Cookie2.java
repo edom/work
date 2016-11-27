@@ -1,5 +1,7 @@
 package com.spacetimecat.web.servlet;
 
+import com.spacetimecat.web.http.param.Param;
+
 import javax.servlet.http.Cookie;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
