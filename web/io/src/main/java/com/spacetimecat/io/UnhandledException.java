@@ -1,4 +1,4 @@
-package com.spacetimecat.web.io;
+package com.spacetimecat.io;
 
 public final class UnhandledException extends RuntimeException
 {

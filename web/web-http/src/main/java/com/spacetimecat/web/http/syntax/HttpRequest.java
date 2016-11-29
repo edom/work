@@ -1,6 +1,6 @@
 package com.spacetimecat.web.http.syntax;
 
-import com.spacetimecat.web.io.EmptyInputStream;
+import com.spacetimecat.io.EmptyInputStream;
 
 import java.io.InputStream;
 

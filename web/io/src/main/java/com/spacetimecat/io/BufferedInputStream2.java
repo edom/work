@@ -1,9 +1,14 @@
-package com.spacetimecat.web.io;
+package com.spacetimecat.io;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
 
+/**
+ * <p>
+ *     Unsynchronized {@link java.io.BufferedInputStream}.
+ * </p>
+ */
 public final class BufferedInputStream2 extends InputStream
 {
     private final InputStream input;

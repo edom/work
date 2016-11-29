@@ -1,7 +1,7 @@
 package com.spacetimecat.web.http.server.imp;
 
 import com.spacetimecat.web.http.server.Guest;
-import com.spacetimecat.web.io.CloseAll;
+import com.spacetimecat.io.CloseAll;
 
 import java.io.InputStream;
 import java.io.OutputStream;

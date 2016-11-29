@@ -3,8 +3,8 @@ package com.spacetimecat.web.example.http.server;
 import com.spacetimecat.web.http.io.HttpInput;
 import com.spacetimecat.web.http.io.HttpOutput;
 import com.spacetimecat.web.http.syntax.HttpRequest;
-import com.spacetimecat.web.io.BufferedInputStream2;
-import com.spacetimecat.web.io.BufferedOutputStream2;
+import com.spacetimecat.io.BufferedInputStream2;
+import com.spacetimecat.io.BufferedOutputStream2;
 
 import java.io.IOException;
 import java.io.InputStream;

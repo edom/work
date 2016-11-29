@@ -1,4 +1,4 @@
-package com.spacetimecat.web.io;
+package com.spacetimecat.io;
 
 import java.io.IOException;
 import java.io.InputStream;

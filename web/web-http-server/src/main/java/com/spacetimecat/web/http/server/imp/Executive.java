@@ -10,8 +10,8 @@ import com.spacetimecat.web.http.server.log.LogEntry;
 import com.spacetimecat.web.http.server.log.RequestLogger;
 import com.spacetimecat.web.http.syntax.HttpRequest;
 import com.spacetimecat.web.http.syntax.HttpResponse;
-import com.spacetimecat.web.io.BufferedInputStream2;
-import com.spacetimecat.web.io.BufferedOutputStream2;
+import com.spacetimecat.io.BufferedInputStream2;
+import com.spacetimecat.io.BufferedOutputStream2;
 
 import java.io.InputStream;
 import java.io.OutputStream;

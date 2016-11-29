@@ -22,11 +22,14 @@ subprojects {
     apply plugin: 'maven'
 }
 
+project('io') {
+}
+
 project('web-all') {
     dependencies {
+        compile project(':io')
         compile parent.project('web-http')
         compile parent.project('web-http-server')
-        compile parent.project('web-io')
         compile parent.project('web-server')
         compile parent.project('web-servlet')
         compile parent.project('web-servlet-json')
@@ -54,7 +57,7 @@ project('web-example-json-api') {
 
 project('web-http') {
     dependencies {
-        compile parent.project('web-io')
+        compile project(':io')
     }
 }
 
@@ -62,9 +65,6 @@ project('web-http-server') {
     dependencies {
         compile parent.project('web-http')
     }
-}
-
-project('web-io') {
 }
 
 project('web-server') {

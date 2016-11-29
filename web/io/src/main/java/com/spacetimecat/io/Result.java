@@ -1,4 +1,4 @@
-package com.spacetimecat.web.io;
+package com.spacetimecat.io;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;

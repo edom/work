@@ -1,7 +1,7 @@
 package com.spacetimecat.web.http.io;
 
 import com.spacetimecat.web.http.syntax.*;
-import com.spacetimecat.web.io.EmptyInputStream;
+import com.spacetimecat.io.EmptyInputStream;
 
 import java.io.IOException;
 import java.io.InputStream;
