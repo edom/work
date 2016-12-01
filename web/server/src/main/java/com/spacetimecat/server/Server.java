@@ -1,10 +1,5 @@
-package com.spacetimecat.web.http.server;
+package com.spacetimecat.server;
 
-/**
- * <p>
- *     HTTP server.
- * </p>
- */
 public final class Server implements Runnable
 {
     private final Entrance entrance;

@@ -1,9 +1,9 @@
-package com.spacetimecat.web.http.server.imp;
+package com.spacetimecat.server.imp;
 
 import com.spacetimecat.web.http.io.EndOfInputException;
 import com.spacetimecat.web.http.io.HttpInput;
 import com.spacetimecat.web.http.io.HttpOutput;
-import com.spacetimecat.web.http.server.Guest;
+import com.spacetimecat.server.Guest;
 import com.spacetimecat.web.http.server.function.HttpFunction;
 import com.spacetimecat.web.http.server.log.DefaultRequestLogger;
 import com.spacetimecat.web.http.server.log.LogEntry;
@@ -21,12 +21,12 @@ import java.io.OutputStream;
  *     One instance of this serves one guest.
  * </p>
  */
-public final class Executive implements Runnable
+public final class HttpCompanion implements Runnable
 {
     private final Guest guest;
     private final HttpFunction function;
 
-    public Executive (Guest guest, HttpFunction function)
+    public HttpCompanion (Guest guest, HttpFunction function)
     {
         this.guest = guest;
         this.function = function;

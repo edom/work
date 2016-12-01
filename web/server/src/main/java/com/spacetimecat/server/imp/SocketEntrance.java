@@ -1,7 +1,6 @@
-package com.spacetimecat.web.http.server.imp;
+package com.spacetimecat.server.imp;
 
-import com.spacetimecat.web.http.server.Entrance;
-import com.spacetimecat.web.http.server.Guest;
+import com.spacetimecat.server.Entrance;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -52,7 +51,7 @@ public final class SocketEntrance implements Entrance
     }
 
     @Override
-    public Guest next ()
+    public SocketGuest next ()
     {
         try
         {
@@ -63,5 +62,11 @@ public final class SocketEntrance implements Entrance
         {
             throw new UncheckedIOException(e);
         }
+    }
+
+    @Override
+    public String toString ()
+    {
+        return server.toString();
     }
 }

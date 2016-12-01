@@ -1,4 +1,4 @@
-package com.spacetimecat.web.http.server;
+package com.spacetimecat.server;
 
 /**
  * <p>

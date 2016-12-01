@@ -1,6 +1,6 @@
-package com.spacetimecat.web.http.server.imp;
+package com.spacetimecat.server.imp;
 
-import com.spacetimecat.web.http.server.Guest;
+import com.spacetimecat.server.Guest;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -65,5 +65,16 @@ public final class SocketGuest implements Guest
         {
             throw new UncheckedIOException(e);
         }
+    }
+
+    public Socket getSocket ()
+    {
+        return socket;
+    }
+
+    @Override
+    public String toString ()
+    {
+        return getName();
     }
 }

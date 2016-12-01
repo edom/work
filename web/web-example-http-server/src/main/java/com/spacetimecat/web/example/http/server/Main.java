@@ -1,8 +1,10 @@
 package com.spacetimecat.web.example.http.server;
 
-import com.spacetimecat.web.http.server.*;
-import com.spacetimecat.web.http.server.imp.DefaultUsher;
-import com.spacetimecat.web.http.server.imp.SocketEntrance;
+import com.spacetimecat.server.Entrance;
+import com.spacetimecat.server.Server;
+import com.spacetimecat.server.Usher;
+import com.spacetimecat.web.http.server.imp.ThreadingHttpUsher;
+import com.spacetimecat.server.imp.SocketEntrance;
 import com.spacetimecat.web.http.server.function.HttpFunction;
 import com.spacetimecat.web.http.server.function.IfValid;
 import com.spacetimecat.web.http.server.function.NoContent;
@@ -20,7 +22,7 @@ public final class Main
                 new NoContent()
             );
         final Entrance entrance = SocketEntrance.onPort(8080);
-        final Usher usher = DefaultUsher.create(1024, function);
+        final Usher usher = ThreadingHttpUsher.create(1024, function);
         new Server(entrance, usher);
     }
 }
