@@ -1,3 +1,6 @@
+include 'concurrent'
+include 'concurrent:lock'
+include 'concurrent:lock-server'
 include 'io'
 include 'web-all'
 include 'web-example'
@@ -9,3 +12,7 @@ include 'web-server'
 include 'web-servlet'
 include 'web-servlet-json'
 include 'web-view'
+
+project(':concurrent').children.each { p ->
+    p.name = "concurrent-${p.name}"
+}

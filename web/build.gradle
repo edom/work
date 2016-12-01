@@ -22,6 +22,22 @@ subprojects {
     apply plugin: 'maven'
 }
 
+project('concurrent') {
+    project('concurrent-lock') {
+        dependencies {
+            compile project(':io')
+            compile project(':server')
+        }
+    }
+    project('concurrent-lock-server') {
+        dependencies {
+            compile project(':concurrent:concurrent-lock')
+            compile "ch.qos.logback:logback-classic:[1,2["
+            compile "org.slf4j:slf4j-api:[1,2["
+        }
+    }
+}
+
 project('io') {
 }
 
