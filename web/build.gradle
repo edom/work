@@ -24,6 +24,10 @@ subprojects {
 }
 
 project('concurrent') {
+    allprojects {
+        group = 'com.spacetimecat.concurrent'
+        version = '0.0.0-SNAPSHOT'
+    }
     project('concurrent-lock') {
         dependencies {
             compile project(':io')
