@@ -23,7 +23,23 @@ p
 
 h1, h2, h3, h4, h5, h6
 {
-    margin: 2em 0em;
+    margin: 1em 0em;
+}
+
+a[name="package.description"]
+{
+    display: block;
+    height: 1em;
+}
+
+div.block
+{
+    margin: 1em 0em;
+}
+
+td div.block
+{
+    margin: 0em;
 }
 
 div.topNav
@@ -151,4 +167,33 @@ dd
 div.bottomNav
 {
     margin: 2em 0em;
+}
+
+.indexContainer ul
+{
+    padding: 0em;
+    margin-left: 1em;
+}
+
+.indexContainer li
+{
+    display: block;
+    line-height: 1.5em;
+    margin: 0.25em 0em;
+}
+
+.deprecatedContent
+{
+    margin: 2em 0em;
+}
+
+.deprecationComment
+{
+    line-height: 1.5em;
+}
+
+.deprecatedLabel
+{
+    font-weight: bold;
+    line-height: 1.5em;
 }
