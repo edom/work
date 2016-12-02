@@ -82,7 +82,9 @@ import java.util.concurrent.Callable;
  *     // generalized style
  *     mutex.run(() -&gt; { action... });
  * </pre>
+ * @deprecated Use {@link com.spacetimecat.concurrent.lock.WithLock}
  */
+@Deprecated
 public interface Gate
 {
     /**
