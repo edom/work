@@ -46,6 +46,30 @@ project('concurrent') {
 project('io') {
 }
 
+project('java-build') {
+
+    group = "com.spacetimecat.build"
+    version = '0.0.0-SNAPSHOT'
+
+    project('java-build-plugin') {
+
+        group = "${parent.group}.plugin"
+        version = parent.version
+
+        project('java-build-plugin-gradle') {
+
+            group = "${parent.group}.gradle"
+            version = '0.0.0-SNAPSHOT'
+
+            dependencies {
+                compile project(':java-build')
+                compile gradleApi()
+            }
+
+        }
+    }
+}
+
 project('server') {
     dependencies {
         compile project(':io')

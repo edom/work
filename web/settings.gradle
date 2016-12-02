@@ -1,6 +1,8 @@
 include 'concurrent'
 include 'concurrent:lock'
 include 'concurrent:lock-server'
+include 'java-build'
+include 'java-build:plugin:gradle'
 include 'io'
 include 'server'
 include 'web-all'
@@ -16,4 +18,12 @@ include 'web-view'
 
 project(':concurrent').children.each { p ->
     p.name = "concurrent-${p.name}"
+}
+
+project(':java-build:plugin').children.each { p ->
+    p.name = "java-build-plugin-${p.name}"
+}
+
+project(':java-build').children.each { p ->
+    p.name = "java-build-${p.name}"
 }
