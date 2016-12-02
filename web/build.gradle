@@ -91,6 +91,13 @@ project('java-build') {
 project('java-lang') {
 }
 
+project('relational') {
+    dependencies {
+        compile 'com.h2database:h2:1.4.193'
+        compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final'
+    }
+}
+
 project('server') {
     dependencies {
         compile project(':io')
