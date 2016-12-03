@@ -1,5 +1,11 @@
 package com.spacetimecat.server;
 
+/**
+ * <p>
+ *     Connect an {@link Entrance} and an {@link Usher},
+ *     to provide generic server functionality.
+ * </p>
+ */
 public final class Server implements Runnable
 {
     private final Entrance entrance;
