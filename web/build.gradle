@@ -37,6 +37,7 @@ project('concurrent') {
     project('lock') {
         dependencies {
             compile project(':io')
+            compile project(':java-lang')
             compile project(':server')
         }
     }
@@ -64,6 +65,10 @@ project('java-build') {
     group = "com.spacetimecat.build"
     version = '0.0.0-SNAPSHOT'
 
+    dependencies {
+        compile project(':java-lang')
+    }
+
     project('plugin') {
 
         group = "${parent.group}.plugin"
@@ -81,6 +86,9 @@ project('java-build') {
 
         }
     }
+}
+
+project('java-lang') {
 }
 
 project('server') {
