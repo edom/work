@@ -54,6 +54,8 @@ project('concurrent') {
             compile "ch.qos.logback:logback-classic:1.1.7"
             compile "org.slf4j:slf4j-api:1.7.21"
         }
+        apply plugin: 'application'
+        mainClassName = 'com.spacetimecat.concurrent.lock.example.ExampleServerMain'
     }
 }
 
