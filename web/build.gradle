@@ -23,6 +23,12 @@ subprojects {
     apply plugin: 'maven'
 }
 
+javadoc.options.stylesheetFile = new File('javadoc.css')
+subprojects {
+    rootProject.javadoc.classpath.add(javadoc.classpath)
+    rootProject.javadoc.source(javadoc.source)
+}
+
 project('concurrent') {
     allprojects {
         group = 'com.spacetimecat.concurrent'
