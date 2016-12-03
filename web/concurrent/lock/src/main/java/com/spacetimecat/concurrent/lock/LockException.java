@@ -2,7 +2,22 @@ package com.spacetimecat.concurrent.lock;
 
 /**
  * <p>
- *     Programming error.
+ *     The caller tries to release a lock that is not engaged.
+ * </p>
+ *
+ * <p>
+ *     In the case of local locks,
+ *     this means that there is a programming error.
+ * </p>
+ *
+ * <p>
+ *     In the case of remote locks,
+ *     this may mean that the lock server is restarted too soon.
+ * </p>
+ *
+ * <p>
+ *     This should not be used to signal input-output error.
+ *     Use another exception such as {@link java.io.UncheckedIOException} for that.
  * </p>
  */
 public class LockException extends RuntimeException
