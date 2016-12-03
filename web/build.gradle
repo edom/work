@@ -28,17 +28,17 @@ project('concurrent') {
         group = 'com.spacetimecat.concurrent'
         version = '0.0.0-SNAPSHOT'
     }
-    project('concurrent-lock') {
+    project('lock') {
         dependencies {
             compile project(':io')
             compile project(':server')
         }
     }
-    project('concurrent-lock-server') {
+    project('lock-server') {
         dependencies {
-            compile project(':concurrent:concurrent-lock')
-            compile "ch.qos.logback:logback-classic:[1,2["
-            compile "org.slf4j:slf4j-api:[1,2["
+            compile project(':concurrent:lock')
+            compile "ch.qos.logback:logback-classic:1.1.7"
+            compile "org.slf4j:slf4j-api:1.7.21"
         }
     }
 }
@@ -51,12 +51,12 @@ project('java-build') {
     group = "com.spacetimecat.build"
     version = '0.0.0-SNAPSHOT'
 
-    project('java-build-plugin') {
+    project('plugin') {
 
         group = "${parent.group}.plugin"
         version = parent.version
 
-        project('java-build-plugin-gradle') {
+        project('gradle') {
 
             group = "${parent.group}.gradle"
             version = '0.0.0-SNAPSHOT'
