@@ -2,19 +2,19 @@
 
 ## Featured
 
-* Gradle plugin for proper dependency resolution:
-[java-build/plugin/gradle](java-build/plugin/gradle)
-* Locking across different processes:
-[concurrent/lock](concurrent/lock),
-[concurrent/lock-client](concurrent/lock-client), and
-[concurrent/lock-server](concurrent/lock-server).
+* Gradle plugin for proper dependency resolution
+    * [java-build/plugin/gradle](java-build/plugin/gradle)
+* Locking across different processes
+    * [concurrent/lock](concurrent/lock)
+    * [concurrent/lock-client](concurrent/lock-client)
+    * [concurrent/lock-server](concurrent/lock-server)
 
 ## Other things
 
-* Generic server using entrances and ushers:
-[server](server)
-* Web application library:
-[web](web)
+* Generic server using entrances and ushers
+    * [server](server)
+* Web application library
+    * [web](web)
 
 ## How to use
 
