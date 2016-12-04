@@ -1,8 +1,9 @@
 package com.spacetimecat.build.math.extended;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
-public final class ExtendedComparator<A> implements Comparator<Extended<A>>
+public final class ExtendedComparator<A> implements Comparator<Extended<A>>, Serializable
 {
     private final Comparator<A> underlying;
 

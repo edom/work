@@ -1,5 +1,6 @@
 package com.spacetimecat.build.math.vector;
 
+import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Objects;
 
@@ -9,7 +10,7 @@ import java.util.Objects;
  * </p>
  * @param <P> vector element type
  */
-public final class PrefixComparator<P> implements Comparator<Vector<P>>
+public final class PrefixComparator<P> implements Comparator<Vector<P>>, Serializable
 {
     private final Comparator<P> partwise;
 

@@ -1,5 +1,6 @@
 package com.spacetimecat.java.lang.compare;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Comparator;
  * </p>
  * @param <A> a type having a natural order
  */
-public final class NaturalComparator<A extends Comparable<A>> implements Comparator<A>
+public final class NaturalComparator<A extends Comparable<A>> implements Comparator<A>, Serializable
 {
     @Override
     public int compare (A a, A b)
