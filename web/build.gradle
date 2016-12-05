@@ -60,6 +60,8 @@ project('concurrent') {
 }
 
 project('io') {
+    group = 'com.spacetimecat.io'
+    version = '0.0.0-SNAPSHOT'
 }
 
 project('java-build') {
@@ -91,9 +93,13 @@ project('java-build') {
 }
 
 project('java-lang') {
+    group = 'com.spacetimecat.java.lang'
+    version = '0.0.0-SNAPSHOT'
 }
 
 project('relational') {
+    group = 'com.spacetimecat.relational'
+    version = '0.0.0-SNAPSHOT'
     dependencies {
         compile 'com.h2database:h2:1.4.193'
         compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final'
@@ -101,12 +107,16 @@ project('relational') {
 }
 
 project('server') {
+    group = 'com.spacetimecat.server'
+    version = '0.0.0-SNAPSHOT'
     dependencies {
         compile project(':io')
     }
 }
 
 project('web-all') {
+    group = 'com.spacetimecat.web'
+    version = '0.0.0-SNAPSHOT'
     dependencies {
         compile project(':io')
         compile parent.project('web-http')
@@ -119,30 +129,40 @@ project('web-all') {
 }
 
 project('web-example') {
+    group = 'com.spacetimecat.web'
+    version = '0.0.0-SNAPSHOT'
     dependencies {
         compile parent.project('web-all')
     }
 }
 
 project('web-example-http-server') {
+    group = 'com.spacetimecat.web'
+    version = '0.0.0-SNAPSHOT'
     dependencies {
         compile parent.project('web-http-server')
     }
 }
 
 project('web-example-json-api') {
+    group = 'com.spacetimecat.web'
+    version = '0.0.0-SNAPSHOT'
     dependencies {
         compile parent.project('web-all')
     }
 }
 
 project('web-http') {
+    group = 'com.spacetimecat.web'
+    version = '0.0.0-SNAPSHOT'
     dependencies {
         compile project(':io')
     }
 }
 
 project('web-http-server') {
+    group = 'com.spacetimecat.web'
+    version = '0.0.0-SNAPSHOT'
     dependencies {
         compile project(':server')
         compile parent.project('web-http')
@@ -150,6 +170,8 @@ project('web-http-server') {
 }
 
 project('web-server') {
+    group = 'com.spacetimecat.web'
+    version = '0.0.0-SNAPSHOT'
     dependencies {
         def jettyVersion = "[9,10["
         compile "org.eclipse.jetty:jetty-server:${jettyVersion}"
@@ -158,6 +180,8 @@ project('web-server') {
 }
 
 project('web-servlet') {
+    group = 'com.spacetimecat.web'
+    version = '0.0.0-SNAPSHOT'
     dependencies {
         compile parent.project('web-http')
         compile "javax.servlet:javax.servlet-api:[3.1,4["
@@ -165,6 +189,8 @@ project('web-servlet') {
 }
 
 project('web-servlet-json') {
+    group = 'com.spacetimecat.web'
+    version = '0.0.0-SNAPSHOT'
     dependencies {
         compile parent.project('web-servlet')
         compile "org.glassfish:javax.json:[1,2["
@@ -172,6 +198,8 @@ project('web-servlet-json') {
 }
 
 project('web-view') {
+    group = 'com.spacetimecat.web'
+    version = '0.0.0-SNAPSHOT'
     dependencies {
         compile "org.jsoup:jsoup:[1.7,2["
     }
