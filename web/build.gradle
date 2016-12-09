@@ -20,35 +20,7 @@ subprojects {
 
     apply plugin: 'idea'
 
-    apply plugin: 'maven-publish'
-
-    publishing {
-        publications {
-            mavenJava(MavenPublication) {
-                from components.java
-                // Workaround for Gradle bug.
-                pom.withXml {
-                    asNode().append(new NodeBuilder().properties {
-                        'maven.compiler.source' sourceCompatibility
-                        'maven.compiler.target' targetCompatibility
-                    })
-                    // Modified workaround for another Gradle bug.
-                    // See https://discuss.gradle.org/t/maven-publish-plugin-generated-pom-making-dependency-scope-runtime/7494/10
-                    asNode().dependencies.'*'.findAll().each() {
-                        it.scope*.value = 'compile'
-                    }
-                }
-            }
-        }
-    }
-
-    task generatePom (type: Copy) {
-        dependsOn 'generatePomFileForMavenJavaPublication'
-        include 'pom-default.xml'
-        from "${buildDir}/publications/mavenJava"
-        into '.'
-        rename 'pom-default.xml', 'pom.xml'
-    }
+    apply plugin: 'maven'
 
 }
 
