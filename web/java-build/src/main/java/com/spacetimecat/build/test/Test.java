@@ -1,5 +1,7 @@
-package com.spacetimecat.build.dependency;
+package com.spacetimecat.build.test;
 
+import com.spacetimecat.build.dependency.NumericStringComparator;
+import com.spacetimecat.build.dependency.Version;
 import com.spacetimecat.build.math.extended.Extended;
 import com.spacetimecat.build.math.range.Range;
 import com.spacetimecat.build.math.vector.PrefixComparator;
