@@ -53,5 +53,5 @@ Replace `SETTINGS` with the path to the above settings.xml file.
 Replace `URL` with that of your repository.
 
 ```
-mvn -s SETTINGS deploy -DaltDeploymentRepository=spacetimecat::default::URL
+mvn -s SETTINGS deploy -DaltDeploymentRepository=spacetimecat::default::URL -DuniqueVersion=false
 ```
