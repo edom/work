@@ -1,7 +1,6 @@
 package com.spacetimecat.concurrent.lock.service;
 
 import com.spacetimecat.concurrent.lock.Lock;
-import com.spacetimecat.concurrent.lock.LockException;
 import com.spacetimecat.concurrent.lock.service.store.Store;
 
 /**
@@ -28,10 +27,8 @@ public final class StoreLock implements Lock
 
     public void release ()
     {
-        if (!source.remove(name))
-        {
-            throw new LockException(toString());
-        }
+        // Ignore failures.
+        source.remove(name);
     }
 
     @Override

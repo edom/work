@@ -25,10 +25,7 @@ public interface Lock
      * </p>
      *
      * <p>
-     *     If there is an underlying input-output error,
-     *     this should throw an exception.
-     *     The caller should log the exception
-     *     and retry locking after a few seconds.
+     *     Must not throw anything.
      * </p>
      *
      * @return
@@ -43,11 +40,12 @@ public interface Lock
      * </p>
      *
      * <p>
-     *     Implementations may limit who can release the lock.
+     *     Implementations should avoid throwing anything.
      * </p>
      *
      * <p>
-     *     Implementations may detect calls that are not paired with {@link #acquire()}.
+     *     Implementations should allow the lock to be released
+     *     by threads other than the acquiring thread.
      * </p>
      *
      * <p>
@@ -56,7 +54,9 @@ public interface Lock
      * </p>
      *
      * @throws LockException
-     * if the lock is not engaged.
+     * if the implementation is reasonably certain that the client programmer misuses this object.
+     * The implementation must consider other factors such as network or storage error where applicable.
+     * Nevertheless, implementations should prefer returning normally even in such case.
      */
     void release ();
 }

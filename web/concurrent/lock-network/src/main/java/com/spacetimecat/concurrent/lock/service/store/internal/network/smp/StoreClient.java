@@ -1,6 +1,9 @@
 package com.spacetimecat.concurrent.lock.service.store.internal.network.smp;
 
-import com.spacetimecat.concurrent.lock.service.store.Store;
+import com.spacetimecat.concurrent.lock.service.store.RiskyStore;
+import com.spacetimecat.java.lang.unexceptional.Left;
+import com.spacetimecat.java.lang.unexceptional.Right;
+import com.spacetimecat.java.lang.unexceptional.Risky;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -9,7 +12,7 @@ import java.net.URI;
 import java.util.Arrays;
 import java.util.Collection;
 
-public final class StoreClient implements Store, AutoCloseable
+public final class StoreClient implements RiskyStore, AutoCloseable
 {
     private final Socket socket;
     private final Protocol protocol;
@@ -31,7 +34,7 @@ public final class StoreClient implements Store, AutoCloseable
      * @return
      * an instance
      */
-    public static StoreClient connect (String strUri)
+    public static Risky<StoreClient> connect (String strUri)
     {
         try
         {
@@ -39,25 +42,19 @@ public final class StoreClient implements Store, AutoCloseable
             final String host = uri.getHost();
             final int port = uri.getPort();
             final Socket socket = new Socket(host, port);
-            return new StoreClient(socket);
+            socket.setSoTimeout(1000);
+            return new Right<>(new StoreClient(socket));
         }
         catch (IOException e)
         {
-            throw new UncheckedIOException(e);
+            return new Left<>(e);
         }
     }
 
     @Override
-    public void close ()
+    public void close () throws IOException
     {
-        try
-        {
-            socket.close();
-        }
-        catch (IOException e)
-        {
-            throw new UncheckedIOException(e);
-        }
+        socket.close();
     }
 
     public Collection<String> list ()
@@ -76,34 +73,34 @@ public final class StoreClient implements Store, AutoCloseable
     }
 
     @Override
-    public boolean add (String name)
+    public Risky<Boolean> add (String name)
     {
         try
         {
             protocol.writeMethod(Protocol.M_ADD);
             protocol.writeStringArray(name);
             protocol.flush();
-            return protocol.readBoolean();
+            return new Right<>(protocol.readBoolean());
         }
         catch (IOException e)
         {
-            throw new UncheckedIOException(e);
+            return new Left<>(e);
         }
     }
 
     @Override
-    public boolean remove (String name)
+    public Risky<Boolean> remove (String name)
     {
         try
         {
             protocol.writeMethod(Protocol.M_REMOVE);
             protocol.writeStringArray(name);
             protocol.flush();
-            return protocol.readBoolean();
+            return new Right<>(protocol.readBoolean());
         }
         catch (IOException e)
         {
-            throw new UncheckedIOException(e);
+            return new Left<>(e);
         }
     }
 

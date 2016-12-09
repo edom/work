@@ -22,7 +22,7 @@ final class SlowClient implements Runnable
     {
         try
         {
-            Thread.sleep(3000L);
+            Thread.sleep(1000L);
         }
         catch (InterruptedException e)
         {

@@ -67,21 +67,31 @@ project('concurrent') {
     }
     project('lock') {
         dependencies {
-            compile project(':io')
             compile project(':java-lang')
-            compile project(':server')
         }
     }
     project('lock-client') {
         dependencies {
-            compile project(':concurrent:lock')
+            compile project(':concurrent:lock-network')
             compile "ch.qos.logback:logback-classic:1.1.7"
             compile "org.slf4j:slf4j-api:1.7.21"
         }
     }
-    project('lock-server') {
+    project('lock-example') {
+        dependencies {
+            compile project(':concurrent:lock-client')
+            compile project(':concurrent:lock-server')
+        }
+    }
+    project('lock-network') {
         dependencies {
             compile project(':concurrent:lock')
+            compile project(':server')
+        }
+    }
+    project('lock-server') {
+        dependencies {
+            compile project(':concurrent:lock-network')
             compile "ch.qos.logback:logback-classic:1.1.7"
             compile "org.slf4j:slf4j-api:1.7.21"
         }

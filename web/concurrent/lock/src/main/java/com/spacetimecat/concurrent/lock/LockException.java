@@ -2,22 +2,13 @@ package com.spacetimecat.concurrent.lock;
 
 /**
  * <p>
- *     The caller tries to release a lock that is not engaged.
+ *     The caller misuses a {@link Lock} by not properly
+ *     pairing {@link Lock#acquire() acquire} and {@link Lock#release() release}.
  * </p>
  *
  * <p>
- *     In the case of local locks,
- *     this means that there is a programming error.
- * </p>
- *
- * <p>
- *     In the case of remote locks,
- *     this may mean that the lock server is restarted too soon.
- * </p>
- *
- * <p>
- *     This should not be used to signal input-output error.
- *     Use another exception such as {@link java.io.UncheckedIOException} for that.
+ *     This should only be used for locks in the same JVM,
+ *     but not all such locks should detect this programming error.
  * </p>
  */
 public class LockException extends RuntimeException

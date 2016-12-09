@@ -17,7 +17,6 @@ public final class AtomicBooleanLock implements Lock
     @Override
     public void release ()
     {
-        lock.getAndSet(false);
         lock.set(false);
     }
 }
