@@ -55,11 +55,33 @@ Avoid getters and setters.
 If the class is only responsible for structuring data, make the field public;
 otherwise move the code using the field into the class.
 
-Avoid checked exceptions.
-
 Make classes final by default.
 After you know how others will subclass it, make it non-final.
 However, you may want to make Throwable subclasses non-final.
+
+### Exceptions
+
+Avoid checked exceptions.
+
+When there is an exceptional condition,
+software is not expected to recover.
+
+Examples of exceptional conditions:
+
+- programming errors
+- assumption violations
+- out of memory
+- stack overflow
+- electrical failure
+- cosmic ray strike flipping a bit in memory
+
+What is exceptional depends on the requirements.
+Network interruption would be an exceptional condition in a throw-away script,
+but would be a non-exceptional condition in distributed computing.
+
+Message passing has no notion of stack unwinding.
+Errors should be represented in the return value.
+Error handling is part of the interface.
 
 ## Unfounded guesses
 
