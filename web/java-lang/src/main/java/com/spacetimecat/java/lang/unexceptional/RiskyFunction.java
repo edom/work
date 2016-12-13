@@ -4,9 +4,9 @@ import java.util.function.Function;
 
 public final class RiskyFunction<A, B> implements Function<A, Risky<B>>
 {
-    private final Function<A, B> original;
+    private final FunctionE<A, B> original;
 
-    public RiskyFunction (Function<A, B> original)
+    public RiskyFunction (FunctionE<A, B> original)
     {
         this.original = original;
     }

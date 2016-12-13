@@ -3,7 +3,7 @@ package com.spacetimecat.java.lang.unexceptional;
 import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
-public final class RiskyCallable<A> implements Supplier<Risky<A>>
+public final class RiskyCallable<A> implements Supplier<Risky<A>>, Callable<Risky<A>>
 {
     private final Callable<A> delegate;
 
@@ -24,5 +24,11 @@ public final class RiskyCallable<A> implements Supplier<Risky<A>>
         {
             return new Left<>(e);
         }
+    }
+
+    @Override
+    public Risky<A> call ()
+    {
+        return get();
     }
 }

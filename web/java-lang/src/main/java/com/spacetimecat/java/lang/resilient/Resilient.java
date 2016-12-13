@@ -1,9 +1,6 @@
 package com.spacetimecat.java.lang.resilient;
 
-import com.spacetimecat.java.lang.unexceptional.Left;
-import com.spacetimecat.java.lang.unexceptional.Right;
-import com.spacetimecat.java.lang.unexceptional.Risky;
-import com.spacetimecat.java.lang.unexceptional.RiskyFunction;
+import com.spacetimecat.java.lang.unexceptional.*;
 import com.spacetimecat.java.lang.unit.Unit;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -84,7 +81,7 @@ public final class Resilient<T> implements AutoCloseable
         );
     }
 
-    public <R> Risky<R> withInstanceRisky (Function<T, R> function)
+    public <R> Risky<R> withInstanceRisky (FunctionE<T, R> function)
     {
         return withInstance(new RiskyFunction<>(function));
     }
