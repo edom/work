@@ -55,6 +55,7 @@ task generatePom {
 }
 
 javadoc.options.stylesheetFile = new File('javadoc.css')
+javadoc.options.links('http://docs.oracle.com/javase/8/docs/api/')
 subprojects {
     rootProject.javadoc.classpath.add(javadoc.classpath)
     rootProject.javadoc.source(javadoc.source)
