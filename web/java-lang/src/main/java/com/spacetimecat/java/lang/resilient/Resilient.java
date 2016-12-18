@@ -106,6 +106,9 @@ public final class Resilient<T> implements AutoCloseable
      *
      * @param instance
      * the failing instance
+     *
+     * @return
+     * whether there is an error
      */
     public Risky<Unit> kill (T instance)
     {

@@ -7,6 +7,11 @@ import java.util.function.Supplier;
  *     Convert exception-based code to conditional-based code.
  * </p>
  *
+ * <p>
+ *     If the code you want to wrap throws checked exceptions,
+ *     use {@link RiskyCallable}.
+ * </p>
+ *
  * @param <A>
  * wrapped value type
  */
@@ -25,9 +30,6 @@ public final class RiskySupplier<A> implements Supplier<Risky<A>>
      *
      * @param delegate
      * the original supplier that may throw something
-     *
-     * @return
-     * an instance
      */
     public RiskySupplier (Supplier<A> delegate)
     {

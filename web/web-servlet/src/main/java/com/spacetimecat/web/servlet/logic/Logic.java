@@ -37,6 +37,12 @@ public interface Logic
      * whether this logic matches (handles) the request.
      * If this is true, processing stops and the response will be sent.
      * If this is false, the response must not be modified.
+     *
+     * @throws IOException
+     * input-output error
+     *
+     * @throws ServletException
+     * other error
      */
     boolean handle (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException;
 }
