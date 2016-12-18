@@ -4,20 +4,54 @@ import org.jsoup.select.Elements;
 
 public class Selection2
 {
-    private final Elements selection;
+    protected final Elements elements;
 
-    public Selection2 (Elements selection)
+    public Selection2 (Elements elements)
     {
-        this.selection = selection;
+        this.elements = elements;
     }
 
-    public void setText (String text)
+    @Override
+    public final String toString ()
     {
-        selection.forEach(element -> element.text(text));
+        return elements.toString();
     }
 
-    public void setValue (String value)
+    public Element2 first ()
     {
-        selection.forEach(element -> element.val(value));
+        return new Element2(elements.first());
+    }
+
+    public final void setText (String text)
+    {
+        elements.forEach(element -> element.text(text));
+    }
+
+    public final void setValue (String value)
+    {
+        elements.forEach(element -> element.val(value));
+    }
+
+    public final Elements unwrap ()
+    {
+        return elements;
+    }
+
+    public final void remove ()
+    {
+        elements.remove();
+    }
+
+    public final void appendChild (Element2 element)
+    {
+        elements.forEach(e ->
+        {
+            e.appendChild(element.unwrap().clone());
+        });
+    }
+
+    public final void setInnerHtml (String html)
+    {
+        elements.html(html);
     }
 }

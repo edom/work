@@ -9,9 +9,9 @@ import java.io.UncheckedIOException;
 
 public class Template
 {
-    private final Document document;
+    protected final Document document;
 
-    protected Template (Document document)
+    public Template (Document document)
     {
         this.document = document;
     }
@@ -41,8 +41,8 @@ public class Template
         }
     }
 
-    public final Document instantiate ()
+    public final Document2 instantiate ()
     {
-        return document.clone();
+        return new Document2(document.clone());
     }
 }

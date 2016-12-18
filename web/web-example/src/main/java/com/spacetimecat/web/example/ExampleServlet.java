@@ -1,9 +1,12 @@
 package com.spacetimecat.web.example;
 
 import com.spacetimecat.web.http.HttpException;
-import com.spacetimecat.web.servlet.*;
+import com.spacetimecat.web.servlet.Entity;
+import com.spacetimecat.web.servlet.HttpServlet2;
+import com.spacetimecat.web.servlet.Request;
+import com.spacetimecat.web.servlet.Response;
+import com.spacetimecat.web.view.Document2;
 import com.spacetimecat.web.view.Template;
-import org.jsoup.nodes.Document;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -27,8 +30,8 @@ final class ExampleServlet extends HttpServlet2
     {
         try
         {
-            final Document document = template.instantiate();
-            final Action action = new Action(document, todoList, new Request(request), new Response(response));
+            final Document2 document = template.instantiate();
+            final Action action = new Action(document.unwrap(), todoList, new Request(request), new Response(response));
             action.beforeRoute();
             action.route();
             action.afterRoute();
