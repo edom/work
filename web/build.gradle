@@ -66,6 +66,11 @@ project('concurrent') {
         group = 'com.spacetimecat.concurrent'
         version = '0.0.0-SNAPSHOT'
     }
+    project('batch') {
+        dependencies {
+            compile project(':java-lang')
+        }
+    }
     project('lock') {
         dependencies {
             compile project(':java-lang')
