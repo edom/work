@@ -61,6 +61,14 @@ subprojects {
     rootProject.javadoc.source(javadoc.source)
 }
 
+project('app-level-join') {
+    group = 'com.spacetimecat.join'
+    version = '0.0.0-SNAPSHOT'
+    dependencies {
+        compile project(':java-lang-function')
+    }
+}
+
 project('concurrent') {
     allprojects {
         group = 'com.spacetimecat.concurrent'
@@ -140,6 +148,11 @@ project('java-build') {
 }
 
 project('java-lang') {
+    group = 'com.spacetimecat.java.lang'
+    version = '0.0.0-SNAPSHOT'
+}
+
+project('java-lang-function') {
     group = 'com.spacetimecat.java.lang'
     version = '0.0.0-SNAPSHOT'
 }
