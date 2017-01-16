@@ -1,0 +1,45 @@
+name: dynasty
+version: 0.0.0
+synopsis: Dynasty simulator
+description: See README.md
+homepage: https://github.com/edom/web/tree/dynasty/haskell/dynasty/
+license: Apache-2.0
+license-file: LICENSE
+author: Erik Dominikus
+maintainer: software@spacetimecat.com
+copyright: 2016 Erik Dominikus
+category: Web
+build-type: Simple
+extra-source-files: README.md
+cabal-version: >=1.10
+
+library
+    hs-source-dirs: src
+    exposed-modules:
+        Dynasty.Main
+    build-depends:
+        base >= 4.7 && < 5
+        , hscurses
+    default-language:
+        Haskell98
+    ghc-options:
+        -O0
+        -Wall
+
+executable dynasty-exe
+    hs-source-dirs: app
+    main-is: Main.hs
+    ghc-options:
+        -O0
+        -threaded
+        -rtsopts
+        -with-rtsopts=-N
+    build-depends:
+        base
+        , dynasty
+    default-language:
+        Haskell98
+
+source-repository head
+    type: git
+    location: https://github.com/edom/web/tree/dynasty/
