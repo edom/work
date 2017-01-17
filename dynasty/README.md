@@ -32,14 +32,12 @@ Then, enter either `main` or `dynastyMain`.
 - Show day using ncurses.
 - Press n to go to next day.
 - Show keyboard controls.
-
-Show character name.
+- Use Gregorian calendar.
+- Show character name.
+- Show character traits.
+- Show character titles.
 
 Show character attributes.
-
-Show character traits.
-
-Show character titles.
 
 Show character location.
 
@@ -85,4 +83,5 @@ The server speed is the minimum of the players' speeds. If a player is respondin
 # Legal notices
 
 Copyright 2017 Erik Dominikus
+
 Licensed under Apache License Version 2.0
