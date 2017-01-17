@@ -1,14 +1,29 @@
-# How do I compile this on Ubuntu 14.04?
+# How do I compile and run this on Ubuntu 14.04?
 
-Install [Stack](https://docs.haskellstack.org/en/stable/README/).
+## Install Stack.
 
-Install development packages:
+Follow the [Stack documentation](https://docs.haskellstack.org/en/stable/README/).
+
+## Install operating system dependencies.
 
 ```
 sudo apt-get install libncursesw5-dev
 ```
 
-libncursesw5-dev satisfies hscurses.
+The package libncursesw5-dev satisfies hscurses.
+We need libncursesw5-dev (with the w) because
+we use characters outside the ASCII character set.
+
+## Run the interpreter.
+
+If this is the first time you run this,
+it will also install the application dependencies.
+
+```
+stack ghci
+```
+
+Then, enter either `main` or `dynastyMain`.
 
 # What do we plan to do?
 
@@ -16,8 +31,7 @@ libncursesw5-dev satisfies hscurses.
 
 - Show day using ncurses.
 - Press n to go to next day.
-
-Show keyboard controls.
+- Show keyboard controls.
 
 Show character name.
 
