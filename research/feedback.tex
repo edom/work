@@ -1,0 +1,209 @@
+\chapter{Feedback gives rise to fixed point equation.}
+
+What happens if we feed the output
+of a function \(f\) back to its input?
+But firstly, what do we mean by feeding it back?
+We mean we wire the input and the output together so that they are the same,
+so that the function's input \(x\) is the same as the function's output \(f~x\).
+That statement immediately translates to the equation \( x = f~x \),
+which is a \emph{fixed point equation}.
+Therefore equalizing the output of a function to its input gives rise to a fixed point equation.
+
+But feedback is more general than that.
+Feedback is the case where the input also depends on the output.
+If the input is \(x\) and the output is \(f~x\),
+we can express feedback as the equation \( x = g~(f~x)~x \),
+which we can generalize to \( x = g~f~x \)
+by letting \(g\) apply \(x\) to \(f\) internally.
+We shall call the equation \( x = g~f~x \) the \emph{general feedback equation}.
+
+But it turns out that we can always write \( x = g~f~x \) as \( x = h~x \)
+where \( h = g~f \).
+We can always write \( f~x = x \) as \( g~x = 0 \) where \( g~x = f~x - x \).
+We can also always write \( x = g~f~x \) as \( 0 = g~f~x \).
+What about squared fixed point equation \( (f~x)^2 - x^2 = 0 \)?
+The equation \( g~x = 0 \) doesn't mean that \(g\) is zero everywhere.
+It means that \(g\) is zero at \(x\), and nothing more, unless quantified.
+
+A fixed point equation is an example of functional equations.
+Other examples are Cauchy's functional equations.
+
+\section{Feedback is a special case of fixed point.}
+
+The \emph{general fixed point equation} is \(x = f ~ x\).
+In this case, we say that \(x\) is a fixed point of \(f\).
+
+\begin{m:thm}[Feedback as special case of fixed point]
+The general feedback equation is a special case of the general fixed point equation.
+\begin{proof}
+Start with the general feedback equation \( f ~ x = g ~ f ~ x \).
+Do eta conversion, producing \( f = g ~ f \).
+Then, rename \(f\) to \(x\) and rename \(g\) to \(f\),
+producing \( x = f ~ x \),
+which is the general fixed point equation.
+\end{proof}
+\end{m:thm}
+
+That theorem relates cybernetics and fixed point theory.
+Thus a feedback is a fixed point of a higher-order function
+in the sense that if \(f = g f\), then \(f\) is a fixed point of \(g\).
+
+\begin{m:lem}
+    If \( f~x = g~x \) for all \(x\), then \(f = g\).
+    \begin{proof}
+        We can prove this using set theory.
+        A function is an injective relation.
+        A relation is a set of ordered pairs.
+    \end{proof}
+\end{m:lem}
+
+Generally, the equation \(f~x = x\) doesn't hold for all \(x\),
+because if it does, \(f\) becomes the identity function.
+There are two points of view:
+you can fix \(f\) and let \(x\) vary, or you can fix \(x\) and let \(f\) vary. 
+
+The set of fixed points of \(f\) is \(\sbn{x}{x = f~x}\).
+
+\begin{m:lem}
+    If \( x = f~x \) for all \(x\),
+    then \(f\) is an identity function.
+\begin{proof}
+    The step from the second to the third equation
+    comes from the previous lemma.
+    \begin{align*}
+        x &= f~x & \text{from the antecedent of this lemma}
+        \\
+        \fid~x &= f~x & \text{due to the antecedent of this lemma}
+        \\
+        \fid &= f
+    \end{align*}
+\end{proof}
+\end{m:lem}
+
+\section{Recurrence relation is an example feedback.}
+
+Consider the function \( f~x = y \).
+If we know \(x\), we can compute \(y\).
+If we know \(y\), we can limit the possibilities of \(x\).
+They depend on each other.
+But they aren't feedback.
+Why?
+What do we mean by `depend'?
+
+Usually we can rewrite a recurrence relation to a fixed point equation.
+For example, we can rewrite \( x_k = f~x_{k-1} \)
+to another equation \( x = f \circ (d~x) \),
+and then to \( x = (f \circ d)~x \),
+where \( d \) is the discrete unit delay function,
+which is defined as \( d~x~k = x~(k-1) \).
+Recurrence relations describe feedback.
+Difference equation is a special case of recurrence relations.
+Difference equation is a discrete version of differential equation.
+
+\[
+    f~x = c \cdot (s - x)
+\]
+
+\section{Closed-loop control is feedback.}
+
+A control system has input signal \(x\), control signal \(y\), output parameter \(z\),
+control function \(c\),
+response function \(r\),
+and follows the equations
+\( z~t = r~z~y~t \)
+and
+\( y~t = c~y~x~t \)
+where \(t\) represents time.
+We use two equations to model the case
+that changing the control signal
+does not instantaneously change the output parameter.
+The control function affects the output parameter indirectly through the control signal.
+The control function cannot directly change the output parameter.
+The response function models physical limitations.
+\begin{align*}
+    z &= r~z~y
+    \\ y &= c~y~x
+\end{align*}
+which can also be stated as the vector feedback equation
+\begin{align*}
+    \bmat{z \\ y} &= \bmat{r~z~y \\ c~y~x}
+\end{align*}
+
+That system of equations suggests that a control system is just two feedback loops.
+A control system is a system of feedback equations.
+However, system of feedback equations is still a special case of the general feedback equation.
+
+\section{Is this a general feedback equation?}
+
+An equation \(f~x = y\) is a feedback equation iff \(f\) appears in \(y\),
+that is if \(f\) appears in both sides of the equation.
+A feedback equation is just another name for functional equation.
+A feedback equation describes a subset of implicit functions.
+
+The \emph{general feedback equation} is \(f ~ x = g ~ f ~ x\).
+It can model every feedback system.
+We give the name \emph{system function} to \(f\)
+and \emph{wiring function} to \(g\).
+
+An \emph{open} system or a \emph{pure feedforward} system
+is a system whose \(g\) does not use \(f\).
+
+\section{What are examples of feedbacks?}
+
+The differential equation \( f~x = d~f~x + d~(d~f)~x \)
+is a special case of the general feedback equation \( f~x = g~f~x \)
+with \( g~f~x = d~f~x + d~(d~f)~x \).
+We can also eta-convert \(g\) to \( g = d + d^2 \).
+
+The Fibonacci equation \( f~x = f~(x-1) + f~(x-2) \)
+is a special case of the general feedback equation \( f~x = g~f~x \)
+with \( g~f = f \circ (s~1) + f \circ (s~2) \)
+where \(s~a~b = b - a\) is flipped subtraction.
+
+Indeed all differential equations and difference equations
+are special cases of the general feedback equation.
+
+PID (proportional-integral-derivative)
+control systems are special cases of the general feedback equation
+with \(g~f~x = c_p \cdot x + c_i \cdot i~f~0~x + c_d \cdot d~f~x\).
+
+IIR (infinite impulse response) filters are special cases of the general feedback equation.
+
+Functional equations are special cases of the general feedback equation.
+
+Thermostats are special cases of the general feedback equation.
+
+Organisms, organizations, and planets are
+also special cases of the general feedback equation.
+
+\section{What are positive and negative feedback?}
+
+We say that a system \( f~x = g~f~x \) has positive feedback iff \( d~f~x > 0 \).
+We say that it has a negative feedback iff \( d~f~x < 0 \).
+
+\section{What is feedback from dynamical systems of view?}
+
+According to \r{A}str\"om and Murray \cite{AstromMurrayFeedback}:
+\begin{quote}
+A \emph{dynamical system} is a system whose behavior changes over time, often in response
+to external stimulation or forcing. The term \emph{feedback} refers to a situation in which
+two (or more) dynamical systems are connected together such that each system
+influences the other and their dynamics are thus strongly coupled.
+\cite[p. 1]{AstromMurrayFeedback}
+\end{quote}
+
+\section{What are examples of fixed points?}
+
+Everything is a fixed point of the identity function \(\fb{x}{x}\).
+The constant \(c\) is a fixed point of the constant function \(\fb{x}{c}\).
+The function \(\exp\) is a fixed point of the real derivative operator \(d\)
+because \(d ~ \exp = \exp\).
+
+Consider \(d^4\), the real derivative operator applied four times.
+The function \(\exp\) is a fixed point of \(d^4\).
+The sine function is another fixed point.
+The cosine function is yet another fixed point.
+
+Eigenvalue-eigenvector pairs are related to fixed points.
+If \(a \cdot x = c \cdot x\) where \(a\) is a matrix, \(x\) is a vector, and \(c\) is a scalar,
+then \(x\) is a fixed point of \(g\) where \(g~x = (a \cdot x) / c\).

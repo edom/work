@@ -1,0 +1,547 @@
+\chapter{How do we approximate functions?}
+
+\section{Approximation needs metric space.}
+
+Before we can approximate, we must have a metric space.
+You must define the concept of distance.
+You must have a target, an error function, and a desired accuracy.
+
+After that, we are interested in
+what we are approximating, how fast we converge, how accurate we are.
+
+At a higher level, we can think of approximation about
+transformation between metric spaces.
+
+In a narrow sense, we can compute the approximate decimal representation of a real number.
+The truncated decimal representation is the approximation of the real number.
+We know the real number with certainty.
+There is only one such real number.
+We can define it.
+We just haven't computed its decimal representation.
+
+In a narrow sense, to approximate a real number is
+to construct a sequence that converges to that real number.
+
+\section{The meat}
+
+Define a metric \(d\) as a function satisfying these, for all \(x\) and \(y\):
+\begin{align*}
+    d~x~y &\ge 0
+    \\
+    d~x~y &= d~y~x
+    \\
+    d~x~y = 0 &\iff x=y
+\end{align*}
+
+\section{R2 = R}
+
+There is a bijection between \(\Real^2\) and \(\Real\).
+We do this by interleaving the digits.
+\[
+    (x, y) \leftrightarrow \ldots X_2 Y_2 X_1 Y_1 X_0 Y_0 . x_1 y_1 x_2 y_2 x_3 y_3 \ldots
+\]
+
+Consequence for machine learning? For approximation theory?
+
+Given \(d\) and \(<\), we can verify whether a sequence approximates a value.
+However, those are not enough to construct an approximation scheme.
+
+What is \(\sqrt{2}\)? It is the positive \(x\) that satisfies \(x^2 = 2\).
+We can rearrange \(x = 2/x\). If we let \(f~x = 2/x\), then \(\sqrt{2}\) is the fixed point of \(f\)?
+
+\begin{align*}
+    f~x &= x
+    \\
+    f~x &= 2/x
+    \\
+    f~y &= 2/y
+    \\
+    f~y - f~x &= 2/y - 2/x = 2/y - x
+    \\
+    \frac{f~y - f~x}{y - x} &= \frac{2(x-y)}{xy(y-x)} = - \frac{2}{xy} = m
+    \\
+    f~y &\approx f~x + m \cdot (y - x)
+    \\
+    f~x &\approx f~y - m \cdot (y - x)
+    \\
+    x &\approx f~y - m \cdot (y - x)
+\end{align*}
+
+Given a fixed point equation, can we construct an approximation scheme?
+
+Newton-Raphson method: given a monotonous function with nonzero derivative, we can approximate.
+
+\section{Motivating example for the guide and update functions}
+
+Computing \(\sqrt{x}\) is harder than computing \(x^2\).
+We can combine iteration and squaring to compute square root.
+
+What is \(\sqrt{2}\)? It is the positive \(x\) that satisfies the equation \(x^2 - 2 = 0\).
+
+We know that \(x\) is between 1 and 2.
+We can use binary search.
+
+We have an initial approximation that \(x \in [a,b]\) and we want to close in:
+we want to show that \(x \in [a',b']\) where \([a',b'] \subset [a,b]\).
+Let \(c = (a+b)/2\). If \(g~c > 0\), the midpoint is above than the target,
+so we update \(a' = a\) and \(b' = c\).
+If \(g~c < 0\), the midpoint is below the target,
+so we update \(a' = c\) and \(b' = b\).
+
+Look at this example approximation scheme to compute \(\sqrt{2}\).
+\begin{align*}
+    f~x = \begin{cases}
+        x / 2 &: x^2 - 2 > 0
+        \\
+        x &: x^2 - 2 = 0
+        \\
+        x + 1 &: x^2 - 2 < 0
+    \end{cases}
+\end{align*}
+
+Given \fun{raise}, \fun{lower}, \fun{guide}, we can construct this approximation scheme:
+\begin{align*}
+    f~x = \begin{cases}
+        \fun{lower}~x &: \fun{guide}~x > 0
+        \\ x &: \fun{guide}~x = 0
+        \\ \fun{raise}~x &: \fun{guide}~x < 0
+    \end{cases}
+\end{align*}
+
+The key fact is that \(g~x\) does not have to compute the exact error.
+It only has to compute an error that is monotonous to the actual error.
+For example, instead of using the error function \(e~x = x - \sqrt{2}\),
+we can define the guide function \(g~x = x^2 - 2\).
+
+\section{Guide function}
+
+The guide function is easier to compute than the error function.
+
+The guide function is related to the error function:
+\begin{align*}
+    e~x = 0 &\iff g~x = 0
+    \\
+    e~x < e~y &\iff g~x < g~y
+\end{align*}
+
+\section{Guided approximation scheme}
+
+Given an update function \(u\) and a guide function \(g\),
+we get a free iterative approximation scheme \(f\):
+\begin{align*}
+    f~x = u~x~(g~x)
+\end{align*}
+
+Simple update function:
+\[
+    u~x~v = x - v/2
+\]
+
+\section{Testing whether a function is an approximation scheme}
+
+Iff \(e\) is a monotonous function
+and \(|e~(f~x)| < |e~x|\) for all \(x\),
+then \(f^\infty~x\) converges.
+
+\section{The update function must satisfy these properties.}
+
+Constraint: If the guide is zero, then the approximation is exact
+and it must keep the approximation.
+\[
+    u~x~0 = x
+\]
+
+Constraint: For smaller error, the update function must jump smaller.
+\[
+    |a| < |b| \iff |u~x~a - x| < |u~x~b - x|
+\]
+
+The update function must jump against the error.
+\[
+    (u~x~a - x) \cdot a < 0
+\]
+
+\section{Conclusion}
+
+Consider a circle of radius 1 and a square of side 2.
+The area of the circle and the circumference of the square:
+\[
+    \pi^2 < 2^2
+\]
+\[
+    \pi^3 < 2^3
+\]
+\[
+    \pi^n < 2^n
+\]
+
+\[
+    [2 \cos (\pi/4)]^2 < \pi^2
+\]
+
+\[
+    x^2 + y^2 = 1
+\]
+
+\[
+    \int_0^1 \sqrt{1-x^2}~dx = \pi / 4
+\]
+
+via Riemann sum:
+
+\[
+    \pi/4 = \lim_{n\to\infty} \sum_{k=0}^{n-1} \frac{1}{n} \sqrt{1 - (k/n)^2}
+\]
+
+Let
+\[
+    f~n = \sum_{k=0}^{n-1} \frac{1}{n} \sqrt{1 - (k/n)^2}
+\]
+State \(f~(2 \cdot n)\) in terms of \(f~n\).
+
+\[
+    f~(2 \cdot n) = \frac{1}{2} \cdot f~n
+\]
+
+\[
+    f~(2 \cdot n) = \sum_{k=0}^{2 \cdot n - 1} \frac{1}{2 \cdot n} \sqrt{1 - (k/(2 \cdot n))^2}
+\]
+
+\[
+    f~(2 \cdot n) = \sum_{k=0}^{2 \cdot n - 1} \frac{1}{2 \cdot n} \sqrt{1 - ((k/2)/n)^2}
+\]
+
+\[
+    f~(2 \cdot n) =
+    \sum_{k=0,2,\ldots}^{2 \cdot n - 2} \frac{1}{2 \cdot n} \sqrt{1 - ((k/2)/n)^2}
+    + \sum_{k=1,3,\ldots}^{2 \cdot n - 1} \frac{1}{2 \cdot n} \sqrt{1 - ((k/2)/n)^2}
+\]
+
+\[
+    f~(2 \cdot n) =
+    \sum_{2 \cdot j=0,2,\ldots}^{2 \cdot n - 2} \frac{1}{2 \cdot n} \sqrt{1 - (((2 \cdot j)/2)/n)^2}
+    + \sum_{2 \cdot j + 1=1,3,\ldots}^{2 \cdot n - 1} \frac{1}{2 \cdot n} \sqrt{1 - (((2 \cdot j + 1)/2)/n)^2}
+\]
+\[
+    f~(2 \cdot n) =
+    \sum_{j=0}^{n - 1} \frac{1}{2 \cdot n} \sqrt{1 - (j/n)^2}
+    + \sum_{2 \cdot j=0,2,\ldots}^{2 \cdot n - 2} \frac{1}{2 \cdot n} \sqrt{1 - (((2 \cdot j + 1)/2)/n)^2}
+\]
+\[
+    f~(2 \cdot n) =
+    \sum_{j=0}^{n - 1} \frac{1}{2 \cdot n} \sqrt{1 - (j/n)^2}
+    + \sum_{j=0}^{n-1} \frac{1}{2 \cdot n} \sqrt{1 - ((j+1/2)/n)^2}
+\]
+\[
+    f~(2 \cdot n) =
+    \frac{1}{2} \sum_{j=0}^{n - 1} \frac{1}{n} \sqrt{1 - (j/n)^2}
+    + \sum_{j=0}^{n-1} \frac{1}{2 \cdot n} \sqrt{1 - (j/n + 1/(2n))^2}
+\]
+\[
+    f~(2 \cdot n) =
+    \frac{1}{2} \cdot f~n
+    + \frac{1}{2} \sum_{j=0}^{n-1} \frac{1}{n} \sqrt{1 - ((j+1/2)/n)^2}
+\]
+
+\[
+    f~d~(2 \cdot n) = \frac{f~d~n + f~(d + 1/(2\cdot n))~n}{2}
+\]
+
+\[
+    f~d~n = \frac{1}{n} \cdot \sum_{k=0}^{n-1} \sqrt{1 - (k/n + d)^2}
+\]
+
+The identity:
+\[
+    f~d~n = \frac{f~d~(n/2) + f~(d + 1/n)~(n/2)}{2}
+\]
+
+\[
+    f~0~2 = \frac{f~0~1 + f~(1/2)~1}{2}
+\]
+
+\[
+    f~0~4 = \frac{f~0~2 + f~(1/4)~2}{2}
+\]
+
+\[
+    f~0~4 = \frac{\frac{f~0~1 + f~(1/2)~1}{2} + \frac{f~(1/4)~1 + f~(3/4)~1}{2}}{2}
+\]
+
+\[
+    f~0~4 = \frac{f~0~1 + f~(1/4)~1 + f~(2/4)~1 + f~(3/4)~1}{4}
+\]
+
+\[
+    f~0~n = \frac{1}{n} \cdot \sum_{k=0}^{n-1} f~(k/n)~1
+\]
+
+That holds for all Riemann sums where \(d\) is the offset (translation).
+
+\[
+    f~d~1 = \sqrt{1 - d^2}
+\]
+
+Let \(x~n = f~0~(2^n)\).
+
+If you have a guide function and have an interval that contains the target,
+you can use the interval approximation scheme.
+
+The equation for the error function is easy to write but hard to compute.
+The key of approximation is finding a guide function.
+If the number is the root of a polynomial,
+then the polynomial equation can be the guide function.
+
+\section{Incremental Riemann sum}
+
+Let
+\[
+    s~f~d~n = \frac{1}{n} \sum_{k=0}^{n-1} f~(k/n + d)
+\]
+where \(s~f~0~n\) is the finite Riemann sum.
+\[
+    \int_0^1 f~(x+u) ~ dx = \lim_{n\to\infty} s~f~u~n
+\]
+
+Then we have the recurrence relation:
+\[
+    s~f~d~(2 \cdot n) = \frac{s~f~d~n + s~f~(d + 1/(2 \cdot n))~n}{2}
+\]
+The recurrence relation can be used to approximate the integral to any accuracy,
+but it converges slowly.
+
+Equivalently:
+\[
+    s~f~d~n = \frac{s~f~d~(n/2) + s~f~(d + 1/n)~(n/2)}{2}
+\]
+
+where
+\[
+    s~f~d~1 = f~d
+\]
+
+\section{Sequence from iteration}
+
+The sequence generated by iterating \(f\) on \(x\) is:
+\[
+    x, ~ f~x, ~ f~(f~x), ~ \ldots, ~ f^n~x, ~ \ldots
+\]
+
+In the theory of unary algebras, that sequence is also known as
+the \emph{orbit} of \(x\) in the unary algebra \((X,f)\)
+where \(x : X\).
+
+\section{Approximating sequence}
+
+Formally we define a sequence \(x = \{ x_0, x_1, \ldots \}\) approximates \(y\) iff \(x_\infty = y\).
+
+\section{Approximation is not estimation.}
+
+Approximation converges.
+Estimation doesn't converge because the actual value is unknown.
+
+Approximation doesn't guess.
+Estimation guesses.
+
+Approximation has error.
+Estimation has uncertainty.
+
+Meta approximation? Approximate the approximation scheme?
+
+\section{Network of radial basis functions}
+
+We can approximate a high-dimensional sparse function
+by a weighted sum of radial functions.
+(A radial function is a function whose value at a point
+depends only on the distance of that point from a certain point.)
+See Bromhead and Lowe 1988, radial basis function neural network?
+% https://en.wikipedia.org/wiki/Radial_basis_function
+
+\section{Approximating unknown functions}
+
+Of course we can't approximate a function
+if we don't know anything about it at all.
+We must know something.
+
+Given a set of sample values,
+what is the most likely function?
+Given a set of sample bit strings,
+what is the most likely algorithm?
+Isn't this the idea of algorithmic complexity (Solomonoff)?
+
+We don't know the closed form expression of the function,
+and we only know a few finitely many values of the function at some points.
+For example, let the input be a \(64 \times 64\) image
+where each pixel is a 8-bit unsigned integer,
+and let the input be a boolean that indicates
+whether the input is the digit zero.
+
+\section{There is an abstract converging approximation scheme in a metric space.}
+
+Let there be a type \(A\).
+Let there be a total order \(<\) on \(A\).
+We want to approximate \(y : A\).
+Start with any \(a : A\).
+Apply approximation scheme \(f : A \to A\).
+An approximation scheme is an endofunction.
+If \(d~(f~x)~y < d~x~y\) for almost all \(x\), then \(f^\infty~a\) converges to \(y\).
+To approximate \(y\), apply \(f\) repeatedly.
+To approximate \(y\), iterate \(f\).
+If \( f^\infty~x = y \), we say \(f\) converges to \(y\) from \(x\).
+
+\section{Example with a continued fraction}
+
+For example, let \(f~x = 1 + 1/x\).
+It follows that
+\[
+    f^\infty~x = 1 + \frac{1}{1 + \frac{1}{1 + \ldots}} = \frac{1 + \sqrt{5}}{2} = \Phi
+\]
+For every \(x > 0\), we have \(f^\infty~x = \Phi\).
+Therefore that \(f\) is an approximation scheme for \(\Phi\).
+
+Let \(f~x = 2 + 1/x\).
+\[
+    2 + \frac{1}{2 + \frac{1}{2 + \ldots}} = 1 + \sqrt{2}
+\]
+
+\section{Some approximation schemes give rise to continued fractions.}
+
+Rearranging a continued fraction gives a polynomial equation.
+
+We can go the other way too.
+We can always transform a polynomial equation into a continued fraction
+by rearranging the equation so that the unknown variable appears on both sides.
+
+You rearrange the equation and end up with the same thing you begin with.
+\[
+    1 + \frac{1}{1 + \frac{1}{1 + \ldots}} = x
+\]
+Subtract both sides by 1.
+\[
+    \frac{1}{1 + \frac{1}{1 + \ldots}} = x - 1
+\]
+Invert both sides.
+\[
+    1 + \frac{1}{1 + \ldots} = \frac{1}{x - 1}
+\]
+The left side is the same as what we started out with.
+\[
+    x = \frac{1}{x - 1}
+\]
+We have a quadratic equation.
+\[
+    x^2 - x - 1 = 0
+\]
+
+Let \(f~x = 1 + 1/x^2\).
+\[
+    1 + \frac{1}{\left(1 + \frac{1}{(1+\ldots)^2}\right)^2}
+\]
+
+\section{Continued fraction of functions}
+
+Let's use the same equation \(f~x = 1 + 1/x\),
+but now \(x : \Real \to \Real\).
+Actually \(f~x~t = 1 + \frac{1}{x~t}\).
+
+Some converges to the constant function \(t \to \Phi\).
+
+\section{Continued fraction of square matrices}
+
+\(f~x = I_n + x^{-1}\).
+
+Some converge. Some oscillate.
+
+\section{Taylor series of function space}
+
+Given \(x : \Real\),
+the Maclaurin series of \(f\) is
+\[
+    \sum_{k=0}^{\infty} \frac{(d^k~f)~0 \cdot x^k}{k!}
+\]
+
+Now what if \(x : \Real \to \Real\)?
+
+\section{Derivative in function space}
+
+Let \(x : \Real \to \Real\).
+Take the limit as \(h \to 0\).
+\[
+    h \cdot d~f~x = f~(x + h) - f~x
+\]
+
+% https://en.wikipedia.org/wiki/Generalizations_of_the_derivative#Functional_analysis
+
+\section{Combination of simpler functions}
+
+\[
+    g~(f_0,f_1,\ldots) \sim w_0 \cdot f_0 + w_1 \cdot f_1 + \ldots
+\]
+
+\section{Continued fraction involving discrete types}
+
+\section{Problem statement}
+
+Approximate a function as a combination of simpler functions.
+
+Approximation needs distance.
+Approximating \(x : A\) requires that a distance \(d~x~y\) be defined.
+The value of \(d~x~y\) is not important.
+The important is the ordering among those values.
+
+A straightforward approximation scheme \(f\) satisfies:
+\[
+    d~(f~x)~(f~(f~x)) < d~x~(f~x)
+\]
+
+\section{Details}
+
+We have a square integrable function \(f : \Real^\infty \to I\)
+where \(I = [0,1]\) is the unit interval.
+We don't know the equation for \(f\), but we have some samples.
+We want to approximate it as a combination of simpler functions
+\[
+    f \sim g~\begin{bmatrix} c_0 & c_1 & \ldots \end{bmatrix}
+\]
+where each \(c_k : \Real \to \Real\)
+and \(g : (\Real \to \Real)^\infty \to (I \to I)\).
+
+If we generalize that by defining \(A = I \to I\),
+we have a thing \(f : A\)
+where each \(c_k : A\) and \(g : A^\infty \to A\).
+\[
+    f \sim g~c
+\]
+
+In the case of a perceptron, \(g\) has the form
+\[
+    g~c = s ~ (m~w~c)
+\]
+where \(W : \Real^\infty\), \(c : \Real^\infty\),
+and \(s : \mathbb{R} \to I\).
+The purpose of \(s\) is to keep the summation result in \(I\).
+
+We can state it as a combination of other functions.
+
+We can truncate its Taylor series.
+
+We can fit a function to the points.
+
+
+
+
+
+% QUESTION
+
+
+
+Define $f^\infty(x)$ as $\lim_{n\to\infty} f^n(x)$, where $f^n = \underbrace{f \circ \ldots \circ f}_{n}$.
+
+Usually the unqualified term 'continued fraction' means continued fraction in $\mathbb{R}$. For example, consider $f(x) = 1+1/x$ where $x \in \mathbb{R}$. In that case, for all $x > 0$, we have $f^\infty(x) = \Phi = \frac{1+\sqrt{5}}{2}$.
+
+Now consider another $f(x) = 1 + 1/x$ where $x \in \mathbb{R} \to \mathbb{R}$. For some $x$, we have $f^\infty(x) = \hat\Phi$ where $\hat\Phi$ is the constant function that always gives $\Phi$. In other words, we can think of $f^\infty$ as a continued fraction in the function space $\mathbb{R} \to \mathbb{R}$.
+
+Have anybody studied such continued fractions in function spaces? I googled:
+
+- continued fraction in function space
+- continued fraction of real function

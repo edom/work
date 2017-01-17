@@ -1,0 +1,399 @@
+\chapter{Learning}
+
+\section{Approximation}
+
+\index{approximation error}
+\index{error!of approximation}
+If the data set is \(D = \{(x_1,y_1),\ldots,(x_n,y_n)\}\) and the approximator is \(f\),
+then the \emph{approximation error} is \(e = \sum_{k=1}^n f(x_k) - y_k\).
+
+\section{Classifier}
+
+\index{binary classifier}%
+\index{classifier}%
+\index{classifier!binary}%
+The type of a \emph{classifier} is \(a \to b\) where \(b\) is countable.
+Iff \(|b| = 2\), the classifier is \emph{binary}.
+Iff \(|b|\) is finite, the classifier is \emph{multi-class}.
+
+A \emph{quasiclassifier} is an inhabitant of \(\Real^\infty \to \Real\).
+A \emph{predicate} \(p\) turns a quasiclassifier \(q\) into a classifier \(c~x = p~(q~x)\).
+
+A multiclassifier can be made from binary classifiers.
+
+\index{maximum-margin hyperplane}%
+\index{hyperplane!maximum-margin}%
+The \emph{maximum-margin hyperplane} separating
+the lower training set \(L\) and the upper training set \(U\)
+is the hyperplane \(h\)
+such that
+\(\forall a \in U : h~a > 0\),
+\,\(\forall b \in L : h~b < 0\),
+and \(\dist~h~(U \cup L)\) is maximal.
+
+\section{Computation, Turing machine}
+
+Turing machine as mono-unary algebra of states (configuration-tape pairs).
+Universal Turing machine.
+
+Lambda calculus.
+Recursive functions.
+
+Learning:
+Given sample, infer something about the population.
+
+Evolution must hardwire procreation to feel good;
+otherwise the species will avoid procreation,
+and it will go extinct.
+
+Machine constructs mental model of the world through its senses,
+and then revise its model.
+It can predict the result of activating certain actuators.
+Language is part of the mental model.
+A sufficiently advanced machine may internally form a language.
+
+Ancient humans knew that fire is hot.
+They just didn't have words to express that fact.
+A modern human who have never experienced a fire
+wouldn't know that fire is hot,
+even though he can read the text ``fire is hot'',
+but all he would know is that fire is a thing, and hot is an adjective.
+
+We can only know something in relation to other things.
+We understand that fire is hot because we understand the consequences:
+fire is bright, heat cooks food.
+
+There is no way to solve a Rubik's cube quickly with just intuition.
+The only way to do that is to follow an algorithm.
+You must think abstractly.
+You must translate the problem into mathematics,
+and then translate the mathematics back into the problem.
+
+An advanced machine would invent mathematics.
+An advanced machine would invent a priori knowledge.
+
+A human can learn from just some samples;
+see a similar thing three times and someone would guess that there's a pattern.
+Sometimes this worked too well: people see patterns when there aren't any;
+pareidolia.
+It's just a consequence of the architecture of the brain.
+The brain is hardwired to recognize patterns.
+
+\section{The artificial dog brain}
+
+This system is basic reinforcement learning.
+
+The operator institutes external reward
+(virtual snack) or punishment (virtual pain)
+by a simple switch.
+
+The behavior function, given sensors, drives the actuators.
+
+Uses gradient descent for backpropagation.
+
+Let \( x : I^m \), \( y : I^n \).
+
+The operator determines the reward function;
+it can be \(-1,0,1\).
+
+The equation governs the system:
+\[
+    d~f = g~r
+\]
+where \(d : (A \to A) \to (A \to A)\) is the differentiation operator,
+\( f : I^m \to I \) is the behavior,
+and \( r : I \) is the external reward.
+If we can feed the reward back from
+the environment to the input of the system,
+then we have an adaptive system that
+learns on its own throughout its lifetime without operator supervision.
+In English: the change of behavior is a function of the reward.
+
+\[
+    f'~x - f~x = r
+\]
+where
+\[
+    f' = f + d~f
+\]
+The definition of \(d\):
+\[
+    h \cdot d~f~x = f~(x+h) - f~x
+\]
+as \(h\) vanishes,
+but the catch is that
+here \(x\) and \(h\) are functions, not the usual numbers.
+
+Hypothetical system:
+\begin{align*}
+    f'~x - f~x &= r
+    \\
+    (f' - f)~x &= r
+    \\
+    ((f + h) - f)~x &= r
+    \\
+    h~x &= r
+    \\
+    f'~x &= f~x + h~x
+\end{align*}
+
+The reward is the projection of the behavior difference to the real line.
+The function \(h\) is the behavior difference function.
+We can choose any \(h\) that satisfies \((f + h)~x = r\).
+The problem is: which one?
+There are infinitely many such functions.
+
+Another thing that makes humans different from machines is that
+\emph{over time, human changes how they respond to rewards.}
+There is always a hardwired mechanism that interacts with the environment
+to reinforce certain behaviors by driving internal satisfaction.
+
+It's possible that mathematics may uncover a better architecture for learning,
+or even uncover the limits of learning.
+
+A possible reward mechanism in human brain is dopamine level.
+If this hypothesis is true, then it should be possible to change human behavior,
+possibly against the brain's will, by dopamine therapy.
+Dopamine therapy, combined with conditioning (like what Pavlov did to dogs),
+should be able to turn anyone into someone else entirely different,
+someone who enjoys what he hated, and hates what he enjoyed.
+
+In biology, there is \emph{reward system}.
+
+\begin{align*}
+    \frac{(f + h)~x - f~x}{h} = r
+\end{align*}
+
+We understand what it means to change a number a little.
+But what does it mean to change a function a little?
+
+We can define
+
+\[
+    f + g = \lambda x \to f~x+g~x
+\]
+
+Indeed we can lift any binary operator elementwise that way.
+The difference between two functions is also a function.
+There is a concept of infinitesimals in the set of hyperreal numbers.
+We can extend functions to hyperfunctions in the same way
+we extend real numbers to hyperreal numbers;
+then we define infinitesimals in function space.
+But probably we'll fare better if we just approach this from topology
+in the first place instead of from nonstandard analysis.
+
+The problem is, when punished, the dog knows that
+\(x\) should not be mapped to \(y\),
+but it does not know what \(x\) should be mapped to.
+
+The dog is hardwired with the preconception that the output is proportional to the input.
+
+How does the reward function relate \(f_1\) and \(f_2\)?
+
+The brain samples the input at certain time intervals.
+
+\section{Precisely defining vague words}
+
+The most difficult task in establishing a learning theory is defining learning mathematically.
+With the right definition, things will fall into place on their own.
+
+A learning equation with goal function \(g\)
+is an equation \( f~x = y \) where \( y \) may contain \( f \)
+and that equation maximizes \( g \).
+\emph{Learning is always relative to a goal function.}
+There is nothing that `just learns'.
+It learns \emph{something};
+that is, `learn' is a transitive verb.
+
+A learning system is a control system that minimizes \(g~x\), subject to
+\[
+    \bmat{z \\ y} = \bmat{r~z~y \\ c~y~x}.
+\]
+
+A learning system is a simultaneous functional equation and optimization problem.
+Learning is a special case of \emph{constrained optimization}.
+Every learning has the form ``Minimize \(g~x\), subject to \(x = f~x\).''
+
+The goal function is a function of the input signal.
+There is no other definition of the goal function that makes sense.
+
+In real world, we don't know the goal function;
+we can only observe behavior.
+The agent may seem to change its high-level goal,
+but there has to be one hardwired goal that causes the agent to change high-level goal.
+The agent changes its high-level goal because it is hardwired to maximize its hardwired goal.
+Every behavior of the agent can be understood in terms of maximizing its hardwired goal.
+
+Every normal embryo of a species grows in the same way,
+following the same sequence,
+with the same number of cells.
+This suggests that every member of a species
+shares the same `bootstrapping' program. (?)
+
+\section{General learning}
+
+How do we define learning mathematically?
+A dog learns. A human learns. An organization learns. A machine learns.
+
+To learn is to purposefully change behavior?
+
+Purposeful can be defined as the optimization (extremization) of a mathematical function.
+
+Define behavior mathematically?
+
+\section{Learning systems are special cases of control systems}
+
+A learning system is a control system that alters
+its own feedback mechanism to optimize its goal function.
+
+An intelligent system can reach its goal in various environments.
+
+A measure of intelligence: diff. environment / diff. goal ?
+
+\section{Supervised learning is function approximation or statistical estimation?}
+
+Every supervised learning problem is a special case of this:
+\begin{quote}
+Given a few \((x,y) \in f\), approximate \(f\).
+\end{quote}
+
+\section{Information gain}
+
+Shannon's definition of \emph{surprisal} (self-information)?
+
+A neuron \emph{reduces entropy}?
+
+\section{Neuron on a finite field}
+
+Who says we have to use real numbers?
+
+There are two ways of thinking about a function \(f : A^n \to A\) where \(A\) is finite:
+as a \emph{projection} from a hyperplane to a line,
+or as a \emph{height map}.
+Thinking it as a projection (a dimension-reducing function)
+gives rise to the question about the information gain.
+Thinking it as a height map gives rise to the question about the gradient.
+
+The question is: can we approximate a complex function as a combination of simple functions?
+
+Let \(L\) be a subset of \( A^2 \to A \).
+We call \(L\) the \emph{allowed} set.
+The question is: can we compose arbitrarily many functions from \(L\)
+to form \( A^2 \to A \)?
+If yes, then we say that \(L\) \emph{generates} \( A^2 \to A \).
+
+Conjecture: \(L\) generates \(A^2 \to A\) iff
+there is no triple \((f,g,h)\in F^3\) that satisfies \( \forall x,y,z: f~x~(g~y~z) = h~x~y \).
+
+Translate to free monoid.
+There are 4 ways to wire a 2-function: \( fxx, fxy, fyx, fyy \).
+There are 2 patterns to wire two 2-functions: \( ffxxx, fxfxx \),
+where an \(f\) is a 2-function and an \(x\) is a variable.
+In total, there are \( 2^2 \times 3^3 = 108 \) ways to wire two 2-functions.
+However, \( |A^3 \to A| = |A|^{|A|^3} \).
+There are ? patterns to wire three 2-functions: \( fffxxxx, ffxfxxx, ffxxfxx, fxffxxx, \ldots \).
+
+There are two combinations: \(\fb{x}{\fb{y}{f~x~y}}\) and \(\fb{x}{\fb{y}{f~y~x}}\).
+
+Wiring combinations 2: \(f~(g~x~y)~z\), \(f~x~(g~y~z)\).
+
+Can we build \emph{every} neural network from 2-input neurons only?
+
+\section{Learning is special case of feedback}
+
+\section{Neuron, neural network layer, neural network}
+
+\index{neuron}%
+\index{neural network}%
+\index{neural network layer}%
+The type of a \emph{neuron} is \(\Real^\infty \to \Real\).
+The type of a \emph{neural network layer} is \(\Real^\infty \to \Real^\infty\).
+The type of a \emph{neural network} is \(\Real^\infty \to \Real^\infty\).
+If the neurons are \(N_0,N_1,\ldots\), the layer is \(L~x = [N_0~x, N_1~x, \ldots]\).
+If the layers are \(L_0,L_1,\ldots\), the network is \(W~x = \ldots L_1~(L_0~x) \).
+
+\section{Neuron}
+
+The type of a recurrent neuron is \(\Real \to \Real^\infty \to \Real\),
+but that type has the cardinality as \(\Real^\infty \to \Real\) does.
+A \emph{recurrent neuron} is an equation \(y_t = f~m_t~x_t\)
+and a recurrence relation \(m_t = y_{t-1}\).
+An infinite impulse response filter is a recurrence relation.
+
+A \emph{neuron} \(n : \Real^\infty \to \Real\)
+has weight \(w \in \Real^\infty\), input \(x \in \Real^\infty\),
+nonlinear activation function \(f : \Real \to \Real\),
+and output \(y = f~(w \cdot x)\) where \(w \cdot x = \sum_{k=0}^\infty w_k \cdot x_k\).
+Elsewhere the term \emph{artificial neuron} is used to disambiguate
+such neuron from \emph{biological neuron}.
+
+A neuron is analytically a function approximation
+and topologically a continuous mapping.
+
+A neuron with two inputs computes \(y = f~(w_0 \cdot x_0 + w_1 \cdot x_1)\).
+An infinite neuron computes \(y = f~w~x\)
+where each of \(y,w,x\) is an infinite sequence of real numbers.
+
+\index{McCulloch-Pitts neuron}%
+\index{neuron!McCulloch-Pitts}%
+A \emph{McCulloch-Pitts neuron} is a neuron whose activation function is the step function.
+
+A Hopfield network.
+
+\section{Neural network layer}
+
+A \emph{neural network layer} is
+\([y_1,\ldots,y_n]\) where each \(y_k = f~(w_k \cdot x) \).
+A neural network layer is
+\(Y = F~(W \vec{x}) \).
+\(F\) is nonlinear.
+
+\section{Radial basis function neural network}
+
+Non-incremental least-square-error approximation by a sum involving a radial basis function.
+The \emph{approximator} \(f\) is a function with the shape \(f~x = \sum_{k=1}^n w_k \cdot b~(x-x_k)\)
+where \(n\) and each \(x_k\) are fixed beforehand.
+The \emph{approximand} is \(g\).
+To obtain \(f\),
+get \(n\) samples \((x_1,y_1), ~ \ldots , ~ (x_n,y_n)\) where each \(y_k = g~x_k\),
+and then
+solve this linear equation to obtain \(\vec{w}\):
+\begin{align}
+    \bmat{g~x_1 \\ \vdots \\ g~x_n} = \bmat{b~(x_1-x_1) & \cdots & b~(x_1-x_n) \\ \vdots & \ddots & \vdots \\ b~(x_n-x_1) & \cdots & b~(x_n-x_n)} \bmat{w_1 \\ \vdots \\ w_n}
+\end{align}
+The resulting \(\vec{w}\) minimizes the
+\emph{square error} (the norm-2 of the error vector).
+
+Incremental approximation.
+Update the approximator to \(f' = f + \Delta f\)
+where
+\(\Delta f~x = - b ~ (x - x_0) \cdot \Delta y\).
+Use genetic algorithm to optimize the width of \(b\).
+See that \(f'~x_0 = y_0\).
+Relate \(\Delta f = f' - f\) and \(\Delta y\).
+\(\int_{-\infty}^\infty \Delta f~x ~ dx = - c \cdot \Delta y\).
+If \(g\) is integrable, then \(f\) will converge if given enough samples.
+Let \(y = f~x_0\).
+The error at \(x_0\) is \(\Delta y = y - y_0\)
+where \(y = f~x_0\) and \(y_0 = g~x_0\).
+Let \(b\) be a probability density function (an integrable function with one unit of area under the curve) whose peak is at zero.
+
+%\section{Adversarial networks}
+%\section{Generative adversarial networks}
+
+% https://en.wikipedia.org/wiki/Feature_learning
+% https://en.wikipedia.org/wiki/Autoencoder
+% https://en.wikipedia.org/wiki/Recurrent_neural_network
+% http://cs.stanford.edu/people/eroberts/courses/soco/projects/neural-networks/Architecture/index.html
+% https://en.wikipedia.org/wiki/Autoreceptor
+
+\section{FitzHugh-Nagumo neuron}
+
+\index{FitzHugh-Nagumo neuron}%
+\index{neuron!FitzHugh-Nagumo}%
+A \emph{FitzHugh-Nagumo neuron} is the following system of equations \cite{izhikevich2006fhn}
+\begin{align*}
+    \dot v &= v - \frac{v^3}{3} - w + I_{ext}
+    \\
+    \tau \dot w &= v + a - b w
+\end{align*}

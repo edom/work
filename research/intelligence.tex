@@ -1,0 +1,337 @@
+\chapter{Intelligence}
+
+We can hide indexes by using the delay operator:
+\[
+    d~f~k = f~(k-1)
+\]
+We can rewrite
+\( x_k + x_{k-1} = 0 \)
+to
+\(x + d~x = 0\).
+
+\section{Relative intelligence measure}
+
+Given a system, measure its intelligence relative to something.
+
+We can measure with respect to a function.
+The result of the function when applied to the system history
+is the intelligence measure of the system.
+
+\section{Intelligent system as a special case of second-order endofunctions on an infinite-dimensional real space}
+
+Consider infinite-dimensional space \(A^\infty\).
+It can be thought as a type whose inhabitants are infinite sequences.
+Each element of each sequence is an inhabitant of \(A\).
+An endofunction \(A^\infty \to A^\infty\) relates the input and output signals at certain time.
+A second-order endofunction \((A^\infty \to A^\infty) \to (A^\infty \to A^\infty)\) is the architecture of the intelligent system;
+it determines how the system changes itself.
+
+\begin{center}
+    \begin{tabular}{ll}
+        thing & type
+        \\
+        \hline
+        signal & \(A\)
+        \\
+        signals & \(A^\infty\)
+        \\
+        behavior & \(A^\infty \to A^\infty\)
+    \end{tabular}
+\end{center}
+
+A vector in \(A^\infty\) represents all signals at a certain time.
+There are input, output, and internal signals.
+All of them are real numbers.
+
+Alternative summation
+\[
+    N \left( \prod_i k_i \cdot f_i \right)
+\]
+
+\section{Other raw ideas}
+
+Evolution of a system?
+
+Relative measure of intelligence.
+\(m\)-intelligence.
+\(m : S \to \mathbb{R}\).
+
+What about competitive learning? Selforganizing maps?
+
+Multiplication is like and, addition is like or.
+
+\subsection{Feedback}
+
+An example discrete function with feedback is
+\( f~(x+1) = x + \frac{1}{8} \cdot f~x \).
+An example continuous function with feedback is
+\( f~(x+h) = x + \frac{1}{8} \cdot f~x \cdot h \).
+The discrete case is a difference equation.
+The continuous case is a differential equation.
+
+Example: linear interpolating latch,
+generalization of level-triggered D latch:
+\[
+    f~w~x~(t+1) = (1 - w) \cdot f~0~x~t + w \cdot x
+\]
+\[
+    f~w~x~0 = w \cdot x
+\]
+where \(w\) is the write enable signal
+(a real number in the unit interval),
+\(x\) is the current input,
+and \(t\) is the discrete time.
+\[
+    y' = (1 - w) \cdot y + w \cdot x
+\]
+
+A function \(f\) with natural number argument
+is an infinite sequence \(f(0), f(1), \ldots, f(n), \ldots\).
+
+\section{Reward system and reinforcement learning}
+
+In mathematical optimization there is something called
+\emph{loss function}, also known as \emph{cost function}.
+
+Learning must be driven by something;
+otherwise a system won't know what to try.
+Intelligence is function optimization.
+
+Let \( r : A^\infty \to A \) be the \emph{reward function}.
+This is intrinsic to the system.
+This drives the system's behavior.
+The system always behaves with the goal of maximizing the reward.
+This function explains why a system behaves the way it does.
+The reward function depends only on inputs and the internal state.
+
+Consider the system at a given time.
+We have input \(x\).
+We have behavior function \(f\).
+We have reward \(r = R~x\).
+We hope that the machine
+replaces the behavior function with \(f'\)
+to increase the next reward.
+How are \(f'\) and \(r\) related?
+
+We make the machine assume that there is a correlation
+between its output and its reward.
+But isn't this gratuitous?
+But if there isn't a causal relationship between the output and the input,
+how can something learn at all?
+Feedback is necessary but not sufficient for learning.
+
+Learning is a special case of control systems in electrical engineering.
+
+\section{A concrete architecture for growable neural networks on year-2016 machines}
+
+The signal buffer is \(S\) and \(T\), an array, the buffered output of neurons.
+Each neuron accepts an arbitrary number of scalars but outputs exactly one scalar.
+
+Is a constant function intelligent? Is a complicated function intelligent?
+Is a program that has one-billion lines of nontrivial code intelligent?
+
+The weight buffer is \(W\).
+
+A neuron has \(w\) (an array of weight indexes), \(x\) (an array of input indexes), and \(y\) (an output index).
+Both \(w\) and \(x\) must have the same length.
+
+In each iteration, for each neuron \((w,x,y)\),
+we do \(T[y] := N \left( \sum_i W[w_i] \cdot S[x_i] \right) \),
+and then swap the pointers \(S\) and \(T\).
+The function \(N\) is the clamping function.
+
+\section{Examples}
+
+You can skip this section if you already understand what I'm talking about.
+
+It seems that neurons encode weights using pulse frequency modulation? Citation?
+
+Example of an infinite-dimensional vector:
+\[
+\begin{bmatrix}
+1/1^2 & 1/2^2 & 1/3^2 & \ldots & 1/n^2 & \ldots
+\end{bmatrix}
+\]
+
+Example of an endofunction:
+\( f~x = y \) where \( y_k = x_k / k \).
+\[
+    f
+    \begin{bmatrix}
+        x_1 & x_2 & \ldots & x_n & \ldots
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        x_1 / 1 & x_2 / 2 & \ldots & x_n / n & \ldots
+    \end{bmatrix}
+\]
+
+Example of a second-order endofunction:
+\[
+    a~f = \sum_i k_i \cdot f_i
+\]
+where each \(f_i : A^\infty \to A^\infty\) is a function,
+each \(k_i\) is a scalar, and \( \sum |k_i| < \infty \).
+
+Another convolutional example of a second-order endofunction:
+\[
+    (a~f)_n = \sum_{i=0}^n f_{n-i} \cdot f_i
+\]
+where \(((f \cdot g)~x)_n = (f~x)_n \cdot (g~x)_n\).
+We can define a vector elementwisely.
+
+Consider \(A = \mathbb{R}\).
+
+If we have a vector space \(A\),
+we can make the function space \(A \to A\) a vector space for free,
+like \(f + g = x \to f(x) + g(x)\).
+If \(A\) is a vector space, then \(A \to A\) is also a vector space,
+and then \((A \to A) \to (A \to A)\) is also a vector space.
+
+Projectors are functions whose type is like \(A^\infty \to A\).
+They are everywhere in machine learning.
+They are topological maps.
+All linear classifiers are projectors.
+Perceptrons and support vector machines are linear classifiers.
+
+In this chapter, we show how intelligence arise
+from projectors that take other projectors.
+\begin{align*}
+    A^\infty &\to A^\infty
+    \\
+    (A^\infty \to A^\infty)^\infty &\to (A^\infty \to A^\infty)
+\end{align*}
+
+\section{Comparison between machine and human}
+
+Perceptrons work by updating weight, but the structure doesn't change;
+there are no new neurons.
+Brain works by updating weight \emph{and} the number of signals;
+the structure changes.
+We have to make an artificial neural network that can grow.
+
+Let a behavior function be an inhabitant of \(I^n \to I\).
+In a human, \(n\) changes with time;
+humans grow and have more senses as they age.
+However, we can model this growth
+using infinite-dimensional space whose
+members have only finitely many nonzero components.
+Instead of using a dependently-typed function \(f~t : I^{n~t} \to I\),
+we use \(f~t : I^\infty \to I\),
+and require that the input of \(f~t\) have at most \(n~t\) nonzero components.
+
+The human sensory system can be thought as a subspace
+of \([0,1]^\infty\) where each vector
+is required to have at most \(n\) nonzero components,
+where \(n\) is the number of sensors.
+We don't know \(n\) exactly,
+but it's a finite natural number,
+although it may be rather large.
+
+The primary difference between an artificial neural network and a human brain
+is the artificial neural network does not change after time,
+whereas the human brain always changes.
+Once the weights of such network is set by training,
+it never changes again until it's retrained.
+The human brain has a \emph{hardwired reward function}
+that changes the brain to maximize the reward.
+This reward function is the dopamine level.
+Therefore if we can formulate a suitable reward function,
+we can make a seed AI.
+But there is a branch that does this.
+It's called \emph{lifelong machine learning}.
+
+\section{Fractal appearance of intelligence}
+
+Intelligence looks fractal.
+The smallest unit of processing, the neuron, is a projector.
+The whole behavior of a human is a projector.
+Those neurons compose to form a bigger projector.
+
+We can form a vector space from a function space \(A^\infty \to A\),
+provided that we also define some operations on \(A\).
+If you can define distance \(d_A\) on \(A\),
+you can define distance on \(d_F\) like this:
+\[
+    d_F~f~g = \sum_{X \in P(A)} d_A~(f~x)~(g~x) \cdot |X|
+\]
+where \(x \in X\), \(P\) divides \(A\) into partitions,
+and \(|X|\) is the size of the infinitesimal subspace \(X\).
+In other words, \(P(A)\) is the set of all disjoint infinitesimal subsets of \(A\).
+But isn't that just a Riemann sum?
+
+\section{Architecture function}
+
+Let \(A = I^\infty \to I\).
+We can state the fractal nature of projectors explicitly:
+\[
+    f~x = a~(f_1,f_2,f_3,\ldots)~x
+\]
+where \(a : A^\infty \to A\) is the \emph{architecture function}
+and each \(f_k : A\) is a component function,
+and there are only finitely many nonzero components.
+Observe that \emph{the architecture function itself is also a projector}.
+It's a higher-order projector.
+
+There are two fundamental subtypes:
+bell (like normal distribution function) and sigmoid (like asinh),
+but because we restrict ourself to unit interval,
+we can use bells only.
+A \emph{bell} is a function with exactly one maximum.
+A unit interval projector can be approximated as a weighted combination of bells.
+\[
+    f~x = N \left( \sum_k w_k \cdot f_k~x \right)
+\]
+Each \(f_k : I^n \to I\) is a component.
+The function \(N : \mathbb{R} \to I\) is the normalization function,
+usually a sigmoid, usually asinh,
+or even this ramp:
+\[
+    N~x =
+    \begin{cases}
+        -1 & : x \le -1
+        \\
+        x & : -1 \le x \le 1
+        \\
+        1 & : 1 \le x
+    \end{cases}
+\]
+
+The problem of machine learning architecture
+is \emph{restating \(f\) as a combination of simpler functions}
+that is general enough so that it can navigate the real-world.
+Indeed every \(f_k\) could be an unit interval projector,
+and we have a hierarchy of projectors
+like multilayer perceptrons.
+
+We want it to be smooth.
+If \(x\) and \(y\) are near,
+then \(f~x\) and \(f~y\) should also be near.
+As \(x\) gets closer to \(y\), so should \(f~x\) get closer to \(f~y\).
+
+The function \(f\) can have any shape,
+but most learning happens in something like a discrete Hilbert space, if there is such a thing.
+For example, an image binary classifier is a function \(f : P^n \to B\)
+where \(P\) is the pixel type and \(n\) is the number of pixels,
+and the boundary between two classes is blurred but smooth
+(not clear-cut, but not blotchy either).
+
+Every binary classifier is a function \(I^n \to I\).
+Both perceptron and support vector machine have the same type,
+but different implementation details.
+Truncating the output of a projector produces a binary classifier.
+
+To build our intuition we can consider the case \(A \to A\) and \(A^2 \to A\).
+The function \(A \to A\) can be graphed on paper.
+We can also draw a heightmap for \(A^2 \to A\).
+The graph of \(A\) can have many humps.
+
+Intelligence is what is exhibited by a function of type \(A^\infty \to A\).
+Summarization of information.
+
+\section{The sigmoid dilemma}
+
+An undesirable property of sigmoid is \(f~(f~|x|) < |x|\).
+Every continuous sigmoid function has that problem.
+The ramp function doesn't have this problem,
+but its derivative has discontinuities.

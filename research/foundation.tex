@@ -1,0 +1,388 @@
+\chapter{Foundation}
+
+If you are already familiar with the things here,
+please at least skim this chapter to verify that
+we are speaking the same language.
+
+\section{Type}
+
+\index{type}%
+\(x : T\) means that the \emph{type} of \(x\) is \(T\).
+\index{function type}%
+\index{type!function}%
+A \emph{function type} looks like \(a \to b\).
+
+Function application:
+Iff \(x:A\) and \(f:A\to B\), then \(f(x):B\).
+
+Types and sets are different:
+\(x \in A\) and \(x : A\) are different.
+
+\section{Logic}
+
+\index{iff}%
+\index{if and only if}%
+``Iff'' is ``if and only if''.
+It is bi-implication.
+
+\index{connectives}%
+\index{logical connectives}%
+Logical connectives:
+\index{conjunction}%
+\index{and}%
+\emph{Conjunction} is \(a \wedge b\) (\(a\) and \(b\)).
+\index{disjunction}%
+\index{or}%
+\emph{Disjunction} is \(a \vee b\) (\(a\) or \(b\)).
+\index{implication}%
+\emph{Implication} is \(a \implies b\) (if \(a\) then \(b\)).
+\index{bi-implication}%
+\emph{Bi-implication} is \(a \iff b\) (iff \(a\) then \(b\)).
+\index{negation}%
+\index{not}%
+\emph{Negation} is \(\neg a\) (not \(a\)).
+
+\section{Set}
+
+\index{set}%
+Practically, a \emph{set} is an unordered collection of unique things.%
+\index{Russell's paradox}%
+\footnote{Theoretically, a ``set'' cannot be defined this way due to Russell's paradox.}
+If \(a \neq b\), then the notations \(\{a,b\}\), \(\{b,a\}\), and \(\{a,a,b\}\)
+all describe the same set of two elements.
+The \emph{cardinality} of a set \(A\), written \(|A|\),
+is the number of elements of \(A\).
+
+\index{set builder notation}%
+\index{notation!set builder}%
+The \emph{set builder notation}
+\( \{ M ~|~ F \} \)
+describes the set of every \(M\) where \(F\) is true
+where \(M\) is an expression and \(F\) is a logic formula.
+For example, the set \(\{ x^2 ~|~ x \in \Nat \}\) is \(\{ 0^2, 1^2, 2^2, \ldots \}\).
+The ellipsis (\ldots) is not an element of the set;
+there are just too many things to write.
+
+Set relationships:
+\index{subset}%
+\(A \subseteq B\)
+(\(A\) is a \emph{subset} of \(B\))
+iff \(\forall x (x \in A \implies x \in B)\).
+\index{disjoint sets}%
+\index{sets!disjoint}%
+Two sets \(a\) and \(b\) are \emph{disjoint} iff \(a \cap b = \emptyset\).
+
+Set operations:
+\index{intersection}%
+\index{intersection  (set theory)}%
+The \emph{intersection of \(A\) and \(B\)} is
+\(A \cap B = \{ x ~|~ x \in A \wedge x \in B \}\).
+\index{union}%
+\index{union (set theory)}%
+The \emph{union of \(A\) and \(B\)} is
+\(A \cup B = \{ x ~|~ x \in A \vee x \in B \}\).
+\index{subtraction (set theory)}%
+\index{sets!subtraction}%
+The \emph{subtraction of \(A\) and \(B\)} is
+\(A - B = \{ x ~|~ x \in A \wedge x \not\in B \}\).
+\index{Cartesian product}%
+The \emph{Cartesian product of \(A\) and \(B\)} is \(A \times B = \{ (a,b) ~|~ a \in A, b \in B \}\).
+The \emph{Cartesian product of \(A_1,\ldots,A_n\)} is
+\(\prod_{k=1}^n A_k = A_1 \times \ldots \times A_n = \{ (a_1,\ldots,a_n) ~|~ a_1 \in A_1, ~\ldots, ~a_n \in A_n \}\).
+\index{power set}%
+\index{set!power}%
+The \emph{power set} of \(A\) is \(2^A = \{ X ~|~ X \subseteq A \}\).
+
+\section{Set partitioning}
+
+\(A_1,\ldots,A_n\) is a \emph{partitioning of \(A\)} iff
+\(\bigcup_{k=1}^n A_k = A\) and
+\(\forall i \neq j (A_i \cap A_j = \emptyset)\).
+
+\section{Relation}
+
+\index{relation}%
+A \emph{relation} is a subset of a Cartesian product.
+\index{binary relation}%
+\index{relation!binary}%
+\(R\) is a \emph{binary relation} between \(A\) and \(B\) iff \(R \subseteq A \times B\).
+Iff \(A = B\), then \(R\) is an \emph{endorelation}.
+
+Properties of an endorelation:
+\index{reflexive relation}%
+\index{relation!reflexive}%
+An endorelation \(R \subseteq A \times A\) is \emph{reflexive} iff
+\(\forall x \in A : (x,x) \in R\),
+\index{symmetric relation}%
+\index{relation!symmetric}%
+is \emph{symmetric} iff
+\(\forall x,y: (x,y) \in R \iff (y,x) \in R\),
+\index{antisymmetric relation}%
+\index{relation!antisymmetric}%
+is \emph{antisymmetric} iff
+\(\forall x,y: (x,y) \in R \wedge (y,x) \in R \implies x = y\),
+\index{transitive relation}%
+\index{relation!transitive}%
+is \emph{transitive} iff
+\(\forall x,y,z: (x,y) \in R \wedge (y,z) \in R \implies (x,z) \in R\),
+\index{total relation}%
+\index{relation!total}%
+is \emph{total} iff
+\(\forall x \in A , y \in A : (x,y) \in R \vee (y,x) \in R\).
+
+\index{equivalence relation}%
+\index{relation!equivalence}%
+An \emph{equivalence relation} is a symmetric transitive reflexive relation.
+\index{partial order}%
+\index{total order}%
+\index{order!partial}%
+\index{order!total}%
+A \emph{partial order} is a antisymmetric transitive reflexive relation.
+A \emph{total order} is an antisymmetric transitive total relation.
+
+\section{Function}
+
+\index{function}%
+A \emph{function} \(f\) is a relation such that
+\(\forall a, b, c : (a,b) \in f \wedge (a,c) \in f \implies b = c\).
+The type of a function is \(a \to b\).
+If \(f\) is a function, then \(f~a = b\) iff \((a,b) \in f\).
+The type of a relation between \(a\) and \(b\) is \(a \to 2^b\).
+
+\section{Indicator function}
+
+\(f(x) = [F]\) means \(f(x) = 1\)
+iff \(F\) is true
+and \(0\) iff \(F\) is false.
+
+Example: \(f(x) = [x \in [0,1]]\)
+
+\section{Unnamed function}
+
+\(f(x) = x + 1\) and \(f = x \to x+1\) mean the same thing.
+When an expression is expected, the notation \(X \to Y\)
+means a function that evaluates to \(Y\) if given \(X\).
+When a type is expected, the notation \(X \to Y\) describes a function type.
+Expressions like \(x \to x + 1\) are called \emph{unnamed functions}.
+
+\section{Currying}
+
+\index{curry}%
+\index{currying}%
+\emph{Currying} \(f : (a_1,\ldots,a_n) \to b\) turns it into \(f' : a_1 \to \ldots \to a_n \to b\)
+such that \(f(x_1,\ldots,x_n)
+= f'~x_1~\ldots~x_n
+= f'(x_1)(x_2)\ldots(x_n)
+= (((f'~x_1)~x_2)\ldots)~x_n
+= (((f'(x_1))(x_2))\ldots)x_n\).
+In this book, all functions are curried.
+
+\section{Order}
+
+Limit
+
+Minimum
+
+Maximum
+
+Extremum
+
+Infimum, greatest lower bound
+
+Supremum, least upper bound
+
+\index{argmin}%
+Define \(m = \arg\min_{x \in X}(f~x)\) iff \(\forall x \in X : f~m \le f~x\).
+
+\index{min}%
+Define \(\min_{x \in X}(f~x) = f~(\arg\min_{x \in X}(f~x))\).
+
+\section{Numbers}
+
+\index{natural number}%
+The set of all \emph{natural numbers} is \(\Nat\).
+\index{Peano axioms}%
+The \emph{Peano axioms} are
+\begin{enumerate*}[label={(\arabic*)}]
+    \item \(0 \in \Nat\),
+    \item \(\forall n (n \in \Nat \implies S(n) \in \Nat)\), and
+    \item nothing else is in \(\Nat\).
+\end{enumerate*}
+\index{successor function}%
+\(S\) is the \emph{successor function}.
+Thus \(1 = S(0), ~ 2 = S(1) = S(S(0)), ~ 3 = S(2) = S(S(1)) = S(S(S(0)))\), and so on.
+
+\(\Nat\) is also the type of natural numbers.
+
+\index{integer}%
+\index{number!integer}%
+The set of all \emph{integers} is \(\Int\).
+\begin{enumerate*}[label={(\arabic*)}]
+    \item \(\Nat \subseteq \Int\),
+    \item \(x : \Int\) iff \((-x) : \Int\), and
+    \item \(x + (-x) = 0\).
+\end{enumerate*}
+
+\index{number!rational}%
+\index{rational number}%
+The set of all \emph{rational numbers} is
+\(\Rational = \{ a/b ~|~ a : \Int, b : \Int, b \neq 0 \}\).
+Iff \(x : \Rational\) and \(x \neq 0\) then \(x/x = 1\).
+
+\index{number!real}%
+\index{real number}%
+\index{digit}%
+\index{base (positional notation)}%
+\(\Real\) is the \emph{set of all real numbers}.
+The \emph{base-\(b\) positional notation} of a real number
+is \(\ldots a_2 a_1 a_0 . a_{-1} a_{-2} \ldots\).
+The value of that number is \(\sum_{k \in \Int} a_k b^k\)
+where each \(a_k\) is a \emph{digit} and \(b\) is the \emph{base},
+where \(b \in \Nat\), \(b > 1\).
+\(\Real\) is isomorphic to \(B^\infty\) where \(1 < |B| < \infty\).
+
+\index{complex number}
+\(\Complex = \{ a + bi ~|~ a \in \Real, b \in \Real \}\)
+is the set of all \emph{complex numbers} where \(i = \sqrt{-1}\).
+
+\index{Euler's identity}%
+\emph{Euler's identity} is \( e^{i \pi} + 1 = 0 \).
+
+Let \(z = a+bi = re^{it}\).
+\index{complex number!rectangular form}%
+\index{rectangular form!of a complex number}%
+The \emph{rectangular form} of \(z\) is \(a+bi\).
+\index{complex number!polar form}%
+\index{polar form!of a complex number}%
+The \emph{polar form} of \(z\) is \(re^{it}\).
+\index{conjugate!of a complex number}%
+\index{complex number!conjugate}%
+\index{complex conjugate}%
+The \emph{conjugate} of \(z\) is \(\conjbar{z} = \conjstar{z} = a-bi = re^{-it}\).
+\index{complex magnitude}%
+\index{complex number!magnitude}%
+\index{magnitude!of a complex number}%
+The \emph{magnitude} of \(z\) is \(\abs{z} = r = \sqrt{z\conj{z}} = \sqrt{a^2+b^2}\).
+\index{complex argument}%
+\index{complex number!argument}%
+\index{argument!of a complex number}%
+The \emph{argument} of \(z\) is \(\arg(z) = \{ t ~|~ z = \abs{z} e^{it} \}\).
+\index{complex argument!principal value}%
+\index{complex number!principal value of argument}%
+\index{principal value of the complex argument}%
+The \emph{principal value of the argument} of \(z\) is \(\Arg(z)\)
+which is the element of \(\arg(z)\) closest to zero.
+
+\section{Metric}
+
+\index{distance}%
+\index{distance!between hyperplane and point}%
+Let \(\dist\) stand for \emph{distance}.
+If \(h\) is a hyperplane,
+then \(\dist~h~X = \min_{x \in X} (\dist~h~x)\)
+where \(\dist~h~x = |x-q|\) where \(q\) is on \(h\) and \(x-q\) is parallel to \(n\).
+\index{metric}%
+A \emph{metric} is...
+
+\section{Norm}
+
+\index{norm}%
+A \emph{norm} is...
+\index{normed space}%
+\index{space!normed}%
+A \emph{normed space} is...
+\index{metric space}%
+\index{space!metric}%
+A \emph{metric space} is...
+\index{Euclidean space}%
+\index{space!Euclidean}%
+An \emph{Euclidean space} is ...
+\index{pre-Hilbert space}%
+\index{space!pre-Hilbert}%
+A \emph{pre-Hilbert space} is ...
+\index{Hilbert space}%
+\index{space!Hilbert}%
+A \emph{Hilbert space} is ...
+Usually we can pretend that a Hilbert space is an infinite-dimensional Euclidean space.
+%A Hilbert space is an infinite-dimensional vector space with inner product,
+%that is also a complete metric space with respect to the distance function induced by the inner product.
+% TODO rephrase using pre-Hilbert space
+
+\index{Banach space}%
+\index{space!Banach}%
+A \emph{Banach space} is a complete normed vector space.
+
+\section{Measure}
+
+A \emph{Jordan content} is...
+
+\index{content (measure theory)}%
+A \emph{content} \(m : 2^A \to \Real\) satisfies
+\begin{enumerate*}[label={(\arabic*)}]
+    \item \(\forall x \in A : m~x \ge 0\),
+    \item \(m~\emptyset = 0\), and
+    \item \(\forall X \subseteq A, Y \subseteq A, X \cap Y = \emptyset : m~(X \cup Y) = m~X + m~Y\).
+\end{enumerate*}
+
+\index{measure}%
+\index{countably additive}%
+\index{countable additivity}%
+A \emph{measure} \(m\) on a set \(A\) is a content that is \emph{countably additive}.
+
+\index{Lebesgue measure}%
+\index{measure!Lebesgue}%
+A \emph{Lebesgue measure} for \(\Real\) is
+\(m~(a,b) = m~[a,b) = m~(a,b] = m~[a,b] = |b-a|\).
+From a measure \(m : \Real \to \Real\)
+we can define a measure \(\mu : \Real^n \to \Real\)
+where
+\(\mu \left( \prod_{i=1}^n X_i \right) = \prod_{i=1}^n m(X_i)\).
+\index{measure space}%
+\index{measure!space}%
+\index{space!measure}%
+A \emph{measure space} is a set and a measure on that set.
+
+\index{measurable function}%
+\index{function!measurable}%
+A \emph{measurable function} is ...
+
+\section{Integral}
+
+\index{integral}%
+\index{integral!Lebesgue}%
+\index{integral!Riemann}%
+\index{Lebesgue integral}%
+\index{Riemann integral}%
+Let \((\Real,m)\) be a measure space and \(f\) be a function.
+Let \(X \subseteq \Real\) and \(Y = \{ f(x) ~|~ x \in X\}\).
+Let \(X_1,\ldots,X_n\) be a partitioning of \(X\) and \(Y_1,\ldots,Y_n\) be a partitioning of \(Y\).
+For each \(k\), let \(x_k \in X_k\) and \(y_k \in Y_k\).
+An \emph{integral of \(f\) in \(X\)}, written \(\int_X f\),
+is \(\lim_{n\to\infty} \sum_{k=1}^{n} a_k\)
+where each \(a_k = m(X_k) \cdot m(Y_k)\) is a rectangular part of the total area.
+See Table \ref{tab:integral}.
+
+\begin{table}[h]
+    \caption{How integrals partition spaces}
+    \label{tab:integral}
+    \centering
+\begin{tabular}{lll}
+    Name & \(X_k\) & \(Y_k\)
+    \\
+    \hline
+    Riemann integral & \( [x_k,x_{k+1}]\) & \( [0,f(x_k)]\)
+    \\
+    Stieltjes integral with respect to \(g\) & \( [g(x_k),g(x_{k+1})]\) & \( [0,f(x_k)]\)
+    \\
+    Lebesgue integral & \( \{x ~|~ f(x) \in Y_k\}\) & \( [y_k,y_{k+1}]\)
+\end{tabular}
+\end{table}
+
+\section{Calculus}
+
+\index{fundamental theorem of calculus}%
+\emph{Fundamental theorem of calculus}:
+Iff \(D(F) = f\), then \(I(f) = F + c\) where \(c\) is a constant function,
+\(D\) is the derivative operator, \(I\) is the antiderivative operator.
+
+Derivative

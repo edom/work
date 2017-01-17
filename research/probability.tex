@@ -1,0 +1,368 @@
+\chapter{Probability}
+
+\section{Probability space}
+
+\index{probability measure}%
+\index{probability!measure}%
+\index{measure!probability}%
+A \emph{probability measure} \(\Pr : 2^\Omega \to \Real\) on a set \(\Omega\) is a measure where \(\Pr(\Omega) = 1\).
+
+\index{probability space}%
+\index{probability!space}%
+\index{space!probability}%
+A \emph{probability space} is a measure space \((\Omega,\Pr)\) where
+\(\Omega\) is a set called the
+\index{sample space}%
+\index{sample!space}%
+\index{space!sample}%
+\emph{sample space}
+and \(\Pr : 2^\Omega \to \Real\) is a probability measure.
+
+\index{event}%
+An \emph{event} is a subset of a sample space.
+
+Relationship between two events \(A\) and \(B\):
+They are
+\index{events!equiprobable}%
+\index{equiprobable events}%
+\emph{equiprobable} iff \(\Pr(A) = \Pr(B)\),
+\index{mutually exclusive events}%
+\index{events!mutually exclusive}%
+\emph{mutually exclusive} iff \(A \cap B = \emptyset\),
+\index{independent events}%
+\index{events!independent}%
+\emph{independent} iff \(\Pr(A \cap B) = \Pr(A) \cdot \Pr(B)\).
+
+\section{Density}
+
+\index{density of a measure}%
+The \emph{density of the measure \(m : 2^U \to \Real\)}
+is the \(f : U \to \Real\) where \(\forall A \subset U : \int_A f = m(A)\).
+
+\index{probability density function}%
+A \emph{probability density function} (pdf) is a function \(f : \Real \to \Real\) where \(\int_\Real f = 1\).
+
+Let \((\Omega,\Pr)\) be a probability space.
+The density of \(\Pr\) is a pdf.
+The density of that space is the density of its measure.
+
+\section{Distribution}
+
+\index{distribution function}%
+\index{cumulative distribution function}%
+The \emph{distribution function} of \(\Pr:2^\Real\to\Real\) is \(F(a) = \Pr(\{ x~|~x \le a\})\),
+which is also called the \emph{cumulative distribution function} of \(\Pr\).
+
+Relationship between density and distribution:
+Iff \(\Pr : 2^\Real \to \Real\),
+\(f\) is the density of \(P\), and
+\(F\) is the distribution of \(P\),
+then \(F(a) = \int_{(-\infty,a]} f\).
+We say that \(f\) is the pdf of \(F\).
+
+\section{Conditional probability}
+
+\index{conditional probability}%
+\index{probability!conditional}%
+The \emph{conditional probability of \(R\) given \(C\)}
+is \(\Pr(R|C) = \Pr(R \cap C) / \Pr(C)\).
+
+\(C\)-conditionalization maps \((\Omega,\Pr)\) to \((C,Q)\)
+where \(Q(R) = \Pr(R|C)\).
+
+Let \(f\) be the density of \(\Pr\).
+Recall that \(\Pr(A) = \int_A f\).
+Therefore \(\Pr(R|C) = \Pr(R \cap C)/\Pr(C) = \int_{R \cap C} f / \int_C f\).
+
+\index{conditional density}%
+\index{density!conditional}%
+The conditional density \(f(r|C)\) satisfies \(\int_R (r \to f(r|C)) = \Pr(R|C) = Q(R)\).
+\(\int_{R \cap C} f / \int_C f\).
+The right side of the vertical bar is a set.
+
+\index{conditional distribution}%
+\index{distribution!conditional}%
+The conditional distribution
+\(F(r \le a|C) = \int_{(-\infty,a]} (r \to f(r|C))\).
+
+\section{Example: Fair six-faced dice roll}
+
+A fair six-faced dice roll can be modeled with
+\(\Omega = \{1,2,3,4,5,6\}\) and \(\Pr(\{1\}) = \Pr(\{2\}) = \Pr(\{3\}) = \Pr(\{4\}) = \Pr(\{5\}) = \Pr(\{6\}) = 1/6\).
+The probability of rolling an odd face is \(\Pr(\{1,3,5\}) = \Pr(\{1\}) + \Pr(\{3\}) + \Pr(\{5\}) = 3/6\).
+
+\section{Random variable}
+
+\index{random variable}%
+\index{random variable!distribution of}%
+\index{distribution!of random variable}%
+A \emph{random variable} \(X : \Omega \to V\)
+is a measurable function.
+\index{real random variable}%
+\index{random variable!real}%
+Iff \(V = \Real\), then \(X\) is a \emph{real random variable}.
+\index{probability space!of random variable}%
+Such \(X\) maps
+\((\Omega,\Pr)\) to \((V,Q)\)
+where \(Q(A) = \Pr(\{\omega~|~X(\omega)\in A\}) = \Pr(X\in A)\).
+Note that \(\Pr(X \in A)\) is an abuse of notation.
+
+The \emph{distribution of \(X\)} is the distribution of \(Q\),
+that is \(F(a) = \Pr(X \le a)\).
+
+\(X \sim D\) means that \emph{the distribution of \(X\) is \(D\)}.
+
+\index{probability mass function}%
+A \emph{probability mass function} (pmf) \(f : \Omega \to \Real\)
+is a function where \(\forall A \subseteq \Omega : \sum_{x \in A} f(x) = \Pr(A)\).
+\index{probability density function}%
+A \emph{probability density function} (pdf) \(f : \Omega \to \Real\)
+is a function where \(\forall A \subseteq \Omega : \int_A f = \Pr(A)\).
+A statement about pdfs can usually be translated into
+a statement about pmfs by replacing integral with summation.
+
+If \(A \subseteq \Real\), then a pmf \(f : A \to \Real\)
+can be turned into a pdf \(g : \Real \to \Real\)
+where
+\(g(x) = \sum_{c \in A} f(c) \cdot \delta(x-c)\)
+where
+\index{Dirac delta function}%
+\index{function!Dirac delta}%
+\(\delta\) is the \emph{Dirac delta function}
+where
+\( \int_X \delta = [0 \in X] \)
+where \([F]\) is 0 iff \(F\) is false and 1 iff \(F\) is true.
+
+\paragraph{Example}
+If \(\Omega\) is the set of all people on Earth,
+then \(X(\omega)\) might be the age of the person \(\omega\) in years.
+If \(\Omega\) is the set of all cookies produced by a machine,
+then \(X(\omega)\) might be the sugar amount in the cookie \(\omega\) in grams.
+If \(\Omega\) is the set of all tasks,
+then \(X(\omega)\) might be the time required to finish the task \(\omega\) in seconds.
+
+\section{Joint and marginal}
+
+\index{joint probability space}%
+\index{probability space!joint}%
+\index{probability!joint}%
+Let there be \(n\) probability spaces \(S_k = (\Omega_k,\Pr_k)\).
+The \emph{joint probability space} of \(S_1,\ldots,S_n\) is
+\(S = (\Omega,\Pr)\)
+where \(\Omega = \prod_{k=1}^n \Omega_k\).
+
+Define the set \(W_k(A) = \{ \omega ~|~ \omega \in \Omega, ~ \omega_k \in A \}\).
+Relationship: \(\Pr_k(A) = \Pr(W_k(A))\).
+We say that \(\Pr_k\) is obtained by \emph{retaining} the \(k\)th component of \(S\).
+
+Let \(N = \{1,\ldots,n\}\) be the set of the indexes of \(S\)
+and let \(K \subseteq N\) be the set of the indexes we want to retain.
+The result of
+\index{retain}%
+\emph{retaining} \(K\) in \(S\)
+is \((\Omega,\Pr_K)\) where
+\(\Pr_K(A) = \Pr\left(\bigcap_{k \in K} W_k(A_k)\right)\)
+where \(A_k = \{ a_k ~|~ a \in A \} \).
+\index{marginalize out}%
+To \emph{marginalize out} \(K\) from \(S\) is to retain \(N-K\) in \(S\).
+Note the relationship among ``retain'', ``marginalize out'', and ``all but'':
+To retain \(x\) is to marginalize out all but \(x\),
+and to marginalize out \(x\) is to retain all but \(x\).
+
+\index{marginal probability space}%
+\index{probability space!marginal}%
+\index{probability!marginal}%
+Marginal probability space?
+Example?
+
+Many random variables:
+The notation \(\Pr(X_1\in A_1 \wedge \ldots \wedge X_n\in A_n)\) means
+\(\Pr(\{(\omega_1,\ldots,\omega_n) ~|~ X_1(\omega_1) \in A_1, ~ \ldots, ~ X_n(\omega_n) \in A_n\})\)
+where \(\Omega = \prod_{k=1}^n \Omega_k\)
+and \(\forall k (X_k : \Omega_k \to V_k)\).
+Such \((\Omega,\Pr)\) is a \emph{joint probability space}.
+
+\section{Iid random variables}
+
+Let there be two random variables \(X\) and \(Y\).
+They are
+\index{random variables!independent}%
+\index{independent random variables}%
+\emph{independent} iff \(\forall A, B : \Pr(X \in A \wedge Y \in B) = \Pr(X \in A) \cdot \Pr(Y \in B)\),
+\index{random variables!identically distributed}%
+\index{identically-distributed random variables}%
+\emph{identically distributed} iff
+\(\forall A : \Pr(X \in A) = \Pr(Y \in A)\),
+\index{random variables!independent and identically-distributed}%
+\index{independent and identically-distributed random variables}%
+\index{random variables!iid}%
+\index{iid!random variables}%
+\emph{iid} iff they are independent and identically-distributed.
+
+\section{Central tendency}
+
+\index{average!weighted}%
+\index{weighted average}%
+The \emph{weighted average} of \(f:\Real\to\Real\) is
+\(w(f) = \int_\Real (x \to f(x) \cdot x) / \int_\Real f\)
+where \(\int_\Real f\) is the
+\index{normalizing constant}%
+\index{constant!normalizing}%
+\emph{normalizing constant},
+which is 1 iff \(f\) is a pdf.
+
+\index{mean!of a pdf}%
+The \emph{mean} of a pdf \(f\) is \(\mu(f) = w(f)\),
+\index{mean!of a distribution}%
+of a distribution \(D\) whose pdf is \(f\) is \(\mu(D) = \mu(f)\),
+\index{mean!of a probability measure}%
+of a probability measure \(\Pr\) whose distribution is \(D\) is
+\(\mu(\Pr) = \mu(D)\),
+\index{mean!of a probability space}%
+of a probability space \(S = (\Real,\Pr)\) is \(\mu(S) = \mu(\Pr)\).
+
+\index{expectation}%
+The \emph{expectation} of a random variable \(X \sim D\) is \(\Expect{X} = \mu(D)\).
+\index{linearity of expectation}%
+\index{expectation!linearity of}%
+Expectation is linear:
+\(\Expect{aX} = a \Expect{X}\) and
+\(\Expect{X+Y} = \Expect{X} + \Expect{Y}\).
+
+\index{moment}%
+The \emph{\(k\)th moment of \(X\)} is \(m_k(X) = \Expect{X^k}\)
+where superscript means power and not composition.
+Expectation is first moment.
+
+\section{Dispersion tendency}
+
+\index{central moment}%
+The \emph{\(k\)th central moment of \(X\)} is \(\mu_k(X) = \Expect{(X - \Expect{X})^k}\).
+
+\index{variance}%
+\emph{Variance} is the second central moment.
+The variance of \(X\) is \(\sigma_X^2 = \mu_2(X)\).
+
+\index{standard deviation}%
+\emph{Standard deviation} is square root of variance.
+
+\index{skewness}%
+\emph{Skewness} is the third central moment.
+
+\section{Mixed moments}
+
+Covariance is \(Cov(X,Y) = \Expect{(X-\Expect{X})(Y-\Expect{Y})}\).
+Correlation is \(Cor(X,Y) = Cov(X,Y) / (\sigma_X \sigma_Y)\).
+
+\section{Bernoulli trial}
+
+\index{Bernoulli trial}%
+A \emph{Bernoulli trial}
+is a probability space \((\Omega,\Pr)\) where \(\Omega = \{0,1\}\),
+\(\Pr(\{0\}) = 1 - p\), and \(\Pr(\{1\}) = p\).
+
+\section{Bernoulli distribution}
+
+\index{distribution!Bernoulli}%
+\index{Bernoulli distribution}%
+The pmf of \(\Bernoulli(p)\) (the \emph{Bernoulli distribution with parameter \(p\)})
+is \(f(0) = 1 - p\) and \(f(1) = p\),
+which can also be written \(f(k) = (1-p)^{1-k} p^k\) where \(k \in \{0,1\}\).
+
+\section{Binomial distribution}
+
+Bernoulli distribution is a special case of
+\emph{binomial distribution} \(\Binomial(n,k,p)\) whose pmf is
+\(f(k) = \binom{n}{k} (1-p)^k p^{n-k}\) where \(k : \Nat, k \le n\) with \(n=1\).
+\(\Binomial(n,k,p)\) is the distribution of \(n\) iid instances of a Bernoulli trial.
+
+The \emph{binomial formula} is \(\binom{n}{k} = \frac{n!}{k!(n-k)!}\).
+
+\(\binom{n}{k}\) is the number of all \(k\)-sized subsets of an \(n\)-sized set.
+The cardinality of \(\{ S ~|~ S \subseteq A, |S| = k \}\) is \(\binom{n}{k}\)
+where \(|A| = n\).
+
+The binomial formula is involved in the expansion \((x+y)^n = \sum_{k=0}^n \binom{n}{k} x^k y^{n-k}\).
+
+\section{Multivariate random variable}
+
+\index{random variable!multivariate}%
+\index{multivariate random variable}%
+\index{random vector}%
+\index{random!vector}%
+\index{vector!random}%
+A \emph{multivariate random variable} or \emph{random vector}
+is a vector of random variables,
+or a vector-valued random variable,
+or a random variable whose sample space is a vector space.
+
+Define \(\{ X < a \}\) as \(\{ x ~|~ x \in u, ~ X~x < a \}\).
+If \(f\) is a bijection and \(Y = f~X\),
+then \(P~\{f~X < a\} = P~\{X < f^{-1}~a\}\).
+
+Algebra on random variables:
+If \(k : a\) and \(X : RV~a\) then \(k X : RV~a\).
+If \(X : RV~a\) and \(Y : RV~a\) then \(X+Y : RV~a\).
+
+\index{population}%
+\index{population!to sample a}%
+\index{population!sample space of}%
+\index{population!probability space}%
+\index{sample (noun)}%
+\index{sample (verb)!a population}%
+\index{observation}%
+\index{unit!statistical}%
+A \emph{population} is a probability space.
+Let \(p\) be a population and \(s\) be its sample space.
+A \emph{sample} of \(p\) is a subset of \(s\).
+To \emph{sample} \(p\) is to pick a subset of \(s\).
+An \emph{observation} is a member of \(s\).
+A \emph{unit} is an observation.
+
+\section{What are these rules for?}
+
+\index{chain rule}%
+\index{probability!chain rule}%
+\index{conditional probability!chain rule}%
+The \emph{chain rule} is \(\Pr(a \cap b) = \Pr(b|a) \cdot \Pr(a) = \Pr(a|b) \cdot \Pr(b)\).
+
+\index{law of total probability}%
+\index{probability!law of total probability}%
+\index{conditional probability!law of total probability}%
+The \emph{law of total probability} is \(\Pr(b) = \sum_{k=1}^n \Pr(b|a_k) \cdot \Pr(a_k) \)
+where \(a_1,\ldots,a_n\) is a partitioning of \(a\).
+
+\index{Bayes rule}%
+The \emph{Bayes rule} is \(\Pr(a|b) = \Pr(b|a) \cdot \Pr(a)\)
+where \(a_1,\ldots,a_n\) is a partitioning of \(a\).
+
+\section{Materials looking for place to belong}
+
+\index{Gaussian distribution}%
+\index{normal distribution}%
+\index{distribution!Gaussian}%
+\index{distribution!normal}%
+\index{Gaussian probability density function}%
+\index{normal probability density function}%
+\index{probability density function!Gaussian}%
+\index{probability density function!normal}%
+The \emph{Gaussian pdf} or the \emph{normal pdf}
+with mean \(\mu\) and variance \(\sigma^2\) is
+\(\frac{1}{\sqrt{2\sigma^2\pi}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)\).
+
+\index{Poisson distribution}%
+\index{Chi-square distribution}%
+\index{Cauchy distribution}%
+\index{Beta distribution}%
+The \emph{Poisson distribution}...
+The \emph{Chi-square distribution}...
+The \emph{Cauchy distribution}...
+The \emph{Beta distribution}...
+
+\section{Random process}
+
+The type of a \emph{random process} is \(\Nat \to \Omega \to R\).
+
+\emph{Random process} is also called \emph{stochastic process}.
+
+\section{Wiener process}

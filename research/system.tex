@@ -1,0 +1,122 @@
+\chapter{Systems}
+
+This chapter defines \emph{system}.
+Later chapters discuss interesting systems.
+We classify systems, hoping to gain some insight.
+We can classify systems into two big classes:
+\emph{time-dependent} and \emph{time-independent}.
+Time-dependent systems are big enough
+so we put it in the next chapter.
+
+\section{What is a system?}
+
+We define a system as an input, a state, and an output.
+The input is \(x\), the output is \(y\), and an equation relates them.
+The state is implied by the equation.
+Such equation can be written \(f~y~x = y\).
+The equation can be quite arbitrary.
+The terms \(f,x,y\) may appear on both sides of the equation.
+
+\begin{m:def}[System]
+A system is \((x,y,f)\) where \(y=f~y~x\).
+\end{m:def}
+
+\section{What equation describes a system?}
+
+\section{Invariant}
+
+An invariant of a system is a property that stays
+the same throughout the evolution of the system.
+
+\section{What is the behavior of a system?}
+
+The behavior of a system is its output, especially the observable part of the output.
+
+\section{Composition}
+
+\section{Continuous system}
+
+\section{Discrete system}
+
+\section{Finite system}
+
+\section{What is an embedded system?}
+
+A system in another system.
+The outer system feeds the inner system's output back to the inner system's input,
+possibly with some change.
+
+Don't confuse this with embedded systems in computer engineering.
+
+\section{How do we measure system complexity?}
+
+\section{Ignoring degenerate feedback: feedforward}
+
+Every function \(f\) is a special case of the general feedback equation \(f~x = g~f~x\)
+where \(g\) is an identity function.
+This suggests that feedforward is a degenerate case of feedback.
+To simplify the writing, from this point on,
+we always assume that a feedback is non-degenerate
+unless written otherwise.
+
+\section{Finding feedback: the inverse fixed point problem}
+
+Given \(f\), find a \(g\) such that \(f~x = g~f~x\) and \(g\) is not an identity function.
+
+The forward fixed point problem:
+Given \(f\), find an \(x\) such that \(x=f~x\).
+
+The inverse fixed point problem is
+``Given \( x \), find an \( f \) such that \( x = f~x \) and \(f\) is not an identity function.''
+This problem arises when we want to determine
+if \(f\) has a feedback.
+
+Example of non-feedback: linear functions.
+Consider a function of the form \(f~x = a \cdot x + b\) where \(a\) and \(b\) are non-zero constants.
+The only \(g\) that satisfies \(g~f = f\) is the identity function \(g~x=x\).
+
+Example of feedback: functional equation.
+Consider a function of the form \(f~x = x \cdot f~(x-1)\).
+
+Recursive functions are special cases of feedback.
+Searching in list.
+\(f~N~e = 0\).
+\(f~(C~h~t)~e = h \equiv e \vee f~t~e\).
+\(g\) is the Y-combinator.
+
+We have a problem: there are infinitely many wildly discontinuous functions satisfying that.
+We want smooth functions.
+
+\section{Feedback based on differentiability-preserving map}
+
+We want a map that preserves differentiability.
+Formally, given \(f=g~f\), we want \(g\) to have the property
+that iff \(f\) is differentiable then \(g~f\) is also differentiable.
+Surely if \(f\) is differentiable and \(g\) is differentiable then \(g~f\) is also differentiable?
+Surely if \(f\) is differentiable \(g\) is a polynomial then \(g~f\) is differentiable?
+
+We begin with the generalized differential on a field:
+\( g~(f+h) = g~f + h \cdot d~g~f \)
+where \( (f + g)~x = f~x + g~x \) and \( (f \cdot g)~x = f~x \cdot g~x \).
+Thus \( h \cdot d~g~f = g~(f+h) - g~f \).
+This is like computing the gradient of a vector function,
+but the vector is infinite-dimensional.
+
+Is it time to learn topology? Smooth manifolds?
+
+\section{Measuring feedback}
+
+Given a system \( f~x = g~f~x \),
+we're interested in measuring how much feedback it has.
+
+Assume that \(f\) is a vector.
+We can measure the feedback by measuring \( d_f ~ g \):
+the differential of \(g\) with respect to \(f\).
+Using non-standard analysis, we define the gradient \( d~f \)
+as something satisfying \( f~(x + h) = f~x + h \cdot d~f~x \)
+where \(h\) is an infinitesimal.
+
+\section{Linear feedback and function classes}
+
+If \(f\) is linear and \(g\) is linear, then \(f \circ g\) is linear.
+A linear feedback does not add anything interesting to a linear function.

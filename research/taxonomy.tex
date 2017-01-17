@@ -1,0 +1,45 @@
+\chapter{Taxonomy}
+
+Artificial intelligence is constrained optimization.
+Brain minimizes free energy \cite{friston2006free,friston2010free}.
+
+Generate vs discriminative.
+
+Type type of an \emph{expert system} is \(Facts \to Query \to Answer\).
+Decision tree.
+Linearized decision tree.
+
+A learning algorithm is \emph{stable} iff its generalization error is bounded.
+
+\section{Voronoi classifier}
+
+Find out the cluster centers.
+Let the Voronoi diagram be the boundary.
+
+\section{Hyperplane classifier}
+
+Let \(h\) be a hyperplane.
+Define \(m : \Real^\infty \to \{0,1\}\),
+the \emph{hard linear binary classifier} of \(h\),
+as \(m~x = [h~x \ge 0]\)
+where \([x]\) is 1 iff \(x\) is true or 0 iff \(x\) is false.
+Soft classifier: define \(m~x = \tanh^{-1}~(h~x)\).
+
+\section{Support vector machine}
+
+A training point \(x\) is a support of \(h\) iff
+it is the closest point to \(h\)
+among all points in the class of \(x\).
+
+Alternative formulation:
+An upper level is a hyperplane \(h_u\) such that \(\forall a \in U : h_u~a > 0\).
+A lower level is a hyperplane \(h_l\) such that \(\forall b \in L : h_l~b < 0\).
+Let \(h_u\) and \(h_l\) be parallel.
+Maximize the distance between \(h_u\) and \(h_l\).
+Then \(h_u\) is the upper margin and \(h_l\) is the lower margin.
+Define \(h\) as the hyperplane exactly between \(h_u\) and \(h_l\).
+
+Define \(m : \Real^\infty \to \{0,1\}\),
+the \emph{support vector machine} (SVM) of \(h\),
+as \(m~x = [h~x \ge 0]\).
+Such SVM is a binary classifier.

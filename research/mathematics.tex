@@ -1,0 +1,82 @@
+\documentclass[10pt,book,openany]{memoir}
+\usepackage[utf8]{inputenc}
+\usepackage{epigraph}
+\setlength{\epigraphwidth}{.5\textwidth}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{cite}
+\usepackage[inline]{enumitem}
+\usepackage{mathpartir}
+\usepackage{thmtools}
+\usepackage{imakeidx}
+% uncomment to debug page layout
+%\usepackage{showframe}
+\usepackage[columns=3,font=footnotesize,justific=raggedright,columnsep=1em,indentunit=1em,itemlayout=singlepar]{idxlayout}
+\usepackage[hidelinks]{hyperref}
+% page size
+\setstocksize{9in}{6in}
+\settrimmedsize{9in}{6in}{*}
+\setlrmarginsandblock{0.625in}{0.5in}{*}
+\setulmarginsandblock{0.875in}{0.875in}{*}
+\setlength\headsep{2em}
+\setlength\footskip{3em}
+\checkandfixthelayout
+\nouppercaseheads
+\chapterstyle{crosshead}
+\raggedbottom
+\input{format}
+% toc
+\setlength\cftchapternumwidth{4em}
+\setlength\cftsectionnumwidth{4em}
+\setlength\cftsectionindent{0em}
+% epigraph
+\renewcommand\epigraphsize{\scriptsize}
+\setlength\epigraphwidth{0.75\textwidth}
+\makeindex
+\begin{document}
+\frontmatter
+\input{title}
+\newpage
+\input{copyright}
+\newpage
+\input{preface}
+\newpage
+\tableofcontents
+\mainmatter
+\input{intro}
+\input{foundation}
+\input{vector}
+\input{probability}
+\input{statistics}
+\input{physics}
+\input{lies}
+\input{closing}
+\input{cybernetics}
+
+% index redirections
+\index{probability!space|see {probability space}}%
+\index{probability!measure|see {probability measure}}%
+\index{measure!probability|see {probability measure}}%
+\index{space!probability|see {probability space}}%
+\index{equations!system of linear|see{system of linear equations}}%
+\index{linear equations!system of|see{system of linear equations}}%
+\index{random!variable|see{random variable}}%
+\index{random!vector|see{random vector}}%
+\index{variable!random|see{random variable}}%
+\index{vector!random|see{random vector}}%
+
+\backmatter
+
+\printindex
+
+\nocite{LeggPhd}
+\nocite{NonParam}
+\nocite{negnevitsky2005artificial}
+\nocite{izhikevich2006fhn}
+\nocite{casella2002statistical}
+
+\bibliography{bib}{}
+\bibliographystyle{plain}
+\end{document}

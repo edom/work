@@ -1,0 +1,150 @@
+\chapter{Statistics}
+
+\section{Statistical model}
+
+\index{nonparametric statistical model}%
+\index{statistical model!nonparametric}%
+A \emph{nonparametric model} is a set of pdfs.
+\index{parametric statistical model}%
+\index{statistical model!parametric}%
+\index{parameter space}%
+A \emph{parametric model} \(F : \Theta \to \Omega \to \Real\)
+maps a parameter \(\theta\)
+to a pdf \(F(\theta)\)
+where \(\Theta\) is the type of the \emph{parameter space}.
+
+\section{Point estimation}
+
+\index{point estimation}%
+\index{point estimator}%
+A \emph{point estimator} \(g : (\RV(\Real))^n \to \RV(\Theta)\)
+is a function taking \(n\) iid random variables \(X_1, \ldots, X_n\)
+and giving an \emph{estimate} \(\estimate\theta = g(X_1,\ldots,X_n)\) which is also a random variable.
+
+The \emph{sampling distribution} of the estimate is the distribution of the estimate.
+
+The \emph{standard error} of the estimate is the variance of the estimate.
+
+\(\estimate\theta\) is a random variable.
+\(\theta\) is an unknown \emph{constant}.
+
+\index{estimate}%
+\(\estimate\theta\) is an \emph{estimate} of \(\theta\).
+The \emph{bias} of \(g\) is \(\Expect{\estimate\theta} - \theta\).
+
+Estimation assumes that the distribution is \emph{constant} and
+that the random variables are iid.
+
+Example:
+Checking coin fairness is estimating the parameter of the underlying Bernoulli distribution.
+If \(X_1, \ldots, X_n \sim \Bernoulli(p)\) for an unknown \(p\),
+then \(p\) can be estimated by \(\hat{p} = g(X_1,\ldots,X_n) = \frac{1}{n} \sum_{k=1}^n X_k\).
+As \(n\) grows,
+due to the central limit theorem,
+the distribution of \(\estimate{p}\) approaches
+a normal distribution whose mean is \(p\).
+
+Example:
+In Bayesian point estimation,
+checking coin fairness is computing \(\Pr(\estimate{p} = \frac{1}{2} | X_1 = x_1, \ldots, X_n = x_n)\).
+Assume that \(\estimate{p}\) is uniformly distributed in \([0,1]\).
+Assume \(\Pr(h)\), compute \(\Pr(h|d)\), given \(\Pr(d|h)\).
+
+There is no way to find out whether the coin is exactly fair,
+but the estimate can always be made more precise by adding data.
+
+\section{Central limit theorem}
+
+The \emph{central limit theorem} is:
+
+The distribution of a sum of iid random variables tends to be normal.
+
+\section{Interval estimation}
+
+Confidence interval is an interval estimation (as opposed to point
+estimation) of a parameter.
+
+\section{Hypothesis testing}
+
+\section{Weak law of large numbers}
+
+\emph{Weak law of large numbers}
+
+\section{Regression}
+
+\index{hyperplane!least-squares}%
+\index{least-squares!linear regression}%
+\index{least-squares!hyperplane}%
+\index{least-squares hyperplane}%
+\index{linear regression!least-squares}%
+\index{regression!linear!least-squares}%
+The \emph{least-squares hyperplane} fitting the data
+\([(x_1,y_1),\ldots,(x_n,y_n)] : [(\Real^m,\Real)]\)
+is the \(f~x = A (x|1)\) that minimizes
+\(\sum_{k=1}^n \norm{f~x_k - y_k}^2 \)
+where
+\(m\) is the number of input variables
+and \(n\) is the sample size.
+That \(A\) is also the least-squares solution
+of \(Z A = Y\)
+where \(A\) is the unknown,
+\(Z = \bmat{(x_1|1) & \ldots & (x_n|1)}^T\),
+\(Y = \bmat{y_1 & \ldots & y_n}^T\).
+That hyperplane is the result of
+\emph{least-squares linear regression} on the data.
+
+The dictionary meaning of
+\index{regression}%
+\index{regress}%
+``to \emph{regress}'' is ``to go back''
+but in statistics it \emph{also} means
+``to estimate model parameters from sample''.
+
+\emph{Regression} is ...
+\emph{Parametric regression} is ...
+\emph{Nonparametric regression} is ...
+
+Elsewhere,
+\index{input variable}%
+\index{independent variable}%
+\index{predictor variable}%
+\index{explanatory variable}%
+\index{variable!input}%
+\index{variable!independent}%
+\index{variable!predictor}%
+\index{variable!explanatory}%
+\emph{input}
+variable is also called independent variable, predictor variable, explanatory variable,
+and
+\index{output variable}%
+\index{dependent variable}%
+\index{criterion variable}%
+\index{variable!output}%
+\index{variable!criterion}%
+\index{variable!dependent}%
+\emph{output} variable is also called dependent variable, criterion variable.
+
+Estimation is computing probability space from a random variable.
+Estimation is computing the parameters of the distribution from a distribution family and some samples.
+An estimation is \emph{parametric} iff the shape of the probability measure function is known.
+
+Law of the unconscious statistician / law of the lazy statistician
+
+Modeling is computing the population probability space from some samples?
+
+Some statistical problems:
+\begin{enumerate*}[label={(\arabic*)}]
+    \item Given distribution, generate samples.
+    \item
+Given a population and a sample, compute the probability that
+the sample was indeed taken from the population.
+\end{enumerate*}
+
+\section{Tikhonov regularization}
+
+\emph{Tikhonov regularization} is ...
+
+\section{Materials looking for a place to belong}
+
+\index{Sobolev space}%
+An example of \emph{Sobolev spaces} is \( \{ f ~|~ \int_\Real (x \to (f''(x))^2) < \infty \} \).
