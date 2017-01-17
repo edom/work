@@ -11,6 +11,7 @@ import qualified Dynasty.Person as P
 import qualified Dynasty.Religion as R
 import qualified Dynasty.State as S
 import qualified Dynasty.Title as T
+import qualified Dynasty.Trait as U
 
 dynastyMain :: IO ()
 dynastyMain = do
@@ -29,6 +30,11 @@ dynastyMain = do
                     dukeOf duchy p = p { P.titles = T.dukeOf duchy : P.titles p }
                     kingOf kingdom p = p { P.titles = T.kingOf kingdom : P.titles p }
                     catholic p = p { P.religion = R.Catholic }
+                    addTrait t p = p { P.traits = t : P.traits p }
+                    kind = addTrait U.Kind
+                    patient = addTrait U.Patient
+                    envious = addTrait U.Envious
+                    wroth = addTrait U.Wroth
                 M.mapM_ S.newPersonWith $ concat
                     [
                         map ((irish . catholic) .) [
@@ -50,6 +56,11 @@ dynastyMain = do
                         [
                             named "Edgar" . kingOf "England"
                             , named "Harold Godwinson" . countOf "Hereford" . kingOf "England"
+                        ]
+                        ,
+                        [
+                            envious . wroth . named "Noman" . countOf "Nocounty" . dukeOf "Noduchy" . kingOf "Nomanland"
+                            , kind . patient . named "Yesman" . countOf "Yescounty" . dukeOf "Yesduchy" . kingOf "Yesland"
                         ]
                     ]
             mainLoop window state0

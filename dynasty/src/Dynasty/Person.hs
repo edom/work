@@ -5,6 +5,7 @@ import Prelude hiding (id)
 import qualified Dynasty.Culture as C
 import qualified Dynasty.Religion as R
 import qualified Dynasty.Title as T
+import qualified Dynasty.Trait as U
 
 type Id = Int
 
@@ -18,11 +19,12 @@ data Person =
         , died :: Maybe Int
         , culture :: C.Culture
         , religion :: R.Religion
+        , traits :: [U.Trait]
     }
     deriving (Show)
 
 empty :: Person
-empty = MkPerson 0 "" 0 [] Nothing C.None R.None
+empty = MkPerson 0 "" 0 [] Nothing C.None R.None []
 
 type Today = Int
 
@@ -36,7 +38,11 @@ formatLong today p =
                 , pad "Born / Age:" ++ "Day " ++ show (born p) ++ " / " ++ show (today - born p) ++ " days old"
                 , "Titles:"
             ]
-            ++ map ("    - " ++ ) (formattedTitlesOf p)
+            ++ map ("    - " ++) (formattedTitlesOf p)
+            ++
+            [
+                pad "Traits:" ++ show (traits p)
+            ]
     where
         minLength = 24
         pad string = string ++ replicate (minLength - length string) ' '
