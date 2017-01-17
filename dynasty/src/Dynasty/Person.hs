@@ -20,11 +20,12 @@ data Person =
         , culture :: C.Culture
         , religion :: R.Religion
         , traits :: [U.Trait]
+        , sex :: T.Sex
     }
     deriving (Show)
 
 empty :: Person
-empty = MkPerson 0 "" 0 [] Nothing C.None R.None []
+empty = MkPerson 0 "" 0 [] Nothing C.None R.None [] T.Male
 
 type Today = Int
 
@@ -33,7 +34,7 @@ formatLong today p =
     unlines $
         map indent $
             [
-                pad "Id / Name:" ++ show (id p) ++ " / " ++ name p
+                pad "Id / Sex / Name:" ++ show (id p) ++ " / " ++ show (sex p) ++ " / " ++ name p
                 , pad "Religion / Culture:" ++ show (religion p) ++ " / " ++ show (culture p)
                 , pad "Born / Age:" ++ "Day " ++ show (born p) ++ " / " ++ show (today - born p) ++ " days old"
                 , "Titles:"
@@ -49,7 +50,7 @@ formatLong today p =
         indent = ("    " ++)
 
 formattedTitlesOf :: Person -> [String]
-formattedTitlesOf = map T.format . titles
+formattedTitlesOf p = map (T.format $ sex p) $ titles p
 
 increment :: Id -> Id
 increment = (+) 1

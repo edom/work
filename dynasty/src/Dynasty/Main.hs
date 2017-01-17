@@ -35,6 +35,7 @@ dynastyMain = do
                     patient = addTrait U.Patient
                     envious = addTrait U.Envious
                     wroth = addTrait U.Wroth
+                    female p = p { P.sex = T.Female }
                 M.mapM_ S.newPersonWith $ concat
                     [
                         map ((irish . catholic) .) [
@@ -61,6 +62,7 @@ dynastyMain = do
                         [
                             envious . wroth . named "Noman" . countOf "Nocounty" . dukeOf "Noduchy" . kingOf "Nomanland"
                             , kind . patient . named "Yesman" . countOf "Yescounty" . dukeOf "Yesduchy" . kingOf "Yesland"
+                            , female . named "Maywoman" . countOf "Maycounty"
                         ]
                     ]
             mainLoop window state0

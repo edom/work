@@ -14,6 +14,11 @@ data Level
     | Emperor
     deriving (Eq, Ord, Show)
 
+data Sex
+    = Male
+    | Female
+    deriving (Eq, Show)
+
 baronOf :: Place -> Title
 baronOf = MkTitle Baron
 
@@ -29,5 +34,16 @@ kingOf = MkTitle King
 emperorOf :: Place -> Title
 emperorOf = MkTitle Emperor
 
-format :: Title -> String
-format (MkTitle level place) = show level ++ " of " ++ place
+formatLevel :: Sex -> Level -> String
+formatLevel sex level =
+    case sex of
+        Male -> show level
+        Female -> case level of
+            Baron -> "Baroness"
+            Count -> "Countess"
+            Duke -> "Duchess"
+            King -> "Queen"
+            Emperor -> "Empress"
+
+format :: Sex -> Title -> String
+format sex (MkTitle level place) = formatLevel sex level ++ " of " ++ place
