@@ -21,30 +21,42 @@ dynastyMain = do
         else do
             C.echo False
             let state0 = flip S.exec S.initialState $ do
-                M.mapM_ S.newPersonWith
+                let
+                    irish p = p { P.culture = A.Irish }
+                    angloSaxon p = p { P.culture = A.AngloSaxon }
+                    named name p = p { P.name = name }
+                    countOf county p = p { P.titles = T.countOf county : P.titles p }
+                    dukeOf duchy p = p { P.titles = T.dukeOf duchy : P.titles p }
+                    kingOf kingdom p = p { P.titles = T.kingOf kingdom : P.titles p }
+                M.mapM_ S.newPersonWith $ concat
                     [
-                        \ p -> p { P.name = "Murchad", P.culture = A.Irish, P.titles = [T.dukeOf "Mumu", T.countOf "Tuadhmhumhain"] }
-                        , \ p -> p { P.name = "Who", P.titles = [T.countOf "Urmhumhain"] }
-                        , \ p -> p { P.name = "Who", P.titles = [T.countOf "Deasmhumhain"] }
-                        , \ p -> p { P.name = "Who", P.titles = [T.countOf "Osraige"] }
-                        , \ p -> p { P.name = "Who", P.titles = [T.countOf "Cill Dara"] }
-                        , \ p -> p { P.name = "Who", P.titles = [T.countOf "Breitne"] }
-                        , \ p -> p { P.name = "Who", P.titles = [T.countOf "Connachta"] }
-                        , \ p -> p { P.name = "Who", P.titles = [T.countOf "Laigin"] }
-                        , \ p -> p { P.name = "Who", P.titles = [T.countOf "Dubhlinn"] }
-                        , \ p -> p { P.name = "Who", P.titles = [T.countOf "Ulster"] }
-                        , \ p -> p { P.name = "Who", P.titles = [T.countOf "Tir Eoghain"] }
-                        , \ p -> p { P.name = "Who", P.titles = [T.countOf "Tir Chonaill"] }
-                        , \ p -> p { P.name = "Domnall" }
-                        , \ p -> p { P.name = "Donnchad" }
-                        , \ p -> p { P.name = "Énna" }
-                        , \ p -> p { P.name = "Diarmaid" }
-                        , \ p -> p { P.name = "Tadg" }
-                        , \ p -> p { P.name = "Conchobar" }
-                        , \ p -> p { P.name = "Eoghan" }
-                        , \ p -> p { P.name = "John" }
-                        , \ p -> p { P.name = "Edward" }
-                        , \ p -> p { P.name = "Henry" }
+                        map (irish .) [
+                            named "Murchad" . countOf "Tuadhmhumhain" . dukeOf "Mumu"
+                            , named "Domnall"
+                            , named "Donnchad"
+                            , named "Énna"
+                            , \ p -> p { P.name = "Who", P.titles = [T.countOf "Urmhumhain"] }
+                            , \ p -> p { P.name = "Who", P.titles = [T.countOf "Deasmhumhain"] }
+                            , \ p -> p { P.name = "Who", P.titles = [T.countOf "Osraige"] }
+                            , \ p -> p { P.name = "Who", P.titles = [T.countOf "Cill Dara"] }
+                            , \ p -> p { P.name = "Who", P.titles = [T.countOf "Breitne"] }
+                            , \ p -> p { P.name = "Who", P.titles = [T.countOf "Connachta"] }
+                            , \ p -> p { P.name = "Who", P.titles = [T.countOf "Laigin"] }
+                            , \ p -> p { P.name = "Who", P.titles = [T.countOf "Dubhlinn"] }
+                            , \ p -> p { P.name = "Who", P.titles = [T.countOf "Ulster"] }
+                            , \ p -> p { P.name = "Who", P.titles = [T.countOf "Tir Eoghain"] }
+                            , \ p -> p { P.name = "Who", P.titles = [T.countOf "Tir Chonaill"] }
+                            , \ p -> p { P.name = "Diarmaid" }
+                            , \ p -> p { P.name = "Tadg" }
+                            , \ p -> p { P.name = "Conchobar" }
+                            , \ p -> p { P.name = "Eoghan" }
+                        ]
+                        ,
+                        map (angloSaxon .)
+                        [
+                            named "Edgar" . kingOf "England"
+                            , named "Harold Godwinson" . kingOf "England"
+                        ]
                     ]
             mainLoop window state0
             C.endWin
