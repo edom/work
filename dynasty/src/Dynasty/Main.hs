@@ -1,7 +1,6 @@
 module Dynasty.Main where
 
 import qualified Control.Monad as M
-import qualified Data.List as L
 import qualified Foreign as F
 
 import qualified UI.HSCurses.Curses as C
@@ -9,6 +8,7 @@ import qualified UI.HSCurses.Curses as C
 import qualified Dynasty.Culture as A
 import qualified Dynasty.Display as E
 import qualified Dynasty.Person as P
+import qualified Dynasty.Religion as R
 import qualified Dynasty.State as S
 import qualified Dynasty.Title as T
 
@@ -28,13 +28,11 @@ dynastyMain = do
                     countOf county p = p { P.titles = T.countOf county : P.titles p }
                     dukeOf duchy p = p { P.titles = T.dukeOf duchy : P.titles p }
                     kingOf kingdom p = p { P.titles = T.kingOf kingdom : P.titles p }
+                    catholic p = p { P.religion = R.Catholic }
                 M.mapM_ S.newPersonWith $ concat
                     [
-                        map (irish .) [
+                        map ((irish . catholic) .) [
                             named "Murchad" . countOf "Tuadhmhumhain" . dukeOf "Mumu"
-                            , named "Domnall"
-                            , named "Donnchad"
-                            , named "Énna"
                             , \ p -> p { P.name = "Who", P.titles = [T.countOf "Urmhumhain"] }
                             , \ p -> p { P.name = "Who", P.titles = [T.countOf "Deasmhumhain"] }
                             , \ p -> p { P.name = "Who", P.titles = [T.countOf "Osraige"] }
@@ -46,16 +44,12 @@ dynastyMain = do
                             , \ p -> p { P.name = "Who", P.titles = [T.countOf "Ulster"] }
                             , \ p -> p { P.name = "Who", P.titles = [T.countOf "Tir Eoghain"] }
                             , \ p -> p { P.name = "Who", P.titles = [T.countOf "Tir Chonaill"] }
-                            , \ p -> p { P.name = "Diarmaid" }
-                            , \ p -> p { P.name = "Tadg" }
-                            , \ p -> p { P.name = "Conchobar" }
-                            , \ p -> p { P.name = "Eoghan" }
                         ]
                         ,
-                        map (angloSaxon .)
+                        map ((angloSaxon . catholic) .)
                         [
                             named "Edgar" . kingOf "England"
-                            , named "Harold Godwinson" . kingOf "England"
+                            , named "Harold Godwinson" . countOf "Hereford" . kingOf "England"
                         ]
                     ]
             mainLoop window state0
@@ -74,15 +68,9 @@ theRealMainLoop chario =
             let
                 day = S.day state
                 people = S.people state
-                strPeople = unlines $ flip map people $ \ p ->
-                    show (P.id p)
-                    ++ " " ++ P.name p
-                    ++ concat (", " : L.intersperse ", " (P.formattedTitlesOf p))
-                    ++ ", born at day " ++ show (P.born p)
-                    ++ ", " ++ show (day - P.born p) ++ " days old"
+                strPeople = unlines $ map (P.formatLong day) people
             C.erase
-            puts "Dynasty Simulator\n"
-            puts $ "Day " ++ show day ++ "\n"
+            puts $ "Dynasty Simulator  Day " ++ show day ++ "\n"
             puts "Keyboard:  q Quit  n Next day\n"
             puts $ "People:\n" ++ strPeople
             C.refresh
