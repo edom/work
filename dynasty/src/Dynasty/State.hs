@@ -18,8 +18,8 @@ data State =
 incrementDate :: State -> State
 incrementDate x = x { day = day x + 1 }
 
-initialState :: State
-initialState = MkState 0 0 []
+empty :: State
+empty = MkState 0 0 []
 
 type StateM = M.State State
 

@@ -22,7 +22,7 @@ dynastyMain = do
             putStrLn "This program does not support your terminal."
         else do
             C.echo False
-            let state0 = flip S.exec S.initialState initialize
+            let state0 = S.exec initialize S.empty
             mainLoop window state0
             C.endWin
 
