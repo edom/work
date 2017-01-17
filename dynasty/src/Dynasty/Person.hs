@@ -3,6 +3,7 @@ module Dynasty.Person where
 import Prelude hiding (id)
 
 import qualified Dynasty.Culture as C
+import qualified Dynasty.Date as D
 import qualified Dynasty.Level as L
 import qualified Dynasty.Religion as R
 import qualified Dynasty.Title as T
@@ -15,20 +16,28 @@ data Person =
     {
         id :: Int
         , name :: String
-        , born :: Int
+        , born :: D.Date
         , titles :: [T.Title]
-        , died :: Maybe Int
+        , died :: Maybe D.Date
         , culture :: C.Culture
         , religion :: R.Religion
         , traits :: [U.Trait]
         , sex :: L.Sex
+        , marriages :: [Marriage]
+    }
+
+data Marriage
+    = MkMarriage
+    {
+        husband :: Id
+        , wife :: Id
     }
     deriving (Show)
 
 empty :: Person
-empty = MkPerson 0 "" 0 [] Nothing C.None R.None [] L.Male
+empty = MkPerson 0 "" (D.fromYmd 1066 1 1) [] Nothing C.None R.None [] L.Male []
 
-type Today = Int
+type Today = D.Date
 
 formatLong :: Today -> Person -> String
 formatLong today p =
@@ -37,7 +46,7 @@ formatLong today p =
             [
                 pad "Id / Sex / Name:" ++ show (id p) ++ " / " ++ show (sex p) ++ " / " ++ name p
                 , pad "Religion / Culture:" ++ show (religion p) ++ " / " ++ show (culture p)
-                , pad "Born / Age:" ++ "Day " ++ show (born p) ++ " / " ++ show (today - born p) ++ " days old"
+                , pad "Born / Age:" ++ D.print (born p) ++ " / " ++ show (today D.- born p) ++ " days old"
                 , "Titles:"
             ]
             ++ map ("    - " ++) (formattedTitlesOf p)

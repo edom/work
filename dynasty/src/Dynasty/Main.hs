@@ -6,6 +6,7 @@ import qualified Foreign as F
 import qualified UI.HSCurses.Curses as C
 
 import qualified Dynasty.Culture as A
+import qualified Dynasty.Date as D
 import qualified Dynasty.Display as E
 import qualified Dynasty.Level as L
 import qualified Dynasty.Person as P
@@ -72,11 +73,11 @@ theRealMainLoop chario =
         getch = E.getch chario
         loop state = do
             let
-                day = S.day state
+                today = S.today state
                 people = S.people state
-                strPeople = unlines $ map (P.formatLong day) people
+                strPeople = unlines $ map (P.formatLong today) people
             C.erase
-            puts $ "Dynasty Simulator  Day " ++ show day ++ "\n"
+            puts $ "Dynasty Simulator  Day " ++ D.print today ++ "\n"
             puts "Keyboard:  q Quit  n Next day\n"
             puts $ "People:\n" ++ strPeople
             C.refresh

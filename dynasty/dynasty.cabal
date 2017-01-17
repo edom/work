@@ -17,6 +17,7 @@ library
     hs-source-dirs: src
     exposed-modules:
         Dynasty.Culture
+        Dynasty.Date
         Dynasty.Display
         Dynasty.Level
         Dynasty.Main
@@ -28,6 +29,7 @@ library
     build-depends:
         base >= 4.7 && < 5
         , hscurses
+        , time
         , transformers
     default-language:
         Haskell98

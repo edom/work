@@ -4,22 +4,22 @@ module Dynasty.State where
 
 import qualified Control.Monad.Trans.State as M
 
+import qualified Dynasty.Date as D
 import qualified Dynasty.Person as P
 
 data State =
     MkState
     {
-        day :: Int
+        today :: D.Date
         , nextPersonId :: P.Id
         , people :: [P.Person]
     }
-    deriving (Show)
 
 incrementDate :: State -> State
-incrementDate x = x { day = day x + 1 }
+incrementDate x = x { today = D.increment $ today x }
 
 empty :: State
-empty = MkState 0 0 []
+empty = MkState (D.fromYmd 1066 1 1) 0 []
 
 type StateM = M.State State
 
