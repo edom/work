@@ -1,0 +1,8 @@
+#!/bin/bash
+name="$1"
+set -e
+pdflatex -output-directory out "$name"
+(cd out && BIBINPUTS=.. bibtex "$name")
+(cd out && makeindex "$name")
+pdflatex -output-directory out "$name"
+pdflatex -output-directory out "$name"
