@@ -11,8 +11,8 @@ import qualified Dynasty.Person as P
 import qualified Dynasty.State as S
 import qualified Dynasty.Title as T
 
-main :: IO ()
-main = do
+dynastyMain :: IO ()
+dynastyMain = do
     window <- C.initScr
     if window == F.nullPtr
         then do
