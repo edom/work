@@ -1,5 +1,7 @@
 module Dynasty.Display where
 
+import qualified Foreign.C as F
+
 import qualified UI.HSCurses.Curses as C
 
 data CharIo
@@ -12,7 +14,7 @@ data CharIo
 curses :: C.Window -> CharIo
 curses window =
     MkCharIo
-        (C.wAddStr window)
+        (wAddStr window)
         getch_
     where
         getch_ = do
@@ -35,3 +37,11 @@ isChar _ _ = False
 asChar :: CharInput -> Maybe Char
 asChar (Char x) = Just x
 asChar _ = Nothing
+
+wAddStr :: C.Window -> String -> IO ()
+wAddStr window string = do
+    _ <- F.withCStringLen string $ \ (cstr, len) ->
+        waddnstr window  cstr (fromIntegral len)
+    return ()
+
+foreign import ccall safe waddnstr :: C.Window -> F.CString -> F.CInt -> IO F.CInt
