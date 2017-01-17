@@ -16,7 +16,11 @@ cabal-version: >=1.10
 library
     hs-source-dirs: src
     exposed-modules:
+        Dynasty.Display
         Dynasty.Main
+        Dynasty.Person
+        Dynasty.State
+        Dynasty.Title
     build-depends:
         base >= 4.7 && < 5
         , hscurses
