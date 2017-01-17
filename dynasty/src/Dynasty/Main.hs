@@ -7,6 +7,7 @@ import qualified UI.HSCurses.Curses as C
 
 import qualified Dynasty.Culture as A
 import qualified Dynasty.Display as E
+import qualified Dynasty.Level as L
 import qualified Dynasty.Person as P
 import qualified Dynasty.Religion as R
 import qualified Dynasty.State as S
@@ -35,7 +36,7 @@ dynastyMain = do
                     patient = addTrait U.Patient
                     envious = addTrait U.Envious
                     wroth = addTrait U.Wroth
-                    female p = p { P.sex = T.Female }
+                    female p = p { P.sex = L.Female }
                 M.mapM_ S.newPersonWith $ concat
                     [
                         map ((irish . catholic) .) [

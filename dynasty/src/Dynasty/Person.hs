@@ -3,6 +3,7 @@ module Dynasty.Person where
 import Prelude hiding (id)
 
 import qualified Dynasty.Culture as C
+import qualified Dynasty.Level as L
 import qualified Dynasty.Religion as R
 import qualified Dynasty.Title as T
 import qualified Dynasty.Trait as U
@@ -20,12 +21,12 @@ data Person =
         , culture :: C.Culture
         , religion :: R.Religion
         , traits :: [U.Trait]
-        , sex :: T.Sex
+        , sex :: L.Sex
     }
     deriving (Show)
 
 empty :: Person
-empty = MkPerson 0 "" 0 [] Nothing C.None R.None [] T.Male
+empty = MkPerson 0 "" 0 [] Nothing C.None R.None [] L.Male
 
 type Today = Int
 

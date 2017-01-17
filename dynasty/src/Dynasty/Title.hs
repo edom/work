@@ -1,49 +1,27 @@
 module Dynasty.Title where
 
+import qualified Dynasty.Level as L
+
 type Place = String
 
 data Title
-    = MkTitle Level Place
+    = MkTitle L.Level Place
     deriving (Show)
 
-data Level
-    = Baron
-    | Count
-    | Duke
-    | King
-    | Emperor
-    deriving (Eq, Ord, Show)
-
-data Sex
-    = Male
-    | Female
-    deriving (Eq, Show)
-
 baronOf :: Place -> Title
-baronOf = MkTitle Baron
+baronOf = MkTitle L.Baron
 
 countOf :: Place -> Title
-countOf = MkTitle Count
+countOf = MkTitle L.Count
 
 dukeOf :: Place -> Title
-dukeOf = MkTitle Duke
+dukeOf = MkTitle L.Duke
 
 kingOf :: Place -> Title
-kingOf = MkTitle King
+kingOf = MkTitle L.King
 
 emperorOf :: Place -> Title
-emperorOf = MkTitle Emperor
+emperorOf = MkTitle L.Emperor
 
-formatLevel :: Sex -> Level -> String
-formatLevel sex level =
-    case sex of
-        Male -> show level
-        Female -> case level of
-            Baron -> "Baroness"
-            Count -> "Countess"
-            Duke -> "Duchess"
-            King -> "Queen"
-            Emperor -> "Empress"
-
-format :: Sex -> Title -> String
-format sex (MkTitle level place) = formatLevel sex level ++ " of " ++ place
+format :: L.Sex -> Title -> String
+format sex (MkTitle level place) = L.format sex level ++ " of " ++ place
