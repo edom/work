@@ -28,7 +28,7 @@ dynastyMain = do
             mainLoop window state0
             C.endWin
 
-initialize :: SM.StateM ()
+initialize :: (SM.MonadState m) => m ()
 initialize = do
     M.mapM_ SM.newPersonWith $ concat
         [

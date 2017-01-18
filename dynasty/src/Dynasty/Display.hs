@@ -5,7 +5,10 @@ Text user interface.
 -}
 module Dynasty.Display
 (
-    CharIo(..)
+    CharIo
+
+    , puts
+    , getch
 
     , curses
 
@@ -15,6 +18,7 @@ module Dynasty.Display
 )
 where
 
+import qualified Control.Monad.IO.Class as I
 import qualified Foreign.C as F
 
 import qualified UI.HSCurses.Curses as C
@@ -22,17 +26,23 @@ import qualified UI.HSCurses.Curses as C
 data CharIo
     = MkCharIo
     {
-        puts :: String -> IO ()
-        , getch :: IO (Maybe CharInput)
+        puts_ :: String -> IO ()
+        , getch_ :: IO (Maybe CharInput)
     }
+
+puts :: (I.MonadIO m) => CharIo -> String -> m ()
+puts d = I.liftIO . puts_ d
+
+getch :: (I.MonadIO m) => CharIo -> m (Maybe CharInput)
+getch d = I.liftIO $ getch_ d
 
 curses :: C.Window -> CharIo
 curses window =
     MkCharIo
         (wAddStr window)
-        getch_
+        getch__
     where
-        getch_ = do
+        getch__ = do
             eKey <- C.getch
             return $ case eKey of
                 _ | eKey == C.cERR -> Nothing
