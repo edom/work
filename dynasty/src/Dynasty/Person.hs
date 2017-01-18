@@ -26,8 +26,6 @@ module Dynasty.Person
     , Today
 
     , ageYear
-
-    , Marriage(..)
 )
 where
 
@@ -62,7 +60,6 @@ data Person =
         , religion :: R.Religion
         , traits :: [U.Trait]
         , sex :: L.Sex
-        , marriages :: [Marriage]
 
         , gold :: Double
         , prestige :: Double
@@ -78,14 +75,6 @@ data Person =
         , motherId :: Maybe Id
     }
 
-data Marriage
-    = MkMarriage
-    {
-        husband :: Id
-        , wife :: Id
-    }
-    deriving (Show)
-
 {- |
 This frees you from having to memorize the order of parameters of 'MkPerson'.
 
@@ -93,7 +82,7 @@ This allows us to add and reorder parameters of 'MkPerson' without breaking your
 -}
 empty :: Person
 empty =
-    MkPerson 0 "" (D.fromYmd 1066 1 1) [] Nothing C.None R.None [] L.Male []
+    MkPerson 0 "" (D.fromYmd 1066 1 1) [] Nothing C.None R.None [] L.Male
     0 0 0
     0 0 0 0 0
     Nothing Nothing

@@ -17,6 +17,7 @@ module Dynasty.State
 
     -- * Internal
 
+    , Marriage(..)
     , incrementPersonId
 )
 where
@@ -39,13 +40,26 @@ data State =
         , people :: [P.Person]
 
         , playerCharId :: P.Id
+
+        , marriages :: [Marriage]
+    }
+
+data Marriage
+    = MkMarriage
+    {
+        begin :: D.Date
+        , end :: Maybe D.Date
+        , husband :: P.Id
+        , wife :: P.Id
     }
 
 incrementDate :: State -> State
 incrementDate x = x { today = D.increment $ today x }
 
 empty :: State
-empty = MkState (D.fromYmd 1066 1 1) 0 [] 0
+empty =
+    MkState (D.fromYmd 1066 1 1) 0 [] 0
+    []
 
 findPeople :: P.Id -> State -> [P.Person]
 findPeople id state =

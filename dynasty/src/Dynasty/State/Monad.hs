@@ -11,6 +11,8 @@ module Dynasty.State.Monad
     -- * On the monad
 
     , newPersonWith
+    , marry
+    , today
 )
 where
 
@@ -18,6 +20,7 @@ import Prelude hiding (id, init)
 
 import qualified Control.Monad.Trans.State as M
 
+import qualified Dynasty.Date as D
 import qualified Dynasty.Person as P
 import qualified Dynasty.State as S
 
@@ -59,3 +62,13 @@ newPersonWith init = do
 addPerson :: P.Person -> StateM ()
 addPerson p = do
     modify $ \ s -> s { S.people = p : S.people s }
+
+today :: StateM D.Date
+today = gets S.today
+
+marry :: P.Person -> P.Person -> StateM S.Marriage
+marry p q = do
+    t <- today
+    let m = S.MkMarriage t Nothing (P.id p) (P.id q)
+    modify $ \ s -> s { S.marriages = m : S.marriages s }
+    return m

@@ -58,6 +58,7 @@ initialize = do
     nowoman <- SM.newPersonWith $
         kind . patient . female . named "Nowoman" . born 1022 9 15
         . kingOf "Nowomanland"
+    _ <- SM.marry noman nowoman
     _nomansson <- SM.newPersonWith $
         named "Noman II Nomansson" . born 1045 3 8
         . fatheredBy noman . motheredBy nowoman
