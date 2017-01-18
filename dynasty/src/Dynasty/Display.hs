@@ -1,3 +1,5 @@
+{-# LANGUAGE ForeignFunctionInterface #-}
+
 module Dynasty.Display where
 
 import qualified Foreign.C as F
