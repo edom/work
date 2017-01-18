@@ -28,6 +28,12 @@ data Person =
         , gold :: Double
         , prestige :: Double
         , piety :: Double
+
+        , diplomacy :: Int
+        , martial :: Int
+        , stewardship :: Int
+        , intrigue :: Int
+        , learning :: Int
     }
 
 data Marriage
@@ -42,6 +48,7 @@ empty :: Person
 empty =
     MkPerson 0 "" (D.fromYmd 1066 1 1) [] Nothing C.None R.None [] L.Male []
     0 0 0
+    0 0 0 0 0
 
 type Today = D.Date
 
@@ -54,6 +61,10 @@ formatLong today p =
                 , pad "Religion / Culture:" ++ show (religion p) ++ " / " ++ show (culture p)
                 , pad "Born / Age:" ++ D.print (born p) ++ " / " ++ show (today D.- born p) ++ " days old"
                 , pad "Gold / Prestige / Piety:" ++ showd (gold p) ++ " / " ++ showd (prestige p) ++ " / " ++ showd (piety p)
+                , pad "D / M / S / I / L:"
+                    ++ show (diplomacy p) ++ " / " ++ show (martial p)
+                    ++ " / " ++ show (stewardship p) ++ " / " ++ show (intrigue p)
+                    ++ " / " ++ show (learning p)
                 , "Titles:"
             ]
             ++ map ("    - " ++) (formattedTitlesOf p)
