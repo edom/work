@@ -1,4 +1,10 @@
-module Dynasty.Main where
+{-# LANGUAGE NoMonomorphismRestriction #-}
+
+module Dynasty.Main
+(
+    dynastyMain
+)
+where
 
 import qualified Control.Monad as M
 import qualified Foreign as F
@@ -89,27 +95,26 @@ mainLoop window = theRealMainLoop $ E.curses window
 
 theRealMainLoop :: E.CharIo -> S.State -> IO ()
 theRealMainLoop chario =
-    loop
+    SM.runStateT_ loop
     where
         puts = E.puts chario
         getch = E.getch chario
-        loop state = do
-            let
-                today = S.today state
-                people = S.people state
-                strPeople = unlines $ map (P.formatLong today) people
-            C.erase
+        erase = E.erase chario
+        refresh = E.refresh chario
+        loop = do
+            today <- SM.today
+            people <- SM.people
+            strPeople <- unlines <$> M.mapM SM.formatPersonLong people
+            state <- SM.get
+            erase
             puts $ "Dynasty Simulator  Day " ++ D.print today ++ "\n"
             puts "Keyboard:  q Quit  n Next day\n"
             puts $ S.print state
             puts $ "People:\n" ++ strPeople
-            C.refresh
+            refresh
             key <- getch
             let
                 quit = maybe False (E.isChar 'q') key
                 nextDay = maybe False (E.isChar 'n') key
-                state0 =
-                    id
-                    . (if nextDay then S.incrementDate else id)
-                    $ state
-            M.unless quit $ loop state0
+            M.when nextDay SM.incrementDate
+            M.unless quit loop

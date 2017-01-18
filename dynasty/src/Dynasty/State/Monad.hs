@@ -6,7 +6,14 @@ module Dynasty.State.Monad
 
     MonadState(..)
 
-    -- * State monad
+    -- * StateT
+
+    , runIdentity
+    , runStateT_
+    , execStateT
+    , evalStateT
+
+    -- * State
 
     , StateM
     , exec
@@ -14,6 +21,9 @@ module Dynasty.State.Monad
 
     -- * On the monad
 
+    , incrementDate
+    , people
+    , formatPersonLong
     , newPersonWith
     , marry
     , today
@@ -21,6 +31,8 @@ module Dynasty.State.Monad
 where
 
 import Prelude hiding (id, init)
+
+import qualified Data.Functor.Identity as I
 
 import qualified Control.Monad.Trans.State as M
 
@@ -41,6 +53,20 @@ instance (Monad m) => MonadState (M.StateT S.State m) where
     modify = M.modify
 
 type StateM = M.State S.State
+
+runIdentity :: I.Identity a -> a
+runIdentity = I.runIdentity
+
+runStateT_ :: (Monad m) => M.StateT s m a -> s -> m ()
+runStateT_ m s = void <$> M.runStateT m s
+    where
+        void _ = ()
+
+execStateT :: (Monad m) => M.StateT S.State m a -> S.State -> m S.State
+execStateT = M.execStateT
+
+evalStateT :: (Monad m) => M.StateT S.State m a -> S.State -> m a
+evalStateT = M.evalStateT
 
 gets :: (MonadState m) => (S.State -> s) -> m s
 gets f = f <$> get
@@ -85,3 +111,12 @@ marry p q = do
     let m = S.MkMarriage t Nothing (P.id p) (P.id q)
     modify $ \ s -> s { S.marriages = m : S.marriages s }
     return m
+
+people :: (MonadState m) => m [P.Person]
+people = gets S.people
+
+incrementDate :: (MonadState m) => m ()
+incrementDate = modify S.incrementDate
+
+formatPersonLong :: (MonadState m) => P.Person -> m String
+formatPersonLong p = P.formatLong <$> today <*> pure p
