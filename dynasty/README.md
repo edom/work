@@ -36,8 +36,7 @@ Then, enter either `main` or `dynastyMain`.
 - Show character name.
 - Show character traits.
 - Show character titles.
-
-Show character attributes.
+- Show character attributes.
 
 Show character location.
 
