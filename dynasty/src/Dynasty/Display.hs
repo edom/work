@@ -1,6 +1,19 @@
 {-# LANGUAGE ForeignFunctionInterface #-}
 
-module Dynasty.Display where
+{- |
+Text user interface.
+-}
+module Dynasty.Display
+(
+    CharIo(..)
+
+    , curses
+
+    , CharInput
+
+    , isChar
+)
+where
 
 import qualified Foreign.C as F
 
@@ -36,10 +49,9 @@ isChar :: Char -> CharInput -> Bool
 isChar a (Char b) = a == b
 isChar _ _ = False
 
-asChar :: CharInput -> Maybe Char
-asChar (Char x) = Just x
-asChar _ = Nothing
-
+{- |
+This exists because the wAddStr that comes with HSCurses uses 'error'.
+-}
 wAddStr :: C.Window -> String -> IO ()
 wAddStr window string = do
     _ <- F.withCStringLen string $ \ (cstr, len) ->

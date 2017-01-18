@@ -12,6 +12,7 @@ import qualified Dynasty.Level as L
 import qualified Dynasty.Person as P
 import qualified Dynasty.Religion as R
 import qualified Dynasty.State as S
+import qualified Dynasty.State.Monad as SM
 import qualified Dynasty.Title as T
 import qualified Dynasty.Trait as U
 
@@ -23,22 +24,26 @@ dynastyMain = do
             putStrLn "This program does not support your terminal."
         else do
             C.echo False
-            let state0 = S.exec initialize S.empty
+            let state0 = SM.exec initialize S.empty
             mainLoop window state0
             C.endWin
 
-initialize :: S.StateM ()
+initialize :: SM.StateM ()
 initialize = do
-    M.mapM_ S.newPersonWith $ concat
+    M.mapM_ SM.newPersonWith $ concat
         [
             map ((irish . catholic) .) [
                 named "Murchad mac Donnchad Ua Briain" . born 1024 1 1 . countOf "Tuadhmhumhain" . dukeOf "Mumu"
             ]
             ,
-            map ((angloSaxon . catholic) .)
+            map ((danish . catholic) .)
             [
                 named "Harthacnut" . born 1018 1 1 . died 1042 6 8 . kingOf "England"
-                , named "Edward the Confessor" . born 1003 1 1 . kingOf "England"
+            ]
+            ,
+            map ((angloSaxon . catholic) .)
+            [
+                named "Edward the Confessor" . born 1003 1 1 . kingOf "England"
                 , named "Harold Godwinson" . born 1022 1 1 . countOf "Hereford" . kingOf "England"
             ]
             ,
@@ -49,10 +54,11 @@ initialize = do
             ]
         ]
     where
+        angloSaxon p = p { P.culture = A.AngloSaxon }
+        danish p = p { P.culture = A.Danish }
         irish p = p { P.culture = A.Irish }
         born y m d p = p { P.born = D.fromYmd y m d }
         died y m d p = p { P.died = Just $ D.fromYmd y m d }
-        angloSaxon p = p { P.culture = A.AngloSaxon }
         named name p = p { P.name = name }
         countOf county p = p { P.titles = T.countOf county : P.titles p }
         dukeOf duchy p = p { P.titles = T.dukeOf duchy : P.titles p }

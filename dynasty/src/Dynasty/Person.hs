@@ -1,4 +1,35 @@
-module Dynasty.Person where
+module Dynasty.Person
+(
+    -- * Record
+
+    Person(..)
+
+    -- * Make
+
+    , empty
+    , newWithId
+
+    -- * Textual display
+
+    , honorifiedName
+    , formatLong
+    , highestTitle
+
+    -- * Identifier
+
+    , Id
+
+    , increment
+
+    -- * Age
+
+    , Today
+
+    , ageYear
+
+    , Marriage(..)
+)
+where
 
 import Prelude hiding (id)
 
@@ -9,12 +40,20 @@ import qualified Dynasty.Religion as R
 import qualified Dynasty.Title as T
 import qualified Dynasty.Trait as U
 
+{- |
+The game should not have more than one million people.
+-}
 type Id = Int
 
+{- |
+An inhabitant of this represents a person in the game.
+
+If you are thinking about using 'MkPerson', use 'empty' instead.
+-}
 data Person =
     MkPerson
     {
-        id :: Int
+        id :: Id
         , name :: String
         , born :: D.Date
         , titles :: [T.Title]
@@ -44,18 +83,33 @@ data Marriage
     }
     deriving (Show)
 
+{- |
+This frees you from having to memorize the order of parameters of 'MkPerson'.
+
+This allows us to add and reorder parameters of 'MkPerson' without breaking your code.
+-}
 empty :: Person
 empty =
     MkPerson 0 "" (D.fromYmd 1066 1 1) [] Nothing C.None R.None [] L.Male []
     0 0 0
     0 0 0 0 0
 
+newWithId :: Id -> Person
+newWithId x = empty { id = x }
+
+{- |
+Compute the highest title held by a person, if any.
+-}
 highestTitle :: Person -> Maybe T.Title
 highestTitle p =
     case titles p of
         [] -> Nothing
         list -> Just $ maximum list
 
+{- |
+Given a person named Man whose 'highestTitle' is the 'L.King' of Kingdom,
+this gives the string King Man of Kingdom.
+-}
 honorifiedName :: Person -> String
 honorifiedName p =
     maybe name_ (\ title -> L.format (sex p) (T.level title) ++ " " ++ name_ ++ " of " ++ T.place title) $ highestTitle p
@@ -64,6 +118,9 @@ honorifiedName p =
 
 type Today = D.Date
 
+{- |
+Compute how old, in years, someone would be at the given date, accounting for birthday.
+-}
 ageYear :: Today -> Person -> Int
 ageYear today p =
     yt - yb - adjustment
@@ -73,6 +130,9 @@ ageYear today p =
         birthdayPassed = (mt, dt) >= (mb, db)
         adjustment = if birthdayPassed then 0 else 1
 
+{- |
+Format the person for multiline textual display.
+-}
 formatLong :: Today -> Person -> String
 formatLong today p =
     unlines $

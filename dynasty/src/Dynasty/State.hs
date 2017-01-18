@@ -1,13 +1,36 @@
 {-# OPTIONS -fno-warn-name-shadowing #-}
 
-module Dynasty.State where
+module Dynasty.State
+(
+    State(..)
 
-import qualified Control.Monad.Trans.State as M
+    -- * Make
+
+    , empty
+    , incrementDate
+    , findPeople
+    , modifyPeople
+
+    -- * Display
+
+    , print
+
+    -- * Internal
+
+    , incrementPersonId
+)
+where
+
+import Prelude hiding (print)
+
 import qualified Data.List as L
 
 import qualified Dynasty.Date as D
 import qualified Dynasty.Person as P
 
+{- |
+An inhabitant of this type is a snapshot of the game at a given moment.
+-}
 data State =
     MkState
     {
@@ -23,20 +46,6 @@ incrementDate x = x { today = D.increment $ today x }
 
 empty :: State
 empty = MkState (D.fromYmd 1066 1 1) 0 [] 0
-
-type StateM = M.State State
-
-exec :: StateM a -> State -> State
-exec = M.execState
-
-eval :: StateM a -> State -> a
-eval = M.evalState
-
-gets :: (State -> s) -> StateM s
-gets = M.gets
-
-modify :: (State -> State) -> StateM ()
-modify = M.modify
 
 findPeople :: P.Id -> State -> [P.Person]
 findPeople id state =
@@ -54,16 +63,5 @@ print state =
         playerCharNames = map P.honorifiedName myChars
         myChars = findPeople playerCharId_ state
 
-newPerson :: StateM P.Person
-newPerson = do
-    id <- gets nextPersonId
-    modify $ \ s -> s { nextPersonId = P.increment id }
-    return $ P.empty { P.id = id }
-
-newPersonWith :: (P.Person -> P.Person) -> StateM ()
-newPersonWith init = do
-    newPerson >>= addPerson . init
-
-addPerson :: P.Person -> StateM ()
-addPerson p = do
-    modify $ \ s -> s { people = p : people s }
+incrementPersonId :: State -> State
+incrementPersonId state = state { nextPersonId = P.increment (nextPersonId state) }

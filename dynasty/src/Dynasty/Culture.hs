@@ -18,9 +18,15 @@ data Culture
     | Frisian
     | Dutch
 
+    | Norse
+    | Swedish
+    | Norwegian
+    | Danish
+
     deriving (Eq, Show)
 
 data Group
     = Celtic
     | WestGermanic
+    | NorthGermanic
     deriving (Eq, Show)

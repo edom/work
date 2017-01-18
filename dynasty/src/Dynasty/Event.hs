@@ -6,6 +6,7 @@ import qualified Control.Monad.Trans.State as M
 
 import qualified Dynasty.Person as P
 import qualified Dynasty.State as S
+import qualified Dynasty.State.Monad as SM
 
 type State = S.State
 
@@ -48,10 +49,10 @@ findPerson id = do
         x : _ -> return x
         _ -> fail $ "This game does not have a person with id " ++ show id
 
-embed :: EventM a -> S.StateM (Either String a)
+embed :: EventM a -> SM.StateM (Either String a)
 embed m = M.state $ \ s -> run m s
 
-lift :: S.StateM a -> EventM a
+lift :: SM.StateM a -> EventM a
 lift m = MkEventM $ \ s ->
         mapfst Right $ M.runState m s
 
