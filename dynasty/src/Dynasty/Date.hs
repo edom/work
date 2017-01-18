@@ -1,3 +1,5 @@
+{-# OPTIONS -fno-warn-name-shadowing #-}
+
 {- |
 The game uses Gregorian calendar as used in 2017
 although it did not exist in 1066;
@@ -8,7 +10,10 @@ module Dynasty.Date
     Date
 
     , fromYmd
+    , toYmd
     , parse
+
+    , year
 
     , increment
     , (-)
@@ -34,6 +39,16 @@ fromYmd
     -> Date
 
 fromYmd year month day = In $ T.fromGregorian (fromIntegral year) month day
+
+toYmd :: Date -> (Int, Int, Int)
+toYmd date = (fromIntegral y, m, d)
+    where
+        (y, m, d) = T.toGregorian $ out date
+
+year :: Date -> Int
+year date = fromIntegral y
+    where
+        (y, _, _) = T.toGregorian $ out date
 
 parse :: (Monad m) => String -> m Date
 parse = fmap In . T.parseTimeM False T.defaultTimeLocale "%F"

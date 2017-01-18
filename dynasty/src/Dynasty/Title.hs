@@ -1,3 +1,5 @@
+{-# OPTIONS -fno-warn-name-shadowing #-}
+
 module Dynasty.Title where
 
 import qualified Dynasty.Level as L
@@ -5,8 +7,12 @@ import qualified Dynasty.Level as L
 type Place = String
 
 data Title
-    = MkTitle L.Level Place
-    deriving (Show)
+    = MkTitle
+    {
+        level :: L.Level
+        , place :: Place
+    }
+    deriving (Eq, Ord, Show)
 
 baronOf :: Place -> Title
 baronOf = MkTitle L.Baron

@@ -50,16 +50,37 @@ empty =
     0 0 0
     0 0 0 0 0
 
+highestTitle :: Person -> Maybe T.Title
+highestTitle p =
+    case titles p of
+        [] -> Nothing
+        list -> Just $ maximum list
+
+honorifiedName :: Person -> String
+honorifiedName p =
+    maybe name_ (\ title -> L.format (sex p) (T.level title) ++ " " ++ name_ ++ " of " ++ T.place title) $ highestTitle p
+    where
+        name_ = name p
+
 type Today = D.Date
+
+ageYear :: Today -> Person -> Int
+ageYear today p =
+    yt - yb - adjustment
+    where
+        (yt, mt, dt) = D.toYmd today
+        (yb, mb, db) = D.toYmd (born p)
+        birthdayPassed = (mt, dt) >= (mb, db)
+        adjustment = if birthdayPassed then 0 else 1
 
 formatLong :: Today -> Person -> String
 formatLong today p =
     unlines $
         map indent $
             [
-                pad "Id / Sex / Name:" ++ show (id p) ++ " / " ++ show (sex p) ++ " / " ++ name p
+                pad "Id / Sex / Hon. Name:" ++ show (id p) ++ " / " ++ show (sex p) ++ " / " ++ honorifiedName p
                 , pad "Religion / Culture:" ++ show (religion p) ++ " / " ++ show (culture p)
-                , pad "Born / Age:" ++ D.print (born p) ++ " / " ++ show (today D.- born p) ++ " days old"
+                , pad "Born / Age:" ++ D.print (born p) ++ " / " ++ show (ageYear today p) ++ " years (" ++ show ageDay ++ " days) old"
                 , pad "Gold / Prestige / Piety:" ++ showd (gold p) ++ " / " ++ showd (prestige p) ++ " / " ++ showd (piety p)
                 , pad "D / M / S / I / L:"
                     ++ show (diplomacy p) ++ " / " ++ show (martial p)
@@ -73,6 +94,7 @@ formatLong today p =
                 pad "Traits:" ++ show (traits p)
             ]
     where
+        ageDay = today D.- born p
         showd x = show (floor x :: Int)
         minLength = 32
         pad string = string ++ replicate (minLength - length string) ' '
