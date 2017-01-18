@@ -62,10 +62,10 @@ runStateT_ m s = void <$> M.runStateT m s
     where
         void _ = ()
 
-execStateT :: (Monad m) => M.StateT S.State m a -> S.State -> m S.State
+execStateT :: (Monad m) => M.StateT s m a -> s -> m s
 execStateT = M.execStateT
 
-evalStateT :: (Monad m) => M.StateT S.State m a -> S.State -> m a
+evalStateT :: (Monad m) => M.StateT s m a -> s -> m a
 evalStateT = M.evalStateT
 
 gets :: (MonadState m) => (S.State -> s) -> m s
