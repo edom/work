@@ -25,6 +25,26 @@ stack ghci
 
 Then, enter either `main` or `dynastyMain`.
 
+# How do I generate the haddock of this project?
+
+Install hscolour if you haven't do that:
+
+```
+stack install hscolour
+```
+
+To generate documentation:
+
+```
+stack haddock
+```
+
+The generated documentation path looks like this (the actual path on your machine may differ):
+
+```
+.stack-work/install/x86_64-linux/lts-6.26/7.10.3/doc/dynasty-0.0.0/index.html
+```
+
 # What do we plan to do?
 
 (a.k.a. Roadmap)
