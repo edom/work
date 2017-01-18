@@ -73,6 +73,9 @@ data Person =
         , stewardship :: Int
         , intrigue :: Int
         , learning :: Int
+
+        , fatherId :: Maybe Id
+        , motherId :: Maybe Id
     }
 
 data Marriage
@@ -93,6 +96,7 @@ empty =
     MkPerson 0 "" (D.fromYmd 1066 1 1) [] Nothing C.None R.None [] L.Male []
     0 0 0
     0 0 0 0 0
+    Nothing Nothing
 
 newWithId :: Id -> Person
 newWithId x = empty { id = x }
@@ -139,6 +143,7 @@ formatLong today p =
         map indent $
             [
                 pad "Id / Sex / Hon. Name:" ++ show (id p) ++ " / " ++ show (sex p) ++ " / " ++ honorifiedName p
+                , pad "Father Id / Mother Id:" ++ showMaybeId (fatherId p) ++ " / " ++ showMaybeId (motherId p)
                 , pad "Religion / Culture:" ++ show (religion p) ++ " / " ++ show (culture p)
                 , pad "Born / Age:" ++ D.print (born p) ++ " / " ++ show (ageYear today p) ++ " years (" ++ show ageDay ++ " days) old"
                 , pad "Gold / Prestige / Piety:" ++ showd (gold p) ++ " / " ++ showd (prestige p) ++ " / " ++ showd (piety p)
@@ -154,6 +159,7 @@ formatLong today p =
                 pad "Traits:" ++ show (traits p)
             ]
     where
+        showMaybeId = maybe "-" show
         ageDay = today D.- born p
         showd x = show (floor x :: Int)
         minLength = 32

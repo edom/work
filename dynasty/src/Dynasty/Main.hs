@@ -48,15 +48,27 @@ initialize = do
             ]
             ,
             [
-                envious . wroth . named "Noman" . countOf "Nocounty" . dukeOf "Noduchy" . kingOf "Nomanland"
-                , kind . patient . named "Yesman" . countOf "Yescounty" . dukeOf "Yesduchy" . kingOf "Yesland"
+                kind . patient . named "Yesman" . countOf "Yescounty" . dukeOf "Yesduchy" . kingOf "Yesland"
                 , female . named "Maywoman" . countOf "Maycounty"
             ]
         ]
+    noman <- SM.newPersonWith $
+        envious . wroth . named "Noman" . born 1020 4 21
+        . countOf "Nocounty" . dukeOf "Noduchy" . kingOf "Nomanland"
+    nowoman <- SM.newPersonWith $
+        kind . patient . female . named "Nowoman" . born 1022 9 15
+        . kingOf "Nowomanland"
+    _nomansson <- SM.newPersonWith $
+        named "Noman II Nomansson" . born 1045 3 8
+        . fatheredBy noman . motheredBy nowoman
+        . countOf "Nowomanland"
+    return ()
     where
         angloSaxon p = p { P.culture = A.AngloSaxon }
         danish p = p { P.culture = A.Danish }
         irish p = p { P.culture = A.Irish }
+        fatheredBy papa child = child { P.fatherId = Just $ P.id papa }
+        motheredBy mama child = child { P.motherId = Just $ P.id mama }
         born y m d p = p { P.born = D.fromYmd y m d }
         died y m d p = p { P.died = Just $ D.fromYmd y m d }
         named name p = p { P.name = name }

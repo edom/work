@@ -47,10 +47,14 @@ newPersonId = do
 {- |
 Create a new 'P.Person', initialize it,
 and add it to the game.
+
+Return the person.
 -}
-newPersonWith :: (P.Person -> P.Person) -> StateM ()
+newPersonWith :: (P.Person -> P.Person) -> StateM P.Person
 newPersonWith init = do
-    newPerson >>= addPerson . init
+    p <- init <$> newPerson
+    addPerson p
+    return p
 
 addPerson :: P.Person -> StateM ()
 addPerson p = do
