@@ -24,6 +24,10 @@ data Person =
         , traits :: [U.Trait]
         , sex :: L.Sex
         , marriages :: [Marriage]
+
+        , gold :: Double
+        , prestige :: Double
+        , piety :: Double
     }
 
 data Marriage
@@ -35,7 +39,9 @@ data Marriage
     deriving (Show)
 
 empty :: Person
-empty = MkPerson 0 "" (D.fromYmd 1066 1 1) [] Nothing C.None R.None [] L.Male []
+empty =
+    MkPerson 0 "" (D.fromYmd 1066 1 1) [] Nothing C.None R.None [] L.Male []
+    0 0 0
 
 type Today = D.Date
 
@@ -47,6 +53,7 @@ formatLong today p =
                 pad "Id / Sex / Name:" ++ show (id p) ++ " / " ++ show (sex p) ++ " / " ++ name p
                 , pad "Religion / Culture:" ++ show (religion p) ++ " / " ++ show (culture p)
                 , pad "Born / Age:" ++ D.print (born p) ++ " / " ++ show (today D.- born p) ++ " days old"
+                , pad "Gold / Prestige / Piety:" ++ showd (gold p) ++ " / " ++ showd (prestige p) ++ " / " ++ showd (piety p)
                 , "Titles:"
             ]
             ++ map ("    - " ++) (formattedTitlesOf p)
@@ -55,7 +62,8 @@ formatLong today p =
                 pad "Traits:" ++ show (traits p)
             ]
     where
-        minLength = 24
+        showd x = show (floor x :: Int)
+        minLength = 32
         pad string = string ++ replicate (minLength - length string) ' '
         indent = ("    " ++)
 
