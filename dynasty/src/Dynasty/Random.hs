@@ -65,7 +65,7 @@ It is like a possibly unfair coin flip.
 bernoulli :: (MonadRandom m) => Probability -> a -> a -> m a
 bernoulli p x y = do
     r <- uniformUnit
-    return $ if r < p then x else y
+    return $ if r < p then y else x
 
 {- |
 The expression @probM p x@
