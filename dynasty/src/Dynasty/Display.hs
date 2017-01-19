@@ -18,6 +18,8 @@ module Dynasty.Display
 
     , isChar
 
+    , asChar
+
     -- * Reexport
 
     , I.MonadIO(..)
@@ -76,6 +78,10 @@ data CharInput
 isChar :: Char -> CharInput -> Bool
 isChar a (Char b) = a == b
 isChar _ _ = False
+
+asChar :: CharInput -> Maybe Char
+asChar (Char x) = Just x
+asChar _ = Nothing
 
 {- |
 This exists because the wAddStr that comes with HSCurses uses 'error'.

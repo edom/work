@@ -1,4 +1,5 @@
 {-# LANGUAGE NoMonomorphismRestriction #-}
+{-# OPTIONS -fno-warn-name-shadowing #-}
 
 module Dynasty.Main
 (
@@ -14,6 +15,7 @@ import qualified UI.HSCurses.Curses as C
 import qualified Dynasty.Date as D
 import qualified Dynasty.Display as E
 import qualified Dynasty.Init as I
+import qualified Dynasty.Person as P
 import qualified Dynasty.Person.Modify as Q
 import qualified Dynasty.Random as R
 import qualified Dynasty.State as S
@@ -44,25 +46,40 @@ theRealMainLoop chario =
         refresh = E.refresh chario
         loop = do
             today <- SM.today
-            people <- SM.people
-            strPeople <- unlines <$> M.mapM SM.formatPersonLong people
             erase
-            puts $ "Dynasty Simulator  Day " ++ D.print today ++ "\n"
-            puts "Keyboard:  q Quit  n Next day\n"
-            R.probM 0.5 $ do
-                puts $ "Character 0 gained 1 Diplomacy.\n"
-                SM.modifyPerson 0 $ Q.addDiplomacy 1
-            R.probM 0.5 $ do
-                puts "Character 0 gained 1 Stewardship.\n"
-                SM.modifyPerson 0 $ Q.addStewardship 1
+            puts $ "Dynasty Simulator  Today is " ++ D.print today ++ "\n"
+            puts "Keyboard:  q Quit  n Next day  p Show all people\n"
             you <- SM.playerChar
             longYou <- M.mapM SM.formatPersonLong you
             puts $ unlines $ "\nYou are playing as:\n" : longYou
-            puts $ "People:\n" ++ strPeople
+            people <- SM.people
+            puts "Events at the beginning of today:\n\n"
+            M.forM_ people $ \ p -> do
+                let id = P.id p
+                R.probM 0.5 $ do
+                    puts $ "Character " ++ show id ++ " gained 1 Diplomacy.\n"
+                    SM.modifyPerson id $ Q.addDiplomacy 1
+                R.probM 0.5 $ do
+                    puts $ "Character " ++ show id ++ " gained 1 Stewardship.\n"
+                    SM.modifyPerson id $ Q.addStewardship 1
             refresh
             key <- getch
-            let
-                quit = maybe False (E.isChar 'q') key
-                nextDay = maybe False (E.isChar 'n') key
-            M.when nextDay SM.incrementDate
-            M.unless quit loop
+            case key >>= E.asChar of
+                Just c -> case c of
+                    'q' -> return ()
+                    'n' -> SM.incrementDate >> loop
+                    'p' -> showAllPeople >> loop
+                    _ -> loop
+                _ -> loop
+        showAllPeople = do
+            people <- SM.people
+            strPeople <- unlines <$> M.mapM SM.formatPersonLong people
+            erase
+            puts "Keyboard:  q Back\n"
+            puts $ "People:\n" ++ strPeople
+            key <- getch
+            case key >>= E.asChar of
+                Just c -> case c of
+                    'q' -> return ()
+                    _ -> showAllPeople
+                _ -> showAllPeople
