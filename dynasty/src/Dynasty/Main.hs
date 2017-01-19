@@ -8,6 +8,7 @@ module Dynasty.Main
 where
 
 import qualified Control.Monad as M
+import qualified Data.Maybe as N
 import qualified Foreign as F
 
 import qualified UI.HSCurses.Curses as C
@@ -17,8 +18,6 @@ import qualified Dynasty.Display as E
 import qualified Dynasty.Event as G
 import qualified Dynasty.Init as I
 import qualified Dynasty.Person as P
-import qualified Dynasty.Person.Modify as Q
-import qualified Dynasty.Random as R
 import qualified Dynasty.State as S
 import qualified Dynasty.State.Monad as SM
 
@@ -46,9 +45,10 @@ theRealMainLoop chario =
         erase = E.erase chario
         refresh = E.refresh chario
         beginDay = do
-            events <- makeEvents
-            M.mapM_ G.effect events
-            midDay events
+            people <- SM.people
+            events <- makeEventsFor people
+            happenings <- N.catMaybes <$> M.mapM G.roll events
+            midDay happenings
         midDay events = do
             today <- SM.today
             erase
@@ -69,31 +69,25 @@ theRealMainLoop chario =
                     'p' -> showAllPeople >> midDay events
                     _ -> midDay events
                 _ -> midDay events
-        makeEvents = do
-            people <- SM.people
-            personalEvents <- fmap concat $ M.forM people $ \ p -> do
-                let id = P.id p
-                fmap (map ($ G.empty) . concat) $ M.sequence
-                    [
-                        R.bernoulli 0.5 [] [
-                            G.setMessage ("Character " ++ show id ++ " gained 1 Diplomacy.")
-                            . G.setEffect (SM.modifyPerson id $ Q.addDiplomacy 1)
-                        ]
-                        , R.bernoulli 0.5 [] [
-                            G.setMessage ("Character " ++ show id ++ " gained 1 Stewardship.")
-                            . G.setEffect (SM.modifyPerson id $ Q.addStewardship 1)
-                        ]
-                    ]
-            let pairs = [ (p, q) | p <- people, q <- people, P.id p /= P.id q ]
-            pairEvents <- fmap (map ($ G.empty)) . fmap concat . M.forM pairs $ \ (p, q) -> do
-                let
-                    i = P.id p
-                    j = P.id q
-                R.bernoulli 0.125 []
-                    [
-                        G.setMessage ("Character " ++ show i ++ "'s opinion of character " ++ show j ++ " improves by 10 until 1066-01-01. (Not implemented.)")
-                    ]
+        makeEventsFor people =
             return $ personalEvents ++ pairEvents
+            where
+                personalEvents = flip concatMap people $ \ p ->
+                    [
+                        G.prob (1/4) $ G.addDiplomacy 1 p
+                        , G.prob (1/4) $ G.addStewardship 1 p
+                    ]
+                pairs = [ (p, q) | p <- people, q <- people, P.id p /= P.id q ]
+                pairEvents = flip concatMap pairs $ \ (p, q) ->
+                    let
+                        i = P.id p
+                        j = P.id q
+                    in
+                        [
+                            G.prob (1/16)
+                            . G.setMessage ("Character " ++ show i ++ "'s opinion of character " ++ show j ++ " improves by 10 until 1066-01-01. (Not implemented.)")
+                            $ G.empty
+                        ]
         showAllPeople = do
             people <- SM.people
             strPeople <- unlines <$> M.mapM SM.formatPersonLong people

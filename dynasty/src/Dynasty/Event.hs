@@ -1,18 +1,48 @@
+{-# LANGUAGE RankNTypes #-}
 {-# OPTIONS -fno-warn-name-shadowing #-}
 
-module Dynasty.Event where
+module Dynasty.Event
+(
+    -- * Make
+
+    Event(..)
+    , empty
+
+    , addDiplomacy
+    , addStewardship
+
+    -- * Roll
+
+    , roll
+
+    -- * Modify
+
+    , prob
+    , setMessage
+    , setEffect
+)
+where
+
+import qualified Control.Monad as N
 
 import qualified Control.Monad.Trans.State as M
 
 import qualified Dynasty.Person as P
+import qualified Dynasty.Person.Modify as Q
+import qualified Dynasty.Random as R
 import qualified Dynasty.State as S
 import qualified Dynasty.State.Monad as SM
 
 data Event m
     = MkEvent
     {
+        probability :: R.Probability
+        ,
+        -- | The player will see this.
         message :: String
-        , effect :: m ()
+        ,
+        -- | This is how the event changes the game.
+        effect :: m ()
     }
 
 setMessage :: String -> Event m -> Event m
@@ -21,8 +51,33 @@ setMessage str e = e { message = str }
 setEffect :: m () -> Event m -> Event m
 setEffect eff e = e { effect = eff }
 
+roll :: (R.MonadRandom m) => Event m -> m (Maybe (Event m))
+roll event = do
+    N.join $ R.bernoulli pr dud fire
+    where
+        pr = probability event
+        dud = return Nothing
+        fire = effect event >> return (Just event)
+
+prob :: R.Probability -> Event m -> Event m
+prob p e = e { probability = p }
+
 empty :: (Applicative m) => Event m
-empty = MkEvent "" (pure ())
+empty = MkEvent 1 "" (pure ())
+
+addDiplomacy :: (SM.MonadState m) => Int -> P.Person -> Event m
+addDiplomacy point person = MkEvent 1 msg eff
+    where
+        msg = P.honorifiedName person ++ " " ++ verb ++ " " ++ show (abs point) ++ " Diplomacy"
+        verb = if point >= 0 then "gains" else "loses"
+        eff = SM.modifyPerson (P.id person) $ Q.addDiplomacy point
+
+addStewardship :: (SM.MonadState m) => Int -> P.Person -> Event m
+addStewardship point person = MkEvent 1 msg eff
+    where
+        msg = P.honorifiedName person ++ " " ++ verb ++ " " ++ show (abs point) ++ " Stewardship"
+        verb = if point >= 0 then "gains" else "loses"
+        eff = SM.modifyPerson (P.id person) $ Q.addStewardship point
 
 type State = S.State
 
