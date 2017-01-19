@@ -14,6 +14,7 @@ import qualified UI.HSCurses.Curses as C
 import qualified Dynasty.Date as D
 import qualified Dynasty.Display as E
 import qualified Dynasty.Init as I
+import qualified Dynasty.Random as R
 import qualified Dynasty.State as S
 import qualified Dynasty.State.Monad as SM
 
@@ -48,6 +49,8 @@ theRealMainLoop chario =
             erase
             puts $ "Dynasty Simulator  Day " ++ D.print today ++ "\n"
             puts "Keyboard:  q Quit  n Next day\n"
+            R.probM 0.5 $ do
+                puts $ "An event happened.\n"
             puts $ S.print state
             puts $ "People:\n" ++ strPeople
             refresh
