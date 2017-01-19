@@ -69,10 +69,9 @@ theRealMainLoop chario =
                     'p' -> showAllPeople >> midDay events
                     _ -> midDay events
                 _ -> midDay events
-        makeEvents :: (Applicative m, R.MonadRandom m, SM.MonadState m) => m [G.Event m]
         makeEvents = do
             people <- SM.people
-            fmap concat $ M.forM people $ \ p -> do
+            personalEvents <- fmap concat $ M.forM people $ \ p -> do
                 let id = P.id p
                 fmap (map ($ G.empty) . concat) $ M.sequence
                     [
@@ -85,6 +84,16 @@ theRealMainLoop chario =
                             . G.setEffect (SM.modifyPerson id $ Q.addStewardship 1)
                         ]
                     ]
+            let pairs = [ (p, q) | p <- people, q <- people, P.id p /= P.id q ]
+            pairEvents <- fmap (map ($ G.empty)) . fmap concat . M.forM pairs $ \ (p, q) -> do
+                let
+                    i = P.id p
+                    j = P.id q
+                R.bernoulli 0.125 []
+                    [
+                        G.setMessage ("Character " ++ show i ++ "'s opinion of character " ++ show j ++ " improves by 10 until 1066-01-01. (Not implemented.)")
+                    ]
+            return $ personalEvents ++ pairEvents
         showAllPeople = do
             people <- SM.people
             strPeople <- unlines <$> M.mapM SM.formatPersonLong people
