@@ -25,6 +25,8 @@ module Dynasty.State.Monad
     , people
     , formatPersonLong
     , newPersonWith
+    , findPerson
+    , modifyPerson
     , marry
     , today
 )
@@ -101,6 +103,17 @@ newPersonWith init = do
 addPerson :: (MonadState m) => P.Person -> m ()
 addPerson p = do
     modify $ \ s -> s { S.people = p : S.people s }
+
+findPerson :: (MonadState m) => P.Id -> m [P.Person]
+findPerson id = do
+    gets $ \ s -> filter (\ p -> P.id p == id) $ S.people s
+
+modifyPerson :: (MonadState m) => P.Id -> (P.Person -> P.Person) -> m ()
+modifyPerson id fun =
+    modify $ \ s -> s { S.people = map f $ S.people s }
+    where
+        f p | P.id p == id = fun p
+        f p = p
 
 today :: (MonadState m) => m D.Date
 today = gets S.today

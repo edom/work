@@ -14,6 +14,7 @@ import qualified UI.HSCurses.Curses as C
 import qualified Dynasty.Date as D
 import qualified Dynasty.Display as E
 import qualified Dynasty.Init as I
+import qualified Dynasty.Person.Modify as Q
 import qualified Dynasty.Random as R
 import qualified Dynasty.State as S
 import qualified Dynasty.State.Monad as SM
@@ -50,7 +51,11 @@ theRealMainLoop chario =
             puts $ "Dynasty Simulator  Day " ++ D.print today ++ "\n"
             puts "Keyboard:  q Quit  n Next day\n"
             R.probM 0.5 $ do
-                puts $ "An event happened.\n"
+                puts $ "Character 0 gained 1 Diplomacy.\n"
+                SM.modifyPerson 0 $ Q.addDiplomacy 1
+            you <- SM.findPerson 0
+            strYou <- M.mapM SM.formatPersonLong you
+            puts $ unlines $ "You are playing as:" : strYou
             puts $ S.print state
             puts $ "People:\n" ++ strPeople
             refresh

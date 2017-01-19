@@ -77,3 +77,5 @@ kind = addTrait U.Kind
 patient = addTrait U.Patient
 envious = addTrait U.Envious
 wroth = addTrait U.Wroth
+
+addDiplomacy d p = p { P.diplomacy = P.diplomacy p + d }
