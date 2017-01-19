@@ -14,6 +14,7 @@ import qualified UI.HSCurses.Curses as C
 
 import qualified Dynasty.Date as D
 import qualified Dynasty.Display as E
+import qualified Dynasty.Event as G
 import qualified Dynasty.Init as I
 import qualified Dynasty.Person as P
 import qualified Dynasty.Person.Modify as Q
@@ -38,13 +39,17 @@ mainLoop window = theRealMainLoop $ E.curses window
 
 theRealMainLoop :: E.CharIo -> S.State -> IO ()
 theRealMainLoop chario =
-    SM.runStateT_ loop
+    SM.runStateT_ beginDay
     where
         puts = E.puts chario
         getch = E.getch chario
         erase = E.erase chario
         refresh = E.refresh chario
-        loop = do
+        beginDay = do
+            events <- makeEvents
+            M.mapM_ G.effect events
+            midDay events
+        midDay events = do
             today <- SM.today
             erase
             puts $ "Dynasty Simulator  Today is " ++ D.print today ++ "\n"
@@ -52,25 +57,34 @@ theRealMainLoop chario =
             you <- SM.playerChar
             longYou <- M.mapM SM.formatPersonLong you
             puts $ unlines $ "\nYou are playing as:\n" : longYou
-            people <- SM.people
-            puts "Events at the beginning of today:\n\n"
-            M.forM_ people $ \ p -> do
-                let id = P.id p
-                R.probM 0.5 $ do
-                    puts $ "Character " ++ show id ++ " gained 1 Diplomacy.\n"
-                    SM.modifyPerson id $ Q.addDiplomacy 1
-                R.probM 0.5 $ do
-                    puts $ "Character " ++ show id ++ " gained 1 Stewardship.\n"
-                    SM.modifyPerson id $ Q.addStewardship 1
+            puts "Events happened today:\n\n"
+            M.forM_ events $ \ event -> do
+                puts $ G.message event ++ "\n"
             refresh
             key <- getch
             case key >>= E.asChar of
                 Just c -> case c of
                     'q' -> return ()
-                    'n' -> SM.incrementDate >> loop
-                    'p' -> showAllPeople >> loop
-                    _ -> loop
-                _ -> loop
+                    'n' -> SM.incrementDate >> beginDay
+                    'p' -> showAllPeople >> midDay events
+                    _ -> midDay events
+                _ -> midDay events
+        makeEvents :: (Applicative m, R.MonadRandom m, SM.MonadState m) => m [G.Event m]
+        makeEvents = do
+            people <- SM.people
+            fmap concat $ M.forM people $ \ p -> do
+                let id = P.id p
+                fmap (map ($ G.empty) . concat) $ M.sequence
+                    [
+                        R.bernoulli 0.5 [] [
+                            G.setMessage ("Character " ++ show id ++ " gained 1 Diplomacy.")
+                            . G.setEffect (SM.modifyPerson id $ Q.addDiplomacy 1)
+                        ]
+                        , R.bernoulli 0.5 [] [
+                            G.setMessage ("Character " ++ show id ++ " gained 1 Stewardship.")
+                            . G.setEffect (SM.modifyPerson id $ Q.addStewardship 1)
+                        ]
+                    ]
         showAllPeople = do
             people <- SM.people
             strPeople <- unlines <$> M.mapM SM.formatPersonLong people

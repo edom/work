@@ -8,6 +8,22 @@ import qualified Dynasty.Person as P
 import qualified Dynasty.State as S
 import qualified Dynasty.State.Monad as SM
 
+data Event m
+    = MkEvent
+    {
+        message :: String
+        , effect :: m ()
+    }
+
+setMessage :: String -> Event m -> Event m
+setMessage str e = e { message = str }
+
+setEffect :: m () -> Event m -> Event m
+setEffect eff e = e { effect = eff }
+
+empty :: (Applicative m) => Event m
+empty = MkEvent "" (pure ())
+
 type State = S.State
 
 newtype EventM a = MkEventM (State -> (Either String a, State))
