@@ -44,6 +44,7 @@ theRealMainLoop chario =
         getch = E.getch chario
         erase = E.erase chario
         refresh = E.refresh chario
+        rowCount = E.rowCount chario
         beginDay = do
             people <- SM.people
             events <- makeEventsFor people
@@ -90,13 +91,21 @@ theRealMainLoop chario =
                         ]
         showAllPeople = do
             people <- SM.people
-            strPeople <- unlines <$> M.mapM SM.formatPersonLong people
+            theLines <- lines . unlines <$> M.mapM SM.formatPersonLong people
+            showScroll 0 theLines
+        showScroll skip lines | skip < 0 = showScroll 0 lines
+        showScroll skip lines | skip > length lines = showScroll (length lines) lines
+        showScroll skip lines = do
+            nRow <- subtract 1 <$> rowCount
             erase
-            puts "Keyboard:  q Back\n"
-            puts $ "People:\n" ++ strPeople
+            puts $ "Keyboard:  q Back  j Down  k Up  Ctrl-f Page down  Ctrl-b Page up\n" ++ unlines (drop skip lines)
             key <- getch
             case key >>= E.asChar of
                 Just c -> case c of
+                    '\^B' -> showScroll (skip - nRow) lines
+                    '\^F' -> showScroll (skip + nRow) lines
                     'q' -> return ()
-                    _ -> showAllPeople
-                _ -> showAllPeople
+                    'j' -> showScroll (skip + 1) lines
+                    'k' -> showScroll (skip - 1) lines
+                    _ -> showScroll skip lines
+                _ -> showScroll skip lines
