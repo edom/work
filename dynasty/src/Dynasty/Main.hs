@@ -53,14 +53,14 @@ theRealMainLoop chario =
         midDay events = do
             today <- SM.today
             erase
-            puts $ "Dynasty Simulator  Today is " ++ D.print today ++ "\n"
-            puts "Keyboard:  q Quit  n Next day  p Show all people\n"
             you <- SM.playerChar
             longYou <- M.mapM SM.formatPersonLong you
-            puts $ unlines $ "\nYou are playing as:\n" : longYou
-            puts "Events happened today:\n\n"
-            M.forM_ events $ \ event -> do
-                puts $ G.message event ++ "\n"
+            puts $
+                "Keyboard:  q Quit  n Next day  p Show all people\n"
+                ++ "Dynasty Simulator  Today is " ++ D.print today ++ "\n"
+                ++ unlines ("\nYou are playing as:\n" : longYou)
+                ++ "Events happened today:\n\n"
+                ++ unlines (map G.message events)
             refresh
             key <- getch
             case key >>= E.asChar of
