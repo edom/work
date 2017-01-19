@@ -21,6 +21,8 @@ module Dynasty.State.Monad
 
     -- * On the monad
 
+    , playerChar
+    , playerCharId
     , incrementDate
     , people
     , formatPersonLong
@@ -133,3 +135,9 @@ incrementDate = modify S.incrementDate
 
 formatPersonLong :: (MonadState m) => P.Person -> m String
 formatPersonLong p = P.formatLong <$> today <*> pure p
+
+playerCharId :: (MonadState m) => m P.Id
+playerCharId = gets S.playerCharId
+
+playerChar :: (MonadState m) => m [P.Person]
+playerChar = playerCharId >>= findPerson

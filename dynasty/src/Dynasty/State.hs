@@ -11,10 +11,6 @@ module Dynasty.State
     , findPerson
     , modifyPerson
 
-    -- * Display
-
-    , print
-
     -- * Internal
 
     , Marriage(..)
@@ -23,8 +19,6 @@ module Dynasty.State
 where
 
 import Prelude hiding (print)
-
-import qualified Data.List as L
 
 import qualified Dynasty.Date as D
 import qualified Dynasty.Person as P
@@ -68,14 +62,6 @@ findPerson id state =
 modifyPerson :: P.Id -> (P.Person -> P.Person) -> State -> State
 modifyPerson id fun state =
     state { people = map (\ p -> if P.id p == id then fun p else p) (people state) }
-
-print :: State -> String
-print state =
-    "You are playing as " ++ show playerCharId_ ++ " [" ++ L.intercalate ", " playerCharNames ++ "]\n"
-    where
-        playerCharId_ = playerCharId state
-        playerCharNames = map P.honorifiedName myChars
-        myChars = findPerson playerCharId_ state
 
 incrementPersonId :: State -> State
 incrementPersonId state = state { nextPersonId = P.increment (nextPersonId state) }

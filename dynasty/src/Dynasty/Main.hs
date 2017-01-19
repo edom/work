@@ -46,17 +46,18 @@ theRealMainLoop chario =
             today <- SM.today
             people <- SM.people
             strPeople <- unlines <$> M.mapM SM.formatPersonLong people
-            state <- SM.get
             erase
             puts $ "Dynasty Simulator  Day " ++ D.print today ++ "\n"
             puts "Keyboard:  q Quit  n Next day\n"
             R.probM 0.5 $ do
                 puts $ "Character 0 gained 1 Diplomacy.\n"
                 SM.modifyPerson 0 $ Q.addDiplomacy 1
-            you <- SM.findPerson 0
-            strYou <- M.mapM SM.formatPersonLong you
-            puts $ unlines $ "You are playing as:" : strYou
-            puts $ S.print state
+            R.probM 0.5 $ do
+                puts "Character 0 gained 1 Stewardship.\n"
+                SM.modifyPerson 0 $ Q.addStewardship 1
+            you <- SM.playerChar
+            longYou <- M.mapM SM.formatPersonLong you
+            puts $ unlines $ "\nYou are playing as:\n" : longYou
             puts $ "People:\n" ++ strPeople
             refresh
             key <- getch
