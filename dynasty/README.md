@@ -58,6 +58,12 @@ The generated documentation path looks like this (the actual path on your machin
 - Show character titles.
 - Show character attributes.
 
+Use the browser for user interface.
+Run a Scotty web server instance at localhost:8008.
+The URL /people shows a HTML page describing all people in the game.
+
+Allow the user to configure the web server port via environment variable `HTTP_PORT`.
+
 Show character location.
 
 Show neighboring counties.
