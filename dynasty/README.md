@@ -25,6 +25,12 @@ stack ghci
 
 Then, enter either `webMain` for the web interface
 or `dynastyMain` for the text interface.
+If you run the web interface,
+open this address in your browser:
+
+```
+http://localhost:8008/
+```
 
 # How do I generate the haddock of this project?
 
