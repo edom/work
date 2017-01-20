@@ -12,21 +12,25 @@ where
 import Prelude
     (
         ($)
+        , (++)
         , (.)
         , (>>)
         , Double
         , Int
         , Show
+        , String
         , floor
         , show
     )
 
-import Data.String (fromString)
+import Data.String (IsString, fromString)
 
 import Text.Blaze.Html5
 import Text.Blaze.Html5.Attributes
 
 import qualified Control.Monad as M
+
+import qualified Text.Blaze.Html5.Attributes as A
 
 import qualified Dynasty.Date as D
 import qualified Dynasty.Person as P
@@ -39,24 +43,26 @@ showOff = fromString . show
 date :: ToHtml D.Date
 date = fromString . D.print
 
-showd = fromString . show . (floor :: Double -> Int)
+dbl :: Double -> String
+dbl = show . (floor :: Double -> Int)
+
+showd :: (IsString a) => Double -> a
+showd = fromString . dbl
 
 person x =
     table ! class_ "person" $ do
-        row "Id" (showOff $ P.id x)
+        row "Id" (showOff pid)
         row "Sex" (showOff $ P.sex x)
-        row "Honorified Name" (fromString $ P.honorifiedName x)
-        row "Father Id" (showOff $ P.fatherId x)
-        row "Mother Id" (showOff $ P.motherId x)
+        row "Honorified Name" (a ! href (fromString $ "/person/" ++ show pid) $ fromString $ P.honorifiedName x)
+        row "Father Id / Mother Id" $ fromString $ show (P.fatherId x) ++ " / " ++ show (P.motherId x)
         row "Born" (date $ P.born x)
-        row "Gold" (showd $ P.gold x)
-        row "Prestige" (showd $ P.prestige x)
-        row "Piety" (showd $ P.piety x)
-        row "Diplomacy" (showOff $ P.diplomacy x)
-        row "Martial" (showOff $ P.martial x)
-        row "Stewardship" (showOff $ P.stewardship x)
-        row "Intrigue" (showOff $ P.intrigue x)
-        row "Learning" (showOff $ P.learning x)
+        row "Gold / Prestige / Piety" $ fromString $ dbl (P.gold x) ++ " / " ++ dbl (P.prestige x) ++ " / " ++ dbl (P.piety x)
+        tr $ do
+            td ! A.title "Diplomacy / Martial / Stewardship / Intrigue / Learning" $ "D / M / S / I / L"
+            td $ fromString $ show (P.diplomacy x) ++ " / " ++ show (P.martial x)
+                ++ " / " ++ show (P.stewardship x) ++ " / " ++ show (P.intrigue x)
+                ++ " / " ++ show (P.learning x)
         row "Titles" $ ul $ M.mapM_ (li . fromString) (P.formattedTitlesOf x)
     where
+        pid = P.id x
         row y z = tr (td y >> td z)

@@ -32,6 +32,8 @@ An inhabitant of this type hides the game state and enforces the game rules.
 data Server m
     = MkServer
     {
+        findPerson :: P.Id -> m [P.Person]
+        ,
         getToday :: m D.Date
         , getPeople :: m [P.Person]
         , getEvents :: m [String]
@@ -44,11 +46,13 @@ you can get a @'Server' m@ for free.
 -}
 fromStateful :: (I.MonadIO m) => T.Stateful S.State m -> Server m
 fromStateful c = MkServer
+    findPerson_
     (T.gets c S.today)
     getPeople_
     getEvents_
     endDay_
     where
+        findPerson_ pid = filter (\ p -> P.id p == pid) <$> getPeople_
         getPeople_ = T.gets c S.people
         getEvents_ = T.gets c S.events
         endDay_ = do
