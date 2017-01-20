@@ -34,6 +34,7 @@ data Server m
     {
         getToday :: m D.Date
         , getPeople :: m [P.Person]
+        , getEvents :: m [String]
         , endDay :: m ()
     }
 
@@ -45,14 +46,17 @@ fromStateful :: (I.MonadIO m) => T.Stateful S.State m -> Server m
 fromStateful c = MkServer
     (T.gets c S.today)
     getPeople_
+    getEvents_
     endDay_
     where
         getPeople_ = T.gets c S.people
+        getEvents_ = T.gets c S.events
         endDay_ = do
             T.modify c S.incrementDate
             people <- getPeople_
             events <- makeEventsFor c people
             happenings <- N.catMaybes <$> M.mapM (G.roll U.unit) events
+            T.modify c $ \ s -> s { S.events = map G.message happenings }
             return ()
 
 makeEventsFor :: (Monad m) => T.Stateful S.State m -> [P.Person] -> m [G.Event m]

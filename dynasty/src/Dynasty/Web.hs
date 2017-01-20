@@ -39,17 +39,21 @@ serve server = W.scotty 8008 $ do
     W.get "/" $ do
         people <- getPeople
         today <- getToday
+        events <- getEvents
         W.html $ BT.renderHtml $ B.docTypeHtml $ do
             B.head $ do
                 B.title "Dynasty Simulator"
                 B.link B.! A.rel "stylesheet" B.! A.href "static/style.css"
             B.body $ do
+                B.h1 "Dynasty Simulator"
                 B.div $ do
                     B.span "Today is "
                     B.span $ DS.fromString $ D.print today
                 B.form B.! A.action "/end-day" B.! A.method "POST" $ do
                     B.input B.! A.type_ "submit" B.! A.value "Next day"
-                B.h1 "People"
+                B.h2 "Events"
+                B.ul $ M.forM_ events $ B.li . DS.fromString
+                B.h2 "People"
                 M.mapM_ H.person people
     W.post "/end-day" $ do
         endDay
@@ -59,3 +63,4 @@ serve server = W.scotty 8008 $ do
         getPeople = S.getPeople server
         endDay = S.endDay server
         getToday = S.getToday server
+        getEvents = S.getEvents server

@@ -1,3 +1,4 @@
+{-# LANGUAGE RankNTypes #-}
 {-# OPTIONS -fno-warn-name-shadowing #-}
 
 module Dynasty.State
@@ -36,6 +37,10 @@ data State =
         , playerCharId :: P.Id
 
         , marriages :: [Marriage]
+
+        ,
+        -- | Descriptions of events that happened at the beginning of 'today'.
+        events :: [String]
     }
 
 data Marriage
@@ -53,6 +58,7 @@ incrementDate x = x { today = D.increment $ today x }
 empty :: State
 empty =
     MkState (D.fromYmd 1066 1 1) 0 [] 0
+    []
     []
 
 findPerson :: P.Id -> State -> [P.Person]
