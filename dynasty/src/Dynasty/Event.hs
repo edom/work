@@ -24,12 +24,14 @@ module Dynasty.Event
 where
 
 import qualified Control.Monad as N
+import qualified Control.Monad.IO.Class as I
 
 import qualified Control.Monad.Trans.State as M
 
 import qualified Dynasty.Person as P
 import qualified Dynasty.Person.Modify as Q
 import qualified Dynasty.Random as R
+import qualified Dynasty.Random.Uniform as U
 import qualified Dynasty.State as S
 import qualified Dynasty.State.Monad as SM
 
@@ -51,9 +53,9 @@ setMessage str e = e { message = str }
 setEffect :: m () -> Event m -> Event m
 setEffect eff e = e { effect = eff }
 
-roll :: (R.MonadRandom m) => Event m -> m (Maybe (Event m))
-roll event = do
-    N.join $ R.bernoulli pr dud fire
+roll :: (I.MonadIO m) => U.Uniform m U.Probability -> Event m -> m (Maybe (Event m))
+roll unit event = do
+    N.join $ U.bernoulli pr dud fire
     where
         pr = probability event
         dud = return Nothing
