@@ -20,6 +20,7 @@ library
         Dynasty.Date
         Dynasty.Display
         Dynasty.Event
+        Dynasty.Html
         Dynasty.Init
         Dynasty.Level
         Dynasty.Main
@@ -27,14 +28,21 @@ library
         Dynasty.Person.Modify
         Dynasty.Random
         Dynasty.Religion
+        Dynasty.Server
         Dynasty.State
         Dynasty.State.Monad
+        Dynasty.Stateful
         Dynasty.Trait
         Dynasty.Title
+        Dynasty.Web
     build-depends:
         base >= 4.7 && < 5
+        , blaze-html
         , hscurses
+        , http-types
         , random
+        , scotty
+        , text
         , time
         , transformers
     default-language:

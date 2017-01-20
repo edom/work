@@ -14,6 +14,7 @@ module Dynasty.Person
     , honorifiedName
     , formatLong
     , highestTitle
+    , formattedTitlesOf
 
     -- * Identifier
 

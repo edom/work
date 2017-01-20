@@ -3,11 +3,14 @@
 
 module Dynasty.Main
 (
+    webMain
+    ,
     dynastyMain
 )
 where
 
 import qualified Control.Monad as M
+import qualified Data.IORef as J
 import qualified Data.Maybe as N
 import qualified Foreign as F
 
@@ -18,8 +21,18 @@ import qualified Dynasty.Display as E
 import qualified Dynasty.Event as G
 import qualified Dynasty.Init as I
 import qualified Dynasty.Person as P
+import qualified Dynasty.Server as U
 import qualified Dynasty.State as S
 import qualified Dynasty.State.Monad as SM
+import qualified Dynasty.Stateful as T
+import qualified Dynasty.Web as W
+
+webMain :: IO ()
+webMain = do
+    var <- J.newIORef initialState
+    W.serve $ U.fromStateful $ T.ioRef var
+    where
+        initialState = SM.exec I.initialize S.empty
 
 dynastyMain :: IO ()
 dynastyMain = do

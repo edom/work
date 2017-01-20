@@ -23,7 +23,8 @@ it will also install the application dependencies.
 stack ghci
 ```
 
-Then, enter either `main` or `dynastyMain`.
+Then, enter either `webMain` for the web interface
+or `dynastyMain` for the text interface.
 
 # How do I generate the haddock of this project?
 
@@ -57,9 +58,9 @@ The generated documentation path looks like this (the actual path on your machin
 - Show character traits.
 - Show character titles.
 - Show character attributes.
+- Run a Scotty web server instance at localhost:8008.
+- Use the browser for user interface.
 
-Use the browser for user interface.
-Run a Scotty web server instance at localhost:8008.
 The URL /people shows a HTML page describing all people in the game.
 
 Allow the user to configure the web server port via environment variable `HTTP_PORT`.
