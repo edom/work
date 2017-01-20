@@ -17,7 +17,6 @@ import qualified UI.HSCurses.Curses as C
 
 import qualified Dynasty.Date as D
 import qualified Dynasty.Display as E
-import qualified Dynasty.Event as G
 import qualified Dynasty.Init as I
 import qualified Dynasty.Server as U
 import qualified Dynasty.State as S

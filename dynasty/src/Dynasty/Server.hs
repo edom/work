@@ -20,6 +20,7 @@ import qualified Data.Maybe as N
 
 import qualified Dynasty.Date as D
 import qualified Dynasty.Event as G
+import qualified Dynasty.Event.Make as EM
 import qualified Dynasty.Person as P
 import qualified Dynasty.Random.Uniform as U
 import qualified Dynasty.State as S
@@ -36,6 +37,10 @@ data Server m
         , endDay :: m ()
     }
 
+{- |
+If you have a @'T.Stateful' 'S.State' m@,
+you can get a @'Server' m@ for free.
+-}
 fromStateful :: (I.MonadIO m) => T.Stateful S.State m -> Server m
 fromStateful c = MkServer
     (T.gets c S.today)
@@ -46,18 +51,20 @@ fromStateful c = MkServer
         endDay_ = do
             T.modify c S.incrementDate
             people <- getPeople_
-            events <- makeEventsFor people
+            events <- makeEventsFor c people
             happenings <- N.catMaybes <$> M.mapM (G.roll U.unit) events
             return ()
 
-makeEventsFor :: (Monad m) => [P.Person] -> m [G.Event m]
-makeEventsFor people =
+makeEventsFor :: (Monad m) => T.Stateful S.State m -> [P.Person] -> m [G.Event m]
+makeEventsFor inst people =
     return $ personalEvents ++ pairEvents
     where
+        addDiplomacy = EM.addDiplomacy inst
+        addStewardship = EM.addStewardship inst
         personalEvents = flip concatMap people $ \ p ->
             [
-                -- G.prob (1/4) $ G.addDiplomacy 1 p
-                -- , G.prob (1/4) $ G.addStewardship 1 p
+                G.prob (1/4) $ addDiplomacy 1 p
+                , G.prob (1/4) $ addStewardship 1 p
             ]
         pairs = [ (p, q) | p <- people, q <- people, P.id p /= P.id q ]
         pairEvents = flip concatMap pairs $ \ (p, q) ->
