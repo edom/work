@@ -4,6 +4,9 @@ Deprecated: Use "Dynasty.Random.Uniform" instead.
 module Dynasty.Random
 where
 
+import Data.Word (Word8)
+
+import qualified Control.Monad.IO.Class as I
 import qualified Control.Monad as M
 
 import qualified Control.Monad.Trans.State as S
@@ -46,3 +49,6 @@ probM :: (MonadRandom m) => Probability -> m () -> m ()
 probM p x = M.join $ bernoulli p nothing x
     where
         nothing = return ()
+
+randomWord8 :: (I.MonadIO m) => m Word8
+randomWord8 = I.liftIO R.randomIO

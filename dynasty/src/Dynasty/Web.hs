@@ -22,7 +22,8 @@ import qualified Text.Blaze.Html.Renderer.Text as BT
 
 import qualified Web.Scotty as W
 
-import qualified Dynasty.Date as D
+import qualified Dynasty.Multiplay.Parlor as MP
+import qualified Dynasty.Multiplay.Table as MT
 import qualified Dynasty.Server as S
 import qualified Dynasty.Html as H
 
@@ -36,48 +37,44 @@ serve server = W.scotty 8008 $ do
     W.get "/static/style.css" $ do
         W.setHeader "Content-Type" "text/css; charset=UTF-8"
         W.file "static/style.css"
-    W.get "/" $ do
+    W.get "/" $ W.html $ BT.renderHtml H.start
+    W.post "/new" $ do
+        tableId <- MT.makeRandomId
+        seeOther $ "/table/" ++ tableId
+    W.get "/table/:tableId" $ do
+        tableId <- W.param "tableId"
+        let tableUrl = "/table/" ++ tableId
         people <- getPeople
         today <- getToday
         events <- getEvents
-        W.html $ BT.renderHtml $ B.docTypeHtml $ do
-            B.head $ do
-                B.title "Dynasty Simulator"
-                B.link B.! A.rel "stylesheet" B.! A.href "/static/style.css"
-            B.body $ do
-                B.h1 "Dynasty Simulator"
-                B.div $ do
-                    B.span "Today is "
-                    B.span $ DS.fromString $ D.print today
-                B.form B.! A.action "/end-day" B.! A.method "POST" $ do
-                    B.input B.! A.type_ "submit" B.! A.value "Next day"
-                B.h2 "Events"
-                B.ul $ M.forM_ events $ B.li . DS.fromString
-                B.h2 "People"
-                M.mapM_ H.person people
-    W.get "/person/:id" $ do
+        W.html $ BT.renderHtml $ H.page today "Dynasty Simulator" $ do
+            B.form B.! A.action (DS.fromString $ tableUrl ++ "/end-day") B.! A.method "POST" $ do
+                B.input B.! A.type_ "submit" B.! A.value "Next day"
+            B.h2 "Events"
+            B.ul $ M.forM_ events $ B.li . DS.fromString
+            B.h2 "People"
+            M.mapM_ (H.person tableUrl) people
+    W.get "/table/:tableId/person/:id" $ do
+        tableId <- W.param "tableId"
+        let tableUrl = "/table/" ++ tableId
         pid <- W.param "id"
         people <- findPerson pid
         today <- getToday
-        W.html $ BT.renderHtml $ B.docTypeHtml $ do
-            B.head $ do
-                B.title "Person"
-                B.link B.! A.rel "stylesheet" B.! A.href "/static/style.css"
-            B.body $ do
-                B.h1 "Dynasty Simulator"
-                B.div $ do
-                    B.span "Today is "
-                    B.span $ DS.fromString $ D.print today
-                B.form B.! A.action "/end-day" B.! A.method "POST" $ do
-                    B.input B.! A.type_ "submit" B.! A.value "Next day"
-                M.mapM_ H.person people
-    W.post "/end-day" $ do
+        W.html $ BT.renderHtml $ H.page today "Person" $ do
+            B.form B.! A.action (DS.fromString $ tableUrl ++ "/end-day") B.! A.method "POST" $ do
+                B.input B.! A.type_ "submit" B.! A.value "Next day"
+            M.mapM_ (H.person tableUrl) people
+    W.post "/table/:tableId/end-day" $ do
+        tableId <- W.param "tableId"
+        let tableUrl = "/table/" ++ tableId
         endDay
-        W.status HS.seeOther303
-        W.setHeader "Location" "/"
+        seeOther tableUrl
     where
         findPerson = S.findPerson server
         getPeople = S.getPeople server
         endDay = S.endDay server
         getToday = S.getToday server
         getEvents = S.getEvents server
+        seeOther url = do
+            W.status HS.seeOther303
+            W.setHeader "Location" $ DS.fromString url
