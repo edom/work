@@ -67,6 +67,10 @@ The generated documentation path looks like this (the actual path on your machin
 - Run a Scotty web server instance at localhost:8008.
 - Use the browser for user interface.
 
+Parlor (multiplayer lobby) and table.
+
+Replace ioref with stm.
+
 The URL /people shows a HTML page describing all people in the game.
 
 Allow the user to configure the web server port via environment variable `HTTP_PORT`.
@@ -111,6 +115,10 @@ Start new game.
 Generate maps and characters.
 
 The server speed is the minimum of the players' speeds. If a player is responding to an event, the server pauses.
+
+# Problems
+
+Cannot use HsOpenSSL because it depends on `integer-gmp < 1`.
 
 # Legal notices
 

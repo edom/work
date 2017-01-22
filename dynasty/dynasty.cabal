@@ -25,6 +25,8 @@ library
         Dynasty.Init
         Dynasty.Level
         Dynasty.Main
+        Dynasty.Multiplay.Parlor
+        Dynasty.Multiplay.Table
         Dynasty.Person
         Dynasty.Person.Modify
         Dynasty.Random
@@ -39,7 +41,9 @@ library
         Dynasty.Web
     build-depends:
         base >= 4.7 && < 5
+        , base64-bytestring
         , blaze-html
+        , bytestring
         , hscurses
         , http-types
         , random
