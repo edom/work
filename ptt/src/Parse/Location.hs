@@ -1,13 +1,17 @@
 module Parse.Location
 (
     Location(..)
+    , Path
 )
 where
+
+type Path = String
 
 data Location
     = MkLocation
     {
-        path :: String
+        path :: Path
         , line :: Int
         , column :: Int
     }
+    deriving (Read, Show)
