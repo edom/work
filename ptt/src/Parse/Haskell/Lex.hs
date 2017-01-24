@@ -17,6 +17,8 @@ module Parse.Haskell.Lex
     , qVarSym
     , qConId
     , reservedId
+    -- * Layout
+    , unlayout
 )
 where
 
@@ -175,3 +177,13 @@ large = M.upper
 digit = M.digit
 
 apostrophe = M.char '\''
+
+{- |
+Insert braces and semicolons implied by indentations.
+
+This should be idempotent (@unlayout . unlayout = unlayout@).
+
+See <https://www.haskell.org/onlinereport/haskell2010/haskellch10.html#x17-17800010.3 Layout> (Haskell 2010 Report).
+-}
+unlayout :: [L.Located Token] -> [L.Located Token]
+unlayout x = x -- TODO
