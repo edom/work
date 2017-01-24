@@ -1,13 +1,18 @@
 {-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE NoMonomorphismRestriction #-}
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 {-# OPTIONS_GHC -fno-warn-unused-do-bind #-}
 
 module Parse.Haskell.Parse
 (
+    -- * Class
+
+    MonadParseHaskell(..)
+
     -- * Type
 
-    Module(..)
+    , Module(..)
     , Import(..)
 
     -- * Syntax
@@ -31,18 +36,24 @@ import qualified Parse.Haskell.Lex as K
 import qualified Parse.Monad as M
 import qualified Parse.Monad.Parsec as N
 
-token match = N.token show L.locate (\ (L.MkLocated _ x) -> match x)
+class (M.MonadParse m) => MonadParseHaskell m where
+
+    token :: (L.Located K.Lexeme -> Maybe a) -> m a
+
+instance MonadParseHaskell (N.Parsec [L.Located K.Lexeme]) where
+
+    token match = N.token show L.locate match
 
 keyword s =
     token $ \ t -> do
         case t of
-            K.Reserved str | s == str -> Just s
+            L.MkLocated _ (K.Reserved str) | s == str -> Just s
             _ -> Nothing
 
 varId s =
     token $ \ t -> do
         case t of
-            K.QVarId "" str | s == str -> Just s
+            L.MkLocated _ (K.QVarId "" str) | s == str -> Just s
             _ -> Nothing
 
 kModule = keyword "module"
@@ -55,7 +66,7 @@ kAs = varId "as"
 modId =
     token $ \ t -> do
         case t of
-            K.QConId prefix name -> Just $ prefix ++ name
+            L.MkLocated _ (K.QConId prefix name) -> Just $ prefix ++ name
             _ -> Nothing
 
 data Module
