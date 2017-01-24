@@ -46,6 +46,7 @@ lexeme = located $ fmap Right $
     <|> reservedId
     <|> reservedOp
     <|> qConId
+    <|> literal
 
 whitespace :: (M.MonadLex m) => m (L.Located T.Token)
 whitespace = located $ Left <$> (whiteString <|> comment <|> nComment)
@@ -142,6 +143,11 @@ symbol = ascSymbol <|> uniSymbol
 ascSymbol = M.oneOf "!#$%&*+./<=>?@\\^|-~"
 uniSymbol = M.charSatisfying (\ c -> C.isSymbol c || C.isPunctuation c)
 uniWhite = M.uniWhite
+
+literal = integer
+
+decimal = T.Decimal <$> M.many1 digit
+integer = decimal
 
 -- | Unqualified constructor identifier.
 conId = (:) <$> large <*> M.many (small <|> large <|> digit <|> apostrophe)

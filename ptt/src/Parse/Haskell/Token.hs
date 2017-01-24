@@ -14,6 +14,7 @@ data Lexeme
     | QConId String String
     | QVarSym String String
     | Reserved String
+    | Decimal String
     deriving (Read, Show, Eq)
 
 data Whitespace
