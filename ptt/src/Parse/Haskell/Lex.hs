@@ -5,9 +5,7 @@
 module Parse.Haskell.Lex
 (
     -- * Type
-    Located(..)
-    , locate
-    , Token
+    Token
     , Lexeme(..)
     , Whitespace(..)
     , filterLexeme
@@ -34,17 +32,7 @@ import Parse.Monad
 import qualified Parse.Location as L
 import qualified Parse.Monad as M
 
-data Located a
-    = MkLocated L.Location a
-    deriving (Read, Show)
-
-locate :: Located a -> L.Location
-locate (MkLocated x _) = x
-
-located arg = MkLocated <$> M.getLocation <*> arg
-
-instance Functor Located where
-    fmap f (MkLocated a b) = MkLocated a (f b)
+located arg = L.MkLocated <$> M.getLocation <*> arg
 
 type Token = Either Whitespace Lexeme
 
@@ -59,23 +47,23 @@ data Whitespace
     = White String
     deriving (Read, Show)
 
-filterLexeme :: [Located Token] -> [Located Lexeme]
-filterLexeme list = [ MkLocated x y | MkLocated x (Right y) <- list ]
+filterLexeme :: [L.Located Token] -> [L.Located Lexeme]
+filterLexeme list = [ L.MkLocated x y | L.MkLocated x (Right y) <- list ]
 
-type Program = [Located Token]
+type Program = [L.Located Token]
 
 -- | This consumes the program until the end of input.
-program :: (M.MonadLex m) => m [Located Token]
+program :: (M.MonadLex m) => m [L.Located Token]
 program = M.many (lexeme <|> whitespace) <* M.end
 
-lexeme :: (M.MonadLex m) => m (Located Token)
+lexeme :: (M.MonadLex m) => m (L.Located Token)
 lexeme = located $ fmap Right $
     M.try qVarId
     <|> reservedId
     <|> reservedOp
     <|> qConId
 
-whitespace :: (M.MonadLex m) => m (Located Token)
+whitespace :: (M.MonadLex m) => m (L.Located Token)
 whitespace = located $ Left . White . concat <$> M.many1 whiteStuff
 whiteStuff = whiteChar <|> comment <|> nComment
 whiteChar = singleton <$> uniWhite -- newLine <|> verTab <|> space <|> tab <|> uniWhite

@@ -26,12 +26,12 @@ import Parse.Monad
         (<|>)
     )
 
+import qualified Parse.Location as L
+import qualified Parse.Haskell.Lex as K
 import qualified Parse.Monad as M
 import qualified Parse.Monad.Parsec as N
 
-import qualified Parse.Haskell.Lex as K
-
-token match = N.token show K.locate (\ (K.MkLocated _ x) -> match x)
+token match = N.token show L.locate (\ (L.MkLocated _ x) -> match x)
 
 keyword s =
     token $ \ t -> do
