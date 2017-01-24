@@ -33,27 +33,28 @@ import Parse.Monad
 
 import qualified Parse.Location as L
 import qualified Parse.Haskell.Lex as K
+import qualified Parse.Haskell.Token as T
 import qualified Parse.Monad as M
 import qualified Parse.Monad.Parsec as N
 
 class (M.MonadParse m) => MonadParseHaskell m where
 
-    token :: (L.Located K.Lexeme -> Maybe a) -> m a
+    token :: (L.Located T.Lexeme -> Maybe a) -> m a
 
-instance MonadParseHaskell (N.Parsec [L.Located K.Lexeme]) where
+instance MonadParseHaskell (N.Parsec [L.Located T.Lexeme]) where
 
     token match = N.token show L.locate match
 
 keyword s =
     token $ \ t -> do
         case t of
-            L.MkLocated _ (K.Reserved str) | s == str -> Just s
+            L.MkLocated _ (T.Reserved str) | s == str -> Just s
             _ -> Nothing
 
 varId s =
     token $ \ t -> do
         case t of
-            L.MkLocated _ (K.QVarId "" str) | s == str -> Just s
+            L.MkLocated _ (T.QVarId "" str) | s == str -> Just s
             _ -> Nothing
 
 kModule = keyword "module"
@@ -66,7 +67,7 @@ kAs = varId "as"
 modId =
     token $ \ t -> do
         case t of
-            L.MkLocated _ (K.QConId prefix name) -> Just $ prefix ++ name
+            L.MkLocated _ (T.QConId prefix name) -> Just $ prefix ++ name
             _ -> Nothing
 
 data Module

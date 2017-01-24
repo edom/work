@@ -4,11 +4,7 @@
 
 module Parse.Haskell.Lex
 (
-    -- * Type
-    Token
-    , Lexeme(..)
-    , Whitespace(..)
-    , filterLexeme
+    filterLexeme
     -- * Program
     , Program
     , program
@@ -17,8 +13,6 @@ module Parse.Haskell.Lex
     , qVarSym
     , qConId
     , reservedId
-    -- * Layout
-    , unlayout
 )
 where
 
@@ -31,50 +25,38 @@ import Parse.Monad
         (<|>)
     )
 
+import qualified Parse.Haskell.Token as T
 import qualified Parse.Location as L
 import qualified Parse.Monad as M
 
 located arg = L.MkLocated <$> M.getLocation <*> arg
 
-type Token = Either Whitespace Lexeme
-
-data Lexeme
-    = QVarId String String
-    | QConId String String
-    | QVarSym String String
-    | Reserved String
-    deriving (Read, Show)
-
-data Whitespace
-    = White String
-    deriving (Read, Show)
-
-filterLexeme :: [L.Located Token] -> [L.Located Lexeme]
+filterLexeme :: [L.Located T.Token] -> [L.Located T.Lexeme]
 filterLexeme list = [ L.MkLocated x y | L.MkLocated x (Right y) <- list ]
 
-type Program = [L.Located Token]
+type Program = [L.Located T.Token]
 
 -- | This consumes the program until the end of input.
-program :: (M.MonadLex m) => m [L.Located Token]
+program :: (M.MonadLex m) => m [L.Located T.Token]
 program = M.many (lexeme <|> whitespace) <* M.end
 
-lexeme :: (M.MonadLex m) => m (L.Located Token)
+lexeme :: (M.MonadLex m) => m (L.Located T.Token)
 lexeme = located $ fmap Right $
     M.try qVarId
     <|> reservedId
     <|> reservedOp
     <|> qConId
 
-whitespace :: (M.MonadLex m) => m (L.Located Token)
-whitespace = located $ Left . White . concat <$> M.many1 whiteStuff
-whiteStuff = whiteChar <|> comment <|> nComment
-whiteChar = singleton <$> uniWhite -- newLine <|> verTab <|> space <|> tab <|> uniWhite
+whitespace :: (M.MonadLex m) => m (L.Located T.Token)
+whitespace = located $ Left <$> (whiteString <|> comment <|> nComment)
+whiteString = T.White <$> M.many1 whiteChar
+whiteChar = uniWhite -- newLine <|> verTab <|> space <|> tab <|> uniWhite
 
 -- | Line comment.
-comment = dashes >> newLine
+comment = T.LineComment <$> (dashes <++> newLine)
 
 -- | Block comment.
-nComment = M.string "{-" -- FIXME
+nComment = T.BlockComment <$> M.string "{-" -- FIXME
 
 dashes = M.string "--"
 newLine =
@@ -82,16 +64,13 @@ newLine =
     <|> lineFeed
     <|> formFeed
 
-singleton x = [x]
-
 (<++>) = A.liftA2 (++)
 
 carriageReturn = M.string "\r"
 lineFeed = M.string "\n"
 formFeed = M.string "\f"
 
-
-reserved = fmap Reserved . M.choice . map (M.try . M.string)
+reserved = fmap T.Reserved . M.choice . map (M.try . M.string)
 
 reservedId = reserved reservedIds
 
@@ -138,13 +117,13 @@ reservedOps = [
     ]
 
 -- | Qualified variable identifier.
-qVarId = QVarId <$> qualifier <*> varId
+qVarId = T.QVarId <$> qualifier <*> varId
 
 -- | Qualified constructor identifier.
-qConId = QConId <$> qualifier <*> conId
+qConId = T.QConId <$> qualifier <*> conId
 
 -- | Qualified variable symbol.
-qVarSym = QVarSym <$> qualifier <*> varSym
+qVarSym = T.QVarSym <$> qualifier <*> varSym
 
 qualifier =
     (M.try (conId <++> M.string ".") <++> qualifier) <|> pure ""
@@ -177,13 +156,3 @@ large = M.upper
 digit = M.digit
 
 apostrophe = M.char '\''
-
-{- |
-Insert braces and semicolons implied by indentations.
-
-This should be idempotent (@unlayout . unlayout = unlayout@).
-
-See <https://www.haskell.org/onlinereport/haskell2010/haskellch10.html#x17-17800010.3 Layout> (Haskell 2010 Report).
--}
-unlayout :: [L.Located Token] -> [L.Located Token]
-unlayout x = x -- TODO

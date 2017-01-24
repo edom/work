@@ -6,6 +6,7 @@ import Control.Monad ((>=>))
 import qualified Data.ByteString as B
 import qualified Data.ByteString.Char8 as BC
 
+import qualified Parse.Haskell.Layout as J
 import qualified Parse.Haskell.Lex as K
 import qualified Parse.Haskell.Parse as P
 import qualified Parse.Monad as M
@@ -26,3 +27,9 @@ testParse = do
         doParse path = do
             N.lex K.program path
             >=> N.parse P.module_ path . K.filterLexeme
+
+testUnlayout = do
+    src <- BC.unpack <$> B.readFile "Test.hs"
+    case N.lex K.program "Test.hs" src of
+        Left e -> putStrLn $ M.message e
+        Right tokens -> mapM_ print $ J.unlayout $ J.makeLInput tokens
