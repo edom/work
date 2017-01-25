@@ -51,4 +51,4 @@ testUnlayout = do
     src <- BC.unpack <$> B.readFile "Test.hs"
     case N.lex (K.program <* M.end) "Test.hs" src of
         Left e -> putStrLn $ M.message e
-        Right tokens -> mapM_ (putStrLn . prettyLocated) $ J.unlayout $ J.makeLToken $ K.filterLexeme tokens
+        Right tokens -> mapM_ (putStrLn . prettyLocated) $ J.unlayout $ J.prepare $ K.filterLexeme tokens
