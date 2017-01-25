@@ -25,15 +25,12 @@ asLexeme :: (M.MonadPlus f) => LToken -> f T.Lexeme
 asLexeme (Normal x) = pure x
 asLexeme _ = A.empty
 
-alt :: (A.Alternative f) => Maybe a -> f a
-alt = maybe A.empty pure
-
 instance U.Untoken LToken where
-    anyKeyword x = alt $ asLexeme x >>= U.anyKeyword
-    leftBrace x = alt $ asLexeme x >>= U.leftBrace
-    rightBrace x = alt $ asLexeme x >>= U.rightBrace
-    anyQVarId x = alt $ asLexeme x >>= U.anyQVarId
-    anyQConId x = alt $ asLexeme x >>= U.anyQConId
+    anyKeyword = asLexeme M.>=> U.anyKeyword
+    leftBrace = asLexeme M.>=> U.leftBrace
+    rightBrace = asLexeme M.>=> U.rightBrace
+    anyQVarId = asLexeme M.>=> U.anyQVarId
+    anyQConId = asLexeme M.>=> U.anyQConId
 
 makeLToken :: [L.Located T.Lexeme] -> [L.Located LToken]
 makeLToken = f . (\ x -> insertFirstToken (take 1 x) ++ map (fmap Normal) x)

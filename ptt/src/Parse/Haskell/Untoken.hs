@@ -46,19 +46,19 @@ without tightly coupling to the actual constructors.
 class Untoken a where
 
     -- | Match a reserved keyword.
-    anyKeyword :: (A.Alternative f) => a -> f String
+    anyKeyword :: (M.MonadPlus f) => a -> f String
 
     -- | Match a left brace.
-    leftBrace :: (A.Alternative f) => a -> f String
+    leftBrace :: (M.MonadPlus f) => a -> f String
 
     -- | Match a right brace.
-    rightBrace :: (A.Alternative f) => a -> f String
+    rightBrace :: (M.MonadPlus f) => a -> f String
 
     -- | Match a 'T.QVarId'.
-    anyQVarId :: (A.Alternative f) => a -> f Name
+    anyQVarId :: (M.MonadPlus f) => a -> f Name
 
     -- | Match a 'T.QConId'.
-    anyQConId :: (A.Alternative f) => a -> f Name
+    anyQConId :: (M.MonadPlus f) => a -> f Name
 
 -- | Match an unqualified identifier that begins with a lowercase character.
 anyVarId = anyQVarId M.>=> asUnqualified
