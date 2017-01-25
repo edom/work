@@ -1,7 +1,7 @@
 module Parse.Haskell.Layout
 (
     -- * Before removing layout
-    LInput(..)
+    LToken(..)
     , makeLInput
     -- * Removing layout
     , unlayout
@@ -12,13 +12,13 @@ import qualified Parse.Haskell.Token as T
 import qualified Parse.Haskell.Untoken as U
 import qualified Parse.Location as L
 
-data LInput
+data LToken
     = Normal T.Token
     | Brace Int -- ^ Haskell report uses the term @{ n }@ for this.
     | Angle Int -- ^ Haskell report uses the term @< n >@ for this.
     deriving (Read, Show)
 
-makeLInput :: [L.Located T.Token] -> [L.Located LInput]
+makeLInput :: [L.Located T.Token] -> [L.Located LToken]
 makeLInput = f
     where
         f [] = []
@@ -40,7 +40,7 @@ This should be idempotent (@unlayout . unlayout = unlayout@).
 
 See <https://www.haskell.org/onlinereport/haskell2010/haskellch10.html#x17-17800010.3 Layout> (Haskell 2010 Report).
 -}
-unlayout :: [L.Located LInput] -> [L.Located LInput]
+unlayout :: [L.Located LToken] -> [L.Located LToken]
 unlayout tokens = f tokens []
     where
         -- This f is L in the Haskell report.
