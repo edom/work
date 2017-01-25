@@ -1,5 +1,17 @@
 # Program transformation tool
 
+## How do I generate the documentation?
+
+```
+stack haddock
+```
+
+The output directory should be:
+
+```
+.stack-work/install/x86_64-linux-gmp4/lts-6.26/7.10.3/doc/
+```
+
 ## How do I set up vanilla vim?
 
 By vanilla vim, we mean the vim you get by
