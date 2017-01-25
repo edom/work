@@ -51,6 +51,9 @@ class Untoken a where
     -- | Match a left brace.
     leftBrace :: (A.Alternative f) => a -> f String
 
+    -- | Match a right brace.
+    rightBrace :: (A.Alternative f) => a -> f String
+
     -- | Match a 'T.QVarId'.
     anyQVarId :: (A.Alternative f) => a -> f Name
 
@@ -71,6 +74,7 @@ theKeyword x = anyKeyword M.>=> eq x
 instance Untoken T.Whitespace where
     anyKeyword _ = A.empty
     leftBrace _ = A.empty
+    rightBrace _ = A.empty
     anyQVarId _ = A.empty
     anyQConId _ = A.empty
 
@@ -79,6 +83,8 @@ instance Untoken T.Lexeme where
     anyKeyword _ = A.empty
     leftBrace (T.Special '{') = pure "{"
     leftBrace _ = A.empty
+    rightBrace (T.Special '}') = pure "}"
+    rightBrace _ = A.empty
     anyQVarId (T.QVarId qual name) = pure $ MkName qual name
     anyQVarId _ = A.empty
     anyQConId (T.QConId qual name) = pure $ MkName qual name
@@ -87,11 +93,13 @@ instance Untoken T.Lexeme where
 instance (Untoken a) => Untoken (L.Located a) where
     anyKeyword (L.MkLocated _ x) = anyKeyword x
     leftBrace (L.MkLocated _ x) = leftBrace x
+    rightBrace (L.MkLocated _ x) = rightBrace x
     anyQVarId (L.MkLocated _ x) = anyQVarId x
     anyQConId (L.MkLocated _ x) = anyQConId x
 
 instance (Untoken a, Untoken b) => Untoken (Either a b) where
     anyKeyword = either anyKeyword anyKeyword
     leftBrace = either leftBrace leftBrace
+    rightBrace = either rightBrace rightBrace
     anyQVarId = either anyQVarId anyQVarId
     anyQConId = either anyQConId anyQConId
