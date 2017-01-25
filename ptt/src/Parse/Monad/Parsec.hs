@@ -46,6 +46,7 @@ instance (T.Stream s I.Identity t, Show t) => M.MonadParse (Parsec s) where
     try = In . T.try . out
     unexpected = In . T.unexpected
     expected s = In (T.parserZero T.<?> s)
+    named s m = In (out m T.<?> s)
 
 instance M.MonadLex (Parsec String) where
     char = In . T.char

@@ -60,6 +60,8 @@ but if @x@ fails, then @try x@ does not consume any input.
 
     expected :: String -> m a
 
+    named :: String -> m a -> m a
+
 class (MonadParse m) => MonadLex m where
 
     -- | This matches a character satisfying 'Data.Char.isAlphaNum'.
