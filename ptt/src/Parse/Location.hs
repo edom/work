@@ -7,8 +7,9 @@ module Parse.Location
 
     -- * Located
 
+    , HasLocation(..)
+    , getLocation
     , Located(..)
-    , locate
 )
 where
 
@@ -30,6 +31,10 @@ data Location
 -- | A path in a file system.
 type Path = String
 
+class HasLocation a where
+    -- | Get the associated 'Location'.
+    locate :: a -> Location
+
 -- | This product type adds 'Location' information to another type.
 data Located a
     = MkLocated Location a
@@ -38,6 +43,8 @@ data Located a
 instance Functor Located where
     fmap f (MkLocated a b) = MkLocated a (f b)
 
--- | Get the associated 'Location'.
-locate :: Located a -> Location
-locate (MkLocated x _) = x
+instance HasLocation (Located a) where
+    locate (MkLocated x _) = x
+
+getLocation :: (HasLocation a) => a -> Location
+getLocation = locate
