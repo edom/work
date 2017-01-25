@@ -8,30 +8,54 @@ module Parse.Haskell.Layout
 )
 where
 
+import qualified Control.Applicative as A
+import qualified Control.Monad as M
+
 import qualified Parse.Haskell.Token as T
 import qualified Parse.Haskell.Untoken as U
 import qualified Parse.Location as L
 
 data LToken
-    = Normal T.Token
+    = Normal T.Lexeme
     | Brace Int -- ^ Haskell report uses the term @{ n }@ for this.
     | Angle Int -- ^ Haskell report uses the term @< n >@ for this.
     deriving (Read, Show)
 
-makeLToken :: [L.Located T.Token] -> [L.Located LToken]
-makeLToken = f
+asLexeme :: (M.MonadPlus f) => LToken -> f T.Lexeme
+asLexeme (Normal x) = pure x
+asLexeme _ = A.empty
+
+alt :: (A.Alternative f) => Maybe a -> f a
+alt = maybe A.empty pure
+
+instance U.Untoken LToken where
+    anyKeyword x = alt $ asLexeme x >>= U.anyKeyword
+    leftBrace x = alt $ asLexeme x >>= U.leftBrace
+    rightBrace x = alt $ asLexeme x >>= U.rightBrace
+    anyQVarId x = alt $ asLexeme x >>= U.anyQVarId
+    anyQConId x = alt $ asLexeme x >>= U.anyQConId
+
+makeLToken :: [L.Located T.Lexeme] -> [L.Located LToken]
+makeLToken = f . (\ x -> insertFirstToken (take 1 x) ++ map (fmap Normal) x)
     where
+        -- Insert Angle if the first token is not @{@ and is not @module@.
+        insertFirstToken :: [L.Located T.Lexeme] -> [L.Located LToken]
+        insertFirstToken maybeHead = do
+            x <- maybeHead
+            Just _ <- return $ U.leftBrace x A.<|> U.theKeyword "module" x
+            return $ L.MkLocated (L.locate x) $ Angle (L.column $ L.locate x)
+        f :: [L.Located LToken] -> [L.Located LToken]
         f [] = []
         f (L.MkLocated a x : L.MkLocated b y : z)
             | Just k <- U.anyKeyword x
             , k `elem` ["let", "where", "do", "of"]
             , Nothing <- U.leftBrace y
-            = L.MkLocated a (Normal x)
+            = L.MkLocated a x
             : L.MkLocated b (Brace $ L.column b)
             : f (L.MkLocated b y : z)
         -- TODO the rest
         f (L.MkLocated a x : y)
-            = L.MkLocated a (Normal x) : f y
+            = L.MkLocated a x : f y
 
 {- |
 Insert braces and semicolons implied by indentations.
