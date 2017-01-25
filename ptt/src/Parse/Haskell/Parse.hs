@@ -24,7 +24,8 @@ module Parse.Haskell.Parse
 )
 where
 
-import Data.Maybe as Q
+import qualified Control.Applicative as A
+import qualified Data.Maybe as Q
 
 import Parse.Monad
     (
@@ -49,6 +50,9 @@ instance MonadParseHaskell (N.Parsec [L.Located T.Lexeme]) where
 theKeyword = token . U.theKeyword
 
 theVarId = token . U.theVarId
+
+leftBrace = token U.leftBrace
+rightBrace = token U.rightBrace
 
 kModule = theKeyword "module"
 kWhere = theKeyword "where"
@@ -77,7 +81,13 @@ module_ =
     -- M.optional exports
 
 -- | Module body.
-body = M.many impDecl
+body = leftBrace *> content
+    where
+        content =
+            (rightBrace *> pure [])
+            <|> (impDecl <:> content)
+
+(<:>) = A.liftA2 (:)
 
 -- | Import declaration.
 impDecl = do
