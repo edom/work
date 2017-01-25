@@ -42,7 +42,8 @@ program = M.many (lexeme <|> whitespace) <* M.end
 
 lexeme :: (M.MonadLex m) => m (L.Located T.Token)
 lexeme = located $ fmap Right $
-    M.try qVarId
+    special
+    <|> M.try qVarId
     <|> M.try qConId
     <|> M.try qVarSym
     <|> M.try qConSym
@@ -174,10 +175,14 @@ conSym = do
 
 symbol = M.named "symbol" $ M.charSatisfying isSymbol
 
-isSymbol c = isAscSymbol c || isUniSymbol c
+isSymbol = (isAscSymbol <||> isUniSymbol) <&&> notF isSpecial
     where
         isAscSymbol c = c `elem` "!#$%&*+./<=>?@\\^|-~:"
         isUniSymbol c = C.isSymbol c || C.isPunctuation c
+
+(<&&>) f g x = f x && g x
+(<||>) f g x = f x || g x
+notF f x = not (f x)
 
 uniWhite = M.uniWhite
 
@@ -185,6 +190,9 @@ literal = integer
 
 decimal = T.Decimal <$> M.many1 digit
 integer = decimal
+
+special = M.named "special" $ T.Special <$> M.charSatisfying isSpecial
+isSpecial c = c `elem` "(),;[]`{}"
 
 -- | Unqualified constructor identifier.
 conId = (:) <$> large <*> M.many (small <|> large <|> digit <|> apostrophe)

@@ -15,6 +15,7 @@ data Lexeme
     | QVarSym String String
     | QConSym String String
     | Reserved String
+    | Special Char
     | Decimal String
     deriving (Read, Show, Eq)
 
