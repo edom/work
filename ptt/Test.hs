@@ -26,3 +26,5 @@ f x =
     y
 
 g (x, y) = (x +) y
+
+myString = "myString"

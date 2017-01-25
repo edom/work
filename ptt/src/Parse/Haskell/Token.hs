@@ -17,6 +17,7 @@ data Lexeme
     | Reserved String
     | Special Char
     | Decimal String
+    | String String
     deriving (Read, Show, Eq)
 
 data Whitespace
