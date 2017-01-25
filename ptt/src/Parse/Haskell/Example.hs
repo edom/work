@@ -1,3 +1,16 @@
+{- |
+The steps of parsing a Haskell module:
+
+- Untab (replace tabs with spaces): @[Char] -> [Char]@.
+- Lex (perform lexical analysis): @[Char] -> [Token]@
+- Infer layout: @[Token] -> [LToken]@
+- Remove layout (insert braces and semicolons): @[LToken] -> [Token]@
+- Remove white tokens: @[Token] -> [Lexeme]@
+- Parse: @[Lexeme] -> Module@
+
+Note that the types are approximate.
+
+-}
 module Parse.Haskell.Example
 where
 
