@@ -2,7 +2,7 @@ module Parse.Haskell.Layout
 (
     -- * Before removing layout
     LToken(..)
-    , makeLInput
+    , makeLToken
     -- * Removing layout
     , unlayout
 )
@@ -18,8 +18,8 @@ data LToken
     | Angle Int -- ^ Haskell report uses the term @< n >@ for this.
     deriving (Read, Show)
 
-makeLInput :: [L.Located T.Token] -> [L.Located LToken]
-makeLInput = f
+makeLToken :: [L.Located T.Token] -> [L.Located LToken]
+makeLToken = f
     where
         f [] = []
         f (L.MkLocated a x : L.MkLocated b y : z)
