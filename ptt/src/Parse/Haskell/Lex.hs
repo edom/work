@@ -36,9 +36,8 @@ filterLexeme list = [ L.MkLocated x y | L.MkLocated x (Right y) <- list ]
 
 type Program = [L.Located T.Token]
 
--- | This consumes the program until the end of input.
 program :: (M.MonadLex m) => m [L.Located T.Token]
-program = M.many (lexeme <|> whitespace) <* M.end
+program = M.many (lexeme <|> whitespace)
 
 lexeme :: (M.MonadLex m) => m (L.Located T.Token)
 lexeme = located $ fmap Right $

@@ -20,7 +20,7 @@ prettyLocated (L.MkLocated loc thing) = prettyLocation loc ++ show thing
 
 testLex = do
     src <- BC.unpack <$> B.readFile "Test.hs"
-    case K.filterLexeme <$> N.lex K.program "Test.hs" src of
+    case K.filterLexeme <$> N.lex (K.program <* M.end) "Test.hs" src of
         Left e -> putStrLn $ M.message e
         Right lexemes -> mapM_ (putStrLn . prettyLocated) lexemes
 
@@ -31,11 +31,11 @@ testParse = do
         Right result -> print result
     where
         doParse path = do
-            N.lex K.program path
-            >=> N.parse P.module_ path . K.filterLexeme
+            N.lex (K.program <* M.end) path
+            >=> N.parse (P.module_ <* M.end) path . K.filterLexeme
 
 testUnlayout = do
     src <- BC.unpack <$> B.readFile "Test.hs"
-    case N.lex K.program "Test.hs" src of
+    case N.lex (K.program <* M.end) "Test.hs" src of
         Left e -> putStrLn $ M.message e
         Right tokens -> mapM_ (putStrLn . prettyLocated) $ J.unlayout $ J.makeLInput tokens
