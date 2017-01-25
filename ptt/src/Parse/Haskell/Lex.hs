@@ -121,6 +121,7 @@ reservedOps = [
         ".."
         , "::"
         , ":"
+        , "=>"
         , "="
         , "\\"
         , "|"
@@ -128,7 +129,6 @@ reservedOps = [
         , "->"
         , "@"
         , "~"
-        , "=>"
     ]
 
 -- | Qualified variable identifier.

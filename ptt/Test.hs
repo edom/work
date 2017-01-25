@@ -28,3 +28,6 @@ f x =
 g (x, y) = (x +) y
 
 myString = "myString"
+
+returnUnit :: (Monad m) => m ()
+returnUnit = return ()
