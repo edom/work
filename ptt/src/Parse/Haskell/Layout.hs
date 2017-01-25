@@ -23,7 +23,7 @@ makeLInput = f
     where
         f [] = []
         f (L.MkLocated a x : L.MkLocated b y : z)
-            | Just k <- U.keyword x
+            | Just k <- U.anyKeyword x
             , k `elem` ["let", "where", "do", "of"]
             , Nothing <- U.leftBrace y
             = L.MkLocated a (Normal x)

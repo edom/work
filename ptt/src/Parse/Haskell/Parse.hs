@@ -34,6 +34,7 @@ import Parse.Monad
 import qualified Parse.Location as L
 import qualified Parse.Haskell.Lex as K
 import qualified Parse.Haskell.Token as T
+import qualified Parse.Haskell.Untoken as U
 import qualified Parse.Monad as M
 import qualified Parse.Monad.Parsec as N
 
@@ -45,30 +46,18 @@ instance MonadParseHaskell (N.Parsec [L.Located T.Lexeme]) where
 
     token match = N.token show L.locate match
 
-keyword s =
-    token $ \ t -> do
-        case t of
-            L.MkLocated _ (T.Reserved str) | s == str -> Just s
-            _ -> Nothing
+theKeyword = token . U.theKeyword
 
-varId s =
-    token $ \ t -> do
-        case t of
-            L.MkLocated _ (T.QVarId "" str) | s == str -> Just s
-            _ -> Nothing
+theVarId = token . U.theVarId
 
-kModule = keyword "module"
-kWhere = keyword "where"
-kImport = keyword "import"
-kQualified = varId "qualified"
-kAs = varId "as"
+kModule = theKeyword "module"
+kWhere = theKeyword "where"
+kImport = theKeyword "import"
+kQualified = theVarId "qualified"
+kAs = theVarId "as"
 
 -- | Module identifier.
-modId =
-    token $ \ t -> do
-        case t of
-            L.MkLocated _ (T.QConId prefix name) -> Just $ prefix ++ name
-            _ -> Nothing
+modId = token $ fmap U.unparse . U.anyQConId
 
 data Module
     = MkModule String [Import]
