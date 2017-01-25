@@ -4,8 +4,15 @@ module Parse.Haskell.Token
     Token
     , Lexeme(..)
     , Whitespace(..)
+
+    -- * Match
+
+    , asLexeme
+    , asWhitespace
 )
 where
+
+import qualified Control.Applicative as A
 
 type Token = Either Whitespace Lexeme
 
@@ -25,3 +32,11 @@ data Whitespace
     | LineComment String -- ^ including the @--@
     | BlockComment String -- ^ including the @{-@ and @-}@
     deriving (Read, Show, Eq)
+
+asLexeme :: (A.Alternative f) => Token -> f Lexeme
+asLexeme (Right x) = pure x
+asLexeme _ = A.empty
+
+asWhitespace :: (A.Alternative f) => Token -> f Whitespace
+asWhitespace (Left x) = pure x
+asWhitespace _ = A.empty
