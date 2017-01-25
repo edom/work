@@ -13,6 +13,7 @@ data Lexeme
     = QVarId String String
     | QConId String String
     | QVarSym String String
+    | QConSym String String
     | Reserved String
     | Decimal String
     deriving (Read, Show, Eq)

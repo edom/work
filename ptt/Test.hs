@@ -11,3 +11,8 @@ decl0 = decl1
 x = 0
 
 y = let z = 0 in z
+
+a = 123 + 456 -- 789
+
+(+++) x _ = x
+infixr +++ 1

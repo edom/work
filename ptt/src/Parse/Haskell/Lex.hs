@@ -43,10 +43,12 @@ program = M.many (lexeme <|> whitespace) <* M.end
 lexeme :: (M.MonadLex m) => m (L.Located T.Token)
 lexeme = located $ fmap Right $
     M.try qVarId
+    <|> M.try qConId
+    <|> M.try qVarSym
+    <|> M.try qConSym
+    <|> literal
     <|> reservedId
     <|> reservedOp
-    <|> qConId
-    <|> literal
 
 whitespace :: (M.MonadLex m) => m (L.Located T.Token)
 whitespace = located $ Left <$> (whiteString <|> comment <|> nComment)
@@ -54,17 +56,20 @@ whiteString = T.White <$> M.many1 whiteChar
 whiteChar = uniWhite -- newLine <|> verTab <|> space <|> tab <|> uniWhite
 
 -- | Line comment.
-comment = T.LineComment <$> (dashes <++> newLine)
+comment = T.LineComment <$> (M.string dashes <++> (M.charSatisfying (not . isSymbol) <:> content))
+    where
+        content = M.try newLine <|> (M.anyChar <:> content)
 
 -- | Block comment.
 nComment = T.BlockComment <$> M.string "{-" -- FIXME
 
-dashes = M.string "--"
+dashes = "--"
 newLine =
     (carriageReturn <++> (N.fromMaybe "" <$> M.optional lineFeed))
     <|> lineFeed
     <|> formFeed
 
+(<:>) = A.liftA2 (:)
 (<++>) = A.liftA2 (++)
 
 carriageReturn = M.string "\r"
@@ -77,6 +82,14 @@ reservedId = reserved reservedIds
 
 reservedOp = reserved reservedOps
 
+{-
+Note for reservedIds and reservedOps:
+
+If x is a prefix of y, then x must come after y in the list.
+This is because <|> is not commutative;
+M.choice picks the first (not the longest) matching string.
+-}
+
 reservedIds = [
         "case"
         , "class"
@@ -88,11 +101,11 @@ reservedIds = [
         , "foreign"
         , "if"
         , "import"
-        , "in"
-        , "infix"
         , "infixl"
         , "infixr"
+        , "infix"
         , "instance"
+        , "in"
         , "let"
         , "module"
         , "newtype"
@@ -105,8 +118,8 @@ reservedIds = [
 
 reservedOps = [
         ".."
-        , ":"
         , "::"
+        , ":"
         , "="
         , "\\"
         , "|"
@@ -126,6 +139,9 @@ qConId = T.QConId <$> qualifier <*> conId
 -- | Qualified variable symbol.
 qVarSym = T.QVarSym <$> qualifier <*> varSym
 
+-- | Qualified constructor symbol.
+qConSym = T.QConSym <$> qualifier <*> conSym
+
 qualifier =
     (M.try (conId <++> M.string ".") <++> qualifier) <|> pure ""
 
@@ -137,11 +153,32 @@ varId = do
         else return str
 
 -- | Unqualified variable symbol.
-varSym = (:) <$> symbol <*> M.many (symbol <|> M.char ':') -- TODO minus (reservedOp | dashes)
+varSym = do
+    str <- (:) <$> nonColon <*> M.many symbol
+    case str of
+        _ | str == dashes -> M.unexpected "dashes"
+        _ | str `elem` reservedOps -> M.unexpected "reservedOps"
+        _ -> return str
+    where
+        nonColon = do
+            s <- symbol
+            if s == ':'
+                then M.expected "non-colon"
+                else return s
 
-symbol = ascSymbol <|> uniSymbol
-ascSymbol = M.oneOf "!#$%&*+./<=>?@\\^|-~"
-uniSymbol = M.charSatisfying (\ c -> C.isSymbol c || C.isPunctuation c)
+conSym = do
+    str <- (:) <$> M.char ':' <*> M.many symbol
+    case str of
+        _ | str `elem` reservedOps -> M.unexpected "reservedOps"
+        _ -> return str
+
+symbol = M.named "symbol" $ M.charSatisfying isSymbol
+
+isSymbol c = isAscSymbol c || isUniSymbol c
+    where
+        isAscSymbol c = c `elem` "!#$%&*+./<=>?@\\^|-~:"
+        isUniSymbol c = C.isSymbol c || C.isPunctuation c
+
 uniWhite = M.uniWhite
 
 literal = integer
