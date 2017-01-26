@@ -47,8 +47,14 @@ testParse = do
             N.lex (K.program <* M.end) path
             >=> N.parse (P.module_ <* M.end) path . K.filterLexeme
 
+testPrepare = do
+    src <- BC.unpack <$> B.readFile "Test.hs"
+    case N.lex (K.program <* M.end) "Test.hs" src of
+        Left e -> putStrLn $ M.message e
+        Right tokens -> mapM_ (putStrLn . prettyLocated) $ J.prepare tokens
+
 testUnlayout = do
     src <- BC.unpack <$> B.readFile "Test.hs"
     case N.lex (K.program <* M.end) "Test.hs" src of
         Left e -> putStrLn $ M.message e
-        Right tokens -> mapM_ (putStrLn . prettyLocated) $ J.unlayout $ J.prepare tokens
+        Right tokens -> mapM_ (putStrLn . prettyLocated) $ J.unlayout tokens

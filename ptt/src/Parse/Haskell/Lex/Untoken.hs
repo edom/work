@@ -44,6 +44,8 @@ without tightly coupling to the actual constructors.
 -}
 class Untoken a where
 
+    isLexeme :: a -> Bool
+
     -- | Match a reserved keyword.
     anyKeyword :: (M.MonadPlus f) => a -> f String
 
@@ -71,6 +73,7 @@ theConId x = anyConId M.>=> eq x
 theKeyword x = anyKeyword M.>=> eq x
 
 instance Untoken T.Whitespace where
+    isLexeme _ = False
     anyKeyword _ = A.empty
     leftBrace _ = A.empty
     rightBrace _ = A.empty
@@ -78,6 +81,7 @@ instance Untoken T.Whitespace where
     anyQConId _ = A.empty
 
 instance Untoken T.Lexeme where
+    isLexeme _ = True
     anyKeyword (T.Reserved x) = pure x
     anyKeyword _ = A.empty
     leftBrace (T.Special '{') = pure "{"
@@ -90,6 +94,7 @@ instance Untoken T.Lexeme where
     anyQConId _ = A.empty
 
 instance (Untoken a) => Untoken (L.Located a) where
+    isLexeme (L.MkLocated _ x) = isLexeme x
     anyKeyword (L.MkLocated _ x) = anyKeyword x
     leftBrace (L.MkLocated _ x) = leftBrace x
     rightBrace (L.MkLocated _ x) = rightBrace x
@@ -97,6 +102,7 @@ instance (Untoken a) => Untoken (L.Located a) where
     anyQConId (L.MkLocated _ x) = anyQConId x
 
 instance Untoken T.Token where
+    isLexeme = tfold isLexeme isLexeme
     anyKeyword = tfold anyKeyword anyKeyword
     leftBrace = tfold leftBrace leftBrace
     rightBrace = tfold rightBrace rightBrace

@@ -30,6 +30,8 @@ instance Functor Laid where
     fmap _ (Angle x) = Angle x
 
 instance U.Untoken (Laid T.Token) where
+    isLexeme (Normal x) = U.isLexeme x
+    isLexeme _ = True
     anyKeyword = asLexeme M.>=> U.anyKeyword
     leftBrace = asLexeme M.>=> U.leftBrace
     rightBrace = asLexeme M.>=> U.rightBrace
@@ -48,34 +50,41 @@ according to the Haskell 2010 report.
 -}
 prepare :: [L.Located T.Token] -> [L.Located (Laid T.Token)]
 prepare =
-    f
+    insertBrace
     . insertFirstToken
-    where
-        f :: [L.Located (Laid T.Token)] -> [L.Located (Laid T.Token)]
-        f [] = []
-        f (x : y : z)
-            | Just k <- U.anyKeyword x
-            , k `elem` ["let", "where", "do", "of"]
-            , Nothing <- U.leftBrace y
-            =
-            let
-                loc = L.locate y
-                col = L.column loc
-            in
-                x
-                : L.MkLocated loc (Brace col)
-                : f (y : z)
-        -- TODO the rest
-        f (x : y)
-            = x : f y
+    . map (fmap Normal)
 
--- Insert Angle if the first token is @{@ or @module@.
-insertFirstToken :: [L.Located T.Token] -> [L.Located (Laid T.Token)]
+{-
+If the lexeme after X is not brace, insert Brace n,
+where
+X is in [let, where, do, of]
+and n is the indentation of the next lexeme or 0,
+-}
+insertBrace :: [L.Located (Laid T.Token)] -> [L.Located (Laid T.Token)]
+insertBrace [] = []
+insertBrace (x : y) | shouldBraceFollow x = x : doInsert x y
+insertBrace (x : y) = x : insertBrace y
+
+shouldBraceFollow x
+    | Just k <- U.anyKeyword x
+    , k `elem` ["let", "where", "do", "of"]
+    = True
+shouldBraceFollow _ = False
+
+doInsert prev [] = [L.MkLocated (L.locate prev) (Brace 0)]
+doInsert _ (s : t) | not (U.isLexeme s) = s : doInsert s t
+doInsert _ (s : t) | Nothing <- U.leftBrace s = L.MkLocated (L.locate s) (Brace (L.getColumn s)) : s : insertBrace t
+doInsert _ (s : t) = s : insertBrace t
+
+-- Insert Brace if the first token is not @{@ or @module@.
+insertFirstToken :: [L.Located (Laid T.Token)] -> [L.Located (Laid T.Token)]
+insertFirstToken (x : y) | not (U.isLexeme x)
+    = x : insertFirstToken y
 insertFirstToken (x : y)
-    | Just _ <- U.leftBrace x A.<|> U.theKeyword "module" x
-    = L.MkLocated (L.locate x) (Angle (L.getColumn x)) : map (fmap Normal) (x : y)
+    | Nothing <- U.leftBrace x A.<|> U.theKeyword "module" x
+    = L.MkLocated (L.locate x) (Brace (L.getColumn x)) : x : y
 insertFirstToken x
-    = map (fmap Normal) x
+    = x
 
 {- |
 Insert braces and semicolons implied by indentations.
@@ -86,8 +95,9 @@ See also the
 <https://www.haskell.org/onlinereport/haskell2010/haskellch10.html#x17-17800010.3 Layout>
 section of the Haskell 2010 Report.
 -}
-unlayout :: [L.Located (Laid T.Token)] -> [L.Located (Laid T.Token)]
-unlayout tokens = f tokens []
+unlayout :: [L.Located T.Token] -> [L.Located T.Token]
+unlayout tokens = f (prepare tokens) []
     where
         -- This is the L function described in the report.
-        f x _ = x -- TODO
+        f list _ = [ L.MkLocated a x | L.MkLocated a (Normal x) <- list ]
+        -- TODO
