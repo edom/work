@@ -9,11 +9,6 @@ module Parse.Haskell.Parse
 
     MonadParseHaskell(..)
 
-    -- * Type
-
-    , Module(..)
-    , Import(..)
-
     -- * Syntax
 
     , module_
@@ -32,6 +27,7 @@ import Parse.Monad
     )
 
 import qualified Parse.Location as L
+import qualified Parse.Haskell.Abstract as C
 import qualified Parse.Haskell.Lex as K
 import qualified Parse.Haskell.Lex.Token as T
 import qualified Parse.Haskell.Lex.Untoken as U
@@ -62,22 +58,10 @@ kAs = theVarId "as"
 -- | Module identifier.
 modId = token $ fmap U.unparse . U.anyQConId
 
-data Module
-    = MkModule String [Import]
-    deriving (Read, Show)
-
-data Import
-    = MkImport
-    {
-        iQualified :: Bool
-        , iModule :: String
-        , iAlias :: String
-    }
-    deriving (Read, Show)
-
-module_ =
-    MkModule <$> (kModule *> modId) <*> (kWhere *> body)
-    -- M.optional exports
+module_ = do
+    name <- kModule *> modId
+    imports <- kWhere *> body
+    return $ C.MkModule name Nothing imports []
 
 -- | Module body.
 body = leftBrace *> content
@@ -94,7 +78,7 @@ impDecl = do
     mQualified <- M.optional kQualified
     moduleId <- modId
     mAlias <- M.optional $ kAs >> modId
-    return $ MkImport (Q.isJust mQualified) moduleId (Q.fromMaybe "" mAlias)
+    return $ C.MkImport (Q.isJust mQualified) moduleId (Q.fromMaybe "" mAlias)
 
 exports = do
     M.char '('
