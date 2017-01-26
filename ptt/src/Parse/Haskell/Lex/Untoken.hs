@@ -1,5 +1,4 @@
 {-# LANGUAGE NoMonomorphismRestriction #-}
-{-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 
 module Parse.Haskell.Lex.Untoken
 (
