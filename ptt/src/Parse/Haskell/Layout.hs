@@ -1,3 +1,5 @@
+{-# LANGUAGE NoMonomorphismRestriction #-}
+
 module Parse.Haskell.Layout
 (
     -- * Before removing layout
@@ -16,14 +18,16 @@ import qualified Parse.Haskell.Lex.Untoken as U
 import qualified Parse.Location as L
 
 data LToken
-    = Normal T.Lexeme
+    = Normal T.Token
     | Brace Int -- ^ Haskell report uses the term @\{n\}@ for this.
     | Angle Int -- ^ Haskell report uses the term @\<n\>@ for this.
     deriving (Read, Show)
 
-asLexeme :: (M.MonadPlus f) => LToken -> f T.Lexeme
-asLexeme (Normal x) = pure x
-asLexeme _ = A.empty
+asToken :: (M.MonadPlus f) => LToken -> f T.Token
+asToken (Normal x) = pure x
+asToken _ = A.empty
+
+asLexeme = asToken M.>=> T.asLexeme
 
 instance U.Untoken LToken where
     anyKeyword = asLexeme M.>=> U.anyKeyword
@@ -36,13 +40,13 @@ instance U.Untoken LToken where
 This transforms the output of the lexical analyzer to the input of the L function
 according to the Haskell 2010 report.
 -}
-prepare :: [L.Located T.Lexeme] -> [L.Located LToken]
+prepare :: [L.Located T.Token] -> [L.Located LToken]
 prepare =
     f
     . (\ x -> insertFirstToken (take 1 x) ++ map (fmap Normal) x)
     where
         -- Insert Angle if the first token is not @{@ and is not @module@.
-        insertFirstToken :: [L.Located T.Lexeme] -> [L.Located LToken]
+        insertFirstToken :: [L.Located T.Token] -> [L.Located LToken]
         insertFirstToken maybeHead = do
             x <- maybeHead
             Just _ <- return $ U.leftBrace x A.<|> U.theKeyword "module" x
