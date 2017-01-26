@@ -114,8 +114,78 @@ See also the
 section of the Haskell 2010 Report.
 -}
 unlayout :: [L.Located T.Token] -> [L.Located T.Token]
-unlayout tokens = f (prepare tokens) []
-    where
-        -- This is the L function described in the report.
-        f list _ = [ L.MkLocated a x | L.MkLocated a (Normal x) <- list ]
-        -- TODO
+unlayout tokens = doUnlayout (prepare tokens) []
+
+-- TODO
+-- This is the L function described in the report.
+
+doUnlayout :: [L.Located (Laid T.Token)] -> [Int] -> [L.Located T.Token]
+
+doUnlayout (t : ts) (m : ms)
+    | Just n <- angle t
+    , m == n
+    = like t colon : doUnlayout ts (m : ms)
+
+doUnlayout (t : ts) (m : ms)
+    | Just n <- angle t
+    , n < m
+    = like t rightBrace : doUnlayout (like t (Angle n) : ts) ms
+
+doUnlayout (t : ts) ms
+    | Just _ <- angle t
+    = doUnlayout ts ms
+
+doUnlayout (t : ts) (m : ms)
+    | Just n <- brace t
+    , n > m
+    = like t leftBrace : doUnlayout ts (n : m : ms)
+
+doUnlayout (t : ts) []
+    | Just n <- brace t
+    = like t leftBrace : doUnlayout ts [n]
+
+-- Note 2
+doUnlayout (t : ts) ms
+    | Just n <- brace t
+    = like t leftBrace : like t rightBrace : doUnlayout (like t (Angle n) : ts) ms
+
+-- Note 3
+doUnlayout (t : ts) (0 : ms)
+    | Just _ <- U.rightBrace t
+    = like t rightBrace : doUnlayout ts ms
+
+-- Note 3
+doUnlayout (t : ts) ms
+    | Just _ <- U.rightBrace t
+    = error "shit"
+
+-- Note 4
+doUnlayout (t : ts) ms
+    | Just _ <- U.leftBrace t
+    = like t leftBrace : doUnlayout ts (0 : ms)
+
+-- Note 5 is too complex to implement.
+
+doUnlayout (t : ts) ms
+    | L.MkLocated p (Normal u) <- t
+    = L.MkLocated p u : doUnlayout ts ms
+
+doUnlayout [] [] = []
+
+-- Note 6
+doUnlayout [] (m : ms) = L.MkLocated (L.MkLocation "" 0 0) rightBrace : doUnlayout [] ms
+
+doUnlayout list stack = [ L.MkLocated a x | L.MkLocated a (Normal x) <- list ]
+
+colon = T.TLexeme $ T.Special ';'
+
+leftBrace = T.TLexeme $ T.Special '{'
+rightBrace = T.TLexeme $ T.Special '}'
+
+angle (L.MkLocated _ (Angle n)) = Just n
+angle _ = Nothing
+
+brace (L.MkLocated _ (Brace n)) = Just n
+brace _ = Nothing
+
+like (L.MkLocated p _) x = L.MkLocated p x
