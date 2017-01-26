@@ -33,7 +33,7 @@ prettyLocated (L.MkLocated loc thing) = prettyLocation loc ++ show thing
 
 testLex = do
     src <- BC.unpack <$> B.readFile "Test.hs"
-    case K.filterLexeme <$> N.lex (K.program <* M.end) "Test.hs" src of
+    case K.filterLexeme <$> K.lex "Test.hs" src of
         Left e -> putStrLn $ M.message e
         Right lexemes -> mapM_ (putStrLn . prettyLocated) lexemes
 

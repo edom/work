@@ -4,17 +4,27 @@
 
 module Parse.Haskell.Lex
 (
-    filterLexeme
-    -- * Program
+    -- * Lexical analysis
+
+    lex
+    , filterLexeme
+
+    -- * Lexers
+
     , Program
     , program
-    -- * Identifiers
+    , lexeme
+    , whitespace
     , qVarId
     , qVarSym
     , qConId
     , reservedId
+    , comment
+    , nComment
 )
 where
+
+import Prelude hiding (lex)
 
 import qualified Control.Applicative as A
 import qualified Data.Char as C
@@ -28,14 +38,26 @@ import Parse.Monad
 import qualified Parse.Haskell.Lex.Token as T
 import qualified Parse.Location as L
 import qualified Parse.Monad as M
+import qualified Parse.Monad.Parsec as P
+
+-- | Perform lexical analysis on the entire string.
+
+lex
+    :: L.Path -- ^ path of the file containing the source (this is for error reporting)
+    -> String -- ^ source code of a Haskell module
+    -> Either M.Error [L.Located T.Token]
+
+lex = P.lex (program <* M.end)
 
 located arg = L.MkLocated <$> M.getLocation <*> arg
 
+-- | Discard whitespaces. (Whitespaces include comments.)
 filterLexeme :: [L.Located T.Token] -> [L.Located T.Lexeme]
 filterLexeme list = [ L.MkLocated x y | L.MkLocated x (Right y) <- list ]
 
 type Program = [L.Located T.Token]
 
+-- | Mixture of 'lexeme's and 'whitespace's.
 program :: (M.MonadLex m) => m [L.Located T.Token]
 program = M.many (lexeme <|> whitespace)
 
