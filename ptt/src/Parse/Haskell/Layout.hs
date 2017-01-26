@@ -13,6 +13,7 @@ where
 
 import qualified Control.Applicative as A
 import qualified Control.Monad as M
+import qualified Data.List as DL
 
 import qualified Parse.Haskell.Lex.Token as T
 import qualified Parse.Haskell.Lex.Untoken as U
@@ -50,9 +51,26 @@ according to the Haskell 2010 report.
 -}
 prepare :: [L.Located T.Token] -> [L.Located (Laid T.Token)]
 prepare =
-    insertBrace
+    insertIndent
+    . insertBrace
     . insertFirstToken
     . map (fmap Normal)
+
+insertIndent tokens =
+    concatMap doInsertIndent theLines
+    where
+        theLines = DL.groupBy (\ x y -> L.getLine x == L.getLine y) tokens
+
+doInsertIndent :: [L.Located (Laid T.Token)] -> [L.Located (Laid T.Token)]
+doInsertIndent x@(L.MkLocated _ (Brace _) : _)
+    = x
+doInsertIndent (x : y)
+    | U.isLexeme x
+    = L.MkLocated (L.locate x) (Angle (L.getColumn x)) : x : y
+doInsertIndent (x : y)
+    = x : doInsertIndent y
+doInsertIndent x
+    = x
 
 {-
 If the lexeme after X is not brace, insert Brace n,

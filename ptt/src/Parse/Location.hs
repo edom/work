@@ -9,10 +9,13 @@ module Parse.Location
 
     , HasLocation(..)
     , getLocation
+    , getLine
     , getColumn
     , Located(..)
 )
 where
+
+import Prelude hiding (getLine)
 
 -- | An inhabitant of this type describes where a character is in a text file.
 data Location
@@ -52,3 +55,6 @@ getLocation = locate
 
 getColumn :: (HasLocation a) => a -> Int
 getColumn = column . locate
+
+getLine :: (HasLocation a) => a -> Int
+getLine = line . locate
