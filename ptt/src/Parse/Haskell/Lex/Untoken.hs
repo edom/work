@@ -96,9 +96,13 @@ instance (Untoken a) => Untoken (L.Located a) where
     anyQVarId (L.MkLocated _ x) = anyQVarId x
     anyQConId (L.MkLocated _ x) = anyQConId x
 
-instance (Untoken a, Untoken b) => Untoken (Either a b) where
-    anyKeyword = either anyKeyword anyKeyword
-    leftBrace = either leftBrace leftBrace
-    rightBrace = either rightBrace rightBrace
-    anyQVarId = either anyQVarId anyQVarId
-    anyQConId = either anyQConId anyQConId
+instance Untoken T.Token where
+    anyKeyword = tfold anyKeyword anyKeyword
+    leftBrace = tfold leftBrace leftBrace
+    rightBrace = tfold rightBrace rightBrace
+    anyQVarId = tfold anyQVarId anyQVarId
+    anyQConId = tfold anyQConId anyQConId
+
+tfold :: (T.Whitespace -> a) -> (T.Lexeme -> a) -> T.Token -> a
+tfold f _ (T.TWhite x) = f x
+tfold _ f (T.TLexeme x) = f x

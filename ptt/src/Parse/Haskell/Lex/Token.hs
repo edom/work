@@ -1,7 +1,8 @@
 module Parse.Haskell.Lex.Token
 (
     -- * Type
-    Token
+
+    Token(..)
     , Lexeme(..)
     , Whitespace(..)
 
@@ -14,7 +15,10 @@ where
 
 import qualified Control.Applicative as A
 
-type Token = Either Whitespace Lexeme
+data Token
+    = TWhite Whitespace
+    | TLexeme Lexeme
+    deriving (Read, Show)
 
 data Lexeme
     = QVarId String String
@@ -34,9 +38,9 @@ data Whitespace
     deriving (Read, Show, Eq)
 
 asLexeme :: (A.Alternative f) => Token -> f Lexeme
-asLexeme (Right x) = pure x
+asLexeme (TLexeme x) = pure x
 asLexeme _ = A.empty
 
 asWhitespace :: (A.Alternative f) => Token -> f Whitespace
-asWhitespace (Left x) = pure x
+asWhitespace (TWhite x) = pure x
 asWhitespace _ = A.empty

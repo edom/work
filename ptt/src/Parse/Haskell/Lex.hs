@@ -52,7 +52,7 @@ located arg = L.MkLocated <$> M.getLocation <*> arg
 
 -- | Discard whitespaces. (Whitespaces include comments.)
 filterLexeme :: [L.Located T.Token] -> [L.Located T.Lexeme]
-filterLexeme list = [ L.MkLocated x y | L.MkLocated x (Right y) <- list ]
+filterLexeme list = [ L.MkLocated x y | L.MkLocated x (T.TLexeme y) <- list ]
 
 type Program = [L.Located T.Token]
 
@@ -61,7 +61,7 @@ program :: (M.MonadLex m) => m [L.Located T.Token]
 program = M.many (lexeme <|> whitespace)
 
 lexeme :: (M.MonadLex m) => m (L.Located T.Token)
-lexeme = located $ fmap Right $
+lexeme = located $ fmap T.TLexeme $
     special
     <|> literal
     <|> M.try qVarId
@@ -72,7 +72,7 @@ lexeme = located $ fmap Right $
     <|> reservedOp
 
 whitespace :: (M.MonadLex m) => m (L.Located T.Token)
-whitespace = located $ Left <$> (whiteString <|> comment <|> nComment)
+whitespace = located $ T.TWhite <$> (whiteString <|> comment <|> nComment)
 whiteString = T.White <$> M.many1 whiteChar
 whiteChar = uniWhite -- newLine <|> verTab <|> space <|> tab <|> uniWhite
 
