@@ -9,6 +9,7 @@ module Parse.Location
 
     , HasLocation(..)
     , getLocation
+    , getColumn
     , Located(..)
 )
 where
@@ -48,3 +49,6 @@ instance HasLocation (Located a) where
 
 getLocation :: (HasLocation a) => a -> Location
 getLocation = locate
+
+getColumn :: (HasLocation a) => a -> Int
+getColumn = column . locate
