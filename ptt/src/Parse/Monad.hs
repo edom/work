@@ -27,6 +27,11 @@ import qualified Control.Monad as M
 
 import qualified Parse.Location as L
 
+{- |
+An inhabitant of @m a@ is like an inhabitant of
+@[t] -> Maybe (a, [t])@ where @t@ is the token type.
+-}
+
 class (Monad m) => MonadParse m where
 
     getLocation :: m L.Location
@@ -61,6 +66,8 @@ but if @x@ fails, then @try x@ does not consume any input.
     expected :: String -> m a
 
     named :: String -> m a -> m a
+
+-- | A @MonadLex@ instance is a 'MonadParse' instance that works with 'Char's.
 
 class (MonadParse m) => MonadLex m where
 
