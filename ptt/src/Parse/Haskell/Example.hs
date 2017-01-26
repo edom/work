@@ -45,7 +45,7 @@ testParse = do
     where
         doParse path = do
             N.lex (K.program <* M.end) path
-            >=> N.parse (P.module_ <* M.end) path . K.filterLexeme
+            >=> N.parse (P.module_ <* M.end) path . K.filterLexeme . J.unlayout
 
 testPrepare = do
     src <- BC.unpack <$> B.readFile "Test.hs"
