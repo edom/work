@@ -17,8 +17,8 @@ import qualified Parse.Location as L
 
 data LToken
     = Normal T.Lexeme
-    | Brace Int -- ^ Haskell report uses the term @{ n }@ for this.
-    | Angle Int -- ^ Haskell report uses the term @< n >@ for this.
+    | Brace Int -- ^ Haskell report uses the term @\{n\}@ for this.
+    | Angle Int -- ^ Haskell report uses the term @\<n\>@ for this.
     deriving (Read, Show)
 
 asLexeme :: (M.MonadPlus f) => LToken -> f T.Lexeme
