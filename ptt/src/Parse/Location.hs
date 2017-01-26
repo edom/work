@@ -12,6 +12,7 @@ module Parse.Location
     , getLine
     , getColumn
     , Located(..)
+    , dislocate
 )
 where
 
@@ -49,6 +50,9 @@ instance Functor Located where
 
 instance HasLocation (Located a) where
     locate (MkLocated x _) = x
+
+dislocate :: Located a -> a
+dislocate (MkLocated _ x) = x
 
 getLocation :: (HasLocation a) => a -> Location
 getLocation = locate

@@ -20,6 +20,10 @@ module Parse.Haskell.Lex
     , reservedId
     , comment
     , nComment
+
+    -- * Unlex
+
+    , Unlex(..)
 )
 where
 
@@ -235,3 +239,36 @@ large = M.upper
 digit = M.digit
 
 apostrophe = M.char '\''
+
+-- | Inverse of lexical analysis.
+
+class Unlex a where
+
+    -- | Turn lexer output back into source code.
+
+    unlex :: a -> String
+
+instance Unlex T.Token where
+    unlex (T.TLexeme x) = unlex x
+    unlex (T.TWhite x) = unlex x
+
+instance Unlex T.Lexeme where
+    unlex (T.QVarId x y) = x ++ y
+    unlex (T.QConId x y) = x ++ y
+    unlex (T.QVarSym x y) = x ++ y
+    unlex (T.QConSym x y) = x ++ y
+    unlex (T.Reserved x) = x
+    unlex (T.Special x) = x : []
+    unlex (T.Decimal x) = x
+    unlex (T.String x) = x
+
+instance Unlex T.Whitespace where
+    unlex (T.White x) = x
+    unlex (T.LineComment x) = x
+    unlex (T.BlockComment x) = x
+
+instance (Unlex a) => Unlex [a] where
+    unlex = concatMap unlex
+
+instance (Unlex a) => Unlex (L.Located a) where
+    unlex = unlex . L.dislocate

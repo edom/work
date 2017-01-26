@@ -58,3 +58,9 @@ testUnlayout = do
     case N.lex (K.program <* M.end) "Test.hs" src of
         Left e -> putStrLn $ M.message e
         Right tokens -> mapM_ (putStrLn . prettyLocated) $ J.unlayout tokens
+
+testUnlex = do
+    src <- BC.unpack <$> B.readFile "Test.hs"
+    case N.lex (K.program <* M.end) "Test.hs" src of
+        Left e -> putStrLn $ M.message e
+        Right tokens -> putStr $ K.unlex $ J.unlayout tokens
