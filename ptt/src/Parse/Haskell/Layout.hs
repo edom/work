@@ -11,8 +11,8 @@ where
 import qualified Control.Applicative as A
 import qualified Control.Monad as M
 
-import qualified Parse.Haskell.Token as T
-import qualified Parse.Haskell.Untoken as U
+import qualified Parse.Haskell.Lex.Token as T
+import qualified Parse.Haskell.Lex.Untoken as U
 import qualified Parse.Location as L
 
 data LToken

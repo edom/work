@@ -1,4 +1,4 @@
-module Parse.Haskell.Token
+module Parse.Haskell.Lex.Token
 (
     -- * Type
     Token

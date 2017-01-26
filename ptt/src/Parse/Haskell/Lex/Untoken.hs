@@ -1,7 +1,7 @@
 {-# LANGUAGE NoMonomorphismRestriction #-}
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 
-module Parse.Haskell.Untoken
+module Parse.Haskell.Lex.Untoken
 (
     Name(..)
     , unparse
@@ -18,7 +18,7 @@ import qualified Control.Applicative as A
 import qualified Control.Monad as M
 
 import qualified Parse.Location as L
-import qualified Parse.Haskell.Token as T
+import qualified Parse.Haskell.Lex.Token as T
 
 -- | Qualified name.
 data Name

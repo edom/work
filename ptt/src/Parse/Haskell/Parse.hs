@@ -34,8 +34,8 @@ import Parse.Monad
 
 import qualified Parse.Location as L
 import qualified Parse.Haskell.Lex as K
-import qualified Parse.Haskell.Token as T
-import qualified Parse.Haskell.Untoken as U
+import qualified Parse.Haskell.Lex.Token as T
+import qualified Parse.Haskell.Lex.Untoken as U
 import qualified Parse.Monad as M
 import qualified Parse.Monad.Parsec as N
 
