@@ -15,7 +15,7 @@ y = let z = 0 in z
 a = 123 + 456 -- 789
 
 (+++) x _ = x
-infixr +++ 1
+infixr 1 +++
 
 f x =
     let
