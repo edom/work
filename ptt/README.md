@@ -39,3 +39,20 @@ is the name of the file you want to open.
 :find <file-pattern>
 :tabfind <file-pattern>
 ```
+
+# Design constraints
+
+- The compiler must not require the output program
+to be linked with a runtime library like GHC RTS.
+
+# Roadmap
+
+## Where we are
+
+- Normal-order beta-reduce lambda calculus terms
+
+## Where we would like to be
+
+- Parse the source code of a Haskell module using the `haskell-src-exts` package
+- Typecheck the abstract syntax tree
+- Interpret GHC `base` package by interpreting the GHC primitives
