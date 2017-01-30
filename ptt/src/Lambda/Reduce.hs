@@ -6,15 +6,11 @@ module Lambda.Reduce
 )
 where
 
-import qualified Control.Applicative as A
-
 import Control.Monad
     (
         MonadPlus
         , guard
     )
-
-import qualified Data.Maybe as DM
 
 import Lambda.Deconstruct
 import Lambda.Term
