@@ -1,3 +1,5 @@
+{-# LANGUAGE MagicHash #-}
+
 module Test.Lex.And.Parse where
 
 import Foo as Bar
@@ -31,3 +33,5 @@ myString = "myString"
 
 returnUnit :: (Monad m) => m ()
 returnUnit = return ()
+
+main = int2Double# 5 +## int2Double# 6
