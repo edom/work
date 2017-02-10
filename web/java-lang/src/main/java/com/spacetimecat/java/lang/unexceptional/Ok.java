@@ -38,12 +38,6 @@ public final class Ok<A> extends Risky<A>
     }
 
     @Override
-    public A getValueOrAssert ()
-    {
-        return value;
-    }
-
-    @Override
     public A getValueOrGetFrom (Supplier<A> supplier)
     {
         return value;
@@ -62,15 +56,14 @@ public final class Ok<A> extends Risky<A>
     }
 
     @Override
-    public Risky<A> ifOkDo (Runnable action)
+    public Risky<A> ifFailRun (Runnable action)
     {
-        action.run();
         return this;
     }
 
     @Override
-    public Risky<A> ifFailRun (Runnable action)
+    public A take () throws Throwable
     {
-        return this;
+        return value;
     }
 }

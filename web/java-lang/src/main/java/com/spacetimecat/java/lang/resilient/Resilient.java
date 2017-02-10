@@ -135,7 +135,7 @@ public final class Resilient<T> implements AutoCloseable
         final T reference = this.reference.getAndSet(null);
         if (reference != null)
         {
-            heaven.retire(reference).throwUnchecked();
+            heaven.retire(reference).takeUnchecked();
         }
     }
 }

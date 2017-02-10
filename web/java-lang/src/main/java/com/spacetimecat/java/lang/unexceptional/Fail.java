@@ -1,7 +1,5 @@
 package com.spacetimecat.java.lang.unexceptional;
 
-import com.spacetimecat.java.lang.Unchecked;
-
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -35,18 +33,6 @@ public final class Fail<A> extends Risky<A>
     }
 
     @Override
-    public void throwChecked () throws Throwable
-    {
-        throw throwable;
-    }
-
-    @Override
-    public void throwUnchecked ()
-    {
-        new Unchecked(throwable).raise();
-    }
-
-    @Override
     public <B> Risky<B> mapValue (Function<A, B> function)
     {
         return new Fail<>(throwable);
@@ -62,5 +48,11 @@ public final class Fail<A> extends Risky<A>
     public <B> B fold (Function<Throwable, B> ifFail, Function<A, B> ifOk)
     {
         return ifFail.apply(throwable);
+    }
+
+    @Override
+    public A take () throws Throwable
+    {
+        throw throwable;
     }
 }

@@ -1,5 +1,7 @@
 package com.spacetimecat.java.lang.unexceptional;
 
+import com.spacetimecat.java.lang.Unchecked;
+
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -37,16 +39,6 @@ public abstract class Risky<A>
         return fallback;
     }
 
-    public A getValueOrAssert ()
-    {
-        throw new AssertionError();
-    }
-
-    public Risky<A> ifOkDo (Runnable action)
-    {
-        return this;
-    }
-
     public Risky<A> ifFailRun (Runnable action)
     {
         action.run();
@@ -70,17 +62,53 @@ public abstract class Risky<A>
 
     public abstract <B> Risky<B> then (Function<A, Risky<B>> function);
 
-    public void throwChecked () throws Throwable
-    {
-    }
-
-    public void throwUnchecked ()
-    {
-    }
-
     public abstract <B> Risky<B> mapValue (Function<A, B> function);
 
     public abstract Risky<A> mapThrowable (Function<Throwable, Throwable> function);
 
     public abstract <B> B fold (Function<Throwable, B> ifFail, Function<A, B> ifOk);
+
+    /**
+     * <p>
+     *     Get the value if this is an {@link Ok},
+     *     or throw an exception if this is a {@link Fail}.
+     * </p>
+     *
+     * <p>
+     *     Convert monad-based code into exception-based code.
+     * </p>
+     *
+     * @return
+     * the value if this is an {@link Ok}
+     *
+     * @throws Throwable
+     * if this is a {@link Fail}
+     */
+    public abstract A take () throws Throwable;
+
+    /**
+     * <p>
+     *     This is like {@link #take()} but throws only unchecked throwables.
+     * </p>
+     *
+     * <p>
+     *     If the throwable is unchecked, this throws it as is.
+     *     If the throwable is checked, this wraps it in a {@link com.spacetimecat.java.lang.UncheckedException}.
+     * </p>
+     *
+     * @return
+     * the value if this is an {@link Ok}
+     */
+    public final A takeUnchecked ()
+    {
+        try
+        {
+            return take();
+        }
+        catch (Throwable e)
+        {
+            new Unchecked(e).raise();
+            throw new AssertionError("should not reach here");
+        }
+    }
 }
