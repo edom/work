@@ -1,8 +1,8 @@
 package com.spacetimecat.concurrent.lock.service.store.internal.network.smp;
 
 import com.spacetimecat.concurrent.lock.service.store.RiskyStore;
-import com.spacetimecat.java.lang.unexceptional.Left;
-import com.spacetimecat.java.lang.unexceptional.Right;
+import com.spacetimecat.java.lang.unexceptional.Fail;
+import com.spacetimecat.java.lang.unexceptional.Ok;
 import com.spacetimecat.java.lang.unexceptional.Risky;
 
 import java.io.IOException;
@@ -43,11 +43,11 @@ public final class StoreClient implements RiskyStore, AutoCloseable
             final int port = uri.getPort();
             final Socket socket = new Socket(host, port);
             socket.setSoTimeout(1000);
-            return new Right<>(new StoreClient(socket));
+            return new Ok<>(new StoreClient(socket));
         }
         catch (IOException e)
         {
-            return new Left<>(e);
+            return new Fail<>(e);
         }
     }
 
@@ -80,11 +80,11 @@ public final class StoreClient implements RiskyStore, AutoCloseable
             protocol.writeMethod(Protocol.M_ADD);
             protocol.writeStringArray(name);
             protocol.flush();
-            return new Right<>(protocol.readBoolean());
+            return new Ok<>(protocol.readBoolean());
         }
         catch (IOException e)
         {
-            return new Left<>(e);
+            return new Fail<>(e);
         }
     }
 
@@ -96,11 +96,11 @@ public final class StoreClient implements RiskyStore, AutoCloseable
             protocol.writeMethod(Protocol.M_REMOVE);
             protocol.writeStringArray(name);
             protocol.flush();
-            return new Right<>(protocol.readBoolean());
+            return new Ok<>(protocol.readBoolean());
         }
         catch (IOException e)
         {
-            return new Left<>(e);
+            return new Fail<>(e);
         }
     }
 

@@ -1,7 +1,7 @@
 package com.spacetimecat.concurrent.lock.client;
 
 import com.spacetimecat.concurrent.lock.service.store.RiskyStore;
-import com.spacetimecat.java.lang.unexceptional.Right;
+import com.spacetimecat.java.lang.unexceptional.Ok;
 import com.spacetimecat.java.lang.unexceptional.Risky;
 
 final class NullStore implements RiskyStore
@@ -13,12 +13,12 @@ final class NullStore implements RiskyStore
     @Override
     public Risky<Boolean> add (String name)
     {
-        return new Right<>(false);
+        return new Ok<>(false);
     }
 
     @Override
     public Risky<Boolean> remove (String name)
     {
-        return new Right<>(false);
+        return new Ok<>(false);
     }
 }

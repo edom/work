@@ -17,11 +17,11 @@ public final class RiskyFunction<A, B> implements Function<A, Risky<B>>
         try
         {
             final B value = original.apply(a);
-            return new Right<>(value);
+            return new Ok<>(value);
         }
         catch (Throwable e)
         {
-            return new Left<>(e);
+            return new Fail<>(e);
         }
     }
 }

@@ -42,11 +42,11 @@ public final class RiskySupplier<A> implements Supplier<Risky<A>>
         try
         {
             final A value = delegate.get();
-            return new Right<>(value);
+            return new Ok<>(value);
         }
         catch (Throwable e)
         {
-            return new Left<>(e);
+            return new Fail<>(e);
         }
     }
 }

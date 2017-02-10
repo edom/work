@@ -3,11 +3,11 @@ package com.spacetimecat.java.lang.unexceptional;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public final class Right<A> extends Risky<A>
+public final class Ok<A> extends Risky<A>
 {
     private final A value;
 
-    public Right (A value)
+    public Ok (A value)
     {
         if (value == null) { throw new NullPointerException("value"); }
         this.value = value;
@@ -52,7 +52,7 @@ public final class Right<A> extends Risky<A>
     @Override
     public <B> Risky<B> mapValue (Function<A, B> function)
     {
-        return new Right<>(function.apply(value));
+        return new Ok<>(function.apply(value));
     }
 
     @Override

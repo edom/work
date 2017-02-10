@@ -2,8 +2,8 @@ package com.spacetimecat.concurrent.lock.client;
 
 import com.spacetimecat.concurrent.lock.service.store.internal.network.smp.StoreClient;
 import com.spacetimecat.java.lang.resilient.Heaven;
-import com.spacetimecat.java.lang.unexceptional.Left;
-import com.spacetimecat.java.lang.unexceptional.Right;
+import com.spacetimecat.java.lang.unexceptional.Fail;
+import com.spacetimecat.java.lang.unexceptional.Ok;
 import com.spacetimecat.java.lang.unexceptional.Risky;
 import com.spacetimecat.java.lang.unit.Unit;
 
@@ -30,11 +30,11 @@ final class StoreHeaven implements Heaven<StoreClient>
         try
         {
             instance.close();
-            return new Right<>(Unit.instance);
+            return new Ok<>(Unit.instance);
         }
         catch (IOException e)
         {
-            return new Left<>(e);
+            return new Fail<>(e);
         }
     }
 }

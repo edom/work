@@ -18,11 +18,11 @@ public final class RiskyCallable<A> implements Supplier<Risky<A>>, Callable<Risk
         try
         {
             final A value = delegate.call();
-            return new Right<>(value);
+            return new Ok<>(value);
         }
         catch (Throwable e)
         {
-            return new Left<>(e);
+            return new Fail<>(e);
         }
     }
 

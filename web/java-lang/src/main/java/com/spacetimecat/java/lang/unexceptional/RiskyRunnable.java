@@ -19,11 +19,11 @@ public final class RiskyRunnable implements Supplier<Risky<Unit>>
         try
         {
             delegate.run();
-            return new Right<>(Unit.instance);
+            return new Ok<>(Unit.instance);
         }
         catch (Throwable e)
         {
-            return new Left<>(e);
+            return new Fail<>(e);
         }
     }
 }

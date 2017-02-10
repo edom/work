@@ -29,7 +29,7 @@ public final class ResilientSocket
             {
                 delegate = supplier.get().getValueOr(null);
             }
-            return delegate == null ? new Left<>(new NullPointerException()) : new Right<>(delegate);
+            return delegate == null ? new Fail<>(new NullPointerException()) : new Ok<>(delegate);
         }
     }
 
@@ -68,11 +68,11 @@ public final class ResilientSocket
                 {
                     delegate.close();
                 }
-                return new Right<>(Unit.instance);
+                return new Ok<>(Unit.instance);
             }
             catch (IOException e)
             {
-                return new Left<>(e);
+                return new Fail<>(e);
             }
         }
     }

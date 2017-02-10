@@ -5,11 +5,11 @@ import com.spacetimecat.java.lang.Unchecked;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public final class Left<A> extends Risky<A>
+public final class Fail<A> extends Risky<A>
 {
     private final Throwable throwable;
 
-    public Left (Throwable throwable)
+    public Fail (Throwable throwable)
     {
         if (throwable == null) { throw new NullPointerException("throwable"); }
         this.throwable = throwable;
@@ -31,7 +31,7 @@ public final class Left<A> extends Risky<A>
     @Override
     public <B> Risky<B> then (Function<A, Risky<B>> function)
     {
-        return new Left<>(throwable);
+        return new Fail<>(throwable);
     }
 
     @Override
@@ -49,13 +49,13 @@ public final class Left<A> extends Risky<A>
     @Override
     public <B> Risky<B> mapValue (Function<A, B> function)
     {
-        return new Left<>(throwable);
+        return new Fail<>(throwable);
     }
 
     @Override
     public Risky<A> mapThrowable (Function<Throwable, Throwable> function)
     {
-        return new Left<>(function.apply(throwable));
+        return new Fail<>(function.apply(throwable));
     }
 
     @Override

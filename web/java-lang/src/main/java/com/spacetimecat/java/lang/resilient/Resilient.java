@@ -44,13 +44,13 @@ public final class Resilient<T> implements AutoCloseable
     {
         {
             final T ref = reference.get();
-            if (ref != null) { return new Right<>(ref); }
+            if (ref != null) { return new Ok<>(ref); }
         }
 
         if (!weAreResponsible.compareAndSet(false, true))
         {
             final String message = "Another thread is creating a new instance. Try again later.";
-            return new Left<>(new TemporaryException(message));
+            return new Fail<>(new TemporaryException(message));
         }
 
         synchronized (closedLock)
@@ -59,7 +59,7 @@ public final class Resilient<T> implements AutoCloseable
             {
                 if (closed)
                 {
-                    return new Left<>(new ClosedException("This object is already closed."));
+                    return new Fail<>(new ClosedException("This object is already closed."));
                 }
 
                 final Risky<T> risky = heaven.create();
