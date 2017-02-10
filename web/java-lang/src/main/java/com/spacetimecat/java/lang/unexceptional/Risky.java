@@ -82,5 +82,5 @@ public abstract class Risky<A>
 
     public abstract Risky<A> mapThrowable (Function<Throwable, Throwable> function);
 
-    public abstract <B> B fold (Function<A, B> ifOk, Function<Throwable, B> ifFail);
+    public abstract <B> B fold (Function<Throwable, B> ifFail, Function<A, B> ifOk);
 }

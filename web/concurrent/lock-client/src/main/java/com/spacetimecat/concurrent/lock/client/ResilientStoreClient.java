@@ -30,7 +30,7 @@ final class ResilientStoreClient implements Store, AutoCloseable
             .then(instance ->
                 instance.add(name)
                     .ifFailRun(() -> kill(instance))
-        ).fold(bool -> bool, throwable -> { warn.accept(throwable); return false; });
+        ).fold(throwable -> { warn.accept(throwable); return false; }, bool -> bool);
     }
 
     @Override
@@ -40,7 +40,7 @@ final class ResilientStoreClient implements Store, AutoCloseable
             .then(instance ->
                 instance.remove(name)
                     .ifFailRun(() -> kill(instance))
-        ).fold(bool -> bool, throwable -> { warn.accept(throwable); return false; });
+        ).fold(throwable -> { warn.accept(throwable); return false; }, bool -> bool);
     }
 
     private void kill (StoreClient instance)

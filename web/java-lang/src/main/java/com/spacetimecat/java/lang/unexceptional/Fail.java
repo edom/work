@@ -59,7 +59,7 @@ public final class Fail<A> extends Risky<A>
     }
 
     @Override
-    public <B> B fold (Function<A, B> ifOk, Function<Throwable, B> ifFail)
+    public <B> B fold (Function<Throwable, B> ifFail, Function<A, B> ifOk)
     {
         return ifFail.apply(throwable);
     }
