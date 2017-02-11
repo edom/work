@@ -6,37 +6,39 @@ import java.util.concurrent.*;
 
 /**
  * <p>
- *     This improves the usability of {@link ScheduledThreadPoolExecutor} for common use cases.
- * </p>
- *
- * <p>
- *     To estimate how many idle threads a machine can handle,
- *     you can assume that every thread takes 1 MB.
+ *     This improves the usability of {@link ThreadPoolExecutor} for common use cases.
  * </p>
  */
-public final class FixedThreadPool implements ExecutorService
+public final class FixedThreadPool implements ExecutorService0
 {
-    private final ThreadPoolExecutor inner;
+    private final ExecutorService0 inner;
 
     /**
      * <p>
-     *     A thread pool with a fixed number of threads.
+     *     This creates a thread pool implementing {@link ExecutorService0} with a fixed number of threads.
+     * </p>
+     *
+     * <p>
+     *     To estimate how many idle threads a machine can handle in 2017,
+     *     you can assume that every thread takes 1 MB.
      * </p>
      *
      * @param name
-     * the name of this thread pool;
-     * this will be the prefix of the names of the threads in this pool
+     * is the name of this thread pool.
+     * This will be the prefix of the names of the threads in this pool.
      *
      * @param threadCount
-     * the number of threads
+     * is the number of threads.
      *
      * @param queueCapacity
-     * the number of
+     * is the maximum number of waiting tasks.
+     * If the queue is full, adding task to this pool
+     * will throw a {@link RejectedExecutionException} instead.
      */
     public FixedThreadPool (String name, int threadCount, int queueCapacity)
     {
         final ThreadFactory factory = new MyThreadFactory(name);
-        inner = new ThreadPoolExecutor(
+        final ThreadPoolExecutor inner = new ThreadPoolExecutor(
             threadCount
             , threadCount
             , 0
@@ -46,9 +48,40 @@ public final class FixedThreadPool implements ExecutorService
         );
         inner.allowCoreThreadTimeOut(false);
         inner.prestartAllCoreThreads();
+        this.inner = new FreeExecutorService0(inner);
     }
 
     // Generated delegates.
+
+    @Override
+    public <T> Future<List<T>> submitAllCallable (Collection<? extends Callable<T>> tasks)
+    {
+        return inner.submitAllCallable(tasks);
+    }
+
+    @Override
+    public <T> Future<List<T>> submitAllCallable (Callable<T>... tasks)
+    {
+        return inner.submitAllCallable(tasks);
+    }
+
+    @Override
+    public Future<List<Void>> submitAllRunnable (Collection<? extends Runnable> tasks)
+    {
+        return inner.submitAllRunnable(tasks);
+    }
+
+    @Override
+    public Future<List<Void>> submitAllRunnable (Runnable... tasks)
+    {
+        return inner.submitAllRunnable(tasks);
+    }
+
+    @Override
+    public Future<Void> submit (Runnable task)
+    {
+        return inner.submit(task);
+    }
 
     @Override
     public void shutdown ()
@@ -90,12 +123,6 @@ public final class FixedThreadPool implements ExecutorService
     public <T> Future<T> submit (Runnable task, T result)
     {
         return inner.submit(task, result);
-    }
-
-    @Override
-    public Future<?> submit (Runnable task)
-    {
-        return inner.submit(task);
     }
 
     @Override
