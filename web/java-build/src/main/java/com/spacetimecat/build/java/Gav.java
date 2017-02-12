@@ -4,24 +4,24 @@ import java.util.Objects;
 
 final class Gav
 {
-    private final String group;
-    private final String artifact;
+    private final String groupId;
+    private final String artifactId;
     private final String version;
 
     /**
-     * @param group
+     * @param groupId
      * can be null
      *
-     * @param artifact
+     * @param artifactId
      * cannot be null
      *
      * @param version
      * can be null
      */
-    Gav (String group, String artifact, String version)
+    Gav (String groupId, String artifactId, String version)
     {
-        this.group = group;
-        this.artifact = Objects.requireNonNull(artifact);
+        this.groupId = groupId;
+        this.artifactId = Objects.requireNonNull(artifactId);
         this.version = version;
     }
 
@@ -32,14 +32,14 @@ final class Gav
         return new Gav(c[0], c[1], c[2]);
     }
 
-    public String getGroup ()
+    public String getGroupId ()
     {
-        return group;
+        return groupId;
     }
 
-    public String getArtifact ()
+    public String getArtifactId ()
     {
-        return artifact;
+        return artifactId;
     }
 
     public String getVersion ()
