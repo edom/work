@@ -97,6 +97,8 @@ public final class Project
         if (!children.isEmpty())
         {
             p.packaging("pom");
+            final List<Project> children = new ArrayList<>(this.children);
+            children.sort((a, b) -> a.name().compareTo(b.name()));
             children.forEach(c -> p.module(c.name()));
         }
         p.dependOn(dependencies);
