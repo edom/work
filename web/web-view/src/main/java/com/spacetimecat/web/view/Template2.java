@@ -7,16 +7,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
 
-public class Template
+public class Template2
 {
     protected final Document document;
 
-    public Template (Document document)
+    public Template2 (Document document)
     {
         this.document = document;
     }
 
-    public static Template fromResource (Class<?> base, String path, String baseUri)
+    public static Template2 fromResource (Class<?> base, String path, String baseUri)
     {
         try (InputStream source = base.getResourceAsStream(path))
         {
@@ -28,12 +28,12 @@ public class Template
         }
     }
 
-    public static Template fromInputStream (InputStream source, String baseUri)
+    public static Template2 fromInputStream (InputStream source, String baseUri)
     {
         try
         {
             final Document parse = Jsoup.parse(source, "UTF-8", baseUri);
-            return new Template(parse);
+            return new Template2(parse);
         }
         catch (IOException e)
         {

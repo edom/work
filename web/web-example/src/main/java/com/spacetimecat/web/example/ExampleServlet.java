@@ -6,7 +6,7 @@ import com.spacetimecat.web.servlet.HttpServlet2;
 import com.spacetimecat.web.servlet.Request;
 import com.spacetimecat.web.servlet.Response;
 import com.spacetimecat.web.view.Document2;
-import com.spacetimecat.web.view.Template;
+import com.spacetimecat.web.view.Template2;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,11 +17,11 @@ final class ExampleServlet extends HttpServlet2
 {
     private final TodoList todoList = new TodoList();
 
-    private final Template template;
+    private final Template2 template;
 
     ExampleServlet (String baseUri)
     {
-        this.template = Template.fromResource(ExampleServlet.class, "template.html", baseUri);
+        this.template = Template2.fromResource(ExampleServlet.class, "template.html", baseUri);
     }
 
 
