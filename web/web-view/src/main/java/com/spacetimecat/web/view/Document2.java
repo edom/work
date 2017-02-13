@@ -11,6 +11,11 @@ public class Document2
         this.document = document;
     }
 
+    public final Document2 deepCopy ()
+    {
+        return new Document2(document.clone());
+    }
+
     @Override
     public final String toString ()
     {
