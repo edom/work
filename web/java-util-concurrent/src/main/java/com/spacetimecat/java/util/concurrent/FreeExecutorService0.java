@@ -6,11 +6,17 @@ import java.util.List;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
-final class FreeExecutorService0 implements ExecutorService0
+/**
+ * <p>
+ *     If you give this {@link ExecutorService},
+ *     this gives you {@link ExecutorService0}.
+ * </p>
+ */
+public final class FreeExecutorService0 implements ExecutorService0
 {
     private final ExecutorService real;
 
-    FreeExecutorService0 (ExecutorService real)
+    public FreeExecutorService0 (ExecutorService real)
     {
         this.real = real;
     }
