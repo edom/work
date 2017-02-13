@@ -51,6 +51,7 @@ final class Mavenize
             )
             .child("java-lang")
             .child("java-lang-function")
+            .child("java-util-concurrent")
             .child("planner")
             .child("relational", c -> c
                 .dependOn("com.h2database:h2:1.4.193")
