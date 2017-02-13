@@ -16,6 +16,14 @@ public class Document2
         return new Document2(document.clone());
     }
 
+    /**
+     * <p>
+     *     Render the HTML.
+     * </p>
+     *
+     * @return
+     * a string representing an HTML document
+     */
     @Override
     public final String toString ()
     {
