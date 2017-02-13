@@ -30,12 +30,13 @@ public final class FixedThreadPool implements ExecutorService0
      * @param threadCount
      * is the number of threads.
      *
-     * @param queueCapacity
-     * is the maximum number of waiting tasks.
-     * If the queue is full, adding task to this pool
+     * @param queue
+     * will store the tasks that have not been assigned to threads.
+     * If the queue is full, adding a task to this pool
      * will throw a {@link RejectedExecutionException} instead.
+     * When in doubt, use an {@link ArrayBlockingQueue}.
      */
-    public FixedThreadPool (String name, int threadCount, int queueCapacity)
+    public FixedThreadPool (String name, int threadCount, BlockingQueue<Runnable> queue)
     {
         final ThreadFactory factory = new MyThreadFactory(name);
         final ThreadPoolExecutor inner = new ThreadPoolExecutor(
@@ -43,7 +44,7 @@ public final class FixedThreadPool implements ExecutorService0
             , threadCount
             , 0
             , TimeUnit.MILLISECONDS
-            , new ArrayBlockingQueue<>(queueCapacity)
+            , queue
             , factory
         );
         inner.allowCoreThreadTimeOut(false);
