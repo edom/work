@@ -52,7 +52,10 @@ final class Mavenize
             .child("java-lang")
             .child("java-lang-function")
             .child("java-util-concurrent")
-            .child("planner")
+            .child("planner", c -> c
+                .dependOn("io.dropwizard:dropwizard-core:1.0.6")
+                .dependOn(r.getChild("web-view"))
+            )
             .child("relational", c -> c
                 .dependOn("com.h2database:h2:1.4.193")
                 .dependOn("org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final")
