@@ -51,8 +51,6 @@ final class Mavenize
             .child("io")
             .child("java-build", c -> c
                 .dependOn(r.getChild("java-lang"))
-                .dependOn(r.getChild("xml-dom"))
-                .dependOn(r.getChild("xml-dom-select"))
                 .dependOn("org.apache.maven:maven-model:[3,)")
             )
             .child("java-lang")
