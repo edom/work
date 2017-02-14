@@ -17,6 +17,7 @@ public final class Project
     private String groupId = "groupId";
     private String artifactId = "artifactId";
     private String version = "0.0.0-SNAPSHOT";
+    private String packaging = "jar";
 
     /**
      * @param path
@@ -41,6 +42,9 @@ public final class Project
     }
 
     private Gav gav () { return new Gav(groupId, artifactId, version); }
+
+    public String packaging () { return packaging; }
+    public Project packaging (String s) { packaging = s; return this; }
 
     public String path () { return path; }
     private boolean pathIs (String s) { return Paths.get(path).equals(Paths.get(s)); }
