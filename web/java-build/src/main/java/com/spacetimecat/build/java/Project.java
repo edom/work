@@ -1,141 +1,113 @@
 package com.spacetimecat.build.java;
 
-import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
 
 public final class Project
 {
-    private final Project parent;
-    private Gav gav;
-
-    private final List<Project> children = new ArrayList<>();
-
     private final List<Gav> dependencies = new ArrayList<>();
+    private final List<Project> children = new ArrayList<>();
+    private final String path;
+    private final Project parent;
+    private String groupId = "groupId";
+    private String artifactId = "artifactId";
+    private String version = "0.0.0-SNAPSHOT";
 
-    public Project (Gav gav)
+    /**
+     * @param path
+     * path relative to the path of the parent project
+     * (not necessarily the root project)
+     */
+    public Project (String path)
     {
-        this(null, gav);
+        this(null, path);
     }
 
-    private Project (Project parent, Gav gav)
+    private Project (Project parent, String path)
     {
         this.parent = parent;
-        this.gav = gav;
+        this.path = path;
     }
 
-    public Project (String groupId, String artifactId, String version)
+    public Project with (Consumer<Project> conf)
     {
-        this(new Gav(groupId, artifactId, version));
-    }
-
-    public Project version (String s)
-    {
-        gav = new Gav(gav.getGroupId(), gav.getArtifactId(), s);
+        conf.accept(this);
         return this;
     }
 
-    public Project group (String s)
+    private Gav gav () { return new Gav(groupId, artifactId, version); }
+
+    public String path () { return path; }
+    private boolean pathIs (String s) { return Paths.get(path).equals(Paths.get(s)); }
+
+    public String group () { return groupId; }
+    public Project group (String s) { groupId = s; return this; }
+
+    public String artifact () { return artifactId; }
+    public Project artifact (String s) { artifactId = s; return this; }
+
+    public String version () { return version; }
+    public Project version (String s) { version = s; return this; }
+
+    public Project dependOn (Gav gav) { dependencies.add(gav); return this; }
+    public Project dependOn (String gav) { return dependOn(Gav.parse(gav)); }
+    public Project dependOn (Project p) { return dependOn(p.gav()); }
+
+    public Project getChild (String path)
     {
-        gav = new Gav(s, gav.getArtifactId(), gav.getVersion());
+        return ensureChild(path);
+    }
+
+    public Project child (String path)
+    {
+        return child(path, c -> {});
+    }
+
+    public Project child (String path, Consumer<Project> configure)
+    {
+        final Project child = ensureChild(path);
+        configure.accept(child);
         return this;
     }
 
-    public Project getChild (String artifactId)
+    private Project ensureChild (String path)
     {
         return children.stream()
-            .filter(p -> p.gav.getArtifactId().equals(artifactId))
-            .findFirst()
-            .orElseGet(() -> createChild(artifactId));
+            .filter(p -> p.pathIs(path))
+            .findAny()
+            .orElseGet(() -> createChild(path));
     }
 
-    private Project createChild (String artifactId)
+    private Project createChild (String path)
     {
-        final Project p = new Project(gav.getGroupId(), artifactId, gav.getVersion());
-        children.add(p);
-        return p;
+        final Path name = Paths.get(path).getFileName();
+        if (name == null) { throw new IllegalArgumentException(path); }
+        final Project child = new Project(path)
+            .group(groupId)
+            .artifact(name.toString())
+            .version(version);
+        children.add(child);
+        return child;
     }
 
-    public Project child (String artifactId)
-    {
-        return child(artifactId, p -> {});
-    }
+    List<Project> children () { return children; }
 
-    public Project child (String artifactId, Consumer<Project> configure)
+    Pom pom ()
     {
-        final Project c = getChild(artifactId);
-        configure.accept(c);
-        return this;
-    }
-
-    public Project dependOn (Gav other)
-    {
-        dependencies.add(other);
-        return this;
-    }
-
-    public Project dependOn (String gav)
-    {
-        return dependOn(Gav.parse(gav));
-    }
-
-    public Project dependOn (Project other)
-    {
-        return dependOn(other.gav);
-    }
-
-    public String name ()
-    {
-        return gav.getArtifactId();
-    }
-
-    public Pom pom ()
-    {
-        final Gav parent = this.parent == null ? null : this.parent.gav;
-        final Pom p = new Pom(parent, gav);
+        final Gav parent = this.parent == null ? null : this.parent.gav();
+        final Pom p = new Pom(parent, gav());
         if (!children.isEmpty())
         {
             p.packaging("pom");
             final List<Project> children = new ArrayList<>(this.children);
-            children.sort((a, b) -> a.name().compareTo(b.name()));
-            children.forEach(c -> p.module(c.name()));
+            children.sort(Comparator.comparing(Project::path));
+            children.forEach(c -> p.module(c.path()));
         }
         p.dependOn(dependencies);
         return p;
-    }
-
-    /**
-     * <p>
-     *     Generate pom.xml files recursively for this project and all its descendants.
-     * </p>
-     *
-     * @param dir
-     * the directory that will contain the pom.xml of this project
-     */
-    public void mavenize (String dir)
-    {
-        doGeneratePom(dir, 16);
-    }
-
-    public Project with (Consumer<Project> configure)
-    {
-        configure.accept(this);
-        return this;
-    }
-
-    private void doGeneratePom (String targetDir, int depthLimit)
-    {
-        final File dir = new File(targetDir);
-        if (!dir.mkdirs() && !dir.isDirectory())
-        {
-            throw new RuntimeException(
-                "Could not create directory: " + dir.getAbsolutePath()
-                    + ". Common causes: you don't have permission to write to some of its parent directories," +
-                    "the filesystem runs out of free space or inode, or the path exists but doesn't point to a directory."
-            );
-        }
-        pom().writeToFile(targetDir + "/pom.xml");
-        children.forEach(c -> c.doGeneratePom(targetDir + "/" + c.name(), depthLimit - 1));
     }
 }

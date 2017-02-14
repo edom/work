@@ -1,5 +1,6 @@
 package com.spacetimecat.build.java.internal;
 
+import com.spacetimecat.build.java.GenerateMavenPomXmlFiles;
 import com.spacetimecat.build.java.Project;
 
 import java.io.File;
@@ -12,7 +13,11 @@ final class Mavenize
         final String jettyVersion = "[9,10)";
         final String logback = "ch.qos.logback:logback-classic:[1.1.7,2)";
         final String slf4j = "org.slf4j:slf4j-api:[1.7.21,2)";
-        new Project("com.spacetimecat", "everything", "0.0.0-SNAPSHOT").with(r -> r
+        final Project project = new Project("")
+        .group("com.spacetimecat")
+        .artifact("everything")
+        .version("0.0.0-SNAPSHOT")
+        .with(r -> r
             .child("app-level-join", c -> c
                 .dependOn(r.getChild("java-lang-function"))
             )
@@ -48,6 +53,7 @@ final class Mavenize
                 .dependOn(r.getChild("java-lang"))
                 .dependOn(r.getChild("xml-dom"))
                 .dependOn(r.getChild("xml-dom-select"))
+                .dependOn("org.apache.maven:maven-model:[3,)")
             )
             .child("java-lang")
             .child("java-lang-function")
@@ -109,6 +115,7 @@ final class Mavenize
             .child("xml-dom-select", c -> c
                 .dependOn(r.getChild("xml-dom"))
             )
-        ).mavenize(root);
+        );
+        new GenerateMavenPomXmlFiles(root, project).run();
     }
 }
