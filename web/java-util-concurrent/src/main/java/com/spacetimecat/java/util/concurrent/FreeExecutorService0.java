@@ -22,6 +22,12 @@ public final class FreeExecutorService0 implements ExecutorService0
     }
 
     @Override
+    public void close ()
+    {
+        shutdown();
+    }
+
+    @Override
     public <T> Future<List<T>> submitAllCallable (Collection<? extends Callable<T>> tasks)
     {
         final List<Future<T>> list = tasks.stream()

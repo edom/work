@@ -12,8 +12,17 @@ import java.util.concurrent.Future;
  *     {@code submit} methods to an {@link ExecutorService}.
  * </p>
  */
-public interface ExecutorService0 extends ExecutorService
+public interface ExecutorService0 extends ExecutorService, AutoCloseable
 {
+    /**
+     * <p>
+     *     This is an alias for {@link #shutdown()}.
+     * </p>
+     *
+     */
+    @Override
+    void close ();
+
     /**
      * <p>
      *     This calls {@link #submit(Callable)} for each task.

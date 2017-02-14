@@ -55,6 +55,12 @@ public final class FixedThreadPool implements ExecutorService0
     // Generated delegates.
 
     @Override
+    public void close ()
+    {
+        shutdown();
+    }
+
+    @Override
     public <T> Future<List<T>> submitAllCallable (Collection<? extends Callable<T>> tasks)
     {
         return inner.submitAllCallable(tasks);
