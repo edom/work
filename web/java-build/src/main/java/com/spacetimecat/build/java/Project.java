@@ -1,11 +1,12 @@
 package com.spacetimecat.build.java;
 
+import org.apache.maven.model.*;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public final class Project
 {
@@ -86,28 +87,85 @@ public final class Project
     {
         final Path name = Paths.get(path).getFileName();
         if (name == null) { throw new IllegalArgumentException(path); }
-        final Project child = new Project(path)
+        final Project child = new Project(this, path)
             .group(groupId)
             .artifact(name.toString())
-            .version(version);
+            .version(version)
+            ;
         children.add(child);
         return child;
     }
 
     List<Project> children () { return children; }
 
-    Pom pom ()
+    Model mavenModel ()
     {
-        final Gav parent = this.parent == null ? null : this.parent.gav();
-        final Pom p = new Pom(parent, gav());
+        final Model m = new Model();
+
+        m.setModelVersion("4.0.0");
+        final Properties properties = new Properties();
+        final String javaVersion = "1.8";
+        properties.put("maven.compiler.source", javaVersion);
+        properties.put("maven.compiler.target", javaVersion);
+        m.setProperties(properties);
+
+        final List<Plugin> defaultPlugins = Arrays.asList(
+            "org.apache.maven.plugins:maven-compiler-plugin:3.6.1"
+            , "org.apache.maven.plugins:maven-resources-plugin:3.0.2"
+            , "org.apache.maven.plugins:maven-site-plugin:3.6"
+        ).stream().map(Gav::parse).map(Project::plugin).collect(Collectors.toList());
+
+        final Build build = new Build();
+        PluginManagement pluginManagement = new PluginManagement();
+        pluginManagement.setPlugins(defaultPlugins);
+        build.setPluginManagement(pluginManagement);
+        m.setBuild(build);
+
+        if (parent != null)
+        {
+            final Parent p = new Parent();
+            p.setGroupId(parent.group());
+            p.setArtifactId(parent.artifact());
+            p.setVersion(parent.version());
+            m.setParent(p);
+        }
         if (!children.isEmpty())
         {
-            p.packaging("pom");
+            m.setPackaging("pom");
             final List<Project> children = new ArrayList<>(this.children);
             children.sort(Comparator.comparing(Project::path));
-            children.forEach(c -> p.module(c.path()));
+            children.forEach(c -> m.addModule(c.path()));
         }
-        p.dependOn(dependencies);
+        m.setGroupId(groupId);
+        m.setArtifactId(artifactId);
+        m.setVersion(version);
+        for (Gav gav : dependencies)
+        {
+            m.addDependency(dependency(gav));
+        }
+        return m;
+    }
+
+    private static Plugin plugin (Gav gav)
+    {
+        final Plugin p = new Plugin();
+        p.setGroupId(gav.getGroupId());
+        p.setArtifactId(gav.getArtifactId());
+        p.setVersion(gav.getVersion());
         return p;
+    }
+
+    private static Dependency dependency (Gav gav)
+    {
+        final Dependency d = new Dependency();
+        d.setGroupId(gav.getGroupId());
+        d.setArtifactId(gav.getArtifactId());
+        d.setVersion(gav.getVersion());
+        return d;
+    }
+
+    private static Dependency dependency (String strGav)
+    {
+        return dependency(Gav.parse(strGav));
     }
 }

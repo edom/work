@@ -1,6 +1,12 @@
 package com.spacetimecat.build.java;
 
+import org.apache.maven.model.Model;
+import org.apache.maven.model.io.xpp3.MavenXpp3Writer;
+
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -47,10 +53,22 @@ public final class GenerateMavenPomXmlFiles
                     "the filesystem runs out of free space or inode, or the path exists but doesn't point to a directory."
             );
         }
-        project.pom().writeToFile(this.dir.resolve("pom.xml").toString());
+        writeTo(project.mavenModel(), this.dir.resolve("pom.xml"));
         project.children().forEach(c ->
             new GenerateMavenPomXmlFiles(this.dir.resolve(c.path()), c)
                 .recur(depthLimit - 1)
         );
+    }
+
+    private static void writeTo (Model self, Path path)
+    {
+        try (FileOutputStream s = new FileOutputStream(path.toFile()))
+        {
+            new MavenXpp3Writer().write(s, self);
+        }
+        catch (IOException e)
+        {
+            throw new UncheckedIOException(e);
+        }
     }
 }
