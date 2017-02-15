@@ -1,6 +1,6 @@
 package com.spacetimecat.planner.web.dropwizard;
 
-import com.spacetimecat.planner.web.jaxrs.WebsiteResource;
+import com.spacetimecat.planner.web.WebsiteResource;
 import com.spacetimecat.web.load.Load;
 import com.spacetimecat.web.load.LoadFileBasic;
 import com.spacetimecat.web.view.FileTemplate;

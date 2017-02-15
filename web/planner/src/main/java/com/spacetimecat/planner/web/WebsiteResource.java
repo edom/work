@@ -1,4 +1,4 @@
-package com.spacetimecat.planner.web.jaxrs;
+package com.spacetimecat.planner.web;
 
 import com.spacetimecat.web.load.Content;
 import com.spacetimecat.web.load.Load;
