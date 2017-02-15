@@ -6,6 +6,8 @@ import java.io.RandomAccessFile;
 import java.io.UncheckedIOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>
@@ -25,7 +27,7 @@ public final class LoadFileBasic implements Load
     public Content load (String name)
     {
         final Path path = resolve(name);
-        final String type = typeOf(path);
+        final String type = typeOf(name);
         final byte[] data = read(path);
         return new Content(type, data);
     }
@@ -61,11 +63,27 @@ public final class LoadFileBasic implements Load
         }
     }
 
-    private static String typeOf (Path path)
+    private static final Map<String, String> contentType = new HashMap<>();
+    static
     {
-        final String name = path.getFileName().toString().toLowerCase();
-        if (name.endsWith(".css")) { return "text/css;charset=UTF-8"; }
-        if (name.endsWith(".js")) { return "application/javascript"; }
-        throw new UnmappedFileTypeException(path.toString());
+        contentType.put("css", "text/css;charset=UTF-8");
+        contentType.put("js", "application/javascript");
+        contentType.put("htm", "text/html;charset=UTF-8");
+        contentType.put("html", "text/html;charset=UTF-8");
+    }
+
+    static String typeOf (String name)
+    {
+        final String e = extensionOf(name).toLowerCase();
+        final String t = contentType.get(e);
+        if (t != null) { return t; }
+        throw new UnmappedFileTypeException(name);
+    }
+
+    private static String extensionOf (String name)
+    {
+        final int i = name.lastIndexOf('.');
+        if (i < 0) { return ""; }
+        return name.substring(i + 1);
     }
 }
