@@ -1,0 +1,64 @@
+#!/bin/bash
+
+set -e
+
+outputClasspathFile="classpath"
+
+defined ()
+{
+    local name="$1"
+    [ ! -z ${!name+x} ]
+}
+
+need ()
+{
+    local name="$1"
+    if ! defined "$name"; then
+        echo "Please set this environment variable first: $name"
+        exit 1
+    fi
+}
+
+download ()
+{
+    need groupId
+    need artifactId
+    need version
+    mvn validate \
+        "-Drun.groupId=$groupId" \
+        "-Drun.artifactId=$artifactId" \
+        "-Drun.version=$version" \
+        "-Drun.outputClasspathFile=$outputClasspathFile"
+}
+
+run ()
+{
+    java -classpath "$(<$outputClasspathFile)" "$@"
+}
+
+main ()
+{
+    local cmd="$1"
+    shift
+    case "$cmd" in
+        download)
+            download
+            ;;
+        run)
+            download
+            run "$@"
+            ;;
+        run-stale)
+            if [ ! -f "$outputClasspathFile" ]; then
+                download
+            fi
+            run "$@"
+            ;;
+        *)
+            echo "Unknown command: $cmd"
+            return 1
+            ;;
+    esac
+}
+
+main "$@"

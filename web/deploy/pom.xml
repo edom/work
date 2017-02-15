@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This project is a dummy project.
+Don't install and don't deploy this.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.spacetimecat.maven.internal.dummy</groupId>
+    <artifactId>download-transitive-dependencies</artifactId>
+    <version>0.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <dependencies>
+        <dependency>
+            <!--
+            This makes Maven download the following artifact
+            and all of its transitive dependencies
+            into the local repository
+            (usually $HOME/.m2/repository).
+            -->
+            <groupId>${run.groupId}</groupId>
+            <artifactId>${run.artifactId}</artifactId>
+            <version>${run.version}</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <!--
+                The 'dependency:build-classpath' goal generates a file
+                whose content can be passed to the '-classpath' parameter
+                of the 'java' executable for running JARs in the local repository.
+                -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <!-- We don't care too much about the phase. -->
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>build-classpath</goal>
+                        </goals>
+                        <configuration>
+                            <outputFile>${run.outputClasspathFile}</outputFile>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                            <overWriteSnapshots>true</overWriteSnapshots>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
