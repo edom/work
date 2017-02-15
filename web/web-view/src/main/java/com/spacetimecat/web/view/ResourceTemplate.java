@@ -27,6 +27,18 @@ public final class ResourceTemplate implements Template
         }
     }
 
+    public ResourceTemplate (ClassLoader base, String path, String baseUri)
+    {
+        try (InputStream source = base.getResourceAsStream(path))
+        {
+            document = new Document2(Jsoup.parse(source, "UTF-8", baseUri));
+        }
+        catch (IOException e)
+        {
+            throw new UncheckedIOException(e);
+        }
+    }
+
     @Override
     public Document2 instantiate ()
     {
