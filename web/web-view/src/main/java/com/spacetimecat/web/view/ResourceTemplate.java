@@ -15,6 +15,7 @@ public final class ResourceTemplate implements Template
 {
     private final Document2 document;
 
+    @Deprecated
     public ResourceTemplate (Class<?> base, String path, String baseUri)
     {
         try (InputStream source = base.getResourceAsStream(path))
