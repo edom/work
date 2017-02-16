@@ -2,7 +2,10 @@
 
 set -e
 
-outputClasspathFile="classpath"
+currentDir="$(pwd)"
+scriptDir="$(dirname "$0")"
+
+outputClasspathFile="$currentDir/classpath"
 
 defined ()
 {
@@ -24,11 +27,13 @@ download ()
     need groupId
     need artifactId
     need version
-    mvn validate \
+    mvn \
+        -f "$scriptDir/pom.xml" \
         "-Drun.groupId=$groupId" \
         "-Drun.artifactId=$artifactId" \
         "-Drun.version=$version" \
-        "-Drun.outputClasspathFile=$outputClasspathFile"
+        "-Drun.outputClasspathFile=$outputClasspathFile" \
+        validate
 }
 
 run ()
