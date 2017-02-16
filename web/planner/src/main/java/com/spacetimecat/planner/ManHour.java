@@ -13,4 +13,10 @@ public final class ManHour
     {
         return value;
     }
+
+    @Override
+    public String toString ()
+    {
+        return String.format("%d man-hour", value);
+    }
 }

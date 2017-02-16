@@ -1,6 +1,9 @@
 package com.spacetimecat.web.view;
 
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import java.util.function.Consumer;
 
 public class Selection2
 {
@@ -25,6 +28,11 @@ public class Selection2
     public final void setText (String text)
     {
         elements.forEach(element -> element.text(text));
+    }
+
+    public final void setText (Object text)
+    {
+        elements.forEach(element -> element.text(text.toString()));
     }
 
     public final void setValue (String value)
@@ -53,5 +61,10 @@ public class Selection2
     public final void setInnerHtml (String html)
     {
         elements.html(html);
+    }
+
+    public void forEach (Consumer<? super Element> action)
+    {
+        elements.forEach(action);
     }
 }

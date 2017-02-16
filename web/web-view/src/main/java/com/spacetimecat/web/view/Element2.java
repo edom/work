@@ -48,6 +48,11 @@ public class Element2
         this.element.appendChild(element.unwrap());
     }
 
+    public final void appendText (String text)
+    {
+        this.element.appendText(text);
+    }
+
     public final void remove ()
     {
         element.remove();

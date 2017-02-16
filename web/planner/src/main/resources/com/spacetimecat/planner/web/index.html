@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <title>Planner</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,16 +9,20 @@
 </body>
     <div class="outerMargin">
         <div class="innerMargin">
-            <form>
-                <h1>Add milestone</h1>
+            <h1>Milestones</h1>
+            <p class="milestoneCountMessage zero">You don't have any milestones.</p>
+            <p class="milestoneCountMessage one">You have 1 milestone.</p>
+            <p class="milestoneCountMessage many">You have <span class="milestoneCount">many</span> milestones.</p>
+            <ul></ul>
+            <form method="post" action="milestone-add">
+                <h2>Add milestone</h2>
                 <label>
-                    Write one sentence describing what you want to see.
-                    Don't think about how.
-                    <textarea name="description"></textarea>
+                    Describe what you want to see in one sentence. Don't think about how.
+                    <textarea name="description" placeholder="Description"></textarea>
                 </label>
                 <label>
-                    Guess when you will arrive at that milestone.
-                    <input type="date" name="deadline" placeholder="YYYY-MM-DD">
+                    Guess how many man-hours you need to reach that.
+                    <input type="number" name="effort" placeholder="Effort">
                 </label>
                 <button>Add milestone</button>
             </form>
