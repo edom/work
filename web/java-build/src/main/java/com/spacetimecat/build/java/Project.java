@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 public final class Project
 {
     private final List<Gav> dependencies = new ArrayList<>();
+    private final List<Gav> plugins = new ArrayList<>();
     private final List<Project> children = new ArrayList<>();
     private final String path;
     private final Project parent;
@@ -61,6 +62,9 @@ public final class Project
     public Project dependOn (Gav gav) { dependencies.add(gav); return this; }
     public Project dependOn (String gav) { return dependOn(Gav.parse(gav)); }
     public Project dependOn (Project p) { return dependOn(p.gav()); }
+
+    public Project plugin (Gav gav) { plugins.add(gav); return this; }
+    public Project plugin (String gav) { return plugin(Gav.parse(gav)); }
 
     public Project getChild (String path)
     {
@@ -113,17 +117,15 @@ public final class Project
         properties.put("maven.compiler.target", javaVersion);
         m.setProperties(properties);
 
-        final List<Plugin> defaultPlugins = Arrays.asList(
-            "org.apache.maven.plugins:maven-compiler-plugin:3.6.1"
-            , "org.apache.maven.plugins:maven-resources-plugin:3.0.2"
-            , "org.apache.maven.plugins:maven-site-plugin:3.6"
-        ).stream().map(Gav::parse).map(Project::plugin).collect(Collectors.toList());
-
-        final Build build = new Build();
-        PluginManagement pluginManagement = new PluginManagement();
-        pluginManagement.setPlugins(defaultPlugins);
-        build.setPluginManagement(pluginManagement);
-        m.setBuild(build);
+        final List<Plugin> mavenPlugins = plugins.stream().map(Project::createPlugin).collect(Collectors.toList());
+        if (!mavenPlugins.isEmpty())
+        {
+            final Build build = new Build();
+            PluginManagement pluginManagement = new PluginManagement();
+            pluginManagement.setPlugins(mavenPlugins);
+            build.setPluginManagement(pluginManagement);
+            m.setBuild(build);
+        }
 
         if (parent != null)
         {
@@ -133,13 +135,13 @@ public final class Project
             p.setVersion(parent.version());
             m.setParent(p);
         }
-        if (!children.isEmpty())
-        {
-            m.setPackaging("pom");
-            final List<Project> children = new ArrayList<>(this.children);
-            children.sort(Comparator.comparing(Project::path));
-            children.forEach(c -> m.addModule(c.path()));
-        }
+        final String effectivePackaging = children.isEmpty() ? packaging : "pom";
+
+        final List<Project> children = new ArrayList<>(this.children);
+        children.sort(Comparator.comparing(Project::path));
+        children.forEach(c -> m.addModule(c.path()));
+
+        m.setPackaging(effectivePackaging);
         m.setGroupId(groupId);
         m.setArtifactId(artifactId);
         m.setVersion(version);
@@ -150,7 +152,7 @@ public final class Project
         return m;
     }
 
-    private static Plugin plugin (Gav gav)
+    private static Plugin createPlugin (Gav gav)
     {
         final Plugin p = new Plugin();
         p.setGroupId(gav.getGroupId());
