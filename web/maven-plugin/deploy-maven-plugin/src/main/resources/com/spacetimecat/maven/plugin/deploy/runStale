@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# This file will be overwritten. Do not edit.
+
+main ()
+{
+    set -e
+
+    local scriptDir="$(dirname "$0")"
+
+    cd "$scriptDir"
+
+    # Build the command line.
+
+    local arg=
+    local -a args=()
+
+    args+=(java)
+    args+=(-cp)
+    args+=("$(<ClassPath)")
+
+    while read arg; do
+        args+=("$arg")
+    done < JavaArguments
+
+    args+=("$(<MainClass)")
+    args+=("$@")
+
+    "${args[@]}"
+}
+
+main "$@"

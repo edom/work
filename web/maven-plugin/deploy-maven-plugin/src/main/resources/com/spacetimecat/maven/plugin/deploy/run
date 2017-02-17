@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# This file will be overwritten. Do not edit.
+
+main ()
+{
+    set -e
+
+    local scriptDir="$(dirname "$0")"
+
+    cd "$scriptDir"
+
+    ./download
+    ./runStale "$@"
+}
+
+main "$@"

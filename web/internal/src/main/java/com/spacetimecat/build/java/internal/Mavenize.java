@@ -59,6 +59,16 @@ final class Mavenize
             .child("java-lang")
             .child("java-lang-function")
             .child("java-util-concurrent")
+            .child("maven-plugin", mp -> mp
+                .group("com.spacetimecat.maven.plugin")
+                .plugin("org.apache.maven.plugins:maven-plugin-plugin:3.5")
+                .child("deploy-maven-plugin", c -> c
+                    .packaging("maven-plugin")
+                    .version("0.0.0-SNAPSHOT")
+                    .dependOn("org.apache.maven:maven-plugin-api:3.3.9")
+                    .dependOn("org.apache.maven.plugin-tools:maven-plugin-annotations:3.5")
+                )
+            )
             .child("planner", c -> c
                 .dependOn("io.dropwizard:dropwizard-core:1.0.6")
                 .dependOn(r.getChild("web-view"))

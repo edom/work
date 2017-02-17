@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
+This file will be overwritten. Do not edit.
+
 This project is a dummy project.
 Don't install and don't deploy this.
 -->
@@ -17,9 +19,9 @@ Don't install and don't deploy this.
             into the local repository
             (usually $HOME/.m2/repository).
             -->
-            <groupId>${run.groupId}</groupId>
-            <artifactId>${run.artifactId}</artifactId>
-            <version>${run.version}</version>
+            <groupId>${groupId}</groupId>
+            <artifactId>${artifactId}</artifactId>
+            <version>${version}</version>
         </dependency>
     </dependencies>
     <build>
@@ -41,7 +43,7 @@ Don't install and don't deploy this.
                             <goal>build-classpath</goal>
                         </goals>
                         <configuration>
-                            <outputFile>${run.outputClasspathFile}</outputFile>
+                            <outputFile>ClassPath</outputFile>
                             <overWriteIfNewer>true</overWriteIfNewer>
                             <overWriteSnapshots>true</overWriteSnapshots>
                         </configuration>
