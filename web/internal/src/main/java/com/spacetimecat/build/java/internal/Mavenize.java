@@ -17,6 +17,9 @@ final class Mavenize
         .group("com.spacetimecat")
         .artifact("everything")
         .version("0.0.0-SNAPSHOT")
+        .plugin("org.apache.maven.plugins:maven-compiler-plugin:3.6.1")
+        .plugin("org.apache.maven.plugins:maven-resources-plugin:3.0.2")
+        .plugin("org.apache.maven.plugins:maven-site-plugin:3.6")
         .with(r -> r
             .child("app-level-join", c -> c
                 .dependOn(r.getChild("java-lang-function"))
