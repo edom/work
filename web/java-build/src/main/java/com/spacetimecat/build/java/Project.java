@@ -19,6 +19,7 @@ public final class Project
     private String artifactId = "artifactId";
     private String version = "0.0.0-SNAPSHOT";
     private String packaging = "jar";
+    private String minMavenVersion;
 
     /**
      * @param path
@@ -65,6 +66,8 @@ public final class Project
 
     public Project plugin (Gav gav) { plugins.add(gav); return this; }
     public Project plugin (String gav) { return plugin(Gav.parse(gav)); }
+
+    public Project minMavenVersion (String v) { minMavenVersion = v; return this; }
 
     public Project getChild (String path)
     {
@@ -135,6 +138,14 @@ public final class Project
             p.setVersion(parent.version());
             m.setParent(p);
         }
+
+        if (minMavenVersion != null)
+        {
+            final Prerequisites p = new Prerequisites();
+            p.setMaven(minMavenVersion);
+            m.setPrerequisites(p);
+        }
+
         final String effectivePackaging = children.isEmpty() ? packaging : "pom";
 
         final List<Project> children = new ArrayList<>(this.children);
