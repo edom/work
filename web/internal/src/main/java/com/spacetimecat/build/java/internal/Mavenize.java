@@ -16,31 +16,43 @@ final class Mavenize
         final Project project = new Project("")
         .group("com.spacetimecat")
         .artifact("everything")
-        .version("0.0.0-SNAPSHOT")
+        .version("0.0.0")
         .plugin("org.apache.maven.plugins:maven-compiler-plugin:3.6.1")
         .plugin("org.apache.maven.plugins:maven-resources-plugin:3.0.2")
         .plugin("org.apache.maven.plugins:maven-site-plugin:3.6")
         .with(r -> r
             .child("app-level-join", c -> c
+                .version("0.0.0-SNAPSHOT")
                 .dependOn(r.getChild("java-lang-function"))
             )
             .child("concurrent", concurrent -> concurrent
-                .child("batch", c -> c.dependOn(r.getChild("java-lang")))
-                .child("lock", c -> c.dependOn(r.getChild("java-lang")))
+                .version("0.0.0")
+                .child("batch", c -> c
+                    .version("0.0.0-SNAPSHOT")
+                    .dependOn(r.getChild("java-lang"))
+                )
+                .child("lock", c -> c
+                    .version("0.0.0")
+                    .dependOn(r.getChild("java-lang"))
+                )
                 .child("lock-client", c -> c
+                    .version("0.0.0")
                     .dependOn(concurrent.getChild("lock-network"))
                     .dependOn(logback)
                     .dependOn(slf4j)
                 )
                 .child("lock-example", c -> c
+                    .version("0.0.0-SNAPSHOT")
                     .dependOn(concurrent.getChild("lock-client"))
                     .dependOn(concurrent.getChild("lock-server"))
                 )
                 .child("lock-network", c -> c
+                    .version("0.0.0")
                     .dependOn(concurrent.getChild("lock"))
                     .dependOn(r.getChild("server"))
                 )
                 .child("lock-server", c -> c
+                    .version("0.0.0")
                     .dependOn(concurrent.getChild("lock-network"))
                     .dependOn(r.getChild("server"))
                     .dependOn(logback)
@@ -48,23 +60,34 @@ final class Mavenize
                 )
             )
             .child("internal", i -> i
+                .version("0.0.0-SNAPSHOT")
                 .group("com.spacetimecat.internal")
                 .dependOn(r.getChild("java-build"))
             )
-            .child("io")
+            .child("io", c ->
+                c.version("0.0.0")
+            )
             .child("java-build", c -> c
+                .version("0.0.0-SNAPSHOT")
                 .dependOn(r.getChild("java-lang"))
                 .dependOn("org.apache.maven:maven-model:[3,)")
             )
-            .child("java-lang")
-            .child("java-lang-function")
-            .child("java-util-concurrent")
+            .child("java-lang", c -> c
+                .version("0.0.0")
+            )
+            .child("java-lang-function", c -> c
+                .version("0.0.0")
+            )
+            .child("java-util-concurrent", c -> c
+                .version("0.0.0")
+            )
             .child("maven-plugin", mp -> mp
                 .group("com.spacetimecat.maven.plugin")
+                .version("0.0.0")
                 .plugin("org.apache.maven.plugins:maven-plugin-plugin:3.5")
                 .child("deploy-maven-plugin", c -> c
                     .packaging("maven-plugin")
-                    .version("0.0.0-SNAPSHOT")
+                    .version("0.0.0")
                     .dependOn("org.apache.maven:maven-plugin-api:3.3.9")
                     .dependOn("org.apache.maven.plugin-tools:maven-plugin-annotations:3.5")
                 )
@@ -78,6 +101,7 @@ final class Mavenize
                 .dependOn("org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final")
             )
             .child("server", c -> c
+                .version("0.0.0")
                 .dependOn(r.getChild("io"))
             )
             .child("web-all", c -> c
