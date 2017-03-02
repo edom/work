@@ -9,7 +9,7 @@ with the appropriate values.
 
 ```
 mvn \
-    com.spacetimecat.maven.plugin:deploy-maven-plugin:0.0.0-SNAPSHOT:deploy \
+    com.spacetimecat.maven.plugin:deploy-maven-plugin:0.0.0:deploy \
     -DgroupId=GroupId \
     -DartifactId=ArtifactId \
     -Dversion=Version \
