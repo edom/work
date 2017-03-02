@@ -35,3 +35,16 @@ port=Port ./run
 ### The client
 
 See [ClientMain.java](lock-example/src/main/java/com/spacetimecat/concurrent/lock/example/ClientMain.java).
+
+## The idea
+
+Given a key-value store, we can make a lock server.
+
+Acquiring a lock is setting the corresponding key in the store.
+If we manage to change the store, we own the lock.
+Otherwise we don't own the lock.
+
+Releasing a lock is removing the corresponding key from the store.
+
+The lock is advisory.
+You can release a lock you don't own.
