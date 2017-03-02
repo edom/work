@@ -49,8 +49,11 @@ public final class ServerMain implements Runnable, AutoCloseable
 
     public static void main (String[] args)
     {
-        final Config config = new Config(System.getProperties());
+        final Config config = new Config(System.getenv());
         final int port = config.getPort();
-        new ServerMain(port);
+        try (ServerMain s = new ServerMain(port))
+        {
+            s.run();
+        }
     }
 }
