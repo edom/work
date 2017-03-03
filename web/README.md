@@ -19,11 +19,26 @@
         * I made this stylesheet because Java 8's default stylesheet
         uses monospaced font for parameter description.
 
+## Notes on the pom.xml files
+
+Do not edit pom.xml files manually. They are generated.
+
+To delete all pom.xml files,
+cd to the directory containing this readme,
+and run this:
+
+```
+find -name pom.xml -delete
+```
+
+To generate the pom.xml files, use IntelliJ IDEA to run
+[Mavenize.java](/internal/src/main/java/com/spacetimecat/build/java/internal/Mavenize.java).
+
 ## Other documents
 
 * [How to use](usage.md)
 * [How to develop](develop.md)
-* [How to deploy](deploy.md)
+* [How to deploy](deploy/)
 * [List of things brewing in this repository](list.md)
 * [Javadoc](https://edom.github.com/java-doc/index.html) for everything in this repository
 * [Design principles](design.md)

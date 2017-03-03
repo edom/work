@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Run from this directory.
+
+main ()
+{
+    local scriptDir="$(pwd)"
+
+    cd ..
+
+    # Match the id here with the server id in settings.xml.
+    # Make sure that settings.xml contains the correct username and password.
+
+    local id='spacetimecat'
+    local layout='default'
+
+    # Replace this with your repository URL.
+    # The release repository must allow redeploy.
+
+    local releaseUrl='https://example.invalid/repository/maven-releases'
+    local snapshotUrl='https://example.invalid/repository/maven-snapshots'
+
+    local releaseRepository="$id::$layout::$releaseUrl"
+    local snapshotRepository="$id::$layout::$snapshotUrl"
+
+    mvn \
+        -s "$scriptDir/settings.xml" \
+        "-DaltReleaseDeploymentRepository=$releaseRepository" \
+        "-DaltSnapshotDeploymentRepository=$snapshotRepository" \
+        deploy \
+        "$@"
+}
+
+main "$@"
