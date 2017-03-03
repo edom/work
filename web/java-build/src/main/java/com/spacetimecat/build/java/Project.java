@@ -4,13 +4,16 @@ import org.apache.maven.model.*;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Properties;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-public final class Project
+public final class Project implements HasGav
 {
-    private final List<Gav> dependencies = new ArrayList<>();
+    private final List<HasGav> dependencies = new ArrayList<>();
     private final List<Gav> plugins = new ArrayList<>();
     private final List<Project> children = new ArrayList<>();
     private final String path;
@@ -54,15 +57,33 @@ public final class Project
     public String group () { return groupId; }
     public Project group (String s) { groupId = s; return this; }
 
+    @Override
+    public String getGroupId ()
+    {
+        return groupId;
+    }
+
     public String artifact () { return artifactId; }
     public Project artifact (String s) { artifactId = s; return this; }
+
+    @Override
+    public String getArtifactId ()
+    {
+        return artifactId;
+    }
 
     public String version () { return version; }
     public Project version (String s) { version = s; return this; }
 
+    @Override
+    public String getVersion ()
+    {
+        return version;
+    }
+
     public Project dependOn (Gav gav) { dependencies.add(gav); return this; }
     public Project dependOn (String gav) { return dependOn(Gav.parse(gav)); }
-    public Project dependOn (Project p) { return dependOn(p.gav()); }
+    public Project dependOn (Project p) { dependencies.add(p); return this; }
 
     public Project plugin (Gav gav) { plugins.add(gav); return this; }
     public Project plugin (String gav) { return plugin(Gav.parse(gav)); }
@@ -156,7 +177,7 @@ public final class Project
         m.setGroupId(groupId);
         m.setArtifactId(artifactId);
         m.setVersion(version);
-        for (Gav gav : dependencies)
+        for (HasGav gav : dependencies)
         {
             m.addDependency(dependency(gav));
         }
@@ -172,7 +193,7 @@ public final class Project
         return p;
     }
 
-    private static Dependency dependency (Gav gav)
+    private static Dependency dependency (HasGav gav)
     {
         final Dependency d = new Dependency();
         d.setGroupId(gav.getGroupId());

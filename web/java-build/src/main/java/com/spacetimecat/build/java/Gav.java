@@ -2,7 +2,7 @@ package com.spacetimecat.build.java;
 
 import java.util.Objects;
 
-final class Gav
+final class Gav implements HasGav
 {
     private final String groupId;
     private final String artifactId;
@@ -32,16 +32,19 @@ final class Gav
         return new Gav(c[0], c[1], c[2]);
     }
 
+    @Override
     public String getGroupId ()
     {
         return groupId;
     }
 
+    @Override
     public String getArtifactId ()
     {
         return artifactId;
     }
 
+    @Override
     public String getVersion ()
     {
         return version;
