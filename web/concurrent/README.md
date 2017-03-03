@@ -32,9 +32,29 @@ cd lock-server
 port=Port ./run
 ```
 
-### The client
+### Depending on the client library
 
-See [ClientMain.java](lock-example/src/main/java/com/spacetimecat/concurrent/lock/example/ClientMain.java).
+If you are using Maven, add this to the `dependencies` section
+of your `pom.xml`:
+
+```
+<dependency>
+  <groupId>com.spacetimecat</groupId>
+  <artifactId>lock-client</artifactId>
+  <version>0.0.0</version>
+</dependency>
+```
+
+If you are using Gradle, add this to your `build.gradle`:
+
+```
+compile 'com.spacetimecat:lock-client:0.0.0'
+```
+
+### Using the client library
+
+For example, see
+[ClientMain.java](lock-example/src/main/java/com/spacetimecat/concurrent/lock/example/ClientMain.java).
 
 ## The idea
 
