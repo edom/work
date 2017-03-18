@@ -1,12 +1,8 @@
 #!/bin/bash
 
-# Run from this directory.
-
 main ()
 {
-    local scriptDir="$(pwd)"
-
-    cd ..
+    local scriptDir="$(dirname "$0")"
 
     # Match the id here with the server id in settings.xml.
     # Make sure that settings.xml contains the correct username and password.

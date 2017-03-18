@@ -1,4 +1,4 @@
-# Deploying
+# Releasing
 
 This directory will help you upload all libraries in this Git repository
 to your Maven repository.
@@ -9,16 +9,17 @@ to your Maven repository.
 
 1. In `settings.xml`,
 put a username and its password for uploading to your Maven repository.
-1. In `deploy` script,
-set the `url` variable to the URL of your repository.
+1. In `release` script,
+set the `releaseUrl` and `snapshotUrl`
+variable to the URL of your release and snapshot repository, respectively.
 
 ### Uploading everything
 
 Run the following command
-in the directory containing this readme:
+in the directory containing the root pom.xml file:
 
 ```
-./deploy
+release/release
 ```
 
 #### Cleaning your local Maven repository

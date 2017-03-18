@@ -38,7 +38,7 @@ To generate the pom.xml files, use IntelliJ IDEA to run
 
 * [How to use](usage.md)
 * [How to develop](develop.md)
-* [How to deploy](deploy/)
+* [How to upload everything to your Maven repository](release/)
 * [List of things brewing in this repository](list.md)
 * [Javadoc](https://edom.github.com/java-doc/index.html) for everything in this repository
 * [Design principles](design.md)
