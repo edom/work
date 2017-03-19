@@ -1,0 +1,276 @@
+\chapter{Computation}
+
+\section{Turing machine}
+
+Turing machine as mono-unary algebra of states (configuration-tape pairs).
+Universal Turing machine.
+
+Lambda calculus.
+Recursive functions.
+
+\emph{A Turing machine is a finite-state machine with read-write memory.}
+How do we model finite-state machine?
+How do we model read-write memory?
+
+Let \(m\) be a Turing machine.
+
+Let \(A\) be the alphabet.
+It is finite.
+
+Let \(S\) be the state type.
+It is finite.
+
+Let \(P = (S,T)\) be the phase type.
+
+Let \(T = (A^\infty,A,A^\infty)\) be the tape type.
+
+Define the \emph{phase} of \(m\) as \((s,t)\)
+where \(s\) is the \emph{state} and \(t\) is the \emph{tape}.
+
+A tape is \((L,h,R) : (A^\infty,A,A^\infty)\).
+
+Define the transition function \(\after : P \to P\).
+
+The pluggable parts of the machine are
+the alphabet type \(A\),
+the state type \(S\),
+the next-state function \(\jump : (S,A) \to S\),
+the output-symbol function \(\fwrite : (S,A) \to A\),
+and the direction function \(\dir : (S,A) \to \{0,1\}\).
+The \(\jump\) computes the next state.
+The \(\fwrite\) function computes the symbol to write.
+The \(\dir\) function computes where the head should move after writing that symbol.
+
+The tape is \((L,h,R)\).
+The string \(L\) is the \emph{reverse} of the string on the left of the head.
+The symbol \(h\) is the symbol at the head.
+The string \(R\) is the string on the right of the head.
+
+Here comes an equational description of a Turing machine.
+For readability, we don't use the minimum number of equations.
+
+\section{The fixed parts}
+
+A Turing machine must satisfy all of these.
+These are the parts we cannot change.
+
+The types.
+\begin{align}
+    P &= (S,T)
+    \\
+    T &= (\InfList~A, ~ A, ~ \InfList~A)
+    \\
+    \after &: P \to P
+\end{align}
+
+The logical constraints.
+\begin{align}
+    S &\text{ is finite}
+    \\
+    A &\text{ is finite}
+\end{align}
+
+The value definitions:
+\begin{align}
+    \after~(s,t) &= (s',t')
+    \\
+    t &= (L,h,R)
+    \\
+    s' &= \jump~i
+    \\
+    t' &= \dir~\stay~\fleft~\fright~i~(L,w,R)
+    \\
+    i &= (s,h)
+    \\
+    w &= \foutput~i
+    \\
+    \stay~(L,h,R) &= (L,h,R)
+    \\
+    \fleft~(cL,h,R) &= (L,c,hR)
+    \\
+    \fright~(L,h,cR) &= (hL,c,R)
+\end{align}
+
+We try to avoid pattern matching:
+\begin{align}
+    t' &= (L',h',R')
+    \\
+    w &= \foutput~i
+    \\
+    L' &= \dir~\stay_0~\fleft_0~\fright_0~L
+    \\
+    h' &= \dir~\stay_1~\fleft_1~\fright_1~L~w~R
+    \\
+    R' &= \dir~\stay_2~\fleft_2~\fright_2~R
+    \\
+    \stay~(L,h,R) &= (L,h,R)
+    \\
+    \fleft~(L,h,R) &= (\tail~L, \head~L, \cons~h~R)
+    \\
+    \fright~(L,h,R) &= (\cons~h~L, \head~R, \tail~R)
+    \\
+    \stay_0~L &= L
+    \\
+    \fleft_0~L &= \tail~L
+    \\
+    \fright_0~L &= \cons~L
+    \\
+    \stay_1~h &= h
+    \\
+    \fleft_1~L &= \head~L
+    \\
+    \fright_1~R &= \head~R
+    \\
+    \stay_2~R &= R
+    \\
+    \fleft_2~R &= \cons~R
+    \\
+    \fright_2~R &= \tail~R
+    \\
+    \stay_0 &= \stay_2
+    \\
+    \fleft_0 &= \fright_2
+    \\
+    \fright_0 &= \fleft_2
+    \\
+    \fleft_1 &= \fright_1
+\end{align}
+
+Some note about the notations:
+We write \(A^\infty\) for the set of all infinite strings of \(A\).
+
+\section{The pluggable parts}
+
+There are the parts we can change.
+\begin{align}
+    s_0 &= \text{the initial state}
+    \\
+    S &= \text{the set of states}
+    \\
+    A &= \text{the set of symbols}
+    \\
+    \jump &= \text{a function of type \((S,A) \to S\)}
+    \\
+    \foutput &= \text{a function of type \((S,A) \to A\)}
+    \\
+    \dir &= \text{a function of type \(\forall a ~.~ a \to a \to a \to (S,A) \to a\)}
+\end{align}
+
+If you have the pluggable parts,
+the equations will give you a Turing machine.
+
+\section{Some definitions}
+
+The input is the initial phase.
+
+Let \(x = (s,t)\).
+We say that \(x\) is an \emph{initial} phase iff \(s = s_0\).
+We say that \(x\) is a \emph{halting} phase iff \(\after~x = x\).
+
+The \emph{phase graph} is defined as follows.
+Its vertex set is the set of all phases.
+An edge \((x,y)\) is in the graph iff \(\after~x = y\).
+
+We say that \(x\) \emph{eventually leads} to \(y\) iff
+there is a path from \(x\) to \(y\) in the phase graph.
+
+We say that the machine \emph{halts for input \(t\)} iff
+\((s_0,t)\) eventually leads to a halting phase.
+
+Let the alphabet be \(A = \{b,0,1\}\) where \(b\) is the blank symbol.
+Let \(B = \ldots bbb \ldots\) be an infinite string of blank symbols.
+We say that the machine \emph{accepts the input \(t\)} iff
+the phase \((s_0,t)\) eventually leads to the phase \((s, (B,1,B))\)
+where \(s\) can be any state.
+
+\section{Turing machine as constrained unary algebra}
+
+A Turing machine is a unary algebra with a limited transition function.
+It can only read and write at the head.
+
+We can encode an infinite stream of \(a\)
+as the infinite type \(S~a = (a \to b) \to (S~a \to b) \to b\).
+
+\emph{A Turing machine is a finite state machine with memory.}
+
+A finite state machine has input, but no memory.
+
+We can encode memory as infinite feedforward.
+
+A finite state machine step function is a function \((S,I) \to (S,O)\).
+
+\section{Machine}
+
+A machine that can only change one cell at a time.
+A machine is
+\((P, f)\)
+where \(P = (S,A^\infty)\)
+and
+\(d~x~(f~x) \le 1\)
+for all \(x : P\).
+The state set \(S\) is finite.
+The alphabet \(A\) is finite.
+Define the distance between two phases as
+\begin{align}
+    d~(s,x)~(t,y) = \sum_{k : \Nat} ~ [x_k \neq y_k].
+\end{align}
+It ignores the state.
+It only cares about the memory.
+
+But unlike Turing machines, this machine cannot approach an infinite number of 1s...
+
+The machine is free to change its state as long as it only changes at most one cell at a time.
+If we remove the restriction, we get a nondeterministic machine,
+or even an oracle.
+
+If \(S\) has exactly \(n\) elements,
+we can encode \(f : S \to A\) as \(g : A^n\)
+where \(f~s_k = g_k\) where \(g = (f~s_1, \ldots, f~s_n)\).
+
+\section{Logical formulation of Turing machine}
+
+We can encode a function \(f : A \to B\) as a predicate \(f' : A \to B \to Bool\) such that \(f'~a~b\) iff \(f~a = b\).
+
+If you have the predicates \(\jump\), \(\fwrite\), \(\stay\), \(\fleft\), and \(\fright\),
+and an initial state and initial tape,
+then the Turing machine generator will give you the following inference rules.
+You can rewrite the rules in Prolog.
+Prolog will then simulate that Turing machine.
+\begin{align}
+    \inferrule
+    {\fwrite~s~h~w \\ \stay~s~h}
+    {\tape~s~(L,h,R)~(L,w,R)}
+    \\
+    \inferrule
+    {\cons~h'~L'~L \\ \cons~w~R~R' \\ \fwrite~s~h~w \\ \fleft~s~h}
+    {\tape~s~(L,h,R)~(L',h',R')}
+    \\
+    \inferrule
+    {\cons~w~L~L' \\ \cons~h'~R'~R \\ \fwrite~s~h~w \\ \fright~s~h}
+    {\tape~s~(L,h,R)~(L',h',R')}
+    \\
+    \inferrule
+    {\jump~s~h~s' \\ \tape~s~(L,h,R)~(L',h',R')}
+    {\phase~(s,(L,h,R))~(s',(L',h',R'))}
+\end{align}
+
+The computation path beginning from \(p\).
+\begin{align}
+    \inferrule
+    {\phase~p~q \\ p \neq q \\ \fpath~q~r \\ \cons~p~r~r'}
+    {\fpath~p~r'}
+    \\
+    \inferrule
+    {\halting~p}
+    {\fpath~p~[p]}
+\end{align}
+
+\begin{align}
+    \halting~x &\equiv \phase~x~x
+\end{align}
+
+\begin{align}
+    \inferrule
+    {\forall s ~ \forall h ~ | \{ w ~|~ \fwrite~s~h~w \} | \le 1 \\ \forall s ~ \forall h ~ |[\stay~s~h] + [\fleft~s~h] + [\fright~s~h]| \le 1}
+    {\text{the machine is deterministic}}
+\end{align}

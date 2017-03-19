@@ -1,0 +1,220 @@
+\chapter{Division from plus, times, and norm}
+
+\begin{abstract}
+    Dividing \(n\) by \(d\) is finding
+    \((q,r)\) that satisfies \(n = q \times d + r\)
+    and minimizes the norm of \(r\).
+    Integer division and set division are special cases of that division.
+\end{abstract}
+
+\section{Terminology}
+
+In \(n / d = q\),
+we call \(n\) the dividend,
+\(d\) the divisor,
+and \(q\) the quotient.
+The dividend is the thing that is divided.
+The divisor is the thing that divides.
+
+In \(a \times b = c\),
+we call \(a\) the multiplier, \(b\) the multiplicand, and \(c\) the product.
+The multiplicand is the thing that is repeated.
+The multiplier is how many times the multiplicand is repeated.
+Therefore \(2 \times 3 = 3+3\) and \(3 \times 2 = 2+2+2\).
+
+The word `quotient' comes from the Latin word `quotiens' that means `how many times'.
+The quotient describes \emph{how many times} we must repeat the divisor to obtain the dividend.
+Therefore \(6/2 = 3\) because \(2+2+2 = 6\)
+and \(6/3 = 2\) because \(3+3 = 6\).
+
+The divisor in a division
+becomes the multiplicand in the related multiplication.
+Formally, \(n / d = q\) means the same thing as \(n = q \times d\).
+To obtain the related multiplication of a division,
+\emph{right}-multiply each side of the equation by the divisor.
+Right multiplication cancels right division.
+
+When we write \(p \times q\), we say that we \emph{left-multiply \(q\) by \(p\)}
+or \emph{right-multiply \(p\) by \(q\)}.
+The `left' and `right' tell us where the multiplier is.
+In a left multiplication, the multiplier (the thing that multiplies)
+is on the left side of the multiplicand (the thing that is multiplied).
+We say that we left-multiply or right-multiply a multiplicand \emph{by} a multiplier.
+
+In the case of left division and right division,
+the `left' and `right' tell us where the divisor is.
+Left division means the divisor is on the left side of the dividend.
+
+If \(p \times (q \times r) = r\), we call \(p\)
+the \emph{left inverse} of \(q\) because \(p\)
+cancels a multiplication where \(q\) is on the \emph{left} side.
+We also say that we \emph{left-divide} \(q \times r\) by \(q\).
+We also write \(q \backslash (q \times r) = r\).
+
+Similarly, if \((p \times q) \times r = p\), we call \(r\)
+the \emph{right inverse} of \(q\) because it
+cancels a multiplication where \(q\) is on the \emph{right} side.
+We write \((p \times q) / q = p\).
+
+To \emph{left-divide} a dividend by a divisor is
+to \emph{left-multiply} the dividend by the \emph{left-inverse} of the divisor.
+To \emph{right-divide} a dividend by a divisor is
+to \emph{right-multiply} the dividend by the \emph{right-inverse} of the divisor.
+
+The consequence of those definitions is that
+we have \(6 / 2 = 3\)
+because \(3 \times 2 = 6\),
+not because \(2 \times 3 = 6\).
+
+A problem with this division is that
+it is not always defined for every non-zero divisor.
+That's where the remainder comes into play.
+It allows us to extend the definition of division.
+The remainder is the smallest thing that we must add to satisfy the equation
+after we find the quotient.
+If the remainder is zero, we say that the divisor \emph{divides} the dividend.
+
+We define \(n/d = q\) where \(n = q \times d + r\)
+such that \(r\) is \emph{minimal} in a way.
+
+\section{Structure}
+
+Let there be a ring-like structure.
+Let there be a type \(R\),
+an addition \(+\),
+a multiplication \(\times\),
+and a norm \(m : R \to [ 0,\infty )\).
+The operations do not have to have identities.
+They do not have to be invertible.
+They do not have to commute.
+
+Dividing \(n\) by \(d\) is finding \((q,r)\) such that \(n = q \times d + r\)
+and making sure that such \((q,r)\) is unique.
+However, there may be many \((q,r)\) that satisfies that equation.
+We want at most one pair.
+Which pair should we choose as the result of the division?
+
+If \(\R = \Nat\), we choose the smallest \(r\).
+If \(R = \Int\), we choose the \(r\) that minimizes \(|r|\),
+the absolute value of \(r\).
+If \(R\) is the type of sets, we choose the \(r\)
+that minimizes \(|r|\), the size of \(r\).
+The common thing here is that we can define a \emph{norm}.
+The division then picks the pair that minimizes the norm of the remainder.
+Here we write \(|r|\) (the norm of \(r\))
+to mean the distance between zero (the additive identity) and \(r\).
+The norm of a natural number is the number itself.
+
+That equation is a special case of the linear equation
+\( b = a_1 \cdot x_1 + \ldots + a_p \cdot x_p \)
+where \(b = n\), \(p = 2\), \(a = (d,1)\), \(x = (q,r)\).
+
+\section{Generalization}
+
+To understand division,
+first we look at following example about the natural numbers.
+Later we will generalize the division to also work on sets.
+
+Suppose that we want to divide \(n\) by \(d\).
+Whenever we divide \(n\) by \(d\),
+what we actually do is we
+find \(q\) and \(m\) that satisfy
+\(n = q \times d + m\)
+where \(q\) is \emph{maximal}
+and \(m\) is \emph{minimal}
+in the sense that there are no bigger \(q\) and smaller \(m\)
+that satisfy the equation.
+We call \(n\) the \emph{dividend} (the thing that is divided),
+\(d\) the \emph{divisor} (the thing that divides),
+\(q\) the \emph{quotient},
+and \(m\) the \emph{modulus} or the \emph{remainder}.
+
+Now consider the integers.
+Given \(n \neq 0\) and \(d \neq 0\),
+there are infinitely many \((q,m)\) pairs that satisfy \( n = q \times d + m \).
+Which one should we choose?
+
+We have just defined natural number division in terms of multiplication, addition, and natural ordering.
+If we can define set multiplication, set addition, and set ordering, then we can define set division.
+
+We can define the multiplication of two sets as their Cartesian product.
+We can define the addition of two sets as their union.
+We can define that a set is less than another iff the former is a proper subset of the latter.
+We then define the remainder as the smallest set that we must add to satisfy the equation.
+Formally,
+\begin{align}
+    Q \times D &= \{ (q,d) ~|~ q : Q, ~ d : D \}
+    \\
+    A + B &= \{ x ~|~ x : A \vee x : B \}
+    \\
+    A \le B &\iff A \subseteq B
+    \\
+    N &= Q \times D + R \text{ such that \(R\) is minimal.}
+\end{align}
+
+To compute the quotient and the modulus,
+we solve \(N = Q \times D + R\)
+with the constraint that \(R\) is \emph{minimal}
+in the sense that there are no smaller \(R\)
+that satisfies that equation.
+
+Similar to \(n/d = q\), we define \( N / D = Q \).
+It seems that all we did was rewrite everything using capital letters.
+It's just that now the variables represent sets instead of numbers.
+\emph{Indeed if we can define multiplication, addition, and maximum,
+then we can define division.}
+
+Note that unlike natural number multiplication,
+set multiplication does not commute.
+
+\section{Example}
+
+Let's say we have these:
+\begin{align*}
+    N &= \{ a, b, c, aa, ab, ac, ba, bb, bc, ca, cb, cc \}
+    \\
+    D &= \{ a, b \}
+\end{align*}
+We compute:
+\begin{align*}
+    N &= Q \times D + M
+    \\
+    N &= \{ a, b, c \} \times \{ a, b \} + \{ c, ac, bc, cc \}
+\end{align*}
+We can't shrink \(M\) anymore
+so we claim:
+\begin{align*}
+    Q &= \{ a, b, c \}
+    \\
+    M &= \{ a, b, c, ac, bc, cc \}
+\end{align*}
+
+Let's say we have a polynomial \(x^2 + 2x + 3\) and we want to divide it with \(x + 1\).
+\begin{align*}
+    n &= x^2 + 2x + 3
+    \\
+    d &= x + 1
+    \\
+    q &= x + 1
+    \\
+    r &= 1
+\end{align*}
+We define \(p \le q\) iff \(\deg~p \le \deg~q\) or \(p_1 \le q_1 \wedge \ldots\).
+
+The left quotient (Brzozowsky derivative)
+of a language \(L\) with respect to a string \(p\) is \(\{p\} \backslash L\).
+It is the special case of left-division of languages
+where the divisor has only one element.
+\begin{align}
+    \{p\} \backslash L = \{ x ~|~ px : L \}
+\end{align}
+
+\begin{align}
+    px : L &\vdash x : \{p\} \backslash L
+\end{align}
+
+The expression \(2 \times 3\) means \(3+3\), not \(2+2+2\).
+They both evaluates to \(6\), but they mean different things.
+For natural numbers this sounds pedantic,
+but this is important when the multiplication does not commute,
+such as set multiplication that we shall see later.
