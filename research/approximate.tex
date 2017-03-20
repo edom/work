@@ -1,6 +1,13 @@
-\chapter{How do we approximate functions?}
+\chapter{Approximation}
 
-\section{Approximation needs metric space.}
+\section{Error}
+
+\index{approximation error}
+\index{error!of approximation}
+If the data set is \(D = \{(x_1,y_1),\ldots,(x_n,y_n)\}\) and the approximator is \(f\),
+then the \emph{approximation error} is \(e = \sum_{k=1}^n f(x_k) - y_k\).
+
+\section{Metric space}
 
 Before we can approximate, we must have a metric space.
 You must define the concept of distance.
@@ -33,20 +40,10 @@ Define a metric \(d\) as a function satisfying these, for all \(x\) and \(y\):
     d~x~y = 0 &\iff x=y
 \end{align*}
 
-\section{R2 = R}
-
-There is a bijection between \(\Real^2\) and \(\Real\).
-We do this by interleaving the digits.
-\[
-    (x, y) \leftrightarrow \ldots X_2 Y_2 X_1 Y_1 X_0 Y_0 . x_1 y_1 x_2 y_2 x_3 y_3 \ldots
-\]
-
-Consequence for machine learning? For approximation theory?
-
 Given \(d\) and \(<\), we can verify whether a sequence approximates a value.
 However, those are not enough to construct an approximation scheme.
 
-What is \(\sqrt{2}\)? It is the positive \(x\) that satisfies \(x^2 = 2\).
+\(\sqrt{2}\) is the positive \(x\) that satisfies \(x^2 = 2\).
 We can rearrange \(x = 2/x\). If we let \(f~x = 2/x\), then \(\sqrt{2}\) is the fixed point of \(f\)?
 
 \begin{align*}
