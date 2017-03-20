@@ -24,3 +24,102 @@ We can transform a non-temporal behavior \(f~x = y\) into a temporal behavior \(
 \section{Life of one neuron?}
 
 % http://biology.stackexchange.com/questions/5306/how-do-neurons-form-new-connections-in-brain-plasticity
+
+\section{A brain at a given time is an array function.}
+
+A brain at a given time is an array function
+having type \(\Real^\infty \to \Real^\infty\).
+Each component of the input array is a signal from a sensor.
+Each component of the output array goes to an actuator.
+
+Since the brain is finite,
+there must be infinitely many zeros in the input and output arrays.
+
+\section{An array iself is also a function.}
+
+An \(E\)-array is a function having type \(\Nat \to E\).
+The input is an index.
+The output is the value of the component at that index.
+Subscripting denotes function application.
+
+\section{Each brain has a maximand.}
+
+Such maximand is a hidden function.
+The brain always tries to maximize the maximand.
+
+A differential change in brain tries to increase the maximand.
+The brain follows gradient.
+
+\section{Consider functions of length-one arrays.}
+
+Let \(h\) be a differential change in brain.
+
+\section{Draft}
+
+The only way to know whether the system has learning something
+is by testing it with samples the system has never seen.
+
+Practically all machine learning cases deal with functions
+that is continuous enough to form a Hilbert space.
+
+Every classification problem in the real world can be written as \(f : I^n \to I\) for an \(n : \Nat\).
+Usually \(I\) is discrete.
+
+Consider the case where \(I = [0,1]\).
+Continuous map from \(I^n\) to \(I\).
+Continuous map from a hyperplane to a line.
+
+\section{How do we relate vector functions and intelligence?}
+
+\section{How does feedback happen in the brain?}
+
+Feedback is due to environment and the physical laws.
+When we move our hand, we see it, because the light
+reflected by our hand now reaches our eyes.
+
+The next input depends on the previous input.
+\begin{align*}
+    y_k &= b~x_k
+    \\
+    x_{k+1} &= f~x_k~y_k
+\end{align*}
+
+\section{The brain is a recurrence relation.}
+
+This pictures the brain as a parallel dataflow computer
+with clock period of a few microseconds.
+
+% https://en.wikipedia.org/wiki/Dataflow_architecture
+
+Let \(m\) be memory, \(x\) be senses, and \(y\) be actuators.
+\begin{align*}
+    m_{t+1} &= f~x_t~m_t
+    \\
+    y_{t+1} &= g~x_t~m_t
+\end{align*}
+
+There is also a version with implicit time.
+\begin{align*}
+    m' &= f~x~m
+    \\
+    y' &= g~x~m
+\end{align*}
+
+There is also a continuous version.
+\begin{align*}
+    m_{t+h} &= h \cdot f~x_t~m_t
+    \\
+    y_{t+h} &= h \cdot g~x_t~m_t
+\end{align*}
+
+\section{The brain evolved from simpler nervous systems.}
+
+Nervous systems are control systems.
+
+Nervous systems must have provided some evolutionary benefit;
+otherwise natural selection would have phased them out.
+
+Bacterial chemotaxis detects chemical concentration difference.
+
+Nematode.
+Caenorhabditis elegans.

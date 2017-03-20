@@ -1,0 +1,96 @@
+\chapter{Solomonoff theory}
+
+Why was Raymond J. Solomonoff \cite{SolAlpProb2011, GacsVitanyiSolomonoff}
+interested in predicting sequences of bits?
+
+Marcus Hutter approached intelligence from \emph{algorithmic} complexity theory (Solomonoff induction)
+\cite{DefineMachIntel}.
+Warren D. Smith approached intelligence from \emph{computational} complexity theory
+(NP-completeness)
+\cite{WdsIntel, WdsIntelSlide}
+
+\section{Generalization of Solomonoff theory}
+
+\newcommand\Bit{\fun{Bit}}
+\newcommand\Bits{\fun{Bits}}
+
+Let \(\Bit = \{0,1\}\).
+Let \(\Bits = \Bit^*\) where \(*\) is the Kleene star.
+Let \(f : \Bits \to \Bits\).
+Let \(p : \Bits \to [0,1]\) be the input distribution.
+Define \(q~y\) as the probability of finding an input \(x\) such that \(f~x = y\).
+Solomonoff used a universal Turing machine for \(f\),
+but I'm interested on the consequences of relaxing this constraint.
+
+Bijection allows us to use \(\Nat\) or any other countable set instead of \(\Bits\).
+Let \(f : \Nat \to \Nat\) be a function.
+We say that \emph{\(x\) \(f\)-explains \(y\)} iff \(f~x = y\).
+Let \(p : \Nat \to [0,1]\) be the input distribution.
+Define \(q~y\) as the probability of finding an \(x\) such that \(f~x = y\).
+We call an input such as \(x\) a \emph{hypothesis}.
+
+\newcommand\preimage{\fun{preimage}}
+
+Let \(f\) be a binary relation.
+We define \(\preimage~f~y = \{ x ~|~ f~x~y \}\).
+
+\section{Generalizing Kolmogorov complexity}
+
+Schmidh\"uber generalized Kolmogorov complexity to super Turing machines \cite{SchmidhuberKolmogorov}.
+
+The Kolmogorov complexity of a string
+is the length of the shortest program that generates that string.
+This complexity depends on the machine.
+Formally, we define \(\kolmogorov~f~y\),
+the Kolmogorov complexity of \(y\) with respect to \(f\),
+as the length of the shortest \(x\) that satisfies \(f~x = y\).
+
+We can relax the constraint of \(f\) so that \(f\)
+now only needs to be a surjective relation.
+We can relax it further so that it is a relation.
+However, if \(f\) is not surjective,
+the Kolmogorov complexity will be partial
+(undefined for some inputs).
+That seems to be as general as logic allows.
+
+We can relax the measure \(m : A \to \Real\) into a function \(m : A \to B\)
+and an ordering \(c\).
+
+\[
+    \kolmogorov~c~m~f = \minimumBy~c \circ \map~m \circ \preimage~f
+\]
+
+Note the notation:
+If \(f\) is a binary relation,
+we overload the notation \(f\)
+to also mean the binary predicate
+that is the indicator function of the relation \(f\).
+We conflate a predicate and its extension.
+We write \(f~x~y\) to mean \((x,y) \in f\).
+The type of the expression \(f~x~y\) is \(\Bool\).
+
+We can generalize Kolmogorov complexity.
+Instead of a space of strings and the length of strings,
+we can use a measure space.
+Furthermore, we can generalize the function into relation.
+Let \(m : A \to \Real\) be a measure on \(A\).
+Let \(f \subseteq A \times A\) be a binary relation.
+Formally,
+\[
+    \kolmogorov~m~f~y = \minimum~(\map~m~(\preimage~f~y))
+\]
+or, more pointfreely,
+\begin{equation}
+    \kolmogorov~m~f = \minimum \circ \map~m \circ \preimage~f
+\end{equation}
+
+We define \(\kolmogorov~m~f~y\) as the measure of an \(x\)
+that both minimizes \(m\) and satisfies \(f~x~y\).
+Therefore \(\kolmogorov\) is a constrained optimization problem.
+The classical Kolmogorov complexity is a special case of \(\kolmogorov\)
+where \(m\) computes the length of a bitstring
+and \(f\) is a universal Turing machine.
+
+The Kolmogorov complexity is incomputable due to the halting problem.
+It does not even have a brute-force algorithm.
+However, Levin search allows us to approximate it.
