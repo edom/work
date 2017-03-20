@@ -1,14 +1,65 @@
 \chapter{Computation}
 
+\section{Endofunction}
+
+\index{endofunction}%
+The type of an \emph{endofunction} is \(a \to a\).
+
+\section{Unary algebra}
+
+\index{unary algebra}%
+A \emph{unary algebra} is \((S,f)\) where \(f : S \to S\).
+
+\section{String}
+
+\index{language}%
+A \emph{language} is a set of strings.
+
+Two
+\index{string}%
+\emph{strings}
+\(x\) and \(y\) can be
+\index{string concatenation}%
+\index{concatenation!string}%
+\emph{concatenated} to \(xy\).
+
+Two languages \(A\) and \(B\) can be
+\index{language concatenation}%
+\index{concatenation!of languages}%
+\emph{concatenated} to
+\(AB = \{ ab ~|~ a \in A, ~ b \in B \}\).
+
+\index{alphabet}%
+An \emph{alphabet} is a finite set whose each element is a string of length one.
+
+\section{Kleene closure}
+
+Let \(A\) be a language.
+The
+\index{Kleene closure}%
+\index{Kleene operator}%
+\index{Kleene star}%
+\emph{Kleene closure}
+of \(A\) is \(A^* = A^0 \cup AA^*\).
+Another nonrecursive definition is
+\( A^* = \bigcup_{n \in \Nat} A^n \)
+where \( A^0 = \{\emptystr\} \),
+\( A^{n+1} = A A^n \),
+and \(\epsilon\) is the
+\index{empty string}%
+\index{string!empty}%
+empty string.
+
+\(A^*\) is the smallest superset of \(A\)
+closed under string concatenation.
+
+\section{Finite automaton}
+
+\section{Finite-state machine}
+
 \section{Turing machine}
 
-Turing machine as mono-unary algebra of states (configuration-tape pairs).
-Universal Turing machine.
-
-Lambda calculus.
-Recursive functions.
-
-\emph{A Turing machine is a finite-state machine with read-write memory.}
+A \emph{Turing machine} is a finite-state machine with read-write memory.
 How do we model finite-state machine?
 How do we model read-write memory?
 
@@ -274,3 +325,13 @@ The computation path beginning from \(p\).
     {\forall s ~ \forall h ~ | \{ w ~|~ \fwrite~s~h~w \} | \le 1 \\ \forall s ~ \forall h ~ |[\stay~s~h] + [\fleft~s~h] + [\fright~s~h]| \le 1}
     {\text{the machine is deterministic}}
 \end{align}
+
+\section{What}
+
+Turing machine as mono-unary algebra of states (configuration-tape pairs)
+
+Universal Turing machine
+
+Lambda calculus
+
+Recursive functions
