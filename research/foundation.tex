@@ -411,3 +411,25 @@ Derivative
 \section{Non-standard analysis}
 
 \section{Infinitesimal}
+
+\section{Closed under binary operation}
+
+\index{closed under binary operation}%
+Let \(S\) be a set and \(f\) be a binary operation.
+(A binary operation is a two-argument function.)
+\emph{\(S\) is closed under \(f\)} iff
+\(\forall a, b \in S : f(a,b) \in S\).
+
+\section{Open set topology}
+
+Let \(X\) be a set.
+Let \(P(A) = 2^A\) be the power set of \(A\).
+We say that \(T \subseteq P(P(X))\) is a \emph{topology} on \(X\) iff
+\begin{enumerate*}[label={(\arabic*)}]
+    \item \(\{ \emptyset, X \} \subseteq T\),
+    \item \(T\) is closed under union, and
+    \item \(T\) is closed under intersection.
+\end{enumerate*}
+
+A \emph{topological space} is \(S = (X,T)\) where \(X\) is a set and \(T\) is a topology on \(X\).
+Each element of \(T\) is an \emph{open set} of \(S\).
