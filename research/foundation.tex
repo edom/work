@@ -179,8 +179,6 @@ In this book, all functions are curried.
 
 \section{Order}
 
-Limit
-
 Minimum
 
 Maximum
@@ -197,7 +195,7 @@ Define \(m = \arg\min_{x \in X}(f~x)\) iff \(\forall x \in X : f~m \le f~x\).
 \index{min}%
 Define \(\min_{x \in X}(f~x) = f~(\arg\min_{x \in X}(f~x))\).
 
-\section{Numbers}
+\section{Natural number}
 
 \index{natural number}%
 The set of all \emph{natural numbers} is \(\Nat\).
@@ -214,6 +212,8 @@ Thus \(1 = S(0), ~ 2 = S(1) = S(S(0)), ~ 3 = S(2) = S(S(1)) = S(S(S(0)))\), and 
 
 \(\Nat\) is also the type of natural numbers.
 
+\section{Integer}
+
 \index{integer}%
 \index{number!integer}%
 The set of all \emph{integers} is \(\Int\).
@@ -223,11 +223,15 @@ The set of all \emph{integers} is \(\Int\).
     \item \(x + (-x) = 0\).
 \end{enumerate*}
 
+\section{Rational number}
+
 \index{number!rational}%
 \index{rational number}%
 The set of all \emph{rational numbers} is
 \(\Rational = \{ a/b ~|~ a : \Int, b : \Int, b \neq 0 \}\).
 Iff \(x : \Rational\) and \(x \neq 0\) then \(x/x = 1\).
+
+\section{Real number}
 
 \index{number!real}%
 \index{real number}%
@@ -240,6 +244,8 @@ The value of that number is \(\sum_{k \in \Int} a_k b^k\)
 where each \(a_k\) is a \emph{digit} and \(b\) is the \emph{base},
 where \(b \in \Nat\), \(b > 1\).
 \(\Real\) is isomorphic to \(B^\infty\) where \(1 < |B| < \infty\).
+
+\section{Complex number}
 
 \index{complex number}
 \(\Complex = \{ a + bi ~|~ a \in \Real, b \in \Real \}\)
@@ -272,6 +278,21 @@ The \emph{argument} of \(z\) is \(\arg(z) = \{ t ~|~ z = \abs{z} e^{it} \}\).
 \index{principal value of the complex argument}%
 The \emph{principal value of the argument} of \(z\) is \(\Arg(z)\)
 which is the element of \(\arg(z)\) closest to zero.
+
+\section{Sequence}
+
+\index{sequence}%
+A \emph{sequence} \(x\) is a list of things \(x_1, x_2, x_3\), and so on.
+
+\section{Series}
+
+\index{series}%
+If \(x\) is a sequence, then \(\sum_k x_k\) is a \emph{series}.
+The series \emph{converges} iff it is a number.
+
+\section{Limit}
+
+\(\lim_{n \to \infty} x_n\)
 
 \section{Metric}
 
@@ -386,3 +407,7 @@ Iff \(D(F) = f\), then \(I(f) = F + c\) where \(c\) is a constant function,
 \(D\) is the derivative operator, \(I\) is the antiderivative operator.
 
 Derivative
+
+\section{Non-standard analysis}
+
+\section{Infinitesimal}
