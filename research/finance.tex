@@ -1,0 +1,34 @@
+\chapter{Finance}
+
+\section{Asset}
+
+If \(x\) is an asset,
+then \(delay(t,x)\) is an asset.
+
+See also \emph{Composing contracts: an adventure in financial engineering} \cite{SpjContract}.
+
+\section{Time preference}
+
+Let \(r\) be the interest rate.
+Let \(x\) be an amount.
+
+The \emph{future value} of \(x\) at time \(t\) is \((1+r)^t x\).
+
+The \emph{present value} of \(delay(t,x)\) is \(x / (1+r)^t\).
+
+\section{Risk-free interest rate}
+
+\emph{Your} risk-free interest rate is
+the highest government-guaranteed interest you can get.
+
+\section{Perpetuity}
+
+A perpetuity is \(\sum_{t \in \Nat} delay(t,p) \).
+
+Let \(r\) be the risk-free interest rate.
+Let \(p\) be an installment.
+Let all installments be the same.
+
+The present value of such perpetuity is \(\frac{p}{r}\).
+
+\section{No-arbitrage}
