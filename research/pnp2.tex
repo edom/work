@@ -1,0 +1,491 @@
+\chapter{Notation}
+
+$a : A$ or $a \in A$ means the type of $a$ is $A$,
+or $a$ is in $A$,
+or $a$ is an element of $A$.
+
+$A \to B$ is the type of every function
+that takes any $a \in A$ and returns any $b \in B$.
+
+Concatenation means function application:
+$fx$ means $f(x)$ in standard mathematical notation.
+$fxy$ means $f(x,y)$ in standard mathematical notation,
+but the former one is with currying.
+$f0$ can mean $f(0,y)$ which is a function of $y$ only.
+
+If $f : A\to B$ and $x:A$, then $fx : B$.
+
+If $f : A\to B\to C$, $x:A$, and $y:B$, then $fxy : C$.
+
+
+
+
+
+\begin{mcor}[number of deciders]
+    Let $|X| = m$.
+    The number of total mappings of type $X^n \to \mathbb B$ is
+    \begin{align}
+        2^{m^n}
+    \end{align}
+    The number of total mappings of type $(X^0 \cup X^1 \cup \ldots \cup X^n) \to \mathbb B$ is:
+    \begin{align}
+        \sum_{n=0}^{\infty} 2^{m^n}
+    \end{align}
+    There are $m^n$ boxes and each box can contain either $\syes$ or $\sno$.
+\end{mcor}
+
+
+
+
+
+\begin{mdef}[Ambiguous operator]
+    The \emph{ambiguous operator} $\amb : A^* \to A$
+    takes a list and returns an element of that list
+    such that the decider containing the amb-expression is led to $\syes$.
+\end{mdef}
+
+    The following is a nondeterministic algorithm:
+    \begin{align}
+        \SDP fx &= gfx[] & \text{where}
+        \\
+        gfxy &= \fite{\fnull x}{fy}{gf(\ftail x)(\amb[y, \ftail y])}
+    \end{align}
+
+
+
+
+
+
+\begin{mlem}[existence of decider bounded below by LIN]
+There exists a decider that cannot be computed
+in less than linear time
+by the standard machine.
+Formally there exists an $X^*$-decider $f$ such that
+for each list $x : X^*$ of length $n$,
+$\TC(fx) \in \Theta n$.
+\begin{proof}
+    Consider the decider that decides whether zero
+    is the modulo-$m$ sum of all elements in the input list of $X$s
+    where $X$ is a finite subset of $\mathbb N$ of size $m$.
+
+    $f x = [\sum_{k=0}^{n-1} x_k = 0]$
+\end{proof}
+\end{mlem}
+
+    \begin{align}
+        \ambc y &= \fite{\fnull y}{y}{\amb[\fhead y :: \ambc (\ftail y), \ambc (\ftail y)]}
+    \end{align}
+
+\begin{mcon}
+Corollary:
+If $\TC_D(\SDP fx) \in \Omega(2^n \cdot n)$ and $\TC_N(\SDP fx) \in O n$,
+there exists a problem that is in NP but not in P;
+therefore $P \subset NP$.
+\end{mcon}
+
+Prove that the only $g$ that satisfies $fx = f(gx)$ is $\text{id}$.
+
+To prove that $\TC (fx) \in O(gn)$,
+write an algorithm that is in that time complexity class.
+
+To prove that $\TC (fx) \in \Omega(gn)$, ...
+
+
+Function Constancy Check Problem/Function Constancy Decider.
+
+Given an almost constant $X^n$-decider, find the only $x$ that differ.
+
+An $X$-decider is almost constant iff $f^{-1}\syes = \{\}$.
+
+This will also prove P neq NP:
+Find $f$ and $g$ such that $\forall x \in X^* ~ fx = gx$ but $\TC_D(fx) \subset \TC_N(gx)$
+
+
+
+
+
+
+
+
+
+\chapter{Computational complexity}
+
+A set is \emph{computable} iff there is an algorithm (a finite description)
+for its indicator function.
+
+\section{Lax monoidal functors}
+
+A category $C$ is defined by $\ob C : \Set\alpha$ and $\hom C : \Set(\alpha, \alpha))$ such that
+associative and preserve identity
+\begin{enumerate}
+    \item $(f \circ g) \circ h = f \circ (g \circ h)$ for all $f,g,h : \hom C$.
+    \item $1_C \circ f = f \circ 1_C = f$ for all $f : \hom C$.
+\end{enumerate}
+
+Functor is $F$:
+\begin{enumerate}
+    \item $f : (A \to B) \to (FA \to FB)$.
+\end{enumerate}
+
+Also known as `monad' in Haskell.
+
+A lax monoidal functor $F$ takes a set.
+\begin{enumerate}
+    \item Zero element $F_0 : FA$.
+    \item Lifting morphism $F_1 : A \to FA$.
+    \item Internal operation on Kleisli category $f : FA \to (A \to FB) \to FB$.
+\end{enumerate}
+
+\section{Monads}
+
+Let there be the following type functions:
+\begin{align}
+    \mM A &= \{ \mM_0 \} \cup \{ \mM_1 a ~|~ a \in A \}
+ \\ \mL A &= \{ \mL_0 \} \cup \{ \mL_1 h t ~|~ h \in A, ~ t \in \mL A \}
+ \\ \mP A &= \{ \mP X ~|~ X \subseteq A \}
+\\ \mE AB &= \{ \mE_0 a ~|~ a \in A \} \cup \{ \mE_1 b ~|~ b \in B \}
+\end{align}
+In Haskell, $\mM$, $\mM_0$, and $\mM_1$ are known as Maybe, Nothing, and Just;
+and $\mL$, $\mL_0$, and $\mL_1$ are known as list type function ([]), the empty list ([]), and the list constructor (:).
+
+\begin{align}
+    \sigma_M &: MA \to (A \to MB) \to MB
+\end{align}
+
+For \mM, $\sigma$ is defined as
+\begin{align}
+    \sigma \mM_0 f &= \mM_0
+    \\ \sigma (\mM_1 a) f &= fa
+\end{align}
+
+For \mL, $\sigma$ is defined as
+\begin{align}
+    \sigma \mL_0 f &= \mL_0
+    \\ \sigma (\mL_1 h t) f &= [\amb (fh \cdot \sigma tf)]
+\end{align}
+where $\amb : \mL A \to A$ is McCarthy's ambiguous operator
+and $\cdot$ is list concatenation.
+The operator $\amb$ picks an element leading to accepting path
+in zero time without computing the other elements.
+
+For \mP, $\sigma$ is defined as
+\begin{align}
+    \sigma (\mP S) f &= \{ \amb \{ f x ~|~ x \in S \} \}
+\end{align}
+
+\section{\mM-extended string}
+
+\begin{align*}
+    x_n' &= \begin{cases}
+ \mM_1 x_n &: n \text{ is a valid index into input string}
+  \\ \mM_0 &: \text{otherwise}
+\end{cases}
+\end{align*}
+
+\section{Definition of computation via expression reduction}
+
+The grammar for expression:
+\begin{align}
+    Exp &::= X
+      \\ &| -Exp
+      \\ &| (Exp)
+      \\ &| Exp + Exp
+      \\ &| Exp \cdot Exp
+\end{align}
+
+A finite countable set $X$.
+
+There are $n^{n \cdot n}$ possible binary operations on a set of $n$ elements.
+We assume using space-time-tradeoff that some of them can be performed in constant time.
+
+A \emph{primitive expression} is an expression whose time cost is one unit.
+We assume that these are the \emph{only} primitive operations:
+\begin{enumerate}
+    \item modulo-$m$ arithmetic operations:
+            negation ($-a$),
+            addition ($a + b$),
+            subtraction ($a - b$),
+            and multiplication ($a \cdot b$).
+    \item every unary operation in $N_m$ and every binary operation in $N_m$
+    \item every unary operation in $\mathbb B = \{0,1\}$ and every binary operation in $\mathbb B$
+    \item comparison: comparing equality $(=) : X \to X \to \mathbb B$
+        and (unsigned) ordering $(<) : X \to X \to \mathbb B$,
+        and three-way conditional ($Cctf$: if $c$ then $t$ else $f$ where $t,f:\alpha$ and $c:\mathbb B$).
+    \item primitive list operations:
+        \begin{enumerate}
+            \item \fnull: determining whether a list is empty
+            \item \fhead: taking the first element (partial function)
+            \item \ftail: taking all but the first element (partial function)
+            \item constructing a list by prepending one element to a list (::)
+        \end{enumerate}
+\end{enumerate}
+For each constant expression $e$, $\tau e = 0$.
+
+A \emph{primitive value} is a value whose space cost is one unit.
+\begin{align}
+    \forall x \in X \quad \sigma x &= 1
+    \\ \forall x \in (A,B) \quad \sigma x &= \sigma a + \sigma b
+     \\ \forall fx \in \{L a | a \in A\} \cup \{R b | b \in B\} \quad \sigma (fx) &= 1 + \sigma x
+\end{align}
+Example:
+\begin{align}
+    \sigma[1,2,3] &= \sigma(1::2::3::[])
+               \\ &= \sigma (L1(L2(L3L_0)))
+               \\ &= 1 + \sigma 1 + \sigma (L2(L3L_0))
+               \\ &= 1 + 1 + 1 + \sigma 2 + \sigma (L3L_0)
+               \\ &= 3 + 1 + 1 + \sigma 3 + \sigma L_0
+               \\ &= 5 + 1 + 1
+               \\ &= 7
+\end{align}
+
+For example, the following $f$ performs modulo-$m$ summation:
+\begin{align}
+     fx &= C (\fnull x) 0 (\fhead x + f(\ftail x))
+\end{align}
+
+The space and time cost for reducing an expression is $\sigma E$ and $\tau E$ respectively.
+
+\section{Definitions}
+
+A \emph{problem} is a set of its instances.
+An instance is a pair of question and answer.
+The question is a string of the input alphabet.
+The answer is a string of the output alphabet.
+A question may have more than one answer.
+Each question must have at least one answer.
+
+An \emph{$\alpha$-machine} has a \emph{transition function}
+$t : (S,\mM X) \to \alpha S$
+where $S$ is the \emph{state type},
+$X$ is the \emph{input alphabet},
+and $\alpha$ determines the way the machine performs computation.
+$X$ must be finite and countable.
+$S$ must be countable.
+$S$ may contain a special elements:
+the accepting state \syes.
+Formally, a \emph{machine} is a 4-tuple $(\alpha,X,S,t)$ where
+\begin{align}
+    X &: \Fin
+ \\ S &: \Set
+ \\ t &: (S,\mM X) \to \alpha S
+\end{align}
+
+Once something is accepted or rejected, it is final:
+\begin{align}
+    \forall x \quad t (\syes,x) &= \pi \syes
+  \\ \forall x \quad t (\sno,x) &= \pi \sno
+\end{align}
+where $\pi : S \to \alpha S$ is the $\alpha$-lifting function.
+
+The transition function must be total
+and it must be an semi-algorithm;
+it must be able to be described
+in a finite number of (what?) elementary operations.
+It must go into an infinite loop when the answer is no.
+
+A \emph{path} of that machine for input $x = [x_0,\ldots] \in X^*$ is $s = [s_0,\ldots] \in S^*$.
+The computation performed by that machine is a repeated application of the transition function:
+\begin{align*}
+    s_n &= \sigma (t (s_{n-1}, x_n'))
+\end{align*}
+where $\sigma$ is defined according to $\alpha$
+and $x'$ is \mM-extended $x$.
+The initial state is $s_0 \in S$.
+The path is an \emph{accepting path} iff $\syes$ is in that path.
+The machine \emph{accepts} an input iff the path for that input is an accepting path.
+
+The \emph{running time} for that input is the length of the corresponding path.
+
+The \emph{maximum space usage} is: (maximum or supremum?)
+\begin{align}
+    \max_{x \in s} (\mu x)
+\end{align}
+
+Deterministic transition function type is $(S,\mM X) \to S$.
+Nondeterministic transition function type is $(S,\mM X) \to \mP S$.
+
+Nondeterministic machine can \emph{look into the future}
+to \emph{guess an accepting path};
+deterministic machine cannot.
+Given the same input, a deterministic machine
+will always go through the same path of computation.
+Given the same input, a nondeterministic machine
+might go through another path of computation.
+
+
+We say that a language is in $\aTIME f$ iff
+there exists a constant $k$ and an $\alpha$-machine
+such that the length of the shortest path of that machine
+for each acceptable input $x$ is in $O(f(\mu x))$.
+
+\begin{align}
+    \DTIME &= \idTIME
+ \\ \NTIME &= \mPTIME
+\end{align}
+
+\section{Example machines}
+
+This machine accepts all inputs:
+\begin{align*}
+    S &= \{ \syes \}
+    \\ s_0 &= \syes
+ \\ t(s,x) &= \pi s
+\end{align*}
+This machine does not accept any input:
+\begin{align*}
+    S &= \{ \sno \}
+    \\ s_0 &= \sno
+ \\ t(s,x) &= \pi s
+\end{align*}
+This machine accepts the language $\{1\}^*$:
+\begin{align*}
+    S &= \{ s_0, \syes, \sno \}
+    \\ t(s,x) &= \text{case $(s,x)$ of} \begin{cases}
+      (s_0, \mM_1 1) &\pi s_0
+        \\ (s_0, \mM_0) &\pi \syes
+ \\ \text{otherwise} &\pi \sno
+\end{cases}
+\end{align*}
+
+Assume that $X = \{0,1\}$.
+\begin{enumerate}
+    \item How many languages can an $\alpha$-machine with $n$ states accept?
+    \item How many states are needed for an $\alpha$-machine to recognize a given language?
+    \item How many transition functions are possible for a machine with $n$ state?
+\end{enumerate}
+
+\section{Languages accepted by a machine}
+
+Let $\mu X = \mu Y = 2$.
+
+Types are measurable:
+\begin{align}
+    \mu(A\to B) &= \mu A \cdot \mu B
+    \\ \mu(A,B) &= \mu A \cdot \mu B
+    \\ \mu(\mM A) &= 1 + \mu A
+    \\ \mu(\mL A) &= 1 + \mu A \cdot \mu(\mL A)
+    \\ \mu(\mP A) &= \mu(2^A) & \text{if $A$ is countable}
+\end{align}
+Hypernatural measures:
+\begin{align}
+    \mu A = \omega &\implies \mu(\mM A) = \omega
+    \\ \mu A > 0 &\implies \mu(\mL A) = \omega
+    \\ \mu A < \omega &\implies \mu(\mP A) = 2^{\mu A}
+\end{align}
+
+How many transition functions does a \mM-machine have?
+
+How many languages can be accepted by \mM-machine with $\mu S = 2$?
+
+Suppose that a problem is in NP.
+Then there exists a constant $k$ such that
+the length of the shortest nondeterministic path
+for valid input whose size is in $O(n)$ is in $O(n^k)$.
+
+The time complexity measure of a computation is
+the length of the path of that computation.
+
+The set of regular languages is $\DSPACE(O(n)) \cap \DTIME(O(n))$.
+
+\section{Speedup theorem?}
+
+Alphabet size can be exchanged with state size.
+Space can be traded for time?
+
+\section{Example: modulo-$m$ subset-sum problem}
+
+$X = \{0,1,2,3,\ldots,m-1\}$.
+$\syes$ iff there exists $N \subseteq \mathbb N$ such that
+\begin{align}
+    \sum_{k \in N} x_k &= 0
+\end{align}
+where addition is done modulo-$m$.
+
+The modulo-$m$ subset-sum problem is in $\NTIME(O(n))$ and is in $\NSPACE(O(m))$
+where $n$ is the length of the input.
+
+\begin{align}
+    S &= \{ S_0 \} \cup \{ S_1 n ~|~ n \in X \}
+    \\ s_0 &= S_0
+\end{align}
+$t$:
+\begin{align}
+    (S_1 0, x) &\to \{ \syes \}
+    \\ (S_1 s, \mM_1 x) &\to \{ S_1 s, S_1 (s+x) \}
+    \\ (S_0, \mM_1 x) &\to \{ S_0, S_1 x \}
+\end{align}
+
+\section{Some Haskell code}
+
+\begin{verbatim}
+type Tr s x y = (s, Maybe x) -> (Maybe s, Maybe y)
+
+run :: Tr s x y -> s -> [x] -> [y]
+run tr state input =
+    let
+        run' s xs =
+            let
+                (mx,xs') = case xs of
+                    [] -> (Nothing, [])
+                    x : t -> (Just x, t)
+                (ms',my) = tr (s,mx)
+                ys = case ms' of
+                    Just s' -> run' s' xs'
+                    Nothing -> []
+            in
+                maybe id (:) my ys
+    in
+        run' state input
+\end{verbatim}
+
+\section{Example: 3-SAT in NP}
+
+Encode a boolean expression.
+
+$X = \{ T, F, A, 0, 1, 2, N, C, D \}$
+
+The grammar for the input is \verb@inp@:
+\begin{verbatim}
+inp     ::=     asgs A exp
+asgs    ::=     empty | asg asgs
+asg     ::=     T | F
+exp     ::=     0 | 1 | 2
+        |       N exp
+        |       C exp exp
+        |       D exp exp
+\end{verbatim}
+
+$A$ separates the assignment and the expression.
+
+The state type is a tuple of three boolean values.
+
+For example, the expression $v_0 \wedge v_1 \vee \neg v_2$ with truth assignment $(v_0,v_1,v_2) = (T,F,F)$ is encoded as TFFDC01N2.
+
+There are $n$ variables.
+
+SAT is in NP iff SAT is verifiable in P.
+
+Constant space. Linear time.
+
+\section{Is there a bijection?}
+
+\begin{align}
+    \mathbb N &\iff 2^\mathbb N
+    \\ 0 &\iff \{\}
+    \\ 1 &\iff \{0\}
+    \\ 2 &\iff \{1\}
+    \\ 3 &\iff \{0,1\}
+    \\ 4 &\iff \{2\}
+    \\ 5 &\iff \{0,2\}
+    \\ 6 &\iff \{1,2\}
+    \\ 7 &\iff \{0,1,2\}
+\end{align}
+will enumerate all of $2^\mathbb N$?
+
+But Cantor's theorem.
+
+We can construct $x \in 2^\mathbb N$ that has no counterpart in the above bijection.
+Counterintuition of infinity.
+
+Binary numbering of $2^\mathbb N$.
+

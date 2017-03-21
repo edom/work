@@ -1,0 +1,59 @@
+\chapter{Pricing}
+
+\section{Non-risky instruments}
+
+Time preference.
+Discount.
+
+The price of a risky instrument
+is the risk-neutral price plus the \emph{risk premium}.
+
+\section{Risk-neutral price of risky instruments}
+
+Let $X$ be random process of the price.
+$X t$ is the random variable for the price at time $t$.
+
+\section{Futures contracts}
+
+The risk-neutral price of futures contract with $T$ time to expiration.
+\begin{align}
+    \int_{\mathbb{R}} p [X T = x] \cdot x \cdot e^{- r \cdot T} \cdot dx
+\end{align}
+
+\section{European call options}
+
+The risk-neutral price of European call option
+that has strike price $k$ and expires in time $T$ from now
+should be
+\begin{align}
+    \int_k^\infty p [X T = x] \cdot (x - k) \cdot e^{- r \cdot T} \cdot dx
+\end{align}
+or, discretely,
+\begin{align}
+    \sum_{x \in \mathbb{X}} p[X T = x] \cdot (x - k) \cdot e^{- r \cdot T} \cdot \Delta x,
+\end{align}
+possibly with $\Delta x = \$ 0.01$
+and $p$ taken from binomial distribution.
+
+Given any two of these three quantities,
+the other one can be computed:
+\begin{itemize}
+    \item actual current price,
+    \item implied distribution of price at expiration,
+    \item risk-free interest rate.
+\end{itemize}
+
+\section{American call options}
+
+The risk-neutral price of American call option
+that has strike price $k$ and expires in time $T$ from now
+should be
+\begin{align}
+    \int_0^T \int_k^\infty p [X t = x] \cdot (x - k) \cdot e^{-r \cdot t} \cdot dx \cdot dt
+\end{align}
+
+The probability that the instrument price lies in the interval $X$
+when the time is in the interval $T$ is
+\begin{align}
+    \int_T \int_X f x t \cdot dx \cdot dt
+\end{align}
