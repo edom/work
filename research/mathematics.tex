@@ -1,7 +1,6 @@
 \documentclass[10pt,book,openany]{memoir}
 \usepackage[utf8]{inputenc}
 \usepackage{epigraph}
-\setlength{\epigraphwidth}{.5\textwidth}
 \usepackage{geometry}
 \usepackage{amsfonts}
 \usepackage{amsmath}
@@ -27,14 +26,14 @@
 \nouppercaseheads
 \chapterstyle{crosshead}
 \raggedbottom
+% epigraph
+\renewcommand\epigraphsize{\scriptsize}
+\setlength\epigraphwidth{0.625\textwidth}
 \input{format}
 % toc
 \setlength\cftchapternumwidth{4em}
 \setlength\cftsectionnumwidth{4em}
 \setlength\cftsectionindent{0em}
-% epigraph
-\renewcommand\epigraphsize{\scriptsize}
-\setlength\epigraphwidth{0.75\textwidth}
 \makeindex
 \begin{document}
 \frontmatter
