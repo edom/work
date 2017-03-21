@@ -1,0 +1,75 @@
+\chapter{Differentials}
+
+\section{Differentiator}
+
+\index{differentiator}%
+The \emph{differentiator}
+\(d : (\Real \to \Real) \to (\Real \to \Real)\)
+is \(d(f) = \lim_{h\to 0} \frac{f(x+h)-f(x)}{h}\).
+
+If \(d\) is the differentiator and \(f\) is a function,
+we will abuse the notation \(df\) to mean \(d(f)\).
+
+Write \(d^{n+1}\) to mean \(d \circ d^n\)
+where \(\circ\) is function composition
+and \(n \in \Nat\).
+Thus \(d^{n+1}(f) = d(d^n(f))\).
+
+\section{Fixed point of differentiator}
+
+Let \(e\) be
+\index{Euler's constant}%
+\index{base of natural logarithm}%
+Euler's constant, the base of natural logarithm.
+
+\index{derivative!fixed point}%
+Iff \(f(x) = e^x\), then \(df = f\).
+
+\section{Linearity}
+
+\index{derivative!linearity}%
+If \(c\) is a constant function, then \(d(c \cdot f) = c \cdot df\).
+
+\(d(f+g) = df + dg\).
+
+\section{Product rule}
+
+\index{derivative!product rule}%
+\index{product rule}%
+Product rule: \(d(f \cdot g) = df \cdot g + f \cdot dg\).
+
+\section{Chain rule}
+
+\index{derivative!chain rule}%
+\index{chain rule}%
+Chain rule: \(d(f \circ g) = df \cdot g + f \cdot dg\).
+
+\section{Power rule}
+
+\index{derivative!power rule}%
+\index{power rule}%
+Power rule: \(d(x \to x^n) = n x^{n-1}\).
+
+\section{Directional derivative}
+
+\index{directional derivative}%
+\index{derivative!directional}%
+The derivative of \(f\) at direction \(v\) at \(x\) is
+\((d_v f)(x) = \lim_{h\to 0}\frac{f(x+h v)-f(x)}{h}\)
+where \(x:\Real^n\).
+
+\section{Gradient}
+
+\index{gradient}%
+The \emph{gradient} of \(f\) is the \(\nabla f\)
+that satisfies \((\nabla f)(x) \cdot v = (d_v f)(x)\).
+It is also written \(\fgrad(f)\).
+
+The type of \(\nabla\) is \((\Real^n \to \Real) \to (\Real^n \to \Real^n)\).
+
+The symbol \(\nabla\) is called \emph{del} or \emph{nabla}.
+
+\section{Differential equation}
+
+\index{differential equation}%
+A differential equation is something like \(d^2f = -cf\).
