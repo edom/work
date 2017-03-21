@@ -2,10 +2,25 @@
 
 \section{Asset}
 
-If \(x\) is an asset,
+If \(x \in \Real\) then \(cash(x)\) is an asset.
+
+If \(t \in \Real\) and \(x\) is an asset,
 then \(delay(t,x)\) is an asset.
 
+If \(p \in [0,1]\) and \(x\) is an asset,
+then \(chance(p,x)\) is an asset.
+
 See also \emph{Composing contracts: an adventure in financial engineering} \cite{SpjContract}.
+
+\section{Value function}
+
+Let \(V\) be the value function.
+
+\(V(cash(x)) = x\).
+
+\(V(chance(p,x)) = p \cdot V(x)\).
+
+\(V(delay(t,x)) = V(x)/(1+r)^t\).
 
 \section{Time preference}
 
