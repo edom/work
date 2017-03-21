@@ -1,0 +1,28 @@
+\chapter{Abstract algebra}
+
+\section{Group}
+
+\index{binary operation}%
+The type of a \emph{binary operation} is \(a \to b \to c\).
+\index{binary operation!closed}%
+\index{closed binary operation}%
+The type of a \emph{closed binary operation} is \(a \to a \to a\).
+A binary operation \(\cdot\) is \emph{associative} iff \(x\cdot(y\cdot z) = (x\cdot y)\cdot z\).
+
+\index{magma}%
+A \emph{magma} is a set and a closed binary operation.
+\index{semigroup}%
+A \emph{semigroup} is an associative magma (a magma whose operation is associative).
+\index{monoid}%
+A \emph{monoid} is a semigroup with an identity element.
+\index{group}%
+A \emph{group} is a monoid whose each element has an inverse.
+
+\section{Ring}
+
+A \emph{ring} is \((S,+,\cdot)\) where
+\((S,+)\) is an commutative group,
+\((S,\cdot)\) is a monoid,
+and multiplication distributes addition:
+\(x \cdot (y+z) = (x \cdot y) + (x \cdot z)\)
+and \((x+y) \cdot z = (x \cdot z) + (y \cdot z)\).

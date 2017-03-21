@@ -1,0 +1,151 @@
+\chapter{Number}
+
+\section{Natural number}
+
+\index{natural number}%
+The set of all \emph{natural numbers} is \(\Nat\).
+The symbol \(\Nat\) is also used for the type of natural numbers.
+
+\section{Peano axioms}
+
+\index{Peano axioms}%
+The \emph{Peano axioms} are
+\begin{enumerate*}[label={(\arabic*)}]
+    \item \(0 : \Nat\),
+    \item \(n : \Nat \implies S(n) : \Nat\),
+    \item \(S(x) = S(y) \iff x = y\),
+    \item the
+\index{axiom of induction}%
+\index{induction!axiom of}%
+\emph{axiom of induction}:
+\end{enumerate*}
+\[
+    \phi(0) \wedge (\forall n \in \Nat : [\phi(n) \implies \phi(S(n))]) \implies (\forall n \in \Nat : \phi(n))
+\]
+\index{successor}%
+where \(S\) is the \emph{successor symbol}.
+Thus, \(1 = S(0), ~ 2 = S(1) = S(S(0)), ~ 3 = S(2) = S(S(1)) = S(S(S(0)))\), and so on.
+
+\section{Zermelo construction}
+
+\index{Zermelo construction of natural numbers}%
+\index{natural number!Zermelo construction}%
+\(S(n) = \{n\}\).
+Thus, \(0 = \emptyset\), \(1 = \{\emptyset\}\), \(2 = \{\{\emptyset\}\}\), and so on.
+
+\section{Closure under successor}
+
+\(\Nat\) is the smallest set closed under successor.
+
+\section{Von Neumann construction}
+
+\index{von Neumann construction of natural numbers}%
+\index{natural number!von Neumann construction}%
+Define:
+\(0 = \{\}\),
+\(S(n) = n \cup \{n\}\).
+
+Thus \(0 \leftrightarrow \{\}\), \(1 \leftrightarrow \{\{\}\}\), \(2 \leftrightarrow \{\{\}, \{\{\}\}\}\), and so on.
+
+Property: \(n \subseteq S(n)\).
+
+Assert: \(\Nat = S(\Nat)\).
+
+Equation:
+\(\Nat = \Nat \cup \{\Nat\}\).
+
+Consequence:
+
+\(x \in \Nat \iff x \in \Nat \vee x \in \{\Nat\}\)
+
+\(x \in \Nat \iff x = \Nat\)
+
+\section{Integer}
+
+\index{integer}%
+\index{number!integer}%
+\(\Int\) is the set of all \emph{integers}.
+\begin{enumerate*}[label={(\arabic*)}]
+    \item \(\Nat \subseteq \Int\),
+    \item \(\forall x \in \Int : (-x) \in \Int\), and
+    \item \(x + (-x) = 0\).
+\end{enumerate*}
+
+\(\Int\) is the smallest superset of \(\Nat\)
+such that \(\Int\) is closed under negation.
+
+\section{Rational number}
+
+\index{number!rational}%
+\index{rational number}%
+The set of all \emph{rational numbers} is
+\(\Rational = \{ a/b ~|~ a : \Int, b : \Int, b \neq 0 \}\).
+Iff \(x : \Rational\) and \(x \neq 0\) then \(x/x = 1\).
+
+\section{Real number}
+
+\index{number!real}%
+\index{real number}%
+\index{digit}%
+\index{base (positional notation)}%
+\(\Real\) is the \emph{set of all real numbers}.
+The \emph{base-\(b\) positional notation} of a real number
+is \(\ldots a_2 a_1 a_0 . a_{-1} a_{-2} \ldots\).
+The value of that number is \(\sum_{k \in \Int} a_k b^k\)
+where each \(a_k\) is a \emph{digit} and \(b\) is the \emph{base},
+where \(b \in \Nat\), \(b > 1\).
+\(\Real\) is isomorphic to \(B^\infty\) where \(1 < |B| < \infty\).
+
+\section{Complex number}
+
+\index{complex number}
+\(\Complex = \{ a + bi ~|~ a \in \Real, b \in \Real \}\)
+is the set of all \emph{complex numbers} where \(i = \sqrt{-1}\).
+
+\index{Euler's identity}%
+\emph{Euler's identity} is \( e^{i \pi} + 1 = 0 \).
+
+Let \(z = a+bi = re^{it}\).
+\index{complex number!rectangular form}%
+\index{rectangular form!of a complex number}%
+The \emph{rectangular form} of \(z\) is \(a+bi\).
+\index{complex number!polar form}%
+\index{polar form!of a complex number}%
+The \emph{polar form} of \(z\) is \(re^{it}\).
+\index{conjugate!of a complex number}%
+\index{complex number!conjugate}%
+\index{complex conjugate}%
+The \emph{conjugate} of \(z\) is \(\conjbar{z} = \conjstar{z} = a-bi = re^{-it}\).
+\index{complex magnitude}%
+\index{complex number!magnitude}%
+\index{magnitude!of a complex number}%
+The \emph{magnitude} of \(z\) is \(\abs{z} = r = \sqrt{z\conj{z}} = \sqrt{a^2+b^2}\).
+\index{complex argument}%
+\index{complex number!argument}%
+\index{argument!of a complex number}%
+The \emph{argument} of \(z\) is \(\arg(z) = \{ t ~|~ z = \abs{z} e^{it} \}\).
+\index{complex argument!principal value}%
+\index{complex number!principal value of argument}%
+\index{principal value of the complex argument}%
+The \emph{principal value of the argument} of \(z\) is \(\Arg(z)\)
+which is the element of \(\arg(z)\) closest to zero.
+
+\section{Sequence}
+
+\index{sequence}%
+A \emph{sequence} \(x\) is a list of things \(x_1, x_2, x_3\), and so on.
+
+\section{Series}
+
+\index{series}%
+If \(x\) is a sequence, then \(\sum_k x_k\) is a \emph{series}.
+The series \emph{converges} iff it is a number.
+
+\section{Prime}
+
+\index{coprime numbers}%
+\index{number!coprime}%
+Two numbers are \emph{coprime} iff their only common divisor is 1.
+\index{prime number}%
+\index{number!prime}%
+A \emph{prime number} is divisible by 1 and itself only, except 1.
