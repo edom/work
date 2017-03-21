@@ -336,6 +336,61 @@ Lambda calculus
 
 Recursive functions
 
+\section{Regex, cfg, Brzozowsky}
+
+If \(a\) is a type, then \(\Regex~a\) is a type.
+Usually we call the \(a\) in \(\Regex~a\) the \emph{alphabet}.
+
+\begin{align}
+    &\vdash \fnull : \Regex~a
+    \\
+    &\vdash \fempty : \Regex~a
+    \\
+    x : a &\vdash x : \Regex~a
+    \\
+    x : \Regex~a, ~ y : \Regex~a &\vdash xy : \Regex~a
+    \\
+    x : \Regex~a, ~ y : \Regex~a &\vdash x|y : \Regex~a
+    \\
+    x : \Regex~a &\vdash x^* : \Regex~a
+\end{align}
+
+Sometimes we parenthesize. The expression \(x|y^*\) means \(x|(y^*)\),
+which is different from \((x|y)^*\).
+
+Let there be a function \(\match : \Regex~a \to \List~a \to \Bool\).
+\begin{align}
+    \match~\fnull~x &\vdash
+    \\
+    &\vdash \match~\fempty~[]
+    \\
+    x : a, ~ y = [x] &\vdash \match~x~y
+    \\
+    \match~r~x, ~ \match~s~y &\vdash \match~(rs)~(xy)
+    \\
+    \match~r~x \vee \match~s~x &\vdash \match~(r|s)~x
+    \\
+    &\vdash \match~r^*~[]
+    \\
+    \match~r~x, \match~(r^*)~y &\vdash \match~(r^*)~(xy)
+\end{align}
+
+Recall that a language is a \emph{set} of strings.
+We define multiplication slightly differently.
+We replace ordered pair with string concatenation:
+\begin{align}
+    Q \times D &= \{ qd ~|~ q : Q, ~ d : D \}.
+\end{align}
+
+\section{Laziness}
+
+Complete laziness, full laziness, interaction sets
+
+Compile Java to lambda calculus
+
+High level intermediate language
+
+
 \section{(Begin old computation book draft)}
 
 \theoremstyle{definition}
