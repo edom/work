@@ -73,3 +73,24 @@ The symbol \(\nabla\) is called \emph{del} or \emph{nabla}.
 
 \index{differential equation}%
 A differential equation is something like \(d^2f = -cf\).
+
+\section{Partial derivative}
+
+Let \(f : \Real^n \to \Real^m\).
+Let \(f_k(x) = (f(x))_k\).
+Define the
+\index{partial derivative}%
+\emph{partial derivative of \(f\) with respect to the \(k\)th variable} as
+\((d_k f)(x) = \lim_{h\to 0}\frac{f(x+he_k)-f(x)}{h}\).
+
+\section{Jacobian operator}
+
+Define the
+\index{Jacobian operator}%
+\emph{Jacobian operator} \(J : (\Real^n \to \Real^m) \to (\Real^n \to \Real^{m \times n})\) as:
+\[
+    [(Jf)(x)]_{ij} = (d_j f_i)(x)
+\]
+The matrix \((Jf)(x)\) is called the
+\index{Jacobian matrix}%
+\emph{Jacobian matrix of \(f\) at \(x\)}.
