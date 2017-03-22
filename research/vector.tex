@@ -47,13 +47,11 @@ The \emph{projection} of \(a\) to \(b\) is \((a \cdot b) \cdot b / |b|^2\).
 
 \index{scalar-matrix multiplication}%
 \emph{Scalar-matrix multiplication} is \((ka)_{ij} = k \cdot a_{ij}\).
-\index{matrix addition}%
-\index{addition!matrix}%
 \index{matrix!addition}%
+\index{addition!matrix}%
 \emph{Matrix addition} is \((a + b)_{ij} = a_{ij} + b_{ij}\).
-\index{matrix multiplication}%
-\index{multiplication!matrix}%
 \index{matrix!multiplication}%
+\index{multiplication!matrix}%
 \emph{Matrix multiplication} is \((ab)_{ij} = \sum_{k=1}^n a_{ik} b_{kj}\) where
 \(a : R^{m \times n}, b : R^{n \times p}, c : R^{m \times p}\).
 
@@ -111,3 +109,62 @@ is the length of the projection of \(x-p\) to \(n\).
 \section{Multivariate calculus}
 
 \section{Vector calculus}
+
+\section{Transpose}
+
+The
+\index{transpose}%
+\index{transpose!of matrix}%
+\index{matrix!transpose}%
+\emph{transpose} of \(M\) is \((M^T)_{ij} = M_{ji}\).
+
+\section{Conjugate transpose}
+
+The
+\index{conjugate transpose}%
+\index{conjugate transpose!of matrix}%
+\index{transpose!conjugate}%
+\index{matrix!conjugate transpose}%
+\emph{conjugate transpose} of \(M\) is \((M^*)_{ij} = (M_{ji})^*\).
+
+\section{Identity matrix}
+
+\index{identity matrix}%
+\index{matrix!identity}%
+\((I_n)_{ij} = \delta_{ij}\) where \(\delta\) is the
+\index{Kronecker delta}%
+Kronecker delta.
+
+\section{Unitary matrix}
+
+A matrix \(M\) is
+\index{unitary matrix}
+\index{matrix!unitary}
+\emph{unitary} iff \(M^*M = MM^* = I\)
+where \(I\) is an identity matrix.
+
+\section{Singular value decomposition}
+
+The
+\index{singular value decomposition}%
+\index{matrix decomposition!singular value}%
+\emph{singular value decomposition} of \(M\) is \(U S V^* = M\) where \(V^*\) is the conjugate transpose of \(V\).
+
+\section{QR decomposition}
+
+\(M\) is an
+\index{triangular matrix}%
+\index{matrix!triangular}%
+\emph{upper triangular matrix} iff ...
+
+\(M\) is an
+\index{orthogonal matrix}%
+\index{matrix!orthogonal}%
+\emph{orthogonal matrix} iff ...
+
+The
+\index{QR decomposition}%
+\index{matrix decomposition!QR}%
+\emph{QR decomposition} of \(M\) is \(M = QR\) where
+\(Q\) is an orthogonal matrix and
+\(R\) is an upper triangular matrix.
