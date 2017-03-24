@@ -11,3 +11,14 @@ Find a function fitting the data and minimizing the
 
 Given \([(x_1,y_1),\ldots,(x_n,y_n)]\),
 find \(f\) minimizing \(\sum_k \norm{f(x_k) - y_k}^2\).
+
+Let \(p, q \in S\) be two points.
+Let \(L(p,q) \subseteq S\) be the line segment from \(p\) to \(q\).
+The set \(S\) is
+\index{convex set}%
+\emph{convex} iff \(\forall p,q \in S : L(p,q) \subseteq S\).
+
+A function in \(\Real \to \Real\) is
+\index{convex function}%
+\emph{convex}
+iff the area above its graph is a convex set.
