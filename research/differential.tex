@@ -15,82 +15,75 @@ where \(\circ\) is function composition
 and \(n \in \Nat\).
 Thus \(d^{n+1}(f) = d(d^n(f))\).
 
-\section{Fixed point of differentiator}
-
-Let \(e\) be
-\index{Euler's constant}%
-\index{base of natural logarithm}%
-Euler's constant, the base of natural logarithm.
-
-\index{derivative!fixed point}%
-Iff \(f(x) = e^x\), then \(df = f\).
-
-\section{Linearity}
+\section{Properties}
 
 \index{derivative!linearity}%
+\paragraph{Linearity}
 If \(c\) is a constant function, then \(d(c \cdot f) = c \cdot df\).
-
-\(d(f+g) = df + dg\).
-
-\section{Product rule}
+Also, \(d(f+g) = df + dg\).
 
 \index{derivative!product rule}%
 \index{product rule}%
-Product rule: \(d(f \cdot g) = df \cdot g + f \cdot dg\).
-
-\section{Chain rule}
+\paragraph{Product rule}
+\(d(f \cdot g) = df \cdot g + f \cdot dg\).
 
 \index{derivative!chain rule}%
 \index{chain rule}%
-Chain rule: \(d(f \circ g) = df \cdot g + f \cdot dg\).
-
-\section{Power rule}
+\paragraph{Chain rule}
+\(d(f \circ g) = dg \cdot (df \circ g)\).
 
 \index{derivative!power rule}%
 \index{power rule}%
-Power rule: \(d(x \to x^n) = n x^{n-1}\).
+\paragraph{Power rule}
+\(d(x \to x^n) = n x^{n-1}\).
 
-\section{Directional derivative}
+\section{Vector differential calculus}
 
 \index{directional derivative}%
 \index{derivative!directional}%
-The derivative of \(f\) at direction \(v\) at \(x\) is
+\paragraph{Directional derivative}
+The derivative of \(f : \Real^n \to \Real^m\) at direction \(v\) at point \(x\) is
 \((d_v f)(x) = \lim_{h\to 0}\frac{f(x+h v)-f(x)}{h}\)
-where \(x:\Real^n\).
+where \(h : \Real\).
 
-\section{Gradient}
+\paragraph{Partial derivative}
+Let \(f : \Real^n \to \Real^m\) and
+\(f_k(x) = (f(x))_k\).
+The
+\index{partial derivative}%
+\emph{partial derivative of \(f\) with respect to the \(k\)th variable} is
+\((d_k f)(x) = \lim_{h\to 0}\frac{f(x+he_k)-f(x)}{h}\)
+where \(h : \Real\) and
+\((e_k)_i = [k = i]\) is a standard basis vector.
 
 \index{gradient}%
+\paragraph{Gradient}
 The \emph{gradient} of \(f\) is the \(\nabla f\)
 that satisfies \((\nabla f)(x) \cdot v = (d_v f)(x)\).
 It is also written \(\fgrad(f)\).
 
-The type of \(\nabla\) is \((\Real^n \to \Real) \to (\Real^n \to \Real^n)\).
-
 The symbol \(\nabla\) is called \emph{del} or \emph{nabla}.
-
-\section{Differential equation}
-
-\index{differential equation}%
-A differential equation is something like \(d^2f = -cf\).
-
-\section{Partial derivative}
-
-Let \(f : \Real^n \to \Real^m\).
-Let \(f_k(x) = (f(x))_k\).
-Define the
-\index{partial derivative}%
-\emph{partial derivative of \(f\) with respect to the \(k\)th variable} as
-\((d_k f)(x) = \lim_{h\to 0}\frac{f(x+he_k)-f(x)}{h}\).
+Its type is \((\Real^n \to \Real) \to (\Real^n \to \Real^n)\).
 
 \section{Jacobian operator}
 
-Define the
+The
 \index{Jacobian operator}%
-\emph{Jacobian operator} \(J : (\Real^n \to \Real^m) \to (\Real^n \to \Real^{m \times n})\) as:
+\emph{Jacobian operator} \(J : (\Real^n \to \Real^m) \to (\Real^n \to \Real^{m \times n})\)
+satisfies:
 \[
     [(Jf)(x)]_{ij} = (d_j f_i)(x)
 \]
 The matrix \((Jf)(x)\) is called the
 \index{Jacobian matrix}%
 \emph{Jacobian matrix of \(f\) at \(x\)}.
+
+\section{Differential equation}
+
+\index{differential equation}%
+A differential equation is something like \(d^2f = -cf\).
+
+\paragraph{Fixed point of \(d\)}
+\index{derivative!fixed point}%
+Iff \(f(x) = e^x\), then \(df = f\)
+where \(e\) is Euler's constant, the base of natural logarithm.

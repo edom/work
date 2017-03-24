@@ -20,7 +20,6 @@ and \(\Pr : 2^\Omega \to \Real\) is a probability measure.
 
 \index{event}%
 An \emph{event} is a subset of a sample space.
-
 Relationship between two events \(A\) and \(B\):
 They are
 \index{events!equiprobable}%
@@ -32,6 +31,11 @@ They are
 \index{independent events}%
 \index{events!independent}%
 \emph{independent} iff \(\Pr(A \cap B) = \Pr(A) \cdot \Pr(B)\).
+
+\paragraph{Example}
+A fair six-faced dice roll can be modeled with
+\(\Omega = \{1,2,3,4,5,6\}\) and \(\Pr(\{1\}) = \Pr(\{2\}) = \Pr(\{3\}) = \Pr(\{4\}) = \Pr(\{5\}) = \Pr(\{6\}) = 1/6\).
+The probability of rolling an odd face is \(\Pr(\{1,3,5\}) = \Pr(\{1\}) + \Pr(\{3\}) + \Pr(\{5\}) = 3/6\).
 
 \section{Density}
 
@@ -85,12 +89,6 @@ The right side of the vertical bar is a set.
 The conditional distribution
 \(F(r \le a|C) = \int_{(-\infty,a]} (r \to f(r|C))\).
 
-\section{Example: Fair six-faced dice roll}
-
-A fair six-faced dice roll can be modeled with
-\(\Omega = \{1,2,3,4,5,6\}\) and \(\Pr(\{1\}) = \Pr(\{2\}) = \Pr(\{3\}) = \Pr(\{4\}) = \Pr(\{5\}) = \Pr(\{6\}) = 1/6\).
-The probability of rolling an odd face is \(\Pr(\{1,3,5\}) = \Pr(\{1\}) + \Pr(\{3\}) + \Pr(\{5\}) = 3/6\).
-
 \section{Random variable}
 
 \index{random variable}%
@@ -132,6 +130,21 @@ where
 where
 \( \int_X \delta = [0 \in X] \)
 where \([F]\) is 0 iff \(F\) is false and 1 iff \(F\) is true.
+
+\paragraph{Iid}
+Two random variables \(X\) and \(Y\) are
+\index{random variables!independent}%
+\index{independent random variables}%
+\emph{independent} iff \(\forall A, B : \Pr(X \in A \wedge Y \in B) = \Pr(X \in A) \cdot \Pr(Y \in B)\),
+\index{random variables!identically distributed}%
+\index{identically-distributed random variables}%
+\emph{identically distributed} iff
+\(\forall A : \Pr(X \in A) = \Pr(Y \in A)\),
+\index{random variables!independent and identically-distributed}%
+\index{independent and identically-distributed random variables}%
+\index{random variables!iid}%
+\index{iid!random variables}%
+\emph{iid} iff they are independent and identically-distributed.
 
 \paragraph{Example}
 If \(\Omega\) is the set of all people on Earth,
@@ -181,23 +194,6 @@ The notation \(\Pr(X_1\in A_1 \wedge \ldots \wedge X_n\in A_n)\) means
 where \(\Omega = \prod_{k=1}^n \Omega_k\)
 and \(\forall k (X_k : \Omega_k \to V_k)\).
 Such \((\Omega,\Pr)\) is a \emph{joint probability space}.
-
-\section{Iid random variables}
-
-Let there be two random variables \(X\) and \(Y\).
-They are
-\index{random variables!independent}%
-\index{independent random variables}%
-\emph{independent} iff \(\forall A, B : \Pr(X \in A \wedge Y \in B) = \Pr(X \in A) \cdot \Pr(Y \in B)\),
-\index{random variables!identically distributed}%
-\index{identically-distributed random variables}%
-\emph{identically distributed} iff
-\(\forall A : \Pr(X \in A) = \Pr(Y \in A)\),
-\index{random variables!independent and identically-distributed}%
-\index{independent and identically-distributed random variables}%
-\index{random variables!iid}%
-\index{iid!random variables}%
-\emph{iid} iff they are independent and identically-distributed.
 
 \section{Central tendency}
 

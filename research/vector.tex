@@ -106,19 +106,13 @@ is \(f~x = (a|b)^T (x|1)\).
 The \emph{distance} of a point \(x\) to hyperplane \(h = n \cdot (x - p)\)
 is the length of the projection of \(x-p\) to \(n\).
 
-\section{Multivariate calculus}
-
-\section{Vector calculus}
-
-\section{Transpose}
+\section{Matrix unary operations}
 
 The
 \index{transpose}%
 \index{transpose!of matrix}%
 \index{matrix!transpose}%
 \emph{transpose} of \(M\) is \((M^T)_{ij} = M_{ji}\).
-
-\section{Conjugate transpose}
 
 The
 \index{conjugate transpose}%
@@ -127,19 +121,20 @@ The
 \index{matrix!conjugate transpose}%
 \emph{conjugate transpose} of \(M\) is \((M^*)_{ij} = (M_{ji})^*\).
 
-\section{Identity matrix}
+\section{Special matrices}
 
 \index{identity matrix}%
 \index{matrix!identity}%
+A matrix \(I : \Real^{n \times n}\) is \emph{identity} iff
+\(\forall (A : \Real^{n \times n}) (IA = AI = A)\).
+The \emph{\(n\times n\) identity matrix} is
 \((I_n)_{ij} = \delta_{ij}\) where \(\delta\) is the
 \index{Kronecker delta}%
-Kronecker delta.
-
-\section{Unitary matrix}
+Kronecker delta \(\delta_{ij} = [i=j]\).
 
 A matrix \(M\) is
-\index{unitary matrix}
-\index{matrix!unitary}
+\index{unitary matrix}%
+\index{matrix!unitary}%
 \emph{unitary} iff \(M^*M = MM^* = I\)
 where \(I\) is an identity matrix.
 

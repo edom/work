@@ -1,0 +1,74 @@
+\chapter{Integral}
+
+\section{Measure}
+
+A \emph{Jordan content} is...
+
+\index{content (measure theory)}%
+A \emph{content} \(m : 2^A \to \Real\) satisfies
+\begin{enumerate*}[label={(\arabic*)}]
+    \item \(\forall x \in A : m~x \ge 0\),
+    \item \(m~\emptyset = 0\), and
+    \item \(\forall X \subseteq A, Y \subseteq A, X \cap Y = \emptyset : m~(X \cup Y) = m~X + m~Y\).
+\end{enumerate*}
+
+\index{measure}%
+\index{countably additive}%
+\index{countable additivity}%
+A \emph{measure} \(m\) on a set \(A\) is a content that is \emph{countably additive}.
+
+\index{Lebesgue measure}%
+\index{measure!Lebesgue}%
+A \emph{Lebesgue measure} for \(\Real\) is
+\(m~(a,b) = m~[a,b) = m~(a,b] = m~[a,b] = |b-a|\).
+From a measure \(m : \Real \to \Real\)
+we can define a measure \(\mu : \Real^n \to \Real\)
+where
+\(\mu \left( \prod_{i=1}^n X_i \right) = \prod_{i=1}^n m(X_i)\).
+\index{measure space}%
+\index{measure!space}%
+\index{space!measure}%
+A \emph{measure space} is a set and a measure on that set.
+
+\index{measurable function}%
+\index{function!measurable}%
+A \emph{measurable function} is ...
+
+\section{Integral}
+
+\index{integral}%
+\index{integral!Lebesgue}%
+\index{integral!Riemann}%
+\index{Lebesgue integral}%
+\index{Riemann integral}%
+Let \((\Real,m)\) be a measure space and \(f\) be a function.
+Let \(X \subseteq \Real\) and \(Y = \{ f(x) ~|~ x \in X\}\).
+Let \(X_1,\ldots,X_n\) be a partitioning of \(X\) and \(Y_1,\ldots,Y_n\) be a partitioning of \(Y\).
+For each \(k\), let \(x_k \in X_k\) and \(y_k \in Y_k\).
+An \emph{integral of \(f\) in \(X\)}, written \(\int_X f\),
+is \(\lim_{n\to\infty} \sum_{k=1}^{n} a_k\)
+where each \(a_k = m(X_k) \cdot m(Y_k)\) is a rectangular part of the total area.
+See Table \ref{tab:integral}.
+
+\begin{table}[h]
+    \caption{How integrals partition spaces}
+    \label{tab:integral}
+    \centering
+\begin{tabular}{lll}
+    Name & \(X_k\) & \(Y_k\)
+    \\
+    \hline
+    Riemann integral & \( [x_k,x_{k+1}]\) & \( [0,f(x_k)]\)
+    \\
+    Stieltjes integral with respect to \(g\) & \( [g(x_k),g(x_{k+1})]\) & \( [0,f(x_k)]\)
+    \\
+    Lebesgue integral & \( \{x ~|~ f(x) \in Y_k\}\) & \( [y_k,y_{k+1}]\)
+\end{tabular}
+\end{table}
+
+\section{Calculus}
+
+\index{fundamental theorem of calculus}%
+\emph{Fundamental theorem of calculus}:
+Iff \(D(F) = f\), then \(I(f) = F + c\) where \(c\) is a constant function,
+\(D\) is the derivative operator, \(I\) is the antiderivative operator.

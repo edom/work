@@ -1,29 +1,5 @@
 \chapter{Learning}
 
-\section{Classifier}
-
-\index{binary classifier}%
-\index{classifier}%
-\index{classifier!binary}%
-The type of a \emph{classifier} is \(a \to b\) where \(b\) is countable.
-Iff \(|b| = 2\), the classifier is \emph{binary}.
-Iff \(|b|\) is finite, the classifier is \emph{multi-class}.
-
-A \emph{quasiclassifier} is an inhabitant of \(\Real^\infty \to \Real\).
-A \emph{predicate} \(p\) turns a quasiclassifier \(q\) into a classifier \(c~x = p~(q~x)\).
-
-A multiclassifier can be made from binary classifiers.
-
-\index{maximum-margin hyperplane}%
-\index{hyperplane!maximum-margin}%
-The \emph{maximum-margin hyperplane} separating
-the lower training set \(L\) and the upper training set \(U\)
-is the hyperplane \(h\)
-such that
-\(\forall a \in U : h~a > 0\),
-\,\(\forall b \in L : h~b < 0\),
-and \(\dist~h~(U \cup L)\) is maximal.
-
 \section{The artificial dog brain}
 
 This system is basic reinforcement learning.
@@ -296,8 +272,13 @@ A neural network layer is
 \section{Radial basis function neural network}
 
 Non-incremental least-square-error approximation by a sum involving a radial basis function.
-The \emph{approximator} \(f\) is a function with the shape \(f~x = \sum_{k=1}^n w_k \cdot b~(x-x_k)\)
-where \(n\) and each \(x_k\) are fixed beforehand.
+
+The \emph{approximator} is \(f(x) = \sum_{k=1}^n w_k \cdot b(s_k,x-x_k)\)
+where \(n\) is fixed beforehand
+where \(b\) is the basis function,
+\(s_k\) is a spread,
+and \(x_k\) is a center.
+Error is \(e = \sum_k \norm{f(x_k) - y_k}^2\).
 The \emph{approximand} is \(g\).
 To obtain \(f\),
 get \(n\) samples \((x_1,y_1), ~ \ldots , ~ (x_n,y_n)\) where each \(y_k = g~x_k\),
@@ -345,6 +326,6 @@ A \emph{FitzHugh-Nagumo neuron} is the following system of equations \cite{izhik
 
 \section{Bibliography}
 
-\emph{Hlearn: a machine learning library for Haskell} \cite{izbicki2013hlearn}
+\emph{HLearn: a machine learning library for Haskell} \cite{izbicki2013hlearn}
 
-Kaggle
+Kaggle: get paid to solve machine learning problems.

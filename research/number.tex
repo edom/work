@@ -26,28 +26,25 @@ The \emph{Peano axioms} are
 where \(S\) is the \emph{successor symbol}.
 Thus, \(1 = S(0), ~ 2 = S(1) = S(S(0)), ~ 3 = S(2) = S(S(1)) = S(S(S(0)))\), and so on.
 
-\section{Zermelo construction}
+\section{Construction}
 
 \index{Zermelo construction of natural numbers}%
 \index{natural number!Zermelo construction}%
+Zermelo construction:
 \(S(n) = \{n\}\).
 Thus, \(0 = \emptyset\), \(1 = \{\emptyset\}\), \(2 = \{\{\emptyset\}\}\), and so on.
+
+\index{von Neumann construction of natural numbers}%
+\index{natural number!von Neumann construction}%
+Von Neumann construction:
+\(0 = \{\}\),
+\(S(n) = n \cup \{n\}\).
+Thus \(0 \leftrightarrow \{\}\), \(1 \leftrightarrow \{\{\}\}\), \(2 \leftrightarrow \{\{\}, \{\{\}\}\}\), and so on.
+Property: \(n \subseteq S(n)\).
 
 \section{Closure under successor}
 
 \(\Nat\) is the smallest set closed under successor.
-
-\section{Von Neumann construction}
-
-\index{von Neumann construction of natural numbers}%
-\index{natural number!von Neumann construction}%
-Define:
-\(0 = \{\}\),
-\(S(n) = n \cup \{n\}\).
-
-Thus \(0 \leftrightarrow \{\}\), \(1 \leftrightarrow \{\{\}\}\), \(2 \leftrightarrow \{\{\}, \{\{\}\}\}\), and so on.
-
-Property: \(n \subseteq S(n)\).
 
 Assert: \(\Nat = S(\Nat)\).
 
@@ -59,6 +56,7 @@ Consequence:
 \(x \in \Nat \iff x \in \Nat \vee x \in \{\Nat\}\)
 
 \(x \in \Nat \iff x = \Nat\)
+?
 
 \section{Integer}
 
@@ -149,3 +147,11 @@ Two numbers are \emph{coprime} iff their only common divisor is 1.
 \index{prime number}%
 \index{number!prime}%
 A \emph{prime number} is divisible by 1 and itself only, except 1.
+
+\section{R2 = R}
+
+There is a bijection between \(\Real^2\) and \(\Real\).
+We do this by interleaving the digits.
+\[
+    (x, y) \leftrightarrow \ldots X_2 Y_2 X_1 Y_1 X_0 Y_0 . x_1 y_1 x_2 y_2 x_3 y_3 \ldots
+\]

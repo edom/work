@@ -4,15 +4,7 @@
 
 Statistical learning
 
-Deep learning \cite{DeepLearning}
-
 Inverse problem theory \cite{tarantola2005inverse}
-
-? \cite{DeepArch}
-
-? \cite{RepLearn}
-
-? \cite{SuttonBartoRein}
 
 ? \cite{SepLogicAi}
 
@@ -37,26 +29,6 @@ Neural networks is one architecture that makes machine trainable.
 Neural network is not necessarily the best architecture for intelligence.
 Evolution is a greedy optimization algorithm.
 
-\section{What is a fractional iterate? (unrelated)}
-
-We generalize \(f^p\) for real \(p\).
-\begin{align*}
-    f^2 &= f \circ f
-    \\
-    f^{1/2} \circ f^{1/2} &= f
-\end{align*}
-
-If \(f~x = x \uparrow a\) then \(f~(f~x) = (x \uparrow a) \uparrow a\).
-
-What is a \(g\) that satisfies \(g~(g~x) = x^a\)?
-
-What does \(d~(p \to f^p)\) even mean?
-The \(d\) is differential operator.
-
-% http://math.stackexchange.com/questions/676229/fractional-composite-of-functions
-
-% https://en.wikipedia.org/wiki/Iterated_function#Fractional_iterates_and_flows.2C_and_negative_iterates
-
 Topologically, a neural network layer is a continuous map.
 It transforms the input space into a more separable space.
 Consider the set of points that satisfy the classifier.
@@ -64,19 +36,6 @@ This set is a manifold.
 A neural network layer stretches, rotates, manipulates that manifold.
 The output wants to be box-shaped.
 But isn't this just the idea of Kohonen's self-organizing maps?
-
-\chapter{Other handy stuffs}
-
-DeepMind is transfer learning:
-let an AI learn in virtual environment,
-then move it into the real world.
-
-\section{Corpuses, datasets, training sets}
-
-MNIST handwritten digit dataset.
-
-%OpenCog
-%http://opencog.org/about/
 
 \chapter{Making machines work}
 
@@ -183,9 +142,6 @@ in the sense we defined above.
 \cite{PickeringCyber}
 \cite{GoertzelAgi}
 \cite{SlomanTuringIrrelevance}
-
-Algorithmic information theory
-\cite{AlgoInfTh}
 
 Giulio Tononi, integrated information theory
 (not to be confused with information integration theory)
@@ -463,14 +419,6 @@ Pulse-frequency modulation in brain neurons
 
 Reward system
 
-\section{R2 = R}
-
-There is a bijection between \(\Real^2\) and \(\Real\).
-We do this by interleaving the digits.
-\[
-    (x, y) \leftrightarrow \ldots X_2 Y_2 X_1 Y_1 X_0 Y_0 . x_1 y_1 x_2 y_2 x_3 y_3 \ldots
-\]
-
 \section{Supervised to unsupervised}
 
 Can a supervised learning algorithm always be made into an unsupervised learning algorithm?
@@ -489,11 +437,11 @@ Given a set of points
 \(\{(x_1,y_1),\ldots,(x_n,y_n)\}\)
 (samples of a function),
 what is the function that optimally approximates those samples?
-The approximation error is \(\sum_k y_k - f~x_k \).
+The approximation error is \(\sum_k y_k - f(x_k) \).
 Let \(F\) be the set of all integrable real-to-real functions.
-Define \(M~f = \int_{-\infty}^\infty f~x~dx\) as the infinite integral of \(f\).
+Define \(M(f) = \int_\Real f\) as the infinite integral of \(f\).
 Define the complexity of \(f\)
-as \(C~f = \sum_{k=1}^\infty M~(D_k~f)\)
+as \(C(f) = \sum_{k=1}^\infty M(D_k(f))\)
 where \(D\) is the derivative operator.
 
 \section{Meta-approximation}
