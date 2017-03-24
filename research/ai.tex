@@ -22,7 +22,10 @@ A
 \emph{feature} inhabits \(a \to \Real\).
 A
 \index{data}%
-\emph{data} is a tuple \((x,y) : (a,b)\).
+\emph{data} or an
+\index{example}%
+\emph{example}
+is a tuple \((x,y) : (a,b)\).
 
 A
 \index{linear predictor}%
@@ -41,6 +44,14 @@ A
 \index{loss function}%
 \emph{loss function} inhabits \((a,b,\Real^\infty) \to \Real\).
 
+The
+\index{training loss}%
+\emph{training loss} of \(g(x) = w \cdot f(x)\) with respect to \(D\)
+is \(\frac{1}{|D|} \sum_{(x,y) \in D} L(x,y,w)\)
+where \(L\) is the loss function.
+
+Learning is finding \(w\) that minimizes the training loss.
+
 Let \(y \in \{-1,+1\}\).
 The
 \index{score}%
@@ -54,3 +65,17 @@ Binarization of \(f\) is \(\sgn \circ f\).
 Least-squares linear regression
 
 Minimize training loss
+
+Gradient descent training with initial weight \(w_1\), iteration count \(T\), and step size \(\eta\):
+Let \(K : \Real^n \to \Real\) be the training loss function.
+Let \(\nabla K\) be the gradient of \(K\).
+The weight update equation is \(w_{t+1} = w_t - \eta \cdot (\nabla K)(w_t)\)
+where \(w_1\) may be random.
+The training result is \(w_T\).
+
+Stochastic gradient descent (SGD) training:
+\(w_{t+1} = w_t - \eta \cdot (\nabla(L~x_t~y_t))(w_t)\).
+Note the usage of the loss function \(L\)
+instead of the training loss function \(K\).
+
+SGD is \emph{online} or \emph{incremental} training.
