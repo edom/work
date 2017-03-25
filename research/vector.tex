@@ -2,15 +2,30 @@
 
 \section{Vector space as Cartesian power of ring}
 
-A ring \(R\) gives rise to an \emph{\(n\)-dimensional vector space} \(R^n\).
-Each element of \(R^n\) is a \emph{vector} \((x_1,\ldots,x_n)\)
+A ring \(R\) give rises to an
+\index{vector space}%
+\emph{\(n\)-dimensional vector space} \(R^n\) and its vector operations.
+Each element of \(R^n\) is a
+\index{vector}%
+\emph{vector} \((x_1,\ldots,x_n)\)
 where each \(x_k \in R\).
+We say that \(R^n\) is a vector space \emph{over} ring \(R\).
 
 \paragraph{Operations}
 Let \(a \in R\) and \(x,y\in R^n\).
-The \emph{scalar multiplication} of \(a\) and \(x\) is \(ax \in R^n\) where \((ax)_k = a x_k\).
-The \emph{vector addition} of \(x\) and \(y\) is \((x+y) \in R^n\) where \((x+y)_k = x_k+y_k\).
-The \emph{inner product} of \(x\) and \(y\) is \(\langle x,y \rangle = x \cdot y = \sum_{k=1}^n x_k y_k\).
+The
+\index{scalar multiplication}%
+\index{multiplication!scalar and vector}%
+\index{vector!scalar multiplication}%
+\emph{scalar multiplication} of \(a\) and \(x\) is \(ax \in R^n\) where \((ax)_k = a x_k\).
+The
+\index{vector!addition}%
+\index{addition!vector}%
+\emph{vector addition} of \(x\) and \(y\) is \((x+y) \in R^n\) where \((x+y)_k = x_k+y_k\).
+The
+\index{inner product!vector}%
+\index{vector!inner product}%
+\emph{inner product} of \(x\) and \(y\) is \(\langle x,y \rangle = x \cdot y = \sum_{k=1}^n x_k y_k\).
 
 The \emph{\(i\)th standard basis} is \(e_i\) where \((e_i)_k = \delta_{ik}\)
 where \(\delta_{ik} = 1_R\) iff \(i=k\) and \(0_R\) otherwise.
@@ -22,11 +37,19 @@ Such vector space is also an inner product space.
 Such vector space is the \emph{natural \(n\)-vectorization of \(R\)}.
 The \emph{component ring} of that vector space is \(R\).
 
-A \emph{linear map} is a function \(f\) such that \(f(x+y) = f(x) + f(y)\)
-and \(f(c \cdot x) = c \cdot f(x)\) where \(c\) is a scalar.
+\section{Dual vector space}
 
-The \emph{dual} of \(V\) is \(V^* = V \to R\).
-A \emph{covector} is an element of \(V^*\).
+Let \(V\) be a vector space over ring \(R\).
+
+The
+\index{dual!vector space}%
+\index{vector space!dual}%
+\emph{dual} of \(V\) is \(V^* = V \to R\).
+A
+\index{covector}%
+\emph{covector} is an element of \(V^*\).
+Another names for covector are
+\emph{linear form}, \emph{linear functional}, and \emph{one-form}.
 
 \(V^*\) is also a vector space
 where scalar multiplication is
@@ -36,6 +59,8 @@ and vector addition is
 where \(c \in R\) and \(f,g \in V^*\).
 \(f(x) = \langle a,x\rangle\) defines a bijection involving \(f:V^*\) and \(a:V\).
 
+A \emph{linear map} is a function \(f\) such that \(f(x+y) = f(x) + f(y)\)
+and \(f(c \cdot x) = c \cdot f(x)\) where \(c\) is a scalar.
 A linear map \(T : R^m \to R^n\) can be thought
 as a vector of covectors \(t : (R^m \to R)^n\) where
 \(
@@ -174,6 +199,29 @@ where \(A\) is the \emph{coefficient matrix} and \(x\) is the \emph{unknown}.
 \index{overdetermined system of linear equations}%
 \index{system of linear equations!overdetermined}%
 That system is \emph{overdetermined} iff \(A\) has more rows than columns.
+
+\section{Basis}
+
+A
+\index{basis!of vector space}%
+\index{vector space!basis}%
+\emph{basis} of an \(n\)-dimensional vector space \(V\) is a set of vectors \(\{e_1,\ldots,e_n\}\) where each \(e_k \in V\)
+such that for every \(v \in V\) there is \(a \in V\) such that \(v = \sum_{k=1}^n a_k e_k\).
+
+The
+\index{standard basis}%
+\index{natural basis}%
+\emph{standard basis} for \(R^n\) is \(\{ e_1, \ldots, e_n\}\) where
+\( (e_k)_i = [ k = i ] \).
+It is also called \emph{natural basis}.
+
+\section{Matrix as linear operator}
+
+The
+\index{span (of a matrix)}%
+\emph{span} of \(A \in \Real^{n\times n}\) is $\fspan(A) = \{ Ax ~|~ x \in \Real^n \}$.
+If we treat \(A\) as a linear functional,
+then \(\fspan(A)\) is the range of \(A\).
 
 \section{Least-squares solution}
 
