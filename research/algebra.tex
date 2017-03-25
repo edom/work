@@ -7,7 +7,9 @@ The type of a \emph{binary operation} is \(a \to b \to c\).
 \index{binary operation!closed}%
 \index{closed binary operation}%
 The type of a \emph{closed binary operation} is \(a \to a \to a\).
-A binary operation \(\cdot\) is \emph{associative} iff \(x\cdot(y\cdot z) = (x\cdot y)\cdot z\).
+A binary operation \(\cdot\)
+is \emph{associative} iff \(x\cdot(y\cdot z) = (x\cdot y)\cdot z\),
+is \emph{commutative} iff \(x \cdot y = y \cdot x\).
 
 \index{magma}%
 A \emph{magma} is a set and a closed binary operation.
@@ -16,7 +18,13 @@ A \emph{semigroup} is an associative magma (a magma whose operation is associati
 \index{monoid}%
 A \emph{monoid} is a semigroup with an identity element.
 \index{group}%
-A \emph{group} is a monoid whose each element has an inverse.
+A \emph{group} is a monoid where each element has an inverse.
+\index{abelian group}%
+\index{commutative group}%
+\index{group!abelian}%
+\index{group!commutative}%
+An \emph{abelian group} or a \emph{commutative group}
+is a group whose operation is commutative.
 
 \section{Ring}
 
@@ -26,3 +34,17 @@ A \emph{ring} is \((S,+,\cdot)\) where
 and multiplication distributes addition:
 \(x \cdot (y+z) = (x \cdot y) + (x \cdot z)\)
 and \((x+y) \cdot z = (x \cdot z) + (y \cdot z)\).
+
+\section{Field}
+
+\(-x\) is the additive inverse of \(x\).
+
+\(x^{-1}\) is the multiplicative inverse of \(x\).
+
+\index{field}%
+\((F,+,\cdot,-,{}^{-1},0,1)\) is a \emph{field} iff
+\((F,+,-,0)\) is a commutative group,
+\((F-\{0\},\cdot,{}^{-1},1)\) is a commutative group,
+and \(\cdot\) distributes \(+\) (that is \(x \cdot (y + z) = (x \cdot y) + (x \cdot z)\)) \cite{wpfield}.
+For brevity, if \(F\) is a set, ``\(F\) is a field'' means that \((F,+,\cdot,-,{}^{-1},0,1)\) is a field.
+That is, for brevity, we blur the distinction between a field and its underlying set.
