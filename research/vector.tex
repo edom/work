@@ -2,11 +2,30 @@
 
 \section{Vector space}
 
+\index{vector space}%
+\index{space!vector}%
+A \emph{vector space} over a field \(F\) is a set \(V\) and the
+\index{vector space axioms}%
+\emph{vector space axioms} \cite{wpvectorspace}\cite{roman2005advanced}:
+For all \(a, b \in F\) and \(x, y \in V\):
+\begin{enumerate*}[label={(\arabic*)}]
+    \item \(V\) forms an additive group,
+    \item \(1 x = x\) where \(1\) is the multiplicative identity of \(F\),
+    \item \((ab)x = a(bx)\),
+    \item \(a(x+y) = ax+ay\),
+    \item \((a+b)x = ax+by\).
+\end{enumerate*}
+Therefore, a vector space \(V\) over a field \(F\) is
+an additive group \(V\) and a \emph{scalar multiplication} \(F \to V \to V\).
+
+\index{vector}%
+A \emph{vector} is an element of a vector space.
+
 \index{vector!concatenation}%
 \index{concatenation!vector}%
 \index{vector concatenation}%
-Define the \emph{vector concatenation} of \(a : \Real^m\) and \(b : \Real^n\)
-as \(a|b : \Real^p\)
+The \emph{vector concatenation} of \(a : \Real^m\) and \(b : \Real^n\)
+is \(a|b : \Real^p\)
 where \(p = m + n\),
 \(a|b = (a_1 , \ldots , a_m , b_1 , \ldots , b_n)\),
 and a scalar is treated as a vector of length 1.
@@ -14,12 +33,6 @@ and a scalar is treated as a vector of length 1.
 \index{vector!column}%
 \index{column vector}%
 A \emph{column vector} of length \(n\) is a \(n \times 1\) matrix.
-
-\index{vector space}%
-\index{space!vector}%
-A \emph{vector space} is a set and some vector operations...
-\index{vector}%
-A \emph{vector} is an element of a vector space.
 
 \index{vectors!orthogonal}%
 \index{orthogonal vectors}%
