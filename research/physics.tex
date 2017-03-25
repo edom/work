@@ -2,6 +2,10 @@
 
 \section{Mechanics}
 
+Newton's law:
+\(F = dp\) where \(F(t)\) is force acting on the point mass at time \(t\)
+and \(p(t)\) is the momentum of the point mass at time \(t\).
+
 State space
 
 Configuration space
@@ -28,3 +32,775 @@ A \emph{tensor} is ...
 
 \index{Einstein field equations}%
 Einstein field equations are ...
+
+\section{Old content (geometry.md)}
+
+Alternative titles:
+
+* relativity theory from mathematics point of view
+* understanding the motivation behind the mathematics of relativity theory
+
+As soon as we have a ring $R$,
+we can make an $n$-dimensional vector space $R^n$
+in a rather straightforward manner.
+We define that a member of $R^n$ has the form
+$(x_1,\ldots,x_n)$,
+which is simply a bunch of $n$ elements of $R$
+grouped together as a tuple; we also call this tuple a *vector*.
+We then use the ring operations to
+define the vector operations (vector scaling and vector addition) on $R^n$:
+\begin{align*}
+a \cdot (x_1,\ldots,x_n) &= (a \cdot x_1,\ldots,a \cdot x_n)
+\\ (x_1,\ldots,x_n) + (y_1,\ldots,y_n) &= (x_1+y_1,\ldots,x_n+y_n).
+\end{align*}
+We call such vector space the *natural $n$-vectorization of $R$*,
+and we call $R$ the *component ring* of that vector space
+because each component of a vector in that space is taken from $R$.
+
+When we have a vector space,
+sometimes we can define an inner product for this vector space
+so that this vector space is also an
+inner product space.
+We define the natural inner product (the *dot product*) of $n$-dimensional real vector spaces as
+the sum of the products of the components having the same indexes:
+\[
+\langle x, y \rangle = x_1 y_1 + \ldots x_n y_n.
+\]
+
+We then define a *covector* as a linear map taking a vector and giving a scalar,
+so we can write a covector's type as $R^n \to R$ where $R$ is the component ring.
+By a linear map, we mean a function $f$ such that $f~(x+y) = f~x + f~y$
+and $f~(c \cdot x) = c \cdot f~x$ where $c$ is a scalar.
+As a consequence of linearity, every covector $f$ will have the form
+$f~(x_1,\ldots,x_n) = a_1 x_1 + \ldots + a_n x_n$,
+which can also be abbreviated to $f~x = \langle a,x\rangle$
+where $a$ is constant.
+
+We define a linear map $t : R^m \to R^n$
+as a vector of $n$ covectors ($R^m \to R$ each).
+\[
+t~(x_1,\ldots,x_m) = (y_1,\ldots,y_n)
+\]
+\[
+y_i = t_i~x = \langle a_i, x \rangle
+\]
+The row vector $T_i$ corresponds to the covector $t_i$.
+Those row vectors form the matrix $T$
+that corresponds to the linear map $t$.
+\begin{align*}
+T_i &= \begin{bmatrix}a_{i1} & \ldots & a_{im}\end{bmatrix}
+\\ T &= \begin{bmatrix}T_1\\\vdots\\T_m\end{bmatrix}
+= \begin{bmatrix}a_{11} & \ldots & a_{1m} \\ \vdots & \ddots & \vdots \\ a_{m1} & \ldots & a_{mm}\end{bmatrix}
+\end{align*}
+If $m = n$, we call the map an *operator*.
+
+A common property of vectors is that
+we can usually state a vector as a *linear combination* of other vectors,
+but a certain linear combination is particularly interesting:
+the linear combination of $n$ vectors in the same $n$-dimensional vector space.
+When we say that $x$ is a linear combination of $e_1,\ldots,e_n$,
+we mean that there exists $a = (a_1,\ldots,a_n)$ such that $x = a_1 \cdot e_1 + \ldots + a_n \cdot e_n$,
+where each $a_k$ is a scalar and each $e_k$ is a vector.
+We can also write the latter equation as
+\[
+x = E~a = a_1 \cdot e_1 + \ldots + a_n \cdot e_n,
+\]
+which we can also spell out into $n$ equations, each like this:
+\[
+x_i = E_i~a = a_1 \cdot (e_1)_i + \ldots + a_n \cdot (e_n)_i,
+\]
+which suggests that each $E_i$ is a covector
+(you should be able to show that $E_i$ is linear).
+We can also write the equation using matrices:
+\[
+x =
+\begin{bmatrix}
+e_1 & \ldots & e_n
+\end{bmatrix}
+\begin{bmatrix}
+a_1 \\ \vdots \\ a_n
+\end{bmatrix}
+\]
+which we can write out in full as
+\[
+x =
+\begin{bmatrix}
+e_{11} & \ldots & e_{n1}
+\\ \vdots & \ddots & \vdots
+\\ e_{1n} & \ldots & e_{nn}
+\end{bmatrix}
+\begin{bmatrix}
+a_1 \\ \vdots \\ a_n
+\end{bmatrix}
+\]
+and thus $E~a = ea$,
+where $e_k$ becomes the $k$th column of $e$.
+We say that $e$ is the matrix corresponding to $E$.
+This is an example of using matrix multiplication to specify
+a linear combination of a set of vectors;
+this matrix equation summarizes $n$ equations into one equation.
+Thus there is an isomorphism between a linear endofunction in a vector space
+and multiplication of a matrix and a column vector;
+every such endofunction has a corresponding matrix.
+
+A note about notation: we write $ab$ to mean the multiplication of $a$ and $b$,
+but we write $e_{ab}$ to mean $(e_a)_b$, which is the $b$th component of the $a$th component of $e$,
+and not to mean the $x$th component of $e$ where $x$ is the result of multiplying $a$ and $b$.
+
+We wonder which vectors in the real $n$-space
+can be written as a linear combination of the columns of $e$.
+The answer depends on the *span* of $e$;
+that span is the set $\{ ex ~|~ x \in \mathbb{R}^n \}$
+(which is also the range of $E$),
+which is the biggest space $E$ can describe.
+If the span of $e$ is also $\mathbb{R}^n$
+(that is if the range of $E$ is also the domain of $E$),
+then every vector
+in the real $n$-space can be stated as a linear combination of the columns of $e$,
+which means that the $E$ is a surjective mapping from $\mathbb{R}^n$ to $\mathbb{R}^n$,
+and in such case, we call $e$ a *basis*,
+and we call each column in $e$ a *basis vector*.
+Thus we have shown that a basis is a surjective mapping between two spaces
+(although the two spaces happen to be the same space),
+so such basis fits the definition of a coordinate system.
+A basis is not the only coordinate system we can use for a vector space,
+but a basis concisely describes linear transformations on a vector space.
+
+Some bases are straightforward:
+The standard basis for real $n$-space,
+which maps a vector to itself, is
+\[
+(e_k)_i =
+\begin{cases}
+1 & \text{if }k = i
+\\ 0 & \text{otherwise.}
+\end{cases}
+\]
+For example, the standard basis for $\mathbb{R}^3$
+is $\{e_1,e_2,e_3\}$
+where $e_1 = (1,0,0)$, $e_2 = (0,1,0)$, and $e_3 = (0,0,1)$,
+which can also be written as the matrix
+\[
+\begin{bmatrix}e_1&e_2&e_3\end{bmatrix}
+= \begin{bmatrix}1&0&0\\0&1&0\\0&0&1\end{bmatrix}
+\]
+where each basis vector becomes a column in the matrix.
+Each coordinate thus becomes a column vector.
+A coordinate system is multiplying a matrix and a vector.
+A coordinate system transformation is multiplies the basis with the transformation matrix.
+This shows that a matrix arises rather naturally
+when we look for a way to describe linear transformations on a vector space.
+
+Then someday somehow we meet a function that transforms a vector into a scalar,
+a function like $f~(x_1,x_2,x_3) = x_1 + 2 x_2 + 3 x_3$,
+which is an example of covectors.
+
+The linearity of covectors, combined with the fact that
+we can state a vector $x$ as a linear combination $a_1 e_1 + \ldots + a_n e_n$,
+allows us to write a covector $f~x$, which is
+$f~(a_1 e_1 + \ldots + a_n e_n)$,
+as the linear combination
+$a_1 \cdot f~e_1 + \ldots + a_n \cdot f~e_n$.
+Here is how we derive it:
+\begin{align*}
+f~x &= f~(a_1 e_1 + \ldots + a_n e_n)
+\\ &= f~(a_1 e_1) + \ldots + f~(a_n e_n)
+\\ &= a_1 \cdot f~e_1 + \ldots + a_n \cdot f~e_n
+\end{align*}
+which, since $(a_1, \ldots, a_n)$ is a column vector, we can write
+\[
+f~x =
+\begin{bmatrix}
+f~e_1 & \ldots & f~e_n
+\end{bmatrix}
+\begin{bmatrix}
+a_1 \\ \vdots \\ a_n
+\end{bmatrix}
+\]
+which is also the dot product (inner product):
+\[
+f~x = \langle (f~e_1, \ldots, f~e_n), (a_1, \ldots, a_n) \rangle
+\]
+and thus every covector $f$ corresponds to a vector
+$a$ where $f~x = \langle a, x \rangle$,
+and every application of that covector to a vector
+corresponds to the computation of an inner product.
+Thus the covector space is isomorphic to another vector space.
+The confusion arises due to the isomorphism between a linear map and a covector.
+If $f~x = \langle a, x \rangle$,
+we can say that $f$ is a covector, or we can say that $a$ is a covector.
+
+Every linear endofunction of an $n$-dimensional vector space can be written as a vector of $n$ of inner products.
+
+The linearity of covectors allows us to write every covector $f$
+as $f~(x_1,\ldots,x_n) = a_1 x_1 + \ldots + a_n x_n$.
+We say that $g$ is a *canonical cobasis* of $e$ if and only if
+$g_i~e_k = [i=k]$ where the brackets are
+Iverson brackets.
+To find the canonical corresponding basis covector of a basis vector?
+For example, suppose we have the bases $e_1 = (1,2)$ and $e_2 = (2,1)$.
+\begin{align*}
+g_1~(x,y) = ax + by
+\\ g_2~(x,y) = px + qy
+\\ g_1~(1,2) = a1 + b2 = 1
+\\ g_1~(2,1) = a2 + b1 = 0
+\\ g_2~(1,2) = p1 + q2 = 0
+\\ g_2~(2,1) = p2 + q1 = 1
+\\
+\begin{bmatrix}1 & 2 \\ 2 & 1\end{bmatrix}
+\begin{bmatrix}a & p \\ b & q\end{bmatrix}
+= \begin{bmatrix}1 & 0 \\ 0 & 1\end{bmatrix}
+\\
+\begin{bmatrix}a & p \\ b & q\end{bmatrix}
+= \frac{1}{3} \begin{bmatrix}-1 & 2 \\ 2 & -1\end{bmatrix}
+\end{align*}
+Thus the canonical basis covectors are $g_1~(x_1,x_2) = -1/3x_1 + 2/3x_2$ and $g_2 = (2/3,-1/3)$.
+\begin{align*}
+\begin{bmatrix}e_1^T \\ \vdots \\ e_n^T\end{bmatrix}
+\begin{bmatrix}g_{i1} \\ \vdots \\ g_{in}\end{bmatrix}
+= \begin{bmatrix}\delta_{i1} \\ \vdots \\ \delta_{in}\end{bmatrix}
+\\
+\begin{bmatrix}e_1^T \\ \vdots \\ e_n^T\end{bmatrix}
+\begin{bmatrix}g_{11} & \ldots & g_{n1} \\ \vdots & \ddots & \vdots \\ g_{1n} & \ldots & g_{nn}\end{bmatrix}
+= \begin{bmatrix}\delta_{11} & \ldots & \delta_{n1} \\ \vdots & \ddots & \vdots \\ \delta_{1n} & \ldots & \delta_{nn}\end{bmatrix}
+\end{align*}
+Thus finding the canonical cobasis is equivalent to solving systems of linear equations.
+
+Now we show that a covector space is also a vector space
+by defining the vector operations:
+\begin{align*}
+(a \cdot f)~\vec{x} &= a \cdot f~\vec{x}
+\\ (f+g)~\vec{x} &= f~\vec{x} + g~\vec{x}
+\end{align*}
+which shows that if $V$ is a vector space,
+then its covector space $V^*$
+(the dual space of $V$)
+is also a vector space.
+If this is confusing, perhaps it is because we have silently generalized the meaning of 'vector' here;
+a 'vector' used to mean a bunch of numbers,
+but now a 'vector' means anything having vector operations (vector scaling and addition).
+This generalization allows us to immediately apply all our previous work with vectors to covectors.
+In particular, we can state a covector $f$ as a linear combination of covectors
+in the same way we did with vectors:
+\[
+f = a_1 \cdot g_1 + \ldots + a_n \cdot g_n
+\]
+which we can also state as the mapping $G~f$,
+and we define the span of $G$
+as $\{ G~f ~|~ f \in V^* \}$, in the same way we did with a set of vectors.
+If the span encompasses the whole covector space $V^*$,
+then $G$ is a basis for $V^*$ (a *cobasis* for $V$).
+
+We can derive a basis for $V^*$ from a basis for $V$.
+Let us write the basis for $V$ as $E = \{ \vec{e}_1, \ldots, \vec{e}_n \}$.
+We then define $G = \{ g_1, \ldots, g_n \}$ where $g_k~\vec{x} = \vec{x}\cdot\vec{e}_k$.
+If such $G$ also spans the entire $V^*$,
+then $G$ is a basis for $V^*$,
+and we call such $G$ the dual basis of $E$.
+This is possible because we require each covector $f$ to be a linear function:
+\[
+f~(a\cdot\vec{x}+b\cdot\vec{y}) = a \cdot f~\vec{x} + b \cdot f~\vec{y}
+\]
+and indeed it is this linearity that allows us to construct the dual basis.
+
+A more interesting thing happens when we operate a vector and a covector.
+The product between a covector $f : V^*$ and vector $\vec{x} : V$
+($V^*$ is the dual space of $V$)
+is simply $f~\vec{x}$ (function application)?
+
+Now we can talk about changing basis.
+A basis transformation is a coordinate system transformation,
+and in this case this transformation has the type
+$(\mathbb{R}^n \to \mathbb{R}^n) \to (\mathbb{R}^n \to \mathbb{R}^n)$.
+Such basis transformation $E' = T~E$ can be written out
+as $\vec{e}'_k = T_k~(\vec{e}_1, \ldots, \vec{e}_n)$,
+which can be written out even more in the greatest detail as
+\[
+(\vec{e}'_k)_i = (T_k)_i~(\vec{e}_1, \ldots, \vec{e}_n)
+\]
+which are actually $n^2$ equations,
+and each $(T_k)_i$ is a function that takes $n^2$ real numbers.
+If the transformation is linear,
+we can write the transformation as matrix multiplication:
+\[
+E' = ET
+\]
+which expands into $n$ equations each:
+\[
+\vec{e}_i' = \sum_{k=1}^n T_{ik} \vec{e}_k
+\]
+which, in turn, expands into $n$ equations again each:
+\[
+e_{ij}' = \sum_{k=1}^n T_{ik} \cdot e_{kj}
+\]
+
+Sometimes we want to use another basis to locate the same point.
+That is, if we have a vector $x$ in basis $E$, and a vector $y$ in basis $TE$,
+we want $Ex = TEy$.
+We want to change the basis from $E$ to $TE$,
+so old coordinate $x$ become $y$,
+but we want $y$ in $TE$ such that $TEy$ is still $Ex$,
+which we can state mathematically:
+\begin{align*}
+TEy &= Ex
+\\ T^{-1}TEy &= T^{-1}Ex
+\\ Ey &= T^{-1}Ex
+\end{align*}
+which says that the change of coordinate goes against the change of basis,
+so we say that the vector $x$ is *contravariant* to the basis transformation $T$.
+This means that if we move the origin of the coordinate system 3 units to the right,
+then we will have to move the coordinates 3 units to the left
+if we want the new coordinate to locate the same point.
+
+What about covectors?
+Covector $f$.
+\[
+f(TEy) = f(Ex)
+\]
+Due to the linearity of covectors:
+\begin{align*}
+f(Ex) &= f\left(\sum_i x_i \vec{e}_i\right)
+\\ &= \sum_i f(x_i \vec{e}_i)
+\\ &= \sum_i f(x_i \vec{e}_i)
+\\ f(TEy) &= f\left(\sum_i y_i T\vec{e}_i \right)
+\\ &= \sum_i f(y_i T\vec{e}_i)
+\\ &= \sum_i f(y_i T\vec{e}_i)
+\\ \vec{e}'_k = \sum_i T_{ki} \vec{e}_i
+\end{align*}
+
+(todo show that covector is covariant)
+
+A linear function is $f~(x+y) = f~x + f~y$.
+
+A bilinear function is
+\[
+f~(x+z,y) = f~(x,y) + f~(z,y)
+\\ f~(x,y+z) = f~(x,y) + f~(x,z)
+\]
+
+Define $p~n~f~x$:
+$p~1~f~x = f~x$;
+$p~n~f~x = p~(n-1)~(\lambda y. f~y)~x$???;
+$p~n~f~x$ means apply $x$ to the $n$th argument of $f$:
+$p~2~f~x = \lambda y. f~y~x$.
+$p~3~f~x = \lambda y z. f~y~z~x$.
+
+Infinite-dimensional vector.
+
+Hilbert space is infinite-dimensional complex vector space.
+
+* complex inner product
+* complete metric space
+
+A bilinear function $f$ is a function such that $p~1~f~x$ is linear
+and $p~2~f~x$ is linear:
+
+A multilinear function is
+\[
+f~(x + e) = f~(x) + f~(x + e)???
+\]
+
+* A linear function is multilinear.
+* Otherwise a function is multilinear iff every partial application of it is also multilinear.
+
+Now that we have covectors, we are ready to define tensors.
+
+Metric tensor.
+
+Differential geometry. Curvilinear coordinates. Space curvature.
+How do you describe a (curved) surface?
+
+A matrix and a covector are both linear functions;
+the difference is that a matrix maps a vector to a vector,
+but a covector maps a vector to a scalar,
+but since a vector is a bunch of scalars,
+we can think of a matrix as a bunch of covectors.
+
+If $R$ is a ring, then every function space $A \to R$ can also form a ring in this manner:
+\begin{align*}
+0_{A\to R}~x &= 0_R
+\\ 1_{A\to R}~x &= 1_R
+\\ (- f)~x &= - f~x
+\\ (f + g)~x &= f~x + g~x
+\\ (f \cdot g)~x &= f~x \cdot g~x.
+\end{align*}
+We call the resulting ring the *natural ring of the function space*,
+but this natural construction is possible only if the codomain space is already a ring.
+
+The name of the equation $f~(x+y) = f~x + f~y$ is Cauchy's functional equation.
+In this writing, we always *assume* that every linear function in $\mathbb{R} \to \mathbb{R}$
+has the form $f~x = c \cdot x$ where $c$ is a constant.
+It may be tempting to believe that *all* such linear functions have that form,
+but such belief is unjustifiable as there are
+discontinuous linear maps.
+% https://en.wikipedia.org/wiki/Discontinuous_linear_map
+
+\section{(old content)}
+
+\section{Coordinate systems}
+
+A coordinate system $M : C \to S$ is a surjective mapping from $C$ to $S$.
+We say that $C$ is the system's coordinate space and $S$ is the system's target space.
+We call a point in $C$ a coordinate,
+which tells us where a point is;
+the coordinate system tells us how to get there.
+For example, let's say that a point is at Cartesian coordinate (3,4) in 2-dimensional Euclidean space.
+The Cartesian coordinate system tells us that to get there,
+start at the origin, go 3 steps right and 4 steps up.
+A widely used coordinate space is the
+$n$-dimensional real coordinate space,
+% https://en.wikipedia.org/wiki/Real_coordinate_space
+which is the set $\mathbb{R}^n$,
+which is also called the real $n$-space.
+A point in the real $n$-space is an $n$-tuple of real numbers $(x_1,\ldots,x_n)$.
+
+A note about terminology:
+we define coordinate as the entire tuple.
+We define $(x,y)$ as the coordinate, and $x$ as the first component, and $y$ as the second component.
+Dictionaries, Wikipedia, and others define $x$ as the x-coordinate, and $y$ as the y-coordinate,
+and $(x,y)$ as the coordinates (note the plural).
+
+Perhaps the most important thing about coordinate systems is that they unify geometry and
+% https://en.wikipedia.org/wiki/Mathematical_analysis
+mathematical analysis,
+allowing us to use numbers, calculus, and algebra to solve geometric problems.
+Now we or computers can
+find the intersection of geometric objects
+by solving the corresponding system of equations,
+and find the size of a geometric object by solving the corresponding integral.
+
+\section{Mappings inside real coordinate spaces}
+
+We have shown that we can use a real $n$-tuple as a coordinate to the real $n$-space.
+In other words, we can map the real $n$-space to itself.
+The identity coordinate system for the real $n$-space is
+$I : \mathbb{R}^n \to \mathbb{R}^n$ where $I~x = x$;
+this $I$ is also the standard basis for the real $n$-space.
+
+We also call a vector space a linear space.
+
+A physics-field fits the definition of a coordinate system.
+
+There is another way to think of a coordinate in $\mathbb{R}^n$:
+as a function $N \to \mathbb{R}$ where $N = \{1,2,3,\ldots,n\}$.
+We can think of an $n$-dimensional $F$-vector as a function $N \to F$ where $N = \{1,2,3,\ldots,n\}$.
+We can forget about dimensions and think of a $F$-vector as a function $\mathbb{N} \to F$.
+
+We can also use vector spaces to talk conveniently about geometric objects.
+With vector spaces, we can define a line by vector collinearity,
+and define a plane by its normal vector.
+Indeed the main reason we develop vector spaces here is to concisely
+talk about coordinate transformations.
+
+Let there be two bases
+$J$ and $K$ (remember that a basis is just a coordinate system defined using some basis vectors).
+Let $T$ be coordinate transformation from $J$ to $K$
+(that is $J~x = K~(T~x)$)
+and $U$ be basis transformation from $J$ to $K$
+(that is $K = U~J$).
+\[
+J~x = (U~J)~(T~x)
+\\ J = U \circ J \circ T
+\]
+
+Interesting things happen when we change the basis.
+$T : E \to F$.
+
+\section{Coordinate transformation}
+
+Let's say we have one space $S$,
+and two coordinate systems $J : M \to S$ and $K : N \to S$.
+A coordinate transformation from $J$ to $K$ (we name this transformation $T : M \to N$)
+transforms a $J$-coordinate
+to an $K$-coordinate describing the same point.
+You can see from the type of $T$ that it deals with $M$ and $N$
+and has nothing to do with $S$.
+This transformation relates both coordinate systems as
+$J~x = K~(T~x)$, which means that if $x$ is a coordinate in $J$, then $T~x$ is a coordinate in $K$ locating the same point.
+We can also write the equation as $J = K \circ T$.
+
+You don't have to remember the equation.
+If you look at the types of $J$, $K$, and $T$,
+there is only one way to make an equation involving all of them.
+
+To consider each component of the coordinate separately,
+we write
+$T~(x_1,\ldots,x_m) = (y_1,\ldots,y_n)$
+where
+\begin{align*}
+y_1 &= t_1~(x_1,\ldots,x_m)
+\\ &\vdots
+\\ y_n &= t_n~(x_1,\ldots,x_m).
+\end{align*}
+Thus we can think of $T$ as an $n$-tuple $(t_1,\ldots,t_n)$
+whose each component $t_k$ takes an $m$-tuple.
+We can extend the definition of function application so that it works on tuples:
+\[
+(t_1,\ldots,t_n)~\vec{x} = (t_1~\vec{x}, \ldots, t_n~\vec{x})
+\]
+but why would we?
+
+If we define that, we can see how a change in a tuple component translates
+to a change in the other tuple component.
+\[
+\frac{\partial y_i}{\partial x_j} = pd~j~t_i
+\]
+
+A space mapping maps the underlying space $M : R \to S$.
+
+Transformation.
+Linear transformation.
+$T(ax+by) = aTx + bTy$.
+
+The transformation $T~x = 2\cdot x$ can be viewed as two things:
+as a space transformation, it makes everything bigger;
+as a coordinate transformation, it makes everything smaller.
+Coordinate transformation works in reverse.
+You can move the point, or you can change the coordinate.
+
+Covariance.
+
+Distance-preserving transformation.
+$d~(T~x)~(T~y) = d~x~y$.
+
+$T$-symmetry.
+$f~(T~x) = T~(f~x)$?
+
+Inverse transformation.
+Composition of transformations.
+
+\section{Coordinate system transformations}
+
+A coordinate system is a mapping (which is another word for 'function'),
+so a coordinate system transformation is a mapping that maps a mapping to another mapping;
+we use the word 'transformation' (which is just another word for 'mapping') so that
+we can write the more serious-sounding 'coordinate system transformation'
+instead of the less awe-inspiring 'space mapping mapping',
+although they mean the same thing.
+Thus a coordinate system transformation
+from $K : Q \to S$ to $L : R \to S$ will have the type
+$(Q \to S) \to (R \to S)$.
+You see, $Q$ is a space,
+so each of $Q \to S$ and $R \to S$ is a space mapping,
+and therefore $(Q \to S) \to (R \to S)$ is a space mapping mapping.
+
+Let's say we have two spaces $R$ and $S$.
+$T : R \to S$.
+
+Embedding and projection are mappings between spaces.
+Embedding maps a lower-dimensional space to a higher-dimensional space;
+projection maps a higher-dimensional space to a lower-dimensional space.
+
+\section{Phields}
+
+Mathematics and physics use field to mean different things.
+Here we use 'field' for the field in mathematics
+and 'phield' for the field in physics.
+% https://en.wikipedia.org/wiki/Field_(physics)
+
+Both a phield and a coordinate system are mappings between two spaces;
+the difference is that a coordinate system must be surjective.
+A phield is a function $f : R \to S$.
+Usually $R$ is a real coordinate space.
+If $S$ is a vector, we call the phield a vector phield.
+If $S$ is a scalar, we call the phield a scalar phield.
+
+\section{Coordinate transformations}
+
+We can use several coordinate systems on the same space.
+Some coordinate systems are more convenient to work with.
+To specify a place on Earth, we can use the
+geographic coordinate system (latitudes and longitudes).
+% https://en.wikipedia.org/wiki/Geographic_coordinate_system
+A coordinate transformation does not move the point.
+
+If a coordinate system is a bijection,
+then it describes an isomorphism between
+its coordinate space and the space it describes.
+This means we can pick any of them we find most convenient,
+and whatever works with it will work with the other.
+
+A point in a space can have different coordinates in different coordinate systems.
+Both the Cartesian coordinate $(r\cos\theta, r\sin\theta)$ and the polar coordinate $(r,\theta)$
+describe the same point in 2-dimensional Euclidean space.
+\[
+C_2~(r\cos\theta, r\sin\theta) = P~(r,\theta)
+\]
+
+\[
+T~(r,\theta) = (r \cos \theta, r \sin \theta)
+\]
+
+\[
+\frac{\partial x}{\partial r} = \cos \theta
+\]
+
+\section{Fixpoints of transformations}
+
+We say that a point is a fixpoint (invariant)
+of a transformation iff the transformation maps it to itself.
+$f~x = x$.
+But why stop here?
+We can say that $f$ is a fixtransform of $x$.
+
+Manifolds.
+
+Topology.
+
+We can embed a plane on a sphere.
+
+To describe an embedding,
+we can use words, or we can use algebra:
+we pick a coordinate system for each space,
+and describe the embedding of the coordinates.
+An embedding $E : R \to S$ is a mapping from a space $R$ to (a subset of) another space $S$.
+Let $J : M \to R$ and $K : N \to S$ be coordinate systems for those spaces, respectively.
+Let $T : M \to N$ be the coordinate transformation that corresponds to that embedding.
+Let $x$ be a $J$-coordinate.
+Then we have:
+\[
+K~(T~x) = E~(J~x)
+\]
+which can also be written
+\[
+K \circ T = E \circ J.
+\]
+Spherical coordinate system
+use three: radius,: $(r,\theta,\phi)$. Here the radius is fixed so we can use $(\theta,\phi)$.
+
+\section{Euclidean metrics}
+
+It is simplest to describe an Euclidean metric in a real coordinate space.
+We define the Euclidean metric for real $n$-space as:
+\[
+d~(x_1,\ldots,x_n)~(y_1,\ldots,y_n) = \sqrt{(y_1-x_1)^2+\ldots+(y_n-x_n)^2}
+\]
+which is the length of the shortest line connecting those points in its Euclidean space.
+
+\section{Projective spaces}
+
+To grasp projective space, see real projective space.
+
+Descartes's Cartesian coordinate system.
+
+Klein's erlangen program.
+
+Using algebra, we can describe a circle whose radius is $r$
+and whose center is the origin in a 2-dimensional Euclidean space with Cartesian coordinate system
+as $\{C_2~(x,y) ~|~ x^2+y^2 = r^2\}$.
+We can find the intersection of two geometric objects
+by solving the system of their equations.
+
+\section{Flavors of geometry: synthetic and analytic}
+
+When asked "What is a line in a 2-dimensional Euclidean space?",
+a student of
+synthetic geometry
+may answer "It is the infinite extension (in both direction)
+of the shortest geometric object connecting two points,"
+while a student of
+analytic geometry
+may answer
+"It is a set of the form $\{ (x,y) ~|~ ax+by=c \}$, given three real numbers $a$, $b$, and $c$."
+% https://en.wikipedia.org/wiki/Synthetic_geometry
+% https://en.wikipedia.org/wiki/Analytic_geometry
+% http://en.wikipedia.org/wiki/Foundations_of_geometry
+% http://en.wikipedia.org/wiki/Timeline_of_geometry
+% https://en.wikipedia.org/wiki/Algebraic_geometry
+Algebraic geometry studies the solution of equations.
+
+Topology studies topological spaces.
+Analytic geometry uses coordinates to define spaces,
+while topology uses neighborhood to define spaces.
+
+\section{Metrics}
+
+With a metric, we can define
+a (generalized) circle with radius $r$ and center $c$
+to be the set of points
+$\{x ~|~ d~c~x = r \}$.
+
+An astronomer may need to tell another astronomer where the latter can find a celestial body.
+He can give its coordinates in a coordinate system they have agreed on.
+The astronomer can use a celestial coordinate system.
+% https://en.wikipedia.org/wiki/Celestial_coordinate_system
+
+\section{Introduction}
+
+Geometry means "measuring the Earth" in Greek.
+
+Why did those Greek philosophers bother thinking about seemingly impractical things like icosahedrons?
+Didn't they have more important things to think about?
+
+Why bother studying more geometry?
+If you're not going to be a land surveyor or a physicist,
+geometry won't benefit you much.
+
+The original motivation for my writing this was to understand the mathematics for relativity theory.
+
+\section{The basic idea of abstract geometry}
+
+Let us begin our study of geometry with the concept of a space.
+Our understanding of space in everyday life won't help.
+Visualization won't help either.
+
+% https://en.wikipedia.org/wiki/Space_(mathematics)
+We use a set to describe a space.
+We don't distinguish a space and its description,
+so 'space' *is* another word for 'set' (a collection),
+and 'point' is another word for 'member' (something in that collection).
+
+It is not only the spaces themselves that make geometry interesting,
+but also the mapping (the functions) between spaces,
+and the properties of those spaces,
+and the way of building spaces from other spaces by changing properties.
+After all, a space is just a set,
+so if a space is all you want to know,
+you can just study set theory instead of geometry.
+
+In chapter 1,
+we will
+start with algebraic structures (especially rings),
+naturally extend a ring into a vector space.
+
+In chapter 2,
+we will talk about coordinate space,
+use a real vector space as a coordinate space,
+describe coordinate system,
+describe a basis (a kind of coordinate system),
+transform a coordinate system to another coordinate system.
+
+In chapter 3,
+we will see how coordinate system transformation affects the coordinates.
+
+In chapter 4,
+we will define tensor product and tensor.
+Understanding tensor requires understanding
+dual vector space and coordinate system transformation.
+
+There are many kinds of spaces we will talk about:
+
+* algebraic structures (especially fields),
+* coordinate space (a space of tuples),
+* real coordinate space (a space of tuples of real numbers),
+* vector space (a coordinate space with vector operations),
+* inner product space (a space with an inner product),
+* covector space (a space whose member is a covector, defined below).
+* tensor space.
+
+There are many ways to make a mapping between two spaces,
+as we will see:
+
+* phield (mapping between two spaces, usually from a coordinate space),
+* coordinate system (surjective mapping between two spaces),
+* natural vectorization of a ring (mapping from a ring to one of its natural vector spaces),
+* basis (linear coordinate system for a vector space),
+* covector (linear mapping from a vector space to its ring space),
+* cobasis (basis for a covector space).
+
+Then, we will eat our own tail by stating that all those mappings are members of their respective function spaces
+(a function space is a space whose members are functions):
+
+* coordinate system transformation (a mapping between two mappings),
+
+The culmination is the understanding of tensor space.
