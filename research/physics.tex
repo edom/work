@@ -35,124 +35,17 @@ Einstein field equations are ...
 
 \section{Old content (geometry.md)}
 
-Alternative titles:
-
-* relativity theory from mathematics point of view
-* understanding the motivation behind the mathematics of relativity theory
-
-As soon as we have a ring $R$,
-we can make an $n$-dimensional vector space $R^n$
-in a rather straightforward manner.
-We define that a member of $R^n$ has the form
-$(x_1,\ldots,x_n)$,
-which is simply a bunch of $n$ elements of $R$
-grouped together as a tuple; we also call this tuple a *vector*.
-We then use the ring operations to
-define the vector operations (vector scaling and vector addition) on $R^n$:
-\begin{align*}
-a \cdot (x_1,\ldots,x_n) &= (a \cdot x_1,\ldots,a \cdot x_n)
-\\ (x_1,\ldots,x_n) + (y_1,\ldots,y_n) &= (x_1+y_1,\ldots,x_n+y_n).
-\end{align*}
-We call such vector space the *natural $n$-vectorization of $R$*,
-and we call $R$ the *component ring* of that vector space
-because each component of a vector in that space is taken from $R$.
-
-When we have a vector space,
-sometimes we can define an inner product for this vector space
-so that this vector space is also an
-inner product space.
-We define the natural inner product (the *dot product*) of $n$-dimensional real vector spaces as
-the sum of the products of the components having the same indexes:
-\[
-\langle x, y \rangle = x_1 y_1 + \ldots x_n y_n.
-\]
-
-We then define a *covector* as a linear map taking a vector and giving a scalar,
-so we can write a covector's type as $R^n \to R$ where $R$ is the component ring.
-By a linear map, we mean a function $f$ such that $f~(x+y) = f~x + f~y$
-and $f~(c \cdot x) = c \cdot f~x$ where $c$ is a scalar.
-As a consequence of linearity, every covector $f$ will have the form
-$f~(x_1,\ldots,x_n) = a_1 x_1 + \ldots + a_n x_n$,
-which can also be abbreviated to $f~x = \langle a,x\rangle$
-where $a$ is constant.
-
-We define a linear map $t : R^m \to R^n$
-as a vector of $n$ covectors ($R^m \to R$ each).
-\[
-t~(x_1,\ldots,x_m) = (y_1,\ldots,y_n)
-\]
-\[
-y_i = t_i~x = \langle a_i, x \rangle
-\]
-The row vector $T_i$ corresponds to the covector $t_i$.
-Those row vectors form the matrix $T$
-that corresponds to the linear map $t$.
-\begin{align*}
-T_i &= \begin{bmatrix}a_{i1} & \ldots & a_{im}\end{bmatrix}
-\\ T &= \begin{bmatrix}T_1\\\vdots\\T_m\end{bmatrix}
-= \begin{bmatrix}a_{11} & \ldots & a_{1m} \\ \vdots & \ddots & \vdots \\ a_{m1} & \ldots & a_{mm}\end{bmatrix}
-\end{align*}
-If $m = n$, we call the map an *operator*.
-
-A common property of vectors is that
-we can usually state a vector as a *linear combination* of other vectors,
-but a certain linear combination is particularly interesting:
-the linear combination of $n$ vectors in the same $n$-dimensional vector space.
-When we say that $x$ is a linear combination of $e_1,\ldots,e_n$,
-we mean that there exists $a = (a_1,\ldots,a_n)$ such that $x = a_1 \cdot e_1 + \ldots + a_n \cdot e_n$,
-where each $a_k$ is a scalar and each $e_k$ is a vector.
-We can also write the latter equation as
-\[
-x = E~a = a_1 \cdot e_1 + \ldots + a_n \cdot e_n,
-\]
-which we can also spell out into $n$ equations, each like this:
-\[
-x_i = E_i~a = a_1 \cdot (e_1)_i + \ldots + a_n \cdot (e_n)_i,
-\]
-which suggests that each $E_i$ is a covector
-(you should be able to show that $E_i$ is linear).
-We can also write the equation using matrices:
-\[
-x =
-\begin{bmatrix}
-e_1 & \ldots & e_n
-\end{bmatrix}
-\begin{bmatrix}
-a_1 \\ \vdots \\ a_n
-\end{bmatrix}
-\]
-which we can write out in full as
-\[
-x =
-\begin{bmatrix}
-e_{11} & \ldots & e_{n1}
-\\ \vdots & \ddots & \vdots
-\\ e_{1n} & \ldots & e_{nn}
-\end{bmatrix}
-\begin{bmatrix}
-a_1 \\ \vdots \\ a_n
-\end{bmatrix}
-\]
-and thus $E~a = ea$,
-where $e_k$ becomes the $k$th column of $e$.
-We say that $e$ is the matrix corresponding to $E$.
-This is an example of using matrix multiplication to specify
-a linear combination of a set of vectors;
-this matrix equation summarizes $n$ equations into one equation.
-Thus there is an isomorphism between a linear endofunction in a vector space
-and multiplication of a matrix and a column vector;
-every such endofunction has a corresponding matrix.
-
 A note about notation: we write $ab$ to mean the multiplication of $a$ and $b$,
 but we write $e_{ab}$ to mean $(e_a)_b$, which is the $b$th component of the $a$th component of $e$,
 and not to mean the $x$th component of $e$ where $x$ is the result of multiplying $a$ and $b$.
 
+The \emph{span} of \(A \in \Real^{n\times n}\) is $\fspan(A) = \{ Ax ~|~ x \in \Real^n \}$.
+If we treat \(A\) as a linear function,
+then \(\fspan(A)\) is the range of \(A\).
+
 We wonder which vectors in the real $n$-space
 can be written as a linear combination of the columns of $e$.
 The answer depends on the *span* of $e$;
-that span is the set $\{ ex ~|~ x \in \mathbb{R}^n \}$
-(which is also the range of $E$),
-which is the biggest space $E$ can describe.
 If the span of $e$ is also $\mathbb{R}^n$
 (that is if the range of $E$ is also the domain of $E$),
 then every vector
@@ -385,13 +278,6 @@ $p~n~f~x$ means apply $x$ to the $n$th argument of $f$:
 $p~2~f~x = \lambda y. f~y~x$.
 $p~3~f~x = \lambda y z. f~y~z~x$.
 
-Infinite-dimensional vector.
-
-Hilbert space is infinite-dimensional complex vector space.
-
-* complex inner product
-* complete metric space
-
 A bilinear function $f$ is a function such that $p~1~f~x$ is linear
 and $p~2~f~x$ is linear:
 
@@ -410,48 +296,30 @@ Metric tensor.
 Differential geometry. Curvilinear coordinates. Space curvature.
 How do you describe a (curved) surface?
 
-A matrix and a covector are both linear functions;
-the difference is that a matrix maps a vector to a vector,
-but a covector maps a vector to a scalar,
-but since a vector is a bunch of scalars,
-we can think of a matrix as a bunch of covectors.
+As a linear map, a matrix is a vector of covectors.
 
-If $R$ is a ring, then every function space $A \to R$ can also form a ring in this manner:
+If $R$ is a ring, then every function space $A \to R$ is also a ring where
 \begin{align*}
-0_{A\to R}~x &= 0_R
-\\ 1_{A\to R}~x &= 1_R
-\\ (- f)~x &= - f~x
-\\ (f + g)~x &= f~x + g~x
-\\ (f \cdot g)~x &= f~x \cdot g~x.
+    0_{A\to R}(x) &= 0_R
+    \\ 1_{A\to R}(x) &= 1_R
+    \\ (- f)(x) &= - f(x)
+    \\ (f + g)(x) &= f(x) + g(x)
+    \\ (f \cdot g)(x) &= f(x) \cdot g(x).
 \end{align*}
-We call the resulting ring the *natural ring of the function space*,
-but this natural construction is possible only if the codomain space is already a ring.
-
-The name of the equation $f~(x+y) = f~x + f~y$ is Cauchy's functional equation.
-In this writing, we always *assume* that every linear function in $\mathbb{R} \to \mathbb{R}$
-has the form $f~x = c \cdot x$ where $c$ is a constant.
-It may be tempting to believe that *all* such linear functions have that form,
-but such belief is unjustifiable as there are
-discontinuous linear maps.
-% https://en.wikipedia.org/wiki/Discontinuous_linear_map
+We call the resulting ring the \emph{natural ring of the function space}.
 
 \section{(old content)}
 
 \section{Coordinate systems}
 
-A coordinate system $M : C \to S$ is a surjective mapping from $C$ to $S$.
-We say that $C$ is the system's coordinate space and $S$ is the system's target space.
-We call a point in $C$ a coordinate,
-which tells us where a point is;
-the coordinate system tells us how to get there.
-For example, let's say that a point is at Cartesian coordinate (3,4) in 2-dimensional Euclidean space.
-The Cartesian coordinate system tells us that to get there,
-start at the origin, go 3 steps right and 4 steps up.
-A widely used coordinate space is the
-$n$-dimensional real coordinate space,
+A \emph{coordinate system} $M : C \to S$ is a surjective mapping from
+\emph{coordinate space} $C$ to \emph{target space} $S$.
+A \emph{coordinate} is a point in \(C\).
+The coordinate system tells us how to get to a point.
+
+The \(n\)-dimensional real coordinate space is $\mathbb{R}^n$.
 % https://en.wikipedia.org/wiki/Real_coordinate_space
-which is the set $\mathbb{R}^n$,
-which is also called the real $n$-space.
+It is also called the real $n$-space.
 A point in the real $n$-space is an $n$-tuple of real numbers $(x_1,\ldots,x_n)$.
 
 A note about terminology:
@@ -460,11 +328,12 @@ We define $(x,y)$ as the coordinate, and $x$ as the first component, and $y$ as 
 Dictionaries, Wikipedia, and others define $x$ as the x-coordinate, and $y$ as the y-coordinate,
 and $(x,y)$ as the coordinates (note the plural).
 
-Perhaps the most important thing about coordinate systems is that they unify geometry and
+Coordinate systems unify geometry and
 % https://en.wikipedia.org/wiki/Mathematical_analysis
-mathematical analysis,
-allowing us to use numbers, calculus, and algebra to solve geometric problems.
-Now we or computers can
+mathematical analysis.
+This unification allows geometric problems to be solved by
+numbers, calculus, and algebra.
+For example, this allows computers to
 find the intersection of geometric objects
 by solving the corresponding system of equations,
 and find the size of a geometric object by solving the corresponding integral.
@@ -474,7 +343,7 @@ and find the size of a geometric object by solving the corresponding integral.
 We have shown that we can use a real $n$-tuple as a coordinate to the real $n$-space.
 In other words, we can map the real $n$-space to itself.
 The identity coordinate system for the real $n$-space is
-$I : \mathbb{R}^n \to \mathbb{R}^n$ where $I~x = x$;
+$I : \mathbb{R}^n \to \mathbb{R}^n$ where $I(x) = x$;
 this $I$ is also the standard basis for the real $n$-space.
 
 We also call a vector space a linear space.
@@ -489,18 +358,17 @@ We can forget about dimensions and think of a $F$-vector as a function $\mathbb{
 We can also use vector spaces to talk conveniently about geometric objects.
 With vector spaces, we can define a line by vector collinearity,
 and define a plane by its normal vector.
-Indeed the main reason we develop vector spaces here is to concisely
-talk about coordinate transformations.
 
-Let there be two bases
-$J$ and $K$ (remember that a basis is just a coordinate system defined using some basis vectors).
+Let there be two bases $J$ and $K$.
 Let $T$ be coordinate transformation from $J$ to $K$
 (that is $J~x = K~(T~x)$)
 and $U$ be basis transformation from $J$ to $K$
 (that is $K = U~J$).
 \[
 J~x = (U~J)~(T~x)
-\\ J = U \circ J \circ T
+\]
+\[
+J = U \circ J \circ T
 \]
 
 Interesting things happen when we change the basis.
@@ -513,15 +381,9 @@ and two coordinate systems $J : M \to S$ and $K : N \to S$.
 A coordinate transformation from $J$ to $K$ (we name this transformation $T : M \to N$)
 transforms a $J$-coordinate
 to an $K$-coordinate describing the same point.
-You can see from the type of $T$ that it deals with $M$ and $N$
-and has nothing to do with $S$.
 This transformation relates both coordinate systems as
 $J~x = K~(T~x)$, which means that if $x$ is a coordinate in $J$, then $T~x$ is a coordinate in $K$ locating the same point.
 We can also write the equation as $J = K \circ T$.
-
-You don't have to remember the equation.
-If you look at the types of $J$, $K$, and $T$,
-there is only one way to make an equation involving all of them.
 
 To consider each component of the coordinate separately,
 we write
@@ -701,7 +563,7 @@ of the shortest geometric object connecting two points,"
 while a student of
 analytic geometry
 may answer
-"It is a set of the form $\{ (x,y) ~|~ ax+by=c \}$, given three real numbers $a$, $b$, and $c$."
+``It is $\{ (x,y) ~|~ ax+by=c \text{ where } a,b,c\in\Real \}$.''
 % https://en.wikipedia.org/wiki/Synthetic_geometry
 % https://en.wikipedia.org/wiki/Analytic_geometry
 % http://en.wikipedia.org/wiki/Foundations_of_geometry
@@ -724,19 +586,6 @@ An astronomer may need to tell another astronomer where the latter can find a ce
 He can give its coordinates in a coordinate system they have agreed on.
 The astronomer can use a celestial coordinate system.
 % https://en.wikipedia.org/wiki/Celestial_coordinate_system
-
-\section{Introduction}
-
-Geometry means "measuring the Earth" in Greek.
-
-Why did those Greek philosophers bother thinking about seemingly impractical things like icosahedrons?
-Didn't they have more important things to think about?
-
-Why bother studying more geometry?
-If you're not going to be a land surveyor or a physicist,
-geometry won't benefit you much.
-
-The original motivation for my writing this was to understand the mathematics for relativity theory.
 
 \section{The basic idea of abstract geometry}
 
