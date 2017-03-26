@@ -17,6 +17,9 @@ A \emph{function type} looks like \(a \to b\).
 Function application:
 Iff \(x:A\) and \(f:A\to B\), then \(f(x):B\).
 
+The arrow in a function type associates to the right.
+The type \(a \to b \to c\) means \(a \to (b \to c)\).
+
 Types and sets are different:
 \(x \in A\) and \(x : A\) are different.
 
@@ -156,6 +159,10 @@ A \emph{function} \(f\) is a relation such that
 The type of a function is \(a \to b\).
 If \(f\) is a function, then \(f~a = b\) iff \((a,b) \in f\).
 The type of a relation between \(a\) and \(b\) is \(a \to 2^b\).
+
+\index{endofunction}%
+The type of an \emph{endofunction} is \(a \to a\).
+An endofunction is a function whose input type is equal to its output type.
 
 \index{Iverson bracket}%
 \paragraph{Iverson bracket}
