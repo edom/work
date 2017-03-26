@@ -19,25 +19,43 @@ A \emph{semigroup} is an associative magma (a magma whose operation is associati
 A \emph{monoid} is a semigroup with an identity element.
 \index{group}%
 A \emph{group} is a monoid where each element has an inverse.
-\index{abelian group}%
-\index{commutative group}%
+\index{commutative!group}%
 \index{group!abelian}%
 \index{group!commutative}%
 An \emph{abelian group} or a \emph{commutative group}
 is a group whose operation is commutative.
 
+\(-x\) is the additive inverse of \(x\).
+
 \section{Ring}
 
-A \emph{ring} is \((S,+,\cdot)\) where
-\((S,+)\) is an commutative group,
-\((S,\cdot)\) is a monoid,
+A
+\index{ring}%
+\emph{ring} is \((S,+,\cdot,-,0,1)\) where
+\((S,+,-,0)\) is a commutative group,
+\((S,\cdot,1)\) is a monoid,
 and multiplication distributes addition:
-\(x \cdot (y+z) = (x \cdot y) + (x \cdot z)\)
-and \((x+y) \cdot z = (x \cdot z) + (y \cdot z)\).
+\begin{align*}
+    x \cdot (y+z) &= (x \cdot y) + (x \cdot z)
+    \\
+    (x+y) \cdot z &= (x \cdot z) + (y \cdot z).
+\end{align*}
+A ring is
+\index{commutative!ring}%
+\index{ring!commutative}%
+\emph{commutative} iff its multiplicative monoid is commutative.
+
+If \(R\) is a ring and \(A \to R\) is a function space,
+then the \emph{natural ring of the function space} is:
+\begin{align*}
+    0_{A\to R}(x) &= 0_R
+    \\ 1_{A\to R}(x) &= 1_R
+    \\ (- f)(x) &= - f(x)
+    \\ (f + g)(x) &= f(x) + g(x)
+    \\ (f \cdot g)(x) &= f(x) \cdot g(x).
+\end{align*}
 
 \section{Field}
-
-\(-x\) is the additive inverse of \(x\).
 
 \(x^{-1}\) is the multiplicative inverse of \(x\).
 
