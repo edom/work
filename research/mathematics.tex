@@ -42,6 +42,11 @@
 \setbeforeparaskip{0em}
 \makeindex
 \begin{document}
+% display-math; doesn't work if put in preamble
+\setlength\abovedisplayskip{0em}
+\setlength\belowdisplayskip{0em}
+\setlength\abovedisplayshortskip{0em}
+\setlength\belowdisplayshortskip{0em}
 \frontmatter
 \input{title}
 \newpage
@@ -63,12 +68,14 @@
 \input{lies}
 \input{closing}
 \chapter{(Ramblings)}
+\input{government}
 \input{computation}
 \input{function}
 \input{number}
-\input{topology}
 \input{nonstandard}
 \input{signal}
+\input{topology}
+\input{differential-geometry}
 \input{physics}
 \input{economics}
 \input{finance}
@@ -86,7 +93,6 @@
 \input{wonderings}
 \input{notation}
 \input{viewpoint}
-\input{vector}
 \input{approximate}
 \input{feedback}
 \input{system}
@@ -102,10 +108,11 @@
 \input{pricing}
 
 % index redirections
-\index{probability!space|see {probability space}}%
-\index{probability!measure|see {probability measure}}%
-\index{measure!probability|see {probability measure}}%
-\index{space!probability|see {probability space}}%
+\index{abelian|see{commutative}}%
+\index{probability!space|see{probability space}}%
+\index{probability!measure|see{probability measure}}%
+\index{measure!probability|see{probability measure}}%
+\index{space!probability|see{probability space}}%
 \index{equations!system of linear|see{system of linear equations}}%
 \index{linear equations!system of|see{system of linear equations}}%
 \index{random!variable|see{random variable}}%
