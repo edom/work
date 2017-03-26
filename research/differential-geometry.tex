@@ -1,0 +1,29 @@
+\chapter{Differential geometry}
+
+\section{Tensor}
+
+\cite{wptensor}
+
+The tensor product of \(A\) and \(B\) is \(A \otimes B\).
+Iff \(a\) is a basis of \(A\) and \(b\) is a basis of \(B\),
+then \(a \otimes b\) is a basis of \(A \otimes B\).
+Thus if \(A\) has \(m\) basis vectors \(\{a_1,\ldots,a_m\}\) and \(B\) has \(n\) basis vectors \(\{b_1,\ldots,b_n\}\),
+then \(C = A \otimes B\) has \(mn\) basis tensors \(\{c_{11}, \ldots, c_{1n}, c_{21}, \ldots, c_{2n}, \ldots, c_{mn}\}\)
+where \(c_{ij} = a_i \otimes b_j\).
+
+Let \(V\) be a vector space over ring \(R\).
+Let \(P = \{1,\ldots,p\}^p\) and \(Q = \{1,\ldots,q\}^q\).
+A \emph{tensor} \(T\) of type \((p,q)\) is an element of
+\(V_q^p\) where
+\[
+    V_q^p = \underbrace{V \otimes \ldots \otimes V}_p \otimes \underbrace{V^* \otimes \ldots \otimes V^*}_q.
+\]
+The tensor \(T\) can be stated as a sum of the basis tensors:
+\( T = \sum_{i \in P} \sum_{j \in Q} T_j^i t_j^i \)
+where \(t_j^i = e_{i_1} \otimes \ldots \otimes e_{i_p} \otimes f_{j_1} \otimes \ldots \otimes f_{j_q}\).
+
+\section{Geometric manifold}
+
+\section{Tangent space}
+
+The tangent space of a point on a manifold is the set of all tangent vectors of that manifold at that point.
