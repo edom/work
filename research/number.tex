@@ -148,6 +148,33 @@ Two numbers are \emph{coprime} iff their only common divisor is 1.
 \index{number!prime}%
 A \emph{prime number} is divisible by 1 and itself only, except 1.
 
+Let \(P\) be the set of all prime numbers.
+
+\paragraph{Nontrivial multiples}
+Let \(\{\Nat\ge 2\} = \Nat - \{0,1\}\).
+Let \(M(n) = \{ k n : k \in N_2 \}\) be the set of nontrivial multiples of \(n\).
+Then \( \Nat - P = \bigcup_{n \in \{\Nat\ge 2\}} M(n) \).
+Property: \(M(ab) \supseteq M(a) \cap M(b)\).
+Property: \(M(ab) \subseteq M(a)\).
+Property: iff \(gcd(a,b)=1\) then \(M(a) \cap M(b) = \emptyset\).
+
+Define \(Q(A) = \bigcup_{a \in A} M(a)\).
+Property: \(Q(\emptyset) = \emptyset\).
+Property: \(Q(\{a\}) = M(a)\).
+Property: \(Q(A \cap B) \subseteq Q(A)\).
+Property: \(Q(A \cup B) \supseteq Q(A)\).
+
+Define \(R(n) = \bigcup_{k=2}^n Q(n)\).
+
+Define \(M_n(d) = M(d) \cap \{\Nat \le n\}\).
+Define \(Q_n(A) = Q(A) \cap \{\Nat \le n\}\).
+Define \(R_n(m) = R(m) \cap \{\Nat \le n\}\).
+Property: \(|M_n(d)| \le \lfloor n/d \rfloor\).
+Define \(u_n(m) = |R_n(m)| / |\{\Nat \le n\}|\).
+Define \(u(m) = \lim_{n \to \infty} u_n(m)\).
+
+Example: \(u(2) = 1/2\), \(u(3) = u(4) = 4/6\), \(u(5) = u(6) = 23/30\), \(u(7) = u(8) = u(9) = u(10) = 86/105\).
+
 \section{R2 = R}
 
 There is a bijection between \(\Real^2\) and \(\Real\).
