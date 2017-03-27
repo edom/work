@@ -132,17 +132,14 @@ Use diagonalization perhaps?)
 
 \section{Defining computation}
 
-Difficulty is because the tape head may move in two directions.
-Graph reduction always proceeds in one direction.
 Post-Turing machine is simpler than Turing machine.
 Wang B-machine is even simpler.
 
-Here I introduce the macroscopic model of computation:
-a computation is a repeated application of a function $f$
+A computation is a repeated application of a function $f$
 until the output does not change anymore.
 The computation begins with the input $x$ already in place.
-I write that such computation produces the output $y$
-in $n$ steps iff $n$ is the smallest number such that $f^{n-1}(x) = f^n(x) = y$
+Such computation produces the output $y$
+in $n$ steps iff $n$ is the smallest number such that $f^{n+1}(x) = f^n(x) = y$
 where $f^n(x)$ means $n$ times applying $f$ to $x$.
 This function can be thought a transition function that describes
 how the entire system (machine state and tape content) changes.
@@ -156,14 +153,8 @@ that always accepts its input.
 The function $f(x) = 2 \cdot x$ corresponds to a machine
 that appends a zero bit to the memory, one by one.
 
-One-instruction-set computer.
-Subleq.
-
 What is the essence of computation?
 Is it recursion?
-
-Using graph reduction as computational model
-may make the problem easier to solve.
 
 This has to do with time-constructibility?
 
@@ -175,9 +166,8 @@ I am looking for a problem whose best deterministic solution
 is an exhaustive search.
 Formally, I am looking for a problem that is dexptime-hard but also in np.
 
-I feel that this problem is promising:
 ``Find a string that satisfies a given satisfiable ptime-predicate,''
-where I use the term \emph{ptime-predicate} to mean that
+where \emph{ptime-predicate} means that
 a machine can compute the predicate in an amount of time
 that is a polynomial of the number of bits in the input string.
 
@@ -283,11 +273,7 @@ Natural numbers are countable.
 
 \section{Introduction}
 
-What does it mean for a function to be \emph{computable} or \emph{recursive}?
-
-Constant function $\forall x ~ f(x) = a$.
-
-Roughly speaking, we say that a function is computable
+Roughly speaking, we say that a function is \emph{computable} or \emph{recursive}
 if and only if it can be stated as a finite arrangement
 of certain primitive operations we allow.
 
@@ -364,354 +350,11 @@ The nondeterministic algorithm:
     gfx &= fx \vee \ambc (gf(0:x)) (gf(1:x))
 \end{align}
 
-\section{Type theory}
+\section{Graph theory}
 
-\section{Motivation}
-
-The type theory described here is inspired by
-Martin-L\"of type theory
-and the Haskell programming language.
-The type theory is constructive (intuitionistic) and dependent.
-This theory shall help us elucidate ideas that
-would be otherwise cumbersome using set theory.
-Perhaps this theory can translate the $\PTIME$ vs $\NPTIME$ problem
-into something easier.
-This theory will be the foundation
-of the next chapters.
-
-\section{Notation}
-
-Iff \(a\) is a type then \(|a|\) is the \emph{cardinality} of \(a\).
-It is the number of inhabitants of that type.
-
-\section{Common types}
-
-\begin{itemize}
-    \item
-        $\Void$ is the empty type.
-        It has no inhabitant.
-    \item
-        $\Bool$ is the type of boolean values.
-        This type has two inhabitants: $\true$ and $\false$.
-    \item
-        $\Bit$ has two inhabitants: $0$ and $1$.
-    \item
-        $\Fun{a}{b}$ is the type of functions from $a$ to $b$.
-        The function can be partial.
-        This type is also be written $a \to b$.
-    \item
-        $\Pred{a}$ is the type of
-        logical predicates about objects of type $a$.
-        We define
-        \[ \Pred{a} = \Fun{a}{\Bool}. \]
-    \item
-        $\Nat$ is the type of natural numbers.
-        This type is defined using Peano axioms.
-    \item
-        $\Set{a}$ is the type of the set of elements of type $a$.
-    \item $\List{a} = \Kleene{a}$ is the Kleene closure of $a$.
-        A list of $a$ is an ordered collection of elements of type $a$ with duplicates allowed.
-        so we can write $[x,y,z] 1 = y$.
-    \item $\Bits$ is the type of bitstrings.
-        \[
-            \Bits = \Kleene{\Bit}
-        \]
-    \item $\Either{a}{b}$ is the sum type or the union type
-        that consists of $\Left{x}$ for all $x : a$
-        and $\Right{y}$ for all $y : b$.
-    \item $\Pair{a}{b}$ is the product type
-        that consists of $(x,y)$ for all $x : a$ and $y : b$.
-    \item
-        $\Vect{a}{n}$ is the type of vectors
-        whose element type is $a$ and whose length is $n : \Nat$:
-        \[ \Vect{a}{n} = \Fun{(I n)}{a} \]
-        where
-        \[ I n = \{ 0, 1, 2, \ldots, n - 1 \} \]
-        or alternatively using predicate logic
-        \[ \Fa{x} (x : \Nat \wedge x < n \iff x : I n) \]
-    \item $\Typ$ is the type of types.
-        This implies
-        \[ \Typ : \Typ \]
-        (Does $\Typ : \Typ$ imply inconsistency?
-        Russell's paradox?
-        Unrestricted comprehension?)
-
-        This means that $\sfSet$ and $\sfRel$ can be thought as the \emph{type functions}
-        \begin{align*}
-            \sfSet &: \Typ \to \Typ,
-            \\
-            \sfRel &: \Typ \to \Typ \to \Typ.
-        \end{align*}
-\end{itemize}
-
-The cardinality of $\Nat$ is $\aleph_0$ (aleph-null).
-
-\section{Cardinality of types}
-
-$|\List{a}| = |\Fun{\Nat}{a}|$.
-
-\(|a \to b| = |b|^{|a|}\)
-
-If a type has finitely many inhabitants,
-then the cardinality of that type is the number of its inhabitants.
-
-If there is a bijection between two types,
-then those types have the same cardinality.
-
-Type-theoretic restatement of Cantor's theorem?
-There is no bijection between $a$ and $\Set{a}$.
-$|a| < |\Set{a}|$.
-
-Kind of ordering on cardinalities:
-\begin{itemize}
-    \item Iff there is an injection from $a$ to $b$, then $|a| \le |b|$.
-    \item Iff there is an surjection from $a$ to $b$, then $|a| \ge |b|$.
-    \item Iff there is a bijection between $a$ and $b$, then $|a| = |b|$.
-\end{itemize}
-
-Two sets are equinumerous (have the same cardinality) if and only if there is a bijection between them.
-
-$|\sfT a| = |\sfT (\Set{a})|$?
-
-\section{Cardinality theorems}
-
-\begin{mthm}
-    \[
-        |a| \lneq |\Set{a}|
-    \]
-\begin{proof}
-    Has been proved by Georg Cantor using Cantor's diagonal argument
-    that the cardinality of a set is strictly less than its power set.
-    Beth numbers.
-    $\beth_n \lneq \beth_{n+1}$ for each natural number $n$.
-\end{proof}
-\end{mthm}
-
-\begin{mthm}[Equinumerosity among one-parameter types]
-    For each $a$, all these types have the same cardinality:
-    $\Pred{a}$, $\Set{a}$.
-    \begin{proof}
-        Let $p : \Pred{a}$ be a predicate and $s : \Set{a}$ be a set.
-        We define $p$ and $s$ such that each object that satisfies the predicate $p$ is an element of the set $s$
-        and also such that each element of the set $s$ satisfies the predicate $p$.
-        \begin{align*}
-            F p &= \{ x \,|\, p x \}
-            \\
-            G s &= \lambda x \to x \in s
-        \end{align*}
-        The relationship is
-        \[ \FA{x} (p x \iff x \in s) \]
-
-        But what if $p x = x \not\in S$.
-        Or what if $p x = \neg\exists S ~ x \in S$?
-        Or what if $p x = \Fa{S} x \in S$?
-        Or what if $p x = x \in x$?
-        What if $p x = \neg (p x)$?
-        Isn't this prone to Russell's paradox?
-        Unrestricted comprehension?
-        FIXME?
-
-        Or is this not prone?
-        $p$ cannot refer to $s$?
-        Can it?
-    \end{proof}
-\end{mthm}
-
-Thus a predicate is a set and a set is a predicate.
-It turns out that there is a name for this concept:
-that set is the \emph{extension} of that predicate.
-If $p$ is a predicate, then $p$ is also a set,
-so we can write $x \in p$ to mean that $p x$ is true.
-What if we assume that a predicate is equal to its own extension?
-Now we make a bold but reasonable claim:
-a predicate \emph{is} a set and a set \emph{is} a predicate.
-This has some interesting consequences.
-
-If we assume the equality, then $p$ becomes a fixed point of $\phi \mu$.
-To see this, we have to define several functions.
-Let $\phi$ be the flip combinator, that is $\phi f x y = f y x$.
-Let $\mu$ be the set membership function, that is $\mu x y = x \in y$.
-Recall that the $\eta$-reduction transforms $p x = q x$ to $p = q$.
-\begin{align*}
-    p x &= x \in s
-    \\
-    &= \mu x s
-    \\
-    &= \phi \mu s x
-    \\
-    p &= \phi \mu s
-    \\
-    p &= s
-    \\
-    p &= \phi \mu p
-    \\
-    p &= \phi \mu (\phi \mu p)
-    \\
-    &= \phi \mu (\phi \mu (\phi \mu p))
-    \\
-    &= \ldots
-\end{align*}
-That implies that we can write strange but provable things like these:
-\begin{align*}
-    1 \in \{0,1,2\} &= \{0,1,2\} 1 = \true
-    \\
-    3 \in \{0,1,2\} &= \{0,1,2\} 3 = \false
-    \\
-    (\lambda x \to x = 1) 1 &= 1 \in (\lambda x \to x = 1) = \true
-\end{align*}
-but this can be confusing at first.
-Should we distinguish predicate and set?
-Should we treat them as the same thing?
-The membership operator $\in$ becomes swapped function application.
-
-We can even generalize the notation $f x = x \in f$ to every function $f : a \to b$, not just predicates.
-Let $f x = x + 1$. Then $f 0 = 0 \in f = 1$.
-This may need some effort and time to get accustomed to,
-but once you master it, you will be another mathematician.
-
-\begin{mthm}[Equinumerosity among two-parameter types]
-    All these types have the same cardinality:
-    \begin{itemize}
-        \item $\Relab{a}{b}$, $\Relab{b}{a}$
-        \item $\Pred(a,b)$, $\Pred(b,a)$
-        \item $\Set{(a,b)}$, $\Set{(b,a)}$
-        \item $\Fun{a}{(\Set{b})}$, $\Fun{(\Set{a})}{b}$
-    \end{itemize}
-    \begin{proof}
-        Proving $|\Relab{a}{b}| = |\Relab{b}{a}|$ is simple.
-
-        Proving $|\Pred(a,b)| = |\Pred(b,a)|$ is simple.
-
-        $r : \Relab{a}{b}$ and $p : \Pred(a,b)$ and $f : a \to b \to \Bool$.
-        $r$ relates $x$ to $y$ if and only if $p(x,y)$ is true.
-        \begin{align*}
-            p z &= z \in r
-             \\ &= \mu z r
-             \\ &= \phi \mu r z
-            \\
-            p &= \phi \mu r
-        \end{align*}
-        Then let $p = r$.
-
-        Since there is a bijection between $\Pred{(a,b)}$ and $\Relab{a}{b}$
-        and between $\Pred{a}$ and $\Set{a}$,
-        there is a bijection between $\Relab{a}{b}$ and $\Set{(a,b)}$.
-
-        To prove that there is a bijection between $\Relab{a}{b}$ and $\Fun{a}{(\Set{b})}$,
-        we choose any $r : \Relab{a}{b}$ that is a relation
-        from objects of type $a$ to objects of type $b$.
-        Define the \emph{image of $x$ in $r$} as
-        $i r x = \{ y \,|\, \text{$r$ relates $x$ to $y$} \}$
-        where the type of $i$ is $\Relab{a}{b} \to a \to \Set{b}$.
-        We define the \emph{relation functionization} function $F$ as
-        \[ F r = \{ (x,Y) \,|\, i r x = Y \} \]
-        we capitalize $Y$ to highlight the fact that it is a set.
-        $G : \Fun{a}{(\Set{b})} \to \Relab{a}{b}$ is the \emph{function relationization} function.
-        \[ G f = \{ (x,y) \,|\, y \in f x \} \]
-        $G f$ relates $x$ to $y$ iff $y \in f x$.
-        We can see that $F(G f) = f$ and $G(F r) = r$.
-        Thus $F \circ G$ is the identity of $\Fun{a}{(\Set{b})}$
-        and $G \circ F$ is the identity of $\Relab{a}{b}$.
-        Thus $F$ and $G$ are inverses of each other.
-
-        ???
-    \end{proof}
-\end{mthm}
-
-There is a mapping from $\Fun{a}{b}$ to $\Relab{a}{b}$.
-There is a bijection between $\Relab{a}{b}$ and $\Relab{b}{a}$.
-There is a bijection between $\Relab{b}{a}$ and $\Fun{b}{(\Set{a})}$.
-This means that there is a bijection between $\Fun{a}{(\Set{b})}$ and $\Fun{b}{(\Set{a})}$.
-
-\section{Machines}
-
-\section{Machine types}
-
-We define the \emph{type of a deterministic machine with configuration type $c$} as
-\[ \DMach{c} = \Pair{(\Set{c})}{(\Fun{c}{c})} \]
-Compare this to the type of a nondeterministic machine
-with the same configuration type,
-which differs only in the type of the second element of the pair
-by replacing $\sfFun$ with $\sfRel$:
-\[ \NMach{c} = \Pair{(\Set{c})}{(\Relab{c}{c})}. \]
-We can generalize this by parametrization to
-the \emph{type of a machine with configuration type $c$
-and transition kind $t$},
-\[
-    \Mach{t}{c} = \Pair{(\Set{c})}{(t\,c\,c)},
-\]
-so that we can define in hindsight that
-\begin{align*}
-       \sfDMach &= \Macha{\sfFun},
-    \\
-       \sfNMach &= \Macha{\sfRel}.
-\end{align*}
-
-\section{Inhabitants of the machine types}
-
-A \emph{deterministic machine $D$ with configuration type $c$}
-(an inhabitant of $\DMach{c}$) is
-\begin{align*}
-    D &= (I,\beta) : \DMach{c}
-\end{align*}
-where
-\begin{itemize}
-    \item the set $I : \Set{c}$ is the set of all \emph{initial configurations} of the machine, and
-    \item the function $\beta : \Fun{c}{c}$ is the \emph{transition function} of the machine.
-\end{itemize}
-
-\section{Turing machines}
-
-The machine we have been talking about
-can be more general than a deterministic Turing machine.
-To make a machine that is equivalent to a Turing machine,
-the configuration type must be countable
-and the transition function must be recursive.
-\begin{align*}
-    \DTM &= \Pair{(\Set{\Bits})}{\RecFun}
-    \\
-    \NTM &= \Pair{(\Set{\Bits})}{\RecRel}
-    \\
-    \RecFun &< \Fun{\Bits}{\Bits}
-    \\
-    \RecRel &< \Relab{\Bits}{\Bits}
-\end{align*}
-
-If and only if $|\RecFun| = |\RecRel|$,
-nondeterminism does not let the machine compute any more function.
-
-Recall that a predicate is a set and a set is a predicate.
-The set $I$ is a subset of $C$.
-Let $C$ be the set of all inhabitants of the configuration type $c$.
-
-\section{Introduction}
-
-A \emph{configuration} of a machine is a state of that machine at a certain time.
-For example, a configuration of a Turing machine is a tuple of its state,
-its head positions, and the contents of its tapes.
-A \emph{machine} is a \emph{transition function}.
-This transition function depends on the set of primitive operations of the machine.
-Seen the other way around, this transition function
-determines the set of primitive operations of the machine.
-
-A machine is an embodiment of an algorithm.
-
-A machine performs computation by repeatedly
-making a transition from its current configuration
-according to its transition function
-until it reaches a terminal configuration.
-
-A \emph{primitive operation} maps a configuration to a configuration.
-Every primitive operation represents a computation that the machine can do in one unit time.
-An \emph{architecture} is a set of primitive operations
-and a set of rules for evaluating expressions built using those primitive operations.
-A \emph{machine} is an architecture and a configuration representing its current state.
-
-\section{Deterministic machines and graph theory}
-
-We can see the tuple $(C,\beta)$ as a \emph{directed graph}
+We can see the tuple $(C,f)$ as a \emph{directed graph}
 where each configuration is a vertex in the graph
-and there is an edge from $x$ to $y$ if and only if $\beta(x) = y$.
+and there is an edge from $x$ to $y$ if and only if $f(x) = y$.
 An \emph{initial configuration} is a possible configuration from which the machine starts computing.
 An initial configuration contains an input for the algorithm running on the machine.
 A deterministic machine always starts computing from an initial configuration
@@ -719,17 +362,12 @@ and always either goes into infinite cycle or ends at terminal configuration.
 
 \paragraph{Termination}
 A configuration $x$ is \emph{terminal} iff
-there is no $y$ satisfying $\beta x = y$, that is iff there is no $y$ such that $(x,y) \in \beta$.
-In the graph, such configuration $x$ is terminal iff it has zero out-degree,
-that is iff there is no edge from that configuration in the graph.
+there is no $y$ such that $(x,y) \in f$.
+A vertex is terminal iff its out-degree is zero.
 
-When there is ambiguity about which machine we are discussing,
-we will write something like `terminal $D$-configuration'
-or `$\beta$-terminal configuration' instead of just `terminal configuration'.
-
-We say that a configuration $x$ \emph{eventually terminates}
-iff there exists $n$ such that $\beta^n(x)$ is terminal.
-Such configuration $x$ eventually terminates iff repeated application of $\beta$ to $x$
+A configuration $x$ \emph{eventually terminates}
+iff there exists $n$ such that $f^n(x)$ is terminal.
+Such configuration $x$ eventually terminates iff repeated application of $f$ to $x$
 eventually produces a terminal configuration.
 In the graph, such configuration $x$ eventually terminates iff
 there is a path from $x$ to a terminal configuration.

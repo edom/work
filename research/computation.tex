@@ -5,6 +5,19 @@
 \index{unary algebra}%
 A \emph{unary algebra} is \((S,f)\) where \(f : S \to S\).
 
+\section{Fixed point}
+
+Iff \(x = f(x)\) then \(x\) is a \emph{fixed point} of \(f\).
+
+Let \(F\) be a set of some functions.
+Let \(G(F)\) be the set of all functions that can be made by combining the functions in \(F\).
+
+A recursive equation has the form \(f(x) = g(f,x)\).
+For example, iff \(x^2 = x^4 + 1\) and \(f(x) = x^2\), then \(g(f,x) = x^4 + 1 = [f(x)]^2 + 1 = f(x^2) + 1 = x^4 + f(1)\)
+and many more.
+
+The \(y\)-combinator satisfies \(y(f) = f(y(f))\).
+
 \section{String}
 
 \index{language}%
@@ -70,6 +83,136 @@ There is a bijection between DFAs and their final-state functions.
 \(D\) \emph{accepts} \(w\) iff \(f(w) \in F\).
 
 The \emph{language recognized by \(D\)} is \(\{ w ~|~ f(w) \in F \}\).
+
+\section{Machine}
+
+A \emph{machine} is \((S,I,f)\)
+where \(S\) is the \emph{state set},
+\(I \subseteq C\) is the \emph{initial state set},
+and \(f \subseteq C \times C\) is the \emph{transition relation}.
+Iff \(f\) is a function, then the machine is \emph{deterministic}.
+
+A Turing machine is \((C,I,f)\)
+where \(C\) is countable
+and \(f\) is recursive.
+
+Example: a state of a Turing machine is \((c,l,h,r)\)
+where \(c\) is a configuration,
+\(l\) is the tape content to the left of the head,
+\(h\) is the tape content at the head,
+and \(r\) is the tape content to the right of the head.
+
+\section{Primitive by metric}
+
+Iff \(d\) is a metric,
+then \(f\) is \emph{\(d\)-primitive} iff \(d(x,f(x)) \le 1\).
+
+Let \(P\) be a set of some \(d\)-primitive functions.
+Let \(P^*\) be the set of all finite compositions of the functions in \(P\).
+
+\paragraph{Example}
+Let \(S\) be the set of all infinite \(\Nat\)-indexed \(E\)-arrays.
+Let \(x,y \in S\).
+The \emph{Hamming distance between \(x\) and \(y\)} is
+\(d(x,y) = \sum_{k\in\Nat} [x_k \neq y_k]\).
+The function \(f(x_0,x_1,\ldots) = f(0,x_1,\ldots)\) is \(d\)-primitive,
+which in English means that this \(f\) does not change more than one element.
+
+\section{Primitive by fiat}
+
+Let \(AB = \{ ab ~|~ a \in A, ~ b \in B \}\)
+where \(ab\) is string concatenation.
+
+Let the \emph{instruction set} \(I\) be a finite set of atoms.
+
+The set of all \(I\)-programs is \(I^*\).
+
+Let the \emph{state set} be \(S\).
+Let the \emph{primitive set} \(P\) be a finite set of \(S\)-endofunctions.
+The set of all \emph{\(P\)-computable} functions is \(P^*\).
+The set \(P^*\) contains every program that can be made from a finite composition of the functions in \(P\):
+the function \(f\) is \(P\)-computable iff it is equal to a finite composition of functions in \(P^*\).
+
+Let the \emph{execution function} \(f : I^* \to P^*\)
+where
+\(f(\emptystr) = id\),
+\(f(ab) = f(a) \circ f(b)\),
+and that \(x \in I\) implies \(f(x) \in P\).
+The set of all \emph{\(I\)-describable} functions are \(\{ f(x) ~|~ x \in I^* \}\).
+
+Let \(S = \Nat^\infty\).
+Example:
+Infinite-stack machine:
+\begin{align*}
+    swap(a,b,c,\ldots) = (b,a,c,\ldots)
+    \\
+    dup(a,b,\ldots) = (a,a,b,\ldots)
+    \\
+    push(a,b,\ldots) = (0,a,b,\ldots)
+    \\
+    pop(a,b,c,\ldots) = (b,c,\ldots)
+    \\
+    read(k,x_0,x_1,\ldots) = (x_k,x_0,x_1,\ldots)
+    \\
+    write(k,v,x_0,x_1,\ldots) = (k,v,x_0,x_1,\ldots,x_{k-1},v,x_{k+1},\ldots)
+    \\
+    if(0,f,t,a,\ldots) = (f,a,\ldots)
+    \\
+    if(1,f,t,a,\ldots) = (t,a,\ldots)
+    \\
+    inc(a,b,\ldots) = (a+1,b,\ldots)
+    \\
+    dec(a,b,\ldots) = (a-1,b,\ldots)
+    \\
+    add(a,b,c,\ldots) = (a+b,c,\ldots)
+\end{align*}
+
+\section{Machine (old)}
+
+A machine that can only change one cell at a time.
+A machine is
+\((P, f)\)
+where \(P = (S,A^\infty)\)
+and
+\(d~x~(f~x) \le 1\)
+for all \(x : P\).
+The state set \(S\) is finite.
+The alphabet \(A\) is finite.
+Define the distance between two phases as
+\begin{align}
+    d~(s,x)~(t,y) = \sum_{k : \Nat} ~ [x_k \neq y_k].
+\end{align}
+It ignores the state.
+It only cares about the memory.
+
+But unlike Turing machines, this machine cannot approach an infinite number of 1s...
+
+The machine is free to change its state as long as it only changes at most one cell at a time.
+If we remove the restriction, we get a nondeterministic machine,
+or even an oracle.
+
+If \(S\) has exactly \(n\) elements,
+we can encode \(f : S \to A\) as \(g : A^n\)
+where \(f~s_k = g_k\) where \(g = (f~s_1, \ldots, f~s_n)\).
+
+\section{Machine (older)}
+
+The transition function depends on the set of primitive operations of the machine.
+Seen the other way around, this transition function
+determines the set of primitive operations of the machine.
+
+A machine is an embodiment of an algorithm.
+
+A machine performs computation by repeatedly
+making a transition from its current configuration
+according to its transition function
+until it reaches a terminal configuration.
+
+A \emph{primitive operation} maps a configuration to a configuration.
+Every primitive operation represents a computation that the machine can do in one unit time.
+An \emph{architecture} is a set of primitive operations
+and a set of rules for evaluating expressions built using those primitive operations.
+A \emph{machine} is an architecture and a configuration representing its current state.
 
 \section{Turing machine}
 
@@ -263,34 +406,6 @@ A finite state machine has input, but no memory.
 We can encode memory as infinite feedforward.
 
 A finite state machine step function is a function \((S,I) \to (S,O)\).
-
-\section{Machine}
-
-A machine that can only change one cell at a time.
-A machine is
-\((P, f)\)
-where \(P = (S,A^\infty)\)
-and
-\(d~x~(f~x) \le 1\)
-for all \(x : P\).
-The state set \(S\) is finite.
-The alphabet \(A\) is finite.
-Define the distance between two phases as
-\begin{align}
-    d~(s,x)~(t,y) = \sum_{k : \Nat} ~ [x_k \neq y_k].
-\end{align}
-It ignores the state.
-It only cares about the memory.
-
-But unlike Turing machines, this machine cannot approach an infinite number of 1s...
-
-The machine is free to change its state as long as it only changes at most one cell at a time.
-If we remove the restriction, we get a nondeterministic machine,
-or even an oracle.
-
-If \(S\) has exactly \(n\) elements,
-we can encode \(f : S \to A\) as \(g : A^n\)
-where \(f~s_k = g_k\) where \(g = (f~s_1, \ldots, f~s_n)\).
 
 \section{Logical formulation of Turing machine}
 

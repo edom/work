@@ -1,0 +1,250 @@
+\chapter{Type theory (old computation book chapter draft)}
+
+The type theory described here is inspired by
+Martin-L\"of type theory
+and the Haskell programming language.
+The type theory is constructive (intuitionistic) and dependent.
+
+\section{Notation}
+
+Iff \(a\) is a type then \(|a|\) is the \emph{cardinality} of \(a\).
+It is the number of inhabitants of that type.
+
+\section{Common types}
+
+\begin{itemize}
+    \item
+        $\Void$ is the empty type.
+        It has no inhabitant.
+    \item
+        $\Bool$ is the type of boolean values.
+        This type has two inhabitants: $\true$ and $\false$.
+    \item
+        $\Bit$ has two inhabitants: $0$ and $1$.
+    \item
+        $\Fun{a}{b}$ is the type of functions from $a$ to $b$.
+        The function can be partial.
+        This type is also be written $a \to b$.
+    \item
+        $\Pred{a}$ is the type of
+        logical predicates about objects of type $a$.
+        We define
+        \[ \Pred{a} = \Fun{a}{\Bool}. \]
+    \item
+        $\Nat$ is the type of natural numbers.
+        This type is defined using Peano axioms.
+    \item
+        $\Set{a}$ is the type of the set of elements of type $a$.
+    \item $\List{a} = \Kleene{a}$ is the Kleene closure of $a$.
+        A list of $a$ is an ordered collection of elements of type $a$ with duplicates allowed.
+        so we can write $[x,y,z] 1 = y$.
+    \item $\Bits$ is the type of bitstrings.
+        \[
+            \Bits = \Kleene{\Bit}
+        \]
+    \item $\Either{a}{b}$ is the sum type or the union type
+        that consists of $\Left{x}$ for all $x : a$
+        and $\Right{y}$ for all $y : b$.
+    \item $\Pair{a}{b}$ is the product type
+        that consists of $(x,y)$ for all $x : a$ and $y : b$.
+    \item
+        $\Vect{a}{n}$ is the type of vectors
+        whose element type is $a$ and whose length is $n : \Nat$:
+        \[ \Vect{a}{n} = \Fun{(I n)}{a} \]
+        where
+        \[ I n = \{ 0, 1, 2, \ldots, n - 1 \} \]
+        or alternatively using predicate logic
+        \[ \Fa{x} (x : \Nat \wedge x < n \iff x : I n) \]
+    \item $\Typ$ is the type of types.
+        This implies
+        \[ \Typ : \Typ \]
+        (Does $\Typ : \Typ$ imply inconsistency?
+        Russell's paradox?
+        Unrestricted comprehension?)
+
+        This means that $\sfSet$ and $\sfRel$ can be thought as the \emph{type functions}
+        \begin{align*}
+            \sfSet &: \Typ \to \Typ,
+            \\
+            \sfRel &: \Typ \to \Typ \to \Typ.
+        \end{align*}
+\end{itemize}
+
+The cardinality of $\Nat$ is $\aleph_0$ (aleph-null).
+
+\section{Cardinality of types}
+
+$|\List{a}| = |\Fun{\Nat}{a}|$.
+
+\(|a \to b| = |b|^{|a|}\)
+
+If a type has finitely many inhabitants,
+then the cardinality of that type is the number of its inhabitants.
+
+If there is a bijection between two types,
+then those types have the same cardinality.
+
+Type-theoretic restatement of Cantor's theorem?
+There is no bijection between $a$ and $\Set{a}$.
+$|a| < |\Set{a}|$.
+
+Kind of ordering on cardinalities:
+\begin{itemize}
+    \item Iff there is an injection from $a$ to $b$, then $|a| \le |b|$.
+    \item Iff there is an surjection from $a$ to $b$, then $|a| \ge |b|$.
+    \item Iff there is a bijection between $a$ and $b$, then $|a| = |b|$.
+\end{itemize}
+
+Two sets are equinumerous (have the same cardinality) if and only if there is a bijection between them.
+
+$|\sfT a| = |\sfT (\Set{a})|$?
+
+\section{Cardinality theorems}
+
+\begin{mthm}
+    \[
+        |a| \lneq |\Set{a}|
+    \]
+\begin{proof}
+    Has been proved by Georg Cantor using Cantor's diagonal argument
+    that the cardinality of a set is strictly less than its power set.
+    Beth numbers.
+    $\beth_n \lneq \beth_{n+1}$ for each natural number $n$.
+\end{proof}
+\end{mthm}
+
+\begin{mthm}[Equinumerosity among one-parameter types]
+    For each $a$, all these types have the same cardinality:
+    $\Pred{a}$, $\Set{a}$.
+    \begin{proof}
+        Let $p : \Pred{a}$ be a predicate and $s : \Set{a}$ be a set.
+        We define $p$ and $s$ such that each object that satisfies the predicate $p$ is an element of the set $s$
+        and also such that each element of the set $s$ satisfies the predicate $p$.
+        \begin{align*}
+            F p &= \{ x \,|\, p x \}
+            \\
+            G s &= \lambda x \to x \in s
+        \end{align*}
+        The relationship is
+        \[ \FA{x} (p x \iff x \in s) \]
+
+        But what if $p x = x \not\in S$.
+        Or what if $p x = \neg\exists S ~ x \in S$?
+        Or what if $p x = \Fa{S} x \in S$?
+        Or what if $p x = x \in x$?
+        What if $p x = \neg (p x)$?
+        Isn't this prone to Russell's paradox?
+        Unrestricted comprehension?
+        FIXME?
+
+        Or is this not prone?
+        $p$ cannot refer to $s$?
+        Can it?
+    \end{proof}
+\end{mthm}
+
+Thus a predicate is a set and a set is a predicate.
+It turns out that there is a name for this concept:
+that set is the \emph{extension} of that predicate.
+If $p$ is a predicate, then $p$ is also a set,
+so we can write $x \in p$ to mean that $p x$ is true.
+What if we assume that a predicate is equal to its own extension?
+Now we make a bold but reasonable claim:
+a predicate \emph{is} a set and a set \emph{is} a predicate.
+This has some interesting consequences.
+
+If we assume the equality, then $p$ becomes a fixed point of $\phi \mu$.
+To see this, we have to define several functions.
+Let $\phi$ be the flip combinator, that is $\phi f x y = f y x$.
+Let $\mu$ be the set membership function, that is $\mu x y = x \in y$.
+Recall that the $\eta$-reduction transforms $p x = q x$ to $p = q$.
+\begin{align*}
+    p x &= x \in s
+    \\
+    &= \mu x s
+    \\
+    &= \phi \mu s x
+    \\
+    p &= \phi \mu s
+    \\
+    p &= s
+    \\
+    p &= \phi \mu p
+    \\
+    p &= \phi \mu (\phi \mu p)
+    \\
+    &= \phi \mu (\phi \mu (\phi \mu p))
+    \\
+    &= \ldots
+\end{align*}
+That implies that we can write strange but provable things like these:
+\begin{align*}
+    1 \in \{0,1,2\} &= \{0,1,2\} 1 = \true
+    \\
+    3 \in \{0,1,2\} &= \{0,1,2\} 3 = \false
+    \\
+    (\lambda x \to x = 1) 1 &= 1 \in (\lambda x \to x = 1) = \true
+\end{align*}
+but this can be confusing at first.
+Should we distinguish predicate and set?
+Should we treat them as the same thing?
+The membership operator $\in$ becomes swapped function application.
+
+We can even generalize the notation $f x = x \in f$ to every function $f : a \to b$, not just predicates.
+Let $f x = x + 1$. Then $f 0 = 0 \in f = 1$.
+This may need some effort and time to get accustomed to,
+but once you master it, you will be another mathematician.
+
+\begin{mthm}[Equinumerosity among two-parameter types]
+    All these types have the same cardinality:
+    \begin{itemize}
+        \item $\Relab{a}{b}$, $\Relab{b}{a}$
+        \item $\Pred(a,b)$, $\Pred(b,a)$
+        \item $\Set{(a,b)}$, $\Set{(b,a)}$
+        \item $\Fun{a}{(\Set{b})}$, $\Fun{(\Set{a})}{b}$
+    \end{itemize}
+    \begin{proof}
+        Proving $|\Relab{a}{b}| = |\Relab{b}{a}|$ is simple.
+
+        Proving $|\Pred(a,b)| = |\Pred(b,a)|$ is simple.
+
+        $r : \Relab{a}{b}$ and $p : \Pred(a,b)$ and $f : a \to b \to \Bool$.
+        $r$ relates $x$ to $y$ if and only if $p(x,y)$ is true.
+        \begin{align*}
+            p z &= z \in r
+             \\ &= \mu z r
+             \\ &= \phi \mu r z
+            \\
+            p &= \phi \mu r
+        \end{align*}
+        Then let $p = r$.
+
+        Since there is a bijection between $\Pred{(a,b)}$ and $\Relab{a}{b}$
+        and between $\Pred{a}$ and $\Set{a}$,
+        there is a bijection between $\Relab{a}{b}$ and $\Set{(a,b)}$.
+
+        To prove that there is a bijection between $\Relab{a}{b}$ and $\Fun{a}{(\Set{b})}$,
+        we choose any $r : \Relab{a}{b}$ that is a relation
+        from objects of type $a$ to objects of type $b$.
+        Define the \emph{image of $x$ in $r$} as
+        $i r x = \{ y \,|\, \text{$r$ relates $x$ to $y$} \}$
+        where the type of $i$ is $\Relab{a}{b} \to a \to \Set{b}$.
+        We define the \emph{relation functionization} function $F$ as
+        \[ F r = \{ (x,Y) \,|\, i r x = Y \} \]
+        we capitalize $Y$ to highlight the fact that it is a set.
+        $G : \Fun{a}{(\Set{b})} \to \Relab{a}{b}$ is the \emph{function relationization} function.
+        \[ G f = \{ (x,y) \,|\, y \in f x \} \]
+        $G f$ relates $x$ to $y$ iff $y \in f x$.
+        We can see that $F(G f) = f$ and $G(F r) = r$.
+        Thus $F \circ G$ is the identity of $\Fun{a}{(\Set{b})}$
+        and $G \circ F$ is the identity of $\Relab{a}{b}$.
+        Thus $F$ and $G$ are inverses of each other.
+
+        ???
+    \end{proof}
+\end{mthm}
+
+There is a mapping from $\Fun{a}{b}$ to $\Relab{a}{b}$.
+There is a bijection between $\Relab{a}{b}$ and $\Relab{b}{a}$.
+There is a bijection between $\Relab{b}{a}$ and $\Fun{b}{(\Set{a})}$.
+This means that there is a bijection between $\Fun{a}{(\Set{b})}$ and $\Fun{b}{(\Set{a})}$.
