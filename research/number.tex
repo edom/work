@@ -175,6 +175,49 @@ Define \(u(m) = \lim_{n \to \infty} u_n(m)\).
 
 Example: \(u(2) = 1/2\), \(u(3) = u(4) = 4/6\), \(u(5) = u(6) = 23/30\), \(u(7) = u(8) = u(9) = u(10) = 86/105\).
 
+\section{Primality and monoid}
+
+The ordered pair \((a,b)\) is a \emph{2-factorization} of \(x\) iff \(ab = x\).
+The \emph{2-factorization set} of \(x\) is \(F(x) = \{ (a,b) ~|~ ab = x \}\).
+
+In \(\Nat\):
+If \(x \ge 1\) then \(|F(x)|\) is even.
+Let \(G(n) = \{ x : |F(x)| = n \}\).
+
+\paragraph{Factor}
+Iff \(ab = x\) then
+\(a\) is a \emph{left factor} of \(x\),
+\(a\) is a \emph{left divisor} \(x\),
+\(a\) \emph{left-divides} \(x\),
+\(b\) is a \emph{right factor} of \(x\),
+\(b\) is a \emph{right divisor} of \(x\),
+\(b\) \emph{right-divides} \(x\),
+\(a\) is a \emph{factor} of \(x\),
+and \(b\) is a \emph{factor} of \(x\).
+Iff \(ab = x\) and \(ac = y\),
+then \(a\) is a \emph{common left factor} of \(x\) and \(y\).
+Iff \(ab = x\) and \(cb = x\),
+then \(b\) is a \emph{common right factor} of \(x\) and \(y\).
+A \emph{common factor} is a common left factor or common right factor.
+
+\paragraph{Prime}
+\(x\) is
+\emph{prime} iff \(F(x) = \{(1,x),(x,1)\}\),
+\emph{composite} iff it is not prime.
+
+What is the maximum number of primes in a monoid with n elements?
+Let the answer be a(n).
+a(1)=0. a(2)=1. a(3)=2. a(n)=n-1?
+
+An \emph{ordered monoid} is a monoid and an order \(\le\).
+
+A \emph{monotone monoid} is a monoid where \(a \le ab\) and \(b \le ab\).
+
+The element \(g\) is a
+\index{generator}%
+\emph{generator} of \((S,\cdot,1)\) iff \(\{g^n ~|~ n \in \Nat\} = S\)
+where \(g^0 = 1\) and \(g^{n+1} = g \cdot g^n\).
+
 \section{R2 = R}
 
 There is a bijection between \(\Real^2\) and \(\Real\).
