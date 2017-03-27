@@ -92,17 +92,12 @@ read Arora and Barak \cite{Arora2009};
 read Marek and Remmel \cite{Marek2009};
 read Boolos, Burgess, and Jeffrey \cite{Boolos2002}
 
-Descriptive complexity: Fagin's theorem.
-Neil Immerman's book.
-NP equivalent to existential second-order logic.
-% http://en.wikipedia.org/wiki/Fagin%27s_theorem
-
 \section{Diary}
 
 In this document, I use the term \emph{predicate} to always mean
 a total function that takes a bit string and gives a bit.
 Furthermore, if $f$ is a predicate, then
-I may write ``$x$ \emph{satisfies} $f$'' to mean $f~x = 1$, and
+I may write ``$x$ \emph{satisfies} $f$'' to mean $f(x) = 1$, and
 I may write ``$f$ is \emph{satisfiable}'' to mean
 that there exists $x$ that satisfies $f$.
 
@@ -147,18 +142,18 @@ a computation is a repeated application of a function $f$
 until the output does not change anymore.
 The computation begins with the input $x$ already in place.
 I write that such computation produces the output $y$
-in $n$ steps iff $n$ is the smallest number such that $f^{n-1}~x = f^n~x = y$
-where $f^n~x$ means $n$ times applying $f$ to $x$.
+in $n$ steps iff $n$ is the smallest number such that $f^{n-1}(x) = f^n(x) = y$
+where $f^n(x)$ means $n$ times applying $f$ to $x$.
 This function can be thought a transition function that describes
 how the entire system (machine state and tape content) changes.
 A machine can be seen as a function.
 
 This is a special case of fractal? Chaotic function?
 
-The zero function $f~x = 0$ corresponds to a machine
+The zero function $f(x) = 0$ corresponds to a machine
 that always accepts its input.
 
-The function $f~x = 2 \cdot x$ corresponds to a machine
+The function $f(x) = 2 \cdot x$ corresponds to a machine
 that appends a zero bit to the memory, one by one.
 
 One-instruction-set computer.
@@ -238,7 +233,7 @@ or pick a bit and append it to the current string.
 The running time of that algorithm is a function of the length
 of the shortest string that satisfies the predicate.
 Let $s~p$ be the length of the shortest string that satisfies the predicate $p$.
-We have just shown that the problem is in $\NTIME(O(s~p))$.
+We have just shown that the problem is in $\NTIME(O(s(p)))$.
 
 Now, if we can show that for that problem
 there is no better deterministic algorithm than the exhaustive search
@@ -247,7 +242,7 @@ then we prove that P and NP are not equal.
 
 The size of the search space of all deterministic algorithms
 that run in $n$ steps is smaller than...
-$\DTIME(2^{s~p})$.
+$\DTIME(2^{s(p)})$.
 
 Can the algorithm use any information from
 the string representation of the predicate?
@@ -256,18 +251,18 @@ Suppose that there is a deterministic algorithm that can
 always find an answer in polynomial time.
 
 How many satisfiable predicates are there?
-Let $c~n$ be the number of predicates that can be satisfied
+Let $c(n)$ be the number of predicates that can be satisfied
 by an input that is not longer than $n$ bits.
 \begin{align}
-  c~0 &= 2^{2^0} - 1 = 1
-  \\
-  c~1 &= 2^{2^0 + 2^1} - 1 = 7
-  \\
-  c~2 &= 2^{2^0 + 2^1 + 2^2} - 1 = 127
-  \\
-  c~3 &= 2^{2^0 + 2^1 + 2^2 + 2^3} - 1 = 32,767
-  \\
-  c~n &= 2^{2^{n+1}-1} - 1
+    c(0) &= 2^{2^0} - 1 = 1
+    \\
+    c(1) &= 2^{2^0 + 2^1} - 1 = 7
+    \\
+    c(2) &= 2^{2^0 + 2^1 + 2^2} - 1 = 127
+    \\
+    c(3) &= 2^{2^0 + 2^1 + 2^2 + 2^3} - 1 = 32,767
+    \\
+    c(n) &= 2^{2^{n+1}-1} - 1
 \end{align}
 
 I use the term \emph{$n$-least predicate} to mean that the predicate
@@ -288,17 +283,9 @@ Natural numbers are countable.
 
 \section{Introduction}
 
-A relation between two sets is a subset of the Cartesian product of those sets.
-A \emph{relation} from $A$ to $B$ is a subset of $A \times B$.
-A \emph{function} is a single-valued relation:
-an injection:
-If $a = b$ then $f a = f b$.
-If $(a,b) \in f$ and $(a,c) \in f$ then $b = c$.
-
-There are infinitely many functions.
 What does it mean for a function to be \emph{computable} or \emph{recursive}?
 
-Constant function $\forall x ~ f x = a$.
+Constant function $\forall x ~ f(x) = a$.
 
 Roughly speaking, we say that a function is computable
 if and only if it can be stated as a finite arrangement
@@ -306,11 +293,6 @@ of certain primitive operations we allow.
 
 For example, if we only allow the constant function,
 then the machine will either accept all input or reject all input.
-
-The Turing machine is too much distraction
-from the more abstract nature of computation itself
-that might be more conveniently be described in.
-It gives too much emphasis on \emph{how} to perform a computation.
 
 \section{First attempt}
 
@@ -729,15 +711,14 @@ A \emph{machine} is an architecture and a configuration representing its current
 
 We can see the tuple $(C,\beta)$ as a \emph{directed graph}
 where each configuration is a vertex in the graph
-and there is an edge from $x$ to $y$ if and only if $\beta x = y$.
+and there is an edge from $x$ to $y$ if and only if $\beta(x) = y$.
 An \emph{initial configuration} is a possible configuration from which the machine starts computing.
 An initial configuration contains an input for the algorithm running on the machine.
 A deterministic machine always starts computing from an initial configuration
 and always either goes into infinite cycle or ends at terminal configuration.
 
-\section{Termination}
-
-We say that a configuration $x$ is \emph{terminal} iff
+\paragraph{Termination}
+A configuration $x$ is \emph{terminal} iff
 there is no $y$ satisfying $\beta x = y$, that is iff there is no $y$ such that $(x,y) \in \beta$.
 In the graph, such configuration $x$ is terminal iff it has zero out-degree,
 that is iff there is no edge from that configuration in the graph.
@@ -747,14 +728,13 @@ we will write something like `terminal $D$-configuration'
 or `$\beta$-terminal configuration' instead of just `terminal configuration'.
 
 We say that a configuration $x$ \emph{eventually terminates}
-iff there exists a natural number $n$ such that $\beta^n x$ is terminal.
+iff there exists $n$ such that $\beta^n(x)$ is terminal.
 Such configuration $x$ eventually terminates iff repeated application of $\beta$ to $x$
 eventually produces a terminal configuration.
 In the graph, such configuration $x$ eventually terminates iff
 there is a path from $x$ to a terminal configuration.
 
-\section{What do we mean by computation?}
-
+\paragraph{Computation}
 A \emph{computation} is a path in the graph.
 More precisely, a computation from $x_0$ to $x_{n-1}$
 is a path $[x_0, x_1, \ldots, x_{n-1}]$
@@ -999,349 +979,6 @@ with transition function $t' = t^p$
 providing polynomial speedup.
 Space usage of configuration $x$.
 Length of program plus length of input.
-
-\section{Usage of computational resources}
-
-There are two computational resources we concern ourselves with:
-time and space.
-The unit of time is arbitrary.
-Number of steps. Each step takes the same amount of time.
-Each configuration transition uses the same amount of time.
-
-The time used by that computation is the length of the corresponding path.
-Formally the time required by the machine
-to move from configuration $a$ to $b$ is
-the smallest natural number $n$ such that $\beta^n a = b$.
-By definition, the machine \emph{moves in one unit time} from configuration $x$ to $y$ iff $\beta x = y$
-so $\beta$ depends on the set of primitive operations we equip the machine with.
-
-The \emph{time-to-termination} of a configuration $x$,
-written $\TC \beta x$,
-is the smallest natural number $n$ such that $\beta^n x$ is terminal.
-The time-to-termination of $x$ is the length of the shortest path from $x$ to a terminal configuration.
-
-The maximum space usage of a computation is
-the maximum of the space usages of the vertexes of the corresponding path.
-Now suppose that we write $s x$ as the \emph{space usage} of configuration $x$.
-The space usage of an initial configuration is the size of the input.
-We define $\SC \beta x$,
-the \emph{maximum-space-to-termination} of a computation from $x$
-as follows:
-\begin{equation}
-    \SC \beta x = \max_{c \in C \beta x} s c
-\end{equation}
-where we define
-$C \beta x = \{ \beta^k x \,|\, k \in \mathbb N \}$
-as the set of all configurations
-that can be reached from $x$ by following $\beta$.
-
-\section{Time class}
-
-What can a machine compute in a given number of steps?
-Given more time, does a machine compute more?
-
-What is the relationship between the size of the input and the running time?
-What is the relation between the size of
-an initial configuration and its time-to-termination?
-How fast does the time-to-termination grow?
-
-We are talking about a special kind of problems
-whose time usage depends only on the length of the input.
-
-A \emph{time class} is a set of all initial configurations that have the same time-to-termination.
-Define the \emph{time class $n$ of machine $D$},
-written $\Teq D n$ (or just $\Teq n$ when the machine is clear in the context),
-as the set of every initial $D$-configuration
-whose time-to-termination equals $n$.
-Then define $\Teqsum n$, the \emph{max-time class $n$},
-as the set of every initial configuration whose time-to-termination is less than $n$:
-\begin{equation}
-    \Teqsum n = \bigcup_{k = 0}^{n - 1} \Teq k
-\end{equation}
-
-For example, if the machine ignores its input and runs in constant time,
-$\Teqsum 1 = I$.
-
-\newcommand{\Cset}{\mathbf{C}}
-Define $\Cset n$ as the set of every initial configuration whose size is less than $n$.
-The \emph{time simplicity function of the machine} is
-\begin{equation}
-    K n = \frac{\mu(\Teqsum n)}{\mu(\Cset n)}
-\end{equation}
-(Find a better name?)
-Higher $K n$ means faster computation.
-The \emph{space simplicity function} of the machine is defined analogously:
-\begin{equation}
-    J n = \frac{\mu(\mathbf S n)}{\mu(\Cset n)}
-\end{equation}
-
-If the alphabet used is the binary alphabet $\{ 0, 1 \}$
-and the input is a natural number encoded using the usual binary positional encoding,
-then $\mu (C n) = 2^n$ and thus $\mu (\Cset n) = 2^{n + 1} - 1$.
-
-If every instance $x$ of size $\mu x$ is solved by machine
-(if the time-to-termination of each initial configuration $x$ of size $\mu x$ is less than $f(\mu x)$)
-then we say that the problem is size-bounded by $f$.
-
-Is there an $m$ such that for all $n > m$, we have $\Teq n = \varnothing$?
-Only if the machine does not read all its input?
-
-Now we examine the relation between the size of the initial configuration
-and the time to termination of that configuration.
-Intuitively, when the problem is non-trivial, as the initial configuration grows larger,
-the machine should require more time to arrive at the related terminal configuration.
-If the problem is non-trivial then a bigger initial configuration
-should imply a higher time to termination of that configuration.
-
-The minimum time-to-termination of every initial configuration of size $n$.
-
-The maximum size of every initial configuration with time-to-termination of $n$.
-
-The sets of functions computable by deterministic and nondeterministic machines are the same?
-
-$\Teq n$ may be empty?
-
-$\Teq n$ and the length of.
-
-Define space equivalence class $n$ as $\Seq n$ as the set of
-every configuration that has a maximum-space-to-termination of $n$.
-
-Both $\TC$ and $\SC$ are functions.
-Are they computable?
-$C \beta$ is also a function.
-
-Every configuration following $x_0$ is fully determined by $x_0$.
-The computation is fully determined by its first configuration.
-A machine is deterministic in the sense that given a configuration,
-the computation that proceeds from that configuration is always the same.
-What can graph theory say about computation?
-What result in graph theory helps us discover something in computation theory?
-Weighted graph can model computation with nonuniform transition time.
-But for what?
-Modeling modern machines with speculative execution?
-
-We say that an algorithm $a$ is in $\TIME(O(f n))$ where $n$ is the length of the input iff
-for infinitely many (but not necessarily every) $i$ in each initial configuration
-$x \equiv (a,i)$ that eventually terminates, we have $\TC x \in O(f(s x))$.
-
-Determining if a number is divisible by $m$ is a constant-time operation in a machine with alphabet of size $m$,
-but is it also constant-time operation in a machine with another base that is coprime to $m$?
-
-\section{Fair coding scheme}
-
-How to code almost anything into a bit string?
-
-How to code members of type $t$ into bits?
-
-How do we constrain the coding function so that meticulous mathematicians
-cannot cheat by shifting the computation into the coding function?
-
-Let $\mu t : t \to \Nat$ be the \emph{canonical measure} of an element of the countable type $t$.
-
-Let $c t : t \to \Bits$ be the coding function.
-This coding function must be measure-preserving, size-preserving.
-Formally the coding function must satisfy
-\[
-    \mu t x \le \mu t y \iff \mu \Bits (c t x) \le \mu \Bits (c t y)
-\]
-for each $x : t$ and $y : t$.
-
-\section{Terminology and notation}
-
-A \emph{list} $x$ of $X$ of length $n$ is $[x_0,x_1,\ldots,x_{n-1}]$
-where each $x_k$ has the type $X$.
-The list $x$ has type $X^*$ (the Kleene closure of $X$).
-The empty list is written $[]$.
-Lists are also known as \emph{strings}.
-
-An \emph{instance} is a string.
-A \emph{problem} is a set of instances.
-A problem is also called a \emph{language}.
-
-A \emph{complexity class} is a set of problems.
-
-We write $\TC_M e$ to mean the number of time units required by machine $M$
-to evaluate expression $e$.
-Sometimes $M$ is omitted so we write only $\TC e$
-such as when the machine is not too relevant
-or is clear in the context.
-
-To evaluate an expression is to reduce it until it becomes a value.
-A value is an expression that reduces to itself.
-
-An \emph{$X$-decider} is an implementation of a function having the type $X \to \mathbb B$.
-We say that the decider \emph{accepts} the input $x$ iff $fx$ is true.
-The \emph{language} recognized by the decider is the set
-\begin{align*}
-    \langset f = \{ x ~|~ x : X, ~ fx \}
-\end{align*}
-
-We say that $b$ is a time usage lower bound of decider $f$ iff $fx \in \Omega b$.
-We say that $b$ is the time usage infimum of that decider iff
-for all $c$ that is a time usage lower bound of $f$,
-$b$ is a time usage lower bound of $f$ and $b \in \Omega c$.
-
-The \emph{decider set} of a language \(L\) is \(\decset L = \decset L = \{ f ~|~ \langset f = L \}\).
-It is the set of all deciders whose language is \(L\).
-We say $f \leTC g$ iff $\forall x \in X^* ~ \TC(fx) \in O(\TC(gx))$.
-
-$f$ is a \emph{minimum-time decider} of $L$ iff for each $g \in \decset L$,
-it holds that $\forall x \in X^* ~ \TC(fx) \in O(\TC(gx))$.
-In other words, such $f$ is an infimum of $\decset L$ according to $\leTC$.
-
-\begin{msco}[nonexistence of time usage supremum]
-    $\decset L$ has no supremum according to $\leTC$.
-    For each decider $f \in \decset L$, there exists an asymptotically slower $g \in \decset L$.
-    \begin{align}
-        \forall f \in \decset L ~ \exists g \in \decset L ~ \forall x \in X^* ~ \TC(fx) \in o(gx)
-    \end{align}
-\end{msco}
-
-\begin{mcor}[decider set equivalence class]
-    We can define two deciders as $f$ and $g$
-    as equivalent iff for all input $x$,
-    their time usage is asymptotically similar.
-    \begin{align}
-        \mathcal E m p L = \{ f ~|~ \langset f = \decset L, ~ \forall x \in X^* ~ \TC_m(fx) \in \Theta(\TC_m(px)) \}
-    \end{align}
-\end{mcor}
-
-\begin{msco}[NTIME upper bound]
-    Let $N$ be a nondeterministic machine.
-    The number of time units required by $N$
-    to evaluate $\SDP fx$ is bounded above as follows
-    where $n$ is the length of $x$:
-    \begin{align}
-        \TC_N(\SDP fx) \in O\left(n + \max_{s \sqsubseteq x} (\TC(fs))\right)
-    \end{align}
-\end{msco}
-
-\begin{msco}[DTIME upper bound]
-    Let $D$ be a deterministic machine.
-    The number of time units required by $D$
-    to evaluate $\SDP fx$ is bounded above as follows
-    where $n$ is the length of $x$:
-    \begin{align}
-        \TC_D(\SDP fx) \in O \left( \sum_{s \sqsubseteq x} \TC(fs) \right)
-    \end{align}
-\end{msco}
-
-A \emph{$g$-transformer} of a decider $f$ is a function $g : X^* \to X^*$
-such that $fx = f(gx)$ for all $x : X^*$.
-If $\TC(fx) \in o(\TC(f(gx)))$ then
-we call the $g$-transformer a \emph{$g$-speedup}.
-On the other hand if $\TC(fx) \in \omega(\TC(f(gx)))$ then
-we call the $g$-transformer a \emph{$g$-slowdown}.
-
-\begin{mcon}[DTIME lower bound]
-    For each deterministic machine $D$,
-    $\TC_D(\SDP fx) \in \Omega(m^n)$ for all $f : X^* \to \mathbb B$
-    and $x : X^*$
-    where $|X| = m$
-    and $|x| = n$.
-\end{mcon}
-
-\begin{mcon}[existence of a certain decider]
-There exists an alphabet $X$
-and an $X^*$-decider $f$ such that
-for each list $x : X^*$ of length $n$,
-the following two statements hold
-\begin{align}
-    \TC_D(\SDP fx) &\in \Omega 2^n
-    \\
-    \TC_N(\SDP fx) &\in O n
-\end{align}
-where $D$ and $N$ are the deterministic machine
-and the nondeterministic machine from the two previous conjectures.
-If such $f$ exists, then $\PTIME \neq \NPTIME$.
-\end{mcon}
-
-\begin{mcon}
-    If $f = f \circ g$ for all $f$ then $g = \id$.
-\end{mcon}
-
-\begin{mcon}[existence of a PNP decider]
-Such decider cannot have overlapping subproblem
-and cannot have optimal substructure.
-There is no mathematical identity that allows decider to be computed faster.
-If
-\begin{align}
-    \neg\exists p ~ \forall x \in \{ a | a \in X^*, p a \} ~ \exists y ~ fx = fy
-\end{align}
-then $f$ exists.
-\end{mcon}
-
-Proof by contradiction:
-suppose that for every decider,
-there exists a mathematical identity that allows it to be computed faster.
-\begin{align}
-    \forall f ~ \exists p ~ \forall x \in \{ a | a \in X^*, p a \} ~ \exists y ~ fx = fy
-\end{align}
-Then what?
-
-\section{Machines}
-
-\begin{mdef}[standard machine]
-    The standard machine with alphabet $X$
-    has the following primitive operation set:
-
-    Every constant of type $X$.
-
-    Every unary operation of type $X \to X$.
-
-    Every binary operation of type $X \to X \to X$.
-
-    Every ternary operation of type $X \to X \to X \to X$.
-    One of these ternary operations is the three-way branch operation:
-    $pctf$ is $t$ iff $c \neq 0$; $f$ otherwise.
-
-    Function application.
-
-    Function composition.
-
-    Some list operations: $\fnull : X^* \to X$,
-    $\fhead : X^* \to X$,
-    $\ftail : X^* \to X^*$,
-    and $\fcons : X \to X^* \to X^*$.
-
-    A fixed-point combinator $y : \forall a ~ (\alpha \to \alpha) \to \alpha$ satisfying $yf = f(yf)$
-    such that the expression $yf$ reduces to $f(yf)$ in one time unit.
-\end{mdef}
-
-\section{Recursion}
-
-\begin{mlem}
-    The type of the Y-combinator is $\forall a ~ (\alpha \to \alpha) \to \alpha$.
-    \begin{proof}
-        The definition is $yf = f(yf)$.
-        \begin{align}
-            f &: \alpha
-            \\
-            r &: \alpha \to \beta
-            \\
-            yf &: \beta
-            \\
-            f &: \beta \to \gamma
-            \\
-            f(yf) &: \gamma
-            \\
-            yf : \beta, \ f(yf) : \gamma, \ yf = f(yf) &\implies \beta = \gamma
-            \\
-            f : \alpha, \ yf : \beta, \ f(yf) : \gamma &\implies f : \beta \to \gamma, \ \alpha = \beta \to \gamma
-        \end{align}
-    \end{proof}
-\end{mlem}
-
-Recursive has to do with fixpoints.
-
-\section{Nondeterminism}
-
-In a nondeterministic machine, $\ambc x y$
-has the same effect as reducing $x$ and $y$ in parallel in one unit time.
-Let the accepting computation be $z$ where $z$ is either $x$ or $y$.
-\begin{align}
-    \TC(\ambc xy) &= \TC z
-\end{align}
 
 \section{Differential topology and computation?}
 

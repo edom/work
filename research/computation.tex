@@ -64,6 +64,8 @@ Another name of DFA is
 
 The \emph{final state} of \(D\) for input \(w \in A^*\) is \(f(w)\)
 where \(f(pc) = t(f(p), c)\) and \(f(\emptystr)=i\).
+Call \(f\) the \emph{final-state function} of \(D\).
+There is a bijection between DFAs and their final-state functions.
 
 \(D\) \emph{accepts} \(w\) iff \(f(w) \in F\).
 
@@ -401,3 +403,11 @@ Complete laziness, full laziness, interaction sets
 Compile Java to lambda calculus
 
 High level intermediate language
+
+\section{Descriptive complexity}
+
+% https://en.wikipedia.org/wiki/Fagin%27s_theorem
+Fagin's theorem:
+There is a bijection between second-order logic predicates and NP problems. (?)
+
+See Neil Immerman's book. (?)
