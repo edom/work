@@ -5,6 +5,14 @@
 \index{unary algebra}%
 A \emph{unary algebra} is \((S,f)\) where \(f : S \to S\).
 
+% https://en.wikipedia.org/wiki/Distance_(graph_theory)
+
+The natural graph of a unary algebra \((V,f)\) is \((V,E)\)
+where \((a,b) \in E\) iff \(f(a) = b\).
+
+The natural metric space of a connected undirected graph \((V,E)\) is \((V,d)\) where
+\(d(a,b)\) is the length of the shortest path from \(a\) to \(b\).
+
 \section{Fixed point}
 
 Iff \(x = f(x)\) then \(x\) is a \emph{fixed point} of \(f\).
@@ -60,37 +68,53 @@ empty string.
 \(A^*\) is the smallest superset of \(A\)
 closed under string concatenation.
 
-\section{Deterministic finite automaton}
+\section{Finite automaton}
 
 % https://en.wikipedia.org/wiki/Automata_theory#Formal_definition
 
 A
-\index{deterministic finite automaton}%
-\emph{deterministic finite automaton} (DFA) is \(D = (Q,A,t,i,F)\) where
+\index{finite automaton}%
+\emph{finite automaton} is \(M = (Q,A,t,i,F)\) where
 \(A\) is the alphabet,
-\(t : Q \to A \to Q\) is the transition function,
+\(t \subseteq Q \times A \times Q\) is the transition relation,
 \(i \in Q\) is the initial state,
 and \(F \subseteq Q\) is the set of accepting states.
-Another name of DFA is
-\index{finite-state machine}%
-\emph{finite-state machine} (FSM).
+Another name of finite automaton is
+\index{state machine}%
+\emph{state machine}.
 
-The \emph{final state} of \(D\) for input \(w \in A^*\) is \(f(w)\)
+\paragraph{Final-state function}
+The \emph{final-state function} of \(M\) is \(f(w)\)
 where \(f(pc) = t(f(p), c)\) and \(f(\emptystr)=i\).
-Call \(f\) the \emph{final-state function} of \(D\).
+Call \(f\) the \emph{final-state function} of \(M\).
+The \emph{final state} of \(M\) for input \(w\) is \(f(w)\).
 There is a bijection between DFAs and their final-state functions.
 
-\(D\) \emph{accepts} \(w\) iff \(f(w) \in F\).
+\(M\) \emph{accepts} \(w\) iff \(f(w) \in F\).
 
-The \emph{language recognized by \(D\)} is \(\{ w ~|~ f(w) \in F \}\).
+The \emph{language recognized by \(M\)} is \(\{ w ~|~ f(w) \in F \}\).
 
 \section{Machine}
 
-A \emph{machine} is \((S,I,f)\)
+A \emph{machine} is \((S,f)\)
 where \(S\) is the \emph{state set},
-\(I \subseteq C\) is the \emph{initial state set},
-and \(f \subseteq C \times C\) is the \emph{transition relation}.
+and \(f \subseteq S \times S\) is the \emph{transition relation}.
 Iff \(f\) is a function, then the machine is \emph{deterministic}.
+\(I = \{ a ~|~ a \in S, ~ (a,b) \not\in f \}\) is the \emph{initial state set}.
+
+Such machine is also graph \((V,E)\) where \(V=S\), \(E = f\),
+and \(I\) is the set of all \emph{source} vertices.
+A source vertex is a vertex with zero indegree.
+A sink vertex is a vertex with zero outdegree.
+
+A machine \emph{is} a graph.
+
+The \emph{fringe} of \(A\) is \(F(A) = \{ b ~|~ a \in A, ~ (a,b) \in E \}\).
+Define: \(F^{n+1}(A) = F(F^n(A))\).
+Property: \(F(\emptyset) = \emptyset\).
+Property: \(F(A \cup B) = F(A) \cup F(B)\).
+\(G\) \emph{accepts} \(v\) iff \(F^\infty(\{v\}) = \emptyset\).
+The \emph{language} recognized by \(G\) is the largest \(L \subseteq V\) such that \(F^\infty(L) = \emptyset\).
 
 A Turing machine is \((C,I,f)\)
 where \(C\) is countable
@@ -174,7 +198,7 @@ A machine is
 \((P, f)\)
 where \(P = (S,A^\infty)\)
 and
-\(d~x~(f~x) \le 1\)
+\(d(x,f(x)) \le 1\)
 for all \(x : P\).
 The state set \(S\) is finite.
 The alphabet \(A\) is finite.
