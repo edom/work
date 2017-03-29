@@ -225,3 +225,176 @@ We do this by interleaving the digits.
 \[
     (x, y) \leftrightarrow \ldots X_2 Y_2 X_1 Y_1 X_0 Y_0 . x_1 y_1 x_2 y_2 x_3 y_3 \ldots
 \]
+
+\section{Collatz conjecture}
+
+Let \(f(n) = n/2\) if \(n\) is even or \(3n+1\) if \(n\) is odd.
+
+\(f(n) = (n \bmod 2) (n/2) + (1 - n \bmod 2) (3n + 1)\).
+
+\(f(n) = (n \bmod 2) (n/2) + (3n + 1) - (n \bmod 2) (3n + 1)\).
+
+\(f(n) = (n \bmod 2) (n/2 - (3n + 1)) + (3n + 1)\).
+
+\(f(n) = (n \bmod 2) (2 - 5n)/2 + (3n + 1)\).
+
+\(2 f(n) = (n \bmod 2) (2 - 5n) + 6n + 2\).
+
+\(f(2n) = n\)
+
+\(f(2n+1) = 3(2n+1)+1 = 6n+4 = 2(3n+2)\)
+
+\(f(2n+2) = n+1\)
+
+\(f(2n+3) = 3(2n+3)+1 = 6n+10 = 2(3n+5)\)
+
+\(f(2n+2k) = n+k\)
+
+\(f(2n+2k+1) = 2(3n+2+3k)\)
+
+\(f(2n+2k+1) = 2(3(n+k)+2)\)
+
+\(f(2(n+k)+1) = 2(3(n+k)+2)\)
+
+\(f(2m+1) = 2(3m+2)\)... back to square 0
+
+Let \(q\) be odd.
+\begin{align*}
+    f(2^{p+1} q) = 2^p q
+    \\
+    f(2^0 q) = 3q + 1
+    \\
+    f(2k+1) = 3(2k+1) + 1 = 6k+4 = 2(3k+2)
+    \\
+    f(2(2k)+1) = 3(4k+1) + 1 = 12k+4 = 4(3k+1)
+    \\
+    f(2(2k+1)+1) = 3(4k+3) + 1 = 12k+10 = 2(6k+5)
+\end{align*}
+
+\begin{align*}
+    f(6n) &= 3n
+    \\
+    f(6n+1) &= 3(6n+1)+1 = 18n+4
+    \\
+    f(6n+2) &= 3n+1
+    \\
+    f(6n+3) &= 3(6n+3) + 1 = 18n+10
+    \\
+    f(6n+4) &= 3n+2
+    \\
+    f(6n+5) &= 3(6n+5) + 1 = 18n+16
+\end{align*}
+
+Let \(g(n) = f(2n)\) and \(h(n) = f(2n+1)\).
+
+Let \(a(n,0) = n\) and \(a(n,k+1) = f(a(n,k))\).
+
+Corollary: \(a(n,k+1) = a(f(n),k)\).
+
+Corollary: If \(n\) is odd, then \(f(n)\) is even.
+
+\section{Representation}
+
+In this section, the domain of discourse is \(\Nat\).
+
+Assume \(n > 0\).
+Define \(t(n)\) as the largest \(p\) such that \(n = 2^p q\).
+Equivalent:
+Define \(t(n)\) as the \(p\) such that \(n = 2^p q\) and \(q\) is odd.
+
+Lemma:
+For every positive \(n\), there exists \(p\) and odd \(q\) such that \(n = 2^p q\).
+
+Lemma:
+For every positive \(n\), there exists \(p\) and \(q < 2^p\) such that \(n = 2^p + q\).
+
+Lemma: If \(b < 2^a\) then \(t(2^a + b) = \min(a,t(b))\).
+
+Lemma: For every \(n\), there exist \(p,q\) such that \(3(2n+1)+1 = 2^p q\).
+
+Corollary: Iff \(n\) is a power of two, then \(q = 1\).
+
+If \(m = 2^a b\) and \(n = 2^c d\) then \(mn = 2^{a+c} (bd)\).
+
+\begin{align*}
+    (2^a b + 2^c d) \bmod 2^p = ?
+\end{align*}
+
+\(2^p \cdot 1 + 1 = 2^0 (2^p + 1)\).
+
+If \(k\) is even then \(2^0 (2k + 1) + 1 = 2k + 2 = 2^1 (k+1)\).
+
+\(2^0 (2(2k) + 1) + 1 = 4k+2 = 2^0(2k+1)\)
+
+If \(k\) is even then \(2^0 (2(2k) + 3) + 1 = 4k+4 = 2^2(k+1)\)
+
+\(t(1,2,3,4,5,\ldots) = 0,1,0,2,0,1,0,3,0,1,0,2,0,1,0,4,\ldots\)
+
+\(t(2,4,6,8,10,\ldots) = 1,2,1,3,1,2,1,4,1,2,1,3,1,2,1,5,\ldots\)
+
+\(t(k)\) is the number of trailing zero bits in the binary representation of \(k\)
+
+Lemma: \(t(k) \cdot t(k+1) = 0\)
+
+Lemma: \(t(ab) = t(a) + t(b)\)
+
+If \(t(k) \ge 1\) then \(2^0 (2^p k+1) + 1 = 2^p k + 2 = 2^p (k+1)\)
+
+If \(t(k) \ge 1\) then \(t(2^a k+1) = a\)
+
+\(t(3k) = t(k)\)
+
+Under what circumstances are \(3(2n+1)+1 = 2^p\) (that is \(q=1\))?
+
+\(6n+4 = 2^p\).
+
+\(1 \equiv 2^p \pmod 3\).
+Corollary: Iff \(p\) is even then \(2^p+2\) is even and divisible by 3.
+
+Corollary: If \(t(n) > 0\) then \(t(f(n)) = t(n)-1\).
+
+\[
+    g(n) =
+    \begin{cases}
+        \{2n\} & \text{if } n \bmod 3 \in \{0,2\}
+        \\
+        \{2n, \frac{n-1}{3}\} & \text{if } n \bmod 3 = 1
+    \end{cases}
+\]
+
+Let \(G(N) = \bigcup_{n \in N} g(n)\).
+
+Let \(H_0 = \{1\}\) and \(H_{k+1} = H_k \cup G(H_k)\).
+
+\(H \sim \{1\}, \{2,1,0\}, \{4,2,1,0\}, \{8,4,2,1,0\}, \{16,8,5,4,2,1,0\}, \{32,16,10,8,5,4,2,1,0\}\)
+
+\(\forall k : H_k \subset H_{k+1}\)
+
+Collatz conjecture: for every \(N \subseteq \Nat - \{1\}\), there exists \(p \in \Nat\) such that \(N \subseteq G^p(\{1\})\).
+
+Conjecture: \(G(\Nat) = \Nat\).
+
+\section{Collatz graph}
+
+Graph \((V,E)\)
+
+\((2n,n) \in E\)
+
+\((2n+1,3(2n+1)+1) \in E\), that is
+\((2n+1,6n+4) \in E\)
+
+\((2,1),(4,2),(6,3),(8,4),(10,5),\ldots\)
+
+\((1,4),(3,10),(5,16),(7,22),(9,28),\ldots\)
+
+Prove that there is a path from every positive \(n\) to 1.
+
+Inverse graph
+
+\((n,2n) \in E'\)
+
+\((6n+4,2n+1) \in E'\)
+
+Prove that there is a path from 1 to every positive \(n\).
+
+Can we transform \(f\) into a monotonically increasing function?
