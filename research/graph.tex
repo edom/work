@@ -1,0 +1,17 @@
+\chapter{Graph}
+
+A \emph{graph} is \((V,E)\) where
+\(V\) is the set of \emph{vertices} and \(E \subseteq V \times V\) is the set of \emph{edges}.
+
+A graph is a relation.
+
+The \emph{length} of a path is the number of edges in that path.
+
+The \emph{geodesic distance} from \(a\) to \(b\) is \(d(a,b)\),
+the length of the shortest path from \(a\) to \(b\).
+
+The graph's \emph{fringe} of \(A\) is \(F(A) = \{ b ~|~ a \in A, ~ (a,b) \in E \}\).
+
+Let \(F^{n+1}(A) = F(F^n(A))\).
+Property: \(F(\emptyset) = \emptyset\).
+Property: \(F(A \cup B) = F(A) \cup F(B)\).
