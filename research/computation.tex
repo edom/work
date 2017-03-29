@@ -68,31 +68,8 @@ empty string.
 \(A^*\) is the smallest superset of \(A\)
 closed under string concatenation.
 
-\section{Finite automaton}
-
-% https://en.wikipedia.org/wiki/Automata_theory#Formal_definition
-
-A
-\index{finite automaton}%
-\emph{finite automaton} is \(M = (Q,A,t,i,F)\) where
-\(A\) is the alphabet,
-\(t \subseteq Q \times A \times Q\) is the transition relation,
-\(i \in Q\) is the initial state,
-and \(F \subseteq Q\) is the set of accepting states.
-Another name of finite automaton is
-\index{state machine}%
-\emph{state machine}.
-
-\paragraph{Final-state function}
-The \emph{final-state function} of \(M\) is \(f(w)\)
-where \(f(pc) = t(f(p), c)\) and \(f(\emptystr)=i\).
-Call \(f\) the \emph{final-state function} of \(M\).
-The \emph{final state} of \(M\) for input \(w\) is \(f(w)\).
-There is a bijection between DFAs and their final-state functions.
-
-\(M\) \emph{accepts} \(w\) iff \(f(w) \in F\).
-
-The \emph{language recognized by \(M\)} is \(\{ w ~|~ f(w) \in F \}\).
+A \emph{decision problem} is isomorphic to a language
+containing the strings representing the yes-instances.
 
 \section{Machine}
 
@@ -102,18 +79,13 @@ and \(f \subseteq S \times S\) is the \emph{transition relation}.
 Iff \(f\) is a function, then the machine is \emph{deterministic}.
 \(I = \{ a ~|~ a \in S, ~ (a,b) \not\in f \}\) is the \emph{initial state set}.
 
-Such machine is also graph \((V,E)\) where \(V=S\), \(E = f\),
+\paragraph{Graph}
+Such machine is also a \emph{graph} \((V,E)\) where \(V=S\), \(E = f\),
 and \(I\) is the set of all \emph{source} vertices.
 A source vertex is a vertex with zero indegree.
 A sink vertex is a vertex with zero outdegree.
 
-A machine \emph{is} a graph.
-
-The \emph{fringe} of \(A\) is \(F(A) = \{ b ~|~ a \in A, ~ (a,b) \in E \}\).
-Define: \(F^{n+1}(A) = F(F^n(A))\).
-Property: \(F(\emptyset) = \emptyset\).
-Property: \(F(A \cup B) = F(A) \cup F(B)\).
-\(G\) \emph{accepts} \(v\) iff \(F^\infty(\{v\}) = \emptyset\).
+\(G\) \emph{accepts} \(v\) iff \(F^\infty(\{v\}) = \emptyset\) where \(F\) is the graph's fringe function.
 The \emph{language} recognized by \(G\) is the largest \(L \subseteq V\) such that \(F^\infty(L) = \emptyset\).
 
 A Turing machine is \((C,I,f)\)
@@ -126,10 +98,10 @@ where \(c\) is a configuration,
 \(h\) is the tape content at the head,
 and \(r\) is the tape content to the right of the head.
 
-\section{Primitive by metric}
+\section{Primitive by distance}
 
-Iff \(d\) is a metric,
-then \(f\) is \emph{\(d\)-primitive} iff \(d(x,f(x)) \le 1\).
+Iff \(d\) is a distance function and \(S\) is the state type,
+then \(f\) is \emph{\(d\)-primitive} iff \(\forall x \in S : d(x,f(x)) \le 1\).
 
 Let \(P\) be a set of some \(d\)-primitive functions.
 Let \(P^*\) be the set of all finite compositions of the functions in \(P\).
@@ -237,6 +209,32 @@ Every primitive operation represents a computation that the machine can do in on
 An \emph{architecture} is a set of primitive operations
 and a set of rules for evaluating expressions built using those primitive operations.
 A \emph{machine} is an architecture and a configuration representing its current state.
+
+\section{Finite automaton}
+
+% https://en.wikipedia.org/wiki/Automata_theory#Formal_definition
+
+A
+\index{finite automaton}%
+\emph{finite automaton} is \(M = (Q,A,t,i,F)\) where
+\(A\) is the alphabet,
+\(t \subseteq Q \times A \times Q\) is the transition relation,
+\(i \in Q\) is the initial state,
+and \(F \subseteq Q\) is the set of accepting states.
+Another name of finite automaton is
+\index{state machine}%
+\emph{state machine}.
+
+\paragraph{Final-state function}
+The \emph{final-state function} of \(M\) is \(f(w)\)
+where \(f(pc) = t(f(p), c)\) and \(f(\emptystr)=i\).
+Call \(f\) the \emph{final-state function} of \(M\).
+The \emph{final state} of \(M\) for input \(w\) is \(f(w)\).
+There is a bijection between DFAs and their final-state functions.
+
+\(M\) \emph{accepts} \(w\) iff \(f(w) \in F\).
+
+The \emph{language recognized by \(M\)} is \(\{ w ~|~ f(w) \in F \}\).
 
 \section{Turing machine}
 
