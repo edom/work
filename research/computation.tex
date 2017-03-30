@@ -13,19 +13,6 @@ where \((a,b) \in E\) iff \(f(a) = b\).
 The natural metric space of a connected undirected graph \((V,E)\) is \((V,d)\) where
 \(d(a,b)\) is the length of the shortest path from \(a\) to \(b\).
 
-\section{Fixed point}
-
-Iff \(x = f(x)\) then \(x\) is a \emph{fixed point} of \(f\).
-
-Let \(F\) be a set of some functions.
-Let \(G(F)\) be the set of all functions that can be made by combining the functions in \(F\).
-
-A recursive equation has the form \(f(x) = g(f,x)\).
-For example, iff \(x^2 = x^4 + 1\) and \(f(x) = x^2\), then \(g(f,x) = x^4 + 1 = [f(x)]^2 + 1 = f(x^2) + 1 = x^4 + f(1)\)
-and many more.
-
-The \(y\)-combinator satisfies \(y(f) = f(y(f))\).
-
 \section{String}
 
 \index{language}%
@@ -71,6 +58,98 @@ closed under string concatenation.
 A \emph{decision problem} is isomorphic to a language
 containing the strings representing the yes-instances.
 
+\section{Computability with respect to primitives}
+
+Let the \emph{primitive set} \(P\) be a finite set of functions.
+The set of all \emph{\(P\)-computable} functions is \(P^*\).
+A function \(f\) is \(P\)-computable iff it is equal to
+a constant finite composition of functions in \(P^*\).
+
+\paragraph{Example}
+Let \(P = \{S\}\) where \(S(n) = n+1\).
+Then \(g(n) = n + 3\) is \(P\)-computable because \(g(n) = S(S(S(n)))\).
+For every constant \(k\), the addition-by-constant function \(h_k(n) = n+k\) is \(P\)-computable because \(h_k = S^k\).
+However, \(n \to 2n\) is not \(P\)-computable
+because there is no \(k\) such that \(S^k(n) = 2n\) for all \(n\).
+
+\paragraph{Example}
+Let \(P = \{f,l\}\) where \(f(a,b) = (a+b,b)\) and \(l(a,b) = a\).
+Then \(g(x,y) = x+y\) is \(P\)-computable because \(g(x,y) = l(f(x,y))\).
+
+\paragraph{Example}
+Let \(P = \{S,r\}\) where \(S(n)=n+1\), \(r(0,x) = x\), and \(r(S(n),x) = r(n,f(x))\).
+Then \(g(x,y) = x+y\) is \(P\)-computable because \(g(x,y) = r(x,y)\).
+
+Lemma:
+If \(r(0,x) = x\) and \(r(n+1,x) = f(r(n,x))\) then \(r(n+1,x) = r(n,f(x))\).
+
+Lemma:
+If \(r(0,x) = x\) and \(r(n+1,x) = r(n,f(x))\) then \(r(n+1,x) = f(r(n,x))\).
+
+\section{Complexity}
+
+The \(P\)-complexity of a \(P\)-computable function \(f\)
+is the number of \(P\)-functions used to make \(f\).
+
+\section{Circuit size}
+
+The circuit-size complexity of a zeroth-order logic formula:
+\begin{align*}
+    C(a) &= 1 \text{ if \(a\) is an axiom}
+    \\
+    C(\neg p) &= 1 + C(p)
+    \\
+    C(p \wedge q) &= 1 + C(p) + C(q)
+    \\
+    C(p \vee q) &= 1 + C(p) + C(q)
+\end{align*}
+
+The circuit-depth complexity of a zeroth-order logic formula:
+\begin{align*}
+    D(a) &= 1 \text{ if \(a\) is an axiom}
+    \\
+    D(\neg p) &= 1 + D(p)
+    \\
+    D(p \wedge q) &= 1 + \max(D(p),D(q))
+    \\
+    D(p \vee q) &= 1 + \max(D(p),D(q))
+\end{align*}
+
+What prevents us from ``cheating'' by encoding the input as the solution?
+
+\section{Primitive recursive functions}
+
+\section{Program}
+
+Let \(AB = \{ ab ~|~ a \in A, ~ b \in B \}\)
+where \(ab\) is string concatenation.
+
+Let the \emph{instruction set} \(I\) be a finite set of atoms.
+
+The set of all \(I\)-programs is \(I^*\).
+
+A program is a finite element of \(I^*\).
+
+Let the \emph{execution function} \(f : I^* \to P^*\)
+where
+\(f(\emptystr) = id\),
+\(f(ab) = f(b) \circ f(a)\),
+and that \(x \in I\) implies \(f(x) \in P\).
+The set of all \emph{\(I\)-describable} functions are \(\{ f(x) ~|~ x \in I^* \}\).
+
+\section{Fixed point}
+
+Iff \(x = f(x)\) then \(x\) is a \emph{fixed point} of \(f\).
+
+Let \(F\) be a set of some functions.
+Let \(G(F)\) be the set of all functions that can be made by combining the functions in \(F\).
+
+A recursive equation has the form \(f(x) = g(f,x)\).
+For example, iff \(x^2 = x^4 + 1\) and \(f(x) = x^2\), then \(g(f,x) = x^4 + 1 = [f(x)]^2 + 1 = f(x^2) + 1 = x^4 + f(1)\)
+and many more.
+
+The \(y\)-combinator satisfies \(y(f) = f(y(f))\).
+
 \section{Machine}
 
 A \emph{machine} is \((S,f)\)
@@ -84,6 +163,8 @@ Such machine is also a \emph{graph} \((V,E)\) where \(V=S\), \(E = f\),
 and \(I\) is the set of all \emph{source} vertices.
 A source vertex is a vertex with zero indegree.
 A sink vertex is a vertex with zero outdegree.
+
+The \emph{time complexity} of an instance is the path length from its initial state to its terminal state.
 
 \(G\) \emph{accepts} \(v\) iff \(F^\infty(\{v\}) = \emptyset\) where \(F\) is the graph's fringe function.
 The \emph{language} recognized by \(G\) is the largest \(L \subseteq V\) such that \(F^\infty(L) = \emptyset\).
@@ -114,27 +195,7 @@ The \emph{Hamming distance between \(x\) and \(y\)} is
 The function \(f(x_0,x_1,\ldots) = f(0,x_1,\ldots)\) is \(d\)-primitive,
 which in English means that this \(f\) does not change more than one element.
 
-\section{Primitive by fiat}
-
-Let \(AB = \{ ab ~|~ a \in A, ~ b \in B \}\)
-where \(ab\) is string concatenation.
-
-Let the \emph{instruction set} \(I\) be a finite set of atoms.
-
-The set of all \(I\)-programs is \(I^*\).
-
-Let the \emph{state set} be \(S\).
-Let the \emph{primitive set} \(P\) be a finite set of \(S\)-endofunctions.
-The set of all \emph{\(P\)-computable} functions is \(P^*\).
-The set \(P^*\) contains every program that can be made from a finite composition of the functions in \(P\):
-the function \(f\) is \(P\)-computable iff it is equal to a finite composition of functions in \(P^*\).
-
-Let the \emph{execution function} \(f : I^* \to P^*\)
-where
-\(f(\emptystr) = id\),
-\(f(ab) = f(a) \circ f(b)\),
-and that \(x \in I\) implies \(f(x) \in P\).
-The set of all \emph{\(I\)-describable} functions are \(\{ f(x) ~|~ x \in I^* \}\).
+\section{Example stack machine primitive}
 
 Let \(S = \Nat^\infty\).
 Example:
