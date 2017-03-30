@@ -293,6 +293,221 @@ Corollary: \(a(n,k+1) = a(f(n),k)\).
 
 Corollary: If \(n\) is odd, then \(f(n)\) is even.
 
+\section{Recursion}
+
+Lemma: For every \(n\) and \(d \neq 0\), there exists \(q,d\) such that \(n = qd+m\) and \(0 \le m < d\).
+
+\begin{align*}
+    f(2n+0) &= n+0
+    \\
+    f(2n+1) &= 6n+4 = 2(3n+2)
+    \\
+    f(4n+0) &= 2n+0
+    \\
+    f(4n+1) &= 12n+4 = 4(3n+1)
+    \\
+    f(4n+2) &= 2n+1
+    \\
+    f(4n+3) &= 12n+10 = 2(6n+5)
+    \\
+    f(8n+0) &= 4n+0
+    \\
+    f(8n+1) &= 24n+4 = 4(6n+1)
+    \\
+    f(8n+2) &= 4n+1
+    \\
+    f(8n+3) &= 24n+10 = 2(12n+5)
+    \\
+    f(8n+4) &= 4n+2 = 2(2n+1)
+    \\
+    f(8n+5) &= 24n+16 = 8(3n+2)
+    \\
+    f(8n+6) &= 4n+3
+    \\
+    f(8n+7) &= 24n+22 = 2(12n+11)
+    \\
+    f(16n+0) &= 8n+0
+    \\
+    f(16n+1) &= 48n+4 = 4(12n+1)
+    \\
+    f(16n+2) &= 8n+1
+    \\
+    f(16n+3) &= 48n+10 = 2(24n+5)
+    \\
+    f(16n+4) &= 8n+2 = 2(4n+1)
+    \\
+    f(16n+5) &= 48n+16 = 16(3n+1)
+    \\
+    f(16n+6) &= 8n+3
+    \\
+    f(16n+7) &= 48n+22 = 2(24n+11)
+    \\
+    f(16n+8) &= 8n+4 = 4(2n+1)
+    \\
+    f(16n+9) &= 48n+28 = 4(12n+7)
+    \\
+    f(16n+10) &= 8n+5
+    \\
+    f(16n+11) &= 48n+34 = 2(24n+17)
+    \\
+    f(16n+12) &= 8n+6 = 2(4n+3)
+    \\
+    f(16n+13) &= 48n+40 = 8(6n+5)
+    \\
+    f(16n+14) &= 8n+7
+    \\
+    f(16n+15) &= 48n+46 = 2(24n+23)
+    \\
+    f(16n-1) &= 48n-2 = 2(24n-1)
+    \\
+    f(16n-5) &= 48n-14 = 2(24n-7)
+\end{align*}
+
+\begin{align*}
+    f^2(4n) &= (gg)(n) = n
+    \\
+    f^2(4n+1) &= (gh)(n) = 6n+2 = 2(3n+1)
+    \\
+    f^2(4n+2) &= (hg)(n) = 6n+4 = 2(3n+2)
+    \\
+    f^2(4n+3) &= (gh)(n) = 6n+5
+    \\
+    f^3(8n) &= (ggg)(n) = n
+    \\
+    f^3(8n+1) &= f^2(24n+4) = (ggh)(n) = 6n+1
+    \\
+    f^3(8n+2) &= f^2(4n+1) = (ghg)(n) = 6n+2 = 2(3n+1)
+    \\
+    f^3(8n+3) &= f^2(24n+10) = (hgh)(n) = 36n+16 = 4(9n+4)
+    \\
+    f^3(8n+4) &= f(2n+1) = (ggg)(n) = 6n+4 = 2(3n+2)
+    \\
+    f^3(8n+5) &= f^2(24n+16) = (ggh)(n) = 6n+4 = 2(3n+2)
+    \\
+    f^3(8n+6) &= f^2(4n+3) = (hgh)(n) = 6n+5
+    \\
+    f^3(8n+7) &= f^2(24n+22) = f(12n+11) = (ghg)(n) = 36n+34 = 2(18n+17)
+    \\
+    f^p(2^p q+0) &= f^{p-1}(2^{p-1} q+0)
+    \\
+    f^p(2^p q+1) &= f^{p-1}(3 \cdot 2^{p-1} q+4)
+\end{align*}
+
+Lemma: \(f^3(8n+4) = f^3(8n+5)\).
+
+Let \(g(n) = n/2\) and \(h(n) = 3n+1\).
+
+\section{Equation}
+
+\(2^p q = 3 n + 1\) where \(q\) is odd.
+
+\(2^{p_0} q_0 = 3 n_0 + 1\) where \(q\) is odd.
+
+\(2^{p_1} q_1 = 3 n_1 + 1\) where \(q\) is odd.
+
+\(n_{k+1} = 2^{p_k} q_k\)
+
+\section{Sequence}
+
+Consider three mutual sequences \(p\), \(q\), and \(n\).
+
+Input: \(q_0\).
+
+Constraint: \(q_k\) odd.
+
+\begin{align*}
+    n_0 &= q_0
+    \\
+    n_{k+1} &= 3 q_k + 1
+    \\
+    n_k &= 2^{p_k} q_k
+\end{align*}
+
+Collatz conjecture: For every odd \(q_0 \in \Nat\), there exists \(k\) such that \(q_k = 1\).
+
+Alternative: For every odd \(a\), there exists \(k\) and odd \(q_0\) such that \(q_k = a\).
+
+Lemma: If \(n\) is even, then \(3n+1\) is odd.
+
+Lemma: If \(n\) is odd, then \(3n+1\) is even.
+
+\section{Composition}
+
+\(u(n) = 1\) where \(u \in (f|g)^*\)
+
+\(3(2n)+1 = 3(2n+1)-2\)
+
+\section{Composition}
+
+\((h \circ g)(n) = 3(n/2) + 1 = (3n+2)/2\)
+
+\((g \circ h)(n) = (3n + 1)/2 = (3n+1)/2\)
+
+\((h \circ g - g \circ h)(n) = 1/2\)
+
+\section{Path}
+
+Let \(P(a,b)\) mean that there is a path from \(a\) to \(b\) in the forward Collatz graph.
+
+(Domain of discourse is \(\Nat\).
+All unbound variables are universally quantified.)
+
+Corollary: If \(P(f(a),b)\) then \(P(a,b)\).
+
+Corollary: If \(n\) is odd and \(P(3n+1,a)\) then \(P(n,a)\).
+
+Corollary: \(P(6n+4,a)\) then \(P(2n+1,a)\).
+
+Corollary: If \(P(n,a)\) then \(P(2n,a)\).
+
+Corollary: If \(n \bmod 3 = 1\) and \(P(n,a)\) then \(P(\frac{n-1}{3},a)\).
+
+Lemma: There is no \(n\) such that \(n \bmod 2^p = 1\) for all \(p > 0\).
+
+Lemma: \(P(2^p n, n)\).
+
+Corollary: \(P(2^p,1)\).
+
+Lemma: If \(P(a,2^p)\) then \(P(a,1)\).
+
+Lemma: If \(P(q, 1)\) then \(P(2^p q,1)\).
+
+Conjecture: If \(P(a,1)\) and \(P(b,1)\) then \(P(ab,1)\)?
+
+Conjecture: If \(P(a,1)\) and \(P(b,1)\) then \(P(a+b,1)\)?
+
+Lemma: If \(P(3n+2,1)\) then \(P(2n+1,1)\).
+
+Lemma: If \(P(3n+1,1)\) then \(P(4n+1,1)\).
+
+Lemma: If \(n\) is odd, then \(f(4n+1) = 4f(n)\).
+
+Lemma: If \(p \ge 2\) then \(f(2^p n + 3) = 2(3 \cdot 2^{p-1} + 5)\).
+
+Suppose \(P(n,1)\). Prove \(P(n+1,1)\).
+
+If \(P(k,1)\) then \(P(2k,1)\).
+
+If \(P(6k+4,1)\) then \(P(2k+1,1)\).
+
+\section{Equivalence}
+
+Lemma: Iff every \(6n+4\) has a path to \(2^p\), then the Collatz conjecture is true.
+
+If \(3n+1 < 4\) and \(3n \bmod 2 = 1\) then \(P(n+1,1)\).
+
+If \(3n+1 < 8\) and \(3n \bmod 4 = 1\) then \(P(3n+1,1)\).
+
+If \(3n+1 < 16\) and \(3n \bmod 8 = 1\) then \(P(3n+1,1)\).
+
+If \(3n+1 < 32\) and \(3n \bmod 16 = 1\) then \(P(3n+1,1)\).
+
+\(\{ (p,N) ~|~ n \in N, ~ 3n \bmod 2^p = 1 \} = \{ (1,\{1,3,5,\ldots\}), (2,\{3,7,11,\ldots\}), (3,\{3,11,19,\ldots\}) \}\)
+
+For all \(n,p\): Statement \(S(p)\) is: if \(3n+1 < 2^{p+1}\) and \(3n \bmod 2^p = 1\) then \(P(3n+1,1)\).
+
+An inductive proof of \(S(p)\) is a proof of the Collatz conjecture.
+
 \section{Representation}
 
 In this section, the domain of discourse is \(\Nat\).
