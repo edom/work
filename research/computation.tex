@@ -5,13 +5,8 @@
 \index{unary algebra}%
 A \emph{unary algebra} is \((S,f)\) where \(f : S \to S\).
 
-% https://en.wikipedia.org/wiki/Distance_(graph_theory)
-
 The natural graph of a unary algebra \((V,f)\) is \((V,E)\)
 where \((a,b) \in E\) iff \(f(a) = b\).
-
-The natural metric space of a connected undirected graph \((V,E)\) is \((V,d)\) where
-\(d(a,b)\) is the length of the shortest path from \(a\) to \(b\).
 
 \section{String}
 
@@ -58,12 +53,65 @@ closed under string concatenation.
 A \emph{decision problem} is isomorphic to a language
 containing the strings representing the yes-instances.
 
+\section{Machine as formal system}
+
+A machine is a formal system.
+
+\paragraph{Example}
+Let \(M\) be the language.
+Syntax:
+Literals are \(\{\emptystr, 1\}\).
+Empty string \(\emptystr \in M\).
+\(1 \in M\).
+\(A \in M, B \in M \vdash AB \in M\).
+Semantics: \(S(\emptystr) = 0\) and \(S(1A) = 1 + S(A)\).
+The syntax of that formal system can also be described using turnstiles:
+\begin{align*}
+    &\vdash \emptystr
+    \\
+    &\vdash 1
+    \\
+    A,B &\vdash AB
+\end{align*}
+
+The expression \(\vdash_M A\) means that \(A \in M\).
+The expression \(A \vdash_M B\) means that if \(A \in M\), then \(B \in M\).
+If \(M\) is clear from context, we write \(\vdash\) instead of \(\vdash_M\).
+
+\paragraph{Example}
+Syntax:
+Literals are \(\{z,s,p\}\):
+\begin{align*}
+    &\vdash z
+    \\
+    A &\vdash s(A)
+    \\
+    A,B &\vdash p(A,B)
+\end{align*}
+Semantics/interpretation \(I : M \to \Nat\):
+\begin{align*}
+    I(z) &= 0
+    \\
+    I(s(A)) &= 1 + I(A)
+    \\
+    I(p(A,B)) &= I(A) + I(B)
+\end{align*}
+
 \section{Computability with respect to primitives}
 
-Let the \emph{primitive set} \(P\) be a finite set of functions.
+Let the \emph{primitive set} \(P\) be a finite set of relations.
 The set of all \emph{\(P\)-computable} functions is \(P^*\).
-A function \(f\) is \(P\)-computable iff it is equal to
-a constant finite composition of functions in \(P^*\).
+A relation \(f\) is \(P\)-computable iff it is equal to
+a constant finite composition of relations in \(P^*\).
+
+\paragraph{Deterministic}
+Iff every primitive is a function,
+then the system is \emph{deterministic}.
+Iff every primitive is a relation,
+then the system is \emph{nondeterministic}.
+Every function is a relation,
+so every deterministic system is also a nondeterministic system,
+but not the other way around.
 
 \paragraph{Example}
 Let \(P = \{S\}\) where \(S(n) = n+1\).
@@ -88,8 +136,8 @@ If \(r(0,x) = x\) and \(r(n+1,x) = r(n,f(x))\) then \(r(n+1,x) = f(r(n,x))\).
 
 \section{Complexity}
 
-The \(P\)-complexity of a \(P\)-computable function \(f\)
-is the number of \(P\)-functions used to make \(f\).
+The \(P\)-complexity of a \(P\)-computable relation \(f\)
+is the number of \(P\)-relations used to make \(f\).
 
 \section{Circuit size}
 
@@ -273,29 +321,79 @@ A \emph{machine} is an architecture and a configuration representing its current
 
 \section{Finite automaton}
 
+\emph{Automata} is the plural of automaton.
+
 % https://en.wikipedia.org/wiki/Automata_theory#Formal_definition
 
 A
 \index{finite automaton}%
-\emph{finite automaton} is \(M = (Q,A,t,i,F)\) where
+\emph{finite automaton} is \(M = (Q,A,T,i,F)\) where
 \(A\) is the alphabet,
-\(t \subseteq Q \times A \times Q\) is the transition relation,
+\(T \subseteq Q \times A \times Q\) is the transition relation,
 \(i \in Q\) is the initial state,
 and \(F \subseteq Q\) is the set of accepting states.
 Another name of finite automaton is
 \index{state machine}%
 \emph{state machine}.
 
-\paragraph{Final-state function}
-The \emph{final-state function} of \(M\) is \(f(w)\)
-where \(f(pc) = t(f(p), c)\) and \(f(\emptystr)=i\).
-Call \(f\) the \emph{final-state function} of \(M\).
-The \emph{final state} of \(M\) for input \(w\) is \(f(w)\).
-There is a bijection between DFAs and their final-state functions.
+A finite automaton is a formal system.
 
-\(M\) \emph{accepts} \(w\) iff \(f(w) \in F\).
+\paragraph{Example}
+Let \(Q = \{q_0,q_1\}, A = \{0,1\}, i = q_0, F = \{q_1\}\), and:
+\begin{align*}
+    &\vdash T(q,0,q)
+    \\
+    &\vdash T(q,1,q_1)
+\end{align*}
+Then \(M\) recognizes \(\{ x ~|~ x \in \{0,1\}^*, x \text{ contains 1}\}\).
 
-The \emph{language recognized by \(M\)} is \(\{ w ~|~ f(w) \in F \}\).
+\paragraph{Final-state relation}
+The \emph{final-state relation} of \(M\) is \(Z \subseteq A^* \times Q\) where:
+\begin{align*}
+    &\vdash Z(\emptystr,i)
+    \\
+    Z(p,a), T(a,c,b) &\vdash Z(pc,b)
+\end{align*}
+The \emph{final states} of \(M\) for input \(w\) is \(Y(w) = \{ q ~|~ Z(w,q) \}\).
+
+\(M\) \emph{accepts} \(w\) iff \(F \subseteq Y(w)\).
+
+The \emph{language recognized by \(M\)} is \(\{ w ~|~ F \subseteq Y(w) \}\).
+
+There is a bijection between finite automata and their final-state relations.
+
+\section{Wang B-machine}
+
+\(I = \{ l,r,e,m,n \} \cup \{ c_k ~|~ k \in \Nat \}\) is \emph{control alphabet}
+where \(l\) is left, \(r\) is right, \(e\) is erase,
+\(m\) is mark, \(n\) is no-operation,
+\(c\) is conditional-absolute-jump-if-marked.
+
+\(T = \{0,1\}\) is \emph{data alphabet} where \(0\) is blank and \(1\) is mark.
+
+\paragraph{Execution}
+A state is \(S(a,b,c,d)\) where \((a,b)\) is control tape and \((c,d)\) is data tape.
+The string \(b\) ends with infinitely many no-operation symbols (\(n\)).
+The string \(c\) begin with infinitely many blanks.
+The string \(d\) ends with infinitely many blanks (\(0\)).
+The leftmost symbol in \(b\) is the current instruction.
+The leftmost symbol in \(d\) is the current scanned data tape cell.
+\begin{align*}
+    \alpha \in T, ~ S(A,l B,C \alpha,D) &\vdash S(A l,B,C,\alpha D)
+    \\
+    \alpha \in T, ~ S(A,r B,C,\alpha D) &\vdash S(A r,B,C \alpha,D)
+    \\
+    \alpha \in T, ~ S(A,e B,C,\alpha D) &\vdash S(A e,B,C,0 D)
+    \\
+    \alpha \in T, ~ S(A,m B,C,\alpha D) &\vdash S(A m,B,C,1 D)
+    \\
+    S(A,c_n B,C,0 D) &\vdash S(A c_n,B,C,0 D)
+    \\
+    |A| = n, ~ S(A \alpha, c_n B, C, 1 D) &\vdash S(A, \alpha c_n B, C, 1 D)
+\end{align*}
+
+\paragraph{Example}
+The program \(e r c_0\) replaces all marks with blanks.
 
 \section{Turing machine}
 
