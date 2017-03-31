@@ -33,6 +33,7 @@
 \setlength\epigraphwidth{0.625\textwidth}
 \input{format}
 % toc
+\setlength\cftpartnumwidth{4em}
 \setlength\cftchapternumwidth{4em}
 \setlength\cftsectionnumwidth{4em}
 \setlength\cftsectionindent{0em}
@@ -55,16 +56,22 @@
 \input{preface}
 \newpage
 {%
+\setlength\cftbeforepartskip{1em}%
 \setlength\cftbeforechapterskip{0em}%
-\renewcommand{\contentsname}{Coarse contents}%
+\renewcommand{\contentsname}{Chapters}%
+\renewcommand{\cftpartfont}{\normalsize\bfseries}%
 \renewcommand{\cftchapterfont}{\normalsize}%
 \renewcommand{\cftchapterpagefont}{\normalsize}%
 \setcounter{tocdepth}{0}%
 \tableofcontents%
 \clearpage%
 }%
-{\setcounter{tocdepth}{3}\tableofcontents}
+{\setcounter{tocdepth}{3}%
+\newpage%
+\tableofcontents%
+}
 \mainmatter
+\part{Basic mathematics}
 \input{intro}
 \input{foundation}
 \input{algebra}
@@ -73,49 +80,52 @@
 \input{probability}
 \input{statistics}
 \input{differential}
-\input{ai}
-\input{lies}
-\input{closing}
-\chapter{(Ramblings)}
-\input{government}
 \input{graph}
+\part{Applied mathematics}
+\input{signal}
+\input{physics}
+\input{finance}
+\input{pricing}
+\part{Computation}
 \input{computation}
 \input{computation-old}
 \input{type-old}
 \input{complexity}
-\input{number}
-\input{nonstandard}
-\input{signal}
-\input{topology}
-\input{differential-geometry}
-\input{physics}
-\input{economics}
-\input{finance}
-\input{business}
-\input{writing}
-\input{weiqi}
-\input{what}
-\input{division}
-\chapter{(Clean up this mess from 2016-10-16)}
+\part{Intelligence}
+\input{ai}
 \input{solomonoff}
 \input{learning}
-\input{agent}
 \input{taxonomy}
-\input{approximate}
-\input{wonderings}
 \input{approximate}
 \input{feedback}
 \input{system}
 \input{intelligence}
 \input{learning}
 \input{human}
+\part{More mathematics}
+\input{number}
+\input{nonstandard}
+\input{topology}
+\input{differential-geometry}
+\input{what}
+\input{function}
+\part{Unsorted mathematical articles}
+\input{division}
+\input{agent}
+\part{Humanities}
+\input{government}
+\input{economics}
+\input{business}
+\input{writing}
+\part{Other ramblings}
+\input{wonderings}
+\input{weiqi}
 \input{hardware}
 \input{humanoid}
 \input{opinion}
-\chapter{(Clean up this mess from 2014)}
-\input{pricing}
-\chapter{(Will this ever be applicable?)}
-\input{function}
+\part{Closing}
+\input{lies}
+\input{closing}
 
 % index redirections
 \index{DFA|see{deterministic finite automaton}}%
@@ -134,6 +144,9 @@
 
 \backmatter
 
+\clearpage
+\noindexintoc
+\addcontentsline{toc}{part}{\indexname}
 \printindex
 
 \nocite{LeggPhd}
@@ -143,6 +156,9 @@
 \nocite{casella2002statistical}
 \nocite{Topology}
 
+\clearpage
+\nobibintoc
+\addcontentsline{toc}{part}{\bibname}
 \bibliography{bib}{}
 \bibliographystyle{plain}
 \end{document}
