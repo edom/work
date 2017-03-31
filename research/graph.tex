@@ -1,17 +1,55 @@
 \chapter{Graph}
 
-A \emph{graph} is \((V,E)\) where
+A \emph{graph} is \(G = (V,E)\) where
 \(V\) is the set of \emph{vertices} and \(E \subseteq V \times V\) is the set of \emph{edges}.
 
-A graph is a relation.
+\(E\) is a relation.
+
+\(G\) is a \emph{function} iff \(\forall a, b, c : a E b \wedge a E c \implies b=c\).
+
+\(G\) is \emph{undirected} iff \(E\) is symmetric.
+
+A \emph{path} is a sequence of edges.
+
+Let \(P(a,b)\) mean ``there is a path from \(a\) to \(b\)'' or ``\(a\) has a path to \(b\)''.
+Then \(P(a,b) = E(a,b) \vee \exists c (P(a,c) \wedge P(c,b))\).
+We say that \(b\) is \emph{reachable} from \(a\) iff there is a path from \(a\) to \(b\).
+
+\(G\) is \emph{cyclic} if it has a vertex that has a path to itself.
+\(G\) is \emph{acyclic} iff it is not cyclic.
+
+\(G\) is \emph{connected} iff \(\forall a,b \in V, a\neq b : P(a,b)\).
+\(G\) is \emph{disconnected} iff it is not connected.
+
+\(G\) is \emph{complete} iff \(\forall a,b \in V, a \neq b : E(a,b)\).
+
+\(G_1 = (V_1,E_1)\) is a \emph{subgraph} of \(G_2 = (V_2,E_2)\)
+iff \(G_2\) is a graph, \(V_1 \subseteq V_2\), and \(E_1 \subseteq E_2\).
+
+A \emph{loop} is an edge of the form \((a,a)\).
 
 The \emph{length} of a path is the number of edges in that path.
 
+% https://en.wikipedia.org/wiki/Distance_(graph_theory)
+
 The \emph{geodesic distance} from \(a\) to \(b\) is \(d(a,b)\),
 the length of the shortest path from \(a\) to \(b\).
+
+The natural metric space of a connected undirected graph \((V,E)\) is \((V,d)\) where
+\(d(a,b)\) is the length of the shortest path from \(a\) to \(b\).
+
+The \emph{indegree} of \(v\) is \(|\{ (a,v) : a E v \}|\).
+
+The \emph{outdegree} of \(v\) is \(|\{ (v,a) : v E a \}|\).
+
+A vertex is \emph{source} iff its indegree is zero.
+
+A vertex is \emph{sink} iff its outdegree is zero.
 
 The graph's \emph{fringe} of \(A\) is \(F(A) = \{ b ~|~ a \in A, ~ (a,b) \in E \}\).
 
 Let \(F^{n+1}(A) = F(F^n(A))\).
 Property: \(F(\emptyset) = \emptyset\).
 Property: \(F(A \cup B) = F(A) \cup F(B)\).
+
+A \emph{tree} is an undirected acyclic graph.
