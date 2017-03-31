@@ -119,6 +119,10 @@ A \emph{relation} is a subset of a Cartesian product.
 \(R\) is a \emph{binary relation} between \(A\) and \(B\) iff \(R \subseteq A \times B\).
 Iff \(A = B\), then \(R\) is an \emph{endorelation}.
 
+\paragraph{Notation}
+We write \(a R b\) or \(R(a,b)\) to mean \((a,b) \in R\).
+We write \(\neg (a R b)\) or \(\neg R(a,b)\) to mean \((a,b) \not\in R\).
+
 Properties of an endorelation:
 \index{reflexive relation}%
 \index{relation!reflexive}%
@@ -150,6 +154,28 @@ An \emph{equivalence relation} is a symmetric transitive reflexive relation.
 \index{order!total}%
 A \emph{partial order} is a antisymmetric transitive reflexive relation.
 A \emph{total order} is an antisymmetric transitive total relation.
+
+The
+\index{composition}%
+\index{composition!of two relations}%
+\index{relation!composition}%
+\emph{composition} of \(f\) and \(g\) is
+\(f \circ g = \{ (a,c) ~|~ (a,b) \in g \wedge (b,c) \in f \}\).
+Repeated composition: \(f^{n+1} = f \circ f^n\).
+
+\(R\) is \emph{transitive} iff \(\forall a,b,c : a R b \wedge b R c \implies a R c\).
+
+The \emph{inverse} of \(R\) is \(R^{-1} = \{ (b,a) ~|~ a R b \}\).
+
+The
+\index{symmetric closure}%
+\emph{symmetric closure} of \(R\)
+is the smallest symmetric relation that is also a superset of \(R\).
+The symmetric closure of \(R\) is \(R \cup R^{-1}\).
+The
+\index{transitive closure}%
+\emph{transitive closure} of \(R\)
+is the smallest transitive relation that is also a superset of \(R\).
 
 \section{Function}
 
