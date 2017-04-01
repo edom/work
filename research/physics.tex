@@ -1,18 +1,88 @@
 \chapter{Physics}
 
-\section{Mechanics}
+Physical laws allow us to predict the state of physical systems.
 
-Newton's law:
-\(F = dp\) where \(F(t)\) is force acting on the point mass at time \(t\)
-and \(p(t)\) is the momentum of the point mass at time \(t\).
+The \emph{degree of freedom} is the number of parameters required to describe the system.
+
+Coordinates
+
+Hamilton's principle
 
 State space
 
-Configuration space
+A
+\index{configuration space}%
+\emph{configuration space} is a vector space where each vector is a generalized coordinate tuple.
 
 Phase space
 
 Hamiltonian mechanics
+
+\paragraph{Example}
+In two-body problem,
+the state space is ...,
+the configuration space is ...,
+the phase space is...
+
+\section{Mechanics}
+
+Newton's second law:
+\(F = dp\) where \(F(t)\) is force acting on the point mass at time \(t\)
+and \(p(t)\) is the momentum of the point mass at time \(t\).
+
+A system of \emph{equations of motion} has the form:
+\begin{align*}
+    x_1(t) &= \ldots
+    \\
+    & \vdots
+    \\
+    x_n(t) &= \ldots
+\end{align*}
+
+\paragraph{Example}
+Pendulum:
+Let \(\theta\) be the angle from the axis parallel to the gravitation vector
+and \(l\) be the line length.
+\(h = l - (1 - \cos \theta) l = l \cos \theta\).
+\(P = m g h\).
+\(K = \frac{1}{2} m v^2\).
+Generalized coordinates: \((h,\theta)\) instead of \((x,y)\).
+Translation rules: \(x = l \sin \theta\) and \(y = l \cos \theta\).
+The point \(x,y=0,0\) is the lowest point of the pendulum.
+
+\section{Example: Two rigid bodies}
+
+Assume constant mass.
+\begin{align*}
+    m_1 \cdot (d^2 x_1)(t) &= G m_1 m_2 \cdot (x_2(t) - x_1(t)) / \norm{x_1(t) - x_2(t)}^3
+    \\
+    m_2 \cdot (d^2 x_2)(t) &= G m_1 m_2 \cdot (x_1(t) - x_2(t)) / \norm{x_1(t) - x_2(t)}^3
+\end{align*}
+Matrix form:
+\begin{align*}
+    \bmat{
+        m_1 \cdot (d^2 x_1)(t)
+        \\
+        m_2 \cdot (d^2 x_2)(t)
+    }
+    &=
+    \frac{G m_1 m_2}{\norm{x_1(t) - x_2(t)}^3}
+    \bmat{
+        x_2(t) - x_1(t)
+        \\
+        x_1(t) - x_2(t)
+    }
+\end{align*}
+
+\paragraph{Example}
+Uniform gravitation field.
+Phase space coordinate \(h\) where \(h\) is height.
+\(P(h) = m g h\).
+\(K(h) = m (v(h))^2 / 2\).
+Conservation of energy: \(P + K = E\).
+\(d_h E = 0 = m g + \frac{1}{2} m \cdot (d_h v)(h) \cdot 2 v(h)\).
+\(0 = g + (d_h v)(h) \cdot v(h)\).
+\(- g = d_h v \cdot v\).
 
 \section{Quantum mechanics}
 
