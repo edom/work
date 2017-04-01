@@ -208,10 +208,95 @@ means a function that evaluates to \(Y\) if given \(X\).
 When a type is expected, the notation \(X \to Y\) describes a function type.
 Expressions like \(x \to x + 1\) are called \emph{unnamed functions}.
 
+The
+\index{image!of relation}%
+\emph{\(R\)-image} of \(A\) is \(\{ y ~|~ (x,y) \in R, ~ x \in A \}\).
+
+The
+\index{preimage!of relation}%
+\emph{\(R\)-preimage} of \(A\) is \(\{ x ~|~ (x,y) \in R, ~ y \in A \}\).
+
+The
+\index{image!of function}%
+\emph{\(f\)-image} of \(A\) is \(\{ f(x) ~|~ x \in A \}\).
+
+The
+\index{preimage!of function}%
+\emph{\(f\)-preimage} of \(A\) is \(\{ x ~|~ f(x) \in A \}\).
+
+For all function \(f\):
+if \(A \subset B\) then \(F(A) \subseteq F(B)\)
+where \(F(A) = \{ f(x) ~|~ x \in A \}\).
+
+For all function \(f\):
+if \(A \subset B\) then \(G(A) \subseteq G(B)\)
+where \(G(A) = \{ x ~|~ f(x) \in A \}\).
+
+The function type operator associates to the right: \(a \to b \to c = a \to (b \to c)\).
+
 \paragraph{Currying}
 \index{curry}%
 \index{currying}%
-\emph{Currying} \(f : (a_1,\ldots,a_n) \to b\) turns it into \(f' : a_1 \to \ldots \to a_n \to b\)
+\emph{Currying} turns every function that takes \(n\) arguments
+to an equivalent function that takes one argument.
+Currying \(f : (a_1,\ldots,a_n) \to b\) turns it into \(f' : a_1 \to \ldots \to a_n \to b\)
 such that \(f(x_1,\ldots,x_n)
 = f'~x_1~\ldots~x_n
 = (((f'~x_1)~x_2)\ldots)~x_n\).
+
+If it is clear from context that \(f\) can take 3 arguments (and not one 3-tuple argument),
+then we abuse the notation \(f(a,b,c)\) to mean \(((f~a)~b)~c\).
+
+\section{Polynomial}
+
+A \emph{polynomial of \(x\)} is an expression of the form \(\sum_{k=0}^n a_k x^k\)
+where \(n\) is the \emph{degree} of the polynomial.
+
+A
+\index{polynomial}%
+\emph{polynomial function of degree \(n\)} is a function of the form
+\(f(x) = \sum_{k=0}^n a_k x^k\) where each \(a_k\) is constant.
+
+A \emph{polynomial function of degree \(n\)} is a function of the form
+\(f(x) = \prod_{k=1}^n (x - r_k)\) where each \(r_k\) is constant.
+Each \(r_k\) is a \emph{root} of the polynomial.
+
+\section{Limit}
+
+Informally, \(\lim_{x \to a} f(x) = b\)
+iff \(f(x)\) approaches \(b\) as \(x\) approaches \(a\).
+
+\section{Sequence}
+
+\index{sequence}%
+A \emph{sequence} \(x\) is a list of things \(x_0, x_1, x_2\), and so on.
+
+An
+\index{arithmetic sequence}%
+\index{sequence!arithmetic}%
+\emph{arithmetic sequence} is a sequence of the form \(x_k = x_0 + a k\).
+
+A
+\index{geometric sequence}%
+\index{sequence!geometric}%
+\emph{geometric sequence} is a sequence of the form \(x_k = r^k x_0\).
+
+\section{Series}
+
+\index{series}%
+If \(x\) is a sequence, then \(\sum_k x_k\) is a \emph{series}.
+The series \emph{converges} iff it is a number.
+
+The
+\index{sequence of partial sums}%
+\index{partial sum}%
+\emph{sequence of partial sums} of the sequence \(x\) is
+the sequence \(y\)
+where \(y_n = \sum_{k=0}^n x_k\).
+The series is \(\lim_{n \to \infty} y_n\).
+
+The
+\index{geometric series}%
+\index{series!geometric}%
+\emph{geometric series} with ratio \(r\) is \(g(r) = \sum_{k=0}^\infty r^k\).
+If \(0 < \abs{r} < 1\) then \(g(r) = \frac{1}{1-r}\).
