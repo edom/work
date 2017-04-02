@@ -27,8 +27,18 @@ Two languages \(A\) and \(B\) can be
 \emph{concatenated} to
 \(AB = \{ ab ~|~ a \in A, ~ b \in B \}\).
 
+The
+\index{empty string}%
+\index{string!empty}%
+\emph{empty string} \(\emptystr\) satisfies \(\emptystr a = a \emptystr = a\).
+
 \index{alphabet}%
 An \emph{alphabet} is a finite set where each element is a string of length one.
+
+\paragraph{Power}
+Let \(A\) be a language and \(n\) be a natural number.
+Define \(A^{n+1} = A A^n\).
+Corollary: \(A^0 = \{\emptystr\}\).
 
 \paragraph{Kleene closure}
 Let \(A\) be a language.
@@ -39,19 +49,31 @@ The
 \emph{Kleene closure}
 of \(A\) is \(A^* = A^0 \cup AA^*\).
 Another nonrecursive definition is
-\( A^* = \bigcup_{n \in \Nat} A^n \)
-where \( A^0 = \{\emptystr\} \),
-\( A^{n+1} = A A^n \),
-and \(\epsilon\) is the
-\index{empty string}%
-\index{string!empty}%
-empty string.
+\( A^* = \bigcup_{n \in \Nat} A^n \).
 
 \(A^*\) is the smallest superset of \(A\)
 closed under string concatenation.
 
-A \emph{decision problem} is isomorphic to a language
+A
+\index{formal system}%
+\emph{formal system} \(F\) is a relation \(F \subseteq A^* \times A^*\)
+made from finitely many rules where each rule has the form \(L \vdash R\)
+where \(A\) is the alphabet.
+What limits the form of \(L\) and \(R\)?
+
+A
+\index{problem}%
+\emph{problem} \(P\) is a relation \(P \subseteq A^* \times A^*\) where \(A\) is the alphabet.
+An \emph{instance} of the problem is an element of the problem's relation.
+
+A
+\index{problem!decision}%
+\index{decision problem}%
+\emph{decision problem} is isomorphic to a language
 containing the strings representing the yes-instances.
+
+\(F\)-unspecifiable problem:
+Proof by diagonalization?
 
 \section{Machine as formal system}
 
