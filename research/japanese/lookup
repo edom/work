@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Usage:
+# ./lookup KANJI
+# where KANJI is a character in the CJK Unified Ideograph Unicode block.
+
+# Environment variables:
+# v=1 show only verbs
+# u=1 show non-P
+
+# For the documentation of EDICT Japanese dictionary, see:
+# http://www.edrdg.org/jmdict/edict_doc.html
+
+# Example:
+# v=1 ./lookup 愛
+
+filter_verb ()
+{
+    if [ "$v" = 1 ]; then
+        grep '(v'
+    else
+        cat
+    fi
+}
+
+filter_common ()
+{
+    if [ "$u" != 1 ]; then
+        grep '(P)'
+    else
+        cat
+    fi
+}
+
+grep "$1" /usr/share/gjiten/dics/edict | filter_common | filter_verb
+echo '======================================================================'
+grep "$1" /usr/share/gjiten/dics/kanjidic
