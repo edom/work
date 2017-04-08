@@ -1,0 +1,19 @@
+#!/bin/bash
+
+echo 'Checking Haskell Stack tool version:'
+
+if ! stack --version; then
+    echo 'Please install Haskell Stack tool first.'
+    exit 1
+fi
+
+echo
+echo '================================================'
+echo '1. Paste Japanese text to standard input.'
+echo '2. Press Enter.'
+echo '3. Press Control-D.'
+echo '4. The program will sort the kanji by frequency.'
+echo '================================================'
+echo
+
+stack --resolver=lts-6.26 runghc CharacterFrequencyAnalysis.hs
