@@ -1,6 +1,11 @@
-\documentclass[12pt,a4paper,openany]{book}
+\documentclass[12pt,openany]{book}
 \usepackage{xeCJK}
 \usepackage{hyperref}
+\usepackage[
+    paperwidth=6in,paperheight=9in
+    ,top=1.00in,bottom=1.00in
+    ,inner=1.00in,outer=0.75in
+]{geometry}
 \setCJKmainfont{Droid Sans Fallback}
 \begin{document}
 \frontmatter
@@ -9,7 +14,7 @@
 \begin{titlepage}
 {%
     \setlength\parindent{0em}%
-    {\huge Bootstrap your Japanese with English}\par\vspace{2em}
+    {\Large Bootstrap your Japanese with English}\par\vspace{2em}
     Erik Dominikus\par
     2017-04-02\par
     (Draft)\par
@@ -79,6 +84,8 @@ Set up an input method, or use Google Translate.
 \input{kanji-1}
 \input{kanji-2}
 \input{kanji-3}
+\input{people}
+\input{logic}
 \input{scratch}
 \input{grammar}
 
