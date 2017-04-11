@@ -4,9 +4,13 @@ This document assumes that you are using Ubuntu 14.04.
 
 ## How to build this document
 
+### First-time prerequisites
+
 ```
-sudo apt-get install texlive-xetex texlive-fonts-extra fonts-takao
+sudo apt-get install texlive-xetex texlive-fonts-extra fonts-hanazono
 ```
+
+### Building
 
 ```
 ./make
