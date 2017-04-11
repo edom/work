@@ -19,14 +19,14 @@
 " Look up in dictionary:
 " (Normal mode) character under cursor
 " (Visual mode) selected string
-:map <F3> yl<CR>:call g:LookupSelection()<CR>
-:vmap <F3> y<CR>:call g:LookupSelection()<CR>
+:map <F3> yl:call g:LookupSelection()<CR>
+:vmap <F3> y:call g:LookupSelection()<CR>
 
 " Look up character under cursor in dictionary, returning verbs only.
-:map <F4> yl<CR>:call g:LookupSelection_VerbOnly()<CR>
+:map <F4> yl:call g:LookupSelection_VerbOnly()<CR>
 
 " Copy to clipboard:
 " (Normal mode) character under cursor
 " (Visual mode) selected string
-:map <F5> "+yl<CR>
-:vmap <F5> "+y<CR>
+:map <F5> "+yl
+:vmap <F5> "+y
