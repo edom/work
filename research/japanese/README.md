@@ -1,4 +1,4 @@
-# Bootstrap your Japanese with English
+# Cold-Turkey Head-First Dive into Kanji
 
 This document assumes that you are using Ubuntu 14.04.
 
