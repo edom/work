@@ -1,0 +1,193 @@
+\chapter{Grammar 2}
+
+All truth values are to be interpreted probabilistically.
+The statement ``everybody has a chicken'' is neither true nor false;
+it has truth value somewhere between 0 and 1.
+
+Probabilistic temporal modal logic?
+
+I-phrase
+
+I-clause
+
+U-phrase
+
+U-clause
+
+A nominal is a thing that acts like a noun.
+
+An adjectival is a thing that modifies a nominal.
+
+\section{Predication and is-a}
+
+車は高い。
+Cars are expensive.
+\[
+    車(x) \vdash 高い(x)
+\]
+
+車は高いか？
+Are cars expensive?
+\[
+    ? : 車(x) \vdash 高い(x)
+\]
+
+黒い車は良いです。
+Black cars are good.
+\[
+    車(x), 黒い(x) \vdash 良い(x)
+\]
+
+犬は動物。
+Dog is a mammal.
+\[
+    犬(x) \vdash 動物(x)
+\]
+
+中村さんは俳優です。Nakamura-san is an actor.
+\[
+    \vdash 俳優(中村さん)
+\]
+or
+\[
+    中村さん(x) \vdash 俳優(x)
+\]
+
+\section{Equation}
+
+あの人は田中さんです。
+
+\[
+    あの人 = 田中さん
+\]
+
+\section{Relative clauses}
+
+妹が居ない人
+people who do not have younger sisters
+\[
+    人(x), \neg \exists y (y \text{ is an 妹 of } x)
+\]
+
+お金がない人
+people who do not have money
+\[
+    人(x), \neg \text{possess}(x,お金)
+\]
+
+お金がない人がいる。
+There are people who do not have money.
+\[
+    \exists x (人(x) \wedge \neg \text{possess}(x,お金))
+\]
+
+お金がない人が悲しい。
+People who do not have money are sad (feel sad).
+(This is just an example sentence.
+It has nothing to do with the real world.)
+\[
+    人(x), \neg \text{possess}(x,お金) \vdash 悲しい(x)
+\]
+
+\section{Example constructions: が、は}
+
+お金（おかね）：お金がありません。The implied entity does not have money.
+
+山（やま）、高い（たかい）：
+この山は高いです。This mountain is tall.
+
+川（かわ）、広い（ひろい）：
+この川は広いです。This river is wide.
+
+石（いし）、子供（こども）、投げる（なげる）：
+石を投げる子供stone-throwing child
+
+名前（なまえ）：お名前は？
+And your name is...?
+
+\section{Example constructions: て下さい}
+
+戸（と）、開く（ひらく）、下さい（ください）：
+戸を開いてく下さい。Please open the door.
+
+\section{Nouns made by conjoining nouns: と}
+
+Unlike English ``and'', Japanese と conjoins \emph{nouns} only.
+English ``and'' can conjoin noun phrases or sentences.
+田中さんと中川さんは東京に行く。Tanaka-san and Nakagawa-san goes to Toukyou.
+\[
+    \vdash \text{destination}(東京),行く(田中さん),行く(中川さん)
+\]
+
+彼（かれ）、私（わたし）、同じ（おなじ）、見る（みる）：
+彼と私は同じ夢を見ました。
+He and I had the same dream.
+\[
+    夢(彼,x), 夢(私,y) \vdash 同じ(x,y)
+\]
+
+\section{Example constructions: Genitive: の}
+
+羽（はね）、黒（くろ）：カラスの羽は黒い。The color of a crow's feathers is black.
+
+Crowのfeatherのcolorはblack。
+
+\[
+    羽(x), カラス(y), \text{belongs-to}(x,y) \vdash 黒い(x)
+\]
+
+\section{Example constructions: Nominalization: の}
+
+\subsection{In doubt}
+
+犬（いぬ）、来る（くる）、来た（きた）：
+
+田中さんは来た。Tanaka-san came.
+\[
+    \vdash 来た(田中さん)
+\]
+About Tanaka-san, he came.
+What Tanaka-san did was coming.
+
+来たのは田中さんです。
+About having come,
+it is Tanaka-san who did that (and not somebody else).
+\[
+    来た(x) \vdash x = 田中さん
+\]
+If anyone came, then it was Tanaka-san.
+Who came is Tanaka-san.
+Tanaka-san is the person who came (and not somebody else).
+
+勉強（ベンキョウ）、貴方（あなた）：
+勉強するのは貴方にいい。
+Studyingはyouにgood。
+Studying is good for you.
+Parse tree:
+貴方にいいmodifiesの,
+貴方にいいのis the topic,
+貴方にいいのはmodifiesいい.
+Logic: good-for(studying,you).
+
+貴方にいいのは勉強するのです。
+What is good for youはstudyingです。
+What is good for you is studying.
+Parse tree:（（貴方）に・いい・の）は・勉強・する・の・です。
+Another possible parse tree:
+（貴方）に・（いい・の）は・勉強・する・の・です。
+For you, what is good is studying.
+
+勉強するのは何のため？
+What is studying for?
+What is the purpose of studying?
+
+\section{Example constructions: たい}
+
+魚（さかな）、食べる（たべる）：魚を食べたくありません。The implied entity does not want to eat fish.
+
+\section{Questionable}
+
+良い（いい）、良くなかった（よくなかった）：
+良くなかった良い事things that was good that was not good.
+
+Does AのBとC parse as Aの(BとC) or (AのB)とC?
