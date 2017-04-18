@@ -1,5 +1,34 @@
 # Using Maven to deploy software to worker machines
 
+## First-time set-up
+
+### Telling Maven to use your mirror
+
+If you have your own Maven mirror (repository manager)
+such as Sonatype Nexus or JFrog Artifactory,
+make sure that this fragment
+exists in your `$HOME/.m2/settings.xml`:
+
+```
+    <servers>
+        <server>
+            <id>the-mirror</id>
+            <username>the-username</username>
+            <password>the-password</password>
+        </server>
+    </servers>
+    <mirrors>
+        <mirror>
+            <id>the-mirror</id>
+            <mirrorOf>central</mirrorOf>
+            <url>the-url</url>
+        </mirror>
+    </mirrors>
+```
+
+Replace `the-mirror`, `the-username`, `the-password`,
+and `the-url` with the appropriate parameters of the mirror.
+
 ## Usage
 
 ### Initialize the current working directory
