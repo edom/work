@@ -1,16 +1,19 @@
 \documentclass[12pt,openany]{book}
+\usepackage{tabularx}
 \usepackage[CJKmath=true]{xeCJK}
+\xeCJKDeclareSubCJKBlock{RadicalB}{"20000 -> "2A6DF}
 \setCJKmainfont{HanaMinA}
+\setCJKmainfont[RadicalB]{HanaMinB}
 \usepackage{ruby}
 \renewcommand\rubysize{0.5}
 \renewcommand\rubysep{0.0em}
 \usepackage{amsmath}
-\usepackage{hyperref}
 \usepackage[
     paperwidth=6in,paperheight=9in
-    ,top=1.00in,bottom=1.00in
-    ,inner=1.00in,outer=0.75in
+    ,top=0.75in,bottom=0.75in
+    ,inner=0.67in,outer=0.33in
 ]{geometry}
+\usepackage{hyperref}
 \begin{document}
 \frontmatter
 \phantomsection
