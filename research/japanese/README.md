@@ -66,6 +66,14 @@ and see the kanji description.
 Press q (or Enter when vim says so) to quit the result.
 If you accidentally begin recording, press Q again.
 
+## Others
+
+```
+sudo apt-get install python3-pip
+pip3 install --user pyquery
+python3 jouyou.py <kanji>
+```
+
 ## Resources
 
 ### Sequencing and prioritization
