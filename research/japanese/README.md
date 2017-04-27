@@ -2,6 +2,8 @@
 
 This document assumes that you are using Ubuntu 14.04.
 
+[Download the draft](https://github.com/edom/research/raw/out/japanese/out/japanese.pdf)
+
 ## How to build this document
 
 ### First-time prerequisites
