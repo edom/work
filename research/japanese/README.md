@@ -7,7 +7,7 @@ This document assumes that you are using Ubuntu 14.04.
 ### First-time prerequisites
 
 ```
-sudo apt-get install latex-cjk-common texlive-xetex texlive-fonts-extra fonts-hanazono
+sudo apt-get install latex-cjk-common texlive-xetex texlive-fonts-extra fonts-hanazono texlive-latex-recommended
 ```
 
 ### Building
