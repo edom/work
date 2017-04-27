@@ -91,6 +91,23 @@ Find Japanese blog posts.
 
 Set up an input method, or use Google Translate.
 
+\newcommand\myspacing{0.5em}
+% side-by-side
+\newcommand\sbs[2]{%
+    {%
+        \parindent0em%
+        \par%
+        \vspace{\myspacing}%
+        \begin{tabularx}{\linewidth}{XX}%
+            {\fontsize{12pt}{12pt}\selectfont#1}%
+            &%
+            {\fontsize{10pt}{12pt}\selectfont#2}%
+        \end{tabularx}%
+        \vspace{\myspacing}%
+        \par%
+    }%
+}
+
 \input{kanji}
 \input{kanji-1}
 \input{kanji-2}
