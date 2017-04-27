@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Update 'out' branch.
+
+set -e
+
+main ()
+{
+    local previousBranch=master
+    local outputBranch=out
+    git checkout "$previousBranch" --
+    git branch -D "$outputBranch" || true
+    git checkout -b "$outputBranch" --
+    git add -f out/japanese.pdf
+    git commit -m 'Add output'
+    git checkout "$previousBranch" --
+}
+
+main
