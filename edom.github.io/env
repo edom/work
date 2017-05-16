@@ -1,0 +1,9 @@
+#!/bin/bash
+
+function main ()
+{
+    export PATH="/home/erik/.local/bin:/home/erik/.gem/ruby/2.4.0/bin:$PATH"
+    "$@"
+}
+
+main "$@"
