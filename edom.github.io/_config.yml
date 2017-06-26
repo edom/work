@@ -35,7 +35,19 @@ exclude:
     - env
     - serve
 
+# https://stackoverflow.com/questions/28439426/merge-two-sources-into-one-feed-xml
+emptyArray: []
+
+header_pages:
+    - about.md
+    - all.md
+
 defaults:
+    -
+        scope:
+            path: ""
+        values:
+            layout: "page"
     -
         scope:
             path: ""
