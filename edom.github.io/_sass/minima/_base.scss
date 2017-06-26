@@ -25,13 +25,35 @@ body {
   font-kerning: normal;
 }
 
+p
+{
+    margin-top: $spacing-unit / 2;
+    margin-bottom: $spacing-unit / 2;
+}
 
+table
+{
+    border-collapse: separate;
+    border-spacing: 0em;
+    margin: auto;
+}
+
+th
+{
+    border-bottom: 1px solid #000;
+    text-align: left;
+}
+
+th, td
+{
+    padding: 0em 1em;
+}
 
 /**
  * Set `margin-bottom` to maintain vertical rhythm
  */
 h1, h2, h3, h4, h5, h6,
-p, blockquote, pre,
+blockquote, pre,
 ul, ol, dl, figure,
 %vertical-rhythm {
   margin-bottom: $spacing-unit / 2;
