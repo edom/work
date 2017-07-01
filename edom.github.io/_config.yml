@@ -37,11 +37,9 @@ exclude:
 
 # https://stackoverflow.com/questions/28439426/merge-two-sources-into-one-feed-xml
 emptyArray: []
-
+# Empty header_pages causes all pages to go into the header.
 header_pages:
-    - about.md
-    - all.md
-
+    - index.md
 defaults:
     -
         scope:

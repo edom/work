@@ -3,6 +3,7 @@ title: Intelligence
 permalink: /intelligence.html
 date: 2017-06-22 03:57:00 +0700
 mathjax: true
+featured: true
 ---
 
 In 2007, on page 12, in the paper [Universal intelligence: a definition of machine intelligence](https://arxiv.org/pdf/0712.3329.pdf),

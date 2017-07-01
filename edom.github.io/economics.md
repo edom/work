@@ -2,6 +2,7 @@
 title: Economics
 permalink: /economics.html
 date: 2017-06-26 20:00 +0700
+featured: true
 ---
 
 ## Land > Labor > Capital

@@ -2,6 +2,7 @@
 title: Writing
 permalink: /writing.html
 date: 2017-05-20 21:29:00 +0700
+featured: true
 ---
 
 ## Why do I write?
@@ -40,3 +41,9 @@ Pop-ups are not OK.
 
 Only useful information.
 No filler, no rant, no hatemongering.
+
+## Notes to self
+
+Decision: a website, not a book.
+
+Reason: To minimize the readers' effort.

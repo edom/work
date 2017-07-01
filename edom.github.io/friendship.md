@@ -4,6 +4,7 @@ language: en
 permalink: /friendship.html
 mathjax: yes
 date: 2016-02-01 00:00:00 +0700
+featured: true
 ---
 
 # Abstract
