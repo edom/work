@@ -24,26 +24,4 @@ MathJax.Hub.Config({
   </script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
   {% endif %}
-
-<script>
-window.addEventListener("load", function ()
-{
-    // Prevent overshort last lines by replacing each space
-    // near the end of each text node with a non-breaking space.
-    var minLastLineLength = 10;
-    var nbsp = "\xA0";
-    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-    var node;
-    while (node = walker.nextNode())
-    {
-        var text = node.nodeValue;
-        var isAllWhite = /^\s*$/.test(text);
-        if (isAllWhite) { continue; }
-        var begin = text.slice(0, -minLastLineLength);
-        var end = text.slice(-minLastLineLength);
-        node.nodeValue = begin + end.replace(/ /g, nbsp);
-    }
-});
-</script>
-
 </head>
