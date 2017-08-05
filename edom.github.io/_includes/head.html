@@ -6,6 +6,7 @@
   <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
   <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
 
+  <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700&amp;subset=latin-ext" rel="stylesheet">
   <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }}" href="{{ "/feed.xml" | relative_url }}">
@@ -17,11 +18,31 @@
   {% if page.mathjax %}
   <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
+    jax: ["input/TeX","input/MathML","input/AsciiMath",
+{% if page.draft %}
+    "output/PreviewHTML"
+{% else %}
+    "output/CommonHTML"
+{% endif %}
+    ],
+    extensions: ["tex2jax.js","mml2jax.js","asciimath2jax.js","MathMenu.js","MathZoom.js","AssistiveMML.js", "a11y/accessibility-menu.js"],
+    TeX: {
+        extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+    },
     "CommonHTML": {
-        scale: 94
+        scale: 100
+    },
+    "fast-preview": {
+        disabled: true,
     }
 });
   </script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  {% if page.draft %}
+<style>
+/* PreviewHTML scale doesn't work */
+.MathJax_PHTML { font-size: 125%; }
+</style>
+  {% endif %}
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js" async></script>
   {% endif %}
 </head>

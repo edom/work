@@ -35,6 +35,10 @@ exclude:
     - env
     - serve
 
+kramdown:
+    # Mathjax <span>\( thing \)</span>
+    parse_span_html: false
+
 # https://stackoverflow.com/questions/28439426/merge-two-sources-into-one-feed-xml
 emptyArray: []
 # Empty header_pages causes all pages to go into the header.
