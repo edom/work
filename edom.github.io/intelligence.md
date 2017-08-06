@@ -307,3 +307,4 @@ https://www.quora.com/What-is-the-simplest-life-form
 - [2015, Deep Convolutional Networks are Hierarchical Kernel Machines](https://arxiv.org/abs/1508.01084)
 - [Michio Kaku: Who is right about A.I.: Mark Zuckerberg or Elon Musk?](https://www.youtube.com/watch?v=F5Z52jl4yHQ)
 - [Stats SE 104385: text processing: assigning meaningful cluster name automatically](https://stats.stackexchange.com/questions/104385/assigning-meaningful-cluster-name-automatically)
+- How did consciousness evolve?

@@ -74,3 +74,6 @@ date: 2017-07-04 22:55 +0700
         - Buying share means buying partial company ownership.
 - Undigested information
     - [Noahpinion: How much value does the finance industry create?](http://noahpinionblog.blogspot.co.id/2013/01/how-much-value-does-finance-industry.html)
+    - Investing, speculating, or gambling?
+        - Slap some "math" on gambling masquerading as "investing", and suddenly it looks legit.
+        - "Modern investing: gambling in disguise", David Schneider

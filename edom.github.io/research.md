@@ -11,60 +11,16 @@ permalink: /research.html
     - [Computer science]({% link compsci.md %})
     - [Physics]({% link physics.md %}) and engineering
         - [Energy storage]({% link ensto.md %})
+        - [Traffic engineering]({% link trafeng.md %})
     - Logic
         - [Counterfactual reasoning]({% link cf.md %})
     - [Mathematics]({% link math.md %})
-    - [Mathematics education]({% link mathedu.md %})
+        - [Mathematics education]({% link mathedu.md %})
     - [Meta-research]({% link meta_research.md %})
         - [Information architecture]({% link infarch.md %})
     - [Biology]({% link biology.md %})
-    - [Economics]({% link economics.md %})
-    - [Finance]({% link finance.md %})
-    - [Government]({% link government.md %})
-        - [Politics]({% link politics.md %})
-            - [Politik Indonesia]({% link politik.md %})
-        - [Jakarta]({% link jakarta.md %})
-    - Psychology
-        - Theory
-            - [Friendship is measured by sacrifice]({% link friendship.md %})
-        - Opinion
-            - [April fools' day is harmful]({% link april.md %})
-        - [Entertainment]({% link entertain.md %})
-            - [Game]({% link game.md %})
-        - [2002, Jennifer Daw, Why and how normal people go mad](http://www.apa.org/monitor/nov02/gomad.aspx)
-    - [Magick]({% link magick.md %})
-        - [Magick experiments]({% link magexp.md %})
-    - [Clothing]({% link cloth.md %})
-    - [Art]({% link art.md %})
-        - [Music]({% link music.md %})
-        - [Acting]({% link act.md %})
-    - [Writing]({% link writing.md %})
-- Undigested
-    - http://tex.stackexchange.com/questions/5635/how-to-cite-a-university-lecture-or-its-slides-or-script
-    - On being wrong
-        - ["All models are wrong, but some are useful."](https://en.wikipedia.org/wiki/All_models_are_wrong), George Edward Pelham Box (1919--2013)
-        - In [The Relativity of Wrong](http://chem.tufts.edu/answersinscience/relativityofwrong.htm), Isaac Asimov writes
-        "[...] John, when people thought the earth was flat, they were wrong. When people thought the earth was spherical, they were wrong. But if you think that thinking the earth is spherical is just as wrong as thinking the earth is flat, then your view is wronger than both of them put together."
-    - Psychology
-        - advertising, propaganda
-            - [How One Man Manipulated All of America](https://www.youtube.com/watch?v=nj_UWbifM2U), 12 minutes, too long, about [WP: Edward Bernays](https://en.wikipedia.org/wiki/Edward_Bernays)
-        - Changing minds
-            - [The Behavioral Change Stairway Model](https://viaconflict.wordpress.com/2014/10/26/the-behavioral-change-stairway-model/),
-            can be used for hostage negotiation, suicide prevention, terrorist deradicalization
-            - changingminds.org
-                - http://changingminds.org/techniques/general/overall/overall.htm
-                - http://changingminds.org/techniques/general/cialdini/cialdini.htm
-                - http://changingminds.org/techniques/general/kellerman/kellerman.htm
-                - http://changingminds.org/techniques/general/being_right/being_right.htm
-                - http://changingminds.org/techniques/general/ingratiation/ingratiation.htm
-                - http://changingminds.org/techniques/how_to/trust_me/trust_me.htm
-    - Is Indonesia basic income feasible?
-        - [APBN 2016](https://www.kemenkeu.go.id/apbn2016) income Rp 1,822.5 trillion (in one year).
-        - 2016 population 258 million people. (source?)
-        - Thus about Rp 7 million per man-year.
-            - This isn't even enough to buy food for one man-year.
-    - [StackOverflow: "Are there any applications of Abstract Algebra to Programming Language Theory? Is there anything that would be useful in language design and compiler implementation?"](https://cstheory.stackexchange.com/questions/12354/programming-language-theory-and-abstract-algebra)
-    - [StackOverflow: Uses of algebraic structures in theoretical computer science](https://cstheory.stackexchange.com/questions/10916/uses-of-algebraic-structures-in-theoretical-computer-science)
-    - [Danielsson et al.'s "Fast and loose reasoning is morally correct"](http://www.cse.chalmers.se/~nad/publications/danielsson-et-al-popl2006.html).
-    - https://www.timeshighereducation.com/features/these-are-20-most-popular-academic-papers-2016
-    - https://www.numbeo.com/cost-of-living/
+    - [Social]({% link social.md %})
+    - Philosophy
+        - https://philosophy.stackexchange.com/questions/21292/do-some-continental-philosophers-deliberately-obfuscate-their-writing-why
+        - https://www.whatisitliketobeaphilosopher.com/
+            - Biographical interviews.

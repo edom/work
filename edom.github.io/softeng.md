@@ -11,6 +11,7 @@ permalink: /softeng.html
     - [Security]({% link security.md %})
     - [Software engineering management]({% link engman.md %})
     - [Class-based programming]({% link cbp.md %})
+    - [Software]({% link software.md %})
 - These pages may be outdated:
     - [Ansible]({% link ansible.md %})
     - [Logging]({% link logging.md %})
@@ -77,3 +78,7 @@ A typo in the source code is not a bug.
             - "Any function that is too complex to be implemented within two weeks is
             further decomposed into smaller functions until each sub-problem is small enough to be called a feature."
 - Meilir Page Jones, "What every programmer should know about object-oriented design"
+- Quartz scheduler performance
+    - http://airboxlab.github.io/performance/scalability/scheduler/quartz/2017/06/20/perf_tuning_quartz.html
+    - https://www.ebayinc.com/stories/blogs/tech/performance-tuning-on-quartz-scheduler/
+    - https://stackoverflow.com/questions/11565993/quartz-performance

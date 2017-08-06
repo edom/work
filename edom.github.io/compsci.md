@@ -10,10 +10,10 @@ permalink: /compsci.html
 - Functional programming research
     - [Haskell]({% link haskell.md %})
     - [Coq]({% link coq.md %})
-- Metaprogramming
-    - [JetBrains MPS]({% link jbmps.md %})
-    - [TXL: source transformation by example](http://txl.ca/index.html), what can it do?
 - [Software engineering]({% link softeng.md %})
+    - [Programming]({% link programming.md %})
+- Why is "functional programming research" under "computer science", but "programming" is under "software engineering"?
+    - Is there any other way to taxonomize this?
 - [Cryptocurrency]({% link crycur.md %})
 - [Matt Might: What CS majors should know](http://matt.might.net/articles/what-cs-majors-should-know/)
 - [Wikipedia: List of important publications in computer science](https://en.m.wikipedia.org/wiki/List_of_important_publications_in_computer_science)
@@ -31,3 +31,9 @@ permalink: /compsci.html
 - Undigested
     - [CSTSE 17502: What is a simple toy research programming language that has simple denotational semantics?](https://cstheory.stackexchange.com/questions/17502/a-simple-programming-language)
     - [Fast Approximate Matrix Multiplication by Solving Linear Systems](https://arxiv.org/abs/1408.4230)
+    - [StackOverflow: Uses of algebraic structures in theoretical computer science](https://cstheory.stackexchange.com/questions/10916/uses-of-algebraic-structures-in-theoretical-computer-science)
+    - [Danielsson et al.'s "Fast and loose reasoning is morally correct"](http://www.cse.chalmers.se/~nad/publications/danielsson-et-al-popl2006.html).
+    - [StackOverflow: "Are there any applications of Abstract Algebra to Programming Language Theory? Is there anything that would be useful in language design and compiler implementation?"](https://cstheory.stackexchange.com/questions/12354/programming-language-theory-and-abstract-algebra)
+    - [Math talk: Theorem about git revision control system?](https://cstheory.stackexchange.com/questions/32374/math-talk-theorem-about-git-revision-control-system)
+    - http://www.ittc.ku.edu/~nfrisby/papers/drafts/Constructing_Language_Processors_with_Algebra_Combinators.pdf
+        - modular monadic semantics?

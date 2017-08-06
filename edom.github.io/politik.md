@@ -22,3 +22,16 @@ permalink: /politik.html
         - Mencegah hal yang merugikan banyak orang.
     - Seandainya Pemda DKI Jakarta hendak membeli sebagian ruas jalan tol untuk dijadikan jalan umum,
     berapa biaya per kilometernya?
+- Why is Reddit blocked in Indonesia?
+    - The official reason
+        - Something like "Reddit is a porn site.".
+        - http://www.mesinwaktu.id/2017/11/alasan-kenapa-reddit-diblokir.html
+        - https://www.quora.com/Why-is-Reddit-blocked-by-the-Indonesian-government
+        - Doesn't make sense.
+            - There is porn on Reddit, but Reddit is not a porn site.
+            There are also porn on Google, Bing, YouTube, Blogspot, but they aren't porn sites.
+            Why block only Reddit?
+            If you're following the law to the letter,
+            why not block all of Internet?
+    - What I think the reason is
+        - Someone in the government might need to be seen working.

@@ -14,8 +14,6 @@ date: 2017-05-20 00:00:00 +0700
 - How do you use a computer?
     - [Internet search tools]({% link search.md %})
     - [Remove nag screens]({% link nag.md %})
-- [Similar websites]({% link similar.md %})
-- [All pages]({% link all.md %})
 - [Long-haired men]({% link longhair.md %})
 - Habits learned the hard way
     - I check the time at [time.gov](https://time.gov/) because Ubuntu 14.04 NTP once betrayed me.
@@ -25,9 +23,7 @@ date: 2017-05-20 00:00:00 +0700
         - [CBN]({% link cbn.md %})
     - Electricity distribution
         - [PLN]({% link pln.md %})
-- Why is the text so big?
-    - Because I'm myopic.
-    - To shrink the text, press Control-minus.
+- [About this website]({% link about.md %})
 
 {% assign everything = site.emptyArray %}
 {% for page in site.pages %}

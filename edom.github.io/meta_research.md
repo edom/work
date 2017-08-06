@@ -195,6 +195,23 @@ Can we crowdsource it?
     - congress
         - [Wikipedia: International Congress of Mathematicians](https://en.wikipedia.org/wiki/International_Congress_of_Mathematicians)
     - See also [English SE 20924](https://english.stackexchange.com/questions/20924/whats-the-difference-between-colloquium-seminar-and-possibly-other-such-w).
+- Why is literature study important?
+    - It saves time.
+        - Skip things that are already done.
+        - Skip dead ends.
+        - Build on other people's work.
+- Taxonomy: How should we structure this site?
+    - Dilemma
+        - The ideal structure is tree.
+            - Each vertex is a page in this website.
+            - Each vertex should not have more than 7 children.
+        - The practical structure is graph.
+    - [Classifying all human knowledge](https://thepantologist.com/classifying-all-human-knowledge/)
+    - [WP:Figurative system of human knowledge](https://en.wikipedia.org/wiki/Figurative_system_of_human_knowledge)
+    - [#WikipediaProblems: How Do You Classify Everything?](https://www.theatlantic.com/technology/archive/2013/10/-wikipediaproblems-how-do-you-classify-everything/280178/)
+        - SUMO (Suggested Upper Merged Ontology)
 - Undigested
     - [Google talk to books](https://books.google.com/talktobooks/)
     - SQ3R method https://academia.stackexchange.com/questions/631/how-to-efficiently-read-mathematically-and-theoretically-dense-books-in-stem-fie
+    - http://tex.stackexchange.com/questions/5635/how-to-cite-a-university-lecture-or-its-slides-or-script
+    - https://www.timeshighereducation.com/features/these-are-20-most-popular-academic-papers-2016

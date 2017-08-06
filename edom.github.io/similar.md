@@ -13,3 +13,4 @@ permalink: /similar.html
     - everyone can edit
     - If [Kelly Kinkade's answer](https://www.quora.com/Will-it-be-feasible-to-move-Wikipedia-mediaWiki-from-PHP-to-some-modern-language-like-Golang)
     is true, then it's worrying that so much human knowledge is stored in such badly designed MediaWiki.
+- TheBrain: the idea is good, but the app is slower than static web.

@@ -69,6 +69,8 @@ permalink: /politics.html
             - https://www.reddit.com/r/LateStageCapitalism/comments/6cqcm3/if_youre_unemployed_it_is_not_because_there_isnt/
         - Best attack aircraft? https://en.wikipedia.org/wiki/Fairchild_Republic_A-10_Thunderbolt_II
     - [The Best Way to Fix The American Political System](https://www.ranker.com/list/the-best-way-to-fix-the-american-political-system/desertrat89)
-- History
-    - https://history.stackexchange.com/questions/32480/why-would-some-nations-want-to-force-japan-to-end-their-isolation
-- [How does money laundering work? - Delena D. Spann](https://www.youtube.com/watch?v=257wV-AbKaE)
+    - History
+        - https://history.stackexchange.com/questions/32480/why-would-some-nations-want-to-force-japan-to-end-their-isolation
+    - [How does money laundering work? - Delena D. Spann](https://www.youtube.com/watch?v=257wV-AbKaE)
+    - Free speech is only possible if people think critically.
+    - Democracy is only possible if people think critically.

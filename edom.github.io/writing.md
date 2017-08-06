@@ -62,5 +62,10 @@ Reason: To minimize the readers' effort.
         - A post is time-sensitive. Its usefulness depends on time.
         Old posts are useless.
         - Posts are good for news, updates, changelogs, diffs.
+- Books should be shorter.
+    - I think a 100-page popular book has only 1 page of useful information.
+    - [WP:Inverted pyramid](https://en.wikipedia.org/wiki/Inverted_pyramid_(journalism))
+        - Begin with the most important statement.
+        - The rest of the book supports that statement.
 - Undigested information
     - [The sad state of personal knowledgebases](https://news.ycombinator.com/item?id=10739227)

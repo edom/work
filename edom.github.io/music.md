@@ -65,6 +65,7 @@ date: 2016-03-27 14:14:08 +0700
         - Granada Music Studio, Jalan Bumi no. 6, near Pakubuwono Residence
         - Resonanz Music Studio
         - Delta Musik Tanjung Duren
+        - PNP Studio Tanjung Duren?
     - eatery-drinkery with live music
         - Double Doors bar, Puri Indah
     - [ben casey: why christian music is so bland (YouTube comment)](https://www.youtube.com/watch?v=zH_5j3Wm9qM&lc=UghFffTwyUZtIHgCoAEC):

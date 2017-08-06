@@ -21,6 +21,7 @@ permalink: /physics.html
     - How should we learn general relativity?
         - How should we learn differential geometry?
             - Should we use spherical trigonometry as an introduction to differential geometry?
+- [Modeling]({% link model.md %})
 - Undigested information fragments
     - [Bob Coecke, categorical quantum mechanics](http://www.cs.ox.ac.uk/people/bob.coecke/)
     - [Why John von Neumann did not Like the Hilbert Space formalism of quantum mechanics (and what he liked instead)](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.35.763)

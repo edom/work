@@ -5,8 +5,12 @@ permalink: /kubernetes.html
 ---
 
 - [kubernetes.io](https://kubernetes.io/): "Production-Grade Container Orchestration"
-- What is the most hassle-free future-proof minimal-maintenance way of authentication and authorization in Kubernetes?
-- How do we add and remove users and roles to Kubernetes?
+- How do we control access to Kubernetes?
+    - https://stackoverflow.com/questions/42170380/how-to-add-users-to-kubernetes-kubectl
+    - https://kubernetes.io/docs/admin/authentication/
+    - https://kubernetes.io/docs/admin/accessing-the-api/
+    - How do we add and remove users and roles to Kubernetes?
+    - Which is the most hassle-free future-proof minimal-maintenance way?
 - How I think Kubernetes fits in Google's strategy
     - Kubernetes commoditizes IaaS providers.
         - It lowers the barrier of switching from any other cloud providers to GCE.

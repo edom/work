@@ -59,3 +59,17 @@ Money is not capital, but it can be used to buy capital, but this quote is relat
 > that wealth is not in bank accounts and that you can’t eat money.
 >
 > Alanis Obomsawin (b. 1932) ([source](http://quoteinvestigator.com/2011/10/20/last-tree-cut/))
+
+- Is Indonesia basic income feasible?
+    - [WP:Basic income](https://en.wikipedia.org/wiki/Basic_income)
+    - [APBN 2016](https://www.kemenkeu.go.id/apbn2016) income Rp 1,822.5 trillion (in one year).
+    - 2016 population 258 million people. (source?)
+    - Thus about Rp 7 million per man-year.
+        - This isn't even enough to buy food for one man-year.
+- https://www.numbeo.com/cost-of-living/
+- Undigested
+    - https://www.opendemocracy.net/transformation/andrew-sayer/is-unearned-income-acceptable
+    - http://www.resilience.org/stories/2016-03-15/money-is-not-a-store-of-value/
+    - Write about inflation
+        - Supply-caused inflation
+        - Demand-caused inflation
