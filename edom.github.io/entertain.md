@@ -57,16 +57,24 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
         - [mgsv final slam](https://www.youtube.com/watch?v=e5jx9aYSG1c)
         - [mgsv gun eater](https://www.youtube.com/watch?v=JYM-vPKyxfA)
         - [Dead Rise 2](https://www.youtube.com/watch?v=VELVomIF2Ts) 1:10 "This car cost a million dollars"
+        - [GTA 4](https://www.youtube.com/watch?v=a4UxBrJ2yIQ)
+        - [Vice city](https://www.youtube.com/watch?v=NZ83rfAqWMw)
     - prozd
         - [clickbait](https://www.youtube.com/watch?v=f4FuOi9rvKw)
         - [harem anime where everyone but the protagonist is sentient furniture](https://www.youtube.com/watch?v=gYXHnkhRwCY)
         - [sports commentators commentating a romantic anime scene](https://www.youtube.com/watch?v=_B13yISVHWI)
         - [getting into a conversation in a language you don't actually speak that well](https://www.youtube.com/watch?v=T_PuZBdT2iM)
         - [having a non-white name](https://www.youtube.com/watch?v=p1RKkRCiU90)
+    - [Kid Spins in Spinning Chair at Park 😂 He pretends it's nothing and walks it off](https://www.youtube.com/watch?v=Bae4jQk-LGc)
 - meme-like materials
     - [in only 2 weeks, Robert lost 2 weeks](https://www.reddit.com/r/FunnyandSad/comments/8ejlih/in_just_two_weeks/)
     - [well-lit husky portrait](https://old.reddit.com/r/aww/comments/8io64x/last_year_while_setting_up_lights_for_some/)
     - fat shibes from [Rapid Liquid: part IV - don't nom cat food](https://www.youtube.com/watch?v=qe8b9gfuwME)
+    - [Massive Shibe can't get out of bed](https://www.youtube.com/watch?v=tu9hnAZteug)
+    - The adventures of Mandy and Major:
+    Major is a shibe that growls like a dinosaur chicken.
+        - [Do you like your new toy?](https://www.youtube.com/watch?v=FuraQCCsKgE)
+        - [Happy Friday!](https://www.youtube.com/watch?v=_gxJNdeG7gM)
     - 19:00 [Best Reactions of JonTron](https://www.youtube.com/watch?v=tP5CLR54igs) "AND IIIII... HOLY SHIT",
     [fragment](https://www.youtube.com/watch?v=V4SQj8Ua3kM),
     [10:49, source](https://www.youtube.com/watch?v=l69BP1uhlMs)

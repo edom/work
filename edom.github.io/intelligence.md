@@ -302,3 +302,6 @@ https://www.quora.com/What-is-the-simplest-life-form
 - [colah.github.io: Backprop](http://colah.github.io/posts/2015-08-Backprop/)
 - google search "ai theory research"
 - [2002, PhotoTOC: Automatic Clustering for Browsing Personal Photographs, by John C. Platt, Mary Czerwinski, Brent A. Field](http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.2.4835)
+- philosophy of learning
+    - [Piaget's constructivism vs Papert's constructionism](http://learning.media.mit.edu/content/publications/EA.Piaget%20_%20Papert.pdf), Edith Ackermann
+- [2015, Deep Convolutional Networks are Hierarchical Kernel Machines](https://arxiv.org/abs/1508.01084)

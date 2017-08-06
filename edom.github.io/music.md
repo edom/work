@@ -25,3 +25,4 @@ date: 2016-03-27 14:14:08 +0700
     - http://www.aaronbonneau.com/7-things-japanese-music-does-better/
     - What is Café del Mar?
         - It seems to be a source of chillout musics and Ibiza Balearic beats and other electronic dance musics?
+    - ["A case study of an award winning public school string orchestra program", Wing Man Fu, graduate thesis]( https://etd.ohiolink.edu/rws_etd/document/get/bgsu1242663220/inline)

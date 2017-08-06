@@ -39,10 +39,18 @@ date: 2018-05-15 02:31:00 +0700
         - Do you handle network interruptions?
         How does the user continue scrolling after network connection is restored?
         Is there an unhandled exception in your script?
-
-## Questions
-
-- What is a database that can be scaled up without downtime?
-We are willing to sacrifice consistency for tracking data.
-- [PMSE 2780: How to organize knowledge within a wiki?](https://pm.stackexchange.com/questions/2780/how-to-organize-knowledge-within-a-wiki)
-- Are we really doing Scrum? http://www.allaboutagile.com/the-scrumbutt-test/
+- Undigested
+    - What is a database that can be scaled up without downtime?
+    We are willing to sacrifice consistency for tracking data.
+    - [PMSE 2780: How to organize knowledge within a wiki?](https://pm.stackexchange.com/questions/2780/how-to-organize-knowledge-within-a-wiki)
+    - Are we really doing Scrum? http://www.allaboutagile.com/the-scrumbutt-test/
+    - BPMN tool: camunda editor (bpmn.io).
+    - https://www.quora.com/What-is-the-best-way-to-organize-a-company-wiki
+    - The nature of enterprise application is low-sophistication high-plumbing,
+    so we need to make plumbing easy.
+    All our programs read data, do something what that data, and write data.
+    The most important things are the data and the business logic.
+    - How to group code? By feature? By dependency? By author?
+        - https://en.wikipedia.org/wiki/Feature-driven_development#Build_by_feature
+            - "Any function that is too complex to be implemented within two weeks is
+            further decomposed into smaller functions until each sub-problem is small enough to be called a feature."

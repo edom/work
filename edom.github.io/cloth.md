@@ -1,0 +1,57 @@
+---
+title: Clothing
+permalink: /cloth.html
+date: 2017-06-09 00:59:00 +0700
+---
+
+- ontology
+    - https://www.quora.com/Does-there-exist-an-ontology-standard-for-clothing-item-categories
+        - 2018: no
+    - [WP:Template:Clothing](https://en.wikipedia.org/wiki/Template:Clothing)
+    - nouns
+        - materials
+            - cotton
+            - fiber
+            - strand
+            - thread
+            - yarn
+            - fabric
+            - cloth
+        - apparels
+            - shirt
+            - pants
+            - jacket
+                - windbreaker/windcheater jacket
+            - jumpsuit
+            - harness
+            - lederhosen
+        - parts of apparels
+            - cuff (of shirt or pants) is fold-back at an end
+        - aggregates
+            - textile
+        - tools
+            - needle
+                - sewing needle
+                - knitting needle
+            - loom (weaving machine)
+            - sewing machine
+    - verbs
+        - [weave](https://en.wiktionary.org/wiki/weave) (wove, woven)
+        - [knit](https://en.wiktionary.org/wiki/knit) (knit, knit)
+        - [sew](https://en.wiktionary.org/wiki/sew) (sewed, sewn)
+        - [stitch](https://en.wiktionary.org/wiki/stitch)
+    - relationships
+        - A thread is woven into a yarn?
+        - A yarn is knit into a fabric?
+        - Fabrics are sewn into clothes?
+- Opinions
+    - Jeans (denim bottoms) look cool, but denim tops look tacky.
+- Why do clothes have seams?
+    - https://www.quora.com/Can-clothes-be-made-from-one-piece-of-fabric-without-any-seams
+    - https://www.quora.com/How-are-clothes-made-without-seams
+    - https://www.quora.com/How-do-they-make-tee-shirts-that-dont-have-seams-down-the-sides
+    - What is the mathematics of wrapping a solid with a surface?
+- [WP:Clothing](https://en.wikipedia.org/wiki/Clothing)
+- Fashion show
+    - Anders Landinger, male skirt
+    - Scandinavian man wearing black maxi dress in [mens dresses and skirts](https://s-media-cache-ak0.pinimg.com/736x/81/01/81/8101816566ba697a0e484de4f2551673.jpg)

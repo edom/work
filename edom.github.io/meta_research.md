@@ -6,6 +6,8 @@ permalink: /meta-research.html
 
 ## Questions
 
+- How to research?
+    - Ask research questions, answer them, and collect them into living documents.
 - Which country values science the most?
 Where is scientist most demanded?
     - [WP: Inglehart--Welzel cultural map of the world](https://en.wikipedia.org/wiki/Inglehart%E2%80%93Welzel_cultural_map_of_the_world)

@@ -56,3 +56,5 @@ permalink: /physics.html
     - [Gil Kalai is skeptical about quantum computers](https://www.quantamagazine.org/gil-kalais-argument-against-quantum-computers-20180207/)
     - This is not an introduction to computational chemistry:
     [A Guide to Molecular Mechanics and Quantum Chemical Calculations, 2003, Warren J. Hehre](https://www.wavefun.com/support/AGuidetoMM.pdf)
+    - [How to save 51 billion lives for 68 cents with simple Engineering](https://www.youtube.com/watch?v=Qf-D1Upn-KU)
+        - Some constraints are good for creativity.

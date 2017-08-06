@@ -341,3 +341,4 @@ advantage of being defined only in terms of functors and natural transformations
 - What is the relationship among monad, natural transformation, Kleisli category of a monad, Eilenberg-Moore what, adjunction?
 - Has some semantics link
 http://math.andrej.com/2016/08/06/hask-is-not-a-category/comment-page-1/
+- [2010, "Subtyping, Declaratively: An Exercise in Mixed Induction and Coinduction", Nils Anders Danielsson and Thorsten Altenkirch](ftp://nozdr.ru/biblio/kolxo3/Cs/CsLn/Mathematics%20of%20program%20construction..%2010%20conf.,%20MPC%202010%20(LNCS6120,%20Springer,%202010)(ISBN%203642133207)(O)(435s)_CsLn_.pdf#page=109)

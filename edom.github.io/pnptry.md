@@ -111,6 +111,8 @@ What problems are equivalent to the P vs NP problem?
             - [Kenneth W. Regan's "Understanding the Mulmuley-Sohoni Approach to P vs. NP"](https://www.cse.buffalo.edu//~regan/papers/pdf/Reg02MSFD.pdf)
             - [Christian Ikenmeyer's 2018 course](https://people.mpi-inf.mpg.de/~cikenmey/teaching/summer18/firstintrotogct/index.html)
     - [A clearing house for Deolalikar P vs NP paper](http://michaelnielsen.org/polymath1/index.php?title=Deolalikar_P_vs_NP_paper)
+- Undigested
+    - One-way function implies something about P vs NP?
 
 ## Meta-research
 

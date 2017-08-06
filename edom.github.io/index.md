@@ -34,6 +34,7 @@ date: 2017-05-20 00:00:00 +0700
     - Now I check the time at [time.gov](https://time.gov/) because Ubuntu 14.04 NTP once betrayed me.
 - Similar websites
     - [kevinbinz.com](https://kevinbinz.com/)
+- [Internet search tools]({% link search.md %})
 
 {% assign everything = site.emptyArray %}
 {% for page in site.pages %}

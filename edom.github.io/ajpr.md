@@ -61,6 +61,10 @@ permalink: /ajpr.html
             - Is my university incompetent?
 - Why are there so many academic journals?
 - [Why we can't trust academic journals to tell the scientific truth](https://www.theguardian.com/higher-education-network/2017/jun/06/why-we-cant-trust-academic-journals-to-tell-the-scientific-truth)
+- Undigested
+    - Academic publishing is broken
+        - https://sbseminar.wordpress.com/2017/04/09/and-elsevier-taketh-away/
+        - https://fairoa.org/
 
 ## Proposal for academic publishing reform: Separate peer review and physical dissemination
 

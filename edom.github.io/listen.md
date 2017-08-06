@@ -4,27 +4,60 @@ date: 2018-05-14 02:34 +0700
 permalink: /listen.html
 ---
 
-- [Ferry Corsten presents Gouryella - Venera (Vee's Theme) [Taken from BLUEPRINT]](https://www.youtube.com/watch?v=qkt_Cik5JmY&index=5&list=PLSKfjMF4i5l6gj-SORWzctkPBIuF7RKE6)
-- [keyboardplayer: Celtic Dance - Improvisation](https://www.youtube.com/watch?v=QaYS11gDhQ0)
-- [sytricka: Running in the 90s vaporwave](https://soundcloud.com/sytricka/wsg-running-in-the-90s-vaporwave), cover of Initial D OST "Running in the 90s"
-- [MACINTOSH PLUS - リサフランク420 / 現代のコンピュー (Lisa Frank 420 / Modern Computing)](https://www.youtube.com/watch?v=cU8HrO7XuiE), vaporwave of [DIANA ROSS it's your move](https://www.youtube.com/watch?v=Uno7f5IGAPI)
-- [Monopoly Tycoon OST - 1990s Theme](https://www.youtube.com/watch?v=TdvWjjcS8I4&list=PLC642184314A6EBDF&index=8)
-- [80s Remix: Focus - Ariana Grande](https://www.youtube.com/watch?v=HwdacYfEvdU&feature=youtu.be)
-- [Ariana Grande - Into You](https://www.youtube.com/watch?v=1ekZEVeXwek)
-- [80s Remix: "Into You" - Dangerous 80s](https://www.youtube.com/watch?v=8uDQ0P9AWc8)
-- [Doel Sumbang - Ai](https://www.youtube.com/watch?v=3fjC3rsUK7o&index=28&list=PLA5GcCf1rx3FirTpMMir0_nEEmTUI61At)
-- [Ermy Kulit, "Ke mana"](https://www.youtube.com/watch?v=eYQTJtonOVI)
-- Gunther - Ding Dong Song
-- Gunther - Tutti Frutti Summer Love
-- [Cajon Beat // Drum & Bass Style _ TooBloo](https://www.youtube.com/watch?v=7MLpX104Auo)
-- [Sitar Trek - Raga Sundar Kauns Jazz, Worldbeat, Fusion Concert. Ashwin Batish @ Kuumbwa Jazz](https://www.youtube.com/watch?v=UgGZWh7Z9eo)
-- unknown music in non-music videos
-    - [unknown music from DJLO video "Yuri's Revenge Glitches, Tricks and misc."](https://www.youtube.com/watch?v=au81LBz3eYI)
-    - [unknown music, sounds a little bit Mongolian, start at 0:21](https://www.youtube.com/watch?v=zy2NhArT02o)
-- Marcell: Semusim
-- [Shanty feat. Marcell - Hanya Memuji](https://www.youtube.com/watch?v=egD4AsW7oOs)
-- [Quad City DJ's - Space Jam (Original)](https://www.youtube.com/watch?v=YrMOxASAmP0);
-[Quad City DJ's - Space Jam](https://www.youtube.com/watch?v=OIeETR_HJ3Y)
-- Led Zeppelin, Kashmir
-- Led Zeppelin, The Immigrant Song
-- THE GROOVE: Khayalan
+- dance music
+    - funk or funk-related (groovy, repetitive, dance-inducing)
+        - [Fat Larry's Band - Act Like You Know](https://www.youtube.com/watch?v=DG9_pVQaJKY)
+            - [The Whatnauts - Help Is On The Way](https://www.youtube.com/watch?v=7nJMgexFopg)
+        - Barry Likumahuwa, "Walkin' with the bass"
+        - [Professor Kliq, "Plastic and flashing lights"](https://soundcloud.com/professorkliq/plastic-flashing-lights-1)
+    - cluster
+        - Gunther - Ding Dong Song
+        - Gunther - Tutti Frutti Summer Love
+    - cluster
+        - [Shanty feat. Marcell - Hanya Memuji](https://www.youtube.com/watch?v=egD4AsW7oOs)
+    - cluster
+        - [Ai No Corrida - Quincy Jones 1981](https://www.youtube.com/watch?v=fXmmWBzS-_o)
+    - cluster
+        - [George Duke - Brazilian Sugar (1980)](https://www.youtube.com/watch?v=TCOVnfcsT4E)
+    - cluster
+        - [80s Remix: Focus - Ariana Grande](https://www.youtube.com/watch?v=HwdacYfEvdU&feature=youtu.be)
+        - [80s Remix: "Into You" - Dangerous 80s](https://www.youtube.com/watch?v=8uDQ0P9AWc8)
+    - cluster
+        - [Ferry Corsten presents Gouryella - Venera (Vee's Theme) [Taken from BLUEPRINT]](https://www.youtube.com/watch?v=qkt_Cik5JmY&index=5&list=PLSKfjMF4i5l6gj-SORWzctkPBIuF7RKE6)
+        - [Monopoly Tycoon OST - 1990s Theme](https://www.youtube.com/watch?v=TdvWjjcS8I4&list=PLC642184314A6EBDF&index=8)
+    - vaporwave
+        - [sytricka: Running in the 90s vaporwave](https://soundcloud.com/sytricka/wsg-running-in-the-90s-vaporwave), cover of Initial D OST "Running in the 90s"
+        - [MACINTOSH PLUS - リサフランク420 / 現代のコンピュー (Lisa Frank 420 / Modern Computing)](https://www.youtube.com/watch?v=cU8HrO7XuiE), vaporwave of [DIANA ROSS it's your move](https://www.youtube.com/watch?v=Uno7f5IGAPI)
+    - other unclustered
+        - [Kylie Minogue, "Spinning around"](https://www.youtube.com/watch?v=t1DWBKk5xHQ)
+        - [Modjo, "Lady" ("Hear me tonight")](https://www.youtube.com/watch?v=mMfxI3r_LyA)
+        - [Pharrell Williams, "Happy"](https://www.youtube.com/watch?v=ZbZSe6N_BXs)
+        - THE GROOVE: Khayalan
+- drum and bass
+    - [fox capture plan / Butterfly Effect](https://www.youtube.com/watch?v=8cMhQ_teEoY):
+    Japanese drum and bass for jazz trio and string quartet
+- power ballad
+    - [Ylvis, "Stonehenge"](https://www.youtube.com/watch?v=mbyzgeee2mg)
+- soul-related
+    - Marcell: Semusim
+    - Seal, "Kiss from a rose"
+- rock
+    - Led Zeppelin, Kashmir
+    - Led Zeppelin, The Immigrant Song
+- other
+    - [keyboardplayer: Celtic Dance - Improvisation](https://www.youtube.com/watch?v=QaYS11gDhQ0)
+    - [Ariana Grande - Into You](https://www.youtube.com/watch?v=1ekZEVeXwek)
+    - [Doel Sumbang - Ai](https://www.youtube.com/watch?v=3fjC3rsUK7o&index=28&list=PLA5GcCf1rx3FirTpMMir0_nEEmTUI61At)
+    - [Ermy Kulit, "Ke mana"](https://www.youtube.com/watch?v=eYQTJtonOVI)
+    - [Cajon Beat // Drum & Bass Style _ TooBloo](https://www.youtube.com/watch?v=7MLpX104Auo)
+    - [Sitar Trek - Raga Sundar Kauns Jazz, Worldbeat, Fusion Concert. Ashwin Batish @ Kuumbwa Jazz](https://www.youtube.com/watch?v=UgGZWh7Z9eo)
+    - unknown music in non-music videos
+        - [unknown music from DJLO video "Yuri's Revenge Glitches, Tricks and misc."](https://www.youtube.com/watch?v=au81LBz3eYI)
+        - [unknown music, sounds a little bit Mongolian, start at 0:21](https://www.youtube.com/watch?v=zy2NhArT02o)
+- music to listen when you're having sugar rush
+    - [Quad City DJ's - Space Jam (Original)](https://www.youtube.com/watch?v=YrMOxASAmP0);
+    [Quad City DJ's - Space Jam](https://www.youtube.com/watch?v=OIeETR_HJ3Y)
+    - metal
+        - [Dragonforce, "Black fire"}(https://www.youtube.com/watch?v=iBN1rAE8sdo)
+- high dynamic range
+    - [Hans Zimmer, "Mountains", from "Interstellar"](https://www.youtube.com/watch?v=o_Ay_iDRAbc)
