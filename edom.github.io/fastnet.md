@@ -11,3 +11,6 @@ I'll write here.
 2017-06-15 00:00 +0700 it goes down.
 04:00 I'm going to bed, and it's still down.
 It went up again some time between 04:00 and 10:30.
+
+2017-08-11 00:00 +0700 it goes down.
+2017-08-11 02:30 +0700 it goes up.
