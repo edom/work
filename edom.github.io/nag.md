@@ -29,3 +29,26 @@ Tested on 2017-07-08.
 ```javascript
 document.querySelector("[data-test-giftwrap]").remove();
 ```
+
+## Group Gmail mails by sender email
+
+```javascript
+(function () {
+    var group = {};
+    document.querySelectorAll("[email]").forEach(function (elem) {
+        var sender = elem.getAttribute("email");
+        group[sender] = 1 + (group[sender] || 0);
+    });
+    var list = [];
+    var sender;
+    var count;
+    for (sender in group) {
+        count = group[sender];
+        list.push([count, sender]);
+    }
+    list.sort(function (a, b) {
+        return -Math.sign(a[0] - b[0]);
+    })
+    return list;
+})();
+```
