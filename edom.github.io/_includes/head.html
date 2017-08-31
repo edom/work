@@ -11,6 +11,15 @@
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }}" href="{{ "/feed.xml" | relative_url }}">
 
+  {% if page.opengraph %}
+  {% if page.opengraph.title %}
+  <meta property="og:title" content="{{ page.opengraph.title }}">
+  {% endif %}
+  {% if page.opengraph.description %}
+  <meta property="og:description" content="{{ page.opengraph.description }}">
+  {% endif %}
+  {% endif %}
+
   {% if jekyll.environment == 'production' and site.google_analytics %}
   {% include google-analytics.html %}
   {% endif %}
