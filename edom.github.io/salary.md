@@ -51,6 +51,9 @@ I don't have to be smarter.
 I just have to move to the United States of America,
 and try not to die in a mass shooting or terrorist attack.
 
+My colleagues surprised me with an even better way to accomplish that:
+stay in Indonesia, but get freelance or remote jobs from USA employers.
+
 ## Other resources
 
 [Payscale](http://www.payscale.com/research/US/Job=Senior_Software_Engineer/Salary) says,
