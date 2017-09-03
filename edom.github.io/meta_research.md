@@ -193,3 +193,6 @@ Can we crowdsource it?
     - congress
         - [Wikipedia: International Congress of Mathematicians](https://en.wikipedia.org/wiki/International_Congress_of_Mathematicians)
     - See also [English SE 20924](https://english.stackexchange.com/questions/20924/whats-the-difference-between-colloquium-seminar-and-possibly-other-such-w).
+- Undigested
+    - [Google talk to books](https://books.google.com/talktobooks/)
+    - SQ3R method https://academia.stackexchange.com/questions/631/how-to-efficiently-read-mathematically-and-theoretically-dense-books-in-stem-fie

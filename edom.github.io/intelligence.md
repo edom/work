@@ -229,4 +229,75 @@ and being told to do things by machines.
 ## Undigested information
 
 - [A giant neuron found wrapped around entire mouse brain](https://www.nature.com/news/a-giant-neuron-found-wrapped-around-entire-mouse-brain-1.21539)
-- [kevinbinz.com: Five Tribes of Machine Learning](https://kevinbinz.com/2017/08/13/ml-five-tribes/), part of [machine learning sequence](https://kevinbinz.com/2017/05/09/sequence-machine-learning/)
+- [kevinbinz.com: Five Tribes of Machine Learning](https://kevinbinz.com/2017/08/13/ml-five-tribes/),
+part of [machine learning sequence](https://kevinbinz.com/2017/05/09/sequence-machine-learning/),
+some contents from Pedro Domingos's book "The master algorithm"
+- [Introducing state of the art text classification with universal language models](http://nlp.fast.ai/classification/2018/05/15/introducting-ulmfit.html)
+- Summary of Pedro Domingos's book "The master algorithm"
+    - Sparse autoencoders (p. 116).
+    - "A nugget of knowledge so incontestable, so fundamental, that we can build all induction on top of it" (p. 64) in Chapter 9.
+    - Induction is the inverse of deduction,
+    as subtraction is the inverse of addition. (Is this a quote from the book?)
+    - EM (expectation maximization) algorithm (p. 209).
+    - Metalearning (p. 237).
+    - A classifier that classifies by combining the output of subclassifiers.
+    - [Markov logic network](http://homes.cs.washington.edu/~pedrod/papers/mlj05.pdf) (p. 246) named [http://alchemy.cs.washington.edu/](Alchemy) (p. 250)
+- Harvard University the graduate school of arts and sciences:
+[Rockwell Anyoha: History of AI](http://sitn.hms.harvard.edu/flash/2017/history-artificial-intelligence/)
+- [Jacques Pitrat](http://jacques.pitrat.pagesperso-orange.fr/) and his CAIA,
+bootstrapping AI with AI.
+- [Marcus Hutter book: Universal Artificial Intelligence: Sequential Decisions based on Algorithmic Probability](http://www.hutter1.net/ai/uaibook.htm)
+and the [slides](http://www.hutter1.net/ai/suaibook.pdf).
+- [Mark A. Kon, Louise A. Raphael, Daniel A. Williams:
+Extending Girosi’s approximation estimates for functions in Sobolev spaces via statistical learning theory](http://math.bu.edu/people/mkon/V5Fin.pdf)
+    - "Girosi [8] established an interesting connection between statistical learning theory
+    (SLT) and approximation theory, showing that SLT methods can be used to
+    prove results of a purely approximation theoretic nature."
+- Speech synthesizer using hidden Markov model?
+Someone must have done it. Find the paper.
+- ISIR (International Society for Intelligence Research)
+human intelligence research [teaching pages](http://www.isironline.org/resources/teaching-pages/).
+- https://en.wikipedia.org/wiki/Artificial_life
+- What is the simplest life form? (2008)
+https://www.quora.com/What-is-the-simplest-life-form
+- https://stats.stackexchange.com/questions/142906/what-does-pac-learning-theory-mean
+- https://brenocon.com/blog/2008/12/statistics-vs-machine-learning-fight/
+    - YC thread for that https://news.ycombinator.com/item?id=4927168
+- [Quora: What are the most important, foundational papers in artificial intelligence/machine learning?](https://www.quora.com/What-are-the-most-important-foundational-papers-in-artificial-intelligence-machine-learning)
+- JAIR (Journal of Artificial Intelligence Research):
+[IJCAI-JAIR awards](https://www.jair.org/index.php/jair/navigationMenu/view/IJCAIJAIR)
+- Schmidhuber, [The Fastest Way of Computing All Universes](http://people.idsia.ch/~juergen/fastestuniverse.pdf)
+- [Dartmouth AI archives](http://raysolomonoff.com/dartmouth/)
+    - [Solomonoff, "An inductive inference machine"](http://raysolomonoff.com/publications/indinf56.pdf)
+- Shane Legg, Joel Veness: algorithmic intelligence quotient
+    - https://github.com/mathemajician/AIQ
+    - An Approximation of the Universal Intelligence Measure
+    by Shane Legg and Joel Veness, 2011
+- [History of AI](https://courses.cs.washington.edu/courses/csep590/06au/projects/history-ai.pdf), University of Washington, History of Computing, CSEP 590A
+- [WP: Timeline of AI](https://en.wikipedia.org/wiki/Timeline_of_artificial_intelligence)
+- https://www.quantamagazine.org/why-self-taught-artificial-intelligence-has-trouble-with-the-real-world-20180221/
+- http://news.mit.edu/2010/ai-unification
+- http://airesearch.com/
+- https://theconversation.com/understanding-the-four-types-of-ai-from-reactive-robots-to-self-aware-beings-67616
+- https://artificialintelligence.id/
+- https://www.asianscientist.com/2017/09/academia/indonesia-ai-nvidia-binus-kinetica/
+- [Practical recommendations for gradient-based training of deep architectures](https://arxiv.org/abs/1206.5533)
+- [Entity Embeddings of Categorical Variables](https://arxiv.org/abs/1604.06737)
+- Google Colab
+- https://qz.com/1172431/artificial-intelligence-ai-should-be-raised-like-children-not-computers/
+- RNN, LSTM, GRU
+    - RNN is recurrent neural network.
+    - LSTM is a kind of RNN.
+    - GRU is a kind of RNN.
+    - https://jhui.github.io/2017/03/15/RNN-LSTM-GRU/
+- http://web.mit.edu/tslvr/www/lessons_two_years.html
+- https://gallery.mailchimp.com/dc3a7ef4d750c0abfc19202a3/files/93e40657-1adb-4891-94ad-c65dda68061f/Ng_MLY01_02.pdf
+- https://www.reddit.com/r/MachineLearning/comments/73n9pm/d_confession_as_an_ai_researcher_seeking_advice/#bottom-comments
+- [netflix prize, part of MLPR class notes](http://www.inf.ed.ac.uk/teaching/courses/mlpr/2017/notes/w6b_netflix_prize.html)
+- Scott M. Lundberg, Su-In Lee: A Unified Approach to Interpreting Model Predictions
+    - http://papers.nips.cc/paper/7062-a-unified-approach-to-interpreting-model-predictions.pdf
+    - https://github.com/slundberg/shap
+- [datascience.com: Introduction to Bayesian Inference](https://www.datascience.com/blog/introduction-to-bayesian-inference-learn-data-science-tutorials)
+- [1987, Intelligence without representation, Rodney A. Brooks](http://www.fc.uaem.mx/~bruno/material/brooks_87_representation.pdf)
+- [colah.github.io: Backprop](http://colah.github.io/posts/2015-08-Backprop/)
+- google search "ai theory research"

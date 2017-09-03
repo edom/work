@@ -10,6 +10,7 @@ date: 2018-05-15 02:31:00 +0700
 - [Gradle]({% link gradle.md %})
 - [Trello]({% link trello.md %})
 - [Class-based programming]({% link cbp.md %})
+- [Software engineering management]({% link engman.md %})
 - Tools
     - git, version control
         - [Git mental model]({% link git.md %})

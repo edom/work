@@ -27,3 +27,6 @@ permalink: /biology.html
 - bacteriophage might help us fight antibiotic-resistant bacteria ([kurzgezagt video](https://www.youtube.com/watch?v=YI3tsmFsrOg))
 - wings at first evolved to help climb steep angles (trees) [The Origin of Flight--What Use is Half a Wing? - HHMI BioInteractive Video](https://www.youtube.com/watch?v=JMuzlEQz3uo)
 - CRISPR is a gene editing technology [WP: CRISPR](https://en.wikipedia.org/wiki/CRISPR)
+- Toxin, venom, poison, what's the difference?
+- Undigested
+    - [Opinion: Biology is the new physics (to be revolutionized by math)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2868533/)

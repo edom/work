@@ -38,3 +38,21 @@ permalink: /physics.html
     - How much does solar panel cost?
         - How long until break-even?
         - Is it cheaper to run on solar power?
+    - Interesting idea: harnessing energy from spinning black hole ergosphere, and making a black hole bomb.
+    Penrose process.
+    [kurzgesagt video](https://www.youtube.com/watch?v=ulCdoCfw-bY)
+    - Given a bomb power in kiloton TNT, find the detonation altitude that maximizes destruction.
+    See the blast curve.
+        - [WP: Blast damage](https://en.wikipedia.org/wiki/Effects_of_nuclear_explosions#Blast_damage)
+        - [WP: Blast curve](https://en.wikipedia.org/wiki/File:Blastcurves_psi.svg)
+    - why reinforce concrete: three types of stresses (tensile, compressive, shear)
+    https://www.youtube.com/watch?v=cZINeaDjisY
+    - A crystal is a repeating structure.
+        - A time crystal or space-time crystal is a structure that repeats in time, as well as in space. 
+        ([WP: Time crystal](https://en.wikipedia.org/wiki/Time_crystal))
+    - An explanation of parallel transport https://physics.stackexchange.com/a/232119
+    - jellyfish for polariton lasers [Jellyfish Lasers Are Revolutionizing Quantum Physics](https://www.youtube.com/watch?v=OpVvR6pa7g8)
+    - [WP: rockoon](https://en.wikipedia.org/wiki/Rockoon) (rocket-balloon)
+    - [Gil Kalai is skeptical about quantum computers](https://www.quantamagazine.org/gil-kalais-argument-against-quantum-computers-20180207/)
+    - This is not an introduction to computational chemistry:
+    [A Guide to Molecular Mechanics and Quantum Chemical Calculations, 2003, Warren J. Hehre](https://www.wavefun.com/support/AGuidetoMM.pdf)

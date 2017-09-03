@@ -49,3 +49,9 @@ permalink: /politics.html
         - If you trade with other nations, you depend on them.
         - Trade (and specialization of labor) is beneficial for everybody if everybody is fair.
     - What is the difference between "independence" and "sovereignty"?
+- Undigested
+    - The Dictator's Handbook, Bruce Bueno de Mesquita
+    - ["Lobbying" *is* "bribing"](https://www.reddit.com/r/LateStageCapitalism/comments/7bd6xm/how_to_bribe_a_lawmaker_101/).
+    - [New UN report finds almost no industry profitable if environmental costs were included](https://www.reddit.com/r/LateStageCapitalism/comments/8i4y3a/new_un_report_finds_almost_no_industry_profitable/)
+    [Why Socrates hated democracy](https://www.youtube.com/watch?v=fLJBzhcSWTk)?
+    Because the average person isn't competent to rule a country.

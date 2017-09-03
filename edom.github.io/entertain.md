@@ -66,6 +66,10 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
 - meme-like materials
     - [in only 2 weeks, Robert lost 2 weeks](https://www.reddit.com/r/FunnyandSad/comments/8ejlih/in_just_two_weeks/)
     - [well-lit husky portrait](https://old.reddit.com/r/aww/comments/8io64x/last_year_while_setting_up_lights_for_some/)
+    - fat shibes from [Rapid Liquid: part IV - don't nom cat food](https://www.youtube.com/watch?v=qe8b9gfuwME)
+    - 19:00 [Best Reactions of JonTron](https://www.youtube.com/watch?v=tP5CLR54igs) "AND IIIII... HOLY SHIT",
+    [fragment](https://www.youtube.com/watch?v=V4SQj8Ua3kM),
+    [10:49, source](https://www.youtube.com/watch?v=l69BP1uhlMs)
 - [subreddit for fans of k-pop girls](https://www.reddit.com/r/asiangirlsbeingcute/top/)
 - dark humor (suicidal, not suitable for everyone)
     - [Ethan Vincent: are we there yet](http://oppressive-silence.com/comic/are-we-there-yet),

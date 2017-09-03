@@ -14,9 +14,8 @@ date: 2017-05-20 00:00:00 +0700
         - Leave a Disqus comment in the related page.
         - [Open an issue on GitHub](https://github.com/edom/edom.github.io/issues).
 - What can you teach me?
-    - [Building a mental model for using Git]({% link git.md %})
+    - [Git mental model]({% link git.md %})
     - [Friendship is measured by sacrifice]({% link friendship.md %})
-    - [How to cook eggs]({% link egg.md %})
     - [Remove nag screens]({% link nag.md %})
 - What are some of your opinions?
     - [Software engineering]({% link software_engineering.md %})
@@ -29,10 +28,6 @@ date: 2017-05-20 00:00:00 +0700
 - Keeping score
     - [Fastnet]({% link fastnet.md %})
     - [PLN]({% link pln.md %})
-- Graveyard
-    - [Seaweed]({% link seaweed.md %})
-    - [Walking]({% link walk.md %})
-    - [Subsistence]({% link subsist.md %})
 - [Entertainment]({% link entertain.md %})
     - [Game]({% link game.md %})
 - Announcements
