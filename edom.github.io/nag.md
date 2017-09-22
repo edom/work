@@ -5,9 +5,45 @@ date: 2017-07-08 19:55 +0700
 featured: yes
 ---
 
-Copy the respective fragments to Inspector Console.
+Copy the respective fragments to your browser's JavaScript Console.
 
 Don't run codes you don't trust.
+
+## Make [www.webtoon.com](http://www.webtoon.com/) fast
+
+That website has an unacceptably slow scrolling.
+This script makes it fast.
+
+### Usage
+
+Open the comic episode you want to read.
+
+Paste this fragment into your browser's JavaScript console.
+
+```javascript
+// Retain big images. Discard everything else.
+var images = [];
+document.querySelectorAll("img").forEach(function (element) {
+    images.push(element);
+});
+document.head.innerHTML = "";
+document.body.innerHTML = "";
+images.forEach(function (element) {
+    const big = 256;
+    const url = element.dataset.url;
+    if (url && element.width >= big) {
+        element.src = url;
+        element.style.display = "block";
+        document.body.appendChild(element);
+    }
+});
+```
+
+To go the the next episode, increment the `episode_no` parameter in the address bar.
+
+### Notes
+
+I tried `getEventListeners` and `removeEventListener` but they don't work.
 
 ## Remove Quora nag screen
 
