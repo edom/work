@@ -8,7 +8,7 @@
     {% include header.html %}
 
     {% if page.mathjax %}
-  <script type="math/tex">
+  <div style="display:none;">\(
 \renewcommand\emptyset{\varnothing}
 \newcommand\Bernoulli{\textrm{Bernoulli}}
 \newcommand\Binomial{\textrm{Binomial}}
@@ -36,7 +36,7 @@
 \newcommand\Search{\text{Search}}
 % model theory structure
 \newcommand\struc[1]{\mathcal{#1}}
-  </script>
+  \)</div>
     {% endif %}
 
     <main class="page-content" aria-label="Content">

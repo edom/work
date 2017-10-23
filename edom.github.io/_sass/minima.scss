@@ -1,5 +1,25 @@
 @charset "utf-8";
 
+@page {
+    size: A4;
+    margin: 2cm 2cm;
+}
+
+@media print {
+    .wrapper {
+        max-width: none;
+        margin: 0em;
+    }
+    .post-content {
+        h1 { font-size: 1.5em; }
+        h2 { font-size: 1.4em; }
+        h3 { font-size: 1.3em; }
+        h4 { font-size: 1.2em; }
+        h5 { font-size: 1.1em; }
+        h6 { font-size: 1.0em; }
+    }
+}
+
 // Define defaults for each variable.
 
 $base-font-family: 'Libre Baskerville', serif !default;
@@ -28,10 +48,12 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
 }
 
-.wrapper {
-    max-width: 32 * $base-font-size;
-    margin-left: auto;
-    margin-right: auto;
+@media screen {
+    .wrapper {
+        max-width: 40 * $base-font-size;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 p
@@ -282,20 +304,14 @@ div.highlighter-rouge > * { display: inline-block; text-align: left; }
  * Site header
  */
 .site-header {
-  border-bottom: 1px solid $grey-color-light;
-  min-height: $spacing-unit * 1.865;
-
-  // Positioning context for the mobile navigation icon
-  position: relative;
 }
 
 .site-title {
-  @include relative-font-size(1.625);
+  @include relative-font-size(1.5);
   font-weight: 300;
   line-height: $base-line-height * $base-font-size * 2.25;
   letter-spacing: -0.02em;
   margin-bottom: 0;
-  float: left;
 
   &,
   &:visited {
@@ -304,7 +320,7 @@ div.highlighter-rouge > * { display: inline-block; text-align: left; }
 }
 
 .site-nav {
-  float: right;
+  display: inline-block;
   line-height: $base-line-height * $base-font-size * 2.25;
 
   .nav-trigger {
@@ -326,9 +342,6 @@ div.highlighter-rouge > * { display: inline-block; text-align: left; }
   }
 
   @include media-query($on-palm) {
-    position: absolute;
-    top: 9px;
-    right: $spacing-unit / 2;
     background-color: $background-color;
     border: 1px solid $grey-color-light;
     border-radius: 5px;
@@ -336,7 +349,6 @@ div.highlighter-rouge > * { display: inline-block; text-align: left; }
 
     label[for="nav-trigger"] {
       display: block;
-      float: right;
       width: 36px;
       height: 36px;
       z-index: 2;
@@ -345,7 +357,6 @@ div.highlighter-rouge > * { display: inline-block; text-align: left; }
 
     .menu-icon {
       display: block;
-      float: right;
       width: 36px;
       height: 26px;
       line-height: 0;
@@ -488,40 +499,58 @@ div.highlighter-rouge > * { display: inline-block; text-align: left; }
 }
 
 .post-title {
-  @include relative-font-size(2.625);
+  @include relative-font-size(2.0);
   letter-spacing: -0.04em;
 
   @include media-query($on-laptop) {
-    @include relative-font-size(2.25);
+    @include relative-font-size(2.0);
   }
 }
 
-.post-content {
-  margin-bottom: $spacing-unit;
+@media screen {
+    .post-content {
+      margin-bottom: $spacing-unit;
 
-  h2 {
-    @include relative-font-size(2);
+      h2 {
+        @include relative-font-size(1.20);
 
-    @include media-query($on-laptop) {
-      @include relative-font-size(1.75);
+        @include media-query($on-laptop) {
+          @include relative-font-size(1.20);
+        }
+      }
+
+      h3 {
+        @include relative-font-size(1.15);
+
+        @include media-query($on-laptop) {
+          @include relative-font-size(1.15);
+        }
+      }
+
+      h4 {
+        @include relative-font-size(1.10);
+
+        @include media-query($on-laptop) {
+          @include relative-font-size(1.10);
+        }
+      }
+
+      h5 {
+        @include relative-font-size(1.05);
+
+        @include media-query($on-laptop) {
+          @include relative-font-size(1.05);
+        }
+      }
+
+      h6 {
+        @include relative-font-size(1.0);
+
+        @include media-query($on-laptop) {
+          @include relative-font-size(1.0);
+        }
+      }
     }
-  }
-
-  h3 {
-    @include relative-font-size(1.625);
-
-    @include media-query($on-laptop) {
-      @include relative-font-size(1.375);
-    }
-  }
-
-  h4 {
-    @include relative-font-size(1.25);
-
-    @include media-query($on-laptop) {
-      @include relative-font-size(1.125);
-    }
-  }
 }
 
 
