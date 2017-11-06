@@ -37,5 +37,5 @@
 " Copy to clipboard:
 " (Normal mode) character under cursor
 " (Visual mode) selected string
-:map <F5> "+yl
+:map <F5> <Esc><Esc><Esc>"+yl
 :vmap <F5> "+y
