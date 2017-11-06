@@ -1,0 +1,121 @@
+\chapter{One-dimensional spaces}
+
+We can divide one-dimensional spaces into two categories:
+\emph{lines} and \emph{curves}.
+Lines are straight.
+Curves may bend.
+Thus every line is a curve.
+
+\ResearchQuestion{%
+Drawing a line is easy,
+but how do we describe a line \emph{algebraically}?
+}
+
+\ResearchQuestion{%
+A line is a straight one-dimensional space.
+\emph{Straight} is defined by the ambient space that contains the line.
+How do we define \emph{straight}?
+}
+
+\section{Defining a line}
+
+If two points \(a\) and \(b\) are on a line,
+then their midpoint \((a + b) / 2\) is also on the line.
+
+(These aren't obvious to the uninitiated?)
+
+If both \(a\) and \(b\) are on a line,
+then the point \(k \cdot (b - a) + a\) is also on the line, for every \(k:\Real\).
+
+If three points \(a,b,c\) are on a line,
+then the displacements \(b-a\) and \(c-b\) are parallel.
+
+\paragraph{Infinite extension of a line segment}
+A \emph{line segment} is what is drawn using a straightedge.
+A \emph{line} is obtained by infinitely extending a line segment in both directions.
+
+\paragraph{Embedding of \(\Real\)}
+\emph{A line is a straight embedding of \(\Real\).}
+A line is something straight-shaped and isomorphic to \(\Real\).
+
+But there is a problem with that definition.
+That definition may include a pathological sheet, which should be a two-dimensional object.
+This is a mapping from \(\Real^2\) to \(\Real\):
+Let there be two real numbers \(a\) and \(b\).
+Define the number \(c\) as \(\ldots a_1 b_1 a_0 b_0 . a_{-1} b_{-1} a_{-2} b_{-2} \ldots\).%
+\footnote{\url{https://math.stackexchange.com/questions/75107/injective-map-from-mathbbr2-to-mathbbr}}%
+\footnote{\url{https://math.stackexchange.com/questions/183361/examples-of-bijective-map-from-mathbbr3-rightarrow-mathbbr}}
+
+We can define a line by a parametric equation: \( x(k) = k g + p \).
+
+We can define a line by an algebraic equation: \( a \cdot x + b = 0 \).
+
+\subsection{Defining a line as a curve with constant velocity}
+
+The \emph{velocity} of the curve \( x : \Real \to \Real^n \) is the derivative of \(x\).
+The velocity of \(x\) is the rate of change of \(x\).
+
+\emph{A line is a curve whose velocity is constant.}
+
+\subsection{Defining a line as a geodesic}
+
+\section{Describing lines in a two-dimensional ambient space}
+
+Every line can be described as the set
+\( \{ (x,y) ~|~ (x,y) \in \Real^2, ~ a x + b y = c \} \).
+(Why?)
+
+\subsection{Describing a line that passes two points}
+
+Describe a line that passes \((x_1,y_1)\) and \((x_2,y_2)\).
+
+The description is
+\begin{align*}
+    a x_1 + b y_1 &= c
+    \\
+    a x_2 + b y_2 &= c
+\end{align*}
+Rearrange:
+\begin{align*}
+    x_1 a + y_1 b &= c
+    \\
+    x_2 a + y_2 b &= c
+\end{align*}
+Solve for \(a,b,c\).
+\begin{align*}
+    \Matrix{x_1 & y_1 \\ x_2 & y_2} \Matrix{a \\ b} = \Matrix{c \\ c}
+\end{align*}
+We can solve it using GNU Octave by typing \verb@[x1,y1;x2,y2] \ [c;c]@
+but we have to substitute the variables with numbers first.
+
+\subsection{Finding the angle formed by two lines}
+
+\subsection{Translating lines and describing parallel lines}
+
+Translating a line produces another line that is parallel to the original line.
+
+Two lines \(ax+by=c\) and \(a'x+b'y=c'\) are parallel iff \(\abs{a/b} = \abs{a'/b'}\)?
+
+\subsection{Describing orthogonal lines}
+
+This is important for tangents, normals, and osculating circles.
+
+\section{Describing higher-dimensional lines}
+
+Every \(n\)-dimensional line can be described as
+\( \{ k g + p ~|~ k \in \Real \} \)
+if \(g, p : \Real^n\).
+
+Describe a line that passes \(x_1\) and \(x_2\).
+The description is
+\begin{align*}
+    x_1 &= k_1 g + p
+    \\
+    x_2 &= k_2 g + p
+\end{align*}
+
+\begin{align*}
+    x_i - p &= k_i g
+\end{align*}
+
+How do we solve the equation \(a = kb\) if \(a,b\) are vectors and \(k\) is a scalar?

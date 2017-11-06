@@ -1,0 +1,487 @@
+\chapter{Frames}
+
+(Wikipedia says frame (ordered basis) for what we say basis. Should we follow?)
+
+\section{A frame is an origin point and a basis}
+
+With a basis, we can describe every vector with tuples.
+
+With a frame, we can describe every point with tuples.
+
+A frame \(S\) is an origin point \( O \) and a basis \( E \).
+
+We can describe a point \( P \) as \( O + OP \).
+We then state \(OP\) as a linear combination of the vectors in \(E\).
+Suppose that the linear combination is \(OP = x_1 e_1 + \ldots + x_n e_n\).
+We call the tuple \( (x_1,\ldots,x_n) \) the \emph{\(S\)-coordinates} of \(P\).
+
+\emph{Coordinate system} is another name for \emph{frame}.
+
+\footnote{\url{https://en.wikipedia.org/wiki/Frame\#Mathematics}}
+
+\section{Some coordinate systems}
+
+A \emph{coordinate system} maps a coordinate tuple to a vector.
+
+\subsection{The rectangular coordinate system}
+
+Orthonormal basis.
+
+\(R(x,y) = x e_1 + y e_2\).
+
+\(R(x) = x_1 e_1 + x_2 e_2\).
+
+In this system, the coordinates are the scalar coefficients in the linear combination of basis vectors.
+The coordinates describe how the basis vectors should be linearly combined to form the described vector.
+
+Let \(T : V^2 \to V^2\) be a linear transformation.
+Then \(T(R(x)) = T(x_1 e_1 + x_2 e_2) = x_1 \cdot T(e_1) + x_2 \cdot T(e_2) = x_1 e_1' + x_2 e_2' = R'(x) \).
+
+\subsection{The polar coordinate system}
+
+\(P(r,t) = r e_1 \text{ rotated } t \text{ radians counterclockwise}\).
+
+\section{Coordinate system transformations}
+
+\subsection{Converting polar coordinate tuples to rectangular coordinate tuples}
+
+Both the rectangular coordinate $(r\cos\theta, r\sin\theta)$ and the polar coordinate $(r,\theta)$
+describe the same point in two-dimensional Euclidean space.
+\[
+R(r\cos\theta, r\sin\theta) = P(r,\theta)
+\]
+
+A point in a space can have different coordinates in different coordinate systems.
+
+\section{Using coordinate systems to apply analysis to geometry}
+
+Coordinate systems bridge synthetic geometry and analytic geometry.
+
+A coordinate system transformation is a function taking a coordinate system and giving another coordinate system.
+
+\section{Describing vectors with numbers without drawing}
+
+Earlier in \ChapterRef{chp:vector},
+we defined a vector as something telling us
+how to go from an origin point to a destination point.
+
+We can define three directions: right, forward, and up.
+We can describe \emph{any} point in space by saying that the point is
+\(x\) meters right, \(y\) meters forward, and \(z\) meters up from where we are standing.
+We have just described a \emph{coordinate system}:
+a mapping between a \emph{coordinate tuple} and a point in space.
+
+A tuple and a coordinate system can represent a vector.
+
+\( v = x_1 e_1 + x_2 e_2 \).
+
+Describing a vector using bases:
+
+\[
+v = \sum_k x_k e_k
+\]
+where each \(x_k:\Real\) and each \(e_k:\Real^n\).
+
+For example:
+
+Let \( e_1 \) be a unit vector pointing right.
+
+Let \( e_2 \) be a unit vector pointing up.
+
+Then, \( 1 e_1 + 2 e_2 \) is a vector.
+
+"The numbers in the list depend on the choice of coordinate system."%
+\footnote{\url{https://en.wikipedia.org/wiki/Covariance_and_contravariance_of_vectors}}
+
+\subsection{Basis vectors and coordinate axes}
+
+An orthonormal basis makes good coordinate axes.%
+\footnote{\url{https://en.wikipedia.org/wiki/Orthonormal_basis}}
+
+The same point has different coordinates in different frames.
+
+\section{Coordinate systems}
+
+We can describe a point by a \emph{coordinate system} and a \emph{coordinate tuple}.
+
+\index{definitions!coordinate}%
+A \emph{coordinate} is a number.
+
+\index{definitions!coordinate tuple}%
+A \emph{coordinate tuple} is a tuple of \emph{coordinates}.
+Example: \((1,2)\).
+
+\index{definitions!coordinate system}%
+A \emph{coordinate system} maps a coordinate tuple to a point in a space.
+
+\index{definitions!\(n\)-dimensional real coordinate space}%
+The \emph{n-dimensional real coordinate space} \( \Real^n \)
+is the set of all \(n\)-tuples where every component is a real number.
+It can \emph{represent} the \(n\)-dimensional Euclidean space.
+
+The \(n\)-dimensional Cartesian coordinate system uses \(n\) basis vectors
+to map \( \Real^n \) to \(n\)-dimensional Euclidean space.
+
+\subsection{Drawing the standard two-dimensional Cartesian coordinate axes}
+
+\subsection{Transforming the vector}
+
+Also known as \emph{active transformation}.
+This changes the vector.
+
+We write \(v = E(x)\) to mean that \emph{the vector \(v\) is described by the coordinate tuple \(x\) under coordinate system \(E\)}.
+
+Let \(v = E(x)\).
+The vector \(v\) is described by the tuple \(x\) under coordinate system \(E\).
+
+If we transform the vector to \(T(v)\),
+then we will also transform the coordinate tuple to \(T(E(x))\),
+which we can also write as \((T \circ E)(x)\) using function composition notation.
+
+Thus, if \(v = E(x)\), then \( T(v) = (T \circ E)(x) \).
+
+Therefore, transforming the vector by \(T\) has the same effect as
+transforming the coordinate system (not the coordinate tuple) by \(T\).
+
+\subsection{Transforming the basis}
+
+\emph{Passive transformation}.
+Changing the basis while still referring to the same point.
+This does not change the vector.
+
+Every vector can be stated as a linear combination of the basis vectors.
+
+\index{definitions!coordinate transformation}%
+A \emph{coordinate transformation} is a map from a coordinate system to a coordinate system.
+
+There are many points in an Euclidean space, but none is special.
+However, we can pick a point in Euclidean space, and call it \( O \), short for \emph{origin}.
+
+We can describe the same vector using different coordinate tuples in different coordinate systems.
+For example, the same vector \(v\) has coordinate tuples \(x\) in coordinate system \(E\)
+and has coordinate tuples \(x'\) in coordinate system \(E'\).
+\[
+    v = E(x) = E'(x')
+\]
+
+\footnote{\url{https://en.wikipedia.org/wiki/Active_and_passive_transformation}}
+
+Let \(T\) be a linear transformation.
+
+If \(E'\) happens to be \(T \circ E\), then
+
+\begin{align*}
+    E(x) &= (T \circ E)(x') & \text{assumed}
+    \\ E(x) &= T(E(x')) & \text{by definition of composition}
+    \\ T^{-1}(E(x)) &= T^{-1}(T(E(x'))) & \text{applying \(T^{-1}\) to both sides}
+    \\ (T^{-1}\circ E)(x) &= E(x')
+\end{align*}
+
+\subsection{Changing basis}
+
+A basis transformation is a coordinate system transformation.
+Such transformation has the type
+$(\mathbb{R}^n \to \mathbb{R}^n) \to (\mathbb{R}^n \to \mathbb{R}^n)$.
+Such basis transformation $E' = T~E$ can be written out
+as $\vec{e}'_k = T_k~(\vec{e}_1, \ldots, \vec{e}_n)$,
+which can be written out even more in the greatest detail as
+\[
+(\vec{e}'_k)_i = (T_k)_i~(\vec{e}_1, \ldots, \vec{e}_n)
+\]
+which are actually $n^2$ equations,
+and each $(T_k)_i$ is a function that takes $n^2$ real numbers.
+If the transformation is linear,
+we can write the transformation as matrix multiplication:
+\[
+E' = ET
+\]
+which expands into $n$ equations each:
+\[
+\vec{e}_i' = \sum_{k=1}^n T_{ik} \vec{e}_k
+\]
+which, in turn, expands into $n$ equations again each:
+\[
+e_{ij}' = \sum_{k=1}^n T_{ik} \cdot e_{kj}
+\]
+
+Sometimes we want to use another basis to locate the same point.
+That is, if we have a vector $x$ in basis $E$, and a vector $y$ in basis $TE$,
+we want $Ex = TEy$.
+We want to change the basis from $E$ to $TE$,
+so old coordinate $x$ become $y$,
+but we want $y$ in $TE$ such that $TEy$ is still $Ex$,
+which we can state mathematically:
+\begin{align*}
+TEy &= Ex
+\\ T^{-1}TEy &= T^{-1}Ex
+\\ Ey &= T^{-1}Ex
+\end{align*}
+which says that the change of coordinate goes against the change of basis,
+so we say that the vector $x$ is *contravariant* to the basis transformation $T$.
+This means that if we move the origin of the coordinate system 3 units to the right,
+then we will have to move the coordinates 3 units to the left
+if we want the new coordinate to locate the same point.
+
+What about covectors?
+Covector $f$.
+\[
+f(TEy) = f(Ex)
+\]
+Due to the linearity of covectors:
+\begin{align*}
+f(Ex) &= f\left(\sum_i x_i \vec{e}_i\right) = \sum_i f(x_i \vec{e}_i)
+\\ f(TEy) &= f\left(\sum_i y_i T\vec{e}_i \right) = \sum_i f(y_i T\vec{e}_i)
+\\ \vec{e}'_k = \sum_i T_{ki} \vec{e}_i
+\end{align*}
+
+(todo show that covector is covariant)
+
+\section{Coordinate transformation}
+
+Let's say we have one space $S$,
+and two coordinate systems $J : M \to S$ and $K : N \to S$.
+A coordinate transformation from $J$ to $K$ (we name this transformation $T : M \to N$)
+transforms a $J$-coordinate
+to an $K$-coordinate describing the same point.
+This transformation relates both coordinate systems as
+$J~x = K~(T~x)$, which means that if $x$ is a coordinate in $J$, then $T~x$ is a coordinate in $K$ locating the same point.
+We can also write the equation as $J = K \circ T$.
+
+To consider each component of the coordinate separately,
+we write
+$T~(x_1,\ldots,x_m) = (y_1,\ldots,y_n)$
+where
+\begin{align*}
+y_1 &= t_1~(x_1,\ldots,x_m)
+\\ &\vdots
+\\ y_n &= t_n~(x_1,\ldots,x_m).
+\end{align*}
+Thus we can think of $T$ as an $n$-tuple $(t_1,\ldots,t_n)$
+whose each component $t_k$ takes an $m$-tuple.
+We can extend the definition of function application so that it works on tuples:
+\[
+(t_1,\ldots,t_n)~\vec{x} = (t_1~\vec{x}, \ldots, t_n~\vec{x})
+\]
+but why would we?
+
+If we define that, we can see how a change in a tuple component translates
+to a change in the other tuple component.
+\[
+\frac{\partial y_i}{\partial x_j} = pd~j~t_i
+\]
+
+A space mapping maps the underlying space $M : R \to S$.
+
+The transformation $T~x = 2\cdot x$ can be viewed as two things:
+as a space transformation, it makes everything bigger;
+as a coordinate transformation, it makes everything smaller.
+Coordinate transformation works in reverse.
+You can move the point, or you can change the coordinate.
+
+Covariance.
+
+Distance-preserving transformation.
+$d~(T~x)~(T~y) = d~x~y$.
+
+$T$-symmetry.
+$f~(T~x) = T~(f~x)$?
+
+Inverse transformation.
+Composition of transformations.
+
+We can use several coordinate systems on the same space.
+Some coordinate systems are more convenient to work with.
+To specify a place on Earth, we can use the
+geographic coordinate system (latitudes and longitudes).
+% https://en.wikipedia.org/wiki/Geographic_coordinate_system
+A coordinate transformation does not move the point.
+
+If a coordinate system is a bijection,
+then it describes an isomorphism between
+its coordinate space and the space it describes.
+This means we can pick any of them we find most convenient,
+and whatever works with it will work with the other.
+
+Let's say we have two spaces $R$ and $S$.
+$T : R \to S$.
+
+Embedding and projection are mappings between spaces.
+Embedding maps a lower-dimensional space to a higher-dimensional space;
+projection maps a higher-dimensional space to a lower-dimensional space.
+
+\subsection{Picking a frame: The standard basis vectors}
+
+The standard basis vectors of $\mathbb{R}^3$
+is $\{e_1,e_2,e_3\}$
+where $e_1 = (1,0,0)$, $e_2 = (0,1,0)$, and $e_3 = (0,0,1)$,
+which can also be written as the matrix
+\[
+    \Matrix{ e_1 & e_2 & e_3 }
+    = \Matrix{ 1&0&0\\0&1&0\\0&0&1 }
+\]
+where each basis vector becomes a column in the matrix.
+
+A coordinate system transformation multiplies the basis with the transformation matrix.
+
+\subsection{Curvilinear coordinate system: polar coordinate system}
+
+\section{Understanding a covector as a linear function}
+
+Every linear endofunction of an $n$-dimensional vector space
+can be written as a vector of $n$ of inner products.
+
+\section{Understanding how cobasis is to covector as basis is to vector}
+
+We can derive a basis for $V^*$ from a basis for $V$.
+Let us write the basis for $V$ as \(E = \{ e_1, \ldots, e_n\}\).
+We then define $G = \{ g_1, \ldots, g_n \}$ where \(g_k(x) = x \cdot e_k\).
+If such $G$ also spans the entire $V^*$,
+then $G$ is a basis for $V^*$,
+and we call such $G$ the dual basis of $E$.
+
+\section{Multiplying a covector and a vector}
+
+The product between a covector $f : V^*$ and vector $\vec{x} : V$
+is simply $f~\vec{x}$ (function application)?
+
+\section{Eigenvalues, eigenvectors, and fixpoints of transformations? Why are we talking about this?}
+
+We say that a point is a fixpoint (invariant)
+of a transformation iff the transformation maps it to itself.
+$f(x) = x$.
+We can also say that $f$ is a fixtransform of $x$.
+
+We can embed a plane on a sphere.
+
+To describe an embedding,
+we can use words, or we can use algebra:
+we pick a coordinate system for each space,
+and describe the embedding of the coordinates.
+An embedding $E : R \to S$ is a mapping from a space $R$ to (a subset of) another space $S$.
+Let $J : M \to R$ and $K : N \to S$ be coordinate systems for those spaces, respectively.
+Let $T : M \to N$ be the coordinate transformation that corresponds to that embedding.
+Let $x$ be a $J$-coordinate.
+Then we have:
+\[
+K~(T~x) = E~(J~x)
+\]
+which can also be written
+\[
+K \circ T = E \circ J.
+\]
+Spherical coordinate system
+use three: radius,: $(r,\theta,\phi)$. Here the radius is fixed so we can use $(\theta,\phi)$.
+
+\section{Moving points around}
+
+\subsection{Translating a point}
+
+We can translate a point \(P\) by a vector \(v\).
+The result is the point \(P + v\).
+
+\subsection{Rotating a vector}
+
+Rotation is always done with respect to the origin.
+If you need otherwise, then translate, rotate, and inverse-translate.
+
+Two-dimensional rotation is simple because the axis of rotation is a point.
+Three-dimensional rotation is more complex because the axis of rotation is a line.
+
+Let \(x\) be the vector that we want to rotate.
+
+Let \(a\) be the axis of rotation.
+
+Let \(n\) be orthogonal to \(a\).
+Let \(a + n = x\).
+Thus, \(a\), \(x\), and \(n\) form a right triangle, with \(x\) as the hypothenuse.
+
+Let \(\theta\) be the angle of rotation.
+
+Let \(A(x,y)\) be the angle from \(x\) to \(y\).
+
+The result of rotating a vector \(x\) about the axis \(a\) by angle \(\theta\) is the vector \(y\).
+
+\(\norm{x} = \norm{y}\)
+
+\(A(a,x) = A(a,y)\).
+
+\(A(n,x) + \theta \equiv A(n,y)\).
+
+\subsection{Applying a rotation matrix to a vector}
+
+This matrix%
+\footnote{\url{https://en.wikipedia.org/wiki/Rotation_matrix}}
+describes
+two-dimensional rotation by a counterclockwise angle of \(\theta\):
+\Formula{
+    \Matrix{
+        \cos\theta & -\sin\theta
+        \\ \sin\theta & \cos\theta
+    }.
+}
+Let that matrix be \(R\).
+Let \(v\) be a vector.
+Then \(Rv\) is \(v\) rotated by \(\theta\).
+
+\section{Moving frames around without moving points}
+
+\subsection{Locating the same point with different coordinate systems}
+
+Example of coordinate transformation:
+The same point in the same two-dimensional Euclidean space
+is described by
+both the polar coordinates \( (r,\theta) \)
+and the rectangular coordinates \( (r \cos \theta, r \sin \theta) \).
+The transformation is \( (r,\theta) \to (r \cos \theta, r \sin \theta) \).
+
+% https://en.wikipedia.org/wiki/Real_coordinate_space
+
+A \emph{coordinate system} $M : C \to S$ is a surjective mapping from
+\emph{coordinate space} $C$ to \emph{target space} $S$.
+
+A \emph{coordinate} is a point in \(C\).
+The coordinate system tells us how to get to a point.
+
+The \(n\)-dimensional real coordinate space is $\mathbb{R}^n$.
+% https://en.wikipedia.org/wiki/Real_coordinate_space
+It is also called the real $n$-space.
+A point in the real $n$-space is an $n$-tuple of real numbers $(x_1,\ldots,x_n)$.
+
+$(x,y)$ is the tuple of coordinates,
+$x$ is the x-coordinate, and $y$ is the y-coordinate.
+
+Coordinate systems unify geometry and
+% https://en.wikipedia.org/wiki/Mathematical_analysis
+mathematical analysis.
+With coordinates,
+we can solve geometric problems by
+numbers, calculus, and algebra,
+so that computers can
+find the intersection of geometric objects
+by solving the corresponding system of equations,
+and find the size of a geometric object by solving the corresponding integral.
+
+\section{Fields}
+
+A field is a function that assigns something to each point in space.
+
+A vector field is a function \( f : P \to V \).
+
+We need two bases to coordinatefully describe a vector field.
+One basis to turn \( P \) to \(\Real^m\).
+Another basis to turn \(V\) to \(\Real^n\).
+
+The coordinateful description of a field \(f\) under basis \(?,?\) is \(f_? : \Real^m \to \Real^n\).
+
+A force field assigns a force vector to each point in space.
+
+A scalar field assigns a scalar to each point in space.
+An example of a scalar field is a temperature field.%
+\footnote{\url{https://en.wikipedia.org/wiki/Temperature_gradient}}
+
+Let \(T(P)\) be the temperature at point \(P\).
+Because \(P = O + \sum_k x_k e_k\), we have \(T(O + \sum_k x_k e_k)\).
+
+Mathematics and physics use the same term \enquote{field} to mean different things.
+
+\footnote{\url{https://en.wikipedia.org/wiki/Field_(physics)}}

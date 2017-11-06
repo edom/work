@@ -1,0 +1,122 @@
+\chapter{Vectors}
+\label{chp:vector}
+\label{sec:vector}
+
+Pick two points \(A\) and \(B\).
+
+The vector \(AB\) tells us how to go from \(A\) to \(B\).
+
+The vector \(AB\) is the subtraction \( B - A \).
+
+We draw the vector \(AB\) as a straight arrow from \(A\) to \(B\).
+
+If we know \(A\) and \(B\), then we can find \(AB\).
+
+If we are at \(A\), then following \(AB\) leads us to \(B\).
+We notate this fact as \( A + AB = B \).
+We write the point on the left and the vector on the right:
+write \( A + AB \), and don't write \( AB + A \).
+
+The zero vector \(0\) tells us how to get to the same point:
+\(A + 0 = A\).
+
+The length of a vector \(v\) is written \(\norm{v}\).
+
+A unit vector is a vector whose length is one.
+
+\section*{Adding two vectors}
+
+If \(AB\) tells us how to go from \(A\) to \(B\)
+and \(BC\) tells us how to go from \(B\) to \(C\),
+then \(AC = AB + BC\)
+tells us how to go from \(A\) to \(C\).
+
+We can see that \( a + b = b + a \) by drawing a parallelogram.
+We say that vector addition is commutative
+because commuting (swapping) the arguments doesn't change the result.
+
+\section*{Negating a vector}
+
+The negation of a vector \(v\) is \(-v\).
+It is the vector such that the sum \(v + (-v)\) is the zero vector \(0\).
+
+If we know the vector \(AB\), then we know \(BA\).
+We write \(BA = -AB\).
+If \(AB\) tells us how to go from \(A\) to \(B\),
+then \(BA\) tells us how to go from \(B\) to \(A\).
+\(BA\) is the reverse of \(AB\).
+
+\(BA\) is also called the negation of \(AB\) because \(AB + BA = 0\) is the zero vector.
+\(A + 0 = A\).
+
+Negating a vector preserves its length:
+\(\norm{-AB} = \norm{BA} = \norm{AB}\).
+
+\section{Vector spaces}
+
+A vector space is a set of vectors.
+
+An example vector space is the set of all two-dimensional Euclidean vectors.
+We can imagine this vector space as the set of all arrows that we can draw on an unbounded flat sheet of paper.
+We don't care about where the arrow is.
+We only care about its length and direction.
+If two arrows have the same length and direction,
+then they represent the same vector.
+
+An example vector space is the space of all two-dimensional Euclidean vectors.
+
+\section{Collinearity and linear combination}
+
+Two vectors \(a\) and \(b\) are collinear
+iff they have the same direction or the opposite direction.
+If we place them so that their origins coincide, they form a straight line segment.
+
+The zero vector is collinear with every vector.
+% This simplifies the definition of basis later.
+% Now we can write \enquote{non-collinear} instead of \enquote{non-zero non-collinear}.
+
+See also Wikipedia\footnote{\url{https://en.wikipedia.org/wiki/Collinearity}}.
+
+\paragraph{Linear combination of two vectors}
+
+Let \(p\) and \(q\) be vectors.
+A linear combination of \(p\) and \(q\) is a vector \( ap+bq \)
+where \(a\) and \(b\) are real numbers.
+In other words, we say that \(r\) is a linear combination of \(p\) and \(q\)
+iff there exists \(a,b\in \Real\) such that \(r = ap+bq\).
+
+\section{External resources}
+
+See Wikipedia%
+\footnote{\url{https://en.wikipedia.org/wiki/Euclidean_vector}}%
+\footnote{\url{https://en.wikipedia.org/wiki/Vector_(mathematics_and_physics)}}%
+.
+
+\section{What?}
+
+\paragraph{Finding the angle between two vectors}
+
+For every pair of vectors,
+we can always find a plane such that both of them lie on that plane.
+The plane defines the angle.
+
+\paragraph{Deciding orthogonality by dot product}
+
+Let \(a\) be a vector.
+
+Let \(b\) be vector.
+
+Let the angle from \(a\) to \(b\) is \(\theta\). Positive means counterclockwise.
+
+The dot product is \(a \cdot b = \norm{a} \cdot \norm{b} \cdot \cos \theta\).
+
+Note that the dot symbol \(\cdot\) is overloaded.
+It may mean real multiplication,
+vector scaling,
+vector dot product,
+or something else.
+Its meaning depends on the things around it.
+
+If \(\norm{a} \cdot \norm{b} \neq 0\) and \(a \cdot b = 0\),
+then \(a\) and \(b\) are orthogonal.
+Two orthogonal vectors form a right angle.

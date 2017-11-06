@@ -1,0 +1,241 @@
+\chapter{Mechanics}
+
+\emph{Mechanics} is a theory of motion.
+
+Reading:
+\emph{The science of mechanics} by Ernst Mach.
+Historical evolution.
+The principles of statics.
+The principles of dynamics.
+
+\section{Understanding mass}
+
+% http://www.ag-physics.org/rmass/
+% https://en.wikipedia.org/wiki/Mass
+The \emph{mass} of an object is the difficulty of changing its velocity.
+
+Mass is resistance to force.
+
+The mass of an object is the amount of matter in that object.
+
+The \emph{rest mass} of an object is its mass measured if it is at rest.
+
+\section{Understanding force}
+
+\emph{Force} is the rate of change of momentum.
+
+A force \emph{acts} on an object.
+
+\section{Using vectors to model forces and others}
+
+Position, momentum, velocity, acceleration, and force are modeled by \emph{vectors} (\S\ref{sec:vector}).
+The position of \(B\) as measured from \(A\) is modeled by a \emph{vector} \(AB\).
+
+\section{Superposing forces}
+
+Forces acting on an object obey the \emph{superposition principle}:
+the result of two forces \(F_1\) and \(F_2\) acting on the same object
+is the same as the result of one force \(F_1+F_2\) acting on that object.
+
+The \emph{net force} acting on an object is the sum of all other forces acting on that object.
+
+\emph{Resultant force} is another term for \emph{net force}.
+
+\section{Understanding moving frames}
+
+A frame of reference may be \emph{moving},
+for example when you look outside from a moving car.
+
+\section{Understanding inertial frames}
+
+An \emph{inertial frame of reference} \(R\) is a frame of reference such that
+for each each object \( M \), if the net force acting on \( M \) is zero, then \(R\) sees that the acceleration of \(M\) is zero.
+
+\section{Appreciating Galileo's ramps}
+
+Galileo put a ramp (inclined plane),
+rolled a ball from its top,
+and measured the time required by the ball to reach the bottom.
+
+% https://en.wikipedia.org/wiki/Inclined_plane
+A narrow ramp.
+To measure time, he put bells along the ramp.
+The rolling ball hits different bells at different times.
+
+% https://en.wikipedia.org/wiki/Equations_for_a_falling_body
+Galileo's law of falling body
+
+In year? Galileo \( h = k t^2 \).
+
+\section{Newton's second law of motion}
+
+If an object has constant mass \( m \) and a constant force \( F \) is acting on it,
+then \( a = F/m \) is that object's constant acceleration.
+
+\section{Mechanical system}
+
+A \emph{mechanical system} is a set of objects \( \{ M_1,\ldots,M_n \} \) and forces \( \{ F_1,\ldots,F_n \} \).
+Each \(F_k\) is an expression.
+With Newton's laws, we can turn such mechanical system into \(n\) equations,
+each of the form \( F_k = m_k \cdot d(d(x_k)) \) for \(k\) from 1 to \(n\).
+
+One way of describing the motion of an object is by modeling time as a real number \( t \),
+and modeling the position as a function of time \( x : \Real \to \Real^n \).
+Thus, at time \( t \), the object is at \( x(t) \).
+
+\section{Field}
+
+A \emph{field} assigns something to each point in space.
+The \emph{gravitational field} assigns to each point a \emph{gravitational force per unit mass}.
+
+A field is modeled by a \emph{multivariate function} (a function that takes several variables).
+The variables can be grouped into a vector.
+This gives the impression that the function takes one big vector instead of several scattered real numbers.
+
+A \emph{scalar field} is a field that gives a scalar.
+
+A \emph{vector field} is a field that gives a vector.
+
+A field \(f\) is \emph{uniform} iff \(f(x)\) is the same for all \(x\).
+
+\section{Weight}
+
+After Newton's law of universal gravitation,
+\emph{weight} means gravitational force.
+The weight of an object on Earth is the gravitational force exerted by Earth on that object.
+\emph{Work} generalizes to \( W = F \cdot x \).
+
+\emph{Work} was defined as weight times height.
+
+\section{Path of an object in a field}
+
+\emph{Path} of an object moving in a field.
+A \emph{conservative force} is a force whose work depends only on the difference between the beginning and ending position,
+and not in the path?
+A force whose work is the same for every path from \(A\) to \(B\)?
+The \emph{action} of a path?
+Principle of stationary action?
+
+\section{Conservative force}
+
+% https://en.m.wikipedia.org/wiki/Conservative_force
+
+Conservative force \emph{conserves} mechanical energy.
+
+\section{Potential energy}
+
+% https://en.wikipedia.org/wiki/Potential_energy
+
+Wikipedia "potential energy":
+Potential energy is associated with forces that act on a body in a way that the total work done by these forces on the body depends only on the initial and final positions of the body in space. These forces, that are called conservative forces, can be represented at every point in space by vectors expressed as gradients of a certain scalar function called potential.
+
+\section{Field as gradient of potential}
+
+(This requires multivariate calculus.)
+
+\section{Galilean invariance?}
+
+% https://en.wikipedia.org/wiki/Galilean_invariance
+% https://en.wikipedia.org/wiki/Galileo%27s_ship
+% Galilean boost
+% https://en.wikipedia.org/wiki/Galilean_transformation
+% https://en.wikipedia.org/wiki/Galilean_transformation#Galilean_group
+
+Also known as \emph{Galilean relativity}.
+The \emph{Galilean invariance} is the statement
+that Newton's laws of motion is the same in all inertial frame of references.
+
+% https://en.wikipedia.org/wiki/Galilean_invariance
+% Einstein's cabin
+
+\section{Confirming experiments}
+
+The experiment of dropping a feather and a ball in vacuum confirms classical mechanics.
+
+\section{Disagreeing experiments}
+
+Problem in atomic theory?
+
+Double-slit electron experiment?
+
+\section{Branches of mechanics}
+
+\emph{Statics} is?
+\emph{Dynamics} is?
+\emph{Kinematics} describes motion without considering its cause.
+
+\section{Michell\textendash{}Cavendish torsion balance experiment}
+
+This experiment finds out \(G\), the gravitational constant.
+
+\section{Moving from force-based thinking to energy-based thinking}
+
+We thought \( F(t) = -g \) and thus \( a(t) = -g/m \) and \( v(t) = - gt / m \) and \( x(t) = - gt^2 / (2m) \).
+We think about the forces,
+figure out the accelerations,
+integrate them to get the velocities,
+and integrate them to get the positions.
+
+How does Hamiltonian mechanics explain a ball falling near the ground?
+\( P = mgh \).
+\( K = \frac{1}{2}mv^2 \).
+The state of the system is \( (h, mv) \).
+The operator is \( P(h, mv) = mgh \) and \( K(h, mv) = \frac{1}{2}mv^2 \).
+\( P + K = \text{constant} \) which means that \( \pdv{P}{h} = 0 \) and \( \pdv{K}{v} = 0 \).
+
+\section{Generalization}
+
+Weight is gravitational force.
+
+\section{More complex cases?}
+
+So far everything has been constant.
+Now we shall consider the case where they change with time.
+
+Let \(g\) be a vector.
+For understanding phase space, we will consider
+the motion of a point mass \(M\) influenced by a uniform gravitational field \( G(x) = g \).
+
+The acceleration will be \( a(t) = g \).
+The velocity can be obtained by integrating \( a \).
+The position and acceleration are related by the equation \( a = d(d(x)) \).
+In Newtonian dynamics, if we know \( x(0) \), \( v(0) \),
+and all the forces acting on a body,
+then we can calculate the trajectory (all past and future position and velocity) of that body.
+
+Let \( F(t) \) be the \emph{force acting on \( M \)} (that is, the sum of all forces acting on \(M\)) at time \(t\).
+Let \( x(t) \) be the position of \( M \) at time \(t\).
+Let \( v(t) \) be the velocity of \( M \) at time \(t\).
+Let \( a(t) \) be the acceleration of \( M \) at time \(t\).
+Then \( a = d(v) \) and \( v = d(x) \).
+Let \( p : \Real \to \Real^n \).
+Let \( p(t) \) be the momentum of \( M \) at time \( t \).
+Then \( F = d(p) \).
+
+Newton's laws of motion:%
+\footnote{\url{https://en.wikipedia.org/wiki/Newton\%27s_laws_of_motion}}
+
+First law:
+In an inertial frame of reference, an object either remains at rest or continues to move at a constant velocity, unless acted upon by a force.
+Second law:
+In an inertial reference frame, the vector sum of the forces F on an object is equal to the mass m of that object multiplied by the acceleration a of the object: \( F = d \ p \).
+Let \( p : T \to M \cdot V \).
+Third law:
+When one body exerts a force on a second body, the second body simultaneously exerts a force equal in magnitude and opposite in direction on the first body.
+
+Andrew Motte's 1729 English translation of Newton's 1726 third edition of
+\emph{Philosophiae naturalis principia mathematica} uses English words and geometry;
+the modern statement uses algebra.
+
+Newton's law of universal gravitation:%
+\footnote{\url{https://en.wikipedia.org/wiki/Newton\%27s_law_of_universal_gravitation\#Modern_form}}
+
+Force carrier\footnote{\url{https://en.wikipedia.org/wiki/Force_carrier}}
+
+% https://en.m.wikipedia.org/wiki/Kinetic_theory_of_gases
+
+% https://en.m.wikipedia.org/wiki/Philosophiæ_Naturalis_Principia_Mathematica
+
+Shell theorem
+
+Newton's laws of motion imply Kepler's laws of planetary motion.

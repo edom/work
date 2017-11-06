@@ -1,0 +1,179 @@
+\chapter{Bases}
+
+The plural of \enquote{basis} is \enquote{bases}.
+Don't confuse it with the plural of \enquote{base}.
+
+\Table{
+    \Columns{ll}
+    \Caption{Basis-related notations}
+    \Head{object & type}
+    \Body{
+        vector & \(V\)
+        \\ tuple & \( \Real^n \)
+        \\ parametric curve & \(\Real \to V\)
+        \\ basis & \( \Real^n \to V \)
+        \\ covector, scalar field & \(V \to \Real\)
+        \\ cobasis & \( V \to \Real^n \)
+        \\ vector change, vector field & \(V \to V\)
+        \\ basis change & \( \Real^n \to \Real^n \)
+    }
+}
+
+A basis invertibly maps a tuple to a vector.
+
+Let \(V\) be a vector space.
+
+A basis of \(V\) is an invertible function with type \( \Real^n \to V \).
+
+With a basis, we can describe a vector by writing a tuple of numbers instead of drawing an arrow.
+
+\section*{Example basis}
+
+Let \(V\) be the space of all two-dimensional Euclidean vectors.
+
+Thus the basis we describe here will have the type \( \Real^2 \to V \).
+
+Let \(i\) be the unit vector pointing east (right).
+
+Let \(j\) be the unit vector pointing north (up).
+
+Note that \(i\) and \(j\) are orthogonal.
+
+Then we can choose a basis \(e\) such that \(e(x,y) = xi+yj\).
+
+In this basis, the tuple \((1,1)\) describes the vector
+that has length \(\sqrt{2}\) and points northeast.
+
+\section*{Example basis change}
+
+Suppose that we rotate the basis \(e\)
+(we rotate the coordinate axes) by 90 degrees counterclockwise.
+Let the new basis be \(f\).
+Then \(f(x,y) = -yi + xj\).
+
+\section*{Don't confuse vectors and tuples}
+
+The tuple is not the vector itself.
+The tuple describes the vector.
+The tuple and the vector are two different things.
+They are related by the basis.
+
+But we can indeed form an abstract-algebraic vector space \(\Real^n\) over the abstract-algebraic field \(\Real\),
+so a real tuple is a vector.
+
+\section{Linear basis}
+
+A basis \(e : \Real^n \to V\) is linear iff \(e(a+b) = e(a) + e(b)\).
+Note that we overload the plus sign.
+The left plus sign is tuple addition.
+The right plus sign is vector addition.
+
+We can explode a linear basis \(e : \Real^n \to V\) to \(n\) vectors \(e_1,\ldots,e_n\),
+each of the type \(V\), in this way:
+\begin{align*}
+    e(x_1,\ldots,x_n) &= e_1 x_1 + \ldots + e_n x_n
+    \\ &= \Matrix{e_1 & \ldots & e_n}\Matrix{x_1 \\ \vdots \\ x_n}
+    \\ &= EX
+\end{align*}
+and thus the linear basis \(e\) can be represented by the matrix \(E\) where
+\[
+    E = \Matrix{e_1 & \ldots & e_n}
+\]
+
+\section{Describing every vector as a linear combination of basis vectors}
+
+We are talking about the two-dimensional Euclidean space here.
+We can imagine it as an unbounded flat sheet of paper.
+
+Let \(V^2\) be the set of all two-dimensional Euclidean vectors.
+
+From \(V^2\), pick any two non-collinear vectors \(e_1\) and \(e_2\).
+
+Let \(x_1,x_2\in\Real\).
+
+The linear combination \(x_1 e_1 + x_2 e_2\) describes a vector in \(V^2\).
+
+If we pick a basis,
+we can represent every vector in \(V^2\) using two real numbers.
+We can describe the entire \(V^2\) using \(\Real^2\)
+as \( V^2 = \{ x_1 e_1 + x_2 e_2 ~|~ (x_1,x_2) \in \Real^2 \} \).
+
+We say that \(E = \{e_1,e_2\}\) is a basis of the two-dimensional Euclidean space.
+
+We say that \((x_1,x_2)\) is the coordinate tuple of vector \(v\) according to basis \(E\).
+We can also say that \((x_1,x_2)\) is the \(E\)-coordinates of \(v\).
+
+A basis of \(V^n\) is a set of \(n\) basis vectors
+in which every pair of basis vectors are non-collinear.
+With such basis, we can describe every vector in \(V^n\)
+as a linear combination of those basis vectors.
+
+\section{Representing a coordinate tuple by a column matrix}
+
+We can write \((x,y,z)\) or we can write
+\[
+    \Matrix{x \\ y \\ z}
+\]
+
+\section{Scaling a vector}
+
+If \(k\) is a number and \(v\) is a vector,
+then \(kv\) is a vector that has the same direction as \(v\),
+but the length of \(kv\) is \(k\) times the length of \(v\),
+that is, \( \norm{k v} = k \norm{v} \).
+
+We can think of \(-v\) (the negation of \(v\)) as scaling \(v\) by \(-1\).
+
+If \(v = \sum_k x_k e_k\) then \(cv = \sum_k (c x_k) e_k \).
+
+\section{The relationship between vectors and coordinates}
+
+We have two choices
+
+\(V \to \Real^n\)
+
+\(\Real^n \to V\)
+
+\section{Exploding a cobasis to covectors}
+
+We can explode a cobasis \( e : V \to \Real^n \) to \(n\) covectors \( e_1, \ldots, e_n \),
+each having type \( V \to \Real \), in this way:
+\[
+    e(v) = (e_1(v), \ldots, e_n(v))
+\]
+
+\section{Why are the basis and cobasis not the other way around?}
+
+\enquote{A choice of an ordered basis for \(V\) is equivalent to a choice of a linear isomorphism \(\varphi\)
+from the coordinate space \(F^n\) to \(V\).}%
+\footnote{\url{https://en.wikipedia.org/wiki/Basis_(linear_algebra)\#Ordered_bases_and_coordinates}}
+
+\section{Radial basis? Polar coordinates?}
+
+Let \(e\) be the radial basis. Then \(e(v+w) \neq e(v) + e(w)\) in general.
+
+\section{The cross product? The Levi-Civita symbol?}
+
+The vector \( a \times b \) is the vector that is orthogonal to \(a\), orthogonal to \(b\).
+Follow the right hand rule.
+If \(a\) is represented by the thumb pointing right,
+and \(b\) is represented by the index finger pointing forward,
+then \(a \times b\) is represented by the middle finger pointing up.
+
+\( a \times b = \sum_i\sum_j\sum_k \epsilon_{ijk} e_i a^j b^k \) ?
+
+\footnote{\url{https://en.wikipedia.org/wiki/Levi-Civita_symbol\#Cross_product_(two_vectors)}}
+
+\section{The Pythagorean theorem}
+
+Let there be a right triangle.
+Let \(c\) be its hypothenuse.
+Let \(a\) and \(b\) be the other two sides.
+Then, \( a^2 + b^2 = c^2 \).
+
+Many proofs of this theorem are on the Internet.
+
+\section{Closing}
+
+With a basis, we can define vectors with numbers without drawing.
+After we have a basis, we can use the calculus of infinitesimals on vectors.

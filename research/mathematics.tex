@@ -1,46 +1,19 @@
 \documentclass[10pt,book,openany]{memoir}
-\usepackage[utf8]{inputenc}
-\usepackage{epigraph}
+\input{format}
+% why do we load geometry?
 \usepackage{geometry}
-\usepackage{amsfonts}
-\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{amssymb}
-\usepackage{cite}
+%\usepackage{amsfonts}
+%\usepackage{amsmath}
+%\usepackage{amsthm}
+%\usepackage{amssymb}
 \usepackage[inline]{enumitem}
 \usepackage{mathpartir}
 \usepackage{thmtools}
-\usepackage{imakeidx}
 % uncomment to debug page layout
 %\usepackage{showframe}
-\usepackage[columns=3,font=footnotesize,justific=raggedright,columnsep=1em,indentunit=1em,itemlayout=singlepar]{idxlayout}
-\usepackage[hidelinks]{hyperref}
-% page size
-\setstocksize{9in}{6in}
-\settrimmedsize{9in}{6in}{*}
-\setlrmarginsandblock{0.625in}{0.5in}{*}
-\setulmarginsandblock{0.875in}{0.875in}{*}
-\setlength\headsep{2em}
-\setlength\footskip{3em}
-\checkandfixthelayout
-\nouppercaseheads
-\chapterstyle{crosshead}
-%\raggedright
-%\setlength\parindent{2em}
-\raggedbottom
-% epigraph
-\renewcommand\epigraphsize{\scriptsize}
-\setlength\epigraphwidth{0.625\textwidth}
-\input{format}
-% toc
-\setlength\cftpartnumwidth{4em}
-\setlength\cftchapternumwidth{4em}
-\setlength\cftsectionnumwidth{4em}
-\setlength\cftsectionindent{0em}
-% list, itemize, enumerate vertical spaces
-\tightlists
-% beforeparaskip leaves too much empty space
-\setbeforeparaskip{0em}
+\input{commands}
+\newcommand\abs[1]{|#1|}
+\newcommand\norm[1]{\lVert#1\rVert}
 \makeindex
 \begin{document}
 % display-math; doesn't work if put in preamble
@@ -154,12 +127,12 @@
 \printindex
 \addcontentsline{toc}{part}{\indexname}
 
-\nocite{LeggPhd}
-\nocite{NonParam}
-\nocite{negnevitsky2005artificial}
-\nocite{izhikevich2006fhn}
-\nocite{casella2002statistical}
-\nocite{Topology}
+\cite{LeggPhd}
+\cite{NonParam}
+\cite{negnevitsky2005artificial}
+\cite{izhikevich2006fhn}
+\cite{casella2002statistical}
+\cite{Topology}
 
 \clearpage
 \nobibintoc

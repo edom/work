@@ -1,0 +1,205 @@
+% draft is faster than final?
+\documentclass[12pt,twoside,openany,draft]{memoir}
+% set to 10pt if using fonts with big x-height such as arev
+%\documentclass[10pt,openany]{memoir}
+\input{../format}
+\usepackage{physics}
+\usepackage{siunitx}
+% workaround
+% cmbr doesn't have this symbol?
+% https://tex.stackexchange.com/questions/33965/siunitx-%C2%B5-doesnt-work
+\usepackage{textcomp}
+%\sisetup{math-micro=\text{µ},text-micro=µ}% if Unicode font
+\sisetup{math-micro=\textmu,text-micro=\textmu}% if legacy font
+% end workaround
+\input{../commands}
+\title{Physics}
+\author{Erik Dominikus}
+\date{2017 Working Draft Edition}%2017-11-01
+\makeindex
+\begin{document}
+% equation spacing; can't precede \begin{document}
+% https://tex.stackexchange.com/questions/21687/avoid-large-spaces-between-text-and-equations
+\def\MathSkip{0.25em}
+\setlength\abovedisplayskip{\MathSkip}
+\setlength\belowdisplayskip{\MathSkip}
+\setlength\abovedisplayshortskip{\MathSkip}
+\setlength\belowdisplayshortskip{\MathSkip}
+%
+% chapter style
+%
+\chapterstyle{crosshead}
+\setlength\beforechapskip{1em}
+\setlength\afterchapskip{1em}
+\renewcommand\chapterheadstart{\par\vspace{\beforechapskip}}
+\renewcommand\clearforchapter{}% don't start new page
+\indentafterchapter
+% https://tex.stackexchange.com/questions/122574/globally-changing-math-line-spacing
+\setlength\jot{0em}% math line spacing = text line spacing
+\frontmatter
+\begin{titlingpage}
+    {
+        \centering
+        \def\usefontsize#1{\fontsize{#1}{#1}\selectfont}
+        {\noindent\usefontsize{6em}\bfseries\thetitle\par}
+        \vspace*{2em}
+        {\noindent\usefontsize{1.5em}\bfseries\thedate\par}
+        \vspace*{\fill}
+        {\noindent\usefontsize{1.25em}\bfseries\theauthor\par}
+    }
+    \pagebreak
+{
+    \setlength\parindent{0em}
+
+    \textcopyright{} 2017 Erik Dominikus
+
+    \vspace{1em}
+
+    This book is licensed under CC BY-SA 4.0 (Creative Commons Attribution-ShareAlike 4.0 International).
+    More information about the license is at
+
+    \url{https://creativecommons.org/licenses/by-sa/4.0/}
+
+    \vspace{1em}
+
+    The source code of this book is available at
+
+    \url{https://github.com/edom/research}
+}
+\end{titlingpage}
+
+\pagebreak
+
+\long\def\disabled#1{}
+
+\pagebreak
+
+\input{preface}
+
+{
+    \makeatletter
+    {
+        \pagebreak
+        \renewcommand\contentsname{List of parts}
+        \maxtocdepth{part}
+        \tableofcontents
+    }
+    {
+        \pagebreak
+        \renewcommand\contentsname{List of chapters}
+        \maxtocdepth{chapter}
+        \tableofcontents
+    }
+    \disabled{
+        \pagebreak
+        \renewcommand\contentsname{List of sections}
+        \maxtocdepth{section}
+        \tableofcontents
+    }
+    {
+        \pagebreak
+        \renewcommand\contentsname{Table of contents}
+        \maxtocdepth{subsection}
+        \tableofcontents
+    }
+    \listoftables
+    \listoffigures
+    \makeatother
+}
+
+\mainmatter
+{
+
+    \part{Foundations}
+
+The foundations consist of
+lambda calculus\footnote{\url{https://en.wikipedia.org/wiki/Lambda_calculus}},
+type theory\footnote{\url{https://en.wikipedia.org/wiki/Type_theory}},
+and logic\footnote{\url{https://en.wikipedia.org/wiki/Logic}}.
+All math in this book is based on them.
+
+    \input{outline}
+    \input{math-1}
+    \input{function}
+}
+{
+    \part{Geometry}
+
+    \input{space}
+    \input{shape}
+    \input{vector}
+
+    \part{Analytic geometry}
+
+    Analytic geometry is geometry with real numbers.
+    It marries mathematical analysis%
+    \footnote{\url{https://en.wikipedia.org/wiki/Mathematical_analysis}}
+    and geometry.
+
+    \input{real-tuple-space}
+    \input{line}
+    \input{basis}
+    \input{transform}
+    \input{frame}
+    \input{matrix}
+    \input{metric}
+    \input{kinematics}
+    \input{curvature}
+    \input{geometry}
+}
+{
+    \part{Basic physics}
+    \input{measurement}
+}
+\disabled{
+    \part{Statics}
+    \input{force}
+    \input{stress}
+    \input{statics}
+}
+\disabled{
+    \part{Other}
+    \input{relativity}
+    \part{Mechanics}
+    \input{mechanics}
+    \input{mechanics-analytical}
+    \input{mechanics-quantum}
+    \part{Particles}
+    \input{statistical}
+    \input{particle}
+    \input{nuclear}
+    \input{wave}
+    \input{electromagnetism}
+    \input{astronomy}
+    \part{Ending}
+    \input{computer}
+    \input{math-2}
+    \input{ending}
+    \appendix
+    \part{Appendices}
+    \input{ordering}
+    \input{inventory}
+    \input{teaching}
+    \input{ramble}
+    \input{writing}
+    \input{philosophy}
+    \backmatter
+    \clearpage
+    \index{postulates|see{laws}}%
+    \index{principles|see{laws}}%
+    \index{law|seealso{law named after people}}%
+    \index{law named after people|seealso{law}}%
+    \index{radiant emittance!see{radiant exitance}}%
+    \index{radiant flux!see{radiant power}}%
+    \printindex
+    \clearpage
+    \bibliography{../../bib}{}
+    \bibliographystyle{plain}
+}
+
+% http://www.damtp.cam.ac.uk/user/tong/teaching.html
+% https://www.symmetrymagazine.org/article/january-2015/how-to-build-your-own-particle-detector
+% http://www.fisika.ui.ac.id/en/akademik/kurikulum_
+% http://www.fi.itb.ac.id/struktur-kurikulum-dan-silabus/
+
+\end{document}

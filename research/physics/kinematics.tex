@@ -1,0 +1,210 @@
+\chapter{Kinematics, and the calculus of infinitesimals}
+\label{sec:derivative}
+
+Kinematics is the mathematics that describes motions.
+
+A \emph{frame} defines \emph{where} and \emph{when}.
+
+\emph{Motion} is change of position.%
+\footnote{\url{https://en.wikipedia.org/wiki/Motion_\%28physics\%29}}
+
+An object \emph{moves} iff its position changes.
+
+The \emph{speed} of an object is how fast it moves:
+how far it moves in how much time.
+\emph{Fast} means high speed,
+going far in little time,
+traveling much distance in little time.
+
+\emph{Average speed} is distance traveled divided by time required.
+
+\emph{Velocity} is the rate of change of position.
+Speed is the magnitude of velocity.
+\emph{Rate of change} is defined by \emph{derivative} (\S\ref{sec:derivative}).
+
+\section{Describing motions using equations relating position and time}
+
+We can use a position function.
+Its type is \( \Real \to V \).
+
+An example of an equation of motion is \( x(t) = 2 t e_1 \).
+It describes an object that moves with constant velocity \(2\) towards the positive x-axis.
+An \emph{equation of motion} is an equation that describes
+the motion of an object by relating time and position.
+
+Each equation of motion corresponds to a moving object.
+
+To describe more objects, use more equations.
+
+Let \(e\) be a linear basis.
+Suppose that the position of an object at time \(t\) is
+\(x(t) = e(x_1(t), \ldots, x_n(t))\).
+Then the velocity at time \(t\) is \(v(t) = \der(x,t) = e(v_1(t), \ldots, v_n(t)) \).
+Can we say that \(v_k(t) = \der(x_k,t)\)?
+
+Moral of the story:
+If we have a linear basis,
+then doing calculus on the coordinates
+is doing calculus on the vectors.
+
+\section{Notating derivatives}
+
+Let \(f : \Real \to \Real\).
+
+\paragraph{\der}
+
+We can describe the derivative by a function \(\der : (\Real \to \Real) \to (\Real \to \Real)\).
+\[
+    \der(f,x) = \StandardPart\parenthesize{\frac{f^*(x+\delta)-f^*(x)}{\delta}}
+\]
+where \(f^*\) is the natural extension of \(f\) to the hyperreals.%
+\footnote{\url{https://en.wikipedia.org/wiki/Non-standard_calculus\#Definition_of_derivative}}
+Then \(\der(f,x)\) is the slope of the tangent line of \(f\) at \(x\).
+
+Strictly, \(\der(f)(x)\), not \(\der(f,x)\).
+
+Thus \(f' = \der(f)\).
+
+\(\dd{x}\) means an infinitesimal change in \(x\)?
+What does that mean?
+What is \(x\)?
+
+\paragraph{Euler\textendash{}Arbogast D-notation}
+
+% https://en.wikipedia.org/wiki/Notation_for_differentiation#Euler.27s_notation
+
+\( D_x E \) is the derivative of expression \(E\) with respect to variable \(x\).
+The variable \(x\) should occur free in \(E\).
+
+Typing rule:
+If \(x:\Real\) and \(E:\Real\), then \(D_x E:\Real\).
+
+The notation \(E[x:=y]\) means \(E\) but with each free occurrence of \(x\) replaced with \(y\).
+
+Then \( D_x E = \lim_{h \to 0} \frac{E[x := x+h] - E}{h} \).
+
+Then \( D_x E = d(x \to E) \).
+
+Example: \( D_x (4x^2) = d(x \to 4x^2) = 8x \).
+
+Example: \( D_y (x + y) = d(y \to x + y) = x + 1 \).
+
+Advantage: With \(D_x\) notation, we can refer to an input by name;
+With \(d_k\) notation, we can refer to an input by index only.
+
+\(D\) is a custom syntax, not an ordinary function.
+
+% Multivariate differential calculus
+% Vector calculus
+
+\section{Relating velocities, tangent lines, and derivatives}
+
+There are several ways of understanding \(f'(x)\) (the derivative of \(f\) at \(x\)):
+\UnorderedList{
+    \item rate of change of \(f\) at \(x\); instantaneous velocity
+    \item slope of the tangent line of \(f\) at \(x\)
+    \item best linear approximation (not discussed here)
+}
+
+\paragraph{Average velocity and the secant line}
+
+Let there be an object.
+
+Let \(x(t) : V^2\) be a vector that describes its position at time \(t : \Real\).
+
+The \emph{average velocity} of that object in the time interval \([t,t+\Delta t]\) is
+\[ \frac{x(t+\Delta t) - x(t)}{\Delta t}. \]
+
+If at time \(t_1\) its position is \(x_1\)
+and at time \(t_2\) its position is \(x_2\),
+then its \emph{average velocity} in the time interval between \(t_1\) and \(t_2\)
+is \((x_2 - x_1) / (t_2 - t_1)\).
+
+A \emph{secant line of \(f\)} is a line that passes \((x_1,f(x_1))\) and \((x_2,f(x_2))\).
+Think of average velocity.
+
+\paragraph{Instantaneous velocity and the tangent line}
+
+If the position of an object at time \(t\) is \(x(t)\),
+then its \emph{instantaneous velocity} at time \(t\) is \(v(t) = (d(x))(t)\).
+The velocity function is the derivative of the position function.
+
+The term \emph{instantaneous velocity} is often shortened to just \emph{velocity}.
+
+The unqualified \emph{velocity} means \emph{instantaneous velocity}.
+
+A car's speedometer measures its instantaneous speed.
+
+Derivative is about \emph{rate of change}:
+how fast a function changes value,
+how big is the change in output compared to the change in input.
+
+Consider a function \(f : \Real \to \Real\).
+If the input is \(x\), then the output is \(f(x)\).
+If you change the input by \(\dd{x}\), the output changes by \(\dd{y}\).
+Formally, \(f(x+\dd{x}) = f(x)+\dd{y}\).
+
+A \emph{tangent line of \(f\) at \(x\)} is what the secant line converges to
+if both \(x_1\) and \(x_2\) converge to \(x\).
+Think of instantaneous velocity.
+
+\paragraph{Understanding the derivative as the slope of the tangent line}
+
+The \emph{derivative of \(f\) at \(x\)} is the slope of the tangent line of \(f\) at \(x\).
+Reminder: The line \(y = mx + c\) has slope \(m\).
+
+\section{Describing motions using implicit equations}
+
+An example of \emph{implicit} equation is \( x(t) = - (d(d(x)))(t) \).
+This is also an example of a \emph{differential equation} because it contains the derivative operator \(d\).
+Differential equations are discussed in \S\ref{sec:diff-eqn}.
+
+\section{Integrals}
+
+We can think of an integral in several ways:
+\UnorderedList{
+\item area under a curve
+\item slicing and summing
+}
+
+\paragraph{Integrating by slicing and summing}
+
+\section{Calculating derivatives and integrals quickly}
+
+\paragraph{Calculating derivatives}
+
+Symbolic calculation is enabled by
+the \emph{constant rule} \eqref{der-constant-rule},
+the \emph{power rule} \eqref{der-power-rule},
+the \emph{product rule} \eqref{der-product-rule},
+and the \emph{chain rule} \eqref{der-chain-rule}.
+\begin{align}
+    d (x \to y) &= 0 \text{ if \( y \) is a constant} \label{der-constant-rule}
+    \\ d (x \to x^p) &= p \cdot x^{p-1} \text{ if \( p \) is a non-zero real number} \label{der-power-rule}
+    \\ d(f \cdot g) &= d(f) \cdot d(g) \label{der-product-rule}
+    \\ d(f \circ g) &= d(g) \cdot (d(f) \circ g) \label{der-chain-rule}
+\end{align}
+
+The \(d\) operator is linear:
+If \(c\) is a constant, then \(d(c \cdot f) = c \cdot d(f)\).
+Also, \(d(f+g) = d(f) + d(g)\).
+
+\paragraph{Calculating integrals}
+
+With the \emph{fundamental theorem of calculus},
+we can compute integrals using antiderivatives.
+With this shortcut, we can skip the slicing and summing.
+
+\Formula{
+    \int_{[a,b]} f(x) \dd{x} \dd{y} \dd{z} = F(b) - F(a)
+}
+
+\section{Exercise}
+
+Compute the derivative of each of these functions:
+\( x \to 1 \), \( x \to x \), \( x \to 2x \), \( x \to x^2 \),
+\( x \to 3e^x \), \(x \to e^x \cdot x \).
+
+Using the power rule, show that \( d(x \to x^2) = 2x \).
+
+Show that \( d(x \to x^3 + x^2) = 3x^2 + 2x \).

@@ -1,0 +1,224 @@
+\chapter{Geometry kitchen sink}
+\label{chp:geometry}
+
+\section{Combining synthetic and analytic geometry? Do we still need this distinction?}
+
+Synthetic geometry uses axioms; it does not use formulas.%
+\footnote{\url{https://en.wikipedia.org/wiki/Synthetic_geometry}}
+
+Analytic geometry uses formulas from mathematical analysis.
+
+Analytic geometry is a marriage between analysis and geometry.
+
+When asked "What is a line in a 2-dimensional Euclidean space?",
+a student of
+synthetic geometry
+may answer "It is the infinite extension (in both direction)
+of the shortest geometric object connecting two points,"
+while a student of
+analytic geometry
+may answer
+``It is $\{ (x,y) ~|~ ax+by=c \text{ where } a,b,c\in\Real \}$.''
+% https://en.wikipedia.org/wiki/Synthetic_geometry
+% https://en.wikipedia.org/wiki/Analytic_geometry
+% http://en.wikipedia.org/wiki/Foundations_of_geometry
+% http://en.wikipedia.org/wiki/Timeline_of_geometry
+% https://en.wikipedia.org/wiki/Algebraic_geometry
+Algebraic geometry studies the solution of equations.
+
+Topology studies topological spaces.
+Analytic geometry uses coordinates to define spaces,
+while topology uses neighborhood to define spaces.
+
+\section{Understanding the advantages of synthetic geometry?}
+
+Why do we begin with synthetic geometry?
+Why don't we just go straight to analytic geometry?
+
+\section{Rambling, too abstract}
+
+What makes geometry interesting is not the spaces,
+but the mapping between spaces?
+
+(Why are we telling the reader this?)
+
+There are many kinds of spaces we will talk about:
+
+* algebraic structures (especially fields),
+* coordinate space (a space of tuples),
+* real coordinate space (a space of tuples of real numbers),
+* vector space (a coordinate space with vector operations),
+* inner product space (a space with an inner product),
+* covector space (a space whose member is a covector, defined below).
+* tensor space.
+
+There are many ways to make a mapping between two spaces,
+as we will see:
+
+* physical field (mapping between two spaces, usually from a coordinate space),
+* coordinate system (surjective mapping between two spaces),
+* natural vectorization of a ring (mapping from a ring to one of its natural vector spaces),
+* basis (linear coordinate system for a vector space),
+* covector (linear mapping from a vector space to its ring space),
+* cobasis (basis for a covector space).
+
+Then, we will eat our own tail by stating that all those mappings are members of their respective function spaces
+(a function space is a space whose members are functions):
+
+* coordinate system transformation (a mapping between two mappings),
+
+\section{Measuring distance using metrics}
+
+With a metric, we can define
+a (generalized) circle with radius $r$ and center $c$
+to be the set of points
+$\{x ~|~ d~c~x = r \}$.
+
+An astronomer may need to tell another astronomer where the latter can find a celestial body.
+He can give its coordinates in a coordinate system they have agreed on.
+The astronomer can use a celestial coordinate system.
+% https://en.wikipedia.org/wiki/Celestial_coordinate_system
+
+\subsection{Measuring distance with Euclidean metrics}
+
+\index{definitions!Euclidean space}%
+The two-dimensional Euclidean space
+may be imagined as an unbounded sheet of flat paper.
+
+The \emph{Euclidean metric} for \(\Real^n\) is \( d(x,y) = \sqrt{\sum_{k=1}^n (y_k-x_k)^2} \).
+It is the length of the shortest straight line segment from \(x\) to \(y\) in Euclidean geometry.
+The two-dimensional Euclidean metric is the Pythagorean theorem.
+
+Do not confuse Euclidean metric \(d\) and derivative operator \(d\).
+
+\section{Not yet read}
+
+\enquote{Two Approaches to Modelling the Universe: Synthetic Differential Geometry and Frame-Valued Sets},
+John L. Bell\footnote{\url{http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.114.1930&rep=rep1&type=pdf}}
+
+\enquote{The power of analytic geometry derives very largely from the fact
+that it permits the methods of the calculus, and, more generally, of
+mathematical analysis, to be introduced into geometry.} (p.~1)
+
+Foundations of geometry\footnote{\url{https://en.wikipedia.org/wiki/Foundations_of_geometry}}
+
+Hilbert's axioms\footnote{\url{https://en.wikipedia.org/wiki/Hilbert\%27s_axioms}}
+
+Birkhoff's axioms\footnote{\url{https://en.wikipedia.org/wiki/Birkhoff\%27s_axioms}}
+
+\section{Mapping \(\Real^n\) to itself? Why?}
+
+We have shown that we can use a real $n$-tuple as a coordinate to the real $n$-space.
+In other words, we can map the real $n$-space to itself.
+The identity coordinate system for the real $n$-space is
+$I : \mathbb{R}^n \to \mathbb{R}^n$ where $I(x) = x$;
+this $I$ is also the standard basis for the real $n$-space.
+
+We also call a vector space a linear space.
+
+There is another way to think of a coordinate in $\mathbb{R}^n$:
+as a function $N \to \mathbb{R}$ where $N = \{1,2,3,\ldots,n\}$.
+We can think of an $n$-dimensional $F$-vector as a function $N \to F$ where $N = \{1,2,3,\ldots,n\}$.
+We can forget about dimensions and think of a $F$-vector as a function $\mathbb{N} \to F$.
+
+We can also use vector spaces to talk conveniently about geometric objects.
+With vector spaces, we can define a line by vector collinearity,
+and define a plane by its normal vector.
+
+Let there be two bases $J$ and $K$.
+Let $T$ be coordinate transformation from $J$ to $K$
+(that is $J~x = K~(T~x)$)
+and $U$ be basis transformation from $J$ to $K$
+(that is $K = U~J$).
+\[
+J~x = (U~J)~(T~x)
+\]
+\[
+J = U \circ J \circ T
+\]
+
+Interesting things happen when we change the basis.
+$T : E \to F$.
+
+\section{Projective spaces (Why are we talking about this?)}
+
+To grasp projective space, see real projective space.
+
+Descartes's Cartesian coordinate system.
+
+Klein's erlangen program.
+
+Using algebra, we can describe a circle whose radius is $r$
+and whose center is the origin in a 2-dimensional Euclidean space with Cartesian coordinate system
+as $\{C_2~(x,y) ~|~ x^2+y^2 = r^2\}$.
+We can find the intersection of two geometric objects
+by solving the system of their equations.
+
+
+
+
+
+
+
+% Synthetic differential geometry
+% http://home.sandiego.edu/~shulman/papers/sdg-pizza-seminar.pdf
+% Synthetic Differential Geometry: An application to Einstein’s Equivalence Principle
+% http://www.math.ru.nl/~landsman/scriptieTim.pdf
+% see the references in
+% https://ncatlab.org/nlab/show/synthetic+differential+geometry
+% https://mathoverflow.net/questions/186851/synthetic-vs-classical-differential-geometry
+
+\section{Avoiding the tensor notation in Ricci calculus and the Einstein summation convention?}
+
+% https://en.wikipedia.org/wiki/Ricci_calculus
+We try not use the tensor notation in Ricci calculus,
+of which the Einstein notation is a part.
+
+Every text should be more readable than writable.
+
+\section{Using equations to constrain a system, reducing its degree of freedom? Why are we talking about this?}
+
+% https://en.m.wikipedia.org/wiki/Constraint_(classical_mechanics)
+
+A \emph{constraint} is?
+A constraint is modeled by an equation.
+A system is modeled by a set of equations.
+The system satisfies all equations in that set.
+
+Example:
+The position of an object moving in straight line is modeled by \(x(t) = k t\).
+
+Constraint force is the cause of the constraint.
+
+\subsection{Understanding a system's degree of freedom}
+
+Bead sliding in a straight wire at an angle to gravitational field line.
+
+Motivate degree of freedom with analytic geometry.
+To describe a circle, we need two parameters c and r.
+
+The degree of freedom of a system is the minimum number of parameters required to describe it.
+Each parameter has type \(\Real\).
+
+% https://en.wikipedia.org/wiki/Classical_central-force_problem
+% https://en.wikipedia.org/wiki/Central_force
+
+\section{Bilinear function? Why are we talking about this?}
+
+A bilinear function \(f\) is left-linear and right-linear:
+\(
+f(x+z,y) = f(x,y) + f(z,y)
+\)
+and
+\(
+f(x,y+z) = f(x,y) + f(x,z)
+\).
+
+We can generalize that to multilinearity, but we won't.
+
+* A linear function is multilinear.
+* Otherwise a function is multilinear iff every partial application of it is also multilinear.
+
+\section{Measuring the distance between two points on a sphere}
+
+The distance from \(P\) to \(Q\) is \(\angle PCQ \cdot r\)

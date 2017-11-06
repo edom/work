@@ -1,0 +1,152 @@
+\chapter{Shapes}
+
+\section{Angles}
+
+Two intersecting lines form an angle\footnote{\url{https://en.wikipedia.org/wiki/Angle}}.
+
+Two lines are parallel iff they don't intersect.
+
+Two lines coincide iff the angle between them is zero.
+
+Two lines are orthogonal iff the angle between them is a right angle.
+
+We use a protractor\footnote{\url{https://en.wikipedia.org/wiki/Protractor}} to measure an angle in degrees.
+A full circle is 360 degrees,
+a half circle is 180 degrees,
+a quarter circle is 90 degrees,
+and so on.
+
+A full turn is 360 degrees,
+a half turn is 180 degrees,
+a quarter turn is 90 degrees,
+and so on.
+
+\section*{Degrees and radians}
+
+Degrees are convenient for manual calculation
+because 360 is divisible by several small integers.
+
+Radians\footnote{\url{https://en.wikipedia.org/wiki/Radian}} simplify formulas.%
+\footnote{\url{https://en.wikipedia.org/wiki/Radian\#Advantages_of_measuring_in_radians}}
+For example,
+let \(c\) be the circumference of
+a circular sector of angle \(a\) and radius \(r\).
+If \(a\) is in radians, then \(c\) has the simple formula \(c = a \cdot r\),
+but if \(a\) is in degrees, the formula becomes \(c = (a / \ang{360}) \cdot r\).
+
+We prefer the unit that simplifies our jobs.
+Engineers prefer degrees.
+Mathematicians prefer radians.
+Both units are widely used,
+so let's learn to convert one to the other.
+
+An angle of \(2\pi\) radians is equal to an angle of \(360\) degrees.%
+\footnote{\url{https://en.wikipedia.org/wiki/Radian\#Conversion_between_radians_and_degrees}}
+Both of them are equal to one full turn:
+\Formula{
+    \frac{d}{360} = \frac{r}{2\pi}
+}
+
+To convert \(r\) radians to \(d\) degrees:
+\Formula{
+    d = \frac{360}{2\pi} \cdot r
+}
+
+To convert \(d\) degrees to \(r\) radians:
+\Formula{
+    r = \frac{2\pi}{360} \cdot d
+}
+
+\ExerciseAnswer{Convert \ang{360} to radians?}{\(2\pi/1\) radians.}
+\ExerciseAnswer{Convert \ang{180} to radians?}{\(2\pi/2\) radians.}
+\ExerciseAnswer{Convert \ang{90} to radians?}{\(2\pi/4\) radians.}
+\ExerciseAnswer{Convert \ang{45} to radians?}{\(2\pi/8\) radians.}
+
+\ShowAnswers
+
+\section{Circles}
+
+\footnote{\url{https://en.wikipedia.org/wiki/Circular_sector}}
+
+\section{Triangles}
+
+A vertex is a point where two sides meet.
+
+A triangle is called a triangle because it has three angles.
+A triangle also has three vertices and three sides.
+
+The sum of all interior angles of a triangle is 180 degrees.
+
+An equilateral triangle is a triangle whose sides have the same length.%
+\footnote{\url{https://en.wikipedia.org/wiki/Equilateral_triangle}}
+Each interior angle of such triangle is \ang{60}.
+
+\enquote{Equilateral} is the Latinate of \enquote{same-sided}.
+
+The study of triangles is called \enquote{trigonometry}.
+
+\paragraph{Labeling a triangle}
+
+A capital letter labels an interior angle.
+The corresponding small letter labels the side across the angle.
+For example, \(a\) is the side across the angle \(A\).
+
+\subsection*{Drawing a standard right triangle}
+
+A right angle is 90 degrees.%
+\footnote{\url{https://en.wikipedia.org/wiki/Right_angle}}
+
+A right triangle is a triangle that has a \ang{90} interior angle.
+
+See the footnote\footnote{\url{https://commons.wikimedia.org/wiki/File:Rtriangle.svg}}
+for the picture of a standard right triangle.
+Here we describe that triangle.
+
+Let there be a triangle \(ABC\).
+
+Let the angle \(C\) be a right angle.
+
+Let \(a\) be the side across angle \(A\).
+
+Let \(b\) be the side across angle \(B\).
+
+Let \(c\) be the side across angle \(C\).
+Thus, \(c\) is the hypotenuse\footnote{\url{https://en.wikipedia.org/wiki/Hypotenuse}},
+the longest side of a right triangle,
+the side across the right angle.
+
+Such triangle is called a standard right triangle.
+
+\section*{Triangle side ratios}
+
+Consider a standard right triangle.
+
+The sine of the angle \(A\) is \(\sin(A) = a/c\).
+
+The cosine of the angle \(A\) is \(\cos(A) = b/c\).
+
+The tangent of the angle \(A\) is \(\tan(A) = a/b\).
+
+\section*{Trigonometric identities}
+
+We can show these by drawing:
+\( \sin(0) = 0 \),
+and \( \cos(0) = 1 \),
+and \( \sin(\pi/2) = 1 \),
+and \( \cos(\pi/2) = 0 \).
+
+The Pythagorean theorem implies \((\sin(A))^2 + (\cos(A))^2 = 1\).
+
+The sine function has a period of \(2\pi\).
+It means that \(\sin(a + 2\pi) = \sin(a)\) for every real number \(a\).
+
+We have \(\cos A = \sin\left(\frac{\pi}{2}-A\right)\)
+because \(A+B+C = \pi\) and \(C = \pi/2\) and \(A+B = \pi/2\).
+
+See also Wikipedia\footnote{\url{https://en.wikipedia.org/wiki/Special_right_triangle}}%
+\footnote{\url{https://en.wikipedia.org/wiki/Right_triangle}}.
+
+\section*{Inverse trigonometric functions}
+
+We can measure an angle by the ratio of the sides of the right triangle formed by the angle.
+We use inverse trigonometric functions (inverse sine, inverse cosine, inverse tangent).

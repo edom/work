@@ -1,0 +1,227 @@
+\chapter{Mathematics 2}
+
+This chapter contains skipped mathematical details.
+Theoretical physicists may have to care.
+Engineers don't have to.
+
+\section{Deriving the Lorentz transformation}
+
+\label{sec:derive-lorentz-transform}
+
+\index{Lorentz transformation!derivation}%
+We can derive the Lorentz transformation in many ways,
+but I think the most elegant derivation is \cite{pal2003nothing}.
+It does so without assuming the constancy of the speed of light.
+You \emph{should} read that paper to understand special relativity.
+It's very readable.
+I think every physics text should be at least as readable as that.
+Next, read \cite{gannett2007nothing} which improves that paper.
+
+Other derivations%
+\footnote{\url{https://en.wikipedia.org/wiki/Lorentz_transformation\#Derivation_of_the_group_of_Lorentz_transformations}}.
+
+% From E = mc2 to the Lorentz transformations via the law of addition of relativistic % velocities
+% http://iopscience.iop.org/article/10.1088/0143-0807/26/4/006
+
+% Unified derivation of the Galileo and the Lorentz transformations
+% http://iopscience.iop.org/article/10.1088/0143-0807/3/2/008
+
+% Yet another unified derivation of galilean and Lorentz transformations
+% http://iopscience.iop.org/article/10.1088/0143-0807/4/4/110
+
+\section{Differential 1-form}
+
+% practical introduction to differential forms
+% https://www.cefns.nau.edu/~schulz/diff.pdf
+
+% primer on differential forms
+% https://arxiv.org/pdf/1206.3323.pdf
+
+% mathematics for physics
+% http://www.goldbart.gatech.edu/PostScript/MS_PG_book/bookmaster.pdf
+
+In \( dx(t) = a(t) \cdot dt(t) \),
+each of \(dx\), \(a\), and \(dt\) is a \emph{function of \(t\)}.
+We lift multiplication from real numbers to function space \( f \cdot g = t \to f(t) \cdot g(t) \),
+and we write \( dx = a \cdot dt \).
+
+\section{Limit}
+
+(Delete this. Use non-standard (infinitesimal) analysis instead.)
+
+\index{definitions!limit}%
+Practically,
+the \emph{limit of \(E\) as \(h\) approaches \(a\)}, written \( \lim_{h \to a} E \),
+is what the expression \( E \) converges to
+if \(h\) is taken from a sequence that converges to \(a\).
+
+\section{Integral}
+
+\subsection{Measure of real interval}
+
+Let \( a, b: \Real \).
+Let \(a \le b\).
+
+The notation \( [a,b] \) describes the set of all real numbers between \(a\) and \(b\), including both.
+Formally, \( [a,b] = \{ x ~|~ a \le x ~\wedge~ x \le b \} \).
+
+\index{definitions!measure}%
+Its \emph{measure} is \( \mu([a,b]) = b - a \).
+
+The measure of a set describes how big that set is.
+
+Do not confuse \emph{measure} with \emph{cardinality} (how many elements a set has).
+
+\subsection{Partitioning a set}
+
+\index{definitions!partition (to partition a set)}%
+To \emph{partition} a set is to divide it into disjoint subsets.
+A partitioning of a set \(S\) into \(n\) partitions is \((S_1,\ldots,S_n)\) such that
+every pair of partitions is disjoint and the union of all of partitions is \(S\).
+
+\subsection{Riemann integral}
+
+% FIXME: COIK (clear only if known)
+\index{definitions!integral}%
+Practically, the \emph{integral} of a function \(f\) in \(A\)
+is the area between the curve of the function and the x-axis that coincides with \(A\).
+Let \( f : \Real \to \Real \).
+Partition \(A\) into \(n\) partitions \(A_1,\ldots,A_n\).
+For each \(k\), pick one point \(a_k \in A_k\).
+\index{definitions!Riemann sum}%
+A \emph{Riemann sum} is \( S_n = \sum_{k=1}^n f(a_k) \cdot A_k \).
+\index{definitions!Riemann integral}%
+The \emph{Riemann integral of \(f\) in \(A\)} is
+\( \int_A f = \lim_{n \to \infty} S_n \).
+
+\section{Calculus}
+
+\subsection{Antiderivative}
+
+% https://en.wikipedia.org/wiki/Antiderivative
+Let \( f = d(F) \).
+
+Then \( f \) is \emph{the derivative} of \( F \).
+
+\index{definitions!antiderivative}%
+Then \( F \) is \emph{an antiderivative} of \(f\).
+
+A function has many antiderivatives.
+Let \(c\) be a constant.
+If \(F\) is an antiderivative of \(f\), then so is \(F + c\).
+
+Interpretation:
+\( (d(f))(x) \) is the rate of change of \(f\) at \(x\).
+\( (d(f))(x) \) is the slope of the tangent line of \(f\) at \(x\).
+
+\section{Differential equation}
+\label{sec:diff-eqn}
+
+We overload the notation 0 to mean not only the number zero but also the constant function \( x \to 0 \).
+
+\index{definitions!differential equation}%
+A \emph{differential equation} is an equation that has the derivative operator \(d\).
+Example: \( f + d(d(f)) = 0 \).
+Let \(e\) be the base of natural logarithm.
+Example: \( f(x) = e^x \) is one of the solutions of \( f = d(f) \).
+
+\section{Calculus of variations?}
+
+\subsection{Path, functional of a path, calculus of variations, Euler\textendash{}Lagrange equation}
+
+\index{definitions!path}%
+A \emph{path} in \( \Real^n \) can be described by a function \( f : \Real \to \Real^n \).
+The path is then the set \( \{ f(a) ~|~ a \in \Real \} \), that is the \emph{image} of \(f\).
+We overload notation.
+\( (f+g)(x) = f(x) + g(x) \).
+
+A \emph{functional} has type \( (\Real \to \Real^n) \to \Real \).
+
+\section{Differential form, 1-form, 2-form}
+
+% https://en.wikipedia.org/wiki/Differential_form
+% prerequisite for:
+% - sympletic manifold
+% - K\"ahler manifold
+% - Calabi\textendash{}Yau manifold
+
+\section{Relating derivatives, tangent lines, best linear approximations}
+
+\section{Generalizing vector spaces}
+
+(We don't seem to need vector space over a field beyond \(\Complex\) in this book.
+We don't need this level of generality in this book.
+We should remove this paragraph.)
+Let \(F\) be a field (in abstract algebra).
+A \emph{vector space over \(F\)} is a space \( V \), a \emph{vector addition} operator \( + : V \to V \to V \),
+a \emph{scalar multiplication} operator \( \cdot : F \to V \to V \), and the \emph{vector space axioms},
+which can be seen in the \enquote{Definition} section in the Wikipedia article for \enquote{vector space}.
+A \emph{vector} is a point in \( V \).
+If \( F = \Real \), then \( V \) is called a \emph{real vector space}.
+If \( V = \Real^n \), then \( V \) is called the \emph{\(n\)-dimensional real vector space}.
+Do not confuse the field in physics (multivariate function) with the field in abstract algebra.
+
+\section{Defining the derivative using infinitesimals}
+
+\footnote{\url{https://en.wikipedia.org/wiki/Non-standard_calculus}}
+
+\index{definitions!derivative (by infinitesimal)}%
+\( d(f) = x \to st\left(\frac{f(x+\delta)-f(x)}{\delta}\right) \)
+
+\section{Defining derivative using limit}
+
+Let \( f : \Real \to \Real \).
+
+\index{definitions!derivative}%
+The \emph{derivative of \( f \) at \(x\)} is \( \dd(f,x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h} \).
+
+The type of \(\dd\) is \( (\Real \to \Real) \to (\Real \to \Real) \),
+which means that \(\dd\) takes a function and gives a function.
+
+\section{Understanding the derivative as the best linear approximation at a point}
+
+\( f(x+h) \approx f(x) + h \cdot f'(x) \)
+
+Using this, we can approximate \(\sqrt{x}\) near a point we know,
+we can approximate \(\sin(x)\) and \(\exp(x)\) for small \(x\).
+
+\section{Understanding partial derivatives}
+
+% https://en.wikipedia.org/wiki/Automatic_differentiation
+% Symbolic differentiation: https://en.wikipedia.org/wiki/Computer_algebra
+% https://en.wikipedia.org/wiki/Numerical_differentiation
+
+Let \( f : \Real^n \to \Real \).
+
+\index{definitions!partial derivative}%
+The \emph{partial derivative of \(f\) at \( x \) with respect to the \(k\)th input}
+is \( d_k(f,x) = \lim_{h \to 0} \frac{f(x + h e_k) - f(x)}{h} \).
+
+The type of \(d_k\) is \((\Real^n \to \Real) \to (\Real^n \to \Real)\),
+which means that \( d_k \) takes a function and gives another function.
+
+\section{Understanding the gradient}
+
+Let \(f : \Real^n \to \Real\).
+
+\index{definitions!gradient}%
+The \emph{gradient of \(f\) at \(x\)} is the vector \( (\nabla f)(x) \) whose \(k\)th component is \( ((\nabla f)(x))_k = d_k(f,x) \).
+Note that \( (\nabla f)(x) \) is a vector in \( \Real^n \) and \( (\nabla f) : \Real^n \to \Real^n \).
+
+The type of \(\nabla f\) is \(\Real^n \to \Real^n\).
+
+\section{Understanding total derivative}
+
+\section{(Does not belong in this chapter)}
+
+Let \( M \) be a \emph{point mass} with \emph{mass} \( m : \Real \) and \emph{velocity} \( v : \Real^n \).
+Its \emph{momentum} is \( p = m \cdot v \).
+
+% https://en.wikipedia.org/wiki/Mechanical_equilibrium
+In statics, a system is in \emph{static equilibrium} iff it is at rest and it stays at rest.
+
+The \emph{momentum} of an object is the difficulty of stopping it.
+
+An object is \emph{at rest} iff its velocity is zero.
+To \emph{stop} an object (to put it to \emph{rest}) is to make its velocity zero.
+\emph{Stationary} is another word for \emph{at rest}.

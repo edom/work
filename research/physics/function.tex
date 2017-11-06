@@ -1,0 +1,105 @@
+\chapter{Functions}
+
+\footnote{\url{https://en.wikipedia.org/wiki/Lambda_calculus}}%
+\footnote{\url{https://en.wikipedia.org/wiki/Lambda_calculus_definition}}
+
+\index{definitions!function}%
+We can think of a function as a computer.
+
+The type \( a \to b \) is inhabited by functions that take an inhabitant of \(a\) and give an inhabitant of \(b\).
+
+A function \(f : a \to b\) maps an \(a\) to a \(b\).
+
+The expression \(f(x)\) means the result of applying \(f\) to \(x\).
+
+If \(x : a\), then \( f(x) : b \).
+
+For example, if \(f(x) = x^2 + x + 1\), then \(f(2+3) = (2+3)^2 + (2+3) + 1\) by substituting \(x\) with \(2+3\).
+
+Don't write \(f(x)\) to mean the function \(f\).
+The function is \(f\).
+The expression \(f(x)\) means the result of applying \(f\) to \(x\).
+
+\paragraph{Defining functions}
+
+An \emph{unnamed function expression} is written like \( x \to x^2 + 1 \).
+
+Example application: the expression \( (x \to x + 1)(5) \) reduces to \( 5 + 1 \).
+
+\paragraph{Composing functions}
+
+We write \(f \circ g\) to mean \( x \to f(g(x)) \).
+
+\paragraph{Applying functions}
+
+\paragraph{The inverse of an invertible function}
+
+If \(f(x) = y\), then \(f^{-1}(y) = x\),
+but only if \(f\) does not map anything else to \(y\).
+We say that \(f^{-1}\) is the inverse of \(f\).
+
+An invertible function is a function whose inverse is also a function.
+
+\((f \circ g)^{-1} \equiv g^{-1} \circ f^{-1}\)
+
+\section{Function-returning functions}
+
+\(x \to (y \to x+y)\).
+
+\section{Currying: one parameter is enough}
+
+A two-input function has a type like \( (a,b) \to c \).
+
+\index{definitions!currying}%
+\emph{Currying} is the transformation from \( f(x,y) \) to \( (f'(x))(y) \) (from \(f\) to \(x \to y \to f(x,y)\)).
+\emph{Uncurrying} is the inverse of currying.
+
+We conflate \( (f'(x))(y) \) and \( f(x,y) \).
+
+We assume that every function takes one input.
+
+Do not confuse:
+\begin{itemize}
+    \item a function that takes \(n\) inputs, and
+    \item a function that takes \emph{one} input that is an \(n\)-tuple.
+\end{itemize}
+
+\section{Plotting the graph of a function}
+
+If you type \verb@sin(x)@ into Google\footnote{\url{https://www.google.com/}},
+it will plot the graph of \(y = \sin(x)\) for you.
+
+You can also type \verb@y=sin(x)@ into Wolfram Alpha\footnote{\url{https://wolframalpha.com/}}.
+
+You can use GNU Octave.
+
+You can use Gnuplot.
+
+\paragraph{Thinking of an operator as a function}
+
+An infix operator is an operator that is placed between two things.
+For example, the dot in \(a \cdot b\) is an infix operator.
+
+An operator does not have to be a symbol.
+It can be a letter.
+It can be a complicated notation.
+For example, \(\pdv{f}{x}\).
+
+We can treat an infix operator as another way of writing a function application.
+We can think of \(a \cdot b\) as a convenient way of writing \((\cdot)(a,b)\).
+
+\footnote{\url{https://en.wikipedia.org/wiki/Operator_(mathematics)}}%
+\footnote{\url{https://en.wikipedia.org/wiki/Operator_(physics)}}
+
+\section{Equivalence of functions, eta-reduction}
+\label{sec:function-equivalence}
+
+We write \(f \equiv g\) to mean that \(f\) gives the same result as \(g\) for all parameters.
+
+\section{Exercises}
+
+To evaluate something is to reduce it to normal form.
+
+\ExerciseAnswer{Evaluate the expression \((x \to x + 1)(5)\), assuming the usual arithmetic.}{Substitute: \(5 + 1\). Reduce: \(6\).}
+
+\ShowAnswers

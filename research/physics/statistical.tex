@@ -1,0 +1,79 @@
+\chapter{Statistical physics}
+
+\section{Appreciating the relevance of statistics}
+
+Consider a box of gas with 1 billion particles.
+It is impractical to model that by 1 billion equations of motion.
+However, we can still say something useful,
+because \emph{statistics} allows us to \emph{summarize} the gas.
+With statistics, we can talk about \emph{macroscopic behavior},
+but we can't talk about individual particles;
+we get the summary and we sacrifice the details.
+
+Now we can talk about the \emph{distribution} of the velocity of the particles,
+such as \emph{50\% of the particles are slower than something}.
+
+Statistical physics is macro-physics.
+The idea is we consider a statistics of the system.
+We look at the big picture instead of looking at each particle.
+There are many particles.
+We cannot say anything about one particle.
+What is an example of \emph{statistical ensemble}?
+
+\section{Getting used to probability and statistics}
+
+\ExerciseAnswer{(Discrete probability) Roll a fair six-faced die once. What is the probability of getting the three-dotted face?}{\(3/6\).}
+\ExerciseAnswer{(Joint probability of independent events) Roll a fair six-faced die three times. What is the probability of getting the three-dotted face three times?}{%
+\((3/6) \times (3/6) \times (3/6)\).}
+
+\ShowAnswers
+
+A \emph{distribution} of a set \(\Omega\) describes how members of \(\Omega\) are distributed.
+Let \(f\) be the density of that distribution.
+Then \(f(x)\) describes the tendency of values to gather around \(x\)?
+Values tend to gather near the peaks of \(f\).
+
+\section{Using the Maxwell\textendash{}Boltzmann distribution of speed (for what?)}
+
+An example question that statistical physics (statistical mechanics) can answer is
+``What is the probability of finding a particle with a given speed?''
+For example, see the probability density function of the Maxwell\textendash{}Boltzmann distribution.
+
+Maxwell distribution is a chi-distribution with 3 degrees of freedom.
+
+Don't remember the equation.
+To be a physicist, you don't need to remember this; you can always go to Wikipedia or open a book.
+The important thing is that you know \emph{what it means} and \emph{what it's useful for}.
+The density of \emph{Maxwell\textendash{}Boltzmann distribution} is \(f(v)\).
+The number \(\int_A f\) describes the \emph{probability of finding a particle
+whose speed is in the set (the range) \(A\)}.
+Let that sink for a moment, especially if you aren't yet comfortable with probability theory.
+The density of \emph{Maxwell\textendash{}Boltzmann distribution} is
+???
+\Formula{
+    \NoNumber
+    f(v) = \parenthesize{ \frac{m}{2\pi k T} }^{3/2} 4 \pi v^2 \exp \parenthesize{ - \frac{mv^2}{2kT} }
+}
+Who got that? How?
+
+% https://en.wikipedia.org/wiki/Temperature
+TODO paraphrase this Wikipedia text:
+Based on the historical development of the kinetic theory of gases, temperature is proportional to the average kinetic energy of the random motions of the constituent microscopic particles
+
+% https://en.wikipedia.org/wiki/Maxwell–Boltzmann_distribution
+
+Statistical mechanics explains thermodynamics.
+
+% https://en.wikipedia.org/wiki/Thermodynamics
+
+\emph{mole} is
+
+Chemistry?
+
+Entropy?
+
+Canonical ensemble?
+
+Statistical ensemble?
+
+% http://demonstrations.wolfram.com/BoseEinsteinFermiDiracAndMaxwellBoltzmannStatistics/

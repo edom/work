@@ -1,0 +1,184 @@
+\chapter{Analytical mechanics}
+
+% https://halshs.archives-ouvertes.fr/halshs-00116768/file/chap5.pdf
+\emph{The origins of analytical mechanics in 18th century}, Marco Panza
+\cite{panza2003origins}
+
+About the name:
+Why is it ``analytical mechanics'' and not ``analytic mechanics''?
+
+\emph{Analytical mechanics} is mathematical analysis applied to mechanics.
+Calculus is a part of mathematical analysis.
+Calculus is about limit, derivative, and integral.
+Several \emph{formulations} of mechanics are
+Newtonian, Lagrangian, Hamiltonian, Routhian,
+one due to Appell,
+and one due to Udwadia\textendash{}Kalaba.
+
+% https://en.wikipedia.org/wiki/Analytical_mechanics
+% https://en.wikipedia.org/wiki/Mathematical_analysis
+% https://en.wikipedia.org/wiki/Gauss%27s_principle_of_least_constraint
+
+\section{Principle of economy}
+
+\section{Variational principles}
+
+\emph{D'Alembert's principle of virtual work}?
+Virtual work?
+Virtual displacement?
+% https://en.wikipedia.org/wiki/D%27Alembert%27s_principle
+% https://en.wikipedia.org/wiki/Virtual_displacement
+% http://fy.chalmers.se/~tfemc/mekanikkompendium.pdf
+% https://en.wikipedia.org/wiki/Hamilton%27s_principle
+% https://en.wikipedia.org/wiki/Principle_of_least_action
+% https://en.wikipedia.org/wiki/Routhian_mechanics
+% https://en.wikipedia.org/wiki/Appell%27s_equation_of_motion
+% https://en.m.wikipedia.org/wiki/Udwadia–Kalaba_equation
+
+\section{Lagrangian mechanics}
+
+Introduction to analytical mechanics \cite[p.~43]{varvoglis2014history}
+
+% https://en.wikipedia.org/wiki/Lagrangian_mechanics#From_Newtonian_to_Lagrangian_mechanics
+
+% https://archive.org/details/springer_10.1007-978-94-015-8903-1
+% https://en.m.wikipedia.org/wiki/Mécanique_analytique
+Lagrange's \emph{M\'ecanique analytique} was published in 1788 \cite{lagrange1997analytical}.
+
+Lagrangian mechanics only works for conservative forces?
+
+The \emph{Lagrangian} of a mechanical system is?
+
+% https://en.m.wikipedia.org/wiki/Lagrangian_mechanics
+
+Let \( e_k \in \Real^n \) be the \emph{\(k\)th basis vector of \( \Real^n \)};
+it is \( e_k = [\delta_{ik}]_{i=1}^n \);
+the \(k\)th component of \( e_k \) is one; every other component of \( e_k \) is zero;
+\( (e_k)_k = 1 \) and \( (e_k)_i = 0 \) if \( i \neq k \).
+
+For example, assume \( \Real^3 \), and let there be a particle \( M \)
+whose mass is \( m \)
+and whose position is \( (0,0,0) \).
+The \emph{gravitational field} of \( M \) at \( x \) is \( g(x) = - G m x / |x|^3 \).
+Such \( g \) is a vector field.
+The \emph{gravitational potential} of \( M \) is the \( \phi \) such that \( \nabla \phi = g \).
+Such \( \phi \) is a scalar field.
+The \emph{potential energy of \( N \) due to \( M \)} is \( K_{MN} = m_N \cdot \phi(x_N) \).
+
+Every particle in a system translates to two things in the \emph{phase space}: a position and a momentum.
+We can describe a system without explicit reference to time.
+We describe each particle by a set of \emph{position-momentum pairs}.
+This set is the \emph{phase space} of the system.
+
+Why bother using phase space if systems of equations work just fine?
+
+We can \emph{describe} the trajectory of a particle using a function
+whose input is a real number representing relative time
+and output is a three-dimensional real vector representing relative position.
+This is straightforward to imagine.
+
+However, we can also describe the same thing by a set of ordered pairs
+\( \{ (t,x) ~|~ \text{the object is at \(x\) at time \(t\)} \} \).
+
+Newton's law of gravity describes the force that a
+\emph{point mass} exerts on another point mass.
+It still applies to planets even if when we assume that a planet is a point mass.
+\[
+    F_{ab} = \frac{G m_a m_b}{|r_{ab}|^2} \hat{r}_{ab}
+\]
+
+% https://en.wikipedia.org/wiki/Gauss%27s_law_for_gravity
+
+Newton's second law:
+\(F = dp\) where \(F(t)\) is force acting on the point mass at time \(t\)
+and \(p(t)\) is the momentum of the point mass at time \(t\).
+
+The \emph{degree of freedom} of a system is the minimum number of parameters required to describe that system.
+
+A system of \emph{equations of motion} has the form:
+\begin{align*}
+    x_1(t) &= \ldots
+    \\
+    & \vdots
+    \\
+    x_n(t) &= \ldots
+\end{align*}
+
+Imagine that in front of you there is a \emph{pendulum} hanging on a thread attached to the roof.
+To model that system, we could pick the XYZ coordinate system
+where, from your point of view,
+the positive X axis is rightward, the positive Y axis is forward, and the positive Z axis is upward.
+Thus, at all times, the force acting on the pendulum is \( F = (0,0,-mg) \).
+This should be straightforward to imagine.
+But you have to determine the tension of the thread that constrains the pendulum's motion.
+
+But we can pick another coordinate system where a point is described by \( (\theta) \).
+Let \(\theta\) be the angle from the vertical axis to the thread:
+\( \theta = 0 \) means that the thread is vertical,
+and positive \( \theta \) means that the pendulum is to your right.
+Let \( K \) be the line length.
+\(h = K - (1 - \cos \theta) K = K \cos \theta\).
+\(P = m g h\).
+\(K = \frac{1}{2} m v^2\).
+Generalized coordinates: \((h,\theta)\) instead of \((x,y)\).
+Translation rules: \(x = K \sin \theta\) and \(y = K \cos \theta\).
+The point \(x,y=0,0\) is the lowest point of the pendulum.
+
+\section{Example: Two rigid bodies}
+
+Assume constant mass.
+\begin{align*}
+    m_1 \cdot (d^2 x_1)(t) &= G m_1 m_2 \cdot (x_2(t) - x_1(t)) / \norm{x_1(t) - x_2(t)}^3
+    \\
+    m_2 \cdot (d^2 x_2)(t) &= G m_1 m_2 \cdot (x_1(t) - x_2(t)) / \norm{x_1(t) - x_2(t)}^3
+\end{align*}
+Matrix form:
+\begin{align*}
+    \bmat{
+        m_1 \cdot (d^2 x_1)(t)
+        \\
+        m_2 \cdot (d^2 x_2)(t)
+    }
+    &=
+    \frac{G m_1 m_2}{\norm{x_1(t) - x_2(t)}^3}
+    \bmat{
+        x_2(t) - x_1(t)
+        \\
+        x_1(t) - x_2(t)
+    }
+\end{align*}
+
+\paragraph{Example}
+Uniform gravitation field.
+Phase space coordinate \(h\) where \(h\) is height.
+\(P(h) = m g h\).
+\(K(h) = m (v(h))^2 / 2\).
+Conservation of energy: \(P + K = E\).
+\(d_h E = 0 = m g + \frac{1}{2} m \cdot (d_h v)(h) \cdot 2 v(h)\).
+\(0 = g + (d_h v)(h) \cdot v(h)\).
+\(- g = d_h v \cdot v\).
+
+\section{Canonical coordinates}
+
+\section{Poisson bracket}
+
+The \emph{Poisson bracket} is ...
+
+\section{Hamiltonian mechanics}
+
+With physical laws, we can predict the state of physical systems.
+
+A
+\index{configuration space}%
+\emph{configuration space} is a vector space where each vector is a generalized coordinate tuple.
+
+Example of Hamiltonian mechanics:
+In two-body problem,
+the state space is ...,
+the configuration space is ...,
+
+\section{Noether's theorem}
+
+\subsection{Conservation of energy}
+
+\subsection{Newton's third law of motion}

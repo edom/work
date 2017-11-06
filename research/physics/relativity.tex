@@ -1,0 +1,867 @@
+\chapter{Relativity}
+
+\paragraph{Needed before reading this chapter}
+Make sure that you have understood Chapter~\ref{chp:geometry}~(p.~\pageref{chp:geometry}).
+
+\UnorderedList{
+\item We see every moving clock ticking slower than our clock.
+}
+
+When reality and theory disagree, reality always wins.
+We celebrate every time we falsify a theory.
+It means that our knowledge is building.
+
+To talk about relativity, we need \emph{analytic geometry},
+which allows us to use numbers to describe locations, shapes, and other geometrical concepts.
+
+After reading this chapter, you should be able to:
+\UnorderedList{
+\item craft a coordinate system
+\item use vector to describe relative positions/displacements
+\item calculate the time dilation, length contraction, momentum, and kinetic energy of an object moving in spacetime
+\item describe the curvature of spacetime due to a point mass
+\item visualize the Schwarzschild metric
+}
+
+\section{Calculating the Lorentz boost}
+
+\index{Lorentz transformation}%
+\index{Lorentz boost}%
+Let \(c\) be the speed of light.
+The \emph{Lorentz boost} of an object moving with constant speed \(v\) is \(\gamma(v)\) where
+\Formula{
+    \gamma(v) = \frac{1}{\sqrt{1 - \frac{v^2}{c^2}}}.
+}
+What does it mean?\footnote{\url{https://en.wikipedia.org/wiki/Lorentz_transformation\#Physical_implications}}
+
+If you are interested in the derivation of the Lorentz transformation,
+see \S\ref{sec:derive-lorentz-transform} (p. \pageref{sec:derive-lorentz-transform}) \emph{later}.
+Don't do it now.
+
+% https://en.wikipedia.org/wiki/Lorentz_transformation#boost
+\ExerciseAnswer{Compute the slowing down of a clock that is moving at half the speed of light.
+How many tick does the moving clock make for each tick that a stationary clock makes?
+What if the moving clock's speed is \(c/4\)?
+What if the moving clock's speed is \SI{100}{km/h}?
+Hint: A handy conversion factor to remember is \(\SI{18}{km/h} = \SI{5}{m/s}\).
+}{TODO}
+
+\ExerciseAnswer{Exercise? Which clock is slower?
+\(A\) is resting and \(B\) is moving.
+\(A\) sees that \(B\)'s clock ticks slower.
+But from \(B\)'s point of view,
+\(A\) is moving and \(B\) is resting,
+so \(B\) sees that \(A\)'s clock ticks slower.
+Thus, which clock ticks slower?
+}{Is this question even valid?}
+
+\ShowAnswers
+
+Time dilation: the faster a clock moves, the slower it ticks.
+
+% this has a point?
+% http://alternativephysics.org/book/index.htm
+
+% Disproved by Schutz:
+% Why Time Dilation must be Impossible:
+% because it's impossible to tell which is moving faster than which,
+% because the frame of reference itself could be moving.
+% http://alternativephysics.org/book/TimeDilation.htm
+
+% https://physics.stackexchange.com/questions/18867/how-does-time-dilation-work-without-a-privileged-reference-frame
+% https://www.reddit.com/r/askscience/comments/1oej1u/how_do_we_pick_the_right_frame_of_reference_for/
+% https://en.wikipedia.org/wiki/Twin_paradox#Resolution_of_the_paradox_in_special_relativity
+
+\emph{Minkowski spacetime}?
+
+\emph{World line} is ...
+
+Proper time?
+
+\subsection{Calculating time dilation}
+
+\subsection{Calculating length contraction}
+
+\subsection{Calculating the vector Lorentz transformation}
+
+\section{Understanding rotation in Minkowski space}
+
+\section{???}
+
+\section{Understanding the stress-energy tensor}
+
+\section{???}
+
+\section{Understanding Einstein field equations}
+
+\paragraph{Key idea}
+Mass bends spacetime.
+
+As energy at a point increases, spacetime bends more there.
+
+% https://en.wikiversity.org/wiki/General_relativity
+% https://en.wikipedia.org/wiki/Riemann_curvature_tensor
+% Notation
+% https://en.wikipedia.org/wiki/Ricci_calculus
+
+A \emph{tensor} is ...
+
+% FIXME copied from wikipedia
+The tensor form of the Einstein field equations is%
+\footnote{\url{https://en.wikipedia.org/wiki/Einstein_field_equations}}
+\Formula{
+    R_{ij} - \frac{1}{2} R g_{ij} + \Lambda g_{ij} = \frac{8\pi G}{c^4} T_{ij}
+}
+where \(R_{ij}\) is the Ricci curvature tensor, \(R\) is the scalar curvature, \(g_{ij}\) is the metric tensor,
+\(\Lambda\) is the cosmological constant, \(G\) is Newton's gravitational constant, \(c\) is the speed of light in vacuum,
+and \(T_{ij}\) is the stress–energy tensor.
+
+\paragraph{Exercise}
+Describe the bending of space due to a point mass.
+
+\subsection{Calculating black hole event horizon radius?}
+
+% https://en.wikipedia.org/wiki/John_Michell_(natural_philosopher)#Black_holes
+
+In 1783, John Michell wrote about \emph{dark stars},
+an object so heavy that light can't escape it?
+
+\section{Calculating gravitational lensing}
+
+% \section{Hawking radiation}
+
+% \section{Black hole thermodynamics}
+
+\section{Deriving Einstein field equations}
+
+(To be done.)
+
+\section{Relativity}
+
+\subsection{Some basic terms}
+
+% Read Landau & Lifshitz relativity volume?
+
+A \emph{spacetime} \(M\) is a four-dimensional space.
+
+An \emph{\(M\)-event} is a point in \(M\).
+
+An \emph{\(M\)-frame} is an invertible function \(\Real^4 \to M\).
+Such frame assigns a unique coordinate tuple to every event.
+
+Let \(A : \Real^4 \to M\) be an \(M\)-frame.
+
+Let \(B : \Real^4 \to M\) be an \(M\)-frame.
+
+Let \(E : M\) be an \(M\)-event.
+
+Let \(t \in \Real\).
+
+Let \(x \in \Real^3\).
+
+The notation \(E = A(t,x)\) means that
+the event \(E\) \emph{happens} at \emph{\(A\)-time} \(t\) and \emph{\(A\)-position} \(x\).
+It means that, \emph{from \(A\)'s point of view},
+the event happens at time \(t\) and position \(x\).
+We also say that such \(t\) is the \emph{\(A\)-time of \(E\)}
+and such \(x\) is the \emph{\(A\)-position of \(E\)}.
+
+We can write unqualified \emph{event} and \emph{frame} to mean \emph{\(M\)-event} and \emph{\(M\)-frame}
+if it's clear from context that the spacetime being discussed is \(M\).
+Similarly, we can write unqualified \emph{time} and \emph{position} to mean \emph{\(A\)-time} and \emph{\(A\)-position}
+if it's clear from context that the frame being discussed is \(A\).
+
+\emph{Observer} is another word for \emph{frame}.
+
+\emph{Time} is measured by a \emph{clock}.
+
+Time orders (sequences) events.
+
+The \emph{position} of an object is where it is in a frame.
+
+\emph{Distance} is measured by a \emph{ruler}.
+
+% https://en.wikipedia.org/wiki/Inertial_frame_of_reference
+
+\subsection{Motion and trajectory}
+
+How do we describe motion?
+
+Let \(A\) be an \(M\)-frame.
+
+Let \(B\) be an \(M\)-frame.
+
+Let \(P\) be a moving object with negligible size.
+
+We describe \emph{A's account} of the motion of \(P\) as
+\enquote{The \emph{\(A\)-position} of \(P\) at \emph{\(A\)-time} \(t\) is \(x(t)\).}
+
+% TODO clear up
+
+The \emph{\(M\)-trajectory} of the object \(P\)
+is the set \( \{ A(t,x(t)) ~|~ t \in \Real \} \subseteq M \).
+It means that at \(A\)-time \(t\), the \(A\)-position of \(P\) is \(x(t)\).
+The \emph{\(A\)-velocity} of \(P\) is the derivative of that \(x\).
+For example, if \(x(t) = vt + x_0\),
+then \(A\) sees that \(P\) is moving with constant velocity \(v\).
+The function \(x\) is \(A\)'s description of \(P\)'s motion.
+Thus, velocity is also relative, because time and position are relative,
+and velocity is defined in terms of time and position.
+
+\index{definitions!stationary}%
+\index{stationary!definition}%
+An object is \emph{\(A\)-stationary} iff its \(A\)-velocity is constantly zero.
+
+\(A\) and \(B\) may disagree about the motion of \(P\), but \(P\)'s \(M\)-trajectory is the same:
+\( \{ A(t,x(t)) ~|~ t \in \Real \} = \{ B(u,y(u)) ~|~ u \in \Real \} \).
+The problem is to state \(u\) and \(y\) in terms of \(t\) and \(x\).
+It can be thought that the trajectory is the unknowable objective existence of the object?
+
+\emph{\(M\)-world-line} is synonym of \emph{\(M\)-trajectory}.
+
+\section{Deciding whether two events are simultaneous}
+
+What happens at the same time according to an observer?
+
+Two \(M\)-events are \emph{\(A\)-simultaneous} iff they have the same \(A\)-time.
+Formally, $A(t,x)$ and $A(u,y)$ are \emph{\(A\)-simultaneous} iff $t = u$.
+
+The set of all events that happen at \(A\)-time \(t\) is \(S_A(t) = \{ A(t,x) ~|~ x \in \Real^3 \}\).
+
+The simultaneity relationship forms an equivalence class?
+Isochrone?
+
+Let the \(A\)-velocity of \(B\) be constant \(b\).
+
+From \(A\)'s point of view, at time \(t\),
+the light has traveled a distance \(ct\).
+Thus, \(S_A(t) = \{ (t,x) ~|~ \norm{x} = ct \}\).
+\(X_A(t) = \{ x ~|~ \norm{x} = ct \}\).
+
+From \(B\)'s point of view, at time \(t\),
+the light has traveled a distance \(ct\),
+but every point in space has moved by \(-vt\).
+Thus, the set of all \(B\)-simultaneous events at \(B\)-time \(t\) is
+\( S_B(t) = \{ (t,x) ~|~ \norm{x - vt} = ct \} \).
+\(X_B(t) = \{ x ~|~ \norm{x - vt} = ct \}\).
+
+Space homogeneity principle:
+\(d(x+h,y+h) = d(x,y)\).
+translating a rod preserves its length.
+The distance between two points depends only on the relative position of the points.
+
+Time homogeneity principle is similar to space homogeneity principle.
+
+Plot \((t,x)\) satisfying \(\norm{x-vt} = ct\).
+In two-dimensional space, it is a pair of lines.
+In three-dimensional space, it is a cone.
+\begin{align*}
+    \norm{x-vt}^2 &= \sum_{k \in \{1,2,3\}} (x_k - v_kt)^2
+\end{align*}
+
+From \(B\)'s point of view, at time \(t\),
+after duration \(dt\),
+the light has traveled a distance \(c~dt\),
+but every point in space has moved by \(-v(t)~dt\).
+Thus, the set of all \(B\)-simultaneous events at \(B\)-time \(t + dt\) is
+\( S_B(t + dt) = \{ (t,x) ~|~ \norm{x - v(t)~dt} = c~(t + dt) \} \).
+
+How do we measure the distance to somewhere?
+We fire a light at it.
+The time light takes to get there is proportional to the distance.
+
+A stationary observer \(A\) fires light everywhere.
+According to \(A\), everything in \(\{ x ~|~ \norm{x} = ct \}\)
+happens at the same \(A\)-time \(t\).
+
+Two events are \emph{\(A\)-simultaneous} iff their \(A\)-times match.
+
+TODO
+What does `synchronized' mean?
+What does it mean that two clocks are synchronized?
+
+% from TED history of the world: Matter is congealed energy.
+
+The water waves we see propagate in water,
+the sound waves we hear propagate in air,
+so it's tempting to guess that the light (the optical waves) we see propagate in
+\emph{luminiferous aether} (``fresh air that carries light''), who coined that name?
+The wave in moving water?
+The \emph{Michelson\textendash{}Morley aether interferometry experiment} tried to measure
+the velocity of the Earth with respect to the aether,
+but they found no significant differences.
+Who threw away the aether idea?
+Light does not need a medium to propagate.
+
+\subsection{Inertial frame}
+
+What is a \emph{moving frame}?
+How do we formalize it?
+Given what \(A\) sees, how do we compute what \(B\) sees?
+
+Let \(A\) and \(B\) agree on the origin: \(A(0,0) = B(0,0)\).
+
+Let the \(A\)-velocity of \(B\) be constant \(b\).
+
+Let the \emph{target} \(T\) be an \(A\)-stationary object at \(A\)-position \(x\).
+
+Let \(E = A(0,0) = B(0,0)\) be the event \enquote{the light fired from the origin}.
+
+Let \(F = A(t,x) = B(t',x')\) be the event \enquote{the light arrived at the target}.
+
+\(A(0,x-ct) = A(0,0)\)
+
+\(B(0,x'-c't') = B(0,0)\)
+
+Let \(c\) be the \(A\)-velocity of the light fired from \(E\) to \(F\).
+
+Thus \(x = ct\). Thus \(c\) and \(x\) have the same direction.
+
+Then \(A(0,x) = B(0,x')\) is the initial event of \(T\).
+
+Then \(F = A(t,x) = B(t',x' - vt')\).
+
+Then \(F = A(t,ct) = B(t',x' - vt')\).
+
+Every \emph{object} has a position in space.
+
+\emph{Law of the velocity of two observers}:
+If \(A\) sees \(B\) moving with velocity \(v\),
+then \(B\) sees \(A\) moving with velocity \(-v\).
+(The \(A\)-velocity of \(B\) is the negation of the \(B\)-velocity of \(A\).)
+
+How do we measure distance?
+
+To measure distance, we use light.
+
+Let \(P\) be an \(A\)-position.
+
+Let \(Q\) be an \(A\)-position.
+
+In frame \(A\),
+if light traverses \(PQ\) in duration \(t\),
+then the \(A\)-length of \(PQ\) is \(d_A(P,Q) = c t\).
+
+If light takes the same \(A\)-duration to traverse \(OA\) and \(OB\),
+then \(OA\) and \(OB\) have equal \(A\)-length: \(d(O,A) = d(O,B)\).
+
+Define \(S(O,q)\) as the set of every point whose distance from \(O\) is \(q\).
+Formally, \(S(O,q) = \{ P ~|~ d(O,P) = q \}\).
+
+Law: \(v_{AB} = -v_{BA}\).
+
+To derive Lorentz transformation, we use three observers \(A,B,C\)
+where \(A\) sees \(B\) moving but \(A\) sees \(C\) stationary.
+
+An \emph{event} is a point \((t,x)\) in spacetime \(\Real \times \Real^3\).
+Let \(A\) and \(B\) agree at \((0,0)\).
+An observer is a frame is a chart is a coordinate system.
+Let \(C_A(e)\) be the \(A\)-coordinates of \(e\).
+
+Let \(E_A(t)\) be the set of all events that happen in \(A\)-time \(t\).
+Then it is \(E_A(t) = \{ e ~|~ \exists x ~ C_A(e) = (t,x) \}\).
+
+Let the position of \(M\) at \(O\)-time \(t\) be \(x(t)\).
+If \(O\) emits light, and object \(M\) is moving with velocity \(v\),
+then the light and \(M\) will meet at \(d(O,x_\text{meet})\)
+where there exists \(t\) such that \(x(t) = x_\text{meet}\).
+It is the intersection of a sphere and a line.
+
+The distance takes two objects, not two points.
+Let there be objects \(S, M, T\) (stationary, moving, and target).
+According to \(S\), \(M\) is moving with velocity \(v\), and \(T\) is stationary.
+Suppose that when \(S\) and \(M\) both coincided at \((t_0,x_0)\),
+both of them fired a light at \(T\) (target).
+\(S\) sees that \(d(S,T) = d(x_0,x_T)\).
+\(M\) sees that \(d(M,T) = d(x_0,x_T - vu)\).
+
+\subsection{Old text}
+
+All lights that originate at \(A(t,x)\) reach \(A\)-position 0 simultaneously at \(A\)-time \(t + x/c\).
+The set of all $\{ A(t,x) ~|~ \norm{x} = ct \}$ is the \(A\)-simultaneity surface at \(A\)-time $t$.
+Two events in the same \(A\)-simultaneity surface happens at the same \(A\)-time.
+
+Let O's firing light in all directions happens at $A=O(0,0)$
+and the detection of that light by Q happens at $B = O(\vec{x},t)$.
+If $\vec{x}$ is always the O-position of Q,
+then
+\[
+t = x/c.
+\]
+
+Now suppose that $Q$ has constant O-velocity $\vec{v}$,
+and the O-position of $Q$ at O-time 0 is $\vec{x}$.
+Q's detection of light now happens at $B'=O(\vec{x}',t')$ instead, where
+\begin{align*}
+\vec{x}' = \vec{x} + \vec{v} t'
+\\ c t' = \norm{\vec{x}'}
+\end{align*}
+due to the light speed constancy principle.
+
+Suppose $\vec{v}$ and $\vec{x}$ are perpendicular to each other.
+\begin{align*}
+(x')^2 = x^2 + (vt')^2 = (ct')^2
+\\ x^2 = (c^2-v^2)(t')^2
+\\ t' = \frac{x}{\sqrt{c^2-v^2}}
+\\ t' = \frac{x}{c \sqrt{1-(v/c)^2}} = \alpha x/c = \alpha t
+\\ x' = \alpha x
+\end{align*}
+
+To help visualize this, we can use the spacetime diagram.
+The x-axis is the distance from O-position zero.
+The y-axis is the interval from O-time zero.
+
+Suppose that they weren't perpendicular.
+\begin{align*}
+\vec{x}' = \vec{x} + \vec{v} t'
+\\ c t' = x'
+\\ x_k' = x_k + v_k t'
+\\ c^2 (t')^2 = (x')^2
+\\ = \norm{\vec{x} + \vec{v} t'}^2
+\\ = x^2 + 2 t' \vec{x} \cdot \vec{v} + v^2(t')^2
+\\ = x^2 + 2 t' \vec{x} \cdot \vec{v} + (v^2 - c^2)(t')^2
+\\ t' = \frac{- 2 \vec{x} \cdot \vec{v} \pm \sqrt{(2 \vec{x}\cdot\vec{v})^2 - 4 (v^2 - c^2) x^2}}{2 (v^2 - c^2)}
+\\ t' = \frac{\vec{x}\cdot\vec{v} + \sqrt{(\vec{x}\cdot\vec{v})^2 + (c^2 - v^2) x^2}}{c^2 - v^2}
+\\ t' = \frac{\vec{x}/c\cdot\vec{v}/c + \sqrt{(\vec{x}/c\cdot\vec{v}/c)^2 + (1 - (v/c)^2) (x/c)^2}}{1 - (v/c)^2}
+\\ t' = \frac{(x/c)(v/c) \cos \theta + \sqrt{((x/c)(v/c)\cos\theta)^2 + (1 - (v/c)^2) (x/c)^2}}{1 - (v/c)^2}
+\\ t' = \frac{t(v/c) \cos \theta + \sqrt{(t(v/c)\cos\theta)^2 + (1 - (v/c)^2) t^2}}{1 - (v/c)^2}
+\end{align*}
+
+A light fired at $O(\vec{x},t)$ can be at any $O(\vec{x}+\vec{dx},t+dt)$
+where $dx = c~dt$.
+
+A light that O detects at $O(\vec{x},t)$ could come from any $O(\vec{x}-\vec{dx},t-dt)$ where
+$dx = c~dt$.
+
+Let M has constant O-velocity $\vec{v}$.
+Let M pass $O(0,0)$.
+
+A light that M detected at $O(\vec{v}t,t)$ could come from any $O(\vec{v}t-\vec{dx},t-dt)$ where $dx = c~dt$.
+Therefore O observes that M must detect all such lights at the same M-time that corresponds to O-time $t$.
+Therefore O observes that all such things must be M-simultaneous.
+
+A light that O detected at $O(0,t)$ and M detected at $O(\vec{v}\tau,\tau)$
+could come from any $O(-\vec{dx},t-dt)$ and $O(\vec{v}\tau-\vec{d\xi},d\tau)$ where $dx = c~dt$ and $d\xi = c~d\tau$.
+
+A light that O detected at $O(0,0)$ and M detected at $O(0,\tau)$
+could come from any $O(-\vec{dx},t-dt)$ and $O(\vec{v}\tau-\vec{d\xi},d\tau)$ where $dx = c~dt$ and $d\xi = c~d\tau$.
+
+A light fired from $O(\vec{x},t)$ will be detected by O at $O(0,t)$ and by M at $O(\vec{v}\tau, \tau)$
+where
+\[
+x = ct
+\\
+\norm{\vec{x} - \vec{v}\tau} = c\tau 
+\]
+
+A light that M detected at $M(0,\tau)$ could come from any $M(\vec{d\xi},\tau-d\tau)$ where $d\xi = c~d\tau$.
+A light that O detected at $M(-\vec{v}\tau,\tau)$ could come from any $M(-\vec{v}\tau+\vec{d\xi},\tau-d\tau)$ where $d\xi = c~d\tau$.
+
+\[
+O(0,0) = M(0,0)
+\\ O(\vec{v}t,t) = M(0,\tau)
+\\ M(-\vec{v}\tau,\tau) = O(0,t)
+\]
+
+This is the same case where everything else has constant M-velocity $-\vec{v}$.
+
+A light fired at $M(\vec{x},t)$ can be at any $M(\vec{x}+\vec{dx},t+dt)$ where
+\[
+dx = c~dt
+\]
+according to light speed constancy principle.
+
+However, $M(\vec{x},t)$ and $M(\vec{x}+\vec{v}u,t+u)$ are the same point in space for all $u$.
+If, at $M(0,t+u)$, M detects a light fired from $M(\vec{x},t)$ (thus $u=x/c$),
+then the firer actually was $M(\vec{x}+\vec{v}u,t)$.
+
+Let $O(0,0) = M(0,0)$.
+Let $O(\vec{v}t,t) = M(0,\tau)$.
+
+Suppose that $O$ observes $M$ to be moving according to $\vec{p}$
+where $\vec{p}(t) = \vec{a} + \vec{v}t$ is the O-position of $M$ at O-time $t$.
+A light that $M$ detects at $O(\vec{p}(t),t)$ could come from any $O(\vec{p}(t)-\vec{dx},t-dt)$
+where $dx = c~dt$.
+A light from $O(\vec{x},t)$ will be detected by O at $O(0,t+x/c)$
+and will be detected by M at $O(\vec{a}+\vec{v}(t+u)-\vec{x},t+u)$
+where $\norm{\vec{a}+\vec{v}(t+u)-\vec{x}} = cu$.
+If $\vec{x}=0$ and $t=0$, then it will be detected by M at $O(\vec{a}+\vec{v}u,u)$ where $\norm{\vec{a}+\vec{v}u}=cu$.
+
+A light from $O(0,t)$ will be detected by M at $O(\vec{a}+\vec{v}u,u)$ where $\norm{\vec{a}+\vec{v}u} = c(u-t)$
+A light from $O(\vec{x},0)$ will be detected by M at $O(\vec{a}+\vec{v}t-\vec{x},t)$ where $\norm{\vec{a}+\vec{v}t-\vec{x}} = ct$
+
+\subsection{Frame transformation}
+
+We \emph{describe frame transformation}.
+We can write the equation \(A(t,x) = B(t',x')\) as \(A(t,x) = B(T(t,x), X(t,x))\)
+with unknown functions \(T\) and \(X\).
+We are trying to state \(t'\) in terms of \(t\) and \(x\).
+We write \(A(t,x) = B(t',x')\) to mean that the \(A\)-coordinates \((t,x)\)
+and the \(B\)-coordinates \((t',x')\) refer to the same \(M\)-event.
+The same \(M\)-event can have different \(A\)-coordinates and \(B\)-coordinates.
+
+\subsection{(being written)}
+
+What is the \(A\)-distance traveled in \(A\)-duration \(dt\) by an object moving with constant \(A\)-velocity \(v\)?
+It is \(\norm{v ~ dt} = \norm{v} ~ dt\).
+
+How do we formalize the constancy of the speed of light?
+
+\section{Special relativity}
+
+Special relativity can be derived from Galileo's principle of relativity
+and Einstein's principle of the universality of the speed of light.
+\cite[p.~1]{schutz2009first}
+
+\index{laws!relativity}%
+\index{laws named after people!Galileo's principle of relativity}%
+\emph{Galileo's principle of relativity}: No experiment can measure the absolute velocity of an observer.
+There is no preferred inertial frame.
+There is no special inertial frame.
+There is no absolute motion.
+
+\index{laws!universality of the speed of light}%
+\index{laws named after people!Einstein's principle of the universality of the speed of light}%
+\emph{Einstein's principle of the universality of the speed of light}:
+The speed of light is the same for all inertial (non-accelerating) observers.
+The origin of this postulate is \enquote{the law of electromagnetics is the same at all reference frames}
+or \enquote{the law of physics is the same in all reference frames}.
+Everyone sees the same Maxwell's equations.
+Everyone measures the same speed of light,
+regardless of how fast they are moving.
+Did Einstein know the Michelson\textendash{}Morley experiment?
+
+So what?
+What are the consequences?
+
+Lorentz transformation can be derived from the principle of the universality of the speed of light,
+with the aid of a spacetime diagram?
+What is a spacetime diagram?
+Minkowski diagram.
+% https://en.wikipedia.org/wiki/Minkowski_diagram
+Hermann Minkowski introduced in 1908.
+
+\section{Ramble}
+
+Spacetime metric
+
+% http://en.wikibooks.org/wiki/Special_Relativity/Simultaneity,_time_dilation_and_length_contraction
+
+% http://en.wikisource.org/wiki/On_the_Electrodynamics_of_Moving_Bodies_(1920_edition)
+
+Let $O$ be the type of frames and $M$ be the type of motions.
+Define $m~x~y$ as the motion of $y$ as observed by $x$:
+\[
+m : O \to O \to M.
+\]
+Define $a~x~y$ as adding the motion $x$ to the frame $y$:
+\[
+a : M \to O \to O.
+\]
+A motion has spacetime distance elapsed as measured by a frame:
+\[
+s : O \to M \to S.
+\]
+
+A frame always looks stationary to itself.
+\[
+m~x~x = 0
+\]
+where $0$ is the null motion.
+
+Inverse motion:
+\[
+m~x~y = -m~y~x
+\]
+
+$m$ looks like subtraction.
+
+Transformation of frames.
+\begin{align*}
+m~(T~x)~y &= T^{-1}~(m~x~y)
+\\ m~x~(T~y) &= T~(m~x~y)
+\end{align*}
+
+If the same transform is applied to both frames:
+\[
+m~x~y = m~(T~x)~(T~y)
+\]
+
+The order of transformation does not matter:
+\begin{align*}
+m~(T~x)~(U~y) &= T^{-1}~(U~(m~x~y)) = U~(T^{-1}~(m~x~y))
+\end{align*}
+
+Frame seeing another frame that sees yet another frame.
+\[
+m~x~z = m~x~y + m~y~z
+\]
+where $+$ is motion addition.
+
+We see that motions form a monoid.
+
+This motion is straightforward to imagine: $x~t = 3 t$.
+
+A motion seen from another reference frame.
+
+The space picture:
+We can think of motion as a path in spacetime.
+\[
+\begin{bmatrix}t\\x\end{bmatrix}
+\]
+
+Force-view of pendulum.
+
+\begin{align*}
+F_x &= 0
+\\
+F_y &= -mg
+\end{align*}
+
+It is easier if we change the coordinate system.
+We look from the bob's point of view
+so that $(0,0)$ is always the bob
+and $(0,1)$ is always the direction from the bob to the pivot.
+
+$\theta=0$ represents negative y-axis.
+Positive increment is counterclockwise.
+
+\begin{align*}
+F_{x'} &= -m g \sin \theta
+\\ a_{x'} &= -g \sin \theta
+\\ \frac{\partial^2 \theta}{\partial t^2} &= -g \sin \theta
+\end{align*}
+
+Field-view of pendulum.
+
+\begin{align*}
+P &= m g h
+\\
+K &= \frac{1}{2} m v^2
+\end{align*}
+
+We can describe a manifold by its tangent space.
+
+% https://physics.stackexchange.com/questions/305857/lorentz-transformation-without-constant-speed-of-light-in-vacuum-reasonable/305861#305861
+
+% Cite this paper: Nothing but Relativity
+% https://arxiv.org/pdf/physics/0302045v1.pdf
+% This paper is already cited by the above paper
+% "One more derivation of the Lorentz transformation"
+% https://fenix.tecnico.ulisboa.pt/downloadFile/3779571248372/Levy-Leblond_(76).pdf
+
+% ramble
+
+OpenStax University Physics Volume 3 \cite{openstaxphysics3}
+
+TODO
+Should we move this chapter earlier to introduce coordinates?
+But this chapter should come after electromagnetism?
+
+TODO
+How do we describe the bending of space?
+How do we describe an almost-Euclidean curved space?
+The curvature of space?
+By the metric?
+
+(Rewrite: simultaneity hypersurface)
+An event is a point in spacetime.
+Let \(A,B,O\) be spatial points.
+Two points \(A\) and \(B\) are \emph{\(O\)-simultaneous} iff a light fired from \(O\) reaches \(A\) and \(B\) at the same \(O\)-time.
+If we are stationary, then our simultaneity hypersurface is a hypersphere.
+
+A world line is a one-dimensional manifold in \(M\).
+
+If \(A\) measures that a light has moved by spatial distance \(dx\), then \(A\)'s clock will have advanced by \(dt = dx / c\).
+
+If \(A\) emits a light, and waits until a time interval of \(dt\) elapsed in his clock, then he will measure that the light has traveled a distance of \(c~dt\).
+
+If \(A\)'s clock measures that a time interval of \(dt\) has elapsed, then the light will have moved by spatial distance \(dx = c ~ dt\).
+
+%https://en.wikipedia.org/wiki/Postulates_of_special_relativity#Mathematical_formulation_of_the_postulates
+Pseudo-Riemannian manifold
+%https://en.wikipedia.org/wiki/Relativity_of_simultaneity#Accelerated_observers
+radar-time/distance definition
+
+The distance of an event \(A\) from another event \(B\) is the time required by light to reach \(B\) from \(A\).
+
+From the point of view of the moving observer, he is stationary, and it is the world (everything else) that is moving towards him with velocity \(-v\). If he fire a ball of light, then after he measures time \(t\), then...
+
+%https://en.wikipedia.org/wiki/Bondi_k-calculus
+%https://en.wikipedia.org/wiki/Rapidity
+
+%https://physics.stackexchange.com/questions/305857/lorentz-transformation-without-constant-speed-of-light-in-vacuum-reasonable/305861#305861
+
+\section{Spacetime diagram and world-lines}
+
+What is the coordinate system of an observer moving with constant velocity \(v\)?
+
+A spacetime diagram represents the worldview of an observer?
+Consider a spacetime diagram with one time dimension and one space dimension.
+A point \((t,x)\) represents an event that occurs at time \(t\) and position \(x\) according to \(O\).
+The horizontal is space coordinate \(x\).
+The vertical is time coordinate \(t\).
+Each event has a spacetime coordinate \((t,x,y,z)\).
+
+Let \(A\) be at 0.
+A light coming from a distance \(x\) from \(A\) will reach \(A\) after \(x/c\) time.
+
+If \(A\) fires a light, let the light \(A\)-velocity be \(c\)
+(a vector whose magnitude is the speed of light),
+then after \(A\)-time-interval \(dt\),
+the light will have traveled an \(A\)-distance of \(\norm{c ~ dt}\).
+But \(B\) sees \(A\)-velocity \(c'\) and the light has traveled an \(A\)-distance of \(\norm{c' ~ dt - v ~ dt}\) from \(B\).
+
+Speed is distance divided by time.
+
+We can measure distance and time:
+fire a light, and wait for its reflection to come back.
+If \(t\) time elapsed until we measure the reflection, then the round-trip distance traveled by the light is \(ct\).
+
+\emph{The same point in spacetime is assigned different coordinates.}
+
+How do we know that two different coordinate tuples refer to the same point in spacetime?
+
+Let \(M\) be the event space.
+An event is a 4-tuple \((t,x,y,z) \in \Real^4\).
+A coordinate system is a bijective mapping \(\Real^4 \to M\).
+Let \(C_A\) and \(C_B\) be coordinate systems.
+The same event \(e = C_A^{-1}(p_A) = C_B^{-1}(p_B)\).
+How can we know that \(p_A\) and \(p_B\) map to the same event?
+
+If \(A\) measures a constant-velocity object at \(C_A^{-1}(t_1,x_1)\) and \(C_A^{-1}(t_2,x_2)\),
+then the velocity of the object is \(C_A^{-1}\left(\frac{x_2-x_1}{t_2-t_1}\right)\).
+
+Two observers \(B\) and \(C\) move with the same \(A\)-velocity \(v\).
+\(B\) fires a light to \(C\).
+
+Let \(e_k\) be \(k\)'s coordinate system.
+Thus \(e_A p = e_B q\) means that \(p\) and \(q\) happen at the same point in spacetime.
+
+An observer is a coordinate system?
+
+The \emph{\(A\)-world-line} of an object \(P\) moving with constant \(A\)-velocity \(v\)
+is \( wlPA = \{ (t, x_0 + v t) ~|~ t \in \Real \} \)
+where \(x_0\) is where the object is at \(A\)-time 0.
+That line is the trajectory of \(P\) in \(A\)'s coordinate system.
+Iff \(P\) is a light, then \(\norm{v} = c\).
+
+TODO How do we add velocities in special relativity?
+
+\section{What?}
+
+An observer brings a clock and a light detector with him.
+He determines the location
+of another object by measuring how long his clock elapses
+between his firing a light and his detecting its reflection.
+If he fires a light with direction $\hat{x}$
+when his clock says $t$ and
+detects its reflection with direction $-\hat{x}$ when his clock says $u$,
+then he infers that his light hit the object when his clock said $(t+u)/2$,
+and he infers that the object was at $\hat{x} c(u-t)/2$ when his light hit the object;
+he assumes that the speed of light is constant.
+
+An observer measures the velocity of another object by firing two lights:
+the first with direction $\hat{x}$ when his clock says $t$,
+and the second with direction $D\hat{x}$ ($\hat{x}$ rotated a little) when his clock says $t + dt$.
+If he detects the first reflection when his clock says $u$
+and he detects the second reflection when his clock says $u + du$,
+then he infers that his first light hits the object at $\hat{x} c(u-t)/2$ when his clock says $(t+u)/2$
+and his second light hits the object at $D\hat{x} c(u-t+du-dt)/2$ when his clock says $(t+dt+u+du)/2$,
+and therefore he infers that the object has displaced by
+$D\hat{x} c(u-t+du-dt)/2 - \hat{x} c(u-t)/2$
+while his clock has elapsed by $(dt+du)/2$.
+We rearrange the displacement:
+\begin{align*}
+& D\hat{x} c(u-t+du-dt)/2 - \hat{x} c(u-t)/2
+\\ &= \frac{c\hat{x}}{2} ((u-t+du-dt)D - (u-t)I)
+\\ &= \frac{c\hat{x}}{2} ((u-t)(D-I) + (du-dt)D)
+\end{align*}
+therefore he measures that the object's average velocity between $t$ and $t+dt$ was:
+\begin{align*}
+&\frac{\frac{c\hat{x}}{2} ((u-t)(D-I) + (du-dt)D)}{(dt+du)/2}
+\\ &= \frac{c\hat{x} ((u-t)(D-I) + (du-dt)D)}{dt+du}
+\end{align*}
+which becomes this if $D=I$ ($\vec{v} \cdot \hat{x} = 0$):
+\begin{align*}
+&\frac{\frac{c\hat{x}}{2} ((u-t)(D-I) + (du-dt)D)}{(dt+du)/2}
+\\ \vec{v} &= \frac{du-dt}{du+dt} c \hat{x}
+\\ -v/c &= \frac{du-dt}{du+dt}
+\\ (du+dt) v/c &= dt-du
+\\ (1+v/c)du &= (1-v/c)dt
+\\ \frac{du}{dt} &= \frac{1-v/c}{1+v/c} = \frac{c-v}{c+v}
+\end{align*}
+
+When he detects a light when his clock says $t$,
+he knows the direction where the light is going ($\hat{x}$),
+and thus he knows the direction the light came from ($-\hat{x}$),
+but he does not know where exactly in his spacetime whence the light originates;
+the light could come from any $\hat{x}u$ when his clock said $t-u$, for all real $u$.
+
+Now we introduce coordinate systems.
+O can describe an event in his O-spacetime coordinate $(t,x,y,z)$,
+and P can describe the same event in his P-spacetime coordinate $(t',x',y',z')$.
+
+An event happens at O-spacetime point P iff
+O would instantaneously observe the event if he were at P.
+If a light is fired from $(t,x,y,z)$ towards O,
+then he will detect it at $(t+\sqrt{x^2+y^2+z^2}/c,0,0,0)$.
+The set of points that are O-simultaneous at O-time $t$ is $\{(t,x,y,z) ~|~ x,y,z\in\mathbb{R}\}$.
+
+Suppose that M has a ruler.
+One tip, A, is at M.
+The other tip, B, is at $\vec{x}$.
+Event C: At M-time $t_0$, M fires a light from A.
+Event D: At M-time $t_1$, the light hits B and reflects.
+Event E: At M-time $t_2$, the reflection arrives at A.
+The M-length of the ruler can be found from $\norm{\vec{x}} = c~(t_2-t_0)/2$.
+
+Suppose that O sees M with constant velocity $\vec{v}$.
+
+% http://www.pbs.org/wgbh/nova/blogs/physics/2014/04/how-many-dimensions-does-the-universe-really-have/
+
+If something travels in O-spacetime from $(t,x,y,z)$ to $(t+dt,x+dx,y+dy,z+dz)$,
+then its velocity can be found as follows:
+\[
+(dx)^2 + (dy)^2 + (dz)^2 = v^2~(dt)^2.
+\]
+If that thing is light then $v=c$.
+
+The light-distance between two points in spacetime:
+\[
+(ds)^2 = (dx)^2 + (dy)^2 + (dz)^2 - c^2~(dt)^2.
+\]
+
+An observer exists as a point in space.
+Given a point, he can measure his distance to it.
+Given two points, he can measure his distance to each;
+he can measure the distance between them;
+he can measure the angle formed by the points through him;
+he can determine if they lie in a line;
+he can calculate the area enclosed by those points and him.
+
+% European Journal of Physics
+% Relativity, H. Bondi
+% http://iopscience.iop.org/article/10.1088/0034-4885/22/1/304
+% Nothing but relativity, redux
+% http://iopscience.iop.org/article/10.1088/0143-0807/28/6/011/meta
+% Lorentz transformations with arbitrary line of motion
+% http://iopscience.iop.org/article/10.1088/0143-0807/28/2/004
+
+% The principle of relativity and the indeterminacy of special relativity
+% http://iopscience.iop.org/article/10.1088/0143-0807/29/1/004
+
+\footnote{\url{https://en.wikipedia.org/wiki/Orbital_decay}}%
+\footnote{\url{https://en.wikipedia.org/wiki/Gravitational_wave}}%
+\footnote{\url{https://en.wikipedia.org/wiki/Two-body_problem_in_general_relativity}}
+
+\footnote{\url{https://en.wikipedia.org/wiki/Newtonian_motivations_for_general_relativity}}
+
+Somatogravic illusion
+\footnote{\url{http://aviationknowledge.wikidot.com/aviation:somatogravic-illusion}}
+
+Brans-Dicke theory
+
+\footnote{\url{https://en.wikipedia.org/wiki/Hafele\%E2\%80\%93Keating_experiment}}%
+\footnote{\url{https://en.wikipedia.org/wiki/Ives\%E2\%80\%93Stilwell_experiment}}%
+\footnote{\url{https://en.wikipedia.org/wiki/Kennedy\%E2\%80\%93Thorndike_experiment}}

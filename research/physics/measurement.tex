@@ -1,0 +1,71 @@
+\chapter{Measurement}
+
+\paragraph{Quantity, magnitude, and unit}
+
+The quantity 1 kg has magnitude 1 and unit kg (kilogram).
+The magnitude is a number.
+The quantity 2 kg is twice 1 kg.
+The quantity 10 kg is ten times 1 kg.
+
+\section{SI units and prefixes}
+
+SI stands for \emph{syst\`eme international d'unit\'es}
+(international system of units).
+
+The units are grouped into two kinds: base units and derived units.
+Base units don't depend on other units.
+Derived units depend on other units.
+Example base units are kilogram (kg), meter (m), and second (s).
+Example derived units are newton (N, which is \si{kg.m.s^{-2}})
+and joule (J, which is \si{N.m}).
+
+A prefix can be put before a unit to enlarge or shrink it.
+Example prefixes are
+\si{\micro} (micro, \(10^{-6}\)),
+m (milli, \(10^{-3}\)),
+k (kilo, \(10^3\)),
+M (mega, \(10^6\)).
+The quantities \SI{1}{kg}, \SI{1000}{g}, and \SI{1000000}{mg} are the same quantity.
+
+Some units are rarely used.
+An example rare unit is megagram (1 million grams).
+
+For the complete list of SI units and prefixes, search the Internet%
+\footnote{\url{https://en.wikipedia.org/wiki/International_System_of_Units\#Units_and_prefixes}}%
+\footnote{\url{https://physics.nist.gov/cuu/Units/units.html}}%
+.
+
+\paragraph{A psychological effect}
+Someone sounds heavier in grams than in kilograms.
+For example, one friend of mine weighs one hundred \emph{thousand} grams.
+We compare numbers more easily than we compare units.
+
+\section{Writing numbers in scientific notation}
+
+% https://en.wikipedia.org/wiki/Significant_figures
+An example number in scientific notation is \( 1.23 \times 10^{50} \).
+Without scientific notation, we would need to write out that number with its 47 trailing zeros.
+
+The number \( 1.23 \times 10^{50} \) has three significant figures.
+
+\section{Reporting a measurement and its uncertainty}
+
+How do we measure quantities?
+How do report a measurement?
+
+Every measurement has an uncertainty.
+Tools have limited precision.
+We report a measurement by writing \SI{1.00(5)}{cm} or \SI[separate-uncertainty]{1.00+-0.05}{cm}
+to mean that the actual quantity is somewhere between 0.95 cm and 1.05 cm.
+We don't know the actual quantity.
+We only know that it's between those.
+
+\section{Sanity check with dimensional analysis}
+
+Dimensional analysis can sanity-check a calculation.
+If the unit is wrong, the calculation is wrong.
+If the unit is right, the calculation may be right.
+
+Dimensional analysis is a test.
+It can detect falsehood.
+It can't prove correctness.

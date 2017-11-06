@@ -1,0 +1,140 @@
+% Usage:
+%
+% \ExerciseAnswer{exercise1}{answer1}
+% \ExerciseAnswer{exercise2}{answer2}
+% ...
+% \ShowAnswers
+
+\newcounter{ExerciseCounter}
+
+\newcommand\ExercisePrefix{Exercise}
+\newcommand\AnswerPrefix{Answer}
+\newcommand\ResearchQuestionPrefix{Unanswered Question}
+\newcommand\LabelSpacing{0.5em}
+
+% page number of the first exercise whose answer has not been shown
+% to ensure that the answer is printed at a different page
+\newcount\LastExercisePageNumber
+\LastExercisePageNumber=0
+
+% TODO use token list instead of box?
+\newbox\AnswerBox
+\def\AppendAnswer#1{\setbox\AnswerBox=\vbox{\leavevmode\unvbox\AnswerBox\par\noindent#1\par}}
+
+%LaTeX undefines \pageno?
+
+\newif\ifAllowExerciseAnswerSamePage
+\AllowExerciseAnswerSamePagetrue
+% \AllowExerciseAnswerSamePagefalse
+
+\def\ShowAnswers{%
+    \edef\ExPageNumber{\the\LastExercisePageNumber}%
+    \edef\MyPageNumber{\value{page}}%
+    \ifAllowExerciseAnswerSamePage\else%
+        \ifnum\ExPageNumber=\MyPageNumber\relax%
+            \errhelp{%
+                Move this call of ShowAnswers down far enough.%
+            }%
+            \errmessage{%
+                An exercise and its answer are in the same page.%
+            }%
+        \fi%
+    \fi%
+    \unvbox\AnswerBox\par%
+}
+
+\newcommand\MakeLabel[1]{\textbf{#1}\hspace{\LabelSpacing}}
+
+\newcommand*\ExerciseAnswer[2]{%
+    \stepcounter{ExerciseCounter}%
+    \LastExercisePageNumber=\value{page}%
+    \AppendAnswer{\MakeLabel{\AnswerPrefix{ }\theExerciseCounter}#2}%
+    \noindent\MakeLabel{\ExercisePrefix{ }\theExerciseCounter}#1\par%
+}
+
+\newcommand\ResearchQuestion[1]{%
+    \stepcounter{ExerciseCounter}%
+    \noindent\MakeLabel{\ResearchQuestionPrefix{ }\theExerciseCounter}#1\par%
+}
+
+\newcommand\ExercisePage[1]{%
+    \pagebreak%
+    #1%
+    \vfill%
+    \ShowAnswers%
+    \pagebreak%
+}
+
+\def\parenthesize#1{\left(#1\right)}% this command surrounds #1 with auto-sized parentheses
+
+\long\def\WithSemanticMarkup#1{% internal macro
+    \def\apply##1##2{##1\parenthesize{##2}}% function application such as \apply{f}{x}
+    #1
+}
+
+\def\Formula#1{% an environment containing one numbered formula
+    \newif\ifNumber\Numbertrue% whether the equation should be numbered
+    \def\NoNumber{\Numberfalse}% can be used in #1
+    \WithSemanticMarkup{%
+        \begin{equation}
+            #1
+            \ifNumber\else\nonumber\fi
+        \end{equation}
+    }
+}
+
+\def\Matrix#1{\begin{bmatrix}#1\end{bmatrix}}
+
+\long\def\UnorderedList#1{\begin{itemize}#1\end{itemize}}
+\long\def\OrderedList#1{\begin{enumerate}#1\end{enumerate}}
+
+% \Hyperlink{URL}{caption}
+\def\Hyperlink#1#2{[#2]\footnote{\url{#1}}}
+
+\def\ChapterRef#1{Chapter~\ref{#1}~(p.~\pageref{#1})}
+\def\SectionRef#1{\S\ref{#1}~(p.~\pageref{#1})}
+\def\ParenRef#1{(\S\ref{#1},~p.~\pageref{#1})}
+
+\def\Table#1{
+    % private
+    \def\TheCaption{}
+    \def\TheColumns{}
+    \def\TheHead{}
+    \def\TheBody{}
+    \def\TheLabel{}
+    \def\BeginTabular{\begin{tabular}}
+    \def\EndTabular{\end{tabular}}
+    \def\Empty{}
+    % public
+    \def\Caption##1{\def\TheCaption{##1}}
+    \def\Head##1{\def\TheHead{##1}}
+    \def\Body##1{\def\TheBody{##1}}
+    \def\Columns##1{\def\TheColumns{##1}}
+    \def\Label##1{\def\TheLabel{##1}}
+    #1
+    \ifx\TheColumns\Empty\errmessage{Columns is required}\fi
+    \ifx\TheHead\Empty\errmessage{Head is required}\fi
+    \ifx\TheBody\Empty\errmessage{Body is required}\fi
+    \ifx\TheCaption\Empty\errmessage{Caption is required}\fi
+    \setlength\heavyrulewidth{1.0pt}
+    \setlength\lightrulewidth{0.5pt}
+    \begin{table}[h]
+        \caption{\TheCaption}
+        \ifx\TheLabel\Empty\else\label{\TheLabel}\fi
+        \edef\TheColumnsGroup{{\TheColumns}}
+        \centering
+        % \begin{tabular}{\TheColumns} doesn't work
+        \expandafter\BeginTabular\TheColumnsGroup
+            \toprule
+            \TheHead
+            \\
+            \midrule
+            \TheBody
+            \\ \bottomrule
+        \EndTabular
+    \end{table}
+}
+
+\def\TableRef#1{Table~\ref{#1}}
+\def\FigureRef#1{Figure~\ref{#1}}
+\def\FIXME#1{\noindent\MakeLabel{FIXME}#1\par}

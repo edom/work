@@ -1,0 +1,292 @@
+\chapter{Mathematics 1}
+
+Lambda calculus is a set of rules for manipulating expressions.
+
+\section*{Accepting mathematics}
+
+If you love mathematics, skip this section.
+This is written for people who think
+they can understand physics without mathematics.
+
+\paragraph{Mathematics is not only formulas}
+Mathematics is about thinking.
+Ideas are important.
+
+\paragraph{Mathematics is an unavoidable tool for physics}
+
+Mathematics has advanced physics.
+Mathematics is here to stay.
+
+If you don't want to learn at least some mathematics,
+don't waste your time learning physics.
+Without math, you will forever be physicist-wannabe.
+
+For physicists, math is a tool.
+Physicists use math.
+Carpenters use saws.
+Blacksmiths use hammers.
+
+You don't need to love math.
+Just don't hate it.
+A carpenter neither loves nor hates his hammer;
+he is simply not attached to it.
+He is dispassionate, indifferent, neutral, uncaring.
+He has no reason to hate it as long as it does what he expects it to do.
+
+If you can understand English,
+then you can understand the math used in this book.
+It will take time, and you will have to think hard, but it is surmountable.
+If you have tried but you still can't understand,
+let us know that we have failed to write clearly.
+
+\paragraph{Mathematics has become a necessity for physics}
+
+We can really understand 20th century physics only if
+we are somewhat fluent in the needed mathematics.
+Without mathematics, our understanding is superficial and vague,
+and all we can do is impress others who are even more clueless.
+
+\paragraph{Mathematics needs mental effort}
+
+Understanding triangles is like lifting a 1 kg weight.
+Understanding vectors is like lifting a 2 kg weight.
+Understanding manifolds is like lifting a 20 kg weight.
+Lifting is uncomfortable,
+but getting used to it makes it less comfortable,
+until it becomes no big deal.
+The only way to get used to something is by repeating it.
+Don't try too hard to understand mathematics; just try to get used to it.
+If you are hell-bent on building your body,
+you won't minding lifting weights, no matter how heavy they are.
+Now you just have to get yourself hell-bent on building your brain.
+Physical training builds muscles.
+Mental training builds brains.
+Muscles can be sexy.
+Brains can be sexy too.
+A book is a mental gym.
+If that motivates you.
+
+Fluffy text ends here.
+The rest of the book requires hard thinking.
+Begin the journey!
+
+\section{Reading mathematical notation}
+
+\paragraph{Mathematical notation is concise English}
+
+When you read an English sentence mixed with mathematical notation,
+replace the notation with an English fragment that makes the sentence grammatical.
+
+\index{definitions!overloading a symbol}%
+\paragraph{Overloading}
+
+To overload a symbol is to give it different meanings in different contexts.
+For example, the same letter \(\Real\) means a set in \enquote{\(x \in \Real\)}
+but means a type in \enquote{\(x : \Real\)}.
+We write \(\Real\) for both the set of all real numbers and the type of a real number.
+
+\TableRef{tab:overloading} shows overloading.
+Note how the same notation \(x,y:\Real\) reads differently.
+
+\Table{
+    \Label{tab:overloading}
+    \Caption{Reading mathematical notation}
+    \Columns{p{0.4\textwidth}p{0.4\textwidth}}
+    \Head{notation & English}
+    \Body{
+        Let \(x,y:\Real\).
+        &
+        Let \(x\) be a real number and \(y\) be a real number.
+        \\
+        \midrule
+        Given \(x, y:\Real\), we can compute \(z:\Real\) between them.
+        &
+        Given a real number \(x\) and a real number \(y\), we can compute a real number \(z\) between them.
+    }
+}
+
+\section{Lambda calculus: rules for forming and reducing expressions}
+
+(Do we really need to tell the reader about lambda calculus?)
+
+In mathematics, a calculus is a set of rules.
+(\enquote{Calculus} means \enquote{pebble}.
+How did its meaning change that much?)
+
+Lambda calculus is a set of rules for forming and reducing expressions.
+An expression is a description of a mathematical object.
+
+\paragraph{Formation rules}
+
+An expression is a variable, a function, or an application.
+
+A variable is an irreducible expression.
+
+If \(a\) is a variable and \(b\) is an expression,
+then \(a \to b\) is a function.
+
+If \(a\) and \(b\) are expressions,
+then \((a)(b)\) is an application.
+We omit the parentheses if such omission doesn't confuse us.
+We do application from left to right: \(abcd\) means \(((ab)c)d\).
+
+\paragraph{Substitution}
+
+The notation \( E[x:=y] \) means the expression \(E\)
+but with all free occurrences of \(x\) replaced by \(y\).
+
+\paragraph{Reduction rules}
+
+We can reduce an application \((a)(x \to y)\) to \(y[x:=a]\).
+
+We can't reduce anything else.
+
+\paragraph{Question}
+
+Why do we bother to make up expressions, only to reduce them?
+(Hint: Computers.)
+
+\paragraph{Typed lambda calculus}
+We can further constraint the rules using types in the next section.
+
+\section{Describing existence using type theory}
+
+Every value has a type.
+
+Every expression has a type.
+
+Every variable has a type.
+
+The type of an expression reminds us about what it is.
+For example, we write \(x : \Nat\) to mean that \(x\) is a natural number.
+
+\index{definitions!type}%
+We write \( x : T \) to mean ``the value \(x\) has the type \(T\)''.
+We can read \(x:T\) as ``\(x\) is a \(T\)''.
+
+We write \( x, y : T \) to shorten ``\( x : T \) and \( y : T \)''.
+
+Variable...
+
+Free variable and bound variable...
+
+Let \(x:T\).
+Then the answer to the question \enquote{What is \(x\)?} is \enquote{\(x\) is a \(T\)}.
+We say that \(x\) inhabits \(T\).
+We also say that \(x\) is an inhabitant of \(T\).
+
+\paragraph{Evaluating an expression to a value}
+
+Example: the expression \(1+2\) evaluates to the value \(3\)
+according to high school arithmetic.
+
+\paragraph{Tuples}
+
+\index{definitions!tuple}%
+A tuple has a fixed number of components.
+An \(n\)-tuple has \(n\) components.
+Some examples of tuples are \( (1,2,3) \) and \( (t_1,t_2) \).
+
+\index{definitions!tuple component}%
+The \(k\)th component of the tuple \(t\) is written \( t_k \) with \(k\) beginning from one.
+For example, if \( t = (0,1) \), then \( t_1 = 0 \) and \( t_2 = 1 \).
+
+\section{Converting between English and logic}
+
+Every popular human language contains logic.
+
+\( p \wedge q \)
+
+\section{Describing collections using set theory}
+
+\index{definitions!``practically''}%
+In this book, \enquote{practically} means \enquote{wrong but useful}.
+We can be practical when we aren't dealing with the foundation of math.
+
+\index{definitions!set}%
+We can think of a \enquote{set} as an unordered collection of things without duplicates.%
+\footnote{Mathematicians don't define \enquote{set} as such because it would lead to Russell's paradox.}
+\enquote{Unordered} means that \( \{a,b\} \) and \( \{b,a\} \) are the same set.
+We say that \( a \) is an element of that set.
+We notate that as \( a \in \{a,b\} \).
+
+We can also define a set by a predicate or an English description.
+An example is the set of all 26 Latin capital letters;
+some of its elements are A, B, and C.
+
+\paragraph{Working with sets}
+
+TODO intersection \(A \cap B\),
+union \(A \cup B\),
+subtraction \(A - B\), ...
+
+\paragraph{Using the set-builder notation to define sets using predicates}
+
+\footnote{\url{https://en.wikipedia.org/wiki/Set-builder_notation}}
+
+\( \{ x ~|~ P(x) \} \)
+
+\( \{ x : P(x) \} \)
+
+\paragraph{Relating set operations and logic operations}
+
+Set intersection corresponds to logical conjunction.
+\[
+\{ x ~|~ a(x) \} \cap \{ x ~|~ b(x) \} = \{ x ~|~ a(x) \wedge b(x) \}
+\]
+
+Set union corresponds to logical disjunction.
+\[
+\{ x ~|~ a(x) \} \cup \{ x ~|~ b(x) \} = \{ x ~|~ a(x) \vee b(x) \}
+\]
+
+\section{Working with equations}
+
+An equation \(a = b\) means that every \(a\) can be replaced with \(b\)
+and every \(b\) can be replaced with \(a\).
+
+Equations help us program computers.
+
+An equation relates several parameters.
+
+An equation can also be thought as describing a relationship, a constraint, something that may or may not be satisfied.
+
+\paragraph{Substituting equal things}
+
+\section{Working with numbers}
+
+\paragraph{Natural numbers}
+
+\paragraph{Real numbers}
+
+% https://www.quora.com/Why-are-real-numbers-called-%E2%80%98real%E2%80%99
+\index{definitions!real number}%
+We write \( \Real \) to mean the set of real numbers\footnote{%
+It's not that other numbers are fake. It's just a name that has stuck.%
+}.
+Example elements are \( 123 \), \( -12.34 \), \( 1/2 \),
+\( \sqrt{2} \), \( 2^{0.1} \), \( \log 5 \), \( \sin 1 \), and \( \sum_{k=0}^\infty 3^{-k} \).
+We assume that you know real number arithmetics.
+
+\paragraph{Basic arithmetics}
+
+We expect you to be able to add, subtract, multiply, and divide two one-digit numbers (from 0 to 9).
+Primary education should have taught you this.
+
+\footnote{\url{https://en.wikipedia.org/wiki/Arithmetic\#Arithmetic_operations}}%
+\footnote{\url{https://en.wikipedia.org/wiki/Addition\#Addition_table}}%
+\footnote{\url{https://en.wikipedia.org/wiki/Multiplication_table}}%
+
+\paragraph{Using the summation notation}
+
+If \(a < b\), then
+\[
+\sum_{k=a}^b f(k) = f(a) + f(a+1) + \ldots + f(b-1) + f(b)
+\]
+
+If \(K = \{ k_0, k_1, \ldots, k_n \}\) is a set, then
+\[
+\sum_{k \in K} f(k) = f(k_0) + f(k_1) + \ldots + f(k_n)
+\]
+
+\( \sum_k f(k) \) is a notation of the sum of all \(f(k)\) for each value that \(k\) can take. The meaning depends on context. For example, if \(v\) is a tuple with three components, then \(\sum_k v_k\) means \(v_1 + v_2 + v_3\).

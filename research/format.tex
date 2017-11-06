@@ -1,98 +1,169 @@
-% deprecated
-\newcommand\N{\mathbb{N}}
-\newcommand\Nat{\mathbb{N}}
-% deprecated
-\newcommand\R{\mathbb{R}}
-\newcommand\Real{\mathbb{R}}
-\newcommand\Bool{\textsf{Bool}}
-\newcommand\Int{\mathbb{Z}}
-\newcommand\Rational{\mathbb{Q}}
-\newcommand\Complex{\mathbb{C}}
-% complex conjugate
-\newcommand\conjstar[1]{#1^*}
-\newcommand\conjbar[1]{\bar{#1}}
-\newcommand\conj\conjbar
-\newcommand\abs[1]{|#1|}
-\newcommand\Arg{\mathrm{Arg}}
-\theoremstyle{definition}
-\newtheorem{m:def}{Definition}
-\theoremstyle{plain}
-\newtheorem{m:thm}{Theorem}
-\newtheorem{m:lem}{Lemma}
-\newcommand\bmat[1]{\begin{bmatrix}#1\end{bmatrix}}
-\newcommand\fun[1]{\textsf{#1}}
-% deprecated
-\newcommand\func[1]{\textsf{#1}}
-\newcommand\fid{\func{id}}
-% set builder notation
-\newcommand\sbn[2]{\{#1~|~#2\}}
-\newcommand\SysTmp{\textsf{SysTmp}}
-\newcommand\Regex{\fun{Regex}}
-\newcommand\fnull{\fun{null}}
-\newcommand\just{\fun{just}}
-\newcommand\fempty{\fun{empty}}
-\newcommand\concat{\fun{concat}}
-\newcommand\union{\fun{union}}
-\newcommand\many{\fun{many}}
-\newcommand\match{\fun{match}}
-\newcommand\InfList{\fun{InfList}}
-\newcommand\List{\fun{List}}
-\newcommand\false{\fun{false}}
-\newcommand\true{\fun{true}}
-\newcommand\isNull{\fun{isNull}}
-\newcommand\dist{\fun{dist}}
-\newcommand\stay{\fun{stay}}
-\newcommand\fleft{\fun{left}}
-\newcommand\fright{\fun{right}}
-\newcommand\head{\fun{head}}
-\newcommand\uncons{\fun{uncons}}
-\newcommand\fwrite{\fun{write}}
-\newcommand\jump{\fun{jump}}
-\newcommand\after{\fun{after}}
-\newcommand\phase{\fun{phase}}
-\newcommand\fpath{\fun{path}}
-\newcommand\dir{\fun{dir}}
-\newcommand\removeLast{\fun{removeLast}}
-\newcommand\cons{\fun{cons}}
-\newcommand\snoc{\fun{snoc}}
-\newcommand\last{\fun{last}}
-\newcommand\tail{\fun{tail}}
-\newcommand\tape{\fun{tape}}
-\newcommand\halting{\fun{halting}}
-\newcommand\foutput{\fun{output}}
-\newcommand\flist{\fun{list}}
-\newcommand\species[1]{\textit{#1}}
-\newcommand\ob{\fun{ob}}
-\newcommand\norm[1]{\lVert#1\rVert}
-\newcommand\fhom{\fun{hom}}
-\newcommand\normalize{\fun{normalize}}
-\newcommand\Var{\fun{Var}}
-\newcommand\map{\fun{map}}
-\newcommand\invmap{\fun{invmap}}
-\newcommand\Set{\fun{Set}}
-\newcommand\any{\fun{any}}
-% probability
-\renewcommand\Pr{P}
-\newcommand\Expect[1]{\mathbb{E}[#1]}
-\newcommand\estimate[1]{\hat{#1}}
-\newcommand\Bernoulli{\text{Bernoulli}}
-\newcommand\Binomial{\text{Binomial}}
-\newcommand\RV{\fun{RV}}
-\newcommand\kolmogorov{\fun{kolmogorov}}
-\newcommand\minimum{\fun{minimum}}
-\newcommand\minimumBy{\fun{minimumBy}}
-% deprecated; function body
-\newcommand\fb[2]{\ensuremath{\lambda #1. #2}}
-\newcommand\emptystr{\epsilon}
-% vector calculus
-\newcommand\fgrad{\fun{grad}}
-\newcommand\fdiv{\fun{div}}
-\newcommand\fcurl{\fun{curl}}
-% other
-\newcommand\Bit{\fun{Bit}}
-\newcommand\Bits{\fun{Bits}}
-\newcommand\argmin{\operatorname{arg\,min}}
-\newcommand\sgn{\operatorname{sgn}}
-% transpose
-\newcommand\tp{\operatorname{tp}}
-\newcommand\fspan{\operatorname{span}}
+% xelatex: use "\ " instead of "~", and use "\textendash" instead of "--"
+\usepackage{microtype}
+% mathematics
+\usepackage{amsmath}
+\usepackage{amsfonts}
+% amsthm must be loaded before newtxmath due to \openbox conflict
+\usepackage{amsthm}
+%\usepackage{amssymb}
+% no need to load amsfonts and amssymb if using mathdesign (included via format-lato)
+% <fonts>
+% Latin Modern is thinner than Libertine.
+% Libertine is thinner than New Century (fouriernc).
+% See also http://www.icl.utk.edu/~mgates3/docs/latex-fonts.pdf
+%\usepackage{lmodern}
+% URW Nimbus Sans: baseline of small I and L don't line up
+%\usepackage[scaled]{helvet}
+%\renewcommand*\familydefault{\sfdefault}
+\let\OriginalSfdefault=\sfdefault% newtx clobbers sfdefault
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+%\usepackage{newpxtext}
+%\usepackage{newpxmath}
+\let\sfdefault=\OriginalSfdefault
+%\input{format-erewhon}
+%\input{format-libertine}
+%\usepackage{fouriernc}
+%\usepackage{fourier}
+% sans-serif fonts
+%\usepackage[default,scale=0.96875]{lato}
+%\usepackage[default]{lato}
+%\usepackage[sfdefault]{quattrocento}
+%\usepackage[sfdefault]{cabin}
+%\usepackage[sfdefault]{cabin}
+%\usepackage[default,scaled=0.96875]{roboto}
+%\usepackage[bitstream-charter,scaled=1.03125]{mathdesign}
+%\usepackage[default,scaled=0.9375]{roboto}
+% <main-font>
+% we pick Computer Modern Bright because it is sans-serif and it has math support
+%\usepackage{lmodern}%thicker than Computer Modern
+%\usepackage{cmbright}
+% arev has bold-italic; cmbright doesn't have bold-italic
+%\usepackage{arev}%the other sans-serif fonts with math support
+%\linespread{1.15}% expand line spacing to improve readability of fonts with high x-height; arev is one such font
+%\renewcommand{\sfdefault}{cmbr}% Computer Modern Bright, a sans-serif font
+%\renewcommand{\familydefault}{\sfdefault}
+\usepackage[T1]{fontenc}
+%\usepackage{fontspec}
+%\usepackage{unicode-math}
+% <workaround>
+% https://tex.stackexchange.com/questions/85696/what-causes-this-strange-interaction-between-glossaries-and-amsmath
+%\usepackage{mathspec}
+%\makeatletter % undo the wrong changes made by mathspec
+%\let\RequirePackage\original@RequirePackage
+%\let\usepackage\RequirePackage
+%\makeatother
+% </workaround>
+%\setmainfont[Scale=1]{Arial}
+%\setmainfont[Scale=1]{Arimo}
+%\setmainfont[Scale=1]{Lato}
+%\setmainfont[Scale=1]{Nimbus Sans L}%thinner than Arial
+%\setmainfont[Scale=1]{TeX Gyre Heros}%enhanced Nimbus Sans
+%\setmainfont[Scale=1]{Liberation Sans}%comes with Ubuntu, but thinner than Nimbus Sans
+%\setmainfont[Scale=1]{Roboto}
+%\setmainfont[Scale=1]{CMU Sans Serif}
+%\setmainfont[Scale=1]{Latin Modern Sans}
+% </main-font>
+%\setmonofont[Scale=0.9375]{Liberation Mono}
+%\setmathfont{Latin Modern Math}
+%\DeclareMathSizes{12}{13}{9.75}{7.3125}%tfs, ms, ss, sss; tfs = 12; R = 3/4; R*ms = ss; R*ss = sss;
+%\usepackage[T1]{fontenc}
+%\usepackage[scaled=0.9375]{inconsolata}%15/16
+% </fonts>
+% <if pdflatex> load fontenc before inputenc
+%\usepackage[T1]{fontenc}
+%\usepackage[utf8]{inputenc}
+% </if>
+\usepackage[strict]{csquotes}% \enquote{something} instead of ``something''
+% citation
+\usepackage{cite}
+% indexing
+% put \makeindex before \begin{document}
+% put \printindex where you want the index to be printed
+\usepackage{imakeidx}
+% notes for indexing:
+% (1) end your \index line with a percent sign %, just in case it inserts a rogue space
+% (2) if we use singlepar, we should make sure that there are no more than one exclamation mark in the argument of \index
+\usepackage[columns=2,font=footnotesize,justific=raggedright,columnsep=1em,indentunit=1em,itemlayout=abshang]{idxlayout}
+%
+%
+% hyperlinking; usually should be loaded last
+%
+% final undoes draft given in documentclass
+\usepackage[hidelinks,final]{hyperref}
+%
+% epigraph
+\usepackage{epigraph}
+\renewcommand\epigraphsize{\scriptsize}
+%\setlength\epigraphwidth{0.625\textwidth}
+\setlength\epigraphwidth{0.75\textwidth}
+%
+%
+% for \( and \) inside \section
+\usepackage{fixltx2e}
+%
+% layout
+%
+% page size
+\setstocksize{9in}{6in}
+\settrimmedsize{9in}{6in}{*}
+\setlrmarginsandblock{1.000in}{0.750in}{*}% spine, edge, ratio
+\setulmarginsandblock{0.875in}{0.875in}{*}
+\setheadfoot{2em}{0em}% headheight, footskip
+\setheaderspaces{*}{1em}{*}% headdrop, headsep, ratio
+%\skip\footins=1em
+\checkandfixthelayout
+% SECTION 1.1 BLA BLA -> Section 1.1 Bla bla
+\nouppercaseheads
+%\raggedright
+%\setlength\parindent{2em}
+\raggedbottom
+%%
+%% toc
+%%
+\setlength\cftpartnumwidth{3.0em}
+\setlength\cftchapternumwidth{3.0em}
+\setlength\cftsectionnumwidth{3.0em}
+\setlength\cftsubsectionnumwidth{3.5em}
+\setlength\cftsectionindent{0em}
+\setlength\cftsubsectionindent{3.0em}
+%%
+%% toc arev (big font)
+%%
+%\setlength\cftpartnumwidth{4.0em}
+%\setlength\cftchapternumwidth{4.0em}
+%\setlength\cftsectionnumwidth{4.0em}
+%\setlength\cftsubsectionnumwidth{4.0em}
+%\setlength\cftsectionindent{0em}
+%\setlength\cftsubsectionindent{4.0em}
+% list, itemize, enumerate vertical spaces
+\tightlists
+% beforeparaskip leaves too much empty space
+\setbeforeparaskip{0em}
+% table of contents
+\setsecnumdepth{subsection}
+\maxtocdepth{subsection}
+% section font size
+\setsecheadstyle{\normalsize\bfseries}%\normalsize because we have long section titles
+\setsubsecheadstyle{\normalsize\bfseries}% same size?
+\setbeforesecskip{0.5em}
+\setaftersecskip{0.5em}
+\setbeforesubsecskip{0.5em}
+\setaftersubsecskip{0.5em}
+% chapterprecis
+\setlength\prechapterprecisshift{-1.5em}
+% exercise
+% http://mirror.pregi.net/tex-archive/macros/latex/contrib/exercise/exercise.pdf
+%\usepackage{exercise}
+%\renewcommand\ExerciseName{Exercise}
+%\renewcommand\ExerciseListName{Exercise}
+\usepackage{../exercise}
+%
+% part; memman.pdf p. 80
+%
+\renewcommand\beforepartskip{\vspace*{1em}}
+\renewcommand\midpartskip{\par\vspace*{0em}}
+\renewcommand\afterpartskip{\vspace*{1em}}
+\renewcommand\partnamefont{\Large\bfseries}
+\renewcommand\partnumfont{\Large\bfseries}
+\renewcommand\parttitlefont{\huge\bfseries}

@@ -1,0 +1,366 @@
+\chapter{Real tuple spaces}
+
+Earlier, we defined \enquote{space} as another word for \enquote{set} because we want
+that definition to include every real tuple space.
+
+The set \(\Real^n\) is the set of all real \(n\)-tuples.
+
+The dimension of \(\Real^n\) is \(n\).
+
+An example element of \(\Real^3\) is \((1,2,3)\).
+
+\section{An example basis}
+
+Imagine a flat sheet of paper.
+
+Draw a point \(A\).
+
+Draw a vector named \(i\), from \(A\), \SI{1}{cm} long, pointing right.
+
+Draw another vector named \(j\), also from \(A\), \SI{1}{cm} long, but pointing up.
+
+Thus, the vectors \(i\) and \(j\) are orthogonal.
+
+Then, we declare the basis
+\( e : \Real^2 \to E^2 \) as \( e(x,y) = xi + yj \).%
+
+\section{Cartesian coordinate system}
+
+Let \(E^n\) mean the \(n\)-dimensional Euclidean space.
+
+The \(n\)-dimensional Cartesian coordinate system matches
+a point in \(E^n\) and a point in \(\Real^n\).
+
+\footnote{\url{https://en.wikipedia.org/wiki/Cartesian_coordinate_system}}
+
+For example...
+
+What mapping is drawn in \FigureRef{fig:a-2d-cartesian-coordinate-system}?
+
+\begin{figure}[h]
+    \centering
+    \url{https://en.wikipedia.org/wiki/File:Cartesian-coordinate-system.svg}
+    \caption{A two-dimensional Cartesian coordinate system}
+    \label{fig:a-2d-cartesian-coordinate-system}
+\end{figure}
+
+\section{Example of geometry with numbers: describing a circle in \(\Real^2\)}
+
+Every variable is a real number unless specified otherwise.
+
+Assume a two-dimensional Cartesian coordinate system.
+
+Consider a circle \(C\) with center \((0,0)\) and radius 1.
+That circle can be described in two ways:
+the algebraic description \eqref{eq:set-circle-algebraic},
+and the parametric description \eqref{eq:set-circle-parametric}.
+Both sets have the same members and describe the same circle.
+\begin{align}
+    \label{eq:set-circle-algebraic}
+    C_{\text{algebraic}} &= \{ (x,y) ~|~ x^2 + y^2 = 1 \}
+    \\
+    \label{eq:set-circle-parametric}
+    C_{\text{parametric}} &= \{ (r \cos t, r \sin t) ~|~ t \in [0,2\pi] \}
+\end{align}
+
+The parametric description \eqref{eq:set-circle-parametric}
+tells us that the dimension of \(C\) is one
+because the description uses one parameter \(t\).
+
+\FIXME{Rename \enquote{parametric description} to \enquote{chart}?}
+
+The derivative of the parametric function is the curve's velocity.
+
+A shape's dimension is the number of parameters in its parametric description.
+
+To see that both sets does describe a circle (and the same circle),
+we can plot the graph of both sets.
+
+\section*{Describing a curve parametrically or algebraically}
+
+\paragraph{Using parametric equations}
+
+We can describe a curve with a function of type \( \Real \to \Real^n \).
+For example, we can write \(x(t) = (r \cos t, r \sin t)\) to describe a circle of radius \(r\).
+We can also write the same equation as a set of parametric equations:
+\(x(t) = r \cos t\) and \(y(t) = r \sin t\).
+
+\paragraph{Using algebraic equations}
+
+We can describe a circle as \( \{ (x,y) ~|~ (x,y) \in \Real^2, ~ x^2 + y^2 = r^2 \} \).
+The equation describes a circle because the set of all points satisfying the equation forms a circle.
+
+\paragraph{Comparing the approaches}
+
+The parametric equation of a circle simplifies computing the derivative.
+
+The algebraic equation of a circle simplifies computing the distance.
+
+\section*{Calculating the length of a parametric curve}
+
+Let the function \(x : \Real \to \Real^n\) describe a curve.
+
+Define \(X(T) = \{ x(t) ~|~ t \in T \}\) as the \emph{image of \(T\) under \(x\)}.
+\footnote{\url{https://en.wikipedia.org/wiki/Image_(mathematics)}}
+
+The segment between \(a\) and \(b\) is \( X([a,b]) = \{ x(k) ~|~ a \le k \le b \} \).
+What is the length of this segment?
+
+Divide the curve into many segments.
+Approximate each segment as a straight line segment.
+
+The \emph{arc length}.
+
+The length of the segment of \(x\) in \(T\) is
+\begin{align*}
+    L(x,T) &= \sum_k \norm{x(t_{k+1}) - x(t_k)}
+    \\ &= \sum_k \frac{\norm{x(t_k + h_k) - x(t_k)}}{h_k} \cdot h_k
+    \\ &= \int_T \abs{x'(t)} \dd{t}
+\end{align*}
+
+Wikipedia\footnote{\url{https://en.wikipedia.org/wiki/Arc_length\#Definition_for_a_smooth_curve}}
+explains how to derive that equation.
+The key is to multiply by \(h_k / h_k\).
+
+\footnote{\url{https://en.wikipedia.org/wiki/Arc_length}}%
+\footnote{\url{https://en.wikipedia.org/wiki/Curve\#Length_of_a_curve}}%
+\footnote{\url{http://mathworld.wolfram.com/ArcLength.html}}
+
+\section*{Describing a surface}
+
+An example of a space is \( \{ (x,y,z) ~|~ x^2+y^2+z^2 = 1 \} \), the skin of the unit sphere in a 3-dimensional Euclidean space.
+
+A \emph{smooth space} looks smooth (no discontinuities).
+It has something to do with differentiability.
+
+\section*{Describing spaces using vectors}
+
+\section*{Describing a line, a plane, and a hyperplane}
+
+A line is a two-dimensional hyperplane.
+A plane is a three-dimensional hyperplane.
+
+The \emph{line} that connects point \(A\) and point \(B\) is the set
+\( \{ A + k \cdot AB ~|~ k \in \Real \} \).
+
+To define a hyperplane, we need a \emph{normal vector} \(n\) and a point \(C\) on the plane.
+The \emph{hyperplane} is then the set of every point \(P\) such that \(CP\) is orthogonal to \(n\).
+
+Try convincing yourself that a line is a two-dimensional hyperplane.
+In two-dimensional Euclidean space, fix a point \(C\),
+and draw a vector \(n\) whose origin is \(C\).
+Pick a \(P\) such that \(CP\) and \(n\) form a right angle.
+Pick another such \(P\).
+Pick yet another such \(P\).
+Pick as many such \(P\) as you need to see that those points form a line.
+
+\section*{Defining lines as cotangent spaces and tangent spaces?}
+
+We have just shown that there are two ways to define a line:
+by \emph{cotangent space} and by \emph{tangent space}?
+
+\section*{Describing a circle, a sphere, and a hypersphere}
+
+A circle has a center and a radius.
+The circumference of a circle is the set of all points
+whose distance from the center is the radius.
+
+A circle with center \(C\) and radius \(r\)
+is described by the set \( \{ P : \norm{CP} = r \} \).
+Note that this set only describes the circumference.
+
+With coordinates: \( \{ (x,y) : \norm{xi + yj} = r \} \).
+
+With coordinates and orthonormal basis: \( \{ (x,y) : x^2 + y^2 = r^2 \} \).
+
+The two-dimensional circle generalizes to the three-dimensional sphere,
+which generalizes to the higher-dimensional hypersphere.
+
+\section*{Describing a shape}
+
+\paragraph{As a set of points}
+
+A shape is a set of points.
+
+\paragraph{With numbers}
+
+Here we get used to using numbers to describe shapes.
+
+Let's say we have a line that connects \((0,0)\) and \((1,1)\).
+Some other points on that line are \((2,2)\) and \((3,3)\).
+However, we want to describe \emph{all} points on that line.
+The way we do it is: ``For every \((x,y)\) in \(\Real^2\), iff \(x=y\), then \((x,y)\) is on the line.''
+We can write it in math notation as \( \{ (x,y) ~|~ (x,y) \in \Real^2, ~ x = y\} \).
+
+We generalize.
+A line that passes \((0,c/b)\) and \((c/a,0)\)
+is described by the set \(\{ (x,y) ~|~ (x,y) \in \Real^2, ~ ax + by = c \}\).
+If this is not obvious to you, try replacing \(x\) and \(y\) in the equation with some numbers
+without violating the equation.
+
+The set \(\{ (x,y) ~|~ (x,y) \in \Real^2, ~ x^2 + y^2 = r^2 \}\) describes a circle.
+
+The set \(\{ (x,y,z) ~|~ (x,y,z) \in \Real^3, ~ x^2 + y^2 + z^2 = r^2 \}\) describes a sphere.
+
+\index{definitions!dimension of a shape}%
+\index{dimension of a shape}%
+The number of the tuple component is the \emph{dimension} of the shape.
+
+\paragraph{With functions}
+
+A function \(\Real \to \Real^3\) describes a curve in a three-dimensional space.
+
+\index{definitions!dimension of a shape}%
+\index{dimension of a shape}%
+The function's parameter count is the \emph{dimension} of the shape.
+
+We can use a function \(\Real^2 \to \Real^3\) such as \( (u,v) \to (0,u,v^2) \).
+This describes a \emph{surface} in a three-dimensional space.
+
+We can use a vector equation such as \( m \cdot x + n = 0 \).
+
+We can use an equation such as \( x^2 + y^2 + z^2 = 1 \).
+
+The distance of two points on the surface is the length of the shortest one-dimensional submanifold
+of that surface such that this submanifold connects those points.
+
+What is the length of a one-dimensional submanifold?
+The curve is described by \( x : \Real \to \Real^n \).
+The length of a small segment around \(t\) is \(\norm{x(t+dt) - x(t)}\).
+
+\section{We haven't understood yet}
+
+\subsection{Using charts and atlases}
+
+TODO
+Motivate differential geometry:
+How do we make a map of the Earth?
+How do we project the surface of a sphere to a paper?
+Curvilinear coordinates. Space curvature.
+How do you describe a (curved) surface?
+What is curvature?
+
+Manifold generalizes surface.
+A surface is a two-dimensional thing in a three-dimensional space.
+There can be \(m\)-dimensional manifold in \(n\)-dimensional space, if \(m \le n\).
+
+We describe the surface of the unit sphere as \( \{ (x,y,z) ~|~ x^2 + y^2 + z^2 = 1, ~ (x,y,z) \in \Real^3 \} \).
+We can also in cylindrical coordinates \( \{ (1,a,b) ~|~ 0 \le a,b < 2\pi \} \).
+The \emph{surface} of that sphere is a \emph{two}-dimensional manifold.
+
+How do we describe a line on the sphere?
+A great circle?
+
+A \emph{chart} is a mapping (a function) between two manifolds?
+
+An \emph{atlas} is a set of charts?
+
+\subsection{Describing a cotangent bundle}
+
+The cotangent bundle of a space \(S\) is the vector bundle of all the cotangent spaces at every point in \(S\).
+
+The cotangent bundle of a space \(S\) is the dual bundle of the tangent bundle of \(S\).
+
+\subsection{Treating a phase space as a cotangent bundle}
+
+This system of two equations describes a system that consists of one free particle: \( x(t) = t \) and \( v(t) = 1 \).
+The phase space of that system is \( \{ (t,mv) ~|~ t \in \Real \} \).
+A set of \emph{canonical coordinates} describes a point in the phase space.
+What physicists call \emph{phase space},
+mathematicians call \emph{cotangent bundle of a manifold} (\enquote{Phase space}, Wikipedia).
+
+\subsection{Understanding \enquote{locally}}
+
+\enquote{locally}\footnote{\url{https://en.wikipedia.org/wiki/Local_property}}
+
+\subsection{Understanding parallel transports}
+
+To understand Riemann curvature tensor.
+\cite{arnold1989mathematical}
+
+\subsection{Describing smooth deformation}
+
+A map from a sheet to a bent sheet.
+
+\subsection{Describing strain using tensor}
+
+\footnote{\url{https://en.wikipedia.org/wiki/Infinitesimal_strain_theory}}
+\footnote{\url{https://en.wikipedia.org/wiki/Continuum_mechanics}}
+
+\section{Generalizing two-dimensional shapes to higher dimensions}
+
+\subsection{Generalizing line to plane and hyperplane}
+
+\subsection{Generalizing circle to sphere and hypersphere}
+
+\section{The word \enquote{manifold}}
+
+You can skip this section.
+
+Riemann defines manifold?
+Poincar\'e's \emph{Analysis situs} defines \emph{manifold}%
+\footnote{\url{http://www.maths.ed.ac.uk/~aar/papers/poincare2009.pdf}}
+
+Manifolds are confusing
+because the word \enquote{manifold} means \enquote{variety},
+which doesn't help students guess anything about locally flat spaces.
+History can explain this mess.%
+\footnote{\url{https://en.wikipedia.org/wiki/Manifold\#History}}%
+\footnote{\url{https://en.wikipedia.org/wiki/History_of_manifolds_and_varieties}}
+
+\section*{Replacing \enquote{manifold} with \enquote{space}}
+
+Sometimes we can replace \enquote{manifold} with \enquote{space}.
+For example, if we are discussing about spaces that are smooth and locally flat,
+then we can write \enquote{cotangent bundle of a space}
+instead of \enquote{cotangent bundle of a manifold}.
+
+\section*{Redefining \enquote{manifold} to mean \enquote{locally flat spaces}}
+
+Every time we meet the word \enquote{manifold},
+we should by reflex think \enquote{locally flat space}.
+
+A manifold is a space that looks flat if we zoom close enough.
+\enquote{Flat} means Euclidean, that is resembling an Euclidean space.
+
+\ExerciseAnswer{Say to yourself until it becomes a reflex: \enquote{A manifold is a locally flat space.}}{A manifold is a locally flat space.}
+
+\ShowAnswers
+
+Some examples of one-dimensional manifolds are lines and circles.%
+\footnote{\url{https://en.wikipedia.org/wiki/Manifold}}
+Some examples of two-dimensional manifolds are flat sheets and bent seets.
+
+\section{Raw thought}
+
+A line is a set of points.
+A sheet is a set of lines.
+A cube is a set of sheets.
+Is this thought useful?
+
+We will study mappings of the form \(\Real^a \to \Real^b\).
+For example, \( \Real \to \Real^n \) is the type of a curve,
+and \( \Real^n \to \Real \) is the type of a scalar field.
+Is there a deeper connection between curves and scalar fields?
+Curves and embeddings?
+Scalar fields and projections?
+
+With the real tuple space and the Cartesian coordinate systems,
+we can marry infinitesimal calculus and geometry into differential geometry.
+
+With analytic geometry, we can describe shapes using real numbers.
+
+\section{Embedding a space in another space}
+
+An \(n+1\)-dimensional space is bigger than an \(n\)-dimensional space.
+
+An \(n+1\)-dimensional space can contain an \(n\)-dimensional space.
+
+An \(n\)-dimensional space can be embedded in an \(n+1\)-dimensional space.
+
+\footnote{\url{https://en.wikipedia.org/wiki/Embedding}}
+
+\section*{Ambient spaces}
+
+An \(m\)-dimensional object in an \(n\)-dimensional ambient space is a function \(\Real^m \to \Real^n\).
+It tells you how to embed the \(m\)-dimensional object into the \(n\)-dimensional ambient space.

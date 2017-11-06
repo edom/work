@@ -1,0 +1,101 @@
+\chapter{Matrices}
+
+The plural of \emph{matrix} is \emph{matrices}.
+
+Matrices were invented to abbreviate systems of linear equations?%
+\footnote{\url{https://en.wikipedia.org/wiki/Matrix_(mathematics)\#History}}
+
+A matrix is a rectangular array of numbers.
+
+We write \(A_{ij}\) or \(A(i,j)\) to mean the cell at row \(i\) column \(j\).
+
+\paragraph{Finding the dimension of a matrix}
+
+We say that the dimension of a matrix \(A\) is \((m,n)\),
+written \(\dim(A) = (m,n)\),
+iff the matrix has \(m\) rows and \(n\) columns.
+
+\paragraph{Example}
+The following matrix has 2 rows and 3 columns, so its dimension is \((2,3)\).
+\Formula{\NoNumber
+    \Matrix{
+        A_{11} & A_{12} & A_{13}
+        \\
+        A_{21} & A_{22} & A_{23}
+    }
+}
+
+\section*{Don't confuse vectors and coordinate tuples}
+
+Use the phrases \emph{column matrix} and \emph{row matrix}
+instead of \emph{column vector} and \emph{row vector}.%
+\footnote{\url{https://en.wikipedia.org/wiki/Row_and_column_vectors}}
+
+The phrase \emph{column vector} confuses a geometric vector and
+the coordinate tuple that describes the vector.
+
+A vector is \emph{not} a bunch numbers.
+A vector is a geometric object with length and direction.
+A vector can be \emph{described} by a coordinate tuple under a coordinate system.
+
+\section{Working with matrices}
+
+\subsection{Multiplying matrices}
+
+Matrix addition is simple:
+add the elements at the same positions:
+\Formula{
+    (AB)_{ij} = A_{ij} + B_{ij}
+}
+
+The cell \((AB)_{ij}\) depends on row \(i\) of \(A\) and column \(j\) of \(B\).
+\Formula{
+    (AB)_{ij} = \sum_k A_{ik} B_{kj}
+}
+
+\subsection{Abbreviating a system of linear equations into a matrix equation}
+
+A matrix \enquote{packs} a system of linear equations into one equation.
+
+\[ AB = C \]
+
+\subsection{Linear function? Using matrix to describe a linear transformation?}
+
+A matrix is a linear map?
+
+A matrix is a vector of covectors?
+
+A linear function is called linear because it describes a line.
+
+A function \(f\) is \emph{linear} iff \( f(x+y) = f(x) + f(y) \).
+
+A \emph{transformation} is another word for function.
+
+Transformation.
+Linear transformation.
+$T(ax+by) = aTx + bTy$.
+
+Matrix arises naturally for describing linear transformations on a vector space.
+
+\section{Generalizing vectors, matrices, and tensors to functions of indexes}
+
+The notation \(A(i)\) suggests that a vector is a function \( I \to \Real \).
+The notation \(A(i,j)\) suggests that a matrix is a function \( (I,J) \to \Real \).
+
+\section{Thinking of a matrix as a linear operator}
+
+\section{Tuple vs array vs matrix vs tensor}
+
+An array is a bunch of numbers.
+
+A matrix is a \emph{rectangular} array for which matrix operations are defined.
+
+A tensor carries with it a coordinate system?
+
+A tensor is \emph{not only} a multi-dimensional array of numbers.
+
+A tuple is a one-dimensional (linear) array.
+
+A matrix is a two-dimensional (rectangular) array.
+
+A tensor is a multi-dimensional array.

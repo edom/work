@@ -1,0 +1,112 @@
+\chapter{Computers}
+
+We recommend that you skip this chapter
+until you use a computer to do physics calculations.
+
+\section{Working with limited precision}
+
+Computers can only store finitely many digits.
+Computers can only represent a \emph{finite} subset of \(\Real\).
+Computers can't represent most real numbers.
+
+The take-home message is:
+\emph{Mixing numbers with varying exponents increases errors}.
+
+To understand these phenomena, we have to understand how computers represent numbers.
+
+\section{Understanding how computers represent numbers}
+
+There are many ways:
+\UnorderedList{
+\item floating-point integers
+\item fixed-point integers
+\item arbitrary-precision integers
+\item symbolic representations
+\item one's-complement signed integers
+\item two's-complement signed integers
+\item unsigned integers
+\item sign-magnitude
+}
+
+The representation depends on the program.
+
+Each representation has its benefits and drawbacks.
+
+If you are doing physics with computers,
+then there's a high chance that the numbers you see are \emph{IEEE 754 double-precision floating-point integers},
+which are often shortened to \emph{doubles}.%
+\footnote{\url{https://en.wikipedia.org/wiki/Double-precision_floating-point_format}}
+
+\footnote{\url{https://en.wikipedia.org/wiki/Binary_number}}%
+\footnote{\url{https://en.wikipedia.org/wiki/Signed_number_representations}}
+
+\subsection{Understanding \emph{doubles}}
+
+A \emph{double} represents a number as the base-2 scientific notation
+\(
+(-1)^s \times 1 . d_{51} d_{50} d_{49} \ldots d_2 d_1 d_0 \times 2^{p - 1023}
+\)
+Note that the first significant digit is always one and is not stored in memory.
+Each \(d_k\) is a binary digit (zero or one).
+
+Bit 63 is the sign bit \(s\):
+0 means positive;
+1 means negative.
+
+Bits 62\textendash{}52 (11 bits) are the \emph{biased exponent} \(p\).
+
+Bits 51\textendash{}0 (52 bits) are called the \emph{significand} or \emph{mantissa}.
+Bit 51 is \(d_{51}\), and so on; bit 0 is \(d_0\).
+
+\subsection{Understanding the problem with doubles}
+
+If a fraction has a denominator that is not a power of two,
+then a double can't represent the fraction exactly.
+For example, a double can't represent even a simple fraction such as \(1/3\) exactly
+because the base-2 expansion of \(1/3\) doesn't terminate,
+in the same way that the decimal expansion of \(1/3\) (\(0.333\ldots\)) doesn't terminate.
+
+A double has only 53 significant binary digits.
+A multiplication of two 53-digit numbers may produce up to a 106-digit number.
+The result is rounded to 53 digits; thus at most 53 digits are lost.
+
+There is also a website\footnote{\url{http://floating-point-gui.de/}} that explains the issue.
+
+\subsection{Understanding computer algebra systems}
+
+Computer algebra systems can represent numbers like \(\sqrt{2}\) and \(1/3\) exactly because
+it does not represent numbers as strings of digits.
+It stores \(\sqrt{2}\) as something like \verb@(sqrt 2)@.
+It does not evaluate \(\sqrt{2}\) to \(1.4142\ldots\) before storing it.
+
+\subsection{Understanding ulp: units of least precision}
+
+The standard is IEEE 754.
+
+For example, in IEEE 754 double-precision floating-point integers,
+\( 2^{53} + 1 = 2^{53} \).
+
+In some browsers, you can verify this. Press Ctrl+Shift+J to open its Console,
+and then enter \verb@Math.pow(2,53)@, and then enter \verb@Math.pow(2,53)+1@,
+and see that they give the same number.
+
+\section{Solving a system of linear equations}
+
+You can use GNU Octave.
+
+Use left division:
+\begin{verbatim}
+A \ C
+\end{verbatim}
+
+This also works for Matlab.
+
+\section{Related fields of study}
+
+Related fields of study are
+\emph{scientific computing} (also known as \emph{computational science})
+and \emph{numerical analysis}.%
+\footnote{\url{https://en.wikipedia.org/wiki/Computational_science}}%
+\footnote{\url{https://en.wikipedia.org/wiki/Numerical_analysis}}
+
+\section{Using an equation to program a computer}

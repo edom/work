@@ -1,0 +1,170 @@
+\chapter{Metrics}
+
+A metric is a function that measures the distance between two points.
+
+Let \(S\) be a space.
+
+Let \(d : S \to S \to \Real\) be a metric of \(S\).
+
+Thus \(d(x,y)\) is the distance from \(x\) to \(y\).
+
+Thus \(d\) should satisfy \(d(x,y) = d(y,x)\).
+
+\section*{Euclidean metrics of real tuple spaces}
+
+Let \(d : \Real^n \to \Real^n \to \Real\).
+Define \(d(x,y) = \sqrt{\sum_{k=1}^n (x_k - y_k)^2}\).
+Then \(d\) we say that \(d\) an Euclidean metric of \(\Real^n\).
+
+\section{Norms and metrics induce each other}
+
+A norm induces a metric.
+A metric induces a norm.%
+\footnote{\url{https://en.wikipedia.org/wiki/Metric_(mathematics)\#Metrics_on_vector_spaces}}
+
+\section{Geodesics}
+
+The distance between two points is the length of the shortest curve that connects them.
+
+\section{Measuring distances on curved spaces}
+
+Example: circle
+
+Draw a circle with center \(C\).
+Draw two points \(P\) and \(Q\) on the circle's perimeter.
+Then \(CPQ\) forms a sector whose arc is \(PQ\).
+The distance from \(P\) to \(Q\) is that arc's length.
+
+Every point the circle can be described by a real number \(a\).
+This real number is the \enquote{angle} of the point.
+
+\(d(a,b) = r \cdot (b-a)\).
+
+TODO define a metric for a curve described by \(x : \Real \to \Real^2\).
+
+A curve is in length-normal formulation (???)
+iff \( L(t,u) = \abs{t-u} \).
+Then the metric is \(d(x,y) = L(f^{-1}(x), f^{-1}(y))\).
+
+We can also define.
+\(d(a,b) = b-a\).
+
+\footnote{\url{https://en.wikipedia.org/wiki/Intrinsic_metric}}
+
+Draw a sphere with center \(C\).
+Draw two points \(P\) and \(Q\) on the sphere.
+
+\section{Generalizing shortest paths into geodesics}
+
+\subsection{Understanding the shortest curve connecting two points}
+
+The concept of geodesic arises naturally when we realize
+that \emph{straightness} is defined in terms of \emph{distance}.
+If we define a \emph{straight} line segment as the \emph{shortest path} connecting its endpoints,
+then the concept of geodesics arises naturally by redefining what \emph{shortest} means.
+
+In Euclidean geometry, the shortest path connecting two points is a line segment.
+Remember that a line is a straight curve.
+
+We can also write \emph{shortest} as \emph{having minimum distance},
+to clarify the connection between straightness and distance.
+
+A curve segment connecting two points is a \emph{geodesic}
+iff the length of the curve segment is the distance between the two points.
+
+If \(x\) is a point on a geodesic,
+then every point \(x + h\) satisfying \(\norm{h} = d(x,x+h)\) is also on the geodesic.
+Can this equation be used to derive the equation of a geodesic?
+The definitions of the norm \(\norm{\cdot}\) and the distance \(d\) depend on the ambient space.
+
+Thus geodesic is a generalization of straightness.
+By \emph{straight}, we mean \emph{shortest} (having minimal length).
+Every line is a geodesic.
+
+A geodesic is a locally length-minimizing curve.%
+\footnote{\url{http://mathworld.wolfram.com/Geodesic.html}}
+
+In metric geometry, a geodesic is a curve which is everywhere locally a distance minimizer.%
+\footnote{\url{https://en.wikipedia.org/wiki/Geodesic\#Metric_geometry}}
+
+\subsection{Finding the equation of a geodesic}
+
+If the curve is given by parametric equation,
+then a geodesic equation can be obtained by minimizing the arc length of the curve?%
+\footnote{\url{http://mathworld.wolfram.com/Geodesic.html}}
+
+\section{Metric tensor}
+
+We have always implicitly assumed that a space defines distance uniformly,
+the same everywhere, that is, we have always assumed the isometry \(d(x+h,y+h) = d(x,y)\) for all \(h\).
+
+\footnote{\url{https://en.wikipedia.org/wiki/Metric_tensor}}%
+\footnote{\url{https://en.wikipedia.org/wiki/Arc_length\#Generalization_to_.28pseudo-.29Riemannian_manifolds}}
+
+A metric tensor is a metric in tensor form?
+A rank-\((a,b)\) tensor is a function with \(a+b\) parameters?
+
+Dot product generalizes to inner product.
+
+Typing rule:
+if \( a, b : V \), then \( \langle a, b \rangle : \Real \).
+An inner product is a function with type \( V \to V \to \Real \).
+
+In Euclidean vector spaces,
+\( \langle x, y \rangle = x \cdot y \).
+The dot product is the inner product of Euclidean vector spaces.
+
+An inner product defines orthogonality. Two vectors are orthogonal iff \( \langle x, y \rangle = 0 \).
+An inner product also defines the length of a vector.
+\[
+\norm{x} = \sqrt{\langle x, x \rangle}
+\]
+
+Tissot's indicatrices visualize a metric tensor by scattering
+many circles throughout a space
+so that we can see how the space's metric tensor distorts them.
+This method tells us how much our map is lying to us.%
+\footnote{\url{https://en.wikipedia.org/wiki/Tissot\%27s_indicatrix}}
+\disabled{}%vim indent bug
+
+\( d(0,x) = \norm{x} \) only in Euclidean geometry?
+
+Perhaps we should digress to mapmaking/cartography?
+
+Motivate metric tensor using cartography?
+The surface of the Earth is a sphere.
+How do we project its surface to a flat paper?
+How do we draw a map?
+
+Inner product generalizes to metric tensor?
+
+A metric tensor's type is also \( V \to V \to \Real \).
+
+Metric on half circle \( \{ (r \cos t, r \sin t) ~|~ t \in [0,\pi] \} \).
+
+\section{Wrong-but-useful is better than right-but-useless}
+
+Ancient people believe that the Earth is a plate.
+
+Most people in 2017 believe that the Earth is a ball.
+
+The Earth is an oblate spheroid.
+It's a slightly flattened sphere.
+It's wider on the equator.
+
+The Earth is irregular.
+
+Note how the statements become more correct, less general, and less applicable.
+
+Earth is a plate, ball, or spheroid, depending on what we are doing.
+If we're driving a car, the Earth is a plate.
+If we're trying to introduce differential geometry by analogy with the Earth, it's a ball.
+If we are comparing the gravitational pull in many places,
+then the Earth is a spheroid.
+If we are trying to one-up someone else, then the Earth is irregular;
+it has mountains and lakes.
+
+We're abusing language.
+What do we mean by \enquote{is}?
+
+Wrong-but-useful is better than right-but-useless.

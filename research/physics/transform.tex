@@ -1,0 +1,232 @@
+\chapter{Transformations}
+
+\section{How transforming a vector transforms its coordinates}
+
+We can imagine rotating a vector by 30 degrees,
+but how do the coordinates change?
+
+Let \(f : V \to V\) be a vector transformation.
+
+Let \(T : V \to V\) be a linear function.
+
+Let \(U : \Real^n \to \Real^n\) be a linear function.
+
+Let \(v:V\) be a vector.
+
+Let \(e:\Real^n \to V\) be a basis.
+
+If \(v\) changes to \(T(v)\), then the \(e\)-coordinates change from \(x\) to \(U(x)\).
+
+Let \(x = (x_1,\ldots,x_n)\).
+
+We can explode \(U : \Real^n \to \Real^n\) into \(n\) functions
+\(U_1,\ldots,U_n\), each of type \(\Real^n \to \Real\),
+so that we can write \(U\) out as
+\Formula{
+    U(x) = (U_1(x), \ldots, U_n(x))
+}
+
+\(T\) is a vector transformation.
+\(U\) is the coordinate transformation that corresponds to \(T\).
+
+Let \(E\) be the basis.
+
+Remember that we can write a vector as \(v = E(x)\).
+
+Suppose that we transform a vector from \(v\) to \(T(v)\).
+
+Thus \(T(v) = T(E(x)) = E(U(x))\).
+
+Thus \(T \circ E = E \circ U\).
+
+\section{Rotation in two-dimensional orthonormal basis}
+
+The vector \(a\) rotated by \(t\) radians counterclockwise is the vector \(b\) having the same length
+but such that the angle from \(a\) to \(b\) is \(t\).
+
+Let \(\{i,j\}\) be an orthonormal basis.
+
+It can be geometrically shown that
+the result of rotating the vector \(xi+yj\) by \(a\) radians
+is the vector \(x'i+y'j\) where
+\begin{align}
+    x' &= \cos(a) \cdot x - \sin(a) \cdot y
+    \\ y' &= \sin(a) \cdot x + \cos(a) \cdot y
+\end{align}
+which we can write as the matrix equation
+\Formula{
+    \Matrix{x' \\ y'}
+    = \Matrix{
+        \cos(a) & -\sin(a)
+        \\ \sin(a) & \cos(a)
+    }
+    \Matrix{x \\ y}
+}
+for which we can also write \( \text{rotate}(a, xi + yj) = x'i + y'j \).
+We can also write \( \text{rotate}(e, a, (x,y)) = (x',y')\).
+We can also write \( \text{rotate}(e, a, X) = R(a) \cdot X\).
+
+If the basis is orthonormal, then we can define the rotation matrix
+\Formula{
+    R(a) = \Matrix{
+        \cos a & -\sin a
+        \\ \sin a & \cos a
+    }
+}
+so that we can write the rotation as matrix multiplication
+\( X' = R(a) \cdot X \).
+
+Thus changing the vector \(v\) to \(\text{rotate}(a,v)\)
+changes the \(e\)-coordinate tuple \(x\) to \(R(a) \cdot x\).
+
+See also Wikipedia%
+\footnote{\url{https://en.wikipedia.org/wiki/Rotation_(mathematics)\#Two_dimensions}}%
+\footnote{\url{https://en.wikipedia.org/wiki/Rotation_matrix\#In_two_dimensions}}%
+.
+
+\section{Transforming the basis}
+
+We have just rotated a vector.
+What if we rotate the basis (the coordinate axes) instead?
+
+See also Wikipedia%
+\footnote{\url{https://en.wikipedia.org/wiki/Active_and_passive_transformation}}%
+\footnote{\url{https://en.wikipedia.org/wiki/Change_of_basis}}%
+\footnote{\url{https://en.wikipedia.org/wiki/Rotation_of_axes}}%
+.
+
+\section{Change of basis}
+
+Let \( e : \Real^n \to V \) be a basis.
+
+For example, if \(e(x,y) = xi + yj\).
+
+Let \(t\) be rotation of 90 degrees counterclockwise.
+
+We can think of a change of basis as an invertible function \( t : \Real^n \to \Real^n \).
+Then, we can change the basis from \(e\) to \(e \circ t\).
+
+We have a vector \(v : V\).
+Its coordinate tuple under basis \(e\) is \(x\).
+Its coordinate tuple under basis \(e \circ t\) is \(x'\).
+\begin{align*}
+    v &= v
+    \\ e(x) &= (e \circ t)(x')
+    \\ e(x) &= e(t(x'))
+    \\ x &= t(x')
+    \\ t^{-1}(x) &= x'
+\end{align*}
+
+Thus a vector is contravariant.
+
+\section{Coordinateless and coordinateful description of scalar fields}
+
+Let \(f : V \to \Real\) be a scalar field.
+We call \(f\) coordinateless because \(f\) does not use any coordinates.
+
+A coordinateful description of \(f\) under basis \(e : \Real^n \to V\) is
+another function \(g : \Real^n \to \Real\)
+such that \(g = f \circ e\).
+
+How do we describe derivatives coordinatelessly?
+
+\section{Keeping a function while changing basis: contravariance and covariance}
+
+Let there be two functions \( p : \Real \to V \) and \( \phi : V \to \Real \).
+Observe how their types mirror each other.
+We will explain how \( p \) is contravariant and \( \phi \) is covariant.
+
+An example of \(p\) is a parametric curve.
+
+An example of \( \phi \) is a scalar field such as a temperature field,
+which maps each point in space to the temperature at that point.
+Another example is a height map,
+which maps each point in space to the height of the terrain at that point.
+
+Let \( p_e, p_f : \Real \to \Real^n \) be coordinateful descriptions of \( p \).
+Let \(\phi_e : \Real^n \to \Real \) describe \(\phi\) using the basis \(e\).
+Let \(\phi_f : \Real^n \to \Real \) describe \(\phi\) using the basis \(f\).
+The subscript denotes the basis.
+\begin{align*}
+    e(p_e(t)) &= p(t)
+    \\ f(p_f(t)) &= p(t)
+    \\ \phi(v) &= \phi_e(e^{-1}(v))
+    \\ \phi(v) &= \phi_f(f^{-1}(v))
+\end{align*}
+
+Even though \(p_e\) and \(p_f\) are different functions,
+they describe the same coordinateless function \(p\), only with different bases.
+We want to change the basis from \(e\) to \(f\), but we want \(p_f\) to describe \(p\).
+
+We write \(f \equiv g\) to mean that \(f\) gives the same result as \(g\) for all parameters.
+We have discussed this in \SectionRef{sec:function-equivalence}.
+Thus, we can tidy up the equations as
+\begin{align*}
+    e \circ p_e &\equiv p
+    \\ f \circ p_f &\equiv p
+    \\ \phi &\equiv \phi_e \circ e^{-1}
+    \\ \phi &\equiv \phi_f \circ f^{-1}
+\end{align*}
+Observe the inverses.
+
+Let \( m : \Real^n \to \Real^n \) be the function that changes the basis from \( e \) to \( f \).
+This means \( f \equiv e \circ m \).
+(The other possibility \(m \circ e\) does not make sense because the types conflict.)
+
+Then, observe how we have to change the coordinates to keep \(p\) and \(\phi\) the same:
+\begin{align*}
+    p &\equiv p
+    &
+    \phi &\equiv \phi
+    \\
+    e \circ p_e &\equiv f \circ p_f
+    &
+    \phi_e \circ e^{-1} &\equiv \phi_f \circ f^{-1}
+    \\
+    e \circ p_e &\equiv (e \circ m) \circ p_{e \circ m}
+    &
+    \phi_e \circ e^{-1} &\equiv \phi_{e \circ m} \circ (e \circ m)^{-1}
+    \\
+    e \circ p_e &\equiv e \circ m \circ p_{e \circ m}
+    &
+    \phi_e \circ e^{-1} &\equiv \phi_{e \circ m} \circ m^{-1} \circ e^{-1}
+    \\
+    p_e &\equiv m \circ p_{e \circ m}
+    &
+    \phi_e &\equiv \phi_{e \circ m} \circ m^{-1}
+    \\
+    m^{-1} \circ p_e &\equiv p_{e \circ m}
+    &
+    \phi_e \circ m &\equiv \phi_{e \circ m}
+\end{align*}
+
+Therefore, summarizing, we get
+\begin{align}
+    m^{-1} \circ p_e &\equiv p_{e \circ m}
+    \\ \phi_e \circ m &\equiv \phi_{e \circ m}
+\end{align}
+
+We say that \(p\) is contravariant because of the \(m^{-1}\).
+
+We say that \(\phi\) is covariant because of the \(m\).
+
+A vector is contravariant.
+
+Functions of type \( \Real \to V \) are contravariant.
+
+Functions of type \( V \to \Real \) are covariant.
+
+\section{Einstein notation?}
+
+\paragraph{Subscripts and superscripts for coordinate tuple components?}
+
+A vector is \(v = e(x^1,\ldots,x^n)\).
+
+A parametric curve is \(p(t) = e((p_e(t))^1, \ldots, (p_e(t))^n)\).
+We lift it to \(p = E(q^1, \ldots, q^n)\).
+
+A covector is \(\phi(v) = \phi_e(x_1,\ldots,x_n)\).
+
+We overload the superscript, which unfortunately has been used to mean raising a number to a power.
+Don't confuse contravariant tuple component notation \(x^3\)
+with power notation \(2^3 = 2 \times 2 \times 2\).
