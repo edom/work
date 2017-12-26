@@ -10,11 +10,14 @@
 
 I want the same thing.
 
-[[http://people.idsia.ch/~juergen/][Schmidhuber's website]] contains a lot of content, if not too much.
+[[http://people.idsia.ch/~juergen/][Schmidhuber's website]] floods the reader with too much content.
 It is hard for an outsider to tell whether he is genius or crazy.
-But he has won lots of competitions.
+But he has lots of credentials.
+
+Schmidhuber gave a [[https://www.reddit.com/r/MachineLearning/comments/2xcyrl/i_am_j%25C3%25BCrgen_schmidhuber_ama/][Reddit mass-interview]].
 
 Isn't Jacques Pitrat's CAIA similar in spirit to what Jürgen Schmidhuber wants?
+Unfortunately [[http://bootstrappingartificialintelligence.fr/WordPress3/][Jacques Pitrat's blog]] is even harder to understand than Schmidhuber's home page.
 
 Is Kyndi closest to what we want?
 "Kyndi serves as a tireless digital assistant, identifying the documents and passages that require human judgment."
@@ -28,57 +31,63 @@ I want it to read journal articles and conference proceedings, understand them, 
 Concepts:
 - artificial general intelligence
 - seed AI
-** Why there is no human-level AGI in 2018?
-Which of these is the bottleneck?
-- hardware
-- software
-- our knowledge
 
-Is it an engineering problem or a philosophical problem?
-* Conjectures about language and logic
-Conjectures:
-- Natural languages are just /surface syntaxes/ for first-order logic.
+Google, DeepMind, Facebook, Tesla, Amazon, OpenAI, and other organizations waste some effort duplicating each other's AI capabilities.
 
-It is straightforward to write a Prolog program that parses some limited English.
-It is still practical to write a Prolog program that parses some richer English with named entity recognition.
-Prolog definite-clause grammars make parsing easy
+Abbreviations:
+- AI: Artificial Intelligence
+- AGI: Artificial General Intelligence
+- ML: Machine Learning
+- COLT: Computational Learning Theory
+* Philosophy of intelligence
+** Toward a unified theory of learning
+What is learning?
 
-Another problems:
-- Which information source should the computer trust?
-- How should the computer reconcile conflicting information?
+To learn is to avoid repeating past mistakes.
 
-2011 "Natural Language Processing With Prolog in the IBM Watson System"
-https://www.cs.nmsu.edu/ALP/2011/03/natural-language-processing-with-prolog-in-the-ibm-watson-system/
+What does learning require?
+What is necessary for learning?
 
-If IBM Watson is possible, then a personal search assistant should be possible.
-* Unifying supervised and unsupervised learning?
-* Concept spaces, word vectors, concept vectors, bags of words
-Let Car represent the concept of car.
-Let Red represent the concept of red.
-Let Modify(Car,Red) represent the concept of red car.
-Then Modify(X,Red) - Modify(Y,Red) = X - Y.
+Learning requires feedback error signal.
 
-Modify(X,M) - Modify(Y,M) = X - Y.
-* AI approaches
-- logic, symbolism
-- biology, connectionism
-- probabilistic logic programming
+These things are similar:
+- hysteresis
+- memory
+- smoothing
+- infinite-impulse-response filter
 
-What's trending in 2018:
-- deep learning (DL)
-- generative adversarial network (GAN)
-- long short-term memory (LSTM)
+/Optimal reverse prediction/ unifies supervised and unsupervised learning \cite{xu2009optimal}.
 
-There are two ways to make an "infinite-layer" neural network:
-- recurrent neural network (RNN), similar to IIR (infinite-impulse-response) filter in control theory
-- neural ordinary differential equations (NODE), similar to Riemann summation in calculus
-* What is intelligence?
-** The most general definition from 2007
+\cite{white2012generalized} generalizes \cite{xu2009optimal} to non-linear predictors.
+
+TODO Unify learning, prediction, modeling, approximation, control, hysteresis, memory
+
+Hysteresis, memory, and learning?
+
+Is [[https://en.wikipedia.org/wiki/Hysteresis][hysteresis]] learning?
+Is hysteresis memory?
+Does intelligence require learning?
+
+An intelligent system does not have to learn.
+
+A non-learning intelligent system will continue to satisfy its goal as long as the system stays in the environments it is familiar with.
+
+Is it possible to accomplish the same goal in different environments without learning?
+
+https://en.wikipedia.org/wiki/Hysteresis#Models_of_hysteresis
+
+Use discrete sequences
+
+Gradient descent
+
+https://forum.azimuthproject.org/discussion/1538/machine-learning
+** What is intelligence?
+*** The most general definition from 2007
 I think the most general definition is
 "Intelligence measures an agent's ability to achieve goals in a wide range of environments"
 \cite[p.12]{DefineMachIntel}\cite{Legg2007Collection}.
 I think it subsumes all other definitions of intelligence in all other fields such as psychology.
-** Intelligence is an ordering (2018-04-26)
+*** Intelligence is an ordering (2018-04-26)
 This idea goes back at least to 2004 in \cite[p.2]{hutter2004universal}.
 
 Intelligence is an /ordering/ of systems.
@@ -115,7 +124,7 @@ We define "to be more $S$-intelligent than" to mean "to $S$-dominate".
 The $S$-domination relation forms a partial order of all systems.
 
 That is how.
-**** Example
+***** Example
 Which is more intelligent, a dog or a rock?
 
 That depends on the task set $S$.
@@ -123,7 +132,7 @@ That depends on the task set $S$.
 It's the rock if ( S = { \text{sit still} } ).
 
 It's the dog if ( S = { \text{move around} } ).
-** Intelligence is function optimization (2018-04-27)
+*** Intelligence is function optimization (2018-04-27)
 Let $g$ be a goal function.
 
 A system's $g$-intelligence is how well it optimizes $g$.
@@ -131,7 +140,7 @@ A system's $g$-intelligence is how well it optimizes $g$.
 What is "how well"?
 
 Optimization (extremization) is either minimization or maximization.
-** What is a mathematical theory of intelligence?
+*** What is a mathematical theory of intelligence?
 Here I try an alternative formalization to \cite[p.12]{DefineMachIntel}.
 
 Let $E$ be a set of /environments/.
@@ -204,11 +213,11 @@ What are some mathematical definitions of intelligence?
   \cite{WdsIntel, WdsIntelSlide}
 
 \cite{Legg2007Collection} is a collection of definitions of intelligence.
-** Historical definitions
+*** Historical definitions
 [[https://brocku.ca/MeadProject/sup/Boring_1923.html][Edwin Boring in 1923]]
 proposed that we start out by defining intelligence as what intelligence tests measure
 "until further scientific observation allows us to extend the definition".
-** What is learning?
+*** What is learning?
 There are so many ML algorithms.
 What's the common thing?
 
@@ -266,7 +275,7 @@ What's the common thing?
 
 Why has AI mastered chess, but not real life?
 Because chess search space is much smaller than real-life search space.
-** What is AI?
+*** What is AI?
 - In the 1950s, AI was whatever McCarthy et al. were doing.
   - "McCarthy coined the term 'artificial intelligence' in 1955, and organized the famous Dartmouth Conference in Summer 1956.
     This conference started AI as a field."
@@ -307,10 +316,6 @@ Because chess search space is much smaller than real-life search space.
           Usually, the function is high-dimensional, and the samples are few.
         - It is simple to measure learning success in perfect information games such as chess.
           Chess also doesn't require any sensors and motors.
-* Abbreviations
-- AI: Artificial Intelligence
-- ML: Machine Learning
-- COLT: Computational Learning Theory
 * Surveys, reviews, positions, and expositions
 - Google query: most recent mathematical ai book
 - http://eliassi.org/COLTSurveyArticle.pdf
@@ -833,83 +838,8 @@ and being told to do things by machines.
 - http://jonbho.net/2014/09/25/defining-intelligence/
 - [[https://github.com/HuwCampbell/grenade][HuwCampbell/grenade: Deep Learning in Haskell]]
 - [[http://www.randomhacks.net/2007/03/03/smart-classification-with-haskell/][Smart classification using Bayesian monads in Haskell - Random Hacks]]
-* Artificial intelligence research
-** Questions
-   :PROPERTIES:
-   :CUSTOM_ID: questions
-   :END:
-
-- What is the best place to do AI research?
-
-** How can I become an AI researcher?
-   :PROPERTIES:
-   :CUSTOM_ID: how-can-i-become-an-ai-researcher
-   :END:
-
-- Where are new results announced?
-
-  - [[https://en.m.wikipedia.org/wiki/Portal:Artificial_intelligence][Wikipedia AI Portal]]
-  - Reddit [[https://www.reddit.com/r/artificial/][/r/artificial]]
-
-- Where is more information?
-
-  - [[https://en.wikipedia.org/wiki/Artificial_intelligence][Wikipedia: Artificial intelligence]]
-
-- Who are the researchers?
-
-  - See also [[https://www.quora.com/Who-is-leading-in-AI-research-among-big-players-like-IBM-Google-Facebook-Apple-and-Microsoft][Quora: Who is leading in AI research among big players like
-    IBM, Google, Facebook, Apple, and Microsoft?]]
-
-    - Google Brain, OpenAI, FAIR (Facebook AI Research), Microsoft Research, IBM Research
-
-  - Geoffrey Hinton,
-    [[http://www.cs.toronto.edu/~hinton/][UToronto page]],
-    [[https://www.reddit.com/r/MachineLearning/comments/2lmo0l/ama_geoffrey_hinton/][Reddit AMA]],
-    [[https://www.semanticscholar.org/author/Geoffrey-E.-Hinton/1695689][Semantic Scholar influence graph]]
-
-    - He is trying to find out how the brain works.
-    - The idea: If a learning algorithm works on machines, then it might have something to do with how brains work.
-    - More interested in physical explanation of how the brain works.
-      Physics first, math second, although his math is OK.
-
-  - Yann LeCun
-  - Jürgen Schmidhuber
-  - Pedro Domingos
-  - Demis Hassabis
-
-    - What is his focus?
-
-  - Pamela McCorduck, AI historian
-
-    - 2004 anniversary edition of her 1979 book [[http://www.pamelamc.com/html/machines_who_think.html]["Machines who think"]]
-
-  - Who else? There are lots of people.
-
-** How are others' works progressing?
-   :PROPERTIES:
-   :CUSTOM_ID: how-are-others-works-progressing
-   :END:
-
-- How is [[https://homes.cs.washington.edu/~pedrod/][Pedro Domingos]]'s progress of finding the master algorithm unifying the five tribes?
-
-  - Markov logic network unifies probabilists and logicians.
-
-    - How about the other three tribes?
-
-  - Hume's question: How do we justify generalization? Why does generalization work?
-
-    - Does Wolpert answer that in "no free lunch theorem"?
-
-      - [[https://en.wikipedia.org/wiki/No_free_lunch_theorem][Wikipedia: No free lunch theorem]]
-
-    - I think induction works because our Universe
-      happens to have a structure that is amenable to induction.
-
-      - If induction doesn't work, and evolution is true,
-        then we would have gone extinct long ago, wouldn't we?
-
-        - What structure is that?
 * Approximation theory
+** Why
 We are interested in approximation theory because we want to justify how neural networks work.
 
 - 2016, article, "Deep vs. shallow networks: An approximation theory perspective", [[https://arxiv.org/abs/1608.03287][pdf available]]
@@ -1048,7 +978,11 @@ Which should we use?
         - The more error we can afford, the faster we can run.
           - May be related: 2013 monograph "Faster Algorithms via Approximation Theory" [[http://theory.epfl.ch/vishnoi/Publications_files/approx-survey.pdf][pdf]]
   - 2018 book "Recent Advances in Constructive Approximation Theory" [[https://www.springer.com/us/book/9783319921648][paywall]]
-* Approximation by truncation
+** Approximation theory and machine learning
+Conference: "Approximation Theory and Machine Learning", at Purdue University, September 29 - 30, 2018
+- http://www.math.purdue.edu/calendar/conferences/machinelearning/
+- http://www.math.purdue.edu/calendar/conferences/machinelearning/abstracts.php
+** Approximation by truncation
 We can approximate a series by /truncating/ it.
 
 Suppose that the series $y = x_0 + x_1 + \ldots$ converges.
@@ -1063,7 +997,7 @@ We cut its tail.
 We take finitely many summands from the beginning.
 
 Here come examples: Truncate all the series!
-** Power series truncation
+*** Power series truncation
 Below we truncate a power series.
 
 Decimal truncation: $1.2$ approximates $1.23$.
@@ -1088,7 +1022,7 @@ Digression: Is a (complex) Fourier series a power series?
 Reminder: A Fourier series looks like $\sum_{k=0}^{\infty} c_k e^{ikt}$.
 
 [[https://en.wikipedia.org/wiki/Laurent_series][WP:Laurent series]] truncation?
-*** Digression: What is an analytic function?
+**** Digression: What is an analytic function?
 A function is /analytic/ iff it can be represented by power series.
 
 Formally, a function $f$ is /analytic/ iff for every $x \in \dom(f)$, we can write $f(x)$ as a power series.
@@ -1096,13 +1030,13 @@ Formally, a function $f$ is /analytic/ iff for every $x \in \dom(f)$, we can wri
 See also [[https://en.wikipedia.org/wiki/Power_series#Analytic_functions][WP:Definition of "analytic function"]].
 
 Taylor series expansion is illustrated in the 2015 slides "Taylor Series: Expansions, Approximations and Error" ([[https://relate.cs.illinois.edu/course/cs357-f15/file-version/2978ddd5db9824a374db221c47a33f437f2df1da/media/cs357-slides6.pdf][pdf]])
-*** Digression: What is the relationship between polynomial and power series?
+**** Digression: What is the relationship between polynomial and power series?
 A polynomial is an algebraic expression. It is not a function.
 
 Power series is a kind of infinite polynomial.
 
 [[https://en.wikipedia.org/wiki/Formal_power_series][WP:Formal power series]]: "A formal power series is a generalization of a polynomial, where the number of terms is allowed to be infinite."
-** Iteration truncation
+*** Iteration truncation
 - [[https://en.wikipedia.org/wiki/Iterated_function][WP:Iterated function]]
 - [[https://en.wikipedia.org/wiki/Iterative_method][WP:Iterative method]]
 - [[http://mathworld.wolfram.com/NewtonsIteration.html][Newton's Iteration]]
@@ -1117,16 +1051,1164 @@ We know that $$ 1 + \frac{1}{1 + \frac{1}{1 + \ldots}} = \frac{1 + \sqrt{5}}{2} 
 We can truncate that continued fraction to approximate $\Phi$.
 
 Seeing those examples makes me wonder whether all approximations are truncation.
-* Automatic differentiation?
-Justin Le, [[https://blog.jle.im/entry/purely-functional-typed-models-1.html][A Purely Functional Typed Approach to Trainable Models]]
-* About defining consciousness
-2009, "How to define consciousness—and how not to define consciousness", [[http://cogprints.org/6453/1/How_to_define_consciousness.pdf][pdf]]
-* <2018-09-28> Book: "interpretable machine learning"
+* Fragments
+** Machine learning sometimes needs philosophy
+It is /sometimes/ important to explain why a prediction works.
+http://blogs.cornell.edu/modelmeanings/2013/12/08/ml-philosophy-and-does-interpretation-matter/
+** What philosophy
+https://plato.stanford.edu/entries/artificial-intelligence/
+
+https://read.dukeupress.edu/easts/article/4/3/419/26019/Go-Strong-or-Go-Home-An-Interview-with-David-Bloor
+** Conjectures about language and logic
+Conjectures:
+- Natural languages are just /surface syntaxes/ for first-order logic.
+
+It is straightforward to write a Prolog program that parses some limited English.
+It is still practical to write a Prolog program that parses some richer English with named entity recognition.
+Prolog definite-clause grammars make parsing easy
+
+Another problems:
+- Which information source should the computer trust?
+- How should the computer reconcile conflicting information?
+
+2011 "Natural Language Processing With Prolog in the IBM Watson System"
+https://www.cs.nmsu.edu/ALP/2011/03/natural-language-processing-with-prolog-in-the-ibm-watson-system/
+
+If IBM Watson is possible, then a personal search assistant should be possible.
+** Concept spaces, word vectors, concept vectors, bags of words
+Let Car represent the concept of car.
+Let Red represent the concept of red.
+Let Modify(Car,Red) represent the concept of red car.
+Then Modify(X,Red) - Modify(Y,Red) = X - Y.
+
+Modify(X,M) - Modify(Y,M) = X - Y.
+** AI approaches
+- logic, symbolism
+- biology, connectionism
+- probabilistic logic programming
+
+What's trending in 2018:
+- deep learning (DL)
+- generative adversarial network (GAN)
+- long short-term memory (LSTM)
+
+There are two ways to make an "infinite-layer" neural network:
+- recurrent neural network (RNN), similar to IIR (infinite-impulse-response) filter in control theory
+- neural ordinary differential equations (NODE), similar to Riemann summation in calculus
+** <2018-09-28> Book: "interpretable machine learning"
 https://christophm.github.io/interpretable-ml-book/
-* Approximation theory and machine learning
-Conference: "Approximation Theory and Machine Learning", at Purdue University, September 29 - 30, 2018
-- http://www.math.purdue.edu/calendar/conferences/machinelearning/
-- http://www.math.purdue.edu/calendar/conferences/machinelearning/abstracts.php
-* Analogizers, recommender systems, matrices
+** Analogizers, recommender systems, matrices
 - https://medium.com/s/story/spotifys-discover-weekly-how-machine-learning-finds-your-new-music-19a41ab76efe
+** Why there is no human-level AGI in 2018?
+Which of these is the bottleneck?
+- Our hardware is not powerful enough.
+- Our software is not efficient enough.
+- Our knowledge is not enough.
+  We are clueless.
+
+Where is the bottleneck, engineering or philosophy?
+** Automatic differentiation?
+Justin Le, [[https://blog.jle.im/entry/purely-functional-typed-models-1.html][A Purely Functional Typed Approach to Trainable Models]]
+** About defining consciousness
+2009, "How to define consciousness—and how not to define consciousness", [[http://cogprints.org/6453/1/How_to_define_consciousness.pdf][pdf]]
+** Artificial intelligence research
+*** Questions
+   :PROPERTIES:
+   :CUSTOM_ID: questions
+   :END:
+
+- What is the best place to do AI research?
+
+*** How can I become an AI researcher?
+   :PROPERTIES:
+   :CUSTOM_ID: how-can-i-become-an-ai-researcher
+   :END:
+
+- Where are new results announced?
+
+  - [[https://en.m.wikipedia.org/wiki/Portal:Artificial_intelligence][Wikipedia AI Portal]]
+  - Reddit [[https://www.reddit.com/r/artificial/][/r/artificial]]
+
+- Where is more information?
+
+  - [[https://en.wikipedia.org/wiki/Artificial_intelligence][Wikipedia: Artificial intelligence]]
+
+- Who are the researchers?
+
+  - See also [[https://www.quora.com/Who-is-leading-in-AI-research-among-big-players-like-IBM-Google-Facebook-Apple-and-Microsoft][Quora: Who is leading in AI research among big players like
+    IBM, Google, Facebook, Apple, and Microsoft?]]
+
+    - Google Brain, OpenAI, FAIR (Facebook AI Research), Microsoft Research, IBM Research
+
+  - Geoffrey Hinton,
+    [[http://www.cs.toronto.edu/~hinton/][UToronto page]],
+    [[https://www.reddit.com/r/MachineLearning/comments/2lmo0l/ama_geoffrey_hinton/][Reddit AMA]],
+    [[https://www.semanticscholar.org/author/Geoffrey-E.-Hinton/1695689][Semantic Scholar influence graph]]
+
+    - He is trying to find out how the brain works.
+    - The idea: If a learning algorithm works on machines, then it might have something to do with how brains work.
+    - More interested in physical explanation of how the brain works.
+      Physics first, math second, although his math is OK.
+
+  - Yann LeCun
+  - Jürgen Schmidhuber
+  - Pedro Domingos
+  - Demis Hassabis
+
+    - What is his focus?
+
+  - Pamela McCorduck, AI historian
+
+    - 2004 anniversary edition of her 1979 book [[http://www.pamelamc.com/html/machines_who_think.html]["Machines who think"]]
+
+  - Who else? There are lots of people.
+
+*** How are others' works progressing?
+   :PROPERTIES:
+   :CUSTOM_ID: how-are-others-works-progressing
+   :END:
+
+- How is [[https://homes.cs.washington.edu/~pedrod/][Pedro Domingos]]'s progress of finding the master algorithm unifying the five tribes?
+
+  - Markov logic network unifies probabilists and logicians.
+
+    - How about the other three tribes?
+
+  - Hume's question: How do we justify generalization? Why does generalization work?
+
+    - Does Wolpert answer that in "no free lunch theorem"?
+
+      - [[https://en.wikipedia.org/wiki/No_free_lunch_theorem][Wikipedia: No free lunch theorem]]
+
+    - I think induction works because our Universe
+      happens to have a structure that is amenable to induction.
+
+      - If induction doesn't work, and evolution is true,
+        then we would have gone extinct long ago, wouldn't we?
+
+        - What structure is that?
+* TODO clean up ai.tex
+** Convex sets
+Let $p, q \in S$ be two points and $L(p,q) \subseteq S$ be the line
+segment from $p$ to $q$. The set $S$ is /convex/ iff
+$\forall p,q \in S : L(p,q) \subseteq S$.
+** Convex functions
+A function $f : \Real \to \Real$ is /convex/ iff the area above its
+graph is a convex set. That area is
+$\{(x,y) ~|~ x \in \Real, ~ y > f(x)\}$.
+** Machine learning
+Why are there so many machine learning algorithms?
+
+Machine learning is finding a function fitting a data list, minimizing
+error on unseen data. Machine learning is about how program improves
+with experience.
+
+Find a function fitting the data and minimizing the /loss function/.
+
+Given $[(x_1,y_1),\ldots,(x_n,y_n)]$, find $f$ minimizing
+$\sum_k \norm{f(x_k) - y_k}^2$.
+
+A /model/ is a constrained optimization problem: Given $C$, compute
+$\min_{x \in C} f(x)$ or $\argmin_{x \in C} f(x)$. If $C$ is discrete,
+use dynamic programming. If $C$ is continuous, use gradient descent.
+** Predictor
+Let $a$ be the input type, $b$ be the output type, and $g : a \to b$. A
+/predictor/ is a function. Iff $b$ is finite, then $f$ is a
+/classifier/. A /feature/ inhabits $a \to \Real$. A /data/ or an
+/example/ is a tuple $(x,y) : (a,b)$.
+
+A /linear predictor/ is the equation $y = w \cdot f(x)$ where $w$ is the
+/weight vector/, $f(x) = (f_1(x),\ldots,f_n(x))$ is the /feature vector/
+of $x$, $f_k(x)$ is the $k$th feature, $x$ is the input, and $y$ is the
+predicted output. The predictor is linear in $w$.
+** Classifier
+The type of a /classifier/ is $a \to b$ where $b$ is countable. Iff
+$|b| = 2$, the classifier is /binary/. Iff $|b|$ is finite, the
+classifier is /multi-class/.
+
+A /quasiclassifier/ is an inhabitant of $\Real^\infty \to \Real$. A
+/predicate/ $p$ turns a quasiclassifier $q$ into a classifier
+$c~x = p~(q~x)$.
+
+A multiclassifier can be made from binary classifiers.
+
+The /maximum-margin hyperplane/ separating the lower training set $L$
+and the upper training set $U$ is the hyperplane $h$ such that
+$\forall a \in U : h~a > 0$,  $\forall b \in L : h~b < 0$, and
+$\dist~h~(U \cup L)$ is maximal.
+** Learner
+A /learner/ inhabits $[(a,b)] \to (a \to b)$.
+
+A /loss function/ inhabits $(a,b,\Real^\infty) \to \Real$.
+
+The /training loss/ of $g(x) = w \cdot f(x)$ with respect to $D$ is
+$\frac{1}{|D|} \sum_{(x,y) \in D} L(x,y,w)$ where $L$ is the loss
+function.
+
+Learning is finding $w$ that minimizes the training loss.
+
+Let $y \in \{-1,+1\}$. The /score/ of $f$ for $(x,y)$ is $f(x)$. The
+/margin/ of $f$ for $(x,y)$ is $f(x) \cdot y$.
+
+Binarization of $f$ is $\sgn \circ f$.
+
+Least-squares linear regression
+
+Minimize training loss
+
+Gradient descent training with initial weight $w_1$, iteration count
+$T$, and step size $\eta$: Let $K : \Real^n \to \Real$ be the training
+loss function. Let $\nabla K$ be the gradient of $K$. The weight update
+equation is $w_{t+1} = w_t - \eta \cdot (\nabla K)(w_t)$ where $w_1$ may
+be random. The training result is $w_T$.
+
+Stochastic gradient descent (SGD) training:
+$w_{t+1} = w_t - \eta \cdot (\nabla(L~x_t~y_t))(w_t)$. Note the usage of
+the loss function $L$ instead of the training loss function $K$.
+
+SGD is /online/ or /incremental/ training.
+
+Classification is regression with zero-one loss function. Every
+classification can be turned into regression by using /hinge loss/ or
+/logistic regression/.
+
+The /logistic function/ is $f(x) = \frac{1}{1 + e^{-x}}$.
+
+Nearest neighbor with training data list $D$: $g(x') = y$ where
+$(x,y) \in D$ minimizing $\norm{f(x') - f(x)}^2$.
+** University courses
+For a course with computer science background, see Stanford University
+CS221 (Artificial Intelligence: Principles and Techniques) Autumn 2016
+\cite{LiangCs221}. For a course with mathematics background, see
+Massachusetts Institute of Technology 18.657 (Mathematics of Machine
+Learning) Fall 2015 \cite{rigollet2015ocw}.
+** Bibliography???
+\cite{DeepArch}
+
+\cite{DeepLearning}
+
+\cite{RepLearn}
+
+\cite{SuttonBartoRein}
+
+Algorithmic information theory \cite{AlgoInfTh}
+** Other resources
+Corpuses, datasets, training sets: MNIST handwritten digit dataset.
+
+OpenAI. Let an AI learn in an accurate-enough physical simulation, then
+move it into the real world.
+
+OpenCog [[http://opencog.org/about/]]
+* TODO clean up system.org
+
+This chapter defines /system/. Later chapters discuss interesting
+systems. We classify systems, hoping to gain some insight. We can
+classify systems into two big classes: /time-dependent/ (time-variant,
+temporal) and /time-independent/ (time-invariant, atemporal).
+
+** What is a system?
+
+We define a system as an input, a state, and an output. The input is
+$x$, the output is $y$, and an equation relates them. The state is
+implied by the equation. Such equation can be written $f~y~x = y$. The
+equation can be quite arbitrary. The terms $f,x,y$ may appear on both
+sides of the equation.
+
+A system is $(x,y,f)$ where $y=f~y~x$.
+
+An /invariant/ of a system is a property that stays the same throughout
+the evolution of the system.
+
+The behavior of a system is its output, especially the observable part
+of the output.
+
+Composition
+
+Continuous system
+
+Discrete system
+
+Finite system
+
+An embedded system is a system in another system. The outer system feeds
+the inner system's output back to the inner system's input, possibly
+with some change.
+
+Don't confuse this with embedded systems in computer engineering.
+
+How do we measure system complexity?
+
+** Ignoring degenerate feedback: feedforward
+
+Every function $f$ is a special case of the general feedback equation
+$f(x) = g(f,x)$ where $g$ is an identity function. This suggests that
+feedforward is a degenerate case of feedback. To simplify the writing,
+from this point on, we always assume that a feedback is non-degenerate
+unless written otherwise.
+
+** Finding feedback: the inverse fixed point problem
+
+Given $f$, find a $g$ such that $f(x) = g(f,x)$ and $g$ is not an
+identity function.
+
+The forward fixed point problem: Given $f$, find an $x$ such that
+$x=f(x)$.
+
+The inverse fixed point problem is "Given $x$, find an $f$ such that
+$x = f(x)$ and $f$ is not an identity function." This problem arises
+when we want to determine if $f$ has a feedback.
+
+Example of non-feedback: linear functions. Consider a function of the
+form $f(x) = a \cdot x + b$ where $a$ and $b$ are non-zero constants.
+The only $g$ that satisfies $g(f) = f$ is the identity function
+$g(x)=x$.
+
+Example of feedback: functional equation. Consider a function of the
+form $f(x) = x \cdot f(x-1)$.
+
+Recursive functions are special cases of feedback. Searching in list.
+$f(N,e) = 0$. $f(C,h,t,e) = h \equiv e \vee f(t,e)$. $g$ is the
+Y-combinator.
+
+We have a problem: there are infinitely many wildly discontinuous
+functions satisfying that. We want smooth functions.
+
+** Feedback based on differentiability-preserving map
+
+We want a map that preserves differentiability. Formally, given
+$f=g(f)$, we want $g$ to have the property that iff $f$ is
+differentiable then $g(f)$ is also differentiable. Surely if $f$ is
+differentiable and $g$ is differentiable then $g(f)$ is also
+differentiable? Surely if $f$ is differentiable $g$ is a polynomial then
+$g(f)$ is differentiable?
+
+We begin with the generalized differential on a field:
+$g~(f+h) = g~f + h \cdot d~g~f$ where $(f + g)~x = f~x + g~x$ and
+$(f \cdot g)~x = f~x \cdot g~x$. Thus $h \cdot d~g~f = g~(f+h) - g~f$.
+This is like computing the gradient of a vector function, but the vector
+is infinite-dimensional.
+
+Is it time to learn topology? Smooth manifolds?
+
+** Measuring feedback
+
+Given a system $f(x) = g(f,x)$, we're interested in measuring how much
+feedback it has.
+
+Assume that $f$ is a vector. We can measure the feedback by measuring
+$d_f ~ g$: the differential of $g$ with respect to $f$. Using
+non-standard analysis, we define the gradient $d f$ as something
+satisfying $f(x + h) = f(x) + h \cdot (d f)(x)$ where $h$ is an
+infinitesimal.
+
+** Linear feedback and function classes
+
+If $f$ is linear and $g$ is linear, then $f \circ g$ is linear. A linear
+feedback does not add anything interesting to a linear function.
+
+** Temporal systems
+
+A temporal system, a time-dependent system, or a time-variant system is
+a system that depends on time. With time, we can define more interesting
+systems.
+
+A temporal system is a function whose type is $(T \to X) \to T \to Y$.
+$$\SysTmp~T~X~Y = (T \to X) \to (T \to Y)$$
+
+We can see a temporal system as a transformation of time functions.
+$(T \to X) \to (T \to Y)$.
+
+Example: $f~x~t = (x~t)^2$.
+
+Example: $$f~x~t = x~t + \int_0^t (s - f~x~t) \cdot dt$$.
+
+A temporal system is $(x,y,f,T)$ that satisfies
+$\forall t \in T : f~y~x~t$.
+
+** First-order system
+
+The previous section talks about second-order system.
+
+This is a first-order system: $\SysTmp~T~X~Y = X \to T \to Y$.
+
+$\SysTmp~T~X~Y = T \to X \to Y$.
+
+There are two points of view: $d_x~f$ and $d_t~f$.
+
+First-order system should be more analyzable.
+
+Continuous-time and discrete-time system?
+
+In the above definition, $T$ is the time type. If $T = \R$ we call the
+system continuous-time. If $T = \N$ we call the system discrete-time.
+
+** Chaining temporal systems
+
+We can feed the output temporal system $f$ to the input of the temporal
+system $g$ this produces the temporal system $h$ where
+$h~x~t = g~(f~x)~t$, or $h~x = g~(f~x)$ after eta-conversion, or
+$h = g \circ f$. It turns out that system composition is just plain
+function composition.
+
+** Stateless and stateful systems
+
+A system is stateless iff the same input always gives the same output.
+There is no way to tell apart a system that has state but doesn't use it
+and a system that really has no state.
+
+A stateless system is a temporal system that satisfies
+$\forall t : \forall u: x~t = x~u \implies y~t = y~u$.
+
+In a stateful system, the same input can give different outputs,
+depending on time.
+
+Why do we define those?
+
+** Property
+
+If $p$ is a predicate that is always true for a system, then $p$ is a
+property of that system. $\SysTmp~T~X~Y \to \{0,1\}$
+
+** Constraint
+
+A constraint of $S$ is a property of $S$ that is always true.
+
+** Parameter/family
+
+Parameterized system.
+
+$P \to \SysTmp~T~X~Y$
+
+System parameter.
+
+Family of systems.
+
+Indexed family of systems.
+
+** Measure
+
+Categorical inverse of parameter. (Whatever categorical inverse means.)
+
+From type theory point of view, parametrization is the inverse of
+measurement.
+
+$\SysTmp~T~X~Y \to M$
+
+** Temporal measure
+
+$m : \SysTmp~T~X~Y \to (T \to M)$
+
+Find $s$ that minimizes $m~s~t$ as $t$ grows.
+
+** System space
+
+Like function space. Metric space.
+
+** System endofunction
+
+$\SysTmp~T~X~Y \to \SysTmp~T~X~Y$.
+
+** Output-input gradient
+
+$f : \SysTmp~T~X~Y$
+
+$f~(x+h) - f~x = h \cdot d~f~x$ but $h$ is a function.
+
+$m$-adaptivity
+
+$(m~f~(x+h) - m~f~x) / h$
+
+Reversal: $\SysTmp~T~X~Y \to \SysTmp~T~Y~X$
+
+Time-reversible/Time-symmetric: $f~x~t = f~x~(-t)$
+
+** Minimand
+
+The minimand is the thing that is to be minimized. It's an English word.
+The minimand of a temporal system is a function that is minimized as
+time goes by.
+
+Recall that a temporal system has type $(T \to X) \to T \to Y$. A
+minimand is a function that has type $(T \to X) \to T \to M$.
+
+The function $g$ is a minimand of a temporal system $s$ iff
+$g~s~t \xrightarrow[t \to \infty]{} 0$.
+
+There's always a trivial minimand: $g~s~t = 0$.
+
+Does every system have a non-trivial minimand?
+
+** Constrained system
+
+Constrained system: a system whose equation is subject to constraints
+(which can be inequalities). Every system is constrained; the definition
+requires it. So why bother defining this?
+
+** Optimizing system
+
+A system is /optimizing/ iff it optimizes a function. We call this
+function a /goal function/. The purpose of the system is to minimize the
+goal function.
+
+A goal is something that a system wants to reach. This implies that the
+definition of goal involves time. The goal function is usually hidden.
+
+** Purposeful system
+
+We also call a purposeful system an optimizing system.
+
+/Purpose requires time./
+
+Let $x$ be a function of time. Let the equation $f~x~t = y$ govern the
+system. Let $g~x$ be a function of time. The system is /purposeful/ iff
+$g~x~t$ approaches zero as $t$ grows, for some non-trivial $g$. We say
+that $g$ is a /purpose/ or a /goal/ of the system. The goal function may
+represent the sensed error with respect to a setpoint.
+
+A purposeful system doesn't have to be adaptive. A simple thermostat is
+purposeful but not adaptive.
+
+** How do we measure how well a system serves its purpose?
+
+is like measuring the rate of convergence of an approximation scheme.
+
+** What is an intelligent system?
+
+Stable system: See stability theory. Lyapunov.
+
+How do we measure how adaptive a system is?
+
+An adaptive system is a system that adapts.
+
+Adaptation implies change.
+
+Adapt means "fit, adjust".
+
+Adaptive with respect to what?
+
+Chaotic system: Small change in input causes large change in output. See
+chaos theory.
+
+* TODO clean up oldindex.xml
+https://medium.com/deeper-learning/a-glossary-of-deep-learning-9cb6292e087e
+
+Lecture 2 of CS221: Artificial Intelligence: Principles and Techniques
+
+Neural network
+https://en.wikipedia.org/wiki/Universal_approximation_theorem
+
+
+Create an AI for automatically finding data from the Internet?
+Machine-aided human summarization (MAHS)
+Human-aided machine summarization (HAMS)
+https://en.wikipedia.org/wiki/Automatic_summarization
+
+Stanford Autumn 2016
+
+Machine Learning, Tom Mitchell, McGraw-Hill
+http://cs229.stanford.edu/
+
+http://www.cs.cmu.edu/~tom/mlbook-chapter-slides.html
+
+
+Undergraduate Computer Science point of view
+https://www.cs.princeton.edu/courses/archive/fall16/cos402/
+
+Graduate
+http://www.cs.cmu.edu/afs/cs/Web/People/15780/
+
+http://homes.cs.washington.edu/~pedrod/
+
+
+
+
+Metric Learning: A Survey
+http://web.cse.ohio-state.edu/~kulis/pubs/ftml_metric_learning.pdf
+
+Distance Metric Learning: A Comprehensive Survey
+https://www.cs.cmu.edu/~liuy/frame_survey_v2.pdf
+
+Learning Deep Architectures for AI
+http://www.iro.umontreal.ca/~bengioy/papers/ftml_book.pdf
+
+https://en.wikipedia.org/wiki/Similarity_learning
+
+Essentials of Machine Learning Algorithms (with Python and R Codes)
+https://www.analyticsvidhya.com/blog/2015/08/common-machine-learning-algorithms/
+
+
+
+
+
+http://www.cs.cmu.edu/~./15381/
+
+http://stanford.edu/~cpiech/cs221/
+
+http://www.cs.princeton.edu/courses/archive/fall15/cos402/
+
+https://grid.cs.gsu.edu/~cscyqz/courses/ai/aiLectures.html
+
+https://www.cs.utexas.edu/users/novak/cs381kcontents.html
+
+https://www.cs.utexas.edu/users/novak/cs343index.html
+
+http://www.cse.unsw.edu.au/~billw/cs9414/notes.html
+
+
+
+Why deep learning works
+
+http://www.vision.jhu.edu/tutorials/ICCV15-Tutorial-Math-Deep-Learning-Intro-Rene-Joan.pdf
+
+http://www.vision.jhu.edu/tutorials/ICCV15-Tutorial-Math-Deep-Learning.htm
+
+https://calculatedcontent.com/2015/03/25/why-does-deep-learning-work/
+
+Neural Networks, Manifolds, and Topology
+http://colah.github.io/posts/2014-03-NN-Manifolds-Topology/
+
+Deep Learning, NLP, and Representations
+http://colah.github.io/posts/2014-07-NLP-RNNs-Representations/
+
+
+Machine Learning
+A Probabilistic Perspective
+Kevin P. Murphy
+Table of Contents
+http://www.cs.ubc.ca/~murphyk/MLbook/pml-toc-22may12.pdf
+
+
+The following is a list of free, open source books on machine learning, statistics, data-mining, etc.
+https://github.com/josephmisiti/awesome-machine-learning/blob/master/books.md
+* TODO intelligence_learning_and_statistics_this_needs_to_be_split
+
+Neural Architecture Search with Reinforcement Learning
+Barret Zoph, Quoc V. Le
+https://arxiv.org/abs/1611.01578
+
+http://artint.info/html/ArtInt.html
+
+https://en.wikipedia.org/wiki/Book:Machine_Learning_%E2%80%93_The_Complete_Guide
+
+https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Mathematics/Reference_resources
+
+An Automatic Clustering Technique for Optimal Clusters
+https://arxiv.org/pdf/1109.1068.pdf
+
+
+
+https://en.wikipedia.org/wiki/State-Action-Reward-State-Action
+
+
+http://blog.minitab.com/blog/adventures-in-statistics-2/understanding-hypothesis-tests:-confidence-intervals-and-confidence-levels
+
+http://greenteapress.com/thinkstats2/html/index.html
+
+https://elitedatascience.com/learn-machine-learning
+
+http://www.mit.edu/~9.520/fall14/Classes/mtheory.html
+
+
+https://arxiv.org/pdf/1311.4158v5.pdf
+
+Unsupervised learning of invariant representations with low sample
+complexity: the magic of sensory cortex or a new framework for machine
+learning?
+
+http://www.stat.yale.edu/Courses/1997-98/101/confint.htm
+
+http://www.itl.nist.gov/div898/handbook/prc/section1/prc14.htm
+
+
+** Machine learning
+
+Algorithmic Aspects of Machine Learning
+Matrices
+http://people.csail.mit.edu/moitra/docs/bookex.pdf
+
+http://www.deeplearningbook.org/
+
+Pedro Domingos: "The Master Algorithm" | Talks at Google - YouTube
+https://www.youtube.com/watch?v=B8J4uefCQMc
+slides:
+https://www.slideshare.net/SessionsEvents/pedro-domingos-professor-university-of-washington-at-mlconf-atl-91815
+Grand unified theory of machine learning
+
+A Tour of Machine Learning Algorithms
+http://machinelearningmastery.com/a-tour-of-machine-learning-algorithms/
+
+
+Asynchronous Methods for Deep Reinforcement Learning
+https://arxiv.org/abs/1602.01783
+
+
+Active learning of inverse models with intrinsically motivated goal exploration in robots (2013)
+http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.278.5254
+
+One-bit compressed sensing by linear programming (2011)
+http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.413.5719
+
+Approximate Clustering without the Approximation
+http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.141.222
+
+Fully Automatic Cross-associations (2004)
+clustering algorithm with no magic numbers
+http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.67.9951
+
+
+One and done? Optimal decisions from very few samples (2009)
+http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.211.6874
+
+
+Whatever Next? Predictive Brains, Situated Agents, and the Future of Cognitive Science. (2012)
+http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.259.7600
+
+
+** Popular science
+
+https://qz.com/1161771/we-looked-at-the-major-scientific-discoveries-from-five-years-ago-to-see-where-they-are-now/
+
+https://inside.com/lists/technically-sentient/recent_issues
+
+6 areas of AI and machine learning to watch closely
+https://medium.com/@NathanBenaich/6-areas-of-artificial-intelligence-to-watch-closely-673d590aa8aa#.sp7w03rk5
+
+Differentiable neural computers
+https://deepmind.com/blog/differentiable-neural-computers/
+* TODO Wonderings
+
+** Reading list
+
+Statistical learning
+
+Inverse problem theory \cite{tarantola2005inverse}
+
+? \cite{SepLogicAi}
+
+Wiener cybernetics book? \cite{WienerCyber}
+
+approximation theory? \cite{ApproxThePrac}
+
+Semi-supervised learning?
+
+What is rational?
+
+Moravec's paradox
+
+** Adversarial random process
+
+$P$ tries to predict $G$. $G$ tries to make $P$ wrong.
+
+** Neural networks
+
+Neural networks is one architecture that makes machine trainable. Neural
+network is not necessarily the best architecture for intelligence.
+Evolution is a greedy optimization algorithm.
+
+Topologically, a neural network layer is a continuous map. It transforms
+the input space into a more separable space. Consider the set of points
+that satisfy the classifier. This set is a manifold. A neural network
+layer stretches, rotates, manipulates that manifold. The output wants to
+be box-shaped. But isn't this just the idea of Kohonen's self-organizing
+maps?
+
+* TODO Making machines work
+
+There are several ways to make machines work: program them, train them,
+or make them learn. Programming and training produce inflexible machines
+that cannot do things that they are not programmed or trained for.
+
+** Delayed signal thought experiment
+
+Imagine that you install something in your brain that delays the signal
+to your left hand by one hand, so your left hand does what you want it
+to do, but one second after when you want it to do that. Would you still
+think your left hand is a part of your self?
+
+If a machine does not have any way of sensing touch, even indirectly,
+then it will never experience touch.
+
+** Signs of intelligence
+
+Imitation and survival?
+
+Imitation implies intelligence? For $a$ to be able to imitate $b$, $a$
+has to have a model of $b$.
+
+If the only goal is to survive, then wouldn't the best strategy be make
+as many copies as many as possible?
+
+Make copies, as fast as possible, as many as possible.
+
+Arrange for the species to maximize the number of copies that live at
+the same time.
+
+Make an organism as fit as possible. Make an organism survives as many
+environments as possible, including the environments it did not
+originally evolve from. A sign of intelligence is that the organism can
+perform well in environments it had never encountered before.
+
+** Related concepts
+
+intelligence, learning, self, consciousness, sentience, life,
+perception, adaptivity, adaptability, adaptation, control, language,
+thought, feeling, reasoning, discovery, recursion, feedback,
+computation, computability.
+
+** Interesting idea
+
+Strategy 1: Given two nouns $a$ and $b$, find a verb $v$ such that the
+sentence $a~v~b$ makes sense. Strategy 2: Given two nouns $a$ and $b$,
+pick which of these two sentences make sense: "$a$ requires $b$," or
+"$a$ does not require $b$."
+
+An early 'intelligence' is chemotaxis. Chemotaxis is random walk that is
+biased by the gradient. (Cite?) The deterministic version of that is
+gradient following algorithm. The goal is to minimize the concentration
+of the chemical at the location of the cell.
+
+Control system. Homeostasis.
+
+Deduction: Given premises, infer conclusion. Induction: Given a few
+premises and a conclusion, infer a rule.
+
+Probabilistic logic. Generalize boolean $\{0,1\}$ to probability, real
+unit interval, $[0,1]$. Boolean logic is a special case of probabilistic
+logic. $p~(x \wedge y) = \min~(p~x)~(p~y)$. Fuzzy logic?
+
+"To organize is to create capabilities by intentionally imposing order
+and structure." \cite{Organ}
+
+** Cybernetics
+
+How can we apply systems theory to management? \cite{SystemManage}
+
+Ashby's optical mobile homeostat \cite{BattleHom} \cite{BattleThree}
+
+Braintenberg vehicles
+
+A Gödel machine improves itself. It proves that the improvement it makes
+indeed makes it better. \cite{GodelMachImpl}
+
+[[http://people.idsia.ch/~juergen/goedelmachine.html]]
+
+[[http://people.idsia.ch/~juergen/selfreflection.pdf]]
+
+[[http://people.idsia.ch/~juergen/metalearner.html]]
+
+Steinberg and Salter (1982) wrote that intelligence is "goal-directed
+adaptive behavior". This suggests that an intelligent system is
+purposeful and adaptive, in the sense we defined above.
+[[https://en.wikipedia.org/wiki/Intelligence#Definitions]]
+
+Intelligence maximizes future freedom?
+[[https://www.ted.com/talks/alex_wissner_gross_a_new_equation_for_intelligence/transcript?language=en#t-121478]]
+
+\cite{PickeringCyber} \cite{GoertzelAgi} \cite{SlomanTuringIrrelevance}
+
+Giulio Tononi, integrated information theory (not to be confused with
+information integration theory)
+
+Nils J. Nilsson modeled a world and an agent as finite-state machines
+\cite{NilsLogicAi}. He used explicit sense type, action type, and memory
+type. William Ross Ashby used the phase space of a continuous dynamical
+system, where time is a real number, to describe an agent's behavior
+\cite{AshbyBrain}.
+
+** Supervised classification problems
+
+AI shines in supervised classification problems. Machine vision.
+
+Digit recognition is classification problem.
+
+** Classification involving sequence or time
+
+* TODO Fields of study related to intelligence
+
+AI is about making something that is as intelligent as a human brain
+without caring about how human brain works. Cognitive neuroscience is
+about how a human brain works.
+
+** Connectionism
+
+** Brain is a vector function
+
+** Machine learning
+
+Machine learning makes machine do things from examples.
+
+** Connectionism
+
+** Computational neuroscience
+
+** Cognitive neuroscience
+
+Cognitive neuroscience tries to understand how brains work. The organism
+with central nervous system with the fewest neurons is . You can create
+your own virtual online at \cite{openworm}.
+
+In rats, neuron firing rate encodes posterior probability (expected
+value)? (Cite?)
+
+Neural coding tries to find out how neurons encode information. Are
+neurons digital, analog, or both? Spike train?
+
+Digit-recognizing neural network performs generalization/induction.
+
+Decoding mental states from brain activity in humans
+\cite{haynes2006decoding}
+
+** Imagination is as real as perception
+
+Imagining a thing excites the same neurons as perceiving that thing.
+Therefore if we have a very good mental model, we should be able to
+perform experiments in our imagination and translate the results to the
+real world.
+
+Imagine that an intelligent machine existed, and then work our way back.
+Invent a story about how we would get there.
+
+** Materials looking for a place to belong
+
+Logic has /syntax/ (form) and /semantics/ (meaning). Grammar determines
+the /well-formed formulas/. Semantics maps a well-formed formulas to an
+/interpretation/. (What are the terms? Mathematical logic lecture notes
+or book?)
+
+The /extension/ of a predicate $p$ is $\{x~|~p(x)\}$.
+
+A formula in first-order logic is /Skolemized/ or is in /Skolem normal
+form/ iff it has the form $\forall x_1 \ldots \forall x_n ~ M$ where $M$
+is a quantifier-free formula in conjunctive normal form. A formula is in
+/conjunctive normal form/ iff ...
+[[http://mathworld.wolfram.com/SkolemizedForm.html]]
+
+A /Herbrand universe/ is ... An /interpretation/ is ... A /formal
+system/ is ... A /formal language/ is ...
+
+/Curry-Howard correspondence/ relates logic and type. A value $x : T$ is
+a proof the logic formula isomorphic to $T$.
+
+** Genetic algorithm
+
+A /genetic algorithm/ is an iterated randomized mixing filtering
+optimization. Generalized genetic algorithm: Let $\fun{Pop}$ be the
+population type. Let $t : \Nat$ be time. Let $\fun{pop}~t : \fun{Pop}$
+be the population at time $t$. Let $\fun{fit}: \fun{Pop}\to \fun{Pop}$
+be the fitness filter a.k.a. selection function a.k.a. selection
+pressure function. Let $\fun{mate}: \fun{Pop}\to \fun{Pop}\to \fun{Pop}$
+be the next-population function, including mutation, birth, death,
+mating. Let $\fun{sur}~(t+1) = \fun{fit}~(\fun{pop}~t)$ be the survivor
+set at time $t+1$. The algorithm is the equation
+$\forall t \in \Nat : \fun{pop}~(t+1) = \fun{sur}~(t+1) + \fun{mate}~(\fun{pop}~t)$.
+Observe the sequence of populations $\fun{pop}~0, \ldots, \fun{pop}~t$.
+A genetic algorithm, an iterated search algorithm, is a mono-unary
+algebra. Genetic algorithm is like tree search. The mating function is
+the fringe function. A genetic algorithm is a stochastic process. A
+genetic algorithm takes a filtering and mating algorithm and produces a
+search algorithm.
+
+Simulated annealing.
+
+Randomized search algorithm.
+
+** Draft
+
+Is a company, which consists of undoubtedly intelligent people,
+intelligent?
+
+Alan Turing proposed the Turing test.
+
+Intelligence is what intelligence tests measure.
+
+I think we use the word 'intelligence' to refer to a stabilizing
+behavior that is complex enough to elude a simple explanation.
+
+I think we agree that we are intelligent.
+
+We cannot know if something is intrinsically intelligent. We can only
+determine intelligence from what we can observe.
+
+** How do we determine how intelligent something is?
+
+An intelligent being may elude detection by pretending to be
+unintelligent.
+
+** The brain at a time is a big array function.
+
+Can we formulate it in a way that does not depend on linear time?
+
+** Control needs feedback.
+
+There is also open-loop or feed-forward control, but complex control
+needs feedback.
+
+** Consciousness
+
+Consciousness needs sensory input.
+
+Consciousness needs feedback.
+
+Self concept needs feedback.
+
+If there is not a feedback, a system cannot distinguish itself from its
+environment. The self concept will never arise.
+
+If a brain can immediately control a thing, then that thing is part of
+the brain's self concept. If the brain can't, it's not.
+
+If a brain often gets certain input shortly after it produces certain
+output, it will associate the output with its self concept.
+
+The self is the thing under conscious control.
+
+** Intelligence is a spectrum.
+
+Is a human intelligent?
+
+Is a rock intelligent?
+
+A human is more intelligent than a rock.
+
+Is a human pretending to be a rock intelligent?
+
+Can an intelligent system look non-intelligent (hide its intelligence)?
+
+We can measure intelligence as numbers.
+
+Intelligence needs learning.
+
+Adapting needs learning.
+
+We say X adapts to Y iff Y surprises X less as time goes by. (Whose idea
+is this?)
+
+Intelligence needs state.
+
+State needs time.
+
+** Intelligence is control.
+
+An intelligent system is a special case of control system.
+
+** Intelligence is relative.
+
+Intelligence relative to something is a real number.
+
+** Intelligence needs the ability to adapt.
+
+** Every software system is a state machine.
+
+** Curry's Y combinator makes a fixed point equation
+
+** What are the limits of intelligence?
+
+** Phase-space learning?
+
+There is a boundary: the agent, and the environment. How many functions
+do we need to model it?
+
+One function that is an endofunction of phase space. The agent state is
+a subspace of that phase space. The environment state is another
+subspace of that phase space.
+
+The idea is to represent the how the phase space changes in a small
+time. The number of variables should equal to the degree of freedom of
+the system.
+
+** What are the ways of describing a system?
+
+- function from time to state
+
+- endofunction of phase space
+
+State space and phase space are the same. State space is for discrete
+systems. Phase space is for continuous systems.
+
+** What fields does this book depend on?
+
+Topology \cite{Topology}
+
+Functional analysis
+
+Dynamical system
+
+Control theory
+
+Fixed point theory
+
+Neurophysiology
+
+Computer science
+
+Cybernetics
+
+[[https://en.wikipedia.org/wiki/Connectionism]]
+
+[[https://en.wikipedia.org/wiki/Cybernetics]]
+
+Biological neuron model
+[[https://en.wikipedia.org/wiki/Biological_neuron_model]]
+
+An introduction to mathematical physiology
+[[https://people.maths.ox.ac.uk/fowler/courses/physiol/physiolnotes.pdf]]
+
+Learning and Transfer of Learning with No Feedback: An Experimental Test
+Across Games
+[[http://repository.cmu.edu/cgi/viewcontent.cgi?article=1040&context=sds]]
+
+Perceptual learning without feedback in non-stationary contexts: Data
+and model
+[[http://socsci-dev.ss.uci.edu/maplab/webdocs/petrovdosherlu06.pdf]]
+
+Neural coding [[https://en.wikipedia.org/wiki/Neural_coding]]
+
+Pulse-frequency modulation in brain neurons
+
+Reward system
+
+** Supervised to unsupervised
+
+Can a supervised learning algorithm always be made into an unsupervised
+learning algorithm?
+
+** Approximation to optimization
+
+Can an approximation scheme always be made into an optimization scheme?
+
+** Optimal clustering
+
+Given a set of points, what is the optimal clustering/partition?
+
+** Optimal approximation
+
+Given a set of points $\{(x_1,y_1),\ldots,(x_n,y_n)\}$ (samples of a
+function), what is the function that optimally approximates those
+samples? The approximation error is $\sum_k y_k - f(x_k)$. Let $F$ be
+the set of all integrable real-to-real functions. Define
+$M(f) = \int_\Real f$ as the infinite integral of $f$. Define the
+complexity of $f$ as $C(f) = \sum_{k=1}^\infty M(D_k(f))$ where $D$ is
+the derivative operator.
+
+** Meta-approximation
+
+Given set of points $D = \{(x_1,y_1),\ldots,(x_n,y_n)\}$, find $g$ that
+finds $f$ that approximates $D$.
+
+Let $F$ be the set of all real-to-real functions. Can we craft a measure
+on $F$? Can we craft a probability measure on $F$? Can we craft a
+universal prior for $F$ like Solomonoff did for bitstrings?
+
+What is the best way to update the approximator using the approximation
+error?
+
+** Chemotaxis is an example of optimization.
+
+[[http://www.mit.edu/~kardar/teaching/projects/chemotaxis(AndreaSchmidt)/finding_food.htm]]
+We can model chemotaxis as gradient following (ascent or descent).
+Andrea Schmidt described chemotaxis as a biased random walk. The bias is
+the chemical concentration gradient.
+
+Chemotaxis is intelligence.
+
 * Bibliography
