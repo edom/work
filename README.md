@@ -115,3 +115,5 @@ Even formalizing the semantics of C is a very complex task.
 In research programming languages, we start from the semantics, and then we realize that language on a computer.
 
 In popular programming languages, we start with something already working, and then we try to formalize that language's semantics.
+
+- [Understanding a monad as an extension](monad.md)
