@@ -1,0 +1,140 @@
+---
+
+# To cite, write something like [CitationKey] in a Markdown file.
+
+# In the future, someone might write a program that parses this YAML file,
+# and uses regular expression to replace every occurrence of [CitationKey]
+# with a proper link in every Markdown file.
+
+- key: Turner2004
+  type: article
+  author: David Turner
+  year: 2004
+  title: Total functional programming
+  links:
+    - url: http://www.jucs.org/jucs_10_7/total_functional_programming/jucs_10_07_0751_0768_turner.pdf
+    - url: http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.106.364&rep=rep1&type=pdf
+      description: citeseerx backup link
+- key: McBride2015
+  type: article
+  author: Conor McBride
+  year: 2015
+  title: Turing-Completeness Totally Free
+  links:
+    - url: https://pdfs.semanticscholar.org/e291/5b546b9039a8cf8f28e0b814f6502630239f.pdf
+    - url: https://personal.cis.strath.ac.uk/conor.mcbride/pub/Totality.pdf
+      description: draft version
+    - url: https://github.com/pigworker/Totality/blob/master/Totality-slides.pdf
+      description:  slides, total model of partiality
+    - url: https://www.reddit.com/r/haskell/comments/vazfp/totality_vs_turing_completeness_mcbridepdf_35/
+      description: Reddit comment thread
+
+- key: Wadler1996
+  type: article
+  author: Philip Wadler
+  year: 1996
+  title: Lazy versus strict
+  links:
+    - url: https://homepages.inf.ed.ac.uk/wadler/papers/lazyvsstrict/lazyvsstrict.ps.gz
+
+- key: Wadler1992
+  type: article
+  author: Philip Wadler
+  year: 1992
+  title: The essence of functional programming
+  abstract: >-
+    This paper explores the use monads to structure functional programs.
+    No prior knowledge of monads or category theory is required.
+  links:
+    - url: http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.41.9361&rep=rep1&type=pdf
+
+- key: Wadler1998
+  type: article
+  author: Philip Wadler
+  year: 1998
+  title: How to add laziness to a strict language without even being odd
+  links:
+    - url: http://homepages.inf.ed.ac.uk/wadler/papers/lazyinstrict/lazyinstrict.ps
+
+- key: Sheard2003
+  type: article
+  author: Tim Sheard
+  year: 2003
+  title: A Pure Language with Default Strict Evaluation Order and Explicit Laziness
+  links:
+    - url: http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.10.5608&rep=rep1&type=pdf
+
+- key: Shivers2004
+  type: article
+  authors:
+    - Olin Shivers
+    - Mitchell Wand
+  year: 2004
+  title: "Bottom-up β-reduction: uplinks and λ-DAGs∗ (extended version)"
+  links:
+    - url: http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.65.5760&rep=rep1&type=pdf
+    - url: http://www.brics.dk/RS/04/38/BRICS-RS-04-38.pdf
+      description: BRICS slightly shorter version
+    - url: https://link.springer.com/content/pdf/10.1007/978-3-540-31987-0_16.pdf
+      description: Springer even shorter version
+
+- key: Capretta2005
+  type: article
+  author: Venanzio Capretta
+  year: 2005
+  title: General recursion via coinductive types
+  links:
+    - url: http://www.cs.ru.nl/~venanzio/publications/Recursion_Coinductive_LMCS_2005.pdf
+
+- key: Bauer2012
+  type: article
+  authors:
+    - Andrej Bauer
+    - Matija Pretnar
+  year: 2012
+  title: Programming with algebraic effects and handlers
+  links:
+    - url: https://arxiv.org/pdf/1203.1539.pdf
+
+- key: Church1932
+  type: article
+  author: Alonzo Church
+  year: 1932
+  title: A set of postulates for the foundation of logic
+
+- key: Lof1984
+  type: article
+  author: Per Martin-Löf
+  year: 1984
+  title: Constructive mathematics and computer programming
+
+- key: Nordstrom1988
+  type: article
+  author: Bengt Nordström
+  year: 1984
+  title: Terminating general recursion
+  links:
+    - url: http://www.cse.chalmers.se/~bengt/papers/genrec.ps
+
+- key: Bove2001
+  type: article
+  author: Ana Bove
+  year: 2001
+  title: Simple general recursion in type theory
+  links:
+    - url: https://www.semanticscholar.org/paper/Simple-General-Recursion-in-Type-Theory-Bove/b11024dc79f4668abd93bfaffb69c2eeeca3709f
+    - url: https://pdfs.semanticscholar.org/b110/24dc79f4668abd93bfaffb69c2eeeca3709f.pdf
+
+- key: Poggio1989
+  type: article
+  year: 1989
+  authors:
+    - Tomaso Poggio
+    - Federico Girosi
+  title: A theory of networks for approximation and learning
+  links:
+    - url: https://dspace.mit.edu/bitstream/handle/1721.1/6511/AIM-1140.pdf
+
+
+# Do not use vim yaml filetype plugin.
+# vim: ft= ai ts=2 sts=2 sw=2
