@@ -19,7 +19,7 @@ The plan is to research two related things in parallel:
 Scala already tries to join parametric subtyping and inheritance subtyping.
 What is the problem with Scala?
 
-See also [functional programming research]({% link function.md %}).
+See also [functional programming research]({% link functional_programming.md %}).
 
 ## Results
 

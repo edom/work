@@ -14,6 +14,6 @@ I'm interested in writing expository living documents for these topics:
 
 - [Meta-research]({% link meta_research.md %})
 - [Intelligence and learning]({% link intelligence.md %})
-- [Functional programming research]({% link function.md %})
+- [Functional programming research]({% link functional_programming.md %})
 - [Joint research with Abdullah]({% link abdullah.md %})
 - [Physics and engineering]({% link physics.md %})

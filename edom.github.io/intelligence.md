@@ -302,3 +302,5 @@ The body of an agent is part of the environment, not of the agent.
 [Dimension independent similarity computation (DISCO)](http://dl.acm.org/citation.cfm?id=2567715)
 
 [Journal of artificial intelligence research](http://www.jair.org/) (open access)
+
+[Machine theory of mind](https://www.semanticscholar.org/paper/Machine-Theory-of-Mind-Rabinowitz-Perbet/4a48d7528bf1f81f48be8a644ffb1bcc08f1b2c5)
