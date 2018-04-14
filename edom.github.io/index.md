@@ -1,9 +1,12 @@
 ---
-# You don't need to edit this file, it's empty on purpose.
-# Edit theme's home layout instead if you wanna make some changes
-# See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: home
+mathjax: yes
+draft: yes
 ---
+
+## Research
+
+See [research]({% link research.md %}).
 
 {% assign everything = site.emptyArray %}
 {% for page in site.pages %}
@@ -11,9 +14,15 @@ layout: home
 {% endfor %}
 {% assign everything = everything | sort: "title" %}
 
+## Opinions
+
+[Software engineering]({% link software_engineering.md %})
+
+[April fools' day is harmful]({% link april.md %})
+
 ## Featured Pages
 
-"Featured" here doesn't mean "Complete".
+"Featured" doesn't mean "Complete".
 It just means "set apart".
 
 <ul>

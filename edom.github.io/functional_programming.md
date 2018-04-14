@@ -17,6 +17,8 @@ TFPL: total functional programming language.
 
 OS: operating system.
 
+TM: Turing machine.
+
 ## Expository works
 
 [Function]({% link function.md %})
@@ -382,13 +384,39 @@ http://www.cs.nott.ac.uk/~pszvc/g54dtp/inductive_domain.v
 
 https://stackoverflow.com/questions/145263/what-is-total-functional-programming
 
+What is a computational effect?
+
 Does totality really have anything to do with termination?
 
-Something is *Turing-complete* iff it can simulate every Turing machine?
+## TFP and Turing-completeness
+
+We must distinguish between a Turing machine and its execution.
+
+A TM needs a tape to run, but does not come with it.
+To run a TM, you have to supply a tape.
+
+A *tape* is a finite sequence of tape symbols.
+
+A *step* is a pair of configuration and tape.
+
+A *run* is a sequence of steps. This sequence may be infinite.
+
+A *run* of a Turing machine \\( m \\) with initial tape \\( t \\) is ...
+
+Instead of thinking about infinitely long tape with infinitely many blank symbols,
+we think that the tape is finite but the TM may at every step
+insert, update, or delete a cell.
+
+A TM is finite by definition: a TM is a tuple whose each component is taken from a finite set.
+The description of a TM does not include the tape.
+The execution trace of a TM may be infinite.
+A TFPL can *describe* every TM just fine.
 
 We can describe a Turing machine in a TFPL?
 
 https://www.reddit.com/r/programming/comments/jvu2w/total_functional_programming_and_the_unimportance/
+
+[LTU: Total functional programming](http://lambda-the-ultimate.org/node/2003)
 
 https://news.ycombinator.com/item?id=12646390
 
@@ -525,3 +553,30 @@ What is Scott continuity?
 Why is it named "continuity"?
 
 https://cs.stackexchange.com/questions/1371/scott-continuous-functions-an-alternative-definition
+
+Girard's System F
+https://people.mpi-sws.org/~skilpat/plerg/papers/harper-system-f-2up.pdf
+https://www.reddit.com/r/haskell/comments/2zqtfk/why_isnt_anyone_talking_about_optimal_lambda/
+
+Venanzio Capretta's partiality monad
+General recursion via coinductive types
+[Venanzio Capretta 2005](http://www.cs.ru.nl/~venanzio/publications/Recursion_Coinductive_LMCS_2005.pdf)
+"see the work by Barendregt
+and Geuvers [5] for a good exposition of technical issues of type-theoretic proof assistants"
+Coinductive types were first
+introduced in type theory by Hagino [34]
+
+[Moggi monad paper](https://www.irif.fr/~mellies/mpri/mpri-ens/articles/moggi-computational-lambda-calculus-and-monads.pdf)
+
+[StackOverflow: What can Idris not do by giving up Turing-completeness?](https://cs.stackexchange.com/questions/19577/what-can-idris-not-do-by-giving-up-turing-completeness):
+"Dual to termination: while an inductive definition must terminate (by consuming all of its data) a coinductive definition must be productive - in practice this means, brieflt, that any recursive call must be guarded by a constructor. I've found this explanation to be the clearest (ymmv): adam.chlipala.net/cpdt/html/Coinductive.html" – Edwin Brady Apr 22 '14 at 17:58
+
+Dependent Types and Multi-monadic Effects in F⋆
+https://www.fstar-lang.org/papers/mumon/paper.pdf
+
+Type Systems, Luca Cardelli
+http://lucacardelli.name/Papers/TypeSystems.pdf
+
+[Karl Voelker master thesis: practical programming with total functions](https://www.cs.rit.edu/~mtf/student-resources/20094_voelker_msthesis.pdf)
+
+[York CS wiki: FP works](https://www.cs.york.ac.uk/plasma/wiki/index.php?title=Functional_Programming#Theses)

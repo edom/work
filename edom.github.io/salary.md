@@ -27,7 +27,9 @@ This roughly means that USD 1 in the USA and IDR 4,000 in Indonesia buy the same
 says that the average software engineer salary is USD 159,000 per year.
 Multiply that by the IDR/USD PPP factor, then divide by 12, and we find out that
 the Indonesian software engineer average salary, adjusted for purchasing power parity,
-is IDR [54,000,000](https://www.google.co.jp/search?q=159000*4091.831%2F12) per month.
+should be IDR [54,000,000](https://www.google.co.jp/search?q=159000*4091.831%2F12) per month.
+According to Jobstreet,
+the actual Indonesian software engineer average salary is only 1/6 of that.
 
 Housing expenses?
 I can sleep at the office.
@@ -51,8 +53,16 @@ I don't have to be smarter.
 I just have to move to the United States of America,
 and try not to die in a mass shooting or terrorist attack.
 
-My colleagues surprised me with an even better way to accomplish that:
-stay in Indonesia, but get freelance or remote jobs from USA employers.
+## A possible reason for the pay gap
+
+It is possible that the average American programmer is
+much more productive than the average Indonesian programmer.
+The average American programmer has better education
+and doesn't have the language barrier.
+The average Indonesian programmer doesn't understand English,
+which is the *de facto* language of software documentation.
+
+(But, weren't we talking about software engineers, not programmers?)
 
 ## Other resources
 

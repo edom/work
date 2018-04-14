@@ -22,3 +22,7 @@ The downtime was 2 hours 30 minutes.
 2017-08-25 02:00 +0700 I went home from office; it had gone up.
 The downtime was less than 18 hours.
 I forgot to ask the people at home how long it had been down.
+
+2017-10-09 11:00 +0700 it went down.
+They said it would go up on 2017-10-10 23:00 +0700 (24 hour downtime).
+2017-10-10 03:23 +0700 it hadn't gone up.

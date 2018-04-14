@@ -62,13 +62,6 @@ Thus, we should *not* write \\( f(x) = \bot \\) to mean that \\( f(x) \\) is und
 
 The function \\( f : A \to B \\) has input type \\( A \\) and output type \\( B \\).
 
-https://en.wikipedia.org/wiki/Turing_completeness
-
-Partial Turing machine, total Turing machine.
-What is the significance of the theorem in [Wikipedia: Total Turing machine](https://en.wikipedia.org/wiki/Total_Turing_machine)?
-
-What is the relationship between total function and total Turing machine?
-
 ## Function equality
 
 Two relations are *equal* iff their domains are equal,

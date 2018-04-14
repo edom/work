@@ -25,6 +25,11 @@ We need living documents that are the sum of those deltas.
 The problem is:
 who are the authors of a collaborative living document?
 
+To research, ask:
+- What questions should we ask?
+
+https://cstheory.stackexchange.com/questions/2953/advice-on-good-research-practices
+
 ## Academic journal publishing reform
 
 Remember Aaron Swartz.
@@ -33,6 +38,61 @@ Library Genesis.
 Sci-Hub.
 
 [Wikipedia: Academic journal publishing reform](https://en.m.wikipedia.org/wiki/Academic_journal_publishing_reform)
+
+https://en.wikisource.org/wiki/Guerilla_Open_Access_Manifesto
+
+https://archive.org/stream/GuerillaOpenAccessManifesto/Goamjuly2008_djvu.txt
+
+https://en.wikipedia.org/wiki/Library_Genesis
+
+https://en.wikipedia.org/wiki/ICanHazPDF
+
+https://en.wikipedia.org/wiki/Sci-Hub
+
+https://vk.com/sci_hub
+
+https://en.wikipedia.org/wiki/Library.nu
+
+[PhysNet](http://de.physnet.net/PhysNet/physnet.html)
+
+[PhysNet PhysDoc: Physics Documents Worldwide](http://de.physnet.net/PhysNet/physdoc.html)
+
+[How To Become A Machine Learning Engineer: Learning Path](https://medium.com/machine-learning-world/learning-path-for-machine-learning-engineer-a7d5dc9de4a4)
+
+Which mailing lists should I join?
+
+Which blogs, websites, or people should I follow?
+
+## How do we know if something is legitimate or bullshit?
+
+[callingbullshit.org](http://callingbullshit.org/)
+
+[How do you know a paper is legit?](http://callingbullshit.org/tools/tools_legit.html)
+
+## On reading papers
+
+Only read papers or books after you know what you are looking for.
+Don't read without reason.
+
+## What tools might help my research?
+
+[learn-anything.xyz](https://learn-anything.xyz/) is a community-curated mind map.
+
+Google's [talk to books](https://books.google.com/talktobooks/).
+
+vixra.org
+
+I have not used any of these.
+
+http://www.arxiv-sanity.com/
+
+http://connectedresearchers.com/online-tools-for-researchers/
+
+https://digitalresearchtools.pbworks.com/w/page/17801693/Organize%20Research%20Materials
+
+https://www.zotero.org/
+
+https://dzone.com/guides/artificial-intelligence-machine-learning-and-predi
 
 ## Proposal for academic publishing reform: Separate peer review and physical dissemination
 
@@ -47,6 +107,14 @@ What is important is "this article was reviewed by <an important researcher>",
 not "this article was published on <an important journal>".
 
 Reputation should be attached to reviewers, not journals.
+
+## Open access journals
+
+How do we know if an open-access journal is legitimate?
+
+http://www.mdpi.com/journal/universe
+
+https://benthamopen.com/PHY/home/
 
 ## How should we write?
 
