@@ -25,3 +25,4 @@ find the entry having the same key in [bibliography.yaml](https://github.com/edo
     - Teaching music to motley crew of moonlighting musicians forming a pop band
     - [Politics]({% link politics.md %})
     - [Software engineer salary]({% link salary.md %})
+    - [Clay millennium prize problems]({% link clay_math.md %})
