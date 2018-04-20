@@ -14,11 +14,11 @@
 
 // Define defaults for each variable.
 
-$base-font-family: 'Libre Baskerville', serif !default;
-$base-font-size:   16px !default;
+$base-font-family: 'Times New Roman', serif !default;
+$base-font-size:   12pt !default;
 $base-font-weight: 400 !default;
 $small-font-size:  $base-font-size * 0.875 !default;
-$base-line-height: 1.5 !default;
+$base-line-height: 1.25 !default;
 
 $spacing-unit:     30px !default;
 
@@ -42,7 +42,7 @@ h1, h2, h3, h4, h5, h6 {
 
 @media screen {
     .wrapper {
-        max-width: 40 * $base-font-size;
+        max-width: 72ex;
         margin-left: auto;
         margin-right: auto;
     }
@@ -229,9 +229,8 @@ blockquote {
 pre,
 code {
   @include relative-font-size(0.9375);
-  border: 1px solid $grey-color-light;
-  border-radius: 3px;
   background-color: #f0f0f0;
+  font-family: 'Courier New', monospace;
 }
 
 code {
@@ -243,7 +242,6 @@ pre {
   overflow-x: auto;
 
   > code {
-    border: 0;
     padding-right: 0;
     padding-left: 0;
   }
