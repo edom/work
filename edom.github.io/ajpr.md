@@ -79,3 +79,8 @@ But together they screw buyers.
 Incentivize academics to publish openly on the Internet instead on closed journals.
 
 Make a website for peer-reviewing articles.
+
+2018-04-25: It exists. See Wikipedia:
+[Publons](https://en.wikipedia.org/wiki/Publons),
+[PubPeer](https://en.wikipedia.org/wiki/PubPeer),
+[JournalReview.org](https://en.wikipedia.org/wiki/JournalReview.org).
