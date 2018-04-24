@@ -42,6 +42,25 @@ permalink: /ajpr.html
         - Library.nu, see [Wikipedia](https://en.wikipedia.org/wiki/Library.nu)
 - What can you do to help solve that?
     - I have a proposal below that I hope is useful, but I'm not sure.
+- https://www.quora.com/Why-do-researchers-have-to-pay-to-read-research-papers-Shouldnt-papers-be-free-for-those-who-need-them-How-are-publishers-able-to-charge-so-much
+- [WP: Academic publishing](https://en.wikipedia.org/wiki/Academic_publishing)
+- [WP: Scientometrics](https://en.wikipedia.org/wiki/Scientometrics)
+    - What are some metrics used to measure an academic resource?
+        - Impact factor, "a measure reflecting the yearly average number of citations to recent articles published in that journal" ([Wikipedia: Impact factor](https://en.wikipedia.org/wiki/Impact_factor))
+        - h-index, https://en.wikipedia.org/wiki/H-index#Calculation
+    - Are those metrics good? Do they create perverse incentive? Are people gaming the system?
+        - I know someone who coauthors more papers than everyone in my university *combined*.
+            - Is it possible to coauthor that many papers?
+            - Is he efficient?
+            - Is he cheating?
+                - Perhaps he should be thanked, but he is not an author?
+                    - What is an author?
+                        - If you suggest an idea, but don't write the paper, are you an author?
+                        - https://www.theguardian.com/higher-education-network/2015/jun/05/my-professor-demand-to-be-listed-author-on-research-paper
+                    - How many papers can you author in a year?
+            - Is my university incompetent?
+- Why are there so many academic journals?
+- [Why we can't trust academic journals to tell the scientific truth](https://www.theguardian.com/higher-education-network/2017/jun/06/why-we-cant-trust-academic-journals-to-tell-the-scientific-truth)
 
 ## Proposal for academic publishing reform: Separate peer review and physical dissemination
 

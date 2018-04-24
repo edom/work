@@ -2,7 +2,6 @@
 title: How to cook eggs
 permalink: /egg.html
 date: 2017-05-20 23:22:00 +0700
-featured: true
 ---
 
 ## Materials

@@ -2,12 +2,15 @@
 title: Abdullah research roadmap
 date: 2018-04-11 03:50 +0700
 permalink: /abdullah.html
+mathjax: yes
 ---
 
+- Abbreviations:
+    - CCC: Cartesian closed category ([Wikipedia](https://en.wikipedia.org/wiki/Cartesian_closed_category))
 - Abdullah wants to make a monad-aware programming language.
+    - Categories enable us to organize a hierarchy of effects?
+        - effectful over category \\( C \\) = extends category \\( C \\)?
 - The plan is to research two related things in parallel:
-    - the relationship among laziness, strictness, totality, and monads
-        - Read [McBride2015].
     - using algebraic subtyping to mix parametric subtyping and inheritance subtyping
         - [Stephen Dolan's Ph.D. thesis "Algebraic subtyping"](https://www.cl.cam.ac.uk/~sd601/thesis.pdf)
             - "Type systems which support subtyping care about the direction of data flow."
@@ -16,6 +19,178 @@ permalink: /abdullah.html
         - Scala already tries to join parametric subtyping and inheritance subtyping.
         What is the problem with Scala?
 - Related: [functional programming research]({% link functional_programming.md %}).
+
+## Research questions
+
+### Possible questions
+
+- What is the result of CPS-transforming a recursive function?
+
+```haskell
+fac 0 = 1
+fac n = n * fac (n - 1)
+
+fac 0 k = k 1
+fac n k = fac (n - 1) $ \ x -> k (n * x)
+```
+
+Conjecture:
+Every recursive function can be transformed to a tail-recursive function with a helper function \\( f(x) = f(g(x)) \\).
+
+```haskell
+fac 0 = 1
+fac n = n * fac (n - 1)
+
+fach (a, 0) = (a, 0)
+fach (a, n) = fach (a * n, n - 1)
+
+fac n = fach (1, n)
+```
+
+How do we enable the caller to step the recursion?
+
+```haskell
+fac n = \ k -> k (\ x -> x * fac (n - 1) k) n
+fac n (\ f x -> f x)
+
+tri 0 = 0
+tri n = n + tri (n - 1)
+
+tri :: Nat -> ((x -> c -> Nat) -> Nat -> Nat)
+tri 0 = \ k -> 0
+tri n = \ k -> k (\ x c -> x + tri (n - 1) c) n
+
+inc x = inc (x + 1)
+
+inc x = \ k -> k (\ ) (x + 1)
+```
+
+- [github: dorchard/unfix: Takes a recursive function and syntactically unties the recursive knot](https://github.com/dorchard/unfix)
+
+### What is the relationship between self-reference, recursion, and fixed points?
+
+We say that \\( x \\) is a *fixed point* of \\( f \\) iff \\( f(x) = x \\).
+
+[MO 126513: categories of recursive functions](https://mathoverflow.net/questions/126513/categories-of-recursive-functions)
+
+- What is the essence of self-recursion?
+    - `fix` does not exist in a strict language.
+        - "The Z combinator will work in strict languages [...]" [WP: Fixed-point combinator](https://en.wikipedia.org/wiki/Fixed-point_combinator#Strict_fixed_point_combinator)
+            - The Z combinator is obtained by eta-expanding the Y combinator.
+
+### What is the formal definition of strict, non-strict, eager, and lazy?
+
+The difference is explained by luqui on [SO 7140978](https://stackoverflow.com/questions/7140978/haskell-how-does-non-strict-and-lazy-differ).
+- Strict and non-strict are about meaning (denotational semantics?).
+Eager and lazy are about operation (operational semantics?).
+- Strictness is a domain-theoretic concept.
+Laziness is a computer implementation detail.
+- This uses Haskell to introduce domain theory: [Wikibooks: Haskell: Denotational semantics](https://en.wikibooks.org/wiki/Haskell/Denotational_semantics).
+    - In Haskell, the least fixed point operator can be defined as `fix f = f (fix f)`.
+        - Why is bottom the *least* fixed point of `id`?
+        Every \\( x \\) is a fixed point of an identity function \\( x \mapsto x \\), isn't it?
+            - What is the ordering?
+                - "Semantic approximation order"
+    - [Haskell wiki](https://wiki.haskell.org/Lazy_vs._non-strict) is wrong?
+    It conflates non-strictness with normal-order reduction strategy?
+    - [A simple example of denotational semantics using a language of binary numerals](http://pages.cs.wisc.edu/~horwitz/CS704-NOTES/6.DENOTATIONAL-SEMANTICS.html#simple)
+    - [WP: Binary combinatory logic](https://en.wikipedia.org/wiki/Binary_combinatory_logic).
+    Its semantics is SK calculus (SKI calculus without the redundant I combinator) which is equivalent to lambda calculus.
+- we can execute non-strict functions eagerly,
+for example by strictness analysis or speculative execution.
+
+People are often sloppy with these terms. Redditors. Experts. Researchers. Academics.
+It is true that Haskell is non-strict.
+It is true that Haskell (as implemented by GHC) is lazy.
+
+We can infer these formal definitions:
+- A function \\( f \\) is *strict* iff \\( f(\bot) = \bot \\).
+    - "a strict function must map bottom to bottom" (from the SO answer)
+
+### How do we represent general recursion by a monad? How do we add general recursion to TFP? How do we do it with monads?
+
+Here we try to salvage [McBride2015].
+
+TODO write the problem: how McBride's General doesn't compose
+
+- Is McBride's General really a monad?
+- Is Abdullah's M really a monad?
+- Did Abdullah mistranslate McBride's General?
+- Is there a way to transform begin-step-end to McBride's General or Abdullah's M?
+- Start with axioms, then infer the data types.
+
+These are the axioms that we want M to satisfy.
+- `rec f . rec g = rec (ext f . g)`
+- `rec f . rec g = rec (f <=< g)`
+- `rec pure = id`
+
+How do we translate a recursive function `f : a -> b`
+to an explicitly recursive function `f : a -> m b`?
+
+```haskell
+-- Abdullah's M, obtained by translating
+-- the General in [McBride2015] from Agda to Haskell
+data M s t a
+    = Em a
+    | Ap (t -> M s t a) s
+
+cata :: (a -> r) -> ((t -> r) -> s -> r) -> r
+cata ar xrxr m = fix $ \ self m -> case m of
+    Em a -> ar a
+    Ap xma x -> xrxr (self . xma) x
+```
+
+- Why do we want to add general recursion to TFP?
+    - Adding general recursion to a TFPL
+    makes programming in that language more practical.
+- There are several attempts to add general recursion to TFP.
+    - [Nordstrom1988] (terminating general recursion)
+    - [Bove2001] (simple general recursion in type theory)
+    - [Capretta2005] (general recursion via coinductive types)
+    - [McBride2015] (Turing-completeness totally free)
+    - me on 2018-04-07: [Approximating general recursion in TFP]({% link tfp_gen_rec.md %})
+    - [A non-termination monad inspired by domain theory](http://adam.chlipala.net/cpdt/html/GeneralRec.html),
+    part of the documentation of Coq's GeneralRec library
+- How are monads useful in FP?
+    - Monads allow embedding a strict language in a lazy language [Wadler1996].
+    - "Monads may be regarded as a mild generalization of continuation-passing style." [Wadler1996]
+- [Philip Wadler's research on monads](http://homepages.inf.ed.ac.uk/wadler/topics/monads.html)
+- Reading triage:
+    - Moggi 1991: Notions of computation and monads
+        - Programs should form a category.
+            - Every type becomes an object in the category.
+            - Every (one-parameter) function becomes a morphism in the category.
+        - "Kleisli triples are just an alternative description for monads. Although
+        the former are easy to justify from a computational perspective, the latter
+        are more widely used in the literature on category theory and have the
+        advantage of being defined only in terms of functors and natural transformations,
+        which make them more suitable for abstract manipulation."
+        - Moggi's most cited paper, according to Google Scholar
+        - [Moggi's home page](https://www.disi.unige.it/person/MoggiE/)
+            - [Moggi's list of his publications](https://www.disi.unige.it/person/MoggiE/publications.html)
+                - recent paper: 2010 "Monad Transformers as Monoid Transformers". Theoretical Computer Science, TCS vol.411
+    - [Moggi 1989: Computational lambda-calculus and monads](https://www.irif.fr/~mellies/mpri/mpri-ens/articles/moggi-computational-lambda-calculus-and-monads.pdf)
+    - 2017 Uustalu [Partiality and container monads](https://www.semanticscholar.org/paper/Partiality-and-Container-Monads-Uustalu-Veltri/a45cabd8696232a985368e5b7f138fd21a7bff9f)
+    - [Sheard2003] (a pure language with default strict evaluation order and explicit laziness)
+    - [Wadler1998] (how to add laziness to a strict language without even being odd)
+    - [Wadler1992] "explores the use of monads to structure functional programs"
+    - [Monad for lazy evaluation](https://srfi.schemers.org/srfi-40/mail-archive/msg00059.html),
+    Scheme, SRFI-40 mail archive, Andre van Tonder
+    - [Not all computational effects are monads](http://math.andrej.com/2008/11/17/not-all-computational-effects-are-monads/)
+    - 2018 Tomas Petricek [What we talk about when we talk about monads](https://arxiv.org/pdf/1803.10195.pdf)
+
+## Result of meeting on 2018-04-21
+
+- https://mvanier.livejournal.com/2897.html
+- Applicative Functor is a homomorphism over CCC (Cartesian closed category)?
+- We can use a category as the denotation of a functional programming language.
+    - An example of a category:
+        - One object: Unit
+        - One morphism:
+        - Two functions:
+            - `f0 x = Unit`
+            - `f1 x = x`
+- What is a CCC? It is a category that satisfies the axioms in [WP: CCC](https://en.wikipedia.org/wiki/Cartesian_closed_category).
 
 ## Agenda for 2018-04-21
 
@@ -45,24 +220,7 @@ Does that question make sense?
 I conjecture that every general recursive function can be transformed into its begin-step-end form.
 See [Approximating general recursion in TFP]({% link tfp_gen_rec.md %}).
 
-### I think we can't add a Lazy monad to Strict Haskell
-
-Abdullah wrote:
-
-> I phrased the research topic as a question: "Is laziness monadic over strict?" (One could also ask, "Is turing-complete monadic over total?")
-The 3 key expressions are "laziness", "monadic over," and "strict."
-As we already know, each of them is multivalued.
-
-> Here's one way to make everything concrete: Let "strict" mean "strict haskell."
-The latter doesn't have infinite lists.
-So lazy haskell is monadic over strict haskell with the usual haskell monadic combinators.
-
-> We understand and appreciate monads as today's best practice for managing such extensions.
-Hence, the motivation behind this research. Many extensions have tidily organized themselved into monads. In particular, IO is monadic. What's uncharted is lazy over strict.
-
-> Turner's Total FP paper gives good reasons as to why we want to program in a total language. But we want the cake and eat it too. We want to write programs, part of which is total and part of which isn't. And we want the language to manage the hierarchy of extensions for us. The best way we know how is via monads.
-
-> Let's illustrate in a gedanken language with explicit extension combinators: Whereas `head :: [a] -> a` in the total fragment (i.e. the base space), we'd have `fmap head :: {a} -> a` in the extension, where `[a]` means finite lists and `{a}` means possibly infinite ones.
+### I think we can't add a Lazy Monad instance to Strict Haskell without changing the language semantics
 
 Here I try to (and fail to) add a Lazy monad to an imaginary language Strict Haskell (SH).
 
@@ -120,47 +278,6 @@ It failed.
 - Why do you ask this?
     - We've been thinking that totality precludes Turing-completeness, but Conor McBride disagrees in [McBride2015].
 
-### How do we add general recursion to TFP? How do we do it with monads?
-
-- Why do we want to add general recursion to TFP?
-    - Adding general recursion to a TFPL
-    makes programming in that language more practical.
-- There are several attempts to add general recursion to TFP.
-    - [Nordstrom1988] (terminating general recursion)
-    - [Bove2001] (simple general recursion in type theory)
-    - [Capretta2005] (general recursion via coinductive types)
-    - [McBride2015] (Turing-completeness totally free)
-    - me on 2018-04-07: [Approximating general recursion in TFP]({% link tfp_gen_rec.md %})
-    - [A non-termination monad inspired by domain theory](http://adam.chlipala.net/cpdt/html/GeneralRec.html),
-    part of the documentation of Coq's GeneralRec library
-- How are monads useful in FP?
-    - Monads allow embedding a strict language in a lazy language [Wadler1996].
-    - "Monads may be regarded as a mild generalization of continuation-passing style." [Wadler1996]
-- [Philip Wadler's research on monads](http://homepages.inf.ed.ac.uk/wadler/topics/monads.html)
-- Reading triage:
-    - Moggi 1991: Notions of computation and monads
-        - Programs should form a category.
-            - Every type becomes an object in the category.
-            - Every (one-parameter) function becomes a morphism in the category.
-        - "Kleisli triples are just an alternative description for monads. Although
-        the former are easy to justify from a computational perspective, the latter
-        are more widely used in the literature on category theory and have the
-        advantage of being defined only in terms of functors and natural transformations,
-        which make them more suitable for abstract manipulation."
-        - Moggi's most cited paper, according to Google Scholar
-        - [Moggi's home page](https://www.disi.unige.it/person/MoggiE/)
-            - [Moggi's list of his publications](https://www.disi.unige.it/person/MoggiE/publications.html)
-                - recent paper: 2010 "Monad Transformers as Monoid Transformers". Theoretical Computer Science, TCS vol.411
-    - [Moggi 1989: Computational lambda-calculus and monads](https://www.irif.fr/~mellies/mpri/mpri-ens/articles/moggi-computational-lambda-calculus-and-monads.pdf)
-    - 2017 Uustalu [Partiality and container monads](https://www.semanticscholar.org/paper/Partiality-and-Container-Monads-Uustalu-Veltri/a45cabd8696232a985368e5b7f138fd21a7bff9f)
-    - [Sheard2003] (a pure language with default strict evaluation order and explicit laziness)
-    - [Wadler1998] (how to add laziness to a strict language without even being odd)
-    - [Wadler1992] "explores the use of monads to structure functional programs"
-    - [Monad for lazy evaluation](https://srfi.schemers.org/srfi-40/mail-archive/msg00059.html),
-    Scheme, SRFI-40 mail archive, Andre van Tonder
-    - [Not all computational effects are monads](http://math.andrej.com/2008/11/17/not-all-computational-effects-are-monads/)
-    - 2018 Tomas Petricek [What we talk about when we talk about monads](https://arxiv.org/pdf/1803.10195.pdf)
-
 ## Results
 
 ### Is continuation the mother of all monads?
@@ -174,3 +291,28 @@ contains a proposed partial proof of the Abdullah conjecture for all Haskell 98 
 The proof can be checked by the Lean theorem prover version 3.
 See also the [Lean prover home page](https://leanprover.github.io/).
 To edit Lean source files, use Visual Studio Code and its Lean plugin.
+
+## Reading triage
+
+[1995, D. A. Turner, Elementary Strong Functional Programming](https://pdfs.semanticscholar.org/b60b/1c2e49ec6f574f220f162c8fdc81b2831830.pdf)
+
+[Godel's System T revisited](https://nms.kcl.ac.uk/maribel.fernandez/papers/TCS10.pdf)
+
+[Total Functional Programming in a Partial Impure Language](http://semantic-domain.blogspot.co.id/2012/12/total-functional-programming-in-partial.html)
+
+[Type theory and functional programming](http://www.cse.chalmers.se/~coquand/bengt.pdf):
+Can we see type theory as a functional programming language?
+
+[Thierry Coquand page at Chalmers](http://www.cse.chalmers.se/~coquand/)
+
+[MO 126513: Categories of recursive functions](https://mathoverflow.net/questions/126513/categories-of-recursive-functions)
+
+[Denotational semantics and rewrite rules for FP](https://www.researchgate.net/publication/234808984_Denotational_semantics_and_rewrite_rules_for_FP):
+"We consider languages whose operational semantics is given by a set of rewrite rules."
+
+[allisons.org: Denotational Semantics](http://www.allisons.org/ll/Semantics/)
+
+The Y-combinator is \\( \lambda f. (\lambda x. f ~ (x ~ x)) ~ (\lambda x. f ~ (x ~ x)) \\).
+[WP: Fixed-point combinator](https://en.wikipedia.org/wiki/Fixed-point_combinator)
+
+[Simple Denotational Semantics for the Lambda Calculus, Pω Revisited?](http://siek.blogspot.co.id/2016/12/simple-denotational-semantics-for.html)

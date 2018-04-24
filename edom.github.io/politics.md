@@ -29,10 +29,12 @@ permalink: /politics.html
         [list of executive actions by Donald Trump](https://en.wikipedia.org/wiki/List_of_executive_actions_by_Donald_Trump)
         to find out who he really is?
         Will someone summarize?
+- Who else trash-talk like Donald Trump does?
+    - Thomas Jefferson, according to [Adam Ruins Everything - Other Donald Trumps Throughout History](https://www.youtube.com/watch?v=ZIv7dQ9tt30)
+    - and lots of people in the colonial era, according to [Slinging Mud and Talking Trash: The Gutter Age of American Journalism](https://www.readex.com/readex-report/slinging-mud-and-talking-trash-gutter-age-american-journalism)
 - Syrian war
     - [Quora: Is Assad bombing his people? If so, why do many people support him?](https://www.quora.com/Is-Assad-bombing-his-people-If-so-why-do-many-people-support-him)
 - How do we fix the justice system?
     - Replace retributive justice with restorative justice.
         - Focus on fixing the damage, not on punishing people.
         - Norwegia is a prime example.
-- [Politik masjid]({% link politik_masjid.md %})

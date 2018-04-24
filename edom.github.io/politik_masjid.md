@@ -36,4 +36,16 @@ language: id
             ](https://techcrunch.com/2016/04/05/whatsapp-completes-end-to-end-encryption-rollout/)
 - Pertanyaan-pertanyaan yang belum terjawab.
     - Siapa yang mensponsori (mendanai) politik masjid?
-    - Siapa yang mendanai aksi demo 2 Desember 2017?
+    - Siapa yang mendanai aksi demo 2 Desember 2016?
+    - Siapa yang menentang sertifikasi ulama atau standardisasi khatib?
+        - Apakah orang yang menentang sertifikasi ulama itu sebenarnya diam-diam anti-pemerintah/anti-NKRI?
+            - Apakah desas-desus tersebut sengaja digulirkan untuk memancing reaksi kaum ekstremis, jadi ketahuan?
+    - Apakah Prabowo berpolitik masjid?
+        - Tidak ada bukti Prabowo berpolitik masjid, namun beliau terkadang beracara bersama orang-orang yang berpolitik masjid.
+            - [Prabowo, Anies, Rizieq bertemu di masjid](http://www.bbc.com/indonesia/trensosial-39642796)
+    - Prabowo umur berapa?
+        - Prabowo lahir tahun 1951. Tahun 2018 umurnya 66 tahun.
+        - Suharto lahir tahun 1921. Tahun 1998 beliau jatuh, umurnya 77 tahun.
+        - Trump lahir tahun 1946. Tahun 2016 beliau terpilih, umurnya 70 tahun.
+        - Menurut [hukumonline.com](http://www.hukumonline.com/klinik/detail/lt576b5bea8bb19/aturan-tentang-batas-usia-pensiun-pekerja),
+        usia pensiun 56 tahun.

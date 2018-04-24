@@ -2,7 +2,6 @@
 title: Building a mental model for using Git
 permalink: /git.html
 date: 2017-06-26 00:36:00 +0700
-featured: true
 ---
 
 In Git, there are two kinds of things:
