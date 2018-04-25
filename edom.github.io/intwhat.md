@@ -5,110 +5,128 @@ date: 2017-06-22 03:57:00 +0700
 mathjax: true
 ---
 
-- What is AI?
-    - "McCarthy coined the term 'artificial intelligence' in 1955, and organized the famous Dartmouth Conference in Summer 1956.
-    This conference started AI as a field."
-        - [Wikipedia: John McCarthy (computer scientist)](https://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist))
-            - Thus AI was whatever they were doing.
-- What are AI approaches? How are we trying to make an AI?
-    - Pedro Domingos categorizes AI approaches into five *tribes*:
-        - symbolists (symbolic logic)
-        - connectionists (neural networks)
-        - evolutionaries (genetic algorithms)
-        - bayesians (statistical learning, probabilistic inference)
-        - analogizers (what is this?)
-- How do we measure intelligence? How do we measure the performance of a learning algorithm?
-    - [Wikipedia: Computational learning theory](https://en.wikipedia.org/wiki/Computational_learning_theory)
-        - What is the goal of computational learning theory?
-            - "Give a rigorous, computationally detailed and plausible account of how learning can be done." [Angluin1992]
-        - "a subfield of Artificial Intelligence devoted to studying the design and analysis of machine learning algorithms"
-        - What is a mathematical theory of learning?
-            - What is learning?
-                - 2018-04-19: "To learn something" is to get better at it.
-                Usually learning uses experience.
-                    - What is the formal definition of "get better"?
-                        - Let there be a system.
-                        Pick a task.
-                        Pick a time interval.
-                        Test the system several times throughout the time interval.
-                        Let the test results be the sequence \\( X = x_1, x_2, \ldots, x_n \\).
-                        We say that the system is *learning* the task in the time interval
-                        iff \\( x_1 < x_2 < \ldots < x_n \\)
-                        (that is iff \\( X \\) is a monotonically increasing sequence).
-                        - How do we formalize "get better" and "experience"?
-                            - "Get better" can be modeled by *monotonically increasing score*
-                            - "Experience" can be modeled by a sequence
-                    - Is experience (past data) necessary for learning?
-                    Are mistakes necessary for learning?
-                - Supervised learning is extrapolating a function from finite samples.
-                Usually, the function is high-dimensional, and the samples are few.
-                - What is the summary of [Poggio1989], especially about learning and approximation theory?
-                    - TODO: Find recent papers that cite [Poggio1989].
-                    - TODO: Read [Poggio1989].
-                - It is simple to measure learning success in perfect information games such as chess.
-                Chess also doesn't require any sensors and motors.
-- What is intelligence?
-    - What is a mathematical theory of intelligence?
-    - In 2007, on page 12, in the paper [Universal intelligence: a definition of machine intelligence](https://arxiv.org/pdf/0712.3329.pdf),
-    Shane Legg and Marcus Hutter wrote,
-    "Intelligence measures an agent’s ability to achieve goals in a wide range of environments,"
-    and then they formalized them.
-    Here I try another formalization.
-        - Let \\(E\\) be a set of *environments*.
-        - Let \\(G : E \to \Real\\) be a *goal function*.
-        The value of \\(G(e)\\) measures how well the agent performs in environment \\(e\\).
-        - The *intelligence* of the agent *with respect to \\(G\\) across \\(E\\)* is \\( \int_E G \\).
-        - A *performance* consists of an agent and an environment.
-        - Assumption: The agent cannot modify \\(G\\).
-        - Behavior is a function taking an environment and outputing something.
-        - Intelligence is *relative* to \\(G\\) and \\(E\\): *goal* and *environment*.
-        - If we see longevity as intelligence test,
-    then an illiterate farmer who lives to 80
-    is more intelligent than a scientist who dies at 20,
-    but a rock that has been there for 100 years would even be more intelligent than the farmer.
-        - If we see money as intelligence test,
-    then a corrupt politician who steals billions of dollars without getting caught
-    is more intelligent than a honest farmer who only has tens of thousands of dollars.
-    - Gaming the system is a sign of intelligence.
-    It is hard to design a goal function that gives the desired outcome without undesired side effects.
-    - IQ tests are intelligence measures with small environment set.
-    - Lifespan may be an intelligence measure with huge environment set.
-    - A human can optimize *several* goal functions across the same environment set.
-    A human may be asked to clean a floor, to write a report, to run a company, to cook food,
-    and to find the quickest route between home and office,
-    and optimize them all.
-    - Some goal functions for humans are (but perhaps not limited to):
-        - Maximize happiness
-        - Minimize pain
-        - Optimize the level of a chemical in the brain
-        - Optimize the time integral of such chemical
-        - Maximize the chance of survival
-    - but I don't know the root goal function
-    that explains all those behaviors.
-    - Where does the word "intelligence" come from? What is its etymology?
-        - The word "intelligent" comes from a Latin word that means "to choose between"
-        ([Dictionary.com](http://www.dictionary.com/browse/intelligent)).
-    - What are some mathematical definitions of intelligence?
-        - "Intelligence measures an agent's ability to achieve goals in a wide range of environments."
-        [Legg2006][Legg2008]
-        - [Shour2018](https://www.researchgate.net/publication/323203054_Defining_intelligence):
-        "Defining intelligence as a rate of problem solving and using the concept
-        of network entropy enable measurement, comparison and calculation of
-        collective and individual intelligence and of computational capacity."
-        - Tononi integrated information theory.
-        [Wikipedia](https://en.wikipedia.org/wiki/Integrated_information_theory).
-        - Schmidhuber, Hutter, and team have used Solomonoff algorithmic probability
-        and Kolmogorov complexity to define a theoretically optimal predictor they call AIXI.
-            - J\"urgen Schmidhuber. [Schmidhuber article](http://www.idsia.ch/~juergen/newai/newai.html).
-            - [Prashant's slides](http://www.cs.uic.edu/~piotr/cs594/Prashant-UniversalAI.pdf).
-                These define "universal" and "optimal".
-        - Marcus Hutter approached intelligence from \emph{algorithmic} complexity theory (Solomonoff induction)
-        \cite{DefineMachIntel}.
-        - Warren D. Smith approached intelligence from \emph{computational} complexity theory
-        (NP-completeness)
-        \cite{WdsIntel, WdsIntelSlide}
-    - What are other definitions of intelligence?
-        - Legg and Hutter has collected definitions of intelligence in [Legg2007Collection].
+## Plan
+
+- 2018-04-26
+    - Read about universal intelligence
+        - Read [Hutter2005Book]
+        - Read [hutter1.net...uaibook.htm](http://www.hutter1.net/ai/uaibook.htm)
+            - He formulated the "degree of intelligence" in 2005; we had a similar idea in 2018 in [intwhat.html]({% link intwhat.md %})
+            - (edited) "AIXI [...] learns by eliminating Turing machines [...] once they become inconsistent with the progressing history."
+        - [Presentation, 393 slides](http://www.hutter1.net/ai/suaibook.pdf)
+        - [Slides](http://users.cecs.anu.edu.au/~ssanner/MLSS2010/Hutter1.pdf), maybe a draft of the above.
+
+## Intelligence can be thought as an ordering (2018-04-26)
+
+Intelligence is an *ordering* of systems.
+
+An order is a transitive antisymmetric relation.
+
+[Edwin G. Boring in 1923](https://brocku.ca/MeadProject/sup/Boring_1923.html)
+proposed that we start out by defining intelligence as what intelligence tests measure
+"until further scientific observation allows us to extend the definition".
+That definition makes sense mathematically.
+
+*Intelligence depends on its measurement*. Absolute intelligence doesn't exist.
+
+### How do we decide which system is more intelligent?
+
+Let \\( A \\) be a system.
+
+Let \\( B \\) be a system.
+
+Let \\( T \\) be a task.
+
+Let \\( S \\) be a set of tasks.
+
+Let \\( T(A) \\) denote how well system \\( A \\) does task \\( T \\).
+This is a number.
+Higher is better.
+We can invent any measurement.
+Our definition of "intelligence" is only as good as this measurement.
+
+We say "\\( A \\) is *\\( T \\)-better* than \\( B \\)" iff \\( T(A) > T(B) \\).
+
+We say "\\( A \\) *\\( S \\)-dominates* \\( B \\)" iff \\( T(A) > T(B) \\) for every task \\( T \in S \\).
+
+We define "to be more \\( S \\)-intelligent than" to mean "to \\( S \\)-dominate".
+
+The \\( S \\)-domination relation forms a partial order of all systems.
+
+That is how.
+
+#### Example
+
+Which is more intelligent, a dog or a rock?
+
+That depends on the task set \\( S \\).
+
+It's the rock if <span>\( S = \{ \text{sit still} \} \)</span>.
+
+It's the dog if <span>\( S = \{ \text{move around} \} \)</span>.
+
+## What is a mathematical theory of intelligence?
+
+- In 2007, on page 12, in the paper [Universal intelligence: a definition of machine intelligence](https://arxiv.org/pdf/0712.3329.pdf),
+Shane Legg and Marcus Hutter wrote,
+"Intelligence measures an agent’s ability to achieve goals in a wide range of environments,"
+and then they formalized them.
+Here I try another formalization.
+    - Let \\(E\\) be a set of *environments*.
+    - Let \\(G : E \to \Real\\) be a *goal function*.
+    The value of \\(G(e)\\) measures how well the agent performs in environment \\(e\\).
+    - The *intelligence* of the agent *with respect to \\(G\\) across \\(E\\)* is \\( \int_E G \\).
+    - A *performance* consists of an agent and an environment.
+    - Assumption: The agent cannot modify \\(G\\).
+    - Behavior is a function taking an environment and outputing something.
+    - Intelligence is *relative* to \\(G\\) and \\(E\\): *goal* and *environment*.
+    - If we see longevity as intelligence test,
+then an illiterate farmer who lives to 80
+is more intelligent than a scientist who dies at 20,
+but a rock that has been there for 100 years would even be more intelligent than the farmer.
+    - If we see money as intelligence test,
+then a corrupt politician who steals billions of dollars without getting caught
+is more intelligent than a honest farmer who only has tens of thousands of dollars.
+- Gaming the system is a sign of intelligence.
+It is hard to design a goal function that gives the desired outcome without undesired side effects.
+- IQ tests are intelligence measures with small environment set.
+- Lifespan may be an intelligence measure with huge environment set.
+- A human can optimize *several* goal functions across the same environment set.
+A human may be asked to clean a floor, to write a report, to run a company, to cook food,
+and to find the quickest route between home and office,
+and optimize them all.
+- Some goal functions for humans are (but perhaps not limited to):
+    - Maximize happiness
+    - Minimize pain
+    - Optimize the level of a chemical in the brain
+    - Optimize the time integral of such chemical
+    - Maximize the chance of survival
+- but I don't know the root goal function
+that explains all those behaviors.
+- Where does the word "intelligence" come from? What is its etymology?
+    - The word "intelligent" comes from a Latin word that means "to choose between"
+    ([Dictionary.com](http://www.dictionary.com/browse/intelligent)).
+- What are some mathematical definitions of intelligence?
+    - "Intelligence measures an agent's ability to achieve goals in a wide range of environments."
+    [Legg2006][Legg2008]
+    - [Shour2018](https://www.researchgate.net/publication/323203054_Defining_intelligence):
+    "Defining intelligence as a rate of problem solving and using the concept
+    of network entropy enable measurement, comparison and calculation of
+    collective and individual intelligence and of computational capacity."
+    - Tononi integrated information theory.
+    [Wikipedia](https://en.wikipedia.org/wiki/Integrated_information_theory).
+    - Schmidhuber, Hutter, and team have used Solomonoff algorithmic probability
+    and Kolmogorov complexity to define a theoretically optimal predictor they call AIXI.
+        - J\"urgen Schmidhuber. [Schmidhuber article](http://www.idsia.ch/~juergen/newai/newai.html).
+        - [Prashant's slides](http://www.cs.uic.edu/~piotr/cs594/Prashant-UniversalAI.pdf).
+            These define "universal" and "optimal".
+    - Marcus Hutter approached intelligence from \emph{algorithmic} complexity theory (Solomonoff induction)
+    \cite{DefineMachIntel}.
+    - Warren D. Smith approached intelligence from \emph{computational} complexity theory
+    (NP-completeness)
+    \cite{WdsIntel, WdsIntelSlide}
+- What are other definitions of intelligence?
+    - Legg and Hutter has collected definitions of intelligence in [Legg2007Collection].
 
 ## What is learning?
 
@@ -166,17 +184,51 @@ That is, consider \\( f, g : \Real^\infty \to \Real^\infty \\).
 - A control system is a function in \\( \Real \to \Real^\infty \to \Real^\infty \\).
 - How does \\( F \\) have memory if \\( F(t) = \int_0^t f(x) ~ dx \\)?
 
-## Intelligence as an ordering: How do we decide which of two systems is more intelligent?
+Why has AI mastered chess, but not real life?
+Because chess search space is much smaller than real-life search space.
 
-- *How do we decide which of two systems is more intelligent?*
-    - Intelligence can be thought as an *ordering* (transitive antisymmetric relation) of systems.
-    - We agree that a dog is more intelligent than a rock. How do we justify that?
-    - Suppose that we can measure whether entity \\( A \\) is *better* than entity \\( B \\) at task \\( T \\).
-    Then we can say that \\( A \\) is *more intelligent* than \\( B \\) in the task set \\( S \\)
-    iff \\( A \\) is better than \\( B \\) at every task in \\( S \\).
-    Note the qualifier "in the task set \\( S \\)".
-    Intelligence depends on how it's measured.
-- [Edwin G. Boring in 1923](https://brocku.ca/MeadProject/sup/Boring_1923.html)
-proposed that we start out by defining intelligence as what intelligence tests measure
-"until further scientific observation allows us to extend the definition".
-That definition makes sense mathematically.
+## What is AI?
+
+- In the 1950s, AI was whatever McCarthy et al. were doing.
+    - "McCarthy coined the term 'artificial intelligence' in 1955, and organized the famous Dartmouth Conference in Summer 1956.
+    This conference started AI as a field."
+    ([WP: John McCarthy (computer scientist)](https://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist)))
+    - [WP: Dartmouth workshop](https://en.wikipedia.org/wiki/Dartmouth_workshop)
+    - [Ray Solomonoff's Dartmouth archives](http://raysolomonoff.com/dartmouth/)
+- What are AI approaches? How are we trying to make an AI?
+    - Pedro Domingos categorizes AI approaches into five *tribes*:
+        - symbolists (symbolic logic)
+        - connectionists (neural networks)
+        - evolutionaries (genetic algorithms)
+        - bayesians (statistical learning, probabilistic inference)
+        - analogizers (what is this?)
+- How do we measure intelligence? How do we measure the performance of a learning algorithm?
+    - [Wikipedia: Computational learning theory](https://en.wikipedia.org/wiki/Computational_learning_theory)
+        - What is the goal of computational learning theory?
+            - "Give a rigorous, computationally detailed and plausible account of how learning can be done." [Angluin1992]
+        - "a subfield of Artificial Intelligence devoted to studying the design and analysis of machine learning algorithms"
+        - What is a mathematical theory of learning?
+            - What is learning?
+                - 2018-04-19: "To learn something" is to get better at it.
+                Usually learning uses experience.
+                    - What is the formal definition of "get better"?
+                        - Let there be a system.
+                        Pick a task.
+                        Pick a time interval.
+                        Test the system several times throughout the time interval.
+                        Let the test results be the sequence \\( X = x_1, x_2, \ldots, x_n \\).
+                        We say that the system is *learning* the task in the time interval
+                        iff \\( x_1 < x_2 < \ldots < x_n \\)
+                        (that is iff \\( X \\) is a monotonically increasing sequence).
+                        - How do we formalize "get better" and "experience"?
+                            - "Get better" can be modeled by *monotonically increasing score*
+                            - "Experience" can be modeled by a sequence
+                    - Is experience (past data) necessary for learning?
+                    Are mistakes necessary for learning?
+                - Supervised learning is extrapolating a function from finite samples.
+                Usually, the function is high-dimensional, and the samples are few.
+                - What is the summary of [Poggio1989], especially about learning and approximation theory?
+                    - TODO: Find recent papers that cite [Poggio1989].
+                    - TODO: Read [Poggio1989].
+                - It is simple to measure learning success in perfect information games such as chess.
+                Chess also doesn't require any sensors and motors.

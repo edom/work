@@ -184,3 +184,9 @@ Is intelligence = adaptiveness?
             - What is intelligence without learning?
             Non-adaptive intelligence? Static intelligence?
 - What is a cyborg?
+
+https://en.wikipedia.org/wiki/Evolutionary_robotics
+
+https://en.wikipedia.org/wiki/Universal_Darwinism
+
+https://en.wikipedia.org/wiki/Evolutionary_computation
