@@ -12,6 +12,7 @@ To resolve citation keys in this website, look up the key in [bibliography.yaml]
 ## Current research interests
 
 - [Intelligence]({% link intelligence.md %})
+- [Probability and statistics]({% link probstat.md %})
 - [Functional programming research]({% link functional_programming.md %})
 - [Joint research with Abdullah]({% link abdullah.md %})
 - [Meta-research]({% link meta_research.md %})
@@ -20,6 +21,7 @@ To resolve citation keys in this website, look up the key in [bibliography.yaml]
 - [Physics]({% link physics.md %})
 - [Clay millennium prize problems]({% link clay_math.md %})
 - [Computer science]({% link computer_science.md %})
+    - [Trying to prove P neq. NP]({% link pnptry.md %})
 - [Software engineer salary]({% link salary.md %})
 - Teaching music to a motley crew of moonlighting musicians forming a pop band
 - Biology
@@ -39,6 +41,9 @@ To resolve citation keys in this website, look up the key in [bibliography.yaml]
             - It's like hiring someone to imitate you for life.
             - Is it legit?
                 - [Wikipedia: Digital immortality](https://en.wikipedia.org/wiki/Digital_immortality)
+- Unstructured ramblings, drafts, thoughts, opinions
+    - [Economics]({% link economics.md %})
+    - [Government]({% link government.md %})
 
 ## What are your research activities?
 

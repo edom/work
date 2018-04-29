@@ -6,33 +6,25 @@ mathjax: yes
 date: 2016-02-01 00:00:00 +0700
 ---
 
-# Abstract
+## Abstract
 
-Your friends are those who will sacrifice for you.
-The greater the sacrifice, the greater the friendship.
+Your friends are those who sacrifice for you.
+The greater the sacrifice,
+the greater the friendship.
+How do we measure a sacrifice?
 
-# Measure
+## Measurement in theory
 
-We define \\(F(A,B)\\), the *friendship measure from A to B*
-as how much sacrifice that A is willing to make for B;
-therefore the problem of measuring friendship boils down
-to the valuation of sacrifices.
+We define \\(F(A,B)\\) (the *friendship measure from A to B*)
+as how much sacrifice that A is willing to make for B.
 
-The easiest (but not necessarily the best) way to approximate
-the amount of that sacrifice
-is by calculating its approximately equivalent amount of money.
-Of course friendship will involve sacrificing a lot of other things beside money,
-but we can approximate the value of all those things with money.
+(Is the direction correct? Is that backwards?)
 
-# Properties
+Thus measuring friendship boils down to valuating sacrifices.
 
-Friendship is circumstantial.
-\\(F(A,B)\\) changes over time.
+\\( F(A,B) \\) can be approximated by an equivalent amount of money.
 
-Friendship is usually asymmetric.
-It is usually the case that \\(F(A,B) \neq F(B,A)\\).
-
-# Measuring
+## Measurement in practice
 
 <a rel="nofollow" href="https://en.wikipedia.org/wiki/Foot-in-the-door_technique">Foot-in-the-door</a>:
 let A ask B to make bigger and bigger sacrifices until B refuses.
@@ -48,5 +40,22 @@ We can also average them, take the maximum, take the minimum,
 use interval arithmetics,
 or describe the result using a statistical distribution, for example.
 
-Note: running those procedures may have consequences to your friendship.
-If you want to measure your friendship, you should measure it unconspicuously.
+## Properties
+
+Friendship is circumstantial:
+\\(F(A,B)\\) changes over time.
+
+Friendship is usually asymmetric:
+\\(F(A,B) \neq F(B,A)\\).
+
+## Questions
+
+What is self-friendship?
+What is \\( F(A,A) \\)?
+How much is one willing to sacrifice for oneself?
+Does this question even make sense?
+
+## Links
+
+- [Mobinah Ahmad's 6-level relationship categorization](http://www.abc.net.au/news/2015-10-29/friendship-theory-developed-by-sydneysider-goes-viral/6897402#theory)
+- ["Ken writes: Isn’t it strange that although friendships are obviously asymmetrical this isn’t unambiguously reflected in language?"](https://kenanddot.wordpress.com/2007/03/21/the-asymmetry-of-friendship/)

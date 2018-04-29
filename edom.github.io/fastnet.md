@@ -26,3 +26,4 @@ I forgot to ask the people at home how long it had been down.
 2017-10-09 11:00 +0700 it went down.
 They said it would go up on 2017-10-10 23:00 +0700 (24 hour downtime).
 2017-10-10 03:23 +0700 it hadn't gone up.
+It finally went up, but I didn't note when.

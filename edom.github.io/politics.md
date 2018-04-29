@@ -38,3 +38,6 @@ permalink: /politics.html
     - Replace retributive justice with restorative justice.
         - Focus on fixing the damage, not on punishing people.
         - Norwegia is a prime example.
+- [Corruption is legal in America](https://www.youtube.com/watch?v=5tu32CCA_Ig), 6-minute video
+    - https://represent.us/
+    - https://anticorruptionact.org/

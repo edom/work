@@ -10,6 +10,9 @@
         max-width: none;
         margin: 0em;
     }
+    #disqus_thread {
+        display: none;
+    }
 }
 
 // Define defaults for each variable.
@@ -37,11 +40,19 @@ $on-palm:          32em !default;
 $on-laptop:        32em !default;
 
 h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.04em;
     font-weight: bold;
 }
 
+h1 { font-size: 2.000rem; }
+h2 { font-size: 1.250rem; }
+h3 { font-size: 1.125rem; }
+h4 { font-size: 1.063rem; }
+h5 { font-size: 0.900rem; }
+h6 { font-size: 0.800rem; }
+
 @media screen {
-    .wrapper {
+    .wrapper, #disqus_thread {
         max-width: 72ex;
         margin-left: auto;
         margin-right: auto;
@@ -52,6 +63,8 @@ p
 {
     margin-top: 0em;
     margin-bottom: 0em;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
     text-indent: 2em;
 }
 
@@ -112,19 +125,35 @@ dl, dd, figure {
 
 
 
+html {
+    font-family: $base-font-family;
+    font-size: 20pt;
+    line-height: 1.25;
+    font-variant: normal;
+    font-weight: normal;
+
+    @include media-query($on-palm) {
+        font-size: 12pt;
+    }
+
+    font-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+
+    font-kerning: normal;
+    -webkit-font-feature-settings: "kern" 1;
+       -moz-font-feature-settings: "kern" 1;
+         -o-font-feature-settings: "kern" 1;
+            font-feature-settings: "kern" 1;
+}
+
+
+
 /**
  * Basic styling
  */
 body {
-  font: $base-font-weight #{$base-font-size}/#{$base-line-height} $base-font-family;
   color: $text-color;
   background-color: $background-color;
-  -webkit-text-size-adjust: 100%;
-  -webkit-font-feature-settings: "kern" 1;
-     -moz-font-feature-settings: "kern" 1;
-       -o-font-feature-settings: "kern" 1;
-          font-feature-settings: "kern" 1;
-  font-kerning: normal;
 }
 
 table
@@ -152,7 +181,10 @@ h1, h2, h3, h4, h5, h6,
 pre,
 dl, figure,
 %vertical-rhythm {
-  margin-bottom: $spacing-unit / 2;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    -webkit-margin-before: 1rem;
+    -webkit-margin-after: 1rem;
 }
 
 
@@ -213,8 +245,6 @@ blockquote {
   color: $grey-color;
   border-left: 4px solid $grey-color-light;
   padding-left: $spacing-unit / 2;
-  @include relative-font-size(1.125);
-  letter-spacing: -0.03em;
 
   > :last-child {
     margin-bottom: 0;
@@ -228,7 +258,7 @@ blockquote {
  */
 pre,
 code {
-  @include relative-font-size(0.9375);
+  font-size: 0.9375rem;
   background-color: #f0f0f0;
   font-family: 'Courier New', monospace;
 }
@@ -294,12 +324,13 @@ div.highlighter-rouge > * { display: inline-block; text-align: left; }
  * Site header
  */
 .site-header {
+    background-color: #f0f0f0;
+    padding: 0.5em 0;
 }
 
 .site-title {
-  @include relative-font-size(1.5);
+  font-size: 1.0em;
   font-weight: 300;
-  line-height: $base-line-height * $base-font-size * 2.25;
   letter-spacing: -0.02em;
   margin-bottom: 0;
 
@@ -311,7 +342,6 @@ div.highlighter-rouge > * { display: inline-block; text-align: left; }
 
 .site-nav {
   display: inline-block;
-  line-height: $base-line-height * $base-font-size * 2.25;
 
   .nav-trigger {
       display: none;
@@ -323,7 +353,6 @@ div.highlighter-rouge > * { display: inline-block; text-align: left; }
 
   .page-link {
     color: $text-color;
-    line-height: $base-line-height;
 
     // Gaps between nav items, but not on the last one
     &:not(:last-child) {
@@ -386,68 +415,13 @@ div.highlighter-rouge > * { display: inline-block; text-align: left; }
  * Site footer
  */
 .site-footer {
-  border-top: 1px solid $grey-color-light;
-  padding: $spacing-unit 0;
-}
-
-.footer-heading {
-  @include relative-font-size(1.125);
-  margin-bottom: $spacing-unit / 2;
-}
-
-.contact-list,
-.social-media-list {
-  list-style: none;
-  margin-left: 0;
-}
-
-.footer-col-wrapper {
-  @include relative-font-size(0.9375);
-  color: $grey-color;
-  margin-left: -$spacing-unit / 2;
-  @extend %clearfix;
-}
-
-.footer-col {
-  float: left;
-  margin-bottom: $spacing-unit / 2;
-  padding-left: $spacing-unit / 2;
-}
-
-.footer-col-1 {
-  width: -webkit-calc(35% - (#{$spacing-unit} / 2));
-  width:         calc(35% - (#{$spacing-unit} / 2));
-}
-
-.footer-col-2 {
-  width: -webkit-calc(20% - (#{$spacing-unit} / 2));
-  width:         calc(20% - (#{$spacing-unit} / 2));
-}
-
-.footer-col-3 {
-  width: -webkit-calc(45% - (#{$spacing-unit} / 2));
-  width:         calc(45% - (#{$spacing-unit} / 2));
-}
-
-@include media-query($on-laptop) {
-  .footer-col-1,
-  .footer-col-2 {
-    width: -webkit-calc(50% - (#{$spacing-unit} / 2));
-    width:         calc(50% - (#{$spacing-unit} / 2));
-  }
-
-  .footer-col-3 {
-    width: -webkit-calc(100% - (#{$spacing-unit} / 2));
-    width:         calc(100% - (#{$spacing-unit} / 2));
-  }
-}
-
-@include media-query($on-palm) {
-  .footer-col {
-    float: none;
-    width: -webkit-calc(100% - (#{$spacing-unit} / 2));
-    width:         calc(100% - (#{$spacing-unit} / 2));
-  }
+    background-color: #f0f0f0;
+    border-top: 1px solid $grey-color-light;
+    padding: 1em 0;
+    font-size: 12pt;
+    @include media-query($on-palm) {
+        font-size: 10pt;
+    }
 }
 
 
@@ -484,31 +458,11 @@ div.highlighter-rouge > * { display: inline-block; text-align: left; }
 /**
  * Posts
  */
-.post-header {
-  margin-bottom: $spacing-unit;
-}
-
-.post-title {
-  @include relative-font-size(2.0);
-  letter-spacing: -0.04em;
-
-  @include media-query($on-laptop) {
-    @include relative-font-size(2.0);
-  }
-}
 
 @media screen {
     .post-content {
       margin-bottom: $spacing-unit;
     }
-}
-
-.post-content {
-    h2 { @include relative-font-size(1.2); }
-    h3 { @include relative-font-size(1.0); }
-    h4 { @include relative-font-size(0.9); }
-    h5 { @include relative-font-size(0.8); }
-    h6 { @include relative-font-size(0.7); }
 }
 
 

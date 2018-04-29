@@ -38,6 +38,8 @@ See also [Meta-research]({% link meta_research.md %}).
     - Pedro Domingos
     - Demis Hassabis
         - What is his focus?
+    - Pamela McCorduck, AI historian
+        - 2004 anniversary edition of her 1979 book ["Machines who think"](http://www.pamelamc.com/html/machines_who_think.html)
     - Who else? There are lots of people.
 
 ## How are others' works progressing?

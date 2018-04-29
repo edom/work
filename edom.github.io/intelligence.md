@@ -19,6 +19,22 @@ mathjax: true
     - [WP: COLT surveys](https://en.wikipedia.org/wiki/Computational_learning_theory#Surveys)
     - https://mitpress.mit.edu/books/introduction-computational-learning-theory
 
+## Plan
+
+- Read about universal intelligence
+    - Pamela McCorduck's "Machines who think" for some history
+        - [WP: Timeline of artificial intelligence](https://en.wikipedia.org/wiki/Timeline_of_artificial_intelligence)
+        - [WP: Progress in artificial intelligence](https://en.wikipedia.org/wiki/Progress_in_artificial_intelligence)
+    - [Hutter2005Book]
+    - [hutter1.net...uaibook.htm](http://www.hutter1.net/ai/uaibook.htm)
+        - He formulated the "degree of intelligence" in 2005; we had a similar idea in 2018 in [intwhat.html]({% link intwhat.md %})
+        - (edited) "AIXI [...] learns by eliminating Turing machines [...] once they become inconsistent with the progressing history."
+    - [Presentation, 393 slides](http://www.hutter1.net/ai/suaibook.pdf)
+    - [Slides](http://users.cecs.anu.edu.au/~ssanner/MLSS2010/Hutter1.pdf), maybe a draft of the above.
+    - Shane Legg's PhD thesis "Machine super intelligence" [Legg2008]
+    - [Legg and Hutter: A formal definition of intelligence for artificial systems](http://www.vetta.org/documents/universal_intelligence_abstract_ai50.pdf)
+    - 2005 Negnevitsky AI book \cite{negnevitsky2005artificial}?
+
 ## Questions
 
 - COLT
@@ -184,9 +200,26 @@ Is intelligence = adaptiveness?
             - What is intelligence without learning?
             Non-adaptive intelligence? Static intelligence?
 - What is a cyborg?
-
-https://en.wikipedia.org/wiki/Evolutionary_robotics
+- If human goal function is survival, then why exists suicide?
+    - Evolutionary noise?
 
 https://en.wikipedia.org/wiki/Universal_Darwinism
 
-https://en.wikipedia.org/wiki/Evolutionary_computation
+## How might we build a seed AI?
+
+- Use off-the-shelf computers.
+- Use supercomputers.
+- Use clusters.
+- Use computers over the Internet.
+- Raise an AI like raising a child.
+- Evolve a system. Create an environment with selection pressure. Run it long enough.
+    - [WP: Evolutionary robotics](https://en.wikipedia.org/wiki/Evolutionary_robotics)
+    - [WP: Evolutionary computation](https://en.wikipedia.org/wiki/Evolutionary_computation)
+- What is TensorFlow? Keras? CNTK? Theano?
+    - The building blocks of AI? Standardized AI components?
+
+## Guesses
+
+In the future, there are only two kinds of jobs:
+telling machines to do things,
+and being told to do things by machines.

@@ -5,24 +5,15 @@ date: 2017-06-22 03:57:00 +0700
 mathjax: true
 ---
 
-## Plan
+## Intelligence is an ordering (2018-04-26)
 
-- 2018-04-26
-    - Read about universal intelligence
-        - Read [Hutter2005Book]
-        - Read [hutter1.net...uaibook.htm](http://www.hutter1.net/ai/uaibook.htm)
-            - He formulated the "degree of intelligence" in 2005; we had a similar idea in 2018 in [intwhat.html]({% link intwhat.md %})
-            - (edited) "AIXI [...] learns by eliminating Turing machines [...] once they become inconsistent with the progressing history."
-        - [Presentation, 393 slides](http://www.hutter1.net/ai/suaibook.pdf)
-        - [Slides](http://users.cecs.anu.edu.au/~ssanner/MLSS2010/Hutter1.pdf), maybe a draft of the above.
-
-## Intelligence can be thought as an ordering (2018-04-26)
+This idea goes back at least to 2005 in [Hutter2005Book] (p. 2).
 
 Intelligence is an *ordering* of systems.
 
 An order is a transitive antisymmetric relation.
 
-[Edwin G. Boring in 1923](https://brocku.ca/MeadProject/sup/Boring_1923.html)
+[Edwin Boring in 1923](https://brocku.ca/MeadProject/sup/Boring_1923.html)
 proposed that we start out by defining intelligence as what intelligence tests measure
 "until further scientific observation allows us to extend the definition".
 That definition makes sense mathematically.
@@ -64,6 +55,16 @@ That depends on the task set \\( S \\).
 It's the rock if <span>\( S = \{ \text{sit still} \} \)</span>.
 
 It's the dog if <span>\( S = \{ \text{move around} \} \)</span>.
+
+## Intelligence is function optimization (2018-04-27)
+
+Let \\( g \\) be a goal function.
+
+A system's \\( g \\)-intelligence is how well it optimizes \\( g \\).
+
+What is "how well"?
+
+Optimization (extremization) is either minimization or maximization.
 
 ## What is a mathematical theory of intelligence?
 

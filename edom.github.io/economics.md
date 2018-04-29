@@ -2,8 +2,29 @@
 title: Economics
 permalink: /economics.html
 date: 2017-06-26 20:00 +0700
-featured: true
 ---
+
+Wealth is the sum of satisfied wants.
+
+Other definition candidates of wealth:
+
+- satisfied wants minus unsatisfied wants
+- satisfied wants divided by total wants
+
+Increasing the wealth of the human race conflicts with antinatalism.
+
+The wealthy man is the man who needs as few things as possible,
+and depends on as few people as possible.
+
+## Fundamentals of economics
+
+Everybody wants something.
+
+How do we satisfy more people using less resources?
+
+How do we produce more than we consume?
+
+How do we give more than we take?
 
 ## Land > Labor > Capital
 
