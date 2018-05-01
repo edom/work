@@ -50,7 +50,7 @@
     {% comment %}
     Enable comments by default.
     {% endcomment %}
-    {% if page.comments != false %}
+    {% if jekyll.environment == 'production' and page.comments != false %}
 <div id="disqus_thread"></div>
 <script>
 
