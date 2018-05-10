@@ -41,3 +41,11 @@ permalink: /politics.html
 - [Corruption is legal in America](https://www.youtube.com/watch?v=5tu32CCA_Ig), 6-minute video
     - https://represent.us/
     - https://anticorruptionact.org/
+- Wars are still happening. They just moved from overt to covert.
+    - [WP: War is a racket](https://en.wikipedia.org/wiki/War_Is_a_Racket), Smedley D. Butler, 1935
+- [Politico: 12 people and things that ruined Iran](https://www.politico.eu/article/12-people-and-things-that-ruined-iran-energy-shah-regime-islamism/)
+    - Iran has a traumatic past. History has shown that it can't trust anyone, even its neighbor Iraq. Thus Iran wants self-sufficiency at all costs.
+    - Self-sufficiency is a necessary but not sufficient condition for independence.
+        - If you trade with other nations, you depend on them.
+        - Trade (and specialization of labor) is beneficial for everybody if everybody is fair.
+    - What is the difference between "independence" and "sovereignty"?

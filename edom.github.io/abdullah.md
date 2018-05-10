@@ -19,6 +19,8 @@ mathjax: yes
         - Scala already tries to join parametric subtyping and inheritance subtyping.
         What is the problem with Scala?
 - Related: [functional programming research]({% link functional_programming.md %}).
+- Who is Abdullah?
+    - Abdullah a.k.a. Kim-Ee Yeoh is [atamo.com](https://www.atamo.com/).
 
 ## Research questions
 

@@ -2,7 +2,6 @@
 title: Research
 date: 2017-07-22 00:00 +0700
 permalink: /research.html
-featured: yes
 ---
 
 This is an index of my research work.
@@ -18,7 +17,8 @@ To resolve citation keys in this website, look up the key in [bibliography.yaml]
 - [Meta-research]({% link meta_research.md %})
 - [Politics]({% link politics.md %})
 - [Politik Indonesia]({% link politik.md %})
-- [Physics]({% link physics.md %})
+- [Physics]({% link physics.md %}) and engineering
+    - [Energy storage]({% link ensto.md %})
 - [Clay millennium prize problems]({% link clay_math.md %})
 - [Computer science]({% link computer_science.md %})
     - [Trying to prove P neq. NP]({% link pnptry.md %})
@@ -41,6 +41,10 @@ To resolve citation keys in this website, look up the key in [bibliography.yaml]
             - It's like hiring someone to imitate you for life.
             - Is it legit?
                 - [Wikipedia: Digital immortality](https://en.wikipedia.org/wiki/Digital_immortality)
+    - Does fasting help someone heal from a disease?
+        - Hypothesis: it might help healing because when you not don't eat, your body's immune system can focus on fighting the disease.
+        - Hypothesis: it might worsen the disease because your body doesn't get enough nutrient to fight the disease.
+        - Hypothesis: it might have no effect.
 - Unstructured ramblings, drafts, thoughts, opinions
     - [Economics]({% link economics.md %})
     - [Government]({% link government.md %})

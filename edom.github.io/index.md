@@ -27,6 +27,7 @@ date: 2017-05-20 00:00:00 +0700
     - In Chrome and Firefox, you can shrink the text with Control-minus.
 - Keeping score
     - [Fastnet]({% link fastnet.md %})
+    - [PLN]({% link pln.md %})
 - Graveyard
     - [Seaweed]({% link seaweed.md %})
     - [Walking]({% link walk.md %})

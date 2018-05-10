@@ -17,6 +17,8 @@ mathjax: true
     - Google query: most recent mathematical ai book
     - http://eliassi.org/COLTSurveyArticle.pdf
     - [WP: COLT surveys](https://en.wikipedia.org/wiki/Computational_learning_theory#Surveys)
+    - [COLT lecture 2018](http://www.cs.ox.ac.uk/people/varun.kanade/teaching/CLT-HT2018/lectures/)
+    - Book: "An Introduction to Computational Learning Theory" by Kearns and Vazirani
     - https://mitpress.mit.edu/books/introduction-computational-learning-theory
 
 ## Plan

@@ -4,14 +4,12 @@ date: 2018-04-11 04:00 +0700
 permalink: /physics.html
 ---
 
-- This is a mixture of physics and engineering.
 - Solar energy, solar cells, and energy storage
     - How do we make solar cells using common materials?
         - [acs.org: Solar cell from common materials](https://www.acs.org/content/acs/en/pressroom/newsreleases/2012/august/new-solar-panels-made-with-more-common-metals-could-be-cheaper-and-more-sustainable.html)
-    - How do we store energy?
-    - How do we improve batteries?
 - Nuclear energy
     - Is there any way to convert nuclear energy into electrical energy without going through heat and turbines?
+    - [Nuclear recycling](https://whatisnuclear.com/recycling.html)
 - Theory
     - [The changing concept of matter in H. Weyl's thought, 1918-1930](https://arxiv.org/abs/math/0409576)
     - [Introducing Groups into Quantum Theory (1926 -- 1930)](https://arxiv.org/abs/math/0409571)

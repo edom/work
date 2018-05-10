@@ -24,6 +24,7 @@ language: id
         - 2017
             - [Ade Armando: Ketika Kubu Anies-Uno Mulai Melancarkan Kampanye SARA](http://www.madinaonline.id/c907-editorial/ketika-kubu-anies-uno-mulai-melancarkan-kampanye-sara/)
             - [The Guardian: Jakarta election challenger Anies accused of courting Islamic vote amid religious divide](https://www.theguardian.com/world/2017/apr/15/jakarta-election-challenger-anies-accused-of-courting-islamic-vote-amid-religious-divide)
+            - [CNN: Tak Bantu Rizieq Pulang, Anies Disebut Kacang Lupa Kulit](https://www.cnnindonesia.com/nasional/20180221153958-20-277802/tak-bantu-rizieq-pulang-anies-disebut-kacang-lupa-kulit)
     - Eggi Sudjana
         - Pengacara Habib Rizieq.
         - 2018: [Wartakota: Eggi Sudjana Bertanya yang Buat Rakyat Miskin Itu Presiden atau Allah Picu Reaksi Istana](http://wartakota.tribunnews.com/2018/04/16/eggi-sudjana-bertanya-yang-buat-rakyat-miskin-itu-presiden-atau-allah-picu-reaksi-istana)
