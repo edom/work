@@ -31,6 +31,7 @@ date: 2017-05-20 00:00:00 +0700
 - Graveyard
     - [Seaweed]({% link seaweed.md %})
     - [Walking]({% link walk.md %})
+- [Entertainment]({% link entertain.md %})
 
 {% assign everything = site.emptyArray %}
 {% for page in site.pages %}

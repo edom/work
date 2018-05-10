@@ -18,7 +18,7 @@ date: 2016-03-27 14:14:08 +0700
     - [Instagram: nomadsmusik](https://www.instagram.com/nomadsmusik/)
     - [YouTube: The Nomads Nomadsmusik](https://www.youtube.com/channel/UC3cCX1U0hCPUhFZ01SrwSlA)
 - When and where are you performing?
-    - Sat 2018-05-12 20:00--21:00 GMT+7 at Paviliun 28 Petogogan ([map](https://www.google.com/maps/place/Paviliun+28/@-6.251401,106.7924393,17z/data=!3m1!4b1!4m5!3m4!1s0x2e69f10cd3d99ee5:0x3de3b73fed12028e!8m2!3d-6.251401!4d106.794628))
+    - Sat 2018-05-12 20:00--21:00 GMT+7 at Paviliun 28 Petogogan ([poster](https://www.instagram.com/p/BiejJ1VBcMQ/), [map](https://www.google.com/maps/place/Paviliun+28/@-6.251401,106.7924393,17z/data=!3m1!4b1!4m5!3m4!1s0x2e69f10cd3d99ee5:0x3de3b73fed12028e!8m2!3d-6.251401!4d106.794628))
 - Who are the past members?
     - T. C. Basyaruddin Alif (guitar)
     - Nukie Nugroho (bass)
@@ -28,6 +28,9 @@ date: 2016-03-27 14:14:08 +0700
     [map](https://www.google.com/maps/place/Clickcorner+Music+Caf%C3%A8/@-6.2939923,106.7044127,17z/data=!3m1!4b1!4m5!3m4!1s0x2e69fab6d71f8f4d:0x90ac96583308f7ba!8m2!3d-6.2939923!4d106.7066014))
 - Where are they now?
     - Alif formed a band named Bengras and moved to Bali.
+- Undigested information fragments
+    - [Op Ed: How Tokenization Is Putting Real-World Assets on Blockchains](https://bitcoinmagazine.com/articles/op-ed-how-tokenization-putting-real-world-assets-blockchains/)
+        - "An example of music ownership/licensing tokenization is SingularDTV."
 
 ## Questions
 

@@ -10,3 +10,7 @@ permalink: /ensto.html
     - [Here are humanity’s best ideas on how to store energy](https://arstechnica.com/information-technology/2017/10/a-world-tour-of-some-of-the-biggest-energy-storage-schemes/)
 - How do we improve batteries?
     - [WP: Battery (electricity)](https://en.wikipedia.org/wiki/Battery_(electricity))
+- What is the difference between a battery and an an electrolytic capacitor?
+    - [Quora: What is the difference between a capacitor and a battery?](https://www.quora.com/What-is-the-difference-between-a-capacitor-and-a-battery)
+        - A battery uses chemical reaction.
+        - A capacitor uses static electricity (electric field).

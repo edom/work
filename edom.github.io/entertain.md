@@ -1,0 +1,63 @@
+---
+title: Entertainment
+date: 2017-07-22 00:00 +0700
+permalink: /entertainment.html
+---
+
+- Educational entertainment
+    - Entertainment should also educate, not only entertain for the sake of entertainment alone.
+Entertainment is a perfect chance to educate the people, the citizens, the laypeople, the masses.
+    - [Wikipedia: Educational entertainment](https://en.wikipedia.org/wiki/Educational_entertainment)
+    - [ElectroBOOM](https://www.youtube.com/channel/UCJ0-OtVpF0wOKEqT2Z1HEtA), Mehdi Sadaghdar
+        - [Electricity pain vs frequency](https://www.youtube.com/watch?v=MMzU66IHe-k)
+        - [Human body capacitance is about 5 nF at 60 Hz](https://www.youtube.com/watch?v=vNpGoNP1tGQ)
+    - Adam ruins everything on trutv
+        - [The real reason hospitals are so expensive](https://www.youtube.com/watch?v=CeDOQpfaUc8)
+            - [WP: Chargemaster](https://en.wikipedia.org/wiki/Chargemaster)
+                - insurance companies
+    - [Nicky Case](http://ncase.me/)
+        - [Game-theoretic explanation of trust for laypeople](http://ncase.me/trust/)
+            - prerequisites to the evolution of trust: repeat interactions, possible win-wins, and low miscommunication
+            - in the short term, game defines the players; in the long term, players define the game
+                - does this make sense?
+        - [polygons](http://ncase.me/polygons/): people tend to segregate
+        - [crowds](http://ncase.me/crowds/)
+            - My opinions:
+                - We can avoid terrorism by intervening social networks.
+                - People tend to segregate.
+                - Government must incentivize mingling and desegregation.
+                - It is important to befriend some people who disagree with you.
+            - [WP: Network theory](https://en.wikipedia.org/wiki/Network_theory)
+    - [explorable explanations](http://explorabl.es/)
+- Entertaining videos, not necessarily educational; things that cheer me up
+    - [how a seal moves on land](https://www.youtube.com/watch?v=l6mGixhCcYY): like fat bouncing tempura
+    - [Ethan Klein's cough compilation](https://www.youtube.com/watch?v=TEG2wxz0ILo)
+    - [sick shibe](https://www.youtube.com/watch?v=UvNDMAHotQg)
+    - [anatomically correct Spiderman](https://www.youtube.com/watch?v=Yc5SfuIb_eM), absurd
+    - ["What's worse than a rapist? Boom. A child. No, a child rapist."](https://www.youtube.com/watch?v=L0a5iwzG7aw)
+    - Steve Harvey's laughter ([Wikidata: Steve Harvey](https://www.wikidata.org/wiki/Q2347009))
+        - [my brother doesn't share his girlfriend](https://www.youtube.com/watch?v=nCSx2BWGBNM)
+            - 0:26--0:38: Steve Harvey laughing: "Jack doesn't share her with me"
+            - 2:48--3:12: Steve Harvey can't hold his laughter after hearing the kid say that William Howard Taft once got stuck in the bathtub
+    - [Bill Wurtz's history of japan](https://www.youtube.com/watch?v=Mh5LY4Mz15o)
+    - [Trump and the photoshopped painting of other US presidents (facepalming, middle finger)](https://twitter.com/JaimsVanDerBeek/status/921175367854866432)
+    - [squirrel fails to climb oiled pole](https://www.youtube.com/watch?v=cFWdjkN62zc)
+    - an0nymooose
+        - [taco review](https://www.youtube.com/watch?v=xKR4FAg1imc)
+        - [berdst friend](https://www.youtube.com/watch?v=l8wMVmY7Zpw)
+            - The music is [Snail's House - Ma Chouchoute [Tasty Release]](https://www.youtube.com/watch?v=5lVOzOBcrm0)
+        - [off limits](https://www.youtube.com/watch?v=dHJfafgLxBw)
+        - [we like to party](https://www.youtube.com/watch?v=b8HO6hba9ZE)
+        - [slam jam](https://www.youtube.com/watch?v=Y-dMSstLDqM)
+    - videogamedunkey
+        - [car fry 5](https://www.youtube.com/watch?v=IY5mBERhSDg)
+        - [mgsv phantom menace](https://www.youtube.com/watch?v=SkNaUiaGRxw)
+        - [mgsv final slam](https://www.youtube.com/watch?v=e5jx9aYSG1c)
+        - [mgsv gun eater](https://www.youtube.com/watch?v=JYM-vPKyxfA)
+    - prozd
+        - [clickbait](https://www.youtube.com/watch?v=f4FuOi9rvKw)
+        - [sports commentators commentating a romantic anime scene](https://www.youtube.com/watch?v=_B13yISVHWI)
+        - [getting into a conversation in a language you don't actually speak that well](https://www.youtube.com/watch?v=T_PuZBdT2iM)
+        - [having a non-white name](https://www.youtube.com/watch?v=p1RKkRCiU90)
+    - in Indonesian language
+        - [mediocredoujin's "Doraemon: The Genesis"](https://www.facebook.com/pg/mediocredoujin/photos/?tab=album&amp;album_id=1616136515299919)
