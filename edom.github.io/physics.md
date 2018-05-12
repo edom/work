@@ -21,3 +21,11 @@ permalink: /physics.html
     - How should we learn general relativity?
         - How should we learn differential geometry?
             - Should we use spherical trigonometry as an introduction to differential geometry?
+- Undigested information fragments
+    - [Bob Coecke, categorical quantum mechanics](http://www.cs.ox.ac.uk/people/bob.coecke/)
+    - [Why John von Neumann did not Like the Hilbert Space formalism of quantum mechanics (and what he liked instead)](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.35.763)
+    - https://en.wikipedia.org/wiki/Entropic_force
+    - http://entropicai.blogspot.co.id/2017/06/fractal-optimising-first-paper.html
+    - ECAT, LENR (low-energy nuclear reaction), cold fusion
+        - http://ecat.com/
+        - http://e-catworld.com/what-is-the-e-cat/

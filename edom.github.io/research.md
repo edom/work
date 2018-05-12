@@ -10,23 +10,32 @@ To resolve citation keys in this website, look up the key in [bibliography.yaml]
 
 ## Current research interests
 
-- [Intelligence]({% link intelligence.md %})
-- [Probability and statistics]({% link probstat.md %})
-- [Functional programming research]({% link functional_programming.md %})
-- [Joint research with Abdullah]({% link abdullah.md %})
-- [Meta-research]({% link meta_research.md %})
-- [Politics]({% link politics.md %})
-- [Politik Indonesia]({% link politik.md %})
-- [Physics]({% link physics.md %}) and engineering
-    - [Energy storage]({% link ensto.md %})
-- [Clay millennium prize problems]({% link clay_math.md %})
-- [Computer science]({% link computer_science.md %})
-    - [Trying to prove P neq. NP]({% link pnptry.md %})
-- [Software engineer salary]({% link salary.md %})
-- [Biology]({% link biology.md %})
-- [Economics]({% link economics.md %})
-- [Finance]({% link finance.md %})
-- [Government]({% link government.md %})
+- Major
+    - [Intelligence]({% link intelligence.md %})
+    - [Probability and statistics]({% link probstat.md %})
+    - [Computer science]({% link computer_science.md %})
+        - [Functional programming research]({% link functional_programming.md %})
+        - [Joint research with Abdullah]({% link abdullah.md %})
+    - [Physics]({% link physics.md %}) and engineering
+        - [Energy storage]({% link ensto.md %})
+- Minor
+    - [Meta-research]({% link meta_research.md %})
+        - [Information architecture]({% link infarch.md %})
+    - [Clay millennium prize problems]({% link clay_math.md %})
+    - [Software engineer salary]({% link salary.md %})
+    - [Biology]({% link biology.md %})
+    - [Economics]({% link economics.md %})
+    - [Finance]({% link finance.md %})
+        - [Cryptocurrency]({% link crycur.md %})
+    - [Government]({% link government.md %})
+    - Computer science
+        - [Trying to prove P neq. NP]({% link pnptry.md %})
+        - Functional programming research
+            - [Coq]({% link coq.md %})
+        - Metaprogramming
+            - [JetBrains MPS]({% link jbmps.md %})
+    - [Politics]({% link politics.md %})
+    - [Politik Indonesia]({% link politik.md %})
 
 ## What are your research activities?
 

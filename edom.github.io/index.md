@@ -32,6 +32,7 @@ date: 2017-05-20 00:00:00 +0700
     - [Seaweed]({% link seaweed.md %})
     - [Walking]({% link walk.md %})
 - [Entertainment]({% link entertain.md %})
+    - [Game]({% link game.md %})
 
 {% assign everything = site.emptyArray %}
 {% for page in site.pages %}

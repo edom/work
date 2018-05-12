@@ -60,10 +60,20 @@ document.body.classList.remove("signup_wall_prevent_scroll");
 
 ## Remove Pinterest nag screen
 
-Tested on 2017-07-08.
+Tested on 2018-05-13.
+
+Type 1.
 
 ```javascript
 document.querySelector("[data-test-giftwrap]").remove();
+```
+
+Type 2.
+
+```javascript
+document.querySelector("#desktopWrapper").style.position = "static";
+document.querySelector("body style").remove();
+document.querySelector(".FullPageModal__scroller").parentNode.remove();
 ```
 
 ## Group Gmail mails by sender email
