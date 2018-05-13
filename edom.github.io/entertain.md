@@ -50,6 +50,7 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
         - [we like to party](https://www.youtube.com/watch?v=b8HO6hba9ZE)
         - [slam jam](https://www.youtube.com/watch?v=Y-dMSstLDqM)
     - videogamedunkey
+        - [captcha](https://www.youtube.com/watch?v=WqnXp6Saa8Y)
         - [car fry 5](https://www.youtube.com/watch?v=IY5mBERhSDg)
         - [mgsv phantom menace](https://www.youtube.com/watch?v=SkNaUiaGRxw)
         - [mgsv final slam](https://www.youtube.com/watch?v=e5jx9aYSG1c)
@@ -61,3 +62,12 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
         - [having a non-white name](https://www.youtube.com/watch?v=p1RKkRCiU90)
     - in Indonesian language
         - [mediocredoujin's "Doraemon: The Genesis"](https://www.facebook.com/pg/mediocredoujin/photos/?tab=album&amp;album_id=1616136515299919)
+- meme-like materials
+    - [in only 2 weeks, Robert lost 2 weeks](https://www.reddit.com/r/FunnyandSad/comments/8ejlih/in_just_two_weeks/)
+    - [well-lit husky portrait](https://old.reddit.com/r/aww/comments/8io64x/last_year_while_setting_up_lights_for_some/)
+- [subreddit for fans of k-pop girls](https://www.reddit.com/r/asiangirlsbeingcute/top/)
+- dark humor (suicidal, not suitable for everyone)
+    - [Ethan Vincent: are we there yet](http://oppressive-silence.com/comic/are-we-there-yet),
+    via [reddit](https://www.reddit.com/r/FunnyandSad/comments/790jyl/are_we_there_yet/)
+    - [Mike Organisciak: 100 days of comics, day 82: visiting grandma](http://mikeorganisciak.com/100-days-of-comics-day-82/)
+- [Music to listen to]({% link listen.md %})
