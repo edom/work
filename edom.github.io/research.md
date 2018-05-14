@@ -34,6 +34,7 @@ To resolve citation keys in this website, look up the key in [bibliography.yaml]
             - [Coq]({% link coq.md %})
         - Metaprogramming
             - [JetBrains MPS]({% link jbmps.md %})
+            - [TXL: source transformation by example](http://txl.ca/index.html), what can it do?
     - [Politics]({% link politics.md %})
     - [Politik Indonesia]({% link politik.md %})
 

@@ -57,6 +57,7 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
         - [mgsv gun eater](https://www.youtube.com/watch?v=JYM-vPKyxfA)
     - prozd
         - [clickbait](https://www.youtube.com/watch?v=f4FuOi9rvKw)
+        - [harem anime where everyone but the protagonist is sentient furniture](https://www.youtube.com/watch?v=gYXHnkhRwCY)
         - [sports commentators commentating a romantic anime scene](https://www.youtube.com/watch?v=_B13yISVHWI)
         - [getting into a conversation in a language you don't actually speak that well](https://www.youtube.com/watch?v=T_PuZBdT2iM)
         - [having a non-white name](https://www.youtube.com/watch?v=p1RKkRCiU90)
@@ -70,4 +71,3 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
     - [Ethan Vincent: are we there yet](http://oppressive-silence.com/comic/are-we-there-yet),
     via [reddit](https://www.reddit.com/r/FunnyandSad/comments/790jyl/are_we_there_yet/)
     - [Mike Organisciak: 100 days of comics, day 82: visiting grandma](http://mikeorganisciak.com/100-days-of-comics-day-82/)
-- [Music to listen to]({% link listen.md %})

@@ -318,3 +318,26 @@ The Y-combinator is \\( \lambda f. (\lambda x. f ~ (x ~ x)) ~ (\lambda x. f ~ (x
 [WP: Fixed-point combinator](https://en.wikipedia.org/wiki/Fixed-point_combinator)
 
 [Simple Denotational Semantics for the Lambda Calculus, Pω Revisited?](http://siek.blogspot.co.id/2016/12/simple-denotational-semantics-for.html)
+
+## Undigested information fragments
+
+- "Partiality is an effect"
+https://www.cs.ox.ac.uk/ralf.hinze/WG2.8/22/slides/tarmo.pdf
+- "Partiality Monad Transformer"
+https://stackoverflow.com/questions/15192897/partiality-monad-transformer
+- http://www.cse.chalmers.se/~nad/publications/danielsson-semantics-partiality-monad.pdf
+- categorical programming language
+    - http://web.sfc.keio.ac.jp/~hagino/thesis.pdf
+    - https://mathoverflow.net/questions/3721/programming-languages-based-on-category-theory
+    - https://softwareengineering.stackexchange.com/questions/216635/category-theory-based-language
+- "Kleisli triple over a category"
+- "Category formed by the Kleisli triples over a category"
+- Moggi 1991:
+    - "Kleisli triples are just an alternative description for monads. Although
+the former are easy to justify from a computational perspective, the latter
+are more widely used in the literature on category theory and have the
+advantage of being defined only in terms of functors and natural transformations, which make them more suitable for abstract manipulation."
+- Where does monad come from? Who invented it? Why was it invented?
+- What is the relationship among monad, natural transformation, Kleisli category of a monad, Eilenberg-Moore what, adjunction?
+- Has some semantics link
+http://math.andrej.com/2016/08/06/hask-is-not-a-category/comment-page-1/

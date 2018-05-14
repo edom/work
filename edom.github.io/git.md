@@ -1,5 +1,5 @@
 ---
-title: Building a mental model for using Git
+title: Git mental model
 permalink: /git.html
 date: 2017-06-26 00:36:00 +0700
 ---
@@ -55,3 +55,11 @@ Every reference points to either a tree or a blob.
 
 For more information, read the [Pro Git](https://git-scm.com/book) book
 or the [manpages](https://git-scm.com/docs) (`man git`).
+
+## Things to write?
+
+Git fundamentals:
+
+- Git store things in the `.git` directory.
+- Why merge conflicts? How to resolve them? How to use `meld`? How to do a three-way merge?
+- Avoid changing spaces. Avoid using your IDE to reformat files that are already commited.

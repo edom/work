@@ -12,3 +12,6 @@ permalink: /listen.html
 - unknown music in non-music videos
     - [unknown music from DJLO video "Yuri's Revenge Glitches, Tricks and misc."](https://www.youtube.com/watch?v=au81LBz3eYI)
     - [unknown music, sounds a little bit Mongolian, start at 0:21](https://www.youtube.com/watch?v=zy2NhArT02o)
+- Marcell: Semusim
+- [Shanty feat. Marcell - Hanya Memuji](https://www.youtube.com/watch?v=egD4AsW7oOs)
+- THE GROOVE: Khayalan

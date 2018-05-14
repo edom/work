@@ -29,3 +29,6 @@ permalink: /physics.html
     - ECAT, LENR (low-energy nuclear reaction), cold fusion
         - http://ecat.com/
         - http://e-catworld.com/what-is-the-e-cat/
+    - nuclear fusion
+        - http://news.mit.edu/2015/small-modular-efficient-fusion-plant-0810
+        - http://www.lockheedmartin.com/us/products/compact-fusion.html

@@ -8,6 +8,7 @@ date: 2017-05-20 00:00:00 +0700
 - What do you do?
     - [Research]({% link research.md %})
     - [Music]({% link music.md %})
+    - [Work]({% link work.md %})
 - How do I ask questions or suggest corrections?
     - Any of these will do:
         - Leave a Disqus comment in the related page.
@@ -33,6 +34,8 @@ date: 2017-05-20 00:00:00 +0700
     - [Walking]({% link walk.md %})
 - [Entertainment]({% link entertain.md %})
     - [Game]({% link game.md %})
+- Announcements
+    - Now I check the time at [time.gov](https://time.gov/) because Ubuntu 14.04 NTP once betrayed me.
 
 {% assign everything = site.emptyArray %}
 {% for page in site.pages %}
