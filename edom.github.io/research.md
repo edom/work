@@ -11,6 +11,8 @@ permalink: /research.html
     - [Computer science]({% link compsci.md %})
     - [Physics]({% link physics.md %}) and engineering
         - [Energy storage]({% link ensto.md %})
+    - Logic
+        - [Counterfactual reasoning]({% link cf.md %})
     - [Mathematics]({% link math.md %})
     - [Mathematics education]({% link mathedu.md %})
     - [Meta-research]({% link meta_research.md %})
@@ -35,6 +37,7 @@ permalink: /research.html
     - [Clothing]({% link cloth.md %})
     - [Art]({% link art.md %})
         - [Music]({% link music.md %})
+        - [Acting]({% link act.md %})
     - [Writing]({% link writing.md %})
 - Undigested
     - http://tex.stackexchange.com/questions/5635/how-to-cite-a-university-lecture-or-its-slides-or-script

@@ -33,6 +33,8 @@ permalink: /softeng.html
             - [Amazon Web Services]({% link aws.md %})
         - Management
             - [Trello]({% link trello.md %})
+    - [Kubernetes]({% link kubernetes.md %})
+    - [The cloud for old-school sysadmins]({% link cloud.md %})
 - Other opinions
     - .NET stack
         - http://engineering.gopangea.com/stack
