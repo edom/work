@@ -225,3 +225,8 @@ https://en.wikipedia.org/wiki/Universal_Darwinism
 In the future, there are only two kinds of jobs:
 telling machines to do things,
 and being told to do things by machines.
+
+## Undigested information
+
+- [A giant neuron found wrapped around entire mouse brain](https://www.nature.com/news/a-giant-neuron-found-wrapped-around-entire-mouse-brain-1.21539)
+- [kevinbinz.com: Five Tribes of Machine Learning](https://kevinbinz.com/2017/08/13/ml-five-tribes/), part of [machine learning sequence](https://kevinbinz.com/2017/05/09/sequence-machine-learning/)

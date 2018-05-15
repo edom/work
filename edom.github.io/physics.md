@@ -32,3 +32,9 @@ permalink: /physics.html
     - nuclear fusion
         - http://news.mit.edu/2015/small-modular-efficient-fusion-plant-0810
         - http://www.lockheedmartin.com/us/products/compact-fusion.html
+    - DC-powered home
+        - Different sockets in addition to AC sockets.
+        - http://www.mnn.com/green-tech/research-innovations/stories/the-home-of-tomorrow-will-run-on-direct-current
+    - How much does solar panel cost?
+        - How long until break-even?
+        - Is it cheaper to run on solar power?

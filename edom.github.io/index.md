@@ -32,10 +32,13 @@ date: 2017-05-20 00:00:00 +0700
 - Graveyard
     - [Seaweed]({% link seaweed.md %})
     - [Walking]({% link walk.md %})
+    - [Subsistence]({% link subsist.md %})
 - [Entertainment]({% link entertain.md %})
     - [Game]({% link game.md %})
 - Announcements
     - Now I check the time at [time.gov](https://time.gov/) because Ubuntu 14.04 NTP once betrayed me.
+- Similar websites
+    - [kevinbinz.com](https://kevinbinz.com/)
 
 {% assign everything = site.emptyArray %}
 {% for page in site.pages %}

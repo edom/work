@@ -72,3 +72,5 @@ date: 2017-07-04 22:55 +0700
         - _Stock_ is company ownership.
         - A _share_ is a fraction of stock.
         - Buying share means buying partial company ownership.
+- Undigested information
+    - [Noahpinion: How much value does the finance industry create?](http://noahpinionblog.blogspot.co.id/2013/01/how-much-value-does-finance-industry.html)

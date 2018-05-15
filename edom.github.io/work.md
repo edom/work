@@ -7,6 +7,9 @@ date: 2018-05-15 02:31:00 +0700
 - [Amazon Web Services]({% link aws.md %})
 - [PostgreSQL]({% link pgsql.md %})
 - [Security]({% link security.md %})
+- [Gradle]({% link gradle.md %})
+- [Trello]({% link trello.md %})
+- [Class-based programming]({% link cbp.md %})
 - Tools
     - git, version control
         - [Git mental model]({% link git.md %})
@@ -28,9 +31,17 @@ date: 2018-05-15 02:31:00 +0700
     - Troubleshooting Dashboard: What metrics you should monitor and why?
         - HTTP 4xx and 5xx status codes and connection failures.
         - Rising maximum latency is the first sign of something going wrong or overloaded.
+    - [The sad state of web development](https://news.ycombinator.com/item?id=11035143) (not everyone agrees).
+    - long text: [Top-down vs. Bottom-up Hierarchy: Or, How to Design a Self-Managed Organization](http://organizationalphysics.com/2016/10/13/top-down-vs-bottom-up-hierarchy-or-how-to-build-a-self-managed-organization/)
+    - Why not infinite scrolling?
+        - Do you have an alternative to infinite scrolling?
+        - Do you handle network interruptions?
+        How does the user continue scrolling after network connection is restored?
+        Is there an unhandled exception in your script?
 
 ## Questions
 
 - What is a database that can be scaled up without downtime?
 We are willing to sacrifice consistency for tracking data.
 - [PMSE 2780: How to organize knowledge within a wiki?](https://pm.stackexchange.com/questions/2780/how-to-organize-knowledge-within-a-wiki)
+- Are we really doing Scrum? http://www.allaboutagile.com/the-scrumbutt-test/

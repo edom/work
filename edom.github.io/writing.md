@@ -47,3 +47,21 @@ No filler, no rant, no hatemongering.
 Decision: a website, not a book.
 
 Reason: To minimize the readers' effort.
+
+- The technology decisions for this wiki and why:
+    - Use technology that should still work at least until year 2100.
+        - Use only free open-source technologies with proven maintenance track record.
+        - Enable rebuilding of the website somewhere else quickly.
+    - Use Jekyll-powered GitHub Pages. If GitHub screws us, we buy a new domain, move to AWS, and ask Google to reindex.
+    - Use GitHub Flavored Markdown. If Jekyll screws us, we switch to Pandoc.
+    - Markdown weaknesses:
+        - The original Markdown doesn't have tables.
+        - Proliferation of incompatible dialects.
+    - Wiki vs blog, page vs post
+        - A page is timeless. Its usefulness should not depend on time.
+        Old pages are still useful.
+        - A post is time-sensitive. Its usefulness depends on time.
+        Old posts are useless.
+        - Posts are good for news, updates, changelogs, diffs.
+- Undigested information
+    - [The sad state of personal knowledgebases](https://news.ycombinator.com/item?id=10739227)
