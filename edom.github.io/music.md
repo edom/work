@@ -20,3 +20,8 @@ date: 2016-03-27 14:14:08 +0700
         - Delta Musik Tanjung Duren
     - eatery-drinkery with live music
         - Double Doors bar, Puri Indah
+    - [ben casey: why christian music is so bland (YouTube comment)](https://www.youtube.com/watch?v=zH_5j3Wm9qM&lc=UghFffTwyUZtIHgCoAEC):
+    "If anyone is curious about why contemporary Christian music is so bland, I'm gonna ramble on that for a bit."
+    - http://www.aaronbonneau.com/7-things-japanese-music-does-better/
+    - What is Café del Mar?
+        - It seems to be a source of chillout musics and Ibiza Balearic beats and other electronic dance musics?

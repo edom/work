@@ -55,3 +55,10 @@ permalink: /politics.html
     - [New UN report finds almost no industry profitable if environmental costs were included](https://www.reddit.com/r/LateStageCapitalism/comments/8i4y3a/new_un_report_finds_almost_no_industry_profitable/)
     [Why Socrates hated democracy](https://www.youtube.com/watch?v=fLJBzhcSWTk)?
     Because the average person isn't competent to rule a country.
+    - History, politics, military, war, weapon
+        - https://www.reddit.com/r/explainlikeimfive/comments/1fy1na/eli5_why_did_joseph_stalin_kill_so_many_people/
+        - [Native American Holocaust](http://www.historyisaweapon.com/defcon1/zinncol1.html)
+        - Reddit: LateStageCapitalism
+            - https://www.reddit.com/r/LateStageCapitalism/comments/6ilw3q/war_who_is_it_good_for/
+            - https://www.reddit.com/r/LateStageCapitalism/comments/6cqcm3/if_youre_unemployed_it_is_not_because_there_isnt/
+        - Best attack aircraft? https://en.wikipedia.org/wiki/Fairchild_Republic_A-10_Thunderbolt_II

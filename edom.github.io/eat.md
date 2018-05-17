@@ -227,3 +227,9 @@ probably because it's seldom fresh here.
         - milk
         - Avoid ripe bananas because it'll be too sweet.
         - Mix everything, mash everything, and eat.
+- Undigested
+    - Cooking, eating, nutrition, food prices
+        - https://www.quora.com/Tea-Is-it-possible-to-estimate-temperature-of-water-without-a-thermometer
+        - Sausage is efficient butchery.
+            - Sausage, frankfurter, bockwurst, bratwurst, kielbasa, what's the difference?
+        - http://www.wheatbellyblog.com/2012/07/an-iodine-primer/

@@ -29,6 +29,7 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
                 - It is important to befriend some people who disagree with you.
             - [WP: Network theory](https://en.wikipedia.org/wiki/Network_theory)
     - [explorable explanations](http://explorabl.es/)
+    - [Glenn Fricker's how to deal with religious fanatics protesting concerts](https://www.youtube.com/watch?v=ix3kPRlnnF8&index=8&list=RDfibfJpIHLQ8)
 - Entertaining videos, not necessarily educational; things that cheer me up
     - [how a seal moves on land](https://www.youtube.com/watch?v=l6mGixhCcYY): like fat bouncing tempura
     - [Ethan Klein's cough compilation](https://www.youtube.com/watch?v=TEG2wxz0ILo)
@@ -55,14 +56,13 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
         - [mgsv phantom menace](https://www.youtube.com/watch?v=SkNaUiaGRxw)
         - [mgsv final slam](https://www.youtube.com/watch?v=e5jx9aYSG1c)
         - [mgsv gun eater](https://www.youtube.com/watch?v=JYM-vPKyxfA)
+        - [Dead Rise 2](https://www.youtube.com/watch?v=VELVomIF2Ts) 1:10 "This car cost a million dollars"
     - prozd
         - [clickbait](https://www.youtube.com/watch?v=f4FuOi9rvKw)
         - [harem anime where everyone but the protagonist is sentient furniture](https://www.youtube.com/watch?v=gYXHnkhRwCY)
         - [sports commentators commentating a romantic anime scene](https://www.youtube.com/watch?v=_B13yISVHWI)
         - [getting into a conversation in a language you don't actually speak that well](https://www.youtube.com/watch?v=T_PuZBdT2iM)
         - [having a non-white name](https://www.youtube.com/watch?v=p1RKkRCiU90)
-    - in Indonesian language
-        - [mediocredoujin's "Doraemon: The Genesis"](https://www.facebook.com/pg/mediocredoujin/photos/?tab=album&amp;album_id=1616136515299919)
 - meme-like materials
     - [in only 2 weeks, Robert lost 2 weeks](https://www.reddit.com/r/FunnyandSad/comments/8ejlih/in_just_two_weeks/)
     - [well-lit husky portrait](https://old.reddit.com/r/aww/comments/8io64x/last_year_while_setting_up_lights_for_some/)
@@ -75,3 +75,8 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
     - [Ethan Vincent: are we there yet](http://oppressive-silence.com/comic/are-we-there-yet),
     via [reddit](https://www.reddit.com/r/FunnyandSad/comments/790jyl/are_we_there_yet/)
     - [Mike Organisciak: 100 days of comics, day 82: visiting grandma](http://mikeorganisciak.com/100-days-of-comics-day-82/)
+- Indonesian
+    - [Iklan kocak jadul: Sempak Firaun, botol cebok](http://humorpoin.blogspot.co.id/2017/06/ada-sempak-firaun-inilah-5-iklan-kocak.html)
+    - [mediocredoujin's "Doraemon: The Genesis"](https://www.facebook.com/pg/mediocredoujin/photos/?tab=album&amp;album_id=1616136515299919)
+- [vim: Entering special characters](http://vim.wikia.com/wiki/Entering_special_characters)
+    - `<Ctrl-K> ' e` to type `é`

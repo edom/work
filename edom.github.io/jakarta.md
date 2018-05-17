@@ -17,3 +17,6 @@ date: 2017-09-03 23:52:00 +0700
 - http://interactive.smartcity.jakarta.go.id/
 - http://infopangan.jakarta.go.id/
 - [http://jakarta.go.id/](jakarta.go.id: Jakarta government services online entry point)
+- Durian
+    - https://www.ucokdurian.id/daging-durian/
+    - Rumah durian harum http://travel.kompas.com/read/2015/03/08/142300327/Sedap.Tempat.Ini.Tawarkan.Durian.Sepanjang.Tahun

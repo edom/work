@@ -301,3 +301,4 @@ https://www.quora.com/What-is-the-simplest-life-form
 - [1987, Intelligence without representation, Rodney A. Brooks](http://www.fc.uaem.mx/~bruno/material/brooks_87_representation.pdf)
 - [colah.github.io: Backprop](http://colah.github.io/posts/2015-08-Backprop/)
 - google search "ai theory research"
+- [2002, PhotoTOC: Automatic Clustering for Browsing Personal Photographs, by John C. Platt, Mary Czerwinski, Brent A. Field](http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.2.4835)
