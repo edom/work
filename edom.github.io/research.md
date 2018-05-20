@@ -9,44 +9,32 @@ permalink: /research.html
 - Research interests
     - [Intelligence]({% link intelligence.md %})
     - [Computer science]({% link compsci.md %})
-        - [Functional programming research]({% link functional_programming.md %})
-        - [Joint research with Abdullah]({% link abdullah.md %})
-        - [Trying to prove P neq. NP]({% link pnptry.md %})
-        - Functional programming research
-            - [Haskell]({% link haskell.md %})
-            - [Coq]({% link coq.md %})
-        - Metaprogramming
-            - [JetBrains MPS]({% link jbmps.md %})
-            - [TXL: source transformation by example](http://txl.ca/index.html), what can it do?
-        - Programming
-            - [Standard MIDI file format]({% link smf.md %})
     - [Physics]({% link physics.md %}) and engineering
         - [Energy storage]({% link ensto.md %})
     - [Mathematics]({% link math.md %})
     - [Meta-research]({% link meta_research.md %})
         - [Information architecture]({% link infarch.md %})
-    - [Clay millennium prize problems]({% link clay_math.md %})
-    - [Software engineer salary]({% link salary.md %})
     - [Biology]({% link biology.md %})
-        - Daily human activities
-            - [Eating]({% link eat.md %})
-                - [How to cook eggs]({% link egg.md %})
-            - [Walking]({% link walk.md %})
-        - [Subsistence]({% link subsist.md %})
-            - [Farming]({% link farm.md %})
-                - [Seaweed]({% link seaweed.md %})
     - [Economics]({% link economics.md %})
     - [Finance]({% link finance.md %})
-        - [Cryptocurrency]({% link crycur.md %})
     - [Government]({% link government.md %})
         - [Politics]({% link politics.md %})
             - [Politik Indonesia]({% link politik.md %})
         - [Jakarta]({% link jakarta.md %})
     - Psychology
+        - Theory
+            - [Friendship is measured by sacrifice]({% link friendship.md %})
+        - Opinion
+            - [April fools' day is harmful]({% link april.md %})
+        - [Entertainment]({% link entertain.md %})
+            - [Game]({% link game.md %})
         - [2002, Jennifer Daw, Why and how normal people go mad](http://www.apa.org/monitor/nov02/gomad.aspx)
     - [Magick]({% link magick.md %})
         - [Magick experiments]({% link magexp.md %})
     - [Clothing]({% link cloth.md %})
+    - [Art]({% link art.md %})
+        - [Music]({% link music.md %})
+    - [Writing]({% link writing.md %})
 - Undigested
     - http://tex.stackexchange.com/questions/5635/how-to-cite-a-university-lecture-or-its-slides-or-script
     - On being wrong

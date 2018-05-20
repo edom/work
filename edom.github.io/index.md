@@ -7,34 +7,28 @@ date: 2017-05-20 00:00:00 +0700
 
 - What do you do?
     - [Research]({% link research.md %})
-    - [Music]({% link music.md %})
-    - [Work]({% link work.md %})
+    - Music
+        - I play piano in the band [The Nomads]({% link nomads.md %}) (an Indonesian band, not the Swedish band).
 - How do I ask questions or suggest corrections?
     - Any of these will do:
         - Leave a Disqus comment in the related page.
         - [Open an issue on GitHub](https://github.com/edom/edom.github.io/issues).
-- What can you teach me?
-    - [Git mental model]({% link git.md %})
-    - [Friendship is measured by sacrifice]({% link friendship.md %})
-    - [Remove nag screens]({% link nag.md %})
-- What are some of your opinions?
-    - [Software engineering]({% link software_engineering.md %})
-    - [April fools' day is harmful]({% link april.md %})
 - Where is everything?
     - See [All pages]({% link all.md %}).
+- How do you use a computer?
+    - [Internet search tools]({% link search.md %})
+    - [Remove nag screens]({% link nag.md %})
 - Why is the text so big?
     - Because I'm myopic.
-    - In Chrome and Firefox, you can shrink the text with Control-minus.
-- Keeping score
-    - [Fastnet]({% link fastnet.md %})
-    - [PLN]({% link pln.md %})
-- [Entertainment]({% link entertain.md %})
-    - [Game]({% link game.md %})
-- Announcements
-    - Now I check the time at [time.gov](https://time.gov/) because Ubuntu 14.04 NTP once betrayed me.
-- Similar websites
-    - [kevinbinz.com](https://kevinbinz.com/)
-- [Internet search tools]({% link search.md %})
+    - How do I shrink the text?
+        - Try pressing Control-minus.
+- [Similar websites]({% link similar.md %})
+- Some private things you might not care about
+    - Habits learned the hard way
+        - I check the time at [time.gov](https://time.gov/) because Ubuntu 14.04 NTP once betrayed me.
+    - Vital service failure log
+        - [Fastnet]({% link fastnet.md %})
+        - [PLN]({% link pln.md %})
 
 {% assign everything = site.emptyArray %}
 {% for page in site.pages %}

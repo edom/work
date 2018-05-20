@@ -305,3 +305,4 @@ https://www.quora.com/What-is-the-simplest-life-form
 - philosophy of learning
     - [Piaget's constructivism vs Papert's constructionism](http://learning.media.mit.edu/content/publications/EA.Piaget%20_%20Papert.pdf), Edith Ackermann
 - [2015, Deep Convolutional Networks are Hierarchical Kernel Machines](https://arxiv.org/abs/1508.01084)
+- [Michio Kaku: Who is right about A.I.: Mark Zuckerberg or Elon Musk?](https://www.youtube.com/watch?v=F5Z52jl4yHQ)

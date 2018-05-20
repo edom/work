@@ -4,6 +4,17 @@ date: 2018-04-15 00:00 +0700
 permalink: /compsci.html
 ---
 
+- [Functional programming research]({% link functional_programming.md %})
+- [Joint research with Abdullah]({% link abdullah.md %})
+- [Trying to prove P neq. NP]({% link pnptry.md %})
+- Functional programming research
+    - [Haskell]({% link haskell.md %})
+    - [Coq]({% link coq.md %})
+- Metaprogramming
+    - [JetBrains MPS]({% link jbmps.md %})
+    - [TXL: source transformation by example](http://txl.ca/index.html), what can it do?
+- [Software engineering]({% link softeng.md %})
+- [Cryptocurrency]({% link crycur.md %})
 - [Matt Might: What CS majors should know](http://matt.might.net/articles/what-cs-majors-should-know/)
 - [Wikipedia: List of important publications in computer science](https://en.m.wikipedia.org/wiki/List_of_important_publications_in_computer_science)
 - Is CS a branch of math?

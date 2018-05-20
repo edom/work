@@ -4,6 +4,11 @@ permalink: /jakarta.html
 date: 2017-09-03 23:52:00 +0700
 ---
 
+- Jakarta is unwalkable.
+We need to fix this.
+    - https://www.nytimes.com/2017/08/20/world/asia/jakarta-walking-study-sidewalks.html
+    - [2011, Walkability Planning in Jakarta](https://escholarship.org/uc/item/05p5r596)
+    - https://www.quora.com/What-are-the-most-walkable-cities-in-Indonesia
 - Government-owned enterprises
     - Where can I buy cheap meat in Jakarta?
         - PD Dharma Jaya

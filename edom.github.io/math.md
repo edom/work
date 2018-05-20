@@ -5,6 +5,10 @@ date: 2017-06-27 03:00:00 +0700
 mathjax: yes
 ---
 
+- Sections
+    - [Clay millennium prize problems]({% link clay_math.md %})
+    - [Probability and statistics]({% link probstat.md %})
+    - [Category theory]({% link category.md %})
 - Persuasive or demonstrative articles
     - [Division from plus, times, and norm]({% link division.md %}): generalizing divisions from numbers to sets
     - [Learning mathematics]({% link mathlearn.md %})
@@ -12,8 +16,6 @@ mathjax: yes
     - [Function]({% link function.md %})
     - [Limit]({% link limit.md %})
     - [Unary algebra]({% link unalg.md %})
-- Sections
-    - [Probability and statistics]({% link probstat.md %})
 - Branches
     - [WP: Mathematics Subject Classification](https://en.wikipedia.org/wiki/Mathematics_Subject_Classification)
         - http://www.ams.org/publications/math-reviews/historicalclassifications

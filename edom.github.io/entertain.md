@@ -30,10 +30,17 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
             - [WP: Network theory](https://en.wikipedia.org/wiki/Network_theory)
     - [explorable explanations](http://explorabl.es/)
     - [Glenn Fricker's how to deal with religious fanatics protesting concerts](https://www.youtube.com/watch?v=ix3kPRlnnF8&index=8&list=RDfibfJpIHLQ8)
+    - [WP:Wikipedia:Unusual articles](https://en.wikipedia.org/wiki/Wikipedia:Unusual_articles)
 - Entertaining videos, not necessarily educational; things that cheer me up
     - [how a seal moves on land](https://www.youtube.com/watch?v=l6mGixhCcYY): like fat bouncing tempura
     - [Ethan Klein's cough compilation](https://www.youtube.com/watch?v=TEG2wxz0ILo)
-    - [sick shibe](https://www.youtube.com/watch?v=UvNDMAHotQg)
+    - shibes
+        - ShibeNation
+            - [sick shibe](https://www.youtube.com/watch?v=UvNDMAHotQg)
+            - [Massive Shibe can't get out of bed](https://www.youtube.com/watch?v=tu9hnAZteug)
+        - Rapid Liquid, shibes
+            - [when you hear the word "walk"](https://www.youtube.com/watch?v=djRfAQfT9E4)
+            - fat shibes from [Rapid Liquid: part IV - don't nom cat food](https://www.youtube.com/watch?v=qe8b9gfuwME)
     - [anatomically correct Spiderman](https://www.youtube.com/watch?v=Yc5SfuIb_eM), absurd
     - ["What's worse than a rapist? Boom. A child. No, a child rapist."](https://www.youtube.com/watch?v=L0a5iwzG7aw)
     - Steve Harvey's laughter ([Wikidata: Steve Harvey](https://www.wikidata.org/wiki/Q2347009))
@@ -59,6 +66,7 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
         - [Dead Rise 2](https://www.youtube.com/watch?v=VELVomIF2Ts) 1:10 "This car cost a million dollars"
         - [GTA 4](https://www.youtube.com/watch?v=a4UxBrJ2yIQ)
         - [Vice city](https://www.youtube.com/watch?v=NZ83rfAqWMw)
+        - [Worst game yet (Country justice: revenge of the rednecks)](https://www.youtube.com/watch?v=Yaou-qomTrg)
     - prozd
         - [clickbait](https://www.youtube.com/watch?v=f4FuOi9rvKw)
         - [harem anime where everyone but the protagonist is sentient furniture](https://www.youtube.com/watch?v=gYXHnkhRwCY)
@@ -69,8 +77,6 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
 - meme-like materials
     - [in only 2 weeks, Robert lost 2 weeks](https://www.reddit.com/r/FunnyandSad/comments/8ejlih/in_just_two_weeks/)
     - [well-lit husky portrait](https://old.reddit.com/r/aww/comments/8io64x/last_year_while_setting_up_lights_for_some/)
-    - fat shibes from [Rapid Liquid: part IV - don't nom cat food](https://www.youtube.com/watch?v=qe8b9gfuwME)
-    - [Massive Shibe can't get out of bed](https://www.youtube.com/watch?v=tu9hnAZteug)
     - The adventures of Mandy and Major:
     Major is a shibe that growls like a dinosaur chicken.
         - [Do you like your new toy?](https://www.youtube.com/watch?v=FuraQCCsKgE)

@@ -4,6 +4,15 @@ date: 2018-05-12 00:00 +0700
 permalink: /biology.html
 ---
 
+- Daily human activities
+    - [Eating]({% link eat.md %})
+        - [How to cook eggs]({% link egg.md %})
+    - [Walking]({% link walk.md %})
+    - Which muscles are atrophied by prolonged sitting?
+    - How to know if a muscle is short/tight or weak?
+- [Subsistence]({% link subsist.md %})
+    - [Farming]({% link farm.md %})
+        - [Seaweed]({% link seaweed.md %})
 - How do we cure death?
 - How do we live forever?
 - Why do we age?

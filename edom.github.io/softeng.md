@@ -1,34 +1,43 @@
 ---
-title: Work
-permalink: /work.html
-date: 2018-05-15 02:31:00 +0700
+title: Software engineering
+date: 2018-04-15 00:00 +0700
+permalink: /softeng.html
 ---
 
-- [Amazon Web Services]({% link aws.md %})
-- [PostgreSQL]({% link pgsql.md %})
-- [Security]({% link security.md %})
-- [Gradle]({% link gradle.md %})
-- [Trello]({% link trello.md %})
-- [Class-based programming]({% link cbp.md %})
-- [Software engineering management]({% link engman.md %})
-- Tools
+- References
+    - [Standard MIDI file format]({% link smf.md %})
+    - [Software engineer salary]({% link salary.md %})
+- Sections
+    - [Security]({% link security.md %})
+    - [Software engineering management]({% link engman.md %})
+    - [Class-based programming]({% link cbp.md %})
+- These pages may be outdated:
+    - [Ansible]({% link ansible.md %})
+    - [Logging]({% link logging.md %})
+    - [Web scraping]({% link scrape.md %})
+    - [Android]({% link android.md %}). Last time I developed for Android in 2012. My knowledge is irrelevant now.
+- Things we use, tools and services
     - git, version control
         - [Git mental model]({% link git.md %})
     - git-gui
     - gitk
     - meld, three-way diff
     - vim, text editor
-- These pages may be outdated:
-    - [Ansible]({% link ansible.md %})
-    - [Logging]({% link logging.md %})
-    - [Web scraping]({% link scrape.md %})
-    - [Android]({% link android.md %}). Last time I developed for Android in 2012. My knowledge is irrelevant now.
+    - Databases
+        - [PostgreSQL]({% link pgsql.md %})
+    - Build tools
+        - Maven
+        - [Gradle]({% link gradle.md %})
+    - Third party services
+        - Cloud infrastructure hosting, infrastructure as a service
+            - [Amazon Web Services]({% link aws.md %})
+        - Management
+            - [Trello]({% link trello.md %})
 - Other opinions
     - .NET stack
         - http://engineering.gopangea.com/stack
         - http://engineering.gopangea.com/2015/12/10/why-dot-net.html
 - Rants; software development woes
-    - ShadowJar doesn't work with Gradle 2.13.
     - Troubleshooting Dashboard: What metrics you should monitor and why?
         - HTTP 4xx and 5xx status codes and connection failures.
         - Rising maximum latency is the first sign of something going wrong or overloaded.
@@ -39,6 +48,17 @@ date: 2018-05-15 02:31:00 +0700
         - Do you handle network interruptions?
         How does the user continue scrolling after network connection is restored?
         Is there an unhandled exception in your script?
+- When we write a program,
+we are actually creating a *mathematical model* of reality,
+creating an implicit ontology,
+defining what exist,
+making simplifying assumptions,
+discarding irrelevant aspects.
+- [Scott Hanselman: "Software doesn't work. I'm shocked at how often we put up with it."](https://www.hanselman.com/blog/EverythingsBrokenAndNobodysUpset.aspx)
+- Programmers need to own up their mistakes, and call an error an error, not a bug.
+A bug is something the programmer cannot control.
+A cosmic ray strike flipping a bit in RAM is a bug.
+A typo in the source code is not a bug.
 - Undigested
     - What is a database that can be scaled up without downtime?
     We are willing to sacrifice consistency for tracking data.

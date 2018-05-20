@@ -2,7 +2,6 @@
 title: Software engineer salary
 permalink: /salary.html
 date: 2017-08-31 02:00:00 +0700
-featured: true
 opengraph:
     title: In 2017, Indonesian software engineers on average should be paid IDR 54,000,000/month, but they are only paid 1/6 of it
     description: Paysa's USD 159,000/year adjusted for purchasing power parity according to OECD 2016 data (about USD 1 = IDR 4,000).

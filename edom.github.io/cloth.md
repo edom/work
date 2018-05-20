@@ -8,6 +8,12 @@ date: 2017-06-09 00:59:00 +0700
     - https://www.quora.com/Does-there-exist-an-ontology-standard-for-clothing-item-categories
         - 2018: no
     - [WP:Template:Clothing](https://en.wikipedia.org/wiki/Template:Clothing)
+    - [Wikidata Q5849500 cloth](https://www.wikidata.org/wiki/Q5849500):
+        "any textile that is woven, felted, knit, pounded, or otherwise made into a flat piece"
+        - some sources according to Wikidata
+            - Textile Terms and Definitions, Textile Institute, Manchester, UK
+            - Fairchild's Dictionary of Textiles
+            - Art Architecture & Thesaurus (AAT)
     - nouns
         - materials
             - cotton
@@ -18,7 +24,12 @@ date: 2017-06-09 00:59:00 +0700
             - fabric
             - cloth
         - apparels
-            - shirt
+            - [WP:shirt](https://en.wikipedia.org/wiki/Shirt)
+                - [WP:sleeveless shirt](https://en.wikipedia.org/wiki/Sleeveless_shirt)
+                    - undershirt
+                    - tank top
+                    - wifebeater
+                    - singlet
             - pants
             - jacket
                 - windbreaker/windcheater jacket
@@ -28,7 +39,10 @@ date: 2017-06-09 00:59:00 +0700
         - parts of apparels
             - cuff (of shirt or pants) is fold-back at an end
         - aggregates
+            - apparel
+            - fashion
             - textile
+            - outfit
         - tools
             - needle
                 - sewing needle
@@ -44,6 +58,9 @@ date: 2017-06-09 00:59:00 +0700
         - A thread is woven into a yarn?
         - A yarn is knit into a fabric?
         - Fabrics are sewn into clothes?
+        - comparisons, differences
+            - shirt vs T-shirt
+                - T-shirts don't have buttons.
 - Opinions
     - Jeans (denim bottoms) look cool, but denim tops look tacky.
 - Why do clothes have seams?

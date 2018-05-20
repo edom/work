@@ -2,7 +2,6 @@
 title: Remove nag screens
 permalink: /nag.html
 date: 2017-07-08 19:55 +0700
-featured: yes
 ---
 
 Copy the respective fragments to your browser's JavaScript Console (Ctrl+Shift+J on Chromium).

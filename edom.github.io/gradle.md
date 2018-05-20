@@ -39,3 +39,5 @@ date: 2018-05-15 23:10:00 +0700
     - When we need to reuse one subproject without the others.
     - If they don't make sense separately, don't split them; it'll just slow down the build for nothing.
     - The same goes for Maven modules.
+- Woes
+    - ShadowJar doesn't work with Gradle 2.13.

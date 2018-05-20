@@ -45,6 +45,7 @@ permalink: /physics.html
     See the blast curve.
         - [WP: Blast damage](https://en.wikipedia.org/wiki/Effects_of_nuclear_explosions#Blast_damage)
         - [WP: Blast curve](https://en.wikipedia.org/wiki/File:Blastcurves_psi.svg)
+        - [WP:NUKEMAP](https://en.wikipedia.org/wiki/NUKEMAP)
     - why reinforce concrete: three types of stresses (tensile, compressive, shear)
     https://www.youtube.com/watch?v=cZINeaDjisY
     - A crystal is a repeating structure.

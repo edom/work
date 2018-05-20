@@ -2,7 +2,6 @@
 title: Writing
 permalink: /writing.html
 date: 2017-05-20 21:29:00 +0700
-featured: true
 ---
 
 ## Why do I write?
