@@ -97,3 +97,5 @@ mathjax: yes
             - [WP: Tissot's indicatrix](https://en.wikipedia.org/wiki/Tissot%27s_indicatrix)
             - [WP: Fuller projection, Dymaxion map](https://en.wikipedia.org/wiki/Fuller_projection)
     - [string diagrams, Paul-André Melliès](https://www.irif.fr/~mellies/slides/oregon-slides-2011-A.pdf)
+    - probability
+        - https://en.wikipedia.org/wiki/Algebra_of_random_variables

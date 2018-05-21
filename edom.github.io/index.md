@@ -23,12 +23,16 @@ date: 2017-05-20 00:00:00 +0700
     - How do I shrink the text?
         - Try pressing Control-minus.
 - [Similar websites]({% link similar.md %})
-- Some private things you might not care about
+- Some things you might not care about
     - Habits learned the hard way
         - I check the time at [time.gov](https://time.gov/) because Ubuntu 14.04 NTP once betrayed me.
     - Vital service failure log
-        - [Fastnet]({% link fastnet.md %})
-        - [PLN]({% link pln.md %})
+        - Internet service providers
+            - [Fastnet]({% link fastnet.md %})
+            - [CBN]({% link cbn.md %})
+        - Electricity distribution
+            - [PLN]({% link pln.md %})
+    - [Long-haired men]({% link longhair.md %})
 
 {% assign everything = site.emptyArray %}
 {% for page in site.pages %}

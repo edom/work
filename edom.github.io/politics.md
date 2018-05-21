@@ -12,9 +12,12 @@ permalink: /politics.html
     - Voltaire: "To find out who rules over you, simply find out who you are not allowed to criticize."
 - Reddit: CrazyIdeas
     - https://www.reddit.com/r/CrazyIdeas/comments/17yniw/you_need_a_license_to_have_children/
+        - Are people more likely to be killed by other people (war, genocide, holocaust) or by cars?
     - https://www.reddit.com/r/CrazyIdeas/comments/3x8fr5/seeing_as_the_1_have_nearly_everything_lets_just/
     - https://www.reddit.com/r/CrazyIdeas/comments/6alqe1/make_a_handy_guide_of_democratic_and_republican/
-    - https://www.reddit.com/r/CrazyIdeas/comments/6cu2yf/we_all_join_isis_so_there_isnt_anyone_left_for/
+    - impractical
+        - https://www.reddit.com/r/CrazyIdeas/comments/6cu2yf/we_all_join_isis_so_there_isnt_anyone_left_for/
+        - [give everyone one free totally legal kill](https://www.reddit.com/r/FunnyandSad/comments/7h7p3u/if_everyone_was_given_one_free_totally_legal_kill/)
 - Who is Donald Trump's greatest opponent?
     - Donald Trump is the person who disagrees most with Donald Trump.
         - [Twitter: DonTrumpsTrump](https://twitter.com/DonTrumpsTrump),
@@ -37,7 +40,7 @@ permalink: /politics.html
 - How do we fix the justice system?
     - Replace retributive justice with restorative justice.
         - Focus on fixing the damage, not on punishing people.
-        - Norwegia is a prime example.
+        - Norway gets the prison system right by "restorative justice" as opposed to American "retributive justice".
 - [Corruption is legal in America](https://www.youtube.com/watch?v=5tu32CCA_Ig), 6-minute video
     - https://represent.us/
     - https://anticorruptionact.org/
@@ -50,7 +53,10 @@ permalink: /politics.html
         - Trade (and specialization of labor) is beneficial for everybody if everybody is fair.
     - What is the difference between "independence" and "sovereignty"?
 - Undigested
-    - The Dictator's Handbook, Bruce Bueno de Mesquita
+    - How can the minority control the majority?
+        - https://en.wikipedia.org/wiki/Big_man_(political_science)
+    - [CGP Grey: The Rules for Rulers](https://www.youtube.com/watch?v=rStL7niR7gs&amp;feature=youtu.be)
+        - "The Dictator's Handbook", Bruce Bueno de Mesquita
     - ["Lobbying" *is* "bribing"](https://www.reddit.com/r/LateStageCapitalism/comments/7bd6xm/how_to_bribe_a_lawmaker_101/).
     - [New UN report finds almost no industry profitable if environmental costs were included](https://www.reddit.com/r/LateStageCapitalism/comments/8i4y3a/new_un_report_finds_almost_no_industry_profitable/)
     [Why Socrates hated democracy](https://www.youtube.com/watch?v=fLJBzhcSWTk)?
@@ -63,3 +69,6 @@ permalink: /politics.html
             - https://www.reddit.com/r/LateStageCapitalism/comments/6cqcm3/if_youre_unemployed_it_is_not_because_there_isnt/
         - Best attack aircraft? https://en.wikipedia.org/wiki/Fairchild_Republic_A-10_Thunderbolt_II
     - [The Best Way to Fix The American Political System](https://www.ranker.com/list/the-best-way-to-fix-the-american-political-system/desertrat89)
+- History
+    - https://history.stackexchange.com/questions/32480/why-would-some-nations-want-to-force-japan-to-end-their-isolation
+- [How does money laundering work? - Delena D. Spann](https://www.youtube.com/watch?v=257wV-AbKaE)

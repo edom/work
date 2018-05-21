@@ -74,3 +74,4 @@ A typo in the source code is not a bug.
         - https://en.wikipedia.org/wiki/Feature-driven_development#Build_by_feature
             - "Any function that is too complex to be implemented within two weeks is
             further decomposed into smaller functions until each sub-problem is small enough to be called a feature."
+- Meilir Page Jones, "What every programmer should know about object-oriented design"

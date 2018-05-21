@@ -607,3 +607,11 @@ Also, Lee Sklar's beard is awesome.
         - ["Karma", Kokia](https://www.youtube.com/watch?v=OkmMsH5ssc8); opening of the "Phantom: Requiem for the Phantom" anime
     - group
         - [(33:09) Chanson triste](https://www.youtube.com/watch?v=iRdxVsmbXVA), Pytor Ilyich Tchaikovsky, op. 40 no. 2, James Last
+- Benjamin Godard, Premier Chagrin
+- [HIVI! - Siapkah Kau 'Tuk Jatuh Cinta Lagi](https://www.youtube.com/watch?v=kX1O93X77d4)
+- [安田瑞 Rei Yasuda／Mirror (完整中文字幕版)](https://www.youtube.com/watch?v=MAx2i2EJhSc&list=PLmDBXhC2SJ4xH41pY4bzEzAY_ZSLR3nP2&index=17)
+- [The Execution - 31/40 - Ace Combat 3 Original Soundtrack](https://www.youtube.com/watch?v=t47XvzN0W5g&list=PLDD61C76EF278E530&index=31)
+- [Flamingosis - Sunset Park](https://www.youtube.com/watch?v=odGExIQTxvg)
+- [Emeli Sandé, "Hurts"](https://www.youtube.com/watch?v=9TqUlGyWSEk)
+- [Ellie Goulding, "Lights"](https://www.youtube.com/watch?v=0NKUpo_xKyQ)
+- [Ellie Goulding, "Beating heart"](https://www.youtube.com/watch?v=wrNTOo4KH8c)

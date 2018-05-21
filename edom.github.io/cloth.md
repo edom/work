@@ -22,6 +22,7 @@ date: 2017-06-09 00:59:00 +0700
             - thread
             - yarn
             - fabric
+            - leather
             - cloth
         - apparels
             - [WP:shirt](https://en.wikipedia.org/wiki/Shirt)
@@ -36,6 +37,10 @@ date: 2017-06-09 00:59:00 +0700
             - jumpsuit
             - harness
             - lederhosen
+            - jeans
+        - modifiers
+            - crop (crop-top)
+            - rise (low-rise, high-rise)
         - parts of apparels
             - cuff (of shirt or pants) is fold-back at an end
         - aggregates

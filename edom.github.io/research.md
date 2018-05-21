@@ -12,6 +12,7 @@ permalink: /research.html
     - [Physics]({% link physics.md %}) and engineering
         - [Energy storage]({% link ensto.md %})
     - [Mathematics]({% link math.md %})
+    - [Mathematics education]({% link mathedu.md %})
     - [Meta-research]({% link meta_research.md %})
         - [Information architecture]({% link infarch.md %})
     - [Biology]({% link biology.md %})
@@ -62,3 +63,5 @@ permalink: /research.html
     - [StackOverflow: "Are there any applications of Abstract Algebra to Programming Language Theory? Is there anything that would be useful in language design and compiler implementation?"](https://cstheory.stackexchange.com/questions/12354/programming-language-theory-and-abstract-algebra)
     - [StackOverflow: Uses of algebraic structures in theoretical computer science](https://cstheory.stackexchange.com/questions/10916/uses-of-algebraic-structures-in-theoretical-computer-science)
     - [Danielsson et al.'s "Fast and loose reasoning is morally correct"](http://www.cse.chalmers.se/~nad/publications/danielsson-et-al-popl2006.html).
+    - https://www.timeshighereducation.com/features/these-are-20-most-popular-academic-papers-2016
+    - https://www.numbeo.com/cost-of-living/

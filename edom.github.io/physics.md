@@ -59,3 +59,4 @@ permalink: /physics.html
     [A Guide to Molecular Mechanics and Quantum Chemical Calculations, 2003, Warren J. Hehre](https://www.wavefun.com/support/AGuidetoMM.pdf)
     - [How to save 51 billion lives for 68 cents with simple Engineering](https://www.youtube.com/watch?v=Qf-D1Upn-KU)
         - Some constraints are good for creativity.
+    - Isotope vs nuclide https://en.m.wikipedia.org/wiki/Isotope

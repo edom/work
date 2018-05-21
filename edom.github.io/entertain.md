@@ -74,6 +74,10 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
         - [getting into a conversation in a language you don't actually speak that well](https://www.youtube.com/watch?v=T_PuZBdT2iM)
         - [having a non-white name](https://www.youtube.com/watch?v=p1RKkRCiU90)
     - [Kid Spins in Spinning Chair at Park 😂 He pretends it's nothing and walks it off](https://www.youtube.com/watch?v=Bae4jQk-LGc)
+    - [The "Tourette's Guy" moving a hot pot while screaming "fuck", and hit his head on the low ceiling lamp](https://www.youtube.com/watch?v=AtbMnixO2nc)
+    - [SFM: L4D: nick](https://www.youtube.com/watch?v=nwpEAYI-5jY)
+    - [gmod: L4D: Who's cooking tonight](https://www.youtube.com/watch?v=pfexEAExzhk)
+    - [Horse passing gas](https://www.youtube.com/watch?v=jMyL0HdXPuc)
 - meme-like materials
     - [in only 2 weeks, Robert lost 2 weeks](https://www.reddit.com/r/FunnyandSad/comments/8ejlih/in_just_two_weeks/)
     - [well-lit husky portrait](https://old.reddit.com/r/aww/comments/8io64x/last_year_while_setting_up_lights_for_some/)
@@ -84,6 +88,10 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
     - 19:00 [Best Reactions of JonTron](https://www.youtube.com/watch?v=tP5CLR54igs) "AND IIIII... HOLY SHIT",
     [fragment](https://www.youtube.com/watch?v=V4SQj8Ua3kM),
     [10:49, source](https://www.youtube.com/watch?v=l69BP1uhlMs)
+    - draw the squad
+        - http://knowyourmeme.com/photos/1082202-draw-the-squad
+        - http://kureiiro.deviantart.com/art/Nier-Automata-Monopoly-Squad-Meme-670671565
+            - from https://www.reddit.com/r/nier/comments/61qm27/automata_in_a_nutshell/
 - [subreddit for fans of k-pop girls](https://www.reddit.com/r/asiangirlsbeingcute/top/)
 - dark humor (suicidal, not suitable for everyone)
     - [Ethan Vincent: are we there yet](http://oppressive-silence.com/comic/are-we-there-yet),
@@ -92,5 +100,8 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
 - Indonesian
     - [Iklan kocak jadul: Sempak Firaun, botol cebok](http://humorpoin.blogspot.co.id/2017/06/ada-sempak-firaun-inilah-5-iklan-kocak.html)
     - [mediocredoujin's "Doraemon: The Genesis"](https://www.facebook.com/pg/mediocredoujin/photos/?tab=album&amp;album_id=1616136515299919)
+    - [Sule bikin Nunung ngompol](https://www.youtube.com/watch?v=SjDOod17cgs)
 - [vim: Entering special characters](http://vim.wikia.com/wiki/Entering_special_characters)
     - `<Ctrl-K> ' e` to type `é`
+- reverse entertainment (when you're too happy, and you need something to make yourself sad)
+    - Nigel the gannet died alone next to concrete decoy birds

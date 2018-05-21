@@ -16,6 +16,8 @@ We need to fix this.
             - http://smartcity.jakarta.go.id/blog/198/beli-daging-online-dari-perusahaan-daerah-dharma-jaya
             - DJMeatshop, expansion of PD Dharma Jaya, [instagram](https://www.instagram.com/djmeatshop/)
                 - Jl. Raya Penggilingan no. 25, Jakarta Timur
+            - www.belidaging-dj.com
+                - Dikasih es batu ga pas ngirim?
 - Kementrian Perdagangan
     - https://ews.kemendag.go.id/
     - https://ews.kemendag.go.id/bawangmerah/DailyPriceBawang.aspx
