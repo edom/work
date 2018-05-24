@@ -101,6 +101,10 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
     - [Iklan kocak jadul: Sempak Firaun, botol cebok](http://humorpoin.blogspot.co.id/2017/06/ada-sempak-firaun-inilah-5-iklan-kocak.html)
     - [mediocredoujin's "Doraemon: The Genesis"](https://www.facebook.com/pg/mediocredoujin/photos/?tab=album&amp;album_id=1616136515299919)
     - [Sule bikin Nunung ngompol](https://www.youtube.com/watch?v=SjDOod17cgs)
+    - /r/indonesia
+        - ["Badannya aja six pack, tititnya pasti kecil." -- "tapi ibu kamu ga komplain.."](https://www.reddit.com/r/indonesia/comments/7mt1v8/brutalsavagerekt/)
+        - [Salah PKI](https://www.reddit.com/r/indonesia/comments/8dvsj3/salah_pki/)
+        - [Polres Bantaeng is SAVAGE](https://www.reddit.com/r/indonesia/comments/7ep760/polres_bantaeng_is_savage/)
 - [vim: Entering special characters](http://vim.wikia.com/wiki/Entering_special_characters)
     - `<Ctrl-K> ' e` to type `é`
 - reverse entertainment (when you're too happy, and you need something to make yourself sad)

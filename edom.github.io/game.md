@@ -72,3 +72,5 @@ date: 2017-06-27 01:00 +0700
     - The *Yakuza* series
         - dark comedy, very good story writing
         - should ring a bell for Kitano Takeshi (Beat Takeshi) fans
+    - I was thinking about buying "Kerbal Space Program", but now I'm sure that I'm not buying it.
+        - [New EULA Makes KSP Spyware? - Kerbal Space Program Terms of Service Steal Private Information](https://www.youtube.com/watch?v=WCLbUD_aubQ)

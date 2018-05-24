@@ -12,6 +12,8 @@ permalink: /research.html
     - [Physics]({% link physics.md %}) and engineering
         - [Energy storage]({% link ensto.md %})
         - [Traffic engineering]({% link trafeng.md %})
+        - Architecture
+            - [Open office is overrated](https://www.youtube.com/watch?v=-p6WWRarjNs)
     - Logic
         - [Counterfactual reasoning]({% link cf.md %})
     - [Mathematics]({% link math.md %})
@@ -20,7 +22,13 @@ permalink: /research.html
         - [Information architecture]({% link infarch.md %})
     - [Biology]({% link biology.md %})
     - [Social]({% link social.md %})
-    - Philosophy
-        - https://philosophy.stackexchange.com/questions/21292/do-some-continental-philosophers-deliberately-obfuscate-their-writing-why
-        - https://www.whatisitliketobeaphilosopher.com/
-            - Biographical interviews.
+    - [Philosophy]({% link philo.md %})
+    - [Writing]({% link writing.md %})
+    - [Fighting]({% link fight.md %})
+    - Cross-branch
+        - Software is similar to law.
+        Bad software and bad law both result in unnecessarily slow system.
+        - Both software and law:
+            - are based on logic
+            - have an ontology
+        - The strongest predictor of someone's wealth is his parents' wealth.

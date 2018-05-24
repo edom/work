@@ -35,3 +35,9 @@ permalink: /politik.html
             why not block all of Internet?
     - What I think the reason is
         - Someone in the government might need to be seen working.
+- Undigested
+    - Why do Habib Rizieq supporters support him?
+    - 2017-06-23 government announces that they will take Rp344 trillion loan. Source?
+    - If Sukarno hadn't fallen, would he have been like Gajah Mada, Washington, Castro, Kim, Mao, Stalin, Khan, or someone else?
+    - Bagaimana cara impor?
+    - Bagaimana cara ekspor?

@@ -72,3 +72,18 @@ what would the religion of those children be?
 
 Thank you for answering the questions.
 I wish you all the best.
+
+## Links
+
+- Websites
+    - [biblegateway.com: online Christian bible](https://www.biblegateway.com/)
+    - [quran.com: online Islamic bible](https://quran.com/)
+    - [wikiislam.net](http://wikiislam.net/wiki/Main_Page)
+- Concepts
+    - [WP:Supersessionism](https://en.wikipedia.org/wiki/Supersessionism)
+    - [WP:Manifest destiny](https://en.wikipedia.org/wiki/Manifest_destiny)
+    - [WP:Crusades](https://en.wikipedia.org/wiki/Crusades)
+    - [WP:Simony](https://en.wikipedia.org/wiki/Simony)
+- Lists
+    - [WP:The bad popes](https://en.wikipedia.org/wiki/The_Bad_Popes)
+    - [Quora: Who was the most corrupt pope in the history of Catholicism?](https://www.quora.com/Who-was-the-most-corrupt-pope-in-the-history-of-Catholicism)

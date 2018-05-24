@@ -233,3 +233,15 @@ probably because it's seldom fresh here.
         - Sausage is efficient butchery.
             - Sausage, frankfurter, bockwurst, bratwurst, kielbasa, what's the difference?
         - http://www.wheatbellyblog.com/2012/07/an-iodine-primer/
+- Potato can be poisonous.
+    - Don't eat potatos that are green under the skin.
+    - Don't eat potatos that have sprouted.
+- How to boil potato
+    - Put potato in pot.
+    - Put water in pot until the potato is almost fully submerged.
+    - Put lid.
+    - Turn on stove. Use biggest fire.
+    - Wait for the water to begin boiling (vivid bubbles).
+    - When the water begins boiling,
+    reduce the fire until to the amount just required to maintain the boil.
+    - Wait for about 10 minutes since the water began boiling.

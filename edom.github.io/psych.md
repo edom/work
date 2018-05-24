@@ -31,3 +31,4 @@ date: 2018-05-24 02:52 +0700
                 - [Same](https://www.nytimes.com/2015/11/15/opinion/sunday/the-key-to-political-persuasion.html).
     - Marketing is about inducing people to buy something.
     - Sometimes being agreeable is more important than being correct.
+        - Other people's feelings are more important than the truth?

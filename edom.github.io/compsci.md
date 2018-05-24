@@ -12,6 +12,7 @@ permalink: /compsci.html
     - [Coq]({% link coq.md %})
 - [Software engineering]({% link softeng.md %})
     - [Programming]({% link programming.md %})
+    - [PlayStation]({% link ps1.md %})
 - Why is "functional programming research" under "computer science", but "programming" is under "software engineering"?
     - Is there any other way to taxonomize this?
 - [Cryptocurrency]({% link crycur.md %})

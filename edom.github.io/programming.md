@@ -20,3 +20,6 @@ date: 2017-06-22 00:28:00 +0700
 - Lisp family/dialects
     - Scheme
     - [PicoLisp](https://picolisp.com/wiki/?home)
+- Undigested
+    - https://hakonrossebo.github.io/functional-programming-babelfish/
+    - https://github.com/rainbyte/haskell-ide-chart

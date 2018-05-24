@@ -76,3 +76,5 @@ date: 2016-03-27 14:14:08 +0700
     - ["A case study of an award winning public school string orchestra program", Wing Man Fu, graduate thesis]( https://etd.ohiolink.edu/rws_etd/document/get/bgsu1242663220/inline)
     - YouTube Content ID algorithm problems:
     [Adam Neely, "What I want to teach, but can't, thanks to Universal Music Group."](https://www.youtube.com/watch?v=nryFmUjtwEY)
+    - [Where Nokia’s Ringtone Originally Came From](https://www.youtube.com/watch?v=B5FaG6dgAxc)
+        - Francisco Tárrega's "Gran Vals"

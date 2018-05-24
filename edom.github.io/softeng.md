@@ -62,6 +62,27 @@ discarding irrelevant aspects.
 A bug is something the programmer cannot control.
 A cosmic ray strike flipping a bit in RAM is a bug.
 A typo in the source code is not a bug.
+- Coupling is deciding what you can depend on.
+    - Big Company X just released this new cool stuff, but will it still be there in 5 years?
+- Meilir Page Jones, "What every programmer should know about object-oriented design"
+- Quartz scheduler performance
+    - http://airboxlab.github.io/performance/scalability/scheduler/quartz/2017/06/20/perf_tuning_quartz.html
+    - https://www.ebayinc.com/stories/blogs/tech/performance-tuning-on-quartz-scheduler/
+    - https://stackoverflow.com/questions/11565993/quartz-performance
+- How do you know a software is maintainable?
+    - Change all the programmers.
+    If the new programmers can handle it,
+    it's maintainable.
+    - The only way to ensure software maintainability is periodic rotation of programmers?
+- Attitude
+    - Respect existing code.
+    It may be ugly, but *it works*.
+        - Is the code really ugly?
+            - Are you refusing to read it because it doesn’t fit your taste?
+            Indent size?
+            Snake case vs camel case?
+                - Is the code truly unreadable, or are you just an asshole?
+                    - How hard have you tried?
 - Undigested
     - What is a database that can be scaled up without downtime?
     We are willing to sacrifice consistency for tracking data.
@@ -77,8 +98,5 @@ A typo in the source code is not a bug.
         - https://en.wikipedia.org/wiki/Feature-driven_development#Build_by_feature
             - "Any function that is too complex to be implemented within two weeks is
             further decomposed into smaller functions until each sub-problem is small enough to be called a feature."
-- Meilir Page Jones, "What every programmer should know about object-oriented design"
-- Quartz scheduler performance
-    - http://airboxlab.github.io/performance/scalability/scheduler/quartz/2017/06/20/perf_tuning_quartz.html
-    - https://www.ebayinc.com/stories/blogs/tech/performance-tuning-on-quartz-scheduler/
-    - https://stackoverflow.com/questions/11565993/quartz-performance
+    - Grails vs Spring MVC vs Play Framework?
+    - Why are Android phones so sluggish?

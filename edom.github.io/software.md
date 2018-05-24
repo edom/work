@@ -12,10 +12,14 @@ date: 2017-06-26 22:30 +0700
     - [Set up Webpack to transpile and bundle TypeScript sources](https://webpack.js.org/guides/typescript/)
     - HTML DOM, web, browser, JavaScript
         - [What forces layout / reflow](https://gist.github.com/paulirish/5d52fb081b3570c81e3a)
-- Legal
+- Software for scientists
+    - [stared github gist](https://gist.github.com/stared/9130888)
+    - https://www.quora.com/What-wiki-blog-software-do-PhD-students-use-to-maintain-personal-notes-of-their-daily-reading-research
+- Legality of software
     - Why doesn't Facebook just keep using Apache Software License version 2.0 for React?
     Why does it roll out its own patent license?
         - Update: Facebook has switched back to Apache-2.0.
+- [Autotools]({% link autotools.md %})
 - Functional programming
     - Haskell
         - https://github.com/sellout/recursion-scheme-talk/blob/master/recursion-scheme-talk.org

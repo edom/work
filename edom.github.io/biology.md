@@ -39,3 +39,5 @@ permalink: /biology.html
 - Toxin, venom, poison, what's the difference?
 - Undigested
     - [Opinion: Biology is the new physics (to be revolutionized by math)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2868533/)
+    - [The Story of Fat: Why we were Wrong about Health](https://www.youtube.com/watch?v=5S6-v37nOtY)
+    - https://design.tutsplus.com/articles/human-anatomy-fundamentals-advanced-body-proportions--vector-19869

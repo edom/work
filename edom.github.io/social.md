@@ -18,4 +18,3 @@ permalink: /social.html
     - [Music]({% link music.md %})
     - [Acting]({% link act.md %})
     - [Clothing]({% link cloth.md %})
-- [Writing]({% link writing.md %})

@@ -4,6 +4,8 @@ date: 2018-04-15 00:00 +0700
 permalink: /politics.html
 ---
 
+- Sections
+    - [Israel-Palestine problem]({% link ispal.md %})
 - What is the Government of China afraid of?
     - The Government of China isn't afraid of criticism. It is afraid of collective action. [King2013]
 - Why are cannabis and heroin illegal?
@@ -59,8 +61,6 @@ permalink: /politics.html
         - "The Dictator's Handbook", Bruce Bueno de Mesquita
     - ["Lobbying" *is* "bribing"](https://www.reddit.com/r/LateStageCapitalism/comments/7bd6xm/how_to_bribe_a_lawmaker_101/).
     - [New UN report finds almost no industry profitable if environmental costs were included](https://www.reddit.com/r/LateStageCapitalism/comments/8i4y3a/new_un_report_finds_almost_no_industry_profitable/)
-    [Why Socrates hated democracy](https://www.youtube.com/watch?v=fLJBzhcSWTk)?
-    Because the average person isn't competent to rule a country.
     - History, politics, military, war, weapon
         - https://www.reddit.com/r/explainlikeimfive/comments/1fy1na/eli5_why_did_joseph_stalin_kill_so_many_people/
         - [Native American Holocaust](http://www.historyisaweapon.com/defcon1/zinncol1.html)
@@ -68,9 +68,20 @@ permalink: /politics.html
             - https://www.reddit.com/r/LateStageCapitalism/comments/6ilw3q/war_who_is_it_good_for/
             - https://www.reddit.com/r/LateStageCapitalism/comments/6cqcm3/if_youre_unemployed_it_is_not_because_there_isnt/
         - Best attack aircraft? https://en.wikipedia.org/wiki/Fairchild_Republic_A-10_Thunderbolt_II
+        - What does manifest destiny have to do with American Imperialism?
+            - [WP:Manifest destiny](https://en.wikipedia.org/wiki/Manifest_destiny)
+            - [WP:American imperialism](https://en.wikipedia.org/wiki/American_imperialism)
     - [The Best Way to Fix The American Political System](https://www.ranker.com/list/the-best-way-to-fix-the-american-political-system/desertrat89)
     - History
         - https://history.stackexchange.com/questions/32480/why-would-some-nations-want-to-force-japan-to-end-their-isolation
     - [How does money laundering work? - Delena D. Spann](https://www.youtube.com/watch?v=257wV-AbKaE)
     - Free speech is only possible if people think critically.
     - Democracy is only possible if people think critically.
+            - Democracy assumes that the electors are educated;
+            otherwise the candidates will manipulate the electors
+            using public media and sensitive issues.
+                - Examples:
+                    - US in 2016 (Trump)
+                    - Indonesia in 2017 (Anies-Sandi)
+        - [Why Socrates hated democracy](https://www.youtube.com/watch?v=fLJBzhcSWTk)?
+            - Because the average person isn't competent to rule a country.
