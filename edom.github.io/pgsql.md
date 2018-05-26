@@ -26,3 +26,7 @@ date: 2018-05-15 02:31:00 +0700
 - PostgreSQL tuning
     - http://madusudanan.com/blog/understanding-postgres-caching-in-depth/#CachePurpose
     - https://wiki.postgresql.org/wiki/Logging_Difficult_Queries
+- 2018-02-21
+    - [pg_bench](https://www.postgresql.org/docs/devel/static/pgbench.html)
+    - IN is faster than VALUES in psql 9.3
+        - select values & join instead of in list https://wiki.postgresql.org/wiki/Sample_Databases

@@ -41,3 +41,25 @@ permalink: /politik.html
     - If Sukarno hadn't fallen, would he have been like Gajah Mada, Washington, Castro, Kim, Mao, Stalin, Khan, or someone else?
     - Bagaimana cara impor?
     - Bagaimana cara ekspor?
+- Apakah saya pesimis atau realistik?
+    - 2014 ada partai baru: [Partai Solidaritas Indonesia](https://psi.id/).
+        - Terus? Semua partai juga pernah baru.
+        Semua partai juga didirikan dengan cita-cita mulia.
+            - Pada tahun 1927 PNI juga partai baru.
+            - Pada tahun 1964 Golkar juga partai baru.
+            - Pada tahun 1973 PDI juga partai baru.
+            - Pada tahun 2001 Partai Demokrat juga partai baru.
+            - Pada tahun 2002 PKS juga partai baru.
+            - Pada tahun 2008 Gerindra juga partai baru.
+            - Setiap partai lain juga partai baru pada tanggal pendiriannya.
+            - Seiring waktu, semua partai baru itu juga terlibat masalah.
+        - Siklus?
+            - Partai baru didirikan karena ketidakpuasan terhadap partai lama.
+            - Setelah lama, partai baru jadi partai lama, dan terlibat masalah.
+            - Ulangi.
+        - Kalau semua partai terlibat masalah,
+        sistem pemerintahan perlu diperbaiki?
+        Pemisahan perlu diperbaiki?
+        Insentif perlu dirancang lebih baik?
+            - Sistem kita mengubah orang muda idealis menjadi orang tua korup?
+                - Orang baik dalam sistem buruk akan jadi orang buruk.

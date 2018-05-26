@@ -64,3 +64,8 @@ I do not always agree with Lenin, but I agree with this sentence of his:
 
 That was 1913.
 In 1976 that could be more simply put as [follow the money](https://en.wikipedia.org/wiki/Follow_the_money).
+
+## Ramble
+
+- A government should only do things that better its people.
+    - How do we know if something will make people better off?

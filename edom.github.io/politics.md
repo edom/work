@@ -43,6 +43,8 @@ permalink: /politics.html
     - Replace retributive justice with restorative justice.
         - Focus on fixing the damage, not on punishing people.
         - Norway gets the prison system right by "restorative justice" as opposed to American "retributive justice".
+    - Society should help people fix their mistakes and reintegrate to society.
+        - [Homeless guy spits some truth.](https://www.youtube.com/watch?v=RfU8TUZRtZg)
 - [Corruption is legal in America](https://www.youtube.com/watch?v=5tu32CCA_Ig), 6-minute video
     - https://represent.us/
     - https://anticorruptionact.org/

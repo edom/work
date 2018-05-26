@@ -4,6 +4,22 @@ permalink: /religion.html
 date: 2017-05-19 03:47:00 +0700
 ---
 
+- Pages
+    - [Which religion should we choose?]({% link relch.md %})
+- Websites
+    - [biblegateway.com: online Christian bible](https://www.biblegateway.com/)
+    - [quran.com: online Islamic bible](https://quran.com/)
+    - [wikiislam.net](http://wikiislam.net/wiki/Main_Page)
+- Concepts
+    - [WP:Supersessionism](https://en.wikipedia.org/wiki/Supersessionism)
+    - [WP:Manifest destiny](https://en.wikipedia.org/wiki/Manifest_destiny)
+    - [WP:Crusades](https://en.wikipedia.org/wiki/Crusades)
+    - [WP:Simony](https://en.wikipedia.org/wiki/Simony)
+- Lists
+    - [WP:The bad popes](https://en.wikipedia.org/wiki/The_Bad_Popes)
+    - [Quora: Who was the most corrupt pope in the history of Catholicism?](https://www.quora.com/Who-was-the-most-corrupt-pope-in-the-history-of-Catholicism)
+    - [WP:Historicity of Jesus](https://en.wikipedia.org/wiki/Historicity_of_Jesus)
+
 ### About this post
 
 This post contains serious questions but no answers.
@@ -73,17 +89,22 @@ what would the religion of those children be?
 Thank you for answering the questions.
 I wish you all the best.
 
-## Links
+### Undigested
 
-- Websites
-    - [biblegateway.com: online Christian bible](https://www.biblegateway.com/)
-    - [quran.com: online Islamic bible](https://quran.com/)
-    - [wikiislam.net](http://wikiislam.net/wiki/Main_Page)
-- Concepts
-    - [WP:Supersessionism](https://en.wikipedia.org/wiki/Supersessionism)
-    - [WP:Manifest destiny](https://en.wikipedia.org/wiki/Manifest_destiny)
-    - [WP:Crusades](https://en.wikipedia.org/wiki/Crusades)
-    - [WP:Simony](https://en.wikipedia.org/wiki/Simony)
-- Lists
-    - [WP:The bad popes](https://en.wikipedia.org/wiki/The_Bad_Popes)
-    - [Quora: Who was the most corrupt pope in the history of Catholicism?](https://www.quora.com/Who-was-the-most-corrupt-pope-in-the-history-of-Catholicism)
+- How do we measure religion?
+    - By number of believers over time?
+- Classification of people by religiosity
+    - internal (can't be seen by others)
+        - by degree of belief
+            - non-believer
+            - believer
+    - external (can be seen by others)
+        - by level of practice
+            - non-practicing
+            - practicing
+        - by spreading
+            - non-spreading
+            - spreading
+                - by forcing their children to the same religion
+                - by proselytizing
+- [Measuring Five Dimensions of Religiosity across Adolescence](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5602559/)

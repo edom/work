@@ -308,3 +308,10 @@ https://www.quora.com/What-is-the-simplest-life-form
 - [Michio Kaku: Who is right about A.I.: Mark Zuckerberg or Elon Musk?](https://www.youtube.com/watch?v=F5Z52jl4yHQ)
 - [Stats SE 104385: text processing: assigning meaningful cluster name automatically](https://stats.stackexchange.com/questions/104385/assigning-meaningful-cluster-name-automatically)
 - How did consciousness evolve?
+    - Thoughts
+        - Consciousness needs memory.
+        - Self-awareness needs senses (sensors).
+    - 2016-08-10 http://www.collective-evolution.com/2014/03/08/10-scientific-studies-that-prove-consciousness-can-alter-our-physical-material-world/
+- The mathematics of deep learning (a website)
+- Can AI be used to upscale old audio/video recordings? Fix deteriorated pictures, films, documents? Color old pictures, photos, films?
+"Modernize" past artifacts? Digital restoration of archives?

@@ -58,6 +58,8 @@ defining what exist,
 making simplifying assumptions,
 discarding irrelevant aspects.
 - [Scott Hanselman: "Software doesn't work. I'm shocked at how often we put up with it."](https://www.hanselman.com/blog/EverythingsBrokenAndNobodysUpset.aspx)
+- [Renaat Verbruggen: Three universal methods of reducing complexity](http://www.computing.dcu.ie/~renaat/ca2/ca214/ca214vii.html): partitioning, hierarchy, independence
+    - It also applies to other things, such as organizing this wiki.
 - Programmers need to own up their mistakes, and call an error an error, not a bug.
 A bug is something the programmer cannot control.
 A cosmic ray strike flipping a bit in RAM is a bug.
@@ -100,3 +102,25 @@ A typo in the source code is not a bug.
             further decomposed into smaller functions until each sub-problem is small enough to be called a feature."
     - Grails vs Spring MVC vs Play Framework?
     - Why are Android phones so sluggish?
+    - distributed systems
+        - [Martin Fowler's First Law of Distributed Object Design](https://martinfowler.com/bliki/FirstLaw.html): "Don't distribute your objects."
+        - http://www.drdobbs.com/errant-architectures/184414966
+    - Eta is GHC ported to JVM.
+        - 2017-01-13: Haskell (~ GHC 7.10.3) on JVM: http://eta-lang.org/docs/html/
+    - How do we make code testable?
+        - Minimize its dependencies.
+        - Minimize the number of things that you must set up before you can run it.
+        - Why?
+            - If you don't satisfy all its dependencies, you can't run it.
+            - If you can't run it, you can't test it.
+            - If your business logic depends on the database, you'll have to set up a database to test your business logic.
+    - What do you need to test?
+        - Testing is proportional to risk.
+            - Riskier code should be tested more.
+                - "Risk comes from not knowing what you're doing." (Warren Buffett)
+                    - Buffett said that for investing, but it also applies to programming.
+        - If it's obvious, don't test it. (Getters, setters, and DAOs without fancy logic)
+        - If you can prove it, don't test it.
+    - https://blog.codinghorror.com/discipline-makes-strong-developers/
+        - Good code is more because of programmer discipline than because of the framework or language.
+- Emphasize maintainability, readability, understandability, changeability?
