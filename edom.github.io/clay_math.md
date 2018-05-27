@@ -48,6 +48,7 @@ of which these are unsolved:
 - How many equations are in the NSE?
 - What is modeled by the NSE? What are the variables of the NSE?
     - Velocity, pressure, temperature, density ([NASA](https://www.grc.nasa.gov/www/k-12/airplane/nseqs.html)).
+- How are the Navier-Stokes equations derived from Newton's laws of motion?
 - Reading triage
     - [official problem description](http://www.claymath.org/sites/default/files/navierstokes.pdf)
     - [Navier--Stokes equations](https://en.wikipedia.org/wiki/Navier%E2%80%93Stokes_equations)
@@ -55,6 +56,11 @@ of which these are unsolved:
     - [Wikipedia: Navier--Stokes equations](https://en.wikipedia.org/wiki/Navier%E2%80%93Stokes_equations)
     - [Navier--Stokes existence and smoothness](https://en.wikipedia.org/wiki/Navier%E2%80%93Stokes_existence_and_smoothness).
     See also the "Partial results" section.
+    - https://www.comsol.com/multiphysics/navier-stokes-equations
+    - https://samjshah.com/2009/11/10/navier-stokes-equations-for-the-layperson/
+    - http://notes.dpdx.net/2006/10/06/penny-smiths-proof-on-the-navier-stokes-equations/
+        - What is the continuity equation?
+    - https://www.quora.com/topic/Navier%E2%80%93Stokes-Existence-and-Smoothness-Problem
 
 ## The Riemann hypothesis
 

@@ -5,6 +5,9 @@ date: 2017-05-20 00:00:00 +0700
 
 # Home
 
+- *This website may contain mistakes.*
+Use with caution.
+Corroborate statements with other independent sources.
 - [Research]({% link research.md %})
 - Music
     - I play piano in the band [The Nomads]({% link nomads.md %}) (an Indonesian band, not the Swedish band).
@@ -17,6 +20,9 @@ date: 2017-05-20 00:00:00 +0700
 - [Long-haired men]({% link longhair.md %})
 - Habits learned the hard way
     - I check the time at [time.gov](https://time.gov/) because Ubuntu 14.04 NTP once betrayed me.
+        - 2018-01-16: I had always thought that it was dependable, but it betrayed me:
+        It showed 2 a.m. while the actual time was 4 a.m..
+        I missed some hours of sleep.
 - Vital service failure log
     - Internet service providers
         - [Fastnet]({% link fastnet.md %})

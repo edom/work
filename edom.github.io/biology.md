@@ -73,3 +73,44 @@ permalink: /biology.html
     - [2013 olivetomato.com: How to Recognize Good and Bad Olive Oil](https://www.olivetomato.com/how-to-recognize-good-and-bad-olive-oil/)
 - What is the difference between olive oil, virgin olive oil, and extra virgin olive oil?
 - [Olive Oil, extra virgin Monthly Price - US Dollars per Metric Ton](https://www.indexmundi.com/commodities/?commodity=olive-oil&months=60), about USD 4,000 per ton.
+- [What Are The Fattest Countries In The World?](https://www.youtube.com/watch?v=sRNtCdyZ8bM)
+    - Obesity began in several countries after Western diet (fast food) was introduced.
+- [AeroFarms (Newark, New Jersey) uses no soil and 95% less water](https://www.youtube.com/watch?v=-_tvJtUHnmU)
+    - large-scale hydroponics?
+- Sugar (fructose) is toxic. Sugar is a toxin.
+    - Robert Lustig
+        - https://en.wikipedia.org/wiki/Robert_Lustig
+    - [WHY Sugar is as Bad as Alcohol (Fructose, The Liver Toxin)](https://www.youtube.com/watch?v=f_4Q9Iv7_Ao)
+        - Ethanol causes alcoholic fatty liver disease.
+        - Fructose causes non-alcoholic fatty liver disease.
+    - pop science
+        - [Sugar Should Be Regulated As Toxin, Researchers Say](https://www.livescience.com/18244-sugar-toxic-regulations.html)
+- [WHY Exercise is so Underrated (Brain Power & Movement Link)](https://www.youtube.com/watch?v=DsVzKCk066g)
+- [HOW to quit Sugar & Unhealthy Habits](https://www.youtube.com/watch?v=olEMIohTgzQ)
+    - The problem is not carb or fat. The problem is processed food.
+- [How do carbohydrates impact your health? - Richard J. Wood](https://www.youtube.com/watch?v=wxzc_2c6GMg)
+    - Starch vs fiber
+        - Both are polysaccharides (chain of monosaccharides).
+        - Starch has alpha-bonds. Can be cleaved by human digestive enzymes.
+        - Fiber has beta-bonds. Humans can't digest.
+- [Why are we still Counting Calories? (History vs. Science)](https://www.youtube.com/watch?v=VyNgvMYb7iQ)
+- [Mutated Plastic-Munching Enzyme Accidentally Created During Lab Experiment](https://gizmodo.com/mutated-plastic-munching-enzyme-accidentally-created-du-1825319901)
+- Anatomy
+    - [Bones & Joints of the Shoulder](https://www.shoulderdoc.co.uk/article/1177)
+    - [Hip range of motion](http://www.fpnotebook.com/mobile/Ortho/Exam/HpRngOfMtn.htm)
+    - Where are the sinuses?
+        - http://www.cancerresearchuk.org/about-cancer/nasal-sinus-cancer/about
+        - choana: connection between nose and mouth
+            - https://en.wikipedia.org/wiki/Posterior_nasal_apertures
+- [WP:TOFI](https://en.wikipedia.org/wiki/TOFI) (thin outside fat inside)
+- How to retrain muscles killed by sitting?
+    - What exercises isolate the glutes?
+        - hip thrust against gravity
+        - "Its most powerful action is to cause the body to regain the erect position after stooping, by drawing the pelvis backward, [...]." ([WP: Gluteus maximus muscle](https://en.wikipedia.org/wiki/Gluteus_maximus_muscle))
+        - "Semitendinosus and semimembranosus extend the hip when the trunk is fixed; they also flex the knee and medially (inwardly) rotate the lower leg when the knee is bent." [WP: Hamstring muscles](https://en.wikipedia.org/wiki/Hamstring_muscles)
+- [What makes muscles grow? - Jeffrey Siegel](https://www.youtube.com/watch?v=2tM1LFFxeKg)
+    - nutrition
+    - hypertrophy is due to microfracture healing
+        - microfracture is due to contraction that is
+            - challenging (harder than the muscle's comfort zone)
+            - eccentric (shortening the muscle: flexing the muscle while it is extended/stretched out)

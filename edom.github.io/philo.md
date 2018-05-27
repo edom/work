@@ -20,6 +20,12 @@ permalink: /philo.html
                     - Doesn't discuss about fairness. Only discusses why they start at different positions.
     - The average person is worth more dead than alive.
         - The organs of an average person are worth more than that person living.
+    - [Curing disease is not a sustainable business model](https://arstechnica.com/tech-policy/2018/04/curing-disease-not-a-sustainable-business-model-goldman-sachs-analysts-say/)
+    - Human rights are legal fiction. What is real is tolerance.
+        - People let other people live.
+        If I am still alive, it's because you let me live,
+        because you tolerate me,
+        not because I have any rights.
 - Ethics (the study of morality)
     - question group
         - Is it good to force someone to do something even if such forcing makes the world better off?
@@ -29,3 +35,11 @@ permalink: /philo.html
     - Make forgetting impossible.
         - Everything has its place.
         - This doesn't apply to dementia.
+- [Adam Ruins Everything - Why Weddings Are A Total Rip-Off](https://www.youtube.com/watch?v=O5BeLinyfpg)
+    - "Despite your family's wishes, weddings are pointless and expensive displays of wealth."
+- "It is sometimes said, common sense is very rare." (François-Marie Arouet a.k.a. Voltaire (1694--1778) in "Philosophical Dictionary" (1767))
+- too long, need summary: [How to Pick a Career (That Actually Fits You)](https://waitbutwhy.com/2018/04/picking-career.html)
+- chubbyemu
+    - [this kid thinks he knows everything](https://www.youtube.com/watch?v=hvPy4aqr5tA):
+    "Successful people feel gratitude. Unsuccessful people feel entitlement."
+    - [You Can't Be Whatever You Want To Be](https://www.youtube.com/watch?v=asF4IEqvYw8)

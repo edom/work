@@ -100,3 +100,12 @@ mathjax: yes
     - probability
         - https://en.wikipedia.org/wiki/Algebra_of_random_variables
     - https://mathoverflow.net/questions/131435/why-dont-more-mathematicians-improve-wikipedia-articles
+    - https://hsm.stackexchange.com/questions/5772/when-was-the-function-arrow-notation-x-mapsto-y-first-used/5777
+- Expositories
+    - [Computer theorem proving in math](https://arxiv.org/abs/math/0311260)
+    - [On proof and progress in mathematics](https://arxiv.org/abs/math/9404236)
+    - [How real are real numbers?](https://arxiv.org/abs/math/0411418)
+    - [Why Mathematics Works So Well](https://arxiv.org/abs/1506.08426)
+    - [Machines, Logic and Quantum Physics](https://arxiv.org/abs/math/9911150)
+- http://www.mathontheweb.org/mathweb/mi-newjs.html
+- https://www.journals.elsevier.com/advances-in-mathematics/most-cited-articles

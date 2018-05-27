@@ -4,7 +4,9 @@ date: 2018-04-15 00:00 +0700
 permalink: /politik.html
 ---
 
-- Lihat juga [Politik masjid]({% link politik_masjid.md %}).
+- Pages
+    - [Politik masjid]({% link politik_masjid.md %}).
+    - [Agenda politik]({% link poliprog.md %}).
 - Pertanyaan-pertanyaan yang belum terjawab:
     - Apa ada hal seperti acara televisi Mata Najwa tetapi berupa tulisan?
 - Jalan tol adalah tindak kejahatan.

@@ -47,3 +47,4 @@ permalink: /capitalism.html
             Companies aren't human. Companies can't work. It's the employees who work.
             - But if the employees weren't in the company, they might create less value.
             The company might be a place where the employees can create more value for society.
+- http://www.visualcapitalist.com/

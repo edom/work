@@ -12,7 +12,10 @@ Daerah Green Ville tahap 4, Jakarta Barat.
 
 2018: Gardu PLN meledak.
 
-2018-04-03 22:00 +0700 brownout.
+2018-01-02 07:00 PLN mati.
+Waktu kembali hidup tidak dicatat.
+
+2018-04-03 22:00 brownout.
 00:00 mati total.
 07:20 nyala.
 

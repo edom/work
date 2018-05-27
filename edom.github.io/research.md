@@ -12,8 +12,11 @@ permalink: /research.html
     - [Physics]({% link physics.md %}) and engineering
         - [Energy storage]({% link ensto.md %})
         - [Traffic engineering]({% link trafeng.md %})
-        - Architecture
-            - [YT:Open office is overrated](https://www.youtube.com/watch?v=-p6WWRarjNs)
+        - Civil engineering
+            - [How Do Sinkholes Form?](https://www.youtube.com/watch?v=e-DVIQPqS8E)
+            Internal erosion, piping, etc.
+            - Architecture
+                - [YT:Open office is overrated](https://www.youtube.com/watch?v=-p6WWRarjNs)
     - Logic
         - [Counterfactual reasoning]({% link cf.md %})
     - [Mathematics]({% link math.md %})
@@ -25,6 +28,7 @@ permalink: /research.html
         - [Music]({% link music.md %})
         - [Acting]({% link act.md %})
         - [Clothing]({% link cloth.md %})
+        - [WP:Hairstyles](https://en.wikipedia.org/wiki/List_of_hairstyles)
     - [Philosophy]({% link philo.md %})
         - [Religion]({% link religion.md %})
     - [Writing]({% link writing.md %})

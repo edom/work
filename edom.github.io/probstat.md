@@ -73,6 +73,12 @@ mathjax: yes
 - Probability or statistics first?
     - [Stats SE 219733: What should be taught first: Probability or Statistics?](https://stats.stackexchange.com/questions/219733/what-should-be-taught-first-probability-or-statistics)
     - [Quora: Should I study probability or statistics first? Why?](https://www.quora.com/Should-I-study-probability-or-statistics-first-Why)
+    - Probability, statistics, sample, and population
+        - Probabilistic modeling: assume population, infer sample
+        - Inferential statistics: gather sample, infer population
+    - http://www.cs.sunysb.edu/~skiena/jaialai/excerpts/node12.html
+        - Probability looks to the future. Statistics looks to the past.
+            - Just like finance and accounting.
 - Example syllabuses:
     - Undergraduate-level
         - [MIT 18.05 Introduction to Probability and Statistics, spring 2014](https://ocw.mit.edu/courses/mathematics/18-05-introduction-to-probability-and-statistics-spring-2014/syllabus/)

@@ -10,6 +10,10 @@ date: 2016-03-27 14:14:08 +0700
     - [Anthems]({% link anthem.md %})
     - (Other) [Music to listen to]({% link listen.md %})
 - [Music software]({% link mussoft.md %})
+- Problems with music in Indonesia
+    - Indoor smoking
+        - Still happens in 2018 in Jakarta, despite the ban of smoking in public places
+    - Piracy
 - Music business
     - Indonesia royalty collection organization: [Karya Cipta Indonesia - Lembaga Manajemen Kolektif Hak Cipta](http://kci-lmk.or.id/)
     - [How much do music artists earn online?](http://www.informationisbeautiful.net/2010/how-much-do-music-artists-earn-online/)
@@ -81,3 +85,5 @@ date: 2016-03-27 14:14:08 +0700
     - Online songwriting service
         - http://songsculptor.com/work4hire.htm
         - Fiverr?
+- Is music a language? What is its syntax and semantics?
+    - [WP: Musical syntax](https://en.wikipedia.org/wiki/Musical_syntax)

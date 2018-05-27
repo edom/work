@@ -315,3 +315,35 @@ https://www.quora.com/What-is-the-simplest-life-form
 - The mathematics of deep learning (a website)
 - Can AI be used to upscale old audio/video recordings? Fix deteriorated pictures, films, documents? Color old pictures, photos, films?
 "Modernize" past artifacts? Digital restoration of archives?
+- brain-computer interface
+    - pop science
+        - [How Brain Waves Can Control Physical Objects](https://www.youtube.com/watch?v=P29EXskk9oU)
+- machine learning
+    - confusion matrix
+    - algebra of words
+        - https://medium.com/@erushton214/a-simple-spell-checker-built-from-word-vectors-9f28452b6f26
+    - https://www.datasciencecentral.com/profiles/blogs/crisp-dm-a-standard-methodology-to-ensure-a-good-outcome
+    - [ML beyond Curve Fitting: An Intro to Causal Inference and do-Calculus](http://www.inference.vc/untitled/)
+- deepmind wavenet
+- [deepcoder: learning to write programs](https://openreview.net/pdf?id=ByldLrqlx)
+- Ramblings, opinions, guesses, hypotheses, conjectures, speculations
+    - AI is approximation (or constrained optimization?) in Sobolev spaces (or \( L^p(\Real) \) spaces?)?
+    - Intelligent agents are only possible if the world they live in is structured.
+    If the laws of physics randomly change over time,
+    then intelligent agents are unlikely.
+    - We should merge machine learning, probability, and statistics?
+        - [WP:Recursive self-improvement](http://en.wikipedia.org/wiki/Recursive_self_improvement)
+    - World = agent + environment.
+    Environment is everything that the agent does not control directly.
+    The body of an agent is part of the environment, not of the agent.
+- [WP:Template:Consciousness](https://en.wikipedia.org/wiki/Template:Consciousness)
+- [Dimension independent similarity computation (DISCO)](http://dl.acm.org/citation.cfm?id=2567715)
+- [Journal of artificial intelligence research](http://www.jair.org/) (open access)
+- [Adversarial Examples that Fool both Human and Computer Vision](https://arxiv.org/abs/1802.08195),
+from [two minute papers 241](https://www.youtube.com/watch?v=AbxPbfODGcs).
+- [Machine theory of mind](https://www.semanticscholar.org/paper/Machine-Theory-of-Mind-Rabinowitz-Perbet/4a48d7528bf1f81f48be8a644ffb1bcc08f1b2c5)
+- Ilias Diakonikolas, Daniel Kane and Alistair Stewart. Optimal Learning via the Fourier Transform for Sums of Independent Integer Random Variables
+- https://en.m.wikipedia.org/wiki/List_of_important_publications_in_computer_science#Machine_learning
+- [Detecting English Writing Styles For Non Native Speakers](https://arxiv.org/abs/1704.07441)
+- "Hicklin envisaged that learning resulted from a dynamic equilibrium between information acquisition and loss."
+([Mathematical modeling of learning, Peter F. W. Preece](https://onlinelibrary.wiley.com/doi/pdf/10.1002/tea.3660210910), 1984)

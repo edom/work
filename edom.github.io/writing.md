@@ -16,6 +16,7 @@ date: 2017-05-20 21:29:00 +0700
         - The rest of the book supports that statement.
 - Undigested information
     - [YC:The sad state of personal knowledgebases](https://news.ycombinator.com/item?id=10739227)
+    - [Quora: Which is better, Markdown or Textile?](https://www.quora.com/Which-is-better-Markdown-or-Textile?share=1)
 
 - Why do I write?
     - **To connect my future self and my past self**.

@@ -215,3 +215,5 @@ Can we crowdsource it?
     - SQ3R method https://academia.stackexchange.com/questions/631/how-to-efficiently-read-mathematically-and-theoretically-dense-books-in-stem-fie
     - http://tex.stackexchange.com/questions/5635/how-to-cite-a-university-lecture-or-its-slides-or-script
     - https://www.timeshighereducation.com/features/these-are-20-most-popular-academic-papers-2016
+    - https://www.quora.com/Is-doing-a-PhD-worth-it-these-days
+    - http://connectedresearchers.com/online-tools-for-researchers/

@@ -58,8 +58,10 @@ or the [manpages](https://git-scm.com/docs) (`man git`).
 
 ## Things to write?
 
-Git fundamentals:
-
-- Git store things in the `.git` directory.
-- Why merge conflicts? How to resolve them? How to use `meld`? How to do a three-way merge?
-- Avoid changing spaces. Avoid using your IDE to reformat files that are already commited.
+- Git fundamentals:
+    - Git store things in the `.git` directory.
+    - Why merge conflicts? How to resolve them? How to use `meld`? How to do a three-way merge?
+    - Avoid changing spaces. Avoid using your IDE to reformat files that are already commited.
+- Workaround for bad user experience
+    - Disable git-gui GC warning:
+        - https://stackoverflow.com/questions/1106529/how-to-skip-loose-object-popup-when-running-git-gui

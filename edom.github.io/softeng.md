@@ -124,3 +124,17 @@ A typo in the source code is not a bug.
     - https://blog.codinghorror.com/discipline-makes-strong-developers/
         - Good code is more because of programmer discipline than because of the framework or language.
 - Emphasize maintainability, readability, understandability, changeability?
+- Reverse engineering
+    - https://reverseengineering.stackexchange.com/questions/1817/is-there-any-disassembler-to-rival-ida-pro
+    - http://www.capstone-engine.org/
+- It’s time to kill the web https://blog.plan99.net/its-time-to-kill-the-web-974a9fe80c89
+    - from https://twitter.com/tehjh Jann Horn's Twitter
+        - At that time Jann Horn was a member of Google's Project Zero
+        https://blog.plan99.net/what-should-follow-the-web-8dcbbeaccd93
+- React reinvents Windows 1.0 (1985) https://bitquabit.com/post/the-more-things-change/
+- Why is Jekyll slow on my machine?
+    - It's fast on GitHub.
+    - What is making it slow?
+        - How do we find that out?
+            - Is there a stack-sampling profiler for Ruby?
+                - Yes, `conscho` in [SO 4092641](https://stackoverflow.com/questions/4092641/profiling-ruby-code) recommends `stackprof`.

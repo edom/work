@@ -23,3 +23,9 @@ date: 2017-06-22 00:28:00 +0700
 - Undigested
     - https://hakonrossebo.github.io/functional-programming-babelfish/
     - https://github.com/rainbyte/haskell-ide-chart
+    - http://docs.mamedev.org/techspecs/luaengine.html
+- The source code is a textual representation of the abstract syntax tree (AST).
+- The source code is unimportant cosmetics.
+We should care about the ASTs and transformations between ASTs.
+We should read, write, and edit ASTs directly, not text.
+The editor should not parse text into AST; it should generate text from AST.

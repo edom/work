@@ -615,3 +615,33 @@ Also, Lee Sklar's beard is awesome.
 - [Emeli Sandé, "Hurts"](https://www.youtube.com/watch?v=9TqUlGyWSEk)
 - [Ellie Goulding, "Lights"](https://www.youtube.com/watch?v=0NKUpo_xKyQ)
 - [Ellie Goulding, "Beating heart"](https://www.youtube.com/watch?v=wrNTOo4KH8c)
+- [Casiopea - Make up city (full album)](https://www.youtube.com/watch?v=jqWBgiO-8Pc)
+- [Masayoshi Takanaka - An Insatiable High LP 1977](https://www.youtube.com/watch?v=9cuxrkZeai8)
+- [Talk Talk - LIVING IN ANOTHER WORLD - 1986](https://www.youtube.com/watch?v=qAlLQaDXc4I&index=4&list=PLYd01mjCQiUl_2OZvyF6HvDN_VA9hsoqe)
+- [Ferry Corsten presents Gouryella - Anahera [Official Music Video]](https://www.youtube.com/watch?v=7ZMZHbAKvGA)
+- [[HD] Super8 & Tab feat. Anton Sonin - Black Is The New Yellow (Original Mix)](https://www.youtube.com/watch?v=9_FRX9ZRm8c)
+- trance
+    - [Leon Bolier ft Roger Shah - Eden](https://www.youtube.com/watch?v=OfLd8Gsclqo)
+- [Leon Bolier - Butterfly](https://www.youtube.com/watch?v=uV9bphUMJxY)
+- [HOME - Resonance](https://www.youtube.com/watch?v=8GW6sLrK40k)
+    - https://midwestcollective.bandcamp.com/album/odyssey
+    - https://midwestcollective.bandcamp.com/track/resonance
+- [Bruno Mars - 24K Magic [Official Video]](https://www.youtube.com/watch?v=UqyT8IEBkvY)
+- [F. Chopin : Ballade op. 23 no. 1 in G minor (Horowitz)](https://www.youtube.com/watch?v=_IKXE_0Mchc)
+- [No Doubt - It's My Life](https://www.youtube.com/watch?v=ubvV498pyIM), originally
+    - [Talk Talk - It's My Life](https://www.youtube.com/watch?v=5ixRWvrkUHo)
+- [Foster The People - Pumped up Kicks](https://www.youtube.com/watch?v=SDTZ7iX4vTQ)
+- [Ghost Town DJs - My Boo](https://www.youtube.com/watch?v=CPm7oCnpld8)
+    - blocked; instead use https://www.youtube.com/watch?v=QxRiwnmYjMg
+- [Steelheart - She's Gone](https://www.youtube.com/watch?v=DiCQ1Yhnu5s)
+    - [Steel Heart - She's Gone](https://www.youtube.com/watch?v=FWan_r49Izc)
+- Indonesia
+    - The Groove: Dahulu, Hanya karena cinta
+    - [ria resty fauzy(ku tutup layar cintaku)](https://www.youtube.com/watch?v=2-otBhB1EVg&list=PLA5GcCf1rx3FirTpMMir0_nEEmTUI61At&index=32)
+    - [Ekspresi-TITI DJ & INDRA LESMANA](https://www.youtube.com/watch?v=6_e3nJi_Uls&list=PLB6QvWjaOFYsEsWPj0pSB0L2T5RUQ3Dc-&index=4)
+    - [Ini Rindu - Farid Hardja Ft. Lucky Resha](https://www.youtube.com/watch?v=CWBXciBEmxg&index=7&list=PLB6QvWjaOFYsEsWPj0pSB0L2T5RUQ3Dc-)
+    - [Denny Malik - Jalan Jalan Sore](https://www.youtube.com/watch?v=vJMNGNaHPe4&index=13&list=PLB6QvWjaOFYsEsWPj0pSB0L2T5RUQ3Dc-)
+    - [ME - Inikah Cinta](https://www.youtube.com/watch?v=P4PtcoI64gQ&list=PLB6QvWjaOFYsEsWPj0pSB0L2T5RUQ3Dc-&index=17)
+    - Fariz RM - Barcelona
+    - [k3s - bohong](https://www.youtube.com/watch?v=I1OhT0Qjqr0&index=29&list=PLB6QvWjaOFYsEsWPj0pSB0L2T5RUQ3Dc-)
+    - [Tanda Tanda (Mus Mujiono)](https://www.youtube.com/watch?v=8WO5npJL4oY)

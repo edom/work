@@ -87,3 +87,6 @@ permalink: /politics.html
                     - Indonesia in 2017 (Anies-Sandi)
         - [Why Socrates hated democracy](https://www.youtube.com/watch?v=fLJBzhcSWTk)?
             - Because the average person isn't competent to rule a country.
+- YouTube: user: The school of life
+    - [The Perfect Country](https://www.youtube.com/watch?v=shanIOl7MyE)
+    - [How to Make a Country Rich](https://www.youtube.com/watch?v=Y9zThcMJzQU)

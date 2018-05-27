@@ -73,3 +73,4 @@ Money is not capital, but it can be used to buy capital, but this quote is relat
     - Write about inflation
         - Supply-caused inflation
         - Demand-caused inflation
+    - https://www.washingtonpost.com/news/wonk/wp/2013/09/09/how-the-cult-of-shareholder-value-wrecked-american-business/

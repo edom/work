@@ -36,3 +36,4 @@ he cannot harm you.
 - Attacking a prepared opponent without being countered requires a decoy.
 But what if the opponent is also prepared for the decoy...
 - Fleeing is an option.
+- http://www.grapplearts.com/how-to-throw-defensive-stiff-arming-bent-over-opponents/

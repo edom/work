@@ -21,3 +21,8 @@ language: en
         - https://www.reddit.com/r/haskell/comments/73r861/cardano_next_generation_blockchain_platform/
         - https://www.reddit.com/r/cardano/comments/8d87hf/haskell_cryptocurrencies/
     - IOHK
+- Hackage outages
+    - Sometimes Hackage goes down.
+    - How to tell Cabal to use a Hackage mirror?
+    An instruction is on the Internet; I forgot where.
+    - 2018-04-13: [Hackage goes down for about a day](https://blog.hackage.haskell.org/posts/2018-04-26-downtime.html)

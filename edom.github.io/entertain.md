@@ -33,6 +33,8 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
     - [WP:Wikipedia:Unusual articles](https://en.wikipedia.org/wiki/Wikipedia:Unusual_articles)
 - Entertaining videos, not necessarily educational; things that cheer me up
     - [how a seal moves on land](https://www.youtube.com/watch?v=l6mGixhCcYY): like fat bouncing tempura
+    - [Virginia opossum babies eating bananas](https://www.youtube.com/watch?v=bRIVTEBaLkA)
+    - [Shiba inu (doge) trying to swim](https://www.youtube.com/watch?v=G8QCRTsed9U)
     - [Ethan Klein's cough compilation](https://www.youtube.com/watch?v=TEG2wxz0ILo)
     - shibes
         - ShibeNation
@@ -57,6 +59,7 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
         - [off limits](https://www.youtube.com/watch?v=dHJfafgLxBw)
         - [we like to party](https://www.youtube.com/watch?v=b8HO6hba9ZE)
         - [slam jam](https://www.youtube.com/watch?v=Y-dMSstLDqM)
+        - [[SFM] LADY](https://www.youtube.com/watch?v=QbFqG-qlR-A), Steelheart's "She's gone"
     - videogamedunkey
         - [captcha](https://www.youtube.com/watch?v=WqnXp6Saa8Y)
         - [car fry 5](https://www.youtube.com/watch?v=IY5mBERhSDg)
@@ -67,6 +70,12 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
         - [GTA 4](https://www.youtube.com/watch?v=a4UxBrJ2yIQ)
         - [Vice city](https://www.youtube.com/watch?v=NZ83rfAqWMw)
         - [Worst game yet (Country justice: revenge of the rednecks)](https://www.youtube.com/watch?v=Yaou-qomTrg)
+        - [H1Z1](https://www.youtube.com/watch?v=8_fk6ni-0eI)
+            - 0:40-1:01 glitchy bear attack
+            - 1:53-1:59 whoops, an accident, unrealistic car explosion
+            - 2:00-2:57 clashing music
+                - 2:24 TURN IT OFF TURN THE MUSIC OFF
+            - 4:22-4:35 nobody's in here; molotov cocktail explodes; shotgun overkill
     - prozd
         - [clickbait](https://www.youtube.com/watch?v=f4FuOi9rvKw)
         - [harem anime where everyone but the protagonist is sentient furniture](https://www.youtube.com/watch?v=gYXHnkhRwCY)
@@ -78,6 +87,7 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
     - [SFM: L4D: nick](https://www.youtube.com/watch?v=nwpEAYI-5jY)
     - [gmod: L4D: Who's cooking tonight](https://www.youtube.com/watch?v=pfexEAExzhk)
     - [Horse passing gas](https://www.youtube.com/watch?v=jMyL0HdXPuc)
+    - [Isle of Dogs - A Michael Bay film](https://www.youtube.com/watch?v=FZBo2wBH0zE): husky sneezing and exploding (warning: loud)
 - meme-like materials
     - [in only 2 weeks, Robert lost 2 weeks](https://www.reddit.com/r/FunnyandSad/comments/8ejlih/in_just_two_weeks/)
     - [well-lit husky portrait](https://old.reddit.com/r/aww/comments/8io64x/last_year_while_setting_up_lights_for_some/)
@@ -93,6 +103,8 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
         - http://kureiiro.deviantart.com/art/Nier-Automata-Monopoly-Squad-Meme-670671565
             - from https://www.reddit.com/r/nier/comments/61qm27/automata_in_a_nutshell/
 - [subreddit for fans of k-pop girls](https://www.reddit.com/r/asiangirlsbeingcute/top/)
+- [Whitest Kids U' Know - Kid Beer (HQ)](http://www.dailymotion.com/video/x2x897x)
+- low-cost cosplay, low-budget cosplay, cheap cosplay
 - dark humor (suicidal, not suitable for everyone)
     - [Ethan Vincent: are we there yet](http://oppressive-silence.com/comic/are-we-there-yet),
     via [reddit](https://www.reddit.com/r/FunnyandSad/comments/790jyl/are_we_there_yet/)
@@ -105,6 +117,16 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
         - ["Badannya aja six pack, tititnya pasti kecil." -- "tapi ibu kamu ga komplain.."](https://www.reddit.com/r/indonesia/comments/7mt1v8/brutalsavagerekt/)
         - [Salah PKI](https://www.reddit.com/r/indonesia/comments/8dvsj3/salah_pki/)
         - [Polres Bantaeng is SAVAGE](https://www.reddit.com/r/indonesia/comments/7ep760/polres_bantaeng_is_savage/)
+    - search di YouTube
+        - emak-emak naik motor masuk tol (ga pake helm (bonceng tiga (lawan arah)))
+        - dari Anto
+            - [dragon ball melayu](https://www.youtube.com/watch?v=PubKqI0Ypi0)
+            - [jupiter mx kebakar](https://www.youtube.com/watch?v=Md44-HVqYfs): motor kebakar diceburin ke comberan
+            - [bemo nabrak pager](https://www.youtube.com/watch?v=l9moNGjiz-s)
+            - [tukang bakso nabrak tukang bajaj](https://www.youtube.com/watch?v=V3zsE3-vHWY)
+                - ini dari Line seseorang; lupa namanya siapa; judulnya "Jakarta in 48 seconds"
+            - [skedaddle skedoodle your dick is now a noodle](https://www.youtube.com/watch?v=P3a-O8wHKg8)
+                - music: NFL (National Football League) theme, or "NFL ON FOX THEME-28221"
 - [vim: Entering special characters](http://vim.wikia.com/wiki/Entering_special_characters)
     - `<Ctrl-K> ' e` to type `é`
 - reverse entertainment (when you're too happy, and you need something to make yourself sad)
