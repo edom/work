@@ -14,7 +14,6 @@ soundtrack,
 composed by [矢野 顕子 (_Yano_ Akiko)](https://en.wikipedia.org/wiki/Akiko_Yano).
 I love the how innocent this song sounds; it always cheers me up.
 Simple but effective.
-- [能動的三分間 (noudouteki sanpunkan)](https://www.youtube.com/watch?v=NTKwzRAdY7w), 東京事変 (Tokyo Incidents)
 - Drum and bass (fast jungle/fast breakbeat)
     - ["Butterfly effect"](https://www.youtube.com/watch?v=8cMhQ_teEoY]), fox capture plan, 2015.
     Japanese drum and bass for jazz trio and string quartet.
@@ -54,7 +53,6 @@ There is also [Matt McGuire's drum cover](https://www.youtube.com/watch?v=n143Q9
     - Led Zeppelin, Kashmir
     - Led Zeppelin, The Immigrant Song
     - ["Sometimes I feel like screaming", Deep Purple](https://www.youtube.com/watch?v=YUoKQvMyWMM), 1996
-    - "Tokyo Rock City", Valshe. Shuffle rhythm. The song's drive is obtained by syncopating the first beat.
     - ボクらの冒険 (bokura no bouken), Kids Alive:
     [video](https://www.youtube.com/watch?v=R5bVQD080YY),
     [audio](https://www.youtube.com/watch?v=EAVBKCaT8lU).
@@ -159,7 +157,6 @@ There is also [Matt McGuire's drum cover](https://www.youtube.com/watch?v=n143Q9
         - [一輩子一場夢 (yī bèi zi yī chǎng mèng), 張衛健 (Dicky _Cheung_)](https://www.youtube.com/watch?v=tzSiGMPW6cQ),
         closing theme of 小寶與康熙 (The Duke of Mount Deer, 2000 TV series)
     - Japanese pop
-        - [别れの予感 (wakare no yokan) テレサ・テン (Teresa _Teng_)](https://www.youtube.com/watch?v=ZPj9EbkuL8M)
         - [枯れない花 (karenai hana), 秋元順子 (_Akimoto_ Junko)](https://www.youtube.com/watch?v=6uVdR2QzJa0)
         - Japanese anime soundtrack involving an orchestra
             - ["Macross", Makoto Fujiwara](https://www.youtube.com/watch?v=ZfvkJ1ISTfo)
@@ -219,8 +216,7 @@ There is also [Matt McGuire's drum cover](https://www.youtube.com/watch?v=n143Q9
         - Seal, "Kiss from a rose"
     - ["You're my everything", Santa Esmeralda](https://www.youtube.com/watch?v=V5pSQFG_nD4)
     - group
-        - ["Crush"](https://www.youtube.com/watch?v=EIhSnaqou0I), Jennifer Paige;
-        there is also an [extended version](https://www.youtube.com/watch?v=Niai5d4eAns)
+        - Jennifer Paige, "Crush"
         - ["Losing my religion"](https://www.youtube.com/watch?v=xwtdhWltSIg), R.E.M.
 - other
     - [keyboardplayer: Celtic Dance - Improvisation](https://www.youtube.com/watch?v=QaYS11gDhQ0)
@@ -319,9 +315,6 @@ There is also English version titled ["Call me"](https://www.youtube.com/watch?v
 - [Way to fall](https://www.youtube.com/watch?v=F9hagVL-__c), from Metal Gear Solid 3
 - bluesy funk
     - funk
-        - ["I'm Mr. Jody", Marvin Sease](https://www.youtube.com/watch?v=4lFc5uOTRaU) (you may want to skip to 2:13);
-        there is also [another video with the same audio](https://www.youtube.com/watch?v=032wN-uAMNk).
-        This song has a 16-bar blues progression.
         - "Superstition", Stevie Wonder
     - fast blues
         - "Boom boom", John Lee Hooker
@@ -601,6 +594,7 @@ Also, Lee Sklar's beard is awesome.
 
 ### Unclassified clusters
 
+- 130-135 bpm, [Sitar Trek - Raga Sundar Kauns Jazz, Worldbeat, Fusion Concert. Ashwin Batish @ Kuumbwa Jazz](https://www.youtube.com/watch?v=UgGZWh7Z9eo)
 - group
     - group
         - ["Desert rose", Sting](https://www.youtube.com/watch?v=C3lWwBslWqg)
@@ -622,6 +616,9 @@ Also, Lee Sklar's beard is awesome.
 - [[HD] Super8 & Tab feat. Anton Sonin - Black Is The New Yellow (Original Mix)](https://www.youtube.com/watch?v=9_FRX9ZRm8c)
 - trance
     - [Leon Bolier ft Roger Shah - Eden](https://www.youtube.com/watch?v=OfLd8Gsclqo)
+    - 140 bpm, trance, progressive, [SYQ - The Theme (Live) [Uplifting Trance]](https://www.youtube.com/watch?v=zR8LVZr2NXk)
+    - [A progressive trance song uploaded by YouTube user MIKOTOmix](https://www.youtube.com/watch?v=8PIOCnZ6PtA)
+    - ["Insomnia", Faithless](https://www.youtube.com/watch?v=t0oSxTymoPA)
 - [Leon Bolier - Butterfly](https://www.youtube.com/watch?v=uV9bphUMJxY)
 - [HOME - Resonance](https://www.youtube.com/watch?v=8GW6sLrK40k)
     - https://midwestcollective.bandcamp.com/album/odyssey
@@ -645,3 +642,26 @@ Also, Lee Sklar's beard is awesome.
     - Fariz RM - Barcelona
     - [k3s - bohong](https://www.youtube.com/watch?v=I1OhT0Qjqr0&index=29&list=PLB6QvWjaOFYsEsWPj0pSB0L2T5RUQ3Dc-)
     - [Tanda Tanda (Mus Mujiono)](https://www.youtube.com/watch?v=8WO5npJL4oY)
+    - ["Lebih indah", Adera](https://www.youtube.com/watch?v=OqsM5kQYjTc)
+- [t.A.T.u. - All About Us](https://www.youtube.com/watch?v=6yP4Nm86yk0)
+- Rihanna and Sia:
+    - ["Diamonds", Rihanna](https://www.youtube.com/watch?v=lWA2pjMjpBs)
+    - "Titanium", Sia
+- [THE GROOVE: Khayalan](https://www.youtube.com/watch?v=c7Ii9o5HjpE)
+- ["This is what you came for"](https://www.youtube.com/watch?v=kOkQ4T5WO9E), Calvin Harris ft. Rihanna
+- "Out of eden", K's Sound Project (Kouhei):
+[instrumental](http://piapro.jp/content/12k4tuul8qollh90);
+the link labeled オリジナル (original) at the right sidebar of that Piapro page
+will play an embedded video from Niconico containing the original version,
+with the voice of Kagamine Len.
+There is a break at 2:09, and a deeper break at 3:13.
+There is also this [video](https://www.youtube.com/watch?v=TXReRZRvhCc).
+This 3-minute video cuts out the second break; the original is 5-minute.
+There is [another video of the original](https://www.youtube.com/watch?v=NWmADAGIcS4).
+There is also a [Valshe cover](https://www.youtube.com/watch?v=CiI1-Y9BfyY).
+- 153 bpm, [恋の抑止力 (koi no yokushiryoku, "Love deterrence"),
+水樹 奈々 (_Mizuki_ Nana)](https://www.youtube.com/watch?v=0LRTM-kdEkI),
+from Metal Gear Solid: Peace Walker
+- 140 bpm, trance, progressive, "Votum stellarum", iconoclasm
+    - 140 bpm, [long version, 6:36](https://www.youtube.com/watch?v=zJUkb4zykAw)
+    - 147 bpm, [short version, 2:46](https://www.youtube.com/watch?v=fhpfemCmSN4)

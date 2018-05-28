@@ -109,3 +109,5 @@ mathjax: yes
     - [Machines, Logic and Quantum Physics](https://arxiv.org/abs/math/9911150)
 - http://www.mathontheweb.org/mathweb/mi-newjs.html
 - https://www.journals.elsevier.com/advances-in-mathematics/most-cited-articles
+- [Selmer Bringsjord, course, "Introduction to formal logic"](http://kryten.mm.rpi.edu/COURSES/INTLOGW/intlog.html)
+- Where are reference works for mathematics?

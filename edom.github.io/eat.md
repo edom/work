@@ -317,3 +317,13 @@ probably because it's seldom fresh here.
         - Fiber has beta-bonds. Humans can't digest.
 - [Why are we still Counting Calories? (History vs. Science)](https://www.youtube.com/watch?v=VyNgvMYb7iQ)
 - [The Story of Fat: Why we were Wrong about Health](https://www.youtube.com/watch?v=5S6-v37nOtY)
+- salt
+    - [Salt: Are you getting Enough? (More Sodium & Health)](https://www.youtube.com/watch?v=amJ-ev8Ial8)
+        - it's easier for the body to get rid of excess sodium than to cope with insufficient sodium
+        - babies pick the food containing nutrients they lack
+    - [WHY Low Salt Stresses the Body (Sodium, Hormones & Potassium)](https://www.youtube.com/watch?v=0bNdhM4vt4I)
+        - lowering salt intake causes chronically high aldosterone levels
+            - [WP:renin-angiotensin system](https://en.wikipedia.org/wiki/Renin%E2%80%93angiotensin_system)
+- Are unripe bananas good to eat?
+    - Does it have antinutrients?
+- What does ripening do to a fruit? Why is a ripe fruit sweeter than an unripe one?

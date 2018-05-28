@@ -28,3 +28,12 @@ permalink: /philo.html
     - [this kid thinks he knows everything](https://www.youtube.com/watch?v=hvPy4aqr5tA):
     "Successful people feel gratitude. Unsuccessful people feel entitlement."
     - [You Can't Be Whatever You Want To Be](https://www.youtube.com/watch?v=asF4IEqvYw8)
+- [The philosophy of Stoicism - Massimo Pigliucci](https://www.youtube.com/watch?v=R9OCA6UFE-0)
+- Machiavelli is misunderstood.
+    - [Misunderstood Machiavelli](http://brimanning.com/misunderstood-machiavelli)
+    - [Have we got Machiavelli all wrong?](https://www.theguardian.com/books/2017/mar/03/have-we-got-machiavelli-all-wrong)
+- Is forcing moral?
+    - Is it good, to give people something they did not ask for?
+    - Is it good, to force people to do something that betters them but unwanted by them?
+- Is it good, to give people something they did not ask for?
+- Does morality depend on intention or outcome?

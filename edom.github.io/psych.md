@@ -34,3 +34,6 @@ date: 2018-05-24 02:52 +0700
     - Sometimes being agreeable is more important than being correct.
         - Other people's feelings are more important than the truth?
     - https://qz.com/881289/a-new-study-linking-profanity-to-honesty-shows-people-who-curse-are-more-authentic/
+- How the Nazis might have made the German people accept Nazism
+    - https://en.wikipedia.org/wiki/The_Wave_%282008_film%29
+    - https://en.wikipedia.org/wiki/The_Third_Wave_(experiment)

@@ -28,7 +28,9 @@ permalink: /biology.html
     - Hypothesis: it might help healing because when you not don't eat, your body's immune system can focus on fighting the disease.
     - Hypothesis: it might worsen the disease because your body doesn't get enough nutrient to fight the disease.
     - Hypothesis: it might have no effect.
-- bacteriophage might help us fight antibiotic-resistant bacteria ([kurzgezagt video](https://www.youtube.com/watch?v=YI3tsmFsrOg))
+- bacteriophage might help us fight antibiotic-resistant bacteria
+    - [kurzgezagt video](https://www.youtube.com/watch?v=YI3tsmFsrOg)
+    - [seeker video](https://www.youtube.com/watch?v=jTwEVK7TMWI)
 - wings at first evolved to help climb steep angles (trees) [The Origin of Flight--What Use is Half a Wing? - HHMI BioInteractive Video](https://www.youtube.com/watch?v=JMuzlEQz3uo)
 - CRISPR is a gene editing technology [WP: CRISPR](https://en.wikipedia.org/wiki/CRISPR)
 - Toxin, venom, poison, what's the difference?

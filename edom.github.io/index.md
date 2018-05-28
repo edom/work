@@ -8,6 +8,8 @@ date: 2017-05-20 00:00:00 +0700
 - *This website may contain mistakes.*
     - Use with caution.
     - Compare with other independent sources.
+- *This website may contain comments by others.*
+    - I am not responsible for those.
 - How to use this website
     - Follow the links that interest you:
         - [Intelligence]({% link intelligence.md %})
@@ -74,22 +76,3 @@ date: 2017-05-20 00:00:00 +0700
         - I collect and organize knowledge into this wiki.
     - Music
         - I play piano in the band [The Nomads]({% link nomads.md %}) (an Indonesian band, not the Swedish band).
-
-{% assign everything = site.emptyArray %}
-{% for page in site.pages %}
-{% assign everything = everything | push: page %}
-{% endfor %}
-{% assign everything = everything | sort: "title" %}
-
-## Featured Pages
-
-"Featured" doesn't mean "Complete".
-It just means "set apart".
-
-<ul>
-{% for page in everything %}
-{% if page.featured %}
-<li><a href="{{ page.url }}">{{ page.title | escape }}</a></li>
-{% endif %}
-{% endfor %}
-</ul>

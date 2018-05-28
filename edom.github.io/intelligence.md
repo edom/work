@@ -347,3 +347,6 @@ from [two minute papers 241](https://www.youtube.com/watch?v=AbxPbfODGcs).
 - [Detecting English Writing Styles For Non Native Speakers](https://arxiv.org/abs/1704.07441)
 - "Hicklin envisaged that learning resulted from a dynamic equilibrium between information acquisition and loss."
 ([Mathematical modeling of learning, Peter F. W. Preece](https://onlinelibrary.wiley.com/doi/pdf/10.1002/tea.3660210910), 1984)
+- AI research tries to make a system that can optimize a wide variety of goal functions?
+- [Mehryar Mohri, Afshin Rostamizadeh, and Ameet Talwalkar; book; "Foundations of machine learning"](https://cs.nyu.edu/~mohri/mlbook/)
+- http://bigthink.com/videos/the-top-3-supplements-for-surviving-the-singularity

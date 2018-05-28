@@ -181,3 +181,8 @@ date: 2018-05-17 01:21 +0700
         - https://www.kaskus.co.id/forum/23/supranatural
         - poltergeist proof? journal articles?
         - http://psionguild.org/education/articles/mental-abilities/telepathy-manual/#IVB
+    - What is the difference between magick, occult, mysticism?
+    What are their etymologies?
+        - https://en.wikipedia.org/wiki/Magick_(Thelema)
+        - https://en.wikipedia.org/wiki/Occult
+        - https://en.wikipedia.org/wiki/Mysticism

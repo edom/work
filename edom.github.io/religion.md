@@ -91,6 +91,9 @@ I wish you all the best.
 
 - How do we measure religion?
     - By number of believers over time?
+- How do religion spread?
+- Why do family members tend to have the same religion?
+    - If children choose their own religions, will they believe it more?
 - Classification of people by religiosity
     - internal (can't be seen by others)
         - by degree of belief
@@ -106,3 +109,5 @@ I wish you all the best.
                 - by forcing their children to the same religion
                 - by proselytizing
 - [Measuring Five Dimensions of Religiosity across Adolescence](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5602559/)
+- Attacking people's beliefs will activate their amygdala,
+resulting in fight-or-flight response?

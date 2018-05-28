@@ -28,5 +28,30 @@ permalink: /research.html
         - We assume:
             - Every adjective is fuzzy.
             - Truth is a continuum.
+- Ramble
+    - Corruptors and their offsprings have so much money that they don't know what to do with it.
 - Moved back here
     - [Social]({% link social.md %})
+- 2017-07-10
+    - Ubuntu crashed without log.
+        - Screen turned off suddenly.
+        - Keyboard forze.
+        - Power button didn't respond even after 4 seconds.
+        - The problem turned out to be shitty graphics card connection.
+            - Hardware problem, not Ubuntu problem.
+            - Probably dust or oxidized connectors.
+                - It would be nice if graphics card could be hotswapped though.
+                    - But do we want to touch a running graphics card?
+        - The fix: unplug and plug the card several times.
+- Economics vs finance
+    - Economics is about value?
+    - Finance is about money?
+- How do I find people who care about what I care?
+- How do I find people with interests similar to mine?
+- How to make money
+    - Make hard things easy.
+- Should we use holidays to form strategic alliances?
+- To form quality relationship, socialize with one person at a time?
+- There are only two way of getting rich:
+    - create value (make others better)
+    - extract value (steal from others, either legally or illegally)

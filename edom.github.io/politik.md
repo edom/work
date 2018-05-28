@@ -65,3 +65,21 @@ permalink: /politik.html
         Insentif perlu dirancang lebih baik?
             - Sistem kita mengubah orang muda idealis menjadi orang tua korup?
                 - Orang baik dalam sistem buruk akan jadi orang buruk.
+    - https://theconversation.com/buasnya-sistem-politik-indonesia-halangi-upaya-reformasi-dari-dalam-oleh-mantan-aktivis-94523
+- Should we repeal blasphemy laws and obscenity laws?
+We already have laws for people causing public disorder.
+    - If a person commits blasphemy and causes public disorder,
+    then that perpetrator should be arrested for causing public disorder,
+    not for blasphemy?
+    - If a person distributes obscene materials and causes public disorder,
+    then that perpetrator should be arrested for causing public disorder,
+    not for distributing obscene materials?
+    - If a person causes public disorder to overthrow a corrupt government,
+    then the government will try to vanquish the rebellion,
+    but the people shall prevail?
+    - Blasphemy laws allow angry people to fight in the courtroom.
+    Without blasphemy laws, angry people would fight on the road,
+    where there are no rules, taking matter into their own hands.
+        - However, blasphemy laws also allow religion
+        to subvert the justice system.
+- How to combat people who provoke you and then cry foul?

@@ -101,3 +101,9 @@ permalink: /politics.html
         Compare how competition (such as SpaceX)
         could cut down the cost of launching rockets.
 - Why is Britain helping Israel?
+- [The Rules for Rulers](https://www.youtube.com/watch?v=rStL7niR7gs)
+- [Quora: What's the story of SoftBank? Where does it get so much money to invest from?](https://www.quora.com/Whats-the-story-of-SoftBank-Where-does-it-get-so-much-money-to-invest-from)
+    - by investing in Alibaba
+- If a law does not prescribe any punishment, will you obey it?
+- Should we just die when we cannot pay the hospital bills?
+    - If your death would ruin your family, should you have a family?

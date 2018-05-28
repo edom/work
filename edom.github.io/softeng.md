@@ -85,6 +85,11 @@ A typo in the source code is not a bug.
             Snake case vs camel case?
                 - Is the code truly unreadable, or are you just an asshole?
                     - How hard have you tried?
+- 2017-05-20
+    - What helps writing maintainable software?
+        - Minimize duplication? The programming language limits deduplication?
+        - Facilitate change, minimize ripple due to change
+        - Flexibility of a component is proportional to its risk of changing?
 - Undigested
     - What is a database that can be scaled up without downtime?
     We are willing to sacrifice consistency for tracking data.
@@ -138,3 +143,38 @@ A typo in the source code is not a bug.
         - How do we find that out?
             - Is there a stack-sampling profiler for Ruby?
                 - Yes, `conscho` in [SO 4092641](https://stackoverflow.com/questions/4092641/profiling-ruby-code) recommends `stackprof`.
+- Ramble
+    - Writing software?
+        - Minimize build time.
+        - Minimize the time from program startup to program ready.
+        Otherwise you won't test the program.
+        - Understand which parts of the code have more risk.
+        Risk is caused by something you don't understand. (Warren Buffett)
+        - Minimize the way things can go wrong.
+        If you make a variable immutable,
+        there are less ways it can go wrong. (?)
+        - Explicit is better than implicit?
+        Prefer writing boilerplates to magical reflection stuff.
+        Let the compiler help you.
+        Let compilation error guide refactoring.
+        - Minimize duplication?
+        Minimize duplication of constants, literals, fragments?
+        - Data is more important than code?
+        The shape of the data is important?
+        - Make every part understandable in isolation?
+        - Avoid nulls? If you must use null, document it.
+- 2018-05-30
+    - Enterprise application stack?
+        - Java 8
+        - Jetty 9.4 (Servlet API 3.1.0)
+        - JPA API 1.0.2 (annotations only)
+        - J2HTML
+        - PostgreSQL 9.5
+        - J2HTML-like for C#
+            - https://github.com/HtmlTags/htmltags
+        - Java: Install OpenJDK 8, install IntelliJ IDEA, you're all set.
+            - IntelliJ IDEA comes with Maven.
+        - .NET: Install Mono, install Monodevelop 5.
+            - Monodevelop 5 comes with Nuget.
+- software legality?
+    - Harmony CLA (Contributor License Agreement)?

@@ -4,6 +4,16 @@ permalink: /mathedu.html
 date: 2018-05-22 02:28:00 +0700
 ---
 
+- Bad teachers make students hate the subject being taught.
+    - Bad math teachers make students hate math.
+    - Bad teachers waste humans, brains, the future of nations, the future of humanity.
+        - How many people *can* think but *won't* because their teachers suck?
+            - How many people *can* do math but *won't* because their math teachers suck?
+- Textbooks should answer "Why should I care?"
+- Everywhere in mathematics is *logic*.
+    - Everything is a consequence of the definitions.
+    - Everything that is true has always been true.
+        - It's just that we haven't proved it.
 - Calculus should be taught with infinitesimals (instead of delta-epsilon)?
     - Pros
         - more intuitive

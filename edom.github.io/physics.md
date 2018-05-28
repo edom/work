@@ -67,3 +67,6 @@ permalink: /physics.html
         - [WP:Quantum electrodynamics](https://en.wikipedia.org/wiki/Quantum_electrodynamics)
             - "is the first theory where full agreement between quantum mechanics and special relativity is achieved"
     - Hamiltonian mechanics in Minkowski spacetime?
+- [Scientists Accidentally Discovered Quark Fusion, Could It Be the Future of Energy?](https://www.youtube.com/watch?v=dGDiS8Dv8a8)
+    - quark fusion
+- What are the von Neumann--Dirac axioms?

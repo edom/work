@@ -77,3 +77,11 @@ date: 2017-06-27 01:00 +0700
 - Game design
     - "If everyone likes your game but no one loves it, it will fail." (Mark Rosewater)
         - https://www.reddit.com/r/DestinyTheGame/comments/7e6wqs/if_everyone_likes_your_game_but_no_one_loves_it/
+    - Designing a game is hard.
+    - Replay is an architecturally significant requirement.
+    - It's more straightforward to develop an enterprise application than a game.
+        - When developing an enterprise application,
+        you have some idea about what you are going to make,
+        the end result, the goal.
+        - When developing a game, it's too free.
+        The requirement is very abstract: "be fun".

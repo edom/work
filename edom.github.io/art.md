@@ -70,3 +70,28 @@ framing theory suggests that the *context* in which a piece of art is presented 
 If people have to pay for something, they will make up an excuse about how it has to be good,
 because they don't want to regret their decision,
 except if the thing is obviously bad.
+
+---
+
+- Asset creation mindset
+    - The characters and the worlds are the copyrightable Intellectual Property.
+    - Don't write a story. Create a reusable asset.
+    - Example:
+    Walt Disney and Ub Iwerks didn't just write a story about rats.
+    They created Mickey Mouse.
+    A mere story about rats would be forgettable.
+    Mickey Mouse continues to live on after Walt Disney died.
+    It becomes something known by lots of people.
+    It's Disney company's asset.
+        - https://en.wikipedia.org/wiki/Mickey_Mouse
+    - This mindset is applicable to all creators:
+    writers, musicians, songwriters, mangakas, game creators.
+    - Copyright law turns fiction into assets:
+    an article, a song, a musical composition, a recording of a musical composition,
+    a drawing of fictional character (the name itself is not copyrightable, but is trademarkable).
+    - copyright law, trademark law
+    - https://www.aspectlg.com/posts/copyright-in-characters-what-can-i-use
+    - https://en.wikipedia.org/wiki/Intellectual_property
+    - You can speculate in intellectual property as you speculate in property (real estate).
+    You can speculate on patents as you speculate on land.
+    But speculations aren't always good for society.

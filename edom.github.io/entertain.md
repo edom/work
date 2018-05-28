@@ -124,6 +124,8 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
         - ["Badannya aja six pack, tititnya pasti kecil." -- "tapi ibu kamu ga komplain.."](https://www.reddit.com/r/indonesia/comments/7mt1v8/brutalsavagerekt/)
         - [Salah PKI](https://www.reddit.com/r/indonesia/comments/8dvsj3/salah_pki/)
         - [Polres Bantaeng is SAVAGE](https://www.reddit.com/r/indonesia/comments/7ep760/polres_bantaeng_is_savage/)
+        - [Iklan indoeskrim meiji ala sinetron kerajaan Indosiar tahun 1990-an](https://www.reddit.com/r/indonesia/comments/6lrrgv/your_daily_dose_of_kearifan_lokal_cringefest/)
+        - [Reaksi nitijen: Bubuk rengginang, Bungkus yosan, Serbet warteg, Nastar duren, Cumi asin](https://www.reddit.com/r/indonesia/comments/6ltl4s/reaksi_nitijen/)
     - search di YouTube
         - emak-emak naik motor masuk tol (ga pake helm (bonceng tiga (lawan arah)))
         - dari Anto

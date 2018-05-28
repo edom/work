@@ -29,3 +29,43 @@ date: 2017-06-22 00:28:00 +0700
 We should care about the ASTs and transformations between ASTs.
 We should read, write, and edit ASTs directly, not text.
 The editor should not parse text into AST; it should generate text from AST.
+- Language-oriented programming? Data-first programming?
+    - Data is the most important thing.
+        - Because data is harder to back up than code?
+    - Program translates the shape of data.
+    - Describe what you want, and write code that follows that description
+    to call the lower-level implementation details.
+- Programming language design
+    - Which should we start with?
+        - Semantics (high-level, top-down language design)
+        - Machine code (low-level, bottom-up language design)
+    - Every enhancement reduces cognitive load.
+    - Example of bottom-up language design and how each level reduces cognitive load:
+        - Begin with machine code.
+        - Provide mnemonics for instructions.
+        - Provide the illusion of infinite custom-named registers and orthogonal operands.
+        - Provide macros subroutines as extensible instructions.
+        - Provide the illusion of infinite custom-named registers and orthogonal operands.
+        - Provide macros and subroutines as extensible instructions.
+        - Provide named locations.
+        - Provide the illusion of infinite memory.
+        - Abstract away processor registers.
+        - Abstract away pointers.
+        - Expression.
+        - Infix expression syntax.
+        - First-class functions.
+        - The program itself is a procedural program that tells the interpreter what code to generate.
+        - End up with something like Randall Hyde's High Level Assembly?
+- Improve an existing language instead of starting new?
+- What is this? http://reasonablypolymorphic.com/blog/elm-is-wrong
+- Interesting languages?
+    - Rebol?
+    - Carp lisp dialect?
+- Scheme vs Lisp:
+    - A Lisp implementation doesn't have to have proper tail calls.
+    - A Scheme implementation must have proper tail calls.
+- Type systems
+    - Types help computers help us.
+        - Types prevent some mistakes.
+        - Types are part of documentation.
+            - Types help us write an IDE.

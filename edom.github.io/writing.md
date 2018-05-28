@@ -59,3 +59,25 @@ date: 2017-05-20 21:29:00 +0700
         - A post is time-sensitive. Its usefulness depends on time.
         Old posts are useless.
         - Posts are good for news, updates, changelogs, diffs.
+    - Alternatives?
+        - http://community.schemewiki.org/
+        - http://www.nongnu.org/skribilo/
+        - Skribilo is a free document production tool that takes a structured document representation as its input
+        and renders that document in a variety of output formats: HTML and Info for on-line browsing, and Lout and
+        LaTeX for high-quality hard copies.
+- 2017-05-18
+    - What to write?
+        - Something you want to write.
+        - Something a group of people want to read.
+- 2017-05-18
+    - Installing Jekyll on Ubuntu 14
+        - Ubuntu 14 has Ruby 1.9.1 package and Jekyll 0.11.2.
+        - Jekyll 3.4.3 requires Ruby 2.
+        - [Download Ruby 2.4.1](https://www.ruby-lang.org/en/downloads/).
+        - Run:
+```
+sudo apt-get install libssl-dev bison
+cd ruby-2.4.1
+configure --prefix=$HOME/.local
+make -j4 install
+```
