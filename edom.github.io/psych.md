@@ -8,8 +8,9 @@ date: 2018-05-24 02:52 +0700
     - [Friendship is measured by sacrifice]({% link friendship.md %})
 - Opinion
     - [April fools' day is harmful]({% link april.md %})
-- [Entertainment]({% link entertain.md %})
-    - [Game]({% link game.md %})
+- [WP:Psychology of collecting](https://en.wikipedia.org/wiki/Psychology_of_collecting)
+    - [WP:Compulsive hoarding](https://en.wikipedia.org/wiki/Compulsive_hoarding)
+    - [WP:Digital hoarding](https://en.wikipedia.org/wiki/Digital_hoarding)
 - Undigested
     - [2002, Jennifer Daw, Why and how normal people go mad](http://www.apa.org/monitor/nov02/gomad.aspx)
     - advertising, propaganda

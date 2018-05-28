@@ -4,8 +4,6 @@ permalink: /religion.html
 date: 2017-05-19 03:47:00 +0700
 ---
 
-- Pages
-    - [Which religion should we choose?]({% link relch.md %})
 - Websites
     - [biblegateway.com: online Christian bible](https://www.biblegateway.com/)
     - [quran.com: online Islamic bible](https://quran.com/)

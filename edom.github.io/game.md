@@ -74,3 +74,6 @@ date: 2017-06-27 01:00 +0700
         - should ring a bell for Kitano Takeshi (Beat Takeshi) fans
     - I was thinking about buying "Kerbal Space Program", but now I'm sure that I'm not buying it.
         - [New EULA Makes KSP Spyware? - Kerbal Space Program Terms of Service Steal Private Information](https://www.youtube.com/watch?v=WCLbUD_aubQ)
+- Game design
+    - "If everyone likes your game but no one loves it, it will fail." (Mark Rosewater)
+        - https://www.reddit.com/r/DestinyTheGame/comments/7e6wqs/if_everyone_likes_your_game_but_no_one_loves_it/

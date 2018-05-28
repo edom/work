@@ -245,3 +245,75 @@ probably because it's seldom fresh here.
     - When the water begins boiling,
     reduce the fire until to the amount just required to maintain the boil.
     - Wait for about 10 minutes since the water began boiling.
+- What is trans fat? Why is trans fat bad?
+    - [WP:Trans fat](https://en.wikipedia.org/wiki/Trans_fat)
+        - "trans-unsaturated fatty acid"
+- How is trans fat generated?
+    - [WP:Trans fat](https://en.wikipedia.org/wiki/Trans_fat)
+        - "Fats contain long hydrocarbon chains, which can either be unsaturated, i.e., have double bonds, or saturated, i.e., have no double bonds. In nature, unsaturated fatty acids generally have cis as opposed to trans configurations.[5] In food production, liquid cis-unsaturated fats such as vegetable oils are hydrogenated to produce saturated fats, which have more desirable physical properties, e.g. they melt at a desirable temperature (30–40 °C). Partial hydrogenation of the unsaturated fat converts some of the cis double bonds into trans double bonds by an isomerization reaction with the catalyst used for the hydrogenation, which yields a trans fat.[2][3]"
+- What is olive oil?
+    - [WP:Olive oil](https://en.wikipedia.org/wiki/Olive_oil)
+    - [WP:Olive](https://en.wikipedia.org/wiki/Olive)
+    - [WP:Olive fruit](https://simple.wikipedia.org/wiki/Olive_(fruit))
+        - Raw olive is very bitter.
+- What is olive oil's smoke point?
+    - [Bertolli extra virgin](https://www.bertolli.com/oils-and-vinegars/extra-virgin-olive-oil/): 200 deg. C
+    - What is smoke point?
+        - [WP:Smoke point](https://en.wikipedia.org/wiki/Smoke_point)
+- Are Bertolli extra virgin olive oils sold in Indonesia real?
+    - Sources suggesting "no"
+        - [2013 US study?](https://lifehacker.com/the-most-and-least-fake-extra-virgin-olive-oil-brands-1460894373)
+        - [2013 thelocal.it: Lidl and Bertolli fined €550k for fake 'extra virgin' olive oil](https://www.thelocal.it/20160629/lidl-and-bertolli-face-huge-fines-for-false-extra-virgin-olive-oil)
+        - [2013 telegraph.co.uk: Italian olive oil scandal: seven top brands 'sold fake extra-virgin'](https://www.telegraph.co.uk/news/worldnews/europe/italy/11988947/Italian-companies-investigated-for-passing-off-ordinary-olive-oil-as-extra-virgin.html)
+    - Sources suggesting "yes"
+        - [2017 Deoleo & Bertolli official statement](http://deoleo.com/english-bertolli-official-statement-against-fake-olive-oil-news/?lang=en)
+        - [2016 North American Olive Oil Association Blog: 21 Olive Oil Brands Certified for Authenticity](https://blog.aboutoliveoil.org/21-olive-oil-brands-certified-for-authenticity)
+    - Other sources
+        - [WP:Olive oil, adulteration](https://en.wikipedia.org/wiki/Olive_oil#Adulteration)
+- How to check olive oil quality? How do we know it's real?
+    - [foodrenegade.com](https://www.foodrenegade.com/how-tell-if-your-olive-oil-fake/):
+    Tests are unreliable. The only way is to know the farmer.
+    - [2013 olivetomato.com: How to Recognize Good and Bad Olive Oil](https://www.olivetomato.com/how-to-recognize-good-and-bad-olive-oil/)
+- What is the difference between olive oil, virgin olive oil, and extra virgin olive oil?
+- [Olive Oil, extra virgin Monthly Price - US Dollars per Metric Ton](https://www.indexmundi.com/commodities/?commodity=olive-oil&months=60), about USD 4,000 per ton.
+- [What Are The Fattest Countries In The World?](https://www.youtube.com/watch?v=sRNtCdyZ8bM)
+    - Obesity began in several countries after Western diet (fast food) was introduced.
+- Sugar (fructose) is toxic. Sugar is a toxin.
+    - Robert Lustig
+        - https://en.wikipedia.org/wiki/Robert_Lustig
+    - [WHY Sugar is as Bad as Alcohol (Fructose, The Liver Toxin)](https://www.youtube.com/watch?v=f_4Q9Iv7_Ao)
+        - Ethanol causes alcoholic fatty liver disease.
+        - Fructose causes non-alcoholic fatty liver disease.
+        - fructose is toxic
+            - fructose metabolism is similar to ethanol metabolism
+            - ethanol metabolism causes alcoholic fatty liver disease
+            - fructose metabolism causes non-alcoholic fatty liver disease
+        - fructose is everywhere
+            - table sugar is 1 part glucose and 1 part fructose
+            - every food in supermarket has sugar added
+        - fructose causes obesity
+        - Fructose in fruit isn't as bad as pure fructose because the fructose in fruit is ... (wrapped in? tied to?) hard-to-digest fibers?
+    - pop science
+        - [Sugar Should Be Regulated As Toxin, Researchers Say](https://www.livescience.com/18244-sugar-toxic-regulations.html)
+- [Low Sodium's link to Fat Gain & Insulin Resistance (Salt vs. Sugar)](https://www.youtube.com/watch?v=-ygExIZm7Wo)
+    - take enough sodium, especially when in ketogenic diet
+    - 9:00 uric acid induces fatty liver
+- [ELLSE 32983:Difference between fast food and junk food](https://ell.stackexchange.com/questions/32983/difference-between-fast-food-and-junk-food)
+    - Fast food is food that is served quickly (because someone else has cooked it for you).
+    - Junk food is unhealthy food.
+        - Too much processing.
+        - Unbalanced nutrition.
+        - Damaging metabolic products.
+- [Why is it so Easy to be Thin in Japan?](https://www.youtube.com/watch?v=lr4MmmWQtZM)
+    - food environment, food culture
+        - It's easy to buy *non-junk* fast food in Japan.
+        - It's easy to buy *junk* fast food in the US.
+- [HOW to quit Sugar & Unhealthy Habits](https://www.youtube.com/watch?v=olEMIohTgzQ)
+    - The problem is not carb or fat. The problem is processed food.
+- [How do carbohydrates impact your health? - Richard J. Wood](https://www.youtube.com/watch?v=wxzc_2c6GMg)
+    - Starch vs fiber
+        - Both are polysaccharides (chain of monosaccharides).
+        - Starch has alpha-bonds. Can be cleaved by human digestive enzymes.
+        - Fiber has beta-bonds. Humans can't digest.
+- [Why are we still Counting Calories? (History vs. Science)](https://www.youtube.com/watch?v=VyNgvMYb7iQ)
+- [The Story of Fat: Why we were Wrong about Health](https://www.youtube.com/watch?v=5S6-v37nOtY)

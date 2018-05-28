@@ -90,3 +90,14 @@ permalink: /politics.html
 - YouTube: user: The school of life
     - [The Perfect Country](https://www.youtube.com/watch?v=shanIOl7MyE)
     - [How to Make a Country Rich](https://www.youtube.com/watch?v=Y9zThcMJzQU)
+- Why is the US defense budget so huge?
+    - https://www.reddit.com/r/explainlikeimfive/comments/3b5ogu/eli5_why_is_the_united_states_defense_budget_so/
+    - https://www.quora.com/Why-does-the-United-States-have-such-a-large-military-budget
+    - My guesses
+        - The US defense budget is so huge because it's dealing with the entire Earth, not only the US?
+        - Also, no competition in the defense sector?
+        It's inefficient?
+        It has no incentive to be efficient.
+        Compare how competition (such as SpaceX)
+        could cut down the cost of launching rockets.
+- Why is Britain helping Israel?

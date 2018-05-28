@@ -31,13 +31,20 @@ date: 2017-06-09 00:59:00 +0700
                     - tank top
                     - wifebeater
                     - singlet
+            - shorts, [WP:Shorts](https://en.wikipedia.org/wiki/Shorts#Terminological_differences)
             - pants
+                - 1/2 pants, 3/4 pants
+                - "jeans" are denim pants
+                - "taper" is the narrowing of pants as they get farther away from the body
+                - "flare" is partial reverse taper; see picture in [quora](https://www.quora.com/What-is-the-difference-between-taper-fit-narrow-fit-slim-fit-regular-and-straight-fit)
+                - action jeans, kicking jeans
+                    - jeans that aren't tight in the crotch
+                - There are no tight trainer pants. Conflicting requirements.
             - jacket
                 - windbreaker/windcheater jacket
             - jumpsuit
             - harness
             - lederhosen
-            - jeans
         - modifiers
             - crop (crop-top)
             - rise (low-rise, high-rise)

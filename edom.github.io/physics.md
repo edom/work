@@ -61,3 +61,9 @@ permalink: /physics.html
     - [How to save 51 billion lives for 68 cents with simple Engineering](https://www.youtube.com/watch?v=Qf-D1Upn-KU)
         - Some constraints are good for creativity.
     - Isotope vs nuclide https://en.m.wikipedia.org/wiki/Isotope
+    - [This Massive Asteroid Is Headed for Earth…. What Now?](https://www.youtube.com/watch?v=yL7EEXg2niU)
+- Unifying quantum mechanics and general relativity?
+    - Unifying quantum mechanics and special relativity
+        - [WP:Quantum electrodynamics](https://en.wikipedia.org/wiki/Quantum_electrodynamics)
+            - "is the first theory where full agreement between quantum mechanics and special relativity is achieved"
+    - Hamiltonian mechanics in Minkowski spacetime?

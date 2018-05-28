@@ -44,7 +44,15 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
             - [when you hear the word "walk"](https://www.youtube.com/watch?v=djRfAQfT9E4)
             - fat shibes from [Rapid Liquid: part IV - don't nom cat food](https://www.youtube.com/watch?v=qe8b9gfuwME)
     - [anatomically correct Spiderman](https://www.youtube.com/watch?v=Yc5SfuIb_eM), absurd
-    - ["What's worse than a rapist? Boom. A child. No, a child rapist."](https://www.youtube.com/watch?v=L0a5iwzG7aw)
+    - absurdist comedy
+        - Family Guy
+            - Peter tries Red Bull https://en.wikipedia.org/wiki/New_Kidney_in_Town
+        - Spongebob
+            - Spongebob and Patrick babysit a clam http://spongebob.wikia.com/wiki/Rock-a-Bye_Bivalve
+            - Squidward takes a day off http://spongebob.wikia.com/wiki/Squid%27s_Day_Off
+            - Man Ray tries to return Patrick's wallet http://spongebob.wikia.com/wiki/Mermaid_Man_and_Barnacle_Boy_III
+        - ["What's worse than a rapist? Boom. A child. No, a child rapist."](https://www.youtube.com/watch?v=L0a5iwzG7aw)
+        - [Whitest Kids U' Know - Kid Beer (HQ)](http://www.dailymotion.com/video/x2x897x)
     - Steve Harvey's laughter ([Wikidata: Steve Harvey](https://www.wikidata.org/wiki/Q2347009))
         - [my brother doesn't share his girlfriend](https://www.youtube.com/watch?v=nCSx2BWGBNM)
             - 0:26--0:38: Steve Harvey laughing: "Jack doesn't share her with me"
@@ -103,7 +111,6 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
         - http://kureiiro.deviantart.com/art/Nier-Automata-Monopoly-Squad-Meme-670671565
             - from https://www.reddit.com/r/nier/comments/61qm27/automata_in_a_nutshell/
 - [subreddit for fans of k-pop girls](https://www.reddit.com/r/asiangirlsbeingcute/top/)
-- [Whitest Kids U' Know - Kid Beer (HQ)](http://www.dailymotion.com/video/x2x897x)
 - low-cost cosplay, low-budget cosplay, cheap cosplay
 - dark humor (suicidal, not suitable for everyone)
     - [Ethan Vincent: are we there yet](http://oppressive-silence.com/comic/are-we-there-yet),

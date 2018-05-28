@@ -217,3 +217,7 @@ Can we crowdsource it?
     - https://www.timeshighereducation.com/features/these-are-20-most-popular-academic-papers-2016
     - https://www.quora.com/Is-doing-a-PhD-worth-it-these-days
     - http://connectedresearchers.com/online-tools-for-researchers/
+- Scientific method
+    - Scientific method is a combination of Ask, Observe, Guess, Test.
+    - [WP:Scientific method](https://en.wikipedia.org/wiki/Scientific_method)
+- [WP:List of unsolved problems](https://en.wikipedia.org/wiki/Lists_of_unsolved_problems)

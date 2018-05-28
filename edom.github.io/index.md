@@ -6,30 +6,74 @@ date: 2017-05-20 00:00:00 +0700
 # Home
 
 - *This website may contain mistakes.*
-Use with caution.
-Corroborate statements with other independent sources.
-- [Research]({% link research.md %})
-- Music
-    - I play piano in the band [The Nomads]({% link nomads.md %}) (an Indonesian band, not the Swedish band).
-- How do I ask questions or suggest corrections? Any of these will do:
-    - Leave a Disqus comment in the related page.
-    - [Open an issue on GitHub](https://github.com/edom/edom.github.io/issues).
-- How do you use a computer?
-    - [Internet search tools]({% link search.md %})
-    - [Remove nag screens]({% link nag.md %})
-- [Long-haired men]({% link longhair.md %})
-- Habits learned the hard way
-    - I check the time at [time.gov](https://time.gov/) because Ubuntu 14.04 NTP once betrayed me.
-        - 2018-01-16: I had always thought that it was dependable, but it betrayed me:
-        It showed 2 a.m. while the actual time was 4 a.m..
-        I missed some hours of sleep.
-- Vital service failure log
-    - Internet service providers
-        - [Fastnet]({% link fastnet.md %})
-        - [CBN]({% link cbn.md %})
-    - Electricity distribution
-        - [PLN]({% link pln.md %})
-- [About this website]({% link about.md %})
+    - Use with caution.
+    - Compare with other independent sources.
+- How to use this website
+    - Follow the links that interest you:
+        - [Intelligence]({% link intelligence.md %})
+        - [Computer science]({% link compsci.md %})
+        - [Physics]({% link physics.md %}) and engineering
+            - [Energy storage]({% link ensto.md %})
+            - [Traffic engineering]({% link trafeng.md %})
+            - Civil engineering
+                - [How Do Sinkholes Form?](https://www.youtube.com/watch?v=e-DVIQPqS8E)
+                    - Internal erosion, piping, etc.
+                - Architecture
+                    - [YT:Open office is overrated](https://www.youtube.com/watch?v=-p6WWRarjNs)
+        - [Mathematics]({% link math.md %})
+            - [Math education]({% link mathedu.md %})
+        - [Art]({% link art.md %})
+            - [Music]({% link music.md %})
+            - [Acting]({% link act.md %})
+        - Self-care, grooming, styling, living:
+            - [Clothing]({% link cloth.md %})
+            - [Mouth care]({% link mouth.md %})
+            - [WP:Hairstyles](https://en.wikipedia.org/wiki/List_of_hairstyles)
+            - [Eating]({% link eat.md %})
+                - [How to cook eggs]({% link egg.md %})
+            - [Walking]({% link walk.md %})
+                - Which muscles are atrophied by prolonged sitting?
+                - How to know if a muscle is short/tight or weak?
+            - [Fighting]({% link fight.md %})
+        - [Philosophy]({% link philo.md %})
+            - [What kind of world are we living in?]({% link world.md %})
+            - [Meta-research]({% link meta_research.md %})
+                - [Information architecture]({% link infarch.md %})
+            - [Religion]({% link religion.md %})
+                - [Which religion should we choose?]({% link relch.md %})
+            - Logic
+                - [Counterfactual reasoning]({% link cf.md %})
+            - Work
+                - [Boss]({% link boss.md %})
+        - [Biology]({% link biology.md %})
+        - [Writing]({% link writing.md %})
+        - Money-related
+            - [Economics]({% link economics.md %})
+            - [Capitalism]({% link capitalism.md %})
+            - [Finance]({% link finance.md %})
+        - [Government]({% link government.md %})
+            - [Politics]({% link politics.md %})
+                - [Politik Indonesia]({% link politik.md %})
+            - [Jakarta]({% link jakarta.md %})
+        - [Psychology]({% link psych.md %})
+        - [Magick]({% link magick.md %})
+            - [Magick experiments]({% link magexp.md %})
+        - [Entertainment]({% link entertain.md %})
+            - [Game]({% link game.md %})
+        - Ungrouped
+            - [Long-haired men]({% link longhair.md %})
+            - [Vital service failure log]({% link log.md %})
+            - [About this website]({% link about.md %})
+            - [How do you use a computer?]({% link usecom.md %})
+    - How do I ask questions or suggest corrections?
+        - Any of these:
+            - Leave a Disqus comment in the related page.
+            - [Open an issue on GitHub](https://github.com/edom/edom.github.io/issues).
+- What do you do?
+    - [Research]({% link research.md %})
+        - I collect and organize knowledge into this wiki.
+    - Music
+        - I play piano in the band [The Nomads]({% link nomads.md %}) (an Indonesian band, not the Swedish band).
 
 {% assign everything = site.emptyArray %}
 {% for page in site.pages %}
