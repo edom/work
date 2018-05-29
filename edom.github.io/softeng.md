@@ -178,3 +178,10 @@ A typo in the source code is not a bug.
             - Monodevelop 5 comes with Nuget.
 - software legality?
     - Harmony CLA (Contributor License Agreement)?
+- What cause software errors?
+    - Programming error: what the programmers think are not what they write.
+    Difference between their thought and the computer's actual rules.
+    Silent wrong assumption.
+    - Contributing factors: bad languages, bad tools.
+        - Bad languages make writing correct programs difficult.
+    - Errors outside programmer control: cosmic rays, hardware problems

@@ -14,6 +14,7 @@ mathjax: yes
     - [Learning mathematics]({% link mathlearn.md %})
 - Reference articles
     - [Function]({% link function.md %})
+    - [Relation]({% link relation.md %})
     - [Limit]({% link limit.md %})
     - [Unary algebra]({% link unalg.md %})
 - Branches
@@ -111,3 +112,5 @@ mathjax: yes
 - https://www.journals.elsevier.com/advances-in-mathematics/most-cited-articles
 - [Selmer Bringsjord, course, "Introduction to formal logic"](http://kryten.mm.rpi.edu/COURSES/INTLOGW/intlog.html)
 - Where are reference works for mathematics?
+- real analysis
+    - G. A. Edgar, [Transseries for beginners](https://people.math.osu.edu/edgar.2/preprints/trans_begin/), a well-written mathematics paper

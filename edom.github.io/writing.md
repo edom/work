@@ -81,3 +81,34 @@ cd ruby-2.4.1
 configure --prefix=$HOME/.local
 make -j4 install
 ```
+- Information visualization
+    - [WP:Exploration](https://en.wikipedia.org/wiki/Exploration)
+    - [WP:Exploration problem](https://en.wikipedia.org/wiki/Exploration_problem)
+    - [WP:Information visualization](https://en.wikipedia.org/wiki/Information_visualization)
+    - Example of information visualization?
+        - https://www.gartner.com/technology/research/digital-marketing/transit-map.jsp
+- 2016-04-16T19:32:18Z
+    - What should we write?
+        - Answers from pragmaticism and capitalism:
+            - Write something that our intended audience find *useful*.
+            - Treat our writing as *asset*.
+            - Ask ourselves: what problem are we solving?
+        - We can write anything you want to,
+        but we will be a better writer
+        if we understand *why people read*.
+        - *People read to solve their problems.*
+            - Some need to fix a computer; help articles fix their problem.
+            - Some need to decide if they will invest in a company; reports fix their problem.
+        - We want to write something good. What is a good writing?
+            - Let me use *pragmaticism* and *capitalism* to define a good writing;
+            you can later define what is good for you
+            according to whatever moral system you subscribe to.
+                - Pragmaticism suggests that a good writing is useful
+                in the sense that the writing *solves* the problem of its intended readers.
+                - Capitalism suggests that a good writing is
+                a *capital*, an asset, a means of production.
+                For example, some novels give rise to films, games, and merchandises;
+                such writings are great assets that will bring wealth to their owners.
+                A writing published on the Internet is also an asset for generating traffic and trust,
+                which can sometimes then translate into money through advertising
+                (or whatever you can convert others' trust to).

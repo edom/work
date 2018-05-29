@@ -83,3 +83,5 @@ We already have laws for people causing public disorder.
         - However, blasphemy laws also allow religion
         to subvert the justice system.
 - How to combat people who provoke you and then cry foul?
+- https://djponline.pajak.go.id/account/login
+    - http://www.pajak.go.id/article/jangan-panik-jika-lupa-kode-efin-ikuti-langkah-berikut

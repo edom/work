@@ -59,7 +59,7 @@ The editor should not parse text into AST; it should generate text from AST.
 - Improve an existing language instead of starting new?
 - What is this? http://reasonablypolymorphic.com/blog/elm-is-wrong
 - Interesting languages?
-    - Rebol?
+    - Rebol? Rebol metaprogramming? https://en.m.wikipedia.org/wiki/REBOL
     - Carp lisp dialect?
 - Scheme vs Lisp:
     - A Lisp implementation doesn't have to have proper tail calls.

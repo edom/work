@@ -8,6 +8,9 @@ permalink: /research.html
     - an index of my research work, and
     - my ramblings (to be moved to their own pages).
 - To resolve citation keys in this website, look up the key in [bibliography.yaml](https://github.com/edom/edom.github.io/blob/master/bibliography.yaml).
+
+## Ramblings and undigested matters
+
 - Software and law
     - Similarity
         - Bad software and bad law both result in unnecessarily slow system.
@@ -28,10 +31,7 @@ permalink: /research.html
         - We assume:
             - Every adjective is fuzzy.
             - Truth is a continuum.
-- Ramble
-    - Corruptors and their offsprings have so much money that they don't know what to do with it.
-- Moved back here
-    - [Social]({% link social.md %})
+- Corruptors and their offsprings have so much money that they don't know what to do with it.
 - 2017-07-10
     - Ubuntu crashed without log.
         - Screen turned off suddenly.
@@ -55,3 +55,16 @@ permalink: /research.html
 - There are only two way of getting rich:
     - create value (make others better)
     - extract value (steal from others, either legally or illegally)
+- [SO 9466360: How to request Google to re-crawl my website?](https://stackoverflow.com/questions/9466360/how-to-request-google-to-re-crawl-my-website)
+- Marketing
+    - To market something is to try to sell it.
+- [YT: What I've learned: Everything wrong with the "System" (Educate yourself)](https://www.youtube.com/watch?v=yzl7oX9FYGE)
+- https://id.wikipedia.org/wiki/Ken_Kawan_Soetanto
+    - Any English publications? Where?
+- http://therumpus.net/2012/11/the-map-of-the-system-of-human-knowledge-by-james-tadd-adcox/
+- https://www.theatlantic.com/magazine/archive/2006/08/a-taxonomy-of-knowledge/305189/
+
+## Other
+
+- Moved back here
+    - [Social]({% link social.md %})

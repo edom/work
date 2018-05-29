@@ -4,6 +4,11 @@ date: 2018-05-25 00:00 +0700
 permalink: /philo.html
 ---
 
+- Epistemology is a branch of philosophy that deals with the question "How do we know that we know?"
+    - There are two kinds of knowledge: *prior* and *posterior*.
+        - Prior (before-the-fact) knowledge is obtained by inferring theorems from axioms through the rules of logic.
+        - Posterior (after-the-fact) knowledge is obtained by observation from the real world through the physical senses.
+    - [WP:a priori and a posteriori](https://en.wikipedia.org/wiki/A_priori_and_a_posteriori)
 - Thoughts
     - If our past is better than our present, then we have failed.
 - https://philosophy.stackexchange.com/questions/21292/do-some-continental-philosophers-deliberately-obfuscate-their-writing-why

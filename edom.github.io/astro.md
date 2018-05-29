@@ -1,0 +1,61 @@
+---
+title: Astronomy
+date: 2017-12-18 05:29 +0700
+permalink: /astro.html
+---
+
+- Reading sky map to find celestial objects
+    - Other names: star chart, star map, sky map
+    - [WP:Celestial sphere](https://en.wikipedia.org/wiki/Celestial_sphere)
+    - The sky looks as if it were projected to a spherical screen?
+    - If a space object is far enough, it will look as if it were fixed in the sky.
+    - Suppose you found something in the sky.
+    How do you tell your friends where that thing is?
+    How do you tell them where to look at in the sky?
+        - Use *equatorial coordinate system*: Right ascension, Declination, and Epoch
+            - Example: Alpha Centauri A. ([WP](https://en.wikipedia.org/wiki/Alpha_Centauri))
+                - Right ascension 14 h 39 m 35.06311 s
+                - Declination -60 deg 50 min 15.0992 sec
+                - Epoch J2000
+            - [WP:Epoch](https://en.wikipedia.org/wiki/Epoch_(astronomy))
+                - J2000 is the Gregorian date 2000-01-01 12:00 TT (terrestrial time).
+    - https://en.wikipedia.org/wiki/Celestial_coordinate_system
+    - https://en.wikipedia.org/wiki/Star_chart
+    - Equatorial coordinate system
+    - Still unanswered: How to read star chart? What are equatorial coordinates?
+- Distance
+    - https://en.wikipedia.org/wiki/Parsec
+    - 1 au (astronomical unit) is roughly the distance between the Sun and the Earth.
+        - 1 au is about 150 million km.
+        - 1 au is about 6 light minutes.
+    - 1 ly is 1 light year.
+        - It's a unit of length, not time.
+            - A *light year* is the distance traveled by light in one year.
+    - Parsec is also a unit of length.
+    - 1 pc is about 3.26 ly.
+- Objects, ontology, hierarchy?
+    - planet
+    - https://en.wikipedia.org/wiki/Stellar_evolution
+        - star
+            - "A star is a luminous sphere of plasma held together by its own gravity."
+            - Every star begins from collapsing clouds of gas and dust?
+            - protostar
+            - main-sequence star
+            - supernova
+            - brown dwarf
+            - white dwarf
+        - solar system
+            - "sol" is Latin word for "sun"
+        - galaxy
+        - nebula
+        - constellation (con + stella)
+            - "stella" is Latin word for "star"
+            - "constellation" means "bunch of stars"
+        - satellite
+        - moon
+        - comet
+        - asteroid
+        - black hole
+- Related fields of study?
+    - https://en.wikipedia.org/wiki/Cosmology
+    - https://en.wikipedia.org/wiki/Cosmogony

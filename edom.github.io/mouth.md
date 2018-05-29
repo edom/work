@@ -18,3 +18,4 @@ permalink: /mouth.html
 - How does dental plaque adhere to tooth surface?
     - How can we detach the plaque without mechanical abrasion?
         - [WP:Dental plaque](https://en.wikipedia.org/wiki/Dental_plaque)
+- 1982, article, J. van Houte, "Bacterial adherence and dental plaque formation"

@@ -85,3 +85,10 @@ date: 2017-06-27 01:00 +0700
         the end result, the goal.
         - When developing a game, it's too free.
         The requirement is very abstract: "be fun".
+- game idea: "airflow simulator"
+    - computational fluid dynamics
+    - input:
+        - a room
+        - airflow requirements
+    - output:
+        - placement of fans

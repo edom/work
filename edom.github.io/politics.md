@@ -107,3 +107,5 @@ permalink: /politics.html
 - If a law does not prescribe any punishment, will you obey it?
 - Should we just die when we cannot pay the hospital bills?
     - If your death would ruin your family, should you have a family?
+- Data source for salaries of various positions in the US: Foreign labor certification wage library
+    - In the US, salary isn't secret, especially if you're a foreigner.

@@ -327,3 +327,5 @@ probably because it's seldom fresh here.
 - Are unripe bananas good to eat?
     - Does it have antinutrients?
 - What does ripening do to a fruit? Why is a ripe fruit sweeter than an unripe one?
+- Undigested
+    - [Seignalet diet](https://www.seignalet.fr/en/)

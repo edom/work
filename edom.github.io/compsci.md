@@ -83,3 +83,12 @@ permalink: /compsci.html
 - [2002 Featherweight Java: A Minimal Core Calculus for Java and GJ](https://www.cis.upenn.edu/~bcpierce/papers/fj-toplas.pdf)
 - [The principal programming paradigms](https://www.info.ucl.ac.be/~pvr/paradigmsDIAGRAMeng108.pdf)
 (PDF poster).
+- ["Data-centric Metaprogramming in Object-Oriented Languages"](https://2015.ecoop.org/event/icooolps-2015-papers-co-developing-libraries-and-their-optimizations)
+- https://en.wikipedia.org/wiki/Industrial_PC
+- https://en.wikipedia.org/wiki/Rugged_computer
+- https://en.wikipedia.org/wiki/Embedded_system
+- https://en.wikipedia.org/wiki/Industry_4.0
+- We also have this "Shadow IT" problem:
+    - https://en.wikipedia.org/wiki/Shadow_IT
+    - https://community.atlassian.com/t5/Confluence-questions/Best-practice-Using-confluence-and-other-systems-like-yammer/qaq-p/323867
+- [Kruna Ratkovic, "Notion of Strong Monad in Computing"](https://www.researchgate.net/profile/Kruna_Ratkovic/publication/323426688_Notion_of_Strong_Monad_in_Computing/links/5a958819a6fdccecff090883/Notion-of-Strong-Monad-in-Computing.pdf)

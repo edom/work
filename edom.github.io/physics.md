@@ -70,3 +70,9 @@ permalink: /physics.html
 - [Scientists Accidentally Discovered Quark Fusion, Could It Be the Future of Energy?](https://www.youtube.com/watch?v=dGDiS8Dv8a8)
     - quark fusion
 - What are the von Neumann--Dirac axioms?
+- [Photonic Chips Will Change Computing Forever... If We Can Get Them Right](https://www.youtube.com/watch?v=rUMx1Rmijzc)
+- [Will We Ever Time Travel? Scientists Say ‘No’ Based on This New Discovery](https://www.youtube.com/watch?v=8LHhpPtRMmU)
+    - This youtube video title needs to be declickbaited. What new discovery?
+- How big is a rocket?
+    - The F-1 engine of Saturn V rocket burns 3,000 kg of fuel every second. https://www.thevintagenews.com/2018/04/03/jeff-bezos/
+    - It looks like a flying skyscraper?

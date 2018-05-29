@@ -9,6 +9,7 @@ date: 2018-05-22 02:28:00 +0700
     - Bad teachers waste humans, brains, the future of nations, the future of humanity.
         - How many people *can* think but *won't* because their teachers suck?
             - How many people *can* do math but *won't* because their math teachers suck?
+- How do we make learning materials that are not teacher brain dump?
 - Textbooks should answer "Why should I care?"
 - Everywhere in mathematics is *logic*.
     - Everything is a consequence of the definitions.

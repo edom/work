@@ -140,3 +140,23 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
     - `<Ctrl-K> ' e` to type `é`
 - reverse entertainment (when you're too happy, and you need something to make yourself sad)
     - Nigel the gannet died alone next to concrete decoy birds
+- Hong Kong comedy films
+    - [WP:Mo lei tau](https://en.wikipedia.org/wiki/Mo_lei_tau)
+    - some actors
+        - Stephen *Chow* Sing-chi ([WP](https://en.wikipedia.org/wiki/Stephen_Chow))
+        - *Ng* Man-tat a.k.a. *Wu* Meng-da ([WP](https://en.wikipedia.org/wiki/Ng_Man-tat))
+        - child actors
+            - *Fok* Siu-man a.k.a. *Hao* Shao-wen a.k.a. Steven *Hao* a.k.a. Bo Bo Ho
+            - *Shi* Xiao-long a.k.a. Ashton *Chen*
+    - some films
+        - Kung fu hustle
+        - Shaolin soccer
+        - The god of cookery ([WP](https://en.wikipedia.org/wiki/The_God_of_Cookery))
+            - [video on YouTube](https://www.youtube.com/watch?v=l8_Mk3-sZsQ)
+                - best of Nancy *Sit* Ka-yin
+                    - 1:10:42 dancing
+                    - 1:22:33 reacting to food
+        - "All for the winner", parody of "God of gamblers" ([WP](https://en.wikipedia.org/wiki/All_for_the_Winner))
+            - https://en.wikipedia.org/wiki/God_of_Gamblers#Sequels,_spin-off
+        - "From Beijing with love", parody of James Bond ([WP](https://en.wikipedia.org/wiki/From_Beijing_with_Love))
+        - Shaolin Popey ([WP](https://en.wikipedia.org/wiki/Shaolin_Popey))

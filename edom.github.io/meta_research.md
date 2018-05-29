@@ -221,3 +221,5 @@ Can we crowdsource it?
     - Scientific method is a combination of Ask, Observe, Guess, Test.
     - [WP:Scientific method](https://en.wikipedia.org/wiki/Scientific_method)
 - [WP:List of unsolved problems](https://en.wikipedia.org/wiki/Lists_of_unsolved_problems)
+- publishers that fail the SCIGen test
+    - Lupine Publishers https://www.sciencealert.com/how-kim-kardashian-inventor-bitcoin-teamed-up-write-scientific-paper-satoshi-nakamoto-predatory-journals

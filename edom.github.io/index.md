@@ -22,6 +22,7 @@ date: 2017-05-20 00:00:00 +0700
                     - Internal erosion, piping, etc.
                 - Architecture
                     - [YT:Open office is overrated](https://www.youtube.com/watch?v=-p6WWRarjNs)
+            - [Astronomy]({% link astro.md %})
         - [Mathematics]({% link math.md %})
             - [Math education]({% link mathedu.md %})
         - [Art]({% link art.md %})
@@ -41,14 +42,14 @@ date: 2017-05-20 00:00:00 +0700
             - [What kind of world are we living in?]({% link world.md %})
             - [Meta-research]({% link meta_research.md %})
                 - [Information architecture]({% link infarch.md %})
+                - [Writing]({% link writing.md %})
             - [Religion]({% link religion.md %})
                 - [Which religion should we choose?]({% link relch.md %})
-            - Logic
+            - [Logic]({% link logic.md %})
                 - [Counterfactual reasoning]({% link cf.md %})
             - Work
                 - [Boss]({% link boss.md %})
         - [Biology]({% link biology.md %})
-        - [Writing]({% link writing.md %})
         - Money-related
             - [Economics]({% link economics.md %})
             - [Capitalism]({% link capitalism.md %})

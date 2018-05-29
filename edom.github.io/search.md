@@ -28,6 +28,8 @@ permalink: /search.html
         - text search
         - reverse image search
         - [Richard Stallman's reasons not to use Microsoft](https://stallman.org/microsoft.html)
+    - searx?
+    - startpage?
     - reverse search tools
         - Google and Bing have reverse image search
         - [tineye.com](https://tineye.com/): reverse image search

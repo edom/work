@@ -350,3 +350,4 @@ from [two minute papers 241](https://www.youtube.com/watch?v=AbxPbfODGcs).
 - AI research tries to make a system that can optimize a wide variety of goal functions?
 - [Mehryar Mohri, Afshin Rostamizadeh, and Ameet Talwalkar; book; "Foundations of machine learning"](https://cs.nyu.edu/~mohri/mlbook/)
 - http://bigthink.com/videos/the-top-3-supplements-for-surviving-the-singularity
+- https://google.github.io/CausalImpact/CausalImpact.html
