@@ -64,13 +64,27 @@ The function \\( f : A \to B \\) has input type \\( A \\) and output type \\( B 
 
 ## Function equality
 
-Two relations are *equal* iff their domains are equal,
-their codomains are equal,
-and their mappings are equal.
-Formally, \\( (A_1,B_1,R_1) = (A_2,B_2,R_2) \\) iff \\( A_1 = A_2 \\) and \\( B_1 = B_2 \\) and \\( R_1 = R_2 \\).
-
-Functions are relations.
-Equality of functions is equality of relations.
+- Two relations are *equal* iff
+    - their domains are equal,
+    - their codomains are equal, and
+    - their mappings are equal.
+- Formally, \\( (A_1,B_1,R_1) = (A_2,B_2,R_2) \\) iff
+    - \\( A_1 = A_2 \\),
+    - \\( B_1 = B_2 \\), and
+    - \\( R_1 = R_2 \\).
+- Functions are relations.
+    - Equality of functions is equality of relations.
+- Intension vs extension
+    - Consider:
+        - \\( f : \Nat \to \Nat \\), <span>\( f(n) = n + n \)</span>,
+        - \\( g : \Nat \to \Nat \\), <span>\( g(n) = 2 \cdot n \)</span>.
+    - Observe:
+        - They are extensionally equal: \\( f(n) = g(n) \\) for all \\( n \\).
+        - They are not intensionally equal: \\( f \neq g \\).
+        - Their outputs match, but they are not the same function.
+    - Problem:
+        - When do we care about intension?
+        - Do we ever care at all?
 
 ## Relationship between functions in functional programming and functions in mathematics
 

@@ -6,7 +6,6 @@ permalink: /compsci.html
 
 - [Functional programming research]({% link functional_programming.md %})
 - [Joint research with Abdullah]({% link abdullah.md %})
-- [Trying to prove P neq. NP]({% link pnptry.md %})
 - Functional programming research
     - [Haskell]({% link haskell.md %})
     - [Coq]({% link coq.md %})

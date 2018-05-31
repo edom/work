@@ -39,6 +39,8 @@ permalink: /astro.html
         - star
             - "A star is a luminous sphere of plasma held together by its own gravity."
             - Every star begins from collapsing clouds of gas and dust?
+            - A star is a self-sustaining fusion nuclear reactor.
+                - [WP:Stellar nucleosynthesis](https://en.wikipedia.org/wiki/Stellar_nucleosynthesis)
             - protostar
             - main-sequence star
             - supernova

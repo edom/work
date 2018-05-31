@@ -3,17 +3,22 @@ layout: default
 date: 2017-05-20 00:00:00 +0700
 ---
 
-# Home
-
-- *This website may contain mistakes.*
-    - Use with caution.
-    - Compare with other independent sources.
-- *This website may contain comments by others.*
-    - I am not responsible for those.
+- This is my public personal wiki.
+    - Mostly my notes and brain dumps.
+- Disclaimers
+    - *This website may contain mistakes.*
+        - Use with caution.
+        - Compare with other independent sources.
+    - *This website may contain comments by others.*
+        - I am not responsible for those.
 - How to use this website
     - Follow the links that interest you:
         - [Intelligence]({% link intelligence.md %})
         - [Computer science]({% link compsci.md %})
+            - [Computation]({% link computation.md %})
+            - [Computational complexity]({% link complexity.md %})
+                - [Trying to prove P neq. NP]({% link pnptry.md %})
+                - [Circuit complexity]({% link circuit.md %})
         - [Physics]({% link physics.md %}) and engineering
             - [Energy storage]({% link ensto.md %})
             - [Traffic engineering]({% link trafeng.md %})
@@ -38,6 +43,7 @@ date: 2017-05-20 00:00:00 +0700
                 - Which muscles are atrophied by prolonged sitting?
                 - How to know if a muscle is short/tight or weak?
             - [Fighting]({% link fight.md %})
+            - [WP:List of human habitation forms](https://en.wikipedia.org/wiki/List_of_human_habitation_forms)
         - [Philosophy]({% link philo.md %})
             - [What kind of world are we living in?]({% link world.md %})
             - [Meta-research]({% link meta_research.md %})
@@ -49,6 +55,9 @@ date: 2017-05-20 00:00:00 +0700
                 - [Counterfactual reasoning]({% link cf.md %})
             - Work
                 - [Boss]({% link boss.md %})
+            - [Long-haired men]({% link longhair.md %})
+            - Does everything fall under philosophy?
+                - How do we prevent this category from becoming a kitchen sink?
         - [Biology]({% link biology.md %})
         - Money-related
             - [Economics]({% link economics.md %})
@@ -64,7 +73,6 @@ date: 2017-05-20 00:00:00 +0700
         - [Entertainment]({% link entertain.md %})
             - [Game]({% link game.md %})
         - Ungrouped
-            - [Long-haired men]({% link longhair.md %})
             - [Vital service failure log]({% link log.md %})
             - [About this website]({% link about.md %})
             - [How do you use a computer?]({% link usecom.md %})

@@ -329,3 +329,4 @@ probably because it's seldom fresh here.
 - What does ripening do to a fruit? Why is a ripe fruit sweeter than an unripe one?
 - Undigested
     - [Seignalet diet](https://www.seignalet.fr/en/)
+- [Reddit:What does our bodies do with the Chlorine present in salt (NaCl)?](https://www.reddit.com/r/askscience/comments/22ou5l/what_does_our_bodies_do_with_the_chlorine_present/)

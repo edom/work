@@ -15,6 +15,12 @@ mathjax: yes
 - Reference articles
     - [Function]({% link function.md %})
     - [Relation]({% link relation.md %})
+    - Which point of view should we use?
+        - We can see a function as a special kind of relation.
+        - We can see a relation from \\( A \\) to \\( B \\) as a function from \\( A \\) to \\( 2^B \\).
+            - Every binary relation \\((A,B,r)\\) is a function \\((A,2^B,f)\\)
+            where \\(f(x) = \\{ y ~\|~ r(x,y) \\}\\).
+        - Which is more primitive: function or relation?
     - [Limit]({% link limit.md %})
     - [Unary algebra]({% link unalg.md %})
 - Branches
@@ -114,3 +120,9 @@ mathjax: yes
 - Where are reference works for mathematics?
 - real analysis
     - G. A. Edgar, [Transseries for beginners](https://people.math.osu.edu/edgar.2/preprints/trans_begin/), a well-written mathematics paper
+- https://en.wikipedia.org/wiki/Mathematical_model
+- Mathematical Knowledge Management
+    - [WP:Mathematical knowledge management](https://en.wikipedia.org/wiki/Mathematical_knowledge_management)
+    - I think we can go a long way by presenting every knowledge in "X is a Y" form.
+    Something is almost always something else.
+    Everything is almost always similar to something else.

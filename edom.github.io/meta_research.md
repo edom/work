@@ -223,3 +223,8 @@ Can we crowdsource it?
 - [WP:List of unsolved problems](https://en.wikipedia.org/wiki/Lists_of_unsolved_problems)
 - publishers that fail the SCIGen test
     - Lupine Publishers https://www.sciencealert.com/how-kim-kardashian-inventor-bitcoin-teamed-up-write-scientific-paper-satoshi-nakamoto-predatory-journals
+- How to study everything?
+    - Begin with ontology:
+        - What exists?
+        - How do they relate?
+- [WP:List of open-access journals](https://en.wikipedia.org/wiki/List_of_open_access_journals)

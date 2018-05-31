@@ -11,6 +11,17 @@ permalink: /kubernetes.html
     - https://kubernetes.io/docs/admin/accessing-the-api/
     - How do we add and remove users and roles to Kubernetes?
     - Which is the most hassle-free future-proof minimal-maintenance way?
+- Kubernetes security
+    - https://kubernetes.io/blog/2016/08/security-best-practices-kubernetes-deployment/
+    - https://kubernetes.io/docs/tasks/administer-cluster/securing-a-cluster/
+    - Which document should we read? Overlapping? Confusing?
+        - https://kubernetes.io/docs/reference/access-authn-authz/controlling-access/
+        - https://kubernetes.io/docs/reference/access-authn-authz/authentication/
+        - https://kubernetes.io/docs/reference/access-authn-authz/authorization/
+    - What is Kubernetes's replacement of AWS security groups?
+        - NetworkPolicy objects
+            - https://kubernetes.io/blog/2017/10/enforcing-network-policies-in-kubernetes/
+            - https://kubernetes.io/blog/2016/04/kubernetes-network-policy-apis/
 - How I think Kubernetes fits in Google's strategy
     - Kubernetes commoditizes IaaS providers.
         - It lowers the barrier of switching from any other cloud providers to GCE.

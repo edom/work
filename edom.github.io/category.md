@@ -39,3 +39,5 @@ mathjax: yes
 - Books
     - [Fong & Spivak, "Seven Sketches in Compositionality: An Invitation to Applied Category Theory"](https://arxiv.org/abs/1803.05316)
     - [Category theory for computing science](http://emis.ams.org/journals/TAC/reprints/articles/22/tr22.pdf)
+- [An introduction to category theory with over 200 exercises and solutions available](http://www.cs.man.ac.uk/~hsimmons/zCATS.pdf)
+by Harold Simmons.

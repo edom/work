@@ -124,3 +124,24 @@ What problems are equivalent to the P vs NP problem?
     - [2009 Lance Fortnow "The status of the P versus NP problem"](http://www.ncmis.cas.cn/kxcb/jclyzs/201204/W020120424627425387644.pdf)
 - What is the P vs NP problem?
     - Official problem description: [The P versus NP problem, by Stephen Cook, for the Clay Millennium Prize Problems](http://www.claymath.org/sites/default/files/pvsnp.pdf)
+
+## Another attempt?
+
+- This is an older attempt.
+- This should be merged to the attempt above.
+- Let:
+    - \\( f \\) be a predicate
+    - \\( k \\) be a natural number
+    - \\( Sat(f,k) \\) be the problem of finding a string \\( x \\) of length \\( k \\) such that \\( f(x) = 1 \\)
+- Lemma: If \\( f \in \TimeP \\) then \\( Sat(f,k) \in \TimeNP \\).
+(This should be obvious and simple to prove?)
+- Conjecture: There exists a predicate whose search cannot be faster than brute force.
+    - Formally: There exists \\( f \in \TimeP \\) such that \\( Sat(f,k) \not \in \TimeP \\).
+- That lemma and that conjecture, if proven true, would imply \\( \TimeP \subset \TimeNP \\).
+- We try to prove that conjecture by diagonalization/pigeonholing?
+The set <span>\( \{0,1\}^k \to \{0,1\} \)</span> has \\( 2^{2^k} \\) elements,
+because by combinatorics, in the truth table, there are \\( 2^k \\) rows, and each row has \\(2\\) possibilities.
+There are \\( 2^{2^k} \\) possible \\(k\\)-letter-string predicates.
+Suppose that a deterministic machine can solve \\( Sat(f,k) \\) for all \\(f\\) in \\(O(poly(k))\\) time.
+(Can we apply pigeonhole principle to the configuration graph?)
+- Every predicate can be stated in disjunctive normal form.

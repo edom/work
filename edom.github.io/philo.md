@@ -42,3 +42,9 @@ permalink: /philo.html
     - Is it good, to force people to do something that betters them but unwanted by them?
 - Is it good, to give people something they did not ask for?
 - Does morality depend on intention or outcome?
+- Why do young people (below 30 years old) have impractical expectations?
+    - Because their frontal cortex hasn't fully developed?
+- Ontology, hierarchy, knowledge organization
+    - [WP:Porphyrian tree](https://en.wikipedia.org/wiki/Porphyrian_tree)
+        - [Ontology in Computer Science](https://link.springer.com/chapter/10.1007/978-1-84628-710-7_2)
+- What is the difference between data, information, belief, knowledge, wisdom?

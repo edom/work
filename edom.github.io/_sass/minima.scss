@@ -6,6 +6,9 @@
 }
 
 @media print {
+    html {
+        font-size: 12pt;
+    }
     .wrapper {
         max-width: none;
         margin: 0em;
@@ -52,6 +55,10 @@ h5 { font-size: 0.900rem; }
 h6 { font-size: 0.800rem; }
 
 @media screen {
+    .page-content > .wrapper {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
     .wrapper, #disqus_thread {
         max-width: 72ex;
         margin-left: auto;
@@ -123,11 +130,14 @@ dl, dd, figure {
   padding: 0;
 }
 
-
+@media screen {
+    html {
+        font-size: 16pt;
+    }
+}
 
 html {
     font-family: $base-font-family;
-    font-size: 20pt;
     line-height: 1.25;
     font-variant: normal;
     font-weight: normal;
@@ -458,12 +468,6 @@ div.highlighter-rouge > * { display: inline-block; text-align: left; }
 /**
  * Posts
  */
-
-@media screen {
-    .post-content {
-      margin-bottom: $spacing-unit;
-    }
-}
 
 
 // Import partials.

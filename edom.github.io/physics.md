@@ -4,6 +4,7 @@ date: 2018-04-11 04:00 +0700
 permalink: /physics.html
 ---
 
+- [WP:Portal:Physics](https://en.wikipedia.org/wiki/Portal:Physics)
 - Solar energy, solar cells, and energy storage
     - How do we make solar cells using common materials?
         - [acs.org: Solar cell from common materials](https://www.acs.org/content/acs/en/pressroom/newsreleases/2012/august/new-solar-panels-made-with-more-common-metals-could-be-cheaper-and-more-sustainable.html)
