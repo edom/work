@@ -4,62 +4,85 @@ permalink: /economics.html
 date: 2017-06-26 20:00 +0700
 ---
 
-Wealth is the sum of satisfied wants.
-
-Other definition candidates of wealth:
-
-- satisfied wants minus unsatisfied wants
-- satisfied wants divided by total wants
-
-Increasing the wealth of the human race conflicts with antinatalism.
-
-The wealthy man is the man who needs as few things as possible,
-and depends on as few people as possible.
-
-## Fundamentals of economics
-
-Everybody wants something.
-
-How do we satisfy more people using less resources?
-
-How do we produce more than we consume?
-
-How do we give more than we take?
-
-## Land > Labor > Capital
-
-The [factors of production](https://en.wikipedia.org/wiki/Factors_of_production)
-in classical economics are:
-
-- land (all other things that exist in nature),
-- labor (human),
-- capital (tools).
-
-Land creates labor.
-
-Labor creates capital.
-
-If capital is destroyed, labor can rebuild it.
-
-If labor is destroyed, capital cannot rebuild it.
-
-Labor without capital is inefficient.
-
-Capital without labor is _nothing_.
-
-However, without land, nothing would exist at all.
-
-Therefore, land is more important than labor, and labor is more important than capital,
-but it seems here that capital is revered, labor is disdained, and land is forgotten.
-
-Money is not capital, but it can be used to buy capital, but this quote is related:
-
+- ontology
+    - wealth
+        - *Wealth* is the sum of satisfied wants.
+    - price, pay, ownership, exchange, transaction
+        - To *own* something is to have exclusive access to that thing.
+        - *Exchange* and *transaction* are synonyms.
+        - An *exchange* is an agreement
+            - between two parties A and B where
+                - A gives X to B,
+                - B gives Y to A.
+        - If X is money and Y is not money, then:
+            - X is the price.
+                - *Price* is the amount agreed for exchange.
+                - *Price* is something sacrificed to get something else.
+            - A is the buyer.
+            - B is the seller.
+            - The buyer *pays* the price to the seller.
+    - negotiation, price-taker, price-maker
+        - Negotiating parties often have asymmetrical bargaining power.
+        - The price-taker is the weaker one.
+        - The price-maker is the stronger one.
+    - money and currency
+        - Money has *currency* and *amount* (*magnitude*).
+        - Money can be *exchanged* with many other things.
+    - debt, interest, and price
+        - The price of debt is the *interest*
+        (the amount of money that will be exchanged for obtaining the loan now).
+            - An X market is a market where X is traded.
+                - A money market is a market where money is traded.
+                    - How do you buy money with money?
+- Assumptions
+    - Every human:
+        - Has wants.
+        - Has priorities? Utility function?
+            - Non-constructive? It exists, but we don't know what it is?
+        - Acts to satisfy those wants.
+- Counterexamples? Where the theory breaks down?
+    - Thiefs want something more than freedom?
+        - But both of the stolen thing and the freedom will be taken away?
+    - Smokers and junk food eaters don't want health?
+        - Everybody wants health?
+            - But doesn't behave consistent with wants?
+                - Cognitive dissonance?
+                    - Want health later or health now?
+                    - Addiction?
+                        - Physical changes to the brain?
+- Fundamentals of economics
+    - Everybody wants something.
+    - How do we satisfy more people using less resources?
+- decision theory?
+    - [WP:von Neumann--Morgenstern utility theorem](https://en.wikipedia.org/wiki/Von_Neumann%E2%80%93Morgenstern_utility_theorem)
+- Higher-order belief
+    - [WP:Keynesian beauty contest](https://en.wikipedia.org/wiki/Keynesian_beauty_contest)
+    - Examples of higher-order beliefs:
+        - People believe that money is valuable because they believe
+        that others also believe that money is valuable.
+- How do we give more than we take?
+    - How do we produce more than we consume?
+- Land > Labor > Capital
+    - The [factors of production](https://en.wikipedia.org/wiki/Factors_of_production)
+    in classical economics are:
+        - land (all other things that exist in nature),
+        - labor (human),
+        - capital (tools).
+    - Land creates labor.
+    - Labor creates capital.
+    - If capital is destroyed, labor can rebuild it.
+    - If labor is destroyed, capital cannot rebuild it.
+    - Labor without capital is inefficient.
+    - Capital without labor is _nothing_.
+    - However, without land, nothing would exist at all.
+    - Therefore, land is more important than labor, and labor is more important than capital,
+        - but it seems here that capital is revered, labor is disdained, and land is forgotten.
+    - Money is not capital, but it can be used to buy capital, but this quote is related:
 > When the last tree is cut, the last fish is caught, and the last river is polluted;
 > when to breathe the air is sickening, you will realize, too late,
 > that wealth is not in bank accounts and that you can’t eat money.
 >
 > Alanis Obomsawin (b. 1932) ([source](http://quoteinvestigator.com/2011/10/20/last-tree-cut/))
-
 - Is Indonesia basic income feasible?
     - [WP:Basic income](https://en.wikipedia.org/wiki/Basic_income)
     - [APBN 2016](https://www.kemenkeu.go.id/apbn2016) income Rp 1,822.5 trillion (in one year).
@@ -74,3 +97,73 @@ Money is not capital, but it can be used to buy capital, but this quote is relat
         - Supply-caused inflation
         - Demand-caused inflation
     - https://www.washingtonpost.com/news/wonk/wp/2013/09/09/how-the-cult-of-shareholder-value-wrecked-american-business/
+- philosophy
+    - Increasing the wealth of the human race conflicts with antinatalism?
+    - Increasing the minimum/average wealth of the human race doesn't conflict with antinatalism?
+- Some economists
+    - David Ricardo
+    - Henry George
+    - Adam Smith
+    - John Maynard Keynes
+- Initial money supply
+    - How is money distributed for the first time (when there is not yet any money)?
+    - How do we transition from barter to cash?
+        - How do we set prices?
+- [WP:Modern monetary theory](https://en.wikipedia.org/wiki/Modern_Monetary_Theory)?
+- Tax
+    - Tax enables government to redistribute money (and therefore some wealth).
+    - Tax enables government to discourage the consumption of certain goods.
+    - Taxation is legalized robbery.
+        - The government forcibly takes some of the people's money.
+        - The people doesn't get to decide what the tax money is used for.
+            - The government is assumed to use that money for the people's good.
+- [WP:Trickle-down economics](https://en.wikipedia.org/wiki/Trickle-down_economics)
+    - How does one arrive at this? How does one think? What is the argument?
+- [WP:Minimum wage](https://en.wikipedia.org/wiki/Minimum_wage)
+    - Does minimum wage hurt the same people it is supposed to help?
+    - Is minimum wage about politics, not economics?
+    - If worker unionization is easy, then government minimum wage is unnecessary?
+    - Without minimum wage, worker unions and company unions will fight directly?
+        - With minimum wage, government intermediates the fight between worker unions and company unions?
+- If the total amount of money is constant,
+then the only way for you to have more money
+is to make someone else has less money.
+    - [WP:Mercantilism](https://en.wikipedia.org/wiki/Mercantilism) assumes that the total wealth in the world is constant?
+        - "Mercantilists viewed the economic system as a zero-sum game, in which any gain by one party required a loss by another.[16]"
+- Questions I haven't been able to answer
+    - If everybody needs to buy food, then why aren't farmers the richest people on Earth?
+        - What if the farmers don't spend?
+            - Will money collect at the farmers?
+            - Will they be the richest people on Earth?
+- Money circulation
+    - Circulating money amount should be proportional to amount of goods/services exchanged?
+    - The amount of money in circulation can be reduced by tax or destruction.
+    - Why do governments sell bonds?
+        - To reduce the amount of money in circulation now?
+            - At the cost of increasing a bigger amount of money circulating in the future?
+    - Money moves faster in certain areas?
+    - How does the government increases the amount of money in circulation?
+        - How I think it might be done:
+            - Create new money.
+            - Spend that money by buying things from a few elites,
+                - with the hope that the elites will quickly spend that money to the lesser elites.
+                    - Thus that money will circulate to more people.
+                        - But isn't this trickle-down economics?
+        - But does it even do this? Isn't it the banks?
+    - What is the effect of people's borrowing from banks?
+        - Increase circulating money now (boom part of boom-bust cycle).
+        - Reduce *more* circulating money later (bust part of boom-bust cycle, when the loan is paid back with interest).
+            - Principal plus interest (money retired) is greater than principal (money created),
+            so the net effect of lending money now
+            is a delayed reduction of a greater amount of money in circulation.
+                - Where does the money to pay the interest come from?
+                    - If left alone, eventually the money collects at the banks?
+                        - But banks have expenses too.
+                            - Banks need to pay taxes, pay their utility bills,
+                            pay their staffs.
+                        - But shouldn't the money collect at the farmers?
+    - The ideal inflation rate is zero?
+        - [WP:Nominal rigidity](https://en.wikipedia.org/wiki/Nominal_rigidity) a.k.a. price-stickiness or wage-stickiness
+- [The difference between wealth creation and wealth extraction](https://makewealthhistory.org/2018/01/31/wealth-creation-and-wealth-extraction/)
+- [The Global Architecture of Wealth Extraction](https://medium.com/@joe_brewer/the-global-architecture-of-wealth-extraction-4c0a6b954a14)
+- [Africa is not poor, we are stealing its wealth](https://www.aljazeera.com/indepth/opinion/2017/05/africa-poor-stealing-wealth-170524063731884.html)

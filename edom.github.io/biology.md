@@ -71,3 +71,7 @@ Distraction osteogenesis. Breaking the leg bones. Undesirable side effects.
     - https://www.popsci.com/why-dont-we-just-throw-all-our-garbage-into-volcanos
 - https://en.wikipedia.org/wiki/Marshall_Warren_Nirenberg
     - some experiments in molecular biology
+- [Teenage dolphins getting high, recreational drug use, pufferfish, neurotoxin](https://www.youtube.com/watch?v=MFgwUWHnVv8)
+- [Neuro-parasitogy of the Jewel Wasp and its Zombie Cockroach Host](https://www.youtube.com/watch?v=ovo_T0KqdYg)
+    - Ampulex compressa, Periplaneta americana
+        - https://en.wikipedia.org/wiki/Alien_(creature_in_Alien_franchise)

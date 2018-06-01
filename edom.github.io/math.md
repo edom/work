@@ -120,7 +120,6 @@ mathjax: yes
 - Where are reference works for mathematics?
 - real analysis
     - G. A. Edgar, [Transseries for beginners](https://people.math.osu.edu/edgar.2/preprints/trans_begin/), a well-written mathematics paper
-- https://en.wikipedia.org/wiki/Mathematical_model
 - Mathematical Knowledge Management
     - [WP:Mathematical knowledge management](https://en.wikipedia.org/wiki/Mathematical_knowledge_management)
     - I think we can go a long way by presenting every knowledge in "X is a Y" form.

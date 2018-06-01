@@ -132,6 +132,8 @@ There is also [Matt McGuire's drum cover](https://www.youtube.com/watch?v=n143Q9
     This song has some interesting chords,
     such as the one at 3:07 in the full version, which I think is G6-F7-B7-E8-Ab8 (where C8 is the middle C).
     It's like playing E major on top of G7.
+        - rock
+            - [Asunaki Tabi](https://www.youtube.com/watch?v=IaVnu3qgdPU), from "Hokuto no ken" ("Fist of the north star")
     - rock pop
         - power ballad
             - [Ylvis, "Stonehenge"](https://www.youtube.com/watch?v=mbyzgeee2mg)

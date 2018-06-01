@@ -2,32 +2,147 @@
 title: Physics
 date: 2018-04-11 04:00 +0700
 permalink: /physics.html
+mathjax: yes
 ---
 
-- [WP:Portal:Physics](https://en.wikipedia.org/wiki/Portal:Physics)
+- Overview
+    - [WP:Physics](https://en.wikipedia.org/wiki/Physics)
+    - [WP:Outline of physics](https://en.wikipedia.org/wiki/Outline_of_physics)
+    - [WP:Portal:Physics](https://en.wikipedia.org/wiki/Portal:Physics)
+    - [YT:The Map of Physics](https://www.youtube.com/watch?v=ZihywtixUYo)
+- Sections
+    - [Modeling]({% link model.md %})
+- Every branch of physics is about constructing a model of reality (nature).
+    - Every branch is interested in different aspects of nature.
+    - Example: Mechanics is interested in motion.
+- Physics can't be separated from philosophy and mathematics.
+    - Mathematical model enables prediction.
+    - Does philosophy enable prediction?
+- Philosophy of physics
+    - The epistemology (how-do-we-know) of physics is pretty much decided.
+        - Scientific method.
+            - [WP:Scientific method](https://en.wikipedia.org/wiki/Scientific_method)
+            - [WP:Hypothetico-deductive model](https://en.wikipedia.org/wiki/Hypothetico-deductive_model)
+            - If theory and experiment disagree, experiment wins.
+                - Unless the experiment is faulty.
+        - Are there alternatives?
+    - The ontology?
+        - Something is defined by its properties?
+        - Something is defined by its behaviors (relation to others)?
+        - [WP:Intrinsic and extrinsic properties](https://en.wikipedia.org/wiki/Intrinsic_and_extrinsic_properties_(philosophy))
+    - [WP:Philosophy of physics](https://en.wikipedia.org/wiki/Philosophy_of_physics)
+    - [WP:Philosophy of science](https://en.wikipedia.org/wiki/Philosophy_of_science)
+        - [WP:Demarcation problem](https://en.wikipedia.org/wiki/Demarcation_problem): What is science? What isn't?
+- Ontology
+    - an attempt
+        - undefined terms
+            - touch
+        - A *matter* is something we can touch.
+            - The air is also a matter because we can feel it with our sense of touch.
+            - Problem: subjective definition
+                - What about people without sense of touch?
+                    - [WP:Anaphia](https://en.wikipedia.org/wiki/Anaphia)
+                    - [WP:Hypoesthesia](https://en.wikipedia.org/wiki/Hypoesthesia)
+            - Is there a definition that doesn't depend on our senses?
+                - Is such definition even possible?
+                    - Should "matter" be undefined?
+                        - Is physics about explaining our perceptions?
+            - A matter is something that exists?
+                - But how do we know that it exists if not from our senses?
+                    - Is there a teapot orbiting the sun?
+                        - [WP:Russell's teapot](https://en.wikipedia.org/wiki/Russell%27s_teapot)
+                            - How do we prove non-existence?
+                                - Do we have to?
+                                    - Yes?
+                                        - Who claims, proves.
+                                            - If you claim that someone raped you, you have to prove it.
+                                            - Problem?
+                                                - If you claim that someone has *never* raped you, you have to prove it.
+                                                    - But how?
+                                                        - Let there be three people X, Y, Z.
+                                                        - Z (probably a judge in a court) doesn't know either X or Y.
+                                                        - How does X prove, to Z, that Y has never raped X?
+                                                            - There are things that are true but unprovable?
+                                                                - Is God true but unprovable (if there is a coherent definition of "God")?
+                                                    - This can be used as a joke?
+                                                        - X: "Hey, do you know? Y has never raped me, but I can't prove it."
+                                                        - Z: "So, what are you suggesting?"
+                                                - How do we prove that Y has never transferred anything to X's bank account?
+                                                    - We assume that the bank is honest and maintains correct records.
+                                                        - Why should Z accept this assumption?
+                                                            - Should Z still accept this assumption if X owned the bank?
+                                                    - The bank record is finite.
+                                                    - Then we only need to check exhaustively whether there is anything from Y in the records.
+                                                - How do we prove that there isn't a teapot orbiting the sun?
+                                                    - We can't visit every point in space.
+                                                    - We can't exhaustive-check the entire Universe.
+                                                    - We can't.
+                                                    - But we can say that it's *implausible*.
+                                                        - Why? How?
+                                                        - What if there is really a teapot-shaped space rock orbiting the sun?
+                                            - If you claim that God exists, you have to prove it.
+                                            - If you claim that God doesn't exist, you also have to prove it.
+                                            - If you don't claim that God exists or not, then you don't have to prove anything.
+                                            - If you *believe* something, then you don't have to prove anything to others,
+                                            as long as you don't claim it before them.
+                                                - Our belief is a claim we make before ourselves.
+                                                If we can prove it, good for us.
+                                                If we can't prove it, it's our problem.
+                                                - But, spreading a belief is making a claim before others.
+                                                It has to be proven.
+    - concepts
+        - mass, acceleration, force
+            - Mass is resistance to force.
+                - Isn't this definition circular?
+                    - Force accelerates mass.
+            - Mass is the amount of matter.
+            - [WP:Mass](https://en.wikipedia.org/wiki/Mass)
+            - [WP:Matter](https://en.wikipedia.org/wiki/Matter)
+        - work
+            - Work is weight lifted through a height. (Coriolis 1826; [WP:Work](https://en.wikipedia.org/wiki/Work_(physics)))
+                - \\( F \cdot h \\) is the work done by lifting a weight \\( F \\) through a height \\( h \\).
+- Theoretical physics
+    - Unifying quantum mechanics and general relativity?
+        - Unifying quantum mechanics and special relativity
+            - [WP:Quantum electrodynamics](https://en.wikipedia.org/wiki/Quantum_electrodynamics)
+                - "is the first theory where full agreement between quantum mechanics and special relativity is achieved"
+        - Hamiltonian mechanics in Minkowski spacetime?
+    - Relativity
+        - https://brilliant.org/wiki/general-relativity-overview/
+    - Undigested
+        - [The changing concept of matter in H. Weyl's thought, 1918-1930](https://arxiv.org/abs/math/0409576)
+        - [Introducing Groups into Quantum Theory (1926 -- 1930)](https://arxiv.org/abs/math/0409571)
+        - [On the wonderfulness of Noether's theorems, 100 years later, and Routh reduction](https://arxiv.org/abs/1804.01714)
+        - concise (50-page) introduction to differential geometry for advanced undergraduate majoring in physics
+        http://physics.sharif.edu/~gr/ref/Differential%20Geometry%20in%20Physics,%20Gabriel%20Lugo,%201998%20[ebook].pdf
+        - https://people.math.ethz.ch/~salamon/PREPRINTS/diffgeo.pdf
+        - How should we learn general relativity?
+            - How should we learn differential geometry?
+                - Should we use spherical trigonometry as an introduction to differential geometry?
+        - [Bob Coecke, categorical quantum mechanics](http://www.cs.ox.ac.uk/people/bob.coecke/)
+        - [Why John von Neumann did not Like the Hilbert Space formalism of quantum mechanics (and what he liked instead)](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.35.763)
+        - What are the von Neumann--Dirac axioms?
+        - quark fusion
+            - [Scientists Accidentally Discovered Quark Fusion, Could It Be the Future of Energy?](https://www.youtube.com/watch?v=dGDiS8Dv8a8)
+    - [WP:Entropic force](https://en.wikipedia.org/wiki/Entropic_force)
+        - http://entropicai.blogspot.co.id/2017/06/fractal-optimising-first-paper.html
+    - A crystal is a repeating structure.
+        - A time crystal or space-time crystal is a structure that repeats in time, as well as in space. 
+        ([WP: Time crystal](https://en.wikipedia.org/wiki/Time_crystal))
+    - An explanation of parallel transport https://physics.stackexchange.com/a/232119
+    - Interesting idea: harnessing energy from spinning black hole ergosphere, and making a black hole bomb.
+    Penrose process.
+    [kurzgesagt video](https://www.youtube.com/watch?v=ulCdoCfw-bY)
 - Solar energy, solar cells, and energy storage
     - How do we make solar cells using common materials?
         - [acs.org: Solar cell from common materials](https://www.acs.org/content/acs/en/pressroom/newsreleases/2012/august/new-solar-panels-made-with-more-common-metals-could-be-cheaper-and-more-sustainable.html)
+    - How much does solar panel cost?
+        - How long until break-even?
+        - Is it cheaper to run on solar power?
 - Nuclear energy
     - Is there any way to convert nuclear energy into electrical energy without going through heat and turbines?
     - [Nuclear recycling](https://whatisnuclear.com/recycling.html)
-- Theory
-    - [The changing concept of matter in H. Weyl's thought, 1918-1930](https://arxiv.org/abs/math/0409576)
-    - [Introducing Groups into Quantum Theory (1926 -- 1930)](https://arxiv.org/abs/math/0409571)
-    - In Newtonian mechanics, we model a rigid object as a point mass whose position at time t is x(t).
-    - [On the wonderfulness of Noether's theorems, 100 years later, and Routh reduction](https://arxiv.org/abs/1804.01714)
-    - concise (50-page) introduction to differential geometry for advanced undergraduate majoring in physics
-    http://physics.sharif.edu/~gr/ref/Differential%20Geometry%20in%20Physics,%20Gabriel%20Lugo,%201998%20[ebook].pdf
-    - https://people.math.ethz.ch/~salamon/PREPRINTS/diffgeo.pdf
-    - How should we learn general relativity?
-        - How should we learn differential geometry?
-            - Should we use spherical trigonometry as an introduction to differential geometry?
-- [Modeling]({% link model.md %})
 - Undigested information fragments
-    - [Bob Coecke, categorical quantum mechanics](http://www.cs.ox.ac.uk/people/bob.coecke/)
-    - [Why John von Neumann did not Like the Hilbert Space formalism of quantum mechanics (and what he liked instead)](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.35.763)
-    - https://en.wikipedia.org/wiki/Entropic_force
-    - http://entropicai.blogspot.co.id/2017/06/fractal-optimising-first-paper.html
     - ECAT, LENR (low-energy nuclear reaction), cold fusion
         - http://ecat.com/
         - http://e-catworld.com/what-is-the-e-cat/
@@ -37,43 +152,37 @@ permalink: /physics.html
     - DC-powered home
         - Different sockets in addition to AC sockets.
         - http://www.mnn.com/green-tech/research-innovations/stories/the-home-of-tomorrow-will-run-on-direct-current
-    - How much does solar panel cost?
-        - How long until break-even?
-        - Is it cheaper to run on solar power?
-    - Interesting idea: harnessing energy from spinning black hole ergosphere, and making a black hole bomb.
-    Penrose process.
-    [kurzgesagt video](https://www.youtube.com/watch?v=ulCdoCfw-bY)
     - Given a bomb power in kiloton TNT, find the detonation altitude that maximizes destruction.
     See the blast curve.
         - [WP: Blast damage](https://en.wikipedia.org/wiki/Effects_of_nuclear_explosions#Blast_damage)
         - [WP: Blast curve](https://en.wikipedia.org/wiki/File:Blastcurves_psi.svg)
         - [WP:NUKEMAP](https://en.wikipedia.org/wiki/NUKEMAP)
-    - why reinforce concrete: three types of stresses (tensile, compressive, shear)
-    https://www.youtube.com/watch?v=cZINeaDjisY
-    - A crystal is a repeating structure.
-        - A time crystal or space-time crystal is a structure that repeats in time, as well as in space. 
-        ([WP: Time crystal](https://en.wikipedia.org/wiki/Time_crystal))
-    - An explanation of parallel transport https://physics.stackexchange.com/a/232119
-    - jellyfish for polariton lasers [Jellyfish Lasers Are Revolutionizing Quantum Physics](https://www.youtube.com/watch?v=OpVvR6pa7g8)
-    - [WP: rockoon](https://en.wikipedia.org/wiki/Rockoon) (rocket-balloon)
-    - [Gil Kalai is skeptical about quantum computers](https://www.quantamagazine.org/gil-kalais-argument-against-quantum-computers-20180207/)
-    - This is not an introduction to computational chemistry:
-    [A Guide to Molecular Mechanics and Quantum Chemical Calculations, 2003, Warren J. Hehre](https://www.wavefun.com/support/AGuidetoMM.pdf)
-    - [How to save 51 billion lives for 68 cents with simple Engineering](https://www.youtube.com/watch?v=Qf-D1Upn-KU)
-        - Some constraints are good for creativity.
-    - Isotope vs nuclide https://en.m.wikipedia.org/wiki/Isotope
-    - [This Massive Asteroid Is Headed for Earth…. What Now?](https://www.youtube.com/watch?v=yL7EEXg2niU)
-- Unifying quantum mechanics and general relativity?
-    - Unifying quantum mechanics and special relativity
-        - [WP:Quantum electrodynamics](https://en.wikipedia.org/wiki/Quantum_electrodynamics)
-            - "is the first theory where full agreement between quantum mechanics and special relativity is achieved"
-    - Hamiltonian mechanics in Minkowski spacetime?
-- [Scientists Accidentally Discovered Quark Fusion, Could It Be the Future of Energy?](https://www.youtube.com/watch?v=dGDiS8Dv8a8)
-    - quark fusion
-- What are the von Neumann--Dirac axioms?
-- [Photonic Chips Will Change Computing Forever... If We Can Get Them Right](https://www.youtube.com/watch?v=rUMx1Rmijzc)
+    - computers
+        - [Gil Kalai is skeptical about quantum computers](https://www.quantamagazine.org/gil-kalais-argument-against-quantum-computers-20180207/)
+        - [Photonic Chips Will Change Computing Forever... If We Can Get Them Right](https://www.youtube.com/watch?v=rUMx1Rmijzc)
+    - lasers
+        - jellyfish for polariton lasers [Jellyfish Lasers Are Revolutionizing Quantum Physics](https://www.youtube.com/watch?v=OpVvR6pa7g8)
+    - chemistry
+        - This is not an introduction to computational chemistry:
+        [A Guide to Molecular Mechanics and Quantum Chemical Calculations, 2003, Warren J. Hehre](https://www.wavefun.com/support/AGuidetoMM.pdf)
+    - nuclear
+        - Isotope vs nuclide https://en.m.wikipedia.org/wiki/Isotope
 - [Will We Ever Time Travel? Scientists Say ‘No’ Based on This New Discovery](https://www.youtube.com/watch?v=8LHhpPtRMmU)
     - This youtube video title needs to be declickbaited. What new discovery?
-- How big is a rocket?
-    - The F-1 engine of Saturn V rocket burns 3,000 kg of fuel every second. https://www.thevintagenews.com/2018/04/03/jeff-bezos/
-    - It looks like a flying skyscraper?
+- engineering
+    - [How to save 51 billion lives for 68 cents with simple Engineering](https://www.youtube.com/watch?v=Qf-D1Upn-KU)
+        - Some constraints are good for creativity.
+- space
+    - How big is a rocket?
+        - The F-1 engine of Saturn V rocket burns 3,000 kg of fuel every second. https://www.thevintagenews.com/2018/04/03/jeff-bezos/
+        - It looks like a flying skyscraper?
+    - [This Massive Asteroid Is Headed for Earth…. What Now?](https://www.youtube.com/watch?v=yL7EEXg2niU)
+    - [WP: rockoon](https://en.wikipedia.org/wiki/Rockoon) (rocket-balloon)
+- [YT:minutephysics user](https://www.youtube.com/user/minutephysics/videos)
+- [YT:GraduatePhysics channel](https://www.youtube.com/channel/UC1jsSfjt8MPRqK254HV1i9Q/videos)
+- [YT:CrashCourse Physics playlist for AP Physics 1 and 2](https://www.youtube.com/playlist?list=PL8dPuuaLjXtN0ge7yDk_UA0ldZJdhwkoV)
+- [YT:For the Love of Physics - Walter Lewin - May 16, 2011](https://www.youtube.com/watch?v=sJG-rXBbmCc)
+    - around 35:40
+        - Cloud is white due to Mie scattering.
+        - Sky is blue due to Rayleigh scattering.
+        - Scattering depends on particle size.

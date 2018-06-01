@@ -9,6 +9,11 @@ permalink: /compsci.html
 - Functional programming research
     - [Haskell]({% link haskell.md %})
     - [Coq]({% link coq.md %})
+        - Also consider [Lean](https://leanprover.github.io/).
+            - Pros of Lean
+                - Integrates with Visual Studio Code
+            - Cons of Lean
+                - Less mature than Coq
 - [Software engineering]({% link softeng.md %})
     - [Programming]({% link programming.md %})
     - [PlayStation]({% link ps1.md %})
@@ -91,3 +96,5 @@ permalink: /compsci.html
     - https://en.wikipedia.org/wiki/Shadow_IT
     - https://community.atlassian.com/t5/Confluence-questions/Best-practice-Using-confluence-and-other-systems-like-yammer/qaq-p/323867
 - [Kruna Ratkovic, "Notion of Strong Monad in Computing"](https://www.researchgate.net/profile/Kruna_Ratkovic/publication/323426688_Notion_of_Strong_Monad_in_Computing/links/5a958819a6fdccecff090883/Notion-of-Strong-Monad-in-Computing.pdf)
+- [YT:Current State of Quantum Computing - Computerphile](https://www.youtube.com/watch?v=PN7mPYcWFKg)
+    - 2018, industry practitioner interview

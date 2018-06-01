@@ -44,15 +44,21 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
             - [when you hear the word "walk"](https://www.youtube.com/watch?v=djRfAQfT9E4)
             - fat shibes from [Rapid Liquid: part IV - don't nom cat food](https://www.youtube.com/watch?v=qe8b9gfuwME)
     - [anatomically correct Spiderman](https://www.youtube.com/watch?v=Yc5SfuIb_eM), absurd
-    - absurdist comedy
-        - Family Guy
-            - Peter tries Red Bull https://en.wikipedia.org/wiki/New_Kidney_in_Town
-        - Spongebob
-            - Spongebob and Patrick babysit a clam http://spongebob.wikia.com/wiki/Rock-a-Bye_Bivalve
-            - Squidward takes a day off http://spongebob.wikia.com/wiki/Squid%27s_Day_Off
-            - Man Ray tries to return Patrick's wallet http://spongebob.wikia.com/wiki/Mermaid_Man_and_Barnacle_Boy_III
+    - absurd comedy
         - ["What's worse than a rapist? Boom. A child. No, a child rapist."](https://www.youtube.com/watch?v=L0a5iwzG7aw)
         - [Whitest Kids U' Know - Kid Beer (HQ)](http://www.dailymotion.com/video/x2x897x)
+        - absurd animation
+            - Family Guy
+                - Peter tries Red Bull https://en.wikipedia.org/wiki/New_Kidney_in_Town
+            - Spongebob
+                - Spongebob and Patrick babysit a clam http://spongebob.wikia.com/wiki/Rock-a-Bye_Bivalve
+                - Squidward takes a day off http://spongebob.wikia.com/wiki/Squid%27s_Day_Off
+                - Man Ray tries to return Patrick's wallet http://spongebob.wikia.com/wiki/Mermaid_Man_and_Barnacle_Boy_III
+            - absurd anime
+                - Hokuto no ken (Fist of the north star)
+                    - [kenshiro vs tank](https://www.youtube.com/watch?v=-_ZeD40Rg8A)
+                    - [kenshiro vs hulk hogan](https://www.youtube.com/watch?v=mjj5XejutCE)
+                - [Holy Muscle Revolution!!](https://www.youtube.com/watch?v=zZ1nSaJKL_c)
     - Steve Harvey's laughter ([Wikidata: Steve Harvey](https://www.wikidata.org/wiki/Q2347009))
         - [my brother doesn't share his girlfriend](https://www.youtube.com/watch?v=nCSx2BWGBNM)
             - 0:26--0:38: Steve Harvey laughing: "Jack doesn't share her with me"
@@ -161,3 +167,7 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
         - "From Beijing with love", parody of James Bond ([WP](https://en.wikipedia.org/wiki/From_Beijing_with_Love))
         - Shaolin Popey ([WP](https://en.wikipedia.org/wiki/Shaolin_Popey))
 - [Fat cat attempts to roll over](https://www.youtube.com/watch?v=F82oaNGsD24)
+- [How wrestler Rhythm Heaven should be played](https://www.youtube.com/watch?v=SpsezVsd0No)
+    - [【みんなのリズム天国】ブロリー会見（レスラー会見）](https://www.youtube.com/watch?v=GTdyWN_XCrM)
+        - "Minna-no rizumu tengoku"
+- [This Chinese mother’s smart way to avoid paying via Face ID on iPhone X](https://www.youtube.com/watch?v=oQwwG_BCWsc)

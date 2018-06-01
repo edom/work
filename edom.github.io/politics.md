@@ -109,3 +109,16 @@ permalink: /politics.html
     - If your death would ruin your family, should you have a family?
 - Data source for salaries of various positions in the US: Foreign labor certification wage library
     - In the US, salary isn't secret, especially if you're a foreigner.
+- No matter how evil or stupid politicians may seem, they do it with a reason?
+    - Which makes it worse?
+        - They're evil on purpose?
+    - How do politicians reason?
+        - Keep it simple?
+            - If politicians are honest:
+                - They represent their voters.
+                    - They reflect the people who vote for them.
+- [WP:Politician](https://en.wikipedia.org/wiki/Politician)
+- [WP:Politics](https://en.wikipedia.org/wiki/Politics)
+- [YT:Putin on ideology - difference between Americans and Russians](https://www.youtube.com/watch?v=3JVR0zAiyw0),
+American individualisn, Russian collectivism
+- [Quora:Is there one website to daily summarize everything that is going on in Washington?](https://www.quora.com/Is-there-one-website-to-daily-summarize-everything-that-is-going-on-in-Washington)

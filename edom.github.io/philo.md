@@ -48,3 +48,5 @@ permalink: /philo.html
     - [WP:Porphyrian tree](https://en.wikipedia.org/wiki/Porphyrian_tree)
         - [Ontology in Computer Science](https://link.springer.com/chapter/10.1007/978-1-84628-710-7_2)
 - What is the difference between data, information, belief, knowledge, wisdom?
+- [HSM SE 2608: Why and when did some areas separate themselves from philosophy and some not?](https://hsm.stackexchange.com/questions/2608/why-and-when-did-some-areas-separate-themselves-from-philosophy-and-some-not)
+    - [When Did Science and Philosophy Separate Into Different Fields of Study?](http://www.slate.com/blogs/quora/2014/12/17/when_did_science_and_philosophy_separate_into_different_fields_of_study.html)

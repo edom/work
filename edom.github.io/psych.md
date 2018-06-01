@@ -37,3 +37,16 @@ date: 2018-05-24 02:52 +0700
 - How the Nazis might have made the German people accept Nazism
     - https://en.wikipedia.org/wiki/The_Wave_%282008_film%29
     - https://en.wikipedia.org/wiki/The_Third_Wave_(experiment)
+- Why do people kill?
+    - Anger? Envy? Hatred?
+- Why do people rape?
+    - Is it about beauty?
+        - No?
+            - There are ugly people who get raped.
+            - There are beautiful people who don't get raped.
+    - Is it about getting satisfaction from unconsenting victim?
+    - Is rape a power trip?
+    - Is there any relationship between grandiosity and rape?
+- Why do people commit crimes?
+    - Do they know the penalties?
+        - If yes, why do they still commit crimes?

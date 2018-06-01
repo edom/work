@@ -4,7 +4,8 @@ date: 2017-05-20 00:00:00 +0700
 ---
 
 - This is my public personal wiki.
-    - Mostly my notes and brain dumps.
+    - Summaries of everything I learn.
+    - Links to things I think I should read but haven't.
 - Disclaimers
     - *This website may contain mistakes.*
         - Use with caution.
@@ -15,6 +16,8 @@ date: 2017-05-20 00:00:00 +0700
     - Follow the links that interest you:
         - [Intelligence]({% link intelligence.md %})
         - [Computer science]({% link compsci.md %})
+            - [WP:Computer science](https://en.wikipedia.org/wiki/Computer_science)
+            - [YT:Map of Computer Science](https://www.youtube.com/watch?v=SzJ46YA_RaA)
             - [Computation]({% link computation.md %})
             - [Computational complexity]({% link complexity.md %})
                 - [Trying to prove P neq. NP]({% link pnptry.md %})
@@ -25,6 +28,8 @@ date: 2017-05-20 00:00:00 +0700
             - Civil engineering
                 - [How Do Sinkholes Form?](https://www.youtube.com/watch?v=e-DVIQPqS8E)
                     - Internal erosion, piping, etc.
+                - why reinforce concrete: three types of stresses (tensile, compressive, shear)
+                https://www.youtube.com/watch?v=cZINeaDjisY
                 - Architecture
                     - [YT:Open office is overrated](https://www.youtube.com/watch?v=-p6WWRarjNs)
             - [Astronomy]({% link astro.md %})
@@ -63,6 +68,7 @@ date: 2017-05-20 00:00:00 +0700
             - [Economics]({% link economics.md %})
             - [Capitalism]({% link capitalism.md %})
             - [Finance]({% link finance.md %})
+            - Which is more fundamental, economics or finance? Which is built on which?
         - [Government]({% link government.md %})
             - [Politics]({% link politics.md %})
                 - [Politik Indonesia]({% link politik.md %})
