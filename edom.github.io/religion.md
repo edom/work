@@ -13,6 +13,7 @@ date: 2017-05-19 03:47:00 +0700
     - [WP:Manifest destiny](https://en.wikipedia.org/wiki/Manifest_destiny)
     - [WP:Crusades](https://en.wikipedia.org/wiki/Crusades)
     - [WP:Simony](https://en.wikipedia.org/wiki/Simony)
+    - [WP:Parody religion](https://en.wikipedia.org/wiki/Parody_religion)
 - Lists
     - [WP:The bad popes](https://en.wikipedia.org/wiki/The_Bad_Popes)
     - [Quora: Who was the most corrupt pope in the history of Catholicism?](https://www.quora.com/Who-was-the-most-corrupt-pope-in-the-history-of-Catholicism)

@@ -5,26 +5,21 @@ permalink: /physics.html
 mathjax: yes
 ---
 
-- Overview
-    - [WP:Physics](https://en.wikipedia.org/wiki/Physics)
-    - [WP:Outline of physics](https://en.wikipedia.org/wiki/Outline_of_physics)
-    - [WP:Portal:Physics](https://en.wikipedia.org/wiki/Portal:Physics)
-    - [YT:The Map of Physics](https://www.youtube.com/watch?v=ZihywtixUYo)
 - Sections
     - [Modeling]({% link model.md %})
-- Every branch of physics is about constructing a model of reality (nature).
-    - Every branch is interested in different aspects of nature.
-    - Example: Mechanics is interested in motion.
+- In the 21st century
+    - Every branch of physics is about constructing a mathematical model of nature.
+        - Every branch is interested in different aspects of nature.
+            - Example: Mechanics is interested in motion.
 - Physics can't be separated from philosophy and mathematics.
     - Mathematical model enables prediction.
-    - Does philosophy enable prediction?
+    - What does philosophy enable?
 - Philosophy of physics
-    - The epistemology (how-do-we-know) of physics is pretty much decided.
-        - Scientific method.
-            - [WP:Scientific method](https://en.wikipedia.org/wiki/Scientific_method)
-            - [WP:Hypothetico-deductive model](https://en.wikipedia.org/wiki/Hypothetico-deductive_model)
-            - If theory and experiment disagree, experiment wins.
-                - Unless the experiment is faulty.
+    - The epistemology (how-do-we-know) of physics is the scientific method.
+        - [WP:Scientific method](https://en.wikipedia.org/wiki/Scientific_method)
+        - [WP:Hypothetico-deductive model](https://en.wikipedia.org/wiki/Hypothetico-deductive_model)
+        - If theory and experiment disagree, experiment wins.
+            - Unless the experiment is faulty.
         - Are there alternatives?
     - The ontology?
         - Something is defined by its properties?
@@ -33,6 +28,8 @@ mathjax: yes
     - [WP:Philosophy of physics](https://en.wikipedia.org/wiki/Philosophy_of_physics)
     - [WP:Philosophy of science](https://en.wikipedia.org/wiki/Philosophy_of_science)
         - [WP:Demarcation problem](https://en.wikipedia.org/wiki/Demarcation_problem): What is science? What isn't?
+- Newton's insight
+    - Both the apple and the moon fall toward the Earth *in the same way* (due to the same cause: "gravity").
 - Ontology
     - an attempt
         - undefined terms
@@ -80,6 +77,12 @@ mathjax: yes
                                                     - But we can say that it's *implausible*.
                                                         - Why? How?
                                                         - What if there is really a teapot-shaped space rock orbiting the sun?
+                                                - How do you prove that two people have never met before?
+                                                - How to prove libel?
+                                                    - Suppose:
+                                                        - X did rape Y.
+                                                        - Y claims that X raped Y, but can't prove it.
+                                                    - Then can X countersue Y with libel?
                                             - If you claim that God exists, you have to prove it.
                                             - If you claim that God doesn't exist, you also have to prove it.
                                             - If you don't claim that God exists or not, then you don't have to prove anything.
@@ -167,8 +170,6 @@ mathjax: yes
         [A Guide to Molecular Mechanics and Quantum Chemical Calculations, 2003, Warren J. Hehre](https://www.wavefun.com/support/AGuidetoMM.pdf)
     - nuclear
         - Isotope vs nuclide https://en.m.wikipedia.org/wiki/Isotope
-- [Will We Ever Time Travel? Scientists Say ‘No’ Based on This New Discovery](https://www.youtube.com/watch?v=8LHhpPtRMmU)
-    - This youtube video title needs to be declickbaited. What new discovery?
 - engineering
     - [How to save 51 billion lives for 68 cents with simple Engineering](https://www.youtube.com/watch?v=Qf-D1Upn-KU)
         - Some constraints are good for creativity.
@@ -178,11 +179,19 @@ mathjax: yes
         - It looks like a flying skyscraper?
     - [This Massive Asteroid Is Headed for Earth…. What Now?](https://www.youtube.com/watch?v=yL7EEXg2niU)
     - [WP: rockoon](https://en.wikipedia.org/wiki/Rockoon) (rocket-balloon)
-- [YT:minutephysics user](https://www.youtube.com/user/minutephysics/videos)
-- [YT:GraduatePhysics channel](https://www.youtube.com/channel/UC1jsSfjt8MPRqK254HV1i9Q/videos)
-- [YT:CrashCourse Physics playlist for AP Physics 1 and 2](https://www.youtube.com/playlist?list=PL8dPuuaLjXtN0ge7yDk_UA0ldZJdhwkoV)
-- [YT:For the Love of Physics - Walter Lewin - May 16, 2011](https://www.youtube.com/watch?v=sJG-rXBbmCc)
-    - around 35:40
-        - Cloud is white due to Mie scattering.
-        - Sky is blue due to Rayleigh scattering.
-        - Scattering depends on particle size.
+- Other external resources
+    - Overview
+        - [WP:Physics](https://en.wikipedia.org/wiki/Physics)
+        - [WP:Outline of physics](https://en.wikipedia.org/wiki/Outline_of_physics)
+        - [WP:Portal:Physics](https://en.wikipedia.org/wiki/Portal:Physics)
+        - [YT:The Map of Physics](https://www.youtube.com/watch?v=ZihywtixUYo)
+    - [YT:minutephysics user](https://www.youtube.com/user/minutephysics/videos)
+    - [YT:GraduatePhysics channel](https://www.youtube.com/channel/UC1jsSfjt8MPRqK254HV1i9Q/videos)
+    - [YT:CrashCourse Physics playlist for AP Physics 1 and 2](https://www.youtube.com/playlist?list=PL8dPuuaLjXtN0ge7yDk_UA0ldZJdhwkoV)
+    - [YT:For the Love of Physics - Walter Lewin - May 16, 2011](https://www.youtube.com/watch?v=sJG-rXBbmCc)
+        - around 35:40
+            - Cloud is white due to Mie scattering.
+            - Sky is blue due to Rayleigh scattering.
+            - Scattering depends on particle size.
+    - [Will We Ever Time Travel? Scientists Say ‘No’ Based on This New Discovery](https://www.youtube.com/watch?v=8LHhpPtRMmU)
+        - This youtube video title needs to be declickbaited. What new discovery?

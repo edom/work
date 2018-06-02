@@ -43,6 +43,7 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
         - Rapid Liquid, shibes
             - [when you hear the word "walk"](https://www.youtube.com/watch?v=djRfAQfT9E4)
             - fat shibes from [Rapid Liquid: part IV - don't nom cat food](https://www.youtube.com/watch?v=qe8b9gfuwME)
+        - [thicc shibe being petted vigorously](https://www.youtube.com/watch?v=FLZZlHUNd_I)
     - [anatomically correct Spiderman](https://www.youtube.com/watch?v=Yc5SfuIb_eM), absurd
     - absurd comedy
         - ["What's worse than a rapist? Boom. A child. No, a child rapist."](https://www.youtube.com/watch?v=L0a5iwzG7aw)
@@ -58,7 +59,13 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
                 - Hokuto no ken (Fist of the north star)
                     - [kenshiro vs tank](https://www.youtube.com/watch?v=-_ZeD40Rg8A)
                     - [kenshiro vs hulk hogan](https://www.youtube.com/watch?v=mjj5XejutCE)
+                    - [Here's where I stop - Hokuto no Ken 2](https://www.youtube.com/watch?v=HGKyPXZOQIc)
+                    - [Fist of the North Star: Greatest Moments - Kenshiro vs Han](https://www.youtube.com/watch?v=3Gr8Qvczrvc)
                 - [Holy Muscle Revolution!!](https://www.youtube.com/watch?v=zZ1nSaJKL_c)
+                - nichijou
+                    - [Nichijou - Mio Loses It](https://www.youtube.com/watch?v=z30Y572EmCk)
+                    - [Nichijou - Principal v. Deer](https://www.youtube.com/watch?v=Z7Et0a8fnuw)
+                - gintama
     - Steve Harvey's laughter ([Wikidata: Steve Harvey](https://www.wikidata.org/wiki/Q2347009))
         - [my brother doesn't share his girlfriend](https://www.youtube.com/watch?v=nCSx2BWGBNM)
             - 0:26--0:38: Steve Harvey laughing: "Jack doesn't share her with me"

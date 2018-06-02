@@ -125,3 +125,8 @@ mathjax: yes
     - I think we can go a long way by presenting every knowledge in "X is a Y" form.
     Something is almost always something else.
     Everything is almost always similar to something else.
+- Real numbers
+    - Between two real numbers, there exists real numbers.
+        - \\( \forall a, z \in \Real; a < z : \\)
+            - \\( \exists m \in \Real : a < m < z \\)
+    - [WP:Real number](https://en.wikipedia.org/wiki/Real_number)

@@ -186,3 +186,13 @@ date: 2018-05-17 01:21 +0700
         - https://en.wikipedia.org/wiki/Magick_(Thelema)
         - https://en.wikipedia.org/wiki/Occult
         - https://en.wikipedia.org/wiki/Mysticism
+        - https://en.wikipedia.org/wiki/Natural_magic
+    - Websites that I have glanced and I deem to have no content
+        - Problems
+            - unclear proposition for the reader in a hurry
+            - doesn't make any prediction or explanation
+            - doesn't even bother to understand existing science
+        - from Google search "scientific method occult"
+            - http://occultsciences.org/
+            - https://www.occultphysics.com/
+                - selling a book

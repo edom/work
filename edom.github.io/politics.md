@@ -117,8 +117,12 @@ permalink: /politics.html
             - If politicians are honest:
                 - They represent their voters.
                     - They reflect the people who vote for them.
+    - Is [WP:Hanlon's razor](https://en.wikipedia.org/wiki/Hanlon%27s_razor) applicable?
 - [WP:Politician](https://en.wikipedia.org/wiki/Politician)
 - [WP:Politics](https://en.wikipedia.org/wiki/Politics)
 - [YT:Putin on ideology - difference between Americans and Russians](https://www.youtube.com/watch?v=3JVR0zAiyw0),
 American individualisn, Russian collectivism
 - [Quora:Is there one website to daily summarize everything that is going on in Washington?](https://www.quora.com/Is-there-one-website-to-daily-summarize-everything-that-is-going-on-in-Washington)
+- I don't always agree with these, but these have some useful things.
+    - [Richard Stallman's personal site](https://stallman.org/)
+        - What's bad about X (company)?

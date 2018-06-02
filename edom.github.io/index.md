@@ -38,19 +38,27 @@ date: 2017-05-20 00:00:00 +0700
         - [Art]({% link art.md %})
             - [Music]({% link music.md %})
             - [Acting]({% link act.md %})
-        - Self-care, grooming, styling, living:
-            - [Clothing]({% link cloth.md %})
-            - [Mouth care]({% link mouth.md %})
-            - [WP:Hairstyles](https://en.wikipedia.org/wiki/List_of_hairstyles)
-            - [Eating]({% link eat.md %})
-                - [How to cook eggs]({% link egg.md %})
-            - [Walking]({% link walk.md %})
-                - Which muscles are atrophied by prolonged sitting?
-                - How to know if a muscle is short/tight or weak?
+        - Self-care, living in the 21st century:
+            - Grooming, styling:
+                - [Clothing]({% link cloth.md %})
+                - [WP:Hairstyles](https://en.wikipedia.org/wiki/List_of_hairstyles)
+            - Health, fitness
+                - [Mouth care]({% link mouth.md %})
+                - [Eating]({% link eat.md %})
+                    - [How to cook eggs]({% link egg.md %})
+                - [Walking]({% link walk.md %})
+                    - Which muscles are atrophied by prolonged sitting?
+                    - How to know if a muscle is short/tight or weak?
+                - [WP:Strength training](https://en.wikipedia.org/wiki/Strength_training)
+                    - [WP:Weight training](https://en.wikipedia.org/wiki/Weight_training)
+                        - [WP:One-repetition maximum](https://en.wikipedia.org/wiki/One-repetition_maximum)
             - [Fighting]({% link fight.md %})
+            - [Buying a smartphone]({% link phone.md %})
+                - [Android vs iPhone]({% link andvsiph.md %})
             - [WP:List of human habitation forms](https://en.wikipedia.org/wiki/List_of_human_habitation_forms)
         - [Philosophy]({% link philo.md %})
             - [What kind of world are we living in?]({% link world.md %})
+            - [Law]({% link law.md %})
             - [Meta-research]({% link meta_research.md %})
                 - [Information architecture]({% link infarch.md %})
                 - [Writing]({% link writing.md %})
@@ -63,16 +71,16 @@ date: 2017-05-20 00:00:00 +0700
             - [Long-haired men]({% link longhair.md %})
             - Does everything fall under philosophy?
                 - How do we prevent this category from becoming a kitchen sink?
+            - [Government]({% link government.md %})
+                - [Politics]({% link politics.md %})
+                    - [Politik Indonesia]({% link politik.md %})
+                - [Jakarta]({% link jakarta.md %})
         - [Biology]({% link biology.md %})
         - Money-related
             - [Economics]({% link economics.md %})
             - [Capitalism]({% link capitalism.md %})
             - [Finance]({% link finance.md %})
             - Which is more fundamental, economics or finance? Which is built on which?
-        - [Government]({% link government.md %})
-            - [Politics]({% link politics.md %})
-                - [Politik Indonesia]({% link politik.md %})
-            - [Jakarta]({% link jakarta.md %})
         - [Psychology]({% link psych.md %})
         - [Magick]({% link magick.md %})
             - [Magick experiments]({% link magexp.md %})

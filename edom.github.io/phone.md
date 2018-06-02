@@ -1,0 +1,46 @@
+---
+title: Buying a smartphone
+date: 2018-06-03 03:40 +0700
+permalink: /phone.html
+---
+
+- If you want to buy an *Android phone*, which one should you buy?
+    - Buy a phone that
+        - is used (not new)
+        - has external SD card
+        - was originally sold by manufacturer, not carrier
+            - is not carrier-locked
+                - [WP:SIM lock](https://en.wikipedia.org/wiki/SIM_lock)
+                - [WP:Razor and blades model](https://en.wikipedia.org/wiki/Razor_and_blades_model)
+        - from a trusted person you know personally (family, friend, coworker)
+    - then factory-reset it.
+    - Which company's phone?
+        - A Google Android phone has Google's crap.
+        - A Samsung Android phone has Samsung's crap *plus* Google's crap.
+        - An X Android phone has X's crap *plus* Google's crap.
+        - 2014 [New Android OEM licensing terms leak; "Open" comes with a lot of restrictions](https://arstechnica.com/gadgets/2014/02/new-android-oem-licensing-terms-leak-open-comes-with-restrictions/)
+        - [androidforums.com: What smartphone has the least amount of or no bloatware?](https://androidforums.com/threads/what-smartphone-has-the-least-amount-of-or-no-bloatware.1026100/)
+    - [SO 13159494: Should I be concerned with flash memory write cycles resource limits?](https://stackoverflow.com/questions/13159494/should-i-be-concerned-with-flash-memory-write-cycles-resource-limits) Likely no.
+- Alternatives to Android?
+    - forks (I don't know how usable)
+        - [WP:Replicant](https://en.wikipedia.org/wiki/Replicant_(operating_system))
+        - [WP:List of open-source mobile phones](https://en.wikipedia.org/wiki/List_of_open-source_mobile_phones)
+    - It's hard to start an alternative.
+        - user first or developer first?
+            - [WP:Catch-22](https://en.wikipedia.org/wiki/Catch-22_(logic))
+            - [WP:Chicken or the egg](https://en.wikipedia.org/wiki/Chicken_or_the_egg)
+        - [WP:Network effect](https://en.wikipedia.org/wiki/Network_effect)
+        - [WP:Barriers to entry](https://en.wikipedia.org/wiki/Barriers_to_entry)
+        - Who has a [WP:war chest](https://en.wikipedia.org/wiki/War_chest) that can match Google's?
+    - if you don't need software compatibility
+        - feature phones?
+        - Ubuntu Phone?
+        - Apple iPhone
+        - Microsoft Windows Phone?
+- Backdoors?
+    - Need corroboration. Truth unknown.
+    - I don't know whether these sources are true.
+    - [WP:Hardware backdoor](https://en.wikipedia.org/wiki/Hardware_backdoor)
+    - 2017, [bleepingcomputer.com: Chinese Backdoor Still Active on Many Android Devices](https://www.bleepingcomputer.com/news/security/chinese-backdoor-still-active-on-many-android-devices/)
+    - 2013, [zerohedge.com: NSA Has Full "Back Door" Access To iPhone, BlackBerry And Android Smartphones, Documents Reveal](https://www.zerohedge.com/news/2013-09-08/nsa-has-full-back-door-access-iphone-blackberry-and-android-smartphones-documents-re)
+    - 2015, [wired.com: Cops don't need a crypto backdoor to get into your iphone](https://www.wired.com/2015/10/cops-dont-need-encryption-backdoor-to-hack-iphones/)

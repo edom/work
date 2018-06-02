@@ -22,22 +22,30 @@ mathjax: yes
         - [The quantum N-body problem](https://aip.scitation.org/doi/10.1063/1.533319)
     - What is the difference between variable and parameter?
     - How many parameters do we need to model a system?
-    - Discrete Newtonian snapshot (N-body problem)
+    - Discrete Newtonian kinematical model
         - A *system at time \\( t \\)* is a set of particles <span>\( \{ 1, \ldots, n \} \)</span>.
             - Time is a real number: \\( t \in \Real \\).
             - The number of particle is constant \\( n \in \Nat \\).
             - For each particle \\( k \\):
-                - It has *mass* \\( m_k \in \Real \\).
                 - It has *position* \\( x_k \in \Real^3 \\).
+                - Simplifying assumptions
+                    - particle
+                        - It is a point.
+                            - It doesn't occupy any space.
+                        - Its mass is not modeled.
+                    - Time is global and absolute (the same everywhere).
+    - Discrete Newtonian dynamical model (N-body problem) extends discrete Newtonian kinematical model.
+        - A *system at time \\( t \\)* is all that above, plus:
+            - For each particle \\( k \\):
+                - It has *mass* \\( m_k \in \Real \\).
+                - It has *resultant force* \\( F_k \\) acting on it.
                 - Simplifying assumptions about the particle
-                    - It is a point.
-                        - It doesn't occupy any space.
                     - It is rigid.
                         - It doesn't deform.
                         - It doesn't break.
-                        - It doesn't merge with other particles.
-                        - It doesn't collide with other particles.
-                        - Its mass is constant.
+                    - Its mass is constant.
+                    - It don't interact with other particles.
+                        - Particles don't merge or collide.
     - [WP:Continuum mechanics](https://en.wikipedia.org/wiki/Continuum_mechanics)
     - Skippable philosophical issues?
         - Does "the same particle at different times" make sense?

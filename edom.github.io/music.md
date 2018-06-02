@@ -45,3 +45,9 @@ date: 2016-03-27 14:14:08 +0700
 - http://www.aaronbonneau.com/7-things-japanese-music-does-better/
 - [Where Nokia’s Ringtone Originally Came From](https://www.youtube.com/watch?v=B5FaG6dgAxc)
     - Francisco Tárrega's "Gran Vals"
+- [WP:Chekhov's gun](https://en.wikipedia.org/wiki/Chekhov%27s_gun) applied to orchestration
+    - If you ask for an instrument, you have to use it.
+        - If it doesn't contribute meaningfully to the music, it's better left out.
+- The more person is in a band, the less everyone works.
+    - Also, more scheduling difficulties.
+    - The ideal band size is less than 5 people?

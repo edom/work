@@ -4,29 +4,69 @@ date: 2018-05-25 00:00 +0700
 permalink: /philo.html
 ---
 
-- Epistemology is a branch of philosophy that deals with the question "How do we know that we know?"
+- Some branches of philosophy
+    - Epistemology (how do we know?)
+    - Ontology (what exists?)
+    - Ethics (morality; what should be?)
+- Epistemology
     - There are two kinds of knowledge: *prior* and *posterior*.
         - Prior (before-the-fact) knowledge is obtained by inferring theorems from axioms through the rules of logic.
         - Posterior (after-the-fact) knowledge is obtained by observation from the real world through the physical senses.
     - [WP:a priori and a posteriori](https://en.wikipedia.org/wiki/A_priori_and_a_posteriori)
+    - [WP:Epistemology](https://en.wikipedia.org/wiki/Epistemology)
+    - [WP:Empiricism](https://en.wikipedia.org/wiki/Empiricism)
+    - [WP:Experimentalism](https://en.wikipedia.org/wiki/Experimentalism)
+    - [WP:Occam's razor](https://en.wikipedia.org/wiki/Occam%27s_razor)
+- Ontology
+    - Measurabilism
+        - A thing exists if and only if it can be measured.
+        - [WP:Mike Alder, Newton's flaming laser sword](https://en.wikipedia.org/wiki/Mike_Alder#Newton.27s_flaming_laser_sword)
+            - "What cannot be settled by experiment is not worth debating."
+    - [WP:Ontology](https://en.wikipedia.org/wiki/Ontology)
 - Thoughts
     - If our past is better than our present, then we have failed.
-- https://philosophy.stackexchange.com/questions/21292/do-some-continental-philosophers-deliberately-obfuscate-their-writing-why
-- https://www.whatisitliketobeaphilosopher.com/
-    - Biographical interviews.
+- How to study philosophy without wasting time?
+    - [Phil. SE 21292: Do some continental philosophers deliberately obfuscate their writing? Why?](https://philosophy.stackexchange.com/questions/21292/do-some-continental-philosophers-deliberately-obfuscate-their-writing-why)
+    - [WP:Pseudophilosophy](https://en.wikipedia.org/wiki/Pseudophilosophy)
+    - [WP:Sophist](https://en.wikipedia.org/wiki/Sophist)
+    - philosophy vs science
+        - [HSM SE 2608: Why and when did some areas separate themselves from philosophy and some not?](https://hsm.stackexchange.com/questions/2608/why-and-when-did-some-areas-separate-themselves-from-philosophy-and-some-not)
+            - [When Did Science and Philosophy Separate Into Different Fields of Study?](http://www.slate.com/blogs/quora/2014/12/17/when_did_science_and_philosophy_separate_into_different_fields_of_study.html)
+                - [Quora: Where and why did scientists and philosophers branch out, and what is the significance of philosophy in the field of science?](https://www.quora.com/Where-and-why-did-scientists-and-philosophers-branch-out-and-what-is-the-significance-of-philosophy-in-the-field-of-science)
+        - [Quora: Why are the sciences separate from philosophy?](https://www.quora.com/Why-are-the-sciences-separate-from-philosophy)
 - Ungrouped
     - What is the difference: egoism, egotism, individualism?
-- Ethics (the study of morality)
+- Ethics
     - question group
         - Is it good to force someone to do something even if such forcing makes the world better off?
         - Is it good to make a few people worse off to make many people better off?
         - Which should we value more: individual liberty or collective good?
+    - [test your morality online](http://www.philosophyexperiments.com/)
+        - [test your moral parsimony](http://www.philosophyexperiments.com/moralityplay/)
+    - For the sake of logical consistency
+        - Amorality
+            - Everyone does whatever they want.
+            - The only reason for not doing something is fear?
+            - Is amorality the only consistent moral system?
+            - Intention doesn't matter.
+            - Intention doesn't change the morality of a situation.
+            - amoral vs immoral
+                - amorality = absence of morality
+                - immorality = what majority thinks bad
+            - [WP:Amorality](https://en.wikipedia.org/wiki/Amorality)
+            - [WP:Immorality](https://en.wikipedia.org/wiki/Immorality)
+            - [WP:Moral nihilism](https://en.wikipedia.org/wiki/Moral_nihilism)
+                - What's the difference?
+        - What is this position named?
+            - Something is morally right iff the majority says so.
+    - [WP:Evolution of morality](https://en.wikipedia.org/wiki/Evolution_of_morality)
 - How do I avoid forgetting things?
     - Make forgetting impossible.
         - Everything has its place.
         - This doesn't apply to dementia.
-- [Adam Ruins Everything - Why Weddings Are A Total Rip-Off](https://www.youtube.com/watch?v=O5BeLinyfpg)
-    - "Despite your family's wishes, weddings are pointless and expensive displays of wealth."
+- pointing out 21th century unwisdom
+    - [Adam Ruins Everything - Why Weddings Are A Total Rip-Off](https://www.youtube.com/watch?v=O5BeLinyfpg)
+        - "Despite your family's wishes, weddings are pointless and expensive displays of wealth."
 - "It is sometimes said, common sense is very rare." (François-Marie Arouet a.k.a. Voltaire (1694--1778) in "Philosophical Dictionary" (1767))
 - too long, need summary: [How to Pick a Career (That Actually Fits You)](https://waitbutwhy.com/2018/04/picking-career.html)
 - chubbyemu
@@ -37,6 +77,7 @@ permalink: /philo.html
 - Machiavelli is misunderstood.
     - [Misunderstood Machiavelli](http://brimanning.com/misunderstood-machiavelli)
     - [Have we got Machiavelli all wrong?](https://www.theguardian.com/books/2017/mar/03/have-we-got-machiavelli-all-wrong)
+- [WP:Paradox of hedonism](https://en.wikipedia.org/wiki/Paradox_of_hedonism)
 - Is forcing moral?
     - Is it good, to give people something they did not ask for?
     - Is it good, to force people to do something that betters them but unwanted by them?
@@ -48,5 +89,7 @@ permalink: /philo.html
     - [WP:Porphyrian tree](https://en.wikipedia.org/wiki/Porphyrian_tree)
         - [Ontology in Computer Science](https://link.springer.com/chapter/10.1007/978-1-84628-710-7_2)
 - What is the difference between data, information, belief, knowledge, wisdom?
-- [HSM SE 2608: Why and when did some areas separate themselves from philosophy and some not?](https://hsm.stackexchange.com/questions/2608/why-and-when-did-some-areas-separate-themselves-from-philosophy-and-some-not)
-    - [When Did Science and Philosophy Separate Into Different Fields of Study?](http://www.slate.com/blogs/quora/2014/12/17/when_did_science_and_philosophy_separate_into_different_fields_of_study.html)
+- [WP:First principle](https://en.wikipedia.org/wiki/First_principle)
+- Pop material
+    - https://www.whatisitliketobeaphilosopher.com/
+        - Biographical interviews.

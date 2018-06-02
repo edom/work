@@ -351,3 +351,10 @@ from [two minute papers 241](https://www.youtube.com/watch?v=AbxPbfODGcs).
 - [Mehryar Mohri, Afshin Rostamizadeh, and Ameet Talwalkar; book; "Foundations of machine learning"](https://cs.nyu.edu/~mohri/mlbook/)
 - http://bigthink.com/videos/the-top-3-supplements-for-surviving-the-singularity
 - https://google.github.io/CausalImpact/CausalImpact.html
+- intelligence testing
+    - [YT:Jordan Peterson - Example IQ questions and what Career/job fits your IQ](https://www.youtube.com/watch?v=8YWjSQHfV5U)
+        - problem: no job for people with IQ below 87?
+        - [R:source for soldier minimum IQ requirement of 85](https://www.reddit.com/r/JordanPeterson/comments/84qmsj/source_of_83_iq_minimum_for_the_us_military/)
+        - [WP:Fluid and crystallized intelligence](https://en.wikipedia.org/wiki/Fluid_and_crystallized_intelligence)
+        - [WP:Raven's progressive matrices](https://en.wikipedia.org/wiki/Raven%27s_Progressive_Matrices)
+        is a language-neutral visual test for fluid intelligence?

@@ -4,6 +4,65 @@ date: 2016-03-27 14:14:08 +0700
 permalink: /listen.html
 ---
 
+- 1980s, orchestral, rock, sentimental ballad
+    - characteristics: strings, horns, electric guitar sometimes, drums, fancy harmony
+    - music from the Rocky series, and similar music
+        - ["Going the distance", Bill Conti](https://www.youtube.com/watch?v=GvQkl7qa6RQ&list=PL2D6C7EAE3805FF1C&index=10), from Rocky
+        - ["Gonna fly now"](https://www.youtube.com/watch?v=MdVOBQwgnyk&index=21&list=PL2D6C7EAE3805FF1C), 1977, from Rocky
+        - "Training montage", Vince DiCola, from Rocky IV
+            - [3-minute version](https://www.youtube.com/watch?v=1Lb3MTlIrC4)
+            - [5-minute version](https://www.youtube.com/watch?v=_Y0J_-Mq6Zg)
+        - ["The final countdown"](https://www.youtube.com/watch?v=9jK-NcRmVcw), Europe
+        - ["Eye of the tiger", Survivor](https://www.youtube.com/watch?v=btPJPFnesV4)
+        - Ali bom-ba-ye, later donated by Ali to Inoki for Theme of Inoki,
+        炎のファイター (honoo no faitaa).
+        Music by Mandrill & Michael Masser.
+            - Inoki Bombaye (Final Mix); taken down from YouTube
+            - [with a little Cuban touch](https://www.youtube.com/watch?v=z8f0AQglISo)
+            - [6-minute version](https://www.youtube.com/watch?v=OdcjgrfHo5s), with guitar
+            - [orchestral](https://www.youtube.com/watch?v=72ZGpHx7tbk)
+            - [interesting break on 2:24](https://www.youtube.com/watch?v=gh8p_9N7bew)
+            - [Samba de Amigo version](https://www.youtube.com/watch?v=MKVHnZ3g5L4)
+            - [Muhammad Ali](https://www.youtube.com/watch?v=msy8IP_pOUM)
+        too bad the uploaded version is overcompressed
+            - [Ali bom-ba-ye](https://www.youtube.com/watch?v=2hNb2ZpYLuY), from 1977 film "The Greatest"
+            - [the Antonio Inoki vs Muhammad Ali 1976 fight](https://www.youtube.com/watch?v=J_ZQAVoGhaw)
+    - mostly animes
+        - "Macross", opening of a 1982 anime with the same name
+            - [Macross Opening Mastered 60FPS HD/HQ](https://www.youtube.com/watch?v=6RdcVauc-64), full
+            - [Super Dimension Fortress Macross (超時空要塞マクロス) OP -- English Subs](https://www.youtube.com/watch?v=gRRkNjdmFyM), TV size, 1:29
+            - blocked, ["Macross"](https://www.youtube.com/watch?v=ZfvkJ1ISTfo)
+        - Hokuto no ken (anime began in 1984)
+            - [Asunaki tabi](https://www.youtube.com/watch?v=IaVnu3qgdPU)
+                - [33/63 Journey of no tomorrow, Asunaki Tabi OST2](https://www.youtube.com/watch?v=4Za7TB9tPUs)
+                - [20/63 Massacre theme (Minagoroshi No theme OST2)](https://www.youtube.com/watch?v=ty0KI7lpdY4),
+                same theme, different feel, slower, trumpet instead of guitar
+            - [Kenshiro's theme](https://www.youtube.com/watch?v=j8ET31df91Y)
+            - sentimental ballad
+                - [16/63 Sorrow Yuria forever OST2](https://www.youtube.com/watch?v=-HJw-3m2auk)
+                - [08/63 Yuria Ai No](https://www.youtube.com/watch?v=eczvvkTwljI)
+                - [40/63 Edge of desperation (Zetsubou no Buchi, OST3)](https://www.youtube.com/watch?v=YPiYJsQKORE)
+                - [45/63 Under the star of tragedy OST3](https://www.youtube.com/watch?v=qyNVcb_RQg4)
+                - [25/63 Lynn (unreleased BGM Remake by TriaxisX)](https://www.youtube.com/watch?v=g1oxIdEDS4A),
+                almost vaporwareization of ai-wo torimodose
+                - [47/63 Shizukanaru kyojin Fudou](https://www.youtube.com/watch?v=SAoT_7PRlZ8)
+            - rock
+                - [Fist of the North Star - Heart of Madness (80s version)](https://www.youtube.com/watch?v=ZrNjvAhsJvQ)
+                    - [57/63 Heart of madness Instrumental version](https://www.youtube.com/watch?v=Ua9Z_VhvgyY)
+            - fusion
+                - [Playing Time (Unreleased BGM remake by himurakenshiro39)](https://www.youtube.com/watch?v=o4WHaBjZM-U)
+                - [Break time (Unreleased BGM remake by himurakenshiro39)](https://www.youtube.com/watch?v=KfqV_8i2_Vo)
+                - [03/63 I'll take back my love OST2](https://www.youtube.com/watch?v=XIT8Sm-fEGE), orchestration of ai-wo torimodose
+                - [Hokuto no Ken - Silent Survivor](https://www.youtube.com/watch?v=l2EV5A1xm7c)
+                    - [Hokuto no Ken Soundtrack - Silent Survivor BGM](https://www.youtube.com/watch?v=NKZpYVBSKaY)
+                    - [41/63 Silent Survivor](https://www.youtube.com/watch?v=k_Mb-RJrMe4)
+                    - guitar riff, "Get down Saturday night", Oliver Cheatham
+                - [12/63 Fateful reunion](https://www.youtube.com/watch?v=An6tPkcPghc)
+                - [50/63 Strongest man in hokuto shinken history](https://www.youtube.com/watch?v=31w6EbIaw9g), enka-ish
+                - [44/63 Dry your tears (BGM)](https://www.youtube.com/watch?v=TjQrmlRDssY)
+                - [14/63 Chase in darkness OST2](https://www.youtube.com/watch?v=5g3IJtoG_hU)
+                - [07/63 Hokuto no ken OST2](https://www.youtube.com/watch?v=zFX12IrG1EE)
+                - [18/63 Attack of evil, aku no Shuugeki OST2](https://www.youtube.com/watch?v=LYsGJwtCRx0)
 - [アガルタの風 ("Wind of Agartha")](https://www.youtube.com/watch?v=JWoHjsQnhxo),
 Kuroneko Lounge, Touhou House, Izanagi set 03,
 [also on Rin Ginsuke's Soundcloud](https://soundcloud.com/rinx2musixxx/izanagi-set-03).
@@ -71,6 +130,8 @@ There is also [Matt McGuire's drum cover](https://www.youtube.com/watch?v=n143Q9
     The band Crystal King released this song in [1984](https://en.wikipedia.org/wiki/Ai_o_Torimodose!!).
         - [anime version](https://www.youtube.com/watch?v=RxkezvGwI20)
         - [movie version](https://www.youtube.com/watch?v=BbaaI5xf4y8)
+        - other links
+            - [01/63 Take Back Your Love!! (Ai o torimodose)](https://www.youtube.com/watch?v=rClxgq-KzHE)
     - Queen
         - ["Crazy little thing called love"](https://www.youtube.com/watch?v=zO6D_BAuYCI)
         - ["Don't stop me now"](https://www.youtube.com/watch?v=HgzGwKwLmgM)
@@ -99,27 +160,6 @@ There is also [Matt McGuire's drum cover](https://www.youtube.com/watch?v=n143Q9
             - ["Bla bla bla"](https://www.youtube.com/watch?v=iIVgOdnPgoM)
             - Menjilat matahari
             - Serigala jalanan
-- music from the Rocky series, and similar music
-    - ["Going the distance", Bill Conti](https://www.youtube.com/watch?v=GvQkl7qa6RQ&list=PL2D6C7EAE3805FF1C&index=10), from Rocky
-    - ["Gonna fly now"](https://www.youtube.com/watch?v=MdVOBQwgnyk&index=21&list=PL2D6C7EAE3805FF1C), 1977, from Rocky
-    - "Training montage", Vince DiCola, from Rocky IV
-        - [3-minute version](https://www.youtube.com/watch?v=1Lb3MTlIrC4)
-        - [5-minute version](https://www.youtube.com/watch?v=_Y0J_-Mq6Zg)
-    - ["The final countdown"](https://www.youtube.com/watch?v=9jK-NcRmVcw), Europe
-    - ["Eye of the tiger", Survivor](https://www.youtube.com/watch?v=btPJPFnesV4)
-    - Ali bom-ba-ye, later donated by Ali to Inoki for Theme of Inoki,
-    炎のファイター (honoo no faitaa).
-    Music by Mandrill & Michael Masser.
-        - Inoki Bombaye (Final Mix); taken down from YouTube
-        - [with a little Cuban touch](https://www.youtube.com/watch?v=z8f0AQglISo)
-        - [6-minute version](https://www.youtube.com/watch?v=OdcjgrfHo5s), with guitar
-        - [orchestral](https://www.youtube.com/watch?v=72ZGpHx7tbk)
-        - [interesting break on 2:24](https://www.youtube.com/watch?v=gh8p_9N7bew)
-        - [Samba de Amigo version](https://www.youtube.com/watch?v=MKVHnZ3g5L4)
-        - [Muhammad Ali](https://www.youtube.com/watch?v=msy8IP_pOUM)
-    too bad the uploaded version is overcompressed
-        - [Ali bom-ba-ye](https://www.youtube.com/watch?v=2hNb2ZpYLuY), from 1977 film "The Greatest"
-        - [the Antonio Inoki vs Muhammad Ali 1976 fight](https://www.youtube.com/watch?v=J_ZQAVoGhaw)
 - pop
     - Indonesian
         - ["1000 tahun lamanya", Tulus](https://www.youtube.com/watch?v=60W7isIyxos)
@@ -161,25 +201,24 @@ There is also [Matt McGuire's drum cover](https://www.youtube.com/watch?v=n143Q9
     - Japanese pop
         - [枯れない花 (karenai hana), 秋元順子 (_Akimoto_ Junko)](https://www.youtube.com/watch?v=6uVdR2QzJa0)
         - Japanese anime soundtrack involving an orchestra
-            - ["Macross", Makoto Fujiwara](https://www.youtube.com/watch?v=ZfvkJ1ISTfo)
             - [海の見える街 (umi no mieru machi), 久石譲 (_Hisaishi_ Jou, English stage name "Joe Hisaishi")](https://www.youtube.com/watch?v=W4Wv-OBwW4k), from Kiki's Delivery Service
         - even older Japanese pop
             - [恋をするなら (koi wo suru nara), 橋幸夫 (_Hashi_ Yukio)](https://www.youtube.com/watch?v=PYmn6cV9mTY).
             I got this from "Getting any?", a Beat Takeshi film.
-        - enka, kayoukyoku, 1980s Japanese pop
+        - kayoukyoku, 1980s Japanese pop? enka? difference?
             - 前川清 (*Maekawa* Kiyoshi)
                 - Koube
                 - Soshite, Koube
                 - Dakishimete
                 - Uwasa no onna
-            - [哀恋記 (airenki)](https://www.youtube.com/watch?v=DX_N5fGClJM), 五木ひろし (_Itsuki_ Hiroshi), 1975
             - Sanga, Takao Horiuchi
-            - 川の流れのように (kawa no nagare no you ni, Like the Flow of the River), by 美空ひばり (_Misora_ Hibari)
-                - There is a cover by 金蓮子 (_Kim_ Yonja). There is a cover by Teresa _Teng_.
             - ざんげの値打ちもない (zange no neuchi mo nai), 北原ミレイ (_Kitahara_ Mirei)
                 - [with break](https://www.youtube.com/watch?v=vSWcFlKO1Ws) (I think this is the best live version)
                 - [without break](https://www.youtube.com/watch?v=LUuqojyTGl0)
                 - [faster tempo, lower video quality](https://www.youtube.com/watch?v=Hf4eX_SYDng) (I think this is too fast)
+            - 川の流れのように (kawa no nagare no you ni, Like the Flow of the River), by 美空ひばり (_Misora_ Hibari)
+                - There is a cover by 金蓮子 (_Kim_ Yonja). There is a cover by Teresa _Teng_.
+            - [哀恋記 (airenki)](https://www.youtube.com/watch?v=DX_N5fGClJM), 五木ひろし (_Itsuki_ Hiroshi), 1975
     - Korean cluster 1
         - Korean power ballad
             - ["Snow flower", _Park_ Hyo Shin](https://www.youtube.com/watch?v=6dgDuXBOzV0).
