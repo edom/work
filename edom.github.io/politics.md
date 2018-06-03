@@ -123,6 +123,7 @@ permalink: /politics.html
 - [YT:Putin on ideology - difference between Americans and Russians](https://www.youtube.com/watch?v=3JVR0zAiyw0),
 American individualisn, Russian collectivism
 - [Quora:Is there one website to daily summarize everything that is going on in Washington?](https://www.quora.com/Is-there-one-website-to-daily-summarize-everything-that-is-going-on-in-Washington)
+- [WP:Public sphere](https://en.wikipedia.org/wiki/Public_sphere)
 - I don't always agree with these, but these have some useful things.
     - [Richard Stallman's personal site](https://stallman.org/)
         - What's bad about X (company)?

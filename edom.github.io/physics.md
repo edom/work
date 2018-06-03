@@ -161,7 +161,6 @@ mathjax: yes
         - [WP: Blast curve](https://en.wikipedia.org/wiki/File:Blastcurves_psi.svg)
         - [WP:NUKEMAP](https://en.wikipedia.org/wiki/NUKEMAP)
     - computers
-        - [Gil Kalai is skeptical about quantum computers](https://www.quantamagazine.org/gil-kalais-argument-against-quantum-computers-20180207/)
         - [Photonic Chips Will Change Computing Forever... If We Can Get Them Right](https://www.youtube.com/watch?v=rUMx1Rmijzc)
     - lasers
         - jellyfish for polariton lasers [Jellyfish Lasers Are Revolutionizing Quantum Physics](https://www.youtube.com/watch?v=OpVvR6pa7g8)
@@ -195,3 +194,13 @@ mathjax: yes
             - Scattering depends on particle size.
     - [Will We Ever Time Travel? Scientists Say ‘No’ Based on This New Discovery](https://www.youtube.com/watch?v=8LHhpPtRMmU)
         - This youtube video title needs to be declickbaited. What new discovery?
+- https://en.wikipedia.org/wiki/Problem_of_induction
+- https://en.wikipedia.org/wiki/Uniformitarianism
+- We assume the *principle of the uniformity of nature*:
+    - The laws of nature is the same everywhere everytime [hume1793inquiry].
+- Is the Universe a simulation?
+    - How do we find out if we are in a simulation?
+        - https://www.technologyreview.com/s/429561/the-measurement-that-would-reveal-the-universe-as-a-computer-simulation/
+        - Look for numerical errors in the Universe. [UniNumError] https://arxiv.org/abs/1210.1847
+- [YT:The more general uncertainty principle, beyond quantum](https://www.youtube.com/watch?v=MBnnXbOM5S4)
+- https://en.wikipedia.org/wiki/Amplituhedron

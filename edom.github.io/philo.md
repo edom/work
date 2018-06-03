@@ -17,12 +17,26 @@ permalink: /philo.html
     - [WP:Empiricism](https://en.wikipedia.org/wiki/Empiricism)
     - [WP:Experimentalism](https://en.wikipedia.org/wiki/Experimentalism)
     - [WP:Occam's razor](https://en.wikipedia.org/wiki/Occam%27s_razor)
+    - In physics, we know things from experiments and inference.
+    - https://en.wikipedia.org/wiki/Scientific_method
+    - [wenning2009scientific] explains scientific epistemology (about 15 pages).
+        - http://www2.phy.ilstu.edu/pte/publications/scientific_epistemology.pdf
+    - What does "to know" mean?
+        - Some possibilities
+            - To *know* an object is to be familiar with that object.
+            - To *know* an object is to be able to *use* that object.
 - Ontology
     - Measurabilism
         - A thing exists if and only if it can be measured.
         - [WP:Mike Alder, Newton's flaming laser sword](https://en.wikipedia.org/wiki/Mike_Alder#Newton.27s_flaming_laser_sword)
             - "What cannot be settled by experiment is not worth debating."
     - [WP:Ontology](https://en.wikipedia.org/wiki/Ontology)
+    - Ontology defines objects, their properties, and their relationships?
+    - "Object" is another word for "thing"?
+    - *Entity* is distinguishable object.
+        - An entity has identity.
+        - An entity can be distinguished from other entities.
+    - [An Ontology for Engineering Mathematics](http://www-ksl.stanford.edu/knowledge-sharing/papers/engmath.html)
 - Thoughts
     - If our past is better than our present, then we have failed.
 - How to study philosophy without wasting time?
@@ -93,3 +107,25 @@ permalink: /philo.html
 - Pop material
     - https://www.whatisitliketobeaphilosopher.com/
         - Biographical interviews.
+- Science and Popper's falsifiability?
+- Knowledge is a tower.
+    - It is built from the bottom upward.
+    - Concepts stand on other concepts.
+    - The bottom of that tower is everything we know from our senses?
+        - Or is it logic?
+- Abductive reasoning?
+    - We know Y from experiment.
+    - Find a theory X that explains Y.
+- Linguistics?
+    - What is a question?
+        - What are its answers?
+        - https://plato.stanford.edu/entries/questions/
+    - How do we answer "What is X"?
+        - Semantics of the copula ("be")?
+        - Depends on the language?
+        - [WP:Semantics of logic](https://en.wikipedia.org/wiki/Semantics_of_logic)?
+        - "X is Y" means "X is another word for Y".
+        - "X is a Y" means "X is an instance of Y".
+            - X a special kind of Y
+            - There exists Z such that "X is a Y that Z"
+        - "X is a Y that Z" means that every X is an instance of Y that satisfies Z.

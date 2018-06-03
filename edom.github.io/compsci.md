@@ -96,5 +96,9 @@ permalink: /compsci.html
     - https://en.wikipedia.org/wiki/Shadow_IT
     - https://community.atlassian.com/t5/Confluence-questions/Best-practice-Using-confluence-and-other-systems-like-yammer/qaq-p/323867
 - [Kruna Ratkovic, "Notion of Strong Monad in Computing"](https://www.researchgate.net/profile/Kruna_Ratkovic/publication/323426688_Notion_of_Strong_Monad_in_Computing/links/5a958819a6fdccecff090883/Notion-of-Strong-Monad-in-Computing.pdf)
-- [YT:Current State of Quantum Computing - Computerphile](https://www.youtube.com/watch?v=PN7mPYcWFKg)
+- quantum computing
+    - should this be in comp-sci or in physics?
     - 2018, industry practitioner interview
+        - [YT:Current State of Quantum Computing - Computerphile](https://www.youtube.com/watch?v=PN7mPYcWFKg)
+        - [YT:Quantum Instruction Set - Computerphile](https://www.youtube.com/watch?v=ZN0lhYU1f5Q)
+    - [Gil Kalai is skeptical about quantum computers](https://www.quantamagazine.org/gil-kalais-argument-against-quantum-computers-20180207/)

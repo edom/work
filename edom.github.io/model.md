@@ -9,10 +9,17 @@ mathjax: yes
 - A model of \\( A \\) is a simplified representation of \\( A \\).
     - To model something is to choose which aspects to care about. All other aspects are ignored.
     - [WP:Model](https://en.wikipedia.org/wiki/Model)
+- A model is a simplified description of reality?
+    - A description of reality is not reality.
+        - If reality and theory disagree, then reality wins and theory must change.
 - On being wrong
     - ["All models are wrong, but some are useful."](https://en.wikipedia.org/wiki/All_models_are_wrong), George Edward Pelham Box (1919--2013)
     - In [The Relativity of Wrong](http://chem.tufts.edu/answersinscience/relativityofwrong.htm), Isaac Asimov writes
-    "[...] John, when people thought the earth was flat, they were wrong. When people thought the earth was spherical, they were wrong. But if you think that thinking the earth is spherical is just as wrong as thinking the earth is flat, then your view is wronger than both of them put together."
+        - Asimov's relativity of wrong:
+            - Both round earth theory and flat earth theory are wrong,
+            - but believing that they are equally wrong is wronger than both of them combined.
+    - https://en.wikipedia.org/wiki/The_Relativity_of_Wrong
+    - https://en.wikipedia.org/wiki/Wronger_than_wrong
 - Mathematical modeling
     - [WP:Mathematical model](https://en.wikipedia.org/wiki/Mathematical_model)
     - [WP:Many-body problem](https://en.wikipedia.org/wiki/Many-body_problem)

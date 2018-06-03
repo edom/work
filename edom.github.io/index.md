@@ -22,17 +22,25 @@ date: 2017-05-20 00:00:00 +0700
             - [Computational complexity]({% link complexity.md %})
                 - [Trying to prove P neq. NP]({% link pnptry.md %})
                 - [Circuit complexity]({% link circuit.md %})
-        - [Physics]({% link physics.md %}) and engineering
-            - [Energy storage]({% link ensto.md %})
-            - [Traffic engineering]({% link trafeng.md %})
-            - Civil engineering
-                - [How Do Sinkholes Form?](https://www.youtube.com/watch?v=e-DVIQPqS8E)
-                    - Internal erosion, piping, etc.
-                - why reinforce concrete: three types of stresses (tensile, compressive, shear)
-                https://www.youtube.com/watch?v=cZINeaDjisY
-                - Architecture
-                    - [YT:Open office is overrated](https://www.youtube.com/watch?v=-p6WWRarjNs)
-            - [Astronomy]({% link astro.md %})
+        - Natural sciences
+            - [Physics]({% link physics.md %}) and engineering
+                - [Energy storage]({% link ensto.md %})
+                - [Traffic engineering]({% link trafeng.md %})
+                - Civil engineering
+                    - [How Do Sinkholes Form?](https://www.youtube.com/watch?v=e-DVIQPqS8E)
+                        - Internal erosion, piping, etc.
+                    - [YT:Why Concrete Needs Reinforcement](https://www.youtube.com/watch?v=cZINeaDjisY)
+                        - three types of stresses: tensile, compressive, shear
+                    - [What's inside Ikea's "wood"?](https://www.youtube.com/watch?v=24F5JlKkxR4)
+                    - Architecture
+                        - [YT:Open office is overrated](https://www.youtube.com/watch?v=-p6WWRarjNs)
+                - [Astronomy]({% link astro.md %})
+            - [Chemistry]({% link chem.md %})
+            - Science in 21st century is multi-/inter-discipline?
+                - All branches of science cross-pollinate?
+                - It's no longer useful to categorize science by branches?
+                - Where is the boundary between two branches?
+                    - Where do physics end and chemistry begin?
         - [Mathematics]({% link math.md %})
             - [Math education]({% link mathedu.md %})
         - [Art]({% link art.md %})

@@ -358,3 +358,4 @@ from [two minute papers 241](https://www.youtube.com/watch?v=AbxPbfODGcs).
         - [WP:Fluid and crystallized intelligence](https://en.wikipedia.org/wiki/Fluid_and_crystallized_intelligence)
         - [WP:Raven's progressive matrices](https://en.wikipedia.org/wiki/Raven%27s_Progressive_Matrices)
         is a language-neutral visual test for fluid intelligence?
+- [YT:4 Experiments Where the AI Outsmarted Its Creators | Two Minute Papers #242](https://www.youtube.com/watch?v=GdTBqBnqhaQ)

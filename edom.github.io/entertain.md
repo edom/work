@@ -178,3 +178,8 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
     - [【みんなのリズム天国】ブロリー会見（レスラー会見）](https://www.youtube.com/watch?v=GTdyWN_XCrM)
         - "Minna-no rizumu tengoku"
 - [This Chinese mother’s smart way to avoid paying via Face ID on iPhone X](https://www.youtube.com/watch?v=oQwwG_BCWsc)
+- people laughing
+    - [YT:"Me laughing at the top 10 Mountain Dew name votes"](https://www.youtube.com/watch?v=rxu3kZPlZx8)
+    - [YT:Meterstick Jim - The Sims 3: The funniest patch notes](https://www.youtube.com/watch?v=4nxsCZ2SEcQ)
+    - [YT:The Turkey Whisperer(ORIGINAL)](https://www.youtube.com/watch?v=Q1sDmooVHj8)
+- [Amazon Alexa Gone Wild!!! Full version from beginning to end](https://www.youtube.com/watch?v=epyWW2e43UU), 0:44
