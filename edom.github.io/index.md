@@ -14,6 +14,12 @@ date: 2017-05-20 00:00:00 +0700
         - I am not responsible for those.
 - How to use this website
     - Follow the links that interest you:
+        - This list is ordered descending by importance to me.
+        - [Living in the 21st century]({% link living.md %}), self-care
+        - [Meta-research]({% link meta_research.md %})
+            - [Information architecture]({% link infarch.md %})
+            - [Writing]({% link writing.md %})
+        - [Knowledge organization]({% link knorg.md %})
         - [Intelligence]({% link intelligence.md %})
         - [Computer science]({% link compsci.md %})
             - [WP:Computer science](https://en.wikipedia.org/wiki/Computer_science)
@@ -23,7 +29,9 @@ date: 2017-05-20 00:00:00 +0700
                 - [Trying to prove P neq. NP]({% link pnptry.md %})
                 - [Circuit complexity]({% link circuit.md %})
         - Natural sciences
+            - [Natural knowledge]({% link natkno.md %})
             - [Physics]({% link physics.md %}) and engineering
+                - [Modeling]({% link model.md %})
                 - [Energy storage]({% link ensto.md %})
                 - [Traffic engineering]({% link trafeng.md %})
                 - Civil engineering
@@ -43,33 +51,11 @@ date: 2017-05-20 00:00:00 +0700
                     - Where do physics end and chemistry begin?
         - [Mathematics]({% link math.md %})
             - [Math education]({% link mathedu.md %})
-        - [Art]({% link art.md %})
-            - [Music]({% link music.md %})
-            - [Acting]({% link act.md %})
-        - Self-care, living in the 21st century:
-            - Grooming, styling:
-                - [Clothing]({% link cloth.md %})
-                - [WP:Hairstyles](https://en.wikipedia.org/wiki/List_of_hairstyles)
-            - Health, fitness
-                - [Mouth care]({% link mouth.md %})
-                - [Eating]({% link eat.md %})
-                    - [How to cook eggs]({% link egg.md %})
-                - [Walking]({% link walk.md %})
-                    - Which muscles are atrophied by prolonged sitting?
-                    - How to know if a muscle is short/tight or weak?
-                - [WP:Strength training](https://en.wikipedia.org/wiki/Strength_training)
-                    - [WP:Weight training](https://en.wikipedia.org/wiki/Weight_training)
-                        - [WP:One-repetition maximum](https://en.wikipedia.org/wiki/One-repetition_maximum)
-            - [Fighting]({% link fight.md %})
-            - [Buying a smartphone]({% link phone.md %})
-                - [Android vs iPhone]({% link andvsiph.md %})
-            - [WP:List of human habitation forms](https://en.wikipedia.org/wiki/List_of_human_habitation_forms)
         - [Philosophy]({% link philo.md %})
-            - [What kind of world are we living in?]({% link world.md %})
+            - Does everything fall under philosophy?
+                - How do we prevent this category from becoming a kitchen sink?
+                - Philosophy is everywhere (a cross-cutting concern), so it shouldn't be a category.
             - [Law]({% link law.md %})
-            - [Meta-research]({% link meta_research.md %})
-                - [Information architecture]({% link infarch.md %})
-                - [Writing]({% link writing.md %})
             - [Religion]({% link religion.md %})
                 - [Which religion should we choose?]({% link relch.md %})
             - [Logic]({% link logic.md %})
@@ -77,8 +63,6 @@ date: 2017-05-20 00:00:00 +0700
             - Work
                 - [Boss]({% link boss.md %})
             - [Long-haired men]({% link longhair.md %})
-            - Does everything fall under philosophy?
-                - How do we prevent this category from becoming a kitchen sink?
             - [Government]({% link government.md %})
                 - [Politics]({% link politics.md %})
                     - [Politik Indonesia]({% link politik.md %})
@@ -95,9 +79,10 @@ date: 2017-05-20 00:00:00 +0700
         - [Entertainment]({% link entertain.md %})
             - [Game]({% link game.md %})
         - Ungrouped
-            - [Vital service failure log]({% link log.md %})
             - [About this website]({% link about.md %})
-            - [How do you use a computer?]({% link usecom.md %})
+        - [Art]({% link art.md %})
+            - [Music]({% link music.md %})
+            - [Acting]({% link act.md %})
     - How do I ask questions or suggest corrections?
         - Any of these:
             - Leave a Disqus comment in the related page.

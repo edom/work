@@ -228,3 +228,4 @@ Can we crowdsource it?
         - What exists?
         - How do they relate?
 - [WP:List of open-access journals](https://en.wikipedia.org/wiki/List_of_open_access_journals)
+- [WP:Body of knowledge](https://en.wikipedia.org/wiki/Body_of_knowledge)

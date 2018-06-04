@@ -127,3 +127,10 @@ American individualisn, Russian collectivism
 - I don't always agree with these, but these have some useful things.
     - [Richard Stallman's personal site](https://stallman.org/)
         - What's bad about X (company)?
+- [America's poor becoming more destitute under Trump: U.N. expert](https://www.reuters.com/article/us-usa-rights-un/americas-poor-becoming-more-destitute-under-trump-u-n-expert-idUSKCN1IY0C3)
+    - https://www.theschooloflife.com/thebookoflife/countries-for-losers-countries-for-winners/
+        - https://www.youtube.com/watch?v=kbpY-2nOYRI
+- [Why do politicians diverge from their constituents' preferences?](https://www.researchgate.net/post/Why_do_politicians_diverge_from_their_constituents_preferences)
+    - "the very idea of representative democracy is based on the fact that the preferences of the individual constituents
+    do not make for good decisions in complex questions."
+    - TODO group this with Socrates's argument

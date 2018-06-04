@@ -85,3 +85,5 @@ We already have laws for people causing public disorder.
 - How to combat people who provoke you and then cry foul?
 - https://djponline.pajak.go.id/account/login
     - http://www.pajak.go.id/article/jangan-panik-jika-lupa-kode-efin-ikuti-langkah-berikut
+- https://www.bloomberg.com/quicktake/indonesias-nationalism
+    - "A lack of roads and ports means it’s cheaper to ship goods to China than across the archipelago."

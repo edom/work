@@ -167,3 +167,7 @@ is to make someone else has less money.
 - [The difference between wealth creation and wealth extraction](https://makewealthhistory.org/2018/01/31/wealth-creation-and-wealth-extraction/)
 - [The Global Architecture of Wealth Extraction](https://medium.com/@joe_brewer/the-global-architecture-of-wealth-extraction-4c0a6b954a14)
 - [Africa is not poor, we are stealing its wealth](https://www.aljazeera.com/indepth/opinion/2017/05/africa-poor-stealing-wealth-170524063731884.html)
+- rent seeking, wealth extraction
+    - unread
+        - [Who are the wealth extractors?](https://boffyblog.blogspot.com/2017/04/general-election-who-are-wealth.html)
+        - [Who’s doing best in the rent-seeking business](http://www.rossgittins.com/2018/01/whos-doing-best-in-rent-seeking-business.html)

@@ -183,3 +183,7 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
     - [YT:Meterstick Jim - The Sims 3: The funniest patch notes](https://www.youtube.com/watch?v=4nxsCZ2SEcQ)
     - [YT:The Turkey Whisperer(ORIGINAL)](https://www.youtube.com/watch?v=Q1sDmooVHj8)
 - [Amazon Alexa Gone Wild!!! Full version from beginning to end](https://www.youtube.com/watch?v=epyWW2e43UU), 0:44
+- [YT:I'M AT SOUP! [TF2 SFM]](https://www.youtube.com/watch?v=4kqbKEqzsAI)
+- English orthography
+    - [Y E S spells yes. What does E Y E S spell?](https://www.youtube.com/watch?v=P4ramoioWnw)
+    - [What does E - Y - E - S spell? Is that spanish? Never laughed so hard.](https://www.youtube.com/watch?v=SN0cLBv5AUc)

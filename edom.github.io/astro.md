@@ -61,3 +61,6 @@ permalink: /astro.html
 - Related fields of study?
     - https://en.wikipedia.org/wiki/Cosmology
     - https://en.wikipedia.org/wiki/Cosmogony
+- When does gravity exceed electrostatic repulsion?
+    - https://physics.stackexchange.com/questions/13971/minimum-number-of-atoms-in-star
+    - http://www.jgiesen.de/astro/stars/star.htm

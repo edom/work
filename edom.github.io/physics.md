@@ -5,8 +5,6 @@ permalink: /physics.html
 mathjax: yes
 ---
 
-- Sections
-    - [Modeling]({% link model.md %})
 - In the 21st century
     - Every branch of physics is about constructing a mathematical model of nature.
         - Every branch is interested in different aspects of nature.
@@ -204,3 +202,10 @@ mathjax: yes
         - Look for numerical errors in the Universe. [UniNumError] https://arxiv.org/abs/1210.1847
 - [YT:The more general uncertainty principle, beyond quantum](https://www.youtube.com/watch?v=MBnnXbOM5S4)
 - https://en.wikipedia.org/wiki/Amplituhedron
+- https://en.wikipedia.org/wiki/Theoretical_physics
+- https://en.wikipedia.org/wiki/Protoscience
+- https://en.wikipedia.org/wiki/Pseudoscience
+- https://newrepublic.com/article/118655/theoretical-phyisicist-explains-why-science-not-about-certainty
+- Free electron can't absorb photon
+    - https://physics.stackexchange.com/questions/225522/free-electron-cant-absorb-a-photon
+    - https://www.quora.com/If-photons-can-be-absorbed-by-electrons-why-can-photons-not-be-absorbed-by-free-electrons

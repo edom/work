@@ -101,8 +101,9 @@ mathjax: yes
         many circles throughout a space
         so that we can see how the space's metric tensor distorts them.
         This method tells us how much our map is lying to us.
-            - [WP: Tissot's indicatrix](https://en.wikipedia.org/wiki/Tissot%27s_indicatrix)
-            - [WP: Fuller projection, Dymaxion map](https://en.wikipedia.org/wiki/Fuller_projection)
+            - [WP:Tissot's indicatrix](https://en.wikipedia.org/wiki/Tissot%27s_indicatrix)
+            - [WP:Fuller projection, Dymaxion map](https://en.wikipedia.org/wiki/Fuller_projection)
+            - [WP:Map--territory relation](https://en.wikipedia.org/wiki/Map%E2%80%93territory_relation)
     - [string diagrams, Paul-André Melliès](https://www.irif.fr/~mellies/slides/oregon-slides-2011-A.pdf)
     - probability
         - https://en.wikipedia.org/wiki/Algebra_of_random_variables

@@ -102,3 +102,5 @@ permalink: /compsci.html
         - [YT:Current State of Quantum Computing - Computerphile](https://www.youtube.com/watch?v=PN7mPYcWFKg)
         - [YT:Quantum Instruction Set - Computerphile](https://www.youtube.com/watch?v=ZN0lhYU1f5Q)
     - [Gil Kalai is skeptical about quantum computers](https://www.quantamagazine.org/gil-kalais-argument-against-quantum-computers-20180207/)
+- [Anatomy of Programming Languages](https://www.cs.utexas.edu/~wcook/anatomy/anatomy.htm), what is this?
+- [Stephen Diehl, Write you a Haskell, Building a modern functional compiler from first principles](http://dev.stephendiehl.com/fun/)
