@@ -5,43 +5,166 @@ permalink: /natkno.html
 mathjax: yes
 ---
 
-- Natural knowledge is knowledge about nature (reality).
-- This page lists natural knowledge, sorted descending by verifiability.
-- This page tries to teach natural knowledge in the fastest way possible.
-    - Knowledge is presented bottom-up.
-        - Most verifiable first.
-- Truth is a continuum (not binary true-and-false).
-- We begin with very wrong ideas.
-- As we progress, we become less wrong.
-- We might will never be 0% wrong.
-    - But knowledge doesn't have to be 100% true in order to be useful.
-- Let's go back in time to the early days of physics.
-    - We know these are wrong.
-        - But we're "cheating": we have hindsight; they didn't.
-    - We will revise knowledge as we go.
-- Brief excursion to epistemology
-    - We *assume* that there are three sources of knowledge:
-        - observation (the senses)
-        - definition (fiat, agreement between speakers of the same language)
-        - inference (logic, rules of thought)
-    - We don't need to go deeper into [Philosophy]({% link philo.md %}) for now.
-- Define: The *Earth* is where we stand.
-- Observe: Things *fall* toward the Earth.
-- Observe: Time of fall depends on height only and not mass.
-    - [WP:Galileo's Leaning Tower of Pisa experiment](https://en.wikipedia.org/wiki/Galileo%27s_Leaning_Tower_of_Pisa_experiment)
-        - Two balls having different weight, dropped from the same height, will reach the Earth at the same time.
-- Define: *Velocity* is the rate of change of position.
-- Observe: <span>\( h = k \cdot t^2 \)</span> where
-    - \\( h \\) is height of fall;
-    - \\( t \\) is time of fall;
-    - \\( k \\) is a constant.
-- Infer: Things fall *with constant acceleration* toward the Earth.
-    - How?
-- Define: *Glass* is transparent (see-through) solid.
-    - [WP:History of glass](https://en.wikipedia.org/wiki/History_of_glass)
+- Overview
+    - Target audience:
+        - Everyone who wants to learn physics from first principles.
+    - Natural knowledge is knowledge about nature (reality).
+    - This page tries to list natural knowledge, sorted descending by verifiability.
+    - This page tries to teach natural knowledge in the fastest way possible.
+        - Knowledge is presented top-down:
+            - A child verifies its parent.
+- Brief excursion to philosophy
+    - Truth is a continuum (not binary true-and-false).
+    - Brief excursion to epistemology
+        - We *assume* that there are three sources of knowledge:
+            - observation (the senses)
+            - definition (fiat, agreement between speakers of the same language)
+            - inference (logic, rules of thought)
+        - We don't need to go deeper into [Philosophy]({% link philo.md %}) for now.
+- Let's go back to prehistoric times.
+    - Let's begin with very wrong ideas.
+        - We're "cheating": we have hindsight; they didn't.
+    - We will revise knowledge as we go. We will become less wrong.
+    - We might will never be 0% wrong.
+        - But knowledge doesn't have to be 100% true in order to be useful.
+- Falling
+    - Define: The *Earth* is where we stand.
+    - Define: *Duration* is what a timer measures.
+    - Define: *Position* is where something is.
+    - Define: *Velocity* is the rate of change of position.
+    - Define: *Acceleration* is the rate of change of velocity.
+    - Define: *Speed* is the magnitude of velocity.
+    - Define: *Time* is duration.
+    - Define: The *distance* between two points A and B is \\( v \cdot t \\),
+        - iff \\( t \\) is the minimum time required by something with constant speed \\( v \\) to go from A to B.
+    - Define: *Length* is what a ruler measures.
+    - Define: *Acceleration* is the rate of change of velocity.
+    - Define: *Weight* is what a weight scale measures.
+    - Define: *Mass* is weight.
+        - (Pretend that "force" has not been invented.)
+    - Infer: Things fall *with constant acceleration* toward the Earth.
+        - That is: <span>\( h = k \cdot t^2 \)</span> where
+            - \\( h \\) is height of fall;
+            - \\( t \\) is time of fall;
+            - \\( k \\) is a constant.
+        - Observe: Things *fall* toward the Earth.
+        - Observe: Time of fall depends on height only and not mass.
+            - [WP:Galileo's Leaning Tower of Pisa experiment](https://en.wikipedia.org/wiki/Galileo%27s_Leaning_Tower_of_Pisa_experiment)
+                - Two balls having different weight, dropped from the same height, will reach the Earth at the same time.
+    - Infer: Things fall with the same acceleration everywhere on Earth.
+        - Observe: *Catenary* is symmetrical.
+            - Tie a rope to two upright posts.
+            - Keep the rope loose, but don't let it touch the ground.
+            - [WP:Catenary](https://en.wikipedia.org/wiki/Catenary)
+    - Infer: Every part of a thing falls with the same acceleration.
+        - Observe:
+            - Break a thing into several parts (pieces).
+            - Drop the parts.
+            - Every part falls with the same acceleration.
+    - Observe: Cavendish torsion balance experiment (1797--1798)
+        - This experiment finds out the density of the Earth.
+        - That is related to the gravitational constant \\( G \\).
+        - [WP:Cavendish experiment](https://en.wikipedia.org/wiki/Cavendish_experiment)
+- Fire, light, and heat
+    - Define: *Glass* is transparent (see-through) solid.
+        - [WP:History of glass](https://en.wikipedia.org/wiki/History_of_glass)
+    - Define: Sundial.
+        - [WP:Sundial](https://en.wikipedia.org/wiki/Sundial)
+        - [WP:Analemma](https://en.wikipedia.org/wiki/Analemma);
+        solar analemma = figure eight pattern of the sun on the sky across the year
+    - Define: Fire.
+    - Define: Heat.
+    - Define: Light.
+    - Define: Shadow.
+    - Infer: Light travels in straight line.
+        - Observe: The shape of the shadow.
+    - ... it's still a very long way to 21st century knowledge
+        - Observe: two fires, two shadows.
+            - Stand between two fires.
+            - Observe: two shadows of you.
+        - Observe: Light can be blocked. (Experiment using two hands and a fire.)
+    - Infer: Heat behaves like light.
+        - Observe: Heat can be blocked. (Experiment using two hands and a fire.)
+- Electromagnetism
+    - Define: Iron.
+        - [WP:Ancient iron production](https://en.wikipedia.org/wiki/Ancient_iron_production)
+        - [Infographic: History of Metals Timeline](http://www.makin-metals.com/about/history-of-metals-infographic/)
+        - [WP:Iron Age](https://en.wikipedia.org/wiki/Iron_Age)
+        - [WP:Metallurgy, history](https://en.wikipedia.org/wiki/Metallurgy#History)
+        - [WP:Ferrous metallurgy](https://en.wikipedia.org/wiki/Ferrous_metallurgy)
+        - [WP:Archaeometallurgy](https://en.wikipedia.org/wiki/Archaeometallurgy)
+    - Define: Lodestone.
+        - [WP:Lodestone](https://en.wikipedia.org/wiki/Lodestone)
+            - [WP:Magnetite](https://en.wikipedia.org/wiki/Magnetite)
+    - Define: A *magnet* is a piece of lodestone.
+    - Electricity
+        - Observe: Electricity
+            - Rub amber with cat fur.
+            - The amber can now attract feathers.
+        - todo: Capacitor
+        - todo: Leyden jar
+        - todo: Electric charge
+        - Define: To *charge* an object is to rub it.
+        - Set
+            - Inferences
+                - Infer: There are two kinds of electric charges.
+                - Infer: Similar charges repel each other.
+                - Infer: Opposite charges attract each other.
+            - Observe:
+                - Rub glass G with silk S.
+                - Rub glass H with silk T.
+                - The glasses *repel* each other (G-H).
+                - The silks *repel* each other (S-T).
+                - A glass and a silk attract each other (G-S, G-T, H-S, H-T).
+                - [Phys. SE 266246: How did physicists know that there are two kind of charges?](https://physics.stackexchange.com/questions/266246/how-did-physicists-know-that-there-are-two-kind-of-charges/266250)
+        - Define: *Positive charge* is the charge left on a glass rod after being rubbed with silk.
+            - [WP:Electric charge](https://en.wikipedia.org/wiki/Electric_charge)
+                - "It is arbitrary which polarity is called positive and which is called negative."
+                - "Positive charge can be defined as the charge left on a glass rod after being rubbed with silk."
+    - Magnetism
+        - Observe: Two magnets attract or repel each other.
+        - Observe: A magnet and a piece of iron attract each other.
+        - ...
+        - todo: Magnetic pole
+        - Infer: The Earth is a magnet.
+            - Observe: Every resting magnetic needle near you points to the same direction (except if you're at the Earth's magnetic poles).
+            - Observe: The Earth has magnetic poles.
+                - [WP:North Magnetic Pole, expeditions](https://en.wikipedia.org/wiki/North_Magnetic_Pole#Expeditions_and_measurements)
+                - [WP:South Magnetic Pole, expeditions](https://en.wikipedia.org/wiki/South_Magnetic_Pole#Expeditions)
+                - Observe: They are moving.
+                    - [WP:Polar drift](https://en.wikipedia.org/wiki/Polar_drift)
+        - [WP:Magnetism, history](https://en.wikipedia.org/wiki/Magnetism#History)
+        - [WP:De Magnete](https://en.wikipedia.org/wiki/De_Magnete) (1600)
+    - Electricity
+        - Observe: Triboelectric effect
+            - [WP:Triboelectric effect](https://en.wikipedia.org/wiki/Triboelectric_effect)
+        - [WP:Electroscope](https://en.wikipedia.org/wiki/Electroscope)
+            - [WP:Versorium](https://en.wikipedia.org/wiki/Versorium)
+        - [WP:Electrostatic induction](https://en.wikipedia.org/wiki/Electrostatic_induction)
+    - [WP:Oersted's law](https://en.wikipedia.org/wiki/Oersted%27s_law)
+    - Summaries
+        - [WP:Electricity, history](https://en.wikipedia.org/wiki/Electricity#History)
+            - William Gilbert (1544--1603) distinguished the lodestone effect from the amber effect.
+                - Rods of amber could be rubbed with cat's fur to attract light objects like feathers.
+                - "Electric" means "like amber".
+                - [WP:Amber](https://en.wikipedia.org/wiki/Amber)
+- Infer: Law of the lever: \\( F_1 \cdot r_1 = F_2 \cdot r_2 \\).
+    - Move the fulcrum, or slide the lever along the fulcrum.
 - Observe: A burning leaf stops burning if it's enclosed.
 - Observe: Food spoils. Food goes rancid.
-- Define: Sundial.
-    - [WP:Sundial](https://en.wikipedia.org/wiki/Sundial)
-    - [WP:Analemma](https://en.wikipedia.org/wiki/Analemma);
-    solar analemma = figure eight pattern of the sun on the sky across the year
+- Unread
+    - [WP:History of science](https://en.wikipedia.org/wiki/History_of_science)
+    - Experiments
+        - https://www.explainthatstuff.com/great-physics-experiments.html
+        - https://www.quora.com/What-are-some-of-the-most-important-experiments-in-physics
+        - https://www.telegraph.co.uk/news/science/science-news/3341042/Top-ten-greatest-experiments.html
+        - https://www.space.com/36307-5-most-ingenious-experiments.html
+        - https://explorable.com/physics-experiments
+        - https://en.wikipedia.org/wiki/List_of_experiments#Physics
+        - https://en.wikipedia.org/wiki/Experimental_physics#Famous_experiments
+        - [de Sitter's Observations - Intro to Physics](https://www.youtube.com/watch?v=HXLj5J4I1nY)
+- Left and right
+    - We can define left and right absolutely due to parity violation.
+    - [WP:Wu experiment](https://en.wikipedia.org/wiki/Wu_experiment)
+        - [WP:Parity, violation](https://en.wikipedia.org/wiki/Parity_(physics)#Parity_violation)
+    - [Phys. SE 18729: absolute defintion of the right (i. e. not left) direction](https://physics.stackexchange.com/questions/18729/absolute-defintion-of-the-right-i-e-not-left-direction)

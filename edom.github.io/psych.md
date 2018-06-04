@@ -30,7 +30,9 @@ date: 2018-05-24 02:52 +0700
             - Application to politics:
                 - [Frame your persuasion in the target's morality](https://qz.com/525132/the-smartest-most-effective-way-to-win-any-political-argument/).
                 - [Same](https://www.nytimes.com/2015/11/15/opinion/sunday/the-key-to-political-persuasion.html).
-    - Marketing is about inducing people to buy something.
+    - A *market* is where things are bought and sold.
+    - To *market* something is to try to sell that thing.
+    - Marketing is about inducing people to buy something?
     - Sometimes being agreeable is more important than being correct.
         - Other people's feelings are more important than the truth?
     - https://qz.com/881289/a-new-study-linking-profanity-to-honesty-shows-people-who-curse-are-more-authentic/

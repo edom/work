@@ -5,6 +5,11 @@ date: 2018-05-16 00:00 +0700
 language: en
 ---
 
+- Haskell in 2018
+    - https://www.reddit.com/r/haskell/comments/7wmhyi/an_opinionated_guide_to_haskell_in_2018/
+    - https://github.com/Gabriel439/post-rfc/blob/master/sotu.md
+    - https://www.reddit.com/r/haskell/comments/54fv8b/what_is_the_state_of_haskell/
+    - https://lexi-lambda.github.io/blog/2018/02/10/an-opinionated-guide-to-haskell-in-2018/
 - How to get started?
     - Too many choices
         - install using the package manager that comes with your system

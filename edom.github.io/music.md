@@ -51,3 +51,5 @@ date: 2016-03-27 14:14:08 +0700
 - The more person is in a band, the less everyone works.
     - Also, more scheduling difficulties.
     - The ideal band size is less than 5 people?
+- http://www.hopefulcases.org/
+    - https://www.reddit.com/r/MadeMeSmile/comments/8fjd1u/on_my_hellish_nyc_commute/

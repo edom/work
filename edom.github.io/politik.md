@@ -87,3 +87,8 @@ We already have laws for people causing public disorder.
     - http://www.pajak.go.id/article/jangan-panik-jika-lupa-kode-efin-ikuti-langkah-berikut
 - https://www.bloomberg.com/quicktake/indonesias-nationalism
     - "A lack of roads and ports means it’s cheaper to ship goods to China than across the archipelago."
+- unread, possible problems with the justice system, unsolved cases
+    - https://nasional.tempo.co/read/793720/bnn-ada-72-mafia-narkoba-lain-freddy-masih-kelas-ecek-ecek
+    - http://akakristianto.com/2015/08/14/ungkap-kematian-pekerja-kebersihan-jis/
+    - http://nasional.republika.co.id/berita/nasional/hukum/15/06/05/npfrim-azwar-tersangka-jis-bukan-mati-bunuh-diri
+    - https://en.wikipedia.org/wiki/Munir_Said_Thalib

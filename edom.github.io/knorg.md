@@ -30,3 +30,6 @@ permalink: /knorg.html
                 - Weapon. Sharp edges.
                 - Fire. Cooking.
                 - Husbandry. Raise. Farm. Ranch. Agriculture. Crops.
+        - Try to restore some of the Internet (Google, Wikipedia) before the survivalists die???
+- Example of primitive life (but not survivalism?)
+    - [YT:Primitive Life](https://www.youtube.com/user/laws507/videos)

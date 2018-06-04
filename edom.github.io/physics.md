@@ -9,9 +9,7 @@ mathjax: yes
     - Every branch of physics is about constructing a mathematical model of nature.
         - Every branch is interested in different aspects of nature.
             - Example: Mechanics is interested in motion.
-- Physics can't be separated from philosophy and mathematics.
-    - Mathematical model enables prediction.
-    - What does philosophy enable?
+- Physics can't be separated from philosophy, mathematics, and engineering?
 - Philosophy of physics
     - The epistemology (how-do-we-know) of physics is the scientific method.
         - [WP:Scientific method](https://en.wikipedia.org/wiki/Scientific_method)
@@ -209,3 +207,9 @@ mathjax: yes
 - Free electron can't absorb photon
     - https://physics.stackexchange.com/questions/225522/free-electron-cant-absorb-a-photon
     - https://www.quora.com/If-photons-can-be-absorbed-by-electrons-why-can-photons-not-be-absorbed-by-free-electrons
+- theoretical physics meta-research
+    - https://www.kth.se/en/sci/phd/programs/physics/forskning/aktuell-forskning-inom-teoretisk-fysik-1.76843
+    - https://www.quora.com/What-are-some-of-the-best-Physics-blogs
+    - https://blog.feedspot.com/physics_blogs/
+- high-energy physics information system
+    - https://inspirehep.net/
