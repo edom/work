@@ -134,3 +134,8 @@ American individualisn, Russian collectivism
     - "the very idea of representative democracy is based on the fact that the preferences of the individual constituents
     do not make for good decisions in complex questions."
     - TODO group this with Socrates's argument
+- Political economy
+    - https://en.wikipedia.org/wiki/Employer_of_last_resort
+        - https://en.wikipedia.org/wiki/Civilian_Conservation_Corps
+        - [Argentina: A Case Study on the "Plan Jefes y Jefas de Hogar
+    Desocupados", or the Employment Road to Economic Recovery](http://www.levyinstitute.org/pubs/wp_534.pdf)

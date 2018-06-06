@@ -7,7 +7,8 @@ mathjax: yes
 
 - Overview
     - Target audience:
-        - Everyone who wants to learn physics from first principles.
+        - Everyone who wants to justify physics.
+        - Everyone who wants to formalize physics.
     - Natural knowledge is knowledge about nature (reality).
     - This page tries to list natural knowledge, sorted descending by verifiability.
     - This page tries to teach natural knowledge in the fastest way possible.
@@ -21,12 +22,46 @@ mathjax: yes
             - definition (fiat, agreement between speakers of the same language)
             - inference (logic, rules of thought)
         - We don't need to go deeper into [Philosophy]({% link philo.md %}) for now.
+    - A problem with physics: *too many unjustified tacit assumptions*.
+        - Every scientific revolution invalidates some tacit assumptions?
+        - Physics is mathematics + engineering + philosophy.
+            - If we skip the mathematics, we can't measure.
+            - If we skip the engineering, we can't experiment.
+            - If we skip the philosophy, we can't progress.
+                - We will make unjustified tacit assumptions.
+        - [WP:Tacit assumption](https://en.wikipedia.org/wiki/Tacit_assumption)
+        - [Tacit assumptions or Implicit assumptions (if they are flawed) leads to paradoxical paradigm and scientific crisis](https://www.researchgate.net/publication/295525659_Tacit_assumptions_or_Implicit_assumptions_if_they_are_flawed_leads_to_paradoxical_paradigm_and_scientific_crisis)
+        - [How to expose insidious tacit assumptions, which sidetrack scientific progress into wrong path (leading to scientific crisis), if not exposed?](https://www.researchgate.net/post/How_to_expose_insidious_tacit_assumptions_which_sidetrack_scientific_progress_into_wrong_path_leading_to_scientific_crisis_if_not_exposed)
+        - [1975, article, paywall, "Tacit Assumptions in Fundamental Particle Physics"](https://www.jstor.org/stable/986647)
+            - [unpaywalled](http://www.iaea.org/inis/collection/NCLCollectionStore/_Public/06/183/6183879.pdf)
 - Let's go back to prehistoric times.
     - Let's begin with very wrong ideas.
         - We're "cheating": we have hindsight; they didn't.
     - We will revise knowledge as we go. We will become less wrong.
     - We might will never be 0% wrong.
         - But knowledge doesn't have to be 100% true in order to be useful.
+- Matter
+    - Define: The *mass* of a thing is the amount of matter in that thing.
+        - Tacit assumption: Things are made of a finite amount of matter.
+            - Water is made of water matter.
+            - Iron is made of iron matter.
+            - X is made of X matter, etc.
+    - Observe:
+    If the mass of one copy of X is \\( m \\),
+    then the mass of two copies of X is \\( 2 \cdot m \\).
+        - What do we mean by a *copy* of X? An "instance" of X?
+        - Tacit assumption: Copies of a thing are made of the same kind of matter.
+        - Tacit assumption: Things of the same type behave in the same way.
+    - Observe: Water dissolves salt.
+        - Solution of salt in water?
+        - Mixture of water matter and salt matter?
+    - [2016, "Theories of matter"](https://www.school-for-champions.com/science/matter_theories.htm)
+    - http://www.edu.pe.ca/queencharlotte/homework/mmorrison/9science/matter/section2_1.pdf
+    - https://en.wikipedia.org/wiki/Atom#First_evidence-based_theory
+        - John Dalton (1766--1844)
+        - https://en.wikipedia.org/wiki/Law_of_multiple_proportions
+        - https://en.wikipedia.org/wiki/Stoichiometry
+        - https://en.wikipedia.org/wiki/Conservation_of_mass
 - Falling
     - Define: The *Earth* is where we stand.
     - Define: *Duration* is what a timer measures.
@@ -40,8 +75,17 @@ mathjax: yes
     - Define: *Length* is what a ruler measures.
     - Define: *Acceleration* is the rate of change of velocity.
     - Define: *Weight* is what a weight scale measures.
-    - Define: *Mass* is weight.
-        - (Pretend that "force" has not been invented.)
+    - Observe: Mass is not weight.
+        - Jump around while measuring the weight of something.
+        - The weight scale glitches.
+    - Assume: Weight is proportional to mass.
+    - Define: *Volume* is what volume meter measures.
+        - Submerge X completely into a bucket full of water.
+        - The *volume* of X is the amount of water that spills.
+    - Define: *Volume* is amount of space occupied.
+        - Tacit assumption: Space exists.
+        - Tacit assumption: Space can be occupied.
+    - Define: *Density* is mass per volume.
     - Infer: Things fall *with constant acceleration* toward the Earth.
         - That is: <span>\( h = k \cdot t^2 \)</span> where
             - \\( h \\) is height of fall;
@@ -78,7 +122,6 @@ mathjax: yes
     - Define: Shadow.
     - Infer: Light travels in straight line.
         - Observe: The shape of the shadow.
-    - ... it's still a very long way to 21st century knowledge
         - Observe: two fires, two shadows.
             - Stand between two fires.
             - Observe: two shadows of you.
@@ -86,6 +129,11 @@ mathjax: yes
     - Infer: Heat behaves like light.
         - Observe: Heat can be blocked. (Experiment using two hands and a fire.)
 - Electromagnetism
+    - Electromagnetism unifies optics, electricity, and magnetism.
+    - Define: A *metal* is a thing with these behaviors:
+        - It shines under sunlight.
+        - It heats up easily when exposed to sunlight or fire.
+        - It doesn't burn in fire, unlike leaf or wood.
     - Define: Iron.
         - [WP:Ancient iron production](https://en.wikipedia.org/wiki/Ancient_iron_production)
         - [Infographic: History of Metals Timeline](http://www.makin-metals.com/about/history-of-metals-infographic/)
@@ -93,21 +141,20 @@ mathjax: yes
         - [WP:Metallurgy, history](https://en.wikipedia.org/wiki/Metallurgy#History)
         - [WP:Ferrous metallurgy](https://en.wikipedia.org/wiki/Ferrous_metallurgy)
         - [WP:Archaeometallurgy](https://en.wikipedia.org/wiki/Archaeometallurgy)
-    - Define: Lodestone.
-        - [WP:Lodestone](https://en.wikipedia.org/wiki/Lodestone)
-            - [WP:Magnetite](https://en.wikipedia.org/wiki/Magnetite)
+    - Define: [WP:Lodestone](https://en.wikipedia.org/wiki/Lodestone).
     - Define: A *magnet* is a piece of lodestone.
     - Electricity
         - Observe: Electricity
             - Rub amber with cat fur.
-            - The amber can now attract feathers.
-        - todo: Capacitor
-        - todo: Leyden jar
-        - todo: Electric charge
-        - Define: To *charge* an object is to rub it.
-        - Set
+            - The amber can now *attract* feathers.
+            - This phenomenon is called "electricity".
+        - Define: To *charge* a thing is to rub it.
+        - Define: A *charged* thing is a thing that
+            - has been rubbed and
+            - interacts with other charged things.
+        - Define: Electric charge
             - Inferences
-                - Infer: There are two kinds of electric charges.
+                - Infer: There are two kinds of charges.
                 - Infer: Similar charges repel each other.
                 - Infer: Opposite charges attract each other.
             - Observe:
@@ -115,12 +162,42 @@ mathjax: yes
                 - Rub glass H with silk T.
                 - The glasses *repel* each other (G-H).
                 - The silks *repel* each other (S-T).
-                - A glass and a silk attract each other (G-S, G-T, H-S, H-T).
+                - A glass and a silk *attract* each other (G-S, G-T, H-S, H-T).
+                - Define: *Vitreous charge* and *resinous charge*
+                    - "Vitreous" is a Latinate word that means "glassy".
+                    - *Vitreous charge* is the charge of a rubbed glass.
+                    - [Wiktionary:vitreous](https://en.wiktionary.org/wiki/vitreous)
+                        - 1733, [WP:Charles François de Cisternay du Fay](https://en.wikipedia.org/wiki/Charles_Fran%C3%A7ois_de_Cisternay_du_Fay)
                 - [Phys. SE 266246: How did physicists know that there are two kind of charges?](https://physics.stackexchange.com/questions/266246/how-did-physicists-know-that-there-are-two-kind-of-charges/266250)
-        - Define: *Positive charge* is the charge left on a glass rod after being rubbed with silk.
-            - [WP:Electric charge](https://en.wikipedia.org/wiki/Electric_charge)
-                - "It is arbitrary which polarity is called positive and which is called negative."
-                - "Positive charge can be defined as the charge left on a glass rod after being rubbed with silk."
+            - Superseded theories
+                - [WP:Fluid theory of electricity](https://en.wikipedia.org/wiki/Fluid_theory_of_electricity)
+            - Define: *Positive charge* is the charge left on a glass rod after being rubbed with silk.
+                - [WP:Electric charge](https://en.wikipedia.org/wiki/Electric_charge)
+                    - "It is arbitrary which polarity is called positive and which is called negative."
+                    - "Positive charge can be defined as the charge left on a glass rod after being rubbed with silk."
+        - Observe: Rubbing a piece of iron doesn't charge it?
+        - How do we measure the charge of a thing?
+            - [WP:Electrometer](https://en.wikipedia.org/wiki/Electrometer)
+            - How do we know whether a thing is charged?
+                - [WP:Electroscope](https://en.wikipedia.org/wiki/Electroscope)
+                    - [WP:Versorium](https://en.wikipedia.org/wiki/Versorium)
+            - Coulomb's torsion balance
+                - [WP:Coulomb's law](https://en.wikipedia.org/wiki/Coulomb%27s_law)
+        - Observe: Touching two things equalizes their electric charge?
+            - Let A be a charged thing.
+            - Let B be an uncharged thing.
+            - Touching A and B charges B.
+        - Observe: Electric charge can be stored.
+        - How do we charge a thing?
+            - Rubbing; [WP:Triboelectric effect](https://en.wikipedia.org/wiki/Triboelectric_effect)
+            - [WP:Electrostatic induction](https://en.wikipedia.org/wiki/Electrostatic_induction)
+            - [WP:Electrostatic generator](https://en.wikipedia.org/wiki/Electrostatic_generator)
+                - frictional machines, Otto von Guericke, around 1663
+        - todo:
+            - Conductors and isolators
+            - Capacitor, Leyden jar
+            - https://en.wikipedia.org/wiki/Electrochemical_cell
+            - https://en.wikipedia.org/wiki/Electric_battery
     - Magnetism
         - Observe: Two magnets attract or repel each other.
         - Observe: A magnet and a piece of iron attract each other.
@@ -135,36 +212,71 @@ mathjax: yes
                     - [WP:Polar drift](https://en.wikipedia.org/wiki/Polar_drift)
         - [WP:Magnetism, history](https://en.wikipedia.org/wiki/Magnetism#History)
         - [WP:De Magnete](https://en.wikipedia.org/wiki/De_Magnete) (1600)
-    - Electricity
-        - Observe: Triboelectric effect
-            - [WP:Triboelectric effect](https://en.wikipedia.org/wiki/Triboelectric_effect)
-        - [WP:Electroscope](https://en.wikipedia.org/wiki/Electroscope)
-            - [WP:Versorium](https://en.wikipedia.org/wiki/Versorium)
-        - [WP:Electrostatic induction](https://en.wikipedia.org/wiki/Electrostatic_induction)
-    - [WP:Oersted's law](https://en.wikipedia.org/wiki/Oersted%27s_law)
+    - Observe: [WP:Oersted's law](https://en.wikipedia.org/wiki/Oersted%27s_law):
+    Electrical current in a wire deflects nearby magnetic needles.
+    - todo:
+        - Reversibility between motor and generator
+            - Input electricity, output mechanicity.
+            - Input mechanicity, output electricity.
+        - https://en.wikipedia.org/wiki/Homopolar_motor
+        - https://en.wikipedia.org/wiki/Homopolar_generator
+        - https://en.wikipedia.org/wiki/Electric_motor
+        - https://en.wikipedia.org/wiki/Electric_generator
+        - https://en.wikipedia.org/wiki/Electromagnetic_induction
+        - https://en.wikipedia.org/wiki/Faraday%27s_law_of_induction
+        - https://en.wikipedia.org/wiki/Biot%E2%80%93Savart_law
+        - https://en.wikipedia.org/wiki/Lenz%27s_law
+        - https://en.wikipedia.org/wiki/Maxwell%27s_equations
     - Summaries
         - [WP:Electricity, history](https://en.wikipedia.org/wiki/Electricity#History)
             - William Gilbert (1544--1603) distinguished the lodestone effect from the amber effect.
-                - Rods of amber could be rubbed with cat's fur to attract light objects like feathers.
+                - Rods of amber could be rubbed with cat's fur to attract light things like feathers.
                 - "Electric" means "like amber".
                 - [WP:Amber](https://en.wikipedia.org/wiki/Amber)
-- Infer: Law of the lever: \\( F_1 \cdot r_1 = F_2 \cdot r_2 \\).
-    - Move the fulcrum, or slide the lever along the fulcrum.
-- Observe: A burning leaf stops burning if it's enclosed.
-- Observe: Food spoils. Food goes rancid.
-- Unread
-    - [WP:History of science](https://en.wikipedia.org/wiki/History_of_science)
-    - Experiments
-        - https://www.explainthatstuff.com/great-physics-experiments.html
-        - https://www.quora.com/What-are-some-of-the-most-important-experiments-in-physics
-        - https://www.telegraph.co.uk/news/science/science-news/3341042/Top-ten-greatest-experiments.html
-        - https://www.space.com/36307-5-most-ingenious-experiments.html
-        - https://explorable.com/physics-experiments
-        - https://en.wikipedia.org/wiki/List_of_experiments#Physics
-        - https://en.wikipedia.org/wiki/Experimental_physics#Famous_experiments
-        - [de Sitter's Observations - Intro to Physics](https://www.youtube.com/watch?v=HXLj5J4I1nY)
-- Left and right
-    - We can define left and right absolutely due to parity violation.
-    - [WP:Wu experiment](https://en.wikipedia.org/wiki/Wu_experiment)
-        - [WP:Parity, violation](https://en.wikipedia.org/wiki/Parity_(physics)#Parity_violation)
-    - [Phys. SE 18729: absolute defintion of the right (i. e. not left) direction](https://physics.stackexchange.com/questions/18729/absolute-defintion-of-the-right-i-e-not-left-direction)
+    - [WP:History of electromagnetic theory](https://en.wikipedia.org/wiki/History_of_electromagnetic_theory)
+    - [WP:Timeline of electromagnetism and classical optics](https://en.wikipedia.org/wiki/Timeline_of_electromagnetism_and_classical_optics)
+- Unplaced
+    - Infer: Law of the lever: \\( F_1 \cdot r_1 = F_2 \cdot r_2 \\).
+        - Move the fulcrum, or slide the lever along the fulcrum.
+    - Observe: A burning leaf stops burning if it's enclosed.
+    - Observe: Food spoils. Food goes rancid.
+    - [WP:Flame](https://en.wikipedia.org/wiki/Flame)
+        - [WP:Fire](https://en.wikipedia.org/wiki/Fire)
+            - What's the difference?
+        - [Phys. SE 259021: How do flames neutralize a static charge?](https://physics.stackexchange.com/questions/259021/how-do-flames-neutralize-a-static-charge)
+    - Left and right
+        - We can define left and right absolutely due to parity violation.
+        - [WP:Wu experiment](https://en.wikipedia.org/wiki/Wu_experiment)
+            - [WP:Parity, violation](https://en.wikipedia.org/wiki/Parity_(physics)#Parity_violation)
+        - [Phys. SE 18729: absolute defintion of the right (i. e. not left) direction](https://physics.stackexchange.com/questions/18729/absolute-defintion-of-the-right-i-e-not-left-direction)
+    - [WP:Buoyancy](https://en.wikipedia.org/wiki/Buoyancy)
+    - Observe: Salt conducts electricity?
+    - Geology
+        - Mineral distribution hypothesis?
+            - Assume:
+                - The Earth was once a hot liquid.
+                - The surface cooled down and solidified.
+            - Infer:
+                - Denser minerals should sink towards the core of Earth.
+                - As we dig deeper, the Earth should be more dense.
+        - [Where do minerals come from?](http://www.bgs.ac.uk/mineralsUK/mineralsYou/wheredo.html)
+            - "Minerals are concentrated by igneous, sedimentary and metamorphic processes"
+            - [WP:Structure of the Earth](https://en.wikipedia.org/wiki/Structure_of_the_Earth)
+    - How do we know that light *is* an electromagnetic wave?
+        - We know that light behaves like an electromagnetic wave, from
+            - the speed of light, and
+            - the wave behavior of light.
+        - But that's all; how do we know that it *is* it?
+    - Formal Physics
+        - [2012, article, "Physics and proof theory"](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4066961/)
+    - Unread
+        - [WP:History of science](https://en.wikipedia.org/wiki/History_of_science)
+        - Experiments
+            - https://www.explainthatstuff.com/great-physics-experiments.html
+            - https://www.quora.com/What-are-some-of-the-most-important-experiments-in-physics
+            - https://www.telegraph.co.uk/news/science/science-news/3341042/Top-ten-greatest-experiments.html
+            - https://www.space.com/36307-5-most-ingenious-experiments.html
+            - https://explorable.com/physics-experiments
+            - https://en.wikipedia.org/wiki/List_of_experiments#Physics
+            - https://en.wikipedia.org/wiki/Experimental_physics#Famous_experiments
+            - [de Sitter's Observations - Intro to Physics](https://www.youtube.com/watch?v=HXLj5J4I1nY)

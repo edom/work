@@ -92,3 +92,6 @@ We already have laws for people causing public disorder.
     - http://akakristianto.com/2015/08/14/ungkap-kematian-pekerja-kebersihan-jis/
     - http://nasional.republika.co.id/berita/nasional/hukum/15/06/05/npfrim-azwar-tersangka-jis-bukan-mati-bunuh-diri
     - https://en.wikipedia.org/wiki/Munir_Said_Thalib
+- https://www.hukumproperti.com/pertanahan/hapusnya-hak-atas-tanah/
+    - "karena ditelantarkan" PP 36/1998
+        - Apakah bisa digunakan untuk tetangga yang meninggalkan rumahnya dan membiarkannya rusak?

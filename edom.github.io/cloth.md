@@ -81,6 +81,9 @@ date: 2017-06-09 00:59:00 +0700
     - https://www.quora.com/How-do-they-make-tee-shirts-that-dont-have-seams-down-the-sides
     - What is the mathematics of wrapping a solid with a surface?
 - [WP:Clothing](https://en.wikipedia.org/wiki/Clothing)
+- [WP:Textile manufacturing](https://en.wikipedia.org/wiki/Textile_manufacturing)
+    - [WP:Textile manufacturing during the Industrial Revolution](https://en.wikipedia.org/wiki/Textile_manufacture_during_the_Industrial_Revolution)
+    - [WP:Textile manufacturing by pre-industrial methods](https://en.wikipedia.org/wiki/Textile_manufacturing_by_pre-industrial_methods)
 - Fashion show
     - Anders Landinger, male skirt
     - Scandinavian man wearing black maxi dress in [mens dresses and skirts](https://s-media-cache-ak0.pinimg.com/736x/81/01/81/8101816566ba697a0e484de4f2551673.jpg)

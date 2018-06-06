@@ -83,3 +83,5 @@ permalink: /law.html
 - Can't we simply ask the defendant "Did you do it?"?
 - [WP:Hitchens's razor](https://en.wikipedia.org/wiki/Hitchens%27s_razor)
     - "What can be asserted without evidence can be dismissed without evidence"
+- Maritime law
+    - [WP:General average](https://en.wikipedia.org/wiki/General_average)
