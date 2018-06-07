@@ -41,7 +41,8 @@ mathjax: yes
     - We might will never be 0% wrong.
         - But knowledge doesn't have to be 100% true in order to be useful.
 - Matter
-    - Define: The *mass* of a thing is the amount of matter in that thing.
+    - Define: *Mass* is the amount of matter.
+        - The *mass* of a thing is the amount of matter in that thing.
         - Tacit assumption: Things are made of a finite amount of matter.
             - Water is made of water matter.
             - Iron is made of iron matter.
@@ -109,6 +110,19 @@ mathjax: yes
         - This experiment finds out the density of the Earth.
         - That is related to the gravitational constant \\( G \\).
         - [WP:Cavendish experiment](https://en.wikipedia.org/wiki/Cavendish_experiment)
+    - Infer: [WP:Newton's law of universal gravitation](https://en.wikipedia.org/wiki/Newton%27s_law_of_universal_gravitation)
+        - \\( F = G \cdot m_1 \cdot m_2 / r^2 \\)
+        - What is the justification?
+            - Does Newton justify Kepler?
+            - Does Kepler justify Newton?
+        - How did Newton arrive at this?
+        - Infer: [WP:Kepler's laws of planetary motion](https://en.wikipedia.org/wiki/Kepler%27s_laws_of_planetary_motion)
+            - Observe: Tycho Brahe's data
+    - Define: A person is *experiencing weightlessness* iff his weight is zero (the weight scale says zero).
+    - Assume: Einstein's equivalence principle?
+        - A free-falling person will experience weightlessness.
+        - A person in void (zero gravity, absence of any other mass) will also experience weightlessness.
+        - Those two phenomenons are *the same phenomenon*.
 - Fire, light, and heat
     - Define: *Glass* is transparent (see-through) solid.
         - [WP:History of glass](https://en.wikipedia.org/wiki/History_of_glass)
@@ -147,55 +161,91 @@ mathjax: yes
         - Observe: Electricity
             - Rub amber with cat fur.
             - The amber can now *attract* feathers.
-            - This phenomenon is called "electricity".
-        - Define: To *charge* a thing is to rub it.
-        - Define: A *charged* thing is a thing that
-            - has been rubbed and
-            - interacts with other charged things.
-        - Define: Electric charge
-            - Inferences
-                - Infer: There are two kinds of charges.
-                - Infer: Similar charges repel each other.
-                - Infer: Opposite charges attract each other.
-            - Observe:
-                - Rub glass G with silk S.
-                - Rub glass H with silk T.
-                - The glasses *repel* each other (G-H).
-                - The silks *repel* each other (S-T).
-                - A glass and a silk *attract* each other (G-S, G-T, H-S, H-T).
-                - Define: *Vitreous charge* and *resinous charge*
-                    - "Vitreous" is a Latinate word that means "glassy".
-                    - *Vitreous charge* is the charge of a rubbed glass.
-                    - [Wiktionary:vitreous](https://en.wiktionary.org/wiki/vitreous)
-                        - 1733, [WP:Charles François de Cisternay du Fay](https://en.wikipedia.org/wiki/Charles_Fran%C3%A7ois_de_Cisternay_du_Fay)
-                - [Phys. SE 266246: How did physicists know that there are two kind of charges?](https://physics.stackexchange.com/questions/266246/how-did-physicists-know-that-there-are-two-kind-of-charges/266250)
-            - Superseded theories
-                - [WP:Fluid theory of electricity](https://en.wikipedia.org/wiki/Fluid_theory_of_electricity)
-            - Define: *Positive charge* is the charge left on a glass rod after being rubbed with silk.
-                - [WP:Electric charge](https://en.wikipedia.org/wiki/Electric_charge)
-                    - "It is arbitrary which polarity is called positive and which is called negative."
-                    - "Positive charge can be defined as the charge left on a glass rod after being rubbed with silk."
-        - Observe: Rubbing a piece of iron doesn't charge it?
-        - How do we measure the charge of a thing?
-            - [WP:Electrometer](https://en.wikipedia.org/wiki/Electrometer)
-            - How do we know whether a thing is charged?
-                - [WP:Electroscope](https://en.wikipedia.org/wiki/Electroscope)
-                    - [WP:Versorium](https://en.wikipedia.org/wiki/Versorium)
-            - Coulomb's torsion balance
-                - [WP:Coulomb's law](https://en.wikipedia.org/wiki/Coulomb%27s_law)
-        - Observe: Touching two things equalizes their electric charge?
-            - Let A be a charged thing.
-            - Let B be an uncharged thing.
-            - Touching A and B charges B.
-        - Observe: Electric charge can be stored.
-        - How do we charge a thing?
-            - Rubbing; [WP:Triboelectric effect](https://en.wikipedia.org/wiki/Triboelectric_effect)
-            - [WP:Electrostatic induction](https://en.wikipedia.org/wiki/Electrostatic_induction)
-            - [WP:Electrostatic generator](https://en.wikipedia.org/wiki/Electrostatic_generator)
-                - frictional machines, Otto von Guericke, around 1663
+            - Define: Such rubbed amber *exhibits electricity*.
+            - These things might be easier to find in the 21st century:
+                - Glass (instead of amber).
+                - Silk or wool (instead of cat fur).
+                - Pieces of paper (instead of feather).
+        - Charge
+            - Define: To *charge* a thing is to make it exhibit electricity.
+            - Observe: Ways to charge a thing
+                - Rubbing
+                    - [WP:Triboelectric effect](https://en.wikipedia.org/wiki/Triboelectric_effect)
+                    - [WP:Electrostatic generator](https://en.wikipedia.org/wiki/Electrostatic_generator)
+                        - frictional machines, Otto von Guericke, around 1663
+                - Influencing
+                    - [WP:Electrostatic induction](https://en.wikipedia.org/wiki/Electrostatic_induction)
+                    - Let A be a charged thing.
+                    - Let B be an uncharged thing.
+                    - Putting A near B charges B.
+                    - Putting A away from B uncharges B.
+                - Touching
+                    - Let A be a charged thing.
+                    - Let B be an uncharged thing.
+                    - If A and B touch, then B becomes charged.
+                    - If A and B are separated after touching, then B is still charged.
+                    - Assume: This doesn't work if B is a metal?
+                    - Observe: Two things equalizes their electric charge when they touch?
+                - Conduction
+                    - Let A be a charged thing.
+                    - Let B be an uncharged thing.
+                    - Let C be a piece of iron.
+                    - Let C touch both A and B, but without A touching B directly.
+                    - Remove C.
+                    - Verify that B is now charged.
+                    - Assume: This still holds if the iron in C is replaced with any other metal.
+                    - Define: Iron is a *conductor*.
+                    - Assume: Every metal is a conductor.
+                    - Define: Everything is either a conductor or an *isolator*.
+                    - Assume: An isolator is a thing that can be charged by rubbing.
+            - Two ways of charging: *vitreously* and *resinously*
+                - Inferences
+                    - Infer: There are two kinds of charged things.
+                    - Infer: Two similarly charged things repel each other.
+                    - Infer: Two differently charged things attract each other.
+                - Observe:
+                    - Rub glass G with silk S.
+                    - Rub glass H with silk T.
+                    - The glasses *repel* each other (G-H).
+                    - The silks *repel* each other (S-T).
+                    - A glass and a silk *attract* each other (G-S, G-T, H-S, H-T).
+                    - Define: A rubbed glass is *vitreously charged*.
+                        - "Vitreous" is a Latinate word that means "glassy".
+                        - [Wiktionary:vitreous](https://en.wiktionary.org/wiki/vitreous)
+                            - 1733, [WP:Charles François de Cisternay du Fay](https://en.wikipedia.org/wiki/Charles_Fran%C3%A7ois_de_Cisternay_du_Fay)
+                    - Define: A thing is *resinously charged* iff it is charged but not vitreously.
+                    - [Phys. SE 266246: How did physicists know that there are two kind of charges?](https://physics.stackexchange.com/questions/266246/how-did-physicists-know-that-there-are-two-kind-of-charges/266250)
+                - Superseded theories
+                    - [WP:Fluid theory of electricity](https://en.wikipedia.org/wiki/Fluid_theory_of_electricity)
+            - Assume: An *electrometer* measures the *strength* of electricity exhibited by a thing.
+                - Assume: The strength of electricity exhibited by a rubbed amber can be measured by the amount of paper it can pull.
+                - [WP:Electrometer](https://en.wikipedia.org/wiki/Electrometer)
+                - How do we know whether a thing is charged, if we don't care about the exact amount of charge?
+                    - [WP:Electroscope](https://en.wikipedia.org/wiki/Electroscope)
+                        - [WP:Versorium](https://en.wikipedia.org/wiki/Versorium)
+            - What?
+                - Define: *Positive charge* is the charge left on a glass rod after being rubbed with silk.
+                    - [WP:Electric charge](https://en.wikipedia.org/wiki/Electric_charge)
+                        - "It is arbitrary which polarity is called positive and which is called negative."
+                        - "Positive charge can be defined as the charge left on a glass rod after being rubbed with silk."
+                - Coulomb's torsion balance
+                    - [WP:Coulomb's law](https://en.wikipedia.org/wiki/Coulomb%27s_law)
+                        - \\( F = k \cdot q_1 \cdot q_2 / r^2 \\)
+            - Observe: Rubbing a piece of iron doesn't charge it?
+            - Observe: Electric charge can be stored.
+            - Observe: Electric charge can be unloaded.
+            - [Phys. SE 23572: How does an object regains its neutrality after being charged by rubbing?](https://physics.stackexchange.com/questions/23572/how-does-an-object-regains-its-neutrality-after-being-charged-by-rubbing)
         - todo:
             - Conductors and isolators
-            - Capacitor, Leyden jar
+            - Infer: Metal and electricity
+                - Observe: Iron doesn't exhibit electricity after being rubbed.
+                - Observe: Iron exhibits electricity by influence.
+            - [WP:Electrical conductor](https://en.wikipedia.org/wiki/Electrical_conductor)
+                - https://www.quora.com/Why-do-conductors-not-produce-static-electricity
+                - https://www.scientificamerican.com/article/static-science-how-well-do-different-materials-make-static-electricity/
+                - https://www.reddit.com/r/askscience/comments/2ujpw8/why_does_metal_eg_a_metal_slide_not_produce_static/
+            - Capacitor
+            - [WP:Leyden jar](https://en.wikipedia.org/wiki/Leyden_jar)
             - https://en.wikipedia.org/wiki/Electrochemical_cell
             - https://en.wikipedia.org/wiki/Electric_battery
     - Magnetism
@@ -280,3 +330,23 @@ mathjax: yes
             - https://en.wikipedia.org/wiki/List_of_experiments#Physics
             - https://en.wikipedia.org/wiki/Experimental_physics#Famous_experiments
             - [de Sitter's Observations - Intro to Physics](https://www.youtube.com/watch?v=HXLj5J4I1nY)
+    - Scientific theory
+        - https://en.wikipedia.org/wiki/Scientific_theory#Unification
+        - https://en.wikipedia.org/wiki/Superseded_scientific_theories#Physics
+    - Define: *Force* is what a force meter measures.
+        - A [WP:Force meter](https://en.wikipedia.org/wiki/Force_meter) is a spring.
+    - [WP:Weighing scale](https://en.wikipedia.org/wiki/Weighing_scale)
+    - [WP:Hooke's law](https://en.wikipedia.org/wiki/Hooke%27s_law)
+        - Let X be a thing.
+        - Hang a copy of X on a spring. The spring lengthens by \\( x \\) from its resting length.
+        - Hang two copies of X on a spring. The spring lengthens by \\( 2 \cdot x \\) from its resting length.
+    - https://en.wikipedia.org/wiki/Universal_testing_machine
+    - https://en.wikipedia.org/wiki/Dynamometer
+    - https://en.wikipedia.org/wiki/Bucket_argument
+    - 1999, book, Roberto Torretti, "The philosophy of physics"
+    - History of electric current
+        - http://www.need.org/Files/curriculum/infobook/Elec3I.pdf
+        - http://practicalphysics.org/electric-charge-and-current-short-history.html
+        - https://en.wikipedia.org/wiki/Electric_current
+    - [Quora: Will the theories of relativity and quantum mechanics merge? With what result?](https://www.quora.com/Will-the-theories-of-relativity-and-quantum-mechanics-merge-With-what-result)
+    - https://en.wikipedia.org/wiki/Scientific_Revolution
