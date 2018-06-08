@@ -40,29 +40,7 @@ mathjax: yes
     - We will revise knowledge as we go. We will become less wrong.
     - We might will never be 0% wrong.
         - But knowledge doesn't have to be 100% true in order to be useful.
-- Matter
-    - Define: *Mass* is the amount of matter.
-        - The *mass* of a thing is the amount of matter in that thing.
-        - Tacit assumption: Things are made of a finite amount of matter.
-            - Water is made of water matter.
-            - Iron is made of iron matter.
-            - X is made of X matter, etc.
-    - Observe:
-    If the mass of one copy of X is \\( m \\),
-    then the mass of two copies of X is \\( 2 \cdot m \\).
-        - What do we mean by a *copy* of X? An "instance" of X?
-        - Tacit assumption: Copies of a thing are made of the same kind of matter.
-        - Tacit assumption: Things of the same type behave in the same way.
-    - Observe: Water dissolves salt.
-        - Solution of salt in water?
-        - Mixture of water matter and salt matter?
-    - [2016, "Theories of matter"](https://www.school-for-champions.com/science/matter_theories.htm)
-    - http://www.edu.pe.ca/queencharlotte/homework/mmorrison/9science/matter/section2_1.pdf
-    - https://en.wikipedia.org/wiki/Atom#First_evidence-based_theory
-        - John Dalton (1766--1844)
-        - https://en.wikipedia.org/wiki/Law_of_multiple_proportions
-        - https://en.wikipedia.org/wiki/Stoichiometry
-        - https://en.wikipedia.org/wiki/Conservation_of_mass
+- [Matter]({% link matter.md %})
 - Falling
     - Define: The *Earth* is where we stand.
     - Define: *Duration* is what a timer measures.
@@ -75,18 +53,6 @@ mathjax: yes
         - iff \\( t \\) is the minimum time required by something with constant speed \\( v \\) to go from A to B.
     - Define: *Length* is what a ruler measures.
     - Define: *Acceleration* is the rate of change of velocity.
-    - Define: *Weight* is what a weight scale measures.
-    - Observe: Mass is not weight.
-        - Jump around while measuring the weight of something.
-        - The weight scale glitches.
-    - Assume: Weight is proportional to mass.
-    - Define: *Volume* is what volume meter measures.
-        - Submerge X completely into a bucket full of water.
-        - The *volume* of X is the amount of water that spills.
-    - Define: *Volume* is amount of space occupied.
-        - Tacit assumption: Space exists.
-        - Tacit assumption: Space can be occupied.
-    - Define: *Density* is mass per volume.
     - Infer: Things fall *with constant acceleration* toward the Earth.
         - That is: <span>\( h = k \cdot t^2 \)</span> where
             - \\( h \\) is height of fall;
@@ -123,38 +89,8 @@ mathjax: yes
         - A free-falling person will experience weightlessness.
         - A person in void (zero gravity, absence of any other mass) will also experience weightlessness.
         - Those two phenomenons are *the same phenomenon*.
-- Fire, light, and heat
-    - Define: *Glass* is transparent (see-through) solid.
-        - [WP:History of glass](https://en.wikipedia.org/wiki/History_of_glass)
-    - Define: Sundial.
-        - [WP:Sundial](https://en.wikipedia.org/wiki/Sundial)
-        - [WP:Analemma](https://en.wikipedia.org/wiki/Analemma);
-        solar analemma = figure eight pattern of the sun on the sky across the year
-    - Define: Fire.
-    - Define: Heat.
-    - Define: Light.
-    - Define: Shadow.
-    - Infer: Light travels in straight line.
-        - Observe: The shape of the shadow.
-        - Observe: two fires, two shadows.
-            - Stand between two fires.
-            - Observe: two shadows of you.
-        - Observe: Light can be blocked. (Experiment using two hands and a fire.)
-    - Infer: Heat behaves like light.
-        - Observe: Heat can be blocked. (Experiment using two hands and a fire.)
 - Electromagnetism
     - Electromagnetism unifies optics, electricity, and magnetism.
-    - Define: A *metal* is a thing with these behaviors:
-        - It shines under sunlight.
-        - It heats up easily when exposed to sunlight or fire.
-        - It doesn't burn in fire, unlike leaf or wood.
-    - Define: Iron.
-        - [WP:Ancient iron production](https://en.wikipedia.org/wiki/Ancient_iron_production)
-        - [Infographic: History of Metals Timeline](http://www.makin-metals.com/about/history-of-metals-infographic/)
-        - [WP:Iron Age](https://en.wikipedia.org/wiki/Iron_Age)
-        - [WP:Metallurgy, history](https://en.wikipedia.org/wiki/Metallurgy#History)
-        - [WP:Ferrous metallurgy](https://en.wikipedia.org/wiki/Ferrous_metallurgy)
-        - [WP:Archaeometallurgy](https://en.wikipedia.org/wiki/Archaeometallurgy)
     - Define: [WP:Lodestone](https://en.wikipedia.org/wiki/Lodestone).
     - Define: A *magnet* is a piece of lodestone.
     - Electricity
@@ -171,6 +107,7 @@ mathjax: yes
             - Observe: Ways to charge a thing
                 - Rubbing
                     - [WP:Triboelectric effect](https://en.wikipedia.org/wiki/Triboelectric_effect)
+                        - [WP:Triboelectric series](https://en.wikipedia.org/wiki/Triboelectric_effect#Triboelectric_series)
                     - [WP:Electrostatic generator](https://en.wikipedia.org/wiki/Electrostatic_generator)
                         - frictional machines, Otto von Guericke, around 1663
                 - Influencing
@@ -246,8 +183,6 @@ mathjax: yes
                 - https://www.reddit.com/r/askscience/comments/2ujpw8/why_does_metal_eg_a_metal_slide_not_produce_static/
             - Capacitor
             - [WP:Leyden jar](https://en.wikipedia.org/wiki/Leyden_jar)
-            - https://en.wikipedia.org/wiki/Electrochemical_cell
-            - https://en.wikipedia.org/wiki/Electric_battery
     - Magnetism
         - Observe: Two magnets attract or repel each other.
         - Observe: A magnet and a piece of iron attract each other.
@@ -290,10 +225,7 @@ mathjax: yes
         - Move the fulcrum, or slide the lever along the fulcrum.
     - Observe: A burning leaf stops burning if it's enclosed.
     - Observe: Food spoils. Food goes rancid.
-    - [WP:Flame](https://en.wikipedia.org/wiki/Flame)
-        - [WP:Fire](https://en.wikipedia.org/wiki/Fire)
-            - What's the difference?
-        - [Phys. SE 259021: How do flames neutralize a static charge?](https://physics.stackexchange.com/questions/259021/how-do-flames-neutralize-a-static-charge)
+    - [Phys. SE 259021: How do flames neutralize a static charge?](https://physics.stackexchange.com/questions/259021/how-do-flames-neutralize-a-static-charge)
     - Left and right
         - We can define left and right absolutely due to parity violation.
         - [WP:Wu experiment](https://en.wikipedia.org/wiki/Wu_experiment)
@@ -344,9 +276,14 @@ mathjax: yes
     - https://en.wikipedia.org/wiki/Dynamometer
     - https://en.wikipedia.org/wiki/Bucket_argument
     - 1999, book, Roberto Torretti, "The philosophy of physics"
-    - History of electric current
+    - Electric current
+        - Detour: Justification of electric current requires chemistry.
         - http://www.need.org/Files/curriculum/infobook/Elec3I.pdf
         - http://practicalphysics.org/electric-charge-and-current-short-history.html
         - https://en.wikipedia.org/wiki/Electric_current
     - [Quora: Will the theories of relativity and quantum mechanics merge? With what result?](https://www.quora.com/Will-the-theories-of-relativity-and-quantum-mechanics-merge-With-what-result)
     - https://en.wikipedia.org/wiki/Scientific_Revolution
+    - Define: Sundial.
+        - [WP:Sundial](https://en.wikipedia.org/wiki/Sundial)
+        - [WP:Analemma](https://en.wikipedia.org/wiki/Analemma);
+        solar analemma = figure eight pattern of the sun on the sky across the year

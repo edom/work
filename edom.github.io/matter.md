@@ -1,0 +1,130 @@
+---
+title: Matter
+date: 2018-06-05 01:30 +0700
+permalink: /matter.html
+mathjax: yes
+---
+
+- Define: *Mass* is the amount of matter.
+    - The *mass* of a thing is the amount of matter in that thing.
+    - Tacit assumption: Things are made of a finite amount of matter.
+        - Water is made of water matter.
+        - Iron is made of iron matter.
+        - X is made of X matter, etc.
+- Define: *Weight* is what a weight scale measures.
+- Define: *Volume* is what volume meter measures.
+    - Submerge X completely into a bucket full of water.
+    - The *volume* of X is the amount of water that spills.
+- Define: *Volume* is amount of space occupied.
+    - Tacit assumption: Space exists.
+    - Tacit assumption: Space can be occupied.
+- Define: *Density* is mass per volume.
+- Observe: Mass is not weight.
+    - Jump around while measuring the weight of something.
+    - The weight scale glitches.
+- Assume: The mass of \\( n \\) copies of X is \\( n \\) times the mass of X.
+    - Problems
+        - What do we mean by a *copy* of X? An *instance* of X?
+        - Tacit assumption: Copies of a thing are made of the same kind of matter.
+        - Tacit assumption: Things of the same type behave in the same way.
+    - Observe: The weight of \\( n \\) copies of X is \\( n \\) times the weight of X.
+    - Assume: Weight is proportional to mass.
+- Unread
+    - [2016, "Theories of matter"](https://www.school-for-champions.com/science/matter_theories.htm)
+    - http://www.edu.pe.ca/queencharlotte/homework/mmorrison/9science/matter/section2_1.pdf
+- Chemistry
+    - [WP:Chemistry, history](https://en.wikipedia.org/wiki/Chemistry#History)
+    - [WP:History of chemistry](https://en.wikipedia.org/wiki/History_of_chemistry)
+    - [WP:Three-age system](https://en.wikipedia.org/wiki/Three-age_system)
+    - Define: *Natural* means not man-made.
+    - Define: Rust.
+    - Assume: Rust occurs naturally.
+    - Observe: Rust becomes iron when burned?
+    - Fire, light, and heat
+        - Observe: Fire.
+            - Define: Burn.
+            - [WP:Control of fire by early humans](https://en.wikipedia.org/wiki/Control_of_fire_by_early_humans)
+                - Infer: The first human encounter of fire is accidental.
+                    - Assume: There existed a time when no human had encountered fire.
+                    - Possible scenarios:
+                        - Someone encountered a plant burning due to lightning or volcanism.
+                        - Someone focused sunlight onto leaf using natural glass, out of pure curiosity.
+                            - Not implausible, but isn't this less likely than accidental discovery of fire due to lightning or volcanism?
+                - [Quora: How did humanity find out how to make fire?](https://www.quora.com/How-did-humanity-find-out-how-to-make-fire)
+                - [acsh.org: How And When Did Humans Discover Fire?](https://www.acsh.org/news/2016/07/23/how-and-when-did-humans-discover-fire)
+                - [sapiens.org: Who Started the First Fire?](https://www.sapiens.org/archaeology/neanderthal-fire/)
+                - [WP:Fire making](https://en.wikipedia.org/wiki/Fire_making)
+                    - "Fire occurs naturally as a result of volcanic activity, meteorites, and lightning strikes."
+                        - [WP:Wildfire](https://en.wikipedia.org/wiki/Wildfire)
+        - Observe: Burning wood produces *ash*.
+        - Define: Flame.
+        - What is the difference between [WP:Flame](https://en.wikipedia.org/wiki/Flame) and [WP:Fire](https://en.wikipedia.org/wiki/Fire)?
+        - Define: Heat
+            - *Heat* is what we feel with our skin near a fire.
+            - We feel *more heat* as we approach a fire.
+        - Define: Light.
+        - Define: Shadow.
+        - Infer: Light travels in straight line.
+            - Observe: The shape of the shadow.
+            - Observe: two fires, two shadows.
+                - Stand between two fires.
+                - Observe: two shadows of you.
+            - Observe: Light can be blocked. (Experiment using two hands and a fire.)
+        - Infer: Heat behaves like light.
+            - Observe: Heat can be blocked. (Experiment using two hands and a fire.)
+    - Define: A *metal* is a thing with these behaviors:
+        - It shines under sunlight.
+        - It heats up easily when exposed to sunlight or fire.
+        - It doesn't burn in fire, unlike leaf or wood.
+    - Metals known before history?
+        - [WP:Native metal](https://en.wikipedia.org/wiki/Native_metal)
+            - "Native metals were prehistoric man's only access to metal, since the process of extracting metals from their ores, smelting, is thought to have been discovered around 6500 BC. However, they could be found only in relatively small amounts, so they could not be used extensively. So while copper and iron were known well before the copper age and Iron Age, they would not have a large impact on humankind until the technology to smelt them from their ores, and thus mass-produce them appeared."
+        - Define: Iron.
+            - [WP:Ancient iron production](https://en.wikipedia.org/wiki/Ancient_iron_production)
+            - [Infographic: History of Metals Timeline](http://www.makin-metals.com/about/history-of-metals-infographic/)
+            - [WP:Iron Age](https://en.wikipedia.org/wiki/Iron_Age)
+            - [WP:Metallurgy, history](https://en.wikipedia.org/wiki/Metallurgy#History)
+            - [WP:Ferrous metallurgy](https://en.wikipedia.org/wiki/Ferrous_metallurgy)
+            - [WP:Archaeometallurgy](https://en.wikipedia.org/wiki/Archaeometallurgy)
+        - Define: Copper.
+            - [W:Native copper](https://en.wikipedia.org/wiki/Native_copper)
+        - [WP:Bronze](https://en.wikipedia.org/wiki/Bronze)
+    - Assume: A *rock* is a hard thing.
+    - Assume: An *ore* is a rock that contains metal.
+        - An iron ore is a rock that contains iron.
+        - A copper ore is a rock that contains copper.
+        - [WP:Ore](https://en.wikipedia.org/wiki/Ore)
+    - Assume: Burning an ore produces metal.
+- [WP:Chemical reaction, history](https://en.wikipedia.org/wiki/Chemical_reaction#History)
+    - "combustion in fire, fermentation and the reduction of ores to metals were known since antiquity"
+- [WP:Atom, first evidence-based theory](https://en.wikipedia.org/wiki/Atom#First_evidence-based_theory)
+    - John Dalton (1766--1844)
+    - [WP:Law of multiple proportions](https://en.wikipedia.org/wiki/Law_of_multiple_proportions)
+    - [WP:Stoichiometry](https://en.wikipedia.org/wiki/Stoichiometry)
+    - [WP:Conservation of mass](https://en.wikipedia.org/wiki/Conservation_of_mass)
+- Element, compound, bond, molecule, ion
+    - Questions
+        - How did the concept of "chemical element" evolve?
+            - [WP:Chemical element, history](https://en.wikipedia.org/wiki/Chemical_element#History)
+        - How were the first elements isolated/produced/extracted/purified?
+    - [WP:Molecule](https://en.wikipedia.org/wiki/Molecule)
+        - Define: Something is either a *molecule* or an *ion*.
+- Electrochemistry
+    - Electrochemical cell
+        - Reduction-oxidation (redox) reaction
+            - [WP:Electric battery](https://en.wikipedia.org/wiki/Electric_battery)
+                - [WP:Electrochemical cell](https://en.wikipedia.org/wiki/Electrochemical_cell)
+                    - [WP:Voltaic pile](https://en.wikipedia.org/wiki/Voltaic_pile)
+                        - Alessandro Volta (1745--1827)
+                            - [WP:History of the battery](https://en.wikipedia.org/wiki/History_of_the_battery)
+- Define: *Glass* is transparent (see-through) solid.
+    - [WP:History of glass](https://en.wikipedia.org/wiki/History_of_glass)
+- Why is the symbol Na read "sodium" in English?
+    - [Quora: Who renamed Natrium and Kalium to Sodium and Potassium? Why?](https://www.quora.com/Who-renamed-Natrium-and-Kalium-to-Sodium-and-Potassium-Why)
+        - Because people are proud assholes.
+            - [WP:Not invented here](https://en.wikipedia.org/wiki/Not_invented_here)
+            - [WP:Law of triviality](https://en.wikipedia.org/wiki/Law_of_triviality):
+            "members of an organisation give disproportionate weight to trivial issues"
+- Observe: Water dissolves salt.
+    - Solution of salt in water?
+    - Mixture of water matter and salt matter?

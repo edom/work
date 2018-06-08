@@ -51,6 +51,8 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
         - absurd animation
             - Family Guy
                 - Peter tries Red Bull https://en.wikipedia.org/wiki/New_Kidney_in_Town
+                - [Peter backs boat down the ramp like a pro](https://www.youtube.com/watch?v=2oq0YNo02KM)
+                - [Peter Crashes the internet - Family Guy](https://www.youtube.com/watch?v=0fkL1E3mMwY)
             - Spongebob
                 - Spongebob and Patrick babysit a clam http://spongebob.wikia.com/wiki/Rock-a-Bye_Bivalve
                 - Squidward takes a day off http://spongebob.wikia.com/wiki/Squid%27s_Day_Off
@@ -82,6 +84,7 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
         - [slam jam](https://www.youtube.com/watch?v=Y-dMSstLDqM)
         - [[SFM] LADY](https://www.youtube.com/watch?v=QbFqG-qlR-A), Steelheart's "She's gone"
     - videogamedunkey
+        - [DIVEKICK](https://www.youtube.com/watch?v=EoC4-ydyeos)
         - [captcha](https://www.youtube.com/watch?v=WqnXp6Saa8Y)
         - [car fry 5](https://www.youtube.com/watch?v=IY5mBERhSDg)
         - [mgsv phantom menace](https://www.youtube.com/watch?v=SkNaUiaGRxw)
