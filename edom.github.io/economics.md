@@ -171,3 +171,26 @@ is to make someone else has less money.
     - unread
         - [Who are the wealth extractors?](https://boffyblog.blogspot.com/2017/04/general-election-who-are-wealth.html)
         - [Who’s doing best in the rent-seeking business](http://www.rossgittins.com/2018/01/whos-doing-best-in-rent-seeking-business.html)
+- Infer: People buy something because they want it.
+    - False assumption: People buy something because it makes them better off.
+    - False assumption: People buy something because *they believe* it makes them better off.
+    - False assumption: Voluntary exchange makes both parties better off.
+    - Counterexample: Cigarette smoking, addictive substances.
+    - Why do people want things? Some possible reasons:
+        - To sustain life.
+        - To avoid pain.
+        - To increase happiness.
+        - To satisfy curiosity.
+        - ...
+        - Their brains are hijacked.
+            - Isn't it generally immoral to harm people?
+            - Is it moral to make people harm themselves (e.g. selling them cigarettes)?
+    - Murphy's law applied to capitalism?
+        - If something is profitable, someone will do it.
+        - Some evil is profitable.
+        - Therefore someone will do some evil and get rich from doing that evil.
+- Unread
+    - False assumptions
+        - ["Top Ten False Assumptions Taught In My Economics Classroom"](https://caspertk.wordpress.com/2012/12/08/top-ten-false-assumptions-taught-in-my-economics-classroom/)
+        - [Fifty Nine False Assumptions of Mainstream Neo-classical Economics](http://www.binaryeconomics.net/wordpress/fifty-nine-false-assumptions-of-mainstream-neo-classical-economics/)
+            - questionable source
