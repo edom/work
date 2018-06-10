@@ -50,6 +50,9 @@ date: 2017-06-09 00:59:00 +0700
             - rise (low-rise, high-rise)
         - parts of apparels
             - cuff (of shirt or pants) is fold-back at an end
+        - accessories
+            - [WP:Sash](https://en.wikipedia.org/wiki/Sash)
+            - wristband, elbow band, knee band, armband, upper armband
         - aggregates
             - apparel
             - fashion

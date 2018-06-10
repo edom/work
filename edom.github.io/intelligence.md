@@ -80,7 +80,6 @@ Should we read these?
     - Pedro Domingos lists 5 "tribes"
 - (merge AI researchers)
     - [WP AI Portal](https://en.wikipedia.org/wiki/Portal:Artificial_intelligence) lists several leading AI researchers
-- Why is consciousness trapped in a body? Why can't we swap the consciousness of two people?
 - 2000, György Turán, [Remarks on COLT](https://link.springer.com/article/10.1023%2FA%3A1018948021083)
 - 2016, Krendzelak, Jakab, [Fundamental principals of Computational Learning Theory](https://ieeexplore.ieee.org/document/7802092/)
     - Reading queue:
@@ -307,11 +306,6 @@ https://www.quora.com/What-is-the-simplest-life-form
 - [2015, Deep Convolutional Networks are Hierarchical Kernel Machines](https://arxiv.org/abs/1508.01084)
 - [Michio Kaku: Who is right about A.I.: Mark Zuckerberg or Elon Musk?](https://www.youtube.com/watch?v=F5Z52jl4yHQ)
 - [Stats SE 104385: text processing: assigning meaningful cluster name automatically](https://stats.stackexchange.com/questions/104385/assigning-meaningful-cluster-name-automatically)
-- How did consciousness evolve?
-    - Thoughts
-        - Consciousness needs memory.
-        - Self-awareness needs senses (sensors).
-    - 2016-08-10 http://www.collective-evolution.com/2014/03/08/10-scientific-studies-that-prove-consciousness-can-alter-our-physical-material-world/
 - The mathematics of deep learning (a website)
 - Can AI be used to upscale old audio/video recordings? Fix deteriorated pictures, films, documents? Color old pictures, photos, films?
 "Modernize" past artifacts? Digital restoration of archives?
@@ -336,7 +330,6 @@ https://www.quora.com/What-is-the-simplest-life-form
     - World = agent + environment.
     Environment is everything that the agent does not control directly.
     The body of an agent is part of the environment, not of the agent.
-- [WP:Template:Consciousness](https://en.wikipedia.org/wiki/Template:Consciousness)
 - [Dimension independent similarity computation (DISCO)](http://dl.acm.org/citation.cfm?id=2567715)
 - [Journal of artificial intelligence research](http://www.jair.org/) (open access)
 - [Adversarial Examples that Fool both Human and Computer Vision](https://arxiv.org/abs/1802.08195),

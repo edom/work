@@ -287,3 +287,10 @@ mathjax: yes
         - [WP:Sundial](https://en.wikipedia.org/wiki/Sundial)
         - [WP:Analemma](https://en.wikipedia.org/wiki/Analemma);
         solar analemma = figure eight pattern of the sun on the sky across the year
+- [Mind]({% link mind.md %})
+- Unread
+    - Ampere's experiments
+        - [Ampère's Experiments](http://farside.ph.utexas.edu/teaching/302l/lectures/node70.html)
+        - http://www.larouchepub.com/eiw/public/1992/eirv19n20-19920515/eirv19n20-19920515_030-the_ampere_crucial_experiments.pdf
+    - https://newrepublic.com/article/118655/theoretical-phyisicist-explains-why-science-not-about-certainty
+- [Reddit: In quantum physic's 'observer effect', what qualifies as an 'observer'?](https://www.reddit.com/r/askscience/comments/1xxbq0/in_quantum_physics_observer_effect_what_qualifies/)

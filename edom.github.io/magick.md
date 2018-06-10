@@ -4,17 +4,6 @@ permalink: /magick.html
 date: 2018-05-17 01:21 +0700
 ---
 
-- Science
-    - Pim van Lommel, cardiologist, consciousness after clinical death
-    - scientists reconstruct picture from cat brain activity
-    - Testing the simulation hypothesis
-        - It is possible to
-        <a href="https://en.wikipedia.org/wiki/Simulation_hypothesis#Testing_the_hypothesis">test</a>
-        if we are in a simulation.
-        If we do, who made it, and why?
-        - http://www.washington.edu/news/2012/12/10/do-we-live-in-a-computer-simulation-uw-researchers-say-idea-can-be-tested/
-        - http://www.huffingtonpost.co.uk/2012/12/12/physicists-universe-simulation-test-university-of-washington-matrix_n_2282745.html
-    - [The blind protocol and its place in consciousness research](http://www.ncbi.nlm.nih.gov/pubmed/16781550)
 - What?
     - [scry.cloud: Crowdsourcing prediction](https://scry.cloud/)
 - Undigested information

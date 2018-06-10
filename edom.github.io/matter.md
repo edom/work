@@ -30,6 +30,7 @@ mathjax: yes
             - Tacit assumption: Things of the same type behave in the same way.
         - Observe: The weight of \\( n \\) copies of X is \\( n \\) times the weight of X.
         - Assume: Weight is proportional to mass.
+    - [WP:History of measurement](https://en.wikipedia.org/wiki/History_of_measurement)
 - Section: Fire, light, and heat
     - Observe: Fire.
         - [WP:Control of fire by early humans](https://en.wikipedia.org/wiki/Control_of_fire_by_early_humans)
@@ -111,7 +112,6 @@ mathjax: yes
                 - [WP:Charcoal](https://en.wikipedia.org/wiki/Charcoal)
                 - What is the difference between charcoal, ash, and soot?
                     - [WP:Ash](https://en.wikipedia.org/wiki/Ash)
-                        - Observe: Burning wood produces *ash*.
                     - [WP:Soot](https://en.wikipedia.org/wiki/Soot)
     - What is the first smelt metal?
         - https://www.britannica.com/technology/smelting
@@ -170,6 +170,12 @@ mathjax: yes
             - [WP:Stoichiometry](https://en.wikipedia.org/wiki/Stoichiometry)
                 - [The origins of stoichiometry](http://chemed.chem.purdue.edu/genchem/history/stoichiometry.html)
                 - [WP:Jeremias Benjamin Richter](https://en.wikipedia.org/wiki/Jeremias_Benjamin_Richter) (1762--1807)
+                - Observe:
+                    - Burning wood produces *ash*.
+                    - Burning *more* wood produces *more* ash.
+                    - The amount of ash produced is *proportional* to the amount of wood burned:
+                        - If burning \\( x \\) amount of wood produces \\( y \\) amount grams of ash,
+                        then burning \\( a \cdot x \\) amount grams of wood produces \\( a \cdot y \\) amount of ash.
             - Require: A chemical reaction that is available to prehistoric humans, and whose reactants and products are easy to weigh.
                 - [WP:Chemical reaction, history](https://en.wikipedia.org/wiki/Chemical_reaction#History)
                     - "combustion in fire, fermentation and the reduction of ores to metals were known since antiquity"

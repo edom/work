@@ -129,9 +129,14 @@ mathjax: yes
         - A time crystal or space-time crystal is a structure that repeats in time, as well as in space. 
         ([WP: Time crystal](https://en.wikipedia.org/wiki/Time_crystal))
     - An explanation of parallel transport https://physics.stackexchange.com/a/232119
-    - Interesting idea: harnessing energy from spinning black hole ergosphere, and making a black hole bomb.
-    Penrose process.
-    [kurzgesagt video](https://www.youtube.com/watch?v=ulCdoCfw-bY)
+    - Futurism
+        - Interesting idea: harnessing energy from spinning black hole ergosphere, and making a black hole bomb.
+        Penrose process.
+        [kurzgesagt video](https://www.youtube.com/watch?v=ulCdoCfw-bY)
+        - https://en.wikipedia.org/wiki/Stellar_engine
+        - https://en.wikipedia.org/wiki/Astronomical_engineering
+        - https://en.wikipedia.org/wiki/Megascale_engineering
+        - https://en.wikipedia.org/wiki/Kardashev_scale
 - Solar energy, solar cells, and energy storage
     - How do we make solar cells using common materials?
         - [acs.org: Solar cell from common materials](https://www.acs.org/content/acs/en/pressroom/newsreleases/2012/august/new-solar-panels-made-with-more-common-metals-could-be-cheaper-and-more-sustainable.html)
@@ -194,10 +199,16 @@ mathjax: yes
 - https://en.wikipedia.org/wiki/Uniformitarianism
 - We assume the *principle of the uniformity of nature*:
     - The laws of nature is the same everywhere everytime [hume1793inquiry].
-- Is the Universe a simulation?
-    - How do we find out if we are in a simulation?
-        - https://www.technologyreview.com/s/429561/the-measurement-that-would-reveal-the-universe-as-a-computer-simulation/
-        - Look for numerical errors in the Universe. [UniNumError] https://arxiv.org/abs/1210.1847
+- Simulation hypothesis
+    - [WP:Simulation hypothesis](https://en.wikipedia.org/wiki/Simulation_hypothesis)
+        - [section: testing the hypothesis physically](https://en.wikipedia.org/wiki/Simulation_hypothesis#Testing_the_hypothesis_physically)
+    - Is the Universe a simulation? Testing the simulation hypothesis
+        - How do we find out if we are in a simulation?
+            - https://www.technologyreview.com/s/429561/the-measurement-that-would-reveal-the-universe-as-a-computer-simulation/
+            - Look for numerical errors in the Universe. [UniNumError] https://arxiv.org/abs/1210.1847
+        - http://www.washington.edu/news/2012/12/10/do-we-live-in-a-computer-simulation-uw-researchers-say-idea-can-be-tested/
+        - http://www.huffingtonpost.co.uk/2012/12/12/physicists-universe-simulation-test-university-of-washington-matrix_n_2282745.html
+        - anisotropy of space?
 - [YT:The more general uncertainty principle, beyond quantum](https://www.youtube.com/watch?v=MBnnXbOM5S4)
 - https://en.wikipedia.org/wiki/Amplituhedron
 - https://en.wikipedia.org/wiki/Theoretical_physics
