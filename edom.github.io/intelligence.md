@@ -227,7 +227,6 @@ and being told to do things by machines.
 
 ## Undigested information
 
-- [A giant neuron found wrapped around entire mouse brain](https://www.nature.com/news/a-giant-neuron-found-wrapped-around-entire-mouse-brain-1.21539)
 - [kevinbinz.com: Five Tribes of Machine Learning](https://kevinbinz.com/2017/08/13/ml-five-tribes/),
 part of [machine learning sequence](https://kevinbinz.com/2017/05/09/sequence-machine-learning/),
 some contents from Pedro Domingos's book "The master algorithm"
@@ -352,3 +351,6 @@ from [two minute papers 241](https://www.youtube.com/watch?v=AbxPbfODGcs).
         - [WP:Raven's progressive matrices](https://en.wikipedia.org/wiki/Raven%27s_Progressive_Matrices)
         is a language-neutral visual test for fluid intelligence?
 - [YT:4 Experiments Where the AI Outsmarted Its Creators | Two Minute Papers #242](https://www.youtube.com/watch?v=GdTBqBnqhaQ)
+- [Tensorizing Neural Networks](https://arxiv.org/abs/1509.06569)
+- [Gated Feedback Recurrent Neural Networks](https://arxiv.org/abs/1502.02367)
+- no information http://syntience.com/

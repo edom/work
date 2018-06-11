@@ -39,9 +39,6 @@ date: 2018-05-17 01:21 +0700
             - http://www.therichest.com/rich-list/most-shocking/6-paranormal-experiments-conducted-by-the-government/?view=all
             - http://io9.com/5721855/25-of-the-scariest-science-experiments-ever-conducted
         - Carl Jung's parapsychological research
-        - Sperry. Liber. Chinese room. Mary's room.
-        - Inconclusive rambling article
-            - [WP: Neuroscience of free will](https://en.wikipedia.org/wiki/Neuroscience_of_free_will)
         - Haunting
             - Institutional experiments
                 - <a href="http://www.parapsych.org/articles/36/68/what_are_the_major_research.aspx">Major research approaches</a>.

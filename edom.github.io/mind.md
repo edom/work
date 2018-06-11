@@ -2,6 +2,7 @@
 title: Mind
 date: 2018-06-11 01:40 +0700
 permalink: /mind.html
+mathjax: yes
 ---
 
 - [WP:Consciousness](https://en.wikipedia.org/wiki/Consciousness)
@@ -26,6 +27,7 @@ permalink: /mind.html
         - [WP:Chinese room](https://en.wikipedia.org/wiki/Chinese_room)
             - [WP:Functionalism](https://en.wikipedia.org/wiki/Functionalism_(philosophy_of_mind))
             - [WP:Computationalism](https://en.wikipedia.org/wiki/Computational_theory_of_mind)
+        - Mary's room
         - [WP:China brain](https://en.wikipedia.org/wiki/China_brain)
         - [WP:Philosophical zombie](https://en.wikipedia.org/wiki/Philosophical_zombie)
         - [WP:Problem of other minds](https://en.wikipedia.org/wiki/Problem_of_other_minds)
@@ -38,6 +40,15 @@ permalink: /mind.html
                 - [WP:Philosophical skepticism](https://en.wikipedia.org/wiki/Philosophical_skepticism)
             - [WP:Explanatory gap](https://en.wikipedia.org/wiki/Explanatory_gap)
             - [WP:John Searle](https://en.wikipedia.org/wiki/John_Searle)
+- Is this an argument for physicalism/materialism/reductionism/monism?
+    - Scientists reconstruct picture from cat brain activity
+        - https://www.berkeley.edu/news/media/releases/99legacy/10-15-1999.html
+    - Scientists reconstruct movie from human brain activity
+        - https://gizmodo.com/5843117/scientists-reconstruct-video-clips-from-brain-activity
+        - [YT:Movie reconstruction from human brain activity](https://www.youtube.com/watch?v=nsjDnYxJ0bo)
+        - http://news.berkeley.edu/2011/09/22/brain-movies/
+- Problems of idealism?
+    - Problem: If reality is an illusion, why is it consistent?
 - Define: Reflex?
     - Intension: A system is a *reflex* system iff it is memoryless.
     - Extension: A system is a *reflex* system iff its reaction is always the same.
@@ -47,7 +58,9 @@ permalink: /mind.html
 - Problems:
     - No testable or measurable definitions?
         - Define: A *model* is a representation or approximation.
-        - Define: The *self* of X is X.
+        - Define: The *self* of X is X?
+        - Define: The *self* of X is everything that X can directly control?
+            - Problem: Define "directly control" without assuming "self".
         - Define: The *self-model* of X is X's model of X.
         - Define: Conscious
             - [Wikt:conscious](https://en.wiktionary.org/wiki/conscious)
@@ -56,15 +69,13 @@ permalink: /mind.html
         - Define: awake
         - Define: Something is *asleep* iff it is not awake.
         - Define: attention
-        - Define: think
-        - Define: thought
-        - Define: qualia
-        - Define: perception
-        - Define: mental state
+        - Define: think, feel
+        - Define: thought, feeling, qualia, perception, mental state
         - Define: percept
         - Define: To *recall* something is to reproduce a model of it.
         - Define: To *remember* something is to be able to *recall* it.
         - Define: *Memory* is something affected by the past.
+        - Define: *Soul* is what animates a thing?
     - What questions should we ask?
 - Prerequisites of consciousness
     - What is *necessary* for consciousness?
@@ -91,11 +102,6 @@ permalink: /mind.html
         - https://www.researchgate.net/publication/283345070_Necessary_and_sufficient_conditions_for_consciousness_Extended_Dual-Aspect_Monism_framework
         - http://www.terapiacognitiva.eu/cpc/dwl/embodied/Prinz.pdf
         - [2012, "Neuronal function is necessary but not sufficient for consciousness: consciousness is necessary for will"](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3501646/)
-- Theories
-    - [WP:Self model](https://en.wikipedia.org/wiki/Self_model)
-    - [WP:Neural correlates of consciousness](https://en.wikipedia.org/wiki/Neural_correlates_of_consciousness)
-    - [WP:Higher-order theories of consciousness](https://en.wikipedia.org/wiki/Higher-order_theories_of_consciousness)
-    - [WP:Mirror neuron](https://en.wikipedia.org/wiki/Mirror_neuron)
 - Observe: There exists things I experienced but don't remember.
     - Example: What I ate some long time ago.
 - What is the relationship between my old self and my present self?
@@ -159,7 +165,6 @@ permalink: /mind.html
 - Pim van Lommel, cardiologist, consciousness after clinical death
     - [WP:Pim van Lommel](https://en.wikipedia.org/wiki/Pim_van_Lommel)
         - [WP:Near-death experience](https://en.wikipedia.org/wiki/Near-death_experience)
-- scientists reconstruct picture from cat brain activity
 - [The blind protocol and its place in consciousness research](http://www.ncbi.nlm.nih.gov/pubmed/16781550)
 - Why is consciousness trapped in a body?
 Why can't we swap the consciousness of two people?
@@ -171,13 +176,56 @@ Why can't we swap the consciousness of two people?
 - [WP:Template:Consciousness](https://en.wikipedia.org/wiki/Template:Consciousness)
 - [YT:Self recognition and the rise of what most refer to as personhood.](https://www.youtube.com/watch?v=pNqirOJ5qAw)
     - 3:03 "a child can't recognize itself in a mirror until it's about two years old", J. Patrick Malone, 2009
-- Experiments relating/involving mind and matter
-    - Split-brain
-        - [WP:Split-brain](https://en.wikipedia.org/wiki/Split-brain)
-        - [Neuroscience for kids](https://faculty.washington.edu/chudler/split.html)
-        - [Roger Sperry's split-brain experiments (1959--1968)](https://embryo.asu.edu/pages/roger-sperrys-split-brain-experiments-1959-1968)
-        - https://www.nobelprize.org/educational/medicine/split-brain/
-- Unread
+- Neuroscience, our best bet?
+    - Experiments/observations relating/involving mind and matter
+        - [WP:Human brain](https://en.wikipedia.org/wiki/Human_brain)
+        - [WP:Brain](https://en.wikipedia.org/wiki/Brain)
+        - Is a brain just a giant chemotaxis machine?
+        - Phineas Gage
+        - Observe: Different human brains have same major areas.
+            - Damaging a specific area disables a specific function.
+            - What does this suggest?
+        - Broca's area
+        - Wernicke's area
+        - Neuroplasticity
+        - Hemisphere, lateralization, lobe
+        - Lobotomy
+        - Split-brain (corpus callostomy)
+            - [WP:Split-brain](https://en.wikipedia.org/wiki/Split-brain)
+            - [Neuroscience for kids](https://faculty.washington.edu/chudler/split.html)
+            - [Roger Sperry's split-brain experiments (1959--1968)](https://embryo.asu.edu/pages/roger-sperrys-split-brain-experiments-1959-1968)
+            - https://www.nobelprize.org/educational/medicine/split-brain/
+            - How did we find out that corpus callostomy reduces epilepsy?
+        - [Libet experiments](http://www.informationphilosopher.com/freedom/libet_experiments.html)
+    - Theories
+        - [WP:Self model](https://en.wikipedia.org/wiki/Self_model)
+        - [WP:Neural correlates of consciousness](https://en.wikipedia.org/wiki/Neural_correlates_of_consciousness)
+        - [WP:Higher-order theories of consciousness](https://en.wikipedia.org/wiki/Higher-order_theories_of_consciousness)
+        - [WP:Mirror neuron](https://en.wikipedia.org/wiki/Mirror_neuron)
+    - Inconclusive rambling article
+        - [WP: Neuroscience of free will](https://en.wikipedia.org/wiki/Neuroscience_of_free_will)
+    - Cognitive neuroscience
+        - The organism with central nervous system with the fewest neurons is *Caenorhabditis elegans*.
+        - You can create your own virtual *Caenorhabditis elegans* online at [openworm.org](http://openworm.org/).
+        - In rats, neuron firing rate encodes posterior probability (expected value)? (Cite?)
+        - Neural coding tries to find out how neurons encode information.
+            - https://en.wikipedia.org/wiki/Neural_coding
+            - Are neurons digital, analog, or both?
+                - Spike train?
+                - Pulse-frequency modulation in neurons?
+                - [Analog and digital codes in the brain](https://arxiv.org/abs/1311.4035)
+                - Neuronal Dynamics online book;
+                From single neurons to networks and models of cognition;
+                Wulfram Gerstner, Werner M. Kistler, Richard Naud and Liam Paninski;
+                [7.6 The Problem of Neural Coding](http://neuronaldynamics.epfl.ch/online/Ch7.S6.html)
+        - Decoding mental states from brain activity in humans [haynes2006decoding]
+    - [A giant neuron found wrapped around entire mouse brain](https://www.nature.com/news/a-giant-neuron-found-wrapped-around-entire-mouse-brain-1.21539)
+    - Life of a neuron?
+        - http://biology.stackexchange.com/questions/5306/how-do-neurons-form-new-connections-in-brain-plasticity
+    - https://en.wikipedia.org/wiki/Neural_basis_of_self
+    - [Towards a cognitive neuroscience of self-awareness](http://www.sciencedirect.com/science/article/pii/S0149763416300410)
+    - sense of embodiment?
+- Unread; validity undetermined
     - experiments
         - too many; confusing https://backyardbrains.com/experiments/
     - [2013, "Mind and matter"](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3914914/)
@@ -189,6 +237,16 @@ Why can't we swap the consciousness of two people?
         - https://www.stevepavlina.com/blog/2005/10/a-scientific-method-for-exploring-consciousness/
         - http://blog.mindvalleyacademy.com/yoga-and-energy-practices/consciousness-experiments
         - https://blog.mindvalley.com/studies-consciousness/
+    - https://www.sciencealert.com/harvard-scientists-think-they-ve-pinpointed-the-neural-source-of-consciousness
+    - https://en.wikipedia.org/wiki/Phantom_limb
+    - rubber hand illusion
+    - Illusions show that our senses are not 100% reliable.
+    - http://cogprints.org/3786/1/StLouis.pdf
+    - https://www.researchgate.net/publication/47677013_Self-recognition_Theory-of-Mind_and_self-awareness_What_side_are_you_on
+        - https://www.ncbi.nlm.nih.gov/pubmed/21049317
+    - ["Self-recognition, Theory-of-Mind, and self-awareness in primates and right hemispheres"](https://pdfs.semanticscholar.org/61cc/5e7613c6f0688fbed6b9a2666c75a3d96d97.pdf)
+    - ["Theory of mind and the self"](http://www.cogsci.ucsd.edu/~pineda/COGS175/readings/Happe.pdf)
+    - https://www.sciencedirect.com/topics/neuroscience/theory-of-mind
 - Problem: Everybody could have been born as anybody.
 - Define: A system *reacts* to something iff ... ?
 - Why am I I?
@@ -200,3 +258,16 @@ Why do I see things from my point of view?
     - https://www.reddit.com/r/atheism/comments/3ncygs/why_am_i_seeing_life_in_first_person_why_have_i/
     - https://www.quora.com/Is-the-human-consciousness-confined-by-our-body
     - https://en.wikipedia.org/wiki/Boltzmann_brain
+- A macroscopic model of the Universe
+    - Characteristics
+        - deterministic
+        - "simulation time" is discrete, stepped, and absolute
+        - unary algebra (similar to "finite automaton" in theory of computation)
+    - The model
+        - Let \\( S \\) be the set of Universe states (snapshots).
+        - Let \\( f : S \to S \\) be the *law of nature*.
+        - Let \\( x \\) be the *initial state* of the Universe.
+        - Let \\( f^0 \\) be an *identity function*.
+        - Let \\( f^n = \underbrace{f \circ \ldots \circ f}_{n} \\) denote *iteration*.
+        - The *history* of the Universe is the sequence <span>\( \langle f^0(x), f^1(x), \ldots, f^n(x), \ldots \rangle \)</span>.
+    - How do we model consciousness in this model?

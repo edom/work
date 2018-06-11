@@ -65,6 +65,7 @@ permalink: /ajpr.html
     - Academic publishing is broken
         - https://sbseminar.wordpress.com/2017/04/09/and-elsevier-taketh-away/
         - https://fairoa.org/
+    - https://academia.stackexchange.com/questions/19333/how-much-do-springer-verlag-authors-make-per-book-sold
 
 ## Proposal for academic publishing reform: Separate peer review and physical dissemination
 

@@ -19,6 +19,14 @@ language: en
         - Cabal
         - Nix
         - Haskell Platform
+- What is your preferred way of installing Haskell?
+    - Download `cabal-install` binary from https://www.haskell.org/cabal/download.html
+    - Download GHC
+    - Extract the `cabal` binary to `~/.local/bin`
+    - Extract the `ghc` binary to `~/.local/bin`
+    - Modify `PATH` in `~/.basrhc`
+    - For what is the hassle?
+        - So that, if anything goes wrong, I can nuke it without nuking my whole operating system.
 - Companies using Haskell
     - https://www.reddit.com/r/haskell/comments/4jo2da/fp_shops/
 - things hot in 2018
@@ -31,3 +39,10 @@ language: en
     - How to tell Cabal to use a Hackage mirror?
     An instruction is on the Internet; I forgot where.
     - 2018-04-13: [Hackage goes down for about a day](https://blog.hackage.haskell.org/posts/2018-04-26-downtime.html)
+- Unread
+    - https://github.com/dhall-lang/dhall-lang
+    - https://wiki.haskell.org/Haskell_Communities_and_Activities_Report
+    - https://haskellweekly.news/
+        - https://github.com/haskellweekly/haskellweekly.github.io
+            - https://wiki.haskell.org/Haskell_Weekly_News
+    - https://haskell.libhunt.com/newsletter/6

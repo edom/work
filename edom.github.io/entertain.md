@@ -252,3 +252,4 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
         - <A HREF="https://www.youtube.com/watch?v=svmypzPUCBE">Gran Turismo 4 - 1 HP to 10,000 HP upgrade - YouTube</A>
     - Reliant Robin
         - <A HREF="https://www.youtube.com/watch?v=QQh56geU0X8">Rolling a Reliant Robin - Top Gear - BBC - YouTube</A>
+- [Bill Nye makes fun of Neil deGrasse Tyson's reply to Dawkins, making Lawrence Krauss glad](https://www.youtube.com/watch?v=n0-jKmcNr_8)

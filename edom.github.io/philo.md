@@ -141,3 +141,4 @@ permalink: /philo.html
             - [Philo. SE 22103: How to justify the use of logic?](https://philosophy.stackexchange.com/questions/22103/how-to-justify-the-use-of-logic)
     - [WP:Epistemology](https://en.wikipedia.org/wiki/Epistemology)
     - [SEP:Epistemology](https://plato.stanford.edu/entries/epistemology/)
+- [Moral behavior in animals | Frans de Waal](https://www.youtube.com/watch?v=GcJxRqTs5nk)

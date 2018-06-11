@@ -21,3 +21,12 @@ date: 2018-05-15 02:31:00 +0700
 - [SE 5930529: How is revocation of a root certificate handled?](https://stackoverflow.com/questions/5930529/how-is-revocation-of-a-root-certificate-handled)
 - [WP: Online Certificate Status Protocol](https://en.wikipedia.org/wiki/Online_Certificate_Status_Protocol)
 - [WP: OCSP Stapling](https://en.wikipedia.org/wiki/OCSP_stapling) moves the cost from client to server.
+- Zero trust security model (ZTSM)
+    - "How would I design my system without any firewalls?"
+    - https://www.scaleft.com/beyondcorp/
+        - old approach: perimeter security, medieval castle, weak core, strong perimeter
+        - https://storage.googleapis.com/pub-tools-public-publication-data/pdf/43231.pdf
+            - "The perimeter security model works well enough when all employees work exclusively in buildings owned by an enterprise."
+            - "access depends solely on device and user credentials, regardless of a user’s network location"
+            - "All access to enterprise resources is fully authenticated, fully authorized, and fully encrypted based upon device state and user credentials."
+            - ZTSM obviates VPN (virtual private network).
