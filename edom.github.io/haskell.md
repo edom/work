@@ -20,11 +20,17 @@ language: en
         - Nix
         - Haskell Platform
 - What is your preferred way of installing Haskell?
-    - Download `cabal-install` binary from https://www.haskell.org/cabal/download.html
-    - Download GHC
-    - Extract the `cabal` binary to `~/.local/bin`
-    - Extract the `ghc` binary to `~/.local/bin`
-    - Modify `PATH` in `~/.basrhc`
+    - Install `cabal-install`
+        - Download the suitable `cabal-install` binary package from https://www.haskell.org/cabal/download.html
+        - Extract the `cabal` binary to `~/.local/bin`
+    - Install current stable release of GHC
+        - Download the current stable release of GHC from https://www.haskell.org/ghc/download.html
+        - Extract it somewhere
+        - Follow the instructions in INSTALL file:
+            - `./configure --prefix=$HOME/.local`
+            - `make -j4 install`
+    - Modify `PATH` in `~/.basrhc`:
+        - Ensure that the line `export PATH="$PATH:$HOME/.local/bin"` is in `~/.bashrc`.
     - For what is the hassle?
         - So that, if anything goes wrong, I can nuke it without nuking my whole operating system.
 - Companies using Haskell

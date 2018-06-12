@@ -194,3 +194,10 @@ is to make someone else has less money.
         - ["Top Ten False Assumptions Taught In My Economics Classroom"](https://caspertk.wordpress.com/2012/12/08/top-ten-false-assumptions-taught-in-my-economics-classroom/)
         - [Fifty Nine False Assumptions of Mainstream Neo-classical Economics](http://www.binaryeconomics.net/wordpress/fifty-nine-false-assumptions-of-mainstream-neo-classical-economics/)
             - questionable source
+- economics-biology analogy
+    - pioneer species?
+        - https://en.wikipedia.org/wiki/Pioneer_species
+        - pioneer species in biology ~ pioneer species in economics ?
+        - ecosystem recovery after wildfire ~ economy recovery after war/disaster ?
+        - fire ecology ~ war/disaster ecology ?
+        - How does a community rebuild itself?

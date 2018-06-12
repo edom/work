@@ -24,5 +24,6 @@ date: 2018-05-24 02:44:00 +0700
                 - If road demand already exceeds supply, then widening roads increases traffic and causes more congestion.
                     - [WP:Induced demand](https://en.wikipedia.org/wiki/Induced_demand)
 - [The high cost of free parking](https://www.youtube.com/watch?v=Akm7ik-H_7U)
+- [A Mathematical Introduction to Traffic Flow Theory](https://helper.ipam.ucla.edu/publications/tratut/tratut_12985.pdf)
 - Related
     - [WP:Traffic engineering (transportation)](https://en.wikipedia.org/wiki/Traffic_engineering_(transportation))

@@ -56,6 +56,8 @@ The editor should not parse text into AST; it should generate text from AST.
         - First-class functions.
         - The program itself is a procedural program that tells the interpreter what code to generate.
         - End up with something like Randall Hyde's High Level Assembly?
+- PL research
+    - [1992, book, "Implementing functional languages: a tutorial"](https://www.microsoft.com/en-us/research/publication/implementing-functional-languages-a-tutorial/)
 - Improve an existing language instead of starting new?
 - What is this? http://reasonablypolymorphic.com/blog/elm-is-wrong
 - Interesting languages?
