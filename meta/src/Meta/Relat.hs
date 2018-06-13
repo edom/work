@@ -4,6 +4,8 @@ import qualified Data.List as L
 
 -- * Type
 
+type Name = String
+
 data Type
     = TInt32
     | TInt64
@@ -17,15 +19,15 @@ data Column
     -- | Internal. Do not use. Use column constructors.
     = MkColumn {
         cType :: Type
-        , cName :: String
+        , cName :: Name
     } deriving (Read, Show)
 
 -- * Column constructors
 
-colInt64 :: String -> Column
+colInt64 :: Name -> Column
 colInt64 name = MkColumn TInt64 name
 
-colVarChar :: Int -> String -> Column
+colVarChar :: Int -> Name -> Column
 colVarChar limit name = MkColumn (TVarChar limit) name
 
 -- * Table
@@ -33,7 +35,7 @@ colVarChar limit name = MkColumn (TVarChar limit) name
 data Table
     -- | Internal. Do not use. Use 'defTable'.
     = MkTable {
-        tName :: String
+        tName :: Name
         , tCols :: [Column]
         , tConstraints :: [Constraint]
     } deriving (Read, Show)
@@ -43,8 +45,14 @@ data Constraint
     | KForeignKey [Column] Table [Column]
     deriving (Read, Show)
 
+mkTable :: Name -> [Column] -> Table
+mkTable nam cols = MkTable nam cols []
+
 defTable :: Table
 defTable = MkTable "" [] []
+
+addPrimaryKey :: [Column] -> Table -> Table
+addPrimaryKey cols tab = tab { tConstraints = tConstraints tab ++ [KPrimaryKey cols] }
 
 -- * Query
 

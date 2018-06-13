@@ -1,7 +1,14 @@
+{-# LANGUAGE ApplicativeDo #-}
+
 module Meta.IntCbp where
 
 import qualified Meta.File as F
+import qualified Meta.Java as J
+import qualified Meta.JavaType as JT
+import qualified Meta.Prop as P
 import qualified Meta.Relat as R
+
+import Meta.Prop ((|>))
 
 -- * Type
 
@@ -44,6 +51,7 @@ defClass = MkClass {
 data Member
     = MField Field
     | MMethod Method
+    | MProp Prop
     | MLineComment String
     | MBlockComment String
     deriving (Read, Show)
@@ -65,6 +73,17 @@ data Method
         , mOverride :: Bool -- ^ true means this method is expected to override an overrideable method in a parent
         , mBody :: [Sta]
     } deriving (Read, Show)
+
+data Prop
+    = MkProp {
+        prType :: Type -- ^ Internal. Do not use. Use 'P.getType' and 'P.setType'.
+        , prName :: String -- ^ Internal. Do not use. Use 'P.getName' and 'P.setName'.
+    } deriving (Read, Show)
+
+instance P.GetName Prop String where getName = prName
+instance P.SetName Prop String where setName n p = p { prName = n }
+instance P.GetType Prop Type where getType = prType
+instance P.SetType Prop Type where setType t p = p { prType = t }
 
 data Param = MkParam {
         pType :: Type
@@ -114,14 +133,21 @@ data GenDto
     -- | Internal. Do not use. Use 'defGenDto'
     = MkGenDto {
         gdCommentField :: Bool -- ^ Whether to comment every field.
+        , gdImmutable :: Bool -- ^ Whether to make every field const/final.
     } deriving (Read, Show)
 
 -- | Default configuration for 'genDto'.
 defGenDto :: GenDto
 defGenDto = MkGenDto {
         gdCommentField = False
+        , gdImmutable = False
     }
 
+-- TODO generate getter methods
+-- TODO generate setter methods
+-- TODO generate 0-param constructor
+-- TODO generate n-param constructor
+-- TODO make every field private
 genDto :: GenDto -> R.Table -> Class
 genDto conf table = defClass {
         cName = name
@@ -150,36 +176,37 @@ genDto conf table = defClass {
                     R.TVarChar _ -> TString
                     _ -> error $ "genDto.mapCol.mapType: not implemented: " ++ show typ
 
--- * Render to Java
+-- * Transform to Java
 
-renderJavaClass :: Class -> F.File
-renderJavaClass cls = F.text path content
+toJavaType :: (P.AppliError f) => Type -> f JT.Type
+toJavaType typ = case typ of
+    TInt32 -> pure JT.Int32
+    TInt64 -> pure JT.Int64
+    TString -> pure JT.string
+    _ -> P.raise ["Meta.IntCbp.javaType: not implemented: " ++ show typ]
+
+toJavaClass :: (P.AppliError f) => Class -> f J.Class
+toJavaClass cls = do
+    mem <- sequenceA $ map toJavaMember $ cMembers cls
+    pure (
+            J.defClass { J.cPkg = pkg, J.cMembers = concat mem }
+            |> P.setName name
+        )
     where
-        name = cName cls
         pkg = cPkg cls
-        members = cMembers cls
-        prefix = case pkg of
-            "" -> ""
-            _ -> map replace pkg ++ "/"
-            where
-                replace '.' = '/'
-                replace x = x
-        path = prefix ++ name ++ ".java"
-        content =
-            "public class " ++ name ++ " {\n"
-            ++ (unlines $ map ("    " ++) $ map renderJavaMember $ members)
-            ++ "}\n"
+        name = cName cls
 
-renderJavaType :: Type -> String
-renderJavaType typ = case typ of
-    TInt64 -> "long"
-    TString -> "java.lang.String"
-    _ -> error $ "renderJavaType: not implemented: " ++ show typ
+toJavaMember :: (P.AppliError f) => Member -> f [J.Member]
+toJavaMember mem = case mem of
+    MField fld -> do
+        jfld <- toJavaField fld
+        pure [J.MField jfld]
+    MLineComment x -> pure [J.MLineComment x]
+    MBlockComment x -> pure [J.MBlockComment x]
+    _ -> P.raise ["Meta.IntCbp.toJavaMember: not implemented: " ++ show mem]
 
--- | Internal. Do not use.
-renderJavaMember :: Member -> String
-renderJavaMember mem = case mem of
-    MField (MkField typ nam) -> "public " ++ renderJavaType typ ++ " " ++ nam ++ ";"
-    MLineComment s -> "//" ++ s;
-    MBlockComment s -> "/*" ++ s ++ "*/";
-    _ -> error $ "renderJavaMember: not implemented: " ++ show mem
+toJavaField :: (P.AppliError f) => Field -> f J.Field
+toJavaField fld = do
+    typ <- toJavaType $ fType fld
+    nam <- pure $ fName fld
+    pure $ J.mkField typ nam
