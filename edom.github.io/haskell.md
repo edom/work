@@ -52,3 +52,11 @@ language: en
         - https://github.com/haskellweekly/haskellweekly.github.io
             - https://wiki.haskell.org/Haskell_Weekly_News
     - https://haskell.libhunt.com/newsletter/6
+- Cabal description field pitfall
+    - http://michael.orlitzky.com/articles/using_haddock_markup_in_a_cabal_file.xhtml
+- ghci
+    - https://www.reddit.com/r/haskell/comments/5su9ag/reload_run_expressions_in_ghci_with_a_single/
+- https://rybczak.net/2016/03/26/how-to-reduce-compilation-times-of-haskell-projects/
+- https://stackoverflow.com/questions/15662984/speed-up-compilation-in-ghc?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+- https://www.reddit.com/r/haskell/comments/45q90s/is_anything_being_done_to_remedy_the_soul/
+- [Haddock markup syntax](https://www.haskell.org/haddock/doc/html/ch03s08.html)

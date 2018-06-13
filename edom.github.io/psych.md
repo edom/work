@@ -52,3 +52,4 @@ date: 2018-05-24 02:52 +0700
 - Why do people commit crimes?
     - Do they know the penalties?
         - If yes, why do they still commit crimes?
+- [beeminder.com: use loss aversion to trick yourself to accomplishing goals](https://www.beeminder.com/home)

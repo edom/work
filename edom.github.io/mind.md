@@ -271,3 +271,10 @@ Why do I see things from my point of view?
         - Let \\( f^n = \underbrace{f \circ \ldots \circ f}_{n} \\) denote *iteration*.
         - The *history* of the Universe is the sequence <span>\( \langle f^0(x), f^1(x), \ldots, f^n(x), \ldots \rangle \)</span>.
     - How do we model consciousness in this model?
+- Unread
+    - https://en.wikipedia.org/wiki/Neuroscience
+    - Why does the brain have lobes?
+    - Why do different brains have the same major areas?
+    - https://en.wikipedia.org/wiki/Brain_damage
+    - https://en.wikipedia.org/wiki/Lobes_of_the_brain
+    - https://en.wikipedia.org/wiki/Lateralization_of_brain_function
