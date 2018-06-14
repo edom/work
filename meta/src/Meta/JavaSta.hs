@@ -1,7 +1,6 @@
 module Meta.JavaSta where
 
 import qualified Data.Int as I
-import qualified Data.List as L
 
 import qualified Meta.JavaType as JT
 
@@ -30,25 +29,6 @@ sDef typ nam ini = SDecl typ nam (Just ini)
 
 sAsgn :: Exp -> Exp -> Sta
 sAsgn loc val = SAsgn loc val
-
-renderBlock :: [Sta] -> String
-renderBlock stas =
-    case stas of
-        [] -> "{}"
-        _ -> "{\n"
-            ++ unlines (map renderSta stas)
-            ++ "}\n"
-
-renderSta :: Sta -> String
-renderSta sta = case sta of
-    SDecl typ nam mini -> JT.render typ ++ " " ++ nam ++ maybe "" (\ ini -> " = " ++ renderExp ini) mini ++ ";"
-    SExp exp -> renderExp exp ++ ";"
-    SAsgn loc val -> renderExp loc ++ " = " ++ renderExp val ++ ";"
-    SIf con tru mfal ->
-        "if (" ++ renderExp con ++ ") " ++ renderBlock tru
-        ++ maybe "" (\ fal -> "else " ++ renderBlock fal) mfal
-    SRet mval -> "return" ++ maybe "" renderExp mval ++ ";"
-    _ -> error $ "Meta.JavaSta.renderSta: not implemented: " ++ show sta
 
 {- |
 Do not use these data type constructors directly. Use constructor functions.
@@ -79,25 +59,6 @@ eStr = EStr
 
 eField :: Exp -> String -> Exp
 eField = EField
-
-renderExp :: Exp -> String
-renderExp ex = case ex of
-    ENull -> "null"
-    EThis -> "this"
-    ESuper -> "super"
-    EEq a b -> "(" ++ renderExp a ++ ") == (" ++ renderExp b ++ ")"
-    ENe a b -> "(" ++ renderExp a ++ ") != (" ++ renderExp b ++ ")"
-    EName s -> s
-    EStr s -> "\"" ++ escStr s ++ "\""
-    EField tar nam -> "(" ++ renderExp tar ++ ")." ++ nam
-    EFieldStatic tar nam -> tar ++ "." ++ nam
-    ECall tar nam args -> "(" ++ renderExp tar ++ ")." ++ nam ++ "(" ++ L.intercalate ", " (map renderExp args) ++ ")"
-    ECallStatic tar nam args -> tar ++ "." ++ nam ++ "(" ++ L.intercalate ", " (map renderExp args) ++ ")"
-    _ -> error $ "Meta.JavaSta.renderExp: not implemented: " ++ show ex
-    where
-        escStr = concatMap escChr
-        escChr '"' = "\\\""
-        escChr x = [x]
 
 data Exp
     -- literal expressions

@@ -1,8 +1,5 @@
 module Meta.Java where
 
-import qualified Data.List as L
-
-import qualified Meta.File as F
 import qualified Meta.JavaSta as JS
 import qualified Meta.JavaType as JT
 import qualified Meta.Prop as P
@@ -171,73 +168,6 @@ eFieldStatic :: Class -> Name -> JS.Exp
 eFieldStatic tar nam = JS.eFieldStatic (qualName tar) nam
 
 -- * Render
-
-data RenOpt
-    -- | Internal. Do not use. Use 'defRenOpt'.
-    = MkRenOpt {
-        roIndent :: Int
-    } deriving (Read, Show)
-
-defRenOpt :: RenOpt
-defRenOpt = MkRenOpt {
-        roIndent = 4
-    }
-
-renderClass :: RenOpt -> Class -> F.File
-renderClass ro cls = F.text path content
-    where
-        pkg = cPkg cls
-        name = cName cls
-        members = cMembers cls
-        parent = cParentClass cls
-        sExtends = case parent of
-            Nothing -> ""
-            Just sup -> " extends " ++ qualName sup
-        prefix = case pkg of
-            "" -> ""
-            _ -> map replace pkg ++ "/"
-            where
-                replace '.' = '/'
-                replace x = x
-        path = prefix ++ name ++ ".java"
-        content =
-            "package " ++ pkg ++ ";\n\n"
-            ++ "public class " ++ name ++ sExtends ++ " {\n"
-            ++ (unlines $ map ("    " ++) $ map (renderMember ro) $ members)
-            ++ "}\n"
-
-renderMember :: RenOpt -> Member -> String
-renderMember ro mem = case mem of
-    MField fld -> "public " ++ JT.render (fType fld) ++ " " ++ fName fld ++ ";"
-    MMethod met -> renderMethod ro met
-    MLineComment s -> "//" ++ s;
-    MBlockComment s -> "/*" ++ s ++ "*/";
-    _ -> error $ "Meta.Java.renderJavaMember: not implemented: " ++ show mem
-
-renderMethod :: RenOpt -> Method -> String
-renderMethod ro met =
-    sAnts
-    ++ "public " ++ JT.render (mRet met) ++ " " ++ mName met ++ " (" ++ renderParams pars ++ ") "
-    ++ sThrows
-    ++ JS.renderBlock body
-    where
-        sAnts = unlines $ map renderAnt ants
-        sThrows = case throws of
-            [] -> ""
-            _ -> "throws " ++ L.intercalate ", " (map JT.render throws)
-        throws = mThrows met
-        pars = mParams met
-        ants = mAnts met
-        body = mBody met
-
-renderAnt :: Ant -> String
-renderAnt ant = "@" ++ JT.render (aType ant)
-
-renderParams :: [Param] -> String
-renderParams pars = L.intercalate ", " $ map renderParam pars
-
-renderParam :: Param -> String
-renderParam par = JT.render (pType par) ++ " " ++ pName par
 
 -- * Internal
 

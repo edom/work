@@ -27,6 +27,8 @@
 
         * "Meta.Java": a subset of Java
 
+        * "Meta.JavaRender": render Java source files
+
         * "Meta.JavaSta": Java statements
 
         * "Meta.JavaType": Java types
@@ -41,6 +43,10 @@
 
     * "Meta.Web": a website description language
 
+* Formatting
+
+    * "Meta.WrapM": layout text into indented length-limited lines
+
 * Support
 
     * "Meta.Prop"
@@ -52,6 +58,10 @@
     * "Meta.Xml": write XML (Extensible Markup Language) documents
 
     * "Meta.Readme": overview, this file
+
+* Internal: Do not use
+
+    * "Meta.Wrap": internals of "Meta.WrapM"
 
 -}
 module Meta.Readme where
