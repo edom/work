@@ -1,53 +1,62 @@
 {- |
 
+Write metaprograms with Haskell as the metalanguage.
+
+A /metaprogram/ is a program that manipulate other programs, possibly in other languages.
+
 * Examples
 
     * "Meta.Example": an example application
+
     * "Meta.ExampleTables": its tables
-
-* Transput (input and output)
-
-    * "Meta.File": write files
 
 * Relational databases
 
     * "Meta.Relat": a subset of relational databases, mostly SQL databases
 
+    * "Meta.SqlCon": connect to SQL databases using HDBC
+
 * Intermediate programming languages
 
     * "Meta.IntCbp": intermediate class-based programming language
 
-        * all common programming languages with some compile-time type-checking
+        * practically all common programming languages
 
-        * similar to C, C++, Java, C#, and Go
+        * similar to C, C++, Java, C#, Python, and Go
 
-* Java
+* Programming languages
 
-    * Syntax
+    * Haskell
+
+        * "Meta.Hs": a subset of Haskell, similar to Template Haskell and Strathclyde Haskell Enhancement, but not hygienic and not typechecked
+
+    * Java
 
         * "Meta.Java": a subset of Java
 
-        * "Meta.JavaRender": render Java source files
+        * "Meta.JavaServlet": generate Java servlet
 
-        * "Meta.JavaSta": Java statements
+        * "Meta.Maven": a subset of Maven (dependency management, build system, and central repository, for Java)
 
-        * "Meta.JavaType": Java types
+        * "Meta.MavenDep": Maven dependency
 
-    * "Meta.JavaServlet": Java servlet
+    * TypeScript
 
-    * "Meta.Maven": a subset of Maven (dependency management, build system, and central repository, for Java)
-
-    * "Meta.MavenDep": Maven dependency
+        * "Meta.Tys": a subset of TypeScript
 
 * Web
 
     * "Meta.Web": a website description language
 
-* Formatting
-
-    * "Meta.WrapM": layout text into indented length-limited lines
-
 * Support
+
+    * Formatting
+
+        * "Meta.WrapM": layout text into indented length-limited lines
+
+    * Transput (input and output)
+
+        * "Meta.File": write files
 
     * "Meta.Prop"
 
@@ -59,9 +68,33 @@
 
     * "Meta.Readme": overview, this file
 
-* Internal: Do not use
+    * Internal: Do not use
 
-    * "Meta.Wrap": internals of "Meta.WrapM"
+        * "Meta.Wrap": internals of "Meta.WrapM"
+
+        * "Meta.Hs" internals
+
+                * "Meta.HsCon": ADT (algebraic data type) constructors
+
+                * "Meta.HsDat": ADTs
+
+                * "Meta.HsExp": expressions
+
+                * "Meta.HsMod": modules
+
+                * "Meta.HsPat": patterns
+
+                * "Meta.HsRender": render Haskell source files
+
+                * "Meta.HsType": types
+
+        * "Meta.Java" internals
+
+                * "Meta.JavaSta": statements
+
+                * "Meta.JavaType": types
+
+                * "Meta.JavaRender": render Java source files
 
 -}
 module Meta.Readme where

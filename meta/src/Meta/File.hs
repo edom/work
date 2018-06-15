@@ -18,6 +18,9 @@ text = MkFile
 
 -- * Actions
 
+prependPath :: I.FilePath -> File -> File
+prependPath pre fil = fil { fPath = pre ++ fPath fil }
+
 write :: File -> IO ()
 write file = do
     D.createDirectoryIfMissing recursive dir

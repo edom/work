@@ -29,9 +29,9 @@ render typ = case typ of
     Int16 -> "short"
     Int32 -> "int"
     Int64 -> "long"
-    Array typ -> render typ ++ "[]"
+    Array ty -> render ty ++ "[]"
     Ref qname -> qname
-    Apply typ pars -> render typ ++ "<" ++ L.intercalate ", " (map render pars) ++ ">"
+    Apply ty pars -> render ty ++ "<" ++ L.intercalate ", " (map render pars) ++ ">"
 
 -- * Predefined types
 

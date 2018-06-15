@@ -1,4 +1,6 @@
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE RankNTypes #-}
+{-# LANGUAGE TypeSynonymInstances #-}
 
 module Meta.Xml where
 
@@ -151,12 +153,11 @@ renderElm ro el@(MkElm ns nam atrs chds) =
         sAtrs = if hasAtr
             then " " ++ renderAtrs roChd atrs
             else ""
-        hasChild = not $ null chds
         preserveSpace = eHasTextChild el
         roChd = enter ro
 
         eHasTextChild :: Elm -> Bool
-        eHasTextChild el = any isTextNode $ eChildren el
+        eHasTextChild ele = any isTextNode $ eChildren ele
 
         isTextNode :: Node -> Bool
         isTextNode nod = case nod of

@@ -28,6 +28,11 @@ indented (MkProgM k) = MkProgM $ \ s0 ->
     in
         (s1 { sCurInd = sCurInd s0 }, a)
 
+commaSep :: [Prog ()] -> Prog ()
+commaSep [] = nop
+commaSep [x] = x
+commaSep (h : t) = h >> atom "," >> space >> commaSep t
+
 -- * Rendering
 
 run :: State -> Prog a -> String

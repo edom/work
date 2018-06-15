@@ -36,5 +36,5 @@ sku = R.mkTable "sku" [
     ]
     |> R.addPrimaryKey [c_id64]
 
-c_id64 :: R.Column
+c_id64 :: R.Col
 c_id64 = R.colInt64 "id"

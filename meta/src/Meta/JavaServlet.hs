@@ -1,7 +1,6 @@
 module Meta.JavaServlet where
 
 import qualified Meta.Java as J
-import qualified Meta.JavaType as JT
 
 -- * Classes
 

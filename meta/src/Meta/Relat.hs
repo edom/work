@@ -10,25 +10,37 @@ data Type
     = TInt32
     | TInt64
     | TVarChar Int -- ^ the limit is the maximum number of characters, not bytes
-    | TNullable Type
+    | TNullable Type -- ^ TODO move to Col cNullable ?
     deriving (Read, Show)
 
 -- * Column
 
-data Column
+data Col
     -- | Internal. Do not use. Use column constructors.
-    = MkColumn {
+    = MkCol {
         cType :: Type
         , cName :: Name
     } deriving (Read, Show)
 
+defCol :: Col
+defCol = MkCol {
+        cType = TInt32
+        , cName = ""
+    }
+
 -- * Column constructors
 
-colInt64 :: Name -> Column
-colInt64 name = MkColumn TInt64 name
+colInt64 :: Name -> Col
+colInt64 name = defCol {
+        cType = TInt64
+        , cName = name
+    }
 
-colVarChar :: Int -> Name -> Column
-colVarChar limit name = MkColumn (TVarChar limit) name
+colVarChar :: Int -> Name -> Col
+colVarChar limit name = defCol {
+        cType = TVarChar limit
+        , cName = name
+    }
 
 -- * Table
 
@@ -36,29 +48,29 @@ data Table
     -- | Internal. Do not use. Use 'defTable'.
     = MkTable {
         tName :: Name
-        , tCols :: [Column]
+        , tCols :: [Col]
         , tConstraints :: [Constraint]
     } deriving (Read, Show)
 
 data Constraint
-    = KPrimaryKey [Column]
-    | KForeignKey [Column] Table [Column]
+    = KPrimaryKey [Col]
+    | KForeignKey [Col] Table [Col]
     deriving (Read, Show)
 
-mkTable :: Name -> [Column] -> Table
+mkTable :: Name -> [Col] -> Table
 mkTable nam cols = MkTable nam cols []
 
 defTable :: Table
 defTable = MkTable "" [] []
 
-addPrimaryKey :: [Column] -> Table -> Table
+addPrimaryKey :: [Col] -> Table -> Table
 addPrimaryKey cols tab = tab { tConstraints = tConstraints tab ++ [KPrimaryKey cols] }
 
 -- * Query
 
 data Query
     = QFrom Table
-    | QProject [Column] Query
+    | QProject [Col] Query
     | QJoin Query Query
     | QSelect Exp Query -- ^ the expression must be a boolean expression
     deriving (Read, Show)
@@ -93,7 +105,7 @@ renderSqlSelect q = case q of
 -- * Expression
 
 data Exp
-    = ECol Column
+    = ECol Col
     | EEq Exp Exp
     | ELt Exp Exp
     | EGt Exp Exp

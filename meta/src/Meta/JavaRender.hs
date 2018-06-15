@@ -82,7 +82,7 @@ renderMethod met = do
             [] -> V.nop
             _ -> do
                 V.atom "throws" >> V.space
-                commaSep $ map (V.atom . JT.render) throws
+                V.commaSep $ map (V.atom . JT.render) throws
         throws = J.mThrows met
         pars = J.mParams met
         ants = J.mAnts met
@@ -93,13 +93,8 @@ renderAnt ant = do
     V.atom $ "@" ++ JT.render (J.aType ant)
     V.break
 
-commaSep :: [V.Prog ()] -> V.Prog ()
-commaSep [] = V.nop
-commaSep [x] = x
-commaSep (h : t) = h >> V.atom "," >> V.space >> commaSep t
-
 renderParams :: [J.Param] -> V.Prog ()
-renderParams pars = commaSep $ map renderParam pars
+renderParams pars = V.commaSep $ map renderParam pars
 
 renderParam :: J.Param -> V.Prog ()
 renderParam par = do
@@ -148,11 +143,11 @@ renderExp ex = case ex of
         V.atom "("
         renderExp tar
         V.atom $ ")." ++ nam ++ "("
-        commaSep $ map renderExp args
+        V.commaSep $ map renderExp args
         V.atom ")"
     JS.ECallStatic tar nam args -> do
         V.atom $ tar ++ "." ++ nam ++ "("
-        commaSep $ map renderExp args
+        V.commaSep $ map renderExp args
         V.atom ")"
     _ -> error $ "Meta.JavaSta.renderExp: not implemented: " ++ show ex
     where
