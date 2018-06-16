@@ -2,9 +2,9 @@
 
 {- |
 
-* Use 'mkProject' to describe your project.
+* Use 'mk_project' to describe your project.
 
-* Use 'toPomXml' to transform that description to XML document.
+* Use 'to_pom_xml' to transform that description to XML document.
 
 -}
 module Meta.Maven where
@@ -12,33 +12,60 @@ module Meta.Maven where
 import qualified Meta.MavenDep as MD
 import qualified Meta.Xml as X
 
-type GrpId = String
-type ArtId = String
+-- * Coordinates
+
+type Group_id = String
+
+type Artifact_id = String
+
 type Version = String
 
 -- * Project
 
 data Project
-    -- | Internal. Do not use. Use 'mkProject'.
+    -- | Internal. Do not use. Use 'mk_project'.
     = MkProject {
-        pGroupId :: GrpId
-        , pArtifactId :: ArtId
+        pGroupId :: Group_id
+        , pArtifactId :: Artifact_id
         , pVersion :: Version
         , pParent :: Maybe Project
         , pPackaging :: Packaging
         , pDeps :: [MD.Dep]
     } deriving (Read, Show)
 
-mkProject :: GrpId -> ArtId -> Version -> Project
-mkProject grp art ver = MkProject {
-        pGroupId = grp
-        , pArtifactId = art
-        , pVersion = ver
+empty :: Project
+empty = MkProject {
+        pGroupId = ""
+        , pArtifactId = ""
+        , pVersion = ""
         , pParent = Nothing
         , pPackaging = PJar
         , pDeps = []
     }
-    where
+
+mk_project :: Group_id -> Artifact_id -> Version -> Project
+mk_project grp art ver = set_gav grp art ver empty
+
+set_gav :: Group_id -> Artifact_id -> Version -> Project -> Project
+set_gav g a v p = p {
+        pGroupId = g
+        , pArtifactId = a
+        , pVersion = v
+    }
+
+-- * Dependency
+
+type Dep = MD.Dep
+
+type Dep_ver = MD.Dep_ver
+
+set_deps :: [Dep] -> Project -> Project
+set_deps ds p = p { pDeps = ds }
+
+dep_provided :: Group_id -> Artifact_id -> Dep_ver -> Dep
+dep_provided = MD.provided
+
+-- * POM XML
 
 {- |
 https://maven.apache.org/guides/introduction/introduction-to-the-pom.html#Minimal_POM
@@ -47,8 +74,8 @@ https://gist.github.com/torgeir/6742158
 
 Search the Internet for @pom.xml template@.
 -}
-toPomXml :: Project -> X.Doc
-toPomXml pro = doc
+to_pom_xml :: Project -> X.Doc
+to_pom_xml pro = doc
     where
         doc :: X.Doc
         doc = X.MkDoc [

@@ -2,7 +2,6 @@ module Meta.HsType where
 
 -- * Name
 
--- | VarName or ConName.
 type Name = String
 
 -- | Example: @\"MyModule.MyType\"@. Dot-separated components. Each component begins with uppercase letter.
@@ -14,10 +13,13 @@ type VarName = String
 -- | Example: @\"MyCon\"@. Must begin with uppercase letter.
 type ConName = String
 
+-- | Type name.
 type TypName = ConName
 
+-- | Class name.
 type ClsName = ConName
 
+-- | Module name.
 type ModName = QualName
 
 -- * Symbol
@@ -62,6 +64,13 @@ data Type
     | Arr Type Type -- @a -> b@
     deriving (Read, Show)
 
+-- same as (->)
+infixr 0 `Arr`
+
+appMany :: Type -> [Type] -> Type
+appMany f [] = f
+appMany f (h : t) = appMany (App f h) t
+
 -- | Get used 'VarName's.
 getVars :: Type -> [VarName]
 getVars typ = case typ of
@@ -79,19 +88,19 @@ getSyms t = case t of
     Lam _ a -> getSyms a
     Arr a b -> getSyms a ++ getSyms b
 
-mkVal :: String -> String -> Type
-mkVal modu nam = Val $ MkSym modu nam
+val :: ModName -> Name -> Type
+val modu nam = Val $ MkSym modu nam
 
 -- * Predefined types
 
 string :: Type
-string = mkVal "Prelude" "String"
+string = val "Prelude" "String"
 
 int32 :: Type
-int32 = mkVal "Data.Int" "Int32"
+int32 = val "Data.Int" "Int32"
 
 int64 :: Type
-int64 = mkVal "Data.Int" "Int64"
+int64 = val "Data.Int" "Int64"
 
 -- * Experimental
 

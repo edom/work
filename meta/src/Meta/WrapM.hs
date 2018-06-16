@@ -29,9 +29,12 @@ indented (MkProgM k) = MkProgM $ \ s0 ->
         (s1 { sCurInd = sCurInd s0 }, a)
 
 commaSep :: [Prog ()] -> Prog ()
-commaSep [] = nop
-commaSep [x] = x
-commaSep (h : t) = h >> atom "," >> space >> commaSep t
+commaSep = sepBy (atom "," >> space)
+
+sepBy :: Prog () -> [Prog ()] -> Prog ()
+sepBy _ [] = nop
+sepBy _ [x] = x
+sepBy sep (h : t) = h >> sep >> sepBy sep t
 
 -- * Rendering
 

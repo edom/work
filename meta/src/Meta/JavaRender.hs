@@ -19,8 +19,11 @@ defRenOpt = MkRenOpt {
         , roCurInd = 0
     }
 
-renderClassFile :: RenOpt -> J.Class -> F.File
-renderClassFile ro cls =
+render_class_file :: J.Class -> F.File
+render_class_file = renderClassFileWith defRenOpt
+
+renderClassFileWith :: RenOpt -> J.Class -> F.File
+renderClassFileWith ro cls =
     F.text path $ V.run V.defState { V.sIndSize = roIndent ro } $ renderClass cls
     where
         prefix = case pkg of

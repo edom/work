@@ -18,10 +18,12 @@ typeOf cls = JT.ref $ qualName cls
 
 -- * Class
 
+type Package_name = String
+
 data Class
     -- | Internal. Do not use. Use 'defClass'.
     = MkClass {
-        cPkg :: String
+        cPkg :: Package_name
         , cName :: String -- ^ Internal. Do not use. Use 'P.getName' and 'P.setName'.
         , cParentClass :: Maybe Class
         , cIfaceClasses :: [Class]
@@ -30,6 +32,9 @@ data Class
         , cComment :: String
         , cExternal :: Bool
     } deriving (Read, Show)
+
+set_pkg :: Package_name -> Class -> Class
+set_pkg p c = c { cPkg = p }
 
 instance P.GetName Class String where getName = cName
 instance P.SetName Class String where setName n c = c { cName = n }

@@ -1,40 +1,42 @@
 module Meta.ExampleTables where
 
-import Meta.Prop ((|>))
+import Meta.User ((|>))
 
-import qualified Meta.Relat as R
+import qualified Meta.User as U
 
 -- | All tables.
-tables :: [R.Table]
+tables :: [U.Table]
 tables = [
         customer
         , sku
         , order
     ]
 
-customer :: R.Table
-customer = R.mkTable "customer" [
+customer :: U.Table
+customer = U.mk_table "customer" [
         c_id64
-        , R.colVarChar 128 "name"
+        , U.col_varchar 128 "name" |> U.col_set_title "Name"
     ]
-    |> R.addPrimaryKey [c_id64]
+    |> U.tab_add_primary_key [c_id64]
 
-order :: R.Table
-order = R.mkTable "order" [
+order :: U.Table
+order = U.mk_table "order" [
         c_id64
-        , R.colVarChar 16 "ref_num"
-        , R.colInt64 "customer_id"
-        , R.colInt64 "sku_id"
+        , U.col_varchar 16 "ref_num"
+            |> U.col_set_short_title "RefNum"
+            |> U.col_set_long_title "Reference number"
+        , U.col_int64 "customer_id"
+        , U.col_int64 "sku_id"
     ]
-    |> R.addPrimaryKey [c_id64]
+    |> U.tab_add_primary_key [c_id64]
 
-sku :: R.Table
-sku = R.mkTable "sku" [
+sku :: U.Table
+sku = U.mk_table "sku" [
         c_id64
-        , R.colVarChar 16 "code"
-        , R.colVarChar 128 "name"
+        , U.col_varchar 16 "code"
+        , U.col_varchar 128 "name"
     ]
-    |> R.addPrimaryKey [c_id64]
+    |> U.tab_add_primary_key [c_id64]
 
-c_id64 :: R.Col
-c_id64 = R.colInt64 "id"
+c_id64 :: U.Column
+c_id64 = U.col_int64 "id"

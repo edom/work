@@ -10,14 +10,26 @@ module Meta.Hs where
 
 import qualified Meta.HsCon as C
 import qualified Meta.HsMod as M
+import qualified Meta.HsRender as HS
 import qualified Meta.HsType as T
+import qualified Meta.RdbCol as RC
 import qualified Meta.Relat as R
+
+-- * Module
+
+mkModule = M.mkModule
+
+type Mod_name = T.ModName
+
+-- * Render
+
+renderModuleFile = HS.renderModuleFile
 
 -- * Generate DTO
 
 genDto :: R.Table -> [M.Member]
 genDto tab = [
-        M.mDat datName cons [T.sc_Read, T.sc_Show]
+        M.mDat datName [] cons [T.sc_Read, T.sc_Show]
     ]
     where
         tabName = R.tName tab
@@ -26,14 +38,14 @@ genDto tab = [
         cons = [C.CRec conName flds]
         flds = map mapColToFld cols
         cols = R.tCols tab
-        mapType :: R.Type -> T.Type
+        mapType :: RC.Type -> T.Type
         mapType typ = case typ of
-            R.TInt32 -> T.int32
-            R.TInt64 -> T.int64
-            R.TVarChar _ -> T.string
+            RC.TInt32 -> T.int32
+            RC.TInt64 -> T.int64
+            RC.TVarChar _ -> T.string
             _ -> error $ "Meta.Hs.genDto.mapType: " ++ show typ
-        mapColToFld :: R.Col -> (T.VarName, T.Type)
-        mapColToFld col = (tabName ++ "_" ++ R.cName col, mapType $ R.cType col)
+        mapColToFld :: RC.Col -> (T.VarName, T.Type)
+        mapColToFld col = (tabName ++ "_" ++ RC.getName col, mapType $ RC.getType col)
 
 -- * Experimental: Design for auto-lifting
 

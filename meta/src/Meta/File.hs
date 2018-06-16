@@ -18,8 +18,12 @@ text = MkFile
 
 -- * Actions
 
+-- | deprecated
 prependPath :: I.FilePath -> File -> File
 prependPath pre fil = fil { fPath = pre ++ fPath fil }
+
+prepend_path :: I.FilePath -> File -> File
+prepend_path pre fil = fil { fPath = pre ++ fPath fil }
 
 write :: File -> IO ()
 write file = do

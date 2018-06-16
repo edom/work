@@ -92,8 +92,11 @@ data Atr
 
 -- * Render
 
-renderDoc :: RenOpt -> Doc -> String
-renderDoc ro (MkDoc nodes) = concatMap (renderNode ro) nodes
+render_doc :: Doc -> String
+render_doc = render_doc_with defRenOpt
+
+render_doc_with :: RenOpt -> Doc -> String
+render_doc_with ro (MkDoc nodes) = concatMap (renderNode ro) nodes
 
 defRenOpt :: RenOpt
 defRenOpt = MkRenOpt {

@@ -20,6 +20,46 @@ infixl 0 |>
 
 -- * Error handling
 
+{- $
+
+* How to handle error in the metaprogram:
+
+    * Don't handle error.
+
+    * Let the metaprogram halt with an exception.
+
+* How to raise error in the metaprogram:
+
+    * Use 'error'.
+
+    * Write helpful error message.
+
+        * In the error message:
+        
+            * include the module name,
+            
+            * include the function name,
+
+            * summarize the problem (the direct cause; don't guess the root cause),
+
+            * 'show' the offending arguments.
+
+        * The message should look like \"Module: function: problem: (arg1) (arg2) ...\".
+
+* Are partial functions OK?
+
+    * In the /metaprogram/, yes, because it simplifies things a lot.
+
+    * In the /target program/, no.
+
+-}
+
+-- ** Deprecated
+
+{- $
+Deprecated. Do not use. Use 'error' instead.
+-}
+
 {- |
 The only relevant instance of this class is 'Err'.
 
@@ -107,3 +147,8 @@ class SetName a b | a -> b where setName :: b -> a -> a
 
 class GetType a b | a -> b where getType :: a -> b
 class SetType a b | a -> b where setType :: b -> a -> a
+
+-- ** Gav (group-artifact-version)
+
+class Get_gav a b | a -> b where get_gav :: a -> b
+class Set_gav a b | a -> b where set_gav :: b -> a -> a

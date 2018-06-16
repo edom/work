@@ -3,6 +3,10 @@
 * Pretty URL pattern matching isn't supported.
 Set up a reverse proxy to rewrite the URL.
 
+* See also:
+
+    * Ur/Web
+
 -}
 module Meta.Web where
 
@@ -18,6 +22,12 @@ data Site
         sPages :: [Page]
     }
     deriving (Show, Read)
+
+empty :: Site
+empty = MkSite []
+
+add_page :: Url -> Content -> Site -> Site
+add_page url con sit = sit { sPages = sPages sit ++ [MkPage url con] }
 
 data Page
     = MkPage {

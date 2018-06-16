@@ -4,6 +4,18 @@ Write metaprograms with Haskell as the metalanguage.
 
 A /metaprogram/ is a program that manipulate other programs, possibly in other languages.
 
+To use, import "Meta.User".
+
+-}
+module Meta.Readme where
+
+-- * Internals
+
+{- $
+
+These are not part of the public API.
+Do not use.
+
 * Examples
 
     * "Meta.Example": an example application
@@ -13,6 +25,8 @@ A /metaprogram/ is a program that manipulate other programs, possibly in other l
 * Relational databases
 
     * "Meta.Relat": a subset of relational databases, mostly SQL databases
+
+        * "Meta.RdbCol": columns
 
     * "Meta.SqlCon": connect to SQL databases using HDBC
 
@@ -30,11 +44,35 @@ A /metaprogram/ is a program that manipulate other programs, possibly in other l
 
         * "Meta.Hs": a subset of Haskell, similar to Template Haskell and Strathclyde Haskell Enhancement, but not hygienic and not typechecked
 
+            * "Meta.HsDat": ADTs
+
+                * "Meta.HsCon": ADT (algebraic data type) constructors
+
+            * "Meta.HsExp": expressions
+
+            * "Meta.HsMod": modules
+
+            * "Meta.HsPat": patterns
+
+            * "Meta.HsRecord": records
+
+            * "Meta.HsRender": render Haskell source files
+
+            * "Meta.HsType": types
+
     * Java
 
         * "Meta.Java": a subset of Java
 
-        * "Meta.JavaServlet": generate Java servlet
+            * "Meta.JavaRender": render Java source files
+
+            * "Meta.JavaSta": statements
+
+            * "Meta.JavaType": types
+
+            * "Meta.JavaWebApp": Java web application
+
+                * "Meta.JavaServlet": Java servlet
 
         * "Meta.Maven": a subset of Maven (dependency management, build system, and central repository, for Java)
 
@@ -54,6 +92,8 @@ A /metaprogram/ is a program that manipulate other programs, possibly in other l
 
         * "Meta.WrapM": layout text into indented length-limited lines
 
+            * "Meta.Wrap": internals of "Meta.WrapM"
+
     * Transput (input and output)
 
         * "Meta.File": write files
@@ -68,33 +108,4 @@ A /metaprogram/ is a program that manipulate other programs, possibly in other l
 
     * "Meta.Readme": overview, this file
 
-    * Internal: Do not use
-
-        * "Meta.Wrap": internals of "Meta.WrapM"
-
-        * "Meta.Hs" internals
-
-                * "Meta.HsCon": ADT (algebraic data type) constructors
-
-                * "Meta.HsDat": ADTs
-
-                * "Meta.HsExp": expressions
-
-                * "Meta.HsMod": modules
-
-                * "Meta.HsPat": patterns
-
-                * "Meta.HsRender": render Haskell source files
-
-                * "Meta.HsType": types
-
-        * "Meta.Java" internals
-
-                * "Meta.JavaSta": statements
-
-                * "Meta.JavaType": types
-
-                * "Meta.JavaRender": render Java source files
-
 -}
-module Meta.Readme where

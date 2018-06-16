@@ -48,14 +48,18 @@ renderMember :: M.Member -> W.Prog ()
 renderMember mem = case mem of
     M.Imp modName -> do
         W.atom ("import qualified " ++ modName) >> W.break
-    M.MDat (D.MkDat tyNam cons ders) -> do
-        W.atom ("data " ++ tyNam) >> W.break
+    M.Dec nam typ -> do
+        W.atom nam >> W.space >> W.atom "::" >> W.space >> renderType typ >> W.break
+    M.MDat (D.MkDat tyNam pars cons ders) -> do
+        W.atom ("data " ++ tyNam) >> W.sepBy W.space (map W.atom pars) >> W.break
         W.indented $ do
             sequence_ $ zipWith renderCon begsym cons
             W.atom "deriving ("
             W.commaSep $ map (W.atom . T.sQualName) $ ders
             W.atom ")" >> W.break
             W.break
+    M.LineComment s -> W.atom ("--" ++ s) >> W.break
+    M.BlockComment s -> W.atom $ "{-" ++ s ++ "-}"
     _ -> error $ "Meta.HsRender.renderMember: " ++ show mem
     where
         begsym = "= " : repeat "| "

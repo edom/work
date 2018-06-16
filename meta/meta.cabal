@@ -19,9 +19,20 @@ flag postgresql
     description:
         Enable connecting to PostgreSQL using HDBC-postgresql.
         Requires package libpq-dev on Ubuntu 14.04.
-    default:        True
+    default: True
+
+flag stage1
+    description: Include stage1.
+    default: True
 
 library
+
+    default-language: Haskell2010
+    ghc-options:
+        -Wall
+
+    hs-source-dirs:
+        src
     exposed-modules:
         Meta.Example
         Meta.ExampleTables
@@ -32,6 +43,7 @@ library
         Meta.HsExp
         Meta.HsMod
         Meta.HsPat
+        Meta.HsRecord
         Meta.HsRender
         Meta.HsType
         Meta.IntCbp
@@ -40,27 +52,32 @@ library
         Meta.JavaServlet
         Meta.JavaSta
         Meta.JavaType
+        Meta.JavaWebApp
         Meta.Maven
         Meta.MavenDep
         Meta.Prop
+        Meta.RdbCol
         Meta.Readme
         Meta.Relat
         Meta.SqlCon
         Meta.Tys
+        Meta.User
         Meta.Web
         Meta.Wrap
         Meta.WrapM
         Meta.Xml
+
+    if flag(stage1)
+        hs-source-dirs:
+            src1
+        exposed-modules:
+
     build-depends:
         base >=4
         , HDBC >= 2
         , directory >=1
         , filepath >=1
+
     if flag(postgresql)
         build-depends:
             HDBC-postgresql >= 2
-    hs-source-dirs:
-        src
-    default-language:   Haskell2010
-    ghc-options:
-        -Wall

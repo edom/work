@@ -2,7 +2,6 @@ module Meta.HsMod where
 
 import qualified Data.List as L
 
-import qualified Meta.HsCon as C
 import qualified Meta.HsDat as D
 import qualified Meta.HsExp as E
 import qualified Meta.HsPat as P
@@ -19,8 +18,8 @@ mkModule modn mems = MkModule modn (fixImports mems)
 impQual :: T.ModName -> Member
 impQual = Imp
 
-mDat :: T.TypName -> [C.Con] -> [T.SymCls] -> Member
-mDat name cons ders = MDat $ D.MkDat name cons ders
+mDat :: T.TypName -> [T.VarName] -> [D.Con] -> [T.SymCls] -> Member
+mDat name pars cons ders = MDat $ D.MkDat name pars cons ders
 
 -- * Internal
 
@@ -77,6 +76,10 @@ instance ClsName type1 type2 ... where
 
     | Ins T.ClsName [T.Type] [Member]
 
+    | LineComment String
+
+    | BlockComment String
+
     deriving (Read, Show)
 
 memGetSyms :: Member -> [T.Sym]
@@ -84,9 +87,11 @@ memGetSyms mem = case mem of
     Imp _ -> []
     Dec _ t -> T.getSyms t
     Def _ pats ex -> concatMap P.getSyms pats ++ E.getSyms ex
-    MDat (D.MkDat _ cons ders) -> concatMap C.getSyms cons ++ ders
+    MDat dat -> D.getSyms dat
     Cls _ pats mems -> concatMap P.getSyms pats ++ concatMap memGetSyms mems
     Ins _ typs mems -> concatMap T.getSyms typs ++ concatMap memGetSyms mems
+    LineComment _ -> []
+    BlockComment _ -> []
 
 -- nub is O(n^2).
 computeImports :: [Member] -> [Member]

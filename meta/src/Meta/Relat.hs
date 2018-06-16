@@ -2,77 +2,47 @@ module Meta.Relat where
 
 import qualified Data.List as L
 
--- * Type
-
-type Name = String
-
-data Type
-    = TInt32
-    | TInt64
-    | TVarChar Int -- ^ the limit is the maximum number of characters, not bytes
-    | TNullable Type -- ^ TODO move to Col cNullable ?
-    deriving (Read, Show)
-
--- * Column
-
-data Col
-    -- | Internal. Do not use. Use column constructors.
-    = MkCol {
-        cType :: Type
-        , cName :: Name
-    } deriving (Read, Show)
-
-defCol :: Col
-defCol = MkCol {
-        cType = TInt32
-        , cName = ""
-    }
-
--- * Column constructors
-
-colInt64 :: Name -> Col
-colInt64 name = defCol {
-        cType = TInt64
-        , cName = name
-    }
-
-colVarChar :: Int -> Name -> Col
-colVarChar limit name = defCol {
-        cType = TVarChar limit
-        , cName = name
-    }
+import qualified Meta.RdbCol as C
 
 -- * Table
+
+-- | Database table name.
+type DbTabName = String
 
 data Table
     -- | Internal. Do not use. Use 'defTable'.
     = MkTable {
-        tName :: Name
-        , tCols :: [Col]
+        tName :: DbTabName
+        , tCols :: [C.Col]
         , tConstraints :: [Constraint]
     } deriving (Read, Show)
 
 data Constraint
-    = KPrimaryKey [Col]
-    | KForeignKey [Col] Table [Col]
+    = KPrimaryKey [C.Col]
+    | KForeignKey [C.Col] Table [C.Col]
     deriving (Read, Show)
 
-mkTable :: Name -> [Col] -> Table
+mkTable :: DbTabName -> [C.Col] -> Table
 mkTable nam cols = MkTable nam cols []
 
 defTable :: Table
 defTable = MkTable "" [] []
 
-addPrimaryKey :: [Col] -> Table -> Table
+addPrimaryKey :: [C.Col] -> Table -> Table
 addPrimaryKey cols tab = tab { tConstraints = tConstraints tab ++ [KPrimaryKey cols] }
 
 -- * Query
 
+{- |
+This is similar to Linq.
+-}
 data Query
-    = QFrom Table
-    | QProject [Col] Query
+    = QFrom Table -- ^ select all rows of the table
+    | QProject [C.Col] Query -- ^ select some columns of subquery
     | QJoin Query Query
-    | QSelect Exp Query -- ^ the expression must be a boolean expression
+    | QFilter Exp Query -- ^ select only satisfying rows from subquery; the expression must be a boolean expression
+    | QSkip Integer Query -- ^ skip first rows of subquery
+    | QLimit Integer Query -- ^ take only first rows of subquery
     deriving (Read, Show)
 
 -- | Perhaps we should introduce an intermediate module Meta.Sql?
@@ -81,16 +51,16 @@ renderSqlSelect q = case q of
     QFrom t ->
         "SELECT * FROM " ++ tName t
     QProject cols subq ->
-        "SELECT " ++ L.intercalate "," (map cName cols)
+        "SELECT " ++ L.intercalate "," (map C.getName cols)
         ++ " FROM (" ++ renderSqlSelect subq ++ ") tmp"
-    QSelect cond subq ->
+    QFilter cond subq ->
         "SELECT * FROM (" ++ renderSqlSelect subq ++ ") tmp WHERE " ++ renderSqlExp cond
     _ ->
         error $ "renderSqlSelect: not implemented: " ++ show q
     where
         renderSqlExp :: Exp -> String
         renderSqlExp e = case e of
-            ECol col -> cName col
+            ECol col -> C.getName col
             EEq a b -> "(" ++ renderSqlExp a ++ " = " ++ renderSqlExp b ++ ")"
             ELt a b -> "(" ++ renderSqlExp a ++ " < " ++ renderSqlExp b ++ ")"
             EGt a b -> "(" ++ renderSqlExp a ++ " > " ++ renderSqlExp b ++ ")"
@@ -105,7 +75,7 @@ renderSqlSelect q = case q of
 -- * Expression
 
 data Exp
-    = ECol Col
+    = ECol C.Col
     | EEq Exp Exp
     | ELt Exp Exp
     | EGt Exp Exp
@@ -117,3 +87,10 @@ data Exp
     | EAnd Exp Exp
     | EOr Exp Exp
     deriving (Read, Show)
+
+-- * Reexports from "Meta.RdbCol"
+
+type Col = C.Col
+
+colInt64 = C.colInt64
+colVarChar = C.colVarChar

@@ -5,7 +5,7 @@ import qualified Control.Monad as M
 import qualified Database.HDBC as H
 import qualified Database.HDBC.PostgreSQL as HP
 
-import qualified Meta.Relat as R
+import qualified Meta.RdbCol as RC
 
 {- |
 See:
@@ -18,11 +18,11 @@ See:
 -}
 type ConStr = String
 
-readType :: String -> Either String R.Type
+readType :: String -> Either String RC.Type
 readType str = case str of
-    "integer" -> pure R.TInt32
-    "bigint" -> pure R.TInt64
-    "character varying" -> pure $ R.TVarChar maxBound -- FIXME
+    "integer" -> pure RC.TInt32
+    "bigint" -> pure RC.TInt64
+    "character varying" -> pure $ RC.TVarChar maxBound -- FIXME
     _ -> Left $ "Meta.SqlCon.readType: not implemented: " ++ str
 
 readNul :: String -> Either String Bool
@@ -48,8 +48,8 @@ test = do
                 let rCol = do
                         t <- readType typ
                         n <- readNul nul
-                        let nt = if n then R.TNullable t else t
-                        pure $ R.defCol { R.cType = nt, R.cName = col }
+                        let nt = if n then RC.TNullable t else t
+                        pure $ RC.mkCol nt col
                 putStrLn $ qna ++ ": " ++ col ++ " type " ++ typ ++ " nullable " ++ nul
                 putStrLn $ " -> " ++ show rCol
         pure ()

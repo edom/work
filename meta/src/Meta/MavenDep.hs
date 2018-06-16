@@ -2,12 +2,11 @@ module Meta.MavenDep where
 
 -- * Dependency
 
-type GrpId = String
-type ArtId = String
-type Version = String
+type Group_id = String
+type Artifact_id = String
 
 -- | Dependency version specification syntax is documented in 'version'.
-type DepVer = String
+type Dep_ver = String
 
 data Scope
     = Compile
@@ -17,10 +16,10 @@ data Scope
 data Dep
     -- | Internal. Do not use. Use dependency constructors.
     = MkDep {
-        groupId :: GrpId
-        , artifactId :: ArtId
+        groupId :: Group_id
+        , artifactId :: Artifact_id
         -- | syntax is documented in https://maven.apache.org/pom.html#Dependency_Version_Requirement_Specification
-        , version :: Version
+        , version :: Dep_ver
         , scope :: Scope
     } deriving (Read, Show)
 
@@ -28,17 +27,12 @@ data Dep
 
 -- | Compile-time dependency.
 compile
-    :: GrpId -- ^ group id
-    -> ArtId -- ^ artifact id
-    -> DepVer -- ^ see 'DepVer' for syntax
+    :: Group_id -- ^ group id
+    -> Artifact_id -- ^ artifact id
+    -> Dep_ver -- ^ see 'Dep_ver' for syntax
     -> Dep
 
 compile grp art ver = MkDep grp art ver Compile
 
-provided :: GrpId -> ArtId -> DepVer -> Dep
+provided :: Group_id -> Artifact_id -> Dep_ver -> Dep
 provided grp art ver = MkDep grp art ver Provided
-
--- * Predefined dependencies
-
-servletApi :: DepVer -> Dep
-servletApi ver = provided "javax.servlet" "javax.servlet-api" ver

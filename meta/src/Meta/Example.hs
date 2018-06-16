@@ -7,77 +7,51 @@ An example web application.
 -}
 module Meta.Example where
 
-import qualified Control.Monad as M
+import Meta.User ((|>))
 
-import qualified Meta.File as F
-import qualified Meta.Hs as H
-import qualified Meta.HsMod as HM
-import qualified Meta.HsRender as HR
-import qualified Meta.IntCbp as C
-import qualified Meta.Java as J
-import qualified Meta.JavaRender as JR
-import qualified Meta.Maven as N
-import qualified Meta.MavenDep as MD
-import qualified Meta.Prop as P
 import qualified Meta.SqlCon as S
-import qualified Meta.Web as W
-import qualified Meta.Xml as X
+import qualified Meta.User as U
 
 import qualified Meta.ExampleTables as T
 
 -- * Fresh (\"greenfield\") approaches
 
--- ** Write the model/ontology in Haskell
-
 {- $
 * Write the metaprogram in Haskell.
 
-* Run the metaprogram to generate program in target language.
+    * Describe your data\/model\/ontology.
 
-* Link generated program with runtime.
+    * Describe your routes.
 
-* Where is the business logic?
+* Run the metaprogram to generate the target program in target language.
+
+    * Generate the web application.
+
+        * Generate the Data Transfer Object (DTO) classes.
+
+        * Generate the views.
+
+* Write the business logic in the target language.
+
+* Link generated target program with runtime and harness.
 -}
+
 main :: IO ()
-main = do
-    let
-        project = (N.mkProject "com.spacetimecat" "meta-example-java" "0.0.0") {
-                N.pDeps = [
-                    MD.servletApi "3.1.0"
-                ]
-            }
-        site = W.MkSite [
-                W.MkPage "/" (W.CSeq (W.CText "hello world") (W.CLink "/1" (W.CText "page 1")))
-                , W.MkPage "/1" (W.CText "this is page 1")
-            ]
-        intDtos = map (renameDto . C.genDto C.defGenDto) T.tables
-    javaDtoClasses <- P.ioFromErr $ sequenceA $ map C.toJavaClass intDtos
-    let
-        javaServletClass = W.toJavaHttpServletClass "MySiteHttpServlet" site
-        javaClasses = map placeJavaClass $ javaDtoClasses ++ [javaServletClass]
-    files <- P.ioFromErr $ do
-        xml_files <- pure [F.text "pom.xml" $ X.renderDoc X.defRenOpt $ N.toPomXml project]
-        java_files <- pure $ map (prependPath "src/main/java/" . JR.renderClassFile JR.defRenOpt) javaClasses
-        pure $ xml_files ++ java_files
-    M.forM_ (map move files) $ \ file -> do
-        putStrLn $ "Writing " ++ F.fPath file
-        F.write file
+main = U.jwa_render app
     where
-        move file = file { F.fPath = "dist/example/" ++ F.fPath file }
-        renameDto cls = cls {
-            C.cName = "Row_" ++ C.cName cls
-        }
-        placeJavaClass cls = cls {
-            J.cPkg = "com.spacetimecat"
-        }
-        prependPath prefix file = file { F.fPath = prefix ++ F.fPath file }
+        app = U.jwa_empty
+            |> U.jwa_set_gav "com.spacetimecat" "meta-example-java" "0.0.0"
+            |> U.jwa_set_deps [
+                U.jwa_dep_provided "javax.servlet" "javax.servlet-api" "3.1.0"
+            ]
+            |> U.jwa_add_page "/" (U.c_seq (U.c_text "hello world") (U.c_link_internal "/1" (U.c_text "page 1")))
+            |> U.jwa_add_page "/1" (U.c_text "this is page 1")
+            |> U.jwa_set_tables T.tables
 
 -- * Legacy (\"brownfield\") approaches
 
--- ** Read tables from an SQL database
-
 {- $
-* Generate data transfer objects (DTOs) from database tables.
+* Generate data transfer objects (DTOs) from existing SQL database tables.
 -}
 
 main0 :: IO ()
@@ -87,11 +61,24 @@ main0 = S.test
 
 -- Example: Generate Haskell DTO
 main1 :: IO ()
-main1 = do
-    flip mapM_ files $ \ file -> do
-        putStrLn $ "Writing " ++ F.fPath file
-        F.write file
+main1 = mapM_ U.file_write_verbose files
     where
-        files = map (F.prependPath "gen/") [
-                HR.renderModuleFile $ HM.mkModule "MyDto" $ concatMap H.genDto T.tables
+        files = map (U.file_prepend_path "gen/") [
+                U.hs_gen_dtos "MyDto" T.tables
             ]
+
+main2 :: IO ()
+main2 = do
+    putStrLn $ U.file_content $ U.hs_render_module_file example
+    where
+        example :: U.Hs_module
+        example = U.hs_rec_generate_module rec
+            where
+                rec =
+                    U.hs_rec_mk "Mod" "Rec" flds
+                    |> U.hs_rec_set_ders [U.sc_Read, U.sc_Show]
+                flds = [
+                        U.hs_rec_mk_field "foo" U.hs_Int32 |> U.hs_getter_camel |> U.hs_setter_camel
+                        , U.hs_rec_mk_field "bar" U.hs_Int64
+                        , U.hs_rec_mk_field "qux" U.hs_String
+                    ]
