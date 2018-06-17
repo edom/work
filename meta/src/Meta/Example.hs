@@ -40,11 +40,28 @@ main :: IO ()
 main = U.jwa_render app
     where
         app = U.jwa_empty
+            |> U.jwa_set_package "com.spacetimecat.meta.example"
+            |> U.jwa_set_servlet_class_name "MySiteHttpServlet"
             |> U.jwa_set_gav "com.spacetimecat" "meta-example-java" "0.0.0"
-            |> U.jwa_set_deps [
-                U.jwa_dep_provided "javax.servlet" "javax.servlet-api" "3.1.0"
+            |> U.jwa_add_deps [
+                U.jwa_dep_provided "javax.inject" "javax.inject" "1"
+                , U.jwa_dep_provided "javax.servlet" "javax.servlet-api" "3.1.0"
             ]
-            |> U.jwa_add_page "/" (U.c_seq (U.c_text "hello world") (U.c_link_internal "/1" (U.c_text "page 1")))
+            |> U.jwa_add_injections [
+                U.injection U.jt_DataSource "ds_test" |> U.inj_named "test"
+            ]
+            |> U.jwa_add_page "/" (
+                U.c_seq [
+                    U.c_text "hello world"
+                    , U.c_link_internal "/customer" (U.c_text "Customers")
+                    , U.c_link_internal "/1" (U.c_text "page 1")
+                ]
+            )
+            |> U.jwa_add_page "/customer" (
+                U.c_seq [
+                    U.c_view (U.q_from T.customer)
+                ]
+            )
             |> U.jwa_add_page "/1" (U.c_text "this is page 1")
             |> U.jwa_set_tables T.tables
 
@@ -63,7 +80,7 @@ main0 = S.test
 main1 :: IO ()
 main1 = mapM_ U.file_write_verbose files
     where
-        files = map (U.file_prepend_path "gen/") [
+        files = map (U.file_prepend_dir "gen") [
                 U.hs_gen_dtos "MyDto" T.tables
             ]
 

@@ -11,7 +11,11 @@
     <!-- https://wiki.eclipse.org/Jetty/Howto/Use_Jetty_with_Maven -->
 
     <properties>
+        <guice.version>4.0</guice.version>
+        <hikaricp.version>2.7.8</hikaricp.version>
         <jetty.version>9.4.11.v20180605</jetty.version>
+        <logback.version>1.2.3</logback.version>
+        <postgresql.version>42.2.2</postgresql.version>
     </properties>
 
     <dependencies>
@@ -19,6 +23,22 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>meta-example-java</artifactId>
             <version>0.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>${guice.version}</version>
+            <classifier>no_aop</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>${hikaricp.version}</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
@@ -29,6 +49,11 @@
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-servlet</artifactId>
             <version>${jetty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
         </dependency>
     </dependencies>
 

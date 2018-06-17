@@ -38,6 +38,9 @@ sepBy sep (h : t) = h >> sep >> sepBy sep t
 
 -- * Rendering
 
+render :: Prog a -> String
+render = run defState
+
 run :: State -> Prog a -> String
 run st0 (MkProgM k) = W.layout W.defLayOpt things
     where

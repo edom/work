@@ -28,7 +28,17 @@ sDef :: JT.Type -> Name -> Exp -> Sta
 sDef typ nam ini = SDecl typ nam (Just ini)
 
 sAsgn :: Exp -> Exp -> Sta
-sAsgn loc val = SAsgn loc val
+sAsgn loc val = SExp (EAssign loc val)
+
+type Type = JT.Type
+
+data Catch = MkCatch {
+        _catch_type :: Type
+        , _catch_name :: Name
+        , _catch_body :: [Sta]
+    } deriving (Read, Show)
+
+type Finally = Maybe [Sta]
 
 {- |
 Do not use these data type constructors directly. Use constructor functions.
@@ -42,7 +52,10 @@ data Sta
     | SSwitch Exp [(Exp, [Sta])] -- ^ switch expression
     | SBreak
     | SDecl JT.Type Name (Maybe Exp)
-    | SAsgn Exp Exp -- ^ assignment statement: lvalue (should be an 'EVar' or 'EField'), rvalue
+    | STry [Sta] [Catch] Finally -- ^ try-catch-finally
+    | SWith [Sta] [Sta] [Catch] Finally -- ^ try-with-resources: definitions, body, catches
+    | SWhile Exp [Sta]
+    | SFor Sta Exp Exp [Sta]
     deriving (Read, Show)
 
 data Case
@@ -89,6 +102,10 @@ data Exp
     | ELogNot Exp Exp
     | ELogAnd Exp Exp
     | ELogOr Exp Exp
+    | ELt Exp Exp
+    | EGt Exp Exp
+    | ELteq Exp Exp
+    | EGteq Exp Exp
     | EEq Exp Exp -- ^ equality expression
     | ENe Exp Exp -- ^ non-equality expression
     | EName Name -- ^ name expression (local variable, parameter reference, class name, or field access) expression
@@ -98,6 +115,9 @@ data Exp
     | ECallStatic Name Name [Exp] -- ^ static call expression: class, method name, arguments
     | ENew JT.Type [Exp] -- ^ instantiation expression
     | EIf Exp Exp Exp -- ^ conditional expression: condition, true part, false part; the part not taken is not evaluated
+    -- assignment
+    | EAssign Exp Exp -- ^ assignment expression: lvalue (should be an 'EVar' or 'EField'), rvalue
+    | EPreInc Exp
     deriving (Read, Show)
 
 eName :: Name -> Exp

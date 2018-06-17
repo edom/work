@@ -5,7 +5,7 @@ import qualified Control.Monad as M
 import qualified Database.HDBC as H
 import qualified Database.HDBC.PostgreSQL as HP
 
-import qualified Meta.RdbCol as RC
+import qualified Meta.Data_internal as RC
 
 {- |
 See:
@@ -46,10 +46,9 @@ test = do
                 ignored = scm `elem` ignoredSchemas
             M.unless ignored $ do
                 let rCol = do
-                        t <- readType typ
-                        n <- readNul nul
-                        let nt = if n then RC.TNullable t else t
-                        pure $ RC.mkCol nt col
+                        ty <- readType typ
+                        nu <- readNul nul
+                        pure $ (RC.mkCol ty col) { RC._nullable = nu }
                 putStrLn $ qna ++ ": " ++ col ++ " type " ++ typ ++ " nullable " ++ nul
                 putStrLn $ " -> " ++ show rCol
         pure ()

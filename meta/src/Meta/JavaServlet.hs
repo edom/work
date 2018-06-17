@@ -47,4 +47,5 @@ m_service = J.defMethod {
             J.typeOf c_IOException
             , J.typeOf c_ServletException
         ]
+        , J.mAccess = J.Public
     }

@@ -8,44 +8,41 @@ https://personal.cis.strath.ac.uk/conor.mcbride/pub/she/
 -}
 module Meta.Hs where
 
+import qualified Meta.Data as D
+import qualified Meta.File as F
 import qualified Meta.HsCon as C
 import qualified Meta.HsMod as M
 import qualified Meta.HsRender as HS
 import qualified Meta.HsType as T
-import qualified Meta.RdbCol as RC
-import qualified Meta.Relat as R
+import qualified Meta.Type as MT
 
 -- * Module
 
+mkModule :: T.ModName -> [M.Member] -> M.Module
 mkModule = M.mkModule
 
 type Mod_name = T.ModName
 
 -- * Render
 
+renderModuleFile :: M.Module -> F.File
 renderModuleFile = HS.renderModuleFile
 
 -- * Generate DTO
 
-genDto :: R.Table -> [M.Member]
+genDto :: D.Table -> [M.Member]
 genDto tab = [
         M.mDat datName [] cons [T.sc_Read, T.sc_Show]
     ]
     where
-        tabName = R.tName tab
+        tabName = D.t_get_name tab
         datName = "Table_" ++ tabName
         conName = "Mk" ++ datName
         cons = [C.CRec conName flds]
         flds = map mapColToFld cols
-        cols = R.tCols tab
-        mapType :: RC.Type -> T.Type
-        mapType typ = case typ of
-            RC.TInt32 -> T.int32
-            RC.TInt64 -> T.int64
-            RC.TVarChar _ -> T.string
-            _ -> error $ "Meta.Hs.genDto.mapType: " ++ show typ
-        mapColToFld :: RC.Col -> (T.VarName, T.Type)
-        mapColToFld col = (tabName ++ "_" ++ RC.getName col, mapType $ RC.getType col)
+        cols = D.t_get_cols tab
+        mapColToFld :: D.Col -> (T.VarName, T.Type)
+        mapColToFld col = (tabName ++ "_" ++ D.c_get_name col, MT.data_to_hs $ D.c_get_type col)
 
 -- * Experimental: Design for auto-lifting
 

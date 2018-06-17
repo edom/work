@@ -24,7 +24,7 @@ break = Break
 
 defLayOpt :: LayOpt
 defLayOpt = MkLayOpt {
-        loLineWidth = 80
+        loLineWidth = 120
     }
 
 layout :: LayOpt -> [Thing] -> String

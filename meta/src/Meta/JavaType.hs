@@ -80,5 +80,8 @@ outputStream = Ref "java.io.OutputStream"
 printWriter :: Type
 printWriter = Ref "java.io.PrintWriter"
 
+dataSource :: Type
+dataSource = Ref "javax.sql.DataSource"
+
 ref :: String -> Type
 ref qname = Ref qname

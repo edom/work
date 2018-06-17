@@ -22,21 +22,13 @@ Do not use.
 
     * "Meta.ExampleTables": its tables
 
-* Relational databases
+* Data
 
-    * "Meta.Relat": a subset of relational databases, mostly SQL databases
+    * "Meta.Data": data description language
 
-        * "Meta.RdbCol": columns
+        * "Meta.Data_internal": its internals
 
     * "Meta.SqlCon": connect to SQL databases using HDBC
-
-* Intermediate programming languages
-
-    * "Meta.IntCbp": intermediate class-based programming language
-
-        * practically all common programming languages
-
-        * similar to C, C++, Java, C#, Python, and Go
 
 * Programming languages
 
@@ -82,6 +74,16 @@ Do not use.
 
         * "Meta.Tys": a subset of TypeScript
 
+    * Intermediate languages
+
+        * "Meta.Cbp": intermediate class-based programming language
+
+            * practically all common programming languages
+
+            * similar to C, C++, Java, C#, Python, and Go
+
+            * "Meta.Cbp_internal": its internals
+
 * Web
 
     * "Meta.Web": a website description language
@@ -97,6 +99,8 @@ Do not use.
     * Transput (input and output)
 
         * "Meta.File": write files
+
+    * "Meta.Type": conversion between type systems
 
     * "Meta.Prop"
 
