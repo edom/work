@@ -7,5 +7,7 @@
         - Write some ugly code involving GHC primitives (unboxed things).
         - Hide the ugliness behind a newtype hidden in a module.
         - Assume that GHC inlines well.
+    - site
 - Plans
-    - merge into meta: haji, pragmatic, ptt
+    - meta
+        - Absorb haji, pragmatic, ptt.

@@ -1,0 +1,17 @@
+packages:
+    haji/
+    meta/
+    pragmatic/
+    ptt/
+
+program-options
+    ghc-options: -j +RTS -A256m -n2m -RTS
+
+allow-newer:
+    Cabal
+
+executable-dynamic: True
+library-vanilla: False
+profiling: True
+relocatable: True
+shared: True

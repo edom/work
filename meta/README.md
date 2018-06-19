@@ -21,3 +21,249 @@
             - the non-generated part of the examples
     - Generated files
         - `src1`: stage-1 Haskell source files
+- Plans
+    - Read tables from postgresql information_schema.
+    - Add a type parameter to Query.
+    - Pretty URL (URL path component instead of GET parameters)?
+    - Refactoring, maintainability/usability improvements
+        - Make Meta.Xml use Meta.WrapM
+    - Do we want this?
+        - change deploy script
+            - build on developer machine
+        - describe tables in Relat
+        - CUD (create, update, delete) of CRUD
+        - servlet: basic auth
+        - dto: auto-jackson
+        - dto: Api req/res Dto includes write and read to json using jackson core without databind; collect those static methods in 1 class
+        - dto: Backend, Android, and iOS dto generation
+        - java: compile-time design pattern (mixin, delegation, decorator)
+            - requires reading java class to delegate all public instance methods
+            - requires reading java source for mixin
+        - derive web view from database table (from hs, not sql)
+            - query description language Query, basically Linq
+                - assume cross-server query ("federation")
+                    - https://en.wikipedia.org/wiki/Federated_database_system
+                    - assume different database servers
+                    - assume different database vendors
+                    - a Table must know its "location"/"type"/"source type"/"access method",
+                    to determine what code is generated to query it.
+                        - decide terminology: "source type"? "access method"? "source alias"?
+                            - Examples of access methods: postgresql, mysql, in-application.
+                        - how to access the table:
+                            - what code to generate for query
+                            - where the table is (where to connect to)
+                                - how to find out where to connect to
+                                    - hardcoded in the application
+                                    - read from file at runtime, not in version control
+                                    - by a variable passed by harness
+                    - assume that a data source is an Iterable<Object[]>?
+                        - Linq assumes that every table is a Sequence?
+                - https://www.devart.com/dotconnect/postgresql/articles/tutorial_linq.html
+            - view description language View
+                - VAutoFromQuery :: Query -> View
+            - try-with-resources: JavaSta, JavaRender
+            - begin with dump all
+            - then add pagination (offset, limit)
+            - then add conjunctive-normal-form filter
+        - fix auto-increment column ddl, limit to int16, int32, and int64 (smallserial, serial, bigserial)
+        - embed lambda calculus in Query?
+        - user experience
+            - read from XML? YAML?
+        - Generate XSD from Haskell record so that IDEA can autocomplete?
+            - incorporate UUXML? But that's from XSD to Haskell. We want from Haskell to XSD.
+                - http://wiki.di.uminho.pt/twiki/pub/Education/Archive/XMLtoSQLConversionToolAFPProject/padl04.pdf
+        - Standardize C project build and layout?
+    - Build a language that translates to Haskell.
+        - With?
+            - first-class modules (Scheme R7RS like?)
+                - combine two modules
+                - renaming reexport
+                - reexport
+            - first-class classes
+            - first-class instances
+            - first-class types? dependent typing?
+            - Design pattern generator?
+                - generate ADT constructors and deconstructors
+                - generate record getters and setters
+                - generate untagged union from several ADTs
+            - `:` instead of `::` and `::` instead of `:`
+            - some supercompilation (compile-time partial evaluation)
+            - consistent definition syntax
+            - redefinable function application?
+            - overloading?
+        - Without?
+            - layout
+            - implicit Prelude import
+            - lowercase-uppercase requirement
+
+```
+-- A module translates to a Haskell data type.
+Module.Name = module {
+    import all from Prelude;
+
+    Maybe a = data {
+        Nothing : Maybe a;
+        Just : a -> Maybe a;
+    } deriving Read Show Eq;
+
+    Either a b = data {
+        Left a;
+        Right b;
+    } deriving Read Show Eq;
+
+    -- A class translates to a Haskell data type.
+    Functor = \ (f : * -> *) -> class {
+        fmap : (a -> b) -> f a -> f b;
+    };
+
+    Functor f = class {
+        fmap : (a -> b) -> f a -> f b;
+    };
+
+    -- A named instance translates to a Haskell value.
+    i = instance Functor Maybe {
+        fmap f (Just x) = Just (f x);
+        fmap _ x = x;
+    };
+
+    -- Default instance. How does it interact with import?
+    default instance Functor Maybe {
+    };
+
+    -- verbose syntax?
+    default instance of Functor for Maybe is {
+    };
+
+    -- Define in let.
+    -- Pattern.
+    let
+        Has = Just;
+        None = Nothing;
+    in {
+        f : Maybe Int -> Int;
+        f (Has x) = x;
+        f None = 0;
+    };
+
+    zero : Int;
+    zero = 0;
+
+    ones : [Int];
+    ones = 1 :: ones;
+
+    add1 : Int -> Int;
+    add1 = \ x -> x;
+
+    -- Inline type signatures.
+    add = \ (x y : Int) ->
+        let import { +; } from Prelude;
+            z = 1;
+        in x + y : Int;
+    infixl 4 `add2`;
+
+    example = (let x = 1; in x) + (let x = 2; in x);
+
+    id {a : *} (x : a) = x;
+    id = \ {a} (x:a) -> x;
+
+    and : Bool -> Bool -> Bool;
+    and False _ = False;
+
+    or : Bool -> Bool -> Bool;
+    or x y = case x of {
+        True -> True;
+        False -> y;
+    };
+
+    -- how about context in type signatures?
+};
+```
+
+- http://www.stephendiehl.com/posts/haskell_2017.html
+- Haskell library: yaml vs HsYaml
+    - https://twitter.com/hvrgnu/status/1004136566984503297
+        - HsYaml is pure Haskell (doesn't use external libraries)
+- [LCF key ideas](https://www.cl.cam.ac.uk/~jrh13/slides/manchester-12sep01/slides.pdf)
+- [Haskell partiality monad](https://gist.github.com/puffnfresh/6222797)
+- https://www.reddit.com/r/haskell/comments/4jhhrj/anders_hejlsberg_on_modern_compiler_construction/
+- https://cs.stackexchange.com/questions/63018/visual-programming-tools-why-don-t-they-work-with-the-ast-directly
+- closed source?
+    - given SQL database, generate HTML user interface http://datanovata.com/
+- http://libcello.org
+- C HTTP server library?
+    - https://kore.io
+    - http://facil.io
+- Possible user questions
+    - How do I write software with this?
+    - What are the important types?
+- Don't format source code manually.
+    - https://github.com/google/google-java-format
+- related software
+    - refactoring tools
+        - https://github.com/RefactoringTools/HaRe
+        - https://hackage.haskell.org/package/haskell-tools-refactor
+    - parsing without symbol solving
+        - Haskell and GHC extensions
+            - http://hackage.haskell.org/package/haskell-src-exts
+        - Haskell 98 only
+            - https://hackage.haskell.org/package/haskell-src
+        - Java
+            - http://hackage.haskell.org/package/language-java
+    - unknown
+        - http://hackage.haskell.org/package/haskell-tools-ast
+        - Ur/Web
+    - multi-database/cross-database query
+        - http://www.unityjdbc.com/doc/multiple/multiplequery.php
+        - https://www.red-gate.com/simple-talk/dotnet/net-tools/a-unified-approach-to-multi-database-query-templates/
+    - similar systems
+        - ERP libraries?
+            - Meta is similar to Apache Ofbiz.
+                - Some differences:
+                    - To define entities, Meta uses Haskell, Ofbiz uses XML.
+                    - Meta is written in Haskell, Ofbiz is written in Java.
+                - https://cwiki.apache.org/confluence/display/OFBIZ/OFBiz+Tutorial+-+A+Beginners+Development+Guide
+        - Web frameworks? Scaffolders?
+            - Meta is similar to Laravel.
+                - https://www.quora.com/Is-Laravel-a-good-framewok-really
+            - Meta is similar to Ruby on Rails.
+        - PhD theses
+            - ["Programming Language Features for Web Application Development", Ezra Cooper](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.422.5683&rep=rep1&type=pdf)
+                - "Links" programming language
+- cabal new-build obviates stack?
+    - http://coldwa.st/e/blog/2017-09-09-Cabal-2-0.html
+- https://stackoverflow.com/questions/5770168/templating-packages-for-haskell
+- concept
+    - https://en.wikipedia.org/wiki/End-user_development
+    - https://en.wikipedia.org/wiki/Low-code_development_platforms
+- For JDBC URL see
+    - https://jdbc.postgresql.org/documentation/80/connect.html
+- similar
+    - https://medium.com/airbnb-engineering/react-native-at-airbnb-f95aa460be1c
+- related?
+    - https://github.com/PostgREST/postgrest
+    - http://rosecompiler.org/
+- some requirement?
+    - https://en.wikipedia.org/wiki/Multitenancy
+- Name?
+    - HUMPS Haskell Universal Meta Programming System ?
+    - Hemps: Haskell Meta Programming System
+    - EAG: Enterprise Application Generator
+    - HAG: Haskell Application Generator
+- https://en.wikipedia.org/wiki/Language-independent_specification
+- http://referaat.cs.utwente.nl/conference/12/paper/7000/expressing-ontologies-using-a-functional-language.pdf
+    - "there are some proposals for implementing subtyping [in Haskell] [11, 12]"
+    - open ADT makes exhaustive case impossible
+- sublanguages?
+    - Ontology definition language
+    - Data definition language
+    - Web application description language
+        - View description language
+- overloading function application https://mail.haskell.org/pipermail/haskell-cafe/2007-May/026314.html
+- Hughes 1995 doc [The design of a pretty-printing library](http://belle.sourceforge.net/doc/hughes95design.pdf)
+- https://www.cs.cmu.edu/~mleone/language-research.html
+- categorical programming language?
+    - https://github.com/msakai/cpl
+    - http://web.sfc.keio.ac.jp/~hagino/thesis.pdf
+- [LTU:progress on gradual typing](http://lambda-the-ultimate.org/node/5292)
+- [WP:lambda-prolog](https://en.wikipedia.org/wiki/%CE%9BProlog)
+- Safely Composable Type-Specific Languages https://www.cs.cmu.edu/~aldrich/papers/ecoop14-tsls.pdf

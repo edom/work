@@ -1,0 +1,22 @@
+- Plans
+    - Make edom.github.io repository HTML only. Move source here. Preprocess source.
+    - Generate proper sitemap.
+    - We need a lightweight semantic markup with fixed ontology.
+        - https://en.wikipedia.org/wiki/Lightweight_markup_language
+    - Which markup language?
+        - reST
+        - [Textile](https://en.wikipedia.org/wiki/Textile_(markup_language))
+        - S-expression
+        - not Markdown
+    - Which tool?
+        - pandoc
+        - hakyll
+    - https://tiddlywiki.com/static/WikiText.html
+    - work/site = source for edom.github.io
+    - reimplement the subset of Jekyll/Liquid that we use (`link`)
+    - Treat GFM `\\(` as Pandoc-Markdown `\(` (begin inline math).
+    - Later, if ever
+        - distributed web hosting
+            - https://en.wikipedia.org/wiki/Peer-to-peer_web_hosting
+            - This requires decentralizing DNS.
+            - This requires replacing all browsers.
