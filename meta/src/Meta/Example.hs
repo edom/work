@@ -12,8 +12,6 @@ import Meta.User ((|>))
 import qualified Meta.SqlCon as S
 import qualified Meta.User as U
 
-import qualified Meta.ExampleTables as T
-
 -- * Fresh (\"greenfield\") approaches
 
 {- $
@@ -37,33 +35,90 @@ import qualified Meta.ExampleTables as T
 -}
 
 main :: IO ()
-main = U.jwa_render app
+main = U.generate_java app
     where
-        app = U.jwa_empty
-            |> U.jwa_set_package "com.spacetimecat.meta.example"
-            |> U.jwa_set_servlet_class_name "MySiteHttpServlet"
-            |> U.jwa_set_gav "com.spacetimecat" "meta-example-java" "0.0.0"
-            |> U.jwa_add_deps [
-                U.jwa_dep_provided "javax.inject" "javax.inject" "1"
-                , U.jwa_dep_provided "javax.servlet" "javax.servlet-api" "3.1.0"
+        app = U.app_empty
+            |> U.set_maven_coordinates "com.spacetimecat" "meta-example-java" "0.0.0"
+            |> U.set_package "com.spacetimecat.meta.example"
+            |> U.set_servlet_class_name "MySiteHttpServlet"
+            |> U.add_dependencies dependencies
+            |> U.add_injections injections
+            |> U.add_pages pages
+            |> U.set_tables all_tables
+        dependencies =
+            [
+                U.provided "javax.inject" "javax.inject" "1"
+                , U.provided "javax.servlet" "javax.servlet-api" "3.1.0"
             ]
-            |> U.jwa_add_injections [
-                U.injection U.jt_DataSource "ds_test" |> U.inj_named "test"
+        injections =
+            [
+                U.injection U.jt_DataSource "ds_test" |> U.set_inject_name "test"
             ]
-            |> U.jwa_add_page "/" (
-                U.c_seq [
-                    U.c_text "hello world"
-                    , U.c_link_internal "/customer" (U.c_text "Customers")
-                    , U.c_link_internal "/1" (U.c_text "page 1")
-                ]
+        pages =
+            [
+                page "/" (
+                    U.seq [
+                        U.link_internal "/customer" (U.text "Customers")
+                        , U.link_internal "/1" (U.text "page 1")
+                    ]
+                )
+                , page "/customer" (
+                    U.seq [
+                        U.tabulate (U.from t_customer)
+                    ]
+                )
+                , page "/1" (U.text "this is page 1")
+                , U.mk_page "/css/style.css" (
+                    U.java_resource "css/style.css"
+                ) |> U.set_content_type "text/css; charset=UTF-8"
+            ]
+        page url content =
+            U.mk_page url (
+                U.html [content]
+                |> U.add_styles ["/css/style.css"]
             )
-            |> U.jwa_add_page "/customer" (
-                U.c_seq [
-                    U.c_view (U.q_from T.customer)
-                ]
-            )
-            |> U.jwa_add_page "/1" (U.c_text "this is page 1")
-            |> U.jwa_set_tables T.tables
+
+mk_table :: U.Table_name -> [U.Column] -> U.Table
+mk_table name cols =
+    U.mk_table name cols
+    |> U.set_schema "example"
+    |> U.set_DataSource_field_name "ds_test"
+
+all_tables :: [U.Table]
+all_tables = [
+        t_customer
+        , t_sku
+        , t_order
+    ]
+
+t_customer :: U.Table
+t_customer = mk_table "customer" [
+        c_id64
+        , U.col_varchar 128 "name" |> U.set_title "Name"
+    ]
+    |> U.add_primary_key [c_id64]
+
+t_order :: U.Table
+t_order = mk_table "order" [
+        c_id64
+        , U.col_varchar 16 "ref_num"
+            |> U.set_short_title "RefNum"
+            |> U.set_long_title "Reference number"
+        , U.col_int64 "customer_id"
+        , U.col_int64 "sku_id"
+    ]
+    |> U.add_primary_key [c_id64]
+
+t_sku :: U.Table
+t_sku = mk_table "sku" [
+        c_id64
+        , U.col_varchar 16 "code"
+        , U.col_varchar 128 "name"
+    ]
+    |> U.add_primary_key [c_id64]
+
+c_id64 :: U.Column
+c_id64 = U.col_int64 "id" |> U.set_title "Id"
 
 -- * Legacy (\"brownfield\") approaches
 
@@ -81,7 +136,7 @@ main1 :: IO ()
 main1 = mapM_ U.file_write_verbose files
     where
         files = map (U.file_prepend_dir "gen") [
-                U.hs_gen_dtos "MyDto" T.tables
+                U.hs_gen_dtos "MyDto" all_tables
             ]
 
 main2 :: IO ()

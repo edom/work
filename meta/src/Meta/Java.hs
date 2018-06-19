@@ -2,6 +2,15 @@
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE TypeSynonymInstances #-}
 
+{- |
+* Naming conventions:
+
+    * s\_: statement constructors
+
+    * e\_: expression constructors
+
+    * t\_: type constructors
+-}
 module Meta.Java where
 
 import qualified Data.Int as I
@@ -24,6 +33,9 @@ type Qual_name = String
 t_ref :: Qual_name ->Type
 t_ref = JT.ref
 
+t_byte :: Type
+t_byte = JT.primInt8
+
 t_int :: Type
 t_int = JT.primInt32
 
@@ -32,6 +44,18 @@ t_SqlException = JT.ref "java.sql.SQLException"
 
 t_ServletException :: Type
 t_ServletException = JT.ref "javax.servlet.ServletException"
+
+t_InputStream :: Type
+t_InputStream = JT.ref "java.io.InputStream"
+
+t_IOException :: Type
+t_IOException = JT.ref "java.io.IOException"
+
+t_URL :: Type
+t_URL = JT.ref "java.net.URL"
+
+t_array_of :: Type -> Type
+t_array_of t = JT.Array t
 
 -- * Class
 
@@ -273,6 +297,10 @@ data Member
 
 type Exp = JS.Exp
 
+e_call_static :: Qual_name -> Method_name -> [Exp] -> Exp
+e_call_static tar nam arg = JS.ECallStatic tar nam arg
+
+-- | Deprecated.
 eCallStatic :: Class -> Name -> [JS.Exp] -> JS.Exp
 eCallStatic tar nam arg = JS.eCallStatic (qualName tar) nam arg
 
@@ -288,11 +316,20 @@ e_this = JS.EThis
 e_name :: Name -> Exp
 e_name = JS.eName
 
+e_int :: I.Int32 -> Exp
+e_int = JS.EInt32
+
 e_str :: String -> Exp
 e_str = JS.eStr
 
 e_new :: Type -> [Exp] -> Exp
 e_new = JS.ENew
+
+e_null :: Exp
+e_null = JS.ENull
+
+e_is_null :: Exp -> Exp
+e_is_null a = JS.EEq a JS.ENull
 
 -- | @[ e_toString e ] => java.util.Objects.toString( [ e ] )@
 e_toString :: Exp -> Exp
@@ -348,6 +385,15 @@ s_while = JS.SWhile
 
 s_throw :: Exp -> Sta
 s_throw = JS.SThrow
+
+s_if :: Exp -> [Sta] -> Sta
+s_if = JS.sIf
+
+s_call :: Exp -> Method_name -> [Exp] -> Sta
+s_call target method args = s_exp (e_call target method args)
+
+s_exp :: Exp -> Sta
+s_exp = JS.SExp
 
 type Catch = JS.Catch
 

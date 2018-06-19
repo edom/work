@@ -24,14 +24,55 @@ empty :: Site
 empty = MkSite []
 
 add_page :: Url -> Content -> Site -> Site
-add_page url con sit = sit { sPages = sPages sit ++ [MkPage url con] }
+add_page url con sit = sit { sPages = sPages sit ++ [page_empty { pUrl = url, pContent = con }] }
+
+add_pages :: [Page] -> Site -> Site
+add_pages pages site = site { sPages = sPages site ++ pages }
 
 data Page
     = MkPage {
         pUrl :: Url -- ^ static, no pattern matching
         , pContent :: Content
+        , pContentType :: String
     }
     deriving (Show, Read)
+
+type Content_type = String
+
+set_content_type :: Content_type -> Page -> Page
+set_content_type t p = p { pContentType = t }
+
+mk_page :: Url -> Content -> Page
+mk_page url content = page_empty {
+        pUrl = url
+        , pContent = content
+    }
+
+page_empty :: Page
+page_empty = MkPage {
+        pUrl = ""
+        , pContent = CEmpty
+        , pContentType = "text/html; charset=UTF-8"
+    }
+
+data Html
+    = MkHtml {
+        _h_title :: String
+        , _h_styles :: [Url]
+        , _h_body :: Content
+    } deriving (Read, Show)
+
+html_empty :: Html
+html_empty = MkHtml {
+        _h_title = ""
+        , _h_styles = []
+        , _h_body = CEmpty
+    }
+
+add_styles :: [Url] -> Html -> Html
+add_styles urls html = html { _h_styles = _h_styles html ++ urls }
+
+type Java_resource_path = String
 
 data Content
     = CEmpty
@@ -42,4 +83,6 @@ data Content
     | CGetParam String -- ^ value of a GET parameter
     | CPostParam String -- ^ value of a POST parameter
     | CView D.Query -- ^ generated view for query
+    | CJavaRes Java_resource_path
+    | CHtml Html
     deriving (Show, Read)

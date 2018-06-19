@@ -34,6 +34,11 @@ data App
         , _injections :: [Injection]
     } deriving (Read, Show)
 
+type Page = W.Page
+
+add_pages :: [Page] -> App -> App
+add_pages pages app = app { _site = W.add_pages pages (_site app) }
+
 type Jdbc_url = String
 
 type Inject_name = String
@@ -150,18 +155,17 @@ get_java_servlet_class app =
             S.sIf (S.eEquals ePathInfo (S.eStr url)) $
                 [
                     sSetStatus "SC_OK"
-                    , S.sCall eResponse "setContentType" [S.eStr "text/html; charset=UTF-8"]
+                    , S.sCall eResponse "setContentType" [S.eStr content_type]
                     , S.sDef JT.printWriter "output" (S.eCall eResponse "getWriter" [])
                 ]
-                ++ content_to_java_sta eOutput content
-                ++ [
-                    S.sRetVoid
-                ]
+                ++ content_to_java_sta e_output content
+                ++ [S.sRetVoid]
             where
                 url = W.pUrl page
                 content = W.pContent page
+                content_type = W.pContentType page
         pages = W.sPages site
-        eOutput = S.eName "output"
+        e_output = S.eName "output"
         eRequest = S.eName "request"
         eResponse = S.eName "response"
         ePathInfo = S.eName "pathInfo"
@@ -176,12 +180,27 @@ content_to_java_sta
 content_to_java_sta e_output con = case con of
     W.CEmpty -> []
     W.CRaw s -> [append_str s]
-    W.CText s -> [append_str $ escape s]
+    W.CText s -> [append_str $ escape_html s]
     W.CSeq cs -> concatMap recur cs
     W.CLink url cap ->
-        [append_str $ "<a href=\"" ++ escape url ++ "\">"]
+        [append_str $ "<a href=\"" ++ escape_html url ++ "\">"]
         ++ recur cap
         ++ [append_str "</a>"]
+    W.CJavaRes path ->
+        let
+            e_this_class = J.e_call J.e_this "getClass" []
+        in
+        [append (J.e_call_static runtime_class_qname "get_resource_as_string" [e_this_class, J.e_str path, J.e_int max_resource_size])]
+    W.CHtml html ->
+        [append_str "<!DOCTYPE html><html><head>"]
+        ++ map
+            (\ s -> append_str $ "<link rel=\"stylesheet\" type=\"text/css\" href=\""
+                ++ escape_html s ++ "\">"
+            )
+            (W._h_styles html)
+        ++ [append_str "</head><body>"]
+        ++ recur (W._h_body html)
+        ++ [append_str "</body></html>"]
     W.CView query@(DI.QFrom table) ->
         let
             ds_field_name = D.t_DataSource_field_name table
@@ -200,7 +219,7 @@ content_to_java_sta e_output con = case con of
                         "<tr>"
                         ++
                         flip concatMap cols (\ col ->
-                            "<th>" ++ maybe "" escape (D.c_short_title col) ++ "</th>"
+                            "<th>" ++ maybe "" escape_html (D.c_short_title col) ++ "</th>"
                         )
                         ++
                         "</tr>"
@@ -241,16 +260,16 @@ content_to_java_sta e_output con = case con of
         ]
     _ -> error $ "Meta.JavaWebApp.content_to_java_sta: not implemented: " ++ show con
     where
+        runtime_class_qname = "com.spacetimecat.meta.rt.java.Meta_runtime"
+        max_resource_size = 1048576
         recur = content_to_java_sta e_output
         append_str = append . J.e_str
         append e_str = S.sCall e_output "append" [e_str]
-        escape s = concatMap esc s
-        esc c = case c of
-            '"' -> "&quot;"
-            '<' -> "&lt;"
-            '>' -> "&gt;"
-            '&' -> "&amp;"
-            '\n' -> "\\n"
-            '\r' -> "\\r"
-            '\t' -> "\\t"
-            _ -> [c]
+        escape_html s = concatMap esc s
+            where
+                esc c = case c of
+                    '"' -> "&quot;"
+                    '<' -> "&lt;"
+                    '>' -> "&gt;"
+                    '&' -> "&amp;"
+                    _ -> [c]

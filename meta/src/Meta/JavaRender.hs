@@ -312,7 +312,11 @@ renderExp ex = case ex of
     _ -> error $ "Meta.JavaRender.renderExp: not implemented: " ++ show ex
     where
         escStr = concatMap escChr
-        escChr '"' = "\\\""
-        escChr x = [x]
+        escChr c = case c of
+            '"' -> "\\\""
+            '\n' -> "\\n"
+            '\r' -> "\\r"
+            '\t' -> "\\t"
+            _ -> [c]
         parene e = V.atom "(" >> renderExp e >> V.atom ")"
         satom x = V.space >> V.atom x >> V.space
