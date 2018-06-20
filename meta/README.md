@@ -1,6 +1,15 @@
 # Metaprogramming
 
-- See the Haddock documentation for the module `Meta.Readme`.
+- Goals
+    - Write a metaprogram in Haskell to generate a Java 8 enterprise web application.
+        - What we mean by "enterprise web application":
+            - User uses web browser to interact with the application.
+            - Lots of CRUD (Create, Read, Update, Delete).
+            - Some business logic.
+            - Used internally in a small company.
+            - Less than 100 users.
+        - What we don't mean by "enterprise web application":
+            - Java Enterprise Edition (Java EE), except Servlet API.
 - Assumptions
     - The user of this library is programmer / developer / software engineer.
 - Directory structure

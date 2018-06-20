@@ -84,9 +84,13 @@ Do not use.
 
             * "Meta.Cbp_internal": its internals
 
+        * "Meta.Lambda": lambda calculus
+
 * Web
 
     * "Meta.Web": a website description language
+
+    * "Meta.Html": HTML
 
 * Support
 

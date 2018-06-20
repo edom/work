@@ -49,6 +49,8 @@ library
         Meta.HsRecord
         Meta.HsRender
         Meta.HsType
+        Meta.Html
+        Meta.Lambda
         Meta.Java
         Meta.JavaRender
         Meta.JavaServlet
@@ -74,10 +76,10 @@ library
         exposed-modules:
 
     build-depends:
-        base >=4
+        base >= 4
         , HDBC >= 2
-        , directory >=1
-        , filepath >=1
+        , directory >= 1
+        , filepath >= 1
 
     if flag(postgresql)
         build-depends:

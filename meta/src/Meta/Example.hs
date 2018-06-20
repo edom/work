@@ -53,13 +53,13 @@ main = U.generate_java app
         pages =
             [
                 page "/" (
-                    U.seq [
+                    U.html [
                         U.link_internal "/customer" (U.text "Customers")
                         , U.link_internal "/1" (U.text "page 1")
                     ]
                 )
                 , page "/customer" (
-                    U.seq [
+                    U.html [
                         U.tabulate (U.from t_customer)
                     ]
                 )

@@ -284,7 +284,7 @@ raw :: String -> Content
 raw = W.CRaw
 
 seq :: [Content] -> Content
-seq = W.CSeq
+seq = mconcat
 
 text :: String -> Content
 text = W.CText
@@ -305,7 +305,7 @@ java_resource = W.CJavaRes
 
 -- ** HTML subset
 
-type Html = W.Html
+type Html_doc = W.Html_doc
 
 class C_html a where
 
@@ -313,9 +313,9 @@ class C_html a where
 
     add_styles :: [Url] -> a -> a
 
-instance C_html Html where
+instance C_html Html_doc where
 
-    html body = W.html_empty { W._h_body = W.CSeq body }
+    html body = W.html_empty { W._h_body = mconcat body }
 
     add_styles = W.add_styles
 

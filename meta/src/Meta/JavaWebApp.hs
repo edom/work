@@ -2,6 +2,7 @@ module Meta.JavaWebApp where
 
 import qualified Meta.Data as D
 import qualified Meta.Data_internal as DI
+import qualified Meta.Html as H
 import qualified Meta.Java as J
 import qualified Meta.JavaServlet as JS
 import qualified Meta.JavaSta as S
@@ -181,7 +182,7 @@ content_to_java_sta e_output con = case con of
     W.CEmpty -> []
     W.CRaw s -> [append_str s]
     W.CText s -> [append_str $ escape_html s]
-    W.CSeq cs -> concatMap recur cs
+    W.CSeq a b -> recur a ++ recur b
     W.CLink url cap ->
         [append_str $ "<a href=\"" ++ escape_html url ++ "\">"]
         ++ recur cap
@@ -201,6 +202,7 @@ content_to_java_sta e_output con = case con of
         ++ [append_str "</head><body>"]
         ++ recur (W._h_body html)
         ++ [append_str "</body></html>"]
+    W.Chtmla html -> recur (H.fold W.CText html)
     W.CView query@(DI.QFrom table) ->
         let
             ds_field_name = D.t_DataSource_field_name table

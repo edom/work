@@ -11,6 +11,7 @@ Set up a reverse proxy to rewrite the URL.
 module Meta.Web where
 
 import qualified Meta.Data as D
+import qualified Meta.Html as H
 
 type Url = String
 
@@ -55,21 +56,21 @@ page_empty = MkPage {
         , pContentType = "text/html; charset=UTF-8"
     }
 
-data Html
-    = MkHtml {
+data Html_doc
+    = Mk_Html_doc {
         _h_title :: String
         , _h_styles :: [Url]
         , _h_body :: Content
     } deriving (Read, Show)
 
-html_empty :: Html
-html_empty = MkHtml {
+html_empty :: Html_doc
+html_empty = Mk_Html_doc {
         _h_title = ""
         , _h_styles = []
         , _h_body = CEmpty
     }
 
-add_styles :: [Url] -> Html -> Html
+add_styles :: [Url] -> Html_doc -> Html_doc
 add_styles urls html = html { _h_styles = _h_styles html ++ urls }
 
 type Java_resource_path = String
@@ -77,12 +78,17 @@ type Java_resource_path = String
 data Content
     = CEmpty
     | CRaw String -- ^ pass-through unmodified
-    | CText String -- ^ escaped
-    | CSeq [Content] -- ^ sequence/concatenation/juxtaposition
+    | CText String -- ^ escaped; move to Chtmla?
+    | CSeq Content Content -- ^ sequence/concatenation/juxtaposition
     | CLink Url Content -- ^ CLink url caption: hyperlink
     | CGetParam String -- ^ value of a GET parameter
     | CPostParam String -- ^ value of a POST parameter
     | CView D.Query -- ^ generated view for query
     | CJavaRes Java_resource_path
-    | CHtml Html
+    | CHtml Html_doc -- rename to CHtmlDoc? remove? c_html_doc :: Html_doc -> [Content] -> Content
+    | Chtmla (H.Html Content) -- rename to CHtml?
     deriving (Show, Read)
+
+instance Monoid Content where
+    mempty = CEmpty
+    mappend = CSeq
