@@ -83,5 +83,8 @@ printWriter = Ref "java.io.PrintWriter"
 dataSource :: Type
 dataSource = Ref "javax.sql.DataSource"
 
+decimal :: Type
+decimal = ref "java.math.BigDecimal"
+
 ref :: String -> Type
 ref qname = Ref qname

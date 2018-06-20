@@ -57,9 +57,9 @@ renderSqlSelect :: Query -> String
 renderSqlSelect q = case q of
     QFrom t ->
         -- TODO escape
-        "SELECT * FROM " ++ maybe "" (++ ".") (_schema t) ++ tName t
+        "SELECT " ++ L.intercalate ", " (map getName $ tCols t) ++ " FROM " ++ maybe "" (++ ".") (_schema t) ++ tName t
     QProject cols subq ->
-        "SELECT " ++ L.intercalate "," (map getName cols)
+        "SELECT " ++ L.intercalate ", " (map getName cols)
         ++ " FROM (" ++ renderSqlSelect subq ++ ") tmp"
     QFilter cond subq ->
         "SELECT * FROM (" ++ renderSqlSelect subq ++ ") tmp WHERE " ++ renderSqlExp cond
@@ -103,16 +103,20 @@ type DbColName = String
 
 -- | Database column data type.
 data Type
-    = TInt32
+    = TBoolean
+    | TInt32
     | TInt64
     | TVarChar Int -- ^ the limit is the maximum number of characters, not bytes
+    | TNumeric Int Int -- ^ precision (total digit count), scale (fraction digit count)
     deriving (Read, Show)
 
 sql_type_name :: Type -> String
 sql_type_name typ = case typ of
+    TBoolean -> "BOOLEAN"
     TInt32 -> "INTEGER"
     TInt64 -> "BIGINT"
     TVarChar n -> "VARCHAR(" ++ show n ++ ")"
+    TNumeric precision scale -> "NUMERIC(" ++ show precision ++ "," ++ show scale ++ ")"
     _ -> error $ "Meta.Data_internal: sql_type_name: not implemented: " ++ show typ
 
 -- * Column

@@ -57,6 +57,12 @@ col_int32 = DI.colInt32
 col_int64 :: Column_name -> Column
 col_int64 = DI.colInt64
 
+col_numeric :: Int -> Int -> Column_name -> Column
+col_numeric precision scale = DI.mkCol (DI.TNumeric precision scale)
+
+col_boolean :: Column_name -> Column
+col_boolean = DI.mkCol DI.TBoolean
+
 -- *** Define table caption
 
 type Short_title = String
@@ -126,7 +132,13 @@ type Maven_dep = M.Dep
 type Maven_dep_ver = M.Dep_ver
 
 add_dependencies :: [Maven_dep] -> App -> App
-add_dependencies deps app = JWA.set_deps (JWA.get_deps app ++ deps) app
+add_dependencies deps app = set_dependencies (get_dependencies app ++ deps) app
+
+get_dependencies :: App -> [Maven_dep]
+get_dependencies = JWA.get_deps
+
+set_dependencies :: [Maven_dep] -> App -> App
+set_dependencies = JWA.set_deps
 
 compile :: Maven_group_id -> Maven_artifact_id -> Maven_dep_ver -> Maven_dep
 compile = MD.compile
@@ -211,9 +223,39 @@ generate_java :: App -> IO ()
 generate_java app_without_runtime = do
     mapM_ file_write_verbose files
     where
-        app = app_without_runtime |> add_dependencies [dep_runtime]
+        app :: App
+        app = app_without_runtime
+            |> add_dependencies (dep_runtime : deps_third_party)
+            |> (\ app_ -> set_dependencies (L.sort $ get_dependencies app_) app_)
+
         dep_runtime = compile "com.spacetimecat" "meta-rt-java" runtime_version
-        runtime_version = "0.0.0"
+            where
+                runtime_version = "0.0.0"
+
+        deps_third_party = [
+                compile "javax.inject" "javax.inject" "1"
+                , compile "javax.servlet" "javax.servlet-api" "3.1.0"
+
+                -- Java logging framework implementing SLF4J
+                , compile "ch.qos.logback" "logback-classic" "1.2.3"
+
+                -- Java dependency injection framework
+                , compile "com.google.inject" "guice" "4.0"
+
+                -- JDBC connection pool
+                , compile "com.zaxxer" "HikariCP" "2.7.8"
+
+                -- Java HTTP server
+                , compile "org.eclipse.jetty" "jetty-server" jetty_version
+
+                -- Jetty implementation of Java Servlet API
+                , compile "org.eclipse.jetty" "jetty-servlet" jetty_version
+
+                -- PostgreSQL JDBC driver
+                , compile "org.postgresql" "postgresql" "42.2.2"
+            ]
+            where
+                jetty_version = "9.4.11.v20180605"
 
         project = JWA._project app
 

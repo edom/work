@@ -11,7 +11,7 @@ type Dep_ver = String
 data Scope
     = Compile
     | Provided
-    deriving (Read, Show)
+    deriving (Eq, Ord, Read, Show)
 
 data Dep
     -- | Internal. Do not use. Use dependency constructors.
@@ -21,7 +21,7 @@ data Dep
         -- | syntax is documented in https://maven.apache.org/pom.html#Dependency_Version_Requirement_Specification
         , version :: Dep_ver
         , scope :: Scope
-    } deriving (Read, Show)
+    } deriving (Eq, Ord, Read, Show)
 
 -- * Dependency constructors
 

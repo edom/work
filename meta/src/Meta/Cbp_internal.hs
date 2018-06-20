@@ -2,11 +2,13 @@ module Meta.Cbp_internal where
 
 data Type
     = TUnit -- ^ unit type
+    | TBool -- ^ boolean type
     | TNat8 -- ^ unsigned 8-bit integer
     | TInt8 -- ^ two's-complement 8-bit signed integer
     | TInt32 -- ^ two's-complement 32-bit integer
     | TInt64 -- ^ two's-complement 64-bit integer
     | TString -- ^ string (character sequence)
+    | TDecimal -- ^ arbitrary precision decimal (such as java.math.BigDecimal)
     | TArray Type Int -- ^ fixed-length array
     | TClass Class -- ^ aggregate
     | TPointer Type -- ^ pointer

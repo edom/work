@@ -45,11 +45,7 @@ main = U.generate_java app
             |> U.add_injections injections
             |> U.add_pages pages
             |> U.set_tables all_tables
-        dependencies =
-            [
-                U.provided "javax.inject" "javax.inject" "1"
-                , U.provided "javax.servlet" "javax.servlet-api" "3.1.0"
-            ]
+        dependencies = []
         injections =
             [
                 U.injection U.jt_DataSource "ds_test" |> U.set_inject_name "test"

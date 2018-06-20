@@ -151,7 +151,8 @@ renderParams pars = V.commaSep $ map renderParam pars
 render_params_lines :: [J.Param] -> V.Prog ()
 render_params_lines pars = case pars of
     [] -> V.nop
-    h : t -> renderParam h >> V.break >> render_params_lines t
+    h : [] -> renderParam h >> V.break
+    h : t -> renderParam h >> V.break >> V.atom "," >> V.space >> render_params_lines t
 
 renderParam :: J.Param -> V.Prog ()
 renderParam par = do
