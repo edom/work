@@ -19,13 +19,16 @@ import qualified Meta.Hs as H
 import qualified Meta.HsMod as HM
 import qualified Meta.HsRecord as HR
 import qualified Meta.HsType as HT
+import qualified Meta.Html as Html
 import qualified Meta.Java as J
-import qualified Meta.JavaType as JT
 import qualified Meta.JavaRender as JR
+import qualified Meta.JavaType as JT
 import qualified Meta.JavaWebApp as JWA
 import qualified Meta.Maven as M
+import qualified Meta.MavenCmd as MavenCmd
 import qualified Meta.MavenDep as MD
 import qualified Meta.Prop as P
+import qualified Meta.SqlType as SqlType
 import qualified Meta.Web as W
 import qualified Meta.WrapM as V
 import qualified Meta.Xml as X
@@ -58,10 +61,10 @@ col_int64 :: Column_name -> Column
 col_int64 = DI.colInt64
 
 col_numeric :: Int -> Int -> Column_name -> Column
-col_numeric precision scale = DI.mkCol (DI.TNumeric precision scale)
+col_numeric precision scale = DI.mkCol (SqlType.Numeric precision scale)
 
 col_boolean :: Column_name -> Column
-col_boolean = DI.mkCol DI.TBoolean
+col_boolean = DI.mkCol SqlType.Boolean
 
 -- *** Define table caption
 
@@ -204,7 +207,7 @@ type Inject_name = JWA.Inject_name
 set_inject_name :: Inject_name -> Injection -> Injection
 set_inject_name = JWA.named
 
--- ** Generate the application
+-- ** Generate application
 
 {- |
 Generate a Java web application.
@@ -259,7 +262,7 @@ generate_java app_without_runtime = do
 
         project = JWA._project app
 
-        files = F.prepend_dir (output_prefix ++ artifact_id) <$> ([pom_xml_file] ++ java_files ++ sql_files)
+        files = F.prepend_dir (get_pom_xml_dir app) <$> ([pom_xml_file] ++ java_files ++ sql_files)
 
         pom_xml_file = F.text "pom.xml" $ X.render_doc $ M.to_pom_xml project
 
@@ -270,11 +273,12 @@ generate_java app_without_runtime = do
         java_servlet_class = JWA.get_java_servlet_class app
         java_classes = J.set_pkg (JWA._package app) <$> (java_dto_classes ++ [java_servlet_class])
 
-        artifact_id = get_artifact_id app
-        output_prefix = JWA._output_prefix app
-
         sql_files = F.prepend_dir "sql" <$> [F.text "create.sql" sql_ddl]
         sql_ddl = generate_sql_ddl tables
+
+-- | Path to the directory containing the pom.xml.
+get_pom_xml_dir :: App -> FilePath
+get_pom_xml_dir app = JWA._output_prefix app F.</> get_artifact_id app
 
 -- * Content language
 
@@ -284,7 +288,7 @@ raw :: String -> Content
 raw = W.CRaw
 
 seq :: [Content] -> Content
-seq = mconcat
+seq = W.content_concat
 
 text :: String -> Content
 text = W.CText
@@ -305,6 +309,14 @@ java_resource = W.CJavaRes
 
 -- ** HTML subset
 
+h1 :: [Content] -> Content
+h1 = W.html_elm "h1"
+
+type Atr = Html.Atr
+
+atr :: Html.Name -> Html.Value -> Content
+atr = W.html_atr
+
 type Html_doc = W.Html_doc
 
 class C_html a where
@@ -315,7 +327,7 @@ class C_html a where
 
 instance C_html Html_doc where
 
-    html body = W.html_empty { W._h_body = mconcat body }
+    html body = W.html_empty { W._h_body = W.content_concat body }
 
     add_styles = W.add_styles
 
@@ -358,6 +370,11 @@ file_write_verbose file = do
     putStrLn $ "Writing " ++ file_path file
     F.write file
 
+-- * Build application
+
+maven_recompile :: App -> IO ()
+maven_recompile app = MavenCmd.recompile (get_pom_xml_dir app)
+
 -- * Internal
 
 get_artifact_id :: App -> Maven_artifact_id
@@ -384,7 +401,7 @@ generate_sql_ddl tabs = V.render $ do
             let cnam = D.c_get_name col
                 ctyp = D.c_get_type col
                 cnul = D.c_get_nullable col
-                styp = DI.sql_type_name ctyp
+                styp = SqlType.to_sql ctyp
                 snul = if cnul then "NULL" else "NOT NULL"
             V.atom (cnam ++ " " ++ styp ++ " " ++ snul)
         v_con con = case con of

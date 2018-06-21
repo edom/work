@@ -1,6 +1,9 @@
 module Meta.Data_internal where
 
 import qualified Data.List as L
+import qualified Meta.SqlType as T
+
+type Type = T.Type
 
 data Table
     -- | Internal. Do not use. Use 'defTable'.
@@ -101,24 +104,6 @@ data Exp
 -- | Database column name.
 type DbColName = String
 
--- | Database column data type.
-data Type
-    = TBoolean
-    | TInt32
-    | TInt64
-    | TVarChar Int -- ^ the limit is the maximum number of characters, not bytes
-    | TNumeric Int Int -- ^ precision (total digit count), scale (fraction digit count)
-    deriving (Read, Show)
-
-sql_type_name :: Type -> String
-sql_type_name typ = case typ of
-    TBoolean -> "BOOLEAN"
-    TInt32 -> "INTEGER"
-    TInt64 -> "BIGINT"
-    TVarChar n -> "VARCHAR(" ++ show n ++ ")"
-    TNumeric precision scale -> "NUMERIC(" ++ show precision ++ "," ++ show scale ++ ")"
-    _ -> error $ "Meta.Data_internal: sql_type_name: not implemented: " ++ show typ
-
 -- * Column
 
 -- | View table column title.
@@ -146,7 +131,7 @@ data Col
 
 defCol :: Col
 defCol = MkCol {
-        cType = TInt32
+        cType = T.Int32
         , cName = ""
         , cShortTitle = Nothing
         , cLongTitle = Nothing
@@ -161,19 +146,19 @@ mkCol t n = defCol { cType = t, cName = n }
 
 colInt32 :: DbColName -> Col
 colInt32 name = defCol {
-        cType = TInt32
+        cType = T.Int32
         , cName = name
     }
 
 colInt64 :: DbColName -> Col
 colInt64 name = defCol {
-        cType = TInt64
+        cType = T.Int64
         , cName = name
     }
 
 colVarChar :: Int -> DbColName -> Col
 colVarChar limit name = defCol {
-        cType = TVarChar limit
+        cType = T.VarChar limit
         , cName = name
     }
 

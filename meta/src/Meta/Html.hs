@@ -1,54 +1,79 @@
-{-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE TypeSynonymInstances #-}
-
 module Meta.Html where
 
-import Prelude hiding (seq)
+import Prelude hiding (concat, seq)
 
 data Html a
     = Empty
-    | Embed a
+    | Pure a
     | Seq (Html a) (Html a)
-    | Text String
-    | Elm Name [Atr] (Html a)
+    | Text String -- ^ will be escaped
+    | EAtr Name Value -- ^ attribute node
+    | Elm Name (Html a) -- ^ name, first child
     deriving (Show, Read)
-
-instance Monoid (Html a) where
-    mempty = Empty
-    mappend = Seq
-
--- | Convenience constructor for 'Elm'.
-elm :: Name -- ^ tag name
-    -> [Atr] -- ^ attributes
-    -> [Html a] -- ^ children
-    -> Html a
-elm name atrs children = Elm name atrs (mconcat children)
 
 type Name = String
 
 type Value = String
 
-data Atr = MkAtr Name Value deriving (Show, Read)
+-- | Convenience constructor for 'Elm'.
+elm :: Name -- ^ tag name
+    -> [Html a] -- ^ children
+    -> Html a
+
+elm name children = Elm name (concat children)
+
+type Atr = (Name, Value)
+
+mk_atr :: Name -> Value -> Atr
+mk_atr = (,)
+
+atr_get_name :: Atr -> Name
+atr_get_name = fst
+
+atr_get_value :: Atr -> Value
+atr_get_value = snd
+
+get_atrs :: Html a -> [Atr]
+get_atrs x = [ mk_atr nam val | EAtr nam val <- get_children x ]
+
+get_children :: Html a -> [Html a]
+get_children x = case x of
+    Elm _ child -> listify_level child
+    _ -> []
+    where
+        listify_level :: Html a -> [Html a]
+        listify_level node = case node of
+            Seq a b -> listify_level a ++ listify_level b
+            y -> [y]
 
 -- * Fold
 
-fold :: (Monoid a) => (String -> a) -> Html a -> a
-fold string html = case html of
-    Empty -> mempty
-    Embed a -> a
-    Seq x y -> recur x `mappend` recur y
-    Text s -> string (escape s)
-    Elm name atrs body ->
-        string ("<" ++ name ++ unwords (map render_atr atrs) ++ ">")
-        `mappend` recur body
-        `mappend` string ("</" ++ name ++ ">")
+fold
+    :: a -- ^ if 'Empty', monoid identity element
+    -> (a -> a -> a) -- ^ if 'Seq', monoid append operation
+    -> (String -> a) -- ^ if 'Text'
+    -> Html a
+    -> a
+
+fold empty_ seq_ string_ = recur
     where
-        recur = fold string
+        recur html = case html of
+            Empty -> empty_
+            Pure a -> a
+            Seq x y -> seq_ (recur x) (recur y)
+            Text s -> string_ (escape s)
+            this@(Elm name child) ->
+                let
+                    atrs = get_atrs this
+                    s_atrs = unwords ("" : map render_atr atrs)
+                in
+                    string_ ("<" ++ name ++ s_atrs ++ ">")
+                    `seq_` recur child
+                    `seq_` string_ ("</" ++ name ++ ">")
+            EAtr _ _ -> empty_
         render_atr :: Atr -> String
-        render_atr (MkAtr name value) =
-            escape name ++ "=" ++ escape value
+        render_atr atr =
+            escape (atr_get_name atr) ++ "=\"" ++ escape (atr_get_value atr) ++ "\""
 
 -- * Escape
 
@@ -61,3 +86,14 @@ escape = concatMap esc
             '<' -> "&lt;"
             '>' -> "&gt;"
             _ -> [c]
+
+-- * Monoid
+
+empty :: Html a
+empty = Empty
+
+append :: Html a -> Html a -> Html a
+append = Seq
+
+concat :: [Html a] -> Html a
+concat = foldr append empty

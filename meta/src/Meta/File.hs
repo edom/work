@@ -23,6 +23,10 @@ module Meta.File (
 
     , write
 
+    -- * Reexports
+
+    , (P.</>)
+
 ) where
 
 import qualified System.Directory as D

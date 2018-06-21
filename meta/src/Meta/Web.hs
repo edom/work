@@ -89,6 +89,25 @@ data Content
     | Chtmla (H.Html Content) -- rename to CHtml?
     deriving (Show, Read)
 
-instance Monoid Content where
-    mempty = CEmpty
-    mappend = CSeq
+type Tag_name = String
+
+html_elm :: Tag_name -> [Content] -> Content
+html_elm tag children = Chtmla $ H.Elm tag (H.concat $ map unwrap children)
+    where
+        unwrap :: Content -> H.Html Content
+        unwrap (Chtmla x) = x
+        unwrap x = H.Pure x
+
+html_atr :: H.Name -> H.Value -> Content
+html_atr nam val = Chtmla $ H.EAtr nam val
+
+-- * Monoid
+
+content_empty :: Content
+content_empty = CEmpty
+
+content_append :: Content -> Content -> Content
+content_append = CSeq
+
+content_concat :: [Content] -> Content
+content_concat = foldr content_append content_empty

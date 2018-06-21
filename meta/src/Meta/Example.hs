@@ -122,8 +122,8 @@ c_id64 = U.col_int64 "id" |> U.set_title "Id"
 * Generate data transfer objects (DTOs) from existing SQL database tables.
 -}
 
-main0 :: IO ()
-main0 = S.test
+import_sql_database :: IO ()
+import_sql_database = S.test
 
 -- * Scratch
 

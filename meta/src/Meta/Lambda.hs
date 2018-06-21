@@ -5,7 +5,7 @@ import Prelude hiding (exp)
 type Name = String
 
 data Exp a
-    = Con a
+    = Pure a
     | Var Name
     | Lam Name (Exp a)
     | App (Exp a) (Exp a)

@@ -58,10 +58,13 @@ library
         Meta.JavaType
         Meta.JavaWebApp
         Meta.Maven
+        Meta.MavenCmd
         Meta.MavenDep
         Meta.Prop
         Meta.Readme
         Meta.SqlCon
+        Meta.SqlType
+        Meta.Test
         Meta.Type
         Meta.Tys
         Meta.User
@@ -80,6 +83,7 @@ library
         , HDBC >= 2
         , directory >= 1
         , filepath >= 1
+        , process >= 1.2.0.0
 
     if flag(postgresql)
         build-depends:

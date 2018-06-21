@@ -30,6 +30,8 @@ Do not use.
 
     * "Meta.SqlCon": connect to SQL databases using HDBC
 
+    * "Meta.SqlType": SQL types
+
 * Programming languages
 
     * Haskell
@@ -68,7 +70,9 @@ Do not use.
 
         * "Meta.Maven": a subset of Maven (dependency management, build system, and central repository, for Java)
 
-        * "Meta.MavenDep": Maven dependency
+            * "Meta.MavenCmd": Maven command-line wrapper
+
+            * "Meta.MavenDep": Maven dependency
 
     * TypeScript
 
@@ -115,5 +119,7 @@ Do not use.
     * "Meta.Xml": write XML (Extensible Markup Language) documents
 
     * "Meta.Readme": overview, this file
+
+    * "Meta.Test": tests for this library
 
 -}

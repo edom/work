@@ -202,7 +202,8 @@ content_to_java_sta e_output con = case con of
         ++ [append_str "</head><body>"]
         ++ recur (W._h_body html)
         ++ [append_str "</body></html>"]
-    W.Chtmla html -> recur (H.fold W.CText html)
+    W.Chtmla html ->
+        recur (H.fold W.content_empty W.content_append W.CRaw html)
     W.CView query@(DI.QFrom table) ->
         let
             ds_field_name = D.t_DataSource_field_name table
