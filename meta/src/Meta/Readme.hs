@@ -32,6 +32,8 @@ Do not use.
 
     * "Meta.SqlType": SQL types
 
+    * "Meta.SqlSyn": SQL abstract syntax
+
 * Programming languages
 
     * Haskell
@@ -89,6 +91,9 @@ Do not use.
             * "Meta.Cbp_internal": its internals
 
         * "Meta.Lambda": lambda calculus
+
+        * "Meta.Cal": calculator expression language:
+        constant expression, arithmetic expression, boolean expression
 
 * Web
 
