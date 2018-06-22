@@ -1,67 +1,69 @@
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE PatternSynonyms #-}
 
 module Meta.Cal where
 
 import Prelude hiding (exp)
 
-data Exp a
-    = EPure a
-    | EPlus a a
-    | EEq a a
-    deriving (Read, Show)
+import qualified Meta.CalExp as E
+import qualified Meta.CalVal as V
 
-instance Functor Exp where
-    fmap f (EPure a) = EPure (f a)
-    fmap f (EPlus a b) = EPlus (f a) (f b)
-    fmap f (EEq a b) = EEq (f a) (f b)
-
-eval_val :: Exp Val -> Val
-eval_val exp = case exp of
-    EPure a -> a
-    EPlus a b -> val_plus a b
-    EEq a b -> val_eq a b
-
-render_exp :: (a -> String) -> Exp a -> String
-render_exp prin exp = case exp of
-    EPure a -> prin a
-    EPlus a b -> "(" ++ prin a ++ " + " ++ prin b ++ ")"
-    EEq a b -> "(" ++ prin a ++ " = " ++ prin b ++ ")"
-
-print_val :: Val -> String
-print_val VInvalid = "invalid"
-print_val (VBool x) = show x
-print_val (VInt x) = show x
-
-data Val
-    = VInvalid
-    | VBool Bool
-    | VInt Int
-    deriving (Read, Show)
-
-val_plus :: Val -> Val -> Val
-val_plus (VInt a) (VInt b) = VInt (a + b)
-val_plus _ _ = VInvalid
-
-val_eq :: Val -> Val -> Val
-val_eq (VInt a) (VInt b) = VBool (a == b)
-val_eq (VBool a) (VBool b) = VBool (a == b)
-val_eq _ _ = VInvalid
-
--- How do we compose Val and Exp?
+-- * Term
 
 data Lang
-    = LVal Val
-    | LExp (Exp Lang)
+    = LVal V.Val
+    | LExp (E.Exp Lang)
     deriving (Read, Show)
 
-eval_lang :: Lang -> Val
-eval_lang (LVal x) = x
-eval_lang (LExp x) = eval_val (fmap eval_lang x)
+class CVal a where
+    vError :: String -> a
+    vInt :: Int -> a
+    vBool :: Bool -> a
 
-render_lang :: Lang -> String
-render_lang (LVal x) = print_val x
-render_lang (LExp x) = render_exp render_lang x
+instance CVal V.Val where
+    vError = V.Error
+    vInt = V.Int
+    vBool = V.Bool
 
-example1 = eval_lang (LExp (EPlus (LVal (VInt 1)) (LVal (VInt 2))))
-example2 = render_lang (LExp (EPlus (LExp (EPlus (LVal (VInt 1)) (LVal (VInt 2)))) (LVal (VInt 2))))
+instance CVal Lang where
+    vError = LVal . vError
+    vInt = LVal . vInt
+    vBool = LVal . vBool
+
+-- * Term constructors
+
+plus :: Lang -> Lang -> Lang
+plus a b = LExp (E.Plus a b)
+
+eq :: Lang -> Lang -> Lang
+eq a b = LExp (E.Eq a b)
+
+-- * Term deconstructors
+
+pattern PInt :: Int -> Lang
+pattern PInt a = LVal (V.Int a)
+
+-- * Evaluation
+
+eval :: Lang -> V.Val
+eval (LVal x) = x
+eval (LExp x) = eval_val (fmap eval x)
+    where
+        eval_val :: E.Exp V.Val -> V.Val
+        eval_val exp = case exp of
+            E.Pure a -> a
+            E.Plus a b -> V.plus a b
+            E.Eq a b -> V.eq a b
+
+-- * Rendering
+
+render :: Lang -> String
+render (LVal x) = V.print x
+render (LExp x) = E.render render x
+
+-- * Examples
+
+example1 = eval (LExp (E.Plus (LVal (V.Int 1)) (LVal (V.Int 2))))
+
+example2 = render (LExp (E.Plus (LExp (E.Plus (LVal (V.Int 1)) (LVal (V.Int 2)))) (LVal (V.Int 2))))
+
+example3 = eval (vInt 1 `plus` vInt 2)
