@@ -45,14 +45,8 @@ pattern PInt a = LVal (V.Int a)
 -- * Evaluation
 
 eval :: Lang -> V.Val
-eval (LVal x) = x
-eval (LExp x) = eval_val (fmap eval x)
-    where
-        eval_val :: E.Exp V.Val -> V.Val
-        eval_val exp = case exp of
-            E.Pure a -> a
-            E.Plus a b -> V.plus a b
-            E.Eq a b -> V.eq a b
+eval (LVal x) = V.eval x
+eval (LExp x) = E.eval (eval <$> x)
 
 -- * Rendering
 

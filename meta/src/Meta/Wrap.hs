@@ -64,7 +64,7 @@ data State
     = MkState {
         sIndent :: Int
         , sPrevCharWasWhite :: Bool
-    } deriving (Show, Read)
+    } deriving (Read, Show)
 
 stInit :: State
 stInit = MkState 0 True
@@ -75,10 +75,10 @@ data LayOpt
     -- | Internal. Do not use. Use 'defLayOpt'.
     = MkLayOpt {
         loLineWidth :: Int -- ^ desired maximum line width
-    } deriving (Show, Read)
+    } deriving (Read, Show)
 
 data Thing
     = Atom IndBol String
     | Space
     | Break
-    deriving (Show, Read)
+    deriving (Read, Show)

@@ -9,7 +9,7 @@ data Html a
     | Text String -- ^ will be escaped
     | EAtr Name Value -- ^ attribute node
     | Elm Name (Html a) -- ^ name, first child
-    deriving (Show, Read)
+    deriving (Read, Show)
 
 type Name = String
 

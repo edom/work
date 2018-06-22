@@ -9,7 +9,7 @@ data Exp a
     | Var Name
     | Lam Name (Exp a)
     | App (Exp a) (Exp a)
-    deriving (Show, Read)
+    deriving (Read, Show)
 
 subst
     :: Name -- ^ needle

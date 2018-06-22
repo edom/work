@@ -36,7 +36,7 @@ data From a
     | FLeftJoin (From a) (From a)
     | FRightJoin (From a) (From a)
     | FOuterJoin (From a) (From a)
-    deriving (Show, Read)
+    deriving (Read, Show)
 
 data Exp a
     = EPure a

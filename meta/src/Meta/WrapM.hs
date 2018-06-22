@@ -70,7 +70,7 @@ data State = MkState {
         , sMaxLineWidth :: Int
         , sThings :: [W.Thing]
         , sCurInd :: Int
-    } deriving (Show, Read)
+    } deriving (Read, Show)
 
 defState :: State
 defState = MkState {

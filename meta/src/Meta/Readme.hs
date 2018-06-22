@@ -92,8 +92,16 @@ Do not use.
 
         * "Meta.Lambda": lambda calculus
 
-        * "Meta.Cal": calculator expression language:
+        * "Meta.Cal": calculator language:
         constant expression, arithmetic expression, boolean expression
+
+            * "Meta.CalVal": value
+
+            * "Meta.CalExp": expression
+
+            * "Meta.CalIo": similar to "Meta.Cal" but with some transput
+
+* "Meta.Peg": a naïve implementation of Parsing Expression Grammar
 
 * Web
 

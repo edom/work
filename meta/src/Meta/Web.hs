@@ -19,7 +19,7 @@ data Site
     = MkSite {
         sPages :: [Page]
     }
-    deriving (Show, Read)
+    deriving (Read, Show)
 
 empty :: Site
 empty = MkSite []
@@ -36,7 +36,7 @@ data Page
         , pContent :: Content
         , pContentType :: String
     }
-    deriving (Show, Read)
+    deriving (Read, Show)
 
 type Content_type = String
 
@@ -87,7 +87,7 @@ data Content
     | CJavaRes Java_resource_path
     | CHtml Html_doc -- rename to CHtmlDoc? remove? c_html_doc :: Html_doc -> [Content] -> Content
     | Chtmla (H.Html Content) -- rename to CHtml?
-    deriving (Show, Read)
+    deriving (Read, Show)
 
 type Tag_name = String
 
