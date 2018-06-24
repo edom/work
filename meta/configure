@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# https://rybczak.net/2016/03/26/how-to-reduce-compilation-times-of-haskell-projects/
+
+# [How to enable flag for single package only?](https://github.com/haskell/cabal/issues/4271)
+
+cabal new-configure \
+    --ghc-options '-j +RTS -A256m -n2m -RTS' \
+    --disable-library-vanilla \
+    --enable-shared \
+    --enable-executable-dynamic \
+    --enable-relocatable \
+    --enable-profiling \
+    --allow-newer 'Cabal' \
+    --constraint 'cassava -bytestring--LT-0_10_4' \
+    -j \
+    "$@"
