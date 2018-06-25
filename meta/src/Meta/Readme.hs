@@ -101,6 +101,12 @@ Do not use.
 
             * "Meta.CalIo": similar to "Meta.Cal" but with some transput
 
+        * "Meta.Logic"
+
+            * "Meta.LogicVal"
+
+        * "Meta.Scheme"
+
 * "Meta.Peg": a naïve implementation of Parsing Expression Grammar
 
 * Web
