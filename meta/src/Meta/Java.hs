@@ -14,19 +14,20 @@
 module Meta.Java where
 
 import qualified Data.Int as I
+import qualified Meta.JavaExp as E
 import qualified Meta.JavaSta as JS
 import qualified Meta.JavaType as JT
 import qualified Meta.Prop as P
 
 -- * Type
 
-type Name = String
+type Name = E.Name
 
 type Type = JT.Type
 
 -- | See also "Meta.JavaType".
 typeOf :: Class -> Type
-typeOf cls = JT.ref $ qualName cls
+typeOf cls = JT.ref $ qual_name cls
 
 type Qual_name = String
 
@@ -164,7 +165,7 @@ a_Singleton = annotFromType $ JT.ref "javax.inject.Singleton"
 
 a_Named :: String -> Ant
 a_Named nam = (annotFromType $ JT.ref "javax.inject.Named") {
-        aParams = [JS.eStr nam]
+        aParams = [eStr nam]
     }
 
 -- * Method parameter
@@ -235,7 +236,7 @@ data Method
         , mTypeParams :: [TypeParam]
         , mParams :: [Param]
         , mThrows :: [Type]
-        , mBody :: [JS.Sta]
+        , mBody :: [Sta]
         , mAnts :: [Ant]
         , mComment :: String
         , _is_ctor :: Bool
@@ -287,8 +288,8 @@ override met = met {
 data Member
     = MField Field
     | MMethod Method
-    | MInit [JS.Sta]
-    | MStaticInit [JS.Sta]
+    | MInit [Sta]
+    | MStaticInit [Sta]
     | MLineComment String
     | MBlockComment String
     deriving (Read, Show)
@@ -298,48 +299,61 @@ data Member
 type Exp = JS.Exp
 
 e_call_static :: Qual_name -> Method_name -> [Exp] -> Exp
-e_call_static tar nam arg = JS.ECallStatic tar nam arg
+e_call_static tar nam arg = E.ECallStatic tar nam arg
 
--- | Deprecated.
-eCallStatic :: Class -> Name -> [JS.Exp] -> JS.Exp
-eCallStatic tar nam arg = JS.eCallStatic (qualName tar) nam arg
+eCallStatic :: Qual_name -> Name -> [Exp] -> Exp
+eCallStatic tar nam arg = E.ECallStatic tar nam arg
 
-eFieldStatic :: Class -> Name -> JS.Exp
-eFieldStatic tar nam = JS.eFieldStatic (qualName tar) nam
+class Has_qual_name a where
+    qual_name :: a -> Qual_name
+
+instance Has_qual_name Qual_name where
+    qual_name = id
+
+instance Has_qual_name Class where
+    qual_name cls = case pkg of
+        "" -> name
+        _ -> pkg ++ "." ++ name
+        where
+            pkg = cPkg cls
+            name = cName cls
+
+eFieldStatic :: (Has_qual_name cls) => cls -> Name -> Exp
+eFieldStatic tar nam = E.EFieldStatic (qual_name tar) nam
 
 e_field :: Exp -> Name -> Exp
-e_field = JS.eField
+e_field = eField
 
 e_this :: Exp
-e_this = JS.EThis
+e_this = E.EThis
 
 e_name :: Name -> Exp
-e_name = JS.eName
+e_name = eName
 
 e_int :: I.Int32 -> Exp
-e_int = JS.EInt32
+e_int = E.EInt32
 
 e_str :: String -> Exp
-e_str = JS.eStr
+e_str = eStr
 
 e_new :: Type -> [Exp] -> Exp
-e_new = JS.ENew
+e_new = E.ENew
 
 e_null :: Exp
-e_null = JS.ENull
+e_null = E.ENull
 
 e_is_null :: Exp -> Exp
-e_is_null a = JS.EEq a JS.ENull
+e_is_null a = E.EEq a E.ENull
 
 -- | @[ e_toString e ] => java.util.Objects.toString( [ e ] )@
 e_toString :: Exp -> Exp
-e_toString e = JS.eCallStatic "java.util.Objects" "toString" [e]
+e_toString e = eCallStatic "java.util.Objects" "toString" [e]
 
 type Int32 = I.Int32
 
 class E_int32 a where e_int32 :: a -> Exp
-instance E_int32 Int where e_int32 = JS.EInt32 . fromIntegral
-instance E_int32 I.Int32 where e_int32 = JS.EInt32
+instance E_int32 Int where e_int32 = E.EInt32 . fromIntegral
+instance E_int32 I.Int32 where e_int32 = E.EInt32
 
 e_int32i :: Int -> Exp
 e_int32i = e_int32
@@ -347,25 +361,47 @@ e_int32i = e_int32
 type Method_name = String
 
 e_call :: Exp -> Method_name -> [Exp] -> Exp
-e_call = JS.eCall
+e_call = eCall
 
 e_str_empty :: Exp
-e_str_empty = JS.eStr ""
+e_str_empty = eStr ""
 
 e_plus :: Exp -> Exp -> Exp
-e_plus = JS.EPlus
+e_plus = E.EPlus
 
 e_lt :: Exp -> Exp -> Exp
-e_lt = JS.ELt
+e_lt = E.ELt
 
 e_lteq :: Exp -> Exp -> Exp
-e_lteq = JS.ELteq
+e_lteq = E.ELteq
 
 e_preincrement :: Exp -> Exp
-e_preincrement = JS.EPreInc
+e_preincrement = E.EPreInc
 
 e_assign :: Exp -> Exp -> Exp
-e_assign = JS.EAssign
+e_assign = E.EAssign
+
+eStr :: String -> Exp
+eStr = E.EStr
+
+eField :: Exp -> String -> Exp
+eField = E.EField
+
+eName :: Name -> Exp
+eName = E.EName
+
+eCall :: Exp -> Name -> [Exp] -> Exp
+eCall tar nam arg = E.ECall tar nam arg
+
+-- * Convenience expression constructors
+
+-- | @eEquals a b@ produces @java.util.Objects.equals(a, b)@.
+eEquals :: Exp -> Exp -> Exp
+eEquals a b = eCallStatic "java.util.Objects" "equals" [a, b]
+
+-- | @eIsNull a@ produces @a == null@.
+eIsNull :: Exp -> Exp
+eIsNull a = E.EEq a E.ENull
 
 -- * Statement
 
@@ -375,10 +411,10 @@ s_block :: [Sta] -> Sta
 s_block = JS.SBlock
 
 s_def :: Type -> Name -> Exp -> Sta
-s_def = JS.sDef
+s_def = sDef
 
 s_assign :: Exp -> Exp -> Sta
-s_assign = JS.sAsgn
+s_assign = sAsgn
 
 s_while :: Exp -> [Sta] -> Sta
 s_while = JS.SWhile
@@ -387,13 +423,37 @@ s_throw :: Exp -> Sta
 s_throw = JS.SThrow
 
 s_if :: Exp -> [Sta] -> Sta
-s_if = JS.sIf
+s_if = sIf
 
 s_call :: Exp -> Method_name -> [Exp] -> Sta
 s_call target method args = s_exp (e_call target method args)
 
 s_exp :: Exp -> Sta
 s_exp = JS.SExp
+
+sIf :: Exp -> [Sta] -> Sta
+sIf con tru = JS.SIf con tru Nothing
+
+sIfElse :: Exp -> [Sta] -> [Sta] -> Sta
+sIfElse con tru fal = JS.SIf con tru (Just fal)
+
+sRet :: Exp -> Sta
+sRet r = JS.SRet (Just r)
+
+sRetVoid :: Sta
+sRetVoid = JS.SRet Nothing
+
+sCall :: Exp -> Name -> [Exp] -> Sta
+sCall tar nam arg = JS.SExp $ eCall tar nam arg
+
+sDecl :: JT.Type -> Name -> Sta
+sDecl typ nam = JS.SDecl typ nam Nothing
+
+sDef :: JT.Type -> Name -> Exp -> Sta
+sDef typ nam ini = JS.SDecl typ nam (Just ini)
+
+sAsgn :: Exp -> Exp -> Sta
+sAsgn loc val = JS.SExp (E.EAssign loc val)
 
 type Catch = JS.Catch
 
@@ -420,11 +480,3 @@ s_with defs body = JS.SWith defs body [] Nothing
 
 s_for :: Sta -> Exp -> Exp -> [Sta] -> Sta
 s_for = JS.SFor
-
-qualName :: Class -> String
-qualName cls = case pkg of
-    "" -> name
-    _ -> pkg ++ "." ++ name
-    where
-        pkg = cPkg cls
-        name = cName cls

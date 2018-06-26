@@ -70,6 +70,6 @@ eval_io exp = case exp of
     GetLine -> V.String <$> P.getLine
     PutStrLn a -> case a of
         V.String s -> P.putStrLn s *> pure V.Unit
-        _ -> pure $ V.Error $ "Meta.CalIo.eval: (" ++ show exp ++ ")"
+        _ -> pure $ V.Error ["Meta.CalIo.eval: (" ++ show exp ++ ")"]
 
 example1 = eval $ putStrLn (plus getLine getLine)

@@ -62,6 +62,8 @@ Do not use.
 
             * "Meta.JavaRender": render Java source files
 
+            * "Meta.JavaExp": expressions
+
             * "Meta.JavaSta": statements
 
             * "Meta.JavaType": types
@@ -99,13 +101,19 @@ Do not use.
 
             * "Meta.CalExp": expression
 
+            * "Meta.CalSta": statement
+
             * "Meta.CalIo": similar to "Meta.Cal" but with some transput
 
         * "Meta.Logic"
 
             * "Meta.LogicVal"
 
+            * "Meta.LogicExp"
+
         * "Meta.Scheme"
+
+        * "Meta.Ski"
 
 * "Meta.Peg": a naïve implementation of Parsing Expression Grammar
 

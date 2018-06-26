@@ -5,7 +5,6 @@ import qualified Meta.Data_internal as DI
 import qualified Meta.Html as H
 import qualified Meta.Java as J
 import qualified Meta.JavaServlet as JS
-import qualified Meta.JavaSta as S
 import qualified Meta.JavaType as JT
 import qualified Meta.Maven as M
 import qualified Meta.Web as W
@@ -142,9 +141,10 @@ get_java_servlet_class app =
             J.MMethod (J.override JS.m_service) {
                 J.mBody =
                     [
-                        S.sDef JT.string "pathInfo" (S.eCall eRequest "getPathInfo" [])
-                        , S.sIf (S.eIsNull ePathInfo) [
-                            S.sAsgn ePathInfo (S.eStr "/")
+                        J.sDef JT.string "pathInfo" (J.eCall eRequest "getPathInfo" [])
+                        , J.sDef JT.string "method" (J.eCall eRequest "getMethod" [])
+                        , J.sIf (J.eIsNull ePathInfo) [
+                            J.sAsgn ePathInfo (J.eStr "/")
                         ]
                     ]
                     ++ map page_handler pages
@@ -153,25 +153,29 @@ get_java_servlet_class app =
                     ]
             }
         page_handler page =
-            S.sIf (S.eEquals ePathInfo (S.eStr url)) $
+            J.sIf (J.eEquals ePathInfo (J.eStr url)) $
                 [
-                    sSetStatus "SC_OK"
-                    , S.sCall eResponse "setContentType" [S.eStr content_type]
-                    , S.sDef JT.printWriter "output" (S.eCall eResponse "getWriter" [])
+                    J.sIf (J.eEquals eMethod (J.eStr method)) $ [
+                        sSetStatus "SC_OK"
+                        , J.sCall eResponse "setContentType" [J.eStr content_type]
+                        , J.sDef JT.printWriter "output" (J.eCall eResponse "getWriter" [])
+                    ]
+                    ++ content_to_java_sta e_output content
+                    ++ [J.sRetVoid]
                 ]
-                ++ content_to_java_sta e_output content
-                ++ [S.sRetVoid]
             where
                 url = W.pUrl page
                 content = W.pContent page
                 content_type = W.pContentType page
+                method = W.pMethod page
         pages = W.sPages site
-        e_output = S.eName "output"
-        eRequest = S.eName "request"
-        eResponse = S.eName "response"
-        ePathInfo = S.eName "pathInfo"
+        e_output = J.eName "output"
+        eRequest = J.eName "request"
+        eResponse = J.eName "response"
+        ePathInfo = J.eName "pathInfo"
+        eMethod = J.eName "method"
         sSetStatus code =
-            S.sCall eResponse "setStatus" [J.eFieldStatic JS.c_HttpServletResponse code]
+            J.sCall eResponse "setStatus" [J.eFieldStatic JS.c_HttpServletResponse code]
 
 content_to_java_sta
     :: J.Exp -- ^ PrintWriter output
@@ -267,7 +271,7 @@ content_to_java_sta e_output con = case con of
         max_resource_size = 1048576
         recur = content_to_java_sta e_output
         append_str = append . J.e_str
-        append e_str = S.sCall e_output "append" [e_str]
+        append e_str = J.sCall e_output "append" [e_str]
         escape_html s = concatMap esc s
             where
                 esc c = case c of

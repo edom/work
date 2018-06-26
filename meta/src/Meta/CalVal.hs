@@ -5,7 +5,7 @@ import Prelude hiding (not)
 import qualified Prelude as P
 
 data Val
-    = Error String
+    = Error [String]
     | Unit
     | Bool Bool
     | Int Int
@@ -13,18 +13,25 @@ data Val
     deriving (Read, Show)
 
 plus :: Val -> Val -> Val
+plus (Error a) (Error b) = Error (a ++ b)
+plus (Error a) _ = Error a
+plus _ (Error b) = Error b
 plus (Int a) (Int b) = Int (a + b)
 plus (String a) (String b) = String (a ++ b)
-plus a b = Error $ "Meta.CalVal.plus: (" ++ show a ++ ") (" ++ show b ++ ")"
+plus a b = Error ["Meta.CalVal.plus: (" ++ show a ++ ") (" ++ show b ++ ")"]
 
 eq :: Val -> Val -> Val
+eq (Error a) (Error b) = Error (a ++ b)
+eq (Error a) _ = Error a
+eq _ (Error b) = Error b
 eq (Int a) (Int b) = Bool (a == b)
 eq (Bool a) (Bool b) = Bool (a == b)
-eq a b = Error $ "Meta.CalVal.eq: (" ++ show a ++ ") (" ++ show b ++ ")"
+eq a b = Error ["Meta.CalVal.eq: (" ++ show a ++ ") (" ++ show b ++ ")"]
 
 not :: Val -> Val
+not (Error a) = Error a
 not (Bool a) = Bool (P.not a)
-not a = Error $ "Meta.CalVal.not: (" ++ show a ++ ")"
+not a = Error ["Meta.CalVal.not: (" ++ show a ++ ")"]
 
 eval :: Val -> Val
 eval = id

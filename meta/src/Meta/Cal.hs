@@ -15,7 +15,7 @@ data Lang
     deriving (Read, Show)
 
 class CVal a where
-    vError :: String -> a
+    vError :: [String] -> a
     vInt :: Int -> a
     vBool :: Bool -> a
 

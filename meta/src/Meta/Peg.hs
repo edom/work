@@ -1,12 +1,16 @@
+{- |
+See also:
+
+    * http://hackage.haskell.org/package/frisby
+
+    * https://en.wikipedia.org/wiki/Parsing_expression_grammar
+-}
 module Meta.Peg where
 
 import Prelude hiding (and, any, concat, fail, not, or, (/), (>), (>>))
 
 -- * Expression
 
-{- |
-<https://en.wikipedia.org/wiki/Parsing_expression_grammar>
--}
 data Exp t a
     = Empty -- ^ empty (always success)
     | Fail -- ^ fail (always fail)

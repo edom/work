@@ -2,6 +2,7 @@ module Meta.JavaRender where
 
 import qualified Meta.File as F
 import qualified Meta.Java as J
+import qualified Meta.JavaExp as E
 import qualified Meta.JavaSta as JS
 import qualified Meta.JavaType as JT
 import qualified Meta.WrapM as V
@@ -53,7 +54,7 @@ renderClass cls = do
         parent = J.cParentClass cls
         pExtends = case parent of
             Nothing -> V.nop
-            Just sup -> V.atom $ "extends " ++ J.qualName sup
+            Just sup -> V.atom $ "extends " ++ J.qual_name sup
 
 renderFinal :: Bool -> V.Prog ()
 renderFinal fin = case fin of
@@ -270,40 +271,40 @@ render_m_finally m = case m of
 
 renderExp :: JS.Exp -> V.Prog ()
 renderExp ex = case ex of
-    JS.ENull -> V.atom "null"
-    JS.EThis -> V.atom "this"
-    JS.ESuper -> V.atom "super"
-    JS.EEq a b -> V.atom "(" >> renderExp a >> V.atom ") == (" >> renderExp b >> V.atom ")"
-    JS.ENe a b -> V.atom "(" >> renderExp a >> V.atom ") != (" >> renderExp b >> V.atom ")"
-    JS.ELteq a b -> parene a >> satom "<=" >> parene b
-    JS.EName s -> V.atom s
-    JS.EStr s -> V.atom $ "\"" ++ escStr s ++ "\""
-    JS.EInt32 n -> V.atom $ show n
-    JS.EInt64 n -> V.atom $ show n
-    JS.EField tar nam -> do
+    E.ENull -> V.atom "null"
+    E.EThis -> V.atom "this"
+    E.ESuper -> V.atom "super"
+    E.EEq a b -> V.atom "(" >> renderExp a >> V.atom ") == (" >> renderExp b >> V.atom ")"
+    E.ENe a b -> V.atom "(" >> renderExp a >> V.atom ") != (" >> renderExp b >> V.atom ")"
+    E.ELteq a b -> parene a >> satom "<=" >> parene b
+    E.EName s -> V.atom s
+    E.EStr s -> V.atom $ "\"" ++ escStr s ++ "\""
+    E.EInt32 n -> V.atom $ show n
+    E.EInt64 n -> V.atom $ show n
+    E.EField tar nam -> do
         -- Parenthesizing "this" affects constructors of classes having final fields.
         -- If "this" is parenthesized, javac complains with "cannot assign a value to final variable".
         let no_par = renderExp tar >> V.atom ("." ++ nam)
             with_par = V.atom "(" >> renderExp tar >> V.atom (")." ++ nam)
         case tar of
-            JS.EThis -> no_par
-            JS.ESuper -> no_par
+            E.EThis -> no_par
+            E.ESuper -> no_par
             _ -> with_par
-    JS.EFieldStatic tar nam -> V.atom $ tar ++ "." ++ nam
-    JS.ECall tar nam args -> do
+    E.EFieldStatic tar nam -> V.atom $ tar ++ "." ++ nam
+    E.ECall tar nam args -> do
         V.atom "("
         renderExp tar
         V.atom $ ")." ++ nam ++ "("
         V.commaSep $ map renderExp args
         V.atom ")"
-    JS.ECallStatic tar nam args -> do
+    E.ECallStatic tar nam args -> do
         V.atom $ tar ++ "." ++ nam ++ "("
         V.commaSep $ map renderExp args
         V.atom ")"
-    JS.EPlus a b -> parene a >> satom "+" >> parene b
-    JS.EAssign a b -> parene a >> satom "=" >> parene b
-    JS.EPreInc a -> V.atom "++" >> parene a
-    JS.ENew t ps -> do
+    E.EPlus a b -> parene a >> satom "+" >> parene b
+    E.EAssign a b -> parene a >> satom "=" >> parene b
+    E.EPreInc a -> V.atom "++" >> parene a
+    E.ENew t ps -> do
         V.atom "new"
         V.space
         V.atom $ JT.render t

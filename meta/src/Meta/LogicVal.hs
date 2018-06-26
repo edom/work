@@ -7,4 +7,3 @@ data Val
     | Str String
     | Var Name
     deriving (Read, Show)
-

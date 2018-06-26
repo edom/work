@@ -30,11 +30,14 @@ add_page url con sit = sit { sPages = sPages sit ++ [page_empty { pUrl = url, pC
 add_pages :: [Page] -> Site -> Site
 add_pages pages site = site { sPages = sPages site ++ pages }
 
+type Method = String
+
 data Page
     = MkPage {
         pUrl :: Url -- ^ static, no pattern matching
         , pContent :: Content
         , pContentType :: String
+        , pMethod :: String
     }
     deriving (Read, Show)
 
@@ -54,6 +57,7 @@ page_empty = MkPage {
         pUrl = ""
         , pContent = CEmpty
         , pContentType = "text/html; charset=UTF-8"
+        , pMethod = "GET"
     }
 
 data Html_doc

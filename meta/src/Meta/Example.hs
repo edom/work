@@ -52,24 +52,24 @@ main = U.generate_java app
             ]
         pages =
             [
-                page "/" (
+                get "/" (
                     U.html [
                         U.link_internal "/customer" (U.text "Customers")
                         , U.link_internal "/1" (U.text "page 1")
                     ]
                 )
-                , page "/customer" (
+                , get "/customer" (
                     U.html [
                         U.tabulate (U.from t_customer)
                     ]
                 )
-                , page "/1" (U.text "this is page 1")
-                , U.mk_page "/css/style.css" (
+                , get "/1" (U.text "this is page 1")
+                , U.get "/css/style.css" (
                     U.java_resource "css/style.css"
                 ) |> U.set_content_type "text/css; charset=UTF-8"
             ]
-        page url content =
-            U.mk_page url (
+        get url content =
+            U.get url (
                 U.html [content]
                 |> U.add_styles ["/css/style.css"]
             )

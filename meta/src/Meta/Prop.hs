@@ -35,9 +35,9 @@ infixl 0 |>
     * Write helpful error message.
 
         * In the error message:
-        
+
             * include the module name,
-            
+
             * include the function name,
 
             * summarize the problem (the direct cause; don't guess the root cause),
