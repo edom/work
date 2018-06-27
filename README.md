@@ -1,13 +1,10 @@
 - Things far from being finished
-    - meta
+    - [meta](meta/)
         - library for writing metaprograms in Haskell
         - use Haskell as metalanguage
-    - sound
+    - [sound](sound/)
         - Find out whether real-time sound synthesis is possible with GHC Haskell.
         - Write some ugly code involving GHC primitives (unboxed things).
         - Hide the ugliness behind a newtype hidden in a module.
         - Assume that GHC inlines well.
-    - site
-- Plans
-    - meta
-        - Absorb haji, pragmatic, ptt.
+    - [site](site/)

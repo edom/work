@@ -29,6 +29,7 @@
     - Pretty URL (URL path component instead of GET parameters)?
     - Refactoring, maintainability/usability improvements
         - Make Meta.Xml use Meta.WrapM
+    - Absorb haji, pragmatic, ptt.
     - Do we want this?
         - change deploy script
             - build on developer machine

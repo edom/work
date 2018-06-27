@@ -27,8 +27,20 @@
         - Call-by-what?
             - Call-by-value
             - Call-by-name
-- Implement lambda calculus without dynamic allocation / garbage collection
-- https://www.quora.com/If-you-were-to-design-a-programming-language-what-other-programming-language-would-it-evolve-from-and-what-aspect-of-that-language-would-you-do-differently
+- Implement lambda calculus.
+    - Without dynamic allocation / garbage collection.
+    - Translate lambda calculus to assembly
+        - Basic idea:
+            - Every expression translates to a subroutine.
+            - Calling the subroutine ~ evaluating the expression.
+            - Subroutine return value ~ value obtained by evaluating the expression.
+        - A lambda abstraction translates to a subroutine that accepts one parameter.
+        - An application translates to a subroutine call.
+        - An int value translates to what? Choice:
+            - itself
+            - a subroutine that returns the int
+- Other people's experiences
+    - https://www.quora.com/If-you-were-to-design-a-programming-language-what-other-programming-language-would-it-evolve-from-and-what-aspect-of-that-language-would-you-do-differently
 - parsing
     - given grammar, generate both parser and unparser/pretty-printer
         - http://www.semdesigns.com/Products/DMS/DMSPrettyPrinters.html?Home=DMSToolkit
@@ -37,8 +49,20 @@
         - [Tillmann Rendel and Klaus Ostermann. "Invertible Syntax Descriptions: Unifying Parsing and Pretty Printing". In Proc. of Haskell Symposium, 2010.](http://www.informatik.uni-marburg.de/~rendel/unparse/rendel10invertible.pdf)
         - http://jssst.or.jp/files/user/taikai/2016/PPL/ppl1-1.pdf
     - 2015, [Nez: practical open grammar language](https://arxiv.org/abs/1511.08307)
-- 2014, [The essence of Reynolds](http://www.cs.bham.ac.uk/~udr/papers/EssenceOfReynolds.pdf)
-    - 1998, Reynolds, "Theories of programming languages"
+- Big names in programming language research, and their contributions
+    - This list is incomplete.
+    - See also:
+        - https://en.wikipedia.org/wiki/Programming_language_theory
+    - https://en.wikipedia.org/wiki/John_C._Reynolds
+        - 2014, [The essence of Reynolds](http://www.cs.bham.ac.uk/~udr/papers/EssenceOfReynolds.pdf)
+            - 1998, Reynolds, "Theories of programming languages"
+    - Henk Barendregt, wrote books on lambda calculus
+    - Thierry Coquand, invented calculus of constructions, Coq
+    - Philip Wadler
+    - Jean-Yves Girard
+    - Steele, Sussman, Felleisen, Barzilay, etc. (Scheme guys, PLT Scheme guys)
+    - Simon Peyton-Jones, etc. (Haskell guys)
+    - Oleg Kiselyov
 - books recommended by courses related to programming language research
     - http://plus.kaist.ac.kr/~han/courses/cs520/
     - https://www.cl.cam.ac.uk/teaching/1516/ConceptsPL/
