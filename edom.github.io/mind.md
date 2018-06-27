@@ -278,3 +278,7 @@ Why do I see things from my point of view?
     - https://en.wikipedia.org/wiki/Brain_damage
     - https://en.wikipedia.org/wiki/Lobes_of_the_brain
     - https://en.wikipedia.org/wiki/Lateralization_of_brain_function
+    - http://www.informationphilosopher.com/solutions/dualisms/
+    - https://www.edge.org/conversation/five-problems-in-the-philosophy-of-mind
+- electrophysiology, Greg Gage, TED 2015, how to control someone else's arm with your brain
+    - https://www.ted.com/talks/greg_gage_how_to_control_someone_else_s_arm_with_your_brain/transcript

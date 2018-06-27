@@ -201,3 +201,40 @@ is to make someone else has less money.
         - ecosystem recovery after wildfire ~ economy recovery after war/disaster ?
         - fire ecology ~ war/disaster ecology ?
         - How does a community rebuild itself?
+- Company theory
+    - Avoiding personification of companies
+        - A company is a group of people.
+        - Group is concept. Person is reality.
+        - Groups can't think. People think.
+        - Groups can't react. People react.
+        - Groups can't live. People live.
+        - Groups can't work. People work.
+        - Groups can't create value. People create value.
+        - Groups can't decide. People decide.
+        - Groups can't be responsible. People are responsible.
+        - Groups can't commit crime. People commit crime.
+        - Groups can't damage environment. People damage environment.
+        - Groups can't exploit. People exploit.
+        - What do we mean when we say "a group of people are walking"?
+        We mean "those people are walking".
+        A group is a concept.
+        We invent it in our language.
+        A group can't walk.
+    - The whole is greater than the parts?
+        - The value that someone produce alone is less than the value he produces with his coworkers?
+        - But social loafing? Bigger team mean less work per person?
+        - Companies exist.
+            - It shows that owning a company can be profitable.
+    - Define: To *employ* someone is to find/give him things to do.
+    - A profitable-company owner employs its employees better than those employees employ themselves.
+    - If employees could find great things to do, they will own a company, not work for a company.
+    - To employ is to exploit.
+        - A company owner who doesn't exploit his employees enough will run out of money.
+        - A company owner who exploits his employees too much will run out of employees.
+        - "Exploit" there is the same "exploit" in "exploiting natural resources".
+            - [Wiktionary:exploit](https://en.wiktionary.org/wiki/exploit#Verb): "to use for one's own advantage"
+- Does Patreon work?
+    - For investors?
+    - For creators?
+    - For patrons?
+    - https://theoutline.com/post/2571/no-one-makes-a-living-on-patreon

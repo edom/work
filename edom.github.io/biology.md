@@ -76,3 +76,4 @@ Distraction osteogenesis. Breaking the leg bones. Undesirable side effects.
     - Ampulex compressa, Periplaneta americana
         - https://en.wikipedia.org/wiki/Alien_(creature_in_Alien_franchise)
 - Is nattokinase real? https://www.healthyhabits.com/hh_news/warfarin-rat-poison-riches/
+- Squatting undoes sitting damage?

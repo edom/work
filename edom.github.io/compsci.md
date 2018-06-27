@@ -2,6 +2,7 @@
 title: Computer science
 date: 2018-04-15 00:00 +0700
 permalink: /compsci.html
+mathjax: yes
 ---
 
 - [Functional programming research]({% link functional_programming.md %})
@@ -33,6 +34,9 @@ permalink: /compsci.html
     - Brzozowski quotients.
         - [Yacc is dead](https://arxiv.org/abs/1010.5023)
         - "Parsing with derivatives"
+- I thought lambda calculus could be summarized in one page, but Henk Barendregt wrote hundreds of pages about it. Is there more to lambda calculus than it seems?
+    - 1994, 50 pages, http://www.nyu.edu/projects/barker/Lambda/barendregt.94.pdf
+    - 1991, 190 pages, https://people.mpi-sws.org/~dreyer/tor/papers/barendregt.pdf
 - Undigested
     - [CSTSE 17502: What is a simple toy research programming language that has simple denotational semantics?](https://cstheory.stackexchange.com/questions/17502/a-simple-programming-language)
     - [Fast Approximate Matrix Multiplication by Solving Linear Systems](https://arxiv.org/abs/1408.4230)
@@ -66,6 +70,66 @@ permalink: /compsci.html
     Software reengineering tools?
     Eclipse Modeling Framework?
     LLVM?
+    - 2018-06-27 an idea about coercive subtyping with "maximally free" coercion function
+        - "\\( A \le B \\)" means "\\( A \\) is a subtype of \\( B \\)".
+        - \\( A \\) is a subtype of \\( B \\) iff we can write a *maximally free* function \\( g : A \to B \\).
+        - What is a *maximally free* function?
+            - It doesn't use anything more than parameters, data constructors, abstraction, and application.
+            - It is the one that uses the most parameters among all free functions with the same type.
+            - Examples:
+                - \\( x \mapsto x + 1 \\) is not free for any types because it uses + and 1.
+                - \\( (x,y) \mapsto x \\) for type \\( \forall a, b : (a,b) \to a \\)
+                is free because it's the only possible function
+                - \\( x \mapsto Just(x) \\) for type \\( \forall a : a \to Maybe(a) \\) is free.
+                - \\( x \mapsto Nothing \\) for that type is also free, but not maximal,
+                but is maximally free for \\( \forall a, b : a \to Maybe(b) \\).
+                - How about \\( a <_? (a,a) \\)?
+                There are more than one maximally free function with that type.
+                Thus \\( a \\) is *not* a subtype of \\( (a,a) \\).
+                But \\( a \\) is a subtype of \\( (a,b) \\) if \\( a \not< b \\).
+                This is strange?
+        - Example:
+            - Every type \\( a \\) is a subtype of \\( (a,b) \\) because the maximally free coercion function is unambiguous: \\( (x,y) \mapsto x \\).
+            - Every type \\( a \\) is a subtype of \\( Maybe(a) \\) because the maximally free coercion function is unambiguous: \\( x \mapsto Just(x) \\).
+            - Let \\( f : Type \to Type \\) be a functor.
+            Then every type \\( a \\) should be a subtype of \\( f(a) \\)
+            with the coercion function \\( x \mapsto Pure(x) \\).
+        - It's coercive subtyping, but the coercion function has to be free.
+            - A la Haskell Djinn, for a given type, there should be only one such free function.
+            - https://en.wikipedia.org/wiki/Subtyping#Coercions
+        - https://en.wikipedia.org/wiki/Liskov_substitution_principle
+    - Hierarchy of type systems?
+        - Hierarchy of lambda calculuses?
+            - https://cstheory.stackexchange.com/questions/8234/is-there-an-expressiveness-hierarchy-for-type-systems
+            - https://en.wikipedia.org/wiki/Lambda_cube
+
+    - What are the refinements of System F?
+        - https://en.wikipedia.org/wiki/System_F
+        - What is System F-omega?
+        - What is System F with subtyping?
+    - Hierarchy of programming language semantics?
+        - https://en.wikipedia.org/wiki/Semantic_spectrum ?
+    - Hierarchy of formal languages
+        - https://en.wikipedia.org/wiki/Chomsky_hierarchy
+        - Hierarchy of machines recognizing those languages?
+            - https://www.reddit.com/r/compsci/comments/35w0du/a_question_about_formal_language_and_automata/
+        - https://en.wikipedia.org/wiki/Expressive_power_(computer_science)
+        - 1991, Felleisen, "On the expressiveness of programming languages"
+            - 1989, Hoare, "The varieties of programming languages"
+            - 1988, Williams, "On the formalization of semantic conventions"
+    - Compiler construction
+        - From grammar description, the machine should generate both a parser and a pretty-printer.
+            - [LTU: Invertible Syntax Descriptions: Unifying Parsing and Pretty Printing](http://lambda-the-ultimate.org/node/4191)
+            - [Invertible Syntax Descriptions: Unifying Parsing and Pretty Printing](http://www.informatik.uni-marburg.de/~rendel/unparse/rendel10invertible.pdf)
+    - Unread
+        - http://fsl.cs.illinois.edu/index.php/Programming_Language_Design_and_Semantics
+        - zig is better than go?
+            - [HN: Zig: a system language which prioritizes optimality, safety, and readability](https://news.ycombinator.com/item?id=12378922)
+- Unread
+    - https://lukepalmer.wordpress.com/2013/03/12/constructions-on-typeclasses-part-1-f-algebras/
+    - K language http://fsl.cs.illinois.edu/index.php/Programming_Language_Design_and_Semantics
+    - https://en.wikipedia.org/wiki/Refal
+    - https://en.wikipedia.org/wiki/Extensible_programming
 - Is there a semantics-first/semantics-driven programming language design?
 - https://github.com/qorelanguage/qore
 - https://github.com/PistonDevelopers/dyon

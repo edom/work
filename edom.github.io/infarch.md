@@ -15,3 +15,5 @@ date: 2016-01-01 00:00:00 +0700
     Put text banners indicating categories.
     Let them ask anyone with uniform.
 - We will confuse users if we dump all information in one page.
+- LATCH: Location, Alphabet, Time, Category, or Hierarchy
+    - https://uxplanet.org/design-principle-organizing-information-343a7ef936a8

@@ -224,3 +224,6 @@ mathjax: yes
     - https://blog.feedspot.com/physics_blogs/
 - high-energy physics information system
     - https://inspirehep.net/
+- Unchecked physical theories? Non-mainstream? Suspicious? Not yet mainstream or will never be mainstream?
+    - http://www.unifiedphysics.com/
+- 2018 quantum entanglement size record: trillions of atoms? https://www.youtube.com/watch?v=LAvfPof1ySI

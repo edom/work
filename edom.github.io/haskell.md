@@ -60,3 +60,8 @@ language: en
 - https://stackoverflow.com/questions/15662984/speed-up-compilation-in-ghc?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 - https://www.reddit.com/r/haskell/comments/45q90s/is_anything_being_done_to_remedy_the_soul/
 - [Haddock markup syntax](https://www.haskell.org/haddock/doc/html/ch03s08.html)
+- metaprogramming from Haskell to Haskell
+    - [Strathclyde Haskell Enhancement](https://personal.cis.strath.ac.uk/conor.mcbride/pub/she/)
+    - Template Haskell
+    - https://wiki.haskell.org/Generics
+        - SYB (Scrap Your Boilerplate), uniplate, etc.

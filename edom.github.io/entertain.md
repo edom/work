@@ -253,3 +253,6 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
     - Reliant Robin
         - <A HREF="https://www.youtube.com/watch?v=QQh56geU0X8">Rolling a Reliant Robin - Top Gear - BBC - YouTube</A>
 - [Bill Nye makes fun of Neil deGrasse Tyson's reply to Dawkins, making Lawrence Krauss glad](https://www.youtube.com/watch?v=n0-jKmcNr_8)
+- parody
+    - [GOKU MAKES A SANDWICH](https://www.youtube.com/watch?v=0T7dLaqKtTY)
+    - [MICHAEL BAY'S EVANGELION](https://www.youtube.com/watch?v=FckkZihQUaU)
