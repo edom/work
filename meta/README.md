@@ -180,3 +180,16 @@
 - [WP:lambda-prolog](https://en.wikipedia.org/wiki/%CE%9BProlog)
 - Safely Composable Type-Specific Languages https://www.cs.cmu.edu/~aldrich/papers/ecoop14-tsls.pdf
 - Subpages
+- Should we use Haskell or TypeScript for this project? Both? Neither?
+    - Killer features
+        - IDE: TypeScript wins (VS Code).
+        - custom infix operators: Haskell wins.
+            - We can go even wilder with Agda, Coq, Idris, Lean, etc.
+        - untagged unions: TypeScript wins.
+        - software diversity: TypeScript wins.
+            - TypeScript works with nodejs and npm. Boatloads of software.
+            - I think TypeScript has more developers.
+        - laziness
+            - Haskell wins.
+    - Both have
+        - ADTs.

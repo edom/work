@@ -1,5 +1,11 @@
+- A goal of programming language research is to make a better programming language?
+    - Do more with less.
+    - *The* ultimate best programming language?
 - Every functional programming language is lambda calculus plus plus.
+- Computer (machine) is embodied formal system.
+    - Assume no hardware fault.
 - Software is executable mathematics.
+- A program is an executable formal system.
     - Can we formalize this using Grue's map theory?
         - Could this be as revolutionary as types-as-propositions (Curry-Howard correspondence) that enables proof assistants?
         - How is "false" represented?
@@ -168,13 +174,42 @@
         - http://conal.net/blog/posts/semantic-editor-combinators
     - [Salon des Refusés 2017](https://2017.programmingconference.org/track/refuses-2017)
     - [github.com/PyCQA/baron](https://github.com/PyCQA/baron): "IDE allow you to refactor code, Baron allows you to write refactoring code."
-- Haskell supercompilation?
-    - GHC
-    - Supero
-    - Morte
-        - https://github.com/Gabriel439/Haskell-Morte-Library
-            - "Morte is a super-optimizing intermediate language for functional languages."
-        - http://www.haskellforall.com/2014/09/morte-intermediate-language-for-super.html
+- Haskell
+    - language change proposals
+        - Auto-lifting (and therefore sequencing) of function application involving Monad instances
+            - The standard rule is:
+                - If `x : a` and `f : a -> b`, then `f x : b`.
+            - Suppose that `m` has a Monad instance.
+                - If `x : m a` and `f : a -> b`, then should the compiler silently translate `f x` to `x >>= return . f`?
+                    - Isn't it the only desirable way of putting together `f` and `x`?
+                        - Monad class requires that `x >>= return . f` be equivalent to `fmap f x`.
+                            - So there is really only one way to do it, isn't it?
+                        - Examples of non-desirable ways: `unsafeCoerce`, `undefined`.
+                - Should the compiler also appropriately translate `f x` for all these combinations?
+                    - Possibilities for the type of `x`:
+                        - `a`
+                        - `m a`
+                    - Possibilities for the type of `f`:
+                        - `a -> b`
+                        - `a -> m b`
+                        - `m (a -> b)`
+                        - `m a -> m b`
+                        - `m a -> b`
+            - At first glance it seems convenient, but what are the consequences?
+                - Some I can think of
+                    - Confusing error message
+                        - Suppose:
+                            - The programmer makes a typing mistake.
+                            - The compiler infers the wrong type.
+                            - The compiler performs translation based on the wrongly inferred type.
+                            - The compiler produces a confusing error message.
+    - Haskell supercompilation?
+        - GHC
+        - Supero
+        - Morte
+            - https://github.com/Gabriel439/Haskell-Morte-Library
+                - "Morte is a super-optimizing intermediate language for functional languages."
+            - http://www.haskellforall.com/2014/09/morte-intermediate-language-for-super.html
 - Make a programming language.
     - For writing metaprograms.
         - Must have clear semantics.
@@ -358,3 +393,7 @@ My = module {
         - visual programming language
             - blocks language
                 - https://harc.ycr.org/project/gp/
+- What I think Haskell gets wrong
+    - Template Haskell
+        - Instead, we should have a metaprogramming library, and generate hs files.
+    - GHC is too slow.
