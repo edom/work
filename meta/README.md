@@ -14,6 +14,7 @@
             - Java Enterprise Edition (Java EE), except Servlet API.
 - Assumptions
     - The user of this library is programmer / developer / software engineer.
+    - Small changes are more likely to be accepted and persisted than big changes.
 - Directory structure
     - Non-generated files
         - `src`: Haskell source files
@@ -24,7 +25,22 @@
     - Generated files
         - `src1`: stage-1 Haskell source files
 - Plans
-    - Read tables from postgresql information_schema.
+    - Small changes that are likely to be accepted.
+        - Generate Java entity class from PostgreSQL information_schema or DDL statements.
+            - Decision:
+                - Parse DDL statements, don't connect to database.
+            - Choose:
+                - Parse SQL DDL statements from a file (manually written, or dumped from database).
+                    - Pros:
+                        - More secure: The program doesn't need the database credentials.
+                    - Cons:
+                        - Need to write an SQL parser.
+                - Connect to database.
+                    - Pros:
+                        - Doesn't need SQL DDL file.
+                            - But the DDL file can be generated easily from the database anyway ("dump schema" option).
+                    - Cons:
+                        - How standard is information_schema?
     - Add a type parameter to Query.
     - Pretty URL (URL path component instead of GET parameters)?
     - Refactoring, maintainability/usability improvements
