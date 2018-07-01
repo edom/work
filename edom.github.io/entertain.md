@@ -256,3 +256,4 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
 - parody
     - [GOKU MAKES A SANDWICH](https://www.youtube.com/watch?v=0T7dLaqKtTY)
     - [MICHAEL BAY'S EVANGELION](https://www.youtube.com/watch?v=FckkZihQUaU)
+    - [Jackie Chan in Street Fighter](https://www.youtube.com/watch?v=Z4Psls1ngwM), from "City Hunter"
