@@ -8,3 +8,6 @@
         - Hide the ugliness behind a newtype hidden in a module.
         - Assume that GHC inlines well.
     - [site](site/)
+- Knowledge base
+    - Haskell
+        - [Cabal tragedies](cabal.md)

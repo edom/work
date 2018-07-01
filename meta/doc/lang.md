@@ -366,6 +366,13 @@ My = module {
                     - Isn't JNI a bigger security hole?
     - What others think Java gets wrong
         - http://tech.jonathangardner.net/wiki/Why_Java_Sucks
+    - What I'm not sure about Java
+        - Why type erasure?
+            - C# 2.0 introduced generics, without type erasure, while maintaining backward compatibility.
+                - Duplicating everything in System.Collections to System.Collections.Generic is ugly, but it's less ugly than type erasure.
+                - https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-version-history
+                - https://stackoverflow.com/questions/11436802/how-are-c-sharp-generics-implemented
+                    - https://blogs.msdn.microsoft.com/ericlippert/2009/07/30/whats-the-difference-part-one-generics-are-not-templates/
 - What I think every procedural programming language (Java, C, C++, Go, Python, Ruby) gets wrong, except JavaScript
     - Functions should be first-class. Methods should not exist. Fields are enough.
     - It should be possible to assign to methods.
@@ -396,4 +403,22 @@ My = module {
 - What I think Haskell gets wrong
     - Template Haskell
         - Instead, we should have a metaprogramming library, and generate hs files.
-    - GHC is too slow.
+    - Build is too slow.
+        - Where should we fix this? GHC? Cabal?
+- What I think every imperative programming language gets wrong
+    - Statements vs expressions
+        - Statement should not exist. Only expressions should.
+            - Eclipse Xtend does this right.
+                - https://www.eclipse.org/xtend/documentation/203_xtend_expressions.html
+            - We can use lambda calculus for imperative programming.
+                - Treat the statement separator (here we use semicolon `;`)
+                as an operator (function with infix syntax)
+                that sequences the effects of two expressions.
+                    - For example:
+                        - Let `a` be an expression.
+                        - Let `b` be an expression.
+                        - Thus `a;b` is an expression.
+                        - The value of `a;b` is the value of `b`.
+                        - The effect of `a;b` is the effect of `a` followed by the effect of `b`.
+                    - Semicolon is associative: `(a;b);c = a;(b;c)`. This also holds for the effects.
+            - Can we replace statements with expressions in existing imperative languages without breaking backward compatibility?
