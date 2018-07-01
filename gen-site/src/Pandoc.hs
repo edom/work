@@ -1,6 +1,6 @@
 module Pandoc where
 
-import qualified Data.Set as Set
+import qualified Data.Text as Text
 
 import qualified Network.URI as Uri
 
@@ -14,21 +14,21 @@ import qualified Hakyll as H
 
 -- * Generalized read and write
 
-readMarkdown :: (Monad m) => String -> m P.Pandoc
+readMarkdown :: (P.PandocMonad m) => String -> m P.Pandoc
 readMarkdown input =
-    either (fail . show) return $ P.readMarkdown readerOptions input
+    P.readMarkdown readerOptions (Text.pack input)
 
 readerOptions :: P.ReaderOptions
 readerOptions = H.defaultHakyllReaderOptions
     {
-        P.readerExtensions = Set.union
-            (Set.fromList [P.Ext_tex_math_single_backslash, P.Ext_tex_math_dollars, P.Ext_latex_macros])
-            (P.readerExtensions H.defaultHakyllReaderOptions)
+        P.readerExtensions =
+            P.extensionsFromList [P.Ext_tex_math_single_backslash, P.Ext_tex_math_dollars, P.Ext_latex_macros]
+            `mappend` P.readerExtensions H.defaultHakyllReaderOptions
     }
 
 readMarkdownFile :: FilePath -> IO P.Pandoc
 readMarkdownFile path =
-    IS.readFile path >>= readMarkdown
+    IS.readFile path >>= P.runIOorExplode . readMarkdown
 
 -- * Demoting headers
 
@@ -40,13 +40,22 @@ demoteHeaders :: P.Pandoc -> P.Pandoc
 demoteHeaders = Ps.headerShift 1
 
 writeHtml :: P.Pandoc -> String
-writeHtml = P.writeHtmlString writerOptions
+writeHtml = writeHtmlString writerOptions
+
+-- FIXME migrate from pandoc 1 to pandoc 2.
+writeHtmlString :: P.WriterOptions -> P.Pandoc -> String
+writeHtmlString opts doc = Text.unpack $ unsafeIgnoreError $ P.writeHtml5String opts doc
+
+unsafeIgnoreError :: P.PandocPure a -> a
+unsafeIgnoreError m = case P.runPure m of
+    Left e -> error $ show e
+    Right x -> x
+-- end fixme
 
 writerOptions :: P.WriterOptions
 writerOptions = H.defaultHakyllWriterOptions
     {
-        P.writerHtml5 = True
-        , P.writerHTMLMathMethod = P.MathJax ""
+        P.writerHTMLMathMethod = P.MathJax ""
     }
 
 -- * Pandoc

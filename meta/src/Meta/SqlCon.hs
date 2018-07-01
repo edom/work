@@ -1,4 +1,8 @@
+{-# LANGUAGE CPP #-}
+
 module Meta.SqlCon where
+
+#ifdef HAVE_postgresql
 
 import qualified Control.Monad as M
 
@@ -62,3 +66,11 @@ test = do
                 "information_schema"
                 , "pg_catalog"
             ]
+
+#else
+
+test :: IO ()
+test = do
+    putStrLn "Meta.SqlCon.test: not implemented, not compiled with PostgreSQL support"
+
+#endif

@@ -109,8 +109,9 @@ resolve
     -> Dic
     -> I.Template
     -> IO ResolvedTemplate
-resolve templatePath dic = go 0 . I.unTemplate
+resolve templatePath dic template = go 0 (I.unTemplate template)
     where
+        go :: Int -> [I.TemplateElement] -> IO ResolvedTemplate
         go depth _ | depth >= (8 :: Int) =
             fail $ "Template: " ++ templatePath ++ ": a $partial$ is nesting too deeply; maybe there is a cycle"
         go _ [] = return []
@@ -120,12 +121,12 @@ resolve templatePath dic = go 0 . I.unTemplate
                 I.Expr e -> return [Expr e]
                 I.Escaped -> return [Escaped]
                 I.If e t mf -> do
-                    t' <- go depth $ I.unTemplate t
-                    mf' <- maybe (return Nothing) (fmap Just . go depth . I.unTemplate) mf
+                    t' <- go depth t
+                    mf' <- maybe (return Nothing) (fmap Just . go depth) mf
                     return [If e t' mf']
                 I.For e b ms -> do
-                    b' <- go depth $ I.unTemplate b
-                    ms' <- maybe (return Nothing) (fmap Just . go depth . I.unTemplate) ms
+                    b' <- go depth b
+                    ms' <- maybe (return Nothing) (fmap Just . go depth) ms
                     return [For e b' ms']
                 I.Partial pathexpr -> do
                     path <- applyExpr dic pathexpr >>= wantLiteral pathexpr

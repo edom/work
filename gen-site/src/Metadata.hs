@@ -8,11 +8,13 @@ module Metadata
 where
 
 import qualified Data.List as L
+
 import qualified Data.Map.Lazy as Map
 
 import qualified Text.Pandoc as P
 
 import qualified Dictionary as D
+import qualified Pandoc as Pan
 
 type Metadata = Map.Map String Value
 
@@ -50,7 +52,8 @@ fromPandocMetaValue = \case
     -- FIXME
     y -> String $ show y
     where
-        write blocks = P.writeHtmlString P.def $ P.Pandoc P.nullMeta blocks
+        write :: [P.Block] -> String
+        write blocks = Pan.writeHtmlString P.def $ P.Pandoc P.nullMeta blocks
 
 -- * Standard metadata
 

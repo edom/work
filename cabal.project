@@ -1,4 +1,5 @@
 packages:
+    gen-site/
     haji/
     meta/
     pragmatic/
@@ -7,11 +8,27 @@ packages:
 program-options
     ghc-options: -j +RTS -A256m -n2m -RTS
 
-allow-newer:
-    Cabal
-
 executable-dynamic: True
 library-vanilla: False
-profiling: True
+optimization: False
+profiling: False
 relocatable: True
 shared: True
+documentation: False
+
+-- Workarounds for build failures.
+
+-- Haddock complains: there are no input files.
+package bytestring-builder
+    documentation: False
+
+-- Every package used by Setup.hs must have a vanilla version.
+
+package cabal-doctest
+    library-vanilla: True
+
+package old-time
+    library-vanilla: True
+
+package old-locale
+    library-vanilla: True

@@ -19,7 +19,9 @@ flag postgresql
     description:
         Enable connecting to PostgreSQL using HDBC-postgresql.
         Requires package libpq-dev on Ubuntu 14.04.
-    default: True
+        Uses HDBC-postgresql.
+        2018-07-01: This is disabled because HDBC-postgresql-2.3.2.5 doesn't work with Cabal 2.
+    default: False
 
 flag stage1
     description: Include stage1.
@@ -101,3 +103,5 @@ library
     if flag(postgresql)
         build-depends:
             HDBC-postgresql >= 2
+        cpp-options:
+            -DHAVE_postgresql
