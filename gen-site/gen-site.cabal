@@ -1,0 +1,54 @@
+name: gen-site
+version: 0.0.0
+synopsis: Generate static site
+description: See README.md
+homepage: https://github.com/edom/gen-site
+license: BSD3
+license-file: LICENSE
+author: Erik Dominikus
+maintainer: software@spacetimecat.com
+copyright: 2016 Erik Dominikus
+category: Web
+build-type: Simple
+cabal-version: >= 1.10
+
+library
+    default-language: Haskell2010
+    ghc-options:
+        -Wall
+        -threaded
+    hs-source-dirs:
+        src
+    exposed-modules:
+        Dictionary
+        Dependency
+        Feed
+        File
+        Item
+        Metadata
+        Pandoc
+        Procedural
+        Route
+        Site
+        Sitemap
+        Template
+    build-depends:
+        base < 5
+        , clay
+        , containers
+        , directory
+        , filepath
+        , hakyll
+        , network-uri
+        , pandoc
+        , pandoc-types >= 1.16
+        , pragmatic >= 0.3.2
+        , process
+        , raw-strings-qq
+        , strict
+        , time
+        , transformers
+
+source-repository head
+  type: git
+  location: https://github.com/edom/gen-site
