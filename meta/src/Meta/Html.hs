@@ -2,6 +2,25 @@ module Meta.Html where
 
 import Prelude hiding (concat, seq)
 
+{- |
+Thoughts on 'Elm' constructor:
+
+An attribute is a child node of an element.
+
+Pros:
+
+* This gives rise to uniform syntax for adding attributes and elements.
+Example: @anElem [atr key1 val1, ..., childElem1, ...]@ is more uniform than @anElem [atr key1, val1] [childElem1, ...]@.
+See 'mk_atr'.
+
+Cons:
+
+* This complicates rendering.
+See 'get_atrs'.
+
+We could define @Elm Name [Atr] a@ instead of @Elm Name (Html a)@.
+An attribute would then be a /property/ of an element instead of a /child/ of an element.
+-}
 data Html a
     = Empty
     | Pure a

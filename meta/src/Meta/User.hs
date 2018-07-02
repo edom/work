@@ -69,12 +69,15 @@ module Meta.User (
     -- ** Generate application
     , generate_java
     , get_pom_xml_dir
-    -- * Content language
+    -- ** Generate command-line interface for controlling the application
+    , command_line
+    -- * Route language
     , Page
     , get
     , post
     , Content_type
     , set_content_type
+    -- * Content language
     , Content
     , raw
     , seq
@@ -82,14 +85,20 @@ module Meta.User (
     , Url
     , link_internal
     , tabulate
+    , form_for_insert
     , Java_resource_path
     , java_resource
     -- ** HTML subset
-    , h1
-    , Atr
-    , atr
     , Html_doc
     , C_html(..)
+    -- *** Element
+    , Tag
+    , elm
+    -- **** Predefined
+    , h1
+    -- *** Attribute
+    , Atr
+    , atr
     -- * Query language
     , Query
     , from
@@ -136,6 +145,7 @@ module Meta.User (
 import Prelude hiding (seq)
 
 import qualified Data.List as L
+import qualified System.Environment as Env
 
 import qualified Meta.Cbp as C
 import qualified Meta.Data as D
@@ -364,6 +374,37 @@ generate_java app_without_runtime = do
 get_pom_xml_dir :: App -> FilePath
 get_pom_xml_dir app = JWA._output_prefix app F.</> get_artifact_id app
 
+{- |
+Command line for controlling the application and related common tasks.
+-}
+command_line :: App -> IO ()
+command_line app = do
+    Env.getArgs >>= parse >>= run
+    where
+        parse :: (Monad m) => [String] -> m Command
+        parse args = case args of
+            [] -> pure Nop
+            "help" : rest -> CmdSeq Help <$> parse rest
+            "generate" : rest -> CmdSeq (Generate app) <$> parse rest
+            "recompile" : rest -> CmdSeq (Recompile app) <$> parse rest
+            _ -> fail $ "Invalid arguments: " ++ show args
+        run :: Command -> IO ()
+        run cmd = case cmd of
+            Nop -> return ()
+            Help -> putStr $
+                "Commands: help, generate, recompile."
+            CmdSeq a b -> run a >> run b
+            Generate ap -> generate_java ap
+            Recompile ap -> maven_recompile ap
+
+data Command
+    = Nop
+    | Help
+    | Generate App
+    | Recompile App
+    | CmdSeq Command Command
+    deriving (Read, Show)
+
 type Page = W.Page
 
 get :: Url -> Content -> Page
@@ -400,17 +441,41 @@ type Url = W.Url
 link_internal :: Url -> Content -> Content
 link_internal = W.CLink
 
--- | Generate view for query.
+-- | Table view for query.
 tabulate :: D.Query -> Content
 tabulate = W.CView
+
+-- | Form for inserting a row into the table.
+form_for_insert :: D.Table -> Content
+form_for_insert table = elm "form" [
+        atr "method" "POST"
+        , atr "action" action
+        , p [text "To be implemented."]
+    ]
+    where
+        action = component m_ds_field ++ component m_schema ++ "/" ++ name ++ "/insert"
+        component :: Maybe String -> String
+        component = maybe "" ("/" ++)
+        m_ds_field = D.t_DataSource_field_name table
+        m_schema = D.t_get_schema table
+        name = D.t_get_name table
 
 type Java_resource_path = W.Java_resource_path
 
 java_resource :: Java_resource_path -> Content
 java_resource = W.CJavaRes
 
+type Tag = Html.Name
+
+-- | @elm tag children@ represents HTML element with tag name @tag@ and children @children@.
+elm :: Tag -> [Content] -> Content
+elm = W.html_elm
+
 h1 :: [Content] -> Content
-h1 = W.html_elm "h1"
+h1 = elm "h1"
+
+p :: [Content] -> Content
+p = elm "p"
 
 type Atr = Html.Atr
 

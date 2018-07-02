@@ -210,6 +210,10 @@
             - https://github.com/Gabriel439/Haskell-Morte-Library
                 - "Morte is a super-optimizing intermediate language for functional languages."
             - http://www.haskellforall.com/2014/09/morte-intermediate-language-for-super.html
+    - Dependency management
+        - https://wiki.haskell.org/The_Monad.Reader/Issue2/EternalCompatibilityInTheory
+            - It applies to all software, not only Haskell ones.
+        - [Michael Snoyman's personal take on PVP version upper bounds](https://gist.github.com/snoyberg/f6f10cdbea4b9e22d1b83e490ec59a10)
 - Make a programming language.
     - For writing metaprograms.
         - Must have clear semantics.
