@@ -142,8 +142,9 @@ module Meta.User (
     , sc_Show
 ) where
 
-import Prelude hiding (seq)
+import Prelude hiding (seq, span)
 
+import qualified Control.Applicative as A
 import qualified Data.List as L
 import qualified System.Environment as Env
 
@@ -317,58 +318,48 @@ What is generated:
         * sql\/create.sql: SQL DDL statements
 -}
 generate_java :: App -> IO ()
-generate_java app_without_runtime = do
-    mapM_ file_write_verbose files
-    where
-        app :: App
-        app = app_without_runtime
-            |> add_dependencies (dep_runtime : deps_third_party)
-            |> (\ app_ -> set_dependencies (L.sort $ get_dependencies app_) app_)
-
-        dep_runtime = compile "com.spacetimecat" "meta-rt-java" runtime_version
+generate_java app_without_runtime =
+    let
+        app = add_runtime_dependency app_without_runtime |> sort_dependencies
+        files = F.prepend_dir (get_pom_xml_dir app) <$> ([pom_xml_file] ++ java_files ++ sql_files)
             where
-                runtime_version = "0.0.0"
+                pom_xml_file = F.text "pom.xml" $ X.render_doc $ M.to_pom_xml project
+                project = JWA._project app
 
+        tables = JWA.aTables app
+
+        java_files = F.prepend_dir "src/main/java" . JR.render_class_file <$> classes
+            where
+                cbp_dto_classes = C.map_class_name (JWA._dto_class_name_prefix app ++) . C.gen_dto <$> tables
+                dto_classes = C.toJavaClass <$> cbp_dto_classes
+                servlet_class = JWA.get_java_servlet_class app
+                classes = J.set_pkg (JWA._package app) <$> (dto_classes ++ [servlet_class])
+
+        sql_files = F.prepend_dir "sql" <$> [F.text "create.sql" sql_ddl]
+            where
+                sql_ddl = generate_sql_ddl tables
+    in
+        mapM_ file_write_verbose files
+    where
+        sort_dependencies :: App -> App
+        sort_dependencies app = set_dependencies (L.sort $ get_dependencies app) app
+
+add_runtime_dependency :: App -> App
+add_runtime_dependency = add_dependencies (dep_runtime : deps_third_party)
+    where
+        runtime_version = "0.0.0"
+        jetty_version = "9.4.11.v20180605"
+        dep_runtime = compile "com.spacetimecat" "meta-rt-java" runtime_version
         deps_third_party = [
                 compile "javax.inject" "javax.inject" "1"
                 , compile "javax.servlet" "javax.servlet-api" "3.1.0"
-
-                -- Java logging framework implementing SLF4J
-                , compile "ch.qos.logback" "logback-classic" "1.2.3"
-
-                -- Java dependency injection framework
-                , compile "com.google.inject" "guice" "4.0"
-
-                -- JDBC connection pool
-                , compile "com.zaxxer" "HikariCP" "2.7.8"
-
-                -- Java HTTP server
-                , compile "org.eclipse.jetty" "jetty-server" jetty_version
-
-                -- Jetty implementation of Java Servlet API
-                , compile "org.eclipse.jetty" "jetty-servlet" jetty_version
-
-                -- PostgreSQL JDBC driver
-                , compile "org.postgresql" "postgresql" "42.2.2"
+                , compile "ch.qos.logback" "logback-classic" "1.2.3" -- logging framework implementing SLF4J
+                , compile "com.google.inject" "guice" "4.0" -- dependency injection framework
+                , compile "com.zaxxer" "HikariCP" "2.7.8" -- JDBC connection pool
+                , compile "org.eclipse.jetty" "jetty-server" jetty_version -- HTTP server
+                , compile "org.eclipse.jetty" "jetty-servlet" jetty_version -- Jetty implementation of Servlet API
+                , compile "org.postgresql" "postgresql" "42.2.2" -- PostgreSQL JDBC driver
             ]
-            where
-                jetty_version = "9.4.11.v20180605"
-
-        project = JWA._project app
-
-        files = F.prepend_dir (get_pom_xml_dir app) <$> ([pom_xml_file] ++ java_files ++ sql_files)
-
-        pom_xml_file = F.text "pom.xml" $ X.render_doc $ M.to_pom_xml project
-
-        java_files = F.prepend_dir "src/main/java" . JR.render_class_file <$> java_classes
-        cbp_dto_classes = C.map_class_name (JWA._dto_class_name_prefix app ++) . C.gen_dto <$> tables
-        tables = JWA.aTables app
-        java_dto_classes = C.toJavaClass <$> cbp_dto_classes
-        java_servlet_class = JWA.get_java_servlet_class app
-        java_classes = J.set_pkg (JWA._package app) <$> (java_dto_classes ++ [java_servlet_class])
-
-        sql_files = F.prepend_dir "sql" <$> [F.text "create.sql" sql_ddl]
-        sql_ddl = generate_sql_ddl tables
 
 -- | Path to the directory containing the pom.xml.
 get_pom_xml_dir :: App -> FilePath
@@ -392,7 +383,7 @@ command_line app = do
         run cmd = case cmd of
             Nop -> return ()
             Help -> putStr $
-                "Commands: help, generate, recompile."
+                "Commands: help, generate, recompile.\n"
             CmdSeq a b -> run a >> run b
             Generate ap -> generate_java ap
             Recompile ap -> maven_recompile ap
@@ -447,11 +438,11 @@ tabulate = W.CView
 
 -- | Form for inserting a row into the table.
 form_for_insert :: D.Table -> Content
-form_for_insert table = elm "form" [
-        atr "method" "POST"
-        , atr "action" action
-        , p [text "To be implemented."]
-    ]
+form_for_insert table = form $
+    [atr "method" "POST", atr "action" action]
+    ++ [p [text "(This form is not yet implemented.)"]]
+    ++ map input_for_column cols
+    ++ [input [atr "type" "submit", atr "value" ("Insert " ++ name)]]
     where
         action = component m_ds_field ++ component m_schema ++ "/" ++ name ++ "/insert"
         component :: Maybe String -> String
@@ -459,6 +450,17 @@ form_for_insert table = elm "form" [
         m_ds_field = D.t_DataSource_field_name table
         m_schema = D.t_get_schema table
         name = D.t_get_name table
+        cols = D.t_get_cols table
+
+input_for_column :: Column -> Content
+input_for_column col =
+    label [
+        span [atr "class" "title", text title]
+        , input [atr "type" "text", atr "name" name]
+    ]
+    where
+        name = D.c_get_name col
+        title = maybe name id $ D.c_long_title col A.<|> D.c_short_title col
 
 type Java_resource_path = W.Java_resource_path
 
@@ -476,6 +478,18 @@ h1 = elm "h1"
 
 p :: [Content] -> Content
 p = elm "p"
+
+span :: [Content] -> Content
+span = elm "span"
+
+form :: [Content] -> Content
+form = elm "form"
+
+label :: [Content] -> Content
+label = elm "label"
+
+input :: [Content] -> Content
+input = elm "input"
 
 type Atr = Html.Atr
 

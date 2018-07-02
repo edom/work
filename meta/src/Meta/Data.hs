@@ -34,6 +34,9 @@ c_get_nullable = I._nullable
 c_short_title :: Col -> Maybe String
 c_short_title = I.cShortTitle
 
+c_long_title :: Col -> Maybe String
+c_long_title = I.cLongTitle
+
 type Constraint = I.Constraint
 
 t_get_name :: Table -> Table_name

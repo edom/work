@@ -35,16 +35,18 @@ import qualified Meta.User as U
 -}
 
 main :: IO ()
-main = U.generate_java app
+main = U.command_line app
+
+app :: U.App
+app = U.app_empty
+    |> U.set_maven_coordinates "com.spacetimecat" "meta-example-java" "0.0.0"
+    |> U.set_package "com.spacetimecat.meta.example"
+    |> U.set_servlet_class_name "MySiteHttpServlet"
+    |> U.add_dependencies dependencies
+    |> U.add_injections injections
+    |> U.add_pages pages
+    |> U.set_tables all_tables
     where
-        app = U.app_empty
-            |> U.set_maven_coordinates "com.spacetimecat" "meta-example-java" "0.0.0"
-            |> U.set_package "com.spacetimecat.meta.example"
-            |> U.set_servlet_class_name "MySiteHttpServlet"
-            |> U.add_dependencies dependencies
-            |> U.add_injections injections
-            |> U.add_pages pages
-            |> U.set_tables all_tables
         dependencies = []
         injections =
             [
@@ -52,27 +54,30 @@ main = U.generate_java app
             ]
         pages =
             [
-                get "/" (
-                    U.html [
-                        U.link_internal "/customer" (U.text "Customers")
-                        , U.link_internal "/1" (U.text "page 1")
-                    ]
-                )
-                , get "/customer" (
-                    U.html [
-                        U.tabulate (U.from t_customer)
-                    ]
-                )
-                , get "/1" (U.text "this is page 1")
-                , U.get "/css/style.css" (
-                    U.java_resource "css/style.css"
-                ) |> U.set_content_type "text/css; charset=UTF-8"
+                get "/" [
+                    U.link_internal "/customer" (U.text "Customers")
+                    , U.link_internal "/1" (U.text "page 1")
+                ]
+                , get "/customer" [
+                    U.tabulate (U.from t_customer)
+                    , U.form_for_insert t_customer
+                ]
+                , get "/1" [U.text "this is page 1"]
+                , static "text/css; charset=UTF-8" "css/style.css"
             ]
         get url content =
             U.get url (
-                U.html [content]
+                U.html content
                 |> U.add_styles ["/css/style.css"]
             )
+        {- |
+@java_resource_path@ should not begin with slash.
+        -}
+        static content_type java_resource_path =
+            U.get url (U.java_resource java_resource_path)
+            |> U.set_content_type content_type
+            where
+                url = "/" ++ java_resource_path
 
 mk_table :: U.Table_name -> [U.Column] -> U.Table
 mk_table name cols =
