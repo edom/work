@@ -6,6 +6,7 @@ module Dictionary where
 import Prelude hiding (lookup)
 
 import qualified Control.Applicative as A
+import qualified Data.Semigroup as Sg
 import qualified Data.Monoid as Mo
 
 import qualified Data.Map.Lazy as Map
@@ -64,12 +65,14 @@ Add/override entries using the 'Mo.Monoid' instance.
 newtype Dictionary k v
     = MkDictionary { _unDictionary :: k -> Maybe v }
 
+instance Sg.Semigroup (Dictionary k v) where
+    (<>) (MkDictionary f) (MkDictionary g) =
+        MkDictionary $ \ k -> f k A.<|> g k
+
 -- This allows overriding entries.
 instance Mo.Monoid (Dictionary k v) where
-    mempty =
-        MkDictionary $ const $ fail "empty dictionary"
-    mappend (MkDictionary f) (MkDictionary g) =
-        MkDictionary $ \ k -> f k A.<|> g k
+    mempty = MkDictionary $ const $ fail "empty dictionary"
+    mappend = (<>)
 
 fromMap :: (Ord k) => Map.Map k v -> Dictionary k v
 fromMap m = MkDictionary $ \ k -> Map.lookup k m

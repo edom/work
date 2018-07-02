@@ -19,12 +19,12 @@ import qualified Haskell.Interpret.Expression as E
 class IsModule t where
     getDeclarations :: t -> [E.Decl]
 
-instance IsModule P.Module where
-    getDeclarations (P.Module _srcloc _name _pragmas _mWarning _mExports _imports decls) =
+instance (Show a) => IsModule (P.Module a) where
+    getDeclarations (P.Module _srcloc _name _pragmas _imports decls) =
         [
             E.MkDecl name (toExpr rhs)
             | P.PatBind _loc lhs rhs _binds <- decls
-            , P.PVar (P.Ident name) <- return lhs
+            , P.PVar _ (P.Ident _ name) <- return lhs
         ]
 
 class IsDecl t where
@@ -40,34 +40,35 @@ instance IsDecl E.Decl where
 class ToExpr t where
     toExpr :: t -> E.Expr
 
-instance ToExpr P.Rhs where
-    toExpr (P.UnGuardedRhs expr) = toExpr expr
+instance (Show a) => ToExpr (P.Rhs a) where
+    toExpr (P.UnGuardedRhs _ expr) = toExpr expr
     toExpr x = notImplemented x
 
-instance ToExpr P.Exp where
-    toExpr (P.App f x) = E.App (toExpr f) (toExpr x)
-    toExpr (P.Var (P.UnQual (P.Ident x))) = E.Var x
-    toExpr (P.InfixApp x op y) = E.App (E.App (toExpr op) (toExpr x)) (toExpr y)
-    toExpr (P.Lit x) = toExpr x
+instance (Show a) => ToExpr (P.Exp a) where
+    toExpr (P.App _ f x) = E.App (toExpr f) (toExpr x)
+    toExpr (P.Var _ (P.UnQual _ (P.Ident _ x))) = E.Var x
+    toExpr (P.InfixApp _ x op y) = E.App (E.App (toExpr op) (toExpr x)) (toExpr y)
+    toExpr (P.Lit _ x) = toExpr x
     toExpr x = notImplemented x
 
-instance ToExpr P.QOp where
-    toExpr (P.QVarOp (P.UnQual (P.Symbol x))) = E.Var x
+instance (Show a) => ToExpr (P.QOp a) where
+    toExpr (P.QVarOp _ (P.UnQual _ (P.Symbol _ x))) = E.Var x
     toExpr x = notImplemented x
 
+notImplemented :: (Show a) => a -> E.Expr
 notImplemented x = E.Err $ "not implemented: toExpr " ++ show x
 
-instance ToExpr P.Literal where
-    toExpr (P.Int x) | x == up = E.Int down
+instance (Show a) => ToExpr (P.Literal a) where
+    toExpr (P.Int _ x _) | x == up = E.Int down
         where
             down :: Int
             down = fromIntegral x
             up :: Integer
             up = fromIntegral down
-    toExpr (P.Int x) = E.Err $ "integer overflow while downsizing Integer into Int:" ++ show x
+    toExpr (P.Int _ _ s) = E.Err $ "integer overflow while downsizing Integer into Int:" ++ s
     toExpr x = notImplemented x
 
-sloppyParseFile :: FilePath -> IO P.Module
+sloppyParseFile :: FilePath -> IO (P.Module P.SrcSpanInfo)
 sloppyParseFile path = P.fromParseResult <$> P.parseFile path
 
 -- TODO encode a module as a @(String -> m Expr) -> (String -> m Expr)@;
@@ -85,7 +86,7 @@ empty modName varName = fail $ "module " ++ modName ++ " does not export " ++ va
 add :: (A.Alternative m) => (String -> m E.Expr) -> (String -> m E.Expr) -> (String -> m E.Expr)
 add f g s = f s A.<|> g s
 
-fromModule :: (Monad m) => P.Module -> String -> m E.Expr
+fromModule :: (Monad m, Show a) => P.Module a -> String -> m E.Expr
 fromModule module_ varName =
     case [ getRhs d | d <- decls, getLhs d == varName ] of
         [x] -> pure x
