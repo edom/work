@@ -72,7 +72,7 @@ instance Sg.Semigroup (Dictionary k v) where
 -- This allows overriding entries.
 instance Mo.Monoid (Dictionary k v) where
     mempty = MkDictionary $ const $ fail "empty dictionary"
-    mappend = (<>)
+    mappend = (Sg.<>)
 
 fromMap :: (Ord k) => Map.Map k v -> Dictionary k v
 fromMap m = MkDictionary $ \ k -> Map.lookup k m
