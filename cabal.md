@@ -54,6 +54,8 @@ library-vanilla: True
         - https://github.com/haskell/cabal/issues/4748
         - [#3409 Can't use system GHC without static libraries at all](https://github.com/commercialhaskell/stack/issues/3409)
         - [#1720 `executable-dynamic: True` should apply to `build-type: Custom` setup](https://github.com/haskell/cabal/issues/1720)
+- [#4506 `new-haddock`'s file monitoring broken](https://github.com/haskell/cabal/issues/4506)
+    - `new-haddock` doesn't work after `new-build`.
 - [#5290 new-build runs into internal error after deleting from store](https://github.com/haskell/cabal/issues/5290)
     - Solution: nuke the entire store: `rm -r ~/.cabal/store`.
 - Non-problems

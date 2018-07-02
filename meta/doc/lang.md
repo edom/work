@@ -426,3 +426,4 @@ My = module {
                         - The effect of `a;b` is the effect of `a` followed by the effect of `b`.
                     - Semicolon is associative: `(a;b);c = a;(b;c)`. This also holds for the effects.
             - Can we replace statements with expressions in existing imperative languages without breaking backward compatibility?
+        - But C has https://en.wikipedia.org/wiki/Comma_operator
