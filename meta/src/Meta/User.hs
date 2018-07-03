@@ -71,6 +71,7 @@ module Meta.User (
     , get_pom_xml_dir
     -- ** Generate command-line interface for controlling the application
     , command_line
+    , command_line_
     -- * Route language
     , Page
     , get
@@ -145,6 +146,7 @@ module Meta.User (
 import Prelude hiding (seq, span)
 
 import qualified Control.Applicative as A
+import qualified Control.Monad as Monad
 import qualified Data.List as L
 import qualified System.Environment as Env
 
@@ -369,31 +371,44 @@ get_pom_xml_dir app = JWA._output_prefix app F.</> get_artifact_id app
 Command line for controlling the application and related common tasks.
 -}
 command_line :: App -> IO ()
-command_line app = do
-    Env.getArgs >>= parse >>= run
+command_line app = Env.getArgs >>= command_line_ app
+
+-- | This is 'command_line' but you pass the command-line arguments yourself.
+command_line_ :: App -> [String] -> IO ()
+command_line_ app = parse Monad.>=> run
     where
         parse :: (Monad m) => [String] -> m Command
         parse args = case args of
             [] -> pure Nop
-            "help" : rest -> CmdSeq Help <$> parse rest
+            "cd" : path : rest -> CmdSeq (Chdir path) <$> parse rest
             "generate" : rest -> CmdSeq (Generate app) <$> parse rest
+            "help" : rest -> CmdSeq Help <$> parse rest
             "recompile" : rest -> CmdSeq (Recompile app) <$> parse rest
             _ -> fail $ "Invalid arguments: " ++ show args
         run :: Command -> IO ()
         run cmd = case cmd of
             Nop -> return ()
-            Help -> putStr $
-                "Commands: help, generate, recompile.\n"
+            Help -> do
+                prog <- Env.getProgName
+                putStr $
+                    "Usage: " ++ prog ++ " COMMAND...\n"
+                    ++ "A COMMAND is any of these:\n"
+                    ++ "    cd DIR      change directory to DIR\n"
+                    ++ "    help        show this\n"
+                    ++ "    generate    generate Java source code\n"
+                    ++ "    recompile   recompile generated Java source code\n"
+            Chdir path -> Dir.setCurrentDirectory path
             CmdSeq a b -> run a >> run b
             Generate ap -> generate_java ap
             Recompile ap -> maven_recompile ap
 
 data Command
     = Nop
-    | Help
-    | Generate App
-    | Recompile App
     | CmdSeq Command Command
+    | Chdir FilePath
+    | Generate App
+    | Help
+    | Recompile App
     deriving (Read, Show)
 
 type Page = W.Page
