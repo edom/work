@@ -6,7 +6,7 @@ module Meta.UserGenJava (
 ) where
 
 import Prelude ()
-import Meta.UserPrelude
+import Meta.Prelude
 
 import qualified Data.List as L
 

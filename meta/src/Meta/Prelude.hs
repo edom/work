@@ -1,13 +1,14 @@
 {- |
 This reexports from "Prelude" the names that don't clash with our names.
 -}
-module Meta.UserPrelude (
+module Meta.Prelude (
     module Prelude
     , (P.|>)
 ) where
 
 import Prelude hiding (
         div
+        , exp
         , seq
         , span
     )

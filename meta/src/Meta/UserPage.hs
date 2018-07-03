@@ -5,18 +5,18 @@ module Meta.UserPage (
     Page
     , get
     , post
-    , Content_type
-    , set_content_type
+    , W.Content_type
+    , W.set_content_type
     -- * Content language
-    , Content
-    , raw
-    , seq
-    , text
-    , Url
-    , Url_relative
-    , link_internal
-    , Java_resource_path
-    , java_resource
+    , C.Content
+    , C.raw
+    , C.seq
+    , C.text
+    , C.Url
+    , C.Url_relative
+    , C.link_internal
+    , C.Java_resource_path
+    , C.java_resource
     -- ** CRUD
     , Crud
     , mk_crud
@@ -27,7 +27,7 @@ module Meta.UserPage (
 ) where
 
 import Prelude ()
-import Meta.UserPrelude
+import Meta.Prelude
 
 import Meta.Web (
         Content
@@ -38,46 +38,20 @@ import Meta.Web (
 import qualified Control.Applicative as A
 
 import qualified Meta.Data as D
-import qualified Meta.Data_internal as DI
 import qualified Meta.UserHtml as H
 import qualified Meta.Web as W
+import qualified Meta.WebContent as C
 
-get :: Url -> Content -> W.Page
+get :: Url -> C.Content -> W.Page
 get url content = (W.mk_page url content) { W.pMethod = "GET" }
 
-post :: Url -> Content -> W.Page
+post :: Url -> C.Content -> W.Page
 post url content = (W.mk_page url content) { W.pMethod = "POST" }
-
-{- |
-Some examples:
-
-* \"application/octet-stream\"
-
-* \"text/html; charset=UTF-8\"
--}
-type Content_type = String
-
-set_content_type :: Content_type -> W.Page -> W.Page
-set_content_type = W.set_content_type
-
-raw :: String -> Content
-raw = W.CRaw
-
-seq :: [Content] -> Content
-seq = W.content_concat
-
-text :: String -> Content
-text = W.CText
-
-type Url_relative = String
-
-link_internal :: Url -> Content -> Content
-link_internal = W.CLink
 
 data Crud
     = MkCrud {
         _cTable :: D.Table
-        , _cBaseUrl :: Url_relative
+        , _cBaseUrl :: C.Url_relative
     } deriving (Read, Show)
 
 mk_crud :: D.Table -> Crud
@@ -86,10 +60,10 @@ mk_crud table = MkCrud {
         , _cBaseUrl = table_base_url table
     }
 
-get_base_url :: Crud -> Url_relative
+get_base_url :: Crud -> C.Url_relative
 get_base_url = _cBaseUrl
 
-table_base_url :: D.Table -> Url_relative
+table_base_url :: D.Table -> C.Url_relative
 table_base_url table = component m_ds_field ++ component m_schema ++ "/" ++ name
     where
         component :: Maybe String -> String
@@ -108,7 +82,7 @@ form_for_insert MkCrud{..} = H.form $
     [
         H.atr "method" "POST"
         , H.atr "action" action
-        , H.span [H.atr "class" "form_title", text form_title]
+        , H.span [H.atr "class" "form_title", C.text form_title]
     ]
     ++ map input_for_column eligible_cols
     ++ [
@@ -123,10 +97,7 @@ form_for_insert MkCrud{..} = H.form $
         form_title = "Insert " ++ name
         name = D.t_get_name _cTable
         cols = D.t_get_cols _cTable
-        eligible_cols = filter (not . is_auto_increment) cols
-
-is_auto_increment :: D.Column -> Bool
-is_auto_increment = DI._cAutoIncrement
+        eligible_cols = filter (not . D.get_auto_increment) cols
 
 {- |
 Generate CRUD pages.
@@ -136,7 +107,7 @@ crud_pages crud@MkCrud{..} = insert_page
     where
         insert_page = [
                 get url_insert (form_for_insert crud)
-                , post url_insert (text "not implemented")
+                , post url_insert (C.text "not implemented")
             ]
         url_insert = _cBaseUrl ++ "/insert"
 
@@ -145,7 +116,7 @@ input_for_column col =
     H.label $
         [
             H.atr "class" "form_field"
-            , H.span [H.atr "class" "title", text title]
+            , H.span [H.atr "class" "title", C.text title]
             , H.input [H.atr "type" "text", H.atr "name" name, H.atr "placeholder" title]
         ]
         ++ null_checkbox
@@ -160,13 +131,8 @@ input_for_column col =
                             H.atr "class" "null_checkbox"
                             -- This breaks if a table contains a nullable column named @name@ and another column named @name_empty_means_null@.
                             , H.input [H.atr "type" "checkbox", H.atr "name" (name ++ "_empty_means_null"), H.atr "checked" "checked"]
-                            , H.span [text "empty means null"]
+                            , H.span [C.text "empty means null"]
                         ]
                     ]
                 else []
         title = maybe name id $ D.c_long_title col A.<|> D.c_short_title col
-
-type Java_resource_path = W.Java_resource_path
-
-java_resource :: Java_resource_path -> Content
-java_resource = W.CJavaRes

@@ -1,18 +1,28 @@
 module Meta.WebContent (
-    Url
-    , Html_doc(..)
+    Html_doc(..)
     , html_empty
     , add_styles
     , Content(..)
-    , Java_resource_path
     , Tag_name
     , html_elm
     , html_atr
+    -- * Constructors
+    , raw
+    , seq
+    , text
+    , Url
+    , Url_relative
+    , link_internal
+    , Java_resource_path
+    , java_resource
     -- * Monoid
     , content_empty
     , content_append
     , content_concat
 ) where
+
+import Prelude ()
+import Meta.Prelude
 
 import qualified Meta.Data as D
 import qualified Meta.Html as H
@@ -36,6 +46,14 @@ html_empty = Mk_Html_doc {
 add_styles :: [Url] -> Html_doc -> Html_doc
 add_styles urls html = html { _h_styles = _h_styles html ++ urls }
 
+type Url_relative = String
+
+link_internal :: Url -> Content -> Content
+link_internal = CLink
+
+java_resource :: Java_resource_path -> Content
+java_resource = CJavaRes
+
 type Java_resource_path = String
 
 data Content
@@ -51,6 +69,15 @@ data Content
     | CHtml Html_doc -- rename to CHtmlDoc? remove? c_html_doc :: Html_doc -> [Content] -> Content
     | Chtmla (H.Html Content) -- rename to CHtml?
     deriving (Read, Show)
+
+raw :: String -> Content
+raw = CRaw
+
+seq :: [Content] -> Content
+seq = content_concat
+
+text :: String -> Content
+text = CText
 
 type Tag_name = String
 

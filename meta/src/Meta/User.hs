@@ -13,27 +13,27 @@
 -}
 module Meta.User (
     -- * Define table
-    D.Table
+    DI.Table
     , DI.Table_name
     , DI.mk_table
     , DI.set_schema
     -- ** Define column
-    , D.Column
-    , DI.Column_name
-    , DI.col_varchar
-    , DI.col_int32
-    , DI.col_int64
-    , DI.col_numeric
-    , DI.col_boolean
+    , DC.Column
+    , DC.Column_name
+    , DC.col_varchar
+    , DC.col_int32
+    , DC.col_int64
+    , DC.col_numeric
+    , DC.col_boolean
     , auto_increment
     , nullable
     -- *** Define table caption
-    , DI.Short_title
-    , DI.Long_title
-    , DI.set_short_title
-    , DI.set_long_title
-    , DI.set_title
-    , DI.set_titles
+    , DC.Short_title
+    , DC.Long_title
+    , DC.set_short_title
+    , DC.set_long_title
+    , DC.set_title
+    , DC.set_titles
     -- *** Define DataSource field name
     , set_DataSource_field_name
     -- ** Define table constraint
@@ -140,11 +140,12 @@ module Meta.User (
 ) where
 
 import Prelude ()
-import Meta.UserPrelude
+import Meta.Prelude
 
 import Meta.UserHtml
 
 import qualified Meta.Data as D
+import qualified Meta.DataColumn as DC
 import qualified Meta.DataQuery as DQ
 import qualified Meta.Data_internal as DI
 import qualified Meta.File as F
@@ -159,10 +160,10 @@ import qualified Meta.UserCmd as Cmd
 import qualified Meta.UserPage as Page
 
 auto_increment :: D.Column -> D.Column
-auto_increment c = c { DI._cAutoIncrement = True }
+auto_increment = D.set_auto_increment True
 
 nullable :: D.Column -> D.Column
-nullable c = c { DI._cNullable = True }
+nullable = D.set_nullable True
 
 set_DataSource_field_name :: JWA.Field_name -> D.Table -> D.Table
 set_DataSource_field_name = D.t_set_DataSource_field_name

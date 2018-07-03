@@ -20,6 +20,13 @@ data Page
     }
     deriving (Read, Show)
 
+{- |
+Some examples:
+
+* \"application/octet-stream\"
+
+* \"text/html; charset=UTF-8\"
+-}
 type Content_type = String
 
 set_content_type :: Content_type -> Page -> Page

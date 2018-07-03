@@ -56,8 +56,11 @@ render (LExp x) = E.render render x
 
 -- * Examples
 
+example1 :: V.Val
 example1 = eval (LExp (E.Plus (LVal (V.Int 1)) (LVal (V.Int 2))))
 
+example2 :: String
 example2 = render (LExp (E.Plus (LExp (E.Plus (LVal (V.Int 1)) (LVal (V.Int 2)))) (LVal (V.Int 2))))
 
+example3 :: V.Val
 example3 = eval (vInt 1 `plus` vInt 2)

@@ -22,7 +22,7 @@ module Meta.UserHtml (
 ) where
 
 import Prelude ()
-import Meta.UserPrelude
+import Meta.Prelude
 
 import Meta.Web (
         Url

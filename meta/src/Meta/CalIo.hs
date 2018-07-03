@@ -4,7 +4,6 @@ import Prelude hiding (exp, getLine, putStrLn)
 
 import qualified Prelude as P
 
-import qualified Meta.Cal as C
 import qualified Meta.CalExp as E
 import qualified Meta.CalVal as V
 
@@ -72,4 +71,5 @@ eval_io exp = case exp of
         V.String s -> P.putStrLn s *> pure V.Unit
         _ -> pure $ V.Error ["Meta.CalIo.eval: (" ++ show exp ++ ")"]
 
+example1 :: IO Val
 example1 = eval $ putStrLn (plus getLine getLine)

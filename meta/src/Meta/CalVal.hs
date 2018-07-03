@@ -28,6 +28,11 @@ eq (Int a) (Int b) = Bool (a == b)
 eq (Bool a) (Bool b) = Bool (a == b)
 eq a b = Error ["Meta.CalVal.eq: (" ++ show a ++ ") (" ++ show b ++ ")"]
 
+if_ :: Val -> Val -> Val -> Val
+if_ (Bool False) _ f = f
+if_ (Bool True) t _ = t
+if_ c t f = Error ["Meta.CalVal.if_: (" ++ show c ++ ") (" ++ show t ++ ") (" ++ show f ++ ")"]
+
 not :: Val -> Val
 not (Error a) = Error a
 not (Bool a) = Bool (P.not a)
