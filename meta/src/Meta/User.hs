@@ -21,6 +21,8 @@ module Meta.User (
     , col_int64
     , col_numeric
     , col_boolean
+    , auto_increment
+    , nullable
     -- *** Define table caption
     , Short_title
     , Long_title
@@ -92,12 +94,18 @@ module Meta.User (
     -- ** HTML subset
     , Html_doc
     , C_html(..)
-    -- *** Element
+    -- *** HTML element
     , Tag
     , elm
-    -- **** Predefined
+    -- **** Predefined HTML elements
     , h1
-    -- *** Attribute
+    , p
+    , span
+    , div
+    , form
+    , label
+    , input
+    -- *** HTML attribute
     , Atr
     , atr
     -- * Query language
@@ -143,12 +151,14 @@ module Meta.User (
     , sc_Show
 ) where
 
-import Prelude hiding (seq, span)
+import Prelude hiding (div, seq, span)
 
 import qualified Control.Applicative as A
 import qualified Control.Monad as Monad
 import qualified Data.List as L
 import qualified System.Environment as Env
+
+import qualified System.Directory as Dir
 
 import qualified Meta.Cbp as C
 import qualified Meta.Data as D
@@ -200,6 +210,15 @@ col_numeric precision scale = DI.mkCol (SqlType.Numeric precision scale)
 
 col_boolean :: Column_name -> Column
 col_boolean = DI.mkCol SqlType.Boolean
+
+auto_increment :: Column -> Column
+auto_increment c = c { DI._cAutoIncrement = True }
+
+nullable :: Column -> Column
+nullable c = c { DI._cNullable = True }
+
+is_auto_increment :: Column -> Bool
+is_auto_increment = DI._cAutoIncrement
 
 type Short_title = String
 
@@ -454,27 +473,48 @@ tabulate = W.CView
 -- | Form for inserting a row into the table.
 form_for_insert :: D.Table -> Content
 form_for_insert table = form $
-    [atr "method" "POST", atr "action" action]
-    ++ [p [text "(This form is not yet implemented.)"]]
-    ++ map input_for_column cols
-    ++ [input [atr "type" "submit", atr "value" ("Insert " ++ name)]]
+    [
+        atr "method" "POST"
+        , atr "action" action
+        , span [atr "class" "form_title", text form_title]
+    ]
+    ++ map input_for_column eligible_cols
+    ++ [input [atr "type" "submit", atr "value" ("Insert " ++ name), atr "class" "form_sole_submit_button"]]
     where
         action = component m_ds_field ++ component m_schema ++ "/" ++ name ++ "/insert"
+        form_title = "Insert " ++ name
         component :: Maybe String -> String
         component = maybe "" ("/" ++)
         m_ds_field = D.t_DataSource_field_name table
         m_schema = D.t_get_schema table
         name = D.t_get_name table
         cols = D.t_get_cols table
+        eligible_cols = filter (not . is_auto_increment) cols
 
 input_for_column :: Column -> Content
 input_for_column col =
-    label [
-        span [atr "class" "title", text title]
-        , input [atr "type" "text", atr "name" name]
-    ]
+    label $
+        [
+            atr "class" "form_field"
+            , span [atr "class" "title", text title]
+            , input [atr "type" "text", atr "name" name, atr "placeholder" title]
+        ]
+        ++ null_checkbox
     where
         name = D.c_get_name col
+        can_be_null = D.c_get_nullable col
+        null_checkbox =
+            if can_be_null
+                then
+                    [
+                        label [
+                            atr "class" "null_checkbox"
+                            -- This breaks if a table contains a nullable column named @name@ and another column named @name_empty_means_null@.
+                            , input [atr "type" "checkbox", atr "name" (name ++ "_empty_means_null"), atr "checked" "checked"]
+                            , span [text "empty means null"]
+                        ]
+                    ]
+                else []
         title = maybe name id $ D.c_long_title col A.<|> D.c_short_title col
 
 type Java_resource_path = W.Java_resource_path
@@ -496,6 +536,9 @@ p = elm "p"
 
 span :: [Content] -> Content
 span = elm "span"
+
+div :: [Content] -> Content
+div = elm "div"
 
 form :: [Content] -> Content
 form = elm "form"

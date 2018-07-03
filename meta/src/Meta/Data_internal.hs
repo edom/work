@@ -126,7 +126,8 @@ data Col
         , cShortTitle :: Maybe ShortTitle
         , cLongTitle :: Maybe LongTitle
         , cFormDesc :: Maybe FormDesc
-        , _nullable :: Bool
+        , _cNullable :: Bool
+        , _cAutoIncrement :: Bool
     } deriving (Read, Show)
 
 defCol :: Col
@@ -136,7 +137,8 @@ defCol = MkCol {
         , cShortTitle = Nothing
         , cLongTitle = Nothing
         , cFormDesc = Nothing
-        , _nullable = False
+        , _cNullable = False
+        , _cAutoIncrement = False
     }
 
 -- * Constructors

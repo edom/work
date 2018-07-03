@@ -29,7 +29,7 @@ c_get_name :: Col -> Col_name
 c_get_name = I.getName
 
 c_get_nullable :: Col -> Bool
-c_get_nullable = I._nullable
+c_get_nullable = I._cNullable
 
 c_short_title :: Col -> Maybe String
 c_short_title = I.cShortTitle
