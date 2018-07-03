@@ -1,3 +1,4 @@
+{-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE TypeSynonymInstances #-}
 
 {- |
@@ -86,11 +87,17 @@ module Meta.User (
     , seq
     , text
     , Url
+    , Url_relative
     , link_internal
-    , tabulate
-    , form_for_insert
     , Java_resource_path
     , java_resource
+    -- ** CRUD
+    , Crud
+    , mk_crud
+    , get_base_url
+    , tabulate
+    , form_for_insert
+    , crud_pages
     -- ** HTML subset
     , Html_doc
     , C_html(..)
@@ -463,16 +470,42 @@ text = W.CText
 
 type Url = W.Url
 
+type Url_relative = String
+
 link_internal :: Url -> Content -> Content
 link_internal = W.CLink
+
+data Crud
+    = MkCrud {
+        _cTable :: Table
+        , _cBaseUrl :: Url_relative
+    } deriving (Read, Show)
+
+mk_crud :: Table -> Crud
+mk_crud table = MkCrud {
+        _cTable = table
+        , _cBaseUrl = table_base_url table
+    }
+
+get_base_url :: Crud -> Url_relative
+get_base_url = _cBaseUrl
+
+table_base_url :: Table -> Url_relative
+table_base_url table = component m_ds_field ++ component m_schema ++ "/" ++ name
+    where
+        component :: Maybe String -> String
+        component = maybe "" ("/" ++)
+        m_ds_field = D.t_DataSource_field_name table
+        m_schema = D.t_get_schema table
+        name = D.t_get_name table
 
 -- | Table view for query.
 tabulate :: D.Query -> Content
 tabulate = W.CView
 
 -- | Form for inserting a row into the table.
-form_for_insert :: D.Table -> Content
-form_for_insert table = form $
+form_for_insert :: Crud -> Content
+form_for_insert MkCrud{..} = form $
     [
         atr "method" "POST"
         , atr "action" action
@@ -481,15 +514,23 @@ form_for_insert table = form $
     ++ map input_for_column eligible_cols
     ++ [input [atr "type" "submit", atr "value" ("Insert " ++ name), atr "class" "form_sole_submit_button"]]
     where
-        action = component m_ds_field ++ component m_schema ++ "/" ++ name ++ "/insert"
+        action = _cBaseUrl ++ "/insert"
         form_title = "Insert " ++ name
-        component :: Maybe String -> String
-        component = maybe "" ("/" ++)
-        m_ds_field = D.t_DataSource_field_name table
-        m_schema = D.t_get_schema table
-        name = D.t_get_name table
-        cols = D.t_get_cols table
+        name = D.t_get_name _cTable
+        cols = D.t_get_cols _cTable
         eligible_cols = filter (not . is_auto_increment) cols
+
+{- |
+Generate CRUD pages.
+-}
+crud_pages :: Crud -> [Page]
+crud_pages crud@MkCrud{..} = insert_page
+    where
+        insert_page = [
+                get url_insert (form_for_insert crud)
+                , post url_insert (text "not implemented")
+            ]
+        url_insert = _cBaseUrl ++ "/insert"
 
 input_for_column :: Column -> Content
 input_for_column col =

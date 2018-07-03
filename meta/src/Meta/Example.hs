@@ -57,14 +57,16 @@ app = U.app_empty
                 get "/" [
                     U.link_internal "/customer" (U.text "Customers")
                     , U.link_internal "/1" (U.text "page 1")
+                    , U.link_internal (U.get_base_url crud_customer ++ "/insert") (U.text "Insert customer")
                 ]
                 , get "/customer" [
                     U.tabulate (U.from t_customer)
-                    , U.form_for_insert t_customer
                 ]
                 , get "/1" [U.text "this is page 1"]
                 , static "text/css; charset=UTF-8" "css/style.css"
             ]
+            ++ U.crud_pages crud_customer
+        crud_customer = U.mk_crud t_customer
         get url content =
             U.get url (
                 U.html content
