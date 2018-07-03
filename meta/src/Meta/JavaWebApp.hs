@@ -1,7 +1,7 @@
 module Meta.JavaWebApp where
 
 import qualified Meta.Data as D
-import qualified Meta.Data_internal as DI
+import qualified Meta.DataQuery as DQ
 import qualified Meta.Html as H
 import qualified Meta.Java as J
 import qualified Meta.JavaServlet as JS
@@ -21,6 +21,17 @@ type Dep_ver = M.Dep_ver
 
 type Package_name = String
 
+type Output_prefix = FilePath
+
+set_output_prefix :: Output_prefix -> App -> App
+set_output_prefix path app = app { _output_prefix = path }
+
+set_package :: String -> App -> App
+set_package pkg app = app { _package = pkg }
+
+set_servlet_class_name :: String -> App -> App
+set_servlet_class_name nam app = app { _servlet_class_name = nam }
+
 data App
     = MkApp {
         _project :: M.Project
@@ -34,9 +45,10 @@ data App
         , _injections :: [Injection]
     } deriving (Read, Show)
 
-type Page = W.Page
+get_artifact_id :: App -> M.Maven_artifact_id
+get_artifact_id = M.pArtifactId . _project
 
-add_pages :: [Page] -> App -> App
+add_pages :: [W.Page] -> App -> App
 add_pages pages app = app { _site = W.add_pages pages (_site app) }
 
 type Jdbc_url = String
@@ -52,15 +64,34 @@ data Injection
         , _ifield :: Field_name
     } deriving (Read, Show)
 
-injection :: J.Type -> Field_name -> Injection
+type Java_type = J.Type
+
+injection :: Java_type -> Field_name -> Injection
 injection typ fld = MkInjection {
         _itype = typ
         , _iname = Nothing
         , _ifield = fld
     }
 
+{- |
+Every injection adds these to the servlet class:
+
+* a private final field
+
+* a constructor parameter
+
+* an assignment statement in the constructor
+-}
+add_injections :: [Injection] -> App -> App
+add_injections injs app = app { _injections = _injections app ++ injs }
+
+-- | For javax.inject.Named annotation.
 named :: Inject_name -> Injection -> Injection
 named nam inj = inj { _iname = Just nam }
+
+-- | This is 'named'.
+set_inject_name :: Inject_name -> Injection -> Injection
+set_inject_name = named
 
 empty :: App
 empty = MkApp {
@@ -75,6 +106,9 @@ empty = MkApp {
         , _injections = []
     }
 
+app_empty :: App
+app_empty = empty
+
 set_tables :: [D.Table] -> App -> App
 set_tables ts a = a { aTables = ts }
 
@@ -84,6 +118,10 @@ set_project p a = a { _project = p }
 set_gav :: Group_id -> Artifact_id -> Version -> App -> App
 set_gav g a v app = set_project (M.set_gav g a v $ _project app) app
 
+-- | This is 'set_gav'.
+set_maven_coordinates :: M.Maven_group_id -> M.Maven_artifact_id -> M.Maven_version -> App -> App
+set_maven_coordinates = set_gav
+
 type Dep = M.Dep
 
 get_deps :: App -> [Dep]
@@ -92,8 +130,14 @@ get_deps = M.pDeps . _project
 set_deps :: [Dep] -> App -> App
 set_deps deps app = set_project (M.set_deps deps $ _project app) app
 
-dep_provided :: Group_id -> Artifact_id -> Dep_ver -> Dep
-dep_provided = M.dep_provided
+get_dependencies :: App -> [M.Maven_dep]
+get_dependencies = get_deps
+
+set_dependencies :: [M.Maven_dep] -> App -> App
+set_dependencies = set_deps
+
+add_dependencies :: [Dep] -> App -> App
+add_dependencies deps app = set_dependencies (get_dependencies app ++ deps) app
 
 -- * Pages
 
@@ -208,7 +252,7 @@ content_to_java_sta e_output con = case con of
         ++ [append_str "</body></html>"]
     W.Chtmla html ->
         recur (H.fold W.content_empty W.content_append W.CRaw html)
-    W.CView query@(DI.QFrom table) ->
+    W.CView query@(DQ.From table) ->
         let
             ds_field_name = D.t_DataSource_field_name table
             err_msg = "Meta.JavaWebApp.content_to_java_sta: table DataSource field name not set: " ++ show table
@@ -217,7 +261,7 @@ content_to_java_sta e_output con = case con of
             e_st = J.e_name "statement"
             e_rs = J.e_name "result_set"
             e_i = J.e_name "i"
-            sql = DI.renderSqlSelect query
+            sql = DQ.renderSqlSelect query
             cols = D.t_get_cols table
             column_count = length cols
             header =
@@ -280,3 +324,6 @@ content_to_java_sta e_output con = case con of
                     '>' -> "&gt;"
                     '&' -> "&amp;"
                     _ -> [c]
+
+jt_DataSource :: Java_type
+jt_DataSource = JT.dataSource

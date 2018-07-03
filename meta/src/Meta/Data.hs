@@ -1,6 +1,30 @@
-module Meta.Data where
+module Meta.Data (
+    Table
+    , Col
+    , I.Column
+    , Col_name
+    , Table_name
+    , Type
+    , Field_name
+    , t_DataSource_field_name
+    , t_set_DataSource_field_name
+    , c_get_type
+    , c_get_name
+    , c_get_nullable
+    , c_short_title
+    , c_long_title
+    , Constraint
+    , t_get_name
+    , t_get_cols
+    , t_get_constraints
+    , t_get_schema
+    , I.t_set_schema
+    -- * Query
+    , Q.Query(..)
+) where
 
 import qualified Meta.Data_internal as I
+import qualified Meta.DataQuery as Q
 
 -- * Table
 
@@ -50,10 +74,3 @@ t_get_constraints = I.tConstraints
 
 t_get_schema :: Table -> Maybe String
 t_get_schema = I._schema
-
-t_set_schema :: String -> Table -> Table
-t_set_schema s t = t { I._schema = Just s }
-
--- * Query
-
-type Query = I.Query

@@ -1,6 +1,5 @@
 module Meta.Data_internal where
 
-import qualified Data.List as L
 import qualified Meta.SqlType as T
 
 type Type = T.Type
@@ -14,6 +13,17 @@ data Table
         , _schema :: Maybe String
         , _t_ds_field :: Maybe String
     } deriving (Read, Show)
+
+type Table_name = String
+
+mk_table :: Table_name -> [Column] -> Table
+mk_table = mkTable
+
+set_schema :: String -> Table -> Table
+set_schema = t_set_schema
+
+t_set_schema :: String -> Table -> Table
+t_set_schema s t = t { _schema = Just s }
 
 data Constraint
     = KPrimaryKey [Col]
@@ -40,64 +50,6 @@ defTable = MkTable {
 
 addPrimaryKey :: [Col] -> Table -> Table
 addPrimaryKey cols tab = tab { tConstraints = tConstraints tab ++ [KPrimaryKey cols] }
-
--- * Query
-
-{- |
-This is similar to Linq.
--}
-data Query
-    = QFrom Table -- ^ select all rows of the table
-    | QProject [Col] Query -- ^ select some columns of subquery
-    | QJoin Query Query
-    | QFilter Exp Query -- ^ select only satisfying rows from subquery; the expression must be a boolean expression
-    | QSkip Integer Query -- ^ skip first rows of subquery
-    | QLimit Integer Query -- ^ take only first rows of subquery
-    deriving (Read, Show)
-
--- | Perhaps we should introduce an intermediate module Meta.Sql?
-renderSqlSelect :: Query -> String
-renderSqlSelect q = case q of
-    QFrom t ->
-        -- TODO escape
-        "SELECT " ++ L.intercalate ", " (map getName $ tCols t) ++ " FROM " ++ maybe "" (++ ".") (_schema t) ++ tName t
-    QProject cols subq ->
-        "SELECT " ++ L.intercalate ", " (map getName cols)
-        ++ " FROM (" ++ renderSqlSelect subq ++ ") tmp"
-    QFilter cond subq ->
-        "SELECT * FROM (" ++ renderSqlSelect subq ++ ") tmp WHERE " ++ renderSqlExp cond
-    _ ->
-        error $ "Meta.Data_internal.renderSqlSelect: not implemented: " ++ show q
-    where
-        renderSqlExp :: Exp -> String
-        renderSqlExp e = case e of
-            ECol col -> getName col
-            EEq a b -> "(" ++ renderSqlExp a ++ " = " ++ renderSqlExp b ++ ")"
-            ELt a b -> "(" ++ renderSqlExp a ++ " < " ++ renderSqlExp b ++ ")"
-            EGt a b -> "(" ++ renderSqlExp a ++ " > " ++ renderSqlExp b ++ ")"
-            ELteq a b -> "(" ++ renderSqlExp a ++ " <= " ++ renderSqlExp b ++ ")"
-            EGteq a b -> "(" ++ renderSqlExp a ++ " >= " ++ renderSqlExp b ++ ")"
-            ENeg a -> "(-" ++ renderSqlExp a ++ ")"
-            EPlus a b -> "(" ++ renderSqlExp a ++ " + " ++ renderSqlExp b ++ ")"
-            ENot a -> "(NOT " ++ renderSqlExp a ++ ")"
-            EAnd a b -> "(" ++ renderSqlExp a ++ " AND " ++ renderSqlExp b ++ ")"
-            EOr a b -> "(" ++ renderSqlExp a ++ " OR " ++ renderSqlExp b ++ ")"
-
--- * Expression
-
-data Exp
-    = ECol Col
-    | EEq Exp Exp
-    | ELt Exp Exp
-    | EGt Exp Exp
-    | ELteq Exp Exp
-    | EGteq Exp Exp
-    | ENeg Exp
-    | EPlus Exp Exp
-    | ENot Exp
-    | EAnd Exp Exp
-    | EOr Exp Exp
-    deriving (Read, Show)
 
 -- * Column
 
@@ -130,6 +82,8 @@ data Col
         , _cAutoIncrement :: Bool
     } deriving (Read, Show)
 
+type Column = Col
+
 defCol :: Col
 defCol = MkCol {
         cType = T.Int32
@@ -140,6 +94,42 @@ defCol = MkCol {
         , _cNullable = False
         , _cAutoIncrement = False
     }
+
+type Column_name = String
+
+col_varchar :: Int -> Column_name -> Column
+col_varchar = colVarChar
+
+col_int32 :: Column_name -> Column
+col_int32 = colInt32
+
+col_int64 :: Column_name -> Column
+col_int64 = colInt64
+
+col_numeric :: Int -> Int -> Column_name -> Column
+col_numeric precision scale = mkCol (T.Numeric precision scale)
+
+col_boolean :: Column_name -> Column
+col_boolean = mkCol T.Boolean
+
+type Short_title = String
+
+type Long_title = String
+
+set_short_title :: Short_title -> Column -> Column
+set_short_title = setShortTitle
+
+set_long_title :: Long_title -> Column -> Column
+set_long_title = setLongTitle
+
+set_title :: String -> Column -> Column
+set_title t = set_long_title t . set_short_title t
+
+set_titles :: Short_title -> Long_title -> Column -> Column
+set_titles st lt = set_long_title lt . set_short_title st
+
+add_primary_key :: [Column] -> Table -> Table
+add_primary_key = addPrimaryKey
 
 -- * Constructors
 

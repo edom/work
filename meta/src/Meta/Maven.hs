@@ -7,26 +7,44 @@
 * Use 'to_pom_xml' to transform that description to XML document.
 
 -}
-module Meta.Maven where
+module Meta.Maven (
+    -- * Coordinates
+    MD.Group_id
+    , MD.Artifact_id
+    , Version
+    -- * Project
+    , Project(..)
+    , empty
+    , mk_project
+    , set_gav
+    -- * Dependency
+    , MD.Dep
+    , MD.Dep_ver
+    , set_deps
+    , dep_provided
+    -- * POM XML
+    , to_pom_xml
+    , Packaging
+    -- * Renamings
+    , MD.Maven_group_id
+    , MD.Maven_artifact_id
+    , Maven_version
+    , MD.Maven_dep
+    , MD.Maven_dep_ver
+) where
 
 import qualified Meta.MavenDep as MD
 import qualified Meta.Xml as X
 
--- * Coordinates
-
-type Group_id = String
-
-type Artifact_id = String
-
 type Version = String
 
--- * Project
+type Maven_version = Version
 
 data Project
     -- | Internal. Do not use. Use 'mk_project'.
     = MkProject {
-        pGroupId :: Group_id
-        , pArtifactId :: Artifact_id
+        pGroupId :: MD.Group_id
+        , pArtifactId :: MD.Artifact_id
         , pVersion :: Version
         , pParent :: Maybe Project
         , pPackaging :: Packaging
@@ -43,29 +61,21 @@ empty = MkProject {
         , pDeps = []
     }
 
-mk_project :: Group_id -> Artifact_id -> Version -> Project
+mk_project :: MD.Group_id -> MD.Artifact_id -> Version -> Project
 mk_project grp art ver = set_gav grp art ver empty
 
-set_gav :: Group_id -> Artifact_id -> Version -> Project -> Project
+set_gav :: MD.Group_id -> MD.Artifact_id -> Version -> Project -> Project
 set_gav g a v p = p {
         pGroupId = g
         , pArtifactId = a
         , pVersion = v
     }
 
--- * Dependency
-
-type Dep = MD.Dep
-
-type Dep_ver = MD.Dep_ver
-
-set_deps :: [Dep] -> Project -> Project
+set_deps :: [MD.Dep] -> Project -> Project
 set_deps ds p = p { pDeps = ds }
 
-dep_provided :: Group_id -> Artifact_id -> Dep_ver -> Dep
+dep_provided :: MD.Group_id -> MD.Artifact_id -> MD.Dep_ver -> MD.Dep
 dep_provided = MD.provided
-
--- * POM XML
 
 {- |
 https://maven.apache.org/guides/introduction/introduction-to-the-pom.html#Minimal_POM
@@ -128,9 +138,6 @@ to_pom_xml pro = doc
             MD.Compile -> "compile"
             MD.Provided -> "provided"
 
--- * Internal
-
--- | Internal. Do not use.
 data Packaging
     = PJar
     | PPom

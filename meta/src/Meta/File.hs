@@ -27,6 +27,13 @@ module Meta.File (
 
     , (P.</>)
 
+    -- * For reexports
+
+    , file_path
+    , file_content
+    , file_prepend_dir
+    , file_write_verbose
+
 ) where
 
 import qualified System.Directory as D
@@ -75,3 +82,17 @@ write file = do
         dir = P.takeDirectory path
         path = fPath file
         content = fContent file
+
+file_path :: File -> String
+file_path = get_path
+
+file_content :: File -> String
+file_content = get_content
+
+file_prepend_dir :: String -> File -> File
+file_prepend_dir = prepend_dir
+
+file_write_verbose :: File -> IO ()
+file_write_verbose file = do
+    putStrLn $ "Writing " ++ file_path file
+    write file

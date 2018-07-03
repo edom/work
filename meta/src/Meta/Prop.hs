@@ -10,6 +10,7 @@ import qualified System.IO.Error as E
 -- * Application
 
 {- |
+Flipped function application.
 Flipped '$'.
 
 https://github.com/izdi/elm-cheat-sheet
