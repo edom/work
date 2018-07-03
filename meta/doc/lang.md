@@ -214,6 +214,15 @@
         - https://wiki.haskell.org/The_Monad.Reader/Issue2/EternalCompatibilityInTheory
             - It applies to all software, not only Haskell ones.
         - [Michael Snoyman's personal take on PVP version upper bounds](https://gist.github.com/snoyberg/f6f10cdbea4b9e22d1b83e490ec59a10)
+    - curation
+        - https://www.reddit.com/r/haskell/comments/4ggt05/best_underrated_haskell_libraries/
+        - https://wiki.haskell.org/Applications_and_libraries
+        - https://stackoverflow.com/questions/9286799/haskell-libraries-overview-and-their-quality
+    - http://matt.might.net/articles/compiling-to-java/
+    - unread
+        - servant web framework
+        - Salsa Haskell .NET bridge
+            - https://wiki.haskell.org/Salsa
 - Make a programming language.
     - For writing metaprograms.
         - Must have clear semantics.
