@@ -31,11 +31,24 @@ data Table = MkTable {
     } deriving (Read, Show)
 
 process :: [Row] -> [Table]
-process infsch_rows =
-    map mk_table $ Map.toList $ Map.fromListWith (++) (map to_pair $ filter (\ row -> _rtSchema row `notElem` ignoredSchemas) infsch_rows)
+process = group_by key collect
     where
-        to_pair row@MkRow{..} = ((_rtCatalog, _rtSchema, _rtTabName), [row])
-        mk_table ((cat,sch,tab),rows) = MkTable cat sch tab rows
+        key MkRow{..} = (_rtCatalog, _rtSchema, _rtTabName)
+        collect (cat,sch,tab) rows = MkTable cat sch tab rows
+
+{- |
+We could relax the constraint to @'Eq' k@
+and remove the @containers@ dependency
+if we use "Data.List" @sortBy@ and @groupBy@,
+at the cost of speed.
+-}
+group_by :: (Ord k) => (a -> k) -> (k -> [a] -> b) -> [a] -> [b]
+group_by key collect things = map (uncurry collect) entry_list
+    where
+        to_entry x = (key x, [x])
+        pairs = map to_entry things
+        the_map = Map.fromListWith (++) pairs
+        entry_list = Map.toList the_map
 
 class FromField f a where
     field :: f a
