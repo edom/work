@@ -120,6 +120,12 @@
         - 1998, Wadler, "A prettier printer"
         - Hughes, Peyton-Jones, et al., http://hackage.haskell.org/package/pretty-1.1.3.6/docs/Text-PrettyPrint-HughesPJ.html
     - [Efficient simple pretty printing combinators](https://www.cs.kent.ac.uk/people/staff/oc/pretty.html)
+    - Earley parser
+        - https://en.wikipedia.org/wiki/Earley_parser
+        - https://hackage.haskell.org/package/Earley
+    - https://github.com/Gabriel439/post-rfc/blob/master/sotu.md#parsing--pretty-printing
+        - https://hackage.haskell.org/package/trifecta
+        - https://hackage.haskell.org/package/parsers
 - Big names in programming language research, and their contributions
     - This list is incomplete.
     - See also:
@@ -173,7 +179,9 @@
     - magic?
         - http://conal.net/blog/posts/semantic-editor-combinators
     - [Salon des Refusés 2017](https://2017.programmingconference.org/track/refuses-2017)
-    - [github.com/PyCQA/baron](https://github.com/PyCQA/baron): "IDE allow you to refactor code, Baron allows you to write refactoring code."
+    - refactoring
+        - [github.com/PyCQA/baron](https://github.com/PyCQA/baron): "IDE allow you to refactor code, Baron allows you to write refactoring code."
+        - HaRe Haskell refactoring tool https://github.com/alanz/HaRe
 - Haskell
     - language change proposals
         - Auto-lifting (and therefore sequencing) of function application involving Monad instances
