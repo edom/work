@@ -1,76 +1,40 @@
 {-# LANGUAGE CPP #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# OPTIONS_GHC -Wno-orphans #-}
 
-module Meta.SqlCon where
+module Meta.SqlCon (
+    test
+) where
 
-#ifdef HAVE_postgresql
+import qualified Control.Exception as E
+import qualified Data.String as DS
 
-import qualified Control.Monad as M
+import qualified Database.PostgreSQL.Simple as P
+import qualified Database.PostgreSQL.Simple.FromField as PF
+import qualified Database.PostgreSQL.Simple.FromRow as PR
 
-import qualified Database.HDBC as H
-import qualified Database.HDBC.PostgreSQL as HP
+import qualified Meta.SqlInf as SI
 
-import qualified Meta.Data_internal as DI
-import qualified Meta.SqlType as T
+instance (PF.FromField a) => SI.FromField PR.RowParser a where
+    field = PR.field
 
-{- |
-See:
-
-* 'HP.connectPostgreSQL'
-
-* http://www.postgresql.org/docs/8.1/static/libpq.html#LIBPQ-CONNECT
-
-* https://www.postgresql.org/docs/8.1/static/libpq-envars.html
--}
-type ConStr = String
-
-readNul :: String -> Either String Bool
-readNul str = case str of
-    "NO" -> pure False
-    "YES" -> pure True
-    _ -> Left $ "Meta.SqlCon.readNul: not implemented: " ++ str
+with :: P.ConnectInfo -> (P.Connection -> IO a) -> IO a
+with inf = E.bracket (P.connect inf) P.close
 
 test :: IO ()
 test = do
-    HP.withPostgreSQL "" $ \ con -> do
-        rows <- H.quickQuery con query []
-        M.forM_ rows $ \ [cat_, scm_, tab_, col_, nul_, typ_, cml_, nup_, nus_] -> do
-            let cat = string cat_
-                scm = string scm_
-                tab = string tab_
-                col = string col_
-                nul = string nul_
-                typ = string typ_
-                cml = int cml_
-                nup = int nup_
-                nus = int nus_
-                qna = cat ++ "." ++ scm ++ "." ++ tab
-                ignored = scm `elem` ignoredSchemas
-            M.unless ignored $ do
-                let rCol = do
-                        ty <- T.from_sql typ
-                        nu <- readNul nul
-                        pure $ (DI.mkCol ty col) { DI._nullable = nu }
-                putStrLn $ qna ++ ": " ++ col ++ " type " ++ typ ++ " nullable " ++ nul
-                putStrLn $ " -> " ++ show rCol
-        pure ()
+    with inf $ \ con -> do
+        rows <- P.queryWith_ SI.parse con (DS.fromString SI.query)
+        mapM_ (putStrLn . describe) $ SI.process rows
     where
-        -- HDBC doesn't support arrays
-        query = "SELECT t.table_catalog, t.table_schema, t.table_name, c.column_name, c.is_nullable, c.data_type, c.character_maximum_length, c.numeric_precision, c.numeric_scale"
-            ++ " FROM information_schema.tables t JOIN information_schema.columns c"
-            ++ " ON (t.table_catalog, t.table_schema, t.table_name) = (c.table_catalog, c.table_schema, c.table_name)"
-        string :: H.SqlValue -> String
-        string = H.fromSql
-        int :: H.SqlValue -> Int
-        int = H.fromSql
-        ignoredSchemas = [
-                "information_schema"
-                , "pg_catalog"
-            ]
-
-#else
-
-test :: IO ()
-test = do
-    putStrLn "Meta.SqlCon.test: not implemented, not compiled with PostgreSQL support"
-
-#endif
+        describe :: SI.Table -> String
+        describe SI.MkTable{..} = _tSchema ++ "." ++ _tName
+        -- Expect libpq to read these from environment variables PGHOST, PGDATABASE, and PGUSER.
+        -- Expect the password to be in the pgpass file.
+        inf = P.defaultConnectInfo {
+                P.connectHost = ""
+                , P.connectDatabase = ""
+                , P.connectUser = ""
+            }

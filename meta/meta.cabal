@@ -81,6 +81,8 @@ library
         Meta.Scheme
         Meta.Ski
         Meta.SqlCon
+        Meta.SqlCon_hp
+        Meta.SqlInf
         Meta.SqlSyn
         Meta.SqlType
         Meta.Test
@@ -105,11 +107,13 @@ library
         exposed-modules:
 
     build-depends:
-        base >= 4
-        , HDBC >= 2
-        , directory >= 1
-        , filepath >= 1
-        , process >= 1.2.0.0
+        base >= 4 && < 5
+        , HDBC >= 2 && < 3
+        , containers >= 0.5 && < 1
+        , directory >= 1 && < 2
+        , filepath >= 1 && < 2
+        , postgresql-simple >= 0.5.4.0 && < 1
+        , process >= 1.2.0.0 && < 2
 
     if flag(postgresql)
         build-depends:
