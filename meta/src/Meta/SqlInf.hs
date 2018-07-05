@@ -12,7 +12,7 @@ import Meta.Prelude
 
 import qualified Data.Int as I
 
-import qualified Data.Map.Strict as Map
+import qualified Data.Map as Map
 
 data Row = MkRow {
         _rtCatalog :: String
