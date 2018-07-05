@@ -8,6 +8,9 @@ https://personal.cis.strath.ac.uk/conor.mcbride/pub/she/
 -}
 module Meta.Hs where
 
+import Prelude ()
+import Meta.Prelude
+
 import qualified Meta.Data as D
 import qualified Meta.File as F
 import qualified Meta.HsCon as C
@@ -60,20 +63,20 @@ ap :: (Monad f) => f (a -> b) -> f a -> f b
 ap mf ma = do
     f <- mf
     a <- ma
-    pure $ f a
+    return $ f a
 
 -- ** A possibility: Metaprogram lifts all applications to ap
 
 class (Monad f) => Fun1 f where fun1 :: f (Int -> Int -> Int)
-instance (Monad f) => Fun1 f where fun1 = pure fun_unlifted
+instance (Monad f) => Fun1 f where fun1 = return fun_unlifted
 
-res1 :: (Monad m) => m Int
+res1 :: (Applicative f, Monad f) => f Int
 res1 = fun1 `ap` val `ap` val
 
 -- ** A possibility: Metaprogram generalizes liftM (compile-time liftM)
 --
 class (Monad f) => Fun2 f where fun2 :: f Int -> f Int -> f Int
-instance (Monad f) => Fun2 f where fun2 mx my = mx >>= \ x -> my >>= \ y -> pure (fun_unlifted x y)
+instance (Monad f) => Fun2 f where fun2 mx my = mx >>= \ x -> my >>= \ y -> return (fun_unlifted x y)
 
-res2 :: (Monad m) => m Int
+res2 :: (Applicative f, Monad f) => f Int
 res2 = fun2 val val

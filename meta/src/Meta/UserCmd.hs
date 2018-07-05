@@ -3,6 +3,9 @@ module Meta.UserCmd (
     , command_line_
 ) where
 
+import Prelude ()
+import Meta.Prelude
+
 import qualified Control.Monad as Monad
 import qualified System.Environment as Env
 
@@ -22,11 +25,11 @@ command_line app = Env.getArgs >>= command_line_ app
 command_line_ :: JWA.App -> [String] -> IO ()
 command_line_ app = friendly_parse Monad.>=> run
     where
-        friendly_parse [] = pure Help
+        friendly_parse [] = return Help
         friendly_parse rest = parse rest
-        parse :: (Monad m) => [String] -> m Command
+        parse :: (Functor m, Monad m) => [String] -> m Command
         parse args = case args of
-            [] -> pure Nop
+            [] -> return Nop
             "cd" : path : rest -> Seq (Chdir path) <$> parse rest
             "generate" : rest -> Seq (Generate app) <$> parse rest
             "help" : rest -> Seq Help <$> parse rest
