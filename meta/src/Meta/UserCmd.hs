@@ -31,7 +31,7 @@ command_line_ app = friendly_parse Monad.>=> run
             "generate" : rest -> Seq (Generate app) <$> parse rest
             "help" : rest -> Seq Help <$> parse rest
             "readpg" : rest -> Seq ReadPg <$> parse rest
-            "recompile" : rest -> Seq (Recompile app) <$> parse rest
+            "compile" : rest -> Seq (Compile app) <$> parse rest
             _ -> fail $ "Invalid arguments. Try \"help\" without quotes. The invalid arguments are " ++ show args ++ "."
         run :: Command -> IO ()
         run cmd = case cmd of
@@ -47,8 +47,8 @@ command_line_ app = friendly_parse Monad.>=> run
                     ++ "\n"
                     ++ "    cd DIR      Change directory to DIR.\n"
                     ++ "\n"
-                    ++ "    generate    Generate Java source code.\n"
-                    ++ "    recompile   Recompile generated Java source code.\n"
+                    ++ "    generate    Generate Java source code, SQL DDL file, and Dockerfile.\n"
+                    ++ "    compile     Compile generated Java source code.\n"
                     ++ "\n"
                     ++ "    readpg      Read PostgreSQL database.\n"
                     ++ "                Destination is read from libpq environment variables PGHOST, PGDATABASE, PGUSER.\n"
@@ -57,14 +57,14 @@ command_line_ app = friendly_parse Monad.>=> run
                     ++ "\n"
                     ++ "A Command may span several command-line arguments.\n"
                     ++ "\n"
-                    ++ "Example: The invocation \"" ++ prog ++ " cd foo generate recompile\" changes directory to \"foo\",\n"
-                    ++ "generates the source code, and then recompiles it."
+                    ++ "Example: The invocation \"" ++ prog ++ " cd foo generate compile\" changes directory to \"foo\",\n"
+                    ++ "generates the source code, and then compiles it."
                     ++ "\n"
             Chdir path -> Dir.setCurrentDirectory path
             Seq a b -> run a >> run b
             Generate ap -> UGJ.generate_java ap
             ReadPg -> SC.test
-            Recompile ap -> UGJ.maven_recompile ap
+            Compile ap -> UGJ.maven_recompile ap
 
 data Command
     = Nop
@@ -73,5 +73,5 @@ data Command
     | Generate JWA.App
     | Help
     | ReadPg
-    | Recompile JWA.App
+    | Compile JWA.App
     deriving (Read, Show)

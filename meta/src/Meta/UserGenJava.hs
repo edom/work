@@ -36,12 +36,17 @@ What is generated:
         * src\/main\/java\/: Java source files
 
         * sql\/create.sql: SQL DDL statements
+
+        * Dockerfile: Docker recipe
+
+            * We assume that Docker is used to distribute the application, not to build the application.
+            The application is built on a development machine or a build machine.
 -}
 generate_java :: JWA.App -> IO ()
 generate_java app_without_runtime =
     let
         app = add_runtime_dependency app_without_runtime |> sort_dependencies
-        files = F.prepend_dir (get_pom_xml_dir app) <$> ([pom_xml_file] ++ java_files ++ sql_files)
+        files = F.prepend_dir (get_pom_xml_dir app) <$> ([pom_xml_file] ++ java_files ++ sql_files ++ docker_files)
             where
                 pom_xml_file = F.text "pom.xml" $ X.render_doc $ M.to_pom_xml project
                 project = JWA._project app
@@ -58,6 +63,12 @@ generate_java app_without_runtime =
         sql_files = F.prepend_dir "sql" <$> [F.text "create.sql" sql_ddl]
             where
                 sql_ddl = generate_sql_ddl tables
+
+        docker_files = [
+                F.text "Dockerfile" $
+                    "FROM openjdk:8-jre-slim\n"
+                    ++ "ADD target /root/target\n"
+            ]
     in
         mapM_ F.file_write_verbose files
     where
