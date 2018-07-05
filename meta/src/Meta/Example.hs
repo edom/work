@@ -1,5 +1,3 @@
-{-# LANGUAGE ApplicativeDo #-}
-
 {- |
 
 An example web application.

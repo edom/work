@@ -1,5 +1,3 @@
-{-# LANGUAGE ApplicativeDo #-}
-
 {- |
 
 * Use 'mk_project' to describe your project.
