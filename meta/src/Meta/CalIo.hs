@@ -1,6 +1,7 @@
 module Meta.CalIo where
 
-import Prelude hiding (exp, getLine, putStrLn)
+import Prelude ()
+import Meta.Prelude hiding (getLine, putStrLn)
 
 import qualified Prelude as P
 
