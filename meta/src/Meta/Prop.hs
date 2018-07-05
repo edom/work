@@ -81,7 +81,17 @@ tryHard comps = case comps of
         Right tt -> Right $ h : tt
 
 {- |
-Use @ApplicativeDo@ language extension.
+The 'Applicative' instance of 'Err' is not compatible with 'Monad'.
+It would violate the equality:
+
+@
+    f <*> a = f `ap` a
+        where
+            ap mf mx = do
+                f <- mf
+                x <- mx
+                return (f x)
+@
 -}
 data Err a
     = ELeft [String]
@@ -104,14 +114,6 @@ instance Applicative Err where
 
 instance AppliError Err where
     raise = ELeft
-
-instance Monad Err where
-    return = pure
-    (>>) ma mb = ma *> mb
-    (>>=) mx k = case mx of
-        ELeft e -> ELeft e
-        ERight x -> k x
-    fail x = raise [x]
 
 getErrors :: Err a -> [String]
 getErrors (ELeft x) = x
