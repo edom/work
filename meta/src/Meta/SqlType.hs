@@ -1,5 +1,8 @@
 module Meta.SqlType where
 
+import Prelude ()
+import Meta.Prelude
+
 import qualified Data.Char as C
 
 -- | Database column data type.

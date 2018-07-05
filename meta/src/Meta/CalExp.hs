@@ -1,6 +1,7 @@
 module Meta.CalExp where
 
-import Prelude hiding (exp)
+import Prelude ()
+import Meta.Prelude
 
 import qualified Meta.CalVal as V
 

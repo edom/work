@@ -7,6 +7,9 @@ SQL information schema.
 -}
 module Meta.SqlInf where
 
+import Prelude ()
+import Meta.Prelude
+
 import qualified Data.Int as I
 
 import qualified Data.Map.Strict as Map

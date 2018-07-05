@@ -7,7 +7,8 @@ See also:
 -}
 module Meta.Peg where
 
-import Prelude hiding (and, any, concat, fail, not, or, (/), (>), (>>))
+import Prelude ()
+import Meta.Prelude hiding (and, any, concat, fail, not, or, (/), (>), (>>))
 
 -- * Expression
 

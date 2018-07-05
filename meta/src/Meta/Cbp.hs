@@ -4,12 +4,13 @@
 
 module Meta.Cbp where
 
+import Prelude ()
+import Meta.Prelude
+
 import qualified Meta.Cbp_internal as I
 import qualified Meta.Data as D
 import qualified Meta.Java as J
 import qualified Meta.Type as MT
-
-import Meta.Prop ((|>))
 
 -- * Type
 

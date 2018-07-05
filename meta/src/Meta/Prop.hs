@@ -5,19 +5,10 @@
 
 module Meta.Prop where
 
+import Prelude ()
+import Meta.Prelude
+
 import qualified System.IO.Error as E
-
--- * Application
-
-{- |
-Flipped function application.
-Flipped '$'.
-
-https://github.com/izdi/elm-cheat-sheet
--}
-(|>) :: a -> (a -> b) -> b
-(|>) x f = f x
-infixl 0 |>
 
 -- * Error handling
 

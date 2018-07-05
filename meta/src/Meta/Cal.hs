@@ -2,7 +2,8 @@
 
 module Meta.Cal where
 
-import Prelude hiding (exp)
+import Prelude ()
+import Meta.Prelude
 
 import qualified Meta.CalExp as E
 import qualified Meta.CalVal as V

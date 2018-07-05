@@ -1,5 +1,8 @@
 module Meta.JavaWebApp where
 
+import Prelude ()
+import Meta.Prelude
+
 import qualified Meta.Data as D
 import qualified Meta.DataQuery as DQ
 import qualified Meta.Html as H
@@ -8,8 +11,6 @@ import qualified Meta.JavaServlet as JS
 import qualified Meta.JavaType as JT
 import qualified Meta.Maven as M
 import qualified Meta.Web as W
-
-import Meta.Prop ((|>))
 
 type Group_id = M.Group_id
 
