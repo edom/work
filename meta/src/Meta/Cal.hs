@@ -1,4 +1,4 @@
-{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE CPP #-}
 
 module Meta.Cal where
 
@@ -38,10 +38,14 @@ plus a b = LExp (E.Plus a b)
 eq :: Lang -> Lang -> Lang
 eq a b = LExp (E.Eq a b)
 
+#if HAVE_PatternSynonyms
+
 -- * Term deconstructors
 
 pattern PInt :: Int -> Lang
 pattern PInt a = LVal (V.Int a)
+
+#endif
 
 -- * Evaluation
 

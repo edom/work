@@ -121,6 +121,12 @@ library
         cpp-options:
             -DHAVE_postgresql
 
+    if impl(ghc >= 7.10)
+        cpp-options:
+            -DHAVE_PatternSynonyms=1
+        default-extensions:
+            PatternSynonyms
+
 executable meta-example
     default-language: Haskell2010
     main-is: Main.hs
