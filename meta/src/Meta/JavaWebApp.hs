@@ -24,6 +24,9 @@ type Package_name = String
 
 type Output_prefix = FilePath
 
+get_output_prefix :: App -> Output_prefix
+get_output_prefix = _output_prefix
+
 set_output_prefix :: Output_prefix -> App -> App
 set_output_prefix path app = app { _output_prefix = path }
 

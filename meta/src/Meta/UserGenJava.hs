@@ -1,7 +1,6 @@
 module Meta.UserGenJava (
     generate_java
     , get_pom_xml_dir
-    , maven_recompile
     , generate_sql_ddl
 ) where
 
@@ -18,7 +17,6 @@ import qualified Meta.Java as J
 import qualified Meta.JavaRender as JR
 import qualified Meta.JavaWebApp as JWA
 import qualified Meta.Maven as M
-import qualified Meta.MavenCmd as MavenCmd
 import qualified Meta.MavenDep as MD
 import qualified Meta.SqlType as SqlType
 import qualified Meta.WrapM as V
@@ -95,9 +93,6 @@ add_runtime_dependency = JWA.add_dependencies (dep_runtime : deps_third_party)
 -- | Path to the directory containing the pom.xml.
 get_pom_xml_dir :: JWA.App -> FilePath
 get_pom_xml_dir app = JWA._output_prefix app F.</> JWA.get_artifact_id app
-
-maven_recompile :: JWA.App -> IO ()
-maven_recompile app = MavenCmd.recompile (get_pom_xml_dir app)
 
 {- |
 Generate SQL DDL (Data Definition Language) statements for schemas and tables.

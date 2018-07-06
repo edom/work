@@ -9,9 +9,8 @@ import Meta.Prelude
 import qualified Control.Monad as Monad
 import qualified System.Environment as Env
 
-import qualified System.Directory as Dir
-
 import qualified Meta.JavaWebApp as JWA
+import qualified Meta.OsProc as Os
 import qualified Meta.SqlCon as SC
 import qualified Meta.UserGenJava as UGJ
 
@@ -30,11 +29,13 @@ command_line_ app = friendly_parse Monad.>=> run
         parse :: (Functor m, Monad m) => [String] -> m Command
         parse args = case args of
             [] -> return Nop
-            "cd" : path : rest -> Seq (Chdir path) <$> parse rest
+            "cd" : path : rest -> Seq (Setcwd path) <$> parse rest
             "generate" : rest -> Seq (Generate app) <$> parse rest
             "help" : rest -> Seq Help <$> parse rest
             "readpg" : rest -> Seq ReadPg <$> parse rest
             "compile" : rest -> Seq (Compile app) <$> parse rest
+            "dbuild" : rest -> Seq (Dbuild app) <$> parse rest
+            "drun" : rest -> Seq (Drun app) <$> parse rest
             _ -> fail $ "Invalid arguments. Try \"help\" without quotes. The invalid arguments are " ++ show args ++ "."
         run :: Command -> IO ()
         run cmd = case cmd of
@@ -53,6 +54,9 @@ command_line_ app = friendly_parse Monad.>=> run
                     ++ "    generate    Generate Java source code, SQL DDL file, and Dockerfile.\n"
                     ++ "    compile     Compile generated Java source code.\n"
                     ++ "\n"
+                    ++ "    dbuild      Build Docker image.\n"
+                    ++ "    drun        Run Docker image.\n"
+                    ++ "\n"
                     ++ "    readpg      Read PostgreSQL database.\n"
                     ++ "                Destination is read from libpq environment variables PGHOST, PGDATABASE, PGUSER.\n"
                     ++ "                Password is read from PGPASSFILE, which defaults to $HOME/.pgpass.\n"
@@ -63,18 +67,39 @@ command_line_ app = friendly_parse Monad.>=> run
                     ++ "Example: The invocation \"" ++ prog ++ " cd foo generate compile\" changes directory to \"foo\",\n"
                     ++ "generates the source code, and then compiles it."
                     ++ "\n"
-            Chdir path -> Dir.setCurrentDirectory path
+            Setcwd path -> Os.setcwd path
             Seq a b -> run a >> run b
             Generate ap -> UGJ.generate_java ap
             ReadPg -> SC.test
-            Compile ap -> UGJ.maven_recompile ap
+            Compile ap -> maven_recompile ap
+            Dbuild ap -> docker_build ap
+            Drun ap -> docker_run ap
+
+in_app_dir :: JWA.App -> IO a -> IO a
+in_app_dir app = Os.withcwd dir
+    where
+        dir = UGJ.get_pom_xml_dir app
+
+maven_recompile :: JWA.App -> IO ()
+maven_recompile app = in_app_dir app $ Os.call "mvn" ["clean", "compile"]
+
+docker_tag :: JWA.App -> String
+docker_tag app = JWA.get_artifact_id app
+
+docker_build :: JWA.App -> IO ()
+docker_build app = in_app_dir app $ Os.call "docker" ["build", "--tag", docker_tag app, "."]
+
+docker_run :: JWA.App -> IO ()
+docker_run app = in_app_dir app $ Os.call "docker" ["run", "--rm", "--interactive", "--tty", docker_tag app]
 
 data Command
     = Nop
     | Seq Command Command
-    | Chdir FilePath
+    | Setcwd FilePath
     | Generate JWA.App
     | Help
     | ReadPg
     | Compile JWA.App
+    | Dbuild JWA.App
+    | Drun JWA.App
     deriving (Read, Show)
