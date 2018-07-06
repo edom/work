@@ -1,3 +1,6 @@
+{- |
+Describe your infrastructure in Haskell.
+-}
 module Manage (
     module Manage.Boilerplate,
     module Manage.Command,

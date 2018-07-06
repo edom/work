@@ -26,4 +26,3 @@ if ! is_root; then
     echo 'Impossible!'
     exit 1
 fi
-
