@@ -84,6 +84,11 @@ library
         Meta.OsProc
         Meta.Peg
         Meta.PegExample
+        Meta.PegGen
+        Meta.PegGenExample
+        Meta.PegGenLoc
+        Meta.PegGenRule
+        Meta.PegGenTree
         Meta.Prelude
         Meta.PreludeGrammar
         Meta.PreludeMin
@@ -136,6 +141,7 @@ library
         , filepath >= 1 && < 2
         , parsec >= 3 && < 4
         , postgresql-simple >= 0.4 && < 1
+        , pretty >= 1.0.0.0 && < 2
         , process >= 1.4.3.0 && < 2
         , shell-escape >= 0 && < 1
         , split >= 0.1 && < 1

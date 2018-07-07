@@ -1,4 +1,6 @@
 {- |
+Consider using "Meta.PegGen" instead of this.
+
 See also:
 
     * http://hackage.haskell.org/package/frisby
