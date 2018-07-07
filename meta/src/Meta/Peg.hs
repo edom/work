@@ -5,12 +5,38 @@ See also:
 
     * https://en.wikipedia.org/wiki/Parsing_expression_grammar
 -}
-module Meta.Peg where
+module Meta.Peg (
+    -- * Expression
+    Exp(..)
+    -- * Rule
+    , Rule(..)
+    , empty
+    , fail
+    , append
+    , concat
+    , term
+    , or
+    , opt
+    , many0
+    , many1
+    , and
+    , not
+    , (/)
+    , (>)
+    , (>!)
+    , (>?)
+    , string
+    , any
+    , space
+    , white
+    -- * Combinators
+    , Value(..)
+    , parse
+    -- * Parse
+) where
 
 import Prelude ()
-import Meta.Prelude hiding (and, any, concat, fail, not, or, (/), (>), (>>))
-
--- * Expression
+import Meta.PreludeGrammar
 
 data Exp t a
     = Empty -- ^ empty (always success)
@@ -43,8 +69,6 @@ mapTerm f e = case e of
     Many a -> Many a
     And a -> And a
     Not a -> Not a
-
--- * Rule
 
 data Rule t
     = RExp { rOut :: Exp t (Rule t) }
@@ -88,8 +112,6 @@ and = RExp . And
 not :: Rule t -> Rule t
 not = RExp . Not
 
--- * Combinators
-
 (/) :: Rule t -> Rule t -> Rule t
 (/) = or
 infixr 1 /
@@ -116,7 +138,11 @@ any :: [Rule t] -> Rule t
 any [] = fail
 any (h : t) = h / any t
 
--- * Parse
+space :: Rule Char
+space = any $ term <$> " \t\n\r"
+
+white :: Rule Char
+white = many1 space
 
 data Value t
     = No
@@ -149,45 +175,3 @@ parse = go . rOut
         go (Not r) x = case parse r x of
             Ok _ _ -> No
             No -> Ok [] x
-
-space :: Rule Char
-space = any $ term <$> " \t\n\r"
-
-white :: Rule Char
-white = many1 space
-
--- * Example
-
--- We should lex before parse, to obviate the "white" noise below.
-exampleParse :: Value Char
-exampleParse = parse cdecl "unsigned int** foo (signed int bar, signed char qux, unsigned long** qux);"
-    where
-        -- Problem:
-        -- C parsing depends on the symbol table.
-        -- We can't parse "unsigned int32_t" without knowing whether "int32_t" has been typedefed.
-        cdecl = typ >! name >? parl >? params >? parr >? scol
-        typ = (name / kvoid / typ_char / typ_short / typ_int / typ_long) > stars
-        stars = (opt white > star > stars) / empty
-        typ_char = opt (ksig > white) > kchar
-        typ_short = opt (ksig > white) > kshort > opt (white > kint)
-        typ_int = (opt (ksig > white) > kint) / (ksig > and (white > name))
-        typ_long = opt (ksig > white) > klong > opt (white > kint)
-        kvoid = string "void"
-        kchar = string "char"
-        kshort = string "short"
-        kint = string "int"
-        klong = string "long"
-        ksig = string "unsigned" / string "signed"
-        kw = kvoid / kchar / kshort / kint / klong / ksig
-
-        param = typ >! name
-        params = opt (param >? many0 (comma >? param))
-        letter = any $ term <$> ['A'..'Z'] ++ ['a'..'z'] ++ ['_']
-        digit = any $ term <$> ['0'..'9']
-        name = not (kw > not name_tail_char) > letter > many0 name_tail_char
-        name_tail_char = letter / digit
-        star = term '*'
-        comma = term ','
-        parl = term '('
-        parr = term ')'
-        scol = term ';'
