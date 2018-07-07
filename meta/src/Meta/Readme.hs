@@ -127,6 +127,8 @@ Do not use.
 
     * Formatting
 
+        * "Meta.Csv": comma-separated values
+
         * "Meta.WrapM": layout text into indented length-limited lines
 
             * "Meta.Wrap": internals of "Meta.WrapM"
@@ -148,5 +150,19 @@ Do not use.
     * "Meta.Readme": overview, this file
 
     * "Meta.Test": tests for this library
+
+* Prelude
+
+    * "Meta.Prelude"
+
+        * "Meta.List"
+
+        * "Meta.Map"
+
+        * "Meta.Time"
+
+* Operating system
+
+    * "Meta.OsProc"
 
 -}

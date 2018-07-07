@@ -46,6 +46,7 @@ library
         Meta.CalVal
         Meta.Cbp
         Meta.Cbp_internal
+        Meta.Csv
         Meta.Data
         Meta.DataColumn
         Meta.DataQuery
@@ -69,10 +70,12 @@ library
         Meta.JavaType
         Meta.JavaWebApp
         Meta.Lambda
+        Meta.List
         Meta.Logic
         Meta.LogicExp
         Meta.LogicVal
         Meta.Machine
+        Meta.Map
         Meta.Maven
         Meta.MavenDep
         Meta.OsProc
@@ -88,6 +91,7 @@ library
         Meta.SqlSyn
         Meta.SqlType
         Meta.Test
+        Meta.Time
         Meta.Type
         Meta.Tys
         Meta.User
@@ -120,11 +124,14 @@ library
         , bytestring >= 0 && < 1
         , HDBC >= 2 && < 3
         , containers >= 0.4 && < 1
+        , csv >= 0
         , directory >= 1.2.3.0 && < 2
         , filepath >= 1 && < 2
         , postgresql-simple >= 0.4 && < 1
         , process >= 1.4.3.0 && < 2
         , shell-escape >= 0 && < 1
+        , split >= 0.1 && < 1
+        , time >= 1
 
     if flag(postgresql)
         build-depends:
