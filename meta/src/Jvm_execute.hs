@@ -4,70 +4,31 @@ This concern of this module is the execution of codes in class files.
 module Jvm_execute
 where
 
-import Data.Bits
-    (
-        (.&.)
-        , (.|.)
-        , xor
-        , shiftL
-        , shiftR
-        , unsafeShiftL
-    )
-import Data.IORef
-    (
-        IORef
-        , newIORef
-        , readIORef
-        , writeIORef
-    )
-import Data.Int
-    (
-        Int8
-        , Int16
-        , Int32
-        , Int64
-    )
-import Data.Word
-    (
-        Word8
-        , Word16
-        , Word32
-        , Word64
-    )
-
-import Control.Monad.IO.Class (MonadIO, liftIO)
-
-import qualified Control.Monad as M
-import qualified Data.List as List
-
-import qualified Data.ByteString as Bs
+import Prelude ()
+import Meta.Prelude
 
 import qualified Data.ByteString.UTF8 as Bu
 
-import qualified Jvm_io as Z
 import qualified Meta.List as Li
 
-import Jvm_arch -- XXX
+import Meta.JvmArch -- XXX
 import Jvm_decode (decode)
-import Jvm_instruction
+import Meta.JvmIns
     (
         Instruction(..)
     )
-import Jvm_member
+import Meta.JvmMember
     (
         Field_ref(..)
         , Method_name
     )
-import Jvm_prepare -- XXX
-import Jvm_value (Value)
-import Jvm_type (Signature)
-import qualified Jvm_arch as A
+import qualified Meta.JvmArch as A
 import qualified Jvm_constant as C
 import qualified Jvm_decode as D
 import qualified Jvm_load as L
-import qualified Jvm_type as T
-import qualified Jvm_type_system as U
-import qualified Jvm_value as V
+import qualified Meta.JvmType as T
+import qualified Meta.JvmTys as U
+import qualified Meta.JvmValue as V
 
 -- * Initializing classes
 
@@ -91,7 +52,7 @@ init_class cls = do
                 (Bu.fromString "<clinit>")
                 (T.Mk_signature [] T.Void)
 
-resolve_method :: (Execute m) => Class -> Method_name -> Signature -> m (Class, Method)
+resolve_method :: (Execute m) => Class -> Method_name -> T.Signature -> m (Class, Method)
 resolve_method orig_cls mname msig = loop orig_cls
     where
         loop cls = do
@@ -185,7 +146,7 @@ This runs the method until it returns,
 and then this returns that method's return value
 (pops it from the operand stack).
 -}
-step_until_returned :: (Execute m) => m Value
+step_until_returned :: (Execute m) => m V.Value
 step_until_returned = do
     state <- get
     depth <- get_depth
@@ -446,13 +407,13 @@ execute instruction =
         Invokestatic c -> do
             (mcls, mname, msig) <- C.get_method_ref c
             let nargs = length (T.s_arg_types msig)
-            args <- reverse <$> M.replicateM nargs pop
+            args <- reverse <$> replicateM nargs pop
             cls <- load_and_init_class mcls
             met <- A.get_method cls mname msig
             A.begin_call cls met args
             -- FIXME this assume mcls == c_name cls
             -- error $ "Invokestatic: " ++ show target_method
-            -- M.when (is_static c)
+            -- when (is_static c)
             -- FIXME ensure that method is:
             -- static
             -- not abstract
@@ -465,7 +426,7 @@ execute instruction =
             (_, mname, msig) <- C.get_method_ref c
             let nargs = 1 + length (T.s_arg_types msig)
             -- XXX
-            this@(V.Instance cname _) : args <- reverse <$> M.replicateM nargs pop
+            this@(V.Instance cname _) : args <- reverse <$> replicateM nargs pop
             origin_class <- load_and_init_class cname
             (target_class, target_method) <- resolve_method origin_class mname msig
             begin_call target_class target_method (this : args)
@@ -475,11 +436,11 @@ execute instruction =
             target_class <- load_and_init_class mcls
             target_method <- get_method target_class mname msig
             let nargs = 1 + length (T.s_arg_types msig)
-            args <- reverse <$> M.replicateM nargs pop
+            args <- reverse <$> replicateM nargs pop
             begin_call target_class target_method args
         New c -> C.get_class_name c >>= new >>= push
         Newarray b -> do
-            elemtype <- D.type_from_newarray_byte b
+            elemtype <- type_from_newarray_byte b
             capacity <- pop_integer
             new_array elemtype capacity [] >>= push
         Anewarray b -> do
@@ -515,7 +476,7 @@ execute instruction =
         Ifnonnull ofs -> do
             v <- pop
             add_pc_if (not $ V.is_null v) (ofs - 3)
-        _ -> stop $ Unknown_instruction instruction
+        _ -> stop $ Not_implemented $ show instruction
 
     where
 
@@ -533,7 +494,7 @@ execute instruction =
         xaload = do
             index <- pop_integer
             (t, n, r) <- pop_array
-            M.unless (0 <= index && index < n) $ stop Array_index_out_of_bounds
+            unless (0 <= index && index < n) $ stop Array_index_out_of_bounds
             list <- read_ioref r
             push $ maybe (U.def_value t) id (list `Li.at` fromIntegral index)
 
@@ -560,14 +521,14 @@ execute instruction =
         if_icmp cmp ofs = do
             x <- pop >>= want_integer
             y <- pop >>= want_integer
-            M.when (cmp y x) $ add_pc (ofs - 3)
+            when (cmp y x) $ add_pc (ofs - 3)
         iconst = push . V.Integer
         lconst = push . V.Long
         fconst = push . V.Float
         dconst = push . V.Double
         add_pc ofs = modify_frame $ \ frame ->
             frame { f_pc = f_pc frame + fromIntegral (fromIntegral ofs :: Pc_offset) }
-        add_pc_if cond ofs = M.when cond $ add_pc (ofs :: Int16)
+        add_pc_if cond ofs = when cond $ add_pc (ofs :: Int16)
 
         pop_integer = pop >>= want_integer
         pop_long = pop >>= want_long
@@ -585,6 +546,21 @@ execute instruction =
         want_double v = maybe (v `type_must_be` T.Double) return (V.double v)
 
         type_must_be v t = stop (Type_must_be (U.type_of v) t)
+
+{- |
+This helps decoding the byte parameter of the 'Newarray' instruction.
+-}
+type_from_newarray_byte :: (A.Stateful m) => Word8 -> m T.Type
+type_from_newarray_byte a = case a of
+    4 -> return T.Bool
+    5 -> return T.Char
+    6 -> return T.Float
+    7 -> return T.Double
+    8 -> return T.Byte
+    9 -> return T.Short
+    10 -> return T.Int
+    11 -> return T.Long
+    _ -> A.stop (A.Invalid_newarray_type a)
 
 -- init_instance :: V.Value -> [V.Value] ->
 
@@ -616,13 +592,13 @@ See also 'V.Instance' in "Jvm_value".
 
 To initialize an instance, 'call' one of its constructors (@<init>@ methods).
     -}
-    new :: Class_name -> m Value
+    new :: Class_name -> m V.Value
     new _ = stop Need_io
 
     {- |
 This allocates an array and sets its elements according to the list.
     -}
-    new_array :: T.Type -> Int32 -> [Value] -> m Value
+    new_array :: T.Type -> Int32 -> [V.Value] -> m V.Value
     new_array _ _ _ = stop Need_io
 
 instance Execute S where
@@ -649,7 +625,7 @@ instance Execute J where
 -- * Creating instances of core classes
 
 -- String (char[], int, int)
-new_String :: (Execute m) => String -> m Value
+new_String :: (Execute m) => String -> m V.Value
 new_String str = do
     cha <- new_char_array str
     ins <- new cname
@@ -661,7 +637,7 @@ new_String str = do
         cname = Bu.fromString "java/lang/String"
 
 -- Class (ClassLoader)
-new_Class :: (Execute m) => m Value
+new_Class :: (Execute m) => m V.Value
 new_Class = do
     ins <- new cname
     _ <- call cname (Bu.fromString "<init>")
@@ -671,15 +647,15 @@ new_Class = do
     where
         cname = Bu.fromString "java/lang/Class"
 
-new_char_array :: (Execute m) => String -> m Value
+new_char_array :: (Execute m) => String -> m V.Value
 new_char_array str = do
     new_array T.Char strlen (V.jchar_list_from_string str)
     where
         strlen = fromIntegral (length str) -- XXX can truncate Int to Int32?
 
--- * Turning 'Constant' into 'Value'
+-- * Turning 'Constant' into 'V.Value'
 
-constant_to_value :: (Execute m) => Constant -> m Value
+constant_to_value :: (Execute m) => Constant -> m V.Value
 constant_to_value c = case c of
     C_integer a -> return (V.Integer a)
     C_float a -> return (V.Float a)

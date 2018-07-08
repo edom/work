@@ -9,15 +9,15 @@ import qualified Data.List as DL
 
 import qualified Data.ByteString.UTF8 as Bu
 
-import Jvm_arch
-import Jvm_instruction
+import Meta.JvmArch
+import Meta.JvmIns
     (
         Instruction
     )
 
 import qualified Jvm_decode as D
-import qualified Jvm_value as V
-import qualified Jvm_type as T
+import qualified Meta.JvmValue as V
+import qualified Meta.JvmType as T
 
 -- * Disassembling bytecode
 

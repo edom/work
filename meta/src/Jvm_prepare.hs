@@ -4,31 +4,12 @@ This module deals with replacing references to constant pool entries.
 module Jvm_prepare
 where
 
-import Data.Int
-    (
-        Int8
-        , Int16
-        , Int32
-        , Int64
-    )
-import Data.Word
-    (
-        Word8
-        , Word16
-        , Word32
-    )
-
 import qualified Control.Monad as M
-import qualified Data.List as L
-
-import qualified Data.ByteString as Bs
-import qualified Data.ByteString.Unsafe as Bsu
 
 import qualified Data.ByteString.UTF8 as Bu
 
-import qualified Jvm_io as Z
-
-import Jvm_arch -- XXX
+import Meta.JvmArch -- XXX
+import qualified Meta.JvmCls as Z
 
 -- * Dereferencing constant pool entries
 

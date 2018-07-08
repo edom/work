@@ -1,21 +1,10 @@
-module Jvm_instruction
-where
+module Meta.JvmIns (
+    -- * Java Virtual Machine instruction set
+    Instruction(..)
+) where
 
-import Data.Int
-    (
-        Int8
-        , Int16
-        , Int32
-        , Int64
-    )
-import Data.Word
-    (
-        Word8
-        , Word16
-        , Word32
-    )
-
--- * Java Virtual Machine instruction set
+import Prelude ()
+import Meta.Prelude
 
 {- |
 https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-7.html

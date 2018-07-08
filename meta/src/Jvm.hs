@@ -18,27 +18,27 @@ import qualified System.IO.Error as Ie
 
 import qualified Data.ByteString.UTF8 as Bu
 
-import Jvm_arch
+import Meta.JvmArch
     (
         S(..)
         , Class(..)
     )
-import Jvm_member (fr_type, fr_name)
+import Meta.JvmMember (fr_type, fr_name)
 
-import qualified Jvm_arch as A
+import qualified Meta.JvmArch as A
 import qualified Jvm_build as B
 import qualified Jvm_debug as C
 import qualified Jvm_execute as E
 import qualified Jvm_interop as O
 import qualified Jvm_load as L
-import qualified Jvm_type as T
-import qualified Jvm_type_system as U
-import qualified Jvm_value as V
+import qualified Meta.JvmType as T
+import qualified Meta.JvmTys as U
+import qualified Meta.JvmValue as V
 
 -- * Architecture
 
 {- $
-"Jvm_io": parse a 'Data.ByteString.ByteString' as found on disk, memory, network.
+"Meta.JvmCls": parse a 'Data.ByteString.ByteString' as found on disk, memory, network.
 
 Some types have the same names.
 

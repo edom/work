@@ -1,13 +1,12 @@
-module Jvm_type_system
-where
+module Meta.JvmTys (
+    type_of
+    , def_value
+) where
 
-import qualified Jvm_value as V
-import qualified Jvm_type as T
+import qualified Meta.JvmValue as V
+import qualified Meta.JvmType as T
 
-import Jvm_value (Value)
-import Jvm_type (Type)
-
-type_of :: Value -> Type
+type_of :: V.Value -> T.Type
 type_of v = case v of
     V.Padding -> T.Void
     V.Null -> T.Null
@@ -25,7 +24,7 @@ type_of v = case v of
 {- |
 Default value for uninitialized fields.
 -}
-def_value :: Type -> Value
+def_value :: T.Type -> V.Value
 def_value t = case t of
     T.Void -> V.Padding
     T.Null -> V.Null

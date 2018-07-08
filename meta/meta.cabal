@@ -43,8 +43,27 @@ library
     hs-source-dirs:
         src
 
+    -- Java_parse
     exposed-modules:
         Meta.Example
+        Jvm
+        Jvm_binary
+        Jvm_build
+        Jvm_constant
+        Jvm_debug
+        Jvm_decode
+        Jvm_execute
+        Jvm_interop
+        Jvm_load
+        Jvm_prepare
+        Jvm_state
+        Manage
+        Manage.Boilerplate
+        Manage.Cast
+        Manage.Command
+        Manage.Host
+        Manage.Iptables
+        Manage.SSH
         Meta.ByteString
         Meta.Cal
         Meta.CalExp
@@ -80,8 +99,13 @@ library
         Meta.JavaType
         Meta.JavaWebApp
         Meta.Json
+        Meta.JvmArch
         Meta.JvmCls
+        Meta.JvmIns
+        Meta.JvmMember
         Meta.JvmType
+        Meta.JvmTys
+        Meta.JvmValue
         Meta.Lambda
         Meta.List
         Meta.Logic
@@ -132,13 +156,7 @@ library
         Meta.Xml
         Meta.Xml_0
         Meta.Zip
-        Manage
-        Manage.Boilerplate
-        Manage.Cast
-        Manage.Command
-        Manage.Host
-        Manage.Iptables
-        Manage.SSH
+        Test_yaml
 
     if flag(stage1)
         hs-source-dirs:
@@ -173,6 +191,7 @@ library
         , unordered-containers
         , utf8-string >= 1 && < 2
         , vector
+        , yaml
         , zip-archive
 
     if flag(postgresql)

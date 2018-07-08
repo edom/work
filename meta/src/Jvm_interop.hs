@@ -3,11 +3,11 @@ where
 
 import qualified Data.ByteString.UTF8 as Bu
 
-import qualified Jvm_arch as A
+import qualified Meta.JvmArch as A
 import qualified Jvm_load as L
 import qualified Jvm_execute as E
-import qualified Jvm_type as T
-import qualified Jvm_value as V
+import qualified Meta.JvmType as T
+import qualified Meta.JvmValue as V
 
 -- * Calling Java code
 

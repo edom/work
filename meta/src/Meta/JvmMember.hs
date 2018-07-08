@@ -1,8 +1,11 @@
-module Jvm_member
-where
+module Meta.JvmMember (
+    Field_ref(..)
+    , Field_name
+    , Method_name
+) where
 
 import Data.ByteString (ByteString)
-import Jvm_type (Type)
+import Meta.JvmType (Type)
 
 data Field_ref
     = Mk_field_ref

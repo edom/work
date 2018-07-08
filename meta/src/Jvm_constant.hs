@@ -6,14 +6,14 @@ import Meta.Prelude
 
 import Data.ByteString (ByteString)
 
-import Jvm_member
+import Meta.JvmMember
     (
         Field_name
         , Method_name
     )
 
-import qualified Jvm_arch as A
-import qualified Jvm_type as T
+import qualified Meta.JvmArch as A
+import qualified Meta.JvmType as T
 import qualified Meta.List as Li
 
 -- * Accessing constant pool entries

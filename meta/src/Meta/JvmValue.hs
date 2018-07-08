@@ -1,8 +1,25 @@
 {- |
-This module should be imported qualified because some names clash with those in "Jvm_type".
+This module should be imported qualified because some names clash with those in "Meta.JvmType".
 -}
-module Jvm_value
-where
+module Meta.JvmValue (
+    -- * Value
+    Value(..)
+    , Class_name
+    -- * Pretty-printing
+    , pretty
+    , pretty_io
+    -- * Marshalling strings
+    , jchar_list_from_string
+    , string_from_jchar_list
+    , is_category_2
+    , is_null
+    , integer
+    , long
+    , float
+    , double
+    , From_java(..)
+    , To_java(..)
+) where
 
 import Prelude ()
 import Meta.Prelude
@@ -18,14 +35,8 @@ import Data.IORef (IORef, readIORef)
 
 import qualified GHC.Float as Gf
 
-import Jvm_member
-    (
-        Field_ref
-    )
-
-import qualified Jvm_type as T
-
--- * Value
+import qualified Meta.JvmMember as M
+import qualified Meta.JvmType as T
 
 {- |
 An inhabitant of this type represents things that Java variables can hold.
@@ -44,14 +55,12 @@ data Value
     | Long Int64
     | Float Float
     | Double Double
-    | Instance Class_name (IORef [(Field_ref, Value)]) -- ^ embrace the 'IO' for instance field values
+    | Instance Class_name (IORef [(M.Field_ref, Value)]) -- ^ embrace the 'IO' for instance field values
     | Array T.Type Int32 (IORef [Value])
 
 type Class_name = Bs.ByteString
 
 -- TODO use ForeignPtr for Array?
-
--- * Pretty-printing
 
 {- |
 If the input is an instance, this does not read its field values.
@@ -78,16 +87,16 @@ This returns the string; this does not print the string yet.
 -}
 pretty_io :: Value -> IO String
 pretty_io v = case v of
-    Array T.Char n r -> do
+    -- Why is the length ignored?
+    Array T.Char _ r -> do
         content <- string_from_jchar_list <$> readIORef r
         return $ pretty v ++ " " ++ show content
-    Array t n r -> do
+    -- Why is the length ignored?
+    Array _ _ r -> do
         content <- readIORef r
         texts <- mapM pretty_io content
         return $ pretty v ++ " [" ++ List.intercalate ", " texts ++ "]"
     _ -> return (pretty v)
-
--- * Marshalling strings
 
 -- XXX This may truncate the Int?
 -- XXX This is grossly inefficient?
@@ -127,19 +136,19 @@ just use the 'Value' constructors ('Integer', 'Long', and so on).
 
 integer :: Value -> Maybe Int32
 integer (Integer x) = return x
-integer v = Nothing
+integer _ = Nothing
 
 long :: Value -> Maybe Int64
 long (Long x) = return x
-long v = Nothing
+long _ = Nothing
 
 float :: Value -> Maybe Float
 float (Float x) = return x
-float v = Nothing
+float _ = Nothing
 
 double :: Value -> Maybe Double
 double (Double x) = return x
-double v = Nothing
+double _ = Nothing
 
 -- * Marshalling
 
@@ -185,9 +194,3 @@ instance To_java Int32 where to_java = Integer
 instance To_java Int64 where to_java = Long
 instance To_java Float where to_java = Float
 instance To_java Double where to_java = Double
-
-{-
-class Marshal m a where
-    from_java :: m a
-    to_java :: a -> m Value
--}

@@ -1,25 +1,7 @@
-module Jvm_arch
-where
+module Meta.JvmArch where
 
-import Data.Bits
-    (
-        (.&.)
-        , (.|.)
-        , unsafeShiftL
-    )
-import Data.Int
-    (
-        Int8
-        , Int16
-        , Int32
-        , Int64
-    )
-import Data.Word
-    (
-        Word8
-        , Word16
-        , Word32
-    )
+import Prelude ()
+import Meta.Prelude
 
 import qualified Control.Monad as M
 import qualified Data.IORef as Ir
@@ -31,23 +13,12 @@ import qualified Data.ByteString as Bs
 
 import qualified Data.ByteString.UTF8 as Bu
 
-import qualified Jvm_type as T
-import qualified Jvm_type_system as U
-import qualified Jvm_value as V
+import qualified Meta.JvmCls as C
+import qualified Meta.JvmMember as Me
+import qualified Meta.JvmType as T
+import qualified Meta.JvmTys as U
+import qualified Meta.JvmValue as V
 import qualified Meta.List as Li
-
-import Jvm_instruction
-    (
-        Instruction(..)
-    )
-import Jvm_io (Code(..))
-import Jvm_member
-import Jvm_value (Value(..))
-import Jvm_type
-    (
-        Signature(..)
-        , Type(..)
-    )
 
 -- * Monads: S and J
 
@@ -92,6 +63,12 @@ newtype S a = Mk_s { un_s :: State -> (State, Maybe a) }
 
 {- |
 'J' is like 'S', but 'J' allows 'IO' while 'S' does not.
+
+Perhaps we should generalize both S and J to something like this:
+
+@
+newtype G m a = MkG { unG :: State -> m (State, Maybe a) }
+@
 -}
 newtype J a = Mk_j { un_j :: State -> IO (State, Maybe a) }
 
@@ -141,10 +118,10 @@ get_loaded_class name =
 -- * Manipulating operand stack
 
 -- | Push value to operand stack.
-push :: (Stateful m) => Value -> m ()
+push :: (Stateful m) => V.Value -> m ()
 push v = modify_frame $ \ f -> f { f_stack = v : f_stack f }
 
-peek :: (Stateful m) => m Value
+peek :: (Stateful m) => m V.Value
 peek = do
     frame <- get_frame
     case f_stack frame of
@@ -152,7 +129,7 @@ peek = do
         x : _ -> return x
 
 -- | Pop value from operand stack.
-pop :: (Stateful m) => m Value
+pop :: (Stateful m) => m V.Value
 pop = do
     frame <- get_frame
     let stack = f_stack frame
@@ -162,7 +139,7 @@ pop = do
             replace_frame frame { f_stack = y }
             return x
 
-pop_return_value :: (Stateful m) => Type -> m Value
+pop_return_value :: (Stateful m) => T.Type -> m V.Value
 pop_return_value t = case t of
     T.Void -> return V.Padding
     _ -> pop
@@ -175,7 +152,7 @@ You should use 'begin_call' instead of using 'enter' directly.
 This also inserts the necessary paddings so that category-2 (8-byte) values
 take two local variable array indexes.
 -}
-begin_call :: (Stateful m) => Class -> Method -> [Value] -> m ()
+begin_call :: (Stateful m) => Class -> Method -> [V.Value] -> m ()
 begin_call cls met args = enter (f_new cls met (workaround args))
     where
         workaround list = do
@@ -240,7 +217,7 @@ Load from local variable array.
 Get the element at the given index from
 the local variable array of the current frame.
 -}
-load :: (Stateful m) => Local_index -> m Value
+load :: (Stateful m) => Local_index -> m V.Value
 load i = do
     frame <- get_frame
     let local = f_local frame
@@ -252,7 +229,7 @@ Store to local variable array.
 Set the element at the given index in the local variable array
 of the current frame.
 -}
-store :: (Stateful m) => Local_index -> Value -> m ()
+store :: (Stateful m) => Local_index -> V.Value -> m ()
 store i v = modify_frame $ \ frame ->
     let
         local = f_local frame
@@ -279,34 +256,34 @@ is_native a = get_access a .&. 0x0100 /= 0
 
 -- * Getting fields and methods
 
-find_method :: (Stateful m) => Class -> Method_name -> T.Signature -> m (Maybe Method)
+find_method :: (Stateful m) => Class -> Me.Method_name -> T.Signature -> m (Maybe Method)
 find_method clas mname msig =
     case [ m | m <- c_methods clas, m_name m == mname, m_signature m == msig ] of
         x : _ -> return (Just x)
         _ -> return Nothing
 
-get_method :: (Stateful m) => Class -> Method_name -> T.Signature -> m Method
+get_method :: (Stateful m) => Class -> Me.Method_name -> T.Signature -> m Method
 get_method clas mname msig = do
     mm <- find_method clas mname msig
     case mm of
         Just x -> return x
         _ -> stop (Method_not_found (c_name clas) mname msig)
 
-get_field :: (Stateful m) => Class -> Field_name -> T.Type -> m Field
+get_field :: (Stateful m) => Class -> Me.Field_name -> T.Type -> m Field
 get_field clas fname ftype =
     case [ f | f <- c_fields clas, f_name f == fname, f_type f == ftype ] of
         x : _ -> return x
-        _ -> stop (Field_not_found (c_name clas) (Mk_field_ref fname ftype))
+        _ -> stop (Field_not_found (c_name clas) (Me.Mk_field_ref fname ftype))
 
 -- * Manipulating field values
 
 -- Grossly inefficient.
-read_static_field :: (Stateful m) => Class -> Field_ref -> m V.Value
+read_static_field :: (Stateful m) => Class -> Me.Field_ref -> m V.Value
 read_static_field clas_ fref =
     -- TODO check if field exists?
-    return $ Li.kv_get_or (U.def_value (fr_type fref)) fref (c_static clas_)
+    return $ Li.kv_get_or (U.def_value (Me.fr_type fref)) fref (c_static clas_)
 
-write_static_field :: (Stateful m) => Class -> Field_ref -> V.Value -> m ()
+write_static_field :: (Stateful m) => Class -> Me.Field_ref -> V.Value -> m ()
 write_static_field clas_ fref value =
     modify $ \ s ->
         s { s_classes = map set (s_classes s) }
@@ -314,7 +291,7 @@ write_static_field clas_ fref value =
         set c | c_name c == c_name clas_ = c { c_static = Li.kv_upsert fref value (c_static c) }
         set c = c
 
-read_instance_field :: (Stateful m) => Value -> Field_ref -> m Value
+read_instance_field :: (Stateful m) => V.Value -> Me.Field_ref -> m V.Value
 read_instance_field ins fref = case ins of
     V.Instance _ r ->
         maybe (U.def_value ftype) snd . DL.find (\ (f, _) -> f == fref) <$> read_ioref r
@@ -323,9 +300,9 @@ read_instance_field ins fref = case ins of
     _ ->
         stop Expecting_instance
     where
-        ftype = fr_type fref
+        ftype = Me.fr_type fref
 
-write_instance_field :: (Stateful m) => Value -> Field_ref -> Value -> m ()
+write_instance_field :: (Stateful m) => V.Value -> Me.Field_ref -> V.Value -> m ()
 write_instance_field target fref value =
     case target of
         V.Instance _ r -> modify_ioref r loop
@@ -333,7 +310,7 @@ write_instance_field target fref value =
         _ -> stop Expecting_instance
     where
         loop [] = [(fref, value)]
-        loop ((fr, fv) : rest) | fr == fref = (fr, value) : rest
+        loop ((fr, _oldval) : rest) | fr == fref = (fr, value) : rest
         loop (_ : rest) = loop rest
 
 -- * Internals: Low-level State and Frame functions
@@ -343,7 +320,7 @@ s_new :: State
 s_new = Mk_state Ready [] [] ["."] [] False False
 
 -- | Create a frame.
-f_new :: Class -> Method -> [Value] -> Frame
+f_new :: Class -> Method -> [V.Value] -> Frame
 f_new cls met loc = Mk_frame cls met 0 [] loc
 
 class Is_ready a where is_ready :: a -> Bool
@@ -379,9 +356,8 @@ data Status
     | Method_body_not_fetchable
     | Invalid_pc Pc
     | Decode_error Word8
-    | Unknown_instruction Instruction
     | Need_io -- ^ usually requested by a native method
-    | Type_must_be Type Type -- ^ actual-type expected-type
+    | Type_must_be T.Type T.Type -- ^ actual-type expected-type
     | Expecting_fieldref
     | Expecting_methodref
     | Expecting_class_name
@@ -393,9 +369,9 @@ data Status
     | Unexpected_null
     | Failed_loading_class Class_name Message
     | Class_not_found Class_name
-    | Field_not_found Class_name Field_ref
-    | Field_not_initialized Class_name Field_ref
-    | Method_not_found Class_name Method_name Signature
+    | Field_not_found Class_name Me.Field_ref
+    | Field_not_initialized Class_name Me.Field_ref
+    | Method_not_found Class_name Me.Method_name T.Signature
     | Negative_array_size
     | Invalid_newarray_type Word8
     | Invalid_tableswitch Message
@@ -418,8 +394,8 @@ data Frame
         f_class :: Class
         , f_method :: Method
         , f_pc :: Pc
-        , f_stack :: [Value] -- ^ operand stack
-        , f_local :: [Value] -- ^ local variable array
+        , f_stack :: [V.Value] -- ^ operand stack
+        , f_local :: [V.Value] -- ^ local variable array
     }
 
 {- |
@@ -435,7 +411,7 @@ type Pc_offset = Int32
 
 -- * Native method binding
 
-find_binding :: (Stateful m) => Class_name -> Method_name -> T.Signature -> m (Maybe Method)
+find_binding :: (Stateful m) => Class_name -> Me.Method_name -> T.Signature -> m (Maybe Method)
 find_binding cname mname msig = do
     bins <- gets s_native_bindings
     let matches = [ m | Mk_binding c m <- bins, c == cname, m_name m == mname, m_signature m == msig ]
@@ -451,14 +427,14 @@ data Binding
     }
 
 -- FIXME handle static/instance?
-bind :: (Stateful m) => Class_name -> Type -> Method_name -> [Type] -> J Value -> m ()
+bind :: (Stateful m) => Class_name -> T.Type -> Me.Method_name -> [T.Type] -> J V.Value -> m ()
 bind cname rtype mname atypes body = modify $ \ s ->
     s
         {
             s_native_bindings = Mk_binding cname method : s_native_bindings s
         }
     where
-        method = Mk_method 0 mname (Mk_signature atypes rtype) (Native_io body)
+        method = Mk_method 0 mname (T.Mk_signature atypes rtype) (Native_io body)
 
 -- * Types suitable for execution
 
@@ -470,7 +446,7 @@ data Class
         , c_fields :: [Field]
         , c_methods :: [Method]
         , c_pool :: [Constant]
-        , c_static :: [(Field_ref, Value)] -- ^ static field values
+        , c_static :: [(Me.Field_ref, V.Value)] -- ^ static field values
         , c_initialized :: Bool
     }
 
@@ -484,8 +460,8 @@ data Constant
     | C_double Double -- ^ 6
     | C_class Bs.ByteString -- ^ 7
     | C_string Bs.ByteString -- ^ 8
-    | C_fieldref Class_name Field_name Type -- ^ 9
-    | C_methodref Class_name Method_name Signature -- ^ 10
+    | C_fieldref Class_name Me.Field_name T.Type -- ^ 9
+    | C_methodref Class_name Me.Method_name T.Signature -- ^ 10
     | C_resolved
     deriving (Read, Show, Eq)
 
@@ -507,8 +483,8 @@ data Field
     = Mk_field
     {
         f_access :: Word16
-        , f_name :: Field_name
-        , f_type :: Type
+        , f_name :: Me.Field_name
+        , f_type :: T.Type
     }
     deriving (Read, Show, Eq)
 
@@ -516,16 +492,16 @@ data Method
     = Mk_method
     {
         m_access :: Word16
-        , m_name :: Method_name
-        , m_signature :: Signature
+        , m_name :: Me.Method_name
+        , m_signature :: T.Signature
         , m_body :: Body
     }
 
 data Body
     = Missing -- ^ no body
-    | Bytecode Code -- ^ JVM bytecode
-    | Native (S Value) -- ^ native without 'IO'
-    | Native_io (J Value) -- ^ native with 'IO'
+    | Bytecode C.Code -- ^ JVM bytecode
+    | Native (S V.Value) -- ^ native without 'IO'
+    | Native_io (J V.Value) -- ^ native with 'IO'
 
 -- Instances involving S
 

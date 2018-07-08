@@ -1,81 +1,50 @@
 module Jvm_decode
 where
 
-import Data.Bits
-    (
-        (.&.)
-        , (.|.)
-        , unsafeShiftL
-    )
-import Data.Int
-    (
-        Int8
-        , Int16
-        , Int32
-        , Int64
-    )
-import Data.Word
-    (
-        Word8
-        , Word16
-        , Word32
-    )
-
-import qualified Control.Monad as M
-import qualified Data.List as L
+import Prelude ()
+import Meta.Prelude
+import qualified Prelude as P
 
 import qualified Data.ByteString as Bs
 import qualified Data.ByteString.Unsafe as Bsu
 
-import Jvm_arch
-    (
-        State(..)
-        , Stateful
-        , Status(..)
-        , Frame(..)
-        , S(..)
-        , J(..)
-        , Pc
-    )
-import Jvm_instruction
-    (
-        Instruction(..)
-    )
-import qualified Jvm_arch as A
-import qualified Jvm_type as T
-import qualified Jvm_io as Z
+import qualified Meta.JvmArch as A
+import qualified Meta.JvmCls as Z
+import qualified Meta.JvmIns as I
+
+import Meta.JvmIns
 
 -- * Decoding JVM bytecode into instructions
 
-class (Stateful m) => Fetch m where
+class (A.Stateful m) => Fetch m where
     -- | Get the program counter that points to the byte that will be 'fetch'ed.
-    get_pc :: m Pc
+    get_pc :: m A.Pc
     -- | Get the byte pointed by the program counter, and increment the program counter.
     fetch :: m Word8
 
-instance Fetch S where
+instance Fetch A.S where
 
-    get_pc = f_pc <$> A.get_frame
+    get_pc = A.f_pc <$> A.get_frame
 
     fetch = do
         frame <- A.get_frame
         let
-            pc = f_pc frame
+            pc = A.f_pc frame
             ipc = fromIntegral pc :: Int -- FIXME what if pc doesn't fit in an Int?
-            body = A.m_body $ f_method frame
+            body = A.m_body $ A.f_method frame
         case body of
-            A.Missing -> A.stop Method_lacks_Code
+            A.Missing -> A.stop A.Method_lacks_Code
             A.Bytecode code_ -> do
                 let code = Z.cd_code code_
                 case () of
                     _ | ipc < Bs.length code -> do
-                        A.replace_frame frame { f_pc = pc + 1 }
+                        A.replace_frame frame { A.f_pc = pc + 1 }
                         return (Bsu.unsafeIndex code ipc)
                     _ ->
-                        A.stop (Invalid_pc pc)
-            _ -> A.stop Method_body_not_fetchable
+                        A.stop (A.Invalid_pc pc)
+            _ -> A.stop A.Method_body_not_fetchable
 
-instance Fetch J where
+instance Fetch A.J where
     get_pc = A.lift get_pc
     fetch = A.lift fetch
 
@@ -83,8 +52,10 @@ instance Fetch J where
 Fetch and decode the next instruction, and increment pc accordingly.
 
 You get 'decode' for practically every instance of 'Fetch'.
+
+Decoding requires program counter because some instructions such as tableswitch have alignment requirements.
 -}
-decode :: (Monad m, Fetch m) => m Instruction
+decode :: (Monad m, Fetch m) => m I.Instruction
 decode = do
     op <- fetch
     case op of
@@ -264,8 +235,8 @@ decode = do
             low <- s4
             high <- s4
             let count = fromIntegral (high - low + 1) -- XXX
-            M.unless (low <= high) $ A.stop (Invalid_tableswitch "high > low")
-            Tableswitch def low high <$> M.replicateM count s4
+            unless (low <= high) $ A.stop (A.Invalid_tableswitch "high > low")
+            Tableswitch def low high <$> replicateM count s4
         172 -> return Ireturn
         173 -> return Lreturn
         174 -> return Freturn
@@ -297,16 +268,16 @@ decode = do
         202 -> return Breakpoint
         254 -> return Impdep1
         255 -> return Impdep2
-        _ -> A.stop (Decode_error op)
+        _ -> A.stop (A.Decode_error op)
     where
         -- mbz = must be zero
         mbz n = u1 >>= \ a -> if a == 0
             then return ()
-            else A.stop (Invalid_reserved n a)
+            else A.stop (A.Invalid_reserved n a)
         -- XXX this aligns with respect to the beginning of code[]
         align4 = do
             p <- get_pc
-            M.replicateM_ (fromIntegral $ 4 - mod p 4) u1
+            replicateM_ (fromIntegral $ 4 - P.mod p 4) u1
         u1 = fetch
         s1 = fromIntegral <$> u1
         u2 = do
@@ -330,19 +301,3 @@ decode = do
         s2 = as_int16 . fromIntegral <$> u2
         as_int32 x = x :: Int32
         as_int16 x = x :: Int16
-        -- XXX where is the documentation for fromIntegral?
-
-{- |
-This helps decoding the byte parameter of the 'Newarray' instruction.
--}
-type_from_newarray_byte :: (A.Stateful m) => Word8 -> m T.Type
-type_from_newarray_byte a = case a of
-    4 -> return T.Bool
-    5 -> return T.Char
-    6 -> return T.Float
-    7 -> return T.Double
-    8 -> return T.Byte
-    9 -> return T.Short
-    10 -> return T.Int
-    11 -> return T.Long
-    _ -> A.stop (Invalid_newarray_type a)

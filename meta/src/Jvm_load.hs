@@ -6,7 +6,6 @@ where
 
 import qualified Meta.Prelude as P
 
-import qualified Control.Applicative as Ap
 import qualified Control.Monad as Mo
 import qualified System.IO.Error as Ie
 
@@ -14,8 +13,8 @@ import qualified Control.Monad.IO.Class as Ic
 
 import qualified Data.ByteString.UTF8 as Bu
 
-import qualified Jvm_arch as A
-import qualified Jvm_io as Z
+import qualified Meta.JvmArch as A
+import qualified Meta.JvmCls as Z
 import qualified Jvm_prepare as P
 
 -- * Loading classes
@@ -65,7 +64,7 @@ load_class_in name (dir : rest) = do
 -- * Internals
 
 {- |
-This returns a 'A.Class' from "Jvm_arch", not a 'Z.Class' from "Jvm_io".
+This returns a 'A.Class' from "Meta.JvmArch", not a 'Z.Class' from "Meta.JvmCls".
 
 You are not supposed to use this function directly;
 let the virtual machine load the classes on its own.
@@ -74,7 +73,7 @@ load_class_file :: FilePath -> IO (Either String A.Class)
 load_class_file = fmap (>>= P.resolve_class) . parse_class_file
 
 {- |
-This returns a 'Z.Class' from "Jvm_io", not a 'A.Class' from "Jvm_arch".
+This returns a 'Z.Class' from "Meta.JvmCls", not a 'A.Class' from "Meta.JvmArch".
 
 Deserialize the binary representation from disk.
 -}

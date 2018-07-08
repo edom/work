@@ -6,28 +6,23 @@ This module provides a convenient way of defining classes.
 module Jvm_build
 where
 
+import Prelude ()
+import Meta.Prelude
+
 import qualified Data.ByteString.UTF8 as Bu
 
 import qualified Control.Monad.Trans.State as Ms
 
-import Data.Bits
-    (
-        (.|.)
-    )
-import Data.Word
-    (
-        Word16
-    )
-import Jvm_arch
+import Meta.JvmArch
     (
         Class(..)
         , Method(..)
         , J
         , S
     )
-import qualified Jvm_arch as A
-import qualified Jvm_type as T
-import qualified Jvm_value as V
+import qualified Meta.JvmArch as A
+import qualified Meta.JvmType as T
+import qualified Meta.JvmValue as V
 
 -- * Building a Class
 
