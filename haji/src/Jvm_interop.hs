@@ -8,7 +8,6 @@ import qualified Jvm_load as L
 import qualified Jvm_execute as E
 import qualified Jvm_type as T
 import qualified Jvm_value as V
-import qualified List as Li
 
 -- * Calling Java code
 

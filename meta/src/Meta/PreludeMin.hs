@@ -25,6 +25,7 @@ module Meta.PreludeMin (
     , M.unless
     , M.replicateM
     , M.replicateM_
+    , (M.>=>)
     -- ** Either, Maybe
     , Either(Left, Right)
     , either

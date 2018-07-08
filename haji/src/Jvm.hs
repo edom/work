@@ -10,66 +10,27 @@ and not directly use those private modules.
 module Jvm
 where
 
-import Data.Bits
-    (
-        (.&.)
-    )
-import Data.Int
-    (
-        Int16
-        , Int32
-    )
-import Data.Word
-    (
-        Word8
-        , Word16
-        , Word32
-    )
-import Foreign
-    (
-        Ptr
-        , alloca
-        , castPtr
-    )
-
-import Control.Monad.IO.Class (MonadIO, liftIO)
+import Control.Monad.IO.Class (liftIO)
 
 import qualified Control.Monad as M
 import qualified Foreign as F
 import qualified System.IO.Error as Ie
 
-import qualified Data.ByteString as Bs
-import qualified Data.ByteString.Unsafe as Bsu
-
-import qualified Data.Serialize as Se
-
 import qualified Data.ByteString.UTF8 as Bu
 
 import Jvm_arch
     (
-        J(..)
-        , S(..)
-        , State
-        , Status
-        , is_ready
-        , lift
+        S(..)
         , Class(..)
     )
-import Jvm_instruction
-    (
-        Instruction
-    )
-import Jvm_member (Field_ref, fr_type, fr_name)
+import Jvm_member (fr_type, fr_name)
 
 import qualified Jvm_arch as A
 import qualified Jvm_build as B
 import qualified Jvm_debug as C
-import qualified Jvm_decode as D
 import qualified Jvm_execute as E
 import qualified Jvm_interop as O
 import qualified Jvm_load as L
-import qualified Jvm_prepare as P
-import qualified Jvm_state as S
 import qualified Jvm_type as T
 import qualified Jvm_type_system as U
 import qualified Jvm_value as V
@@ -77,7 +38,7 @@ import qualified Jvm_value as V
 -- * Architecture
 
 {- $
-"Jvm_io": parse a 'Bs.ByteString' as found on disk, memory, network.
+"Jvm_io": parse a 'Data.ByteString.ByteString' as found on disk, memory, network.
 
 Some types have the same names.
 
@@ -105,15 +66,15 @@ runvm option = do
         A.bind (Bu.fromString "java/lang/Float")
             T.Int (Bu.fromString "floatToRawIntBits") [T.Float] $ do
                 V.Float x <- A.load 0 -- FIXME
-                fmap V.Integer $ liftIO $ alloca $ \ p -> do
+                fmap V.Integer $ liftIO $ F.alloca $ \ p -> do
                     F.poke p x
-                    F.peek (castPtr p) -- FIXME
+                    F.peek (F.castPtr p) -- FIXME
         A.bind (Bu.fromString "java/lang/Double")
             T.Long (Bu.fromString "doubleToRawLongBits") [T.Double] $ do
                 V.Double x <- A.load 0 -- FIXME
-                fmap V.Long $ liftIO $ alloca $ \ p -> do
+                fmap V.Long $ liftIO $ F.alloca $ \ p -> do
                     F.poke p x
-                    F.peek (castPtr p) -- FIXME
+                    F.peek (F.castPtr p) -- FIXME
         A.bind (Bu.fromString "java/lang/Class")
             (T.Instance (Bu.fromString "java/lang/Class")) (Bu.fromString "getPrimitiveClass") [T.Instance (Bu.fromString "java/lang/String")] $ do
                 a0 <- A.load 0

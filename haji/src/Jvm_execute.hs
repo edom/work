@@ -45,7 +45,7 @@ import qualified Data.ByteString as Bs
 import qualified Data.ByteString.UTF8 as Bu
 
 import qualified Jvm_io as Z
-import qualified List as Li
+import qualified Meta.List as Li
 
 import Jvm_arch -- XXX
 import Jvm_decode (decode)

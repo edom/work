@@ -26,7 +26,6 @@ import Jvm_arch
         , S
     )
 import qualified Jvm_arch as A
-import qualified Jvm_state as S
 import qualified Jvm_type as T
 import qualified Jvm_value as V
 

@@ -34,7 +34,7 @@ import qualified Data.ByteString.UTF8 as Bu
 import qualified Jvm_type as T
 import qualified Jvm_type_system as U
 import qualified Jvm_value as V
-import qualified List as Li
+import qualified Meta.List as Li
 
 import Jvm_instruction
     (

@@ -1,16 +1,10 @@
 module Jvm_constant
 where
 
-import Data.Word
-    (
-        Word8
-        , Word16
-        , Word32
-    )
+import Prelude ()
+import Meta.Prelude
 
 import Data.ByteString (ByteString)
-
-import qualified Control.Monad as Mo
 
 import Jvm_member
     (
@@ -20,7 +14,7 @@ import Jvm_member
 
 import qualified Jvm_arch as A
 import qualified Jvm_type as T
-import qualified List as Li
+import qualified Meta.List as Li
 
 -- * Accessing constant pool entries
 
@@ -37,16 +31,16 @@ get i = do
         (A.c_pool clas `Li.at` (fromIntegral i - 1))
 
 get_field_ref :: (A.Stateful m) => Word16 -> m (A.Class_name, Field_name, T.Type)
-get_field_ref = get Mo.>=> want_field_ref
+get_field_ref = get >=> want_field_ref
 
 get_method_ref :: (A.Stateful m) => Word16 -> m (A.Class_name, Method_name, T.Signature)
-get_method_ref = get Mo.>=> want_method_ref
+get_method_ref = get >=> want_method_ref
 
 get_class_name :: (A.Stateful m) => Word16 -> m A.Class_name
-get_class_name = get Mo.>=> want_class_name
+get_class_name = get >=> want_class_name
 
 get_string :: (A.Stateful m) => Word16 -> m ByteString
-get_string = get Mo.>=> want_string
+get_string = get >=> want_string
 
 want_string :: (A.Stateful m) => A.Constant -> m ByteString
 want_string (A.C_string a) = return a

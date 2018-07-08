@@ -4,6 +4,9 @@ This module should be imported qualified because some names clash with those in 
 module Jvm_value
 where
 
+import Prelude ()
+import Meta.Prelude
+
 import qualified Data.Char as Ch
 import qualified Data.List as List
 
@@ -12,19 +15,7 @@ import qualified Data.ByteString as Bs
 import qualified Data.ByteString.UTF8 as Bu
 
 import Data.IORef (IORef, readIORef)
-import Data.Int
-    (
-        Int8
-        , Int16
-        , Int32
-        , Int64
-    )
-import Data.Word
-    (
-        Word8
-        , Word16
-        , Word32
-    )
+
 import qualified GHC.Float as Gf
 
 import Jvm_member
