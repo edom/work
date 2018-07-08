@@ -444,3 +444,9 @@ My = module {
                     - Semicolon is associative: `(a;b);c = a;(b;c)`. This also holds for the effects.
             - Can we replace statements with expressions in existing imperative languages without breaking backward compatibility?
         - But C has https://en.wikipedia.org/wiki/Comma_operator
+- IDE (integrated development environment), editor
+    - https://hackage.haskell.org/package/treersec "Build a structure editor for a programming language from combinators following the grammar."
+    - http://www.lamdu.org/
+    - cirru https://news.ycombinator.com/item?id=13773813
+        - lots of similar things https://news.ycombinator.com/item?id=13774864
+    - isomorf: find code fragment popularity by structure (not-only-text) comparison https://isomorf.io/#!/tours/of/overview/7/haskell
