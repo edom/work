@@ -39,6 +39,7 @@ library
 
     exposed-modules:
         Meta.Example
+        Meta.ByteString
         Meta.Cal
         Meta.CalExp
         Meta.CalIo
@@ -63,6 +64,7 @@ library
         Meta.HsRender
         Meta.HsType
         Meta.Html
+        Meta.Http
         Meta.Java
         Meta.JavaExp
         Meta.JavaRender
@@ -70,6 +72,7 @@ library
         Meta.JavaSta
         Meta.JavaType
         Meta.JavaWebApp
+        Meta.Json
         Meta.JvmCls
         Meta.JvmType
         Meta.Lambda
@@ -104,6 +107,7 @@ library
         Meta.SqlSyn
         Meta.SqlType
         Meta.Test
+        Meta.Text
         Meta.Time
         Meta.Type
         Meta.Tys
@@ -135,6 +139,7 @@ library
 
     build-depends:
         base >= 4 && < 5
+        , aeson >= 1 && < 2
         , bytestring >= 0 && < 1
         , cereal >= 0 && < 1
         , containers >= 0.4 && < 1
@@ -142,14 +147,20 @@ library
         , directory >= 1.2.3.0 && < 2
         , filepath >= 1 && < 2
         , HDBC >= 2 && < 3
+        , http-client >= 0 && < 1
+        , http-types >= 0 && < 1
         , parsec >= 3 && < 4
         , postgresql-simple >= 0.4 && < 1
         , pretty >= 1.0.0.0 && < 2
         , process >= 1.4.3.0 && < 2
+        , scientific
         , shell-escape >= 0 && < 1
         , split >= 0.1 && < 1
+        , text
         , time >= 1
+        , unordered-containers
         , utf8-string >= 1 && < 2
+        , vector
 
     if flag(postgresql)
         build-depends:
