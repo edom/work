@@ -29,10 +29,12 @@ command_line_ app = friendly_parse Monad.>=> run
         parse args = case args of
             [] -> return Nop
             "cd" : path : rest -> Seq (Setcwd path) <$> parse rest
+            "clean" : rest -> Seq (Clean app) <$> parse rest
             "generate" : rest -> Seq (Generate app) <$> parse rest
             "help" : rest -> Seq Help <$> parse rest
             "readpg" : rest -> Seq ReadPg <$> parse rest
             "compile" : rest -> Seq (Compile app) <$> parse rest
+            "package" : rest -> Seq (Package app) <$> parse rest
             "dbuild" : rest -> Seq (Dbuild app) <$> parse rest
             "drun" : rest -> Seq (Drun app) <$> parse rest
             _ -> fail $ "Invalid arguments. Try \"help\" without quotes. The invalid arguments are " ++ show args ++ "."
@@ -50,11 +52,19 @@ command_line_ app = friendly_parse Monad.>=> run
                     ++ "\n"
                     ++ "    cd DIR      Change directory to DIR.\n"
                     ++ "\n"
+                    ++ "Maven commands, assuming that Maven 3 CLI is in PATH:\n"
+                    ++ "\n"
                     ++ "    generate    Generate Java source code, SQL DDL file, and Dockerfile.\n"
+                    ++ "    clean       Delete compilation result Java class files.\n"
                     ++ "    compile     Compile generated Java source code.\n"
+                    ++ "    package     Create the JAR.\n"
+                    ++ "\n"
+                    ++ "Docker commands, assuming that docker CLI is in PATH:\n"
                     ++ "\n"
                     ++ "    dbuild      Build Docker image.\n"
                     ++ "    drun        Run Docker image.\n"
+                    ++ "\n"
+                    ++ "Database commands:\n"
                     ++ "\n"
                     ++ "    readpg      Read PostgreSQL database.\n"
                     ++ "                Destination is read from libpq environment variables PGHOST, PGDATABASE, PGUSER.\n"
@@ -68,9 +78,11 @@ command_line_ app = friendly_parse Monad.>=> run
                     ++ "\n"
             Setcwd path -> Os.setcwd path
             Seq a b -> run a >> run b
+            Clean ap -> maven ap ["clean"]
             Generate ap -> UGJ.generate_java ap
             ReadPg -> SC.test
             Compile ap -> maven_recompile ap
+            Package ap -> maven_package ap
             Dbuild ap -> docker_build ap
             Drun ap -> docker_run ap
 
@@ -79,8 +91,14 @@ in_app_dir app = Os.withcwd dir
     where
         dir = UGJ.get_pom_xml_dir app
 
+maven :: JWA.App -> [Os.Arg] -> IO ()
+maven app args = in_app_dir app $ Os.call "mvn" args
+
 maven_recompile :: JWA.App -> IO ()
-maven_recompile app = in_app_dir app $ Os.call "mvn" ["clean", "compile"]
+maven_recompile app = maven app ["clean", "compile"]
+
+maven_package :: JWA.App -> IO ()
+maven_package app = maven app ["-Prelease", "package"]
 
 docker_tag :: JWA.App -> String
 docker_tag app = JWA.get_artifact_id app
@@ -95,10 +113,12 @@ data Command
     = Nop
     | Seq Command Command
     | Setcwd FilePath
+    | Clean JWA.App
     | Generate JWA.App
     | Help
     | ReadPg
     | Compile JWA.App
+    | Package JWA.App
     | Dbuild JWA.App
     | Drun JWA.App
     deriving (Read, Show)
