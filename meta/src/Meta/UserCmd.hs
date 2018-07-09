@@ -25,19 +25,21 @@ command_line_ app = friendly_parse Monad.>=> run
     where
         friendly_parse [] = return Help
         friendly_parse rest = parse rest
+
         parse :: (Functor m, Monad m) => [String] -> m Command
         parse args = case args of
             [] -> return Nop
             "cd" : path : rest -> Seq (Setcwd path) <$> parse rest
-            "clean" : rest -> Seq (Clean app) <$> parse rest
-            "generate" : rest -> Seq (Generate app) <$> parse rest
+            "clean" : rest -> Seq Clean <$> parse rest
+            "generate" : rest -> Seq Generate <$> parse rest
             "help" : rest -> Seq Help <$> parse rest
             "readpg" : rest -> Seq ReadPg <$> parse rest
-            "compile" : rest -> Seq (Compile app) <$> parse rest
-            "package" : rest -> Seq (Package app) <$> parse rest
-            "dbuild" : rest -> Seq (Dbuild app) <$> parse rest
-            "drun" : rest -> Seq (Drun app) <$> parse rest
+            "compile" : rest -> Seq Compile <$> parse rest
+            "package" : rest -> Seq Package <$> parse rest
+            "dbuild" : rest -> Seq Dbuild <$> parse rest
+            "drun" : rest -> Seq Drun <$> parse rest
             _ -> fail $ "Invalid arguments. Try \"help\" without quotes. The invalid arguments are " ++ show args ++ "."
+
         run :: Command -> IO ()
         run cmd = case cmd of
             Nop -> return ()
@@ -78,47 +80,47 @@ command_line_ app = friendly_parse Monad.>=> run
                     ++ "\n"
             Setcwd path -> Os.setcwd path
             Seq a b -> run a >> run b
-            Clean ap -> maven ap ["clean"]
-            Generate ap -> UGJ.generate_java ap
+            Clean -> maven ["clean"]
+            Generate -> UGJ.generate_java app
             ReadPg -> SC.test
-            Compile ap -> maven_recompile ap
-            Package ap -> maven_package ap
-            Dbuild ap -> docker_build ap
-            Drun ap -> docker_run ap
+            Compile -> maven_recompile
+            Package -> maven_package
+            Dbuild -> docker_build
+            Drun -> docker_run
 
-in_app_dir :: JWA.App -> IO a -> IO a
-in_app_dir app = Os.withcwd dir
-    where
-        dir = UGJ.get_pom_xml_dir app
+        in_app_dir :: IO a -> IO a
+        in_app_dir = Os.withcwd dir
+            where
+                dir = UGJ.get_pom_xml_dir app
 
-maven :: JWA.App -> [Os.Arg] -> IO ()
-maven app args = in_app_dir app $ Os.call "mvn" args
+        maven :: [Os.Arg] -> IO ()
+        maven args = in_app_dir $ Os.call "mvn" args
 
-maven_recompile :: JWA.App -> IO ()
-maven_recompile app = maven app ["clean", "compile"]
+        maven_recompile :: IO ()
+        maven_recompile = maven ["clean", "compile"]
 
-maven_package :: JWA.App -> IO ()
-maven_package app = maven app ["-Prelease", "package"]
+        maven_package :: IO ()
+        maven_package = maven ["-Prelease", "package"]
 
-docker_tag :: JWA.App -> String
-docker_tag app = JWA.get_artifact_id app
+        docker_tag :: String
+        docker_tag = JWA.get_artifact_id app
 
-docker_build :: JWA.App -> IO ()
-docker_build app = in_app_dir app $ Os.call "docker" ["build", "--tag", docker_tag app, "."]
+        docker_build :: IO ()
+        docker_build = in_app_dir $ Os.call "docker" ["build", "--tag", docker_tag, "."]
 
-docker_run :: JWA.App -> IO ()
-docker_run app = in_app_dir app $ Os.call "docker" ["run", "--rm", "--interactive", "--tty", docker_tag app]
+        docker_run :: IO ()
+        docker_run = in_app_dir $ Os.call "docker" ["run", "--rm", "--interactive", "--tty", docker_tag]
 
 data Command
     = Nop
     | Seq Command Command
     | Setcwd FilePath
-    | Clean JWA.App
-    | Generate JWA.App
+    | Clean
+    | Generate
     | Help
     | ReadPg
-    | Compile JWA.App
-    | Package JWA.App
-    | Dbuild JWA.App
-    | Drun JWA.App
+    | Compile
+    | Package
+    | Dbuild
+    | Drun
     deriving (Read, Show)
