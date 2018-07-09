@@ -86,7 +86,7 @@ https://gist.github.com/torgeir/6742158
 Search the Internet for @pom.xml template@.
 -}
 to_pom_xml :: Project -> X.Doc
-to_pom_xml pro = doc
+to_pom_xml MkProject{..} = doc
     where
         doc :: X.Doc
         doc = X.mkDoc [
@@ -97,10 +97,10 @@ to_pom_xml pro = doc
                     , nAtr "xsi" "schemaLocation" "http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
                 ] [
                     elm "modelVersion" [] [text "4.0.0"]
-                    , elm "groupId" [] [text grp]
-                    , elm "artifactId" [] [text art]
-                    , elm "version" [] [text ver]
-                    , elm "packaging" [] [text $ renderPackaging pkg]
+                    , elm "groupId" [] [text pGroupId]
+                    , elm "artifactId" [] [text pArtifactId]
+                    , elm "version" [] [text pVersion]
+                    , elm "packaging" [] [text $ renderPackaging pPackaging]
                     , elm "properties" [] [
                         elm "project.build.sourceEncoding" [] [text "UTF-8"]
                         , elm "java.version" [] [text "1.8"]
@@ -118,22 +118,48 @@ to_pom_xml pro = doc
                             ]
                         ]
                     ]
-                    , elm "dependencies" [] (map renderDep deps)
+                    , elm "profiles" [] [
+                        elm "profile" [] [
+                            elt "id" "release"
+                            , elm "build" [] [
+                                elm "plugins" [] [
+                                    -- https://maven.apache.org/plugins/maven-dependency-plugin/examples/copying-project-dependencies.html
+                                    elm "plugin" [] [
+                                        elt "groupId" "org.apache.maven.plugins"
+                                        , elt "artifactId" "maven-dependency-plugin"
+                                        , elt "version" "3.0.1"
+                                        , elm "executions" [] [
+                                            elm "execution" [] [
+                                                elt "phase" "package"
+                                                , elm "goals" [] [
+                                                    elt "goal" "copy-dependencies"
+                                                ]
+                                                , elm "configuration" [] [
+                                                    elt "prependGroupId" "true"
+                                                    , elt "includeScope" "runtime"
+                                                    , elt "overWriteSnapshots" "true"
+                                                    , elt "overWriteReleases" "true"
+                                                    , elt "outputDirectory" "${project.build.directory}/dependency"
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                    , elm "dependencies" [] (map renderDep pDeps)
                 ]
             ]
-        grp = pGroupId pro
-        art = pArtifactId pro
-        ver = pVersion pro
-        pkg = pPackaging pro
-        deps = pDeps pro
+        elt name_ text_ = elm name_ [] [text text_]
         renderPackaging p = case p of
             PJar -> "jar"
             PPom -> "pom"
-        renderDep d = elm "dependency" [] [
-                elm "groupId" [] [text $ MD.groupId d]
-                , elm "artifactId" [] [text $ MD.artifactId d]
-                , elm "version" [] [text $ MD.version d]
-                , elm "scope" [] [text $ renderScope $ MD.scope d]
+        renderDep MD.MkDep{..} = elm "dependency" [] [
+                elm "groupId" [] [text groupId]
+                , elm "artifactId" [] [text artifactId]
+                , elm "version" [] [text version]
+                , elm "scope" [] [text $ renderScope scope]
             ]
         renderScope scope = case scope of
             MD.Compile -> "compile"
