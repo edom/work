@@ -1,3 +1,5 @@
+{-# LANGUAGE RecordWildCards #-}
+
 {- |
 
 * Use 'mk_project' to describe your project.
@@ -33,6 +35,7 @@ module Meta.Maven (
 
 import qualified Meta.MavenDep as MD
 import qualified Meta.Xml as X
+import qualified Meta.Xml_0 as Y
 
 type Version = String
 
@@ -86,36 +89,36 @@ to_pom_xml :: Project -> X.Doc
 to_pom_xml pro = doc
     where
         doc :: X.Doc
-        doc = X.MkDoc [
-                X.proc "xml" [X.atr "version" "1.0", X.atr "encoding" "UTF-8"]
-                , X.elm "project" [
-                    X.atr "xmlns" "http://maven.apache.org/POM/4.0.0"
-                    , X.nAtr "xmlns" "xsi" "http://www.w3.org/2001/XMLSchema-instance"
-                    , X.nAtr "xsi" "schemaLocation" "http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+        doc = X.mkDoc [
+                X.proc "xml" [atr "version" "1.0", atr "encoding" "UTF-8"]
+                , elm "project" [
+                    atr "xmlns" "http://maven.apache.org/POM/4.0.0"
+                    , nAtr "xmlns" "xsi" "http://www.w3.org/2001/XMLSchema-instance"
+                    , nAtr "xsi" "schemaLocation" "http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
                 ] [
-                    X.elm "modelVersion" [] [X.text "4.0.0"]
-                    , X.elm "groupId" [] [X.text grp]
-                    , X.elm "artifactId" [] [X.text art]
-                    , X.elm "version" [] [X.text ver]
-                    , X.elm "packaging" [] [X.text $ renderPackaging pkg]
-                    , X.elm "properties" [] [
-                        X.elm "project.build.sourceEncoding" [] [X.text "UTF-8"]
-                        , X.elm "java.version" [] [X.text "1.8"]
+                    elm "modelVersion" [] [text "4.0.0"]
+                    , elm "groupId" [] [text grp]
+                    , elm "artifactId" [] [text art]
+                    , elm "version" [] [text ver]
+                    , elm "packaging" [] [text $ renderPackaging pkg]
+                    , elm "properties" [] [
+                        elm "project.build.sourceEncoding" [] [text "UTF-8"]
+                        , elm "java.version" [] [text "1.8"]
                     ]
-                    , X.elm "build" [] [
-                        X.elm "plugins" [] [
-                            X.elm "plugin" [] [
-                                X.elm "groupId" [] [X.text "org.apache.maven.plugins"]
-                                , X.elm "artifactId" [] [X.text "maven-compiler-plugin"]
-                                , X.elm "version" [] [X.text "3.1"]
-                                , X.elm "configuration" [] [
-                                    X.elm "source" [] [X.text "${java.version}"]
-                                    , X.elm "target" [] [X.text "${java.version}"]
+                    , elm "build" [] [
+                        elm "plugins" [] [
+                            elm "plugin" [] [
+                                elm "groupId" [] [text "org.apache.maven.plugins"]
+                                , elm "artifactId" [] [text "maven-compiler-plugin"]
+                                , elm "version" [] [text "3.1"]
+                                , elm "configuration" [] [
+                                    elm "source" [] [text "${java.version}"]
+                                    , elm "target" [] [text "${java.version}"]
                                 ]
                             ]
                         ]
                     ]
-                    , X.elm "dependencies" [] (map renderDep deps)
+                    , elm "dependencies" [] (map renderDep deps)
                 ]
             ]
         grp = pGroupId pro
@@ -126,15 +129,16 @@ to_pom_xml pro = doc
         renderPackaging p = case p of
             PJar -> "jar"
             PPom -> "pom"
-        renderDep d = X.elm "dependency" [] [
-                X.elm "groupId" [] [X.text $ MD.groupId d]
-                , X.elm "artifactId" [] [X.text $ MD.artifactId d]
-                , X.elm "version" [] [X.text $ MD.version d]
-                , X.elm "scope" [] [X.text $ renderScope $ MD.scope d]
+        renderDep d = elm "dependency" [] [
+                elm "groupId" [] [text $ MD.groupId d]
+                , elm "artifactId" [] [text $ MD.artifactId d]
+                , elm "version" [] [text $ MD.version d]
+                , elm "scope" [] [text $ renderScope $ MD.scope d]
             ]
         renderScope scope = case scope of
             MD.Compile -> "compile"
             MD.Provided -> "provided"
+        Y.Module_Meta_Xml{..} = Y.module_Meta_Xml
 
 data Packaging
     = PJar

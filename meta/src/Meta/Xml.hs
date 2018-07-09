@@ -2,6 +2,17 @@
 {-# LANGUAGE RankNTypes #-}
 {-# LANGUAGE TypeSynonymInstances #-}
 
+{- |
+Consider using "Meta.Xml_0" instead.
+
+Things to consider:
+
+* Merge this and "Meta.Html".
+An attribute should be a node.
+An attribute should not be a property of an element.
+
+* Change the pretty-printer to use the @pretty@ library.
+-}
 module Meta.Xml where
 
 import qualified Data.String as S
@@ -45,8 +56,10 @@ instance S.IsString Node where fromString = NText
 
 class CElm a where
 
+    -- | Element in a namespace.
     nElm :: Ns -> Name -> [Atr] -> [Node] -> a
 
+    -- | Element in the empty namespace.
     elm :: Name -> [Atr] -> [Node] -> a
     elm = nElm ""
 
