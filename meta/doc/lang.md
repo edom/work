@@ -450,3 +450,14 @@ My = module {
     - cirru https://news.ycombinator.com/item?id=13773813
         - lots of similar things https://news.ycombinator.com/item?id=13774864
     - isomorf: find code fragment popularity by structure (not-only-text) comparison https://isomorf.io/#!/tours/of/overview/7/haskell
+- compiling with continuations
+    - Why use CPS (continuation passing style) as intermediate form?
+        - http://matt.might.net/articles/cps-conversion/
+        - https://www.microsoft.com/en-us/research/publication/compiling-with-continuations-continued/
+        - https://news.ycombinator.com/item?id=7150095
+    - 2003, retrospective: the essence of compiling with continuations https://users.soe.ucsc.edu/~cormac/papers/best-pldi.pdf
+        - https://en.wikipedia.org/wiki/A-normal_form
+- relational programming (pure logic programming?)
+    - miniKanren
+        - Byrd PhD thesis https://scholarworks.iu.edu/dspace/bitstream/handle/2022/8777/Byrd_indiana_0093A_10344.pdf
+            - mentions other programming languages: Prolog, Mercury, Curry
