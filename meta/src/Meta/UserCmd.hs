@@ -1,3 +1,5 @@
+{-# LANGUAGE RecordWildCards #-}
+
 module Meta.UserCmd (
     command_line
     , command_line_
@@ -8,8 +10,11 @@ import Meta.Prelude
 
 import qualified Control.Monad as Monad
 
+import qualified Meta.Http as Http
 import qualified Meta.JavaWebApp as JWA
+import qualified Meta.Json as Json
 import qualified Meta.Os as Os
+import qualified Meta.Pretty as P
 import qualified Meta.SqlCon as SC
 import qualified Meta.UserGenJava as UGJ
 
@@ -38,6 +43,8 @@ command_line_ app = friendly_parse Monad.>=> run
             "package" : rest -> Seq Package <$> parse rest
             "dbuild" : rest -> Seq Dbuild <$> parse rest
             "drun" : rest -> Seq Drun <$> parse rest
+            "ksvc" : rest -> Seq Ksvc <$> parse rest
+            "ksvcs" : rest -> Seq Ksvcs <$> parse rest
             _ -> fail $ "Invalid arguments. Try \"help\" without quotes. The invalid arguments are " ++ show args ++ "."
 
         run :: Command -> IO ()
@@ -66,6 +73,11 @@ command_line_ app = friendly_parse Monad.>=> run
                     ++ "    dbuild      Build Docker image.\n"
                     ++ "    drun        Run Docker image.\n"
                     ++ "\n"
+                    ++ "Kubernetes commands:\n"
+                    ++ "\n"
+                    ++ "    ksvc        List the app's service.\n"
+                    ++ "    ksvcs       List all services.\n"
+                    ++ "\n"
                     ++ "Database commands:\n"
                     ++ "\n"
                     ++ "    readpg      Read PostgreSQL database.\n"
@@ -87,29 +99,65 @@ command_line_ app = friendly_parse Monad.>=> run
             Package -> maven_package
             Dbuild -> docker_build
             Drun -> docker_run
+            Ksvc -> kube_service
+            Ksvcs -> kube_services
 
         in_app_dir :: IO a -> IO a
         in_app_dir = Os.withcwd dir
             where
                 dir = UGJ.get_pom_xml_dir app
 
-        maven :: [Os.Arg] -> IO ()
-        maven args = in_app_dir $ Os.call "mvn" args
-
-        maven_recompile :: IO ()
-        maven_recompile = maven ["clean", "compile"]
-
-        maven_package :: IO ()
-        maven_package = maven ["-Prelease", "package"]
-
         docker_tag :: String
         docker_tag = JWA.get_artifact_id app
 
-        docker_build :: IO ()
-        docker_build = in_app_dir $ Os.call "docker" ["build", "--tag", docker_tag, "."]
+        kube_service_name = JWA.get_kube_service_name app
 
-        docker_run :: IO ()
+        maven :: [Os.Arg] -> IO ()
+        maven args = in_app_dir $ Os.call "mvn" args
+
+        get_kube_services :: IO [Service]
+        get_kube_services = do
+            bs <- Http.get_ByteString $ kube_api_server ++ "/api/v1/services"
+            Right json <- return $ Json.decode bs
+            return (
+                (json `at` "items")
+                |> Json.assume_array
+                |> map (\ s ->
+                    let
+                        spec = s `at` "spec"
+                        metadata = s `at` "metadata"
+                    in
+                        MkService {
+                            _sName = Json.assume_string $ metadata `at` "name"
+                            , _sClusterIp = Json.assume_string $ spec `at` "clusterIP"
+                        }
+                    )
+                )
+            where
+                at = Json.at
+                kube_api_server = "http://localhost:8001"
+
+        display_service :: Service -> String
+        display_service MkService{..} = P.render $ P.text _sName P.<> P.text ":" P.<+> P.text _sClusterIp
+
+        -- IO ()
+
+        maven_recompile = maven ["clean", "compile"]
+        maven_package = maven ["-Prelease", "package"]
+        docker_build = in_app_dir $ Os.call "docker" ["build", "--tag", docker_tag, "."]
         docker_run = in_app_dir $ Os.call "docker" ["run", "--rm", "--interactive", "--tty", docker_tag]
+        kube_service = do
+            svcs <- get_kube_services
+            putStr $ unlines $ map display_service $ filter (\ MkService{..} -> _sName == kube_service_name) svcs
+        kube_services = do
+            svcs <- get_kube_services
+            putStr $ unlines $ map display_service svcs
+
+data Service
+    = MkService {
+        _sName :: String
+        , _sClusterIp :: String
+    } deriving (Read, Show)
 
 data Command
     = Nop
@@ -123,4 +171,6 @@ data Command
     | Package
     | Dbuild
     | Drun
+    | Ksvc
+    | Ksvcs
     deriving (Read, Show)
