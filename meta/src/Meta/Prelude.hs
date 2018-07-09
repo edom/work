@@ -20,6 +20,8 @@ module Meta.Prelude (
     , not
     , and
     , or
+    , (&&)
+    , (||)
     -- * List
     , concat
     , all
@@ -31,11 +33,15 @@ module Meta.Prelude (
     , null
     , length
     , reverse
+    , L.isPrefixOf
+    , L.isInfixOf
+    , L.isSuffixOf
     -- ** Char, String
     , lines
     , unlines
     , unwords
     , words
+    , UpDownCase(..)
     -- * Ord
     , Ord((<), (>), (<=), (>=))
     -- * Num
@@ -69,15 +75,21 @@ module Meta.Prelude (
     , W.Word64
     -- * Monad fail
     , fail
-    -- * Custom
+    -- * Errors
+    , user_error
+    , raise_either
+    -- * Function
     , (|>)
 ) where
 
 import Prelude
 import Meta.PreludeMin
 
+import qualified Data.Char as C
 import qualified Data.Int as I
+import qualified Data.List as L
 import qualified Data.Word as W
+import qualified System.IO.Error as IE
 
 import qualified Meta.Os as Os
 
@@ -90,3 +102,22 @@ https://github.com/izdi/elm-cheat-sheet
 (|>) :: a -> (a -> b) -> b
 (|>) x f = f x
 infixl 0 |>
+
+class UpDownCase a where
+    upcase :: a -> a
+    downcase :: a -> a
+
+instance UpDownCase Char where
+    upcase = C.toUpper
+    downcase = C.toLower
+
+instance (UpDownCase a) => UpDownCase [a] where
+    upcase = map upcase
+    downcase = map downcase
+
+-- | @user_error msg = 'IE.ioError' ('IE.userError' msg)@.
+user_error :: String -> IO a
+user_error = IE.ioError . IE.userError
+
+raise_either :: (Monad m) => Either String a -> m a
+raise_either = either fail return
