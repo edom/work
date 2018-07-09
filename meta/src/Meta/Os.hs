@@ -16,11 +16,14 @@ module Meta.Os (
     , Env.getEnvironment
     -- * Careless transput
     , Slurp(..)
+    -- * Directory traversal
+    , descendant_files_of
 ) where
 
 import Control.Monad ((>=>))
 
 import qualified Control.Monad.IO.Class as MI
+import qualified System.Directory.Tree as DT
 import qualified System.Environment as Env
 
 import qualified Data.Text as T
@@ -38,5 +41,24 @@ class Slurp m a where slurp :: FilePath -> m a
 
 -- | 'B.readFile' from "Data.ByteString".
 instance (MI.MonadIO m) => Slurp m B.ByteString where slurp = MI.liftIO . B.readFile
+instance (MI.MonadIO m) => Slurp m B.LazyByteString where slurp = slurp >=> return . B.fromStrict
 instance (MI.MonadIO m) => Slurp m T.Text where slurp = slurp >=> return . Te.decodeUtf8With Tee.lenientDecode
 instance (MI.MonadIO m) => Slurp m String where slurp = slurp >=> return . T.unpack
+
+{- |
+Get every relative file path in the directory recursively.
+
+Directories are excluded.
+
+Unreadable files are silently ignored.
+-}
+descendant_files_of :: FilePath -> IO [FilePath]
+descendant_files_of path = do
+    anchor DT.:/ tree <- DT.readDirectoryWith read_contents path
+    return $ map (\ name -> anchor ++ "/" ++ name) $ listify tree
+    where
+        read_contents _ = return ()
+        listify :: DT.DirTree a -> [FilePath]
+        listify node = case node of
+            DT.File name _ -> [name]
+            DT.Dir name children -> map (\ c -> name ++ "/" ++ c) (concatMap listify children)
