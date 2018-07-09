@@ -163,6 +163,6 @@ Do not use.
 
 * Operating system
 
-    * "Meta.OsProc"
+    * "Meta.Os"
 
 -}

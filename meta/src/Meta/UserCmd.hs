@@ -7,10 +7,9 @@ import Prelude ()
 import Meta.Prelude
 
 import qualified Control.Monad as Monad
-import qualified System.Environment as Env
 
 import qualified Meta.JavaWebApp as JWA
-import qualified Meta.OsProc as Os
+import qualified Meta.Os as Os
 import qualified Meta.SqlCon as SC
 import qualified Meta.UserGenJava as UGJ
 
@@ -18,7 +17,7 @@ import qualified Meta.UserGenJava as UGJ
 Command line for controlling the application and related common tasks.
 -}
 command_line :: JWA.App -> IO ()
-command_line app = Env.getArgs >>= command_line_ app
+command_line app = Os.getArgs >>= command_line_ app
 
 -- | This is 'command_line' but you pass the command-line arguments yourself.
 command_line_ :: JWA.App -> [String] -> IO ()
@@ -41,7 +40,7 @@ command_line_ app = friendly_parse Monad.>=> run
         run cmd = case cmd of
             Nop -> return ()
             Help -> do
-                prog <- Env.getProgName
+                prog <- Os.getProgName
                 putStr $
                     "Usage: " ++ prog ++ " Command...\n"
                     ++ "\n"
