@@ -26,8 +26,7 @@ import Meta.PreludeGrammar
 import qualified Meta.PegGenLoc as L
 import qualified Meta.PegGenRule as R
 import qualified Meta.PegGenTree as T
-
-import qualified Text.PrettyPrint as P
+import qualified Meta.Pretty as P
 
 type Error = String
 
