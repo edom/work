@@ -124,6 +124,7 @@ library
         Meta.WrapM
         Meta.Xml
         Meta.Xml_0
+        Meta.Zip
         Manage
         Manage.Boilerplate
         Manage.Cast
@@ -137,9 +138,11 @@ library
             src1
         exposed-modules:
 
+    -- See Codec.Archive.Zip.toArchiveOrFail about @binary >= 0.7@.
     build-depends:
         base >= 4 && < 5
         , aeson >= 1 && < 2
+        , binary >= 0.7
         , bytestring >= 0 && < 1
         , cereal >= 0 && < 1
         , containers >= 0.4 && < 1
@@ -163,6 +166,7 @@ library
         , unordered-containers
         , utf8-string >= 1 && < 2
         , vector
+        , zip-archive
 
     if flag(postgresql)
         build-depends:
