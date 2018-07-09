@@ -72,6 +72,8 @@ module Meta.User (
     , JWA.jt_DataSource
     , JWA.Inject_name
     , JWA.set_inject_name
+    -- ** Define Kubernetes parameters
+    , JWA.set_kube_service_name
     -- ** Generate command-line interface for controlling the application
     , Cmd.command_line
     , Cmd.command_line_

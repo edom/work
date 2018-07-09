@@ -47,6 +47,7 @@ data App
         , _servlet_class_name :: String
         , _dto_class_name_prefix :: String
         , _injections :: [Injection]
+        , _kube_service_name :: String
     } deriving (Read, Show)
 
 get_artifact_id :: App -> M.Maven_artifact_id
@@ -108,6 +109,7 @@ empty = MkApp {
         , _servlet_class_name = "Servlet"
         , _dto_class_name_prefix = "Row_"
         , _injections = []
+        , _kube_service_name = ""
     }
 
 app_empty :: App
@@ -142,6 +144,12 @@ set_dependencies = set_deps
 
 add_dependencies :: [Dep] -> App -> App
 add_dependencies deps app = set_dependencies (get_dependencies app ++ deps) app
+
+get_kube_service_name :: App -> String
+get_kube_service_name = _kube_service_name
+
+set_kube_service_name :: String -> App -> App
+set_kube_service_name s a = a { _kube_service_name = s }
 
 -- * Pages
 
