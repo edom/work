@@ -8,6 +8,9 @@ Mirroring a Debian repository.
 -}
 module Debian where
 
+import Prelude ()
+import Meta.Prelude
+
 import qualified Control.Exception as Ex
 import qualified Control.Monad as M
 import qualified Data.List as L
@@ -194,12 +197,6 @@ from_list =
     Map.fromListWith (++) . map (\ p -> (p_name p, [p]))
 
 -- * IO
-
-class Slurp a where slurp :: FilePath -> IO a
-
-instance Slurp Bs.ByteString where slurp = Bs.readFile
-instance Slurp T.Text where slurp = fmap (Te.decodeUtf8With Tee.lenientDecode) . slurp
-instance Slurp String where slurp = fmap T.unpack . slurp
 
 read_remaining :: Si.Handle -> IO String
 read_remaining h =

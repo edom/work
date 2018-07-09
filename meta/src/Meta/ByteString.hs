@@ -9,6 +9,7 @@ module Meta.ByteString (
     , fromStrict
     -- * IO
     , C_putStr(..)
+    , B.readFile
 ) where
 
 import Prelude hiding (putStr)

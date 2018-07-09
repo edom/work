@@ -57,6 +57,7 @@ module Meta.Prelude (
     , getLine
     , putStr
     , putStrLn
+    , Os.Slurp(..)
     -- * Power-of-two Int variants
     , I.Int8
     , I.Int16
@@ -77,6 +78,8 @@ import Meta.PreludeMin
 
 import qualified Data.Int as I
 import qualified Data.Word as W
+
+import qualified Meta.Os as Os
 
 {- |
 Flipped function application.

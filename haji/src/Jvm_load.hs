@@ -4,6 +4,8 @@ This module deals with loading classes without initializing them.
 module Jvm_load
 where
 
+import qualified Meta.Prelude as P
+
 import qualified Control.Applicative as Ap
 import qualified Control.Monad as Mo
 import qualified System.IO.Error as Ie
@@ -77,4 +79,4 @@ This returns a 'Z.Class' from "Jvm_io", not a 'A.Class' from "Jvm_arch".
 Deserialize the binary representation from disk.
 -}
 parse_class_file :: FilePath -> IO (Either String Z.Class)
-parse_class_file path = Z.parse_class path <$> Z.slurp path
+parse_class_file path = Z.parse_class path <$> P.slurp path

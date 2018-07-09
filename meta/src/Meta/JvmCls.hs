@@ -22,8 +22,6 @@ module Meta.JvmCls (
     , Code(..)
     , Attribute(..)
     , Handler(..)
-    -- * Low-level IO
-    , slurp
     -- * Method
     , Method_info(..)
     -- * Field
@@ -234,12 +232,6 @@ The input is a UTF-8 bytestring.
 parse_method_type :: Bs.ByteString -> Either String Signature
 parse_method_type =
     either (Left . show) Right . P.parse method_type "" . Bu.toString
-
-{- |
-This is 'Bs.readFile' from "Data.ByteString".
--}
-slurp :: FilePath -> IO Bs.ByteString
-slurp = Bs.readFile
 
 field_type :: Parser Type
 field_type =
