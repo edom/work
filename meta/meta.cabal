@@ -30,6 +30,12 @@ flag stage1
 library
 
     default-language: Haskell2010
+    default-extensions:
+        FlexibleContexts
+        FlexibleInstances
+        MultiParamTypeClasses
+        RecordWildCards
+        TypeSynonymInstances
 
     ghc-options:
         -Wall
