@@ -13,6 +13,38 @@ or
 @
 import qualified Meta.Prelude as P
 @
+
+* Principles:
+
+    * Assume that the user just wants to get started quickly.
+
+    * Therefore:
+
+        * Be maximalist.
+        Export as much as possible.
+
+        * Be sloppy.
+        Prioritize ease of use over everything else.
+
+            * Avoid overzealous types.
+            Don't pretend that Haskell has dependent types.
+
+            * Avoid partial functions.
+            They produce unhelpful error messages when they fail.
+
+            * Inefficiency is acceptable.
+            There are other packages if the user needs performance.
+
+            * When working in IO, just throw an exception if anything fails.
+            The user doesn't want to handle error.
+
+* Similar packages:
+
+    * https://hackage.haskell.org/package/classy-prelude
+
+    * https://hackage.haskell.org/package/basic-prelude
+
+    * https://hackage.haskell.org/packages/#cat:Prelude
 -}
 module Meta.Prelude (
     module Meta.PreludeMin
