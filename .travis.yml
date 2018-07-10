@@ -1,0 +1,35 @@
+# https://docs.travis-ci.com/user/languages/haskell/
+
+language: haskell
+
+cache:
+    directories:
+        - $HOME/.cabal
+        - $HOME/.ghc
+        - $HOME/.stack
+
+install: []
+
+script:
+    - cabal --config-file=travis/cabal.config --max-backjumps=-1 new-build $PKG
+
+# Ubuntu GHC versions: https://launchpad.net/ubuntu/+source/ghc
+# GHC version history: https://www.haskell.org/ghc/
+# "If you use GHC, which versions of it do you use?" https://taylor.fausak.me/2017/11/15/2017-state-of-haskell-survey-results/#question-18
+# - No need to test GHC 8.4 and 8.2 because I use them.
+# - GHC 7.10 implements the Applicative Monad Proposal.
+# - GHC 7.8 has different pattern synonym syntax.
+# - GHC 7.6 doesn't support the PatternSynonyms extension.
+# - GHC 7.4 is the version packaged for Ubuntu 14.04.
+# - If we drop PatternSynonyms, we might go as far back as GHC 7.4.
+ghc:
+    - "8.0"
+    - "7.10"
+    - "7.8"
+    - "7.6"
+    - "7.4"
+
+env:
+    - PKG=meta
+
+before_install: []
