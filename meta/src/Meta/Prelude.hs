@@ -114,11 +114,18 @@ module Meta.Prelude (
     , raise_either
     -- * Function
     , (|>)
+    -- * Concurrency
+    -- $concur
+    -- ** Forking
+    , Con.forkIO
+    , Con.forkOS
+    , Con.killThread
 ) where
 
 import Prelude hiding (either)
 import Meta.PreludeMin
 
+import qualified Control.Concurrent as Con
 import qualified Data.Char as C
 import qualified Data.Int as I
 import qualified Data.List as L
@@ -163,3 +170,9 @@ beginsWith = L.isPrefixOf
 -- | Synonym of 'L.isSuffixOf'.
 endsWith :: (Eq a) => [a] -> [a] -> Bool
 endsWith = L.isSuffixOf
+
+{- $concur
+This assumes that the compiler is GHC.
+
+See also "Control.Concurrent".
+-}
