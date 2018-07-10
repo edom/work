@@ -1,3 +1,5 @@
+{-# LANGUAGE FunctionalDependencies #-}
+
 {- |
 This mostly reexports symbols from @base@, for both backward and forward compatibility.
 
@@ -54,6 +56,13 @@ module Meta.Prelude (
     , or
     , (&&)
     , (||)
+    -- * Bitwise operations
+    , (Bits..&.)
+    , (Bits..|.)
+    , Bits.xor
+    , Bits.unsafeShiftL
+    , Bits.shiftL
+    , Bits.shiftR
     -- * List
     , concat
     , all
@@ -85,6 +94,8 @@ module Meta.Prelude (
     , Integral
     , Fractional
     , Real
+    , RealFloat(isNaN)
+    , RealFrac(truncate)
     , Double
     , Float
     , Int
@@ -98,6 +109,12 @@ module Meta.Prelude (
     , putStr
     , putStrLn
     , Os.Slurp(..)
+    -- ** IORef
+    , IORef.IORef
+    , IORef.newIORef
+    , IORef.readIORef
+    , IORef.writeIORef
+    , IC.MonadIO(liftIO)
     -- * Power-of-two Int variants
     , I.Int8
     , I.Int16
@@ -120,18 +137,32 @@ module Meta.Prelude (
     , Con.forkIO
     , Con.forkOS
     , Con.killThread
+    -- * ByteString
+    , B.ByteString
+    , B.LazyByteString
+    -- * List-like interface for things
+    , UnconsPure(..)
+    , UnconsA(..)
 ) where
 
 import Prelude hiding (either)
 import Meta.PreludeMin
 
+import qualified Control.Applicative as A
 import qualified Control.Concurrent as Con
+import qualified Data.Bits as Bits
 import qualified Data.Char as C
+import qualified Data.IORef as IORef
 import qualified Data.Int as I
 import qualified Data.List as L
 import qualified Data.Word as W
 import qualified System.IO.Error as IE
 
+import qualified Control.Monad.IO.Class as IC
+import qualified Data.ByteString as BS
+import qualified Data.ByteString.Lazy as BSL
+
+import qualified Meta.ByteString as B
 import qualified Meta.Os as Os
 
 {- |
@@ -176,3 +207,38 @@ This assumes that the compiler is GHC.
 
 See also "Control.Concurrent".
 -}
+
+{- |
+A generalized list is either a generalized nil or a generalized cons.
+-}
+class UnconsPure lst elm | lst -> elm where
+    -- | Case analysis. Pattern matching.
+    unconsPure
+        :: lst -- ^ generalized list
+        -> a -- ^ what to do if the generalized list is a generalized nil
+        -> (elm -> lst -> a) -- ^ what to do if the generalized list is a generalized cons
+        -> a
+
+instance UnconsPure [elm] elm where
+    unconsPure lst emp con = case lst of
+        [] -> emp
+        x:y -> con x y
+
+instance UnconsPure B.ByteString W.Word8 where
+    unconsPure lst emp con = maybe emp (uncurry con) $ BS.uncons lst
+
+instance UnconsPure B.LazyByteString W.Word8 where
+    unconsPure lst emp con = maybe emp (uncurry con) $ BSL.uncons lst
+
+class UnconsA lst elm | lst -> elm where
+    unconsA :: (A.Alternative f) => lst -> f (elm, lst)
+
+instance UnconsA [elm] elm where unconsA = defUnconsA
+instance UnconsA B.ByteString W.Word8 where unconsA = defUnconsA
+instance UnconsA B.LazyByteString W.Word8 where unconsA = defUnconsA
+
+defUnconsA
+    :: (A.Alternative f, UnconsPure lst elm)
+    => (lst -> f (elm, lst))
+
+defUnconsA lst = unconsPure lst A.empty (curry A.pure)

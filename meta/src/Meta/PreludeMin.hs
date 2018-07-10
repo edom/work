@@ -129,21 +129,35 @@ readMaybe = either (const Nothing) Just . readEither
 {- |
 @'EitherString' a@ is @'Either' 'String' a@ whose 'fail' does the expected thing.
 
+EitherString is also an instance of 'A.Alternative' and 'M.MonadPlus'.
+
 Use 'either' from 'C_either' to pattern-match an EitherString.
 -}
 newtype EitherString a = MkEitherString { unEitherString :: Either String a }
     deriving (Eq, Ord, Read, Show)
 
-instance Functor EitherString where fmap f = MkEitherString . fmap f . unEitherString
+instance Functor EitherString where
+    fmap f = MkEitherString . fmap f . unEitherString
 
 instance A.Applicative EitherString where
     pure = MkEitherString . A.pure
     (<*>) a b = MkEitherString (unEitherString a A.<*> unEitherString b)
 
+instance A.Alternative EitherString where
+    empty = MkEitherString (Left "")
+    (<|>) a b = MkEitherString (go (unEitherString a) (unEitherString b))
+        where
+            go x@(Right _) _ = x
+            go _ y = y
+
 instance Monad EitherString where
     fail = MkEitherString . Left
     return = A.pure
     (>>=) a b = MkEitherString (unEitherString a >>= unEitherString . b)
+
+instance M.MonadPlus EitherString where
+    mzero = A.empty
+    mplus = (A.<|>)
 
 {- |
 This generalizes 'P.either' from "Prelude" so that it works with both 'Either' and 'EitherString'.
