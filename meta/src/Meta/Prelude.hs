@@ -114,7 +114,7 @@ module Meta.Prelude (
     , (|>)
 ) where
 
-import Prelude
+import Prelude hiding (either)
 import Meta.PreludeMin
 
 import qualified Data.Char as C

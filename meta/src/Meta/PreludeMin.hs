@@ -1,3 +1,4 @@
+{-# LANGUAGE FunctionalDependencies #-}
 {- |
 Not to be used directly.
 -}
@@ -9,14 +10,21 @@ module Meta.PreludeMin (
     , String
     -- * Functor, Applicative, Monad
     -- $amp
+    -- ** Functor
     , Functor(fmap)
+    -- *** Functions
     , (A.<$)
     , (A.<$>)
+    -- ** Applicative
     , A.Applicative((<*>), pure)
+    -- *** Functions
     , (A.*>)
     , (A.<*)
+    -- ** Alternative
     , A.Alternative((<|>))
+    -- ** Monad
     , Monad((>>), (>>=), return)
+    -- *** Functions
     , (=<<)
     , mapM
     , mapM_
@@ -26,9 +34,14 @@ module Meta.PreludeMin (
     , M.replicateM
     , M.replicateM_
     , (M.>=>)
-    -- ** Either, Maybe
+    -- * Either, EitherString, Maybe
+    -- ** Either
     , Either(Left, Right)
-    , either
+    -- ** EitherString
+    , EitherString
+    -- ** Functions
+    , C_either(..)
+    -- ** Maybe
     , Maybe(Nothing, Just)
     , maybe
     -- * Function, error, tuple
@@ -44,10 +57,13 @@ module Meta.PreludeMin (
     , snd
     -- * Read, Show, polyfills
     -- $read
+    -- ** Read
     , Read
-    , Show(show)
+    -- *** Functions
     , readEither
     , readMaybe
+    -- ** Show
+    , Show(show)
     -- * Eq
     , Eq((==), (/=))
     -- * Ord
@@ -58,6 +74,9 @@ module Meta.PreludeMin (
     , take
     , drop
 ) where
+
+import Prelude hiding (either)
+import qualified Prelude as P
 
 import qualified Control.Applicative as A
 import qualified Control.Monad as M
@@ -104,3 +123,29 @@ readEither str = case reads str of
 
 readMaybe :: (Read a) => String -> Maybe a
 readMaybe = either (const Nothing) Just . readEither
+
+{- |
+@'EitherString' a@ is @'Either' 'String' a@ whose 'fail' does the expected thing.
+
+Use 'either' from 'C_either' to pattern-match an EitherString.
+-}
+newtype EitherString a = MkEitherString { unEitherString :: Either String a }
+    deriving (Eq, Ord, Read, Show)
+
+instance Functor EitherString where fmap f = MkEitherString . fmap f . unEitherString
+
+instance A.Applicative EitherString where
+    pure = MkEitherString . A.pure
+    (<*>) a b = MkEitherString (unEitherString a A.<*> unEitherString b)
+
+instance Monad EitherString where
+    fail = MkEitherString . Left
+    return = A.pure
+    (>>=) a b = MkEitherString (unEitherString a >>= unEitherString . b)
+
+{- |
+This generalizes 'P.either' from "Prelude" so that it works with both 'Either' and 'EitherString'.
+-}
+class C_either e a b | e -> a b where either :: (a -> c) -> (b -> c) -> e -> c
+instance C_either (Either a b) a b where either = P.either
+instance C_either (EitherString b) String b where either a b = P.either a b . unEitherString
