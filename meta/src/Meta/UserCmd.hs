@@ -10,6 +10,7 @@ import Meta.Prelude
 
 import qualified Control.Monad as Monad
 
+import qualified Meta.Docker as Doc
 import qualified Meta.Http as Http
 import qualified Meta.JavaWebApp as JWA
 import qualified Meta.Json as Json
@@ -43,6 +44,7 @@ command_line_ app = friendly_parse Monad.>=> run
             "package" : rest -> Seq Package <$> parse rest
             "dbuild" : rest -> Seq Dbuild <$> parse rest
             "drun" : rest -> Seq Drun <$> parse rest
+            "dpush" : rest -> Seq Dpush <$> parse rest
             "ksvc" : rest -> Seq Ksvc <$> parse rest
             "ksvcs" : rest -> Seq Ksvcs <$> parse rest
             _ -> fail $ "Invalid arguments. Try \"help\" without quotes. The invalid arguments are " ++ show args ++ "."
@@ -72,6 +74,7 @@ command_line_ app = friendly_parse Monad.>=> run
                     ++ "\n"
                     ++ "    dbuild      Build Docker image.\n"
                     ++ "    drun        Run Docker image.\n"
+                    ++ "    dpush       Push Docker image to Docker registry.\n"
                     ++ "\n"
                     ++ "Kubernetes commands:\n"
                     ++ "\n"
@@ -99,6 +102,7 @@ command_line_ app = friendly_parse Monad.>=> run
             Package -> maven_package
             Dbuild -> docker_build
             Drun -> docker_run
+            Dpush -> docker_push
             Ksvc -> kube_service
             Ksvcs -> kube_services
 
@@ -107,13 +111,18 @@ command_line_ app = friendly_parse Monad.>=> run
             where
                 dir = UGJ.get_pom_xml_dir app
 
-        docker_tag :: String
-        docker_tag = JWA.get_artifact_id app
+        -- String
 
+        docker_tag = JWA.get_artifact_id app
+        docker_repository = JWA.get_docker_repository app
         kube_service_name = JWA.get_kube_service_name app
 
-        maven :: [Os.Arg] -> IO ()
+        -- [Os.Arg] -> IO ()
+
         maven args = in_app_dir $ Os.call "mvn" args
+
+        deploy :: Doc.Deploy
+        deploy = Doc.mk_deploy_or_error docker_tag docker_repository
 
         get_kube_services :: IO [Service]
         get_kube_services = do
@@ -144,8 +153,13 @@ command_line_ app = friendly_parse Monad.>=> run
 
         maven_recompile = maven ["clean", "compile"]
         maven_package = maven ["-Prelease", "package"]
-        docker_build = in_app_dir $ Os.call "docker" ["build", "--tag", docker_tag, "."]
-        docker_run = in_app_dir $ Os.call "docker" ["run", "--rm", "--interactive", "--tty", docker_tag]
+        docker_build = in_app_dir $ Doc.build deploy
+        docker_run = in_app_dir $ Doc.run deploy
+        docker_push = in_app_dir $ do
+            putStr $
+                "If docker push fails, try running \"aws ecr get-login --no-include-email\", and run the generated \"docker login\" command.\n"
+                ++ "If you are using old versions of AWS CLI and Docker, you may need to remove the \"--no-include-email\" flag.\n"
+            Doc.push deploy
         kube_service = do
             svcs <- get_kube_services
             putStr $ unlines $ map display_service $ filter (\ MkService{..} -> _sName == kube_service_name) svcs
@@ -171,6 +185,7 @@ data Command
     | Package
     | Dbuild
     | Drun
+    | Dpush
     | Ksvc
     | Ksvcs
     deriving (Read, Show)

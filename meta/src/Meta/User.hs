@@ -72,6 +72,9 @@ module Meta.User (
     , JWA.jt_DataSource
     , JWA.Inject_name
     , JWA.set_inject_name
+    -- ** Define Docker parameters
+    , JWA.get_docker_repository
+    , JWA.set_docker_repository
     -- ** Define Kubernetes parameters
     , JWA.set_kube_service_name
     -- ** Generate command-line interface for controlling the application
