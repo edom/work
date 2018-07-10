@@ -461,3 +461,12 @@ My = module {
     - miniKanren
         - Byrd PhD thesis https://scholarworks.iu.edu/dspace/bitstream/handle/2022/8777/Byrd_indiana_0093A_10344.pdf
             - mentions other programming languages: Prolog, Mercury, Curry
+- Haskell has isorecursive types.
+    - Can we make it use equirecursive types?
+    - Can we make it automatically insert roll-unroll/fold-unfold/In-out?
+    - How do we compose monads seamlessly?
+        - Isorecursive types?
+        - True sum types (untagged unions)?
+    - 2016, System F-omega with Equirecursive Types for Datatype-Generic Programming http://ps.informatik.uni-tuebingen.de/research/functors/equirecursion-fomega-popl16.pdf
+- John Hughes, "Deriving combinator implementations", lecture 4, "Designing and using combinators" http://www.cse.chalmers.se/~rjmh/Combinators/DerivingCombinators/sld001.htm
+- http://matt.might.net/articles/best-programming-languages/
