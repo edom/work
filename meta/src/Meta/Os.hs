@@ -62,3 +62,4 @@ descendant_files_of path = do
         listify node = case node of
             DT.File name _ -> [name]
             DT.Dir name children -> map (\ c -> name ++ "/" ++ c) (concatMap listify children)
+            _ -> []
