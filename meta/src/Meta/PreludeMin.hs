@@ -5,6 +5,7 @@ Not to be used directly.
 module Meta.PreludeMin (
     -- * Bool
     Bool(False, True)
+    , otherwise
     -- * Char, String
     , Char
     , String
@@ -30,6 +31,7 @@ module Meta.PreludeMin (
     , mapM_
     , M.forM
     , M.forM_
+    , M.when
     , M.unless
     , M.replicateM
     , M.replicateM_
