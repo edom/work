@@ -80,6 +80,7 @@ library
         Meta.Docker
         Meta.File
         Meta.Fix
+        Meta.Ghc
         Meta.Hs
         Meta.HsCon
         Meta.HsDat
@@ -176,6 +177,8 @@ library
         , directory >= 1.2.3.0 && < 2
         , directory-tree
         , filepath >= 1 && < 2
+        , ghc
+        , ghc-paths
         , HDBC >= 2 && < 3
         , http-client >= 0 && < 1
         , http-types >= 0 && < 1
