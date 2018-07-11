@@ -5,6 +5,25 @@ packages:
     pragmatic/
     ptt/
 
+-- Exclude yi/yi-frontend-pango/ due to dependency conflict.
+optional-packages:
+    yi/yi/
+    yi/yi-core/
+    yi/yi-dynamic-configuration/
+    yi/yi-frontend-vty/
+    yi/yi-fuzzy-open/
+    yi/yi-intero/
+    yi/yi-ireader/
+    yi/yi-keymap-cua/
+    yi/yi-keymap-emacs/
+    yi/yi-keymap-vim/
+    yi/yi-language/
+    yi/yi-misc-modes/
+    yi/yi-mode-haskell/
+    yi/yi-mode-javascript/
+    yi/yi-snippet/
+
+
 program-options
     ghc-options: -j +RTS -A256m -n2m -RTS
 
@@ -15,6 +34,9 @@ profiling: False
 relocatable: True
 shared: True
 documentation: False
+
+constraints:
+    yi -pango
 
 -- Workarounds for build failures.
 

@@ -27,6 +27,10 @@ flag stage1
     description: Include stage1.
     default: True
 
+flag yi
+    description: Include yi editor.
+    default: True
+
 library
 
     default-language: Haskell2010
@@ -183,6 +187,7 @@ library
         , HDBC >= 2 && < 3
         , http-client >= 0 && < 1
         , http-types >= 0 && < 1
+        , mtl
         , parsec >= 3 && < 4
         , postgresql-simple >= 0.4 && < 1
         , pretty >= 1.0.0.0 && < 2
@@ -205,6 +210,18 @@ library
         cpp-options:
             -DHAVE_postgresql
 
+    if flag(yi)
+        build-depends:
+            yi-core
+            , yi-frontend-vty
+            , yi-keymap-vim
+            , yi-misc-modes
+            , yi-mode-haskell
+            , yi-rope
+        exposed-modules:
+            Meta.Yi
+            Meta.YiMain
+
     if impl(ghc >= 7.10)
         cpp-options:
             -DHAVE_PatternSynonyms=1
@@ -223,3 +240,13 @@ executable meta-manage-example
     hs-source-dirs: app
     main-is: Main.hs
     build-depends: base, meta
+
+executable meta-yi
+    if !flag(yi)
+        buildable: False
+    default-language: Haskell2010
+    hs-source-dirs: app/yi
+    main-is: Main.hs
+    build-depends: base, meta
+    ghc-options:
+        -threaded
