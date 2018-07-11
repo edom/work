@@ -1,3 +1,4 @@
+-- | Consider using "Meta.JvmIns0" instead.
 module Meta.JvmIns (
     -- * Java Virtual Machine instruction set
     Instruction(..)
@@ -181,6 +182,7 @@ data Instruction
     | Jsr Int16 -- ^ 168
     | Ret Word8 -- ^ 169
     | Tableswitch Int32 Int32 Int32 [Int32] -- ^ 170 def low high offsets
+    -- Lookupswitch Int32 [(Int32,Int32)] -- ^ 171 def npairs pairs
     | Ireturn -- ^ 172
     | Lreturn -- ^ 173
     | Freturn -- ^ 174
