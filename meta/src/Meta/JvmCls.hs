@@ -3,7 +3,8 @@ Class file parsing.
 -}
 module Meta.JvmCls (
     -- * Parse class files
-    parse_class
+    parse_class_file
+    , parse_class
     , parse_field_type
     , Class(..)
     , Access
@@ -43,6 +44,9 @@ import Meta.JvmType
         Type(..)
         , Signature(..)
     )
+
+parse_class_file :: FilePath -> IO (Either String Class)
+parse_class_file path = parse_class path <$> slurp path
 
 {- |
 The 'FilePath' argument is used for error reporting.
