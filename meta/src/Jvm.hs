@@ -6,6 +6,20 @@ Every other module in the package is a private internal module
 that is included here only for documentation completeness.
 You should only use this public module
 and not directly use those private modules.
+
+* How do I decode bytecode? Where is @decode : [Word8] -> [Instruction]@?
+
+* How do I optimize bytecode?
+
+    * How do I translate JVM bytecode into "Meta.Stk" abstract stack machine instruction?
+
+        * Then how do I translate that to lambda calculus?
+
+            * Translate to lambda calculus using lots of @let@s?
+
+            * Or translate to CPS (contiuation-passing style) first instead?
+
+* How do I find every class that has @something@ in its constant pool?
 -}
 module Jvm
 where
