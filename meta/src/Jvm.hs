@@ -20,6 +20,71 @@ and not directly use those private modules.
             * Or translate to CPS (contiuation-passing style) first instead?
 
 * How do I find every class that has @something@ in its constant pool?
+
+* How do I parse a class file?
+
+    * What packages might be related?
+
+        * jvm-binary: A library for reading Java class-files
+        <https://hackage.haskell.org/package/jvm-binary>
+
+        * jvm-parser: A parser for JVM bytecode files
+        <https://hackage.haskell.org/package/jvm-parser>
+
+        * dbjava: Decompiler Bytecode Java
+        <https://hackage.haskell.org/package/dbjava>
+
+        * hs-java: Java .class files assembler/disassembler
+        <https://hackage.haskell.org/package/hs-java>
+
+        * javaclass: Java class files
+        <https://hackage.haskell.org/package/javaclass>
+
+        * language-java-classfile: Parser for Java .class files
+        <https://hackage.haskell.org/package/language-java-classfile>
+
+        * javav: A utility to print the target version of Java class files.
+        <https://hackage.haskell.org/package/javav>
+
+* Related packages
+
+    * JVM
+
+        * <https://hackage.haskell.org/packages/search?terms=jvm>
+
+        * jvm: Call any JVM function from Haskell.
+        <https://hackage.haskell.org/package/jvm>
+
+        * HJVM: A library to create a Java Virtual Machine and manipulate Java objects
+        <https://hackage.haskell.org/package/HJVM>
+
+        * inline-java: Java interop via inline Java code in Haskell modules.
+        <https://hackage.haskell.org/package/inline-java>
+
+        * java-bridge: Bindings to the JNI and a high level interface generator.
+        <https://hackage.haskell.org/package/java-bridge>
+
+        * jarfind: Tool for searching java classes, members and fields in classfiles and JAR archives
+        <https://hackage.haskell.org/package/jarfind>
+
+        * java-adt: Create immutable algebraic data structures for Java.
+        <https://hackage.haskell.org/package/java-adt>
+
+        * jdi: Implementation of Java Debug Interface
+        <https://hackage.haskell.org/package/jdi>
+
+    * Java
+
+        * java-character: Functions to simulate Java's Character class.
+        <https://hackage.haskell.org/package/java-character>
+
+        * cantor: Application for analysis of java source code
+        <https://hackage.haskell.org/package/cantor>
+
+    * Non-JVM
+
+        * simple-stacked-vm: Simple stacked virtual machine: assembler, disassembler, bytecode interpreter
+        <https://hackage.haskell.org/package/simple-stacked-vm>
 -}
 module Jvm
 where
