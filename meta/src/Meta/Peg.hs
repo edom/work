@@ -3,9 +3,9 @@ Consider using "Meta.PegGen" instead of this.
 
 See also:
 
-    * http://hackage.haskell.org/package/frisby
+    * <http://hackage.haskell.org/package/frisby>
 
-    * https://en.wikipedia.org/wiki/Parsing_expression_grammar
+    * <https://en.wikipedia.org/wiki/Parsing_expression_grammar>
 -}
 module Meta.Peg (
     -- * Expression

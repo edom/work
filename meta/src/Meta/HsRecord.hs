@@ -3,7 +3,7 @@
 
     * the \"record\" library on Hackage
 
-        * http://nikita-volkov.github.io/record/
+        * <http://nikita-volkov.github.io/record/>
 -}
 module Meta.HsRecord where
 

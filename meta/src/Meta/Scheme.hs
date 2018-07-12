@@ -1,7 +1,7 @@
 {-
 * See also:
 
-    * http://hackage.haskell.org/package/husk-scheme
+    * <http://hackage.haskell.org/package/husk-scheme>
 -}
 module Meta.Scheme where
 

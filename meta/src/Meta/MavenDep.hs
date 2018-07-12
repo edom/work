@@ -19,7 +19,7 @@ data Dep
     = MkDep {
         groupId :: Group_id
         , artifactId :: Artifact_id
-        -- | syntax is documented in https://maven.apache.org/pom.html#Dependency_Version_Requirement_Specification
+        -- | syntax is documented in <https://maven.apache.org/pom.html#Dependency_Version_Requirement_Specification>
         , version :: Dep_ver
         , scope :: Scope
     } deriving (Eq, Ord, Read, Show)

@@ -18,9 +18,9 @@ See:
 
 * 'HP.connectPostgreSQL'
 
-* http://www.postgresql.org/docs/8.1/static/libpq.html#LIBPQ-CONNECT
+* <http://www.postgresql.org/docs/8.1/static/libpq.html#LIBPQ-CONNECT>
 
-* https://www.postgresql.org/docs/8.1/static/libpq-envars.html
+* <https://www.postgresql.org/docs/8.1/static/libpq-envars.html>
 -}
 type ConStr = String
 

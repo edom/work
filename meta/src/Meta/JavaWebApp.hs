@@ -157,7 +157,7 @@ get_docker_repository = _docker_repository
 
     * The @repository@ is a name that may contain slashes.
 
-* https://stackoverflow.com/questions/34004076/difference-between-docker-registry-and-repository
+* <https://stackoverflow.com/questions/34004076/difference-between-docker-registry-and-repository>
 -}
 set_docker_repository :: String -> App -> App
 set_docker_repository s a = a { _docker_repository = s }
@@ -182,7 +182,7 @@ add_page url con app = app { _site = W.add_page url con (_site app) }
 {- |
 See also:
 
-* https://stackoverflow.com/questions/1159168/should-one-call-close-on-httpservletresponse-getoutputstream-getwriter
+* <https://stackoverflow.com/questions/1159168/should-one-call-close-on-httpservletresponse-getoutputstream-getwriter>
 -}
 get_java_servlet_class :: App -> J.Class
 get_java_servlet_class app =

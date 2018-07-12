@@ -42,11 +42,11 @@ import qualified Meta.Prelude as P
 
 * Similar packages:
 
-    * https://hackage.haskell.org/package/classy-prelude
+    * <https://hackage.haskell.org/package/classy-prelude>
 
-    * https://hackage.haskell.org/package/basic-prelude
+    * <https://hackage.haskell.org/package/basic-prelude>
 
-    * https://hackage.haskell.org/packages/#cat:Prelude
+    * <https://hackage.haskell.org/packages/#cat:Prelude>
 -}
 module Meta.Prelude (
     module Meta.PreludeMin

@@ -22,9 +22,9 @@
 
 * Resources
 
-    * http://hackage.haskell.org/package/ghc
+    * <http://hackage.haskell.org/package/ghc>
 
-    * http://hackage.haskell.org/package/ghc-paths
+    * <http://hackage.haskell.org/package/ghc-paths>
 
     * Sample codes
 -}
@@ -67,9 +67,9 @@ This is 'G.runGhc' with recommended defaults.
 
 * See also some sample codes:
 
-    * https://wiki.haskell.org/GHC/As_a_library
+    * <https://wiki.haskell.org/GHC/As_a_library>
 
-    * https://downloads.haskell.org/~ghc/8.4.3/docs/html/users_guide/extending_ghc.html
+    * <https://downloads.haskell.org/~ghc/8.4.3/docs/html/users_guide/extending_ghc.html>
 -}
 defaultRunGhc :: G.Ghc a -> IO a
 defaultRunGhc com = G.defaultErrorHandler DF.defaultFatalMessager DF.defaultFlushOut $ G.runGhc (Just GP.libdir) com
@@ -92,7 +92,7 @@ It is read by the compiler.
 {- $pretty
 * This is similar to the @pretty@ package.
 
-    * http://hackage.haskell.org/package/pretty
+    * <http://hackage.haskell.org/package/pretty>
 
     * 1995, article, \"The design of a pretty-printing library\", John Hughes.
 -}

@@ -4,7 +4,7 @@
 {- |
 See also Strathclyde Haskell Enhancement:
 
-https://personal.cis.strath.ac.uk/conor.mcbride/pub/she/
+<https://personal.cis.strath.ac.uk/conor.mcbride/pub/she/>
 -}
 module Meta.Hs where
 
