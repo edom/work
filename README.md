@@ -22,6 +22,8 @@
             - Reduce @-j4@ to @-j1@?
             - Add @optimization: False@ into @travis/cabal.config@.
                 - @cabal --config-file=travis/cabal.config@
+        - Related GHC woes
+            - [#9221 (super!) linear slowdown of parallel builds on 40 core machine](https://ghc.haskell.org/trac/ghc/ticket/9221)
 - Some notes about @optional-packages@ in @cabal.project@:
     - Clone [Yi editor source](https://github.com/yi-editor/yi) into @yi@.
         - Hackage's yi-0.17.1 (Nov 2017) is not ready for GHC 8.
