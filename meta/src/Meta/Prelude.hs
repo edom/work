@@ -51,11 +51,11 @@ import qualified Meta.Prelude as P
 module Meta.Prelude (
     module Meta.PreludeMin
     -- * Bool
-    , not
-    , and
-    , or
-    , (&&)
-    , (||)
+    , P.not
+    , P.and
+    , P.or
+    , (P.&&)
+    , (P.||)
     -- * Bitwise operations
     , (Bits..&.)
     , (Bits..|.)
@@ -64,47 +64,47 @@ module Meta.Prelude (
     , Bits.shiftL
     , Bits.shiftR
     -- * List
-    , concat
-    , all
-    , any
-    , concatMap
-    , filter
-    , foldl
-    , foldr
-    , null
-    , length
-    , reverse
+    , P.concat
+    , P.all
+    , P.any
+    , P.concatMap
+    , P.filter
+    , P.foldl
+    , P.foldr
+    , P.null
+    , P.length
+    , P.reverse
     , L.isPrefixOf
     , L.isInfixOf
     , L.isSuffixOf
     , beginsWith
     , endsWith
     -- ** Char, String
-    , lines
-    , unlines
-    , unwords
-    , words
+    , P.lines
+    , P.unlines
+    , P.unwords
+    , P.words
     , UpDownCase(..)
     -- * Ord
-    , Ord((<), (>), (<=), (>=))
+    , P.Ord((<), (>), (<=), (>=))
     -- * Num
     -- $num
-    , Num((+), (-), (*), fromInteger, negate)
-    , fromIntegral
-    , Integral
-    , Fractional
-    , Real
-    , RealFloat(isNaN)
-    , RealFrac(truncate)
-    , Double
-    , Float
-    , Int
+    , P.Num((+), (-), (*), fromInteger, negate)
+    , P.fromIntegral
+    , P.Integral
+    , P.Fractional
+    , P.Real
+    , P.RealFloat(isNaN)
+    , P.RealFrac(truncate)
+    , P.Double
+    , P.Float
+    , P.Int
     -- * Bounded, Enum
-    , Bounded(minBound, maxBound)
-    , Enum
+    , P.Bounded(minBound, maxBound)
+    , P.Enum
     -- * IO
-    , FilePath
-    , IO
+    , P.FilePath
+    , P.IO
     , getLine
     , putStr
     , putStrLn
@@ -125,7 +125,7 @@ module Meta.Prelude (
     , W.Word32
     , W.Word64
     -- * Monad fail
-    , fail
+    , P.fail
     -- * Errors
     , user_error
     , raise_either
@@ -143,9 +143,11 @@ module Meta.Prelude (
     -- * List-like interface for things
     , UnconsPure(..)
     , UnconsA(..)
+    -- * IsString class for OverloadedStrings extension
+    , S.IsString(..)
 ) where
 
-import Prelude hiding (either)
+import Prelude ()
 import Meta.PreludeMin
 
 import qualified Control.Applicative as A
@@ -155,7 +157,9 @@ import qualified Data.Char as C
 import qualified Data.IORef as IORef
 import qualified Data.Int as I
 import qualified Data.List as L
+import qualified Data.String as S
 import qualified Data.Word as W
+import qualified Prelude as P
 import qualified System.IO.Error as IE
 
 import qualified Control.Monad.IO.Class as IC
@@ -188,11 +192,11 @@ instance (UpDownCase a) => UpDownCase [a] where
     downcase = map downcase
 
 -- | @user_error msg = 'IE.ioError' ('IE.userError' msg)@.
-user_error :: String -> IO a
+user_error :: String -> P.IO a
 user_error = IE.ioError . IE.userError
 
 raise_either :: (Monad m) => Either String a -> m a
-raise_either = either fail return
+raise_either = either P.fail return
 
 -- | Synonym of 'L.isPrefixOf'.
 beginsWith :: (Eq a) => [a] -> [a] -> Bool
@@ -242,3 +246,15 @@ defUnconsA
     => (lst -> f (elm, lst))
 
 defUnconsA lst = unconsPure lst A.empty (curry A.pure)
+
+-- | This generalizes 'P.getLine' from "Prelude".
+getLine :: (IC.MonadIO m) => m String
+getLine = IC.liftIO P.getLine
+
+-- | This generalizes 'P.putStr' from "Prelude".
+putStr :: (IC.MonadIO m) => String -> m ()
+putStr = IC.liftIO . P.putStr
+
+-- | This generalizes 'P.putStrLn' from "Prelude".
+putStrLn :: (IC.MonadIO m) => String -> m ()
+putStrLn = IC.liftIO . P.putStrLn
