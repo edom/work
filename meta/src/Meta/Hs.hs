@@ -2,9 +2,57 @@
 {-# LANGUAGE UndecidableInstances #-}
 
 {- |
-See also Strathclyde Haskell Enhancement:
+* Use cases
 
-<https://personal.cis.strath.ac.uk/conor.mcbride/pub/she/>
+    * How do I parse a hs file?
+
+        * Would I want to do it using GHC?
+
+            * Why?
+
+                * Stand on the shoulders of giants.
+                Leverage all of GHC.
+
+                * More likely to be supported than a random Hackage library.
+
+                * Practically everyone uses GHC.
+                Practically it is /the/ Haskell compiler.
+
+                * Well-documented, for an open-source project.
+
+            * Why not?
+
+                * GHC is big.
+
+                * Not everyone uses GHC.
+
+                * Unstable.
+                However, a big project such as GHC has high inertia, so the change shouldn't be very big.
+
+                * The original vision of the project is programming language research, not real world usage.
+
+                    * But people are already using it in production.
+
+                * All support personnels are volunteers.
+
+        * What are the alternatives?
+
+            * <https://github.com/haskell-suite/haskell-src-exts>
+
+                * How was it made?
+                Did it incorporate any code from GHC?
+
+    * How do I make an ADT (algebraic data type), and serialize it to hs source file?
+
+        * How does GHC represent an ADT?
+
+            * In "HsDecls", see the DataDecl constructor of TyClDecl, and see the HsDataDefn type.
+
+* See also:
+
+    * "Meta.Ghc"
+
+    * Strathclyde Haskell Enhancement <https://personal.cis.strath.ac.uk/conor.mcbride/pub/she/>
 -}
 module Meta.Hs where
 
