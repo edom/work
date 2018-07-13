@@ -167,6 +167,19 @@ library
         Meta.Zip
         Test_yaml
 
+    -- For Meta.Ghc.
+    if impl(ghc >= 8.4)
+        cpp-options:
+            -DMETA_GHC_MODULE=Meta.Ghc_8_4
+        exposed-modules:
+            Meta.Ghc_8_4
+    else
+        if impl(ghc >= 8.2)
+            cpp-options:
+                -DMETA_GHC_MODULE=Meta.Ghc_8_2
+            exposed-modules:
+                Meta.Ghc_8_2
+
     if flag(stage1)
         hs-source-dirs:
             src1

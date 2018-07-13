@@ -1,7 +1,9 @@
+{-# LANGUAGE CPP #-}
+
 {- |
 * Prerequisites
 
-    * This requires GHC 8.
+    * This requires GHC 8.2 or 8.4.
 
 * What does this module do?
 
@@ -11,6 +13,8 @@
 
     * This also provides a convenient way to construct and manipulate GHC's syntax trees.
 
+    * This presents a uniform interface for the supported GHC versions.
+
 * Usage notes
 
     * If you need an instance 'G.GhcMonad' or 'G.ExceptionMonad', use 'G.Ghc'.
@@ -18,30 +22,70 @@
 
 * Resources
 
-    * <http://hackage.haskell.org/package/ghc>
+    * <https://ghc.haskell.org/trac/ghc/wiki/GhcApiStatus>
 
-    * <http://hackage.haskell.org/package/ghc-paths>
+    * 2008, email, \"[Haskell-cafe] GHC API: how to get the typechecked AST?\" <https://mail.haskell.org/pipermail/haskell-cafe/2008-May/042616.html>
+
+    * 2005, article, \"Porting HaRe to the GHC API\" <https://www.cs.kent.ac.uk/pubs/2005/2266/>
+
+    * Sample codes
+
+        * <https://wiki.haskell.org/GHC/As_a_library>
+
+        * <https://downloads.haskell.org/~ghc/8.4.3/docs/html/users_guide/extending_ghc.html>
 
 * See also
 
-    * "Meta.Hs"
+    * Related modules in this package
+
+        * "Meta.Hs"
+
+    * Related packages on Hackage
+
+        * <http://hackage.haskell.org/package/ghc>
+
+        * <http://hackage.haskell.org/package/ghc-paths>
+
+        * ghc-mod is a backend program to enrich Haskell programming in editors <http://hackage.haskell.org/package/ghc-mod>
+
+        * hint: Runtime Haskell interpreter (GHC API wrapper) <http://hackage.haskell.org/package/hint>
+
+        * intero: Complete interactive development program for Haskell <http://hackage.haskell.org/package/intero>
+
+        * HaRe: the Haskell Refactorer. <http://hackage.haskell.org/package/HaRe>
+
+    * Other related projects
+
+        * <https://github.com/haskell/haskell-ide-engine>
 -}
 module Meta.Ghc (
     -- * Simple interface
     -- ** Entry point
     defaultRunGhc
     , loadPackageDatabase
-    , loadAllTargets
     -- ** Dynamic flags
     -- $dynflags
     , G.getSessionDynFlags
     , G.setSessionDynFlags
+    , setGeneralFlag
     -- ** Input
     -- $input
+    , addFile
     , G.guessTarget
     , G.setTargets
+    , loadAllTargets
+    , G.SuccessFlag(..)
+    , G.succeeded
+    , G.failed
+    , G.getModuleGraph
+    , G.ModuleGraph
+    , G.ModSummary(..)
+    , G.parseModule
+    , G.ParsedModule(..)
+    , T.HsParsedModule(..)
     -- ** Pretty printing
     -- $pretty
+    , prettyPrint
     , Ou.showSDoc
     , Ou.ppr
     -- * Syntax tree
@@ -50,6 +94,7 @@ module Meta.Ghc (
     , module S
     -- ** Locations and passes
     , G.noLoc
+    , G.unLoc
     , pass_GhcPs
     -- ** HsModule
     , emptyHsModule
@@ -58,6 +103,7 @@ module Meta.Ghc (
     , emptyHsDataDefn
     , emptyCon
     -- ** Names
+    , GetName(..)
     , SetName(..)
     -- *** Internal instances for making names
     , MkModuleName(..)
@@ -73,7 +119,21 @@ module Meta.Ghc (
     -- ** Input
     , G.load
     , G.LoadHowMuch(..)
+    -- * DynFlags, GeneralFlag, package databases
+    , G.DynFlags(..)
+    , G.GeneralFlag(..)
+    , DF.PackageDBFlag(..)
+    , DF.PkgConfRef(..)
+    , DF.PackageFlag(..)
+    , DF.PackageArg(..)
+    , DF.ModRenaming(..)
+    -- ** GhcLink, HscTarget
+    , G.GhcLink(..)
+    , G.HscTarget(..)
 ) where
+
+import Prelude ()
+import Meta.Prelude
 
 import HsSyn as S
 
@@ -81,20 +141,18 @@ import qualified DynFlags as DF
 import qualified GHC as G
 import qualified GHC.Paths as GP
 import qualified Module as M
-import qualified Outputable as Ou
 import qualified OccName as Oc
+import qualified Outputable as Ou
 import qualified RdrName as R
+import qualified HscTypes as T
+
+-- See the cabal file.
+import qualified META_GHC_MODULE as Z
 
 {- |
 * This is 'G.runGhc' with recommended defaults.
 
 * You may need to call 'loadPackageDatabase'.
-
-* See also some sample codes:
-
-    * <https://wiki.haskell.org/GHC/As_a_library>
-
-    * <https://downloads.haskell.org/~ghc/8.4.3/docs/html/users_guide/extending_ghc.html>
 -}
 defaultRunGhc :: G.Ghc a -> IO a
 defaultRunGhc com =
@@ -108,6 +166,7 @@ loadPackageDatabase = do
     flags <- G.getSessionDynFlags
     -- This has a side effect of loading the package database.
     G.setSessionDynFlags flags
+
 {- |
 See also 'G.load' and 'G.LoadAllTargets'.
 -}
@@ -118,10 +177,16 @@ loadAllTargets = G.load G.LoadAllTargets
 A /dynamic flag/ is a flag that can be modified from source file by OPTIONS_GHC pragma.
 -}
 
+setGeneralFlag :: G.GeneralFlag -> G.DynFlags -> G.DynFlags
+setGeneralFlag = flip DF.gopt_set
+
 {- $input
 A /target/ is an input for the compiler.
 It is read by the compiler.
 -}
+
+addFile :: (G.GhcMonad m) => FilePath -> m ()
+addFile path = G.guessTarget path Nothing >>= G.addTarget
 
 {- $pretty
 * Everywhere you meet an instance of 'Ou.Outputable', you can transform it to 'Ou.SDoc' with 'Ou.ppr'.
@@ -142,6 +207,11 @@ It is read by the compiler.
     * 1995, article, \"The design of a pretty-printing library\", John Hughes.
 -}
 
+prettyPrint :: (G.GhcMonad m, Ou.Outputable a) => a -> m ()
+prettyPrint thing = do
+    flags <- G.getSessionDynFlags
+    putStrLn $ Ou.showSDoc flags $ Ou.ppr thing
+
 {- $ast
 Convenience functions for constructing and manipulating GHC syntax trees.
 
@@ -152,13 +222,21 @@ In general, we follow these:
     * Everywhere a @('Maybe' a)@ is required, use 'Nothing'.
 -}
 
--- | This helps the type-checker infer the compilation pass as \"parsed\".
-pass_GhcPs :: f S.GhcPs -> f S.GhcPs
+{- |
+This is 'id', but this helps the type-checker infer the compilation pass as \"parsed\".
+
+Some history:
+
+* RdrName in GHC 8.2.
+
+* GhcPs in GHC 8.4.
+-}
+pass_GhcPs :: f Z.GhcPs -> f Z.GhcPs
 pass_GhcPs = id
 
 -- | A default value for 'S.HsModule'.
 -- Use 'pass_GhcPs' to help the type-checker infer the @pass@ argument.
-emptyHsModule :: S.HsModule pass
+emptyHsModule :: S.HsModule Z.GhcPs
 emptyHsModule = S.HsModule {
         S.hsmodName = Nothing
         , S.hsmodExports = Nothing
@@ -169,7 +247,7 @@ emptyHsModule = S.HsModule {
     }
 
 -- | Empty data type declaration.
-emptyDataDecl :: G.TyClDecl G.GhcPs
+emptyDataDecl :: G.TyClDecl Z.GhcPs
 emptyDataDecl = G.DataDecl {
         G.tcdLName = mkDataName ""
         , G.tcdTyVars = G.mkHsQTvs []
@@ -191,7 +269,7 @@ emptyHsDataDefn = G.HsDataDefn  {
     }
 
 -- | Empty Haskell 98 data constructor.
-emptyCon :: G.ConDecl G.GhcPs
+emptyCon :: G.ConDecl Z.GhcPs
 emptyCon = G.ConDeclH98 {
         G.con_name = mkDataName ""
         , G.con_qvars = Nothing
@@ -200,23 +278,29 @@ emptyCon = G.ConDeclH98 {
         , G.con_doc = Nothing
     }
 
+class GetName a b where
+    getName :: a -> b
+
+instance GetName G.ModSummary String where
+    getName ms = G.moduleNameString $ G.moduleName $ G.ms_mod ms
+
 -- | Set the name of @a@ to @b@.
 class SetName a b where
     -- | @setName b a@ sets the name of @a@ to @b@.
     -- For example, @a@ may be a @'HsModule' 'G.GhcPs'@.
     setName :: b -> a -> a
 
-instance SetName (G.HsModule G.GhcPs) String where
+instance SetName (G.HsModule Z.GhcPs) String where
     setName name modu = modu {
             G.hsmodName = mkModuleName name
         }
 
-instance SetName (G.TyClDecl G.GhcPs) String where
+instance SetName (G.TyClDecl Z.GhcPs) String where
     setName name ddef = ddef {
             G.tcdLName = mkDataName name
         }
 
-instance SetName (G.ConDecl G.GhcPs) String where
+instance SetName (G.ConDecl Z.GhcPs) String where
     setName name cdec = case cdec of
         G.ConDeclGADT _ a b -> G.ConDeclGADT [mkDataName name] a b
         G.ConDeclH98 _ a b c d -> G.ConDeclH98 (mkDataName name) a b c d
