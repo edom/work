@@ -71,9 +71,19 @@
 
         * I have a bad feeling: I think we will end up reimplementing Git if we go down this path.
 
+    * Directory browser, similar to vim netrw (also compare emacs dired).
+
+        * If the argument to @:e@ is a directory, open the directory browser.
+
+        * @v@ opens the file in a vertical split.
+
+        * @t@ opens the file in a new tab.
+
+        * <https://hackage.haskell.org/package/yi-core-0.17.1/docs/Yi-Dired.html>
+
 * See also
 
-    * <http://www.nobugs.org/developer/yi/>
+    * Some tutorial and sample codes <http://www.nobugs.org/developer/yi/>
 
     * <https://www.reddit.com/r/haskell/comments/55igdm/what_would_you_want_to_see_in_a_yi_tutorial/>
 
@@ -106,7 +116,7 @@ module Meta.Yi (
     -- ** Editor actions
     , quitEditor
     -- ** Buffer actions
-    , YBM.insertB
+    , Insert(..)
     -- * Preset configurations
     , YVI.configureVim
     , YH.configureHaskellMode
@@ -135,6 +145,7 @@ import qualified Yi.Config.Simple.Types as YCT
 import qualified Yi.Core as YC
 import qualified Yi.Interact as YI
 import qualified Yi.Keymap.Keys as YKK
+import qualified Yi.Rope as R
 
 {- $action
 Currently 'Y.Action' is defined as:
@@ -244,6 +255,24 @@ ctrl = Y.ctrl
 -- | Quit the editor.
 quitEditor :: KeymapM ()
 quitEditor = Y.write (Y.YiA YC.quitEditor)
+
+{- |
+Insert something at current position.
+-}
+class Insert a where
+    insert :: a -> KeymapM ()
+
+kb :: (Show a) => Y.BufferM a -> KeymapM ()
+kb = Y.write . Y.BufferA
+
+instance Insert Char where
+    insert = kb . YBM.insertB
+
+instance Insert String where
+    insert = kb . YBM.insertN . R.fromString
+
+instance Insert R.YiString where
+    insert = kb . YBM.insertN
 
 {- |
 See 'makeConfig' for how to make a 'Config'.
