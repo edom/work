@@ -145,6 +145,8 @@ module Meta.Prelude (
     , UnconsA(..)
     -- * IsString class for OverloadedStrings extension
     , S.IsString(..)
+    -- * Faithful functors
+    , Faithful(..)
 ) where
 
 import Prelude ()
@@ -172,12 +174,13 @@ import qualified Meta.Os as Os
 {- |
 Flipped function application.
 Flipped '$'.
+But '$' binds more strongly than @|>@.
 
 https://github.com/izdi/elm-cheat-sheet
 -}
 (|>) :: a -> (a -> b) -> b
 (|>) x f = f x
-infixl 0 |>
+infixl 1 |>
 
 class UpDownCase a where
     upcase :: a -> a
@@ -258,3 +261,31 @@ putStr = IC.liftIO . P.putStr
 -- | This generalizes 'P.putStrLn' from "Prelude".
 putStrLn :: (IC.MonadIO m) => String -> m ()
 putStrLn = IC.liftIO . P.putStrLn
+
+{- |
+An instance of Faithful f means that it is in principle always possible to recover @x@ from @'faithful' x@.
+
+It means that @f :: * -> *@ is an injective function, if we think of types as sets.
+
+If @f@ is also an instance of 'A.Applicative', then it should also satisfy @pure = faithful@.
+
+An example of a faithful data type:
+
+@
+data F a
+    = Pure a
+    | SomethingElse
+
+faithful = Pure
+@
+
+An example of a forgetful (non-faithful) data type:
+
+@
+data G a
+    = AnInt Int
+    | SomethingFancy
+@
+-}
+class Faithful f where
+    faithful :: a -> f a
