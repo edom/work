@@ -103,7 +103,10 @@ endif
 " End copied content.
 
 " Use spaces not tabs.
-set ts=4 sts=4 sw=4 et
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
 
 " Don't write "*~" files.
 set nobackup writebackup
@@ -112,6 +115,18 @@ set nobackup writebackup
 map <F2> :w<Enter>
 map <F3> :mksession!<Enter>
 map <F4> :qa<Enter>
+map <F5> :tabp<Enter>
+map <F6> :tabn<Enter>
+
+" For security reasons?
+set nomodeline
+
+" Treat Racket files as Scheme files.
+au BufNewFile,BufRead *.rkt set ft=scheme
+au BufNewFile,BufRead *.scrbl set ft=scheme
+
+" Avoid scrolling to stupid positions.
+set scrolloff=255
 
 " In netrw, press 'p' to preview the file content in a vertical split taking 50% of the screen width.
 let g:netrw_preview = 1
