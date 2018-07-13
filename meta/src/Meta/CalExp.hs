@@ -18,6 +18,16 @@ data Exp a
     | If a a a -- ^ If boolCond truePart falsePart
     deriving (Read, Show)
 
+instance Faithful Exp where
+    faithful = Pure
+
+instance (V.CalVal a) => V.CalVal (Exp a) where
+    error = faithful . V.error
+    unit = faithful V.unit
+    bool = faithful . V.bool
+    int = faithful . V.int
+    string = faithful . V.string
+
 instance Functor Exp where
     fmap f (Pure a) = Pure (f a)
     fmap f (Plus a b) = Plus (f a) (f b)

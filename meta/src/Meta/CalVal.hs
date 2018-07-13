@@ -1,6 +1,15 @@
-module Meta.CalVal where
+module Meta.CalVal (
+    Val(..)
+    , CalVal(..)
+    , plus
+    , eq
+    , if_
+    , not
+    , eval
+    , print
+) where
 
-import Prelude hiding (not)
+import Prelude hiding (error, not, print)
 
 import qualified Prelude as P
 
@@ -11,6 +20,20 @@ data Val
     | Int Int
     | String String
     deriving (Read, Show)
+
+class CalVal a where
+    error :: [String] -> a
+    unit :: a
+    bool :: Bool -> a
+    int :: Int -> a
+    string :: String -> a
+
+instance CalVal Val where
+    error = Error
+    unit = Unit
+    bool = Bool
+    int = Int
+    string = String
 
 plus :: Val -> Val -> Val
 plus (Error a) (Error b) = Error (a ++ b)

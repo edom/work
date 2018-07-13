@@ -15,6 +15,7 @@ data Lang
     | LExp (E.Exp Lang)
     deriving (Read, Show)
 
+{-# DEPRECATED CVal "Use 'V.CalVal'" #-}
 class CVal a where
     vError :: [String] -> a
     vInt :: Int -> a
