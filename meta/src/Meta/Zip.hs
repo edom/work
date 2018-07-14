@@ -20,9 +20,9 @@ module Meta.Zip (
     , decompress_or_error
     -- * Experimental
     , print_entries_recursive
+    , is_zip_file
 ) where
 
-import qualified Control.Monad.IO.Class as MI
 import qualified Meta.ByteString as B
 import qualified Meta.Prelude as P
 import qualified Codec.Archive.Zip as Z
@@ -81,18 +81,19 @@ print_entries_recursive :: FilePath -> Z.Archive -> IO ()
 print_entries_recursive = go
     where
         go prefix archive = do
-            forM_ (Z.get_entries archive) $ \ entry -> do
-                let path = Z.get_relative_path entry
+            P.forM_ (get_entries archive) $ \ entry -> do
+                let path = get_relative_path entry
                 if is_zip_file path
                     then do
                         putStrLn $ prefix ++ "/" ++ path
-                        let dent = Z.decompress_or_error entry
-                        arch <- Z.to_archive dent
+                        let dent = decompress_or_error entry
+                        arch <- to_archive dent
                         go (prefix ++ "/" ++ path) arch
                     else putStrLn $ prefix ++ "/" ++ path
 
-        is_zip_file :: FilePath -> Bool
-        is_zip_file path =
-            (d `endsWith` ".zip") || (d `endsWith` ".jar")
-            where
-                d = downcase path
+-- | Whether the file path ends with @.zip@ or @.jar@ (ignoring case).
+is_zip_file :: FilePath -> Bool
+is_zip_file path =
+    (d `P.endsWith` ".zip") || (d `P.endsWith` ".jar")
+    where
+        d = P.downcase path
