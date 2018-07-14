@@ -45,6 +45,7 @@ import Meta.JvmType
         , Signature(..)
     )
 
+-- | A convenience function that does IO and calls 'parse_class'.
 parse_class_file :: FilePath -> IO (Either String Class)
 parse_class_file path = parse_class path <$> slurp path
 

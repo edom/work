@@ -86,8 +86,26 @@ and not directly use those private modules.
         * simple-stacked-vm: Simple stacked virtual machine: assembler, disassembler, bytecode interpreter
         <https://hackage.haskell.org/package/simple-stacked-vm>
 -}
-module Jvm
-where
+module Jvm (
+    -- * Parsing class files
+    JC.parse_class_file
+    , JC.parse_class
+    -- * Architecture
+    -- $arch
+    -- * Running
+    , runvm
+    , testrunvm
+    , Class_name
+    , A.State(..)
+    -- * Command-line options
+    , Option(..)
+    , Main_class(..)
+    , option_def
+    -- * Utility: listing class members
+    , list
+    -- * Testing
+    , jvm
+) where
 
 import Control.Monad.IO.Class (liftIO)
 
@@ -110,18 +128,13 @@ import qualified Jvm_debug as C
 import qualified Jvm_execute as E
 import qualified Jvm_interop as O
 import qualified Jvm_load as L
+import qualified Meta.JvmCls as JC
 import qualified Meta.JvmType as T
 import qualified Meta.JvmTys as U
 import qualified Meta.JvmValue as V
 
--- * Architecture
-
-{- $
-"Meta.JvmCls": parse a 'Data.ByteString.ByteString' as found on disk, memory, network.
-
-Some types have the same names.
-
-There are two 'Monad's: S and J.
+{- $arch
+There are two 'Monad' instances: 'S' and 'J'.
 
 J is an extension of S that allows 'IO'.
 
@@ -280,8 +293,6 @@ testrunvm = do
 
 type Class_name = String
 
--- * Command-line options
-
 {- |
 An inhabitant of this type is a configuration that
 can be manipulated by command-line options
@@ -317,8 +328,6 @@ option_def = Mk_option
         , o_classpath = ["."]
     }
 
--- * Utility: listing class members
-
 list :: String -> IO ()
 list cname = do
     M.void $ flip A.exec_io state $ do
@@ -332,8 +341,6 @@ list cname = do
         bo = B.bootstrap what
         what :: S V.Value
         what = return V.Null
-
--- * Testing
 
 jvm :: IO ()
 jvm = do
