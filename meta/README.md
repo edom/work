@@ -197,3 +197,5 @@
     - The hoogle on stackage.org top right text bar seems to be most complete
         - https://www.stackage.org/
     - https://mail.haskell.org/pipermail/haskell-cafe/2013-August/109945.html
+- GHC woes
+    - Profiling requires recompiling all transitive dependencies if they happen to be compiled without profiling.
