@@ -201,13 +201,13 @@ user_error = IE.ioError . IE.userError
 raise_either :: (Monad m) => Either String a -> m a
 raise_either = either P.fail return
 
--- | Synonym of 'L.isPrefixOf'.
+-- | @a `beginsWith` b = b `'L.isPrefixOf'` a@.
 beginsWith :: (Eq a) => [a] -> [a] -> Bool
-beginsWith = L.isPrefixOf
+beginsWith = flip L.isPrefixOf
 
--- | Synonym of 'L.isSuffixOf'.
+-- | @a `endsWith` b = b `'L.isSuffixOf'` a@.
 endsWith :: (Eq a) => [a] -> [a] -> Bool
-endsWith = L.isSuffixOf
+endsWith = flip L.isSuffixOf
 
 {- $concur
 This assumes that the compiler is GHC.
