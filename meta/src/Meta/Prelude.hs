@@ -70,7 +70,7 @@ module Meta.Prelude (
     , P.all
     , P.any
     , P.concatMap
-    , P.filter
+    , Filter(..)
     , P.foldl
     , P.foldr
     , P.null
@@ -155,11 +155,14 @@ module Meta.Prelude (
     , Os.getArgs
     -- * Array-like, integer-indexable collection
     , At(..)
+    , FromList(..)
+    , ToList(..)
+    -- * Data.Vector
+    , V.Vector
     -- * Maps from Data.Map
     , Map.Map
     , Map.from_list
     , Map.fromListWith
-    , Map.toList
 ) where
 
 import Prelude ()
@@ -180,6 +183,7 @@ import qualified System.IO.Error as IE
 import qualified Control.Monad.IO.Class as IC
 import qualified Data.ByteString as BS
 import qualified Data.ByteString.Lazy as BSL
+import qualified Data.Vector as V
 
 import qualified Meta.ByteString as B
 import qualified Meta.Map as Map
@@ -214,6 +218,15 @@ user_error = IE.ioError . IE.userError
 
 raise_either :: (Monad m) => Either String a -> m a
 raise_either = either P.fail return
+
+class Filter c a | c -> a where
+    filter :: (a -> Bool) -> c -> c
+
+instance Filter [a] a where
+    filter = P.filter
+
+instance Filter (V.Vector a) a where
+    filter = V.filter
 
 class IsInfixOf a where
     isInfixOf :: a -> a -> Bool
@@ -315,8 +328,13 @@ class Faithful f where
 
 -- | Integer-indexed collection. See 'at'.
 class At c i e where
-    -- | @at c i@ is the element at index @i@ of collection @c@.
-    -- This function is to be used infix such as @c `at` 123@.
+    {- |
+@at c i@ is the element at index @i@ of collection @c@.
+
+This function is to be used infix such as @c `at` 123@.
+
+For speed, use `at` with Vector from Data.Vector, and don't use `at` with lists.
+    -}
     at :: c -> i -> e
 
 instance (Monad m, P.Integral i, Show i, m a ~ b) => At [a] i b where
@@ -326,3 +344,21 @@ instance (Monad m, P.Integral i, Show i, m a ~ b) => At [a] i b where
             go (h:_) 0 = return h
             go (_:t) n = go t (n P.- 1)
             go _ _ = P.fail $ "at: index out of bounds: " ++ show index
+
+instance (Monad m, P.Integral i, Show i, m a ~ b) => At (V.Vector a) i b where
+    at c i = maybe (P.fail $ "at: Vector: index out of bounds: " ++ show i) return $ c V.!? P.fromIntegral i
+
+class FromList a b where
+    fromList :: a -> b
+
+instance FromList [a] (V.Vector a) where
+    fromList = V.fromList
+
+class ToList a b where
+    toList :: a -> b
+
+instance (a0 ~ a1) => ToList (V.Vector a0) [a1] where
+    toList = V.toList
+
+instance (k0 ~ k1, a0 ~ a1) => ToList (Map.Map k0 a0) [(k1, a1)] where
+    toList = Map.toList
