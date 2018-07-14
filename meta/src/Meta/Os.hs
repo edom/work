@@ -15,8 +15,9 @@ module Meta.Os (
     -- , Env.lookupEnv -- not in base 4.5
     , Env.getEnvironment
     -- * Careless transput
+    -- $careless
     , Slurp(..)
-    -- * Directory traversal
+    -- ** Directory traversal
     , descendant_files_of
 ) where
 
@@ -34,10 +35,28 @@ import Meta.OsProc
 
 import qualified Meta.ByteString as B
 
+{- $careless
+The only consideration for these careless functions are ease of use.
+Errors are not handled.
+Resource\/performance (CPU and memory usage) is not considered.
+-}
+
 {- |
 The most general way to strictly and carelessly read a file.
+
+Stability: implicit inference only.
+Do not define your own instances.
+Do not use in type signatures.
 -}
-class Slurp m a where slurp :: FilePath -> m a
+class Slurp m a where
+    {- |
+Sloppily read the whole file into memory.
+
+The parameter @m@ can be any instance of 'MI.MonadIO'.
+
+The parameter @a@ can be 'B.ByteString', 'B.LazyByteString', 'T.Text', or 'String'.
+    -}
+    slurp :: FilePath -> m a
 
 -- | 'B.readFile' from "Data.ByteString".
 instance (MI.MonadIO m) => Slurp m B.ByteString where slurp = MI.liftIO . B.readFile
@@ -50,7 +69,8 @@ Get every relative file path in the directory recursively.
 
 Directories are excluded.
 
-Unreadable files are silently ignored.
+If any files are unreadable, the behahior is undefined.
+Currently those unreadable files are silently ignored, but don't depend on this behavior.
 -}
 descendant_files_of :: FilePath -> IO [FilePath]
 descendant_files_of path = do
@@ -62,4 +82,4 @@ descendant_files_of path = do
         listify node = case node of
             DT.File name _ -> [name]
             DT.Dir name children -> map (\ c -> name ++ "/" ++ c) (concatMap listify children)
-            _ -> []
+            _ -> [] -- ignore read failures

@@ -102,13 +102,14 @@ module Meta.Prelude (
     -- * Bounded, Enum
     , P.Bounded(minBound, maxBound)
     , P.Enum
-    -- * IO
+    -- * IO, transput
     , P.FilePath
     , P.IO
     , getLine
     , putStr
     , putStrLn
-    , Os.Slurp(..)
+    -- ** Sloppy transput
+    , Os.slurp
     -- ** IORef
     , IORef.IORef
     , IORef.newIORef
