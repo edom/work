@@ -1,4 +1,6 @@
 {-# LANGUAGE FunctionalDependencies #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {- |
 This mostly reexports symbols from @base@, for both backward and forward compatibility.
@@ -75,7 +77,7 @@ module Meta.Prelude (
     , P.length
     , P.reverse
     , L.isPrefixOf
-    , L.isInfixOf
+    , IsInfixOf(..)
     , L.isSuffixOf
     , beginsWith
     , endsWith
@@ -148,6 +150,16 @@ module Meta.Prelude (
     , S.IsString(..)
     -- * Faithful functors
     , Faithful(..)
+    -- * Operating system services
+    -- ** Command-line arguments
+    , Os.getArgs
+    -- * Array-like, integer-indexable collection
+    , At(..)
+    -- * Maps from Data.Map
+    , Map.Map
+    , Map.from_list
+    , Map.fromListWith
+    , Map.toList
 ) where
 
 import Prelude ()
@@ -170,6 +182,7 @@ import qualified Data.ByteString as BS
 import qualified Data.ByteString.Lazy as BSL
 
 import qualified Meta.ByteString as B
+import qualified Meta.Map as Map
 import qualified Meta.Os as Os
 
 {- |
@@ -201,6 +214,15 @@ user_error = IE.ioError . IE.userError
 
 raise_either :: (Monad m) => Either String a -> m a
 raise_either = either P.fail return
+
+class IsInfixOf a where
+    isInfixOf :: a -> a -> Bool
+
+instance (Eq a) => IsInfixOf [a] where
+    isInfixOf = L.isInfixOf
+
+instance IsInfixOf B.ByteString where
+    isInfixOf = BS.isInfixOf
 
 -- | @a `beginsWith` b = b `'L.isPrefixOf'` a@.
 beginsWith :: (Eq a) => [a] -> [a] -> Bool
@@ -290,3 +312,17 @@ data G a
 -}
 class Faithful f where
     faithful :: a -> f a
+
+-- | Integer-indexed collection. See 'at'.
+class At c i e where
+    -- | @at c i@ is the element at index @i@ of collection @c@.
+    -- This function is to be used infix such as @c `at` 123@.
+    at :: c -> i -> e
+
+instance (Monad m, P.Integral i, Show i, m a ~ b) => At [a] i b where
+    at _ i | i P.< 0 = P.fail $ "at: negative index: " ++ show i
+    at list index = go list index
+        where
+            go (h:_) 0 = return h
+            go (_:t) n = go t (n P.- 1)
+            go _ _ = P.fail $ "at: index out of bounds: " ++ show index
