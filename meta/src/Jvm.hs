@@ -99,6 +99,8 @@ module Jvm (
     , P.resolve_constant_pool
     -- ** Constant-pool entries
     , P.Entry_(..)
+    , P.Index
+    , P.get_name
     -- * Architecture
     -- $arch
     -- * Running

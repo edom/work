@@ -96,7 +96,7 @@ parse_class_0 path =
             unless (magic == 0xcafebabe) $ fail "bad magic"
             minor <- u2
             major <- u2
-            pool <- g_pool_0
+            pool <- fromList <$> g_pool_0
             access <- u2
             this <- u2
             super <- u2

@@ -1,6 +1,4 @@
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE ScopedTypeVariables #-}
-{-# LANGUAGE StandaloneDeriving #-}
 
 {- |
 Constant pool.
@@ -37,7 +35,7 @@ data Resolved = MkResolved deriving (Read, Show)
 data Class_ cls str super = Mk_class {
         _minor :: Word16 -- ^ class file minor version
         , _major :: Word16 -- ^ class file major version
-        , _pool :: [Entry_ cls str] -- ^ constant pool
+        , _pool :: Pool_ cls str -- ^ constant pool
         , _access :: Access -- ^ public, protected, etc.
         , _this :: cls -- ^ (Class) of this class
         , _super :: super -- ^ (Class) of the superclass (parent class) of this class
@@ -47,7 +45,21 @@ data Class_ cls str super = Mk_class {
         , _attrs :: [Attribute str] -- ^ usually ignored
     } deriving (Read, Show)
 
-get_constant_pool :: Class_ cls str super -> [Entry_ cls str]
+class C_get_name a b where
+    -- | The parameter @a@ can be a @'Class' 'Raw'@ or a @'Class' 'Resolved'@.
+    get_name :: a -> b
+
+instance (cls0 ~ cls1) => C_get_name (Class_ cls0 str super) cls1 where
+    get_name = _this
+
+-- type PoolC a = [a] -- slow
+type PoolC a = Vector a
+
+type Pool_ cls str = PoolC (Entry_ cls str)
+
+type Pool r = PoolC (Entry r)
+
+get_constant_pool :: Class_ cls str super -> Pool_ cls str
 get_constant_pool = _pool
 
 data Attribute str = Mk_attribute {
@@ -95,27 +107,28 @@ data Entry_ cls str
     deriving (Read, Show)
 
 -- | Replace indexes with contents.
-resolve_constant_pool :: (Monad m) => [Entry Raw] -> m [Entry Resolved]
-resolve_constant_pool raws = mapM resolve raws
-    where
-        resolve :: (Monad m) => Entry Raw -> m (Entry Resolved)
-        resolve raw = case raw of
-            Utf8 x -> return $ Utf8 x
-            Integer x -> return $ Integer x
-            Float x -> return $ Float x
-            Long x -> return $ Long x
-            Double x -> return $ Double x
-            EClass c -> do
-                Utf8 s <- raws `at` (c - 1)
-                return $ EClass s
-            String s -> do
-                Utf8 s0 <- raws `at` (s - 1)
-                return $ String s0
-            Fieldref x y -> return $ Fieldref x y
-            Methodref x y -> return $ Methodref x y
-            Interfacemethodref x y -> return $ Interfacemethodref x y
-            Nameandtype s c -> do
-                Utf8 s0 <- raws `at` (s - 1)
-                Utf8 c0 <- raws `at` (c - 1)
-                return $ Nameandtype s0 c0
-            Unused -> return Unused
+resolve_constant_pool :: (Monad m) => Pool Raw -> m (Pool Resolved)
+resolve_constant_pool raws = mapM (resolve_entry raws) raws
+
+-- | Internal function.
+resolve_entry :: (Monad m) => Pool Raw -> Entry Raw -> m (Entry Resolved)
+resolve_entry raws raw = case raw of
+    Utf8 x -> return $ Utf8 x
+    Integer x -> return $ Integer x
+    Float x -> return $ Float x
+    Long x -> return $ Long x
+    Double x -> return $ Double x
+    EClass c -> do
+        Utf8 s <- raws `at` (c - 1)
+        return $ EClass s
+    String s -> do
+        Utf8 s0 <- raws `at` (s - 1)
+        return $ String s0
+    Fieldref x y -> return $ Fieldref x y
+    Methodref x y -> return $ Methodref x y
+    Interfacemethodref x y -> return $ Interfacemethodref x y
+    Nameandtype s c -> do
+        Utf8 s0 <- raws `at` (s - 1)
+        Utf8 c0 <- raws `at` (c - 1)
+        return $ Nameandtype s0 c0
+    Unused -> return Unused
