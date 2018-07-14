@@ -1,33 +1,7 @@
 {- |
 Class file parsing.
 -}
-module Meta.JvmCls (
-    -- * Parse class files
-    parse_class_file
-    , parse_class
-    , parse_field_type
-    , Class(..)
-    , Access
-    -- * Access constant pool
-    -- $constpool
-    , PIndex
-    , Cp_index
-    , cp_get_integer
-    , cp_get_utf8
-    , cp_get_nameandtype
-    , cp_get_class
-    , Constant(..)
-    -- * Parse Code attribute content
-    , parse_code_attr_content
-    , parse_method_type
-    , Code(..)
-    , Attribute(..)
-    , Handler(..)
-    -- * Method
-    , Method_info(..)
-    -- * Field
-    , Field_info(..)
-) where
+module Meta.JvmCls where
 
 import Prelude (seq)
 import Meta.Prelude
@@ -37,7 +11,7 @@ import qualified Data.ByteString.UTF8 as Bu
 import qualified Data.Serialize as Se
 import qualified Text.Parsec as P
 
-import qualified Meta.List as Li
+import qualified Meta.JvmConstPool as C
 
 import Meta.JvmType
     (
@@ -46,15 +20,13 @@ import Meta.JvmType
     )
 
 -- | A convenience function that does IO and calls 'parse_class'.
-parse_class_file :: FilePath -> IO (Either String Class)
+parse_class_file :: (MonadIO m) => FilePath -> m (EitherString Class)
 parse_class_file path = parse_class path <$> slurp path
 
-{- |
-The 'FilePath' argument is used for error reporting.
--}
-parse_class :: FilePath -> Bs.ByteString -> Either String Class
+{-# DEPRECATED parse_class "Use 'parse_class_0'" #-}
+parse_class :: (Monad m) => FilePath -> Bs.ByteString -> m Class
 parse_class path =
-    Se.runGet grammar
+    either fail return . Se.runGet grammar
     where
         grammar = do
             magic <- u4
@@ -112,6 +84,69 @@ parse_class path =
                     trace $ new_i `seq` loop (new_entries ++ result) new_i
             loop [] 0
 
+{- |
+The 'FilePath' argument is used for error reporting.
+-}
+parse_class_0 :: (Monad m) => FilePath -> Bs.ByteString -> m (C.Class C.Raw)
+parse_class_0 path =
+    either fail return . Se.runGet grammar
+    where
+        grammar = do
+            magic <- u4
+            unless (magic == 0xcafebabe) $ fail "bad magic"
+            minor <- u2
+            major <- u2
+            pool <- g_pool_0
+            access <- u2
+            this <- u2
+            super <- u2
+            ifaces <- array_of u2
+            fields <- array_of $ C.Mk_field_info <$> u2 <*> u2 <*> u2 <*> g_attributes_0
+            methods <- array_of $ C.Mk_method_info <$> u2 <*> u2 <*> u2 <*> g_attributes_0
+            attrs <- g_attributes_0
+            return $ C.Mk_class minor major pool access this super ifaces fields methods attrs
+        f8 = Se.getFloat64be
+        f4 = Se.getFloat32be
+        s8 = Se.getInt64be
+        s4 = Se.getInt32be
+        u4 = Se.getWord32be
+        u2 = Se.getWord16be
+        u1 = Se.getWord8
+        -- "In retrospect, making 8-byte constants take two constant pool entries was a poor choice."
+        -- https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.5
+        g_pool_0 = do
+            n <- fromIntegral <$> u2
+            let
+                count = n - 1
+                loop result i | i >= count = return (reverse result)
+                loop result i = do
+                    tag <- u1
+                    let
+                        mem_index = i + 1
+                        one = fmap (\ x -> [x])
+                        two = fmap (\ x -> [C.Unused, x]) -- reversed
+                        -- P_unused is not stored on disk, but is present on memory.
+                    new_entries <- case tag of
+                        1 -> one $ C.Utf8 <$> g_string u2
+                        3 -> one $ C.Integer <$> s4
+                        4 -> one $ C.Float <$> f4
+                        5 -> two $ C.Long <$> s8
+                        6 -> two $ C.Double <$> f8
+                        7 -> one $ C.EClass <$> u2
+                        8 -> one $ C.String <$> u2
+                        9 -> one $ C.Fieldref <$> u2 <*> u2
+                        10 -> one $ C.Methodref <$> u2 <*> u2
+                        11 -> one $ C.Interfacemethodref <$> u2 <*> u2
+                        12 -> one $ C.Nameandtype <$> u2 <*> u2
+                        _ -> fail $ path ++ ": constant pool entry #" ++ show mem_index ++ " (D" ++ show i ++ ") has invalid tag: " ++ show tag
+                    let
+                        new_i = i + length new_entries
+                        -- For debugging, uncomment the first definition of 'trace' and comment the second one.
+                        -- trace u = Debug.Trace.trace ("#" ++ show mem_index ++ " (D" ++ show i ++ "): " ++ show new_entries) u
+                        trace = id
+                    trace $ new_i `seq` loop (new_entries ++ result) new_i
+            loop [] 0
+
 g_string :: (Integral a) => Se.Get a -> Se.Get Bs.ByteString
 g_string get_length =
     get_length >>= Se.getByteString . fromIntegral
@@ -160,7 +195,7 @@ cp_get_integer c i = do
         _ -> Left "not an Integer"
 
 cp_get :: Class -> Cp_index -> Either String Constant
-cp_get c i = maybe (Left "invalid constant pool index") Right $ Li.at (c_pool c) (fromIntegral i - 1)
+cp_get c i = maybe (Left "invalid constant pool index") Right $ (c_pool c `at` (i - 1))
 
 {- |
 The first constant pool entry has index 1.
@@ -208,6 +243,13 @@ parse_code_attr_content =
 g_attributes :: Se.Get [Attribute]
 g_attributes =
     array_of $ Mk_attribute <$> u2 <*> g_string u4
+    where
+        u4 = Se.getWord32be
+        u2 = Se.getWord16be
+
+g_attributes_0 :: Se.Get [C.Attribute C.Index]
+g_attributes_0 =
+    array_of $ C.Mk_attribute <$> u2 <*> g_string u4
     where
         u4 = Se.getWord32be
         u2 = Se.getWord16be
@@ -265,18 +307,20 @@ type Parser a = P.Parsec String () a
 
 -- * Types
 
+-- | An entry of a constant pool.
+{-# DEPRECATED Constant "Use \"Meta.JvmConstPool\"" #-}
 data Constant
     = P_utf8 Bs.ByteString
     | P_integer Int32
     | P_float Float
     | P_long Int64
     | P_double Double
-    | P_class PIndex
+    | P_class PIndex -- ^ must point to a 'P_utf8'
     | P_string PIndex
     | P_fieldref PIndex PIndex
     | P_methodref PIndex PIndex
     | P_interfacemethodref PIndex PIndex
-    | P_nameandtype PIndex PIndex
+    | P_nameandtype PIndex PIndex -- ^ part of field or method info; parameters are 'P_utf8' and 'P_class'
     | P_unused -- ^ second slot of 8-byte constant
     deriving (Read, Show)
 
@@ -308,19 +352,24 @@ data Method_info
     }
     deriving (Read, Show)
 
+{- |
+This represents a parsed class file.
+
+@c_super c@ is zero iff @c@ represents the java.lang.Object class.
+-}
 data Class
     = Mk_class
     {
         c_minor :: Word16 -- ^ class file minor version
         , c_major :: Word16 -- ^ class file major version
         , c_pool :: [Constant] -- ^ constant pool
-        , c_access :: Access
-        , c_this :: PIndex
-        , c_super :: PIndex
+        , c_access :: Access -- ^ public, protected, etc.
+        , c_this :: PIndex -- ^ (Class) of this class
+        , c_super :: PIndex -- ^ (Class) of the superclass (parent class) of this class
         , c_ifaces :: [PIndex] -- ^ interfaces implemented by this class
         , c_fields :: [Field_info] -- ^ fields of this class
         , c_methods :: [Method_info] -- ^ methods of this class
-        , c_attrs :: [Attribute]
+        , c_attrs :: [Attribute] -- ^ usually ignored
     }
     deriving (Read, Show)
 

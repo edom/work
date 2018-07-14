@@ -88,8 +88,17 @@ and not directly use those private modules.
 -}
 module Jvm (
     -- * Parsing class files
-    JC.parse_class_file
-    , JC.parse_class
+    C.parse_class_0
+    , P.Class
+    , P.Entry
+    , P.Raw
+    , P.Resolved
+    -- * Accessing the constant pool
+    , P.get_constant_pool
+    -- ** Resolving the constant pool
+    , P.resolve_constant_pool
+    -- ** Constant-pool entries
+    , P.Entry_(..)
     -- * Architecture
     -- $arch
     -- * Running
@@ -124,11 +133,12 @@ import Meta.JvmMember (fr_type, fr_name)
 
 import qualified Meta.JvmArch as A
 import qualified Jvm_build as B
-import qualified Jvm_debug as C
+import qualified Jvm_debug as D
 import qualified Jvm_execute as E
 import qualified Jvm_interop as O
 import qualified Jvm_load as L
-import qualified Meta.JvmCls as JC
+import qualified Meta.JvmCls as C
+import qualified Meta.JvmConstPool as P
 import qualified Meta.JvmType as T
 import qualified Meta.JvmTys as U
 import qualified Meta.JvmValue as V
@@ -283,7 +293,7 @@ runvm option = do
 testrunvm :: IO ()
 testrunvm = do
     s <- runvm option
-    putStrLn $ C.dump s
+    putStrLn $ D.dump s
     where
         option = option_def
             {
@@ -368,7 +378,7 @@ jvm = do
     final_state <- flip A.exec_io init_state $ do
         -- O.call "Hello" T.Int "test2" [T.Int, T.Int] [V.Integer 200, V.Integer 100] >>= A.push
         O.call "Hello" T.Int "virtual" [T.Int] [V.Null, V.Integer 12345] >>= A.push
-    putStrLn $ C.dump final_state
+    putStrLn $ D.dump final_state
     return ()
     where
         io_error :: String -> IO a
