@@ -161,7 +161,15 @@ instance M.MonadPlus EitherString where
 
 {- |
 This generalizes 'P.either' from "Prelude" so that it works with both 'Either' and 'EitherString'.
+
+All instances of this class must be in the module "Meta.PreludeMin".
+Don't define your own instances.
 -}
-class C_either e a b | e -> a b where either :: (a -> c) -> (b -> c) -> e -> c
-instance C_either (Either a b) a b where either = P.either
-instance C_either (EitherString b) String b where either a b = P.either a b . unEitherString
+class C_either e a b | e -> a b where
+    either :: (a -> c) -> (b -> c) -> e -> c
+
+instance C_either (Either a b) a b where
+    either = P.either
+
+instance C_either (EitherString b) String b where
+    either a b = P.either a b . unEitherString
