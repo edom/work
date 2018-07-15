@@ -11,12 +11,12 @@
 - Knowledge base
     - Haskell
         - [Cabal tragedies](cabal.md)
+- 2018-07-16: I stopped using Travis CI because `cabal new-build` ran out of memory.
 - The `travis` branch
     - Pushing to this branch will trigger a rebuild.
     - This branch is meant to be rebased onto `origin/master`.
     - This branch is meant to be force-pushed.
     - The file `.travis.yml` shall stay in this branch.
-    - <a href="https://travis-ci.com/edom/work"><img alt="build status" src="https://travis-ci.com/edom/work.svg?branch=travis"></a>
     - Travis CI woes
         - @cabal new-build@ runs out of memory.
             - Reduce @-j4@ to @-j1@?

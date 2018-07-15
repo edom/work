@@ -12,6 +12,14 @@
             - Less than 100 users.
         - What we don't mean by "enterprise web application":
             - Java Enterprise Edition (Java EE), except Servlet API.
+    - Reverse-engineer an obfuscated Java 6 application.
+        - Approach:
+            - Transform Java bytecode into something related to lambda calculus.
+            - Simplify (optimize) the representation.
+            - Transform it back into Java bytecode.
+    - Create an abstract programming language that can represent the semantics of all programming languages.
+        - Use it to translate programs across programming languages.
+        - Similar to Pandoc but for programming languages.
 - Assumptions
     - The user of this library is programmer / developer / software engineer.
     - Small changes are more likely to be accepted and persisted than big changes.
