@@ -5,6 +5,7 @@ module Meta.JvmValue (
     -- * Value
     Value(..)
     , Class_name
+    , Instance_data
     -- * Pretty-printing
     , pretty
     , pretty_io
@@ -55,8 +56,11 @@ data Value
     | Long Int64
     | Float Float
     | Double Double
-    | Instance Class_name (IORef [(M.Field_ref, Value)]) -- ^ embrace the 'IO' for instance field values
+    | Instance Class_name Instance_data
     | Array T.Type Int32 (IORef [Value])
+
+-- type Instance_data = Map M.Field_ref Value
+type Instance_data = IORef [(M.Field_ref, Value)]
 
 type Class_name = Bs.ByteString
 

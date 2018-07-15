@@ -4,7 +4,8 @@ This module deals with loading classes without initializing them.
 module Jvm_load
 where
 
-import qualified Meta.Prelude as P
+import Prelude ()
+import Meta.Prelude
 
 import qualified Control.Monad as Mo
 import qualified System.IO.Error as Ie
@@ -15,7 +16,8 @@ import qualified Data.ByteString.UTF8 as Bu
 
 import qualified Meta.JvmArch as A
 import qualified Meta.JvmCls as Z
-import qualified Jvm_prepare as P
+import qualified Meta.JvmSer as S
+import qualified Jvm_prepare as Prep
 
 -- * Loading classes
 
@@ -51,11 +53,12 @@ load_class_in name (dir : rest) = do
     let path = dir ++ "/" ++ Bu.toString name ++ ".class"
     debug_load path
     ec <- Ic.liftIO $ Ie.tryIOError $ load_class_file path
-    case ec of
+    case either Left Right ec of
         Left e | Ie.isDoesNotExistError e -> load_class_in name rest
         Left e -> A.stop (A.Failed_loading_class name (show e))
-        Right (Left e) -> A.stop (A.Failed_loading_class name e)
-        Right (Right c) -> return c
+        Right u -> case either Left Right u of
+            Left e -> A.stop (A.Failed_loading_class name e)
+            Right c -> return c
     where
         debug_load path = do
             debug <- A.gets A.s_debug_load
@@ -69,13 +72,13 @@ This returns a 'A.Class' from "Meta.JvmArch", not a 'Z.Class' from "Meta.JvmCls"
 You are not supposed to use this function directly;
 let the virtual machine load the classes on its own.
 -}
-load_class_file :: FilePath -> IO (Either String A.Class)
-load_class_file = fmap (>>= P.resolve_class) . parse_class_file
+load_class_file :: FilePath -> IO (EitherString A.Class)
+load_class_file = fmap (>>= Prep.resolve_class) . parse_class_file
 
 {- |
 This returns a 'Z.Class' from "Meta.JvmCls", not a 'A.Class' from "Meta.JvmArch".
 
 Deserialize the binary representation from disk.
 -}
-parse_class_file :: FilePath -> IO (Either String Z.Class)
-parse_class_file path = Z.parse_class path <$> P.slurp path
+parse_class_file :: FilePath -> IO (EitherString Z.Class)
+parse_class_file path = S.parse_class path <$> slurp path

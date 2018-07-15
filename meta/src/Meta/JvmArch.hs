@@ -7,13 +7,11 @@ import qualified Control.Monad as M
 import qualified Data.IORef as Ir
 import qualified Data.List as DL
 
-import Control.Monad.IO.Class (MonadIO, liftIO)
-
 import qualified Data.ByteString as Bs
 
 import qualified Data.ByteString.UTF8 as Bu
 
-import qualified Meta.JvmCls as C
+import qualified Meta.JvmClsConst as K
 import qualified Meta.JvmMember as Me
 import qualified Meta.JvmType as T
 import qualified Meta.JvmTys as U
@@ -24,6 +22,8 @@ import qualified Meta.List as Li
 
 {- |
 This class represents what is common between 'S' and 'J'.
+
+This class should be renamed to @Interpret@.
 -}
 class (Monad m) => Stateful m where
     get :: m State
@@ -221,7 +221,7 @@ load :: (Stateful m) => Local_index -> m V.Value
 load i = do
     frame <- get_frame
     let local = f_local frame
-    maybe (stop Invalid_local_index) return (Li.at local i)
+    maybe (stop Invalid_local_index) return (local `at` i)
 
 {- |
 Store to local variable array.
@@ -438,6 +438,7 @@ bind cname rtype mname atypes body = modify $ \ s ->
 
 -- * Types suitable for execution
 
+-- | Resolved class.
 data Class
     = Mk_class
     {
@@ -499,7 +500,7 @@ data Method
 
 data Body
     = Missing -- ^ no body
-    | Bytecode C.Code -- ^ JVM bytecode
+    | Bytecode K.Code -- ^ JVM bytecode
     | Native (S V.Value) -- ^ native without 'IO'
     | Native_io (J V.Value) -- ^ native with 'IO'
 

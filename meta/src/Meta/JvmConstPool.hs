@@ -15,7 +15,7 @@ import Meta.Prelude
 {- |
 This represents a parsed class file.
 
-@_super c@ is zero iff @c@ represents the java.lang.Object class.
+The parameter @r@ can be 'Raw' or 'Resolved'.
 -}
 type family Class r where
     Class Raw = Class_ Index Index Index
@@ -31,7 +31,11 @@ data Resolved = MkResolved deriving (Read, Show)
 
 -- * Other things
 
--- | See 'Class' for the type parameters.
+{- |
+See 'Class' for the type parameters.
+
+If @c :: 'Class' 'Raw'@, then @'_super' c@ is zero iff @c@ represents the java.lang.Object class.
+-}
 data Class_ cls str super = Mk_class {
         _minor :: Word16 -- ^ class file minor version
         , _major :: Word16 -- ^ class file major version
@@ -59,6 +63,7 @@ type Pool_ cls str = PoolC (Entry_ cls str)
 
 type Pool r = PoolC (Entry r)
 
+-- | @get_constant_pool :: 'Class' r -> 'Pool' r@
 get_constant_pool :: Class_ cls str super -> Pool_ cls str
 get_constant_pool = _pool
 

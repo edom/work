@@ -8,8 +8,8 @@ import qualified Prelude as P
 import qualified Data.ByteString as Bs
 import qualified Data.ByteString.Unsafe as Bsu
 
+import qualified Meta.JvmAccess as Ac
 import qualified Meta.JvmArch as A
-import qualified Meta.JvmCls as Z
 import qualified Meta.JvmIns as I
 
 import Meta.JvmIns
@@ -35,7 +35,7 @@ instance Fetch A.S where
         case body of
             A.Missing -> A.stop A.Method_lacks_Code
             A.Bytecode code_ -> do
-                let code = Z.cd_code code_
+                let code = Ac.get_code code_
                 case () of
                     _ | ipc < Bs.length code -> do
                         A.replace_frame frame { A.f_pc = pc + 1 }

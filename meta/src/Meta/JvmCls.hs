@@ -3,354 +3,41 @@ Class file parsing.
 -}
 module Meta.JvmCls where
 
-import Prelude (seq)
+import Prelude ()
 import Meta.Prelude
 
-import qualified Data.ByteString as Bs
-import qualified Data.ByteString.UTF8 as Bu
-import qualified Data.Serialize as Se
-import qualified Text.Parsec as P
+import qualified Meta.JvmAccess as A
+import qualified Meta.JvmClsConst as K
 
-import qualified Meta.JvmConstPool as C
-
-import Meta.JvmType
-    (
-        Type(..)
-        , Signature(..)
-    )
-
--- | A convenience function that does IO and calls 'parse_class'.
-parse_class_file :: (MonadIO m) => FilePath -> m (EitherString Class)
-parse_class_file path = parse_class path <$> slurp path
-
-{-# DEPRECATED parse_class "Use 'parse_class_0'" #-}
-parse_class :: (Monad m) => FilePath -> Bs.ByteString -> m Class
-parse_class path =
-    either fail return . Se.runGet grammar
-    where
-        grammar = do
-            magic <- u4
-            unless (magic == 0xcafebabe) $ fail "bad magic"
-            minor <- u2
-            major <- u2
-            pool <- g_pool
-            access <- u2
-            this <- u2
-            super <- u2
-            ifaces <- array_of u2
-            fields <- array_of $ Mk_field_info <$> u2 <*> u2 <*> u2 <*> g_attributes
-            methods <- array_of $ Mk_method_info <$> u2 <*> u2 <*> u2 <*> g_attributes
-            attrs <- g_attributes
-            return $ Mk_class minor major pool access this super ifaces fields methods attrs
-        f8 = Se.getFloat64be
-        f4 = Se.getFloat32be
-        s8 = Se.getInt64be
-        s4 = Se.getInt32be
-        u4 = Se.getWord32be
-        u2 = Se.getWord16be
-        u1 = Se.getWord8
-        -- "In retrospect, making 8-byte constants take two constant pool entries was a poor choice."
-        -- https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.5
-        g_pool = do
-            n <- fromIntegral <$> u2
-            let
-                count = n - 1
-                loop result i | i >= count = return (reverse result)
-                loop result i = do
-                    tag <- u1
-                    let
-                        mem_index = i + 1
-                        one = fmap (\ x -> [x])
-                        two = fmap (\ x -> [P_unused, x]) -- reversed
-                        -- P_unused is not stored on disk, but is present on memory.
-                    new_entries <- case tag of
-                        1 -> one $ P_utf8 <$> g_string u2
-                        3 -> one $ P_integer <$> s4
-                        4 -> one $ P_float <$> f4
-                        5 -> two $ P_long <$> s8
-                        6 -> two $ P_double <$> f8
-                        7 -> one $ P_class <$> u2
-                        8 -> one $ P_string <$> u2
-                        9 -> one $ P_fieldref <$> u2 <*> u2
-                        10 -> one $ P_methodref <$> u2 <*> u2
-                        11 -> one $ P_interfacemethodref <$> u2 <*> u2
-                        12 -> one $ P_nameandtype <$> u2 <*> u2
-                        _ -> fail $ path ++ ": constant pool entry #" ++ show mem_index ++ " (D" ++ show i ++ ") has invalid tag: " ++ show tag
-                    let
-                        new_i = i + length new_entries
-                        -- For debugging, uncomment the first definition of 'trace' and comment the second one.
-                        -- trace u = Debug.Trace.trace ("#" ++ show mem_index ++ " (D" ++ show i ++ "): " ++ show new_entries) u
-                        trace = id
-                    trace $ new_i `seq` loop (new_entries ++ result) new_i
-            loop [] 0
+-- * Constant pool
 
 {- |
-The 'FilePath' argument is used for error reporting.
--}
-parse_class_0 :: (Monad m) => FilePath -> Bs.ByteString -> m (C.Class C.Raw)
-parse_class_0 path =
-    either fail return . Se.runGet grammar
-    where
-        grammar = do
-            magic <- u4
-            unless (magic == 0xcafebabe) $ fail "bad magic"
-            minor <- u2
-            major <- u2
-            pool <- fromList <$> g_pool_0
-            access <- u2
-            this <- u2
-            super <- u2
-            ifaces <- array_of u2
-            fields <- array_of $ C.Mk_field_info <$> u2 <*> u2 <*> u2 <*> g_attributes_0
-            methods <- array_of $ C.Mk_method_info <$> u2 <*> u2 <*> u2 <*> g_attributes_0
-            attrs <- g_attributes_0
-            return $ C.Mk_class minor major pool access this super ifaces fields methods attrs
-        f8 = Se.getFloat64be
-        f4 = Se.getFloat32be
-        s8 = Se.getInt64be
-        s4 = Se.getInt32be
-        u4 = Se.getWord32be
-        u2 = Se.getWord16be
-        u1 = Se.getWord8
-        -- "In retrospect, making 8-byte constants take two constant pool entries was a poor choice."
-        -- https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.5
-        g_pool_0 = do
-            n <- fromIntegral <$> u2
-            let
-                count = n - 1
-                loop result i | i >= count = return (reverse result)
-                loop result i = do
-                    tag <- u1
-                    let
-                        mem_index = i + 1
-                        one = fmap (\ x -> [x])
-                        two = fmap (\ x -> [C.Unused, x]) -- reversed
-                        -- P_unused is not stored on disk, but is present on memory.
-                    new_entries <- case tag of
-                        1 -> one $ C.Utf8 <$> g_string u2
-                        3 -> one $ C.Integer <$> s4
-                        4 -> one $ C.Float <$> f4
-                        5 -> two $ C.Long <$> s8
-                        6 -> two $ C.Double <$> f8
-                        7 -> one $ C.EClass <$> u2
-                        8 -> one $ C.String <$> u2
-                        9 -> one $ C.Fieldref <$> u2 <*> u2
-                        10 -> one $ C.Methodref <$> u2 <*> u2
-                        11 -> one $ C.Interfacemethodref <$> u2 <*> u2
-                        12 -> one $ C.Nameandtype <$> u2 <*> u2
-                        _ -> fail $ path ++ ": constant pool entry #" ++ show mem_index ++ " (D" ++ show i ++ ") has invalid tag: " ++ show tag
-                    let
-                        new_i = i + length new_entries
-                        -- For debugging, uncomment the first definition of 'trace' and comment the second one.
-                        -- trace u = Debug.Trace.trace ("#" ++ show mem_index ++ " (D" ++ show i ++ "): " ++ show new_entries) u
-                        trace = id
-                    trace $ new_i `seq` loop (new_entries ++ result) new_i
-            loop [] 0
-
-g_string :: (Integral a) => Se.Get a -> Se.Get Bs.ByteString
-g_string get_length =
-    get_length >>= Se.getByteString . fromIntegral
-
-array_of :: Se.Get a -> Se.Get [a]
-array_of body = do
-    count <- fromIntegral <$> Se.getWord16be
-    replicateM count body
-
-{- $constpool
-
-Every function in this section follows this pattern:
+Every function @cp_get_*@ follows this pattern:
 
 @
-cp_get_/something/ :: Class -> Cp_index -> Either String /sometype/
+cp_get_/something/ :: Class_file -> PIndex -> Either String /sometype/
 @
-
 -}
+cp_get :: (Monad m) => Class_file -> K.PIndex -> m K.Constant
+cp_get c i = maybe (fail "invalid constant pool index") return $ (c_pool c `at` (i - 1))
 
-cp_get_utf8 :: Class -> Cp_index -> Either String Bs.ByteString
-cp_get_utf8 c i = do
-    e <- cp_get c i
-    case e of
-        P_utf8 a -> Right a
-        _ -> Left "not a UTF8"
+-- | See 'cp_get'.
+cp_get_utf8 :: Class_file -> K.PIndex -> EitherString ByteString
+cp_get_utf8 c i = cp_get c i >>= K.get_utf8
 
-cp_get_nameandtype :: Class -> Cp_index -> Either String (Word16, Word16)
-cp_get_nameandtype c i = do
-    e <- cp_get c i
-    case e of
-        P_nameandtype a b -> Right (a, b)
-        _ -> Left "not a NameAndType"
+-- | See 'cp_get'.
+cp_get_nameandtype :: Class_file -> K.PIndex -> EitherString (Word16, Word16)
+cp_get_nameandtype c i = cp_get c i >>= K.get_nameandtype
 
-cp_get_class :: Class -> Cp_index -> Either String Word16
-cp_get_class c i = do
-    e <- cp_get c i
-    case e of
-        P_class a -> Right a
-        _ -> Left "not a Class"
+-- | See 'cp_get'.
+cp_get_class :: Class_file -> K.PIndex -> EitherString Word16
+cp_get_class c i = cp_get c i >>= K.get_class
 
-cp_get_integer :: Class -> Cp_index -> Either String Int32
-cp_get_integer c i = do
-    e <- cp_get c i
-    case e of
-        P_integer a -> Right a
-        _ -> Left "not an Integer"
+-- | See 'cp_get'.
+cp_get_integer :: Class_file -> K.PIndex -> EitherString Int32
+cp_get_integer c i = cp_get c i >>= K.get_integer
 
-cp_get :: Class -> Cp_index -> Either String Constant
-cp_get c i = maybe (Left "invalid constant pool index") Right $ (c_pool c `at` (i - 1))
-
-{- |
-The first constant pool entry has index 1.
--}
-type PIndex = Word16
-
--- | Consider using 'PIndex' instead.
-type Cp_index = Word16
-
-{- |
-Method body.
--}
-data Code
-    = Mk_code
-    {
-        cd_max_stack :: Word16
-        , cd_max_local :: Word16
-        , cd_code :: Bs.ByteString
-        , cd_handlers :: [Handler]
-        , cd_attributes :: [Attribute]
-    }
-    deriving (Read, Show, Eq)
-
-{- |
-The input is the attribute content.
-It does not include the 6-byte attribute header (name and size).
--}
-parse_code_attr_content :: Bs.ByteString -> Either String Code
-parse_code_attr_content =
-    Se.runGet grammar
-    where
-        grammar = do
-            max_stack <- u2
-            max_local <- u2
-            code <- g_string u4 -- XXX can be too big
-            handlers <- do
-                count <- fromIntegral <$> u2
-                replicateM count $ Mk_handler <$> u2 <*> u2 <*> u2 <*> u2
-            attrs <- g_attributes
-            return $ Mk_code max_stack max_local code handlers attrs
-        u4 = Se.getWord32be
-        u2 = Se.getWord16be
-        u1 = Se.getWord8
-
-g_attributes :: Se.Get [Attribute]
-g_attributes =
-    array_of $ Mk_attribute <$> u2 <*> g_string u4
-    where
-        u4 = Se.getWord32be
-        u2 = Se.getWord16be
-
-g_attributes_0 :: Se.Get [C.Attribute C.Index]
-g_attributes_0 =
-    array_of $ C.Mk_attribute <$> u2 <*> g_string u4
-    where
-        u4 = Se.getWord32be
-        u2 = Se.getWord16be
-
-data Handler
-    = Mk_handler
-    {
-        h_start_pc :: Word16
-        , h_end_pc :: Word16
-        , h_handler_pc :: Word16
-        , h_catch_type :: Word16
-    }
-    deriving (Read, Show, Eq)
-
--- * Parse signature
-
-{- |
-The input is a UTF-8 bytestring.
--}
-parse_field_type :: Bs.ByteString -> Either String Type
-parse_field_type =
-    either (Left . show) Right . P.parse field_type "" . Bu.toString
-
-{- |
-The input is a UTF-8 bytestring.
--}
-parse_method_type :: Bs.ByteString -> Either String Signature
-parse_method_type =
-    either (Left . show) Right . P.parse method_type "" . Bu.toString
-
-field_type :: Parser Type
-field_type =
-    Byte <$ P.char 'B'
-    <|> Char <$ P.char 'C'
-    <|> Double <$ P.char 'D'
-    <|> Float <$ P.char 'F'
-    <|> Int <$ P.char 'I'
-    <|> Long <$ P.char 'J'
-    <|> Instance <$> (Bu.fromString <$> (P.char 'L' *> P.manyTill P.anyChar (P.char ';')))
-    <|> Short <$ P.char 'S'
-    <|> Bool <$ P.char 'Z'
-    <|> Array <$ P.char '[' <*> field_type
-
-method_type :: Parser Signature
-method_type =
-    Mk_signature
-    <$> (P.char '(' *> P.many field_type <* P.char ')')
-    <*> return_type
-    where
-        return_type =
-            field_type
-            <|> Void <$ P.char 'V'
-
-type Parser a = P.Parsec String () a
-
--- * Types
-
--- | An entry of a constant pool.
-{-# DEPRECATED Constant "Use \"Meta.JvmConstPool\"" #-}
-data Constant
-    = P_utf8 Bs.ByteString
-    | P_integer Int32
-    | P_float Float
-    | P_long Int64
-    | P_double Double
-    | P_class PIndex -- ^ must point to a 'P_utf8'
-    | P_string PIndex
-    | P_fieldref PIndex PIndex
-    | P_methodref PIndex PIndex
-    | P_interfacemethodref PIndex PIndex
-    | P_nameandtype PIndex PIndex -- ^ part of field or method info; parameters are 'P_utf8' and 'P_class'
-    | P_unused -- ^ second slot of 8-byte constant
-    deriving (Read, Show)
-
-data Attribute
-    = Mk_attribute
-    {
-        a_name :: PIndex
-        , a_content :: Bs.ByteString
-    }
-    deriving (Read, Show, Eq)
-
-data Field_info
-    = Mk_field_info
-    {
-        fi_access :: Access
-        , fi_name :: PIndex
-        , fi_descriptor :: PIndex
-        , fi_attributes :: [Attribute]
-    }
-    deriving (Read, Show)
-
-data Method_info
-    = Mk_method_info
-    {
-        mi_access :: Access
-        , mi_name :: PIndex
-        , mi_descriptor :: PIndex
-        , mi_attributes :: [Attribute]
-    }
-    deriving (Read, Show)
+-- * Class
 
 {- |
 This represents a parsed class file.
@@ -362,16 +49,16 @@ data Class
     {
         c_minor :: Word16 -- ^ class file minor version
         , c_major :: Word16 -- ^ class file major version
-        , c_pool :: [Constant] -- ^ constant pool
-        , c_access :: Access -- ^ public, protected, etc.
-        , c_this :: PIndex -- ^ (Class) of this class
-        , c_super :: PIndex -- ^ (Class) of the superclass (parent class) of this class
-        , c_ifaces :: [PIndex] -- ^ interfaces implemented by this class
-        , c_fields :: [Field_info] -- ^ fields of this class
-        , c_methods :: [Method_info] -- ^ methods of this class
-        , c_attrs :: [Attribute] -- ^ usually ignored
+        , c_pool :: [K.Constant] -- ^ constant pool
+        , c_access :: A.Access -- ^ public, protected, etc.
+        , c_this :: K.PIndex -- ^ (Class) of this class
+        , c_super :: K.PIndex -- ^ (Class) of the superclass (parent class) of this class
+        , c_ifaces :: [K.PIndex] -- ^ interfaces implemented by this class
+        , c_fields :: [K.Field_info] -- ^ fields of this class
+        , c_methods :: [K.Method_info] -- ^ methods of this class
+        , c_attrs :: [K.Attribute] -- ^ usually ignored
     }
     deriving (Read, Show)
 
--- | Access modifier (public, private, etc.)
-type Access = Word16
+-- | The representation of a class for storage on disk.
+type Class_file = Class

@@ -13,7 +13,7 @@ data Field_ref
         fr_name :: Field_name
         , fr_type :: Type
     }
-    deriving (Read, Show, Eq)
+    deriving (Read, Show, Eq, Ord)
 
 type Field_name = ByteString
 

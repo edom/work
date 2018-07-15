@@ -26,7 +26,7 @@ data Type
     | Short
     | Bool
     | Array Type
-    deriving (Read, Show, Eq)
+    deriving (Read, Show, Eq, Ord)
 
 data Signature
     = Mk_signature

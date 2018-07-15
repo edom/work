@@ -2,6 +2,8 @@
 * The approach here is to describe instructions.
 
 * The approach in "Meta.JvmIns" is to make a big data-type.
+
+* It should be possible to generate "Meta.JvmIns" using this module.
 -}
 module Meta.JvmIns0 (
     -- * Parsing
@@ -12,12 +14,8 @@ module Meta.JvmIns0 (
     , Ins(..)
     , Name
     , Pat
-    , instructions
     -- * Instruction descriptions
-    , nop
-    , aconst_null
-    , iconst_m1
-    , bipush
+    , instructions
 ) where
 
 import Prelude (mod)
@@ -30,6 +28,8 @@ data Ins
         , _pattern :: Pat -- ^ layout in memory; for reading and writing
     } deriving (Read, Show)
 
+-- | Instruction mnemonic.
+-- Should consist of lowercase characters only.
 type Name = String
 
 -- | 1-byte instruction.
@@ -50,6 +50,10 @@ data Pat
     | Seq Pat Pat -- ^ Seq x y is x immediately followed by y
     deriving (Read, Show)
 
+instance Semigroup Pat where
+    (<>) = Seq
+
+-- | For 'parse'.
 class (Monad m) => Parse m where
 
     -- | Get the program counter.
@@ -67,12 +71,15 @@ class (Monad m) => Parse m where
         pc <- get_pc
         unless (pc `mod` 4 == 0) (fetch >> align4)
 
+-- | Value.
 data Val
     = VWord8 Word8
     | VWord16 Word16
     | VInt8 Int8
     deriving (Read, Show)
 
+-- | Parse the input according to the 'Pat' pattern.
+-- The input is implied in @m@.
 parse :: (Parse m) => Pat -> m [Val]
 parse pat = case pat of
     Emp -> return []
@@ -94,23 +101,9 @@ parse pat = case pat of
 instructions :: [Ins]
 instructions = [
         nop
-        , aconst_null
-        , iconst_m1
-        , bipush
+        , simple "aconst_null" 1
+        , simple "iconst_m1" 2
+        , nop { _name = "bipush", _pattern = Fix 16 <> PInt8 }
     ]
-
--- | 0
-nop :: Ins
-nop = simple "nop" 0
-
--- | 1
-aconst_null :: Ins
-aconst_null = simple "aconst_null" 1
-
--- | 2
-iconst_m1 :: Ins
-iconst_m1 = simple "iconst_m1" 2
-
--- | 16
-bipush :: Ins
-bipush = nop { _name = "bipush", _pattern = Fix 16 `Seq` PInt8 }
+    where
+        nop = simple "nop" 0

@@ -28,6 +28,8 @@ and not directly use those private modules.
         * jvm-binary: A library for reading Java class-files
         <https://hackage.haskell.org/package/jvm-binary>
 
+            * That package uses type families and Template Haskell.
+
         * jvm-parser: A parser for JVM bytecode files
         <https://hackage.haskell.org/package/jvm-parser>
 
@@ -87,8 +89,15 @@ and not directly use those private modules.
         <https://hackage.haskell.org/package/simple-stacked-vm>
 -}
 module Jvm (
+    -- * Class
+    C.Class_file
+    , Class_for_translation
+    , Class_for_interpretation
     -- * Parsing class files
-    C.parse_class_0
+    -- ** Method 1
+    , S.parse_class
+    -- ** Method 2
+    , S.parse_class_0
     , P.Class
     , P.Entry
     , P.Raw
@@ -96,11 +105,21 @@ module Jvm (
     -- * Accessing the constant pool
     , P.get_constant_pool
     -- ** Resolving the constant pool
+    -- $resolve
+
+    -- *** Method 1: the Jvm_prepare module
+    , Prep.resolve_class
+    -- *** Method 2: the Meta.JvmConstPool module
     , P.resolve_constant_pool
-    -- ** Constant-pool entries
     , P.Entry_(..)
     , P.Index
     , P.get_name
+    -- * Decoding bytecode
+    , Dec.decode
+    -- ** Disassembling bytecode
+    , D.disassemble
+    -- ** Dumping state
+    , D.dump
     -- * Architecture
     -- $arch
     -- * Running
@@ -118,7 +137,8 @@ module Jvm (
     , jvm
 ) where
 
-import Control.Monad.IO.Class (liftIO)
+import Prelude ()
+import Meta.Prelude
 
 import qualified Control.Monad as M
 import qualified Foreign as F
@@ -133,17 +153,50 @@ import Meta.JvmArch
     )
 import Meta.JvmMember (fr_type, fr_name)
 
-import qualified Meta.JvmArch as A
 import qualified Jvm_build as B
+import qualified Jvm_decode as Dec
 import qualified Jvm_debug as D
 import qualified Jvm_execute as E
 import qualified Jvm_interop as O
 import qualified Jvm_load as L
+import qualified Jvm_prepare as Prep
+import qualified Meta.JvmArch as A
 import qualified Meta.JvmCls as C
 import qualified Meta.JvmConstPool as P
+import qualified Meta.JvmSer as S
 import qualified Meta.JvmType as T
 import qualified Meta.JvmTys as U
 import qualified Meta.JvmValue as V
+
+-- | The representation of a class for translating bytecode to another form.
+type Class_for_translation = A.Class
+
+-- | The representation of a class for execution by bytecode interpretation.
+type Class_for_interpretation = A.Class
+
+{- $resolve
+A /class/ is several concepts:
+
+    * the representation for storage in a file in a disk
+
+    * the representation for theoretical manipulation or transformation
+
+    * the representation for execution by JVM
+
+There are two choices:
+
+    * Use type parameters and type families.
+
+        * Pro: Better documentation.
+
+        * Con: Type parameters prevent unboxing of the instantiated parameter.
+
+        * Con: Type families prevent the automatic @deriving@ of type class instances.
+
+        * Con: Requires recent GHC.
+
+    * Use two types in different modules.
+-}
 
 {- $arch
 There are two 'Monad' instances: 'S' and 'J'.
@@ -363,7 +416,7 @@ jvm = do
         what = do
             return V.Null
     -- print er
-    Right cls <- L.load_class_file clspath
+    cls <- L.load_class_file clspath >>= either fail return
     let [entry_point] = [ m | m <- c_methods bo, A.m_name m == Bu.fromString "<main>" ]
     -- let [entry_point] = [ m | m <- c_methods cls, S.name_is "test" m ]
     {-
