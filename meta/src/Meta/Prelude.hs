@@ -335,16 +335,18 @@ data G a
 class Faithful f where
     faithful :: a -> f a
 
--- | Integer-indexed collection. See 'at'.
-class At c i e where
+-- | This states that @col@ is a collection of @elm@ indexed by @ind@. See 'at'.
+class At col ind elm where
     {- |
-@at c i@ is the element at index @i@ of collection @c@.
+@at col ind@ is the element at index @ind@ of collection @col@.
 
 This function is to be used infix such as @c `at` 123@.
 
+This presents a uniform interface for locating an element in lists, vectors, and maps.
+
 For speed, use `at` with Vector from Data.Vector, and don't use `at` with lists.
     -}
-    at :: c -> i -> e
+    at :: col -> ind -> elm
 
 instance (Monad m, P.Integral i, Show i, m a ~ b) => At [a] i b where
     at _ i | i P.< 0 = P.fail $ "at: negative index: " ++ show i
