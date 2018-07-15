@@ -470,3 +470,5 @@ My = module {
     - 2016, System F-omega with Equirecursive Types for Datatype-Generic Programming http://ps.informatik.uni-tuebingen.de/research/functors/equirecursion-fomega-popl16.pdf
 - John Hughes, "Deriving combinator implementations", lecture 4, "Designing and using combinators" http://www.cse.chalmers.se/~rjmh/Combinators/DerivingCombinators/sld001.htm
 - http://matt.might.net/articles/best-programming-languages/
+- other programming languages
+    - [Sixten: Functional programming with fewer indirections](https://github.com/ollef/sixten)
