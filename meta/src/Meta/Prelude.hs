@@ -167,6 +167,9 @@ module Meta.Prelude (
     , Map.Map
     , Map.from_list
     , Map.fromListWith
+    -- * Semigroup and Monoid
+    , Sgr.Semigroup(..)
+    , Mon.Monoid(..)
 ) where
 
 import Prelude ()
@@ -179,6 +182,8 @@ import qualified Data.Char as C
 import qualified Data.IORef as IORef
 import qualified Data.Int as I
 import qualified Data.List as L
+import qualified Data.Monoid as Mon
+import qualified Data.Semigroup as Sgr
 import qualified Data.String as S
 import qualified Data.Word as W
 import qualified Prelude as P
