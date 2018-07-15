@@ -357,6 +357,9 @@ instance (Monad m, P.Integral i, Show i, m a ~ b) => At [a] i b where
 instance (Monad m, P.Integral i, Show i, m a ~ b) => At (V.Vector a) i b where
     at c i = maybe (P.fail $ "at: Vector: index out of bounds: " ++ show i) return $ c V.!? P.fromIntegral i
 
+instance (Monad m, Ord k, Show k) => At (Map.Map k v) k (m v) where
+    at c i = maybe (P.fail $ "at: Map: key not found: " ++ show i) return $ Map.lookup i c
+
 class FromList a b where
     fromList :: a -> b
 
