@@ -81,6 +81,10 @@ module Meta.Prelude (
     , L.isSuffixOf
     , beginsWith
     , endsWith
+    -- ** Repetition
+    , P.repeat
+    , P.replicate
+    , P.cycle
     -- ** Char, String
     , P.lines
     , P.unlines
