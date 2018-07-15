@@ -24,6 +24,8 @@
 
     * <https://ghc.haskell.org/trac/ghc/wiki/GhcApiStatus>
 
+    * <https://ghc.haskell.org/trac/ghc/wiki/NativeMetaprogramming>
+
     * 2008, email, \"[Haskell-cafe] GHC API: how to get the typechecked AST?\" <https://mail.haskell.org/pipermail/haskell-cafe/2008-May/042616.html>
 
     * 2005, article, \"Porting HaRe to the GHC API\" <https://www.cs.kent.ac.uk/pubs/2005/2266/>
