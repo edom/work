@@ -472,3 +472,93 @@ My = module {
 - http://matt.might.net/articles/best-programming-languages/
 - other programming languages
     - [Sixten: Functional programming with fewer indirections](https://github.com/ollef/sixten)
+        - It also deals with representing algebraic data type inhabitants as bit patterns.
+    - https://en.wikipedia.org/wiki/Curry_(programming_language)
+- Extending Haskell
+    - common problem in parsing: how to decorate AST in a functional language
+        - 2017, "Trees that grow", https://www.microsoft.com/en-us/research/uploads/prod/2016/11/trees-that-grow.pdf
+            - "The compiler writer is then faced with two unpalatable choices.
+            She can define a new data type representing the output decorated tree, at the cost of much duplication.
+            Or she can write a single data type with all the necessary fields and constructors, at the cost of having many unused fields and constructors at different stages of compilation."
+            - However, it is possible to achieve ADT extensibility with pattern synonyms, with Fix, and without type families.
+                - Similar endeavors
+                    - https://wiki.haskell.org/Type_composition
+                - Haskell doesn't beta-reduce types.
+                - This is an example code:
+```haskell
+data Exp_ name exp
+    = Var name
+    | Add exp exp
+    | ...
+
+data Locd a
+    = MkLocd Loc a
+
+data Typed t a = MkTyped t a
+
+newtype Compose f g a = MkCompose { unCompose :: f (g a) }
+
+type PsExp name = Fix (Compose Locd (Exp_ name))
+type TcExp name = Fix (Compose Locd (Compose Typed (Exp_ name)))
+
+-- To ameliorate the verbosity:
+
+class Exp name exp where
+    var :: name -> exp
+    add :: exp -> exp -> exp
+    ...
+
+instance Exp (PsExp name) where ...
+instance Exp (TcExp name) where ...
+```
+                - What if GHC can "inline" data types at compile time?
+                What if GHC can "inline" A and B in `data A = MA Int; data B = MB Int String; data E = EA A | EB B;`,
+                producing `data E = EA Int | EB Int String`?
+                Implementing this with Haskell 98 types should be straightforward.
+        - related
+            - "Data types a la carte"
+                - http://hackage.haskell.org/package/compdata
+            - Haskell type composition
+            - https://wiki.haskell.org/Extensible_datatypes
+    - Open ADTs (algebraic data types)
+        - "Closed" means "defined in one place".
+        - Open ADTs don't mix with exhaustive case analysis (function totality).
+            - https://stackoverflow.com/questions/870919/why-are-haskell-algebraic-data-types-closed
+            - But what if functions are "open" too?
+                - https://www.andres-loeh.de/OpenDatatypes.pdf
+        - If `f : a -> b`, then the compiler should infer `lift f : (Monad m) => m a -> m b`.
+    - Can we extend Haskell to "auto-fmap"?
+        - Possibilities:
+            - Add rewrite rules so that the compiler "recovers" from some type "errors".
+            - Extend the syntax and semantics of function application.
+        - Related
+            - 1989, article, Wadler, "Theorems for free!"
+            - The Haskell Djinn can, given a type T, infer/construct a term having type T.
+        - Recovering from some type errors
+            - Idea
+                - Extend Haskell with "implicit injections".
+                - The compiler should try in-scope injections automatically when there is a typing error, before quitting with a type error.
+                    - Isn't this similar to Scala implicits and implicit conversion?
+                        - I forgot who, but I think somebody on the Internet said that Scala implicits are a way for the compiler to recover from type errors.
+                - Can we do this on GHC?
+                    - https://ghc.haskell.org/trac/ghc/wiki/Commentary/Compiler/TypeChecker
+                        - GHC typechecker works on Haskell before it's transformed to Core.
+                    - Write a plugin for GHC?
+                        - Can a GHC modify the syntax tree on type error?
+                    - Use GHC as library?
+                    - We can't use GHC rewrite rules because they are only applied when optimization is enabled.
+            - Define the concept of "expected type".
+            - Let `e` be an expression.
+            - Let `f : a -> b`.
+            - Let `m` be an instance of Monad.
+            - If `e` has type `a`, but the compiler expects `e` to have type `m a`, then the compiler shall rewrite `e` to `return e`.
+            - If `e` has type `m a`, then the compiler rewrites `f e` to `map f e`.
+        - If `x` is a Monad, then these are two *different* things: `x : a` and `return x`, but they are related, in the sense that they are equivalent, in the sense that one is trivially computable/derivable from the other.
+        - Can Strathclyde Haskell Enhancement (SHE) do this?
+            - It has idiom brackets.
+            It translates `(| f a1 ... an |)` to `pure f <*> a1 <*> ... <*> an`.
+                - https://personal.cis.strath.ac.uk/conor.mcbride/pub/she/idiom.html
+            - Enhancement to SHE https://github.com/bezirg/she
+                - http://blog.bezirg.net/posts/2013-08-03-enhancement-to-the-strathclyde-haskell-enhancement.html
+        - https://en.wikipedia.org/wiki/Bidirectional_transformation
+            - https://www.cis.upenn.edu/~bcpierce/papers/lenses-etapsslides.pdf
