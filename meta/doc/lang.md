@@ -562,3 +562,4 @@ instance Exp (TcExp name) where ...
                 - http://blog.bezirg.net/posts/2013-08-03-enhancement-to-the-strathclyde-haskell-enhancement.html
         - https://en.wikipedia.org/wiki/Bidirectional_transformation
             - https://www.cis.upenn.edu/~bcpierce/papers/lenses-etapsslides.pdf
+- [Extension programming language](extension.md)
