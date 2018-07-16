@@ -22,7 +22,7 @@ example_ghc =
 
         when (G.succeeded suc) $ do
             graph <- G.getModuleGraph
-            forM_ graph $ \ ms -> do
+            forM_ (G.mgModSummaries graph) $ \ ms -> do
                 pm <- G.parseModule ms
                 putStrLn $ "-- This is a module parsed from file: " ++ G.getName ms
                 let hsmod = G.unLoc $ G.pm_parsed_source pm

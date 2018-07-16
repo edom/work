@@ -81,7 +81,8 @@ module Meta.Ghc (
     , G.SuccessFlag(..)
     , G.succeeded
     , G.failed
-    , G.getModuleGraph
+    , Z.getModuleGraph
+    , Z.mgModSummaries
     , G.ModuleGraph
     , G.ModSummary(..)
     , G.parseModule

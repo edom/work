@@ -1,5 +1,12 @@
-module Meta.Ghc_8_4 where
+module Meta.Ghc_8_4 (
+    G.GhcPs
+    , T.ModuleGraph
+    , getModuleGraph
+    , G.mgModSummaries
+) where
 
 import qualified GHC as G
+import qualified HscTypes as T
 
-type GhcPs = G.GhcPs
+getModuleGraph :: (G.GhcMonad m) => m T.ModuleGraph
+getModuleGraph = G.getModuleGraph
