@@ -3,7 +3,13 @@ module Meta.GhcExample where
 import Prelude ()
 import Meta.Prelude
 
+import qualified Bag
+import qualified DriverPhases
+import qualified ErrUtils
+import qualified HscMain
+import qualified HscTypes
 import qualified GHC as F
+import qualified TcRnDriver
 import qualified Meta.Ghc as G
 
 example_ghc :: IO ()
@@ -21,12 +27,39 @@ example_ghc =
         suc <- G.loadAllTargets
 
         when (G.succeeded suc) $ do
+            putStrLn "Should we ignore loadAllTargets's return value?"
+
+        when True $ do
             graph <- G.getModuleGraph
-            forM_ (G.mgModSummaries graph) $ \ ms -> do
-                pm <- G.parseModule ms
-                putStrLn $ "-- This is a module parsed from file: " ++ G.getName ms
-                let hsmod = G.unLoc $ G.pm_parsed_source pm
-                G.prettyPrint hsmod
+            forM_ (G.mgModSummaries graph) $ \ mod_sum -> do
+                parsed_mod <- G.parseModule mod_sum
+                putStrLn $ "-- This is a module parsed from file: " ++ G.getName mod_sum
+                let hs_mod = G.unLoc $ G.pm_parsed_source parsed_mod
+                G.prettyPrint hs_mod
+                hsc_env <- G.getSession
+                let hpm = G.HsParsedModule {
+                            G.hpm_module = F.parsedSource parsed_mod
+                            , G.hpm_src_files = F.pm_extra_src_files parsed_mod
+                            , G.hpm_annotations = F.pm_annotations parsed_mod
+                        }
+                {-
+                Fail: m_tge is Mothing.
+                ((warns, errs), m_tge) <- liftIO $ TcRnDriver.tcRnModule hsc_env DriverPhases.HsSrcFile False hpm
+                putStrLn "----- Warnings -----"
+                liftIO $ ErrUtils.printBagOfErrors flags warns
+                putStrLn "----- Errors -----"
+                liftIO $ ErrUtils.printBagOfErrors flags errs
+                -}
+                {-
+                -- Fails with exception.
+                let warn_msgs = ErrUtils.emptyMessages
+                liftIO $ HscTypes.runHsc hsc_env (HscMain.hscFileFrontEnd mod_sum)
+                -}
+                {-
+                -- Fails with exception.
+                G.hscTypecheckRename hsc_env mod_sum hpm
+                tc_mod <- G.typecheckModule parsed_mod
+                -}
                 return ()
 
         putStrLn "-- This is a module built from scratch."

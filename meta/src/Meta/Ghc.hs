@@ -67,6 +67,7 @@ module Meta.Ghc (
     -- ** Entry point
     defaultRunGhc
     , loadPackageDatabase
+    , G.GhcMonad(..)
     -- ** Dynamic flags
     -- $dynflags
     , G.getSessionDynFlags
@@ -85,8 +86,11 @@ module Meta.Ghc (
     , Z.mgModSummaries
     , G.ModuleGraph
     , G.ModSummary(..)
+    -- *** High-level functions for running phases
     , G.parseModule
+    , G.typecheckModule
     , G.ParsedModule(..)
+    , G.TypecheckedModule(..)
     , T.HsParsedModule(..)
     -- ** Pretty printing
     -- $pretty
@@ -113,6 +117,10 @@ module Meta.Ghc (
     -- *** Internal instances for making names
     , MkModuleName(..)
     , MkName(..)
+    -- * Experimental
+    -- $experimental
+    , newHscEnv
+    , hscTypecheckRename
     -- * Other reexports
     -- ** Entry point
     , G.defaultErrorHandler
@@ -145,6 +153,7 @@ import HsSyn as S
 import qualified DynFlags as DF
 import qualified GHC as G
 import qualified GHC.Paths as GP
+import qualified HscMain
 import qualified Module as M
 import qualified OccName as Oc
 import qualified Outputable as Ou
@@ -342,3 +351,33 @@ instance MkName R.RdrName where
 instance (MkName a) => MkName (G.Located a) where
     mkDataName = G.noLoc . mkDataName
     mkVarName = G.noLoc . mkVarName
+
+{- $experimental
+* <https://ghc.haskell.org/trac/ghc/wiki/Commentary/Compiler/TypeChecker>
+
+* <https://ghc.haskell.org/trac/ghc/wiki/NewPlugins>
+
+    * <https://github.com/thoughtpolice/strict-ghc-plugin>
+
+* How do we typecheck a module, but don't quit on error?
+
+    * Salvage some things from 'G.typecheckModule'.
+-}
+
+{- |
+See 'G.HscEnv'.
+
+Why do we obtain a HscEnv?
+We want to run a certain part of the typechecker.
+we want to do something on some type errors.
+'G.typecheckModule' is too coarse-grained.
+
+Don't do this.
+Use 'G.getSession' to obtain the HscEnv.
+See the code of 'G.typecheckModule'.
+-}
+newHscEnv :: (G.GhcMonad m) => m G.HscEnv
+newHscEnv = G.getSessionDynFlags >>= liftIO . HscMain.newHscEnv
+
+-- hscTypecheckRename :: (G.GhcMonad m) => G.HscEnv -> G.ModSummary -> T.HsParsedModule -> m (TcGblEnv, _)
+hscTypecheckRename env mod_sum hpm = liftIO $ HscMain.hscTypecheckRename env mod_sum hpm
