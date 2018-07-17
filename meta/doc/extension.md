@@ -22,7 +22,7 @@ Problem: X * X can't be used where an X is expected, because there are two possi
 There are many injections X -> X * Y, but there is only one injection X * Y -> X.
 If there is only one possible injection from A to B, then the compiler should allow the programmer to state that he wants the compiler to allow him to provide an A wherever a B is expected, and to use the injection automatically.
 
-## Semantics of types?
+## Semantics of types? "Semantics" or "model"?
 
 [Types form a *ring*](typering.md), like the natural numbers.
 There we define an algebra of (mono)types.
@@ -47,6 +47,39 @@ Properties:
 - S(Natural) = the set of all natural numbers
 - S(Integer) = the set of all integers
 
+How is a functional language a category?
+See 1990 Barr & Wells book "Category theory for computing science" section 2.2 "Functional programming languages as categories" (page 20 onwards).
+[Reprint](http://emis.ams.org/journals/TAC/reprints/articles/22/tr22a.pdf).
+[Backup link](http://www.math.mcgill.ca/triples/Barr-Wells-ctcs.pdf): an older version, no big changes.
+
+```
+INJECT EVERY (x, y) : a * b TO x : a
+INJECT EVERY (x, y) : a * b TO y : b
+
+FORALL a b x INJECT x : a TO Left x : Either a b
+FORALL a b y INJECT y : b TO Right y : Either a b
+
+TYPE F a = CHOICES
+    | F0 a
+    | F1 a
+
+VAL a : Integer * Integer = (1, 2) -- OK
+VAL _ : Integer = a -- Error: Ambiguous injections.
+VAL _ : Either Integer Integer = 10 -- Error: Ambiguous injections.
+VAL _ : F Integer = 1 -- Error: Ambiguous injections.
+VAL _ : Maybe (Maybe Integer) = 10 -- OK
+```
+
+If M is a monad, then there is only one way to inject A to M A.
+
+Hypothesis:
+Cartesian-closed categories have such name because they are closed with respect to the Cartesian product:
+For each of pair of objects in C, their Cartesian product is also an object in C.
+
+https://en.wikipedia.org/wiki/De_Bruijn_index
+
+2007, "A Head-to-Head Comparison of de Bruijn Indices and Names", https://www.sciencedirect.com/science/article/pii/S1571066107002319
+
 ## Drafts
 
 An extension enables data types and functions to be extended automatically.
@@ -68,12 +101,13 @@ LSP = Liskov substitution principle
     - Idea: Subtyping is defined by universal property?
 Mnemonic: B comes after A, so B is bigger than A.
 - There are two subtypings:
-    - Contra-subspacing subtyping:
-        - A is a subtype of B iff S(B) is a subspace of S(A).
+    - Contra-subspacing (contravariant) subtyping:
+        - A is a subtype of B iff S(A) is a superspace of S(B).
         - Example:
-            - Employee is a subtype of Person.
-            - S(Employee) <= S(Person).
-    - Co-subspacing subtyping:
+            - Suppose that Employee is a subtype of Person.
+            - Then Employee -> Integer is a subtype of Person -> Integer.
+            - S(Employee -> Integer) >= S(Person -> Integer).
+    - Co-subspacing (covariant) subtyping:
         - A is a subtype of B iff S(A) is a subspace of S(B).
         - Example:
             - Natural is a subtype of `forall a. a`.
