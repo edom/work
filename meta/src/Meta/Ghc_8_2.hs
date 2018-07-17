@@ -13,7 +13,7 @@ type GhcPs = R.RdrName
 newtype ModuleGraph = MkModuleGraph [G.ModSummary]
 
 getModuleGraph :: (G.GhcMonad m) => m ModuleGraph
-getModuleGraph = G.getModuleGraph
+getModuleGraph = MkModuleGraph <$> G.getModuleGraph
 
 mgModSummaries :: ModuleGraph -> [G.ModSummary]
 mgModSummaries (MkModuleGraph x) = x
