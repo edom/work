@@ -1,29 +1,149 @@
-Extension programming language
+# Extension programming language?
+
+## Motivation?
+
+### The compiler should automate all universal properties?
+
+Consider the example universal property in page 1 of the 1998 MacLane book "Categories for the working mathematician".
+
+Let p : X * Y -> X and q : X * Y -> Y be the projections of the Cartesian product X * Y.
+Those projections are called "universal", but why?
+
+Suppose the programmer has defined a function f : W -> X * Y, where X /= Y.
+
+The compiler should allow f to be used everywhere a W -> X is required or a W -> Y is required.
+The compiler should automatically use p . f and q . f in place of f in such contexts.
+
+Observe that an X * Y can be used everywhere an X is expected.
+Thus we say that X * Y is a *subtype* of X, although X * Y is a *superspace* (extension) of X, because X * Y has more inhabitants than X.
+
+Problem: X * X can't be used where an X is expected, because there are two possible projections, and the compiler can't know which one the programmer wants.
+
+There are many injections X -> X * Y, but there is only one injection X * Y -> X.
+If there is only one possible injection from A to B, then the compiler should allow the programmer to state that he wants the compiler to allow him to provide an A wherever a B is expected, and to use the injection automatically.
+
+## Semantics of types?
+
+[Types form a *ring*](typering.md), like the natural numbers.
+There we define an algebra of (mono)types.
+
+There are some choices when defining S(A), the semantics of a type A.
+
+- As the set S(A) = { S(x) | x : A }.
+Here S(A) means the semantics of the type A, and S(x) means the (denotational semantics of the value x whose type is A.
+- As the category S(A).
+The objects are the set above.
+The arrows are the endofunctions of A.
+
+Properties:
+- S(A * B) = S(A) * S(B), where the right * is Cartesian product.
+- S(A + B) = S(A) + S(B), where the right + is set union.
+- S(A -> B) = the computable subset of S(A) -> S(B)
+- S (F A) = (S F) (S A), where F : Type -> Type.
+- S(A (+) B) = S(A) (+) S(B) (disjoint union)
+    - A (+) B = {0} * A + {1} * B
+- S(0) = {} (the empty set)
+- S(1) = {unit} (a singleton set, modulo isomorphism)
+- S(Natural) = the set of all natural numbers
+- S(Integer) = the set of all integers
+
+## Drafts
 
 An extension enables data types and functions to be extended automatically.
-
-The semantics of a type is a set.
-Let \( A \) be a type.
-Let \( B \) be a type.
-Iff \( B \) extends \( A \), then \( S(A) \subseteq S(B) \).
-Mnemonic: B comes after A, so B is bigger than A.
 
 Notes about the word "extend".
 
 LSP = Liskov substitution principle
 
-Difference with OOP (object-oriented programming):
+- Difference with OOP (object-oriented programming):
     - In OOP, if A extends B (A is a subclass of B), then A is a subtype of B, provided that the programmer doesn't violate LSP.
-    - Here, if A extends B (B is a subspace of A), then B is a subtype of A.
-        - Note the flipping.
+    - Here, if A extends B (B is a subspace of A), then A is a subtype of B.
         - Interpret "extend" here as "grow", "widen", or "broaden".
         Think of adding objects into sets/spaces of mathematical objects.
         For example, you get the set of integers by *extending* the set of natural numbers with negative integers.
         Forget about OOP classes.
         - It would be nice if we can prove that all extensions in the language satisfy the LSP.
+- What does "A is a subtype of B" mean?
+    - Everywhere an A is required, a B can be substituted.
+    - Idea: Subtyping is defined by universal property?
+Mnemonic: B comes after A, so B is bigger than A.
+- There are two subtypings:
+    - Contra-subspacing subtyping:
+        - A is a subtype of B iff S(B) is a subspace of S(A).
+        - Example:
+            - Employee is a subtype of Person.
+            - S(Employee) <= S(Person).
+    - Co-subspacing subtyping:
+        - A is a subtype of B iff S(A) is a subspace of S(B).
+        - Example:
+            - Natural is a subtype of `forall a. a`.
+            - S(Natural) = Nat is a subspace of S(forall a. a) = Omega.
 
-These are the consequences of telling the compiler to extend A to B:
-    - Everywhere an A is expected, a B can be substituted.
+Consider:
+
+```
+TYPE Maybe a = CHOICES
+    | Nothing
+    | Just a
+
+TYPE Nullable a = CHOICES
+    | Null
+    | Present a
+
+INJECT EVERY x : a TO Present x : Nullable a
+```
+
+The semantics of `Maybe : Type -> Type` is:
+    - S(Maybe) = s \mapsto {unit} + s.
+    - S(Maybe a) = {unit} + S(a).
+
+- Types and representation schemes
+    - If T = U, then T and U should have the same representation scheme (same way of injecting mathematical values to bit patterns).
+- How do we implement compile-type coproducts (untagged union) without runtime type information?
+    - The compiler must be able to prove which branch of the coproduct is taken.
+    For example, the compiler should be able to prove that `f 0 : Natural` and `n /= 0 |- f n : String`.
+```
+f : Natural -> Natural + String
+f 0 = "Zero"
+f n = n
+```
+    - Another example:
+```
+f0 : Natural -> Natural
+f0 n = n + 1
+
+f1 : String -> String
+f1 x = "hello " ++ x
+
+f : Natural + String -> Natural + String
+f = coproduct f0 f1
+
+f : Natural + String -> Natural
+IF x : Natural
+    THEN f x = x + 1
+    ELSE f x = 0
+
+-- No problem, because A + A = A, because types form a ring.
+f : Natural + Natural -> Natural
+f x = x + 1
+
+-- f 0 should produce 1
+-- f "john" should produce "hello john"
+```
+- A type declaration defines new syntax and the rules for type-checking that syntax.
+```
+SYNTAX
+    IF a : Type THEN
+        Nothing : Maybe a
+        IF x : a THEN Just x : Maybe a
+```
+- Syntax:
+    - A *word* is a string of non-whitespace characters.
+    - A term is a sequence of words.
+- Can an algebraic operation on types be translated automatically to operations on values?
+    - For coproducts, yes.
+    - How about product?
+- These are the consequences of telling the compiler to extend A to B:
     - The compiler automatically does these:
         - Define an *injection* `i : A -> B` (an injective function).
         We may also call it an *embedding* from A to B because it injects A into a subspace of B.
@@ -47,9 +167,37 @@ These are the consequences of telling the compiler to extend A to B:
                 - ? : T+C -> T+C
             - M T = T*F
                 - ? : T*F -> T*F, preserving the F
-        - What is the category?
-            - What is an object? A type?
-            - What is a morphism? An expression of type a -> b?
+- Category-theoretic stuffs
+    - Our programming language forms a category C where:
+        - An object is a monotype.
+        - A morphism is expression that denotes a function.
+            - A morphism is an expression having type `a -> b`.
+    - The act of adding a constructor forms an endofunctor.
+        - Let T be an object of C.
+        - Let K be an object of C.
+        - We will show that M = (M_obj, M_mor) forms a functor.
+        We will write M(A) to mean either M_obj(A) or M_mor(A) depending on context.
+        This conflation is the norm in category theory.
+        - Let M(T) = T+K be the type that results from adding the constructors of type K to type T.
+        - Also define M_mor(f) (written M(f)) as follows:
+            - M maps every Mor(A,B) (that is A -> B) into an Mor(M(A),M(B)) (that is A+K -> B+K) as follows:
+                - M f (inl x) = f x
+                - M f (inr y) = inr y
+        - Show that M_mor is associative.
+        - Thus M = (M_obj, M_mor) is an endofunctor.
+    - The act of adding a parameter with default value forms an endofunctor.
+    The act of adding a parameter forms a family of endofunctors.
+        - Let F be an object of C.
+        - Let M(T) = T*F be the type that results from adding a parameter of type F to every constructor of T.
+        - Define a default value for F, call it def : F.
+        - Define M(f) as M f x = (x, def).
+
+The function `inject` is a special open function.
+"Open" means that the definition isn't localized.
+It can be spread.
+The `INJECT` statement adds a case for the `inject` function.
+The compiler inserts `inject` automatically,
+but you can still explicitly insert `inject` manually.
 
 Example: Numeric types:
 
@@ -62,14 +210,20 @@ TYPE Integer = CHOICES
     | P Natural
     | N Natural
 
+-- These three statements are equivalent.
+VAL inject : Natural -> Integer = P
+INJECT USING P
 INJECT EVERY Natural INTO Integer USING P
+EMBED Natural IN Integer USING P
 
 TYPE Rational = FIELDS
     , numerator : Integer -- dividend
     , denominator : Integer -- divisor
 
 INJECT EVERY k : Integer INTO (k, 1) : Rational
--- INJECT EVERY Integer INTO Rational USING \ k -> Rational { numerator = k, denominator = 1, }
+
+EMBED Integer IN Rational
+    BY INJECTING EVERY k : Integer TO (k, 1) : Rational
 
 -- This representation of Real is questionable.
 -- How can we print a Real?
@@ -78,6 +232,26 @@ TYPE FractionalPart digit = Natural -> digit
 
 TYPE Real digit = (Integer, FractionalPart digit)
 ```
+
+Alternative:
+
+```
+TYPE NaturalF a = CHOICES
+    | Pure a
+    | Succ a
+
+TYPE Natural = Fix NaturalF
+
+TYPE IntegerF a = CHOICES
+    | Pure a
+    | Negate a
+
+TYPE Integer = Fix (IntegerF . NaturalF)
+
+INJECT EVERY n : NaturalF a TO Pure n : IntegerF a
+```
+
+It would be nice if the language can help us define a fixpoint of a composition of functors with little boilerplate.
 
 Example: `Maybe a`:
 
@@ -167,14 +341,30 @@ INJECT f (Fix f) INTO Fix f USING MkFix
 INJECT Fix f INTO f (Fix f) USING unFix
 ```
 
+We don't automatically inject `b` into `Either a b` because doing so could introduce logic errors while refactoring.
+
 ```
 TYPE Either a b = CHOICES
     | Left a
     | Right e
+```
 
+`Throws` is `Either` with automatic injection.
+
+```
 TYPE Throws e a = a WITH MORE CHOICES
     | Throw e
 
+TYPE Throws e a = CHOICES
+    | Throw e
+    | Return a
+
+ASSUMING e a
+    EMBED a IN Throws e a
+        BY INJECTING EVERY x TO Return x
+```
+
+```
 TYPE List a = CHOICES
     | Nil
     | Cons a (List a)
@@ -231,6 +421,16 @@ TYPE Functor m = FIELDS
 TYPE Monad m = Functor m WITH MORE FIELDS
     , return : m -> a
     , join : m (m a) -> m a
+
+VAL instance_Semigroup_List : Semigroup List = FIELDS
+    Nil <> ys = ys
+    Cons x xs <> ys = Cons x (xs <> ys)
+
+DEFAULT Semigroup List = instance_Semigroup_List
+
+-- what :: (Monad m) => m Int
+VAL what : IMPLICIT instance : Monad m -> m Int =
+    return instance
 
 VAL instance_Functor_Maybe : Functor Maybe = FIELDS
     ,   map f (Just x) = Just (f x)

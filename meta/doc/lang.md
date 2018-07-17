@@ -563,3 +563,6 @@ instance Exp (TcExp name) where ...
         - https://en.wikipedia.org/wiki/Bidirectional_transformation
             - https://www.cis.upenn.edu/~bcpierce/papers/lenses-etapsslides.pdf
 - [Extension programming language](extension.md)
+- row polymorphism vs structural subtyping https://news.ycombinator.com/item?id=13047934
+    - Why is it called row polymorphism?
+    Where is the row?
