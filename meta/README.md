@@ -106,8 +106,9 @@
         - HsYaml is pure Haskell (doesn't use external libraries)
 - [LCF key ideas](https://www.cl.cam.ac.uk/~jrh13/slides/manchester-12sep01/slides.pdf)
 - [Haskell partiality monad](https://gist.github.com/puffnfresh/6222797)
-- https://www.reddit.com/r/haskell/comments/4jhhrj/anders_hejlsberg_on_modern_compiler_construction/
-- https://cs.stackexchange.com/questions/63018/visual-programming-tools-why-don-t-they-work-with-the-ast-directly
+- compiler construction
+    - https://www.reddit.com/r/haskell/comments/4jhhrj/anders_hejlsberg_on_modern_compiler_construction/
+    - https://cs.stackexchange.com/questions/63018/visual-programming-tools-why-don-t-they-work-with-the-ast-directly
 - closed source?
     - given SQL database, generate HTML user interface http://datanovata.com/
 - http://libcello.org
@@ -179,15 +180,50 @@
     - Data definition language
     - Web application description language
         - View description language
-- Hughes 1995 doc [The design of a pretty-printing library](http://belle.sourceforge.net/doc/hughes95design.pdf)
-- https://www.cs.cmu.edu/~mleone/language-research.html
-- categorical programming language?
-    - https://github.com/msakai/cpl
-    - http://web.sfc.keio.ac.jp/~hagino/thesis.pdf
+- software design
+    - functional programming software design
+        - designing combinators
+            - Hughes 1995 doc [The design of a pretty-printing library](http://belle.sourceforge.net/doc/hughes95design.pdf)
+- programming language research
+    - https://www.cs.cmu.edu/~mleone/language-research.html
+    - category theory and programming language
+        - categorical programming language?
+            - aggregators
+                - 2009, https://mathoverflow.net/questions/3721/programming-languages-based-on-category-theory
+                - https://softwareengineering.stackexchange.com/questions/216635/category-theory-based-language
+            - 2000, PhD thesis, "Categorical programming with inductive and coinductive types" https://kodu.ut.ee/~varmo/papers/thesis.pdf
+            - 1993, article, "Comparing Hagino's categorical programming language and typed lambda-calculi" https://www.sciencedirect.com/science/article/pii/030439759390186W
+            - 1987, PhD thesis, "Categorical programming language" http://web.sfc.keio.ac.jp/~hagino/thesis.pdf
+                - "An interpreter of Hagino's Categorical Programming Language (CPL)." https://github.com/msakai/cpl
+        - category theory applied to programming language theory
+            - 2012, "Generic Programming with Adjunctions" http://www.cs.ox.ac.uk/ralf.hinze/LN.pdf
+    - programming language design
+        - https://tomassetti.me/resources-create-programming-languages/
+        - 2004, book, "Programming language design concepts"
 - [LTU:progress on gradual typing](http://lambda-the-ultimate.org/node/5292)
 - [WP:lambda-prolog](https://en.wikipedia.org/wiki/%CE%9BProlog)
 - Safely Composable Type-Specific Languages https://www.cs.cmu.edu/~aldrich/papers/ecoop14-tsls.pdf
 - Subpages
+- reverse-engineering
+    - Optimization is a partial inverse of obfuscation.
+    - Optimizer can help deobfuscate unnecessary instructions, but not renamings.
+    - Statistical renaming can help deobfuscate names.
+    - https://en.wikipedia.org/wiki/Reverse_engineering#Reverse_engineering_of_protocols
+        - automatic online learning
+    - Can we reverse-engineer by supercompilation or partial evaluation?
+    - search keywords to try
+        - java bytecode optimizer
+        - java deobfuscator
+        - metacompilation, supercompilation, partial evaluation, program specialization, etc. https://everipedia.org/wiki/Metacompilation/
+    - https://www.reddit.com/r/REMath/
+    - https://security.stackexchange.com/questions/29866/reverse-engineering-and-java
+    - Transpile Java bytecode to JavaScript, and use jsnice?
+    - jsnice: statistical renaming, type inference and deobfuscation http://jsnice.org/
+    - supercompile Java programs
+        - "Ongoing work on Supercompilation of Java code (or supercompilation in general)?" http://lambda-the-ultimate.org/node/2739
+        - "A Java Supercompiler and Its Application to Verification of Cache-Coherence Protocols" https://link.springer.com/chapter/10.1007/978-3-642-11486-1_16
+        - 2002, "Supercompiling Java Programs" http://goertzel.org/papers/SupercompilingJavaMay2002.htm
+            - What are the differences between supercompilation and partial evaluation?
 - Should we use Haskell or TypeScript for this project? Both? Neither?
     - Killer features
         - IDE: TypeScript wins (VS Code).

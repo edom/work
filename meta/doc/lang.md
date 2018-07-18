@@ -568,3 +568,14 @@ instance Exp (TcExp name) where ...
     - Why is it called row polymorphism?
     Where is the row?
         - See "Objects and Aspects: Row Polymorphism", Neel Krishnaswami https://www.cs.cmu.edu/~neelk/rows.pdf
+- Every recursive type can be written as `mu a. F a` where F is the associated free functor?
+    - Example: `List a = Fix (F a)` where `F a b = 1 + a * b`.
+    - `Fix F = F (Fix F)` is the least fixed point of F.
+- Ramble
+    - Inverse of parsing is generation? From grammar, generate all possible strings and their syntax trees.
+    - Inverse of analytical grammar is generative grammar?
+    - Parser is syntax analyzer.
+    - Analysis is the opposite of synthesis?
+    - What is syntax synthesizer?
+    - Inverse of parsing is pretty-printing?
+    - If matching is analogous to subtraction, then what is analogous to multiplication? Generation?
