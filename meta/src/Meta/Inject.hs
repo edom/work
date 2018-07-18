@@ -32,14 +32,27 @@ instance {-# OVERLAPPING #-} (Applicative m, PureR a b) => PureR a (m b) where
 
 
 
+
+
+
 class MapR a b c d where
     mapR :: (a -> b) -> (c -> d)
 
 instance {-# OVERLAPPABLE #-} (a ~ c, b ~ d) => MapR a b c d where
     mapR f = f
 
-instance {-# OVERLAPPING #-} (Functor m, MapR a b c d, m d ~ md) => MapR a b (m c) md where
+-- If we pick this, then @bindR@ works, but @mapR inc (pureR i) :: Maybe (Maybe Char)@ breaks.
+instance {-# OVERLAPPING #-} (Functor m, MapR a b c d, mc ~ m c, m d ~ md) => MapR a b (m c) md where
     mapR f = fmap (mapR f)
+
+{-
+-- If we pick this, then @bindR@ breaks, but @mapR inc (pureR i) :: Maybe (Maybe Char)@ works.
+instance {-# OVERLAPPING #-} (Functor m, MapR a b c d, mc ~ m c, m d ~ md) => MapR a b mc (m d) where
+    mapR f = fmap (mapR f)
+-}
+
+
+
 
 
 

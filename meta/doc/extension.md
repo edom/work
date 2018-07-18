@@ -52,6 +52,72 @@ See 1990 Barr & Wells book "Category theory for computing science" section 2.2 "
 [Reprint](http://emis.ams.org/journals/TAC/reprints/articles/22/tr22a.pdf).
 [Backup link](http://www.math.mcgill.ca/triples/Barr-Wells-ctcs.pdf): an older version, no big changes.
 
+Let L be a functional programming language.
+Let C be the category that is a model of such L.
+An object in C is a type in L.
+An arrow from A to B is an expression whose type is `A -> B`.
+
+A functor F maps every object A to F(A),
+and maps every arrow f : A -> B to F(f) : F(A) -> F(B).
+
+Let F(A) = A + K describe a disjoint union.
+Then F is an endofunctor.
+
+```
+F : Type -> Type
+F A = A + K
+f : A -> B
+
+F : (A -> B) -> (F(A) -> F(B))
+F f : A + K -> B + K
+F f (inl a) = inl (f a)
+F f (inr k) = inr k
+```
+
+We can model a functor in our language as:
+
+```
+-- This Functor actually corresponds an endofunctor in the category that is the model of this functional language, not just any arbitrary functor.
+TYPE Functor = FIELDS
+    F : Type -> Type
+    m : (a -> b) -> (F a -> F b)
+    -- Can the compiler prove this for us?
+    prop : m (@id a) = @id (F a)
+    prop = auto
+
+TYPE NatTrans (S : Functor) (T : Functor) = FIELDS
+    tau : S -> T
+
+VAL Functor_identity : Functor = FIELDS
+    F = id
+    m = id
+
+VAL Functor_add_right (K : Type) : Functor = FIELDS
+    F a = a + K
+    m f (inl a) = inl (f a)
+    m f (inr k) = inr k
+
+inc : Integer -> Integer
+inc x = x + 1
+
+input : Integer + String
+input = 1    -- compiler infers auto-injection using inl
+
+output : Integer + String -> Integer + String
+output = inc input  -- compiler infers auto-injection, replaces this with `output = instance_Functor_Either.map inc input`
+```
+
+There is only one such functor.
+The compiler should derive such functor for us.
+For example: GHC can derive a Functor instance.
+
+The functor F is also an object in C(L).
+
+The functor category of C(L) is inside C(L) itself?
+
+There is only one function that has the type `forall a b, a * b -> a`.
+That function is `f (x,y) = x`.
+
 ```
 INJECT EVERY (x, y) : a * b TO x : a
 INJECT EVERY (x, y) : a * b TO y : b
@@ -68,6 +134,60 @@ VAL _ : Integer = a -- Error: Ambiguous injections.
 VAL _ : Either Integer Integer = 10 -- Error: Ambiguous injections.
 VAL _ : F Integer = 1 -- Error: Ambiguous injections.
 VAL _ : Maybe (Maybe Integer) = 10 -- OK
+```
+
+Example of natural transformation:
+
+```
+-- S = Maybe
+-- T = Either String
+nt : Maybe c -> Either String c
+nt Nothing = Left ""
+nt (Just x) = Right x
+```
+
+Example of an adjunction:
+
+```
+Adjunction from X = C(L) to A = C(L)
+    F endofunctor of C(L)
+    G endofunctor of C(L)
+    phi_xa : (F x -> a) -> (x -> G a)
+    phi_ax : (x -> G a) -> (F x -> a)
+    such that phi_xa and phi_ax are inverses
+
+Non-example:
+    Let F = Maybe and G = Maybe
+    phi_xa : (Maybe x -> a) -> (x -> Maybe a)
+    phi_xa f = \ x -> Just (f (pure x))
+    phi_ax : (x -> Maybe a) -> (Maybe x -> a)
+    phi_ax f = \ mx -> case mx of
+        Just x -> case phi_ax of
+            Just a -> a
+            Nothing -> ???
+        Nothing -> ???
+```
+
+Example of a monad:
+
+```
+Let T be an endofunctor, which consists of
+    T : Type -> Type
+    and
+    Tf :  (a -> b) -> (T a -> T b)
+    .
+eta : c -> T c
+mu : T (T x) -> T x
+
+and some laws
+
+Example:
+eta : a -> Maybe a
+eta = Just
+
+mu : Maybe (Maybe a) -> Maybe a
+mu (Just x) = x
+mu _ = Nothing
 ```
 
 If M is a monad, then there is only one way to inject A to M A.

@@ -474,6 +474,7 @@ My = module {
     - [Sixten: Functional programming with fewer indirections](https://github.com/ollef/sixten)
         - It also deals with representing algebraic data type inhabitants as bit patterns.
     - https://en.wikipedia.org/wiki/Curry_(programming_language)
+    - http://fsl.cs.illinois.edu/images/5/5e/Cayenne.pdf
 - Extending Haskell
     - common problem in parsing: how to decorate AST in a functional language
         - 2017, "Trees that grow", https://www.microsoft.com/en-us/research/uploads/prod/2016/11/trees-that-grow.pdf
@@ -566,3 +567,4 @@ instance Exp (TcExp name) where ...
 - row polymorphism vs structural subtyping https://news.ycombinator.com/item?id=13047934
     - Why is it called row polymorphism?
     Where is the row?
+        - See "Objects and Aspects: Row Polymorphism", Neel Krishnaswami https://www.cs.cmu.edu/~neelk/rows.pdf
