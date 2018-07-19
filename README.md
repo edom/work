@@ -27,3 +27,16 @@
 - Some notes about @optional-packages@ in @cabal.project@:
     - Clone [Yi editor source](https://github.com/yi-editor/yi) into @yi@.
         - Hackage's yi-0.17.1 (Nov 2017) is not ready for GHC 8.
+- information organization
+    - An information is a sentence, a paragraph, a picture, or anything that helps us accomplish something.
+        - Here "information" is a countable noun.
+    - Informations should be grouped by the task it helps us accomplish.
+        - Every task T requires a set of informations, which should be put together in one place.
+        - If doing task T requires informations J and K, then J and K should be grouped together.
+        - Duplication problem.
+            - Suppose: both task T and task U requires information J.
+            - Where should J be put?
+    - The value of information J should be measured by the ratio V/E, where V is the value of the task that J helps us accomplish, and E is our effort for obtaining J.
+    - Example of combinatorial explosion of categories.
+        - Which should a red car be grouped together with: a red hat or a blue car?
+            - Which should a big old man be grouped together with: a big old woman, a big young man, or a small old man?
