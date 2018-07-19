@@ -9,13 +9,21 @@
 - Software is executable mathematics.
 - Every functional programming language is lambda calculus plus plus.
     - Every functional programming language L can be modeled by a category C(L) whose objects are the types of L and arrows are the function expressions of L.
-- collections, links, aggregators
-    - https://www.cs.cmu.edu/~mleone/language-research.html
-- enterprise application development
-    - It's 2018. CRUD should be generated.
-        - https://news.ycombinator.com/item?id=15429616
-        - http://isis.apache.org/
-        - other tools?
+- where to find more
+    - recent programming language research
+        - meetings, conferences, symposiums
+            - POPL ("ACM SIGPLAN Symposium on Principles of Programming Languages")
+                - its twitter https://twitter.com/poplconf?lang=en
+    - collections, links, aggregators
+        - https://www.cs.cmu.edu/~mleone/language-research.html
+- software engineering
+    - enterprise application development
+        - It's 2018. CRUD should be generated.
+            - https://news.ycombinator.com/item?id=15429616
+            - http://isis.apache.org/
+            - other tools?
+        - feature-oriented software development
+            - https://en.wikipedia.org/wiki/FOSD_program_cubes
 - category theory and programming languages
     - categorical programming (what is this?)
         - 2000, PhD thesis, "Categorical programming with inductive and coinductive types" https://kodu.ut.ee/~varmo/papers/thesis.pdf
@@ -28,6 +36,11 @@
                 - https://softwareengineering.stackexchange.com/questions/216635/category-theory-based-language
     - category theory applied to programming language theory
         - 2012, "Generic Programming with Adjunctions" http://www.cs.ox.ac.uk/ralf.hinze/LN.pdf
+- compiler construction
+    - Every compiler does name resolution / symbol table.
+        - Is there a compiler that doesn't do that? https://www.reddit.com/r/Forth/comments/695oik/advances_in_forth_language_design/dh454oq/
+- 2018, "Collapsing towers of interpreters" http://lampwww.epfl.ch/~amin/pub/collapsing-towers.pdf
+    - "It is well known that *staging* an interpreter – making it generate code whenever it would normally interpret an expression – yields a compiler [...]"
 - semantics-aware software engineering?
     - compiler toolkit?
         - Stratego/XT
@@ -40,6 +53,10 @@
 - programming language design
     - https://tomassetti.me/resources-create-programming-languages/
     - 2004, book, "Programming language design concepts"
+    - https://en.wikipedia.org/wiki/Expression_problem
+- don't repeat yourself
+    - https://en.wikipedia.org/wiki/Generic_programming
+        - parametric polymorphism
 - Safely Composable Type-Specific Languages https://www.cs.cmu.edu/~aldrich/papers/ecoop14-tsls.pdf
 - A program is an executable formal system.
     - Can we formalize this using Grue's map theory?
