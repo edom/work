@@ -65,6 +65,8 @@ cover of Initial D OST "Running in the 90s"
 - 110 bpm, [Charlie Puth, "How long"](https://www.youtube.com/watch?v=CwfoyVa980U)
 - 115 bpm, 1978, ["Got to be real", Cheryl Lynn](https://www.youtube.com/watch?v=tlCC1XojRzM)
 - 115 bpm, 1979, [Earth, Wind, and Fire: "In the stone"](https://www.youtube.com/watch?v=6Z2xClustQo)
+- 115 bpm, 1987, ["Never gonna give you up", Rick Astley](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+- 115 bpm, 1988, ["Together forever", Rick Astley](https://www.youtube.com/watch?v=yPYZpwSpKmA)
 - 115 bpm, funky electronic, Professor Kliq, "Plastic and flashing lights"
     - [soundcloud](https://soundcloud.com/professorkliq/plastic-flashing-lights-1)
     - [youtube](https://www.youtube.com/watch?v=oSbljg7OcCU)

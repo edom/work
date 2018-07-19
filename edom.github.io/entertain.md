@@ -191,6 +191,8 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
     - news reporter can't stop laughing
         - I think this is the best news reporter laughing:
             - <A HREF="https://www.youtube.com/watch?v=D6xa3VcxWtI">Russian news reporter can&#39;t stop laughing (with English subtitles) - YouTube</A>
+        - We have a contender: [Chris P Bacon news anchor reporter looses control laughs at name of pig](https://www.youtube.com/watch?v=pMA3x-bc8iM)
+            - Robert Bradfield https://twitter.com/robertbreports/status/826300273043894272?lang=en
 - Technological unpleasantry
     - [This Chinese mother’s smart way to avoid paying via Face ID on iPhone X](https://www.youtube.com/watch?v=oQwwG_BCWsc)
     - [Amazon Alexa Gone Wild!!! Full version from beginning to end](https://www.youtube.com/watch?v=epyWW2e43UU), 0:44
@@ -257,3 +259,7 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
     - [GOKU MAKES A SANDWICH](https://www.youtube.com/watch?v=0T7dLaqKtTY)
     - [MICHAEL BAY'S EVANGELION](https://www.youtube.com/watch?v=FckkZihQUaU)
     - [Jackie Chan in Street Fighter](https://www.youtube.com/watch?v=Z4Psls1ngwM), from "City Hunter"
+- animals
+    - [That's how cats get out of the maze! (ENG SUB)](https://www.youtube.com/watch?v=yb5xBnFeRtA)
+- enhancements
+    - botched Canadian robbery: [Woman falls through the ceiling in convenience store (Metal Gear Version)](https://www.youtube.com/watch?v=w-E7kz9I0wk)

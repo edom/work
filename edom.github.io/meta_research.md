@@ -8,6 +8,8 @@ permalink: /meta-research.html
 
 - How to research?
     - Ask research questions, answer them, and collect them into living documents.
+    - Slides, Simon Peyton-Jones, ["How to write a great research paper: seven simple suggestions"](https://www.cis.upenn.edu/~sweirich/icfp-plmw15/slides/peyton-jones.pdf).
+    There is [a copy on Microsoft](https://www.microsoft.com/en-us/research/academic-program/write-great-research-paper/).
 - Which country values science the most?
 Where is scientist most demanded?
     - [WP: Inglehart--Welzel cultural map of the world](https://en.wikipedia.org/wiki/Inglehart%E2%80%93Welzel_cultural_map_of_the_world)
