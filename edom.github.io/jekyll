@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# This calls Jekyll 3 (the version used by GitHub in 2018) on Ubuntu 14.04.
+# We had to compile some things from source because Ubuntu 14.04 is too old.
+
+main () {
+    export PATH="/home/erik/.local/bin:/home/erik/.gem/ruby/2.4.0/bin:$PATH"
+    command "$@"
+}
+
+jekyll () {
+    main jekyll "$@"
+}
+
+jekyll "$@"
