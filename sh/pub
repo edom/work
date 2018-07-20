@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# This script expects to be run from the parent of the directory containing this script.
+# Usage: sh/pub
+# This overwrites edom.github.io with whatever that is in "_site".
+
+set -o errexit
+
+pushd edom.github.io
+./jekyll build
+popd
+
+export GIT_DIR=tmp/edom.github.io.git
+mkdir -p "$GIT_DIR"
+git init --bare
+git config user.name 'Erik Dominikus'
+git config user.email 'software@spacetimecat.com'
+
+# https://stackoverflow.com/questions/25172470/git-error-fatal-git-work-tree-or-work-tree-directory-not-allowed-without
+export GIT_WORK_TREE=edom.github.io/_site
+git add --all .
+git commit -m "$(date -Iseconds)" || true
+git push -f git@github.com:edom/edom.github.io.git master
