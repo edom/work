@@ -68,6 +68,10 @@ Why isn't there any?
         The ideal software captures the essence of the problem.
         The essence of a problem is mathematical definitions.
         Mathematical definitions aren't supposed to change.
+        - Software is a model of reality.
+        - Software is law.
+        - Software is executable theory of nature.
+        - Software is like physics but executable.
         - https://queue.acm.org/detail.cfm?id=2693160
 - Important things for all countries on Earth:
     - Change the justice system from retributive justice to restorative justice.
@@ -83,6 +87,9 @@ Why isn't there any?
         Like the homeless.
         This stigma makes it impossible for them to get financial stability and get out of the vicious circle of crime.
         - Not to mention questionable prison initiation rituals.
+    - Social isolation causes violence and extremism.
+        - [YT:I Was Almost A School Shooter | Aaron Stark | TEDxBoulder](https://www.youtube.com/watch?v=azRl1dI-Cts)
+            - Bullying is part of the social isolation vicious circle.
 - physics
     - physics expository works https://physics.stackexchange.com/questions/194300/physics-journals-that-focus-on-expository-work
     - "Newly published articles in physics" http://www.scholarpedia.org/article/Encyclopedia:Physics
