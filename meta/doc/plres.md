@@ -289,8 +289,9 @@ Things that I think are wrong in 2018.
     - What I think every imperative programming language gets wrong
         - Statements vs expressions
             - Statement should not exist. Only expressions should.
-                - Eclipse Xtend does this right.
+                - Xtend and Haxe do this right.
                     - https://www.eclipse.org/xtend/documentation/203_xtend_expressions.html
+                    - https://code.haxe.org/category/principles/everything-is-an-expression.html
                 - We can use lambda calculus for imperative programming.
                     - Treat the statement separator (here we use semicolon `;`)
                     as an operator (function with infix syntax)

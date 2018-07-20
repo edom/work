@@ -40,3 +40,54 @@
     - Example of combinatorial explosion of categories.
         - Which should a red car be grouped together with: a red hat or a blue car?
             - Which should a big old man be grouped together with: a big old woman, a big young man, or a small old man?
+- When can I have a Debian phone?
+Why isn't there any?
+    - https://www.androidpit.com/turn-your-android-device-into-a-linux-pc-without-rooting
+    - https://www.thanassis.space/android.html
+    - https://www.linuxjournal.com/content/maru-os-brings-debian-your-phone
+    - or just buy a laptop/notebook/netbook and a GSM dongle
+- What is a symposium?
+    - From Greek meaning "to drink together".
+        - https://en.wikipedia.org/wiki/Symposium
+    - What is the difference between conference, congregation, symposium, seminar?
+- ramble
+    - https://www.researchgate.net/project/Ontology-oriented-programming
+    - http://www.doc.ic.ac.uk/~klc/OntProg.html
+    - In order to do something new, you must make sure that nobody else has done it.
+    In 2018, there are 7 billion people.
+    - We should not take pride in inventing something new.
+    We should take pride in finding out that something is already known 50 years ago.
+    - What is software engineering?
+        - Engineering is the application of science.
+        - Civil engineering is the application of natural science.
+        - Software engineering is the application of computer science.
+        - What is science?
+            - Science is the application of the scientific method.
+            - Science is a mixture of philosophy, mathematics, and experiments.
+        - The ideal software is easy to change but doesn't change.
+        The ideal software captures the essence of the problem.
+        The essence of a problem is mathematical definitions.
+        Mathematical definitions aren't supposed to change.
+        - https://queue.acm.org/detail.cfm?id=2693160
+- Important things for all countries on Earth:
+    - Change the justice system from retributive justice to restorative justice.
+    Instead of locking up prisoners, make them repair the harm they did.
+    - Who should we talk to?
+    Legislators?
+    - This is urgent and important.
+        - Millions of people are being incarcerated.
+        Their ability is being wasted.
+        They are deprived of future.
+        They will have difficulties reintegrating into society.
+        Stigmatized.
+        Like the homeless.
+        This stigma makes it impossible for them to get financial stability and get out of the vicious circle of crime.
+        - Not to mention questionable prison initiation rituals.
+- physics
+    - physics expository works https://physics.stackexchange.com/questions/194300/physics-journals-that-focus-on-expository-work
+    - "Newly published articles in physics" http://www.scholarpedia.org/article/Encyclopedia:Physics
+- https://stackoverflow.com/questions/3416980/why-arent-whole-program-optimizations-more-prevalent-now/27757382
+- https://en.wikipedia.org/wiki/Multi-adjoint_logic_programming
+- https://medium.com/netflix-techblog/linux-performance-analysis-in-60-000-milliseconds-accc10403c55
+- Keynote - What's Different In Dotty by Martin Odersky https://www.youtube.com/watch?v=9lWrt6H6UdE
+- https://lifehacker.com/why-i-killed-my-standing-desk-and-what-i-do-instead-1565554537

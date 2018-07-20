@@ -291,3 +291,4 @@ instance Exp (TcExp name) where ...
         - servant web framework
         - Salsa Haskell .NET bridge
             - https://wiki.haskell.org/Salsa
+- https://en.wikipedia.org/wiki/Higher-order_abstract_syntax
