@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Back up your repository before using this.
+
+# Usage: cd DIR && gitmove ESCNEWDIR
+# That incantation rewrites every path DIR/F to DIR/NEWDIR/F by rewriting every commit.
+# ESCNEWDIR is escaped NEWDIR, explained below.
+
+# Note about escaping: Hyphens in ESCNEWDIR must be preceded by a backslash.
+# For example, if NEWDIR is foo-bar, then the incantation must be:
+#     cd DIR && gitmove 'foo\-bar'
+# The single quote makes the shell not interpret the string passed to sed.
+
+# This fragment is copied from man git-filter-branch, and then modified to avoid choking on empty commits.
+
+git filter-branch -f --index-filter '
+  git ls-files -s |
+  sed "s-\t\"*-&'"$1"'/-" |
+  GIT_INDEX_FILE=$GIT_INDEX_FILE.new git update-index --index-info &&
+      { mv $GIT_INDEX_FILE.new $GIT_INDEX_FILE; true; }
+' master
