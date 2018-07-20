@@ -139,3 +139,5 @@ American individualisn, Russian collectivism
         - https://en.wikipedia.org/wiki/Civilian_Conservation_Corps
         - [Argentina: A Case Study on the "Plan Jefes y Jefas de Hogar
     Desocupados", or the Employment Road to Economic Recovery](http://www.levyinstitute.org/pubs/wp_534.pdf)
+- Justin Trudeau: "Donald Trump was elected on a promise to help the millions of middle-class families who feel left out of the success and progress of the past decades, and, interestingly enough, that is exactly the promise I got elected on, too."
+    - https://www.quora.com/How-does-Justin-Trudeau-view-Canadas-relationship-with-the-US-in-light-of-Donald-Trump-winning-the-US-presidential-election/answer/Justin-Trudeau
