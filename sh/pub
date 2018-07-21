@@ -1,23 +1,46 @@
 #!/bin/bash
 
 # This script expects to be run from the parent of the directory containing this script.
-# Usage: sh/pub
-# This overwrites edom.github.io with whatever that is in "_site".
+# Usage: sh/pub COMMIT
+# This checks out COMMIT, rebuilds the site, and overwrites edom.github.io.
+# You should be careful not to publish unpublished content.
+# If COMMIT is not given, this defaults to "origin/master".
 
 set -o errexit
 
+# This and "./jekyll clean" remove unpublished content.
+# A weakness is that if anything fails, we end up with a detached HEAD.
+
+git checkout --detach "${1:-origin/master}"
+
+# We specify --destination so that we don't clash with a running "jekyll serve".
+# However, you should make sure that no "jekyll serve" is running.
+
+JEKYLL_DIR=_site_publish
+
 pushd edom.github.io
-./jekyll build
+./jekyll clean --destination "./${JEKYLL_DIR}"
+./jekyll build --destination "./${JEKYLL_DIR}"
 popd
 
-export GIT_DIR=tmp/edom.github.io.git
-mkdir -p "$GIT_DIR"
-git init --bare
-git config user.name 'Erik Dominikus'
-git config user.email 'software@spacetimecat.com'
+# Spawn a subshell to confine the scope of the GIT_* exports.
 
-# https://stackoverflow.com/questions/25172470/git-error-fatal-git-work-tree-or-work-tree-directory-not-allowed-without
-export GIT_WORK_TREE=edom.github.io/_site
-git add --all .
-git commit -m "$(date -Iseconds)" || true
-git push -f git@github.com:edom/edom.github.io.git master
+(
+
+    set -o errexit
+
+    export GIT_DIR=tmp/edom.github.io.git
+    mkdir -p "$GIT_DIR"
+    git init --bare
+    git config user.name 'Erik Dominikus'
+    git config user.email 'software@spacetimecat.com'
+
+    # https://stackoverflow.com/questions/25172470/git-error-fatal-git-work-tree-or-work-tree-directory-not-allowed-without
+    export GIT_WORK_TREE="edom.github.io/${JEKYLL_DIR}"
+    git add --all .
+    git commit -m "$(date -Iseconds)" || true
+    git push -f git@github.com:edom/edom.github.io.git master
+
+)
+
+git checkout master
