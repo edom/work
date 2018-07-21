@@ -37,3 +37,9 @@ Jekyll can generate sitemap.xml without plugins.
 - Why is the font so big?
     - Because I'm myopic.
     - To shrink the text, press Control-minus.
+- Why is the font so small?
+    - To fit more information on screen.
+    - To expand the text, press Control-plus.
+    - I read smaller text faster because my eyes move less, until the font size reaches 8pt.
+    The screen pixels aren't dense enough to render 8pt sans-serif.
+    - 2018-07-21: Wikipedia uses 14px (about 10.5pt).

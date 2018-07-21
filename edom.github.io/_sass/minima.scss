@@ -1,27 +1,11 @@
 @charset "utf-8";
 
-@page {
-    size: A4;
-    margin: 2cm 2cm;
-}
-
-@media print {
-    html {
-        font-size: 12pt;
-    }
-    .wrapper {
-        max-width: none;
-        margin: 0em;
-    }
-    #disqus_thread {
-        display: none;
-    }
-}
-
 // Define defaults for each variable.
 
-$base-font-family: 'Times New Roman', serif !default;
-$base-font-size:   12pt !default;
+$base-font-family: 'Helvetica', 'Arial', sans-serif !default;
+$base-font-size:   10pt !default;
+$palm-font-size:   10pt !default;
+$print-font-size:  10pt !default;
 $base-font-weight: 400 !default;
 $small-font-size:  $base-font-size * 0.875 !default;
 $base-line-height: 1.25 !default;
@@ -42,12 +26,30 @@ $content-width:    64em !default;
 $on-palm:          32em !default;
 $on-laptop:        32em !default;
 
+@page {
+    size: A4;
+    margin: 2cm 2cm;
+}
+
+@media print {
+    html {
+        font-size: $print-font-size;
+    }
+    .wrapper {
+        max-width: none;
+        margin: 0em;
+    }
+    #disqus_thread {
+        display: none;
+    }
+}
+
 h1, h2, h3, h4, h5, h6 {
     letter-spacing: -0.04em;
     font-weight: bold;
 }
 
-h1 { font-size: 2.000rem; }
+h1 { font-size: 1.333rem; }
 h2 { font-size: 1.250rem; }
 h3 { font-size: 1.125rem; }
 h4 { font-size: 1.063rem; }
@@ -132,7 +134,7 @@ dl, dd, figure {
 
 @media screen {
     html {
-        font-size: 16pt;
+        font-size: $base-font-size;
     }
 }
 
@@ -143,7 +145,7 @@ html {
     font-weight: normal;
 
     @include media-query($on-palm) {
-        font-size: 12pt;
+        font-size: $palm-font-size;
     }
 
     font-size-adjust: 100%;
