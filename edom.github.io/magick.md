@@ -6,6 +6,7 @@ date: 2018-05-17 01:21 +0700
 
 - What?
     - [scry.cloud: Crowdsourcing prediction](https://scry.cloud/)
+- Are there tutorials?
 - Undigested information
     - These are unknown, but these give us a procedure we can try, if it's clear at all.
         - A simple remote viewing protocol everyone can try: http://www.irva.org/remote-viewing/howto.html

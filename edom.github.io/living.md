@@ -44,3 +44,4 @@ permalink: /living.html
     - Distrust is the norm.
 - [What kind of world are we living in?]({% link world.md %})
 - [WP:21st century](https://en.wikipedia.org/wiki/21st_century)
+- https://lifehacker.com/why-i-killed-my-standing-desk-and-what-i-do-instead-1565554537

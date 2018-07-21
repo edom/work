@@ -10,6 +10,8 @@ permalink: /meta-research.html
     - Ask research questions, answer them, and collect them into living documents.
     - Slides, Simon Peyton-Jones, ["How to write a great research paper: seven simple suggestions"](https://www.cis.upenn.edu/~sweirich/icfp-plmw15/slides/peyton-jones.pdf).
     There is [a copy on Microsoft](https://www.microsoft.com/en-us/research/academic-program/write-great-research-paper/).
+- In order to do something new, you must make sure that nobody else has done it.
+In 2018, there are 7 billion people.
 - Which country values science the most?
 Where is scientist most demanded?
     - [WP: Inglehart--Welzel cultural map of the world](https://en.wikipedia.org/wiki/Inglehart%E2%80%93Welzel_cultural_map_of_the_world)
@@ -231,3 +233,8 @@ Can we crowdsource it?
         - How do they relate?
 - [WP:List of open-access journals](https://en.wikipedia.org/wiki/List_of_open_access_journals)
 - [WP:Body of knowledge](https://en.wikipedia.org/wiki/Body_of_knowledge)
+- What is a symposium?
+    - From Greek meaning "to drink together".
+        - https://en.wikipedia.org/wiki/Symposium
+    - What is the difference between conference, congregation, symposium, seminar?
+    Why can't we just use the word "meeting" for all of them?

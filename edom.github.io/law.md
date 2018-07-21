@@ -4,7 +4,21 @@ date: 2018-06-02 16:48 +0700
 permalink: /law.html
 ---
 
-- Law is about *provability*, not truth.
+- There is something above the law: violence, that is, power, that is, human nature.
+    - Law is whatever people fear.
+    - Power is the ability to do violence (bodily harm).
+    - Weapon is power multiplier.
+    Weapon multiplies the ability to do violence.
+    - People who are above the law are above the law because they have more power than the police.
+    Example of those people are extremely rich people, including big corruptors.
+    Such powerful people have enough money to do more violence than the police can do.
+    - Religious demonstrators are above the law because they can do more violence than the police can do.
+        - The police must develop non-lethal crowd-control weapons.
+- Law requires the ability to do violence.
+- Law isn't about truth.
+Law has never been about truth.
+Philosophy is about truth.
+- Modern law is about *provability*.
     - Since when? Since "habeas corpus"?
         - [WP:Habeas corpus](https://en.wikipedia.org/wiki/Habeas_corpus)
     - Is law a formal system that can do arithmetic?

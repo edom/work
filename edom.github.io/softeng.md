@@ -129,9 +129,6 @@ A typo in the source code is not a bug.
     - https://blog.codinghorror.com/discipline-makes-strong-developers/
         - Good code is more because of programmer discipline than because of the framework or language.
 - Emphasize maintainability, readability, understandability, changeability?
-- Reverse engineering
-    - https://reverseengineering.stackexchange.com/questions/1817/is-there-any-disassembler-to-rival-ida-pro
-    - http://www.capstone-engine.org/
 - It’s time to kill the web https://blog.plan99.net/its-time-to-kill-the-web-974a9fe80c89
     - from https://twitter.com/tehjh Jann Horn's Twitter
         - At that time Jann Horn was a member of Google's Project Zero
@@ -185,3 +182,21 @@ A typo in the source code is not a bug.
     - Contributing factors: bad languages, bad tools.
         - Bad languages make writing correct programs difficult.
     - Errors outside programmer control: cosmic rays, hardware problems
+- What is software engineering?
+    - Engineering is the application of science.
+    - Civil engineering is the application of natural science.
+    - Software engineering is the application of computer science.
+    - What is science?
+        - Science is the application of the scientific method.
+        - Science is a mixture of philosophy, mathematics, and experiments.
+    - The ideal software is easy to change but doesn't change.
+    The ideal software captures the essence of the problem.
+    The essence of a problem is mathematical definitions.
+    Mathematical definitions aren't supposed to change.
+    - Software is a model of reality.
+    - Software is law.
+    - Software is executable theory of nature.
+    - Software is like physics but executable.
+    - https://queue.acm.org/detail.cfm?id=2693160
+    - https://www.cs.umn.edu/research/research_areas/software-engineering-and-programming-languages
+        - "Software is a solution to a computational problem using a formal programming language."

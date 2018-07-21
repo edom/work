@@ -1,4 +1,8 @@
-# Programming language research
+---
+title: Programming language research
+permalink: /plres.html
+date: 2018-07-22 02:45 +0700
+---
 
 - The goal is to make *the* programming language.
 - A goal of programming language research is to make a better programming language?
@@ -16,14 +20,14 @@
                 - its twitter https://twitter.com/poplconf?lang=en
     - collections, links, aggregators
         - https://www.cs.cmu.edu/~mleone/language-research.html
-- software engineering
-    - enterprise application development
-        - It's 2018. CRUD should be generated.
-            - https://news.ycombinator.com/item?id=15429616
-            - http://isis.apache.org/
-            - other tools?
-        - feature-oriented software development
-            - https://en.wikipedia.org/wiki/FOSD_program_cubes
+    - software engineering
+        - enterprise application development
+            - It's 2018. CRUD should be generated.
+                - https://news.ycombinator.com/item?id=15429616
+                - http://isis.apache.org/
+                - other tools?
+            - feature-oriented software development
+                - https://en.wikipedia.org/wiki/FOSD_program_cubes
 - category theory and programming languages
     - categorical programming (what is this?)
         - 2000, PhD thesis, "Categorical programming with inductive and coinductive types" https://kodu.ut.ee/~varmo/papers/thesis.pdf

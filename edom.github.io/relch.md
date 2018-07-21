@@ -1,5 +1,5 @@
 ---
-title: Which religion should we choose?
+title: Choosing a religion
 permalink: /relch.html
 date: 2018-05-26 23:31:00 +0700
 ---
