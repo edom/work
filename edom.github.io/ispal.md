@@ -1,5 +1,5 @@
 ---
-title: Ispal
+title: Solving the Israel-Palestine problem
 date: 2018-05-25 00:00 +0700
 permalink: /ispal.html
 ---

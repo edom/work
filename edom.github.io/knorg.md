@@ -1,5 +1,5 @@
 ---
-title: Knowledge organization
+title: Organizing knowledge
 date: 2018-06-04 23:50 +0700
 permalink: /knorg.html
 ---

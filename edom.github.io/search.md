@@ -1,5 +1,5 @@
 ---
-title: Internet search tools
+title: Searching the Internet
 date: 2018-05-18 00:00 +0700
 permalink: /search.html
 ---
@@ -36,3 +36,8 @@ permalink: /search.html
         - [moomash](http://www.mooma.sh) (was "audentifi"), YouTube reverse audio search
             - 2018: only works with some video formats; doesn't work for old videos
         - http://whatpixel.com/original-source-image-search-tools/
+- The Internet is full of crap.
+    - So are libraries.
+    - So is the world.
+    - So is this website.
+    - Thus, you must think for yourself.

@@ -4,53 +4,95 @@ date: 2018-07-21 23:57 +0700
 permalink: /reveng.html
 ---
 
-- Java application
-    - I want to reverse-engineer a Java 6 stock trading application.
-    - Obstacles:
-        - It's obfuscated.
-        - It makes its own ClassLoader.
-    - Do I have to do this time-consuming stuff? What are the alternatives?
-        - I can buy data.
-        - I can ask the company to provide some documentation about their protocols.
-            - Whom should I talk to?
-                - I can ask my sales representative whether he knows the people who made or is maintaining the application.
-                - Someone in a local Java User Group might know something.
-                    - https://groups.google.com/forum/#!forum/jugi
-                        - The mailing list has devolved into a job board.
-                    - Is there a chat? IRC?
-                    - https://www.facebook.com/groups/ForumJavaIndonesia/
-                - People who have made a similar application
-                    - 2008 PT Trimegah Securities Tbk https://www.linkedin.com/in/syahreza-pahlevi-ginting-0041b52/
-                    - 2016 BCA Sekuritas https://www.linkedin.com/in/kusnandartoni/
-                    - 2010 https://www.linkedin.com/in/elvino-a07277b/
-                    - unclear linkedin profile
-                        - 2013-2016 Bareksa, 2012 Limas https://www.linkedin.com/in/arisman-26672a52/
-        - I can try to convince the company to open-source this platform.
-            - Somewhat unlikely in this country that is behind the US by 10 years or perhaps even more.
-        - I can switch to the company's other product that is a web app that uses websockets.
-            - Which one is easier to reverse-engineer?
-        - These are possible, but I would rather not do these:
-            - Get a job in a securities company, and then get the required information.
-    - The plan:
-        - Try existing deobfuscators, supercompilers, disassemblers, debuggers, and other tools.
-    - should try?
-        - "All-in-one Java reverse engineering tool" https://github.com/helios-decompiler/standalone-app
-    - Optimization is a partial inverse of obfuscation.
-    - Optimizer can help deobfuscate unnecessary instructions, but not renamings.
-    - Statistical renaming can help deobfuscate names.
-    - https://en.wikipedia.org/wiki/Reverse_engineering#Reverse_engineering_of_protocols
-        - automatic online learning
-    - Can we reverse-engineer by supercompilation or partial evaluation?
-    - search keywords to try
-        - java bytecode optimizer
-        - java deobfuscator
-        - metacompilation, supercompilation, partial evaluation, program specialization, etc. https://everipedia.org/wiki/Metacompilation/
-    - https://www.reddit.com/r/REMath/
-    - https://security.stackexchange.com/questions/29866/reverse-engineering-and-java
-    - Transpile Java bytecode to JavaScript, and use jsnice?
-    - jsnice: statistical renaming, type inference and deobfuscation http://jsnice.org/
-    - supercompile Java programs
-        - "Ongoing work on Supercompilation of Java code (or supercompilation in general)?" http://lambda-the-ultimate.org/node/2739
-        - "A Java Supercompiler and Its Application to Verification of Cache-Coherence Protocols" https://link.springer.com/chapter/10.1007/978-3-642-11486-1_16
-        - 2002, "Supercompiling Java Programs" http://goertzel.org/papers/SupercompilingJavaMay2002.htm
-            - What are the differences between supercompilation and partial evaluation?
+- I want to reverse-engineer a Java 6 stock trading application.
+    - The app's license agreement doesn't mention anything about reverse engineering.
+- Obstacles:
+    - It's obfuscated.
+        - It outsmarts IntelliJ IDEA's decompiler.
+    - It makes its own ClassLoader.
+    - The network traffic is probably encrypted.
+- The plan:
+    - Find some information about how to debug Java bytecode.
+        - Decision: Write a Java program that uses the JDI (Java Debug Interface).
+        - References we will often use
+            - [Java 8 JDI javadoc](https://docs.oracle.com/javase/8/docs/jdk/api/jpda/jdi/index.html)
+        - Details:
+            - Things that come with JDK 7:
+                - [JPDA (Java Platform Debug Architecture)](https://docs.oracle.com/javase/7/docs/technotes/guides/jpda/index.html)
+                    - [JPDA examples that come with JDK](https://docs.oracle.com/javase/7/docs/technotes/guides/jpda/examples.html)
+                        - [javadt](https://docs.oracle.com/javase/7/docs/technotes/guides/jpda/javadt.html) GUI tool
+                        - [jdb](https://docs.oracle.com/javase/7/docs/technotes/tools/windows/jdb.html) command-line tool
+                        - [trace](https://docs.oracle.com/javase/7/docs/technotes/guides/jpda/trace.html)
+                    - JPDA = JVMTI + JDWP + JDI
+                        - JVMTI = Java Virtual Machine Tool Interface
+                        - JDWP = Java Debug Wire Protocol
+                        - JDI = Java Debug Interface
+                            - "We recommend the JDI layer for all debugger development." ([source](https://docs.oracle.com/javase/7/docs/technotes/guides/jpda/architecture.html#jdi))
+                            - This enables us to write programs that debug programs.
+            - Sample code
+                - There doesn't seem to be any official tutorials.
+                - [dzone.com: Generating a minable event stream with JDI](https://dzone.com/articles/generating-minable-event)
+                - [Java: Using JPDA to write a debugger](http://illegalargumentexception.blogspot.com/2009/03/java-using-jpda-to-write-debugger.html)
+                - [JDK 7 jdb source code](https://github.com/openjdk-mirror/jdk7u-jdk/blob/master/src/share/classes/com/sun/tools/example/debug/tty/TTY.java).
+    - Use JDB to debug the program.
+        - Or perhaps Eclipse? [crowdstrike.com: Native Java Bytecode Debugging without Source Code](https://www.crowdstrike.com/blog/native-java-bytecode-debugging-without-source-code/)
+    - Find out where to focus.
+        - Map network-related call graph.
+            - Put a breakpoint at Socket.getOutputStream.
+            - It uses netty and thread pools, encumbering the recovery of the interesting stack frames.
+            - It uses a serialization library `msgpack`. Perhaps put breakpoints there?
+    - Write a program to dump the call graph of every call to netty class from non-netty class.
+- Woes
+    - There is no `chdir` in Java standard library, and it seems that there will never be.
+    See [WONTFIX: JDK-4045688: "Add chdir or equivalent notion of changing working directory"](https://bugs.openjdk.java.net/browse/JDK-4045688).
+    - Method entry event is abysmally slow.
+        - https://stackoverflow.com/questions/751105/why-does-the-debugged-program-slow-down-so-much-when-using-method-entry-debuggin/api.stackexchange.com
+        - https://stackoverflow.com/questions/48114042/jpda-methodentryevent-causing-app-to-run-very-slow
+        - https://netbeans.org/bugzilla/show_bug.cgi?id=47759
+        - https://bugs.eclipse.org/bugs/show_bug.cgi?id=90870
+    - Breakpointing an abstract method throws a NullPointerException.
+- Do I have to do this time-consuming stuff? What are the alternatives?
+    - I can buy data.
+    - I can ask the company to provide some documentation about their protocols.
+        - Whom should I talk to?
+            - I can ask my sales representative whether he knows the people who made or is maintaining the application.
+            - Someone in a local Java User Group might know something.
+                - https://groups.google.com/forum/#!forum/jugi
+                    - The mailing list has devolved into a job board.
+                - Is there a chat? IRC?
+                - https://www.facebook.com/groups/ForumJavaIndonesia/
+            - People who have made a similar application
+                - 2008 PT Trimegah Securities Tbk https://www.linkedin.com/in/syahreza-pahlevi-ginting-0041b52/
+                - 2016 BCA Sekuritas https://www.linkedin.com/in/kusnandartoni/
+                - 2010 https://www.linkedin.com/in/elvino-a07277b/
+                - unclear linkedin profile
+                    - 2013-2016 Bareksa, 2012 Limas https://www.linkedin.com/in/arisman-26672a52/
+    - I can try to convince the company to open-source this platform.
+        - Somewhat unlikely in this country that is behind the US by 10 years or perhaps even more.
+    - I can switch to the company's other product that is a web app that uses websockets.
+        - Which one is easier to reverse-engineer?
+    - These are possible, but I would rather not do these:
+        - Get a job in a securities company, and then get the required information.
+- The plan:
+    - Try existing deobfuscators, supercompilers, disassemblers, debuggers, and other tools.
+- should try?
+    - "All-in-one Java reverse engineering tool" https://github.com/helios-decompiler/standalone-app
+- Optimization is a partial inverse of obfuscation.
+- Optimizer can help deobfuscate unnecessary instructions, but not renamings.
+- Statistical renaming can help deobfuscate names.
+- https://en.wikipedia.org/wiki/Reverse_engineering#Reverse_engineering_of_protocols
+    - automatic online learning
+- Can we reverse-engineer by supercompilation or partial evaluation?
+- search keywords to try
+    - java bytecode optimizer
+    - java deobfuscator
+    - metacompilation, supercompilation, partial evaluation, program specialization, etc. https://everipedia.org/wiki/Metacompilation/
+- https://www.reddit.com/r/REMath/
+- https://security.stackexchange.com/questions/29866/reverse-engineering-and-java
+- Transpile Java bytecode to JavaScript, and use jsnice?
+- jsnice: statistical renaming, type inference and deobfuscation http://jsnice.org/
+- supercompile Java programs
+    - "Ongoing work on Supercompilation of Java code (or supercompilation in general)?" http://lambda-the-ultimate.org/node/2739
+    - "A Java Supercompiler and Its Application to Verification of Cache-Coherence Protocols" https://link.springer.com/chapter/10.1007/978-3-642-11486-1_16
+    - 2002, "Supercompiling Java Programs" http://goertzel.org/papers/SupercompilingJavaMay2002.htm
+        - What are the differences between supercompilation and partial evaluation?

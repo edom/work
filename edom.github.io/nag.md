@@ -1,5 +1,5 @@
 ---
-title: Remove nag screens
+title: Removing nag screens
 permalink: /nag.html
 date: 2017-07-08 19:55 +0700
 ---

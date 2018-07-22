@@ -227,5 +227,10 @@ mathjax: yes
 - Unchecked physical theories? Non-mainstream? Suspicious? Not yet mainstream or will never be mainstream?
     - http://www.unifiedphysics.com/
 - 2018 quantum entanglement size record: trillions of atoms? https://www.youtube.com/watch?v=LAvfPof1ySI
-- physics expository works https://physics.stackexchange.com/questions/194300/physics-journals-that-focus-on-expository-work
-- "Newly published articles in physics" http://www.scholarpedia.org/article/Encyclopedia:Physics
+- Getting started
+    - physics expository works https://physics.stackexchange.com/questions/194300/physics-journals-that-focus-on-expository-work
+- Keeping up with recent research
+    - "Newly published articles in physics" http://www.scholarpedia.org/article/Encyclopedia:Physics
+- Finding literature
+    - [PhysNet](http://de.physnet.net/PhysNet/physnet.html)
+    - [PhysNet PhysDoc: Physics Documents Worldwide](http://de.physnet.net/PhysNet/physdoc.html)

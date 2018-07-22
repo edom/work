@@ -4,12 +4,12 @@ date: 2018-04-15 00:00 +0700
 permalink: /politics.html
 ---
 
-- Sections
-    - [Israel-Palestine problem]({% link ispal.md %})
 - What is the Government of China afraid of?
     - The Government of China isn't afraid of criticism. It is afraid of collective action. [King2013]
 - Why are cannabis and heroin illegal?
     - [/r/LateStageCapitalism: John Ehrlichman: Nixon illegalized drugs to stigmatize hippies (cannabis) and blacks (heroin) because those people were against him.](https://www.reddit.com/r/LateStageCapitalism/comments/6h6med/daily_reminder_about_the_true_purpose_of_the_war/)
+    - Cannabis overuse permanently damages teen brains.
+    - Another theory: cotton farmers vs hemp farmers?
 - How do we find who really rules us?
     - Voltaire: "To find out who rules over you, simply find out who you are not allowed to criticize."
 - Reddit: CrazyIdeas

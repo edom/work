@@ -1,5 +1,5 @@
 ---
-title: Natural knowledge
+title: Justifying physics
 date: 2018-06-05 01:30 +0700
 permalink: /natkno.html
 mathjax: yes

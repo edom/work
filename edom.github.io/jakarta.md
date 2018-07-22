@@ -27,3 +27,15 @@ We need to fix this.
 - Durian
     - https://www.ucokdurian.id/daging-durian/
     - Rumah durian harum http://travel.kompas.com/read/2015/03/08/142300327/Sedap.Tempat.Ini.Tawarkan.Durian.Sepanjang.Tahun
+- Jakarta Barat
+    - Macet
+        - Pom bensin di Kemanggisan bikin macet tiap jam makan siang.
+        Mobil yang ngantri banyak, stasiun yang buka cuma satu.
+        - Tempat makan di Tanjung Duren bikin macet.
+        Bikin tempat makan tapi tidak bikin tempat parkir.
+        Parkir di jalan.
+        Mengganggu kepentingan umum.
+        Negative externality.
+        Seperti buang limbah ke sungai.
+        - Green Ville terlalu banyak tempat makan.
+        Setiap Sabtu macetnya sampai Jalan Panjang.

@@ -1,15 +1,22 @@
 ---
-title: Meta-research
+title: Doing research better
 date: 2018-04-11 04:00 +0700
-permalink: /meta-research.html
+permalink: /meta_research.html
 ---
 
 ## Questions
 
 - How to research?
     - Ask research questions, answer them, and collect them into living documents.
-    - Slides, Simon Peyton-Jones, ["How to write a great research paper: seven simple suggestions"](https://www.cis.upenn.edu/~sweirich/icfp-plmw15/slides/peyton-jones.pdf).
-    There is [a copy on Microsoft](https://www.microsoft.com/en-us/research/academic-program/write-great-research-paper/).
+    - Write.
+        - How should we write?
+            - Slides, Simon Peyton-Jones, ["How to write a great research paper: seven simple suggestions"](https://www.cis.upenn.edu/~sweirich/icfp-plmw15/slides/peyton-jones.pdf).
+            There is [a copy on Microsoft](https://www.microsoft.com/en-us/research/academic-program/write-great-research-paper/).
+        - What writing medium should we use?
+            - Researchers should collaborate writing living documents instead of writing isolated papers.
+            We need something like Wikipedia but for research.
+            We need a goal-oriented/task-oriented Wikipedia.
+            Wikiversity might be close to that.
 - In order to do something new, you must make sure that nobody else has done it.
 In 2018, there are 7 billion people.
 - Which country values science the most?
@@ -82,9 +89,6 @@ Where is scientist most demanded?
     - [CST SE 2953: Advice on good research practices](https://cstheory.stackexchange.com/questions/2953/advice-on-good-research-practices)
     - What is an ideal research process, in BPMN (Business Process Model Notation)?
     - Scientists/researchers/academics need something like a global version of a combination of Wikipedia and [AirBnb's Knowledge Repo](https://medium.com/airbnb-engineering/scaling-knowledge-at-airbnb-875d73eff091)
-- Where can I find what? What is the question?
-    - [PhysNet](http://de.physnet.net/PhysNet/physnet.html)
-    - [PhysNet PhysDoc: Physics Documents Worldwide](http://de.physnet.net/PhysNet/physdoc.html)
 - How do I keep myself up-to-date? How do I keep myself in the loop?
     - Which mailing lists should I join?
     - Which blogs, websites, or people should I follow?
@@ -118,12 +122,6 @@ How do we know if an open-access journal is legitimate?
 http://www.mdpi.com/journal/universe
 
 https://benthamopen.com/PHY/home/
-
-## How should we write?
-
-Researchers should collaborate writing living documents instead of writing isolated papers.
-We need something like Wikipedia but for research.
-Wikiversity might be close to that.
 
 ## How do we know what others have done?
 

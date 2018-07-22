@@ -44,3 +44,9 @@ permalink: /phone.html
     - 2017, [bleepingcomputer.com: Chinese Backdoor Still Active on Many Android Devices](https://www.bleepingcomputer.com/news/security/chinese-backdoor-still-active-on-many-android-devices/)
     - 2013, [zerohedge.com: NSA Has Full "Back Door" Access To iPhone, BlackBerry And Android Smartphones, Documents Reveal](https://www.zerohedge.com/news/2013-09-08/nsa-has-full-back-door-access-iphone-blackberry-and-android-smartphones-documents-re)
     - 2015, [wired.com: Cops don't need a crypto backdoor to get into your iphone](https://www.wired.com/2015/10/cops-dont-need-encryption-backdoor-to-hack-iphones/)
+- When can I have a Debian phone?
+Why isn't there any?
+    - https://www.androidpit.com/turn-your-android-device-into-a-linux-pc-without-rooting
+    - https://www.thanassis.space/android.html
+    - https://www.linuxjournal.com/content/maru-os-brings-debian-your-phone
+    - or just buy a laptop/notebook/netbook and a GSM dongle

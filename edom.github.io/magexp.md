@@ -1,5 +1,5 @@
 ---
-title: Magick experiments
+title: Experimenting with magick
 permalink: /magexp.html
 date: 2018-05-17 01:21 +0700
 ---

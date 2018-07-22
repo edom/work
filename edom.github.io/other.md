@@ -1,0 +1,63 @@
+---
+title: Other unorganized contents
+permalink: /other.html
+date: 2018-07-22 13:15 +0700
+---
+
+- I am regrouping the contents in this website from by-topic to by-task.
+- This page contains the old grouping that I haven't moved.
+- [Writing]({% link writing.md %})
+- [Intelligence]({% link intelligence.md %})
+- [Computer science]({% link compsci.md %})
+    - [WP:Computer science](https://en.wikipedia.org/wiki/Computer_science)
+    - [YT:Map of Computer Science](https://www.youtube.com/watch?v=SzJ46YA_RaA)
+    - [Computation]({% link computation.md %})
+    - [Computational complexity]({% link complexity.md %})
+        - [Circuit complexity]({% link circuit.md %})
+- Natural sciences
+    - [Physics]({% link physics.md %}) and engineering
+        - [Modeling]({% link model.md %})
+        - [Energy storage]({% link ensto.md %})
+        - [Traffic engineering]({% link trafeng.md %})
+        - Civil engineering
+            - [How Do Sinkholes Form?](https://www.youtube.com/watch?v=e-DVIQPqS8E)
+                - Internal erosion, piping, etc.
+            - [YT:Why Concrete Needs Reinforcement](https://www.youtube.com/watch?v=cZINeaDjisY)
+                - three types of stresses: tensile, compressive, shear
+            - [What's inside Ikea's "wood"?](https://www.youtube.com/watch?v=24F5JlKkxR4)
+            - Architecture
+                - [YT:Open office is overrated](https://www.youtube.com/watch?v=-p6WWRarjNs)
+        - [Astronomy]({% link astro.md %})
+    - [Chemistry]({% link chem.md %})
+    - Science in 21st century is multi-/inter-discipline?
+        - All branches of science cross-pollinate?
+        - It's no longer useful to categorize science by branches?
+        - Where is the boundary between two branches?
+            - Where do physics end and chemistry begin?
+- [Mathematics]({% link math.md %})
+    - [Math education]({% link mathedu.md %})
+- [Philosophy]({% link philo.md %})
+    - Does everything fall under philosophy?
+        - How do we prevent this category from becoming a kitchen sink?
+        - Philosophy is everywhere (a cross-cutting concern), so it shouldn't be a category.
+    - [Law]({% link law.md %})
+    - [Religion]({% link religion.md %})
+    - [Logic]({% link logic.md %})
+        - [Counterfactual reasoning]({% link cf.md %})
+    - Work
+        - [Boss]({% link boss.md %})
+    - [Long-haired men]({% link longhair.md %})
+- [Biology]({% link biology.md %})
+- Money-related
+    - [Economics]({% link economics.md %})
+    - [Capitalism]({% link capitalism.md %})
+    - [Finance]({% link finance.md %})
+    - Which is more fundamental, economics or finance? Which is built on which?
+- [Psychology]({% link psych.md %})
+- [Entertainment]({% link entertain.md %})
+    - [Game]({% link game.md %})
+- Ungrouped
+    - [About this website]({% link about.md %})
+- [Art]({% link art.md %})
+    - [Music]({% link music.md %})
+    - [Acting]({% link act.md %})

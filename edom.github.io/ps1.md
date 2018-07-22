@@ -15,7 +15,14 @@ permalink: /ps1.html
         - Map the call graph.
         Find the bottom-most call that coincides with the rendering of one frame.
             - Insert breakpoint.
-            - Go untli return.
+            - Go until return.
+- How to use GDB to debug MAME?
+    - PCSX is easy to debug because it is in C, uses global variables (such as `psxRegs`), and doesn't care about 100% faithful emulation.
+    - MAME uses C++ and tries to emulate the whole hardware.
+        - Can we supercompile MAME to make it faster?
+        But how do we debug supercompiled programs?
+        - We can make our own global variables.
+        The source is open.
 - https://en.wikipedia.org/wiki/PlayStation_(console)#Hardware
 - https://en.wikipedia.org/wiki/PlayStation_technical_specifications
 - http://phoboslab.org/log/2015/04/reverse-engineering-wipeout-psx

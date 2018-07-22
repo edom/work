@@ -1,12 +1,16 @@
 ---
-title: Magick
+title: Obtaining magickal powers
 permalink: /magick.html
 date: 2018-05-17 01:21 +0700
 ---
 
+- Which ones are not charlatans, fraudsters, quacks?
+- We may dismiss the explanation, but we must not dismiss the fact (the phenomenon, the observation).
+- Are there tutorials?
+    - Related search terms (Indonesian, Javanese, Sundanese, English):
+        - ajian, gaib (occult), gendam, ilmu, jangjawokan, kanuragan, kinasihan, linuwih, magick, reiki, rukyah, ruwat, sakti, santet, sihir, teluh, tenaga dalam, tenung
 - What?
     - [scry.cloud: Crowdsourcing prediction](https://scry.cloud/)
-- Are there tutorials?
 - Undigested information
     - These are unknown, but these give us a procedure we can try, if it's clear at all.
         - A simple remote viewing protocol everyone can try: http://www.irva.org/remote-viewing/howto.html

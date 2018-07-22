@@ -30,11 +30,7 @@ permalink: /living.html
         - Unread
             - https://www.fix-knee-pain.com/basic-postural-problems-at-the-hip-anterior-pelvic-tilt/
             - http://backpainsolutionsonline.com/announcements-and-releases/back-pain-exercise/posterior-pelvic-tilt-causes-and-treatments
-- Using technology
-    - [How do you use a computer?]({% link usecom.md %})
-    - [Buying a smartphone]({% link phone.md %})
-        - [Android vs iPhone]({% link andvsiph.md %})
-    - [WP:21st century skills](https://en.wikipedia.org/wiki/21st_century_skills)
+- [WP:21st century skills](https://en.wikipedia.org/wiki/21st_century_skills)
 - [WP:List of human habitation forms](https://en.wikipedia.org/wiki/List_of_human_habitation_forms)
 - [Fighting]({% link fight.md %})
 - Disappointments
