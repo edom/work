@@ -6,14 +6,60 @@ permalink: /reveng.html
 
 - I want to reverse-engineer a Java 6 stock trading application.
     - The app's license agreement doesn't mention anything about reverse engineering.
-- Obstacles:
+- Obstacles and woes:
     - It's obfuscated.
         - It outsmarts IntelliJ IDEA's decompiler.
     - It makes its own ClassLoader.
     - The network traffic is probably encrypted.
+    - There is no `chdir` in Java standard library, and it seems that there will never be.
+    See [WONTFIX: JDK-4045688: "Add chdir or equivalent notion of changing working directory"](https://bugs.openjdk.java.net/browse/JDK-4045688).
+    - Method entry event is abysmally slow.
+        - https://stackoverflow.com/questions/751105/why-does-the-debugged-program-slow-down-so-much-when-using-method-entry-debuggin/api.stackexchange.com
+        - https://stackoverflow.com/questions/48114042/jpda-methodentryevent-causing-app-to-run-very-slow
+        - https://netbeans.org/bugzilla/show_bug.cgi?id=47759
+        - https://bugs.eclipse.org/bugs/show_bug.cgi?id=90870
+    - Breakpointing an abstract method throws a NullPointerException.
 - The plan:
+    - Compute static call graph.
+        - https://github.com/gousiosg/java-callgraph
+            - from https://stackoverflow.com/questions/29382231/how-do-i-trace-methods-calls-in-java
+        - Find patterns in the call graph.
+        Find calls from non-network class to network class.
+            - A *network class* is a class whose qualified name matches any of these patterns:
+                - `java.net.*`
+                - `java.nio.*`
+                - `*.netty.*`
+        - Don't exclude any class.
+        Filter it later instead.
+    - Find tools.
+        - Articles.
+            - 2008, article, "The Rigi Reverse Engineering Environment", [pdf](https://www.rose-hulman.edu/class/cs/csse575/Resources/rigi-wasdett2008-paper06.pdf)
+                - https://en.wikipedia.org/wiki/Rigi_(software)
+                - requires source code
+            - 2002, article, "Dynamic Analysis For Reverse Engineering and Program Understanding", [pdf](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.302.1091&rep=rep1&type=pdf)
+            - 2001, article, "Shimba—An environment for reverse engineering Java software systems", [abstract](https://www.researchgate.net/publication/220280416_Shimba-An_environment_for_reverse_engineering_Java_software_systems)
+                - The publication sounds promising, but where is the source code?
+                It's not on GitHub.
+    - If that fails, compute dynamic call graph.
+    Trace method calls.
+        - Print something everytime a method is called.
+        - Insert bytecode at the beginning of every method.
+        - Which classes?
+        Exclude `java.*` and `javax.*`, but include `java.net.*` and `java.nio.*`.
+        - Use AOP (aspect-oriented programming) that uses bytecode manipulation such as AspectJ.
+            - Using AspectJ ("aspect weaving" is bytecode manipulation)
+                - https://www.yegor256.com/2014/06/01/aop-aspectj-java-method-logging.html
+                - [Tracing method calls in Java with JDB](https://teaspoon-consulting.com/articles/tracing-java-method-calls.html)
+                - 2007, article, [Five ways for tracing Java execution](http://blog.zvikico.com/2007/11/five-ways-for-t.html)
+                - https://stackoverflow.com/questions/19850695/does-java-have-any-mechanism-for-a-vm-to-trace-method-calls-on-itself-without-u
+                    - Use Javassist?
+                - https://stackoverflow.com/questions/49159666/how-to-intercept-each-method-call-within-given-method-using-spring-aop-or-aspect
+                - https://mathewjhall.wordpress.com/2011/03/31/tracing-java-method-execution-with-aspectj/
+                - https://www.rhyous.com/2012/05/26/aop-logging-all-method-calls-and-executions-in-java-with-aspectj/
     - Find some information about how to debug Java bytecode.
-        - Decision: Write a Java program that uses the JDI (Java Debug Interface).
+        - 2018-07-22 decision: Write a Java program that uses the JDI (Java Debug Interface).
+            - 2018-07-23 hindsight: That was a bad decision.
+            We should have computed the call graph first.
         - References we will often use
             - [Java 8 JDI javadoc](https://docs.oracle.com/javase/8/docs/jdk/api/jpda/jdi/index.html)
         - Details:
@@ -42,15 +88,6 @@ permalink: /reveng.html
             - It uses netty and thread pools, encumbering the recovery of the interesting stack frames.
             - It uses a serialization library `msgpack`. Perhaps put breakpoints there?
     - Write a program to dump the call graph of every call to netty class from non-netty class.
-- Woes
-    - There is no `chdir` in Java standard library, and it seems that there will never be.
-    See [WONTFIX: JDK-4045688: "Add chdir or equivalent notion of changing working directory"](https://bugs.openjdk.java.net/browse/JDK-4045688).
-    - Method entry event is abysmally slow.
-        - https://stackoverflow.com/questions/751105/why-does-the-debugged-program-slow-down-so-much-when-using-method-entry-debuggin/api.stackexchange.com
-        - https://stackoverflow.com/questions/48114042/jpda-methodentryevent-causing-app-to-run-very-slow
-        - https://netbeans.org/bugzilla/show_bug.cgi?id=47759
-        - https://bugs.eclipse.org/bugs/show_bug.cgi?id=90870
-    - Breakpointing an abstract method throws a NullPointerException.
 - Do I have to do this time-consuming stuff? What are the alternatives?
     - I can buy data.
     - I can ask the company to provide some documentation about their protocols.

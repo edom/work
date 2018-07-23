@@ -8,7 +8,8 @@ date: 2018-05-17 01:21 +0700
 - We may dismiss the explanation, but we must not dismiss the fact (the phenomenon, the observation).
 - Are there tutorials?
     - Related search terms (Indonesian, Javanese, Sundanese, English):
-        - ajian, gaib (occult), gendam, ilmu, jangjawokan, kanuragan, kinasihan, linuwih, magick, reiki, rukyah, ruwat, sakti, santet, sihir, teluh, tenaga dalam, tenung
+        - ajian, clairaudiance, clairvoyance, extrasensory perception, gaib (occult), gendam, ilmu, jangjawokan, kanuragan, kinasihan, linuwih, magick, medium, poltergeist, premonition, psychokinesis, reiki, remote viewing, rukyah, ruwat, sakti, santet, sihir, telekinesis, telepathy, teluh, tenaga dalam, tenung
+- [Banned TEDTalk about Psychic Abilities | Russell Targ | suespeaks.org](https://www.youtube.com/watch?v=hBl0cwyn5GY)
 - What?
     - [scry.cloud: Crowdsourcing prediction](https://scry.cloud/)
 - Undigested information

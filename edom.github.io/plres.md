@@ -5,6 +5,20 @@ date: 2018-07-22 02:45 +0700
 ---
 
 - The goal is to make *the* programming language.
+- In order for a language to be adopted, people must perceive its risk as low.
+    - The language must work with existing codebases.
+        - The language designer must think from the language user's point of view.
+            - Let's say I have 100,000 lines of Java that I've been writing and testing for the past 5 years.
+            Are you expecting me throw away all of them?
+        - Thus the language must work with C, C++, C#, Java, Go, JavaScript, Python, Ruby, and everything else.
+        This should be possible because the essence of all programming languages is the same: every programming language is a formal system.
+        It should be possible to translate a program P1 in language L1 to program P2 in language L2 with the same semantics.
+    - Mixing the old and new languages should be easy.
+    - 2013, article, "Empirical analysis of programming language adoption", [pdf](http://sns.cs.princeton.edu/docs/asr-oopsla13.pdf)
+- ontology and programming
+    - "ontoprog: Ontology-based Programming: Extended Semantics for OOP languages", [github](https://github.com/andreasBihlmaier/ontoprog)
+    - 2012, article, "Modeling the Knowledge Domain of the Java Programming Language as an Ontology", [pdf](http://eeyem.eap.gr/wp-content/uploads/2017/06/11_ICWL2012.pdf)
+    - 2007, article, "Towards a programming language ontology", [pdf](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.82.194&rep=rep1&type=pdf)
 - A goal of programming language research is to make a better programming language?
     - Do more with less.
     - *The* ultimate best programming language?
@@ -357,3 +371,4 @@ Things that I think are wrong in 2018.
         - What is syntax synthesizer?
         - Inverse of parsing is pretty-printing?
         - If matching is analogous to subtraction, then what is analogous to multiplication? Generation?
+- [Class-based programming]({% link cbp.md %})

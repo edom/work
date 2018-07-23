@@ -34,3 +34,23 @@ permalink: /knorg.html
     - Then I tried grouping by project (goals).
     - I switched from lookup-oriented knowledge organization (organize knowledge for refindability (fast lookup))
     to task-oriented (goal-oriented) knowledge organization (organize knowledge by the tasks that require the knowledge).
+- Can machine organize information for us?
+Can machine cluster documents by the task they help accomplish?
+    - Internet search "automatic clustering of wiki articles"
+        - 2017, article, "Spectral Clustering Wikipedia Keyword-Based Search Results", [html](https://www.frontiersin.org/articles/10.3389/frobt.2016.00078/full)
+        - 2016, article, "WikiWrite: Generating Wikipedia Articles Automatically", [pdf](https://www.ijcai.org/Proceedings/16/Papers/389.pdf)
+        - 2014, article, "Text mining in R – Automatic categorization of Wikipedia articles", [html](http://www.rexamine.com/2014/06/text-mining-in-r-automatic-categorization-of-wikipedia-articles/)
+        - 2011, article, "Categorization of Wikipedia articles with spectral clustering", [pdf](https://link.springer.com/content/pdf/10.1007/978-3-642-23878-9_14.pdf)
+        - 2007, article, "Clustering Short Texts using Wikipedia", [pdf](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.188.1139&rep=rep1&type=pdf)
+        - https://www.quora.com/How-should-I-cluster-Wikipedia-articles
+        - slightly different topics
+            - https://en.wikipedia.org/wiki/Document_clustering
+            - 2010, article, "Exploiting Wikipedia Knowledge for Conceptual Hierarchical Clustering of Documents", [html](https://www.researchgate.net/publication/221579515_Exploiting_Wikipedia_Knowledge_for_Conceptual_Hierarchical_Clustering_of_Documents)
+            - 2008, article, "Clustering Documents with Active Learning Using Wikipedia", [abstract](https://ieeexplore.ieee.org/document/4781188/)
+    - Machine reading comprehension
+        - [MS MARCO: Microsoft MAchine Reading COmprehension Dataset](http://www.msmarco.org/)
+        - https://www.quora.com/What-is-the-difference-between-machine-comprehension-and-question-answering-in-NLP
+        - 2017, slides, "Machine reading comprehension", [pdf](http://tcci.ccf.org.cn/summit/2017/dlinfo/003.pdf)
+        - https://www.microsoft.com/en-us/research/blog/transfer-learning-machine-reading-comprehension/
+        - https://futurism.com/machines-beat-humans-stanford-reading-comprehension-test/
+        - 2018, article, "Adversarial reading networks for machine comprehension", [review](https://openreview.net/forum?id=Hy3MvSlRW), "Interesting idea, unconvincing results"

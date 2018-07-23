@@ -4,14 +4,19 @@ date: 2018-04-15 00:00 +0700
 permalink: /softeng.html
 ---
 
+- The keys to lasting software
+    - Clear ontology
+    - Task-oriented documentation
+        - Documentation doesn't have to be separate from code.
+    - What else?
 - References
     - [Standard MIDI file format]({% link smf.md %})
     - [Software engineer salary]({% link salary.md %})
 - Sections
     - [Security]({% link security.md %})
     - [Software engineering management]({% link engman.md %})
-    - [Class-based programming]({% link cbp.md %})
-    - [Software]({% link software.md %})
+    - Developing software for the Web
+        - [Software]({% link software.md %})
 - These pages may be outdated:
     - [Ansible]({% link ansible.md %})
     - [Logging]({% link logging.md %})
