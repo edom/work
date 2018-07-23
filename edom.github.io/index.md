@@ -19,8 +19,8 @@ date: 2017-05-20 00:00:00 +0700
                 - Forward engineering
                     - [Making the only programming language we will ever need]({% link plres.md %})
                         - [Argument for static typing]({% link statyp.md %})
-                - Reverse engineering
-                    - [Reverse-engineering an Indonesian stock trading application written in Java 6]({% link reveng.md %})
+                - [Reverse engineering]({% link reveng.md %})
+                    - [Reverse engineering the network protocol used by a Java desktop application: a stock trading application written in Java 6]({% link rejava.md %})
                     - [Reverse-engineering PlayStation 1 3D games to control the camera]({% link ps1.md %})
             - Computational complexity
                 - [Trying to prove P neq. NP]({% link pnptry.md %})

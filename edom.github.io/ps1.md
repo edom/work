@@ -1,11 +1,11 @@
 ---
-title: PlayStation
+title: Reverse-engineering PlayStation 1 3D games to control the camera
 date: 2018-05-25 00:00 +0700
 permalink: /ps1.html
 ---
 
 - I want to move the camera arbitrarily in the PlayStation game "Street Fighter EX plus alpha".
-    - The same technique might be applicable to other 3D PS1 games such as "Tekken 3".
+    - The same technique might be applicable to other 3D PS1 games such as "Street Fighter EX2 plus", "Tekken 3", and "Fighting Layer" (Namco System 12, beefed-up PlayStation 1).
     - Interesting instructions: RTPT, CTC2.
         - I think that's the only way the game can render the graphics at 30 fps, given the hardware.
         - Need some knowledge of linear algebra and computer graphics.
@@ -16,6 +16,15 @@ permalink: /ps1.html
         Find the bottom-most call that coincides with the rendering of one frame.
             - Insert breakpoint.
             - Go until return.
+        - Use GDB.
+        Turn on debug info.
+        Disable optimization.
+        Write some tracing code.
+        Use GDB to toggle the code.
+        Write a line to trace output file every time a CTC2 or RTPT instruction is executed.
+        Every line contains register values (including program counter PC).
+        - Add GDB script to run current function until it returns.
+        Do this by putting a temporary breakpoint at `$ra`.
 - How to use GDB to debug MAME?
     - PCSX is easy to debug because it is in C, uses global variables (such as `psxRegs`), and doesn't care about 100% faithful emulation.
     - MAME uses C++ and tries to emulate the whole hardware.
