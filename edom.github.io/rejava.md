@@ -14,32 +14,74 @@ permalink: /rejava.html
     and [SO 4951517](https://stackoverflow.com/questions/4951517/static-analysis-of-java-call-graph).
     - AspectJ Aspect Oriented Programming, bytecode instrumentation, bytecode manipulation
     - [Helios decompiler](https://github.com/helios-decompiler/standalone-app): "All-in-one Java reverse engineering tool"
-- Tracing method calls (producing dynamic call trace)
-    - Using AspectJ
-        - The plan
-            - Print something everytime a method is called.
-            - Insert bytecode at the beginning of every method.
-            - Exclude `java.*` and `javax.*` classes, but include `java.net.*` and `java.nio.*`.
-            Also include everything else.
-        - What is the minimum knowledge necessary to make sense of AspectJ?
-        Where is the crash course?
-            - What can it do that we need?
-                - Using AspectJ, we can insert tracing code at the beginning of every method at class load time.
-            - "Aspect weaving" is bytecode manipulation.
-            - short read, [baeldung.com: Intro to AspectJ](http://www.baeldung.com/aspectj)
-            - long read, [The AspectJ™ Programming Guide](https://www.eclipse.org/aspectj/doc/next/progguide/index.html)
-            - [Downloads](https://www.eclipse.org/aspectj/downloads.php): Do we have to do this? Can we use Maven instead?
-            - [FAQ](https://www.eclipse.org/aspectj/doc/released/faq.php)
-        - Sample codes
-            - Good task-oriented AspectJ cookbook: [4.1. Capturing a Method Call](https://www.safaribooksonline.com/library/view/aspectj-cookbook/0596006543/ch04s02.html)
-            - https://www.yegor256.com/2014/06/01/aop-aspectj-java-method-logging.html
-            - [Tracing method calls in Java with JDB](https://teaspoon-consulting.com/articles/tracing-java-method-calls.html)
-            - 2007, article, [Five ways for tracing Java execution](http://blog.zvikico.com/2007/11/five-ways-for-t.html)
-            - https://stackoverflow.com/questions/19850695/does-java-have-any-mechanism-for-a-vm-to-trace-method-calls-on-itself-without-u
-                - Use Javassist?
-            - https://stackoverflow.com/questions/49159666/how-to-intercept-each-method-call-within-given-method-using-spring-aop-or-aspect
-            - https://mathewjhall.wordpress.com/2011/03/31/tracing-java-method-execution-with-aspectj/
-            - https://www.rhyous.com/2012/05/26/aop-logging-all-method-calls-and-executions-in-java-with-aspectj/
+- Producing static call graph Using `java-callgraph`
+    - Building, assuming JDK 8 and Maven 3 are installed:
+```
+git clone git@github.com:gousiosg/java-callgraph.git
+cd java-callgraph
+mvn package
+```
+    - Producing static call graph of classes in JAR files:
+```
+java -jar target/javacg-0.1-SNAPSHOT-static.jar JAR1 JAR2 ...
+```
+        - The graph representation is adjacency list.
+        One line of text represents one edge in the call graph.
+        The format is documented at its [GitHub page](https://github.com/gousiosg/java-callgraph).
+        A line `X Y` means the method X calls the method Y.
+        - It only works with JARs.
+        It doesn't work with directories.
+    - We can also produce a class dependency graph using the `jdeps` tool that comes with the JDK.
+    - Discerning the static call graph
+        - `egrep -i 'java.net|netty|crypt|msgpack|buffer' static | egrep -v 'java.lang|java.awt|javax.swing' | sort | less`
+        - Which methods have anything to do with encryption?
+            - `awk '$2 ~ /crypt/' static | sort`
+            - The class `a.a.c.d` is the only class that uses `javax.crypto.*`.
+        - Which methods use the class `a.a.c.d`?
+            - `awk '$2 ~ /a.a.c.d/' static | sort`
+        - What other methods are interesting?
+            - `java.net.Socket.get(Input|Output)Stream`
+            - `netty`
+        - After reading the static call graph, I think this might be how the app sends a message:
+            - Construct plaintext message using msgpack.
+            - Encrypt the plaintext, producing ciphertext, probably a ByteBuffer.
+            - Send the ciphertext with java.net or netty.
+- Tracing runtime method calls using AspectJ
+    - Download the latest stable release of AspectJ (1.9.1 as of 2018-04-20) from the [official download page](https://www.eclipse.org/aspectj/downloads.php).
+    It's an installer.
+        - Install it using `java -jar aspectj-1.9.1.jar` (change the filename if required).
+            - Read the `README-AspectJ.html` whose exact location is displayed at the end of installation.
+        - Read [The AspectJ™ development environment guide, Chapter 5, "Load-time-weaving"](https://www.eclipse.org/aspectj/doc/released/devguide/ltw.html).
+    - The plan
+        - Print something everytime a method is called.
+        - Insert bytecode at the beginning of every method.
+        - Exclude `java.*` and `javax.*` classes, but include `java.net.*` and `java.nio.*`.
+        Also include everything else.
+    - What is the minimum knowledge necessary to make sense of AspectJ?
+    Where is the crash course?
+        - What can it do that we need?
+            - Using AspectJ, we can insert tracing code at the beginning of every method at class load time.
+        - "Aspect weaving" is bytecode manipulation.
+        - short read, [baeldung.com: Intro to AspectJ](http://www.baeldung.com/aspectj)
+        - long read, [The AspectJ™ Programming Guide](https://www.eclipse.org/aspectj/doc/next/progguide/index.html)
+        - [Downloads](https://www.eclipse.org/aspectj/downloads.php): Do we have to do this? Can we use Maven instead?
+        - [FAQ](https://www.eclipse.org/aspectj/doc/released/faq.php)
+    - Sample codes
+        - Good task-oriented AspectJ cookbook: [4.1. Capturing a Method Call](https://www.safaribooksonline.com/library/view/aspectj-cookbook/0596006543/ch04s02.html)
+        - https://www.yegor256.com/2014/06/01/aop-aspectj-java-method-logging.html
+        - [Tracing method calls in Java with JDB](https://teaspoon-consulting.com/articles/tracing-java-method-calls.html)
+        - 2007, article, [Five ways for tracing Java execution](http://blog.zvikico.com/2007/11/five-ways-for-t.html)
+        - https://stackoverflow.com/questions/19850695/does-java-have-any-mechanism-for-a-vm-to-trace-method-calls-on-itself-without-u
+            - Use Javassist?
+        - https://stackoverflow.com/questions/49159666/how-to-intercept-each-method-call-within-given-method-using-spring-aop-or-aspect
+        - https://mathewjhall.wordpress.com/2011/03/31/tracing-java-method-execution-with-aspectj/
+        - https://www.rhyous.com/2012/05/26/aop-logging-all-method-calls-and-executions-in-java-with-aspectj/
+- The use cases we are interested in
+    - Check application updates.
+    - Check news.
+    - Log in.
+    - Get stock data?
+    - Place order?
 - The plan:
     - Do we need a call graph or call trace?
     Will a trace suffice?
