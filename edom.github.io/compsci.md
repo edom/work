@@ -5,8 +5,6 @@ permalink: /compsci.html
 mathjax: yes
 ---
 
-- [Functional programming research]({% link functional_programming.md %})
-- [Joint research with Abdullah]({% link abdullah.md %})
 - Functional programming research
     - [Haskell]({% link haskell.md %})
     - [Coq]({% link coq.md %})
@@ -15,10 +13,6 @@ mathjax: yes
                 - Integrates with Visual Studio Code
             - Cons of Lean
                 - Less mature than Coq
-- [Software engineering]({% link softeng.md %})
-    - [Programming]({% link programming.md %})
-- Why is "functional programming research" under "computer science", but "programming" is under "software engineering"?
-    - Is there any other way to taxonomize this?
 - [Cryptocurrency]({% link crycur.md %})
 - [Matt Might: What CS majors should know](http://matt.might.net/articles/what-cs-majors-should-know/)
 - [Wikipedia: List of important publications in computer science](https://en.m.wikipedia.org/wiki/List_of_important_publications_in_computer_science)
@@ -29,13 +23,6 @@ mathjax: yes
     - What is problem, computation, complexity, P, NP?
     - Can we construct a problem that is in NP but not in P?
     - Can we show that P = NP leads to contradiction?
-- Parsing
-    - Brzozowski quotients.
-        - [Yacc is dead](https://arxiv.org/abs/1010.5023)
-        - "Parsing with derivatives"
-- I thought lambda calculus could be summarized in one page, but Henk Barendregt wrote hundreds of pages about it. Is there more to lambda calculus than it seems?
-    - 1994, 50 pages, http://www.nyu.edu/projects/barker/Lambda/barendregt.94.pdf
-    - 1991, 190 pages, https://people.mpi-sws.org/~dreyer/tor/papers/barendregt.pdf
 - Undigested
     - [CSTSE 17502: What is a simple toy research programming language that has simple denotational semantics?](https://cstheory.stackexchange.com/questions/17502/a-simple-programming-language)
     - [Fast Approximate Matrix Multiplication by Solving Linear Systems](https://arxiv.org/abs/1408.4230)
@@ -116,10 +103,6 @@ mathjax: yes
         - 1991, Felleisen, "On the expressiveness of programming languages"
             - 1989, Hoare, "The varieties of programming languages"
             - 1988, Williams, "On the formalization of semantic conventions"
-    - Compiler construction
-        - From grammar description, the machine should generate both a parser and a pretty-printer.
-            - [LTU: Invertible Syntax Descriptions: Unifying Parsing and Pretty Printing](http://lambda-the-ultimate.org/node/4191)
-            - [Invertible Syntax Descriptions: Unifying Parsing and Pretty Printing](http://www.informatik.uni-marburg.de/~rendel/unparse/rendel10invertible.pdf)
     - Unread
         - http://fsl.cs.illinois.edu/index.php/Programming_Language_Design_and_Semantics
         - zig is better than go?

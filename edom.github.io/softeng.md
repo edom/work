@@ -1,5 +1,5 @@
 ---
-title: Software engineering
+title: Making lasting software
 date: 2018-04-15 00:00 +0700
 permalink: /softeng.html
 ---
@@ -9,6 +9,26 @@ permalink: /softeng.html
     - Task-oriented documentation
         - Documentation doesn't have to be separate from code.
     - What else?
+    - *Capture* the requirement.
+    Translate the requirement into software, instead of making a software system that *satisfies* the requirement.
+        - The program may be rewritten, but the functional requirements, the business logic and the mathematical truths rarely change.
+            - In order to make software last, we must *capture* the requirements, not make a system that satisfies the requirements.
+            This requires a change in mindset.
+            The software is not something made to some requirements; the software is the requirements itself.
+            The software is not the shirt made-to-order; the software is the order itself, from which all satisfying shirts can be generated/derived/produced.
+- Readings
+    - 2018, book, "The essence of software engineering", [description](https://link.springer.com/book/10.1007/978-3-319-73897-0), [pdf](https://link.springer.com/content/pdf/10.1007%2F978-3-319-73897-0.pdf)
+        - chapter, "What is software?: The role of empirical methods in answering the question", [description](https://link.springer.com/chapter/10.1007/978-3-319-73897-0_4), [pdf](https://link.springer.com/content/pdf/10.1007%2F978-3-319-73897-0_4.pdf)
+    - [ICSE (International Conference on Software Engineering) most influential articles](http://www.icse-conferences.org/mostinfluential.html)
+        - "ICSE is the flagship conference of [software engineering] [...]." ([Georgios Gousios](http://www.gousios.org/blog/Report-from-ICSE-2017.html))
+            - 2008, article, "Debugging Reinvented: Asking and Answering Why and Why Not Questions About Program Behavior ICSE-30"
+                - https://www.cs.cmu.edu/~NatProg/whyline.html
+                - https://github.com/andyjko/whyline
+            - 2012, slides, "Connecting Software Architecture to Implementation: The Next 10 Years", [pdf](http://www.cs.cmu.edu/~aldrich/presentations/aldrich-icse-mip-2012.pdf)
+                - 2002, article, "ArchJava: Connecting Software Architecture to Implementation", [pdf](https://www.ics.uci.edu/~andre/informatics223s2009/aldrichchambersnotkin.pdf)
+            - 1997, article, "Software processes are software too, revisited", [pdf](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.148.7620&rep=rep1&type=pdf)
+                - 1987, article, "Software processes are software too", [pdf](http://laser.cs.umass.edu/techreports/1987-LJO.pdf)
+    - 2018, slides, "What would a science of software engineering look like?", [pdf](http://herbsleb.org/web-pres/slides/crowd-chase-2018-final-dist.pdf)
 - References
     - [Standard MIDI file format]({% link smf.md %})
     - [Software engineer salary]({% link salary.md %})
@@ -178,6 +198,7 @@ A typo in the source code is not a bug.
             - IntelliJ IDEA comes with Maven.
         - .NET: Install Mono, install Monodevelop 5.
             - Monodevelop 5 comes with Nuget.
+        - Database should be a library, not a stand-alone server.
 - software legality?
     - Harmony CLA (Contributor License Agreement)?
 - What cause software errors?

@@ -27,6 +27,9 @@ date: 2018-07-22 02:45 +0700
 - Software is executable mathematics.
 - Every functional programming language is lambda calculus plus plus.
     - Every functional programming language L can be modeled by a category C(L) whose objects are the types of L and arrows are the function expressions of L.
+    - I thought lambda calculus could be summarized in one page, but Henk Barendregt wrote hundreds of pages about it. Is there more to lambda calculus than it seems?
+        - 1994, 50 pages, http://www.nyu.edu/projects/barker/Lambda/barendregt.94.pdf
+        - 1991, 190 pages, https://people.mpi-sws.org/~dreyer/tor/papers/barendregt.pdf
 - where to find more
     - recent programming language research
         - meetings, conferences, symposiums
@@ -362,13 +365,20 @@ Things that I think are wrong in 2018.
             - "Polymorphism, subtyping and type inference in MLsub" http://www.cl.cam.ac.uk/~sd601/papers/mlsub-preprint.pdf
                 - from http://lambda-the-ultimate.org/node/5393
                      - from https://contributors.scala-lang.org/t/algebraic-subtyping/577
-- parsing, grammar
-    - ramble
-        - Inverse of parsing is generation? From grammar, generate all possible strings and their syntax trees.
-        - Inverse of analytical grammar is generative grammar?
-        - Parser is syntax analyzer.
-        - Analysis is the opposite of synthesis?
-        - What is syntax synthesizer?
-        - Inverse of parsing is pretty-printing?
-        - If matching is analogous to subtraction, then what is analogous to multiplication? Generation?
 - [Class-based programming]({% link cbp.md %})
+- Making compilers
+    - From grammar description, the machine should generate both a parser and a pretty-printer.
+        - [LTU: Invertible Syntax Descriptions: Unifying Parsing and Pretty Printing](http://lambda-the-ultimate.org/node/4191)
+        - [Invertible Syntax Descriptions: Unifying Parsing and Pretty Printing](http://www.informatik.uni-marburg.de/~rendel/unparse/rendel10invertible.pdf)
+    - Syntax analysis (parsing)
+        - Brzozowski quotients.
+            - [Yacc is dead](https://arxiv.org/abs/1010.5023)
+            - "Parsing with derivatives"
+        - What is an/the inverse of parsing?
+            - Inverse of parsing is generation? From grammar, generate all possible strings and their syntax trees.
+            - Inverse of analytical grammar is generative grammar?
+            - Parser is syntax analyzer.
+            - Analysis is the opposite of synthesis?
+            - What is syntax synthesizer?
+            - Inverse of parsing is pretty-printing?
+            - If matching is analogous to subtraction, then what is analogous to multiplication? Generation?

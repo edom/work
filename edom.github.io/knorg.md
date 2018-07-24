@@ -54,3 +54,5 @@ Can machine cluster documents by the task they help accomplish?
         - https://www.microsoft.com/en-us/research/blog/transfer-learning-machine-reading-comprehension/
         - https://futurism.com/machines-beat-humans-stanford-reading-comprehension-test/
         - 2018, article, "Adversarial reading networks for machine comprehension", [review](https://openreview.net/forum?id=Hy3MvSlRW), "Interesting idea, unconvincing results"
+- 2002, slides, ["Expertise browser: a quantitative approach to identifying expertise"](http://mockus.us/papers/exbpresentation.pdf)
+    - http://mockus.org/ExV/index.html

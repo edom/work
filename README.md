@@ -34,3 +34,8 @@
 - https://en.wikipedia.org/wiki/Multi-adjoint_logic_programming
 - https://medium.com/netflix-techblog/linux-performance-analysis-in-60-000-milliseconds-accc10403c55
 - Keynote - What's Different In Dotty by Martin Odersky https://www.youtube.com/watch?v=9lWrt6H6UdE
+- Building the website
+    - Install Jekyll 3 on Ubuntu 14.04
+        - See (but don't blindly follow) https://gist.github.com/Piyush3dB/b7daa3f178746c7d7479ca1cbd694160
+        - Use [rbenv](https://github.com/rbenv/rbenv) to install newer Ruby versions.
+        - Ubuntu 14.04 Jekyll is too ancient for GitHub Pages.
