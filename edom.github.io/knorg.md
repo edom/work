@@ -56,3 +56,6 @@ Can machine cluster documents by the task they help accomplish?
         - 2018, article, "Adversarial reading networks for machine comprehension", [review](https://openreview.net/forum?id=Hy3MvSlRW), "Interesting idea, unconvincing results"
 - 2002, slides, ["Expertise browser: a quantitative approach to identifying expertise"](http://mockus.us/papers/exbpresentation.pdf)
     - http://mockus.org/ExV/index.html
+- Undigested
+    - [PMSE 2780: How to organize knowledge within a wiki?](https://pm.stackexchange.com/questions/2780/how-to-organize-knowledge-within-a-wiki)
+    - https://www.quora.com/What-is-the-best-way-to-organize-a-company-wiki

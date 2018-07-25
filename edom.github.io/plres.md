@@ -382,3 +382,5 @@ Things that I think are wrong in 2018.
             - What is syntax synthesizer?
             - Inverse of parsing is pretty-printing?
             - If matching is analogous to subtraction, then what is analogous to multiplication? Generation?
+- Supercompilation
+    - [LTU: Ongoing work on Supercompilation of Java code (or supercompilation in general)?](http://lambda-the-ultimate.org/node/2739)

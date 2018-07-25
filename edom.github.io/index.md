@@ -23,6 +23,7 @@ date: 2017-05-20 00:00:00 +0700
                             - [Functional programming research]({% link functional_programming.md %})
                             - [Joint research with Abdullah]({% link abdullah.md %})
                             - [Programming]({% link programming.md %})
+                    - [Using Java]({% link java.md %})
                     - [Making contributable open-source projects]({% link opensrc.md %})
                 - [Reverse engineering]({% link reveng.md %})
                     - [Reverse engineering the network protocol used by a Java desktop application]({% link rejava.md %}): a stock trading application written in Java 6

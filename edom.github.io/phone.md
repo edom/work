@@ -50,3 +50,4 @@ Why isn't there any?
     - https://www.thanassis.space/android.html
     - https://www.linuxjournal.com/content/maru-os-brings-debian-your-phone
     - or just buy a laptop/notebook/netbook and a GSM dongle
+- Why are Android phones so sluggish?

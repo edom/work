@@ -35,6 +35,12 @@ Philosophy is about truth.
     - [WP:Truth](https://en.wikipedia.org/wiki/Truth)
     - [WP:Proof theory](https://en.wikipedia.org/wiki/Proof_theory)
     - [WP:Provability logic](https://en.wikipedia.org/wiki/Provability_logic)
+- Enforceability is important.
+An unenforceable law practically doesn't exist.
+    - This is why government requires the employer to withhold employee income tax.
+    This is why the employee doesn't pay the income tax directly.
+        - There are much fewer employees than employees.
+        - It's easier to arrest employers than employees.
 - Ontology
     - complain, complainant, plaintiff
     - defend, defendant, suspect, convict, felon, recidivist

@@ -39,3 +39,10 @@
         - See (but don't blindly follow) https://gist.github.com/Piyush3dB/b7daa3f178746c7d7479ca1cbd694160
         - Use [rbenv](https://github.com/rbenv/rbenv) to install newer Ruby versions.
         - Ubuntu 14.04 Jekyll is too ancient for GitHub Pages.
+    - Why is Jekyll slow on my machine?
+        - It's fast on GitHub.
+        - What is making it slow?
+            - How do we find that out?
+                - Is there a stack-sampling profiler for Ruby?
+                    - Yes, `conscho` in [SO 4092641](https://stackoverflow.com/questions/4092641/profiling-ruby-code) recommends `stackprof`.
+        - On second thought, it's not too slow.
