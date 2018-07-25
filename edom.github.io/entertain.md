@@ -265,3 +265,4 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
     - botched Canadian robbery: [Woman falls through the ceiling in convenience store (Metal Gear Version)](https://www.youtube.com/watch?v=w-E7kz9I0wk)
 - [CGI Animated Short Film HD "The D in David " by Michelle Yi and Yaron Farkash \| CGMeetup](https://www.youtube.com/watch?v=o2kPSAYS2wQ)
 - [Wakaliwood: Tren Terbaru Film Laga DIY dari Uganda](https://www.youtube.com/watch?v=Cg44R3-5TK)
+- TED-Ed: "Why isn't the world covered in poop? - Eleanor Slade and Paul Manning" (TLDR: dung beetles), [youtube](https://www.youtube.com/watch?v=uSTNyHkde08)

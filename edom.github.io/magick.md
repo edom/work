@@ -10,6 +10,13 @@ date: 2018-05-17 01:21 +0700
     - Related search terms (Indonesian, Javanese, Sundanese, English):
         - ajian, clairaudiance, clairvoyance, extrasensory perception, gaib (occult), gendam, ilmu, jangjawokan, kanuragan, kinasihan, linuwih, magick, medium, poltergeist, premonition, psychokinesis, reiki, remote viewing, rukyah, ruwat, sakti, santet, sihir, telekinesis, telepathy, teluh, tenaga dalam, tenung
 - [Banned TEDTalk about Psychic Abilities | Russell Targ | suespeaks.org](https://www.youtube.com/watch?v=hBl0cwyn5GY)
+- To be tested: theories, hypotheses, assertions, sometimes contradicting each other
+    - Gaia: "A Unified Theory Of The Paranormal", [youtube](https://www.youtube.com/watch?v=QinS6-0O2_Q)
+        - John A. Keel, The Mothman Propecies, The Eighth Tower
+            - electromagnetic events are often associated with paranormal events
+            - Santet has negative electric charge. Sleeping on the floor blocks santet. https://areknerut.wordpress.com/2012/11/15/hukum-fisika-sebagai-cara-untuk-menangkal-santet/
+            - Sleeping on the floor worsens santet. (7th item in the list) https://www.brilio.net/serem/7-cara-menangkal-santet-menurut-pendekar-silat-a-masruri-170924x.html
+        - Stephen Greer, CE-5 UFO summoning protocol
 - What?
     - [scry.cloud: Crowdsourcing prediction](https://scry.cloud/)
 - Undigested information

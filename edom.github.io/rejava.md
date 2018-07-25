@@ -13,8 +13,116 @@ permalink: /rejava.html
     such as in [SO 29382231](https://stackoverflow.com/questions/29382231/how-do-i-trace-methods-calls-in-java)
     and [SO 4951517](https://stackoverflow.com/questions/4951517/static-analysis-of-java-call-graph).
     - AspectJ Aspect Oriented Programming, bytecode instrumentation, bytecode manipulation
+    - IntelliJ IDEA, an IDE that comes with a class file decompiler
     - [Helios decompiler](https://github.com/helios-decompiler/standalone-app): "All-in-one Java reverse engineering tool"
+- Tracing runtime method calls using AspectJ
+    - Download the latest stable release of AspectJ (1.9.1 as of 2018-04-20) from the [official download page](https://www.eclipse.org/aspectj/downloads.php).
+    It's an installer.
+        - Install it using `java -jar aspectj-1.9.1.jar` (change the filename if required).
+            - Read the `README-AspectJ.html` whose exact location is displayed at the end of installation.
+        - Read [The AspectJ™ development environment guide, Chapter 5, "Load-time-weaving"](https://www.eclipse.org/aspectj/doc/released/devguide/ltw.html).
+    - The plan
+        - Print something everytime a method is called.
+        - Insert bytecode at the beginning of every method.
+        - Exclude `java.*` and `javax.*` classes, but include `java.net.*` and `java.nio.*`.
+        Also include everything else.
+    - What is the minimum knowledge necessary to make sense of AspectJ?
+    Where is the crash course?
+        - What can it do that we need?
+            - Using AspectJ, we can insert tracing code at the beginning of every method at class load time.
+        - "Aspect weaving" is bytecode manipulation.
+        - short read, [baeldung.com: Intro to AspectJ](http://www.baeldung.com/aspectj)
+        - long read, [The AspectJ™ Programming Guide](https://www.eclipse.org/aspectj/doc/next/progguide/index.html)
+        - [Downloads](https://www.eclipse.org/aspectj/downloads.php): Do we have to do this? Can we use Maven instead?
+        - [FAQ](https://www.eclipse.org/aspectj/doc/released/faq.php)
+    - Sample codes
+        - https://mathewjhall.wordpress.com/2011/03/31/tracing-java-method-execution-with-aspectj/
+        - Task-oriented AspectJ cookbook: [4.1. Capturing a Method Call](https://www.safaribooksonline.com/library/view/aspectj-cookbook/0596006543/ch04s02.html)
+        - https://www.yegor256.com/2014/06/01/aop-aspectj-java-method-logging.html
+        - [Tracing method calls in Java with JDB](https://teaspoon-consulting.com/articles/tracing-java-method-calls.html)
+        - 2007, article, [Five ways for tracing Java execution](http://blog.zvikico.com/2007/11/five-ways-for-t.html)
+        - https://stackoverflow.com/questions/19850695/does-java-have-any-mechanism-for-a-vm-to-trace-method-calls-on-itself-without-u
+            - Use Javassist?
+        - https://stackoverflow.com/questions/49159666/how-to-intercept-each-method-call-within-given-method-using-spring-aop-or-aspect
+        - https://www.rhyous.com/2012/05/26/aop-logging-all-method-calls-and-executions-in-java-with-aspectj/
+        - Eclipse Trace.aj sample file, [github](https://github.com/eclipse/org.aspectj/blob/master/tests/bugs/messyAround/aspects/Trace.aj)
+        - https://blog.csanchez.org/2005/03/27/tracing-an-application-using-aspec/
+- Increase log4j verbosity
+- Inferences
+    - The netty major version is 3.
+    - `esmart.feed.engine.network.d:a` determines our public IP address.
+    - `esmart.feed.engine.ui.qo:n` Socket.connects to somewhere.
+    - Initializing netty
+        - `a.a.d.e:h()` initializes netty client.
+        - `a.a.d.e:a(String,String)` connects.
+        - It uses LengthFieldBasedFrameDecoder
+            - http://netty.io/3.6/api/org/jboss/netty/handler/codec/frame/LengthFieldBasedFrameDecoder.html
+            - `var1.addLast("frameDecoder", new LengthFieldBasedFrameDecoder(2147483647, 0, 4, 0, 4, true));`
+            - `INFO 2018-07-25 22:14:40,830 [New I/O  worker #1] a.a.d.e Connected to : esmartbnis.com/202.129.186.235:62229`
+        - `a.a.d.e` extends `IdleStateAwareChannelHandler`.
+        - After the frame is decoded, the frame payload (without the length) is passed to the handler.
+        This is a callback.
+        Control is inverted.
+        Netty calls the application.
+            - http://netty.io/3.6/api/org/jboss/netty/handler/timeout/IdleStateAwareChannelHandler.html
+        - `a.a.d.e:channelConnected` calls `a.a.d.e:d()` which does login by constructing the following message:
+```
+h var1 = new h(this, "CONNECT");
+var1.a("login", this.l);
+var1.a("passcode", this.m);
+this.a(var1);
+```
+            - `a.a.d.h` is message frame/format/model/struct/POJO/bean, used by both client and server.
+                - `a.a.d.h:a()` serializes, returning a ChannelBuffer.
+                - `a.a.d.e.a(byte[])` deserializes server response, returning an `a.a.d.h`.
+            - The protocol seems to be close to [STOMP as implemented by ActiveMQ Apollo](https://activemq.apache.org/apollo/documentation/stomp-manual.html),
+                - Similarity: SUBSCRIBE has a `selector` header.
+                - Difference: SEND has a misspelled `replyto` header.
+                Apollo has `reply-to`.
+        - The protocol (as decoded by `a.a.d.e:a(byte[])`):
+            - Make a STOMP frame/message.
+            - Encode the STOMP command as the first element in a MsgPack array.
+            - Encode the STOMP header *values* in an application-predefined order as the rest of the elements of the MsgPack array.
+            Header names aren't sent over the network.
+            Header order is hard-coded in the application.
+            - Serialize the MsgPack array into byte array X.
+            - ZIP the byte array X into Y.
+            - Let the length of Y be 32-bit big-endian integer N.
+            - The byte array NY is what is sent over the network.
+            - Some data such as login/passcode are encrypted.
+        - When the client receives a server response:
+            - `a.a.d.e:messageReceived` gets executed.
+                - `a.a.d.e:b(byte[])` reacts to server response.
+                Probably changes some fields.
+                    - `a.a.d.e:a(byte[])` decodes server response bytes into a STOMP message.
+                    It's a custom binary encoding?
+                    Are the authors overlaying STOMP on a legacy protocol?
+                        - The class `a.a.c.e` does ZIP compression/decompression.
+                        - Package `a.a.b` is an unknown compressor/decompressor.
+                        - Field `a.a.c.e:B` is compression method.
+                        1 means compression in `a.a.b` package.
+                        2 means ZIP.
+            - Then probably a STOMP SEND/MESSAGE frame encapsulates a FIX (Financial Information Exchange) message.
+        - Then `a.a.d.e:a(a.a.d.h)` sends it to the server.
+    - `a.a.c.a` seems to be a base64 decoder copied from the Internet.
+        - 2003-07-22: http://www.cs.huji.ac.il/~dbi/ex2/Base64Coder.java
+            - https://github.com/chdh
+                - http://www.source-code.biz/base64coder/java/
+        - 2012-05-24: [SO 469695 answer 10736154](https://stackoverflow.com/questions/469695/decode-base64-data-in-java/10736154#10736154).
+        - 2013-11-09: https://github.com/mixpanel/mixpanel-android/blob/master/src/main/java/com/mixpanel/android/util/Base64Coder.java
+            - copyright year goes back to 2003
+    - The server is down every 00:00 -- 01:00 UTC+7.
+    - Some strings to find?
+        - `loading news failed, your connection / server not ready`
+- The use cases we are interested in
+    - Check application updates.
+    - Check news.
+    - Log in.
+    - Get stock data?
+    - Place order?
 - Producing static call graph Using `java-callgraph`
+    - In hindsight, this step is unnecessary.
+    We should have begun with runtime method tracing using AspectJ and bytecode decompiling using IntelliJ IDEA.
     - Building, assuming JDK 8 and Maven 3 are installed:
 ```
 git clone git@github.com:gousiosg/java-callgraph.git
@@ -46,42 +154,6 @@ java -jar target/javacg-0.1-SNAPSHOT-static.jar JAR1 JAR2 ...
             - Construct plaintext message using msgpack.
             - Encrypt the plaintext, producing ciphertext, probably a ByteBuffer.
             - Send the ciphertext with java.net or netty.
-- Tracing runtime method calls using AspectJ
-    - Download the latest stable release of AspectJ (1.9.1 as of 2018-04-20) from the [official download page](https://www.eclipse.org/aspectj/downloads.php).
-    It's an installer.
-        - Install it using `java -jar aspectj-1.9.1.jar` (change the filename if required).
-            - Read the `README-AspectJ.html` whose exact location is displayed at the end of installation.
-        - Read [The AspectJ™ development environment guide, Chapter 5, "Load-time-weaving"](https://www.eclipse.org/aspectj/doc/released/devguide/ltw.html).
-    - The plan
-        - Print something everytime a method is called.
-        - Insert bytecode at the beginning of every method.
-        - Exclude `java.*` and `javax.*` classes, but include `java.net.*` and `java.nio.*`.
-        Also include everything else.
-    - What is the minimum knowledge necessary to make sense of AspectJ?
-    Where is the crash course?
-        - What can it do that we need?
-            - Using AspectJ, we can insert tracing code at the beginning of every method at class load time.
-        - "Aspect weaving" is bytecode manipulation.
-        - short read, [baeldung.com: Intro to AspectJ](http://www.baeldung.com/aspectj)
-        - long read, [The AspectJ™ Programming Guide](https://www.eclipse.org/aspectj/doc/next/progguide/index.html)
-        - [Downloads](https://www.eclipse.org/aspectj/downloads.php): Do we have to do this? Can we use Maven instead?
-        - [FAQ](https://www.eclipse.org/aspectj/doc/released/faq.php)
-    - Sample codes
-        - Good task-oriented AspectJ cookbook: [4.1. Capturing a Method Call](https://www.safaribooksonline.com/library/view/aspectj-cookbook/0596006543/ch04s02.html)
-        - https://www.yegor256.com/2014/06/01/aop-aspectj-java-method-logging.html
-        - [Tracing method calls in Java with JDB](https://teaspoon-consulting.com/articles/tracing-java-method-calls.html)
-        - 2007, article, [Five ways for tracing Java execution](http://blog.zvikico.com/2007/11/five-ways-for-t.html)
-        - https://stackoverflow.com/questions/19850695/does-java-have-any-mechanism-for-a-vm-to-trace-method-calls-on-itself-without-u
-            - Use Javassist?
-        - https://stackoverflow.com/questions/49159666/how-to-intercept-each-method-call-within-given-method-using-spring-aop-or-aspect
-        - https://mathewjhall.wordpress.com/2011/03/31/tracing-java-method-execution-with-aspectj/
-        - https://www.rhyous.com/2012/05/26/aop-logging-all-method-calls-and-executions-in-java-with-aspectj/
-- The use cases we are interested in
-    - Check application updates.
-    - Check news.
-    - Log in.
-    - Get stock data?
-    - Place order?
 - The plan:
     - Do we need a call graph or call trace?
     Will a trace suffice?
@@ -151,7 +223,6 @@ java -jar target/javacg-0.1-SNAPSHOT-static.jar JAR1 JAR2 ...
             - It uses a serialization library `msgpack`. Perhaps put breakpoints there?
     - Write a program to dump the call graph of every call to netty class from non-netty class.
 - Obstacles and woes:
-    - Its obfuscation outsmarts IntelliJ IDEA's decompiler.
     - There is no `chdir` in Java standard library, and it seems that there will never be.
     See [WONTFIX: JDK-4045688: "Add chdir or equivalent notion of changing working directory"](https://bugs.openjdk.java.net/browse/JDK-4045688).
     - Method entry event is abysmally slow because it forces bytecode interpretation ([SO 751105](https://stackoverflow.com/questions/751105/why-does-the-debugged-program-slow-down-so-much-when-using-method-entry-debuggin/api.stackexchange.com)).

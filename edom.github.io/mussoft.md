@@ -44,3 +44,8 @@ date: 2016-03-27 14:14:08 +0700
     - [arecordmidi](https://linux.die.net/man/1/arecordmidi)
     - [gbevin/sendmidi](https://github.com/gbevin/SendMIDI)
     - [Cmidi](https://github.com/naglalakk/Cmidi), MIDI sequencer for command line, alpha
+    - Music transcription software
+        - https://www.musical-u.com/learn/whats-the-best-program-to-transcribe-music/
+        - http://scorecloud.com/
+        - https://www.lunaverus.com/
+        - https://music.stackexchange.com/questions/4514/is-there-a-computer-program-to-transcribe-songs-to-sheet-music
