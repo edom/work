@@ -111,7 +111,12 @@ this.a(var1);
         - 2012-05-24: [SO 469695 answer 10736154](https://stackoverflow.com/questions/469695/decode-base64-data-in-java/10736154#10736154).
         - 2013-11-09: https://github.com/mixpanel/mixpanel-android/blob/master/src/main/java/com/mixpanel/android/util/Base64Coder.java
             - copyright year goes back to 2003
-    - The server is down every 00:00 -- 01:00 UTC+7.
+    - Schedule problems
+        - The server is down every 00:00 -- 01:00 UTC+7.
+        - The traffic is only interesting in the [trading hours](http://www.idx.co.id/en-us/investor/trading-hours/).
+            - We can't just reverse-engineer the program at any convenient time.
+                - Capture the traffic.
+                - Analyze the traffic later when there is time.
     - Some strings to find?
         - `loading news failed, your connection / server not ready`
 - The use cases we are interested in
