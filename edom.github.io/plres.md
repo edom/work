@@ -384,3 +384,6 @@ Things that I think are wrong in 2018.
             - If matching is analogous to subtraction, then what is analogous to multiplication? Generation?
 - Supercompilation
     - [LTU: Ongoing work on Supercompilation of Java code (or supercompilation in general)?](http://lambda-the-ultimate.org/node/2739)
+- Metaprogramming
+    - http://kaitai.io/
+        - from description, generate parsers for binary data (as opposed to text data)

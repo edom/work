@@ -59,12 +59,33 @@ permalink: /rejava.html
             - http://netty.io/3.6/api/org/jboss/netty/handler/codec/frame/LengthFieldBasedFrameDecoder.html
             - `var1.addLast("frameDecoder", new LengthFieldBasedFrameDecoder(2147483647, 0, 4, 0, 4, true));`
             - `INFO 2018-07-25 22:14:40,830 [New I/O  worker #1] a.a.d.e Connected to : esmartbnis.com/202.129.186.235:62229`
+                - server IP addresses
+                    - 202.129.186.235
+                    - 180.178.108.230
         - `a.a.d.e` extends `IdleStateAwareChannelHandler`.
         - After the frame is decoded, the frame payload (without the length) is passed to the handler.
-        This is a callback.
+        - `a.a.d.e:a(byte[])` and `a.a.d.h:a` are supposed to be inverses of each other.
+        - `a.a.d.h:a()` encrypts a serialized MsgPack array using `a.a.c.c:a(byte[])`,
+        a polyalphabetic substitution cipher that is its own inverse:
+        applying the cipher twice (with the same key) gives the original message.
+        - Application uses callback.
         Control is inverted.
         Netty calls the application.
             - http://netty.io/3.6/api/org/jboss/netty/handler/timeout/IdleStateAwareChannelHandler.html
+        - Servers (open ports) at esmartbnis.com
+            - News server uses port 843.
+            Input is XML.
+            Output is JSON.
+            - Update server uses FTP (port 21 for control).
+            - Feed server uses port 62229.
+                - Traffic to server is compressed and encrypted.
+                - Traffic from server is compressed but not encrypted.
+                - Encryption
+                    - Client generates symmetric key S (in practice the String representation of a random UUID).
+                    - Client constructs and encodes a STOMP frame CONNECT with login, passcode, and S.
+                    - Client encrypts the bytes using server RSA public key hardcoded in client.
+                    - Client encrypts the following frames with S using `a.a.c.c:a(byte[])`.
+            - Trading server uses port 63339.
         - `a.a.d.e:channelConnected` calls `a.a.d.e:d()` which does login by constructing the following message:
 ```
 h var1 = new h(this, "CONNECT");
@@ -90,6 +111,13 @@ this.a(var1);
             - Let the length of Y be 32-bit big-endian integer N.
             - The byte array NY is what is sent over the network.
             - Some data such as login/passcode are encrypted.
+        - `a.a.c.d:a(byte[],PublicKey)` encrypts the byte array using `RSA/ECB/PKCS1Padding` cipher.
+        - Java libpcap wrapper
+            - [pcap4j](https://www.pcap4j.org/), [github](https://github.com/kaitoy/pcap4j)
+            - jnetpcap
+            - pcap4j looks best, so we pick it.
+                - https://github.com/java-native-access/jna/issues/281
+                    - `-Djna.nosys=true`
         - When the client receives a server response:
             - `a.a.d.e:messageReceived` gets executed.
                 - `a.a.d.e:b(byte[])` reacts to server response.
@@ -102,6 +130,7 @@ this.a(var1);
                         - Field `a.a.c.e:B` is compression method.
                         1 means compression in `a.a.b` package.
                         2 means ZIP.
+                        - Ubuntu 14.04: `zlib-flate` CLI from `qpdf` package, compress/decompress stdin to stdout
             - Then probably a STOMP SEND/MESSAGE frame encapsulates a FIX (Financial Information Exchange) message.
         - Then `a.a.d.e:a(a.a.d.h)` sends it to the server.
     - `a.a.c.a` seems to be a base64 decoder copied from the Internet.
