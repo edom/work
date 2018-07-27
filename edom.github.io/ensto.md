@@ -17,3 +17,4 @@ permalink: /ensto.html
 - Undigested
     - glass-electrolyte battery, [This New 'Perfect' Battery Has Experts Stumped](https://www.youtube.com/watch?v=YAg_8iCLIIw)
     - [These Squishy Batteries Are Made Out of Water, Here’s How They Work](https://www.youtube.com/watch?v=3BZFyT-VC-I)
+    - [Graphene balls for lithium rechargeable batteries with fast charging and high volumetric energy densities](https://www.nature.com/articles/s41467-017-01823-7)

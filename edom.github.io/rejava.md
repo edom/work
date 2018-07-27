@@ -146,8 +146,17 @@ this.a(var1);
             - We can't just reverse-engineer the program at any convenient time.
                 - Capture the traffic.
                 - Analyze the traffic later when there is time.
+    - The server is also accessible via [http://esmartbnis.com](http://esmartbnis.com).
+    It uses HTTP, JavaScript, WebSocket.
+    It should use the same protocol as the Java client.
     - Some strings to find?
         - `loading news failed, your connection / server not ready`
+        - The string `63339` is in `TradingComm`.
+    - `esmart.feed.engine.network.d` gets the client IP address.
+    It's copied from the Internet.
+        - created on 2013-12-06 https://stackoverflow.com/questions/9481865/getting-the-ip-address-of-the-current-machine-using-java/20418809#20418809
+            - created on 2008-03-04 https://issues.apache.org/jira/browse/JCS-40
+- How do we write our own ClassLoader using Javassist, and use it as the boot classloader?
 - The use cases we are interested in
     - Check application updates.
     - Check news.
