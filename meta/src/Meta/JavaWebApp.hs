@@ -292,7 +292,7 @@ content_to_java_sta e_output con = case con of
             e_i = J.e_name "i"
             sql = DQ.renderSqlSelect query
             cols = D.t_get_cols table
-            column_count = length cols
+            column_count = length cols :: Int
             header =
                 [
                     append_str $

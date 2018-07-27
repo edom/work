@@ -74,7 +74,7 @@ module Meta.Prelude (
     , P.foldl
     , P.foldr
     , P.null
-    , P.length
+    , Length(..)
     , P.reverse
     , L.isPrefixOf
     , IsInfixOf(..)
@@ -236,6 +236,18 @@ instance Filter [a] a where
 
 instance Filter (V.Vector a) a where
     filter = V.filter
+
+class Length a n where
+    length :: a -> n
+
+instance (P.Integral n) => Length [a] n where
+    length = P.fromIntegral . P.length
+
+instance (P.Integral n) => Length B.ByteString n where
+    length = P.fromIntegral . BS.length
+
+instance (P.Integral n) => Length B.LazyByteString n where
+    length = P.fromIntegral . BSL.length
 
 class IsInfixOf a where
     isInfixOf :: a -> a -> Bool
