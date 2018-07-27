@@ -48,6 +48,14 @@ permalink: /rejava.html
         - Eclipse Trace.aj sample file, [github](https://github.com/eclipse/org.aspectj/blob/master/tests/bugs/messyAround/aspects/Trace.aj)
         - https://blog.csanchez.org/2005/03/27/tracing-an-application-using-aspec/
 - Increase log4j verbosity
+- Trading login
+```
+2018-07-27T15:11:09.132Z	main	void esmart.trading.engine.TradingComm.a(i, g) -> void esmart.trading.engine.TradingComm.m()
+2018-07-27T15:12:06.743Z	Thread-37	void esmart.trading.engine.TradingComm.a(String, String, d) -> void esmart.trading.engine.TradingComm.m()
+```
+    - `esmart.trading.engine.TradingComm:a(i,g)` starts two threads:
+        - The thread `o` (of type `a.a.a.b`).
+        - The thread `p` (of type `a.a.a.c`).
 - Inferences
     - The netty major version is 3.
     - `esmart.feed.engine.network.d:a` determines our public IP address.
@@ -83,7 +91,7 @@ permalink: /rejava.html
                 - Encryption
                     - Client generates symmetric key S (in practice the String representation of a random UUID).
                     - Client constructs and encodes a STOMP frame CONNECT with login, passcode, and S.
-                    - Client encrypts the bytes using server RSA public key hardcoded in client.
+                    - Client encrypts the bytes using server RSA 1024-bit public key hardcoded in client, in ECB mode, with PKCS#1 (v1.5) padding.
                     - Client encrypts the following frames with S using `a.a.c.c:a(byte[])`.
             - Trading server uses port 63339.
         - `a.a.d.e:channelConnected` calls `a.a.d.e:d()` which does login by constructing the following message:
