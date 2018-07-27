@@ -112,7 +112,7 @@ module Meta.Prelude (
     , P.FilePath
     , P.IO
     , getLine
-    , putStr
+    , PutStr(..)
     , putStrLn
     -- ** Sloppy transput
     , Os.slurp
@@ -299,9 +299,19 @@ defUnconsA lst = unconsPure lst A.empty (curry A.pure)
 getLine :: (IC.MonadIO m) => m String
 getLine = IC.liftIO P.getLine
 
--- | This generalizes 'P.putStr' from "Prelude".
-putStr :: (IC.MonadIO m) => String -> m ()
-putStr = IC.liftIO . P.putStr
+-- | See 'putStr'.
+class PutStr a m where
+    -- | This generalizes 'P.putStr' from "Prelude".
+    putStr :: a -> m ()
+
+instance (IC.MonadIO m) => PutStr String m where
+    putStr = IC.liftIO . P.putStr
+
+instance (IC.MonadIO m) => PutStr B.ByteString m where
+    putStr = IC.liftIO . B.putStr
+
+instance (IC.MonadIO m) => PutStr B.LazyByteString m where
+    putStr = IC.liftIO . B.putStr
 
 -- | This generalizes 'P.putStrLn' from "Prelude".
 putStrLn :: (IC.MonadIO m) => String -> m ()
