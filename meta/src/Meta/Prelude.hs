@@ -114,6 +114,7 @@ module Meta.Prelude (
     , getLine
     , PutStr(..)
     , putStrLn
+    , MST.ST
     -- ** Sloppy transput
     , Os.slurp
     -- ** IORef
@@ -127,6 +128,7 @@ module Meta.Prelude (
     , I.Int16
     , I.Int32
     , I.Int64
+    , W.Word
     , W.Word8
     , W.Word16
     , W.Word32
@@ -177,6 +179,7 @@ import Meta.PreludeMin
 
 import qualified Control.Applicative as A
 import qualified Control.Concurrent as Con
+import qualified Control.Monad.ST as MST
 import qualified Data.Bits as Bits
 import qualified Data.Char as C
 import qualified Data.IORef as IORef
