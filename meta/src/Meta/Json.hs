@@ -16,6 +16,7 @@ module Meta.Json (
     , at
     , assume_array
     , assume_string
+    , assume_number
 ) where
 
 import Prelude hiding (null)
@@ -86,3 +87,8 @@ assume_array _ = []
 assume_string :: Value -> String
 assume_string (A.String t) = T.unpack t
 assume_string _ = ""
+
+-- | This returns zero on failure.
+assume_number :: Value -> Number
+assume_number (A.Number a) = a
+assume_number _ = 0
