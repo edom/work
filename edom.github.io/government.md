@@ -5,8 +5,17 @@ date: 2017-06-26 02:00:00 +0700
 ---
 
 - Important and urgent things for most (if not all) countries on Earth to do as soon as possible:
-    - Restrict the form of all political campaigns to text containing the list of things the candidate wants to do.
-        - Avoid pandering and toxic campaigns.
+    - Political system
+        - Restrict the form of all political campaigns to text containing the list of things the candidate wants to do.
+            - Avoid pandering and toxic campaigns.
+        - Replace parliaments with sortition (randomly choosing people)?
+            - TED: "What if we replaced politicians with randomly selected people? | Brett Hennig", [youtube](https://www.youtube.com/watch?v=cUee1I69nFs)
+            - [WP:Sortition](https://en.wikipedia.org/wiki/Sortition)
+            - Will sortition work in a homogeneous country?
+            Won't it just promote groupthink?
+            - How does sortition affect the minority?
+            How should the population be sampled?
+            Stratified sampling?
     - Justice system
         - Legislators, please change the justice system from retributive justice to restorative justice for the non-violent criminals.
             - Instead of locking up prisoners, let them repair the harm they did, and help them reintegrate into society.

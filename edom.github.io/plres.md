@@ -387,3 +387,4 @@ Things that I think are wrong in 2018.
 - Metaprogramming
     - http://kaitai.io/
         - from description, generate parsers for binary data (as opposed to text data)
+- 2015, article, "Dynamically Composing Languages in a Modular Way: Supporting C Extensions for Dynamic Languages", [pdf](https://chrisseaton.com/rubytruffle/modularity15/rubyextensions.pdf)

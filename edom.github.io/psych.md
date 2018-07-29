@@ -53,3 +53,10 @@ date: 2018-05-24 02:52 +0700
     - Do they know the penalties?
         - If yes, why do they still commit crimes?
 - [beeminder.com: use loss aversion to trick yourself to accomplishing goals](https://www.beeminder.com/home)
+- [Does your job match your personality? | Jordan Peterson](https://www.youtube.com/watch?v=WEvqMN75sCI)
+    - axis: complexity
+        - high complexity requires high cognitive function level
+    - axis: creative/entrepreneurial vs managerial/administrative
+        - big five personality trait
+            - C/E requires "openness to experience"
+            - M/A requires conscientiousness

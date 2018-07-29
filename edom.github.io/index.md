@@ -30,6 +30,7 @@ date: 2017-05-20 00:00:00 +0700
                     - [Reverse-engineering PlayStation 1 3D games to control the camera]({% link ps1.md %})
             - Computational complexity
                 - [Trying to prove P neq. NP]({% link pnptry.md %})
+            - [Building online communities]({% link community.md %})
         - [Justifying physics]({% link natkno.md %})
         - Sociopolitics
             - [Improving countries]({% link government.md %})
@@ -59,6 +60,7 @@ date: 2017-05-20 00:00:00 +0700
             - [Choosing a religion]({% link relch.md %})
             - [Obtaining magickal powers]({% link magick.md %})
                 - [Experimenting with magick]({% link magexp.md %})
+            - [Learning Mandarin]({% link mandarin.md %})
 - [Other unorganized contents]({% link other.md %})
 - How do I ask questions or suggest corrections?
     - Any of these:

@@ -17,6 +17,8 @@ date: 2018-05-17 01:21 +0700
             - Santet has negative electric charge. Sleeping on the floor blocks santet. https://areknerut.wordpress.com/2012/11/15/hukum-fisika-sebagai-cara-untuk-menangkal-santet/
             - Sleeping on the floor worsens santet. (7th item in the list) https://www.brilio.net/serem/7-cara-menangkal-santet-menurut-pendekar-silat-a-masruri-170924x.html
         - Stephen Greer, CE-5 UFO summoning protocol
+- Gaia: Remembering Past Lives, [youtube](https://www.youtube.com/watch?v=X4LuRJWzPEA)
+- [YT:TED:A scientific approach to the paranormal | Carrie Poppy](https://www.youtube.com/watch?v=n8yhaFd_GpM)
 - What?
     - [scry.cloud: Crowdsourcing prediction](https://scry.cloud/)
 - Undigested information

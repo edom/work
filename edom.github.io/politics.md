@@ -141,3 +141,6 @@ American individualisn, Russian collectivism
     Desocupados", or the Employment Road to Economic Recovery](http://www.levyinstitute.org/pubs/wp_534.pdf)
 - Justin Trudeau: "Donald Trump was elected on a promise to help the millions of middle-class families who feel left out of the success and progress of the past decades, and, interestingly enough, that is exactly the promise I got elected on, too."
     - https://www.quora.com/How-does-Justin-Trudeau-view-Canadas-relationship-with-the-US-in-light-of-Donald-Trump-winning-the-US-presidential-election/answer/Justin-Trudeau
+- [How to understand power - Eric Liu](https://www.youtube.com/watch?v=c_Eutci7ack)
+- Stop fluoridating water
+    - Gaia: The Actual Truth About Fluoride, [youtube](https://www.youtube.com/watch?v=HAagzF6D-nE)
