@@ -5,7 +5,7 @@ module Meta.Crypto (
     , rsa_decrypt
     , rsa_read_key_pair_from_file
     -- * Monad
-    , Ran.MonadRandom
+    , Ran.MonadRandom(..)
 ) where
 
 import Prelude ()

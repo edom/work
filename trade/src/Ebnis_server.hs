@@ -1,20 +1,35 @@
+{-# OPTIONS_GHC -fno-warn-orphans #-}
+{-# LANGUAGE FlexibleInstances #-}
+
+{- |
+The plan:
+
+* "Ebnis_server" builds on "Ebnis_proto_7".
+
+* "Ebnis_proto_7" (application: STOMP) builds on "Ebnis_proto_6".
+
+* "Ebnis_proto_6" (presentation: compression and encryption) builds on "Ebnis_proto_5".
+
+* "Ebnis_proto_5" (session: connect, @Monad_session@) builds on "Meta.Network".
+
+* "Meta.Network" (framing) builds on TCP (OSI layer 4).
+
+* TCP builds on IP (OSI layer 3).
+-}
 module Ebnis_server (
     main
+    , Serve
 ) where
 
 import Prelude ()
 import Meta.Prelude
-import qualified Prelude as P
 
 import qualified Control.Concurrent as C
-import qualified Control.Concurrent.STM as STM
-import qualified Data.Serialize as Bin
+import qualified Control.Monad.Reader as R
 import qualified Data.Time as Time
-import qualified Network.Socket as S
-import qualified Network.Simple.TCP as Tcp
 
-import qualified Ebnis_connect as Con
 import qualified Ebnis_proto as Pro
+import qualified Meta.Network as Net
 import qualified Meta.Os as Os
 import qualified Meta.Crypto as Crypto
 
@@ -24,8 +39,6 @@ import qualified Meta.Crypto as Crypto
 class Log m where
     log :: String -> m ()
 
-class (MonadIO m, Log m) => Serve m
-
 instance Log IO where
     log msg = do
         utc <- Time.getCurrentTime
@@ -33,55 +46,55 @@ instance Log IO where
         let time = Time.formatTime Time.defaultTimeLocale "%FT%T%03Q" utc
         putStrLn $ time ++ "\t[" ++ show tid ++ "]\t" ++ msg
 
-instance Serve IO
+instance (MonadIO m) => Log (R.ReaderT r m) where
+    log msg = liftIO $ log msg
 
-main :: (Serve m) => m ()
+-- | In practice this always instantiates to 'IO'.
+class (Monad m) => Serve m where
+    get_rsa_key_pair :: m Crypto.RSA_key_pair
+
+data Server = MkServer {
+        _rsa_key_pair :: Crypto.RSA_key_pair
+    } deriving (Read, Show)
+
+instance (Monad m) => Serve (R.ReaderT Server m) where
+    get_rsa_key_pair = R.asks _rsa_key_pair
+
+-- orphan
+instance (Crypto.MonadRandom m) => Crypto.MonadRandom (R.ReaderT r m) where
+    getRandomBytes n = R.lift $ Crypto.getRandomBytes n
+
+-- | Run the server.
+main :: IO ()
 main = do
-    liftIO $ S.withSocketsDo $ do
+    Net.withSocketsDo $ do
+        -- TODO Make sure that only the user can access the key.
         rkp_file <- Os.getEnv "RSA_KEYPAIR_PEM_FILE"
         log $ "Reading RSA key pair from \"" ++ rkp_file ++ "\"."
         rkp <- Crypto.rsa_read_key_pair_from_file rkp_file
-
-        let
-            handle socket addr = do
-                log $ "Accepted a connection from " ++ show addr ++ "."
-                login
-                loop
-                where
-
-                    loop = do
-                        frame <- read_frame
-                        loop
-
-                    login = do
-                        frame <- read_frame
-                        con <- Con.decode rkp frame
-                        log $ show $ Con.sanitize con
-                        let session = 0
-                        write_frame $ Pro.connected session -- FIXME
-
-                    -- | This returns the payload without the length.
-                    read_frame :: IO ByteString
-                    read_frame = do
-                        b_len <- read_exactly 4
-                        len <- either fail return $ Bin.runGet Bin.getWord32be b_len
-                        let limit = 1048576
-                        when (len > limit) $ fail $ "Frame too big: " ++ show len ++ " > " ++ show limit
-                        read_exactly (fromIntegral len)
-
-                    write_frame :: Pro.Frame -> IO ByteString
-                    write_frame frame = do
-                        fail "not implemented"
-
-                    read_exactly :: Int -> IO ByteString
-                    read_exactly n
-                        | n <= 0 = return mempty
-                        | otherwise = do
-                            m_bs <- Tcp.recv socket n
-                            case m_bs of
-                                Just bs -> (bs <>) <$> read_exactly (n - length bs)
-                                _ -> fail $ "Premature end of file. Expecting to read " ++ show n ++ " more bytes."
-
         log "Trying to listen on 0.0.0.0:62229."
+        let server = MkServer rkp
         -- Problem: Unbounded forking.
-        Tcp.serve Tcp.HostAny "62229" $ \ (socket, addr) -> handle socket addr
+        Net.serve Net.HostAny "62229" (handle server)
+
+    where
+
+        handle server socket addr = flip R.runReaderT server $ do
+            log $ "Accepted a connection from " ++ show addr ++ "."
+            session <- login
+            let session_id = 0 -- FIXME
+            flip Pro.runReaderT session $ do
+                Pro.write_stomp_frame $ Pro.connected session_id
+                loop
+
+            where
+
+                loop = do
+                    frame <- Pro.read_stomp_frame
+                    loop
+
+                login = do
+                    rkp <- get_rsa_key_pair
+                    con <- Pro.read_connect socket rkp
+                    log $ show $ Pro.sanitize con
+                    return $ Pro.mk_session socket con
