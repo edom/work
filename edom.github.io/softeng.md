@@ -32,8 +32,10 @@ permalink: /softeng.html
             - 1997, article, "Software processes are software too, revisited", [pdf](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.148.7620&rep=rep1&type=pdf)
                 - 1987, article, "Software processes are software too", [pdf](http://laser.cs.umass.edu/techreports/1987-LJO.pdf)
     - 2018, slides, "What would a science of software engineering look like?", [pdf](http://herbsleb.org/web-pres/slides/crowd-chase-2018-final-dist.pdf)
-    - [Renaat Verbruggen: Three universal methods of reducing complexity](http://www.computing.dcu.ie/~renaat/ca2/ca214/ca214vii.html): partitioning, hierarchy, independence
-        - It also applies to other things, such as organizing this wiki.
+    - on complexity
+        - [Renaat Verbruggen: Three universal methods of reducing complexity](http://www.computing.dcu.ie/~renaat/ca2/ca214/ca214vii.html): partitioning, hierarchy, independence
+            - It also applies to other things, such as organizing this wiki.
+        - 2000, article, "How complex systems fail", [pdf](http://web.mit.edu/2.75/resources/random/How%20Complex%20Systems%20Fail.pdf)
     - [Scott Hanselman: "Software doesn't work. I'm shocked at how often we put up with it."](https://www.hanselman.com/blog/EverythingsBrokenAndNobodysUpset.aspx)
     - Meilir Page Jones, "What every programmer should know about object-oriented design"
     - How do you know a software is maintainable?
@@ -49,7 +51,6 @@ permalink: /softeng.html
         - Existing programmers must spend some time helping the newcoming programmers, temporarily reducing productivity even further.
 - References
     - [Standard MIDI file format]({% link smf.md %})
-    - [Software engineer salary]({% link salary.md %})
     - These pages may be outdated:
         - [Ansible]({% link ansible.md %})
         - [Logging]({% link logging.md %})
@@ -243,3 +244,9 @@ A typo in the source code is not a bug.
         - https://queue.acm.org/detail.cfm?id=2693160
         - https://www.cs.umn.edu/research/research_areas/software-engineering-and-programming-languages
             - "Software is a solution to a computational problem using a formal programming language."
+- How can we read SWEBOK?
+Isn't it too long?
+    - https://en.wikipedia.org/wiki/Software_Engineering_Body_of_Knowledge
+    - http://www.sebokwiki.org/wiki/An_Overview_of_the_SWEBOK_Guide
+- 2010, article, "We show how symbolic execution and Satisfiability Modulo Theories (SMT) solvers can be gainfully employed to greatly automate software debugging of evolving programs.", [downloadable as pdf](https://www.sciencedirect.com/science/article/pii/S1571066110001246)
+    - confusing title: "Debugging as a Science, that too, when your Program is Changing"

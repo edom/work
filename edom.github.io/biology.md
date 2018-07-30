@@ -49,17 +49,6 @@ permalink: /biology.html
         - choana: connection between nose and mouth
             - https://en.wikipedia.org/wiki/Posterior_nasal_apertures
 - [WP:TOFI](https://en.wikipedia.org/wiki/TOFI) (thin outside fat inside)
-- How to retrain muscles killed by sitting?
-    - What exercises isolate the glutes?
-        - hip thrust against gravity
-        - "Its most powerful action is to cause the body to regain the erect position after stooping, by drawing the pelvis backward, [...]." ([WP: Gluteus maximus muscle](https://en.wikipedia.org/wiki/Gluteus_maximus_muscle))
-        - "Semitendinosus and semimembranosus extend the hip when the trunk is fixed; they also flex the knee and medially (inwardly) rotate the lower leg when the knee is bent." [WP: Hamstring muscles](https://en.wikipedia.org/wiki/Hamstring_muscles)
-- [What makes muscles grow? - Jeffrey Siegel](https://www.youtube.com/watch?v=2tM1LFFxeKg)
-    - nutrition
-    - hypertrophy is due to microfracture healing
-        - microfracture is due to contraction that is
-            - challenging (harder than the muscle's comfort zone)
-            - eccentric (shortening the muscle: flexing the muscle while it is extended/stretched out)
 - 2018, [How Long Do You Remain Conscious If Your Head Is Chopped Off?](https://www.youtube.com/watch?v=F21DwTdBrvo)
 A few seconds, around 15 seconds.
 - 2018, [This Unorthodox Procedure Makes Short People A Foot Taller](https://www.youtube.com/watch?v=ImkuUN2mSdw)
@@ -76,5 +65,8 @@ Distraction osteogenesis. Breaking the leg bones. Undesirable side effects.
     - Ampulex compressa, Periplaneta americana
         - https://en.wikipedia.org/wiki/Alien_(creature_in_Alien_franchise)
 - Is nattokinase real? https://www.healthyhabits.com/hh_news/warfarin-rat-poison-riches/
-- Squatting undoes sitting damage?
 - 2018, article, [Melatonin: Much More Than You Wanted To Know](https://www.lesswrong.com/posts/E4cKD9iTWHaE7f3AJ/melatonin-much-more-than-you-wanted-to-know)
+- proper posture animations
+    - https://www.youtube.com/watch?v=eb4rKCM3BKM
+    - https://www.youtube.com/watch?v=6SkKPgKX_gY
+    - https://www.youtube.com/watch?v=n78PS4zq3D8

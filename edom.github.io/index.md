@@ -25,9 +25,38 @@ date: 2017-05-20 00:00:00 +0700
                             - [Programming]({% link programming.md %})
                     - [Using Java]({% link java.md %})
                     - [Making contributable open-source projects]({% link opensrc.md %})
+                    - [Solving the AST decoration problem]({% link ast.md %})
                 - [Reverse engineering]({% link reveng.md %})
                     - [Reverse engineering the network protocol used by a Java desktop application]({% link rejava.md %}): a stock trading application written in Java 6
                     - [Reverse-engineering PlayStation 1 3D games to control the camera]({% link ps1.md %})
+                - Finding career/jobs in software engineering
+                    - recruiters?
+                        - https://triplebyte.com/
+                            - from http://highscalability.com/
+                            - https://triplebyte.com/blog/how-to-interview-engineers
+                            - https://triplebyte.com/blog/does-it-make-sense-for-programmers-to-move-to-the-bay-area
+                    - agencies?
+                        - https://www.fastcompany.com/3008194/top-programmers-are-getting-agents-should-you
+                        - https://www.infoworld.com/article/2886735/it-careers/should-you-hire-a-software-developer-talent-agent.html
+                        - https://www.quora.com/Is-there-such-a-thing-as-a-talent-agent-agency-for-software-engineers
+                        - http://valleywag.gawker.com/talent-agents-for-programmers-cant-wait-to-take-their-1-1660224273
+                        - http://wisecareers.com/articles/information-technology/talent-agents-representing-computer-programmers
+                        - https://www.businessinsider.com/big-name-talent-agency-that-represents-coding-rock-stars-2014-11/?IR=T
+                        - http://blog.alinelerner.com/why-talent-agents-for-engineers-dont-exist/
+                        - https://www.newyorker.com/magazine/2014/11/24/programmers-price
+                        - https://freelancing.stackexchange.com/questions/6551/finding-talent-agents-for-software-developers
+                        - https://news.ycombinator.com/item?id=8617452
+                    - unions?
+                        - https://softwareengineering.stackexchange.com/questions/9481/are-there-any-unions-for-software-developers
+                        - https://news.ycombinator.com/item?id=13564440
+                        - https://qz.com/916534/silicon-valley-tech-workers-are-talking-about-starting-their-first-union-in-2017-to-resist-trump/
+                        - https://www.theatlantic.com/technology/archive/2011/06/why-it-workers-should-unionize/240810/
+                        - https://www.reddit.com/r/programming/comments/3vuynn/programmers_dont_need_a_union_we_need_a_profession/
+                        - https://www.quora.com/What-would-happen-if-there-was-a-programmers-union
+                        - https://techcrunch.com/2013/07/29/why-labor-unions-and-silicon-valley-arent-friends-in-2-charts/
+                    - unread
+                        - https://medium.com/javascript-scene/why-hiring-is-so-hard-in-tech-c462c3230017
+                    - [Software engineer salary]({% link salary.md %})
             - Computational complexity
                 - [Trying to prove P neq. NP]({% link pnptry.md %})
             - [Building online communities]({% link community.md %})
@@ -55,6 +84,7 @@ date: 2017-05-20 00:00:00 +0700
                         - [Removing nag screens]({% link nag.md %})
                     - [Buying a smartphone]({% link phone.md %})
                         - [Android vs iPhone]({% link andvsiph.md %})
+                - [Growing muscles]({% link muscle.md %})
     - Feeling
         - Spirituality
             - [Choosing a religion]({% link relch.md %})
