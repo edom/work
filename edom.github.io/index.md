@@ -25,6 +25,7 @@ date: 2017-05-20 00:00:00 +0700
                             - [Programming]({% link programming.md %})
                     - [Using Java]({% link java.md %})
                     - [Making contributable open-source projects]({% link opensrc.md %})
+                        - [Building online communities]({% link community.md %})
                     - [Solving the AST decoration problem]({% link ast.md %})
                 - [Reverse engineering]({% link reveng.md %})
                     - [Reverse engineering the network protocol used by a Java desktop application]({% link rejava.md %}): a stock trading application written in Java 6
@@ -54,12 +55,13 @@ date: 2017-05-20 00:00:00 +0700
                         - https://www.reddit.com/r/programming/comments/3vuynn/programmers_dont_need_a_union_we_need_a_profession/
                         - https://www.quora.com/What-would-happen-if-there-was-a-programmers-union
                         - https://techcrunch.com/2013/07/29/why-labor-unions-and-silicon-valley-arent-friends-in-2-charts/
+                    - interviews?
+                        - https://jvns.ca/blog/2013/12/30/questions-im-asking-in-interviews/
                     - unread
                         - https://medium.com/javascript-scene/why-hiring-is-so-hard-in-tech-c462c3230017
                     - [Software engineer salary]({% link salary.md %})
             - Computational complexity
                 - [Trying to prove P neq. NP]({% link pnptry.md %})
-            - [Building online communities]({% link community.md %})
         - [Justifying physics]({% link natkno.md %})
         - Sociopolitics
             - [Improving countries]({% link government.md %})

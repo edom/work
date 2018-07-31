@@ -22,3 +22,4 @@ date: 2018-07-24 15:00 +0700
 - Documentation should be task-oriented.
 - The non-software part is important too.
 - 2000, article, "A Case Study of Open Source Software Development: The Apache Server", [pdf](http://herbsleb.org/web-pubs/pdfs/mockus-acase-2000.pdf)
+- 2017, article, "Understanding the Impressions, Motivations, and Barriers of One Time Code Contributors to FLOSS Projects: A Survey", [pdf](http://carver.cs.ua.edu/Papers/Conference/2017/ICSE_OTC.pdf)

@@ -105,3 +105,8 @@ the community is fragmented because there are too many communication channels (m
         - https://www.quora.com/How-do-I-search-for-previous-messages-on-an-IRC-channel
         - http://www.tomsguide.com/answers/id-2052675/irc-channel-history-connected.html
     - https://dague.net/2014/09/13/my-irc-proxy-setup/
+- Hosting your community's static website
+    - https://github.com/haskell-id/website/issues/5
+    - Choices:
+        - GitHub Pages
+        - Firebase
