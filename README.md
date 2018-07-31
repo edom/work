@@ -1,4 +1,5 @@
 - Things far from being finished
+    - [trade](trade/): Trade stocks in Indonesia
     - [meta](meta/)
         - library for writing metaprograms in Haskell
         - use Haskell as metalanguage
@@ -35,6 +36,8 @@
 - https://medium.com/netflix-techblog/linux-performance-analysis-in-60-000-milliseconds-accc10403c55
 - Keynote - What's Different In Dotty by Martin Odersky https://www.youtube.com/watch?v=9lWrt6H6UdE
 - Building the website
+    - Serving the website: Run the script [sh/jekserve](sh/jekserve).
+    - Publishing the website: Run the script [sh/pub](sh/pub).
     - Install Jekyll 3 on Ubuntu 14.04
         - See (but don't blindly follow) https://gist.github.com/Piyush3dB/b7daa3f178746c7d7479ca1cbd694160
         - Use [rbenv](https://github.com/rbenv/rbenv) to install newer Ruby versions.

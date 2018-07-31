@@ -38,6 +38,7 @@ the community is fragmented because there are too many communication channels (m
                 - https://www.reddit.com/r/linux/comments/8d3sg1/irc_gateway_for_slack/
                 - https://www.reddit.com/r/Slack/comments/8hyky9/best_alternative_to_the_now_defunct_irc_gateway/
                 - https://tedium.co/2017/10/17/irc-vs-slack-chat-history/
+    - [Gitter](https://gitter.im/)
     - WhatsApp group
     - Facebook group
     - Google groups (mailing list) (Can we assume that everyone has a Google account?)
