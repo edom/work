@@ -93,7 +93,7 @@ date: 2017-05-20 00:00:00 +0700
             - [Obtaining magickal powers]({% link magick.md %})
                 - [Experimenting with magick]({% link magexp.md %})
             - [Learning Mandarin]({% link mandarin.md %})
-        - 2017, 1 hour, [Frank Abagnale: "Catch Me If You Can" | Talks at Google](https://www.youtube.com/watch?v=vsMydMDi3rI)
+        - 2017, 1 hour, [Frank Abagnale: "Catch Me If You Can" \| Talks at Google](https://www.youtube.com/watch?v=vsMydMDi3rI)
 - [Other unorganized contents]({% link other.md %})
 - How do I ask questions or suggest corrections?
     - Any of these:
