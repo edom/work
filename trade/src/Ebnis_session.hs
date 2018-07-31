@@ -12,21 +12,19 @@ module Ebnis_session (
     -- ** Things we can do with a session
     , deflate
     , inflate
-    -- * Internal
-    , MR.runReaderT
 ) where
 
 import Prelude ()
 import Meta.Prelude
 
-import qualified Control.Monad.Reader as MR
+import qualified Control.Monad.Reader as R
 
 import qualified Ebnis_connect as Con
 import qualified Ebnis_scramble as Scr
 import qualified Meta.Network as Net
 import qualified Meta.Zlib as Z
 
-type Session_id = Int
+type Session_id = Word64
 
 {- |
 An inhabitant of this is a proof that the user has been successfully authenticated and authorized.
@@ -34,9 +32,10 @@ An inhabitant of this is a proof that the user has been successfully authenticat
 data Session = MkSession {
         _socket :: Net.Socket
         , _connection :: Con.Connection
+        , _session_id :: Session_id
     } deriving (Show)
 
-mk_session :: Net.Socket -> Con.Connection -> Session
+mk_session :: Net.Socket -> Con.Connection -> Session_id -> Session
 mk_session = MkSession
 
 -- | Things that depend on a 'Session'.
@@ -48,6 +47,9 @@ class (Functor m, Monad m) => Monad_session m where
     read_frame :: m Net.Payload
 
     write_frame :: Net.Payload -> m ()
+
+    get_session_id :: m Session_id
+    get_session_id = _session_id <$> get_session
 
     -- | See 'Con.Connection'.
     get_connection :: m Con.Connection
@@ -87,8 +89,8 @@ class (Functor m, Monad m) => Monad_session m where
                 Scr.unscramble key bs
             _ -> return bs
 
-instance (Functor m, MonadIO m) => Monad_session (MR.ReaderT Session m) where
-    get_session = MR.ask
+instance (Functor m, MonadIO m) => Monad_session (R.ReaderT Session m) where
+    get_session = R.ask
     read_frame = get_socket >>= Net.read_frame
     write_frame frame = do
         socket <- get_socket

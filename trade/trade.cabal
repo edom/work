@@ -30,19 +30,20 @@ library
         Meta.Zlib
         Trade_orphan
     build-depends:
-        base >= 4 && < 5
+        base >= 4.10 && < 4.11
         , meta
-        , array
+        , array >= 0.5 && < 0.6
         , base64-bytestring >= 1.0 && < 1.1
-        , bytestring
+        , bytestring >= 0.10 && < 0.11
         , cereal >= 0.5 && < 0.6
         , cryptonite >= 0.25 && < 0.26
         , HsOpenSSL >= 0.11 && < 0.12
+        , HsYAML >= 0.1 && < 0.2
         , messagepack >= 0.5 && < 0.6
-        , mtl
+        , mtl >= 2.2 && < 2.3
         , network >= 2.7 && < 2.8
         , network-simple >= 0.4 && < 0.5
-        , stm
+        , stm >= 2.4 && < 2.5
         , time >= 1.8 && < 1.9
         , zlib-bindings >= 0.1 && < 0.2
 
@@ -55,7 +56,7 @@ executable ebnis_client
         -rtsopts
         -threaded
         -fprof-auto
-    build-depends: base, trade, meta
+    build-depends: base, trade
 
 executable ebnis_server
     default-language: Haskell2010
@@ -66,4 +67,4 @@ executable ebnis_server
         -rtsopts
         -threaded
         -fprof-auto
-    build-depends: base, trade, meta
+    build-depends: base, trade
