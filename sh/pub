@@ -19,6 +19,7 @@ git checkout --detach "${1:-origin/master}"
 JEKYLL_DIR=_site_publish
 
 pushd edom.github.io
+export JEKYLL_ENV=production
 ./jekyll clean --destination "./${JEKYLL_DIR}"
 ./jekyll build --destination "./${JEKYLL_DIR}"
 popd
