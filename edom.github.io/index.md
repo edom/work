@@ -87,6 +87,30 @@ date: 2017-05-20 00:00:00 +0700
                     - [Buying a smartphone]({% link phone.md %})
                         - [Android vs iPhone]({% link andvsiph.md %})
                 - [Growing muscles]({% link muscle.md %})
+        - Statistics
+            - Durian
+                - The fruit is a ripe Durian Medan that has been peeled bought from Toko Buah Jakarta.
+                The package contains seed and pulp only, without rind.
+                - Date of measurement: 2018-08-01.
+                - Price tag
+                    - Weight on price tag: 1328 grams
+                    - Unit price: IDR 55000/kg
+                    - Total price: IDR 73040
+                - Direct measurements
+                    - The seeds are put on a plate for weighing.
+                    - Weights
+                        - 9 grams: wrapping (styrofoam and plastic)
+                        - 612 grams: the plate and the seeds
+                        - 300 grams: the plate
+                    - Other quantities
+                        - There are 26 seeds.
+                - Conclusions
+                    - Weight breakdown of 1328 gram "durian":
+                        - 9 grams of wrapping (styrofoam and plastic)
+                        - 312 grams of 26 seeds (without pulp)
+                        - 1007 grams of pulp
+                    - Pulp weight is 75.83% of total package weight.
+                    - Effective price of pulp: IDR 72532/kg.
     - Feeling
         - Spirituality
             - [Choosing a religion]({% link relch.md %})
