@@ -12,7 +12,7 @@ module Meta.Os (
     , Env.withArgs
     -- * Environment
     , Env.getEnv
-    -- , Env.lookupEnv -- not in base 4.5
+    , Env.lookupEnv -- requires base >= 4.6
     , Env.getEnvironment
     -- * Careless transput
     -- $careless
