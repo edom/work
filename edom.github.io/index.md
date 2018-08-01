@@ -93,7 +93,19 @@ date: 2017-05-20 00:00:00 +0700
             - [Obtaining magickal powers]({% link magick.md %})
                 - [Experimenting with magick]({% link magexp.md %})
             - [Learning Mandarin]({% link mandarin.md %})
-        - 2017, 1 hour, [Frank Abagnale: "Catch Me If You Can" \| Talks at Google](https://www.youtube.com/watch?v=vsMydMDi3rI)
+        - Credit cards vs debit cards
+            - 2017, 1 hour, [Frank Abagnale: "Catch Me If You Can" \| Talks at Google](https://www.youtube.com/watch?v=vsMydMDi3rI)
+                - Use credit card, not debit card.
+            - Use credit card, but don't fall into debt.
+            Treat credit card as means of payment, not loan.
+            - Never use debit card outside trusted ATMs.
+            - But what about cash withdrawals from ATMs?
+            Credit cards have higher fees.
+            - https://www.nerdwallet.com/blog/credit-cards/credit-card-vs-debit-card-safer-online-purchases/
+            - https://www.quora.com/Are-credit-cards-safer-than-debit-cards
+            - FUD (fear, uncertainty, and doubt)
+                - https://www.chimebank.com/2017/08/08/are-credit-cards-really-safer-than-debit-cards/
+                    - Of course banks want you to use the debit card. It reduces their liability.
 - [Other unorganized contents]({% link other.md %})
 - How do I ask questions or suggest corrections?
     - Any of these:

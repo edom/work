@@ -105,3 +105,12 @@ In 1976 that could be more simply put as [follow the money](https://en.wikipedia
 
 - A government should only do things that better its people.
     - How do we know if something will make people better off?
+- Is Chinese government dominated by scientists and engineers?
+    - https://gineersnow.com/leadership/chinese-government-dominated-scientists-engineers
+- https://www.quora.com/What-would-a-government-designed-by-engineers-and-not-politicians-look-like?share=1
+    - https://tomgrego.blogspot.com/2010/12/a-government-you-can-love.html
+    - https://www.quora.com/Concretely-what-can-we-do-to-get-US-politics-working-What’s-gone-wrong-and-why-are-things-worse-than-20-years-ago-How-could-US-politics-improve-in-10-years-What-short-term-tactics-could-advance-the-long-term-goal?share=1
+- The public sector is inefficient, but the private sector might be too efficient (extracting too much profit? but how much profit is too much?)?
+Is there a mixture between the two?
+Regulated private sector?
+- https://en.wikipedia.org/wiki/Monopoly_on_violence
