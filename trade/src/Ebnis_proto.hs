@@ -34,9 +34,14 @@ module Ebnis_proto (
     , Net.HostPreference(..)
     -- ** Logging
     , Log.Monad_log(..)
+    -- ** Base64
+    , Crypto.base64_encode
+    , Crypto.base64_decode
     -- ** Crypto
     , Crypto.RSA_key_pair
     , Crypto.RSA_public_key
+    , Crypto.rsa_read_public_key_from_der_string
+    , Crypto.rsa_read_public_key_from_file
     , Crypto.rsa_read_key_pair_from_file
     -- ** Operating system
     , Os.getEnv
@@ -48,7 +53,7 @@ module Ebnis_proto (
     -- ** Monad
     , M.forever
     -- * STOMP frames
-    Stomp.Command
+    , Stomp.Command
     , Stomp.Header
     , Stomp.get_command
     , Stomp.get_headers

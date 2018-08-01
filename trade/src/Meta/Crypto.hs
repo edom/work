@@ -13,7 +13,9 @@ module Meta.Crypto (
     , RSA_public_key
     , RSA_key_pair
     -- ** Reading keys from files
+    , DER
     , PEM_file_path
+    , rsa_read_public_key_from_der_string
     , rsa_read_public_key_from_file
     , rsa_read_key_pair_from_file
     -- ** Encryption and decryption
@@ -31,6 +33,7 @@ import qualified Crypto.PubKey.RSA.PKCS15 as CP
 import qualified Crypto.Random as Ran
 import qualified Data.ByteString.Base64 as Base64
 import qualified OpenSSL as OS
+import qualified OpenSSL.DER as OD
 import qualified OpenSSL.EVP.PKey as OE
 import qualified OpenSSL.PEM as OP
 import qualified OpenSSL.RSA as OR
@@ -66,6 +69,13 @@ rsa_decrypt :: (Ran.MonadRandom m) => RSA_key_pair -> Ciphertext -> m Plaintext
 rsa_decrypt k c = CP.decryptSafer k c >>= either (fail . show) return
 
 type PEM_file_path = FilePath
+
+type DER = ByteString
+
+rsa_read_public_key_from_der_string :: (Monad m) => DER -> m RSA_public_key
+rsa_read_public_key_from_der_string der = do
+    pub <- maybe (fail "Invalid DER string") return $ OD.fromDERPub der
+    return $ translate_pub pub
 
 -- | Read RSA public key from PEM file.
 rsa_read_public_key_from_file :: PEM_file_path -> IO RSA_public_key

@@ -1,6 +1,9 @@
 # Trading
 
+- This isn't working yet.
+Please visit again later.
 - License is AGPL version 3.0.
+- Orientation is long-term trading.
 - Roadmap:
     - EBNIS
         - client
@@ -9,6 +12,8 @@
             - [ ] log_verbose Messages
             - [ ] list all tradables (stocks, warrants, and ETFs)
             - [ ] get all orders of all tradables for the day
+            - [ ] get all candlesticks of all tradables as far to the past as possible
+            - [ ] store the orders to a local storage
             - [ ] authenticate to trading server
             - [ ] get portfolio
         - server
@@ -16,3 +21,66 @@
             - [ ] log_verbose Messages
     - [ ] extract libraries to separate cabal package
     - [ ] use jdb to reverse-engineer the client's view of the trading server protocol
+- Disclaimer
+    - Use at your own risk.
+    There is a real possibility of losing money.
+    - If you lose money investing manually, fancy software will only make you lose more money faster.
+- Other related things?
+    - What are other softwares?
+        - What are some related search keywords?
+            - wealth management software
+            - portfolio management software
+            - trading software
+            - investing software
+        - Open-source
+            - aggregators
+                - https://quant.stackexchange.com/questions/10905/what-open-source-trading-platform-are-available
+                - https://www.quora.com/Is-there-an-open-source-investing-tool-software-for-Linux
+                - https://money.stackexchange.com/questions/7247/where-can-i-find-open-source-portfolio-management-software
+                - http://www.traderslaboratory.com/forums/topic/7060-open-source-trading-platforms-master-list/
+            - examples?
+                - https://github.com/StockSharp/StockSharp
+            - https://skrooge.org/
+                - https://cgit.kde.org/skrooge.git/
+            - ongoing?
+                - https://github.com/stosia/quant.id
+        - Almost open-source
+            - https://jstock.org/
+                - https://github.com/yccheok/jstock
+                    - What is the license?
+                        - https://github.com/yccheok/jstock/issues/114
+                        - https://github.com/yccheok/jstock/issues/51
+        - Closed-source
+            - aggregators
+                - https://www.sahamok.com/trading-saham-online-system/
+            - unclear
+                - https://www.ifcmarkets.co.id/platforms/stock-trading-software
+                - https://www.ifcmarkets.co.id/platforms/portfolio-analysis-software
+        - SaaS
+            - Don't use SaaS.
+            Don't try your algorithm online.
+            Don't let your algorithm get out of your box.
+        - Interesting, but what is this?
+            - http://wealthbot.io/
+    - Data?
+        - https://github.com/ledwindra?tab=repositories
+            - https://github.com/ledwindra/idx_fundamental_data
+            - https://github.com/HibHaqqi/idx_machine_learning
+                - http://www.dataharianbei.com/
+            - https://github.com/ledwindra/indonesia_stocks
+        - https://github.com/barbarian1803/saham_analisis
+    - abandonware
+        - hangat-hangat tahi gajah?
+            - https://github.com/SahamDev/SahamDev, 35000 (?) lines of C++ code, last updated in 2016
+            - https://github.com/zhongping/Equity-Market, 6000 lines of C# code, last updated in 2017
+        - hangat-hangat tahi ayam?
+            - https://github.com/azuanalias92/SahamKu, 400 lines of Java code, last updated in 2017
+            - https://github.com/notdon/cortex, 400 lines of Python code, last updated in 2017
+            - https://github.com/rubiagatra/stock-ticker-id, last updated in 2018
+            - https://github.com/alukito/idx-data, last updated in 2015
+            - https://github.com/alifahsanul/Finance_Program, last updated in 2016
+        - course assignments?
+            - https://github.com/weixianlow/Buy-Sell-Stock-Algorithm, last updated in 2016
+    - academic publications
+        - 2011, article, "Hedge Fund Stock Trading in the Financial Crisis of 2007-2009" [pdf](http://efa2011.efa-online.org/fisher.osu.edu/blogs/efa2011/files/APE_2_3.pdf)
+        - https://github.com/stosia/awesome-ml-for-trading
