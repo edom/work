@@ -172,6 +172,9 @@ module Meta.Prelude (
     -- * Semigroup and Monoid
     , Sgr.Semigroup(..)
     , Mon.Monoid(..)
+    -- * Exceptions
+    , E.bracket
+    , E.bracket_
 ) where
 
 import Prelude ()
@@ -179,6 +182,7 @@ import Meta.PreludeMin
 
 import qualified Control.Applicative as A
 import qualified Control.Concurrent as Con
+import qualified Control.Exception as E
 import qualified Control.Monad.ST as MST
 import qualified Data.Bits as Bits
 import qualified Data.Char as C

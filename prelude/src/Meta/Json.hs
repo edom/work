@@ -6,11 +6,13 @@ module Meta.Json (
     Value
     -- * Parsing
     , C_decode(..)
+    , C_encode(..)
     -- * Value constructors
     , null
     , Number
-    , number
-    , string
+    , C_number(..)
+    , C_string(..)
+    , Array(..)
     -- * Sloppy deconstruction
     , Key
     , at
@@ -19,7 +21,8 @@ module Meta.Json (
     , assume_number
 ) where
 
-import Prelude hiding (null)
+import Prelude ()
+import Meta.Prelude hiding (at, null)
 
 import qualified Meta.ByteString as B
 import qualified Meta.Text as T
@@ -40,11 +43,36 @@ type Number = S.Scientific
 null :: Value
 null = A.Null
 
-number :: Number -> Value
-number = A.toJSON
+class C_number a where
+    number :: a -> Value
 
-string :: String -> Value
-string = A.toJSON
+instance C_number S.Scientific where
+    number = A.Number
+
+instance C_number Word32 where
+    number = A.toJSON
+
+-- | @b@ is typically 'Value'.
+class C_string a b where
+    string :: a -> b
+
+instance C_string String Value where
+    string = A.String . T.convert_utf_8
+
+instance (Monad m) => C_string B.ByteString (m Value) where
+    string = fmap A.String . T.convert_utf_8
+
+instance C_string T.Text Value where
+    string = A.String
+
+class Array a where
+    array :: a -> Value
+
+instance Array (V.Vector Value) where
+    array = A.Array
+
+instance Array [Value] where
+    array = array . V.fromList
 
 {- $parsing
 The function 'A.decode' can be thought as having the type @'M.LazyByteString' -> 'Value'@.
@@ -52,6 +80,15 @@ The function 'A.decode' can be thought as having the type @'M.LazyByteString' ->
 class C_decode a where decode :: a -> Either String Value
 instance C_decode B.ByteString where decode = A.eitherDecodeStrict
 instance C_decode B.LazyByteString where decode = A.eitherDecode
+
+class C_encode a where
+    encode :: Value -> a
+
+instance C_encode B.LazyByteString where
+    encode = A.encode
+
+instance C_encode B.ByteString where
+    encode = B.toStrict . encode
 
 type Key = String
 
