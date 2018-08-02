@@ -5,8 +5,11 @@ module Meta.Network (
     -- ** WSAStartup
     -- $windows
     , S.withSocketsDo
-    -- * Network.Simple.TCP: Simple TCP server
+    -- * Network.Simple.TCP: Simple TCP client and server
+    , connect
+    , with_connect
     , serve
+    , Tcp.send
     , Tcp.HostPreference(..)
     , Tcp.ServiceName
     , Tcp.SockAddr
@@ -41,6 +44,17 @@ read_exactly socket = loop
                 case m_bs of
                     Just bs -> (bs <>) <$> loop (n - length bs)
                     _ -> fail $ "Premature end of file. Expecting to read " ++ show n ++ " more bytes."
+
+{- |
+See 'Tcp.connectSock'.
+-}
+connect :: (MonadIO m) => Tcp.HostName -> Tcp.ServiceName -> m (S.Socket, S.SockAddr)
+connect = Tcp.connectSock
+
+-- | 'bracket'ed 'connect'.
+with_connect :: Tcp.HostName -> Tcp.ServiceName -> (S.Socket -> S.SockAddr -> IO a) -> IO a
+with_connect host port action =
+    bracket (connect host port) (\ (sock, _) -> Tcp.closeSock sock) (uncurry action)
 
 serve
     :: (MonadIO m)

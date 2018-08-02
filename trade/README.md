@@ -7,6 +7,7 @@ Please visit again later.
 - Roadmap:
     - EBNIS
         - client
+            - [ ] programming error in read Meta.Crypt.rsa_read_public_key_from_der_string?
             - [ ] read user credentials and optional server public key from YAML file
             - [ ] authenticate to feed server
             - [ ] log_verbose Messages

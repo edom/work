@@ -10,6 +10,7 @@ module Ebnis_proto (
     , Con.Connection
     , Con.sanitize
     , Con.decode_connect
+    , Con.encode_connect
     -- * Message
     , Message(..)
     -- ** Constructors
@@ -30,8 +31,11 @@ module Ebnis_proto (
     -- ** Meta.Network
     , Net.withSocketsDo
     , Net.Socket
+    , Net.connect
+    , Net.with_connect
     , Net.serve
     , Net.HostPreference(..)
+    , Net.send
     -- ** Logging
     , Log.Monad_log(..)
     -- ** Base64
@@ -43,6 +47,7 @@ module Ebnis_proto (
     , Crypto.rsa_read_public_key_from_der_string
     , Crypto.rsa_read_public_key_from_file
     , Crypto.rsa_read_key_pair_from_file
+    , Crypto.MonadRandom(..)
     -- ** Operating system
     , Os.getEnv
     -- ** Reader
