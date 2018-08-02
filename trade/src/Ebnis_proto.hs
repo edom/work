@@ -7,6 +7,7 @@ module Ebnis_proto (
     -- * EBNIS idiosyncrasies
     -- ** CONNECT special case
     read_connect
+    , write_connect
     , Con.Connection
     , Con.sanitize
     , Con.decode_connect
@@ -25,6 +26,7 @@ module Ebnis_proto (
     , Ses.Session_id
     , Ses.Session
     , Ses.mk_session
+    , Ses.set_session_id
     , read_message
     , write_message
     -- * Non-protocol-related reexports
@@ -92,6 +94,11 @@ read_connect socket rkp = do
     frame <- Net.read_frame socket
     Con.decode_connect rkp frame
 
+write_connect :: (MonadIO m, Crypto.MonadRandom m) => Net.Socket -> Crypto.RSA_public_key -> Con.Connection -> m ()
+write_connect socket pub con = do
+    payload <- Con.encode_connect pub con
+    Net.write_frame socket payload
+
 data Message
     = Connected Ses.Session_id
     | Disconnect
@@ -109,16 +116,19 @@ Use 'read_connect' instead.
 
 Reverse-engineered from @a.a.d.e:a(byte[])@.
 -}
-decode_message :: (MonadIO m, Ses.Monad_session m) => ByteString -> m Message
+decode_message :: (MonadIO m, Ses.Monad_session m) => Net.Frame -> m Message
 decode_message compressed = do
     inflated <- Ses.inflate compressed
     unscrambled <- Ses.unscramble inflated
     mp <- either fail return $ S.runGet S.get unscrambled
     case mp of
         MP.ObjectArray (mp_cmd : params) | Just cmd <- as_int mp_cmd -> case (cmd, params) of
-            (2, _) -> return Disconnect
-            _ -> fail $ "Invalid MessagePack object: " ++ show mp
-        _ -> fail $ "Invalid MessagePack object: " ++ show mp
+            (1, [MP.ObjectString session_id]) ->
+                return $ Connected session_id
+            (2, _) ->
+                return Disconnect
+            _ -> fail $ "Ebnis_proto.decode_message: Invalid MessagePack object: " ++ show mp
+        _ -> fail $ "Ebnis_proto.decode_message: Invalid MessagePack object: " ++ show mp
     where
         as_int :: (Monad m) => MP.Object -> m Int
         as_int obj = case obj of
@@ -131,7 +141,7 @@ Don't use this for CONNECT.
 
 Reverse-engineered from @a.a.d.h:a()@.
 -}
-encode_message :: (MonadIO m, Ses.Monad_session m) => Message -> m ByteString
+encode_message :: (MonadIO m, Ses.Monad_session m) => Message -> m Net.Frame
 encode_message msg = do
     msgpack_object <- MP.ObjectArray <$> case msg of
         Connected session_id -> do

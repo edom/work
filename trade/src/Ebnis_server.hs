@@ -19,6 +19,7 @@ The plan:
 module Ebnis_server (
     main
     , Monad_server(..)
+    , read_key_pair
 ) where
 
 import Prelude ()
@@ -31,7 +32,7 @@ import Trade_orphan ()
 
 data Server = MkServer {
         _rsa_key_pair :: P.RSA_key_pair
-        , _tv_session_id :: C.TVar P.Session_id
+        , _tv_session_id :: C.TVar Word64
     }
 
 -- | In practice this always instantiates to 'IO'.
@@ -49,7 +50,7 @@ instance (MonadIO m) => Monad_server (P.ReaderT Server m) where
         liftIO $ C.atomically $ do
             x <- C.readTVar _tv_session_id
             C.modifyTVar' _tv_session_id (+ 1)
-            return x
+            return $ fromString $ show x
 
 -- https://wiki.haskell.org/Implement_a_chat_server
 -- http://hackage.haskell.org/package/network-2.7.0.2/docs/Network-Socket.html
@@ -58,20 +59,14 @@ instance (MonadIO m) => Monad_server (P.ReaderT Server m) where
 main :: IO ()
 main = do
     P.withSocketsDo $ do
-        tv_session_id <- C.newTVarIO (0 :: P.Session_id)
-        rkp <- read_key
+        tv_session_id <- C.newTVarIO (0 :: Word64)
+        rkp <- read_key_pair
         P.log "Trying to listen on 0.0.0.0:62229."
         let server = MkServer rkp tv_session_id
         -- Problem: Unbounded forking.
         P.serve P.HostAny "62229" (handle server)
 
     where
-
-        -- TODO Make sure that only the user can access the key.
-        read_key = do
-            path <- P.getEnv "RSA_KEYPAIR_PEM_FILE"
-            P.log $ "Reading RSA key pair from \"" ++ path ++ "\"."
-            P.rsa_read_key_pair_from_file path
 
         -- This services one client connection.
         handle server socket addr = do
@@ -88,8 +83,16 @@ main = do
 
         login socket = do
             rkp <- get_rsa_key_pair
+            P.log "Reading CONNECT message."
             con <- P.read_connect socket rkp
             -- TODO authenticate
             session_id <- get_next_session_id
             P.log $ "Authenticated: " ++ show (P.sanitize con)
             return $ P.mk_session socket con session_id
+
+-- TODO Make sure that only the user can access the key.
+read_key_pair :: IO P.RSA_key_pair
+read_key_pair = do
+    path <- P.getEnv "RSA_KEYPAIR_PEM_FILE"
+    P.log $ "Reading RSA key pair from \"" ++ path ++ "\"."
+    P.rsa_read_key_pair_from_file path

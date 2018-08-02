@@ -2,6 +2,7 @@
 
 module Ebnis_client (
     Config(..)
+    , read_config
     , read_config_from_file
     , Monad_client(..)
     , main
@@ -64,32 +65,47 @@ with_echo echo action = do
 get_password :: IO String
 get_password = with_echo False getLine
 
-main :: IO ()
-main = P.withSocketsDo $ do
-    -- This doesn't work, but this 'openssl -inform der -in trade/what.der' works.
-    let str = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDVd/gb2ORdLI7nTRHJR8C5EHs4RkRBcQuQdHkZ6eq0xnV2f0hkWC8h0mYH/bmelb5ribwulMwzFkuktXoufqzoft6Q6jLQRnkNJGRP6yA4bXqXfKYj1yeMusIPyIb3CTJT/gfZ40oli6szwu4DoFs66IZpJLv4qxU9hqu6NtJ+8QIDAQAB"
-    let bas = fromString str
-    der <- P.base64_decode bas
-    B.writeFile "what.der" der
-    rpk <- P.rsa_read_public_key_from_der_string der
-    putStr $ show rpk
+prompt :: (MonadIO m) => String -> m ()
+prompt str = do
+    putStr str
+    liftIO $ I.hFlush I.stdout
 
+read_config :: IO Config
+read_config = do
     cnf_path <- maybe def_cnf_path id <$> Os.lookupEnv "CNF_FILE"
     P.log $ "Reading configuration from file: " ++ cnf_path
-    MkConfig{..} <- read_config_from_file cnf_path
-    user <- putStr "User: " >> getLine
-    pass <- putStr "Password: " >> get_password
+    read_config_from_file cnf_path
+    where
+        def_cnf_path = "cnf/ebnis.yaml"
+
+main :: IO ()
+main = P.withSocketsDo $ do
+    MkConfig{..} <- read_config
+    user <- prompt "User: " >> getLine
+    pass <- prompt "Password: " >> get_password
+    putStr "\n"
     lbs_uuid <- B.fromStrict <$> P.getRandomBytes 16
     uuid <- maybe (fail "Should not happen: Could not generate UUID.") return $ U.fromByteString lbs_uuid
     let session_key = U.toASCIIBytes uuid
-        con = C.def_connection {
+        con = (C.def_connection C.Client) {
                 C._login = user
                 , C._passcode = pass
                 , C._session_key = session_key
             }
     bs_con <- P.encode_connect _server_public_key con
-    P.with_connect _server_address "62229" $ \ sock _ -> do
-        P.send sock bs_con
-        putStrLn "Not implemented."
-    where
-        def_cnf_path = "cnf/ebnis.yaml"
+    let port = 62229 :: Word16
+    P.log $ "Connecting to server: " ++ _server_address ++ ":" ++ show port
+    P.with_connect _server_address (show port) $ \ sock _ -> do
+        P.log $ "Sending CONNECT message."
+        P.write_connect sock _server_public_key con
+        let pre_session = P.mk_session sock con (fromString "0")
+        session_id <- flip P.runReaderT pre_session $ do
+            P.log $ "Waiting for CONNECTED message."
+            frame <- P.read_frame
+            message <- P.decode_message frame
+            case message of
+                Connected session_id -> return session_id
+                _ -> fail $ show message
+        let session = P.set_session_id session_id pre_session
+        putStr $ "Session ID: " ++ show session_id
+        putStr "\n"

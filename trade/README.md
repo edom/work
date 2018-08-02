@@ -7,9 +7,12 @@ Please visit again later.
 - Roadmap:
     - EBNIS
         - client
-            - [ ] programming error in read Meta.Crypt.rsa_read_public_key_from_der_string?
-            - [ ] read user credentials and optional server public key from YAML file
+            - [x] programming error in read Meta.Crypt.rsa_read_public_key_from_der_string
+                - [x] replace HsOpenSSL with asn1-encoding, x509
+                - [ ] replace HsOpenSSL with pem
+            - [x] read user credentials and optional server public key from YAML file
             - [ ] authenticate to feed server
+                - [ ] handle authentication failure
             - [ ] log_verbose Messages
             - [ ] list all tradables (stocks, warrants, and ETFs)
             - [ ] get all orders of all tradables for the day

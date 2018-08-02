@@ -14,7 +14,10 @@ module Meta.Network (
     , Tcp.ServiceName
     , Tcp.SockAddr
     -- * Frame
+    , Frame
     , Payload
+    , mk_frame
+    , get_payload
     , read_frame
     , write_frame
 ) where
@@ -43,7 +46,7 @@ read_exactly socket = loop
                 m_bs <- Tcp.recv socket n
                 case m_bs of
                     Just bs -> (bs <>) <$> loop (n - length bs)
-                    _ -> fail $ "Premature end of file. Expecting to read " ++ show n ++ " more bytes."
+                    _ -> fail $ "read_exactly: Premature end of file. Expecting to read " ++ show n ++ " more bytes."
 
 {- |
 See 'Tcp.connectSock'.
@@ -68,6 +71,15 @@ serve host port handle = Tcp.serve host port (uncurry handle)
 -- | Frame content, without length.
 type Payload = ByteString
 
+newtype Frame = MkFrame Payload
+    deriving (Read, Show)
+
+mk_frame :: Payload -> Frame
+mk_frame = MkFrame
+
+get_payload :: Frame -> Payload
+get_payload (MkFrame payload) = payload
+
 {- |
 A frame is:
 
@@ -77,21 +89,22 @@ A frame is:
 
 The function 'read_frame' returns the payload without the length.
 -}
-read_frame :: (MonadIO m) => S.Socket -> m Payload
+read_frame :: (MonadIO m) => S.Socket -> m Frame
 read_frame socket = liftIO $ do
     b_len <- read_exactly socket 4
-    len <- either fail return $ Bin.runGet Bin.getWord32be b_len
+    len <- either (\ msg -> fail $ "read_frame: " ++ msg) return $ Bin.runGet Bin.getWord32be b_len
     let limit = 1048576
-    when (len > limit) $ fail $ "Frame too big: " ++ show len ++ " > " ++ show limit
-    read_exactly socket (fromIntegral len)
+    when (len > limit) $ fail $ "read_frame: Frame too big: " ++ show len ++ " > " ++ show limit
+    MkFrame <$> read_exactly socket (fromIntegral len)
 
 {- |
 See 'read_frame' for the definition of \"frame\".
 
 The function 'write_frame' writes the length of the payload and then the payload.
 -}
-write_frame :: (MonadIO m) => S.Socket -> Payload -> m ()
-write_frame socket frame = liftIO $ do
-    let len = length frame
-        b_len = Bin.runPut $ Bin.putWord32be len
-    Tcp.send socket b_len
+write_frame :: (MonadIO m) => S.Socket -> Frame -> m ()
+write_frame socket (MkFrame payload) = liftIO $ do
+    let len = length payload
+        bs_len = Bin.runPut $ Bin.putWord32be len
+        frame = bs_len <> payload
+    Tcp.send socket frame

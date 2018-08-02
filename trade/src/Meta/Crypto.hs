@@ -31,9 +31,12 @@ import Meta.Prelude
 import qualified Crypto.PubKey.RSA as CR
 import qualified Crypto.PubKey.RSA.PKCS15 as CP
 import qualified Crypto.Random as Ran
+import qualified Data.ASN1.BinaryEncoding as AB
+import qualified Data.ASN1.Encoding as AE
+import qualified Data.ASN1.Types as AT
 import qualified Data.ByteString.Base64 as Base64
+import qualified Data.X509 as X
 import qualified OpenSSL as OS
-import qualified OpenSSL.DER as OD
 import qualified OpenSSL.EVP.PKey as OE
 import qualified OpenSSL.PEM as OP
 import qualified OpenSSL.RSA as OR
@@ -62,11 +65,11 @@ type Ciphertext = ByteString
 
 -- | Encrypt with RSA public key.
 rsa_encrypt :: (Ran.MonadRandom m) => RSA_public_key -> Plaintext -> m Ciphertext
-rsa_encrypt k p = CP.encrypt k p >>= either (fail . show) return
+rsa_encrypt k p = CP.encrypt k p >>= either (\ err -> fail $ "rsa_encrypt: " ++ show err) return
 
 -- | Decrypt with RSA private key.
 rsa_decrypt :: (Ran.MonadRandom m) => RSA_key_pair -> Ciphertext -> m Plaintext
-rsa_decrypt k c = CP.decryptSafer k c >>= either (fail . show) return
+rsa_decrypt k c = CP.decryptSafer k c >>= either (\ err -> fail $ "rsa_decrypt: " ++ show err) return
 
 type PEM_file_path = FilePath
 
@@ -74,8 +77,9 @@ type DER = ByteString
 
 rsa_read_public_key_from_der_string :: (Monad m) => DER -> m RSA_public_key
 rsa_read_public_key_from_der_string der = do
-    pub <- maybe (fail "Invalid DER string") return $ OD.fromDERPub der
-    return $ translate_pub pub
+    asn1s <- either (fail . show) return $ AE.decodeASN1' AB.DER der
+    (X.PubKeyRSA pub, _) <- either (\ msg -> fail $ "rsa_read_public_key_from_der_string: " ++ msg) return $ AT.fromASN1 asn1s
+    return pub
 
 -- | Read RSA public key from PEM file.
 rsa_read_public_key_from_file :: PEM_file_path -> IO RSA_public_key
@@ -113,4 +117,6 @@ translate_priv k = do
         d = OR.rsaD k
         p = OR.rsaP k
         q = OR.rsaQ k
-        a msg val = maybe (fail msg) return val
+        a msg val = maybe (fail $ "Meta.Crypto.translate_priv: " ++ msg) return val
+
+-- https://stackoverflow.com/questions/12961809/how-to-parse-asn-1-with-haskell
