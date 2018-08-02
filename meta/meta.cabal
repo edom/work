@@ -68,7 +68,6 @@ library
         Manage.Iptables
         Manage.SSH
         Meta.Apply
-        Meta.ByteString
         Meta.Cal
         Meta.CalExp
         Meta.CalIo
@@ -105,7 +104,6 @@ library
         Meta.JavaSta
         Meta.JavaType
         Meta.JavaWebApp
-        Meta.Json
         Meta.JvmAccess
         Meta.JvmArch
         Meta.JvmConstPool
@@ -126,11 +124,8 @@ library
         Meta.LogicExp
         Meta.LogicVal
         Meta.Machine
-        Meta.Map
         Meta.Maven
         Meta.MavenDep
-        Meta.Os
-        Meta.OsProc
         Meta.Peg
         Meta.PegExample
         Meta.PegGen
@@ -138,9 +133,6 @@ library
         Meta.PegGenLoc
         Meta.PegGenRule
         Meta.PegGenTree
-        Meta.Prelude
-        Meta.PreludeGrammar
-        Meta.PreludeMin
         Meta.Pretty
         Meta.Prop
         Meta.Readme
@@ -153,7 +145,6 @@ library
         Meta.SqlType
         Meta.Stk
         Meta.Test
-        Meta.Text
         Meta.Time
         Meta.Type
         Meta.Tys
@@ -194,14 +185,15 @@ library
     -- See Codec.Archive.Zip.toArchiveOrFail about @binary >= 0.7@.
     build-depends:
         base >= 4.6 && < 5
-        , aeson >= 1 && < 2
+
+        , prelude
+
         , binary >= 0.7
         , bytestring >= 0 && < 1
         , cereal >= 0 && < 1
         , containers >= 0.4 && < 1
         , csv >= 0
         , directory >= 1.2.3.0 && < 2
-        , directory-tree
         , filepath >= 1 && < 2
         , ghc
         , ghc-paths
@@ -213,13 +205,11 @@ library
         , postgresql-simple >= 0.4 && < 1
         , pretty >= 1.0.0.0 && < 2
         , process >= 1.4.3.0 && < 2
-        , scientific
         , shell-escape >= 0 && < 1
         , split >= 0.1 && < 1
         , text
         , time >= 1
         , transformers
-        , unordered-containers
         , utf8-string >= 1 && < 2
         , vector
         , yaml
