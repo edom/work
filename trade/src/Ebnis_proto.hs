@@ -4,6 +4,8 @@
 Common things between server and client.
 -}
 module Ebnis_proto (
+    -- * Protocol documentation
+    -- $protocol
     -- * EBNIS idiosyncrasies
     -- ** CONNECT special case
     read_connect
@@ -82,6 +84,30 @@ import qualified Meta.Stomp as Stomp
 
 import qualified Ebnis_connect as Con
 import qualified Ebnis_session as Ses
+
+{- $protocol
+
+See 'Net.read_frame' in "Meta.Net" for the definition of /frame/.
+
+The client generates a session key.
+See 'Con.Session_key'.
+
+The client sends a CONNECT frame containing the session key.
+The CONNECT frame format is idiosyncratic.
+See and 'write_connect' and 'Con.encode_connect'.
+
+The server replies with a CONNECTED frame or an ERROR frame.
+
+That concludes the handshake.
+
+After that handshake, every client-to-server messages are scrambled with the session key.
+See 'Ses.read_message' and 'Ses.write_message' for the message format.
+See 'Ses.read_frame' and 'Ses.write_frame' ("Ebnis_session") for the frame format.
+and 'Net.write_frame' ("Meta.Network").
+A /frame/ contains a /message/.
+See 'Ses.scramble' and "Ebnis_scramble" for the scrambling algorithm.
+
+-}
 
 read_message :: (MonadIO m, Ses.Monad_session m) => m Message
 read_message = Ses.read_frame >>= decode_message
