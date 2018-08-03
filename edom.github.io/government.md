@@ -114,3 +114,23 @@ In 1976 that could be more simply put as [follow the money](https://en.wikipedia
 Is there a mixture between the two?
 Regulated private sector?
 - https://en.wikipedia.org/wiki/Monopoly_on_violence
+    - https://en.wikipedia.org/wiki/Justification_for_the_state
+- https://www.bbc.com/news/uk-politics-42570823
+- https://www.quora.com/Are-there-any-countries-without-government
+- If healthcare were affordable, would we still need insurance?
+- We don't need insurance.
+We need affordable healthcare.
+- http://time.com/4937691/americans-cheap-healthcare-instantly/
+- https://www.bloomberg.com/news/articles/2018-05-15/doctors-who-hate-insurance-so-much-they-go-without-it-themselves
+- https://www.quora.com/What-do-doctors-think-about-insurance-companies
+- What makes healthcare so expensive?
+    - Definitely not the general practitioners (non-specialist doctors).
+    They charge the patient only about $20 per visit.
+    - Hospitals?
+    - Drugs?
+    - Insurances?
+- argument for government, the necessity of government
+    - https://www.quora.com/Why-have-so-few-humans-realized-that-governments-are-unnecessary
+- https://en.wikipedia.org/wiki/Night-watchman_state
+- If taxes were voluntary, would people pay tax?
+- https://en.wikipedia.org/wiki/Voluntary_taxation

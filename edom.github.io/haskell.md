@@ -10,6 +10,16 @@ language: en
     - https://github.com/Gabriel439/post-rfc/blob/master/sotu.md
     - https://www.reddit.com/r/haskell/comments/54fv8b/what_is_the_state_of_haskell/
     - https://lexi-lambda.github.io/blog/2018/02/10/an-opinionated-guide-to-haskell-in-2018/
+- Development workflow and tools
+    - 2018
+        - IDE (integrated development environment)
+            - Visual Studio Code
+            - Leksah
+            - others?
+            - https://github.com/haskell/haskell-ide-engine
+        - cabal new-style
+    - 2016, http://www.stephendiehl.com/posts/vim_2016.html
+        - 2015 (?), http://www.stephendiehl.com/posts/vim_haskell.html
 - How to get started?
     - Too many choices
         - install using the package manager that comes with your system
