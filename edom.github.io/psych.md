@@ -60,3 +60,5 @@ date: 2018-05-24 02:52 +0700
         - big five personality trait
             - C/E requires "openness to experience"
             - M/A requires conscientiousness
+- [A simple way to break a bad habit | Judson Brewer](https://www.youtube.com/watch?v=-moW9jvvMr4): by being curiously aware
+- [How to motivate yourself to change your behavior | Tali Sharot | TEDxCambridge](https://www.youtube.com/watch?v=xp0O2vi8DX4)

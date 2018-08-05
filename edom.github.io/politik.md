@@ -95,3 +95,5 @@ We already have laws for people causing public disorder.
 - https://www.hukumproperti.com/pertanahan/hapusnya-hak-atas-tanah/
     - "karena ditelantarkan" PP 36/1998
         - Apakah bisa digunakan untuk tetangga yang meninggalkan rumahnya dan membiarkannya rusak?
+- http://www.dpr.go.id/jdih/uu1945
+    - UUD 1945 pasal 1 ayat 3: "Negara Indonesia adalah negara hukum."

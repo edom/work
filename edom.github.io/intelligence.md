@@ -354,3 +354,6 @@ from [two minute papers 241](https://www.youtube.com/watch?v=AbxPbfODGcs).
 - [Tensorizing Neural Networks](https://arxiv.org/abs/1509.06569)
 - [Gated Feedback Recurrent Neural Networks](https://arxiv.org/abs/1502.02367)
 - no information http://syntience.com/
+- [The pattern behind self-deception | Michael Shermer](https://www.youtube.com/watch?v=b_6-iVz1R0o):
+patternicity, agenticity, pattern over-recognition, false positive, false negative
+    - "false positive" is a much better name than "type 1 error"

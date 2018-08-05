@@ -266,3 +266,4 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
 - [CGI Animated Short Film HD "The D in David " by Michelle Yi and Yaron Farkash \| CGMeetup](https://www.youtube.com/watch?v=o2kPSAYS2wQ)
 - [Wakaliwood: Tren Terbaru Film Laga DIY dari Uganda](https://www.youtube.com/watch?v=Cg44R3-5TK)
 - TED-Ed: "Why isn't the world covered in poop? - Eleanor Slade and Paul Manning" (TLDR: dung beetles), [youtube](https://www.youtube.com/watch?v=uSTNyHkde08)
+- TED-Ed: "At what moment are you dead? - Randall Hayes", [youtube](https://www.youtube.com/watch?v=5c6C3rHOdf8), 3:00 cute duck animation

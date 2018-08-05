@@ -20,6 +20,17 @@ language: en
         - cabal new-style
     - 2016, http://www.stephendiehl.com/posts/vim_2016.html
         - 2015 (?), http://www.stephendiehl.com/posts/vim_haskell.html
+    - Which version of GHC should I use?
+        - The one that is supported by HaRe (Haskell refactoring tool) and other tools (IDE, Leksah, Cabal, etc.).
+        In 2018, I think the safe choice is GHC 7.10?
+            - http://hackage.haskell.org/package/HaRe
+            - Does Cabal 2.2 work with GHC 7.10?
+- Haskell woes?
+    - Exceptions?
+        - http://hackage.haskell.org/package/safe-exceptions
+        - https://www.fpcomplete.com/blog/2016/11/exceptions-best-practices-haskell
+        - https://www.reddit.com/r/haskell/comments/589fkg/haskell_and_the_no_runtime_exception_claim_95_of/
+    - Module system
 - How to get started?
     - Too many choices
         - install using the package manager that comes with your system

@@ -72,3 +72,4 @@ Distraction osteogenesis. Breaking the leg bones. Undesirable side effects.
     - https://www.youtube.com/watch?v=n78PS4zq3D8
 - animals that photosynthesize
     - https://www.nationalgeographic.com/animals/2018/07/solar-powered-photosynthetic-sea-slugs-in-decline-news/
+- reverse desertification [https://www.youtube.com/watch?v=vpTHi7O66pI](https://www.youtube.com/watch?v=vpTHi7O66pI): use livestock, mimick natural predators to make livestock move around
