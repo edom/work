@@ -15,6 +15,9 @@ library
         -Wall
     default-extensions:
         FlexibleContexts
+        FlexibleInstances
+        MultiParamTypeClasses
+        TypeSynonymInstances
     exposed-modules:
         Trade_main
         Ebnis_client
@@ -26,6 +29,8 @@ library
         Meta.Crypto
         Meta.Log
         Meta.Network
+        Meta.Pubsub
+        Meta.Queue
         Meta.Stomp
         Meta.Zlib
         Programming_errors
