@@ -3,6 +3,7 @@
     - [meta](meta/)
         - library for writing metaprograms in Haskell
         - use Haskell as metalanguage
+    - [prelude](prelude/): a maximalist Haskell Prelude that tries to collects best practices
     - [sound](sound/)
         - Find out whether real-time sound synthesis is possible with GHC Haskell.
         - Write some ugly code involving GHC primitives (unboxed things).

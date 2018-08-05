@@ -51,7 +51,10 @@ import qualified Meta.Prelude as P
     * <https://hackage.haskell.org/packages/#cat:Prelude>
 -}
 module Meta.Prelude (
+    -- * Reexports
     module Meta.PreludeMin
+    , module Meta.Prelude_concurrent
+    , module Meta.Prelude_time
     -- * Bool
     , P.not
     , P.and
@@ -70,6 +73,7 @@ module Meta.Prelude (
     , P.all
     , P.any
     , P.concatMap
+    , FilterM(..)
     , Filter(..)
     , P.foldl
     , P.foldr
@@ -122,6 +126,7 @@ module Meta.Prelude (
     , IORef.newIORef
     , IORef.readIORef
     , IORef.writeIORef
+    , IORef.atomicModifyIORef'
     , IC.MonadIO(liftIO)
     -- * Power-of-two Int variants
     , I.Int8
@@ -133,6 +138,8 @@ module Meta.Prelude (
     , W.Word16
     , W.Word32
     , W.Word64
+    -- * Monad
+    , M.forever
     -- * Monad fail
     , P.fail
     -- * Errors
@@ -140,12 +147,6 @@ module Meta.Prelude (
     , raise_either
     -- * Function
     , (|>)
-    -- * Concurrency
-    -- $concur
-    -- ** Forking
-    , Con.forkIO
-    , Con.forkOS
-    , Con.killThread
     -- * ByteString
     , B.ByteString
     , B.LazyByteString
@@ -175,31 +176,46 @@ module Meta.Prelude (
     -- * Exceptions
     , E.bracket
     , E.bracket_
+    -- * Sys.Mem.Weak
+    , MW.Weak
+    , MW.mkWeakPtr
+    , MW.deRefWeak
+    -- * Reader
+    , R.MonadReader(..)
+    , R.ReaderT
+    -- * Maybe
+    , Mb.isJust
 ) where
 
 import Prelude ()
 import Meta.PreludeMin
 
 import qualified Control.Applicative as A
-import qualified Control.Concurrent as Con
 import qualified Control.Exception as E
+import qualified Control.Monad as M
 import qualified Control.Monad.ST as MST
 import qualified Data.Bits as Bits
 import qualified Data.Char as C
 import qualified Data.IORef as IORef
 import qualified Data.Int as I
 import qualified Data.List as L
+import qualified Data.Maybe as Mb
 import qualified Data.Monoid as Mon
 import qualified Data.Semigroup as Sgr
 import qualified Data.String as S
 import qualified Data.Word as W
 import qualified Prelude as P
 import qualified System.IO.Error as IE
+import qualified System.Mem.Weak as MW
 
+import qualified Control.Monad.Reader as R
 import qualified Control.Monad.IO.Class as IC
 import qualified Data.ByteString as BS
 import qualified Data.ByteString.Lazy as BSL
 import qualified Data.Vector as V
+
+import Meta.Prelude_concurrent
+import Meta.Prelude_time
 
 import qualified Meta.ByteString as B
 import qualified Meta.Map as Map
@@ -235,14 +251,20 @@ user_error = IE.ioError . IE.userError
 raise_either :: (Monad m) => Either String a -> m a
 raise_either = either P.fail return
 
-class Filter c a | c -> a where
-    filter :: (a -> Bool) -> c -> c
+class Filter p i o where
+    filter :: p -> i -> o
 
-instance Filter [a] a where
+instance (a ~ b, b ~ c) => Filter (a -> Bool) [b] [c] where
     filter = P.filter
 
-instance Filter (V.Vector a) a where
+instance (a ~ b, b ~ c) => Filter (a -> Bool) (V.Vector b) (V.Vector c) where
     filter = V.filter
+
+class FilterM p i o where
+    filterM :: p -> i -> o
+
+instance (Monad m, a ~ b, b ~ c, m ~ n) => FilterM (a -> m Bool) [b] (n [c]) where
+    filterM = M.filterM
 
 class Length a n where
     length :: a -> n
@@ -272,12 +294,6 @@ beginsWith = flip L.isPrefixOf
 -- | @a `endsWith` b = b `'L.isSuffixOf'` a@.
 endsWith :: (Eq a) => [a] -> [a] -> Bool
 endsWith = flip L.isSuffixOf
-
-{- $concur
-This assumes that the compiler is GHC.
-
-See also "Control.Concurrent".
--}
 
 {- |
 A generalized list is either a generalized nil or a generalized cons.
