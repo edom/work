@@ -59,3 +59,5 @@ Can machine cluster documents by the task they help accomplish?
 - Undigested
     - [PMSE 2780: How to organize knowledge within a wiki?](https://pm.stackexchange.com/questions/2780/how-to-organize-knowledge-within-a-wiki)
     - https://www.quora.com/What-is-the-best-way-to-organize-a-company-wiki
+- Knowledge is only as good as what it enables you.
+    - 2013, article, [Knowledge is no longer power; How you use knowledge is power!](https://www.k4health.org/blog/post/knowledge-no-longer-power-how-you-use-knowledge-power)

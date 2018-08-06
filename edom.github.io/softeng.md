@@ -250,3 +250,21 @@ Isn't it too long?
     - http://www.sebokwiki.org/wiki/An_Overview_of_the_SWEBOK_Guide
 - 2010, article, "We show how symbolic execution and Satisfiability Modulo Theories (SMT) solvers can be gainfully employed to greatly automate software debugging of evolving programs.", [downloadable as pdf](https://www.sciencedirect.com/science/article/pii/S1571066110001246)
     - confusing title: "Debugging as a Science, that too, when your Program is Changing"
+- Distilling the best practices and standardizing the tools and processes
+    - API (application programming interface) information systems, REST clients, REST API debuggers
+        - https://insomnia.rest/
+            - source code https://github.com/getinsomnia/insomnia
+        - https://www.getpostman.com/
+            - not open source https://stackoverflow.com/questions/43380313/postman-main-source-code-repository
+    - JOOQ
+    - https://zachholman.com/posts/deploying-software
+    - IDE (integrated development environment)
+        - How do we make an IDE?
+        Can we generate an IDE from grammar?
+    - How do we put academic research into practice?
+        - 1995, article, "Deriving specifications from requirements: an example", [paywall](https://dl.acm.org/citation.cfm?id=225016)
+        - 1998, article, "Architecture-based runtime software evolution", [paywall](https://dl.acm.org/citation.cfm?id=302181)
+        - 2000, article, "Bandera: extracting finite-state models from Java source code", [paywall](https://dl.acm.org/citation.cfm?id=337234)
+            - Is this related with C#'s async-await?
+    - metaprogramming
+        - "Spoon is a library to analyze, transform, rewrite, transpile Java source code (incl Java 9 & Java 10)." [source](https://github.com/INRIA/spoon)

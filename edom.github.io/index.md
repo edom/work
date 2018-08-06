@@ -3,15 +3,11 @@ layout: default
 date: 2017-05-20 00:00:00 +0700
 ---
 
-- This is my public personal wiki.
-    - Summaries of everything I learn.
-    - Links to things I think I should read but haven't.
 - Disclaimers
     - This website may contain mistakes.
     Use with caution.
     Compare with other independent sources.
-    - This website may contain comments by others.
-    I am not responsible for those.
+    - I am not responsible for other's comments.
 - Projects
     - Thinking
         - Computer
@@ -84,6 +80,7 @@ date: 2017-05-20 00:00:00 +0700
                     - [Using computers]({% link usecom.md %})
                         - [Searching the Internet]({% link search.md %})
                         - [Removing nag screens]({% link nag.md %})
+                        - [Making a personal wiki]({% link perswiki.md %})
                     - [Buying a smartphone]({% link phone.md %})
                         - [Android vs iPhone]({% link andvsiph.md %})
                 - [Growing muscles]({% link muscle.md %})
@@ -140,3 +137,8 @@ date: 2017-05-20 00:00:00 +0700
         - I collect and organize knowledge into this wiki.
     - Music
         - I play piano in the band [The Nomads]({% link nomads.md %}) (an Indonesian band, not the Swedish band).
+- Is there a distributed search engine, something as good as Google, but not owned by a company?
+    - https://en.wikipedia.org/wiki/Distributed_search_engine
+    - https://fourweekmba.com/distributed-search-engines-vs-google/
+    - https://en.wikipedia.org/wiki/YaCy
+        - https://en.wikipedia.org/wiki/Dooble
