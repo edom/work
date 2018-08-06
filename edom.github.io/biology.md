@@ -72,4 +72,8 @@ Distraction osteogenesis. Breaking the leg bones. Undesirable side effects.
     - https://www.youtube.com/watch?v=n78PS4zq3D8
 - animals that photosynthesize
     - https://www.nationalgeographic.com/animals/2018/07/solar-powered-photosynthetic-sea-slugs-in-decline-news/
-- reverse desertification [https://www.youtube.com/watch?v=vpTHi7O66pI](https://www.youtube.com/watch?v=vpTHi7O66pI): use livestock, mimick natural predators to make livestock move around
+- Reversing global warming
+    - Reversing desertification
+        - [How to green the world's deserts and reverse climate change | Allan Savory](https://www.youtube.com/watch?v=vpTHi7O66pI)
+            - Use livestock to mimick natural predators to make livestock move around.
+    - We might be able to use [Tali Sharot's TEDx talk](https://www.youtube.com/watch?v=xp0O2vi8DX4) to reduce global warming (the way the electric company manipulates her into using less electricity).

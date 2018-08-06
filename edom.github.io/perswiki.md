@@ -29,3 +29,8 @@ date: 2018-08-06 22:17 +0700
             - https://github.com/lotabout/static-wiki
         - unknown
             - http://dynalon.github.io/mdwiki/#!index.md
+- Avoid accidental publishing.
+    - Don't put anything you don't want to publish inside your Jekyll directory, no matter how convenient.
+    Accidents happen.
+    Humans make mistakes.
+    Computer doesn't care.

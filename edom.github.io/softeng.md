@@ -80,8 +80,6 @@ permalink: /softeng.html
                 - http://engineering.gopangea.com/stack
                 - http://engineering.gopangea.com/2015/12/10/why-dot-net.html
 - [Security]({% link security.md %})
-- [Software engineering management]({% link engman.md %})
-    - long text: [Top-down vs. Bottom-up Hierarchy: Or, How to Design a Self-Managed Organization](http://organizationalphysics.com/2016/10/13/top-down-vs-bottom-up-hierarchy-or-how-to-build-a-self-managed-organization/)
 - Developing software for the Web
     - [Software]({% link software.md %})
     - [The sad state of web development](https://news.ycombinator.com/item?id=11035143) (not everyone agrees).
@@ -268,3 +266,5 @@ Isn't it too long?
             - Is this related with C#'s async-await?
     - metaprogramming
         - "Spoon is a library to analyze, transform, rewrite, transpile Java source code (incl Java 9 & Java 10)." [source](https://github.com/INRIA/spoon)
+- unread
+    - long text: [Top-down vs. Bottom-up Hierarchy: Or, How to Design a Self-Managed Organization](http://organizationalphysics.com/2016/10/13/top-down-vs-bottom-up-hierarchy-or-how-to-build-a-self-managed-organization/)

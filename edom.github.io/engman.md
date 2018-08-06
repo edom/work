@@ -4,6 +4,28 @@ permalink: /engman.html
 date: 2018-05-15 02:31:00 +0700
 ---
 
+- Attracting and retaining engineering talent (or any talent)
+    - Have something you want to accomplish.
+        - Have both a *product* roadmap and a *technical* roadmap.
+            - Know both *what* you want to accomplish and *how* you might accomplish it.
+            - No need to be too detailed.
+            Principles should suffice.
+            - Product roadmap satisfies the desire to have an impact.
+            - Technical roadmap satisfies the desire of mastery.
+    - State them concisely.
+    - Find people who want to accomplish the same thing.
+        - Find people who want to "move" in the same "direction".
+    - Talents leave you when their goals and your goals no longer coincide.
+    Either they change, you change, or both.
+- If there is a shortage of software engineers, then you can only hire fresh graduates and train them in house.
+    - You want trainable people.
+        - High IQ is a must, but not enough.
+        - You also want agreeable people, but not yes-men.
+        - People are like chemicals.
+        Some form bonds with some.
+        Some explode when mixed.
+        Some are inert.
+        Some are toxic.
 - What does a software engineering manager do?
     - [What Lyft thinks](https://www.lyft.com/jobs/software-engineering-manager)
     - [What Mark Shuttleworth thinks](http://www.markshuttleworth.com/archives/694)

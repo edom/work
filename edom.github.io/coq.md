@@ -6,7 +6,7 @@ mathjax: true
 ---
 
 - Introduction
-    - I haven't found a suitable introduction to Coq.
+    - What is a suitable introduction to Coq?
     - [Daniel Schepler's "Mathematical formalization using Coq"](https://people.debian.org/~schepler/coqtut.v.html) seems approachable.
     - [MO 155909: Wanted: a “Coq for the working mathematician”](https://mathoverflow.net/questions/155909/wanted-a-coq-for-the-working-mathematician)
     - [MO 164959: How do I verify the Coq proof of Feit-Thompson?](https://mathoverflow.net/questions/164959/how-do-i-verify-the-coq-proof-of-feit-thompson)

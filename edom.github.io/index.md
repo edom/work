@@ -23,6 +23,8 @@ date: 2017-05-20 00:00:00 +0700
                     - [Making contributable open-source projects]({% link opensrc.md %})
                         - [Building online communities]({% link community.md %})
                     - [Solving the AST decoration problem]({% link ast.md %})
+                    - [Proving things using computers]({% link proof.md %})
+                    - [Attracting and retaining engineering talent]({% link engman.md %})
                 - [Reverse engineering]({% link reveng.md %})
                     - [Reverse engineering the network protocol used by a Java desktop application]({% link rejava.md %}): a stock trading application written in Java 6
                     - [Reverse-engineering PlayStation 1 3D games to control the camera]({% link ps1.md %})
@@ -84,6 +86,12 @@ date: 2017-05-20 00:00:00 +0700
                     - [Buying a smartphone]({% link phone.md %})
                         - [Android vs iPhone]({% link andvsiph.md %})
                 - [Growing muscles]({% link muscle.md %})
+                - Hidup di Indonesia abad 21
+                    - BPJS?
+                        - [Cek saldo BPJS](https://daftar.bpjs-kesehatan.go.id/bpjs-checking/)
+                        - [Ini registrasi apa?](https://sso.bpjsketenagakerjaan.go.id/registrasi.bpjs)
+                        Kenapa harus registrasi?
+                    - [BTPN Jenius?]({% link btpn.md %})
         - Statistics
             - Durian
                 - The fruit is a ripe Durian Medan that has been peeled bought from Toko Buah Jakarta.

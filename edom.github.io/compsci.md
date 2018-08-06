@@ -7,12 +7,6 @@ mathjax: yes
 
 - Functional programming research
     - [Haskell]({% link haskell.md %})
-    - [Coq]({% link coq.md %})
-        - Also consider [Lean](https://leanprover.github.io/).
-            - Pros of Lean
-                - Integrates with Visual Studio Code
-            - Cons of Lean
-                - Less mature than Coq
 - [Cryptocurrency]({% link crycur.md %})
 - [Matt Might: What CS majors should know](http://matt.might.net/articles/what-cs-majors-should-know/)
 - [Wikipedia: List of important publications in computer science](https://en.m.wikipedia.org/wiki/List_of_important_publications_in_computer_science)

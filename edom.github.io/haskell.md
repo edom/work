@@ -31,6 +31,7 @@ language: en
         - https://www.fpcomplete.com/blog/2016/11/exceptions-best-practices-haskell
         - https://www.reddit.com/r/haskell/comments/589fkg/haskell_and_the_no_runtime_exception_claim_95_of/
     - Module system
+    - `Read(read)` should be named to `Coshow(coshow)`.
 - How to get started?
     - Too many choices
         - install using the package manager that comes with your system
