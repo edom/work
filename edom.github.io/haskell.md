@@ -1,15 +1,36 @@
 ---
-title: Haskell
+title: Using Haskell
 permalink: /haskell.html
 date: 2018-05-16 00:00 +0700
 language: en
 ---
 
+- Setting up development environment
+    - Install the Haskell `stack` tool.
+        - I use the [manual download](https://docs.haskellstack.org/en/stable/install_and_upgrade/#linux).
+            - If you want to make sure that the download isn't corrupted, check the corresponding sha256sum from [GitHub releases page](https://github.com/commercialhaskell/stack/releases/).
+            - If you don't mind sudoing, use the installer script in the [documentation](https://docs.haskellstack.org/en/stable/README/).
+        - Then I check the archive contents using `tar tzf`.
+        - If there's no weird paths, I extract the archive with `tar xzf`.
+        - Then I make the symbolic link `~/.local/bin/stack`.
+        - If you use the manual download, you may have to install some operating system packages.
+            - The list is on the [install script](https://get.haskellstack.org/).
+            Search for `install_dependencies` for your distro.
+    - Choose a Stack solver.
+    - (2018-08-07) Download GHC 7.10 using Stack.
+        - Which version of GHC should I use?
+            - The one that is supported by [HaRe](http://hackage.haskell.org/package/HaRe) (Haskell refactoring tool) and other tools (IDE, Leksah, Cabal, etc.).
+            In 2018, I think the safe choice is GHC 7.10.
+    - unread, Stephen Diehl
+        - http://www.stephendiehl.com/posts/vim_2016.html
+        - http://www.stephendiehl.com/posts/vim_haskell.html
+        - http://www.stephendiehl.com/posts/haskell_2018.html
 - Haskell in 2018
     - https://www.reddit.com/r/haskell/comments/7wmhyi/an_opinionated_guide_to_haskell_in_2018/
     - https://github.com/Gabriel439/post-rfc/blob/master/sotu.md
     - https://www.reddit.com/r/haskell/comments/54fv8b/what_is_the_state_of_haskell/
     - https://lexi-lambda.github.io/blog/2018/02/10/an-opinionated-guide-to-haskell-in-2018/
+    - [Eta: Haskell on JVM](https://eta-lang.org/)
 - Development workflow and tools
     - 2018
         - IDE (integrated development environment)
@@ -20,11 +41,6 @@ language: en
         - cabal new-style
     - 2016, http://www.stephendiehl.com/posts/vim_2016.html
         - 2015 (?), http://www.stephendiehl.com/posts/vim_haskell.html
-    - Which version of GHC should I use?
-        - The one that is supported by HaRe (Haskell refactoring tool) and other tools (IDE, Leksah, Cabal, etc.).
-        In 2018, I think the safe choice is GHC 7.10?
-            - http://hackage.haskell.org/package/HaRe
-            - Does Cabal 2.2 work with GHC 7.10?
 - Haskell woes?
     - Exceptions?
         - http://hackage.haskell.org/package/safe-exceptions

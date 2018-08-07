@@ -19,16 +19,23 @@ date: 2017-05-20 00:00:00 +0700
                             - [Functional programming research]({% link functional_programming.md %})
                             - [Joint research with Abdullah]({% link abdullah.md %})
                             - [Programming]({% link programming.md %})
+                    - [Using Haskell]({% link haskell.md %})
                     - [Using Java]({% link java.md %})
                     - [Making contributable open-source projects]({% link opensrc.md %})
                         - [Building online communities]({% link community.md %})
                     - [Solving the AST decoration problem]({% link ast.md %})
                     - [Proving things using computers]({% link proof.md %})
-                    - [Attracting and retaining engineering talent]({% link engman.md %})
+                    - [Liberating software]({% link libersoft.md %})
+                    - [Making a Java virtual machine]({% link jvm.md %})
+                    - Real-time garbage collection
+                        - http://michaelrbernste.in/2013/06/03/real-time-garbage-collection-is-real.html
                 - [Reverse engineering]({% link reveng.md %})
                     - [Reverse engineering the network protocol used by a Java desktop application]({% link rejava.md %}): a stock trading application written in Java 6
                     - [Reverse-engineering PlayStation 1 3D games to control the camera]({% link ps1.md %})
-                - Finding career/jobs in software engineering
+                - Software engineering career
+                    - [Attracting and retaining engineering talent]({% link engman.md %})
+                    - [Software engineer salary]({% link salary.md %})
+                    - [Netflix culture](https://jobs.netflix.com/culture)
                     - recruiters?
                         - https://triplebyte.com/
                             - from http://highscalability.com/
@@ -55,9 +62,9 @@ date: 2017-05-20 00:00:00 +0700
                         - https://techcrunch.com/2013/07/29/why-labor-unions-and-silicon-valley-arent-friends-in-2-charts/
                     - interviews?
                         - https://jvns.ca/blog/2013/12/30/questions-im-asking-in-interviews/
+                        - https://github.com/InterviewMap/InterviewMap
                     - unread
                         - https://medium.com/javascript-scene/why-hiring-is-so-hard-in-tech-c462c3230017
-                    - [Software engineer salary]({% link salary.md %})
             - Computational complexity
                 - [Trying to prove P neq. NP]({% link pnptry.md %})
         - [Justifying physics]({% link natkno.md %})

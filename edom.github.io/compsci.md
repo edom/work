@@ -6,7 +6,6 @@ mathjax: yes
 ---
 
 - Functional programming research
-    - [Haskell]({% link haskell.md %})
 - [Cryptocurrency]({% link crycur.md %})
 - [Matt Might: What CS majors should know](http://matt.might.net/articles/what-cs-majors-should-know/)
 - [Wikipedia: List of important publications in computer science](https://en.m.wikipedia.org/wiki/List_of_important_publications_in_computer_science)

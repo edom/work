@@ -23,3 +23,8 @@ date: 2018-08-07 01:19 +0700
             - Which proofs are interesting?
 - Companies
     - [Galois](https://galois.com/), on [github](https://github.com/GaloisInc/)
+- unread interesting things
+    - http://www.joachim-breitner.de/blog/717-Why_prove_programs_equivalent_when_your_compiler_can_do_that_for_you_
+    - http://www.michaelburge.us/2017/08/25/writing-a-formally-verified-porn-browser-in-coq.html
+    - https://aphyr.com/posts/342-typing-the-technical-interview
+    - http://tech.frontrowed.com/2017/09/22/aggregations/
