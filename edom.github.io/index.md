@@ -3,6 +3,7 @@ layout: default
 date: 2017-05-20 00:00:00 +0700
 ---
 
+- I am the target audience of this website, but I hope it's useful for you too.
 - Disclaimers
     - This website may contain mistakes.
     Use with caution.
@@ -32,6 +33,7 @@ date: 2017-05-20 00:00:00 +0700
                         - http://michaelrbernste.in/2013/06/03/real-time-garbage-collection-is-real.html
                     - npm dependency hell, how npm2 works, how npm3 works
                         - http://npm.github.io/how-npm-works-docs/theory-and-design/dependency-hell.html
+                    - [Running X client applications on Docker on Linux]({% link dockerx.md %})
                 - [Reverse engineering]({% link reveng.md %})
                     - [Reverse engineering the network protocol used by a Java desktop application]({% link rejava.md %}): a stock trading application written in Java 6
                     - [Reverse-engineering PlayStation 1 3D games to control the camera]({% link ps1.md %})
@@ -77,7 +79,7 @@ date: 2017-05-20 00:00:00 +0700
             - [Politics]({% link politics.md %})
                 - [Solving the Israel-Palestine problem]({% link ispal.md %})
                 - [Politik Indonesia]({% link politik.md %})
-                - [Jakarta]({% link jakarta.md %}): Things for me to do in Jakarta.
+                - [Living in Jakarta]({% link jakarta.md %})
             - Social
                 - Prevent social isolation.
                 Social isolation causes violence and extremism.
@@ -103,30 +105,6 @@ date: 2017-05-20 00:00:00 +0700
                         - [Ini registrasi apa?](https://sso.bpjsketenagakerjaan.go.id/registrasi.bpjs)
                         Kenapa harus registrasi?
                     - [BTPN Jenius?]({% link btpn.md %})
-        - Statistics
-            - Durian
-                - The fruit is a ripe Durian Medan that has been peeled bought from Toko Buah Jakarta.
-                The package contains seed and pulp only, without rind.
-                - Date of measurement: 2018-08-01.
-                - Price tag
-                    - Weight on price tag: 1328 grams
-                    - Unit price: IDR 55000/kg
-                    - Total price: IDR 73040
-                - Direct measurements
-                    - The seeds are put on a plate for weighing.
-                    - Weights
-                        - 9 grams: wrapping (styrofoam and plastic)
-                        - 612 grams: the plate and the seeds
-                        - 300 grams: the plate
-                    - Other quantities
-                        - There are 26 seeds.
-                - Conclusions
-                    - Weight breakdown of 1328 gram "durian":
-                        - 9 grams of wrapping (styrofoam and plastic)
-                        - 312 grams of 26 seeds (without pulp)
-                        - 1007 grams of pulp
-                    - Pulp weight is 75.83% of total package weight.
-                    - Effective price of pulp: IDR 72532/kg.
     - Feeling
         - Spirituality
             - [Choosing a religion]({% link relch.md %})
@@ -146,6 +124,10 @@ date: 2017-05-20 00:00:00 +0700
             - FUD (fear, uncertainty, and doubt)
                 - https://www.chimebank.com/2017/08/08/are-credit-cards-really-safer-than-debit-cards/
                     - Of course banks want you to use the debit card. It reduces their liability.
+- Things I'm no longer interested in
+    - 2018-08-09: games, music.
+    - [Learning to play mahjong]({% link mahjong.md %})
+    - [Learning to play the violin]({% link violin.md %})
 - [Other unorganized contents]({% link other.md %})
 - How do I ask questions or suggest corrections?
     - Any of these:
@@ -156,8 +138,3 @@ date: 2017-05-20 00:00:00 +0700
         - I collect and organize knowledge into this wiki.
     - Music
         - I play piano in the band [The Nomads]({% link nomads.md %}) (an Indonesian band, not the Swedish band).
-- Is there a distributed search engine, something as good as Google, but not owned by a company?
-    - https://en.wikipedia.org/wiki/Distributed_search_engine
-    - https://fourweekmba.com/distributed-search-engines-vs-google/
-    - https://en.wikipedia.org/wiki/YaCy
-        - https://en.wikipedia.org/wiki/Dooble

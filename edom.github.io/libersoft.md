@@ -12,6 +12,17 @@ permalink: /libersoft.html
         - https://yacy.net/en/index.html
             - How do I use it?
             - What can I use it for?
+        - How many people use YaCy?
+        - There is [online demo](https://yacy.net/en/Searchportal.html).
+        It may fail.
+        - What are YaCy alternatives?
+        It is the most widely used?
+        What is the future?
+        How many developers?
+        - Are there text (non-video) tutorials?
+        There is a [wiki](http://www.yacy-websearch.net/wiki/index.php/En:Start).
+        - How does YaCy handle adversarial/malicious peers?
+            - https://yacy.net/en/Technology.html
     - What are alternatives to Google?
     Are these real alternatives?
     Which are usable?

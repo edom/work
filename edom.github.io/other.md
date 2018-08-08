@@ -61,3 +61,12 @@ date: 2018-07-22 13:15 +0700
 - [Art]({% link art.md %})
     - [Music]({% link music.md %})
     - [Acting]({% link act.md %})
+- Linux
+    - Why use swap partitions and not swap files?
+        - Defragmenting swap files might have undesirable effects.
+            - https://lwn.net/Articles/317787/
+    - ext4 defragmentation tools
+        - https://askubuntu.com/questions/221079/how-to-defrag-an-ext4-filesystem
+            - e2freefrag DEV, e4defrag -c FILE
+    - SATA 3 Gbps controller problem?
+        - https://github.com/zfsonlinux/zfs/issues/4873
