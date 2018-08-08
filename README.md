@@ -10,9 +10,6 @@
         - Hide the ugliness behind a newtype hidden in a module.
         - Assume that GHC inlines well.
     - [site](site/)
-- Knowledge base
-    - Haskell
-        - [Cabal tragedies](cabal.md)
 - 2018-07-16: I stopped using Travis CI because `cabal new-build` ran out of memory.
 - The `travis` branch
     - Pushing to this branch will trigger a rebuild.

@@ -6,6 +6,16 @@ language: en
 ---
 
 - Setting up development environment
+    - Duplicate intersecting efforts?
+    Too many choices?
+        - Why is there Haskell Platform and Haskell Stack?
+        - Which should we use?
+        - Why is there haskell-lang.org and haskell.org?
+            - https://news.ycombinator.com/item?id=12054690
+        - Why should I use Platform if there is Stack?
+        - Why should I use Stack if there is Cabal new-style?
+        - Why Stack?
+            - Vetted packages?
     - Install the Haskell `stack` tool.
         - I use the [manual download](https://docs.haskellstack.org/en/stable/install_and_upgrade/#linux).
             - If you want to make sure that the download isn't corrupted, check the corresponding sha256sum from [GitHub releases page](https://github.com/commercialhaskell/stack/releases/).
@@ -103,3 +113,10 @@ language: en
     - Template Haskell
     - https://wiki.haskell.org/Generics
         - SYB (Scrap Your Boilerplate), uniplate, etc.
+- What does "Avoid 'success at all costs'" mean?
+    - https://news.ycombinator.com/item?id=12056169
+- The alternative to Cabal PVP is compile error, or, even worse, logic error and runtime failure?
+    - Cabal PVP depends on library authors/maintainers to test and update their dependency bounds.
+    - It's not only Haskell, but all programming.
+    Every library author must thoughtfully maintain backward compatibility and can't just make arbitrary changes and break things.
+        - https://plan99.net/~mike/writing-shared-libraries.html

@@ -1,4 +1,8 @@
-# Cabal tragedies
+---
+title: Using Cabal
+permalink: /cabal.html
+date: 2018-08-08 00:00 +0700
+---
 
 - Every package used by Setup.hs must have a vanilla version.
     - Why I encountered this error:

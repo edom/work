@@ -12,5 +12,9 @@ permalink: /libersoft.html
         - https://yacy.net/en/index.html
             - How do I use it?
             - What can I use it for?
-    - https://restoreprivacy.com/google-alternatives/
-        - Which are good?
+    - What are alternatives to Google?
+    Are these real alternatives?
+    Which are usable?
+        - https://restoreprivacy.com/google-alternatives/
+        - https://degooglisons-internet.org/en/
+            - https://news.ycombinator.com/item?id=13140389

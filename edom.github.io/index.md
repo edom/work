@@ -20,6 +20,7 @@ date: 2017-05-20 00:00:00 +0700
                             - [Joint research with Abdullah]({% link abdullah.md %})
                             - [Programming]({% link programming.md %})
                     - [Using Haskell]({% link haskell.md %})
+                        - [Using Cabal]({% link cabal.md %})
                     - [Using Java]({% link java.md %})
                     - [Making contributable open-source projects]({% link opensrc.md %})
                         - [Building online communities]({% link community.md %})
@@ -29,6 +30,8 @@ date: 2017-05-20 00:00:00 +0700
                     - [Making a Java virtual machine]({% link jvm.md %})
                     - Real-time garbage collection
                         - http://michaelrbernste.in/2013/06/03/real-time-garbage-collection-is-real.html
+                    - npm dependency hell, how npm2 works, how npm3 works
+                        - http://npm.github.io/how-npm-works-docs/theory-and-design/dependency-hell.html
                 - [Reverse engineering]({% link reveng.md %})
                     - [Reverse engineering the network protocol used by a Java desktop application]({% link rejava.md %}): a stock trading application written in Java 6
                     - [Reverse-engineering PlayStation 1 3D games to control the camera]({% link ps1.md %})
@@ -39,7 +42,6 @@ date: 2017-05-20 00:00:00 +0700
                     - recruiters?
                         - https://triplebyte.com/
                             - from http://highscalability.com/
-                            - https://triplebyte.com/blog/how-to-interview-engineers
                             - https://triplebyte.com/blog/does-it-make-sense-for-programmers-to-move-to-the-bay-area
                     - agencies?
                         - https://www.fastcompany.com/3008194/top-programmers-are-getting-agents-should-you
@@ -61,10 +63,12 @@ date: 2017-05-20 00:00:00 +0700
                         - https://www.quora.com/What-would-happen-if-there-was-a-programmers-union
                         - https://techcrunch.com/2013/07/29/why-labor-unions-and-silicon-valley-arent-friends-in-2-charts/
                     - interviews?
-                        - https://jvns.ca/blog/2013/12/30/questions-im-asking-in-interviews/
-                        - https://github.com/InterviewMap/InterviewMap
-                    - unread
+                        - https://triplebyte.com/blog/how-to-interview-engineers
                         - https://medium.com/javascript-scene/why-hiring-is-so-hard-in-tech-c462c3230017
+                        - https://jvns.ca/blog/2013/12/30/questions-im-asking-in-interviews/
+                        - https://mattermark.com/the-one-method-ive-used-to-eliminate-bad-tech-hires/
+                            - https://news.ycombinator.com/item?id=12915809
+                        - https://github.com/InterviewMap/InterviewMap
             - Computational complexity
                 - [Trying to prove P neq. NP]({% link pnptry.md %})
         - [Justifying physics]({% link natkno.md %})
