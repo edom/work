@@ -1,5 +1,5 @@
 ---
-title: Division from plus, times, and norm
+title: Generalizing division
 permalink: /division.html
 date: 2017-03-20 03:24:26 +0700
 mathjax: yes
@@ -14,6 +14,8 @@ To divide \\(n\\) by \\(d\\) is to find
 \\((q,r)\\) that satisfies \\(n = q \times d + r\\)
 and minimizes the norm of \\(r\\).
 This allows us to generalize division to integers and sets.
+
+If we have plus, times, and norm, then we have division.
 
 ## Terminology
 

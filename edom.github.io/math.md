@@ -6,12 +6,8 @@ mathjax: yes
 ---
 
 - Sections
-    - [Clay millennium prize problems]({% link clay_math.md %})
     - [Probability and statistics]({% link probstat.md %})
     - [Category theory]({% link category.md %})
-- Persuasive or demonstrative articles
-    - [Division from plus, times, and norm]({% link division.md %}): generalizing divisions from numbers to sets
-    - [Learning mathematics]({% link mathlearn.md %})
 - Reference articles
     - [Function]({% link function.md %})
     - [Relation]({% link relation.md %})

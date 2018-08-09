@@ -1,5 +1,5 @@
 ---
-title: Mathematics education
+title: Teaching mathematics
 permalink: /mathedu.html
 date: 2018-05-22 02:28:00 +0700
 ---

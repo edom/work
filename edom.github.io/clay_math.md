@@ -1,5 +1,5 @@
 ---
-title: Clay millennium prize problems
+title: Solving the Clay millennium prize problems
 date: 2017-07-22 18:00 +0700
 permalink: /clay_math.html
 mathjax: yes

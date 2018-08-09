@@ -6,8 +6,6 @@ date: 2018-07-22 13:15 +0700
 
 - I am regrouping the contents in this website from by-topic to by-task.
 - This page contains the old grouping that I haven't moved.
-- [Writing]({% link writing.md %})
-- [Intelligence]({% link intelligence.md %})
 - [Computer science]({% link compsci.md %})
     - [WP:Computer science](https://en.wikipedia.org/wiki/Computer_science)
     - [YT:Map of Computer Science](https://www.youtube.com/watch?v=SzJ46YA_RaA)
@@ -34,8 +32,6 @@ date: 2018-07-22 13:15 +0700
         - It's no longer useful to categorize science by branches?
         - Where is the boundary between two branches?
             - Where do physics end and chemistry begin?
-- [Mathematics]({% link math.md %})
-    - [Math education]({% link mathedu.md %})
 - [Philosophy]({% link philo.md %})
     - Does everything fall under philosophy?
         - How do we prevent this category from becoming a kitchen sink?
@@ -61,12 +57,3 @@ date: 2018-07-22 13:15 +0700
 - [Art]({% link art.md %})
     - [Music]({% link music.md %})
     - [Acting]({% link act.md %})
-- Linux
-    - Why use swap partitions and not swap files?
-        - Defragmenting swap files might have undesirable effects.
-            - https://lwn.net/Articles/317787/
-    - ext4 defragmentation tools
-        - https://askubuntu.com/questions/221079/how-to-defrag-an-ext4-filesystem
-            - e2freefrag DEV, e4defrag -c FILE
-    - SATA 3 Gbps controller problem?
-        - https://github.com/zfsonlinux/zfs/issues/4873

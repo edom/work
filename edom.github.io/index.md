@@ -42,22 +42,25 @@ date: 2017-05-20 00:00:00 +0700
                     - [Software engineer salary]({% link salary.md %})
                     - [Netflix culture](https://jobs.netflix.com/culture)
                     - recruiters?
-                        - https://triplebyte.com/
-                            - from http://highscalability.com/
-                            - https://triplebyte.com/blog/does-it-make-sense-for-programmers-to-move-to-the-bay-area
+                        - [triplebyte.com](https://triplebyte.com/)
+                            - from [highscalability.com](http://highscalability.com/)
+                            - ["Does it make sense for programmers to move to the bay area?"](https://triplebyte.com/blog/does-it-make-sense-for-programmers-to-move-to-the-bay-area)
                     - agencies?
-                        - https://www.fastcompany.com/3008194/top-programmers-are-getting-agents-should-you
-                        - https://www.infoworld.com/article/2886735/it-careers/should-you-hire-a-software-developer-talent-agent.html
-                        - https://www.quora.com/Is-there-such-a-thing-as-a-talent-agent-agency-for-software-engineers
-                        - http://valleywag.gawker.com/talent-agents-for-programmers-cant-wait-to-take-their-1-1660224273
-                        - http://wisecareers.com/articles/information-technology/talent-agents-representing-computer-programmers
-                        - https://www.businessinsider.com/big-name-talent-agency-that-represents-coding-rock-stars-2014-11/?IR=T
-                        - http://blog.alinelerner.com/why-talent-agents-for-engineers-dont-exist/
-                        - https://www.newyorker.com/magazine/2014/11/24/programmers-price
-                        - https://freelancing.stackexchange.com/questions/6551/finding-talent-agents-for-software-developers
-                        - https://news.ycombinator.com/item?id=8617452
+                        - persuasions
+                            - https://www.fastcompany.com/3008194/top-programmers-are-getting-agents-should-you
+                            - https://www.infoworld.com/article/2886735/it-careers/should-you-hire-a-software-developer-talent-agent.html
+                        - cynics
+                            - http://valleywag.gawker.com/talent-agents-for-programmers-cant-wait-to-take-their-1-1660224273
+                        - ungrouped
+                            - https://www.quora.com/Is-there-such-a-thing-as-a-talent-agent-agency-for-software-engineers
+                            - http://blog.alinelerner.com/why-talent-agents-for-engineers-dont-exist/
+                            - http://wisecareers.com/articles/information-technology/talent-agents-representing-computer-programmers
+                            - https://www.businessinsider.com/big-name-talent-agency-that-represents-coding-rock-stars-2014-11/?IR=T
+                            - https://www.newyorker.com/magazine/2014/11/24/programmers-price
+                            - https://freelancing.stackexchange.com/questions/6551/finding-talent-agents-for-software-developers
+                            - https://news.ycombinator.com/item?id=8617452
                     - unions?
-                        - https://softwareengineering.stackexchange.com/questions/9481/are-there-any-unions-for-software-developers
+                        - [SE 9481 "Are there any unions for software developers?"](https://softwareengineering.stackexchange.com/questions/9481/are-there-any-unions-for-software-developers)
                         - https://news.ycombinator.com/item?id=13564440
                         - https://qz.com/916534/silicon-valley-tech-workers-are-talking-about-starting-their-first-union-in-2017-to-resist-trump/
                         - https://www.theatlantic.com/technology/archive/2011/06/why-it-workers-should-unionize/240810/
@@ -65,12 +68,16 @@ date: 2017-05-20 00:00:00 +0700
                         - https://www.quora.com/What-would-happen-if-there-was-a-programmers-union
                         - https://techcrunch.com/2013/07/29/why-labor-unions-and-silicon-valley-arent-friends-in-2-charts/
                     - interviews?
-                        - https://triplebyte.com/blog/how-to-interview-engineers
-                        - https://medium.com/javascript-scene/why-hiring-is-so-hard-in-tech-c462c3230017
-                        - https://jvns.ca/blog/2013/12/30/questions-im-asking-in-interviews/
-                        - https://mattermark.com/the-one-method-ive-used-to-eliminate-bad-tech-hires/
-                            - https://news.ycombinator.com/item?id=12915809
-                        - https://github.com/InterviewMap/InterviewMap
+                        - ["How to interview engineers"](https://triplebyte.com/blog/how-to-interview-engineers)
+                        - ["Why hiring is so hard in tech"](https://medium.com/javascript-scene/why-hiring-is-so-hard-in-tech-c462c3230017)
+                        - ["Questions I'm asking in interviews"](https://jvns.ca/blog/2013/12/30/questions-im-asking-in-interviews/)
+                        - ["The one method I've used to eliminate bad tech hires"](https://mattermark.com/the-one-method-ive-used-to-eliminate-bad-tech-hires/)
+                            - [HN comments](https://news.ycombinator.com/item?id=12915809)
+                        - [InterviewMap on GitHub](https://github.com/InterviewMap/InterviewMap)
+            - System administration
+                - [Administering Ubuntu]({% link ubuntu.md %})
+            - Intelligence
+                - [Making intelligence]({% link intelligence.md %})
             - Computational complexity
                 - [Trying to prove P neq. NP]({% link pnptry.md %})
         - Organizational studies
@@ -81,6 +88,7 @@ date: 2017-05-20 00:00:00 +0700
             - [Politics]({% link politics.md %})
                 - [Solving the Israel-Palestine problem]({% link ispal.md %})
                 - [Politik Indonesia]({% link politik.md %})
+                    - [Censoring the Internet in Indonesia]({% link indocen.md %})
                 - [Living in Jakarta]({% link jakarta.md %})
             - Social
                 - Prevent social isolation.
@@ -107,6 +115,12 @@ date: 2017-05-20 00:00:00 +0700
                         - [Ini registrasi apa?](https://sso.bpjsketenagakerjaan.go.id/registrasi.bpjs)
                         Kenapa harus registrasi?
                     - [BTPN Jenius?]({% link btpn.md %})
+        - [Mathematics]({% link math.md %})
+            - [Learning mathematics]({% link mathlearn.md %})
+            - [Teaching mathematics]({% link mathedu.md %})
+            - [Generalizing division]({% link division.md %})
+            - [Solving the Clay millennium prize problems]({% link clay_math.md %})
+        - [Writing]({% link writing.md %})
     - Feeling
         - Spirituality
             - [Choosing a religion]({% link relch.md %})
