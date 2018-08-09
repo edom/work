@@ -388,3 +388,9 @@ Things that I think are wrong in 2018.
     - http://kaitai.io/
         - from description, generate parsers for binary data (as opposed to text data)
 - 2015, article, "Dynamically Composing Languages in a Modular Way: Supporting C Extensions for Dynamic Languages", [pdf](https://chrisseaton.com/rubytruffle/modularity15/rubyextensions.pdf)
+- https://github.com/nim-lang/Nim
+- 2016, article, "Towards Ontology-Based Program Analysis", [pdf](http://drops.dagstuhl.de/opus/volltexte/2016/6120/pdf/LIPIcs-ECOOP-2016-26.pdf)
+    - Interesting conference title: "Conference on very important topics (CVIT)"
+        - Is it real?
+        Is it a secret society?
+        Google doesn't seem to know about it.

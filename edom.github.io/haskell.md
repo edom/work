@@ -123,3 +123,5 @@ language: en
     - It's not only Haskell, but all programming.
     Every library author must thoughtfully maintain backward compatibility and can't just make arbitrary changes and break things.
         - https://plan99.net/~mike/writing-shared-libraries.html
+- Will Eta kill [Frege](https://github.com/Frege/frege)?
+It's sad to see works thrown away.

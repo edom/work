@@ -73,6 +73,8 @@ date: 2017-05-20 00:00:00 +0700
                         - https://github.com/InterviewMap/InterviewMap
             - Computational complexity
                 - [Trying to prove P neq. NP]({% link pnptry.md %})
+        - Organizational studies
+            - [Spreading information in an organization]({% link spreadinf.md %})
         - [Justifying physics]({% link natkno.md %})
         - Sociopolitics
             - [Improving countries]({% link government.md %})

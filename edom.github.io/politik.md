@@ -97,3 +97,6 @@ We already have laws for people causing public disorder.
         - Apakah bisa digunakan untuk tetangga yang meninggalkan rumahnya dan membiarkannya rusak?
 - http://www.dpr.go.id/jdih/uu1945
     - UUD 1945 pasal 1 ayat 3: "Negara Indonesia adalah negara hukum."
+- https://tirto.id/menilik-harta-kekayaan-cagub-cawagub-dki-bPPV
+- https://tirto.id/benarkah-syariat-islam-menghambat-investasi-di-aceh-cP3C
+- https://tirto.id/dana-otsus-dicabut-aceh-siap-bangkrut-cP54
