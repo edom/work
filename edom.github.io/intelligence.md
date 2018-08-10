@@ -12,7 +12,6 @@ mathjax: true
 - [About intelligence research]({% link intmeta.md %})
     - How can I become an AI researcher?
     - How are others' works progressing?
-- [What is intelligence?]({% link intwhat.md %})
 - What are some AI survey papers, review articles, and expository works?
     - Google query: most recent mathematical ai book
     - http://eliassi.org/COLTSurveyArticle.pdf

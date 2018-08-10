@@ -77,11 +77,14 @@ date: 2017-05-20 00:00:00 +0700
             - System administration
                 - [Administering Ubuntu]({% link ubuntu.md %})
             - Intelligence
+                - [Defining intelligence]({% link intwhat.md %})
                 - [Making intelligence]({% link intelligence.md %})
             - Computational complexity
                 - [Trying to prove P neq. NP]({% link pnptry.md %})
         - Organizational studies
             - [Spreading information in an organization]({% link spreadinf.md %})
+            - 2014, article, "Whose critical path are you on?", Philip J. Guo, [html](http://www.pgbovine.net/critical-path.htm)
+                - To get someone's attention, get on his critical path.
         - [Justifying physics]({% link natkno.md %})
         - Sociopolitics
             - [Improving countries]({% link government.md %})

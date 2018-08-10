@@ -1,5 +1,5 @@
 ---
-title: What is intelligence?
+title: Defining intelligence
 permalink: /intwhat.html
 date: 2017-06-22 03:57:00 +0700
 mathjax: true

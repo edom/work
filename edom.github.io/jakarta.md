@@ -29,6 +29,8 @@ We need to fix this.
 - [http://jakarta.go.id/](jakarta.go.id: Jakarta government services online entry point)
 - Durian
     - https://www.ucokdurian.id/daging-durian/
+        - https://www.youtube.com/watch?v=H53IHuGMtHM
+            - 2018, Asep Purnama: "Lu kena tipu ko. Kalau lu udah pernah makan langsung tempat ucok durian di medan, disitu ada spanduk gede dengan tulisan "ucok durian tidak ada penjualan online". Ini juga audah di konfirmasi sama pelayan disana kalau ucok durian tidak buka online dimanapun. Jd lu kena tipu penjual online"
     - Rumah durian harum http://travel.kompas.com/read/2015/03/08/142300327/Sedap.Tempat.Ini.Tawarkan.Durian.Sepanjang.Tahun
     - Statistics
         - The fruit is a ripe Durian Medan that has been peeled bought from Toko Buah Jakarta.

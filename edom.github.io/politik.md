@@ -100,3 +100,11 @@ We already have laws for people causing public disorder.
 - https://tirto.id/menilik-harta-kekayaan-cagub-cawagub-dki-bPPV
 - https://tirto.id/benarkah-syariat-islam-menghambat-investasi-di-aceh-cP3C
 - https://tirto.id/dana-otsus-dicabut-aceh-siap-bangkrut-cP54
+- keluar masuk
+    - Polisi bisa? (tapi seharusnya tidak bisa?) https://nasional.kompas.com/read/2018/01/15/16055551/polisi-yang-sudah-masuk-ke-politik-seharusnya-tak-bisa-balik-lagi-ke-polri
+    - TNI tidak bisa https://news.detik.com/berita/d-3305012/setelah-mundur-agus-tak-bisa-kembali-ke-tni-kodam-jaya-itu-pilihannya
+        - PNS TNI tidak bisa
+    - PNS lain bisa http://www.hukumonline.com/klinik/detail/lt59ae5a5d781fd/bolehkah-melamar-menjadi-pns-lagi-jika-pernah-berhenti-dengan-hormat-atas-permintaan-sendiri
+- Pemilihan Presiden 2019
+    - https://www.reddit.com/r/indonesia/comments/9640by/rekam_jejak_sikap_dan_perkataan_maruf_amin/
+        - https://www.reddit.com/r/indonesia/comments/9631cu/maruf_amin_dulu_saya_yang_menggerakkan_aksi_212/

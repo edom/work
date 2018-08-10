@@ -51,6 +51,12 @@ language: en
             - Leksah
             - others?
             - https://github.com/haskell/haskell-ide-engine
+            - wasted efforts?
+                - [EclipseFP](https://github.com/JPMoresmau/eclipsefp), no longer developed since 2015
+                    - http://jpmoresmau.blogspot.com/2015/05/eclipsefp-end-of-life-from-me-at-least.html
+                        - He got tired of working alone.
+                        He pointed us to [FPComplete ide-backend](https://www.fpcomplete.com/blog/2015/03/announce-ide-backend).
+                            - [ide-backend](https://github.com/fpco/ide-backend) seems dead; last activity is in 2016.
         - cabal new-style
     - 2016, http://www.stephendiehl.com/posts/vim_2016.html
         - 2015 (?), http://www.stephendiehl.com/posts/vim_haskell.html

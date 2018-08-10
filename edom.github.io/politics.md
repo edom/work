@@ -147,3 +147,4 @@ American individualisn, Russian collectivism
     - cities can practically bypass national governments
 - Stop fluoridating water
     - Gaia: The Actual Truth About Fluoride, [youtube](https://www.youtube.com/watch?v=HAagzF6D-nE)
+- [Political compass](https://www.politicalcompass.org/): plotting economical-political views in two-dimensional space

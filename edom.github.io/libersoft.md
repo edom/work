@@ -53,6 +53,16 @@ permalink: /libersoft.html
         - How do you make YaCy your personal search engine?
         How do you tailor YaCy to your needs?
         - Is YaCy the state of the art?
+        - How do Lucene, Solr, and Elasticsearch compare?
+            - 2016, [quora](https://www.quora.com/How-do-Lucene-Elasticsearch-and-Solr-compare)
+            - 2013, [SO 15704644](https://stackoverflow.com/questions/15704644/difference-between-solr-and-lucene)
+            - https://logz.io/blog/solr-vs-elasticsearch/
+            - http://solr-vs-elasticsearch.com/
+            - http://lucene.apache.org/solr/
+        - http://www.yacy-websearch.net/wiki/index.php/En:Features
+        - http://www.yacy-websearch.net/wiki/index.php/En:Use_cases
+        - How does Lucene work?
+        - How does Solr work?
     - What are alternatives to Google?
     Are these real alternatives?
     Which are usable?
