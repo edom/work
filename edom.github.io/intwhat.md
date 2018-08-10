@@ -20,6 +20,8 @@ That definition makes sense mathematically.
 
 *Intelligence depends on its measurement*. Absolute intelligence doesn't exist.
 
+- The *behavior* of a system is whatever it exhibits that can be observed from outside.
+
 ### How do we decide which system is more intelligent?
 
 Let \\( A \\) be a system.

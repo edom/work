@@ -9,6 +9,10 @@ date: 2017-05-20 00:00:00 +0700
     Use with caution.
     Compare with other independent sources.
     - I am not responsible for other's comments.
+- Organization of this site
+    - For most pages:
+        - The title is a goal.
+        - The content is the ongoing journey to achieve it.
 - Projects
     - Thinking
         - Computer
@@ -20,6 +24,7 @@ date: 2017-05-20 00:00:00 +0700
                             - [Functional programming research]({% link functional_programming.md %})
                             - [Joint research with Abdullah]({% link abdullah.md %})
                             - [Programming]({% link programming.md %})
+                        - Philip Wadler's list [Functional Programming in the Real World](http://homepages.inf.ed.ac.uk/wadler/realworld/)
                     - [Using Haskell]({% link haskell.md %})
                         - [Using Cabal]({% link cabal.md %})
                     - [Using Java]({% link java.md %})
@@ -28,6 +33,7 @@ date: 2017-05-20 00:00:00 +0700
                     - [Solving the AST decoration problem]({% link ast.md %})
                     - [Proving things using computers]({% link proof.md %})
                     - [Liberating software]({% link libersoft.md %})
+                        - [Making a search engine]({% link srceng.md %})
                     - [Making a Java virtual machine]({% link jvm.md %})
                     - Real-time garbage collection
                         - http://michaelrbernste.in/2013/06/03/real-time-garbage-collection-is-real.html
@@ -93,6 +99,7 @@ date: 2017-05-20 00:00:00 +0700
                 - [Politik Indonesia]({% link politik.md %})
                     - [Censoring the Internet in Indonesia]({% link indocen.md %})
                 - [Living in Jakarta]({% link jakarta.md %})
+                - [Using the media in politics]({% link polmed.md %})
             - Social
                 - Prevent social isolation.
                 Social isolation causes violence and extremism.
@@ -144,9 +151,16 @@ date: 2017-05-20 00:00:00 +0700
                 - https://www.chimebank.com/2017/08/08/are-credit-cards-really-safer-than-debit-cards/
                     - Of course banks want you to use the debit card. It reduces their liability.
 - Things I'm no longer interested in
-    - 2018-08-09: games, music.
     - [Learning to play mahjong]({% link mahjong.md %})
     - [Learning to play the violin]({% link violin.md %})
+    - [Art]({% link art.md %})
+        - [Music]({% link music.md %})
+        - [Acting]({% link act.md %})
+    - [Entertainment]({% link entertain.md %})
+        - [Game]({% link game.md %})
+- Finding other information sources
+    - Finding other wikis
+        - [WP:List of wikis](https://en.wikipedia.org/wiki/List_of_wikis)
 - [Other unorganized contents]({% link other.md %})
 - How do I ask questions or suggest corrections?
     - Any of these:
@@ -157,3 +171,4 @@ date: 2017-05-20 00:00:00 +0700
         - I collect and organize knowledge into this wiki.
     - Music
         - I play piano in the band [The Nomads]({% link nomads.md %}) (an Indonesian band, not the Swedish band).
+    - [About this website]({% link about.md %})

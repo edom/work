@@ -71,6 +71,7 @@ of which these are unsolved:
 - [Wikipedia: Riemann hypothesis](https://en.wikipedia.org/wiki/Riemann_hypothesis)
 - Riemann zeta function is an analytical continuation of a [Dirichlet series](https://en.wikipedia.org/wiki/Dirichlet_series)?
 - [Wikipedia: Riemann zeta function](https://en.wikipedia.org/wiki/Riemann_zeta_function)
+- ["Understanding the Riemann hypothesis"](http://www.riemannhypothesis.info/): Markus Shepherd (né Schepke)'s blog and journey towards understanding the Riemann hypothesis.
 - How are these related?
     - Euler's totient function?
     - Prime counting function?

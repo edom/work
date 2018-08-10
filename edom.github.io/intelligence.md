@@ -357,3 +357,5 @@ from [two minute papers 241](https://www.youtube.com/watch?v=AbxPbfODGcs).
 patternicity, agenticity, pattern over-recognition, false positive, false negative
     - "false positive" is a much better name than "type 1 error"
 - expected 2018, draft book, "Model-based machine learning", [html](http://www.mbmlbook.com/)
+- vision (making machines see)
+    - Jim Bednar, [Orientation Perception Demos](http://homepages.inf.ed.ac.uk/jbednar/demos.html)

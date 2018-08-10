@@ -7,8 +7,9 @@ date: 2018-07-22 13:15 +0700
 - I am regrouping the contents in this website from by-topic to by-task.
 - This page contains the old grouping that I haven't moved.
 - [Computer science]({% link compsci.md %})
-    - [WP:Computer science](https://en.wikipedia.org/wiki/Computer_science)
-    - [YT:Map of Computer Science](https://www.youtube.com/watch?v=SzJ46YA_RaA)
+    - Learning computer science
+        - [WP:Computer science](https://en.wikipedia.org/wiki/Computer_science)
+        - [YT:Map of Computer Science](https://www.youtube.com/watch?v=SzJ46YA_RaA)
     - [Computation]({% link computation.md %})
     - [Computational complexity]({% link complexity.md %})
         - [Circuit complexity]({% link circuit.md %})
@@ -50,10 +51,3 @@ date: 2018-07-22 13:15 +0700
     - [Finance]({% link finance.md %})
     - Which is more fundamental, economics or finance? Which is built on which?
 - [Psychology]({% link psych.md %})
-- [Entertainment]({% link entertain.md %})
-    - [Game]({% link game.md %})
-- Ungrouped
-    - [About this website]({% link about.md %})
-- [Art]({% link art.md %})
-    - [Music]({% link music.md %})
-    - [Acting]({% link act.md %})
