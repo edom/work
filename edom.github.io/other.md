@@ -26,6 +26,13 @@ date: 2018-07-22 13:15 +0700
             - [What's inside Ikea's "wood"?](https://www.youtube.com/watch?v=24F5JlKkxR4)
             - Architecture
                 - [YT:Open office is overrated](https://www.youtube.com/watch?v=-p6WWRarjNs)
+            - Softwood vs hardwood
+                - Softwood is gymnosperm (monocot) wood.
+                - Hardwood is angiosperm (dicot) wood.
+                - Softwood isn't always softer than hardwood.
+                - https://en.wikipedia.org/wiki/Softwood
+                - https://en.wikipedia.org/wiki/Hardwood
+                - https://en.wikipedia.org/wiki/Dicotyledon#Comparison_with_monocotyledons
         - [Astronomy]({% link astro.md %})
     - [Chemistry]({% link chem.md %})
     - Science in 21st century is multi-/inter-discipline?
@@ -51,3 +58,7 @@ date: 2018-07-22 13:15 +0700
     - [Finance]({% link finance.md %})
     - Which is more fundamental, economics or finance? Which is built on which?
 - [Psychology]({% link psych.md %})
+- Finding out whether my local grocery store is overpriced
+    - 2018-08-12
+        - Nangka kupas Rp 42000/kg
+        - Nanas honi Sunpride Rp 39000/kg

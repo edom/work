@@ -85,6 +85,7 @@ of which these are unsolved:
         - [Wikipedia: AKS primality test](https://en.wikipedia.org/wiki/AKS_primality_test)
     - [Wikipedia: Prime number](https://en.wikipedia.org/wiki/Prime_number)
         - [Wikipedia: Number theory](https://en.wikipedia.org/wiki/Number_theory)
+- https://terrytao.wordpress.com/2018/01/19/the-de-bruijn-newman-constant-is-non-negativ/
 
 ## Birch and Swinnerton-Dyer conjecture
 

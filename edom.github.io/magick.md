@@ -197,3 +197,11 @@ date: 2018-05-17 01:21 +0700
             - http://occultsciences.org/
             - https://www.occultphysics.com/
                 - selling a book
+- aggregators
+    - https://www.reddit.com/r/Paranormal/comments/3ep2f1/my_huge_collection_of_paranormalthemed_askreddit/
+    - https://www.reddit.com/r/Paranormal/comments/6l40lg/some_lesser_known_askreddit_paranormal_etc_threads/
+    - https://www.reddit.com/r/Thetruthishere/top/
+    - things that convince some people
+        - https://www.reddit.com/r/AskReddit/comments/6prmsk/serious_redditors_who_use_to_not_believe_in_the/
+        - https://www.reddit.com/r/AskReddit/comments/6ryogk/serious_redditors_who_believe_in_the_paranormal/
+        - https://www.reddit.com/r/Thetruthishere/comments/5bq8fj/what_is_the_most_convincing_paranormal_evidence/

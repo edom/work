@@ -77,3 +77,5 @@ Distraction osteogenesis. Breaking the leg bones. Undesirable side effects.
         - [How to green the world's deserts and reverse climate change | Allan Savory](https://www.youtube.com/watch?v=vpTHi7O66pI)
             - Use livestock to mimick natural predators to make livestock move around.
     - We might be able to use [Tali Sharot's TEDx talk](https://www.youtube.com/watch?v=xp0O2vi8DX4) to reduce global warming (the way the electric company manipulates her into using less electricity).
+- "How to build synthetic DNA and send it across the internet - Dan Gibson", [youtube](https://www.youtube.com/watch?v=6ElobAhlQo0)
+    - https://en.wikipedia.org/wiki/Gibson_assembly

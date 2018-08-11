@@ -17,6 +17,11 @@ permalink: /meta_research.html
             We need something like Wikipedia but for research.
             We need a goal-oriented/task-oriented Wikipedia.
             Wikiversity might be close to that.
+    - Finding recent publications using academic search engines
+        - I tested these using these queries: "partial evaluation", "optimal lambda"
+            - [Google scholar](https://scholar.google.com/)
+            - [Microsoft academic](https://academic.microsoft.com/)
+            - [Bielefeld academic search engine](https://www.base-search.net/) boosts open-access documents.
 - In order to do something new, you must make sure that nobody else has done it.
 In 2018, there are 7 billion people.
 - Which country values science the most?

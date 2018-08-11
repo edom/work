@@ -22,6 +22,7 @@ date: 2017-05-20 00:00:00 +0700
                         - [Argument for static typing]({% link statyp.md %})
                         - Old content to be reorganized
                             - [Functional programming research]({% link functional_programming.md %})
+                                - [Optimizing lambda calculus]({% link optlam.md %})
                             - [Joint research with Abdullah]({% link abdullah.md %})
                             - [Programming]({% link programming.md %})
                         - Philip Wadler's list [Functional Programming in the Real World](http://homepages.inf.ed.ac.uk/wadler/realworld/)
@@ -33,7 +34,10 @@ date: 2017-05-20 00:00:00 +0700
                     - [Solving the AST decoration problem]({% link ast.md %})
                     - [Proving things using computers]({% link proof.md %})
                     - [Liberating software]({% link libersoft.md %})
-                        - [Making a search engine]({% link srceng.md %})
+                        - Searching
+                            - Where does this fit in the hierarchy?
+                            - https://en.wikipedia.org/wiki/Optimal_stopping
+                            - [Making a search engine]({% link srceng.md %})
                     - [Making a Java virtual machine]({% link jvm.md %})
                     - Real-time garbage collection
                         - http://michaelrbernste.in/2013/06/03/real-time-garbage-collection-is-real.html
@@ -82,6 +86,7 @@ date: 2017-05-20 00:00:00 +0700
                         - [InterviewMap on GitHub](https://github.com/InterviewMap/InterviewMap)
             - System administration
                 - [Administering Ubuntu]({% link ubuntu.md %})
+                - [SO 22697049: difference between Google App Engine and Google Compute Engine](https://stackoverflow.com/questions/22697049/what-is-the-difference-between-google-app-engine-and-google-compute-engine)
             - Intelligence
                 - [Defining intelligence]({% link intwhat.md %})
                 - [Making intelligence]({% link intelligence.md %})
@@ -120,11 +125,19 @@ date: 2017-05-20 00:00:00 +0700
                         - [Android vs iPhone]({% link andvsiph.md %})
                 - [Growing muscles]({% link muscle.md %})
                 - Hidup di Indonesia abad 21
-                    - BPJS?
-                        - [Cek saldo BPJS](https://daftar.bpjs-kesehatan.go.id/bpjs-checking/)
-                        - [Ini registrasi apa?](https://sso.bpjsketenagakerjaan.go.id/registrasi.bpjs)
-                        Kenapa harus registrasi?
-                    - [BTPN Jenius?]({% link btpn.md %})
+                    - Memakai hak warga negara
+                        - BPJS?
+                            - [Cek saldo BPJS](https://daftar.bpjs-kesehatan.go.id/bpjs-checking/)
+                            - [Ini registrasi apa?](https://sso.bpjsketenagakerjaan.go.id/registrasi.bpjs)
+                            Kenapa harus registrasi?
+                        - [BTPN Jenius?]({% link btpn.md %})
+                        - Mendirikan perusahaan?
+                            - Bagaimana?
+                            - Bayar berapa?
+                            - Berapa lama?
+                            - Apa keuntungan pajak?
+                        - Jangan abstain dalam pemilu.
+                        Lihat argumen [/u/kolormelar](https://www.reddit.com/r/indonesia/comments/968qbs/ajakan_untuk_yang_tidak_cocok_dengan_pasangan/e3yw8bd/).
         - [Mathematics]({% link math.md %})
             - [Learning mathematics]({% link mathlearn.md %})
             - [Teaching mathematics]({% link mathedu.md %})

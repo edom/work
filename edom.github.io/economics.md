@@ -238,3 +238,4 @@ is to make someone else has less money.
     - For creators?
     - For patrons?
     - https://theoutline.com/post/2571/no-one-makes-a-living-on-patreon
+- https://en.wikipedia.org/wiki/Laffer_curve

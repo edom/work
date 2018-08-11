@@ -16,6 +16,7 @@ language: en
         - Why should I use Stack if there is Cabal new-style?
         - Why Stack?
             - Vetted packages?
+        - http://www.haskellforall.com/2018/05/how-i-evaluate-haskell-packages.html
     - Install the Haskell `stack` tool.
         - I use the [manual download](https://docs.haskellstack.org/en/stable/install_and_upgrade/#linux).
             - If you want to make sure that the download isn't corrupted, check the corresponding sha256sum from [GitHub releases page](https://github.com/commercialhaskell/stack/releases/).

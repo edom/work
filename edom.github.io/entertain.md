@@ -267,3 +267,5 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
 - [Wakaliwood: Tren Terbaru Film Laga DIY dari Uganda](https://www.youtube.com/watch?v=Cg44R3-5TK)
 - TED-Ed: "Why isn't the world covered in poop? - Eleanor Slade and Paul Manning" (TLDR: dung beetles), [youtube](https://www.youtube.com/watch?v=uSTNyHkde08)
 - TED-Ed: "At what moment are you dead? - Randall Hayes", [youtube](https://www.youtube.com/watch?v=5c6C3rHOdf8), 3:00 cute duck animation
+- https://www.reddit.com/r/indonesia/comments/6b4e9a/finest_savagery/
+- https://www.reddit.com/r/CrappyDesign/

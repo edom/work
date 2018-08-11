@@ -1,10 +1,15 @@
 ---
-title: Programming language research
+title: Making the only programming language we will ever need
 permalink: /plres.html
 date: 2018-07-22 02:45 +0700
 ---
 
 - The goal is to make *the* programming language.
+- What are the criteria?
+    - The language must be suitable for systems programming.
+        - System programming is hardware-aware programming.
+        Application programming assumes abstract machine, infinite memory, and all convenience provided by the operating system.
+            - Why do we make this distinction?
 - In order for a language to be adopted, people must perceive its risk as low.
     - The language must work with existing codebases.
         - The language designer must think from the language user's point of view.
@@ -85,32 +90,6 @@ date: 2018-07-22 02:45 +0700
         - How is "false" represented?
         - How is "true" represented?
         - How is "conjunction" represented?
-- lambda calculus
-    - Church-encoding enables lambda calculus to represent conditionals and algebraic data types.
-    - Fixed-point combinators enables recursion and looping.
-    - https://en.wikipedia.org/wiki/Lambda_cube
-    - https://en.wikipedia.org/wiki/Calculus_of_constructions
-    - https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus
-        - "The simply typed lambda calculus [...], a form of type theory,
-        is a typed interpretation of the lambda calculus with only one type constructor: [...] that builds function types."
-            - What is an "interpretation of the lambda calculus"?
-            - What is "the lambda calculus"? Is there only one lambda calculus?
-    - https://www.reddit.com/r/haskell/comments/8els6f/why_are_combinators_as_powerful_as_full/
-    - https://math.stackexchange.com/questions/5639/the-power-of-lambda-calculi
-    - Implement lambda calculus.
-        - Without dynamic allocation / garbage collection.
-        - Translate lambda calculus to assembly
-            - Basic idea:
-                - Every expression translates to a subroutine.
-                - Calling the subroutine ~ evaluating the expression.
-                - Subroutine return value ~ value obtained by evaluating the expression.
-            - A lambda abstraction translates to a subroutine that accepts one parameter.
-            - An application translates to a subroutine call.
-            - An int value translates to what? Choice:
-                - itself
-                - a subroutine that returns the int
-        - 2012, article, ["From Mathematics to Abstract Machine: A formal derivation of an executable Krivine machine"](https://arxiv.org/abs/1202.2924)
-            - https://en.wikipedia.org/wiki/Krivine_machine
 - interoperation between proof assistants?
     - Lem ("lightweight executable mathematics")
         - https://www.openhub.net/p/lightweight-executable-mathematics
