@@ -359,3 +359,4 @@ patternicity, agenticity, pattern over-recognition, false positive, false negati
 - expected 2018, draft book, "Model-based machine learning", [html](http://www.mbmlbook.com/)
 - vision (making machines see)
     - Jim Bednar, [Orientation Perception Demos](http://homepages.inf.ed.ac.uk/jbednar/demos.html)
+- https://en.wikipedia.org/wiki/Bayesian_approaches_to_brain_function

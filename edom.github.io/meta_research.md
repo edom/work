@@ -22,6 +22,24 @@ permalink: /meta_research.html
             - [Google scholar](https://scholar.google.com/)
             - [Microsoft academic](https://academic.microsoft.com/)
             - [Bielefeld academic search engine](https://www.base-search.net/) boosts open-access documents.
+        - aggregators
+            - https://www.llrx.com/2017/01/academic-and-scholar-search-engines-and-sources-2017/
+                - Different fields have different search engines.
+                Why?
+                What is the difference between biology literature study, computer science literature study, and physics literature study?
+        - Are there academic metasearch engines / search aggregators?
+- Reading academic publications
+    - The input is the publication and some effort.
+    - What is the output?
+    - What is the best way of reading?
+        - An attempt to answer that
+            - Begin with a goal.
+            - Every time you read a sentence, compare it to your goal.
+                - If the sentence helps you reach your goal, process the sentence.
+                - Otherwise, skip it.
+    - A publication can be thought as a set of first-order logic statements.
+    - What is knowledge?
+        - A piece of knowledge is a sentence: a first-order logic statement with no free variables.
 - In order to do something new, you must make sure that nobody else has done it.
 In 2018, there are 7 billion people.
 - Which country values science the most?

@@ -43,3 +43,32 @@ date: 2018-05-17 01:21 +0700
         So far experiments one person influences a RNG at a time.
         Does the effect add up?
             - Is there even any effect at all?
+- We might dismiss one person for hallucinating.
+Two unrelated honest people corroborating each other are less likely to be hallucinating.
+The more people say the same thing, the more serious the claim is.
+Not necessarily more true, but surely more serious.
+Most people are not pathological liars.
+    - The facts may be correct, but the explanation may be unjustified.
+    - https://www.lesswrong.com/posts/CJxSgaqG6y7z6Rbij/are-mass-hallucinations-a-real-thing
+- https://www.reddit.com/r/AskReddit/comments/1sv39b/serious_what_in_your_opinion_is_the_most/
+    - https://www.youtube.com/watch?v=92jFdzNC228&feature=youtu.be&t=2m28s
+        - Andy Coppock
+    - https://www.youtube.com/watch?v=DL_bIhVJi-k&feature=youtu.be
+        - text summary https://www.reddit.com/r/AskReddit/comments/1sv39b/serious_what_in_your_opinion_is_the_most/ce25ska/
+            - there is also a debunking
+    - https://www.quora.com/What-are-the-most-convincing-paranormal-cases
+- From the ghost's point of view, it is we who are haunting them, not they who are haunting us.
+Or is it not that simple?
+- aggregators
+    - [Creating a Google map of haunted locations](https://www.reddit.com/r/Paranormal/comments/7nh31e/creating_a_google_map_of_haunted_locations/)
+- Sam Parnia's AWARE study
+    - https://en.wikipedia.org/wiki/Sam_Parnia
+- some ghost pictures are due to crappy camera https://www.reddit.com/r/Paranormal/comments/6jdy18/question_why_does_every_ghost_picture_seem_to_be/
+- scientific?
+    - https://www.reddit.com/r/Paranormal/comments/w2b04/hello_rparanormal_i_am_a_physicist_and_i_have_an/
+    - http://liparanormalinvestigators.com/
+        - They claim [high standard of evidence](http://liparanormalinvestigators.com/evidence-gallery/).
+- 2018-08-13
+    - I was too scared to view some materials at night. I did these:
+        - Play "Yakety Sax" in the background.
+        - Surf the Internet with my sister.

@@ -64,14 +64,17 @@ of which these are unsolved:
 
 ## The Riemann hypothesis
 
+- 2018-08-12: The [Riemann hypothesis Wikipedia page](https://en.wikipedia.org/wiki/Riemann_hypothesis) is more comprehensive than this page.
 - [official problem description](http://www.claymath.org/sites/default/files/official_problem_description.pdf)
 - [a more elementary problem that is equivalent to the Riemann hypothesis](http://www.math.lsa.umich.edu/~lagarias/doc/elementaryrh.pdf), 2001, Jeffrey C. Lagarias
 - [A study of the Riemann zeta function](https://arxiv.org/abs/1707.01754), 2017, Yochay Jerby
 - [Notes on the Riemann Hypothesis](https://arxiv.org/abs/1707.01770), 2010, published 2017, Ricardo Pérez-Marco
-- [Wikipedia: Riemann hypothesis](https://en.wikipedia.org/wiki/Riemann_hypothesis)
 - Riemann zeta function is an analytical continuation of a [Dirichlet series](https://en.wikipedia.org/wiki/Dirichlet_series)?
 - [Wikipedia: Riemann zeta function](https://en.wikipedia.org/wiki/Riemann_zeta_function)
 - ["Understanding the Riemann hypothesis"](http://www.riemannhypothesis.info/): Markus Shepherd (né Schepke)'s blog and journey towards understanding the Riemann hypothesis.
+- What is the history of the Riemann zeta function?
+How did it arise?
+What were people trying to do?
 - How are these related?
     - Euler's totient function?
     - Prime counting function?

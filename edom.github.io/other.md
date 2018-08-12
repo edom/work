@@ -62,3 +62,63 @@ date: 2018-07-22 13:15 +0700
     - 2018-08-12
         - Nangka kupas Rp 42000/kg
         - Nanas honi Sunpride Rp 39000/kg
+- Document typesetting/processing systems?
+Markup languages?
+    - http://www.nongnu.org/skribilo/
+    - markdown
+    - reST (restructured text)
+    - LaTeX
+    - roff, troff, nroff, groff
+    - GNU info
+    - Unix man
+- 2017, 1 hour, [Frank Abagnale: "Catch Me If You Can" \| Talks at Google](https://www.youtube.com/watch?v=vsMydMDi3rI)
+    - Use credit card, not debit card.
+        - Use credit card, but don't fall into debt.
+        Treat credit card as means of payment, not loan.
+        - Never use debit card outside trusted ATMs.
+        - But what about cash withdrawals from ATMs?
+        Credit cards have higher fees.
+        - https://www.nerdwallet.com/blog/credit-cards/credit-card-vs-debit-card-safer-online-purchases/
+        - https://www.quora.com/Are-credit-cards-safer-than-debit-cards
+        - FUD (fear, uncertainty, and doubt)
+            - https://www.chimebank.com/2017/08/08/are-credit-cards-really-safer-than-debit-cards/
+                - Of course banks want you to use the debit card. It reduces their liability.
+    - Passwordless authentication
+        - Authentication with a phone, without username, without password: [Trusona](https://www.trusona.com/), from the Frank Abagnale 2017 Google talk above.
+        - https://hacks.mozilla.org/2014/10/passwordless-authentication-secure-simple-and-fast-to-deploy/
+        - 2014, Justin Balthrop, "The basic idea is that instead of using a password to authenticate each user, a temporary secret code is sent to them over a secure channel."
+        ([source](https://medium.com/@ninjudd/passwords-are-obsolete-9ed56d483eb))
+- Software engineering career?
+    - recruiters?
+        - [triplebyte.com](https://triplebyte.com/)
+            - from [highscalability.com](http://highscalability.com/)
+            - ["Does it make sense for programmers to move to the bay area?"](https://triplebyte.com/blog/does-it-make-sense-for-programmers-to-move-to-the-bay-area)
+    - agencies?
+        - persuasions
+            - https://www.fastcompany.com/3008194/top-programmers-are-getting-agents-should-you
+            - https://www.infoworld.com/article/2886735/it-careers/should-you-hire-a-software-developer-talent-agent.html
+        - cynics
+            - http://valleywag.gawker.com/talent-agents-for-programmers-cant-wait-to-take-their-1-1660224273
+        - ungrouped
+            - https://www.quora.com/Is-there-such-a-thing-as-a-talent-agent-agency-for-software-engineers
+            - http://blog.alinelerner.com/why-talent-agents-for-engineers-dont-exist/
+            - http://wisecareers.com/articles/information-technology/talent-agents-representing-computer-programmers
+            - https://www.businessinsider.com/big-name-talent-agency-that-represents-coding-rock-stars-2014-11/?IR=T
+            - https://www.newyorker.com/magazine/2014/11/24/programmers-price
+            - https://freelancing.stackexchange.com/questions/6551/finding-talent-agents-for-software-developers
+            - https://news.ycombinator.com/item?id=8617452
+    - unions?
+        - [SE 9481 "Are there any unions for software developers?"](https://softwareengineering.stackexchange.com/questions/9481/are-there-any-unions-for-software-developers)
+        - https://news.ycombinator.com/item?id=13564440
+        - https://qz.com/916534/silicon-valley-tech-workers-are-talking-about-starting-their-first-union-in-2017-to-resist-trump/
+        - https://www.theatlantic.com/technology/archive/2011/06/why-it-workers-should-unionize/240810/
+        - https://www.reddit.com/r/programming/comments/3vuynn/programmers_dont_need_a_union_we_need_a_profession/
+        - https://www.quora.com/What-would-happen-if-there-was-a-programmers-union
+        - https://techcrunch.com/2013/07/29/why-labor-unions-and-silicon-valley-arent-friends-in-2-charts/
+    - interviews?
+        - ["How to interview engineers"](https://triplebyte.com/blog/how-to-interview-engineers)
+        - ["Why hiring is so hard in tech"](https://medium.com/javascript-scene/why-hiring-is-so-hard-in-tech-c462c3230017)
+        - ["Questions I'm asking in interviews"](https://jvns.ca/blog/2013/12/30/questions-im-asking-in-interviews/)
+        - ["The one method I've used to eliminate bad tech hires"](https://mattermark.com/the-one-method-ive-used-to-eliminate-bad-tech-hires/)
+            - [HN comments](https://news.ycombinator.com/item?id=12915809)
+        - [InterviewMap on GitHub](https://github.com/InterviewMap/InterviewMap)
