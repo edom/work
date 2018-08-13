@@ -108,3 +108,8 @@ We already have laws for people causing public disorder.
 - Pemilihan Presiden 2019
     - https://www.reddit.com/r/indonesia/comments/9640by/rekam_jejak_sikap_dan_perkataan_maruf_amin/
         - https://www.reddit.com/r/indonesia/comments/9631cu/maruf_amin_dulu_saya_yang_menggerakkan_aksi_212/
+- Mengapa kita tidak minta tolong cenayang panggil arwah Bung Karno dan tanyakan kebenaran G30S PKI dan Supersemar?
+    - Mengapa kita tidak tanya istrinya, anaknya, atau kerabatnya?
+- Student activism
+    - [SEMAR UI](https://twitter.com/semarui?lang=en)
+    - [Komune Rakapare](https://twitter.com/rakapare?lang=en)

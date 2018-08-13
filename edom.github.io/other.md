@@ -122,3 +122,6 @@ Markup languages?
         - ["The one method I've used to eliminate bad tech hires"](https://mattermark.com/the-one-method-ive-used-to-eliminate-bad-tech-hires/)
             - [HN comments](https://news.ycombinator.com/item?id=12915809)
         - [InterviewMap on GitHub](https://github.com/InterviewMap/InterviewMap)
+- Applying probability theory and statistics to marketing and pricing
+    - https://medium.com/airbnb-engineering/learning-market-dynamics-for-optimal-pricing-97cffbcc53e3
+    - https://overflow.buffer.com/2018/08/13/predicting-churn/
