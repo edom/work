@@ -429,11 +429,16 @@ div.highlighter-rouge > * { display: inline-block; text-align: left; }
 .site-footer {
     background-color: #f0f0f0;
     border-top: 1px solid $grey-color-light;
-    padding: 1em 0;
+    padding: 0em 0em;
     font-size: $base-font-size;
     @include media-query($on-palm) {
         font-size: $palm-font-size;
     }
+}
+
+.site-footer p {
+  text-indent: 0em;
+  margin: 1em 0em;
 }
 
 
