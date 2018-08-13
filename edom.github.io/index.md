@@ -59,6 +59,7 @@ date: 2017-05-20 00:00:00 +0700
                 - [Making intelligence]({% link intelligence.md %})
             - Computational complexity
                 - [Trying to prove P neq. NP]({% link pnptry.md %})
+        - [Investing]({% link invest.md %})
         - Organizational studies
             - [Spreading information in an organization]({% link spreadinf.md %})
             - 2014, article, "Whose critical path are you on?", Philip J. Guo, [html](http://www.pgbovine.net/critical-path.htm)
@@ -117,6 +118,7 @@ date: 2017-05-20 00:00:00 +0700
             - [Obtaining magickal powers]({% link magick.md %})
                 - [Experimenting with magick]({% link magexp.md %})
             - [Learning Mandarin]({% link mandarin.md %})
+            - [Learning Japanese]({% link japanese.md %})
 - Things I'm no longer interested in
     - [Learning to play mahjong]({% link mahjong.md %})
     - [Learning to play the violin]({% link violin.md %})

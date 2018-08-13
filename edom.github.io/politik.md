@@ -113,3 +113,5 @@ We already have laws for people causing public disorder.
 - Student activism
     - [SEMAR UI](https://twitter.com/semarui?lang=en)
     - [Komune Rakapare](https://twitter.com/rakapare?lang=en)
+- [What was Indonesia like before Reformasi and after1998? (Long) : indonesia](https://www.reddit.com/r/indonesia/comments/61ed2m/what_was_indonesia_like_before_reformasi_and/)
+- Indonesia needs a politifact website.

@@ -97,3 +97,12 @@ document.querySelector(".FullPageModal__scroller").parentNode.remove();
     return list;
 })();
 ```
+
+## Chrome bookmarklet: Make Markdown link for page
+
+This may produce invalid Markdown.
+Check before you copy.
+
+```
+javascript:window.prompt("Copy to clipboard: Ctrl+C, Enter", "- [" + document.title + "](" + document.URL + ")");
+```

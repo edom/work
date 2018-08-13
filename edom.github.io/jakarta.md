@@ -70,3 +70,4 @@ We need to fix this.
         Seperti buang limbah ke sungai.
         - Green Ville terlalu banyak tempat makan.
         Setiap Sabtu macetnya sampai Jalan Panjang.
+- [PD Pasar Jaya commodity price list](http://www.pasarjaya.co.id/komoditas)

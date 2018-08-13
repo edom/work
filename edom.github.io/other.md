@@ -6,6 +6,7 @@ date: 2018-07-22 13:15 +0700
 
 - I am regrouping the contents in this website from by-topic to by-task.
 - This page contains the old grouping that I haven't moved.
+- This page is also a staging area, a queue, a scratchpad, for the things I shall process later.
 - [Computer science]({% link compsci.md %})
     - Learning computer science
         - [WP:Computer science](https://en.wikipedia.org/wiki/Computer_science)
@@ -125,3 +126,50 @@ Markup languages?
 - Applying probability theory and statistics to marketing and pricing
     - https://medium.com/airbnb-engineering/learning-market-dynamics-for-optimal-pricing-97cffbcc53e3
     - https://overflow.buffer.com/2018/08/13/predicting-churn/
+- I found these while browsing the Internet, but I never tried these
+    - http://m.warungdaging.com/#features
+- Perhaps I should make a browser plugin that copies a link of the page to the clipboard in Markdown format?
+    - Which browser has easiest plugin development?
+        - The result might be suspicious because I used Google to look for the answer.
+        - 2016: Chrome ([source](https://www.quora.com/Is-it-easier-to-write-a-plug-in-extension-for-Chrome-or-Firefox))
+        - 2011: Chrome ([source](https://stackoverflow.com/questions/6438329/which-browser-is-easier-to-develop-plug-ins-for-chrome-or-firefox))
+- Beginning to work on GHC
+    - Please see the [newcomers guide](https://ghc.haskell.org/trac/ghc/wiki/Newcomers) first.
+- [The veil of ignorance](http://mrmrs.cc/writing/2016/03/23/the-veil-of-ignorance/)
+- We should limit inheritance.
+    - Each child should inherit at most 1 house, 1 car, and cash for 10 years of basic living expenses.
+- [Applying John Rawl's "veil of ignorance" argument to web design](http://mrmrs.cc/writing/2016/03/23/the-veil-of-ignorance/)
+- Alien technologies?
+    - https://github.com/transient-haskell/transient
+- Self-driving buses for public transport can drive transport costs down?
+    - Which are the biggest transport cost component? Is it fuel or the driver?
+- Parapsychology.
+Some interesting anecdotes.
+Still looking for replicable experiment.
+    - [Koestler parapsychology unit of University of Edinburgh](https://koestlerunit.wordpress.com/)
+- [Simple Nature, an online physics textbook](http://www.lightandmatter.com/area1sn.html): for beginner, too wordy for me.
+- audiophile stuffs
+    - https://en.wikipedia.org/wiki/Digital_room_correction
+- Google alternatives?
+    - [The Top 5 Google Alternatives and Why You Should Use Them](https://www.makeuseof.com/tag/5-google-search-alternatives-that-you-could-experiment-with/)
+- Generating electricity, do-it-yourself
+    - Mike Davis
+        - [How I built an electricity producing wind turbine](http://www.mdpub.com/Wind_Turbine/)
+        - [How I built an electricity producing Solar Panel](http://www.mdpub.com/SolarPanel/index.html)
+        - [My Home-Made Biomass Gasifier](http://www.mdpub.com/gasifier/index.html)
+- AI
+    - 2007, article, "Self-taught Learning: Transfer Learning from Unlabeled Data", [pdf](https://cs.stanford.edu/people/ang/papers/icml07-selftaughtlearning.pdf)
+    - https://en.wikipedia.org/wiki/Category:Open-source_artificial_intelligence
+    - https://en.wikipedia.org/wiki/Commonsense_knowledge_(artificial_intelligence)
+    - 2010, article, [A grand unified theory of AI - MIT News](https://news.mit.edu/2010/ai-unification)
+    - 2016, article, [AI Research Trends - One Hundred Year Study on Artificial Intelligence (AI100)](https://ai100.stanford.edu/2016-report/section-i-what-artificial-intelligence/ai-research-trends)
+- Pemerintah menyediakan akses ke jurnal berbayar.
+Di mana? Cara pakainya?
+- https://wiki.haskell.org/Enterprise_Haskell
+- Why are clothes so expensive?
+- The problem with opening a business is too many choices.
+Almost all businesses make money.
+- Are there open source enterprise accounting systems?
+- [Distributed Systems in Haskell :: Will Yager](http://yager.io/Distributed/Distributed.html)
+- Bahasa Indonesia
+    - Apa beda manjur, mempan, mujarab, dan mustajab?
