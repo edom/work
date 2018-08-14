@@ -32,3 +32,17 @@ date: 2018-05-16 00:33:00 +0700
         - https://en.wikipedia.org/wiki/List_of_kanji_radicals_by_stroke_count
     - https://en.wikipedia.org/wiki/Radical_(Chinese_characters)
     - Use wiktionary to look up Han character origins (Bronze inscriptions)
+- How does Mandarin absorb loanwords, foreign terms, foreign proper names?
+    - Examples
+        - How does [WP:Las Vegas](https://en.wikipedia.org/wiki/Las_Vegas) become [WP:拉斯维加斯](https://zh.wikipedia.org/wiki/%E6%8B%89%E6%96%AF%E7%BB%B4%E5%8A%A0%E6%96%AF) (lā sī wéi jiā sī)?
+        - How does [WP:India](https://en.wikipedia.org/wiki/India) become [WP:印度](https://zh.wikipedia.org/wiki/%E5%8D%B0%E5%BA%A6) (yìn dù)?
+        - How does [WP:Indonesia](https://en.wikipedia.org/wiki/Indonesia) become [WP:印度尼西亚](https://zh.wikipedia.org/wiki/%E5%8D%B0%E5%BA%A6%E5%B0%BC%E8%A5%BF%E4%BA%9A) (yìn dù ní xī yà)?
+        - How does [WP:Saddam Hussein](https://en.wikipedia.org/wiki/Saddam_Hussein) become [WP:萨达姆·侯赛因](https://zh.wikipedia.org/wiki/%E8%90%A8%E8%BE%BE%E5%A7%86%C2%B7%E4%BE%AF%E8%B5%9B%E5%9B%A0) (sà dá mǔ hóu sài yīn)?
+        - How does [WP:George Walker Bush](https://en.wikipedia.org/wiki/George_W._Bush) become [WP:乔治·沃克·布什](https://zh.wikipedia.org/wiki/%E4%B9%94%E6%B2%BB%C2%B7%E6%B2%83%E5%85%8B%C2%B7%E5%B8%83%E4%BB%80) (qiáo zhì wò kè bù shí)?
+    - If every character has a meaning, how do we specify sound without meaning?
+    - https://www.quora.com/How-are-foreign-names-written-in-Chinese
+    - [How Chinese, Japanese, and Vietnamese handle foreign names](http://www.cjvlang.com/Writing/fornames.html)
+    - [How do you write foreign or English names in Chinese?](https://www.fluentinmandarin.com/content/how-do-you-write-foreignenglish-names-in-chinese/)
+    - [WP:Transcription into Chinese characters](https://en.wikipedia.org/wiki/Transcription_into_Chinese_characters)
+    - https://chinese.stackexchange.com/questions/2270/why-do-chinese-translations-of-english-names-sound-very-inaccurate
+- 2018, [How KaiOS Is Becoming the 3rd Major Mobile OS - YouTube](https://www.youtube.com/watch?v=OA_g2bQgOXY)

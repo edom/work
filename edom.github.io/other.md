@@ -315,6 +315,7 @@ The pack might contain things like yacy.net, matrix.org, riot.im.
     - http://www.nderf.org/
     - [AWARE study initial results are published!](https://iands.org/news/news/front-page-news/1060-aware-study-initial-results-are-published.html)
     - https://www.resuscitationjournal.com/article/S0300-9572%2814%2900739-4/pdf
+    - ["Experiments Proving Astral Projection is Real"](https://www.youtube.com/watch?v=bjQxwm9vuiE)
 - central premonitions registry
     - 1968, http://www.weirduniverse.net/blog/comments/central_premonitions_registry
     - 2017, https://scry.cloud/
@@ -387,3 +388,44 @@ https://en.wikipedia.org/wiki/Mereological_essentialism
     - International?
 - [Planetmath](https://github.com/planetmath) is a collection of TeX documents.
     - Can it be made into a mathematical knowledge management system?
+- Components for publish-subscribe in Haskell?
+    - https://www.stackage.org/lts-6.35/package/broadcast-chan-0.1.1
+- https://wikieducator.org/Main_Page
+- [Thyer's PhD thesis "Lazy specialization"](http://thyer.name/phd-thesis/thesis-thyer.pdf) has an accessible introduction to lambda calculus in Chapter 2.
+- philosophy
+    - [The First-Person and Third- Person Views](http://consc.net/notes/first-third.html)
+- The job of a company (a company director?) is to find what to do and find who should do it.
+    - Everyone has different tendencies, strengths, weaknesses, desires, preferences, habits, upbringings, backgrounds.
+    - Some people are more suited for some jobs.
+        - Some jobs require high IQ; otherwise the employee will take too long to learn.
+        - Some jobs require low IQ; otherwise the employee will get bored too soon.
+            - Yes, low IQ can be a strength.
+    - The company has goals.
+    - The director breaks down the goals into jobs.
+    - The director matches employees and jobs.
+    - Which comes first: the job or the employee?
+        - Do you formulate a job description first, and then find people to do that?
+        - Do you hire people first, and then formulate jobs suitable for them?
+    - A good company accomplishes more than each employee can accomplish individually.
+- From Wadler home page
+    - [From Data Types to Session Types: A Basis for Concurrency and Distribution](http://groups.inf.ed.ac.uk/abcd/)
+- Lennart Augustsson's [Things that amuse me](http://augustss.blogspot.com/2008/12/somewhat-failed-adventure-in-haskell.html), Haskell module overloading
+- [How KaiOS Is Becoming the 3rd Major Mobile OS - YouTube](https://www.youtube.com/watch?v=OA_g2bQgOXY)
+    - Much money can be made from selling to poor people (hopefully while also helping them).
+        - [The Smart Way to Make Profits While Serving the Poor](https://hbr.org/2012/06/the-smart-way-to-make-profits)
+- politics
+    - [Why the wars America starts are unwinnable - Danny Sjursen - YouTube](https://www.youtube.com/watch?v=o0ONByhAHC4)
+    - [What America gets wrong about China and the rest of Asia | David Kang - YouTube](https://www.youtube.com/watch?v=U7DdgUAWR-s)
+        - China isn't a rising power. It has always been big.
+        - Big nations have big internal (intra-nation) struggles.
+        - Most big nations (such as the old Chinese dynasties) fall due to internal struggles.
+- psychology
+    - [Facts Don't Win Fights: Here’s How to Cut Through Confirmation Bias - Tali Sharot - YouTube](https://www.youtube.com/watch?v=kyioZODhKbE)
+        - To polarize someone is to make him more confident (about a belief).
+        - Confirmation bias: People hear what they want to hear.
+            - People filter incoming information.
+            - People bend incoming information to conform with their preexisting beliefs.
+            - Agreements polarize people, but disagreements don't depolarize people.
+            - Information agreeing with preexisting belief polarize the believer.
+            - Information disagreeing with preexisting belief is filtered out and doesn't depolarize the believer.
+        - A key insight? We don't need to change people's beliefs to change their behavior.

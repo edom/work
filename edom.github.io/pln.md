@@ -28,3 +28,12 @@ Waktu kembali hidup tidak dicatat.
 2018-08-08 23:28 PLN mati 1 menit.
 
 Mengapa PLN suka mati 1 menit?
+
+- 2018-08-14 23:58 PLN mati 1 menit.
+    - This corrupts Chromium profile.
+    - Chromium fails to restore tabs.
+        - This is the second time it fails.
+    - My response:
+        - Discard tabs at the end of browsing.
+            - Open Chromium with predefined tabs.
+            - This also solves two other problems: tab hoarding and information overload.
