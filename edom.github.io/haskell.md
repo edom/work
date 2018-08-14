@@ -35,6 +35,9 @@ language: en
             In 2018, I think the safe choice is GHC 7.10.
         - The widely supported GHC version lags very much behind the latest stable GHC version.
         I think this may be because the GHC team is rolling out lots of breaking changes in the parser because they are working on the "Trees that grow" proposal.
+        - Which Stackage LTS version should I use?
+            - [LTS 6.35](https://www.stackage.org/lts-6.35), because of GHC 7.10.3.
+                - It also hosts a hoogle search for searching Haskell program elements.
     - unread, Stephen Diehl
         - http://www.stephendiehl.com/posts/vim_2016.html
         - http://www.stephendiehl.com/posts/vim_haskell.html

@@ -165,7 +165,9 @@ Still looking for replicable experiment.
     - 2016, article, [AI Research Trends - One Hundred Year Study on Artificial Intelligence (AI100)](https://ai100.stanford.edu/2016-report/section-i-what-artificial-intelligence/ai-research-trends)
 - Pemerintah menyediakan akses ke jurnal berbayar.
 Di mana? Cara pakainya?
-- https://wiki.haskell.org/Enterprise_Haskell
+- Enterprise Haskell?
+    - https://wiki.haskell.org/Enterprise_Haskell
+    - DSH: Database Supported Haskell https://hackage.haskell.org/package/DSH
 - Why are clothes so expensive?
 - The problem with opening a business is too many choices.
 Almost all businesses make money.
@@ -173,3 +175,215 @@ Almost all businesses make money.
 - [Distributed Systems in Haskell :: Will Yager](http://yager.io/Distributed/Distributed.html)
 - Bahasa Indonesia
     - Apa beda manjur, mempan, mujarab, dan mustajab?
+- Why users don't use distributed systems
+    - [highscalability.com: What do you believe now that you didn't five years ago?](http://highscalability.com/blog/2018/8/13/what-do-you-believe-now-that-you-didnt-five-years-ago.html)
+        - "Decentralized systems will continue to lose to centralized systems until there's a driver requiring decentralization to deliver a clearly superior consumer experience."
+            - Users don't care.
+            They want software to just work.
+- [The Kubernetes Bible for Beginners & Developers - Level UpLevel Up](https://www.level-up.one/kubernetes-bible-beginners/)
+- YaCy-related
+    - [Loklak Search - Distributed Open Source Search for Twitter and Social Media with Peer to Peer Technology](https://loklak.org/)
+    - [SUSI.AI Chat - Open Source Artificial Intelligence](https://chat.susi.ai/)
+    - https://www.pcworld.com/article/245414/yacy_its_about_freedom_not_beating_google.html
+- [Deutsche Digitale Bibliothek - Kultur und Wissen online](https://www.deutsche-digitale-bibliothek.de/?lang=en) (English available)
+- Finding an alternative to Slack
+    - https://matrix.org/blog/home/
+        - riot.im is built on matrix.org?
+            - [Slack no more. Why you should use Riot.im and Matrix.org](http://www.1500wordmtu.com/2016/slack-no-more-why-you-should-use-riotim-and-matrixorg)
+                - vector.im is another name for riot.im?
+                - https://matrix.org/docs/guides/faq.html
+                - It seems that riot.im is a strong contender to (if not better than) Slack.
+            - [Tony “Abolish ICE” Arcieri on Twitter: "If you've been looking for an OSS end-to-end encrypted alternative to Slack, @RiotChat is probably your best bet: https://t.co/U5My74tLvn"](https://twitter.com/bascule/status/803680470386884608)
+                - [Riot releases end-to-end encryption: get ready to chat securely! – Medium](https://medium.com/@RiotChat/exciting-new-riot-release-get-ready-for-chatting-securely-acc93ecfe0a)
+- We should make a "freedom pack": an installer of essential free/libre open-source distributed-web applications.
+The pack might contain things like yacy.net, matrix.org, riot.im.
+    - Why stop there? Why not make free/libre distributed operating system with all those goodies preinstalled?
+        - https://en.wikipedia.org/wiki/Distributed_operating_system
+- A good OS is invisible like a good design.
+    - The user can't tell whether an OS is good.
+    If the OS is good, everything runs smoothly.
+    - But the user can tell whether an OS is bad.
+    Crashes due to non-hardware problems.
+    Things that don't just work.
+- [How open source took over the world](https://www.theinquirer.net/inquirer/feature/3013459/how-open-source-took-over-the-world)
+- 2010, article, "Sustainability of Free/Libre Open Source Projects: A Longitudinal Study", [pdf](https://pdfs.semanticscholar.org/934e/0e87df10ca51138e3fe857a2de216787cbef.pdf)
+- [The Open Source Definition - Open Source Initiative](https://opensource.org/osd)
+    - "Open source doesn't just mean access to the source code."
+- Don't buy from Oracle.
+    - [Oracle finally targets Java non-payers – six years after plucking Sun : programming](https://www.reddit.com/r/programming/comments/5iogug/oracle_finally_targets_java_nonpayers_six_years/)
+    - [Oracle Begins Aggressively Pursuing Java Licensing Fees - Slashdot](https://developers.slashdot.org/story/16/12/18/0147216/oracle-begins-aggressively-pursuing-java-licensing-fees)
+- Low-code application development
+    - G Suite low-code https://developers.google.com/appmaker/
+    - competitor https://www.outsystems.com/platform/#low-code
+        - "OutSystems is an open, standards-based platform with no lock-in, no proprietary data models, or proprietary run-time"
+- Wikipedia alternatives?
+    - https://en.wikipedia.org/wiki/Wikipedia:Other_projects_similar_to_Wikipedia
+    - https://en.wikipedia.org/wiki/Wikipedia:Alternative_outlets
+    - https://www.quora.com/What-are-the-best-alternatives-to-Wikipedia
+    - https://everipedia.org/wiki/InterPlanetary_File_System/
+        - Everipedia and IPFS?
+    - https://oedb.org/ilibrarian/top-7-alternatives-to-wikipedia/
+- AI
+    - sequence learning?
+        - https://devblogs.nvidia.com/deep-learning-nutshell-sequence-learning/
+        - https://en.wikipedia.org/wiki/Sequence_learning
+    - AI perception of time?
+- IntelliJ IDEA can open a Maven project whose POM XML file name is not pom.xml.
+- JVM memory usage problem
+    - Tuning JVM memory usage
+        - https://docs.oracle.com/cd/E13150_01/jrockit_jvm/jrockit/geninfo/diagnos/tune_footprint.html
+        - https://www.javacodegeeks.com/2017/11/minimize-java-memory-usage-right-garbage-collector.html
+    - "Make JVM respect CPU and RAM limits" https://hub.docker.com/_/openjdk/
+    - https://blogs.oracle.com/java-platform-group/java-se-support-for-docker-cpu-and-memory-limits
+- https://felipec.wordpress.com/2011/06/16/after-two-weeks-of-using-gnome-3-i-officially-hate-it/
+    - Why does the author disapprove of GNOME 3?
+- relationship between Aspect-Oriented Programming and Functional Programming
+    - 2009, article, "What Does Aspect-Oriented Programming Mean for Functional Programmers?", [pdf](https://www.cs.ox.ac.uk/files/2282/wgp14-wang.pdf)
+    - 2008, article, "On Feature Orientation and Functional Programming", [pdf](https://pdfs.semanticscholar.org/522e/b6c2ea910ed074a13fe21767c9fa070fb685.pdf)
+    - 2016, article, "Realtime collaborative editor. Algebraic properties of the problem.", [html](http://blog.haskell-exists.com/yuras/posts/realtime-collaborative-editor.html)
+        - see also Darcs patch theory
+    - 2008, PhD thesis, "An Integrated System to Manage Crosscutting Concerns in Source Code", [pdf](http://wwwtmp.st.ewi.tudelft.nl/arie/phds/Marin.pdf)
+    - 2003, article, "Language-independent aspect-oriented programming", [pdf available](http://www.tara.tcd.ie/handle/2262/32627)
+- https://libcloud.apache.org/
+    - "One Interface To Rule Them All: Python library for interacting with many of the popular cloud service providers using a unified API."
+- duren medan kupas (ada biji tapi tanpa kulit), Rp 47000 per kg!? Biasanya Rp 75000? Atau biasanya kemahalan?
+    - https://www.tokopedia.com/durenkupasjkt/duren-kupas-asli-medan
+    - https://www.tokopedia.com/durenkupasjkt/etalase/duren
+- software engineering research, advances in software engineering
+    - http://www.sigsoft.org/events.html
+    - http://homepage.divms.uiowa.edu/~slonnegr/plf/Book/Chapter7.pdf
+- algebraic subtyping
+    - http://www.cl.cam.ac.uk/~sd601/papers/mlsub-preprint.pdf
+    - https://www.cl.cam.ac.uk/~sd601/thesis.pdf
+    - https://cs.stackexchange.com/questions/53998/what-are-the-major-differences-between-row-polymorphism-and-subtyping
+    - https://www.cl.cam.ac.uk/teaching/1415/L28/rows.pdf
+    - 2017, "Introduction to homotopy type theory", http://www.cs.nott.ac.uk/~psztxa/ss-types-17/notes-summer17.pdf
+    - http://www.cs.nott.ac.uk/~psztxa/ss-types-17/
+    - https://homotopytypetheory.org/book/
+    - https://en.wikipedia.org/wiki/Subtyping
+    - https://en.wikipedia.org/wiki/Circle-ellipse_problem
+    - What does "X is a Y" mean?
+    It means P(X) => P(Y) for every predicate P.
+    Liskov substitution principle.
+    Does it mean "X is a subclass of Y" or "X is an instance of Y"?
+- [HuwCampbell/grenade: Deep Learning in Haskell](https://github.com/HuwCampbell/grenade)
+- [Smart classification using Bayesian monads in Haskell - Random Hacks](http://www.randomhacks.net/2007/03/03/smart-classification-with-haskell/)
+- just for curiosity https://github.com/edwinb/idris-php
+- recursive types http://ecee.colorado.edu/~siek/ecen5013/spring10/lecture15.pdf
+- Great Works in Programming Languages, Collected by Benjamin C. Pierce http://www.cis.upenn.edu/~bcpierce/courses/670Fall04/GreatWorksInPL.shtml
+- to read? "theories of programming languages reynolds"
+- 2017, book, "Principles of Programming Languages" https://www.cs.bgu.ac.il/~mira/ppl-book-full.pdf
+- http://tomasp.net/coeffects/
+- 2003, article, "Composing Programming Languages by Combining Action-Semantics Modules" http://www.brics.dk/RS/03/53/BRICS-RS-03-53.pdf
+- yet another music programming language https://github.com/alda-lang/alda
+- 2001, position paper, "Composition Languages for Black-Box Components" http://scg.unibe.ch/archive/papers/Wuyt01c.pdf
+- 2008, article, "Church and Curry: Combining Intrinsic and Extrinsic Typing", Frank Pfenning https://www.cs.cmu.edu/~fp/papers/andrews08.pdf
+- glue: Make better services. (deprecated) https://hackage.haskell.org/package/glue
+- someone has too much time https://hackage.haskell.org/package/ImperativeHaskell
+- linearscan: Linear scan register allocator, formally verified in Coq; 2004, master thesis, https://hackage.haskell.org/package/linearscan
+- Lastik: A library for compiling programs in a variety of languages (Java, Scala, C#) https://hackage.haskell.org/package/Lastik
+- risc386: Reduced instruction set i386 simulator https://hackage.haskell.org/package/risc386
+- https://medium.com/@pocztarski/shame-driven-development-4545fae46fd
+- 2017, "Theorems for Free for Free", Wadler http://homepages.inf.ed.ac.uk/wadler/topics/blame.html
+    - What is "polymorphic blame calculus"?
+- https://idris.readthedocs.io/en/v1.3.0/faq/faq.html#what-are-the-differences-between-agda-and-idris
+    - "Why does Idris use eager evaluation rather than lazy?"
+        - "What is the representation of `thing` at run-time? Is it a bit pattern representing an integer, or is it a pointer to some code which will compute an integer? In Idris, we have decided that we would like to make this distinction precise [...]"
+        - Idris has laziness, but you have to be explicit.
+- https://en.wikipedia.org/wiki/Automatic_programming
+- https://en.wikipedia.org/wiki/Program_synthesis
+- https://www.cs.cmu.edu/~mleone/language-research.html
+- http://strategoxt.org/
+- http://tech.jonathangardner.net/wiki/Why_Java_Sucks#Speaking_of_the_JVM...
+- https://chrisdone.com/posts/haskell-constraint-trick
+- https://chrisdone.com/posts/twitter-problem-loeb
+- http://blog.sigfpe.com/2006/11/from-l-theorem-to-spreadsheet.html
+- http://blog.sigfpe.com/2007/02/comonads-and-reading-from-future.html
+- https://css-tricks.com/autoprefixer/
+- 2005, article, "Why Most Published Research Findings Are False", John P. A. Ioannidis, [html](http://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0020124)
+- "Confessions Of A Used Programming Language Salesman: Getting The Masses Hooked On Haskell", Erik Meijer, [pdf](https://pdfs.semanticscholar.org/233a/932b3e94f1f117655e4862995b32f33754be.pdf)
+- 1966, article, P. J. Landin, "The next 700 programming languages", [pdf](https://www.cs.cmu.edu/~crary/819-f09/Landin66.pdf)
+    - https://en.wikipedia.org/wiki/Off-side_rule
+- http://matt.might.net/articles/best-programming-languages/
+- How do we spell-check this website?
+- Measuring investment performance
+    - https://en.wikipedia.org/wiki/Sharpe_ratio
+    - https://en.wikipedia.org/wiki/Sortino_ratio
+- astral travel, remote viewing, out-of-body experience, near-death experience
+    - https://allaboutheaven.org/observations/1122/127/swann-ingo-out-of-body-to-mercury-003207
+    - https://www.quora.com/Is-astral-projection-true-If-so-has-anyone-done-it-Is-there-a-standard-procedure
+    - http://www.nderf.org/
+    - [AWARE study initial results are published!](https://iands.org/news/news/front-page-news/1060-aware-study-initial-results-are-published.html)
+    - https://www.resuscitationjournal.com/article/S0300-9572%2814%2900739-4/pdf
+- central premonitions registry
+    - 1968, http://www.weirduniverse.net/blog/comments/central_premonitions_registry
+    - 2017, https://scry.cloud/
+- Money is a way for people to decide what is important (vote for what is important).
+    - People vote with their money.
+- Type systems
+    - Church types and Curry types
+        - https://lispcast.com/church-vs-curry-types/
+    - Liquid Haskell https://ucsd-progsys.github.io/liquidhaskell-blog/
+
+- https://www.quora.com/Does-the-human-brain-have-an-internal-language
+    - mereological fallacy, confusing the part and the whole
+- https://www.quora.com/Is-the-human-brain-analog-or-digital
+https://en.wikipedia.org/wiki/Mereological_essentialism
+- [EWD641: On the interplay between mathematics and programming](http://www.cs.utexas.edu/users/EWD/ewd06xx/EWD641.PDF)
+- https://twitter.com/yudapearl/status/1016858846034210816
+    - 2018, "The Seven Tools of Causal Inference with Reflections on Machine Learning", Judea Pearl, [pdf](http://ftp.cs.ucla.edu/pub/stat_ser/r481.pdf)
+        - book, "The book of why [...]", Judea Pearl
+- https://blog.codinghorror.com/why-cant-database-tables-index-themselves/
+- https://thegradient.pub/nlp-imagenet/
+- https://chrisalbon.com/
+- https://createmomo.github.io/2017/09/12/CRF_Layer_on_the_Top_of_BiLSTM_1/
+- skin color chart
+    - https://en.wikipedia.org/wiki/Von_Luschan%27s_chromatic_scale
+    - https://en.wikipedia.org/wiki/Fitzpatrick_scale
+- http://hackage.haskell.org/package/Workflow
+- https://pchiusano.github.io/2017-01-20/why-not-haskell.html
+- http://unisonweb.org/2015-05-07/about.html#post-start
+- haskell for devops
+    - https://www.reddit.com/r/haskell/comments/31vnos/neil_mitchell_devops_with_haskell/
+    - https://github.com/commercialhaskell/commercialhaskell/blob/master/taskforce/devops.md
+    - [azubi: A simple DevOps tool which will never "reach" enterprice level.](http://hackage.haskell.org/package/azubi)
+- [facebook/duckling: Language, engine, and tooling for expressing, testing, and evaluating composable language rules on input strings.](https://github.com/facebook/duckling)
+- [GaloisInc/crucible: Crucible is a library for symbolic simulation of imperative programs](https://github.com/GaloisInc/crucible)
+- [CSS flexbox cheat sheet](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
+- JSNice: a statistical approach to program deobfuscation
+    - http://www.jsnice.org/
+    - http://www.nice2predict.org/
+    - https://www.sri.inf.ethz.ch/jsnice.php
+- Reverse-engineering and deobfuscation
+    - Optimization is a partial inverse of obfuscation.
+    - An optimizer can be used to deobfuscate.
+    - Let's make a JVM bytecode optimizer in Haskell?
+    - Stolas / Reverse Engineering Toolkit https://gist.github.com/Stolas/173b174a1d62734540c360d8f66850d9
+    - https://resources.infosecinstitute.com/top-8-reverse-engineering-tools-cyber-security-professionals/#gref
+    - https://www.quora.com/Whats-your-best-reverse-engineering-tools-and-why
+- https://en.wikipedia.org/wiki/List_of_electronic_trading_protocols
+- [PostgREST/postgrest: REST API for any Postgres database](https://github.com/PostgREST/postgrest)
+    - https://restifydb.com/
+    - https://www.progress.com/blogs/restify-databases-expose-your-database-to-rest-web-services
+    - http://www.odata.org/getting-started/understand-odata-in-6-steps/
+- [[1612.02547] Self-composable Programming](https://arxiv.org/abs/1612.02547)
+- 2009, "Domain-Specific Languages for Composable Editor Plugins"
+    - [2009 slides pdf](https://pdfs.semanticscholar.org/presentation/85d8/bc42122ff5175be1ebc3c7b91e4abff55d22.pdf)
+    - [2010 article pdf](http://bora.uib.no/bitstream/handle/1956/9721/1-s2.0-S1571066110001179-main.pdf?sequence=1)
+- why not PEG parsing
+    - http://jeffreykegler.github.io/Ocean-of-Awareness-blog/individual/2015/03/peg.html
+- https://en.wikipedia.org/wiki/21st_century_skills
+- site material
+- 2015, PhD thesis, Bergersen, "Measuring Programming Skill: Construction and Validation of an Instrument for Evaluating Java Developers"
+    - [pdf](http://folk.uio.no/gunnab/publications/Bergersen2015_PhD_thesis.pdf)
+    - It's a collection of 4 articles.
+    - https://www.duo.uio.no/handle/10852/48583
+- https://www.inc.com/business-insider/amazon-founder-ceo-jeff-bezos-customer-emails-forward-managers-fix-issues.html
+    - "If all his [Bezos's] data says one thing and a few customers say something else, he believes the customers."
+- Software engineer association?
+    - Indonesia
+        - SARCCOM Software architect Indonesia community http://sarccom.org/
+        - ASPILUKI Asosiasi Piranti Lunak Telematika Indonesia http://www.aspiluki.or.id/
+    - International?
+- [Planetmath](https://github.com/planetmath) is a collection of TeX documents.
+    - Can it be made into a mathematical knowledge management system?

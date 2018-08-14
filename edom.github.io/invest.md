@@ -83,3 +83,4 @@ date: 2017-02-23 02:43:08 +0700
     - http://www.e-bursa.com/
     - http://www.bloomberg.com/quote/LMAS:IJ
     - http://topbrokerforex.blog.com/2012/08/02/daftar-badan-regulasi-untuk-broker-forex/
+- https://en.wikipedia.org/wiki/Outline_of_finance#Post-modern_portfolio_theory
