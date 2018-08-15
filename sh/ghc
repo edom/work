@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Run GHC 7.10.3 using stack.
+
+stack_resolver=lts-6.35
+
+stack --resolver=$stack_resolver ghc -- "$@"
+
+# The command "stack exec CMD" sets up PATH and executes CMD.
+
+# Examples:
+
+# stack --resolver=$stack_resolver exec bash -- "$@"
+# stack --resolver=$stack_resolver exec ghc-pkg -- "$@"
+# stack --resolver=$stack_resolver exec cabal -- "$@"
