@@ -23,3 +23,5 @@ date: 2018-08-10 03:49 +0700
 - Why isn't ssh fail2ban the default?
 Why is security not the default?
 - 2014, "Is there any solution to make OpenVPN authentication with Google ID?", [SF 597833](https://serverfault.com/questions/597833/is-there-any-solution-to-make-openvpn-authentication-with-google-id)
+- man page usability, terminal usability, reducing cognitive load
+    - [tldr.sh](https://tldr.sh/): "The TLDR pages are a community effort to simplify the beloved man pages with practical examples."

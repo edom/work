@@ -110,8 +110,11 @@ We already have laws for people causing public disorder.
         - https://www.reddit.com/r/indonesia/comments/9631cu/maruf_amin_dulu_saya_yang_menggerakkan_aksi_212/
 - Mengapa kita tidak minta tolong cenayang panggil arwah Bung Karno dan tanyakan kebenaran G30S PKI dan Supersemar?
     - Mengapa kita tidak tanya istrinya, anaknya, atau kerabatnya?
-- Student activism
-    - [SEMAR UI](https://twitter.com/semarui?lang=en)
-    - [Komune Rakapare](https://twitter.com/rakapare?lang=en)
+- Peduli rakyat kecil
+    - Student activism
+        - [SEMAR UI](https://twitter.com/semarui?lang=en)
+        - [Komune Rakapare](https://twitter.com/rakapare?lang=en)
 - [What was Indonesia like before Reformasi and after1998? (Long) : indonesia](https://www.reddit.com/r/indonesia/comments/61ed2m/what_was_indonesia_like_before_reformasi_and/)
 - Indonesia needs a politifact website.
+- Is the 21st century is the age of demagogues, or has it always been the case?
+When did candidates begin appealing to emotion using racism and religion?

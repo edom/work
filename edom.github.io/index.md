@@ -112,6 +112,7 @@ date: 2017-05-20 00:00:00 +0700
             - [Generalizing division]({% link division.md %})
             - [Solving the Clay millennium prize problems]({% link clay_math.md %})
         - [Writing]({% link writing.md %})
+        - [Justifying counterfactual reasoning]({% link cf.md %})
     - Feeling
         - Spirituality
             - [Choosing a religion]({% link relch.md %})

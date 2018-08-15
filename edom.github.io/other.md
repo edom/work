@@ -48,7 +48,6 @@ date: 2018-07-22 13:15 +0700
     - [Law]({% link law.md %})
     - [Religion]({% link religion.md %})
     - [Logic]({% link logic.md %})
-        - [Counterfactual reasoning]({% link cf.md %})
     - Work
         - [Boss]({% link boss.md %})
     - [Long-haired men]({% link longhair.md %})
@@ -72,7 +71,7 @@ Markup languages?
     - roff, troff, nroff, groff
     - GNU info
     - Unix man
-- 2017, 1 hour, [Frank Abagnale: "Catch Me If You Can" \| Talks at Google](https://www.youtube.com/watch?v=vsMydMDi3rI)
+- 2017, 1 hour, [Frank Abagnale: "Catch Me If You Can" - Talks at Google](https://www.youtube.com/watch?v=vsMydMDi3rI)
     - Use credit card, not debit card.
         - Use credit card, but don't fall into debt.
         Treat credit card as means of payment, not loan.
@@ -415,7 +414,7 @@ https://en.wikipedia.org/wiki/Mereological_essentialism
         - [The Smart Way to Make Profits While Serving the Poor](https://hbr.org/2012/06/the-smart-way-to-make-profits)
 - politics
     - [Why the wars America starts are unwinnable - Danny Sjursen - YouTube](https://www.youtube.com/watch?v=o0ONByhAHC4)
-    - [What America gets wrong about China and the rest of Asia | David Kang - YouTube](https://www.youtube.com/watch?v=U7DdgUAWR-s)
+    - [What America gets wrong about China and the rest of Asia - David Kang - YouTube](https://www.youtube.com/watch?v=U7DdgUAWR-s)
         - China isn't a rising power. It has always been big.
         - Big nations have big internal (intra-nation) struggles.
         - Most big nations (such as the old Chinese dynasties) fall due to internal struggles.
@@ -429,3 +428,53 @@ https://en.wikipedia.org/wiki/Mereological_essentialism
             - Information agreeing with preexisting belief polarize the believer.
             - Information disagreeing with preexisting belief is filtered out and doesn't depolarize the believer.
         - A key insight? We don't need to change people's beliefs to change their behavior.
+- Inheriting digital data
+    - What to do with your data when you die?
+    - https://www.businessinsider.sg/how-to-give-google-account-to-trusted-person-when-you-die-2018-8/
+- Science progresses much faster if we exchange data/knowledge/information freely.
+    - You have something I need.
+    - I have something you need.
+- We need content curation for science/academics.
+    - https://medium.com/content-curation-official-guide/why-to-curate-information-73ecb47b98a5
+    - https://en.wikipedia.org/wiki/Content_curation
+    - https://en.wikipedia.org/wiki/Digital_curation
+    - 2016, article, [Why To Curate Information – Content Curation Official Guide](https://medium.com/content-curation-official-guide/why-to-curate-information-73ecb47b98a5)
+    - 2017, article, [How To Monetize Curated Content – Content Curation Official Guide](https://medium.com/content-curation-official-guide/how-to-monetize-curated-content-465cc44725bd)
+    - 2008, article, [Who are your content curators - and what skill should they have?](https://www.missiontolearn.com/content-curator/)
+    - Is there a curated wiki?
+    Can we crowdsource curation?
+        - 2017, article, [Mob Rule: Curating via Crowdsourcing - Big Think](https://bigthink.com/Picture-This/mob-rule-curating-via-crowdsourcing)
+        - 2016, article, [Crowdsourcing and curation: perspectives from biology and natural language processing](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4976298/)
+        - 2016, article, [Crowdsourcing: Spotify's Secret Weapon for Curation at Scale - Yeti](https://yeti.co/blog/crowdsourcing-spotifys-secret-weapon-for-curation-at-scale/)
+        - 2016, article, [Crowdsourcing – Using the crowd: curated vs. unknown - Analytics Magazine](http://analytics-magazine.org/crowdsourcing-using-the-crowd-curated-vs-unknown/)
+        - 2013, article, "A Theoretical Analysis of Crowdsourced Content Curation", [pdf](http://users.eecs.northwestern.edu/~gar627/crowdsource.pdf)
+    - ["My Curated List of AI and Machine Learning Resources from Around the Web"](https://medium.com/machine-learning-in-practice/my-curated-list-of-ai-and-machine-learning-resources-from-around-the-web-9a97823b8524)
+- answer set programming
+    - [News: Speed up solving complex problems: be lazy and only work crucial tasks - Aalto University](http://cs.aalto.fi/en/current/news/2018-07-18/)
+        - 2018, article, "Exploiting Justifications for Lazy Grounding of Answer Set Programs", [pdf](https://www.ijcai.org/proceedings/2018/0240.pdf)
+- Vimium: vim-like shortcuts for navigating the chromium browser
+    - [Install from Chrome Web Store](https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en)
+    - [Source code on GitHub](https://github.com/philc/vimium)
+- Don't use GitFlow.
+Use continuous integration and continuous deployment instead.
+    - The `master` branch always builds, always runs, and is always releasable.
+    - Everything goes to `master`. Sketches, hotfixes, everything.
+    - Avoid non-master long-lived branches.
+    - It is OK to introduce half-baked code into `master` as long as it doesn't introduce errors.
+        - Use feature switch/toggle.
+            - Just because code is in `master` doesn't mean it will be run on production.
+        - Work-in-progress doesn't have to be full of errors.
+    - Discipline yourself to make small commits and avoid big merges.
+    - Discipline yourself to make backward-compatible changes, and deprecate things slowly.
+        - Give your users time to migrate.
+        - If your changes are always backward-compatible, you will never break someone else's code.
+    - You can rebase/tidy up commits that you haven't pushed.
+    - Merges and rebases produce the same working tree but have different uses.
+        - The computer doesn't care whether you merge or rebase.
+        - Merges and rebases exist for the humans.
+    - 2017, article, [Moving away from GitFlow](https://www.gamasutra.com/blogs/NiklasGray/20170927/306445/Moving_away_from_GitFlow.php)
+- knowledge organization?
+    - 2016, article, [Scaling Knowledge at Airbnb – Airbnb Engineering & Data Science – Medium](https://medium.com/airbnb-engineering/scaling-knowledge-at-airbnb-875d73eff091)
+    - 2018, article, [Using Airbnb's Knowledge Repository to Scale Your Organization's Knowledge - SocialCops](https://blog.socialcops.com/technology/engineering/airbnb-knowledge-repository-scale-knowledge/)
+- build systems
+    - How do Haskell Shake and F# FAKE compare?

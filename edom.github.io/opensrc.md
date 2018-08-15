@@ -26,3 +26,6 @@ date: 2018-07-24 15:00 +0700
 - If you want to attract people, you must have a goal/vision/roadmap.
     - You will attract people with the same goal.
     - If their goal changes, they will leave you, and that's OK.
+- Your project must have a readme and a contributor guidelines.
+    - https://help.github.com/articles/setting-guidelines-for-repository-contributors/
+    - Make it easy for people to contribute.
