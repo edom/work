@@ -478,3 +478,33 @@ Use continuous integration and continuous deployment instead.
     - 2018, article, [Using Airbnb's Knowledge Repository to Scale Your Organization's Knowledge - SocialCops](https://blog.socialcops.com/technology/engineering/airbnb-knowledge-repository-scale-knowledge/)
 - build systems
     - How do Haskell Shake and F# FAKE compare?
+- [Jeremy Rifkin on the Fall of Capitalism and the Internet of Things - YouTube](https://www.youtube.com/watch?v=3xOK2aJ-0Js)
+- Does putting on a headphone enhance your focus, even if it isn't playing any sound?
+    - How about putting a motorcycle helmet?
+- [Corporate Greed Isn’t New. The Internet Is Just the New Playing Field, says Douglas Rushkoff - YouTube](https://www.youtube.com/watch?v=mAOyOULWKUo)
+    - Corporates were invented by aristocrats to make sure peasants stay peasants?
+    - [transcript](https://bigthink.com/videos/douglas-rushkoff-on-the-internet-and-the-future-of-business)
+        - We should verify and distill these texts:
+            - "As the peasants became wealthy the aristocracy got scared, who are these people?
+            They're not going to be dependent on us any more.
+            So they came up with two main financial innovations to prevent the rise of this peer to peer economy.
+            The first one was the chartered monopoly, really the parent to the modern corporation.
+            All the chartered monopoly was was a way to say all of you small businesses are now illegal.
+            If you want to be in the shoe business you have to work for his majesty's royal shoe company.
+            You want to be in the grain business you have to work for his majesty's royal grain company.
+            So people who were small business people now became employees.
+            Instead of selling the value they created, now they sold their time as servants, as wage laborers."
+            - "The second invention they came up with was central currency.
+            Not such a terrible thing in itself.
+            It's great to have a long distance currency that lots of people can use and value, but the problem was they made all of the local currencies illegal.
+            So the only way people could trade with each other, the candlestick maker could trade with the chicken farmer was by borrowing central currency from the treasury.
+            So now you had to borrow money at interest just in order to transact.
+            And that set in motion really a growth cascade.
+            If you have a currency that has to be paid back with interest, in order to just make end meet you need an economy that's growing.
+            You need more money next year than there was this year."
+            - "So that worked well for colonial powers, as long as we could extend into Africa and South America and North America, find slaves, find new resources, we could grow.
+            But what happens when you reach the end of the planet's growth as we did really at the end of World War II?"
+- Maintaining open source projects
+    - [nayafia/awesome-maintainers: Talks, blog posts, and interviews about the experience of being an open source maintainer](https://github.com/nayafia/awesome-maintainers)
+    - [André Staltz - Open source without maintainers](https://staltz.com/open-source-without-maintainers.html)
+    - [Best Practices for Maintainers | Open Source Guides](https://opensource.guide/best-practices/)

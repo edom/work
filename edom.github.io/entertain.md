@@ -183,7 +183,8 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
 - [How wrestler Rhythm Heaven should be played](https://www.youtube.com/watch?v=SpsezVsd0No)
     - [【みんなのリズム天国】ブロリー会見（レスラー会見）](https://www.youtube.com/watch?v=GTdyWN_XCrM)
         - "Minna-no rizumu tengoku"
-- people laughing
+- people laughing brutally
+    - [kardashiianvideos and Xx\_\_Eric\_\_xX](https://www.instagram.com/p/BmW3f4VBYAp/)
     - [YT:"Me laughing at the top 10 Mountain Dew name votes"](https://www.youtube.com/watch?v=rxu3kZPlZx8)
     - [YT:Meterstick Jim - The Sims 3: The funniest patch notes](https://www.youtube.com/watch?v=4nxsCZ2SEcQ)
     - [YT:The Turkey Whisperer(ORIGINAL)](https://www.youtube.com/watch?v=Q1sDmooVHj8)
