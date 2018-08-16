@@ -484,7 +484,8 @@ Use continuous integration and continuous deployment instead.
 - [Corporate Greed Isn’t New. The Internet Is Just the New Playing Field, says Douglas Rushkoff - YouTube](https://www.youtube.com/watch?v=mAOyOULWKUo)
     - Corporates were invented by aristocrats to make sure peasants stay peasants?
     - [transcript](https://bigthink.com/videos/douglas-rushkoff-on-the-internet-and-the-future-of-business)
-        - We should verify and distill these texts:
+        - We should verify and distill these texts.
+        These are some bold claims.
             - "As the peasants became wealthy the aristocracy got scared, who are these people?
             They're not going to be dependent on us any more.
             So they came up with two main financial innovations to prevent the rise of this peer to peer economy.
@@ -508,3 +509,86 @@ Use continuous integration and continuous deployment instead.
     - [nayafia/awesome-maintainers: Talks, blog posts, and interviews about the experience of being an open source maintainer](https://github.com/nayafia/awesome-maintainers)
     - [André Staltz - Open source without maintainers](https://staltz.com/open-source-without-maintainers.html)
     - [Best Practices for Maintainers | Open Source Guides](https://opensource.guide/best-practices/)
+- Long hair for men
+    - [How to Tie Your Long Hair - For Men - The Longhairs](https://blog.thelonghairs.us/how-to-tie-your-long-hair/)
+- GHC TDNR (type-directed name resolution)
+    - https://ghc.haskell.org/trac/ghc/ticket/4479
+    - https://ghc.haskell.org/trac/ghc/wiki/Records/OverloadedRecordFields
+    - https://stackoverflow.com/questions/22417063/current-state-of-record-types-and-subtyping-in-haskell
+    - https://en.wikipedia.org/wiki/Subtyping#Record_types
+        - Width and depth subtyping
+- Finding a programming language for programming in the large
+    - Ecosystem, libraries, tools, and communities.
+    - The most important thing in programming in the large is name management.
+    Namespaces.
+        - C has two namespaces: type namespace and value namespace.
+        - Haskell has two namespaces: type namespace and value namespace.
+        - Java has better namespacing than C.
+        - Enable the same name to be used in different context, so that you can write `get_name employee` and `get_name company` instead of `employee_get_name employee` or `company_get_name company`.
+            - Ad-hoc polymorphism.
+    - Which one has the biggest community?
+    - Which one has a decent IDE?
+    - Which community puts their money on where their mouth is?
+    - Comparing type systems
+        - [The Typed Racket Guide](https://docs.racket-lang.org/ts-guide/)
+        - F#
+        - SML
+        - Caml
+        - OCaml
+        - Idris, Agda
+        - Coq, Lean
+        - Haskell
+        - 2004, chapter, "Type systems", Luca Cardelli, [pdf](http://lucacardelli.name/Papers/TypeSystems.pdf)
+            - from https://www.artima.com/forums/flat.jsp?forum=106&thread=185420
+            - 2005, book, "Advanced topics in types and programming languages", Benjamin C. Pierce (editor)
+                - Part IV, "Types for Programming in the Large"
+            - 2002, book, "Types and programming languages", Benjamin C. Pierce
+        - Java, Kotlin, Scala
+        - Things that annoy me
+            - ML, SML, Caml, OCaml: `'a tf` is somewhat annoying. It should have been `tf a`.
+                - F# uses `tf<'a>`.
+                - Haskell uses `Tf a`.
+            - Would you rather type `'a list` (F#) or deal with an inadequate record/module system (Haskell)?
+            - Haskell doesn't have `instance Read (->)` and `instance Show (->)`.
+                - Haskell expressions are not first-class citizen in the language.
+                    - Unlike Lisp/Scheme.
+                - Encumbers metaprogramming.
+        - OCaml labels and polymorphic variants?
+            - http://caml.inria.fr/pub/docs/manual-ocaml-400/manual006.html
+            - OCaml labels are somewhat similar to Scheme keyword arguments.
+        - F# quotations is important for metaprogramming.
+        - F# doesn't do ad-hoc polymorphism well?
+            - [Ad-hoc Polymorphism in F# (how to survive without Type Classes) - Without the loop](https://withouttheloop.com/articles/2014-10-21-fsharp-adhoc-polymorphism/)
+            - [Higher-kinded Polymorphism: What is it, why you want it · David Raab](https://sidburn.github.io/blog/2016/03/24/higher-kinded-polymorphism)
+        - https://cstheory.stackexchange.com/questions/40705/why-did-caml-become-ocaml-or-why-use-objects-in-f
+        - ML begat Caml. Caml begat Caml Light? Caml Light begat OCaml?
+        - [How does F# compare to OCaml, in regard to major syntactic differences, paradigm shifts, and interoperability with Windows? What about its numeric capabilities? - Quora](https://www.quora.com/How-does-F-compare-to-OCaml-in-regard-to-major-syntactic-differences-paradigm-shifts-and-interoperability-with-Windows-What-about-its-numeric-capabilities)
+            - Jon Harrop claims. More sources needed. Take it with a grain of salt.
+                - "OCaml has an integrated full-blown macro system in the form of Camlp4 whereas F# does not have macros and, in fact, has been deliberately closed off in order to discourage people from creating products that compete with Visual Studio."
+                    - "deliberately closed off [...]" is a bold claim.
+    - [Are all languages basically the same? - Software Engineering Stack Exchange](https://softwareengineering.stackexchange.com/questions/155239/are-all-languages-basically-the-same/155243)
+- Some ideas
+    - Compile a Java class to an ELF native binary.
+    Use DWARF to help reconstruct stack trace.
+- [lazy: Explicit laziness for Haskell](http://hackage.haskell.org/package/lazy)
+    - "This library provides laziness as an abstraction with an explicit type-signature, and it so happens that this abstraction forms a monad!"
+    - [If Haskell were strict, what would the laziness be like?](https://nikita-volkov.github.io/if-haskell-were-strict/)
+    - 2014, article, [Paul Chiusano: An interesting variation on a strict by default language](https://pchiusano.github.io/2014-09-18/explicit-laziness.html)
+    - [How do we all feel about laziness? : haskell](https://www.reddit.com/r/haskell/comments/36s0ii/how_do_we_all_feel_about_laziness/)
+- garbage collection
+    - [Conservative GC: Is It Really That Bad? (X-post /r/java) : programming](https://www.reddit.com/r/programming/comments/7zfbs5/conservative_gc_is_it_really_that_bad_xpost_rjava/) (summary)
+        - [Conservative GC: Is It Really That Bad? – Excelsior JET Team Blog](https://www.excelsiorjet.com/blog/articles/conservative-gc-is-it-really-that-bad/)
+    - [Conservative GC: Is It Really That Bad? | Hacker News](https://news.ycombinator.com/item?id=16436574)
+- package/dependency management tools
+    - Java: Maven, Gradle
+    - OCaml: OPAM
+    - Haskell: Cabal, Stack
+    - F#: Paket? NuGet?
+    - C/C++: conan? chocolate? vcpkg?
+- [Idris as a Library - BAM Weblog](https://brianmckenna.org/blog/idris_library)
+    - Idris as compiler backend
+- open source
+    - [Shame-driven development – Rafał Pocztarski – Medium](https://medium.com/@pocztarski/shame-driven-development-4545fae46fd)
+- 1999, article, "How enterprises use functional languages, and why they don't", Philip Wadler, [pdf](http://homepages.inf.ed.ac.uk/wadler/papers/how-and-why/how-and-why.pdf)
+- machine learning
+    - [Avik-Jain/100-Days-Of-ML-Code: 100 Days of ML Coding](https://github.com/Avik-Jain/100-Days-Of-ML-Code)

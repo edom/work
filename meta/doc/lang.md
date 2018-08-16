@@ -125,13 +125,6 @@ My = module {
 };
 ```
 
-- compiling with continuations
-    - Why use CPS (continuation passing style) as intermediate form?
-        - http://matt.might.net/articles/cps-conversion/
-        - https://www.microsoft.com/en-us/research/publication/compiling-with-continuations-continued/
-        - https://news.ycombinator.com/item?id=7150095
-    - 2003, retrospective: the essence of compiling with continuations https://users.soe.ucsc.edu/~cormac/papers/best-pldi.pdf
-        - https://en.wikipedia.org/wiki/A-normal_form
 - relational programming (pure logic programming?)
     - miniKanren
         - Byrd PhD thesis https://scholarworks.iu.edu/dspace/bitstream/handle/2022/8777/Byrd_indiana_0093A_10344.pdf
@@ -146,8 +139,6 @@ My = module {
 - John Hughes, "Deriving combinator implementations", lecture 4, "Designing and using combinators" http://www.cse.chalmers.se/~rjmh/Combinators/DerivingCombinators/sld001.htm
 - http://matt.might.net/articles/best-programming-languages/
 - other programming languages
-    - [Sixten: Functional programming with fewer indirections](https://github.com/ollef/sixten)
-        - It also deals with representing algebraic data type inhabitants as bit patterns.
     - https://en.wikipedia.org/wiki/Curry_(programming_language)
     - http://fsl.cs.illinois.edu/images/5/5e/Cayenne.pdf
 - Extending Haskell

@@ -10,16 +10,17 @@ date: 2018-07-22 02:45 +0700
         - System programming is hardware-aware programming.
         Application programming assumes abstract machine, infinite memory, and all convenience provided by the operating system.
             - Why do we make this distinction?
-- In order for a language to be adopted, people must perceive its risk as low.
-    - The language must work with existing codebases.
-        - The language designer must think from the language user's point of view.
-            - Let's say I have 100,000 lines of Java that I've been writing and testing for the past 5 years.
-            Are you expecting me throw away all of them?
-        - Thus the language must work with C, C++, C#, Java, Go, JavaScript, Python, Ruby, and everything else.
-        This should be possible because the essence of all programming languages is the same: every programming language is a formal system.
-        It should be possible to translate a program P1 in language L1 to program P2 in language L2 with the same semantics.
-    - Mixing the old and new languages should be easy.
-    - 2013, article, "Empirical analysis of programming language adoption", [pdf](http://sns.cs.princeton.edu/docs/asr-oopsla13.pdf)
+    - In order for a language to be adopted, people must perceive its risk as low.
+        - The language must work with existing codebases.
+            - The language designer must think from the language user's point of view.
+                - Let's say I have 100,000 lines of Java that I've been writing and testing for the past 5 years.
+                Are you expecting me throw away all of them?
+            - Thus the language must work with C, C++, C#, Java, Go, JavaScript, Python, Ruby, and everything else.
+            This should be possible because the essence of all programming languages is the same: every programming language is a formal system.
+            It should be possible to translate a program P1 in language L1 to program P2 in language L2 with the same semantics.
+            - Improve/enhance, not supersede.
+        - Mixing the old and new languages should be easy.
+        - 2013, article, "Empirical analysis of programming language adoption", [pdf](http://sns.cs.princeton.edu/docs/asr-oopsla13.pdf)
 - ontology and programming
     - "ontoprog: Ontology-based Programming: Extended Semantics for OOP languages", [github](https://github.com/andreasBihlmaier/ontoprog)
     - 2012, article, "Modeling the Knowledge Domain of the Java Programming Language as an Ontology", [pdf](http://eeyem.eap.gr/wp-content/uploads/2017/06/11_ICWL2012.pdf)
@@ -373,3 +374,38 @@ Things that I think are wrong in 2018.
         - Is it real?
         Is it a secret society?
         Google doesn't seem to know about it.
+- functional languages with explicit memory layout?
+functional languages for systems programming?
+    - [Sixten: Functional programming with fewer indirections](https://github.com/ollef/sixten)
+        - It also deals with representing algebraic data type inhabitants as bit patterns.
+        - "Sixten is very related to other functional languages such as Haskell, Agda, and Idris.
+        The biggest difference between other languages and Sixten is the way that Sixten allows us to control the memory layout of data."
+        - [Sixten, "General", Gitter, community chat](https://gitter.im/sixten-lang/General?source=orgpage)
+- compiling with continuations
+    - Why use CPS (continuation passing style) as intermediate form?
+        - http://matt.might.net/articles/cps-conversion/
+        - https://www.microsoft.com/en-us/research/publication/compiling-with-continuations-continued/
+        - https://news.ycombinator.com/item?id=7150095
+    - 2003, retrospective: the essence of compiling with continuations https://users.soe.ucsc.edu/~cormac/papers/best-pldi.pdf
+        - https://en.wikipedia.org/wiki/A-normal_form
+- What are Prolog alternatives?
+    - 2011, article, [[1107.5408] A structured alternative to Prolog with simple compositional semantics](https://arxiv.org/abs/1107.5408)
+- [Row Polymorphism Isn't Subtyping - BAM Weblog](https://brianmckenna.org/blog/row_polymorphism_isnt_subtyping)
+- People who share the vision for *the* programming language
+    - [Polymorphic Programming - BAM Weblog](https://brianmckenna.org/blog/polymorphic_programming)
+        - has some links
+        - Is this 1969 article related? Can't be found online.
+            - https://en.wikipedia.org/wiki/Polymorphic_Programming_Language
+        - Are these related?
+            - 1989, article, "Database Programming in Machiavelli – a Polymorphic Language with Static Type Inference", [pdf](http://homepages.inf.ed.ac.uk/opb/papers/SIGMOD89.pdf)
+    - Can we use Description Logic (the theoretical foundations of Web Ontology Language OWL) to generate software, especially enterprise applications?
+        - 2015, article, [[1503.01723] Modelling the Semantic Web using a Type System](https://arxiv.org/abs/1503.01723)
+        - 2005, article, "Software engineering ontologies and their implementation", [pdf](https://espace.curtin.edu.au/bitstream/handle/20.500.11937/9549/19598_downloaded_stream_116.pdf), [pdf copy](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.86.5585&rep=rep1&type=pdf)
+    - People who share a subset of the vision; they don't go far enough
+        - XForms
+            - 2016, article, [Leveraging declarative languages in web application development - SpringerLink](https://link.springer.com/article/10.1007/s11280-015-0339-z)
+            - 2014, slides, advocacy, [Declarative Web Applications](https://homepages.cwi.nl/~steven/Talks/2014/01-31-declarative/)
+        - 2007, workshop, [Declarative Models of Distributed Web Applications](https://www.w3.org/2007/02/dmdwa-ws/)
+- 2017, article, [[1707.00024] A Formalized General Theory of Syntax with Bindings](https://arxiv.org/abs/1707.00024)
+- [Vectors are records, too (pdf) : dependent_types](https://www.reddit.com/r/dependent_types/comments/8qig0u/vectors_are_records_too_pdf/)
+- https://wiki.haskell.org/Untypechecking is "converting from a type to a term".
