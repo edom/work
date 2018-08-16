@@ -592,3 +592,25 @@ Use continuous integration and continuous deployment instead.
 - 1999, article, "How enterprises use functional languages, and why they don't", Philip Wadler, [pdf](http://homepages.inf.ed.ac.uk/wadler/papers/how-and-why/how-and-why.pdf)
 - machine learning
     - [Avik-Jain/100-Days-Of-ML-Code: 100 Days of ML Coding](https://github.com/Avik-Jain/100-Days-Of-ML-Code)
+- Justifying consciousness using evolution?
+    - [The biological function of consciousness](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4122207/)
+    - [How does sentience benefit survival and why is it developed? - Quora](https://www.quora.com/How-does-sentience-benefit-survival-and-why-is-it-developed)
+- Prolog ontology?
+    - What is the relationship between Prolog, logic programming, ontology, and relational databases?
+        - [What are ontology can do, but relational database can not? - Stack Overflow](https://stackoverflow.com/questions/29062541/what-are-ontology-can-do-but-relational-database-can-not)
+            - [Ontologies and DB Schema: What's the Difference?](https://www.slideshare.net/UscholdM/ontologies-and-db-schema-whats-the-difference)
+            - 2011, article, "Ontologies versus relational databases: Are they so different? A comparison", [pdf available](https://www.researchgate.net/publication/251332115_Ontologies_versus_relational_databases_Are_they_so_different_A_comparison)
+            - 2010, article, "Mapping between Relational Databases and OWL Ontologies: an example", [pdf](https://www.lu.lv/materiali/apgads/raksti/756_pp_99-117.pdf)
+    - [Salmon Run: Ontology Rules with Prolog](http://sujitpal.blogspot.com/2009/06/ontology-rules-with-prolog.html)
+    - [SWI-Prolog for the (semantic) web](http://www.swi-prolog.org/web/)
+- [Online Companies Like Facebook Have Created a Meaningless Economy, says Douglas Rushkoff - YouTube](https://www.youtube.com/watch?v=6_n1Dro0Uec)
+- [CHINA IS BEYOND CASHLESS - YouTube](https://www.youtube.com/watch?v=gysKE3POUv0)
+- Xiaomi limits hardware profit to 5%? What?
+    - [Why does Xiaomi limit its profits to 5%? - YouTube TechAltar : Android](https://www.reddit.com/r/Android/comments/8k43qo/why_does_xiaomi_limit_its_profits_to_5_youtube/)
+        - Because Xiaomi is a software company, not a hardware company.
+- http://ontologies.sti-innsbruck.at/acco/ns.html
+- [Haskell ides? : haskell](https://www.reddit.com/r/haskell/comments/86bmpu/haskell_ides/)
+- 2005, article, "Practical Ontology Systems for Enterprise Application", [pdf](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.622.6490&rep=rep1&type=pdf)
+- 2006, article, "Applications of Ontologies in Software Engineering", [pdf](https://km.aifb.kit.edu/ws/swese2006/final/happel_full.pdf)
+- [Who controls the world? - James B. Glattfelder](https://www.youtube.com/watch?v=cWVk8Cdvmgs)
+    - physical modeling/explanation of financial inequality

@@ -31,6 +31,7 @@ date: 2017-05-20 00:00:00 +0700
                     - [Using Java]({% link java.md %})
                     - [Making contributable open-source projects]({% link opensrc.md %})
                         - [Building online communities]({% link community.md %})
+                        - Maintaining open-source projects
                     - [Solving the AST decoration problem]({% link ast.md %})
                     - [Proving things using computers]({% link proof.md %})
                     - [Liberating software]({% link libersoft.md %})
@@ -55,8 +56,23 @@ date: 2017-05-20 00:00:00 +0700
                 - [Administering Ubuntu]({% link ubuntu.md %})
                 - [SO 22697049: difference between Google App Engine and Google Compute Engine](https://stackoverflow.com/questions/22697049/what-is-the-difference-between-google-app-engine-and-google-compute-engine)
             - Intelligence
-                - [Defining intelligence]({% link intwhat.md %})
-                - [Making intelligence]({% link intelligence.md %})
+                - Doing the last work we will ever need
+                    - [Defining intelligence]({% link intwhat.md %})
+                    - [Making intelligence]({% link intelligence.md %})
+                    - Making machines understand language
+                    - How do we make machines curious?
+                    How do we make them get bored?
+                        - We know that intelligent people get bored quickly.
+                            - Why shouldn't intelligent machines get bored?
+                    - How do we approximate a function?
+                    Is it even possible to approximate arbitrary functions?
+                        - google search: machine learning approximation theory
+                            - [Approximation Theory for Deep Learning Models: Where to Start? - Mathematics Stack Exchange](https://math.stackexchange.com/questions/2680158/approximation-theory-for-deep-learning-models-where-to-start)
+                            - http://helper.ipam.ucla.edu/publications/dlt2018/dlt2018_14936.pdf
+                            - http://www.vision.jhu.edu/tutorials/ICCV15-Tutorial-Math-Deep-Learning-Intro-Rene-Joan.pdf
+                            - 2017, slides, "From approximation theory to machine learning: New perspectives in the theory of function spaces and their applications", [pdf](http://npfsa2017.uni-jena.de/l_notes/vybiral.pdf)
+                            - 2018, article, "Approximation theory, Numerical Analysis and Deep Learning", [abstract](http://at.yorku.ca/c/b/p/g/30.htm)
+                                - "the problem of numerically solving a large class of (high-dimensional) PDEs (such as linear Black-Scholes or diffusion equations) can be cast into a classical supervised learning problem which can then be solved by deep learning methods"
             - Computational complexity
                 - [Trying to prove P neq. NP]({% link pnptry.md %})
         - [Investing]({% link invest.md %})

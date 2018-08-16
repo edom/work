@@ -14,6 +14,40 @@ date: 2017-02-23 02:43:08 +0700
     - https://www.reddit.com/r/indonesia/comments/8l4ykk/why_an_emerging_market_rout_has_hit_indonesia_so/
         - https://www.bloomberg.com/news/articles/2018-05-09/why-an-emerging-market-rout-has-hit-indonesia-so-hard-quicktake
         - Why do they disapprove of Sri Mulyani?
+- Everyday there are stocks that rise by 20% and there are stocks that fall by 20%.
+    - If we can predict which will rise, we can get rich quickly.
+    - Why do prices rise?
+    Because buyers concede to sellers.
+        - Because there is more buying pressure than selling pressure.
+        - Because there is more buy orders than sell orders.
+        - Because more people buy.
+        - Because less people sell.
+        - Because more people buy.
+    - Why do people buy a stock?
+        - Because they believe it will rise.
+            - Why do they believe so?
+                - Fallacious reasoning.
+                Psychological bias.
+                Appeal to authority.
+                Hearsay.
+                Fear of missing out.
+                Irrational exuberance?
+        - Because they believe it will give them dividends.
+        - https://money.stackexchange.com/questions/82057/what-factors-make-someone-buy-or-sell-a-stock
+    - How do we persuade/encourage people to buy a stock?
+    How do you market a stock?
+        - This is gray area.
+        Is it even legal?
+    - How do we prevent sellers from selling?
+- Hypothesis: Some companies' financial statements predict economic/financial crises.
+    - How are economic crises even possible if there is enough money for everybody?
+        - Uneven distribution of money?
+        - Hypothesis: The solution to an economic crisis is a forced redistribution of money, an economic reboot/restart, however unpleasant.
+            - In an economic crisis, tax the wealthy and pay the poor.
+            - I think that is an optimal solution (if not the only solution), but that is politically incorrect, so we'll never see that.
+        - If ignored, economic crisis will escalate to sociopolitical crisis.
+- Banks lend money with interest.
+Thus, paying back the loans reduce circulating money.
 - https://iextrading.com/
     - the only independent stock exchange in the USA
     - http://hackage.haskell.org/package/stocks

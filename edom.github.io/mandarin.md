@@ -46,3 +46,43 @@ date: 2018-05-16 00:33:00 +0700
     - [WP:Transcription into Chinese characters](https://en.wikipedia.org/wiki/Transcription_into_Chinese_characters)
     - https://chinese.stackexchange.com/questions/2270/why-do-chinese-translations-of-english-names-sound-very-inaccurate
 - 2018, [How KaiOS Is Becoming the 3rd Major Mobile OS - YouTube](https://www.youtube.com/watch?v=OA_g2bQgOXY)
+- What is Chinese equivalent of Twitter, Google, Facebook, Wikipedia, Google Scholar?
+    - Google - baidu
+    - Wikipedia - baike
+- 雅加达 yǎ jiā dá - Jakarta
+- 新闻 xīn wén - news
+- 好事 hǎo shì - good thing, good deed
+    - https://baike.baidu.com/item/%E5%A5%BD%E4%BA%8B
+        - Is that an encyclopedia or a dictionary?
+            - 词 cí - word
+            - "X"一词 X yī cí - the word "X"
+            - 通常 - tōng cháng - generally, usually
+- [sina.com Jakarta news in Mandarin](http://tags.news.sina.com.cn/%E9%9B%85%E5%8A%A0%E8%BE%BE)
+    - http://sports.sina.com.cn/others/fencing/2018-08-16/doc-ihhvciiv7596331.shtml
+        - 击剑冠军孙伟将任亚运火炬手 fencing champion Sun Wei will assume the post of Asian Games torchbearer
+            - 击剑 jí jiàn - fencing - anggar
+            - 冠军 guàn jūn - champion - juara
+            - 孙伟 sūn wěi - Sun Wei (name)
+            - 将 jiāng - will, be going to, soon - akan
+            - 任 rèn - to take charge of; to assume the post of
+            - 亚运 yà yùn - Asian Games
+                - 亚 abbreviation of 亚细亚 yà xì yà - Asia
+                - 亚运 abbreviation of 亚洲运动会 yà zhōu yùn dòng huì - Asian Games
+            - 火炬手 huǒ jù shǒu - torchbearer (火 fire, 火炬 torch, 手 hand) - pembawa obor
+        - 上届斩获两枚奖牌 last time (he) seized two medals
+            - 上届 shàng jiè - previous; last
+            - 斩获 zhǎn huò - to seize
+                - 斩 behead, cut
+                - 获 catch, obtain, capture
+            - 两枚 奖牌 liǎng méi jiǎng pái - two medals
+                - 枚 counter word for small flat objects; similar to Indonesian "keping"
+                    - https://en.wiktionary.org/wiki/%E6%9E%9A#Chinese
+        - 8月18日，第十八届亚运会将在印尼雅加达举行。 (On) August 18th, the 18th Asian Games will take place (be held) in Jakarta, Indonesia.
+            - 8月18日 (八月十八日) bā yuè shí bā rì - August 18th
+            - 第十八届 dì shí bā jiè - the 18th time
+            - 亚运会 yàyùn huì - Asian Games
+            - 将 jiàng - will
+            - 在 zài - in, at
+            - 印尼 yìn ní - abbreviation of Indonesia
+            - 雅加达 yǎ jiā dá - Jakarta
+            - 举行 jǔ xíng - to hold (a meeting, reception, etc.) - menyelenggarakan

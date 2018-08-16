@@ -28,6 +28,7 @@ date: 2018-07-22 02:45 +0700
 - A goal of programming language research is to make a better programming language?
     - Do more with less.
     - *The* ultimate best programming language?
+- The [Sixten](https://github.com/ollef/sixten) language might be a good starting point.
 - Computer (machine) is embodied formal system.
     - Assume no hardware fault.
 - Software is executable mathematics.
