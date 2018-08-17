@@ -41,3 +41,4 @@ date: 2018-05-15 02:31:00 +0700
 - social pitfalls
     - https://en.wikipedia.org/wiki/Sayre%27s_law
     - https://en.wikipedia.org/wiki/Law_of_triviality
+- [Amazon jobs came down to 3 questions, according to 1998 Bezos letter - INSIDER](https://www.thisisinsider.com/amazon-jobs-executive-questions-2018-8)

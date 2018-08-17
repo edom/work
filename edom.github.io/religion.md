@@ -8,6 +8,7 @@ date: 2017-05-19 03:47:00 +0700
     - [biblegateway.com: online Christian bible](https://www.biblegateway.com/)
     - [quran.com: online Islamic bible](https://quran.com/)
     - [wikiislam.net](http://wikiislam.net/wiki/Main_Page)
+    - [Why Won't God Heal Amputees?](http://whywontgodhealamputees.com/)
 - Concepts
     - [WP:Supersessionism](https://en.wikipedia.org/wiki/Supersessionism)
     - [WP:Manifest destiny](https://en.wikipedia.org/wiki/Manifest_destiny)

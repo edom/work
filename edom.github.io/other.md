@@ -17,7 +17,6 @@ date: 2018-07-22 13:15 +0700
 - Natural sciences
     - [Physics]({% link physics.md %}) and engineering
         - [Modeling]({% link model.md %})
-        - [Energy storage]({% link ensto.md %})
         - [Traffic engineering]({% link trafeng.md %})
         - Civil engineering
             - [How Do Sinkholes Form?](https://www.youtube.com/watch?v=e-DVIQPqS8E)
@@ -151,11 +150,6 @@ Still looking for replicable experiment.
     - https://en.wikipedia.org/wiki/Digital_room_correction
 - Google alternatives?
     - [The Top 5 Google Alternatives and Why You Should Use Them](https://www.makeuseof.com/tag/5-google-search-alternatives-that-you-could-experiment-with/)
-- Generating electricity, do-it-yourself
-    - Mike Davis
-        - [How I built an electricity producing wind turbine](http://www.mdpub.com/Wind_Turbine/)
-        - [How I built an electricity producing Solar Panel](http://www.mdpub.com/SolarPanel/index.html)
-        - [My Home-Made Biomass Gasifier](http://www.mdpub.com/gasifier/index.html)
 - AI
     - 2007, article, "Self-taught Learning: Transfer Learning from Unlabeled Data", [pdf](https://cs.stanford.edu/people/ang/papers/icml07-selftaughtlearning.pdf)
     - https://en.wikipedia.org/wiki/Category:Open-source_artificial_intelligence
@@ -390,7 +384,6 @@ https://en.wikipedia.org/wiki/Mereological_essentialism
 - Components for publish-subscribe in Haskell?
     - https://www.stackage.org/lts-6.35/package/broadcast-chan-0.1.1
 - https://wikieducator.org/Main_Page
-- [Thyer's PhD thesis "Lazy specialization"](http://thyer.name/phd-thesis/thesis-thyer.pdf) has an accessible introduction to lambda calculus in Chapter 2.
 - philosophy
     - [The First-Person and Third- Person Views](http://consc.net/notes/first-third.html)
 - The job of a company (a company director?) is to find what to do and find who should do it.
@@ -509,8 +502,6 @@ Use continuous integration and continuous deployment instead.
     - [nayafia/awesome-maintainers: Talks, blog posts, and interviews about the experience of being an open source maintainer](https://github.com/nayafia/awesome-maintainers)
     - [André Staltz - Open source without maintainers](https://staltz.com/open-source-without-maintainers.html)
     - [Best Practices for Maintainers | Open Source Guides](https://opensource.guide/best-practices/)
-- Long hair for men
-    - [How to Tie Your Long Hair - For Men - The Longhairs](https://blog.thelonghairs.us/how-to-tie-your-long-hair/)
 - GHC TDNR (type-directed name resolution)
     - https://ghc.haskell.org/trac/ghc/ticket/4479
     - https://ghc.haskell.org/trac/ghc/wiki/Records/OverloadedRecordFields
@@ -614,3 +605,125 @@ Use continuous integration and continuous deployment instead.
 - 2006, article, "Applications of Ontologies in Software Engineering", [pdf](https://km.aifb.kit.edu/ws/swese2006/final/happel_full.pdf)
 - [Who controls the world? - James B. Glattfelder](https://www.youtube.com/watch?v=cWVk8Cdvmgs)
     - physical modeling/explanation of financial inequality
+- Why can't people stay at home on holidays?
+    - If you don't like staying at home on holidays, that means something is wrong with your home.
+    Fix it.
+    Make it the best place on Earth.
+    Face reality.
+    Don't escape.
+- [How to Persuade Others with the Right Questions: Jedi Mind Tricks from Daniel H. Pink](https://www.youtube.com/watch?v=WAL7Pz1i1jU)
+    - how to get your daughter to clean her room
+        - the comment section is pessimistic
+- dying, near-death experiences
+    - [From life to death, beyond and back | Thomas Fleischmann | TEDxTUHHSalon - YouTube](https://www.youtube.com/watch?v=mMYhgTgE6MU)
+- [The Third Industrial Revolution: A Radical New Sharing Economy](https://www.youtube.com/watch?v=QX3M8Ka9vUA)
+    - Jeremy Rifkin, Third Industrial Revolution, sharing economy, Germany, Digital Europe, China Internet Plus, aggregate efficiency, distributed system
+        - The Second Industrial Revolution peaked at 20% aggregate efficiency.
+        - Difference between post-Westphalian worldview and Millenial worldview.
+            - The 21st century way of living is radically different.
+            Different ideas of freedom.
+                - In the post-Westphalian worldview, freedom means sovereignty, being autonomous, being an island.
+        - Second Industrial Revolution teaches kids to be factory workers. Obedient. Unquestioning. Hardworking.
+- [Richard Dawkins: No, Not All Opinions Are Equal—Elitism, Lies, and the Limits of Democracy - YouTube](https://www.youtube.com/watch?v=pe4feBH0ABk)
+    - Not all opinions are equal.
+        - This goes back to Socrates.
+    - If you have a surgery, you want an expert surgeon.
+    - If you have a concert, you want an expert musicians.
+    - Why then, when it comes to Brexit, do people suddently think they are expert politicians?
+        - The people voting for Brexit might not even understand what the European Union is.
+- Every religion started out as something good.
+It civilized its community.
+However, after 1000 years, people got too attached to religion, and religion loses its benefits.
+    - History of Islam
+        - Islam civilized Arabia.
+            - [Arabia before Islam - A Restatement of the History of Islam and Muslims - Books on Islam and Muslims - Al-Islam.org](https://www.al-islam.org/restatement-history-islam-and-muslims-sayyid-ali-ashgar-razwy/arabia-islam)
+                - Before Islam, Arabia consisted of constantly warring tribes.
+            - Before Islam, a man can take an unlimited number of wives.
+            - Islam limited it to four, and requires that the man take care of the wives properly.
+                - That's a big change: from unlimited to four!
+        - [Islam destroyed its own "Golden Age" - Neil deGrasse Tyson & Steven Weinberg - YouTube](https://www.youtube.com/watch?v=BvkBlpfbFJM)
+            - There was Islamic Golden Age, but it ended tragically.
+                - Are the Gulf Nations allergic to science?
+                - What is the Muslim Brotherhood's idea of education?
+            - [WP:Al-Ghazali](https://en.wikipedia.org/wiki/Al-Ghazali) has a role in the downfall.
+            - [Islamic Golden Age - Wikipedia](https://en.wikipedia.org/wiki/Islamic_Golden_Age)
+        - [Why Does the Muslim World Lag in Science? | Middle East Forum](https://www.meforum.org/articles/other/why-does-the-muslim-world-lag-in-science), too long
+- One learns a language by example sentences.
+One learns a programming language by example programs/snippets.
+    - One does not learn a language by memorizing the syntax.
+    - One does not learn a language by memorizing the language reference document.
+- Ideas
+    - Mathematically, A type is a set whose membership is syntactically decidable.
+    - Engineeringly, A type gives meaning to bit patterns.
+    A type encodes meaning into bit patterns.
+        - For example, consider the bit pattern 11111111.
+            - It means -1 as an int8.
+            - It means 127 as an uint8.
+- cybercrime
+    - 2016
+        - [The $1,000,000,000 North Korean Bank Heist - YouTube](https://www.youtube.com/watch?v=Usu9z0feHug)
+            - [Bangladesh Bank robbery - Wikipedia](https://en.wikipedia.org/wiki/Bangladesh_Bank_robbery)
+- Systems should be secure by default.
+    - UNIX/Linux woes
+        - Why is SSH fail2ban not installed by default?
+        - Why does an application run as the user?
+            - I think this is a design flaw.
+            It's a big gaping security hole.
+            It allows an application to access all your files.
+            But how do we fix this without sacrificing convenience?
+            - Why is sandboxing not the default?
+        - How do we understand SELinux?
+            - [SELinux Explained with Examples in Easy Language](https://www.computernetworkingnotes.com/rhce-study-guide/selinux-explained-with-examples-in-easy-language.html)
+            - NSA made SELinux. How trustworthy is it? Does it have NSA backdoors?
+                - [linux - How trustworthy is SELinux? - Information Security Stack Exchange](https://security.stackexchange.com/questions/42383/how-trustworthy-is-selinux)
+                - 2017, [The NSA has tried to backdoor linux three times : linux](https://www.reddit.com/r/linux/comments/54in5s/the_nsa_has_tried_to_backdoor_linux_three_times/)
+        - What is the relationship/difference between MAC (mandatory access control) and DAC (discretionary access control)?
+        Are they antonyms? Complements?
+            - [access control - MAC vs DAC vs RBAC - Information Security Stack Exchange](https://security.stackexchange.com/questions/63518/mac-vs-dac-vs-rbac)
+    - The only real secure way to run an untrusted application is on a different machine with no network connection.
+- [Dream telepathy - Wikipedia](https://en.wikipedia.org/wiki/Dream_telepathy)
+- distributed functional programming?
+    - [WP:MBrace](https://en.wikipedia.org/wiki/MBrace), F#
+    - [Cloud Haskell](https://haskell-distributed.github.io/)
+        - has some academic papers https://wiki.haskell.org/Cloud_Haskell
+    - [PatrickMaier/HdpH: Haskell distributed parallel Haskell](https://github.com/PatrickMaier/HdpH)
+- HLearn: a machine learning library for Haskell \cite{izbicki2013hlearn}
+- Kaggle: get paid to solve machine learning problems.
+- [Where is the world's most liveable city? | The Economist - YouTube](https://www.youtube.com/watch?v=ylR21fezN7E)
+    - 2018: Vienna. Was Melbourne.
+- The law of demand and supply only happens with order-book-like markets.
+- [WP:Bullshit asymmetry principle](https://en.wikipedia.org/wiki/Bullshit#Bullshit_asymmetry_principle)
+    - "The amount of energy needed to refute bullshit is an order of magnitude bigger than to produce it."
+    - Does that mean it's easier to fight a bullshit with another bullshit?
+        - Why don't we fight bullshit with bullshit?
+        - Why don't we fight false news with false news?
+        - Why don't we fight hoaxes with hoaxes?
+        - Why don't we fight propagandas with propagandas?
+        - Everybody loses.
+- To everyone, especially religious people:
+    - Why do you let someone else decide what/how you should think?
+- GIF is video, not image.
+    - GIF videos must have controls.
+- https://www.quora.com/What-are-possible-warning-signs-of-an-imminent-economic-collapse
+- https://www.quora.com/How-do-I-publish-artificial-intelligence-research-if-I-am-not-currently-in-academia-or-an-industry-research-setting
+- "How to write a good CVPR submission", [pdf slides](https://billf.mit.edu/sites/default/files/documents/cvprPapers.pdf)
+- Work-life balance?
+    - Life *is* work.
+    - Your work defines you.
+    You are only as good as your contribution to the world.
+    Your work defines the meaning of your life.
+    - Don't confuse working with employment.
+        - Work is everything that creates value.
+        - Employment is just a kind of work.
+    - Don't confuse being busy and working.
+        - Work should create value.
+        - You can feel busy while not producing anything.
+        - Work has goals. Being busy doesn't have goals.
+    - People don't care about processes.
+    They only care about results.
+    - If you are not working in all your waking hours, then it's not the work you want.
+    - If I could work in my sleep, I would!
+- Transport is waste.
+Hence travel is waste.
+- Google should penalize (push down) Pinterest from image search.
+It's littering.

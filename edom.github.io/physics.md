@@ -126,7 +126,7 @@ mathjax: yes
     - [WP:Entropic force](https://en.wikipedia.org/wiki/Entropic_force)
         - http://entropicai.blogspot.co.id/2017/06/fractal-optimising-first-paper.html
     - A crystal is a repeating structure.
-        - A time crystal or space-time crystal is a structure that repeats in time, as well as in space. 
+        - A time crystal or space-time crystal is a structure that repeats in time, as well as in space.
         ([WP: Time crystal](https://en.wikipedia.org/wiki/Time_crystal))
     - An explanation of parallel transport https://physics.stackexchange.com/a/232119
     - Futurism
@@ -137,12 +137,6 @@ mathjax: yes
         - https://en.wikipedia.org/wiki/Astronomical_engineering
         - https://en.wikipedia.org/wiki/Megascale_engineering
         - https://en.wikipedia.org/wiki/Kardashev_scale
-- Solar energy, solar cells, and energy storage
-    - How do we make solar cells using common materials?
-        - [acs.org: Solar cell from common materials](https://www.acs.org/content/acs/en/pressroom/newsreleases/2012/august/new-solar-panels-made-with-more-common-metals-could-be-cheaper-and-more-sustainable.html)
-    - How much does solar panel cost?
-        - How long until break-even?
-        - Is it cheaper to run on solar power?
 - Nuclear energy
     - Is there any way to convert nuclear energy into electrical energy without going through heat and turbines?
     - [Nuclear recycling](https://whatisnuclear.com/recycling.html)

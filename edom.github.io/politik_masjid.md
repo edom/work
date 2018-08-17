@@ -50,3 +50,4 @@ language: id
         - Trump lahir tahun 1946. Tahun 2016 beliau terpilih, umurnya 70 tahun.
         - Menurut [hukumonline.com](http://www.hukumonline.com/klinik/detail/lt576b5bea8bb19/aturan-tentang-batas-usia-pensiun-pekerja),
         usia pensiun 56 tahun.
+- 2018-08-08, [PBNU: Jika Bukan NU, Tak Ada Tanggung Jawab Menangkan Jokowi](https://www.cnnindonesia.com/nasional/20180808190440-32-320666/pbnu-jika-bukan-nu-tak-ada-tanggung-jawab-menangkan-jokowi)

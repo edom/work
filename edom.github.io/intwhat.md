@@ -230,8 +230,5 @@ Because chess search space is much smaller than real-life search space.
                     Are mistakes necessary for learning?
                 - Supervised learning is extrapolating a function from finite samples.
                 Usually, the function is high-dimensional, and the samples are few.
-                - What is the summary of [Poggio1989], especially about learning and approximation theory?
-                    - TODO: Find recent papers that cite [Poggio1989].
-                    - TODO: Read [Poggio1989].
                 - It is simple to measure learning success in perfect information games such as chess.
                 Chess also doesn't require any sensors and motors.

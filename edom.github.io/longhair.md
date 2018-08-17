@@ -13,3 +13,5 @@ permalink: /longhair.html
     - Nuno Bettencourt, born 1966
     - Fabio Lanzoni, born 1959
     - Franz Liszt, born 1811
+- Grooming
+    - [How to Tie Your Long Hair - For Men - The Longhairs](https://blog.thelonghairs.us/how-to-tie-your-long-hair/)

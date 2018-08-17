@@ -8,6 +8,11 @@ Every time Fastnet goes down when
 I want to connect to the Internet,
 I'll write here.
 
+2016-11-29 it went down.
+
+2016-12-13 it went down due to someone else's fault.
+Kabel kecangkul alat berat orang lain di depan BCA KCP Kepa Duri Jl Mangga.
+
 2017-06-15 00:00 +0700 it went down.
 04:00 I went to bed, and it was still down.
 It went up again some time between 04:00 and 10:30.
@@ -27,3 +32,6 @@ I forgot to ask the people at home how long it had been down.
 They said it would go up on 2017-10-10 23:00 +0700 (24 hour downtime).
 2017-10-10 03:23 +0700 it hadn't gone up.
 It finally went up, but I didn't note when.
+
+In 2018, we stopped using Fastnet.
+We switched to CBN.

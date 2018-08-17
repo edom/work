@@ -19,13 +19,6 @@ date: 2017-05-20 00:00:00 +0700
             - Software engineering
                 - Forward engineering: [Making lasting software]({% link softeng.md %})
                     - Programming language research: [Making the only programming language we will ever need]({% link plres.md %})
-                        - [Argument for static typing]({% link statyp.md %})
-                        - Old content to be reorganized
-                            - [Functional programming research]({% link functional_programming.md %})
-                                - [Optimizing lambda calculus]({% link optlam.md %})
-                                - Philip Wadler's list [Functional Programming in the Real World](http://homepages.inf.ed.ac.uk/wadler/realworld/)
-                            - [Joint research with Abdullah]({% link abdullah.md %})
-                            - [Programming]({% link programming.md %})
                     - [Using Haskell]({% link haskell.md %})
                         - [Using Cabal]({% link cabal.md %})
                     - [Using Java]({% link java.md %})
@@ -37,7 +30,7 @@ date: 2017-05-20 00:00:00 +0700
                     - [Liberating software]({% link libersoft.md %})
                         - Searching
                             - Where does this fit in the hierarchy?
-                            - https://en.wikipedia.org/wiki/Optimal_stopping
+                            - [WP:Optimal stopping](https://en.wikipedia.org/wiki/Optimal_stopping)
                             - [Making a search engine]({% link srceng.md %})
                     - [Making a Java virtual machine]({% link jvm.md %})
                     - Real-time garbage collection
@@ -64,15 +57,7 @@ date: 2017-05-20 00:00:00 +0700
                     How do we make them get bored?
                         - We know that intelligent people get bored quickly.
                             - Why shouldn't intelligent machines get bored?
-                    - How do we approximate a function?
-                    Is it even possible to approximate arbitrary functions?
-                        - google search: machine learning approximation theory
-                            - [Approximation Theory for Deep Learning Models: Where to Start? - Mathematics Stack Exchange](https://math.stackexchange.com/questions/2680158/approximation-theory-for-deep-learning-models-where-to-start)
-                            - http://helper.ipam.ucla.edu/publications/dlt2018/dlt2018_14936.pdf
-                            - http://www.vision.jhu.edu/tutorials/ICCV15-Tutorial-Math-Deep-Learning-Intro-Rene-Joan.pdf
-                            - 2017, slides, "From approximation theory to machine learning: New perspectives in the theory of function spaces and their applications", [pdf](http://npfsa2017.uni-jena.de/l_notes/vybiral.pdf)
-                            - 2018, article, "Approximation theory, Numerical Analysis and Deep Learning", [abstract](http://at.yorku.ca/c/b/p/g/30.htm)
-                                - "the problem of numerically solving a large class of (high-dimensional) PDEs (such as linear Black-Scholes or diffusion equations) can be cast into a classical supervised learning problem which can then be solved by deep learning methods"
+                    - [Approximating functions]({% link approx.md %})
             - Computational complexity
                 - [Trying to prove P neq. NP]({% link pnptry.md %})
         - [Investing]({% link invest.md %})
@@ -94,6 +79,18 @@ date: 2017-05-20 00:00:00 +0700
                 Social isolation causes violence and extremism.
                     - [YT:I Was Almost A School Shooter \| Aaron Stark \| TEDxBoulder](https://www.youtube.com/watch?v=azRl1dI-Cts)
                         - Bullying is part of the social isolation vicious circle.
+            - Achieving independence
+                - [Achieving energy independence]({% link energy.md %})
+                - Demonopolizing the ability to do violence?
+                    - People who care (and thus readily mobilize) are less oppressable than people who don't.
+                        - How do we get people to care about and participate in politics?
+                - Automating politics/governments/law?
+                - Empowering people with distributed local technology?
+                    - Take power away from governments and elites, and give it back to the masses?
+                        - Isn't that mobocracy/ochlocracy?
+                        Anarchy?
+                        Do we want?
+                            - [RationalWiki: Difference between anarchy and mobocracy](https://rationalwiki.org/wiki/Anarchy#Contrast_with_mobocracy)
         - [Doing research better]({% link meta_research.md %})
             - [Organizing knowledge]({% link knorg.md %})
                 - [Rebooting human knowledge in case of mass destruction]({% link reboot.md %})
@@ -129,6 +126,7 @@ date: 2017-05-20 00:00:00 +0700
             - [Solving the Clay millennium prize problems]({% link clay_math.md %})
         - [Writing]({% link writing.md %})
         - [Justifying counterfactual reasoning]({% link cf.md %})
+        - [Justifying my value]({% link value.md %})
     - Feeling
         - Spirituality
             - [Choosing a religion]({% link relch.md %})

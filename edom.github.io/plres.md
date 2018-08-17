@@ -321,15 +321,6 @@ Things that I think are wrong in 2018.
         - visual programming language
             - blocks language
                 - https://harc.ycr.org/project/gp/
-- IDE (integrated development environment), editor
-    - Given a grammar, the computer should generate an IDE for us.
-    Syntax highlighting.
-    Refactoring.
-    - https://hackage.haskell.org/package/treersec "Build a structure editor for a programming language from combinators following the grammar."
-    - http://www.lamdu.org/
-    - cirru https://news.ycombinator.com/item?id=13773813
-        - lots of similar things https://news.ycombinator.com/item?id=13774864
-    - isomorf: find code fragment popularity by structure (not-only-text) comparison https://isomorf.io/#!/tours/of/overview/7/haskell
 - 2002, article collection, "Recent advances in Java technology: theory, application, implementation" http://www.cs.nuim.ie/~jpower/Research/Papers/2002/power-raijt-toc.pdf
 - other people's collections
     - https://github.com/steshaw/plt
@@ -395,6 +386,7 @@ functional languages for systems programming?
 - People who share the vision for *the* programming language
     - [Polymorphic Programming - BAM Weblog](https://brianmckenna.org/blog/polymorphic_programming)
         - has some links
+        - 2017, article, "Compiling to Categories", Conal Elliott, [pdf](http://conal.net/papers/compiling-to-categories/compiling-to-categories.pdf)
         - Is this 1969 article related? Can't be found online.
             - https://en.wikipedia.org/wiki/Polymorphic_Programming_Language
         - Are these related?
@@ -407,6 +399,35 @@ functional languages for systems programming?
             - 2016, article, [Leveraging declarative languages in web application development - SpringerLink](https://link.springer.com/article/10.1007/s11280-015-0339-z)
             - 2014, slides, advocacy, [Declarative Web Applications](https://homepages.cwi.nl/~steven/Talks/2014/01-31-declarative/)
         - 2007, workshop, [Declarative Models of Distributed Web Applications](https://www.w3.org/2007/02/dmdwa-ws/)
+        - IDE (integrated development environment), editor
+            - Given a grammar, the computer should generate an IDE for us.
+            Syntax highlighting.
+            Refactoring.
+            - https://hackage.haskell.org/package/treersec "Build a structure editor for a programming language from combinators following the grammar."
+            - http://www.lamdu.org/
+            - cirru https://news.ycombinator.com/item?id=13773813
+                - lots of similar things https://news.ycombinator.com/item?id=13774864
+            - isomorf: find code fragment popularity by structure (not-only-text) comparison https://isomorf.io/#!/tours/of/overview/7/haskell
+        - Haskell supercompilation?
+            - GHC
+            - Supero
+            - Morte
+                - https://github.com/Gabriel439/Haskell-Morte-Library
+                    - "Morte is a super-optimizing intermediate language for functional languages."
+                - http://www.haskellforall.com/2014/09/morte-intermediate-language-for-super.html
+        - [Thyer's PhD thesis "Lazy specialization"](http://thyer.name/phd-thesis/thesis-thyer.pdf) has an accessible introduction to lambda calculus in Chapter 2.
+            - Turn an interpreter into a compiler for free!
 - 2017, article, [[1707.00024] A Formalized General Theory of Syntax with Bindings](https://arxiv.org/abs/1707.00024)
 - [Vectors are records, too (pdf) : dependent_types](https://www.reddit.com/r/dependent_types/comments/8qig0u/vectors_are_records_too_pdf/)
 - https://wiki.haskell.org/Untypechecking is "converting from a type to a term".
+- A module is just a record (tuple whose components are named), in a dependently-typed language.
+- [Argument for static typing]({% link statyp.md %})
+- Old content to be reorganized
+    - [Functional programming research]({% link functional_programming.md %})
+        - [Optimizing lambda calculus]({% link optlam.md %})
+        - Philip Wadler's list [Functional Programming in the Real World](http://homepages.inf.ed.ac.uk/wadler/realworld/)
+    - [Joint research with Abdullah]({% link abdullah.md %})
+    - [Programming]({% link programming.md %})
+- [Programming Language and Compiler Research Groups](https://www.cs.cmu.edu/~mleone/language/projects.html)
+- [IEEE posts its top list of languages - The PL Enthusiast](http://www.pl-enthusiast.net/2014/07/10/ieee-posts-its-top-list-of-languages/)
+- [What is PL research and how is it useful? - The PL Enthusiast](http://www.pl-enthusiast.net/2015/05/27/what-is-pl-research-and-how-is-it-useful/)

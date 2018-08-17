@@ -115,6 +115,58 @@ We already have laws for people causing public disorder.
         - [SEMAR UI](https://twitter.com/semarui?lang=en)
         - [Komune Rakapare](https://twitter.com/rakapare?lang=en)
 - [What was Indonesia like before Reformasi and after1998? (Long) : indonesia](https://www.reddit.com/r/indonesia/comments/61ed2m/what_was_indonesia_like_before_reformasi_and/)
-- Indonesia needs a politifact website.
+- Indonesia needs a website like politifact or factcheck.org.
 - Is the 21st century is the age of demagogues, or has it always been the case?
 When did candidates begin appealing to emotion using racism and religion?
+- Rumah saya baru bebas banjir pada zaman BTP (Basuki Tjahaja Purnama a.k.a. Ahok).
+    - Tahun 1990-an setiap 5-6 tahun sekali, rumah banjir.
+    - Makin lama makin parah. Tiap tahun banjir.
+    - Bahkan, pernah suatu ketika, tidak hujan malah banjir.
+    - Jalanan dinaikkan 50 cm. Rumah dinaikkan 100 cm. Tetap banjir.
+    - Saat BTP menjabat, rumah saya tidak banjir.
+- [Anyone know what happened to 1000 Startup? I found these three comments in a video about them. : indonesia](https://www.reddit.com/r/indonesia/comments/98afrg/anyone_know_what_happened_to_1000_startup_i_found/)
+    - Program 1000 startup hilang?
+- WTF news. Are these real?
+    - [Bocah-Bocah Terciduk Saat Asyik Dugem di Diskotek Berkedok Toko Es Krim - Regional Liputan6.com](https://www.liputan6.com/regional/read/3618529/bocah-bocah-terciduk-saat-asyik-dugem-di-diskotek-berkedok-toko-es-krim)
+        - from [reddit](https://www.reddit.com/r/indonesia/comments/97s1o2/bocahbocah_terciduk_saat_asyik_dugem_di_diskotek/)
+    - [Tommy Soeharto Dianugerahi Gelar "Gus" oleh Ulama di Jatim - Kompas.com](https://regional.kompas.com/read/2017/05/10/15213361/tommy.soeharto.dianugerahi.gelar.gus.oleh.ulama.di.jatim)
+        - [Kronologi Kasus Tommy Soeharto - Nasional Tempo.co](https://nasional.tempo.co/read/10122/kronologi-kasus-tommy-soeharto)
+        - [Pembunuhan Hakim Syafiuddin yang Dirancang Tommy Soeharto - Tirto.ID](https://tirto.id/pembunuhan-hakim-syafiuddin-yang-dirancang-tommy-soeharto-cPVT)
+        - [Sadisnya Pembunuhan Hakim Kartasasmita oleh Tommy Soeharto - Seword](https://seword.com/politik/sadisnya-pembunuhan-hakim-kartasasmita-oleh-tommy-soeharto-ryLUQSUYG)
+- Bantuan langsung tunai (BLT) = cash transfers
+    - [Targeted cash transfer schemes can do more harm than good - Livemint](https://www.livemint.com/Politics/144kmvZXyDiM40UxY66DYJ/Targeted-cash-transfer-schemes-can-do-more-harm-than-good.html)
+    - Giving money to poor people immediately increases their purchasing power, but there are consequences.
+    - They buy things, increasing demand.
+    - If there is not enough supply, then prices rise.
+    - Conclusion:
+        - In the short term, cash transfers provides immediate relief to poor people.
+        - In the long term, cash transfers hurts the poor people it intends to help.
+        - To help the poor, the government should increase the supply of goods to the poor.
+            - Ideal permanent strategic solution: increase aggregate efficiency to drive down costs.
+                - Localize production.
+                Avoid transportation.
+                Transportation is waste.
+                - Depend on renewable energy.
+                The sun is free!
+                Wind is free!
+                The TCO (total cost of ownership) of solar is approaching that of coal/oil?
+                - Good infrastructure to reduce transport time/cost.
+                - Integrate transport modes to reduce transport costs?
+            - Quick temporary tactical solution: subsidies.
+    - Basic income is unconditional cash transfers.
+- [Adakah cara untuk browsing / mencari UU, PERMEN, dll berdasarkan topik? : indonesia](https://www.reddit.com/r/indonesia/comments/97pzfs/adakah_cara_untuk_browsing_mencari_uu_permen_dll/)
+    - JDIH (Jaringan Dokumentasi dan Informasi Hukum)
+- [Pendapat seorang redditor dengan username kurang elok](https://www.reddit.com/r/indonesia/comments/97bncz/mahfud_sebut_maruf_amin_suruh_nu_ancam_jokowi/e472v4s/] tentang Maruf Amin, calon wakil presiden 2019. Pendapat ini terdengar gila, tapi mungkin. Entah.
+    - "Sesuai UU kita, ketika presiden gak ada (karena meninggal atau lengser) wapres langsung auto-presiden. Disini ada insentif besar utk kaum mereka bunuh atau lengserkan presiden."
+- [Ganti Rugi Tak Kunjung Cair, Korban Salah Tangkap Gugat Menkeu](https://news.detik.com/berita/4167913/ganti-rugi-tak-kunjung-cair-korban-salah-tangkap-gugat-menkeu?utm_source=twitter&utm_medium=oa&utm_content=detikcom&utm_campaign=cmssocmed)
+    - Aturan 14 hari bayar.
+    Itu sudah 2 tahun tidak bayar.
+    - Betul kata Hotman Paris, Indonesia perlu aturan contempt of court (penghinaan terhadap lembaga peradilan).
+    Selama tidak ada aturan itu, putusan pengadilan tidak dihargai.
+- [Telegram from US Embassy Jakarta to State Department, "Who Is Behind [1998] Disappearances?," : indonesia](https://www.reddit.com/r/indonesia/comments/97iz5m/telegram_from_us_embassy_jakarta_to_state/)
+    - [Pendapat redditor fourrier01](https://www.reddit.com/r/indonesia/comments/97iz5m/telegram_from_us_embassy_jakarta_to_state/e4a0s02/): "Every year, just before election, there's always a news to reveal Prabowo stench over and over. 4 years ago there was Allan Nairn. [...] This one isn't so surprising anymore."
+- Belum dibaca
+    - [Pros of Jokowi : indonesia](https://www.reddit.com/r/indonesia/comments/983if1/pros_of_jokowi/)
+    - [Why Fear Over Islamists in Prabowo's Future Government is Unfounded : indonesia](https://www.reddit.com/r/indonesia/comments/982c5x/why_fear_over_islamists_in_prabowos_future/)
+- [Geopolitics of Southeast Asia Part 2: Malay Archipelago - YouTube](https://www.youtube.com/watch?v=MFrLcRhMKnE)
+    - Indonesia is too big to defend itself.

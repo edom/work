@@ -148,3 +148,4 @@ American individualisn, Russian collectivism
 - Stop fluoridating water
     - Gaia: The Actual Truth About Fluoride, [youtube](https://www.youtube.com/watch?v=HAagzF6D-nE)
 - [Political compass](https://www.politicalcompass.org/): plotting economical-political views in two-dimensional space
+- [China’s all-powerful leader should heed the lessons from history, former official says - The Washington Post](https://www.washingtonpost.com/world/asia_pacific/chinas-all-powerful-leader-should-heed-the-lessons-from-history-former-official-says/2017/11/09/22e7987a-c39a-11e7-a441-3a768c8586f1_story.html?noredirect=on&utm_term=.5dcdb36d3ff0)
