@@ -28,15 +28,22 @@ language: en
             - The list is on the [install script](https://get.haskellstack.org/).
             Search for `install_dependencies` for your distro.
     - Choose a Stack solver.
-    - (2018-08-07) Download GHC 7.10 using Stack.
-        - Which version of GHC should I use?
-        You should use 7.10.
-            - The one that is supported by [HaRe](http://hackage.haskell.org/package/HaRe) (Haskell refactoring tool) and other tools (IDE, Leksah, Cabal, etc.).
-            In 2018, I think the safe choice is GHC 7.10.
+        - Forget it. Just install GHC to home.
+            - `./configure --prefix ~/.local`
+            - `make -j4 install`
+    - Which version of GHC should I use?
+            - The one that is supported by
+            [HaRe](http://hackage.haskell.org/package/HaRe) (Haskell refactoring tool) and
+            [Leksah](https://github.com/leksah/leksah).
+                - On 2018-08-20, this is 8.0.2.
+                    - Leksah requires ghc >= 8.0.2.
+                    - HaRe supports ghc <= 8.0.2.
+                    - GHC 8.0 is unacceptably slow.
+                        - Forget HaRe. We'll go with Leksah. Use GHC 8.4.3.
         - The widely supported GHC version lags very much behind the latest stable GHC version.
         I think this may be because the GHC team is rolling out lots of breaking changes in the parser because they are working on the "Trees that grow" proposal.
         - Which Stackage LTS version should I use?
-            - [LTS 6.35](https://www.stackage.org/lts-6.35), because of GHC 7.10.3.
+            - [LTS 6.35](https://www.stackage.org/lts-6.35) if GHC 7.10.3?
                 - It also hosts a hoogle search for searching Haskell program elements.
     - unread, Stephen Diehl
         - http://www.stephendiehl.com/posts/vim_2016.html

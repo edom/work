@@ -30,6 +30,13 @@ mathjax: yes
         - Suppose that the function \\( g \\) approximates the function \\( f \\) in interval \\( I \\).
             - The "approximation error at \\( x \\)" is \\( g(x) - f(x) \\).
             - The "maximum absolute error" is \\( \max_{x \in I} \abs{g(x) - f(x)} \\).
+        - How do we measure the distance between two \\( \Real \to \Real \\) functions \\( f \\) and \\( g \\)?
+            - The maximum norm, in interval \\( I \\) is \\( \max_{x \in I} \abs{f(x) - g(x)} \\).
+                - Other names: uniform norm, supremum norm, Chebyshev norm, infinity norm, norm-infinity, \\( L_\infty \\)-norm
+                - [WP:Uniform norm](https://en.wikipedia.org/wiki/Uniform_norm)
+                - Why is it called "uniform"?
+            - What is this norm called? \\( \int_{x \in I} [f(x)-g(x)]^2 ~ dx \\).
+    - What is a multivariate polynomial?
     - Commonly conflated concepts
         - Approximation is not estimation.
             - Approximation converges.
@@ -129,6 +136,8 @@ Is it even possible to approximate arbitrary functions?
             - "the problem of numerically solving a large class of (high-dimensional) PDEs (such as linear Black-Scholes or diffusion equations) can be cast into a classical supervised learning problem which can then be solved by deep learning methods"
 - Determine whether we need to read these
     - Very likely
+        - 2017, lecture notes, "Lectures on multivariate polynomial approximation", [pdf](http://www.math.unipd.it/~demarchi/MultInterp/LectureNotesMI.pdf)
+        - 2015, slides, "Best polynomial approximation: multidimensional case", [pdf](https://carma.newcastle.edu.au/meetings/spcom/talks/Sukhorukova-SPCOM_2015.pdf)
         - 1998, book, "A Short Course on Approximation Theory", N. L. Carothers, [pdf](http://fourier.math.uoc.gr/~mk/approx1011/carothers.pdf)
         - https://en.wikipedia.org/wiki/Bernstein_polynomial#Approximating_continuous_functions
             - https://en.wikipedia.org/wiki/Pointwise_convergence
@@ -152,6 +161,8 @@ Is it even possible to approximate arbitrary functions?
             - 2006, chapter, "Topics in multivariate approximation theory", [pdf available](https://www.researchgate.net/publication/226303661_Topics_in_multivariate_approximation_theory)
             - 1982, article, "Topics in multivariate approximation theory", [pdf](http://www.dtic.mil/dtic/tr/fulltext/u2/a116248.pdf)
             - 1986, "Multivariate Approximation Theory: Selected Topics", [paywall](https://epubs.siam.org/doi/book/10.1137/1.9781611970197)
+        - Theorem
+            - 2017, article, "Multivariate polynomial approximation in the hypercube", [pdf](https://people.maths.ox.ac.uk/trefethen/hypercube_published.pdf)
         - 2017, article, "Selected open problems in polynomial approximation and potential theory", [pdf](http://drna.padovauniversitypress.it/system/files/papers/BaranCiezEgginkKowalskaNagyPierzcha%C5%82a_DRNA2017.pdf)
         - 2017, article, "High order approximation theory for Banach space valued functions", [pdf available](https://ictp.acad.ro/jnaat/journal/article/view/1112)
         - Articles summarizing people's works

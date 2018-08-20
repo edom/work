@@ -134,6 +134,10 @@ date: 2017-05-20 00:00:00 +0700
             - [Teaching mathematics]({% link mathedu.md %})
             - [Generalizing division]({% link division.md %})
             - [Solving the Clay millennium prize problems]({% link clay_math.md %})
+            - Writing mathematics
+                - 1989, article, "Mathematical writing", Donald E. Knuth, Tracy Larrabee, and Paul M. Roberts, [pdf](http://jmlr.csail.mit.edu/reviewing-papers/knuth_mathematical_writing.pdf)
+                    - "Many readers will skim over formulas on their first reading of your exposition.
+                    Therefore, your sentences should flow smoothly when all but the simplest formulas are replaced by 'blah' or some other grunting noise. (p. 3)
         - [Writing]({% link writing.md %})
         - [Justifying counterfactual reasoning]({% link cf.md %})
         - [Justifying my value]({% link value.md %})

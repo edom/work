@@ -431,6 +431,8 @@ functional languages for systems programming?
 - [Programming Language and Compiler Research Groups](https://www.cs.cmu.edu/~mleone/language/projects.html)
 - [IEEE posts its top list of languages - The PL Enthusiast](http://www.pl-enthusiast.net/2014/07/10/ieee-posts-its-top-list-of-languages/)
 - [What is PL research and how is it useful? - The PL Enthusiast](http://www.pl-enthusiast.net/2015/05/27/what-is-pl-research-and-how-is-it-useful/)
+- 2014, article, [Ontology-based Representation and Reasoning on Process Models: A Logic Programming Approach](https://arxiv.org/abs/1410.1776)
+- 1994, article, "Formalizing architectural connection", [pdf](http://web.cs.wpi.edu/~cs562/s98/pdf/wright-icse16.pdf)
 - relationship between Aspect-Oriented Programming and Functional Programming
     - 2009, article, "What Does Aspect-Oriented Programming Mean for Functional Programmers?", [pdf](https://www.cs.ox.ac.uk/files/2282/wgp14-wang.pdf)
     - 2008, article, "On Feature Orientation and Functional Programming", [pdf](https://pdfs.semanticscholar.org/522e/b6c2ea910ed074a13fe21767c9fa070fb685.pdf)

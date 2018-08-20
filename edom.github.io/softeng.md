@@ -268,3 +268,5 @@ Isn't it too long?
         - "Spoon is a library to analyze, transform, rewrite, transpile Java source code (incl Java 9 & Java 10)." [source](https://github.com/INRIA/spoon)
 - unread
     - long text: [Top-down vs. Bottom-up Hierarchy: Or, How to Design a Self-Managed Organization](http://organizationalphysics.com/2016/10/13/top-down-vs-bottom-up-hierarchy-or-how-to-build-a-self-managed-organization/)
+- 2014, article, "Bidirectionally tolerating inconsistency: partial transformations", [pdf](http://groups.inf.ed.ac.uk/bx/fase14.pdf)
+    - 1990, article, "Tolerating inconsistency", Robert Balzer, [pdf](http://gssi.det.uvigo.es/users/jgd/public_html/doctorado_01-02/p158-balzer.pdf)

@@ -1,3 +1,19 @@
+This package sometimes fails to build.
+Removing hakyll version constraint sometimes solves the problem.
+
+```
+Resolving dependencies...
+Error:
+    Dependency on unbuildable library from pandoc
+    In the stanza 'library'
+    In the inplace package 'gen-site-0.0.0'
+```
+
+- Does that mean pandoc is to blame?
+- Does that mean hakyll is to blame?
+- 2018, Cabal programming error, https://github.com/haskell/cabal/issues/5325
+    - Cabal fails to backtrack on `buildable: False`.
+
 - Plans
     - Modernize this (it uses ghc 7, cabal 1, pandoc, hakyll).
     - Things that must be done anyway.

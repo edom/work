@@ -38,12 +38,15 @@
     - Publishing the website: Run the script [sh/pub](sh/pub).
     - Install Jekyll 3 on Ubuntu 14.04
         - See (but don't blindly follow) https://gist.github.com/Piyush3dB/b7daa3f178746c7d7479ca1cbd694160
-        - Use [rbenv](https://github.com/rbenv/rbenv) to install newer Ruby versions.
-        - Ubuntu 14.04 Jekyll is too ancient for GitHub Pages.
-    - Why is Jekyll slow on my machine?
-        - It's fast on GitHub.
+            - Use [rbenv](https://github.com/rbenv/rbenv) to install newer Ruby versions.
+                - Ubuntu 14.04 Jekyll is too ancient for GitHub Pages.
+                - [What are the differences between rbenv, rvm, and chruby?](https://stackoverflow.com/questions/22153521/what-are-the-differences-between-rbenv-rvm-and-chruby)
+                    - For our use case, rbenv is best.
+                    We don't want to program in Ruby.
+                    We just want to install Jekyll.
+    - How do we speed up Jekyll?
+        - Is 6 seconds for 160 pages slow?
         - What is making it slow?
             - How do we find that out?
                 - Is there a stack-sampling profiler for Ruby?
                     - Yes, `conscho` in [SO 4092641](https://stackoverflow.com/questions/4092641/profiling-ruby-code) recommends `stackprof`.
-        - On second thought, it's not too slow.
