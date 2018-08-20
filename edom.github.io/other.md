@@ -230,13 +230,6 @@ The pack might contain things like yacy.net, matrix.org, riot.im.
     - https://blogs.oracle.com/java-platform-group/java-se-support-for-docker-cpu-and-memory-limits
 - https://felipec.wordpress.com/2011/06/16/after-two-weeks-of-using-gnome-3-i-officially-hate-it/
     - Why does the author disapprove of GNOME 3?
-- relationship between Aspect-Oriented Programming and Functional Programming
-    - 2009, article, "What Does Aspect-Oriented Programming Mean for Functional Programmers?", [pdf](https://www.cs.ox.ac.uk/files/2282/wgp14-wang.pdf)
-    - 2008, article, "On Feature Orientation and Functional Programming", [pdf](https://pdfs.semanticscholar.org/522e/b6c2ea910ed074a13fe21767c9fa070fb685.pdf)
-    - 2016, article, "Realtime collaborative editor. Algebraic properties of the problem.", [html](http://blog.haskell-exists.com/yuras/posts/realtime-collaborative-editor.html)
-        - see also Darcs patch theory
-    - 2008, PhD thesis, "An Integrated System to Manage Crosscutting Concerns in Source Code", [pdf](http://wwwtmp.st.ewi.tudelft.nl/arie/phds/Marin.pdf)
-    - 2003, article, "Language-independent aspect-oriented programming", [pdf available](http://www.tara.tcd.ie/handle/2262/32627)
 - https://libcloud.apache.org/
     - "One Interface To Rule Them All: Python library for interacting with many of the popular cloud service providers using a unified API."
 - duren medan kupas (ada biji tapi tanpa kulit), Rp 47000 per kg!? Biasanya Rp 75000? Atau biasanya kemahalan?
@@ -727,3 +720,18 @@ One learns a programming language by example programs/snippets.
 Hence travel is waste.
 - Google should penalize (push down) Pinterest from image search.
 It's littering.
+- Communism
+    - The USSR was beyond communism; it was Stalinism.
+    - Stalinism failed because it overcentralizes power.
+        - Power corrupts.
+        - Oppression isn't a good long-term strategy.
+        - People are like gas.
+            - Increasing pressure (oppression, stress, overcrowding) increases temperature (collisions, friction, conflicts, clashes).
+    - People would still work even if they couldn't get rich.
+        - People work to give their life meaning, not to get rich.
+            - Getting rich is a side-effect.
+        - Would they work better if they could get rich?
+- How to teach history
+    - Don't memorize things that you can look up on the Internet.
+    - Stories, insights, reasons, motivations
+    - Empathize with the subjects

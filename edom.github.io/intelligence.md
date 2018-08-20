@@ -360,3 +360,8 @@ patternicity, agenticity, pattern over-recognition, false positive, false negati
 - vision (making machines see)
     - Jim Bednar, [Orientation Perception Demos](http://homepages.inf.ed.ac.uk/jbednar/demos.html)
 - https://en.wikipedia.org/wiki/Bayesian_approaches_to_brain_function
+- [DeepMind Has A Superhuman Level Quake 3 AI Team - YouTube](https://www.youtube.com/watch?v=MvFABFWPBrw)
+    - Moby Motion's comment: "Really exciting because of the sparse internal rewards and long term planning. A step towards AI agents that are useful in real life."
+- 2018 AI is like autistic savants.
+They perform one task exceptionally well, but they are bad at everything else.
+    - 2018, [DeepMind's AI Takes An IQ Test - YouTube](https://www.youtube.com/watch?v=eSaShQbUJTQ)

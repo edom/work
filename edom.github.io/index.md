@@ -84,6 +84,16 @@ date: 2017-05-20 00:00:00 +0700
                 - Demonopolizing the ability to do violence?
                     - People who care (and thus readily mobilize) are less oppressable than people who don't.
                         - How do we get people to care about and participate in politics?
+                    - Online campaigns/petitions.
+                        - [Technology can give political power back to the people - New Scientist](https://www.newscientist.com/article/mg22630182-800-technology-can-give-political-power-back-to-the-people/)
+                    - Using the Internet (social media, messaging, forum, etc.) to incite people?
+                    - Teach people how to participate democracy?
+                        - If shit gets to the top, people have only themselves to blame.
+                            - Democracy means they could have prevented that shit.
+                                - But they were apathetic.
+                                They didn't care.
+                                They gave up before even trying.
+                                So that shit rose without any obstacles.
                 - Automating politics/governments/law?
                 - Empowering people with distributed local technology?
                     - Take power away from governments and elites, and give it back to the masses?

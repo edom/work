@@ -431,3 +431,10 @@ functional languages for systems programming?
 - [Programming Language and Compiler Research Groups](https://www.cs.cmu.edu/~mleone/language/projects.html)
 - [IEEE posts its top list of languages - The PL Enthusiast](http://www.pl-enthusiast.net/2014/07/10/ieee-posts-its-top-list-of-languages/)
 - [What is PL research and how is it useful? - The PL Enthusiast](http://www.pl-enthusiast.net/2015/05/27/what-is-pl-research-and-how-is-it-useful/)
+- relationship between Aspect-Oriented Programming and Functional Programming
+    - 2009, article, "What Does Aspect-Oriented Programming Mean for Functional Programmers?", [pdf](https://www.cs.ox.ac.uk/files/2282/wgp14-wang.pdf)
+    - 2008, article, "On Feature Orientation and Functional Programming", [pdf](https://pdfs.semanticscholar.org/522e/b6c2ea910ed074a13fe21767c9fa070fb685.pdf)
+    - 2016, article, "Realtime collaborative editor. Algebraic properties of the problem.", [html](http://blog.haskell-exists.com/yuras/posts/realtime-collaborative-editor.html)
+        - see also Darcs patch theory
+    - 2008, PhD thesis, "An Integrated System to Manage Crosscutting Concerns in Source Code", [pdf](http://wwwtmp.st.ewi.tudelft.nl/arie/phds/Marin.pdf)
+    - 2003, article, "Language-independent aspect-oriented programming", [pdf available](http://www.tara.tcd.ie/handle/2262/32627)
