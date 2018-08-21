@@ -408,19 +408,62 @@ functional languages for systems programming?
             - cirru https://news.ycombinator.com/item?id=13773813
                 - lots of similar things https://news.ycombinator.com/item?id=13774864
             - isomorf: find code fragment popularity by structure (not-only-text) comparison https://isomorf.io/#!/tours/of/overview/7/haskell
-        - Haskell supercompilation?
-            - GHC
-            - Supero
-            - Morte
-                - https://github.com/Gabriel439/Haskell-Morte-Library
-                    - "Morte is a super-optimizing intermediate language for functional languages."
-                - http://www.haskellforall.com/2014/09/morte-intermediate-language-for-super.html
-        - [Thyer's PhD thesis "Lazy specialization"](http://thyer.name/phd-thesis/thesis-thyer.pdf) has an accessible introduction to lambda calculus in Chapter 2.
-            - Turn an interpreter into a compiler for free!
+        - supercompilation, specialization, partial evaluation
+            - Haskell supercompilation?
+                - GHC
+                - Supero
+                - Morte
+                    - https://github.com/Gabriel439/Haskell-Morte-Library
+                        - "Morte is a super-optimizing intermediate language for functional languages."
+                    - http://www.haskellforall.com/2014/09/morte-intermediate-language-for-super.html
+            - [Thyer's PhD thesis "Lazy specialization"](http://thyer.name/phd-thesis/thesis-thyer.pdf) has an accessible introduction to lambda calculus in Chapter 2.
+            - 1991, "A partial evaluator for the untyped lambda-calculus", [paywall](https://www.cambridge.org/core/journals/journal-of-functional-programming/article/a-partial-evaluator-for-the-untyped-lambda-calculus/EE324F936F0A009B6766B13FF6755DFC)
+                - related: semantic-directed code generation?
+            - Gabriel Gonzales stuff: Morte, Dhall.
+        - [A Treatise on Cosmos —the New Programming Language](https://medium.com/@McCosmos/a-treatise-on-cosmos-the-new-programming-language-905be69eb4af)
+            - procedural-looking logic programming language
+        - syntax
+            - [WP:Off-side rule](https://en.wikipedia.org/wiki/Off-side_rule), indentation as block delimiter
+    - Turn an interpreter into a compiler for free!
 - 2017, article, [[1707.00024] A Formalized General Theory of Syntax with Bindings](https://arxiv.org/abs/1707.00024)
 - [Vectors are records, too (pdf) : dependent_types](https://www.reddit.com/r/dependent_types/comments/8qig0u/vectors_are_records_too_pdf/)
 - https://wiki.haskell.org/Untypechecking is "converting from a type to a term".
-- A module is just a record (tuple whose components are named), in a dependently-typed language.
+- Functional programming in the large
+    - Key idea: A module is just a record (tuple whose components are named), in a dependently-typed language.
+        - Module = lambda-calculus + dictionary
+        - This idea is similar to Nix modules.
+        - A module is just a lambda expression.
+        - `type Module = Map Name Decl -> Map Name Decl`
+        - A module translates into a lambda-calculus expression.
+        - An import translates to an entry in the input kvm.
+            - kvm = key-value map, look-up table, dictionary
+        - An export translates to an entry in the output kvm.
+        - Example:
+
+        ```
+        module {
+            import add mul Int32;
+            export f g T;
+            f = add;
+            g = mul;
+            T = Int32;
+        };
+
+        \ {add; mul; Int32; ...} -> let {
+            f = add;
+            g = mul;
+            T = Int32;
+        } in {f; g; T;};
+        ```
+
+        - Key ideas of that example:
+            - Dictionary pattern matching simulates row polymorphism.
+            - `{a;b;c;}` is shorthand for `{a:a; b:b; c:c;}`.
+    - Hypothesis: Lazy evaluation solves the partial query problem elegantly.
+    - Cool thing: Dhall can import from IPFS.
+        - http://www.haskellforall.com/2016/12/dhall-non-turing-complete-configuration.html
+    - Untyped functional programming languages
+        - Tulip
 - [Argument for static typing]({% link statyp.md %})
 - Old content to be reorganized
     - [Functional programming research]({% link functional_programming.md %})
@@ -440,3 +483,18 @@ functional languages for systems programming?
         - see also Darcs patch theory
     - 2008, PhD thesis, "An Integrated System to Manage Crosscutting Concerns in Source Code", [pdf](http://wwwtmp.st.ewi.tudelft.nl/arie/phds/Marin.pdf)
     - 2003, article, "Language-independent aspect-oriented programming", [pdf available](http://www.tara.tcd.ie/handle/2262/32627)
+- [NOOL 2015 accepted papers - SPLASH 2015](https://2015.splashcon.org/track/nool2015#event-overview) ("New Object Oriented Languages")
+    - "Classes Considered Harmful", [pdf](http://web.cecs.pdx.edu/~black/publications/ClassesHarmful.pdf)
+    - "Ubiquitous Object Orientation to Foster the Advancement of Programming Languages", [pdf](http://www.cs.cmu.edu/~dkurilov/papers/nool15.pdf)
+- NOOL 2016 articles
+    - "Nomen: A Dynamically Typed OO Programming Language, Transpiled to Java", [pdf](http://www.it.uu.se/workshop/nool16/nool16-paper9.pdf)
+        - "Nomen is an experimental, dynamically typed OO programming language which compiles to Java source code."
+        - "Nomen is designed as a language for experimenting with IDE support generation using the Rascal language workbench."
+    - "The essence of subclassing", [pdf](http://www.it.uu.se/workshop/nool16/nool16-paper5.pdf)
+    - "Towards Automatic Decoration", [pdf](http://www.it.uu.se/workshop/nool16/nool16-paper2.pdf)
+    - "Static Typing Without Static Types — Typing Inheritance from the Bottom Up", [pdf](http://www.it.uu.se/workshop/nool16/nool16-paper4.pdf)
+    - syntax
+        - "Polite Programmers, Use Spaces in Identifiers When Needed", [pdf](http://www.it.uu.se/workshop/nool16/nool16-paper10.pdf)
+- [WP:Comparison of functional programming languages](https://en.wikipedia.org/wiki/Comparison_of_functional_programming_languages)
+- Designing APIs
+    - [An API Ontology - Literate Programming](http://blog.steveklabnik.com/posts/2012-02-13-an-api-ontology)

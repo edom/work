@@ -744,3 +744,4 @@ It's littering.
     - Don't memorize things that you can look up on the Internet.
     - Stories, insights, reasons, motivations
     - Empathize with the subjects
+- 2011, article, "A Very Rough Guide for PhD Students in Mathematics", [pdf](http://www.maths.manchester.ac.uk/media/eps/schoolofmathematics/study/guide_2011.pdf)

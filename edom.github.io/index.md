@@ -38,6 +38,7 @@ date: 2017-05-20 00:00:00 +0700
                     - npm dependency hell, how npm2 works, how npm3 works
                         - http://npm.github.io/how-npm-works-docs/theory-and-design/dependency-hell.html
                     - [Running X client applications on Docker on Linux]({% link dockerx.md %})
+                    - [Markdown sucks]({% link markdown.md %})
                 - [Reverse engineering]({% link reveng.md %})
                     - [Reverse engineering the network protocol used by a Java desktop application]({% link rejava.md %}): a stock trading application written in Java 6
                     - [Reverse-engineering PlayStation 1 3D games to control the camera]({% link ps1.md %})

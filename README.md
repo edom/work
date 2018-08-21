@@ -37,13 +37,22 @@
     - Serving the website: Run the script [sh/jekserve](sh/jekserve).
     - Publishing the website: Run the script [sh/pub](sh/pub).
     - Install Jekyll 3 on Ubuntu 14.04
+        - Install the version in [GitHub pages dependency versions](https://pages.github.com/versions/).
+        - Follow [Setting up your GitHub Pages site locally with Jekyll - User Documentation](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/).
+        - 2018-08-21
+            - Install ruby 2.5.1.
+            - `gem install bundler`
+            - `bundle install`
+            - `BUNDLE_GEMFILE=... bundle exec`
         - See (but don't blindly follow) https://gist.github.com/Piyush3dB/b7daa3f178746c7d7479ca1cbd694160
-            - Use [rbenv](https://github.com/rbenv/rbenv) to install newer Ruby versions.
-                - Ubuntu 14.04 Jekyll is too ancient for GitHub Pages.
-                - [What are the differences between rbenv, rvm, and chruby?](https://stackoverflow.com/questions/22153521/what-are-the-differences-between-rbenv-rvm-and-chruby)
-                    - For our use case, rbenv is best.
-                    We don't want to program in Ruby.
-                    We just want to install Jekyll.
+            - I changed my mind.
+            Don't use rbenv.
+            Just compile ruby from source or download a binary package for your operating system and put it somewhere in `~/.local`.
+                - Use [rbenv](https://github.com/rbenv/rbenv) to install newer Ruby versions.
+                    - Ubuntu 14.04 Jekyll is too ancient for GitHub Pages.
+                    - [What are the differences between rbenv, rvm, and chruby?](https://stackoverflow.com/questions/22153521/what-are-the-differences-between-rbenv-rvm-and-chruby)
+                        - We don't want to program in Ruby.
+                        We just want to install Jekyll.
     - How do we speed up Jekyll?
         - Is 6 seconds for 160 pages slow?
         - What is making it slow?

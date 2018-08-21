@@ -15,27 +15,31 @@ permalink: /ast.html
         - TypeScript (JavaScript) is ideal for AST decoration problem?
         You just add a key to the AST node object you want to decorate.
             - Any language with structural typing is ideal?
-```typescript
-interface Node {
-}
 
-interface Node_parse extends Node {
-}
+            ```typescript
+            interface Node {
+            }
 
-interface Node_desugar extends Node_parse {
-}
-```
+            interface Node_parse extends Node {
+            }
+
+            interface Node_desugar extends Node_parse {
+            }
+            ```
+
     - Loosely-typed Haskell?
         - This is basically the JavaScript way.
-```haskell
-type Key = String
-data Value
-    = VNum Double
-    | VStr String
-    | VObj Object
-type Object = [(Key, Value)]
-type Node = Object
-```
+
+        ```haskell
+        type Key = String
+        data Value
+            = VNum Double
+            | VStr String
+            | VObj Object
+        type Object = [(Key, Value)]
+        type Node = Object
+        ```
+
     - 2017, article, "Trees that grow", https://www.microsoft.com/en-us/research/uploads/prod/2016/11/trees-that-grow.pdf
         - "The compiler writer is then faced with two unpalatable choices.
         She can define a new data type representing the output decorated tree, at the cost of much duplication.
@@ -45,32 +49,34 @@ type Node = Object
                 - https://wiki.haskell.org/Type_composition
             - Haskell doesn't beta-reduce types.
             - This is an example code:
-```haskell
-data Exp_ name exp
-    = Var name
-    | Add exp exp
-    | ...
 
-data Locd a
-    = MkLocd Loc a
+            ```haskell
+            data Exp_ name exp
+                = Var name
+                | Add exp exp
+                | ...
 
-data Typed t a = MkTyped t a
+            data Locd a
+                = MkLocd Loc a
 
-newtype Compose f g a = MkCompose { unCompose :: f (g a) }
+            data Typed t a = MkTyped t a
 
-type PsExp name = Fix (Compose Locd (Exp_ name))
-type TcExp name = Fix (Compose Locd (Compose Typed (Exp_ name)))
+            newtype Compose f g a = MkCompose { unCompose :: f (g a) }
 
--- To ameliorate the verbosity:
+            type PsExp name = Fix (Compose Locd (Exp_ name))
+            type TcExp name = Fix (Compose Locd (Compose Typed (Exp_ name)))
 
-class Exp name exp where
-    var :: name -> exp
-    add :: exp -> exp -> exp
-    ...
+            -- To ameliorate the verbosity:
 
-instance Exp (PsExp name) where ...
-instance Exp (TcExp name) where ...
-```
+            class Exp name exp where
+                var :: name -> exp
+                add :: exp -> exp -> exp
+                ...
+
+            instance Exp (PsExp name) where ...
+            instance Exp (TcExp name) where ...
+            ```
+
     - What if GHC can "inline" data types at compile time?
     What if GHC can "inline" A and B in `data A = MA Int; data B = MB Int String; data E = EA A | EB B;`,
     producing `data E = EA Int | EB Int String`?
