@@ -745,3 +745,10 @@ It's littering.
     - Stories, insights, reasons, motivations
     - Empathize with the subjects
 - 2011, article, "A Very Rough Guide for PhD Students in Mathematics", [pdf](http://www.maths.manchester.ac.uk/media/eps/schoolofmathematics/study/guide_2011.pdf)
+- [WP:Comparison of XML editors](https://en.wikipedia.org/wiki/Comparison_of_XML_editors)
+    - Pick the one with open-source license and schema-aware autocompletion.
+        - 2018-08-22
+            - emacs nxml-mode
+            - jEdit XML plugin
+            - QXMLEdit? Can it autocomplete?
+            - XML Notepad

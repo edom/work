@@ -59,3 +59,4 @@
             - How do we find that out?
                 - Is there a stack-sampling profiler for Ruby?
                     - Yes, `conscho` in [SO 4092641](https://stackoverflow.com/questions/4092641/profiling-ruby-code) recommends `stackprof`.
+        - Upgrading Ruby 1.9.1 to Ruby 2.5.1 speeds up Jekyll.

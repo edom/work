@@ -78,8 +78,8 @@ date: 2018-07-22 02:45 +0700
         - YACC, Bison
         - Lex, Flex
         - Eclipse Modeling Framework
-- programming language design
-    - https://tomassetti.me/resources-create-programming-languages/
+- What already exists?
+    - [68 Resources on creating programming languages](https://tomassetti.me/resources-create-programming-languages/)
     - 2004, book, "Programming language design concepts"
     - https://en.wikipedia.org/wiki/Expression_problem
 - don't repeat yourself
@@ -429,42 +429,8 @@ functional languages for systems programming?
 - [Vectors are records, too (pdf) : dependent_types](https://www.reddit.com/r/dependent_types/comments/8qig0u/vectors_are_records_too_pdf/)
 - https://wiki.haskell.org/Untypechecking is "converting from a type to a term".
 - Functional programming in the large
-    - Key idea: A module is just a record (tuple whose components are named), in a dependently-typed language.
-        - Module = lambda-calculus + dictionary
-        - This idea is similar to Nix modules.
-        - A module is just a lambda expression.
-        - `type Module = Map Name Decl -> Map Name Decl`
-        - A module translates into a lambda-calculus expression.
-        - An import translates to an entry in the input kvm.
-            - kvm = key-value map, look-up table, dictionary
-        - An export translates to an entry in the output kvm.
-        - Example:
-
-        ```
-        module {
-            import add mul Int32;
-            export f g T;
-            f = add;
-            g = mul;
-            T = Int32;
-        };
-
-        \ {add; mul; Int32; ...} -> let {
-            f = add;
-            g = mul;
-            T = Int32;
-        } in {f; g; T;};
-        ```
-
-        - Key ideas of that example:
-            - Dictionary pattern matching simulates row polymorphism.
-            - `{a;b;c;}` is shorthand for `{a:a; b:b; c:c;}`.
-    - Hypothesis: Lazy evaluation solves the partial query problem elegantly.
-    - Cool thing: Dhall can import from IPFS.
-        - http://www.haskellforall.com/2016/12/dhall-non-turing-complete-configuration.html
-    - Untyped functional programming languages
-        - Tulip
-- [Argument for static typing]({% link statyp.md %})
+    - [Designing module systems]({% link module.md %})
+    - [Argument for static typing]({% link statyp.md %})
 - Old content to be reorganized
     - [Functional programming research]({% link functional_programming.md %})
         - [Optimizing lambda calculus]({% link optlam.md %})
@@ -498,3 +464,7 @@ functional languages for systems programming?
 - [WP:Comparison of functional programming languages](https://en.wikipedia.org/wiki/Comparison_of_functional_programming_languages)
 - Designing APIs
     - [An API Ontology - Literate Programming](http://blog.steveklabnik.com/posts/2012-02-13-an-api-ontology)
+- Tools
+    - Golang
+    - Ruby gem and bundler
+    - Python pip

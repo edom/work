@@ -270,3 +270,4 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
 - TED-Ed: "At what moment are you dead? - Randall Hayes", [youtube](https://www.youtube.com/watch?v=5c6C3rHOdf8), 3:00 cute duck animation
 - https://www.reddit.com/r/indonesia/comments/6b4e9a/finest_savagery/
 - https://www.reddit.com/r/CrappyDesign/
+- [Don’t you brush YOUR bears? - YouTube](https://www.youtube.com/watch?v=x70d3Uw6Nxs)
