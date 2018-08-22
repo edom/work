@@ -47,6 +47,15 @@ the community is fragmented because there are too many communication channels (m
                 - https://www.reddit.com/r/linux/comments/8d3sg1/irc_gateway_for_slack/
                 - https://www.reddit.com/r/Slack/comments/8hyky9/best_alternative_to_the_now_defunct_irc_gateway/
                 - https://tedium.co/2017/10/17/irc-vs-slack-chat-history/
+        - Replacing Slack
+            - https://matrix.org/blog/home/
+                - riot.im is built on matrix.org?
+                    - [Slack no more. Why you should use Riot.im and Matrix.org](http://www.1500wordmtu.com/2016/slack-no-more-why-you-should-use-riotim-and-matrixorg)
+                        - vector.im is another name for riot.im?
+                        - https://matrix.org/docs/guides/faq.html
+                        - It seems that riot.im is a strong contender to (if not better than) Slack.
+                    - [Tony “Abolish ICE” Arcieri on Twitter: "If you've been looking for an OSS end-to-end encrypted alternative to Slack, @RiotChat is probably your best bet: https://t.co/U5My74tLvn"](https://twitter.com/bascule/status/803680470386884608)
+                        - [Riot releases end-to-end encryption: get ready to chat securely! – Medium](https://medium.com/@RiotChat/exciting-new-riot-release-get-ready-for-chatting-securely-acc93ecfe0a)
     - WhatsApp group
     - Facebook group
     - Telegram

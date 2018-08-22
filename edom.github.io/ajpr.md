@@ -89,3 +89,25 @@ Make a website for peer-reviewing articles.
 [Publons](https://en.wikipedia.org/wiki/Publons),
 [PubPeer](https://en.wikipedia.org/wiki/PubPeer),
 [JournalReview.org](https://en.wikipedia.org/wiki/JournalReview.org).
+
+## Other content
+
+- Science progresses much faster if we exchange data/knowledge/information freely.
+    - You have something I need.
+    - I have something you need.
+- We need content curation for science/academics.
+    - https://medium.com/content-curation-official-guide/why-to-curate-information-73ecb47b98a5
+    - https://en.wikipedia.org/wiki/Content_curation
+    - https://en.wikipedia.org/wiki/Digital_curation
+    - 2016, article, [Why To Curate Information – Content Curation Official Guide](https://medium.com/content-curation-official-guide/why-to-curate-information-73ecb47b98a5)
+    - 2017, article, [How To Monetize Curated Content – Content Curation Official Guide](https://medium.com/content-curation-official-guide/how-to-monetize-curated-content-465cc44725bd)
+    - 2008, article, [Who are your content curators - and what skill should they have?](https://www.missiontolearn.com/content-curator/)
+    - Is there a curated wiki?
+    Can we crowdsource curation?
+        - 2017, article, [Mob Rule: Curating via Crowdsourcing - Big Think](https://bigthink.com/Picture-This/mob-rule-curating-via-crowdsourcing)
+        - 2016, article, [Crowdsourcing and curation: perspectives from biology and natural language processing](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4976298/)
+        - 2016, article, [Crowdsourcing: Spotify's Secret Weapon for Curation at Scale - Yeti](https://yeti.co/blog/crowdsourcing-spotifys-secret-weapon-for-curation-at-scale/)
+        - 2016, article, [Crowdsourcing – Using the crowd: curated vs. unknown - Analytics Magazine](http://analytics-magazine.org/crowdsourcing-using-the-crowd-curated-vs-unknown/)
+        - 2013, article, "A Theoretical Analysis of Crowdsourced Content Curation", [pdf](http://users.eecs.northwestern.edu/~gar627/crowdsource.pdf)
+    - ["My Curated List of AI and Machine Learning Resources from Around the Web"](https://medium.com/machine-learning-in-practice/my-curated-list-of-ai-and-machine-learning-resources-from-around-the-web-9a97823b8524)
+- [Least publishable unit - Wikipedia](https://en.wikipedia.org/wiki/Least_publishable_unit)

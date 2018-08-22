@@ -21,6 +21,9 @@ We need to fix this.
                 - Jl. Raya Penggilingan no. 25, Jakarta Timur
             - www.belidaging-dj.com
                 - Dikasih es batu ga pas ngirim?
+        - I found these while browsing the Internet, but I never tried these.
+        I don't know how cheap.
+            - http://m.warungdaging.com/#features
 - Kementrian Perdagangan
     - https://ews.kemendag.go.id/
     - https://ews.kemendag.go.id/bawangmerah/DailyPriceBawang.aspx
@@ -70,4 +73,26 @@ We need to fix this.
         Seperti buang limbah ke sungai.
         - Green Ville terlalu banyak tempat makan.
         Setiap Sabtu macetnya sampai Jalan Panjang.
+    - Informasi lokal
+        - Tempat makan.
+        Makanan cocok dengan selera saya.
+        Makanan yang bisa dikulkasin.
+        Untuk saat libur, katering tidak datang, dan bingung mau makan apa.
+            - Jalan Ratu Kemuning
+                - 2018-08-23. Siomay B2 Sewan Koko. Siomay ikan dengan minyak babi. Rp 4000 per potong.
+                - Siomay Wijaya. Siomay babi. Rp 5000 per potong.
+                - 2018-08-20. Ketoprak Cirebon Agung. Ngantri parah. Rp 13000 per porsi.
+                - Kwetiau udang Singapur Mimi
+                - Bakpau B Delapan
+                - Bakso Malang Nonik
+                - Ali Tiociu. Capcai, puyunghai, ayam nanking, ayam goreng mentega.
+                - Bakmi Ahok
+                - Bakmi Bintang Gading
+        - Finding out whether my local grocery store is overpriced
+            - 2018-08-12
+                - Nangka kupas Rp 42000/kg
+                - Nanas honi Sunpride Rp 39000/kg
 - [PD Pasar Jaya commodity price list](http://www.pasarjaya.co.id/komoditas)
+- duren medan kupas (ada biji tapi tanpa kulit), Rp 47000 per kg!? Biasanya Rp 75000? Atau biasanya kemahalan?
+    - https://www.tokopedia.com/durenkupasjkt/duren-kupas-asli-medan
+    - https://www.tokopedia.com/durenkupasjkt/etalase/duren

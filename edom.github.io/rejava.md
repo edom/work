@@ -328,3 +328,4 @@ java -jar target/javacg-0.1-SNAPSHOT-static.jar JAR1 JAR2 ...
         - https://blog.takipi.com/double-agent-java-vs-native-agents/
     - Related JEPs (Java Enhancement Proposals)
         - 2018-07-23: last updated in 2015, created in 2011, [JEP 159: Enhanced Class Redefinition](http://openjdk.java.net/jeps/159), [JDK-8046149](https://bugs.openjdk.java.net/browse/JDK-8046149)
+- https://en.wikipedia.org/wiki/List_of_electronic_trading_protocols

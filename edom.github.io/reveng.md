@@ -1,11 +1,11 @@
 ---
-title: Software reverse-engineering
+title: Reverse software engineering
 date: 2018-07-21 23:57 +0700
 permalink: /reveng.html
 ---
 
 - Overview
-    - https://en.wikipedia.org/wiki/Reverse_engineering
+    - [WP:Reverse engineering](https://en.wikipedia.org/wiki/Reverse_engineering)
         - Knowledge Discovery Metamodel
     - 2006, article, "An Overview of the State-of-The-Art Reverse Engineering Techniques", [pdf](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.107.1164&rep=rep1&type=pdf)
 - In reverse engineering, tools are very important.
@@ -22,3 +22,15 @@ permalink: /reveng.html
 - Ambiguous title: The phrase "Reverse-engineering software" can mean two things:
     - software that helps people do reverse-engineering
     - the act of reverse-engineering a computer program (that is, software)
+- Reverse-engineering and deobfuscation
+    - Optimization is a partial inverse of obfuscation.
+    - An optimizer can be used to deobfuscate.
+    - Let's make a JVM bytecode optimizer in Haskell?
+    - Stolas / Reverse Engineering Toolkit https://gist.github.com/Stolas/173b174a1d62734540c360d8f66850d9
+    - https://resources.infosecinstitute.com/top-8-reverse-engineering-tools-cyber-security-professionals/#gref
+    - https://www.quora.com/Whats-your-best-reverse-engineering-tools-and-why
+- Where does this belong: programming language research, statistics, or reverse engineering?
+    - JSNice: a statistical approach to program deobfuscation
+        - http://www.jsnice.org/
+        - http://www.nice2predict.org/
+        - https://www.sri.inf.ethz.ch/jsnice.php

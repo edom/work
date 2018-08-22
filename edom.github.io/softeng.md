@@ -270,3 +270,54 @@ Isn't it too long?
     - long text: [Top-down vs. Bottom-up Hierarchy: Or, How to Design a Self-Managed Organization](http://organizationalphysics.com/2016/10/13/top-down-vs-bottom-up-hierarchy-or-how-to-build-a-self-managed-organization/)
 - 2014, article, "Bidirectionally tolerating inconsistency: partial transformations", [pdf](http://groups.inf.ed.ac.uk/bx/fase14.pdf)
     - 1990, article, "Tolerating inconsistency", Robert Balzer, [pdf](http://gssi.det.uvigo.es/users/jgd/public_html/doctorado_01-02/p158-balzer.pdf)
+- Software engineer association?
+    - Indonesia
+        - SARCCOM Software architect Indonesia community http://sarccom.org/
+        - ASPILUKI Asosiasi Piranti Lunak Telematika Indonesia http://www.aspiluki.or.id/
+    - International?
+- Don't use GitFlow.
+Use continuous integration and continuous deployment instead.
+    - The `master` branch always builds, always runs, and is always releasable.
+    - Everything goes to `master`. Sketches, hotfixes, everything.
+    - Avoid non-master long-lived branches.
+    - It is OK to introduce half-baked code into `master` as long as it doesn't introduce errors.
+        - Use feature switch/toggle.
+            - Just because code is in `master` doesn't mean it will be run on production.
+        - Work-in-progress doesn't have to be full of errors.
+    - Discipline yourself to make small commits and avoid big merges.
+    - Discipline yourself to make backward-compatible changes, and deprecate things slowly.
+        - Give your users time to migrate.
+        - If your changes are always backward-compatible, you will never break someone else's code.
+    - You can rebase/tidy up commits that you haven't pushed.
+    - Merges and rebases produce the same working tree but have different uses.
+        - The computer doesn't care whether you merge or rebase.
+        - Merges and rebases exist for the humans.
+    - 2017, article, [Moving away from GitFlow](https://www.gamasutra.com/blogs/NiklasGray/20170927/306445/Moving_away_from_GitFlow.php)
+- build systems
+    - How do Haskell Shake and F# FAKE compare?
+- Does putting on a headphone enhance your focus, even if it isn't playing any sound?
+    - How about putting a motorcycle helmet?
+- 1999, article, "How enterprises use functional languages, and why they don't", Philip Wadler, [pdf](http://homepages.inf.ed.ac.uk/wadler/papers/how-and-why/how-and-why.pdf)
+- Optimizing enterprise application development
+    - Low-code application development
+        - G Suite low-code https://developers.google.com/appmaker/
+        - competitor https://www.outsystems.com/platform/#low-code
+            - "OutSystems is an open, standards-based platform with no lock-in, no proprietary data models, or proprietary run-time"
+- software engineering research, advances in software engineering
+    - http://www.sigsoft.org/events.html
+    - http://homepage.divms.uiowa.edu/~slonnegr/plf/Book/Chapter7.pdf
+- https://blog.codinghorror.com/why-cant-database-tables-index-themselves/
+- 2015, PhD thesis, Bergersen, "Measuring Programming Skill: Construction and Validation of an Instrument for Evaluating Java Developers"
+    - [pdf](http://folk.uio.no/gunnab/publications/Bergersen2015_PhD_thesis.pdf)
+    - It's a collection of 4 articles.
+    - https://www.duo.uio.no/handle/10852/48583
+- garbage collection
+    - [Conservative GC: Is It Really That Bad? (X-post /r/java) : programming](https://www.reddit.com/r/programming/comments/7zfbs5/conservative_gc_is_it_really_that_bad_xpost_rjava/) (summary)
+        - [Conservative GC: Is It Really That Bad? – Excelsior JET Team Blog](https://www.excelsiorjet.com/blog/articles/conservative-gc-is-it-really-that-bad/)
+    - [Conservative GC: Is It Really That Bad? | Hacker News](https://news.ycombinator.com/item?id=16436574)
+    - Real-time garbage collection
+        - http://michaelrbernste.in/2013/06/03/real-time-garbage-collection-is-real.html
+- 2005, article, "Practical Ontology Systems for Enterprise Application", [pdf](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.622.6490&rep=rep1&type=pdf)
+- 2006, article, "Applications of Ontologies in Software Engineering", [pdf](https://km.aifb.kit.edu/ws/swese2006/final/happel_full.pdf)
+- npm dependency hell, how npm2 works, how npm3 works
+    - http://npm.github.io/how-npm-works-docs/theory-and-design/dependency-hell.html

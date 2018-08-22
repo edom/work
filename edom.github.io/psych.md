@@ -64,3 +64,15 @@ date: 2018-05-24 02:52 +0700
 - [How to motivate yourself to change your behavior | Tali Sharot | TEDxCambridge](https://www.youtube.com/watch?v=xp0O2vi8DX4)
 - https://www.washingtonpost.com/news/storyline/wp/2014/12/04/people-around-you-control-your-mind-the-latest-evidence/?utm_term=.40265b80e149
     - https://news.ycombinator.com/item?id=12698204
+- [Facts Don't Win Fights: Here’s How to Cut Through Confirmation Bias - Tali Sharot - YouTube](https://www.youtube.com/watch?v=kyioZODhKbE)
+    - To polarize someone is to make him more confident (about a belief).
+    - Confirmation bias: People hear what they want to hear.
+        - People filter incoming information.
+        - People bend incoming information to conform with their preexisting beliefs.
+        - Agreements polarize people, but disagreements don't depolarize people.
+        - Information agreeing with preexisting belief polarize the believer.
+        - Information disagreeing with preexisting belief is filtered out and doesn't depolarize the believer.
+    - Key insight: We can change people's behavior without changing their beliefs.
+- [How to Persuade Others with the Right Questions: Jedi Mind Tricks from Daniel H. Pink](https://www.youtube.com/watch?v=WAL7Pz1i1jU)
+    - how to get your daughter to clean her room
+        - the comment section is pessimistic

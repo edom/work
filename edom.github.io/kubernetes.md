@@ -30,3 +30,4 @@ permalink: /kubernetes.html
         - The same way Microsoft Windows commoditized PC hardware.
     - [WP:Commoditization](https://en.wikipedia.org/wiki/Commoditization)
     - [WP:Infrastructure as a service](https://en.wikipedia.org/wiki/Infrastructure_as_a_service)
+- [The Kubernetes Bible for Beginners & Developers - Level UpLevel Up](https://www.level-up.one/kubernetes-bible-beginners/)

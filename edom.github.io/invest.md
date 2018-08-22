@@ -118,3 +118,6 @@ Thus, paying back the loans reduce circulating money.
     - http://www.bloomberg.com/quote/LMAS:IJ
     - http://topbrokerforex.blog.com/2012/08/02/daftar-badan-regulasi-untuk-broker-forex/
 - https://en.wikipedia.org/wiki/Outline_of_finance#Post-modern_portfolio_theory
+- Measuring investment performance
+    - https://en.wikipedia.org/wiki/Sharpe_ratio
+    - https://en.wikipedia.org/wiki/Sortino_ratio

@@ -3,171 +3,174 @@ layout: default
 date: 2017-05-20 00:00:00 +0700
 ---
 
-- I am the target audience of this website, but I hope it's useful for you too.
+- I write everything for myself, but I hope you find it useful.
 - Disclaimers
-    - This website may contain mistakes.
-    Use with caution.
+    - I may err.
+    Read cautiously.
     Compare with other independent sources.
-    - I am not responsible for other's comments.
+    - I am not responsible for other people's comments.
 - Organization of this site
-    - For most pages:
-        - The title is a goal.
-        - The content is the ongoing journey to achieve it.
+    - For most pages, the title is a goal, and the content is the ongoing journey to achieve it.
 - Projects
-    - Thinking
-        - Computer
-            - Software engineering
-                - Forward engineering: [Making lasting software]({% link softeng.md %})
-                    - Programming language research: [Making the only programming language we will ever need]({% link plres.md %})
-                    - [Using Haskell]({% link haskell.md %})
-                        - [Using Cabal]({% link cabal.md %})
-                    - [Using Java]({% link java.md %})
-                    - [Making contributable open-source projects]({% link opensrc.md %})
-                        - [Building online communities]({% link community.md %})
-                        - Maintaining open-source projects
+    - Computer practice
+        - Software engineering
+            - Forward software engineering
+                - [Making lasting software]({% link softeng.md %})
+                - [Making the only programming language we will ever need]({% link plres.md %})
                     - [Solving the AST decoration problem]({% link ast.md %})
+                    - Solving the expression problem
                     - [Proving things using computers]({% link proof.md %})
-                    - [Liberating software]({% link libersoft.md %})
-                        - Searching
-                            - Where does this fit in the hierarchy?
-                            - [WP:Optimal stopping](https://en.wikipedia.org/wiki/Optimal_stopping)
-                            - [Making a search engine]({% link srceng.md %})
+                - [Using Haskell]({% link haskell.md %})
+                    - [Using Cabal]({% link cabal.md %})
+                - [Using Java]({% link java.md %})
                     - [Making a Java virtual machine]({% link jvm.md %})
-                    - Real-time garbage collection
-                        - http://michaelrbernste.in/2013/06/03/real-time-garbage-collection-is-real.html
-                    - npm dependency hell, how npm2 works, how npm3 works
-                        - http://npm.github.io/how-npm-works-docs/theory-and-design/dependency-hell.html
-                    - [Running X client applications on Docker on Linux]({% link dockerx.md %})
-                    - [Markdown sucks]({% link markdown.md %})
-                - [Reverse engineering]({% link reveng.md %})
-                    - [Reverse engineering the network protocol used by a Java desktop application]({% link rejava.md %}): a stock trading application written in Java 6
-                    - [Reverse-engineering PlayStation 1 3D games to control the camera]({% link ps1.md %})
-                - Software engineering career
-                    - [Attracting and retaining engineering talent]({% link engman.md %})
-                    - [Software engineer salary]({% link salary.md %})
-                    - [Netflix culture](https://jobs.netflix.com/culture)
-            - System administration
-                - [Administering Ubuntu]({% link ubuntu.md %})
-                - [SO 22697049: difference between Google App Engine and Google Compute Engine](https://stackoverflow.com/questions/22697049/what-is-the-difference-between-google-app-engine-and-google-compute-engine)
-            - Intelligence
-                - Doing the last work we will ever need
-                    - [Defining intelligence]({% link intwhat.md %})
-                    - [Making intelligence]({% link intelligence.md %})
-                    - Making machines understand language
-                    - How do we make machines curious?
-                    How do we make them get bored?
-                        - We know that intelligent people get bored quickly.
-                            - Why shouldn't intelligent machines get bored?
-                    - [Approximating functions]({% link approx.md %})
-            - Computational complexity
-                - [Trying to prove P neq. NP]({% link pnptry.md %})
+                - [Making contributable open-source projects]({% link opensrc.md %})
+                    - [Building online communities]({% link community.md %})
+                    - Maintaining open-source projects
+            - [Reverse software engineering]({% link reveng.md %})
+                - [Reverse engineering the network protocol used by a Java desktop application]({% link rejava.md %}): a stock trading application written in Java 6
+                - [Reverse-engineering PlayStation 1 3D games to control the camera]({% link ps1.md %})
+            - [Managing software engineers]({% link engman.md %})
+            - [Software engineer salary]({% link salary.md %})
+        - [Administering a computer]({% link sysadm.md %})
+            - [Running X client applications on Docker on Linux]({% link dockerx.md %})
+        - [Using computers]({% link usecom.md %})
+            - [Searching the Internet]({% link search.md %})
+            - [Removing nag screens]({% link nag.md %})
+            - [Making a personal wiki]({% link perswiki.md %})
+            - [Buying a smartphone]({% link phone.md %})
+                - [Android vs iPhone]({% link andvsiph.md %})
+        - [Liberating software]({% link libersoft.md %})
+            - Searching
+                - Where does this fit in the hierarchy?
+                - [WP:Optimal stopping](https://en.wikipedia.org/wiki/Optimal_stopping)
+                - [Making a search engine]({% link srceng.md %})
+    - Computer science
+        - Intelligence
+            - Doing the last work we will ever need
+                - [Defining intelligence]({% link intwhat.md %})
+                - [Making intelligence]({% link intelligence.md %})
+                - Making machines understand language
+                - How do we make machines curious?
+                How do we make them get bored?
+                    - We know that intelligent people get bored quickly.
+                        - Why shouldn't intelligent machines get bored?
+                - [Approximating functions]({% link approx.md %})
+        - Computational complexity
+            - [Trying to prove P neq. NP]({% link pnptry.md %})
+    - [Getting rich]({% link getrich.md %})
         - [Investing]({% link invest.md %})
-        - Organizational studies
-            - [Spreading information in an organization]({% link spreadinf.md %})
-            - 2014, article, "Whose critical path are you on?", Philip J. Guo, [html](http://www.pgbovine.net/critical-path.htm)
-                - To get someone's attention, get on his critical path.
+        - [Justifying my value]({% link value.md %})
+    - Managing organizations
+        - [Spreading information in an organization]({% link spreadinf.md %})
+        - 2014, article, "Whose critical path are you on?", Philip J. Guo, [html](http://www.pgbovine.net/critical-path.htm)
+            - To get someone's attention, get on his critical path.
+        - [Netflix culture](https://jobs.netflix.com/culture)
+    - Understanding nature
         - [Justifying physics]({% link natkno.md %})
-        - Sociopolitics
-            - [Improving countries]({% link government.md %})
+        - [Justifying counterfactual reasoning]({% link cf.md %})
+    - Improving society
+        - [Improving countries]({% link government.md %})
             - [Politics]({% link politics.md %})
                 - [Solving the Israel-Palestine problem]({% link ispal.md %})
-                - [Politik Indonesia]({% link politik.md %})
-                    - [Censoring the Internet in Indonesia]({% link indocen.md %})
-                - [Living in Jakarta]({% link jakarta.md %})
                 - [Using the media in politics]({% link polmed.md %})
-            - Social
-                - Prevent social isolation.
-                Social isolation causes violence and extremism.
-                    - [YT:I Was Almost A School Shooter \| Aaron Stark \| TEDxBoulder](https://www.youtube.com/watch?v=azRl1dI-Cts)
-                        - Bullying is part of the social isolation vicious circle.
-            - Achieving independence
-                - [Achieving energy independence]({% link energy.md %})
-                - Demonopolizing the ability to do violence?
-                    - People who care (and thus readily mobilize) are less oppressable than people who don't.
-                        - How do we get people to care about and participate in politics?
-                    - Online campaigns/petitions.
-                        - [Technology can give political power back to the people - New Scientist](https://www.newscientist.com/article/mg22630182-800-technology-can-give-political-power-back-to-the-people/)
-                    - Using the Internet (social media, messaging, forum, etc.) to incite people?
-                    - Teach people how to participate democracy?
-                        - If shit gets to the top, people have only themselves to blame.
-                            - Democracy means they could have prevented that shit.
-                                - But they were apathetic.
-                                They didn't care.
-                                They gave up before even trying.
-                                So that shit rose without any obstacles.
-                - Automating politics/governments/law?
-                - Empowering people with distributed local technology?
-                    - Take power away from governments and elites, and give it back to the masses?
-                        - Isn't that mobocracy/ochlocracy?
-                        Anarchy?
-                        Do we want?
-                            - [RationalWiki: Difference between anarchy and mobocracy](https://rationalwiki.org/wiki/Anarchy#Contrast_with_mobocracy)
-        - [Doing research better]({% link meta_research.md %})
-            - [Organizing knowledge]({% link knorg.md %})
-                - [Rebooting human knowledge in case of mass destruction]({% link reboot.md %})
-                - The page [Information architecture]({% link infarch.md %}) should be merged into "Organizing knowledge".
-        - Self-care
-            - [Living in the 21st century]({% link living.md %})
-                - Using technology
-                    - [Using computers]({% link usecom.md %})
-                        - [Searching the Internet]({% link search.md %})
-                        - [Removing nag screens]({% link nag.md %})
-                        - [Making a personal wiki]({% link perswiki.md %})
-                    - [Buying a smartphone]({% link phone.md %})
-                        - [Android vs iPhone]({% link andvsiph.md %})
-                - [Growing muscles]({% link muscle.md %})
-                - Hidup di Indonesia abad 21
-                    - Memakai hak warga negara
-                        - BPJS?
-                            - [Cek saldo BPJS](https://daftar.bpjs-kesehatan.go.id/bpjs-checking/)
-                            - [Ini registrasi apa?](https://sso.bpjsketenagakerjaan.go.id/registrasi.bpjs)
-                            Kenapa harus registrasi?
-                        - [BTPN Jenius?]({% link btpn.md %})
-                        - Mendirikan perusahaan?
-                            - Bagaimana?
-                            - Bayar berapa?
-                            - Berapa lama?
-                            - Apa keuntungan pajak?
-                        - Jangan abstain dalam pemilu.
-                        Lihat argumen [/u/kolormelar](https://www.reddit.com/r/indonesia/comments/968qbs/ajakan_untuk_yang_tidak_cocok_dengan_pasangan/e3yw8bd/).
-        - [Mathematics]({% link math.md %})
-            - [Learning mathematics]({% link mathlearn.md %})
-            - [Teaching mathematics]({% link mathedu.md %})
-            - [Generalizing division]({% link division.md %})
-            - [Solving the Clay millennium prize problems]({% link clay_math.md %})
-            - Writing mathematics
-                - 1989, article, "Mathematical writing", Donald E. Knuth, Tracy Larrabee, and Paul M. Roberts, [pdf](http://jmlr.csail.mit.edu/reviewing-papers/knuth_mathematical_writing.pdf)
-                    - "Many readers will skim over formulas on their first reading of your exposition.
-                    Therefore, your sentences should flow smoothly when all but the simplest formulas are replaced by 'blah' or some other grunting noise. (p. 3)
-        - [Writing]({% link writing.md %})
-        - [Justifying counterfactual reasoning]({% link cf.md %})
-        - [Justifying my value]({% link value.md %})
-    - Feeling
-        - Spirituality
-            - [Choosing a religion]({% link relch.md %})
-            - [Obtaining magickal powers]({% link magick.md %})
-                - [Experimenting with magick]({% link magexp.md %})
-            - [Learning Mandarin]({% link mandarin.md %})
-            - [Learning Japanese]({% link japanese.md %})
-- Things I'm no longer interested in
-    - [Learning to play mahjong]({% link mahjong.md %})
-    - [Learning to play the violin]({% link violin.md %})
-    - [Art]({% link art.md %})
-        - [Music]({% link music.md %})
-        - [Acting]({% link act.md %})
-    - [Entertainment]({% link entertain.md %})
-        - [Game]({% link game.md %})
+        - Preventing social isolation
+            Social isolation causes violence and extremism.
+                - [YT:I Was Almost A School Shooter \| Aaron Stark \| TEDxBoulder](https://www.youtube.com/watch?v=azRl1dI-Cts)
+                    - Bullying is part of the social isolation vicious circle.
+            - [YT:Cohousing communities help prevent social isolation](https://www.youtube.com/watch?v=DmWrx0ntATU)
+        - Achieving independence
+            - [Achieving energy independence]({% link energy.md %})
+            - Demonopolizing the ability to do violence?
+                - People who care (and thus readily mobilize) are less oppressable than people who don't.
+                    - How do we get people to care about and participate in politics?
+                - Online campaigns/petitions.
+                    - [Technology can give political power back to the people - New Scientist](https://www.newscientist.com/article/mg22630182-800-technology-can-give-political-power-back-to-the-people/)
+                - Using the Internet (social media, messaging, forum, etc.) to incite people?
+                - Teach people how to participate democracy?
+                    - If shit gets to the top, people have only themselves to blame.
+                        - Democracy means they could have prevented that shit.
+                            - But they were apathetic.
+                            They didn't care.
+                            They gave up before even trying.
+                            So that shit rose without any obstacles.
+            - Automating politics/governments/law?
+            - Empowering people with distributed local technology?
+                - Take power away from governments and elites, and give it back to the masses?
+                    - Isn't that mobocracy/ochlocracy?
+                    Anarchy?
+                    Do we want?
+                        - [RationalWiki: Difference between anarchy and mobocracy](https://rationalwiki.org/wiki/Anarchy#Contrast_with_mobocracy)
+    - [Doing research better]({% link meta_research.md %})
+        - [Organizing knowledge]({% link knorg.md %})
+            - [Rebooting human knowledge in case of mass destruction]({% link reboot.md %})
+            - The page [Information architecture]({% link infarch.md %}) should be merged into "Organizing knowledge".
+    - Living in the 21st century
+        - [What kind of world are we living in?]({% link world.md %})
+            - [WP:21st century](https://en.wikipedia.org/wiki/21st_century)
+            - [WP:21st century skills](https://en.wikipedia.org/wiki/21st_century_skills)
+            - [YT:China is beyond cashless](https://www.youtube.com/watch?v=gysKE3POUv0)
+        - Grooming, styling, appearance
+            - [WP:Hairstyles](https://en.wikipedia.org/wiki/List_of_hairstyles)
+                - [Wearing long hair for men]({% link longhair.md %})
+            - [Naming articles of clothing]({% link cloth.md %})
+        - Health and fitness
+            - [Growing muscles]({% link muscle.md %})
+            - [Mouth care]({% link mouth.md %})
+            - [Eating]({% link eat.md %})
+                - [How to cook eggs]({% link egg.md %})
+        - Hidup di Indonesia abad 21
+            - [Politik Indonesia]({% link politik.md %})
+                - [Censoring the Internet in Indonesia]({% link indocen.md %})
+                - Memakai hak warga negara
+                    - BPJS?
+                        - [Cek saldo BPJS](https://daftar.bpjs-kesehatan.go.id/bpjs-checking/)
+                        - [Ini registrasi apa?](https://sso.bpjsketenagakerjaan.go.id/registrasi.bpjs)
+                        Kenapa harus registrasi?
+                    - [BTPN Jenius?]({% link btpn.md %})
+                    - Mendirikan perusahaan?
+                        - Bagaimana?
+                        - Bayar berapa?
+                        - Berapa lama?
+                        - Apa keuntungan pajak?
+                    - Jangan abstain dalam pemilu.
+                    Lihat argumen [/u/kolormelar](https://www.reddit.com/r/indonesia/comments/968qbs/ajakan_untuk_yang_tidak_cocok_dengan_pasangan/e3yw8bd/).
+                    - Pemerintah menyediakan akses ke jurnal berbayar? Di mana? Cara pakainya?
+            - [Living in Jakarta]({% link jakarta.md %})
+                - [Vital service failure log]({% link log.md %})
+        - Making a house
+            - [WP:List of human habitation forms](https://en.wikipedia.org/wiki/List_of_human_habitation_forms)
+        - [Fighting]({% link fight.md %})
+    - [Mathematics]({% link math.md %})
+        - [Learning mathematics]({% link mathlearn.md %})
+        - [Teaching mathematics]({% link mathedu.md %})
+        - [Generalizing division]({% link division.md %})
+        - [Solving the Clay millennium prize problems]({% link clay_math.md %})
+        - Writing mathematics
+            - 1989, article, "Mathematical writing", Donald E. Knuth, Tracy Larrabee, and Paul M. Roberts, [pdf](http://jmlr.csail.mit.edu/reviewing-papers/knuth_mathematical_writing.pdf)
+                - "Many readers will skim over formulas on their first reading of your exposition.
+                Therefore, your sentences should flow smoothly when all but the simplest formulas are replaced by 'blah' or some other grunting noise. (p. 3)
+    - [Writing]({% link writing.md %})
+        - [Working around Markdown]({% link markdown.md %})
+    - Spirituality
+        - [Choosing a religion]({% link relch.md %})
+        - [Obtaining magickal powers]({% link magick.md %})
+            - [Experimenting with magick]({% link magexp.md %})
+    - Learning languages
+        - [Learning Mandarin]({% link mandarin.md %})
+        - [Learning Japanese]({% link japanese.md %})
+        - Bahasa Indonesia
+            - Apa beda manjur, mempan, mujarab, dan mustajab?
 - Finding other information sources
     - Finding other wikis
         - [WP:List of wikis](https://en.wikipedia.org/wiki/List_of_wikis)
 - [Other unorganized contents]({% link other.md %})
+    - [Research]({% link research.md %})
+- [Things I've forlet]({% link forlet.md %})
 - How do I ask questions or suggest corrections?
     - Any of these:
         - Leave a Disqus comment in the related page.
         - [Open an issue on GitHub](https://github.com/edom/edom.github.io/issues).
-- What do you do?
-    - [Research]({% link research.md %})
-        - I collect and organize knowledge into this wiki.
-    - Music
-        - I play piano in the band [The Nomads]({% link nomads.md %}) (an Indonesian band, not the Swedish band).
-    - [About this website]({% link about.md %})
+- Music
+    - I play piano in the band [The Nomads]({% link nomads.md %}) (an Indonesian band, not the Swedish band).
+- [About this website]({% link about.md %})

@@ -1,5 +1,5 @@
 ---
-title: Software engineering management
+title: Managing software engineers
 permalink: /engman.html
 date: 2018-05-15 02:31:00 +0700
 ---
@@ -42,3 +42,37 @@ date: 2018-05-15 02:31:00 +0700
     - https://en.wikipedia.org/wiki/Sayre%27s_law
     - https://en.wikipedia.org/wiki/Law_of_triviality
 - [Amazon jobs came down to 3 questions, according to 1998 Bezos letter - INSIDER](https://www.thisisinsider.com/amazon-jobs-executive-questions-2018-8)
+- Software engineering career?
+    - recruiters?
+        - [triplebyte.com](https://triplebyte.com/)
+            - from [highscalability.com](http://highscalability.com/)
+            - ["Does it make sense for programmers to move to the bay area?"](https://triplebyte.com/blog/does-it-make-sense-for-programmers-to-move-to-the-bay-area)
+    - agencies?
+        - persuasions
+            - https://www.fastcompany.com/3008194/top-programmers-are-getting-agents-should-you
+            - https://www.infoworld.com/article/2886735/it-careers/should-you-hire-a-software-developer-talent-agent.html
+        - cynics
+            - http://valleywag.gawker.com/talent-agents-for-programmers-cant-wait-to-take-their-1-1660224273
+        - ungrouped
+            - https://www.quora.com/Is-there-such-a-thing-as-a-talent-agent-agency-for-software-engineers
+            - http://blog.alinelerner.com/why-talent-agents-for-engineers-dont-exist/
+            - http://wisecareers.com/articles/information-technology/talent-agents-representing-computer-programmers
+            - https://www.businessinsider.com/big-name-talent-agency-that-represents-coding-rock-stars-2014-11/?IR=T
+            - https://www.newyorker.com/magazine/2014/11/24/programmers-price
+            - https://freelancing.stackexchange.com/questions/6551/finding-talent-agents-for-software-developers
+            - https://news.ycombinator.com/item?id=8617452
+    - unions?
+        - [SE 9481 "Are there any unions for software developers?"](https://softwareengineering.stackexchange.com/questions/9481/are-there-any-unions-for-software-developers)
+        - https://news.ycombinator.com/item?id=13564440
+        - https://qz.com/916534/silicon-valley-tech-workers-are-talking-about-starting-their-first-union-in-2017-to-resist-trump/
+        - https://www.theatlantic.com/technology/archive/2011/06/why-it-workers-should-unionize/240810/
+        - https://www.reddit.com/r/programming/comments/3vuynn/programmers_dont_need_a_union_we_need_a_profession/
+        - https://www.quora.com/What-would-happen-if-there-was-a-programmers-union
+        - https://techcrunch.com/2013/07/29/why-labor-unions-and-silicon-valley-arent-friends-in-2-charts/
+    - interviews?
+        - ["How to interview engineers"](https://triplebyte.com/blog/how-to-interview-engineers)
+        - ["Why hiring is so hard in tech"](https://medium.com/javascript-scene/why-hiring-is-so-hard-in-tech-c462c3230017)
+        - ["Questions I'm asking in interviews"](https://jvns.ca/blog/2013/12/30/questions-im-asking-in-interviews/)
+        - ["The one method I've used to eliminate bad tech hires"](https://mattermark.com/the-one-method-ive-used-to-eliminate-bad-tech-hires/)
+            - [HN comments](https://news.ycombinator.com/item?id=12915809)
+        - [InterviewMap on GitHub](https://github.com/InterviewMap/InterviewMap)

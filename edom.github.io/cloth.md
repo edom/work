@@ -1,9 +1,10 @@
 ---
-title: Clothing
+title: Naming articles of clothing
 permalink: /cloth.html
 date: 2017-06-09 00:59:00 +0700
 ---
 
+- Common problem: "What do you call that thing you wear?"
 - ontology
     - https://www.quora.com/Does-there-exist-an-ontology-standard-for-clothing-item-categories
         - 2018: no
@@ -53,6 +54,8 @@ date: 2017-06-09 00:59:00 +0700
         - accessories
             - [WP:Sash](https://en.wikipedia.org/wiki/Sash)
             - wristband, elbow band, knee band, armband, upper armband
+            - necklace
+                - cowboy necklace
         - aggregates
             - apparel
             - fashion
@@ -76,6 +79,7 @@ date: 2017-06-09 00:59:00 +0700
         - comparisons, differences
             - shirt vs T-shirt
                 - T-shirts don't have buttons.
+    - [Article of clothing - definition of article of clothing by The Free Dictionary](https://www.thefreedictionary.com/article+of+clothing)
 - Opinions
     - Jeans (denim bottoms) look cool, but denim tops look tacky.
 - Why do clothes have seams?

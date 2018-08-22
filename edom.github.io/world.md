@@ -20,3 +20,5 @@ permalink: /world.html
     not because I have any rights.
 - Our descendants will see us as insane, the same way we 21st century people see our Dark Ages ancestors as insane.
     - [WP:Dark Ages](https://en.wikipedia.org/wiki/Dark_Ages_(historiography))
+- Distrust is the norm.
+    - 21st century is full of fake news and disinformation spreading via the Internet, especially social media.

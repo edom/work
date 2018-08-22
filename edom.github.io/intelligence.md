@@ -365,3 +365,27 @@ patternicity, agenticity, pattern over-recognition, false positive, false negati
 - 2018 AI is like autistic savants.
 They perform one task exceptionally well, but they are bad at everything else.
     - 2018, [DeepMind's AI Takes An IQ Test - YouTube](https://www.youtube.com/watch?v=eSaShQbUJTQ)
+- AI
+    - 2007, article, "Self-taught Learning: Transfer Learning from Unlabeled Data", [pdf](https://cs.stanford.edu/people/ang/papers/icml07-selftaughtlearning.pdf)
+    - https://en.wikipedia.org/wiki/Category:Open-source_artificial_intelligence
+    - https://en.wikipedia.org/wiki/Commonsense_knowledge_(artificial_intelligence)
+    - 2010, article, [A grand unified theory of AI - MIT News](https://news.mit.edu/2010/ai-unification)
+    - 2016, article, [AI Research Trends - One Hundred Year Study on Artificial Intelligence (AI100)](https://ai100.stanford.edu/2016-report/section-i-what-artificial-intelligence/ai-research-trends)
+    - sequence learning?
+        - https://devblogs.nvidia.com/deep-learning-nutshell-sequence-learning/
+        - https://en.wikipedia.org/wiki/Sequence_learning
+    - AI perception of time?
+- https://www.quora.com/Does-the-human-brain-have-an-internal-language
+    - mereological fallacy, confusing the part and the whole
+- https://www.quora.com/Is-the-human-brain-analog-or-digital
+https://en.wikipedia.org/wiki/Mereological_essentialism
+- machine learning
+    - [Avik-Jain/100-Days-Of-ML-Code: 100 Days of ML Coding](https://github.com/Avik-Jain/100-Days-Of-ML-Code)
+- Justifying consciousness using evolution?
+    - [The biological function of consciousness](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4122207/)
+    - [How does sentience benefit survival and why is it developed? - Quora](https://www.quora.com/How-does-sentience-benefit-survival-and-why-is-it-developed)
+- https://www.quora.com/How-do-I-publish-artificial-intelligence-research-if-I-am-not-currently-in-academia-or-an-industry-research-setting
+- [How does life fight against entropy? - Quora](https://www.quora.com/How-does-life-fight-against-entropy)
+- Life and entropy
+    - [How does life fight against entropy? - Quora](https://www.quora.com/How-does-life-fight-against-entropy)
+    - [WP:Entropy and life](https://en.wikipedia.org/wiki/Entropy_and_life)

@@ -21,22 +21,23 @@ date: 2018-07-22 02:45 +0700
             - Improve/enhance, not supersede.
         - Mixing the old and new languages should be easy.
         - 2013, article, "Empirical analysis of programming language adoption", [pdf](http://sns.cs.princeton.edu/docs/asr-oopsla13.pdf)
-- ontology and programming
-    - "ontoprog: Ontology-based Programming: Extended Semantics for OOP languages", [github](https://github.com/andreasBihlmaier/ontoprog)
-    - 2012, article, "Modeling the Knowledge Domain of the Java Programming Language as an Ontology", [pdf](http://eeyem.eap.gr/wp-content/uploads/2017/06/11_ICWL2012.pdf)
-    - 2007, article, "Towards a programming language ontology", [pdf](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.82.194&rep=rep1&type=pdf)
-- A goal of programming language research is to make a better programming language?
+- A goal of programming language research is to make a better programming language (if not the best).
     - Do more with less.
     - *The* ultimate best programming language?
+- Basic assumptions
+    - Computer (machine) is embodied formal system.
+        - Assume no hardware fault.
+    - Software is executable mathematics.
 - The [Sixten](https://github.com/ollef/sixten) language might be a good starting point.
-- Computer (machine) is embodied formal system.
-    - Assume no hardware fault.
-- Software is executable mathematics.
 - Every functional programming language is lambda calculus plus plus.
     - Every functional programming language L can be modeled by a category C(L) whose objects are the types of L and arrows are the function expressions of L.
     - I thought lambda calculus could be summarized in one page, but Henk Barendregt wrote hundreds of pages about it. Is there more to lambda calculus than it seems?
         - 1994, 50 pages, http://www.nyu.edu/projects/barker/Lambda/barendregt.94.pdf
         - 1991, 190 pages, https://people.mpi-sws.org/~dreyer/tor/papers/barendregt.pdf
+- ontology and programming
+    - "ontoprog: Ontology-based Programming: Extended Semantics for OOP languages", [github](https://github.com/andreasBihlmaier/ontoprog)
+    - 2012, article, "Modeling the Knowledge Domain of the Java Programming Language as an Ontology", [pdf](http://eeyem.eap.gr/wp-content/uploads/2017/06/11_ICWL2012.pdf)
+    - 2007, article, "Towards a programming language ontology", [pdf](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.82.194&rep=rep1&type=pdf)
 - where to find more
     - recent programming language research
         - meetings, conferences, symposiums
@@ -468,3 +469,104 @@ functional languages for systems programming?
     - Golang
     - Ruby gem and bundler
     - Python pip
+- relationship between Aspect-Oriented Programming and Functional Programming
+    - 2009, article, "What Does Aspect-Oriented Programming Mean for Functional Programmers?", [pdf](https://www.cs.ox.ac.uk/files/2282/wgp14-wang.pdf)
+    - 2008, article, "On Feature Orientation and Functional Programming", [pdf](https://pdfs.semanticscholar.org/522e/b6c2ea910ed074a13fe21767c9fa070fb685.pdf)
+    - 2016, article, "Realtime collaborative editor. Algebraic properties of the problem.", [html](http://blog.haskell-exists.com/yuras/posts/realtime-collaborative-editor.html)
+        - see also Darcs patch theory
+    - 2008, PhD thesis, "An Integrated System to Manage Crosscutting Concerns in Source Code", [pdf](http://wwwtmp.st.ewi.tudelft.nl/arie/phds/Marin.pdf)
+    - 2003, article, "Language-independent aspect-oriented programming", [pdf available](http://www.tara.tcd.ie/handle/2262/32627)
+- algebraic subtyping
+    - http://www.cl.cam.ac.uk/~sd601/papers/mlsub-preprint.pdf
+    - https://www.cl.cam.ac.uk/~sd601/thesis.pdf
+    - https://cs.stackexchange.com/questions/53998/what-are-the-major-differences-between-row-polymorphism-and-subtyping
+    - https://www.cl.cam.ac.uk/teaching/1415/L28/rows.pdf
+    - 2017, "Introduction to homotopy type theory", http://www.cs.nott.ac.uk/~psztxa/ss-types-17/notes-summer17.pdf
+    - http://www.cs.nott.ac.uk/~psztxa/ss-types-17/
+    - https://homotopytypetheory.org/book/
+    - https://en.wikipedia.org/wiki/Subtyping
+    - https://en.wikipedia.org/wiki/Circle-ellipse_problem
+    - What does "X is a Y" mean?
+    It means P(X) => P(Y) for every predicate P.
+    Liskov substitution principle.
+    Does it mean "X is a subclass of Y" or "X is an instance of Y"?
+- Great Works in Programming Languages, Collected by Benjamin C. Pierce http://www.cis.upenn.edu/~bcpierce/courses/670Fall04/GreatWorksInPL.shtml
+- to read? "theories of programming languages reynolds"
+- 2017, book, "Principles of Programming Languages" https://www.cs.bgu.ac.il/~mira/ppl-book-full.pdf
+- 2003, article, "Composing Programming Languages by Combining Action-Semantics Modules" http://www.brics.dk/RS/03/53/BRICS-RS-03-53.pdf
+- 2001, position paper, "Composition Languages for Black-Box Components" http://scg.unibe.ch/archive/papers/Wuyt01c.pdf
+- glue: Make better services. (deprecated) https://hackage.haskell.org/package/glue
+- Type systems
+    - recursive types http://ecee.colorado.edu/~siek/ecen5013/spring10/lecture15.pdf
+    - http://tomasp.net/coeffects/
+    - 2008, article, "Church and Curry: Combining Intrinsic and Extrinsic Typing", Frank Pfenning https://www.cs.cmu.edu/~fp/papers/andrews08.pdf
+- yet another music programming language https://github.com/alda-lang/alda
+- linearscan: Linear scan register allocator, formally verified in Coq; 2004, master thesis, https://hackage.haskell.org/package/linearscan
+- Lastik: A library for compiling programs in a variety of languages (Java, Scala, C#) https://hackage.haskell.org/package/Lastik
+- risc386: Reduced instruction set i386 simulator https://hackage.haskell.org/package/risc386
+- 2017, "Theorems for Free for Free", Wadler http://homepages.inf.ed.ac.uk/wadler/topics/blame.html
+    - What is "polymorphic blame calculus"?
+- https://idris.readthedocs.io/en/v1.3.0/faq/faq.html#what-are-the-differences-between-agda-and-idris
+    - "Why does Idris use eager evaluation rather than lazy?"
+        - "What is the representation of `thing` at run-time? Is it a bit pattern representing an integer, or is it a pointer to some code which will compute an integer? In Idris, we have decided that we would like to make this distinction precise [...]"
+        - Idris has laziness, but you have to be explicit.
+- https://en.wikipedia.org/wiki/Automatic_programming
+- https://en.wikipedia.org/wiki/Program_synthesis
+- https://www.cs.cmu.edu/~mleone/language-research.html
+- http://strategoxt.org/
+- "Confessions Of A Used Programming Language Salesman: Getting The Masses Hooked On Haskell", Erik Meijer, [pdf](https://pdfs.semanticscholar.org/233a/932b3e94f1f117655e4862995b32f33754be.pdf)
+    - What are the key points?
+- 1966, article, P. J. Landin, "The next 700 programming languages", [pdf](https://www.cs.cmu.edu/~crary/819-f09/Landin66.pdf)
+    - https://en.wikipedia.org/wiki/Off-side_rule
+- http://matt.might.net/articles/best-programming-languages/
+- Type systems
+    - Church types and Curry types
+        - https://lispcast.com/church-vs-curry-types/
+    - Liquid Haskell https://ucsd-progsys.github.io/liquidhaskell-blog/
+- [EWD641: On the interplay between mathematics and programming](http://www.cs.utexas.edu/users/EWD/ewd06xx/EWD641.PDF)
+- http://hackage.haskell.org/package/Workflow
+- https://pchiusano.github.io/2017-01-20/why-not-haskell.html
+- http://unisonweb.org/2015-05-07/about.html#post-start
+- [facebook/duckling: Language, engine, and tooling for expressing, testing, and evaluating composable language rules on input strings.](https://github.com/facebook/duckling)
+- [GaloisInc/crucible: Crucible is a library for symbolic simulation of imperative programs](https://github.com/GaloisInc/crucible)
+- 2009, "Domain-Specific Languages for Composable Editor Plugins"
+    - [2009 slides pdf](https://pdfs.semanticscholar.org/presentation/85d8/bc42122ff5175be1ebc3c7b91e4abff55d22.pdf)
+    - [2010 article pdf](http://bora.uib.no/bitstream/handle/1956/9721/1-s2.0-S1571066110001179-main.pdf?sequence=1)
+- why not PEG parsing
+    - http://jeffreykegler.github.io/Ocean-of-Awareness-blog/individual/2015/03/peg.html
+- From Wadler home page
+    - [From Data Types to Session Types: A Basis for Concurrency and Distribution](http://groups.inf.ed.ac.uk/abcd/)
+- answer set programming
+    - [News: Speed up solving complex problems: be lazy and only work crucial tasks - Aalto University](http://cs.aalto.fi/en/current/news/2018-07-18/)
+        - 2018, article, "Exploiting Justifications for Lazy Grounding of Answer Set Programs", [pdf](https://www.ijcai.org/proceedings/2018/0240.pdf)
+- [Idris as a Library - BAM Weblog](https://brianmckenna.org/blog/idris_library)
+    - Idris as compiler backend
+- Prolog ontology?
+    - What is the relationship between Prolog, logic programming, ontology, and relational databases?
+        - [What are ontology can do, but relational database can not? - Stack Overflow](https://stackoverflow.com/questions/29062541/what-are-ontology-can-do-but-relational-database-can-not)
+            - [Ontologies and DB Schema: What's the Difference?](https://www.slideshare.net/UscholdM/ontologies-and-db-schema-whats-the-difference)
+            - 2011, article, "Ontologies versus relational databases: Are they so different? A comparison", [pdf available](https://www.researchgate.net/publication/251332115_Ontologies_versus_relational_databases_Are_they_so_different_A_comparison)
+            - 2010, article, "Mapping between Relational Databases and OWL Ontologies: an example", [pdf](https://www.lu.lv/materiali/apgads/raksti/756_pp_99-117.pdf)
+    - [Salmon Run: Ontology Rules with Prolog](http://sujitpal.blogspot.com/2009/06/ontology-rules-with-prolog.html)
+    - [SWI-Prolog for the (semantic) web](http://www.swi-prolog.org/web/)
+- [Paul Chiusano: If Haskell is so great, why hasn't it taken over the world? And the curious case of Go.](https://pchiusano.github.io/2017-01-20/why-not-haskell.html)
+    - Unison programming language
+- [Morte: an intermediate language for super-optimizing functional programs](http://www.haskellforall.com/2014/09/morte-intermediate-language-for-super.html) - Incremental λ-Calculus
+- Parsing
+    - Can we parse incrementally?
+        - Differentiating Parsers
+        Automatic derivation of incremental parser from a grammar or a non-incremental parser?
+        Like automatic differentiation but generalized to any program?
+        http://lambda-the-ultimate.org/node/3704
+        - http://matt.might.net/articles/implementation-of-regular-expression-matching-in-scheme-with-derivatives/
+        - Parsing with derivatives?
+        https://hackage.haskell.org/package/derp
+        https://arxiv.org/abs/1010.5023
+        http://matt.might.net/articles/parsing-with-derivatives/ "Yacc is dead"
+        - Type-directed automatic incrementalization
+        http://www.cs.cmu.edu/~joshuad/papers/incr/
+        - https://en.wikipedia.org/wiki/Incremental_computing
+        https://inc-lc.github.io/
+        - http://okmij.org/ftp/continuations/differentiating-parsers.html
+        - https://hackage.haskell.org/package/incremental-parser
+        - Brzozowski quotient

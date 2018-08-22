@@ -1,5 +1,5 @@
 ---
-title: Long-haired men
+title: Wearing long hair for men
 date: 2018-05-22 03:45:00 +0700
 permalink: /longhair.html
 ---

@@ -61,3 +61,6 @@ Can machine cluster documents by the task they help accomplish?
     - https://www.quora.com/What-is-the-best-way-to-organize-a-company-wiki
 - Knowledge is only as good as what it enables you.
     - 2013, article, [Knowledge is no longer power; How you use knowledge is power!](https://www.k4health.org/blog/post/knowledge-no-longer-power-how-you-use-knowledge-power)
+- knowledge organization?
+    - 2016, article, [Scaling Knowledge at Airbnb – Airbnb Engineering & Data Science – Medium](https://medium.com/airbnb-engineering/scaling-knowledge-at-airbnb-875d73eff091)
+    - 2018, article, [Using Airbnb's Knowledge Repository to Scale Your Organization's Knowledge - SocialCops](https://blog.socialcops.com/technology/engineering/airbnb-knowledge-repository-scale-knowledge/)

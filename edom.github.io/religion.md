@@ -113,3 +113,22 @@ I wish you all the best.
 - [Measuring Five Dimensions of Religiosity across Adolescence](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5602559/)
 - Attacking people's beliefs will activate their amygdala,
 resulting in fight-or-flight response?
+- Every religion started out as something good.
+It civilized its community.
+However, after 1000 years, people got too attached to religion, and religion loses its benefits.
+    - History of Islam
+        - Islam civilized Arabia.
+            - [Arabia before Islam - A Restatement of the History of Islam and Muslims - Books on Islam and Muslims - Al-Islam.org](https://www.al-islam.org/restatement-history-islam-and-muslims-sayyid-ali-ashgar-razwy/arabia-islam)
+                - Before Islam, Arabia consisted of constantly warring tribes.
+            - Before Islam, a man can take an unlimited number of wives.
+            - Islam limited it to four, and requires that the man take care of the wives properly.
+                - That's a big change: from unlimited to four!
+        - [Islam destroyed its own "Golden Age" - Neil deGrasse Tyson & Steven Weinberg - YouTube](https://www.youtube.com/watch?v=BvkBlpfbFJM)
+            - There was Islamic Golden Age, but it ended tragically.
+                - Are the Gulf Nations allergic to science?
+                - What is the Muslim Brotherhood's idea of education?
+            - [WP:Al-Ghazali](https://en.wikipedia.org/wiki/Al-Ghazali) has a role in the downfall.
+            - [Islamic Golden Age - Wikipedia](https://en.wikipedia.org/wiki/Islamic_Golden_Age)
+        - [Why Does the Muslim World Lag in Science? | Middle East Forum](https://www.meforum.org/articles/other/why-does-the-muslim-world-lag-in-science), too long
+- To everyone, especially religious people:
+    - Why do you let someone else decide what/how you should think?

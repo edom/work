@@ -29,3 +29,13 @@ date: 2018-07-24 15:00 +0700
 - Your project must have a readme and a contributor guidelines.
     - https://help.github.com/articles/setting-guidelines-for-repository-contributors/
     - Make it easy for people to contribute.
+- Maintaining open source projects
+    - [nayafia/awesome-maintainers: Talks, blog posts, and interviews about the experience of being an open source maintainer](https://github.com/nayafia/awesome-maintainers)
+    - [André Staltz - Open source without maintainers](https://staltz.com/open-source-without-maintainers.html)
+    - [Best Practices for Maintainers - Open Source Guides](https://opensource.guide/best-practices/)
+- [How open source took over the world](https://www.theinquirer.net/inquirer/feature/3013459/how-open-source-took-over-the-world)
+- 2010, article, "Sustainability of Free/Libre Open Source Projects: A Longitudinal Study", [pdf](https://pdfs.semanticscholar.org/934e/0e87df10ca51138e3fe857a2de216787cbef.pdf)
+- [The Open Source Definition - Open Source Initiative](https://opensource.org/osd)
+    - "Open source doesn't just mean access to the source code."
+- open source development methodology
+    - [Shame-driven development – Rafał Pocztarski – Medium](https://medium.com/@pocztarski/shame-driven-development-4545fae46fd)

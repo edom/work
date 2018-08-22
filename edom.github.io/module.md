@@ -118,3 +118,59 @@ Human and computer.
         - http://www.haskellforall.com/2016/12/dhall-non-turing-complete-configuration.html
     - Elixir can pattern-match maps (dictionaries).
 - What is a module in an untyped functional programming language such as Tulip?
+- Finding a programming language for programming in the large
+    - Ecosystem, libraries, tools, and communities.
+    - The most important thing in programming in the large is name management.
+    Namespaces.
+        - C has two namespaces: type namespace and value namespace.
+        - Haskell has two namespaces: type namespace and value namespace.
+        - Java has better namespacing than C.
+        - Enable the same name to be used in different context, so that you can write `get_name employee` and `get_name company` instead of `employee_get_name employee` or `company_get_name company`.
+            - Ad-hoc polymorphism.
+    - Which one has the biggest community?
+    - Which one has a decent IDE?
+    - Which community puts their money on where their mouth is?
+    - Comparing type systems
+        - [The Typed Racket Guide](https://docs.racket-lang.org/ts-guide/)
+        - F#
+        - SML
+        - Caml
+        - OCaml
+        - Idris, Agda
+        - Coq, Lean
+        - Haskell
+        - 2004, chapter, "Type systems", Luca Cardelli, [pdf](http://lucacardelli.name/Papers/TypeSystems.pdf)
+            - from https://www.artima.com/forums/flat.jsp?forum=106&thread=185420
+            - 2005, book, "Advanced topics in types and programming languages", Benjamin C. Pierce (editor)
+                - Part IV, "Types for Programming in the Large"
+            - 2002, book, "Types and programming languages", Benjamin C. Pierce
+        - Java, Kotlin, Scala
+        - Things that annoy me
+            - ML, SML, Caml, OCaml: `'a tf` is somewhat annoying. It should have been `tf a`.
+                - F# uses `tf<'a>`.
+                - Haskell uses `Tf a`.
+            - Would you rather type `'a list` (F#) or deal with an inadequate record/module system (Haskell)?
+            - Haskell doesn't have `instance Read (->)` and `instance Show (->)`.
+                - Haskell expressions are not first-class citizen in the language.
+                    - Unlike Lisp/Scheme.
+                - Encumbers metaprogramming.
+        - OCaml labels and polymorphic variants?
+            - http://caml.inria.fr/pub/docs/manual-ocaml-400/manual006.html
+            - OCaml labels are somewhat similar to Scheme keyword arguments.
+        - F# quotations is important for metaprogramming.
+        - F# doesn't do ad-hoc polymorphism well?
+            - [Ad-hoc Polymorphism in F# (how to survive without Type Classes) - Without the loop](https://withouttheloop.com/articles/2014-10-21-fsharp-adhoc-polymorphism/)
+            - [Higher-kinded Polymorphism: What is it, why you want it · David Raab](https://sidburn.github.io/blog/2016/03/24/higher-kinded-polymorphism)
+        - https://cstheory.stackexchange.com/questions/40705/why-did-caml-become-ocaml-or-why-use-objects-in-f
+        - ML begat Caml. Caml begat Caml Light? Caml Light begat OCaml?
+        - [How does F# compare to OCaml, in regard to major syntactic differences, paradigm shifts, and interoperability with Windows? What about its numeric capabilities? - Quora](https://www.quora.com/How-does-F-compare-to-OCaml-in-regard-to-major-syntactic-differences-paradigm-shifts-and-interoperability-with-Windows-What-about-its-numeric-capabilities)
+            - Jon Harrop claims. More sources needed. Take it with a grain of salt.
+                - "OCaml has an integrated full-blown macro system in the form of Camlp4 whereas F# does not have macros and, in fact, has been deliberately closed off in order to discourage people from creating products that compete with Visual Studio."
+                    - "deliberately closed off [...]" is a bold claim.
+    - [Are all languages basically the same? - Software Engineering Stack Exchange](https://softwareengineering.stackexchange.com/questions/155239/are-all-languages-basically-the-same/155243)
+- package/dependency management tools
+    - Java: Maven, Gradle
+    - OCaml: OPAM
+    - Haskell: Cabal, Stack
+    - F#: Paket? NuGet?
+    - C/C++: conan? chocolate? vcpkg?

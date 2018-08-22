@@ -149,3 +149,25 @@ American individualisn, Russian collectivism
     - Gaia: The Actual Truth About Fluoride, [youtube](https://www.youtube.com/watch?v=HAagzF6D-nE)
 - [Political compass](https://www.politicalcompass.org/): plotting economical-political views in two-dimensional space
 - [China’s all-powerful leader should heed the lessons from history, former official says - The Washington Post](https://www.washingtonpost.com/world/asia_pacific/chinas-all-powerful-leader-should-heed-the-lessons-from-history-former-official-says/2017/11/09/22e7987a-c39a-11e7-a441-3a768c8586f1_story.html?noredirect=on&utm_term=.5dcdb36d3ff0)
+- We should limit inheritance.
+    - Each child should inherit at most 1 house, 1 car, and cash sufficient for him to reach an age of 30.
+- [Why the wars America starts are unwinnable - Danny Sjursen - YouTube](https://www.youtube.com/watch?v=o0ONByhAHC4)
+- [What America gets wrong about China and the rest of Asia - David Kang - YouTube](https://www.youtube.com/watch?v=U7DdgUAWR-s)
+    - China isn't a rising power. It has always been big.
+    - Big nations have big internal (intra-nation) struggles.
+    - Most big nations (such as the old Chinese dynasties) fall due to internal struggles.
+- [Richard Dawkins: No, Not All Opinions Are Equal—Elitism, Lies, and the Limits of Democracy - YouTube](https://www.youtube.com/watch?v=pe4feBH0ABk)
+    - Not all opinions are equal.
+        - This goes back to Socrates.
+    - If you have a surgery, you want an expert surgeon.
+    - If you have a concert, you want an expert musicians.
+    - Why then, when it comes to Brexit, do people suddently think they are expert politicians?
+        - The people voting for Brexit might not even understand what the European Union is.
+- Has Google been artificially diversifying its employees by discriminating against Caucasian and Asian men?
+See James Damore lawsuit.
+    - [James Damore on Twitter](https://twitter.com/jamesadamore)
+- [Why societies collapse \| Jared Diamond - YouTube](https://www.youtube.com/watch?v=IESYMFtLIis)
+    - One possible reason:
+        - conflict of interest
+            - Elites make self-serving decisions that are good for themselves in the short term but bad for the society in the long term.
+            - Those elites don't directly feel the bad consequences of their decisions.

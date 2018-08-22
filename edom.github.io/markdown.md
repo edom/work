@@ -1,5 +1,5 @@
 ---
-title: Markdown sucks
+title: Working around Markdown
 permalink: /markdown.html
 date: 2018-08-21 20:31 +0700
 ---

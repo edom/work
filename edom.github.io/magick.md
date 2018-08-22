@@ -205,3 +205,20 @@ date: 2018-05-17 01:21 +0700
         - https://www.reddit.com/r/AskReddit/comments/6prmsk/serious_redditors_who_use_to_not_believe_in_the/
         - https://www.reddit.com/r/AskReddit/comments/6ryogk/serious_redditors_who_believe_in_the_paranormal/
         - https://www.reddit.com/r/Thetruthishere/comments/5bq8fj/what_is_the_most_convincing_paranormal_evidence/
+- Parapsychology.
+Some interesting anecdotes.
+Still looking for replicable experiment.
+    - [Koestler parapsychology unit of University of Edinburgh](https://koestlerunit.wordpress.com/)
+- astral travel, remote viewing, out-of-body experience, near-death experience
+    - https://allaboutheaven.org/observations/1122/127/swann-ingo-out-of-body-to-mercury-003207
+    - https://www.quora.com/Is-astral-projection-true-If-so-has-anyone-done-it-Is-there-a-standard-procedure
+    - http://www.nderf.org/
+    - [AWARE study initial results are published!](https://iands.org/news/news/front-page-news/1060-aware-study-initial-results-are-published.html)
+    - https://www.resuscitationjournal.com/article/S0300-9572%2814%2900739-4/pdf
+    - ["Experiments Proving Astral Projection is Real"](https://www.youtube.com/watch?v=bjQxwm9vuiE)
+- central premonitions registry
+    - 1968, http://www.weirduniverse.net/blog/comments/central_premonitions_registry
+    - 2017, https://scry.cloud/
+- dying, near-death experiences
+    - [YT:From life to death, beyond and back - Thomas Fleischmann - TEDxTUHHSalon](https://www.youtube.com/watch?v=mMYhgTgE6MU)
+- [WP:Dream telepathy](https://en.wikipedia.org/wiki/Dream_telepathy)

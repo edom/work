@@ -17,7 +17,23 @@ date: 2017-05-20 21:29:00 +0700
 - Undigested information
     - [YC:The sad state of personal knowledgebases](https://news.ycombinator.com/item?id=10739227)
     - [Quora: Which is better, Markdown or Textile?](https://www.quora.com/Which-is-better-Markdown-or-Textile?share=1)
-
+- Why do we write?
+    - Because someone needs to read it.
+        - At least your future self should need to read it.
+    - The reader is the writer's reason for existing.
+    - If you can't think of anyone who would read it, don't write it.
+- What should we write?
+    - Something that someone needs to read.
+- Why do we read?
+What do we need to read?
+    - Why do we need anything?
+        - Either for survival or for curiosity.
+        - Human brain has evolved two instincts: survival and curiosity.
+            - We become anxious when our survival is threatened.
+            - We become happy when our curiosity is satisfied.
+            - We become bored when we run out of things that make us curious.
+        - Thus the root cause of every human action is either survival or curiosity.
+    - Thus we read to survive (avoid death) and decuriousify (to avoid boredom).
 - Why do I write?
     - **To connect my future self and my past self**.
     Sometimes my past self makes a decision that my future self regrets.
