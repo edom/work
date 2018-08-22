@@ -5793,5 +5793,1056 @@ a, a \rightarrow b \vdash b
     Inductive False : Prop := .
     Inductive and (A B : Prop) : Prop := and : A -> B -> and A B.
 #+END_EXAMPLE
+* TODO Fix this incoherent Java ramble; don't read
+- Make it work
+- Make it maintainable
+- Make it efficient (only if needed)
+- Make it reusable (only if there is demand)
+- You Are Not Gonna Need It until proven otherwise, but this does not mean you do not need to anticipate.
+- There are many ways to write code that do the same thing. Prefer the way that is the easiest to read and change and needs the least maintenance.
+- Don't write getters and setters. Move the computation into the class, or use public fields.
+- Corollary: Use public fields for your DTOs (or move the computation there). http://stackoverflow.com/questions/10240372/jackson-field-based-serialization
+- Make value classes have final fields and a constructor.
+- Use Java wisely ("Object-assisted procedural programming").
+  https://www.quora.com/In-Object-Oriented-design-are-void-methods-bad
+- OBPP ("Object-based procedural programming"), term coined by Peter DiSalvo.
+- Java is not OOP; Java is OBPP.
+
+The Java language is the C language with automatic memory management and without preprocessor.
+
+C:
+
+#+BEGIN_SRC C
+    /* file MyClass.h */
+
+    #ifdef _MyClass_h_INCLUDED_
+    #define _MyClass_h_INCLUDED_
+
+    struct _MyClass;
+    typedef struct _MyClass MyClass;
+
+    MyClass* MyClass_new ();
+
+    int MyClass_myMethod (MyClass* this, Arg* arg);
+
+    #endif
+
+
+    /* file MyClass.c */
+
+    #include <MyClass.h>
+
+    static const int ONE = 1;
+
+    struct _MyClass {
+        int myField;
+    };
+
+    MyClass* MyClass_new () {
+        const int size = sizeof(MyClass);
+        MyClass* this = malloc(size);
+        memset(this, 0, size);
+        return this;
+    }
+
+    int MyClass_myMethod (MyClass* this, Arg* arg) {
+        this->myField = ONE + Arg_getField(arg);
+        return ONE;
+    }
+#+END_SRC
+
+Java:
+
+#+BEGIN_SRC java
+    /* file MyClass.java */
+    class MyClass {
+        private static final int ONE = 1;
+        private int myMethod (Arg arg) {
+            this.myField = ONE + arg.getField();
+            return ONE;
+        }
+    }
+#+END_SRC
+
+The essence is the same, but Java reduces the accidental complexity.
+
+Method chaining vs fluent
+Method chaining transforms the dot (method invocation) into semicolon (sequence point).
+
+Fluent is embedded DSL.
+
+- Don't use TestNG's @Test for SomethingExample?
+  Write a main method in a SomethingExample class instead?
+- Other stuffs https://github.com/jhalterman/failsafe
+- http://blog.ploeh.dk/2014/03/10/solid-the-next-step-is-functional/
+- http://martinfowler.com/bliki/RoleInterface.html
+- http://blog.ploeh.dk/2011/06/07/SOLIDCodeisnt/
+- https://www.jetbrains.com/help/idea/2016.2/code-inspection.html
+- object is closure; closure is object
+- LLVM is procedural core.
+*** Candidate solution: source-to-source translation
+*** Candidate solution: binary interoperability
+Translate Java class to LLVM IR.
+
+Translate Haskell to LLVM IR.
+
+Translate C to LLVM IR.
+
+Java has JNI.
+
+Constraints:
+
+- ABI-compatible with JNI:
+  JNI C libraries works without recompilation.
+
+Foreign.
+
+What's wrong:
+I want to edit the syntax tree.
+I don't care about spacing.
+
+The name is /structural editor/.
+projectional editor.
+
+https://www.facebook.com/notes/kent-beck/prune-a-code-editor-that-is-not-a-text-editor/1012061842160013/
+
+http://www.lamdu.org/
+
+http://projectured.org/
+** Improving the Java language
+Too much software is written in Java.
+
+Xtend
+
+Kotlin
+
+IDE support
+
+Top-level methods.
+** Metaprogramming
+#+BEGIN_EXAMPLE java
+{% raw %}
+    msg = "Hello";
+    c = Class.new;
+    c += {{ int foo; }};
+    c += {{
+        void sayHello ()
+        {
+            System.out.println($msg);
+        }
+    }};
+{% endraw %}
+#+END_EXAMPLE
+** Old
+This is my opinion on how to best use Java.
+
+Java, when used properly, should not be more verbose than C.
+*Java should be thought as enhanced C*.
+It adds these features:
+
+- namespacing
+- garbage collection
+- exception
+- limited functional programming
+- reflection (should be documented thoroughly when used)
+
+and it removes these features:
+
+- preprocessor
+- separate header files
+
+Java sucks least when used as a *mainly procedural* programming language.
+
+Subclassing, public fields, getters, setters, statics,
+mutability, and big classes are not evil in and of themselves.
+What is evil is /writing code without understanding *why* you write it that way/.
+The key to good programming is understanding why the code is the way it is.
+
+With documentation, understanding data is easier than understanding control flow.
+
+*A maintenance engineer translates requirement changes to software changes.*
+Software consists of program code, database schema, documentation, and so on.
+A software is maintainable iff a reasonable requirement change translates to a reasonable software change.
+
+For example, an application may now have to handle ten times the traffic it was designed for.
+
+If, in 10 years, your application will never handle more than 10 requests per second,
+but you split your application into 10 JVMs communicating with JSON-RPC,
+you're wasting too many resources.
+** Example of namespacing
+This is a module in C.
+Note that each procedure name is prefixed with =point_=.
+
+#+BEGIN_SRC C
+    #include <math.h>
+
+    typedef struct
+    {
+        double x;
+        double y;
+    }
+    Point;
+
+    void point_init (Point* self, double x, double y)
+    {
+        self->x = x;
+        self->y = y;
+    }
+
+    double point_distance (Point* a, Point* b)
+    {
+        return sqrt(square(b->x - a->x) + square(b->y - a->y));
+    }
+
+    static double square (double x)
+    {
+        return x * x;
+    }
+#+END_SRC
+
+This is the module in Java.
+Note that now you don't have to prefix your method names with =point_=
+because it already lives in the class =Point=.
+
+#+BEGIN_SRC java
+    package com.example;
+
+    final class Point
+    {
+        final double x;
+        final double y;
+
+        Point (double x, double y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+
+        double distance (Point that)
+        {
+            return distance(this, that);
+        }
+
+        static double distance (Point a, Point b)
+        {
+            return Math.sqrt(square(b.x - a.x) + square(b.y - a.y));
+        }
+
+        private static double square (double x)
+        {
+            return x * x;
+        }
+    }
+#+END_SRC
+** Another example
+#+BEGIN_SRC java
+    class Exchange
+    {
+        final HttpServletRequest request;
+        final HttpServletResponse response;
+    }
+#+END_SRC
+** Mixin
+Use extend or mixin if and only if
+you want all subclasses to benefit from enhancements of the base class.
+
+A tradeoff is that =unsafeSetHp= is public.
+
+#+BEGIN_SRC java
+    interface GameObject
+    {
+        long getId ();
+    }
+
+    interface Health
+    {
+        int getMaxHp ();
+        int getHp ();
+        void unsafeSetHp (int x);
+        default void setHp (int x)
+        {
+            final int maxHp = getMaxHp();
+            if (x < 0) { setHp(0); return; }
+            if (x >= maxHp) { setHp(maxHp); return; }
+            setHp(x);
+        }
+        default boolean isDead ()
+        {
+            return getHp() <= 0;
+        }
+        default void addHp (int x)
+        {
+            setHp(getHp() + x);
+        }
+    }
+
+    class Chara implements GameObject, Health
+    {
+        final long id;
+
+        int maxHp;
+        int hp;
+
+        Chara (long id, int maxHp)
+        {
+            this.id = id;
+            this.maxHp = maxHp;
+            this.hp = maxHp;
+        }
+
+        @Override public long getId () { return id; }
+        @Override public int getMaxHp () { return maxHp; }
+        @Override public int getHp () { return hp; }
+        @Override public void unsafeSetHp (int x) { this.hp = x; }
+    }
+#+END_SRC
+** Unrelated
+Field stores data.
+Method does work.
+Classes groups fields and methods.
+
+/A class groups methods that share parameters./
+The fields are those shared parameters.
+
+A Java class is equivalent to a C struct and the functions whose first parameter is that struct.
+In C, those things are usually grouped into one C file,
+so a Java class is practically equivalent to a C file.
+Static field in Java is global variable in C,
+but without the name conflict.
+
+C =#include= translates to Java =import=, =extends=, and =implements=.
+=implements X= imports X's default methods into this module.
+=extends X= imports X's fields and methods into this module.
+=import static= imports X's static methods into this module.
+
+Java 8 interfaces can be used as mixins.
+Use default methods.
+
+A mixin is a contract
+"if you give me X, I'll give you Y."
+
+Every method is a contract:
+If you give me X, I'll give you Y.
+
+Getters and setters provide "lazy fields" and "computed fields".
+
+Java can be used with edit-compile-reload-refresh.
+Java can hotswap.
+
+IDE makes navigation easy.
+
+A class is an instantiable module.
+
+The aim is to maximize understandability and minimize duplication.
+Sometimes, reducing duplication makes the code incomprehensible.
+
+=a.b(c)= is a syntactic sugar for =b(a,c)=.
+Implicit first argument.
+
+Exception is structured goto.
+
+https://www.reddit.com/r/learnprogramming/comments/1f0g2b/eli5_the_main_differences_between_oop_and/
+
+https://www.reddit.com/r/learnprogramming/comments/tocjf/procedural_programmer_me_needs_help_making_the_oo/
+** Can process fix incompetent people?
+** Java-Haskell interoperation
+https://wiki.haskell.org/GHC/FAQ
+
+https://wiki.haskell.org/HaskellImplementorsWorkshop/2016
+*** State of the art
+LLJVM?
+
+https://github.com/Frege/frege
+Haskell-like language
+
+http://eta-lang.org/
+port GHC primitives to Java?
+
+Sorted from the most desirable (highest level):
+
+- Source-to-source translation.
+
+  - Write a Java source interpreter in Haskell.
+  - Map Haskell code to Java.
+
+Write a JVM in Haskell.
+
+Translate both Java and Haskell to a common lower-level language such as LLVM.
+
+Core-to-bytecode.
+
+JNI-to-FFI.
+** Haskell-to-Java
+http://mmhelloworld.github.io/blog/2013/07/10/frege-hello-java/
+
+The Frege language.
+The Eta language.
+
+Haskell => Java?
+
+Core => Java?
+
+Module => Class
+
+Data type => Static inner class
+
+Value => instance of =Thunk=
+
+Data constructor => Class extending the class corresponding to the data type
+
+A value definition in a module => a static final Thunk field in the class
+
+A class => A class
+
+A member of a class => An instance field of the Class; the type of the field is =Thunk=
+
+A class constraint => A dictionary argument whose type is the class
+
+Case match => if instanceof
+
+#+BEGIN_SRC java
+    interface Thunk
+    {
+        Object force ();
+        Thunk apply (Thunk x);
+    }
+
+    class Atom
+    {
+        Object value;
+        Supplier x;
+        Atom (Supplier x) { this.x = x; }
+        Object force ()
+        {
+            if (value == null) { value = x.get(); }
+            return value;
+        }
+    }
+#+END_SRC
+
+#+BEGIN_SRC haskell
+    module M where
+
+    a :: Int
+    a = 1
+
+    f :: Int -> Int
+    f x = x + 1
+
+    g :: (a -> b) -> a -> b
+    g f x = f x
+#+END_SRC
+
+Map =Int= and =Int32= to a =Thunk= producing a =java.lang.Integer=.
+A Haskell program assumes that =Int= is a two's complement signed integer
+/at least/ 30 bits wide.
+
+#+BEGIN_SRC haskell
+    class M
+    {
+        static final Thunk a = new Atom(() -> 1);
+        static final Thunk f = new Lambda(x -> (Integer) x + 1);
+        static final Thunk g = new Lambda(f -> new Lambda(x -> f.apply(x)));
+    }
+#+END_SRC
+*** Java-to-Haskell
+https://github.com/Frege/frege/wiki/Calling-Frege-Code-from-Java
+
+Java method -> foreign import
+
+#+BEGIN_SRC haskell
+    -- Foreign.Java
+
+    data JByte
+    data JInt
+    data JShort
+    data JLong
+    data JObject
+
+    foreign import java package.Class Method :: ArgType0 ArgType1 ... as haskellName
+
+    foreign import java java.lang.Integer parseInt :: String -> Int32 as jParseInt
+#+END_SRC
+
+Message-passing view of Java objects
+
+#+BEGIN_SRC haskell
+    s <- call object "toString" []
+
+    ...
+
+    jls <- getClass "java.lang.System"
+    out <- getField jls "out"
+    call out "println" ["Hello world"]
+#+END_SRC
+** Architecture
+Every Java program is a sequence of statements.
+
+Every Java program is equivalent to one long main class?
+
+A block is a sequence of statements.
+
+#+BEGIN_EXAMPLE
+    class Name
+        int prop
+        // Generates:
+        // int prop
+        // int getProp ()
+        // void setProp (int)
+    end
+#+END_EXAMPLE
+** Understanding factoring
+Imagine writing your program as one long main method.
+It is almost certain that you will find duplicate blocks.
+
+Two duplicate blocks can be factored into a method.
+Two methods with the same parameters can be factored into a class.
+
+What is an optimal factoring of that program?
+The factoring is wrong iff the same change needs to be performed more than once.
+A program can also suffer from modification anomaly.
+
+There are prime fragments:
+fragments that cannot be factored into smaller parts.
+** OOP as a special case of FP
+Object and closure are equivalent.
+
+=o.m(a0,a1,...) -> m o a0 a1 ...=
+** Functional multimethod
+Statically checked.
+
+#+BEGIN_EXAMPLE
+    collide (a : Asteroid) (b : Asteroid) = ...
+    collide (a : Asteroid) (s : Spaceship) = ...
+    collide (s : Spaceship) (a : Asteroid) = collide a s
+    collide (s : Spaceship) (t : Spaceship) = ...
+
+    True : Bool.
+
+    False : Bool.
+
+    Ord Bool.
+
+    Bool x, Bool y |-
+        Equal x y =
+            match x y in
+                False False -> True;;
+                True True -> True;;
+                _ _ -> False.
+
+    LessThan False False = False.
+    LessThan False True = True.
+    LessThan True False = False.
+    LessThan True True = False.
+
+    IfElse False t f = f.
+    IfElse True t f = t.
+
+    And False x = False.
+    And True x = x.
+
+    Or False x = x.
+    Or True x = True.
+
+    Not False = True.
+    Not True = False.
+
+    Min x y = IfElse (LessThan x y) x y.
+    Max x y = IfElse (LessThan x y) y x.
+
+    Table Employee.
+
+    Column Id Employee |- Bigint Id.
+    Column Name Employee |- String Name.
+
+    Column name Employee, type name |- Read name From resultSet = Get type name From resultSet.
+
+    Column name Employee |-
+        Member
+            (Tuple name (Read name From resultSet))
+            (Read Employee From resultSet).
+
+    Main |-
+        source = Connect "jdbc:postgresql://127.0.0.1/test",
+        resultSet = ExecuteQuery source "SELECT * FROM employee",
+        Member tuple (Read Employee From resultSet),
+        Print tuple.
+
+    ?- Main.
+
+    Ord a, Ord b |- min a b = if lt a b then a else b
+
+    a : Asteroid, b : Asteroid |- collide a b = ...
+    IF
+        a, b : Asteroid
+        AND
+        s, t : Spaceship
+    THEN
+        collide a b = ...
+        collide a s = ...
+        collide s t = ...
+
+    define multimethod collide with parameters
+        a, b : Asteroid
+        s, t : Spaceship
+    where case parameters matching
+        a b -> ...
+        a s -> ...
+        s a -> ...
+        s t -> ...
+#+END_EXAMPLE
+** Java
+=a.m(b)= and =m(a,b)= are equivalent.
+The dot is a syntactic sugar for implicit first argument, plus virtual dispatch.
+
+The changes that must be made to implement a feature.
+The program is well-factored if no change is duplicated.
+
+A maintainable software does not have to be object-oriented, but it has to be well-factored.
+A well-factored program /prevents the same modification from being duplicated./
+
+Factorization reduces information duplication.
+
+Depending on dependable things simplify your program.
+I know someone who used a SQL database but didn't want to depend on it,
+so he wrote application-level joins everywhere.
+
+A software is maintainable iff it is simple to change.
+Being able to start, stop, and restart quickly (in just a few seconds) also helps.
+*** SQL
+Mutable fields.
+
+#+BEGIN_EXAMPLE
+    Column a
+        name : String
+        read : a -> ResultSet -> ()
+        write : ResultSet -> a -> ()
+
+    Table a = [Column a]
+
+    read : Table a -> a -> ResultSet -> ()
+    write : Table a -> ResultSet -> a -> ()
+
+    interface SqlCallable2<A, B>
+    {
+        void call (A a, B b) throws SQLException;
+    }
+
+    class Column<E>
+    {
+        String name;
+        SqlCallable2<E, ResultSet> read;
+        SqlCallable2<ResultSet, E> write;
+    }
+#+END_EXAMPLE
+*** Annoyances of local variables
+- Java can't infer the type of local variables
+- Local variables aren't final by default
+
+#+BEGIN_SRC java
+    final Something something = new Something();
+#+END_SRC
+*** Example of under-factored program
+#+BEGIN_SRC java
+    class Employee
+    {
+        List<A> getById (long id)
+        {
+            ... "SELECT * FROM my_schema.employee WHERE id = ?" ...
+        }
+
+        List<A> getByName (String name)
+        {
+            ... "SELECT * FROM my_schema.employee WHERE name = ?" ...
+        }
+    }
+#+END_SRC
+
+What if =my_schema= or =employee= change?
+
+#+BEGIN_SRC java
+    class Employee
+    {
+        private static String TABLE = "my_schema.employee";
+
+        List<A> getById (long id)
+        {
+            ... "SELECT * FROM " + TABLE + " WHERE id = ?" ...
+        }
+
+        List<A> getByName (String name)
+        {
+            ... "SELECT * FROM " + TABLE + " WHERE name = ?" ...
+        }
+    }
+#+END_SRC
+
+What if SQL syntax changes; for example, what if a committee decides to change SQL =SELECT= to =CHOOSE=?
+We assume it's unlikely,
+so we don't design our program to anticipate that.
+** Extract covariant expressions into variables
+#+BEGIN_SRC java
+    System.out.println("John's salary is " + employee.computeSalary());
+    if (employee.computeSalary() >= 1000)
+    {
+        System.out.println("It's over one thousand");
+    }
+#+END_SRC
+
+What if =employee.computeSalary= changes?
+
+#+BEGIN_SRC java
+    final long salary = employee.computeSalary();
+    System.out.println("John's salary is " + salary);
+    if (salary >= 1000)
+    {
+        System.out.println("It's over one thousand");
+    }
+#+END_SRC
+
+What if we want to print to =aPrintStream= instead of =System.out=?
+
+#+BEGIN_SRC java
+    final long salary = employee.computeSalary();
+    final StringBuilder message = new StringBuilder();
+    message.append("John's salary is ").append(salary).append('\n')
+        .append(salary >= 1000 ? "It's over one thousand" : "");
+    aPrintStream.println(message);
+#+END_SRC
+
+What if =salary= type changes from =long= to =BigInteger=?
+We assume it's unlikely.
+** Extract covariant blocks into method
+Two blocks that must change together.
+
+#+BEGIN_SRC java
+    static Y m (A a, B b, ...);
+#+END_SRC
+
+#+BEGIN_SRC java
+    static Y m0 (X0 x0, X1 x1, ...);
+    static Y m1 (X0 x0, X2 x2, ...);
+#+END_SRC
+
+becomes
+
+#+BEGIN_SRC java
+    class C
+    {
+        X0 x0;
+        Y m0 (X1 x1, ...);
+        Y m1 (X2 x2, ...);
+    }
+#+END_SRC
+
+Things that change together should be grouped together.
+
+Constructors are methods too.
+
+If two methods share a common parameter, the parameter can be extracted into a field.
+
+If two classes share a common field, a class can be extracted.
+
+Static methods are reusable.
+
+Instance methods force you to instantiate the class.
+** Implications of architecture on security
+A popular trend: split front-end and back-end.
+Write front-end in NodeJS, write back-end in Java, front-end calls back-end via JSON HTTP API.
+Front-end runs on visitors' browsers.
+Back-end is open to public.
+
+You cannot secure the application.
+If you cannot secure the hardware running the software,
+all bets are off.
+*** Foo
+Java is a procedural programming language.
+
+The only reason we don't write everything in one big method is maintainability.
+
+A code is easier to understand if it doesn't mix abstraction levels.
+
+Names relate to things the reader already knows.
+
+Java does not have C#'s extension methods.
+
+Java as procedural programming with implicit first argument.
+
+#+BEGIN_EXAMPLE
+    object.method(arg1, ...) = method(object, arg1, ...)
+#+END_EXAMPLE
+
+Principles make decision-making easy (not necessarily correct).
+Principles are heuristics.
+
+/Cohesion/ is the most important characteristic of a class.
+The purpose of a class is to group a /working set/ (variables that often change together),
+and the methods that use those variables.
+
+The risk of modifying code?
+
+The larger the change, the bigger the risk.
+
+If you are using object mapper like Jackson,
+changing a field to final can break your code.
+(You must annotate.)
+That's why I avoid reflection.
+
+Microrefactoring.
+Small steps.
+
+Abstraction is not a mere indirection. yegor256???
+Abstraction allows you to say a lot with a little code.
+** Mitigating the risk of changing code
+Don't just change old code.
+
+Write new code that works with the old code.
+Deprecate the old code.
+Delete the old code.
+
+#+BEGIN_SRC java
+    class CustomList<T>
+    {
+        private final List<T> inner;
+
+        public CustomList (List<T> inner)
+        {
+            this.inner = inner;
+        }
+
+        public static <T> CustomList<T> fromArray (T[] array)
+        {
+            final List<T> list = new ArrayList<>();
+            list.addAll(Arrays.asList(array));
+            return new CustomList<>(list);
+        }
+
+        public List<T> toList ()
+        {
+            return inner;
+        }
+
+        // Implement your primitives like size, map, whatever.
+    }
+#+END_SRC
+** Maintainable code
+The problem is working with too many details at once.
+
+Mixing HTTP-handling code (such as the Servlet API 3.0)
+with your business logic will cause readability problem.
+If a method contains getCookie and business logic,
+you're in for maintenance problems.
+
+Java is more verbose than Haskell,
+but it doesn't mean that you can't create maintainable Java programs;
+it doesn't mean that your Haskell programs will automatically be more maintainable.
+If you suck, your code will be just as bad.
+
+Java is a /procedural/ language.
+Problems begin when people try to force object-oriented paradigm to Java.
+
+#+BEGIN_SRC java
+    interface Log
+    {
+        void info (String message);
+        void warn (String message);
+        void error (String message);
+    }
+#+END_SRC
+
+#+BEGIN_SRC java
+    class Log_log4j implements Log
+    {
+        private final Logger log;
+        public Log_log4j (Logger log)
+        {
+            this.log = log;
+        }
+        @Override public void error (String message) { log.error(message); }
+    }
+#+END_SRC
+** Writing program backwards
+If you're a shop, you can try putting all your pricing logic into one class:
+
+- Every buyer whose age is 60 years or greater gets a 10% elder discount.
+- Every buyer (unique phone number) is a first-time buyer (who has not bought anything) gets 10% newcomer discount.
+- For simplicity, discount percentages are added before applied to the original price.
+
+#+BEGIN_SRC java
+    double percent_discount ()
+    {
+        double percentage = 0;
+        if (buyer_age >= 60) { percentage += 10; }
+        if (buyer_is_first_time) { percentage += 10; }
+        return percentage;
+    }
+#+END_SRC
+
+At this point you don't care about how to compute buyer_age and buyer_is_first_time.
+You simply want to express the pricing rules as a simple Java code that a programmer can easily understand.
+
+To compute the buyer's age, we need his/her date of birth and today's date.
+Use JodaTime.
+
+#+BEGIN_SRC java
+    buyer_age = today.subtract(buyer_birth_date);
+#+END_SRC
+
+Then we need to figure out how to get today's date, and so on, and then you arrive at this method:
+
+If you need something in a method,
+but it's not that method's responsibility to compute it,
+then it should be a parameter of that method.
+
+#+BEGIN_SRC java
+    class Pricing
+    {
+
+        void rule ()
+        {
+            // XXX dont use double for your prices?
+
+            entry(item.name, item.price);
+
+            if (event.is_giveaway)
+            {
+                discount(s.giveaway(), item.price);
+                return;
+            }
+
+            if (buyer.age >= 60) { discount(s.elder(), 1); }
+            if (buyer.is_first_time) { discount(s.first_timer(), 1); }
+            if (buyer.wants_insurance) { surcharge(s.insurance(), 1); }
+
+            if (event.is_new_year) { discount(s.new_year(), 1); }
+            if (event.is_christmas) { discount(s.christmas(), 2); }
+            if (event.is_online_shopping_day) { discount(s.online_shopping_day(), 0.25 * item.price); }
+
+            if (item.is_rare) { surcharge(s.rare(), 10); }
+            if (item.is_luxury) { surcharge(s.luxury(), 5); }
+            if (item.is_from_lion_air) { surcharge(s.lion_air_admin_fee(), 10); }
+            if (item.is_from_telkomsel) { surcharge(s.telkomsel_admin_fee(), 0.15); }
+
+            if (payment.uses_credit_card) { surcharge(s.credit_card_fee(), 0.03 * item.price); }
+
+            surcharge(s.surcharge_vat(), 0.1 * item.price);
+        }
+
+        class Buyer
+        {
+            final int age;
+            final boolean is_first_time;
+            final boolean wants_insurance;
+        }
+
+        class Entry
+        {
+            final String label;
+            final double amount;
+        }
+
+        private final Strings.I s;
+        private final List<Entry> entries = new ArrayList<>();
+
+        private void entry (String label, double amount)
+        {
+            entries.add(new Entry(label, amount));
+        }
+
+        private void surcharge (String label, double amount)
+        {
+            entry(label, amount);
+        }
+
+        private void discount (String label, double amount)
+        {
+            entry(label, -amount);
+        }
+
+    }
+#+END_SRC
+
+There you have it: a straightforward, readable, maintainable, easily changeable pricing rule for your online business.
+A straightforward translation.
+
+Filling the fields is someone else's problem.
+
+Internationalization:
+
+#+BEGIN_SRC java
+    class Strings
+    {
+        interface I
+        {
+            /** Value-added tax. */
+            String elder ();
+            String vat ();
+        }
+        class English implements I
+        {
+            @Override public String elder () { return "elder"; }
+            @Override public String vat () { return "VAT"; }
+        }
+        class Indonesia implements I
+        {
+            @Override public String elder () { return "lansia"; }
+            @Override public String vat () { return "PPn"; }
+        }
+        static load (String path) throws IOException
+        {
+            // use Proxy to lookup table
+        }
+    }
+#+END_SRC
+
+Do you need to be able to change the discounts without recompiling the program?
+You don't.
+Instead of making it configurable, make compilation and deployment fast, easy, and automatic, and just recompile.
+There is less room for mistakes if you keep it in one place that is easy to see: the source code.
+The compiler will also help catch mistakes.
+
+Now you figure out how to compute buyer_age.
+
+The name of a class doesn't have to be a noun.
+
+A constructor parameter states that the class depends on a feature.
+
+A class describes a feature.
+
+#+BEGIN_SRC java
+    interface Storage
+    {
+        void save_user (???) throws IOException;
+    }
+#+END_SRC
+
+#+BEGIN_SRC java
+    interface Handler?
+    {
+        void get_cookie ();
+        Handler set_cookie ();
+        Handler set_cookie ();
+    }
+#+END_SRC
+
+A Java class corresponds to a C source file.
+This is as if you could put multiple C source files inside a Java class.
+And you can put many Java classes inside a Java class.
+Think of a class like a folder for C source files;
+it groups things to help programmers understand the code,
+not as something that corresponds to an object.
+** Crucial question
+If there are many ways of writing programs that do the same thing,
+why choose a particular way?
+
+More maintainable.
+** Use snake case
+Class name: =My_class_name=
+
+Field, method, and variable name: =my_method_name=
+
+Maintainability is done by limiting ugliness inside a class.
+
+It is possible to write maintainable Java code. It will only be a bit more verbose.
 * Bibliography
 bibliography:default
