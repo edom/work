@@ -570,3 +570,48 @@ functional languages for systems programming?
         - http://okmij.org/ftp/continuations/differentiating-parsers.html
         - https://hackage.haskell.org/package/incremental-parser
         - Brzozowski quotient
+- Elixir has gradual static typing via Erlang Dialyzer.
+    - [Typespecs and behaviours - Elixir](https://elixir-lang.org/getting-started/typespecs-and-behaviours.html)
+    - [Understanding Elixir Types - via @codeship](https://blog.codeship.com/understanding-elixir-types/)
+        - "Elixir functions are set up so that they can transparently be called across processes, heaps, or even machines in a cluster."
+        - Can BEAM/Erlang/Elixir do live process migration?
+    - The catch?
+        - [Typed Elixir - Elixir Chat - Elixir Forum](https://elixirforum.com/t/typed-elixir/1388)
+            - Is Dialyzer slow?
+                - "My motivation for this is 95% of my bugs in Elixir/Erlang are due to using types wrong, like I may slightly change a tuple format somewhere but do not update it elsewhere and dialyzer does not catch it because the prior library state was in its cache that I then need to rebuild, in addition to dialyzer can take a long time to run."
+- Working with XML
+    - Essential editor features
+        - Automate closing tag.
+        - Editing an opening tag also edits the closing tag.
+        - Editing a closing tag also edits the opening tag.
+    - Supporting XML Schema Definition (XSD)
+        - In principle, from a type defined in an XSD file, we can generate a Haskell module and a Java class.
+            - The problem: Finding an XSD editor.
+                - IntelliJ IDEA works for me, but I'd be happy if there is a lighter alternative.
+                - [XML Schema Editor - Wikipedia](https://en.wikipedia.org/wiki/XML_Schema_Editor#cite_note-1)
+        - [W3C XML Schema: DOs and DON'Ts](http://www.kohsuke.org/xmlschema/XMLSchemaDOsAndDONTs.html)
+        - [WP:Comparison of XML editors](https://en.wikipedia.org/wiki/Comparison_of_XML_editors)
+            - Pick the one with open-source license and schema-aware autocompletion.
+                - 2018-08-22
+                    - emacs nxml-mode
+                    - jEdit XML plugin
+                    - QXMLEdit? Can it autocomplete?
+                    - XML Notepad
+- Java metaprogramming
+    - Similar products
+        - libraries
+            - [INRIA Spoon](https://github.com/INRIA/spoon)
+            - The `javax.lang.model` package of the Java standard library, but it does not model method bodies.
+        - environments
+            - [Eclipse Modeling Framework (EMF)](http://www.eclipse.org/modeling/emf/)
+            - [JetBrains MPS (Meta Programming System)](https://www.jetbrains.com/mps/)
+        - programming languages
+            - [Eclipse Xtext](http://www.eclipse.org/Xtext/) and [Eclipse Xtend](http://www.eclipse.org/xtend/)
+        - parser generators
+            - [WP:Compiler-compiler](https://en.wikipedia.org/wiki/Compiler-compiler)
+            - [WP:Comparison of parser generators](https://en.wikipedia.org/wiki/Comparison_of_parser_generators)
+            - [ANTLR (Another Tool for Language Recognition)](http://www.antlr.org/)
+            - [JavaCC](https://javacc.org/)
+    - Related concepts
+        - Model-driven development
+        - Model-driven architecture

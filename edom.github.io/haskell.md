@@ -142,3 +142,10 @@ language: en
         - https://plan99.net/~mike/writing-shared-libraries.html
 - Will Eta kill [Frege](https://github.com/Frege/frege)?
 It's sad to see works thrown away.
+- Finding the Haskell IDE.
+    - [what IDE/editor do you use for Haskell development? : haskell](https://www.reddit.com/r/haskell/comments/5lgtb1/what_ideeditor_do_you_use_for_haskell_development/)
+    - [What are powerful Haskell IDEs? - Quora](https://www.quora.com/What-are-powerful-Haskell-IDEs)
+    - [What is the best IDE for programming in Haskell? - Quora](https://www.quora.com/What-is-the-best-IDE-for-programming-in-Haskell)
+    - Leksah-nix fails to build on my machine (Ubuntu 14.04).
+    There are no prebuilt binaries.
+    Must compile from source from [Hackage](https://github.com/leksah/leksah/wiki/download) using Cabal.

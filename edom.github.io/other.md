@@ -228,10 +228,16 @@ The pack might contain things like yacy.net, matrix.org, riot.im.
             - One does not learn a language by memorizing the syntax.
             - One does not learn a language by memorizing the language reference document.
 - 2011, article, "A Very Rough Guide for PhD Students in Mathematics", [pdf](http://www.maths.manchester.ac.uk/media/eps/schoolofmathematics/study/guide_2011.pdf)
-- [WP:Comparison of XML editors](https://en.wikipedia.org/wiki/Comparison_of_XML_editors)
-    - Pick the one with open-source license and schema-aware autocompletion.
-        - 2018-08-22
-            - emacs nxml-mode
-            - jEdit XML plugin
-            - QXMLEdit? Can it autocomplete?
-            - XML Notepad
+- Accounting terms
+    - What is an account?
+        - If you deposit money in banks, then you have an account for every bank account you have.
+        - If you lend money to people, then you have an account for every people.
+    - What is a journal?
+        - A journal is optimized for entering transactions by date.
+        - What is a transaction?
+            - A transaction involves two or more accounts.
+                - The sum of all account changes in a transaction is zero.
+    - What is a subledger (subsidiary ledger)?
+        - A subledger of account C is obtained by selecting only the journal entries that affect the account C.
+    - What is a general ledger?
+        - A general ledger is the concatenation/combination/summation of several subledgers.
