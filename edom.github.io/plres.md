@@ -5,11 +5,7 @@ date: 2018-07-22 02:45 +0700
 ---
 
 - The goal is to make *the* programming language.
-- What are the criteria?
-    - The language must be suitable for systems programming.
-        - System programming is hardware-aware programming.
-        Application programming assumes abstract machine, infinite memory, and all convenience provided by the operating system.
-            - Why do we make this distinction?
+- What are the criteria for a language to be adopted?
     - In order for a language to be adopted, people must perceive its risk as low.
         - The language must work with existing codebases.
             - The language designer must think from the language user's point of view.
@@ -21,6 +17,10 @@ date: 2018-07-22 02:45 +0700
             - Improve/enhance, not supersede.
         - Mixing the old and new languages should be easy.
         - 2013, article, "Empirical analysis of programming language adoption", [pdf](http://sns.cs.princeton.edu/docs/asr-oopsla13.pdf)
+    - The language must be suitable for systems programming.
+        - System programming is hardware-aware programming.
+        Application programming assumes abstract machine, infinite memory, and all convenience provided by the operating system.
+            - Why do we make this distinction?
 - A goal of programming language research is to make a better programming language (if not the best).
     - Do more with less.
     - *The* ultimate best programming language?
@@ -34,10 +34,6 @@ date: 2018-07-22 02:45 +0700
     - I thought lambda calculus could be summarized in one page, but Henk Barendregt wrote hundreds of pages about it. Is there more to lambda calculus than it seems?
         - 1994, 50 pages, http://www.nyu.edu/projects/barker/Lambda/barendregt.94.pdf
         - 1991, 190 pages, https://people.mpi-sws.org/~dreyer/tor/papers/barendregt.pdf
-- ontology and programming
-    - "ontoprog: Ontology-based Programming: Extended Semantics for OOP languages", [github](https://github.com/andreasBihlmaier/ontoprog)
-    - 2012, article, "Modeling the Knowledge Domain of the Java Programming Language as an Ontology", [pdf](http://eeyem.eap.gr/wp-content/uploads/2017/06/11_ICWL2012.pdf)
-    - 2007, article, "Towards a programming language ontology", [pdf](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.82.194&rep=rep1&type=pdf)
 - where to find more
     - recent programming language research
         - meetings, conferences, symposiums
@@ -70,15 +66,6 @@ date: 2018-07-22 02:45 +0700
         - Is there a compiler that doesn't do that? https://www.reddit.com/r/Forth/comments/695oik/advances_in_forth_language_design/dh454oq/
 - 2018, "Collapsing towers of interpreters" http://lampwww.epfl.ch/~amin/pub/collapsing-towers.pdf
     - "It is well known that *staging* an interpreter – making it generate code whenever it would normally interpret an expression – yields a compiler [...]"
-- semantics-aware software engineering?
-    - compiler toolkit?
-        - Stratego/XT
-        - TXL
-        - Eclipse Xtext, Eclipse Xtend
-        - ANTLR
-        - YACC, Bison
-        - Lex, Flex
-        - Eclipse Modeling Framework
 - What already exists?
     - [68 Resources on creating programming languages](https://tomassetti.me/resources-create-programming-languages/)
     - 2004, book, "Programming language design concepts"
@@ -93,10 +80,6 @@ date: 2018-07-22 02:45 +0700
         - How is "false" represented?
         - How is "true" represented?
         - How is "conjunction" represented?
-- interoperation between proof assistants?
-    - Lem ("lightweight executable mathematics")
-        - https://www.openhub.net/p/lightweight-executable-mathematics
-        - http://www.cl.cam.ac.uk/~pes20/lem/
 - foundation of mathematics
     - set theories, such as ZF, ZFC, NBG, etc.
         - https://math.stackexchange.com/questions/136215/difference-between-zfc-nbg
@@ -308,20 +291,6 @@ Things that I think are wrong in 2018.
                         - Semicolon is associative: `(a;b);c = a;(b;c)`. This also holds for the effects.
                 - Can we replace statements with expressions in existing imperative languages without breaking backward compatibility?
             - But C has https://en.wikipedia.org/wiki/Comma_operator
-- obscure
-    - VPRI, Alan Kay et al., archived (stopped operating in 2018), computing for the masses?
-        - "Improve 'powerful ideas education' for the world's children and to advance the state of systems research and personal computing"
-            - https://harc.ycr.org/
-                - https://www.ycr.org/
-        - https://en.wikipedia.org/wiki/Viewpoints_Research_Institute
-        - https://en.wikipedia.org/wiki/COLA_(software_architecture)
-        - https://news.ycombinator.com/item?id=11686325
-        - FONC = fundamentals of new computing
-        - http://www.vpri.org/index.html
-    - YCR
-        - visual programming language
-            - blocks language
-                - https://harc.ycr.org/project/gp/
 - 2002, article collection, "Recent advances in Java technology: theory, application, implementation" http://www.cs.nuim.ie/~jpower/Research/Papers/2002/power-raijt-toc.pdf
 - other people's collections
     - https://github.com/steshaw/plt
@@ -338,7 +307,6 @@ Things that I think are wrong in 2018.
             - "Polymorphism, subtyping and type inference in MLsub" http://www.cl.cam.ac.uk/~sd601/papers/mlsub-preprint.pdf
                 - from http://lambda-the-ultimate.org/node/5393
                      - from https://contributors.scala-lang.org/t/algebraic-subtyping/577
-- [Class-based programming]({% link cbp.md %})
 - Making compilers
     - From grammar description, the machine should generate both a parser and a pretty-printer.
         - [LTU: Invertible Syntax Descriptions: Unifying Parsing and Pretty Printing](http://lambda-the-ultimate.org/node/4191)
@@ -429,15 +397,6 @@ functional languages for systems programming?
 - 2017, article, [[1707.00024] A Formalized General Theory of Syntax with Bindings](https://arxiv.org/abs/1707.00024)
 - [Vectors are records, too (pdf) : dependent_types](https://www.reddit.com/r/dependent_types/comments/8qig0u/vectors_are_records_too_pdf/)
 - https://wiki.haskell.org/Untypechecking is "converting from a type to a term".
-- Functional programming in the large
-    - [Designing module systems]({% link module.md %})
-    - [Argument for static typing]({% link statyp.md %})
-- Old content to be reorganized
-    - [Functional programming research]({% link functional_programming.md %})
-        - [Optimizing lambda calculus]({% link optlam.md %})
-        - Philip Wadler's list [Functional Programming in the Real World](http://homepages.inf.ed.ac.uk/wadler/realworld/)
-    - [Joint research with Abdullah]({% link abdullah.md %})
-    - [Programming]({% link programming.md %})
 - [Programming Language and Compiler Research Groups](https://www.cs.cmu.edu/~mleone/language/projects.html)
 - [IEEE posts its top list of languages - The PL Enthusiast](http://www.pl-enthusiast.net/2014/07/10/ieee-posts-its-top-list-of-languages/)
 - [What is PL research and how is it useful? - The PL Enthusiast](http://www.pl-enthusiast.net/2015/05/27/what-is-pl-research-and-how-is-it-useful/)
@@ -513,7 +472,6 @@ functional languages for systems programming?
 - https://en.wikipedia.org/wiki/Automatic_programming
 - https://en.wikipedia.org/wiki/Program_synthesis
 - https://www.cs.cmu.edu/~mleone/language-research.html
-- http://strategoxt.org/
 - "Confessions Of A Used Programming Language Salesman: Getting The Masses Hooked On Haskell", Erik Meijer, [pdf](https://pdfs.semanticscholar.org/233a/932b3e94f1f117655e4862995b32f33754be.pdf)
     - What are the key points?
 - 1966, article, P. J. Landin, "The next 700 programming languages", [pdf](https://www.cs.cmu.edu/~crary/819-f09/Landin66.pdf)
@@ -579,24 +537,6 @@ functional languages for systems programming?
         - [Typed Elixir - Elixir Chat - Elixir Forum](https://elixirforum.com/t/typed-elixir/1388)
             - Is Dialyzer slow?
                 - "My motivation for this is 95% of my bugs in Elixir/Erlang are due to using types wrong, like I may slightly change a tuple format somewhere but do not update it elsewhere and dialyzer does not catch it because the prior library state was in its cache that I then need to rebuild, in addition to dialyzer can take a long time to run."
-- Working with XML
-    - Essential editor features
-        - Automate closing tag.
-        - Editing an opening tag also edits the closing tag.
-        - Editing a closing tag also edits the opening tag.
-    - Supporting XML Schema Definition (XSD)
-        - In principle, from a type defined in an XSD file, we can generate a Haskell module and a Java class.
-            - The problem: Finding an XSD editor.
-                - IntelliJ IDEA works for me, but I'd be happy if there is a lighter alternative.
-                - [XML Schema Editor - Wikipedia](https://en.wikipedia.org/wiki/XML_Schema_Editor#cite_note-1)
-        - [W3C XML Schema: DOs and DON'Ts](http://www.kohsuke.org/xmlschema/XMLSchemaDOsAndDONTs.html)
-        - [WP:Comparison of XML editors](https://en.wikipedia.org/wiki/Comparison_of_XML_editors)
-            - Pick the one with open-source license and schema-aware autocompletion.
-                - 2018-08-22
-                    - emacs nxml-mode
-                    - jEdit XML plugin
-                    - QXMLEdit? Can it autocomplete?
-                    - XML Notepad
 - Java metaprogramming
     - Similar products
         - libraries
@@ -605,13 +545,248 @@ functional languages for systems programming?
         - environments
             - [Eclipse Modeling Framework (EMF)](http://www.eclipse.org/modeling/emf/)
             - [JetBrains MPS (Meta Programming System)](https://www.jetbrains.com/mps/)
-        - programming languages
+            - [Stratego/XT](http://strategoxt.org/)
+            - TXL
             - [Eclipse Xtext](http://www.eclipse.org/Xtext/) and [Eclipse Xtend](http://www.eclipse.org/xtend/)
+        - programming languages
+            - Eclipse Xtend
         - parser generators
             - [WP:Compiler-compiler](https://en.wikipedia.org/wiki/Compiler-compiler)
             - [WP:Comparison of parser generators](https://en.wikipedia.org/wiki/Comparison_of_parser_generators)
             - [ANTLR (Another Tool for Language Recognition)](http://www.antlr.org/)
             - [JavaCC](https://javacc.org/)
+            - YACC, Bison; with Lex, Flex
     - Related concepts
         - Model-driven development
         - Model-driven architecture
+- Old content to be reorganized
+    - [Functional programming research]({% link functional_programming.md %})
+        - Functional programming in the real world
+            - Philip Wadler's list [Functional Programming in the Real World](http://homepages.inf.ed.ac.uk/wadler/realworld/)
+    - [Joint research with Abdullah]({% link abdullah.md %})
+    - [Programming]({% link programming.md %})
+- relational programming (pure logic programming?)
+    - miniKanren
+        - Byrd PhD thesis https://scholarworks.iu.edu/dspace/bitstream/handle/2022/8777/Byrd_indiana_0093A_10344.pdf
+            - mentions other programming languages: Prolog, Mercury, Curry
+- Haskell has isorecursive types.
+    - Can we make it use equirecursive types?
+    - Can we make it automatically insert roll-unroll/fold-unfold/In-out?
+    - How do we compose monads seamlessly?
+        - Isorecursive types?
+        - True sum types (untagged unions)?
+    - 2016, System F-omega with Equirecursive Types for Datatype-Generic Programming http://ps.informatik.uni-tuebingen.de/research/functors/equirecursion-fomega-popl16.pdf
+- John Hughes, "Deriving combinator implementations", lecture 4, "Designing and using combinators" http://www.cse.chalmers.se/~rjmh/Combinators/DerivingCombinators/sld001.htm
+- http://matt.might.net/articles/best-programming-languages/
+- other programming languages
+    - https://en.wikipedia.org/wiki/Curry_(programming_language)
+    - http://fsl.cs.illinois.edu/images/5/5e/Cayenne.pdf
+- Extending Haskell
+    - Open ADTs (algebraic data types)
+        - "Closed" means "defined in one place".
+        - Open ADTs don't mix with exhaustive case analysis (function totality).
+            - https://stackoverflow.com/questions/870919/why-are-haskell-algebraic-data-types-closed
+            - But what if functions are "open" too?
+                - https://www.andres-loeh.de/OpenDatatypes.pdf
+        - If `f : a -> b`, then the compiler should infer `lift f : (Monad m) => m a -> m b`.
+    - Can we extend Haskell to "auto-fmap"?
+        - Possibilities:
+            - Add rewrite rules so that the compiler "recovers" from some type "errors".
+            - Extend the syntax and semantics of function application.
+        - Related
+            - 1989, article, Wadler, "Theorems for free!"
+            - The Haskell Djinn can, given a type T, infer/construct a term having type T.
+        - Recovering from some type errors
+            - Idea
+                - Extend Haskell with "implicit injections".
+                - The compiler should try in-scope injections automatically when there is a typing error, before quitting with a type error.
+                    - Isn't this similar to Scala implicits and implicit conversion?
+                        - I forgot who, but I think somebody on the Internet said that Scala implicits are a way for the compiler to recover from type errors.
+                - Can we do this on GHC?
+                    - https://ghc.haskell.org/trac/ghc/wiki/Commentary/Compiler/TypeChecker
+                        - GHC typechecker works on Haskell before it's transformed to Core.
+                    - Write a plugin for GHC?
+                        - Can a GHC modify the syntax tree on type error?
+                    - Use GHC as library?
+                    - We can't use GHC rewrite rules because they are only applied when optimization is enabled.
+            - Define the concept of "expected type".
+            - Let `e` be an expression.
+            - Let `f : a -> b`.
+            - Let `m` be an instance of Monad.
+            - If `e` has type `a`, but the compiler expects `e` to have type `m a`, then the compiler shall rewrite `e` to `return e`.
+            - If `e` has type `m a`, then the compiler rewrites `f e` to `map f e`.
+        - If `x` is a Monad, then these are two *different* things: `x : a` and `return x`, but they are related, in the sense that they are equivalent, in the sense that one is trivially computable/derivable from the other.
+        - Can Strathclyde Haskell Enhancement (SHE) do this?
+            - It has idiom brackets.
+            It translates `(| f a1 ... an |)` to `pure f <*> a1 <*> ... <*> an`.
+                - https://personal.cis.strath.ac.uk/conor.mcbride/pub/she/idiom.html
+            - Enhancement to SHE https://github.com/bezirg/she
+                - http://blog.bezirg.net/posts/2013-08-03-enhancement-to-the-strathclyde-haskell-enhancement.html
+        - https://en.wikipedia.org/wiki/Bidirectional_transformation
+            - https://www.cis.upenn.edu/~bcpierce/papers/lenses-etapsslides.pdf
+- [Extension programming language](extension.md)
+- Every recursive type can be written as `mu a. F a` where F is the associated free functor?
+    - Example: `List a = Fix (F a)` where `F a b = 1 + a * b`.
+    - `Fix F = F (Fix F)` is the least fixed point of F.
+- Haskell
+    - language change proposals
+        - Auto-lifting (and therefore sequencing) of function application involving Monad instances
+            - The standard rule is:
+                - If `x : a` and `f : a -> b`, then `f x : b`.
+            - Suppose that `m` has a Monad instance.
+                - If `x : m a` and `f : a -> b`, then should the compiler silently translate `f x` to `x >>= return . f`?
+                    - Isn't it the only desirable way of putting together `f` and `x`?
+                        - Monad class requires that `x >>= return . f` be equivalent to `fmap f x`.
+                            - So there is really only one way to do it, isn't it?
+                        - Examples of non-desirable ways: `unsafeCoerce`, `undefined`.
+                - Should the compiler also appropriately translate `f x` for all these combinations?
+                    - Possibilities for the type of `x`:
+                        - `a`
+                        - `m a`
+                    - Possibilities for the type of `f`:
+                        - `a -> b`
+                        - `a -> m b`
+                        - `m (a -> b)`
+                        - `m a -> m b`
+                        - `m a -> b`
+            - At first glance it seems convenient, but what are the consequences?
+                - Some I can think of
+                    - Confusing error message
+                        - Suppose:
+                            - The programmer makes a typing mistake.
+                            - The compiler infers the wrong type.
+                            - The compiler performs translation based on the wrongly inferred type.
+                            - The compiler produces a confusing error message.
+    - Dependency management
+        - https://wiki.haskell.org/The_Monad.Reader/Issue2/EternalCompatibilityInTheory
+            - It applies to all software, not only Haskell ones.
+        - [Michael Snoyman's personal take on PVP version upper bounds](https://gist.github.com/snoyberg/f6f10cdbea4b9e22d1b83e490ec59a10)
+    - curation
+        - https://www.reddit.com/r/haskell/comments/4ggt05/best_underrated_haskell_libraries/
+        - https://wiki.haskell.org/Applications_and_libraries
+        - https://stackoverflow.com/questions/9286799/haskell-libraries-overview-and-their-quality
+    - http://matt.might.net/articles/compiling-to-java/
+    - unread
+        - servant web framework
+        - Salsa Haskell .NET bridge
+            - https://wiki.haskell.org/Salsa
+- https://en.wikipedia.org/wiki/Higher-order_abstract_syntax
+- http://www.stephendiehl.com/posts/haskell_2017.html
+- Haskell library: yaml vs HsYaml
+    - https://twitter.com/hvrgnu/status/1004136566984503297
+        - HsYaml is pure Haskell (doesn't use external libraries)
+- [LCF key ideas](https://www.cl.cam.ac.uk/~jrh13/slides/manchester-12sep01/slides.pdf)
+- [Haskell partiality monad](https://gist.github.com/puffnfresh/6222797)
+- compiler construction
+    - https://www.reddit.com/r/haskell/comments/4jhhrj/anders_hejlsberg_on_modern_compiler_construction/
+    - https://cs.stackexchange.com/questions/63018/visual-programming-tools-why-don-t-they-work-with-the-ast-directly
+- closed source?
+    - given SQL database, generate HTML user interface http://datanovata.com/
+- http://libcello.org
+- C HTTP server library?
+    - https://kore.io
+    - http://facil.io
+- Possible user questions
+    - How do I write software with this?
+    - What are the important types?
+- Don't format source code manually.
+    - https://github.com/google/google-java-format
+- related software
+    - refactoring tools
+        - https://github.com/RefactoringTools/HaRe
+        - https://hackage.haskell.org/package/haskell-tools-refactor
+    - parsing without symbol solving
+        - Haskell and GHC extensions
+            - http://hackage.haskell.org/package/haskell-src-exts
+        - Haskell 98 only
+            - https://hackage.haskell.org/package/haskell-src
+        - Java
+            - http://hackage.haskell.org/package/language-java
+    - unknown
+        - http://hackage.haskell.org/package/haskell-tools-ast
+        - Ur/Web
+    - multi-database/cross-database query
+        - http://www.unityjdbc.com/doc/multiple/multiplequery.php
+        - https://www.red-gate.com/simple-talk/dotnet/net-tools/a-unified-approach-to-multi-database-query-templates/
+    - similar systems
+        - ERP libraries?
+            - Meta is similar to Apache Ofbiz.
+                - Some differences:
+                    - To define entities, Meta uses Haskell, Ofbiz uses XML.
+                    - Meta is written in Haskell, Ofbiz is written in Java.
+                - https://cwiki.apache.org/confluence/display/OFBIZ/OFBiz+Tutorial+-+A+Beginners+Development+Guide
+        - Web frameworks? Scaffolders?
+            - Meta is similar to Laravel.
+                - https://www.quora.com/Is-Laravel-a-good-framewok-really
+            - Meta is similar to Ruby on Rails.
+        - PhD theses
+            - ["Programming Language Features for Web Application Development", Ezra Cooper](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.422.5683&rep=rep1&type=pdf)
+                - "Links" programming language
+- cabal new-build obviates stack?
+    - http://coldwa.st/e/blog/2017-09-09-Cabal-2-0.html
+- https://stackoverflow.com/questions/5770168/templating-packages-for-haskell
+- concept
+    - https://en.wikipedia.org/wiki/End-user_development
+    - https://en.wikipedia.org/wiki/Low-code_development_platforms
+- For JDBC URL see
+    - https://jdbc.postgresql.org/documentation/80/connect.html
+- similar
+    - https://medium.com/airbnb-engineering/react-native-at-airbnb-f95aa460be1c
+- related?
+    - https://github.com/PostgREST/postgrest
+    - http://rosecompiler.org/
+- some requirement?
+    - https://en.wikipedia.org/wiki/Multitenancy
+- Name?
+    - HUMPS Haskell Universal Meta Programming System ?
+    - Hemps: Haskell Meta Programming System
+    - EAG: Enterprise Application Generator
+    - HAG: Haskell Application Generator
+- https://en.wikipedia.org/wiki/Language-independent_specification
+- http://referaat.cs.utwente.nl/conference/12/paper/7000/expressing-ontologies-using-a-functional-language.pdf
+    - "there are some proposals for implementing subtyping [in Haskell] [11, 12]"
+    - open ADT makes exhaustive case impossible
+- sublanguages?
+    - Ontology definition language
+    - Data definition language
+    - Web application description language
+        - View description language
+- software design
+    - functional programming software design
+        - designing combinators
+            - Hughes 1995 doc [The design of a pretty-printing library](http://belle.sourceforge.net/doc/hughes95design.pdf)
+- [LTU:progress on gradual typing](http://lambda-the-ultimate.org/node/5292)
+- [WP:lambda-prolog](https://en.wikipedia.org/wiki/%CE%9BProlog)
+- Should we use Haskell or TypeScript for this project? Both? Neither?
+    - Killer features
+        - IDE: TypeScript wins (VS Code).
+        - custom infix operators: Haskell wins.
+            - We can go even wilder with Agda, Coq, Idris, Lean, etc.
+        - untagged unions: TypeScript wins.
+        - software diversity: TypeScript wins.
+            - TypeScript works with nodejs and npm. Boatloads of software.
+            - I think TypeScript has more developers.
+        - laziness
+            - Haskell wins.
+    - Both have
+        - ADTs.
+- Hoogle vs Hayoo?
+    - The hoogle on stackage.org top right text bar seems to be most complete
+        - https://www.stackage.org/
+    - https://mail.haskell.org/pipermail/haskell-cafe/2013-August/109945.html
+- GHC woes
+    - Profiling requires recompiling all transitive dependencies if they happen to be compiled without profiling.
+- Obscure things. Much marketing, little technical detail.
+    - VPRI, Alan Kay et al., archived (stopped operating in 2018), computing for the masses?
+        - "Improve 'powerful ideas education' for the world's children and to advance the state of systems research and personal computing"
+            - https://harc.ycr.org/
+                - https://www.ycr.org/
+        - https://en.wikipedia.org/wiki/Viewpoints_Research_Institute
+        - https://en.wikipedia.org/wiki/COLA_(software_architecture)
+        - https://news.ycombinator.com/item?id=11686325
+        - FONC = fundamentals of new computing
+        - http://www.vpri.org/index.html
+    - YCR
+        - visual programming language
+            - blocks language
+                - https://harc.ycr.org/project/gp/

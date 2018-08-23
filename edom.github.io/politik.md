@@ -170,3 +170,33 @@ When did candidates begin appealing to emotion using racism and religion?
     - [Why Fear Over Islamists in Prabowo's Future Government is Unfounded : indonesia](https://www.reddit.com/r/indonesia/comments/982c5x/why_fear_over_islamists_in_prabowos_future/)
 - [Geopolitics of Southeast Asia Part 2: Malay Archipelago - YouTube](https://www.youtube.com/watch?v=MFrLcRhMKnE)
     - Indonesia is too big to defend itself.
+- Tanjung Balai Sumatra Utara sering rusuh?
+    - 2018, [5 Fakta Kasus Meiliana, Menangis di Sidang hingga Fatwa MUI - Kompas.com](https://regional.kompas.com/read/2018/08/23/18025471/5-fakta-kasus-meiliana-menangis-di-sidang-hingga-fatwa-mui)
+        - [Keterangan Ranto Sibarani, anggota tim penasihat hukum tergugat](https://www.facebook.com/ransibar/posts/10216709033187633)
+        - Coba tanya MUI Sumatra Utara:
+            - Mengapa Jusuf Kalla boleh minta suara azan dikecilkan, tetapi Meiliana tidak boleh?
+                - 2018, [JK Nilai Kasus Meiliana Bukan Soal Toleransi](https://news.detik.com/berita/4179062/jk-nilai-kasus-meiliana-bukan-soal-toleransi)
+                - Karena JK wapres?
+                    - Seandainya wapresnya Meiliana, apa dia boleh minta suara azan dikecilkan?
+                        - Seandainya wapresnya Ahok?
+            - Mengapa standar ganda?
+                - Yang ini hanya kena teguran, tidak dipenjara: [Sebut 'Nabi Muhammad Sesat', Ustaz Evie Effendie Kena Teguran Keras - Regional Liputan6.com](https://www.liputan6.com/regional/read/3614381/sebut-nabi-muhammad-sesat-ustaz-evie-effendie-kena-teguran-keras)
+                - 2018, [Pengeluh Volume Azan Dibui 18 Bulan, Bagaimana Perusak Vihara?](https://news.detik.com/berita/4178495/pengeluh-volume-azan-dibui-18-bulan-bagaimana-perusak-vihara)
+                Hanya 1-2 bulan.
+            - Mengapa PBNU tidak sepakat dengan MUI?
+                - [PBNU, ICJR dan Setara Kritik Vonis Kasus Penistaan Agama Meiliana - nasional Tempo.co](https://nasional.tempo.co/read/1119693/pbnu-icjr-dan-setara-kritik-vonis-kasus-penistaan-agama-meiliana)
+                - [PBNU: Katakan Suara Adzan Terlalu Keras Bukan Penistaan Agama - nasional Tempo.co](https://nasional.tempo.co/read/1119345/pbnu-katakan-suara-adzan-terlalu-keras-bukan-penistaan-agama/full&view=ok)
+                - Jadi yang benar siapa?
+    - 2018, [Ini Kronologi Penangkapan Terduga Teroris di Tanjungbalai, Satu Orang Tewas di Tempat - Tribun Medan](http://medan.tribunnews.com/2018/05/15/ini-kronologis-penangkapan-terduga-teroris-di-tanjungbalai-satu-orang-tewas-di-tempat)
+    - 2018, [Dua Tahun Usai Kerusuhan SARA, Toleransi di Tanjung Balai Kian Kuat – VIVA](https://www.viva.co.id/berita/nasional/1057980-dua-tahun-usai-kerusuhan-sara-toleransi-di-tanjung-balai-kian-kuat)
+        - Baru dipuji sudah rusuh lagi.
+    - 2016, [Tujuh Warga Jadi Tersangka Kerusuhan Tanjungbalai - Tirto.ID](https://tirto.id/tujuh-warga-jadi-tersangka-kerusuhan-tanjungbalai-bwtp)
+    - 2016, [Fakta Sebenarnya di Balik Rusuh Tanjung Balai \| Jarum Detik](http://jarumdetik.blogspot.com/2016/07/fakta-sebenarnya-di-balik-rusuh-tanjung.html)
+        - Masyarakat setempat sudah dua kali terhasut berita bohong: 2016 dan 2018.
+            - [Jangan Seperti Keledai Atau Lebih Parah - Motivasi Islami](https://www.motivasi-islami.com/jangan-seperti-keledai-atau-lebih-parah/): Keledai saja tak jatuh dua kali ke lubang yang sama.
+    - A person's beliefs filter all incoming information.
+    Therefore people believe hoax that supports their beliefs, and reject facts that counter their beliefs.
+        - Riots uncover true beliefs.
+        - Kerusuhan adalah bukti bahwa toleransi hanya di permukaan.
+    - UU 1/1965 tentang penodaan agama
+        - [Asal-Usul Delik Penistaan Agama - Tirto.ID](https://tirto.id/asal-usul-delik-penistaan-agama-b49e)

@@ -17,9 +17,20 @@ date: 2017-05-20 00:00:00 +0700
             - Forward software engineering
                 - [Making lasting software]({% link softeng.md %})
                 - [Making the only programming language we will ever need]({% link plres.md %})
-                    - [Solving the AST decoration problem]({% link ast.md %})
-                    - Solving the expression problem
-                    - [Proving things using computers]({% link proof.md %})
+                    - [Modeling all data]({% link modeldata.md %})
+                        - [Solving the AST decoration problem]({% link ast.md %})
+                        - Solving the expression problem
+                    - Functional programming
+                        - [Optimizing lambda calculus]({% link optlam.md %})
+                    - Managing large software
+                        - [Designing module systems]({% link module.md %})
+                        - [Argument for static typing]({% link statyp.md %})
+                        - [Proving things using computers]({% link proof.md %})
+                        - Maintaining backward compatibility
+                            - Making only backward-compatible changes simplifies the lives of people who depend on you.
+                            - Too backward-compatible?
+                                - GNU Autotools
+                                - Windows 95: [Much more than you would ever know.. The original version of Sim City was writt... \| Hacker News](https://news.ycombinator.com/item?id=2281932)
                 - [Using Haskell]({% link haskell.md %})
                     - [Using Cabal]({% link cabal.md %})
                 - [Using Java]({% link java.md %})

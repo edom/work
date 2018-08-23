@@ -28,3 +28,7 @@ date: 2018-08-07 01:19 +0700
     - http://www.michaelburge.us/2017/08/25/writing-a-formally-verified-porn-browser-in-coq.html
     - https://aphyr.com/posts/342-typing-the-technical-interview
     - http://tech.frontrowed.com/2017/09/22/aggregations/
+- interoperation between proof assistants?
+    - Lem ("lightweight executable mathematics")
+        - https://www.openhub.net/p/lightweight-executable-mathematics
+        - http://www.cl.cam.ac.uk/~pes20/lem/
