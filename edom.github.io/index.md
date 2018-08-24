@@ -31,10 +31,13 @@ date: 2017-05-20 00:00:00 +0700
                             - Too backward-compatible?
                                 - GNU Autotools
                                 - Windows 95: [Much more than you would ever know.. The original version of Sim City was writt... \| Hacker News](https://news.ycombinator.com/item?id=2281932)
+                    - [Designing markup languages]({% link markup.md %})
                 - [Using Haskell]({% link haskell.md %})
                     - [Using Cabal]({% link cabal.md %})
                 - [Using Java]({% link java.md %})
                     - [Making a Java virtual machine]({% link jvm.md %})
+                - Using Emacs
+                    - [Vivek Haldar — The levels of Emacs proficiency](http://blog.vivekhaldar.com/post/3996068979/the-levels-of-emacs-proficiency)
                 - [Making contributable open-source projects]({% link opensrc.md %})
                     - [Building online communities]({% link community.md %})
                     - Maintaining open-source projects
@@ -121,6 +124,15 @@ date: 2017-05-20 00:00:00 +0700
             - [WP:21st century](https://en.wikipedia.org/wiki/21st_century)
             - [WP:21st century skills](https://en.wikipedia.org/wiki/21st_century_skills)
             - [YT:China is beyond cashless](https://www.youtube.com/watch?v=gysKE3POUv0)
+            - Big cyber crimes
+                - 2016
+                    - [The $1,000,000,000 North Korean Bank Heist - YouTube](https://www.youtube.com/watch?v=Usu9z0feHug)
+                        - [Bangladesh Bank robbery - Wikipedia](https://en.wikipedia.org/wiki/Bangladesh_Bank_robbery)
+        - Finding a place to live
+            - [Where is the world's most liveable city? \| The Economist - YouTube](https://www.youtube.com/watch?v=ylR21fezN7E)
+                - 2018: Vienna. Was Melbourne.
+            - Making a house
+                - [WP:List of human habitation forms](https://en.wikipedia.org/wiki/List_of_human_habitation_forms)
         - Grooming, styling, appearance
             - [WP:Hairstyles](https://en.wikipedia.org/wiki/List_of_hairstyles)
                 - [Wearing long hair for men]({% link longhair.md %})
@@ -149,9 +161,14 @@ date: 2017-05-20 00:00:00 +0700
                     - Pemerintah menyediakan akses ke jurnal berbayar? Di mana? Cara pakainya?
             - [Living in Jakarta]({% link jakarta.md %})
                 - [Vital service failure log]({% link log.md %})
-        - Making a house
-            - [WP:List of human habitation forms](https://en.wikipedia.org/wiki/List_of_human_habitation_forms)
         - [Fighting]({% link fight.md %})
+        - Dying in the 21st century
+            - Inheriting digital data
+                - What to do with your data when you die?
+                - https://www.businessinsider.sg/how-to-give-google-account-to-trusted-person-when-you-die-2018-8/
+            - Do we have to die?
+            Can technology save us?
+            Will we reach immortality in this century?
     - [Mathematics]({% link math.md %})
         - [Learning mathematics]({% link mathlearn.md %})
         - [Teaching mathematics]({% link mathedu.md %})
@@ -172,6 +189,7 @@ date: 2017-05-20 00:00:00 +0700
         - [Learning Japanese]({% link japanese.md %})
         - Bahasa Indonesia
             - Apa beda manjur, mempan, mujarab, dan mustajab?
+    - [Accounting]({% link account.md %})
 - Finding other information sources
     - Finding other wikis
         - [WP:List of wikis](https://en.wikipedia.org/wiki/List_of_wikis)

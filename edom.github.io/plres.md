@@ -776,6 +776,13 @@ functional languages for systems programming?
     - https://mail.haskell.org/pipermail/haskell-cafe/2013-August/109945.html
 - GHC woes
     - Profiling requires recompiling all transitive dependencies if they happen to be compiled without profiling.
+- What is a type?
+    - Mathematically, A type is a set whose membership is syntactically decidable.
+    - Engineeringly, A type gives meaning to bit patterns.
+    A type encodes meaning into bit patterns.
+        - For example, consider the bit pattern 11111111.
+            - It means -1 as an int8.
+            - It means 127 as an uint8.
 - Obscure things. Much marketing, little technical detail.
     - VPRI, Alan Kay et al., archived (stopped operating in 2018), computing for the masses?
         - "Improve 'powerful ideas education' for the world's children and to advance the state of systems research and personal computing"

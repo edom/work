@@ -392,3 +392,6 @@ https://en.wikipedia.org/wiki/Mereological_essentialism
 - Making machine understand human languages
     - [Microsoft creates AI that can read a document and answer questions about it as well as a person - The AI Blog](https://blogs.microsoft.com/ai/microsoft-creates-ai-can-read-document-answer-questions-well-person/)
 - [A (Long) Peek into Reinforcement Learning](https://lilianweng.github.io/lil-log/2018/02/19/a-long-peek-into-reinforcement-learning.html)
+- Competitions
+    - Kaggle: get paid to solve machine learning problems.
+- HLearn: a machine learning library for Haskell \cite{izbicki2013hlearn}

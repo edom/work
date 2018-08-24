@@ -45,3 +45,17 @@ date: 2018-08-24 01:31 +0700
     - "ontoprog: Ontology-based Programming: Extended Semantics for OOP languages", [github](https://github.com/andreasBihlmaier/ontoprog)
     - 2012, article, "Modeling the Knowledge Domain of the Java Programming Language as an Ontology", [pdf](http://eeyem.eap.gr/wp-content/uploads/2017/06/11_ICWL2012.pdf)
     - 2007, article, "Towards a programming language ontology", [pdf](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.82.194&rep=rep1&type=pdf)
+- REST ontology
+    - REST forces hierarchical ontology.
+    - https://server/property/101/name -> "foo"
+        - "101" is an instance of "property" class.
+        - "property" is a class in "server" namespace.
+        - Attribute "name" of "101" has value "foo".
+    - https://server/property/101 -> {"name": "foo", "location": "somewhere"}
+        - "101" is an instance of "property" class.
+    - https://server/property/101/stock/level/day -> 10
+        - means that property 101 can last 10 days
+        - A/B mean A has B?
+        - A/B mean B is an instance of A?
+    - [REST is OVER! - Literate Programming](http://blog.steveklabnik.com/posts/2012-02-23-rest-is-over)
+        - REST has been renamed to "Hypermedia API".

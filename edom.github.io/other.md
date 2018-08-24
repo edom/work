@@ -51,40 +51,15 @@ date: 2018-07-22 13:15 +0700
         - [Boss]({% link boss.md %})
 - [Biology]({% link biology.md %})
 - [Psychology]({% link psych.md %})
-- Finding the best document typesetting/processing system
-    - What are some markup languages?
-        - http://www.nongnu.org/skribilo/
-        - markdown
-        - reST (restructured text)
-        - LaTeX
-        - roff, troff, nroff, groff
-        - GNU info
-        - Unix man
 - Applying probability theory and statistics to marketing and pricing
     - https://medium.com/airbnb-engineering/learning-market-dynamics-for-optimal-pricing-97cffbcc53e3
     - https://overflow.buffer.com/2018/08/13/predicting-churn/
-- Perhaps I should make a browser plugin that copies a link of the page to the clipboard in Markdown format?
-No. A bookmarklet suffices.
-    - Which browser has easiest plugin development?
-        - The result might be suspicious because I used Google to look for the answer.
-        - 2016: Chrome ([source](https://www.quora.com/Is-it-easier-to-write-a-plug-in-extension-for-Chrome-or-Firefox))
-        - 2011: Chrome ([source](https://stackoverflow.com/questions/6438329/which-browser-is-easier-to-develop-plug-ins-for-chrome-or-firefox))
-- Beginning to work on GHC
-    - Please see the [newcomers guide](https://ghc.haskell.org/trac/ghc/wiki/Newcomers) first.
-- [Applying John Rawls's "veil of ignorance" argument to web design](http://mrmrs.cc/writing/2016/03/23/the-veil-of-ignorance/)
-- Alien technologies?
-    - https://github.com/transient-haskell/transient
+- Where ethics and design meet
+    - [Applying John Rawls's "veil of ignorance" argument to web design](http://mrmrs.cc/writing/2016/03/23/the-veil-of-ignorance/)
 - Self-driving buses for public transport can drive transport costs down?
     - Which are the biggest transport cost component? Is it fuel or the driver?
 - [Simple Nature, an online physics textbook](http://www.lightandmatter.com/area1sn.html): for beginner, too wordy for me.
-- Google alternatives?
-    - [The Top 5 Google Alternatives and Why You Should Use Them](https://www.makeuseof.com/tag/5-google-search-alternatives-that-you-could-experiment-with/)
-- Enterprise Haskell?
-    - https://wiki.haskell.org/Enterprise_Haskell
-    - DSH: Database Supported Haskell https://hackage.haskell.org/package/DSH
 - Why are clothes so expensive?
-- Are there open source enterprise accounting systems?
-- [Distributed Systems in Haskell :: Will Yager](http://yager.io/Distributed/Distributed.html)
 - Why users don't use distributed systems
     - [highscalability.com: What do you believe now that you didn't five years ago?](http://highscalability.com/blog/2018/8/13/what-do-you-believe-now-that-you-didnt-five-years-ago.html)
         - "Decentralized systems will continue to lose to centralized systems until there's a driver requiring decentralization to deliver a clearly superior consumer experience."
@@ -109,16 +84,7 @@ The pack might contain things like yacy.net, matrix.org, riot.im.
     - https://everipedia.org/wiki/InterPlanetary_File_System/
         - Everipedia and IPFS?
     - https://oedb.org/ilibrarian/top-7-alternatives-to-wikipedia/
-- [HuwCampbell/grenade: Deep Learning in Haskell](https://github.com/HuwCampbell/grenade)
-- [Smart classification using Bayesian monads in Haskell - Random Hacks](http://www.randomhacks.net/2007/03/03/smart-classification-with-haskell/)
-- someone has too much time
-    - https://hackage.haskell.org/package/ImperativeHaskell
-    - just for curiosity https://github.com/edwinb/idris-php
 - http://tech.jonathangardner.net/wiki/Why_Java_Sucks#Speaking_of_the_JVM...
-- https://chrisdone.com/posts/haskell-constraint-trick
-- https://chrisdone.com/posts/twitter-problem-loeb
-- http://blog.sigfpe.com/2006/11/from-l-theorem-to-spreadsheet.html
-- http://blog.sigfpe.com/2007/02/comonads-and-reading-from-future.html
 - CSS programming
     - https://css-tricks.com/autoprefixer/
     - [CSS flexbox cheat sheet](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
@@ -133,10 +99,6 @@ The pack might contain things like yacy.net, matrix.org, riot.im.
 - skin color chart
     - https://en.wikipedia.org/wiki/Von_Luschan%27s_chromatic_scale
     - https://en.wikipedia.org/wiki/Fitzpatrick_scale
-- haskell for devops
-    - https://www.reddit.com/r/haskell/comments/31vnos/neil_mitchell_devops_with_haskell/
-    - https://github.com/commercialhaskell/commercialhaskell/blob/master/taskforce/devops.md
-    - [azubi: A simple DevOps tool which will never "reach" enterprice level.](http://hackage.haskell.org/package/azubi)
 - [PostgREST/postgrest: REST API for any Postgres database](https://github.com/PostgREST/postgrest)
     - https://restifydb.com/
     - https://www.progress.com/blogs/restify-databases-expose-your-database-to-rest-web-services
@@ -146,60 +108,30 @@ The pack might contain things like yacy.net, matrix.org, riot.im.
     - "If all his [Bezos's] data says one thing and a few customers say something else, he believes the customers."
 - [Planetmath](https://github.com/planetmath) is a collection of TeX documents.
     - Can it be made into a mathematical knowledge management system?
-- Components for publish-subscribe in Haskell?
-    - https://www.stackage.org/lts-6.35/package/broadcast-chan-0.1.1
 - https://wikieducator.org/Main_Page
 - philosophy
     - [The First-Person and Third-Person Views](http://consc.net/notes/first-third.html)
-- Lennart Augustsson's [Things that amuse me](http://augustss.blogspot.com/2008/12/somewhat-failed-adventure-in-haskell.html), Haskell module overloading
-- [How KaiOS Is Becoming the 3rd Major Mobile OS - YouTube](https://www.youtube.com/watch?v=OA_g2bQgOXY)
-    - Much money can be made from selling to poor people (hopefully while also helping them).
-        - [The Smart Way to Make Profits While Serving the Poor](https://hbr.org/2012/06/the-smart-way-to-make-profits)
-- Inheriting digital data
-    - What to do with your data when you die?
-    - https://www.businessinsider.sg/how-to-give-google-account-to-trusted-person-when-you-die-2018-8/
-- Vimium: vim-like shortcuts for navigating the chromium browser
-    - [Install from Chrome Web Store](https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en)
-    - [Source code on GitHub](https://github.com/philc/vimium)
-- GHC TDNR (type-directed name resolution)
-    - https://ghc.haskell.org/trac/ghc/ticket/4479
-    - https://ghc.haskell.org/trac/ghc/wiki/Records/OverloadedRecordFields
-    - https://stackoverflow.com/questions/22417063/current-state-of-record-types-and-subtyping-in-haskell
-    - https://en.wikipedia.org/wiki/Subtyping#Record_types
-        - Width and depth subtyping
+- Browser plugins (I don't necessarily use)
+    - Vimium: vim-like shortcuts for navigating the chromium browser
+        - [Install from Chrome Web Store](https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en)
+        - [Source code on GitHub](https://github.com/philc/vimium)
+    - Perhaps I should make a browser plugin that copies a link of the page to the clipboard in Markdown format?
+    No. A bookmarklet suffices.
+        - Which browser has easiest plugin development?
+            - The result might be suspicious because I used Google to look for the answer.
+            - 2016: Chrome ([source](https://www.quora.com/Is-it-easier-to-write-a-plug-in-extension-for-Chrome-or-Firefox))
+            - 2011: Chrome ([source](https://stackoverflow.com/questions/6438329/which-browser-is-easier-to-develop-plug-ins-for-chrome-or-firefox))
 - Some ideas
     - Compile a Java class to an ELF native binary.
     Use DWARF to help reconstruct stack trace.
-- [lazy: Explicit laziness for Haskell](http://hackage.haskell.org/package/lazy)
-    - "This library provides laziness as an abstraction with an explicit type-signature, and it so happens that this abstraction forms a monad!"
-    - [If Haskell were strict, what would the laziness be like?](https://nikita-volkov.github.io/if-haskell-were-strict/)
-    - 2014, article, [Paul Chiusano: An interesting variation on a strict by default language](https://pchiusano.github.io/2014-09-18/explicit-laziness.html)
-    - [How do we all feel about laziness? : haskell](https://www.reddit.com/r/haskell/comments/36s0ii/how_do_we_all_feel_about_laziness/)
-- Xiaomi limits hardware profit to 5%? What?
-    - [Why does Xiaomi limit its profits to 5%? - YouTube TechAltar : Android](https://www.reddit.com/r/Android/comments/8k43qo/why_does_xiaomi_limit_its_profits_to_5_youtube/)
-        - Because Xiaomi is a software company, not a hardware company.
+- smartphone politics
+    - Xiaomi limits hardware profit to 5%? What?
+        - [Why does Xiaomi limit its profits to 5%? - YouTube TechAltar : Android](https://www.reddit.com/r/Android/comments/8k43qo/why_does_xiaomi_limit_its_profits_to_5_youtube/)
+            - Because Xiaomi is a software company, not a hardware company.
+    - [How KaiOS Is Becoming the 3rd Major Mobile OS - YouTube](https://www.youtube.com/watch?v=OA_g2bQgOXY)
+        - Much money can be made from selling to poor people (hopefully while also helping them).
+            - [The Smart Way to Make Profits While Serving the Poor](https://hbr.org/2012/06/the-smart-way-to-make-profits)
 - http://ontologies.sti-innsbruck.at/acco/ns.html
-- [Haskell ides? : haskell](https://www.reddit.com/r/haskell/comments/86bmpu/haskell_ides/)
-- Ideas
-    - Mathematically, A type is a set whose membership is syntactically decidable.
-    - Engineeringly, A type gives meaning to bit patterns.
-    A type encodes meaning into bit patterns.
-        - For example, consider the bit pattern 11111111.
-            - It means -1 as an int8.
-            - It means 127 as an uint8.
-- cybercrime
-    - 2016
-        - [The $1,000,000,000 North Korean Bank Heist - YouTube](https://www.youtube.com/watch?v=Usu9z0feHug)
-            - [Bangladesh Bank robbery - Wikipedia](https://en.wikipedia.org/wiki/Bangladesh_Bank_robbery)
-- distributed functional programming?
-    - [WP:MBrace](https://en.wikipedia.org/wiki/MBrace), F#
-    - [Cloud Haskell](https://haskell-distributed.github.io/)
-        - has some academic papers https://wiki.haskell.org/Cloud_Haskell
-    - [PatrickMaier/HdpH: Haskell distributed parallel Haskell](https://github.com/PatrickMaier/HdpH)
-- HLearn: a machine learning library for Haskell \cite{izbicki2013hlearn}
-- Kaggle: get paid to solve machine learning problems.
-- [Where is the world's most liveable city? | The Economist - YouTube](https://www.youtube.com/watch?v=ylR21fezN7E)
-    - 2018: Vienna. Was Melbourne.
 - The law of demand and supply only happens with order-book-like markets.
 - [WP:Bullshit asymmetry principle](https://en.wikipedia.org/wiki/Bullshit#Bullshit_asymmetry_principle)
     - "The amount of energy needed to refute bullshit is an order of magnitude bigger than to produce it."
@@ -228,16 +160,8 @@ The pack might contain things like yacy.net, matrix.org, riot.im.
             - One does not learn a language by memorizing the syntax.
             - One does not learn a language by memorizing the language reference document.
 - 2011, article, "A Very Rough Guide for PhD Students in Mathematics", [pdf](http://www.maths.manchester.ac.uk/media/eps/schoolofmathematics/study/guide_2011.pdf)
-- Accounting terms
-    - What is an account?
-        - If you deposit money in banks, then you have an account for every bank account you have.
-        - If you lend money to people, then you have an account for every people.
-    - What is a journal?
-        - A journal is optimized for entering transactions by date.
-        - What is a transaction?
-            - A transaction involves two or more accounts.
-                - The sum of all account changes in a transaction is zero.
-    - What is a subledger (subsidiary ledger)?
-        - A subledger of account C is obtained by selecting only the journal entries that affect the account C.
-    - What is a general ledger?
-        - A general ledger is the concatenation/combination/summation of several subledgers.
+- Using chat such as IRC/Slack
+    - I find that most channels are idle.
+    - There are two kinds of channels: temporary and permanent.
+        - Temporary channel is functional. It gathers people for a task/project.
+        - Permanent channel is structural. It gathers people in the same tribe/department/structure.

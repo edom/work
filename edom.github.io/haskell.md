@@ -146,6 +146,48 @@ It's sad to see works thrown away.
     - [what IDE/editor do you use for Haskell development? : haskell](https://www.reddit.com/r/haskell/comments/5lgtb1/what_ideeditor_do_you_use_for_haskell_development/)
     - [What are powerful Haskell IDEs? - Quora](https://www.quora.com/What-are-powerful-Haskell-IDEs)
     - [What is the best IDE for programming in Haskell? - Quora](https://www.quora.com/What-is-the-best-IDE-for-programming-in-Haskell)
+    - [Haskell ides? : haskell](https://www.reddit.com/r/haskell/comments/86bmpu/haskell_ides/)
     - Leksah-nix fails to build on my machine (Ubuntu 14.04).
     There are no prebuilt binaries.
     Must compile from source from [Hackage](https://github.com/leksah/leksah/wiki/download) using Cabal.
+- GHC
+    - Beginning to work on GHC
+        - Please see the [newcomers guide](https://ghc.haskell.org/trac/ghc/wiki/Newcomers) first.
+    - GHC TDNR (type-directed name resolution)
+        - https://ghc.haskell.org/trac/ghc/ticket/4479
+        - https://ghc.haskell.org/trac/ghc/wiki/Records/OverloadedRecordFields
+        - https://stackoverflow.com/questions/22417063/current-state-of-record-types-and-subtyping-in-haskell
+        - https://en.wikipedia.org/wiki/Subtyping#Record_types
+            - Width and depth subtyping
+- Enterprise Haskell?
+    - https://wiki.haskell.org/Enterprise_Haskell
+    - DSH: Database Supported Haskell https://hackage.haskell.org/package/DSH
+- [Distributed Systems in Haskell :: Will Yager](http://yager.io/Distributed/Distributed.html)
+- Alien technologies?
+    - https://github.com/transient-haskell/transient
+- [HuwCampbell/grenade: Deep Learning in Haskell](https://github.com/HuwCampbell/grenade)
+- [Smart classification using Bayesian monads in Haskell - Random Hacks](http://www.randomhacks.net/2007/03/03/smart-classification-with-haskell/)
+- someone has too much time
+    - https://hackage.haskell.org/package/ImperativeHaskell
+    - just for curiosity https://github.com/edwinb/idris-php
+- https://chrisdone.com/posts/haskell-constraint-trick
+- https://chrisdone.com/posts/twitter-problem-loeb
+- http://blog.sigfpe.com/2006/11/from-l-theorem-to-spreadsheet.html
+- http://blog.sigfpe.com/2007/02/comonads-and-reading-from-future.html
+- haskell for devops
+    - https://www.reddit.com/r/haskell/comments/31vnos/neil_mitchell_devops_with_haskell/
+    - https://github.com/commercialhaskell/commercialhaskell/blob/master/taskforce/devops.md
+    - [azubi: A simple DevOps tool which will never "reach" enterprice level.](http://hackage.haskell.org/package/azubi)
+- Components for publish-subscribe in Haskell?
+    - https://www.stackage.org/lts-6.35/package/broadcast-chan-0.1.1
+- Lennart Augustsson's [Things that amuse me](http://augustss.blogspot.com/2008/12/somewhat-failed-adventure-in-haskell.html), Haskell module overloading
+- [lazy: Explicit laziness for Haskell](http://hackage.haskell.org/package/lazy)
+    - "This library provides laziness as an abstraction with an explicit type-signature, and it so happens that this abstraction forms a monad!"
+    - [If Haskell were strict, what would the laziness be like?](https://nikita-volkov.github.io/if-haskell-were-strict/)
+    - 2014, article, [Paul Chiusano: An interesting variation on a strict by default language](https://pchiusano.github.io/2014-09-18/explicit-laziness.html)
+    - [How do we all feel about laziness? : haskell](https://www.reddit.com/r/haskell/comments/36s0ii/how_do_we_all_feel_about_laziness/)
+- distributed functional programming?
+    - [WP:MBrace](https://en.wikipedia.org/wiki/MBrace), F#
+    - [Cloud Haskell](https://haskell-distributed.github.io/)
+        - has some academic papers https://wiki.haskell.org/Cloud_Haskell
+    - [PatrickMaier/HdpH: Haskell distributed parallel Haskell](https://github.com/PatrickMaier/HdpH)
