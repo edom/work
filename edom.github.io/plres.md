@@ -28,28 +28,25 @@ date: 2018-07-22 02:45 +0700
     - Computer (machine) is embodied formal system.
         - Assume no hardware fault.
     - Software is executable mathematics.
-- The [Sixten](https://github.com/ollef/sixten) language might be a good starting point.
+- Where shall we start?
+    - These languages are interesting starting points:
+        - [Sixten](https://github.com/ollef/sixten)
+        - Dhall
+        - [Morte: an intermediate language for super-optimizing functional programs](http://www.haskellforall.com/2014/09/morte-intermediate-language-for-super.html)
 - Every functional programming language is lambda calculus plus plus.
-    - Every functional programming language L can be modeled by a category C(L) whose objects are the types of L and arrows are the function expressions of L.
     - I thought lambda calculus could be summarized in one page, but Henk Barendregt wrote hundreds of pages about it. Is there more to lambda calculus than it seems?
         - 1994, 50 pages, http://www.nyu.edu/projects/barker/Lambda/barendregt.94.pdf
         - 1991, 190 pages, https://people.mpi-sws.org/~dreyer/tor/papers/barendregt.pdf
-- where to find more
+- Where to find recent programming language research?
     - recent programming language research
         - meetings, conferences, symposiums
             - POPL ("ACM SIGPLAN Symposium on Principles of Programming Languages")
-                - its twitter https://twitter.com/poplconf?lang=en
+                - [its twitter](https://twitter.com/poplconf?lang=en)
     - collections, links, aggregators
         - https://www.cs.cmu.edu/~mleone/language-research.html
-    - software engineering
-        - enterprise application development
-            - It's 2018. CRUD should be generated.
-                - https://news.ycombinator.com/item?id=15429616
-                - http://isis.apache.org/
-                - other tools?
-            - feature-oriented software development
-                - https://en.wikipedia.org/wiki/FOSD_program_cubes
 - category theory and programming languages
+    - Category-theoretic model of functional programming languages
+        - Every functional programming language L can be modeled by a category C(L) whose objects are the types of L and arrows are the function expressions of L.
     - categorical programming (what is this?)
         - 2000, PhD thesis, "Categorical programming with inductive and coinductive types" https://kodu.ut.ee/~varmo/papers/thesis.pdf
         - categorical programming language
@@ -113,46 +110,6 @@ date: 2018-07-22 02:45 +0700
         - Call-by-what?
             - Call-by-value
             - Call-by-name
-- syntax, grammar, parsing, pretty-printing
-    - Parsing is the act of modifying the *state* of the parser.
-        - 2017, ["A Typed, Algebraic Approach to Parsing"](https://www.cl.cam.ac.uk/~nk480/parsing.pdf)
-            - "[...] we extend the notion of Brzozowski derivative from regular expressions to the typed context-free expressions."
-    - Unparsing is the linearization (serialization) of a tree.
-    - Parsing is the treeization (delinearization, deserialization) of a line.
-    - Parsing is String -> Maybe Tree.
-    - Unparsing is Tree -> String.
-    - Can we make parsing truly one-to-one? String -> Tree. CST = AST. Very rigid syntax. Forbid whitespace freedom.
-    - Why lex (lexical analysis / tokenization)?
-        - Cleaner grammar (no need to mention whitespaces in the grammar).
-            - Example:
-                - With lexing: `exp ::= exp "+" exp`
-                - Without lexing: `exp ::= exp white "+" white exp`.
-        - https://en.wikibooks.org/wiki/Compiler_Construction/Lexical_analysis
-            - "Strictly speaking, tokenization may be handled by the parser. The reason why we tend to bother with tokenising in practice is that it makes the parser simpler,
-            and decouples it from the character encoding used for the source code."
-    - given grammar, generate both parser and unparser/pretty-printer
-        - http://www.semdesigns.com/Products/DMS/DMSPrettyPrinters.html?Home=DMSToolkit
-        - https://hackage.haskell.org/package/invertible-syntax-0.2.1/src/Example.lhs
-        - https://hackage.haskell.org/package/invertible-syntax
-        - [Tillmann Rendel and Klaus Ostermann. "Invertible Syntax Descriptions: Unifying Parsing and Pretty Printing". In Proc. of Haskell Symposium, 2010.](http://www.informatik.uni-marburg.de/~rendel/unparse/rendel10invertible.pdf)
-        - http://jssst.or.jp/files/user/taikai/2016/PPL/ppl1-1.pdf
-    - Parsing Expression Grammar (PEG)
-        - https://github.com/harc/ohm/
-            - https://ohmlang.github.io/
-                - https://harc.ycr.org/project/ohm/
-        - Packrat
-    - 2015, [Nez: practical open grammar language](https://arxiv.org/abs/1511.08307)
-    - algebra of pretty-printing
-        - 1995, Hughes, "The design of a pretty-printing library"
-        - 1998, Wadler, "A prettier printer"
-        - Hughes, Peyton-Jones, et al., http://hackage.haskell.org/package/pretty-1.1.3.6/docs/Text-PrettyPrint-HughesPJ.html
-    - [Efficient simple pretty printing combinators](https://www.cs.kent.ac.uk/people/staff/oc/pretty.html)
-    - Earley parser
-        - https://en.wikipedia.org/wiki/Earley_parser
-        - https://hackage.haskell.org/package/Earley
-    - https://github.com/Gabriel439/post-rfc/blob/master/sotu.md#parsing--pretty-printing
-        - https://hackage.haskell.org/package/trifecta
-        - https://hackage.haskell.org/package/parsers
 - Big names in programming language research, and their contributions
     - This list is incomplete.
     - See also:
@@ -307,22 +264,6 @@ Things that I think are wrong in 2018.
             - "Polymorphism, subtyping and type inference in MLsub" http://www.cl.cam.ac.uk/~sd601/papers/mlsub-preprint.pdf
                 - from http://lambda-the-ultimate.org/node/5393
                      - from https://contributors.scala-lang.org/t/algebraic-subtyping/577
-- Making compilers
-    - From grammar description, the machine should generate both a parser and a pretty-printer.
-        - [LTU: Invertible Syntax Descriptions: Unifying Parsing and Pretty Printing](http://lambda-the-ultimate.org/node/4191)
-        - [Invertible Syntax Descriptions: Unifying Parsing and Pretty Printing](http://www.informatik.uni-marburg.de/~rendel/unparse/rendel10invertible.pdf)
-    - Syntax analysis (parsing)
-        - Brzozowski quotients.
-            - [Yacc is dead](https://arxiv.org/abs/1010.5023)
-            - "Parsing with derivatives"
-        - What is an/the inverse of parsing?
-            - Inverse of parsing is generation? From grammar, generate all possible strings and their syntax trees.
-            - Inverse of analytical grammar is generative grammar?
-            - Parser is syntax analyzer.
-            - Analysis is the opposite of synthesis?
-            - What is syntax synthesizer?
-            - Inverse of parsing is pretty-printing?
-            - If matching is analogous to subtraction, then what is analogous to multiplication? Generation?
 - Supercompilation
     - [LTU: Ongoing work on Supercompilation of Java code (or supercompilation in general)?](http://lambda-the-ultimate.org/node/2739)
 - Metaprogramming
@@ -363,11 +304,12 @@ functional languages for systems programming?
     - Can we use Description Logic (the theoretical foundations of Web Ontology Language OWL) to generate software, especially enterprise applications?
         - 2015, article, [[1503.01723] Modelling the Semantic Web using a Type System](https://arxiv.org/abs/1503.01723)
         - 2005, article, "Software engineering ontologies and their implementation", [pdf](https://espace.curtin.edu.au/bitstream/handle/20.500.11937/9549/19598_downloaded_stream_116.pdf), [pdf copy](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.86.5585&rep=rep1&type=pdf)
-    - People who share a subset of the vision; they don't go far enough
+    - People who share some of the vision but don't go far enough
         - XForms
             - 2016, article, [Leveraging declarative languages in web application development - SpringerLink](https://link.springer.com/article/10.1007/s11280-015-0339-z)
             - 2014, slides, advocacy, [Declarative Web Applications](https://homepages.cwi.nl/~steven/Talks/2014/01-31-declarative/)
         - 2007, workshop, [Declarative Models of Distributed Web Applications](https://www.w3.org/2007/02/dmdwa-ws/)
+        - [#proglangdesign](http://www.proglangdesign.net/)
         - IDE (integrated development environment), editor
             - Given a grammar, the computer should generate an IDE for us.
             Syntax highlighting.
@@ -386,6 +328,7 @@ functional languages for systems programming?
                         - "Morte is a super-optimizing intermediate language for functional languages."
                     - http://www.haskellforall.com/2014/09/morte-intermediate-language-for-super.html
             - [Thyer's PhD thesis "Lazy specialization"](http://thyer.name/phd-thesis/thesis-thyer.pdf) has an accessible introduction to lambda calculus in Chapter 2.
+                - "Tower of interpreters" test
             - 1991, "A partial evaluator for the untyped lambda-calculus", [paywall](https://www.cambridge.org/core/journals/journal-of-functional-programming/article/a-partial-evaluator-for-the-untyped-lambda-calculus/EE324F936F0A009B6766B13FF6755DFC)
                 - related: semantic-directed code generation?
             - Gabriel Gonzales stuff: Morte, Dhall.
@@ -393,7 +336,7 @@ functional languages for systems programming?
             - procedural-looking logic programming language
         - syntax
             - [WP:Off-side rule](https://en.wikipedia.org/wiki/Off-side_rule), indentation as block delimiter
-    - Turn an interpreter into a compiler for free!
+    - [Quest For The Perfect Language](http://wiki.c2.com/?QuestForThePerfectLanguage)
 - 2017, article, [[1707.00024] A Formalized General Theory of Syntax with Bindings](https://arxiv.org/abs/1707.00024)
 - [Vectors are records, too (pdf) : dependent_types](https://www.reddit.com/r/dependent_types/comments/8qig0u/vectors_are_records_too_pdf/)
 - https://wiki.haskell.org/Untypechecking is "converting from a type to a term".
@@ -509,25 +452,6 @@ functional languages for systems programming?
     - [SWI-Prolog for the (semantic) web](http://www.swi-prolog.org/web/)
 - [Paul Chiusano: If Haskell is so great, why hasn't it taken over the world? And the curious case of Go.](https://pchiusano.github.io/2017-01-20/why-not-haskell.html)
     - Unison programming language
-- [Morte: an intermediate language for super-optimizing functional programs](http://www.haskellforall.com/2014/09/morte-intermediate-language-for-super.html) - Incremental λ-Calculus
-- Parsing
-    - Can we parse incrementally?
-        - Differentiating Parsers
-        Automatic derivation of incremental parser from a grammar or a non-incremental parser?
-        Like automatic differentiation but generalized to any program?
-        http://lambda-the-ultimate.org/node/3704
-        - http://matt.might.net/articles/implementation-of-regular-expression-matching-in-scheme-with-derivatives/
-        - Parsing with derivatives?
-        https://hackage.haskell.org/package/derp
-        https://arxiv.org/abs/1010.5023
-        http://matt.might.net/articles/parsing-with-derivatives/ "Yacc is dead"
-        - Type-directed automatic incrementalization
-        http://www.cs.cmu.edu/~joshuad/papers/incr/
-        - https://en.wikipedia.org/wiki/Incremental_computing
-        https://inc-lc.github.io/
-        - http://okmij.org/ftp/continuations/differentiating-parsers.html
-        - https://hackage.haskell.org/package/incremental-parser
-        - Brzozowski quotient
 - Elixir has gradual static typing via Erlang Dialyzer.
     - [Typespecs and behaviours - Elixir](https://elixir-lang.org/getting-started/typespecs-and-behaviours.html)
     - [Understanding Elixir Types - via @codeship](https://blog.codeship.com/understanding-elixir-types/)
@@ -783,6 +707,17 @@ functional languages for systems programming?
         - For example, consider the bit pattern 11111111.
             - It means -1 as an int8.
             - It means 127 as an uint8.
+- Every type checking algorithm is unification (logic programming).
+    - If the programmer annotates a term, use that annotation.
+    - If the a term is not annotated, annotate that term with a freshly generated variable.
+    - Unify everything according to the typing rules.
+    - See Algorithm W in [WP:Hindley–Milner type system](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system).
+- [metaprogramming - Why is ML called Meta-Language? - Stack Overflow](https://stackoverflow.com/questions/50490883/why-is-ml-called-meta-language)
+- What is incremental lambda-calculus, and (automatic) differentiation of algebraic data types?
+- "Purely functional lazy nondeterministic programming", [paywall](https://www.cambridge.org/core/journals/journal-of-functional-programming/article/purely-functional-lazy-nondeterministic-programming/1E8BA117E549A9612BC4AF9804E5507A)
+- [What are some interesting language features that may not be well known? : ProgrammingLanguages](https://www.reddit.com/r/ProgrammingLanguages/comments/8vcrzb/what_are_some_interesting_language_features_that/)
+- [A practitioner’s guide to reading programming languages papers](https://blog.acolyer.org/2018/01/26/a-practitioners-guide-to-reading-programming-languages-papers/)
+    - from [top scoring links : ProgrammingLanguages](https://www.reddit.com/r/ProgrammingLanguages/top/)
 - Obscure things. Much marketing, little technical detail.
     - VPRI, Alan Kay et al., archived (stopped operating in 2018), computing for the masses?
         - "Improve 'powerful ideas education' for the world's children and to advance the state of systems research and personal computing"

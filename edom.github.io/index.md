@@ -15,8 +15,13 @@ date: 2017-05-20 00:00:00 +0700
     - Computer practice
         - Software engineering
             - Forward software engineering
-                - [Making lasting software]({% link softeng.md %})
+                - [Making lasting software sooner]({% link softeng.md %})
                 - [Making the only programming language we will ever need]({% link plres.md %})
+                    - Making interpreters/translators/compilers
+                        - Don't make a compiler?
+                        Make an interpreter instead, and stage it?
+                        Turn an interpreter into a compiler for free?
+                        - [Parsing]({% link parse.md %})
                     - [Modeling all data]({% link modeldata.md %})
                         - [Solving the AST decoration problem]({% link ast.md %})
                         - Solving the expression problem

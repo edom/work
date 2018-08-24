@@ -1,5 +1,5 @@
 ---
-title: Making lasting software
+title: Making lasting software sooner
 date: 2018-04-15 00:00 +0700
 permalink: /softeng.html
 ---
@@ -16,6 +16,7 @@ permalink: /softeng.html
             This requires a change in mindset.
             The software is not something made to some requirements; the software is the requirements itself.
             The software is not the shirt made-to-order; the software is the order itself, from which all satisfying shirts can be generated/derived/produced.
+
 - Readings
     - 2018, book, "The essence of software engineering", [description](https://link.springer.com/book/10.1007/978-3-319-73897-0), [pdf](https://link.springer.com/content/pdf/10.1007%2F978-3-319-73897-0.pdf)
         - chapter "Escaping Method Prison – On the Road to Real Software Engineering"
@@ -319,5 +320,13 @@ Use continuous integration and continuous deployment instead.
         - http://michaelrbernste.in/2013/06/03/real-time-garbage-collection-is-real.html
 - 2005, article, "Practical Ontology Systems for Enterprise Application", [pdf](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.622.6490&rep=rep1&type=pdf)
 - 2006, article, "Applications of Ontologies in Software Engineering", [pdf](https://km.aifb.kit.edu/ws/swese2006/final/happel_full.pdf)
-- npm dependency hell, how npm2 works, how npm3 works
-    - http://npm.github.io/how-npm-works-docs/theory-and-design/dependency-hell.html
+- dependency management
+    - npm dependency hell, how npm2 works, how npm3 works
+        - http://npm.github.io/how-npm-works-docs/theory-and-design/dependency-hell.html
+- How do we develop enterprise software with less effort?
+    - CRUD should be generated.
+        - https://news.ycombinator.com/item?id=15429616
+        - http://isis.apache.org/
+        - other tools?
+    - feature-oriented software development
+        - https://en.wikipedia.org/wiki/FOSD_program_cubes

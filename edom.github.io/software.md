@@ -24,7 +24,6 @@ date: 2017-06-26 22:30 +0700
     - Haskell
         - https://github.com/sellout/recursion-scheme-talk/blob/master/recursion-scheme-talk.org
         - https://github.com/krispo/awesome-haskell
-        - [incremental/online parsing](https://yi-editor.github.io/posts/2014-09-04-incremental-parsing/)
         - Cabal is the key to Haskell usability and adoption?
             - https://www.haskell.org/cabal/
             - Haskell lacks something like ruby gem, python pypi, or nodejs npm.

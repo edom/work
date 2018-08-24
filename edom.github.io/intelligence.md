@@ -395,3 +395,4 @@ https://en.wikipedia.org/wiki/Mereological_essentialism
 - Competitions
     - Kaggle: get paid to solve machine learning problems.
 - HLearn: a machine learning library for Haskell \cite{izbicki2013hlearn}
+- [Deep Dive Into Machine Learning - DZone AI](https://dzone.com/articles/deep-dive-into-machine-learning)
