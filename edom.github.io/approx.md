@@ -5,10 +5,39 @@ date: 2018-08-17 22:52 +0700
 mathjax: yes
 ---
 
-- Why are we interested in approximation theory?
-    - Because we want to justify how neural networks work.
-        - 2016, article, "Deep vs. shallow networks: An approximation theory perspective", [pdf available](https://arxiv.org/abs/1608.03287)
-        - [WP:Explainable Artificial Intelligence](https://en.wikipedia.org/wiki/Explainable_Artificial_Intelligence)
+We are interested in approximation theory because we want to justify how neural networks work.
+
+- 2016, article, "Deep vs. shallow networks: An approximation theory perspective", [pdf available](https://arxiv.org/abs/1608.03287)
+- [WP:Explainable Artificial Intelligence](https://en.wikipedia.org/wiki/Explainable_Artificial_Intelligence)
+
+We should begin by skimming the 1998 book "A Short Course on Approximation Theory" by N. L. Carothers ([pdf](http://fourier.math.uoc.gr/~mk/approx1011/carothers.pdf)).
+Then we should skim the 2017 lecture notes "Lectures on multivariate polynomial approximation" ([pdf](http://www.math.unipd.it/~demarchi/MultInterp/LectureNotesMI.pdf)).
+
+The phrase "x *approximates* y" means "x is *close* to y", which implies distance, which implies metric space.
+
+How close is the approximation?
+Suppose that the function \\( g \\) approximates the function \\( f \\) in interval \\( I \\).
+Then:
+
+- The "approximation error at \\( x \\)" is \\( g(x) - f(x) \\).
+- The "maximum absolute error" is \\( \max_{x \in I} \abs{g(x) - f(x)} \\).
+
+How do we measure the distance between two \\( \Real \to \Real \\) functions \\( f \\) and \\( g \\)?
+There are several ways.
+Which should we use?
+
+- The maximum norm, in interval \\( I \\) is \\( \max_{x \in I} \abs{f(x) - g(x)} \\).
+This norm is also called uniform norm, supremum norm, Chebyshev norm, infinity norm, norm-infinity, \\( L_\infty \\)-norm.
+Why is it called "uniform"?
+[WP:Uniform norm](https://en.wikipedia.org/wiki/Uniform_norm).
+- What is this norm called? \\( \int_{x \in I} [f(x)-g(x)]^2 ~ dx \\).
+
+[Are all approximations truncation?]({% link atrunc.md %})
+Are there other approximation schemes beside series truncation?
+Are probabilistic approximations such as Monte Carlo approximations also truncation?
+
+## Other
+
 - Courses
     - 2017, [Approximation Theory, 7.5 ECTS](https://www.nada.kth.se/~olofr/Approx/)
     - 2012, syllabus, Drexel University, Math 680-002 (Approximation Theory), [pdf](http://www.math.drexel.edu/~foucart/TeachingFiles/S12/Math680Syl.pdf)
@@ -23,19 +52,6 @@ mathjax: yes
         - Can we approximate \\( f \\)?
         - How do approximation and curve-fitting relate?
 - Overview
-    - What does "to approximate" mean?
-        - The phrase "x *approximates* y" means "x is *close* to y".
-        - "Close" implies distance which implies metric space.
-    - How close is the approximation?
-        - Suppose that the function \\( g \\) approximates the function \\( f \\) in interval \\( I \\).
-            - The "approximation error at \\( x \\)" is \\( g(x) - f(x) \\).
-            - The "maximum absolute error" is \\( \max_{x \in I} \abs{g(x) - f(x)} \\).
-        - How do we measure the distance between two \\( \Real \to \Real \\) functions \\( f \\) and \\( g \\)?
-            - The maximum norm, in interval \\( I \\) is \\( \max_{x \in I} \abs{f(x) - g(x)} \\).
-                - Other names: uniform norm, supremum norm, Chebyshev norm, infinity norm, norm-infinity, \\( L_\infty \\)-norm
-                - [WP:Uniform norm](https://en.wikipedia.org/wiki/Uniform_norm)
-                - Why is it called "uniform"?
-            - What is this norm called? \\( \int_{x \in I} [f(x)-g(x)]^2 ~ dx \\).
     - What is a multivariate polynomial?
     - Commonly conflated concepts
         - Approximation is not estimation.
@@ -50,50 +66,6 @@ mathjax: yes
 - The *uniform norm* is ...
 - Best approximation is ...
 - Uniform approximation is best approximation in uniform norm.
-- Hypothesis: Approximation is truncation.
-    - We can approximate a series by *truncating* it.
-    - Suppose that the series \\( y = x_0 + x_1 + \ldots \\) converges.
-    - Suppose that the sequence \\( \langle x_0, x_1, \ldots \rangle \\) converges to zero.
-    - Pick where to cut.
-        - Pick a natural number \\( n \\).
-    - Then the series \\( x_0 + \ldots + x_n \\) approximates the series \\( y \\).
-        - We cut its tail.
-        We take finitely many summands from the beginning.
-    - Examples: Truncate all the series!
-        - decimal truncation: \\( 1.2 \\) approximates \\( 1.23 \\).
-        - rational truncation:
-            - \\( 12/23 \\) approximates \\( 123/234 \\).
-            - [WP:Padé approximation](https://en.wikipedia.org/wiki/Pad%C3%A9_approximant) is a truncation of a ratio of sums.
-        - polynomial truncation: \\( 1 + x \\) approximates \\( 1 + x + x^2 \\) for \\( x \\) near zero.
-        - power series truncation:
-            - Taylor series truncation: \\( 1 + x + \frac{x^2}{2} \\) approximates \\( e^x \\) for \\( x \\) near zero.
-            Remember the Taylor series expansion \\( e^x = \sum_{n \in \Nat} \frac{x^n}{n!} \\).
-                - [WP:Definition of "analytic function"](https://en.wikipedia.org/wiki/Power_series#Analytic_functions).
-                    - A function is *analytic* iff it can be represented by power series.
-                        - A function \\( f \\) is *analytic* iff for every \\( x \in \dom(f) \\), we can write \\( f(x) \\) as a power series.
-                - For illustrations of Taylor series expansion, see:
-                    - 2015, slides, "Taylor Series: Expansions, Approximations and Error", [pdf](https://relate.cs.illinois.edu/course/cs357-f15/file-version/2978ddd5db9824a374db221c47a33f437f2df1da/media/cs357-slides6.pdf)
-            - Digression: What is the relationship between polynomial and power series?
-                - A polynomial is an algebraic expression. It is not a function.
-                - Power series is a kind of infinite polynomial.
-                    - [WP:Formal power series](https://en.wikipedia.org/wiki/Formal_power_series): "A formal power series is a generalization of a polynomial, where the number of terms is allowed to be infinite."
-            - Fourier series truncation: The [Wikipedia example](https://en.wikipedia.org/wiki/Fourier_series#Example_1:_a_simple_Fourier_series) animates how a Fourier series converges to the sawtooth function as more terms are added.
-                - Digression: Is a (complex) Fourier series a power series?
-                    - Reminder: A Fourier series looks like \\( \sum_{k=0}^{\infty} c_k e^{ikt} \\).
-        - [WP:Laurent series](https://en.wikipedia.org/wiki/Laurent_series) truncation?
-        - iteration truncation
-            - [WP:Iterated function](https://en.wikipedia.org/wiki/Iterated_function)
-            - [WP:Iterative method](https://en.wikipedia.org/wiki/Iterative_method)
-            - [Newton's Iteration](http://mathworld.wolfram.com/NewtonsIteration.html)
-            - [WP:Methods of computing square roots, the Babylonian method](https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Babylonian_method)
-            - An iteration converges to an attractive fixed point.
-            - Example:
-                - Let \\( f(x) = x + \frac{1}{x} \\).
-            - continued fraction truncation:
-                - We know that \\[ 1 + \frac{1}{1 + \frac{1}{1 + \ldots}} = \frac{1 + \sqrt{5}}{2} = \Phi. \\]
-                We can truncate that continued fraction to approximate \\( \Phi \\).
-        - probabilistic approximation? Monte Carlo approximation?
-- Are there other approximation schemes beside series truncation?
 - https://en.wikipedia.org/wiki/Approximation_theory#Remez's_algorithm
     - https://en.wikipedia.org/wiki/Remez_algorithm
         - Inputs: a function, and an interval.
@@ -136,9 +108,7 @@ Is it even possible to approximate arbitrary functions?
             - "the problem of numerically solving a large class of (high-dimensional) PDEs (such as linear Black-Scholes or diffusion equations) can be cast into a classical supervised learning problem which can then be solved by deep learning methods"
 - Determine whether we need to read these
     - Very likely
-        - 2017, lecture notes, "Lectures on multivariate polynomial approximation", [pdf](http://www.math.unipd.it/~demarchi/MultInterp/LectureNotesMI.pdf)
         - 2015, slides, "Best polynomial approximation: multidimensional case", [pdf](https://carma.newcastle.edu.au/meetings/spcom/talks/Sukhorukova-SPCOM_2015.pdf)
-        - 1998, book, "A Short Course on Approximation Theory", N. L. Carothers, [pdf](http://fourier.math.uoc.gr/~mk/approx1011/carothers.pdf)
         - https://en.wikipedia.org/wiki/Bernstein_polynomial#Approximating_continuous_functions
             - https://en.wikipedia.org/wiki/Pointwise_convergence
             - https://en.wikipedia.org/wiki/Uniform_convergence

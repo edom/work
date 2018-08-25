@@ -105,3 +105,5 @@ An unenforceable law practically doesn't exist.
     - "What can be asserted without evidence can be dismissed without evidence"
 - Maritime law
     - [WP:General average](https://en.wikipedia.org/wiki/General_average)
+- legal loopholes, programming errors
+    - [The Perfect Crime May Be Possible in Yellowstone Park | Mental Floss](https://mentalfloss.com/article/83439/perfect-crime-may-be-possible-yellowstone-park)

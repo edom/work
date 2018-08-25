@@ -271,3 +271,6 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
 - https://www.reddit.com/r/indonesia/comments/6b4e9a/finest_savagery/
 - https://www.reddit.com/r/CrappyDesign/
 - [Don’t you brush YOUR bears? - YouTube](https://www.youtube.com/watch?v=x70d3Uw6Nxs)
+- [Takeshi's Castle Episode 1 Original Japanese Broadcast](https://www.youtube.com/watch?v=Q9wAORBq0fE)
+    - 1980s disco music
+- [Funny Babies Confused by Twin Parents Compilation - YouTube](https://www.youtube.com/watch?v=alNI45hzzmY)

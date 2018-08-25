@@ -8,6 +8,13 @@ We are concerned about two things: what we need to store, and how we store it.
 
 Business process automation begins with data modeling.
 
+An *entity* is something that has an identity:
+an entity persists through time.
+In relational databases, an entity is a row with a primary key;
+two entities are assumed to be identical iff their primary keys are equal.
+
+We can store data as array of fixed-size records on disk.
+
 Suppose we are building an online shop.
 We sell disparate things such as houses, cars, and phones.
 We want each item type to have tailored search
@@ -16,6 +23,10 @@ because people have different concerns:
 - Someone buying a used car is concerned about mileage.
 - Someone buying a house is concerned about location.
 - Someone buying a phone is concerned about RAM size.
+
+Every buyer has his *model* of the thing he wants to buy.
+Aligning the website's model to the buyer's model should increase sales.
+A model is what we care.
 
 There are several models of a car:
 
@@ -60,8 +71,6 @@ One Haskell record field becomes one final Java class field.
 - We want to express "function 'getName' works with every record that has a 'name' field".
 (Row polymorphism.)
     - `getName : { name : String | _ } -> String`
-
-
 - Prior arts
     - [Data model - Wikipedia](https://en.wikipedia.org/wiki/Data_model)
     - [Data modeling - Wikipedia](https://en.wikipedia.org/wiki/Data_modeling)

@@ -16,7 +16,6 @@ date: 2018-07-22 13:15 +0700
         - [Circuit complexity]({% link circuit.md %})
 - Natural sciences
     - [Physics]({% link physics.md %}) and engineering
-        - [Modeling]({% link model.md %})
         - [Traffic engineering]({% link trafeng.md %})
         - Civil engineering
             - [How Do Sinkholes Form?](https://www.youtube.com/watch?v=e-DVIQPqS8E)
@@ -165,3 +164,55 @@ The pack might contain things like yacy.net, matrix.org, riot.im.
     - There are two kinds of channels: temporary and permanent.
         - Temporary channel is functional. It gathers people for a task/project.
         - Permanent channel is structural. It gathers people in the same tribe/department/structure.
+- Does everyone have a fusiform gyrus? A prefrontal cortex?
+- [TED: Your brain hallucinates your conscious reality \| Anil Seth](https://www.youtube.com/watch?v=lyu7v7nWzfo)
+- [TED: What hallucination reveals about our minds \| Oliver Sacks](https://www.youtube.com/watch?v=SgOTaXhbqPQ)
+- same video, different narrator
+    - [Veritasium: Your Amazing Molecular Machines](https://www.youtube.com/watch?v=X_tYrnv_o6A)
+    - [Drew Berry: Animations of unseeable biology](https://www.youtube.com/watch?v=WFCvkkDSfIU)
+- [The surprising habits of original thinkers \| Adam Grant](https://www.youtube.com/watch?v=fxbCHn6gE3U)
+- [TED-Ed: What is entropy? - Jeff Phillips](https://www.youtube.com/watch?v=YM-uykVfq_E)
+- [This Quantum ‘Sixth Sense’ Could Allow Birds to Navigate Earth’s Magnetic Field](https://www.youtube.com/watch?v=PRYmx7Lk9F0)
+- [The Earth Is Running Out of Sand and It Could Cause a Global Crisis](https://www.youtube.com/watch?v=YnY0J_Z1TF4)
+- City planning
+    - [Let's Make Mass Transit Free* - YouTube](https://www.youtube.com/watch?v=ccxVYborUcU)
+        - Making mass transit free benefits everyone, including those who don't use mass transit.
+        Free mass transit reduces traffic.
+- Mathematical modeling
+    - [WP:Mathematical model](https://en.wikipedia.org/wiki/Mathematical_model)
+    - [WP:Many-body problem](https://en.wikipedia.org/wiki/Many-body_problem)
+    - [WP:Few-body systems](https://en.wikipedia.org/wiki/Few-body_systems)
+    - [WP:N-body problem](https://en.wikipedia.org/wiki/N-body_problem)
+    - Articles
+        - [The quantum N-body problem](https://aip.scitation.org/doi/10.1063/1.533319)
+    - What is the difference between variable and parameter?
+    - How many parameters do we need to model a system?
+    - Discrete Newtonian kinematical model
+        - A *system at time \\( t \\)* is a set of particles <span>\( \{ 1, \ldots, n \} \)</span>.
+            - Time is a real number: \\( t \in \Real \\).
+            - The number of particle is constant \\( n \in \Nat \\).
+            - For each particle \\( k \\):
+                - It has *position* \\( x_k \in \Real^3 \\).
+                - Simplifying assumptions
+                    - particle
+                        - It is a point.
+                            - It doesn't occupy any space.
+                        - Its mass is not modeled.
+                    - Time is global and absolute (the same everywhere).
+    - Discrete Newtonian dynamical model (N-body problem) extends discrete Newtonian kinematical model.
+        - A *system at time \\( t \\)* is all that above, plus:
+            - For each particle \\( k \\):
+                - It has *mass* \\( m_k \in \Real \\).
+                - It has *resultant force* \\( F_k \\) acting on it.
+                - Simplifying assumptions about the particle
+                    - It is rigid.
+                        - It doesn't deform.
+                        - It doesn't break.
+                    - Its mass is constant.
+                    - It don't interact with other particles.
+                        - Particles don't merge or collide.
+    - [WP:Continuum mechanics](https://en.wikipedia.org/wiki/Continuum_mechanics)
+    - Skippable philosophical issues?
+        - Does "the same particle at different times" make sense?
+            - What is "same"?
+        - [WP:"Panta rhei" ("Everything flows"), Heraclitus](https://en.wikipedia.org/wiki/Heraclitus#Panta_rhei,_%22everything_flows%22)

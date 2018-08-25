@@ -21,6 +21,23 @@ date: 2018-07-22 02:45 +0700
         - System programming is hardware-aware programming.
         Application programming assumes abstract machine, infinite memory, and all convenience provided by the operating system.
             - Why do we make this distinction?
+    - The language must facilitate metaprogramming.
+    Everything must be a first-class citizen.
+    It has to have EVAL.
+    The language must provide a way for interpreting/compiling/loading a program at runtime.
+    The compiler becomes a part of every program.
+        - What is the reason for the name "metacircular evaluator"?
+        What is circular?
+        What is metacircular?
+    - To make syntax first-class, we need QUOTE and UNQUOTE (such as in Lisp/Scheme)?
+    - To prevent syntax flamewar, we should define the canonical linearization of the abstract syntax tree.
+    Go does this with `go fmt`.
+    I think that is wise.
+
+The problem with current programming methodologies is that they don't capture the higher-level properties of software, such as the architecture.
+For example, how do we write, in a way that the computer can exploit, this statement:
+"The fields of class C correspond one-to-one with the columns of database table T."?
+
 - A goal of programming language research is to make a better programming language (if not the best).
     - Do more with less.
     - *The* ultimate best programming language?
@@ -35,13 +52,17 @@ date: 2018-07-22 02:45 +0700
         - [Morte: an intermediate language for super-optimizing functional programs](http://www.haskellforall.com/2014/09/morte-intermediate-language-for-super.html)
 - Every functional programming language is lambda calculus plus plus.
     - I thought lambda calculus could be summarized in one page, but Henk Barendregt wrote hundreds of pages about it. Is there more to lambda calculus than it seems?
-        - 1994, 50 pages, http://www.nyu.edu/projects/barker/Lambda/barendregt.94.pdf
-        - 1991, 190 pages, https://people.mpi-sws.org/~dreyer/tor/papers/barendregt.pdf
+        - 1994, 50 pages, [pdf](http://www.nyu.edu/projects/barker/Lambda/barendregt.94.pdf)
+        - 1991, 190 pages, [pdf](https://people.mpi-sws.org/~dreyer/tor/papers/barendregt.pdf)
+    - unknown-year lecture notes "Lambda Calculus as a Programming Language" [pdf](http://andrei.clubcisco.ro/cursuri/2pp/01.Lambda_prog.pdf)
+    - Extending lambda-calculus with various bells and whistles
+        - Vectorial lambda-calculus
+            - The 2013 article "The Vectorial Lambda-Calculus" [pdf](https://who.rocq.inria.fr/Alejandro.Diaz-Caro/TheVectorialCalculus.pdf) adds vectors and matrices and their types to lambda calculus.
+            - The 2010 article "Semantics of a Typed Algebraic Lambda-Calculus" [pdf available](https://arxiv.org/abs/1006.1433) also mentions "vectorial".
 - Where to find recent programming language research?
-    - recent programming language research
-        - meetings, conferences, symposiums
-            - POPL ("ACM SIGPLAN Symposium on Principles of Programming Languages")
-                - [its twitter](https://twitter.com/poplconf?lang=en)
+    - meetings, conferences, symposiums
+        - [POPL on Twitter](https://twitter.com/poplconf?lang=en).
+        Its full name is "ACM SIGPLAN Symposium on Principles of Programming Languages".
     - collections, links, aggregators
         - https://www.cs.cmu.edu/~mleone/language-research.html
 - category theory and programming languages
@@ -345,13 +366,14 @@ functional languages for systems programming?
 - [What is PL research and how is it useful? - The PL Enthusiast](http://www.pl-enthusiast.net/2015/05/27/what-is-pl-research-and-how-is-it-useful/)
 - 2014, article, [Ontology-based Representation and Reasoning on Process Models: A Logic Programming Approach](https://arxiv.org/abs/1410.1776)
 - 1994, article, "Formalizing architectural connection", [pdf](http://web.cs.wpi.edu/~cs562/s98/pdf/wright-icse16.pdf)
-- relationship between Aspect-Oriented Programming and Functional Programming
-    - 2009, article, "What Does Aspect-Oriented Programming Mean for Functional Programmers?", [pdf](https://www.cs.ox.ac.uk/files/2282/wgp14-wang.pdf)
-    - 2008, article, "On Feature Orientation and Functional Programming", [pdf](https://pdfs.semanticscholar.org/522e/b6c2ea910ed074a13fe21767c9fa070fb685.pdf)
-    - 2016, article, "Realtime collaborative editor. Algebraic properties of the problem.", [html](http://blog.haskell-exists.com/yuras/posts/realtime-collaborative-editor.html)
-        - see also Darcs patch theory
-    - 2008, PhD thesis, "An Integrated System to Manage Crosscutting Concerns in Source Code", [pdf](http://wwwtmp.st.ewi.tudelft.nl/arie/phds/Marin.pdf)
-    - 2003, article, "Language-independent aspect-oriented programming", [pdf available](http://www.tara.tcd.ie/handle/2262/32627)
+- Aspect-oriented programming is a restricted form of metaprogramming.
+    - relationship between Aspect-Oriented Programming and Functional Programming
+        - 2009, article, "What Does Aspect-Oriented Programming Mean for Functional Programmers?", [pdf](https://www.cs.ox.ac.uk/files/2282/wgp14-wang.pdf)
+        - 2008, article, "On Feature Orientation and Functional Programming", [pdf](https://pdfs.semanticscholar.org/522e/b6c2ea910ed074a13fe21767c9fa070fb685.pdf)
+        - 2016, article, "Realtime collaborative editor. Algebraic properties of the problem.", [html](http://blog.haskell-exists.com/yuras/posts/realtime-collaborative-editor.html)
+            - see also Darcs patch theory
+        - 2008, PhD thesis, "An Integrated System to Manage Crosscutting Concerns in Source Code", [pdf](http://wwwtmp.st.ewi.tudelft.nl/arie/phds/Marin.pdf)
+        - 2003, article, "Language-independent aspect-oriented programming", [pdf available](http://www.tara.tcd.ie/handle/2262/32627)
 - [NOOL 2015 accepted papers - SPLASH 2015](https://2015.splashcon.org/track/nool2015#event-overview) ("New Object Oriented Languages")
     - "Classes Considered Harmful", [pdf](http://web.cecs.pdx.edu/~black/publications/ClassesHarmful.pdf)
     - "Ubiquitous Object Orientation to Foster the Advancement of Programming Languages", [pdf](http://www.cs.cmu.edu/~dkurilov/papers/nool15.pdf)
@@ -371,13 +393,6 @@ functional languages for systems programming?
     - Golang
     - Ruby gem and bundler
     - Python pip
-- relationship between Aspect-Oriented Programming and Functional Programming
-    - 2009, article, "What Does Aspect-Oriented Programming Mean for Functional Programmers?", [pdf](https://www.cs.ox.ac.uk/files/2282/wgp14-wang.pdf)
-    - 2008, article, "On Feature Orientation and Functional Programming", [pdf](https://pdfs.semanticscholar.org/522e/b6c2ea910ed074a13fe21767c9fa070fb685.pdf)
-    - 2016, article, "Realtime collaborative editor. Algebraic properties of the problem.", [html](http://blog.haskell-exists.com/yuras/posts/realtime-collaborative-editor.html)
-        - see also Darcs patch theory
-    - 2008, PhD thesis, "An Integrated System to Manage Crosscutting Concerns in Source Code", [pdf](http://wwwtmp.st.ewi.tudelft.nl/arie/phds/Marin.pdf)
-    - 2003, article, "Language-independent aspect-oriented programming", [pdf available](http://www.tara.tcd.ie/handle/2262/32627)
 - algebraic subtyping
     - http://www.cl.cam.ac.uk/~sd601/papers/mlsub-preprint.pdf
     - https://www.cl.cam.ac.uk/~sd601/thesis.pdf
@@ -628,7 +643,6 @@ functional languages for systems programming?
             - http://hackage.haskell.org/package/language-java
     - unknown
         - http://hackage.haskell.org/package/haskell-tools-ast
-        - Ur/Web
     - multi-database/cross-database query
         - http://www.unityjdbc.com/doc/multiple/multiplequery.php
         - https://www.red-gate.com/simple-talk/dotnet/net-tools/a-unified-approach-to-multi-database-query-templates/
@@ -718,6 +732,16 @@ functional languages for systems programming?
 - [What are some interesting language features that may not be well known? : ProgrammingLanguages](https://www.reddit.com/r/ProgrammingLanguages/comments/8vcrzb/what_are_some_interesting_language_features_that/)
 - [A practitioner’s guide to reading programming languages papers](https://blog.acolyer.org/2018/01/26/a-practitioners-guide-to-reading-programming-languages-papers/)
     - from [top scoring links : ProgrammingLanguages](https://www.reddit.com/r/ProgrammingLanguages/top/)
+- Why should we care about parametricity?
+    - [Parametricity: Money for Nothing and Theorems for Free - Bartosz Milewski's Programming Cafe](https://bartoszmilewski.com/2014/09/22/parametricity-money-for-nothing-and-theorems-for-free/)
+- Interesting functional programming languages tailored for web programming.
+Perhaps related to data modeling.
+    - Ur/Web
+    - [The Links Programming Language](http://links-lang.org/)
+- Moving logic into SQL stored procedures
+    - [Simplify: move code into database functions \| Derek Sivers](https://sivers.org/pg)
+        - A legitimate concern: How do we version-control (and release, and rollback) stored procedures, triggers, and other database logics?
+    - [Andl, a relational language that is not SQL, is coming to Postgres \| Hacker News](https://news.ycombinator.com/item?id=11802917)
 - Obscure things. Much marketing, little technical detail.
     - VPRI, Alan Kay et al., archived (stopped operating in 2018), computing for the masses?
         - "Improve 'powerful ideas education' for the world's children and to advance the state of systems research and personal computing"
@@ -732,3 +756,7 @@ functional languages for systems programming?
         - visual programming language
             - blocks language
                 - https://harc.ycr.org/project/gp/
+- https://www.microsoft.com/en-us/research/publication/convenient-explicit-effects-using-type-inference-with-subeffects/
+- Functional Payout Framework http://lambda-the-ultimate.org/node/3331
+- [If Haskell were strict, what would the laziness be like?](https://nikita-volkov.github.io/if-haskell-were-strict/)
+- http://homepages.inf.ed.ac.uk/wadler/papers/free-rectypes/free-rectypes.txt

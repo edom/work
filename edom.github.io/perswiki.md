@@ -34,3 +34,4 @@ date: 2018-08-06 22:17 +0700
     Accidents happen.
     Humans make mistakes.
     Computer doesn't care.
+- [How to Load Disqus Comments on Demand with JavaScript](https://www.labnol.org/internet/load-disqus-comments-on-click/28653/)

@@ -396,3 +396,7 @@ https://en.wikipedia.org/wiki/Mereological_essentialism
     - Kaggle: get paid to solve machine learning problems.
 - HLearn: a machine learning library for Haskell \cite{izbicki2013hlearn}
 - [Deep Dive Into Machine Learning - DZone AI](https://dzone.com/articles/deep-dive-into-machine-learning)
+- https://towardsdatascience.com/intuitively-understanding-variational-autoencoders-1bfe67eb5daf
+- [keras-team/keras: Deep Learning for humans](https://github.com/keras-team/keras)
+- [CS230: Deep Learning - Projects](http://cs230.stanford.edu/proj-spring-2018.html)
+- http://jonbho.net/2014/09/25/defining-intelligence/

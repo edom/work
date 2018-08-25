@@ -294,8 +294,10 @@ Use continuous integration and continuous deployment instead.
         - The computer doesn't care whether you merge or rebase.
         - Merges and rebases exist for the humans.
     - 2017, article, [Moving away from GitFlow](https://www.gamasutra.com/blogs/NiklasGray/20170927/306445/Moving_away_from_GitFlow.php)
-- build systems
-    - How do Haskell Shake and F# FAKE compare?
+- Comparing build systems?
+    - Haskell Shake
+    - F# FAKE
+    - Apache Buildr
 - Does putting on a headphone enhance your focus, even if it isn't playing any sound?
     - How about putting a motorcycle helmet?
 - 1999, article, "How enterprises use functional languages, and why they don't", Philip Wadler, [pdf](http://homepages.inf.ed.ac.uk/wadler/papers/how-and-why/how-and-why.pdf)
