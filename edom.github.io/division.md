@@ -234,11 +234,10 @@ where the divisor has only one element.
 The Brzozowski quotient is a special case where the divisor is a singleton set:
 <span>\( \{p\} \backslash L \)</span>.
 
+Brzozowski quotient is discussed further in [Parsing]({% link parse.md %}).
+
 ## Related materials
 
 - Wikipedia
     - [Division](https://en.wikipedia.org/wiki/Division_(mathematics))
-    - [Quotient of a formal language](https://en.wikipedia.org/wiki/Quotient_of_a_formal_language)
-    - [Brzozowski derivative](https://en.wikipedia.org/wiki/Brzozowski_derivative)
-        - [Janusz Brzozowski et al. on arxiv](https://arxiv.org/find/cs/1/au:+Brzozowski_J/0/1/0/all/0/1)
     - [Preorder](https://en.wikipedia.org/wiki/Preorder)

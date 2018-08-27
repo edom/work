@@ -99,9 +99,9 @@ Perhaps I can't realize all of these, but I try.
             - [Solving the Israel-Palestine problem]({% link ispal.md %})
             - [Using the media in politics]({% link polmed.md %})
     - Preventing social isolation
-        Social isolation causes violence and extremism.
-            - [YT:I Was Almost A School Shooter \| Aaron Stark \| TEDxBoulder](https://www.youtube.com/watch?v=azRl1dI-Cts)
-                - Bullying is part of the social isolation vicious circle.
+        - Social isolation causes violence and extremism.
+        Bullying is part of the social isolation vicious circle.
+        [YT:I Was Almost A School Shooter \| Aaron Stark \| TEDxBoulder](https://www.youtube.com/watch?v=azRl1dI-Cts)
         - [YT:Cohousing communities help prevent social isolation](https://www.youtube.com/watch?v=DmWrx0ntATU)
     - Achieving independence
         - [Achieving energy independence]({% link energy.md %})

@@ -4,67 +4,108 @@ permalink: /plres.html
 date: 2018-07-22 02:45 +0700
 ---
 
-- The goal is to make *the* programming language.
-- What are the criteria for a language to be adopted?
-    - In order for a language to be adopted, people must perceive its risk as low.
-        - The language must work with existing codebases.
-            - The language designer must think from the language user's point of view.
-                - Let's say I have 100,000 lines of Java that I've been writing and testing for the past 5 years.
-                Are you expecting me throw away all of them?
-            - Thus the language must work with C, C++, C#, Java, Go, JavaScript, Python, Ruby, and everything else.
-            This should be possible because the essence of all programming languages is the same: every programming language is a formal system.
-            It should be possible to translate a program P1 in language L1 to program P2 in language L2 with the same semantics.
-            - Improve/enhance, not supersede.
-        - Mixing the old and new languages should be easy.
-        - 2013, article, "Empirical analysis of programming language adoption", [pdf](http://sns.cs.princeton.edu/docs/asr-oopsla13.pdf)
-    - The language must be suitable for systems programming.
-        - System programming is hardware-aware programming.
-        Application programming assumes abstract machine, infinite memory, and all convenience provided by the operating system.
-            - Why do we make this distinction?
-    - The language must facilitate metaprogramming.
-    Everything must be a first-class citizen.
-    It has to have EVAL.
-    The language must provide a way for interpreting/compiling/loading a program at runtime.
-    The compiler becomes a part of every program.
-        - What is the reason for the name "metacircular evaluator"?
-        What is circular?
-        What is metacircular?
-    - To make syntax first-class, we need QUOTE and UNQUOTE (such as in Lisp/Scheme)?
-    - To prevent syntax flamewar, we should define the canonical linearization of the abstract syntax tree.
-    Go does this with `go fmt`.
-    I think that is wise.
+- TOC
+{:toc}
 
-The problem with current programming methodologies is that they don't capture the higher-level properties of software, such as the architecture.
-For example, how do we write, in a way that the computer can exploit, this statement:
-"The fields of class C correspond one-to-one with the columns of database table T."?
+## Goal
 
-- A goal of programming language research is to make a better programming language (if not the best).
-    - Do more with less.
-    - *The* ultimate best programming language?
+The goal is to make *the* programming language.
+
+A goal of programming language research is to make a better programming language (if not the best).
+Do more with less.
+
+*The* ultimate best programming language?
+
+## What is a program?
+
+A program (software) is an executable formal system.
+
+Can we formalize this using Grue's map theory?
+
+- How is "false" represented?
+- How is "true" represented?
+- How is "conjunction" represented?
+
+## How do we increase language adoption?
+
+In order for a language to be adopted, people must perceive its risk as low.
+
+The language must work with existing codebases.
+
+The language designer must think from the language user's point of view.
+Let's say I have 100,000 lines of Java that I've been writing and testing for the past 5 years.
+Are you expecting me throw away all of them?
+
+Thus the language must work with C, C++, C#, Java, Go, JavaScript, Python, Ruby, and everything else.
+This should be possible because the essence of all programming languages is the same: every programming language is a formal system.
+It should be possible to translate a program P1 in language L1 to program P2 in language L2 with the same semantics.
+
+Improve/enhance, not supersede.
+
+Mixing languages should be easy.
+
+2013, article, "Empirical analysis of programming language adoption", [pdf](http://sns.cs.princeton.edu/docs/asr-oopsla13.pdf)
+
+The language must be suitable for systems programming.
+- System programming is hardware-aware programming.
+Application programming assumes abstract machine, infinite memory, and all convenience provided by the operating system.
+    - Why do we make this distinction?
+
+The language must facilitate metaprogramming.
+Everything must be a first-class citizen.
+It has to have EVAL.
+The language must provide a way for interpreting/compiling/loading a program at runtime.
+The compiler becomes a part of every program.
+
+What is the reason for the name "metacircular evaluator"?
+What is circular?
+What is metacircular?
+
+To make syntax first-class, we need QUOTE and UNQUOTE (such as in Lisp/Scheme)?
+
+To prevent syntax flamewar, we should define the canonical linearization of the abstract syntax tree.
+Go does this with `go fmt`.
+I think that is wise.
+
 - Basic assumptions
     - Computer (machine) is embodied formal system.
         - Assume no hardware fault.
     - Software is executable mathematics.
-- Where shall we start?
-    - These languages are interesting starting points:
-        - [Sixten](https://github.com/ollef/sixten)
-        - Dhall
-        - [Morte: an intermediate language for super-optimizing functional programs](http://www.haskellforall.com/2014/09/morte-intermediate-language-for-super.html)
-- Every functional programming language is lambda calculus plus plus.
-    - I thought lambda calculus could be summarized in one page, but Henk Barendregt wrote hundreds of pages about it. Is there more to lambda calculus than it seems?
-        - 1994, 50 pages, [pdf](http://www.nyu.edu/projects/barker/Lambda/barendregt.94.pdf)
-        - 1991, 190 pages, [pdf](https://people.mpi-sws.org/~dreyer/tor/papers/barendregt.pdf)
-    - unknown-year lecture notes "Lambda Calculus as a Programming Language" [pdf](http://andrei.clubcisco.ro/cursuri/2pp/01.Lambda_prog.pdf)
-    - Extending lambda-calculus with various bells and whistles
-        - Vectorial lambda-calculus
-            - The 2013 article "The Vectorial Lambda-Calculus" [pdf](https://who.rocq.inria.fr/Alejandro.Diaz-Caro/TheVectorialCalculus.pdf) adds vectors and matrices and their types to lambda calculus.
-            - The 2010 article "Semantics of a Typed Algebraic Lambda-Calculus" [pdf available](https://arxiv.org/abs/1006.1433) also mentions "vectorial".
-- Where to find recent programming language research?
-    - meetings, conferences, symposiums
-        - [POPL on Twitter](https://twitter.com/poplconf?lang=en).
-        Its full name is "ACM SIGPLAN Symposium on Principles of Programming Languages".
-    - collections, links, aggregators
-        - https://www.cs.cmu.edu/~mleone/language-research.html
+
+## Where shall we start?
+
+These languages are interesting starting points:
+
+- [Sixten](https://github.com/ollef/sixten)
+- Dhall
+- [Morte: an intermediate language for super-optimizing functional programs](http://www.haskellforall.com/2014/09/morte-intermediate-language-for-super.html)
+
+## Functional programming?
+
+Every functional programming language is lambda calculus plus plus.
+
+I thought lambda calculus could be summarized in one page, but Henk Barendregt wrote hundreds of pages about it. Is there more to lambda calculus than it seems?
+
+- 1994, 50 pages, [pdf](http://www.nyu.edu/projects/barker/Lambda/barendregt.94.pdf)
+- 1991, 190 pages, [pdf](https://people.mpi-sws.org/~dreyer/tor/papers/barendregt.pdf)
+
+## Extending lambda-calculus with various bells and whistles
+
+- Vectorial lambda-calculus
+    - The 2013 article "The Vectorial Lambda-Calculus" [pdf](https://who.rocq.inria.fr/Alejandro.Diaz-Caro/TheVectorialCalculus.pdf) adds vectors and matrices and their types to lambda calculus.
+    - The 2010 article "Semantics of a Typed Algebraic Lambda-Calculus" [pdf available](https://arxiv.org/abs/1006.1433) also mentions "vectorial".
+
+## Where to find recent programming language research?
+
+- meetings, conferences, symposiums
+    - [POPL on Twitter](https://twitter.com/poplconf?lang=en).
+    Its full name is "ACM SIGPLAN Symposium on Principles of Programming Languages".
+- collections, links, aggregators
+    - https://www.cs.cmu.edu/~mleone/language-research.html
+
+## what
+
+- unknown-year lecture notes "Lambda Calculus as a Programming Language" [pdf](http://andrei.clubcisco.ro/cursuri/2pp/01.Lambda_prog.pdf)
 - category theory and programming languages
     - Category-theoretic model of functional programming languages
         - Every functional programming language L can be modeled by a category C(L) whose objects are the types of L and arrows are the function expressions of L.
@@ -82,8 +123,6 @@ For example, how do we write, in a way that the computer can exploit, this state
 - compiler construction
     - Every compiler does name resolution / symbol table.
         - Is there a compiler that doesn't do that? https://www.reddit.com/r/Forth/comments/695oik/advances_in_forth_language_design/dh454oq/
-- 2018, "Collapsing towers of interpreters" http://lampwww.epfl.ch/~amin/pub/collapsing-towers.pdf
-    - "It is well known that *staging* an interpreter – making it generate code whenever it would normally interpret an expression – yields a compiler [...]"
 - What already exists?
     - [68 Resources on creating programming languages](https://tomassetti.me/resources-create-programming-languages/)
     - 2004, book, "Programming language design concepts"
@@ -92,12 +131,6 @@ For example, how do we write, in a way that the computer can exploit, this state
     - https://en.wikipedia.org/wiki/Generic_programming
         - parametric polymorphism
 - Safely Composable Type-Specific Languages https://www.cs.cmu.edu/~aldrich/papers/ecoop14-tsls.pdf
-- A program is an executable formal system.
-    - Can we formalize this using Grue's map theory?
-        - Could this be as revolutionary as types-as-propositions (Curry-Howard correspondence) that enables proof assistants?
-        - How is "false" represented?
-        - How is "true" represented?
-        - How is "conjunction" represented?
 - foundation of mathematics
     - set theories, such as ZF, ZFC, NBG, etc.
         - https://math.stackexchange.com/questions/136215/difference-between-zfc-nbg
@@ -131,25 +164,11 @@ For example, how do we write, in a way that the computer can exploit, this state
         - Call-by-what?
             - Call-by-value
             - Call-by-name
-- Big names in programming language research, and their contributions
-    - This list is incomplete.
-    - See also:
-        - https://en.wikipedia.org/wiki/Programming_language_theory
-    - https://en.wikipedia.org/wiki/John_C._Reynolds
-        - 2014, [The essence of Reynolds](http://www.cs.bham.ac.uk/~udr/papers/EssenceOfReynolds.pdf)
-            - 1998, Reynolds, "Theories of programming languages"
-    - Henk Barendregt, wrote books on lambda calculus
-    - Thierry Coquand, invented calculus of constructions, Coq
-    - Philip Wadler
-    - Jean-Yves Girard
-    - Steele, Sussman, Felleisen, Barzilay, etc. (Scheme guys, PLT Scheme guys)
-        - 1999, Steele, "Growing a language"
-            - http://www.catonmat.net/blog/growing-a-language-by-guy-steele/
-    - Simon Peyton-Jones, etc. (Haskell guys)
-    - Oleg Kiselyov
-    - Edward Kmett
-    - Adam Chlipala
-    - a list http://www.angelfire.com/tx4/cus/people/index.html
+- https://en.wikipedia.org/wiki/Programming_language_theory
+- https://en.wikipedia.org/wiki/John_C._Reynolds
+    - 2014, [The essence of Reynolds](http://www.cs.bham.ac.uk/~udr/papers/EssenceOfReynolds.pdf)
+        - 1998, Reynolds, "Theories of programming languages"
+- a list of people http://www.angelfire.com/tx4/cus/people/index.html
 - paradigm, approach, viewpoint, worldview
     - graph programming languages
         - https://cstheory.stackexchange.com/questions/3906/what-are-theoretically-sound-programming-languages-for-graph-problems
@@ -198,8 +217,6 @@ For example, how do we write, in a way that the computer can exploit, this state
         - Kotlin?
         - Clojure?
         - Scala? https://www.scala-lang.org/blog/2017/11/27/macros.html
-- Other people's experiences
-    - https://www.quora.com/If-you-were-to-design-a-programming-language-what-other-programming-language-would-it-evolve-from-and-what-aspect-of-that-language-would-you-do-differently
 - 2017, PhD thesis, ["Context-aware programming languages"](http://tomasp.net/academic/theses/coeffects/)
     - [amazingly empathic considerate presentation that has the audience in mind](http://tomasp.net/coeffects/)
         - if only all PhD theses are presented that way
@@ -214,61 +231,6 @@ For example, how do we write, in a way that the computer can exploit, this state
     - magic?
         - http://conal.net/blog/posts/semantic-editor-combinators
     - [Salon des Refusés 2017](https://2017.programmingconference.org/track/refuses-2017)
-- Commentary on existing programming languages.
-Things that I think are wrong in 2018.
-    - Java
-        - What I think Java gets wrong
-            - JVM does too much.
-                - JVM bytecode verification
-                    - It's the compiler's job, not the VM's.
-                    - Does it even add any security?
-                        - Isn't JNI a bigger security hole?
-        - What others think Java gets wrong
-            - http://tech.jonathangardner.net/wiki/Why_Java_Sucks
-        - What I'm not sure about Java
-            - Why type erasure?
-                - C# 2.0 introduced generics, without type erasure, while maintaining backward compatibility.
-                    - Duplicating everything in System.Collections to System.Collections.Generic is ugly, but it's less ugly than type erasure.
-                    - https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-version-history
-                    - https://stackoverflow.com/questions/11436802/how-are-c-sharp-generics-implemented
-                        - https://blogs.msdn.microsoft.com/ericlippert/2009/07/30/whats-the-difference-part-one-generics-are-not-templates/
-    - What I think every procedural programming language (Java, C, C++, Go, Python, Ruby) gets wrong, except JavaScript
-        - Functions should be first-class. Methods should not exist. Fields are enough.
-        - It should be possible to assign to methods.
-        - `a.b()` should not mean "call method b of object a"
-        - `a.b()` should mean "get the function a.b, then call it".
-        - `a.b()` should mean `(a.b)()`.
-            - `m = a.b; m();` should mean the same as `a.b()`.
-        - JavaScript does this right.
-        - What JavaScript does wrong, TypeScript does right.
-    - What I think C and C++ got right but get wrong
-        - In the 1970s these were tolerable (memory was limited; tools didn't exist). In 2018 these aren't tolerable.
-            - Writing header files manually (should be generated from C files instead)
-            - Preprocessor that works on text, not on C/C++ AST
-    - What I think Haskell gets wrong
-        - Template Haskell
-            - Instead, we should have a metaprogramming library, and generate hs files.
-        - Build is too slow.
-            - Where should we fix this? GHC? Cabal?
-    - What I think every imperative programming language gets wrong
-        - Statements vs expressions
-            - Statement should not exist. Only expressions should.
-                - Xtend and Haxe do this right.
-                    - https://www.eclipse.org/xtend/documentation/203_xtend_expressions.html
-                    - https://code.haxe.org/category/principles/everything-is-an-expression.html
-                - We can use lambda calculus for imperative programming.
-                    - Treat the statement separator (here we use semicolon `;`)
-                    as an operator (function with infix syntax)
-                    that sequences the effects of two expressions.
-                        - For example:
-                            - Let `a` be an expression.
-                            - Let `b` be an expression.
-                            - Thus `a;b` is an expression.
-                            - The value of `a;b` is the value of `b`.
-                            - The effect of `a;b` is the effect of `a` followed by the effect of `b`.
-                        - Semicolon is associative: `(a;b);c = a;(b;c)`. This also holds for the effects.
-                - Can we replace statements with expressions in existing imperative languages without breaking backward compatibility?
-            - But C has https://en.wikipedia.org/wiki/Comma_operator
 - 2002, article collection, "Recent advances in Java technology: theory, application, implementation" http://www.cs.nuim.ie/~jpower/Research/Papers/2002/power-raijt-toc.pdf
 - other people's collections
     - https://github.com/steshaw/plt
@@ -350,6 +312,8 @@ functional languages for systems programming?
                     - http://www.haskellforall.com/2014/09/morte-intermediate-language-for-super.html
             - [Thyer's PhD thesis "Lazy specialization"](http://thyer.name/phd-thesis/thesis-thyer.pdf) has an accessible introduction to lambda calculus in Chapter 2.
                 - "Tower of interpreters" test
+                - 2018, "Collapsing towers of interpreters" http://lampwww.epfl.ch/~amin/pub/collapsing-towers.pdf
+                    - "It is well known that *staging* an interpreter – making it generate code whenever it would normally interpret an expression – yields a compiler [...]"
             - 1991, "A partial evaluator for the untyped lambda-calculus", [paywall](https://www.cambridge.org/core/journals/journal-of-functional-programming/article/a-partial-evaluator-for-the-untyped-lambda-calculus/EE324F936F0A009B6766B13FF6755DFC)
                 - related: semantic-directed code generation?
             - Gabriel Gonzales stuff: Morte, Dhall.
@@ -760,3 +724,128 @@ Perhaps related to data modeling.
 - Functional Payout Framework http://lambda-the-ultimate.org/node/3331
 - [If Haskell were strict, what would the laziness be like?](https://nikita-volkov.github.io/if-haskell-were-strict/)
 - http://homepages.inf.ed.ac.uk/wadler/papers/free-rectypes/free-rectypes.txt
+
+## Justifying the creation of yet another programming language
+
+A new programming language should fix unforeseen design mistakes in existing programming languages.
+It should not repeat their design mistakes.
+Therefore we should collect the design mistakes so that we can avoid repeating them.
+
+## Design mistakes
+
+What is a mistake?
+How do we know it's a mistake?
+
+We realize something is a mistake when we find a better way.
+
+### Common design mistakes
+
+#### Dynamic typing
+
+Dynamic typing is a design mistake.
+Type inference goes back to 1958.
+ML has type inference since 1973.
+It's 2018.
+There is no excuse for ignoring 60 years of research.
+See [WP1](https://en.wikipedia.org/wiki/Type_inference#Hindley%E2%80%93Milner_type_inference_algorithm),
+[WP2](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system#History_of_type_inference).
+
+#### Lack of metaprogramming support
+
+Lack of metaprogramming support is a design mistake.
+
+#### Mutable by default
+
+Having variables mutable by default is a design mistake.
+
+#### Non-first-class constructs
+
+Object-oriented programming is a design mistake.
+
+- `a.b()` should not mean "call method b of object a"
+- `a.b()` should mean "get the function a.b, then call it".
+- `a.b()` should mean `(a.b)()`.
+    - `m = a.b; m();` should mean the same as `a.b()`.
+    - Functions should be first-class.
+    Methods should not exist.
+    Fields are enough (with function types).
+    It should be possible to assign to methods.
+
+Statements are a design mistake.
+They should not exist.
+Only expressions should.
+Xtend and Haxe do this right.
+- https://www.eclipse.org/xtend/documentation/203_xtend_expressions.html
+- https://code.haxe.org/category/principles/everything-is-an-expression.html
+- Can we replace statements with expressions in existing imperative languages without breaking backward compatibility?
+- But C has https://en.wikipedia.org/wiki/Comma_operator
+- We can use lambda calculus for imperative programming.
+    - Treat the statement separator (here we use semicolon `;`)
+    as an operator (function with infix syntax)
+    that sequences the effects of two expressions.
+        - For example:
+            - Let `a` be an expression.
+            - Let `b` be an expression.
+            - Thus `a;b` is an expression.
+            - The value of `a;b` is the value of `b`.
+            - The effect of `a;b` is the effect of `a` followed by the effect of `b`.
+        - Semicolon is associative: `(a;b);c = a;(b;c)`. This also holds for the effects.
+
+### Java
+
+JVM does too much.
+JVM bytecode verification is the compiler's job, not the VM's.
+Does JVM bytecode verification even add any security?
+Isn't JNI a bigger security hole?
+
+- Assuming that programmers are untrustworthy idiots.
+Programmers make mistakes, but they aren't idiots.
+    - https://www.reddit.com/r/programming/comments/utqb/ask_reddit_why_do_so_many_reddit_users_hate_java/cutv1/
+        - "Java's solution to the problem of C++ allowing you to blow your foot off was to chop off your legs."
+    - Forbidding multiple inheritance.
+    - Java interfaces.
+    See 2015 Robert C. Martin article [Java interface considered harmful](http://blog.cleancoder.com/uncle-bob/2015/01/08/InterfaceConsideredHarmful.html).
+    - Implementing generics too late.
+    - Implementing generics with type erasure.
+    C# 2.0 introduced generics, without type erasure, while maintaining backward compatibility,
+    by duplicating everything in System.Collections to System.Collections.Generic.
+    This is ugly, but less ugly than type erasure.
+        - https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-version-history
+        - https://stackoverflow.com/questions/11436802/how-are-c-sharp-generics-implemented
+            - https://blogs.msdn.microsoft.com/ericlippert/2009/07/30/whats-the-difference-part-one-generics-are-not-templates/
+    - Checked exceptions don't play nice with java.util.Stream.
+    Either checked exception or java.util.Stream is a design mistake.
+        - https://en.wikipedia.org/wiki/Effect_system
+- What others think Java gets wrong
+    - http://tech.jonathangardner.net/wiki/Why_Java_Sucks
+
+### C and C++
+
+In the 1970s these were tolerable: memory was limited, tools didn't exist.
+In 2018 these aren't tolerable.
+
+- No C++ compiler follows the standard 100%.
+- Parsing requires symbol resolution and type checking.
+- Header files. They should be automatically generated from C files instead.
+- Preprocessor works on text, not on C/C++ AST.
+
+### Haskell
+
+- What I think Haskell gets wrong
+    - Template Haskell
+        - Instead, we should have a metaprogramming library, and generate hs files.
+    - Build is too slow.
+
+## what
+
+A problem with current programming methodologies is that they don't capture the higher-level properties of software, such as the architecture.
+For example, how do we write, in a way that the computer can exploit, this statement:
+"The fields of class C correspond one-to-one with the columns of database table T."?
+
+- Other people's experiences
+    - https://www.quora.com/If-you-were-to-design-a-programming-language-what-other-programming-language-would-it-evolve-from-and-what-aspect-of-that-language-would-you-do-differently
+    - [5 Mistakes in Programming Language Design ― Andreas Zwinkau](http://beza1e1.tuxen.de/articles/proglang_mistakes.html)
+        - [Mistakes in programming language design \| Hacker News](https://news.ycombinator.com/item?id=1500665)
+    - [What is the greatest design flaw you have faced in any programming language? - Software Engineering Stack Exchange](https://softwareengineering.stackexchange.com/questions/55047/what-is-the-greatest-design-flaw-you-have-faced-in-any-programming-language)
+    - [Programming Language Design Rules](http://www.inquisition.ca/en/info/gepsypl/rules.htm)
+    - 1999 Steele article "Growing a language" [html](http://www.catonmat.net/blog/growing-a-language-by-guy-steele/)

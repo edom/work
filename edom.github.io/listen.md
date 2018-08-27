@@ -706,3 +706,15 @@ from Metal Gear Solid: Peace Walker
 - 140 bpm, trance, progressive, "Votum stellarum", iconoclasm
     - 140 bpm, [long version, 6:36](https://www.youtube.com/watch?v=zJUkb4zykAw)
     - 147 bpm, [short version, 2:46](https://www.youtube.com/watch?v=fhpfemCmSN4)
+- Kyrgyztan pop
+    - Gulnur Satylganova
+        - [Гульнур Сатылганова - Асман - YouTube](https://www.youtube.com/watch?v=lB4HeQ2c0T4)
+        - [Гульнур Сатылганова - Дебе - YouTube](https://www.youtube.com/watch?v=7HDYiCJTsfk)
+        - [Гулнур Сатылганова - Суйуу кучу - YouTube](https://www.youtube.com/watch?v=wXHKxGWyfR8)
+        - [Гульнур Сатылганова - Ак санат - YouTube](https://www.youtube.com/watch?v=LsaIiXIG8qM)
+        - [Гульнур Сатылганова Сагынган күндөр - YouTube](https://www.youtube.com/watch?v=9inF-PsMRE8)
+    - from playlist [Kyrgyzstan music - YouTube](https://www.youtube.com/playlist?list=PLkmUtGkAs4SULTd0qSbz5HvoQDeXDTTwb)
+        - 41 [Кыз-Бурак - Сизге - YouTube](https://www.youtube.com/watch?v=epCFukpiXlI&index=41&list=PLkmUtGkAs4SULTd0qSbz5HvoQDeXDTTwb)
+        - 42 [Нурлан Насип "Эки жаш" super kg - YouTube](https://www.youtube.com/watch?v=5L0y8Jxg8Ro&index=42&list=PLkmUtGkAs4SULTd0qSbz5HvoQDeXDTTwb)
+    - [TOP SONG 2017 \| KAIRAT KYRGYZ - ZHASTYK KEZ \| КАЙРАТ КЫРГЫЗ - ЖАШТЫК КЕЗ / СОЛО МЕДИПОРТАЛЫ - YouTube](https://www.youtube.com/watch?v=GQ1l2tdbXlI)
+    - [SANIA - Жаштык кез - YouTube](https://www.youtube.com/watch?v=LDNXdfk7hY8)

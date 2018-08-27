@@ -218,3 +218,17 @@ The pack might contain things like yacy.net, matrix.org, riot.im.
         - [WP:"Panta rhei" ("Everything flows"), Heraclitus](https://en.wikipedia.org/wiki/Heraclitus#Panta_rhei,_%22everything_flows%22)
 - Using Python
     - [How does python find packages?](https://leemendelowitz.github.io/blog/how-does-python-find-packages.html)
+- DevOps
+    - Ops can't fix shitty Dev.
+    No amount of Ops will fix stupid programming.
+    Ops is impossible without decent Dev.
+    - API description language, application description language: WADL vs Swagger vs what else?
+        - https://www.w3.org/Submission/wadl/
+        - 2010 article "DADL: Distributed Application Description Language" [pdf](https://www.isi.edu/~mirkovic/publications/dadlsubmit.pdf)
+    - https://devops.stackexchange.com/questions/1361/what-are-known-efforts-to-establish-devops-ontology-model
+    - 2016 article "Application of Ontologies in Cloud Computing: The State-Of-The-Art" [pdf available](https://arxiv.org/abs/1610.02333)
+    - 2015 article "Composable DevOps" [paywall](https://dl.acm.org/citation.cfm?id=2867125)
+    - 2012 article "Towards an Ontology for Cloud Services" [paywall](https://ieeexplore.ieee.org/document/6245776/)
+    - 2012 article "Cloud Computing Ontologies: A Systematic Review" [pdf](https://pdfs.semanticscholar.org/cd5f/e6edb6284fcbcb470239464bb0c8e3ee2d50.pdf)
+    - 2008 article "Toward a Unified Ontology of Cloud Computing" [pdf available](https://www.researchgate.net/publication/224367196_Toward_a_Unified_Ontology_of_Cloud_Computing)
+    - https://www.skytap.com/blog/cloud-ontology/
