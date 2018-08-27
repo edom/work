@@ -16,4 +16,8 @@ Which are usable?
         - [The Top 5 Google Alternatives and Why You Should Use Them](https://www.makeuseof.com/tag/5-google-search-alternatives-that-you-could-experiment-with/)
 - 2016, article, "The Fathers of the Internet Revolution Urge Today’s Software Engineers to Reinvent the Web", Tekla S. Perry, [html](https://spectrum.ieee.org/view-from-the-valley/telecom/internet/the-fathers-of-the-internet-revolution-urge-todays-pioneers-to-reinvent-the-web).
 See the bulleted lists.
-- One WhatsApp account can't be used with two phones.
+- Privacy violations
+    - Android
+        - Samsung Galaxy S8
+            - Why does changing the theme require email address?
+            This feature doesn't require email.

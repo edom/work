@@ -216,3 +216,5 @@ The pack might contain things like yacy.net, matrix.org, riot.im.
         - Does "the same particle at different times" make sense?
             - What is "same"?
         - [WP:"Panta rhei" ("Everything flows"), Heraclitus](https://en.wikipedia.org/wiki/Heraclitus#Panta_rhei,_%22everything_flows%22)
+- Using Python
+    - [How does python find packages?](https://leemendelowitz.github.io/blog/how-does-python-find-packages.html)

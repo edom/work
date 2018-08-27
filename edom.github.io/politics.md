@@ -171,3 +171,6 @@ See James Damore lawsuit.
         - conflict of interest
             - Elites make self-serving decisions that are good for themselves in the short term but bad for the society in the long term.
             - Those elites don't directly feel the bad consequences of their decisions.
+- China
+    - http://www.cirosantilli.com/
+        - https://github.com/cirosantilli/china-dictatorship/blob/master/FAQ.adoc
