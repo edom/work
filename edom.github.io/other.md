@@ -232,3 +232,7 @@ The pack might contain things like yacy.net, matrix.org, riot.im.
     - 2012 article "Cloud Computing Ontologies: A Systematic Review" [pdf](https://pdfs.semanticscholar.org/cd5f/e6edb6284fcbcb470239464bb0c8e3ee2d50.pdf)
     - 2008 article "Toward a Unified Ontology of Cloud Computing" [pdf available](https://www.researchgate.net/publication/224367196_Toward_a_Unified_Ontology_of_Cloud_Computing)
     - https://www.skytap.com/blog/cloud-ontology/
+- Python virtualenv is relatively forward-compatible.
+Don't waste time installing Python from source.
+Use the Python packaged with your distro, and use virtualenv.
+The Pip that comes with Python 3.7.0 fails because Ubuntu 14.04 OpenSSL is too old (or Python doesn't bother to maintain backward compatibility).
