@@ -216,8 +216,6 @@ The pack might contain things like yacy.net, matrix.org, riot.im.
         - Does "the same particle at different times" make sense?
             - What is "same"?
         - [WP:"Panta rhei" ("Everything flows"), Heraclitus](https://en.wikipedia.org/wiki/Heraclitus#Panta_rhei,_%22everything_flows%22)
-- Using Python
-    - [How does python find packages?](https://leemendelowitz.github.io/blog/how-does-python-find-packages.html)
 - DevOps
     - Ops can't fix shitty Dev.
     No amount of Ops will fix stupid programming.
@@ -232,7 +230,24 @@ The pack might contain things like yacy.net, matrix.org, riot.im.
     - 2012 article "Cloud Computing Ontologies: A Systematic Review" [pdf](https://pdfs.semanticscholar.org/cd5f/e6edb6284fcbcb470239464bb0c8e3ee2d50.pdf)
     - 2008 article "Toward a Unified Ontology of Cloud Computing" [pdf available](https://www.researchgate.net/publication/224367196_Toward_a_Unified_Ontology_of_Cloud_Computing)
     - https://www.skytap.com/blog/cloud-ontology/
-- Python virtualenv is relatively forward-compatible.
-Don't waste time installing Python from source.
-Use the Python packaged with your distro, and use virtualenv.
-The Pip that comes with Python 3.7.0 fails because Ubuntu 14.04 OpenSSL is too old (or Python doesn't bother to maintain backward compatibility).
+- 2018-08-29 What I learned today.
+    - To temporarily defuse your enemy's hatred of you, find another enemy that is common to both of you.
+        - These happens in quick succession:
+        Coworker A offended me.
+        Then coworker B came and offended A in front of me.
+        Then I offend coworker B in front of A.
+        Then I can feel some agreement with coworker A.
+    - The perception of having a common enemy unites people, even if the enemy is fake.
+- Common company wiki fundamental problem:
+    - Employees have no reason to read the wiki.
+    - It doesn't help them do their jobs.
+        - Why should they read it then?
+- Library problems
+    - In 2018, a lot of human knowledge is still in libraries and not available on the Internet.
+    Digital typesetting was invented relatively recently.
+    Papers should be scanned and OCR-ed.
+    AI can help.
+    - Why are there different libraries?
+    There should be only one library in the world.
+    All library should be the same.
+    All library should have the same content.

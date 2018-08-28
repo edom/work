@@ -3,24 +3,30 @@ layout: default
 date: 2017-05-20 00:00:00 +0700
 ---
 
-- I write everything for myself, but I hope you find it useful.
-- Disclaimers
-    - I may err.
-    Read cautiously.
-    Compare with other independent sources.
-    - I am not responsible for other people's comments.
-- Organization of this site
-    - For most pages, the title is a goal, and the content is the ongoing journey to achieve it.
+- TOC
+{:toc}
+
+## Welcome and disclaimers
+
+I write everything for myself, but I hope you find it useful.
+
+I may err.
+Read cautiously.
+Compare with other independent sources.
+
+I am not responsible for other people's comments.
+
+Organization of this site:
+For most pages, the title is a goal, and the content is the ongoing journey to achieve it.
 
 ## Dreams
-
-Perhaps I can't realize all of these, but I try.
 
 - Computer practice
     - Software engineering
         - Forward software engineering
             - [Making lasting software sooner]({% link softeng.md %})
             - [Making the only programming language we will ever need]({% link plres.md %})
+                - [Programming language design mistakes]({% link pldm.md %})
                 - Making interpreters/translators/compilers
                     - Don't make a compiler?
                     Make an interpreter instead, and stage it?
@@ -46,6 +52,7 @@ Perhaps I can't realize all of these, but I try.
                 - [Using Cabal]({% link cabal.md %})
             - [Using Java]({% link java.md %})
                 - [Making a Java virtual machine]({% link jvm.md %})
+            - [Using Python]({% link python.md %})
             - Using Emacs
                 - [Vivek Haldar — The levels of Emacs proficiency](http://blog.vivekhaldar.com/post/3996068979/the-levels-of-emacs-proficiency)
             - [Making contributable open-source projects]({% link opensrc.md %})
@@ -64,6 +71,7 @@ Perhaps I can't realize all of these, but I try.
         - [Making a personal wiki]({% link perswiki.md %})
         - [Buying a smartphone]({% link phone.md %})
             - [Android vs iPhone]({% link andvsiph.md %})
+        - [Contributing to Wikipedia]({% link wikipedia.md %})
     - [Liberating software]({% link libersoft.md %})
         - Searching
             - Where does this fit in the hierarchy?
@@ -171,6 +179,7 @@ Perhaps I can't realize all of these, but I try.
                 - Pemerintah menyediakan akses ke jurnal berbayar? Di mana? Cara pakainya?
         - [Living in Jakarta]({% link jakarta.md %})
             - [Vital service failure log]({% link log.md %})
+    - [Handling existential crisis]({% link crisis.md %})
     - [Fighting]({% link fight.md %})
     - Dying in the 21st century
         - Inheriting digital data
@@ -205,11 +214,17 @@ Perhaps I can't realize all of these, but I try.
         - [WP:List of wikis](https://en.wikipedia.org/wiki/List_of_wikis)
 - [Other unorganized contents]({% link other.md %})
     - [Research]({% link research.md %})
-- [Things I've forlet]({% link forlet.md %}): dreams I've given up
-- How do I ask questions or suggest corrections?
-    - Any of these:
-        - Leave a Disqus comment in the related page.
-        - [Open an issue on GitHub](https://github.com/edom/edom.github.io/issues).
 - Music
     - I play piano in the band [The Nomads]({% link nomads.md %}) (an Indonesian band, not the Swedish band).
 - [About this website]({% link about.md %})
+
+## Contacting
+
+To ask questions or suggest corrections, do any of these:
+
+- Leave a Disqus comment in the related page.
+- [Open an issue on GitHub](https://github.com/edom/edom.github.io/issues).
+
+## Abandoned dreams
+
+- [Things I've forlet]({% link forlet.md %}): dreams I've given up
