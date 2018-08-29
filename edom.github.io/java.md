@@ -77,5 +77,4 @@ permalink: /java.html
         - Start/stop dumping call trace of a running JVM into a file.
         - Open the dump as a sequence diagram in Eclipse.
         - Some filtering.
-- [Ask Reddit: Why do so many reddit users hate java? : programming](https://www.reddit.com/r/programming/comments/utqb/ask_reddit_why_do_so_many_reddit_users_hate_java/cutv1/)
-    - "Java's solution to the problem of C++ allowing you to blow your foot off was to chop off your legs."
+- [Jconsole to remote servers, easily \| Jethro Carr](https://www.jethrocarr.com/2013/11/30/jconsole-to-remote-servers-easily/)

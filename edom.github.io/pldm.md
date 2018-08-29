@@ -96,6 +96,10 @@ do this right.
 Virtual machines are a design mistake.
 Instead, do semantic mapping: map a program in language A to an equivalent program in language B while preserving the meaning.
 
+### More than one way to do something
+
+["There is more than one way to do it"](https://en.wikipedia.org/wiki/There%27s_more_than_one_way_to_do_it) is a design mistake.
+
 ## Java
 
 - Checked exceptions don't play nice with java.util.Stream.
@@ -117,7 +121,7 @@ Java presumes that the programmer is not only untrustworthy but also an idiot.
 
 Programmers make mistakes, but they aren't idiots.
 
-- https://www.reddit.com/r/programming/comments/utqb/ask_reddit_why_do_so_many_reddit_users_hate_java/cutv1/
+- [Ask Reddit: Why do so many reddit users hate java? : programming](https://www.reddit.com/r/programming/comments/utqb/ask_reddit_why_do_so_many_reddit_users_hate_java/cutv1/)
     - "Java's solution to the problem of C++ allowing you to blow your foot off was to chop off your legs."
 
 ### Throwing away the good parts of C++

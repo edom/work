@@ -702,6 +702,7 @@ functional languages for systems programming?
 Perhaps related to data modeling.
     - Ur/Web
     - [The Links Programming Language](http://links-lang.org/)
+    - [The Opa Language](http://opalang.org/)
 - Moving logic into SQL stored procedures
     - [Simplify: move code into database functions \| Derek Sivers](https://sivers.org/pg)
         - A legitimate concern: How do we version-control (and release, and rollback) stored procedures, triggers, and other database logics?

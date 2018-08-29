@@ -66,9 +66,6 @@ permalink: /softeng.html
         - vim, text editor
         - Databases
             - [PostgreSQL]({% link pgsql.md %})
-        - Build tools
-            - Maven
-            - [Gradle]({% link gradle.md %})
         - Third party services
             - Cloud infrastructure hosting, infrastructure as a service
                 - [Amazon Web Services]({% link aws.md %})

@@ -54,3 +54,5 @@ Why is security not the default?
         Are they antonyms? Complements?
             - [access control - MAC vs DAC vs RBAC - Information Security Stack Exchange](https://security.stackexchange.com/questions/63518/mac-vs-dac-vs-rbac)
     - The only real secure way to run an untrusted application is on a different machine with no network connection.
+- [pv(1): monitor progress of data through pipe - Linux man page](https://linux.die.net/man/1/pv)
+- [jq](https://stedolan.github.io/jq/), [WP:jq (programming language)](https://en.wikipedia.org/wiki/Jq_(programming_language))

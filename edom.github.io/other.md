@@ -251,3 +251,21 @@ The pack might contain things like yacy.net, matrix.org, riot.im.
     There should be only one library in the world.
     All library should be the same.
     All library should have the same content.
+- 2018-08-29
+Although I'm happy to be proven wrong,
+I believe that a minimum IQ of 120 is necessary but not sufficient for software engineering (cooperativeness is also required).
+It seems IQ tests are inaccurate for high IQs above 130.
+    - [What IQ do you need in order to be a programmer? : learnprogramming](https://www.reddit.com/r/learnprogramming/comments/2ue71p/what_iq_do_you_need_in_order_to_be_a_programmer/)
+        - The OP doesn't sound like his IQ is 89.
+    - Higher IQ means faster learning, and that's all.
+    - To each according to their ability.
+    Society needs low IQ people.
+    Some jobs fit low IQ people.
+    These jobs are equally honorable as high IQ jobs are.
+    Low IQ isn't an insult.
+    Everyone is different.
+- I think for every thing X we want to do, there should be only one way to do X.
+- Java
+    - [JSweet: a transpiler to write JavaScript programs in Java](http://www.jsweet.org/)
+    - [Spark Framework: An expressive web framework for Kotlin and Java - Documentation](http://sparkjava.com/documentation.html)
+    - [webfolderio/ui4j: Web Automation for Java](https://github.com/webfolderio/ui4j)

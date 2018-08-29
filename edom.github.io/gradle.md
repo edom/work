@@ -1,5 +1,5 @@
 ---
-title: Gradle
+title: Using Gradle
 permalink: /gradle.html
 date: 2018-05-15 23:10:00 +0700
 ---

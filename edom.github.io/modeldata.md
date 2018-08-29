@@ -112,3 +112,4 @@ One Haskell record field becomes one final Java class field.
         - A/B mean B is an instance of A?
     - [REST is OVER! - Literate Programming](http://blog.steveklabnik.com/posts/2012-02-23-rest-is-over)
         - REST has been renamed to "Hypermedia API".
+- https://en.wikipedia.org/wiki/Semantic_data_model

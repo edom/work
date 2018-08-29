@@ -51,6 +51,10 @@ For most pages, the title is a goal, and the content is the ongoing journey to a
             - [Using Haskell]({% link haskell.md %})
                 - [Using Cabal]({% link cabal.md %})
             - [Using Java]({% link java.md %})
+                - Building a Java project
+                    - 2018-08-29: If you have to choose between Maven and Gradle, and your code is 100% Java, then I recommend Maven.
+                    - [Using Maven]({% link maven.md %})
+                    - [Using Gradle]({% link gradle.md %})
                 - [Making a Java virtual machine]({% link jvm.md %})
             - [Using Python]({% link python.md %})
             - Using Emacs
@@ -58,6 +62,7 @@ For most pages, the title is a goal, and the content is the ongoing journey to a
             - [Making contributable open-source projects]({% link opensrc.md %})
                 - [Building online communities]({% link community.md %})
                 - Maintaining open-source projects
+            - [Deploying web applications]({% link deploy.md %})
         - [Reverse software engineering]({% link reveng.md %})
             - [Reverse engineering the network protocol used by a Java desktop application]({% link rejava.md %}): a stock trading application written in Java 6
             - [Reverse-engineering PlayStation 1 3D games to control the camera]({% link ps1.md %})
