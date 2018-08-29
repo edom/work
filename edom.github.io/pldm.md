@@ -137,6 +137,10 @@ This is ugly, but less ugly than type erasure.
     - [SO:How are C# generics implemented?](https://stackoverflow.com/questions/11436802/how-are-c-sharp-generics-implemented)
         - [Generics are not templates](https://blogs.msdn.microsoft.com/ericlippert/2009/07/30/whats-the-difference-part-one-generics-are-not-templates/)
 
+### Weak functional programming (allowing partial functions)
+
+Allowing partial functions is a design mistake.
+
 ## C and C++
 
 In the 1970s these were tolerable: memory was limited, tools didn't exist.
@@ -161,6 +165,42 @@ In 2018 these aren't tolerable.
 - Haskell compilation is slow.
 - Haskell module system is a design mistake.
 - GHC: If A depends on B, and B changes without changing API, then A still requires recompilation.
+- Bottom inhabits every type including the supposedly empty type `data Void`.
+
+### Not leveraging user-defined isomorphisms
+
+I want this:
+
+```
+data A = A0 | A1
+data B = B0 | B1
+
+isomorphism "iso" between A and B is
+    A0 ~ B0
+    A1 ~ B1
+```
+
+instead of this:
+
+```haskell
+data Iso a b = MkIso {
+        fwd :: a -> b
+        , rev :: b -> a
+    }
+
+iso :: Iso a b
+iso = MkIso ab ba where
+
+    ab :: A -> B
+    ab A0 = B0
+    ab A1 = B1
+
+    ba :: B -> A
+    ba B0 = A0
+    ba B1 = A1
+```
+
+Explicit isomorphism may help reduce newtype boilerplate.
 
 ## what
 

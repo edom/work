@@ -76,3 +76,11 @@ date: 2018-05-24 02:52 +0700
 - [How to Persuade Others with the Right Questions: Jedi Mind Tricks from Daniel H. Pink](https://www.youtube.com/watch?v=WAL7Pz1i1jU)
     - how to get your daughter to clean her room
         - the comment section is pessimistic
+- 2018-08-29 What I learned today.
+    - To temporarily defuse your enemy's hatred of you, find another enemy that is common to both of you.
+        - These happens in quick succession:
+        Coworker A offended me.
+        Then coworker B came and offended A in front of me.
+        Then I offend coworker B in front of A.
+        Then I can feel some agreement with coworker A.
+    - The perception of having a common enemy unites people, even if the enemy is fake.

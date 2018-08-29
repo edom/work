@@ -736,3 +736,7 @@ Perhaps related to data modeling.
 - 1996 article "Seven Deadly Sins of Introductory Programming Language Design" [pdf](https://pdfs.semanticscholar.org/d314/78c5b95c399b6418b41011debefbc699c633.pdf)
 - 1996 book "Advanced programming language design" [pdf](https://www.researchgate.net/profile/Raphael_Finkel/publication/220692467_Advanced_programming_language_design/links/0c96052af3e324bf31000000/Advanced-programming-language-design.pdf)
 - 1973 article "Hints on Programming Language Design" [pdf](http://www.dtic.mil/dtic/tr/fulltext/u2/773391.pdf)
+
+## Probably irrelevant to our goal
+
+- [WP:Non-English-based programming languages](https://en.wikipedia.org/wiki/Non-English-based_programming_languages)

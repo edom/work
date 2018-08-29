@@ -57,3 +57,12 @@ Example:
 Output:
 
 [foo | bar | baz](https://example.com)
+
+## Markdown table sucks.
+
+Problems:
+
+- Can't put code block in table.
+- Can't put multiple paragraphs in table cell.
+
+Of course you can type the raw HTML, but we are using Markdown to avoid typing HTML.

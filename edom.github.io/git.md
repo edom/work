@@ -66,8 +66,3 @@ or the [manpages](https://git-scm.com/docs) (`man git`).
     - Disable git-gui GC warning:
         - https://stackoverflow.com/questions/1106529/how-to-skip-loose-object-popup-when-running-git-gui
 - [Understanding Git Filter-branch and the Git Storage Model](https://manishearth.github.io/blog/2017/03/05/understanding-git-filter-branch/)
-- Continuous integration
-    - [Jenkins](https://jenkins.io/)
-- Continuous delivery
-    - [Spinnaker](https://www.spinnaker.io/)
-- The ideal workflow: Git push triggers deployment?
