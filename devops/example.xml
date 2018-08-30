@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<d:devops
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="devops.xsd"
+        xmlns:d="urn:com.spacetimecat:devops:0.0.0"
+>
+    <d:application>
+        <d:name>example</d:name>
+        <d:type>
+            <d:java>
+                <d:main_class>com.example.Main</d:main_class>
+            </d:java>
+        </d:type>
+        <d:min_cpu>1</d:min_cpu>
+        <d:max_cpu>4</d:max_cpu>
+        <d:min_memory>
+            <d:quantity>4</d:quantity>
+            <d:memory_unit>GB</d:memory_unit>
+        </d:min_memory>
+        <d:can_scale_horizontally>true</d:can_scale_horizontally>
+    </d:application>
+</d:devops>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:schema
+        xmlns:s="http://www.w3.org/2001/XMLSchema"
+        xmlns:d="urn:com.spacetimecat:devops:0.0.0"
+        targetNamespace="urn:com.spacetimecat:devops:0.0.0"
+>
+
+    <s:element name="devops">
+        <s:annotation>
+            <s:documentation>Top-level document root element.</s:documentation>
+        </s:annotation>
+        <s:complexType>
+            <s:choice minOccurs="0" maxOccurs="unbounded">
+                <s:element ref="d:team"/>
+                <s:element ref="d:application"/>
+            </s:choice>
+        </s:complexType>
+    </s:element>
+
+    <s:element name="team">
+        <s:complexType>
+            <s:sequence>
+                <s:element ref="d:name"/>
+                <s:choice minOccurs="0" maxOccurs="unbounded">
+                    <s:annotation>
+                        <s:documentation>A set of people maintaining a set of applications.</s:documentation>
+                    </s:annotation>
+                    <s:element ref="d:team"/>
+                    <s:element ref="d:application"/>
+                </s:choice>
+            </s:sequence>
+        </s:complexType>
+    </s:element>
+
+    <s:element name="application">
+        <s:annotation>
+            <s:documentation>
+                <p>An application is a formal system that a machine can execute.</p>
+                <p>We accomodate mostly-idle bursty applications.</p>
+            </s:documentation>
+        </s:annotation>
+        <s:complexType>
+            <s:all>
+                <s:element ref="d:name"/>
+                <s:element ref="d:type"/>
+                <!-- requirements -->
+                <s:element ref="d:min_cpu" minOccurs="0"/>
+                <s:element ref="d:max_cpu" minOccurs="0"/>
+                <s:element ref="d:min_memory" minOccurs="0"/>
+                <!-- abilities -->
+                <s:element ref="d:can_scale_horizontally" minOccurs="0"/>
+            </s:all>
+        </s:complexType>
+    </s:element>
+
+    <s:element name="type">
+        <s:complexType>
+            <s:choice>
+                <s:element ref="d:java"/>
+            </s:choice>
+        </s:complexType>
+    </s:element>
+
+    <s:element name="name" type="s:string"/>
+
+    <s:element name="java">
+        <s:annotation>
+            <s:documentation>A Java application.</s:documentation>
+        </s:annotation>
+        <s:complexType>
+            <s:sequence>
+                <s:element ref="d:main_class"/>
+            </s:sequence>
+        </s:complexType>
+    </s:element>
+
+    <s:element name="can_scale_horizontally" type="s:boolean">
+        <s:annotation>
+            <s:documentation>
+                <p>"True" means that the application is stateless, and thus multiple instances can be run behind a load-balancer.</p>
+            </s:documentation>
+        </s:annotation>
+    </s:element>
+
+    <s:element name="main_class" type="s:string"/>
+
+    <s:element name="min_cpu" type="s:double"/>
+
+    <s:element name="max_cpu">
+        <s:annotation>
+            <s:documentation>
+                <p>Maximum CPU while bursting.</p>
+                <p>The absence of this element means that the application uses as many as possible CPU cores while bursting.</p>
+            </s:documentation>
+        </s:annotation>
+        <s:simpleType>
+            <s:restriction base="s:double">
+            </s:restriction>
+        </s:simpleType>
+    </s:element>
+
+    <s:element name="min_memory">
+        <s:complexType>
+            <s:all>
+                <s:element ref="d:quantity"/>
+                <s:element ref="d:memory_unit"/>
+            </s:all>
+        </s:complexType>
+    </s:element>
+
+    <s:element name="quantity" type="s:nonNegativeInteger"/>
+
+    <s:element name="memory_unit" type="d:Memory_unit"/>
+
+    <s:attributeGroup name="Memory">
+        <s:attribute name="unit" type="Memory_unit"/>
+    </s:attributeGroup>
+
+    <s:simpleType name="Memory_unit">
+        <s:restriction base="s:string">
+            <s:enumeration value="KB"/>
+            <s:enumeration value="MB"/>
+            <s:enumeration value="GB"/>
+            <s:enumeration value="TB"/>
+        </s:restriction>
+    </s:simpleType>
+
+</s:schema>
