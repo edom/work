@@ -4,6 +4,9 @@ permalink: /sysadm.html
 date: 2018-08-10 03:49 +0700
 ---
 
+- TOC
+{:toc}
+
 - Why use swap partitions and not swap files?
     - Defragmenting swap files might have undesirable effects.
         - https://lwn.net/Articles/317787/
@@ -56,3 +59,7 @@ Why is security not the default?
     - The only real secure way to run an untrusted application is on a different machine with no network connection.
 - [pv(1): monitor progress of data through pipe - Linux man page](https://linux.die.net/man/1/pv)
 - [jq](https://stedolan.github.io/jq/), [WP:jq (programming language)](https://en.wikipedia.org/wiki/Jq_(programming_language))
+
+## Probably relevant Twitters
+
+- [nixcraft](https://twitter.com/nixcraft): some humor, some important
