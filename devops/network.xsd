@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:schema
+        xmlns:s="http://www.w3.org/2001/XMLSchema"
+        xmlns:n="http://spacetimecat.com/xmlns/devops/network"
+        targetNamespace="http://spacetimecat.com/xmlns/devops/network"
+>
+
+    <s:element name="forwarding">
+        <s:complexType>
+            <s:all>
+                <s:element ref="n:from"/>
+                <s:element ref="n:to"/>
+            </s:all>
+        </s:complexType>
+    </s:element>
+
+    <s:simpleType name="protocol">
+        <s:restriction base="s:string">
+            <s:enumeration value="tcp"/>
+            <s:enumeration value="http"/>
+        </s:restriction>
+    </s:simpleType>
+
+    <s:element name="from">
+        <s:complexType>
+            <s:choice>
+                <s:element ref="n:url_base"/>
+            </s:choice>
+        </s:complexType>
+    </s:element>
+
+    <s:element name="to">
+        <s:complexType>
+            <s:choice>
+                <s:element ref="n:local_port"/>
+            </s:choice>
+        </s:complexType>
+    </s:element>
+
+    <s:element name="local_port" type="s:nonNegativeInteger">
+        <s:annotation>
+            <s:documentation>
+                <p>The TCP port the application is listening at in the machine that is running the application.</p>
+                <p>The protocol is assumed to be HTTP.</p>
+            </s:documentation>
+        </s:annotation>
+    </s:element>
+
+    <s:element name="url_base" type="s:anyURI">
+        <s:annotation>
+            <s:documentation>
+                <p>Every request to a URL that begins with this url_base will be forwarded to the destination.</p>
+            </s:documentation>
+        </s:annotation>
+    </s:element>
+
+</s:schema>

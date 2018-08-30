@@ -1,36 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <s:schema
         xmlns:s="http://www.w3.org/2001/XMLSchema"
-        xmlns:d="urn:com.spacetimecat:devops:0.0.0"
-        targetNamespace="urn:com.spacetimecat:devops:0.0.0"
+        xmlns:d="http://spacetimecat.com/xmlns/devops"
+        xmlns:n="http://spacetimecat.com/xmlns/devops/network"
+        targetNamespace="http://spacetimecat.com/xmlns/devops"
 >
+
+    <s:import schemaLocation="network.xsd" namespace="http://spacetimecat.com/xmlns/devops/network"/>
 
     <s:element name="devops">
         <s:annotation>
-            <s:documentation>Top-level document root element.</s:documentation>
+            <s:documentation>
+                <p>A model of the devops of an organization.</p>
+                <p>Top-level document root element.</p>
+            </s:documentation>
         </s:annotation>
         <s:complexType>
             <s:choice minOccurs="0" maxOccurs="unbounded">
-                <s:element ref="d:team"/>
                 <s:element ref="d:application"/>
             </s:choice>
+            <s:attributeGroup ref="d:version"/>
         </s:complexType>
+        <s:unique name="name">
+            <s:selector xpath="d:application"/>
+            <s:field xpath="d:name"/>
+        </s:unique>
+        <s:unique name="url_base">
+            <s:selector xpath="d:application/d:network/n:forwarding/n:from"/>
+            <s:field xpath="n:url_base"/>
+        </s:unique>
     </s:element>
 
-    <s:element name="team">
-        <s:complexType>
-            <s:sequence>
-                <s:element ref="d:name"/>
-                <s:choice minOccurs="0" maxOccurs="unbounded">
-                    <s:annotation>
-                        <s:documentation>A set of people maintaining a set of applications.</s:documentation>
-                    </s:annotation>
-                    <s:element ref="d:team"/>
-                    <s:element ref="d:application"/>
-                </s:choice>
-            </s:sequence>
-        </s:complexType>
-    </s:element>
+    <s:attributeGroup name="version">
+        <s:attribute name="version" type="s:string"/>
+    </s:attributeGroup>
 
     <s:element name="application">
         <s:annotation>
@@ -42,18 +45,55 @@
         <s:complexType>
             <s:all>
                 <s:element ref="d:name"/>
-                <s:element ref="d:type"/>
-                <!-- requirements -->
-                <s:element ref="d:min_cpu" minOccurs="0"/>
-                <s:element ref="d:max_cpu" minOccurs="0"/>
-                <s:element ref="d:min_memory" minOccurs="0"/>
+                <s:element ref="d:description" minOccurs="0"/>
+                <s:element ref="d:language"/>
+                <s:element ref="d:resource_requirement" minOccurs="0"/>
                 <!-- abilities -->
-                <s:element ref="d:can_scale_horizontally" minOccurs="0"/>
+                <s:element ref="d:allow_horizontal_scaling" minOccurs="0"/>
+                <s:element ref="d:network" minOccurs="0"/>
+                <s:element ref="d:local_admin_port" minOccurs="0"/>
             </s:all>
         </s:complexType>
     </s:element>
 
-    <s:element name="type">
+    <s:element name="name" type="s:string">
+        <s:annotation>
+            <s:documentation>Must be unique among applications.</s:documentation>
+        </s:annotation>
+    </s:element>
+
+    <s:element name="resource_requirement">
+        <s:complexType>
+            <s:all>
+                <s:element ref="d:min_cpu" minOccurs="0"/>
+                <s:element ref="d:max_cpu" minOccurs="0"/>
+                <s:element ref="d:min_memory" minOccurs="0"/>
+                <s:element ref="d:max_memory" minOccurs="0"/>
+            </s:all>
+        </s:complexType>
+    </s:element>
+
+    <s:element name="network">
+        <s:complexType>
+            <s:choice minOccurs="0" maxOccurs="unbounded">
+                <s:element ref="n:forwarding"/>
+            </s:choice>
+        </s:complexType>
+    </s:element>
+
+    <s:element name="local_admin_port" type="s:nonNegativeInteger">
+        <s:annotation>
+            <s:documentation>
+                <p>Another TCP port the application is listening at for administrative commands.</p>
+                <p>The port should not be exposed to the public.</p>
+            </s:documentation>
+        </s:annotation>
+    </s:element>
+
+    <s:element name="language">
+        <s:annotation>
+            <s:documentation>This is about how to build the application.</s:documentation>
+        </s:annotation>
         <s:complexType>
             <s:choice>
                 <s:element ref="d:java"/>
@@ -61,11 +101,14 @@
         </s:complexType>
     </s:element>
 
-    <s:element name="name" type="s:string"/>
+    <s:element name="description" type="s:string"/>
 
     <s:element name="java">
         <s:annotation>
-            <s:documentation>A Java application.</s:documentation>
+            <s:documentation>
+                <p>A Java application.</p>
+                <p>We assume that the Java application uses Maven.</p>
+            </s:documentation>
         </s:annotation>
         <s:complexType>
             <s:sequence>
@@ -74,49 +117,68 @@
         </s:complexType>
     </s:element>
 
-    <s:element name="can_scale_horizontally" type="s:boolean">
+    <s:element name="allow_horizontal_scaling" type="s:boolean">
         <s:annotation>
             <s:documentation>
-                <p>"True" means that the application is stateless, and thus multiple instances can be run behind a load-balancer.</p>
+                <p>The value "true" means that different requests from the same client can be routed to different server instances without confusing the client.</p>
             </s:documentation>
         </s:annotation>
     </s:element>
 
-    <s:element name="main_class" type="s:string"/>
+    <s:element name="main_class" type="s:string">
+        <s:annotation>
+            <s:documentation>Java application entry point.</s:documentation>
+        </s:annotation>
+    </s:element>
 
     <s:element name="min_cpu" type="s:double"/>
 
-    <s:element name="max_cpu">
+    <s:element name="max_cpu" type="s:double">
         <s:annotation>
             <s:documentation>
                 <p>Maximum CPU while bursting.</p>
                 <p>The absence of this element means that the application uses as many as possible CPU cores while bursting.</p>
             </s:documentation>
         </s:annotation>
-        <s:simpleType>
-            <s:restriction base="s:double">
-            </s:restriction>
-        </s:simpleType>
     </s:element>
 
-    <s:element name="min_memory">
-        <s:complexType>
-            <s:all>
-                <s:element ref="d:quantity"/>
-                <s:element ref="d:memory_unit"/>
-            </s:all>
-        </s:complexType>
+    <s:element name="min_memory" type="d:memory">
+        <s:annotation>
+            <s:documentation>
+                <p>Minimum amount of memory that should be allocated for the application to have acceptable garbage collection overhead.</p>
+            </s:documentation>
+        </s:annotation>
     </s:element>
+
+    <s:element name="max_memory" type="d:memory">
+        <s:annotation>
+            <s:documentation>
+                <p>Maximum memory limit. If the application is near this limit, then allocation may fail or the application may be killed.</p>
+                <p>The absence of this element means that the system is free to limit the memory to any value above min_memory.</p>
+            </s:documentation>
+        </s:annotation>
+    </s:element>
+
+    <s:complexType name="memory">
+        <s:simpleContent>
+            <s:extension base="s:nonNegativeInteger">
+                <s:attributeGroup ref="d:memory"/>
+            </s:extension>
+        </s:simpleContent>
+    </s:complexType>
 
     <s:element name="quantity" type="s:nonNegativeInteger"/>
 
-    <s:element name="memory_unit" type="d:Memory_unit"/>
+    <s:element name="memory_unit" type="d:memory_unit"/>
 
-    <s:attributeGroup name="Memory">
-        <s:attribute name="unit" type="Memory_unit"/>
+    <s:attributeGroup name="memory">
+        <s:attribute name="unit" type="d:memory_unit"/>
     </s:attributeGroup>
 
-    <s:simpleType name="Memory_unit">
+    <s:simpleType name="memory_unit">
+        <s:annotation>
+            <s:documentation>Base-2.</s:documentation>
+        </s:annotation>
         <s:restriction base="s:string">
             <s:enumeration value="KB"/>
             <s:enumeration value="MB"/>

@@ -1,22 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+XML is not suited for this.
+We want the declaration site of these bindings to be as close as possible to their use sites.
+-->
+<!DOCTYPE devops [
+    <!ENTITY example_port "1234">
+]>
 <d:devops
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="devops.xsd"
-        xmlns:d="urn:com.spacetimecat:devops:0.0.0"
+        xsi:schemaLocation="http://spacetimecat.com/xmlns/devops devops.xsd"
+        xmlns:d="http://spacetimecat.com/xmlns/devops"
+        xmlns:n="http://spacetimecat.com/xmlns/devops/network"
 >
+    <!-- Define your applications. -->
     <d:application>
+        <!-- Name must be unique. -->
         <d:name>example</d:name>
-        <d:type>
+        <d:description>an example application</d:description>
+        <d:language>
             <d:java>
                 <d:main_class>com.example.Main</d:main_class>
             </d:java>
-        </d:type>
-        <d:min_cpu>1</d:min_cpu>
-        <d:max_cpu>4</d:max_cpu>
-        <d:min_memory>
-            <d:quantity>4</d:quantity>
-            <d:memory_unit>GB</d:memory_unit>
-        </d:min_memory>
-        <d:can_scale_horizontally>true</d:can_scale_horizontally>
+        </d:language>
+        <d:resource_requirement>
+            <d:min_cpu>1</d:min_cpu>
+            <d:max_cpu>4</d:max_cpu>
+            <d:min_memory unit="MB">4096</d:min_memory>
+        </d:resource_requirement>
+        <d:allow_horizontal_scaling>true</d:allow_horizontal_scaling>
+        <d:network>
+            <n:forwarding>
+                <n:from>
+                    <!-- URL base must be unique. -->
+                    <n:url_base>http://example.com/</n:url_base>
+                </n:from>
+                <n:to>
+                    <n:local_port>&example_port;</n:local_port>
+                </n:to>
+            </n:forwarding>
+            <n:forwarding>
+                <n:from>
+                    <!-- This assumes TLS termination at load balancer. -->
+                    <n:url_base>https://example.com/</n:url_base>
+                </n:from>
+                <n:to>
+                    <n:local_port>&example_port;</n:local_port>
+                </n:to>
+            </n:forwarding>
+        </d:network>
     </d:application>
 </d:devops>
