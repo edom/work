@@ -4,6 +4,8 @@ permalink: /markup.html
 date: 2018-08-24 19:14 +0700
 ---
 
+A markup language adds some semantics to text.
+
 - Finding the best document typesetting/processing system
     - What are some markup languages?
         - http://www.nongnu.org/skribilo/

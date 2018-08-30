@@ -48,6 +48,8 @@ Vim can semi-automate XML closing tag using Ctrl+P.
 In principle, from a type defined in an XSD file, we can generate a Haskell module and a Java class.
 
 - [W3C XML Schema: DOs and DON'Ts](http://www.kohsuke.org/xmlschema/XMLSchemaDOsAndDONTs.html)
+- [xsd - What are the best practices for versioning XML schemas? - Stack Overflow](https://stackoverflow.com/questions/2014237/what-are-the-best-practices-for-versioning-xml-schemas)
+- [Tutorial: XML Schema Keys \| XML Schema Tutorial \| Webucator](https://www.webucator.com/tutorial/learn-xml-schema/XML-Schema-Keys.cfm)
 
 ## Toward markup language agnosticity
 

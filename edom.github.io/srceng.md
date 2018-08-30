@@ -127,3 +127,4 @@ The search may ignore stop words when crawling, but it should not ignore stop wo
     - https://en.wikipedia.org/wiki/Seeks
     - succumbed to money
         - https://en.wikipedia.org/wiki/Blekko
+- 1999 article [Indexing the Internet](http://www.tk421.net/essays/babel.html)

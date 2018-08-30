@@ -75,6 +75,7 @@ cover of Initial D OST "Running in the 90s"
 - 115 bpm, [Jennifer Paige, "Crush"](https://www.youtube.com/watch?v=EIhSnaqou0I)
     - [extended version](https://www.youtube.com/watch?v=Niai5d4eAns)
 - 116 bpm, ["Get lucky", Daft Punk ft. Pharrell Williams and Nile Rodgers](https://www.youtube.com/watch?v=5NV6Rdv1a3I)
+- 117 bpm, "Night birds", Shakatak
 - 117 bpm, 1963, Boots Randolph, "Yakety sax"
     - 117 bpm, 1958, [Boots Randolph - "Yakety Sax" (Original 1958 Version)](https://www.youtube.com/watch?v=R4NDLJow1ZE)
     - 117 bpm, 1963, [1963 HITS ARCHIVE: Yakety Sax - Boots Randolph](https://www.youtube.com/watch?v=pdYzDolumkU)

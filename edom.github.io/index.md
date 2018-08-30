@@ -26,6 +26,8 @@ For most pages, the title is a goal, and the content is the ongoing journey to a
         - Forward software engineering
             - [Making lasting software sooner]({% link softeng.md %})
             - [Making the only programming language we will ever need]({% link plres.md %})
+                - [Extending lambda calculus]({% link lambda.md %})
+                - [Extending Haskell]({% link exhask.md %})
                 - [Programming language design mistakes]({% link pldm.md %})
                 - Making interpreters/translators/compilers
                     - Don't make a compiler?
@@ -48,6 +50,7 @@ For most pages, the title is a goal, and the content is the ongoing journey to a
                             - GNU Autotools
                             - Windows 95: [Much more than you would ever know.. The original version of Sim City was writt... \| Hacker News](https://news.ycombinator.com/item?id=2281932)
                 - [Designing markup languages]({% link markup.md %})
+                - [Designing configuration languages]({% link conflang.md %})
             - Using programming languages and their related tools
                 - [Using Haskell]({% link haskell.md %})
                     - [Using Cabal]({% link cabal.md %})

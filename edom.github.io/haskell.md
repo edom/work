@@ -191,3 +191,12 @@ It's sad to see works thrown away.
     - [Cloud Haskell](https://haskell-distributed.github.io/)
         - has some academic papers https://wiki.haskell.org/Cloud_Haskell
     - [PatrickMaier/HdpH: Haskell distributed parallel Haskell](https://github.com/PatrickMaier/HdpH)
+- curation
+    - https://www.reddit.com/r/haskell/comments/4ggt05/best_underrated_haskell_libraries/
+    - https://wiki.haskell.org/Applications_and_libraries
+    - https://stackoverflow.com/questions/9286799/haskell-libraries-overview-and-their-quality
+- unread
+    - servant web framework
+    - Salsa Haskell .NET bridge
+        - https://wiki.haskell.org/Salsa
+    - [Haskell partiality monad](https://gist.github.com/puffnfresh/6222797)

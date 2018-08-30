@@ -26,7 +26,11 @@ Can we formalize this using Grue's map theory?
 - How is "true" represented?
 - How is "conjunction" represented?
 
-## How do we increase language adoption?
+Every functional programming language is lambda calculus plus plus.
+
+Functional programming is lambda calculus plus plus.
+
+## Increasing language adoption
 
 In order for a language to be adopted, people must perceive its risk as low.
 
@@ -72,157 +76,252 @@ I think that is wise.
         - Assume no hardware fault.
     - Software is executable mathematics.
 
-## Where shall we start?
+## Finding giants whose shoulders we want to stand on
 
-These languages are interesting starting points:
-
-- [Sixten](https://github.com/ollef/sixten)
-- Dhall
-- [Morte: an intermediate language for super-optimizing functional programs](http://www.haskellforall.com/2014/09/morte-intermediate-language-for-super.html)
-
-## Functional programming?
-
-Every functional programming language is lambda calculus plus plus.
-
-I thought lambda calculus could be summarized in one page, but Henk Barendregt wrote hundreds of pages about it. Is there more to lambda calculus than it seems?
-
-- 1994, 50 pages, [pdf](http://www.nyu.edu/projects/barker/Lambda/barendregt.94.pdf)
-- 1991, 190 pages, [pdf](https://people.mpi-sws.org/~dreyer/tor/papers/barendregt.pdf)
-
-## Extending lambda-calculus with various bells and whistles
-
-- Vectorial lambda-calculus
-    - The 2013 article "The Vectorial Lambda-Calculus" [pdf](https://who.rocq.inria.fr/Alejandro.Diaz-Caro/TheVectorialCalculus.pdf) adds vectors and matrices and their types to lambda calculus.
-    - The 2010 article "Semantics of a Typed Algebraic Lambda-Calculus" [pdf available](https://arxiv.org/abs/1006.1433) also mentions "vectorial".
-
-## Where to find recent programming language research?
-
-- meetings, conferences, symposiums
-    - [POPL on Twitter](https://twitter.com/poplconf?lang=en).
-    Its full name is "ACM SIGPLAN Symposium on Principles of Programming Languages".
-- collections, links, aggregators
-    - https://www.cs.cmu.edu/~mleone/language-research.html
-
-## what
-
-- unknown-year lecture notes "Lambda Calculus as a Programming Language" [pdf](http://andrei.clubcisco.ro/cursuri/2pp/01.Lambda_prog.pdf)
-- category theory and programming languages
-    - Category-theoretic model of functional programming languages
-        - Every functional programming language L can be modeled by a category C(L) whose objects are the types of L and arrows are the function expressions of L.
-    - categorical programming (what is this?)
-        - 2000, PhD thesis, "Categorical programming with inductive and coinductive types" https://kodu.ut.ee/~varmo/papers/thesis.pdf
-        - categorical programming language
-            - 1993, article, "Comparing Hagino's categorical programming language and typed lambda-calculi" https://www.sciencedirect.com/science/article/pii/030439759390186W
-            - 1987, PhD thesis, "Categorical programming language" http://web.sfc.keio.ac.jp/~hagino/thesis.pdf
-                - "An interpreter of Hagino's Categorical Programming Language (CPL)." https://github.com/msakai/cpl
-            - aggregators
-                - 2009, https://mathoverflow.net/questions/3721/programming-languages-based-on-category-theory
-                - https://softwareengineering.stackexchange.com/questions/216635/category-theory-based-language
-    - category theory applied to programming language theory
-        - 2012, "Generic Programming with Adjunctions" http://www.cs.ox.ac.uk/ralf.hinze/LN.pdf
-- compiler construction
-    - Every compiler does name resolution / symbol table.
-        - Is there a compiler that doesn't do that? https://www.reddit.com/r/Forth/comments/695oik/advances_in_forth_language_design/dh454oq/
+- These languages are interesting starting points:
+    - [Sixten](https://github.com/ollef/sixten)
+    - Dhall
+    - [Morte: an intermediate language for super-optimizing functional programs](http://www.haskellforall.com/2014/09/morte-intermediate-language-for-super.html)
+- Designing programming languages:
+    - 2018 article "Interdisciplinary Programming Language Design" [pdf](http://www.cs.cmu.edu/~mcoblenz/HCPLD-preprint.pdf)
+    - 2018 article "A Programmable Programming Language" [pdf](http://silo.cs.indiana.edu:8346/c211/impatient/cacm-draft.pdf)
+    - 2018 article "Combining Model Checking and Testing" [pdf](https://www.cis.upenn.edu/~alur/CIS673/testing.pdf)
+    - 2013 article "Idris, a General Purpose Dependently Typed Programming Language: Design and Implementation" [pdf](https://eb.host.cs.st-andrews.ac.uk/drafts/impldtp.pdf)
+    - 2007 article "Position Paper: Thoughts on Programming with Proof Assistants" [pdf](https://ac.els-cdn.com/S1571066107002502/1-s2.0-S1571066107002502-main.pdf?_tid=19c6192b-ca57-4ef0-9403-1cfb624c817c&acdnat=1535488824_78a2c31f390f3a1fb72f0c31024f2495)
+    - 1996 article "Seven Deadly Sins of Introductory Programming Language Design" [pdf](https://pdfs.semanticscholar.org/d314/78c5b95c399b6418b41011debefbc699c633.pdf)
+    - 1996 book "Advanced programming language design" [pdf](https://www.researchgate.net/profile/Raphael_Finkel/publication/220692467_Advanced_programming_language_design/links/0c96052af3e324bf31000000/Advanced-programming-language-design.pdf)
+    - 1973 article "Hints on Programming Language Design" [pdf](http://www.dtic.mil/dtic/tr/fulltext/u2/773391.pdf)
+- Finding recent programming language research:
+    - meetings, conferences, symposiums
+        - [POPL on Twitter](https://twitter.com/poplconf?lang=en).
+        Its full name is "ACM SIGPLAN Symposium on Principles of Programming Languages".
+    - collections, links, aggregators
+        - https://www.cs.cmu.edu/~mleone/language-research.html
 - What already exists?
     - [68 Resources on creating programming languages](https://tomassetti.me/resources-create-programming-languages/)
     - 2004, book, "Programming language design concepts"
     - https://en.wikipedia.org/wiki/Expression_problem
-- don't repeat yourself
-    - https://en.wikipedia.org/wiki/Generic_programming
-        - parametric polymorphism
-- Safely Composable Type-Specific Languages https://www.cs.cmu.edu/~aldrich/papers/ecoop14-tsls.pdf
-- foundation of mathematics
-    - set theories, such as ZF, ZFC, NBG, etc.
-        - https://math.stackexchange.com/questions/136215/difference-between-zfc-nbg
-    - type theories, such as Martin-Löf type theory
-    - logic?
-    - category theory?
-    - lambda calculus?
-    - https://cstheory.stackexchange.com/questions/27217/are-there-presentations-of-set-theory-in-terms-of-lambda-calculus
-        - Grue's map theory, 1992
-            - http://hjemmesider.diku.dk/~grue/
-                - 1992, Grue, PhD thesis, ["Map theory"](http://hjemmesider.diku.dk/~grue/papers/Grue92/Grue92.pdf)
-                    - p. 130: "Equality is better than truth [...]" (How do we explain the context?)
-                        - https://en.wikipedia.org/wiki/Equational_logic
-            - related?
-                - equational programming
-- Composition, composable systems
-    - https://en.wikipedia.org/wiki/Software_transactional_memory#Composable_operations
-- Lambda calculus semantics
-    - https://en.wikipedia.org/wiki/Lambda_calculus#Semantics
-        - "In the 1970s, Dana Scott showed that, if only continuous functions were considered,
-        a set or domain D with the required property could be found, thus providing a model for the lambda calculus."
-            - 1982, ["What is a model of lambda calculus?"](https://www.sciencedirect.com/science/article/pii/S0019995882800879)
-            - 2008, PhD thesis, ["Models and theories of lambda calculus"](https://tel.archives-ouvertes.fr/tel-00715207/document)
-                - 2009, [summary](https://arxiv.org/abs/0904.4756)
-    - Paul Hudak, lecture notes, [The Lambda Calculus](http://www.cs.yale.edu/homes/hudak/CS430F07/LectureSlides/Reynolds-ch10.pdf)
-        - "The Greatest Thing Since Sliced Bread™, or maybe even before it"
-    - The operational semantics of lambda calculus depends on the evaluation strategy?
-        - What-reduction?
-            - Normal-order reduction
-            - Applicative-order reduction
-        - Call-by-what?
-            - Call-by-value
-            - Call-by-name
-- https://en.wikipedia.org/wiki/Programming_language_theory
-- https://en.wikipedia.org/wiki/John_C._Reynolds
-    - 2014, [The essence of Reynolds](http://www.cs.bham.ac.uk/~udr/papers/EssenceOfReynolds.pdf)
-        - 1998, Reynolds, "Theories of programming languages"
-- a list of people http://www.angelfire.com/tx4/cus/people/index.html
-- paradigm, approach, viewpoint, worldview
-    - graph programming languages
-        - https://cstheory.stackexchange.com/questions/3906/what-are-theoretically-sound-programming-languages-for-graph-problems
-            - https://www.cs.york.ac.uk/plasma/wiki/index.php?title=GP_%28Graph_Programs%29
-            - 2007, PhD thesis, Steinert, ["The graph programming language GP"](https://www.cs.york.ac.uk/ftpdir/reports/2007/YCST/15/YCST-2007-15.pdf)
-            - a short visual example of "conditional rule schemata"
-                - 2010, article, ["Hoare Logic for Graph Programs"](https://www.cs.york.ac.uk/plasma/publications/pdf/PoskittPlump.VS-Theory.10.pdf)
-            - https://markorodriguez.com/2013/01/09/on-graph-computing/
-            - https://en.wikipedia.org/wiki/Gremlin_(programming_language)
-    - equational programming?
-        - 2017-2018, https://www.cs.vu.nl/~tcs/ep/
-        - term-rewriting
-            - retired, [Q language](http://q-lang.sourceforge.net/)
-                - http://q-lang.sourceforge.net/examples.html
-                - superseded by Pure
-                    - https://agraef.github.io/pure-lang/
-                    - https://en.wikipedia.org/wiki/Pure_(programming_language)
-                    - https://github.com/agraef/pure-lang/wiki/Rewriting
-            - Joy
-    - 2002, article, ["Stochastic Lambda Calculus and Monads of Probability Distributions"](http://www.cs.tufts.edu/comp/150PP/archive/norman-ramsey/pmonad.pdf)
+    - don't repeat yourself
+        - https://en.wikipedia.org/wiki/Generic_programming
+            - parametric polymorphism
+    - Safely Composable Type-Specific Languages https://www.cs.cmu.edu/~aldrich/papers/ecoop14-tsls.pdf
 - books
     - books recommended by courses related to programming language research
         - http://plus.kaist.ac.kr/~han/courses/cs520/
         - https://www.cl.cam.ac.uk/teaching/1516/ConceptsPL/
         - https://en.wikipedia.org/wiki/Programming_language_theory#Further_reading
     - 1995, book, "Syntax and semantics of programming languages", Slonneger & Kurtz http://homepage.divms.uiowa.edu/~slonnegr/plf/Book/
-- towards a language with first-class syntax
-    - composable grammars?
-        - 2013, article, Viera & Swierstra, "First Class Syntax, Semantics, and Their Composition" http://www.cs.ru.nl/P.Achten/IFL2013/symposium_proceedings_IFL2013/ifl2013_submission_21.pdf
-            - 2013, PhD thesis, Viera, "First Class Syntax, Semantics, and Their Composition" file:///home/erik/Downloads/viera.pdf
-        - 1990, ["A Primer for Program Composition Notation"](https://authors.library.caltech.edu/26726/)
-        - https://stackoverflow.com/questions/953185/composable-grammars
-        - OMeta
-        - Programming languages with programmable syntax
-            - [Katahdin](http://chrisseaton.com/katahdin/)
-        - parsing expression grammar, packrat
-            - "Parsing ought to be easier"
-                - https://news.ycombinator.com/item?id=2330830
-                    - "PEGs are one class of cleanly composable grammars."?
-        - http://www.cs.cmu.edu/~Compose/
-        - cryptographic protocol analysis
-            - https://en.wikipedia.org/wiki/Universal_composability
-    - Programming languages with macros
-        - Common Lisp
-        - Scheme
-        - Kotlin?
-        - Clojure?
-        - Scala? https://www.scala-lang.org/blog/2017/11/27/macros.html
 - 2017, PhD thesis, ["Context-aware programming languages"](http://tomasp.net/academic/theses/coeffects/)
     - [amazingly empathic considerate presentation that has the audience in mind](http://tomasp.net/coeffects/)
         - if only all PhD theses are presented that way
             - if only everybody writes that way
 - 2014, book, Odersky, "Scala by example"
     - perhaps the best way to learn Scala for non-Scala programmers
+- https://en.wikipedia.org/wiki/John_C._Reynolds
+    - 2014, [The essence of Reynolds](http://www.cs.bham.ac.uk/~udr/papers/EssenceOfReynolds.pdf)
+        - 1998, Reynolds, "Theories of programming languages"
+- a list of people http://www.angelfire.com/tx4/cus/people/index.html
+- other people's collections
+    - https://github.com/steshaw/plt
+
+### People who share the vision for *the* programming language
+
+- [Polymorphic Programming - BAM Weblog](https://brianmckenna.org/blog/polymorphic_programming)
+    - has some links
+    - 2017, article, "Compiling to Categories", Conal Elliott, [pdf](http://conal.net/papers/compiling-to-categories/compiling-to-categories.pdf)
+    - Is this 1969 article related? Can't be found online.
+        - https://en.wikipedia.org/wiki/Polymorphic_Programming_Language
+    - Are these related?
+        - 1989, article, "Database Programming in Machiavelli – a Polymorphic Language with Static Type Inference", [pdf](http://homepages.inf.ed.ac.uk/opb/papers/SIGMOD89.pdf)
+- Can we use Description Logic (the theoretical foundations of Web Ontology Language OWL) to generate software, especially enterprise applications?
+    - 2015, article, [[1503.01723] Modelling the Semantic Web using a Type System](https://arxiv.org/abs/1503.01723)
+    - 2005, article, "Software engineering ontologies and their implementation", [pdf](https://espace.curtin.edu.au/bitstream/handle/20.500.11937/9549/19598_downloaded_stream_116.pdf), [pdf copy](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.86.5585&rep=rep1&type=pdf)
+
+### People who share some of the vision but don't go far enough
+
+- XForms
+    - 2016, article, [Leveraging declarative languages in web application development - SpringerLink](https://link.springer.com/article/10.1007/s11280-015-0339-z)
+    - 2014, slides, advocacy, [Declarative Web Applications](https://homepages.cwi.nl/~steven/Talks/2014/01-31-declarative/)
+- 2007, workshop, [Declarative Models of Distributed Web Applications](https://www.w3.org/2007/02/dmdwa-ws/)
+- [#proglangdesign](http://www.proglangdesign.net/)
+- IDE (integrated development environment), editor
+    - Given a grammar, the computer should generate an IDE for us.
+    Syntax highlighting.
+    Refactoring.
+    - https://hackage.haskell.org/package/treersec "Build a structure editor for a programming language from combinators following the grammar."
+    - http://www.lamdu.org/
+    - cirru https://news.ycombinator.com/item?id=13773813
+        - lots of similar things https://news.ycombinator.com/item?id=13774864
+    - isomorf: find code fragment popularity by structure (not-only-text) comparison https://isomorf.io/#!/tours/of/overview/7/haskell
+- supercompilation, specialization, partial evaluation
+    - Haskell supercompilation?
+        - GHC
+        - Supero
+        - Morte
+            - https://github.com/Gabriel439/Haskell-Morte-Library
+                - "Morte is a super-optimizing intermediate language for functional languages."
+            - http://www.haskellforall.com/2014/09/morte-intermediate-language-for-super.html
+    - [Thyer's PhD thesis "Lazy specialization"](http://thyer.name/phd-thesis/thesis-thyer.pdf) has an accessible introduction to lambda calculus in Chapter 2.
+        - "Tower of interpreters" test
+        - 2018, "Collapsing towers of interpreters" http://lampwww.epfl.ch/~amin/pub/collapsing-towers.pdf
+            - "It is well known that *staging* an interpreter – making it generate code whenever it would normally interpret an expression – yields a compiler [...]"
+    - 1991, "A partial evaluator for the untyped lambda-calculus", [paywall](https://www.cambridge.org/core/journals/journal-of-functional-programming/article/a-partial-evaluator-for-the-untyped-lambda-calculus/EE324F936F0A009B6766B13FF6755DFC)
+        - related: semantic-directed code generation?
+    - Gabriel Gonzales stuff: Morte, Dhall.
+    - [LTU: Ongoing work on Supercompilation of Java code (or supercompilation in general)?](http://lambda-the-ultimate.org/node/2739)
+- [A Treatise on Cosmos —the New Programming Language](https://medium.com/@McCosmos/a-treatise-on-cosmos-the-new-programming-language-905be69eb4af)
+    - procedural-looking logic programming language
+- syntax
+    - [WP:Off-side rule](https://en.wikipedia.org/wiki/Off-side_rule), indentation as block delimiter
+- [Quest For The Perfect Language](http://wiki.c2.com/?QuestForThePerfectLanguage)
+
+## Category theory and programming languages?
+
+The section title needs a verb.
+
+- Category-theoretic model of functional programming languages
+    - Every functional programming language L can be modeled by a category C(L) whose objects are the types of L and arrows are the function expressions of L.
+- categorical programming (what is this?)
+    - 2000, PhD thesis, "Categorical programming with inductive and coinductive types" https://kodu.ut.ee/~varmo/papers/thesis.pdf
+    - categorical programming language
+        - 1993, article, "Comparing Hagino's categorical programming language and typed lambda-calculi" https://www.sciencedirect.com/science/article/pii/030439759390186W
+        - 1987, PhD thesis, "Categorical programming language" http://web.sfc.keio.ac.jp/~hagino/thesis.pdf
+            - "An interpreter of Hagino's Categorical Programming Language (CPL)." https://github.com/msakai/cpl
+        - aggregators
+            - 2009, https://mathoverflow.net/questions/3721/programming-languages-based-on-category-theory
+            - https://softwareengineering.stackexchange.com/questions/216635/category-theory-based-language
+- category theory applied to programming language theory
+    - 2012, "Generic Programming with Adjunctions" http://www.cs.ox.ac.uk/ralf.hinze/LN.pdf
+
+## Making compilers?
+
+Every compiler does name resolution / symbol table.
+Is there a compiler that doesn't do that?
+[Forth?](https://www.reddit.com/r/Forth/comments/695oik/advances_in_forth_language_design/dh454oq/)
+
+- https://www.reddit.com/r/haskell/comments/4jhhrj/anders_hejlsberg_on_modern_compiler_construction/
+- https://cs.stackexchange.com/questions/63018/visual-programming-tools-why-don-t-they-work-with-the-ast-directly
+- compiling with continuations
+    - Why use CPS (continuation passing style) as intermediate form?
+        - http://matt.might.net/articles/cps-conversion/
+        - https://www.microsoft.com/en-us/research/publication/compiling-with-continuations-continued/
+        - https://news.ycombinator.com/item?id=7150095
+    - 2003, retrospective: the essence of compiling with continuations https://users.soe.ucsc.edu/~cormac/papers/best-pldi.pdf
+        - https://en.wikipedia.org/wiki/A-normal_form
+
+## Foundation of mathematics?
+
+- set theories, such as ZF, ZFC, NBG, etc.
+    - https://math.stackexchange.com/questions/136215/difference-between-zfc-nbg
+- type theories, such as Martin-Löf type theory
+- logic?
+- category theory?
+- lambda calculus?
+- https://cstheory.stackexchange.com/questions/27217/are-there-presentations-of-set-theory-in-terms-of-lambda-calculus
+    - Grue's map theory, 1992
+        - http://hjemmesider.diku.dk/~grue/
+            - 1992, Grue, PhD thesis, ["Map theory"](http://hjemmesider.diku.dk/~grue/papers/Grue92/Grue92.pdf)
+                - p. 130: "Equality is better than truth [...]" (How do we explain the context?)
+                    - https://en.wikipedia.org/wiki/Equational_logic
+        - related?
+            - equational programming
+
+## Paradigm, approach, viewpoint, worldview?
+
+- graph programming languages
+    - https://cstheory.stackexchange.com/questions/3906/what-are-theoretically-sound-programming-languages-for-graph-problems
+        - https://www.cs.york.ac.uk/plasma/wiki/index.php?title=GP_%28Graph_Programs%29
+        - 2007, PhD thesis, Steinert, ["The graph programming language GP"](https://www.cs.york.ac.uk/ftpdir/reports/2007/YCST/15/YCST-2007-15.pdf)
+        - a short visual example of "conditional rule schemata"
+            - 2010, article, ["Hoare Logic for Graph Programs"](https://www.cs.york.ac.uk/plasma/publications/pdf/PoskittPlump.VS-Theory.10.pdf)
+        - https://markorodriguez.com/2013/01/09/on-graph-computing/
+        - https://en.wikipedia.org/wiki/Gremlin_(programming_language)
+- equational programming?
+    - 2017-2018, https://www.cs.vu.nl/~tcs/ep/
+    - term-rewriting
+        - retired, [Q language](http://q-lang.sourceforge.net/)
+            - http://q-lang.sourceforge.net/examples.html
+            - superseded by Pure
+                - https://agraef.github.io/pure-lang/
+                - https://en.wikipedia.org/wiki/Pure_(programming_language)
+                - https://github.com/agraef/pure-lang/wiki/Rewriting
+        - Joy
+- 2002, article, ["Stochastic Lambda Calculus and Monads of Probability Distributions"](http://www.cs.tufts.edu/comp/150PP/archive/norman-ramsey/pmonad.pdf)
+
+## Toward a language with first-class syntax?
+
+- composable grammars?
+    - 2013, article, Viera & Swierstra, "First Class Syntax, Semantics, and Their Composition" http://www.cs.ru.nl/P.Achten/IFL2013/symposium_proceedings_IFL2013/ifl2013_submission_21.pdf
+        - 2013, PhD thesis, Viera, "First Class Syntax, Semantics, and Their Composition" file:///home/erik/Downloads/viera.pdf
+    - 1990, ["A Primer for Program Composition Notation"](https://authors.library.caltech.edu/26726/)
+    - https://stackoverflow.com/questions/953185/composable-grammars
+    - OMeta
+    - Programming languages with programmable syntax
+        - [Katahdin](http://chrisseaton.com/katahdin/)
+    - parsing expression grammar, packrat
+        - "Parsing ought to be easier"
+            - https://news.ycombinator.com/item?id=2330830
+                - "PEGs are one class of cleanly composable grammars."?
+    - http://www.cs.cmu.edu/~Compose/
+    - cryptographic protocol analysis
+        - https://en.wikipedia.org/wiki/Universal_composability
+- Programming languages with macros
+    - Common Lisp
+    - Scheme
+    - Kotlin?
+    - Clojure?
+    - Scala? https://www.scala-lang.org/blog/2017/11/27/macros.html
+
+## Type systems and type theory?
+
+- https://cs.stackexchange.com/questions/53998/what-are-the-major-differences-between-row-polymorphism-and-subtyping
+- row polymorphism vs structural subtyping https://news.ycombinator.com/item?id=13047934
+    - Why is it called row polymorphism?
+    Where is the row?
+        - See "Objects and Aspects: Row Polymorphism", Neel Krishnaswami https://www.cs.cmu.edu/~neelk/rows.pdf
+    - Church types and Curry types
+        - https://lispcast.com/church-vs-curry-types/
+    - Liquid Haskell https://ucsd-progsys.github.io/liquidhaskell-blog/
+    - [Row Polymorphism Isn't Subtyping - BAM Weblog](https://brianmckenna.org/blog/row_polymorphism_isnt_subtyping)
+    - recursive types http://ecee.colorado.edu/~siek/ecen5013/spring10/lecture15.pdf
+    - http://tomasp.net/coeffects/
+    - 2008, article, "Church and Curry: Combining Intrinsic and Extrinsic Typing", Frank Pfenning https://www.cs.cmu.edu/~fp/papers/andrews08.pdf
+    - From Wadler home page
+        - [From Data Types to Session Types: A Basis for Concurrency and Distribution](http://groups.inf.ed.ac.uk/abcd/)
+    - [Vectors are records, too (pdf) : dependent_types](https://www.reddit.com/r/dependent_types/comments/8qig0u/vectors_are_records_too_pdf/)
+    - https://wiki.haskell.org/Untypechecking is "converting from a type to a term".
+    - NOOL 2016 article "Static Typing Without Static Types — Typing Inheritance from the Bottom Up" [pdf](http://www.it.uu.se/workshop/nool16/nool16-paper4.pdf)
+- Every recursive type can be written as `mu a. F a` where F is the associated free functor?
+    - Example: `List a = Fix (F a)` where `F a b = 1 + a * b`.
+    - `Fix F = F (Fix F)` is the least fixed point of F.
+
+### Algebraic subtyping?
+
+- subtyping
+    - algebraic subtyping
+        - 2016, PhD thesis, "Algebraic subtyping", Stephen Dolan https://www.cl.cam.ac.uk/~sd601/thesis.pdf
+        - "Polymorphism, subtyping and type inference in MLsub" http://www.cl.cam.ac.uk/~sd601/papers/mlsub-preprint.pdf
+            - from http://lambda-the-ultimate.org/node/5393
+                    - from https://contributors.scala-lang.org/t/algebraic-subtyping/577
+- http://www.cl.cam.ac.uk/~sd601/papers/mlsub-preprint.pdf
+- https://www.cl.cam.ac.uk/~sd601/thesis.pdf
+- https://cs.stackexchange.com/questions/53998/what-are-the-major-differences-between-row-polymorphism-and-subtyping
+- https://www.cl.cam.ac.uk/teaching/1415/L28/rows.pdf
+- 2017, "Introduction to homotopy type theory", http://www.cs.nott.ac.uk/~psztxa/ss-types-17/notes-summer17.pdf
+- http://www.cs.nott.ac.uk/~psztxa/ss-types-17/
+- https://homotopytypetheory.org/book/
+- https://en.wikipedia.org/wiki/Subtyping
+- https://en.wikipedia.org/wiki/Circle-ellipse_problem
+- What does "X is a Y" mean?
+It means P(X) => P(Y) for every predicate P.
+Liskov substitution principle.
+Does it mean "X is a subclass of Y" or "X is an instance of Y"?
+
+## Drinking from the firehose
+
+- Composition, composable systems
+    - https://en.wikipedia.org/wiki/Software_transactional_memory#Composable_operations
+- https://en.wikipedia.org/wiki/Programming_language_theory
 - refactoring
     - [github.com/PyCQA/baron](https://github.com/PyCQA/baron): "IDE allow you to refactor code, Baron allows you to write refactoring code."
     - HaRe Haskell refactoring tool https://github.com/alanz/HaRe
@@ -232,23 +331,7 @@ I thought lambda calculus could be summarized in one page, but Henk Barendregt w
         - http://conal.net/blog/posts/semantic-editor-combinators
     - [Salon des Refusés 2017](https://2017.programmingconference.org/track/refuses-2017)
 - 2002, article collection, "Recent advances in Java technology: theory, application, implementation" http://www.cs.nuim.ie/~jpower/Research/Papers/2002/power-raijt-toc.pdf
-- other people's collections
-    - https://github.com/steshaw/plt
 - 1985, article, "Automatic synthesis of typed Λ-programs on term algebras" https://www.sciencedirect.com/science/article/pii/0304397585901355
-- type systems and type theory
-    - https://cs.stackexchange.com/questions/53998/what-are-the-major-differences-between-row-polymorphism-and-subtyping
-    - row polymorphism vs structural subtyping https://news.ycombinator.com/item?id=13047934
-        - Why is it called row polymorphism?
-        Where is the row?
-            - See "Objects and Aspects: Row Polymorphism", Neel Krishnaswami https://www.cs.cmu.edu/~neelk/rows.pdf
-    - subtyping
-        - algebraic subtyping
-            - 2016, PhD thesis, "Algebraic subtyping", Stephen Dolan https://www.cl.cam.ac.uk/~sd601/thesis.pdf
-            - "Polymorphism, subtyping and type inference in MLsub" http://www.cl.cam.ac.uk/~sd601/papers/mlsub-preprint.pdf
-                - from http://lambda-the-ultimate.org/node/5393
-                     - from https://contributors.scala-lang.org/t/algebraic-subtyping/577
-- Supercompilation
-    - [LTU: Ongoing work on Supercompilation of Java code (or supercompilation in general)?](http://lambda-the-ultimate.org/node/2739)
 - Metaprogramming
     - http://kaitai.io/
         - from description, generate parsers for binary data (as opposed to text data)
@@ -266,65 +349,9 @@ functional languages for systems programming?
         - "Sixten is very related to other functional languages such as Haskell, Agda, and Idris.
         The biggest difference between other languages and Sixten is the way that Sixten allows us to control the memory layout of data."
         - [Sixten, "General", Gitter, community chat](https://gitter.im/sixten-lang/General?source=orgpage)
-- compiling with continuations
-    - Why use CPS (continuation passing style) as intermediate form?
-        - http://matt.might.net/articles/cps-conversion/
-        - https://www.microsoft.com/en-us/research/publication/compiling-with-continuations-continued/
-        - https://news.ycombinator.com/item?id=7150095
-    - 2003, retrospective: the essence of compiling with continuations https://users.soe.ucsc.edu/~cormac/papers/best-pldi.pdf
-        - https://en.wikipedia.org/wiki/A-normal_form
 - What are Prolog alternatives?
     - 2011, article, [[1107.5408] A structured alternative to Prolog with simple compositional semantics](https://arxiv.org/abs/1107.5408)
-- [Row Polymorphism Isn't Subtyping - BAM Weblog](https://brianmckenna.org/blog/row_polymorphism_isnt_subtyping)
-- People who share the vision for *the* programming language
-    - [Polymorphic Programming - BAM Weblog](https://brianmckenna.org/blog/polymorphic_programming)
-        - has some links
-        - 2017, article, "Compiling to Categories", Conal Elliott, [pdf](http://conal.net/papers/compiling-to-categories/compiling-to-categories.pdf)
-        - Is this 1969 article related? Can't be found online.
-            - https://en.wikipedia.org/wiki/Polymorphic_Programming_Language
-        - Are these related?
-            - 1989, article, "Database Programming in Machiavelli – a Polymorphic Language with Static Type Inference", [pdf](http://homepages.inf.ed.ac.uk/opb/papers/SIGMOD89.pdf)
-    - Can we use Description Logic (the theoretical foundations of Web Ontology Language OWL) to generate software, especially enterprise applications?
-        - 2015, article, [[1503.01723] Modelling the Semantic Web using a Type System](https://arxiv.org/abs/1503.01723)
-        - 2005, article, "Software engineering ontologies and their implementation", [pdf](https://espace.curtin.edu.au/bitstream/handle/20.500.11937/9549/19598_downloaded_stream_116.pdf), [pdf copy](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.86.5585&rep=rep1&type=pdf)
-    - People who share some of the vision but don't go far enough
-        - XForms
-            - 2016, article, [Leveraging declarative languages in web application development - SpringerLink](https://link.springer.com/article/10.1007/s11280-015-0339-z)
-            - 2014, slides, advocacy, [Declarative Web Applications](https://homepages.cwi.nl/~steven/Talks/2014/01-31-declarative/)
-        - 2007, workshop, [Declarative Models of Distributed Web Applications](https://www.w3.org/2007/02/dmdwa-ws/)
-        - [#proglangdesign](http://www.proglangdesign.net/)
-        - IDE (integrated development environment), editor
-            - Given a grammar, the computer should generate an IDE for us.
-            Syntax highlighting.
-            Refactoring.
-            - https://hackage.haskell.org/package/treersec "Build a structure editor for a programming language from combinators following the grammar."
-            - http://www.lamdu.org/
-            - cirru https://news.ycombinator.com/item?id=13773813
-                - lots of similar things https://news.ycombinator.com/item?id=13774864
-            - isomorf: find code fragment popularity by structure (not-only-text) comparison https://isomorf.io/#!/tours/of/overview/7/haskell
-        - supercompilation, specialization, partial evaluation
-            - Haskell supercompilation?
-                - GHC
-                - Supero
-                - Morte
-                    - https://github.com/Gabriel439/Haskell-Morte-Library
-                        - "Morte is a super-optimizing intermediate language for functional languages."
-                    - http://www.haskellforall.com/2014/09/morte-intermediate-language-for-super.html
-            - [Thyer's PhD thesis "Lazy specialization"](http://thyer.name/phd-thesis/thesis-thyer.pdf) has an accessible introduction to lambda calculus in Chapter 2.
-                - "Tower of interpreters" test
-                - 2018, "Collapsing towers of interpreters" http://lampwww.epfl.ch/~amin/pub/collapsing-towers.pdf
-                    - "It is well known that *staging* an interpreter – making it generate code whenever it would normally interpret an expression – yields a compiler [...]"
-            - 1991, "A partial evaluator for the untyped lambda-calculus", [paywall](https://www.cambridge.org/core/journals/journal-of-functional-programming/article/a-partial-evaluator-for-the-untyped-lambda-calculus/EE324F936F0A009B6766B13FF6755DFC)
-                - related: semantic-directed code generation?
-            - Gabriel Gonzales stuff: Morte, Dhall.
-        - [A Treatise on Cosmos —the New Programming Language](https://medium.com/@McCosmos/a-treatise-on-cosmos-the-new-programming-language-905be69eb4af)
-            - procedural-looking logic programming language
-        - syntax
-            - [WP:Off-side rule](https://en.wikipedia.org/wiki/Off-side_rule), indentation as block delimiter
-    - [Quest For The Perfect Language](http://wiki.c2.com/?QuestForThePerfectLanguage)
 - 2017, article, [[1707.00024] A Formalized General Theory of Syntax with Bindings](https://arxiv.org/abs/1707.00024)
-- [Vectors are records, too (pdf) : dependent_types](https://www.reddit.com/r/dependent_types/comments/8qig0u/vectors_are_records_too_pdf/)
-- https://wiki.haskell.org/Untypechecking is "converting from a type to a term".
 - [Programming Language and Compiler Research Groups](https://www.cs.cmu.edu/~mleone/language/projects.html)
 - [IEEE posts its top list of languages - The PL Enthusiast](http://www.pl-enthusiast.net/2014/07/10/ieee-posts-its-top-list-of-languages/)
 - [What is PL research and how is it useful? - The PL Enthusiast](http://www.pl-enthusiast.net/2015/05/27/what-is-pl-research-and-how-is-it-useful/)
@@ -347,7 +374,6 @@ functional languages for systems programming?
         - "Nomen is designed as a language for experimenting with IDE support generation using the Rascal language workbench."
     - "The essence of subclassing", [pdf](http://www.it.uu.se/workshop/nool16/nool16-paper5.pdf)
     - "Towards Automatic Decoration", [pdf](http://www.it.uu.se/workshop/nool16/nool16-paper2.pdf)
-    - "Static Typing Without Static Types — Typing Inheritance from the Bottom Up", [pdf](http://www.it.uu.se/workshop/nool16/nool16-paper4.pdf)
     - syntax
         - "Polite Programmers, Use Spaces in Identifiers When Needed", [pdf](http://www.it.uu.se/workshop/nool16/nool16-paper10.pdf)
 - [WP:Comparison of functional programming languages](https://en.wikipedia.org/wiki/Comparison_of_functional_programming_languages)
@@ -357,30 +383,12 @@ functional languages for systems programming?
     - Golang
     - Ruby gem and bundler
     - Python pip
-- algebraic subtyping
-    - http://www.cl.cam.ac.uk/~sd601/papers/mlsub-preprint.pdf
-    - https://www.cl.cam.ac.uk/~sd601/thesis.pdf
-    - https://cs.stackexchange.com/questions/53998/what-are-the-major-differences-between-row-polymorphism-and-subtyping
-    - https://www.cl.cam.ac.uk/teaching/1415/L28/rows.pdf
-    - 2017, "Introduction to homotopy type theory", http://www.cs.nott.ac.uk/~psztxa/ss-types-17/notes-summer17.pdf
-    - http://www.cs.nott.ac.uk/~psztxa/ss-types-17/
-    - https://homotopytypetheory.org/book/
-    - https://en.wikipedia.org/wiki/Subtyping
-    - https://en.wikipedia.org/wiki/Circle-ellipse_problem
-    - What does "X is a Y" mean?
-    It means P(X) => P(Y) for every predicate P.
-    Liskov substitution principle.
-    Does it mean "X is a subclass of Y" or "X is an instance of Y"?
 - Great Works in Programming Languages, Collected by Benjamin C. Pierce http://www.cis.upenn.edu/~bcpierce/courses/670Fall04/GreatWorksInPL.shtml
 - to read? "theories of programming languages reynolds"
 - 2017, book, "Principles of Programming Languages" https://www.cs.bgu.ac.il/~mira/ppl-book-full.pdf
 - 2003, article, "Composing Programming Languages by Combining Action-Semantics Modules" http://www.brics.dk/RS/03/53/BRICS-RS-03-53.pdf
 - 2001, position paper, "Composition Languages for Black-Box Components" http://scg.unibe.ch/archive/papers/Wuyt01c.pdf
 - glue: Make better services. (deprecated) https://hackage.haskell.org/package/glue
-- Type systems
-    - recursive types http://ecee.colorado.edu/~siek/ecen5013/spring10/lecture15.pdf
-    - http://tomasp.net/coeffects/
-    - 2008, article, "Church and Curry: Combining Intrinsic and Extrinsic Typing", Frank Pfenning https://www.cs.cmu.edu/~fp/papers/andrews08.pdf
 - yet another music programming language https://github.com/alda-lang/alda
 - linearscan: Linear scan register allocator, formally verified in Coq; 2004, master thesis, https://hackage.haskell.org/package/linearscan
 - Lastik: A library for compiling programs in a variety of languages (Java, Scala, C#) https://hackage.haskell.org/package/Lastik
@@ -399,10 +407,6 @@ functional languages for systems programming?
 - 1966, article, P. J. Landin, "The next 700 programming languages", [pdf](https://www.cs.cmu.edu/~crary/819-f09/Landin66.pdf)
     - https://en.wikipedia.org/wiki/Off-side_rule
 - http://matt.might.net/articles/best-programming-languages/
-- Type systems
-    - Church types and Curry types
-        - https://lispcast.com/church-vs-curry-types/
-    - Liquid Haskell https://ucsd-progsys.github.io/liquidhaskell-blog/
 - [EWD641: On the interplay between mathematics and programming](http://www.cs.utexas.edu/users/EWD/ewd06xx/EWD641.PDF)
 - http://hackage.haskell.org/package/Workflow
 - https://pchiusano.github.io/2017-01-20/why-not-haskell.html
@@ -414,8 +418,6 @@ functional languages for systems programming?
     - [2010 article pdf](http://bora.uib.no/bitstream/handle/1956/9721/1-s2.0-S1571066110001179-main.pdf?sequence=1)
 - why not PEG parsing
     - http://jeffreykegler.github.io/Ocean-of-Awareness-blog/individual/2015/03/peg.html
-- From Wadler home page
-    - [From Data Types to Session Types: A Basis for Concurrency and Distribution](http://groups.inf.ed.ac.uk/abcd/)
 - answer set programming
     - [News: Speed up solving complex problems: be lazy and only work crucial tasks - Aalto University](http://cs.aalto.fi/en/current/news/2018-07-18/)
         - 2018, article, "Exploiting Justifications for Lazy Grounding of Answer Set Programs", [pdf](https://www.ijcai.org/proceedings/2018/0240.pdf)
@@ -472,117 +474,19 @@ functional languages for systems programming?
     - miniKanren
         - Byrd PhD thesis https://scholarworks.iu.edu/dspace/bitstream/handle/2022/8777/Byrd_indiana_0093A_10344.pdf
             - mentions other programming languages: Prolog, Mercury, Curry
-- Haskell has isorecursive types.
-    - Can we make it use equirecursive types?
-    - Can we make it automatically insert roll-unroll/fold-unfold/In-out?
-    - How do we compose monads seamlessly?
-        - Isorecursive types?
-        - True sum types (untagged unions)?
-    - 2016, System F-omega with Equirecursive Types for Datatype-Generic Programming http://ps.informatik.uni-tuebingen.de/research/functors/equirecursion-fomega-popl16.pdf
 - John Hughes, "Deriving combinator implementations", lecture 4, "Designing and using combinators" http://www.cse.chalmers.se/~rjmh/Combinators/DerivingCombinators/sld001.htm
 - http://matt.might.net/articles/best-programming-languages/
+- http://matt.might.net/articles/compiling-to-java/
 - other programming languages
     - https://en.wikipedia.org/wiki/Curry_(programming_language)
     - http://fsl.cs.illinois.edu/images/5/5e/Cayenne.pdf
-- Extending Haskell
-    - Open ADTs (algebraic data types)
-        - "Closed" means "defined in one place".
-        - Open ADTs don't mix with exhaustive case analysis (function totality).
-            - https://stackoverflow.com/questions/870919/why-are-haskell-algebraic-data-types-closed
-            - But what if functions are "open" too?
-                - https://www.andres-loeh.de/OpenDatatypes.pdf
-        - If `f : a -> b`, then the compiler should infer `lift f : (Monad m) => m a -> m b`.
-    - Can we extend Haskell to "auto-fmap"?
-        - Possibilities:
-            - Add rewrite rules so that the compiler "recovers" from some type "errors".
-            - Extend the syntax and semantics of function application.
-        - Related
-            - 1989, article, Wadler, "Theorems for free!"
-            - The Haskell Djinn can, given a type T, infer/construct a term having type T.
-        - Recovering from some type errors
-            - Idea
-                - Extend Haskell with "implicit injections".
-                - The compiler should try in-scope injections automatically when there is a typing error, before quitting with a type error.
-                    - Isn't this similar to Scala implicits and implicit conversion?
-                        - I forgot who, but I think somebody on the Internet said that Scala implicits are a way for the compiler to recover from type errors.
-                - Can we do this on GHC?
-                    - https://ghc.haskell.org/trac/ghc/wiki/Commentary/Compiler/TypeChecker
-                        - GHC typechecker works on Haskell before it's transformed to Core.
-                    - Write a plugin for GHC?
-                        - Can a GHC modify the syntax tree on type error?
-                    - Use GHC as library?
-                    - We can't use GHC rewrite rules because they are only applied when optimization is enabled.
-            - Define the concept of "expected type".
-            - Let `e` be an expression.
-            - Let `f : a -> b`.
-            - Let `m` be an instance of Monad.
-            - If `e` has type `a`, but the compiler expects `e` to have type `m a`, then the compiler shall rewrite `e` to `return e`.
-            - If `e` has type `m a`, then the compiler rewrites `f e` to `map f e`.
-        - If `x` is a Monad, then these are two *different* things: `x : a` and `return x`, but they are related, in the sense that they are equivalent, in the sense that one is trivially computable/derivable from the other.
-        - Can Strathclyde Haskell Enhancement (SHE) do this?
-            - It has idiom brackets.
-            It translates `(| f a1 ... an |)` to `pure f <*> a1 <*> ... <*> an`.
-                - https://personal.cis.strath.ac.uk/conor.mcbride/pub/she/idiom.html
-            - Enhancement to SHE https://github.com/bezirg/she
-                - http://blog.bezirg.net/posts/2013-08-03-enhancement-to-the-strathclyde-haskell-enhancement.html
-        - https://en.wikipedia.org/wiki/Bidirectional_transformation
-            - https://www.cis.upenn.edu/~bcpierce/papers/lenses-etapsslides.pdf
-- [Extension programming language](extension.md)
-- Every recursive type can be written as `mu a. F a` where F is the associated free functor?
-    - Example: `List a = Fix (F a)` where `F a b = 1 + a * b`.
-    - `Fix F = F (Fix F)` is the least fixed point of F.
-- Haskell
-    - language change proposals
-        - Auto-lifting (and therefore sequencing) of function application involving Monad instances
-            - The standard rule is:
-                - If `x : a` and `f : a -> b`, then `f x : b`.
-            - Suppose that `m` has a Monad instance.
-                - If `x : m a` and `f : a -> b`, then should the compiler silently translate `f x` to `x >>= return . f`?
-                    - Isn't it the only desirable way of putting together `f` and `x`?
-                        - Monad class requires that `x >>= return . f` be equivalent to `fmap f x`.
-                            - So there is really only one way to do it, isn't it?
-                        - Examples of non-desirable ways: `unsafeCoerce`, `undefined`.
-                - Should the compiler also appropriately translate `f x` for all these combinations?
-                    - Possibilities for the type of `x`:
-                        - `a`
-                        - `m a`
-                    - Possibilities for the type of `f`:
-                        - `a -> b`
-                        - `a -> m b`
-                        - `m (a -> b)`
-                        - `m a -> m b`
-                        - `m a -> b`
-            - At first glance it seems convenient, but what are the consequences?
-                - Some I can think of
-                    - Confusing error message
-                        - Suppose:
-                            - The programmer makes a typing mistake.
-                            - The compiler infers the wrong type.
-                            - The compiler performs translation based on the wrongly inferred type.
-                            - The compiler produces a confusing error message.
-    - Dependency management
-        - https://wiki.haskell.org/The_Monad.Reader/Issue2/EternalCompatibilityInTheory
-            - It applies to all software, not only Haskell ones.
-        - [Michael Snoyman's personal take on PVP version upper bounds](https://gist.github.com/snoyberg/f6f10cdbea4b9e22d1b83e490ec59a10)
-    - curation
-        - https://www.reddit.com/r/haskell/comments/4ggt05/best_underrated_haskell_libraries/
-        - https://wiki.haskell.org/Applications_and_libraries
-        - https://stackoverflow.com/questions/9286799/haskell-libraries-overview-and-their-quality
-    - http://matt.might.net/articles/compiling-to-java/
-    - unread
-        - servant web framework
-        - Salsa Haskell .NET bridge
-            - https://wiki.haskell.org/Salsa
+- [Extension programming language?](https://github.com/edom/work/blob/master/meta/doc/extension.md)
 - https://en.wikipedia.org/wiki/Higher-order_abstract_syntax
 - http://www.stephendiehl.com/posts/haskell_2017.html
 - Haskell library: yaml vs HsYaml
     - https://twitter.com/hvrgnu/status/1004136566984503297
         - HsYaml is pure Haskell (doesn't use external libraries)
 - [LCF key ideas](https://www.cl.cam.ac.uk/~jrh13/slides/manchester-12sep01/slides.pdf)
-- [Haskell partiality monad](https://gist.github.com/puffnfresh/6222797)
-- compiler construction
-    - https://www.reddit.com/r/haskell/comments/4jhhrj/anders_hejlsberg_on_modern_compiler_construction/
-    - https://cs.stackexchange.com/questions/63018/visual-programming-tools-why-don-t-they-work-with-the-ast-directly
 - closed source?
     - given SQL database, generate HTML user interface http://datanovata.com/
 - http://libcello.org
@@ -701,12 +605,21 @@ functional languages for systems programming?
 - Interesting functional programming languages tailored for web programming.
 Perhaps related to data modeling.
     - Ur/Web
+        - [FAQ](http://www.impredicative.com/ur/faq.html)
+            - "Why would I prefer to use Ur/Web over OPA?"
     - [The Links Programming Language](http://links-lang.org/)
     - [The Opa Language](http://opalang.org/)
 - Moving logic into SQL stored procedures
     - [Simplify: move code into database functions \| Derek Sivers](https://sivers.org/pg)
         - A legitimate concern: How do we version-control (and release, and rollback) stored procedures, triggers, and other database logics?
     - [Andl, a relational language that is not SQL, is coming to Postgres \| Hacker News](https://news.ycombinator.com/item?id=11802917)
+- https://www.microsoft.com/en-us/research/publication/convenient-explicit-effects-using-type-inference-with-subeffects/
+- [If Haskell were strict, what would the laziness be like?](https://nikita-volkov.github.io/if-haskell-were-strict/)
+- http://homepages.inf.ed.ac.uk/wadler/papers/free-rectypes/free-rectypes.txt
+
+## Probably irrelevant to our goal
+
+- [WP:Non-English-based programming languages](https://en.wikipedia.org/wiki/Non-English-based_programming_languages)
 - Obscure things. Much marketing, little technical detail.
     - VPRI, Alan Kay et al., archived (stopped operating in 2018), computing for the masses?
         - "Improve 'powerful ideas education' for the world's children and to advance the state of systems research and personal computing"
@@ -721,22 +634,4 @@ Perhaps related to data modeling.
         - visual programming language
             - blocks language
                 - https://harc.ycr.org/project/gp/
-- https://www.microsoft.com/en-us/research/publication/convenient-explicit-effects-using-type-inference-with-subeffects/
 - Functional Payout Framework http://lambda-the-ultimate.org/node/3331
-- [If Haskell were strict, what would the laziness be like?](https://nikita-volkov.github.io/if-haskell-were-strict/)
-- http://homepages.inf.ed.ac.uk/wadler/papers/free-rectypes/free-rectypes.txt
-
-## Designing programming languages
-
-- 2018 article "Interdisciplinary Programming Language Design" [pdf](http://www.cs.cmu.edu/~mcoblenz/HCPLD-preprint.pdf)
-- 2018 article "A Programmable Programming Language" [pdf](http://silo.cs.indiana.edu:8346/c211/impatient/cacm-draft.pdf)
-- 2018 article "Combining Model Checking and Testing" [pdf](https://www.cis.upenn.edu/~alur/CIS673/testing.pdf)
-- 2013 article "Idris, a General Purpose Dependently Typed Programming Language: Design and Implementation" [pdf](https://eb.host.cs.st-andrews.ac.uk/drafts/impldtp.pdf)
-- 2007 article "Position Paper: Thoughts on Programming with Proof Assistants" [pdf](https://ac.els-cdn.com/S1571066107002502/1-s2.0-S1571066107002502-main.pdf?_tid=19c6192b-ca57-4ef0-9403-1cfb624c817c&acdnat=1535488824_78a2c31f390f3a1fb72f0c31024f2495)
-- 1996 article "Seven Deadly Sins of Introductory Programming Language Design" [pdf](https://pdfs.semanticscholar.org/d314/78c5b95c399b6418b41011debefbc699c633.pdf)
-- 1996 book "Advanced programming language design" [pdf](https://www.researchgate.net/profile/Raphael_Finkel/publication/220692467_Advanced_programming_language_design/links/0c96052af3e324bf31000000/Advanced-programming-language-design.pdf)
-- 1973 article "Hints on Programming Language Design" [pdf](http://www.dtic.mil/dtic/tr/fulltext/u2/773391.pdf)
-
-## Probably irrelevant to our goal
-
-- [WP:Non-English-based programming languages](https://en.wikipedia.org/wiki/Non-English-based_programming_languages)

@@ -708,9 +708,20 @@ from Metal Gear Solid: Peace Walker
     - 147 bpm, [short version, 2:46](https://www.youtube.com/watch?v=fhpfemCmSN4)
 - Kyrgyztan pop
     - Gulnur Satylganova
-        - [Гульнур Сатылганова - Асман - YouTube](https://www.youtube.com/watch?v=lB4HeQ2c0T4)
-        - [Гульнур Сатылганова - Дебе - YouTube](https://www.youtube.com/watch?v=7HDYiCJTsfk)
-        - [Гулнур Сатылганова - Суйуу кучу - YouTube](https://www.youtube.com/watch?v=wXHKxGWyfR8)
+        - dance
+            - EDM 1
+                - [Гульнур Сатылганова - Дебе - YouTube](https://www.youtube.com/watch?v=7HDYiCJTsfk)
+                - [Гульнур Сатылганова Күн достор - YouTube](https://www.youtube.com/watch?v=6F9IUDIXm3k)
+                - [Гульнур Сатылганова Бир нуска - YouTube](https://www.youtube.com/watch?v=k6wpbTQntzg)
+                    - somewhat reminiscent of Shakatak's "Night birds"
+                - [Cахна Гулнур Сатылганова - Жаны ыр 2016 Сахна - YouTube](https://www.youtube.com/watch?v=Xnz3NIrDCNs)
+            - EDM 2
+                - [Гульнур Сатылганова Мен сага жолугушум керек эле - YouTube](https://www.youtube.com/watch?v=foF_wC9Aq7Q)
+            - reggaeish
+                - [Гулнур Сатылганова - Суйуу кучу - YouTube](https://www.youtube.com/watch?v=wXHKxGWyfR8)
+        - epic
+            - [Гульнур Сатылганова - Асман - YouTube](https://www.youtube.com/watch?v=lB4HeQ2c0T4)
+            - [ЖАНЫ КЛИП 2017 / ГУЛНУР САТЫЛГАНОВА & АДИЛЕТ АЗИМОВ - БОЛСОЧУ / СОЛО МЕДИАПОРТАЛЫ - YouTube](https://www.youtube.com/watch?v=Gn750FKTLds)
         - [Гульнур Сатылганова - Ак санат - YouTube](https://www.youtube.com/watch?v=LsaIiXIG8qM)
         - [Гульнур Сатылганова Сагынган күндөр - YouTube](https://www.youtube.com/watch?v=9inF-PsMRE8)
     - from playlist [Kyrgyzstan music - YouTube](https://www.youtube.com/playlist?list=PLkmUtGkAs4SULTd0qSbz5HvoQDeXDTTwb)
@@ -718,3 +729,9 @@ from Metal Gear Solid: Peace Walker
         - 42 [Нурлан Насип "Эки жаш" super kg - YouTube](https://www.youtube.com/watch?v=5L0y8Jxg8Ro&index=42&list=PLkmUtGkAs4SULTd0qSbz5HvoQDeXDTTwb)
     - [TOP SONG 2017 \| KAIRAT KYRGYZ - ZHASTYK KEZ \| КАЙРАТ КЫРГЫЗ - ЖАШТЫК КЕЗ / СОЛО МЕДИПОРТАЛЫ - YouTube](https://www.youtube.com/watch?v=GQ1l2tdbXlI)
     - [SANIA - Жаштык кез - YouTube](https://www.youtube.com/watch?v=LDNXdfk7hY8)
+- to listen
+    - Gulnur Satylganova
+        - lists
+            - [some demo clips](https://www.shazam.com/track/344705388/%D0%B4%D0%B5%D0%B1%D0%B5)
+            - [some MP3](https://mp3livelisten.ru/search/gul-nur-satylganova)
+        - [Гульнур Сатылганова-Сага Текст/ Gulnur Satylganova-Saga Lyrics - YouTube](https://www.youtube.com/watch?v=ddvjyr_TmcM)

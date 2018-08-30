@@ -56,6 +56,16 @@ Why I don't use NixOS:
 - NixOS is insane.
 Patching every software on Earth is not sustainable.
 NixOS is only sustainable if the upstream developers use NixOS.
+- 2018-08-31: Ubuntu has [old-releases.ubuntu.com](http://old-releases.ubuntu.com/).
+It archives things back to 2006.
+Ubuntu has money to host 12 years of archive.
+NixOS doesn't have that much money.
+NixOS can only afford to host 1-2 years of archive.
+- NixOS (or anything else indeed) would be heaven if library writers valued backward compatibility.
+I want my library writers to worship backward compatibility like sysadmins worship uptime.
+I want them to never break things that depend on them.
+But my experience invalidates this hope.
+I've seen too many breakages.
 
 Who uses this?
 
@@ -111,6 +121,12 @@ We don't know how to predict the far future.
 - The ideal workflow: Git push triggers deployment?
 
 ## What is DevOps?
+
+XML is not suitable for declarative DevOps.
+See comments in [devops/example.xml](https://github.com/edom/work/blob/master/devops/example.xml).
+We want the declaration site of some bindings to be as close as possible to their use sites.
+
+I'm thinking about using [Dhall](https://github.com/dhall-lang/dhall-lang).
 
 Separating Dev and Ops doesn't make sense.
 
