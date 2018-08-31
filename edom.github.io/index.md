@@ -19,7 +19,7 @@ I am not responsible for other people's comments.
 Organization of this site:
 For most pages, the title is a goal, and the content is the ongoing journey to achieve it.
 
-## Dreams
+## Goals
 
 - Computer practice
     - Software engineering
@@ -72,6 +72,8 @@ For most pages, the title is a goal, and the content is the ongoing journey to a
             - [Reverse engineering the network protocol used by a Java desktop application]({% link rejava.md %}): a stock trading application written in Java 6
             - [Reverse-engineering PlayStation 1 3D games to control the camera]({% link ps1.md %})
         - [Managing software engineers]({% link engman.md %})
+            - [Interviewing software engineers]({% link engint.md %})
+            - [Reviewing performance]({% link perfrev.md %})
         - [Software engineer salary]({% link salary.md %})
     - [Administering a computer]({% link sysadm.md %})
         - [Running X client applications on Docker on Linux]({% link dockerx.md %})
@@ -112,10 +114,10 @@ For most pages, the title is a goal, and the content is the ongoing journey to a
     - [Justifying physics]({% link natkno.md %})
     - [Justifying counterfactual reasoning]({% link cf.md %})
 - Improving society
-    - [Improving countries]({% link government.md %})
-        - [Politics]({% link politics.md %})
-            - [Solving the Israel-Palestine problem]({% link ispal.md %})
-            - [Using the media in politics]({% link polmed.md %})
+    - [Legislating better societies]({% link government.md %})
+    - [Politics]({% link politics.md %})
+        - [Solving the Israel-Palestine problem]({% link ispal.md %})
+        - [Using the media in politics]({% link polmed.md %})
     - Preventing social isolation
         - Social isolation causes violence and extremism.
         Bullying is part of the social isolation vicious circle.
@@ -149,13 +151,6 @@ For most pages, the title is a goal, and the content is the ongoing journey to a
         - The page [Information architecture]({% link infarch.md %}) should be merged into "Organizing knowledge".
 - Living in the 21st century
     - [What kind of world are we living in?]({% link world.md %})
-        - [WP:21st century](https://en.wikipedia.org/wiki/21st_century)
-        - [WP:21st century skills](https://en.wikipedia.org/wiki/21st_century_skills)
-        - [YT:China is beyond cashless](https://www.youtube.com/watch?v=gysKE3POUv0)
-        - Big cyber crimes
-            - 2016
-                - [The $1,000,000,000 North Korean Bank Heist - YouTube](https://www.youtube.com/watch?v=Usu9z0feHug)
-                    - [Bangladesh Bank robbery - Wikipedia](https://en.wikipedia.org/wiki/Bangladesh_Bank_robbery)
     - Finding a place to live
         - [Where is the world's most liveable city? \| The Economist - YouTube](https://www.youtube.com/watch?v=ylR21fezN7E)
             - 2018: Vienna. Was Melbourne.
@@ -228,14 +223,11 @@ For most pages, the title is a goal, and the content is the ongoing journey to a
 - Music
     - I play piano in the band [The Nomads]({% link nomads.md %}) (an Indonesian band, not the Swedish band).
 - [About this website]({% link about.md %})
+- [Things I've forlet]({% link forlet.md %}): goals I've abandoned
 
-## Contacting
+## Contact
 
 To ask questions or suggest corrections, do any of these:
 
 - Leave a Disqus comment in the related page.
 - [Open an issue on GitHub](https://github.com/edom/edom.github.io/issues).
-
-## Abandoned dreams
-
-- [Things I've forlet]({% link forlet.md %}): dreams I've given up

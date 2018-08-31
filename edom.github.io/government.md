@@ -1,49 +1,57 @@
 ---
-title: Improving countries
+title: Legislating better societies
 permalink: /government.html
 date: 2017-06-26 02:00:00 +0700
 ---
 
-- Important and urgent things for most (if not all) countries on Earth to do as soon as possible:
-    - Political system
-        - Restrict the form of all political campaigns to text containing the list of things the candidate wants to do.
-            - Avoid pandering and toxic campaigns.
-        - Replace parliaments with sortition (randomly choosing people)?
-            - TED: "What if we replaced politicians with randomly selected people? | Brett Hennig", [youtube](https://www.youtube.com/watch?v=cUee1I69nFs)
-            - [WP:Sortition](https://en.wikipedia.org/wiki/Sortition)
-            - Will sortition work in a homogeneous country?
-            Won't it just promote groupthink?
-            - How does sortition affect the minority?
-            How should the population be sampled?
-            Stratified sampling?
-    - Justice system
-        - Legislators, please change the justice system from retributive justice to restorative justice for the non-violent criminals.
-            - Instead of locking up prisoners, let them repair the harm they did, and help them reintegrate into society.
-            - Millions of people are being incarcerated.
-            Their ability is being wasted.
-            They are deprived of future.
-            They will have difficulties reintegrating into society.
-            Stigmatized.
-            Like the homeless.
-            This stigma makes it impossible for them to get financial stability and get out of the vicious circle of crime.
-                - Also, prison initiation rituals are terrible.
-            - There are two kinds of criminals:
-                - *Perforce criminals* commit crime to defend themselves from immediate bodily harm that threatens their existence.
-                Examples are hungry moneyless people who steal food, and cornered people who kill.
-                The solution is restorative justice, and giving work to the criminal for financial stability, helping them reintegrate into society.
-                    - If the threat is removed, perforce criminals no longer commit crime.
-                - *Non-perforce criminals* commit crime for anything else.
-                Examples are psychopaths (people with physical inability to weigh bad consequences because their brains are wired differently).
-                The solution is eugenics: modify them by gene therapy or psychological therapy or whatever technology, or kill them if they can't change,
-                but only after we have proven that they can't change.
-                    - See also [theatlantic.com: When your child is a psychopath](https://www.theatlantic.com/magazine/archive/2017/06/when-your-child-is-a-psychopath/524502/).
-            - Prisons should not exist.
-            There should exist only two kinds of punishment:
-                - Forced labor, for perforce criminals, to repair the harm they did.
-                The state must also help them reintegrate into society.
-                - Death penalty, for non-perforce criminals.
-            - In any case, nobody should be locked up for so long.
-            Locking up people wastes resource.
+These are important and urgent things for most (if not all) countries on Earth to do as soon as possible.
+
+- TOC
+{:toc}
+
+## Fixing the political system
+
+- Restrict the form of all political campaigns to text containing the list of things the candidate wants to do.
+    - Avoid pandering and toxic campaigns.
+- Replace parliaments with sortition (randomly choosing people)?
+    - TED: "What if we replaced politicians with randomly selected people? \| Brett Hennig", [youtube](https://www.youtube.com/watch?v=cUee1I69nFs)
+    - [WP:Sortition](https://en.wikipedia.org/wiki/Sortition)
+    - Will sortition work in a homogeneous country?
+    Won't it just promote groupthink?
+    - How does sortition affect the minority?
+    How should the population be sampled?
+    Stratified sampling?
+
+## Fixing the justice system
+
+- Change the justice system from retributive justice to restorative justice for the non-violent criminals.
+    - Instead of locking up prisoners, let them repair the harm they did, and help them reintegrate into society.
+    - Millions of people are being incarcerated.
+    Their ability is being wasted.
+    They are deprived of future.
+    They will have difficulties reintegrating into society.
+    Stigmatized.
+    Like the homeless.
+    This stigma makes it impossible for them to get financial stability and get out of the vicious circle of crime.
+        - Also, prison initiation rituals are terrible.
+    - There are two kinds of criminals:
+        - *Perforce criminals* commit crime to defend themselves from immediate bodily harm that threatens their existence.
+        Examples are hungry moneyless people who steal food, and cornered people who kill.
+        The solution is restorative justice, and giving work to the criminal for financial stability, helping them reintegrate into society.
+            - If the threat is removed, perforce criminals no longer commit crime.
+        - *Non-perforce criminals* commit crime for anything else.
+        Examples are psychopaths (people with physical inability to weigh bad consequences because their brains are wired differently).
+        The solution is eugenics: modify them by gene therapy or psychological therapy or whatever technology, or kill them if they can't change,
+        but only after we have proven that they can't change.
+            - See also [theatlantic.com: When your child is a psychopath](https://www.theatlantic.com/magazine/archive/2017/06/when-your-child-is-a-psychopath/524502/).
+    - Prisons should not exist.
+    There should exist only two kinds of punishment:
+        - Forced labor, for perforce criminals, to repair the harm they did.
+        The state must also help them reintegrate into society.
+        - Death penalty, for non-perforce criminals.
+    - In any case, nobody should be locked up for so long.
+    Locking up people wastes resource.
+- Limit inheritance.
 
 ## A government is to maximize the well-being of its people
 
@@ -67,10 +75,12 @@ Government official corruption, similar to corporate management corruption,
 is a [principal-agent problem](https://en.wikipedia.org/wiki/Principal%E2%80%93agent_problem).
 Everything that solves the principal-agent problem also solves corruption.
 
-## A quadrant
+## Deciding what governments should do
 
-- Does it benefit many people?
-- Does it benefit a few people?
+Use this quadrant:
+
+- Axis 1: Does it benefit many people?
+- Axis 2: Does it benefit a few people?
 
 Things that benefit many and benefit few are best left to the private sector
 with as little regulation as needed to keep the market healthy.

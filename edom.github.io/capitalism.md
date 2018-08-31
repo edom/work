@@ -61,3 +61,4 @@ permalink: /capitalism.html
         - home bakeries
         - art freelancing
     - research in pure mathematics
+- [WP:Criticism of capitalism](https://en.wikipedia.org/wiki/Criticism_of_capitalism)

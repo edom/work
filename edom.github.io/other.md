@@ -247,3 +247,10 @@ It seems IQ tests are inaccurate for high IQs above 130.
     - [JSweet: a transpiler to write JavaScript programs in Java](http://www.jsweet.org/)
     - [Spark Framework: An expressive web framework for Kotlin and Java - Documentation](http://sparkjava.com/documentation.html)
     - [webfolderio/ui4j: Web Automation for Java](https://github.com/webfolderio/ui4j)
+
+Human rights are legal fiction.
+What is real is tolerance.
+People let other people live.
+If I am still alive, it's because others let me live,
+because others tolerate me,
+not because I have any rights.

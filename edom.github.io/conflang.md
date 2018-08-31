@@ -39,3 +39,5 @@ We're considering HashiCorp Terraform.
 I think they should use Dhall, or at least learn from Dhall, instead of creating their own
 [HCL (HashiCorp Configuration Language)](https://www.terraform.io/docs/configuration/syntax.html).
 We have a "Terraform Workaround Engineer" here at work.
+
+Someone has done that: [dhall-terraform](https://github.com/blast-hardcheese/dhall-terraform).
