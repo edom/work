@@ -39,3 +39,9 @@ date: 2018-08-30 03:41 +0700
 - lunatic
 - deranged
 - delusional
+
+## Researches
+
+- 2015 article "Vocabulary Learning Strategies",
+[abstract](https://jyx.jyu.fi/handle/123456789/49945),
+[pdf](https://jyx.jyu.fi/bitstream/handle/123456789/49945/vls.pdf)

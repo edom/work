@@ -120,6 +120,11 @@ We don't know how to predict the far future.
     - [Spinnaker](https://www.spinnaker.io/)
 - The ideal workflow: Git push triggers deployment?
 
+These pages may be outdated:
+
+- [Ansible]({% link ansible.md %})
+- [Logging]({% link logging.md %})
+
 ## What is DevOps?
 
 XML is not suitable for declarative DevOps.
@@ -150,3 +155,27 @@ What is Google search result for "devops tools"?
     - OASIS TOSCA; too ad-hoc?
 - what
     - 2015 article "Composable DevOps: Automated Ontology Based DevOps Maturity Analysis" [paywall](https://ieeexplore.ieee.org/document/7207405/)
+
+## Haskell for devops?
+
+- https://www.reddit.com/r/haskell/comments/31vnos/neil_mitchell_devops_with_haskell/
+- https://github.com/commercialhaskell/commercialhaskell/blob/master/taskforce/devops.md
+- [azubi: A simple DevOps tool which will never "reach" enterprice level.](http://hackage.haskell.org/package/azubi)
+
+## Migrating running processes
+
+- [WP:Process migration](https://en.wikipedia.org/wiki/Process_migration)
+
+## Troubleshooting Dashboard: What metrics you should monitor and why?
+
+- We want to minimize what we need to see.
+we want the metric that predicts the most problems.
+    - Rising maximum latency is a sign that something is overloaded.
+    - Rising resource usage (CPU, memory, disk, disk queue depth) predicts rising latency.
+- We want the metric to help us locate problems.
+
+When such metric deviates from baseline, we know there is problem, but where?
+
+What other metrics should we monitor?
+
+- HTTP 4xx and 5xx status codes and connection failures?

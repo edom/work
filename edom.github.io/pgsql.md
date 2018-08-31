@@ -1,5 +1,5 @@
 ---
-title: PostgreSQL
+title: Using PostgreSQL
 permalink: /pgsql.html
 date: 2018-05-15 02:31:00 +0700
 ---

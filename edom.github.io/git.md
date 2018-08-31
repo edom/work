@@ -1,8 +1,13 @@
 ---
-title: Git mental model
+title: Using Git
 permalink: /git.html
 date: 2017-06-26 00:36:00 +0700
 ---
+
+- TOC
+{:toc}
+
+## Mental model
 
 A *commit* is a snapshot of the working tree.
 
@@ -66,3 +71,9 @@ or the [manpages](https://git-scm.com/docs) (`man git`).
     - Disable git-gui GC warning:
         - https://stackoverflow.com/questions/1106529/how-to-skip-loose-object-popup-when-running-git-gui
 - [Understanding Git Filter-branch and the Git Storage Model](https://manishearth.github.io/blog/2017/03/05/understanding-git-filter-branch/)
+
+## Related tools
+
+- git-gui, for making commits
+- gitk, for showing history
+- meld, for three-way diff/merge

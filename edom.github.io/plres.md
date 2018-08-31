@@ -2,6 +2,7 @@
 title: Making the only programming language we will ever need
 permalink: /plres.html
 date: 2018-07-22 02:45 +0700
+mathjax: true
 ---
 
 - TOC
@@ -16,19 +17,58 @@ Do more with less.
 
 *The* ultimate best programming language?
 
+## Subtopics
+
+- [Extending lambda calculus]({% link lambda.md %})
+- [Optimizing lambda calculus]({% link optlam.md %})
+- [Extending Haskell]({% link exhask.md %})
+- [Programming language design mistakes]({% link pldm.md %})
+- [Designing markup languages]({% link markup.md %})
+- [Designing configuration languages]({% link conflang.md %})
+- Making interpreters/translators/compilers
+    - Don't make a compiler?
+    Make an interpreter instead, and stage it?
+    Turn an interpreter into a compiler for free?
+    - [Parsing]({% link parse.md %})
+
 ## What is a program?
 
-A program (software) is an executable formal system.
-
-Can we formalize this using Grue's map theory?
-
-- How is "false" represented?
-- How is "true" represented?
-- How is "conjunction" represented?
+A program is an executable formal system.
 
 Every functional programming language is lambda calculus plus plus.
 
 Functional programming is lambda calculus plus plus.
+
+## What should we know before creating a programming language?
+
+- 2015 dissertation "Evidence-based programming language design: a philosophical and methodological exploration",
+[abstract](https://jyx.jyu.fi/handle/123456789/47698),
+[pdf](https://jyx.jyu.fi/bitstream/handle/123456789/47698/978-951-39-6388-0_vaitos04122015.pdf)
+- [What are some interesting language features that may not be well known? : ProgrammingLanguages](https://www.reddit.com/r/ProgrammingLanguages/comments/8vcrzb/what_are_some_interesting_language_features_that/)
+- [A practitioner’s guide to reading programming languages papers](https://blog.acolyer.org/2018/01/26/a-practitioners-guide-to-reading-programming-languages-papers/)
+    - from [top scoring links : ProgrammingLanguages](https://www.reddit.com/r/ProgrammingLanguages/top/)
+
+## What are some interesting programming languages?
+
+- Interesting functional programming languages tailored for web programming.
+Perhaps related to data modeling.
+    - Ur/Web
+        - [FAQ](http://www.impredicative.com/ur/faq.html)
+            - "Why would I prefer to use Ur/Web over OPA?"
+        - [How to Get Started Learning Ur/Web](http://www.impredicative.com/ur/resources.html)
+    - [The Links Programming Language](http://links-lang.org/)
+    - [The Opa Language](http://opalang.org/)
+- Moving logic into SQL stored procedures
+    - [Simplify: move code into database functions \| Derek Sivers](https://sivers.org/pg)
+        - A legitimate concern: How do we version-control (and release, and rollback) stored procedures, triggers, and other database logics?
+    - [Andl, a relational language that is not SQL, is coming to Postgres \| Hacker News](https://news.ycombinator.com/item?id=11802917)
+- https://www.microsoft.com/en-us/research/publication/convenient-explicit-effects-using-type-inference-with-subeffects/
+- [If Haskell were strict, what would the laziness be like?](https://nikita-volkov.github.io/if-haskell-were-strict/)
+- http://homepages.inf.ed.ac.uk/wadler/papers/free-rectypes/free-rectypes.txt
+
+### Do we really have to read these fragmented sources?
+
+- [Lecture 12: Design and Evolution of Programming Languages](http://www.cse.chalmers.se/edu/year/2015/course/DAT150/lectures/proglang-12.html)
 
 ## Increasing language adoption
 
@@ -209,7 +249,7 @@ Is there a compiler that doesn't do that?
     - 2003, retrospective: the essence of compiling with continuations https://users.soe.ucsc.edu/~cormac/papers/best-pldi.pdf
         - https://en.wikipedia.org/wiki/A-normal_form
 
-## Foundation of mathematics?
+## Foundation of mathematics especially for programming?
 
 - set theories, such as ZF, ZFC, NBG, etc.
     - https://math.stackexchange.com/questions/136215/difference-between-zfc-nbg
@@ -225,6 +265,13 @@ Is there a compiler that doesn't do that?
                     - https://en.wikipedia.org/wiki/Equational_logic
         - related?
             - equational programming
+        - 2016 reformulation article "A synthetic axiomatization of Map Theory" [pdf available](https://hal.archives-ouvertes.fr/hal-00678410v3)
+
+Can we formalize "a program is an executable formal system" using Grue's map theory?
+
+- How is "false" represented?
+- How is "true" represented?
+- How is "conjunction" represented?
 
 ## Paradigm, approach, viewpoint, worldview?
 
@@ -247,6 +294,11 @@ Is there a compiler that doesn't do that?
                 - https://github.com/agraef/pure-lang/wiki/Rewriting
         - Joy
 - 2002, article, ["Stochastic Lambda Calculus and Monads of Probability Distributions"](http://www.cs.tufts.edu/comp/150PP/archive/norman-ramsey/pmonad.pdf)
+- "Purely functional lazy nondeterministic programming", [paywall](https://www.cambridge.org/core/journals/journal-of-functional-programming/article/purely-functional-lazy-nondeterministic-programming/1E8BA117E549A9612BC4AF9804E5507A)
+- relational programming (pure logic programming?)
+    - miniKanren
+        - Byrd PhD thesis https://scholarworks.iu.edu/dspace/bitstream/handle/2022/8777/Byrd_indiana_0093A_10344.pdf
+            - mentions other programming languages: Prolog, Mercury, Curry
 
 ## Toward a language with first-class syntax?
 
@@ -294,6 +346,25 @@ Is there a compiler that doesn't do that?
 - Every recursive type can be written as `mu a. F a` where F is the associated free functor?
     - Example: `List a = Fix (F a)` where `F a b = 1 + a * b`.
     - `Fix F = F (Fix F)` is the least fixed point of F.
+- Why should we care about parametricity?
+    - [Parametricity: Money for Nothing and Theorems for Free - Bartosz Milewski's Programming Cafe](https://bartoszmilewski.com/2014/09/22/parametricity-money-for-nothing-and-theorems-for-free/)
+
+### What is a type?
+
+- Mathematically, A type is a set whose membership is syntactically decidable.
+- Engineeringly, A type gives meaning to bit patterns.
+A type encodes meaning into bit patterns.
+    - For example, consider the bit pattern 11111111.
+        - It means -1 as an int8.
+        - It means 127 as an uint8.
+
+### Type-checking
+
+- Every type checking algorithm is unification (logic programming).
+    - If the programmer annotates a term, use that annotation.
+    - If the a term is not annotated, annotate that term with a freshly generated variable.
+    - Unify everything according to the typing rules.
+    - See Algorithm W in [WP:Hindley–Milner type system](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system).
 
 ### Algebraic subtyping?
 
@@ -332,9 +403,6 @@ Does it mean "X is a subclass of Y" or "X is an instance of Y"?
     - [Salon des Refusés 2017](https://2017.programmingconference.org/track/refuses-2017)
 - 2002, article collection, "Recent advances in Java technology: theory, application, implementation" http://www.cs.nuim.ie/~jpower/Research/Papers/2002/power-raijt-toc.pdf
 - 1985, article, "Automatic synthesis of typed Λ-programs on term algebras" https://www.sciencedirect.com/science/article/pii/0304397585901355
-- Metaprogramming
-    - http://kaitai.io/
-        - from description, generate parsers for binary data (as opposed to text data)
 - 2015, article, "Dynamically Composing Languages in a Modular Way: Supporting C Extensions for Dynamic Languages", [pdf](https://chrisseaton.com/rubytruffle/modularity15/rubyextensions.pdf)
 - https://github.com/nim-lang/Nim
 - 2016, article, "Towards Ontology-Based Program Analysis", [pdf](http://drops.dagstuhl.de/opus/volltexte/2016/6120/pdf/LIPIcs-ECOOP-2016-26.pdf)
@@ -357,14 +425,6 @@ functional languages for systems programming?
 - [What is PL research and how is it useful? - The PL Enthusiast](http://www.pl-enthusiast.net/2015/05/27/what-is-pl-research-and-how-is-it-useful/)
 - 2014, article, [Ontology-based Representation and Reasoning on Process Models: A Logic Programming Approach](https://arxiv.org/abs/1410.1776)
 - 1994, article, "Formalizing architectural connection", [pdf](http://web.cs.wpi.edu/~cs562/s98/pdf/wright-icse16.pdf)
-- Aspect-oriented programming is a restricted form of metaprogramming.
-    - relationship between Aspect-Oriented Programming and Functional Programming
-        - 2009, article, "What Does Aspect-Oriented Programming Mean for Functional Programmers?", [pdf](https://www.cs.ox.ac.uk/files/2282/wgp14-wang.pdf)
-        - 2008, article, "On Feature Orientation and Functional Programming", [pdf](https://pdfs.semanticscholar.org/522e/b6c2ea910ed074a13fe21767c9fa070fb685.pdf)
-        - 2016, article, "Realtime collaborative editor. Algebraic properties of the problem.", [html](http://blog.haskell-exists.com/yuras/posts/realtime-collaborative-editor.html)
-            - see also Darcs patch theory
-        - 2008, PhD thesis, "An Integrated System to Manage Crosscutting Concerns in Source Code", [pdf](http://wwwtmp.st.ewi.tudelft.nl/arie/phds/Marin.pdf)
-        - 2003, article, "Language-independent aspect-oriented programming", [pdf available](http://www.tara.tcd.ie/handle/2262/32627)
 - [NOOL 2015 accepted papers - SPLASH 2015](https://2015.splashcon.org/track/nool2015#event-overview) ("New Object Oriented Languages")
     - "Classes Considered Harmful", [pdf](http://web.cecs.pdx.edu/~black/publications/ClassesHarmful.pdf)
     - "Ubiquitous Object Orientation to Foster the Advancement of Programming Languages", [pdf](http://www.cs.cmu.edu/~dkurilov/papers/nool15.pdf)
@@ -442,38 +502,6 @@ functional languages for systems programming?
         - [Typed Elixir - Elixir Chat - Elixir Forum](https://elixirforum.com/t/typed-elixir/1388)
             - Is Dialyzer slow?
                 - "My motivation for this is 95% of my bugs in Elixir/Erlang are due to using types wrong, like I may slightly change a tuple format somewhere but do not update it elsewhere and dialyzer does not catch it because the prior library state was in its cache that I then need to rebuild, in addition to dialyzer can take a long time to run."
-- Java metaprogramming
-    - Similar products
-        - libraries
-            - [INRIA Spoon](https://github.com/INRIA/spoon)
-            - The `javax.lang.model` package of the Java standard library, but it does not model method bodies.
-        - environments
-            - [Eclipse Modeling Framework (EMF)](http://www.eclipse.org/modeling/emf/)
-            - [JetBrains MPS (Meta Programming System)](https://www.jetbrains.com/mps/)
-            - [Stratego/XT](http://strategoxt.org/)
-            - TXL
-            - [Eclipse Xtext](http://www.eclipse.org/Xtext/) and [Eclipse Xtend](http://www.eclipse.org/xtend/)
-        - programming languages
-            - Eclipse Xtend
-        - parser generators
-            - [WP:Compiler-compiler](https://en.wikipedia.org/wiki/Compiler-compiler)
-            - [WP:Comparison of parser generators](https://en.wikipedia.org/wiki/Comparison_of_parser_generators)
-            - [ANTLR (Another Tool for Language Recognition)](http://www.antlr.org/)
-            - [JavaCC](https://javacc.org/)
-            - YACC, Bison; with Lex, Flex
-    - Related concepts
-        - Model-driven development
-        - Model-driven architecture
-- Old content to be reorganized
-    - [Functional programming research]({% link functional_programming.md %})
-        - Functional programming in the real world
-            - Philip Wadler's list [Functional Programming in the Real World](http://homepages.inf.ed.ac.uk/wadler/realworld/)
-    - [Joint research with Abdullah]({% link abdullah.md %})
-    - [Programming]({% link programming.md %})
-- relational programming (pure logic programming?)
-    - miniKanren
-        - Byrd PhD thesis https://scholarworks.iu.edu/dspace/bitstream/handle/2022/8777/Byrd_indiana_0093A_10344.pdf
-            - mentions other programming languages: Prolog, Mercury, Curry
 - John Hughes, "Deriving combinator implementations", lecture 4, "Designing and using combinators" http://www.cse.chalmers.se/~rjmh/Combinators/DerivingCombinators/sld001.htm
 - http://matt.might.net/articles/best-programming-languages/
 - http://matt.might.net/articles/compiling-to-java/
@@ -528,19 +556,10 @@ functional languages for systems programming?
         - PhD theses
             - ["Programming Language Features for Web Application Development", Ezra Cooper](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.422.5683&rep=rep1&type=pdf)
                 - "Links" programming language
-- cabal new-build obviates stack?
-    - http://coldwa.st/e/blog/2017-09-09-Cabal-2-0.html
-- https://stackoverflow.com/questions/5770168/templating-packages-for-haskell
-- concept
-    - https://en.wikipedia.org/wiki/End-user_development
-    - https://en.wikipedia.org/wiki/Low-code_development_platforms
 - For JDBC URL see
     - https://jdbc.postgresql.org/documentation/80/connect.html
 - similar
     - https://medium.com/airbnb-engineering/react-native-at-airbnb-f95aa460be1c
-- related?
-    - https://github.com/PostgREST/postgrest
-    - http://rosecompiler.org/
 - some requirement?
     - https://en.wikipedia.org/wiki/Multitenancy
 - Name?
@@ -576,46 +595,80 @@ functional languages for systems programming?
             - Haskell wins.
     - Both have
         - ADTs.
-- Hoogle vs Hayoo?
-    - The hoogle on stackage.org top right text bar seems to be most complete
-        - https://www.stackage.org/
-    - https://mail.haskell.org/pipermail/haskell-cafe/2013-August/109945.html
-- GHC woes
-    - Profiling requires recompiling all transitive dependencies if they happen to be compiled without profiling.
-- What is a type?
-    - Mathematically, A type is a set whose membership is syntactically decidable.
-    - Engineeringly, A type gives meaning to bit patterns.
-    A type encodes meaning into bit patterns.
-        - For example, consider the bit pattern 11111111.
-            - It means -1 as an int8.
-            - It means 127 as an uint8.
-- Every type checking algorithm is unification (logic programming).
-    - If the programmer annotates a term, use that annotation.
-    - If the a term is not annotated, annotate that term with a freshly generated variable.
-    - Unify everything according to the typing rules.
-    - See Algorithm W in [WP:Hindley–Milner type system](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system).
+
+## Enabling metaprogramming
+
 - [metaprogramming - Why is ML called Meta-Language? - Stack Overflow](https://stackoverflow.com/questions/50490883/why-is-ml-called-meta-language)
+- related?
+    - https://github.com/PostgREST/postgrest
+    - http://rosecompiler.org/
+- Metaprogramming
+    - http://kaitai.io/
+        - from description, generate parsers for binary data (as opposed to text data)
+- Aspect-oriented programming is a restricted form of metaprogramming.
+    - relationship between Aspect-Oriented Programming and Functional Programming
+        - 2009, article, "What Does Aspect-Oriented Programming Mean for Functional Programmers?", [pdf](https://www.cs.ox.ac.uk/files/2282/wgp14-wang.pdf)
+        - 2008, article, "On Feature Orientation and Functional Programming", [pdf](https://pdfs.semanticscholar.org/522e/b6c2ea910ed074a13fe21767c9fa070fb685.pdf)
+        - 2016, article, "Realtime collaborative editor. Algebraic properties of the problem.", [html](http://blog.haskell-exists.com/yuras/posts/realtime-collaborative-editor.html)
+            - see also Darcs patch theory
+        - 2008, PhD thesis, "An Integrated System to Manage Crosscutting Concerns in Source Code", [pdf](http://wwwtmp.st.ewi.tudelft.nl/arie/phds/Marin.pdf)
+        - 2003, article, "Language-independent aspect-oriented programming", [pdf available](http://www.tara.tcd.ie/handle/2262/32627)
+- Java metaprogramming
+    - Similar products
+        - libraries
+            - [INRIA Spoon](https://github.com/INRIA/spoon)
+            - The `javax.lang.model` package of the Java standard library, but it does not model method bodies.
+        - environments
+            - [Eclipse Modeling Framework (EMF)](http://www.eclipse.org/modeling/emf/)
+            - [JetBrains MPS (Meta Programming System)](https://www.jetbrains.com/mps/)
+            - [Stratego/XT](http://strategoxt.org/)
+            - TXL
+            - [Eclipse Xtext](http://www.eclipse.org/Xtext/) and [Eclipse Xtend](http://www.eclipse.org/xtend/)
+        - programming languages
+            - Eclipse Xtend
+        - parser generators
+            - [WP:Compiler-compiler](https://en.wikipedia.org/wiki/Compiler-compiler)
+            - [WP:Comparison of parser generators](https://en.wikipedia.org/wiki/Comparison_of_parser_generators)
+            - [ANTLR (Another Tool for Language Recognition)](http://www.antlr.org/)
+            - [JavaCC](https://javacc.org/)
+            - YACC, Bison; with Lex, Flex
+    - Related concepts
+        - Model-driven development
+        - Model-driven architecture
+
+## Automatic (program) differentiation
+
 - What is the relationship between incremental lambda-calculus and automatic differentiation of programs (or of algebraic data types)?
-- "Purely functional lazy nondeterministic programming", [paywall](https://www.cambridge.org/core/journals/journal-of-functional-programming/article/purely-functional-lazy-nondeterministic-programming/1E8BA117E549A9612BC4AF9804E5507A)
-- [What are some interesting language features that may not be well known? : ProgrammingLanguages](https://www.reddit.com/r/ProgrammingLanguages/comments/8vcrzb/what_are_some_interesting_language_features_that/)
-- [A practitioner’s guide to reading programming languages papers](https://blog.acolyer.org/2018/01/26/a-practitioners-guide-to-reading-programming-languages-papers/)
-    - from [top scoring links : ProgrammingLanguages](https://www.reddit.com/r/ProgrammingLanguages/top/)
-- Why should we care about parametricity?
-    - [Parametricity: Money for Nothing and Theorems for Free - Bartosz Milewski's Programming Cafe](https://bartoszmilewski.com/2014/09/22/parametricity-money-for-nothing-and-theorems-for-free/)
-- Interesting functional programming languages tailored for web programming.
-Perhaps related to data modeling.
-    - Ur/Web
-        - [FAQ](http://www.impredicative.com/ur/faq.html)
-            - "Why would I prefer to use Ur/Web over OPA?"
-    - [The Links Programming Language](http://links-lang.org/)
-    - [The Opa Language](http://opalang.org/)
-- Moving logic into SQL stored procedures
-    - [Simplify: move code into database functions \| Derek Sivers](https://sivers.org/pg)
-        - A legitimate concern: How do we version-control (and release, and rollback) stored procedures, triggers, and other database logics?
-    - [Andl, a relational language that is not SQL, is coming to Postgres \| Hacker News](https://news.ycombinator.com/item?id=11802917)
-- https://www.microsoft.com/en-us/research/publication/convenient-explicit-effects-using-type-inference-with-subeffects/
-- [If Haskell were strict, what would the laziness be like?](https://nikita-volkov.github.io/if-haskell-were-strict/)
-- http://homepages.inf.ed.ac.uk/wadler/papers/free-rectypes/free-rectypes.txt
+
+## Extending functions
+
+Not only classes, but also functions, should be extensible.
+
+"To extend the function \\( f : A \to B \\) to the function \\( f' : A' \to B' \\)" means:
+
+- For every \\( x \in A \\), we have \\( f(x) = f'(x) \\).
+- \\( A \subseteq A' \\).
+- \\( B \subseteq B' \\).
+
+A consequence:
+Every occurrence of \\( f \\) can be replaced with \\( f' \\) while preserving the meaning of the containing expression.
+
+## Low-code? Programming for the masses?
+
+Limited programming?
+
+What can we assume about the user's skill/knowledge/background?
+
+- https://en.wikipedia.org/wiki/End-user_development
+- https://en.wikipedia.org/wiki/Low-code_development_platforms
+
+## Old content to be reorganized
+
+- [Functional programming research]({% link functional_programming.md %})
+    - Functional programming in the real world
+        - Philip Wadler's list [Functional Programming in the Real World](http://homepages.inf.ed.ac.uk/wadler/realworld/)
+- [Joint research with Abdullah]({% link abdullah.md %})
+- [Programming]({% link programming.md %})
 
 ## Probably irrelevant to our goal
 

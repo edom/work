@@ -83,3 +83,5 @@ library-vanilla: True
         - Code duplication
             - `CmdRepl.hs` seems to be copied from `CmdBuild.hs`.
         - `CmdBuild.hs` imports `...Orchestration` unqualified without explicit import list
+- Cabal description field pitfall
+    - http://michael.orlitzky.com/articles/using_haddock_markup_in_a_cabal_file.xhtml

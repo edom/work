@@ -51,7 +51,14 @@ These are important and urgent things for most (if not all) countries on Earth t
         - Death penalty, for non-perforce criminals.
     - In any case, nobody should be locked up for so long.
     Locking up people wastes resource.
-- Limit inheritance.
+
+## Should we limit inheritance?
+
+https://taxfoundation.org/estate-and-inheritance-taxes-around-world/
+
+Should we have any tax at all?
+
+Should government funding be voluntary?
 
 ## A government is to maximize the well-being of its people
 
@@ -144,3 +151,14 @@ We need affordable healthcare.
 - https://en.wikipedia.org/wiki/Night-watchman_state
 - If taxes were voluntary, would people pay tax?
 - https://en.wikipedia.org/wiki/Voluntary_taxation
+
+## The world should have only one country, one government, one law.
+
+Having many countries causes legal loopholes.
+
+If there is only one country, there will be no tax tricks, tax havens.
+
+There would be no illegal immigrants.
+Everyone would be a world citizen.
+
+- https://www.quora.com/Why-cant-all-the-earth-countries-unite-to-make-a-single-federation

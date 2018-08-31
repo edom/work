@@ -48,11 +48,6 @@ permalink: /capitalism.html
             - But if the employees weren't in the company, they might create less value.
             The company might be a place where the employees can create more value for society.
 - http://www.visualcapitalist.com/
-- K-pop is slavery
-    - [WP:Slave contract](https://en.wikipedia.org/wiki/Slave_Contract)
-    - [YT:The Late Capitalism of K-Pop](https://www.youtube.com/watch?v=J8LxORztUWY)
-    - [YT:The Dark Side Of Being A K-Pop Star](https://www.youtube.com/watch?v=ClVqqJ3Peuc)
-    - [YT:Inside The Lives Of The World's Most Famous K-Pop Stars](https://www.youtube.com/watch?v=8NcTeIVUXyE)
 - Capital is everything that is not labor?
 - Capitalism is capital above labor? Communism is labor above capital?
 - Example of low-capital high-labor:

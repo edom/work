@@ -82,15 +82,6 @@ date: 2018-07-22 02:45 +0700
                 - The compiler performs translation based on the wrongly inferred type.
                 - The compiler produces a confusing error message.
 
-## Library-writing, backward compatibility, dependency management, and empathy
-
-This crosscuts so many issues that I'm perplexed where to put this.
-
-[Eternal compatibility in theory](https://wiki.haskell.org/The_Monad.Reader/Issue2/EternalCompatibilityInTheory)
-applies to all software, not only Haskell ones.
-
-[Michael Snoyman's personal take on PVP version upper bounds](https://gist.github.com/snoyberg/f6f10cdbea4b9e22d1b83e490ec59a10).
-
 ## Equirecursive types?
 
 Haskell has isorecursive types.

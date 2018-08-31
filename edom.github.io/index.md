@@ -26,32 +26,16 @@ For most pages, the title is a goal, and the content is the ongoing journey to a
         - Forward software engineering
             - [Making lasting software sooner]({% link softeng.md %})
             - [Making the only programming language we will ever need]({% link plres.md %})
-                - [Extending lambda calculus]({% link lambda.md %})
-                - [Extending Haskell]({% link exhask.md %})
-                - [Programming language design mistakes]({% link pldm.md %})
-                - Making interpreters/translators/compilers
-                    - Don't make a compiler?
-                    Make an interpreter instead, and stage it?
-                    Turn an interpreter into a compiler for free?
-                    - [Parsing]({% link parse.md %})
                 - [Modeling]({% link model.md %})
                     - [Modeling all data]({% link modeldata.md %})
                         - [Solving the AST decoration problem]({% link ast.md %})
                         - Solving the expression problem
-                - Functional programming
-                    - [Optimizing lambda calculus]({% link optlam.md %})
                 - Managing large software
                     - [Designing module systems]({% link module.md %})
                     - [Argument for static typing]({% link statyp.md %})
                     - [Proving things using computers]({% link proof.md %})
-                    - Maintaining backward compatibility
-                        - Making only backward-compatible changes simplifies the lives of people who depend on you.
-                        - Too backward-compatible?
-                            - GNU Autotools
-                            - Windows 95: [Much more than you would ever know.. The original version of Sim City was writt... \| Hacker News](https://news.ycombinator.com/item?id=2281932)
-                - [Designing markup languages]({% link markup.md %})
-                - [Designing configuration languages]({% link conflang.md %})
-            - Using programming languages and their related tools
+                    - [Maintaining backward-compatibility]({% link compat.md %})
+            - Programming
                 - [Using Haskell]({% link haskell.md %})
                     - [Using Cabal]({% link cabal.md %})
                 - [Using Java]({% link java.md %})
@@ -60,7 +44,13 @@ For most pages, the title is a goal, and the content is the ongoing journey to a
                         - [Using Maven]({% link maven.md %})
                         - [Using Gradle]({% link gradle.md %})
                 - [Using Python]({% link python.md %})
-            - [Using XML]({% link xml.md %})
+                - [Using Git]({% link git.md %})
+                - [Using XML]({% link xml.md %})
+                - [Using PostgreSQL]({% link pgsql.md %})
+                - [Standard MIDI file format]({% link smf.md %})
+                - These pages may be outdated:
+                    - [Web scraping]({% link scrape.md %})
+                    - [Android]({% link android.md %}). Last time I developed for Android in 2012. My knowledge is irrelevant now.
             - Using Emacs
                 - [Vivek Haldar — The levels of Emacs proficiency](http://blog.vivekhaldar.com/post/3996068979/the-levels-of-emacs-proficiency)
             - [Making contributable open-source projects]({% link opensrc.md %})
@@ -77,6 +67,11 @@ For most pages, the title is a goal, and the content is the ongoing journey to a
         - [Software engineer salary]({% link salary.md %})
     - [Administering a computer]({% link sysadm.md %})
         - [Running X client applications on Docker on Linux]({% link dockerx.md %})
+        - [Moving to clouds, for old-school sysadmins]({% link cloud.md %})
+        - [Kubernetes]({% link kubernetes.md %})
+        - Cloud infrastructure hosting, infrastructure as a service
+            - [Amazon Web Services]({% link aws.md %})
+        - [Security]({% link security.md %})
     - [Using computers]({% link usecom.md %})
         - [Searching the Internet]({% link search.md %})
         - [Removing nag screens]({% link nag.md %})
@@ -84,6 +79,7 @@ For most pages, the title is a goal, and the content is the ongoing journey to a
         - [Buying a smartphone]({% link phone.md %})
             - [Android vs iPhone]({% link andvsiph.md %})
         - [Contributing to Wikipedia]({% link wikipedia.md %})
+        - [Using Trello]({% link trello.md %})
     - [Liberating software]({% link libersoft.md %})
         - Searching
             - Where does this fit in the hierarchy?
@@ -105,6 +101,8 @@ For most pages, the title is a goal, and the content is the ongoing journey to a
 - [Getting rich]({% link getrich.md %})
     - [Investing]({% link invest.md %})
     - [Justifying my value]({% link value.md %})
+    - [Finding same-goaled people]({% link findpep.md %})
+    - [Standardizing organizations]({% link stdorg.md %})
 - Managing organizations
     - [Spreading information in an organization]({% link spreadinf.md %})
     - 2014, article, "Whose critical path are you on?", Philip J. Guo, [html](http://www.pgbovine.net/critical-path.htm)
@@ -212,6 +210,7 @@ For most pages, the title is a goal, and the content is the ongoing journey to a
     - [Learning English]({% link english.md %})
     - [Learning Mandarin]({% link mandarin.md %})
     - [Learning Japanese]({% link japanese.md %})
+    - [Learning German]({% link german.md %})
     - Bahasa Indonesia
         - Apa beda manjur, mempan, mujarab, dan mustajab?
 - [Accounting]({% link account.md %})

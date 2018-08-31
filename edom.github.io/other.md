@@ -254,3 +254,12 @@ People let other people live.
 If I am still alive, it's because others let me live,
 because others tolerate me,
 not because I have any rights.
+
+- Can we make memory a compressible resource?
+    - CPU is compressible resource.
+    - Memory is incompressible resource.
+    Allocation can't be moved.
+- Quartz scheduler performance
+    - http://airboxlab.github.io/performance/scalability/scheduler/quartz/2017/06/20/perf_tuning_quartz.html
+    - https://www.ebayinc.com/stories/blogs/tech/performance-tuning-on-quartz-scheduler/
+    - https://stackoverflow.com/questions/11565993/quartz-performance

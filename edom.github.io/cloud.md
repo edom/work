@@ -1,5 +1,5 @@
 ---
-title: The cloud for old-school sysadmins
+title: Moving to clouds, for old-school sysadmins
 permalink: /cloud.html
 date: 2017-06-26 16:30:00 +0700
 ---

@@ -400,3 +400,5 @@ https://en.wikipedia.org/wiki/Mereological_essentialism
 - [keras-team/keras: Deep Learning for humans](https://github.com/keras-team/keras)
 - [CS230: Deep Learning - Projects](http://cs230.stanford.edu/proj-spring-2018.html)
 - http://jonbho.net/2014/09/25/defining-intelligence/
+- [HuwCampbell/grenade: Deep Learning in Haskell](https://github.com/HuwCampbell/grenade)
+- [Smart classification using Bayesian monads in Haskell - Random Hacks](http://www.randomhacks.net/2007/03/03/smart-classification-with-haskell/)
