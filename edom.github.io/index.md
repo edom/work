@@ -21,6 +21,8 @@ For most pages, the title is a goal, and the content is the ongoing journey to a
 
 ## Goals
 
+We should join forces to reach our shared goals.
+
 - Computer practice
     - Software engineering
         - Forward software engineering
@@ -164,6 +166,8 @@ For most pages, the title is a goal, and the content is the ongoing journey to a
         - [Eating]({% link eat.md %})
             - [How to cook eggs]({% link egg.md %})
     - Hidup di Indonesia abad 21
+        - [Memperbaik Indonesia]({% link indonesia.md %})
+            - [Memperbaik UUD 1945]({% link uud.md %})
         - [Politik Indonesia]({% link politik.md %})
             - [Censoring the Internet in Indonesia]({% link indocen.md %})
             - Memakai hak warga negara

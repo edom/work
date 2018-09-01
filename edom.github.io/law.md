@@ -4,6 +4,18 @@ date: 2018-06-02 16:48 +0700
 permalink: /law.html
 ---
 
+- TOC
+{:toc}
+
+## The ideal law enforcement
+
+- Describe the case to a computer (such as a Prolog program).
+- The computer suggests relevant laws.
+The judge still makes the final decision though.
+The judge uses restorative justice.
+
+## what
+
 - There is something above the law: violence, that is, power, that is, human nature.
     - Law is whatever people fear.
     - Power is the ability to do violence (bodily harm).

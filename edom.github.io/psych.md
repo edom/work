@@ -53,15 +53,15 @@ date: 2018-05-24 02:52 +0700
     - Do they know the penalties?
         - If yes, why do they still commit crimes?
 - [beeminder.com: use loss aversion to trick yourself to accomplishing goals](https://www.beeminder.com/home)
-- [Does your job match your personality? | Jordan Peterson](https://www.youtube.com/watch?v=WEvqMN75sCI)
+- [Does your job match your personality? \| Jordan Peterson](https://www.youtube.com/watch?v=WEvqMN75sCI)
     - axis: complexity
         - high complexity requires high cognitive function level
     - axis: creative/entrepreneurial vs managerial/administrative
         - big five personality trait
             - C/E requires "openness to experience"
             - M/A requires conscientiousness
-- [A simple way to break a bad habit | Judson Brewer](https://www.youtube.com/watch?v=-moW9jvvMr4): by being curiously aware
-- [How to motivate yourself to change your behavior | Tali Sharot | TEDxCambridge](https://www.youtube.com/watch?v=xp0O2vi8DX4)
+- [A simple way to break a bad habit \| Judson Brewer](https://www.youtube.com/watch?v=-moW9jvvMr4): by being curiously aware
+- [How to motivate yourself to change your behavior \| Tali Sharot \| TEDxCambridge](https://www.youtube.com/watch?v=xp0O2vi8DX4)
 - https://www.washingtonpost.com/news/storyline/wp/2014/12/04/people-around-you-control-your-mind-the-latest-evidence/?utm_term=.40265b80e149
     - https://news.ycombinator.com/item?id=12698204
 - [Facts Don't Win Fights: Here’s How to Cut Through Confirmation Bias - Tali Sharot - YouTube](https://www.youtube.com/watch?v=kyioZODhKbE)
@@ -84,3 +84,16 @@ date: 2018-05-24 02:52 +0700
         Then I offend coworker B in front of A.
         Then I can feel some agreement with coworker A.
     - The perception of having a common enemy unites people, even if the enemy is fake.
+- [Why obvious lies make great propaganda - YouTube](https://www.youtube.com/watch?v=nknYtlOvaQ0)
+    - [The Russian "Firehose of Falsehood" Propaganda Model: Why It Might Work and Options to Counter It \| RAND](https://www.rand.org/pubs/perspectives/PE198.html)
+        - This has a concrete recommendations for countering the firehose of falsehood.
+    - Trump and Putin use "firehose of falsehood" to assert power, in the same way school bullies do.
+    - The only way to take power from them is to dismiss them.
+    Media should stop giving them a platform.
+    We should refuse to hear them.
+    We should not fact-check, because by fact-checking we affirm that they have power.
+    We should simply dismiss everything they say.
+    Their competitors should counter-flood the media with their own firehoses.
+    - I'm sure Trump and Putin are not the only people using that technique.
+    I suspect that PKS may be using that technique in mosques in West Java.
+    - Can [WP:Gaslighting](https://en.wikipedia.org/wiki/Gaslighting) be used to unplant false beliefs?

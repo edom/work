@@ -28,6 +28,8 @@ Can everyone be a micro-ISP?
     - How much does solar panel cost?
         - How long until break-even?
         - Is it cheaper to run on solar power?
+- Storing energy more efficiently
+    - [How Supercapacitors Could Make Batteries a Thing of the Past - YouTube](https://www.youtube.com/watch?v=GeSvErqdmIM)
 - Solar panels are the inverse of lamps.
     - Lamp: electricity in, light out.
     - Solar panel: light in, electricity out.

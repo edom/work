@@ -711,6 +711,7 @@ from Metal Gear Solid: Peace Walker
         - dance
             - EDM 1
                 - [Гульнур Сатылганова - Дебе - YouTube](https://www.youtube.com/watch?v=7HDYiCJTsfk)
+                    - alternative title: Сени буйруп койбогондо
                 - [Гульнур Сатылганова Күн достор - YouTube](https://www.youtube.com/watch?v=6F9IUDIXm3k)
                 - [Гульнур Сатылганова Бир нуска - YouTube](https://www.youtube.com/watch?v=k6wpbTQntzg)
                     - somewhat reminiscent of Shakatak's "Night birds"

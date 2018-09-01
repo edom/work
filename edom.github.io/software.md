@@ -5,10 +5,6 @@ date: 2017-06-26 22:30 +0700
 ---
 
 - Web development
-    - [HSLUV: human-friendly *perceptually uniform* color picker](http://www.hsluv.org/)
-        - [Wikipedia: CIELUV color space](https://en.wikipedia.org/wiki/CIELUV)
-        - [Good colour maps: how to design them](https://arxiv.org/abs/1509.03700), 2015, Peter Kovesi
-    - [Lea Verou's contrast ratio checker tool](https://leaverou.github.io/contrast-ratio/)
     - [Set up Webpack to transpile and bundle TypeScript sources](https://webpack.js.org/guides/typescript/)
     - HTML DOM, web, browser, JavaScript
         - [What forces layout / reflow](https://gist.github.com/paulirish/5d52fb081b3570c81e3a)

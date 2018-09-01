@@ -263,3 +263,34 @@ not because I have any rights.
     - http://airboxlab.github.io/performance/scalability/scheduler/quartz/2017/06/20/perf_tuning_quartz.html
     - https://www.ebayinc.com/stories/blogs/tech/performance-tuning-on-quartz-scheduler/
     - https://stackoverflow.com/questions/11565993/quartz-performance
+- picking colors
+    - theories and principles
+        - [How to Design for Color Blindness](https://usabilla.com/blog/how-to-design-for-color-blindness/)
+        - [Color Harmonies: complementary, analogous, triadic color schemes](http://www.tigercolor.com/color-lab/color-theory/color-harmonies.htm)
+    - tools
+        - [HSLUV: human-friendly *perceptually uniform* color picker](http://www.hsluv.org/)
+            - [Wikipedia: CIELUV color space](https://en.wikipedia.org/wiki/CIELUV)
+            - [Good colour maps: how to design them](https://arxiv.org/abs/1509.03700), 2015, Peter Kovesi
+        - [Lea Verou's contrast ratio checker tool](https://leaverou.github.io/contrast-ratio/)
+
+## Cooperatives?
+
+What is the difference between cooperative and nonprofit?
+
+Do cooperatives have limited liabilities like limited liability companies?
+
+Cooperative is not a legal form?
+
+How to measure member contribution?
+This is hard, if even possible at all.
+Thus it's a bad idea to distribute profit according to member contribution.
+An alternative way to distribute is
+[WP:From each according to his ability, to each according to his needs](https://en.wikipedia.org/wiki/From_each_according_to_his_ability,_to_each_according_to_his_needs),
+but it only works if there is abundance.
+
+- Which assumption is better?
+    - Assumption of scarcity: Human always wants more than what exists. There is never enough resources for everybody.
+    - Assumption of abundance: There is a point where humans are satisfied. There are enough resources for everybody.
+
+I think the assumption of abundance is saner.
+But unfortunately it seems to lead to communism.
