@@ -1,0 +1,70 @@
+{
+    "git.ignoreLegacyWarning": true,
+    "lean.executablePath": "/home/erik/lean-3.3.0-linux/bin/lean",
+    "lean.memoryLimit": "1024",
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/*.olean": true,
+        "**/*.o": true,
+        "**/*.a": true,
+    },
+    "files.trimTrailingWhitespace": true,
+    "editor.fontFamily": "'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.fontSize": 12,
+    "window.zoomLevel": 0,
+    "workbench.editor.enablePreviewFromQuickOpen": true,
+    "workbench.colorTheme": "Default High Contrast",
+    // https://code.visualstudio.com/docs/getstarted/themes#_customizing-a-color-theme
+    // https://code.visualstudio.com/docs/extensions/themes-snippets-colorizers#_textmate-theme-rules
+    // This customizes "Default High Contrast" with colors whose hues are around 90 degrees.
+    // We don't use blue because blue is black under night mode filters / blue light filters.
+    "editor.tokenColorCustomizations": {
+        "[Default High Contrast]": {
+            "comments": "#777c00", // HSLUV 90 100 50
+            "textMateRules": [
+                {
+                    "scope": "text",
+                    "settings": {
+                        "foreground": "#e2e2e2", // HSLUV 0 0 90
+                    },
+                },
+                {
+                    "scope": "comment",
+                    "settings": {
+                        "foreground": "#777c00", // HSLUV 90 100 50
+                    },
+                },
+                {
+                    "scope": [
+                        "string",
+                        "constant",
+                        "constant.language",
+                    ],
+                    "settings": {
+                        "foreground": "#ffbb03", // HSLUV 55 100 80
+                    },
+                },
+                {
+                    "scope": [
+                        "entity.name.tag",
+                        "markup.heading",
+                    ],
+                    "settings": {
+                        "foreground": "#ffffff", // HSLUV 0 0 100
+                        "fontStyle": "bold",
+                    },
+                },
+                {
+                    "scope": "entity.other.attribute-name",
+                    "settings": {
+                        "foreground": "#b8c100", // HSLUV 90 100 75
+                    },
+                },
+            ]
+        }
+    },
+}
