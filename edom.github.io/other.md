@@ -4,6 +4,11 @@ permalink: /other.html
 date: 2018-07-22 13:15 +0700
 ---
 
+- TOC
+{:toc}
+
+## what
+
 - I am regrouping the contents in this website from by-topic to by-task.
 - This page contains the old grouping that I haven't moved.
 - This page is also a staging area, a queue, a scratchpad, for the things I shall process later.
@@ -294,3 +299,38 @@ but it only works if there is abundance.
 
 I think the assumption of abundance is saner.
 But unfortunately it seems to lead to communism.
+
+## Judaism, kareth, gays, and lesbians
+
+- [WP:Kareth](https://en.wikipedia.org/wiki/Kareth)
+    - It is interesting that a gay is punishable by kareth, but a lesbian is not punishable by kareth.
+        - See item no. 4: "A male having sexual intercourse with another male".
+        It doesn't say anything about "a female having sexual intercourse with another female".
+    - It doesn't mean that Judaism allows lesbianism.
+    There may be other rules somewhere else.
+    - [WP:Homosexuality and Judaism](https://en.wikipedia.org/wiki/Homosexuality_and_Judaism)
+
+## Utilitarianism is questionable.
+
+- https://rationaloptimist.wordpress.com/2014/05/24/utilitarianism-is-killing-one-to-save-five-moral/
+- http://blog.practicalethics.ox.ac.uk/2014/11/why-i-am-not-a-utilitarian/
+
+## It is insane that every country makes their own laws.
+
+Software engineers share as much as possible to avoid repeating work.
+They use operating systems, libraries.
+
+Legislators could share more work.
+
+Most software engineers use the same operating system.
+Every country has its own constitution.
+This is an insane amount of duplication.
+
+There should be a "software library" for laws.
+Laws should be reusable.
+It should be able to legislate
+"law X of country Y also holds in country Z, provided that every occurrence of X is replaced by Z".
+
+- [WP:Don't repeat yourself](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)
+- [WP:World government](https://en.wikipedia.org/wiki/World_government)
+- [Quora question about world government](https://www.quora.com/There-is-only-one-country-in-the-world-and-there-are-no-borders-no-need-for-passports-People-can-travel-freely-and-there-is-a-similar-legal-and-economic-system-for-everyone-in-the-world-What-do-you-think-of-this-idea)

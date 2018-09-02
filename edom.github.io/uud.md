@@ -132,7 +132,7 @@ Presiden tidak bisa pecat DPR.
 
 ## Yang sudah baik
 
-### Indonesia adalah negara sosialis.
+### Sistem ekonomi paham tengah, berimbang antara kapitalisme dan sosialisme
 
 Pasal 27 ayat 2: "Tiap-tiap warga negara berhak atas pekerjaan dan penghidupan yang layak bagi kemanusiaan."
 

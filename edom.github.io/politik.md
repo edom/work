@@ -258,6 +258,15 @@ WNI keturunan Cina bisa masuk universitas negeri.
     - Jalanan dinaikkan 50 cm. Rumah dinaikkan 100 cm. Tetap banjir.
     - Saat BTP menjabat, rumah saya tidak banjir.
 
+Namun, hal yang saya tidak setuju:
+
+- Omongan kurang dijaga, mungkin terbawa emosi.
+Akhirnya kata-katanya dipakai untuk menyerang dia.
+- Utilitarianisme.
+[WP:Trolley problem](https://en.wikipedia.org/wiki/Trolley_problem) menyiratkan bahwa utilitarianisme tidak cocok jadi prinsip moral.
+Saya hargai kemampuan problem-solving dan kecepatan kerja Ahok, tapi soal prinsip moral ini saya tidak setuju.
+    - [HAM Versi Ahok untuk Melindungi Rakyat Banyak](https://news.detik.com/berita/2998358/ham-versi-ahok-untuk-melindungi-rakyat-banyak)
+
 ## Why is Reddit blocked in Indonesia?
 
 - The official reason
