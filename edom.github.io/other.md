@@ -334,3 +334,19 @@ It should be able to legislate
 - [WP:Don't repeat yourself](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)
 - [WP:World government](https://en.wikipedia.org/wiki/World_government)
 - [Quora question about world government](https://www.quora.com/There-is-only-one-country-in-the-world-and-there-are-no-borders-no-need-for-passports-People-can-travel-freely-and-there-is-a-similar-legal-and-economic-system-for-everyone-in-the-world-What-do-you-think-of-this-idea)
+
+## Converting between goods and services
+
+SaaS converts goods (software) into services.
+If you have goods, and you want to make it a service, then you host a software that controls access to that goods.
+
+Robot converts services into goods.
+If you have a service, and you want to make it a goods, then you make a robot that does that service.
+
+## Justifying freedom
+
+- Hypotheses:
+    - People do/produce best (the highest quantity for the lowest price) when they pursue what they want to do/produce.
+    - People approach their strengths and leave their weaknesses.
+    - Different people have different goals.
+    - Higher intrinsic motivation increases willingness to accept lower pay.

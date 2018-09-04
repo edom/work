@@ -688,3 +688,10 @@ What can we assume about the user's skill/knowledge/background?
             - blocks language
                 - https://harc.ycr.org/project/gp/
 - Functional Payout Framework http://lambda-the-ultimate.org/node/3331
+
+## Is inheritance subtyping?
+
+- 1989, "Inheritance is not subtyping", [pdf](https://www.cs.utexas.edu/users/wcook/papers/InheritanceSubtyping90/CookPOPL90.pdf)
+- 2013, "Inheritance is subtyping", [pdf](https://pdfs.semanticscholar.org/569c/9b35375144756761167fd4a2571b1d97f0e8.pdf)
+- [Subtyping vs inheritance](https://www.cmi.ac.in/~madhavan/courses/pl2009/lecturenotes/lecture-notes/node28.html)
+    - Subtyping and inheritance are orthogonal concepts.
