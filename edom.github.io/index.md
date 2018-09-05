@@ -47,6 +47,7 @@ We should join forces to reach our shared goals.
                         - [Using Gradle]({% link gradle.md %})
                 - [Using Python]({% link python.md %})
                 - [Using Git]({% link git.md %})
+                    - [Speeding up Git]({% link gitspd.md %})
                 - [Using XML]({% link xml.md %})
                 - [Using PostgreSQL]({% link pgsql.md %})
                 - [Standard MIDI file format]({% link smf.md %})

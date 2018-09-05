@@ -63,3 +63,38 @@ Why is security not the default?
 ## Probably relevant Twitters
 
 - [nixcraft](https://twitter.com/nixcraft): some humor, some important
+
+## Bash pitfalls
+
+This is bash version `GNU bash, version 4.3.11(1)-release (x86_64-pc-linux-gnu)` that comes with Ubuntu 14.04.
+
+### Local variable definition ignores command substitution result
+
+At first this seems like an unexpected interaction between function, `local` variable, `set -e (set -o errexit)`, and command substitution `$(cmd)`.
+
+The word `local` is a shell command that has an exit status, not a keyword like `var` in JavaScript.
+Bash is behaving as documented.
+See the documentation for `local` in `man bash`.
+
+```bash
+fun_0() {
+    local var
+    var=$(false)
+    echo fun_0
+}
+
+fun_1() {
+    local var=$(false)
+    echo fun_1
+}
+
+fun_2() {
+    local var=$1
+    echo fun_2
+}
+
+echo $(set -o errexit; fun_0) # Expected: This doesn't print fun_0.
+echo $(set -o errexit; fun_1) # PITFALL: This prints fun_1 !!!
+echo $(set -o nounset; fun_2) # Pitfall: This doesn't print fun_2, and aborts with "bash: $1: unbound variable".
+
+```
