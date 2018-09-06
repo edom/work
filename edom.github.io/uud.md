@@ -108,9 +108,14 @@ Mungkin beberapa tambahan ini dibuat karena penculikan, penghilangan, dan penemb
 
 - Pasal 28A: "Setiap orang berhak untuk hidup serta berhak mempertahankan hidup dan kehidupannya."
 - Pasal 28B ayat 1: "Setiap orang berhak membentuk keluarga dan melanjutkan keturunan melalui perkawinan yang sah."
-    - Tidak perlu diatur pun orang akan kawin.
+    - Tanpa dibolehkan pun orang akan kawin.
+    Sebelum ada UUD 1945 pun orang sudah kawin.
     Mengapa bisa ada ayat ini di UUD?
     Apa latar belakangnya?
+    - Setiap orang?
+    Apakah semua orang boleh melanjutkan keturunan?
+    Apakah orang yang tidak bisa mengurus anak sebaiknya melanjutkan keturunan?
+    Apakah ekstremis sebaiknya melanjutkan keturunan?
 - Pasal 28B ayat 2: "Setiap anak berhak atas kelangsungan hidup, tumbuh, dan berkembang serta berhak atas perlindungan dari kekerasan dan diskriminasi."
 - Pasal 28C, 28D, 28E, 28F, 28G, 28H, 28I: you don't say. Bagaimana cara menegakannya?
 

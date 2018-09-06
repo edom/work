@@ -23,6 +23,12 @@ Translate the requirement into software, instead of making a software system tha
 Don't just follow hypes.
 Always have a reason when doing things.
 Record your reasoning for your forgetful future self.
+- Design software to be refactored without surprises.
+    - Example: Avoid runtime reflection (unless for the most obvious cases).
+    An alternative to that is code generation.
+        - Help the compiler help you.
+        - Even the most obvious cases aren't obvious to someone who see the code for the first time?
+- Shorten the edit-compile-test cycle. Design software so that it compiles fast and it starts up fast.
 - What else?
 
 ## What we know

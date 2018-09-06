@@ -72,6 +72,20 @@ or the [manpages](https://git-scm.com/docs) (`man git`).
         - https://stackoverflow.com/questions/1106529/how-to-skip-loose-object-popup-when-running-git-gui
 - [Understanding Git Filter-branch and the Git Storage Model](https://manishearth.github.io/blog/2017/03/05/understanding-git-filter-branch/)
 
+## Git hash collisions
+
+Git hash collision may occur albeit extremely unlikely.
+Git assumes that if two objects have the same hash, then they are the same object.
+This is false; the converse is true: if two objects are the same, then they have the same hash.
+When hash collision occur, Git may silently lose data.
+Git is an example of software that is incorrect but works for the use cases it was designed for (source code versioning).
+Git is not meant to be used as an arbitrary database.
+
+Other softwares are incorrect as well.
+We routinely make software that assumes that there will never be more than 2^64 rows in a database table.
+
+Is it even possible to write correct software at all?
+
 ## Related tools
 
 - git-gui, for making commits

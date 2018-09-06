@@ -31,8 +31,9 @@ I guess that speeding up checkout will also speed up cherry-pick.
 
 It seems that `commit` and `write-tree` are slow.
 
-`GIT_TRACE_PERFORMANCE=true` has no effect.
-Which git version is it for?
+- [Git - Environment Variables](https://git-scm.com/book/en/v2/Git-Internals-Environment-Variables)
+    - `GIT_TRACE_PERFORMANCE=true` has no effect.
+    Which git version is it for?
 
 ## The plan
 
@@ -44,3 +45,7 @@ Which git version is it for?
 ## Plan: Make a rebase that uses only trees and not indexes
 
 If a tree changes, all its ancestors have to be rewritten.
+
+## Plan: Just use subtrees and keep the repository small
+
+I think this is the least-effort solution that solves (works around) the problem.

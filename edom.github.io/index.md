@@ -69,6 +69,7 @@ We should join forces to reach our shared goals.
             - [Reviewing performance]({% link perfrev.md %})
         - [Software engineer salary]({% link salary.md %})
     - [Administering a computer]({% link sysadm.md %})
+        - [Programming Bash]({% link bash.md %})
         - [Running X client applications on Docker on Linux]({% link dockerx.md %})
         - [Moving to clouds, for old-school sysadmins]({% link cloud.md %})
         - [Kubernetes]({% link kubernetes.md %})

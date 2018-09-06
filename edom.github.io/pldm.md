@@ -100,6 +100,10 @@ Instead, do semantic mapping: map a program in language A to an equivalent progr
 
 ["There is more than one way to do it"](https://en.wikipedia.org/wiki/There%27s_more_than_one_way_to_do_it) is a design mistake.
 
+### Disallowing multi-line string literals
+
+Languages should allow CR/LF in string literals.
+
 ## Java
 
 - Checked exceptions don't play nice with java.util.Stream.

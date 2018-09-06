@@ -349,7 +349,7 @@ Can we formalize "a program is an executable formal system" using Grue's map the
 - Why should we care about parametricity?
     - [Parametricity: Money for Nothing and Theorems for Free - Bartosz Milewski's Programming Cafe](https://bartoszmilewski.com/2014/09/22/parametricity-money-for-nothing-and-theorems-for-free/)
 
-### What is a type?
+### What is a type? Understanding what a type is from how it is used
 
 - Mathematically, A type is a set whose membership is syntactically decidable.
 - Engineeringly, A type gives meaning to bit patterns.
@@ -357,6 +357,17 @@ A type encodes meaning into bit patterns.
     - For example, consider the bit pattern 11111111.
         - It means -1 as an int8.
         - It means 127 as an uint8.
+
+A type defines the memory layout (bit pattern) of its values.
+
+A type constrains values and expressions.
+
+A type determines what values a function can take/give.
+
+There are also other uses of types.
+
+The question is: What is a type?
+What principles should we follow when we design a language?
 
 ### Type-checking
 
@@ -695,3 +706,22 @@ What can we assume about the user's skill/knowledge/background?
 - 2013, "Inheritance is subtyping", [pdf](https://pdfs.semanticscholar.org/569c/9b35375144756761167fd4a2571b1d97f0e8.pdf)
 - [Subtyping vs inheritance](https://www.cmi.ac.in/~madhavan/courses/pl2009/lecturenotes/lecture-notes/node28.html)
     - Subtyping and inheritance are orthogonal concepts.
+
+## Maximum polymorphism?
+
+- Read this: [Lecture 4: Higher Polymorphism \| Advances in Programming Languages](https://blog.inf.ed.ac.uk/apl16/archives/178/comment-page-1)
+- [Rethink Structural Types · Issue #1886 · lampepfl/dotty](https://github.com/lampepfl/dotty/issues/1886)
+    - "However, there is another area where statically-typed languages are often more awkward than dynamically-typed ones: database access."
+
+## Typing records
+
+A record type can be thought as a product type whose components are named.
+
+If each value `valN` has type `typN`, then the record `{key1=val1; key2=val2; ...;}` has type `{key1:typ1; key2:typ2; ...;}`.
+For example, the record `{name="John"; age=20}` has type `{name:String; age:Int;}`.
+
+## Polymorphism is code generation
+
+- Consider translating `id : a -> a` to assembly.
+    - If types define memory layout (bit representation), then the compiler must generate an `id` function for every `a`.
+    - If the language uses runtime type tagging, then there doesn't have to be more than one`id` functions.
