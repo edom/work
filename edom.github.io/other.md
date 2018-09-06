@@ -350,3 +350,8 @@ If you have a service, and you want to make it a goods, then you make a robot th
     - People approach their strengths and leave their weaknesses.
     - Different people have different goals.
     - Higher intrinsic motivation increases willingness to accept lower pay.
+
+## Uncertainty in hiring
+
+In hiring, if a candidate leaves good impressions (not exceptional, but decent nonetheless), but you aren't sure about him, should you just reject him?
+Does "maybe" mean "no"?

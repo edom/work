@@ -31,9 +31,16 @@ I guess that speeding up checkout will also speed up cherry-pick.
 
 It seems that `commit` and `write-tree` are slow.
 
+`GIT_TRACE_PERFORMANCE=true` has no effect.
+Which git version is it for?
+
 ## The plan
 
 - [atlassian.com: How to manage big Git repositories](https://www.atlassian.com/blog/git/handle-big-repositories-git)
     - Try git sparse checkout?
     It seems that sparse-checkout and rebase doesn't mix.
 - Not recommended: `git gc --aggressive` (doesn't do what we think it would do).
+
+## Plan: Make a rebase that uses only trees and not indexes
+
+If a tree changes, all its ancestors have to be rewritten.
