@@ -707,6 +707,36 @@ What can we assume about the user's skill/knowledge/background?
 - [Subtyping vs inheritance](https://www.cmi.ac.in/~madhavan/courses/pl2009/lecturenotes/lecture-notes/node28.html)
     - Subtyping and inheritance are orthogonal concepts.
 
+My conclusion is:
+A language should provide both nominal and structural subtyping.
+
+We can define structural subtyping for C structs.
+
+We can define layout types (almost like ASN.1):
+
+```
+layout {
+    at byte 0;
+    def var0 : little_endian int32;
+    at byte 4;
+    def var1 : big_endian int32;
+    reserve 8 byte;
+    skip 4 byte; -- synonym for reserve
+    def var2 : int8;
+    def var3 : array of 4 int8;
+    align 16;
+    def var4 : layout {
+        reserve 16 byte;
+        def var1 : int8;
+        align 32;
+    };
+}
+```
+
+We can define intersection, union, concatenation, and composition/nesting of two layout types.
+
+Why don't we just build ASN.1 into the language?
+
 ## Maximum polymorphism?
 
 - Read this: [Lecture 4: Higher Polymorphism \| Advances in Programming Languages](https://blog.inf.ed.ac.uk/apl16/archives/178/comment-page-1)

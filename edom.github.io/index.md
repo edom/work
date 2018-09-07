@@ -55,6 +55,7 @@ We should join forces to reach our shared goals.
                     - [Web scraping]({% link scrape.md %})
                     - [Android]({% link android.md %}). Last time I developed for Android in 2012. My knowledge is irrelevant now.
             - [Using Emacs]({% link emacs.md %})
+                - [Emacs-Vi correspondence table]({% link emacsvi.md %})
             - [Making contributable open-source projects]({% link opensrc.md %})
                 - [Building online communities]({% link community.md %})
                 - Maintaining open-source projects

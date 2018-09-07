@@ -355,3 +355,7 @@ If you have a service, and you want to make it a goods, then you make a robot th
 
 In hiring, if a candidate leaves good impressions (not exceptional, but decent nonetheless), but you aren't sure about him, should you just reject him?
 Does "maybe" mean "no"?
+
+## what
+
+- DMTCP (Distributed MultiThreaded Checkpointing): Checkpoint/Restart functionality for Linux processes

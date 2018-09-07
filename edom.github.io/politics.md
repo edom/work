@@ -174,3 +174,9 @@ See James Damore lawsuit.
 - China
     - http://www.cirosantilli.com/
         - https://github.com/cirosantilli/china-dictatorship/blob/master/FAQ.adoc
+- The goal of a career politician is to get reelected.
+    - How do we create a system that makes sure that one is reelected if and only if he works according to the people's desires,
+    and one is taken down as soon as he strays from the people's desires?
+        - How do we create a system that is robust, that depends only minimally on the electees, that works for a wide variety of malicious electees?
+            - How do we make government fear the people, and people fear the government?
+            How do we make mutual fear?
