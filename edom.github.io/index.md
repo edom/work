@@ -54,8 +54,7 @@ We should join forces to reach our shared goals.
                 - These pages may be outdated:
                     - [Web scraping]({% link scrape.md %})
                     - [Android]({% link android.md %}). Last time I developed for Android in 2012. My knowledge is irrelevant now.
-            - Using Emacs
-                - [Vivek Haldar — The levels of Emacs proficiency](http://blog.vivekhaldar.com/post/3996068979/the-levels-of-emacs-proficiency)
+            - [Using Emacs]({% link emacs.md %})
             - [Making contributable open-source projects]({% link opensrc.md %})
                 - [Building online communities]({% link community.md %})
                 - Maintaining open-source projects

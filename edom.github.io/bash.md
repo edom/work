@@ -11,6 +11,7 @@ date: 2018-09-05 00:00 +0700
 
 - Bash has associative arrays
     - https://www.artificialworlds.net/blog/2012/10/17/bash-associative-array-examples/
+- [SierraSoftworks/bash-cli: A command line framework built using nothing but Bash and compatible with anything](https://github.com/SierraSoftworks/bash-cli)
 
 ## Error handling
 

@@ -725,3 +725,23 @@ For example, the record `{name="John"; age=20}` has type `{name:String; age:Int;
 - Consider translating `id : a -> a` to assembly.
     - If types define memory layout (bit representation), then the compiler must generate an `id` function for every `a`.
     - If the language uses runtime type tagging, then there doesn't have to be more than one`id` functions.
+
+## Fixed points and recursive types
+
+A thing \\( x \\) is a *fixed point* of function \\( f \\) iff \\( f(x) = x \\).
+
+A function may have zero, one, or many fixed points.
+
+A thing \\( x : A \\) is a *least fixed point* of function \\( f : A \to A \\) iff
+\\( x \\) is a minimum of the set of the fixed points of \\( f \\).
+The words "least" and "minimum" assume an ordering \\( \le \\).
+This ordering should be clear from context.
+
+If \\( f \\) has exactly one least fixed point \\( x \\) with respect to ordering \\( \le \\), then we write \\( \mu_\le(f) = x \\).
+
+The syntax \\( \mu a. b \\) means \\( \mu_\le(\lambda a. b) \\).
+The syntax \\( \mu a. b \\) is analogous to lambda expression syntax \\( \lambda a. b \\).
+
+What is the ordering used in formulating the least fixed point of a recursive algebraic data type?
+
+todo: equirecursive types and isorecursive types

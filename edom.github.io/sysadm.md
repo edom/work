@@ -60,6 +60,34 @@ Why is security not the default?
 - [pv(1): monitor progress of data through pipe - Linux man page](https://linux.die.net/man/1/pv)
 - [jq](https://stedolan.github.io/jq/), [WP:jq (programming language)](https://en.wikipedia.org/wiki/Jq_(programming_language))
 
+## sudo security hole mitigation: Don't reuse the terminal you use for sudo.
+
+The problem:
+If you run sudo in a terminal,
+then every program you run in the same terminal shortly after can become root without asking for your password,
+(You may not have this problem if your system disables credential caching.)
+
+To see how, save this into `evil.sh`, and then `chmod 755 evil.sh`, and then `sudo echo login`, and then `./evil.sh`.
+
+```bash
+#!/bin/bash
+# If you run this script not long after sudoing in the same terminal,
+# then this script can become root without prompting for your password.
+sudo echo PWNED # could be a malicious program
+```
+
+The security hole is by design for convenience because people don't like typing their passwords.
+This hole is not fatal; the user can control this.
+It seems that this hole won't be closed;
+there doesn't seem to be any way of closing this hole without annoying the user.
+
+The mitigation is simple disciplined behavior:
+
+- Do as few things as necessary in an elevated terminal.
+- Run only trusted programs and scripts.
+- Close the terminal as soon as possible.
+Alternatively, you can also run `sudo -K` to remove the cache.
+
 ## Probably relevant Twitters
 
 - [nixcraft](https://twitter.com/nixcraft): some humor, some important
