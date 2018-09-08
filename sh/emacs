@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+main() {
+    case "$1" in
+        (1) # for editing emacs lisp
+            emacs --maximize
+            ;;
+        (2) # for editing plan.org
+            emacs --maximize --no-desktop --visit org/plan.org
+            ;;
+        (3) # for reading info
+            emacs --fullheight --quick --eval '(info "/usr/share/info/org.gz")'
+            ;;
+    esac
+}
+
+main "$@"

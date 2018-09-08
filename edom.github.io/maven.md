@@ -11,6 +11,8 @@ Maven is rigid.
 All projects build in the same way.
 If you want Maven to do something, but you can't find an example on the Internet, you should assume that it can't be done.
 
-To build your project, run `mvn package`.
+To compile your project, run `mvn compile`.
+
+To package your project, run `mvn package`.
 
 Maven output directory is `target`.

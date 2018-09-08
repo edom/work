@@ -274,3 +274,5 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
 - [Takeshi's Castle Episode 1 Original Japanese Broadcast](https://www.youtube.com/watch?v=Q9wAORBq0fE)
     - 1980s disco music
 - [Funny Babies Confused by Twin Parents Compilation - YouTube](https://www.youtube.com/watch?v=alNI45hzzmY)
+- cat videos
+    - [Every day. Every. Darn. Day. - YouTube](https://www.youtube.com/watch?v=9EYZnSXEla0)

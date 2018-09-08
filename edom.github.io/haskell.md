@@ -242,3 +242,7 @@ Must compile from source from [Hackage](https://github.com/leksah/leksah/wiki/do
 
 - https://hackage.haskell.org/package/ImperativeHaskell
 - just for curiosity https://github.com/edwinb/idris-php
+
+## What's hampering Haskell adoption?
+
+- GHC's aggressive intermodule optimization precludes prebuilt binaries.

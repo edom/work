@@ -42,20 +42,21 @@ We should join forces to reach our shared goals.
                     - [Using Cabal]({% link cabal.md %})
                 - [Using Java]({% link java.md %})
                     - Building a Java project
-                        - 2018-08-29: If you have to choose between Maven and Gradle, and your code is 100% Java, then I recommend Maven.
+                        - 2018-08-29: I recommend Maven.
                         - [Using Maven]({% link maven.md %})
                         - [Using Gradle]({% link gradle.md %})
                 - [Using Python]({% link python.md %})
-                - [Using Git]({% link git.md %})
-                    - [Speeding up Git]({% link gitspd.md %})
                 - [Using XML]({% link xml.md %})
                 - [Using PostgreSQL]({% link pgsql.md %})
                 - [Standard MIDI file format]({% link smf.md %})
-                - These pages may be outdated:
+                - Outdated pages:
                     - [Web scraping]({% link scrape.md %})
                     - [Android]({% link android.md %}). Last time I developed for Android in 2012. My knowledge is irrelevant now.
+            - [Using Git]({% link git.md %})
+                - [Speeding up Git]({% link gitspd.md %})
             - [Using Emacs]({% link emacs.md %})
-                - [Emacs-Vi correspondence table]({% link emacsvi.md %})
+                - [Using Org Mode]({% link orgmode.md %})
+                - [Emacs for vi users]({% link emacsvi.md %})
             - [Making contributable open-source projects]({% link opensrc.md %})
                 - [Building online communities]({% link community.md %})
                 - Maintaining open-source projects

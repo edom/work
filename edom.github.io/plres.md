@@ -704,11 +704,13 @@ What can we assume about the user's skill/knowledge/background?
 
 - 1989, "Inheritance is not subtyping", [pdf](https://www.cs.utexas.edu/users/wcook/papers/InheritanceSubtyping90/CookPOPL90.pdf)
 - 2013, "Inheritance is subtyping", [pdf](https://pdfs.semanticscholar.org/569c/9b35375144756761167fd4a2571b1d97f0e8.pdf)
+    - basically tells the user to read AbdelGawad's other works
 - [Subtyping vs inheritance](https://www.cmi.ac.in/~madhavan/courses/pl2009/lecturenotes/lecture-notes/node28.html)
     - Subtyping and inheritance are orthogonal concepts.
 
-My conclusion is:
 A language should provide both nominal and structural subtyping.
+
+- 2008, "Integrating Nominal and Structural Subtyping", [pdf](http://www.cs.cmu.edu/~aldrich/papers/ecoop08.pdf)
 
 We can define structural subtyping for C structs.
 
@@ -775,3 +777,23 @@ The syntax \\( \mu a. b \\) is analogous to lambda expression syntax \\( \lambda
 What is the ordering used in formulating the least fixed point of a recursive algebraic data type?
 
 todo: equirecursive types and isorecursive types
+
+## Case study: CommonMark, Liquid, and Jekyll, reusable grammar
+
+I want something like this:
+
+```
+data CommonMark = ... -- CommonMark AST
+data Liquid = ... -- Liquid AST
+type Jekyll = CommonMark + Liquid
+
+parse_cm : String -> Parser CommonMark
+parse_lq : String -> Parser Liquid
+parse_jk : String -> Parser Jekyll
+parse_jk = parse_cm + parse_lq
+```
+
+- [design - Composable Grammars - Stack Overflow](https://stackoverflow.com/questions/953185/composable-grammars)
+- [Grammar reuse](https://jeffreykegler.github.io/Ocean-of-Awareness-blog/individual/2015/12/composable.html)
+- [melt-umn/silver: An attribute grammar-based programming language for composable language extensions](https://github.com/melt-umn/silver)
+- OMeta, Katahdin
