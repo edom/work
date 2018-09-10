@@ -1,16 +1,34 @@
 ;; -*- lexical-binding: t -*-
 
+; See the documentation of the 'my-main' function.
+
+; See Emacs manual "Saving Customizations"
+; Don't save the customization in emacs init file.
+; The custom file may have sensitive data such as IRC password.
+(setq custom-file "~/.emacs.d/custom.el")
+
+(defun my-main () "
+Run 'SPACEMACS=1 emacs' in bash to run spacemacs.
+"
+  (if (getenv "SPACEMACS") (my-run-spacemacs) (my-customizations))
+  )
+
+(defun append-to-list (dst src)
+  (dolist (elm src) (add-to-list dst elm t))
+  )
+
 (defun my-customizations () "
 Entry point.
 Called at the end of init.el.
 "
   (require 'package)
   ; https://melpa.org/#/getting-started
-  (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+  (append-to-list 'package-archives '(
+    ("melpa" . "https://melpa.org/packages/")
+    ("melpa-stable" . "https://stable.melpa.org/packages/")
+    ))
   (package-initialize)
-  ; See Emacs manual "Saving Customizations"
-  (setq custom-file "~/.emacs.d/custom.el")
-  (load custom-file t) ; optional
+  (load custom-file t) ; optional; custom-file is set somewhere else in this file
   ; Editor settings
   ; Dealing with whitespaces.
   (setq-default indent-tabs-mode nil) ; use spaces instead of tabs
@@ -141,4 +159,15 @@ Publish a website?
 
 ;;;;;;;; End
 
-(my-customizations)
+;;;;;;;; 2018-09-11 Spacemacs
+
+(defun my-run-spacemacs () "
+See https://github.com/syl20bnr/spacemacs#alternate-installations
+"
+  (progn
+    (setq spacemacs-start-directory "~/.emacs.d/spacemacs/") ; replace this with whither you git-cloned spacemacs
+    (load-file (concat spacemacs-start-directory "init.el"))
+    )
+  )
+
+(my-main)

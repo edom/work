@@ -739,6 +739,9 @@ We can define intersection, union, concatenation, and composition/nesting of two
 
 Why don't we just build ASN.1 into the language?
 
+- [Why not use Structural Subtyping?](http://whiley.org/2010/12/13/why-not-use-structural-subtyping/)
+    - What is it trying to say?
+
 ## Maximum polymorphism?
 
 - Read this: [Lecture 4: Higher Polymorphism \| Advances in Programming Languages](https://blog.inf.ed.ac.uk/apl16/archives/178/comment-page-1)

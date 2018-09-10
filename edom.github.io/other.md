@@ -365,3 +365,29 @@ Does "maybe" mean "no"?
     - 2018-09-08: a problem: can't close session with android keyboard (requires a physical keyboard plugged in via OTG USB)
 - psychology?
     - [Forget About Setting Goals. Focus on This Instead.](https://jamesclear.com/goals-systems): focus on systems/processes instead of goals.
+
+## Rejecting reality?
+
+In year 1000 AD who would have thought that 1000 years later we would have AI deepfakes,
+human sex change (sex reassignment surgery, hormone therapy),
+and what else reality-bending technologies we have.
+
+In 2018 those technologies aren't perfect.
+We can see deepfake artifacts.
+We can tell apart transsexuals from their hips.
+Maybe in the future those technologies will be perfected.
+Maybe in the future people can be whoever they want to be.
+"You are who you want to be" is getting more literal.
+
+When that time comes, we will have more respect for philosophers.
+If everything is easy to fake, then what is real, and how do we know it's real?
+If everything is easy to fake, then what can be taken as proof in court?
+What really exists?
+If a man can easily become a woman, and a woman can easily become a man, then what does it mean to be a man/woman?
+Do ID cards still make sense if you are immortal and you change your identity every 6 months?
+Technology will force us to deal with ontology and epistemology.
+
+Reality discontents humans.
+We work hard to deceive our senses so that we can escape reality.
+We try to make imagination real, and make reality irrelevant.
+The Matrix is getting real.

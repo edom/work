@@ -280,3 +280,29 @@ Run several emacs processes:
         - [WP:XEmacs history](https://en.wikipedia.org/wiki/XEmacs#History)
         - [Xah Lee: My Experience of Emacs vs XEmacs](http://ergoemacs.org/emacs/emacs_vs_xemacs.html)
             - [Ben Wing: GNU Emacs and XEmacs Schism](http://ergoemacs.org/emacs/gnu_emacs_xemacs_schism_Ben_Wing.html)
+
+## How to uninstall Emacs on Ubuntu 14.04
+
+From [Uninstalling Emacs with apt-get: lessons in interface design](https://arp242.net/weblog/uninstalling_emacs_with_apt-get-_lessons_in_interface_design):
+
+```
+sudo apt-get remove 'emacs*'
+```
+
+## Trying spacemacs
+
+Spacemacs is quite polished compared to vanilla Emacs.
+
+Woe: Emacs can't install packages in parallel.
+
+What is helm?
+What is ivy?
+What is projectile?
+What is helm-projectile?
+
+- [Helm vs Ivy: What are the differences, what are the advantages? : emacs](https://www.reddit.com/r/emacs/comments/7vcrwo/helm_vs_ivy_what_are_the_differences_what_are_the/)
+
+## Using emacs for writing research papers
+
+- [jkitchin/org-ref: org-mode modules for citations, cross-references, bibliographies in org-mode and useful bibtex tools to go with it.](https://github.com/jkitchin/org-ref)
+- [Org mode for academic writing: Bibliographies with org-ref - Vivek's Info](http://viveks.info/org-mode-academic-writing-bibliographies-org-ref/)
