@@ -363,3 +363,5 @@ Does "maybe" mean "no"?
     - 2018-09-08: Too bad there is no clear way for android to charge while OTG (hosting) USB.
     Otherwise phones could kill netbooks.
     - 2018-09-08: a problem: can't close session with android keyboard (requires a physical keyboard plugged in via OTG USB)
+- psychology?
+    - [Forget About Setting Goals. Focus on This Instead.](https://jamesclear.com/goals-systems): focus on systems/processes instead of goals.

@@ -98,6 +98,16 @@ I want Emacs to transform in-buffer setting to front matter.
 I don't want BEGIN_HTML.
 I want proper metadata mapping.
 
+## Links
+
+The syntax is `[[URL][text]]`.
+
+To copy the URL of an Org link to clipboard, use the workaround `C-c C-l C-a C-k C-g`.
+
+- Woe: The link text cannot contain brackets.
+    - [emacs - How to escape square bracket in org mode links? - Stack Overflow](https://stackoverflow.com/questions/27284913/how-to-escape-square-bracket-in-org-mode-links)
+- [Bookmarklet to copy link to clipboard formatted as org-link! : emacs](https://www.reddit.com/r/emacs/comments/682wsu/bookmarklet_to_copy_link_to_clipboard_formatted/)
+
 ## Going deeper
 
 - [Creating Gantt charts by Exporting to TaskJuggler](https://orgmode.org/worg/org-tutorials/org-taskjuggler.html)

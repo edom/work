@@ -110,6 +110,11 @@ The more often a command is used, the shorter it should be.
 |delete from cursor to just before next word|dw||
 |delete from cursor to end of line|D / d$|C-k|
 |delete character under cursor|x|C-d|
+|delete to character|df\<char>|M-z \<char> RET / M-x zap-to-char|
+|delete to nth occurrence of char after cursor|d\<n>f\<char>|C-u \<n> M-z \<char> RET|
+|**indenting**||
+|indent|>|C-x TAB / M-x indent-rigidly|
+|indent||C-u 4 C-x TAB|
 |**find, search**|||
 |incremental search forward|/\<text>|C-s|
 |incremental search backward|/?<text>|C-r|

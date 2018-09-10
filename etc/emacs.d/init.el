@@ -1,34 +1,44 @@
-(require 'package)
+;; -*- lexical-binding: t -*-
 
-(package-initialize)
-
-;; Load customizations.
-
-(defun load-optional (path)
-  "load but ignore non-existent files"
-  (load path t))
-
-; Emacs manual "Saving Customizations"
-(setq custom-file "~/.emacs.d/custom.el")
-(load-optional custom-file)
-
-; Editor settings
-(setq indent-tabs-mode nil) ; use spaces instead of tabs
-(setq show-trailing-whitespace t)
-(show-paren-mode 1) ; highlight matching parentheses
-(setq show-paren-delay 0) ; immediately
-
-; Emacs manual "Saving Emacs Sessions"
-(desktop-save-mode 1)
+(defun my-customizations () "
+Entry point.
+Called at the end of init.el.
+"
+  (require 'package)
+  ; https://melpa.org/#/getting-started
+  (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+  (package-initialize)
+  ; See Emacs manual "Saving Customizations"
+  (setq custom-file "~/.emacs.d/custom.el")
+  (load custom-file t) ; optional
+  ; Editor settings
+  ; Dealing with whitespaces.
+  (setq-default indent-tabs-mode nil) ; use spaces instead of tabs
+  (setq-default tab-width 4)
+  (setq-default show-trailing-whitespace t)
+  ; Show matching parentheses
+  (show-paren-mode 1) ; highlight matching parentheses
+  (setq-default show-paren-delay 0) ; immediately
+  ; Emacs manual "Saving Emacs Sessions"
+  (desktop-save-mode 1)
+  ; Strip trailing whitespaces on save
+  (add-hook 'before-save-hook #'delete-trailing-whitespace t)
+  ; Other customizations
+  (my-org-customizations)
+  )
 
 ;;;;;;;; Configurations specific to my workflow.
 
 ;;;;;;;; Emacs 24.3.1 Org Mode 8.2.4
+;;;;;;;; Emacs 26.1 Org Mode 9.1.9
 
-(require 'ox)
-(require 'ox-html)
-
-(setq org-publish-project-alist
+(defun my-org-customizations ()
+  (require 'ox)
+  (require 'ox-html)
+  ; https://emacs.stackexchange.com/questions/41220/org-mode-disable-indentation-when-promoting-and-demoting-trees-subtrees
+  (setq-default org-adapt-indentation nil)
+  (setq-default org-agenda-files '("~/work/org"))
+  (setq org-publish-project-alist
       '(
         ("org-edom"
          :base-directory "/home/erik/work/org/"
@@ -39,18 +49,23 @@
          ; TODO org-myhtml-publish-to-myhtml
          :publishing-function org-html-publish-to-html
          )
-        ))
+        )
+      )
 
-;;;; Custom org mode backend for prepending YAML front matter to the output HTML document/fragment.
-;;;; This is because I have old contents (almost 200 markdown files) in Jekyll, as of 2018-09-10.
+  ;;;; Custom org mode backend for prepending YAML front matter to the output HTML document/fragment.
+  ;;;; This is because I have old contents (almost 200 markdown files) in Jekyll, as of 2018-09-10.
 
-; https://orgmode.org/worg/dev/org-export-reference.html
+  ; https://orgmode.org/worg/dev/org-export-reference.html
 
-(org-export-define-derived-backend 'myhtml 'html
-  :translate-alist '(
-    (template . myhtml-template)
-    (inner-template . myhtml-inner-template)
+  (org-export-define-derived-backend 'myhtml 'html
+    :translate-alist '(
+      (template . myhtml-template)
+      (inner-template . myhtml-inner-template)
+      )
     )
+
+  (add-hook 'org-mode-hook #'my-org-key-bindings t)
+
   )
 
 (defun myhtml-template (contents info)
@@ -124,4 +139,6 @@ Publish a website?
   (global-set-key (kbd "s-p") 'my-org-publish)
   )
 
-(add-hook 'org-mode-hook #'my-org-key-bindings t)
+;;;;;;;; End
+
+(my-customizations)

@@ -91,3 +91,22 @@ Alternatively, you can also run `sudo -K` to remove the cache.
 ## Probably relevant Twitters
 
 - [nixcraft](https://twitter.com/nixcraft): some humor, some important
+
+## Building software for old Ubuntu
+
+Suppose:
+
+- You are using Ubuntu 14.04.
+- Ubuntu 14.04 comes with Emacs 24.
+- You want to build Emacs 26 (because you want Spacemacs).
+
+You may be able to do that.
+Install the build dependencies, and hope that emacs 26 doesn't get too edgy with its libraries.
+
+```
+sudo apt-get build-dep emacs24
+```
+
+That is from [How to Build Emacs on Linux](http://ergoemacs.org/emacs/building_emacs_on_linux.html).
+
+You can do that for other software, as long as they don't require dependencies that are too recent.
