@@ -238,6 +238,7 @@ Sistem kita mengubah orang muda idealis menjadi orang tua korup?
 Orang baik dalam sistem buruk akan jadi orang buruk.
 
 - https://theconversation.com/buasnya-sistem-politik-indonesia-halangi-upaya-reformasi-dari-dalam-oleh-mantan-aktivis-94523
+- [What do Indonesians know/think about the new party PSI (Partai Solidaritas Indonesia)? And how big is the chance that the PSI will get a place in the parliament? - Quora](https://www.quora.com/What-do-Indonesians-know-think-about-the-new-party-PSI-Partai-Solidaritas-Indonesia-And-how-big-is-the-chance-that-the-PSI-will-get-a-place-in-the-parliament)
 
 ## Ucapan terima kasih
 

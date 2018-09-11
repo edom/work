@@ -28,6 +28,11 @@ Called at the end of init.el.
     ("melpa-stable" . "https://stable.melpa.org/packages/")
     ))
   (package-initialize)
+
+  ; use-package, for lazy loading to speed up emacs start-up when using many packages
+  (package-install 'use-package)
+  (require 'use-package)
+
   (load custom-file t) ; optional; custom-file is set somewhere else in this file
   ; Editor settings
   ; Dealing with whitespaces.
@@ -42,6 +47,7 @@ Called at the end of init.el.
   ; Strip trailing whitespaces on save
   (add-hook 'before-save-hook #'delete-trailing-whitespace t)
   ; Other customizations
+  (use-package magit :ensure t :pin melpa-stable)
   (my-org-customizations)
   )
 
@@ -53,6 +59,16 @@ Called at the end of init.el.
 (defun my-org-customizations ()
   (require 'ox)
   (require 'ox-html)
+  (use-package org-ref
+    :ensure t
+    :config (let
+                ((bibfiles '("~/work/org/bib.bib")))
+              (setq reftex-default-bibliography bibfiles
+                    org-ref-default-bibliography bibfiles
+                    bibtex-completion-bibliography bibfiles
+                    )
+              )
+    )
   ; https://emacs.stackexchange.com/questions/41220/org-mode-disable-indentation-when-promoting-and-demoting-trees-subtrees
   (setq-default org-adapt-indentation nil)
   (setq-default org-agenda-files '("~/work/org"))

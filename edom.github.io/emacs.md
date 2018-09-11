@@ -217,6 +217,7 @@ Use `C-h m` or `M-x describe-mode` to get some help.
 - funcall
 
 For someone used to Scheme, Emacs Lisp is unpleasant.
+2018-09-12: When will Guile Emacs be mainstream?
 
 - How do I define a local function?
     - You define it with let and lambda, as in Scheme.
@@ -233,6 +234,9 @@ For someone used to Scheme, Emacs Lisp is unpleasant.
     - Emacs Lisp doesn't have proper tail calls.
 - Contentious
     - Lisp macro is simpler than Scheme macro, but Lisp macro is unhygienic.
+- [Famous Programers on How Common Lisp Sucks](http://xahlee.info/comp/Common_Lisp_quotations.html)
+- [EmacsWiki: Why Does Elisp Suck](https://www.emacswiki.org/emacs/WhyDoesElispSuck)
+- [EmacsWiki: Emacs Lisp Limitations](https://www.emacswiki.org/emacs/EmacsLispLimitations)
 
 ### Suggested workflow
 
@@ -304,5 +308,14 @@ What is helm-projectile?
 
 ## Using emacs for writing research papers
 
+- [org-ref installation](https://github.com/jkitchin/org-ref#installation)
 - [jkitchin/org-ref: org-mode modules for citations, cross-references, bibliographies in org-mode and useful bibtex tools to go with it.](https://github.com/jkitchin/org-ref)
 - [Org mode for academic writing: Bibliographies with org-ref - Vivek's Info](http://viveks.info/org-mode-academic-writing-bibliographies-org-ref/)
+
+## Increasing emacs usability
+
+- [jwiegley/use-package: A use-package declaration for simplifying your .emacs](https://github.com/jwiegley/use-package)
+
+Woe: Magit requires Git >= 1.9.4.
+Ubuntu 14.04 comes with Git 1.9.1.
+Build from source, or add a PPA.

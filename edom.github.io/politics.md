@@ -180,3 +180,18 @@ See James Damore lawsuit.
         - How do we create a system that is robust, that depends only minimally on the electees, that works for a wide variety of malicious electees?
             - How do we make government fear the people, and people fear the government?
             How do we make mutual fear?
+- [The Grand Theory of Amazon - YouTube](https://www.youtube.com/watch?v=UyohSu-Ft_U)
+    - Amazon is a scale company.
+    It specializes in scaling.
+- The solution is to make corruption impossible and irrelevant.
+- Work-for-hire (WFH) contracts should be illegal, and be replaced with irrevocable licensing.
+Every man should own his own labor.
+Work-for-hire contributes to social injustice.
+- Solution to extremism/radicalism:
+Make it a law that every copy of Quran/Bible/other holy book must be accompanied with historical context.
+The book should prescribe how it should be interpreted.
+People should not invent their own interpretations.
+The interpretation must be justified by historical context.
+    - [Why Does the Quran Require Context? \| About Islam](http://aboutislam.net/counseling/ask-about-islam/why-does-the-quran-require-context/)
+    - [Why the historical context of the Qur'an and the Bible cannot be ignored](https://www.sbs.com.au/news/why-the-historical-context-of-the-qur-an-and-the-bible-cannot-be-ignored)
+    - synonyms: interpretation, exegesis, tafsir

@@ -5,15 +5,17 @@ set -o nounset
 set -o pipefail
 
 main() {
-    case "$1" in
+    local arg="$1"
+    shift
+    case "$arg" in
         (1) # for editing emacs lisp
-            emacs --maximize
+            emacs --maximize "$@"
             ;;
         (2) # for editing plan.org
-            emacs --maximize --no-desktop --visit org/plan.org
+            emacs --maximize --no-desktop --visit org/plan.org "$@"
             ;;
         (3) # for reading info
-            emacs --fullheight --quick --eval '(info "/usr/share/info/org.gz")'
+            emacs --fullheight --quick --eval '(info "/usr/share/info/org.gz")' "$@"
             ;;
     esac
 }

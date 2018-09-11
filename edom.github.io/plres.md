@@ -122,6 +122,9 @@ I think that is wise.
     - [Sixten](https://github.com/ollef/sixten)
     - Dhall
     - [Morte: an intermediate language for super-optimizing functional programs](http://www.haskellforall.com/2014/09/morte-intermediate-language-for-super.html)
+    - [Is there such a thing as a low-level functional language? : haskell](https://www.reddit.com/r/haskell/comments/27z7yw/is_there_such_a_thing_as_a_lowlevel_functional/)
+        - ATS and Rust
+    - [What are some of the most abstract programming languages in 2015? - Quora](https://www.quora.com/What-are-some-of-the-most-abstract-programming-languages-in-2015)
 - Designing programming languages:
     - 2018 article "Interdisciplinary Programming Language Design" [pdf](http://www.cs.cmu.edu/~mcoblenz/HCPLD-preprint.pdf)
     - 2018 article "A Programmable Programming Language" [pdf](http://silo.cs.indiana.edu:8346/c211/impatient/cacm-draft.pdf)
@@ -163,6 +166,13 @@ I think that is wise.
 - a list of people http://www.angelfire.com/tx4/cus/people/index.html
 - other people's collections
     - https://github.com/steshaw/plt
+- google search for "haskell code generation"
+    - [veggies: Haskell code generation from scratch – Blog – Joachim Breitner's Homepage](https://www.joachim-breitner.de/blog/719-veggies__Haskell_code_generation_from_scratch)
+        - [veggies: Haskell code generation from scratch : haskell](https://www.reddit.com/r/haskell/comments/66q87y/veggies_haskell_code_generation_from_scratch/)
+    - [HBURG - Haskell Bottom Up Rewrite Generator \| ByteLabs](https://www.bytelabs.org/project/haskell-bottom-up-rewrite-generator/)
+- software development is software too
+    - meta-language
+        - 2016, "JunGL: a Scripting Language for Refactoring", [pdf](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.94.859&rep=rep1&type=pdf)
 
 ### People who share the vision for *the* programming language
 
@@ -702,9 +712,10 @@ What can we assume about the user's skill/knowledge/background?
 
 ## Is inheritance subtyping?
 
-- 1989, "Inheritance is not subtyping", [pdf](https://www.cs.utexas.edu/users/wcook/papers/InheritanceSubtyping90/CookPOPL90.pdf)
-- 2013, "Inheritance is subtyping", [pdf](https://pdfs.semanticscholar.org/569c/9b35375144756761167fd4a2571b1d97f0e8.pdf)
-    - basically tells the user to read AbdelGawad's other works
+The short article [2] basically tells the user to read AbdelGawad's other works.
+
+- [1] 1989, "Inheritance is not subtyping", [pdf](https://www.cs.utexas.edu/users/wcook/papers/InheritanceSubtyping90/CookPOPL90.pdf)
+- [2] 2013, "Inheritance is subtyping", [pdf](https://pdfs.semanticscholar.org/569c/9b35375144756761167fd4a2571b1d97f0e8.pdf)
 - [Subtyping vs inheritance](https://www.cmi.ac.in/~madhavan/courses/pl2009/lecturenotes/lecture-notes/node28.html)
     - Subtyping and inheritance are orthogonal concepts.
 
@@ -800,3 +811,35 @@ parse_jk = parse_cm + parse_lq
 - [Grammar reuse](https://jeffreykegler.github.io/Ocean-of-Awareness-blog/individual/2015/12/composable.html)
 - [melt-umn/silver: An attribute grammar-based programming language for composable language extensions](https://github.com/melt-umn/silver)
 - OMeta, Katahdin
+
+## Some tentative plans
+
+- Create a language that compiles to Haskell.
+- [bennofs/haskell-generate: Type-safe library for generating haskell source code](https://github.com/bennofs/haskell-generate)
+
+## 2018-09-12 question
+
+Do you know of anything that computes (generates code for) the products/sums of data-types?
+Do you know of any libraries that enable us to describe how to transform a data type to a related data type?
+Do you know of anything resembling template metaprogramming for Haskell that is not Template Haskell?
+For example:
+
+```
+data A = A1 | A2
+data B = B1 | B2
+
+-- <input>
+generate data P = A * B
+generate data S = A + B
+-- </input>
+
+-- <output>
+data P  = P_A1_B1
+        | P_A1_B2
+        | P_A2_B1
+        | P_A2_B2
+
+data S  = S_A1 | S_A2
+        | S_B1 | S_B2
+-- </output>
+```

@@ -81,3 +81,7 @@ Distraction osteogenesis. Breaking the leg bones. Undesirable side effects.
     - https://en.wikipedia.org/wiki/Gibson_assembly
 - https://www.boredpanda.com/chinese-family-before-and-after-6-month-weight-loss-results-fan/
 - [Your Skin Cells Could Make a Baby, Will This Be the End of Infertility?](https://www.youtube.com/watch?v=2mIeuTjDqwQ)
+- falling asleep quickly
+    - [A secret military technique could help you fall asleep in 2 minutes - Business Insider](https://www.businessinsider.com/a-secret-military-technique-could-help-you-fall-asleep-in-2-minutes-2018-9/?IR=T)
+        - Relax all muscles
+        - Think "don't think"
