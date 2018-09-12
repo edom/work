@@ -119,3 +119,13 @@ An unenforceable law practically doesn't exist.
     - [WP:General average](https://en.wikipedia.org/wiki/General_average)
 - legal loopholes, programming errors
     - [The Perfect Crime May Be Possible in Yellowstone Park | Mental Floss](https://mentalfloss.com/article/83439/perfect-crime-may-be-possible-yellowstone-park)
+
+## Handling lawyers
+
+If you don't know, don't act like you know.
+
+Watch out for baits.
+Don't be greedy.
+
+- Risky stuffs
+    - [I am the guy who owned MikeRoweSoft.com. AMA : IAmA](https://www.reddit.com/r/IAmA/comments/ajsih/i_am_the_guy_who_owned_mikerowesoftcom_ama/c0hy3d8/)

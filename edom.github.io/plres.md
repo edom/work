@@ -367,6 +367,9 @@ A type encodes meaning into bit patterns.
     - For example, consider the bit pattern 11111111.
         - It means -1 as an int8.
         - It means 127 as an uint8.
+    - Types help translate programs.
+
+Programming languages have semantics, even if it is implicit.
 
 A type defines the memory layout (bit pattern) of its values.
 
@@ -378,6 +381,11 @@ There are also other uses of types.
 
 The question is: What is a type?
 What principles should we follow when we design a language?
+
+- [Church vs Curry Types - LispCast](https://lispcast.com/church-vs-curry-types/)
+- https://news.ycombinator.com/item?id=8045115
+    - [Dynamic Languages are Static Languages \| Existential Type](https://existentialtype.wordpress.com/2011/03/19/dynamic-languages-are-static-languages/)
+- [Church vs Curry Types -- Two conflicting perspectives : programming](https://www.reddit.com/r/programming/comments/2cavea/church_vs_curry_types_two_conflicting_perspectives/)
 
 ### Type-checking
 

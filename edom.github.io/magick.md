@@ -222,3 +222,5 @@ Still looking for replicable experiment.
 - dying, near-death experiences
     - [YT:From life to death, beyond and back - Thomas Fleischmann - TEDxTUHHSalon](https://www.youtube.com/watch?v=mMYhgTgE6MU)
 - [WP:Dream telepathy](https://en.wikipedia.org/wiki/Dream_telepathy)
+- [[Serious] What, in your opinion, is the most convincing photo captured of something supernatural? : AskReddit](https://www.reddit.com/r/AskReddit/comments/1sv39b/serious_what_in_your_opinion_is_the_most/)
+    - https://www.reddit.com/r/Paranormal/comments/1b0k5d/i_aint_afraid_of_no_ghost/
