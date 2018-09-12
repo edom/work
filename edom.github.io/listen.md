@@ -737,3 +737,8 @@ from Metal Gear Solid: Peace Walker
             - [some demo clips](https://www.shazam.com/track/344705388/%D0%B4%D0%B5%D0%B1%D0%B5)
             - [some MP3](https://mp3livelisten.ru/search/gul-nur-satylganova)
         - [Гульнур Сатылганова-Сага Текст/ Gulnur Satylganova-Saga Lyrics - YouTube](https://www.youtube.com/watch?v=ddvjyr_TmcM)
+- [Anne Sophie-Mutter - Mendelssohn Violin Concerto in E minor, Op.64 - Kurt Masur - YouTube](https://www.youtube.com/watch?v=K67o86CS5uo)
+    - lovely Jewish-sounding theme
+- [Hauschka - Boiler Room In Stereo - YouTube](https://www.youtube.com/watch?v=HYsvlJgtAgY&t=10s)
+    - Gene Pozniak's comment: 'This is the coolest and most listenable use of "prepared piano" technique I've ever heard. :-)'
+    - from [CMV: "Contemporary classical music" after WWII is generally pretentious garbage. : changemyview](https://www.reddit.com/r/changemyview/comments/848eio/cmv_contemporary_classical_music_after_wwii_is/)
