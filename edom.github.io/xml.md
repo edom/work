@@ -16,7 +16,7 @@ List of editors:
     - IntelliJ IDEA
 - I don't know
     - emacs nxml-mode
-    - jEdit XML plugin
+    - [jEdit XML plugin](http://plugins.jedit.org/plugins/?XML)
     - QXMLEdit? Can it autocomplete?
     - XML Notepad
 

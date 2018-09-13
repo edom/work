@@ -358,6 +358,10 @@ Can we formalize "a program is an executable formal system" using Grue's map the
     - `Fix F = F (Fix F)` is the least fixed point of F.
 - Why should we care about parametricity?
     - [Parametricity: Money for Nothing and Theorems for Free - Bartosz Milewski's Programming Cafe](https://bartoszmilewski.com/2014/09/22/parametricity-money-for-nothing-and-theorems-for-free/)
+- What is subtyping?
+    - A subtyping relation is an ordering of types.
+        - So what? That is technically correct but that doesn't give any insights.
+        - A subtype is an ordering that follows the Liskov substitution principle?
 
 ### What is a type? Understanding what a type is from how it is used
 
