@@ -195,3 +195,10 @@ The interpretation must be justified by historical context.
     - [Why Does the Quran Require Context? \| About Islam](http://aboutislam.net/counseling/ask-about-islam/why-does-the-quran-require-context/)
     - [Why the historical context of the Qur'an and the Bible cannot be ignored](https://www.sbs.com.au/news/why-the-historical-context-of-the-qur-an-and-the-bible-cannot-be-ignored)
     - synonyms: interpretation, exegesis, tafsir
+- How much political power do we have?
+    - [How Much Political Power Do You Have? - The Atlantic](https://www.theatlantic.com/magazine/archive/2015/07/power-quiz/395273/)
+    - [BBC iWonder - Do you know how much political power is in your pocket?](http://www.bbc.co.uk/guides/zpyr4wx)
+- office politics
+    - [How Much Political Power Do You Have? - Your Office Coach](http://www.yourofficecoach.com/coaching-resources/office-politics/political-games/how-much-political-power-do-you-have)
+- [Money's power in politics: Give everyone a share - CNN](https://edition.cnn.com/2015/02/16/opinion/schmitt-politics-money/index.html)
+- [How To Exercise Political Power Part 1](https://www.crummy.com/2004/11/01/2)

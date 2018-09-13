@@ -86,6 +86,22 @@ Begin the line with a hyphen (`-`).
 
 `S-TAB` to unindent the current item one level outward.
 
+## Opening calendar to insert dates
+
+`C-c .` open calendar to insert date; the date will show up in agenda.
+
+`C-c ! RET` open calendar to insert date; the date won't show up in agenda.
+
+- In the calendar
+    - The default selected date is today date.
+    - S-LEFT / S-RIGHT move selection 1 day backward/forward
+    - M-S-LEFT / M-S-RIGHT move selection 1 month backward/forward
+    - \< / > scroll calendar by 1 month
+    - C-v / M-v scroll calendar by 3 months
+    - M-S-UP / M-S-DOWN scroll calendar by 1 year
+
+- [org mode - Change date from active to inactive - Emacs Stack Exchange](https://emacs.stackexchange.com/questions/37430/change-date-from-active-to-inactive)
+
 ## Exporting to HTML for use with Jekyll
 
 I have already had a wiki in Jekyll.

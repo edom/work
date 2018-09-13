@@ -319,3 +319,8 @@ What is helm-projectile?
 Woe: Magit requires Git >= 1.9.4.
 Ubuntu 14.04 comes with Git 1.9.1.
 Build from source, or add a PPA.
+
+Automatic indentation of comments
+[surprises](https://stackoverflow.com/questions/26312317/wrong-indentation-of-comments-in-emacs)
+people who don't know
+[Emacs Lisp comment conventions](https://www.gnu.org/software/emacs/manual/html_node/elisp/Comment-Tips.html).

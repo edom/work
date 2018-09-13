@@ -391,3 +391,22 @@ Reality discontents humans.
 We work hard to deceive our senses so that we can escape reality.
 We try to make imagination real, and make reality irrelevant.
 The Matrix is getting real.
+
+## what
+
+- Ethics and the workforce
+    - [Where are the programmers who give a shit? – Hacker Noon](https://hackernoon.com/where-are-the-programmers-who-give-a-shit-87f859f13f75)
+        - [What are the 10 most harmful jobs? - 80,000 Hours](https://80000hours.org/2015/08/what-are-the-10-most-harmful-jobs/)
+            - Not everyone agrees. See the comment section.
+- [Market for Corporate Control – Econlib](https://www.econlib.org/library/Enc/MarketforCorporateControl.html)
+    - "Markets discipline producers by rewarding them with profits when they create value for consumers and punishing them with losses when they fail to create enough value for consumers."
+- Find a high-social-impact job suitable for you: [Get social impact career ideas - 80,000 Hours](https://80000hours.org/career-quiz/#/)
+    - I don't understand the recommendations.
+- [How to find the world's most pressing problems](https://80000hours.org/career-guide/most-pressing-problems/)
+- [The evidence on how to find the right career for you - 80,000 Hours](https://80000hours.org/career-guide/personal-fit/)
+- [Evidence-based advice on how to be successful in any job - 80,000 Hours](https://80000hours.org/career-guide/how-to-be-successful/)
+
+Example of federated/decentralized social networks:
+
+- [Kari Nordmann's comment](https://medium.com/@rxpvh2000/where-are-the-programmers-who-give-a-shit-d27ad2ef24fc):
+"Explore federated (decentralized) social networks (Mastodon, diaspora*, Friendica, Hubzilla, GNU Social, Socialhome, Pleroma, GangGo) "

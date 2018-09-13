@@ -129,3 +129,30 @@ Don't be greedy.
 
 - Risky stuffs
     - [I am the guy who owned MikeRoweSoft.com. AMA : IAmA](https://www.reddit.com/r/IAmA/comments/ajsih/i_am_the_guy_who_owned_mikerowesoftcom_ama/c0hy3d8/)
+
+## Making good laws
+
+Good laws satisfactorily answers:
+
+- How are we going to enforce it?
+- What is the worst that haters can do?
+- What questions might arise?
+- What undefined cases?
+
+Good laws:
+
+- Can be enforced practically (sane effort and cost)
+- Addresses the root cause of the problem
+- Minimizes unintended effects (is well-targeted)
+- Is complete (handle all cases) and Leaves no questions
+- Is timeless/future-proof (doesn't depend on time) (is this even possible?)
+
+People are creative.
+They will find ways around laws.
+
+Questionable example: even-odd car license plate rule.
+If cars are cheap, then people will just buy two cars.
+The root cause of the problem is bad/expensive/unintegrated public transport.
+
+Bad example: legislating morality.
+Are you going to visit each of the 100 million homes and install a camera?

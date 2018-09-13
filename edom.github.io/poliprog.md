@@ -5,12 +5,20 @@ permalink: /poliprog.html
 ---
 
 - Program kerja saya seandainya saya menjadi anggota DPR:
+    - evidence-based legislation?
+    data-driven legislation?
     - mengilegalkan *lobbying*
     - mengganti *retributive justice* dengan *restorative justice*
     - menertibkan kampanye politik
         - membatasi kampanye hanya dalam bentuk prospektus (tertulis) berisi rencana program kerja, seperti yang sedang Anda lihat
         - mengumpulkan prospektus dalam satu website
         - melarang semua bentuk lain
+    - mengurangi ekstremisme/radikalisme
+        - Setiap ayat sensitif dalam kitab suci harus disertai komentar tentang konteks sejarah turunnya ayat tersebut.
+        Terutama Quran karena mayoritas penduduk Indonesia Muslim.
+        - Kitab suci bisa berupa buku kertas, aplikasi komputer, dll.
+        - Bagaimana cara mencegah [WP:Auto-segregation](https://en.wikipedia.org/wiki/Auto-segregation)?
+        Asimilasi vs akulturasi vs absorpsi vs integrasi?
 - Program kerja saya seandainya saya menjadi gubernur DKI:
     - Solusi kemacetan tol Jakarta?
         - Solusi:

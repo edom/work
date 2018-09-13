@@ -27,6 +27,8 @@ https://en.wikipedia.org/wiki/Machiavellianism_in_the_workplace
 https://en.wikipedia.org/wiki/Workplace_deviance
 https://en.wikipedia.org/wiki/Live_and_let_live_(World_War_I)
 
+Does performance review make employees think short term and seek quick small wins?
+
 ## Why does the Internet think that performance reviews don't work?
 
 - http://www.growthengineering.co.uk/annual-performance-reviews-dont-work/
