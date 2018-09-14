@@ -309,6 +309,10 @@ Can we formalize "a program is an executable formal system" using Grue's map the
     - miniKanren
         - Byrd PhD thesis https://scholarworks.iu.edu/dspace/bitstream/handle/2022/8777/Byrd_indiana_0093A_10344.pdf
             - mentions other programming languages: Prolog, Mercury, Curry
+- https://en.wikipedia.org/wiki/Multi-adjoint_logic_programming
+- ramble
+    - https://www.researchgate.net/project/Ontology-oriented-programming
+    - http://www.doc.ic.ac.uk/~klc/OntProg.html
 
 ## Toward a language with first-class syntax?
 
@@ -770,6 +774,7 @@ Why don't we just build ASN.1 into the language?
 - Read this: [Lecture 4: Higher Polymorphism \| Advances in Programming Languages](https://blog.inf.ed.ac.uk/apl16/archives/178/comment-page-1)
 - [Rethink Structural Types · Issue #1886 · lampepfl/dotty](https://github.com/lampepfl/dotty/issues/1886)
     - "However, there is another area where statically-typed languages are often more awkward than dynamically-typed ones: database access."
+    - Keynote - What's Different In Dotty by Martin Odersky https://www.youtube.com/watch?v=9lWrt6H6UdE
 
 ## Typing records
 
@@ -855,3 +860,7 @@ data S  = S_A1 | S_A2
         | S_B1 | S_B2
 -- </output>
 ```
+
+## Whole-program optimization?
+
+- https://stackoverflow.com/questions/3416980/why-arent-whole-program-optimizations-more-prevalent-now/27757382

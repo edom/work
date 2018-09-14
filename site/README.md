@@ -1,4 +1,0 @@
-- Plans
-    - Absorb ~/sites/.
-    - Absorb ~/research/.
-    - Make edom.github.io repository HTML only. Move source here. Preprocess source.

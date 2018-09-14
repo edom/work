@@ -110,3 +110,7 @@ sudo apt-get build-dep emacs24
 That is from [How to Build Emacs on Linux](http://ergoemacs.org/emacs/building_emacs_on_linux.html).
 
 You can do that for other software, as long as they don't require dependencies that are too recent.
+
+## what
+
+- https://medium.com/netflix-techblog/linux-performance-analysis-in-60-000-milliseconds-accc10403c55

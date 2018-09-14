@@ -13,6 +13,7 @@ date: 2018-08-30 03:41 +0700
     - similar: replace, supersede, deprecate
 - to fudgel = to pretend to work while in reality you are not doing anything ([Wiktionary](https://en.wiktionary.org/wiki/fudgel))
     - to procrastinate = to put off; to delay ([Wiktionary](https://en.wiktionary.org/wiki/procrastinate))
+- to lucubrate = to work diligently by artificial light; to study at night [Wiktionary](https://en.wiktionary.org/wiki/lucubrate)
 
 ## Colorful synonyms of bad
 

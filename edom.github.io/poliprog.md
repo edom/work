@@ -13,12 +13,19 @@ permalink: /poliprog.html
         - membatasi kampanye hanya dalam bentuk prospektus (tertulis) berisi rencana program kerja, seperti yang sedang Anda lihat
         - mengumpulkan prospektus dalam satu website
         - melarang semua bentuk lain
-    - mengurangi ekstremisme/radikalisme
+    - mengurangi/meniadakan ekstremisme/radikalisme
         - Setiap ayat sensitif dalam kitab suci harus disertai komentar tentang konteks sejarah turunnya ayat tersebut.
         Terutama Quran karena mayoritas penduduk Indonesia Muslim.
         - Kitab suci bisa berupa buku kertas, aplikasi komputer, dll.
         - Bagaimana cara mencegah [WP:Auto-segregation](https://en.wikipedia.org/wiki/Auto-segregation)?
         Asimilasi vs akulturasi vs absorpsi vs integrasi?
+        - Apakah efektif?
+        Quran terjemahan ekstremis akan tetap saja beredar underground.
+        Tapi kebijakan ini mungkin mempengaruhi Muslim moderat yang selama ini complicit atau bahkan diam-diam setuju dengan ekstremis.
+        - Kita sebaiknya tidak memaksakan/mengatur kepercayaan dengan undang-undang.
+        - Bagaimana seandainya ada orang mengarang kitab suci sendiri?
+        - Menyerahkan pendidikan agama sepenuhnya kepada keluarga (dari yang tadinya sekolah).
+            - Yang seharusnya diajarkan di sekolah adalah sejarah agama, bukan agama.
 - Program kerja saya seandainya saya menjadi gubernur DKI:
     - Solusi kemacetan tol Jakarta?
         - Solusi:

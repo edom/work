@@ -122,7 +122,15 @@ To copy the URL of an Org link to clipboard, use the workaround `C-c C-l C-a C-k
 
 - Woe: The link text cannot contain brackets.
     - [emacs - How to escape square bracket in org mode links? - Stack Overflow](https://stackoverflow.com/questions/27284913/how-to-escape-square-bracket-in-org-mode-links)
-- [Bookmarklet to copy link to clipboard formatted as org-link! : emacs](https://www.reddit.com/r/emacs/comments/682wsu/bookmarklet_to_copy_link_to_clipboard_formatted/)
+
+## Chrome bookmarklet: Make org-mode link for page
+
+This may produce invalid markup.
+Check before you copy.
+
+```
+javascript:window.prompt("Copy to clipboard: Ctrl+C, Enter", "[[" + document.URL + "][" + document.title + "]]");
+```
 
 ## Going deeper
 

@@ -54,9 +54,6 @@ We should join forces to reach our shared goals.
                     - [Android]({% link android.md %}). Last time I developed for Android in 2012. My knowledge is irrelevant now.
             - [Using Git]({% link git.md %})
                 - [Speeding up Git]({% link gitspd.md %})
-            - [Using Emacs]({% link emacs.md %})
-                - [Using Org Mode]({% link orgmode.md %})
-                - [Emacs for vi users]({% link emacsvi.md %})
             - [Making contributable open-source projects]({% link opensrc.md %})
                 - [Building online communities]({% link community.md %})
                 - Maintaining open-source projects
@@ -150,6 +147,9 @@ We should join forces to reach our shared goals.
                     - [RationalWiki: Difference between anarchy and mobocracy](https://rationalwiki.org/wiki/Anarchy#Contrast_with_mobocracy)
 - [Doing research better]({% link meta_research.md %})
     - [Organizing knowledge]({% link knorg.md %})
+        - [Using Emacs]({% link emacs.md %})
+            - [Using Org Mode]({% link orgmode.md %})
+            - [Emacs for vi users]({% link emacsvi.md %})
         - [Rebooting human knowledge in case of mass destruction]({% link reboot.md %})
         - The page [Information architecture]({% link infarch.md %}) should be merged into "Organizing knowledge".
 - Living in the 21st century

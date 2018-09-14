@@ -179,3 +179,12 @@ When such metric deviates from baseline, we know there is problem, but where?
 What other metrics should we monitor?
 
 - HTTP 4xx and 5xx status codes and connection failures?
+
+## Open source Heroku/PaaS/dashboard alternative?
+
+Google search "open source heroku clone".
+
+As usual, there are too many open source options.
+
+- From [What are some open source Heroku alternatives? - Quora](https://www.quora.com/What-are-some-open-source-Heroku-alternatives):
+Dokku, Flynn, Convox?, Globo.com Tsuru, Apache Stratos, cloudify-cosmo, lastbackend, CaptainDuckDuck

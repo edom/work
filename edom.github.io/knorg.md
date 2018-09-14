@@ -4,6 +4,11 @@ date: 2018-06-04 23:50 +0700
 permalink: /knorg.html
 ---
 
+- TOC
+{:toc}
+
+## what
+
 - Knowledge should be ordered descending by importance, from the most important?
 - Knowledge should be ordered ascending by verifiability, from the easiest to verify?
 - Knowledge should be grouped by usefulness?
@@ -64,3 +69,9 @@ Can machine cluster documents by the task they help accomplish?
 - knowledge organization?
     - 2016, article, [Scaling Knowledge at Airbnb – Airbnb Engineering & Data Science – Medium](https://medium.com/airbnb-engineering/scaling-knowledge-at-airbnb-875d73eff091)
     - 2018, article, [Using Airbnb's Knowledge Repository to Scale Your Organization's Knowledge - SocialCops](https://blog.socialcops.com/technology/engineering/airbnb-knowledge-repository-scale-knowledge/)
+
+## The personal knowledge base?
+
+See [Designing a Personal Knowledgebase – A Curious Mix](http://www.acuriousmix.com/2014/09/03/designing-a-personal-knowledgebase/).
+
+See also its HackerNews commend thread [Designing a Personal Knowledgebase \| Hacker News](https://news.ycombinator.com/item?id=8270759).
