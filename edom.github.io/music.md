@@ -53,3 +53,5 @@ date: 2016-03-27 14:14:08 +0700
     - The ideal band size is less than 5 people?
 - http://www.hopefulcases.org/
     - https://www.reddit.com/r/MadeMeSmile/comments/8fjd1u/on_my_hellish_nyc_commute/
+- music composition / sound design method; imitate language tone/contour
+    - ["How I composed the Windows 10 calendar alert" - YouTube](https://www.youtube.com/watch?v=1sqg63imHx0)

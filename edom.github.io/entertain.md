@@ -276,3 +276,5 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
 - [Funny Babies Confused by Twin Parents Compilation - YouTube](https://www.youtube.com/watch?v=alNI45hzzmY)
 - cat videos
     - [Every day. Every. Darn. Day. - YouTube](https://www.youtube.com/watch?v=9EYZnSXEla0)
+- bear videos
+    - [Bruiser Bear - YouTube](https://www.youtube.com/watch?v=I-yqvT8vKZc), bear belly-flopping into pool

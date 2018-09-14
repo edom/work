@@ -87,13 +87,13 @@ Called at the end of init.el.
   (setq org-publish-project-alist
       '(
         ("org-edom"
-         :base-directory "/home/erik/work/org/"
+         :base-directory "~/work/org/"
          :base-extension "org"
-         :publishing-directory "/tmp/orgtest/"
+         :publishing-directory "~/work/edom.github.io/"
          :recursive t
          :body-only t
          ; TODO org-myhtml-publish-to-myhtml
-         :publishing-function org-html-publish-to-html
+         :publishing-function org-myhtml-publish-to-myhtml
          )
         )
       )
@@ -108,17 +108,32 @@ Called at the end of init.el.
       (template . myhtml-template)
       (inner-template . myhtml-inner-template)
       )
+    ;; See the documentation of the variable 'org-export-options-alist'.
+    :options-alist '(
+      (:permalink "PERMALINK" "permalink" nil t)
+      )
     )
 
   (add-hook 'org-mode-hook #'my-org-key-bindings t)
 
   )
 
+(defun org-get-html-extension (plist)
+  (or (plist-get plist :html-extension) org-html-extension "html"))
+
+(defun org-myhtml-publish-to-myhtml (plist filename pub-dir)
+  "See the function 'org-html-publish-to-html' in 'ox-html.el'."
+  (org-publish-org-to 'myhtml filename (concat "." (org-get-html-extension plist)) plist pub-dir)
+  )
+
+;; 'contents' is transcoded string.
+;; 'info' is plist of export options.
+
 (defun myhtml-template (contents info)
   (concat (my-front-matter info) (org-html-template contents info)))
 
 (defun myhtml-inner-template (contents info)
-  (concat (my-front-matter info) (org-html-inner template contents info)))
+  (concat (my-front-matter info) (org-html-inner-template contents info)))
 
 ;; TODO escape YAML string
 (defun my-front-matter (info) "
@@ -129,10 +144,21 @@ For example, #+TITLE should map to title.
 
 Complication: #+TITLE can have markup, but YAML front matter expects title to be string.
 "
-  (let* (
+  (lexical-let* (
          (get (lambda (key) (org-export-data (plist-get info key) info)))
+         ;; XXX This is a hack; base-dir should come from publishing config.
+         ;;
+         ;; The proper solution is something like (file-relative-name input-path base-dir).
+         ;;
+         ;; How does org HTML exporter translate a link to that.org into a link to that.html?
+         ;; If this.org has a link to that.org, then this.html has a link to that.html.
+         ;; When exporting, org replaces every link to that.org with a link to that.html.
+         ;; How does org do that?
+         ;;
+         ;; See also https://www.gnu.org/software/emacs/manual/html_node/elisp/File-Names.html#File-Names
+         (base-dir (expand-file-name "~/work/org/"))
          (title (funcall get ':title))
-         (date (funcall get ':date))
+         (date (org-export-data (funcall get ':date) info))
          (input-path (funcall get ':input-file))
          (permalink (funcall get ':permalink))
          )

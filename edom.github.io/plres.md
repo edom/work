@@ -377,6 +377,10 @@ A type encodes meaning into bit patterns.
         - It means 127 as an uint8.
     - Types help translate programs.
 
+A programming language is a formal system.
+A type system is a formal system.
+Therefore a type system is an embedded formal system, embedded in a bigger formal system that is a programming language.
+
 Programming languages have semantics, even if it is implicit.
 
 A type defines the memory layout (bit pattern) of its values.

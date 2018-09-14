@@ -4,6 +4,11 @@ permalink: /opensrc.html
 date: 2018-07-24 15:00 +0700
 ---
 
+- TOC
+{:toc}
+
+## what
+
 - Some problems:
     - Marketing problem: People don't even know the project exists.
     - Onboarding problem: People want to contribute to the project, but the project's README doesn't have clear instructions.
@@ -39,3 +44,47 @@ date: 2018-07-24 15:00 +0700
     - "Open source doesn't just mean access to the source code."
 - open source development methodology
     - [Shame-driven development – Rafał Pocztarski – Medium](https://medium.com/@pocztarski/shame-driven-development-4545fae46fd)
+
+## Maintaining open-source projects
+
+Be a benevolent dictator.
+Don't be democratic.
+Be decisive without being offensive.
+Skip the swearing.
+Don't put your words in other people's mouths.
+Avoid statements whose subject is "you", such as "you are ...", "you said ...", "you want ...", "you think ...".
+
+When you don't want something, you can just say "No", repeatedly if necessary.
+You don't have to explain why.
+You have the final say.
+Not everything is open to discussion.
+
+Democracy doesn't work in open source.
+Most people are lazy, polite, selfish, short-term-oriented, impatient, and incompetent.
+
+If you are democratic, you will waste your time convincing people who won't be convinced anyway.
+People who already understand don't need to be convinced.
+People who don't understand will never be convinced.
+
+If you are permissive, your codebase will degrade into a pile full of half-done half-assed workarounds.
+
+Tolerate no mediocrity.
+Tolerate no misspelling.
+Reject incomprehensible commits.
+Demand the absolute best.
+Never lower the bar.
+It's better to receive no contribution at all than let a shitty contributor in.
+Working code is not enough.
+The code should also be correct.
+
+If you receive an almost good contribution, either you fix it, or you reject it.
+
+Reject incompetent people.
+
+Get out of the way of competent people.
+Don't distract them from doing their job.
+
+If you want to leave the project, appoint a replacement dictator?
+
+Contributors may often have IQ above 130, but IQ doesn't meant competent.
+Higher IQ only means faster learning; that's all.

@@ -125,6 +125,10 @@ These pages may be outdated:
 - [Ansible]({% link ansible.md %})
 - [Logging]({% link logging.md %})
 
+## Fabric vs Ansible
+
+From the user's point of view, Fabric is a python library, whereas Ansible is YAML-driven framework.
+
 ## What is DevOps?
 
 XML is not suitable for declarative DevOps.

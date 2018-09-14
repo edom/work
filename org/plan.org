@@ -1,23 +1,74 @@
 #+TITLE:Plan
-#+DATE:2018-09-10T03:56:00+0700
-
-* Drafts
-** Making the programming language
+#+DATE:2018-09-10 03:56:00 +0700
+#+PERMALINK: /plan.html
+* TODO <2018-09-15> Make the programming language
 - cite:DBLP:conf/popl/CookHC90
 - cite:cartwright2013inheritance
+** TODO Compare programming language research journals and conferences
+Which ones should we care about?
+Which ones are the real deal?
+*** ICFP
+*** OOPSLA
+*** PLDI
+*** POPL
+*** PACM
+*** PACMPL
 *** DBLP vs Semantic Scholar?
 https://dblp.uni-trier.de/
-*** Programming language research conferences
-Which one?
-**** ICFP
-**** OOPSLA
-**** PLDI
-**** POPL
-**** PACM
-**** PACMPL
-** Economics
-*** [2018-09-11] Microeconomics
 
+** TODO <2018-09-15> Find out how type systems may guarantee pointer safety
+*** TODO <2018-09-15> Study Sixten type system
+*** TODO <2018-09-15> Study Rust type system
+* <2018-09-15> Org Mode woes: can't put code block in table
+[[https://stackoverflow.com/questions/24933135/code-blocks-inside-tables-for-org-mode][Code blocks inside tables for org-mode - Stack Overflow]]
+
+I left Markdown only to find out that Org Mode shares this weakness.
+
+Wanted: a markup that can compare code blocks side-by-side in a table.
+* Debugging Emacs Lisp
+<2018-09-15>
+My use case: Debug my custom org-mode exporter for Jekyll.
+I want to dump the plist passed to =my-front-matter=.
+
+Emacs Lisp manual chapter "Debugging Lisp programs" mentions =trace.el=.
+The usage instructions are near the beginning of [[https://github.com/emacs-mirror/emacs/blob/emacs-26.1/lisp/emacs-lisp/trace.el][Emacs 26.1 trace.el source code]],
+which also documents some limitations.
+
+The =trace.el= method is the most limited, but it is the simplest to use, among the options.
+
+Here are the steps.
+
+- Install advices.
+  Put cursor after closing paren, and then =C-x C-e= to eval the sexp.
+  #+BEGIN_SRC elisp
+  ;; replace the function name symbol with yours
+  (trace-function-background 'myhtml-inner-template)
+  (trace-function-background 'my-front-matter)
+  #+END_SRC
+- Do something that will run the function.
+  In my case, I run =M-x my-org-export-for-jekyll=.
+- Open the =*trace-output*= buffer (using =C-x b=).
+- Prettify the s-expression:
+  Move the cursor to the opening paren, and then =C-u M-x indent-pp-sexp=.
+- Remove noisy s-expression such as =:exported-data= by using =C-M-k= (=M-x kill-sexp=).
+  This can also remove a long string.
+- After you have finished debugging, remove advices (or just restart Emacs).
+  #+BEGIN_SRC elisp
+  (untrace-all)
+  #+END_SRC
+* Emacs wishlist
+** What vim can do
+*** =*= search next occurrence of word
+*** =d%= delete to matching delimiter
+https://stackoverflow.com/questions/20458990/emacs-how-to-delete-until-and-including-bracket
+*** =%= jump to matching delimiter
+** What VSCode can do
+*** Copy link URL
+*** Ctrl+P fuzzy/subsequence file path matching
+I heard this is possible in Emacs using helm-projectile.
+*** Ctrl+Shift+F find in files
+** Convert from Lisp list to YAML for Jekyll front matter
+* <2018-09-11> Microeconomics
 An economy consists of actors.
 
 - No economic actor has complete view of the economy.
@@ -30,28 +81,20 @@ An economy consists of actors.
 Hypotheses:
 
 - Shocks ripple through actors.
-- For non-vital things, demand collapse is more dangerous than supply collapse. Wasted inventory.
+- Demand collapse may waste inventory.
 
 Statistics can give us an accurate picture of the economy.
 Random sampling of actors.
-* Later
-** Emacs wishlist
-*** What vim can do
-**** =*= search next occurrence of word
-**** =d%= delete to matching delimiter
-https://stackoverflow.com/questions/20458990/emacs-how-to-delete-until-and-including-bracket
-**** =%= jump to matching delimiter
-*** What VSCode can do
-**** Copy link URL
-**** Ctrl+P fuzzy/subsequence file path matching
-**** Ctrl+Shift+F find in files
-*** Convert from Lisp list to YAML for Jekyll front matter
-** TODO Modernize operating system
+* <2018-09-15> (Ethics) moral particularism
+https://philosophynow.org/issues/60/Why_You_Shouldnt_Be_A_Person_Of_Principle
+* TODO <2018-09-15> Fix possible programming error in ~/work/web in Iterables.filter
+* TODO <2018-09-15> Modernize operating system
 Back up data.
 Should not take more than a day.
-*** Install Ubuntu 18.04 after its point release
+** TODO <2018-09-15> Install Ubuntu 18.04 after its point release
 Ubuntu 14.04 EOL is April 2019.
-**** Install Spacemacs, helm-projectile
+*** Install Spacemacs, helm-projectile
+* TODO <2018-09-15> Make an Emacs Lisp interpreter in Haskell for Yi editor
 * References
 bibliography:default
 bibliographystyle:simple

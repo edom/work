@@ -272,7 +272,7 @@ There is also [Matt McGuire's drum cover](https://www.youtube.com/watch?v=n143Q9
     - [Quad City DJ's - Space Jam (Original)](https://www.youtube.com/watch?v=YrMOxASAmP0);
     [Quad City DJ's - Space Jam](https://www.youtube.com/watch?v=OIeETR_HJ3Y)
     - metal
-        - [Dragonforce, "Black fire"}(https://www.youtube.com/watch?v=iBN1rAE8sdo)
+        - [Dragonforce, "Black fire"](https://www.youtube.com/watch?v=iBN1rAE8sdo)
         - From Street Fighter 5:
             - [Ken's theme from Street Fighter 5](https://www.youtube.com/watch?v=1t8B3Sx8X-0)
             - [Guile's theme from Street Fighter 5](https://www.youtube.com/watch?v=X1kb6Lb8hOg)
