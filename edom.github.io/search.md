@@ -35,6 +35,9 @@ permalink: /search.html
         - [tineye.com](https://tineye.com/): reverse image search
         - [moomash](http://www.mooma.sh) (was "audentifi"), YouTube reverse audio search
             - 2018: only works with some video formats; doesn't work for old videos
+            - 2018-09-15: It have gone out of business, it seems.
+        - Shazam
+            - Is there anything like Shazam that takes a YouTube URL, and doesn't require me to install anything?
         - http://whatpixel.com/original-source-image-search-tools/
 - The Internet is full of crap.
     - So are libraries.
