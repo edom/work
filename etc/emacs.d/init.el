@@ -72,7 +72,7 @@ Called at the end of init.el.
   (use-package org-ref
     :ensure t
     :config (let
-                ((bibfiles '("~/work/org/bib.bib")))
+                ((bibfiles '("~/work/edom.github.io/bib.bib")))
               (setq reftex-default-bibliography bibfiles
                     org-ref-default-bibliography bibfiles
                     bibtex-completion-bibliography bibfiles
@@ -82,17 +82,16 @@ Called at the end of init.el.
   ;; https://emacs.stackexchange.com/questions/41220/org-mode-disable-indentation-when-promoting-and-demoting-trees-subtrees
   (setq-default org-adapt-indentation nil)
   ;; agenda
-  (setq-default org-agenda-files '("~/work/org"))
+  (setq-default org-agenda-files '("~/work/edom.github.io/"))
   ;; publishing
   (setq org-publish-project-alist
       '(
         ("org-edom"
-         :base-directory "~/work/org/"
+         :base-directory "~/work/edom.github.io/"
          :base-extension "org"
          :publishing-directory "~/work/edom.github.io/"
          :recursive t
          :body-only t
-         ; TODO org-myhtml-publish-to-myhtml
          :publishing-function org-myhtml-publish-to-myhtml
          )
         )
@@ -156,7 +155,7 @@ Complication: #+TITLE can have markup, but YAML front matter expects title to be
          ;; How does org do that?
          ;;
          ;; See also https://www.gnu.org/software/emacs/manual/html_node/elisp/File-Names.html#File-Names
-         (base-dir (expand-file-name "~/work/org/"))
+         (base-dir (expand-file-name "~/work/edom.github.io/"))
          (title (funcall get ':title))
          (date (org-export-data (funcall get ':date) info))
          (input-path (funcall get ':input-file))
@@ -172,34 +171,27 @@ Complication: #+TITLE can have markup, but YAML front matter expects title to be
     )
   )
 
-;; This is for testing purposes only.
-(defun my-org-export-for-jekyll () "
-Export current org-mode buffer as HTML for edom.github.io.
-This assumes Ubuntu 14.04, Emacs 24.3.1, and Org Mode 8.2.4.
-"
-  (interactive)
-  (let
-      (
-       (async nil)
-       (subtree-only nil)
-       (visible-only nil)
-       (body-only t)
-       (ext-plist nil)
-       (org-buffer-name "*Org HTML Export*")
-       )
-    (progn
-      (org-export-to-buffer 'myhtml org-buffer-name
-        async subtree-only visible-only body-only ext-plist)
-      )))
-
 (defun my-org-publish () "
 Publish a website?
 "
   (interactive)
-  (let (
-        (force t)
+  ;; Should we force?
+  ;; Do we risk any staleness?
+  (lexical-let* (
+        (force nil)
         )
-    (org-publish "org-edom" force)
+    (save-mark-and-excursion
+      (org-publish "org-edom" force)
+      )
+    )
+  )
+
+(defun my-org-publish-current-file ()
+  "See 'org-publish-current-file'.
+Use this instead of 'C-c C-e P f'."
+  (interactive)
+  (save-mark-and-excursion
+    (org-publish-current-file t)
     )
   )
 
@@ -207,8 +199,7 @@ Publish a website?
 
 ;; TODO make these keybindings buffer-local according to the mode
 (defun my-org-key-bindings ()
-  (global-set-key (kbd "s-e") 'my-org-export-for-jekyll)
-  (global-set-key (kbd "s-p") 'my-org-publish)
+  (global-set-key (kbd "<f5>") 'my-org-publish)
   )
 
 ;;;; End of customizations

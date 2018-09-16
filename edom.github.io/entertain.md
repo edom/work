@@ -32,18 +32,7 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
     - [Glenn Fricker's how to deal with religious fanatics protesting concerts](https://www.youtube.com/watch?v=ix3kPRlnnF8&index=8&list=RDfibfJpIHLQ8)
     - [WP:Wikipedia:Unusual articles](https://en.wikipedia.org/wiki/Wikipedia:Unusual_articles)
 - Entertaining videos, not necessarily educational; things that cheer me up
-    - [how a seal moves on land](https://www.youtube.com/watch?v=l6mGixhCcYY): like fat bouncing tempura
-    - [Virginia opossum babies eating bananas](https://www.youtube.com/watch?v=bRIVTEBaLkA)
-    - [Shiba inu (doge) trying to swim](https://www.youtube.com/watch?v=G8QCRTsed9U)
     - [Ethan Klein's cough compilation](https://www.youtube.com/watch?v=TEG2wxz0ILo)
-    - shibes
-        - ShibeNation
-            - [sick shibe](https://www.youtube.com/watch?v=UvNDMAHotQg)
-            - [Massive Shibe can't get out of bed](https://www.youtube.com/watch?v=tu9hnAZteug)
-        - Rapid Liquid, shibes
-            - [when you hear the word "walk"](https://www.youtube.com/watch?v=djRfAQfT9E4)
-            - fat shibes from [Rapid Liquid: part IV - don't nom cat food](https://www.youtube.com/watch?v=qe8b9gfuwME)
-        - [thicc shibe being petted vigorously](https://www.youtube.com/watch?v=FLZZlHUNd_I)
     - [anatomically correct Spiderman](https://www.youtube.com/watch?v=Yc5SfuIb_eM), absurd
     - absurd comedy
         - ["What's worse than a rapist? Boom. A child. No, a child rapist."](https://www.youtube.com/watch?v=L0a5iwzG7aw)
@@ -76,7 +65,6 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
             - 2:48--3:12: Steve Harvey can't hold his laughter after hearing the kid say that William Howard Taft once got stuck in the bathtub
     - [Bill Wurtz's history of japan](https://www.youtube.com/watch?v=Mh5LY4Mz15o)
     - [Trump and the photoshopped painting of other US presidents (facepalming, middle finger)](https://twitter.com/JaimsVanDerBeek/status/921175367854866432)
-    - [squirrel fails to climb oiled pole](https://www.youtube.com/watch?v=cFWdjkN62zc)
     - an0nymooose
         - [taco review](https://www.youtube.com/watch?v=xKR4FAg1imc)
         - [berdst friend](https://www.youtube.com/watch?v=l8wMVmY7Zpw)
@@ -112,15 +100,10 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
     - [The "Tourette's Guy" moving a hot pot while screaming "fuck", and hit his head on the low ceiling lamp](https://www.youtube.com/watch?v=AtbMnixO2nc)
     - [SFM: L4D: nick](https://www.youtube.com/watch?v=nwpEAYI-5jY)
     - [gmod: L4D: Who's cooking tonight](https://www.youtube.com/watch?v=pfexEAExzhk)
-    - [Horse passing gas](https://www.youtube.com/watch?v=jMyL0HdXPuc)
     - [Isle of Dogs - A Michael Bay film](https://www.youtube.com/watch?v=FZBo2wBH0zE): husky sneezing and exploding (warning: loud)
 - meme-like materials
     - [in only 2 weeks, Robert lost 2 weeks](https://www.reddit.com/r/FunnyandSad/comments/8ejlih/in_just_two_weeks/)
     - [well-lit husky portrait](https://old.reddit.com/r/aww/comments/8io64x/last_year_while_setting_up_lights_for_some/)
-    - The adventures of Mandy and Major:
-    Major is a shibe that growls like a dinosaur chicken.
-        - [Do you like your new toy?](https://www.youtube.com/watch?v=FuraQCCsKgE)
-        - [Happy Friday!](https://www.youtube.com/watch?v=_gxJNdeG7gM)
     - 19:00 [Best Reactions of JonTron](https://www.youtube.com/watch?v=tP5CLR54igs) "AND IIIII... HOLY SHIT",
     [fragment](https://www.youtube.com/watch?v=V4SQj8Ua3kM),
     [10:49, source](https://www.youtube.com/watch?v=l69BP1uhlMs)
@@ -179,7 +162,6 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
             - https://en.wikipedia.org/wiki/God_of_Gamblers#Sequels,_spin-off
         - "From Beijing with love", parody of James Bond ([WP](https://en.wikipedia.org/wiki/From_Beijing_with_Love))
         - Shaolin Popey ([WP](https://en.wikipedia.org/wiki/Shaolin_Popey))
-- [Fat cat attempts to roll over](https://www.youtube.com/watch?v=F82oaNGsD24)
 - [How wrestler Rhythm Heaven should be played](https://www.youtube.com/watch?v=SpsezVsd0No)
     - [【みんなのリズム天国】ブロリー会見（レスラー会見）](https://www.youtube.com/watch?v=GTdyWN_XCrM)
         - "Minna-no rizumu tengoku"
@@ -214,13 +196,6 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
         - <A HREF="https://www.youtube.com/watch?v=bS5P_LAqiVg">KUNG FURY Official Movie [HD] - YouTube</A>
         - <A HREF="https://www.youtube.com/watch?v=ZTidn2dBYbY&index=27&list=RDaDMsGl_XxTk">David Hasselhoff - True Survivor (from Kung Fury) - YouTube</A>
     - <A HREF="https://en.wikipedia.org/wiki/Chacarron_Macarron">Chacarron Macarron - Wikipedia, the free encyclopedia</A>
-    - animals, mostly dogs
-        - <A HREF="https://www.youtube.com/watch?v=EVwlMVYqMu4">TWO DOGS DINING - YouTube</A>
-        - <A HREF="https://www.youtube.com/watch?v=G8QCRTsed9U">Doge swim - YouTube</A>
-        - <A HREF="https://www.youtube.com/watch?v=SStvNcLHQ_Q">When dad gets home from work it&#39;s cuddle time - YouTube</A>
-        - terminated: <A HREF="https://www.youtube.com/watch?v=qkJgSdYh2Eg">0:32 Yucky the cattish shibe - YouTube</A>
-        - <A HREF="https://www.youtube.com/watch?v=naYHO7AS9hk">This dog wants some yogurt but its too shy to ask for it - YouTube</A>
-        - <A HREF="https://www.youtube.com/watch?v=gtvvHRYGvJg">awkward sleeping position - Shibe doing a Flashback - YouTube</A>
     - absurd comedy
         - [Big Bill Hell's](https://www.youtube.com/watch?time_continue=19&v=4sZuN0xXWLc), extreme language, advertisement parody
         - <A HREF="https://www.youtube.com/watch?v=XkFaIpDg194">EPIC Drum Solo FAIL! - YouTube</A>
@@ -245,8 +220,6 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
                 - <A HREF="https://www.youtube.com/watch?v=U76chEyJjKw">Yakuza 0: 17 Minutes of Meeting Goro Majima - YouTube</A>
             - <A HREF="https://www.youtube.com/watch?v=l1SvvagUGuU&list=RDaDMsGl_XxTk&index=27">Gorgeous Freeman - Episode 2 - The Crowbar - YouTube</A>
             - [YT:I'M AT SOUP! [TF2 SFM]](https://www.youtube.com/watch?v=4kqbKEqzsAI)
-    - "animal cover" of songs
-        - <A HREF="https://www.youtube.com/watch?v=Ahhxk3uZE2g">Linkin Park - Numb (Animal Cover) - YouTube</A>
     - "disgustang"
         - <A HREF="https://www.youtube.com/watch?v=eGmgraZef9Y">DISGUSTANG - SHET - Cher lloyd - Massive Shet cover - YouTube</A>
         - <A HREF="https://www.youtube.com/watch?v=8E7ScwCbGLU">DISGUSTANG - YouTube</A>
@@ -261,7 +234,42 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
     - [MICHAEL BAY'S EVANGELION](https://www.youtube.com/watch?v=FckkZihQUaU)
     - [Jackie Chan in Street Fighter](https://www.youtube.com/watch?v=Z4Psls1ngwM), from "City Hunter"
 - animals
-    - [That's how cats get out of the maze! (ENG SUB)](https://www.youtube.com/watch?v=yb5xBnFeRtA)
+    - best animals
+        - [how a seal moves on land](https://www.youtube.com/watch?v=l6mGixhCcYY): like fat bouncing tempura
+        - [Virginia opossum babies eating bananas](https://www.youtube.com/watch?v=bRIVTEBaLkA)
+        - [Shiba inu (doge) trying to swim](https://www.youtube.com/watch?v=G8QCRTsed9U)
+        - [Horse passing gas](https://www.youtube.com/watch?v=jMyL0HdXPuc)
+        - The adventures of Mandy and Major:
+        Major is a shibe that growls like a dinosaur chicken.
+            - [Do you like your new toy?](https://www.youtube.com/watch?v=FuraQCCsKgE)
+            - [Happy Friday!](https://www.youtube.com/watch?v=_gxJNdeG7gM)
+    - cats
+        - [Every day. Every. Darn. Day. - YouTube](https://www.youtube.com/watch?v=9EYZnSXEla0)
+        - [Fat cat attempts to roll over](https://www.youtube.com/watch?v=F82oaNGsD24)
+        - [That's how cats get out of the maze! (ENG SUB)](https://www.youtube.com/watch?v=yb5xBnFeRtA)
+    - geckos
+        - [AwA Smooth Knob-Tailed Gecko - YouTube](https://www.youtube.com/watch?v=ICMPLBE6aXk)
+    - bears
+        - [Bruiser Bear - YouTube](https://www.youtube.com/watch?v=I-yqvT8vKZc), bear belly-flopping into pool
+        - [Don’t you brush YOUR bears? - YouTube](https://www.youtube.com/watch?v=x70d3Uw6Nxs)
+    - animals, mostly dogs
+        - <A HREF="https://www.youtube.com/watch?v=EVwlMVYqMu4">TWO DOGS DINING - YouTube</A>
+        - <A HREF="https://www.youtube.com/watch?v=G8QCRTsed9U">Doge swim - YouTube</A>
+        - <A HREF="https://www.youtube.com/watch?v=SStvNcLHQ_Q">When dad gets home from work it&#39;s cuddle time - YouTube</A>
+        - terminated: <A HREF="https://www.youtube.com/watch?v=qkJgSdYh2Eg">0:32 Yucky the cattish shibe - YouTube</A>
+        - <A HREF="https://www.youtube.com/watch?v=naYHO7AS9hk">This dog wants some yogurt but its too shy to ask for it - YouTube</A>
+        - <A HREF="https://www.youtube.com/watch?v=gtvvHRYGvJg">awkward sleeping position - Shibe doing a Flashback - YouTube</A>
+    - "animal cover" of songs
+        - <A HREF="https://www.youtube.com/watch?v=Ahhxk3uZE2g">Linkin Park - Numb (Animal Cover) - YouTube</A>
+    - [squirrel fails to climb oiled pole](https://www.youtube.com/watch?v=cFWdjkN62zc)
+    - shibes
+        - ShibeNation
+            - [sick shibe](https://www.youtube.com/watch?v=UvNDMAHotQg)
+            - [Massive Shibe can't get out of bed](https://www.youtube.com/watch?v=tu9hnAZteug)
+        - Rapid Liquid, shibes
+            - [when you hear the word "walk"](https://www.youtube.com/watch?v=djRfAQfT9E4)
+            - fat shibes from [Rapid Liquid: part IV - don't nom cat food](https://www.youtube.com/watch?v=qe8b9gfuwME)
+        - [thicc shibe being petted vigorously](https://www.youtube.com/watch?v=FLZZlHUNd_I)
 - enhancements
     - botched Canadian robbery: [Woman falls through the ceiling in convenience store (Metal Gear Version)](https://www.youtube.com/watch?v=w-E7kz9I0wk)
 - [CGI Animated Short Film HD "The D in David " by Michelle Yi and Yaron Farkash \| CGMeetup](https://www.youtube.com/watch?v=o2kPSAYS2wQ)
@@ -270,11 +278,6 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
 - TED-Ed: "At what moment are you dead? - Randall Hayes", [youtube](https://www.youtube.com/watch?v=5c6C3rHOdf8), 3:00 cute duck animation
 - https://www.reddit.com/r/indonesia/comments/6b4e9a/finest_savagery/
 - https://www.reddit.com/r/CrappyDesign/
-- [Don’t you brush YOUR bears? - YouTube](https://www.youtube.com/watch?v=x70d3Uw6Nxs)
 - [Takeshi's Castle Episode 1 Original Japanese Broadcast](https://www.youtube.com/watch?v=Q9wAORBq0fE)
     - 1980s disco music
 - [Funny Babies Confused by Twin Parents Compilation - YouTube](https://www.youtube.com/watch?v=alNI45hzzmY)
-- cat videos
-    - [Every day. Every. Darn. Day. - YouTube](https://www.youtube.com/watch?v=9EYZnSXEla0)
-- bear videos
-    - [Bruiser Bear - YouTube](https://www.youtube.com/watch?v=I-yqvT8vKZc), bear belly-flopping into pool

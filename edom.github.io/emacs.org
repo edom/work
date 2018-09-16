@@ -1,0 +1,667 @@
+#+TITLE: Using Emacs and Org Mode
+#+DATE: 2018-09-07 16:11 +0700
+#+PERMALINK: /emacs.html
+* Preliminaries
+** How long will it take?
+<2018-09-16>
+I spent at least 3 days to set up emacs, set up org mode, and make org mode play nice with Jekyll.
+You may finish much faster than that because you can avoid repeating some of my ordeals.
+You may finish slower because you encounter surprises that I didn't.
+
+If you're new to emacs, but don't want to spend a day configuring emacs, then don't use emacs;
+use Visual Studio Code or Spacemacs instead.
+** Why emacs?
+Because of org mode.
+If it weren't for org mode, I would never have touched emacs.
+
+The [[https://www.gnu.org/software/emacs/tour/][Emacs guided tour]] may give some reasons.
+** Check whether these Org Mode woes would affect you
+Before you jump, check whether what you want to do is possible in Org Mode.
+These woes are mostly non-fatal but annoying.
+*** Possible deal-breakers
+**** <2018-09-15> Can't put code block in table
+[[https://stackoverflow.com/questions/24933135/code-blocks-inside-tables-for-org-mode][Code blocks inside tables for org-mode - Stack Overflow]]
+
+I left Markdown only to find out that Org Mode shares this weakness.
+
+Wanted: a markup that can put code blocks side-by-side in a table.
+
+Do we really need this?
+The table is going to be too wide for mobiles anyway.
+**** <2018-09-16> There is no documented way to change the title of the table of contents
+*** Workaround unknown
+**** <2018-09-17> Incremental search doesn't search link URLs
+**** <2018-09-16> Can't get too fancy with inline markup because Org uses regex where CFG should be used
+This has been worked around in newer org version.
+I can't reproduce this with org 9.1.14.
+They are still using regex, but they replaced the pattern with a more useful default.
+
+We can't insert verbatim "a= b".
+This inserts verbatim "a" followed by text "b=":
+#+BEGIN_SRC
+=a= b=
+#+END_SRC
+
+- [[https://emacs.stackexchange.com/questions/13820/inline-verbatim-and-code-with-quotes-in-org-mode][Inline verbatim and code with quotes in Org-mode - Emacs Stack Exchange]]
+- [[https://orgmode.org/worg/dev/org-syntax.html][Org Syntax (draft)]]
+- There may be a workaround: [[https://orgmode.org/manual/Quoting-HTML-tags.html][The Org Manual: Quoting HTML tags]].
+**** <2018-09-16> Link text can't contain brackets
+Is this still true in org 9?
+[[https://stackoverflow.com/questions/27284913/how-to-escape-square-bracket-in-org-mode-links][emacs - How to escape square bracket in org mode links? - Stack Overflow]]
+**** <2018-09-16> org-ref: "References" heading should be h2, but is h1
+*** Workaround exists
+**** <2018-09-17> Publishing moves the cursor to the beginning of buffer
+In short, =org-publish= clobbers excursion.
+
+To publish current file, press =C-c C-e P f=.
+
+The workaround is to wrap =org-publish= in =save-mark-and-excursion=.
+**** <2018-09-16> org-ref: There is an unwanted link to the bib file if there is no cite at all in the source org file
+The workaround is to remove the =bibliography:= if the document doesn't have any =cite:=.
+** Key notation
+- =C-a= means hold Ctrl and press the A key.
+- =M-a= means hold Meta (Alt) and press the A key.
+- =S-a= means hold Shift and press the A key.
+- =RET= means press the Return/Enter key.
+- =LEFT= means press the Left Arrow key.
+- =BKSP= means the Backspace key.
+  Emacs calls this key =DEL=.
+- =SPC= means the Space key.
+- =C-a C-b= means =C-a= and then =C-b=.
+- =M-x help= means press =M-x= and then type =help= (and press Enter if necessary).
+* Setting up Emacs and Org Mode
+** Installing Emacs
+<2018-09-16>
+To install Emacs 26 on Ubuntu 14.04, I follow some of [[http://ergoemacs.org/emacs/building_emacs_on_linux.html][How to Build Emacs on Linux]], but I don't sudo.
+
+Download Emacs source code package
+Check its integrity.
+Extract it to =SOMEWHERE=.
+
+Install build dependencies
+#+BEGIN_SRC bash
+sudo apt-get build-dep emacs24
+#+END_SRC
+
+Build Emacs from source.
+Close that terminal.
+Open a new one.
+#+BEGIN_SRC bash
+cd SOMEWHERE
+./configure --prefix=$HOME/.local # assuming that $HOME doesn't contain spaces
+make -j4 install # replace 4 with the number of cores you have
+#+END_SRC
+
+We assume you use bash.
+Ensure that =$HOME/.local/bin= is in your =PATH=.
+Ensure that this line is in your =~/.bashrc= file, preferably near the end.
+#+BEGIN_SRC bash
+export PATH="$PATH:$HOME/.local/bin"
+#+END_SRC
+
+Close the terminal.
+Open a new one.
+Entering =emacs --version= should print something like =GNU Emacs 26.1= followed by license notice.
+** Launching Emacs
+Launch emacs from your terminal in your working directory.
+Use =emacs -fs= to start emacs fullscreen.
+Use =emacs -mm= to start emacs maximized.
+** Configuring Emacs and Org Mode
+<2018-09-17>
+You can skip this by copying the =emacs.d= folder of my [[https://github.com/edom/work/][work]] repository.
+But it may fail; I haven't tested it with a fresh installation.
+You can also copy other people's emacs config you find on the Internet.
+*** Ensuring that the configuration folders/files exist
+Set up your emacs initialization file =~/.emacs.d/init.el=.
+It is an Emacs Lisp program.
+
+Make sure that the file =~/.emacs= does not exist;
+otherwise Emacs won't read =~/.emacs.d/init.el=.
+
+You may want to commit your modifications to your personal Git repository,
+and make =~/.emacs.d= a symbolic link.
+
+Make sure that you don't accidentally publish sensitive data (such as IRC passwords).
+*** Making Emacs remember where you left off
+Save a desktop/session so that emacs continues where you left off:
+=M-x desktop-save=.
+(Do we still need this if we already have =(setq desktop-save 1)= in the init file?)
+
+See also "Saving Emacs Sessions" in the Emacs manual.
+Unfortunately Emacs 24.3 doesn't save the frames and windows.
+*** Adding MELPA
+*** Installing a recent org mode from MELPA
+=M-x package-install RET org RET=
+**** TODO Use use-package in init file to automate installation
+*** Installing org-ref for citing research papers
+- [[https://github.com/jkitchin/org-ref#installation][org-ref installation]]
+- [[https://github.com/jkitchin/org-ref][jkitchin/org-ref: org-mode modules for citations, cross-references, bibliographies in org-mode and useful bibtex tools to go with it.]]
+- [[http://viveks.info/org-mode-academic-writing-bibliographies-org-ref/][Org mode for academic writing: Bibliographies with org-ref - Vivek's Info]]
+*** <2018-09-16> Check your Emacs version and Org Mode version
+Check your Emacs version with =M-x emacs-version=.
+Check your Org Mode version with =M-x org-version=.
+This document assumes these versions:
+#+BEGIN_SRC
+GNU Emacs 26.1 (build 1, x86_64-pc-linux-gnu, GTK+ Version 2.24.23) of 2018-09-10
+Org mode version 9.1.14 (9.1.14-1-g4931fc-elpaplus @ /home/erik/.emacs.d/elpa/org-plus-contrib-20180910/)
+#+END_SRC
+*** Restart Emacs so that your config changes take effect
+*** If Emacs is misbehaving
+If Emacs is misbehaving (and you have no idea why), try running =emacs -q=.
+If it runs fine, try nuking the file =~/.emacs= and the directory =~/.emacs.d=.
+But you will lose all your customizations and installed packages.
+*** Configuring org mode
+The default isn't always sane.
+Thus I have these customizations in my Emacs init file.
+**** <2018-09-16> Avoiding reindentation when moving trees around
+We do this to prevent unnecessary whitespace changes in version control.
+https://emacs.stackexchange.com/questions/41220/org-mode-disable-indentation-when-promoting-and-demoting-trees-subtrees
+#+BEGIN_SRC elisp
+(setq-default org-adapt-indentation nil)
+#+END_SRC
+**** <2018-09-16> Removing day names from inserted dates
+#+BEGIN_SRC elisp
+(setq org-time-stamp-formats '("<%Y-%m-%d>" . "<%Y-%m-%d %H:%M>"))
+#+END_SRC
+** Entering org mode
+Visit a file with =.org= extension.
+Alternatively, =M-x org-mode=.
+* Editing text in Emacs
+** Inserting text
+Most of the time, you simply type the file contents.
+** Common keys
+- To exit Emacs, =C-x C-c=.
+- To cancel a long-running action, or exit a prompt, press =C-g=.
+- To find/start/open/visit a file, =C-x C-f=.
+  The file doesn't have to exist.
+- To autocomplete a file name or command name in minibuffer, press =TAB=.
+- To start a shell, =M-x shell=.
+** Discover Emacs, don't memorize it
+- To find out what a key does, press =C-h k= (describe key sequence), and then press the keys.
+  Emacs will tell you what function the key is bound to.
+- To find out what a function does, press =C-h f= and type the function name.
+  Emacs will also tell you what keys are bound to that function.
+- =C-h ?= help for help
+- =C-h a= apropos (find command matching a given pattern)
+- =C-h i= info document reader; usually documents some emacs packages/plugins
+- =C-h t= tutorial for Emacs
+- =C-h r= read Emacs manual
+** Using buffers and windows
+- buffers
+    - =C-x C-f= opens a file or directory into a buffer
+    - =C-x C-b= lists buffers in the other window
+    - =C-x C-LEFT= goes to previous buffer
+    - =C-x C-RIGHT= goes to next buffer
+    - =C-x k= kills a buffer
+    - =C-x s= saves some buffers
+    - =C-x b= switches to another buffer, or opens a new buffer
+        - =C-x 4 b= the same, but in the other window
+- windows
+    - =C-x 1= delete other windows (all windows except the focused one)
+    = =C-x o= switches to another window / the other window
+    - =C-x 2= split window below
+    - =C-x 3= split window right
+- =C-x 4 0= kill-buffer-and-window
+- =C-x 4 C-f= open a file in the other window
+** Autocompletion
+*** Elisp autocompletion
+- =C-M-i= autocomplete symbol for Emacs Lisp
+*** Org Mode autocompletion using pcomplete
+- =M-TAB= (that is likely reserved by your window manager) or =ESC TAB= or =C-M-i=.
+  For example, type =#+= at the beginning of a line and then press =C-M-i=.
+*** Word autocompletion with dabbrev (dynamic abbreviation)
+This can save us from typing long words repeatedly.
+See [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Dynamic-Abbrevs.html#Dynamic-Abbrevs][Dynamic Abbrevs - GNU Emacs Manual]] for what these does.
+Try it.
+- =M-/= dabbrev-expand
+- =C-M-/= dabbrev-completion (I rarely use this)
+** Searching
+- entering incremental search
+    - =C-s= forward incremental search
+    - =C-r= reverse incremental search
+    - =C-M-s= forward incremental search regex
+        - The regex syntax is somewhere in [[https://www.gnu.org/software/emacs/tour/][A guided tour of Emacs]]
+- While in incremental search prompt:
+    - =C-s= go to next occurrence
+    - =C-r= go to previous occurrence
+    - =M-p= previous item in search history
+    - =M-n= next item in search history
+- =C-h k C-s= describe your options while in incremental search prompt
+- =M-%= (that is Alt+Shift+5 on an English QWERTY keyboard) query replace
+** Marking, jumping, copying, cutting, and pasting
+- rapidly moving between two locations
+    - =C-SPC= set mark to current point
+    - =C-x C-x= swap mark and current point
+- while marking
+    - cutting
+        - =C-w= kill region (cut it into clipboard)
+        - =M-w= copy region into clipboard
+- =C-k= kill the rest of current line
+- =C-y= paste from clipboard
+- =C-S-BKSP= kill entire line
+
+Some commands set the mark.
+** Basic motions: moving by one character, word, line
+- moving by a character or a line
+  - horizontally/characterwise
+    - =C-b= moves the cursor back to the previous character
+    - =C-f= moves the cursor forward to the next character
+    - =C-a= moves the cursor to the beginning of line
+    - =C-e= moves the cursor to the ending of line
+  - vertically/linewise
+    - =C-n= moves the cursor down to the next line
+    - =C-p= moves the cursor up to the previous line
+- moving by a screen
+  - =M-v= goes up a screen
+  - =C-v= goes down a screen
+  - =C-M-v= goes down a screen in the other window
+  - =C-M-S-v= goes up a screen in the other window
+
+Emacs call scroll-*up*-command for what I think as going *down* a screen.
+Emacs thinks about moving the text.
+I think about moving the viewport.
+** Indenting and reindenting
+- =TAB= indents in elisp mode, but not in org mode
+- =C-M-\= (indent-region) reindents region according to current mode
+- =M-\= remove space around cursor
+- =C-u 4 M-x indent-rigidly= deepens indentation of the selected (marked) region by 4 units regardless of mode
+*** <2018-09-17> Woe: inconsistent newlines: C-j and C-m
+In org mode: =C-j= inserts newline and indents; =C-m= inserts newline.
+In elisp mode, they are flipped.
+* Navigating the file system using dired
+Input =C-x C-f=, input a directory path, and press Enter.
+Emacs opens Dired (directory edit) mode.
+
+- Navigating:
+    - =BKSP= moves the cursor up one item.
+    - =SPC= moves the cursor down one item.
+    - =l= (small L) refreshes the display.
+- Opening:
+    - =RET= opens the item in the current window.
+    If it's a directory, emacs opens another dired.
+    If it's a file, emacs opens the editor.
+    - =o= (small O) opens the item in the other window.
+
+Read the dired info documentation.
+
+Use =C-h m= or =M-x describe-mode= to get some help.
+
+- Unanswered question:
+  - What is the Emacs equivalent of VSCode Ctrl+P (open file fuzzy search / approximate string matching / subsequence matching)?
+    - Completion styles.
+      - [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Completion-Styles.html][Completion Styles - GNU Emacs Manual]]
+    - arcane stuffs
+      - [[https://emacs.stackexchange.com/questions/13500/fuzzy-completion-style][minibuffer - fuzzy completion-style - Emacs Stack Exchange]]
+** Moving files into another directory, updating buffers
+- In dired (note upper and lower case shortcuts):
+  - Mark the files with =m= or unmark with =u=.
+  - Press =R=.
+  - Enter the destination directory.
+  - Press =RET=.
+- [[http://pragmaticemacs.com/emacs/dired-marking-copying-moving-and-deleting-files/][Dired: marking, copying, moving and deleting files | Pragmatic Emacs]]
+* Editing in Org Mode
+We'll mostly be inserting headers (lines that begin with asterisks) and bodies.
+Sometimes we make a header a TODO item.
+Sometimes we insert a date.
+Sometimes we move trees around.
+** Inserting, editing, and moving headers and subtrees
+- Begin the line with one or more asterisks (=*=).
+- moving subtrees
+    - =M-UP= move subtree up
+    - =M-DOWN= move subtree down
+- promoting and demoting
+    - =M-LEFT= promote header one level shallower
+    - =M-RIGHT= demote header one level deeper
+    - =M-S-LEFT= promote subtree one level shallower
+    - =M-S-RIGHT= demote subtree one level deeper
+- =C-c C-w= refile (move) subtree into (as a child of) a level-1 heading in the same org file.
+  See the help of the function =org-refile=.
+** Inserting code blocks quickly
+Type =<s= and press =TAB=.
+- [[https://emacs.stackexchange.com/questions/12841/quickly-insert-source-blocks-in-org-mode][org babel - Quickly insert source blocks in org mode - Emacs Stack Exchange]]
+- [[https://orgmode.org/manual/Easy-templates.html][The Org Manual: Easy templates]]
+** Making TODOs
+- =S-LEFT= / =S-RIGHT= cycle item TODO state
+- =S-M-RET= insert TODO below current item
+- =S-UP= / =S-DOWN= change item priority (see "TODO Items > Priorities" in manual)
+** Navigating an org file
+- cycling visibility
+    - =TAB= cycle subtree visibility
+    - =S-TAB= cycle global visibility
+    - See also Org Mode manual "Visibility cycling".
+- moving around
+    - =C-c C-n= next heading
+    - =C-c C-p= previous heading
+    - =C-c C-f= next heading same level
+    - =C-c C-b= previous heading same level
+    - =C-c C-u= backward to higher level heading
+    - =C-c C-j= jump/goto
+** Inserting lists
+- Begin the line with a hyphen (=-=).
+- =M-RET= to enter the next item.
+- =RET= to end the list.
+- =TAB= to indent the current item one level inward.
+- =S-TAB= to unindent the current item one level outward.
+** Inserting dates
+- =C-c .= open calendar to insert date; the date will show up in agenda.
+- =C-c ! RET= open calendar to insert date; the date won't show up in agenda.
+- In the calendar
+    - The default selected date is today date.
+    - S-LEFT / S-RIGHT move selection 1 day backward/forward
+    - M-S-LEFT / M-S-RIGHT move selection 1 month backward/forward
+    - < / > scroll calendar by 1 month
+    - C-v / M-v scroll calendar by 3 months
+    - M-S-UP / M-S-DOWN scroll calendar by 1 year
+- [[https://emacs.stackexchange.com/questions/37430/change-date-from-active-to-inactive][org mode - Change date from active to inactive - Emacs Stack Exchange]]
+** Links
+- The syntax is =[[URL][text]]=.
+- =C-c C-l= edit link if cursor is on a link; otherwise insert link.
+- To copy the URL of an Org link to clipboard, use the workaround =C-c C-l C-a C-k C-g=.
+*** Chrome bookmarklet: Make org-mode link for page
+This may produce invalid markup.
+Check before you copy.
+#+BEGIN_SRC
+javascript:window.prompt("Copy to clipboard: Ctrl+C, Enter", "[[" + document.URL + "][" + document.title + "]]");
+#+END_SRC
+* Making Org play nice with Jekyll
+** Other people's options
+*** Emacs Lisp programs with improper metadata mapping
+I want Emacs to transform in-buffer setting to front matter.
+I don't want =BEGIN_HTML= or =BEGIN_EXPORT=.
+I want proper metadata mapping =#+SOMETHING=.
+The proper solution is to define a custom backend that derives the preamble from the org file metadata.
+
+I reject these proposed solutions.
+- [[https://orgmode.org/worg/org-tutorials/org-jekyll.html][Official worg tutorial]]
+- [[http://cute-jumper.github.io/emacs/2013/10/06/orgmode-to-github-pages-with-jekyll][Junpeng Qiu's]]
+- [[https://levlaz.org/using-org-mode-with-jekyll/][Lev Lazinskiy's]]
+*** Emacs Lisp programs with proper metadata mapping
+One problem: I write wiki not blog.
+- [[http://ardumont.github.io/blogging-with-org-and-jekyll-with-org2jekyll][Antoine R. Dumont]]'s [[https://github.com/ardumont/org2jekyll][org2jekyll]]
+- [[http://endlessparentheses.com/how-i-blog-one-year-of-posts-in-a-single-org-file.html][Adrian Malabarba]]'s [[https://github.com/Malabarba/ox-jekyll-subtree][ox-jekyll extension]]
+- [[https://github.com/yoshinari-nomura/org-octopress][yoshinari-nomura/org-octopress: org-mode in octopress]]
+*** Jekyll plugins
+Interesting: Jekyll plugin [[https://github.com/eggcaker/jekyll-org][eggcaker/jekyll-org]].
+But does it support org-ref?
+*** Too idealistic
+[[https://stackoverflow.com/questions/19019468/how-to-render-org-mode-file-from-jekyll-github-without-converting-org-to-html][How to render org-mode file from jekyll/github without converting .org to .html? - Stack Overflow]]
+** My choice: Elisp program with proper metadata mapping
+I mostly follow the official tutorial, but I do proper metadata mapping.
+** Exporting Org to HTML for use with Jekyll
+I have already had a wiki in Jekyll.
+
+- =C-c C-e h h= export thisfile.org to thisfile.html; silently overwrite the output
+- =C-c C-e h H= export to buffer; don't create file
+** <2018-09-16> Porting some old Markdown content to Org Mode
+The proper solution is to write a program that transforms Markdown AST to Org AST,
+but the amount of Markdown I want to convert does not justify the effort of writing such program.
+Thus I use Visual Studio Code and regexes to transform some files manually.
+
+These regexes don't work if any wildcard matches a funny character.
+We need context-free grammar for that.
+*** Converting links
+VSCode regex replace pattern for converting Markdown links to Org Mode links:
+#+BEGIN_SRC
+\[(.*)\]\((.*)\)
+[[$2][$1]]
+#+END_SRC
+*** Converting headers
+This is VSCode regex replace pattern for converting Markdown headers to Org Mode headers.
+Repeat until there is no matches.
+Beware of inadvertently matching Bash comments if any.
+
+There should be a trailing space after every of these regexes.
+#+BEGIN_SRC
+^##
+
+*
+
+^###
+**
+
+^####
+***
+
+etc.
+#+END_SRC
+*** Backslashes, code blocks, and inline code
+Replace =`= with ===.
+* Getting more help
+** Online introductory materials
+- Read the emacs manual in emacs: press =C-h r=.
+- Open the info browser: press =C-h i=.
+- [[http://blog.vivekhaldar.com/post/3996068979/the-levels-of-emacs-proficiency][Vivek Haldar — The levels of Emacs proficiency]]
+- [[http://ergoemacs.org/emacs/emacs.html][Xah Lee's Emacs tutorial]]
+** Org Mode introductory materials
+- [[https://orgmode.org/][Org mode for Emacs – Your Life in Plain Text]]
+- [[https://orgmode.org/worg/org-tutorials/org-taskjuggler.html][Creating Gantt charts by Exporting to TaskJuggler]]
+- Learning org-mode from others
+  - [[http://doc.norang.ca/org-mode.html][Org Mode - Organize Your Life In Plain Text!]]
+** Reading the Org Mode manual
+Read the manual with =M-x org-info=.
+However, on Ubuntu 14.04, there is a catch:
+=M-x org-version= says 8.2.4,
+but emacs comes with its own org-mode 7.9.3f documentation in =/usr/share/info/emacs-24= that precedes =/usr/share/info=.
+Use =C-u C-h i /usr/share/info/org.gz RET= to open the correct documentation.
+
+There is a shorter HTML version online: [[https://orgmode.org/guide/][the compact org-mode guide]],
+but it's more convenient to browse the info document in emacs.
+** Navigating an info document
+- =q= quits the info viewer
+- =RET= follows the link under cursor
+- =TAB= moves the cursor to the next link
+- =S-TAB= moves the cursor to the previous link
+- =l= (small L) goes back to the previous page in your browsing history
+- =u= goes up to the parent page (of the current page)
+- =n= goes to the next page
+- =p= goes to the previous page
+- =h= brings up help about how to use the info viewer
+* Programming in Emacs Lisp
+** Basics
+
+- =M-\= delete all spaces and tabs around point
+- =C-M-k= kill s-expression
+- =C-x C-e= eval last s-expression before point
+- indenting/formatting
+  - =C-M-\= indent region
+  - =M-x indent-sexp=
+- partial reloading
+  - =C-M-x= or =M-x eval-defun=
+  - =M-x eval-region=
+- setq
+- add-to-list
+- load
+- load-path
+- funcall
+
+For someone used to Scheme, Emacs Lisp is unpleasant.
+2018-09-12: When will Guile Emacs be mainstream?
+
+- How do I define a local function?
+  - You define it with let and lambda, as in Scheme.
+    But you call it by prepending funcall.
+    If in Scheme you write =(f a b)=,
+    then in Emacs Lisp you write =(funcall f a b)=.
+    - Why do I need this funcall noise?
+      Because it's Lisp-2.
+      If you don't like that, and you don't mind depending on the =cl= package,
+      then you can use =flet= as described in [[https://www.emacswiki.org/emacs/LocalFunctions][EmacsWiki: Local Functions]].
+      However, =cl= is a big package; it's a waste of dependencies if you only use =flet=.
+- Warts for historical reasons
+  - Lexical scoping is not the default, probably because it's easier to write a dynamic-binding interpreter than a .
+  - Emacs Lisp doesn't have proper tail calls.
+- Contentious
+  - Lisp macro is simpler than Scheme macro, but Lisp macro is unhygienic.
+- [[http://xahlee.info/comp/Common_Lisp_quotations.html][Famous Programers on How Common Lisp Sucks]]
+- [[https://www.emacswiki.org/emacs/WhyDoesElispSuck][EmacsWiki: Why Does Elisp Suck]]
+- [[https://www.emacswiki.org/emacs/EmacsLispLimitations][EmacsWiki: Emacs Lisp Limitations]]
+** Suggested workflow
+This example is for developing org mode:
+
+Run several emacs processes:
+
+- In workspace 1, run =emacs -mm= for writing Emacs Lisp code.
+- In workspace 2, run =emacs -fh --no-desktop --visit ORGFILE= for testing. We'll often restart this instance.
+- In workspace 2, run =emacs -Q -fh --eval '(info "org")'= for reading the org mode manual.
+** Debugging Emacs Lisp using trace.el
+<2018-09-15>
+My use case: Debug my custom org-mode exporter for Jekyll.
+I want to dump the plist passed to =my-front-matter=.
+
+Emacs Lisp manual chapter "Debugging Lisp programs" mentions =trace.el=.
+The usage instructions are near the beginning of [[https://github.com/emacs-mirror/emacs/blob/emacs-26.1/lisp/emacs-lisp/trace.el][Emacs 26.1 trace.el source code]],
+which also documents some limitations.
+
+The =trace.el= method is the most limited, but it is the simplest to use, among the options.
+
+Here are the steps.
+
+- Install advices.
+  Put cursor after closing paren, and then =C-x C-e= to eval the sexp.
+  #+BEGIN_SRC elisp
+  ;; replace the function name symbol with yours
+  (trace-function-background 'myhtml-inner-template)
+  (trace-function-background 'my-front-matter)
+  #+END_SRC
+- Do something that will run the function.
+  In my case, I run =M-x my-org-export-for-jekyll=.
+- Open the =*trace-output*= buffer (using =C-x b=).
+- Prettify the s-expression:
+  Move the cursor to the opening paren, and then =C-u M-x indent-pp-sexp=.
+- Remove noisy s-expression such as =:exported-data= by using =C-M-k= (=M-x kill-sexp=).
+  This can also remove a long string.
+- After you have finished debugging, remove advices (or just restart Emacs).
+  #+BEGIN_SRC elisp
+  (untrace-all)
+  #+END_SRC
+
+** Comment indentation surprises
+Automatic indentation of comments
+[[https://stackoverflow.com/questions/26312317/wrong-indentation-of-comments-in-emacs][surprises]]
+people who don't know
+[[https://www.gnu.org/software/emacs/manual/html_node/elisp/Comment-Tips.html][Emacs Lisp comment conventions]].
+* Configuring Emacs further
+** Using emacs packages
+- [[https://github.com/jwiegley/use-package][jwiegley/use-package: A use-package declaration for simplifying your .emacs]]
+** Other people's Emacs setups and init files
+- [[https://github.com/jwiegley/dot-emacs][John Wiegley]]
+- [[https://sites.google.com/site/steveyegge2/my-dot-emacs-file][Steve Yegge]]
+- [[http://www.i3s.unice.fr/~malapert/org/tips/emacs_orgmode.html][Arnaud Malapert's org mode configuration]]
+- [[https://www.reddit.com/r/emacs/comments/3hevcv/how_does_your_emacs_setup_look_like/][How does your Emacs setup look like? : emacs]]
+- [[https://www.quora.com/What-does-your-Emacs-setup-look-like][What does your Emacs setup look like? - Quora]]
+- [[https://github.com/emacs-tw/awesome-emacs][emacs-tw/awesome-emacs: A community driven list of useful Emacs packages, libraries and others.]]
+
+* Next steps
+** TODO Install evil-mode
+** TODO Install Magit
+- magit: [[https://magit.vc/][It's Magit! A Git Porcelain inside Emacs]]
+  - vs git-el?
+*** <2018-09-16> Woe: Magit requires Git >= 1.9.4
+Ubuntu 14.04 comes with Git 1.9.1.
+Build from source, or add a PPA.
+** TODO My Emacs wishlist
+*** What vim can do
+Does evil-mode count?
+**** =*= search next occurrence of word
+**** =d%= delete to matching delimiter
+https://stackoverflow.com/questions/20458990/emacs-how-to-delete-until-and-including-bracket
+**** =%= jump to matching delimiter
+**** DONE <2018-09-17> keyword local completion =C-x C-p=, =C-x C-n=
+This is [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Dynamic-Abbrevs.html#Dynamic-Abbrevs][dynamic abbreviations]] in Emacs.
+
+| Vim insert mode | Emacs     |
+|-----------------+-----------|
+| C-x C-p         | M-/       |
+| C-x C-n         | C-u - M-/ |
+
+In Vim, =C-p= or =C-n= for next match.
+In Emacs, =M-/= for next match.
+**** line autocompletion =C-x C-l=
+*** What VSCode can do
+**** Copy link URL
+**** TODO <2018-09-16> Ctrl+P fuzzy/subsequence file path matching
+I heard this is possible in Emacs using helm-projectile.
+**** Ctrl+Shift+F find in files
+*** Convert from Lisp list to YAML for Jekyll front matter
+** TODO Make a personal wiki
+I use Jekyll and Org Mode.
+I don't use these.
+- [[https://www.emacswiki.org/emacs/EmacsWikiMode][EmacsWiki: Emacs Wiki Mode]]
+
+** Unorganized content
+*** Staying healthy
+- [[http://ergoemacs.org/emacs/emacs_hand_pain_celebrity.html][Famous Programers with Repetitive Strain Injury]]
+*** Should we do everything in Emacs?
+<2018-09-16> No. Emacs isn't always fast.
+- erc: IRC with emacs
+- opening PDF with emacs
+- browsing the Internet with emacs
+- icicles: "emacs library that enhances minibuffer/input completion"
+- programming: paredit, haskell-mode, golang-mode, etc.
+- Compare Emacs Lisp and Vim Script
+- remembrance-agent: Emacs mode to help find relevant texts
+- twittering-mode: Twitter client for Emacs
+*** Other editors I haven't tried
+- [[http://diakonos.pist0s.ca/][Diakonos - a linux editor for the masses]]
+- Spacemacs
+- non-free
+  - [[https://www.sublimetext.com/][Sublime Text - A sophisticated text editor for code, markup and prose]]
+- TeX/LaTeX
+  - GNU TeXmacs
+  - WhizzyTeX
+- XEmacs? emacs-lucid?
+  - [[https://en.wikipedia.org/wiki/XEmacs#History][WP:XEmacs history]]
+  - [[http://ergoemacs.org/emacs/emacs_vs_xemacs.html][Xah Lee: My Experience of Emacs vs XEmacs]]
+    - [[http://ergoemacs.org/emacs/gnu_emacs_xemacs_schism_Ben_Wing.html][Ben Wing: GNU Emacs and XEmacs Schism]]
+*** Emacs stuffs, that may be similar to org-mode, from Ubuntu 14.04 package list, that I haven't tried
+- "BHL is an Emacs mode that enables you to convert text files into HTML, LaTeX and SGML files."
+- "Howm(Hitori Otegaru Wiki Modoki) is a note-taking tool on Emacs."
+- emacs-wiki
+- mhc: schedule management tool for emacsen
+- muse-el: Author and publish projects using Wiki-like markup
+- smartdoc-elisp: emacs mode for smartdoc
+- sisu: documents - structuring, publishing in multiple formats and search
+*** How are we supposed to use the Org Mode Agenda?
+I have already been using Google Calendar.
+I don't use org agenda.
+
+I don't give deadlines to my todos.
+Of what use is the agenda then?
+
+An agenda summarizes/aggregates org files.
+See "Agenda Views > Agenda Files" in org mode manual.
+*** Is there too much technical debt / corner-cutting in Emacs?
+Examples:
+- global variables in the C code preventing multithreading
+- [[https://orgmode.org/worg/org-hacks.html][Org ad hoc code, quick hacks and workarounds]]
+*** Trying spacemacs, helm, ivy, projectile
+Spacemacs is quite polished compared to vanilla Emacs.
+
+Woe: Emacs can't install packages in parallel.
+
+What is helm?
+What is ivy?
+What is projectile?
+What is helm-projectile?
+
+- [[https://www.reddit.com/r/emacs/comments/7vcrwo/helm_vs_ivy_what_are_the_differences_what_are_the/][Helm vs Ivy: What are the differences, what are the advantages? : emacs]]
+* Obsolete content
+Don't read these.
+These are no longer useful.
+** Installing Emacs 24.3 on Ubuntu 14.04
+I tried using emacs 24.3 that comes with ubuntu 14.04 but it was too old.
+Skip this.
+
+On 2018-09-07, the command
+=sudo apt-get install emacs magit org-mode org-mode-doc=
+on Ubuntu 14.04 will install:
+
+- emacs 24.3.1
+- magit 1.2.0
+- org-mode 8.2.4
+** How to uninstall Emacs on Ubuntu 14.04
+From [[https://arp242.net/weblog/uninstalling_emacs_with_apt-get-_lessons_in_interface_design][Uninstalling Emacs with apt-get: lessons in interface design]]:
+
+#+BEGIN_SRC
+sudo apt-get remove 'emacs*'
+#+END_SRC

@@ -487,3 +487,21 @@ div.highlighter-rouge > * { display: inline-block; text-align: left; }
 @import
   "minima/syntax-highlighting"
 ;
+
+// org-mode
+
+.timestamp {
+  opacity: 0.5;
+}
+
+.done.DONE {
+  font-weight: bold;
+  font-family: monospace;
+  color: #006e00; // ~ HSLUV 128 100 40
+}
+
+.todo.TODO {
+  font-weight: bold;
+  font-family: monospace;
+  color: #c00000; // ~ HSLUV 12 100 40
+}

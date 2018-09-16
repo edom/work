@@ -147,8 +147,7 @@ We should join forces to reach our shared goals.
                     - [RationalWiki: Difference between anarchy and mobocracy](https://rationalwiki.org/wiki/Anarchy#Contrast_with_mobocracy)
 - [Doing research better]({% link meta_research.md %})
     - [Organizing knowledge]({% link knorg.md %})
-        - [Using Emacs]({% link emacs.md %})
-            - [Using Org Mode]({% link orgmode.md %})
+        - [Using Emacs and Org Mode]({% link emacs.html %})
             - [Emacs for vi users]({% link emacsvi.md %})
         - [Rebooting human knowledge in case of mass destruction]({% link reboot.md %})
         - The page [Information architecture]({% link infarch.md %}) should be merged into "Organizing knowledge".
