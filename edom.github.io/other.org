@@ -1,6 +1,7 @@
-#+TITLE: Other unorganized contents
+#+TITLE: Catchment area
 #+DATE: 2018-07-22 13:15 +0700
 #+PERMALINK: /other.html
+This file is for my capture-refile workflow.
 ** what
    :PROPERTIES:
    :CUSTOM_ID: what
@@ -525,3 +526,151 @@ Example of federated/decentralized social networks:
 
 - [[https://medium.com/@rxpvh2000/where-are-the-programmers-who-give-a-shit-d27ad2ef24fc][Kari Nordmann's comment]]:
   "Explore federated (decentralized) social networks (Mastodon, diaspora*, Friendica, Hubzilla, GNU Social, Socialhome, Pleroma, GangGo) "
+* <2018-09-11> Microeconomics
+An economy consists of actors.
+
+- No economic actor has complete view of the economy.
+  Every actor can only see his suppliers and consumers.
+- Every actor responds only to what immediately affects it: its direct suppliers and consumers.
+- Actors need time to respond to change in demand/supply.
+- Some actors maintain buffers/inventories.
+- Some actors get involved in futures.
+
+Hypotheses:
+
+- Shocks ripple through actors.
+- Demand collapse may waste inventory.
+
+Statistics can give us an accurate picture of the economy.
+Random sampling of actors.
+* TODO <2018-09-15> Fix possible programming error in ~/work/web in Iterables.filter
+* TODO <2018-09-15> Modernize operating system
+Back up data.
+Should not take more than a day.
+** TODO <2018-09-15> Install Ubuntu 18.04 after its point release
+Ubuntu 14.04 EOL is April 2019.
+* TODO <2018-09-15> Make an Emacs Lisp interpreter in Haskell for Yi editor
+* Rencana legislasi; some are probably bad ideas
+** <2018-09-17> Gratiskan kendaraan umum bertrayek
+- Lebih mudah dan murah daripada integrasi antarmoda?
+- Mengurangi trafik dan polusi.
+*** Biaya yang diperlukan (unit economics)
+- Gaji supir 20 jam/minggu Rp 5 juta/bulan
+- Bahan bakar, 5 km/liter, Rp 10000/liter
+- Biaya perawatan kendaraan Rp ?/bulan
+- Kecepatan rata-rata 50 km/jam
+- Asuransi kesehatan Rp ?/bulan
+- Asuransi kendaraan Rp ?/bulan
+*** Potensi masalah dan penolakan
+**** Pengemudi ojek, taksi, dan mobil sewa mungkin menolak karena pendapatan mereka mungkin berkurang
+- Bantu mereka beralih jadi supir kendaraan umum bertrayek.
+*** Negara lain yang sudah berhasil
+** Fix the system; berantas perverse incentive, principal-agent problem, dan conflict of interest
+*** <2018-09-17> Larang partai membayar anggota; wajibkan anggota membayar partai?
+- Berantas politik karir.
+- Pastikan bahwa yang masuk adalah orang yang benar-benar peduli politik.
+- Tapi kalau begini, politik jadi sampingan.
+  Tidak semua orang mau punya 2 pekerjaan.
+* Obtain political power?
+** TODO <2018-09-17> Join a think tank or a political party or both?
+** TODO <2018-09-17> Educate the people about critical thinking, religion, history, power, and politics?
+* <2018-09-17> Open source Heroku/PaaS/dashboard alternative?
+We don't even know what such things are called.
+
+Google search "open source heroku clone".
+
+As usual, there are too many open source options.
+
+- From [[https://www.quora.com/What-are-some-open-source-Heroku-alternatives][What are some open source Heroku alternatives? - Quora]]:
+  Dokku, Flynn, Convox?, Globo.com Tsuru, Apache Stratos, cloudify-cosmo, lastbackend, CaptainDuckDuck.
+* TODO Ask others
+** Who should we ask?
+- Haskell Cafe mailing list
+- #haskell on freenode IRC
+- Haskell reddit
+- Abdullah
+** TODO <2018-09-17> Is there anything like Pandoc but for programming languages instead of markup languages?
+Does anyone know of anything like Pandoc but for programming languages?
+
+For example, it would translate Haskell to Java by translating Haskell into an internal representation and then translating that internal representation to Java.
+
+Possible related things:
+- LLVM IR
+- GHC Core
+* Setting up and running a X.509 certificate authority (for TLS, for example)
+Practically everyone uses OpenSSL.
+
+What servers do we have to setup?
+OCSP responder?
+** What software are other certificate authorities using?
+** Guides of varying qualities other have written
+*** Probably helpful
+- [[http://pages.cs.wisc.edu/~zmiller/ca-howto/][How To Setup a CA]], Ian Alderman and Zach Miller
+- [[https://www.wikihow.com/Be-Your-Own-Certificate-Authority][How to Be Your Own Certificate Authority (with Pictures) - wikiHow]]
+- [[https://ericlemes.com/2018/05/17/ssl-part-3/][SSL – part 3 – How to run your own Certificate Authority – Eric Lemes' Blog]]
+- [[https://workaround.org/certificate-authority/][How do I create my own Certificate Authority (CA) – workaround.org]]
+- [[https://www.davidpashley.com/articles/becoming-a-x-509-certificate-authority/][Becoming a X.509 Certificate Authority - David Pashley.comDavid Pashley.com]]
+- [[https://ssl.comodo.com/support/ssl-validation-faqs/what-standards-do-certification-authorities-have-to-comply-with.php][What standards do certification authorities have to comply with?]]
+*** What
+- [[https://www.esecurityplanet.com/network-security/how-to-run-your-own-certificate-authority.html][esecurityplanet.com]]
+- [[https://fabrictestdocs.readthedocs.io/en/stable/Setup/ca-setup.html][Certificate Authority (CA) Setup — fabrictestdocs stable documentation]]
+** Tools of varying qualities others have made
+- https://en.wikipedia.org/wiki/Certificate_authority#Software
+- OpenSSL
+- [[https://github.com/google/easypki][google/easypki: Creating a certificate authority the easy way]]
+- https://github.com/recursecenter/ca-tools, requires ruby
+* Hiring, interviewing, recruiting
+** Hiring standards, what to test in work sample tests
+*** IOT engineer
+Must master some of hardware, software, and business.
+
+- Software
+  - C++ smart pointers
+- Hardware
+  - soldering skills
+  - basic understanding of electric circuits
+  - designing and making PCBs, including local knowledge of where to buy components and services
+
+What the employer may expect the employee to do:
+
+- design and make systems (hardware and software) with constrained production cost and field operation
+- maintain existing programs written in C++/Java (or whatever the employer uses), including documenting software
+- travel to maintain remote hardware
+** What is the best predictor?
+According to [[http://blog.eskill.com/best-worst-predictors/][eskill.com]]:
+- past behavior
+- conscientiousness (what is this? how do we test this?)
+- cognitive ability
+
+Interviews must be structured.
+Unstructured interviews waste time.
+
+[[https://resources.workable.com/blog/conduct-structured-interview][How to conduct a structured interview | Workable]]
+
+We can test skill.
+
+How do we test behavior?
+
+Questions are unreliable.
+Actions are reliable.
+
+Where is the research paper?
+
+How does Google hire?
+
+What is the best predictor of on-the-job performance?
+How do we interview to best predict on-the-job/post-interview performance?
+- work sample test
+- education/university
+- IQ
+- github
+- tricky questions
+- school grades
+- what else?
+
+Is there evidence-based hiring like evidence-based medicine?
+
+Can we use machine learning to hire people?
+[[https://www.criteriacorp.com/resources/whitepaper_tests_versus_humans.php][Can Pre-Employment Tests Predict Employee Success Better than a Human?]]
+* What is TurnKey GNU/Linux?
+[[https://www.turnkeylinux.org/][TurnKey GNU/Linux: 100+ free ready-to-use system images for virtual machines, the cloud, and bare metal.]]
