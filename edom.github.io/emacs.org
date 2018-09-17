@@ -393,19 +393,34 @@ I have already had a wiki in Jekyll.
 - =C-c C-e h h= export thisfile.org to thisfile.html; silently overwrite the output
 - =C-c C-e h H= export to buffer; don't create file
 ** <2018-09-16> Porting some old Markdown content to Org Mode
+*** Options
+- [[https://emacs.stackexchange.com/questions/5465/how-to-migrate-markdown-files-to-emacs-org-mode-format][How to migrate Markdown files to Emacs org mode format - Emacs Stack Exchange]]
+  - Pandoc can convert Markdown to Org.
+    There is even [[https://pandoc.org/try/][Try pandoc online]], but don't post sensitive data online, such as password, company secret, etc.
+
+We want to convert from GitHub-Flavored Markdown to Org Mode.
+
+Use Pandoc v??
+Don't use the one that comes with Ubuntu 14.04; it's too old.
+#+BEGIN_SRC
+pandoc --from gfm --to org
+#+END_SRC
+*** <2018-09-17> Don't follow this manual way
 The proper solution is to write a program that transforms Markdown AST to Org AST,
 but the amount of Markdown I want to convert does not justify the effort of writing such program.
 Thus I use Visual Studio Code and regexes to transform some files manually.
 
+(<2018-09-17> Someone else already wrote that program. It's called Pandoc.)
+
 These regexes don't work if any wildcard matches a funny character.
 We need context-free grammar for that.
-*** Converting links
+**** Converting links
 VSCode regex replace pattern for converting Markdown links to Org Mode links:
 #+BEGIN_SRC
 \[(.*)\]\((.*)\)
 [[$2][$1]]
 #+END_SRC
-*** Converting headers
+**** Converting headers
 This is VSCode regex replace pattern for converting Markdown headers to Org Mode headers.
 Repeat until there is no matches.
 Beware of inadvertently matching Bash comments if any.
@@ -424,7 +439,7 @@ There should be a trailing space after every of these regexes.
 
 etc.
 #+END_SRC
-*** Backslashes, code blocks, and inline code
+**** Backslashes, code blocks, and inline code
 Replace =`= with ===.
 * Getting more help
 ** Online introductory materials
@@ -552,6 +567,14 @@ people who don't know
 - [[https://github.com/emacs-tw/awesome-emacs][emacs-tw/awesome-emacs: A community driven list of useful Emacs packages, libraries and others.]]
 
 * Next steps
+** TODO <2018-09-17> Use citeproc instead of org-ref?
+<2018-09-17>
+Citeproc markup language seems to be more expressive than org-ref markup language.
+
+Example of citeproc syntax from [[https://pandoc.org/index.html][Pandoc - About pandoc]]:
+#+BEGIN_SRC
+[see @doe99, pp. 33-35; also @smith04, ch. 1]
+#+END_SRC
 ** TODO Install evil-mode
 ** TODO Install Magit
 - magit: [[https://magit.vc/][It's Magit! A Git Porcelain inside Emacs]]
