@@ -412,7 +412,7 @@ Remove the YAML front-matter.
 Later, manually add the corresponding Org Mode metadata into the output.
 (Or white a Lua script? Pandoc mentions something about Lua scripting.)
 
-Manually resolve Jekyll link tags such as ={% link something.md %}=.
+Manually resolve Jekyll link tags such as ={% raw %}{% link something.md %}{% endraw %}=.
 You can use regex if your html file name always coincides with the source md file name.
 *** Use Pandoc
 <2018-09-18>
