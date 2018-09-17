@@ -15,11 +15,28 @@ Because of org mode.
 If it weren't for org mode, I would never have touched emacs.
 
 The [[https://www.gnu.org/software/emacs/tour/][Emacs guided tour]] may give some reasons.
-** Check whether these Org Mode woes would affect you
+** Key notation
+- =C-a= means hold Ctrl and press the A key.
+- =M-a= means hold Meta (Alt) and press the A key.
+- =S-a= means hold Shift and press the A key.
+- =RET= means press the Return/Enter key.
+- =LEFT= means press the Left Arrow key.
+- =BKSP= means the Backspace key.
+  Emacs calls this key =DEL=.
+- =SPC= means the Space key.
+- =C-a C-b= means =C-a= and then =C-b=.
+- =M-x help= means press =M-x= and then type =help= (and press Enter if necessary).
+
+* Checks before you jump into Org Mode
 Before you jump, check whether what you want to do is possible in Org Mode.
-These woes are mostly non-fatal but annoying.
-*** Possible deal-breakers
-**** <2018-09-15> Can't put code block in table
+I presume we don't want to spend too much time hacking Org Mode to make it work.
+** Can Org Mode do what you want?
+If you really can't afford these limitations, don't use Org Mode.
+*** <2018-09-18> Can't put brackets in link text
+[[https://emacs.stackexchange.com/questions/7792/can-i-make-links-in-org-mode-that-contain-brackets-or][Can I make links in Org Mode that contain brackets? - Emacs Stack Exchange]]
+
+Org uses regex where it should use CFG.
+*** <2018-09-15> Can't put code block in table
 [[https://stackoverflow.com/questions/24933135/code-blocks-inside-tables-for-org-mode][Code blocks inside tables for org-mode - Stack Overflow]]
 
 I left Markdown only to find out that Org Mode shares this weakness.
@@ -28,10 +45,12 @@ Wanted: a markup that can put code blocks side-by-side in a table.
 
 Do we really need this?
 The table is going to be too wide for mobiles anyway.
-**** <2018-09-16> There is no documented way to change the title of the table of contents
-*** Workaround unknown
-**** <2018-09-17> Incremental search doesn't search link URLs
-**** <2018-09-16> Can't get too fancy with inline markup because Org uses regex where CFG should be used
+*** <2018-09-16> Can't change the title of a table of contents
+There is no documented way to do that.
+** Can you live with some Org Mode woes?
+These woes are mostly non-fatal but annoying.
+*** <2018-09-17> Incremental search doesn't search link URLs
+*** <2018-09-16> Can't get too fancy with inline markup because Org uses regex where CFG should be used
 This has been worked around in newer org version.
 I can't reproduce this with org 9.1.14.
 They are still using regex, but they replaced the pattern with a more useful default.
@@ -45,30 +64,19 @@ This inserts verbatim "a" followed by text "b=":
 - [[https://emacs.stackexchange.com/questions/13820/inline-verbatim-and-code-with-quotes-in-org-mode][Inline verbatim and code with quotes in Org-mode - Emacs Stack Exchange]]
 - [[https://orgmode.org/worg/dev/org-syntax.html][Org Syntax (draft)]]
 - There may be a workaround: [[https://orgmode.org/manual/Quoting-HTML-tags.html][The Org Manual: Quoting HTML tags]].
-**** <2018-09-16> Link text can't contain brackets
+*** <2018-09-16> Link text can't contain brackets
 Is this still true in org 9?
 [[https://stackoverflow.com/questions/27284913/how-to-escape-square-bracket-in-org-mode-links][emacs - How to escape square bracket in org mode links? - Stack Overflow]]
-**** <2018-09-16> org-ref: "References" heading should be h2, but is h1
-*** Workaround exists
-**** <2018-09-17> Publishing moves the cursor to the beginning of buffer
+*** <2018-09-16> org-ref: "References" heading should be h2, but is h1
+** Are you willing to work around some Org Mode annoyances?
+*** <2018-09-17> Publishing moves the cursor to the beginning of buffer
 In short, =org-publish= clobbers excursion.
 
 To publish current file, press =C-c C-e P f=.
 
 The workaround is to wrap =org-publish= in =save-mark-and-excursion=.
-**** <2018-09-16> org-ref: There is an unwanted link to the bib file if there is no cite at all in the source org file
+*** <2018-09-16> org-ref: There is an unwanted link to the bib file if there is no cite at all in the source org file
 The workaround is to remove the =bibliography:= if the document doesn't have any =cite:=.
-** Key notation
-- =C-a= means hold Ctrl and press the A key.
-- =M-a= means hold Meta (Alt) and press the A key.
-- =S-a= means hold Shift and press the A key.
-- =RET= means press the Return/Enter key.
-- =LEFT= means press the Left Arrow key.
-- =BKSP= means the Backspace key.
-  Emacs calls this key =DEL=.
-- =SPC= means the Space key.
-- =C-a C-b= means =C-a= and then =C-b=.
-- =M-x help= means press =M-x= and then type =help= (and press Enter if necessary).
 * Setting up Emacs and Org Mode
 ** Installing Emacs
 <2018-09-16>
@@ -398,13 +406,26 @@ I have already had a wiki in Jekyll.
   - Pandoc can convert Markdown to Org.
     There is even [[https://pandoc.org/try/][Try pandoc online]], but don't post sensitive data online, such as password, company secret, etc.
 
-We want to convert from GitHub-Flavored Markdown to Org Mode.
+We want to convert from Jekyll GitHub-Flavored Markdown to Org Mode.
+*** Preliminary clean-up: Remove YAML front-matter, Jekyll tags, and Liquid tags
+Remove the YAML front-matter.
+Later, manually add the corresponding Org Mode metadata into the output.
+(Or white a Lua script? Pandoc mentions something about Lua scripting.)
 
-Use Pandoc v??
+Manually resolve Jekyll link tags such as ={% link something.md %}=.
+You can use regex if your html file name always coincides with the source md file name.
+*** Use Pandoc
+<2018-09-18>
+This assumes Pandoc 2.3.
 Don't use the one that comes with Ubuntu 14.04; it's too old.
+
+[[https://github.com/jgm/pandoc/releases/tag/2.3][Download statically-linked Pandoc 2.3]] for your operating system.
 #+BEGIN_SRC
-pandoc --from gfm --to org
+pandoc --from markdown --to org --wrap=preserve --output OUTPUT.md INPUT.md
 #+END_SRC
+
+The option =--wrap=preserve= is illustrated in [[https://stackoverflow.com/questions/26066621/preserve-line-breaks-in-pandoc-markdown-latex-conversion][Preserve Line Breaks in Pandoc Markdown -> LaTeX Conversion - Stack Overflow]].
+*** Check for wrong code blocks, inline markups, maths, tables
 *** <2018-09-17> Don't follow this manual way
 The proper solution is to write a program that transforms Markdown AST to Org AST,
 but the amount of Markdown I want to convert does not justify the effort of writing such program.

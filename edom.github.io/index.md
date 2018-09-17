@@ -223,8 +223,55 @@ We should join forces to reach our shared goals.
 - Finding other information sources
     - Finding other wikis
         - [WP:List of wikis](https://en.wikipedia.org/wiki/List_of_wikis)
-- [Other unorganized contents]({% link other.md %})
+- [Other unorganized contents]({% link other.html %})
+    - I am regrouping the contents in this website from by-topic to by-task.
+    These are pages with old grouping.
     - [Research]({% link research.md %})
+    - This page contains the old grouping that I haven't moved.
+    - This page is also a staging area, a queue, a scratchpad, for the things I shall process later.
+    - [Computer science]({% link compsci.md %})
+        - Learning computer science
+            - [WP:Computer science](https://en.wikipedia.org/wiki/Computer_science)
+            - [YT:Map of Computer Science](https://www.youtube.com/watch?v=SzJ46YA_RaA)
+        - [Computation]({% link computation.md %})
+        - [Computational complexity]({% link complexity.md %})
+            - [Circuit complexity]({% link circuit.md %})
+    - Natural sciences
+        - [Physics]({% link physics.md %}) and engineering
+            - [Traffic engineering]({% link trafeng.md %})
+            - Civil engineering
+                - [How Do Sinkholes Form?](https://www.youtube.com/watch?v=e-DVIQPqS8E)
+                    - Internal erosion, piping, etc.
+                - [YT:Why Concrete Needs Reinforcement](https://www.youtube.com/watch?v=cZINeaDjisY)
+                    - three types of stresses: tensile, compressive, shear
+                - [What's inside Ikea's "wood"?](https://www.youtube.com/watch?v=24F5JlKkxR4)
+                - Architecture
+                    - [YT:Open office is overrated](https://www.youtube.com/watch?v=-p6WWRarjNs)
+                - Softwood vs hardwood
+                    - Softwood is gymnosperm (monocot) wood.
+                    - Hardwood is angiosperm (dicot) wood.
+                    - Softwood isn't always softer than hardwood.
+                    - https://en.wikipedia.org/wiki/Softwood
+                    - https://en.wikipedia.org/wiki/Hardwood
+                    - https://en.wikipedia.org/wiki/Dicotyledon#Comparison_with_monocotyledons
+            - [Astronomy]({% link astro.md %})
+        - [Chemistry]({% link chem.md %})
+        - Science in 21st century is multi-/inter-discipline?
+            - All branches of science cross-pollinate?
+            - It's no longer useful to categorize science by branches?
+            - Where is the boundary between two branches?
+                - Where do physics end and chemistry begin?
+    - [Philosophy]({% link philo.md %})
+        - Does everything fall under philosophy?
+            - How do we prevent this category from becoming a kitchen sink?
+            - Philosophy is everywhere (a cross-cutting concern), so it shouldn't be a category.
+        - [Law]({% link law.md %})
+        - [Religion]({% link religion.md %})
+        - [Logic]({% link logic.md %})
+        - Work
+            - [Boss]({% link boss.md %})
+    - [Biology]({% link biology.md %})
+    - [Psychology]({% link psych.md %})
 - Music
     - I play piano in the band [The Nomads]({% link nomads.md %}) (an Indonesian band, not the Swedish band).
 - [About this website]({% link about.md %})

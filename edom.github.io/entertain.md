@@ -247,6 +247,7 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
         - [Every day. Every. Darn. Day. - YouTube](https://www.youtube.com/watch?v=9EYZnSXEla0)
         - [Fat cat attempts to roll over](https://www.youtube.com/watch?v=F82oaNGsD24)
         - [That's how cats get out of the maze! (ENG SUB)](https://www.youtube.com/watch?v=yb5xBnFeRtA)
+        - [Siamese kitten loud purring - YouTube](https://www.youtube.com/watch?v=LdOQ6qtoQ4I)
     - geckos
         - [AwA Smooth Knob-Tailed Gecko - YouTube](https://www.youtube.com/watch?v=ICMPLBE6aXk)
     - bears
