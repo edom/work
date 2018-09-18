@@ -2,13 +2,15 @@
 
 // Define defaults for each variable.
 
-$base-font-family: 'Helvetica', 'Arial', sans-serif !default;
-$base-font-size:   14pt !default;
+$base-font-family: 'Times New Roman', serif !default;
+$base-font-size:   16pt !default;
+$code-font-family: 'Courier New', monospace !default;
+$code-font-size:   $base-font-size;
 $palm-font-size:   10pt !default;
 $print-font-size:  10pt !default;
 $base-font-weight: 400 !default;
 $small-font-size:  $base-font-size * 0.875 !default;
-$base-line-height: 1.25 !default;
+$base-line-height: 1.2 !default;
 
 $spacing-unit:     30px !default;
 
@@ -144,7 +146,7 @@ dl, dd, figure {
 
 html {
     font-family: $base-font-family;
-    line-height: 1.25;
+    line-height: $base-line-height;
     font-variant: normal;
     font-weight: normal;
 
@@ -274,10 +276,10 @@ blockquote {
  */
 pre,
 code {
-  font-size: 0.9375rem;
+  font-size: $code-font-size;
   background-color: $code-background-color;
   color: $code-text-color;
-  font-family: 'Liberation Mono', 'Courier New', monospace;
+  font-family: $code-font-family;
 }
 
 code {
@@ -495,13 +497,15 @@ div.highlighter-rouge > * { display: inline-block; text-align: left; }
 }
 
 .done.DONE {
+  font-size: 0.875em;
   font-weight: bold;
-  font-family: monospace;
+  font-family: $code-font-family;
   color: #006e00; // ~ HSLUV 128 100 40
 }
 
 .todo.TODO {
+  font-size: 0.875em;
   font-weight: bold;
-  font-family: monospace;
+  font-family: $code-font-family;
   color: #c00000; // ~ HSLUV 12 100 40
 }

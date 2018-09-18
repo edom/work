@@ -10,7 +10,7 @@ permalink: /politik.html
 ## Subtopics
 
 - [Politik masjid]({% link politik_masjid.md %})
-- [Agenda politik]({% link poliprog.md %})
+- [Agenda politik]({% link poliprog.html %})
 
 ## Pertanyaan-pertanyaan yang belum terjawab
 

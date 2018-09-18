@@ -27,16 +27,16 @@ The [[https://www.gnu.org/software/emacs/tour/][Emacs guided tour]] may give som
 - =C-a C-b= means =C-a= and then =C-b=.
 - =M-x help= means press =M-x= and then type =help= (and press Enter if necessary).
 
-* Checks before you jump into Org Mode
+** Checks before you jump into Org Mode
 Before you jump, check whether what you want to do is possible in Org Mode.
 I presume we don't want to spend too much time hacking Org Mode to make it work.
-** Can Org Mode do what you want?
+*** Can Org Mode do what you want?
 If you really can't afford these limitations, don't use Org Mode.
-*** <2018-09-18> Can't put brackets in link text
+**** <2018-09-18> Can't put brackets in link text
 [[https://emacs.stackexchange.com/questions/7792/can-i-make-links-in-org-mode-that-contain-brackets-or][Can I make links in Org Mode that contain brackets? - Emacs Stack Exchange]]
 
 Org uses regex where it should use CFG.
-*** <2018-09-15> Can't put code block in table
+**** <2018-09-15> Can't put code block in table
 [[https://stackoverflow.com/questions/24933135/code-blocks-inside-tables-for-org-mode][Code blocks inside tables for org-mode - Stack Overflow]]
 
 I left Markdown only to find out that Org Mode shares this weakness.
@@ -45,12 +45,12 @@ Wanted: a markup that can put code blocks side-by-side in a table.
 
 Do we really need this?
 The table is going to be too wide for mobiles anyway.
-*** <2018-09-16> Can't change the title of a table of contents
+**** <2018-09-16> Can't change the title of a table of contents
 There is no documented way to do that.
-** Can you live with some Org Mode woes?
+*** Can you live with some Org Mode woes?
 These woes are mostly non-fatal but annoying.
-*** <2018-09-17> Incremental search doesn't search link URLs
-*** <2018-09-16> Can't get too fancy with inline markup because Org uses regex where CFG should be used
+**** <2018-09-17> Incremental search doesn't search link URLs
+**** <2018-09-16> Can't get too fancy with inline markup because Org uses regex where CFG should be used
 This has been worked around in newer org version.
 I can't reproduce this with org 9.1.14.
 They are still using regex, but they replaced the pattern with a more useful default.
@@ -64,18 +64,18 @@ This inserts verbatim "a" followed by text "b=":
 - [[https://emacs.stackexchange.com/questions/13820/inline-verbatim-and-code-with-quotes-in-org-mode][Inline verbatim and code with quotes in Org-mode - Emacs Stack Exchange]]
 - [[https://orgmode.org/worg/dev/org-syntax.html][Org Syntax (draft)]]
 - There may be a workaround: [[https://orgmode.org/manual/Quoting-HTML-tags.html][The Org Manual: Quoting HTML tags]].
-*** <2018-09-16> Link text can't contain brackets
+**** <2018-09-16> Link text can't contain brackets
 Is this still true in org 9?
 [[https://stackoverflow.com/questions/27284913/how-to-escape-square-bracket-in-org-mode-links][emacs - How to escape square bracket in org mode links? - Stack Overflow]]
-*** <2018-09-16> org-ref: "References" heading should be h2, but is h1
-** Are you willing to work around some Org Mode annoyances?
-*** <2018-09-17> Publishing moves the cursor to the beginning of buffer
+**** <2018-09-16> org-ref: "References" heading should be h2, but is h1
+*** Are you willing to work around some Org Mode annoyances?
+**** <2018-09-17> Publishing moves the cursor to the beginning of buffer
 In short, =org-publish= clobbers excursion.
 
 To publish current file, press =C-c C-e P f=.
 
 The workaround is to wrap =org-publish= in =save-mark-and-excursion=.
-*** <2018-09-16> org-ref: There is an unwanted link to the bib file if there is no cite at all in the source org file
+**** <2018-09-16> org-ref: There is an unwanted link to the bib file if there is no cite at all in the source org file
 The workaround is to remove the =bibliography:= if the document doesn't have any =cite:=.
 * Setting up Emacs and Org Mode
 ** Installing Emacs

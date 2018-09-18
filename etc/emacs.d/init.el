@@ -200,6 +200,7 @@ Use this instead of 'C-c C-e P f'."
 ;; TODO make these keybindings buffer-local according to the mode
 (defun my-org-key-bindings ()
   (global-set-key (kbd "<f5>") 'my-org-publish)
+  (global-set-key (kbd "<f6>") 'my-org-publish-current-file)
   )
 
 ;;;; End of customizations
