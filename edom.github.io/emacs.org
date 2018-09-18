@@ -587,6 +587,47 @@ people who don't know
 - [[https://www.quora.com/What-does-your-Emacs-setup-look-like][What does your Emacs setup look like? - Quora]]
 - [[https://github.com/emacs-tw/awesome-emacs][emacs-tw/awesome-emacs: A community driven list of useful Emacs packages, libraries and others.]]
 
+* Using Git from Emacs
+** TODO <2018-09-18> Compare various Emacs integrations
+What are the options and differences?
+Which one should I use?
+- [[https://www.emacswiki.org/emacs/Git][EmacsWiki: Git]]
+- VC
+- Magit
+- git-el
+
+VC comes with Emacs.
+
+- [[https://www.reddit.com/r/emacs/comments/2h7s6z/vc_as_an_alternative_to_magit/][vc as an alternative to magit? : emacs]]
+- [[https://news.ycombinator.com/item?id=1817324][Ask HN: Best emacs / git integration? | Hacker News]]
+** TODO Install Magit
+- magit: [[https://magit.vc/][It's Magit! A Git Porcelain inside Emacs]]
+*** <2018-09-16> Woe: Magit requires Git >= 1.9.4
+Ubuntu 14.04 comes with Git 1.9.1.
+Build from source, or add a PPA.
+** Using magit
+See also "Getting started" in Magit user manual.
+*** Open the Magit status window
+Open Magit status using =C-x g= or =M-x magit-status=.
+
+The following sections assume that you are in the Magit status window.
+*** Basic commands
+- =q= close the Magit status window
+- =p= move up
+- =n= move down
+- =h= help
+- =g= refresh
+*** Stage or unstage files and hunks
+- =s= stage a file or hunk
+- =u= unstage a file or hunk
+- =TAB= toggle visibility of a section (files in a section, or hunks in a file)
+*** Commit
+- =c= open commit dialog
+  - =c= make normal commit
+    - =C-c C-c= commit
+    - =C-c C-k= cancel commit
+*** Rebase
+- =r i= start interactive rebase; follow instructions on screen
 * Next steps
 ** TODO <2018-09-17> Use citeproc instead of org-ref?
 <2018-09-17>
@@ -597,12 +638,6 @@ Example of citeproc syntax from [[https://pandoc.org/index.html][Pandoc - About 
 [see @doe99, pp. 33-35; also @smith04, ch. 1]
 #+END_SRC
 ** TODO Install evil-mode
-** TODO Install Magit
-- magit: [[https://magit.vc/][It's Magit! A Git Porcelain inside Emacs]]
-  - vs git-el?
-*** <2018-09-16> Woe: Magit requires Git >= 1.9.4
-Ubuntu 14.04 comes with Git 1.9.1.
-Build from source, or add a PPA.
 ** TODO My Emacs wishlist
 *** What vim can do
 Does evil-mode count?
