@@ -118,6 +118,7 @@ We should join forces to reach our shared goals.
     - [Politics]({% link politics.md %})
         - [Solving the Israel-Palestine problem]({% link ispal.md %})
         - [Using the media in politics]({% link polmed.md %})
+        - [Defining marriage]({% link marry.html %})
     - Preventing social isolation
         - Social isolation causes violence and extremism.
         Bullying is part of the social isolation vicious circle.
