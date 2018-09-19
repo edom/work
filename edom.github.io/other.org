@@ -651,6 +651,15 @@ Can we use machine learning to hire people?
 In hiring, if a candidate leaves good impressions (not exceptional, but decent nonetheless), but you aren't sure about him, should you just reject him?
 Does "maybe" mean "no"?
 
+** To avoid wasting time, begin with the most selective test.
+Begin with the test with the highest failure ratio.
+End the interview as soon as the candidates fail the test.
+Respect their time and your time.
+Don't force them to do what they can't do well.
+Don't set them up to fail.
+If you aren't going to hire them, don't waste their time.
+** Recruitment pipeline
+- Review the resume / curriculum vitae.
 * What is TurnKey GNU/Linux?
 [[https://www.turnkeylinux.org/][TurnKey GNU/Linux: 100+ free ready-to-use system images for virtual machines, the cloud, and bare metal.]]
 * PostgreSQL ALTER TABLE DROP COLUMN doesn't actually remove the column from disk
@@ -658,3 +667,48 @@ From [[https://nerderati.com/2017/01/03/postgresql-tables-can-have-at-most-1600-
 * <2018-09-19> Web development woes: lack of a set of font families with same x-height
 I need a serif font family, sans-serif font family, a monospaced font family, and a math font family.
 I want all of them to have the same x-height.
+** <2018-09-19> Recruiting networks are double-edged swords for employers
+Example tools: Linkedin, SmartRecruiters.
+
+You can use it to find new employees.
+But your employees can also use it to find new employers.
+
+But the overall economy stands to gain if we can fix the information asymmetry in job market.
+** <2018-09-19> Sturgeon's law, originally for science fiction, also applies to job applicants
+"Ninety percent of everything is crap."
+
+Ninety percent of your applicants is crap.
+
+Indeed it applies to /everything/.
+Ninety percent of /everything/ is crap.
+Software.
+Companies.
+Goods.
+
+Ninety percent of /everything/ is crap: people, countries, etc.;
+and we may be in that 90%.
+** <2018-09-19> GitHub is trying machine learning
+- I think GitHub should be like StackOverflow but for open-source codes/libraries/programs instead of questions.
+  Prevent people from reinventing the wheel.
+  Help people find things that already exist.
+  - <2018-09-19>
+    Google is doing a better job at what GitHub should be doing:
+    finding existing open-source software, that does something we want, that we can reuse.
+    It's a hard problem.
+- [[https://githubengineering.com/towards-natural-language-semantic-code-search/][Towards Natural Language Semantic Code Search | GitHub Engineering]]
+- I think StackOverflow can use machine learning to comprehend user query and recommend related questions/answers/information.
+* How do we model historical data in SQL?
+- Do we have to use SQL?
+- Is SQL the best tool for the job?
+- Does SQL do the job well enough to justify reducing maintenance costs?
+- How is historical data related to audit trail?
+  - Audit trail encompasses historical data.
+    Audit trail is a more stringent requirement.
+*** TODO <2018-09-19> Read
+- [[https://stackoverflow.com/questions/3874199/how-to-store-historical-data][database design - How to Store Historical Data - Stack Overflow]]
+- [[https://grisha.org/blog/2015/09/23/storing-time-series-in-postgresql-efficiently/][Storing Time Series in PostgreSQL efficiently - Gregory Trubetskoy]]
+- [[https://dba.stackexchange.com/questions/114580/best-way-to-design-a-database-and-table-to-keep-records-of-changes][mysql - Best way to design a database and table to keep records of changes? - Database Administrators Stack Exchange]]
+  - [[https://www.codeproject.com/Articles/105768/Audit-Trail-Tracing-Data-Changes-in-Database][Audit Trail – Tracing Data Changes in Database - CodeProject]]
+- [[https://www.red-gate.com/simple-talk/sql/database-administration/database-design-a-point-in-time-architecture/][Database Design: A Point in Time Architecture - Simple Talk]]
+- [[https://blog.timescale.com/time-series-data-why-and-how-to-use-a-relational-database-instead-of-nosql-d0cd6975e87c][Time-series data: Why (and how) to use a relational database instead of NoSQL]]
+  - Where is the SQL DDL/schema?

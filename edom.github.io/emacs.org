@@ -196,19 +196,20 @@ Most of the time, you simply type the file contents.
 - =C-h r= read Emacs manual
 ** Using buffers and windows
 - buffers
-    - =C-x C-f= opens a file or directory into a buffer
-    - =C-x C-b= lists buffers in the other window
-    - =C-x C-LEFT= goes to previous buffer
-    - =C-x C-RIGHT= goes to next buffer
-    - =C-x k= kills a buffer
-    - =C-x s= saves some buffers
-    - =C-x b= switches to another buffer, or opens a new buffer
-        - =C-x 4 b= the same, but in the other window
+  - =C-x C-f= opens a file or directory into a buffer
+  - =C-x C-b= lists buffers in the other window
+  - =C-x C-LEFT= goes to previous buffer
+  - =C-x C-RIGHT= goes to next buffer
+  - =C-x k= kills a buffer
+  - =C-x s= saves some buffers
+  - =C-x b= switches to another buffer, or opens a new buffer
+    - =C-x 4 b= the same, but in the other window
 - windows
-    - =C-x 1= delete other windows (all windows except the focused one)
-    = =C-x o= switches to another window / the other window
-    - =C-x 2= split window below
-    - =C-x 3= split window right
+  - =C-x 0= delete current window
+  - =C-x 1= delete other windows (all windows except the focused one)
+  - =C-x o= switches to another window / the other window
+  - =C-x 2= split window below
+  - =C-x 3= split window right
 - =C-x 4 0= kill-buffer-and-window
 - =C-x 4 C-f= open a file in the other window
 ** Autocompletion
@@ -225,25 +226,25 @@ Try it.
 - =C-M-/= dabbrev-completion (I rarely use this)
 ** Searching
 - entering incremental search
-    - =C-s= forward incremental search
-    - =C-r= reverse incremental search
-    - =C-M-s= forward incremental search regex
-        - The regex syntax is somewhere in [[https://www.gnu.org/software/emacs/tour/][A guided tour of Emacs]]
+  - =C-s= forward incremental search
+  - =C-r= reverse incremental search
+  - =C-M-s= forward incremental search regex
+    - The regex syntax is somewhere in [[https://www.gnu.org/software/emacs/tour/][A guided tour of Emacs]]
 - While in incremental search prompt:
-    - =C-s= go to next occurrence
-    - =C-r= go to previous occurrence
-    - =M-p= previous item in search history
-    - =M-n= next item in search history
+  - =C-s= go to next occurrence
+  - =C-r= go to previous occurrence
+  - =M-p= previous item in search history
+  - =M-n= next item in search history
 - =C-h k C-s= describe your options while in incremental search prompt
 - =M-%= (that is Alt+Shift+5 on an English QWERTY keyboard) query replace
 ** Marking, jumping, copying, cutting, and pasting
 - rapidly moving between two locations
-    - =C-SPC= set mark to current point
-    - =C-x C-x= swap mark and current point
+  - =C-SPC= set mark to current point
+  - =C-x C-x= swap mark and current point
 - while marking
-    - cutting
-        - =C-w= kill region (cut it into clipboard)
-        - =M-w= copy region into clipboard
+  - cutting
+    - =C-w= kill region (cut it into clipboard)
+    - =M-w= copy region into clipboard
 - =C-k= kill the rest of current line
 - =C-y= paste from clipboard
 - =C-S-BKSP= kill entire line
@@ -281,11 +282,11 @@ Input =C-x C-f=, input a directory path, and press Enter.
 Emacs opens Dired (directory edit) mode.
 
 - Navigating:
-    - =BKSP= moves the cursor up one item.
-    - =SPC= moves the cursor down one item.
-    - =l= (small L) refreshes the display.
+  - =BKSP= moves the cursor up one item.
+  - =SPC= moves the cursor down one item.
+  - =l= (small L) refreshes the display.
 - Opening:
-    - =RET= opens the item in the current window.
+  - =RET= opens the item in the current window.
     If it's a directory, emacs opens another dired.
     If it's a file, emacs opens the editor.
     - =o= (small O) opens the item in the other window.
@@ -315,13 +316,13 @@ Sometimes we move trees around.
 ** Inserting, editing, and moving headers and subtrees
 - Begin the line with one or more asterisks (=*=).
 - moving subtrees
-    - =M-UP= move subtree up
-    - =M-DOWN= move subtree down
+  - =M-UP= move subtree up
+  - =M-DOWN= move subtree down
 - promoting and demoting
-    - =M-LEFT= promote header one level shallower
-    - =M-RIGHT= demote header one level deeper
-    - =M-S-LEFT= promote subtree one level shallower
-    - =M-S-RIGHT= demote subtree one level deeper
+  - =M-LEFT= promote header one level shallower
+  - =M-RIGHT= demote header one level deeper
+  - =M-S-LEFT= promote subtree one level shallower
+  - =M-S-RIGHT= demote subtree one level deeper
 - =C-c C-w= refile (move) subtree into (as a child of) a level-1 heading in the same org file.
   See the help of the function =org-refile=.
 ** Inserting code blocks quickly
@@ -334,16 +335,16 @@ Type =<s= and press =TAB=.
 - =S-UP= / =S-DOWN= change item priority (see "TODO Items > Priorities" in manual)
 ** Navigating an org file
 - cycling visibility
-    - =TAB= cycle subtree visibility
-    - =S-TAB= cycle global visibility
-    - See also Org Mode manual "Visibility cycling".
+  - =TAB= cycle subtree visibility
+  - =S-TAB= cycle global visibility
+  - See also Org Mode manual "Visibility cycling".
 - moving around
-    - =C-c C-n= next heading
-    - =C-c C-p= previous heading
-    - =C-c C-f= next heading same level
-    - =C-c C-b= previous heading same level
-    - =C-c C-u= backward to higher level heading
-    - =C-c C-j= jump/goto
+  - =C-c C-n= next heading
+  - =C-c C-p= previous heading
+  - =C-c C-f= next heading same level
+  - =C-c C-b= previous heading same level
+  - =C-c C-u= backward to higher level heading
+  - =C-c C-j= jump/goto
 ** Inserting lists
 - Begin the line with a hyphen (=-=).
 - =M-RET= to enter the next item.
@@ -354,17 +355,20 @@ Type =<s= and press =TAB=.
 - =C-c .= open calendar to insert date; the date will show up in agenda.
 - =C-c ! RET= open calendar to insert date; the date won't show up in agenda.
 - In the calendar
-    - The default selected date is today date.
-    - S-LEFT / S-RIGHT move selection 1 day backward/forward
-    - M-S-LEFT / M-S-RIGHT move selection 1 month backward/forward
-    - < / > scroll calendar by 1 month
-    - C-v / M-v scroll calendar by 3 months
-    - M-S-UP / M-S-DOWN scroll calendar by 1 year
+  - The default selected date is today date.
+  - S-LEFT / S-RIGHT move selection 1 day backward/forward
+  - M-S-LEFT / M-S-RIGHT move selection 1 month backward/forward
+  - < / > scroll calendar by 1 month
+  - C-v / M-v scroll calendar by 3 months
+  - M-S-UP / M-S-DOWN scroll calendar by 1 year
 - [[https://emacs.stackexchange.com/questions/37430/change-date-from-active-to-inactive][org mode - Change date from active to inactive - Emacs Stack Exchange]]
 ** Links
 - The syntax is =[[URL][text]]=.
 - =C-c C-l= edit link if cursor is on a link; otherwise insert link.
 - To copy the URL of an Org link to clipboard, use the workaround =C-c C-l C-a C-k C-g=.
+- =C-c C-o= open link.
+  If the target is a local org file, Emacs will open it in new window.
+  Press =C-c 0= to close the currently focused window.
 *** Chrome bookmarklet: Make org-mode link for page
 This may produce invalid markup.
 Check before you copy.
