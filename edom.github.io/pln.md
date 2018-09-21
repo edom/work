@@ -29,7 +29,9 @@ Waktu kembali hidup tidak dicatat.
 
 2018-09-18 01:18 PLN mati 5 detik.
 
-Mengapa PLN suka mati 1 menit?
+2018-09-19 02:55 PLN mati 5 detik.
+
+Mengapa PLN suka mati 5 detik?
 
 - 2018-08-14 23:58 PLN mati 1 menit.
     - This corrupts Chromium profile.
