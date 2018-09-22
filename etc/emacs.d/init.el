@@ -110,6 +110,7 @@ Called at the end of init.el.
     ;; See the documentation of the variable 'org-export-options-alist'.
     :options-alist '(
       (:permalink "PERMALINK" "permalink" nil t)
+      (:mathjax "MATHJAX" "mathjax" nil t) ;; whether the document has math markup
       )
     )
 
@@ -160,12 +161,14 @@ Complication: #+TITLE can have markup, but YAML front matter expects title to be
          (date (org-export-data (funcall get ':date) info))
          (input-path (funcall get ':input-file))
          (permalink (funcall get ':permalink))
+         (mathjax (not (equal "" (funcall get ':mathjax))))
          )
     (concat
      "---\n"
      "title: " title "\n"
      "date: " date "\n"
      "permalink: " permalink "\n"
+     (if mathjax "mathjax: yes\n" "")
      "---\n"
      )
     )

@@ -27,7 +27,7 @@ We should join forces to reach our shared goals.
     - Software engineering
         - Forward software engineering
             - [Making lasting software sooner]({% link softeng.md %})
-            - [Making the only programming language we will ever need]({% link plres.md %})
+            - [Making the only programming language we will ever need]({% link plres.html %})
                 - [Modeling]({% link model.md %})
                     - [Modeling all data]({% link modeldata.md %})
                         - [Solving the AST decoration problem]({% link ast.md %})
@@ -37,6 +37,24 @@ We should join forces to reach our shared goals.
                     - [Argument for static typing]({% link statyp.md %})
                     - [Proving things using computers]({% link proof.md %})
                     - [Maintaining backward-compatibility]({% link compat.md %})
+                - Subtopics
+                    - [Extending lambda calculus]({% link lambda.md %})
+                    - [Optimizing lambda calculus]({% link optlam.md %})
+                    - [Extending Haskell]({% link exhask.md %})
+                    - [Programming language design mistakes]({% link pldm.md %})
+                    - [Designing markup languages]({% link markup.md %})
+                    - [Designing configuration languages]({% link conflang.md %})
+                    - Making interpreters/translators/compilers
+                        - Don't make a compiler?
+                        Make an interpreter instead, and stage it?
+                        Turn an interpreter into a compiler for free?
+                        - [Parsing]({% link parse.md %})
+                - Old content to be reorganized
+                    - [Functional programming research]({% link functional_programming.md %})
+                        - Functional programming in the real world
+                            - Philip Wadler's list [Functional Programming in the Real World](http://homepages.inf.ed.ac.uk/wadler/realworld/)
+                    - [Joint research with Abdullah]({% link abdullah.md %})
+                    - [Programming]({% link programming.md %})
             - Programming
                 - [Using Haskell]({% link haskell.md %})
                     - [Using Cabal]({% link cabal.md %})
@@ -171,7 +189,9 @@ We should join forces to reach our shared goals.
     - Hidup di Indonesia abad 21
         - [Memperbaik Indonesia]({% link indonesia.md %})
             - [Memperbaik UUD 1945]({% link uud.md %})
-        - [Politik Indonesia]({% link politik.md %})
+        - [Cita-cita politik]({% link politik.html %})
+        - Politik lain
+            - [Politik masjid]({% link politik_masjid.md %})
             - [Censoring the Internet in Indonesia]({% link indocen.md %})
             - Memakai hak warga negara
                 - BPJS?
