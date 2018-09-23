@@ -10,8 +10,6 @@ permalink: /politics.html
     - [/r/LateStageCapitalism: John Ehrlichman: Nixon illegalized drugs to stigmatize hippies (cannabis) and blacks (heroin) because those people were against him.](https://www.reddit.com/r/LateStageCapitalism/comments/6h6med/daily_reminder_about_the_true_purpose_of_the_war/)
     - Cannabis overuse permanently damages teen brains.
     - Another theory: cotton farmers vs hemp farmers?
-- How do we find who really rules us?
-    - Voltaire: "To find out who rules over you, simply find out who you are not allowed to criticize."
 - Reddit: CrazyIdeas
     - https://www.reddit.com/r/CrazyIdeas/comments/17yniw/you_need_a_license_to_have_children/
         - Are people more likely to be killed by other people (war, genocide, holocaust) or by cars?
