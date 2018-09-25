@@ -58,7 +58,6 @@ Existing programmers must spend some time helping the newcoming programmers, tem
     - [Renaat Verbruggen: Three universal methods of reducing complexity](http://www.computing.dcu.ie/~renaat/ca2/ca214/ca214vii.html): partitioning, hierarchy, independence
         - It also applies to other things, such as organizing this wiki.
     - 2000, article, "How complex systems fail", [pdf](http://web.mit.edu/2.75/resources/random/How%20Complex%20Systems%20Fail.pdf)
-- [Scott Hanselman: "Software doesn't work. I'm shocked at how often we put up with it."](https://www.hanselman.com/blog/EverythingsBrokenAndNobodysUpset.aspx)
 - Meilir Page Jones, "What every programmer should know about object-oriented design"
 - How do you know a software is maintainable?
     - Change all the programmers.
