@@ -5,18 +5,40 @@
 #+MATHJAX: t
 
 * Goal
-   :PROPERTIES:
-   :CUSTOM_ID: goal
-   :END:
 
 The goal is to make /the/ programming language.
+
+/The/ ultimate best programming language?
+
+** What is programming language research for?
 
 A goal of programming language research is to make a better programming language (if not the best).
 Do more with less.
 
-/The/ ultimate best programming language?
+** Envisioned usage?
 
-Source code should be human-readable article?
+- Suprastructure software engineer captures business logic into high-level program.
+  - Source code should be human-readable article.
+  - This steps focuses on describing what things exist and the relationships between them.
+  - This steps focuses on modeling.
+- Infrastructure software engineer maps high-level languages to low-level languages.
+  - Example of low-level programming language: Java, C#, C++, C, SQL, Scheme, Lisp, Haskell.
+  - This steps focuses on the modeling language.
+- some mention of "suprastructure" and "infrastructure" https://en.wikipedia.org/wiki/Process_architecture
+
+* Modeling all data
+
+** Hypothesis: data = ADTs + records + row polymorphism
+
+Hypothesis: All data can be modeled by a combination of these:
+
+- product (tuple)
+- sum (alternative, union)
+- record (tuple with named components)
+- row polymorphism
+
+Can we use web standards to define an ontology (so we can use Protege to edit it)?
+https://protege.stanford.edu/
 
 * Basic ontology of programming
 
@@ -86,6 +108,10 @@ Lambda calculus formalizes binding and substitution.
 
 - http://joeduffyblog.com/2015/11/03/blogging-about-midori/
   - http://joeduffyblog.com/2016/02/07/the-error-model/
+
+** Example of mixing nominal and structural subtyping
+
+https://www.eclipse.org/n4js/features/nominal-and-structural-typing.html
 
 ** Increasing language adoption
    :PROPERTIES:
