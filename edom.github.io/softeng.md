@@ -1,11 +1,26 @@
 ---
-title: Making lasting software sooner
+title: Standardizing software development?
 date: 2018-04-15 00:00 +0700
 permalink: /softeng.html
 ---
 
 - TOC
 {:toc}
+
+Hardware engineers have standard nuts, bolts, connectors, and components.
+
+Is software too malleable?
+
+Why standardize?
+
+- standardization reduces cost
+- standardization reduces duplicate effort
+- standardization improves interoperability
+
+Hypothesis:
+Programming language is too free.
+If programming language is limited (that is, if there is only one way to do one thing),
+then software will standardize itself.
 
 ## The keys to lasting software
 

@@ -16,18 +16,29 @@ Do more with less.
 
 /The/ ultimate best programming language?
 
+Source code should be human-readable article?
 
-* Basic ontology: program, language, machine
+* Basic ontology of programming
 
-A programming language is a formal language that is used to program a machine.
+A /language/ is something that has syntax (form) and semantics (meaning).
 
-A program is a string in a programming language.
+A language enables its users to /communicate/ with each other.
+
+A language is formed by the agreements of its users.
+
+A /formal language/ ...
+
+A /programming language/ is a formal language that is used for programming (a machine).
+
+To program a machine is ...?
+
+A /program/ is a formula/string/term in a programming language?
 
 A machine can be modeled by a formal system.
 
-A program is an executable mathematics?
+A program is an executable mathematical object?
 
-** Functional programming
+* Functional programming
 
 Every functional programming language is lambda calculus plus plus.
 
@@ -44,7 +55,6 @@ Functional programming is lambda calculus plus plus.
 - https://softwareengineering.stackexchange.com/questions/55047/what-is-the-greatest-design-flaw-you-have-faced-in-any-programming-language
 - http://math.andrej.com/2009/05/29/mathematically-structured-but-not-necessarily-functional-programming/
 - read, "true sums of products" http://hackage.haskell.org/package/generics-sop
-- read, http://joeduffyblog.com/2016/02/07/the-error-model/
 - https://waleedkhan.name/blog/getting-a-job-in-pl/
   - https://www.reddit.com/r/ProgrammingLanguages/comments/9ffiky/how_to_get_a_job_in_programming_languages/
 - https://www.reddit.com/r/ProgrammingLanguages/comments/9fgv3v/can_logic_programming_execute_as_fast_as/
@@ -66,6 +76,16 @@ Functional programming is lambda calculus plus plus.
    :CUSTOM_ID: what-should-we-know-before-creating-a-programming-language
    :END:
 
+** Lambda calculus
+
+Lambda calculus formalizes binding and substitution.
+
+** Semantics
+
+** Midori?
+
+- http://joeduffyblog.com/2015/11/03/blogging-about-midori/
+  - http://joeduffyblog.com/2016/02/07/the-error-model/
 
 ** Increasing language adoption
    :PROPERTIES:
@@ -518,10 +538,7 @@ Can we formalize "a program is an executable formal system" using Grue's map the
   - Clojure?
   - Scala? https://www.scala-lang.org/blog/2017/11/27/macros.html
 
-* Drinking from the firehose
-   :PROPERTIES:
-   :CUSTOM_ID: drinking-from-the-firehose
-   :END:
+* TODO Process these informations
 
 - Composition, composable systems
 
@@ -1303,5 +1320,28 @@ A subtype is an ordering that follows the Liskov substitution principle?
 It means P(X) => P(Y) for every predicate P.
 Liskov substitution principle.
 Does it mean "X is a subclass of Y" or "X is an instance of Y"?
+
+* Denotational semantics
+
+** Intro to denotational semantics
+
+- [[https://pdfs.semanticscholar.org/presentation/76cd/955ec6dafde3699d64e50882ec7fb4384803.pdf][pdf slides]]
+- 1989, PhD thesis, Frank Steven Kent Silbermann, "A Denotational Semantics Approach to Functional and Logic Programming", chapter 3, [[http://www.cs.unc.edu/techreports/89-030.pdf][pdf]]
+  - "A novel approach is taken in constructing an operational semantics directly from the denotational description."
+
+** TODO Does lambda calculus have a semantics that doesn't depend on reduction strategy?
+
+* Combine things and let the programmer choose?
+
+** Combine nominal subtyping and structural subtyping
+
+** Combine closed-world assumption (logic programming / relational database) and open-world assumption (web ontology)
+
+* Declarative programming languages
+
+[[http://www.cse.chalmers.se/~oloft/Papers/wm96/node2.html][Declarative Programming Languages]], functional logic programming, two ways it is done (narrowing and residuation);
+definitional programming, GCLA language (separate definition and control)
+
+- 1995, "Functional Logic Programming in GCLA", [[http://www.cse.chalmers.se/~oloft/Papers/wm95.pdf][pdf]]
 
 bibliography:default
