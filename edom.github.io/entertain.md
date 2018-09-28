@@ -282,3 +282,5 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
 - [Takeshi's Castle Episode 1 Original Japanese Broadcast](https://www.youtube.com/watch?v=Q9wAORBq0fE)
     - 1980s disco music
 - [Funny Babies Confused by Twin Parents Compilation - YouTube](https://www.youtube.com/watch?v=alNI45hzzmY)
+- [orang lagi tetew di lampu merah digaplok](https://www.reddit.com/r/indonesia/comments/8ps19a/tetew/)
+    - [sama, tapi di youtube, buat yang ga bisa buka reddit](https://www.youtube.com/watch?v=rvLdJQPxScQ)

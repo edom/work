@@ -46,6 +46,7 @@ date: 2017-06-09 00:59:00 +0700
             - jumpsuit
             - harness
             - lederhosen
+            - [WP:halterneck](https://en.wikipedia.org/wiki/Halterneck)
         - modifiers
             - crop (crop-top)
             - rise (low-rise, high-rise)
