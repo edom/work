@@ -40,6 +40,8 @@ Hypothesis: All data can be modeled by a combination of these:
 Can we use web standards to define an ontology (so we can use Protege to edit it)?
 https://protege.stanford.edu/
 
+- Does Eclipse EMF have textual representation?
+
 * Basic ontology of programming
 
 A /language/ is something that has syntax (form) and semantics (meaning).
@@ -59,6 +61,80 @@ A /program/ is a formula/string/term in a programming language?
 A machine can be modeled by a formal system.
 
 A program is an executable mathematical object?
+
+* Building a programming language on top of lambda calculus
+
+** Lambda calculus
+
+Lambda calculus formalizes binding and substitution.
+
+*** Reduction rules
+
+- reduce ((\ x -> y) p) = reduce (y but with every bound occurence of x replaced with p)
+- reduce x = x otherwise
+
+*** Examples of extending lambda calculus
+
+- [[https://sites.ualberta.ca/~jhoover/325/CourseNotes/section/UntypedLambda.htm][Functional Programming - 12. The Extended Untyped lambda Calculus]]
+- STLC = simply-typed lambda calculus
+- [[https://softwarefoundations.cis.upenn.edu/plf-current/MoreStlc.html][Extending STLC]]
+- 1982 article "A consistent extension of the lambda-calculus as a base for functional programming languages", https://www.sciencedirect.com/science/article/pii/S0019995882904582
+- "Extending the Lambda Calculus: An Eager Functional Language", [[http://www.cs.yale.edu/homes/hudak/CS430F07/LectureSlides/Reynolds-ch11.pdf][pdf slides]]
+
+*** What
+
+- "Cost models based on the lambda-calculus", [[http://www.cs.cmu.edu/~guyb/papers/lambdaInria.pdf][pdf slides]], from http://www.cs.cmu.edu/~guyb/
+- [[https://www.seas.harvard.edu/courses/cs152/2016sp/sections/sec-2016-02-18-soln.pdf][Exercises]] about denotational semantics and lambda calculus
+- lambda-prolog http://www.lix.polytechnique.fr/~dale/lProlog/
+- 2005 article "Introduction to Type Theory" [[http://www.cs.ru.nl/~erikb/onderwijs/sl2/materiaal/tt-sl2.pdf][pdf]]
+
+*** Denotational semantics
+
+**** Intro to denotational semantics
+
+- 1971, monograph, Dana Scott and Christopher Strachey, "Toward a mathematical semantics for computer languages", [[https://www.cs.ox.ac.uk/files/3228/PRG06.pdf][pdf]]
+- [[https://pdfs.semanticscholar.org/presentation/76cd/955ec6dafde3699d64e50882ec7fb4384803.pdf][pdf slides]]
+- 1997, book, "Denotational semantics: a methodology for language development", [[http://www.bcl.hamilton.ie/~barak/teach/F2008/NUIM/CS424/texts/ds.pdf][pdf]]
+- 1989, PhD thesis, Frank Steven Kent Silbermann, "A Denotational Semantics Approach to Functional and Logic Programming", chapter 3, [[http://www.cs.unc.edu/techreports/89-030.pdf][pdf]]
+  - "A novel approach is taken in constructing an operational semantics directly from the denotational description."
+
+**** TODO Does lambda calculus have a semantics that doesn't depend on reduction strategy?
+
+** First-class records obviate namespaces and modules
+
+** Extending lambda calculus with records
+
+We add these expression syntax rules:
+
+- If each of x1,...,xn is a label and each of e1,...,en is an expression, then ={x1:e1; ...; xn:en;}= is a /record expression/.
+  An example of a record expression is ={id: \ x -> x; app: \ f x -> f x;}=.
+  - Should we generalize label to expression?
+- =union R S= is a /record union expression/.
+
+** Extending lambda calculus with user-defined metadata attached to concrete syntax tree nodes
+
+We add these expression syntax rules:
+
+- If M is an expression and E is an expression, then =E : M= (read: data E annotated with metadata M) is an /annotated expression/.
+  - Alternative syntax: =E : M= can also be written =meta M E=.
+
+This generalizes type systems.
+With type systems, you annotate an expression with a type expression.
+With general annotations, you annotate an expression with another expression (some of which are type expressions).
+
+We assume that the outermost metadata update wins:
+
+- meta M (meta N E) = meta M E
+
+We add metadata extraction function symbol =meta-of=.
+
+We add these beta-reduction rules:
+
+- reduce (meta M E) = reduce E
+- reduce (meta-of (meta M E)) = reduce M
+- reduce (meta-of E) = #<empty-record> (for expressions without metadata)
+
+** When should we introduce a type system?
 
 * Functional programming
 
@@ -93,25 +169,26 @@ Functional programming is lambda calculus plus plus.
   in a concise and readable ASCII notation that is close to what one would write in informal mathematics."
   https://www.cl.cam.ac.uk/~pes20/ott/
 
-* What should we know before creating a programming language?
-   :PROPERTIES:
-   :CUSTOM_ID: what-should-we-know-before-creating-a-programming-language
-   :END:
+* After-2018 programming language requirements
 
-** Lambda calculus
-
-Lambda calculus formalizes binding and substitution.
-
-** Semantics
-
-** Midori?
+** Ergonomic error handling
 
 - http://joeduffyblog.com/2015/11/03/blogging-about-midori/
   - http://joeduffyblog.com/2016/02/07/the-error-model/
 
+** REPL (read-eval-print loop)
+
+The language must not preclude making a REPL for it.
+
+REPL is important for immediate feedback, experimentation, exploration, and playing around.
+
 ** Example of mixing nominal and structural subtyping
 
 https://www.eclipse.org/n4js/features/nominal-and-structural-typing.html
+
+** Programming language should separate modeling and binding. Can we combine dynamic binding and static typing?
+
+Example of binding is =import= statement.
 
 ** Increasing language adoption
    :PROPERTIES:
@@ -162,6 +239,62 @@ I think that is wise.
     - Assume no hardware fault.
 
   - Software is executable mathematics.
+
+** Paradigm, approach, viewpoint, worldview?
+
+- graph programming languages
+
+  - https://cstheory.stackexchange.com/questions/3906/what-are-theoretically-sound-programming-languages-for-graph-problems
+
+    - https://www.cs.york.ac.uk/plasma/wiki/index.php?title=GP_%28Graph_Programs%29
+    - 2007, PhD thesis, Steinert, [[https://www.cs.york.ac.uk/ftpdir/reports/2007/YCST/15/YCST-2007-15.pdf]["The graph programming language GP"]]
+    - a short visual example of "conditional rule schemata"
+
+      - 2010, article, [[https://www.cs.york.ac.uk/plasma/publications/pdf/PoskittPlump.VS-Theory.10.pdf]["Hoare Logic for Graph Programs"]]
+
+    - https://markorodriguez.com/2013/01/09/on-graph-computing/
+    - https://en.wikipedia.org/wiki/Gremlin_(programming_language)
+
+- equational programming?
+
+  - 2017-2018, https://www.cs.vu.nl/~tcs/ep/
+  - term-rewriting
+
+    - retired, [[http://q-lang.sourceforge.net/][Q language]]
+
+      - http://q-lang.sourceforge.net/examples.html
+      - superseded by Pure
+
+        - https://agraef.github.io/pure-lang/
+        - https://en.wikipedia.org/wiki/Pure_(programming_language)
+        - https://github.com/agraef/pure-lang/wiki/Rewriting
+
+    - Joy
+
+- 2002, article, [[http://www.cs.tufts.edu/comp/150PP/archive/norman-ramsey/pmonad.pdf]["Stochastic Lambda Calculus and Monads of Probability Distributions"]]
+- "Purely functional lazy nondeterministic programming", [[https://www.cambridge.org/core/journals/journal-of-functional-programming/article/purely-functional-lazy-nondeterministic-programming/1E8BA117E549A9612BC4AF9804E5507A][paywall]]
+- relational programming (pure logic programming?)
+
+  - miniKanren
+
+    - Byrd PhD thesis https://scholarworks.iu.edu/dspace/bitstream/handle/2022/8777/Byrd_indiana_0093A_10344.pdf
+
+      - mentions other programming languages: Prolog, Mercury, Curry
+
+- https://en.wikipedia.org/wiki/Multi-adjoint_logic_programming
+- ramble
+
+  - https://www.researchgate.net/project/Ontology-oriented-programming
+  - http://www.doc.ic.ac.uk/~klc/OntProg.html
+
+** Low-code? Programming for the masses?
+
+Limited programming?
+
+What can we assume about the user's skill/knowledge/background?
+
+- https://en.wikipedia.org/wiki/End-user_development
+- https://en.wikipedia.org/wiki/Low-code_development_platforms
 
 * Finding giants whose shoulders we want to stand on
    :PROPERTIES:
@@ -474,56 +607,6 @@ Can we formalize "a program is an executable formal system" using Grue's map the
 - How is "false" represented?
 - How is "true" represented?
 - How is "conjunction" represented?
-
-* Paradigm, approach, viewpoint, worldview?
-   :PROPERTIES:
-   :CUSTOM_ID: paradigm-approach-viewpoint-worldview
-   :END:
-
-- graph programming languages
-
-  - https://cstheory.stackexchange.com/questions/3906/what-are-theoretically-sound-programming-languages-for-graph-problems
-
-    - https://www.cs.york.ac.uk/plasma/wiki/index.php?title=GP_%28Graph_Programs%29
-    - 2007, PhD thesis, Steinert, [[https://www.cs.york.ac.uk/ftpdir/reports/2007/YCST/15/YCST-2007-15.pdf]["The graph programming language GP"]]
-    - a short visual example of "conditional rule schemata"
-
-      - 2010, article, [[https://www.cs.york.ac.uk/plasma/publications/pdf/PoskittPlump.VS-Theory.10.pdf]["Hoare Logic for Graph Programs"]]
-
-    - https://markorodriguez.com/2013/01/09/on-graph-computing/
-    - https://en.wikipedia.org/wiki/Gremlin_(programming_language)
-
-- equational programming?
-
-  - 2017-2018, https://www.cs.vu.nl/~tcs/ep/
-  - term-rewriting
-
-    - retired, [[http://q-lang.sourceforge.net/][Q language]]
-
-      - http://q-lang.sourceforge.net/examples.html
-      - superseded by Pure
-
-        - https://agraef.github.io/pure-lang/
-        - https://en.wikipedia.org/wiki/Pure_(programming_language)
-        - https://github.com/agraef/pure-lang/wiki/Rewriting
-
-    - Joy
-
-- 2002, article, [[http://www.cs.tufts.edu/comp/150PP/archive/norman-ramsey/pmonad.pdf]["Stochastic Lambda Calculus and Monads of Probability Distributions"]]
-- "Purely functional lazy nondeterministic programming", [[https://www.cambridge.org/core/journals/journal-of-functional-programming/article/purely-functional-lazy-nondeterministic-programming/1E8BA117E549A9612BC4AF9804E5507A][paywall]]
-- relational programming (pure logic programming?)
-
-  - miniKanren
-
-    - Byrd PhD thesis https://scholarworks.iu.edu/dspace/bitstream/handle/2022/8777/Byrd_indiana_0093A_10344.pdf
-
-      - mentions other programming languages: Prolog, Mercury, Curry
-
-- https://en.wikipedia.org/wiki/Multi-adjoint_logic_programming
-- ramble
-
-  - https://www.researchgate.net/project/Ontology-oriented-programming
-  - http://www.doc.ic.ac.uk/~klc/OntProg.html
 
 * Toward a language with first-class syntax?
    :PROPERTIES:
@@ -984,18 +1067,6 @@ Not only classes, but also functions, should be extensible.
 A consequence:
 Every occurrence of \( f \) can be replaced with \( f' \) while preserving the meaning of the containing expression.
 
-* Low-code? Programming for the masses?
-   :PROPERTIES:
-   :CUSTOM_ID: low-code-programming-for-the-masses
-   :END:
-
-Limited programming?
-
-What can we assume about the user's skill/knowledge/background?
-
-- https://en.wikipedia.org/wiki/End-user_development
-- https://en.wikipedia.org/wiki/Low-code_development_platforms
-
 * Probably irrelevant to our goal
    :PROPERTIES:
    :CUSTOM_ID: probably-irrelevant-to-our-goal
@@ -1162,9 +1233,6 @@ I want something like this:
 - [[https://github.com/bennofs/haskell-generate][bennofs/haskell-generate: Type-safe library for generating haskell source code]]
 
 * 2018-09-12 question
-   :PROPERTIES:
-   :CUSTOM_ID: question
-   :END:
 
 Do you know of anything that computes (generates code for) the products/sums of data-types?
 Do you know of any libraries that enable us to describe how to transform a data type to a related data type?
@@ -1297,6 +1365,7 @@ https://cs.stackexchange.com/questions/53998/what-are-the-major-differences-betw
 *** Row polymorphism vs structural subtyping
 https://news.ycombinator.com/item?id=13047934
 ** what
+
 - Liquid Haskell https://ucsd-progsys.github.io/liquidhaskell-blog/
 - [[https://brianmckenna.org/blog/row_polymorphism_isnt_subtyping][Row Polymorphism Isn't Subtyping - BAM Weblog]]
 - recursive types http://ecee.colorado.edu/~siek/ecen5013/spring10/lecture15.pdf
@@ -1307,6 +1376,8 @@ https://news.ycombinator.com/item?id=13047934
 - [[https://www.reddit.com/r/dependent_types/comments/8qig0u/vectors_are_records_too_pdf/][Vectors are records, too (pdf) : dependent_types]]
 - https://wiki.haskell.org/Untypechecking is "converting from a type to a term".
 - NOOL 2016 article "Static Typing Without Static Types — Typing Inheritance from the Bottom Up" [[http://www.it.uu.se/workshop/nool16/nool16-paper4.pdf][pdf]]
+- https://en.wikipedia.org/wiki/Literate_programming
+
 ** Parametricity
 - Every recursive type can be written as `mu a. F a` where F is the associated free functor?
     - Example: `List a = Fix (F a)` where `F a b = 1 + a * b`.
@@ -1347,16 +1418,6 @@ It means P(X) => P(Y) for every predicate P.
 Liskov substitution principle.
 Does it mean "X is a subclass of Y" or "X is an instance of Y"?
 
-* Denotational semantics
-
-** Intro to denotational semantics
-
-- [[https://pdfs.semanticscholar.org/presentation/76cd/955ec6dafde3699d64e50882ec7fb4384803.pdf][pdf slides]]
-- 1989, PhD thesis, Frank Steven Kent Silbermann, "A Denotational Semantics Approach to Functional and Logic Programming", chapter 3, [[http://www.cs.unc.edu/techreports/89-030.pdf][pdf]]
-  - "A novel approach is taken in constructing an operational semantics directly from the denotational description."
-
-** TODO Does lambda calculus have a semantics that doesn't depend on reduction strategy?
-
 * Combine things and let the programmer choose?
 
 ** Combine nominal subtyping and structural subtyping
@@ -1369,5 +1430,13 @@ Does it mean "X is a subclass of Y" or "X is an instance of Y"?
 definitional programming, GCLA language (separate definition and control)
 
 - 1995, "Functional Logic Programming in GCLA", [[http://www.cse.chalmers.se/~oloft/Papers/wm95.pdf][pdf]]
+
+* Common Lisp Object System
+
+- [[http://www.aiai.ed.ac.uk/~jeff/clos-guide.html][A Brief Guide to CLOS]]
+
+* Common Lisp advocacy
+
+- 2018, article, [[https://academic.oup.com/bib/article/19/3/537/2769437][How the strengths of Lisp-family languages facilitate building complex and flexible bioinformatics applications | Briefings in Bioinformatics | Oxford Academic]]
 
 bibliography:default
