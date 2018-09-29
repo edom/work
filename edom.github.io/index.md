@@ -38,16 +38,12 @@ We should join forces to reach our shared goals.
                     - [Proving things using computers]({% link proof.md %})
                     - [Maintaining backward-compatibility]({% link compat.md %})
                 - Subtopics
-                    - [Extending lambda calculus]({% link lambda.md %})
-                    - [Optimizing lambda calculus]({% link optlam.md %})
+                    - [Extending lambda calculus]({% link lambda.html %})
                     - [Extending Haskell]({% link exhask.md %})
                     - [Programming language design mistakes]({% link pldm.md %})
                     - [Designing markup languages]({% link markup.md %})
                     - [Designing configuration languages]({% link conflang.md %})
                     - Making interpreters/translators/compilers
-                        - Don't make a compiler?
-                        Make an interpreter instead, and stage it?
-                        Turn an interpreter into a compiler for free?
                         - [Parsing]({% link parse.md %})
                 - Old content to be reorganized
                     - [Functional programming research]({% link functional_programming.md %})
