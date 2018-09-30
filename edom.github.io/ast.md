@@ -4,6 +4,9 @@ date: 2018-07-30 17:48 +0700
 permalink: /ast.html
 ---
 
+- Other names of this problem:
+    - [AST typing problem](https://www.reddit.com/r/haskell/comments/1f91w3/the_ast_typing_problem/)
+    - "Trees that grow" problem
 - common problem in parsing: how to decorate AST in a functional language
     - 2013, article, [The AST typing problem](http://blog.ezyang.com/2013/05/the-ast-typing-problem/), Edward Z. Yang
         - 2010, discussion, "The AST typing problem", [LTU](http://lambda-the-ultimate.org/node/4170)

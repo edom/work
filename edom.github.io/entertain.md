@@ -284,3 +284,4 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
 - [Funny Babies Confused by Twin Parents Compilation - YouTube](https://www.youtube.com/watch?v=alNI45hzzmY)
 - [orang lagi tetew di lampu merah digaplok](https://www.reddit.com/r/indonesia/comments/8ps19a/tetew/)
     - [sama, tapi di youtube, buat yang ga bisa buka reddit](https://www.youtube.com/watch?v=rvLdJQPxScQ)
+- [Kitchen Gun - The Peter Serafinowicz Show - BBC Two - YouTube](https://www.youtube.com/watch?v=6-7NDP8V-6A)

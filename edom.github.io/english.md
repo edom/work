@@ -14,6 +14,7 @@ date: 2018-08-30 03:41 +0700
 - to fudgel = to pretend to work while in reality you are not doing anything ([Wiktionary](https://en.wiktionary.org/wiki/fudgel))
     - to procrastinate = to put off; to delay ([Wiktionary](https://en.wiktionary.org/wiki/procrastinate))
 - to lucubrate = to work diligently by artificial light; to study at night [Wiktionary](https://en.wiktionary.org/wiki/lucubrate)
+- https://en.wiktionary.org/wiki/Thesaurus:laugh
 
 ## Colorful synonyms of bad
 
@@ -33,6 +34,7 @@ date: 2018-08-30 03:41 +0700
 - hatefully bad: shitty, half-assed, crummy, crappy, cruddy
 - outrageously bad: [goddamn] [worthless] [motherfucking] [truckload of / piece of] [shit / crap]
 (the order of adjectives is important)
+- https://en.wiktionary.org/wiki/Thesaurus:bad
 
 ## Synonyms of insane
 
@@ -40,6 +42,7 @@ date: 2018-08-30 03:41 +0700
 - lunatic
 - deranged
 - delusional
+- https://en.wiktionary.org/wiki/Thesaurus:insane
 
 ## Researches
 

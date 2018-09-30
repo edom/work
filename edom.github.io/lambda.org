@@ -21,6 +21,10 @@ in a way that is also feasible to machine translation using classical compiler t
 - 1982 article "A consistent extension of the lambda-calculus as a base for functional programming languages", https://www.sciencedirect.com/science/article/pii/S0019995882904582
 - "Extending the Lambda Calculus: An Eager Functional Language", [[http://www.cs.yale.edu/homes/hudak/CS430F07/LectureSlides/Reynolds-ch11.pdf][pdf slides]]
 
+** Alternative titles
+
+- "How far can we push Scheme/Lisp?"
+
 * Lambda calculus
 
 Lambda calculus formalizes binding and substitution.
@@ -59,6 +63,8 @@ A /character string literal/ is surrounded with quotes.
 
 What is Unicode's definition of "character"?
 Is that definition sane?
+
+Should Unicode normalization/canonicalization be built into the programming language?
 
 Issues: ordering/collation, capitalization, combination, halfwidthization, ligature, etc.
 
@@ -186,6 +192,9 @@ https://stackoverflow.com/questions/28796904/whats-the-reason-of-let-rec-for-imp
 
 * Sharing, laziness, full laziness, complete laziness, and optimal reduction
 
+- https://www.reddit.com/r/haskell/comments/3pa5ii/are_optimal_evaluators_actually_optimal/
+  - https://cstheory.stackexchange.com/questions/32850/are-optimal-evaluators-actually-optimal
+
 ** Sharing
 
 - Should the programmer care about sharing?
@@ -213,6 +222,16 @@ These depend on circumstances:
 - If y is cheap, we want x not shared.
 
 How do we define "expensive"?
+
+** Lazy accumulation problem
+
+#+BEGIN_EXAMPLE
+sum a 0 = a
+sum a
+
+sum 0 = 0
+sum n = n + sum (n - 1)
+#+END_EXAMPLE
 
 * Currying is not compatible with vararg and named parameters?
 
@@ -532,3 +551,135 @@ I thought lambda calculus could be summarized in one page, but Henk Barendregt w
 * Ocaml
 
 - https://ocaml.org/learn/
+
+* Reconciling functional and logic programming into declarative programming?
+
+1996 publication "A Note on Declarative Programming Paradigms and the Future of Definitional Programming" [[http://www.cse.chalmers.se/~oloft/Papers/wm96/wm96.html][html]]
+
+** Example: Representing a predicate in lambda calculus
+
+Lambda calculus with boolean logic extensions:
+
+#+BEGIN_EXAMPLE
+p = \ x -> x = "a" OR x = "b"
+#+END_EXAMPLE
+
+Prolog:
+
+#+BEGIN_EXAMPLE
+p(a).
+p(b).
+#+END_EXAMPLE
+
+** Example: Representing a function in logic programming
+
+#+BEGIN_EXAMPLE
+inc(X, Y) :- X = Y + 1.
+#+END_EXAMPLE
+
+** The "satisfy" function
+
+The expression "satisfy f" finds all x : a that satisfies f : a -> bool.
+Thus the type of "satisfy" is "(a -> bool) -> list a".
+
+It is in principle possible to write such "satisfy" builtin for some lambda expressions.
+
+#+BEGIN_EXAMPLE
+satisfy (\ x -> x = "a" OR x = "b")
+=> ["a","b"]
+
+satisfy (\ (x : int) -> x >= 10)
+=> [10,11,12,...] -- an infinite list
+
+satisfy (\ (x : bool) -> true)
+=> [false,true]
+#+END_EXAMPLE
+
+** A function is a relation, a relation is a function, so what?
+
+A function \( (A,B,F) \) is trivially a relation.
+
+A relation \( (A,B,R) \) is a function \( (A,2^B,F) \) where \( F(x) = \{ y ~|~ (x,y) \in R \} \).
+
+* Precise memory accounting
+
+We want precise memory accounting to enable the runtime to limit memory usage.
+
+* Logic programming vs theorem proving
+
+https://stackoverflow.com/questions/36335633/difference-between-logic-programming-and-automated-theorem-proving
+
+* Execution state reification, save states, saving and loading states, pausing and resuming computations
+
+We want execution state reification so that we can do live process migration.
+
+* Knowledge representation and software specification
+
+- 2010, "Functional-Logic Programming Lecture Notes", Harold Boley, slides, [[http://www.cs.unb.ca/~boley/FLP/cs6905FLP.pdf][pdf]]
+  - Knowledge representation in AI roughly corresponds to software specification in software engineering.
+  - Declarative programs can be thought as executable specifications.
+  - Invertibility principle (slide 36)
+  - Nesting/conjunction principle (slide 46)
+  - Unification principle (slide 50)
+  - Amalgamation/integration principle (slide 55)
+  - That's a long deck: 270 slides.
+
+* Haskell woes
+
+- [[https://news.ycombinator.com/item?id=5893442][Ask HN: Any downsides of programming in Haskell? | Hacker News]]
+- [[https://www.reddit.com/r/haskell/comments/1gknfs/ask_hn_any_downsides_of_programming_in_haskell/][Ask HN: Any downsides of programming in Haskell? : haskell]]
+
+** Can't import type class instances explicitly
+
+[[https://stackoverflow.com/questions/8728596/explicitly-import-instances][There is a reason]].
+
+* Monads, and Haskell type system limitations
+
+- A monad is a way of /conservatively extending/ all categories. (Abdullah, private correspondence)
+- https://www.reddit.com/r/haskell/comments/3h2aqg/can_someone_explain_the_monads_are_generalised/
+
+** Should Nat (the natural numbers) be a subtype of Int (the integers)?
+
+Intuitively, yes.
+
+** <2018-10-01> @abdullah Signedness is a monad: conservatively extending naturals to integers
+
+I think this is what we mean when we say "integer is a monad".
+I think what we are really trying to say is "signedness is a monad", that is, "we can conservatively extend the naturals to the integers by using the Signed monad".
+
+We can write that in Haskell as follows (with some problems described later).
+
+#+BEGIN_EXAMPLE
+data Nat = Zero | Succ Nat
+type Int = Signed Nat
+data Signed a = Positive a | Negative a
+
+instance Functor Signed ...
+instance Applicative Signed ...
+
+instance Monad Signed where
+    return = Positive
+    m >>= k = join_signed (fmap k m)
+
+join_signed :: Signed (Signed a) -> Signed a
+join_signed mm = case mm of
+    Positive x -> x
+    Negative x -> negate_signed x
+
+negate_signed :: Signed a -> Signed a
+negate_signed (Positive x) = Negative x
+negate_signed (Negative x) = Positive x
+
+f :: Nat -> Nat
+f = ...
+
+f_int :: Int -> Int
+f_int = fmap f
+#+END_EXAMPLE
+
+We can have Signed Char, Signed String, etc., but those may not make sense.
+
+The problem:
+Nat should be a subtype of Int, because everyone who knows arithmetics seems to think that way.
+We want f and f_int to be the /same/ function.
+We don't want to type fmap, liftM2, and their ilk.

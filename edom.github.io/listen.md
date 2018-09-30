@@ -742,3 +742,8 @@ from Metal Gear Solid: Peace Walker
 - [Hauschka - Boiler Room In Stereo - YouTube](https://www.youtube.com/watch?v=HYsvlJgtAgY&t=10s)
     - Gene Pozniak's comment: 'This is the coolest and most listenable use of "prepared piano" technique I've ever heard. :-)'
     - from [CMV: "Contemporary classical music" after WWII is generally pretentious garbage. : changemyview](https://www.reddit.com/r/changemyview/comments/848eio/cmv_contemporary_classical_music_after_wwii_is/)
+- [Etrian Odyssey Untold: TMG - Town - The Lounge Where We Speak of Tomorrow - YouTube](https://www.youtube.com/watch?v=MkUcIfCS99w)
+    - from [{FAWFUL REUPLOAD}[YTP] Squishward Feigns Krabsperger's Syndrome to Squeeze Sponges in the Employee - YouTube](https://www.youtube.com/watch?v=XwgPraTb_64)
+        - from [there will Never Ever be another cartoon like Spongebob Squarepants. - YouTube](https://www.youtube.com/watch?v=cYu7Y52iiYI)
+- [Etrian Odyssey Untold: TMG - Scene - Blue and White - YouTube](https://www.youtube.com/watch?v=0WwxxkbcQmk&list=PLF3sECcU-eWy1gxwlz8XyO2Q7MdLyiK6d&index=18)
+- [One Direction - What A Feeling (Audio) - YouTube](https://www.youtube.com/watch?v=8L6CJzZUO_M)

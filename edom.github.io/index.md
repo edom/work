@@ -128,7 +128,6 @@ We should join forces to reach our shared goals.
     - [Justifying physics]({% link natkno.md %})
     - [Justifying counterfactual reasoning]({% link cf.md %})
 - Improving society
-    - [Legislating better societies]({% link government.md %})
     - [Politics]({% link politics.md %})
         - [Solving the Israel-Palestine problem]({% link ispal.md %})
         - [Using the media in politics]({% link polmed.md %})
