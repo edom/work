@@ -111,3 +111,4 @@ Make a website for peer-reviewing articles.
         - 2013, article, "A Theoretical Analysis of Crowdsourced Content Curation", [pdf](http://users.eecs.northwestern.edu/~gar627/crowdsource.pdf)
     - ["My Curated List of AI and Machine Learning Resources from Around the Web"](https://medium.com/machine-learning-in-practice/my-curated-list-of-ai-and-machine-learning-resources-from-around-the-web-9a97823b8524)
 - [Least publishable unit - Wikipedia](https://en.wikipedia.org/wiki/Least_publishable_unit)
+- [Vega Academic Publishing System – Blog](http://www.vegapublish.info/): "Vega is laying a new foundation for online open access publishing."

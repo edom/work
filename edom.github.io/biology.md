@@ -5,7 +5,7 @@ permalink: /biology.html
 ---
 
 - [Subsistence]({% link subsist.md %})
-    - [Farming]({% link farm.md %})
+    - Farming
         - [Seaweed]({% link seaweed.md %})
 - How do we cure death?
 - How do we live forever?

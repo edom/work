@@ -198,3 +198,4 @@ http://lambda-the-ultimate.org/node/3704
 - https://github.com/Gabriel439/post-rfc/blob/master/sotu.md#parsing--pretty-printing
     - https://hackage.haskell.org/package/trifecta
     - https://hackage.haskell.org/package/parsers
+- Parsing in Lisp and Racket https://stackoverflow.com/questions/21185879/writing-a-formal-language-parser-with-lisp
