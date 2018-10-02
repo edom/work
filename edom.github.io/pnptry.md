@@ -145,3 +145,8 @@ There are \\( 2^{2^k} \\) possible \\(k\\)-letter-string predicates.
 Suppose that a deterministic machine can solve \\( Sat(f,k) \\) for all \\(f\\) in \\(O(poly(k))\\) time.
 (Can we apply pigeonhole principle to the configuration graph?)
 - Every predicate can be stated in disjunctive normal form.
+
+## Other people's works that may be related
+
+- 2017-11-22 news about NEXP and ACC https://news.mit.edu/2017/faculty-profile-ryan-williams-1122
+- an explanation in English https://danielmiessler.com/study/pvsnp/

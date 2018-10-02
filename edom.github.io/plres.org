@@ -1422,3 +1422,11 @@ https://en.wikipedia.org/wiki/Intrinsic_and_extrinsic_properties
 - https://www.reddit.com/r/ProgrammingLanguages/comments/9fgv3v/can_logic_programming_execute_as_fast_as/
   - https://www.info.ucl.ac.be/~pvr/Peter.thesis/Peter.thesis.html
 - https://stackoverflow.com/questions/23711790/comparision-of-abstract-machines-for-execution-of-prolog
+* Why people don't adopt metaprogramming tools
+I fear that the tool doesn't perfectly fit my use case.
+When that happens, I want to drop down to the lower layer.
+Generated code is usually inflexible.
+I could maintain a patch, but isn't it (patching generated code) rather hacky and brittle?
+The right way is to design the metalanguage so that it can express such transformation.
+
+https://www.eclipse.org/epsilon/doc/articles/eugenia-patching/
