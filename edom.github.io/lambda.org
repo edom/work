@@ -1,47 +1,54 @@
-#+TITLE: Using lambda calculus
+#+TITLE: Building a formal language from lambda calculus
 #+DATE: 2018-07-22 02:45 +0700
 #+OPTIONS: ^:nil
 #+PERMALINK: /lambda.html
 #+MATHJAX: t
 
 * Introduction
-
 ** Goal
-
 The goal is to build a usable formal language up from lambda calculus.
 
 A /formal human language/ is a formal language that humans use to precisely (unambiguously) communicate technicalities to other humans
 in a way that is also feasible to machine translation using classical compiler techniques.
-
 ** Examples of extending lambda calculus
-
 - [[https://sites.ualberta.ca/~jhoover/325/CourseNotes/section/UntypedLambda.htm][Functional Programming - 12. The Extended Untyped lambda Calculus]]
 - STLC = simply-typed lambda calculus
 - [[https://softwarefoundations.cis.upenn.edu/plf-current/MoreStlc.html][Extending STLC]]
 - 1982 article "A consistent extension of the lambda-calculus as a base for functional programming languages", https://www.sciencedirect.com/science/article/pii/S0019995882904582
 - "Extending the Lambda Calculus: An Eager Functional Language", [[http://www.cs.yale.edu/homes/hudak/CS430F07/LectureSlides/Reynolds-ch11.pdf][pdf slides]]
-
 ** Alternative titles
-
 - "How far can we push Scheme/Lisp?"
-
+** Principles
+*** Refer to mathematics, logic, and English.
+*** Solve the root cause; don't hack.
+** Other people's opinions about designing programming languages
+- http://www.inquisition.ca/en/info/gepsypl/rules.htm
+- 2015 dissertation "Evidence-based programming language design: a philosophical and methodological exploration",
+  [[https://jyx.jyu.fi/handle/123456789/47698][abstract]],
+  [[https://jyx.jyu.fi/bitstream/handle/123456789/47698/978-951-39-6388-0_vaitos04122015.pdf][pdf]]
+- https://www.reddit.com/r/ProgrammingLanguages/comments/9ep9xq/what_i_did_not_steal_from_perl_6/
+  - "What's a character?" https://www.perlmonks.org/?node_id=1214956
+- https://www.reddit.com/r/ProgrammingLanguages/comments/9eqrfy/what_are_the_biggest_problems_with_programming/
+- 2017 article "The End of History? Using a Proof Assistant to Replace Language Design with Library Design" [[https://www.cs.purdue.edu/homes/bendy/Fiat/fiat-snapl.pdf][pdf]]
+- [[http://purduepl.github.io/index.html][Purdue university programming languages group]]
+** Shopping for ideas
+- [[https://www.reddit.com/r/ProgrammingLanguages/comments/8vcrzb/what_are_some_interesting_language_features_that/][What are some interesting language features that may not be well known? : ProgrammingLanguages]]
+- https://softwareengineering.stackexchange.com/questions/55047/what-is-the-greatest-design-flaw-you-have-faced-in-any-programming-language
+- https://www.reddit.com/r/ProgrammingLanguages/comments/9erq87/languages_with_separate_types_for_pointers_to_the/
+- http://math.andrej.com/2009/05/29/mathematically-structured-but-not-necessarily-functional-programming/
+- read, "true sums of products" http://hackage.haskell.org/package/generics-sop
 * Lambda calculus
-
 Lambda calculus formalizes binding and substitution.
 
 Follow [[https://crypto.stanford.edu/~blynn/lambda/][Ben Lynn's lambda-calculus tutorial]]:
 
 - why use lambda calculus as theoretical basis (cool reasons!)
-
 ** Beta-reduction
-
 - reduce : E -> E
 - reduce ((\ x -> y) p) = reduce (y[x:=p])
   - y[x:=p] means y but with every bound occurence of x replaced with p)
 - reduce x = x otherwise
-
 * Strings, especially of characters
-
 A /string/ is a homogenous sequence.
 
 A string has a beginning, and may have an ending.
@@ -56,11 +63,8 @@ A /character string/ is a sequence of characters.
 Unqualified "string" usually means "character string".
 
 A /character string literal/ is surrounded with quotes.
-
 ** Escape sequences
-
 ** Characters
-
 What is Unicode's definition of "character"?
 Is that definition sane?
 
@@ -70,15 +74,12 @@ Issues: ordering/collation, capitalization, combination, halfwidthization, ligat
 
 - https://en.wikipedia.org/wiki/String_(computer_science)
 - https://en.wikipedia.org/wiki/Character_(computing)
-
 * Macro, reflection, reification, quoting
-
 The language should be a model of itself.
 
 The language should be able to describe itself.
 
 Does that cause a paradox?
-
 * What program, execution, and termination mean in declarative paradigms
 
 In functional paradigm:
@@ -105,14 +106,32 @@ We want records because /records obviate namespaces and modules/.
 
 We want namespaces and modules because they are necessary for humans to manage large programs.
 
-** Do we want to represent records as functions?
+** We don't want to represent records as functions.
 
-A record r is a function r : string -> expression.
+We can describe the semantics of a record r as a function r : string -> expression.
+
+There are several options to pretty-print a record:
+
+- Define a =show-record= function that is different from =show=.
+- But we want polymorphic =show=. We want one =show= function to work for all things.
+- If a record is represented by a lambda abstraction, then pretty-printing the record will pretty-print a lambda abstraction.
+  We don't want that.
+  We want pretty-printed records to look like how we write records.
+
+** We want records to be applicable like lambda; we add a new beta-reduction rule for "applying" records.
 
 Record access is function application.
 To get the field =fld= or record =rec=, evaluate =rec fld=.
 
 The record =rec= with the the field =fld= updated to =new= is the expression =\ name -> IF name = fld THEN new ELSE rec fld=.
+
+We add this beta-reduction rule:
+
+- If X is a record, and Y is a string, then =X Y= reduces to =get X Y=.
+
+We want to pretend that records are functions.
+We want to use records as if they were functions.
+But we don't want records to be functions; we want to pretty-print records as records, not as lambda abstractions.
 
 ** Modules as record functions
 
@@ -606,15 +625,14 @@ A relation \( (A,B,R) \) is a function \( (A,2^B,F) \) where \( F(x) = \{ y ~|~ 
 We want precise memory accounting to enable the runtime to limit memory usage.
 
 * Logic programming vs theorem proving
-
-https://stackoverflow.com/questions/36335633/difference-between-logic-programming-and-automated-theorem-proving
-
+- https://stackoverflow.com/questions/36335633/difference-between-logic-programming-and-automated-theorem-proving
+- https://en.wikipedia.org/wiki/Automated_theorem_proving
 * Execution state reification, save states, saving and loading states, pausing and resuming computations
 
 We want execution state reification so that we can do live process migration.
 
 * Knowledge representation and software specification
-
+** Their relationships
 - 2010, "Functional-Logic Programming Lecture Notes", Harold Boley, slides, [[http://www.cs.unb.ca/~boley/FLP/cs6905FLP.pdf][pdf]]
   - Knowledge representation in AI roughly corresponds to software specification in software engineering.
   - Declarative programs can be thought as executable specifications.
@@ -623,7 +641,8 @@ We want execution state reification so that we can do live process migration.
   - Unification principle (slide 50)
   - Amalgamation/integration principle (slide 55)
   - That's a long deck: 270 slides.
-
+** Executable specification?
+- lightweight executable mathematics https://www.cl.cam.ac.uk/~pes20/lem/
 * Haskell woes
 
 - [[https://news.ycombinator.com/item?id=5893442][Ask HN: Any downsides of programming in Haskell? | Hacker News]]

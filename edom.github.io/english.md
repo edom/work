@@ -44,6 +44,8 @@ date: 2018-08-30 03:41 +0700
 - delusional
 - https://en.wiktionary.org/wiki/Thesaurus:insane
 
+## razmatazz, claptrap, humbug
+
 ## Researches
 
 - 2015 article "Vocabulary Learning Strategies",

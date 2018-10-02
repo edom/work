@@ -80,32 +80,45 @@ Every functional programming language is lambda calculus plus plus.
 
 Functional programming is lambda calculus plus plus.
 
-* TODO <2018-09-22> Summarize
-
-- 2015 dissertation "Evidence-based programming language design: a philosophical and methodological exploration",
-  [[https://jyx.jyu.fi/handle/123456789/47698][abstract]],
-  [[https://jyx.jyu.fi/bitstream/handle/123456789/47698/978-951-39-6388-0_vaitos04122015.pdf][pdf]]
-- [[https://www.reddit.com/r/ProgrammingLanguages/comments/8vcrzb/what_are_some_interesting_language_features_that/][What are some interesting language features that may not be well known? : ProgrammingLanguages]]
+* Beginning programming language research
 - [[https://blog.acolyer.org/2018/01/26/a-practitioners-guide-to-reading-programming-languages-papers/][A practitioner's guide to reading programming languages papers]]
   - from [[https://www.reddit.com/r/ProgrammingLanguages/top/][top scoring links : ProgrammingLanguages]]
-- https://softwareengineering.stackexchange.com/questions/55047/what-is-the-greatest-design-flaw-you-have-faced-in-any-programming-language
-- http://math.andrej.com/2009/05/29/mathematically-structured-but-not-necessarily-functional-programming/
-- read, "true sums of products" http://hackage.haskell.org/package/generics-sop
 - https://waleedkhan.name/blog/getting-a-job-in-pl/
   - https://www.reddit.com/r/ProgrammingLanguages/comments/9ffiky/how_to_get_a_job_in_programming_languages/
-- https://www.reddit.com/r/ProgrammingLanguages/comments/9fgv3v/can_logic_programming_execute_as_fast_as/
-  - https://www.info.ucl.ac.be/~pvr/Peter.thesis/Peter.thesis.html
-- https://www.reddit.com/r/ProgrammingLanguages/comments/9em9jf/future_directions_for_optimizing_compilers/
-  - "Future Directions for Optimizing Compilers" https://arxiv.org/abs/1809.02161
-- https://www.reddit.com/r/ProgrammingLanguages/comments/9ep9xq/what_i_did_not_steal_from_perl_6/
-  - "What's a character?" https://www.perlmonks.org/?node_id=1214956
-- https://www.reddit.com/r/ProgrammingLanguages/comments/9erq87/languages_with_separate_types_for_pointers_to_the/
-- https://www.reddit.com/r/ProgrammingLanguages/comments/9eqrfy/what_are_the_biggest_problems_with_programming/
-- lightweight executable mathematics https://www.cl.cam.ac.uk/~pes20/lem/
+* Implementing programming languages
 - "Ott is a tool for writing definitions of programming languages and calculi.
   It takes as input a definition of a language syntax and semantics,
   in a concise and readable ASCII notation that is close to what one would write in informal mathematics."
   https://www.cl.cam.ac.uk/~pes20/ott/
+* Making compilers
+- https://www.reddit.com/r/ProgrammingLanguages/comments/9em9jf/future_directions_for_optimizing_compilers/
+  - "Future Directions for Optimizing Compilers" https://arxiv.org/abs/1809.02161
+* TODO Measuring things
+** TODO Measuring programming language quality
+- https://en.wikipedia.org/wiki/Goodhart%27s_law
+*** Minimum IQ required to understand the language
+*** Development cost
+**** Length of program
+**** Development effort; number of people; amount of time
+*** Developer feeling/enjoyment
+*** Maintenance cost
+**** Cost due to runtime defects (defects discovered while the program is running in production environment)
+*** Rosetta Stone: comparing programs that do the same thing in different languages
+https://medium.com/concerning-pharo/elegant-pharo-code-bb590f0856d0
+*** Learnability, masterability, usability
+** TODO Measuring developer productivity
+- 2004 article "Defining and measuring the productivity of programming languages" [[https://pdfs.semanticscholar.org/1852/9ff58460b6238f5095af073d8505d79d3264.pdf][pdf]]:
+  - It defines these metrics:
+    - "the time and effort required to write, debug, and tune the code"
+    - "the performance of the code that results"
+  - power-efficiency graph (human efficiency and machine efficiency)
+  - what else?
+- 2008 https://ifs.host.cs.st-andrews.ac.uk/Books/SE9/Web/Planning/productivity.html
+  - https://ifs.host.cs.st-andrews.ac.uk/Books/SE9/
+- 1992 article https://www.andrews.edu/~vyhmeisr/papers/progprod.html
+- 2012 article http://www.drdobbs.com/jvm/the-comparative-productivity-of-programm/240005881
+  - "A database comparing 6,000 projects shows that the choice of programming language has a significant impact on project schedule."
+** TODO Measuring software complexity
 
 * After-2018 programming language requirements
 
@@ -127,56 +140,6 @@ https://www.eclipse.org/n4js/features/nominal-and-structural-typing.html
 ** Programming language should separate modeling and binding. Can we combine dynamic binding and static typing?
 
 Example of binding is =import= statement.
-
-** Increasing language adoption
-   :PROPERTIES:
-   :CUSTOM_ID: increasing-language-adoption
-   :END:
-
-In order for a language to be adopted, people must perceive its risk as low.
-
-The language must work with existing codebases.
-
-The language designer must think from the language user's point of view.
-Let's say I have 100,000 lines of Java that I've been writing and testing for the past 5 years.
-Are you expecting me throw away all of them?
-
-Thus the language must work with C, C++, C#, Java, Go, JavaScript, Python, Ruby, and everything else.
-This should be possible because the essence of all programming languages is the same: every programming language is a formal system.
-It should be possible to translate a program P1 in language L1 to program P2 in language L2 with the same semantics.
-
-Improve/enhance, not supersede.
-
-Mixing languages should be easy.
-
-2013, article, "Empirical analysis of programming language adoption", [[http://sns.cs.princeton.edu/docs/asr-oopsla13.pdf][pdf]]
-
-The language must be suitable for systems programming. - System programming is hardware-aware programming.
-Application programming assumes abstract machine, infinite memory, and all convenience provided by the operating system. - Why do we make this distinction?
-
-The language must facilitate metaprogramming.
-Everything must be a first-class citizen.
-It has to have EVAL.
-The language must provide a way for interpreting/compiling/loading a program at runtime.
-The compiler becomes a part of every program.
-
-What is the reason for the name "metacircular evaluator"?
-What is circular?
-What is metacircular?
-
-To make syntax first-class, we need QUOTE and UNQUOTE (such as in Lisp/Scheme)?
-
-To prevent syntax flamewar, we should define the canonical linearization of the abstract syntax tree.
-Go does this with =go fmt=.
-I think that is wise.
-
-- Basic assumptions
-
-  - Computer (machine) is embodied formal system.
-
-    - Assume no hardware fault.
-
-  - Software is executable mathematics.
 
 ** Paradigm, approach, viewpoint, worldview?
 
@@ -233,7 +196,51 @@ What can we assume about the user's skill/knowledge/background?
 
 - https://en.wikipedia.org/wiki/End-user_development
 - https://en.wikipedia.org/wiki/Low-code_development_platforms
+* Increasing language adoption
+** What
+In order for a language to be adopted, people must perceive its risk as low.
 
+The language must work with existing codebases.
+
+The language designer must think from the language user's point of view.
+Let's say I have 100,000 lines of Java that I've been writing and testing for the past 5 years.
+Are you expecting me throw away all of them?
+
+Thus the language must work with C, C++, C#, Java, Go, JavaScript, Python, Ruby, and everything else.
+This should be possible because the essence of all programming languages is the same: every programming language is a formal system.
+It should be possible to translate a program P1 in language L1 to program P2 in language L2 with the same semantics.
+
+Improve/enhance, not supersede.
+
+Mixing languages should be easy.
+
+2013, article, "Empirical analysis of programming language adoption", [[http://sns.cs.princeton.edu/docs/asr-oopsla13.pdf][pdf]]
+
+The language must be suitable for systems programming. - System programming is hardware-aware programming.
+Application programming assumes abstract machine, infinite memory, and all convenience provided by the operating system. - Why do we make this distinction?
+
+The language must facilitate metaprogramming.
+Everything must be a first-class citizen.
+It has to have EVAL.
+The language must provide a way for interpreting/compiling/loading a program at runtime.
+The compiler becomes a part of every program.
+
+What is the reason for the name "metacircular evaluator"?
+What is circular?
+What is metacircular?
+
+To make syntax first-class, we need QUOTE and UNQUOTE (such as in Lisp/Scheme)?
+
+To prevent syntax flamewar, we should define the canonical linearization of the abstract syntax tree.
+Go does this with =go fmt=.
+I think that is wise.
+
+- Basic assumptions
+  - Computer (machine) is embodied formal system.
+    - Assume no hardware fault.
+  - Software is executable mathematics.
+** Other people's opinions
+- 2012 article "Socio-PLT: Principles for Programming Language Adoption" [[https://lmeyerov.github.io/projects/socioplt/paper0413.pdf][pdf]]
 * Finding giants whose shoulders we want to stand on
    :PROPERTIES:
    :CUSTOM_ID: finding-giants-whose-shoulders-we-want-to-stand-on
@@ -1378,3 +1385,40 @@ definitional programming, GCLA language (separate definition and control)
 - 2018, article, [[https://academic.oup.com/bib/article/19/3/537/2769437][How the strengths of Lisp-family languages facilitate building complex and flexible bioinformatics applications | Briefings in Bioinformatics | Oxford Academic]]
 
 bibliography:default
+
+* TODO How do we develop enterprise web applications efficiently?
+** <2018-09-27> Enterprise application development is like three blind people describing an elephant.
+Every team is a blind people.
+
+The company's actual ontology is the elephant.
+
+How do we unify enterprise systems?
+Should we combine subsystem ontologies to produce the actual ontology,
+or should we derive subsystem ontologies from the actual ontology?
+** The ontology of enterprise web applications
+*** Entities
+An /entity/ is something that has identity.
+Every entity is distinguishable from other entities.
+*** Properties (extrinsic properties)
+A /property/ of an entity is something that makes the entity what it is.
+
+In software modeling, properties are usually extrinsic properties.
+
+An extrinsic property of an entity is something we give to the entity, not something that comes with the entity.
+
+Examples of properties:
+
+- The name of a person is an extrinsic property.
+  Changing his name doesn't change what I think of him.
+- The name of a hotel is an extrinsic property.
+  Changing the hotel's name does not change my willingness to stay in it.
+
+A /property/ is a function from entity E to value V.
+
+https://en.wikipedia.org/wiki/Intrinsic_and_extrinsic_properties
+*** Combining entities
+*** Mapping entities to storages
+* Fast logic programming?
+- https://www.reddit.com/r/ProgrammingLanguages/comments/9fgv3v/can_logic_programming_execute_as_fast_as/
+  - https://www.info.ucl.ac.be/~pvr/Peter.thesis/Peter.thesis.html
+- https://stackoverflow.com/questions/23711790/comparision-of-abstract-machines-for-execution-of-prolog
