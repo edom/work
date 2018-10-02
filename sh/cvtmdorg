@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# cvtmdorg INPUT OUTPUT
+# Convert Markdown to Org
+
+# This assumes Pandoc 2.3.
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+pandoc --from=markdown --to=org --wrap=preserve --output="$2" "$1"
