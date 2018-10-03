@@ -16,14 +16,17 @@ in a way that is also feasible to machine translation using classical compiler t
 - [[https://softwarefoundations.cis.upenn.edu/plf-current/MoreStlc.html][Extending STLC]]
 - 1982 article "A consistent extension of the lambda-calculus as a base for functional programming languages", https://www.sciencedirect.com/science/article/pii/S0019995882904582
 - "Extending the Lambda Calculus: An Eager Functional Language", [[http://www.cs.yale.edu/homes/hudak/CS430F07/LectureSlides/Reynolds-ch11.pdf][pdf slides]]
-*** TODO Study Caml Core
-- https://caml.inria.fr/pub/docs/manual-ocaml/coreexamples.html
+*** TODO Study OCaml
+Caml begets Caml Light begets OCaml.
+- https://ocaml.org/
+- [[https://caml.inria.fr/pub/docs/manual-ocaml/coreexamples.html]]
 - https://caml.inria.fr/resources/doc/faq/core.en.html
 ** Alternative titles
 - "How far can we push Scheme/Lisp?"
 ** Principles
 *** Refer to mathematics, logic, and English.
 *** Solve the root cause; don't hack.
+*** Interoperate with existing systems. Improve existing systems. Enable replacement, but don't require it.
 ** Other people's opinions about designing programming languages
 - http://www.inquisition.ca/en/info/gepsypl/rules.htm
 - 2015 dissertation "Evidence-based programming language design: a philosophical and methodological exploration",
@@ -353,6 +356,8 @@ IF entity todo_app todo E THEN property E int64 id.
 - 1998 article "Computing with Contexts: A simple approach" https://core.ac.uk/download/pdf/82065430.pdf
 - 2009 article "Two-level Lambda-calculus" https://www.sciencedirect.com/science/article/pii/S1571066109002400
 
+* Working with existing systems
+** Working with Java
 * Semantics (should we worry about this earlier?)
 
 ** Cost model
