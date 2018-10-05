@@ -26,19 +26,18 @@ We should join forces to reach our shared goals.
 - Computer practice
     - Software engineering
         - Forward software engineering
-            - [Making lasting software sooner]({% link softeng.md %})
-            - [Making the only programming language we will ever need]({% link plres.html %})
-                - [Modeling]({% link model.md %})
-                    - [Modeling all data]({% link modeldata.md %})
-                        - [Solving the AST decoration problem]({% link ast.md %})
-                        - Solving the expression problem
+            - [Making lasting software sooner]({% link softeng.html %})
+                - [Software]({% link software.md %})?
+                - Making the only programming language we will ever need
+                    - [Modeling]({% link model.md %})
+                        - [Modeling all data]({% link modeldata.md %})
+                            - [Solving the AST decoration problem]({% link ast.md %})
+                            - Solving the expression problem
                 - Managing large software
-                    - [Designing module systems]({% link module.md %})
                     - [Argument for static typing]({% link statyp.md %})
                     - [Proving things using computers]({% link proof.md %})
                     - [Maintaining backward-compatibility]({% link compat.md %})
                 - Subtopics
-                    - [Extending lambda calculus]({% link lambda.html %})
                     - [Extending Haskell]({% link exhask.md %})
                     - [Programming language design mistakes]({% link pldm.md %})
                     - [Designing markup languages]({% link markup.md %})

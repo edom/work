@@ -91,4 +91,4 @@ Can we make it use equirecursive types?
 - How do we compose monads seamlessly?
     - Isorecursive types?
     - True sum types (untagged unions)?
-- See also the reference to the 2016 article "System F-omega with Equirecursive Types for Datatype-Generic Programming" in [Extending lambda calculus]({% link lambda.html %}).
+- "System F-omega with Equirecursive Types for Datatype-Generic Programming"?

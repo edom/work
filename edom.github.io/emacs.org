@@ -384,6 +384,10 @@ Check before you copy.
 #+BEGIN_SRC
 javascript:window.prompt("Copy to clipboard: Ctrl+C, Enter", "[[" + document.URL + "][" + document.title + "]]");
 #+END_SRC
+** Searching hidden text such as link URL
+- https://emacs.stackexchange.com/questions/21208/search-and-replace-invisible-url-link-in-org-mode
+  - =M-x org-toggle-link-display=
+  - The =search-invisible= variable
 * Making Org play nice with Jekyll
 ** Other people's options
 *** Emacs Lisp programs with improper metadata mapping
