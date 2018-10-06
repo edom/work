@@ -14,4 +14,6 @@ permalink: /longhair.html
     - Fabio Lanzoni, born 1959
     - Franz Liszt, born 1811
 - Grooming
-    - [How to Tie Your Long Hair - For Men - The Longhairs](https://blog.thelonghairs.us/how-to-tie-your-long-hair/)
+    - "How to Tie Your Long Hair - For Men - The Longhairs",
+    [video](https://www.youtube.com/watch?v=f5ObBVtnixg),
+    [blog](https://blog.thelonghairs.us/how-to-tie-your-long-hair/)
