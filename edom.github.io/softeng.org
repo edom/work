@@ -3032,6 +3032,27 @@ Set a time-out.
 
   - [[https://github.com/jordanlewis/simple-module-system][jordanlewis/simple-module-system: Adding modules to a polymorphic lambda calculus]], code in SML/NJ.
 * Communities
-- https://www.reddit.com/r/ProgrammingLanguages/
+- #proglangdesign community
+  - their wiki https://github.com/proglangdesign/proglangdesign-wiki/wiki
+  - their reddit https://www.reddit.com/r/ProgrammingLanguages/
+  - their website https://www.proglangdesign.net/
 * Web application frameworks?
 http://zotonic.com/
+* Other solutions to the AST typing problem / trees-that-grow problem; using recursion schemes for separation of concern in functional programming
+- "Program Reduction: A Win for Recursion Schemes" http://www.newartisans.com/2018/04/win-for-recursion-schemes/
+  - Annotated expression trees
+    - "The first moment when this recursion scheme went from an interesting idea to a good design decision was when someone created an issue on GitHub, asking to add location information to the expression tree."
+  - Abstract Definitional Interpreters?
+    - 2017 article "Abstracting Definitional Interpreters" https://arxiv.org/abs/1707.04755
+  - boilerplate
+  - recommends using recursion schemes
+
+That is an interesting idea, but some important questions remain:
+
+- How do we do that without boilerplate (for the library writer)?
+- How do we do that without performance penalty?
+* Effects?
+- Reddit post "Try/Catch and Async/Await are just a specialized form of Algebraic Effects!" https://www.reddit.com/r/ProgrammingLanguages/comments/9kzcz6/trycatch_and_asyncawait_are_just_a_specialized/
+  - 2016 article "Algebraic Effects for Functional Programming" https://www.microsoft.com/en-us/research/wp-content/uploads/2016/08/algeff-tr-2016-v2.pdf
+    - "we show how algebraic effects generalize over common constructs like exception handling, state, iterators and async-await"
+  - <2018-10-08> not yet performant

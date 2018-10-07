@@ -4,9 +4,6 @@ date: 2018-05-12 00:00 +0700
 permalink: /biology.html
 ---
 
-- [Subsistence]({% link subsist.md %})
-    - Farming
-        - [Seaweed]({% link seaweed.md %})
 - How do we cure death?
 - How do we live forever?
 - Why do we age?

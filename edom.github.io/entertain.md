@@ -176,6 +176,7 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
             - <A HREF="https://www.youtube.com/watch?v=D6xa3VcxWtI">Russian news reporter can&#39;t stop laughing (with English subtitles) - YouTube</A>
         - We have a contender: [Chris P Bacon news anchor reporter looses control laughs at name of pig](https://www.youtube.com/watch?v=pMA3x-bc8iM)
             - Robert Bradfield https://twitter.com/robertbreports/status/826300273043894272?lang=en
+    - [ShadowPorker: Gluten Free Lapdances](https://www.youtube.com/watch?v=beA-HMLVb9M)
 - Technological unpleasantry
     - [This Chinese mother’s smart way to avoid paying via Face ID on iPhone X](https://www.youtube.com/watch?v=oQwwG_BCWsc)
     - [Amazon Alexa Gone Wild!!! Full version from beginning to end](https://www.youtube.com/watch?v=epyWW2e43UU), 0:44

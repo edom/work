@@ -128,6 +128,7 @@ We should join forces to reach our shared goals.
     - [Justifying counterfactual reasoning]({% link cf.md %})
 - Improving society
     - [Political dreams]({% link politics.html %})
+        - [Subsistence]({% link subsist.html %})
         - [Solving the Israel-Palestine problem]({% link ispal.md %})
         - [Defining marriage]({% link marry.html %})
     - Preventing social isolation
