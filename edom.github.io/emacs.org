@@ -85,6 +85,8 @@ To publish current file, press =C-c C-e P f=.
 The workaround is to wrap =org-publish= in =save-mark-and-excursion=.
 **** <2018-09-16> org-ref: There is an unwanted link to the bib file if there is no cite at all in the source org file
 The workaround is to remove the =bibliography:= if the document doesn't have any =cite:=.
+**** <2018-10-09> Can't change title of table of contents
+It's hardcoded in ox-html.el and ox.el.
 * Setting up Emacs and Org Mode
 ** Installing Emacs
 <2018-09-16>
@@ -388,6 +390,8 @@ javascript:window.prompt("Copy to clipboard: Ctrl+C, Enter", "[[" + document.URL
 - https://emacs.stackexchange.com/questions/21208/search-and-replace-invisible-url-link-in-org-mode
   - =M-x org-toggle-link-display=
   - The =search-invisible= variable
+** Inserting table of contents
+https://orgmode.org/manual/Table-of-contents.html
 * Making Org play nice with Jekyll
 ** Other people's options
 *** Emacs Lisp programs with improper metadata mapping

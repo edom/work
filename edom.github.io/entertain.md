@@ -272,6 +272,7 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
             - [when you hear the word "walk"](https://www.youtube.com/watch?v=djRfAQfT9E4)
             - fat shibes from [Rapid Liquid: part IV - don't nom cat food](https://www.youtube.com/watch?v=qe8b9gfuwME)
         - [thicc shibe being petted vigorously](https://www.youtube.com/watch?v=FLZZlHUNd_I)
+    - [Lyrebird mimics construction sounds](https://www.youtube.com/watch?v=C0ZffIh0-NA)
 - enhancements
     - botched Canadian robbery: [Woman falls through the ceiling in convenience store (Metal Gear Version)](https://www.youtube.com/watch?v=w-E7kz9I0wk)
 - [CGI Animated Short Film HD "The D in David " by Michelle Yi and Yaron Farkash \| CGMeetup](https://www.youtube.com/watch?v=o2kPSAYS2wQ)
