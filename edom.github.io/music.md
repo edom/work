@@ -55,3 +55,14 @@ date: 2016-03-27 14:14:08 +0700
     - https://www.reddit.com/r/MadeMeSmile/comments/8fjd1u/on_my_hellish_nyc_commute/
 - music composition / sound design method; imitate language tone/contour
     - ["How I composed the Windows 10 calendar alert" - YouTube](https://www.youtube.com/watch?v=1sqg63imHx0)
+
+## Musical background
+
+- Erik Dominikus was born in 1989 in Jakarta, Indonesia.
+- In 2001-2007 he studied classical music under Mr Hans (Han-Sin) Huang B.Mus.
+- In 2005 he took a Javanese gamelan class in SMA Regina Pacis Jakarta.
+- In 2006 he passed the ABRSM Grade 8 Piano examination.
+- In 2007 he passed the ABRSM Grade 6 Theory examination.
+- In 2011 he obtained his Bachelor of Computer Science degree from the Faculty of Computer Science, Universitas Indonesia.
+- In 2012 he learned to play some jazz music from a local community (Margo Friday Jazz) and the Internet.
+- In 2016-2017 he arranged some songs for an orchestra in his parish (Catholic Church of St Andrew, Jakarta), and composed some songs for the theater in that parish.
