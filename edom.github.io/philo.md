@@ -129,7 +129,7 @@ permalink: /philo.html
             - X a special kind of Y
             - There exists Z such that "X is a Y that Z"
         - "X is a Y that Z" means that every X is an instance of Y that satisfies Z.
-- Distraction from [Natural knowledge]({% link natkno.md %}):
+- Distraction from [Natural knowledge]({% link natkno.html %}):
     - How do we justify knowledge?
         - How do we justify knowledge from observation?
             - [Philo. SE 15463: Why distrust our senses?](https://philosophy.stackexchange.com/questions/15463/why-distrust-our-senses)

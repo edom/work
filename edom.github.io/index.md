@@ -124,7 +124,7 @@ We should join forces to reach our shared goals.
         - To get someone's attention, get on his critical path.
     - [Netflix culture](https://jobs.netflix.com/culture)
 - Understanding nature
-    - [Justifying physics]({% link natkno.md %})
+    - [Justifying physics]({% link natkno.html %})
     - [Justifying counterfactual reasoning]({% link cf.md %})
 - Improving society
     - [Political dreams]({% link politics.html %})
