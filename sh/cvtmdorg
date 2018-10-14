@@ -9,4 +9,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-pandoc --from=markdown --to=org --wrap=preserve --output="$2" "$1"
+# 2018-10-15: Workaround for GitHub Pages
+# https://github.com/jgm/pandoc/issues/4969
+# jgm suggested the tex_math_double_backslash extension to cope with my working around GitHub Pages.
+pandoc --from=markdown+tex_math_double_backslash --to=org --wrap=preserve --output="$2" "$1"

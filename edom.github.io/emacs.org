@@ -55,6 +55,14 @@ I don't know how it is in 2018.
 
 https://github.com/jkitchin/org-ref/issues/228
 
+**** <2018-10-15> Org's HTML inlining is slightly more verbose than Markdown's.
+You can't just type HTML in Org Mode.
+For example, you can do the following in Markdown, but not Org Mode.
+#+BEGIN_EXAMPLE
+Hello, <span class="what">world</span>.
+#+END_EXAMPLE
+You have to prefix it with =@@html:=.
+https://orgmode.org/manual/Quoting-HTML-tags.html
 *** Can you live with some Org Mode woes?
 These woes are mostly non-fatal but annoying.
 **** <2018-09-17> Incremental search doesn't search link URLs

@@ -48,7 +48,6 @@ We should join forces to reach our shared goals.
                     - [Functional programming research]({% link functional_programming.md %})
                         - Functional programming in the real world
                             - Philip Wadler's list [Functional Programming in the Real World](http://homepages.inf.ed.ac.uk/wadler/realworld/)
-                    - [Joint research with Abdullah]({% link abdullah.md %})
                     - [Programming]({% link programming.md %})
             - Programming
                 - [Using Haskell]({% link haskell.md %})
@@ -60,7 +59,7 @@ We should join forces to reach our shared goals.
                         - [Using Gradle]({% link gradle.md %})
                 - [Using Python]({% link python.md %})
                 - [Using XML]({% link xml.md %})
-                - [Using PostgreSQL]({% link pgsql.md %})
+                - [Using PostgreSQL]({% link pgsql.html %})
                 - [Standard MIDI file format]({% link smf.md %})
                 - Outdated pages:
                     - [Web scraping]({% link scrape.md %})
@@ -91,8 +90,7 @@ We should join forces to reach our shared goals.
         - [Searching the Internet]({% link search.md %})
         - [Removing nag screens]({% link nag.md %})
         - [Making a personal wiki]({% link perswiki.md %})
-        - [Buying a smartphone]({% link phone.md %})
-            - [Android vs iPhone]({% link andvsiph.md %})
+        - [Buying a smartphone]({% link phone.html %})
         - [Contributing to Wikipedia]({% link wikipedia.md %})
         - [Using Trello]({% link trello.md %})
     - [Liberating software]({% link libersoft.md %})
@@ -112,7 +110,7 @@ We should join forces to reach our shared goals.
                     - Why shouldn't intelligent machines get bored?
             - [Approximating functions]({% link approx.md %})
     - Computational complexity
-        - [Trying to prove P neq. NP]({% link pnptry.md %})
+        - [Trying to prove P neq. NP]({% link pnptry.html %})
 - [Getting rich]({% link getrich.md %})
     - [Investing]({% link invest.md %})
     - [Justifying my value]({% link value.md %})
@@ -137,7 +135,6 @@ We should join forces to reach our shared goals.
         [YT:I Was Almost A School Shooter \| Aaron Stark \| TEDxBoulder](https://www.youtube.com/watch?v=azRl1dI-Cts)
         - [YT:Cohousing communities help prevent social isolation](https://www.youtube.com/watch?v=DmWrx0ntATU)
     - Achieving independence
-        - [Achieving energy independence]({% link energy.md %})
         - Demonopolizing the ability to do violence?
             - People who care (and thus readily mobilize) are less oppressable than people who don't.
                 - How do we get people to care about and participate in politics?
@@ -218,7 +215,6 @@ We should join forces to reach our shared goals.
     - [Learning German]({% link german.md %})
     - Bahasa Indonesia
         - Apa beda manjur, mempan, mujarab, dan mustajab?
-- [Accounting]({% link account.md %})
 - Finding other information sources
     - Finding other wikis
         - [WP:List of wikis](https://en.wikipedia.org/wiki/List_of_wikis)

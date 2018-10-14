@@ -12,6 +12,5 @@ permalink: /forlet.html
         - [Music]({% link music.md %})
             - audiophile stuffs
                 - https://en.wikipedia.org/wiki/Digital_room_correction
-        - [Acting]({% link act.md %})
     - [Entertainment]({% link entertain.md %})
         - [Game]({% link game.md %})
