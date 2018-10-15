@@ -1174,3 +1174,44 @@ Browser fingerprinting
   - What is a general ledger?
     - A general ledger is the concatenation/combination/summation of several subledgers.
 - Are there open source enterprise accounting systems?
+* Measuring things to find bottlenecks (Linux, TCP, HTTP, network, CPU, disk, etc.)
+- How many empty TCP connections per second can a TCP endpoint accept?
+  We don't want to measure transfer rate.
+  We want to measure kernel bookkeeping overhead.
+  - These can't do that:
+    - iperf
+  - Can these do that?
+    - https://txlab.wordpress.com/2016/05/05/tcpkali-tcp-load-generator/
+    - http://uperf.org/
+    - qperf (ubuntu?)
+      - https://www.opsdash.com/blog/network-performance-linux.html
+      - https://access.redhat.com/solutions/2122681
+- How many HTTP requests can it handle? Use ApacheBench. =sudo apt-get install apache2-utils=.
+- How do we reduce the worst-case response time under high load?
+- Is the Linux process scheduler fair?
+- Is the Linux process scheduler time complexity O(1)?
+- https://medium.com/@oscar.eriks/case-study-network-bottlenecks-on-a-linux-server-part-2-the-kernel-88cf614aae70
+- Which is better, select or epoll?
+** Linux TCP TIME_WAIT exhaustion on busy server
+- What are my options?
+  - Assign more IP addresses.
+  - Geographically distribute the application.
+    Procure edge servers closer to the clients.
+    But you can't do this if you are not a CDN or ISP.
+  - Reduce the TIME_WAIT MSL (maximum segment lifetime)
+    - http://www.lognormal.com/blog/2012/09/27/linux-tcpip-tuning/
+    - This makes TCP incorrect, but in the case of a load balancer, the probability of the incorrectness is negligible (unless it's an attack, or it's behind a NAT).
+    - =net.ipv4.netfilter.ip_conntrack_tcp_timeout_time_wait = 1=
+  - Non-options
+    - =net.ipv4.tcp_tw_recycle= has been removed.
+    - =net.ipv4.tcp_tw_reuse= doesn't work.
+  - https://vincent.bernat.ch/en/blog/2014-tcp-time-wait-state-linux
+    - https://news.ycombinator.com/item?id=7684015
+    - "The universal solution is to /increase the number of possible quadruplets/ by using, for example, more server ports."
+    - "Moreover, when designing protocols, /don’t let clients close first/."
+- See the TCP protocol documentation.
+  Where are the wait states?
+  Who hold the wait states?
+  The client?
+  The server?
+  The one who calls the =close= system call?
