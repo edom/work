@@ -31,8 +31,6 @@ We should join forces to reach our shared goals.
                 - Making the only programming language we will ever need
                     - [Modeling]({% link model.md %})
                         - [Modeling all data]({% link modeldata.md %})
-                            - [Solving the AST decoration problem]({% link ast.md %})
-                            - Solving the expression problem
                 - Managing large software
                     - [Argument for static typing]({% link statyp.md %})
                     - [Proving things using computers]({% link proof.md %})

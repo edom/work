@@ -3,11 +3,81 @@
 #+OPTIONS: ^:nil
 #+PERMALINK: /softeng.html
 #+MATHJAX: t
+* Goal
+The goal is to make /the/ programming language.
+
+/The/ ultimate best programming language?
+** What is programming language research for?
+A goal of programming language research is to make a better programming language (if not the best).
+Do more with less.
+** Jargon is necessary for concision (high information transfer rate)
+In different fields of studies, we invent jargons for concision, to speed up information transmission, to convey more meaning in shorter time with less words.
+** Envisioned usage? Infrastructure engineers and suprastructure engineers?
+- Suprastructure software engineer captures business logic into high-level program.
+  - Source code should be human-readable article.
+  - This steps focuses on describing what things exist and the relationships between them.
+  - This steps focuses on modeling.
+- Infrastructure software engineer maps high-level languages to low-level languages.
+  - Example of low-level programming language: Java, C#, C++, C, SQL, Scheme, Lisp, Haskell.
+  - This steps focuses on the modeling language.
+- some mention of "suprastructure" and "infrastructure" https://en.wikipedia.org/wiki/Process_architecture
+*** Language-oriented programming, domain-specific languages (DSLs)
+The 2010 article "Using DSLs for Developing Enterprise Systems" [[https://research.cyber.ee/simpl/enterprise-dsl.pdf][pdf]]:
+
+- It uses the terms "language engineer", "transformation specialist", and "business engineer".
+- It defines several usage scenarios of DSLs.
+- It defines five criteria for comparing DSL tools.
+- It compares some DSL tools.
+
+That paper should have been a wiki article.
+** But software engineers can't just assume that users are going to wait forever, that memory is unlimited, that network is always up and fast, etc.?
+* What is software engineering?
+** What is software?
+** What is engineering?
+/Engineering/ is?
+
+Engineering implies design goals, tradeoffs, and decisions.
+
+An engineering activity has a goal.
+** Ontology and jargon
+A /language/ is something that has syntax (form) and semantics (meaning).
+
+A language enables its users to /communicate/ with each other.
+
+A language is formed by the agreements of its users.
+
+A /formal language/ ...
+
+A /programming language/ is a formal language that is used for programming (a machine).
+
+To program a machine is ...?
+
+A /program/ is a formula/string/term in a programming language?
+
+A machine can be modeled by a formal system.
+
+A program is an executable mathematical object?
+* Basics
+** Who use programming languages?
+A programming language serves as a means of communication in three cases:
+
+- human-to-human:
+- human-to-machine:
+- machine-to-machine:
+
+We advance technologically when we raise the bar for machines (we expect more from machines), not when we expect more from humans.
+(?)
 
 * Unsorted things from softeng.md
-Hardware engineers have standard nuts, bolts, connectors, and components.
+** Why is hardware more standardized than software?
+Hardware standardization benefits everyone (both its makers and its users).
+Hardware unstandardization is more expensive than hardware standardization.
+
+Software standardization is more expensive than software unstandardization.
 
 Is software too malleable?
+
+Hardware engineers have standard nuts, bolts, connectors, and components.
 
 Why standardize?
 
@@ -19,199 +89,110 @@ Hypothesis:
 Programming language is too free.
 If programming language is limited (that is, if there is only one way to do one thing),
 then software will standardize itself.
-** The keys to lasting software
-   :PROPERTIES:
-   :CUSTOM_ID: the-keys-to-lasting-software
-   :END:
 
+There are some software standards, such as ABIs (Application Binary Interfaces).
+C calling convention is a standard.
+** How do we write lasting software?
 - Clear ontology
 - Task-oriented documentation
-
   - Documentation doesn't have to be separate from code.
-
 - /Capture/ the requirement.
   Translate the requirement into software, instead of making a software system that /satisfies/ the requirement.
-
   - The program may be rewritten, but the functional requirements, the business logic and the mathematical truths rarely change.
-
     - In order to make software last, we must /capture/ the requirements, not make a system that satisfies the requirements.
       This requires a change in mindset.
       The software is not something made to some requirements; the software is the requirements itself.
       The software is not the shirt made-to-order; the software is the order itself, from which all satisfying shirts can be generated/derived/produced.
-
 - Think for yourself.
   Don't just follow hypes.
   Always have a reason when doing things.
   Record your reasoning for your forgetful future self.
 - Design software to be refactored without surprises.
-
   - Example: Avoid runtime reflection (unless for the most obvious cases).
     An alternative to that is code generation.
-
     - Help the compiler help you.
     - Even the most obvious cases aren't obvious to someone who see the code for the first time?
-
 - Shorten the edit-compile-test cycle. Design software so that it compiles fast and it starts up fast.
 - What else?
-
 ** What we know
-   :PROPERTIES:
-   :CUSTOM_ID: what-we-know
-   :END:
-
 Adding people to a late software project makes it later (Fred Brooks, "No silver bullet").
 Newcoming programmers, no matter how experienced, need time to onboard; they are not immediately productive.
 Existing programmers must spend some time helping the newcoming programmers, temporarily reducing productivity even further.
-
 ** Readings?
-   :PROPERTIES:
-   :CUSTOM_ID: readings
-   :END:
-
 - 2018, book, "The essence of software engineering", [[https://link.springer.com/book/10.1007/978-3-319-73897-0][description]], [[https://link.springer.com/content/pdf/10.1007%2F978-3-319-73897-0.pdf][pdf]]
-
   - chapter "Escaping Method Prison -- On the Road to Real Software Engineering"
-
     - some history of software engineering; method wars;
     - some retrospective
     - [[https://semat.org/][SEMAT (Software Engineering Method And Theory)]]
-
 - [[http://www.icse-conferences.org/mostinfluential.html][ICSE (International Conference on Software Engineering) most influential articles]]
-
   - "ICSE is the flagship conference of [software engineering] [...]." ([[http://www.gousios.org/blog/Report-from-ICSE-2017.html][Georgios Gousios]])
-
     - 2008, article, "Debugging Reinvented: Asking and Answering Why and Why Not Questions About Program Behavior ICSE-30"
-
       - https://www.cs.cmu.edu/~NatProg/whyline.html
       - https://github.com/andyjko/whyline
-
     - 2012, slides, "Connecting Software Architecture to Implementation: The Next 10 Years", [[http://www.cs.cmu.edu/~aldrich/presentations/aldrich-icse-mip-2012.pdf][pdf]]
-
       - 2002, article, "ArchJava: Connecting Software Architecture to Implementation", [[https://www.ics.uci.edu/~andre/informatics223s2009/aldrichchambersnotkin.pdf][pdf]]
-
     - 1997, article, "Software processes are software too, revisited", [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.148.7620&rep=rep1&type=pdf][pdf]]
-
       - 1987, article, "Software processes are software too", [[http://laser.cs.umass.edu/techreports/1987-LJO.pdf][pdf]]
-
 - 2018, slides, "What would a science of software engineering look like?", [[http://herbsleb.org/web-pres/slides/crowd-chase-2018-final-dist.pdf][pdf]]
 - on complexity
-
   - [[http://www.computing.dcu.ie/~renaat/ca2/ca214/ca214vii.html][Renaat Verbruggen: Three universal methods of reducing complexity]]: partitioning, hierarchy, independence
-
     - It also applies to other things, such as organizing this wiki.
-
   - 2000, article, "How complex systems fail", [[http://web.mit.edu/2.75/resources/random/How%20Complex%20Systems%20Fail.pdf][pdf]]
-
 - Meilir Page Jones, "What every programmer should know about object-oriented design"
 - How do you know a software is maintainable?
-
   - Change all the programmers.
     If the new programmers can handle it,
     it's maintainable.
   - The only way to ensure software maintainability is periodic rotation of programmers?
-
 ** Old pages
-   :PROPERTIES:
-   :CUSTOM_ID: old-pages
-   :END:
-
 - Things we use, tools and services
-
   - vim, text editor
   - Management
   - Other opinions
-
     - .NET stack
-
       - http://engineering.gopangea.com/stack
       - http://engineering.gopangea.com/2015/12/10/why-dot-net.html
-
 ** Developing software for the Web
-   :PROPERTIES:
-   :CUSTOM_ID: developing-software-for-the-web
-   :END:
-
 - [[https://news.ycombinator.com/item?id=11035143][The sad state of web development]] (not everyone agrees).
 - It's time to kill the web https://blog.plan99.net/its-time-to-kill-the-web-974a9fe80c89
-
   - from https://twitter.com/tehjh Jann Horn's Twitter
-
     - At that time Jann Horn was a member of Google's Project Zero
       https://blog.plan99.net/what-should-follow-the-web-8dcbbeaccd93
-
 - Why not infinite scrolling?
-
   - Do you have an alternative to infinite scrolling?
   - Do you handle network interruptions?
     How does the user continue scrolling after network connection is restored?
     Is there an unhandled exception in your script?
-
 ** Software development woes
-   :PROPERTIES:
-   :CUSTOM_ID: software-development-woes
-   :END:
-
 - When we write a program,
   we are actually creating a /mathematical model/ of reality,
   creating an implicit ontology,
   defining what exist,
   making simplifying assumptions,
   discarding irrelevant aspects.
-
 ** Most "bugs" are actually "programming errors".
-   :PROPERTIES:
-   :CUSTOM_ID: most-bugs-are-actually-programming-errors.
-   :END:
-
 Programmers need to own up their mistakes, and call an error an error, not a bug.
 A bug is something the programmer cannot control.
 A cosmic ray strike flipping a bit in RAM is a bug.
 A typo in the source code is not a bug.
-
 ** Coupling
-   :PROPERTIES:
-   :CUSTOM_ID: coupling
-   :END:
-
 - Coupling is deciding what you can depend on.
-
   - Big Company X just released this new cool stuff, but will it still be there in 5 years?
-
-** Respecting legacy code
-   :PROPERTIES:
-   :CUSTOM_ID: respecting-legacy-code
-   :END:
-
+** Respect legacy code because it works, but don't get too attached to anything.
 It may be ugly, but /it works/.
-
 - Is the code really ugly?
-
   - Are you refusing to read it because it doesn't fit your taste?
     Indent size?
     Snake case vs camel case?
-
     - Is the code truly unreadable, or are you just an asshole?
-
       - How hard have you tried?
-
 ** Maintainability
-   :PROPERTIES:
-   :CUSTOM_ID: maintainability
-   :END:
-
 - 2017-05-20
-
   - What helps writing maintainable software?
-
     - Minimize duplication? The programming language limits deduplication?
     - Facilitate change, minimize ripple due to change
     - Flexibility of a component is proportional to its risk of changing?
-
 ** Undigested
-   :PROPERTIES:
-   :CUSTOM_ID: undigested
-   :END:
-
 - What is a database that can be scaled up without downtime?
   We are willing to sacrifice consistency for tracking data.
 - Are we really doing Scrum? http://www.allaboutagile.com/the-scrumbutt-test/
@@ -220,32 +201,21 @@ It may be ugly, but /it works/.
   All our programs read data, do something what that data, and write data.
   The most important things are the data and the business logic.
 - How to group code? By feature? By dependency? By author?
-
   - https://en.wikipedia.org/wiki/Feature-driven_development#Build_by_feature
-
     - "Any function that is too complex to be implemented within two weeks is
       further decomposed into smaller functions until each sub-problem is small enough to be called a feature."
-
 - Grails vs Spring MVC vs Play Framework?
 - distributed systems
-
   - [[https://martinfowler.com/bliki/FirstLaw.html][Martin Fowler's First Law of Distributed Object Design]]: "Don't distribute your objects."
   - http://www.drdobbs.com/errant-architectures/184414966
-
 - Eta is GHC ported to JVM.
-
   - 2017-01-13: Haskell (~ GHC 7.10.3) on JVM: http://eta-lang.org/docs/html/
-
 - https://blog.codinghorror.com/discipline-makes-strong-developers/
-
   - Good code is more because of programmer discipline than because of the framework or language.
-
 - Emphasize maintainability, readability, understandability, changeability?
 - React reinvents Windows 1.0 (1985) https://bitquabit.com/post/the-more-things-change/
 - Ramble
-
   - Writing software?
-
     - Minimize build time.
     - Minimize the time from program startup to program ready.
       Otherwise you won't test the program.
@@ -264,62 +234,40 @@ It may be ugly, but /it works/.
       The shape of the data is important?
     - Make every part understandable in isolation?
     - Avoid nulls? If you must use null, document it.
-
 - 2018-05-30
-
   - Enterprise application stack?
-
     - Java 8
     - Jetty 9.4 (Servlet API 3.1.0)
     - JPA API 1.0.2 (annotations only)
     - J2HTML
     - PostgreSQL 9.5
     - J2HTML-like for C#
-
       - https://github.com/HtmlTags/htmltags
-
     - Java: Install OpenJDK 8, install IntelliJ IDEA, you're all set.
-
       - IntelliJ IDEA comes with Maven.
-
     - .NET: Install Mono, install Monodevelop 5.
-
       - Monodevelop 5 comes with Nuget.
-
     - Database should be a library, not a stand-alone server.
-
 - software legality?
-
   - Harmony CLA (Contributor License Agreement)?
-
 - What cause software errors?
-
   - Programming error: what the programmers think are not what they write.
     Difference between their thought and the computer's actual rules.
     Silent wrong assumption.
   - Contributing factors: bad languages, bad tools.
-
     - Bad languages make writing correct programs difficult.
-
   - Errors outside programmer control: cosmic rays, hardware problems
-
 - What is software engineering?
-
   - Engineering is the application of science.
   - Civil engineering is the application of natural science.
   - Software engineering is the application of computer science.
   - What is science?
-
     - Science is the application of the scientific method.
     - Science is a mixture of philosophy, mathematics, and experiments.
-
   - What is software?
-
     - chapter, "What is software?: The role of empirical methods in answering the question", [[https://link.springer.com/chapter/10.1007/978-3-319-73897-0_4][description]], [[https://link.springer.com/content/pdf/10.1007%2F978-3-319-73897-0_4.pdf][pdf]]
-
       - "Legislation is (like?) software development."
       - "[Cooking] Recipes are software."
-
     - The ideal software is easy to change but doesn't change.
       The ideal software captures the essence of the problem.
       The essence of a problem is mathematical definitions.
@@ -327,301 +275,114 @@ It may be ugly, but /it works/.
     - Software is a model of reality.
     - Software is law?
       Law is software?
-
       - Similarity between software and law
-
         - Bad software and bad law both result in unnecessarily slow system.
         - Both are based on logic.
         - Both have an ontology.
         - The law of a country is a big (possibly inconsistent) logic program.
-
           - The law in writing vs the law in practice
-
             - I think it is too much for anyone to know all laws that are in effect in a country.
-
       - Difference between software and law
-
         - A judge cares about both the letter of the law and the spirit of the law.
         - A computer cares only about the letter of the software.
           There is no such thing as the spirit of the software.
-
           - A computer does what we write, not what we mean.
-
             - The programmer follows the computer's rules. Not the other way around.
-
         - [[https://en.wikipedia.org/wiki/Letter_and_spirit_of_the_law][WP:Letter and spirit of the law]]
-
     - Software is executable theory of nature.
     - Software is like physics but executable.
     - https://queue.acm.org/detail.cfm?id=2693160
     - https://www.cs.umn.edu/research/research_areas/software-engineering-and-programming-languages
-
       - "Software is a solution to a computational problem using a formal programming language."
-
 - 2010, article, "We show how symbolic execution and Satisfiability Modulo Theories (SMT) solvers can be gainfully employed to greatly automate software debugging of evolving programs.", [[https://www.sciencedirect.com/science/article/pii/S1571066110001246][downloadable as pdf]]
-
   - confusing title: "Debugging as a Science, that too, when your Program is Changing"
-
 - Distilling the best practices and standardizing the tools and processes
-
   - API (application programming interface) information systems, REST clients, REST API debuggers
-
     - https://insomnia.rest/
-
       - source code https://github.com/getinsomnia/insomnia
-
     - https://www.getpostman.com/
-
       - not open source https://stackoverflow.com/questions/43380313/postman-main-source-code-repository
-
   - JOOQ
   - https://zachholman.com/posts/deploying-software
   - IDE (integrated development environment)
-
     - How do we make an IDE?
       Can we generate an IDE from grammar?
-
   - How do we put academic research into practice?
-
     - 1995, article, "Deriving specifications from requirements: an example", [[https://dl.acm.org/citation.cfm?id=225016][paywall]]
     - 1998, article, "Architecture-based runtime software evolution", [[https://dl.acm.org/citation.cfm?id=302181][paywall]]
     - 2000, article, "Bandera: extracting finite-state models from Java source code", [[https://dl.acm.org/citation.cfm?id=337234][paywall]]
-
       - Is this related with C#'s async-await?
-
   - metaprogramming
-
     - "Spoon is a library to analyze, transform, rewrite, transpile Java source code (incl Java 9 & Java 10)." [[https://github.com/INRIA/spoon][source]]
-
 - unread
-
   - long text: [[http://organizationalphysics.com/2016/10/13/top-down-vs-bottom-up-hierarchy-or-how-to-build-a-self-managed-organization/][Top-down vs. Bottom-up Hierarchy: Or, How to Design a Self-Managed Organization]]
-
 - 2014, article, "Bidirectionally tolerating inconsistency: partial transformations", [[http://groups.inf.ed.ac.uk/bx/fase14.pdf][pdf]]
-
   - 1990, article, "Tolerating inconsistency", Robert Balzer, [[http://gssi.det.uvigo.es/users/jgd/public_html/doctorado_01-02/p158-balzer.pdf][pdf]]
-
 - Don't use GitFlow.
   Use continuous integration and continuous deployment instead.
-
   - The =master= branch always builds, always runs, and is always releasable.
   - Everything goes to =master=. Sketches, hotfixes, everything.
   - Avoid non-master long-lived branches.
   - It is OK to introduce half-baked code into =master= as long as it doesn't introduce errors.
-
     - Use feature switch/toggle.
-
       - Just because code is in =master= doesn't mean it will be run on production.
-
     - Work-in-progress doesn't have to be full of errors.
-
   - Discipline yourself to make small commits and avoid big merges.
   - Discipline yourself to make backward-compatible changes, and deprecate things slowly.
-
     - Give your users time to migrate.
     - If your changes are always backward-compatible, you will never break someone else's code.
-
   - You can rebase/tidy up commits that you haven't pushed.
   - Merges and rebases produce the same working tree but have different uses.
-
     - The computer doesn't care whether you merge or rebase.
     - Merges and rebases exist for the humans.
-
   - 2017, article, [[https://www.gamasutra.com/blogs/NiklasGray/20170927/306445/Moving_away_from_GitFlow.php][Moving away from GitFlow]]
-
 - Comparing build systems?
-
   - Haskell Shake
   - F# FAKE
   - Apache Buildr
-
 - Does putting on a headphone enhance your focus, even if it isn't playing any sound?
-
   - How about putting a motorcycle helmet?
-
 - 1999, article, "How enterprises use functional languages, and why they don't", Philip Wadler, [[http://homepages.inf.ed.ac.uk/wadler/papers/how-and-why/how-and-why.pdf][pdf]]
 - Optimizing enterprise application development
-
   - Low-code application development
-
     - G Suite low-code https://developers.google.com/appmaker/
     - competitor https://www.outsystems.com/platform/#low-code
-
       - "OutSystems is an open, standards-based platform with no lock-in, no proprietary data models, or proprietary run-time"
-
 - software engineering research, advances in software engineering
-
   - http://www.sigsoft.org/events.html
   - http://homepage.divms.uiowa.edu/~slonnegr/plf/Book/Chapter7.pdf
-
 - https://blog.codinghorror.com/why-cant-database-tables-index-themselves/
 - 2015, PhD thesis, Bergersen, "Measuring Programming Skill: Construction and Validation of an Instrument for Evaluating Java Developers"
-
   - [[http://folk.uio.no/gunnab/publications/Bergersen2015_PhD_thesis.pdf][pdf]]
   - It's a collection of 4 articles.
   - https://www.duo.uio.no/handle/10852/48583
-
 - 2005, article, "Practical Ontology Systems for Enterprise Application", [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.622.6490&rep=rep1&type=pdf][pdf]]
 - 2006, article, "Applications of Ontologies in Software Engineering", [[https://km.aifb.kit.edu/ws/swese2006/final/happel_full.pdf][pdf]]
 - dependency management
-
   - npm dependency hell, how npm2 works, how npm3 works
-
     - http://npm.github.io/how-npm-works-docs/theory-and-design/dependency-hell.html
-
 - How do we develop enterprise software with less effort?
-
   - CRUD should be generated.
-
     - https://news.ycombinator.com/item?id=15429616
     - http://isis.apache.org/
     - other tools?
-
   - feature-oriented software development
-
     - https://en.wikipedia.org/wiki/FOSD_program_cubes
-
-** Impractical?
-   :PROPERTIES:
-   :CUSTOM_ID: impractical
-   :END:
-
-- How can we read SWEBOK?
-  Who reads SWEBOK?
-
-  - https://en.wikipedia.org/wiki/Software_Engineering_Body_of_Knowledge
-  - http://www.sebokwiki.org/wiki/An_Overview_of_the_SWEBOK_Guide
-
-** Testing
-   :PROPERTIES:
-   :CUSTOM_ID: testing
-   :END:
-
+** Amount of testing should be proportional to risk.
 - How do we make code testable?
-
   - Minimize its dependencies.
   - Minimize the number of things that you must set up before you can run it.
   - Why?
-
     - If you don't satisfy all its dependencies, you can't run it.
     - If you can't run it, you can't test it.
     - If your business logic depends on the database, you'll have to set up a database to test your business logic.
-
 - What do we need to test?
-
   - Testing is proportional to risk.
-
     - Riskier code should be tested more.
-
       - "Risk comes from not knowing what you're doing." (Warren Buffett)
-
         - Buffett said that for investing, but it also applies to programming.
-
   - If it's obvious, don't test it. (Getters, setters, and DAOs without fancy logic)
   - If you can prove it, don't test it.
-
-** Garbage collection
-   :PROPERTIES:
-   :CUSTOM_ID: garbage-collection
-   :END:
-
-- [[https://www.reddit.com/r/programming/comments/7zfbs5/conservative_gc_is_it_really_that_bad_xpost_rjava/][Conservative GC: Is It Really That Bad? (X-post /r/java) : programming]] (summary)
-
-  - [[https://www.excelsiorjet.com/blog/articles/conservative-gc-is-it-really-that-bad/][Conservative GC: Is It Really That Bad? -- Excelsior JET Team Blog]]
-
-- [[https://news.ycombinator.com/item?id=16436574][Conservative GC: Is It Really That Bad? | Hacker News]]
-- Real-time garbage collection
-
-  - http://michaelrbernste.in/2013/06/03/real-time-garbage-collection-is-real.html
-
-- Why GC only memory?
-  Why not also GC file handles?
-  Why not GC all resources?
-
-  - [[https://cs.stackexchange.com/questions/52735/why-does-garbage-collection-extend-only-to-memory-and-not-other-resource-types][Why does garbage collection extend only to memory and not other resource types? - Computer Science Stack Exchange]]
-
-** Software engineer associations
-   :PROPERTIES:
-   :CUSTOM_ID: software-engineer-associations
-   :END:
-
-- Indonesia
-
-  - [[http://sarccom.org/][SARCCOM Software architect Indonesia community]]
-  - [[http://www.aspiluki.or.id/][ASPILUKI Asosiasi Piranti Lunak Telematika Indonesia]]
-
-- International?
-* from plres.org
-* Goal
-
-The goal is to make /the/ programming language.
-
-/The/ ultimate best programming language?
-
-** What is programming language research for?
-
-A goal of programming language research is to make a better programming language (if not the best).
-Do more with less.
-
-In different fields of studies, we invent jargons for concision, to speed up information transmission, to convey more meaning in shorter time with less words.
-
-Writing an enterprise application in Java is like teaching graduate physics using only the 100 most common English words.
-
-** Envisioned usage? Infrastructure engineers and suprastructure engineers?
-
-- Suprastructure software engineer captures business logic into high-level program.
-  - Source code should be human-readable article.
-  - This steps focuses on describing what things exist and the relationships between them.
-  - This steps focuses on modeling.
-- Infrastructure software engineer maps high-level languages to low-level languages.
-  - Example of low-level programming language: Java, C#, C++, C, SQL, Scheme, Lisp, Haskell.
-  - This steps focuses on the modeling language.
-- some mention of "suprastructure" and "infrastructure" https://en.wikipedia.org/wiki/Process_architecture
-
-*** Language-oriented programming, domain-specific languages (DSLs)
-
-The 2010 article "Using DSLs for Developing Enterprise Systems" [[https://research.cyber.ee/simpl/enterprise-dsl.pdf][pdf]]:
-
-- It uses the terms "language engineer", "transformation specialist", and "business engineer".
-- It defines several usage scenarios of DSLs.
-- It defines five criteria for comparing DSL tools.
-- It compares some DSL tools.
-
-That paper should have been a wiki article.
-
-* Basics
-
-** Ontology of programming
-
-A /language/ is something that has syntax (form) and semantics (meaning).
-
-A language enables its users to /communicate/ with each other.
-
-A language is formed by the agreements of its users.
-
-A /formal language/ ...
-
-A /programming language/ is a formal language that is used for programming (a machine).
-
-To program a machine is ...?
-
-A /program/ is a formula/string/term in a programming language?
-
-A machine can be modeled by a formal system.
-
-A program is an executable mathematical object?
-
-** Who use programming languages?
-
-A programming language serves as a means of communication in three cases:
-
-- human-to-human:
-- human-to-machine:
-- machine-to-machine:
-
-We advance technologically when we raise the bar for machines (we expect more from machines), not when we expect more from humans.
-(?)
-
 * Functional programming
 
 Every functional programming language is lambda calculus plus plus.
@@ -1005,36 +766,6 @@ I think that is wise.
 
 - [[http://www.cse.chalmers.se/edu/year/2015/course/DAT150/lectures/proglang-12.html][Lecture 12: Design and Evolution of Programming Languages]]
 
-* Category theory and programming languages?
-   :PROPERTIES:
-   :CUSTOM_ID: category-theory-and-programming-languages
-   :END:
-
-The section title needs a verb.
-
-- Category-theoretic model of functional programming languages
-
-  - Every functional programming language L can be modeled by a category C(L) whose objects are the types of L and arrows are the function expressions of L.
-
-- categorical programming (what is this?)
-
-  - 2000, PhD thesis, "Categorical programming with inductive and coinductive types" https://kodu.ut.ee/~varmo/papers/thesis.pdf
-  - categorical programming language
-
-    - 1993, article, "Comparing Hagino's categorical programming language and typed lambda-calculi" https://www.sciencedirect.com/science/article/pii/030439759390186W
-    - 1987, PhD thesis, "Categorical programming language" http://web.sfc.keio.ac.jp/~hagino/thesis.pdf
-
-      - "An interpreter of Hagino's Categorical Programming Language (CPL)." https://github.com/msakai/cpl
-
-    - aggregators
-
-      - 2009, https://mathoverflow.net/questions/3721/programming-languages-based-on-category-theory
-      - https://softwareengineering.stackexchange.com/questions/216635/category-theory-based-language
-
-- category theory applied to programming language theory
-
-  - 2012, "Generic Programming with Adjunctions" http://www.cs.ox.ac.uk/ralf.hinze/LN.pdf
-
 * Making compilers?
    :PROPERTIES:
    :CUSTOM_ID: making-compilers
@@ -1057,43 +788,6 @@ Is there a compiler that doesn't do that?
   - 2003, retrospective: the essence of compiling with continuations https://users.soe.ucsc.edu/~cormac/papers/best-pldi.pdf
 
     - https://en.wikipedia.org/wiki/A-normal_form
-
-* Foundation of mathematics especially for programming?
-   :PROPERTIES:
-   :CUSTOM_ID: foundation-of-mathematics-especially-for-programming
-   :END:
-
-- set theories, such as ZF, ZFC, NBG, etc.
-
-  - https://math.stackexchange.com/questions/136215/difference-between-zfc-nbg
-
-- type theories, such as Martin-Löf type theory
-- logic?
-- category theory?
-- lambda calculus?
-- https://cstheory.stackexchange.com/questions/27217/are-there-presentations-of-set-theory-in-terms-of-lambda-calculus
-
-  - Grue's map theory, 1992
-
-    - http://hjemmesider.diku.dk/~grue/
-
-      - 1992, Grue, PhD thesis, [[http://hjemmesider.diku.dk/~grue/papers/Grue92/Grue92.pdf]["Map theory"]]
-
-        - p. 130: "Equality is better than truth [...]" (How do we explain the context?)
-
-          - https://en.wikipedia.org/wiki/Equational_logic
-
-    - related?
-
-      - equational programming
-
-    - 2016 reformulation article "A synthetic axiomatization of Map Theory" [[https://hal.archives-ouvertes.fr/hal-00678410v3][pdf available]]
-
-Can we formalize "a program is an executable formal system" using Grue's map theory?
-
-- How is "false" represented?
-- How is "true" represented?
-- How is "conjunction" represented?
 
 * Toward a language with first-class syntax?
    :PROPERTIES:
@@ -1554,38 +1248,6 @@ Not only classes, but also functions, should be extensible.
 A consequence:
 Every occurrence of \( f \) can be replaced with \( f' \) while preserving the meaning of the containing expression.
 
-* Probably irrelevant to our goal
-   :PROPERTIES:
-   :CUSTOM_ID: probably-irrelevant-to-our-goal
-   :END:
-
-- [[https://en.wikipedia.org/wiki/Non-English-based_programming_languages][WP:Non-English-based programming languages]]
-- Obscure things. Much marketing, little technical detail.
-
-  - VPRI, Alan Kay et al., archived (stopped operating in 2018), computing for the masses?
-
-    - "Improve 'powerful ideas education' for the world's children and to advance the state of systems research and personal computing"
-
-      - https://harc.ycr.org/
-
-        - https://www.ycr.org/
-
-    - https://en.wikipedia.org/wiki/Viewpoints_Research_Institute
-    - https://en.wikipedia.org/wiki/COLA_(software_architecture)
-    - https://news.ycombinator.com/item?id=11686325
-    - FONC = fundamentals of new computing
-    - http://www.vpri.org/index.html
-
-  - YCR
-
-    - visual programming language
-
-      - blocks language
-
-        - https://harc.ycr.org/project/gp/
-
-- Functional Payout Framework http://lambda-the-ultimate.org/node/3331
-
 * Is inheritance subtyping?
    :PROPERTIES:
    :CUSTOM_ID: is-inheritance-subtyping
@@ -1688,7 +1350,7 @@ What is the ordering used in formulating the least fixed point of a recursive al
 
 todo: equirecursive types and isorecursive types
 
-* Case study: CommonMark, Liquid, and Jekyll, reusable grammar
+* A sketch about reusable language-oriented programming: CommonMark, Liquid, and Jekyll, reusable grammar?
    :PROPERTIES:
    :CUSTOM_ID: case-study-commonmark-liquid-and-jekyll-reusable-grammar
    :END:
@@ -1710,17 +1372,9 @@ I want something like this:
 - [[https://jeffreykegler.github.io/Ocean-of-Awareness-blog/individual/2015/12/composable.html][Grammar reuse]]
 - [[https://github.com/melt-umn/silver][melt-umn/silver: An attribute grammar-based programming language for composable language extensions]]
 - OMeta, Katahdin
-
-* Some tentative plans
-   :PROPERTIES:
-   :CUSTOM_ID: some-tentative-plans
-   :END:
-
-- Create a language that compiles to Haskell.
+* Some tentative plans: Create a language that compiles to Haskell?
 - [[https://github.com/bennofs/haskell-generate][bennofs/haskell-generate: Type-safe library for generating haskell source code]]
-
-* 2018-09-12 question
-
+* 2018-09-12 question for Abdullah
 Do you know of anything that computes (generates code for) the products/sums of data-types?
 Do you know of any libraries that enable us to describe how to transform a data type to a related data type?
 Do you know of anything resembling template metaprogramming for Haskell that is not Template Haskell?
@@ -1745,7 +1399,6 @@ For example:
             | S_B1 | S_B2
     -- </output>
 #+END_EXAMPLE
-
 * Whole-program optimization?
    :PROPERTIES:
    :CUSTOM_ID: whole-program-optimization
@@ -1923,11 +1576,7 @@ definitional programming, GCLA language (separate definition and control)
 - [[http://www.aiai.ed.ac.uk/~jeff/clos-guide.html][A Brief Guide to CLOS]]
 
 * Common Lisp advocacy
-
 - 2018, article, [[https://academic.oup.com/bib/article/19/3/537/2769437][How the strengths of Lisp-family languages facilitate building complex and flexible bioinformatics applications | Briefings in Bioinformatics | Oxford Academic]]
-
-bibliography:default
-
 * TODO How do we develop enterprise web applications efficiently?
 ** <2018-09-27> Enterprise application development is like three blind people describing an elephant.
 Every team is a blind people.
@@ -1989,31 +1638,31 @@ How do we measure the probability that a program, uniformly randomly taken from 
 - <2018-10-04> https://www.thestrangeloop.com/2018/all-the-languages-together.html
   - "Unfortunately, most current languages and toolchains were designed with language interoperability as an afterthought [...]"
   - "This talk is about how to change the status quo to make it easier to build multi-language software."
-* from lambda.org
-* Introduction
-** Goal
+* Designing the programming language
+** Introduction
+*** Goal
 The goal is to build a usable formal language up from lambda calculus.
 
 A /formal human language/ is a formal language that humans use to precisely (unambiguously) communicate technicalities to other humans
 in a way that is also feasible to machine translation using classical compiler techniques.
-** Examples of extending lambda calculus
+*** Examples of extending lambda calculus
 - [[https://sites.ualberta.ca/~jhoover/325/CourseNotes/section/UntypedLambda.htm][Functional Programming - 12. The Extended Untyped lambda Calculus]]
 - STLC = simply-typed lambda calculus
 - [[https://softwarefoundations.cis.upenn.edu/plf-current/MoreStlc.html][Extending STLC]]
 - 1982 article "A consistent extension of the lambda-calculus as a base for functional programming languages", https://www.sciencedirect.com/science/article/pii/S0019995882904582
 - "Extending the Lambda Calculus: An Eager Functional Language", [[http://www.cs.yale.edu/homes/hudak/CS430F07/LectureSlides/Reynolds-ch11.pdf][pdf slides]]
-*** TODO Study OCaml
+**** TODO Study OCaml
 Caml begets Caml Light begets OCaml.
 - https://ocaml.org/
 - [[https://caml.inria.fr/pub/docs/manual-ocaml/coreexamples.html]]
 - https://caml.inria.fr/resources/doc/faq/core.en.html
-** Alternative titles
+*** Alternative titles
 - "How far can we push Scheme/Lisp?"
-** Principles
-*** Refer to mathematics, logic, and English.
-*** Solve the root cause; don't hack.
-*** Interoperate with existing systems. Improve existing systems. Enable replacement, but don't require it.
-** Other people's opinions about designing programming languages
+*** Principles
+**** Refer to mathematics, logic, and English.
+**** Solve the root cause; don't hack.
+**** Interoperate with existing systems. Improve existing systems. Enable replacement, but don't require it.
+*** Other people's opinions about designing programming languages
 - http://www.inquisition.ca/en/info/gepsypl/rules.htm
 - 2015 dissertation "Evidence-based programming language design: a philosophical and methodological exploration",
   [[https://jyx.jyu.fi/handle/123456789/47698][abstract]],
@@ -2026,24 +1675,24 @@ Caml begets Caml Light begets OCaml.
 - https://www.reddit.com/r/ProgrammingLanguages/comments/9eqrfy/what_are_the_biggest_problems_with_programming/
 - 2017 article "The End of History? Using a Proof Assistant to Replace Language Design with Library Design" [[https://www.cs.purdue.edu/homes/bendy/Fiat/fiat-snapl.pdf][pdf]]
 - [[http://purduepl.github.io/index.html][Purdue university programming languages group]]
-** Shopping for ideas
+*** Shopping for ideas
 - [[https://www.reddit.com/r/ProgrammingLanguages/comments/8vcrzb/what_are_some_interesting_language_features_that/][What are some interesting language features that may not be well known? : ProgrammingLanguages]]
 - https://softwareengineering.stackexchange.com/questions/55047/what-is-the-greatest-design-flaw-you-have-faced-in-any-programming-language
 - https://www.reddit.com/r/ProgrammingLanguages/comments/9erq87/languages_with_separate_types_for_pointers_to_the/
 - http://math.andrej.com/2009/05/29/mathematically-structured-but-not-necessarily-functional-programming/
 - read, "true sums of products" http://hackage.haskell.org/package/generics-sop
-* Lambda calculus
+** Lambda calculus
 Lambda calculus formalizes binding and substitution.
 
 Follow [[https://crypto.stanford.edu/~blynn/lambda/][Ben Lynn's lambda-calculus tutorial]]:
 
 - why use lambda calculus as theoretical basis (cool reasons!)
-** Beta-reduction
+*** Beta-reduction
 - reduce : E -> E
 - reduce ((\ x -> y) p) = reduce (y[x:=p])
   - y[x:=p] means y but with every bound occurence of x replaced with p)
 - reduce x = x otherwise
-* Strings, especially of characters
+** Strings, especially of characters
 A /string/ is a homogenous sequence.
 
 A string has a beginning, and may have an ending.
@@ -2058,8 +1707,8 @@ A /character string/ is a sequence of characters.
 Unqualified "string" usually means "character string".
 
 A /character string literal/ is surrounded with quotes.
-** Escape sequences
-** Characters
+*** Escape sequences
+*** Characters
 What is Unicode's definition of "character"?
 Is that definition sane?
 
@@ -2069,13 +1718,13 @@ Issues: ordering/collation, capitalization, combination, halfwidthization, ligat
 
 - https://en.wikipedia.org/wiki/String_(computer_science)
 - https://en.wikipedia.org/wiki/Character_(computing)
-* Macro, reflection, reification, quoting
+** Macro, reflection, reification, quoting
 The language should be a model of itself.
 
 The language should be able to describe itself.
 
 Does that cause a paradox?
-* What program, execution, and termination mean in declarative paradigms
+** What program, execution, and termination mean in declarative paradigms
 
 In functional paradigm:
 
@@ -2095,13 +1744,13 @@ In theorem-proving paradigm:
 - Execution is trying to prove the main(world) goal.
 - Execution terminates when the goal is proved or disproved.
 
-* Records, also for namespaces and modules
+** Records, also for namespaces and modules
 
 We want records because /records obviate namespaces and modules/.
 
 We want namespaces and modules because they are necessary for humans to manage large programs.
 
-** We don't want to represent records as functions.
+*** We don't want to represent records as functions.
 
 We can describe the semantics of a record r as a function r : string -> expression.
 
@@ -2113,7 +1762,7 @@ There are several options to pretty-print a record:
   We don't want that.
   We want pretty-printed records to look like how we write records.
 
-** We want records to be applicable like lambda; we add a new beta-reduction rule for "applying" records.
+*** We want records to be applicable like lambda; we add a new beta-reduction rule for "applying" records.
 
 Record access is function application.
 To get the field =fld= or record =rec=, evaluate =rec fld=.
@@ -2128,7 +1777,7 @@ We want to pretend that records are functions.
 We want to use records as if they were functions.
 But we don't want records to be functions; we want to pretty-print records as records, not as lambda abstractions.
 
-** Modules as record functions
+*** Modules as record functions
 
 A module is a function taking a record and giving a record.
 The input is called /imports/ or /dependencies/.
@@ -2140,7 +1789,7 @@ Example:
 \ { add; } -> { add_one: \ x -> add x 1; }
 #+END_EXAMPLE
 
-** Record expressions
+*** Record expressions
 
 We add these expression syntax rules:
 
@@ -2151,7 +1800,7 @@ We add these expression syntax rules:
 
 An example of a record expression is ={id: \ x -> x; app: \ f x -> f x;}=.
 
-** Labels
+*** Labels
 
 A /label/ is a string.
 If the label doesn't contain funny characters, it doesn't have to be quoted.
@@ -2159,7 +1808,7 @@ For example, ={"a":1;}= and ={a:1;}= are the same thing.
 
 Should we generalize label to expression?
 
-* Annotations: user-defined metadata attached to concrete syntax tree nodes
+** Annotations: user-defined metadata attached to concrete syntax tree nodes
 
 We add these expression syntax rules:
 
@@ -2184,12 +1833,12 @@ We add these beta-reduction rules:
 
 This is like Java/C# annotation but more principled?
 
-** Annotation is not type
+*** Annotation is not type
 
 This is an example of type annotation that our annotation above can't handle: =\ (x : T) -> y=,
 because =x= is not an expression.
 
-* Let-expressions
+** Let-expressions
 
 The /let-expression/ =let x1 = y1; ...; xn = yn; in z;= desugars to =(\ x1 ... xn -> z) y1 ... yn=.
 
@@ -2197,19 +1846,19 @@ Let-expressions is for readability by humans.
 
 Do we still need let-expressions if our program is well-factored?
 
-** let-expressions may recur
+*** let-expressions may recur
 
 I think letrec is ugly.
 All let-expression should allow recursion, like Haskell's.
 
 https://stackoverflow.com/questions/28796904/whats-the-reason-of-let-rec-for-impure-functional-language-ocaml/28798040
 
-* Sharing, laziness, full laziness, complete laziness, and optimal reduction
+** Sharing, laziness, full laziness, complete laziness, and optimal reduction
 
 - https://www.reddit.com/r/haskell/comments/3pa5ii/are_optimal_evaluators_actually_optimal/
   - https://cstheory.stackexchange.com/questions/32850/are-optimal-evaluators-actually-optimal
 
-** Sharing
+*** Sharing
 
 - Should the programmer care about sharing?
 - sigma-calculus?
@@ -2220,7 +1869,7 @@ https://stackoverflow.com/questions/28796904/whats-the-reason-of-let-rec-for-imp
 Sharing affects performance, but does not change the result.
 Should we care?
 
-** Example of sharing
+*** Example of sharing
 
 Consider the expression letexp defined as =let x = y in z;=.
 
@@ -2237,7 +1886,7 @@ These depend on circumstances:
 
 How do we define "expensive"?
 
-** Lazy accumulation problem
+*** Lazy accumulation problem
 
 #+BEGIN_EXAMPLE
 sum a 0 = a
@@ -2247,7 +1896,7 @@ sum 0 = 0
 sum n = n + sum (n - 1)
 #+END_EXAMPLE
 
-* Currying is not compatible with vararg and named parameters?
+** Currying is not compatible with vararg and named parameters?
 
 Vararg stands for "variable-length arguments".
 
@@ -2260,9 +1909,9 @@ The problems:
 - https://softwareengineering.stackexchange.com/questions/286231/is-it-possible-to-have-currying-and-variadic-function-at-the-same-time
 - http://tolmasky.com/2016/03/24/generalizing-jsx/
 
-* Modeling all data
+** Modeling all data
 
-** Hypothesis: data = ADTs + records + row polymorphism
+*** Hypothesis: data = ADTs + records + row polymorphism
 
 Hypothesis: All data can be modeled by a combination of these:
 
@@ -2276,7 +1925,7 @@ https://protege.stanford.edu/
 
 - Does Eclipse EMF have textual representation?
 
-** Church-representation of products, sums, and algebraic data types in general
+*** Church-representation of products, sums, and algebraic data types in general
 
 https://en.wikipedia.org/wiki/Lambda_calculus#Pairs
 
@@ -2311,7 +1960,7 @@ Thus:
 
 - [s z] = \ f g -> g (\ f g -> f)
 
-** Reverse semantics
+*** Reverse semantics
 
 Semantics maps syntax to mathematical object.
 
@@ -2323,11 +1972,11 @@ Example of reverse semantics is representing the tuple =(x,y)= with the lambda a
 
 https://en.wikipedia.org/wiki/Realizability
 
-** Self-interpreter
+*** Self-interpreter
 
 1994 article "Efficient Self-Interpretation in Lambda Calculus"
 
-* Representing knowledge; logic programming; symbolic AI
+** Representing knowledge; logic programming; symbolic AI
 
 - https://en.wikipedia.org/wiki/Logic_programming#Knowledge_representation
 - https://en.wikipedia.org/wiki/Knowledge_representation_and_reasoning
@@ -2338,24 +1987,24 @@ Example: We encode "a todo item has an int64 id" as
 IF entity todo_app todo E THEN property E int64 id.
 #+END_EXAMPLE
 
-* Dynamic binding, contextual holes
+** Dynamic binding, contextual holes
 
 - 1996 article "Enriching the lambda calculus with contexts: toward a theory of incremental program construction" https://dl.acm.org/citation.cfm?id=232652
 - 1998 article "A lambda-calculus for dynamic binding" https://core.ac.uk/download/pdf/82810390.pdf
 - 1998 article "Computing with Contexts: A simple approach" https://core.ac.uk/download/pdf/82065430.pdf
 - 2009 article "Two-level Lambda-calculus" https://www.sciencedirect.com/science/article/pii/S1571066109002400
 
-* Working with existing systems
-** Working with Java
-* Semantics (should we worry about this earlier?)
+** Working with existing systems
+*** Working with Java
+** Semantics (should we worry about this earlier?)
 
-** Cost model
+*** Cost model
 
 - "Cost models based on the lambda-calculus", [[http://www.cs.cmu.edu/~guyb/papers/lambdaInria.pdf][pdf slides]], from http://www.cs.cmu.edu/~guyb/
 
-** Denotational semantics
+*** Denotational semantics
 
-*** Intro to denotational semantics
+**** Intro to denotational semantics
 
 - 1971, monograph, Dana Scott and Christopher Strachey, "Toward a mathematical semantics for computer languages", [[https://www.cs.ox.ac.uk/files/3228/PRG06.pdf][pdf]]
 - [[https://pdfs.semanticscholar.org/presentation/76cd/955ec6dafde3699d64e50882ec7fb4384803.pdf][pdf slides]]
@@ -2364,9 +2013,9 @@ IF entity todo_app todo E THEN property E int64 id.
 - 1989, PhD thesis, Frank Steven Kent Silbermann, "A Denotational Semantics Approach to Functional and Logic Programming", chapter 3, [[http://www.cs.unc.edu/techreports/89-030.pdf][pdf]]
   - "A novel approach is taken in constructing an operational semantics directly from the denotational description."
 
-*** TODO Does lambda calculus have a semantics that doesn't depend on reduction strategy?
+**** TODO Does lambda calculus have a semantics that doesn't depend on reduction strategy?
 
-** Operational semantics and evaluation/reduction strategy
+*** Operational semantics and evaluation/reduction strategy
 
 Which one should we choose, and why?
 
@@ -2381,13 +2030,13 @@ Which one should we choose, and why?
 - https://en.wikipedia.org/wiki/Lambda_calculus#Reduction_strategies
 - https://en.wikipedia.org/wiki/Evaluation_strategy
 
-* Overloadable function application?
+** Overloadable function application?
 
-* Interpreters: Giving different meanings to the same syntax
+** Interpreters: Giving different meanings to the same syntax
 
 Sometimes we want to interpret the same syntax (appearance, source code, text) differently.
 
-* System F, System F with subtyping, System F-omega
+** System F, System F with subtyping, System F-omega
 
 https://en.wikipedia.org/wiki/System_F
 
@@ -2395,15 +2044,15 @@ https://en.wikipedia.org/wiki/System_F
 
 Brown and Palsberg, "Breaking Through the Normalization Barrier: A Self-Interpreter for F-omega"
 
-* Lambda-prolog?
+** Lambda-prolog?
 
 - lambda-prolog http://www.lix.polytechnique.fr/~dale/lProlog/
 
-* Imperative subset
+** Imperative subset
 
 Haskell's ST monad enables us to embed a local imperative program in a functional program.
 
-* Introduction?
+** Introduction?
 
 - unknown-year lecture notes "Lambda Calculus as a Programming Language" [[http://andrei.clubcisco.ro/cursuri/2pp/01.Lambda_prog.pdf][pdf]]
 
@@ -2412,7 +2061,7 @@ I thought lambda calculus could be summarized in one page, but Henk Barendregt w
 - 1994, 50 pages, [[http://www.nyu.edu/projects/barker/Lambda/barendregt.94.pdf][pdf]]
 - 1991, 190 pages, [[https://people.mpi-sws.org/~dreyer/tor/papers/barendregt.pdf][pdf]]
 
-* Extending lambda-calculus with various bells and whistles
+** Extending lambda-calculus with various bells and whistles
 
 - Vectorial lambda-calculus
 
@@ -2421,7 +2070,7 @@ I thought lambda calculus could be summarized in one page, but Henk Barendregt w
 
 - 2016 article "System F-omega with Equirecursive Types for Datatype-Generic Programming" [[http://ps.informatik.uni-tuebingen.de/research/functors/equirecursion-fomega-popl16.pdf][pdf]]
 
-* Lambda calculus semantics?
+** Lambda calculus semantics?
 
 - https://en.wikipedia.org/wiki/Lambda_calculus#Semantics
 
@@ -2449,11 +2098,11 @@ I thought lambda calculus could be summarized in one page, but Henk Barendregt w
     - Call-by-value
     - Call-by-name
 
-* When should we introduce a type system?
+** When should we introduce a type system?
 
 - 2005 article "Introduction to Type Theory" [[http://www.cs.ru.nl/~erikb/onderwijs/sl2/materiaal/tt-sl2.pdf][pdf]]
 
-* Optimizing lambda calculus?
+** Optimizing lambda calculus?
 
 - http://thyer.name/lambda-animator/
 - http://thyer.name/phd-thesis/
@@ -2549,7 +2198,7 @@ I thought lambda calculus could be summarized in one page, but Henk Barendregt w
 
       - https://en.wikipedia.org/wiki/Krivine_machine
 
-* Begin with an interpreter, not a compiler
+** Begin with an interpreter, not a compiler
 
 - Don't make a compiler?
   Make an interpreter instead, and stage it?
@@ -2562,17 +2211,17 @@ I thought lambda calculus could be summarized in one page, but Henk Barendregt w
 - multi-stage programming for Scala https://scala-lms.github.io/
 - 2006 article "A Verified Staged Interpreter is a Verified Compiler" [[https://www.researchgate.net/profile/Kevin_Hammond/publication/221108683_A_verified_staged_interpreter_is_a_verified_compiler/links/00b7d517ede725c057000000.pdf][pdf]]
 
-* Foreign function interface: working with C
+** Foreign function interface: working with C
 
-* Ocaml
+** Ocaml
 
 - https://ocaml.org/learn/
 
-* Reconciling functional and logic programming into declarative programming?
+** Reconciling functional and logic programming into declarative programming?
 
 1996 publication "A Note on Declarative Programming Paradigms and the Future of Definitional Programming" [[http://www.cse.chalmers.se/~oloft/Papers/wm96/wm96.html][html]]
 
-** Example: Representing a predicate in lambda calculus
+*** Example: Representing a predicate in lambda calculus
 
 Lambda calculus with boolean logic extensions:
 
@@ -2587,13 +2236,13 @@ p(a).
 p(b).
 #+END_EXAMPLE
 
-** Example: Representing a function in logic programming
+*** Example: Representing a function in logic programming
 
 #+BEGIN_EXAMPLE
 inc(X, Y) :- X = Y + 1.
 #+END_EXAMPLE
 
-** The "satisfy" function
+*** The "satisfy" function
 
 The expression "satisfy f" finds all x : a that satisfies f : a -> bool.
 Thus the type of "satisfy" is "(a -> bool) -> list a".
@@ -2611,25 +2260,25 @@ satisfy (\ (x : bool) -> true)
 => [false,true]
 #+END_EXAMPLE
 
-** A function is a relation, a relation is a function, so what?
+*** A function is a relation, a relation is a function, so what?
 
 A function \( (A,B,F) \) is trivially a relation.
 
 A relation \( (A,B,R) \) is a function \( (A,2^B,F) \) where \( F(x) = \{ y ~|~ (x,y) \in R \} \).
 
-* Precise memory accounting
+** Precise memory accounting
 
 We want precise memory accounting to enable the runtime to limit memory usage.
 
-* Logic programming vs theorem proving
+** Logic programming vs theorem proving
 - https://stackoverflow.com/questions/36335633/difference-between-logic-programming-and-automated-theorem-proving
 - https://en.wikipedia.org/wiki/Automated_theorem_proving
-* Execution state reification, save states, saving and loading states, pausing and resuming computations
+** Execution state reification, save states, saving and loading states, pausing and resuming computations
 
 We want execution state reification so that we can do live process migration.
 
-* Knowledge representation and software specification
-** Their relationships
+** Knowledge representation and software specification
+*** Their relationships
 - 2010, "Functional-Logic Programming Lecture Notes", Harold Boley, slides, [[http://www.cs.unb.ca/~boley/FLP/cs6905FLP.pdf][pdf]]
   - Knowledge representation in AI roughly corresponds to software specification in software engineering.
   - Declarative programs can be thought as executable specifications.
@@ -2638,27 +2287,27 @@ We want execution state reification so that we can do live process migration.
   - Unification principle (slide 50)
   - Amalgamation/integration principle (slide 55)
   - That's a long deck: 270 slides.
-** Executable specification?
+*** Executable specification?
 - lightweight executable mathematics https://www.cl.cam.ac.uk/~pes20/lem/
-* Haskell woes
+** Haskell woes
 
 - [[https://news.ycombinator.com/item?id=5893442][Ask HN: Any downsides of programming in Haskell? | Hacker News]]
 - [[https://www.reddit.com/r/haskell/comments/1gknfs/ask_hn_any_downsides_of_programming_in_haskell/][Ask HN: Any downsides of programming in Haskell? : haskell]]
 
-** Can't import type class instances explicitly
+*** Can't import type class instances explicitly
 
 [[https://stackoverflow.com/questions/8728596/explicitly-import-instances][There is a reason]].
 
-* Monads, and Haskell type system limitations
+** Monads, and Haskell type system limitations
 
 - A monad is a way of /conservatively extending/ all categories. (Abdullah, private correspondence)
 - https://www.reddit.com/r/haskell/comments/3h2aqg/can_someone_explain_the_monads_are_generalised/
 
-** Should Nat (the natural numbers) be a subtype of Int (the integers)?
+*** Should Nat (the natural numbers) be a subtype of Int (the integers)?
 
 Intuitively, yes.
 
-** <2018-10-01> @abdullah Signedness is a monad: conservatively extending naturals to integers
+*** <2018-10-01> @abdullah Signedness is a monad: conservatively extending naturals to integers
 
 I think this is what we mean when we say "integer is a monad".
 I think what we are really trying to say is "signedness is a monad", that is, "we can conservatively extend the naturals to the integers by using the Signed monad".
@@ -2699,7 +2348,7 @@ The problem:
 Nat should be a subtype of Int, because everyone who knows arithmetics seems to think that way.
 We want f and f_int to be the /same/ function.
 We don't want to type fmap, liftM2, and their ilk.
-* Abdullah's dream language: Extending System F application beta-reduction rules to automate fmap and extend?
+** Abdullah's dream language: Extending System F application beta-reduction rules to automate fmap and extend?
 Add these inference rules?
 - If =f : a -> b=, and =x : m a=, and =m= is an instance of =Functor=, then =f x= beta-reduces to =fmap f x=.
 - If =k : a -> m b=, and =x : m a=, and =m= is an instance of =Monad=, then =k x= beta-reduces to =k =<< x=.
@@ -3456,3 +3105,194 @@ The Y-combinator is \( \lambda f. (\lambda x. f ~ (x ~ x)) ~ (\lambda x. f ~ (x 
 - Has some semantics link
   http://math.andrej.com/2016/08/06/hask-is-not-a-category/comment-page-1/
 - [[ftp://nozdr.ru/biblio/kolxo3/Cs/CsLn/Mathematics%20of%20program%20construction..%2010%20conf.,%20MPC%202010%20(LNCS6120,%20Springer,%202010)(ISBN%203642133207)(O)(435s)_CsLn_.pdf#page=109][2010, "Subtyping, Declaratively: An Exercise in Mixed Induction and Coinduction", Nils Anders Danielsson and Thorsten Altenkirch]]
+* Logic programming / relational programming
+** Comparison of Prolog implementations
+- https://en.wikipedia.org/wiki/Comparison_of_Prolog_implementations
+* Solving the expression problem
+* Solving the AST decoration problem / AST typing problem
+- Other names of this problem:
+  - [[https://www.reddit.com/r/haskell/comments/1f91w3/the_ast_typing_problem/][AST typing problem]]
+  - "Trees that grow" problem
+- common problem in parsing: how to decorate AST in a functional language
+  - 2013, article, [[http://blog.ezyang.com/2013/05/the-ast-typing-problem/][The AST typing problem]], Edward Z. Yang
+    - 2010, discussion, "The AST typing problem", [[http://lambda-the-ultimate.org/node/4170][LTU]]
+  - Embracing the Any type
+    - [[http://javaparser.org/][JavaParser]] added an =Object data= field to the AST Node base class, but they changed their minds.
+      - https://github.com/javaparser/javaparser/issues/456
+      - https://github.com/javaparser/javaparser/pull/472
+  - Structural typing
+    - TypeScript (JavaScript) is ideal for AST decoration problem?
+      You just add a key to the AST node object you want to decorate.
+      - Any language with structural typing is ideal?
+      #+BEGIN_EXAMPLE
+          interface Node {
+          }
+
+          interface Node_parse extends Node {
+          }
+
+          interface Node_desugar extends Node_parse {
+          }
+      #+END_EXAMPLE
+  - Loosely-typed Haskell?
+    - This is basically the JavaScript way.
+    #+BEGIN_SRC haskell
+        type Key = String
+        data Value
+            = VNum Double
+            | VStr String
+            | VObj Object
+        type Object = [(Key, Value)]
+        type Node = Object
+    #+END_SRC
+  - 2017, article, "Trees that grow", https://www.microsoft.com/en-us/research/uploads/prod/2016/11/trees-that-grow.pdf
+    - "The compiler writer is then faced with two unpalatable choices.
+      She can define a new data type representing the output decorated tree, at the cost of much duplication.
+      Or she can write a single data type with all the necessary fields and constructors, at the cost of having many unused fields and constructors at different stages of compilation."
+    - However, we can fake extensible ADTs with pattern synonyms, with Fix, and without type families.
+      - Similar endeavors
+        - https://wiki.haskell.org/Type_composition
+      - Haskell doesn't beta-reduce types.
+      - This is an example code:
+      #+BEGIN_SRC haskell
+          data Exp_ name exp
+              = Var name
+              | Add exp exp
+              | ...
+
+          data Locd a
+              = MkLocd Loc a
+
+          data Typed t a = MkTyped t a
+
+          newtype Compose f g a = MkCompose { unCompose :: f (g a) }
+
+          type PsExp name = Fix (Compose Locd (Exp_ name))
+          type TcExp name = Fix (Compose Locd (Compose Typed (Exp_ name)))
+
+          -- To ameliorate the verbosity:
+
+          class Exp name exp where
+              var :: name -> exp
+              add :: exp -> exp -> exp
+              ...
+
+          instance Exp (PsExp name) where ...
+          instance Exp (TcExp name) where ...
+      #+END_SRC
+  - What if GHC can "inline" data types at compile time?
+    What if GHC can "inline" A and B in =data A = MA Int; data B = MB Int String; data E = EA A | EB B;=,
+    producing =data E = EA Int | EB Int String=?
+    Implementing this with Haskell 98 types should be straightforward.
+  - related - "Data types a la carte" - http://hackage.haskell.org/package/compdata - Haskell type composition - https://wiki.haskell.org/Extensible_datatypes
+- Other people's efforts
+  - https://brianmckenna.org/blog/type_annotation_cofree
+- https://discuss.ocaml.org/t/is-it-feasible-to-write-parsers-without-using-polymorphic-variants-for-ast-representation/1906
+* Language design
+- https://github.com/mjambon/ocaml-wishlist
+* ML/OCaml records vs modules: Why do we have modules if records suffice? An Ocaml "functor" would then simply be a function from records to records.
+* Too speculative? Unclear goal/reason? Condemned to oblivion?
+** Category theory and programming languages?
+The section title needs a verb.
+- Category-theoretic model of functional programming languages
+  - Every functional programming language L can be modeled by a category C(L) whose objects are the types of L and arrows are the function expressions of L.
+- categorical programming (what is this?)
+  - 2000, PhD thesis, "Categorical programming with inductive and coinductive types" https://kodu.ut.ee/~varmo/papers/thesis.pdf
+  - categorical programming language
+    - 1993, article, "Comparing Hagino's categorical programming language and typed lambda-calculi" https://www.sciencedirect.com/science/article/pii/030439759390186W
+    - 1987, PhD thesis, "Categorical programming language" http://web.sfc.keio.ac.jp/~hagino/thesis.pdf
+      - "An interpreter of Hagino's Categorical Programming Language (CPL)." https://github.com/msakai/cpl
+    - aggregators
+      - 2009, https://mathoverflow.net/questions/3721/programming-languages-based-on-category-theory
+      - https://softwareengineering.stackexchange.com/questions/216635/category-theory-based-language
+- category theory applied to programming language theory
+  - 2012, "Generic Programming with Adjunctions" http://www.cs.ox.ac.uk/ralf.hinze/LN.pdf
+** Foundation of mathematics especially for programming?
+- set theories, such as ZF, ZFC, NBG, etc.
+  - https://math.stackexchange.com/questions/136215/difference-between-zfc-nbg
+- type theories, such as Martin-Löf type theory
+- logic?
+- category theory?
+- lambda calculus?
+- https://cstheory.stackexchange.com/questions/27217/are-there-presentations-of-set-theory-in-terms-of-lambda-calculus
+  - Grue's map theory, 1992
+    - http://hjemmesider.diku.dk/~grue/
+      - 1992, Grue, PhD thesis, [[http://hjemmesider.diku.dk/~grue/papers/Grue92/Grue92.pdf]["Map theory"]]
+        - p. 130: "Equality is better than truth [...]" (How do we explain the context?)
+          - https://en.wikipedia.org/wiki/Equational_logic
+    - related?
+      - equational programming
+    - 2016 reformulation article "A synthetic axiomatization of Map Theory" [[https://hal.archives-ouvertes.fr/hal-00678410v3][pdf available]]
+Can we formalize "a program is an executable formal system" using Grue's map theory?
+- How is "false" represented?
+- How is "true" represented?
+- How is "conjunction" represented?
+** Probably irrelevant to our goal
+   :PROPERTIES:
+   :CUSTOM_ID: probably-irrelevant-to-our-goal
+   :END:
+
+- [[https://en.wikipedia.org/wiki/Non-English-based_programming_languages][WP:Non-English-based programming languages]]
+- Obscure things. Much marketing, little technical detail.
+
+  - VPRI, Alan Kay et al., archived (stopped operating in 2018), computing for the masses?
+
+    - "Improve 'powerful ideas education' for the world's children and to advance the state of systems research and personal computing"
+
+      - https://harc.ycr.org/
+
+        - https://www.ycr.org/
+
+    - https://en.wikipedia.org/wiki/Viewpoints_Research_Institute
+    - https://en.wikipedia.org/wiki/COLA_(software_architecture)
+    - https://news.ycombinator.com/item?id=11686325
+    - FONC = fundamentals of new computing
+    - http://www.vpri.org/index.html
+
+  - YCR
+
+    - visual programming language
+
+      - blocks language
+
+        - https://harc.ycr.org/project/gp/
+
+- Functional Payout Framework http://lambda-the-ultimate.org/node/3331
+** Automatic deglobalization of C programs?
+** Who reads SWEBOK? How can we read SWEBOK? Who reads all of it? Why does anyone bother writing it?
+- https://en.wikipedia.org/wiki/Software_Engineering_Body_of_Knowledge
+- http://www.sebokwiki.org/wiki/An_Overview_of_the_SWEBOK_Guide
+  - <2017-04-27>
+    Someone claims to have read it.
+    Holy shit.
+    https://www.quora.com/Do-you-use-SWEBOK-Is-it-helpful
+- Is the knowledge applicable?
+  Knowledge that can't be applied is useless.
+* Information that is looking for a place where they can be most useful
+** Software engineer associations
+   :PROPERTIES:
+   :CUSTOM_ID: software-engineer-associations
+   :END:
+
+- Indonesia
+
+  - [[http://sarccom.org/][SARCCOM Software architect Indonesia community]]
+  - [[http://www.aspiluki.or.id/][ASPILUKI Asosiasi Piranti Lunak Telematika Indonesia]]
+
+- International?
+** Garbage collection
+- [[https://www.reddit.com/r/programming/comments/7zfbs5/conservative_gc_is_it_really_that_bad_xpost_rjava/][Conservative GC: Is It Really That Bad? (X-post /r/java) : programming]] (summary)
+  - [[https://www.excelsiorjet.com/blog/articles/conservative-gc-is-it-really-that-bad/][Conservative GC: Is It Really That Bad? -- Excelsior JET Team Blog]]
+- [[https://news.ycombinator.com/item?id=16436574][Conservative GC: Is It Really That Bad? | Hacker News]]
+- Real-time garbage collection
+  - http://michaelrbernste.in/2013/06/03/real-time-garbage-collection-is-real.html
+- Why GC only memory?
+  Why not also GC file handles?
+  Why not GC all resources?
+  - [[https://cs.stackexchange.com/questions/52735/why-does-garbage-collection-extend-only-to-memory-and-not-other-resource-types][Why does garbage collection extend only to memory and not other resource types? - Computer Science Stack Exchange]]
+** 2017 article "What Is the Best Way For Developers to Learn New Software Tools? An Empirical Comparison Between a Text and a Video Tutorial"
+- http://programming-journal.org/2017/1/17/
+* Sayings
+- Writing an enterprise application in Java is like teaching graduate physics using only the 100 most common English words.
+* Bibliography
+bibliography:default
