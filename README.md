@@ -10,6 +10,7 @@ I share my goals and knowledge in the website [edom.github.io](https://edom.gith
 - [org](org/): org-mode notes; should be exported into edom.github.io
 - [etc](etc/): configuration files for Emacs, Vim, Visual Studio Code, etc.
 - [sh](sh/): shell scripts, mostly Bash
+- [software](software/): a SWI-Prolog 7 knowledge base
 
 ## Things far from being finished; sometimes even abandoned; mostly doodles
 

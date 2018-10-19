@@ -3294,5 +3294,89 @@ Can we formalize "a program is an executable formal system" using Grue's map the
 - http://programming-journal.org/2017/1/17/
 * Sayings
 - Writing an enterprise application in Java is like teaching graduate physics using only the 100 most common English words.
+* <2018-10-20> Change of opinion; We should write the language in Prolog instead of Haskell.
+- 2004, parsing in Prolog, "Parsing and Semantics in DCGs" http://www.inf.ed.ac.uk/teaching/courses/aipp/lecture_slides/11_PS_DCGs.pdf
+- Prolog DCG (definite clause grammar) facilitates writing an attribute grammar.
+- https://en.wikipedia.org/wiki/Definite_clause_grammar
+* Using SWI-Prolog
+** Installing SWI-Prolog
+*** Principles
+- If your Linux distro has a packaged SWI Prolog 7, use it.
+  - Otherwise build from source.
+*** <2018-10-20> Installing SWI-Prolog 7.6.4 on Ubuntu 14.04
+- Uninstall existing SWI prolog installations.
+- Download the [[http://www.swi-prolog.org/download/stable][source]].
+- Check the checksum using sha256sum.
+- Follow the [[http://www.swi-prolog.org/build/unix.html][build instructions]].
+  - Install dependencies, but replace =libunwind-dev= with =libunwind8-dev=.
+    - Don't install the documentation dependencies; it's too big.
+  - =cp -p build.templ build=.
+  - Edit =build=:
+    - Set =PREFIX= to =$HOME/.local=.
+    - Uncomment the =--link= option in =EXTRACFG= variable.
+  - Run =./build=.
+- Ensure that =$HOME/.local= is in your =PATH=.
+- Tell SWI-Prolog to use readline.
+  - Set it in the user init file.
+    - Create a FILE containing this line: =:- set_prolog_flag(readline, readline).=
+      - Add =-f FILE= switch to the command line you use to start =swipl=.
+- Related GitHub issue https://github.com/SWI-Prolog/issues/issues/72.
+
+** Loading files
+- =:- [foo].= is shorthand for =:- consult(foo).=.
+  - http://www.swi-prolog.org/pldoc/man?predicate=consult/1
+** How do I use SWI-Prolog?
+- Write a =load.pro= script that loads your files.
+- To start a query interpreter, =swipl -l load.pro=.
+- You write /rules/ in files.
+  You write /queries/ in the query interpreter.
+  - Pasting a file into the interpreter does /not/ load the file.
+    - This is contrary to Lisp/Python/Ruby interpreters.
+** <2018-10-20> How do we make sense of this counterintuitive module syntax?
+- https://stackoverflow.com/questions/42399020/how-to-get-a-listing-of-a-specific-knowledge-base
+** Which string representation should I use?
+*** The answer: Dedicated double-quoted string type (SWI-Prolog 7)
+- "Strings are distinct from lists" http://www.swi-prolog.org/pldoc/man?section=strings
+- "Why has the representation of double quoted text changed?" http://www.swi-prolog.org/pldoc/man?section=ext-dquotes-motivation
+- 2013 article "Strings in ECLiPSe 6.2, SWI-7 and YAP" http://eclipseclp.org/wiki/Prolog/Strings
+  - "With SWI-7 and ECLiPSe 6.2 string support has been harmonized, and YAP is expected to agree as well."
+  - "Agreed Common Functionality"
+  - "Situation before December 2013"
+*** Non-answers
+**** Edinburgh style: Double-quoted string as list of integer codes (default mode of SWI-Prolog 6.6.4 on Ubuntu 14.04)
+- A Unicode character is represented as an integer that is the code of that character.
+- A string is represented as a list of codes.
+  Example: ="aaa" = [97,97,97]=.
+- Inconvenient to debug.
+- This behavior changes in SWI-Prolog 7.
+- This was in 1993 ISO standard draft. http://fsl.cs.illinois.edu/images/9/9c/PrologStandard.pdf
+  - This wasn't in the final version?
+**** Double-quoted string as list of one-character atoms
+- A Unicode character is represented as a one-character atom.
+- A string is represented as a list of one-character atoms.
+  Example: ="aaa" = [a,a,a]=.
+- This assumes that the Prolog implementation garbage-collects atoms.
+- More convenient to debug.
+** Definite clause grammars
+- The DCG clause =left --> right= desugars/expands/translates into the definite clause =left(A,B) :- right(A,B)= where =(A,B)= encodes the difference list.
+- "Interesting Things about Prolog" https://gist.github.com/CMCDragonkai/89a6c502ca7272e5e7464c0fc8667f4d
+  - "Definite clause grammars (DCG) make the difference list pattern into a first class primitive with the =-->= operator."
+** Open World Assumption vs Closed World Assumption
+- http://www.mkbergman.com/852/the-open-world-assumption-elephant-in-the-room/
+** Discover the wonderful world of Prolog / logic programming / relational programming
+*** Symbolic AI is the easiest AI approach.
+- Connectionist AI (neural networks) excels at tasks that are difficult to describe in formal logic.
+- Symbolic AI (Prolog) is much more understandable and predictable than connectionist AI.
+  - Understanding connectionist AI requires probability, statistics, and real analysis.
+- Why not both?
+  2017 article "SLDR-DL: A Framework for SLD-Resolution with Deep Learning" https://arxiv.org/pdf/1705.02210.pdf?
+*** Dreams
+- offload/scale/formalize thinking/cognition
+- transform reasoning into data entry
+- brain prosthetics; cognitive prosthetics
+- Leibniz, "Let us calculate!", calculus ratiocinator
+  - https://en.wikipedia.org/wiki/Calculus_ratiocinator
+  - https://publicdomainreview.org/2016/11/10/let-us-calculate-leibniz-llull-and-computational-imagination/
+- probabilistic logic programming
 * Bibliography
 bibliography:default
