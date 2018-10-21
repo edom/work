@@ -459,8 +459,7 @@ I can imagine him smiling, as he usually does when he sings.
 - ["Looking through the eyes of love", Melissa Manchester](https://www.youtube.com/watch?v=Z_TAgUMn06M)
 - ["The way we were", Barbra Streisand](https://www.youtube.com/watch?v=HJNrKHv50X8)
 - "If", Bread
-I tried to sing this song with head voice;
-it's hard.
+  - I tried to sing this song with head voice; it's hard.
 - ["Knife", Rockwell](https://www.youtube.com/watch?v=7ge1yWot4cE)
 - "Perjalanan", by Frankie & Jane
 - Michael Jackson

@@ -54,7 +54,10 @@ date: 2017-06-09 00:59:00 +0700
             - cuff (of shirt or pants) is fold-back at an end
         - accessories
             - [WP:Sash](https://en.wikipedia.org/wiki/Sash)
-            - wristband, elbow band, knee band, armband, upper armband
+            - band
+                - https://en.wikipedia.org/wiki/Sleeve_garter a.k.a. bicep band, arm band, upper arm band
+                - wrist band, elbow band, knee band
+                - foot band
             - necklace
                 - cowboy necklace
         - aggregates

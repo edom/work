@@ -5,7 +5,6 @@ This is not a complete implementation.
 */
 
 :- module(java_syntax, [
-    expression//1
 ]).
 
 :- use_module(library(clpfd)).
@@ -45,12 +44,86 @@ rules([
 ])
 */
 
-number([First|Rest]) --> digit(First), (number(Rest) ; {Rest = []}).
+/*
+Transform
 
-digit(Code) --> [Code], {code_type(Code, digit)}.
+    head(H1, ..., Hn) ==> Body
 
-space(Code) --> [Code], {code_type(Code, space)}.
+to
 
-expression(plus(M, N)) --> expression_number(M), "+", expression_number(N).
+    head(Node, H1, ..., Hn) -->
+        input(Input),
+        Body,
+        remaining(Remaining),
+        append(Codes, Remaining, Input),
+        Node = head().
+*/
 
-expression_number(Number) --> number(Codes), {number_codes(Number, Codes)}.
+:- op(1200, xfx, '==>').
+
+% TODO
+term_expansion((Head ==> Body), (Dcg_head --> Dcg_body)) :- true
+    , Head =.. [Functor | Params]
+    , Dcg_head =.. [Functor, Codes | Params]
+    , Dcg_body = (input(Input), Body, remaining(Remaining), {lists:append(Codes, Remaining, Input)})
+    .
+
+match(Rule, Match, A, B) :- true
+    , Goal =.. [Rule, A, B]
+    , call(Goal)
+    , append(Match, B, A)
+    .
+
+% Use these to get DCG generated parameters.
+input(A,A,_).
+remaining(B,_,B).
+
+% A node is a compound Type(Source) where Source is list of codes.
+% A lexing error is represented with error(Message, Source).
+
+decimal_numeral --> digit.
+
+digit --> [Code], {code_type(Code, digit)}.
+
+number_ -->
+    digit, number_
+;   digit
+.
+
+operator -->
+    "+"
+.
+
+digit([Code | U], [Code], U) :- code_type(Code, digit).
+
+number(U0, P0, U1) :- digit(U0, P0, U1).
+number(U0, P2, U2) :- digit(U0, P0, U1), number(U1, P1, U2), append(P0, P1, P2).
+
+operator([Code | U], [Code], U) :- string_codes("+-", Codes), member(Code, Codes).
+
+expression(U0, P0, U1) :- number(U0, P0, U1).
+expression(U0, P3, U3) :- true
+    , operator(U1, P1, U2)
+    , expression(U0, P0, U1)
+    , expression(U2, P2, U3)
+    , append([P0, P1, P2], P3)
+    .
+
+white_space --> [Code], {code_type(Code, space)}.
+
+line_terminator --> [Code], member(Code, [10, 13]).
+
+digit([C]) :- code_type(C, digit).
+
+number_([H]) :- digit([H]).
+number_([H|T]) :- digit([H]), number_(T).
+
+operator([0'+]).
+
+expression(number(E), E) :- number_(E).
+expression(plus(EA,EC), E) :- true
+    , operator(B)
+    , append([A,B,C], E)
+    , expression(EA,A)
+    , expression(EC,C)
+    .

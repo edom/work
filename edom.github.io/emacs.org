@@ -781,3 +781,8 @@ sudo apt-get remove 'emacs*'
 - http://ergoemacs.org/emacs/emacs_narrow-to-defun_eval-defun_bug.html
   - Xah found that on Emacs 24.4.1.
   - <2018-09-27> I'm using Emacs 26.1 and it still has that programming error.
+* Finding out what is slowing down Emacs
+- https://www.reddit.com/r/emacs/comments/6uhzc9/very_slow_org_mode/
+  - =M-x profiler-start=
+  - Do something slow.
+  - =M-x profiler-report=.
