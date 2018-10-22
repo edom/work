@@ -3324,6 +3324,22 @@ https://medium.com/concerning-pharo/elegant-pharo-code-bb590f0856d0
   Example: ="aaa" = [a,a,a]=.
 - This assumes that the Prolog implementation garbage-collects atoms.
 - More convenient to debug.
+** Difference lists
+- Who invented difference lists when?
+
+A "difference list" is a term of the form =A - B= where =A= is a list and =B= is a list.
+
+A difference list represents a list.
+
+The difference list =A - []= represents the list =A=.
+
+- https://en.wikipedia.org/wiki/Difference_list
+- https://en.wikibooks.org/wiki/Prolog/Difference_Lists
+  - Difference list has constant-time append.
+    Ordinary list has linear-time append.
+- https://wiki.haskell.org/Difference_list
+  - "Whether this kind of difference list is more efficient than another list representations depends on usage patterns."
+- http://homepages.inf.ed.ac.uk/pbrna/prologbook/node180.html
 ** Prolog procedural semantics
 *** Swapped phrases
 There is only a small syntactic difference between =dfs= and =bfs= (it's just flipped order).
@@ -3395,8 +3411,15 @@ How far does a cut cut?
 "The craft of Prolog" defines three kinds of cuts: red, green, and blue.
 - A red cut destroys the logical meaning of a program.
   Green and blue cuts don't.
+** Profiling in SWI-Prolog; find where your program spends time; find where it is slow; diagnose slowness
+To run your =Goal= with profiling, simply query =profile(Goal)=.
+
+Profiling couldn't be any simpler than this.
 ** Relational parsing; parsing with Prolog; my train of thought
+Parsing is turning a list into a tree.
 *** Approaches
+- 2002 course notes http://www.cs.sfu.ca/~cameron/Teaching/383/DCG.html
+- 1987 article "Parsing and compiling using Prolog" http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.101.9739&rep=rep1&type=pdf
 - relational approach
   - recognizer: =digit(Input)=
     - recognizer with explicit search strategy
@@ -3414,6 +3437,65 @@ How far does a cut cut?
   - parsing expression grammar
 - procedural approach
   - recursive-descent
+- https://en.wikipedia.org/wiki/Garden-path_sentence
+*** Determining the groundness of the length of the lists involved in append/3 and append/2
+**** Why do we care?
+Because we want to write naive parsers that terminate.
+**** What?
+From the source code of SWI-Prolog, with some modifications:
+- http://www.swi-prolog.org/pldoc/doc/_SWI_/library/lists.pl?show=src#append/3
+
+"Ground" here is an adjective, not a noun.
+A term is /ground/ iff it has no variables.
+A term is non-ground otherwise.
+
+#+BEGIN_SRC prolog
+append([], L, L).
+append([H|T], L, [H|R]) :-
+    append(T, L, R).
+
+append([], []).
+append([L|Ls], As) :-
+    append(L, Ws, As),
+    append(Ls, Ws).
+#+END_SRC
+
+We say that a list is /length-ground/ iff its length is ground, and /length-unground/ otherwise.
+The elements don't have to be ground.
+- The empty list is length-ground.
+- A list [_|T] is length-ground iff T is length-ground.
+- If a variable gets unified with a length-ground list, then the variable is length-ground.
+
+To analyze length-groundedness, we "reverse" the program.
+
+#+BEGIN_EXAMPLE
+% append(T, L, R)
+append([], L, L).
+append(T, L, R) => append([H|T], L, [H|R]).
+#+END_EXAMPLE
+
+(Length-ground = proper list?)
+
+Now we can infer these about append(T, L, R):
+- If T = [], then L and R have the same length-groundness.
+- The recursive case:
+  - Iff T is length-ground, then [H|T] is length-ground.
+  - Iff R is length-ground, then [H|R] is length-ground.
+- If we want L to be length-ground, then R has to be length-ground.
+- Thus we can infer that L and R have the same length-groundness regardless of the length-groundness of T.
+
+If append(A, B, C) succeeds, then:
+- If A = [], then B and C have the same length-groundness.
+- If two of A, B, C are length-ground, then the other one is length-ground?
+- If two of A, B, C are length-unground, then the other one is length-unground?
+
+What?
+- 2002 article "Efficient Groundness Analysis in Prolog" https://arxiv.org/abs/cs/0201012
+  - https://github.com/pschachte/groundness
+**** How do we generate a long list in Prolog, for testing?
+***** How do we say "A is a list of 100 equal elements" in Prolog?
+** What?
+- 99 Prolog problems http://www.ic.unicamp.br/~meidanis/courses/problemas-prolog/
 *** Naive approach with recognizer / membership predicate
 A /recognizer/ is a unary predicate that takes a list of character codes.
 
@@ -3602,6 +3684,12 @@ We shouldn't chicken out.
 We shouldn't compromise by working around our grammar descriptions.
 *** Precedence parsing?
 - 1996 article "An Operator Precedence Parser for Standard Prolog Text" https://onlinelibrary.wiley.com/doi/abs/10.1002/%28SICI%291097-024X%28199607%2926%3A7%3C763%3A%3AAID-SPE33%3E3.0.CO%3B2-L
+** Total relational programming (relational programs that can be proven to terminate?)
+A total relation is a relation that is defined for every element in its domain.
+
+If there is total functional programming, then there should be total relational programming.
+
+It is too easy to write a Prolog program that doesn't terminate.
 ** Prolog is a depth-first brute-forcer
 But you can emulate other search algorithms too.
 *** Non-termination pitfalls, and how to generate terms correctly
