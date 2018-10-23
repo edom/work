@@ -132,3 +132,84 @@ expression(Order, infix(P1, ML, MR), U0, P3, U3) :-
     OR #=< Order,
     expression(OL, ML, U0, P0, U1),
     expression(OR, MR, U2, P2, U3).
+
+:- use_module('tax.pro').
+
+example_tax(Gross_income, Tax) :-
+    taxation_subject(Taxation, Subject),
+    taxation_year(Taxation, 2018),
+    subject_has_npwp(Subject, true),
+    subject_gross_income(Subject, Income),
+    income_year(Income, 2018),
+    income_amount(Income, Gross_income),
+    taxation_income_tax(Taxation, Tax).
+
+/*
+Embedded C-like expression language but with unification instead of assignment.
+
+Translate the expression fun(Input) to the goal fun(Input, Result).
+
+Example query:
+
+eval((
+    A = 1;
+    (B, C) = (2, A + 2 + 3);
+    D = 4 + 5 * sin(6);
+    E = 7 + plus(8,9)
+), Result).
+*/
+
+:- op(650, xfy, ++).
+
+eval_arith_binop(E, Val) :-
+    E =.. [Name, EA, EB],
+    eval(EA, VA),
+    eval(EB, VB),
+    Exp =.. [Name, VA, VB],
+    Val is Exp.
+
+eval(A, A) :-
+    atom(A), !
+;   number(A), !
+;   string(A), !.
+
+% This case is problematic.
+% We can't have good error message.
+eval(V, V) :- var(V), !.
+
+eval([], []) :- !.
+eval([H|T], [H|T]) :- !.
+
+eval((EA, EB), (EA, EB)) :- !.
+
+eval(E, Val) :-
+    functor(E, Name, 2),
+    member(Name, [+, *]),
+    !,
+    eval_arith_binop(E, Val).
+
+eval((EA ++ EB), Val) :-
+    !,
+    eval(EA, VA),
+    eval(EB, VB),
+    append(VA, VB, Val).
+
+eval((Pat = E), Val) :-
+    !,
+    eval(E, Val),
+    Pat = Val.
+
+eval((EA; EB), Val) :-
+    !,
+    eval(EA, _),
+    eval(EB, Val).
+
+eval(Exp, Val) :-
+    current_arithmetic_function(Exp),
+    !,
+    Val is Exp.
+
+eval(Exp, Val) :-
+    functor(Exp, _, _),
+    !,
+    call(Exp, Val).

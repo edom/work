@@ -3262,6 +3262,10 @@ https://medium.com/concerning-pharo/elegant-pharo-code-bb590f0856d0
 * Sayings
 - Writing an enterprise application in Java is like teaching graduate physics using only the 100 most common English words.
 * Relational programming / logic programming with SWI-Prolog
+** Woes
+*** <2018-10-24> There is no standard date/time/calendar library
+- Java 8 has "java.util.time"; previous Java versions can use "Joda Time".
+- Haskell has the "time" package ("Data.Time" module).
 ** Installing SWI-Prolog
 *** Principles
 - If your Linux distro has a packaged SWI Prolog 7, use it.
@@ -3324,6 +3328,13 @@ https://medium.com/concerning-pharo/elegant-pharo-code-bb590f0856d0
   Example: ="aaa" = [a,a,a]=.
 - This assumes that the Prolog implementation garbage-collects atoms.
 - More convenient to debug.
+** Use clpfd #=/2 instead of is/2
+** Comparison between what is difficult in various programming languages
+- 2014 presentation "That scripting language called Prolog" https://www.slideshare.net/SergeiWinitzki/prolog-talk
+  - It compares what is difficult in various programming languages.
+  - It defines "declarative": 'Programming is "declarative" when /specifications are programs/.'
+    - Slide 29: "declarative programming = creating a good DSL for your domain"
+  - Slide 24 compares SQL, Datalog, and Prolog.
 ** Difference lists
 - Who invented difference lists when?
 
