@@ -3266,6 +3266,44 @@ https://medium.com/concerning-pharo/elegant-pharo-code-bb590f0856d0
 *** <2018-10-24> There is no standard date/time/calendar library
 - Java 8 has "java.util.time"; previous Java versions can use "Joda Time".
 - Haskell has the "time" package ("Data.Time" module).
+** Functional/expression style sometimes beats relational/unification style
+#+BEGIN_EXAMPLE
+-- Functional/expression style
+g (f0 x0) (f1 x1) (f2 x2)
+
+% Relational/unification style
+f0(X0, Y0), f1(X1, Y1), f2(X2, Y2), g(Y0, Y1, Y2, Z).
+#+END_EXAMPLE
+Example where functional style wins:
+- string formatting
+- number crunching
+
+If backtracking isn't involved, functional style wins (is more concise than relational style).
+
+If computation is reversible, relational style wins (half the amount of code of functional style).
+
+We should use both styles depending on circumstances.
+
+We can define a functional/expression/applicative/evaluative sublanguage in Prolog, roughly like this:
+
+#+BEGIN_SRC prolog
+eval((A = B), Val) :- A = B, eval(B, Val), !.
+eval(F, Val) :- callable(F), call(F, Val), !. % lots of hand-waving here
+% etc.
+#+END_SRC
+
+Haskell is weak against the AST decoration problem.
+Dynamic languages (Scheme, JavaScript, Prolog) / gradual-typed languages (TypeScript) beat static languages (Haskell) on the AST decoration problem.
+How about Ocaml polymorphic variants?
+
+- 1999 article "Embedding Prolog in Haskell" https://pdfs.semanticscholar.org/7c46/5d25205830735d0a034532746b7243221eca.pdf
+  - "We propose an embedding of logic programming into lazy functional programming
+    in which each predicate in a Prolog program becomes a Haskell function,
+    in such a way that both the declarative and the procedural reading of the Prolog predicate are preserved."
+- 1988 article "Towards functional programming in Prolog" ftp://obaluae.inf.puc-rio.br/pub/docs/Publications/88_AI_Furtado_SINPLAN.Not.pdf
+
+Should we move from Prolog to Scheme/miniKanren or Mercury?
+** Prolog needs static checking like Erlang Dialyzer
 ** Installing SWI-Prolog
 *** Principles
 - If your Linux distro has a packaged SWI Prolog 7, use it.
@@ -3329,6 +3367,10 @@ https://medium.com/concerning-pharo/elegant-pharo-code-bb590f0856d0
 - This assumes that the Prolog implementation garbage-collects atoms.
 - More convenient to debug.
 ** Use clpfd #=/2 instead of is/2
+** Fixing programming errors
+- https://www.cs.ucsb.edu/~kyledewey/cs162w15/debugging_prolog.html
+- http://www.swi-prolog.org/pldoc/man?section=debugoverview
+  - Type =/f= in the tracer prompt to run to the next failure.
 ** Comparison between what is difficult in various programming languages
 - 2014 presentation "That scripting language called Prolog" https://www.slideshare.net/SergeiWinitzki/prolog-talk
   - It compares what is difficult in various programming languages.
