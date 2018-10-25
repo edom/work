@@ -3261,6 +3261,42 @@ https://medium.com/concerning-pharo/elegant-pharo-code-bb590f0856d0
 
 * Sayings
 - Writing an enterprise application in Java is like teaching graduate physics using only the 100 most common English words.
+* Benefits and drawbacks of static type checking
+The benefits of types:
+
+- Types prevent stupid mistakes.
+- Types can be used to improve program efficiency.
+- Types are documentation for both human and machine.
+  Types communicate intention to both human and machine.
+
+The drawbacks of types:
+
+- Some safe programs don't typecheck.
+- Some programs become longer.
+  - Haskell's type system complicates the AST decoration problem.
+    In TypeScript, the AST decoration problem is trivial;
+    you just add a field at runtime.
+* Direct left-recursive parsers in Prolog
+The key: unify terminals before recursing into nonterminals.
+#+BEGIN_SRC prolog
+% S is a list of character codes.
+binary_operator([0'+]).
+binary_operator([0'*]).
+
+digit(C) :- code_type(C, digit).
+
+number(S) :-
+    digit([S])
+;   append([[A], B], S), digit(A), number(B);
+
+expression(S) :-
+    number(S)
+;   binary_operator(B), append([A, B, C], S), expression(A), expression(C).
+#+END_SRC
+* Prolog is ideal for writing a typechecker, and TypeScript is ideal for typechecking AST decorations, so we should fuse Prolog and TypeScript.
+Abdullah pointed out to me that TypeScript interface is similar to Ocaml polymorphic variant?
+** But there is Racket and its languages such as ProfessorJ, Datalog.
+- "Creating languages" https://docs.racket-lang.org/guide/languages.html
 * Relational programming / logic programming with SWI-Prolog
 ** Woes
 *** <2018-10-24> There is no standard date/time/calendar library
@@ -3296,13 +3332,15 @@ Haskell is weak against the AST decoration problem.
 Dynamic languages (Scheme, JavaScript, Prolog) / gradual-typed languages (TypeScript) beat static languages (Haskell) on the AST decoration problem.
 How about Ocaml polymorphic variants?
 
+Should we move from Prolog to Scheme/miniKanren or Mercury?
+** Embedding Prolog/Haskell in Haskell/Prolog
+*** Embedding Prolog in Haskell
 - 1999 article "Embedding Prolog in Haskell" https://pdfs.semanticscholar.org/7c46/5d25205830735d0a034532746b7243221eca.pdf
   - "We propose an embedding of logic programming into lazy functional programming
     in which each predicate in a Prolog program becomes a Haskell function,
     in such a way that both the declarative and the procedural reading of the Prolog predicate are preserved."
 - 1988 article "Towards functional programming in Prolog" ftp://obaluae.inf.puc-rio.br/pub/docs/Publications/88_AI_Furtado_SINPLAN.Not.pdf
-
-Should we move from Prolog to Scheme/miniKanren or Mercury?
+*** Embedding Haskell in Prolog: Nobody is talking about this.
 ** Prolog needs static checking like Erlang Dialyzer
 ** Installing SWI-Prolog
 *** Principles
@@ -3886,5 +3924,27 @@ definitional programming, GCLA language (separate definition and control)
     Think of it as "second steps in Prolog".
     If you have already read one of the introductory books, if you have taken an introductory course on Prolog, if you have written one or two Prolog programs, and if you are wondering why it is still hard to writegood Prolog programs, this book is meant to help you.
     The purpose of the book is to show you how you can write Prolog programs that work, that don't take an unreasonable amount of time, and that are clean enough to show to your friends."
+** Prolog typechecking; vital to prevent stupid mistakes in large-scale development
+1997 inconclusive discussion "Prolog Type Checker" https://dtai.cs.kuleuven.be/projects/ALP/newsletter/archive_93_96/net/typing/types.html
+* Unpopular opinions
+- https://www.quora.com/What-unpopular-opinions-do-you-have-about-software-development
+* The relationship between programming and past self
+The key to being a good programmer is being someone that your future self can trust.
+
+When we change a program, we are trusting our past self.
+* The context of "Premature optimization"
+http://wiki.c2.com/?PrematureOptimization
+
+Knuth was telling us to focus on what matters.
+
+The catchy maxim "premature optimization is the root of all evil" is at risk of being taken out of context.
+
+(Straw-man) example where "optimizing" is stupid:
+You're building a small to-do list app, and you do it in C, and you use GOTO statements.
+
+Example where not "optimizing" is stupid:
+You're building a electronic fuel injection system,
+and you don't know anything about jitter, latency, and real-time systems.
+Controlling latency here is a requirement, not an optimization.
 * Bibliography
 bibliography:default
