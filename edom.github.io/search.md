@@ -39,6 +39,7 @@ permalink: /search.html
         - Shazam
             - Is there anything like Shazam that takes a YouTube URL, and doesn't require me to install anything?
         - http://whatpixel.com/original-source-image-search-tools/
+        - [saucenao.com](https://saucenao.com/): reverse image search; I use it to find images stolen from pixiv
 - The Internet is full of crap.
     - So are libraries.
     - So is the world.

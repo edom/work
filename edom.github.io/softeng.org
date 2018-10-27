@@ -447,8 +447,6 @@ Unintended behavior?
 How do we measure intention?
 ** By probability of error of random programs?
 How do we measure the probability that a program, uniformly randomly taken from the set of all legal programs in language L, contains an error?
-* Other people with related goals
-- <2018-10-04> [[http://www.cs.umd.edu/~dvanhorn/][David Van Horn]] "I work toward making the construction of reusable, trusted software components possible and effective"
 * Designing the programming language
 ** <2018-10-20> Change of opinion; We should write the language in Prolog instead of Haskell.
 - 2004, parsing in Prolog, "Parsing and Semantics in DCGs" http://www.inf.ed.ac.uk/teaching/courses/aipp/lecture_slides/11_PS_DCGs.pdf
@@ -1203,184 +1201,6 @@ I think that is wise.
   - Software is executable mathematics.
 *** Other people's opinions
 - 2012 article "Socio-PLT: Principles for Programming Language Adoption" [[https://lmeyerov.github.io/projects/socioplt/paper0413.pdf][pdf]]
-** Finding giants whose shoulders we want to stand on
-   :PROPERTIES:
-   :CUSTOM_ID: finding-giants-whose-shoulders-we-want-to-stand-on
-   :END:
-
-- These languages are interesting starting points:
-
-  - [[https://github.com/ollef/sixten][Sixten]]
-  - Dhall
-  - [[http://www.haskellforall.com/2014/09/morte-intermediate-language-for-super.html][Morte: an intermediate language for super-optimizing functional programs]]
-  - [[https://www.reddit.com/r/haskell/comments/27z7yw/is_there_such_a_thing_as_a_lowlevel_functional/][Is there such a thing as a low-level functional language? : haskell]]
-    - ATS and Rust
-  - [[https://www.quora.com/What-are-some-of-the-most-abstract-programming-languages-in-2015][What are some of the most abstract programming languages in 2015? - Quora]]
-  - Midori
-  - Mercury
-  - Perl 6?
-
-- Designing programming languages:
-
-  - 2018 article "Interdisciplinary Programming Language Design" [[http://www.cs.cmu.edu/~mcoblenz/HCPLD-preprint.pdf][pdf]]
-  - 2018 article "A Programmable Programming Language" [[http://silo.cs.indiana.edu:8346/c211/impatient/cacm-draft.pdf][pdf]]
-  - 2018 article "Combining Model Checking and Testing" [[https://www.cis.upenn.edu/~alur/CIS673/testing.pdf][pdf]]
-  - 2013 article "Idris, a General Purpose Dependently Typed Programming Language: Design and Implementation" [[https://eb.host.cs.st-andrews.ac.uk/drafts/impldtp.pdf][pdf]]
-  - 2007 article "Position Paper: Thoughts on Programming with Proof Assistants" [[https://ac.els-cdn.com/S1571066107002502/1-s2.0-S1571066107002502-main.pdf?_tid=19c6192b-ca57-4ef0-9403-1cfb624c817c&acdnat=1535488824_78a2c31f390f3a1fb72f0c31024f2495][pdf]]
-  - 1996 article "Seven Deadly Sins of Introductory Programming Language Design" [[https://pdfs.semanticscholar.org/d314/78c5b95c399b6418b41011debefbc699c633.pdf][pdf]]
-  - 1996 book "Advanced programming language design" [[https://www.researchgate.net/profile/Raphael_Finkel/publication/220692467_Advanced_programming_language_design/links/0c96052af3e324bf31000000/Advanced-programming-language-design.pdf][pdf]]
-  - 1973 article "Hints on Programming Language Design" [[http://www.dtic.mil/dtic/tr/fulltext/u2/773391.pdf][pdf]]
-
-- Finding recent programming language research:
-
-  - meetings, conferences, symposiums
-
-    - [[https://twitter.com/poplconf?lang=en][POPL on Twitter]].
-      Its full name is "ACM SIGPLAN Symposium on Principles of Programming Languages".
-
-  - collections, links, aggregators
-
-    - https://www.cs.cmu.edu/~mleone/language-research.html
-
-- What already exists?
-
-  - [[https://tomassetti.me/resources-create-programming-languages/][68 Resources on creating programming languages]]
-  - 2004, book, "Programming language design concepts"
-  - https://en.wikipedia.org/wiki/Expression_problem
-  - don't repeat yourself
-
-    - https://en.wikipedia.org/wiki/Generic_programming
-
-      - parametric polymorphism
-
-  - Safely Composable Type-Specific Languages https://www.cs.cmu.edu/~aldrich/papers/ecoop14-tsls.pdf
-
-- books
-
-  - books recommended by courses related to programming language research
-
-    - http://plus.kaist.ac.kr/~han/courses/cs520/
-    - https://www.cl.cam.ac.uk/teaching/1516/ConceptsPL/
-    - https://en.wikipedia.org/wiki/Programming_language_theory#Further_reading
-
-  - 1995, book, "Syntax and semantics of programming languages", Slonneger & Kurtz http://homepage.divms.uiowa.edu/~slonnegr/plf/Book/
-
-- 2017, PhD thesis, [[http://tomasp.net/academic/theses/coeffects/]["Context-aware programming languages"]]
-
-  - [[http://tomasp.net/coeffects/][amazingly empathic considerate presentation that has the audience in mind]]
-
-    - if only all PhD theses are presented that way
-
-      - if only everybody writes that way
-
-- 2014, book, Odersky, "Scala by example"
-
-  - perhaps the best way to learn Scala for non-Scala programmers
-
-- https://en.wikipedia.org/wiki/John_C._Reynolds
-
-  - 2014, [[http://www.cs.bham.ac.uk/~udr/papers/EssenceOfReynolds.pdf][The essence of Reynolds]]
-
-    - 1998, Reynolds, "Theories of programming languages"
-
-- a list of people http://www.angelfire.com/tx4/cus/people/index.html
-- other people's collections
-
-  - https://github.com/steshaw/plt
-
-- google search for "haskell code generation"
-
-  - [[https://www.joachim-breitner.de/blog/719-veggies__Haskell_code_generation_from_scratch][veggies: Haskell code generation from scratch -- Blog -- Joachim Breitner's Homepage]]
-
-    - [[https://www.reddit.com/r/haskell/comments/66q87y/veggies_haskell_code_generation_from_scratch/][veggies: Haskell code generation from scratch : haskell]]
-
-  - [[https://www.bytelabs.org/project/haskell-bottom-up-rewrite-generator/][HBURG - Haskell Bottom Up Rewrite Generator | ByteLabs]]
-
-- software development is software too
-
-  - meta-language
-
-    - 2016, "JunGL: a Scripting Language for Refactoring", [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.94.859&rep=rep1&type=pdf][pdf]]
-
-*** People who share the vision for /the/ programming language
-
-- [[https://brianmckenna.org/blog/polymorphic_programming][Polymorphic Programming - BAM Weblog]]
-
-  - has some links
-  - 2017, article, "Compiling to Categories", Conal Elliott, [[http://conal.net/papers/compiling-to-categories/compiling-to-categories.pdf][pdf]]
-  - Is this 1969 article related? Can't be found online.
-
-    - https://en.wikipedia.org/wiki/Polymorphic_Programming_Language
-
-  - Are these related?
-
-    - 1989, article, "Database Programming in Machiavelli -- a Polymorphic Language with Static Type Inference", [[http://homepages.inf.ed.ac.uk/opb/papers/SIGMOD89.pdf][pdf]]
-
-- Can we use Description Logic (the theoretical foundations of Web Ontology Language OWL) to generate software, especially enterprise applications?
-
-  - 2015, article, [[https://arxiv.org/abs/1503.01723][[1503.01723] Modelling the Semantic Web using a Type System]]
-  - 2005, article, "Software engineering ontologies and their implementation", [[https://espace.curtin.edu.au/bitstream/handle/20.500.11937/9549/19598_downloaded_stream_116.pdf][pdf]], [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.86.5585&rep=rep1&type=pdf][pdf copy]]
-
-*** People who share some of the vision but don't go far enough
-
-- XForms
-
-  - 2016, article, [[https://link.springer.com/article/10.1007/s11280-015-0339-z][Leveraging declarative languages in web application development - SpringerLink]]
-  - 2014, slides, advocacy, [[https://homepages.cwi.nl/~steven/Talks/2014/01-31-declarative/][Declarative Web Applications]]
-
-- 2007, workshop, [[https://www.w3.org/2007/02/dmdwa-ws/][Declarative Models of Distributed Web Applications]]
-- [[http://www.proglangdesign.net/][#proglangdesign]]
-- IDE (integrated development environment), editor
-
-  - Given a grammar, the computer should generate an IDE for us.
-    Syntax highlighting.
-    Refactoring.
-  - https://hackage.haskell.org/package/treersec "Build a structure editor for a programming language from combinators following the grammar."
-  - http://www.lamdu.org/
-  - cirru https://news.ycombinator.com/item?id=13773813
-
-    - lots of similar things https://news.ycombinator.com/item?id=13774864
-
-  - isomorf: find code fragment popularity by structure (not-only-text) comparison https://isomorf.io/#!/tours/of/overview/7/haskell
-
-- supercompilation, specialization, partial evaluation
-
-  - Haskell supercompilation?
-
-    - GHC
-    - Supero
-    - Morte
-
-      - https://github.com/Gabriel439/Haskell-Morte-Library
-
-        - "Morte is a super-optimizing intermediate language for functional languages."
-
-      - http://www.haskellforall.com/2014/09/morte-intermediate-language-for-super.html
-
-  - [[http://thyer.name/phd-thesis/thesis-thyer.pdf][Thyer's PhD thesis "Lazy specialization"]] has an accessible introduction to lambda calculus in Chapter 2.
-
-    - "Tower of interpreters" test
-    - 2018, "Collapsing towers of interpreters" http://lampwww.epfl.ch/~amin/pub/collapsing-towers.pdf
-
-      - "It is well known that /staging/ an interpreter -- making it generate code whenever it would normally interpret an expression -- yields a compiler [...]"
-
-  - 1991, "A partial evaluator for the untyped lambda-calculus", [[https://www.cambridge.org/core/journals/journal-of-functional-programming/article/a-partial-evaluator-for-the-untyped-lambda-calculus/EE324F936F0A009B6766B13FF6755DFC][paywall]]
-
-    - related: semantic-directed code generation?
-
-  - Gabriel Gonzales stuff: Morte, Dhall.
-  - [[http://lambda-the-ultimate.org/node/2739][LTU: Ongoing work on Supercompilation of Java code (or supercompilation in general)?]]
-
-- [[https://medium.com/@McCosmos/a-treatise-on-cosmos-the-new-programming-language-905be69eb4af][A Treatise on Cosmos ---the New Programming Language]]
-
-  - procedural-looking logic programming language
-
-- syntax
-
-  - [[https://en.wikipedia.org/wiki/Off-side_rule][WP:Off-side rule]], indentation as block delimiter
-
-- [[http://wiki.c2.com/?QuestForThePerfectLanguage][Quest For The Perfect Language]]
-
 ** What are some interesting programming languages?
    :PROPERTIES:
    :CUSTOM_ID: what-are-some-interesting-programming-languages
@@ -2652,11 +2472,150 @@ Does it mean "X is a subclass of Y" or "X is an instance of Y"?
 - <2018-10-04> https://www.thestrangeloop.com/2018/all-the-languages-together.html
   - "Unfortunately, most current languages and toolchains were designed with language interoperability as an afterthought [...]"
   - "This talk is about how to change the status quo to make it easier to build multi-language software."
-* Communities
+* Communities and other people with related goals
+** Communities
 - #proglangdesign community
   - their wiki https://github.com/proglangdesign/proglangdesign-wiki/wiki
   - their reddit https://www.reddit.com/r/ProgrammingLanguages/
   - their website https://www.proglangdesign.net/
+** People
+- <2018-10-04> [[http://www.cs.umd.edu/~dvanhorn/][David Van Horn]] "I work toward making the construction of reusable, trusted software components possible and effective"
+** Finding giants whose shoulders we want to stand on, for building the programming language
+- These languages are interesting starting points:
+  - [[https://github.com/ollef/sixten][Sixten]]
+  - Dhall
+  - [[http://www.haskellforall.com/2014/09/morte-intermediate-language-for-super.html][Morte: an intermediate language for super-optimizing functional programs]]
+  - [[https://www.reddit.com/r/haskell/comments/27z7yw/is_there_such_a_thing_as_a_lowlevel_functional/][Is there such a thing as a low-level functional language? : haskell]]
+    - ATS and Rust
+  - [[https://www.quora.com/What-are-some-of-the-most-abstract-programming-languages-in-2015][What are some of the most abstract programming languages in 2015? - Quora]]
+  - Midori
+  - Mercury
+  - Perl 6?
+- Designing programming languages:
+  - 2018 article "Interdisciplinary Programming Language Design" [[http://www.cs.cmu.edu/~mcoblenz/HCPLD-preprint.pdf][pdf]]
+  - 2018 article "A Programmable Programming Language" [[http://silo.cs.indiana.edu:8346/c211/impatient/cacm-draft.pdf][pdf]]
+  - 2018 article "Combining Model Checking and Testing" [[https://www.cis.upenn.edu/~alur/CIS673/testing.pdf][pdf]]
+  - 2013 article "Idris, a General Purpose Dependently Typed Programming Language: Design and Implementation" [[https://eb.host.cs.st-andrews.ac.uk/drafts/impldtp.pdf][pdf]]
+  - 2007 article "Position Paper: Thoughts on Programming with Proof Assistants" [[https://ac.els-cdn.com/S1571066107002502/1-s2.0-S1571066107002502-main.pdf?_tid=19c6192b-ca57-4ef0-9403-1cfb624c817c&acdnat=1535488824_78a2c31f390f3a1fb72f0c31024f2495][pdf]]
+  - 1996 article "Seven Deadly Sins of Introductory Programming Language Design" [[https://pdfs.semanticscholar.org/d314/78c5b95c399b6418b41011debefbc699c633.pdf][pdf]]
+  - 1996 book "Advanced programming language design" [[https://www.researchgate.net/profile/Raphael_Finkel/publication/220692467_Advanced_programming_language_design/links/0c96052af3e324bf31000000/Advanced-programming-language-design.pdf][pdf]]
+  - 1973 article "Hints on Programming Language Design" [[http://www.dtic.mil/dtic/tr/fulltext/u2/773391.pdf][pdf]]
+- Finding recent programming language research:
+  - meetings, conferences, symposiums
+    - [[https://twitter.com/poplconf?lang=en][POPL on Twitter]].
+      Its full name is "ACM SIGPLAN Symposium on Principles of Programming Languages".
+  - collections, links, aggregators
+    - https://www.cs.cmu.edu/~mleone/language-research.html
+- What already exists?
+  - [[https://tomassetti.me/resources-create-programming-languages/][68 Resources on creating programming languages]]
+  - 2004, book, "Programming language design concepts"
+  - https://en.wikipedia.org/wiki/Expression_problem
+  - don't repeat yourself
+    - https://en.wikipedia.org/wiki/Generic_programming
+      - parametric polymorphism
+  - Safely Composable Type-Specific Languages https://www.cs.cmu.edu/~aldrich/papers/ecoop14-tsls.pdf
+- books
+  - books recommended by courses related to programming language research
+    - http://plus.kaist.ac.kr/~han/courses/cs520/
+    - https://www.cl.cam.ac.uk/teaching/1516/ConceptsPL/
+    - https://en.wikipedia.org/wiki/Programming_language_theory#Further_reading
+  - 1995, book, "Syntax and semantics of programming languages", Slonneger & Kurtz http://homepage.divms.uiowa.edu/~slonnegr/plf/Book/
+- 2017, PhD thesis, [[http://tomasp.net/academic/theses/coeffects/]["Context-aware programming languages"]]
+  - [[http://tomasp.net/coeffects/][amazingly empathic considerate presentation that has the audience in mind]]
+    - if only all PhD theses are presented that way
+      - if only everybody writes that way
+- 2014, book, Odersky, "Scala by example"
+  - perhaps the best way to learn Scala for non-Scala programmers
+- https://en.wikipedia.org/wiki/John_C._Reynolds
+  - 2014, [[http://www.cs.bham.ac.uk/~udr/papers/EssenceOfReynolds.pdf][The essence of Reynolds]]
+    - 1998, Reynolds, "Theories of programming languages"
+- a list of people http://www.angelfire.com/tx4/cus/people/index.html
+- other people's collections
+  - https://github.com/steshaw/plt
+- google search for "haskell code generation"
+  - [[https://www.joachim-breitner.de/blog/719-veggies__Haskell_code_generation_from_scratch][veggies: Haskell code generation from scratch -- Blog -- Joachim Breitner's Homepage]]
+    - [[https://www.reddit.com/r/haskell/comments/66q87y/veggies_haskell_code_generation_from_scratch/][veggies: Haskell code generation from scratch : haskell]]
+  - [[https://www.bytelabs.org/project/haskell-bottom-up-rewrite-generator/][HBURG - Haskell Bottom Up Rewrite Generator | ByteLabs]]
+- software development is software too
+  - meta-language
+    - 2016, "JunGL: a Scripting Language for Refactoring", [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.94.859&rep=rep1&type=pdf][pdf]]
+*** People who share the vision for /the/ programming language
+
+- [[https://brianmckenna.org/blog/polymorphic_programming][Polymorphic Programming - BAM Weblog]]
+
+  - has some links
+  - 2017, article, "Compiling to Categories", Conal Elliott, [[http://conal.net/papers/compiling-to-categories/compiling-to-categories.pdf][pdf]]
+  - Is this 1969 article related? Can't be found online.
+
+    - https://en.wikipedia.org/wiki/Polymorphic_Programming_Language
+
+  - Are these related?
+
+    - 1989, article, "Database Programming in Machiavelli -- a Polymorphic Language with Static Type Inference", [[http://homepages.inf.ed.ac.uk/opb/papers/SIGMOD89.pdf][pdf]]
+
+- Can we use Description Logic (the theoretical foundations of Web Ontology Language OWL) to generate software, especially enterprise applications?
+
+  - 2015, article, [[https://arxiv.org/abs/1503.01723][[1503.01723] Modelling the Semantic Web using a Type System]]
+  - 2005, article, "Software engineering ontologies and their implementation", [[https://espace.curtin.edu.au/bitstream/handle/20.500.11937/9549/19598_downloaded_stream_116.pdf][pdf]], [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.86.5585&rep=rep1&type=pdf][pdf copy]]
+
+*** People who share some of the vision but don't go far enough
+- XForms
+
+  - 2016, article, [[https://link.springer.com/article/10.1007/s11280-015-0339-z][Leveraging declarative languages in web application development - SpringerLink]]
+  - 2014, slides, advocacy, [[https://homepages.cwi.nl/~steven/Talks/2014/01-31-declarative/][Declarative Web Applications]]
+
+- 2007, workshop, [[https://www.w3.org/2007/02/dmdwa-ws/][Declarative Models of Distributed Web Applications]]
+- [[http://www.proglangdesign.net/][#proglangdesign]]
+- IDE (integrated development environment), editor
+
+  - Given a grammar, the computer should generate an IDE for us.
+    Syntax highlighting.
+    Refactoring.
+  - https://hackage.haskell.org/package/treersec "Build a structure editor for a programming language from combinators following the grammar."
+  - http://www.lamdu.org/
+  - cirru https://news.ycombinator.com/item?id=13773813
+
+    - lots of similar things https://news.ycombinator.com/item?id=13774864
+
+  - isomorf: find code fragment popularity by structure (not-only-text) comparison https://isomorf.io/#!/tours/of/overview/7/haskell
+
+- supercompilation, specialization, partial evaluation
+
+  - Haskell supercompilation?
+
+    - GHC
+    - Supero
+    - Morte
+
+      - https://github.com/Gabriel439/Haskell-Morte-Library
+
+        - "Morte is a super-optimizing intermediate language for functional languages."
+
+      - http://www.haskellforall.com/2014/09/morte-intermediate-language-for-super.html
+
+  - [[http://thyer.name/phd-thesis/thesis-thyer.pdf][Thyer's PhD thesis "Lazy specialization"]] has an accessible introduction to lambda calculus in Chapter 2.
+
+    - "Tower of interpreters" test
+    - 2018, "Collapsing towers of interpreters" http://lampwww.epfl.ch/~amin/pub/collapsing-towers.pdf
+
+      - "It is well known that /staging/ an interpreter -- making it generate code whenever it would normally interpret an expression -- yields a compiler [...]"
+
+  - 1991, "A partial evaluator for the untyped lambda-calculus", [[https://www.cambridge.org/core/journals/journal-of-functional-programming/article/a-partial-evaluator-for-the-untyped-lambda-calculus/EE324F936F0A009B6766B13FF6755DFC][paywall]]
+
+    - related: semantic-directed code generation?
+
+  - Gabriel Gonzales stuff: Morte, Dhall.
+  - [[http://lambda-the-ultimate.org/node/2739][LTU: Ongoing work on Supercompilation of Java code (or supercompilation in general)?]]
+
+- [[https://medium.com/@McCosmos/a-treatise-on-cosmos-the-new-programming-language-905be69eb4af][A Treatise on Cosmos ---the New Programming Language]]
+
+  - procedural-looking logic programming language
+
+- syntax
+
+  - [[https://en.wikipedia.org/wiki/Off-side_rule][WP:Off-side rule]], indentation as block delimiter
+
+- [[http://wiki.c2.com/?QuestForThePerfectLanguage][Quest For The Perfect Language]]
 * Web application frameworks?
 http://zotonic.com/
 * Solving the expression problem
@@ -2752,515 +2711,6 @@ That is an interesting idea, but some important questions remain:
 
 - How do we do that without boilerplate (for the library writer)?
 - How do we do that without performance penalty?
-* Too speculative? Unclear goal/reason? Condemned to oblivion?
-** Category theory and programming languages?
-The section title needs a verb.
-- Category-theoretic model of functional programming languages
-  - Every functional programming language L can be modeled by a category C(L) whose objects are the types of L and arrows are the function expressions of L.
-- categorical programming (what is this?)
-  - 2000, PhD thesis, "Categorical programming with inductive and coinductive types" https://kodu.ut.ee/~varmo/papers/thesis.pdf
-  - categorical programming language
-    - 1993, article, "Comparing Hagino's categorical programming language and typed lambda-calculi" https://www.sciencedirect.com/science/article/pii/030439759390186W
-    - 1987, PhD thesis, "Categorical programming language" http://web.sfc.keio.ac.jp/~hagino/thesis.pdf
-      - "An interpreter of Hagino's Categorical Programming Language (CPL)." https://github.com/msakai/cpl
-    - aggregators
-      - 2009, https://mathoverflow.net/questions/3721/programming-languages-based-on-category-theory
-      - https://softwareengineering.stackexchange.com/questions/216635/category-theory-based-language
-- category theory applied to programming language theory
-  - 2012, "Generic Programming with Adjunctions" http://www.cs.ox.ac.uk/ralf.hinze/LN.pdf
-** Foundation of mathematics especially for programming?
-- set theories, such as ZF, ZFC, NBG, etc.
-  - https://math.stackexchange.com/questions/136215/difference-between-zfc-nbg
-- type theories, such as Martin-Löf type theory
-- logic?
-- category theory?
-- lambda calculus?
-- https://cstheory.stackexchange.com/questions/27217/are-there-presentations-of-set-theory-in-terms-of-lambda-calculus
-  - Grue's map theory, 1992
-    - http://hjemmesider.diku.dk/~grue/
-      - 1992, Grue, PhD thesis, [[http://hjemmesider.diku.dk/~grue/papers/Grue92/Grue92.pdf]["Map theory"]]
-        - p. 130: "Equality is better than truth [...]" (How do we explain the context?)
-          - https://en.wikipedia.org/wiki/Equational_logic
-    - related?
-      - equational programming
-    - 2016 reformulation article "A synthetic axiomatization of Map Theory" [[https://hal.archives-ouvertes.fr/hal-00678410v3][pdf available]]
-Can we formalize "a program is an executable formal system" using Grue's map theory?
-- How is "false" represented?
-- How is "true" represented?
-- How is "conjunction" represented?
-** Probably irrelevant to our goal
-   :PROPERTIES:
-   :CUSTOM_ID: probably-irrelevant-to-our-goal
-   :END:
-
-- [[https://en.wikipedia.org/wiki/Non-English-based_programming_languages][WP:Non-English-based programming languages]]
-- Obscure things. Much marketing, little technical detail.
-
-  - VPRI, Alan Kay et al., archived (stopped operating in 2018), computing for the masses?
-
-    - "Improve 'powerful ideas education' for the world's children and to advance the state of systems research and personal computing"
-
-      - https://harc.ycr.org/
-
-        - https://www.ycr.org/
-
-    - https://en.wikipedia.org/wiki/Viewpoints_Research_Institute
-    - https://en.wikipedia.org/wiki/COLA_(software_architecture)
-    - https://news.ycombinator.com/item?id=11686325
-    - FONC = fundamentals of new computing
-    - http://www.vpri.org/index.html
-
-  - YCR
-
-    - visual programming language
-
-      - blocks language
-
-        - https://harc.ycr.org/project/gp/
-
-- Functional Payout Framework http://lambda-the-ultimate.org/node/3331
-** Automatic deglobalization of C programs?
-** Who reads SWEBOK? How can we read SWEBOK? Who reads all of it? Why does anyone bother writing it?
-- https://en.wikipedia.org/wiki/Software_Engineering_Body_of_Knowledge
-- http://www.sebokwiki.org/wiki/An_Overview_of_the_SWEBOK_Guide
-  - <2017-04-27>
-    Someone claims to have read it.
-    Holy shit.
-    https://www.quora.com/Do-you-use-SWEBOK-Is-it-helpful
-- Is the knowledge applicable?
-  Knowledge that can't be applied is useless.
-* Information that is looking for a place where they can be most useful
-** Software engineer associations
-   :PROPERTIES:
-   :CUSTOM_ID: software-engineer-associations
-   :END:
-
-- Indonesia
-
-  - [[http://sarccom.org/][SARCCOM Software architect Indonesia community]]
-  - [[http://www.aspiluki.or.id/][ASPILUKI Asosiasi Piranti Lunak Telematika Indonesia]]
-
-- International?
-** Garbage collection
-- [[https://www.reddit.com/r/programming/comments/7zfbs5/conservative_gc_is_it_really_that_bad_xpost_rjava/][Conservative GC: Is It Really That Bad? (X-post /r/java) : programming]] (summary)
-  - [[https://www.excelsiorjet.com/blog/articles/conservative-gc-is-it-really-that-bad/][Conservative GC: Is It Really That Bad? -- Excelsior JET Team Blog]]
-- [[https://news.ycombinator.com/item?id=16436574][Conservative GC: Is It Really That Bad? | Hacker News]]
-- Real-time garbage collection
-  - http://michaelrbernste.in/2013/06/03/real-time-garbage-collection-is-real.html
-- Why GC only memory?
-  Why not also GC file handles?
-  Why not GC all resources?
-  - [[https://cs.stackexchange.com/questions/52735/why-does-garbage-collection-extend-only-to-memory-and-not-other-resource-types][Why does garbage collection extend only to memory and not other resource types? - Computer Science Stack Exchange]]
-** 2017 article "What Is the Best Way For Developers to Learn New Software Tools? An Empirical Comparison Between a Text and a Video Tutorial"
-- http://programming-journal.org/2017/1/17/
-** Common Lisp advocacy?
-- 2018, article, [[https://academic.oup.com/bib/article/19/3/537/2769437][How the strengths of Lisp-family languages facilitate building complex and flexible bioinformatics applications | Briefings in Bioinformatics | Oxford Academic]]
-*** Common Lisp Object System
-
-- [[http://www.aiai.ed.ac.uk/~jeff/clos-guide.html][A Brief Guide to CLOS]]
-
-** Why people don't adopt metaprogramming tools
-I fear that the tool doesn't perfectly fit my use case.
-When that happens, I want to drop down to the lower layer.
-Generated code is usually inflexible.
-I could maintain a patch, but isn't it (patching generated code) rather hacky and brittle?
-The right way is to design the metalanguage so that it can express such transformation.
-
-https://www.eclipse.org/epsilon/doc/articles/eugenia-patching/
-** TODO How do we develop enterprise web applications efficiently?
-*** <2018-09-27> Enterprise application development is like three blind people describing an elephant.
-Every team is a blind people.
-
-The company's actual ontology is the elephant.
-
-How do we unify enterprise systems?
-Should we combine subsystem ontologies to produce the actual ontology,
-or should we derive subsystem ontologies from the actual ontology?
-*** The ontology of enterprise web applications
-**** Entities
-An /entity/ is something that has identity.
-Every entity is distinguishable from other entities.
-**** Properties (extrinsic properties)
-A /property/ of an entity is something that makes the entity what it is.
-
-In software modeling, properties are usually extrinsic properties.
-
-An extrinsic property of an entity is something we give to the entity, not something that comes with the entity.
-
-Examples of properties:
-
-- The name of a person is an extrinsic property.
-  Changing his name doesn't change what I think of him.
-- The name of a hotel is an extrinsic property.
-  Changing the hotel's name does not change my willingness to stay in it.
-
-A /property/ is a function from entity E to value V.
-
-https://en.wikipedia.org/wiki/Intrinsic_and_extrinsic_properties
-**** Combining entities
-**** Mapping entities to storages
-** TODO Process these informations
-
-- Composition, composable systems
-
-  - https://en.wikipedia.org/wiki/Software_transactional_memory#Composable_operations
-
-- https://en.wikipedia.org/wiki/Programming_language_theory
-- refactoring
-
-  - [[https://github.com/PyCQA/baron][github.com/PyCQA/baron]]: "IDE allow you to refactor code, Baron allows you to write refactoring code."
-  - HaRe Haskell refactoring tool https://github.com/alanz/HaRe
-
-- ungrouped
-
-  - https://medium.com/generative-design/introduction-to-computational-design-6c0fdfb3f1
-  - magic?
-
-    - http://conal.net/blog/posts/semantic-editor-combinators
-
-  - [[https://2017.programmingconference.org/track/refuses-2017][Salon des Refusés 2017]]
-
-- 2002, article collection, "Recent advances in Java technology: theory, application, implementation" http://www.cs.nuim.ie/~jpower/Research/Papers/2002/power-raijt-toc.pdf
-- 1985, article, "Automatic synthesis of typed Λ-programs on term algebras" https://www.sciencedirect.com/science/article/pii/0304397585901355
-- 2015, article, "Dynamically Composing Languages in a Modular Way: Supporting C Extensions for Dynamic Languages", [[https://chrisseaton.com/rubytruffle/modularity15/rubyextensions.pdf][pdf]]
-- https://github.com/nim-lang/Nim
-- 2016, article, "Towards Ontology-Based Program Analysis", [[http://drops.dagstuhl.de/opus/volltexte/2016/6120/pdf/LIPIcs-ECOOP-2016-26.pdf][pdf]]
-
-  - Interesting conference title: "Conference on very important topics (CVIT)"
-
-    - Is it real?
-      Is it a secret society?
-      Google doesn't seem to know about it.
-
-- functional languages with explicit memory layout?
-  functional languages for systems programming?
-
-  - [[https://github.com/ollef/sixten][Sixten: Functional programming with fewer indirections]]
-
-    - It also deals with representing algebraic data type inhabitants as bit patterns.
-    - "Sixten is very related to other functional languages such as Haskell, Agda, and Idris.
-      The biggest difference between other languages and Sixten is the way that Sixten allows us to control the memory layout of data."
-    - [[https://gitter.im/sixten-lang/General?source=orgpage][Sixten, "General", Gitter, community chat]]
-
-- What are Prolog alternatives?
-
-  - 2011, article, [[https://arxiv.org/abs/1107.5408][[1107.5408] A structured alternative to Prolog with simple compositional semantics]]
-
-- 2017, article, [[https://arxiv.org/abs/1707.00024][[1707.00024] A Formalized General Theory of Syntax with Bindings]]
-- [[https://www.cs.cmu.edu/~mleone/language/projects.html][Programming Language and Compiler Research Groups]]
-- [[http://www.pl-enthusiast.net/2014/07/10/ieee-posts-its-top-list-of-languages/][IEEE posts its top list of languages - The PL Enthusiast]]
-- [[http://www.pl-enthusiast.net/2015/05/27/what-is-pl-research-and-how-is-it-useful/][What is PL research and how is it useful? - The PL Enthusiast]]
-- 2014, article, [[https://arxiv.org/abs/1410.1776][Ontology-based Representation and Reasoning on Process Models: A Logic Programming Approach]]
-- 1994, article, "Formalizing architectural connection", [[http://web.cs.wpi.edu/~cs562/s98/pdf/wright-icse16.pdf][pdf]]
-- [[https://2015.splashcon.org/track/nool2015#event-overview][NOOL 2015 accepted papers - SPLASH 2015]] ("New Object Oriented Languages")
-
-  - "Classes Considered Harmful", [[http://web.cecs.pdx.edu/~black/publications/ClassesHarmful.pdf][pdf]]
-  - "Ubiquitous Object Orientation to Foster the Advancement of Programming Languages", [[http://www.cs.cmu.edu/~dkurilov/papers/nool15.pdf][pdf]]
-
-- NOOL 2016 articles
-
-  - "Nomen: A Dynamically Typed OO Programming Language, Transpiled to Java", [[http://www.it.uu.se/workshop/nool16/nool16-paper9.pdf][pdf]]
-
-    - "Nomen is an experimental, dynamically typed OO programming language which compiles to Java source code."
-    - "Nomen is designed as a language for experimenting with IDE support generation using the Rascal language workbench."
-
-  - "The essence of subclassing", [[http://www.it.uu.se/workshop/nool16/nool16-paper5.pdf][pdf]]
-  - "Towards Automatic Decoration", [[http://www.it.uu.se/workshop/nool16/nool16-paper2.pdf][pdf]]
-  - syntax
-
-    - "Polite Programmers, Use Spaces in Identifiers When Needed", [[http://www.it.uu.se/workshop/nool16/nool16-paper10.pdf][pdf]]
-
-- [[https://en.wikipedia.org/wiki/Comparison_of_functional_programming_languages][WP:Comparison of functional programming languages]]
-- Designing APIs
-
-  - [[http://blog.steveklabnik.com/posts/2012-02-13-an-api-ontology][An API Ontology - Literate Programming]]
-
-- Tools
-
-  - Golang
-  - Ruby gem and bundler
-  - Python pip
-
-- Great Works in Programming Languages, Collected by Benjamin C. Pierce http://www.cis.upenn.edu/~bcpierce/courses/670Fall04/GreatWorksInPL.shtml
-- to read? "theories of programming languages reynolds"
-- 2017, book, "Principles of Programming Languages" https://www.cs.bgu.ac.il/~mira/ppl-book-full.pdf
-- 2003, article, "Composing Programming Languages by Combining Action-Semantics Modules" http://www.brics.dk/RS/03/53/BRICS-RS-03-53.pdf
-- 2001, position paper, "Composition Languages for Black-Box Components" http://scg.unibe.ch/archive/papers/Wuyt01c.pdf
-- glue: Make better services. (deprecated) https://hackage.haskell.org/package/glue
-- yet another music programming language https://github.com/alda-lang/alda
-- linearscan: Linear scan register allocator, formally verified in Coq; 2004, master thesis, https://hackage.haskell.org/package/linearscan
-- Lastik: A library for compiling programs in a variety of languages (Java, Scala, C#) https://hackage.haskell.org/package/Lastik
-- risc386: Reduced instruction set i386 simulator https://hackage.haskell.org/package/risc386
-- 2017, "Theorems for Free for Free", Wadler http://homepages.inf.ed.ac.uk/wadler/topics/blame.html
-
-  - What is "polymorphic blame calculus"?
-
-- https://idris.readthedocs.io/en/v1.3.0/faq/faq.html#what-are-the-differences-between-agda-and-idris
-
-  - "Why does Idris use eager evaluation rather than lazy?"
-
-    - "What is the representation of =thing= at run-time? Is it a bit pattern representing an integer, or is it a pointer to some code which will compute an integer? In Idris, we have decided that we would like to make this distinction precise [...]"
-    - Idris has laziness, but you have to be explicit.
-
-- https://en.wikipedia.org/wiki/Automatic_programming
-- https://en.wikipedia.org/wiki/Program_synthesis
-- https://www.cs.cmu.edu/~mleone/language-research.html
-- "Confessions Of A Used Programming Language Salesman: Getting The Masses Hooked On Haskell", Erik Meijer, [[https://pdfs.semanticscholar.org/233a/932b3e94f1f117655e4862995b32f33754be.pdf][pdf]]
-
-  - What are the key points?
-
-- 1966, article, P. J. Landin, "The next 700 programming languages", [[https://www.cs.cmu.edu/~crary/819-f09/Landin66.pdf][pdf]]
-
-  - https://en.wikipedia.org/wiki/Off-side_rule
-
-- http://matt.might.net/articles/best-programming-languages/
-- [[http://www.cs.utexas.edu/users/EWD/ewd06xx/EWD641.PDF][EWD641: On the interplay between mathematics and programming]]
-- http://hackage.haskell.org/package/Workflow
-- https://pchiusano.github.io/2017-01-20/why-not-haskell.html
-- http://unisonweb.org/2015-05-07/about.html#post-start
-- [[https://github.com/facebook/duckling][facebook/duckling: Language, engine, and tooling for expressing, testing, and evaluating composable language rules on input strings.]]
-- [[https://github.com/GaloisInc/crucible][GaloisInc/crucible: Crucible is a library for symbolic simulation of imperative programs]]
-- 2009, "Domain-Specific Languages for Composable Editor Plugins"
-
-  - [[https://pdfs.semanticscholar.org/presentation/85d8/bc42122ff5175be1ebc3c7b91e4abff55d22.pdf][2009 slides pdf]]
-  - [[http://bora.uib.no/bitstream/handle/1956/9721/1-s2.0-S1571066110001179-main.pdf?sequence=1][2010 article pdf]]
-
-- why not PEG parsing
-
-  - http://jeffreykegler.github.io/Ocean-of-Awareness-blog/individual/2015/03/peg.html
-
-- answer set programming
-
-  - [[http://cs.aalto.fi/en/current/news/2018-07-18/][News: Speed up solving complex problems: be lazy and only work crucial tasks - Aalto University]]
-
-    - 2018, article, "Exploiting Justifications for Lazy Grounding of Answer Set Programs", [[https://www.ijcai.org/proceedings/2018/0240.pdf][pdf]]
-
-- [[https://brianmckenna.org/blog/idris_library][Idris as a Library - BAM Weblog]]
-
-  - Idris as compiler backend
-
-- Prolog ontology?
-
-  - What is the relationship between Prolog, logic programming, ontology, and relational databases?
-
-    - [[https://stackoverflow.com/questions/29062541/what-are-ontology-can-do-but-relational-database-can-not][What are ontology can do, but relational database can not? - Stack Overflow]]
-
-      - [[https://www.slideshare.net/UscholdM/ontologies-and-db-schema-whats-the-difference][Ontologies and DB Schema: What's the Difference?]]
-      - 2011, article, "Ontologies versus relational databases: Are they so different? A comparison", [[https://www.researchgate.net/publication/251332115_Ontologies_versus_relational_databases_Are_they_so_different_A_comparison][pdf available]]
-      - 2010, article, "Mapping between Relational Databases and OWL Ontologies: an example", [[https://www.lu.lv/materiali/apgads/raksti/756_pp_99-117.pdf][pdf]]
-
-  - [[http://sujitpal.blogspot.com/2009/06/ontology-rules-with-prolog.html][Salmon Run: Ontology Rules with Prolog]]
-  - [[http://www.swi-prolog.org/web/][SWI-Prolog for the (semantic) web]]
-
-- [[https://pchiusano.github.io/2017-01-20/why-not-haskell.html][Paul Chiusano: If Haskell is so great, why hasn't it taken over the world? And the curious case of Go.]]
-
-  - Unison programming language
-
-- Elixir has gradual static typing via Erlang Dialyzer.
-
-  - [[https://elixir-lang.org/getting-started/typespecs-and-behaviours.html][Typespecs and behaviours - Elixir]]
-  - [Understanding Elixir Types - via @codeship](https://blog.codeship.com/understanding-elixir-types/)
-
-    - "Elixir functions are set up so that they can transparently be called across processes, heaps, or even machines in a cluster."
-    - Can BEAM/Erlang/Elixir do live process migration?
-
-  - The catch?
-
-    - [[https://elixirforum.com/t/typed-elixir/1388][Typed Elixir - Elixir Chat - Elixir Forum]]
-
-      - Is Dialyzer slow?
-
-        - "My motivation for this is 95% of my bugs in Elixir/Erlang are due to using types wrong, like I may slightly change a tuple format somewhere but do not update it elsewhere and dialyzer does not catch it because the prior library state was in its cache that I then need to rebuild, in addition to dialyzer can take a long time to run."
-
-- John Hughes, "Deriving combinator implementations", lecture 4, "Designing and using combinators" http://www.cse.chalmers.se/~rjmh/Combinators/DerivingCombinators/sld001.htm
-- http://matt.might.net/articles/best-programming-languages/
-- http://matt.might.net/articles/compiling-to-java/
-- other programming languages
-
-  - https://en.wikipedia.org/wiki/Curry_(programming_language)
-  - http://fsl.cs.illinois.edu/images/5/5e/Cayenne.pdf
-
-- [[https://github.com/edom/work/blob/master/meta/doc/extension.md][Extension programming language?]]
-- https://en.wikipedia.org/wiki/Higher-order_abstract_syntax
-- http://www.stephendiehl.com/posts/haskell_2017.html
-- Haskell library: yaml vs HsYaml
-
-  - https://twitter.com/hvrgnu/status/1004136566984503297
-
-    - HsYaml is pure Haskell (doesn't use external libraries)
-
-- [[https://www.cl.cam.ac.uk/~jrh13/slides/manchester-12sep01/slides.pdf][LCF key ideas]]
-- closed source?
-
-  - given SQL database, generate HTML user interface http://datanovata.com/
-
-- http://libcello.org
-- C HTTP server library?
-
-  - https://kore.io
-  - http://facil.io
-
-- Possible user questions
-
-  - How do I write software with this?
-  - What are the important types?
-
-- Don't format source code manually.
-
-  - https://github.com/google/google-java-format
-
-- related software
-
-  - refactoring tools
-
-    - https://github.com/RefactoringTools/HaRe
-    - https://hackage.haskell.org/package/haskell-tools-refactor
-
-  - parsing without symbol solving
-
-    - Haskell and GHC extensions
-
-      - http://hackage.haskell.org/package/haskell-src-exts
-
-    - Haskell 98 only
-
-      - https://hackage.haskell.org/package/haskell-src
-
-    - Java
-
-      - http://hackage.haskell.org/package/language-java
-
-  - unknown
-
-    - http://hackage.haskell.org/package/haskell-tools-ast
-
-  - multi-database/cross-database query
-
-    - http://www.unityjdbc.com/doc/multiple/multiplequery.php
-    - https://www.red-gate.com/simple-talk/dotnet/net-tools/a-unified-approach-to-multi-database-query-templates/
-
-  - similar systems
-
-    - ERP libraries?
-
-      - Meta is similar to Apache Ofbiz.
-
-        - Some differences:
-
-          - To define entities, Meta uses Haskell, Ofbiz uses XML.
-          - Meta is written in Haskell, Ofbiz is written in Java.
-
-        - https://cwiki.apache.org/confluence/display/OFBIZ/OFBiz+Tutorial+-+A+Beginners+Development+Guide
-
-    - Web frameworks? Scaffolders?
-
-      - Meta is similar to Laravel.
-
-        - https://www.quora.com/Is-Laravel-a-good-framewok-really
-
-      - Meta is similar to Ruby on Rails.
-
-    - PhD theses
-
-      - [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.422.5683&rep=rep1&type=pdf]["Programming Language Features for Web Application Development", Ezra Cooper]]
-
-        - "Links" programming language
-
-- For JDBC URL see
-
-  - https://jdbc.postgresql.org/documentation/80/connect.html
-
-- similar
-
-  - https://medium.com/airbnb-engineering/react-native-at-airbnb-f95aa460be1c
-
-- some requirement?
-
-  - https://en.wikipedia.org/wiki/Multitenancy
-
-- Name?
-
-  - HUMPS Haskell Universal Meta Programming System ?
-  - Hemps: Haskell Meta Programming System
-  - EAG: Enterprise Application Generator
-  - HAG: Haskell Application Generator
-
-- https://en.wikipedia.org/wiki/Language-independent_specification
-- http://referaat.cs.utwente.nl/conference/12/paper/7000/expressing-ontologies-using-a-functional-language.pdf
-
-  - "there are some proposals for implementing subtyping [in Haskell] [11, 12]"
-  - open ADT makes exhaustive case impossible
-
-- sublanguages?
-
-  - Ontology definition language
-  - Data definition language
-  - Web application description language
-
-    - View description language
-
-- software design
-
-  - functional programming software design
-
-    - designing combinators
-
-      - Hughes 1995 doc [[http://belle.sourceforge.net/doc/hughes95design.pdf][The design of a pretty-printing library]]
-
-- [[http://lambda-the-ultimate.org/node/5292][LTU:progress on gradual typing]]
-- [[https://en.wikipedia.org/wiki/%CE%9BProlog][WP:lambda-prolog]]
-- Should we use Haskell or TypeScript for this project? Both? Neither?
-
-  - Killer features
-
-    - IDE: TypeScript wins (VS Code).
-    - custom infix operators: Haskell wins.
-
-      - We can go even wilder with Agda, Coq, Idris, Lean, etc.
-
-    - untagged unions: TypeScript wins.
-    - software diversity: TypeScript wins.
-
-      - TypeScript works with nodejs and npm. Boatloads of software.
-      - I think TypeScript has more developers.
-
-    - laziness
-
-      - Haskell wins.
-
-  - Both have
-
-    - ADTs.
-
-** TODO Measuring things
-*** TODO Measuring programming language quality
-- https://en.wikipedia.org/wiki/Goodhart%27s_law
-**** Minimum IQ required to understand the language
-**** Development cost
-***** Length of program
-***** Development effort; number of people; amount of time
-**** Developer feeling/enjoyment
-**** Maintenance cost
-***** Cost due to runtime defects (defects discovered while the program is running in production environment)
-**** Rosetta Stone: comparing programs that do the same thing in different languages
-https://medium.com/concerning-pharo/elegant-pharo-code-bb590f0856d0
-**** Learnability, masterability, usability
-*** TODO Measuring developer productivity
-- 2004 article "Defining and measuring the productivity of programming languages" [[https://pdfs.semanticscholar.org/1852/9ff58460b6238f5095af073d8505d79d3264.pdf][pdf]]:
-  - It defines these metrics:
-    - "the time and effort required to write, debug, and tune the code"
-    - "the performance of the code that results"
-  - power-efficiency graph (human efficiency and machine efficiency)
-  - what else?
-- 2008 https://ifs.host.cs.st-andrews.ac.uk/Books/SE9/Web/Planning/productivity.html
-  - https://ifs.host.cs.st-andrews.ac.uk/Books/SE9/
-- 1992 article https://www.andrews.edu/~vyhmeisr/papers/progprod.html
-- 2012 article http://www.drdobbs.com/jvm/the-comparative-productivity-of-programm/240005881
-  - "A database comparing 6,000 projects shows that the choice of programming language has a significant impact on project schedule."
-*** TODO Measuring software complexity
-
-* Sayings
-- Writing an enterprise application in Java is like teaching graduate physics using only the 100 most common English words.
 * Benefits and drawbacks of static type checking
 The benefits of types:
 
@@ -3926,13 +3376,553 @@ definitional programming, GCLA language (separate definition and control)
     The purpose of the book is to show you how you can write Prolog programs that work, that don't take an unreasonable amount of time, and that are clean enough to show to your friends."
 ** Prolog typechecking; vital to prevent stupid mistakes in large-scale development
 1997 inconclusive discussion "Prolog Type Checker" https://dtai.cs.kuleuven.be/projects/ALP/newsletter/archive_93_96/net/typing/types.html
-* Unpopular opinions
+* The problem with formal methods: you can't prove what you don't model.
+- Intel uses formal methods, but we have Spectre/Meltdown.
+  Do they model that?
+- How will we ever know that we didn't miss anything?
+- You have to prove that it does everything that you want it to do, /and/ that it does only that, and nothing else.
+** What if it is impossible to write correct software? What are our options to mitigate/limit the damage?
+* Racket syntax objects, read-syntax; does Prolog/Haskell have this?
+- Must understand: reader and expander.
+  - Racket parsing has two stages/levels: reader and expander.
+  - (My guess?) The output of the reader is the input of the expander?
+- https://docs.racket-lang.org/guide/hash-reader.html
+  - "The difference between =read= and =read-syntax= is that read is meant to be used for data while =read-syntax= is meant to be used to parse programs."
+  - Readtables work at the reader level.
+  - Macros work at the expander level.
+    - Macros can't change the lexicon.
+* Ramblings? Wish lists? Too speculative? Unclear goal/reason? Condemned to oblivion?
+** Category theory and programming languages?
+The section title needs a verb.
+- Category-theoretic model of functional programming languages
+  - Every functional programming language L can be modeled by a category C(L) whose objects are the types of L and arrows are the function expressions of L.
+- categorical programming (what is this?)
+  - 2000, PhD thesis, "Categorical programming with inductive and coinductive types" https://kodu.ut.ee/~varmo/papers/thesis.pdf
+  - categorical programming language
+    - 1993, article, "Comparing Hagino's categorical programming language and typed lambda-calculi" https://www.sciencedirect.com/science/article/pii/030439759390186W
+    - 1987, PhD thesis, "Categorical programming language" http://web.sfc.keio.ac.jp/~hagino/thesis.pdf
+      - "An interpreter of Hagino's Categorical Programming Language (CPL)." https://github.com/msakai/cpl
+    - aggregators
+      - 2009, https://mathoverflow.net/questions/3721/programming-languages-based-on-category-theory
+      - https://softwareengineering.stackexchange.com/questions/216635/category-theory-based-language
+- category theory applied to programming language theory
+  - 2012, "Generic Programming with Adjunctions" http://www.cs.ox.ac.uk/ralf.hinze/LN.pdf
+** Foundation of mathematics especially for programming?
+- set theories, such as ZF, ZFC, NBG, etc.
+  - https://math.stackexchange.com/questions/136215/difference-between-zfc-nbg
+- type theories, such as Martin-Löf type theory
+- logic?
+- category theory?
+- lambda calculus?
+- https://cstheory.stackexchange.com/questions/27217/are-there-presentations-of-set-theory-in-terms-of-lambda-calculus
+  - Grue's map theory, 1992
+    - http://hjemmesider.diku.dk/~grue/
+      - 1992, Grue, PhD thesis, [[http://hjemmesider.diku.dk/~grue/papers/Grue92/Grue92.pdf]["Map theory"]]
+        - p. 130: "Equality is better than truth [...]" (How do we explain the context?)
+          - https://en.wikipedia.org/wiki/Equational_logic
+    - related?
+      - equational programming
+    - 2016 reformulation article "A synthetic axiomatization of Map Theory" [[https://hal.archives-ouvertes.fr/hal-00678410v3][pdf available]]
+Can we formalize "a program is an executable formal system" using Grue's map theory?
+- How is "false" represented?
+- How is "true" represented?
+- How is "conjunction" represented?
+** Probably irrelevant to our goal
+   :PROPERTIES:
+   :CUSTOM_ID: probably-irrelevant-to-our-goal
+   :END:
+
+- [[https://en.wikipedia.org/wiki/Non-English-based_programming_languages][WP:Non-English-based programming languages]]
+- Obscure things. Much marketing, little technical detail.
+
+  - VPRI, Alan Kay et al., archived (stopped operating in 2018), computing for the masses?
+
+    - "Improve 'powerful ideas education' for the world's children and to advance the state of systems research and personal computing"
+
+      - https://harc.ycr.org/
+
+        - https://www.ycr.org/
+
+    - https://en.wikipedia.org/wiki/Viewpoints_Research_Institute
+    - https://en.wikipedia.org/wiki/COLA_(software_architecture)
+    - https://news.ycombinator.com/item?id=11686325
+    - FONC = fundamentals of new computing
+    - http://www.vpri.org/index.html
+
+  - YCR
+
+    - visual programming language
+
+      - blocks language
+
+        - https://harc.ycr.org/project/gp/
+
+- Functional Payout Framework http://lambda-the-ultimate.org/node/3331
+** Automatic deglobalization of C programs?
+** Who reads SWEBOK? How can we read SWEBOK? Who reads all of it? Why does anyone bother writing it?
+- https://en.wikipedia.org/wiki/Software_Engineering_Body_of_Knowledge
+- http://www.sebokwiki.org/wiki/An_Overview_of_the_SWEBOK_Guide
+  - <2017-04-27>
+    Someone claims to have read it.
+    Holy shit.
+    https://www.quora.com/Do-you-use-SWEBOK-Is-it-helpful
+- Is the knowledge applicable?
+  Knowledge that can't be applied is useless.
+** <2018-09-15> Make an Emacs Lisp interpreter in Haskell for Yi editor
+** How do we model historical data in SQL?
+- Do we have to use SQL?
+- Is SQL the best tool for the job?
+- Does SQL do the job well enough to justify reducing maintenance costs?
+- How is historical data related to audit trail?
+  - Audit trail encompasses historical data.
+    Audit trail is a more stringent requirement.
+*** TODO <2018-09-19> Read
+- [[https://stackoverflow.com/questions/3874199/how-to-store-historical-data][database design - How to Store Historical Data - Stack Overflow]]
+- [[https://grisha.org/blog/2015/09/23/storing-time-series-in-postgresql-efficiently/][Storing Time Series in PostgreSQL efficiently - Gregory Trubetskoy]]
+- [[https://dba.stackexchange.com/questions/114580/best-way-to-design-a-database-and-table-to-keep-records-of-changes][mysql - Best way to design a database and table to keep records of changes? - Database Administrators Stack Exchange]]
+  - [[https://www.codeproject.com/Articles/105768/Audit-Trail-Tracing-Data-Changes-in-Database][Audit Trail – Tracing Data Changes in Database - CodeProject]]
+- [[https://www.red-gate.com/simple-talk/sql/database-administration/database-design-a-point-in-time-architecture/][Database Design: A Point in Time Architecture - Simple Talk]]
+- [[https://blog.timescale.com/time-series-data-why-and-how-to-use-a-relational-database-instead-of-nosql-d0cd6975e87c][Time-series data: Why (and how) to use a relational database instead of NoSQL]]
+  - Where is the SQL DDL/schema?
+** Information that is looking for a place where they can be most useful
+*** Software engineer associations
+   :PROPERTIES:
+   :CUSTOM_ID: software-engineer-associations
+   :END:
+
+- Indonesia
+
+  - [[http://sarccom.org/][SARCCOM Software architect Indonesia community]]
+  - [[http://www.aspiluki.or.id/][ASPILUKI Asosiasi Piranti Lunak Telematika Indonesia]]
+
+- International?
+*** Garbage collection
+- [[https://www.reddit.com/r/programming/comments/7zfbs5/conservative_gc_is_it_really_that_bad_xpost_rjava/][Conservative GC: Is It Really That Bad? (X-post /r/java) : programming]] (summary)
+  - [[https://www.excelsiorjet.com/blog/articles/conservative-gc-is-it-really-that-bad/][Conservative GC: Is It Really That Bad? -- Excelsior JET Team Blog]]
+- [[https://news.ycombinator.com/item?id=16436574][Conservative GC: Is It Really That Bad? | Hacker News]]
+- Real-time garbage collection
+  - http://michaelrbernste.in/2013/06/03/real-time-garbage-collection-is-real.html
+- Why GC only memory?
+  Why not also GC file handles?
+  Why not GC all resources?
+  - [[https://cs.stackexchange.com/questions/52735/why-does-garbage-collection-extend-only-to-memory-and-not-other-resource-types][Why does garbage collection extend only to memory and not other resource types? - Computer Science Stack Exchange]]
+*** 2017 article "What Is the Best Way For Developers to Learn New Software Tools? An Empirical Comparison Between a Text and a Video Tutorial"
+- http://programming-journal.org/2017/1/17/
+*** Common Lisp advocacy?
+- 2018, article, [[https://academic.oup.com/bib/article/19/3/537/2769437][How the strengths of Lisp-family languages facilitate building complex and flexible bioinformatics applications | Briefings in Bioinformatics | Oxford Academic]]
+**** Common Lisp Object System
+
+- [[http://www.aiai.ed.ac.uk/~jeff/clos-guide.html][A Brief Guide to CLOS]]
+
+*** Why people don't adopt metaprogramming tools
+I fear that the tool doesn't perfectly fit my use case.
+When that happens, I want to drop down to the lower layer.
+Generated code is usually inflexible.
+I could maintain a patch, but isn't it (patching generated code) rather hacky and brittle?
+The right way is to design the metalanguage so that it can express such transformation.
+
+https://www.eclipse.org/epsilon/doc/articles/eugenia-patching/
+*** TODO How do we develop enterprise web applications efficiently?
+**** <2018-09-27> Enterprise application development is like three blind people describing an elephant.
+Every team is a blind people.
+
+The company's actual ontology is the elephant.
+
+How do we unify enterprise systems?
+Should we combine subsystem ontologies to produce the actual ontology,
+or should we derive subsystem ontologies from the actual ontology?
+**** The ontology of enterprise web applications
+***** Entities
+An /entity/ is something that has identity.
+Every entity is distinguishable from other entities.
+***** Properties (extrinsic properties)
+A /property/ of an entity is something that makes the entity what it is.
+
+In software modeling, properties are usually extrinsic properties.
+
+An extrinsic property of an entity is something we give to the entity, not something that comes with the entity.
+
+Examples of properties:
+
+- The name of a person is an extrinsic property.
+  Changing his name doesn't change what I think of him.
+- The name of a hotel is an extrinsic property.
+  Changing the hotel's name does not change my willingness to stay in it.
+
+A /property/ is a function from entity E to value V.
+
+https://en.wikipedia.org/wiki/Intrinsic_and_extrinsic_properties
+***** Combining entities
+***** Mapping entities to storages
+*** TODO Process these informations
+
+- Composition, composable systems
+
+  - https://en.wikipedia.org/wiki/Software_transactional_memory#Composable_operations
+
+- https://en.wikipedia.org/wiki/Programming_language_theory
+- refactoring
+
+  - [[https://github.com/PyCQA/baron][github.com/PyCQA/baron]]: "IDE allow you to refactor code, Baron allows you to write refactoring code."
+  - HaRe Haskell refactoring tool https://github.com/alanz/HaRe
+
+- ungrouped
+
+  - https://medium.com/generative-design/introduction-to-computational-design-6c0fdfb3f1
+  - magic?
+
+    - http://conal.net/blog/posts/semantic-editor-combinators
+
+  - [[https://2017.programmingconference.org/track/refuses-2017][Salon des Refusés 2017]]
+
+- 2002, article collection, "Recent advances in Java technology: theory, application, implementation" http://www.cs.nuim.ie/~jpower/Research/Papers/2002/power-raijt-toc.pdf
+- 1985, article, "Automatic synthesis of typed Λ-programs on term algebras" https://www.sciencedirect.com/science/article/pii/0304397585901355
+- 2015, article, "Dynamically Composing Languages in a Modular Way: Supporting C Extensions for Dynamic Languages", [[https://chrisseaton.com/rubytruffle/modularity15/rubyextensions.pdf][pdf]]
+- https://github.com/nim-lang/Nim
+- 2016, article, "Towards Ontology-Based Program Analysis", [[http://drops.dagstuhl.de/opus/volltexte/2016/6120/pdf/LIPIcs-ECOOP-2016-26.pdf][pdf]]
+
+  - Interesting conference title: "Conference on very important topics (CVIT)"
+
+    - Is it real?
+      Is it a secret society?
+      Google doesn't seem to know about it.
+
+- functional languages with explicit memory layout?
+  functional languages for systems programming?
+
+  - [[https://github.com/ollef/sixten][Sixten: Functional programming with fewer indirections]]
+
+    - It also deals with representing algebraic data type inhabitants as bit patterns.
+    - "Sixten is very related to other functional languages such as Haskell, Agda, and Idris.
+      The biggest difference between other languages and Sixten is the way that Sixten allows us to control the memory layout of data."
+    - [[https://gitter.im/sixten-lang/General?source=orgpage][Sixten, "General", Gitter, community chat]]
+
+- What are Prolog alternatives?
+
+  - 2011, article, [[https://arxiv.org/abs/1107.5408][[1107.5408] A structured alternative to Prolog with simple compositional semantics]]
+
+- 2017, article, [[https://arxiv.org/abs/1707.00024][[1707.00024] A Formalized General Theory of Syntax with Bindings]]
+- [[https://www.cs.cmu.edu/~mleone/language/projects.html][Programming Language and Compiler Research Groups]]
+- [[http://www.pl-enthusiast.net/2014/07/10/ieee-posts-its-top-list-of-languages/][IEEE posts its top list of languages - The PL Enthusiast]]
+- [[http://www.pl-enthusiast.net/2015/05/27/what-is-pl-research-and-how-is-it-useful/][What is PL research and how is it useful? - The PL Enthusiast]]
+- 2014, article, [[https://arxiv.org/abs/1410.1776][Ontology-based Representation and Reasoning on Process Models: A Logic Programming Approach]]
+- 1994, article, "Formalizing architectural connection", [[http://web.cs.wpi.edu/~cs562/s98/pdf/wright-icse16.pdf][pdf]]
+- [[https://2015.splashcon.org/track/nool2015#event-overview][NOOL 2015 accepted papers - SPLASH 2015]] ("New Object Oriented Languages")
+
+  - "Classes Considered Harmful", [[http://web.cecs.pdx.edu/~black/publications/ClassesHarmful.pdf][pdf]]
+  - "Ubiquitous Object Orientation to Foster the Advancement of Programming Languages", [[http://www.cs.cmu.edu/~dkurilov/papers/nool15.pdf][pdf]]
+
+- NOOL 2016 articles
+
+  - "Nomen: A Dynamically Typed OO Programming Language, Transpiled to Java", [[http://www.it.uu.se/workshop/nool16/nool16-paper9.pdf][pdf]]
+
+    - "Nomen is an experimental, dynamically typed OO programming language which compiles to Java source code."
+    - "Nomen is designed as a language for experimenting with IDE support generation using the Rascal language workbench."
+
+  - "The essence of subclassing", [[http://www.it.uu.se/workshop/nool16/nool16-paper5.pdf][pdf]]
+  - "Towards Automatic Decoration", [[http://www.it.uu.se/workshop/nool16/nool16-paper2.pdf][pdf]]
+  - syntax
+
+    - "Polite Programmers, Use Spaces in Identifiers When Needed", [[http://www.it.uu.se/workshop/nool16/nool16-paper10.pdf][pdf]]
+
+- [[https://en.wikipedia.org/wiki/Comparison_of_functional_programming_languages][WP:Comparison of functional programming languages]]
+- Designing APIs
+
+  - [[http://blog.steveklabnik.com/posts/2012-02-13-an-api-ontology][An API Ontology - Literate Programming]]
+
+- Tools
+
+  - Golang
+  - Ruby gem and bundler
+  - Python pip
+
+- Great Works in Programming Languages, Collected by Benjamin C. Pierce http://www.cis.upenn.edu/~bcpierce/courses/670Fall04/GreatWorksInPL.shtml
+- to read? "theories of programming languages reynolds"
+- 2017, book, "Principles of Programming Languages" https://www.cs.bgu.ac.il/~mira/ppl-book-full.pdf
+- 2003, article, "Composing Programming Languages by Combining Action-Semantics Modules" http://www.brics.dk/RS/03/53/BRICS-RS-03-53.pdf
+- 2001, position paper, "Composition Languages for Black-Box Components" http://scg.unibe.ch/archive/papers/Wuyt01c.pdf
+- glue: Make better services. (deprecated) https://hackage.haskell.org/package/glue
+- yet another music programming language https://github.com/alda-lang/alda
+- linearscan: Linear scan register allocator, formally verified in Coq; 2004, master thesis, https://hackage.haskell.org/package/linearscan
+- Lastik: A library for compiling programs in a variety of languages (Java, Scala, C#) https://hackage.haskell.org/package/Lastik
+- risc386: Reduced instruction set i386 simulator https://hackage.haskell.org/package/risc386
+- 2017, "Theorems for Free for Free", Wadler http://homepages.inf.ed.ac.uk/wadler/topics/blame.html
+
+  - What is "polymorphic blame calculus"?
+
+- https://idris.readthedocs.io/en/v1.3.0/faq/faq.html#what-are-the-differences-between-agda-and-idris
+
+  - "Why does Idris use eager evaluation rather than lazy?"
+
+    - "What is the representation of =thing= at run-time? Is it a bit pattern representing an integer, or is it a pointer to some code which will compute an integer? In Idris, we have decided that we would like to make this distinction precise [...]"
+    - Idris has laziness, but you have to be explicit.
+
+- https://en.wikipedia.org/wiki/Automatic_programming
+- https://en.wikipedia.org/wiki/Program_synthesis
+- https://www.cs.cmu.edu/~mleone/language-research.html
+- "Confessions Of A Used Programming Language Salesman: Getting The Masses Hooked On Haskell", Erik Meijer, [[https://pdfs.semanticscholar.org/233a/932b3e94f1f117655e4862995b32f33754be.pdf][pdf]]
+
+  - What are the key points?
+
+- 1966, article, P. J. Landin, "The next 700 programming languages", [[https://www.cs.cmu.edu/~crary/819-f09/Landin66.pdf][pdf]]
+
+  - https://en.wikipedia.org/wiki/Off-side_rule
+
+- http://matt.might.net/articles/best-programming-languages/
+- [[http://www.cs.utexas.edu/users/EWD/ewd06xx/EWD641.PDF][EWD641: On the interplay between mathematics and programming]]
+- http://hackage.haskell.org/package/Workflow
+- https://pchiusano.github.io/2017-01-20/why-not-haskell.html
+- http://unisonweb.org/2015-05-07/about.html#post-start
+- [[https://github.com/facebook/duckling][facebook/duckling: Language, engine, and tooling for expressing, testing, and evaluating composable language rules on input strings.]]
+- [[https://github.com/GaloisInc/crucible][GaloisInc/crucible: Crucible is a library for symbolic simulation of imperative programs]]
+- 2009, "Domain-Specific Languages for Composable Editor Plugins"
+
+  - [[https://pdfs.semanticscholar.org/presentation/85d8/bc42122ff5175be1ebc3c7b91e4abff55d22.pdf][2009 slides pdf]]
+  - [[http://bora.uib.no/bitstream/handle/1956/9721/1-s2.0-S1571066110001179-main.pdf?sequence=1][2010 article pdf]]
+
+- why not PEG parsing
+
+  - http://jeffreykegler.github.io/Ocean-of-Awareness-blog/individual/2015/03/peg.html
+
+- answer set programming
+
+  - [[http://cs.aalto.fi/en/current/news/2018-07-18/][News: Speed up solving complex problems: be lazy and only work crucial tasks - Aalto University]]
+
+    - 2018, article, "Exploiting Justifications for Lazy Grounding of Answer Set Programs", [[https://www.ijcai.org/proceedings/2018/0240.pdf][pdf]]
+
+- [[https://brianmckenna.org/blog/idris_library][Idris as a Library - BAM Weblog]]
+
+  - Idris as compiler backend
+
+- Prolog ontology?
+
+  - What is the relationship between Prolog, logic programming, ontology, and relational databases?
+
+    - [[https://stackoverflow.com/questions/29062541/what-are-ontology-can-do-but-relational-database-can-not][What are ontology can do, but relational database can not? - Stack Overflow]]
+
+      - [[https://www.slideshare.net/UscholdM/ontologies-and-db-schema-whats-the-difference][Ontologies and DB Schema: What's the Difference?]]
+      - 2011, article, "Ontologies versus relational databases: Are they so different? A comparison", [[https://www.researchgate.net/publication/251332115_Ontologies_versus_relational_databases_Are_they_so_different_A_comparison][pdf available]]
+      - 2010, article, "Mapping between Relational Databases and OWL Ontologies: an example", [[https://www.lu.lv/materiali/apgads/raksti/756_pp_99-117.pdf][pdf]]
+
+  - [[http://sujitpal.blogspot.com/2009/06/ontology-rules-with-prolog.html][Salmon Run: Ontology Rules with Prolog]]
+  - [[http://www.swi-prolog.org/web/][SWI-Prolog for the (semantic) web]]
+
+- [[https://pchiusano.github.io/2017-01-20/why-not-haskell.html][Paul Chiusano: If Haskell is so great, why hasn't it taken over the world? And the curious case of Go.]]
+
+  - Unison programming language
+
+- Elixir has gradual static typing via Erlang Dialyzer.
+
+  - [[https://elixir-lang.org/getting-started/typespecs-and-behaviours.html][Typespecs and behaviours - Elixir]]
+  - [Understanding Elixir Types - via @codeship](https://blog.codeship.com/understanding-elixir-types/)
+
+    - "Elixir functions are set up so that they can transparently be called across processes, heaps, or even machines in a cluster."
+    - Can BEAM/Erlang/Elixir do live process migration?
+
+  - The catch?
+
+    - [[https://elixirforum.com/t/typed-elixir/1388][Typed Elixir - Elixir Chat - Elixir Forum]]
+
+      - Is Dialyzer slow?
+
+        - "My motivation for this is 95% of my bugs in Elixir/Erlang are due to using types wrong, like I may slightly change a tuple format somewhere but do not update it elsewhere and dialyzer does not catch it because the prior library state was in its cache that I then need to rebuild, in addition to dialyzer can take a long time to run."
+
+- John Hughes, "Deriving combinator implementations", lecture 4, "Designing and using combinators" http://www.cse.chalmers.se/~rjmh/Combinators/DerivingCombinators/sld001.htm
+- http://matt.might.net/articles/best-programming-languages/
+- http://matt.might.net/articles/compiling-to-java/
+- other programming languages
+
+  - https://en.wikipedia.org/wiki/Curry_(programming_language)
+  - http://fsl.cs.illinois.edu/images/5/5e/Cayenne.pdf
+
+- [[https://github.com/edom/work/blob/master/meta/doc/extension.md][Extension programming language?]]
+- https://en.wikipedia.org/wiki/Higher-order_abstract_syntax
+- http://www.stephendiehl.com/posts/haskell_2017.html
+- Haskell library: yaml vs HsYaml
+
+  - https://twitter.com/hvrgnu/status/1004136566984503297
+
+    - HsYaml is pure Haskell (doesn't use external libraries)
+
+- [[https://www.cl.cam.ac.uk/~jrh13/slides/manchester-12sep01/slides.pdf][LCF key ideas]]
+- closed source?
+
+  - given SQL database, generate HTML user interface http://datanovata.com/
+
+- http://libcello.org
+- C HTTP server library?
+
+  - https://kore.io
+  - http://facil.io
+
+- Possible user questions
+
+  - How do I write software with this?
+  - What are the important types?
+
+- Don't format source code manually.
+
+  - https://github.com/google/google-java-format
+
+- related software
+
+  - refactoring tools
+
+    - https://github.com/RefactoringTools/HaRe
+    - https://hackage.haskell.org/package/haskell-tools-refactor
+
+  - parsing without symbol solving
+
+    - Haskell and GHC extensions
+
+      - http://hackage.haskell.org/package/haskell-src-exts
+
+    - Haskell 98 only
+
+      - https://hackage.haskell.org/package/haskell-src
+
+    - Java
+
+      - http://hackage.haskell.org/package/language-java
+
+  - unknown
+
+    - http://hackage.haskell.org/package/haskell-tools-ast
+
+  - multi-database/cross-database query
+
+    - http://www.unityjdbc.com/doc/multiple/multiplequery.php
+    - https://www.red-gate.com/simple-talk/dotnet/net-tools/a-unified-approach-to-multi-database-query-templates/
+
+  - similar systems
+
+    - ERP libraries?
+
+      - Meta is similar to Apache Ofbiz.
+
+        - Some differences:
+
+          - To define entities, Meta uses Haskell, Ofbiz uses XML.
+          - Meta is written in Haskell, Ofbiz is written in Java.
+
+        - https://cwiki.apache.org/confluence/display/OFBIZ/OFBiz+Tutorial+-+A+Beginners+Development+Guide
+
+    - Web frameworks? Scaffolders?
+
+      - Meta is similar to Laravel.
+
+        - https://www.quora.com/Is-Laravel-a-good-framewok-really
+
+      - Meta is similar to Ruby on Rails.
+
+    - PhD theses
+
+      - [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.422.5683&rep=rep1&type=pdf]["Programming Language Features for Web Application Development", Ezra Cooper]]
+
+        - "Links" programming language
+
+- For JDBC URL see
+
+  - https://jdbc.postgresql.org/documentation/80/connect.html
+
+- similar
+
+  - https://medium.com/airbnb-engineering/react-native-at-airbnb-f95aa460be1c
+
+- some requirement?
+
+  - https://en.wikipedia.org/wiki/Multitenancy
+
+- Name?
+
+  - HUMPS Haskell Universal Meta Programming System ?
+  - Hemps: Haskell Meta Programming System
+  - EAG: Enterprise Application Generator
+  - HAG: Haskell Application Generator
+
+- https://en.wikipedia.org/wiki/Language-independent_specification
+- http://referaat.cs.utwente.nl/conference/12/paper/7000/expressing-ontologies-using-a-functional-language.pdf
+
+  - "there are some proposals for implementing subtyping [in Haskell] [11, 12]"
+  - open ADT makes exhaustive case impossible
+
+- sublanguages?
+
+  - Ontology definition language
+  - Data definition language
+  - Web application description language
+
+    - View description language
+
+- software design
+
+  - functional programming software design
+
+    - designing combinators
+
+      - Hughes 1995 doc [[http://belle.sourceforge.net/doc/hughes95design.pdf][The design of a pretty-printing library]]
+
+- [[http://lambda-the-ultimate.org/node/5292][LTU:progress on gradual typing]]
+- [[https://en.wikipedia.org/wiki/%CE%9BProlog][WP:lambda-prolog]]
+- Should we use Haskell or TypeScript for this project? Both? Neither?
+
+  - Killer features
+
+    - IDE: TypeScript wins (VS Code).
+    - custom infix operators: Haskell wins.
+
+      - We can go even wilder with Agda, Coq, Idris, Lean, etc.
+
+    - untagged unions: TypeScript wins.
+    - software diversity: TypeScript wins.
+
+      - TypeScript works with nodejs and npm. Boatloads of software.
+      - I think TypeScript has more developers.
+
+    - laziness
+
+      - Haskell wins.
+
+  - Both have
+
+    - ADTs.
+
+*** TODO Measuring things
+**** TODO Measuring programming language quality
+- https://en.wikipedia.org/wiki/Goodhart%27s_law
+***** Minimum IQ required to understand the language
+***** Development cost
+****** Length of program
+****** Development effort; number of people; amount of time
+***** Developer feeling/enjoyment
+***** Maintenance cost
+****** Cost due to runtime defects (defects discovered while the program is running in production environment)
+***** Rosetta Stone: comparing programs that do the same thing in different languages
+https://medium.com/concerning-pharo/elegant-pharo-code-bb590f0856d0
+***** Learnability, masterability, usability
+**** TODO Measuring developer productivity
+- 2004 article "Defining and measuring the productivity of programming languages" [[https://pdfs.semanticscholar.org/1852/9ff58460b6238f5095af073d8505d79d3264.pdf][pdf]]:
+  - It defines these metrics:
+    - "the time and effort required to write, debug, and tune the code"
+    - "the performance of the code that results"
+  - power-efficiency graph (human efficiency and machine efficiency)
+  - what else?
+- 2008 https://ifs.host.cs.st-andrews.ac.uk/Books/SE9/Web/Planning/productivity.html
+  - https://ifs.host.cs.st-andrews.ac.uk/Books/SE9/
+- 1992 article https://www.andrews.edu/~vyhmeisr/papers/progprod.html
+- 2012 article http://www.drdobbs.com/jvm/the-comparative-productivity-of-programm/240005881
+  - "A database comparing 6,000 projects shows that the choice of programming language has a significant impact on project schedule."
+**** TODO Measuring software complexity
+
+** Sayings
+- Writing an enterprise application in Java is like teaching graduate physics using only the 100 most common English words.
+** Unpopular opinions
 - https://www.quora.com/What-unpopular-opinions-do-you-have-about-software-development
-* The relationship between programming and past self
+** The relationship between programming and past self
 The key to being a good programmer is being someone that your future self can trust.
 
 When we change a program, we are trusting our past self.
-* The context of "Premature optimization"
+** The context of "Premature optimization"
 http://wiki.c2.com/?PrematureOptimization
 
 Knuth was telling us to focus on what matters.
@@ -3946,5 +3936,56 @@ Example where not "optimizing" is stupid:
 You're building a electronic fuel injection system,
 and you don't know anything about jitter, latency, and real-time systems.
 Controlling latency here is a requirement, not an optimization.
+** Defining software complexity as the length of the shortest first-order-logic formula that describes it?
+Every software can, in principle, be described by a first-order-logic formula that describes the requirements satisfied or behaviors exhibited by the system.
+*** What is complexity?
+- [[https://fs.blog/2014/03/what-is-complexity/][Farnam Street blog post]]
+- [[http://www.hartford.edu/complexity/whats-complexity.aspx][What Is 'Complexity'? | University of Hartford]]
+** Haskell strictness checker
+- 2018 "Keep your laziness in check" https://dl.acm.org/citation.cfm?doid=3243631.3236797
+  - "We introduce StrictCheck: a property-based random testing framework for observing, specifying, and testing the strictness of Haskell functions."
+* Arguments for static type checking?
+** What?
+- There are two camps:
+  - DTL (dynamically typed language)
+  - STL (statically typed language)
+- Every programmer is lazy, but differently.
+  - People who use DTLs are too lazy to write the types.
+  - People who use STLs are too lazy to do what machines can do, such as
+    - detecting typos,
+    - avoiding unintentional conversions,
+    - tracing the code, 2 weeks later, to find out the type of a variable.
+- People who use DTLs are too diligent.
+They love to do what machines can do: type checking.
+- Static typing enables you to be lazier.
+  Help the machine help you avoid work.
+  By investing in a few keystrokes, you will get these in return:
+- The machine will catch more mistakes for you.
+- You can have an IDE that finds references correctly.
+  This enables features such as "Jump to definition", "Rename", and even more fancy refactorings.
+- Moral of the story:
+  - Let the machines do all the boring stuffs.
+  - Be future-lazy, not present-lazy.
+    Do things now so that you can be lazy later.
+    Don't be lazy now only to regret it later.
+    - People who organize their things are too lazy to spend mental effort later in a scramble to find things.
+    - People who don't organize their things are just too lazy to do it, and would rather just experience regret in the future than experience some hardship now for a better future.
+    - The sane solution to "too lazy to write types" is to pick a language with type inference, not to ditch types altogether.
+    Don't throw the baby out with the bathwater.
+- This argument also applies to functional programming vs procedural programming.
+  Indeed this argument applies to every technology.
+  Adopting technology enables us to be lazier.
+- People buy tractors because they are too lazy to till their fields with hoes.
+- People use frameworks because they are too lazy to do the same plumbing again and again.
+- People strive to avoid side-effects in functional programming because they are too lazy to debug synchronization errors.
+- The only thing the human race isn't too lazy to do is to think about lazier ways of doing things.
+** What?
+- https://dimjasevic.net/marko/2018/10/23/typed-functional-programming-and-software-correctness/
+  - "what can be done about a programmer’s limited time to write correct software?
+    While there are multiple plausible answers to this question,
+    I will argue that a very effective solution is to use typed functional programming."
+  - 2017 https://dimjasevic.net/marko/2017/11/10/a-subtyping-polymorphism-misfortune/
+    - "the interaction between subtyping and parametric polymorphism asks for trouble"
+    - type-parameter variance and polymorphism don't mix?
 * Bibliography
 bibliography:default

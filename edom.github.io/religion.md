@@ -133,3 +133,13 @@ However, after 1000 years, people got too attached to religion, and religion los
         - [Why Does the Muslim World Lag in Science? | Middle East Forum](https://www.meforum.org/articles/other/why-does-the-muslim-world-lag-in-science), too long
 - To everyone, especially religious people:
     - Why do you let someone else decide what/how you should think?
+
+## Hypothesis: Before science, religion helped humanity survive.
+
+Religion, superstition, and folk tales had evolutionary benefit.
+
+Before science, religion was humankind's best attempt at understanding reality.
+
+Understanding reality helps survival.
+
+The paranoid is more likely to survive.

@@ -32,7 +32,6 @@ We should join forces to reach our shared goals.
                     - [Modeling]({% link model.md %})
                         - [Modeling all data]({% link modeldata.md %})
                 - Managing large software
-                    - [Argument for static typing]({% link statyp.md %})
                     - [Proving things using computers]({% link proof.md %})
                     - [Maintaining backward-compatibility]({% link compat.md %})
                 - Subtopics
