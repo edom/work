@@ -179,7 +179,6 @@ We should join forces to reach our shared goals.
             - [Politik masjid]({% link politik_masjid.md %})
             - [Censoring the Internet in Indonesia]({% link indocen.md %})
         - [Living in Jakarta]({% link jakarta.md %})
-            - [Vital service failure log]({% link log.md %})
         - [BTPN Jenius?]({% link btpn.md %})
     - [Handling existential crisis]({% link crisis.md %})
     - [Fighting]({% link fight.md %})
