@@ -174,7 +174,6 @@ We should join forces to reach our shared goals.
     - Hidup di Indonesia abad 21
         - Politik lain
             - [Politik masjid]({% link politik_masjid.md %})
-            - [Censoring the Internet in Indonesia]({% link indocen.md %})
         - [Living in Jakarta]({% link jakarta.md %})
         - [BTPN Jenius?]({% link btpn.md %})
     - [Handling existential crisis]({% link crisis.md %})
