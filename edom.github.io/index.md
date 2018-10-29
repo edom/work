@@ -194,7 +194,7 @@ We should join forces to reach our shared goals.
         - 1989, article, "Mathematical writing", Donald E. Knuth, Tracy Larrabee, and Paul M. Roberts, [pdf](http://jmlr.csail.mit.edu/reviewing-papers/knuth_mathematical_writing.pdf)
             - "Many readers will skim over formulas on their first reading of your exposition.
             Therefore, your sentences should flow smoothly when all but the simplest formulas are replaced by 'blah' or some other grunting noise. (p. 3)
-- [Writing]({% link writing.md %})
+- [Writing]({% link writing.html %})
     - [Working around Markdown]({% link markdown.md %})
 - Spirituality
     - [Choosing a religion]({% link relch.md %})

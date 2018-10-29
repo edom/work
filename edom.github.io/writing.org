@@ -1,0 +1,212 @@
+#+TITLE: Writing
+#+DATE: 2017-05-20 21:29:00 +0700
+#+PERMALINK: /writing.html
+* Writing
+- Links
+
+  - [[https://en.wikipedia.org/wiki/Content_Engineering][WP:Content engineering]]
+
+- Books should be shorter.
+
+  - I think a 100-page popular book has only 1 page of useful information.
+  - [[https://en.wikipedia.org/wiki/Inverted_pyramid_(journalism)][WP:Inverted pyramid]]
+
+    - Begin with the most important statement.
+    - The rest of the book supports that statement.
+
+- Undigested information
+
+  - [[https://news.ycombinator.com/item?id=10739227][YC:The sad state of personal knowledgebases]]
+  - [[https://www.quora.com/Which-is-better-Markdown-or-Textile?share=1][Quora: Which is better, Markdown or Textile?]]
+
+- Why do we write?
+
+  - Because someone needs to read it.
+
+    - At least your future self should need to read it.
+
+  - The reader is the writer's reason for existing.
+  - If you can't think of anyone who would read it, don't write it.
+
+- What should we write?
+
+  - Something that someone needs to read.
+
+- Why do we read?
+  What do we need to read?
+
+  - Why do we need anything?
+
+    - Either for survival or for curiosity.
+    - Human brain has evolved two instincts: survival and curiosity.
+
+      - We become anxious when our survival is threatened.
+      - We become happy when our curiosity is satisfied.
+      - We become bored when we run out of things that make us curious.
+
+    - Thus the root cause of every human action is either survival or curiosity.
+
+  - Thus we read to survive (avoid death) and decuriousify (to avoid boredom).
+
+- Why do I write?
+
+  - *To connect my future self and my past self*.
+    Sometimes my past self makes a decision that my future self regrets.
+    When that happens, my future self wants to trace back
+    how my past self could have made such decision.
+  - *To change the world to what I want it to be*.
+    I think writing is the most efficient way of
+    spreading information and influencing people.
+    Telepathic broadcasting would be more efficient,
+    but I don't know how to do that.
+    Anyway, it's up to the world
+    whether they want to change.
+  - *To save your time*.
+    I'm happy when my writing helps you understand something faster.
+
+- Architecture
+
+  - Each document in this site is a living document.
+  - Decision: a website, not a book.
+
+    - Reason: To minimize the readers' effort.
+
+- Rules
+
+  - As long as this site is hosted on GitHub,
+    all contents in this site shall follow the
+    [[https://help.github.com/articles/github-terms-of-service/][GitHub Terms of Service]].
+  - Ads are OK as long as they don't hamper the reading experience.
+    They must not slow down the page.
+    They must not cover the content.
+  - Pop-ups are not OK.
+
+- The technology decisions for this wiki and why:
+
+  - Use technology that should still work at least until year 2100.
+
+    - Use only free open-source technologies with proven maintenance track record.
+    - Enable rebuilding of the website somewhere else quickly.
+
+  - Use Jekyll-powered GitHub Pages. If GitHub screws us, we buy a new domain, move to AWS, and ask Google to reindex.
+  - Use GitHub Flavored Markdown. If Jekyll screws us, we switch to Pandoc.
+  - Markdown weaknesses:
+
+    - The original Markdown doesn't have tables.
+    - Proliferation of incompatible dialects.
+
+  - Wiki vs blog, page vs post
+
+    - A page is timeless. Its usefulness should not depend on time.
+      Old pages are still useful.
+    - A post is time-sensitive. Its usefulness depends on time.
+      Old posts are useless.
+    - Posts are good for news, updates, changelogs, diffs.
+
+  - Alternatives?
+
+    - http://community.schemewiki.org/
+    - http://www.nongnu.org/skribilo/
+    - Skribilo is a free document production tool that takes a structured document representation as its input
+      and renders that document in a variety of output formats: HTML and Info for on-line browsing, and Lout and
+      LaTeX for high-quality hard copies.
+
+- 2017-05-18
+
+  - What to write?
+
+    - Something you want to write.
+    - Something a group of people want to read.
+
+- 2017-05-18
+
+  - Installing Jekyll on Ubuntu 14
+
+    - Ubuntu 14 has Ruby 1.9.1 package and Jekyll 0.11.2.
+    - Jekyll 3.4.3 requires Ruby 2.
+    - [[https://www.ruby-lang.org/en/downloads/][Download Ruby 2.4.1]].
+    - Run:
+
+    #+BEGIN_EXAMPLE
+        sudo apt-get install libssl-dev bison
+        cd ruby-2.4.1
+        configure --prefix=$HOME/.local
+        make -j4 install
+    #+END_EXAMPLE
+
+- Information visualization
+
+  - [[https://en.wikipedia.org/wiki/Exploration][WP:Exploration]]
+  - [[https://en.wikipedia.org/wiki/Exploration_problem][WP:Exploration problem]]
+  - [[https://en.wikipedia.org/wiki/Information_visualization][WP:Information visualization]]
+  - Example of information visualization?
+
+    - https://www.gartner.com/technology/research/digital-marketing/transit-map.jsp
+
+- 2016-04-16T19:32:18Z
+
+  - What should we write?
+
+    - Answers from pragmaticism and capitalism:
+
+      - Write something that our intended audience find /useful/.
+      - Treat our writing as /asset/.
+      - Ask ourselves: what problem are we solving?
+
+    - We can write anything you want to,
+      but we will be a better writer
+      if we understand /why people read/.
+    - /People read to solve their problems./
+
+      - Some need to fix a computer; help articles fix their problem.
+      - Some need to decide if they will invest in a company; reports fix their problem.
+
+    - We want to write something good. What is a good writing?
+
+      - Let me use /pragmaticism/ and /capitalism/ to define a good writing;
+        you can later define what is good for you
+        according to whatever moral system you subscribe to.
+
+        - Pragmaticism suggests that a good writing is useful
+          in the sense that the writing /solves/ the problem of its intended readers.
+        - Capitalism suggests that a good writing is
+          a /capital/, an asset, a means of production.
+          For example, some novels give rise to films, games, and merchandises;
+          such writings are great assets that will bring wealth to their owners.
+          A writing published on the Internet is also an asset for generating traffic and trust,
+          which can sometimes then translate into money through advertising
+          (or whatever you can convert others' trust to).
+* Gender-neutral third-person pronoun
+- Prescription
+
+  - I use "he" as both male and gender-neutral singular third-person pronoun.
+  - Ambiguity resolution rules
+
+    - If the context makes sense for both genders, then "he" is gender-neutral.
+
+- Languages without this problem
+
+  - Indonesian has gender-neutral third-person pronoun "dia" and "beliau".
+
+- [[https://en.wikipedia.org/wiki/Singular_they#Older_usage][WP:Singular they, older usage]]
+* Writing for screen
+- Design your text so that the reader can read it continuously and can resume arbitrarily.
+  - A page should be finishable in one sitting (about 15 minutes perhaps?).
+  - Links?
+    - Links should be clumped together, not scattered.
+      - Links distract. They break the continuity/immersion of the reading.
+  - Design the branching points such that readers understand what to expect by following the links.
+- Difference
+  - No progress indicator.
+    - On paper, your hand tells you how far you are from the end of the book.
+    - On screen, you have no idea where you are.
+  - No position indicator.
+    - On paper, you can mark a page and resume reading later.
+    - On screen, you can bookmark a page.
+  - Navigation: linear vs tree
+    - On paper, navigation is mostly linear: you go to the next page.
+      Occasionally you jump to the table of contents.
+      - On screen, navigation is tree.
+        - Following links depth-first risks forgetting the original context.
+        - Following links breadth-first risks browser tab count explosion.
+- Which feels better: flip pages of paper, or navigate several hyperlinks?
