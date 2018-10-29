@@ -241,8 +241,6 @@ We should join forces to reach our shared goals.
                     - https://en.wikipedia.org/wiki/Softwood
                     - https://en.wikipedia.org/wiki/Hardwood
                     - https://en.wikipedia.org/wiki/Dicotyledon#Comparison_with_monocotyledons
-            - [Astronomy]({% link astro.md %})
-        - [Chemistry]({% link chem.md %})
         - Science in 21st century is multi-/inter-discipline?
             - All branches of science cross-pollinate?
             - It's no longer useful to categorize science by branches?
