@@ -58,9 +58,6 @@ We should join forces to reach our shared goals.
                 - [Using XML]({% link xml.md %})
                 - [Using PostgreSQL]({% link pgsql.html %})
                 - [Standard MIDI file format]({% link smf.md %})
-                - Outdated pages:
-                    - [Web scraping]({% link scrape.md %})
-                    - [Android]({% link android.md %}). Last time I developed for Android in 2012. My knowledge is irrelevant now.
             - [Using Git]({% link git.md %})
                 - [Speeding up Git]({% link gitspd.md %})
             - [Making contributable open-source projects]({% link opensrc.md %})
