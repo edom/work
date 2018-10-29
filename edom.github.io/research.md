@@ -50,8 +50,3 @@ permalink: /research.html
 - https://www.theatlantic.com/magazine/archive/2006/08/a-taxonomy-of-knowledge/305189/
 - [WP:Joy's law of management](https://en.wikipedia.org/wiki/Joy%27s_law_(management)):
 "no matter who you are, most of the smartest people work for someone else"
-
-## Other
-
-- Moved back here
-    - [Social]({% link social.md %})
