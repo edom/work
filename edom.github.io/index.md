@@ -106,6 +106,9 @@ We should join forces to reach our shared goals.
     - Computational complexity
         - [Trying to prove P neq. NP]({% link pnptry.html %})
 - [Getting rich]({% link getrich.md %})
+    - Which is more fundamental, economics or finance? Which is built on which?
+        - [Economics]({% link economics.md %})
+        - [Finance]({% link finance.md %})
     - [Investing]({% link invest.md %})
     - [Justifying my value]({% link value.md %})
     - [Finding same-goaled people]({% link findpep.md %})
