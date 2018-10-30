@@ -4,6 +4,8 @@ permalink: /mathedu.html
 date: 2018-05-22 02:28:00 +0700
 ---
 
+# Teaching mathematics
+
 - Bad teachers make students hate the subject being taught.
     - Bad math teachers make students hate math.
     - Bad teachers waste humans, brains, the future of nations, the future of humanity.

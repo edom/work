@@ -5,6 +5,8 @@ permalink: /category.html
 mathjax: yes
 ---
 
+## Category theory
+
 - What is the history of category theory? Who invented it? Why?
     - [Quora: How did topology motivate the creation of category theory?](https://www.quora.com/How-did-topology-motivate-the-creation-of-category-theory?share=1)
 - What is a graph?

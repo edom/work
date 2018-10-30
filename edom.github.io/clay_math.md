@@ -5,6 +5,8 @@ permalink: /clay_math.html
 mathjax: yes
 ---
 
+# Solving the Clay millennium prize problems
+
 - What is the progress?
     - In 2017, [Norbert Blum](http://theory.cs.uni-bonn.de/blum/blum.var) (Prof. Dr. in CS at Bonn, Germany)
     proposed a proof, found out that it failed, and explained why it failed.

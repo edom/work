@@ -5,6 +5,8 @@ permalink: /function.html
 mathjax: yes
 ---
 
+# Function
+
 ## Prerequisites
 
 - [Wikipedia: Cartesian product](https://en.wikipedia.org/wiki/Cartesian_product)

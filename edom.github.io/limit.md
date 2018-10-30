@@ -5,6 +5,8 @@ date: 2017-06-27 03:00:00 +0700
 mathjax: yes
 ---
 
+# Limit
+
 We motivate the definition of the limit of a sequence.
 
 A *sequence* \\( s \\) consists of the elements \\( s_0 \\), \\( s_1 \\), and so on, possibly endlessly.

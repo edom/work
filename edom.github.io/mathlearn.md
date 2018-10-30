@@ -5,6 +5,8 @@ date: 2017-06-27 03:00:00 +0700
 mathjax: yes
 ---
 
+# Learning mathematics
+
 - Setting the attitude
     - "Young man, in mathematics you don't understand things. You just get used to them."
     John von Neumann (1903--1957) ([source](https://en.wikiquote.org/wiki/John_von_Neumann))

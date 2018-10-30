@@ -5,6 +5,8 @@ date: 2017-06-29 22:40 +0700
 permalink: /relation.html
 ---
 
+# Relation
+
 The *arity* of a relation is its number of parameters.
 For example, if \\(A\\) has arity 2, then \\(A(x,y)\\) is a *formula*.
 

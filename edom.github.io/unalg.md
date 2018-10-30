@@ -6,6 +6,8 @@ mathjax: yes
 date: 2018-05-16 00:26 +0700
 ---
 
+# Unary algebra
+
 A *mono-unary algebra* \((A,f)\) is a set \(A\) and a unary function \(f : A \to A\).
 
 There is always an injection from a unary algebra \((A, f)\)
@@ -123,7 +125,7 @@ Lemma: If \(c\) is a cardinal number, then \(c! = 2^c\).
 h~(g~x~y) = f~(h~x)?
 \]
 
-# Graph
+## Graph
 
 There is always an injection from a unary algebra \((A, f)\)
 to the *directed graph* \((A,E)\) where \(f~x = y\) iff \(E~x~y\).
@@ -131,7 +133,7 @@ to the *directed graph* \((A,E)\) where \(f~x = y\) iff \(E~x~y\).
 There is always an injection from a directed graph \((V, E)\)
 to the unary algebra \((2^V, F)\) where \(F~X = \{ y ~|~ x \in X, ~ E~x~y \}\).
 
-# Every magma can be commutative
+## Every magma can be commutative
 
 Every magma \((A,f)\) can be embedded into an \(n\)-anticommutative magma \((A^2,g,n)\)
 where \(g~a~b = n~(g~b~a)\).
@@ -143,6 +145,6 @@ n~(x,y) = (y,x)
 \end{align*}
 \]
 
-# Conclusion
+## Conclusion
 
 There is an isomorphism between unary systems and magmas.
