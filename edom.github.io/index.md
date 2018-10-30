@@ -155,7 +155,6 @@ We should join forces to reach our shared goals.
     - [Organizing knowledge]({% link knorg.md %})
         - [Using Emacs and Org Mode]({% link emacs.html %})
             - [Emacs for vi users]({% link emacsvi.md %})
-        - [Rebooting human knowledge in case of mass destruction]({% link reboot.md %})
         - The page [Information architecture]({% link infarch.md %}) should be merged into "Organizing knowledge".
 - Living in the 21st century
     - [What kind of world are we living in?]({% link world.md %})
@@ -232,7 +231,7 @@ We should join forces to reach our shared goals.
             - It's no longer useful to categorize science by branches?
             - Where is the boundary between two branches?
                 - Where do physics end and chemistry begin?
-    - [Philosophy]({% link philo.md %})
+    - Philosophy
         - Does everything fall under philosophy?
             - How do we prevent this category from becoming a kitchen sink?
             - Philosophy is everywhere (a cross-cutting concern), so it shouldn't be a category.
