@@ -4,6 +4,8 @@ permalink: /gradle.html
 date: 2018-05-15 23:10:00 +0700
 ---
 
+# Using Gradle
+
 - Conclusion:
     - I still haven't found any reason to switch from Maven to Gradle
     (other than "because this project is already using it").

@@ -4,8 +4,7 @@ permalink: /git.html
 date: 2017-06-26 00:36:00 +0700
 ---
 
-- TOC
-{:toc}
+# Using Git
 
 ## Mental model
 

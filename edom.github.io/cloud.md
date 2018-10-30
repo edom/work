@@ -4,6 +4,8 @@ permalink: /cloud.html
 date: 2017-06-26 16:30:00 +0700
 ---
 
+# Moving to clouds, for old-school sysadmins
+
 The most important pages on the [AWS website](https://aws.amazon.com/)
 are the pricing pages and the technical documentation.
 That website has much content, but not much information,

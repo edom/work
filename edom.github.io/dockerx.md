@@ -4,6 +4,8 @@ permalink: /dockerx.html
 date: 2016-05-02 03:31:20 +0700
 ---
 
+# Running X client applications on Docker on Linux
+
 ```
 docker \
     -e DISPLAY \

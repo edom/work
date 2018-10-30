@@ -4,8 +4,7 @@ permalink: /sysadm.html
 date: 2018-08-10 03:49 +0700
 ---
 
-- TOC
-{:toc}
+# Administering a computer
 
 - Why use swap partitions and not swap files?
     - Defragmenting swap files might have undesirable effects.

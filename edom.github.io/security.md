@@ -4,6 +4,8 @@ permalink: /security.html
 date: 2018-05-15 02:31:00 +0700
 ---
 
+# Security
+
 - Bastion hosts, aka jump boxes
     - Does a jump box add any security?
         - http://cloudacademy.com/blog/aws-bastion-host-nat-instances-vpc-peering-security/

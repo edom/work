@@ -4,8 +4,7 @@ permalink: /gitspd.html
 date: 2018-09-05 23:44 +0700
 ---
 
-- TOC
-{:toc}
+# Speeding up Git
 
 ## The problem
 

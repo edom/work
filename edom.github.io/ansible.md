@@ -4,6 +4,8 @@ permalink: /ansible.html
 date: 2018-05-15 02:31:00 +0700
 ---
 
+# Ansible
+
 An [inventory](http://docs.ansible.com/ansible/intro_inventory.html) is a map from host alias to host address.
 We use those aliases to select the machines to mutate.
 

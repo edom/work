@@ -4,8 +4,7 @@ permalink: /deploy.html
 date: 2018-08-29 19:09 +0700
 ---
 
-- TOC
-{:toc}
+# Deploying web applications
 
 ## Formalizing deployment requirements
 

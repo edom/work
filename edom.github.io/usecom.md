@@ -4,6 +4,8 @@ date: 2018-05-29 02:15 +0700
 permalink: /usecom.html
 ---
 
+# Using computers
+
 - Habits learned the hard way
     - I check the time at [time.gov](https://time.gov/) because Ubuntu 14.04 NTP once betrayed me.
         - 2018-01-16: I had always thought that it was dependable, but it betrayed me:

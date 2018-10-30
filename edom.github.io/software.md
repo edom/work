@@ -4,6 +4,8 @@ permalink: /software.html
 date: 2017-06-26 22:30 +0700
 ---
 
+# Software
+
 - Web development
     - [Set up Webpack to transpile and bundle TypeScript sources](https://webpack.js.org/guides/typescript/)
     - HTML DOM, web, browser, JavaScript

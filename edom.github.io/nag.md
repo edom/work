@@ -4,6 +4,8 @@ permalink: /nag.html
 date: 2017-07-08 19:55 +0700
 ---
 
+# Removing nag screens
+
 Copy the respective fragments to your browser's JavaScript Console (Ctrl+Shift+J on Chromium).
 
 Don't run codes you don't trust.

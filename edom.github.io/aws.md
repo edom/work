@@ -4,6 +4,8 @@ permalink: /aws.html
 date: 2018-05-15 02:31:00 +0700
 ---
 
+# Amazon Web Services
+
 - How do we detect if we're running on AWS?
     - [Question on AWS forum](https://forums.aws.amazon.com/message.jspa?messageID=122425)
     - Some choices:

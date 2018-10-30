@@ -4,6 +4,8 @@ date: 2018-05-16 03:03 +0700
 permalink: /java.html
 ---
 
+# Using Java
+
 - How to profile a Java application startup?
     - How to make a Java application wait for a debugger to attach on startup?
 - Speeding up Java startup

@@ -4,8 +4,7 @@ permalink: /bash.html
 date: 2018-09-05 00:00 +0700
 ---
 
-- TOC
-{:toc}
+# Bash shell programming
 
 ## Articles
 

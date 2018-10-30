@@ -4,6 +4,8 @@ permalink: /python.html
 date: 2018-07-29 03:48 +0700
 ---
 
+# Using Python
+
 Python virtualenv is relatively forward-compatible.
 Don't waste time installing Python from source.
 Use the Python packaged with your distro, and use virtualenv.
