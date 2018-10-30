@@ -102,7 +102,13 @@ We should join forces to reach our shared goals.
             How do we make them get bored?
                 - We know that intelligent people get bored quickly.
                     - Why shouldn't intelligent machines get bored?
+            - [About intelligence research]({% link intmeta.md %})
+                - How can I become an AI researcher?
+                - How are others' works progressing?
             - [Approximating functions]({% link approx.md %})
+                - [Are all approximations truncation?]({% link atrunc.md %})
+                Are there other approximation schemes beside series truncation?
+                Are probabilistic approximations such as Monte Carlo approximations also truncation?
     - Computational complexity
         - [Trying to prove P neq. NP]({% link pnptry.html %})
 - [Getting rich]({% link getrich.md %})

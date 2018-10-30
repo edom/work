@@ -173,7 +173,6 @@ Thus geometric projection is modeling.
 
 In analysis, we can map Y (the exponential function) to X (a truncated Taylor series of the exponential function).
 Thus approximation is modeling.
-Related: [approx]({% link approx.md %}), [atrunc]({% link atrunc.md %}).
 
 In real life, a writing is a model of its author.
 What you think about X is your model of X.

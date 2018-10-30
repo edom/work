@@ -7,12 +7,9 @@ mathjax: true
 
 This page is about AI research, not about AI.
 
-See also [Meta-research]({% link meta_research.md %}).
-
 ## Questions
 
 - What is the best place to do AI research?
-    - See also "What is the best place to do research?" in [Meta-research]({% link meta_research.md %}).
 
 ## How can I become an AI researcher?
 

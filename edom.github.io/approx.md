@@ -32,10 +32,6 @@ Why is it called "uniform"?
 [WP:Uniform norm](https://en.wikipedia.org/wiki/Uniform_norm).
 - What is this norm called? \\( \int_{x \in I} [f(x)-g(x)]^2 ~ dx \\).
 
-[Are all approximations truncation?]({% link atrunc.md %})
-Are there other approximation schemes beside series truncation?
-Are probabilistic approximations such as Monte Carlo approximations also truncation?
-
 ## Other
 
 - Courses

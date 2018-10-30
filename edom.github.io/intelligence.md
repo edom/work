@@ -9,9 +9,6 @@ mathjax: true
     - AI: Artificial Intelligence
     - ML: Machine Learning
     - COLT: Computational Learning Theory
-- [About intelligence research]({% link intmeta.md %})
-    - How can I become an AI researcher?
-    - How are others' works progressing?
 - What are some AI survey papers, review articles, and expository works?
     - Google query: most recent mathematical ai book
     - http://eliassi.org/COLTSurveyArticle.pdf
@@ -28,7 +25,7 @@ mathjax: true
         - [WP: Progress in artificial intelligence](https://en.wikipedia.org/wiki/Progress_in_artificial_intelligence)
     - [Hutter2005Book]
     - [hutter1.net...uaibook.htm](http://www.hutter1.net/ai/uaibook.htm)
-        - He formulated the "degree of intelligence" in 2005; we had a similar idea in 2018 in [intwhat.html]({% link intwhat.md %})
+        - He formulated the "degree of intelligence" in 2005
         - (edited) "AIXI [...] learns by eliminating Turing machines [...] once they become inconsistent with the progressing history."
     - [Presentation, 393 slides](http://www.hutter1.net/ai/suaibook.pdf)
     - [Slides](http://users.cecs.anu.edu.au/~ssanner/MLSS2010/Hutter1.pdf), maybe a draft of the above.
