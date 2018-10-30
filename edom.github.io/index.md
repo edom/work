@@ -69,7 +69,6 @@ We should join forces to reach our shared goals.
             - [Reverse engineering the network protocol used by a Java desktop application]({% link rejava.md %}): a stock trading application written in Java 6
             - [Reverse-engineering PlayStation 1 3D games to control the camera]({% link ps1.md %})
         - [Managing software engineers]({% link engman.md %})
-            - [Interviewing software engineers]({% link engint.md %})
         - [Software engineer salary]({% link salary.md %})
     - [Administering a computer]({% link sysadm.md %})
         - [Programming Bash]({% link bash.md %})
