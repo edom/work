@@ -66,3 +66,8 @@ Problems:
 - Can't put multiple paragraphs in table cell.
 
 Of course you can type the raw HTML, but we are using Markdown to avoid typing HTML.
+
+## 2018-10-31: Don't resort to raw HTML markup in Markdown.
+
+- https://emacs.stackexchange.com/questions/33601/how-to-include-rendered-html-in-org-mode
+  - It seems that Org changed `#+BEGIN_HTML` to `#+BEGIN_EXPORT html`; Pandoc uses `#+BEGIN_HTML`.
