@@ -70,7 +70,6 @@ We should join forces to reach our shared goals.
             - [Reverse-engineering PlayStation 1 3D games to control the camera]({% link ps1.md %})
         - [Managing software engineers]({% link engman.md %})
             - [Interviewing software engineers]({% link engint.md %})
-            - [Reviewing performance]({% link perfrev.md %})
         - [Software engineer salary]({% link salary.md %})
     - [Administering a computer]({% link sysadm.md %})
         - [Programming Bash]({% link bash.md %})
@@ -124,11 +123,9 @@ We should join forces to reach our shared goals.
     - [Netflix culture](https://jobs.netflix.com/culture)
 - Understanding nature
     - [Justifying physics]({% link natkno.html %})
-    - [Justifying counterfactual reasoning]({% link cf.md %})
 - Improving society
     - [Political dreams]({% link politics.html %})
         - [Subsistence]({% link subsist.html %})
-        - [Solving the Israel-Palestine problem]({% link ispal.md %})
         - [Defining marriage]({% link marry.html %})
     - Preventing social isolation
         - Social isolation causes violence and extremism.
@@ -182,7 +179,6 @@ We should join forces to reach our shared goals.
         - Politik lain
             - [Politik masjid]({% link politik_masjid.md %})
         - [Living in Jakarta]({% link jakarta.md %})
-        - [BTPN Jenius?]({% link btpn.md %})
     - [Handling existential crisis]({% link crisis.md %})
     - [Fighting]({% link fight.md %})
     - Dying in the 21st century
