@@ -151,8 +151,8 @@ We should join forces to reach our shared goals.
                 Anarchy?
                 Do we want?
                     - [RationalWiki: Difference between anarchy and mobocracy](https://rationalwiki.org/wiki/Anarchy#Contrast_with_mobocracy)
-- [Doing research better]({% link meta_research.md %})
-    - [Organizing knowledge]({% link knorg.md %})
+- Doing research better
+    - [Organizing knowledge]({% link knorg.md %}); this page should be merged into research.org?
         - [Using Emacs and Org Mode]({% link emacs.html %})
             - [Emacs for vi users]({% link emacsvi.md %})
         - The page [Information architecture]({% link infarch.md %}) should be merged into "Organizing knowledge".
@@ -202,7 +202,7 @@ We should join forces to reach our shared goals.
 - [Other unorganized contents]({% link other.html %})
     - I am regrouping the contents in this website from by-topic to by-task.
     These are pages with old grouping.
-    - [Research]({% link research.md %})
+    - [Research]({% link research.html %})
     - This page contains the old grouping that I haven't moved.
     - This page is also a staging area, a queue, a scratchpad, for the things I shall process later.
     - [Computer science]({% link compsci.md %})
