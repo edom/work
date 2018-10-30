@@ -5,6 +5,8 @@
 #+OPTIONS: toc:nil
 #+TOC: headlines 1
 #+TOC: headlines 3
+* Note: This page was automatically converted from markdown to org; there may be some LaTeX formatting breakage
+* from math.md
 - Branches
 
   - [[https://en.wikipedia.org/wiki/Mathematics_Subject_Classification][WP: Mathematics Subject Classification]]
@@ -171,3 +173,965 @@
       - $\exists m \in \Real : a < m < z$
 
   - [[https://en.wikipedia.org/wiki/Real_number][WP:Real number]]
+* Category theory
+   :PROPERTIES:
+   :CUSTOM_ID: category-theory
+   :END:
+
+- What is the history of category theory? Who invented it? Why?
+
+  - [[https://www.quora.com/How-did-topology-motivate-the-creation-of-category-theory?share=1][Quora: How did topology motivate the creation of category theory?]]
+
+- What is a graph?
+
+  - A graph has /vertices/ and /edges/.
+
+- What is an undirected graph? What is a directed graph?
+
+  - A /undirected/ graph is a graph whose edges are /unordered/ pairs.
+  - A /directed/ graph is a graph whose edges are /ordered/ pairs.
+
+- Which one is the default?
+
+  - In this document, when we say just "graph", we mean "directed graph".
+
+- What is a pre-category?
+- What is a category?
+
+  - A category has /objects/ and /morphisms/, and satisfies the category axioms.
+
+    - What is an object?
+
+      - Anything. It's undefined, like "point" in geometry.
+
+    - What is a morphism?
+    - What are the category axioms?
+
+  - A category can be thought as a graph whose edge relation is reflexive and transitive.
+
+- What is a functor?
+
+  - A functor maps a category to another category.
+  - The endofunctors on a category $C$ form a category called the /functor category/ of $C$.
+
+    - Category theory is recursive.
+
+- What is a natural transformation?
+- What is an adjunction?
+- What is a monad?
+
+  - A monad is a triple $(T,\mu,\eta)$.
+
+** Undigested
+   :PROPERTIES:
+   :CUSTOM_ID: undigested
+   :END:
+
+- Courses
+
+  - [[https://forum.azimuthproject.org/discussion/2037/lecture-17-chapter-1-the-grand-synthesis][John Baez on adjoints, joins, and meets]],
+    part of applied category theory course
+
+- Books
+
+  - [[https://arxiv.org/abs/1803.05316][Fong & Spivak, "Seven Sketches in Compositionality: An Invitation to Applied Category Theory"]]
+  - [[http://emis.ams.org/journals/TAC/reprints/articles/22/tr22.pdf][Category theory for computing science]]
+
+- [[http://www.cs.man.ac.uk/~hsimmons/zCATS.pdf][An introduction to category theory with over 200 exercises and solutions available]]
+  by Harold Simmons.
+* Solving the Clay millennium prize problems
+  :PROPERTIES:
+  :CUSTOM_ID: solving-the-clay-millennium-prize-problems
+  :END:
+
+- What is the progress?
+
+  - In 2017, [[http://theory.cs.uni-bonn.de/blum/blum.var][Norbert Blum]] (Prof. Dr. in CS at Bonn, Germany)
+    proposed a proof, found out that it failed, and explained why it failed.
+    See also the news on [[https://www.theregister.co.uk/2017/08/31/pnp_proof_fails_yet_again/][theregister.co.uk]]
+    and the discussion on [[https://cstheory.stackexchange.com/questions/38803/is-norbert-blums-2017-proof-that-p-ne-np-correct][CSSE 38803]].
+  - [[https://www.win.tue.nl/~gwoegi/P-versus-NP.htm][G.J. Woeginger's P-vs-NP page]]
+    says that the most recent attempt is in 2016. It lists a hundred of failed attempts.
+  - From 2015: [[https://www.reddit.com/r/askscience/comments/2shpn7/has_there_been_any_progress_on_the_seven/][/r/askscience: Has there been any progress on the seven millennium [math] prize problems?]]
+  - From 2014: [[https://www.quora.com/Has-there-been-any-progress-on-the-other-Millennium-Prize-Problems][Quora: Has there been any progress on the other millennium prize problems?]]
+  - From 2009: [[https://cacm.acm.org/magazines/2009/9/38904-the-status-of-the-p-versus-np-problem/fulltext][Lance Fortnow's CACM 2009 review article "The Status of the P Versus NP Problem"]]
+
+- What are the Clay Millenium Prize Problems?
+  The Clay Mathematics Institute of Cambridge, Massachusetts (CMI),
+  offers one million US dollars for each solution of [[http://www.claymath.org/millennium-problems][the seven problems]],
+  of which these are unsolved:
+
+  - Riemann hypothesis
+  - Birch and Swinnerton-Dyer conjecture
+  - Hodge conjecture
+    [[http://www.claymath.org/sites/default/files/hodge.pdf][official problem description]]
+  - P versus NP problem, of computational complexity theory
+
+    - [[https://arxiv.org/list/cs.CC/recent][arxiv cs.CC - Computational Complexity]]
+    - [[https://arxiv.org/list/cs.LO/recent][arxiv cs.LO - Logic in Computer Science]]
+
+  - Navier--Stokes existence and smoothness
+  - Yang--Mills and mass gap
+    [[http://www.claymath.org/sites/default/files/yangmills.pdf][official problem description]]
+
+- What is the CMI? Why was it founded? What is it doing?
+- Why did the CMI select those problems?
+
+  - [[http://www.claymath.org/millennium-problems/millennium-prize-problems][CMI's short story about the problems]]
+  - [[https://en.wikipedia.org/wiki/Millennium_Prize_Problems][Wikipedia: Millennium Prize Problems]]
+
+** Navier--Stokes equations
+   :PROPERTIES:
+   :CUSTOM_ID: navierstokes-equations
+   :END:
+
+- Abbreviations
+
+  - NSE: Navier--Stokes equations
+
+- Where did the NSE come from?
+
+  - How do we derive the NSE from the laws of physics?
+  - How did Navier arrive at the equations? How did Stokes? What were they doing?
+
+    - [[https://www.wolframscience.com/reference/notes/996d][Wolfram note 996d]]
+    - [[http://liwei-chen.blogspot.co.id/2007/09/brief-history-of-navier-stokes-equation.html][Liwei Chen, A brief history of Navier--Stokes equation]]
+    - Are there other more reliable sources?
+
+  - How do the NSE extend the Euler equations?
+
+- How many equations are in the NSE?
+- What is modeled by the NSE? What are the variables of the NSE?
+
+  - Velocity, pressure, temperature, density ([[https://www.grc.nasa.gov/www/k-12/airplane/nseqs.html][NASA]]).
+
+- How are the Navier-Stokes equations derived from Newton's laws of motion?
+- Reading triage
+
+  - [[http://www.claymath.org/sites/default/files/navierstokes.pdf][official problem description]]
+  - [[https://en.wikipedia.org/wiki/Navier%E2%80%93Stokes_equations][Navier--Stokes equations]]
+  - [[https://en.wikipedia.org/wiki/Navier%E2%80%93Stokes_existence_and_smoothness][Navier--Stokes existence and smoothness]]
+  - [[https://en.wikipedia.org/wiki/Navier%E2%80%93Stokes_equations][Wikipedia: Navier--Stokes equations]]
+  - [[https://en.wikipedia.org/wiki/Navier%E2%80%93Stokes_existence_and_smoothness][Navier--Stokes existence and smoothness]].
+    See also the "Partial results" section.
+  - https://www.comsol.com/multiphysics/navier-stokes-equations
+  - https://samjshah.com/2009/11/10/navier-stokes-equations-for-the-layperson/
+  - http://notes.dpdx.net/2006/10/06/penny-smiths-proof-on-the-navier-stokes-equations/
+
+    - What is the continuity equation?
+
+  - https://www.quora.com/topic/Navier%E2%80%93Stokes-Existence-and-Smoothness-Problem
+
+** The Riemann hypothesis
+   :PROPERTIES:
+   :CUSTOM_ID: the-riemann-hypothesis
+   :END:
+
+- 2018-08-12: The [[https://en.wikipedia.org/wiki/Riemann_hypothesis][Riemann hypothesis Wikipedia page]] is more comprehensive than this page.
+- [[http://www.claymath.org/sites/default/files/official_problem_description.pdf][official problem description]]
+- [[http://www.math.lsa.umich.edu/~lagarias/doc/elementaryrh.pdf][a more elementary problem that is equivalent to the Riemann hypothesis]], 2001, Jeffrey C. Lagarias
+- [[https://arxiv.org/abs/1707.01754][A study of the Riemann zeta function]], 2017, Yochay Jerby
+- [[https://arxiv.org/abs/1707.01770][Notes on the Riemann Hypothesis]], 2010, published 2017, Ricardo Pérez-Marco
+- Riemann zeta function is an analytical continuation of a [[https://en.wikipedia.org/wiki/Dirichlet_series][Dirichlet series]]?
+- [[https://en.wikipedia.org/wiki/Riemann_zeta_function][Wikipedia: Riemann zeta function]]
+- [[http://www.riemannhypothesis.info/]["Understanding the Riemann hypothesis"]]: Markus Shepherd (né Schepke)'s blog and journey towards understanding the Riemann hypothesis.
+- What is the history of the Riemann zeta function?
+  How did it arise?
+  What were people trying to do?
+- How are these related?
+
+  - Euler's totient function?
+  - Prime counting function?
+  - Twin prime conjecture
+  - Prime gap problem
+  - Number theory? Analysis?
+
+    - Gamma function
+
+      - Stirling's approximation of factorials
+
+    - Cryptography?
+
+  - number theory and complexity theory
+
+    - [[https://en.wikipedia.org/wiki/AKS_primality_test][Wikipedia: AKS primality test]]
+
+  - [[https://en.wikipedia.org/wiki/Prime_number][Wikipedia: Prime number]]
+
+    - [[https://en.wikipedia.org/wiki/Number_theory][Wikipedia: Number theory]]
+
+- https://terrytao.wordpress.com/2018/01/19/the-de-bruijn-newman-constant-is-non-negativ/
+
+** Birch and Swinnerton-Dyer conjecture
+   :PROPERTIES:
+   :CUSTOM_ID: birch-and-swinnerton-dyer-conjecture
+   :END:
+
+- [[http://www.claymath.org/sites/default/files/birchswin.pdf][official problem description]]
+- [[https://en.wikipedia.org/wiki/Birch_and_Swinnerton-Dyer_conjecture][Wikipedia: Birch and Swinnerton-Dyer conjecture]]
+- How are these related?
+
+  - [[https://en.wikipedia.org/wiki/Faltings%27s_theorem][Faltings's theorem]]
+
+    - [[https://en.wikipedia.org/wiki/Genus_(mathematics)#Algebraic_geometry][Genus of an algebraic curve]]
+
+      - [[https://en.wikipedia.org/wiki/Arithmetic_genus][Arithmetic genus]]
+
+        - [[https://en.wikipedia.org/wiki/Hodge_theory][Hodge number]]
+
+          - complex vector space
+* Function
+  :PROPERTIES:
+  :CUSTOM_ID: function
+  :END:
+
+** Prerequisites
+   :PROPERTIES:
+   :CUSTOM_ID: prerequisites
+   :END:
+
+- [[https://en.wikipedia.org/wiki/Cartesian_product][Wikipedia: Cartesian product]]
+
+** Relation
+   :PROPERTIES:
+   :CUSTOM_ID: relation
+   :END:
+
+An example ordered pair is $(a,b)$. It is not the same as $(b,a)$.
+
+A /relation/ $r$ is a triple $(A,B,R)$ where
+$A$ is a set called the /domain/,
+$B$ is a set called the /codomain/,
+and $R \subseteq A \times B$ is a set that is the relation's /mapping/.
+Such mapping is a set of ordered pairs.
+
+Iff $(a,b) \in R$, then we say that $r$ /relates/ $a$ /to/ $b$.
+The word "to" implies that direction is important.
+
+A relation is not just a subset of a Cartesian product.
+The domains and codomains matter.
+
+** Function
+   :PROPERTIES:
+   :CUSTOM_ID: function-1
+   :END:
+
+A /function/ is a relation in which each element of the domain is related to /exactly one/ thing.
+
+Let $f = (A,B,F)$ be a function.
+
+The notation of "applying $f$ to $x$", written $f(x)$,
+means the $y$ such that $(x,y) \in F$.
+
+** Partial functions
+   :PROPERTIES:
+   :CUSTOM_ID: partial-functions
+   :END:
+
+A /partial function/ is a relation in which each element of the domain is related to /at most one/ thing.
+If you replace "at most one" with "exactly one", you get the definition of a function.
+
+If a partial function $f$ does not relate a domain element $x$ to anything,
+then we say that $f(x)$ is /undefined/.
+
+The symbol $\bot$ is called /bottom/.
+
+We can /totalize/ a partial function $f = (A,B,F)$ into a total function $f_\bot = (A,B_\bot,F_\bot)$
+where $B_\bot = B \cup \\{ \bot \\}$, and we require that $\bot \not\in B$,
+and, for each $a \in A$:
+1. if $(a,b) \in F$, then $(a,b) \in F_\bot$;
+2. otherwise, $(a,\bot) \in F_\bot$.
+
+What is the difference between "undefined" and "bottom"?
+The "bottom" of a set $B$ is /defined/ as something that is not equal to anything in $B$.
+On the other hand, something "undefined" is /not defined/ at all,
+for example the result of $1 / 0$.
+Thus, we should /not/ write $f(x) = \bot$ to mean that $f(x)$ is undefined.
+
+[[http://wiki.portal.chalmers.se/agda/pmwiki.php?n=ReferenceManual.Totality][Agda Wiki: Totality]]
+
+[[https://ncatlab.org/nlab/show/partial+function][ncatlab: partial function]]
+
+The function $f : A \to B$ has input type $A$ and output type $B$.
+
+** Function equality
+   :PROPERTIES:
+   :CUSTOM_ID: function-equality
+   :END:
+
+- Two relations are /equal/ iff
+
+  - their domains are equal,
+  - their codomains are equal, and
+  - their mappings are equal.
+
+- Formally, $(A_1,B_1,R_1) = (A_2,B_2,R_2)$ iff
+
+  - $A_1 = A_2$,
+  - $B_1 = B_2$, and
+  - $R_1 = R_2$.
+
+- Functions are relations.
+
+  - Equality of functions is equality of relations.
+
+- Intension vs extension
+
+  - Consider:
+
+    - $f : \Nat \to \Nat$, ( f(n) = n + n ),
+    - $g : \Nat \to \Nat$, ( g(n) = 2 \cdot n ).
+
+  - Observe:
+
+    - They are extensionally equal: $f(n) = g(n)$ for all $n$.
+    - They are not intensionally equal: $f \neq g$.
+    - Their outputs match, but they are not the same function.
+
+  - Problem:
+
+    - When do we care about intension?
+    - Do we ever care at all?
+
+** Relationship between functions in functional programming and functions in mathematics
+   :PROPERTIES:
+   :CUSTOM_ID: relationship-between-functions-in-functional-programming-and-functions-in-mathematics
+   :END:
+
+These functions =idn= and =idz= are /different/ functions.
+
+#+BEGIN_SRC haskell
+    idn : Nat -> Nat
+    idn x => x
+
+    idz : Int -> Int
+    idz x => x
+#+END_SRC
+
+\begin{align*}
+[idn] = (\Nat, \Nat , x \to x)
+\\
+[idz] = (\Integers, \Integers, x \to x)
+\end{align*}
+
+The slides [[http://www.cs.yale.edu/homes/hudak/CS430F07/LectureSlides/Reynolds-ch10.pdf][the lambda calculus]]
+has some explanation of the semanticses of lambda calculus.
+The slides are a part of [[http://www.cs.yale.edu/homes/hudak/CS430F07/][Yale CS-430/CS-530 formal semantics course]].
+* Limit
+  :PROPERTIES:
+  :CUSTOM_ID: limit
+  :END:
+
+We motivate the definition of the limit of a sequence.
+
+A /sequence/ $s$ consists of the elements $s_0$, $s_1$, and so on, possibly endlessly.
+The notation ( s = ( 1/n )/{n=1}^{\infty} ) means the sequence
+\begin{align*}
+s_1 &= 1/1,
+\\ s_2 &= 1/2,
+\\ s_3 &= 1/3,
+\end{align*}
+and so on where $s_n = 1/n$ for each integer $n$ greater than or equal to one.
+The index does not have to begin with one.
+For example, the notation ( ( n^2 )/{n \in \Nat} ) means the sequence
+\begin{align*}
+s_0 = 0^2,
+\\ s_1 = 1^2,
+\\ s_2 = 2^2,
+\end{align*}
+and so on where $s_n = n^2$ for each $n$ in $\Nat$.
+Unless indicated otherwise, an index is a natural number, which begins from zero.
+Instead of using indexes such as $s_n$, we can also use brackets $s[n]$,
+and we can even use parentheses $s(n)$.
+We define $S(A)$ to be the image of $A$ through $s$,
+that is the set of all possible outputs of $s$,
+that is the set ( { x _{|} a \in A, ~ s(a) = x } ).
+The set $S(A)$ is obtained by applying $s$ to each element of $A$,
+that is, if ( A = { a_1, a_2, a_3, \ldots } ), then ( S(A) = { s(a_1), s(a_2), s(a_3), \ldots } ).
+Let $A$ be a set from which the sequence elements are taken.
+Let $A$ also has a partial order $\le$.
+The statement $\beta \le \alpha$ can also be written $\alpha \ge \beta$.
+The notation $s(k)$ suggests that a sequence can be thought as a function $\Nat \to A$.
+Due to the partial order, we can define an /upper bound of $s$/ as a $z$ such that $s_n \le z$ for all $n$,
+and we can define a /lower bound of $s$/ as an $a$ such that $s_n \ge a$ for all $n$.
+The /supremum/ of $s$ is its least upper bound.
+The /infimum/ of $s$ is its greatest lower bound.
+If and only if the infimum $\inf s$ and the supremum $\sup s$ have the same value $L$,
+then we say that $s$ /converges/ to $L$,
+and we say that the /limit/ of $s$ is $L$,
+and we write $\lim s = L$.
+
+Note that the bounds do not have to occur in the sequence itself.
+
+If we have a sequence $s$,
+then we can apply a function $f$ to each member of $s$
+to create a new sequence $t_n = f(s_n)$.
+Every function can be /lifted/ into a function that works on sequences
+by applying that original function to each element of the sequence.
+
+Now that we have defined the limit of a sequence,
+we can now define the limit of a function /as its input approaches a value/.
+Let $f$ be a function.
+By saying "the input of $f$ approaches $a$",
+we mean that there exists a sequence $x$ that converges to $a$.
+We define the /limit/ of a function $f$ as its input $x$ approaches $a$ to be $L$, written $\lim_{x \to a} f(x) = L$,
+if and only if for every sequence $u$ that converges to $a$,
+the limit of the sequence ( \lim (f(u_n))_{n \in \Nat} = f(a) ).
+
+Another way we can define $\lim_{x \to a} f(x)$ is by the epsilon-delta definition of limit
+as done by Cauchy, Bolzano, and Weierstrass.
+
+A /generalized sequence/ is a function from an index set $I$ to an element set $A$,
+where the index has an ordering $\le$.
+
+** Related materials
+   :PROPERTIES:
+   :CUSTOM_ID: related-materials
+   :END:
+
+- Wikipedia
+
+  - [[https://en.wikipedia.org/wiki/Sequence#Examples_and_notation][Sequence: Examples and notation]]
+  - [[https://en.wikipedia.org/wiki/Limit_(mathematics)][Limit]]
+  - [[https://en.wikipedia.org/wiki/Net_(mathematics)][Topological net]]
+* Teaching mathematics
+  :PROPERTIES:
+  :CUSTOM_ID: teaching-mathematics
+  :END:
+
+- Bad teachers make students hate the subject being taught.
+
+  - Bad math teachers make students hate math.
+  - Bad teachers waste humans, brains, the future of nations, the future of humanity.
+
+    - How many people /can/ think but /won't/ because their teachers suck?
+
+      - How many people /can/ do math but /won't/ because their math teachers suck?
+
+- How do we make learning materials that are not teacher brain dump?
+- Textbooks should answer "Why should I care?"
+- Everywhere in mathematics is /logic/.
+
+  - Everything is a consequence of the definitions.
+  - Everything that is true has always been true.
+
+    - It's just that we haven't proved it.
+
+- Calculus should be taught with infinitesimals (instead of delta-epsilon)?
+
+  - Pros
+
+    - more intuitive
+    - simplifies probability theory
+
+  - Cons
+
+    - some topology (and perhaps some other advanced mathematics) uses delta-epsilon
+
+  - [[https://pdfs.semanticscholar.org/8b83/73154da1eb0fa1b8b2a97e5fe63bf44a9c14.pdf][2016, "Teaching Calculus with Infinitesimals", Rebecca Vinsonhaler]]
+
+    - "This article argues that first semester calculus courses for non-mathematics majors
+      should be taught using infinitesimals."
+
+  - [[http://u.cs.biu.ac.il/~katzmik/sullivan76.pdf][1976, "The Teaching of Elementary Calculus Using the Nonstandard Analysis Approach", Kathleen Sullivan]]
+  - https://www.quora.com/Why-dont-schools-and-textbooks-use-non-standard-analysis-to-teach-calculus
+  - https://math.stackexchange.com/questions/2097694/why-is-non-standard-analysis-not-fully-or-at-all-integrated-in-our-current-schoo
+  - https://kew1beans.wordpress.com/2014/10/20/167/
+  - https://cornellmath.wordpress.com/2007/08/28/non-nonstandard-calculus-i/
+  - non-standard probability theory
+
+    - https://en.wikipedia.org/wiki/Influence_of_non-standard_analysis#Probability_theory
+
+      - [[https://web.math.princeton.edu/~nelson/books/rept.pdf]["Radically elementary probability theory" of Edward Nelson]]
+
+    - https://mathoverflow.net/questions/107945/nonstandard-analysis-in-probability-theory
+
+  - [[https://projecteuclid.org/euclid.ndjfl/euclid.ndjfl/1093891802][1975, "Nonstandard probability", S. Michael Webb]]
+* Learning mathematics
+  :PROPERTIES:
+  :CUSTOM_ID: learning-mathematics
+  :END:
+
+- Setting the attitude
+
+  - "Young man, in mathematics you don't understand things. You just get used to them."
+    John von Neumann (1903--1957) ([[https://en.wikiquote.org/wiki/John_von_Neumann][source]])
+  - Mathematics is English and some rules (or whatever your language is).
+    People who can understand English can get used to mathematics (with effort).
+  - Mathematics is a tower of concepts.
+  - Mathematics is a chain of concepts.
+  - Mathematics is a tree of concepts.
+
+- Definitions
+
+  - /Definitions/ are important.
+    Your first reaction when you encounter an unknown word should be "What's its definition?"
+    For example, a /group/ is a set and a binary operation satisfying the group axioms.
+    If you're new, your questions should be "What is a set?",
+    "What is a binary operation?",
+    and "What are the group axioms?",
+    and then you should search them on the Internet.
+    (Don't do it right now; it's just an example.)
+  - Read the definition.
+    Try to use the definition.
+    Find some examples.
+    You will forget.
+    It's OK.
+    Read them again later after you forgot.
+    It takes several times of forgetting to get used to it,
+    and eventually you'll get a feel of it.
+    You /must/ expect to forget, because forgetting is part of learning.
+  - Mathematicians invent new words to do more with less words.
+    It's more efficient to say "$G$ is a group"
+    than write the group axioms in full every time a group needs to be declared.
+
+- Notation
+
+  - A /mathematical notation/, like the Latin alphabet,
+    is a way of writing English (or whatever your language is).
+    When you read "math",
+    you are really reading the same language
+    that you speak everyday.
+  - When you encounter symbols in a sentence,
+    think about how they should read in English
+    to make the whole sentence grammatically correct.
+  - Mathematical notations also have slangs and inconsistencies, just like English.
+    We're human after all.
+  - An /equation/ $A=B$ means you can change
+    every $A$ with $B$, and every $B$ with $A$,
+    everywhere you find them, as long as the context is still the same.
+  - *Don't hate the notation.*
+    Used properly, it saves your time and others' time.
+  - *Note:* Please memorize the 48 symbols in the [[https://en.wikipedia.org/wiki/Greek_alphabet#Letters][Greek alphabet]]
+    (24 capital letters and 24 small letters).
+* Probability and statistics
+  :PROPERTIES:
+  :CUSTOM_ID: probability-and-statistics
+  :END:
+
+"Probstat" is "probability and statistics".
+
+- Basic probability modeling
+
+  - Model coins and dices, both fair and biased, and combination
+  - Multiple coin tosses
+  - Conditional probability
+  - Bayes rule
+
+    - Sensitivity and specificity
+    - False positive and false negative
+    - Testing the test
+
+  - Counting exhaustively
+
+    - Monty Hall problem
+    - [[https://en.wikipedia.org/wiki/Boy_or_girl_paradox][WP: Boy-or-girl paradox]] (need unambiguous problem statement)
+
+  - Basic combinatorics (counting combinations)
+  - Randomness
+
+- Basic statistics
+
+  - Collection? Dataset? Sample?
+  - Variable vs parameter
+  - Collect data
+  - Design a survey
+
+    - Avoid leading questions ([[https://en.wikipedia.org/wiki/Leading_question][WP]])
+    - Avoid loaded questions ([[https://en.wikipedia.org/wiki/Loaded_question][WP]])
+
+  - [[https://en.wikipedia.org/wiki/Statistical_data_type][WP: Statistical data type]]
+  - Calculate descriptive statistics
+
+- More rigor
+
+  - Measure theory
+  - Continuous probability
+
+- Where should these be? How should we organize this?
+
+  - Determining coin fairness
+  - Random variable
+
+    - Not a variable, and not random?
+
+  - Inferential statistics
+
+    - Infer something about the population from samples.
+    - How do we sample the population correctly?
+    - Case study: election "quick count" or "exit poll"
+
+  - Estimation
+
+    - Bias
+    - Point estimation
+    - Likelihood
+
+      - Maximum likelihood estimation?
+
+  - Fitting
+
+    - Consider replacing "regression" with "fitting".
+    - Line fitting with one independent variable
+
+  - Random process
+  - Random walk
+  - Stochastic integral
+  - Markov process
+  - How do we interpret very small probabilities?
+  - Expectation, expected value
+  - Distribution
+  - Normal distribution
+  - Central limit theorem
+  - Renewal theory
+  - Decision theory
+  - [[https://en.wikipedia.org/wiki/Optimal_stopping][WP: Optimal stopping]]
+
+    - [[https://en.wikipedia.org/wiki/Secretary_problem][WP: Secretary problem]]
+
+  - Betting
+  - Bookmaking
+
+** Meta-research
+   :PROPERTIES:
+   :CUSTOM_ID: meta-research
+   :END:
+
+- [[https://www.reddit.com/r/math/comments/6qbyw6/proability_research_areas/][/r/math: What are some of the most interesting probability research areas?]]
+
+** Education
+   :PROPERTIES:
+   :CUSTOM_ID: education
+   :END:
+
+- Probability or statistics first?
+
+  - [[https://stats.stackexchange.com/questions/219733/what-should-be-taught-first-probability-or-statistics][Stats SE 219733: What should be taught first: Probability or Statistics?]]
+  - [[https://www.quora.com/Should-I-study-probability-or-statistics-first-Why][Quora: Should I study probability or statistics first? Why?]]
+  - Probability, statistics, sample, and population
+
+    - Probabilistic modeling: assume population, infer sample
+    - Inferential statistics: gather sample, infer population
+
+  - http://www.cs.sunysb.edu/~skiena/jaialai/excerpts/node12.html
+
+    - Probability looks to the future. Statistics looks to the past.
+
+      - Just like finance and accounting.
+
+- Example syllabuses:
+
+  - Undergraduate-level
+
+    - [[https://ocw.mit.edu/courses/mathematics/18-05-introduction-to-probability-and-statistics-spring-2014/syllabus/][MIT 18.05 Introduction to Probability and Statistics, spring 2014]]
+    - [[https://ocw.mit.edu/courses/mathematics/18-440-probability-and-random-variables-spring-2014/syllabus/][MIT 18.440 Probability and Random Variables, spring 2014]]
+    - [[http://www.sap.ui.ac.id/main/sap/342474/2009/2010%20-%201][Universitas Indonesia ENG200801 2009-2010]]
+    - [[http://www.maths.manchester.ac.uk/study/undergraduate/courses/mathematics-bsc/course-unit-spec/?unitcode=MATH20701][UK Manchester undergraduate MATH20701]]
+
+  - Postgraduate-level
+
+    - [[https://www-old.fmi.uni-sofia.bg/sms/phdcourses/prob-stat-PhD-3.pdf][A PhD-level syllabus from 2011]]
+    - [[https://www.southampton.ac.uk/courses/modules/math6122.page][UK Southampton postgraduate MATH6122]]
+
+** Links
+   :PROPERTIES:
+   :CUSTOM_ID: links
+   :END:
+
+- [[https://en.wikipedia.org/wiki/Template:Stochastic_processes][WP template: Stochastic processes]]
+** Monty Hall problem
+   :PROPERTIES:
+   :CUSTOM_ID: monty-hall-problem
+   :END:
+
+There are three doors.
+Let the set of doors be ( D = { 1, 2, 3 } ).
+One door $p$ has the prize.
+The other two doors $q, r$ have nothing.
+
+The host knows which is which. The contestant doesn't.
+
+The host asks the contestant to pick a door.
+
+The contestant chooses a door $c$.
+
+The host opens another door $e$ (empty) that is neither $c$ (your choice) nor $p$ (the prize).
+Formally, ( e \in D - { c, p } ).
+Remember that sets don't care how many times an element occurs: ( { a,a } = { a } ).
+
+The host asks the contestant whether he wants to switch (to the door that is neither $c$ nor $e$).
+
+Should the contestant switch?
+
+Yes.
+
+A calculation is in [[https://en.wikipedia.org/wiki/Monty_Hall_problem][WP: Monty Hall problem]].
+** Randomness
+  :PROPERTIES:
+  :CUSTOM_ID: randomness
+  :END:
+
+"Random" means "we don't know why".
+
+We see randomness because we ignore details.
+
+Randomness is due to the details ignored by our models.
+
+Coin tosses are unpredictable,
+but the /statistics/ of coin tosses is predictable.
+
+*** Example of "random" in English
+   :PROPERTIES:
+   :CUSTOM_ID: example-of-random-in-english
+   :END:
+
+"The software crashes randomly." means "We don't know why it crashes."
+There /is/ a cause, but we're ignoring it.
+
+*** Unanswered questions
+   :PROPERTIES:
+   :CUSTOM_ID: unanswered-questions
+   :END:
+
+What is the difference between these words: random, haphazard, chaotic, unpredictable, uncertain, noisy?
+
+*** External links
+   :PROPERTIES:
+   :CUSTOM_ID: external-links
+   :END:
+
+- [[https://en.wiktionary.org/wiki/random][Wiktionary: random]]
+- [[https://en.wikipedia.org/wiki/Randomness][Wikipedia: Randomness]]
+* Relation
+  :PROPERTIES:
+  :CUSTOM_ID: relation
+  :END:
+
+The /arity/ of a relation is its number of parameters.
+For example, if $A$ has arity 2, then $A(x,y)$ is a /formula/.
+
+Relations of arity 0, 1, and 2 are also called /nullary/, /unary/, and /binary/, respectively.
+
+A /constant/ is a nullary relation.
+
+A /set/ is a unary relation.
+We can write either $A(x)$ or $x \in A$ to mean that $x$ is an /element/ of the set $A$.
+
+What is the difference between a relation and a predicate?
+
+A pedantic note:
+Theoretically, a formula is not a truth value,
+and it is the /interpretation/ that maps formulas to truth values.
+For example, if $A$ is a unary relation,
+then $A(x)$ is a formula, not the truth value,
+and therefore it does not make sense to say "$A(x)$ is true".
+Practically, the interpretation is implicit, and we say "$A(x)$ is true" to mean "the implied interpretation maps $A(x)$ to truth value 1".
+
+** Binary relations
+   :PROPERTIES:
+   :CUSTOM_ID: binary-relations
+   :END:
+
+These are isomorphic:
+
+- [[https://en.wikipedia.org/wiki/Binary_relation][binary relation]],
+- [[https://en.wikipedia.org/wiki/Transition_system][transition system]],
+- [[https://en.wikipedia.org/wiki/Abstract_rewriting_system][rewriting system]],
+- [[https://en.wikipedia.org/wiki/Directed_graph][directed graph]] (digraph).
+
+Every binary relation $A$ is also a /directed graph/
+where $(x,y)$ is an edge iff $A(x,y)$.
+We will mix terms.
+For example, a relation is /acyclic/ iff its graph is acyclic.
+
+Let $A$ be a binary relation.
+
+Iff $A(x,y)$, then $x$ is in the /domain/ of $A$.
+
+Iff $A(x,y)$, then $y$ is in the /range/ of $A$.
+
+$x$ /reaches/ $y$ ($y$ is /reachable/ from $x$)
+iff there is a path from $x$ to $y$.
+
+$x$ is /initial/ iff its in-degree is zero (no $y$ satisfying $A(y,x)$).
+
+$x$ is /terminal/ iff its out-degree is zero (no $y$ satisfying $A(x,y)$).
+
+The /composition/ of $A$ and $B$ is $A \circ B$
+where ( (A \circ B)(x,y) = \exists m ( B(x,m) \wedge A(m,y) ) ).
+Note the swap: first $B$ maps $x$ to $m$,
+and then $A$ maps $m$ to $y$.
+Function composition is special case of relation composition.
+
+The /$n$th self-composition/ of $A$ is ( A^n = A \circ A^{n-1} ).
+
+The /infinite self-composition/ of $A$ is ( A^\infty ),
+the smallest relation satisfying $A \circ A^\infty = A^\infty$.
+We also say that $A^\infty$ is the /least fixed point/ of $F$ where ( F(X) = A \circ X ).
+
+The /transitive closure/ of $A$ is the union of all self-compositions of $A$.
+Formally, ( tc(A) = \bigcup_{k=1}^{\infty A}k ).
+
+** External links
+   :PROPERTIES:
+   :CUSTOM_ID: external-links
+   :END:
+
+- [[https://proofwiki.org/wiki/Definition:Relation][ProofWiki definition of relation]]
+* Unary algebra
+  :PROPERTIES:
+  :CUSTOM_ID: unary-algebra
+  :END:
+
+A /mono-unary algebra/ ((A,f)) is a set (A) and a unary function (f : A \to A).
+
+There is always an injection from a unary algebra ((A, f))
+to the /magma/ ((A, F~f))
+where (F_{f}x~y = f~x).
+The binary operation (F~f) ignores its second argument.
+This magma happens to also be a noncommutative /semigroup/:
+if we let (g = F~f), then (g_{(g}x_{y)}z = g_{x}(g_{y}z)).
+Therefore the variety of unary algebras is isomorphic
+to a subvariety of magmas.
+
+There is also always an injection from a magma ((A, g))
+to the unary algebra ((A^2, G~g))
+where (G_{g}(x,y) = (g_{x}y, ~ y)).
+The unary operation (G~g) passes through the second component.
+
+If (A) is infinite,
+there is always a bijection between (A) and (A^2).
+
+If (A) and (B) have the same cardinality,
+then for each injection (m : A \to B) and function (f : A \to A),
+there is always a (g : B \to B) such that (m_{(f}x) = g_{(m}x)).
+More understandably,
+[
+f~x = y \iff g_{(m}x) = m~y
+]
+
+If (A) and (B) have the same cardinality,
+then for each function (f : A \to A),
+there is always an injection (m : A \to B)
+and a function (g : B \to B) such that (m_{(f}x) = g_{(m}x)).
+
+If (A) and (B) are isomorphic (have the same cardinality),
+then the variety of (A)-unary algebras and the variety of (B)-unary algebras are isomorphic.
+
+/The variety of (A)-unary algebras/
+is the set of all unary algebras whose underlying set is (A).
+
+*Lemma:* There is always an isomorphism between two varieties of unary algebras
+whose underlying sets have the same cardinality.
+
+*Corollary:* if (A) is infinite, then the variety of (A)-unary algebras
+and the variety of (A^2)-unary algebras are isomorphic.
+
+If (A) is infinite,
+there is always a bijection (m : A \to A^2)
+such that (m_{(f}x) = g_{(m}x)).
+
+If (A) is infinite,
+then there is always an injection from a unary algebra ((A^2,f))
+to the unary algebra ((A,g)).
+
+If (A) is infinite,
+then there is always a bijection between
+a unary algebra ((A,f)) and a unary algebra ((A^2,g)),
+for every (f) and (g).
+
+Lemma: If there is a bijection between (A) and (B),
+there is also a bijection between (2^A) and (2^B).
+(Axiom of choice?)
+
+http://math.stackexchange.com/questions/243590/bijection-from-mathbb-r-to-mathbb-rn
+
+Lemma: If there is a bijection between (A) and (B),
+there is also a bijection between (A \to A) and (B \to B).
+(Since ((A \to A) \subset 2^A)).
+
+Conclusion: there is an isomorphism between the set of ((A,f))s and the set of ((A^2,g))s.
+
+A homomorphism from ((A, f)) to ((B, g)) is (h : A \to B) such that
+(h_{(f}x) = g_{(h}x)).
+
+Let there be these structures:
+
+- The unary system ((A, f)) where (f : A \to A).
+- The fixpointed unar ((A, f, p)) where (f~p = p).
+- The magma ((A, g)) where (g : A \to A \to A).
+- The semigroup ((A, g)) where (g) is associative.
+- The semigroup ((A, g, a)) with left-absorbing element (a).
+- The unar ((A^2, h)) where (A^2 = A \times A).
+
+A fixpoint in the unar becomes a left-absorbing element in the magma.
+
+The semigroup is non-commutative: (F_{f}x~y \neq F_{f}y~x).
+
+Therefore there is a homomorphism from
+the algebra of unary systems to the algebra of non-commutative semigroups.
+
+A left-absorbing element in the binar becomes
+the left component of a fixpoint in the unar.
+[
+(g_{p}y, ~y) = (p,y) = h~(p,y)
+]
+
+Another way to embed:
+[
+\begin{align*}
+(g~x~y, ~ g~y~x) = h~(x,y)
+\\ (g~p~y, ~ g~y~p) = (p, ~ f~y) = h~(p,y)
+\\ (g~x~p, ~ g~p~x) = (f~x, ~ p) = h~(x,p)
+\end{align*}
+]
+
+Flip, like negation:
+[
+m~(x,y) = m~(y,x)
+]
+
+Lemma: If (c) is a cardinal number, then (c! = 2^c).
+[[https://www.wolframalpha.com/input/?i=aleph+0+factorial][WolframAlpha for the factorial of aleph-0]]
+
+** A unar and its square are isomorphic?
+   :PROPERTIES:
+   :CUSTOM_ID: a-unar-and-its-square-are-isomorphic
+   :END:
+
+[
+h_{(g}x~y) = f_{(h}x)?
+]
+
+** Graph
+   :PROPERTIES:
+   :CUSTOM_ID: graph
+   :END:
+
+There is always an injection from a unary algebra ((A, f))
+to the /directed graph/ ((A,E)) where (f~x = y) iff (E_{x}y).
+
+There is always an injection from a directed graph ((V, E))
+to the unary algebra ((2^V, F)) where (F~X = { y _{|} x \in X, ~ E_{x}y }).
+
+** Every magma can be commutative
+   :PROPERTIES:
+   :CUSTOM_ID: every-magma-can-be-commutative
+   :END:
+
+Every magma ((A,f)) can be embedded into an (n)-anticommutative magma ((A^2,g,n))
+where (g_{a}b = n_{(g}b~a)).
+
+[
+\begin{align*}
+n~(x,y) = (y,x)
+\\ g~(u,v)~(x,y) = (f~u~v, f~x~y)
+\end{align*}
+]
+
+** Conclusion
+   :PROPERTIES:
+   :CUSTOM_ID: conclusion
+   :END:
+
+There is an isomorphism between unary systems and magmas.
