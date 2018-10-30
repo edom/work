@@ -1,0 +1,1216 @@
+#+TITLE: Making intelligence
+#+DATE: 2017-06-22 03:57:00 +0700
+#+PERMALINK: /intelligence.html
+#+MATHJAX: true
+#+OPTIONS: toc:nil
+#+TOC: headlines 1
+#+TOC: headlines 3
+* intelligence.md
+- Abbreviations:
+
+  - AI: Artificial Intelligence
+  - ML: Machine Learning
+  - COLT: Computational Learning Theory
+
+- What are some AI survey papers, review articles, and expository works?
+
+  - Google query: most recent mathematical ai book
+  - http://eliassi.org/COLTSurveyArticle.pdf
+  - [[https://en.wikipedia.org/wiki/Computational_learning_theory#Surveys][WP: COLT surveys]]
+  - [[http://www.cs.ox.ac.uk/people/varun.kanade/teaching/CLT-HT2018/lectures/][COLT lecture 2018]]
+  - Book: "An Introduction to Computational Learning Theory" by Kearns and Vazirani
+  - https://mitpress.mit.edu/books/introduction-computational-learning-theory
+
+** Plan
+   :PROPERTIES:
+   :CUSTOM_ID: plan
+   :END:
+
+- Read about universal intelligence
+
+  - Pamela McCorduck's "Machines who think" for some history
+
+    - [[https://en.wikipedia.org/wiki/Timeline_of_artificial_intelligence][WP: Timeline of artificial intelligence]]
+    - [[https://en.wikipedia.org/wiki/Progress_in_artificial_intelligence][WP: Progress in artificial intelligence]]
+
+  - [Hutter2005Book]
+  - [[http://www.hutter1.net/ai/uaibook.htm][hutter1.net...uaibook.htm]]
+
+    - He formulated the "degree of intelligence" in 2005
+    - (edited) "AIXI [...] learns by eliminating Turing machines [...] once they become inconsistent with the progressing history."
+
+  - [[http://www.hutter1.net/ai/suaibook.pdf][Presentation, 393 slides]]
+  - [[http://users.cecs.anu.edu.au/~ssanner/MLSS2010/Hutter1.pdf][Slides]], maybe a draft of the above.
+  - Shane Legg's PhD thesis "Machine super intelligence" [Legg2008]
+  - [[http://www.vetta.org/documents/universal_intelligence_abstract_ai50.pdf][Legg and Hutter: A formal definition of intelligence for artificial systems]]
+  - 2005 Negnevitsky AI book \cite{negnevitsky2005artificial}?
+
+** Questions
+   :PROPERTIES:
+   :CUSTOM_ID: questions
+   :END:
+
+- COLT
+
+  - Should we read this?
+
+    - [[https://arxiv.org/abs/1405.1513][Ibrahim Alabdulmohsin: A Mathematical Theory of Learning]]
+    - 1999: [[http://www.cis.syr.edu/people/royer/stl2e/][Sanjay Jain et al.: Systems that learn]]
+    - https://www.quora.com/What-are-the-best-math-books-for-machine-learning
+    - https://machinelearningwithvick.quora.com/Learning-about-machine-learning
+    - http://web.archive.org/web/20101102210231/http://measuringmeasures.com/blog/2010/1/15/learning-about-statistical-learning.html
+    - https://www.quora.com/Which-are-the-best-books-to-get-the-Math-background-for-Machine-Learning
+    - https://www.quora.com/How-do-I-learn-mathematics-for-machine-learning?share=1
+
+  - http://emis.ams.org/journals/TAC/reprints/articles/22/tr22.pdf
+
+    - https://www.quora.com/What-are-some-survey-papers-on-artificial-intelligence-and-deep-learning
+    - http://people.idsia.ch/~juergen/deep-learning-conspiracy.html
+    - [[https://arxiv.org/abs/1404.7828][Jürgen Schmidhuber: "Deep Learning in Neural Networks: An Overview"]]
+    - http://www.ijircce.com/upload/2017/june/107_A%20Survey.pdf
+
+Should we read these?
+
+2017, [[https://www.cambridge.org/core/journals/behavioral-and-brain-sciences/article/building-machines-that-learn-and-think-for-themselves/E28DBFEC380D4189FB7754B50066A96F][Building machines that learn and think for themselves]]
+
+** Note to self
+   :PROPERTIES:
+   :CUSTOM_ID: note-to-self
+   :END:
+
+- Which AI architecture has won lots of AI contests lately?
+
+  - Is it LSTM RNN?
+  - What is LSTM RNN?
+
+    - "long short-term memory recurrent neural network"
+    - http://colah.github.io/posts/2015-08-Understanding-LSTMs/
+    - "The expression /long short-term/ refers to the fact that LSTM is a model
+      for the /short-term memory/ which can last for a /long/ period of time." ([[https://en.wikipedia.org/wiki/Long_short-term_memory][Wikipedia]])
+
+- How do we learn amid lies, deception, disinformation, misinformation?
+
+  - Related to adversarial learning? https://en.wikipedia.org/wiki/Adversarial_machine_learning ?
+
+- What are some tools that I can use to make my computer learn?
+
+  - Google TensorFlow
+  - Does OpenAI have tools?
+
+- TODO s/adapt/habituate
+- Let $f(t,x)$ be the system's response intensity for stimulus intensity $x$ at time $t$. We say the system is /habituating/ between the time $t_1$ and $t_2$ iff $f(t_1,x) > f(t_2,x)$ for all stimulus intensity $x$.
+- "The habituation process is a form of adaptive behavior (or neuroplasticity) that is classified as non-associative learning." https://en.wikipedia.org/wiki/Habituation
+- How many AI approaches are there?
+
+  - [[https://en.wikipedia.org/wiki/Portal:Artificial_intelligence][WP AI Portal]] lists 4 approaches
+  - Pedro Domingos lists 5 "tribes"
+
+- (merge AI researchers)
+
+  - [[https://en.wikipedia.org/wiki/Portal:Artificial_intelligence][WP AI Portal]] lists several leading AI researchers
+
+- 2000, György Turán, [[https://link.springer.com/article/10.1023%2FA%3A1018948021083][Remarks on COLT]]
+- 2016, Krendzelak, Jakab, [[https://ieeexplore.ieee.org/document/7802092/][Fundamental principals of Computational Learning Theory]]
+
+  - Reading queue:
+
+    - D. Angluin, C. Smith, "Inductive inference: theory and methods", A.C.M. Computing Surveys, vol. 15, pp. 237-269, 1983.
+    - M. Anthony, N. Biggs, "Computational Learning Theory" in , Cambridge university press, 1992.
+    - M.J. Kearns, "The computational Complexity of Machine Learning" in , The MIT Press, May 1990.
+    - L.G. Valiant, "A theory of the learnable", Communications of the A.C.M., vol. 27, no. 11, pp. 1134-1142, 1984.
+    - L. Pitt, L.G. Valiant, "Computational limitations on learning from examples", Journal of the A.C.M., vol. 35, no. 4, pp. 965-984, 1988.
+
+- helpful slides
+  https://cs.uwaterloo.ca/~klarson/teaching/W15-486/lectures/22Colt.pdf
+- Bertoni et
+  al. http://elearning.unimib.it/pluginfile.php/283303/mod_resource/content/1/Apprendimento_Automatico/Computational_Learning.pdf
+- https://stats.stackexchange.com/questions/142906/what-does-pac-learning-theory-mean
+- https://pdfs.semanticscholar.org/presentation/fbbd/65646c8a81094864d4e0b0dfb9c1f22181af.pdf
+- http://web.cs.iastate.edu/~honavar/colt-tutorial.pdf
+- https://en.wikipedia.org/wiki/Probably_approximately_correct_learning#cite_note-valiant-1
+  A Theory of the Learnable
+  Leslie G. Valiant
+  1984
+  http://web.mit.edu/6.435/www/Valiant84.pdf
+- kearns vazirani introduction
+  ftp://ftp.cis.upenn.edu/pub/cse140/public_html/2002/kvpages.pdf
+- http://www.cis.upenn.edu/~mkearns/
+  the computational complexity of machine learning
+  http://www.cis.upenn.edu/~mkearns/papers/thesis.pdf
+  https://www.worldscientific.com/worldscibooks/10.1142/10175
+- 2015
+  http://www.cs.tufts.edu/~roni/Teaching/CLT/
+- probably link to this
+  http://bactra.org/notebooks/learning-theory.html
+- semantics-first
+  https://pdfs.semanticscholar.org/83e7/b615c165209af54dd0fe05c850bb08232625.pdf
+- discrete approximation theory
+  see the references of this paper
+  https://www.worldscientific.com/doi/suppl/10.1142/10175/suppl_file/10175_chap01.pdf
+- https://profs.info.uaic.ro/~ciortuz/SLIDES/ml7.pdf
+
+Optimal learning for humans
+https://www.kqed.org/mindshift/37289
+
+Curate from this
+https://thesecondprinciple.com/optimal-learning/
+
+Boston dynamics dog robots
+
+Tesla car autopilots
+
+Google and Uber self-driving cars
+
+https://www.quora.com/Will-we-ever-have-a-rigorous-and-robust-definition-for-intelligence
+
+rigorous definition of intelligence
+The new ai is general and rigorous, idsia
+Toward a theory of intelligence,RAND
+
+A system responds to a stimulus.
+Define: a system is /adapting/ to a stimulus if the same stimulus level elicits decreasing response level from the system.
+The stimulus level has to be increased to maintain the response level.
+
+Is learning = adapting?
+Is intelligence = adaptiveness?
+
+** Others
+   :PROPERTIES:
+   :CUSTOM_ID: others
+   :END:
+
+- What are some expository works in AI?
+
+  - [[https://www.sciencedirect.com/science/article/pii/S1574013717300606][The evolution of sentiment analysis---A review of research topics, venues, and top cited papers]]
+
+- What are the trends in AI?
+
+  - [[https://twitter.com/michael_nielsen/status/983502409325395969][Michael Nielsen's tweet]]:
+    "I meet lots of people who tell me fatalistically (& often despondently) that it's near impossible to do important work on neural nets today, unless you have huge compute and huge data sets."
+
+    - [[https://arxiv.org/abs/1712.00409][Deep Learning Scaling is Predictable, Empirically]]
+
+- Should we read this?
+
+  - [[http://www.cs.cmu.edu/~16831-f12/notes/F11/16831_lecture15_shorvath.pdf][Boosting: Gradient descent in function space]]
+  - [[http://alessio.guglielmi.name/res/cos/][Alessio Guglielmi's deep inference]]
+  - [[https://arxiv.org/abs/1412.1044][Problem theory, Ramón Casares]]
+
+- EcoBot is a robot that can feed itself.
+
+  - [[https://en.wikipedia.org/wiki/EcoBot][Wikipedia: EcoBot]]:
+    "a class of energetically autonomous robots that can remain self-sustainable
+    by collecting their energy from material, mostly waste matter, in the environment"
+
+- [[https://www.sciencedaily.com/releases/2016/04/160427081533.htm][A single-celled organism capable of learning]]: protists may learn by habituation
+- Selected threads from /r/artificial:
+
+  - [[https://www.reddit.com/r/artificial/comments/8begcv/what_are_some_of_the_best_books_on_artificial/][What are some of the best books on AI/ML?]]
+  - [[https://www.reddit.com/r/artificial/comments/8bzrmd/math_phd_want_to_learn_more_about_ai_what_to_read/][Math PhD. Want to learn more about AI. What to read?]]
+
+- What is so bad about human extinction?
+
+  - If you are nihilist, then there is nothing inherently bad about human extinction.
+
+- What is the question?
+- How do we make an AI?
+- How do we create a seed AI?
+- History questions:
+
+  - Why was Raymond J. Solomonoff \cite{SolAlpProb2011, GacsVitanyiSolomonoff} interested in predicting sequences of bits?
+    What was he interested in?
+    What was he trying to do?
+
+- Mathematical spaces
+
+  - What is a metric?
+  - What is a norm?
+  - What is a measure?
+  - https://en.wikipedia.org/wiki/Space_(mathematics)#Three_taxonomic_ranks
+  - https://en.wikipedia.org/wiki/Topological_space#Classification_of_topological_spaces
+  - https://en.wikipedia.org/wiki/Functional_analysis
+
+    - What is a Hilbert space?
+    - What is a Banach space?
+    - What is a Sobolev space?
+    - What is a measure?
+
+      - What is a Lebesgue measure?
+
+        - What is an Lp space?
+
+          - [[https://en.wikipedia.org/wiki/Lp_space#Lp_spaces][Wikipedia: Lp space]]
+          - How is it pronounced?
+
+            - "Lebesgue space with $p$-norm"
+
+        - What is a small lp space?
+
+** Non-prioritized questions
+   :PROPERTIES:
+   :CUSTOM_ID: non-prioritized-questions
+   :END:
+
+- What is AI? Why should I care?
+
+  - AI is the way for us to become gods.
+
+- What is the relationship between AI and ML?
+
+  - ML is a subset of AI.
+
+    - Then what is the rest of AI that is not ML?
+
+      - Ethics? Philosophy? Rule systems?
+      - [[https://ai.stackexchange.com/questions/35/what-is-the-difference-between-artificial-intelligence-and-machine-learning][AI SE 35: What is the difference between artificial intelligence and machine learning?]]
+      - What is intelligence without learning?
+        Non-adaptive intelligence? Static intelligence?
+
+- What is a cyborg?
+- If human goal function is survival, then why exists suicide?
+
+  - Evolutionary noise?
+
+https://en.wikipedia.org/wiki/Universal_Darwinism
+
+** How might we build a seed AI?
+   :PROPERTIES:
+   :CUSTOM_ID: how-might-we-build-a-seed-ai
+   :END:
+
+- Use off-the-shelf computers.
+- Use supercomputers.
+- Use clusters.
+- Use computers over the Internet.
+- Raise an AI like raising a child.
+- Evolve a system. Create an environment with selection pressure. Run it long enough.
+
+  - [[https://en.wikipedia.org/wiki/Evolutionary_robotics][WP: Evolutionary robotics]]
+  - [[https://en.wikipedia.org/wiki/Evolutionary_computation][WP: Evolutionary computation]]
+
+- What is TensorFlow? Keras? CNTK? Theano?
+
+  - The building blocks of AI? Standardized AI components?
+
+** Guesses
+   :PROPERTIES:
+   :CUSTOM_ID: guesses
+   :END:
+
+In the future, there are only two kinds of jobs:
+telling machines to do things,
+and being told to do things by machines.
+
+** Undigested information
+   :PROPERTIES:
+   :CUSTOM_ID: undigested-information
+   :END:
+
+- [[https://kevinbinz.com/2017/08/13/ml-five-tribes/][kevinbinz.com: Five Tribes of Machine Learning]],
+  part of [[https://kevinbinz.com/2017/05/09/sequence-machine-learning/][machine learning sequence]],
+  some contents from Pedro Domingos's book "The master algorithm"
+- [[http://nlp.fast.ai/classification/2018/05/15/introducting-ulmfit.html][Introducing state of the art text classification with universal language models]]
+- Summary of Pedro Domingos's book "The master algorithm"
+
+  - Sparse autoencoders (p. 116).
+  - "A nugget of knowledge so incontestable, so fundamental, that we can build all induction on top of it" (p. 64) in Chapter 9.
+  - Induction is the inverse of deduction,
+    as subtraction is the inverse of addition. (Is this a quote from the book?)
+  - EM (expectation maximization) algorithm (p. 209).
+  - Metalearning (p. 237).
+  - A classifier that classifies by combining the output of subclassifiers.
+  - [[http://homes.cs.washington.edu/~pedrod/papers/mlj05.pdf][Markov logic network]] (p. 246) named [[file:Alchemy][http://alchemy.cs.washington.edu/]] (p. 250)
+
+- Harvard University the graduate school of arts and sciences:
+  [[http://sitn.hms.harvard.edu/flash/2017/history-artificial-intelligence/][Rockwell Anyoha: History of AI]]
+- [[http://jacques.pitrat.pagesperso-orange.fr/][Jacques Pitrat]] and his CAIA,
+  bootstrapping AI with AI.
+- [[http://www.hutter1.net/ai/uaibook.htm][Marcus Hutter book: Universal Artificial Intelligence: Sequential Decisions based on Algorithmic Probability]]
+  and the [[http://www.hutter1.net/ai/suaibook.pdf][slides]].
+- [[http://math.bu.edu/people/mkon/V5Fin.pdf][Mark A. Kon, Louise A. Raphael, Daniel A. Williams:
+  Extending Girosi's approximation estimates for functions in Sobolev spaces via statistical learning theory]]
+
+  - "Girosi [8] established an interesting connection between statistical learning theory
+    (SLT) and approximation theory, showing that SLT methods can be used to
+    prove results of a purely approximation theoretic nature."
+
+- Speech synthesizer using hidden Markov model?
+  Someone must have done it. Find the paper.
+- ISIR (International Society for Intelligence Research)
+  human intelligence research [[http://www.isironline.org/resources/teaching-pages/][teaching pages]].
+- https://en.wikipedia.org/wiki/Artificial_life
+- What is the simplest life form? (2008)
+  https://www.quora.com/What-is-the-simplest-life-form
+- https://stats.stackexchange.com/questions/142906/what-does-pac-learning-theory-mean
+- https://brenocon.com/blog/2008/12/statistics-vs-machine-learning-fight/
+
+  - YC thread for that https://news.ycombinator.com/item?id=4927168
+
+- [[https://www.quora.com/What-are-the-most-important-foundational-papers-in-artificial-intelligence-machine-learning][Quora: What are the most important, foundational papers in artificial intelligence/machine learning?]]
+- JAIR (Journal of Artificial Intelligence Research):
+  [[https://www.jair.org/index.php/jair/navigationMenu/view/IJCAIJAIR][IJCAI-JAIR awards]]
+- Schmidhuber, [[http://people.idsia.ch/~juergen/fastestuniverse.pdf][The Fastest Way of Computing All Universes]]
+- [[http://raysolomonoff.com/dartmouth/][Dartmouth AI archives]]
+
+  - [[http://raysolomonoff.com/publications/indinf56.pdf][Solomonoff, "An inductive inference machine"]]
+
+- Shane Legg, Joel Veness: algorithmic intelligence quotient
+
+  - https://github.com/mathemajician/AIQ
+  - An Approximation of the Universal Intelligence Measure
+    by Shane Legg and Joel Veness, 2011
+
+- [[https://courses.cs.washington.edu/courses/csep590/06au/projects/history-ai.pdf][History of AI]], University of Washington, History of Computing, CSEP 590A
+- [[https://en.wikipedia.org/wiki/Timeline_of_artificial_intelligence][WP: Timeline of AI]]
+- https://www.quantamagazine.org/why-self-taught-artificial-intelligence-has-trouble-with-the-real-world-20180221/
+- http://news.mit.edu/2010/ai-unification
+- http://airesearch.com/
+- https://theconversation.com/understanding-the-four-types-of-ai-from-reactive-robots-to-self-aware-beings-67616
+- https://artificialintelligence.id/
+- https://www.asianscientist.com/2017/09/academia/indonesia-ai-nvidia-binus-kinetica/
+- [[https://arxiv.org/abs/1206.5533][Practical recommendations for gradient-based training of deep architectures]]
+- [[https://arxiv.org/abs/1604.06737][Entity Embeddings of Categorical Variables]]
+- Google Colab
+- https://qz.com/1172431/artificial-intelligence-ai-should-be-raised-like-children-not-computers/
+- RNN, LSTM, GRU
+
+  - RNN is recurrent neural network.
+  - LSTM is a kind of RNN.
+  - GRU is a kind of RNN.
+  - https://jhui.github.io/2017/03/15/RNN-LSTM-GRU/
+
+- http://web.mit.edu/tslvr/www/lessons_two_years.html
+- https://gallery.mailchimp.com/dc3a7ef4d750c0abfc19202a3/files/93e40657-1adb-4891-94ad-c65dda68061f/Ng_MLY01_02.pdf
+- https://www.reddit.com/r/MachineLearning/comments/73n9pm/d_confession_as_an_ai_researcher_seeking_advice/#bottom-comments
+- [[http://www.inf.ed.ac.uk/teaching/courses/mlpr/2017/notes/w6b_netflix_prize.html][netflix prize, part of MLPR class notes]]
+- Scott M. Lundberg, Su-In Lee: A Unified Approach to Interpreting Model Predictions
+
+  - http://papers.nips.cc/paper/7062-a-unified-approach-to-interpreting-model-predictions.pdf
+  - https://github.com/slundberg/shap
+
+- [[https://www.datascience.com/blog/introduction-to-bayesian-inference-learn-data-science-tutorials][datascience.com: Introduction to Bayesian Inference]]
+- [[http://www.fc.uaem.mx/~bruno/material/brooks_87_representation.pdf][1987, Intelligence without representation, Rodney A. Brooks]]
+- [[http://colah.github.io/posts/2015-08-Backprop/][colah.github.io: Backprop]]
+- google search "ai theory research"
+- [[http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.2.4835][2002, PhotoTOC: Automatic Clustering for Browsing Personal Photographs, by John C. Platt, Mary Czerwinski, Brent A. Field]]
+- philosophy of learning
+
+  - [[http://learning.media.mit.edu/content/publications/EA.Piaget%20_%20Papert.pdf][Piaget's constructivism vs Papert's constructionism]], Edith Ackermann
+
+- [[https://arxiv.org/abs/1508.01084][2015, Deep Convolutional Networks are Hierarchical Kernel Machines]]
+- [[https://www.youtube.com/watch?v=F5Z52jl4yHQ][Michio Kaku: Who is right about A.I.: Mark Zuckerberg or Elon Musk?]]
+- [[https://stats.stackexchange.com/questions/104385/assigning-meaningful-cluster-name-automatically][Stats SE 104385: text processing: assigning meaningful cluster name automatically]]
+- The mathematics of deep learning (a website)
+- Can AI be used to upscale old audio/video recordings? Fix deteriorated pictures, films, documents? Color old pictures, photos, films?
+  "Modernize" past artifacts? Digital restoration of archives?
+- brain-computer interface
+
+  - pop science
+
+    - [[https://www.youtube.com/watch?v=P29EXskk9oU][How Brain Waves Can Control Physical Objects]]
+
+- machine learning
+
+  - confusion matrix
+  - algebra of words
+
+    - https://medium.com/@erushton214/a-simple-spell-checker-built-from-word-vectors-9f28452b6f26
+
+  - https://www.datasciencecentral.com/profiles/blogs/crisp-dm-a-standard-methodology-to-ensure-a-good-outcome
+  - [[http://www.inference.vc/untitled/][ML beyond Curve Fitting: An Intro to Causal Inference and do-Calculus]]
+
+- deepmind wavenet
+- [[https://openreview.net/pdf?id=ByldLrqlx][deepcoder: learning to write programs]]
+- Ramblings, opinions, guesses, hypotheses, conjectures, speculations
+
+  - AI is approximation (or constrained optimization?) in Sobolev spaces (or ( L^p(\Real) ) spaces?)?
+  - Intelligent agents are only possible if the world they live in is structured.
+    If the laws of physics randomly change over time,
+    then intelligent agents are unlikely.
+  - We should merge machine learning, probability, and statistics?
+
+    - [[http://en.wikipedia.org/wiki/Recursive_self_improvement][WP:Recursive self-improvement]]
+
+  - World = agent + environment.
+    Environment is everything that the agent does not control directly.
+    The body of an agent is part of the environment, not of the agent.
+
+- [[http://dl.acm.org/citation.cfm?id=2567715][Dimension independent similarity computation (DISCO)]]
+- [[http://www.jair.org/][Journal of artificial intelligence research]] (open access)
+- [[https://arxiv.org/abs/1802.08195][Adversarial Examples that Fool both Human and Computer Vision]],
+  from [[https://www.youtube.com/watch?v=AbxPbfODGcs][two minute papers 241]].
+- [[https://www.semanticscholar.org/paper/Machine-Theory-of-Mind-Rabinowitz-Perbet/4a48d7528bf1f81f48be8a644ffb1bcc08f1b2c5][Machine theory of mind]]
+- Ilias Diakonikolas, Daniel Kane and Alistair Stewart. Optimal Learning via the Fourier Transform for Sums of Independent Integer Random Variables
+- https://en.m.wikipedia.org/wiki/List_of_important_publications_in_computer_science#Machine_learning
+- [[https://arxiv.org/abs/1704.07441][Detecting English Writing Styles For Non Native Speakers]]
+- "Hicklin envisaged that learning resulted from a dynamic equilibrium between information acquisition and loss."
+  ([[https://onlinelibrary.wiley.com/doi/pdf/10.1002/tea.3660210910][Mathematical modeling of learning, Peter F. W. Preece]], 1984)
+- AI research tries to make a system that can optimize a wide variety of goal functions?
+- [[https://cs.nyu.edu/~mohri/mlbook/][Mehryar Mohri, Afshin Rostamizadeh, and Ameet Talwalkar; book; "Foundations of machine learning"]]
+- http://bigthink.com/videos/the-top-3-supplements-for-surviving-the-singularity
+- https://google.github.io/CausalImpact/CausalImpact.html
+- intelligence testing
+
+  - [[https://www.youtube.com/watch?v=8YWjSQHfV5U][YT:Jordan Peterson - Example IQ questions and what Career/job fits your IQ]]
+
+    - problem: no job for people with IQ below 87?
+    - [[https://www.reddit.com/r/JordanPeterson/comments/84qmsj/source_of_83_iq_minimum_for_the_us_military/][R:source for soldier minimum IQ requirement of 85]]
+    - [[https://en.wikipedia.org/wiki/Fluid_and_crystallized_intelligence][WP:Fluid and crystallized intelligence]]
+    - [[https://en.wikipedia.org/wiki/Raven%27s_Progressive_Matrices][WP:Raven's progressive matrices]]
+      is a language-neutral visual test for fluid intelligence?
+
+- [[https://www.youtube.com/watch?v=GdTBqBnqhaQ][YT:4 Experiments Where the AI Outsmarted Its Creators | Two Minute Papers #242]]
+- [[https://arxiv.org/abs/1509.06569][Tensorizing Neural Networks]]
+- [[https://arxiv.org/abs/1502.02367][Gated Feedback Recurrent Neural Networks]]
+- no information http://syntience.com/
+- [[https://www.youtube.com/watch?v=b_6-iVz1R0o][The pattern behind self-deception | Michael Shermer]]:
+  patternicity, agenticity, pattern over-recognition, false positive, false negative
+
+  - "false positive" is a much better name than "type 1 error"
+
+- expected 2018, draft book, "Model-based machine learning", [[http://www.mbmlbook.com/][html]]
+- vision (making machines see)
+
+  - Jim Bednar, [[http://homepages.inf.ed.ac.uk/jbednar/demos.html][Orientation Perception Demos]]
+
+- https://en.wikipedia.org/wiki/Bayesian_approaches_to_brain_function
+- [[https://www.youtube.com/watch?v=MvFABFWPBrw][DeepMind Has A Superhuman Level Quake 3 AI Team - YouTube]]
+
+  - Moby Motion's comment: "Really exciting because of the sparse internal rewards and long term planning. A step towards AI agents that are useful in real life."
+
+- 2018 AI is like autistic savants.
+  They perform one task exceptionally well, but they are bad at everything else.
+
+  - 2018, [[https://www.youtube.com/watch?v=eSaShQbUJTQ][DeepMind's AI Takes An IQ Test - YouTube]]
+
+- AI
+
+  - 2007, article, "Self-taught Learning: Transfer Learning from Unlabeled Data", [[https://cs.stanford.edu/people/ang/papers/icml07-selftaughtlearning.pdf][pdf]]
+  - https://en.wikipedia.org/wiki/Category:Open-source_artificial_intelligence
+  - https://en.wikipedia.org/wiki/Commonsense_knowledge_(artificial_intelligence)
+  - 2010, article, [[https://news.mit.edu/2010/ai-unification][A grand unified theory of AI - MIT News]]
+  - 2016, article, [[https://ai100.stanford.edu/2016-report/section-i-what-artificial-intelligence/ai-research-trends][AI Research Trends - One Hundred Year Study on Artificial Intelligence (AI100)]]
+  - sequence learning?
+
+    - https://devblogs.nvidia.com/deep-learning-nutshell-sequence-learning/
+    - https://en.wikipedia.org/wiki/Sequence_learning
+
+  - AI perception of time?
+
+- https://www.quora.com/Does-the-human-brain-have-an-internal-language
+
+  - mereological fallacy, confusing the part and the whole
+
+- https://www.quora.com/Is-the-human-brain-analog-or-digital
+  https://en.wikipedia.org/wiki/Mereological_essentialism
+- machine learning
+
+  - [[https://github.com/Avik-Jain/100-Days-Of-ML-Code][Avik-Jain/100-Days-Of-ML-Code: 100 Days of ML Coding]]
+
+- Justifying consciousness using evolution?
+
+  - [[https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4122207/][The biological function of consciousness]]
+  - [[https://www.quora.com/How-does-sentience-benefit-survival-and-why-is-it-developed][How does sentience benefit survival and why is it developed? - Quora]]
+
+- https://www.quora.com/How-do-I-publish-artificial-intelligence-research-if-I-am-not-currently-in-academia-or-an-industry-research-setting
+- [[https://www.quora.com/How-does-life-fight-against-entropy][How does life fight against entropy? - Quora]]
+- Life and entropy
+
+  - [[https://www.quora.com/How-does-life-fight-against-entropy][How does life fight against entropy? - Quora]]
+  - [[https://en.wikipedia.org/wiki/Entropy_and_life][WP:Entropy and life]]
+
+- Making machine understand human languages
+
+  - [[https://blogs.microsoft.com/ai/microsoft-creates-ai-can-read-document-answer-questions-well-person/][Microsoft creates AI that can read a document and answer questions about it as well as a person - The AI Blog]]
+
+- [[https://lilianweng.github.io/lil-log/2018/02/19/a-long-peek-into-reinforcement-learning.html][A (Long) Peek into Reinforcement Learning]]
+- Competitions
+
+  - Kaggle: get paid to solve machine learning problems.
+
+- HLearn: a machine learning library for Haskell \cite{izbicki2013hlearn}
+- [[https://dzone.com/articles/deep-dive-into-machine-learning][Deep Dive Into Machine Learning - DZone AI]]
+- https://towardsdatascience.com/intuitively-understanding-variational-autoencoders-1bfe67eb5daf
+- [[https://github.com/keras-team/keras][keras-team/keras: Deep Learning for humans]]
+- [[http://cs230.stanford.edu/proj-spring-2018.html][CS230: Deep Learning - Projects]]
+- http://jonbho.net/2014/09/25/defining-intelligence/
+- [[https://github.com/HuwCampbell/grenade][HuwCampbell/grenade: Deep Learning in Haskell]]
+- [[http://www.randomhacks.net/2007/03/03/smart-classification-with-haskell/][Smart classification using Bayesian monads in Haskell - Random Hacks]]
+* intmeta.md
+This page is about AI research, not about AI.
+
+** Questions
+   :PROPERTIES:
+   :CUSTOM_ID: questions
+   :END:
+
+- What is the best place to do AI research?
+
+** How can I become an AI researcher?
+   :PROPERTIES:
+   :CUSTOM_ID: how-can-i-become-an-ai-researcher
+   :END:
+
+- Where are new results announced?
+
+  - [[https://en.m.wikipedia.org/wiki/Portal:Artificial_intelligence][Wikipedia AI Portal]]
+  - Reddit [[https://www.reddit.com/r/artificial/][/r/artificial]]
+
+- Where is more information?
+
+  - [[https://en.wikipedia.org/wiki/Artificial_intelligence][Wikipedia: Artificial intelligence]]
+
+- Who are the researchers?
+
+  - See also [[https://www.quora.com/Who-is-leading-in-AI-research-among-big-players-like-IBM-Google-Facebook-Apple-and-Microsoft][Quora: Who is leading in AI research among big players like
+    IBM, Google, Facebook, Apple, and Microsoft?]]
+
+    - Google Brain, OpenAI, FAIR (Facebook AI Research), Microsoft Research, IBM Research
+
+  - Geoffrey Hinton,
+    [[http://www.cs.toronto.edu/~hinton/][UToronto page]],
+    [[https://www.reddit.com/r/MachineLearning/comments/2lmo0l/ama_geoffrey_hinton/][Reddit AMA]],
+    [[https://www.semanticscholar.org/author/Geoffrey-E.-Hinton/1695689][Semantic Scholar influence graph]]
+
+    - He is trying to find out how the brain works.
+    - The idea: If a learning algorithm works on machines, then it might have something to do with how brains work.
+    - More interested in physical explanation of how the brain works.
+      Physics first, math second, although his math is OK.
+
+  - Yann LeCun
+  - Jürgen Schmidhuber
+  - Pedro Domingos
+  - Demis Hassabis
+
+    - What is his focus?
+
+  - Pamela McCorduck, AI historian
+
+    - 2004 anniversary edition of her 1979 book [[http://www.pamelamc.com/html/machines_who_think.html]["Machines who think"]]
+
+  - Who else? There are lots of people.
+
+** How are others' works progressing?
+   :PROPERTIES:
+   :CUSTOM_ID: how-are-others-works-progressing
+   :END:
+
+- How is [[https://homes.cs.washington.edu/~pedrod/][Pedro Domingos]]'s progress of finding the master algorithm unifying the five tribes?
+
+  - Markov logic network unifies probabilists and logicians.
+
+    - How about the other three tribes?
+
+  - Hume's question: How do we justify generalization? Why does generalization work?
+
+    - Does Wolpert answer that in "no free lunch theorem"?
+
+      - [[https://en.wikipedia.org/wiki/No_free_lunch_theorem][Wikipedia: No free lunch theorem]]
+
+    - I think induction works because our Universe
+      happens to have a structure that is amenable to induction.
+
+      - If induction doesn't work, and evolution is true,
+        then we would have gone extinct long ago, wouldn't we?
+
+        - What structure is that?
+
+* intwhat.md
+** Intelligence is an ordering (2018-04-26)
+   :PROPERTIES:
+   :CUSTOM_ID: intelligence-is-an-ordering-2018-04-26
+   :END:
+
+This idea goes back at least to 2005 in [Hutter2005Book] (p. 2).
+
+Intelligence is an /ordering/ of systems.
+
+An order is a transitive antisymmetric relation.
+
+[[https://brocku.ca/MeadProject/sup/Boring_1923.html][Edwin Boring in 1923]]
+proposed that we start out by defining intelligence as what intelligence tests measure
+"until further scientific observation allows us to extend the definition".
+That definition makes sense mathematically.
+
+/Intelligence depends on its measurement/. Absolute intelligence doesn't exist.
+
+- The /behavior/ of a system is whatever it exhibits that can be observed from outside.
+
+*** How do we decide which system is more intelligent?
+    :PROPERTIES:
+    :CUSTOM_ID: how-do-we-decide-which-system-is-more-intelligent
+    :END:
+
+Let $A$ be a system.
+
+Let $B$ be a system.
+
+Let $T$ be a task.
+
+Let $S$ be a set of tasks.
+
+Let $T(A)$ denote how well system $A$ does task $T$.
+This is a number.
+Higher is better.
+We can invent any measurement.
+Our definition of "intelligence" is only as good as this measurement.
+
+We say "$A$ is /$T$-better/ than $B$" iff $T(A) > T(B)$.
+
+We say "$A$ /$S$-dominates/ $B$" iff $T(A) > T(B)$ for every task $T \in S$.
+
+We define "to be more $S$-intelligent than" to mean "to $S$-dominate".
+
+The $S$-domination relation forms a partial order of all systems.
+
+That is how.
+
+**** Example
+     :PROPERTIES:
+     :CUSTOM_ID: example
+     :END:
+
+Which is more intelligent, a dog or a rock?
+
+That depends on the task set $S$.
+
+It's the rock if ( S = { \text{sit still} } ).
+
+It's the dog if ( S = { \text{move around} } ).
+
+** Intelligence is function optimization (2018-04-27)
+   :PROPERTIES:
+   :CUSTOM_ID: intelligence-is-function-optimization-2018-04-27
+   :END:
+
+Let $g$ be a goal function.
+
+A system's $g$-intelligence is how well it optimizes $g$.
+
+What is "how well"?
+
+Optimization (extremization) is either minimization or maximization.
+
+** What is a mathematical theory of intelligence?
+   :PROPERTIES:
+   :CUSTOM_ID: what-is-a-mathematical-theory-of-intelligence
+   :END:
+
+- In 2007, on page 12, in the paper [[https://arxiv.org/pdf/0712.3329.pdf][Universal intelligence: a definition of machine intelligence]],
+  Shane Legg and Marcus Hutter wrote,
+  "Intelligence measures an agent's ability to achieve goals in a wide range of environments,"
+  and then they formalized them.
+  Here I try another formalization.
+
+  - Let $E$ be a set of /environments/.
+  - Let $G : E \to \Real$ be a /goal function/.
+    The value of $G(e)$ measures how well the agent performs in environment $e$.
+  - The /intelligence/ of the agent /with respect to $G$ across $E$/ is $\int_E G$.
+  - A /performance/ consists of an agent and an environment.
+  - Assumption: The agent cannot modify $G$.
+  - Behavior is a function taking an environment and outputing something.
+  - Intelligence is /relative/ to $G$ and $E$: /goal/ and /environment/.
+  - If we see longevity as intelligence test,
+    then an illiterate farmer who lives to 80
+    is more intelligent than a scientist who dies at 20,
+    but a rock that has been there for 100 years would even be more intelligent than the farmer.
+  - If we see money as intelligence test,
+    then a corrupt politician who steals billions of dollars without getting caught
+    is more intelligent than a honest farmer who only has tens of thousands of dollars.
+
+- Gaming the system is a sign of intelligence.
+  It is hard to design a goal function that gives the desired outcome without undesired side effects.
+- IQ tests are intelligence measures with small environment set.
+- Lifespan may be an intelligence measure with huge environment set.
+- A human can optimize /several/ goal functions across the same environment set.
+  A human may be asked to clean a floor, to write a report, to run a company, to cook food,
+  and to find the quickest route between home and office,
+  and optimize them all.
+- Some goal functions for humans are (but perhaps not limited to):
+
+  - Maximize happiness
+  - Minimize pain
+  - Optimize the level of a chemical in the brain
+  - Optimize the time integral of such chemical
+  - Maximize the chance of survival
+
+- but I don't know the root goal function
+  that explains all those behaviors.
+- Where does the word "intelligence" come from? What is its etymology?
+
+  - The word "intelligent" comes from a Latin word that means "to choose between"
+    ([[http://www.dictionary.com/browse/intelligent][Dictionary.com]]).
+
+- What are some mathematical definitions of intelligence?
+
+  - "Intelligence measures an agent's ability to achieve goals in a wide range of environments."
+    [Legg2006][Legg2008]
+  - [[https://www.researchgate.net/publication/323203054_Defining_intelligence][Shour2018]]:
+    "Defining intelligence as a rate of problem solving and using the concept
+    of network entropy enable measurement, comparison and calculation of
+    collective and individual intelligence and of computational capacity."
+  - Tononi integrated information theory.
+    [[https://en.wikipedia.org/wiki/Integrated_information_theory][Wikipedia]].
+  - Schmidhuber, Hutter, and team have used Solomonoff algorithmic probability
+    and Kolmogorov complexity to define a theoretically optimal predictor they call AIXI.
+
+    - J"urgen Schmidhuber. [[http://www.idsia.ch/~juergen/newai/newai.html][Schmidhuber article]].
+    - [[http://www.cs.uic.edu/~piotr/cs594/Prashant-UniversalAI.pdf][Prashant's slides]].
+      These define "universal" and "optimal".
+
+  - Marcus Hutter approached intelligence from \emph{algorithmic} complexity theory (Solomonoff induction)
+    \cite{DefineMachIntel}.
+  - Warren D. Smith approached intelligence from \emph{computational} complexity theory
+    (NP-completeness)
+    \cite{WdsIntel, WdsIntelSlide}
+
+- What are other definitions of intelligence?
+
+  - Legg and Hutter has collected definitions of intelligence in [Legg2007Collection].
+
+** What is learning?
+   :PROPERTIES:
+   :CUSTOM_ID: what-is-learning
+   :END:
+
+- There are so many ML algorithms.
+  What's the common thing?
+- Should I read these?
+
+  - [[https://medium.com/machine-learning-world/learning-path-for-machine-learning-engineer-a7d5dc9de4a4][How To Become A Machine Learning Engineer: Learning Path]]
+  - https://dzone.com/guides/artificial-intelligence-machine-learning-and-predi
+
+- What is the relationship between ML and statistical modeling?
+- How do we categorize ML algorithms?
+
+  - Online vs offline
+
+    - [[https://en.wikipedia.org/wiki/Online_machine_learning][Wikipedia: Online machine learning]]
+
+  - Discrete-time model vs continuous-time model
+
+    - LTI (linear time-invariant) systems
+
+  - Assemble answers from these sources:
+
+    - [[https://en.wikipedia.org/wiki/Machine_learning#Approaches][Wikipedia: Machine learning, approaches]]
+    - [[https://en.wikipedia.org/wiki/Outline_of_machine_learning#Machine_learning_algorithms][Wikipedia: Outline of machine learning, algorithms]]
+    - [[https://en.wikipedia.org/wiki/Outline_of_machine_learning#Machine_learning_methods][Wikipedia: Outline of machine learning, methods]]
+    - [[https://machinelearningmastery.com/a-tour-of-machine-learning-algorithms/][A tour of machine learning algorithms]]
+    - [[https://towardsdatascience.com/types-of-machine-learning-algorithms-you-should-know-953a08248861][Types of machine learning algorithms you should know]]
+    - [[https://stats.stackexchange.com/questions/214381/what-exactly-is-the-mathematical-definition-of-a-classifier-classification-alg][Stats SE 214381: mathematical definition of classifier]]
+    - [[https://www.analyticsvidhya.com/blog/2017/09/common-machine-learning-algorithms/][Common machine learning algorithms]]
+
+- What is a neural network?
+
+  - A /neuron/ is a function in $\Real^\infty \to \Real$.
+  - A /neural network/ layer is a function in $\Real^\infty \to \Real^\infty$.
+  - Why do neural networks work?
+
+    - [[https://en.wikipedia.org/wiki/Universal_approximation_theorem][Wikipedia: Universal approximation theorem]]
+
+- Statistical learning
+- What is backpropagation, from functional analysis point of view?
+- Who are AI/ML researchers and what are their focuses?
+
+  - Does Geoffrey Hinton specialize in image recognition?
+
+- What is the relationship between intelligence and compression?
+- Consider endofunctions of infinite-dimensional real tuple space.
+  That is, consider $f, g : \Real^\infty \to \Real^\infty$.
+
+  - What is the distance between them?
+
+- Reductionistically, a brain can be thought as a function in $\Real \to \Real^\infty \to \Real^\infty$.
+
+  - The first parameter is time.
+  - The second parameter is the sensor signals.
+  - The output of the function is the actuator signals.
+  - Can we model a brain by such
+    [[https://en.wikipedia.org/wiki/Functional_differential_equation][functional differential equation]]
+    involving [[https://en.wikipedia.org/wiki/Functional_derivative][functional derivative]]s?
+  - $\norm{f(t+h,x) - f(t,x)} = h \cdot g(t,x)$
+  - $\norm{f(t+h) - f(t)} = h \cdot g(t)$
+  - It seems wrong. Abandon this path. See below.
+
+- We model the input as a function $x : \Real \to \Real^n$.
+- We model the output as a function $y : \Real \to \Real^n$.
+
+  - $\norm{y(t+h) - y(t)} = h \cdot g(t)$
+  - $y(t+h) - y(t) = h \cdot (dy)(t)$
+  - $\norm{(dy)(t)} = g(t)$
+
+    - There are infinitely many $dy$ that satisfies that. Which one should we choose?
+
+  - If $y : \Real \to \Real^n$ then $dy : \Real \to \Real^n$.
+
+- A classifier is a function in $\Real^\infty \to \Real$.
+- A control system snapshot is a function in $\Real^\infty \to \Real^\infty$.
+- A control system is a function in $\Real \to \Real^\infty \to \Real^\infty$.
+- How does $F$ have memory if $F(t) = \int_0^t f(x) ~ dx$?
+
+Why has AI mastered chess, but not real life?
+Because chess search space is much smaller than real-life search space.
+
+** What is AI?
+   :PROPERTIES:
+   :CUSTOM_ID: what-is-ai
+   :END:
+
+- In the 1950s, AI was whatever McCarthy et al. were doing.
+
+  - "McCarthy coined the term 'artificial intelligence' in 1955, and organized the famous Dartmouth Conference in Summer 1956.
+    This conference started AI as a field."
+    ([[https://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist)][WP: John McCarthy (computer scientist)]])
+  - [[https://en.wikipedia.org/wiki/Dartmouth_workshop][WP: Dartmouth workshop]]
+  - [[http://raysolomonoff.com/dartmouth/][Ray Solomonoff's Dartmouth archives]]
+
+- What are AI approaches? How are we trying to make an AI?
+
+  - Pedro Domingos categorizes AI approaches into five /tribes/:
+
+    - symbolists (symbolic logic)
+    - connectionists (neural networks)
+    - evolutionaries (genetic algorithms)
+    - bayesians (statistical learning, probabilistic inference)
+    - analogizers (what is this?)
+
+- How do we measure intelligence? How do we measure the performance of a learning algorithm?
+
+  - [[https://en.wikipedia.org/wiki/Computational_learning_theory][Wikipedia: Computational learning theory]]
+
+    - What is the goal of computational learning theory?
+
+      - "Give a rigorous, computationally detailed and plausible account of how learning can be done." [Angluin1992]
+
+    - "a subfield of Artificial Intelligence devoted to studying the design and analysis of machine learning algorithms"
+    - What is a mathematical theory of learning?
+
+      - What is learning?
+
+        - 2018-04-19: "To learn something" is to get better at it.
+          Usually learning uses experience.
+
+          - What is the formal definition of "get better"?
+
+            - Let there be a system.
+              Pick a task.
+              Pick a time interval.
+              Test the system several times throughout the time interval.
+              Let the test results be the sequence $X = x_1, x_2, \ldots, x_n$.
+              We say that the system is /learning/ the task in the time interval
+              iff $x_1 < x_2 < \ldots < x_n$
+              (that is iff $X$ is a monotonically increasing sequence).
+            - How do we formalize "get better" and "experience"?
+
+              - "Get better" can be modeled by /monotonically increasing score/
+              - "Experience" can be modeled by a sequence
+
+          - Is experience (past data) necessary for learning?
+            Are mistakes necessary for learning?
+
+        - Supervised learning is extrapolating a function from finite samples.
+          Usually, the function is high-dimensional, and the samples are few.
+        - It is simple to measure learning success in perfect information games such as chess.
+          Chess also doesn't require any sensors and motors.
+
+
+* approx.md
+We are interested in approximation theory because we want to justify how neural networks work.
+
+- 2016, article, "Deep vs. shallow networks: An approximation theory perspective", [[https://arxiv.org/abs/1608.03287][pdf available]]
+- [[https://en.wikipedia.org/wiki/Explainable_Artificial_Intelligence][WP:Explainable Artificial Intelligence]]
+
+We should begin by skimming the 1998 book "A Short Course on Approximation Theory" by N. L. Carothers ([[http://fourier.math.uoc.gr/~mk/approx1011/carothers.pdf][pdf]]).
+Then we should skim the 2017 lecture notes "Lectures on multivariate polynomial approximation" ([[http://www.math.unipd.it/~demarchi/MultInterp/LectureNotesMI.pdf][pdf]]).
+
+The phrase "x /approximates/ y" means "x is /close/ to y", which implies distance, which implies metric space.
+
+How close is the approximation?
+Suppose that the function $g$ approximates the function $f$ in interval $I$.
+Then:
+
+- The "approximation error at $x$" is $g(x) - f(x)$.
+- The "maximum absolute error" is $\max_{x \in I} \abs{g(x) - f(x)}$.
+
+How do we measure the distance between two $\Real \to \Real$ functions $f$ and $g$?
+There are several ways.
+Which should we use?
+
+- The maximum norm, in interval $I$ is $\max_{x \in I} \abs{f(x) - g(x)}$.
+  This norm is also called uniform norm, supremum norm, Chebyshev norm, infinity norm, norm-infinity, $L_\infty$-norm.
+  Why is it called "uniform"?
+  [[https://en.wikipedia.org/wiki/Uniform_norm][WP:Uniform norm]].
+- What is this norm called? $\int_{x \in I} [f(x)-g(x)]^2 ~ dx$.
+
+** Other
+   :PROPERTIES:
+   :CUSTOM_ID: other
+   :END:
+
+- Courses
+
+  - 2017, [[https://www.nada.kth.se/~olofr/Approx/][Approximation Theory, 7.5 ECTS]]
+  - 2012, syllabus, Drexel University, Math 680-002 (Approximation Theory), [[http://www.math.drexel.edu/~foucart/TeachingFiles/S12/Math680Syl.pdf][pdf]]
+  - 2002, [[http://math.ucdenver.edu/~aknyazev/teaching/02/5667/][MATH 5667-001: Introduction to Approximation Theory, CU-Denver, Fall 02]].
+
+- Subfields of approximation theory
+
+  - Classical approximation theory deals with univariate real functions $\Real \to \Real$.
+  - Multivariate approximation theory deals with multivariate real functions $\Real^m \to \Real^n$.
+
+- Scenarios
+
+  - Suppose we want to approximate the function $f$,
+    but we don't know the equation for $f$;
+    we only have a few input-output samples.
+
+    - Can we approximate $f$?
+    - How do approximation and curve-fitting relate?
+
+- Overview
+
+  - What is a multivariate polynomial?
+  - Commonly conflated concepts
+
+    - Approximation is not estimation.
+
+      - Approximation converges.
+        Estimation doesn't, because the actual value is unknown.
+      - Approximation doesn't guess.
+        Estimation does.
+      - Approximation has error.
+        Estimation has uncertainty.
+      - Approximation is part of analysis.
+        Estimation is part of statistics.
+
+- The /uniform norm/ is ...
+- Best approximation is ...
+- Uniform approximation is best approximation in uniform norm.
+- https://en.wikipedia.org/wiki/Approximation_theory#Remez's_algorithm
+
+  - https://en.wikipedia.org/wiki/Remez_algorithm
+
+    - Inputs: a function, and an interval.
+    - Output: an optimal polynomial approximating the input function in the input interval.
+
+- What are Bernstein polynomials?
+  What question does the Weierstrass approximation theorem answer?
+
+  - http://www4.ncsu.edu/~mtchu/Teaching/Lectures/MA530/chapter7.pdf
+
+- [[https://en.wikipedia.org/wiki/Chebyshev_polynomials][WP:Chebyshev polynomials]]
+
+  - Why is it important?
+    How does it relate to best approximation?
+
+    - "Chebyshev polynomials are important in approximation theory because the roots of the Chebyshev polynomials of the first kind, which are also called Chebyshev nodes, are used as nodes in polynomial interpolation.
+      The resulting interpolation polynomial minimizes the problem of Runge's phenomenon and provides an approximation that is close to the polynomial of best approximation to a continuous function under the maximum norm."
+
+- Machine learning as relation approximation
+
+  - Machine learning, statistical modelling, function approximation, and curve fitting are related.
+  - Generalize function approximation to relation approximation.
+  - A function can be stated as a relation.
+  - A relation can be stated as a function.
+
+- Consider the least-square solution to an overdetermined system of linear equations.
+  Is such solution a kind of approximation?
+
+  - There is no exact solution to begin with?
+  - Why is it called "least-squares /approximation/"?
+  - How can you approximate something that does not exist?
+
+    - 1.2 approximates 1.23. Both 1.2 and 1.23 exist.
+    - Contrarily, there is no X such that AX = B.
+
+- What are approximation schemes?
+
+  - https://en.wikipedia.org/wiki/Polynomial-time_approximation_scheme
+
+- How do we approximate a function?
+  Is it even possible to approximate arbitrary functions?
+
+  - If the function is analytic, we can truncate its Taylor series.
+
+    - Commonly-used differentiable functions are analytic.
+
+  - Chebyshev polynomials?
+  - If we have an approximation scheme, we may be able to improve it.
+
+    - https://en.wikipedia.org/wiki/Series_acceleration
+
+      - https://en.wikipedia.org/wiki/Aitken%27s_delta-squared_process
+
+  - google search: machine learning approximation theory
+
+    - [[https://math.stackexchange.com/questions/2680158/approximation-theory-for-deep-learning-models-where-to-start][Approximation Theory for Deep Learning Models: Where to Start? - Mathematics Stack Exchange]]
+    - http://www.vision.jhu.edu/tutorials/ICCV15-Tutorial-Math-Deep-Learning-Intro-Rene-Joan.pdf
+    - 2017, slides, "From approximation theory to machine learning: New perspectives in the theory of function spaces and their applications", [[http://npfsa2017.uni-jena.de/l_notes/vybiral.pdf][pdf]]
+    - 2018, article, "Approximation theory, Numerical Analysis and Deep Learning", [[http://at.yorku.ca/c/b/p/g/30.htm][abstract]]
+
+      - "the problem of numerically solving a large class of (high-dimensional) PDEs (such as linear Black-Scholes or diffusion equations) can be cast into a classical supervised learning problem which can then be solved by deep learning methods"
+
+- Determine whether we need to read these
+
+  - Very likely
+
+    - 2015, slides, "Best polynomial approximation: multidimensional case", [[https://carma.newcastle.edu.au/meetings/spcom/talks/Sukhorukova-SPCOM_2015.pdf][pdf]]
+    - https://en.wikipedia.org/wiki/Bernstein_polynomial#Approximating_continuous_functions
+
+      - https://en.wikipedia.org/wiki/Pointwise_convergence
+      - https://en.wikipedia.org/wiki/Uniform_convergence
+
+    - https://en.wikipedia.org/wiki/Approximation
+
+      - https://en.wikipedia.org/wiki/Approximation_theory
+
+        - is a branch of https://en.wikipedia.org/wiki/Functional_analysis
+        - https://en.wikipedia.org/wiki/Approximation_theory#Chebyshev_approximation
+
+      - https://en.wikipedia.org/wiki/Approximate_computing
+
+        - example: https://en.wikipedia.org/wiki/Artificial_neural_network
+
+    - https://en.wikipedia.org/wiki/Telescoping_series
+
+  - Likely
+
+    - 2018, slides, "Deep Learning: Approximation of Functions by Composition", [[http://helper.ipam.ucla.edu/publications/dlt2018/dlt2018_14936.pdf][pdf]]
+
+      - classical approximation vs deep learning
+
+    - 2013, short survey article draft, "Multivariate approximation", [[http://num.math.uni-goettingen.de/schaback/research/papers/MultApp_01.pdf][pdf]]
+    - 1995, short introduction, "Multivariate Interpolation and Approximation by Translates of a Basis Function", [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.45.2194&rep=rep1&type=pdf][pdf]]
+    - 1989, article, "A Theory of Networks for Approximation and Learning", [[http://www.dtic.mil/docs/citations/ADA212359][pdf available]]
+
+      - What is the summary, especially about learning and approximation theory?
+
+  - Unlikely
+
+    - Survey-like
+
+      - 2006, chapter, "Topics in multivariate approximation theory", [[https://www.researchgate.net/publication/226303661_Topics_in_multivariate_approximation_theory][pdf available]]
+      - 1982, article, "Topics in multivariate approximation theory", [[http://www.dtic.mil/dtic/tr/fulltext/u2/a116248.pdf][pdf]]
+      - 1986, "Multivariate Approximation Theory: Selected Topics", [[https://epubs.siam.org/doi/book/10.1137/1.9781611970197][paywall]]
+
+    - Theorem
+
+      - 2017, article, "Multivariate polynomial approximation in the hypercube", [[https://people.maths.ox.ac.uk/trefethen/hypercube_published.pdf][pdf]]
+
+    - 2017, article, "Selected open problems in polynomial approximation and potential theory", [[http://drna.padovauniversitypress.it/system/files/papers/BaranCiezEgginkKowalskaNagyPierzcha%C5%82a_DRNA2017.pdf][pdf]]
+    - 2017, article, "High order approximation theory for Banach space valued functions", [[https://ictp.acad.ro/jnaat/journal/article/view/1112][pdf available]]
+    - Articles summarizing people's works
+
+      - 2017, article, "Michael J.D. Powell's work in approximation theory and optimisation", [[https://www.sciencedirect.com/science/article/abs/pii/S0021904517301053][paywall]]
+      - 2000, article, "Weierstrass and Approximation Theory", [[https://www.sciencedirect.com/science/article/pii/S0021904500935081][paywall]]
+
+    - 2013, article, "[1312.5540] Emerging problems in approximation theory for the numerical solution of nonlinear PDEs of integrable type", [[https://arxiv.org/abs/1312.5540][pdf available]]
+    - 1985, article, "Some problems in approximation theory and numerical analysis - IOPscience", [[http://iopscience.iop.org/article/10.1070/RM1985v040n01ABEH003526][pdf available]]
+    - 2011, article, "Experiments on Probabilistic Approximations", [[https://people.eecs.ku.edu/~jerzygb/c154-clark.pdf][pdf]]
+
+- Less relevant overview
+
+  - Why do we approximate?
+
+    - Because it is practically inevitable.
+
+      - Fundamental reason: Because computers are finite.
+      - Practical reason: Trade-off between computation time and precision.
+
+        - The more error we can afford, the faster we can run.
+
+          - May be related: 2013 monograph "Faster Algorithms via Approximation Theory" [[http://theory.epfl.ch/vishnoi/Publications_files/approx-survey.pdf][pdf]]
+
+  - 2018 book "Recent Advances in Constructive Approximation Theory" [[https://www.springer.com/us/book/9783319921648][paywall]]
+
+
+* atrunc.md
+We can approximate a series by /truncating/ it.
+
+Suppose that the series $y = x_0 + x_1 + \ldots$ converges.
+
+Suppose that the sequence $\langle x_0, x_1, \ldots \rangle$ converges to zero.
+
+Pick where to cut.
+Pick a natural number $n$.
+
+Then the series $x_0 + \ldots + x_n$ approximates the series $y$.
+We cut its tail.
+We take finitely many summands from the beginning.
+
+Here come examples: Truncate all the series!
+
+** Power series truncation
+   :PROPERTIES:
+   :CUSTOM_ID: power-series-truncation
+   :END:
+
+Below we truncate a power series.
+
+Decimal truncation: $1.2$ approximates $1.23$.
+Remember that a decimal number is a series.
+For example, the number $1.23$ is the power series
+$$ \ldots 01.230 \ldots = \ldots + 0 \cdot 10^1 + 1 \cdot 10^0 + 2 \cdot 10^{-1} + 3 \cdot 10^{-2} + 0 \cdot 10^{-3} + \ldots. $$
+
+Polynomial truncation: $1 + x$ approximates $1 + x + x^2$ for $x$ near zero.
+
+Taylor series truncation: $1 + x + \frac{x^2}{2}$ approximates $e^x$ for $x$ near zero.
+Remember the Taylor series expansion $e^x = \sum_{n \in \Nat} \frac{x^n}{n!}$.
+
+Below we truncate the ratio of two power series.
+
+Rational truncation: $12/23$ approximates $123/234$.
+
+[[https://en.wikipedia.org/wiki/Pad%C3%A9_approximant][WP:Padé approximation]] is a truncation of a ratio of series.
+
+Fourier series truncation: The [[https://en.wikipedia.org/wiki/Fourier_series#Example_1:_a_simple_Fourier_series][Wikipedia example]] animates how a Fourier series converges to the sawtooth function as more terms are added.
+
+Digression: Is a (complex) Fourier series a power series?
+Reminder: A Fourier series looks like $\sum_{k=0}^{\infty} c_k e^{ikt}$.
+
+[[https://en.wikipedia.org/wiki/Laurent_series][WP:Laurent series]] truncation?
+
+*** Digression: What is an analytic function?
+    :PROPERTIES:
+    :CUSTOM_ID: digression-what-is-an-analytic-function
+    :END:
+
+A function is /analytic/ iff it can be represented by power series.
+
+Formally, a function $f$ is /analytic/ iff for every $x \in \dom(f)$, we can write $f(x)$ as a power series.
+
+See also [[https://en.wikipedia.org/wiki/Power_series#Analytic_functions][WP:Definition of "analytic function"]].
+
+Taylor series expansion is illustrated in the 2015 slides "Taylor Series: Expansions, Approximations and Error" ([[https://relate.cs.illinois.edu/course/cs357-f15/file-version/2978ddd5db9824a374db221c47a33f437f2df1da/media/cs357-slides6.pdf][pdf]])
+
+*** Digression: What is the relationship between polynomial and power series?
+    :PROPERTIES:
+    :CUSTOM_ID: digression-what-is-the-relationship-between-polynomial-and-power-series
+    :END:
+
+A polynomial is an algebraic expression. It is not a function.
+
+Power series is a kind of infinite polynomial.
+
+[[https://en.wikipedia.org/wiki/Formal_power_series][WP:Formal power series]]: "A formal power series is a generalization of a polynomial, where the number of terms is allowed to be infinite."
+
+** Iteration truncation
+   :PROPERTIES:
+   :CUSTOM_ID: iteration-truncation
+   :END:
+
+- [[https://en.wikipedia.org/wiki/Iterated_function][WP:Iterated function]]
+- [[https://en.wikipedia.org/wiki/Iterative_method][WP:Iterative method]]
+- [[http://mathworld.wolfram.com/NewtonsIteration.html][Newton's Iteration]]
+- [[https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Babylonian_method][WP:Methods of computing square roots, the Babylonian method]]
+- An iteration converges to an attractive fixed point.
+
+Example:
+Let $f(x) = x + \frac{1}{x}$.
+
+Continued fraction truncation:
+We know that $$ 1 + \frac{1}{1 + \frac{1}{1 + \ldots}} = \frac{1 + \sqrt{5}}{2} = \Phi. $$
+We can truncate that continued fraction to approximate $\Phi$.
+
+Seeing those examples makes me wonder whether all approximations are truncation.

@@ -93,20 +93,18 @@ We should join forces to reach our shared goals.
             - [WP:Optimal stopping](https://en.wikipedia.org/wiki/Optimal_stopping)
             - [Making a search engine]({% link srceng.md %})
 - Computer science
-    - Intelligence
+    - [Intelligence]({% link intelligence.html %})
         - Doing the last work we will ever need
-            - [Defining intelligence]({% link intwhat.md %})
-            - [Making intelligence]({% link intelligence.md %})
             - Making machines understand language
             - How do we make machines curious?
             How do we make them get bored?
                 - We know that intelligent people get bored quickly.
                     - Why shouldn't intelligent machines get bored?
-            - [About intelligence research]({% link intmeta.md %})
+            - About intelligence research
                 - How can I become an AI researcher?
                 - How are others' works progressing?
-            - [Approximating functions]({% link approx.md %})
-                - [Are all approximations truncation?]({% link atrunc.md %})
+            - Approximating functions
+                - Are all approximations truncation?
                 Are there other approximation schemes beside series truncation?
                 Are probabilistic approximations such as Monte Carlo approximations also truncation?
     - Computational complexity
