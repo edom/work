@@ -114,7 +114,6 @@ We should join forces to reach our shared goals.
         - [Finance]({% link finance.md %})
     - [Investing]({% link invest.md %})
     - [Justifying my value]({% link value.md %})
-    - [Finding same-goaled people]({% link findpep.md %})
     - [Standardizing organizations]({% link stdorg.md %})
 - Managing organizations
     - [Spreading information in an organization]({% link spreadinf.md %})
