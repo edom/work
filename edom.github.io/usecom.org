@@ -1,0 +1,1272 @@
+#+TITLE: Using computers
+#+DATE: 2016-05-02 03:31:20 +0700
+#+OPTIONS: toc:nil
+#+TOC: headlines 1
+#+TOC: headlines 3
+#+PERMALINK: /usecom.html
+* Using computers
+  :PROPERTIES:
+  :CUSTOM_ID: using-computers
+  :END:
+
+- Habits learned the hard way
+
+  - I check the time at [[https://time.gov/][time.gov]] because Ubuntu 14.04 NTP once betrayed me.
+
+    - 2018-01-16: I had always thought that it was dependable, but it betrayed me:
+      It showed 2 a.m. while the actual time was 4 a.m..
+      I missed some hours of sleep.
+* Ansible
+  :PROPERTIES:
+  :CUSTOM_ID: ansible
+  :END:
+
+An [[http://docs.ansible.com/ansible/intro_inventory.html][inventory]] is a map from host alias to host address.
+We use those aliases to select the machines to mutate.
+
+Ansible has two executables: =ansible= and =ansible-playbook=.
+
+The =ansible-playbook= takes a YAML configuration.
+
+The =ansible= executable executes one command.
+
+The =ansible= command is like a "single-task playbook".
+
+See also =man ansible= ("run a task on target hosts") and =man ansible-playbook=.
+
+A machine can have many roles.
+
+An Ansible role should be a noun phrase (=web-server=), not a verb phrase (=install-web-server=).
+* Autotools
+  :PROPERTIES:
+  :CUSTOM_ID: autotools
+  :END:
+
+- Cargo-cult programming
+
+  - Sometimes fixes things
+
+    - Add =-I /usr/share/aclocal= to =ACLOCAL_AMFLAGS= in =Makefile.am=.
+
+- [[http://voices.canonical.com/jussi.pakkanen/2011/09/13/autotools/][Why GNU Autotools is not my favorite build system | Jussi Pakkanen's development blog]]
+* Amazon Web Services
+  :PROPERTIES:
+  :CUSTOM_ID: amazon-web-services
+  :END:
+
+- How do we detect if we're running on AWS?
+
+  - [[https://forums.aws.amazon.com/message.jspa?messageID=122425][Question on AWS forum]]
+  - Some choices:
+
+    - on instance launch time: set an environment variable in the AMI used to launch instances.
+      This seems to be the most reliable way.
+    - on application runtime:
+
+      - HTTP server at 169.254.169.254
+      - Reverse DNS lookup
+      - =/proc/xen= (if your development machine doesn't use xen)
+
+- How do we get EC2 instance metadata?
+
+  - http://stackoverflow.com/questions/625644/find-out-the-instance-id-from-within-an-ec2-machine
+  - http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+
+- Amazon RDS is not for scaling.
+  It is designed to simplify operation of relational databases.
+  [[https://www.quora.com/Does-Amazon-RDS-solve-the-MySQL-scaling-issue][It is not designed to scale relational databases horizontally]].
+- The write capacity does not raise in proportion to the number of machines.
+- Deployment with Amazon Machine Images
+
+  - We assume that the code scales horizontally.
+  - Install everything you need to that instance.
+  - Snapshot an AMI from an instance.
+
+- EC2 security notes:
+
+  - Because all instances are launched from the same image,
+    they have the same SSH host keys.
+    Compromising any of them will also compromise all other instances sharing the key.
+  - See also [[http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/building-shared-amis.html][Amazon's notes on building shared AMIs]].
+
+- How do I install AWS CLI on Ubuntu 14.04?
+
+  - =sudo apt-get install awscli=
+
+- RDS
+
+  - In Amazon RDS PostgreSQL, slow queries are not logged by default.
+    See [[http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.Concepts.PostgreSQL.html][RDS user guide]].
+  - [[http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-rds-db.html][Using Route 53 for aliasing your RDS instances]]
+  - [[http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_BestPractices.html][RDS best practices]]
+
+- Shit did happen.
+
+  - A busy RDS instance got CPU-throttled (ran out of CPU credits).
+
+    - /CPU credit doesn't have to reach zero/ in order for the instance to be throttled.
+      Don't use CloudWatch alarm condition =CpuCredit = 0=.
+
+  - A busy RDS instance got IOPS-throttled (ran out of IOPS credits).
+
+    - 2018 CloudWatch doesn't have IOPS credit metric.
+      Can't make alarm.
+
+- [[https://aws.amazon.com/blogs/aws/aws-device-farm-update-remote-access-to-devices-for-interactive-testing/][AWS Device Farm]]: interactive testing on real devices.
+* Bash shell programming
+  :PROPERTIES:
+  :CUSTOM_ID: bash-shell-programming
+  :END:
+
+** Articles
+   :PROPERTIES:
+   :CUSTOM_ID: articles
+   :END:
+
+- Bash has associative arrays
+
+  - https://www.artificialworlds.net/blog/2012/10/17/bash-associative-array-examples/
+
+- [[https://github.com/SierraSoftworks/bash-cli][SierraSoftworks/bash-cli: A command line framework built using nothing but Bash and compatible with anything]]
+- [[http://wiki.bash-hackers.org/syntax/pe][parameter expansion]]
+- [[https://github.com/dylanaraps/pure-bash-bible][pure bash bible]]
+
+** Error handling
+   :PROPERTIES:
+   :CUSTOM_ID: error-handling
+   :END:
+
+I set these bash options in my script to make it fail fast:
+
+#+BEGIN_SRC sh
+    set -o errexit
+    set -o nounset
+    set -o pipefail
+#+END_SRC
+
+** Bash pitfalls
+   :PROPERTIES:
+   :CUSTOM_ID: bash-pitfalls
+   :END:
+
+This is bash version =GNU bash, version 4.3.11(1)-release (x86_64-pc-linux-gnu)= that comes with Ubuntu 14.04.
+
+*** Local variable definition ignores command substitution result
+    :PROPERTIES:
+    :CUSTOM_ID: local-variable-definition-ignores-command-substitution-result
+    :END:
+
+At first this seems like an unexpected interaction between function, =local= variable, =set -e (set -o errexit)=, and command substitution =$(cmd)=.
+
+The word =local= is a shell command that has an exit status, not a keyword like =var= in JavaScript.
+Bash is behaving as documented.
+See the documentation for =local= in =man bash=.
+
+#+BEGIN_SRC sh
+    fun_0() {
+        local var
+        var=$(false)
+        echo fun_0
+    }
+
+    fun_1() {
+        local var=$(false)
+        echo fun_1
+    }
+
+    fun_2() {
+        local var=$1
+        echo fun_2
+    }
+
+    echo $(set -o errexit; fun_0) # Expected: This doesn't print fun_0.
+    echo $(set -o errexit; fun_1) # PITFALL: This prints fun_1 !!!
+    echo $(set -o nounset; fun_2) # Pitfall: This doesn't print fun_2, and aborts with "bash: $1: unbound variable".
+#+END_SRC
+* Moving to clouds, for old-school sysadmins
+The most important pages on the [[https://aws.amazon.com/][AWS website]]
+are the pricing pages and the technical documentation.
+That website has much content, but not much information,
+perhaps because they are not selling to sysadmins.
+
+| Amazonese                            | Old-school                                                                        |
+|--------------------------------------+-----------------------------------------------------------------------------------|
+| Route 53                             | managed DNS server                                                                |
+| VPC (virtual private cluster)        | managed LAN (local area network)                                                  |
+| EC2 (elastic compute cloud) instance | managed virtual machine                                                           |
+| security group                       | managed iptables/firewall                                                         |
+| RDS (relational database service)    | managed SQL server                                                                |
+| EBS (elastic block store)            | managed NAS (network-attached storage)                                            |
+| ELB (elastic load balancer)          | managed HAProxy                                                                   |
+| ElastiCache                          | managed Memcached/Redis                                                           |
+| Lambda                               | automatically turn on machines to run a piece of code, and turn off idle machines |
+
+AWS, GCE, and Azure do the same thing you used to do.
+The difference is they do it on a much larger scale,
+and they make an API on top of it,
+so you can /automate/ it,
+but this also mean that /you/ can be automated away,
+so beware!
+
+With this cloud stuff, you can't buy a machine and bring it to the data center.
+You start a machine from your computer.
+The machine is now virtual;
+it doesn't correspond to a motherboard anymore.
+Procuring a machine is just a few clicks on the website,
+or a few keystrokes on the terminal,
+and your machine will be running in a few minutes.
+What you used to do in days, now you can do in minutes.
+
+With this cloud stuff, you can't visit the data center to restart a stuck machine.
+You restart it from your computer.
+
+You're billed per hour.
+What was infrastructure (like roads) is now utility (like electricity).
+
+The cloud is cheaper for bursty load with low average load.
+If your average load is high, old-school is cheaper.
+
+One thing doesn't change: you still need to back up data to a safe place /outside/ the cloud.
+(I'm a hypocrite; I say that but I don't do that.)
+* Deploying web applications
+  :PROPERTIES:
+  :CUSTOM_ID: deploying-web-applications
+  :END:
+
+** Formalizing deployment requirements
+   :PROPERTIES:
+   :CUSTOM_ID: formalizing-deployment-requirements
+   :END:
+
+What is the way to deploy web applications?
+
+- General information
+
+  - I have a Java web application.
+  - It compiles by =mvn package=.
+  - Its main class is =blah=.
+
+- Network
+
+  - It listens on port 1234.
+  - Its URL should be =https://blah/=.
+  - It is HTTPS only. HTTP port shouldn't be open at all.
+
+- Resource requirements and burst characteristics
+
+  - It needs 4 GB of RAM for acceptable garbage collection overhead.
+  - It is mostly idle, but when it bursts, it requires 4 cores.
+  - Ops is free to horizontally scale the stateless application server.
+
+Assuming that I'm on either Amazon Web Services or Google Cloud Platform, how do I formalize my ops requirements in a cloud-agnostic way?
+The 2016 article "On Formalizing and Identifying Patterns in Cloud Workload Specifications" [[https://ieeexplore.ieee.org/document/7516840/][paywall]] suggests an answer:
+
+- "Approaches include orchestration specifications CAMP [1], [2], Open-CSA, SOA-ML and USDL,
+  and on the industrial side solutions such as Amazon CloudFormation, OpenStack Heat, Cloudify and Alien4Cloud.
+  To consolidate and enable interoperability within this variety of approaches, a technical committee by OASIS [3]
+  defined a standard for the Topology and Orchestration Specification of Cloud Applications (TOSCA) [4], [5],
+  which defines guidelines and facilities for the complete specification, orchestration and configuration of complex workloads,
+  addressing portability in heterogeneous clouds."
+
+I assume that it suggests TOSCA.
+
+Problem: The average person won't read a specification.
+
+Who uses TOSCA?
+Who implements that?
+Why do I never see it on AWS or GCP?
+Why would they follow your standard if they are the de facto standard?
+
+Do we need more than one cloud providers?
+
+Tools?
+
+- kubernetes
+- keter, pm2
+- [[https://developers.redhat.com/blog/2018/06/28/why-kubernetes-is-the-new-application-server/][Why Kubernetes is The New Application Server - RHD Blog]]
+
+Why I don't use NixOS:
+
+- NixOS is insane.
+  Patching every software on Earth is not sustainable.
+  NixOS is only sustainable if the upstream developers use NixOS.
+- 2018-08-31: Ubuntu has [[http://old-releases.ubuntu.com/][old-releases.ubuntu.com]].
+  It archives things back to 2006.
+  Ubuntu has money to host 12 years of archive.
+  NixOS doesn't have that much money.
+  NixOS can only afford to host 1-2 years of archive.
+- NixOS (or anything else indeed) would be heaven if library writers valued backward compatibility.
+  I want my library writers to worship backward compatibility like sysadmins worship uptime.
+  I want them to never break things that depend on them.
+  But my experience invalidates this hope.
+  I've seen too many breakages.
+
+Who uses this?
+
+- 2013 "Towards a Formal Model for Cloud Computing" [[https://link.springer.com/chapter/10.1007/978-3-319-06859-6_34][paywall]]
+
+** Design
+   :PROPERTIES:
+   :CUSTOM_ID: design
+   :END:
+
+- 2018-08-30
+- [[https://blog.chef.io/2015/04/23/ontology-infrastructure-classification-and-the-design-of-chef/][Ontology, Infrastructure Classification, and the Design of Chef - Chef Blog]]
+
+I agree that 2018 devops ontologies suck, but I think we shouldn't avoid ontology-based systems.
+The solution is not to avoid ontologies.
+The solution is to craft a proper ontology that is timeless and essential.
+This is a hard philosophical problem.
+
+For example, the relationship between "application" and "entry point" is timeless.
+"Entry point" is an essential property of "application".
+By definition, every application has an entry point.
+
+Every software has an implicit ontology, like it or not.
+
+Every ontology systems that captures accident instead of essence is bound to fail.
+Every computer ontology system that avoids philosophical ontology (What is X? What is the timeless essence of X?) is bound to fail.
+
+Are these related?
+
+- [[https://en.wikipedia.org/wiki/Existence_precedes_essence][WP:Existence precedes essence]]
+- [[https://en.wikipedia.org/wiki/Essence][WP:Essence]] (probably unrelated to above)
+- 2011 article "On doing ontology without metaphysics" [[https://www.jstor.org/stable/41329478?seq=1#page_scan_tab_contents][paywall]]
+- 2012 article "Philosophies without ontology" [[https://www.journals.uchicago.edu/doi/pdfplus/10.14318/hau3.1.015][pdf]]
+- [[https://webhome.phy.duke.edu/~rgb/Beowulf/axioms/axioms/node4.html][Philosophy is Bullshit: David Hume]]
+
+  - What are pseudoquestions?
+
+How do we answer "What is X?"?
+
+There is an easy answer for mathematics.
+Mathematics is unique in that its ontology is mostly a priori / by fiat: we say it exists; therefore it exists.
+However, would it still be the case if we didn't have languages to express it?
+
+For the real world it's hard.
+
+Sometimes when we ask "What is X?", we are really asking "What is X for?" instead.
+
+How do answer "What is X?" such that the correctness/truth/relevance of the answer does not depend on time/circumstances?
+We don't know how to predict the far future.
+
+** Continuous something
+   :PROPERTIES:
+   :CUSTOM_ID: continuous-something
+   :END:
+
+- Continuous integration
+
+  - [[https://jenkins.io/][Jenkins]]
+
+- Continuous delivery
+
+  - [[https://www.spinnaker.io/][Spinnaker]]
+
+- The ideal workflow: Git push triggers deployment?
+
+These pages may be outdated:
+
+- [[file:%7B%%20link%20ansible.md%20%%7D][Ansible]]
+- [[file:%7B%%20link%20logging.md%20%%7D][Logging]]
+
+** Fabric vs Ansible
+   :PROPERTIES:
+   :CUSTOM_ID: fabric-vs-ansible
+   :END:
+
+From the user's point of view, Fabric is a python library, whereas Ansible is YAML-driven framework.
+
+** What is DevOps?
+   :PROPERTIES:
+   :CUSTOM_ID: what-is-devops
+   :END:
+
+XML is not suitable for declarative DevOps.
+See comments in [[https://github.com/edom/work/blob/master/devops/example.xml][devops/example.xml]].
+We want the declaration site of some bindings to be as close as possible to their use sites.
+
+I'm thinking about using [[https://github.com/dhall-lang/dhall-lang][Dhall]].
+
+Separating Dev and Ops doesn't make sense.
+
+Ops can't fix shitty Dev.
+No amount of Ops will fix stupid programming.
+Ops is impossible without decent Dev.
+
+What is Google search result for "devops tools"?
+
+- API description language, application description language: WADL vs Swagger vs what else?
+
+  - https://www.w3.org/Submission/wadl/
+  - 2010 article "DADL: Distributed Application Description Language" [[https://www.isi.edu/~mirkovic/publications/dadlsubmit.pdf][pdf]]
+
+- ontology?
+
+  - https://devops.stackexchange.com/questions/1361/what-are-known-efforts-to-establish-devops-ontology-model
+  - 2016 article "Application of Ontologies in Cloud Computing: The State-Of-The-Art" [[https://arxiv.org/abs/1610.02333][pdf available]]
+  - 2015 article "Composable DevOps" [[https://dl.acm.org/citation.cfm?id=2867125][paywall]]
+  - 2012 article "Towards an Ontology for Cloud Services" [[https://ieeexplore.ieee.org/document/6245776/][paywall]]
+  - 2012 article "Cloud Computing Ontologies: A Systematic Review" [[https://pdfs.semanticscholar.org/cd5f/e6edb6284fcbcb470239464bb0c8e3ee2d50.pdf][pdf]]
+  - 2008 article "Toward a Unified Ontology of Cloud Computing" [[https://www.researchgate.net/publication/224367196_Toward_a_Unified_Ontology_of_Cloud_Computing][pdf available]]
+  - https://www.skytap.com/blog/cloud-ontology/
+  - OASIS TOSCA; too ad-hoc?
+
+- what
+
+  - 2015 article "Composable DevOps: Automated Ontology Based DevOps Maturity Analysis" [[https://ieeexplore.ieee.org/document/7207405/][paywall]]
+
+** Haskell for devops?
+   :PROPERTIES:
+   :CUSTOM_ID: haskell-for-devops
+   :END:
+
+- https://www.reddit.com/r/haskell/comments/31vnos/neil_mitchell_devops_with_haskell/
+- https://github.com/commercialhaskell/commercialhaskell/blob/master/taskforce/devops.md
+- [[http://hackage.haskell.org/package/azubi][azubi: A simple DevOps tool which will never "reach" enterprice level.]]
+
+** Migrating running processes
+   :PROPERTIES:
+   :CUSTOM_ID: migrating-running-processes
+   :END:
+
+- [[https://en.wikipedia.org/wiki/Process_migration][WP:Process migration]]
+
+** Troubleshooting Dashboard: What metrics you should monitor and why?
+   :PROPERTIES:
+   :CUSTOM_ID: troubleshooting-dashboard-what-metrics-you-should-monitor-and-why
+   :END:
+
+- We want to minimize what we need to see.
+  we want the metric that predicts the most problems.
+
+  - Rising maximum latency is a sign that something is overloaded.
+  - Rising resource usage (CPU, memory, disk, disk queue depth) predicts rising latency.
+
+- We want the metric to help us locate problems.
+
+When such metric deviates from baseline, we know there is problem, but where?
+
+What other metrics should we monitor?
+
+- HTTP 4xx and 5xx status codes and connection failures?
+* Running X client applications on Docker on Linux
+  :PROPERTIES:
+  :CUSTOM_ID: running-x-client-applications-on-docker-on-linux
+  :END:
+
+#+BEGIN_EXAMPLE
+    docker \
+        -e DISPLAY \
+        -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
+        -u <user> <image> <command>
+#+END_EXAMPLE
+
+Replace =<user>= with a non-root user.
+You need a non-root user because the X server rejects connection from the root user by default.
+You can change this with =xhost=, but it's better to connect with a non-root user.
+
+The =<command>= argument is optional.
+
+The =-e DISPLAY= parameter reexports the =DISPLAY= environment variable to the application inside the container.
+X client applications will read from this environment variable to determine which server to connect to.
+
+The =-v HOST:CONT:ro= option mounts =HOST= directory to =CONT= directory read-only.
+This is so that the application in the container can connect to the host X server's Unix socket.
+
+On Linux, display =:0= corresponds to the Unix socket =/tmp/.X11-unix/X0=.
+Everyone who can connect to that Unix socket will
+be able to run X client applications on the machine;
+it is not specific to Docker.
+
+If X complains about shared memory, try:
+
+#+BEGIN_EXAMPLE
+    docker \
+        -e DISPLAY=unix$DISPLAY \
+        -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
+        -u <user> <image> <command>
+#+END_EXAMPLE
+* Using Git
+  :PROPERTIES:
+  :CUSTOM_ID: using-git
+  :END:
+
+** Mental model
+   :PROPERTIES:
+   :CUSTOM_ID: mental-model
+   :END:
+
+A /commit/ is a snapshot of the working tree.
+
+A /reference/ names a commit so that you can write =master=
+instead of =da39a3e=.
+
+If you are a visual person,
+you can think about how git commands change
+the picture shown by =gitk=
+(a tool for visualizing Git repositories).
+
+In gitk, a blue circle is a commit,
+a green box is a /reference/,
+and the bold green box is the /head/.
+
+The head points to the commit that will be the parent of the next commit.
+
+When you =git init=, Git creates a =.git= directory.
+
+When you =git status=, it prints =On branch master=.
+It means that the head points to the same commit pointed by the reference named =master=.
+
+When you =git commit=, you make a new commit (blue circle),
+and move the current branch (bold green box) to that new commit.
+
+When you =git reset Target=,
+you move the head (bold green box) to =Target=.
+
+If you are not yet comfortable with Git,
+back up your data by copying the =.git= directory.
+It can get corrupted.
+Things will go wrong.
+You may accidentally do something and don't know how to recover.
+Computers don't understand what you mean.
+They do what you say, not what you mean.
+
+** More information
+   :PROPERTIES:
+   :CUSTOM_ID: more-information
+   :END:
+
+A Git /object/:
+
+- is identified by a SHA-1 hash;
+- is either a blob, tree, or commit;
+- is stored as a file somewhere in the =.git= folder.
+
+A /commit/ has zero or more parents.
+It also refers to a tree.
+
+A /tree/ is a list of references.
+Every reference points to either a tree or a blob.
+
+For more information, read the [[https://git-scm.com/book][Pro Git]] book
+or the [[https://git-scm.com/docs][manpages]] (=man git=).
+
+** Things to write?
+   :PROPERTIES:
+   :CUSTOM_ID: things-to-write
+   :END:
+
+- Git fundamentals:
+
+  - Git store things in the =.git= directory.
+  - Why merge conflicts? How to resolve them? How to use =meld=? How to do a three-way merge?
+  - Avoid changing spaces. Avoid using your IDE to reformat files that are already commited.
+
+- Workaround for bad user experience
+
+  - Disable git-gui GC warning:
+
+    - https://stackoverflow.com/questions/1106529/how-to-skip-loose-object-popup-when-running-git-gui
+
+- [[https://manishearth.github.io/blog/2017/03/05/understanding-git-filter-branch/][Understanding Git Filter-branch and the Git Storage Model]]
+
+** Git hash collisions
+   :PROPERTIES:
+   :CUSTOM_ID: git-hash-collisions
+   :END:
+
+Git hash collision may occur albeit extremely unlikely.
+Git assumes that if two objects have the same hash, then they are the same object.
+This is false; the converse is true: if two objects are the same, then they have the same hash.
+When hash collision occur, Git may silently lose data.
+Git is an example of software that is incorrect but works for the use cases it was designed for (source code versioning).
+Git is not meant to be used as an arbitrary database.
+
+Other softwares are incorrect as well.
+We routinely make software that assumes that there will never be more than 2^64 rows in a database table.
+
+Is it even possible to write correct software at all?
+
+** Related tools
+   :PROPERTIES:
+   :CUSTOM_ID: related-tools
+   :END:
+
+- git-gui, for making commits
+- gitk, for showing history
+- meld, for three-way diff/merge
+* Speeding up Git
+  :PROPERTIES:
+  :CUSTOM_ID: speeding-up-git
+  :END:
+
+** The problem
+   :PROPERTIES:
+   :CUSTOM_ID: the-problem
+   :END:
+
+I have a repository with 100,000 files and 1,000,000 objects.
+Git rebase is slow.
+Git interactive rebase is even slower.
+
+** Hypothesis: How git rebase works
+   :PROPERTIES:
+   :CUSTOM_ID: hypothesis-how-git-rebase-works
+   :END:
+
+I guess =git rebase --onto TARGET BASE MOVE= works like this:
+
+#+BEGIN_EXAMPLE
+    git checkout --orphan TARGET --
+    git cherry-pick <all commits from BASE to MOVE, excluding BASE, including MOVE>
+    git checkout -B MOVE
+#+END_EXAMPLE
+
+Cherry-pick is also slow.
+I guess that speeding up cherry-pick will also speed up rebase.
+
+Checkout is also slow.
+I guess that speeding up checkout will also speed up cherry-pick.
+
+It seems that =commit= and =write-tree= are slow.
+
+- [[https://git-scm.com/book/en/v2/Git-Internals-Environment-Variables][Git - Environment Variables]]
+
+  - =GIT_TRACE_PERFORMANCE=true= has no effect.
+    Which git version is it for?
+
+** The plan
+   :PROPERTIES:
+   :CUSTOM_ID: the-plan
+   :END:
+
+- [[https://www.atlassian.com/blog/git/handle-big-repositories-git][atlassian.com: How to manage big Git repositories]]
+
+  - Try git sparse checkout?
+    It seems that sparse-checkout and rebase doesn't mix.
+
+- Not recommended: =git gc --aggressive= (doesn't do what we think it would do).
+
+** Plan: Make a rebase that uses only trees and not indexes
+   :PROPERTIES:
+   :CUSTOM_ID: plan-make-a-rebase-that-uses-only-trees-and-not-indexes
+   :END:
+
+If a tree changes, all its ancestors have to be rewritten.
+
+** Plan: Just use subtrees and keep the repository small
+   :PROPERTIES:
+   :CUSTOM_ID: plan-just-use-subtrees-and-keep-the-repository-small
+   :END:
+
+I think this is the least-effort solution that solves (works around) the problem.
+* Using Gradle
+  :PROPERTIES:
+  :CUSTOM_ID: using-gradle
+  :END:
+
+- Conclusion:
+
+  - I still haven't found any reason to switch from Maven to Gradle
+    (other than "because this project is already using it").
+
+- Which version of Gradle are we talking about?
+
+  - Gradle 2.9.
+
+- What problems does Gradle solve?
+
+  - Dependency management (picking the libraries' versions and downloading the corresponding JAR files) for Java.
+
+- Do we have those problems?
+
+  - Yes. Software has external dependencies.
+
+- Does Gradle 2.9 solve those problems well?
+
+  - No. Gradle 2.9's dependency resolution algorithm doesn't compute the intersection of version ranges. (Maybe now it does.)
+
+    - Why does it have this defect? Maybe Gradle developers had different priorities, or they didn't know how to do it.
+    - [[https://danysk.github.io/information%20technology/gradle-dependency-resolution-is-insane/][Danilo Pianini: Version ranges resolution in Gradle is insane]]
+
+  - However, there are times we want exact versions instead of version ranges. You want deterministic builds.
+    In this case, there's no need to compute intersections.
+
+    - [[http://blog.danlew.net/2015/09/09/dont-use-dynamic-versions-for-your-dependencies/][Dan Lew: Don't use dynamic versions for your dependencies]]
+
+  - On the other hand, we want to benefit from library updates. Maybe there are security fixes.
+    So we want version ranges?
+
+    - But this assumes that the library maintainer obeys Semantic Versioning.
+
+- Why are we using Gradle instead of Maven? What Maven annoyances does Gradle hide from us?
+
+  - Gradle build scripts are shorter (but IDEA autocompletes Maven pom.xml).
+
+- Why /not/ Gradle?
+
+  - Why Maven instead of Gradle?
+
+    - IDEA integrates better with Maven because pom.xml is configuration, not program.
+      (But IDEA can also open build.gradle?)
+
+      - Opening a pom.xml just works in IDEA.
+
+- How does Gradle 2.9 annoy us?
+
+  - We often have to explicitly tell Gradle 2.9 the exact versions of the libraries we want because it doesn't compute intersections properly.
+    Maven computes intersections.
+  - Gradle doesn't download dependencies in parallel. (But neither does Maven.)
+  - Gradle 2.9 doesn't generate a useful Maven POM, only a minimally valid POM.
+
+- When should I split a Gradle subproject or a Maven module?
+
+  - When we need to reuse one subproject without the others.
+  - If they don't make sense separately, don't split them; it'll just slow down the build for nothing.
+  - The same goes for Maven modules.
+
+- Woes
+
+  - ShadowJar doesn't work with Gradle 2.13.
+* Using Java
+  :PROPERTIES:
+  :CUSTOM_ID: using-java
+  :END:
+
+- How to profile a Java application startup?
+
+  - How to make a Java application wait for a debugger to attach on startup?
+
+- Speeding up Java startup
+
+  - Hypothesis: IntelliJ IDEA startup is slow because it decompresses JAR.
+    Java startup would be faster if the JARs were decompressed (created using =jar c0=).
+
+    - How do we test this?
+      Profile IntelliJ IDEA startup.
+
+  - Hypothesis: The IDE would be faster if it's compiled ahead-of-time.
+
+    - Can we cache the just-in-time compilation result?
+
+  - Does supercompiling the IDE affect speed?
+
+- We can use the JVM without the Java language.
+
+  - https://en.wikipedia.org/wiki/List_of_JVM_languages
+
+- Profiling
+
+  - Install NetBeans.
+  - Choose 'Profile' in the menu, and then 'Attach to External Process'.
+  - Click the down-pointing triangle on the right of the Attach button.
+  - Choose 'Setup Attach to Process...'.
+  - Select 'Manually started remote Java process'.
+  - Choose the remote operating system.
+  - Follow further instructions in NetBeans.
+
+    - If you need =JAVA_HOME= on Oracle JRE 8 on Ubuntu 14.04, use =/usr/lib/jvm/java-8-oracle/jre=.
+
+- How do I start the JVM with a profiling agent?
+- Let the compiler help you.
+
+  - If you make your the fields of your Java class final, you will never forget to set it.
+
+    - You don't need to remember anything.
+    - It just won't compile.
+
+  - You can have dependency injection without dependency injection container/framework.
+
+    - https://sites.google.com/site/unclebobconsultingllc/blogs-by-robert-martin/dependency-injection-inversion
+    - If you have so many classes that instantiating them hurts, don't create so many classes in the first place.
+    - Neutral article http://fabien.potencier.org/do-you-need-a-dependency-injection-container.html
+    - Very opinionated article, borderline fanatical http://www.yegor256.com/2014/10/03/di-containers-are-evil.html
+    - http://blog.ploeh.dk/2010/02/03/ServiceLocatorisanAnti-Pattern/
+
+      - "In short, the problem with Service Locator is that it hides a class' dependencies, causing run-time errors instead of compile-time errors [...]"
+
+- Package by feature, not by layer: http://www.javapractices.com/topic/TopicAction.do?Id=205
+
+  - Dont separate model, data, entity, accessor, and service packages; package by feature not layer
+
+- IntelliJ IDEA can open a Maven project whose POM XML file name is not pom.xml.
+- JVM memory usage problem
+
+  - Tuning JVM memory usage
+
+    - https://docs.oracle.com/cd/E13150_01/jrockit_jvm/jrockit/geninfo/diagnos/tune_footprint.html
+    - https://www.javacodegeeks.com/2017/11/minimize-java-memory-usage-right-garbage-collector.html
+
+  - "Make JVM respect CPU and RAM limits" https://hub.docker.com/_/openjdk/
+  - https://blogs.oracle.com/java-platform-group/java-se-support-for-docker-cpu-and-memory-limits
+
+- 2017-02-21
+
+  - https://github.com/javaparser/javaparser
+  - https://github.com/javaparser/javasymbolsolver
+
+- https://github.com/java-deobfuscator/deobfuscator
+- 2017-05-20
+
+  - Generating Java code
+
+    - Alternatives
+
+      - Use Python to generate Java code?
+        Python comes installed with Ubuntu.
+      - Use Java CodeModel to generate Java code.
+        https://github.com/javaee/jaxb-codemodel
+      - Use the Haskell package =language-java=
+        to generate Java code.
+      - Read table metadata from DataSource,
+        generate Java source file for Entity and DAO.
+
+- 2017-05-18
+
+  - Java is procedural.
+  - =object.method(argument)= is a syntactic sugar for =method(object, argument)=.
+  - Where should the method =m= be defined?
+    It can be defined in both =a= and =b=.
+    =a.m(b)= or =b.m(a)= or =C.m(a,b)=?
+    If you have to ask this, your design is wrong.
+  - Antipattern: two classes A and B with conversion from A to B and B to A?
+
+    - Solution: Delete one of them?
+
+- http://blog.sokolenko.me/2014/11/javavm-options-production.html
+- [[http://maintainj.com/index.html][MaintainJ: "We simplify the complexity of maintaining Java code"]]
+
+  - Watch the demo.
+  - What does it do, as seen by programmers, in non-marketing tech-speak?
+
+    - Start/stop dumping call trace of a running JVM into a file.
+    - Open the dump as a sequence diagram in Eclipse.
+    - Some filtering.
+
+- [[https://www.jethrocarr.com/2013/11/30/jconsole-to-remote-servers-easily/][Jconsole to remote servers, easily | Jethro Carr]]
+* Using Maven
+  :PROPERTIES:
+  :CUSTOM_ID: using-maven
+  :END:
+
+The strength of Maven is its ecosystem.
+Network effect.
+
+Maven is rigid.
+All projects build in the same way.
+If you want Maven to do something, but you can't find an example on the Internet, you should assume that it can't be done.
+
+To compile your project, run =mvn compile=.
+
+To package your project, run =mvn package=.
+
+Maven output directory is =target=.
+* Removing nag screens
+  :PROPERTIES:
+  :CUSTOM_ID: removing-nag-screens
+  :END:
+
+Copy the respective fragments to your browser's JavaScript Console (Ctrl+Shift+J on Chromium).
+
+Don't run codes you don't trust.
+
+** Make [[http://www.webtoon.com/][www.webtoon.com]] fast
+   :PROPERTIES:
+   :CUSTOM_ID: make-www.webtoon.com-fast
+   :END:
+
+That website has an unacceptably slow scrolling.
+This script makes it fast.
+
+*** Usage
+    :PROPERTIES:
+    :CUSTOM_ID: usage
+    :END:
+
+Open the comic episode you want to read.
+
+Paste this fragment into your browser's JavaScript console.
+
+#+BEGIN_EXAMPLE
+    // Retain big images. Discard everything else.
+    var images = [];
+    document.querySelectorAll("img").forEach(function (element) {
+        images.push(element);
+    });
+    document.head.innerHTML = "";
+    document.body.innerHTML = "";
+    images.forEach(function (element) {
+        const big = 256;
+        const url = element.dataset.url;
+        if (url && element.width >= big) {
+            element.src = url;
+            element.style.display = "block";
+            document.body.appendChild(element);
+        }
+    });
+#+END_EXAMPLE
+
+To go the the next episode, increment the =episode_no= parameter in the address bar.
+
+*** Notes
+    :PROPERTIES:
+    :CUSTOM_ID: notes
+    :END:
+
+I tried =getEventListeners= and =removeEventListener= but they don't work.
+
+** Remove Quora nag screen
+   :PROPERTIES:
+   :CUSTOM_ID: remove-quora-nag-screen
+   :END:
+
+Tested on 2017-07-08.
+
+Not only does Quora put up a nag screen, it also disables scrolling.
+
+#+BEGIN_EXAMPLE
+    document.querySelectorAll("div[id]").forEach(function (x) {
+        if (x.id.indexOf("signup_wall_wrapper") >= 0) { x.remove(); }
+    });
+    document.body.classList.remove("signup_wall_prevent_scroll");
+#+END_EXAMPLE
+
+** Remove Pinterest nag screen
+   :PROPERTIES:
+   :CUSTOM_ID: remove-pinterest-nag-screen
+   :END:
+
+Tested on 2018-05-13.
+
+Type 1.
+
+#+BEGIN_EXAMPLE
+    document.querySelector("[data-test-giftwrap]").remove();
+#+END_EXAMPLE
+
+Type 2.
+
+#+BEGIN_EXAMPLE
+    document.querySelector("#desktopWrapper").style.position = "static";
+    document.querySelector("body style").remove();
+    document.querySelector(".FullPageModal__scroller").parentNode.remove();
+#+END_EXAMPLE
+
+** Group Gmail mails by sender email
+   :PROPERTIES:
+   :CUSTOM_ID: group-gmail-mails-by-sender-email
+   :END:
+
+#+BEGIN_EXAMPLE
+    (function () {
+        var group = {};
+        document.querySelectorAll("[email]").forEach(function (elem) {
+            var sender = elem.getAttribute("email");
+            group[sender] = 1 + (group[sender] || 0);
+        });
+        var list = [];
+        var sender;
+        var count;
+        for (sender in group) {
+            count = group[sender];
+            list.push([count, sender]);
+        }
+        list.sort(function (a, b) {
+            return -Math.sign(a[0] - b[0]);
+        })
+        return list;
+    })();
+#+END_EXAMPLE
+
+** Chrome bookmarklet: Make Markdown link for page
+   :PROPERTIES:
+   :CUSTOM_ID: chrome-bookmarklet-make-markdown-link-for-page
+   :END:
+
+This may produce invalid Markdown.
+Check before you copy.
+
+#+BEGIN_EXAMPLE
+    javascript:window.prompt("Copy to clipboard: Ctrl+C, Enter", "- [" + document.title + "](" + document.URL + ")");
+#+END_EXAMPLE
+* Using Python
+  :PROPERTIES:
+  :CUSTOM_ID: using-python
+  :END:
+
+Python virtualenv is relatively forward-compatible.
+Don't waste time installing Python from source.
+Use the Python packaged with your distro, and use virtualenv.
+The Pip that comes with Python 3.7.0 fails because Ubuntu 14.04 OpenSSL is too old (or Python doesn't bother to maintain backward compatibility).
+
+#+BEGIN_EXAMPLE
+    sudo apt-get install python-virtualenv
+#+END_EXAMPLE
+
+Create a virtualenv directory using =virtualenv PATH=
+Note: After the directory is created, it can't be renamed.
+
+[[https://leemendelowitz.github.io/blog/how-does-python-find-packages.html][How does python find packages?]]
+* Security
+  :PROPERTIES:
+  :CUSTOM_ID: security
+  :END:
+
+- Bastion hosts, aka jump boxes
+
+  - Does a jump box add any security?
+
+    - http://cloudacademy.com/blog/aws-bastion-host-nat-instances-vpc-peering-security/
+    - http://www.infoworld.com/article/2612700/security/-jump-boxes--improve-security--if-you-set-them-up-right.html
+
+- Check your HTTPS
+
+  - [[https://www.ssllabs.com/ssltest/][Test your HTTPS implementation]]; it's too easy to do security wrong.
+
+- [[https://www.vaultproject.io/][HashiCorp Vault]]
+
+  - [[https://github.com/hashicorp/vault][source code]], language Go, license MPL 2.0
+  - What is Vault? "Vault is a tool for securely accessing /secrets/." ([[https://www.vaultproject.io/intro/index.html][Introduction]])
+  - What can it do?
+  - How do I install it?
+  - How do I run it?
+  - How do I interact with it?
+  - [[https://www.hashicorp.com/][HashiCorp]]
+
+- [[https://stackoverflow.com/questions/5930529/how-is-revocation-of-a-root-certificate-handled][SE 5930529: How is revocation of a root certificate handled?]]
+- [[https://en.wikipedia.org/wiki/Online_Certificate_Status_Protocol][WP: Online Certificate Status Protocol]]
+- [[https://en.wikipedia.org/wiki/OCSP_stapling][WP: OCSP Stapling]] moves the cost from client to server.
+- Zero trust security model (ZTSM)
+
+  - "How would I design my system without any firewalls?"
+  - https://www.scaleft.com/beyondcorp/
+
+    - old approach: perimeter security, medieval castle, weak core, strong perimeter
+    - https://storage.googleapis.com/pub-tools-public-publication-data/pdf/43231.pdf
+
+      - "The perimeter security model works well enough when all employees work exclusively in buildings owned by an enterprise."
+      - "access depends solely on device and user credentials, regardless of a user's network location"
+      - "All access to enterprise resources is fully authenticated, fully authorized, and fully encrypted based upon device state and user credentials."
+      - ZTSM obviates VPN (virtual private network).
+* Software
+  :PROPERTIES:
+  :CUSTOM_ID: software
+  :END:
+
+- Web development
+
+  - [[https://webpack.js.org/guides/typescript/][Set up Webpack to transpile and bundle TypeScript sources]]
+  - HTML DOM, web, browser, JavaScript
+
+    - [[https://gist.github.com/paulirish/5d52fb081b3570c81e3a][What forces layout / reflow]]
+
+- Software for scientists
+
+  - [[https://gist.github.com/stared/9130888][stared github gist]]
+  - https://www.quora.com/What-wiki-blog-software-do-PhD-students-use-to-maintain-personal-notes-of-their-daily-reading-research
+
+- Legality of software
+
+  - Why doesn't Facebook just keep using Apache Software License version 2.0 for React?
+    Why does it roll out its own patent license?
+
+    - Update: Facebook has switched back to Apache-2.0.
+
+- [[file:%7B%%20link%20autotools.md%20%%7D][Autotools]]
+- Functional programming
+
+  - Haskell
+
+    - https://github.com/sellout/recursion-scheme-talk/blob/master/recursion-scheme-talk.org
+    - https://github.com/krispo/awesome-haskell
+    - Cabal is the key to Haskell usability and adoption?
+
+      - https://www.haskell.org/cabal/
+      - Haskell lacks something like ruby gem, python pypi, or nodejs npm.
+
+        - https://stackoverflow.com/questions/5138881/how-are-ghc-pkg-and-cabal-programs-related-haskell
+        - https://stackoverflow.com/questions/2706667/what-is-the-relationship-between-ghc-pkg-and-cabal
+
+  - Pure-lang
+
+    - https://puredocs.bitbucket.io/pure.html#lazy-evaluation-and-streams
+    - https://bitbucket.org/purelang/pure-lang/wiki/Rewriting
+    - https://agraef.github.io/pure-docs/#language-and-standard-library
+    - https://agraef.github.io/pure-docs/pure.html#pure-overview
+    - https://wiki.haskell.org/Applications_and_libraries/Music_and_sound
+
+- Ungrouped
+
+  - [[https://github.com/plasma-umass/doppio][doppio]], a JVM written in TypeScript, with a POSIX-compatible runtime system
+
+    - from https://www.reddit.com/r/programming/comments/3xkn75/nashorn_javascript_on_the_jvm_ftw/
+
+- My abandoned software
+
+  - These are not usable.
+  - [[https://github.com/edom/pragmatic][Pragmatic Haskell library]]
+    tries to standardize the ways of doing things.
+  - [[https://github.com/edom/try-phabricator][Try Phabricator]]
+    uses Docker Compose and is bundled with Apache, PHP, and MariaDB.
+    It worked out of the box, but it was not designed for production.
+  - [[https://github.com/edom/apt-manual-mirror][APT manual mirror]] copies selected Debian packages
+    into local directory while preserving the layout.
+    It allows you to mirror only the packages you want.
+  - [[https://github.com/edom/haji][Haji]] tries to be a Java bytecode interpreter written in Haskell.
+* Administering a computer
+  :PROPERTIES:
+  :CUSTOM_ID: administering-a-computer
+  :END:
+
+- Why use swap partitions and not swap files?
+
+  - Defragmenting swap files might have undesirable effects.
+
+    - https://lwn.net/Articles/317787/
+
+- ext4 defragmentation tools
+
+  - https://askubuntu.com/questions/221079/how-to-defrag-an-ext4-filesystem
+
+    - e2freefrag DEV, e4defrag -c FILE
+
+- SATA 3 Gbps controller problem?
+
+  - https://github.com/zfsonlinux/zfs/issues/4873
+
+- Security
+
+  - Isolating (sandboxing) an application
+
+    - Creating a dedicated limited user for an application
+
+      - =adduser --system=, or just use the =nobody= user?
+
+  - Many methods of isolation
+
+    - https://unix.stackexchange.com/questions/384117/linux-isolate-process-without-containers
+    - https://www.engineyard.com/blog/linux-containers-isolation
+    - https://opensourceforu.com/2016/07/many-approaches-sandboxing-linux/
+
+- Why isn't ssh fail2ban the default?
+  Why is security not the default?
+- 2014, "Is there any solution to make OpenVPN authentication with Google ID?", [[https://serverfault.com/questions/597833/is-there-any-solution-to-make-openvpn-authentication-with-google-id][SF 597833]]
+- man page usability, terminal usability, reducing cognitive load
+
+  - [[https://tldr.sh/][tldr.sh]]: "The TLDR pages are a community effort to simplify the beloved man pages with practical examples."
+
+- [[https://stackoverflow.com/questions/22697049/what-is-the-difference-between-google-app-engine-and-google-compute-engine][SO 22697049: difference between Google App Engine and Google Compute Engine]]
+- A good OS (operating system) is invisible like a good design.
+
+  - The user can't tell whether an OS is good.
+    If the OS is good, everything runs smoothly.
+  - But the user can tell whether an OS is bad.
+    Crashes due to non-hardware problems.
+    Things that don't just work.
+
+- https://felipec.wordpress.com/2011/06/16/after-two-weeks-of-using-gnome-3-i-officially-hate-it/
+
+  - Why does the author disapprove of GNOME 3?
+
+- https://libcloud.apache.org/
+
+  - "One Interface To Rule Them All: Python library for interacting with many of the popular cloud service providers using a unified API."
+
+- Systems should be secure by default.
+
+  - UNIX/Linux woes
+
+    - Why is SSH fail2ban not installed by default?
+    - Why does an application run as the user?
+
+      - I think this is a design flaw.
+        It's a big gaping security hole.
+        It allows an application to access all your files.
+        But how do we fix this without sacrificing convenience?
+      - Why is sandboxing not the default?
+
+    - How do we understand SELinux?
+
+      - [[https://www.computernetworkingnotes.com/rhce-study-guide/selinux-explained-with-examples-in-easy-language.html][SELinux Explained with Examples in Easy Language]]
+      - NSA made SELinux. How trustworthy is it? Does it have NSA backdoors?
+
+        - [[https://security.stackexchange.com/questions/42383/how-trustworthy-is-selinux][linux - How trustworthy is SELinux? - Information Security Stack Exchange]]
+        - 2017, [[https://www.reddit.com/r/linux/comments/54in5s/the_nsa_has_tried_to_backdoor_linux_three_times/][The NSA has tried to backdoor linux three times : linux]]
+
+    - What is the relationship/difference between MAC (mandatory access control) and DAC (discretionary access control)?
+      Are they antonyms? Complements?
+
+      - [[https://security.stackexchange.com/questions/63518/mac-vs-dac-vs-rbac][access control - MAC vs DAC vs RBAC - Information Security Stack Exchange]]
+
+  - The only real secure way to run an untrusted application is on a different machine with no network connection.
+
+- [[https://linux.die.net/man/1/pv][pv(1): monitor progress of data through pipe - Linux man page]]
+- [[https://stedolan.github.io/jq/][jq]], [[https://en.wikipedia.org/wiki/Jq_(programming_language)][WP:jq (programming language)]]
+
+** sudo security hole mitigation: Don't reuse the terminal you use for sudo.
+   :PROPERTIES:
+   :CUSTOM_ID: sudo-security-hole-mitigation-dont-reuse-the-terminal-you-use-for-sudo.
+   :END:
+
+The problem:
+If you run sudo in a terminal,
+then every program you run in the same terminal shortly after can become root without asking for your password,
+(You may not have this problem if your system disables credential caching.)
+
+To see how, save this into =evil.sh=, and then =chmod 755 evil.sh=, and then =sudo echo login=, and then =./evil.sh=.
+
+#+BEGIN_SRC sh
+    #!/bin/bash
+    # If you run this script not long after sudoing in the same terminal,
+    # then this script can become root without prompting for your password.
+    sudo echo PWNED # could be a malicious program
+#+END_SRC
+
+The security hole is by design for convenience because people don't like typing their passwords.
+This hole is not fatal; the user can control this.
+It seems that this hole won't be closed;
+there doesn't seem to be any way of closing this hole without annoying the user.
+
+The mitigation is simple disciplined behavior:
+
+- Do as few things as necessary in an elevated terminal.
+- Run only trusted programs and scripts.
+- Close the terminal as soon as possible.
+  Alternatively, you can also run =sudo -K= to remove the cache.
+
+** Probably relevant Twitters
+   :PROPERTIES:
+   :CUSTOM_ID: probably-relevant-twitters
+   :END:
+
+- [[https://twitter.com/nixcraft][nixcraft]]: some humor, some important
+
+** Building software for old Ubuntu
+   :PROPERTIES:
+   :CUSTOM_ID: building-software-for-old-ubuntu
+   :END:
+
+Suppose:
+
+- You are using Ubuntu 14.04.
+- Ubuntu 14.04 comes with Emacs 24.
+- You want to build Emacs 26 (because you want Spacemacs).
+
+You may be able to do that.
+Install the build dependencies, and hope that emacs 26 doesn't get too edgy with its libraries.
+
+#+BEGIN_EXAMPLE
+    sudo apt-get build-dep emacs24
+#+END_EXAMPLE
+
+That is from [[http://ergoemacs.org/emacs/building_emacs_on_linux.html][How to Build Emacs on Linux]].
+
+You can do that for other software, as long as they don't require dependencies that are too recent.
+
+** what
+   :PROPERTIES:
+   :CUSTOM_ID: what
+   :END:
+
+- https://medium.com/netflix-techblog/linux-performance-analysis-in-60-000-milliseconds-accc10403c55

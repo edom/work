@@ -27,7 +27,6 @@ We should join forces to reach our shared goals.
     - Software engineering
         - Forward software engineering
             - [Making lasting software sooner]({% link softeng.html %})
-                - [Software]({% link software.md %})?
                 - Making the only programming language we will ever need
                     - [Modeling]({% link model.md %})
                         - [Modeling all data]({% link modeldata.md %})
@@ -49,38 +48,25 @@ We should join forces to reach our shared goals.
             - Programming
                 - [Using Haskell]({% link haskell.md %})
                     - [Using Cabal]({% link cabal.md %})
-                - [Using Java]({% link java.md %})
+                - Using Java
                     - Building a Java project
-                        - 2018-08-29: I recommend Maven.
-                        - [Using Maven]({% link maven.md %})
-                        - [Using Gradle]({% link gradle.md %})
-                - [Using Python]({% link python.md %})
+                        - 2018-08-29: For Java enterprise/server programming, I recommend Maven instead of Gradle.
                 - [Using XML]({% link xml.md %})
                 - [Using PostgreSQL]({% link pgsql.html %})
                 - [Standard MIDI file format]({% link smf.md %})
-            - [Using Git]({% link git.md %})
-                - [Speeding up Git]({% link gitspd.md %})
             - [Making contributable open-source projects]({% link opensrc.md %})
                 - [Building online communities]({% link community.md %})
                 - Maintaining open-source projects
-            - [Deploying web applications]({% link deploy.md %})
             - [Making a Java virtual machine]({% link jvm.md %})
         - [Reverse software engineering]({% link reveng.md %})
             - [Reverse engineering the network protocol used by a Java desktop application]({% link rejava.md %}): a stock trading application written in Java 6
             - [Reverse-engineering PlayStation 1 3D games to control the camera]({% link ps1.md %})
         - [Managing software engineers]({% link engman.md %})
         - [Software engineer salary]({% link salary.md %})
-    - [Administering a computer]({% link sysadm.md %})
-        - [Programming Bash]({% link bash.md %})
-        - [Running X client applications on Docker on Linux]({% link dockerx.md %})
-        - [Moving to clouds, for old-school sysadmins]({% link cloud.md %})
-        - [Kubernetes]({% link kubernetes.md %})
-        - Cloud infrastructure hosting, infrastructure as a service
-            - [Amazon Web Services]({% link aws.md %})
-        - [Security]({% link security.md %})
-    - [Using computers]({% link usecom.md %})
+    - Administering a computer
+        - [Kubernetes]({% link kubernetes.md %}) (should be merge to usecom)
+    - [Using computers]({% link usecom.html %})
         - [Searching the Internet]({% link search.md %})
-        - [Removing nag screens]({% link nag.md %})
         - [Making a personal wiki]({% link perswiki.md %})
         - [Buying a smartphone]({% link phone.html %})
         - [Contributing to Wikipedia]({% link wikipedia.md %})
