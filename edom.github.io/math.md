@@ -5,20 +5,6 @@ date: 2017-06-27 03:00:00 +0700
 mathjax: yes
 ---
 
-- Sections
-    - [Probability and statistics]({% link probstat.md %})
-    - [Category theory]({% link category.md %})
-- Reference articles
-    - [Function]({% link function.md %})
-    - [Relation]({% link relation.md %})
-    - Which point of view should we use?
-        - We can see a function as a special kind of relation.
-        - We can see a relation from \\( A \\) to \\( B \\) as a function from \\( A \\) to \\( 2^B \\).
-            - Every binary relation \\((A,B,r)\\) is a function \\((A,2^B,f)\\)
-            where \\(f(x) = \\{ y ~\|~ r(x,y) \\}\\).
-        - Which is more primitive: function or relation?
-    - [Limit]({% link limit.md %})
-    - [Unary algebra]({% link unalg.md %})
 - Branches
     - [WP: Mathematics Subject Classification](https://en.wikipedia.org/wiki/Mathematics_Subject_Classification)
         - http://www.ams.org/publications/math-reviews/historicalclassifications

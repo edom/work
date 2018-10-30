@@ -186,6 +186,20 @@ We should join forces to reach our shared goals.
         - 1989, article, "Mathematical writing", Donald E. Knuth, Tracy Larrabee, and Paul M. Roberts, [pdf](http://jmlr.csail.mit.edu/reviewing-papers/knuth_mathematical_writing.pdf)
             - "Many readers will skim over formulas on their first reading of your exposition.
             Therefore, your sentences should flow smoothly when all but the simplest formulas are replaced by 'blah' or some other grunting noise. (p. 3)
+    - Sections
+        - [Probability and statistics]({% link probstat.md %})
+        - [Category theory]({% link category.md %})
+    - Reference articles
+        - [Function]({% link function.md %})
+        - [Relation]({% link relation.md %})
+        - Which point of view should we use?
+            - We can see a function as a special kind of relation.
+            - We can see a relation from \\( A \\) to \\( B \\) as a function from \\( A \\) to \\( 2^B \\).
+                - Every binary relation \\((A,B,r)\\) is a function \\((A,2^B,f)\\)
+                where \\(f(x) = \\{ y ~\|~ r(x,y) \\}\\).
+            - Which is more primitive: function or relation?
+        - [Limit]({% link limit.md %})
+        - [Unary algebra]({% link unalg.md %})
 - [Writing]({% link writing.html %})
     - [Working around Markdown]({% link markdown.md %})
 - Spirituality
