@@ -5,6 +5,8 @@ date: 2017-07-03 02:25 +0700
 mathjax: yes
 ---
 
+# Probability and statistics
+
 "Probstat" is "probability and statistics".
 
 - Basic probability modeling
@@ -16,10 +18,10 @@ mathjax: yes
         - False positive and false negative
         - Testing the test
     - Counting exhaustively
-        - [Monty Hall problem]({% link montyhall.md %})
+        - Monty Hall problem
         - [WP: Boy-or-girl paradox](https://en.wikipedia.org/wiki/Boy_or_girl_paradox) (need unambiguous problem statement)
     - Basic combinatorics (counting combinations)
-    - [Randomness]({% link random.md %})
+    - Randomness
 - Basic statistics
     - Collection? Dataset? Sample?
     - Variable vs parameter

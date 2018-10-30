@@ -5,6 +5,8 @@ date: 2018-04-28 19:58 +0700
 mathjax: yes
 ---
 
+## Monty Hall problem
+
 There are three doors.
 Let the set of doors be <span>\( D = \{ 1, 2, 3 \} \)</span>.
 One door \\( p \\) has the prize.

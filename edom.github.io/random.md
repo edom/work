@@ -4,6 +4,8 @@ permalink: /random.html
 date: 2018-04-28 16:32 +0700
 ---
 
+# Randomness
+
 "Random" means "we don't know why".
 
 We see randomness because we ignore details.
