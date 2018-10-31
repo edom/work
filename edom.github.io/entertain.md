@@ -57,8 +57,8 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
                     - [Nichijou - Mio Loses It](https://www.youtube.com/watch?v=z30Y572EmCk)
                     - [Nichijou - Principal v. Deer](https://www.youtube.com/watch?v=Z7Et0a8fnuw)
                 - Gintama
-                    - <A HREF="https://www.youtube.com/watch?v=69P8GM8oq1o">Captain Katsura Getting A Driver&#39;s License - Gintama Funny Moments - YouTube</A>
-                    - <A HREF="https://www.youtube.com/watch?v=6dc2LKl2df4">GinTama 銀魂 - The GPS - YouTube</A>
+                    - [Captain Katsura Getting A Driver&#39;s License - Gintama Funny Moments - YouTube](https://www.youtube.com/watch?v=69P8GM8oq1o)
+                    - [GinTama 銀魂 - The GPS - YouTube](https://www.youtube.com/watch?v=6dc2LKl2df4)
     - Steve Harvey's laughter ([Wikidata: Steve Harvey](https://www.wikidata.org/wiki/Q2347009))
         - [my brother doesn't share his girlfriend](https://www.youtube.com/watch?v=nCSx2BWGBNM)
             - 0:26--0:38: Steve Harvey laughing: "Jack doesn't share her with me"
@@ -135,7 +135,7 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
             - [bemo nabrak pager](https://www.youtube.com/watch?v=l9moNGjiz-s)
             - [tukang bakso nabrak tukang bajaj](https://www.youtube.com/watch?v=V3zsE3-vHWY)
                 - ini dari Line seseorang; lupa namanya siapa; judulnya "Jakarta in 48 seconds"
-                - might be the source: <A HREF="https://timeline.line.me/post/_dfCPHdjBy5z5KFzyUcIxQz7GVZXpc3nqB9byb3g/1149597060303044432">LINE TIMELINE - Mungkin ini satu-satunya video yang dapat menjelaskan Jakarta dalam 48 detik</A>, Rifqi Taufik Alhakim, 2017-05-28 20:23 +0700
+                - might be the source: [LINE TIMELINE - Mungkin ini satu-satunya video yang dapat menjelaskan Jakarta dalam 48 detik](https://timeline.line.me/post/_dfCPHdjBy5z5KFzyUcIxQz7GVZXpc3nqB9byb3g/1149597060303044432), Rifqi Taufik Alhakim, 2017-05-28 20:23 +0700
             - [skedaddle skedoodle your dick is now a noodle](https://www.youtube.com/watch?v=P3a-O8wHKg8)
                 - music: NFL (National Football League) theme, or "NFL ON FOX THEME-28221"
 - [vim: Entering special characters](http://vim.wikia.com/wiki/Entering_special_characters)
@@ -170,10 +170,10 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
     - [YT:"Me laughing at the top 10 Mountain Dew name votes"](https://www.youtube.com/watch?v=rxu3kZPlZx8)
     - [YT:Meterstick Jim - The Sims 3: The funniest patch notes](https://www.youtube.com/watch?v=4nxsCZ2SEcQ)
     - [YT:The Turkey Whisperer(ORIGINAL)](https://www.youtube.com/watch?v=Q1sDmooVHj8)
-        - copy: <A HREF="https://www.youtube.com/watch?v=BC2d1vNyO78">Very funny video - laughing chickens - YouTube</A>
+        - copy: [Very funny video - laughing chickens - YouTube](https://www.youtube.com/watch?v=BC2d1vNyO78)
     - news reporter can't stop laughing
         - I think this is the best news reporter laughing:
-            - <A HREF="https://www.youtube.com/watch?v=D6xa3VcxWtI">Russian news reporter can&#39;t stop laughing (with English subtitles) - YouTube</A>
+            - [Russian news reporter can&#39;t stop laughing (with English subtitles) - YouTube](https://www.youtube.com/watch?v=D6xa3VcxWtI)
         - We have a contender: [Chris P Bacon news anchor reporter looses control laughs at name of pig](https://www.youtube.com/watch?v=pMA3x-bc8iM)
             - Robert Bradfield https://twitter.com/robertbreports/status/826300273043894272?lang=en
     - [ShadowPorker: Gluten Free Lapdances](https://www.youtube.com/watch?v=beA-HMLVb9M)
@@ -190,45 +190,45 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
 - From my old Chromium bookmark folder "ENTERTAINMENT":
     - todo: merge into the above sections
     - Creative Labs keyboard drum demonstration
-        - <A HREF="https://www.youtube.com/watch?v=Ofn2A1p13Sg">Asian Guy Plays Drums On A Keyboard - YouTube</A>
-        - <A HREF="https://www.youtube.com/watch?v=h73kd6wsBq0">Creative Labs Keyboard Drum Demonstration. - YouTube</A>
-        - <A HREF="https://www.youtube.com/watch?v=fqM7bN3Kc7I">Funky Creative Prodikeys Demonstration - YouTube</A>
+        - [Asian Guy Plays Drums On A Keyboard - YouTube](https://www.youtube.com/watch?v=Ofn2A1p13Sg)
+        - [Creative Labs Keyboard Drum Demonstration. - YouTube](https://www.youtube.com/watch?v=h73kd6wsBq0)
+        - [Funky Creative Prodikeys Demonstration - YouTube](https://www.youtube.com/watch?v=fqM7bN3Kc7I)
     - Kung Fury
-        - <A HREF="https://www.youtube.com/watch?v=bS5P_LAqiVg">KUNG FURY Official Movie [HD] - YouTube</A>
-        - <A HREF="https://www.youtube.com/watch?v=ZTidn2dBYbY&index=27&list=RDaDMsGl_XxTk">David Hasselhoff - True Survivor (from Kung Fury) - YouTube</A>
-    - <A HREF="https://en.wikipedia.org/wiki/Chacarron_Macarron">Chacarron Macarron - Wikipedia, the free encyclopedia</A>
+        - [KUNG FURY Official Movie [HD] - YouTube](https://www.youtube.com/watch?v=bS5P_LAqiVg)
+        - [David Hasselhoff - True Survivor (from Kung Fury) - YouTube](https://www.youtube.com/watch?v=ZTidn2dBYbY&index=27&list=RDaDMsGl_XxTk)
+    - [Chacarron Macarron - Wikipedia, the free encyclopedia](https://en.wikipedia.org/wiki/Chacarron_Macarron)
     - absurd comedy
         - [Big Bill Hell's](https://www.youtube.com/watch?time_continue=19&v=4sZuN0xXWLc), extreme language, advertisement parody
-        - <A HREF="https://www.youtube.com/watch?v=XkFaIpDg194">EPIC Drum Solo FAIL! - YouTube</A>
-        - <A HREF="https://www.youtube.com/watch?v=uMl9oYSVGlo">Everything is Samuel L. Jackson&#39;s Fault - YouTube</A>
+        - [EPIC Drum Solo FAIL! - YouTube](https://www.youtube.com/watch?v=XkFaIpDg194)
+        - [Everything is Samuel L. Jackson&#39;s Fault - YouTube](https://www.youtube.com/watch?v=uMl9oYSVGlo)
         - cartoons
-            - <A HREF="https://www.youtube.com/watch?v=_NXrTujMP50">Anime 404 - YouTube</A>
+            - [Anime 404 - YouTube](https://www.youtube.com/watch?v=_NXrTujMP50)
             - The Legend of Koizumi (mudazumo naki kaikaku)
-                - <A HREF="https://www.youtube.com/watch?v=se5ROC63y4Q">Mudazumo Naki Kaikaku Ending - YouTube</A>
-                - <A HREF="http://mahjong.wikidot.com/the-legend-of-kozumi">The Legend of Koizumi - Mahjong Wiki (麻将维基)</A>
-            - <A HREF="https://www.youtube.com/watch?v=IjhkREEQIHQ">lucky star - Legendary Girl A! - YouTube</A>
-            - <A HREF="https://www.youtube.com/watch?v=PYB3zE9LOLg">"my gonads are indestructible" &amp; "nigga get your black ass outta here" - BOONDOCKS BEST MOMENTS - YouTube</A>
-            - <A HREF="https://www.youtube.com/watch?v=tIDYiGeqnUA">Yondemasu yo,azazel san funny moments part 3 - YouTube</A>
-            - <A HREF="https://www.youtube.com/watch?v=xLf_wMECFw8">Katanagatari: Togame has the Worst Timing - YouTube</A>
-            - <A HREF="https://vimeo.com/115840451">gag manga biyori - harris impact [アニメ DVD] 増田こうすけ劇場 ギャグマンガ日和 第06話 「ハリスインパクト ビックリ大作戦」 on Vimeo</A>
-            - <A HREF="https://www.youtube.com/watch?v=q4ZFUDMmIgc">Barakamon - Fujoshi [Funny] - YouTube</A>
-            - <A HREF="https://www.youtube.com/watch?v=vZ1mWFi9FwM">Saber Gets A Job At A Maid Cafe HD (Fate Stay Night) - YouTube</A>
+                - [Mudazumo Naki Kaikaku Ending - YouTube](https://www.youtube.com/watch?v=se5ROC63y4Q)
+                - [The Legend of Koizumi - Mahjong Wiki (麻将维基)](http://mahjong.wikidot.com/the-legend-of-kozumi)
+            - [lucky star - Legendary Girl A! - YouTube](https://www.youtube.com/watch?v=IjhkREEQIHQ)
+            - ["my gonads are indestructible" &amp; "nigga get your black ass outta here" - BOONDOCKS BEST MOMENTS - YouTube](https://www.youtube.com/watch?v=PYB3zE9LOLg)
+            - [Yondemasu yo,azazel san funny moments part 3 - YouTube](https://www.youtube.com/watch?v=tIDYiGeqnUA)
+            - [Katanagatari: Togame has the Worst Timing - YouTube](https://www.youtube.com/watch?v=xLf_wMECFw8)
+            - [gag manga biyori - harris impact [アニメ DVD] 増田こうすけ劇場 ギャグマンガ日和 第06話 「ハリスインパクト ビックリ大作戦」 on Vimeo](https://vimeo.com/115840451)
+            - [Barakamon - Fujoshi [Funny] - YouTube](https://www.youtube.com/watch?v=q4ZFUDMmIgc)
+            - [Saber Gets A Job At A Maid Cafe HD (Fate Stay Night) - YouTube](https://www.youtube.com/watch?v=vZ1mWFi9FwM)
         - parody?
-            - <A HREF="https://www.youtube.com/watch?v=LSBFTKI-zIM">KFC Loves Gays with John Goodman - YouTube</A>
-            - <A HREF="https://www.youtube.com/watch?v=mbyzgeee2mg">Ylvis - Stonehenge [Official music video HD] [Explicit lyrics] - YouTube</A>
+            - [KFC Loves Gays with John Goodman - YouTube](https://www.youtube.com/watch?v=LSBFTKI-zIM)
+            - [Ylvis - Stonehenge [Official music video HD] [Explicit lyrics] - YouTube](https://www.youtube.com/watch?v=mbyzgeee2mg)
         - games
             - Yakuza series
-                - <A HREF="https://www.youtube.com/watch?v=U76chEyJjKw">Yakuza 0: 17 Minutes of Meeting Goro Majima - YouTube</A>
-            - <A HREF="https://www.youtube.com/watch?v=l1SvvagUGuU&list=RDaDMsGl_XxTk&index=27">Gorgeous Freeman - Episode 2 - The Crowbar - YouTube</A>
+                - [Yakuza 0: 17 Minutes of Meeting Goro Majima - YouTube](https://www.youtube.com/watch?v=U76chEyJjKw)
+            - [Gorgeous Freeman - Episode 2 - The Crowbar - YouTube](https://www.youtube.com/watch?v=l1SvvagUGuU&list=RDaDMsGl_XxTk&index=27)
             - [YT:I'M AT SOUP! [TF2 SFM]](https://www.youtube.com/watch?v=4kqbKEqzsAI)
     - "disgustang"
-        - <A HREF="https://www.youtube.com/watch?v=eGmgraZef9Y">DISGUSTANG - SHET - Cher lloyd - Massive Shet cover - YouTube</A>
-        - <A HREF="https://www.youtube.com/watch?v=8E7ScwCbGLU">DISGUSTANG - YouTube</A>
+        - [DISGUSTANG - SHET - Cher lloyd - Massive Shet cover - YouTube](https://www.youtube.com/watch?v=eGmgraZef9Y)
+        - [DISGUSTANG - YouTube](https://www.youtube.com/watch?v=8E7ScwCbGLU)
     - absurd racing
-        - <A HREF="https://www.youtube.com/watch?v=qAkrzEqHHyA">60 000 HP &quot;Shockwave&quot; FIRST JET RACE EVER in MI! - YouTube</A>
-        - <A HREF="https://www.youtube.com/watch?v=svmypzPUCBE">Gran Turismo 4 - 1 HP to 10,000 HP upgrade - YouTube</A>
+        - [60 000 HP &quot;Shockwave&quot; FIRST JET RACE EVER in MI! - YouTube](https://www.youtube.com/watch?v=qAkrzEqHHyA)
+        - [Gran Turismo 4 - 1 HP to 10,000 HP upgrade - YouTube](https://www.youtube.com/watch?v=svmypzPUCBE)
     - Reliant Robin
-        - <A HREF="https://www.youtube.com/watch?v=QQh56geU0X8">Rolling a Reliant Robin - Top Gear - BBC - YouTube</A>
+        - [Rolling a Reliant Robin - Top Gear - BBC - YouTube](https://www.youtube.com/watch?v=QQh56geU0X8)
 - [Bill Nye makes fun of Neil deGrasse Tyson's reply to Dawkins, making Lawrence Krauss glad](https://www.youtube.com/watch?v=n0-jKmcNr_8)
 - parody
     - [GOKU MAKES A SANDWICH](https://www.youtube.com/watch?v=0T7dLaqKtTY)
@@ -255,14 +255,14 @@ Entertainment is a perfect chance to educate the people, the citizens, the laype
         - [Bruiser Bear - YouTube](https://www.youtube.com/watch?v=I-yqvT8vKZc), bear belly-flopping into pool
         - [Don’t you brush YOUR bears? - YouTube](https://www.youtube.com/watch?v=x70d3Uw6Nxs)
     - animals, mostly dogs
-        - <A HREF="https://www.youtube.com/watch?v=EVwlMVYqMu4">TWO DOGS DINING - YouTube</A>
-        - <A HREF="https://www.youtube.com/watch?v=G8QCRTsed9U">Doge swim - YouTube</A>
-        - <A HREF="https://www.youtube.com/watch?v=SStvNcLHQ_Q">When dad gets home from work it&#39;s cuddle time - YouTube</A>
-        - terminated: <A HREF="https://www.youtube.com/watch?v=qkJgSdYh2Eg">0:32 Yucky the cattish shibe - YouTube</A>
-        - <A HREF="https://www.youtube.com/watch?v=naYHO7AS9hk">This dog wants some yogurt but its too shy to ask for it - YouTube</A>
-        - <A HREF="https://www.youtube.com/watch?v=gtvvHRYGvJg">awkward sleeping position - Shibe doing a Flashback - YouTube</A>
+        - [TWO DOGS DINING - YouTube](https://www.youtube.com/watch?v=EVwlMVYqMu4)
+        - [Doge swim - YouTube](https://www.youtube.com/watch?v=G8QCRTsed9U)
+        - [When dad gets home from work it&#39;s cuddle time - YouTube](https://www.youtube.com/watch?v=SStvNcLHQ_Q)
+        - terminated: [0:32 Yucky the cattish shibe - YouTube](https://www.youtube.com/watch?v=qkJgSdYh2Eg)
+        - [This dog wants some yogurt but its too shy to ask for it - YouTube](https://www.youtube.com/watch?v=naYHO7AS9hk)
+        - [awkward sleeping position - Shibe doing a Flashback - YouTube](https://www.youtube.com/watch?v=gtvvHRYGvJg)
     - "animal cover" of songs
-        - <A HREF="https://www.youtube.com/watch?v=Ahhxk3uZE2g">Linkin Park - Numb (Animal Cover) - YouTube</A>
+        - [Linkin Park - Numb (Animal Cover) - YouTube](https://www.youtube.com/watch?v=Ahhxk3uZE2g)
     - [squirrel fails to climb oiled pole](https://www.youtube.com/watch?v=cFWdjkN62zc)
     - shibes
         - ShibeNation
