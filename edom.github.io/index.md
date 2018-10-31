@@ -177,7 +177,6 @@ We should join forces to reach our shared goals.
 - [Writing]({% link writing.html %})
     - [Working around Markdown]({% link markdown.md %})
 - Spirituality
-    - [Choosing a religion]({% link relch.md %})
     - [Obtaining magickal powers]({% link magick.md %})
         - [Experimenting with magick]({% link magexp.md %})
 - Finding other information sources
