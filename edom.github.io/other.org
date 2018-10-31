@@ -2863,3 +2863,398 @@ Repeat the message.
 
 Keep your calm, no matter what others say.
 Repeat the headline.
+* 2016-04-01 April fools' day is harmful
+  :PROPERTIES:
+  :CUSTOM_ID: april-fools-day-is-harmful
+  :END:
+
+April fools' day is harmful.
+
+Pranks are harmful.
+
+[[http://www.telegraph.co.uk/technology/2016/04/01/gmails-mic-drop-april-fool-backfires-costing-people-their-jobs/][Gmail mic drop April fools' day prank]]
+is [[http://www.businessinsider.co.id/google-pulls-mic-drop-minions-april-fools-joke-due-to-complaints-job-losses-2016-4/#.Vv43px_I7Qo][a stupid idea]], and also a harmful one, it turns out.
+
+I, among who knows how many of the other [[http://techcrunch.com/2016/02/01/gmail-now-has-more-than-1b-monthly-active-users/][1 billion users]],
+was sending an email to a head recruiter for a job on the following Monday (2016-04-04)
+when I accidentally pressed that damn button.
+
+Pranks violate the [[https://en.wikipedia.org/wiki/Cooperative_principle][cooperative principle]].
+
+The next time you're going to play pranks: just don't.
+Better spend your time somewhere else.
+* Friendship
+  :PROPERTIES:
+  :CUSTOM_ID: friendship
+  :END:
+
+** Abstract
+   :PROPERTIES:
+   :CUSTOM_ID: abstract
+   :END:
+
+Your friends are those who sacrifice for you.
+The greater the sacrifice,
+the greater the friendship.
+How do we measure a sacrifice?
+
+** Measurement in theory
+   :PROPERTIES:
+   :CUSTOM_ID: measurement-in-theory
+   :END:
+
+We define $F(A,B)$ (the /friendship measure from A to B/)
+as how much sacrifice that A is willing to make for B.
+
+(Is the direction correct? Is that backwards?)
+
+Thus measuring friendship boils down to valuating sacrifices.
+
+$F(A,B)$ can be approximated by an equivalent amount of money.
+
+** Measurement in practice
+   :PROPERTIES:
+   :CUSTOM_ID: measurement-in-practice
+   :END:
+
+Foot-in-the-door:
+let A ask B to make bigger and bigger sacrifices until B refuses.
+Then we have found $F(A,B)$.
+
+Door-in-the-face:
+let A ask B to make a sacrifice so big that B refuses,
+and then let A ask B to make smaller and smaller sacrifices until B accepts.
+Then we have found $F(A,B)$.
+
+Those results may differ, but $F(A,B)$ should lie somewhere between those two points.
+We can also average them, take the maximum, take the minimum,
+use interval arithmetics,
+or describe the result using a statistical distribution, for example.
+
+** Properties
+   :PROPERTIES:
+   :CUSTOM_ID: properties
+   :END:
+
+Friendship is circumstantial:
+$F(A,B)$ changes over time.
+
+Friendship is usually asymmetric:
+$F(A,B) \neq F(B,A)$.
+
+** Questions
+   :PROPERTIES:
+   :CUSTOM_ID: questions
+   :END:
+
+What is self-friendship?
+What is $F(A,A)$?
+How much is one willing to sacrifice for oneself?
+Does this question even make sense?
+
+** Links
+   :PROPERTIES:
+   :CUSTOM_ID: links
+   :END:
+
+- [[http://www.abc.net.au/news/2015-10-29/friendship-theory-developed-by-sydneysider-goes-viral/6897402#theory][Mobinah Ahmad's 6-level relationship categorization]]
+- [[https://kenanddot.wordpress.com/2007/03/21/the-asymmetry-of-friendship/]["Ken writes: Isn't it strange that although friendships are obviously asymmetrical this isn't unambiguously reflected in language?"]]
+* Learning to play mahjong
+  :PROPERTIES:
+  :CUSTOM_ID: learning-to-play-mahjong
+  :END:
+
+The variant discussed here is classic Chinese mahjong.
+
+** Basic facts
+   :PROPERTIES:
+   :CUSTOM_ID: basic-facts
+   :END:
+
+There are 136 mahjong tiles,
+of which 52 are dealed to the players.
+The remaining 84 forms the wall.
+Thus, in a play, you only get at most 21 chances to change your hand,
+that is 84 divided by 4 (the number of players).
+
+If each player takes 15 seconds, then a hand
+will take at most 4 x 15 x 21 = 1,260 seconds (21 minutes).
+
+There are 136 tiles (not including 4 flower tiles and 4 season tiles):
+
+There are 3 suits (bams, dots, and chars). Each suit has 9 classes. Each number has 4 instances. Thus each suit has 36 tiles. Thus there are 108 suit tiles.
+
+There are 7 honors (4 winds and 3 dragons). Each honor has 4 instances. Thus there are 28 honor tiles.
+
+There are 27 suit classes and 7 honor classes, giving a total of 34 classes.
+
+Each tile class has 4 instances.
+
+Each tile is equally probable to be drawn.
+
+The probability of picking a tile class is 4/136. The odds of picking a tile class is 4:132.
+
+** Number of chows, pungs, and kongs
+   :PROPERTIES:
+   :CUSTOM_ID: number-of-chows-pungs-and-kongs
+   :END:
+
+The probability of drawing a pung:
+34 * 4/136 * 3/135 * 2/134 = 1/3,015 (odd of 1 : 3,014, approx 1 : 3,000)
+
+Each suit has 7 unique chows: 123, 234, 345, 456, 567, 678, 789.
+There are 3 suits, so there are 21 unique chows.
+Each tile has 4 instances.
+Each chow has 4^3 instances.
+The probability of drawing a chow: 21 * 4^3 / (136 * 135 * 134) = 28 / 51,255
+(odd of 1 : 51,227, approx 1 : 51,000).
+
+Pung is more likely than chow. Is this a calculation mistake?
+
+The probability of drawing a kong (four identical tiles):
+34 * 4/136 * 3/135 * 2/134 * 1/133 = 1/400,995 (odd of 1 : 400,994, approx 1 : 401,000)
+
+The probability of drawing a pair:
+34 * 4/136 * 3/135 = 1/45 (odd of 1 : 44)
+
+The probability of drawing two tiles having the same class:
+4/136 * 3/135 = 1/1,530 (odd of 1 : 1,529)
+
+The probability of drawing two tiles having the same suit (3 suits):
+3 * 36/136 * 35/135 = 7/34 (odd of 7 : 27, approx 1 : 4)
+
+The probability of drawing a chow:
+The probability of drawing n, n+1, n+2 unordered of the same suit, for n in 1 to 7:
+
+3! * 3 * 7 * 4/136 * 4/135 * 4/134 = 56/17,085 (odd of 56 : 17,029, about 1 : 304)
+
+The probability of drawing a pair, given that one tile has been drawn by another player:
+
+Let each player draw exactly one tile. The probability of four players drawing the same tile:
+34 * 4/136 * 3/135 * 2/134 * 1/133 = the probability of drawing a kong
+* Psychology
+  :PROPERTIES:
+  :CUSTOM_ID: psychology
+  :END:
+
+- [[https://en.wikipedia.org/wiki/Psychology_of_collecting][WP:Psychology of collecting]]
+
+  - [[https://en.wikipedia.org/wiki/Compulsive_hoarding][WP:Compulsive hoarding]]
+  - [[https://en.wikipedia.org/wiki/Digital_hoarding][WP:Digital hoarding]]
+
+- Undigested
+
+  - [[http://www.apa.org/monitor/nov02/gomad.aspx][2002, Jennifer Daw, Why and how normal people go mad]]
+  - advertising, propaganda
+
+    - [[https://www.youtube.com/watch?v=nj_UWbifM2U][How One Man Manipulated All of America]], 12 minutes, too long, about [[https://en.wikipedia.org/wiki/Edward_Bernays][WP: Edward Bernays]]
+
+  - Persuasion, changing minds
+
+    - [[https://viaconflict.wordpress.com/2014/10/26/the-behavioral-change-stairway-model/][The Behavioral Change Stairway Model]],
+      can be used for hostage negotiation, suicide prevention, terrorist deradicalization
+    - changingminds.org
+
+      - http://changingminds.org/techniques/general/overall/overall.htm
+      - http://changingminds.org/techniques/general/cialdini/cialdini.htm
+      - http://changingminds.org/techniques/general/kellerman/kellerman.htm
+      - http://changingminds.org/techniques/general/being_right/being_right.htm
+      - http://changingminds.org/techniques/general/ingratiation/ingratiation.htm
+      - http://changingminds.org/techniques/how_to/trust_me/trust_me.htm
+
+    - The key to persuasion is *think as the target*.
+      Think what he/she wants and hates.
+
+      - Application to politics:
+
+        - [[https://qz.com/525132/the-smartest-most-effective-way-to-win-any-political-argument/][Frame your persuasion in the target's morality]].
+        - [[https://www.nytimes.com/2015/11/15/opinion/sunday/the-key-to-political-persuasion.html][Same]].
+
+  - A /market/ is where things are bought and sold.
+  - To /market/ something is to try to sell that thing.
+  - Marketing is about inducing people to buy something?
+  - Sometimes being agreeable is more important than being correct.
+
+    - Other people's feelings are more important than the truth?
+
+  - https://qz.com/881289/a-new-study-linking-profanity-to-honesty-shows-people-who-curse-are-more-authentic/
+
+- How the Nazis might have made the German people accept Nazism
+
+  - https://en.wikipedia.org/wiki/The_Wave_%282008_film%29
+  - https://en.wikipedia.org/wiki/The_Third_Wave_(experiment)
+
+- Why do people kill?
+
+  - Anger? Envy? Hatred?
+
+- Why do people rape?
+
+  - Is it about beauty?
+
+    - No?
+
+      - There are ugly people who get raped.
+      - There are beautiful people who don't get raped.
+
+  - Is it about getting satisfaction from unconsenting victim?
+  - Is rape a power trip?
+  - Is there any relationship between grandiosity and rape?
+
+- Why do people commit crimes?
+
+  - Do they know the penalties?
+
+    - If yes, why do they still commit crimes?
+
+- [[https://www.beeminder.com/home][beeminder.com: use loss aversion to trick yourself to accomplishing goals]]
+- [[https://www.youtube.com/watch?v=WEvqMN75sCI][Does your job match your personality? | Jordan Peterson]]
+
+  - axis: complexity
+
+    - high complexity requires high cognitive function level
+
+  - axis: creative/entrepreneurial vs managerial/administrative
+
+    - big five personality trait
+
+      - C/E requires "openness to experience"
+      - M/A requires conscientiousness
+
+- [[https://www.youtube.com/watch?v=-moW9jvvMr4][A simple way to break a bad habit | Judson Brewer]]: by being curiously aware
+- [[https://www.youtube.com/watch?v=xp0O2vi8DX4][How to motivate yourself to change your behavior | Tali Sharot | TEDxCambridge]]
+- https://www.washingtonpost.com/news/storyline/wp/2014/12/04/people-around-you-control-your-mind-the-latest-evidence/?utm_term=.40265b80e149
+
+  - https://news.ycombinator.com/item?id=12698204
+
+- [[https://www.youtube.com/watch?v=kyioZODhKbE][Facts Don't Win Fights: Here's How to Cut Through Confirmation Bias - Tali Sharot - YouTube]]
+
+  - To polarize someone is to make him more confident (about a belief).
+  - Confirmation bias: People hear what they want to hear.
+
+    - People filter incoming information.
+    - People bend incoming information to conform with their preexisting beliefs.
+    - Agreements polarize people, but disagreements don't depolarize people.
+    - Information agreeing with preexisting belief polarize the believer.
+    - Information disagreeing with preexisting belief is filtered out and doesn't depolarize the believer.
+
+  - Key insight: We can change people's behavior without changing their beliefs.
+
+- [[https://www.youtube.com/watch?v=WAL7Pz1i1jU][How to Persuade Others with the Right Questions: Jedi Mind Tricks from Daniel H. Pink]]
+
+  - how to get your daughter to clean her room
+
+    - the comment section is pessimistic
+
+- 2018-08-29 What I learned today.
+
+  - To temporarily defuse your enemy's hatred of you, find another enemy that is common to both of you.
+
+    - These happens in quick succession:
+      Coworker A offended me.
+      Then coworker B came and offended A in front of me.
+      Then I offend coworker B in front of A.
+      Then I can feel some agreement with coworker A.
+
+  - The perception of having a common enemy unites people, even if the enemy is fake.
+
+- [[https://www.youtube.com/watch?v=nknYtlOvaQ0][Why obvious lies make great propaganda - YouTube]]
+
+  - [[https://www.rand.org/pubs/perspectives/PE198.html][The Russian "Firehose of Falsehood" Propaganda Model: Why It Might Work and Options to Counter It | RAND]]
+
+    - This has a concrete recommendations for countering the firehose of falsehood.
+
+  - Trump and Putin use "firehose of falsehood" to assert power, in the same way school bullies do.
+  - The only way to take power from them is to dismiss them.
+    Media should stop giving them a platform.
+    We should refuse to hear them.
+    We should not fact-check, because by fact-checking we affirm that they have power.
+    We should simply dismiss everything they say.
+    Their competitors should counter-flood the media with their own firehoses.
+  - I'm sure Trump and Putin are not the only people using that technique.
+    I suspect that PKS may be using that technique in mosques in West Java.
+  - Can [[https://en.wikipedia.org/wiki/Gaslighting][WP:Gaslighting]] be used to unplant false beliefs?
+* Spreading information in an organization
+  :PROPERTIES:
+  :CUSTOM_ID: spreading-information-in-an-organization
+  :END:
+
+- Two choices of where we can put the burden: the seeker and the source.
+
+  - Polling: The person who needs an information seeks the person who might have it.
+    This is hard because the person who needs an information might not realize that he needs the information. "Why wasn't I informed?"
+  - Reacting: The person who has an information seeks the person who might need it.
+    This is hard because this requires empathy and knowing the whole organization.
+
+    - We can't depend on people.
+
+  - Third way: There are people who specialize in collecting information from the sources and spreading information to the seekers.
+
+- Which of those two systems is best?
+
+  - I think the "polling" choice is the only sane choice.
+    The "reacting" choice assumes too much about human altruism.
+
+- A computer can help, but the final burden will always be on the seeker?
+
+  - Mixture?
+
+- 2009, thesis, "The most effective communication channel to spread information in an organization", Susanna Ketoja, [[http://www.theseus.fi/handle/10024/6736][information]], [[http://www.theseus.fi/bitstream/handle/10024/6736/Ketoja_Susanna.pdf][pdf]]
+
+  - The most effective way to spread information in an organization is a combination of email and informal meetings.
+* Standardizing organizations
+  :PROPERTIES:
+  :CUSTOM_ID: standardizing-organizations
+  :END:
+
+Building an organization that builds organizations.
+
+Building an organization operating system.
+
+- An organization is a group, a company, a business, a non-profit, etc..
+- The goal: Every organization should use the same software for operations: accounting, financing, ERP, human resource management, issue tracking, workflow.
+- Every library should use the same library information system.
+- The organization can focus on its core competency.
+- The business operations software should be so good that every organization uses it.
+* Traffic engineering
+  :PROPERTIES:
+  :CUSTOM_ID: traffic-engineering
+  :END:
+
+- Everyone has different willingness for travel.
+
+  - Some travel is necessary.
+
+    - Travel to work. Travel to make economic transactions.
+    - This is ideally as efficient and fast as possible.
+    - This forms the inelastic baseline demand.
+
+  - The rest of travel is discretionary.
+
+    - Travel to leisure.
+    - This is ideally as enjoyable as possible.
+    - This forms the elastic demand.
+
+- Is induced demand theory correct?
+
+  - Disagreements
+
+    - https://www.cato.org/blog/debunking-induced-demand-myth
+
+  - Agreements
+
+    - http://plazaperspective.com/road-widening/
+    - "Induced demand means that for every person that switches from driving to an alternative, another driver will take their place."
+    - [[https://www.youtube.com/watch?v=N4PW66_g6XA][How to Fix Traffic Forever]]
+
+      - Counterintuitive
+
+        - If road demand already exceeds supply, then widening roads increases traffic and causes more congestion.
+
+          - [[https://en.wikipedia.org/wiki/Induced_demand][WP:Induced demand]]
+
+- [[https://www.youtube.com/watch?v=Akm7ik-H_7U][The high cost of free parking]]
+- [[https://helper.ipam.ucla.edu/publications/tratut/tratut_12985.pdf][A Mathematical Introduction to Traffic Flow Theory]]
+- Related
+
+  - [[https://en.wikipedia.org/wiki/Traffic_engineering_(transportation)][WP:Traffic engineering (transportation)]]
