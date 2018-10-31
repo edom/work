@@ -5,10 +5,6 @@ date: 2016-03-27 14:14:08 +0700
 ---
 
 - Selected music
-    - [Jazz music]({% link jazz.md %})
-    - [Music to dance to]({% link dance.md %})
-    - [Anthems]({% link anthem.md %})
-    - (Other) [Music to listen to]({% link listen.md %})
 - [Music software]({% link mussoft.md %})
 - [Music business]({% link musbus.md %})
 - Problems with music in Indonesia
