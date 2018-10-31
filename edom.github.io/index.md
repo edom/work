@@ -230,6 +230,7 @@ We should join forces to reach our shared goals.
     - [Biology]({% link biology.md %})
 - Music
     - I play piano in the band [The Nomads]({% link nomads.md %}) (an Indonesian band, not the Swedish band).
+- [Entertainment]({% link entertain.html %})
 - [About this website]({% link about.md %})
 - [Things I've forlet]({% link forlet.md %}): goals I've abandoned
 
