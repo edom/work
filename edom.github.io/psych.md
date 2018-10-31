@@ -4,10 +4,8 @@ permalink: /psych.html
 date: 2018-05-24 02:52 +0700
 ---
 
-- Theory
-    - [Friendship is measured by sacrifice]({% link friendship.md %})
-- Opinion
-    - [April fools' day is harmful]({% link april.md %})
+# Psychology
+
 - [WP:Psychology of collecting](https://en.wikipedia.org/wiki/Psychology_of_collecting)
     - [WP:Compulsive hoarding](https://en.wikipedia.org/wiki/Compulsive_hoarding)
     - [WP:Digital hoarding](https://en.wikipedia.org/wiki/Digital_hoarding)

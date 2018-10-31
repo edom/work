@@ -4,6 +4,8 @@ language: en
 published: 2016-04-01T12:10:25Z
 ---
 
+# 2016-04-01 April fools' day is harmful
+
 April fools' day is harmful.
 
 Pranks are harmful.

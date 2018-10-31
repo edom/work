@@ -6,6 +6,8 @@ mathjax: yes
 date: 2016-02-01 00:00:00 +0700
 ---
 
+# Friendship
+
 ## Abstract
 
 Your friends are those who sacrifice for you.

@@ -4,9 +4,11 @@ permalink: /mahjong.html
 date: 2018-05-31 00:00:00 +0700
 ---
 
+# Learning to play mahjong
+
 The variant discussed here is classic Chinese mahjong.
 
-# Basic facts
+## Basic facts
 
 There are 136 mahjong tiles,
 of which 52 are dealed to the players.
@@ -31,7 +33,7 @@ Each tile is equally probable to be drawn.
 
 The probability of picking a tile class is 4/136. The odds of picking a tile class is 4:132.
 
-# Number of chows, pungs, and kongs
+## Number of chows, pungs, and kongs
 
 The probability of drawing a pung:
 34 * 4/136 * 3/135 * 2/134 = 1/3,015 (odd of 1 : 3,014, approx 1 : 3,000)

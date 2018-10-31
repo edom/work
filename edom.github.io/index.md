@@ -99,9 +99,7 @@ We should join forces to reach our shared goals.
         - [Finance]({% link finance.md %})
     - [Investing]({% link invest.md %})
     - [Justifying my value]({% link value.md %})
-    - [Standardizing organizations]({% link stdorg.md %})
 - Managing organizations
-    - [Spreading information in an organization]({% link spreadinf.md %})
     - 2014, article, "Whose critical path are you on?", Philip J. Guo, [html](http://www.pgbovine.net/critical-path.htm)
         - To get someone's attention, get on his critical path.
     - [Netflix culture](https://jobs.netflix.com/culture)
@@ -200,7 +198,6 @@ We should join forces to reach our shared goals.
             - [Circuit complexity]({% link circuit.md %})
     - Natural sciences
         - [Physics]({% link physics.md %}) and engineering
-            - [Traffic engineering]({% link trafeng.md %})
             - Civil engineering
                 - [How Do Sinkholes Form?](https://www.youtube.com/watch?v=e-DVIQPqS8E)
                     - Internal erosion, piping, etc.
@@ -231,7 +228,6 @@ We should join forces to reach our shared goals.
         - Work
             - [Boss]({% link boss.md %})
     - [Biology]({% link biology.md %})
-    - [Psychology]({% link psych.md %})
 - Music
     - I play piano in the band [The Nomads]({% link nomads.md %}) (an Indonesian band, not the Swedish band).
 - [About this website]({% link about.md %})

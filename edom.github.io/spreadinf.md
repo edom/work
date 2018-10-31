@@ -4,6 +4,8 @@ permalink: /spreadinf.html
 date: 2018-08-09 18:12 +0700
 ---
 
+# Spreading information in an organization
+
 - Two choices of where we can put the burden: the seeker and the source.
     - Polling: The person who needs an information seeks the person who might have it.
     This is hard because the person who needs an information might not realize that he needs the information. "Why wasn't I informed?"

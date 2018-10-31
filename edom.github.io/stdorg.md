@@ -4,6 +4,8 @@ permalink: /stdorg.html
 date: 2018-09-01 01:12 +0700
 ---
 
+# Standardizing organizations
+
 Building an organization that builds organizations.
 
 Building an organization operating system.

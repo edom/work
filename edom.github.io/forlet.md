@@ -6,7 +6,6 @@ permalink: /forlet.html
 
 - "Forlet" is the Germanic English for the French English "abandon".
 - I was once fleetingly interested in these things.
-    - [Learning to play mahjong]({% link mahjong.md %})
     - [Art]({% link art.md %})
         - [Music]({% link music.md %})
             - audiophile stuffs
