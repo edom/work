@@ -223,7 +223,7 @@ We should join forces to reach our shared goals.
             - How do we prevent this category from becoming a kitchen sink?
             - Philosophy is everywhere (a cross-cutting concern), so it shouldn't be a category.
         - [Law]({% link law.md %})
-        - [Religion]({% link religion.md %})
+        - [Religion]({% link religion.html %})
         - [Logic]({% link logic.md %})
         - Work
             - [Boss]({% link boss.md %})
