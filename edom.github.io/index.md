@@ -75,7 +75,6 @@ We should join forces to reach our shared goals.
         - Searching
             - Where does this fit in the hierarchy?
             - [WP:Optimal stopping](https://en.wikipedia.org/wiki/Optimal_stopping)
-            - [Making a search engine]({% link srceng.md %})
 - Computer science
     - [Intelligence]({% link intelligence.html %})
         - Doing the last work we will ever need
@@ -136,10 +135,8 @@ We should join forces to reach our shared goals.
                 Do we want?
                     - [RationalWiki: Difference between anarchy and mobocracy](https://rationalwiki.org/wiki/Anarchy#Contrast_with_mobocracy)
 - Doing research better
-    - [Organizing knowledge]({% link knorg.md %}); this page should be merged into research.org?
-        - [Using Emacs and Org Mode]({% link emacs.html %})
-            - [Emacs for vi users]({% link emacsvi.md %})
-        - The page [Information architecture]({% link infarch.md %}) should be merged into "Organizing knowledge".
+    - [Using Emacs and Org Mode]({% link emacs.html %})
+        - [Emacs for vi users]({% link emacsvi.md %})
 - Living in the 21st century
     - [What kind of world are we living in?]({% link world.md %})
     - Finding a place to live
@@ -176,9 +173,6 @@ We should join forces to reach our shared goals.
             - Which is more primitive: function or relation?
 - [Writing]({% link writing.html %})
     - [Working around Markdown]({% link markdown.md %})
-- Spirituality
-    - [Obtaining magickal powers]({% link magick.md %})
-        - [Experimenting with magick]({% link magexp.md %})
 - Finding other information sources
     - Finding other wikis
         - [WP:List of wikis](https://en.wikipedia.org/wiki/List_of_wikis)
