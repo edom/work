@@ -83,8 +83,6 @@ We should join forces to reach our shared goals.
                 Are probabilistic approximations such as Monte Carlo approximations also truncation?
     - Computational complexity
         - [Trying to prove P neq. NP]({% link pnptry.html %})
-- Getting rich
-    - Which is more fundamental, economics or finance? Which is built on which?
 - Managing organizations
     - 2014, article, "Whose critical path are you on?", Philip J. Guo, [html](http://www.pgbovine.net/critical-path.htm)
         - To get someone's attention, get on his critical path.
