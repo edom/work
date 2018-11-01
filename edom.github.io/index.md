@@ -49,7 +49,6 @@ We should join forces to reach our shared goals.
                 - Using Java
                     - Building a Java project
                         - 2018-08-29: For Java enterprise/server programming, I recommend Maven instead of Gradle.
-                - [Using PostgreSQL]({% link pgsql.html %})
                 - [Standard MIDI file format]({% link smf.md %})
             - [Making contributable open-source projects]({% link opensrc.md %})
                 - [Building online communities]({% link community.md %})

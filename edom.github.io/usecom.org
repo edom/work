@@ -2140,3 +2140,43 @@ Can we use XML Schema to validate a JSON/YAML document?
 We can map a subset of XML to YAML using [[http://yaml.org/xml][YAXML, the (draft) XML Binding for YAML]].
 
 - [[https://www.quora.com/In-choosing-between-XML-and-YAML-what-are-advantages-and-more-natural-problem-domains-for-each-one][In choosing between XML and YAML, what are advantages and more natural problem domains for each one? - Quora]]
+* Using PostgreSQL
+- Questions
+
+  - How do we find slow queries?
+  - Which queries lock some tables or the database?
+  - Is there a GUI or visualization tool?
+
+    - There should already be a tool for visualizing such Postgresql statistics?
+
+  - Is autovacuum enabled on our RDS clusters? How do we know?
+  - Do we need [[http://stackoverflow.com/questions/19135340/how-does-postgresql-perform-writes-so-much-faster-than-sqlite][reliability]]?
+    If we can sacrifice reliability, we can speed things up by turning fsync off.
+  - How much performance does RDS encryption cost?
+    [[http://blog.minjar.com/post/108724853340/rds-encryption-and-benchmarking-postgresql][Negligible, but with caveats.]]
+
+- Answers looking for questions
+
+  - There is a [[https://www.postgresql.org/docs/9.4/static/monitoring-stats.html][statistics collector]].
+  - [[https://wiki.postgresql.org/wiki/Logging_Difficult_Queries][Logging Difficult Queries]]
+  - [[https://www.postgresql.org/docs/9.4/static/maintenance.html][Postgresql needs regular maintenance]].
+    One critical maintenance task is to VACUUM the database;
+    the query planner relies on VACUUM ANALYZE.
+  - [[https://gist.github.com/chanks/7585810][Turning PostgreSQL into a queue serving 10,000 jobs per second]]
+  - [[http://pgeoghegan.blogspot.co.id/2012/06/towards-14000-write-transactions-on-my.html][Towards 14,000 write transactions on a laptop]]
+  - [[https://blogs.harvard.edu/philg/2011/01/10/how-many-updates-per-second-can-a-standard-rdbms-process/][How many updates per second can a standard RDBMS process?]]
+
+- PostgreSQL tuning
+
+  - http://madusudanan.com/blog/understanding-postgres-caching-in-depth/#CachePurpose
+  - https://wiki.postgresql.org/wiki/Logging_Difficult_Queries
+
+- 2018-02-21
+
+  - [[https://www.postgresql.org/docs/devel/static/pgbench.html][pg_bench]]
+  - IN is faster than VALUES in psql 9.3
+
+    - select values & join instead of in list https://wiki.postgresql.org/wiki/Sample_Databases
+** Traps, pitfalls, gotchas
+*** PostgreSQL ALTER TABLE DROP COLUMN doesn't actually remove the column from disk
+From [[https://nerderati.com/2017/01/03/postgresql-tables-can-have-at-most-1600-columns/][PostgreSQL Tables Can Only Have 1600 Columns, Ever. | Nerderati]].
