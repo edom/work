@@ -58,7 +58,7 @@ Row polymorphism should help write enterprise software because most data in ente
 
 A record is a tuple whose components are named.
 
-What is a class? [Class-based programming]({% link cbp.md %}).
+What is a class? Class-based programming?
 
 We can translate a Haskell record (algebraic data type with exactly one constructor) to a Java final class whose fields are final.
 One Haskell record field becomes one final Java class field.

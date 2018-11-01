@@ -4006,5 +4006,1711 @@ https://arxiv.org/abs/1712.01208
 * Making a programming language
 https://www.reddit.com/r/ProgrammingLanguages/comments/9ky7o6/writing_my_own_programming_language/e72qjll/
 banzr: 'Racket is taught in universities to be used to write languages. Use "match" and "cases" to build the parser and interpreter. Good luck!'
+* Class-based programming
+  :PROPERTIES:
+  :CUSTOM_ID: class-based-programming
+  :END:
+
+- What is a class?
+
+  - What is a class?
+
+    - A class is a blueprint (a template).
+    - A class is a way of organizing your program.
+
+  - What does a class have?
+
+    - A class has name, fields, and methods.
+
+  - What does a class do?
+
+    - A class groups data and code that needs that data.
+
+- Every object belongs to a class.
+- In class-based programming:
+
+  - Objects don't have methods.
+  - Classes have instance methods.
+  - Each instance method can be called with an instance as a hidden argument.
+
+- From procedural point of view, these two are the same:
+
+#+BEGIN_EXAMPLE
+    // Java
+
+    object.method(arg0, arg1, ...)
+
+    // C
+
+    method(object, arg0, arg1, ...)
+#+END_EXAMPLE
+
+- The dot is just a syntax for passing an implicit first argument.
+- The dot operator associates to the left:
+
+#+BEGIN_EXAMPLE
+    a.b().c().d() = ((a.b()).c()).d()
+#+END_EXAMPLE
+* Maintaining backward-compatibility
+  :PROPERTIES:
+  :CUSTOM_ID: maintaining-backward-compatibility
+  :END:
+
+** The key of library-writing is empathy.
+   :PROPERTIES:
+   :CUSTOM_ID: the-key-of-library-writing-is-empathy.
+   :END:
+
+Think about your users.
+Don't break their stuffs.
+
+See [[https://wiki.haskell.org/The_Monad.Reader/Issue2/EternalCompatibilityInTheory][Eternal compatibility in theory]].
+
+Making only backward-compatible changes simplifies the lives of people who depend on you.
+
+Library authors must maintain some backward compatibility.
+They can't just make arbitrary changes and break things.
+
+- https://plan99.net/~mike/writing-shared-libraries.html
+
+** Choosing a versioning policy
+   :PROPERTIES:
+   :CUSTOM_ID: choosing-a-versioning-policy
+   :END:
+
+Use what everybody else is already using in your ecosystem:
+[[https://github.com/dhall-lang/dhall-lang/blob/master/VERSIONING.md][Dhall versioning policy]],
+[[https://pvp.haskell.org/][Haskell PVP Specification]],
+[[https://semver.org/][Semantic Versioning]],
+etc.
+
+If everybody followed eternal compatibility, versioning policies would be irrelevant and upgrades would be smoother.
+
+** Following Haskell package versioning policy
+   :PROPERTIES:
+   :CUSTOM_ID: following-haskell-package-versioning-policy
+   :END:
+
+- [[https://gist.github.com/snoyberg/f6f10cdbea4b9e22d1b83e490ec59a10][Michael Snoyman's personal take on PVP version upper bounds]].
+- The alternative to Cabal PVP is compile error, or, even worse, logic error and runtime failure?
+
+  - Cabal PVP depends on library authors/maintainers to test and update their dependency bounds.
+
+** Backward-compatibility hall of fame
+   :PROPERTIES:
+   :CUSTOM_ID: backward-compatibility-hall-of-fame
+   :END:
+
+These systems may be too backward-compatible.
+
+2018-09-01: [[https://www.ibm.com/support/knowledgecenter/en/linuxonibm/liaag/wkvm/wkvm_c_overview.htm][IBM Z mainframes]].
+The page says that the 2018 system is mostly backwards-compatible to the 1964 system.
+
+- 2014: [[http://www.longpelaexpertise.com.au/ezine/IBMBackwardCompatibility.php][Are IBM Mainframes Really Backward Compatible? - LongEx Mainframe Quarterly]]
+
+Windows 95: [[https://news.ycombinator.com/item?id=2281932][Much more than you would ever know.. The original version of Sim City was writt... | Hacker News]]
+* Designing configuration languages
+  :PROPERTIES:
+  :CUSTOM_ID: designing-configuration-languages
+  :END:
+
+** What is a configuration language?
+   :PROPERTIES:
+   :CUSTOM_ID: what-is-a-configuration-language
+   :END:
+
+Configuration language is programming language minus Turing-completeness.
+
+** What is the best configuration language?
+   :PROPERTIES:
+   :CUSTOM_ID: what-is-the-best-configuration-language
+   :END:
+
+2018-08-31:
+[[https://github.com/dhall-lang/dhall-lang][Dhall]] is the pinnacle of configuration languages, in my opinion, as far as I know.
+
+Can a configuration language get any better than Dhall?
+
+How far can we push configuration languages without Turing-completing it?
+
+Dhall isn't the only Turing-incomplete language.
+There are also Coq, Lean, Agda, and others.
+Can we use these as configuration languages?
+Should we?
+
+** Some rants
+   :PROPERTIES:
+   :CUSTOM_ID: some-rants
+   :END:
+
+Write your configuration in Dhall.
+You minimize duplication.
+It generates YAML/JSON.
+
+Why stop there?
+Replace all your YAML, JSON, XML, INI, PROPERTIES, configurations with Dhall.
+
+2018-08-31:
+We're considering HashiCorp Terraform.
+I think they should use Dhall, or at least learn from Dhall, instead of creating their own
+[[https://www.terraform.io/docs/configuration/syntax.html][HCL (HashiCorp Configuration Language)]].
+We have a "Terraform Workaround Engineer" here at work.
+
+Someone has done that: [[https://github.com/blast-hardcheese/dhall-terraform][dhall-terraform]].
+* Coq
+  :PROPERTIES:
+  :CUSTOM_ID: coq
+  :END:
+
+- Introduction
+
+  - What is a suitable introduction to Coq?
+  - [[https://people.debian.org/~schepler/coqtut.v.html][Daniel Schepler's "Mathematical formalization using Coq"]] seems approachable.
+  - [[https://mathoverflow.net/questions/155909/wanted-a-coq-for-the-working-mathematician][MO 155909: Wanted: a "Coq for the working mathematician"]]
+  - [[https://mathoverflow.net/questions/164959/how-do-i-verify-the-coq-proof-of-feit-thompson][MO 164959: How do I verify the Coq proof of Feit-Thompson?]]
+  - https://softwarefoundations.cis.upenn.edu/current/index.html
+  - Yves Bertot's "Coq in a hurry"
+  - [[https://coq.inria.fr/tutorial-nahas][Coq tutorial by Mike Nahas]]
+  - [[https://coq.inria.fr/distrib/current/refman/Reference-Manual006.html#Cic][Calculus of inductive constructions]]
+
+- [[http://blog.mikael.johanssons.org/coq-and-simple-group-theory.html][Coq and simple group theory]]
+- Installation on Ubuntu 14.04
+
+  - =sudo apt-get install coq=
+
+** Introduction
+   :PROPERTIES:
+   :CUSTOM_ID: introduction
+   :END:
+
+Coq source file extension is =.v=.
+
+The notation =x:T= means "the type of =x= is =T=", "=x= inhabits =T=".
+It also means "=x= is a proof of =T=" by Curry-Howard isomorphism.
+
+The type of =nat= is =Type(1)=.
+
+The type of =set= is =Type(2)=.
+
+The type of =Type(i)= is =Type(i+1)=.
+
+#+BEGIN_EXAMPLE
+    (* This is a comment in Coq. *)
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+    coqtop -l filename.v -batch
+#+END_EXAMPLE
+
+** Defining things
+   :PROPERTIES:
+   :CUSTOM_ID: defining-things
+   :END:
+
+#+BEGIN_EXAMPLE
+    Definition x: nat := 0.
+    Check x.
+
+    Definition f (x: nat): nat := x + 1.
+#+END_EXAMPLE
+
+Definition = non-recursive definition
+
+Fixpoint = recursive definition
+
+Inductive = type (Set (small set)) definition
+
+#+BEGIN_EXAMPLE
+    Definition name: type
+    where
+    type: Set
+    or type: Prop
+    or type: Type.
+#+END_EXAMPLE
+
+Proving 0+1 = 1 using Curry-Howard isomorphism?
+
+Axiom: and-elimination
+
+\begin{align*}
+a \wedge b \vdash a
+\end{align*}
+
+#+BEGIN_EXAMPLE
+    Theorem and_elim: forall a b: Prop, a /\ b -> a.
+    tauto.
+    Qed.
+#+END_EXAMPLE
+
+\begin{align*}
+a \vdash a \vee b
+\end{align*}
+
+Modus ponens
+
+\begin{align*}
+a, a \rightarrow b \vdash b
+\end{align*}
+
+** How Coq represents propositions
+   :PROPERTIES:
+   :CUSTOM_ID: how-coq-represents-propositions
+   :END:
+
+#+BEGIN_EXAMPLE
+    Print False.
+    Print True.
+    Inductive True : Prop := I : True.
+    Inductive False : Prop := .
+    Inductive and (A B : Prop) : Prop := and : A -> B -> and A B.
+#+END_EXAMPLE
+* Stop abusing the equals sign
+  :PROPERTIES:
+  :CUSTOM_ID: stop-abusing-the-equals-sign
+  :END:
+
+The equals sign should be used for equations only and nothing else.
+
+Consider this fragment in a hypothetical functional programming language.
+
+#+BEGIN_SRC haskell
+    hang : Nat
+    hang = hang
+#+END_SRC
+
+The fragment =hang = hang= falsely suggests that it is an /equation/ like $x = x$.
+We can substitute $x$ with any natural number, and the equation $x = x$ will still hold.
+But that is not what we mean with =hang=.
+We are defining a /rewrite rule/, not an equation.
+Thus we should write =hang => hang= instead.
+
+In an equation, the left and right side are equal.
+We don't care if they are flipped.
+In a rewrite rule, we care about direction.
+We want to start with $1 + 1$ and end with $2$, not the other way,
+unless we are writing a theorem prover.
+
+Programming is hard enough already.
+Let's not make it harder for students.
+Stop using confusing notation.
+
+Reading triage:
+
+- [[https://www.researchgate.net/publication/286418817_Misuse_of_the_equals_sign_An_entrenched_practice_from_early_primary_years_to_tertiary_mathematics][Misuse of the equals sign: An entrenched practice from early primary years to tertiary mathematics]]
+* Functional programming research
+  :PROPERTIES:
+  :CUSTOM_ID: functional-programming-research
+  :END:
+
+- Abbreviations
+
+  - CPS: continuation-passing style
+  - FP: functional programming
+  - OS: operating system
+  - PFP: partial functional programming
+  - TFP: total functional programming
+  - TFPL: total functional programming language
+  - TM: Turing machine
+
+** Research questions
+   :PROPERTIES:
+   :CUSTOM_ID: research-questions
+   :END:
+
+** Monads, lazy, strict
+   :PROPERTIES:
+   :CUSTOM_ID: monads-lazy-strict
+   :END:
+
+- Can you sell me some TFP?
+
+  - What is TFP?
+
+    - TFP is functional programming with only total functions.
+
+      - A function is total iff it is defined for every element of its domain.
+
+    - TFP ensures that every function is total by constraining every recursion to be structural recursion.
+
+      - Structural recursion is recursion with the constraint that every recursive call is syntactically smaller.
+
+  - Why TFP?
+
+    - The practical advantage of TFP is that it is easier
+      (and therefore faster and less costly)
+      to write provably correct programs in TFP
+      compared to PFP or imperative programming.
+
+      - This ultimately translates to faster time-to-market,
+        lower development cost, fewer errors, fewer customer complaints, and higher customer satisfaction.
+        (I know this sounds like bullshit. We should not underestimate the ways that humans can screw up.)
+
+    - The theoretical advantage of TFP
+      is that TFP has simpler denotational semantics compared to PFP
+      because TFP has less bottoms to consider. [Turner2004]
+
+  - Why not TFP?
+
+    - A disadvantage of TFP is that it is not Turing-complete because all programs must terminate,
+      but OSes don't terminate,
+      but we can still write an OS in a TFPL using codata and corecursion [Turner2004]
+      which are discussed in another section in this document.
+
+** Ramble
+  :PROPERTIES:
+  :CUSTOM_ID: ramble
+  :END:
+
+*You should not read anything below this point.*
+These are the drafts of my drafts.
+I think they should be included in this page,
+but I haven't worked them enough.
+
+- Why did Simon Peyton-Jones write that the next Haskell will be strict?
+
+  - [[http://www.cs.nott.ac.uk/~gmh/appsem-slides/peytonjones.ppt][Simon Peyton-Jones PPT slides]].
+  - [[https://news.ycombinator.com/item?id=1924061][ycombinator comment thread]].
+
+This is a questionnaire, not survey article:
+A preliminary survey of functional programming
+Caitlin Sadowski
+Daan Leijen
+https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/paper-67.pdf
+
+- How do these differ: Agda, Coq, Lean, Isabelle, ACL2, and others?
+
+  - [[https://www.reddit.com/r/haskell/comments/3b498l/if_you_could_change_one_thing_about_haskell_what/csk2gvl/][Conor McBride's tangential opinions]]
+    on Coq vs Agda vs others
+  - [[http://wiki.portal.chalmers.se/agda/pmwiki.php?n=Main.AgdaVsCoq][Agda Wiki: Agda vs Coq]]
+  - [[https://www.reddit.com/r/haskell/comments/30j9l6/lean_the_new_open_source_theorem_prover_developed/][/r/haskell: Lean: the new open source theorem prover developed at Microsoft Research]]
+
+*** Lambda calculus
+   :PROPERTIES:
+   :CUSTOM_ID: lambda-calculus
+   :END:
+
+- History
+
+  - Alonzo Church introduced lambda calculus in 1932 in [Church1932].
+  - Notations have changed.
+    Church wrote $S_y^x U$ but we write $U[x := y]$ for the same thing:
+    the expression $U$ but with every occurrence of free variable $x$ replaced by expression $y$.
+  - [Church1932] credits a 1924 publication of Moses Schönfinkel for what we call /currying/:
+    changing a multi-parameter function to a one-parameter function
+    returning another one-parameter function returning yet another one-parameter function, and so on.
+    Currying is changing $f : (a,b) \to c$ to $f' : a \to (b \to c)$ such that $f(x,y) = (f'(x))(y)$.
+
+- See also [[https://en.wikipedia.org/wiki/Lambda_calculus][Wikipedia: Lambda calculus]].
+
+**** might be too old
+    :PROPERTIES:
+    :CUSTOM_ID: might-be-too-old
+    :END:
+
+- [Lof1984]
+- 1986 A survey of functional programming language principles https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/19870002073.pdf
+
+*** Codata, corecursion, and coinduction
+   :PROPERTIES:
+   :CUSTOM_ID: codata-corecursion-and-coinduction
+   :END:
+
+For more about codata, corecursion, and coinduction, see: - [[http://www.cl.cam.ac.uk/archive/mjcg/plans/Coinduction.html]["Corecursion and coinduction: what they are and how they relate to recursion and induction", Mike Gordon]]:
+"My goal here is to try to understand these things through the activity of creating a simple explanation." - [[http://blog.sigfpe.com/2007/07/data-and-codata.html]["Data and Codata", Dan Piponi]]:
+"The program might not terminate, but from a mathematical perspective this is a completely well defined function."
+"Note the duality: in structural recursion we 'deconstruct' the argument and then we're allowed to recurse. In guarded recursion we recurse first, and then we're allowed to use the constructor." - [[https://www.tac-tics.net/blog/data-vs-codata]["Data vs Codata", Michael Maloney]]
+
+*** Miscellany
+   :PROPERTIES:
+   :CUSTOM_ID: miscellany
+   :END:
+
+[Turner2004] calls TFP "strong functional programming".
+
+*** Lazy, strict
+   :PROPERTIES:
+   :CUSTOM_ID: lazy-strict
+   :END:
+
+- The Church-Rosser property
+  ([[https://en.wikipedia.org/wiki/Church%E2%80%93Rosser_theorem][Wikipedia]],
+  [[http://mathworld.wolfram.com/Church-RosserProperty.html][Mathworld]]),
+  eliminates the difference between strict and lazy in a TFPL [Turner2004].
+
+*** Type theory is a formal system, not a branch of mathematics
+   :PROPERTIES:
+   :CUSTOM_ID: type-theory-is-a-formal-system-not-a-branch-of-mathematics
+   :END:
+
+There are at least two type theories:
+the Martin-L"of type theory, and the calculus of constructions [Bove2001].
+I thought "type theory" was a branch of mathematics,
+like "category theory", "graph theory", and "number theory".
+
+"Martin-L"of's type theory is basically a theory about sets in which it is possible to interpret a logic." [Nordstrom1988]
+
+*** Recursion and fixpoint
+   :PROPERTIES:
+   :CUSTOM_ID: recursion-and-fixpoint
+   :END:
+
+We say that $x$ is a /fixpoint/ of $f$ iff $x = f(x)$.
+
+A [[https://www.cs.cornell.edu/courses/cs3110/2013sp/supplemental/lectures/lec29-fixpoints/lec29.html][text lecture]]
+describes how to obtain the factorial function as a fixed point of successive /approximations/.
+
+[[https://en.wikipedia.org/wiki/Fixed-point_combinator][Wikipedia: Fixed-point combinator]].
+A fixed-point combinator enables /anonymous/ recursive functions.
+
+TFP rejects the definition =fix f = f (fix f)= because this is not a structural recursion.
+
+Recursion is about fixpoint.
+
+*** The Eff language and monad-aware languages
+   :PROPERTIES:
+   :CUSTOM_ID: the-eff-language-and-monad-aware-languages
+   :END:
+
+Consider this passage from [McBride2015]:
+
+#+BEGIN_QUOTE
+  [The Eff language lets] us write in direct
+  style for whatever effectful interface is locally available, then obtain the computation
+  delivered by the appropriate Moggi-style translation into an explicitly monadic
+  kernel.
+#+END_QUOTE
+
+I think "in direct style"
+means that in Eff we can write =f x= to mean what we would write as =x >>= f= in Haskell,
+but with the Monad instance automatically inferred based on the locally available effects.
+
+I think that passage suggests that the Eff language [Bauer2012]
+is related to the "monad-aware language" that Abdullah is trying to accomplish.
+The relation is that Eff infers the monad from the locally available effects.
+However, Eff's type system ignores the effects (like ML's type system)
+so this is probably not what Abdullah wants.
+
+*** Reading triage
+   :PROPERTIES:
+   :CUSTOM_ID: reading-triage
+   :END:
+
+http://semantic-domain.blogspot.co.id/2016/03/agda-is-not-purely-functional-language.html
+
+https://en.wikipedia.org/wiki/Category:Term-rewriting_programming_languages
+
+In a term-rewriting language such as Pure, we can write program transformation as part of the program.
+https://stackoverflow.com/questions/24330902/how-does-term-rewriting-based-evaluation-work
+
+https://www.quora.com/What-are-examples-of-statically-typed-logic-programming-languages-ex-similar-to-Prolog
+
+https://mathoverflow.net/questions/3920/what-does-it-mean-to-discharge-assumptions-or-premises
+
+http://www.cs.nott.ac.uk/~pszvc/g54dtp/inductive_domain.v
+
+https://stackoverflow.com/questions/145263/what-is-total-functional-programming
+
+What is a computational effect?
+
+Does totality really have anything to do with termination?
+
+*** TFP and Turing-completeness
+   :PROPERTIES:
+   :CUSTOM_ID: tfp-and-turing-completeness
+   :END:
+
+We must distinguish between a Turing machine and its execution.
+
+A TM needs a tape to run, but does not come with it.
+To run a TM, you have to supply a tape.
+
+A /tape/ is a finite sequence of tape symbols.
+
+A /step/ is a pair of configuration and tape.
+
+A /run/ is a sequence of steps. This sequence may be infinite.
+
+A /run/ of a Turing machine $m$ with initial tape $t$ is ...
+
+Instead of thinking about infinitely long tape with infinitely many blank symbols,
+we think that the tape is finite but the TM may at every step
+insert, update, or delete a cell.
+
+A TM is finite by definition: a TM is a tuple whose each component is taken from a finite set.
+The description of a TM does not include the tape.
+The execution trace of a TM may be infinite.
+A TFPL can /describe/ every TM just fine.
+
+We can describe a Turing machine in a TFPL?
+
+https://www.reddit.com/r/programming/comments/jvu2w/total_functional_programming_and_the_unimportance/
+
+[[http://lambda-the-ultimate.org/node/2003][LTU: Total functional programming]]
+
+https://news.ycombinator.com/item?id=12646390
+
+https://existentialtype.wordpress.com/2014/03/20/old-neglected-theorems-are-still-theorems/
+
+https://math.stackexchange.com/questions/111773/are-total-recursive-functions-recursively-enumerable
+
+How do we write this "echo" program in TFP? Is it even total?
+
+#+BEGIN_SRC haskell
+    main : IO ()
+    main = getLine >>= putStrLn >> main
+#+END_SRC
+
+We can /describe/ the infinite list of natural numbers =[0,1,2,3,...]= in a TFP.
+
+#+BEGIN_EXAMPLE
+    f : Nat -> Nat
+    f n = n + 1
+
+    f : Nat -> Nat
+    f n = n
+#+END_EXAMPLE
+
+[[https://arxiv.org/abs/1610.09254][Partiality, Revisited: The Partiality Monad as a Quotient Inductive-Inductive Type]]
+
+http://www.cl.cam.ac.uk/archive/mjcg/plans/Coinduction.html
+
+https://en.wikipedia.org/wiki/Natural_transformation
+
+https://en.wikipedia.org/wiki/Initial_algebra
+endofunctor, F-algebra, initial object
+
+[[https://dtai.cs.kuleuven.be/problog/][probabilistic logic programming]]
+
+*** Metaprogramming
+   :PROPERTIES:
+   :CUSTOM_ID: metaprogramming
+   :END:
+
+Spoofax vs Xtext vs MPS?
+http://www.metaborg.org/en/latest/
+http://www.metaborg.org/en/latest/source/overview/examples.html
+
+PEG (parsing expression grammar)
+
+http://ttic.uchicago.edu/~dmcallester/foundations.pdf
+https://en.wikipedia.org/wiki/Foundations_of_mathematics
+https://web.stanford.edu/class/cs103/notes/Mathematical%20Foundations%20of%20Computing.pdf
+https://github.com/hoplon/javelin
+https://codon.com/consider-static-typing
+
+*** Structured editor
+   :PROPERTIES:
+   :CUSTOM_ID: structured-editor
+   :END:
+
+https://news.ycombinator.com/item?id=13773813
+
+https://www.reddit.com/r/programming/comments/1tp83j/lamdu_structuralast_editor/
+
+*** Others
+   :PROPERTIES:
+   :CUSTOM_ID: others
+   :END:
+
+[[https://tio.run/#agda][Compile and run Agda programs online]].
+
+*** Positive and negative positions, strict positivity
+   :PROPERTIES:
+   :CUSTOM_ID: positive-and-negative-positions-strict-positivity
+   :END:
+
+In the function type $A \to B$,
+we say that $A$ occurs in a /negative/ position
+and $B$ occurs in a /positive/ position.
+See [[https://cs.stackexchange.com/questions/42150/meaning-of-positive-position-and-negative-position-in-type-theory][CS StackExchange 42150]].
+
+For the /strict positivity/ constraint of a data type definition, see these:
+[[https://cs.stackexchange.com/questions/55646/strict-positivity][CS StackExchange 55646]],
+[[http://wiki.portal.chalmers.se/agda/pmwiki.php?n=ReferenceManual.SimpleInductiveTypes?from=ReferenceManual.Datatypes#Strictpositivity][Agda Wiki: Strict positivity]].
+
+In a TFPL, there is no expression whose type is =forall a. a=.
+
+#+BEGIN_EXAMPLE
+    exit : IO a
+#+END_EXAMPLE
+
+*** Rewriting systems
+   :PROPERTIES:
+   :CUSTOM_ID: rewriting-systems
+   :END:
+
+A TFPL program is a terminating ARS.
+https://en.m.wikipedia.org/wiki/Termination_(term_rewriting)
+
+[[https://softoption.us/content/node/37][SoftOption: normal forms and termination]]
+
+[[https://softoption.us/content/node/654][SoftOption: lambda calculus and combinatory logic]]
+
+There are at least two widely used confluent term-rewriting systems:
+
+- applicative, lambda calculus, beta-reduction
+- concatenative, postfix notation, PostScript, Forth
+
+An expression is in normal form iff there is no applicable rewrite rule.
+See [[https://en.wikipedia.org/wiki/Normal_form_(abstract_rewriting)][Wikipedia: Normal form (abstract rewriting)]].
+
+The following =hang= function is not total.
+Why?
+
+#+BEGIN_SRC haskell
+    hang : Nat -> Nat
+    hang x => hang x
+#+END_SRC
+
+The expression =hang x= can be rewritten to =hang x=, so =hang x= is not a normal form,
+but this goes on forever, so =hang x= does not have a normal form, and thus =hang x= is not total.
+
+This =loop= thing is not a function in the mathematical sense. Why is that?
+
+#+BEGIN_EXAMPLE
+    loop : a
+    loop => loop
+#+END_EXAMPLE
+
+Consider this, where =exit= terminates the program.
+
+#+BEGIN_SRC haskell
+    what : Nat
+    what => exit
+#+END_SRC
+
+The function =crash= also does not produce a =Nat=.
+
+- What is Scott continuity?
+
+  - Why is it named "continuity"?
+
+https://cs.stackexchange.com/questions/1371/scott-continuous-functions-an-alternative-definition
+
+Girard's System F
+https://people.mpi-sws.org/~skilpat/plerg/papers/harper-system-f-2up.pdf
+https://www.reddit.com/r/haskell/comments/2zqtfk/why_isnt_anyone_talking_about_optimal_lambda/
+
+Venanzio Capretta's partiality monad
+General recursion via coinductive types
+[[http://www.cs.ru.nl/~venanzio/publications/Recursion_Coinductive_LMCS_2005.pdf][Venanzio Capretta 2005]]
+"see the work by Barendregt
+and Geuvers [5] for a good exposition of technical issues of type-theoretic proof assistants"
+Coinductive types were first
+introduced in type theory by Hagino [34]
+
+[[https://cs.stackexchange.com/questions/19577/what-can-idris-not-do-by-giving-up-turing-completeness][StackOverflow: What can Idris not do by giving up Turing-completeness?]]:
+"Dual to termination: while an inductive definition must terminate (by consuming all of its data) a coinductive definition must be productive - in practice this means, brieflt, that any recursive call must be guarded by a constructor. I've found this explanation to be the clearest (ymmv): adam.chlipala.net/cpdt/html/Coinductive.html" -- Edwin Brady Apr 22 '14 at 17:58
+
+Dependent Types and Multi-monadic Effects in F⋆
+https://www.fstar-lang.org/papers/mumon/paper.pdf
+
+Type Systems, Luca Cardelli
+http://lucacardelli.name/Papers/TypeSystems.pdf
+
+[[https://www.cs.rit.edu/~mtf/student-resources/20094_voelker_msthesis.pdf][Karl Voelker master thesis: practical programming with total functions]]
+
+[[https://www.cs.york.ac.uk/plasma/wiki/index.php?title=Functional_Programming#Theses][York CS wiki: FP researches]]
+
+- Position papers
+
+  - [[https://www.irif.fr/~mellies/mpri/mpri-ens/articles/hyland-power-lawvere-theories-and-monads.pdf][2007, Hyland & Power: "The Category Theoretic Understanding of
+    Universal Algebra: Lawvere Theories and
+    Monads"]]
+
+- Should we read these?
+
+  - 2015 Ralf Hinze, Nicolas Wu, Jeremy Gibbons: [[http://www.cs.ox.ac.uk/people/jeremy.gibbons/publications/conjugate-hylos.pdf][Conjugate Hylomorphisms Or: The Mother of All Structured Recursion Schemes]]
+  - 2007 Colin John Morris Kemp PhD thesis [[https://pdfs.semanticscholar.org/21da/de9b8e96724265f911c90c0ddd935901a0f0.pdf][Theoretical foundations for practical "totally functional programming"]]
+* JetBrains MPS
+  :PROPERTIES:
+  :CUSTOM_ID: jetbrains-mps
+  :END:
+
+MPS is "Meta Programming System".
+
+A concept can have properties. Each property has a type.
+The property type system is limited to int, string, and regex-constrained string.
+
+A member in a model is an /instance/ of a concept,
+similar to how an object is an instance of a class in Java.
+
+MPS is a /tree/ editor, not a text editor.
+
+A concept is an AST (abstract syntax tree) node type.
+
+On 2017-08-12, MPS 2017.2 doesn't support Java 7 try-with-resources statements.
+
+The MPS IntelliJ IDEA plugin allows you to use a language from IDEA,
+but not defining your own language.
+You need the MPS IDE for that.
+
+** External links
+   :PROPERTIES:
+   :CUSTOM_ID: external-links
+   :END:
+
+- [[https://confluence.jetbrains.com/display/MPSD20172/Using+MPS+inside+IntelliJ+IDEA][Using MPS inside IntelliJ IDEA]]
+- [[https://confluence.jetbrains.com/pages/viewpage.action?pageId=93128576][MPS user guide for Java developers (IntelliJ IDEA)]] (long)
+- [[https://confluence.jetbrains.com/display/MPSD20172/Finding+your+way+out][What to do when there is a problem]]
+* Logging
+  :PROPERTIES:
+  :CUSTOM_ID: logging
+  :END:
+
+- Before logging something, think how it would be read.
+- If you can't read the log, you shouldn't write the log.
+- Only log important things.
+  Keep logging volume low.
+  Minimize retention; only retain important logs.
+  Don't retain debugging logs.
+- Storage is cheap. Rotate your logs and buy more storage.
+- If you're looking for things to do, maybe you can try using Amazon SDK
+  and log your events to CloudWatch or CloudTrail (or perhaps even SNS).
+  Treat a log as an event stream, not a file.
+- http://jasonwilder.com/blog/2013/07/16/centralized-logging-architecture/
+- http://jasonwilder.com/blog/2012/01/03/centralized-logging/
+* Designing markup languages
+  :PROPERTIES:
+  :CUSTOM_ID: designing-markup-languages
+  :END:
+
+A markup language adds some semantics to text.
+
+- Finding the best document typesetting/processing system
+
+  - What are some markup languages?
+
+    - http://www.nongnu.org/skribilo/
+    - markdown
+    - reST (restructured text)
+    - TeX, LaTeX
+    - Unix roff, troff, nroff, man, GNU groff
+    - GNU info
+
+- Finding a lightweight semantic markup language with fixed ontology
+
+  - [[https://en.wikipedia.org/wiki/Lightweight_markup_language][WP:Lightweight markup language]]
+  - Which markup language?
+
+    - reST
+    - [[https://en.wikipedia.org/wiki/Textile_(markup_language)][Textile]]. GitHub Pages stopped supporting this.
+    - S-expression
+    - not Markdown?
+    - https://tiddlywiki.com/static/WikiText.html
+    - https://hackage.haskell.org/package/mmark
+    - [[https://orgmode.org/][Org mode for Emacs -- Your Life in Plain Text]]
+
+      - [[https://medium.com/@jackbaty/using-markdown-instead-of-org-mode-a78a1805c0ba][Using Markdown instead of Org Mode -- Jack Baty -- Medium]]
+
+  - Which tool?
+
+    - pandoc
+    - hakyll
+
+  - Which editor?
+
+    - Vim
+    - Emacs
+    - Visual Studio Code
+    - Too experimental
+
+      - [[https://clearly.pl/tutorial/][clearly.pl]] reminds me of TiddlyWiki.
+
+* Making a Java virtual machine
+  :PROPERTIES:
+  :CUSTOM_ID: making-a-java-virtual-machine
+  :END:
+
+- https://en.wikipedia.org/wiki/Java_Class_Library
+- https://en.wikipedia.org/wiki/Java_Native_Interface
+
+  - https://docs.oracle.com/javase/7/docs/technotes/guides/jni/spec/functions.html
+
+* Parsing
+  :PROPERTIES:
+  :CUSTOM_ID: parsing
+  :END:
+
+I expect the computer to infer a parser and a pretty-printer from the same grammar.
+Parser generators only give half of what I want.
+
+** What is parsing?
+   :PROPERTIES:
+   :CUSTOM_ID: what-is-parsing
+   :END:
+
+Parsing is also called "syntax analysis" (analysis = breakdown, syntax = put together).
+
+Parsing is the act of modifying the /state/ of the parser.
+This is the operational view.
+
+Parsing is converting a sequence to a tree.
+This is the data view.
+
+Trees are graphs. Why stop at trees? Why not graphs?
+
+- [[https://en.wikipedia.org/wiki/Graph_rewriting][WP:Graph rewriting]]
+- 2015 slides "Graph grammars" [[http://www.its.caltech.edu/~matilde/GraphGrammarsLing.pdf][pdf]]
+- 1993 article "A Graph Parsing Algorithm and Implementation" [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.612.9698&rep=rep1&type=pdf][pdf]]
+- 1990 article "A Graph Parsing Algorithm" [[https://dl.acm.org/citation.cfm?id=859753][paywall]]
+
+What is the difference between syntax and grammar?
+
+*** Lexical analysis
+    :PROPERTIES:
+    :CUSTOM_ID: lexical-analysis
+    :END:
+
+We lex (perform lexical analysis / tokenization) to clean up the grammar (no need to mention whitespaces in the grammar).
+For example:
+
+- With lexing:
+
+#+BEGIN_EXAMPLE
+    exp ::= exp PLUS exp
+#+END_EXAMPLE
+
+- Without lexing:
+
+#+BEGIN_EXAMPLE
+    white ::= ...
+    exp ::= exp white "+" white exp
+#+END_EXAMPLE
+
+"Strictly speaking, tokenization may be handled by the parser.
+The reason why we tend to bother with tokenising in practice is that it makes the parser simpler,
+and decouples it from the character encoding used for the source code."
+([[https://en.wikibooks.org/wiki/Compiler_Construction/Lexical_analysis][Wikibooks:Compiler construction]])
+
+** What is the inverse of parsing?
+   :PROPERTIES:
+   :CUSTOM_ID: what-is-the-inverse-of-parsing
+   :END:
+
+Unparsing?
+
+Parsing is the treeization (delinearization, deserialization) of a line.
+Unparsing is the linearization (serialization) of a tree.
+
+Parsing is String -> Maybe Tree.
+Unparsing is Tree -> String.
+
+Can we make parsing truly one-to-one?
+String -> Tree.
+CST = AST.
+Very rigid syntax.
+Forbid whitespace freedom.
+
+Another possibility: Inverse of parsing is anti-parsing (generation)?
+From grammar, generate all possible strings and their syntax trees.
+
+Inverse of analytical grammar is generative grammar?
+
+- https://en.wikipedia.org/wiki/Generative_grammar
+- https://en.wikipedia.org/wiki/Formal_grammar#Analytic_grammars
+
+Parser is syntax analyzer.
+Analysis is the opposite of synthesis?
+What is syntax synthesizer?
+
+Inverse of parsing is pretty-printing?
+
+If matching is analogous to subtraction, then what is analogous to multiplication?
+Generation?
+
+- algebra of pretty-printing
+
+  - 1995, Hughes, "The design of a pretty-printing library"
+  - 1998, Wadler, "A prettier printer"
+  - Hughes, Peyton-Jones, et al., http://hackage.haskell.org/package/pretty-1.1.3.6/docs/Text-PrettyPrint-HughesPJ.html
+
+- [[https://www.cs.kent.ac.uk/people/staff/oc/pretty.html][Efficient simple pretty printing combinators]]
+
+** How should parsing be done?
+   :PROPERTIES:
+   :CUSTOM_ID: how-should-parsing-be-done
+   :END:
+
+From grammar description, the machine should generate both a parser and a pretty-printer.
+
+Given grammar, generate both parser and unparser/pretty-printer. - http://www.semdesigns.com/Products/DMS/DMSPrettyPrinters.html?Home=DMSToolkit - https://hackage.haskell.org/package/invertible-syntax-0.2.1/src/Example.lhs - https://hackage.haskell.org/package/invertible-syntax - [[http://www.informatik.uni-marburg.de/~rendel/unparse/rendel10invertible.pdf][Tillmann Rendel and Klaus Ostermann. "Invertible Syntax Descriptions: Unifying Parsing and Pretty Printing". In Proc. of Haskell Symposium, 2010.]] - http://jssst.or.jp/files/user/taikai/2016/PPL/ppl1-1.pdf - [[http://lambda-the-ultimate.org/node/4191][LTU: Invertible Syntax Descriptions: Unifying Parsing and Pretty Printing]] - [[http://www.informatik.uni-marburg.de/~rendel/unparse/rendel10invertible.pdf][Invertible Syntax Descriptions: Unifying Parsing and Pretty Printing]]
+
+Some parsing techniques:
+
+- recursive descent parser (writing a parser manually)
+- parser generators: Happy (Haskell), Bison (with Yacc)
+- parser combinators: Parsec (Haskell)
+- PEG (parsing expression grammar)
+- Brzozowski quotient
+- binary-parser description languages: ASN.1, Google Protobuf, Apache Thrift, Apache Avro
+- invertible parsing?
+- https://en.wikipedia.org/wiki/Chart_parser
+
+** Incremental/online parsing
+   :PROPERTIES:
+   :CUSTOM_ID: incrementalonline-parsing
+   :END:
+
+Incremental parsing is parsing as input becomes available (without waiting for the whole input to become available).
+
+- Type-directed automatic incrementalization
+
+  - http://www.cs.cmu.edu/~joshuad/papers/incr/
+
+- https://en.wikipedia.org/wiki/Incremental_computing
+
+  - https://inc-lc.github.io/
+
+- https://hackage.haskell.org/package/incremental-parser
+- [[https://yi-editor.github.io/posts/2014-09-04-incremental-parsing/][incremental/online parsing]]
+
+** Parsing with Brzozowski quotients
+   :PROPERTIES:
+   :CUSTOM_ID: parsing-with-brzozowski-quotients
+   :END:
+
+Brzozowski quotient is like quotient in integer division, but for strings.
+(Formal definition?)
+
+Why is Brzozowski quotient called Brzozowski derivative?
+
+- [[https://en.wikipedia.org/wiki/Quotient_of_a_formal_language][Quotient of a formal language]]
+- [[https://en.wikipedia.org/wiki/Brzozowski_derivative][Brzozowski derivative]]
+
+  - [[https://arxiv.org/find/cs/1/au:+Brzozowski_J/0/1/0/all/0/1][Janusz Brzozowski et al. on arxiv]]
+
+The /multiplication/ of two strings $x$ and $y$ is the concatenation $x \cdot y = x y$.
+
+Multiplication is associative: $(xy)z = x(yz)$.
+
+The /inverse/ of a string $x$ is written $x^{-1}$.
+It's hypothetical.
+It's pure symbolic manipulation.
+Don't imagine what it looks like.
+Do care about its properties:
+
+- We define $x^{-1} x = \epsilon$.
+- We define $x x^{-1} = \epsilon$.
+- We define $(x y)^{-1} = x^{-1} y^{-1}$.
+
+The /left division/ of a string $x$ by divisor $y$ is $y^{-1} x$.
+
+The /right division/ of a string $x$ by divisor $y$ is $x y^{-1}$.
+
+How do we define quotient and remainder?
+
+Perhaps Brzozowski's paper describes why it's called a derivative?
+
+The multiplication of two languages $A$ and $B$ is the Cartesian product $AB = \\{ ab ~\|~ a \in A, b \in B \\}$.
+
+- Differentiating Parsers
+  Automatic derivation of incremental parser from a grammar or a non-incremental parser?
+  Like automatic differentiation but generalized to any program?
+  http://lambda-the-ultimate.org/node/3704
+- http://matt.might.net/articles/implementation-of-regular-expression-matching-in-scheme-with-derivatives/
+- http://okmij.org/ftp/continuations/differentiating-parsers.html
+- Parsing with derivatives?
+
+  - https://hackage.haskell.org/package/derp
+  - https://arxiv.org/abs/1010.5023
+  - http://matt.might.net/articles/parsing-with-derivatives/ "Yacc is dead"
+
+- Brzozowski quotients.
+
+  - [[https://arxiv.org/abs/1010.5023][Yacc is dead]]
+  - "Parsing with derivatives"
+
+- 2017, [[https://www.cl.cam.ac.uk/~nk480/parsing.pdf]["A Typed, Algebraic Approach to Parsing"]]
+
+  - "[...] we extend the notion of Brzozowski derivative from regular expressions to the typed context-free expressions."
+
+** History of parsing
+   :PROPERTIES:
+   :CUSTOM_ID: history-of-parsing
+   :END:
+
+- [[https://jeffreykegler.github.io/personal/timeline_v3][Parsing: a timeline -- V3.0]]: 2012 article about a history of parsing.
+
+  - [[https://www.reddit.com/r/ProgrammingLanguages/comments/8cz97n/parsing_a_timeline_hopefully_this_puts_parsing_is/][Parsing: a timeline. Hopefully this puts "Parsing is a solved problem" to rest. : ProgrammingLanguages]]
+  - [[http://jeffreykegler.github.io/Ocean-of-Awareness-blog/individual/2018/05/knuth_1965.html][Why is parsing considered solved?]]
+
+** What
+   :PROPERTIES:
+   :CUSTOM_ID: what
+   :END:
+
+- Parsing Expression Grammar (PEG)
+
+  - https://github.com/harc/ohm/
+
+    - https://ohmlang.github.io/
+
+      - https://harc.ycr.org/project/ohm/
+
+  - Packrat
+
+- 2015, [[https://arxiv.org/abs/1511.08307][Nez: practical open grammar language]]
+- Earley parser
+
+  - https://en.wikipedia.org/wiki/Earley_parser
+  - https://hackage.haskell.org/package/Earley
+
+- https://github.com/Gabriel439/post-rfc/blob/master/sotu.md#parsing--pretty-printing
+
+  - https://hackage.haskell.org/package/trifecta
+  - https://hackage.haskell.org/package/parsers
+
+- Parsing in Lisp and Racket https://stackoverflow.com/questions/21185879/writing-a-formal-language-parser-with-lisp
+* Programming language design mistakes
+  :PROPERTIES:
+  :CUSTOM_ID: programming-language-design-mistakes
+  :END:
+
+** Disclaimer
+   :PROPERTIES:
+   :CUSTOM_ID: disclaimer
+   :END:
+
+This will change without notice.
+
+This may contain mistakes.
+
+Opinions may change.
+
+** Justifying the creation of yet another programming language
+   :PROPERTIES:
+   :CUSTOM_ID: justifying-the-creation-of-yet-another-programming-language
+   :END:
+
+A new programming language should fix unforeseen design mistakes in existing programming languages.
+It should not repeat their design mistakes.
+Therefore we should collect the design mistakes so that we can avoid repeating them.
+
+What is a mistake?
+How do we know it's a mistake?
+
+We realize something is a mistake when we find a better way.
+
+** Common design mistakes
+   :PROPERTIES:
+   :CUSTOM_ID: common-design-mistakes
+   :END:
+
+*** Ignoring programming language theory and research
+    :PROPERTIES:
+    :CUSTOM_ID: ignoring-programming-language-theory-and-research
+    :END:
+
+Some mistakes are because the language designer is ignorant or too lazy.
+
+*** Dynamic typing
+    :PROPERTIES:
+    :CUSTOM_ID: dynamic-typing
+    :END:
+
+Dynamic typing is a design mistake.
+Type inference goes back to 1958.
+ML has type inference since 1973.
+It's 2018.
+There is no excuse for ignoring 60 years of research.
+See [[https://en.wikipedia.org/wiki/Type_inference#Hindley%E2%80%93Milner_type_inference_algorithm][WP1]],
+[[https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system#History_of_type_inference][WP2]].
+
+*** Lack of metaprogramming support
+    :PROPERTIES:
+    :CUSTOM_ID: lack-of-metaprogramming-support
+    :END:
+
+Lack of metaprogramming support is a design mistake.
+
+*** Lack of symbol overloading (ad-hoc polymorphism)
+    :PROPERTIES:
+    :CUSTOM_ID: lack-of-symbol-overloading-ad-hoc-polymorphism
+    :END:
+
+Scheme and Haskell lack convenient symbol overloading.
+Haskell requires you to make a type class for ad-hoc polymorphism.
+
+Without overloading, clashing names need to be prefixed manually.
+
+*** Mutable by default
+    :PROPERTIES:
+    :CUSTOM_ID: mutable-by-default
+    :END:
+
+Having variables mutable by default is a design mistake.
+
+*** Non-first-class constructs
+    :PROPERTIES:
+    :CUSTOM_ID: non-first-class-constructs
+    :END:
+
+Object-oriented programming is a design mistake.
+
+- =a.b()= should not mean "call method b of object a"
+- =a.b()= should mean "get the function a.b, then call it".
+- =a.b()= should mean =(a.b)()=.
+
+  - =m = a.b; m();= should mean the same as =a.b()=.
+  - Functions should be first-class.
+    Methods should not exist.
+    Fields are enough (with function types).
+    It should be possible to assign to methods.
+
+Statements are a design mistake.
+They should not exist.
+Only expressions should.
+[[https://www.eclipse.org/xtend/documentation/203_xtend_expressions.html][Xtend]]
+and
+[[https://code.haxe.org/category/principles/everything-is-an-expression.html][Haxe]]
+do this right. - Can we replace statements with expressions in existing imperative languages without breaking backward compatibility? - But C has [[https://en.wikipedia.org/wiki/Comma_operator][WP:Comma operator]]? - We can use lambda calculus for imperative programming. - Treat the statement separator (here we use semicolon =;=)
+as an operator (function with infix syntax)
+that sequences the effects of two expressions. - For example: - Let =a= be an expression. - Let =b= be an expression. - Thus =a;b= is an expression. - The value of =a;b= is the value of =b=. - The effect of =a;b= is the effect of =a= followed by the effect of =b=. - Semicolon is associative: =(a;b);c = a;(b;c)=. This also holds for the effects.
+
+*** Virtual machines
+    :PROPERTIES:
+    :CUSTOM_ID: virtual-machines
+    :END:
+
+Virtual machines are a design mistake.
+Instead, do semantic mapping: map a program in language A to an equivalent program in language B while preserving the meaning.
+
+*** More than one way to do something
+    :PROPERTIES:
+    :CUSTOM_ID: more-than-one-way-to-do-something
+    :END:
+
+[[https://en.wikipedia.org/wiki/There%27s_more_than_one_way_to_do_it]["There is more than one way to do it"]] is a design mistake.
+
+*** Disallowing multi-line string literals
+    :PROPERTIES:
+    :CUSTOM_ID: disallowing-multi-line-string-literals
+    :END:
+
+Languages should allow CR/LF in string literals.
+
+** Java
+   :PROPERTIES:
+   :CUSTOM_ID: java
+   :END:
+
+- Checked exceptions don't play nice with java.util.Stream.
+  Either checked exception or java.util.Stream is a design mistake.
+
+  - https://en.wikipedia.org/wiki/Effect_system
+
+- What others think Java gets wrong
+
+  - http://tech.jonathangardner.net/wiki/Why_Java_Sucks
+
+*** Overcomplicated Java Virtual Machine
+    :PROPERTIES:
+    :CUSTOM_ID: overcomplicated-java-virtual-machine
+    :END:
+
+JVM does too much.
+JVM bytecode verification is the compiler's job, not the VM's.
+Does JVM bytecode verification even add any security?
+Isn't JNI a bigger security hole?
+
+*** Working against programmers
+    :PROPERTIES:
+    :CUSTOM_ID: working-against-programmers
+    :END:
+
+Java presumes that the programmer is not only untrustworthy but also an idiot.
+
+Programmers make mistakes, but they aren't idiots.
+
+- [[https://www.reddit.com/r/programming/comments/utqb/ask_reddit_why_do_so_many_reddit_users_hate_java/cutv1/][Ask Reddit: Why do so many reddit users hate java? : programming]]
+
+  - "Java's solution to the problem of C++ allowing you to blow your foot off was to chop off your legs."
+
+*** Throwing away the good parts of C++
+    :PROPERTIES:
+    :CUSTOM_ID: throwing-away-the-good-parts-of-c
+    :END:
+
+- Forbidding multiple inheritance is a design mistake.
+- Java interfaces are a design mistake.
+  See 2015 Robert C. Martin article [[http://blog.cleancoder.com/uncle-bob/2015/01/08/InterfaceConsideredHarmful.html][Java interface considered harmful]].
+- Implementing generics too late with type erasure.
+  [[https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-version-history][C# 2.0 introduced]]
+  generics, without type erasure, while maintaining backward compatibility,
+  by duplicating everything in System.Collections to System.Collections.Generic.
+  This is ugly, but less ugly than type erasure.
+
+  - [[https://stackoverflow.com/questions/11436802/how-are-c-sharp-generics-implemented][SO:How are C# generics implemented?]]
+
+    - [[https://blogs.msdn.microsoft.com/ericlippert/2009/07/30/whats-the-difference-part-one-generics-are-not-templates/][Generics are not templates]]
+
+*** Weak functional programming (allowing partial functions)
+    :PROPERTIES:
+    :CUSTOM_ID: weak-functional-programming-allowing-partial-functions
+    :END:
+
+Allowing partial functions is a design mistake.
+
+** C and C++
+   :PROPERTIES:
+   :CUSTOM_ID: c-and-c
+   :END:
+
+In the 1970s these were tolerable: memory was limited, tools didn't exist.
+In 2018 these aren't tolerable.
+
+- Unattainable standard.
+
+  - [[https://stackoverflow.com/questions/5574469/are-there-any-fully-conforming-c-implementations][SO:Are there any fully conforming C++ implementations?]]
+
+- Pile of workarounds.
+- C++ compilation is abysmally slow. =#include <iostream>= expands to 10000 lines.
+- C pointer declaration syntax for pointers and arrays is a design mistake.
+- Conflating pointers and arrays.
+- Leaving a lot of things undefined.
+- Zero-terminated string is a design mistake.
+- Parsing requires symbol resolution and type checking.
+- Header files. They should be automatically generated from C files instead.
+- Preprocessor works on text, not on C/C++ AST.
+
+** Haskell
+   :PROPERTIES:
+   :CUSTOM_ID: haskell
+   :END:
+
+- Template Haskell
+
+  - Instead, we should have a metaprogramming library, and generate hs files.
+
+- Haskell compilation is slow.
+- Haskell module system is a design mistake.
+- GHC: If A depends on B, and B changes without changing API, then A still requires recompilation.
+- Bottom inhabits every type including the supposedly empty type =data Void=.
+
+*** Not leveraging user-defined isomorphisms
+    :PROPERTIES:
+    :CUSTOM_ID: not-leveraging-user-defined-isomorphisms
+    :END:
+
+I want this:
+
+#+BEGIN_EXAMPLE
+    data A = A0 | A1
+    data B = B0 | B1
+
+    isomorphism "iso" between A and B is
+        A0 ~ B0
+        A1 ~ B1
+#+END_EXAMPLE
+
+instead of this:
+
+#+BEGIN_SRC haskell
+    data Iso a b = MkIso {
+            fwd :: a -> b
+            , rev :: b -> a
+        }
+
+    iso :: Iso a b
+    iso = MkIso ab ba where
+
+        ab :: A -> B
+        ab A0 = B0
+        ab A1 = B1
+
+        ba :: B -> A
+        ba B0 = A0
+        ba B1 = A1
+#+END_SRC
+
+Explicit isomorphism may help reduce newtype boilerplate.
+
+** what
+   :PROPERTIES:
+   :CUSTOM_ID: what
+   :END:
+
+A problem with current programming methodologies is that they don't capture the higher-level properties of software, such as the architecture.
+For example, how do we write, in a way that the computer can exploit, this statement:
+"The fields of class C correspond one-to-one with the columns of database table T."?
+
+- Other people's experiences
+
+  - https://www.quora.com/If-you-were-to-design-a-programming-language-what-other-programming-language-would-it-evolve-from-and-what-aspect-of-that-language-would-you-do-differently
+  - [[http://beza1e1.tuxen.de/articles/proglang_mistakes.html][5 Mistakes in Programming Language Design ― Andreas Zwinkau]]
+
+    - [[https://news.ycombinator.com/item?id=1500665][Mistakes in programming language design | Hacker News]]
+
+  - [[https://softwareengineering.stackexchange.com/questions/55047/what-is-the-greatest-design-flaw-you-have-faced-in-any-programming-language][What is the greatest design flaw you have faced in any programming language? - Software Engineering Stack Exchange]]
+  - [[http://www.inquisition.ca/en/info/gepsypl/rules.htm][Programming Language Design Rules]]
+  - 1999 Steele article "Growing a language" [[http://www.catonmat.net/blog/growing-a-language-by-guy-steele/][html]]
+* Programming
+  :PROPERTIES:
+  :CUSTOM_ID: programming
+  :END:
+
+- Metaprogramming
+
+  - JetBrains MPS
+  - [[http://txl.ca/index.html][TXL: source transformation by example]], what can it do?
+  - http://www.moserware.com/2008/06/ometa-who-what-when-where-why.html
+
+- [[http://adam.chlipala.net/mlcomp/][Comparing Objective Caml and Standard ML]], Adam Chlipala
+
+  - https://people.mpi-sws.org/~rossberg/sml-vs-ocaml.html
+
+- Programming languages don't work with each other very well.
+
+  - What we need is not a new programming language, but a way for languages to work together?
+
+- A program is
+
+  - a sequence of instructions (procedural programming)
+  - a lambda expression (functional programming)
+
+- [[https://mollyrocket.com/casey/stream_0019.html][compression-oriented programming]]
+- Lisp family/dialects
+
+  - Scheme
+  - [[https://picolisp.com/wiki/?home][PicoLisp]]
+
+- Undigested
+
+  - https://hakonrossebo.github.io/functional-programming-babelfish/
+  - https://github.com/rainbyte/haskell-ide-chart
+  - http://docs.mamedev.org/techspecs/luaengine.html
+
+- The source code is a textual representation of the abstract syntax tree (AST).
+- The source code is unimportant cosmetics.
+  We should care about the ASTs and transformations between ASTs.
+  We should read, write, and edit ASTs directly, not text.
+  The editor should not parse text into AST; it should generate text from AST.
+- Language-oriented programming? Data-first programming?
+
+  - Data is the most important thing.
+
+    - Because data is harder to back up than code?
+
+  - Program translates the shape of data.
+  - Describe what you want, and write code that follows that description
+    to call the lower-level implementation details.
+
+- Programming language design
+
+  - Which should we start with?
+
+    - Semantics (high-level, top-down language design)
+    - Machine code (low-level, bottom-up language design)
+
+  - Every enhancement reduces cognitive load.
+  - Example of bottom-up language design and how each level reduces cognitive load:
+
+    - Begin with machine code.
+    - Provide mnemonics for instructions.
+    - Provide the illusion of infinite custom-named registers and orthogonal operands.
+    - Provide macros subroutines as extensible instructions.
+    - Provide the illusion of infinite custom-named registers and orthogonal operands.
+    - Provide macros and subroutines as extensible instructions.
+    - Provide named locations.
+    - Provide the illusion of infinite memory.
+    - Abstract away processor registers.
+    - Abstract away pointers.
+    - Expression.
+    - Infix expression syntax.
+    - First-class functions.
+    - The program itself is a procedural program that tells the interpreter what code to generate.
+    - End up with something like Randall Hyde's High Level Assembly?
+
+- PL research
+
+  - [[https://www.microsoft.com/en-us/research/publication/implementing-functional-languages-a-tutorial/][1992, book, "Implementing functional languages: a tutorial"]]
+
+- Improve an existing language instead of starting new?
+- What is this? http://reasonablypolymorphic.com/blog/elm-is-wrong
+- Interesting languages?
+
+  - Rebol? Rebol metaprogramming? https://en.m.wikipedia.org/wiki/REBOL
+  - Carp lisp dialect?
+
+- Scheme vs Lisp:
+
+  - A Lisp implementation doesn't have to have proper tail calls.
+  - A Scheme implementation must have proper tail calls.
+
+- Type systems
+
+  - Types help computers help us.
+
+    - Types prevent some mistakes.
+    - Types are part of documentation.
+
+      - Types help us write an IDE.
+
+* Proving things using computers
+
+- Where is tutorial?
+- A goal should be to make it easy to make correct software?
+- 2014, slides, "How I became interested in foundations of mathematics.", Vladimir Voevodsky, [[https://www.math.ias.edu/vladimir/sites/math.ias.edu.vladimir/files/2014_08_ASC_lecture.pdf][pdf]]
+- Why should we be interested in homotopy type theory?
+- Coq
+- [[https://leanprover.github.io/][Lean]]
+
+  - Pros of Lean
+
+    - Integrates with Visual Studio Code
+
+  - Cons of Lean
+
+    - Less mature than Coq
+
+- Should we care about the relationship between functional programming and theorem proving?
+- Ramble
+
+  - Useless idea?
+
+    - Reverse-proving: generate all proofs of a theory.
+      (Proving is: given a statement, prove (or disprove).)
+
+      - Which true sentences are interesting?
+      - Which proofs are interesting?
+
+- Companies
+
+  - [[https://galois.com/][Galois]], on [[https://github.com/GaloisInc/][github]]
+
+- unread interesting things
+
+  - http://www.joachim-breitner.de/blog/717-Why_prove_programs_equivalent_when_your_compiler_can_do_that_for_you_
+  - http://www.michaelburge.us/2017/08/25/writing-a-formally-verified-porn-browser-in-coq.html
+  - https://aphyr.com/posts/342-typing-the-technical-interview
+  - http://tech.frontrowed.com/2017/09/22/aggregations/
+
+- interoperation between proof assistants?
+
+  - Lem ("lightweight executable mathematics")
+
+    - https://www.openhub.net/p/lightweight-executable-mathematics
+    - http://www.cl.cam.ac.uk/~pes20/lem/
+
+* Scheme currying
+  :PROPERTIES:
+  :CUSTOM_ID: scheme-currying
+  :END:
+
+** Abstract
+   :PROPERTIES:
+   :CUSTOM_ID: abstract
+   :END:
+
+We define the macros =lambda/c=, =apply/c=, and =define/c=,
+which are curried analogs of =lambda=, =apply=, and =define=, respectively.
+This way is simple,
+but it uses macros
+and it is limited to fixed-arity lambda expressions.
+
+** The idea
+   :PROPERTIES:
+   :CUSTOM_ID: the-idea
+   :END:
+
+The idea of =lambda/c= is this pattern:
+
+#+BEGIN_EXAMPLE
+    (lambda/c (a) z) => (lambda (a) z)
+    (lambda/c (a b) z) => (lambda (a) (lambda (b) z))
+    (lambda/c (a b c) z) => (lambda (a) (lambda (b) (lambda (c) z)))
+    ...
+#+END_EXAMPLE
+
+The idea of =apply/c= is this pattern:
+
+#+BEGIN_EXAMPLE
+    (apply/c a b) => (a b)
+    (apply/c a b c) => ((a b) c)
+    (apply/c a b c d) => (((a b) c) d)
+    ...
+#+END_EXAMPLE
+
+However, there is a difference:
+=apply= is an arity-2 procedure taking a procedure and a list,
+whereas =apply/c= is a macro that takes one or more arguments.
+
+The idea of =define/c= is this parallel:
+
+#+BEGIN_EXAMPLE
+    (define (a b ... y) z) = (define a (lambda (b ... y) z))
+    (define/c (a b ... y) z) = (define a (lambda/c (b ... y) z))
+#+END_EXAMPLE
+
+** The code
+   :PROPERTIES:
+   :CUSTOM_ID: the-code
+   :END:
+
+I tried this code on Guile 2.0.9 on Ubuntu 14.04.
+
+#+BEGIN_EXAMPLE
+    (define-syntax lambda/c
+        (syntax-rules ()
+            (
+                (_ (x) body ...)
+                (lambda (x) body ...)
+            )
+            (
+                (_ (x y ...) body ...)
+                (lambda (x) (lambda/c (y ...) body ...))
+            )
+        )
+    )
+
+    (define-syntax apply/c
+        (syntax-rules ()
+            (
+                (_ f)
+                (f)
+            )
+            (
+                (_ f x)
+                (f x)
+            )
+            (
+                (_ f x y ...)
+                (apply/c (f x) y ...)
+            )
+        )
+    )
+
+    (define-syntax define/c
+        (syntax-rules ()
+            (
+                (_ (f) body ...)
+                (define f (lambda () body ...))
+            )
+            (
+                (_ (f x ...) body ...)
+                (define f (lambda/c (x ...) body ...))
+            )
+        )
+    )
+#+END_EXAMPLE
+
+** Example
+   :PROPERTIES:
+   :CUSTOM_ID: example
+   :END:
+
+After the above macros have been defined
+(by copying them to your REPL, for example),
+the following fragment should print three threes.
+
+#+BEGIN_EXAMPLE
+    (define f (lambda/c (x y) (+ x y)))
+    (define g (lambda (x) (lambda (y) (+ x y))))
+    (define/c (h x y) (+ x y))
+    (apply/c f 1 2)
+    (apply/c g 1 2)
+    (apply/c h 1 2)
+#+END_EXAMPLE
+* 2018-04-07 Approximating general recursion in TFP
+  :PROPERTIES:
+  :CUSTOM_ID: approximating-general-recursion-in-tfp
+  :END:
+
+Here we are going to show how to approximate general recursive functions in TFP
+with the help of the following =repeat= and =approx=:
+
+#+BEGIN_SRC haskell
+    -- The expression `repeat n f x` means
+    -- `n` times of the application of `f` to `x`.
+    repeat : Nat -> (a -> a) -> a -> a
+    repeat 0 f = id
+    repeat (n+1) f = repeat n f . f
+
+    approx
+        : Nat -- count
+        -> (a -> s) -- begin
+        -> (s -> s) -- step
+        -> (s -> Maybe b) -- end
+        -> (a -> Maybe b)
+
+    approx count begin step end =
+        end . repeat count step . begin
+#+END_SRC
+
+To approximate a general recursive function =f : a -> b=,
+we write a data type =S_f= and these three non-recursive total functions:
+
+#+BEGIN_SRC haskell
+    begin_f : a -> S_f
+    step_f : S_f -> S_f
+    end_f : S_f -> Maybe b
+
+    -- A side note:
+    -- In PFP, the original `f` can be
+    -- recovered from those three functions:
+    f input = loop (begin_f input)
+        where
+            loop s = case end_f s of
+                Just output -> output
+                _ -> loop (step_f s)
+#+END_SRC
+
+Then, we can approximate =f= as =f_approx=:
+
+#+BEGIN_SRC haskell
+    f_approx : Nat -> (a -> Maybe b)
+    f_approx count =
+        approx count begin_f step_f end_f
+#+END_SRC
+
+The =count= parameter can be thought as a time limit or time-out,
+the number of iterations,
+the number of steps.
+
+Here is an example approximation of the factorial function.
+
+#+BEGIN_SRC haskell
+    fac 0 = 1
+    fac n = n * fac (n-1)
+
+    data State = Mk { n : Nat, a : Nat }
+
+    fac_approx count =
+        end . repeat count step . begin
+        where
+            begin : Nat -> State
+            begin n = Mk n 1
+
+            end : State -> Maybe Nat
+            end (Mk 0 a) = Just a
+            end _ = Nothing
+
+            step : State -> State
+            step (Mk 0 a) = Mk 0 a
+            step (Mk (n+1) a) = Mk n (a * (n+1))
+#+END_SRC
+
+Here is an example approximation of bottom.
+
+#+BEGIN_SRC haskell
+    -- PFP
+
+    hang : a
+    hang = hang
+
+    -- TFP approximation
+
+    data State = Mk
+
+    hang_begin _ = Mk
+    hang_step s = s
+    hang_end _ = Nothing
+
+    hang_approx count =
+        hang_end . repeat count hang_step . hang_begin
+#+END_SRC
+
+I conjecture that there is an algorithm that can transform every general recursive function into its begin-step-end form.
 * Bibliography
 bibliography:default

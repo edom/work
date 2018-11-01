@@ -234,8 +234,6 @@ where the divisor has only one element.
 The Brzozowski quotient is a special case where the divisor is a singleton set:
 <span>\( \{p\} \backslash L \)</span>.
 
-Brzozowski quotient is discussed further in [Parsing]({% link parse.md %}).
-
 ## Related materials
 
 - Wikipedia
