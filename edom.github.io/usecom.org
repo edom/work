@@ -1270,3 +1270,873 @@ You can do that for other software, as long as they don't require dependencies t
    :END:
 
 - https://medium.com/netflix-techblog/linux-performance-analysis-in-60-000-milliseconds-accc10403c55
+* Using Cabal
+  :PROPERTIES:
+  :CUSTOM_ID: using-cabal
+  :END:
+
+- Every package used by Setup.hs must have a vanilla version.
+
+  - Why I encountered this error:
+
+    - I set =library-vanilla= to =False= due to https://rybczak.net/2016/03/26/how-to-reduce-compilation-times-of-haskell-projects/
+
+  - How I encountered this error:
+
+    - HDBC-postgresql-2.3.2.5 =Setup.hs= build fails due to linking error with =shared: True=.
+
+      - The offending packages are =old-time= and =old-locale=.
+
+        - It's OK if we build them as shared library, but we must also build their vanilla version.
+
+      - It's not the library content that fails to build. It's the Cabal Setup of the library that fails to link.
+      - GHC expects that =old-time= and =old-locale= are system libraries?
+      - GHC passes '-lHSold-time-VERSION-HASH.so'. It passes that in the -l switch to GCC.
+      - Cabal writes 'libHSold-time-VERSION-HASH-ghc-8.2.2.so'.
+
+        - Note the =ghc-8.2.2= part isn't in the string passed by GHC to GCC.
+
+      - Can we solve this by =cabal install old-time old-locale=?
+      - https://github.com/haskell/cabal/issues/1720
+
+        - Workaround: Add =--ghc-options=-dynamic= to cabal new-install
+
+      - How do we tell Cabal to use the version we installed with new-install?
+      - Where should we fix this? Cabal? GHC? HDBC-postgresql?
+      - Should we find another library? Hackage has a low-level libpgsql wrapper.
+      - Should we just disable HDBC-postgresql on meta?
+
+  - How I diagnosed it:
+
+    - Pass =-v= to GHC (create a bash script named =ghc= that calls =SOMEWHERE/ghc -v "$@"=, and put its directory in front of =PATH=).
+    - Add =-v= to =cabal=. Then look at this fragment. It's suspicious that =old-time= is the only package with a hash.
+
+    #+BEGIN_EXAMPLE
+        package flags [-package-id Cabal-2.0.1.0{unit Cabal-2.0.1.0 True ([])},
+             -package-id array-0.5.2.0{unit array-0.5.2.0 True ([])},
+             -package-id base-4.10.1.0{unit base-4.10.1.0 True ([])},
+             -package-id binary-0.8.5.1{unit binary-0.8.5.1 True ([])},
+             -package-id bytestring-0.10.8.2{unit bytestring-0.10.8.2 True ([])},
+             -package-id containers-0.5.10.2{unit containers-0.5.10.2 True ([])},
+             -package-id deepseq-1.4.3.0{unit deepseq-1.4.3.0 True ([])},
+             -package-id directory-1.3.0.2{unit directory-1.3.0.2 True ([])},
+             -package-id filepath-1.4.1.2{unit filepath-1.4.1.2 True ([])},
+             -package-id ghc-prim-0.5.1.1{unit ghc-prim-0.5.1.1 True ([])},
+             -package-id old-time-1.1.0.3-8c2cc8e5fb3b424e71501141225064c5d9ee4eeba7f40b702227ad1c3ea2c5b7{unit old-time-1.1.0.3-8c2cc8e5fb3b424e71501141225064c5d9ee4eeba7f40b702227ad1c3ea2c5b7 True ([])},
+             -package-id pretty-1.1.3.3{unit pretty-1.1.3.3 True ([])},
+             -package-id process-1.6.1.0{unit process-1.6.1.0 True ([])},
+             -package-id template-haskell-2.12.0.0{unit template-haskell-2.12.0.0 True ([])},
+             -package-id time-1.8.0.2{unit time-1.8.0.2 True ([])},
+             -package-id transformers-0.5.2.0{unit transformers-0.5.2.0 True ([])},
+             -package-id unix-2.7.2.2{unit unix-2.7.2.2 True ([])}]
+    #+END_EXAMPLE
+
+  - How I solved it:
+
+    - I added this fragment to =cabal.project=:
+      #+BEGIN_EXAMPLE
+
+      package old-time
+      library-vanilla: True
+
+      package old-locale
+      library-vanilla: True
+      #+END_EXAMPLE
+
+    - Related
+        - https://github.com/haskell/cabal/issues/4748
+        - [#3409 Can't use system GHC without static libraries at all](https://github.com/commercialhaskell/stack/issues/3409)
+        - [#1720 `executable-dynamic: True` should apply to `build-type: Custom` setup](https://github.com/haskell/cabal/issues/1720)
+
+- [[https://github.com/haskell/cabal/issues/4506][#4506 =new-haddock='s file monitoring broken]]
+
+  - =new-haddock= doesn't work after =new-build=.
+
+- [[https://github.com/haskell/cabal/issues/5290][#5290 new-build runs into internal error after deleting from store]]
+
+  - Solution: nuke the entire store: =rm -r ~/.cabal/store=.
+
+- Non-problems
+
+  - =cabal new-build --disable-optimization= doesn't disable optimization of transitive dependencies.
+
+    - Cannot reproduce this in cabal 2.3. Is this a 2.0.0.1 bug?
+    - =$HOME/.cabal/config= has =optimization: False=.
+    - Is this a regression? Oversight? It works with =cabal install=.
+    - What I'm trying to do:
+
+      - Build transitive dependencies with optimization disabled, for faster development.
+
+    - My guess:
+
+      - There seems to be a problem in how the new code path plumbs down arguments.
+      - ="Using internal setup method with build-type"= always gets argument =--enable-optimization=.
+
+        - That message is printed by =./Distribution/Client/SetupWrapper.hs:418= =internalSetupMethod= if =cabal new-repl= is run with =--verbose=.
+        - Where does that =--enable-optimization= come from?
+        - Why isn't the =--disable-optimization= passed down?
+
+    - Related issues:
+
+      - [[https://github.com/haskell/cabal/issues/3720][#3720 Tracking bug for cabal.project semantics]]
+      - [[https://github.com/haskell/cabal/issues/5353][#5353 cabal new-configure --disable-optimization has no effect if ghc-options in cabal file contain optimization flag]]
+
+- Cabal codebase
+
+  - Seemingly minor codebase maintenance problems
+
+    - Code duplication
+
+      - =CmdRepl.hs= seems to be copied from =CmdBuild.hs=.
+
+    - =CmdBuild.hs= imports =...Orchestration= unqualified without explicit import list
+
+- Cabal description field pitfall
+
+  - http://michael.orlitzky.com/articles/using_haddock_markup_in_a_cabal_file.xhtml
+* Using Haskell
+** Setting up development environment
+- Duplicate intersecting efforts?
+  Too many choices?
+
+  - Why is there Haskell Platform and Haskell Stack?
+  - Which should we use?
+  - Why is there haskell-lang.org and haskell.org?
+
+    - https://news.ycombinator.com/item?id=12054690
+
+  - Why should I use Platform if there is Stack?
+  - Why should I use Stack if there is Cabal new-style?
+  - Why Stack?
+
+    - Vetted packages?
+
+  - http://www.haskellforall.com/2018/05/how-i-evaluate-haskell-packages.html
+
+- cabal new-build obviates stack?
+
+  - http://coldwa.st/e/blog/2017-09-09-Cabal-2-0.html
+
+*** My incoherent rambling
+My old way: stack.
+My new way: cabal new-style.
+It may change again.
+
+- Install the Haskell =stack= tool.
+
+  - I use the [[https://docs.haskellstack.org/en/stable/install_and_upgrade/#linux][manual download]].
+
+    - If you want to make sure that the download isn't corrupted, check the corresponding sha256sum from [[https://github.com/commercialhaskell/stack/releases/][GitHub releases page]].
+    - If you don't mind sudoing, use the installer script in the [[https://docs.haskellstack.org/en/stable/README/][documentation]].
+
+  - Then I check the archive contents using =tar tzf=.
+  - If there's no weird paths, I extract the archive with =tar xzf=.
+  - Then I make the symbolic link =~/.local/bin/stack=.
+  - If you use the manual download, you may have to install some operating system packages.
+
+    - The list is on the [[https://get.haskellstack.org/][install script]].
+      Search for =install_dependencies= for your distro.
+
+- Choose a Stack solver.
+
+  - Forget it. Just install GHC to home.
+
+    - =./configure --prefix ~/.local=
+    - =make -j4 install=
+
+- Which version of GHC should I use? - The one that is supported by
+  [[http://hackage.haskell.org/package/HaRe][HaRe]] (Haskell refactoring tool) and
+  [[https://github.com/leksah/leksah][Leksah]]. - On 2018-08-20, this is 8.0.2. - Leksah requires ghc >= 8.0.2. - HaRe supports ghc <= 8.0.2. - GHC 8.0 is unacceptably slow. - Forget HaRe. We'll go with Leksah. Use GHC 8.4.3.
+
+  - The widely supported GHC version lags very much behind the latest stable GHC version.
+    I think this may be because the GHC team is rolling out lots of breaking changes in the parser because they are working on the "Trees that grow" proposal.
+  - Which Stackage LTS version should I use?
+
+    - [[https://www.stackage.org/lts-6.35][LTS 6.35]] if GHC 7.10.3?
+
+      - It also hosts a hoogle search for searching Haskell program elements.
+
+- How to get started?
+
+  - Too many choices
+
+    - install using the package manager that comes with your system
+
+      - pros: least hassle
+      - cons: outdated software
+
+    - Stack
+    - Cabal
+    - Nix
+    - Haskell Platform
+
+- What is your preferred way of installing Haskell?
+
+  - Install =cabal-install=
+
+    - Download the suitable =cabal-install= binary package from https://www.haskell.org/cabal/download.html
+    - Extract the =cabal= binary to =~/.local/bin=
+
+  - Install current stable release of GHC
+
+    - Download the current stable release of GHC from https://www.haskell.org/ghc/download.html
+    - Extract it somewhere
+    - Follow the instructions in INSTALL file:
+
+      - =./configure --prefix=$HOME/.local=
+      - =make -j4 install=
+
+  - Modify =PATH= in =~/.basrhc=:
+
+    - Ensure that the line =export PATH="$PATH:$HOME/.local/bin"= is in =~/.bashrc=.
+
+  - For what is the hassle?
+
+    - So that, if anything goes wrong, I can nuke it without nuking my whole operating system.
+
+** Hackage outages
+Hackage is Haskell package repository.
+Sometimes it goes down.
+
+- How to tell Cabal to use a Hackage mirror?
+  An instruction is on the Internet; I forgot where.
+- 2018-04-13: [[https://blog.hackage.haskell.org/posts/2018-04-26-downtime.html][Hackage goes down for about a day]]
+
+** Haskell in 2018
+- unread, Stephen Diehl
+
+  - http://www.stephendiehl.com/posts/vim_2016.html
+  - http://www.stephendiehl.com/posts/vim_haskell.html
+  - http://www.stephendiehl.com/posts/haskell_2018.html
+  - https://www.reddit.com/r/haskell/comments/7wmhyi/an_opinionated_guide_to_haskell_in_2018/
+  - https://github.com/Gabriel439/post-rfc/blob/master/sotu.md
+  - https://www.reddit.com/r/haskell/comments/54fv8b/what_is_the_state_of_haskell/
+  - https://lexi-lambda.github.io/blog/2018/02/10/an-opinionated-guide-to-haskell-in-2018/
+  - [[https://eta-lang.org/][Eta: Haskell on JVM]]
+
+- Development workflow and tools
+
+  - 2018
+
+    - IDE (integrated development environment)
+
+      - Visual Studio Code
+      - Leksah
+      - others?
+      - https://github.com/haskell/haskell-ide-engine
+      - wasted efforts?
+
+        - [[https://github.com/JPMoresmau/eclipsefp][EclipseFP]], no longer developed since 2015
+
+          - http://jpmoresmau.blogspot.com/2015/05/eclipsefp-end-of-life-from-me-at-least.html
+
+            - He got tired of working alone.
+              He pointed us to [[https://www.fpcomplete.com/blog/2015/03/announce-ide-backend][FPComplete ide-backend]].
+
+              - [[https://github.com/fpco/ide-backend][ide-backend]] seems dead; last activity is in 2016.
+
+    - cabal new-style
+
+  - 2016, http://www.stephendiehl.com/posts/vim_2016.html
+
+    - 2015 (?), http://www.stephendiehl.com/posts/vim_haskell.html
+
+- Companies using Haskell
+
+  - https://www.reddit.com/r/haskell/comments/4jo2da/fp_shops/
+
+- things hot in 2018
+
+  - [[https://cardanofoundation.org/][Cardano]]
+
+    - https://www.reddit.com/r/haskell/comments/73r861/cardano_next_generation_blockchain_platform/
+    - https://www.reddit.com/r/cardano/comments/8d87hf/haskell_cryptocurrencies/
+
+  - IOHK
+
+- Unread
+
+  - https://github.com/dhall-lang/dhall-lang
+  - https://wiki.haskell.org/Haskell_Communities_and_Activities_Report
+  - https://haskellweekly.news/
+
+    - https://github.com/haskellweekly/haskellweekly.github.io
+
+      - https://wiki.haskell.org/Haskell_Weekly_News
+
+  - https://haskell.libhunt.com/newsletter/6
+
+** Using GHC
+- Using GHCI
+
+  - https://www.reddit.com/r/haskell/comments/5su9ag/reload_run_expressions_in_ghci_with_a_single/
+
+- https://rybczak.net/2016/03/26/how-to-reduce-compilation-times-of-haskell-projects/
+- https://stackoverflow.com/questions/15662984/speed-up-compilation-in-ghc?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+- https://www.reddit.com/r/haskell/comments/45q90s/is_anything_being_done_to_remedy_the_soul/
+
+** what
+- [[https://www.haskell.org/haddock/doc/html/ch03s08.html][Haddock markup syntax]]
+- metaprogramming from Haskell to Haskell
+
+  - [[https://personal.cis.strath.ac.uk/conor.mcbride/pub/she/][Strathclyde Haskell Enhancement]]
+  - Template Haskell
+  - https://wiki.haskell.org/Generics
+
+    - SYB (Scrap Your Boilerplate), uniplate, etc.
+
+- What does "Avoid 'success at all costs'" mean?
+
+  - https://news.ycombinator.com/item?id=12056169
+
+- Will Eta kill [[https://github.com/Frege/frege][Frege]]?
+  It's sad to see works thrown away.
+
+** Finding a Haskell IDE
+I haven't found a convincing IDE for Haskell.
+
+- [[https://www.reddit.com/r/haskell/comments/5lgtb1/what_ideeditor_do_you_use_for_haskell_development/][what IDE/editor do you use for Haskell development? : haskell]]
+- [[https://www.quora.com/What-are-powerful-Haskell-IDEs][What are powerful Haskell IDEs? - Quora]]
+- [[https://www.quora.com/What-is-the-best-IDE-for-programming-in-Haskell][What is the best IDE for programming in Haskell? - Quora]]
+- [[https://www.reddit.com/r/haskell/comments/86bmpu/haskell_ides/][Haskell ides? : haskell]]
+- Leksah-nix fails to build on my machine (Ubuntu 14.04).
+  There are no prebuilt binaries.
+  Must compile from source from [[https://github.com/leksah/leksah/wiki/download][Hackage]] using Cabal.
+
+** what
+- Enterprise Haskell?
+
+  - https://wiki.haskell.org/Enterprise_Haskell
+  - DSH: Database Supported Haskell https://hackage.haskell.org/package/DSH
+
+- [[http://yager.io/Distributed/Distributed.html][Distributed Systems in Haskell :: Will Yager]]
+- Alien technologies?
+
+  - https://github.com/transient-haskell/transient
+
+** what
+- useful trick, especially helpful when abusing type classes: https://chrisdone.com/posts/haskell-constraint-trick
+- https://chrisdone.com/posts/twitter-problem-loeb
+- http://blog.sigfpe.com/2006/11/from-l-theorem-to-spreadsheet.html
+- http://blog.sigfpe.com/2007/02/comonads-and-reading-from-future.html
+- Components for publish-subscribe in Haskell?
+
+  - https://www.stackage.org/lts-6.35/package/broadcast-chan-0.1.1
+
+- Lennart Augustsson's [[http://augustss.blogspot.com/2008/12/somewhat-failed-adventure-in-haskell.html][Things that amuse me]], Haskell module overloading
+- [[http://hackage.haskell.org/package/lazy][lazy: Explicit laziness for Haskell]]
+
+  - "This library provides laziness as an abstraction with an explicit type-signature, and it so happens that this abstraction forms a monad!"
+  - [[https://nikita-volkov.github.io/if-haskell-were-strict/][If Haskell were strict, what would the laziness be like?]]
+  - 2014, article, [[https://pchiusano.github.io/2014-09-18/explicit-laziness.html][Paul Chiusano: An interesting variation on a strict by default language]]
+  - [[https://www.reddit.com/r/haskell/comments/36s0ii/how_do_we_all_feel_about_laziness/][How do we all feel about laziness? : haskell]]
+
+- distributed functional programming?
+
+  - [[https://en.wikipedia.org/wiki/MBrace][WP:MBrace]], F#
+  - [[https://haskell-distributed.github.io/][Cloud Haskell]]
+
+    - has some academic papers https://wiki.haskell.org/Cloud_Haskell
+
+  - [[https://github.com/PatrickMaier/HdpH][PatrickMaier/HdpH: Haskell distributed parallel Haskell]]
+
+** Curating libraries
+- https://www.reddit.com/r/haskell/comments/4ggt05/best_underrated_haskell_libraries/
+- https://wiki.haskell.org/Applications_and_libraries
+- https://stackoverflow.com/questions/9286799/haskell-libraries-overview-and-their-quality
+
+** what
+- unread
+
+  - servant web framework
+  - Salsa Haskell .NET bridge
+
+    - https://wiki.haskell.org/Salsa
+
+  - [[https://gist.github.com/puffnfresh/6222797][Haskell partiality monad]]
+
+- https://stackoverflow.com/questions/5770168/templating-packages-for-haskell
+- Hoogle vs Hayoo?
+
+  - The hoogle on stackage.org top right text bar seems to be most complete
+
+    - https://www.stackage.org/
+
+  - https://mail.haskell.org/pipermail/haskell-cafe/2013-August/109945.html
+
+** Haskell woes
+- Exceptions?
+
+  - http://hackage.haskell.org/package/safe-exceptions
+  - https://www.fpcomplete.com/blog/2016/11/exceptions-best-practices-haskell
+  - https://www.reddit.com/r/haskell/comments/589fkg/haskell_and_the_no_runtime_exception_claim_95_of/
+
+- Module system
+- =Read(read)= should be renamed to =CoShow(coshow)=.
+
+** GHC woes
+- Profiling requires recompiling all transitive dependencies if they happen to be compiled without profiling.
+*** Working on GHC
+- Beginning to work on GHC
+
+  - Please see the [[https://ghc.haskell.org/trac/ghc/wiki/Newcomers][newcomers guide]] first.
+
+- GHC TDNR (type-directed name resolution)
+
+  - https://ghc.haskell.org/trac/ghc/ticket/4479
+  - https://ghc.haskell.org/trac/ghc/wiki/Records/OverloadedRecordFields
+  - https://stackoverflow.com/questions/22417063/current-state-of-record-types-and-subtyping-in-haskell
+  - https://en.wikipedia.org/wiki/Subtyping#Record_types
+
+    - Width and depth subtyping
+
+** People who have too much time
+- https://hackage.haskell.org/package/ImperativeHaskell
+- just for curiosity https://github.com/edwinb/idris-php
+
+** What's hampering Haskell adoption?
+- GHC's aggressive intermodule optimization precludes prebuilt binaries.
+* Using Kubernetes
+  :PROPERTIES:
+  :CUSTOM_ID: using-kubernetes
+  :END:
+
+- [[https://kubernetes.io/][kubernetes.io]]: "Production-Grade Container Orchestration"
+- How do we control access to Kubernetes?
+
+  - https://stackoverflow.com/questions/42170380/how-to-add-users-to-kubernetes-kubectl
+  - https://kubernetes.io/docs/admin/authentication/
+  - https://kubernetes.io/docs/admin/accessing-the-api/
+  - How do we add and remove users and roles to Kubernetes?
+  - Which is the most hassle-free future-proof minimal-maintenance way?
+
+- Kubernetes security
+
+  - https://kubernetes.io/blog/2016/08/security-best-practices-kubernetes-deployment/
+  - https://kubernetes.io/docs/tasks/administer-cluster/securing-a-cluster/
+  - Which document should we read? Overlapping? Confusing?
+
+    - https://kubernetes.io/docs/reference/access-authn-authz/controlling-access/
+    - https://kubernetes.io/docs/reference/access-authn-authz/authentication/
+    - https://kubernetes.io/docs/reference/access-authn-authz/authorization/
+
+  - What is Kubernetes's replacement of AWS security groups?
+
+    - NetworkPolicy objects
+
+      - https://kubernetes.io/blog/2017/10/enforcing-network-policies-in-kubernetes/
+      - https://kubernetes.io/blog/2016/04/kubernetes-network-policy-apis/
+
+- How I think Kubernetes fits in Google's strategy
+
+  - Kubernetes commoditizes IaaS providers.
+
+    - It lowers the barrier of switching from any other cloud providers to GCE.
+
+      - Examples of other cloud providers:
+        Amazon Web Services (AWS), DigitalOcean, Alibaba Cloud (Aliyun), Microsoft Azure
+
+    - The same way Microsoft Windows commoditized PC hardware.
+
+  - [[https://en.wikipedia.org/wiki/Commoditization][WP:Commoditization]]
+  - [[https://en.wikipedia.org/wiki/Infrastructure_as_a_service][WP:Infrastructure as a service]]
+
+- [[https://www.level-up.one/kubernetes-bible-beginners/][The Kubernetes Bible for Beginners & Developers - Level UpLevel Up]]
+* Making a personal wiki
+  :PROPERTIES:
+  :CUSTOM_ID: making-a-personal-wiki
+  :END:
+
+- Selection criteria:
+
+  - How many people are using it?
+  - How big can it grow without slowing down?
+  - How good is its markup?
+  - How long will it last?
+    How long can it operate without being obsolete?
+    How fast do the software dependencies rot?
+
+    - How long does Ubuntu maintain the repository archive of old Ubuntu versions?
+
+      - http://old-releases.ubuntu.com/
+
+        - 2018-08-06: It seems that Ubuntu maintains the repositories to as far back as 2006.
+        - https://askubuntu.com/questions/91815/how-to-install-software-or-upgrade-from-an-old-unsupported-release
+
+- Too many choices.
+
+  - http://wiki.c2.com/?PersonalWiki
+  - http://wiki.c2.com/?WikiEngines
+  - https://www.quora.com/Whats-the-best-way-to-create-a-personal-wiki
+  - [[https://www.wikimatrix.org/][wikimatrix.org: compare wiki softwares]]
+  - safety in numbers?
+
+    - many users
+
+      - Jekyll
+      - http://moinmo.in/
+      - https://gohugo.io/
+
+    - few users
+
+      - https://github.com/lotabout/static-wiki
+
+    - unknown
+
+      - http://dynalon.github.io/mdwiki/#!index.md
+
+- Avoid accidental publishing.
+
+  - Don't put anything you don't want to publish inside your Jekyll directory, no matter how convenient.
+    Accidents happen.
+    Humans make mistakes.
+    Computer doesn't care.
+
+- [[https://www.labnol.org/internet/load-disqus-comments-on-click/28653/][How to Load Disqus Comments on Demand with JavaScript]]
+* Searching the Internet
+  :PROPERTIES:
+  :CUSTOM_ID: searching-the-internet
+  :END:
+
+- Example search: given a text description, find related images
+- Example reverse search: given an image, describe it, or find its copies on the Internet
+- Internet search tools in 2018
+
+  - [[https://duckduckgo.com/][duckduckgo.com]]: privacy-focused search engine
+
+    - less censored than Google
+    - no reverse search (yet?)
+
+  - [[https://google.com/][google.com]]: biggest Internet search engine in 2018
+
+    - censored
+    - text search
+    - image search
+    - reverse image search
+    - Problems
+
+      - Google should rank down Pinterest.
+
+        - In my experience, Pinterest is never an authoritative nor original source.
+        - Google has ranked down Tumblr and Wikipedia.
+
+      - Example of Google censorship (compare with DuckDuckGo):
+
+        - search terms related to pornography
+        - search terms related to the darknet (the hidden wiki, Tor websites)
+        - rhino poaching (Google favors contents against rhino poaching)
+
+      - [[https://stallman.org/google.html][Richard Stallman's reasons not to use Google]]
+
+  - [[https://www.bing.com/][bing.com]]: Microsoft's answer to Google
+
+    - text search
+    - reverse image search
+    - [[https://stallman.org/microsoft.html][Richard Stallman's reasons not to use Microsoft]]
+
+  - searx?
+  - startpage?
+  - reverse search tools
+
+    - Google and Bing have reverse image search
+    - [[https://tineye.com/][tineye.com]]: reverse image search
+    - [[http://www.mooma.sh][moomash]] (was "audentifi"), YouTube reverse audio search
+
+      - 2018: only works with some video formats; doesn't work for old videos
+      - 2018-09-15: It have gone out of business, it seems.
+
+    - Shazam
+
+      - Is there anything like Shazam that takes a YouTube URL, and doesn't require me to install anything?
+
+    - http://whatpixel.com/original-source-image-search-tools/
+    - [[https://saucenao.com/][saucenao.com]]: reverse image search; I use it to find images stolen from pixiv
+
+- The Internet is full of crap.
+
+  - So are libraries.
+  - So is the world.
+  - So is this website.
+  - Thus, you must think for yourself.
+* Using Trello
+  :PROPERTIES:
+  :CUSTOM_ID: using-trello
+  :END:
+
+- How should we best use Trello?
+
+  - A card gathers people to help each other accomplish a common goal.
+  - A card disseminates information from the people who have it to the people who need it.
+
+- Traps
+
+  - Because Trello cannot collaborative edit, we must not write too long before we save. Two people must not edit the card at the same time.
+
+- What do we use Trello for?
+
+  - Prioritize what to do, starting with the highest velocity (value per effort)
+  - Give enough information for others to help us
+
+- What Trello is not
+
+  - A Trello column is not a mere to-do list.
+  - Milestone lists are better than to-do lists.
+    Be declarative, not imperative. Describe what you want, not how you want to do it.
+  - If you can do it in a few hours, you don't need to make a Trello card for it.
+  - If you don't need help with something, don't write a Trello card for it.
+
+- Our attitude towards Trello
+
+  - We should consider the time spent on Trello as overhead.
+    We should minimize the time we are editing, moving, arranging Trello cards.
+
+    - Human nature trap: It's fun to look busy (over-organizing).
+
+- When not Slack?
+
+  - If you need to remember it later, use Trello or Confluence, not Slack.
+  - If a problem will take some time, don't waste your time typing on Slack.
+    Put it in Trello, and assign it to the person who can fix it.
+
+- What is in a card?
+
+  - Write a card with the intention of helping everyone else help you.
+    The card must answer "What can I help? How can I help?".
+  - A card contains information or will contain information.
+  - A person should be in the card if:
+
+    - he person needs that information, or
+    - he can contribute that information (he may also contribute in a comment).
+
+  - No other person should care about that card.
+
+- What is Trello?
+
+  - To answer this, we answer these questions:
+
+    - What does Trello make easy?
+    - What does Trello make hard?
+    - We seek an operational definition for Trello. We define something by what it do.
+
+- What should we group together? Why?
+
+  - A board is a list of a column.
+  - A column is a list of cards. Trello uses the term "list", but we use "column" to avoid confusion.
+  - A card has zero or more members.
+  - A card has zero or more labels.
+  - A label is like an atom in propositional logic.
+  - The filtering system is a limited form of propositional logic.
+  - A card is a way for several people to share information.
+  - If two people need the same information, they should subscribe to the same card.
+  - If we need two people to finish (archive) a card, then both of those people should be members of that card.
+  - What is a label?
+    You give a label L to a card if and only if you often need to filter (select) all cards labeled L.
+  - Why are two cards in the same list?
+    Because they have something in common. They share something. An aspect of them is equal.
+  - We group something in a list to minimize moving cards.
+  - What is that aspect? What irreplaceable advantage does it give us?
+  - Because they have the same members? (We can use filter for this.)
+    Because they belong to the same team?
+    Because they have the same due date? (We can use filter for this.)
+    Because they are a part of the same user story?
+    Navigating multiple boards is hard (big cognitive burden).
+  - Label is for filtering.
+
+- What is easy to do in Trello?
+
+  - Toggle any of the first 10 labels.
+  - Show cards assigned to me (the user who is logged in).
+  - Show cards by a conjunction or a disjunction of a Condition.
+  - Condition is an element of Conditions.
+  - Conditions is the union of all labels in a board and members of a board.
+  - Click on the due date in the card description to mark it complete.
+  - Read card comments in reverse chronological order (newer comments first).
+  - Move a card to the bottom of an adjacent list.
+  - See the number of checked items in a checklist in a card.
+  - In the comment of a card, add another card.
+
+- Trello assumes that every checklist in the item has the same effort.
+  Therefore we must make sure that every item in a checklist in the item has the same effort.
+- What is a bit hard to do (because it cannot be done by keyboard alone):
+
+  - Adding a check list in a card
+  - A card can have many checklists
+  - Marking a check list in a card
+  - Unmarking a check list in a card
+  - Filtering makes navigating a large board possible.
+
+- What is hard to do in Trello:
+
+  - Move from a board to another boards. (High cognitive load due to context switching.)
+  - One person should not be in more than one board.
+  - Move a card from a list to another list. It is easier to archive the list.
+  - Unarchive a card
+
+- What is impossible (assuming no plugins):
+
+  - See due dates in non-US format
+  - Use keyboard to move card up or down in a list
+  - Gantt chart
+  - Calendars
+  - Progress report
+  - Collaboratively edit a card description.
+    Trello will only show the last saved description.
+    The previous descriptions are not lost, but hardly accessible.
+    The old description can be accessed by Exporting a card as JSON.
+  - In a card description, we can link to a board or a card, but not link to a list.
+
+- Member vs subscribe:
+
+  - If and only if you are a member of a card, it will show in 'my card' filter (Press Q)
+    The members of a card are the people assigned to a card
+    We must tailor our workflow so that we use only the easy things.
+
+- Please read and memorize the Trello shortcut keys.
+
+  - Also read [[https://help.trello.com/article/734-how-to-use-trello-like-a-pro][How to use Trello like a pro]].
+  - Those documents reflect what the Trello designer thinks Trello is best used for.
+
+- In search of a Trello architecture
+
+  - Fixed Pipeline / Mini waterfalls
+
+    - Column = team, Card = product
+    - One column is assembly line.
+    - Cards move from left to right.
+    - Progress is sequential. Right column cannot start before left column finishes what it has to do with the card.
+    - Ideal for the same process that is repeated very many times.
+    - For example, in our case, the columns would be Requirement, UI, Database, Backend, Frontend, Done.
+
+  - Column = a rather big to-do, card = breakdown of the column
+
+    - For example, in our case, each column would be "As a (who), I (do what)".
+    - A column is a work item and each card in the column is a breakdown of that item.
+
+  - Column = epic / bigger user story, card = smaller user story
+  - Column = milestone, card = breakdown of milestone
+
+- Trello list hierarchy (a Trello account is a list of lists of ...)
+
+  - A Trello account is a list of boards.
+  - A board is a list of columns.
+  - A column is a list of cards.
+  - A card is a list of checklists.
+  - A checklist is a list of checklist items.
+  - Therefore we can use Trello for work breakdown structure of perhaps at most 4 levels deep.
+* Contributing to Wikipedia
+  :PROPERTIES:
+  :CUSTOM_ID: contributing-to-wikipedia
+  :END:
+
+** Beginning contributing to Wikipedia
+   :PROPERTIES:
+   :CUSTOM_ID: beginning-contributing-to-wikipedia
+   :END:
+
+Don't publish anything you may regret later.
+Once it's on the Internet, it's forever.
+The Internet doesn't forget.
+Wikipedia is a highly crawled and archived site.
+
+** What should be in user page?
+   :PROPERTIES:
+   :CUSTOM_ID: what-should-be-in-user-page
+   :END:
+
+Templates: User page, User in $country, Babel
+
+See [[https://en.wikipedia.org/wiki/Wikipedia:User_pages][WP:User pages]].
+
+[[https://en.wikipedia.org/wiki/Wikipedia:Userboxes][WP:Userboxes]]
+* Using XML
+  :PROPERTIES:
+  :CUSTOM_ID: using-xml
+  :END:
+
+** Finding the editor
+   :PROPERTIES:
+   :CUSTOM_ID: finding-the-editor
+   :END:
+
+List of editors:
+
+- I have used
+
+  - Vim
+  - IntelliJ IDEA
+
+- I don't know
+
+  - emacs nxml-mode
+  - [[http://plugins.jedit.org/plugins/?XML][jEdit XML plugin]]
+  - QXMLEdit? Can it autocomplete?
+  - XML Notepad
+
+Sources:
+
+- [[https://en.wikipedia.org/wiki/XML_Schema_Editor#cite_note-1][WP:XML Schema Editor]]
+- [[https://en.wikipedia.org/wiki/Comparison_of_XML_editors][WP:Comparison of XML editors]]
+
+IntelliJ IDEA works fine, but I'd be happy if there is a lighter alternative.
+
+My criteria:
+
+- open-source
+- schema-aware, supports XML Schema Definition (XSD)
+- autocompletion
+
+  - 2018-08-22
+
+Nice-to-have features:
+
+- Automate closing tag.
+- Editing an opening tag also edits the closing tag.
+- Editing a closing tag also edits the opening tag.
+- Any way to avoid memorizing and typing =xmlns:xsi=.
+
+Vim can semi-automate XML closing tag using Ctrl+P.
+
+** Using schemas
+   :PROPERTIES:
+   :CUSTOM_ID: using-schemas
+   :END:
+
+In principle, from a type defined in an XSD file, we can generate a Haskell module and a Java class.
+
+- [[http://www.kohsuke.org/xmlschema/XMLSchemaDOsAndDONTs.html][W3C XML Schema: DOs and DON'Ts]]
+- [[https://stackoverflow.com/questions/2014237/what-are-the-best-practices-for-versioning-xml-schemas][xsd - What are the best practices for versioning XML schemas? - Stack Overflow]]
+- [[https://www.webucator.com/tutorial/learn-xml-schema/XML-Schema-Keys.cfm][Tutorial: XML Schema Keys | XML Schema Tutorial | Webucator]]
+
+** Toward markup language agnosticity
+   :PROPERTIES:
+   :CUSTOM_ID: toward-markup-language-agnosticity
+   :END:
+
+What is common between XML, JSON, and YAML?
+
+Can we map (interconvert) between XML and YAML?
+Approximate data model:
+
+#+BEGIN_SRC haskell
+    type Key = String
+    type Atr = (Key, String)
+
+    data Xml
+        = XText String
+        | XElem [Atr] Name [Xml]
+
+    data Json
+        = JText String
+        | JMap [(Key, Json)]
+        | JList [Json]
+
+    xj :: Xml -> Json
+
+    jx :: Json -> Xml
+#+END_SRC
+
+Can we use XML Schema to validate a JSON/YAML document?
+
+We can map a subset of XML to YAML using [[http://yaml.org/xml][YAXML, the (draft) XML Binding for YAML]].
+
+- [[https://www.quora.com/In-choosing-between-XML-and-YAML-what-are-advantages-and-more-natural-problem-domains-for-each-one][In choosing between XML and YAML, what are advantages and more natural problem domains for each one? - Quora]]
