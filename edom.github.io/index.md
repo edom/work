@@ -205,7 +205,6 @@ We should join forces to reach our shared goals.
         - [Logic]({% link logic.md %})
         - Work
             - [Boss]({% link boss.md %})
-    - [Biology]({% link biology.md %})
 - Music
     - I play piano in the band [The Nomads]({% link nomads.md %}) (an Indonesian band, not the Swedish band).
 - [Entertainment]({% link entertain.html %})
