@@ -5,6 +5,8 @@ date: 2017-06-29 18:30 +0700
 permalink: /circuit.html
 ---
 
+# Circuit complexity
+
 - [WP:Circuit complexity](https://en.wikipedia.org/wiki/Circuit_complexity)
 
 ## The shortest \\(n\\)-parameter boolean predicate equivalence class representative problem
@@ -35,20 +37,20 @@ C(\alpha \vee \beta) &= 1 + C(\alpha) + C(\beta),
 \\
 C(\alpha) &= 0 \text{ otherwise}.
 \end{align*}</span>
-- Given a formula \\( \phi \in E_n \\) and an *assignment* <span>\( a : \{0,1\}^n \)</span>,
+- Given a formula \\( \phi \in E_n \\) and an *assignment* \\( a : \{0,1\}^n \\),
 we can *interpret* the formula \\( \phi \\).
     - The result of interpreting \\( \phi \\) with assignment \\( a\\) is written \\( \phi|_a \\),
     and is obtained by replacing each \\( x_k \\) with \\( a_k \\)
     and evaluating the expression to either zero or one.
     - This interpretation enables us to define *equivalence*,
         - Formally, we say that two formulas \\( \alpha, \beta \in E_n \\) are *equivalent*, written \\( \alpha \equiv \beta \\), iff
-        for every assignment <span>\( a \in \{0,1\}^n \)</span>, it holds that <span>\( \alpha|_a = \beta|_a \)</span>.
+        for every assignment \\( a \in \{0,1\}^n \\), it holds that \\( \alpha|_a = \beta|_a \\).
         Then, we define the *equivalence class* of a formula \\( \phi \in E_n \\) as
-        <span>\(
+        \\(
         [\phi] = \{ \alpha ~|~ \alpha \equiv \phi, ~ \alpha \in E_n \}
-        \)</span>.
+        \\).
             - Every element of that equivalence class is called a *representative* of that class.
-            Note that equivalence is not equality: <span>\( x_0 \wedge x_0 \)</span> and <span>\( x_0 \)</span>
+            Note that equivalence is not equality: \\( x_0 \wedge x_0 \\) and \\( x_0 \\)
             are equivalent but not equal.
         - Two formulas are equivalent iff they always give matching results for all assignments.
         - Two formulas are equal iff they look the same.
@@ -72,7 +74,7 @@ Q(0,0) &= 0
 \\ Q(2,7) &= x_0 \vee x_1
 \\ Q(2,9) &= (x_0 \wedge x_1) \vee \neg (x_0 \vee x_1)
 \end{align*}</span>
-- It should be apparent that <span>\( Q(n,2^{2^n}-1-k) = \neg Q(n,k) \)</span>.
+- It should be apparent that \\( Q(n,2^{2^n}-1-k) = \neg Q(n,k) \\).
 It should be apparent that \\( Q(2,6) \\) is XOR and \\( Q(2,9) \\) is bi-implication.
 It should be apparent that \\( Q(2,6) \\) and \\( Q(2,9) \\) are the longest expressions for \\( n = 2 \\),
 and both of them have size \\( 4 \\).
@@ -112,20 +114,22 @@ and all conjunctive normal forms have the maximal number of \\( 2^{n - 1} \\) cl
     For every \\(A \subseteq E_n\\),
     we say that \\(\alpha \in \inf(A)\\) iff \\( \alpha \le \phi \\) for every \\(\phi \in E_n\\).
     - A *bit* is either zero or one.
-    - We define the mapping <span>\( N_n : \{0,1\}^n \to \Nat \)</span>
+    - We define the mapping \\( N_n : \{0,1\}^n \to \Nat \\)
     as a mapping from the \\(n\\)-dimensional bit vector \\(x = (x_0,\ldots,x_{n-1})\\)
-    to the natural number <span>\(N_n(x) = \sum_{k=0}^{n-1} x_k 2^k \)</span>.
+    to the natural number \\(N_n(x) = \sum_{k=0}^{n-1} x_k 2^k \\).
         - \\(N_n(x)\\) is the number whose
         \\(n\\)-bit binary right-to-left encoding is the \\(n\\)-dimensional bit vector \\(x\\).
     - We define the bit vector identifying the predicate as
-    <div>\begin{align*}
+    <span>\begin{align*}
     B_n(\phi) = N_{2^n}( \phi(N_n^{-1}(0)), \ldots, \phi(N_n^{-1}(2^n-1)))
-    \end{align*}</div>
+    \end{align*}</span>
 - Shannon 1949 proved that almost all \\( n \\)-argument boolean functions
 require circuits of size \\( \Theta(2^n/n) \\). (citation?)
 - For small numbers, we can enumerate the answers by hand.
 - A formula is *canonical* iff it cannot be shortened.
-- What is the longest possible canonical description length of a predicate that takes \\( k \\) arguments?
+
+What is the longest possible canonical description length of a predicate that takes \\( k \\) arguments?
+
 ```
 0000 | 0
 0001 | a \wedge b
@@ -144,12 +148,16 @@ require circuits of size \\( \Theta(2^n/n) \\). (citation?)
 1110 | \neg (a \wedge b)
 1111 | 1
 ```
-    - Conjecture: The longest 2-argument predicate is 0110.
-    - Conjecture: \\( (a \wedge \neg b) \vee (\neg a \wedge b) \\) is the shortest description of 0110.
-    - What we are asking here is Sipser 1997's *circuit-size complexity*?
+
+Conjecture: The longest 2-argument predicate is 0110.
+
+Conjecture: \\( (a \wedge \neg b) \vee (\neg a \wedge b) \\) is the shortest description of 0110.
+
+What we are asking here is Sipser 1997's *circuit-size complexity*?
+
 - How are circuit complexity and proof complexity related?
 - Simplification rewrite rules:
-<div>\begin{align*}
+<span>\begin{align*}
 \neg (\neg \alpha) = \alpha
 \\
 \alpha \wedge \neg \alpha = 0
@@ -169,7 +177,7 @@ require circuits of size \\( \Theta(2^n/n) \\). (citation?)
 \neg \alpha \vee \neg \beta = \neg (\alpha \wedge \beta)
 \\
 (\alpha \wedge \beta) \vee (\alpha \wedge \gamma) = \alpha \wedge (\beta \vee \gamma)
-\end{align*}</div>
+\end{align*}</span>
 - Is this the problem we're talking about?
     - [WP:Circuit minimization for Boolean functions](https://en.wikipedia.org/wiki/Circuit_minimization_for_Boolean_functions)
     - [Circuit Minimization Problem](http://www.cs.sfu.ca/~kabanets/papers/mincircuit.pdf), 1999, Valentine Kabanets and Jin-Yi Cai
