@@ -173,7 +173,6 @@ We should join forces to reach our shared goals.
             - [YT:Map of Computer Science](https://www.youtube.com/watch?v=SzJ46YA_RaA)
         - [Computation]({% link computation.md %})
         - [Computational complexity]({% link complexity.md %})
-            - [Circuit complexity]({% link circuit.md %})
     - Natural sciences
         - [Physics]({% link physics.md %}) and engineering
             - Civil engineering
