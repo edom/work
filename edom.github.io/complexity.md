@@ -5,6 +5,8 @@ date: 2017-06-29 18:30 +0700
 permalink: /complexity.html
 ---
 
+# Computational complexity
+
 - world effort
     - [A compendium of NP optimization problems](https://www.nada.kth.se/~viggo/wwwcompendium/wwwcompendium.html)
         - Smallest equivalent something:
@@ -66,29 +68,29 @@ https://www.nada.kth.se/~viggo/wwwcompendium/node49.html
 - Complexity axioms
     - Blum's?
     - Here we axiomatize machine-independent *complexity*.
-    - Recall that a problem \\( P \\) is a subset of <span>\( X \times Y \)</span>.
+    - Recall that a problem \\( P \\) is a subset of \\( X \times Y \\).
     We posit, without referring to any model of computation,
     that every question \\(x\\) has a *complexity* \\(m(x)\\), usually a number.
     The function \\( m \\) is a *complexity measure* of \\( P \\) iff it satisfies the axioms below.
     - For help, we define \\( S(k) \\)
     as the set of all questions with the same complexity \\( k \\),
-    that is <span>\( S(k) = \{ x ~|~ m(x) = k \} \)</span>.
+    that is \\( S(k) = \{ x ~|~ m(x) = k \} \\).
     Then, the *complexity axioms* are:
-        - Every <span>\( S(k) \)</span> is finite.
+        - Every \\( S(k) \\) is finite.
         - There are always more complex questions than less complex questions,
         because, for example, longer strings can encode more questions.
-        Formally, if \\( i < j \\) then <span>\( |S(i)| < |S(j)| \)</span>.
+        Formally, if \\( i < j \\) then \\( |S(i)| < |S(j)| \\).
     - Note that the complexity measure is \\( m \\), not \\( S \\).
     - Computation graph axiom:
         - A machine can only manipulate one symbol at a time.
-        Formally, if \\( E(a,b) \\) then <span>\( |m(a) - m(b)| \le 1 \)</span>.
+        Formally, if \\( E(a,b) \\) then \\( |m(a) - m(b)| \le 1 \\).
         - The out-degree of a vertex of a nondeterministic graph may exceed 1 but cannot exceed a constant.
 - Machine, algorithm, and complexity
     - The [time complexity](https://en.wikipedia.org/wiki/Worst-case_complexity#Definition)
     of machine \\(m\\) for input \\(x\\) is \\(t(m,x)\\),
     the number of steps \\(m\\) makes between the beginning and the halting.
     The _worst-case time complexity_ of \\(m\\) for input _size_ \\(n\\) is
-    <span>\(T(m,n) = \left\vert \max_{|x| = n} t(m,x) \right\vert\)</span>.
+    \\(T(m,n) = \left\vert \max_{|x| = n} t(m,x) \right\vert\\).
     We can also write asymptotic statements such as \\(T(m,n) \in O(f(n))\\).
     - An algorithm \\(a\\) implies a machine \\(m(a)\\).
     - An _algorithm_ solves a _problem_.
@@ -98,7 +100,7 @@ https://www.nada.kth.se/~viggo/wwwcompendium/node49.html
     - A _machine_ \\(M\\) is a _transition relation_ \\(T\\)
     (an _acyclic_ binary relation).
 \\[
-T(x,y) = \text{\\(M\\) can state-transition from \\(x\\) to \\(y\\).}
+T(x,y) = \text{\(M\) can state-transition from \(x\) to \(y\).}
 \\]
     - \\(M\\) _computes_ \\(P\\) iff
     a subgraph of the shortcut of \\(T\\) is isomorphic to \\(P\\).
@@ -107,38 +109,38 @@ T(x,y) = \text{\\(M\\) can state-transition from \\(x\\) to \\(y\\).}
     [graph isomorphism](https://en.wikipedia.org/wiki/Graph_isomorphism),
     [subgraph isomorphism problem](https://en.wikipedia.org/wiki/Subgraph_isomorphism_problem).
     - _Deterministic_ machine equals _functional_ relation.
-    - \(G\) \emph{accepts} \(v\) iff \(F^\infty(\{v\}) = \emptyset\) where \(F\) is the graph's fringe function.
-    The \emph{language} recognized by \(G\) is the largest \(L \subseteq V\) such that \(F^\infty(L) = \emptyset\).
-    - A Turing machine is \((C,I,f)\)
-    where \(C\) is countable
-    and \(f\) is recursive.
+    - \\(G\\) \emph{accepts} \\(v\\) iff \\(F^\infty(\{v\}) = \emptyset\\) where \\(F\\) is the graph's fringe function.
+    The \emph{language} recognized by \\(G\\) is the largest \\(L \subseteq V\\) such that \\(F^\infty(L) = \emptyset\\).
+    - A Turing machine is \\((C,I,f)\\)
+    where \\(C\\) is countable
+    and \\(f\\) is recursive.
     - https://en.wikipedia.org/wiki/Register_machine
-    - Example: a state of a Turing machine is \((c,l,h,r)\)
-    where \(c\) is a configuration,
-    \(l\) is the tape content to the left of the head,
-    \(h\) is the tape content at the head,
-    and \(r\) is the tape content to the right of the head.
+    - Example: a state of a Turing machine is \\((c,l,h,r)\\)
+    where \\(c\\) is a configuration,
+    \\(l\\) is the tape content to the left of the head,
+    \\(h\\) is the tape content at the head,
+    and \\(r\\) is the tape content to the right of the head.
     - A problem class is a function.
-    - A *problem* is a member of \(S\).
-    - A *problem class* is a subset of \(S\).
-    - Sometimes we can *reduce* a problem \(p : P\) into another problem \(q : Q\)
-    by an injective reduction \(r : P \to Q\).
+    - A *problem* is a member of \\(S\\).
+    - A *problem class* is a subset of \\(S\\).
+    - Sometimes we can *reduce* a problem \\(p : P\\) into another problem \\(q : Q\\)
+    by an injective reduction \\(r : P \to Q\\).
 - Space and time complexity
     - Can we deal with complexity without ever defining machine and computation
     (besides assuming they exist)?
-    - \(\newcommand\ftime{\text{time}}
+    - \\(\newcommand\ftime{\text{time}}
     \newcommand\fspace{\text{space}}
-    \newcommand\fsize{\text{size}}\)We are interested at the number of steps
+    \newcommand\fsize{\text{size}}\\)We are interested at the number of steps
     a machine makes for an input before terminating.
-    We define \(\ftime~f~x\) as the *running time*
-    of the machine \(f\) for input (initial state) \(x\).
-    - We also define \(\fsize~x\) as the *size* of the state \(x\).
+    We define \\(\ftime~f~x\\) as the *running time*
+    of the machine \\(f\\) for input (initial state) \\(x\\).
+    - We also define \\(\fsize~x\\) as the *size* of the state \\(x\\).
     - (Concrete)
-    Formally, \(\ftime~f~x = n\) iff \(n\) is the smallest natural number such that \(f^{n+1}~x = f^n~x\).
+    Formally, \\(\ftime~f~x = n\\) iff \\(n\\) is the smallest natural number such that \\(f^{n+1}~x = f^n~x\\).
     - We apply general algebraic thinking again, this time about congruences.
-    Let \(T~f~n = \{ x ~|~ \ftime~f~x = n \} \)
-    be the set of all inputs that \(f\) handles in \(n\) steps.
-    We can also let \(U~n = \{ (f,x) ~|~ \ftime~f~x = n \}\)?
+    Let \\(T~f~n = \{ x ~|~ \ftime~f~x = n \} \\)
+    be the set of all inputs that \\(f\\) handles in \\(n\\) steps.
+    We can also let \\(U~n = \{ (f,x) ~|~ \ftime~f~x = n \}\\)?
     \[
     \lambda f . \lambda n . \{ x ~|~ \ftime~f~x = n \}
     \\
@@ -146,9 +148,9 @@ T(x,y) = \text{\\(M\\) can state-transition from \\(x\\) to \\(y\\).}
     \\
     \lambda m . \lambda n . \{ (f,x) ~|~ \fsize~x = m, ~ \ftime~f~x = n \}
     \]
-    - We define \(\fspace : M~S \to S \to \Nat\),
-    where \(\fspace~f~x\) is the size of the biggest state in \(\{ f^n~x ~|~ n \in \Nat \}\).
-    - The other option is to require that each machine \(f\) have a \(t : S \to \Nat\) where \(t~(f~x) = 1 + t~x\).
+    - We define \\(\fspace : M~S \to S \to \Nat\\),
+    where \\(\fspace~f~x\\) is the size of the biggest state in \\(\{ f^n~x ~|~ n \in \Nat \}\\).
+    - The other option is to require that each machine \\(f\\) have a \\(t : S \to \Nat\\) where \\(t~(f~x) = 1 + t~x\\).
 - Complexity as an ordering of questions
     - Postulate:
     For every pair of questions, we can always decide which is more complex.
@@ -165,7 +167,7 @@ T(x,y) = \text{\\(M\\) can state-transition from \\(x\\) to \\(y\\).}
     (Are we sure we don't need order-reflecting?)
     - Rabin complexity axioms?
     Still with the same \\( m \\) here.
-    For help, let <span>\( L(k) = \{ x ~|~ m(x) \le k \} \)</span>
+    For help, let \\( L(k) = \{ x ~|~ m(x) \le k \} \\)
     be the set of all questions that are not more complex than \\( k \\).
     Then the axioms are:
         - Every \\( L(k) \\) is finite.
@@ -178,7 +180,7 @@ T(x,y) = \text{\\(M\\) can state-transition from \\(x\\) to \\(y\\).}
     - [WP:Order theory](https://en.wikipedia.org/wiki/Order_theory)
 - Articles
     - [WP:Boolean satisfiability problem](https://en.wikipedia.org/wiki/Boolean_satisfiability_problem)
-    - [Where the really hard problems are](http://www.dcs.gla.ac.uk/~pat/cpM/papers/cheeseman91where.pdf), Cheeseman, Kanefsky, and Taylor, 
+    - [Where the really hard problems are](http://www.dcs.gla.ac.uk/~pat/cpM/papers/cheeseman91where.pdf), Cheeseman, Kanefsky, and Taylor,
         - "Almost all k-colorable graphs are easy to color", J. S. Turner, 1988
     - Blum
         - [On the computational complexity of algorithms](https://www.researchgate.net/profile/Juris_Hartmanis/publication/242506038_On_the_Computational_Complexity_of_Algorithms/links/53fcd0a40cf2364ccc04db1d.pdf), J. Hartmanis and R. E. Stearns, 1965
