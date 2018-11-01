@@ -4,9 +4,10 @@ permalink: /programming.html
 date: 2017-06-22 00:28:00 +0700
 ---
 
-- [Scheme currying]({% link scheme-curry.md %})
+# Programming
+
 - Metaprogramming
-    - [JetBrains MPS]({% link jbmps.md %})
+    - JetBrains MPS
     - [TXL: source transformation by example](http://txl.ca/index.html), what can it do?
     - http://www.moserware.com/2008/06/ometa-who-what-when-where-why.html
 - [Comparing Objective Caml and Standard ML](http://adam.chlipala.net/mlcomp/), Adam Chlipala

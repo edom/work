@@ -4,8 +4,7 @@ permalink: /conflang.html
 date: 2018-08-31 03:21 +0700
 ---
 
-- TOC
-{:toc}
+# Designing configuration languages
 
 ## What is a configuration language?
 

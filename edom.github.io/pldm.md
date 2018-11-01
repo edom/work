@@ -4,8 +4,7 @@ permalink: /pldm.html
 date: 2018-08-29 00:15 +0700
 ---
 
-- TOC
-{:toc}
+# Programming language design mistakes
 
 ## Disclaimer
 

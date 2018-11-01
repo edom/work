@@ -5,11 +5,10 @@ date: 2018-08-25 00:50 +0700
 mathjax: yes
 ---
 
+# Parsing
+
 I expect the computer to infer a parser and a pretty-printer from the same grammar.
 Parser generators only give half of what I want.
-
-- TOC
-{:toc}
 
 ## What is parsing?
 

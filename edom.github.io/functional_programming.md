@@ -5,6 +5,8 @@ permalink: /functional_programming.html
 mathjax: yes
 ---
 
+# Functional programming research
+
 - Abbreviations
     - CPS: continuation-passing style
     - FP: functional programming
@@ -13,8 +15,6 @@ mathjax: yes
     - TFP: total functional programming
     - TFPL: total functional programming language
     - TM: Turing machine
-- Position papers
-    - [Stop abusing the equals sign]({% link equals_sign.md %})
 
 ## Research questions
 

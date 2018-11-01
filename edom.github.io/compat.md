@@ -4,8 +4,7 @@ permalink: /compat.html
 date: 2018-09-01 03:50 +0700
 ---
 
-- TOC
-{:toc}
+# Maintaining backward-compatibility
 
 ## The key of library-writing is empathy.
 

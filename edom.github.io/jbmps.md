@@ -4,6 +4,8 @@ permalink: /jetbrains-mps.html
 date: 2017-08-12 05:00:00 +0700
 ---
 
+# JetBrains MPS
+
 MPS is "Meta Programming System".
 
 A concept can have properties. Each property has a type.

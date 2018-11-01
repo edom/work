@@ -4,6 +4,8 @@ permalink: /logging.html
 date: 2018-05-15 02:31:00 +0700
 ---
 
+# Logging
+
 - Before logging something, think how it would be read.
 - If you can't read the log, you shouldn't write the log.
 - Only log important things.

@@ -5,6 +5,8 @@ permalink: /equals_sign.html
 mathjax: yes
 ---
 
+# Stop abusing the equals sign
+
 The equals sign should be used for equations only and nothing else.
 
 Consider this fragment in a hypothetical functional programming language.

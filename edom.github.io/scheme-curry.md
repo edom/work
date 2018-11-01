@@ -4,6 +4,8 @@ permalink: /scheme-curry.html
 date: 2017-09-04 02:25:00 +0700
 ---
 
+# Scheme currying
+
 ## Abstract
 
 We define the macros `lambda/c`, `apply/c`, and `define/c`,

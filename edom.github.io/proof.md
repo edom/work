@@ -4,11 +4,13 @@ permalink: /proof.html
 date: 2018-08-07 01:19 +0700
 ---
 
+# Proving things using computers
+
 - Where is tutorial?
 - A goal should be to make it easy to make correct software?
 - 2014, slides, "How I became interested in foundations of mathematics.", Vladimir Voevodsky, [pdf](https://www.math.ias.edu/vladimir/sites/math.ias.edu.vladimir/files/2014_08_ASC_lecture.pdf)
 - Why should we be interested in homotopy type theory?
-- [Coq]({% link coq.md %})
+- Coq
 - [Lean](https://leanprover.github.io/)
     - Pros of Lean
         - Integrates with Visual Studio Code

@@ -4,6 +4,8 @@ permalink: /cbp.html
 date: 2018-05-15 23:54:00 +0700
 ---
 
+# Class-based programming
+
 - What is a class?
     - What is a class?
         - A class is a blueprint (a template).

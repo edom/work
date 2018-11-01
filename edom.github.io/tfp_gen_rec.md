@@ -5,6 +5,8 @@ permalink: /tfp_gen_rec.html
 mathjax: yes
 ---
 
+# 2018-04-07 Approximating general recursion in TFP
+
 Here we are going to show how to approximate general recursive functions in TFP
 with the help of the following `repeat` and `approx`:
 

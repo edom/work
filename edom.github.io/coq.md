@@ -5,6 +5,8 @@ date: 2017-07-17 23:00:00 +0700
 mathjax: true
 ---
 
+# Coq
+
 - Introduction
     - What is a suitable introduction to Coq?
     - [Daniel Schepler's "Mathematical formalization using Coq"](https://people.debian.org/~schepler/coqtut.v.html) seems approachable.
