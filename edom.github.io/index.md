@@ -203,8 +203,6 @@ We should join forces to reach our shared goals.
         - [Law]({% link law.md %})
         - [Religion]({% link religion.html %})
         - [Logic]({% link logic.md %})
-        - Work
-            - [Boss]({% link boss.md %})
 - Music
     - I play piano in the band [The Nomads]({% link nomads.md %}) (an Indonesian band, not the Swedish band).
 - [Entertainment]({% link entertain.html %})
