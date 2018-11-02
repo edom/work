@@ -255,11 +255,6 @@ C calling convention is a standard.
 ** Adding people to a late software project makes it later (Fred Brooks, "No silver bullet").
 Newcoming programmers, no matter how experienced, need time to onboard; they are not immediately productive.
 Existing programmers must spend some time helping the newcoming programmers, temporarily reducing productivity even further.
-** How do you know a software is maintainable?
-- Change all the programmers.
-  If the new programmers can handle it,
-  it's maintainable.
-- The only way to ensure software maintainability is periodic rotation of programmers?
 ** Complexity
 *** Renaat Verbruggen: Three universal methods of reducing complexity: partitioning, hierarchy, independence
 - [[http://www.computing.dcu.ie/~renaat/ca2/ca214/ca214vii.html][Renaat Verbruggen: Three universal methods of reducing complexity]]: partitioning, hierarchy, independence
@@ -294,12 +289,6 @@ Every software can, in principle, be described by a first-order-logic formula th
     https://www.quora.com/Do-you-use-SWEBOK-Is-it-helpful
 - Is the knowledge applicable?
   Knowledge that can't be applied is useless.
-** Maintainability
-- 2017-05-20
-  - What helps writing maintainable software?
-    - Minimize duplication? The programming language limits deduplication?
-    - Facilitate change, minimize ripple due to change
-    - Flexibility of a component is proportional to its risk of changing?
 ** Model vs reality
 - When we write a program,
   we are actually creating a /mathematical model/ of reality,
@@ -450,6 +439,8 @@ A /character string/ is a sequence of characters.
 Unqualified "string" usually means "character string".
 
 A /character string literal/ is surrounded with quotes.
+
+- inconclusive discussion https://www.reddit.com/r/ProgrammingLanguages/comments/9tj6ka/how_would_you_best_implement_first_class_strings/
 *** Escape sequences
 *** Characters
 What is Unicode's definition of "character"?
@@ -4416,6 +4407,8 @@ https://arxiv.org/abs/1712.01208
 * Maintaining software
 ** Backward-compatibility complicates development but simplifies maintenance
 *** If you maintain your library's backward-compatibility, you only need to maintain the latest version of the library.
+*** Compatibility reduces dependency hell and bit rot.
+*** The root cause of dependency hell / DLL hell / JAR hell is incompetent library developers who don't care about compatibility.
 *** Defining interfaces and backward-compatibility
 An interface is something that users depend on.
 
@@ -4509,6 +4502,17 @@ It may be ugly, but /it works/.
   Treat a log as an event stream, not a file.
 - http://jasonwilder.com/blog/2013/07/16/centralized-logging-architecture/
 - http://jasonwilder.com/blog/2012/01/03/centralized-logging/
+** Maintainability
+- 2017-05-20
+  - What helps writing maintainable software?
+    - Minimize duplication? The programming language limits deduplication?
+    - Facilitate change, minimize ripple due to change
+    - Flexibility of a component is proportional to its risk of changing?
+** How do you know a software is maintainable?
+- Change all the programmers.
+  If the new programmers can handle it,
+  it's maintainable.
+- The only way to ensure software maintainability is periodic rotation of programmers?
 * Functional programming research
   :PROPERTIES:
   :CUSTOM_ID: functional-programming-research
