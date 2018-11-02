@@ -347,6 +347,28 @@ https://dblp.uni-trier.de/
   - [[http://www.aspiluki.or.id/][ASPILUKI Asosiasi Piranti Lunak Telematika Indonesia]]
 
 - International?
+** Software business model
+- Hardware is moved.
+- Software is /copied/, not moved.
+- When you sell hardware, you /transfer/ ownership. The hardware doesn't multiple into two.
+- There are two models:
+  - SaaS (software as a service, a web application; you control the hardware that runs the software, but not the input and output of the process)
+  - bundling software with restricted hardware (Apple iPhone)
+- Controlling software requires controlling the hardware that runs it.
+  - Controlling the law requires controlling the lawmakers and the law enforcers.
+- Isn't it absurd to judge a crime by its potentiality not its actuality?
+- Process is software. Law is software.
+- The chemical process in a chemical plant is also software, but not everyone owns a chemical plant.
+  - If you hire a chemical engineer to design and implement your chemical plant's process, does the chemical engineer own the rights to the process?
+  - If you hire a software to design and implement your computer's operating system, does the software engineer own the rights to the operating system?
+
+Ownership is the ability to control access.
+To own a thing is to be able to control the access to that thing.
+
+- It is easy to control access to hardware. Nature/physics is with us on this issue.
+- It isn't easy to control access to software.
+
+- https://medium.com/@mattklein123/the-broken-economics-of-oss-5a1b31fc0182
 * Functional programming
 
 Every functional programming language is lambda calculus plus plus.
@@ -2379,10 +2401,6 @@ Does it mean "X is a subclass of Y" or "X is an instance of Y"?
   - "Unfortunately, most current languages and toolchains were designed with language interoperability as an afterthought [...]"
   - "This talk is about how to change the status quo to make it easier to build multi-language software."
 ** Programming language design mistakes
-  :PROPERTIES:
-  :CUSTOM_ID: programming-language-design-mistakes
-  :END:
-
 *** Disclaimer
    :PROPERTIES:
    :CUSTOM_ID: disclaimer
@@ -2661,6 +2679,7 @@ For example, how do we write, in a way that the computer can exploit, this state
   - [[https://softwareengineering.stackexchange.com/questions/55047/what-is-the-greatest-design-flaw-you-have-faced-in-any-programming-language][What is the greatest design flaw you have faced in any programming language? - Software Engineering Stack Exchange]]
   - [[http://www.inquisition.ca/en/info/gepsypl/rules.htm][Programming Language Design Rules]]
   - 1999 Steele article "Growing a language" [[http://www.catonmat.net/blog/growing-a-language-by-guy-steele/][html]]
+*** Lisp design mistake: having separate data and function cell
 ** Designing configuration languages
   :PROPERTIES:
   :CUSTOM_ID: designing-configuration-languages
@@ -3467,8 +3486,25 @@ definitional programming, GCLA language (separate definition and control)
     Think of it as "second steps in Prolog".
     If you have already read one of the introductory books, if you have taken an introductory course on Prolog, if you have written one or two Prolog programs, and if you are wondering why it is still hard to writegood Prolog programs, this book is meant to help you.
     The purpose of the book is to show you how you can write Prolog programs that work, that don't take an unreasonable amount of time, and that are clean enough to show to your friends."
+** What?
+*** P# translates Prolog to C#.
+https://pdfs.semanticscholar.org/12ec/568a6583d3d66b6821f28269f06937a9f2eb.pdf
+*** "Real World Programming in SWI-Prolog"
+http://www.pathwayslms.com/swipltuts/index.html
+*** "Frequently Asked Questions for ##Prolog"
+http://www.pathwayslms.com/swipltuts/student/
 ** Prolog typechecking; vital to prevent stupid mistakes in large-scale development
 1997 inconclusive discussion "Prolog Type Checker" https://dtai.cs.kuleuven.be/projects/ALP/newsletter/archive_93_96/net/typing/types.html
+** What are these trying to say?
+- 1991 article "Logic Programming, Functional Programming, and Inductive Definitions" https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-205.pdf
+  - "The unification of logic and functional programming, like the Holy Grail, is sought by countless people"
+  - "More generally, we suggest that the traditional paradigm — logic programming as first-order logic — is seriously out of step with practice.
+    We offer an alternative paradigm. We view the logic program as an /inductive definition/ of sets and relations."
+  - "To justify the Closed World Assumption, we propose that logic programs should be viewed as inductive definitions, not as first-order theories.
+    Some people refuse to abandon the dream of programming in first-order logic.
+    But we have to ask whether this dream is possible — even whether it is desirable.
+    The first-order paradigm does not deal adequately with negation in databases, and seems to be an unreliable guide in research on program correctness and language design.
+    Inductive definitions are more fundamental than first-order logic, and perhaps easier to understand."
 * Ramblings? Wish lists? Too speculative? Unclear goal/reason? Condemned to oblivion?
 ** Category theory and programming languages?
 The section title needs a verb.

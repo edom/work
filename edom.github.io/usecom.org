@@ -114,10 +114,6 @@ An Ansible role should be a noun phrase (=web-server=), not a verb phrase (=inst
 
 - [[https://aws.amazon.com/blogs/aws/aws-device-farm-update-remote-access-to-devices-for-interactive-testing/][AWS Device Farm]]: interactive testing on real devices.
 * Bash shell programming
-  :PROPERTIES:
-  :CUSTOM_ID: bash-shell-programming
-  :END:
-
 ** Articles
    :PROPERTIES:
    :CUSTOM_ID: articles
@@ -183,6 +179,9 @@ See the documentation for =local= in =man bash=.
     echo $(set -o errexit; fun_1) # PITFALL: This prints fun_1 !!!
     echo $(set -o nounset; fun_2) # Pitfall: This doesn't print fun_2, and aborts with "bash: $1: unbound variable".
 #+END_SRC
+** Others
+- https://github.com/koalaman/shellcheck
+  - <2018-11-03> I'm not going back to Haskell until GHC compiles faster.
 * Moving to clouds, for old-school sysadmins
 The most important pages on the [[https://aws.amazon.com/][AWS website]]
 are the pricing pages and the technical documentation.
