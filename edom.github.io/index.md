@@ -163,7 +163,7 @@ We should join forces to reach our shared goals.
             - [YT:Map of Computer Science](https://www.youtube.com/watch?v=SzJ46YA_RaA)
         - [Computation]({% link computation.md %})
     - Natural sciences
-        - [Physics]({% link physics.md %}) and engineering
+        - Physics and engineering
             - Civil engineering
                 - [How Do Sinkholes Form?](https://www.youtube.com/watch?v=e-DVIQPqS8E)
                     - Internal erosion, piping, etc.
