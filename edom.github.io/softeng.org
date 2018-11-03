@@ -180,6 +180,12 @@ That paper should have been a wiki article.
 - [[http://wiki.c2.com/?QuestForThePerfectLanguage][Quest For The Perfect Language]]
 * What is software engineering?
 ** What is software?
+- Which ICSE paper said this?
+  - Law is software.
+  - Process is software.
+  - Recipe is software.
+- What is software?
+*** The source code is not the software. Don't commit reification fallacy.
 ** What is engineering?
 /Engineering/ is?
 
@@ -369,6 +375,15 @@ To own a thing is to be able to control the access to that thing.
 - It isn't easy to control access to software.
 
 - https://medium.com/@mattklein123/the-broken-economics-of-oss-5a1b31fc0182
+** Measuring software quality?
+- https://cs.stackexchange.com/questions/47077/is-there-a-way-of-objectively-measuring-the-efficiency-or-quality-of-software-or
+** Programming language quality?
+- https://medium.com/@richardeng/how-to-measure-programming-language-complexity-afe4f7e75786
+- https://medium.com/concerning-pharo/elegant-pharo-code-bb590f0856d0
+** Technical writing, software documentation
+- https://www.divio.com/blog/documentation/:
+"Documentation needs to include and be structured around its *four different functions*: /tutorials, how-to guides, explanation and technical reference/.
+Each of them *requires a distinct mode of writing*."
 * Functional programming
 
 Every functional programming language is lambda calculus plus plus.
@@ -3505,6 +3520,48 @@ http://www.pathwayslms.com/swipltuts/student/
     But we have to ask whether this dream is possible — even whether it is desirable.
     The first-order paradigm does not deal adequately with negation in databases, and seems to be an unreliable guide in research on program correctness and language design.
     Inductive definitions are more fundamental than first-order logic, and perhaps easier to understand."
+** Books?
+- 1995 book "Prolog Programming in Depth" http://www.lsv.fr/~reichert/Enseignement/2012/PPL/Prolog_Programming_In_Depth.pdf
+  - 1.16 Styles of encoding knowledge, p. 28
+    - parent, male, female vs. father, mother
+    - "Which style is computationally more efficient depends on the kinds of queries to be answered."
+    - "Unlike other knowledge representation languages, Prolog does not force the knowledge base builder to state information in a particular logical style.
+      Information can be entered in whatever form is most convenient, and then appropriate rules can be added to retrieve the information in a different form."
+    - "We could use a 'data-record' format to encode the family tree like [person(Name,Sex,Father,Mother)]"
+      - "The only advantage of this style is that the multi-argument facts are often easy to generate from conventional databases,
+        by simply printing out the data in a format that conforms to Prolog syntax."
+  - 5.12 Grand Finale: Reading a Lotus Spreadsheet, p. 148
+  - 5.13 Language and Metalanguage, p. 153
+    - "A Prolog program can extend and modify the inference engine that controls program execution.
+      Thus, the language can change itself in ways that go beyond superficial syntax."
+      - Really? How?
+  - 5.17 Intensional and Extensional Queries, p. 159
+  - 5.19 Giving Meaning to Operators, p. 163
+    - "How to make the ampersand mean 'and' in Prolog"
+  - 5.20 Prolog in Prolog, p. 165
+    - "Meta-interpreter for Prolog"
+  - 5.21 Extending the inference engine, p. 167
+    - biconditionals
+  - 11 Defeasible Prolog, p. 347
+    - 11.1 Nonmonotonic reasoning and Prolog, p. 347
+      - "If our reasoning is monotonic, the set of conclusions we draw from the information we have only gets larger as we get more and more information.
+        Once we reach a conclusion, no additional information will cause us to reject it.
+        When our reasoning is nonmonotonic, we may reject an earlier conclusion on the basis of new information."
+      - "Human reasoning is notoriously nonmonotonic. We make plans based on what we expect to happen,
+        but we constantly revise our expectations, and our plans, as events unfold."
+      - "The Prolog inference engine is nonmonotonic because of the way it handles negation."
+      - Why is "defeasible" not spelled "defeatable"?
+    - 11.2 New syntax for defeasible reasoning, p. 348
+      - "Although Prolog can perform some kinds of nonmonotonic reasoning, Prolog rules are not defeasible."
+      - "Some instances of defeasible reasoning cannot be reproduced in ordinary Prolog."
+      - "What we need is a new way to represent defeasible rules and presumptions and
+        an inference engine that knows how to use them. We also need a negation operator
+        that is different from negation-as-failure so we can represent rules that tell us
+        when something is positively not the case rather than just that we cannot /prove/ that it is the case.
+        These negative rules are needed to tell us when we have an exception to a defeasible rule, but they are desirable in their own right as well."
+        - The second sentence is too long.
+    - (I haven't read it.)
+* Directives like =:- op= complicate parsing a Prolog source code.
 * Ramblings? Wish lists? Too speculative? Unclear goal/reason? Condemned to oblivion?
 ** Category theory and programming languages?
 The section title needs a verb.
@@ -5569,8 +5626,10 @@ https://en.m.wikipedia.org/wiki/REBOL
     - Types help us write an IDE.
 * Proving things using computers
 ** The problem with formal methods: you can't prove what you don't model.
-- Intel uses formal methods, but we have Spectre/Meltdown.
-  Do they model that?
+- Intel uses formal method, but why does its processors have vulnerabilities?
+  - Because /you can't prove what you don't model/.
+  - Spectre, Meltdown, etc.
+  - https://arstechnica.com/information-technology/2018/11/intel-cpus-fall-to-new-hyperthreading-exploit-that-pilfers-crypto-keys/?amp=1
 - How will we ever know that we didn't miss anything?
 - You have to prove that it does everything that you want it to do, /and/ that it does only that, and nothing else.
 *** What if it is impossible to write correct software? What are our options to mitigate/limit the damage?
