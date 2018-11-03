@@ -2,10 +2,11 @@
 
 // Define defaults for each variable.
 
-$base-font-family: 'Times New Roman', serif !default;
-$base-font-size:   16pt !default;
-$code-font-family: 'Courier New', monospace !default;
-$code-font-size:   $base-font-size;
+$base-font-family: 'DejaVu Serif', serif !default;
+$base-font-size:   14pt !default;
+$code-font-family: 'DejaVu Sans Mono', monospace !default;
+$code-font-size:   13pt;
+$pre-font-size:    12pt;
 $palm-font-size:   10pt !default;
 $print-font-size:  10pt !default;
 $base-font-weight: 400 !default;
@@ -276,17 +277,18 @@ blockquote {
  */
 pre,
 code {
-  font-size: $code-font-size;
   background-color: $code-background-color;
   color: $code-text-color;
   font-family: $code-font-family;
 }
 
 code {
+  font-size: $code-font-size;
   padding: 1px 5px;
 }
 
 pre {
+  font-size: $pre-font-size;
   padding: 8px 12px;
   overflow-x: auto;
 
