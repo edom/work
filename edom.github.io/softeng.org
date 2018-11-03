@@ -384,6 +384,13 @@ To own a thing is to be able to control the access to that thing.
 - https://www.divio.com/blog/documentation/:
 "Documentation needs to include and be structured around its *four different functions*: /tutorials, how-to guides, explanation and technical reference/.
 Each of them *requires a distinct mode of writing*."
+** TODO Who said this "pit of success"? It was someone on the Internet.
+- Write code that makes your client/user/reader (another programmer who uses your code) fall into the pit of success.
+- Corollary: Principle of least astonishment.
+- Corollary: Write code that a programmer can understand with an IDE without having to read much documentation.
+- Corollary: Group data and methods that need those data together in one class.
+- Can that principle derive these principles? http://c2.com/cgi/wiki?PrinciplesOfObjectOrientedDesign
+- You can write maintainable and reliable procedural code?
 * Functional programming
 
 Every functional programming language is lambda calculus plus plus.
@@ -404,7 +411,9 @@ A programming language serves as a means of communication in three cases:
 
 We advance technologically when we raise the bar for machines (we expect more from machines), not when we expect more from humans.
 (?)
-
+** Encoding length trade-off
+- If we choose to encode something shorter in a language, then other things must be encoded longer.
+  - If we make it easier to do something, something else has to become harder.
 ** Programming Languages Zoo
 "The Programming Languages Zoo is a collection of miniature programming languages which demonstrates various concepts and techniques used in programming language design and implementation. It is a good starting point for those who would like to implement their own programming language, or just learn how it is done."
 http://plzoo.andrej.com/
