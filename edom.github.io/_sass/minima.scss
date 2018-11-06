@@ -8,7 +8,7 @@ $code-font-family: 'DejaVu Sans Mono', monospace !default;
 $code-font-size:   13pt;
 $pre-font-size:    12pt;
 $palm-font-size:   10pt !default;
-$print-font-size:  10pt !default;
+$print-font-size:  12pt !default;
 $base-font-weight: 400 !default;
 $small-font-size:  $base-font-size * 0.875 !default;
 $base-line-height: 1.2 !default;
@@ -34,8 +34,8 @@ $on-palm:          32em !default;
 $on-laptop:        32em !default;
 
 @page {
-    size: A4;
-    margin: 2cm 2cm;
+    size: 6in 9in;
+    margin: 1.0in 0.5in;
 }
 
 @media print {
@@ -141,7 +141,14 @@ dl, dd, figure {
 @media screen {
     html {
         font-size: $base-font-size;
+
+        @include media-query($on-palm) {
+            font-size: $palm-font-size;
+        }
     }
+
+    font-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
 }
 
 html {
@@ -149,13 +156,6 @@ html {
     line-height: $base-line-height;
     font-variant: normal;
     font-weight: normal;
-
-    @include media-query($on-palm) {
-        font-size: $palm-font-size;
-    }
-
-    font-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
 
     font-kerning: normal;
     -webkit-font-feature-settings: "kern" 1;
