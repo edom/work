@@ -1,6 +1,7 @@
 #+TITLE: Philosophy
 #+DATE: 2018-04-11 04:00 +0700
 #+PERMALINK: /philo.html
+#+MATHJAX: yes
 #+OPTIONS: toc:nil
 #+TOC: headlines 1
 #+TOC: headlines 2
@@ -1282,3 +1283,768 @@ Example:
 What is the relationship between sameness and the principle of the identity of indiscernibles
 ("there cannot be separate objects or entities that have all their properties in common")?
 https://en.wikipedia.org/wiki/Identity_of_indiscernibles
+* Implication
+<2017-10-21T15:30:00+0700>
+** Abstract
+   :PROPERTIES:
+   :CUSTOM_ID: abstract
+   :END:
+
+The /implication/ $A \to B$ means that $A$ /restricts/ $B$.
+
+We introducture an /implication system/,
+which involves a metric and a freedom function.
+We unify (generalizes?) material implication in classical logic
+and conditional probability in probability theory.
+
+(Need better abstract. Answer "Why should I care?")
+
+** Interpreting truth value
+   :PROPERTIES:
+   :CUSTOM_ID: interpreting-truth-value
+   :END:
+
+*** As degree of certainty
+    :PROPERTIES:
+    :CUSTOM_ID: as-degree-of-certainty
+    :END:
+
+Let $\tau(p) \in [0,1]$ describe how /certain/ we are about the sentence $p$.
+If $\tau(p) = 0$, then we don't know anything about $p$.
+If $\tau(p) = 1$, then we know $p$ for sure.
+
+Note that $\tau(p) = 0$ does /not/ mean that $p$ is false;
+it means that we /don't know/.
+
+*** As information transfer, as contagiousness of ascertainment
+    :PROPERTIES:
+    :CUSTOM_ID: as-information-transfer-as-contagiousness-of-ascertainment
+    :END:
+
+$\tau(p \to q)$ measures the amount of information transferred from our knowledge of $p$ to our knowledge of $q$.
+
+It measures how reducing the uncertainty of $p$ reduces the uncertainty of $q$.
+
+** What does implication mean?
+   :PROPERTIES:
+   :CUSTOM_ID: what-does-implication-mean
+   :END:
+
+(This section needs rereading and rewriting.)
+
+We read the sentence $p \to q$ as "$p$ implies $q$'' or"if $p$, then $q$''.
+
+What does $p \to q$ mean?
+
+It means that:
+
+- If we know $p$, then we can infer $q$.
+- If we don't know $p$, then the implication does not say anything at all.
+- Knowing $p$ allows us to /predict/ $q$.
+- $p$ gives information about $q$.
+- $p$ determines $q$.
+- $p$ restricts $q$.
+
+We can formalize this constraint by using a /metric/ $d : [0,1]^2 \to [0,1]$
+and a function $u : [0,1]^2 \to [0,1]$.
+We can formalize the constraint as the following inequality:
+
+\begin{align}
+    d(\tau(p), \tau(q)) \le u(\tau(p), \tau(p \to q))
+\end{align}
+
+where the function $u$ must satisfy $u(0,x) = u(x,0) = 1$ for all $x \in [0,1]$, and $u(1,1) = 0$.
+The right-hand side of the inequality says that the maximum distance depends only on $\tau(p)$ and $\tau(p \to q)$.
+(As we increase our certainty about both the premise and the implication, we become more certain about the conclusion.)
+
+*** Deriving the constraint
+    :PROPERTIES:
+    :CUSTOM_ID: deriving-the-constraint
+    :END:
+
+If both $\tau(p)$ and $\tau(p \to q)$ are high, then the constraint is quite strict, and $\tau(q)$ should be near $\tau(p)$.
+
+The /modus ponens/ is
+"if we are sure about $p$ and we are sure about $p \to q$, then we can be sure about $q$''.
+We can say that more formally as
+"if $\tau(p)$ is high, and $\tau(p \to q)$ is high, then $\tau(q)$ should be high''.
+
+The number $\tau(p \to q)$ should describe how /strictly/ $\tau(p)$ constrains $\tau(q)$.
+Let's consider the corner cases first to gain some intuition for later generalization.
+The corner cases are:
+
+- If $\tau(p) = 0$, then $\tau(q)$ is not constrained.
+  (If we aren't sure about the premise, we can't make a conclusion, regardless of how sure we are about the implication.)
+- If $\tau(p \to q) = 0$, then $\tau(q)$ is not constrained.
+  (If we aren't sure about the implication, we can't make a conclusion, regardless of how sure we are about the premise.)
+- If $\tau(p) = 1$ and $\tau(p \to q) = 1$, then $\tau(q)$ has no freedom at all, and it must be $\tau(q) = \tau(p) = 1$.
+  (If we are sure about both the premise and the implication, then we can make the conclusion.)
+- If we know that $\tau(p)$ is low or $\tau(p \to q)$ is low, then knowing any of those does not enable us to infer anything about $\tau(q)$.
+
+*** Algebra of metrics
+    :PROPERTIES:
+    :CUSTOM_ID: algebra-of-metrics
+    :END:
+
+If $d$ is a metric and $k$ is a constant, then $d' = (x,y) \to k \cdot d(x,y)$ is also a metric?
+
+If $d_1$ and $d_2$ are metrics then $d_1 + d_2$ is a metric?
+
+If $d_1$ and $d_2$ are metrics then $d_1 \cdot d_2$ is a metric?
+
+A linear combination of metrics is a metric.
+
+*** Consequent freedom functions
+    :PROPERTIES:
+    :CUSTOM_ID: consequent-freedom-functions
+    :END:
+
+If $u$ is a consequent freedom function, then so is $u' = (x,y) \to [u(x,y)]^k$ for all real $k > 0$.
+
+If each of $u_1, \ldots, u_n$ is a consequent freedom function,
+and if $\sum_{k=1}^n w_k = 1$,
+then $u' = (x,y) \to \sum_{k=1}^n w_k \cdot u_k(x,y)$ is also a consequent freedom function.
+
+An example function that satisfies those constraints is $u(x,y) = 1 - xy$.
+Indeed, for every real $k > 0$, the definitions $u(x,y) = 1 - (xy)^k$ and $u(x,y) = (1 - xy)^k$ satisfy those constraints.
+For simplicity, until there is reason for doing otherwise, we pick $d(x,y) = |x - y|$ (norm-1) and $u(x,y) = 1 - xy$, and therefore we obtain
+the following special case:
+
+\begin{align}
+    | \tau(p) - \tau(q) | \le 1 - \tau(p) \cdot \tau(p \to q).
+\end{align}
+
+Let $P = \tau(p)$, $Q = \tau(q)$, and $R = \tau(p \to q)$.
+
+\begin{align}
+    (P-Q)^2 &amp;\le 1 - PR
+    \\ (P-Q)^2-1 &amp;\le - PR
+    \\ (P-Q+1)(P-Q-1) &amp;\le - PR
+    \\ PR &amp;\le (P-Q+1)(P-Q-1)
+    \\ R &amp;\le \frac{(P-Q+1)(P-Q-1)}{P}
+    \\ R &amp;\le \left(1 - \frac{Q-1}{P}\right) \left( 1 - \frac{Q+1}{P}\right)
+\end{align}
+
+Another example is $u(x,y) = 1 - \min(x,y)$.
+Can it be written $u(x,y) = \neg (x \wedge y)$, as in fuzzy logic?
+
+If we know $\tau(p)$ and $\tau(p \to q)$, but we don't know $\tau(q)$, then we can estimate $\tau(q)$ as the midpoint.
+Let $P = \tau(p)$, let $Q = \tau(q)$, and let $R = \tau(p \to q)$.
+
+\begin{align}
+    - u(P,R) &amp;\le P - Q \le u(P,R)
+    \\ - P - u(P,R) &amp;\le -Q \le -P + u(P,R)
+    \\ P + u(P,R) &amp;\ge Q \ge P - u(P,R)
+    \\ \hat{Q} &amp;= P
+\end{align}
+
+WTF...
+
+(RAMBLE)
+
+In classical logic, knowing $\tau(p)$ and $\tau(q)$
+allows us to determine $\tau(p \to q)$.
+/This does not make sense./
+It should be the other way around:
+knowing $\tau(p \to q)$ should allow us to use $\tau(p)$ to restrict $\tau(q)$.
+
+We may know something for sure because
+we defined it to be true
+or we experienced it ourselves through our senses.
+
+In classical logic, $\tau(p)$ is either 0 or 1,
+and $\tau(p) = 0$ means that $p$ is false,
+and $\tau(p) = 1$ means that $p$ is true.
+
+*** Principle of no contradiction
+    :PROPERTIES:
+    :CUSTOM_ID: principle-of-no-contradiction
+    :END:
+
+Principle of no contradiction:
+$\tau(p) = -1$ if we know that $p$ is false.
+
+Should we accept this principle?
+
+Therefore $\tau(\neg p) = - \tau(p)$.
+
+Does paraconsistent logic make sense?
+
+** Implication system
+   :PROPERTIES:
+   :CUSTOM_ID: implication-system
+   :END:
+
+*** Definition of implication system
+    :PROPERTIES:
+    :CUSTOM_ID: definition-of-implication-system
+    :END:
+
+A /unit metric/ is a metric whose inputs and output are in the unit real line $[0,1]$.
+More specifically, a /unit metric/ is a function $d : [0,1]^2 \to [0,1]$ satisfying the following /metric axioms/ for all $x,y,z \in [0,1]$:
+
+\begin{align}
+    d(x,x) &amp;= 0,
+    \\ d(x,y) &amp;= d(y,x),
+    \\ d(x,z) &amp;\le d(x,y) + d(y,z).
+\end{align}
+
+A /consequent freedom function/ is a function $u : [0,1]^2 \to [0,1]$
+satisfying \eqref{mdf_axiom_1} to \eqref{is_mono_2}
+for all $x,y,y' \in [0,1]$, and $c \in (0,1)$:
+\begin{align}
+    u(1,1) &amp;= 0, \label{mdf_axiom_1}
+    \\ u(0,x) &amp;= 1,
+    \\ u(x,0) &amp;= 1,
+    \\ y \le y' &amp;\implies u(c,y) \ge u(c,y'), \label{is_mono_1}
+    \\ y \le y' &amp;\implies u(y,c) \ge u(y',c). \label{is_mono_2}
+\end{align}
+The constraints \eqref{is_mono_1} and \eqref{is_mono_2} say that $u$ is monotonically non-increasing with respect to each argument.
+
+An /implication system/ is a tuple $(S,\tau,d,u)$
+plus the constraints \eqref{is-cstr-begin} to \eqref{imp-constr}.
+
+The set $S$ is a set of /sentences/.
+This set is closed under implication:
+\begin{align}
+    p \in S \wedge q \in S \implies (p \to q) \in S. \label{is-cstr-begin}
+\end{align}
+
+The function $\tau : S \to [0,1]$ is a /truth value function/.
+
+The function $d$ is a /unit metric/.
+
+The function $u$ is a /consequent freedom function/.
+
+The system must satisfy \eqref{imp-constr} for all $p,q \in S$:
+\begin{align}
+    d(\tau(p), \tau(q)) &amp;\le u(\tau(p), \tau(p \to q)). \label{imp-constr}
+\end{align}
+We call \eqref{imp-constr} the /meaningful implication constraint/.
+(Need a better name.)
+(Simplify this definition.)
+
+*** Known instances
+    :PROPERTIES:
+    :CUSTOM_ID: known-instances
+    :END:
+
+These systems are implication systems: - classical logic - probability theory
+
+Need to find out:
+
+- possibility theory
+- minimal logic
+- paraconsistent logic
+- Dempster--Shafer theory
+- evidential decision theory
+
+\begin{m:lem}
+Classical logic is an implication system.
+\begin{proof}
+In classical logic, \\( \tau(p \to q) = 0 \\) iff \\( (\tau(p),\tau(q)) = (1,0) \\),
+and \\( \tau(p \to q) = 1 \\) otherwise.
+To see that classical logic satisfies \eqref{imp-constr},
+use proof by cases on \eqref{imp-constr}.
+\end{proof}
+\end{m:lem}
+\begin{m:lem}
+Probability theory is an implication system.
+\begin{proof}
+In probability theory, \\( \tau \\) is the *probability measure*,
+and \eqref{imp-constr} translates to \eqref{lem-prob-is-1}, which is equivalent to \eqref{lem-prob-is-2}.
+\begin{align}
+    |P(A) - P(B)| &amp;\le 1 - P(A) \cdot P(B|A) \label{lem-prob-is-1}
+    \\ |P(A) - P(B)| &amp;\le 1 - P(A \cap B) \label{lem-prob-is-2}
+\end{align}
+
+We split \eqref{lem-prob-is-2} into two cases.
+
+The first case \\( P(A) - P(B) \le 0 \\) is proven below.
+\begin{align}
+-(P(A) - P(B)) &amp;\le 1 - P(A \cap B)
+\\ P(B) - P(A) &amp;\le 1 - P(A \cap B)
+\\ \underbrace{P(B)}_{\in [0,1]} + \underbrace{[P(A \cap B) - P(A)]}_{\le 0} &amp;\le 1
+\end{align}
+
+The second case \\( P(A) - P(B) \ge 0 \\) is proven below.
+\begin{align}
+P(A) - P(B) &amp;\le 1 - P(A \cap B)
+\\ \underbrace{P(A)}_{\in [0,1]} + \underbrace{[P(A \cap B) - P(B)]}_{\le 0} &amp;\le 1
+\end{align}
+
+Therefore, both cases hold,
+and thus probability theory is an implication system.
+\end{proof}
+\end{m:lem}
+In probability theory, conditional probability is $P(A) \cdot P(B|A) = P(A \cap B)$,
+which can also be written $\tau(p) \cdot \tau(p \to q) = \tau(p \wedge q)$.
+If all samples are equiprobable, then the $P(B|A)$ measures how much of $B$ is inside $A$.
+If the intersection of $A$ and $B$ is not empty, then $0 \le P(B|A) \le 1$.
+If $A$ and $B$ are disjoint, then $P(B|A) = 0$.
+If $A \subseteq B$, then $P(B|A) = 1$.
+
+*** Probability theory
+    :PROPERTIES:
+    :CUSTOM_ID: probability-theory
+    :END:
+
+Probability theory also allows us to compute $\tau(p \to q)$ by conditional probabilities $\tau(p) \cdot \tau(p \to q) = \tau(p \wedge q)$.
+
+** Induction
+   :PROPERTIES:
+   :CUSTOM_ID: induction
+   :END:
+
+*** Justifying induction with probability theory
+    :PROPERTIES:
+    :CUSTOM_ID: justifying-induction-with-probability-theory
+    :END:
+
+Let $X \subseteq \Omega$ be a set of some samples.
+For every $x \in X$, we can observe $x$ and compute $\tau(x)$.
+
+Induction works because /the sample mean is an unbiased esimator of the population mean/.
+If you pick 100 /random/ people, and 55 are male,
+then it is rational to generalize that to the assumption that 55% of the human population is male.
+You cannot infer this from your friends because they are not random.
+
+Let $P(X) = \{ x ~|~ p(x) \}$ where $p$ is a predicate.
+Let $\Omega$ be the universe of discourse.
+Let $E \subseteq \Omega$ and $E' \subseteq \Omega$.
+Then, \eqref{ind} states that every additional evidence makes the induction more reasonable.
+\begin{align}
+E \subseteq E' \to \tau(P(E) \to P(\Omega)) \le \tau(P(E') \to P(\Omega)) \label{ind}
+\end{align}
+
+** Conditionals
+   :PROPERTIES:
+   :CUSTOM_ID: conditionals
+   :END:
+
+*** Types of conditionals according to logic, philosophy, and linguistics
+    :PROPERTIES:
+    :CUSTOM_ID: types-of-conditionals-according-to-logic-philosophy-and-linguistics
+    :END:
+
+There are several types of conditionals:
+causal, strict, indicative, counterfactual, strict, material, formal.
+
+*** Problem with material conditional
+    :PROPERTIES:
+    :CUSTOM_ID: problem-with-material-conditional
+    :END:
+
+*** Eight types of conditionals by the truth values of the parts
+    :PROPERTIES:
+    :CUSTOM_ID: eight-types-of-conditionals-by-the-truth-values-of-the-parts
+    :END:
+
+If $\tau(p) = 1$ means that all swans are white,
+then $\tau(p) = 0.99$ should mean that almost all swans are white,
+and $\tau(p) = 0$ should mean that we don't have any particular belief about whether swans are white.
+Should $\tau(p) = -1$ mean that no swans are white?
+
+There are eight combinations of antecedent, consequent, and implication:
+
+- /total nonsense/ (UUU): If X had been born in a Muslim family, then X would be a Christian now.
+- /counterfactual/ (UUR): If X had been born in a Muslim family, then X would be a Muslim now.
+- /non-sequitur/ (URU): If X had been born in a Muslim family, I'll get a million dollars.
+- ? /ransom/ (URR): If you give me a million dollars, I'll keep working as usual.
+- /wishful thinking/ (RUU): If I keep working as usual, I'll get a million dollars.
+- /paradox/ (RUR): (Quantum mechanics?)
+- /irrelevant/ (RRU): If John is a man, then Mary is a woman.
+- /law/ (RRR): reasonable antecedent, reasonable consequent, reasonable implication: Theorems in mathematics.
+
+An implication should become more reasonable as its antecedent becomes more reasonable?
+An implication should become more reasonable as its consequent becomes more reasonable?
+
+The function $\tau$
+takes a sentence (a belief) and gives a real number in $[0,1]$.
+The value $\tau(p \to q)$ describes how justified we are when we infer $q$ just by knowing $p$.
+
+If $p$ causes $q$, then removing $p$ should also remove $q$.
+Formally, $(p \to q) \vdash (\neg p \to \neg q)$.
+
+Correlation is a necessary but not sufficient for causation.
+
+Finding common cause: Find $p$ such that $p \to q$ and $p \to r$.
+
+Should $p \to \top$ be equally true to $p$?
+
+Example: John pressed the button, and a light blinked. It is rational for John to reason that if the button were not pressed, the light would not blink. But why is that rational? What is the mathematical justification? The implicit belief that the system always behaves the same way.
+The implicit belief is that the button behaves the same at all times.
+$\forall t \in \Real, press(t) \to blink(t + 1)$
+
+Every counterfactual reasoning implicitly makes a /ceteris paribus/ (everything else being equal) assumption.
+When we make a counterfactual implication,
+we assume that everything else other than the premise stays the same in the past we are imagining.
+"If the driver was driving more slowly, the driver would have had enough time to brake, and therefore the crash would have been avoided."
+
+Suppose that two cars crashed at an intersection.
+What causes the crash?
+
+If we have that axiom, then by $\forall$-elimination we can prove the following, given $t_0 \in \Real$:
+
+$press(t_0) \to blink(t_0 + 1)$
+
+What should $\tau(p \to q)$ be?
+
+Spurious correlation, confounding factor
+
+Is there an example of counterfactual that does not involve time?
+
+$\tau (\forall x \in [0,1], x \in [0,1/2]) = 1/2$
+depends on the distribution?
+
+** The axioms
+   :PROPERTIES:
+   :CUSTOM_ID: the-axioms
+   :END:
+
+In this section, we list the axioms that $\tau$ has to satisfy.
+
+*** Equations
+    :PROPERTIES:
+    :CUSTOM_ID: equations
+    :END:
+
+The equations allow us to rewrite sentences without changing their reasonability.
+
+\eqref{and_idem} and \eqref{or_idem} describe /idempotence/ or /contraction/.
+\eqref{and_comm} and \eqref{or_comm} describe /commutativity/.
+\eqref{and_assoc} and \eqref{or_assoc} describe /associativity/.
+I thought everybody would accept these axioms, but I was wrong,
+as these axioms do not hold in /linear logic/,
+but for everyday reasoning, I think these axioms should hold.
+
+\begin{align}
+\tau(p \wedge p) &amp;= \tau(p) \label{and_idem}
+\\ \tau(p \vee p) &amp;= \tau(p) \label{or_idem}
+\\ \tau(p \wedge q) &amp;= \tau(q \wedge p) \label{and_comm}
+\\ \tau(p \vee q) &amp;= \tau(q \vee p) \label{or_comm}
+\\ \tau((p \wedge q) \wedge r) &amp;= \tau(p \wedge (q \wedge r)) \label{and_assoc}
+\\ \tau((p \vee q) \vee r) &amp;= \tau(p \vee (q \vee r)) \label{or_assoc}
+\end{align}
+
+The following axioms are less obvious.
+\eqref{imp_dist_and} and \eqref{imp_dist_or} state that implication distributes conjunction and disjunction on the right side.
+\eqref{imp_suf} states that every sufficient cause is a necessary cause.
+
+\begin{align}
+\tau(p \to (q \wedge q')) &amp;= \tau((p \to q) \wedge (p \to q')) \label{imp_dist_and}
+\\ \tau(p \to (q \vee q')) &amp;= \tau((p \to q) \vee (p \to q')) \label{imp_dist_or}
+\\ \tau((p \vee p') \to q) &amp;= \tau((p \to q) \wedge (p' \to q)) \label{imp_suf}
+\end{align}
+
+\eqref{curry} is /currying/, which may be obvious if you know functional programming.
+
+\begin{align}
+\tau((p \wedge p') \to q) &amp;= \tau(p \to (p' \to q)) \label{curry}
+\end{align}
+
+*** Tautologies
+    :PROPERTIES:
+    :CUSTOM_ID: tautologies
+    :END:
+
+\eqref{nowhere} is self-inference.
+\eqref{and_elim} is conjunction elimination.
+\eqref{or_intro} is disjunction introduction.
+\eqref{mp} is modus ponens or implication elimination.
+\eqref{imp_and_elim} is relaxing the consequent.
+\eqref{syl} is syllogism.
+These forms are always valid regardless of the sentences.
+
+\begin{align}
+1 &amp;= \tau(p \to p) \label{nowhere}
+\\ 1 &amp;= \tau((p \wedge q) \to p) \label{and_elim}
+\\ 1 &amp;= \tau(p \to (p \vee q)) \label{or_intro}
+\\ 1 &amp;= \tau((p \wedge (p \to q)) \to q) \label{mp}
+\\ 1 &amp;= \tau((p \to (q \wedge r)) \to (p \to q)) \label{imp_and_elim}
+\\ 1 &amp;= \tau((p \to q) \wedge (q \to r)) \to (p \to r)) \label{syl}
+\end{align}
+
+If we accept the law of excluded middle $p \wedge \neg p = \bot$,
+then we must also accept the principle of explosion $\bot \to p$,
+which is obtained by replacing $q = \bot$ in \eqref{and_elim}.
+
+*** Inequalities
+    :PROPERTIES:
+    :CUSTOM_ID: inequalities
+    :END:
+
+\eqref{and_dom} and \eqref{or_dom} describe /dominance/:
+satisfying two sentences are harder than satisfying either of them.
+\eqref{prud_ante} and \eqref{prud_cons} are the /axioms of prudence/ that say that
+restricting the antecedent or relaxing the consequent strengthens the implication.
+$(p \wedge p') \to q$ should not be less reasonable than $p \to q$
+because both $p$ and $p'$ are necessary but not sufficient causes of $q$.
+
+\begin{align}
+\tau(p \wedge q) &amp;\le \tau(p) \label{and_dom}
+\\ \tau(p \vee q) &amp;\ge \tau(p) \label{or_dom}
+\\ \tau((p \wedge p') \to q) &amp;\ge \tau(p \to q) \label{prud_ante}
+\\ \tau(p \to (q \wedge q')) &amp;\le \tau(p \to q) \label{prud_cons}
+\end{align}
+
+The /axiom of precedence of knowledge over inference} \eqref{know*
+states that inference (indirect knowledge) should not be more reasonable than experience (direct knowledge).
+\begin{align}
+\tau(p \to q) = 1 &amp;\implies \tau(p) \ge \tau(q) \label{know}
+\end{align}
+
+The explanation for \eqref{imp-constr-lin} begins somewhere before \eqref{imp-constr}.
+\begin{align}
+|\tau(p) - \tau(q)| &amp;\le 1 - \tau(p) \cdot \tau(p \to q) \label{imp-constr-lin}
+\end{align}
+
+A corollary of \eqref{know} follows.
+
+\begin{align}
+\tau(p \leftrightarrow q) = 1 &amp;\implies \tau(p) = \tau(q)
+\end{align}
+
+## Other
+
+It would be nice if it could be a proper superset of propositional logic.
+
+Trivial:
+
+\begin{align*}
+\tau(\bot) &amp;= 0
+\\ \tau(\top) &amp;= 1
+\end{align*}
+
+Axioms of implication:
+
+\begin{align*}
+\tau(p \to \neg p) &amp;= 0
+\\ \tau(p \leftrightarrow q) &amp;= \tau((p \to q) \wedge (q \to p))
+\end{align*}
+
+Should conditional probability be an axiom?
+It generalizes to classical propositional calculus.
+
+\begin{align*}
+\tau(p \to q) \cdot \tau(p) &amp;= \tau(p \wedge q)
+\end{align*}
+
+Law of excluded middle
+(might be controversial):
+
+\begin{align*}
+\tau(p \wedge \neg p) &amp;= 0
+\\ \tau(p \vee \neg p) &amp;= 0
+\\ \tau(p) + \tau(\neg p) &amp;= 1
+\end{align*}
+
+It is reasonable to believe something iff it is not reasonable to believe otherwise.
+Formally \\( \tau(\neg p) = 1 - \tau(p) \\).
+
+\begin{align}
+\tau(p \vee q) &amp;\le \tau(p) + \tau(q) \label{or_tri}
+\end{align}
+
+\eqref{or_tri} is the *triangle inequality of disjunctions*. It is still questionable.
+
+## Relation with fuzzy logic
+
+If \\( t \\) is a *t-norm* (as in fuzzy logic) and \\( k \\) is a positive real number,
+then \\( u(x,y) = 1 - [t(x,y)]^k \\) satisfy the constraints.
+
+## Tangential remarks
+
+Truth value can be interpreted as truth, belief, probability, or reasonability.
+
+Inductive reasoning helped our ancestors survive the harsh nature.
+
+\\( p \to q \\).
+Does it mean "\\( p \\) predicts \\( q \\)"?
+Does it mean "\\( p \\) explains \\( q \\)"?
+Does it mean "\\( p \\) supports \\( q \\)"?
+(It is impossible to know the reality and therefore causation.)
+We write \\( p \to q \\) to mean "\\( p \\) causes \\( q \\)".
+
+In practice \\( \tau(p) = 1 \\) iff \\( p \\) is a rule of thought, a mathematical law, or a direct experience.
+
+If \\( p \to q \\), then \\( p \\) gives us information for predicting \\( q \\).
+
+## (Different article) Computation
+
+## Motivation
+
+To talk about a set, we must define it.
+To define a set, we must use a language.
+English.
+*Mathematical mother tongue?*
+
+### Examples of problems
+
+The input is a lambda-calculus expression,
+the output is its normal form.
+
+The input is a propositional logic expression,
+the output is its minimum equivalent expression.
+
+The input is a pair \\( (G,H) \\) of graphs,
+the output is whether \\( G \\) and \\( H \\) are isomorphic.
+
+\\( \{ (x,y) ~|~ x^2 = y, ~ y \in \Nat \} \\).
+
+Let \\( c \\) be a constant.
+Then \\( con(c,A) = \{ (a,c) ~|~ a \in A \} \\) is a constant problem.
+
+Identity problem \\( id(A) = \{ (a,a) ~|~ a \in A \} \\).
+
+### Examples of formal languages
+
+Example of formal language:
+(1) the empty string is in the language;
+(2) if \\( x \\) is, then \\( 1x \\) is;
+(3) nothing else is.
+Then the elements of that set are the empty string,
+the string 1, the string 11, the string 111, and so on.
+
+These paragraphs are dense, so read slowly.
+
+Example: natural numbers.
+Let \\( L \\) be a language.
+Let \\( \{ z,s \} \\) be the alphabet.
+Let the *formation rules* of \\( L \\) consist of two rules:
+(1) \\( z \in L \\), and
+(2) \\( A \in L \implies sA \in L \\).
+Examples of some members of \\( L \\) are \\( z, sz, ssz, sssz \\).
+We can map a string in \\( L \\) to a natural number.
+A possible *interpretation* of \\( L \\) is \\( I : L \to \Nat \\)
+where \\( I(z) = 0 \\) and \\( I(sA) = 1 + I(A) \\),
+so \\( I(sz) = 1 \\), \\( I(ssz) = 2 \\), \\( I(sssz) = 3 \\), and so on.
+
+Example: natural number equality.
+Let \\( L \\) be a language.
+Let \\( \{ z,s,=,),( \} \\) be the alphabet.
+(1) \\( (z = z) \in L \\) (read that as "the string \\( z = z \\) is a member of \\( L \\)'', *not* "\\( z \\) equals to \\( z \in L \\)''),
+(2) \\( (A = B) \in L \implies (sA = sB) \in L \\).
+
+Example: propositional calculus.
+Let \\( A \\) be a finite set of letters.
+Let \\( L \\) be a language.
+\\( \alpha \in A \vdash \alpha \in L \\).
+\\( \alpha \in L, \beta \in L \vdash C \alpha \beta \in L \\).
+\\( \alpha \in L \vdash N \alpha \in L \\).
+Let \\( H : A \to Bool \\).
+Let \\( I : L \to Bool \\).
+\\( x \in A \implies I(x) = H(x) \\).
+\\( I(Cxy) = I(x) \wedge I(y) \\).
+\\( I(Nx) = \neg I(x) \\).
+
+A *ground term* is a term that does not contain any free variables.
+
+% first order logic: syntax and semantics
+% http://web.engr.oregonstate.edu/~afern/classes/cs532/notes/fo-ss.pdf
+
+## Definitions
+
+A *problem* is
+a set of question-answer pairs.
+An *instance* of that problem is an element of that set.
+The questions and answers can be anything;
+a *problem* is simply a set of ordered pairs.
+
+A *decision problem*
+is a problem where each answer is either yes or no.
+
+A formal language *computes* a problem.
+
+Research question:
+Why is a problem harder than another problem?
+
+A thing is *computable* iff it is finitely describable;
+to *compute* a thing is to construct it from its finite description.
+For example, *the set of all natural numbers divisible by two*
+is computable, because we have just described it in a few English words,
+but things get interesting if we *restrict* our language
+and see what descriptions are still possible despite such restrictions.
+
+A *formal language} (or just a /language* if there is no ambiguity) is a set of strings,
+and this set can be described by rules.
+
+From a set $S$ and a language $L$,
+several questions arise:
+\begin{enumerate}
+    \item Can \\( L \\) *describe* \\( S \\)?
+    \item If \\( L \\) can describe \\( S \\), *how short* can the description be?
+    \item *How much time* do we need to construct a thing from its description?
+\end{enumerate}
+(RAMBLE)
+
+Sometimes we write $P(x,y)$ to mean $(x,y) \in P$.
+But this conflates a set and a predicate that describes the set.
+
+https://en.wikipedia.org/wiki/Law_of_thought
+https://en.wikipedia.org/wiki/Natural_deduction
+https://en.wikipedia.org/wiki/Explanation
+https://en.wikipedia.org/wiki/Theory_of_justification
+http://web.stanford.edu/class/cs103/tools/truth-table-tool/
+
+https://en.wikipedia.org/wiki/Probabilistic_logic#Modern_proposals
+https://en.wikipedia.org/wiki/T-norm
+https://en.wikipedia.org/wiki/Dempster--Shafer_theory
+https://en.wikipedia.org/wiki/Temporal_logic
+https://en.wikipedia.org/wiki/Probabilistic_CTL
+http://www.paulnoordhof.com/uploads/2/6/4/0/26400091/paul_noordhof_probabilistic_causation_preemption_and_counterfactuals.pdf
+https://en.wikipedia.org/wiki/Causa_sui
+https://en.wikipedia.org/wiki/Minimal_logic
+
+Ontologies and Knowledge-Based Systems
+http://artint.info/2e/html/ArtInt2e.Ch14.html
+
+Find implication and conditional in arxiv, arxiv math, arxiv logic, google scholar, and logic journals
+
+- https://en.wikipedia.org/wiki/Conditional
+- https://en.wikipedia.org/wiki/Relevance_logic
+- https://en.wikipedia.org/wiki/Many-valued_logic
+- https://plato.stanford.edu/entries/logic-conditionals/
+
+Types of conditionals: causal, indicative, counterfactual, subjunctive, material, formal.
+
+Metric Spaces, Generalized Logic, and Closed Categories
+https://golem.ph.utexas.edu/category/2014/02/metric_spaces_generalized_logi.html
+
+- https://en.wikipedia.org/wiki/Imprecise_probability
+- https://en.wikipedia.org/wiki/Fuzzy_measure_theory
+- https://en.wikipedia.org/wiki/Upper_and_lower_probabilities
+- https://en.wikipedia.org/wiki/Evidential_decision_theory
+- https://en.wikipedia.org/wiki/Decision_theory
+- https://en.wikipedia.org/wiki/Fuzzy_logic#IF-THEN_rules
+- http://www.dia.fi.upm.es/~mgremesal/MIR/slides/Lesson%206%20(Inference%20from%20Conditional%20Fuzzy%20Propositions).pdf
+- Conditional propositions and inference http://w3.ualg.pt/~jvo/rnsd2015-16/rnsd2015-16L20.pdf
+- Causality (Judea Pearl book)
+- Fuzzy modus ponens; Journal of logic and analysis http://logicandanalysis.org/
+- universal logic; Jean-Yves Béziau https://en.wikipedia.org/wiki/Jean-Yves_B%C3%A9ziau
+- http://www.jyb-logic.org/papers/LogicaYB94%20-%20Beziau.pdf
+- http://www.sciencedirect.com/science/article/pii/0888613X87900235
+- Implication in fuzzy logic; International Journal of Approximate Reasoning
+- The Semantics of Predicate Logic as a Programming Language (1976)
+  http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.64.9246&rep=rep1&type=pdf
+- http://www.sciencedirect.com/science/article/pii/0165011480900548
+  Axiomatic approach to implication for approximate reasoning with fuzzy logic (1980)
+- 1994 article "Logic programming and knowledge representation"
+  http://ebusiness.mit.edu/bgrosof/paps/lp+kr-baral+gelfond.pdf
+- 1979 article "A new approach to approximate reasoning using a fuzzy logic"
+  http://www.sciencedirect.com/science/article/pii/0165011479900046
+- 1912 article "Implication and the Algebra of Logic",
+  C. I. Lewis, Mind, Vol. 21, No. 84 (Oct., 1912), pp. 522-531
+  http://www.jstor.org/stable/2249157?seq=1#page_scan_tab_contents
+- 1969 article "How Implication Is Understood",
+  P. N. Johnson-Laird and Joanna Tagart,
+  The American Journal of Psychology,
+  Vol. 82, No. 3 (Sep., 1969), pp. 367-373
+  http://www.jstor.org/stable/1420752?seq=1#page_scan_tab_contents
+- 1936 article "The Meaning of Implication", Daniel J. Bronstein, Mind
+  http://www.jstor.org/stable/2250235?seq=1#page_scan_tab_contents
+- Judea Pearl's do-calculus https://en.wikipedia.org/wiki/Probabilistic_causation
+- 2012 article "The Do-Calculus Revisited" http://ftp.cs.ucla.edu/pub/stat_ser/r402.pdf
+- 1997 article "Probabilistic counterfactuals: semantics, computation, and application" http://www.dtic.mil/dtic/tr/fulltext/u2/a332296.pdf
+
+Axioms of probabilistic propositional calculus? - Boolean truth value $\{ 0,1 \}$ generalizes to real number probability $[0,1]$. - Sentence generalizes to event (subset of sample space). - $t(p \wedge q) = \min(t(p),t(q))$ - Find $t$ such that $t$ is a probability measure and $t(p) \le t(p \wedge q)$, $t(p \vee q) \le t(p)$. - A logical predicate becomes an event family (input: sample; output: set of samples). - Does it make sense to define $t(p \to q) = \Pr (q|p)$ (Bayes's law)? - What is $t(\forall x \in A, p(x))$? It is $\Pr (x \in A \to p(x))$. - The truth value function takes a logical /sentence/ (it cannot contain any free variables) and outputs a real number. - The statement "every swan is white" is not entirely wrong.
