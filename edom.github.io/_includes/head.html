@@ -19,6 +19,75 @@
   {% endif %}
   {% endif %}
 
+    <script>
+// Help the reader estimate how much time the reading is going to take.
+// Show word count and reading time estimation in TOC entry.
+//
+// TOC = table of contents
+//
+// Known issue: This janks: this DOM manipulation is done after the page is rendered.
+// If we don't want jank, we have to manipulate the HTML source before it reaches the browser.
+// We assume that the user doesn't refresh the page while reading.
+// The benefit of fixing that jank is not enough for me to justify trying to fix it.
+document.addEventListener("DOMContentLoaded", function () {
+    function count_word (string) {
+        return string.trim().split(/\s+/).length;
+    }
+    function show_quantity (count, singular) {
+        let plural = singular + "s"; // For this script only.
+        return count + " " + ((count == 1) ? singular : plural);
+    }
+    function create_length_indicator (word, minute) {
+        let e = document.createElement("span");
+        e.className = "toc_entry__length_indicator";
+        e.textContent = " (" + show_quantity(word, "word") + " ~ " + show_quantity(minute, "minute") + ")";
+        return e;
+    }
+    // We assume that readers read this many words per minute with 100% comprehension.
+    // This assumption may not hold for dense texts such as philosophy and mathematics.
+    const wpm_assumption = 200;
+    // We assume a certain Jekyll template.
+    let page = document.querySelector("main.page-content");
+    if (page === null) {
+        console.log("toc_generate_estimate: Impossible: CSS selector \"main.page-content\" does not match anything");
+        return;
+    }
+    let page_title = document.querySelector("header.post-header h1.post-title");
+    if (page_title === null) {
+        console.log("toc_generate_estimate: Impossible: CSS selector \"header.post-header h1.post-title\" does not match anything");
+        return;
+    }
+    let page_word = count_word(page.textContent);
+    let page_minute = Math.ceil(page_word / wpm_assumption);
+    page_title.insertAdjacentElement("afterend", create_length_indicator(page_word, page_minute));
+    // We violate the HTML specification.
+    // The page may have several elements with the same ID.
+    // We assume that Org HTML Export generates a DIV element with ID "table-of-contents".
+    // We assume that Jekyll Markdown-to-HTML generates a UL element with ID "markdown-toc".
+    // This only works for Org HTML Export's TOC.
+    let toc_entries = document.querySelectorAll("#table-of-contents a");
+    toc_entries.forEach((toc_entry_a) => {
+        let href = toc_entry_a.getAttribute("href"); // We assume that this is a string like "#org0123456".
+        if (href.charAt(0) !== '#') {
+            console.log("toc_generate_estimate: Impossible: " + href + " does not begin with hash sign");
+            return;
+        }
+        // We can't just document.querySelector(href) because target_id may contain invalid ID characters such as periods.
+        let target_id = href.substring(1);
+        let id_escaped = target_id.replace("\"", "\\\"");
+        let h_elem = document.querySelector("[id=\"" + id_escaped + "\"]"); // We assume that this is the h1/h2/h3 element referred by the TOC entry.
+        if (h_elem === null) { // We assume that this is impossible.
+            console.log("toc_generate_estimate: Impossible: " + href + " does not refer to anything");
+            return;
+        }
+        let section = h_elem.parentNode;
+        let section_word = count_word(section.textContent);
+        let section_minute = Math.ceil(section_word / wpm_assumption);
+        toc_entry_a.insertAdjacentElement("afterend", create_length_indicator(section_word, section_minute));
+    });
+});
+    </script>
+
   {% if jekyll.environment == 'production' and site.google_analytics %}
   {% include google-analytics.html %}
   {% endif %}
@@ -54,48 +123,6 @@ MathJax.Hub.Config({
 .MathJax_PHTML { font-size: 125%; }
 </style>
   {% endif %}
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js" async></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js" async defer></script>
   {% endif %}
-    <script>
-        // Help the reader estimate how much time the reading is going to take.
-        // Show word count and reading time estimation in TOC entry.
-        //
-        // TOC = table of contents
-        document.addEventListener("DOMContentLoaded", function () {
-            function count_word (string) {
-                return string.trim().split(/\s+/).length;
-            }
-            function show_quantity (count, singular) {
-                let plural = singular + "s"; // For this script only.
-                return count + " " + ((count == 1) ? singular : plural);
-            }
-            // We violate the HTML specification.
-            // The page may have several elements with the same ID.
-            // We assume that Org HTML Export generates a DIV element with ID "table-of-contents".
-            // We assume that Jekyll Markdown-to-HTML generates a UL element with ID "markdown-toc".
-            // This only works for Org HTML Export's TOC.
-            let toc_entries = document.querySelectorAll("#table-of-contents a");
-            toc_entries.forEach((toc_entry_a) => {
-                let href = toc_entry_a.getAttribute("href"); // We assume that this is a string like "#org0123456".
-                let h_elem = document.querySelector(href); // We assume that this is the h1/h2/h3 element referred by the TOC entry.
-                if (h_elem === null) { // We assume that this is impossible.
-                    console.log("toc_generate_estimate: Impossible: " + href + " does not refer to anything");
-                    return;
-                }
-                let section = h_elem.parentNode;
-                let word_count = count_word(section.textContent);
-                // We assume that readers read this many words per minute with 100% comprehension.
-                // This assumption may not hold for dense texts such as philosophy and mathematics.
-                let wpm_assumption = 200;
-                let minute_estimate = Math.ceil(word_count / wpm_assumption);
-                let length_indicator = (function () {
-                    let e = document.createElement("span");
-                    e.className = "toc_entry__length_indicator";
-                    e.textContent = " (" + show_quantity(word_count, "word") + " ~ " + show_quantity(minute_estimate, "minute") + ")";
-                    return e;
-                })();
-                toc_entry_a.parentNode.insertBefore(length_indicator, toc_entry_a.nextSibling);
-            });
-        });
-    </script>
 </head>
