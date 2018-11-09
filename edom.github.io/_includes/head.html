@@ -56,4 +56,46 @@ MathJax.Hub.Config({
   {% endif %}
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js" async></script>
   {% endif %}
+    <script>
+        // Help the reader estimate how much time the reading is going to take.
+        // Show word count and reading time estimation in TOC entry.
+        //
+        // TOC = table of contents
+        document.addEventListener("DOMContentLoaded", function () {
+            function count_word (string) {
+                return string.trim().split(/\s+/).length;
+            }
+            function show_quantity (count, singular) {
+                let plural = singular + "s"; // For this script only.
+                return count + " " + ((count == 1) ? singular : plural);
+            }
+            // We violate the HTML specification.
+            // The page may have several elements with the same ID.
+            // We assume that Org HTML Export generates a DIV element with ID "table-of-contents".
+            // We assume that Jekyll Markdown-to-HTML generates a UL element with ID "markdown-toc".
+            // This only works for Org HTML Export's TOC.
+            let toc_entries = document.querySelectorAll("#table-of-contents a");
+            toc_entries.forEach((toc_entry_a) => {
+                let href = toc_entry_a.getAttribute("href"); // We assume that this is a string like "#org0123456".
+                let h_elem = document.querySelector(href); // We assume that this is the h1/h2/h3 element referred by the TOC entry.
+                if (h_elem === null) { // We assume that this is impossible.
+                    console.log("toc_generate_estimate: Impossible: " + href + " does not refer to anything");
+                    return;
+                }
+                let section = h_elem.parentNode;
+                let word_count = count_word(section.textContent);
+                // We assume that readers read this many words per minute with 100% comprehension.
+                // This assumption may not hold for dense texts such as philosophy and mathematics.
+                let wpm_assumption = 200;
+                let minute_estimate = Math.ceil(word_count / wpm_assumption);
+                let length_indicator = (function () {
+                    let e = document.createElement("span");
+                    e.className = "toc_entry__length_indicator";
+                    e.textContent = " (" + show_quantity(word_count, "word") + " ~ " + show_quantity(minute_estimate, "minute") + ")";
+                    return e;
+                })();
+                toc_entry_a.parentNode.insertBefore(length_indicator, toc_entry_a.nextSibling);
+            });
+        });
+    </script>
 </head>
