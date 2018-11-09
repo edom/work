@@ -155,6 +155,35 @@ Alice knows Charlie, but never interacts with Charlie.
 If Alice tells Bob to make Charlie do what Alice wants Charlie to do, but Charlie doesn't do it, then there are three possibilities:
 Alice doesn't control Bob, or Bob doesn't control Charlie, or both.
 * Cause, causality, implication, and probability
+** Cause
+"C /causes/ E" means:
+- C /precedes/ E: C happens before E.
+- C is /necessary/ for E: If C doesn't happen, then E doesn't happen.
+- C is /sufficient/ for E: If C happens, then E happens.
+
+Synonyms: to cause, to determine, to ascertain.
+
+A /causal factor/ is not a cause.
+** Example of updating a causal model: fire, match, and dryness
+At first, we believe that Strike causes Fire.
+
+But then we find water.
+
+Now we believe that Strike /and/ Dry causes Fire.
+Note the verb "causes":
+"Strike and Dry" is one thing, not two separate "Strike" and "Dry".
+Strike alone or Dry alone doesn't cause Fire.
+
+But then we find chemistry and vacuum pump.
+
+Now we believe that Strike and Dry and Oyygen causes Fire, and so on.
+
+When we encounter a surprise, we update our /causal model/.
+
+"The essence of causality is the generation and determination of one phenomenon by another."
+https://www.marxists.org/reference/archive/spirkin/works/dialectical-materialism/ch02-s06.html
+- That is all that page has to say.
+- That page should have been a sentence instead.
 ** Causality jargon
 Suppose that there are a button X, a button Y, and a lamp Z,
 wired such that Z lights up iff both X and Y are pressed.
@@ -191,6 +220,9 @@ Then P(E|C) exceeds P(E).
 What does this mean: "C gives us some information about E"?
 
 The converse isn't always true.
+
+"Causality connotes lawlike necessity, whereas probabilities connote exceptionality, doubt, and lack of regularity"
+(Pearl 2009 Causality book p. 1).
 ** Suspecting causation from correlation of things that happen almost together
 Let C abbreviate Cause.
 
@@ -288,6 +320,10 @@ Other resources:
 - [[https://en.wikipedia.org/wiki/Wishful_thinking][WP:Wishful thinking]]
 - Study [[http://bayes.cs.ucla.edu/jp_home.html][Judea Pearl's works]].
 - [[https://en.wikipedia.org/wiki/Tacit_assumption][WP:Tacit assumption]]
+** Cause, luck, and randomness
+/Luck/ is cause that we don't bother to find out.
+
+"Random" means "caused by something we don't know".
 * Science aims to find what each inanimate thing wants.
 <2018-11-07>
 
@@ -350,11 +386,9 @@ Thus there is something /forcing/ everything else to /exist/.
 
 If I don't exist, how can I force myself to exist?
 * Knowledge, consciousness
-** Some knowledge are transferable.
-We can /transfer/ some knowledge by /language/.
-
-We believe that some knowledge is transferrable, although we don't know what knowledge is.
-
+We don't know what "knowledge" is.
+But, for this section, assume that we know.
+** We think we can share or transfer some knowledge.
 We can /transfer/ some knowledge by /simulation/.
 Simulator-trained pilots /know/ how to fly planes:
 If they can fly the planes in the simulator, they can fly the planes in reality.
@@ -362,21 +396,59 @@ If they can fly the planes in the simulator, they can fly the planes in reality.
 We can /transfer/ some knowledge by /teaching/.
 School teachers /transfer/ knowledge to their students.
 
+Language enables some knowledge transfer.
+
 We don't know how to transfer other knowledge.
 The taste of salt.
 The hue of green.
 
 Perhaps someday technology will enable transferring all knowledge.
+** Knowledge, software, copy, and move
+We can /copy/ knowledge, but not /move/ knowledge.
+This is similar to software: it can be copied but not moved.
+By move I mean: when you move your car from place A to place B, the car is now at B, and is no longer at A.
+But we don't /move/ software from hardware A to hardware B;
+we /copy/ it from A to B, and then /delete/ the copy at A.
+The same with knowledge:
+We don't move it from person A to person B;
+we /copy/ it; we spread it; and we don't know how to /delete/ knowledge from a person.
 
-** Plato JTB theory: Knowledge is justified true belief.
-Gettier problem?
-Can we believe something right for the wrong reason?
-** How do we know? Ways of obtaining and justifying knowledge
-- Through our senses.
-- By logic?
-- By divine revelation?
-- Telepathy?
-- Mind upload?
+Books are not knowledge.
+Books contain /text/, not knowledge.
+Destroying a book is like destroying a computer disk that contains a program.
+** The dualistic nature of machines; the machine-program dualism; the hardware-software dualism
+The hardware is the body.
+The software is the mind.
+
+Are bits software /itself/, or are bits a /representation/ (embodiment) of software?
+
+A running machine embodies the software it is running?
+** Old English, ken, wit, and knowledge
+German has "kennen" and "wissen".
+English has "ken" and "wit".
+
+To ken something is to have experienced something.
+
+To wit something is to remember something.
+
+- https://en.wiktionary.org/wiki/kennen#Usage_notes
+- https://yourdailygerman.com/what-is-the-difference-wissen-and-kennen/
+
+"I know that water is H2O" means "I /trust/ the book that says water is H2O".
+
+"I know how beef tastes" means "I /have experienced/ the taste of beef, and I believe that all beef tastes that way".
+
+"I don't know what 2 times 1234567 is" means "I know how to compute the result but I /don't bother/ to".
+
+"I don't know whether the Riemann hypothesis is true" means I don't know.
+
+"I know the Pythagorean theorem"
+
+"I know a proof of the Pythagorean theorem"
+
+"I know a person who can do that"
+
+In all cases, knowledge implies /memory/.
 ** Consciousness is the ability to know.
 <2018-11-04>
 
@@ -611,8 +683,20 @@ If I cut off my legs, am I I?
 - electrophysiology, Greg Gage, TED 2015, how to control someone else's arm with your brain
   - https://www.ted.com/talks/greg_gage_how_to_control_someone_else_s_arm_with_your_brain/transcript
 ** <2018-11-05> Attention is the direction of consciousness?
-** TODO What is knowledge?
-*** TODO What does it mean to know something?
+* TODO What is knowledge?
+** Plato JTB theory: Knowledge is Justified True Belief.
+Gettier problem / epistemic luck?
+Can we believe something right for the wrong reason?
+
+Justifying justifications?
+** How do we know? Ways of obtaining and justifying knowledge
+- Through our senses.
+- By logic?
+- By divine revelation?
+- Telepathy?
+- Mind upload?
+
+** TODO What does it mean to know something?
 Example sentences:
 - "I know the taste of salt."
 - "I know you did it."
@@ -633,9 +717,9 @@ Example sentences:
 Reading queue:
 - https://philosophy.stackexchange.com/questions/33348/what-does-it-mean-to-know-something
 - https://www.quora.com/What-does-it-mean-to-know-something
-**** Language issues
-***** If we place a blind between a camera and a person, does the camera become unaware of the person?
-*** TODO Knowledge justification dilemma
+*** Language issues
+**** If we place a blind between a camera and a person, does the camera become unaware of the person?
+** TODO Knowledge justification dilemma
 Knowledge without justification is "dumb luck": https://english.stackexchange.com/questions/384314/is-there-a-word-for-an-unjustified-true-belief
 
 Thus, a true belief isn't always a knowledge.
@@ -644,8 +728,8 @@ Knowledge with justification suffers the Gettier problem.
 
 - https://en.wikipedia.org/wiki/Gettier_problem#Knowledge_as_justified_true_belief_(JTB)
 - https://en.wikipedia.org/wiki/Epistemology#Defining_knowledge
-*** TODO What is the difference between knowledge and belief?
-**** Knowledge is a /subset/ of belief?
+** TODO What is the difference between knowledge and belief?
+*** Knowledge is a /subset/ of belief?
 Every knowledge is a belief.
 There are beliefs that are not knowledge.
 
@@ -653,28 +737,31 @@ My knowledge of the taste of salt is a belief.
 
 Language is not necessary for belief.
 For example, I can falsely believe that I have a shirt with this color that I can see in my mind but I can't describe to you.
-**** Wrong: /Knowledge/ is /belief/ that agrees with /reality/.
+*** Wrong: /Knowledge/ is /belief/ that agrees with /reality/.
 "We know S" means "we believe S, and S is true".
 
 When we say "S is true", we mean that S is true in objective reality.
-**** Belief is not binary
+*** Belief is not binary
 "If an acquaintance suddenly contacts you after a long time of silence, he is trying to sell you insurance."
 
 "If the cloud looks gray, it's going to rain."
-**** Distinguishing the absence of belief and the belief of absence
+*** Distinguishing the absence of belief and the belief of absence
 There is a difference between "S does not believe P" and "S believes that P is false".
-**** Beliefs that go against reality
+*** Beliefs that go against reality
 False negative: S is true but I believe that S is false.
 
 False positive: S is false but I believe that S is true.
-**** Unread
+*** Unread
 - https://en.wikipedia.org/wiki/Doxastic_logic
 - https://en.wikipedia.org/wiki/Modal_logic#Doxastic_logic
-**** Beliefs about conditionals and probabilities
+*** Beliefs about conditionals and probabilities
 Example belief: Car crashes kill drivers.
-*** TODO We can imagine some things we have never experienced.
-*** TODO Can we imagine a color we have never seen?
-*** TODO What do we /believe/ about our /imagination/?
+** TODO We can imagine some things we have never experienced.
+** TODO Can we imagine a color we have never seen?
+** TODO What do we /believe/ about our /imagination/?
+** Knowledge argument, Mary's room: Argument against physicalism
+- https://en.wikipedia.org/wiki/Knowledge_argument
+- https://plato.stanford.edu/entries/qualia-knowledge/#3.1
 * On self, mind, brain, and volition
 ** Conclusions
 The /self/ of X is everything that X /controls/.
@@ -1296,6 +1383,8 @@ People often conflate /fact/ and /judgment/.
 Example:
 - Fact: "I don't understand this piece of math."
 - Judgment: "I'm bad at math."
+** List of unsolved problems in philosophy
+https://en.wikipedia.org/wiki/List_of_unsolved_problems_in_philosophy
 * Other things about language
 ** TODO Sameness is meaning-preserving universal substitutability?
 <2018-11-06>
