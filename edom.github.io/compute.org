@@ -1,6 +1,6 @@
 #+TITLE: Computation
 #+DATE: 2017-06-29 22:40 +0700
-#+PERMALINK: /computation.html
+#+PERMALINK: /compute.html
 #+MATHJAX: yes
 - What is the theory of computation?
 
@@ -26,65 +26,23 @@
     The function space forms a semigroup.
 
 - ontology?
-
+  - (moved to file:philo.org)
   - computable
-
     - [[https://en.wikipedia.org/wiki/Computable_function][WP:Computable function]]
-
   - computation
   - problem
-
     - [[https://en.wikipedia.org/wiki/Computational_problem][WP:Computational problem]]
     - [[https://en.wikipedia.org/wiki/Decision_problem][WP:Decision problem]]
-
-  - machine
-
-    - A /machine/ is a formal system.
-    - An FA (/finite automaton/) is ...
-    - An FSM (/finite-state machine/) is ...
-    - A /Turing-machine/ is an FSM with infinite memory.
-
-      - [[https://en.wikipedia.org/wiki/Turing_machine#Formal_definition][WP:Turing machine, formal definition]]
-      - Turing-completeness
-
-        - [[https://en.wikipedia.org/wiki/Turing_completeness][WP:Turing-completeness]]
-        - A formal system is /Turing-complete/ iff it can simulate every TM (Turing machine).
-
-          - What does it mean to /simulate/ a TM?
-
-        - [[https://cstheory.stackexchange.com/questions/36863/formal-definition-of-turing-completeness][StackExchange CS theory 36863 formal definition of Turing-completeness]]:
-
-          - Kaveh suggested:
-
-            - [[https://www.sciencedirect.com/science/article/pii/S0049237X08712576][Robin Gandy: Church's Thesis and Principles for Mechanisms]]
-            - Classical recursion theory volume 1
-
-      - Partial Turing machine, total Turing machine
-
-        - What is the significance of the theorem in [[https://en.wikipedia.org/wiki/Total_Turing_machine][WP:Total Turing machine]]?
-        - What is the relationship between total function and total Turing machine?
-
-  - program
-  - algorithm
-
-    - An /algorithm/ is a finite description that can be executed by a machine.
-
   - computation graph
-
     - ? $M$ /simulates/ $N$ iff a subgraph of $M$ is isomorphic to $N$.
-
       - $T$ is the type of terms.
       - $M$ is the semantic function.
-
     - Shortcut
-
       - The /shortcut/ of $A$ is $B$ where
         $$
           B(x,y) = \text{\\(x\\) is initial, \\(y\\) is terminal, and \\(x\\) reaches \\(y\\).}
           $$
-
         - $A$ should be acyclic.
-
       - Alternative names for shortcut:
         [[https://en.wikipedia.org/wiki/Disintermediation][WP:Disintermediation]],
         immediation,
@@ -93,9 +51,7 @@
         abridgement.
       - Shortcutting is idempotent:
         the shortcut of the shortcut is the shortcut itself.
-
 - Do not confuse a /problem/ and an /algorithm/ that solves that problem.
-
   - Example:
     Consider $p(x)$ that
     wastes $2^{|x|}$ steps,

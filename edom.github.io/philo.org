@@ -385,6 +385,160 @@ then everything must have a cause that is not itself.
 Thus there is something /forcing/ everything else to /exist/.
 
 If I don't exist, how can I force myself to exist?
+** What is science?
+How is "social science" and "computer science" science?
+
+"Science" comes from the Latin word "scientia" that means "knowledge".
+- https://en.wiktionary.org/wiki/science#Etymology_1
+* Philosophy of computer science
+** Real numbers, ideal and physical existence
+"1.412" is a /decimal representation/ of a real number, not the real number itself.
+
+Algebraic-geometric definition:
+A /real number/ is a /point/ in the /totally-ordered/ set of points in /one-dimensional/ Euclidean geometry;
+the real numbers form a /ring/ (even a /field/).
+It exists ideally.
+It doesn't exist physically.
+The body can't interact with a real number.
+We can't touch a real number.
+There is no physical experiment that tests the properties of real numbers.
+The mind can't interact with a real number either.
+We can't imagine a real number; we can only imagine a /representation/ of that real number.
+
+Addition also has a geometric meaning: it is the set of points on the plane \(\{(x,y,z) ~\vert~ x+y=z\}\).
+
+But our minds can correlate idea space and physical space.
+
+There are several ways of defining the real numbers.
+Which one should we use for the philosophy of mind and computation, and why?
+
+We use physics experiments to find out physical laws.
+We use thought experiments to find out ideal laws (such as theorems about real numbers).
+An eye is a physical sense that enables the brain to probe the space of bodies.
+A mind is an ideal sense that enables the brain to probe the space of ideas.
+** Computation is approximate expression normalization
+To /compute/ a real number is to calculate some of its digits.
+To /compute/ an arithmetic /expression/ is to /evaluate/ it (to reduce it into a /value/), often approximately.
+For example: 1/7 is an /expression/, and .142 is a /value/ that is the 3 most significant digits of the result of /evaluating/ that expression.
+
+Why do we feel that 1.412 is /more evaluated/ than \(\sqrt{2}\)?
+Why do we feel that 1.412 is a /normal form/?
+Because it is /physically easier/ for us to locate 1.412 on the real number line than to locate \(\sqrt{2}\).
+Thus to compute a real number is to /locate it/ on the real number line.
+This justifies the geometric interpretation of real numbers.
+
+We can /partially evaluate/ an expression, such as from 1+2-1 to 3-1.
+
+See also:
+- https://en.wikipedia.org/wiki/Human_computer
+
+Don't conflate a /real-number expression/ and a /real number/.
+A real-number expression /evaluates/ to a real number.
+A real-number expression /is not/ a real number.
+
+Let \(E(\Real)\) be the set of all real-number expressions.
+
+Let \(f:E(\Real)\to\Real\) be the evaluation function.
+
+What is the machine computing when I'm typing this document?
+** Algorithm, machine, describability, computability
+We assume that these are primitive concepts: algorithm, machine.
+By "machine", we mean a computing machine.
+
+An /algorithm/ is a /finite description/: a string in a formal language.
+Thus not every real number is /describable/,
+because there are fewer strings in L than there are real numbers.
+Thus not every real number is /computable/,
+because computability requires describability.
+
+Remember that a /formal system/ is a /formal language/ and a set of /inference rules/.
+- https://cs.stackexchange.com/questions/42443/relationship-between-formal-system-and-formal-languages
+
+An algorithm is a string in a formal language \(L\).
+We /model/ a /machine/ as a /formal system/ whose language is \(L\).
+
+Algorithms /describe/.
+Machines /compute/.
+
+What does it mean for a machine to /compute/ a real number?
+
+Suppose that \(Y(T) \in \Real\) is the /output/ of the algorithm \(A\) if we let the algorithm run for duration \(T \in \Nat\).
+
+The algorithm \(A\) /computes/ the /limit/ of the approximation sequence \( \langle Y(t) \rangle_{t \in \Nat} \).
+Thus "\(A\) computes real number \(R\)" means that the limit of that sequence is \(R\).
+
+More explicitly, we say "the algorithm \(A\) /computes/ the real number \(R\)" to mean:
+for every approximation error \(E > 0\) that we are willing to have,
+there exists a duration \(T \in \Nat\) such that \(\abs{Y(T) - R} < E\).
+Informally, the algorithm can always take more time to satisfy ever-diminishing (but still positive) approximation error.
+
+A real number \(R\) is /computable/ iff there is an algorithm that computes \(R\).
+
+There are as many natural numbers as there are algorithms.
+Therefore /not every real number is computable/, because there are fewer natural numbers than real numbers.
+
+See also:
+- https://en.wikipedia.org/wiki/Limit_of_a_sequence
+** What it means for an algorithm to compute a function
+The algorithm \(A\) /computes/ the function \(f : A \to B\) iff for every input \(x \in A\), the algorithm outputs \(f(x)\).
+** Machine, algorithm, embodiment, computation
+A machine /embodies/ an algorithm.
+A machine /computes/ what the algorithm computes.
+
+"To /program/ a machine to compute X" is to /arrange/ the machine to compute X,
+for example: rewire the machine, load another set of punch cards, write a program in a text editor, etc.
+** What is software?
+- Which ICSE paper said this?
+  - Law is software.
+  - Process is software.
+  - Recipe is software.
+- What is software?
+
+The source code is not the software.
+Don't commit reification fallacy.
+** The dualistic nature of machines; the machine-program dualism; the hardware-software dualism
+The hardware is the body.
+The software is the mind.
+
+Are bits software /itself/, or are bits a /representation/ (embodiment) of software?
+
+A running machine embodies the software it is running?
+** TODO Move this somewhere else: Hierarchy of machines
+- An FA (/finite automaton/) is ...
+- An FSM (/finite-state machine/) is ...
+- A /Turing-machine/ is an FSM with infinite memory.
+  - [[https://en.wikipedia.org/wiki/Turing_machine#Formal_definition][WP:Turing machine, formal definition]]
+  - Turing-completeness
+    - [[https://en.wikipedia.org/wiki/Turing_completeness][WP:Turing-completeness]]
+    - A formal system is /Turing-complete/ iff it can simulate every TM (Turing machine).
+      - What does it mean to /simulate/ a TM?
+    - [[https://cstheory.stackexchange.com/questions/36863/formal-definition-of-turing-completeness][StackExchange CS theory 36863 formal definition of Turing-completeness]]:
+      - Kaveh suggested:
+        - [[https://www.sciencedirect.com/science/article/pii/S0049237X08712576][Robin Gandy: Church's Thesis and Principles for Mechanisms]]
+        - Classical recursion theory volume 1
+  - Partial Turing machine, total Turing machine
+    - What is the significance of the theorem in [[https://en.wikipedia.org/wiki/Total_Turing_machine][WP:Total Turing machine]]?
+    - What is the relationship between total function and total Turing machine?
+* Reading conditionals
+** (Failed attempt) Properly translating material conditional into English "does not preclude"
+Remember that the /material conditional/ \( p \to q \) is equivalent to \( \neg (p \wedge \neg q) \) in classical logic.
+
+We can interpret \( p \wedge \neg q \) as "\( p \) /precludes/ \( q \)".
+
+Thus we can interpret the material conditional \( p \to q \) as "\( p \) /does not preclude/ \( q \)".
+However, we practically pretend that it means "if \( p \) then \( q \)".
+This lie works because we practically always pick relevant \(p\) and \(q\).
+
+However, there is a difficulty:
+If \(p\) and \(q\) are irrelevant, \( p \) is true, and \( q \) is false, then what does "\(p\) does not preclude \(q\)" mean?
+
+See also:
+- https://en.wikipedia.org/wiki/Paradoxes_of_material_implication
+** Belief inference rule in doxastic logic
+We can define \( p \Rightarrow q \) as "knowing \( p \) is sufficient to infer \( q \)", that is, "believing \( p \) implies believing \( q \)".
+\[
+(p \Rightarrow q) = (K p \rightarrow K q).
+\]
 * Knowledge, consciousness
 We don't know what "knowledge" is.
 But, for this section, assume that we know.
@@ -416,13 +570,6 @@ we /copy/ it; we spread it; and we don't know how to /delete/ knowledge from a p
 Books are not knowledge.
 Books contain /text/, not knowledge.
 Destroying a book is like destroying a computer disk that contains a program.
-** The dualistic nature of machines; the machine-program dualism; the hardware-software dualism
-The hardware is the body.
-The software is the mind.
-
-Are bits software /itself/, or are bits a /representation/ (embodiment) of software?
-
-A running machine embodies the software it is running?
 ** Old English, ken, wit, and knowledge
 German has "kennen" and "wissen".
 English has "ken" and "wit".

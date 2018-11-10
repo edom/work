@@ -85,6 +85,8 @@ date: 2017-06-09 00:59:00 +0700
         - comparisons, differences
             - shirt vs T-shirt
                 - T-shirts don't have buttons.
+    - adjectives
+        - sheer, as in "sheer shirt": translucent, see-through
     - [Article of clothing - definition of article of clothing by The Free Dictionary](https://www.thefreedictionary.com/article+of+clothing)
 - Opinions
     - Jeans (denim bottoms) look cool, but denim tops look tacky.
