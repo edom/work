@@ -11,22 +11,22 @@ permalink: /computation.html
 - Where should we begin?
     - Should we begin by defining a function, a machine,
     computation, complexity, or a problem class?
-    - Suppose we have a function \(f : A \to B\).
-    - Given an input function \(\alpha : A \to S\),
-    an output function \(\beta : S \to B\),
-    and a transition function \(m : S \to S\),
-    the computation is \(f = \beta \circ m^\infty \circ \alpha\).
-    - The space of all functions from \(A\) to \(B\): \(F~A~B\).
+    - Suppose we have a function \\(f : A \to B\\).
+    - Given an input function \\(\alpha : A \to S\\),
+    an output function \\(\beta : S \to B\\),
+    and a transition function \\(m : S \to S\\),
+    the computation is \\(f = \beta \circ m^\infty \circ \alpha\\).
+    - The space of all functions from \\(A\\) to \\(B\\): \\(F~A~B\\).
     - We know that a function is a kind of relation.
     A relation composes.
-    \((S, \circ)\) where \(\circ\) is associative.
+    \\((S, \circ)\\) where \\(\circ\\) is associative.
     There is identity relation.
     There is inverse relation.
     Therefore the relation space forms a group.
     The function space forms a semigroup.
 - ontology?
     - computable
-        - [WP:Computable function](https://en.m.wikipedia.org/wiki/Computable_function)
+        - [WP:Computable function](https://en.wikipedia.org/wiki/Computable_function)
     - computation
     - problem
         - [WP:Computational problem](https://en.wikipedia.org/wiki/Computational_problem)
@@ -101,15 +101,15 @@ permalink: /computation.html
     For each outside \\(x\\), \\(N(x,x)\\).
     - The computed relation of \\(T\\) is \\(N^\infty = N^\infty \circ N\\).
     - The problem computed by the graph is the infinite self-composition of the graph’s next-state function.
-    Such problem is the smallest \\( X \\) that satisfies <span>\( N \circ X = X \)</span>.
-    It is the least fixed point of \\( F \\) where <span>\( F(X) = N \circ X \)</span>.
-    The nth self-composition of \\( N \\) is <span>\( N^n = E \circ N^{n-1} \)</span>.
+    Such problem is the smallest \\( X \\) that satisfies \\( N \circ X = X \\).
+    It is the least fixed point of \\( F \\) where \\( F(X) = N \circ X \\).
+    The nth self-composition of \\( N \\) is \\( N^n = E \circ N^{n-1} \\).
     - An _infinite composition_ \\(N^\infty\\) is a relation satisfying \\(N^\infty \circ N = N^\infty\\).
     The empty relation satisfies this.
     The other one is nontrivial.
 - Problem computed by a graph
     - A graph G *computes* the problem
-    <span>\( P(G) = \{ (x,y) ~|~ \text{\(y\) is the nearest terminal vertex reachable from \(x\)} \} \)</span>.
+    \\( P(G) = \{ (x,y) ~|~ \text{\\(y\\) is the nearest terminal vertex reachable from \\(x\\)} \} \\).
     Because the graph is loopless, there is no path from a vertex to itself, a vertex is not reachable from itself.
 
 ```
@@ -122,9 +122,9 @@ dist(x,y,n) = adist(x,y,n) wedge neg exists m < n : adist(x,y,m)
 
 - Configuration graph as formal system?
     - Configuration *is* well-formed formula.
-    - <span>\( E(a,b) \)</span> *is* iff <span>\( a' \vdash b' \)</span>.
+    - \\( E(a,b) \\) *is* iff \\( a' \vdash b' \\).
     - Initial state *is* axiom.
-    - <span>\( F \models P \)</span>
+    - \\( F \models P \\)
 
 ### Related articles
 
@@ -175,10 +175,10 @@ in computer science."
         - Predicate ~ set.
             - (A predicate is a unary relation.)
     - Insight?
-        - Every predicate <span>\(p\)</span>
+        - Every predicate \\(p\\)
         gives rise to at least two problems:
-            - <span>\(\Compute(p) = \text{given \(x\), compute \(p(x)\)}\)</span>, and
-            - <span>\(\Search(p) = \text{find any \(x\) such that \(p(x)\) is true}\)</span>.
+            - \\(\Compute(p) = \text{given \\(x\\), compute \\(p(x)\\)}\\), and
+            - \\(\Search(p) = \text{find any \\(x\\) such that \\(p(x)\\) is true}\\).
         - https://en.wikipedia.org/wiki/Search_problem
     - There are \\(p\\) with slow \\(\Compute(p)\\) but fast \\(\Search(p)\\)?
     - There are \\(p\\) with fast \\(\Compute(p)\\) but slow \\(\Search(p)\\)?
@@ -213,11 +213,11 @@ For every complexity classes \\(C\\) and \\(D\\),
 there exists \\(p \in C\\) such that \\(S(p) \in D\\).
 - Formal languages and describable problems
     - Consider the formal language \\(L\\)
-    with alphabet <span>\( \{ z,s \} \)</span>
+    with alphabet \\( \{ z,s \} \\)
     and formation rules
     (1) \\( z \in L \\) and
     (2) \\( \alpha \in L \rightarrow s \alpha \in L \\).
-    It should be obvious that \\(L\\) describes the set <span>\( \{ z, sz, ssz, \ldots \} \)</span>.
+    It should be obvious that \\(L\\) describes the set \\( \{ z, sz, ssz, \ldots \} \\).
     This language solves the problem of adding a natural number by one.
 - First-order logic
     - Example of terms in first-order logic:
