@@ -162,7 +162,7 @@ We should join forces to reach our shared goals.
         - Learning computer science
             - [WP:Computer science](https://en.wikipedia.org/wiki/Computer_science)
             - [YT:Map of Computer Science](https://www.youtube.com/watch?v=SzJ46YA_RaA)
-        - [Computation]({% link computation.md %})
+        - [Computation]({% link compute.html %})
     - Natural sciences
         - Physics and engineering
             - Civil engineering
