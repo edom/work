@@ -28,7 +28,7 @@ We should join forces to reach our shared goals.
         - Forward software engineering
             - [Making lasting software sooner]({% link softeng.html %})
                 - Making the only programming language we will ever need
-                    - [Modeling]({% link model.md %})
+                    - Modeling
                         - [Modeling all data]({% link modeldata.md %})
                 - Subtopics
                     - [Extending Haskell]({% link exhask.md %})
