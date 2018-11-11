@@ -11,7 +11,7 @@ $palm-font-size:   10pt !default;
 $print-font-size:  14pt !default;
 $base-font-weight: 400 !default;
 $small-font-size:  $base-font-size * 0.875 !default;
-$base-line-height: 1.2 !default;
+$base-line-height: 1.5 !default;
 
 $spacing-unit:     30px !default;
 
@@ -519,6 +519,11 @@ div.highlighter-rouge > * { display: inline-block; text-align: left; }
   font-weight: bold;
   font-family: $code-font-family;
   color: #c00000; // ~ HSLUV 12 100 40
+}
+
+.section-number-2, .section-number-3 {
+  min-width: 3rem;
+  display: inline-block;
 }
 
 // TOC
