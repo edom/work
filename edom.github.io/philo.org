@@ -7,9 +7,15 @@
 #+TOC: headlines 2
 #+TOC: headlines 3
 * Introduction
-I am trying to find the ultimate consequences of mind-related concepts defined in English.
+The target audience of this book is myself.
+I write this to clarify my thoughts.
+My plan is:
+- /Define/ the concepts according to how we use them in everyday English.
+- /Infer/ the consequences of those definitions.
+- /Relate/ the concepts with each other.
+- /Order/ the concepts by requirement (which concepts require which concepts).
 
-This document is basically my trying to explicate and justify my most fundamental beliefs.
+I am trying to find the ultimate consequences of mind-related concepts defined in English.
 
 /We must agree on these before you read further./
 If we don't agree, no communication can happen between us.
@@ -46,7 +52,7 @@ knowledge, awareness.
 These are the same: to /know/ X, to be /aware/ of X.
 
 attention, focus.
-* Linguistic conventions
+* Logic, language, ontology, and science
 ** Ability is the existence of satisfying action.
 <2018-11-06>
 
@@ -105,6 +111,72 @@ Thus the meaning of "to live" is "to have changing wants".
 Thus the meaning of "life" is, literally, "having changing wants".
 
 Problem: this definition generalizes "to live" too much?
+** Science aims to find what each inanimate thing wants.
+<2018-11-07>
+
+Remember that we assume that /want/ is a primitive concept.
+It doesn't assume what can want and what can't want.
+
+What an /inanimate/ thing /wants/ is what it would do if it weren't /forced/ to.
+Thus we can find what an inanimate thing want by /isolating/ it so that nothing forces it to do anything.
+
+Example.
+Imagine a weight balance.
+I put a heavier weight on the left plate.
+I put a lighter weight on the right plate.
+Both weights /want/ to fall toward the Earth.
+The heavier weight /forces/ the lighter weight to rise,
+against what the lighter weight /wants/,
+against what the lighter weight would do if the heavier weight did not force the lighter weight to rise.
+
+/Science aims to find what each inanimate thing wants./
+We isolate inanimate things, so that nothing control them, so that we know how they behave.
+We isolate atoms so that we can understand their wants.
+
+Nature /wants/ to enforce the law of nature.
+
+A gas /wants/ to fill its container?
+
+We aren't personifying inanimate things.
+They do /want/ something.
+It's just that their wants don't change with time.
+
+Every mass /wants/ to attract every other mass.
+Earth /wants/ a rock to fall toward the Earth.
+
+What does a voltage regulator want?
+
+There is a difference between these statements:
+- Every thing that does not exist wants to continue not-existing.
+- Nothing wants to continue not-existing.
+*** Problem: How do we know that nothing is forcing an inanimate thing to do anything?
+Difference of meaning:
+- "Nothing" exists = the English word "nothing" exists
+- Nothing exists = there does not exist anything; it is not true that anything exists
+
+Which one does "Nothing causes its own existence" mean?
+- There isn't anything that causes its own existence.
+- There is a thing that we call "nothing", and it causes its own existence.
+
+Can something cause its own existence?
+Can something causes itself to exist?
+Is there such a thing?
+
+Is there something forcing everything else to exist?
+
+Is everything forced to exist?
+Does anything want to exist?
+
+If we assume that something cannot cause its own existence,
+then everything must have a cause that is not itself.
+Thus there is something /forcing/ everything else to /exist/.
+
+If I don't exist, how can I force myself to exist?
+*** What is science?
+How is "social science" and "computer science" science?
+
+"Science" comes from the Latin word "scientia" that means "knowledge".
+- https://en.wiktionary.org/wiki/science#Etymology_1
 ** Cause, make, force, control, want, affect
 <2018-11-07>
 
@@ -154,6 +226,79 @@ In the hierarchy, Alice commands Bob, and Bob commands Charlie.
 Alice knows Charlie, but never interacts with Charlie.
 If Alice tells Bob to make Charlie do what Alice wants Charlie to do, but Charlie doesn't do it, then there are three possibilities:
 Alice doesn't control Bob, or Bob doesn't control Charlie, or both.
+** Reading conditionals
+*** (Failed attempt) Properly translating material conditional into English "does not preclude"
+Remember that the /material conditional/ \( p \to q \) is equivalent to \( \neg (p \wedge \neg q) \) in classical logic.
+
+We can interpret \( p \wedge \neg q \) as "\( p \) /precludes/ \( q \)".
+
+Thus we can interpret the material conditional \( p \to q \) as "\( p \) /does not preclude/ \( q \)".
+However, we practically pretend that it means "if \( p \) then \( q \)".
+This lie works because we practically always pick relevant \(p\) and \(q\).
+
+However, there is a difficulty:
+If \(p\) and \(q\) are irrelevant, \( p \) is true, and \( q \) is false, then what does "\(p\) does not preclude \(q\)" mean?
+
+See also:
+- https://en.wikipedia.org/wiki/Paradoxes_of_material_implication
+*** Belief inference rule in doxastic logic
+We can define \( p \Rightarrow q \) as "knowing \( p \) is sufficient to infer \( q \)", that is, "believing \( p \) implies believing \( q \)".
+\[
+(p \Rightarrow q) = (K p \rightarrow K q).
+\]
+
+But why would we?
+** TODO Sameness is meaning-preserving universal substitutability?
+<2018-11-06>
+/X is the same as Y/ iff every occurence of X can be replaced with Y while preserving the meaning of the containing statement.
+
+What is the relationship between sameness and the principle of the identity of indiscernibles
+("there cannot be separate objects or entities that have all their properties in common")?
+https://en.wikipedia.org/wiki/Identity_of_indiscernibles
+
+** Some opinions about philosophy and language
+*** On the laypeople
+If a layperson can't understand you, you are wrong.
+
+We should clarify words, not redefine them.
+We should start from their everyday meaning.
+
+We should avoid inventing a new word if a word already exists for it.
+
+We should use everyday language.
+People who bend words too much alienate themselves.
+*** <2018-11-06> "Academic philosophy’s wrong turn"
+https://medium.com/the-polymath-project/in-defense-of-philosophy-2ca6ef0aa4a0
+** Interpreting truth value
+*** As degree of certainty
+Let $\tau(p) \in [0,1]$ describe how /certain/ we are about the sentence $p$.
+If $\tau(p) = 0$, then we don't know anything about $p$.
+If $\tau(p) = 1$, then we know $p$ for sure.
+
+Note that $\tau(p) = 0$ does /not/ mean that $p$ is false;
+it means that we /don't know/.
+*** As information transfer, as contagiousness of ascertainment
+$\tau(p \to q)$ measures the amount of information transferred from our knowledge of $p$ to our knowledge of $q$.
+
+It measures how reducing the uncertainty of $p$ reduces the uncertainty of $q$.
+** Numbers, ideal existence, and physical existence
+"123" is a /decimal representation/ of a number, not the number itself.
+
+A number exists ideally.
+It doesn't exist physically.
+Our body can't interact with a number.
+We can't touch a real number.
+There is no physical experiment that tests the properties of numbers.
+Our mind can't interact with a number either.
+We can't imagine a number.
+We can only imagine a /representation/ of that number.
+
+But our minds can correlate idea space and physical space.
+
+We use physics experiments to find out physical laws.
+We use thought experiments to find out ideal laws (such as theorems about real numbers).
+An eye is a physical sense that enables the brain to probe the space of bodies.
+A mind is an ideal sense that enables the brain to probe the space of ideas.
 * Cause, causality, implication, and probability
 ** Cause
 "C /causes/ E" means:
@@ -324,120 +469,83 @@ Other resources:
 /Luck/ is cause that we don't bother to find out.
 
 "Random" means "caused by something we don't know".
-* Science aims to find what each inanimate thing wants.
-<2018-11-07>
+* Modeling, with emphasis on computer science
+** Theory, model, simplifying assumption; some examples
+Examples:
+- The theory \(q \to r\) /models/ the theory \((p\wedge q) \to r\) with the /simplifying assumption/ that \(p\) is true.
+- The theory \(e^x \approx 1 + x + x^2/2\) /models/ the theory \(e^x = \sum_{k=0}^\infty x^k/k!\) with the /simplifying assumption/ that \(x\) is near zero.
+- The theory "if I strike the match then it will burn" is a causal /model/ of how striking matches work in reality,
+  with the /simplifying assumptions/ that all matches are dry (and many other implicit simplifying assumptions we take for granted).
 
-Remember that we assume that /want/ is a primitive concept.
-It doesn't assume what can want and what can't want.
+We model a thing by making simplifying assumptions on that thing.
+We choose which aspects to care about.
+We ignore all other aspects.
+Thus a model of something is a /simplification/ of that thing.
 
-What an /inanimate/ thing /wants/ is what it would do if it weren't /forced/ to.
-Thus we can find what an inanimate thing want by /isolating/ it so that nothing forces it to do anything.
+An example of how to model is partial evaluation (fixing of variables).
+In this case, the model X is obtained from the modeled Y by partially evaluating Y, that is, by assuming the constancy of some variables in Y.
 
-Example.
-Imagine a weight balance.
-I put a heavier weight on the left plate.
-I put a lighter weight on the right plate.
-Both weights /want/ to fall toward the Earth.
-The heavier weight /forces/ the lighter weight to rise,
-against what the lighter weight /wants/,
-against what the lighter weight would do if the heavier weight did not force the lighter weight to rise.
+We judge models by their usefulness, not by their correctness.
 
-/Science aims to find what each inanimate thing wants./
-We isolate inanimate things, so that nothing control them, so that we know how they behave.
-We isolate atoms so that we can understand their wants.
+Questions:
+- If our perception models reality, then what are the simplifying assumptions?
+** A model is ...
+A model is ... resemblance, replica, downscaling, simplification?
+We say "X models Y" iff X resembles Y, iff X behaves like Y, iff X is a simplification of Y, iff X and Y have something in common but X is simpler than Y?
+A model of X is a simplified representation of X.
+A model is a simplified description of reality?
+A description of reality is not reality.
+If reality and theory disagree, then reality wins and theory must change.
+** Example of modeling
+"To model X" is to deliberately lose irrelevant information about X.
 
-Nature /wants/ to enforce the law of nature.
+"X models Y" means "Y is X with some simplifying assumptions".
 
-A gas /wants/ to fill its container?
+"X models Y" means "Y is X with some details lost".
 
-We aren't personifying inanimate things.
-They do /want/ something.
-It's just that their wants don't change with time.
+Example of how model deliberately loses information.
+Statics.
+Real physical systems in rest.
+Pick a coordinate system.
+Center of mass of car.
+Change car color.
+The model is the same.
+The reality is different.
+** Model and reality
+- Some models model reality well.
+- Some reality is modeled well.
+- Some models are unrealistic.
+- Some reality are unmodelable.
+** Example of modeling; example of violating the simplifying assumptions
+The tuple (john, 30 years old) models the tuple (john, 30 years old, black hair, brown eyes).
+The capturing function (the modeling schema) is $(a,b,c,d) \mapsto (a,b)$.
+Modeling is dimension reduction.
+Modeling is projection.
 
-Every mass /wants/ to attract every other mass.
-Earth /wants/ a rock to fall toward the Earth.
+If we violate a simplifying assumption, the model breaks down and gives nonsensical funny results.
+The name-age tuple (john, 10000 years old) models something nonexistent.
+We can insert such nonsensical data into the database, but what does such nonsensical data mean?
+We can substitute the mass variables in Newton's gravity equation with negative quantities, but what does it mean?
+** Modeling: How does X model Y?
+Consider several ways we can model a person:
 
-What does a voltage regulator want?
+- as a stick figure
+- as a photograph
+- as a police sketch
+- as a tuple (row in a relational database)
+- as a "chemical" that may react with another person ("chemical")
 
-There is a difference between these statements:
-- Every thing that does not exist wants to continue not-existing.
-- Nothing wants to continue not-existing.
-** Problem: How do we know that nothing is forcing an inanimate thing to do anything?
-Difference of meaning:
-- "Nothing" exists = the English word "nothing" exists
-- Nothing exists = there does not exist anything; it is not true that anything exists
+Reading list:
 
-Which one does "Nothing causes its own existence" mean?
-- There isn't anything that causes its own existence.
-- There is a thing that we call "nothing", and it causes its own existence.
-
-Can something cause its own existence?
-Can something causes itself to exist?
-Is there such a thing?
-
-Is there something forcing everything else to exist?
-
-Is everything forced to exist?
-Does anything want to exist?
-
-If we assume that something cannot cause its own existence,
-then everything must have a cause that is not itself.
-Thus there is something /forcing/ everything else to /exist/.
-
-If I don't exist, how can I force myself to exist?
-** What is science?
-How is "social science" and "computer science" science?
-
-"Science" comes from the Latin word "scientia" that means "knowledge".
-- https://en.wiktionary.org/wiki/science#Etymology_1
-* Model
-** Abstract
-   :PROPERTIES:
-   :CUSTOM_ID: abstract
-   :END:
-
-{:.no_toc}
-
-We want to replace this abstract with the answers of these questions:
-
-- What is a model?
-  What does "X is a model of Y" mean?
-- How does X model Y?
-- How do we measure how good a model is?
-- How do we formalize all that?
-- How does it relate to model theory?
-
-** Contents
-   :PROPERTIES:
-   :CUSTOM_ID: contents
-   :END:
-
-{:.no_toc}
-
-- TOC
-  {:toc}
-
-** What is a model?
-   :PROPERTIES:
-   :CUSTOM_ID: what-is-a-model
-   :END:
-
-*** Tracing the roots of "model"
-    :PROPERTIES:
-    :CUSTOM_ID: tracing-the-roots-of-model
-    :END:
-
-[[https://en.wiktionary.org/wiki/model][Wiktionary:model]] says that "model" comes from Latin "modellus" that is diminutive of "modulus" that is diminutive of "modus" that means "measure".
+- 1980 Hilary Putnam article "Models and Reality" [[https://www.jstor.org/stable/2273415?seq=1#page_scan_tab_contents][paywall]]
+- 2004 Ronald N. Giere article "How Models Are Used to Represent Reality" [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.433.860&rep=rep1&type=pdf][pdf]]
+** What is a "model" in English?
+Etymology: "model" comes from Latin "modellus" that is diminutive of "modulus" that is diminutive of "modus" that means "measure", according to [[https://en.wiktionary.org/wiki/model][Wiktionary]].
 Thus "modellus" should mean "a small small measure".
 
 What is the history of the word "model"?
 How did people use it in the past?
 Use [[https://books.google.com/ngrams][Google Ngram]] to find how words were used in the past, as far back as the 18th century.
-
-*** Inferring the meaning of "model" from example sentences
-    :PROPERTIES:
-    :CUSTOM_ID: inferring-the-meaning-of-model-from-example-sentences
-    :END:
 
 Here we try to infer the meanings of "model" from these sources:
 
@@ -448,13 +556,10 @@ Here we try to infer the meanings of "model" from these sources:
   [[https://en.wiktionary.org/wiki/model#Etymology][Wiktionary]].
   Also, the definition of "model oneself after" in [[https://www.merriam-webster.com/dictionary/model%20oneself%20after][Merriam-Webster]].
 - Other people's opinions:
-
   - [[http://www.systems-thinking.org/simulation/model.htm][systems-thinking.org]]: A model is a simplification of reality.
   - 2010 Emily Griffiths article "What is a model?" [[https://web.archive.org/web/20120312220527/http://www.emily-griffiths.postgrad.shef.ac.uk/models.pdf][archived pdf]]
   - [[https://books.google.com/talktobooks/query?q=What%20is%20a%20model%3F][What is a model? - Talk to Books]]
-
 - Encyclopedia articles
-
   - Wikipedia article [[https://en.wikipedia.org/wiki/Model][Model]], and all pages linked from there, such as
     [[https://en.wikipedia.org/wiki/Architectural_model][Architectural model]],
     [[https://en.wikipedia.org/wiki/Physical_model][Physical model]],
@@ -466,110 +571,43 @@ The word "model" have many meanings.
 Here are some example sentences.
 We are only interested in Sense 1.
 But can we show that the other senses are just special cases of Sense 1?
-
 - Sense 1: concept
-
   - Sense 1a: concretion for transfer learning
-
     - "A /model organism/ is [...] extensively studied [...]
       with the expectation that discoveries made in the model organism will provide insight into [...] other organisms."
       ([[https://en.wikipedia.org/wiki/Model_organism][WP:Model organism]])
       This suggests that a model is about /transfer learning/:
       a knowledge about the model maps to a knowledge about the modeled,
       if the model captures the required aspects.
-
   - Sense 1b: abstraction, picking aspects, ignoring irrelevant details
-
     - A Newton equation system /models/ a real physical system.
     - A Newton equation system /is a model of/ a real physical system.
     - Quadratic equations /model/ parabolic motions.
     - The Lotka-Volterra equations can /model/ the populations of lions and deers in a savanna.
-
   - Note: It is confusing that "model" can mean both concretion and abstraction, which are opposites.
   - Sense 1c: a resemblance that takes less effort to make than the real thing does
-
     - This /model/ railroad is mostly made of plastic.
     - This miniature /models/ the 20-story building.
     - This miniature /is a model of/ the 20-story building.
     - A stick figure is a /model/ of a person/animal/being.
-
   - Sense 1c: intended resemblance
-
     - Some cartoon characters /are modeled after/ real people.
     - The Abraham Lincoln statue /was modeled after/ Abraham Lincoln.
       (It means that the statue was intended to look like him.)
-
 - Sense 2: person, animal, being
-
   - Sense 2a: fashion model, photo model, actor
-
     - The /model/ sits on the chair so that the painters can begin painting.
     - The /model/ wearing a fancy dress walks on the catwalk.
     - The /model/ is posing for the camera.
     - His dog is /modeling/ for a dog food advertisement.
-
   - Sense 2b: what one strives to imitate
-
     - He is a /role model/.
     - He is a /model/ husband. He and his wife are much happier after their marriage.
-
 - Sense 3: type, class, kind, variant, product line
-
   - Ford /Model/ T and Tesla /Model/ S are cars.
   - This Honda car comes in two /models/: an automatic transmission /model/ and a manual transmission /model/.
   - Which /model/ of this Toyota car do you want to buy: the gasoline engine /model/ or the diesel engine /model/?
-
-A model is ... resemblance, replica, downscaling, simplification?
-We say "X models Y" iff X resembles Y, iff X behaves like Y, iff X is a simplification of Y, iff X and Y have something in common but X is simpler than Y?
-A model of X is a simplified representation of X.
-A model is a simplified description of reality?
-A description of reality is not reality.
-If reality and theory disagree, then reality wins and theory must change.
-
-To model something is to choose which aspects to care about.
-All other aspects are ignored.
-
-Obvious implication: A model is not the real thing.
-
-A model is analogization.
-
-"To model X" is to deliberately lose irrelevant information about X.
-
-"X models Y" means "Y is X under some simplifying assumptions".
-
-"X models Y" means "Y is X with some details lost".
-
-The tuple (john, 30 years old) models the tuple (john, 30 years old, black hair, brown eyes).
-The capturing function (the modeling schema) is $(a,b,c,d) \mapsto (a,b)$.
-Modeling is dimension reduction.
-Modeling is projection.
-
-Another example.
-Statics.
-Real physical systems in rest.
-Pick a coordinate system.
-Center of mass of car.
-Change car color.
-The model is the same.
-The reality is different.
-
-Some models model reality well.
-Some reality is modeled well.
-Some models are unrealistic.
-Some reality are unmodelable.
-
-Example: (john, 100000 years old).
-
-Let X be the set of all people in company C.
-Let Y be the set of all tuples (name, age).
-
-(john, 1000 years old) is in Y, but f doesn't map it.
-
 *** Defining "model" generally
-    :PROPERTIES:
-    :CUSTOM_ID: defining-model-generally
-    :END:
-
 We say any of these to mean the same thing:
 
 - "The set X models the set Y with capturing function f."
@@ -608,49 +646,10 @@ Our thoughts of ourselves model ourselves.
 Consider X = the set of all white cars and Y = the set of all cars.
 Obviously X is a subset of Y.
 X models Y.
+** Our "model" vs metamathematics model theory "model"
+SEP's "Basic notions of model theory" is surprisingly readable. https://plato.stanford.edu/archives/fall2018/entries/model-theory/
 
-** Modeling: How does X model Y?
-   :PROPERTIES:
-   :CUSTOM_ID: modeling-how-does-x-model-y
-   :END:
-
-Consider several ways we can model a person:
-
-- as a stick figure
-- as a photograph
-- as a police sketch
-- as a tuple (row in a relational database)
-- as a "chemical" that may react with another person ("chemical")
-
-Reading list:
-
-- 1980 Hilary Putnam article "Models and Reality" [[https://www.jstor.org/stable/2273415?seq=1#page_scan_tab_contents][paywall]]
-- 2004 Ronald N. Giere article "How Models Are Used to Represent Reality" [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.433.860&rep=rep1&type=pdf][pdf]]
-
-** Measuring model quality: How well does X model Y?
-   :PROPERTIES:
-   :CUSTOM_ID: measuring-model-quality-how-well-does-x-model-y
-   :END:
-
-- [[https://en.wikipedia.org/wiki/All_models_are_wrong]["All models are wrong, but some are useful."]], George Edward Pelham Box (1919--2013)
-- In [[http://chem.tufts.edu/answersinscience/relativityofwrong.htm][The Relativity of Wrong]], Isaac Asimov writes
-
-  - Asimov's relativity of wrong:
-
-    - Both round earth theory and flat earth theory are wrong,
-    - but believing that they are equally wrong is wronger than both of them combined.
-
-- https://en.wikipedia.org/wiki/The_Relativity_of_Wrong
-- https://en.wikipedia.org/wiki/Wronger_than_wrong
-- 2003 article "Measuring the Quality of Data Models: An Empirical Evaluation of the Use of Quality Metrics in Practice" [[https://pdfs.semanticscholar.org/0536/3b8ddecd695444dc9b341796a0dc73e606be.pdf][pdf]]
-- [[http://tdan.com/measuring-the-quality-of-models/4877][Measuring the Quality of Models | TDAN.com]]
-
-** Relating to model theory?
-   :PROPERTIES:
-   :CUSTOM_ID: relating-to-model-theory
-   :END:
-
-Our definition of "model" above includes the notion of "model" in model theory?
+Our definition of "model" includes the notion of "model" in model theory?
 
 What is a "model" in model theory?
 Here I try to paraphrase
@@ -690,36 +689,64 @@ $$
 I think $J(A)$ is related to a Herbrand universe, but how?
 
 The structure $S = (A,I)$ maps the language $L$ to $J(A)$.
+** TODO Questions we want to answer
+- How does X model Y?
+- How do we measure how good a model is?
+- How do we formalize all that?
+- How does it relate to model theory?
+** Measuring model quality: How well does X model Y?
+- [[https://en.wikipedia.org/wiki/All_models_are_wrong]["All models are wrong, but some are useful."]], George Edward Pelham Box (1919--2013)
+- In [[http://chem.tufts.edu/answersinscience/relativityofwrong.htm][The Relativity of Wrong]], Isaac Asimov writes
 
-...
+  - Asimov's relativity of wrong:
 
-* Philosophy of computer science
-** Real numbers, ideal and physical existence
-"1.412" is a /decimal representation/ of a real number, not the real number itself.
+    - Both round earth theory and flat earth theory are wrong,
+    - but believing that they are equally wrong is wronger than both of them combined.
 
-Algebraic-geometric definition:
-A /real number/ is a /point/ in the /totally-ordered/ set of points in /one-dimensional/ Euclidean geometry;
-the real numbers form a /ring/ (even a /field/).
-It exists ideally.
-It doesn't exist physically.
-The body can't interact with a real number.
-We can't touch a real number.
-There is no physical experiment that tests the properties of real numbers.
-The mind can't interact with a real number either.
-We can't imagine a real number; we can only imagine a /representation/ of that real number.
+- https://en.wikipedia.org/wiki/The_Relativity_of_Wrong
+- https://en.wikipedia.org/wiki/Wronger_than_wrong
+- 2003 article "Measuring the Quality of Data Models: An Empirical Evaluation of the Use of Quality Metrics in Practice" [[https://pdfs.semanticscholar.org/0536/3b8ddecd695444dc9b341796a0dc73e606be.pdf][pdf]]
+- [[http://tdan.com/measuring-the-quality-of-models/4877][Measuring the Quality of Models | TDAN.com]]
+** Model of model: multiple-level machine model
+A model can model another model.
+We can stack simplifying assumptions on top of other simplifying assumptions.
 
-Addition also has a geometric meaning: it is the set of points on the plane \(\{(x,y,z) ~\vert~ x+y=z\}\).
+A mechanical machine is modeled by a system of equations derived from Newton's motion laws.
 
-But our minds can correlate idea space and physical space.
+We can model an abacus ...
 
-There are several ways of defining the real numbers.
-Which one should we use for the philosophy of mind and computation, and why?
+Suppose that we have a mechanical calculator that adds two 3-digit numbers.
+Suppose that we have an electronic calculator that also adds two 3-digit numbers.
+Then /the same model/ models both the mechanical calculator and the electronic calculator.
 
-We use physics experiments to find out physical laws.
-We use thought experiments to find out ideal laws (such as theorems about real numbers).
-An eye is a physical sense that enables the brain to probe the space of bodies.
-A mind is an ideal sense that enables the brain to probe the space of ideas.
-** Computation is approximate expression normalization
+An electrical machine is called a "circuit".
+
+First, we can model a circuit as its /lumped element model/.
+This model is a system of equations derived from Kirchhoff's circuit laws.
+This model is only valid under the conditions described in [[https://en.wikipedia.org/wiki/Lumped_element_model#Lumped_matter_discipline][WP:Lumped matter discipline]].
+
+A /switch/ S is modeled as a /lumped component/ S1 with one binary state (open/closed) and two terminals (S1A and S1B).
+
+Second, we can model the lumped element model S1 further as Boolean algebra equation.
+The switch model S1 is then modeled again as a /Boolean-algebra equation/ S2: S1A = S1B.
+
+An electrical logic /circuit/ is modeled as a /system/ of Boolean-algebra equations.
+
+An electrical logic circuit /component/ is modeled as an /equation/ in Boolean-algebra.
+
+An electrical logic circuit /node/ is modeled as a /variable/ that holds either 0 or 1.
+
+A computing machine is called a "computer".
+
+A computer is modeled by... not a system of equations?
+
+Claude Shannon's 1937 master thesis.
+Who retyped this neat version?
+https://www.cs.virginia.edu/~evans/greatworks/shannon38.pdf
+- About Claude Shannon's 1937 master thesis https://en.wikipedia.org/wiki/Claude_Shannon#Logic_circuits
+* Computer science
+** What does it mean for a machine to compute a real number?
+Computation is approximate expression normalization.
 To /compute/ a real number is to calculate some of its digits.
 To /compute/ an arithmetic /expression/ is to /evaluate/ it (to reduce it into a /value/), often approximately.
 For example: 1/7 is an /expression/, and .142 is a /value/ that is the 3 most significant digits of the result of /evaluating/ that expression.
@@ -743,14 +770,30 @@ Let \(E(\Real)\) be the set of all real-number expressions.
 
 Let \(f:E(\Real)\to\Real\) be the evaluation function.
 
-What is the machine computing when I'm typing this document?
+Questions:
+- What is the machine computing when I'm typing this document?
+- There are several ways of defining the real numbers.
+  Which one should we use for the philosophy of mind and computation, and why?
+
+Algebraic-geometric definition:
+A /real number/ is a /point/ in the /totally-ordered/ set of points in /one-dimensional/ Euclidean geometry;
+the real numbers form a /field/.
+
+Addition also has a geometric meaning: it is the set of points on the plane \(\{(x,y,z) ~\vert~ x+y=z\}\).
 ** Algorithm, machine, describability, computability
 We assume that these are primitive concepts: algorithm, machine.
 By "machine", we mean a computing machine.
 
-An /algorithm/ is a /finite description/: a string in a formal language.
+An algorithm /describes/ what a machine /computes/.
+
+An /algorithm/ is an /executable description/: a string in a formal language in a formal system.
+A description has /finite/ length.
+By "executable", we mean that an algorithm has a /machine model/.
+We always define an algorithm with respect to a machine.
+
 Thus not every real number is /describable/,
-because there are fewer strings in L than there are real numbers.
+because there are fewer strings in that formal language than there are real numbers.
+
 Thus not every real number is /computable/,
 because computability requires describability.
 
@@ -759,11 +802,10 @@ Remember that a /formal system/ is a /formal language/ and a set of /inference r
 
 An algorithm is a string in a formal language \(L\).
 We /model/ a /machine/ as a /formal system/ whose language is \(L\).
+The machine is not the formal system.
+The thing is not the model.
 
-Algorithms /describe/.
-Machines /compute/.
-
-What does it mean for a machine to /compute/ a real number?
+*What does it mean for a machine to /compute/ a real number?*
 
 Suppose that \(Y(T) \in \Real\) is the /output/ of the algorithm \(A\) if we let the algorithm run for duration \(T \in \Nat\).
 
@@ -822,26 +864,6 @@ A running machine embodies the software it is running?
   - Partial Turing machine, total Turing machine
     - What is the significance of the theorem in [[https://en.wikipedia.org/wiki/Total_Turing_machine][WP:Total Turing machine]]?
     - What is the relationship between total function and total Turing machine?
-* Reading conditionals
-** (Failed attempt) Properly translating material conditional into English "does not preclude"
-Remember that the /material conditional/ \( p \to q \) is equivalent to \( \neg (p \wedge \neg q) \) in classical logic.
-
-We can interpret \( p \wedge \neg q \) as "\( p \) /precludes/ \( q \)".
-
-Thus we can interpret the material conditional \( p \to q \) as "\( p \) /does not preclude/ \( q \)".
-However, we practically pretend that it means "if \( p \) then \( q \)".
-This lie works because we practically always pick relevant \(p\) and \(q\).
-
-However, there is a difficulty:
-If \(p\) and \(q\) are irrelevant, \( p \) is true, and \( q \) is false, then what does "\(p\) does not preclude \(q\)" mean?
-
-See also:
-- https://en.wikipedia.org/wiki/Paradoxes_of_material_implication
-** Belief inference rule in doxastic logic
-We can define \( p \Rightarrow q \) as "knowing \( p \) is sufficient to infer \( q \)", that is, "believing \( p \) implies believing \( q \)".
-\[
-(p \Rightarrow q) = (K p \rightarrow K q).
-\]
 * Knowledge, consciousness
 We don't know what "knowledge" is.
 But, for this section, assume that we know.
@@ -1133,20 +1155,20 @@ If I cut off my legs, am I I?
 - electrophysiology, Greg Gage, TED 2015, how to control someone else's arm with your brain
   - https://www.ted.com/talks/greg_gage_how_to_control_someone_else_s_arm_with_your_brain/transcript
 ** <2018-11-05> Attention is the direction of consciousness?
-* TODO What is knowledge?
-** Plato JTB theory: Knowledge is Justified True Belief.
+** TODO What is knowledge?
+*** Plato JTB theory: Knowledge is Justified True Belief.
 Gettier problem / epistemic luck?
 Can we believe something right for the wrong reason?
 
 Justifying justifications?
-** How do we know? Ways of obtaining and justifying knowledge
+*** How do we know? Ways of obtaining and justifying knowledge
 - Through our senses.
 - By logic?
 - By divine revelation?
 - Telepathy?
 - Mind upload?
 
-** TODO What does it mean to know something?
+*** TODO What does it mean to know something?
 Example sentences:
 - "I know the taste of salt."
 - "I know you did it."
@@ -1167,9 +1189,9 @@ Example sentences:
 Reading queue:
 - https://philosophy.stackexchange.com/questions/33348/what-does-it-mean-to-know-something
 - https://www.quora.com/What-does-it-mean-to-know-something
-*** Language issues
-**** If we place a blind between a camera and a person, does the camera become unaware of the person?
-** TODO Knowledge justification dilemma
+**** Language issues
+***** If we place a blind between a camera and a person, does the camera become unaware of the person?
+*** TODO Knowledge justification dilemma
 Knowledge without justification is "dumb luck": https://english.stackexchange.com/questions/384314/is-there-a-word-for-an-unjustified-true-belief
 
 Thus, a true belief isn't always a knowledge.
@@ -1178,8 +1200,8 @@ Knowledge with justification suffers the Gettier problem.
 
 - https://en.wikipedia.org/wiki/Gettier_problem#Knowledge_as_justified_true_belief_(JTB)
 - https://en.wikipedia.org/wiki/Epistemology#Defining_knowledge
-** TODO What is the difference between knowledge and belief?
-*** Knowledge is a /subset/ of belief?
+*** TODO What is the difference between knowledge and belief?
+**** Knowledge is a /subset/ of belief?
 Every knowledge is a belief.
 There are beliefs that are not knowledge.
 
@@ -1187,32 +1209,32 @@ My knowledge of the taste of salt is a belief.
 
 Language is not necessary for belief.
 For example, I can falsely believe that I have a shirt with this color that I can see in my mind but I can't describe to you.
-*** Wrong: /Knowledge/ is /belief/ that agrees with /reality/.
+**** Wrong: /Knowledge/ is /belief/ that agrees with /reality/.
 "We know S" means "we believe S, and S is true".
 
 When we say "S is true", we mean that S is true in objective reality.
-*** Belief is not binary
+**** Belief is not binary
 "If an acquaintance suddenly contacts you after a long time of silence, he is trying to sell you insurance."
 
 "If the cloud looks gray, it's going to rain."
-*** Distinguishing the absence of belief and the belief of absence
+**** Distinguishing the absence of belief and the belief of absence
 There is a difference between "S does not believe P" and "S believes that P is false".
-*** Beliefs that go against reality
+**** Beliefs that go against reality
 False negative: S is true but I believe that S is false.
 
 False positive: S is false but I believe that S is true.
-*** Unread
+**** Unread
 - https://en.wikipedia.org/wiki/Doxastic_logic
 - https://en.wikipedia.org/wiki/Modal_logic#Doxastic_logic
-*** Beliefs about conditionals and probabilities
+**** Beliefs about conditionals and probabilities
 Example belief: Car crashes kill drivers.
-** TODO We can imagine some things we have never experienced.
-** TODO Can we imagine a color we have never seen?
-** TODO What do we /believe/ about our /imagination/?
-** Knowledge argument, Mary's room: Argument against physicalism
+*** TODO We can imagine some things we have never experienced.
+*** TODO Can we imagine a color we have never seen?
+*** TODO What do we /believe/ about our /imagination/?
+*** Knowledge argument, Mary's room: Argument against physicalism
 - https://en.wikipedia.org/wiki/Knowledge_argument
 - https://plato.stanford.edu/entries/qualia-knowledge/#3.1
-* On self, mind, brain, and volition
+* Self, mind, brain, and volition
 ** Conclusions
 The /self/ of X is everything that X /controls/.
 
@@ -1468,24 +1490,6 @@ But there are stories of some people who can corroborate their past lives?
 ***** All these articles are behind fucking paywalls. Who the hell pays $40 to read philosophers fuck around with language?
 - 1987 article "Are Intentions Self-Referential?" https://www.jstor.org/stable/4319923?seq=1
 - 2000 article "The Self-referentiality of Intentions" https://link.springer.com/article/10.1023%2FA%3A1018336525240
-* Plans
-- /Define/ the concepts according to how we use them in everyday English.
-- /Infer/ the consequences of those definitions.
-- /Relate/ the concepts with each other.
-- /Order/ the concepts by requirement (which concepts require which concepts).
-* Some opinions about philosophy and language
-** On the laypeople
-If a layperson can't understand you, you are wrong.
-
-We should clarify words, not redefine them.
-We should start from their everyday meaning.
-
-We should avoid inventing a new word if a word already exists for it.
-
-We should use everyday language.
-People who bend words too much alienate themselves.
-** <2018-11-06> "Academic philosophy’s wrong turn"
-https://medium.com/the-polymath-project/in-defense-of-philosophy-2ca6ef0aa4a0
 * What?
 ** Objective reality
 *** My inability to manipulate everything implies the existence of reality outside my mind
@@ -1835,14 +1839,6 @@ Example:
 - Judgment: "I'm bad at math."
 ** List of unsolved problems in philosophy
 https://en.wikipedia.org/wiki/List_of_unsolved_problems_in_philosophy
-* Other things about language
-** TODO Sameness is meaning-preserving universal substitutability?
-<2018-11-06>
-/X is the same as Y/ iff every occurence of X can be replaced with Y while preserving the meaning of the containing statement.
-
-What is the relationship between sameness and the principle of the identity of indiscernibles
-("there cannot be separate objects or entities that have all their properties in common")?
-https://en.wikipedia.org/wiki/Identity_of_indiscernibles
 * Implication (do not read; conversion errors)
 <2017-10-21T15:30:00+0700>
 
@@ -1858,18 +1854,6 @@ We unify (generalizes?) material implication in classical logic
 and conditional probability in probability theory.
 
 (Need better abstract. Answer "Why should I care?")
-** Interpreting truth value
-*** As degree of certainty
-Let $\tau(p) \in [0,1]$ describe how /certain/ we are about the sentence $p$.
-If $\tau(p) = 0$, then we don't know anything about $p$.
-If $\tau(p) = 1$, then we know $p$ for sure.
-
-Note that $\tau(p) = 0$ does /not/ mean that $p$ is false;
-it means that we /don't know/.
-*** As information transfer, as contagiousness of ascertainment
-$\tau(p \to q)$ measures the amount of information transferred from our knowledge of $p$ to our knowledge of $q$.
-
-It measures how reducing the uncertainty of $p$ reduces the uncertainty of $q$.
 ** What does implication mean?
 (This section needs rereading and rewriting.)
 
@@ -1981,8 +1965,8 @@ or we experienced it ourselves through our senses.
 In classical logic, $\tau(p)$ is either 0 or 1,
 and $\tau(p) = 0$ means that $p$ is false,
 and $\tau(p) = 1$ means that $p$ is true.
-*** Principle of no contradiction
-Principle of no contradiction:
+*** Principle of non-contradiction
+Principle of non-contradiction:
 $\tau(p) = -1$ if we know that $p$ is false.
 
 Should we accept this principle?
@@ -2113,7 +2097,6 @@ E \subseteq E' \to \tau(P(E) \to P(\Omega)) \le \tau(P(E') \to P(\Omega)) \label
 *** Types of conditionals according to logic, philosophy, and linguistics
 There are several types of conditionals:
 causal, strict, indicative, counterfactual, strict, material, formal.
-*** Problem with material conditional
 *** Eight types of conditionals by the truth values of the parts
 If $\tau(p) = 1$ means that all swans are white,
 then $\tau(p) = 0.99$ should mean that almost all swans are white,
