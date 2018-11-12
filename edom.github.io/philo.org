@@ -81,7 +81,7 @@ But /can/ doesn't mean /should/.
 People sometimes say "can't" when they mean they don't know how.
 Example:
 "I can't start the car."
-Of course he /can/; there is a satisfying action: Fix the car, turn the key, and so on.
+Of course he /can/; there is a satisfying action: Repair the car, turn the key, and so on.
 But he doesn't /know/ how.
 He should say "I don't know how I can start the car" or "The car isn't starting."
 That satisfying action /exists/ regardless of whether he knows it.
@@ -470,40 +470,60 @@ Other resources:
 
 "Random" means "caused by something we don't know".
 * Modeling, with emphasis on computer science
-** Theory, model, simplifying assumption; some examples
-Examples:
-- The theory \(q \to r\) /models/ the theory \((p\wedge q) \to r\) with the /simplifying assumption/ that \(p\) is true.
-- The theory \(e^x \approx 1 + x + x^2/2\) /models/ the theory \(e^x = \sum_{k=0}^\infty x^k/k!\) with the /simplifying assumption/ that \(x\) is near zero.
-- The theory "if I strike the match then it will burn" is a causal /model/ of how striking matches work in reality,
-  with the /simplifying assumptions/ that all matches are dry (and many other implicit simplifying assumptions we take for granted).
+** Summary
+A /model/ of a thing is a /simplification/ of that thing.
 
-We model a thing by making simplifying assumptions on that thing.
-We choose which aspects to care about.
-We ignore all other aspects.
-Thus a model of something is a /simplification/ of that thing.
+A model always comes with /simplifying assumptions/.
 
-An example of how to model is partial evaluation (fixing of variables).
-In this case, the model X is obtained from the modeled Y by partially evaluating Y, that is, by assuming the constancy of some variables in Y.
+Violating the simplifying assumptions leads to nonsense.
+** Examples of modeling as simplification
+Here we think of some examples where X is a model of Y.
+We discuss about (1) how X simplifies Y (the "manner of simplification"), (2) what the simplifying assumptions are,
+and (3) what nonsense happens when the assumptions are violated.
 
-We judge models by their usefulness, not by their correctness.
+The formula \(q \to r\) /models/ the formula \((p\wedge q) \to r\).
+The /manner of simplification/ is grounding some variables.
+The /simplifying assumption/ is that \(p\) is true.
 
-Questions:
-- If our perception models reality, then what are the simplifying assumptions?
-** A model is ...
-A model is ... resemblance, replica, downscaling, simplification?
-We say "X models Y" iff X resembles Y, iff X behaves like Y, iff X is a simplification of Y, iff X and Y have something in common but X is simpler than Y?
-A model of X is a simplified representation of X.
-A model is a simplified description of reality?
-A description of reality is not reality.
-If reality and theory disagree, then reality wins and theory must change.
-** Example of modeling
-"To model X" is to deliberately lose irrelevant information about X.
+The formula \(e^x \approx 1 + x + x^2/2\) /models/ the formula \(e^x = \sum_{k=0}^\infty x^k/k!\).
+The /manner of simplification/ is truncating the series.
+The /simplifying assumption/ is that \(x\) is near zero.
+
+The statement "if I strike the match then it will burn" is a causal /model/ of how striking matches work in reality.
+The /manner of simplification/ is picking a small part of the modeled.
+The /simplifying assumptions/ are that all matches are dry (and many other implicit simplifying assumptions we take for granted).
+
+A fashion model /models/ the average person.
+The /manner of simplification/ is hasty generalization.
+(Fallacies can be useful. Indeed a model is something /wrong but useful/.)
+The /simplifying assumption/ is that the average person has similar body measurements.
+Violating this assumption makes the clothes misfit.
+
+The tuple (john, 30 years old) models the tuple (john, 30 years old, black hair, brown eyes).
+The model simplifies the modeled by projection (as in the geometric projection of a solid to its shadow).
+The capturing function (the modeling schema) is $(a,b,c,d) \mapsto (a,b)$.
+Modeling is dimension reduction.
+Modeling is projection.
+
+If we violate a simplifying assumption, the model breaks down and gives nonsensical results.
+The name-age tuple (john, 10000 years old) models something nonexistent.
+We can insert such nonsensical data into the database, but what does such nonsensical data mean?
+We can substitute the mass variables in Newton's gravity equation with negative quantities, but what does it mean?
+
+Our perception /models/ reality with the /simplifying assumption/ that we stay in the environment that evolution and natural selection led us to.
+We violate this assumption when we fly an aircraft.
+This violation may kill us.
+- https://en.wikipedia.org/wiki/Sensory_illusions_in_aviation
+- https://www.scientificamerican.com/article/did-humans-evolve-to-see-things-as-they-really-are/
+  - "Mimicry works only if there is an objective reality to mimic."
+** Modeling by ignoring irrelevant information
+"To model X" is to ignore the irrelevant aspects of X.
 
 "X models Y" means "Y is X with some simplifying assumptions".
 
 "X models Y" means "Y is X with some details lost".
 
-Example of how model deliberately loses information.
+Example of how model ignores irrelevant aspects.
 Statics.
 Real physical systems in rest.
 Pick a coordinate system.
@@ -511,21 +531,61 @@ Center of mass of car.
 Change car color.
 The model is the same.
 The reality is different.
+The model ignores the irrelevant aspect that is the car's color.
+** How we model things
+We model a thing by making simplifying assumptions on that thing.
+We choose which aspects to care about.
+We ignore all other aspects.
+Thus a model of something is a /simplification/ of that thing.
+
+We judge models by their usefulness, not by their correctness.
+
+We can find out a model's simplifying assumptions by pushing it to failure.
+This is what experimental physicists do.
+*** Modeling by partial evaluation (grounding of variables)
+An example of how to model is partial evaluation (grounding of variables).
+In this case, the model X is obtained from the modeled Y by partially evaluating Y, that is, by assuming the constancy of some variables in Y.
+** Generalizing the "model" in model theory?
+Sentence S models sentence T iff S can be derived from T by grounding some variables.
+The simplifying assumption is that assignment of variables to ground terms.
+The simplifying assumption is an interpretation.
+
+Examples.
+"John ate a hamburger" is a model of "X ate Y".
+"John ate a hamburger" is a model of "Someone ate something".
+
+To /interpret/ a sentence is to /ground/ all its variables (to substitute all its variables with /ground terms/).
+
+This generalizes model theory?
+** Our reason for model things: our limited thought
+We /model/ a machine in order to /understand/ what it does:
+to /interpret/ what it does, to give /meaning/ to what it does.
+Of course what we /think/ it does is not what it /actually/ does.
+We think the machine is adding two numbers.
+What the machine actually does is shuffling electrons around in a way that we interpret as adding two numbers.
+We model something so that we can reason about it.
+We can only think about very few things at once.
+
+We ignore hardware problems, such as unreliable power supplies, cosmic rays flipping bits,
+cats pissing on the machine, fires burning down the building,
+and other infinitely many hardware problems we conveniently ignore.
+The simplifying assumption is that the hardware works in the environment it's designed for.
+As long as our simplifying assumptions hold, our model is valid.
+
+We need that model.
+Without model, irrelevant details would preclude us from understanding anything.
+** A model is ...
+A model is ... resemblance, replica, downscaling, simplification?
+We say "X models Y" iff X resembles Y, iff X behaves like Y, iff X is a simplification of Y, iff X and Y have something in common but X is simpler than Y?
+A model of X is a simplified representation of X.
+A model is a simplified description of reality?
+A description of reality is not reality.
+If reality and theory disagree, then reality wins and theory must change.
 ** Model and reality
 - Some models model reality well.
 - Some reality is modeled well.
 - Some models are unrealistic.
 - Some reality are unmodelable.
-** Example of modeling; example of violating the simplifying assumptions
-The tuple (john, 30 years old) models the tuple (john, 30 years old, black hair, brown eyes).
-The capturing function (the modeling schema) is $(a,b,c,d) \mapsto (a,b)$.
-Modeling is dimension reduction.
-Modeling is projection.
-
-If we violate a simplifying assumption, the model breaks down and gives nonsensical funny results.
-The name-age tuple (john, 10000 years old) models something nonexistent.
-We can insert such nonsensical data into the database, but what does such nonsensical data mean?
-We can substitute the mass variables in Newton's gravity equation with negative quantities, but what does it mean?
 ** Modeling: How does X model Y?
 Consider several ways we can model a person:
 
@@ -539,9 +599,21 @@ Reading list:
 
 - 1980 Hilary Putnam article "Models and Reality" [[https://www.jstor.org/stable/2273415?seq=1#page_scan_tab_contents][paywall]]
 - 2004 Ronald N. Giere article "How Models Are Used to Represent Reality" [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.433.860&rep=rep1&type=pdf][pdf]]
-** What is a "model" in English?
+** "Model theory" should be named "structure theory" instead
+"Model theory" should be called "structure theory" instead.
+Group theory studies groups.
+Number theory studies numbers.
+Model theory studies structures!
+What a surprise!
+** Some history of the English word "model"
 Etymology: "model" comes from Latin "modellus" that is diminutive of "modulus" that is diminutive of "modus" that means "measure", according to [[https://en.wiktionary.org/wiki/model][Wiktionary]].
 Thus "modellus" should mean "a small small measure".
+
+I asked this online:
+- https://hsm.stackexchange.com/questions/7948/what-motivated-the-choice-of-the-word-model-in-model-theory/7953#7953
+
+Wilfrid Hodges's take on the history of the word "model":
+- https://plato.stanford.edu/entries/model-theory/#Modelling
 
 What is the history of the word "model"?
 How did people use it in the past?
@@ -745,6 +817,58 @@ Who retyped this neat version?
 https://www.cs.virginia.edu/~evans/greatworks/shannon38.pdf
 - About Claude Shannon's 1937 master thesis https://en.wikipedia.org/wiki/Claude_Shannon#Logic_circuits
 * Computer science
+** Tools, usage, and machine
+Remember that we defined /self/ as everything that we control.
+
+The essence of tools is the extension of self (the boundary of control).
+
+A /tool/ is a thing that extends our /self/ (our boundary of control).
+A tool is a thing that enables us to control more things than we would without that tool.
+
+"Tool" is a relative concept, like "weed", "good", "bad".
+Whether something is a tool depends on what use we imagine of it.
+We can think of a rock as a useless heavy space-occupying thing.
+We can think of a rock as a tool for crushing things.
+To 20th century people, a computer is a mind extension tool.
+To a villager in the Stone Age, a computer might be a heavy weight that can be thrown to kill animals.
+
+/Usage is goal-directed control/.
+To use something is to control it for a goal/purpose/intention.
+"To use X for Y" is to control X in order to achieve Y (to make Y true).
+
+A tool is something we use.
+
+A tool may be animate.
+
+People are tools.
+Everyone uses everyone else.
+We use each other.
+A worker is a capitalist's tool; a capitalist is also a worker's tool.
+An employee is his employer's tool; an employer is also his employee's tool.
+Surely employers avoid hiring useless employees, and employees avoid hiring useless employers.
+A useless employee doesn't work; a useless employer doesn't pay.
+
+How /do/ we use this person?
+How /can/ we use this person?
+What /does/ this person help us do?
+What /can/ this person help us do?
+
+Using other people is not inherently bad.
+One can use his tools with care, whether animate and inanimate.
+But this idea may discomfort non-philosophers.
+
+It is only a matter of time before a tool-using animal realizes that it can use other animals as tools.
+
+Are we using others, or are we being used by others?
+** Tools and machines
+(I need to find the words to say this, and rewrite this more clearly.)
+
+A /machine/ is an /automatic tool/:
+it is a tool that runs by itself; it has its own behavior.
+
+A hammer doesn't have its own behaviors.
+A car has its own behaviors.
+A computer has its own behaviors.
 ** What does it mean for a machine to compute a real number?
 Computation is approximate expression normalization.
 To /compute/ a real number is to calculate some of its digits.
