@@ -469,39 +469,126 @@ Other resources:
 /Luck/ is cause that we don't bother to find out.
 
 "Random" means "caused by something we don't know".
-* Modeling, with emphasis on computer science
+* Model and simplification
 ** Summary
 A /model/ of a thing is a /simplification/ of that thing.
 
 A model always comes with /simplifying assumptions/.
 
 Violating the simplifying assumptions leads to nonsense.
-** Examples of modeling as simplification
+
+Related concepts: simplification, ignoration, truncation, approximation.
+** The meaning of "model"
+*** History of the English word "model"
+In the 15th century, a model is a small woodwork crafted with the same proportions of a building that is going to be built.
+Thus a model has the same shape of the building but is much smaller.
+For example, if the building has a stone wall, then the model has a wooden card.
+
+The English word "model" comes from Latin "modellus" that is diminutive of "modulus" that is diminutive of "modus".
+The Latin "modus" means "measure", and "modulus" is small "modus", and "modellus" is small "modulus";
+thus "modellus" should mean "a small small measure".
+
+Sources:
+- Dictionaries and thesauruses
+  - Oxford English Dictionary: "model" comes from "Late 16th century (denoting a set of plans of a building) [...]".
+    [[https://en.oxforddictionaries.com/definition/model]]
+  - Historical Thesaurus of English (ht.ac.uk):
+    The noun "model" was used in 1575 to mean "plans of construction".
+    and the verb "model" was used in 1604 to mean "represent".
+    [[https://ht.ac.uk/category-selection/?word=model&page=1&categoryMinis=on&categorySort=tier]]
+  - The Online Etymology Dictionary traces the noun "model" back to the 1570s "likeness made to scale; architect's set of designs".
+    It traces the verb "model" back to a word in 1660s meaning "fashion in clay or wax".
+    [[https://www.etymonline.com/word/model]]
+  - Princeton WordNet 3.1
+    [[http://wordnetweb.princeton.edu/perl/webwn?s=model&sub=Search+WordNet&o2=&o0=1&o8=1&o1=1&o7=&o5=&o9=&o6=&o3=&o4=&h=]]
+  - The Free Dictionary [[https://www.thefreedictionary.com/model]]
+  - Wiktionary [[https://en.wiktionary.org/wiki/model]]
+  - Also, the definition of "model oneself after" in Merriam-Webster dictionary
+    [[https://www.merriam-webster.com/dictionary/model%20oneself%20after]]
+- Images
+  - 15th century wooden architectural model of Florence Cathedral Dome by Filippo Brunelleschi
+    [[https://www.architectural-review.com/essays/architects-do-it-with-models-the-history-of-architecture-in-16-models/8658964.article]]
+- Essays
+  - Wilfrid Hodges's history of the word "model" in "model theory", in the Stanford Encyclopedia of Philosophy
+    [[https://plato.stanford.edu/entries/model-theory/#Modelling]]
+  - Gene Bellinger's definition: "a simplification of reality intended to promote understanding"
+    [[http://www.systems-thinking.org/simulation/model.htm]]
+  - 2009 Emily Griffiths article "What is a model?"
+    - various types of models: conceptual models, in vivo (in life) models, in vitro (in glass) models, in silico (in silicon, that is, computer) models
+    - "Certainly all models are simplifications"
+    - "[models] bear some likeness to the real world and are constructed to reflect certain parts that are essential for the job in hand"
+    - [[https://sites.google.com/a/ncsu.edu/emily-griffiths/publications/general-articles]]
+    - [[https://sites.google.com/a/ncsu.edu/emily-griffiths/whatisamodel.pdf?attredirects=0]]
+    - [[https://web.archive.org/web/20120312220527/http://www.emily-griffiths.postgrad.shef.ac.uk/models.pdf]]
+- Forums
+  - I asked this on History of Science and Mathematics StackOverflow.
+    [[https://hsm.stackexchange.com/questions/7948/what-motivated-the-choice-of-the-word-model-in-model-theory/7953#7953]]
+- Automated question-answering systems
+  - [[https://books.google.com/talktobooks/query?q=What%20is%20a%20model?][What is a model? - Google Talk to Books]]
+- Encyclopedias
+  - Wikipedia article [[https://en.wikipedia.org/wiki/Model][Model]], and pages linked from there, such as
+    [[https://en.wikipedia.org/wiki/Architectural_model][Architectural model]],
+    [[https://en.wikipedia.org/wiki/Physical_model][Physical model]],
+    Also, by text search: [[https://en.wikipedia.org/wiki/Role_model][Role model]].
+  - [[https://www.britannica.com/search?query=model][Encyclopaedia Britannica search result for "model"]]
+  - [[https://www.encyclopedia.com/search?keys=model][encyclopedia.com search result for "model"]]
+*** The meanings of "model" in 2018
+How do we show that all these senses of "model" are essentially simplifications?
+**** Concretization for transfer learning
+For example, we study a /model organism/ to understand other organisms.
+This suggests that a model is about /transfer learning/:
+knowledge about the model maps to knowledge about the modeled,
+as long as the knowledge is about aspects captured by the model.
+See also the [[https://en.wikipedia.org/wiki/Model_organism][Wikipedia article about model organism]].
+**** Abstraction, picking aspects, ignoring irrelevant details
+- A Newton equation system /models/ a real physical system.
+- A Newton equation system /is a model of/ a real physical system.
+- Quadratic equations /model/ parabolic motions.
+- The Lotka-Volterra equations can /model/ the populations of lions and deers in a savanna.
+
+It is confusing that "model" can mean both concretion and abstraction, which are opposites.
+**** A resemblance that takes less effort to make than the real thing does
+- This /model/ railroad is mostly made of plastic.
+- This miniature /models/ the 20-story building.
+- This miniature /is a model of/ the 20-story building.
+- A stick figure is a /model/ of a person/animal/being.
+**** Intentional resemblance
+- Some cartoon characters /are modeled after/ real people.
+- The Abraham Lincoln statue /was modeled after/ Abraham Lincoln.
+  (It means that the statue was intended to look like him.)
+**** Fashion model, photo model, actor
+- The /model/ sits on the chair so that the painters can begin painting.
+- The /model/ wearing a fancy dress walks on the catwalk.
+- The /model/ is posing for the camera.
+- His dog is /modeling/ for a dog food advertisement.
+**** What one strives to imitate
+- He is a /role model/.
+- He is a /model/ husband. He and his wife are much happier after their marriage.
+**** Type, class, kind, variant, product line
+- Ford /Model/ T and Tesla /Model/ S are cars.
+- This Honda car comes in two /models/: an automatic transmission /model/ and a manual transmission /model/.
+- Which /model/ of this Toyota car do you want to buy: the gasoline engine /model/ or the diesel engine /model/?
+** Modeling is simplification.
 Here we think of some examples where X is a model of Y.
 We discuss about (1) how X simplifies Y (the "manner of simplification"), (2) what the simplifying assumptions are,
 and (3) what nonsense happens when the assumptions are violated.
 
-The formula \(q \to r\) /models/ the formula \((p\wedge q) \to r\).
-The /manner of simplification/ is grounding some variables.
-The /simplifying assumption/ is that \(p\) is true.
+The following paragraphs follow this pattern: "X models Y, by /(manner of simplification)/, assuming /(simplifying assumptions)/".
 
-The formula \(e^x \approx 1 + x + x^2/2\) /models/ the formula \(e^x = \sum_{k=0}^\infty x^k/k!\).
-The /manner of simplification/ is truncating the series.
-The /simplifying assumption/ is that \(x\) is near zero.
+The formula \(q \to r\) models the formula \((p\wedge q) \to r\), by grounding some variables, assuming that \(p\) is true.
 
-The statement "if I strike the match then it will burn" is a causal /model/ of how striking matches work in reality.
-The /manner of simplification/ is picking a small part of the modeled.
-The /simplifying assumptions/ are that all matches are dry (and many other implicit simplifying assumptions we take for granted).
+The formula \(e^x \approx 1 + x + x^2/2\) models the formula \(e^x = \sum_{k=0}^\infty x^k/k!\), by truncating the series, assuming that \(x\) is near zero.
 
-A fashion model /models/ the average person.
-The /manner of simplification/ is hasty generalization.
-(Fallacies can be useful. Indeed a model is something /wrong but useful/.)
-The /simplifying assumption/ is that the average person has similar body measurements.
+The statement "if I strike the match then it will burn" is a causal /model/ of how striking matches work in reality, by picking a small part of the modeled,
+assuming that all matches are dry (and many other implicit simplifying assumptions we take for granted).
+
+A fashion model models the average person, by hasty generalization, assuming that the average person has similar body measurements.
+(Fallacies such as hasty generalization can be useful. Indeed a model is something /wrong but useful/.)
 Violating this assumption makes the clothes misfit.
 
-The tuple (john, 30 years old) models the tuple (john, 30 years old, black hair, brown eyes).
-The model simplifies the modeled by projection (as in the geometric projection of a solid to its shadow).
-The capturing function (the modeling schema) is $(a,b,c,d) \mapsto (a,b)$.
+The tuple (john, 30 years old) models the tuple (john, 30 years old, black hair, brown eyes),
+by projection (as in the geometric projection of a solid to its shadow),
+assuming that the discarded aspects are irrelevant.
 Modeling is dimension reduction.
 Modeling is projection.
 
@@ -510,7 +597,7 @@ The name-age tuple (john, 10000 years old) models something nonexistent.
 We can insert such nonsensical data into the database, but what does such nonsensical data mean?
 We can substitute the mass variables in Newton's gravity equation with negative quantities, but what does it mean?
 
-Our perception /models/ reality with the /simplifying assumption/ that we stay in the environment that evolution and natural selection led us to.
+Our perception models reality, assuming that we stay in the environment that evolution and natural selection led us to.
 We violate this assumption when we fly an aircraft.
 This violation may kill us.
 - https://en.wikipedia.org/wiki/Sensory_illusions_in_aviation
@@ -539,12 +626,59 @@ We ignore all other aspects.
 Thus a model of something is a /simplification/ of that thing.
 
 We judge models by their usefulness, not by their correctness.
-
-We can find out a model's simplifying assumptions by pushing it to failure.
-This is what experimental physicists do.
 *** Modeling by partial evaluation (grounding of variables)
 An example of how to model is partial evaluation (grounding of variables).
 In this case, the model X is obtained from the modeled Y by partially evaluating Y, that is, by assuming the constancy of some variables in Y.
+*** TODO Capturing function?
+We say any of these to mean the same thing:
+
+- "The set X models the set Y with capturing function f."
+- "The function f models Y with X."
+
+The meaning is "There are subsets $X' \subseteq X$ and $Y' \subseteq Y$
+such that $f : Y' \to X'$ is surjective."
+
+The "capturing function" defines the aspects of reality that we capture in our model.
+The function describes how X model Y.
+
+Corollary: Every set models itself.
+This is the theoretically correct but practically useless 1:1 map.
+
+Here are some examples of "X models Y" to show the generality of that definition:
+
+In software engineering, we can map Y (an employee) to X (a row in the database), but then we lose some irrelevant information about Y, such as hair color, weight.
+
+In physics, we can map Y (a real physical system) to X (a Newton equation system) by assuming certain things (coordinate systems, point masses, absolute time),
+but we can't map X to Y because in reality there are no point masses and time is relative.
+By "Newton equation system", we mean a system of equations whose every equation looks like $F_k = m_k \cdot a_k$.
+
+In geometry, we can map Y (a 3D vector) to X (a 2D vector).
+Thus geometric projection is modeling.
+
+In analysis, we can map Y (the exponential function) to X (a truncated Taylor series of the exponential function).
+Thus approximation is modeling.
+
+In real life, a writing is a model of its author.
+What you think about X is your model of X.
+Everyone models everyone they have ever encountered.
+Our thoughts model reality.
+Brain activity models reality.
+Our thoughts of ourselves model ourselves.
+
+Consider X = the set of all white cars and Y = the set of all cars.
+Obviously X is a subset of Y.
+X models Y.
+** Fundamental learning by falsifying simplifying assumptions
+We learn something fundamental by testing ("torturing") our models at their limits to break them.
+We can find out a model's simplifying assumptions by pushing it to failure.
+Fundamental learning happens at the boundary of a simplifying assumption,
+that is, a situation where a simplifying assumption changes from true to false.
+This is what experimental physicists do.
+
+We learn about people when we anger them.
+Other people's anger signals us that at least one of our simplifying assumptions about them doesn't hold.
+
+An aircraft crash signals that a simplifying assumption, of someone, somewhere, is wrong.
 ** Generalizing the "model" in model theory?
 Sentence S models sentence T iff S can be derived from T by grounding some variables.
 The simplifying assumption is that assignment of variables to ground terms.
@@ -557,7 +691,7 @@ Examples.
 To /interpret/ a sentence is to /ground/ all its variables (to substitute all its variables with /ground terms/).
 
 This generalizes model theory?
-** Our reason for model things: our limited thought
+** We model things because our thought is limited
 We /model/ a machine in order to /understand/ what it does:
 to /interpret/ what it does, to give /meaning/ to what it does.
 Of course what we /think/ it does is not what it /actually/ does.
@@ -605,119 +739,6 @@ Group theory studies groups.
 Number theory studies numbers.
 Model theory studies structures!
 What a surprise!
-** Some history of the English word "model"
-Etymology: "model" comes from Latin "modellus" that is diminutive of "modulus" that is diminutive of "modus" that means "measure", according to [[https://en.wiktionary.org/wiki/model][Wiktionary]].
-Thus "modellus" should mean "a small small measure".
-
-I asked this online:
-- https://hsm.stackexchange.com/questions/7948/what-motivated-the-choice-of-the-word-model-in-model-theory/7953#7953
-
-Wilfrid Hodges's take on the history of the word "model":
-- https://plato.stanford.edu/entries/model-theory/#Modelling
-
-What is the history of the word "model"?
-How did people use it in the past?
-Use [[https://books.google.com/ngrams][Google Ngram]] to find how words were used in the past, as far back as the 18th century.
-
-Here we try to infer the meanings of "model" from these sources:
-
-- The definitions of "model" in these dictionaries:
-  [[http://wordnetweb.princeton.edu/perl/webwn?s=model&sub=Search+WordNet&o2=&o0=1&o8=1&o1=1&o7=&o5=&o9=&o6=&o3=&o4=&h=][Princeton WordNet 3.1]],
-  [[https://en.oxforddictionaries.com/definition/model][English Oxford Dictionaries]],
-  [[https://www.thefreedictionary.com/model][The Free Dictionary]],
-  [[https://en.wiktionary.org/wiki/model#Etymology][Wiktionary]].
-  Also, the definition of "model oneself after" in [[https://www.merriam-webster.com/dictionary/model%20oneself%20after][Merriam-Webster]].
-- Other people's opinions:
-  - [[http://www.systems-thinking.org/simulation/model.htm][systems-thinking.org]]: A model is a simplification of reality.
-  - 2010 Emily Griffiths article "What is a model?" [[https://web.archive.org/web/20120312220527/http://www.emily-griffiths.postgrad.shef.ac.uk/models.pdf][archived pdf]]
-  - [[https://books.google.com/talktobooks/query?q=What%20is%20a%20model%3F][What is a model? - Talk to Books]]
-- Encyclopedia articles
-  - Wikipedia article [[https://en.wikipedia.org/wiki/Model][Model]], and all pages linked from there, such as
-    [[https://en.wikipedia.org/wiki/Architectural_model][Architectural model]],
-    [[https://en.wikipedia.org/wiki/Physical_model][Physical model]],
-    Also, by text search: [[https://en.wikipedia.org/wiki/Role_model][Role model]].
-  - [[https://www.britannica.com/search?query=model][Encyclopaedia Britannica search result for "model"]]
-  - [[https://www.encyclopedia.com/search?keys=model][encyclopedia.com search result for "model"]]
-
-The word "model" have many meanings.
-Here are some example sentences.
-We are only interested in Sense 1.
-But can we show that the other senses are just special cases of Sense 1?
-- Sense 1: concept
-  - Sense 1a: concretion for transfer learning
-    - "A /model organism/ is [...] extensively studied [...]
-      with the expectation that discoveries made in the model organism will provide insight into [...] other organisms."
-      ([[https://en.wikipedia.org/wiki/Model_organism][WP:Model organism]])
-      This suggests that a model is about /transfer learning/:
-      a knowledge about the model maps to a knowledge about the modeled,
-      if the model captures the required aspects.
-  - Sense 1b: abstraction, picking aspects, ignoring irrelevant details
-    - A Newton equation system /models/ a real physical system.
-    - A Newton equation system /is a model of/ a real physical system.
-    - Quadratic equations /model/ parabolic motions.
-    - The Lotka-Volterra equations can /model/ the populations of lions and deers in a savanna.
-  - Note: It is confusing that "model" can mean both concretion and abstraction, which are opposites.
-  - Sense 1c: a resemblance that takes less effort to make than the real thing does
-    - This /model/ railroad is mostly made of plastic.
-    - This miniature /models/ the 20-story building.
-    - This miniature /is a model of/ the 20-story building.
-    - A stick figure is a /model/ of a person/animal/being.
-  - Sense 1c: intended resemblance
-    - Some cartoon characters /are modeled after/ real people.
-    - The Abraham Lincoln statue /was modeled after/ Abraham Lincoln.
-      (It means that the statue was intended to look like him.)
-- Sense 2: person, animal, being
-  - Sense 2a: fashion model, photo model, actor
-    - The /model/ sits on the chair so that the painters can begin painting.
-    - The /model/ wearing a fancy dress walks on the catwalk.
-    - The /model/ is posing for the camera.
-    - His dog is /modeling/ for a dog food advertisement.
-  - Sense 2b: what one strives to imitate
-    - He is a /role model/.
-    - He is a /model/ husband. He and his wife are much happier after their marriage.
-- Sense 3: type, class, kind, variant, product line
-  - Ford /Model/ T and Tesla /Model/ S are cars.
-  - This Honda car comes in two /models/: an automatic transmission /model/ and a manual transmission /model/.
-  - Which /model/ of this Toyota car do you want to buy: the gasoline engine /model/ or the diesel engine /model/?
-*** Defining "model" generally
-We say any of these to mean the same thing:
-
-- "The set X models the set Y with capturing function f."
-- "The function f models Y with X."
-
-The meaning is "There are subsets $X' \subseteq X$ and $Y' \subseteq Y$
-such that $f : Y' \to X'$ is surjective."
-
-The "capturing function" defines the aspects of reality that we capture in our model.
-The function describes how X model Y.
-
-Corollary: Every set models itself.
-This is the theoretically correct but practically useless 1:1 map.
-
-Here are some examples of "X models Y" to show the generality of that definition:
-
-In software engineering, we can map Y (an employee) to X (a row in the database), but then we lose some irrelevant information about Y, such as hair color, weight.
-
-In physics, we can map Y (a real physical system) to X (a Newton equation system) by assuming certain things (coordinate systems, point masses, absolute time),
-but we can't map X to Y because in reality there are no point masses and time is relative.
-By "Newton equation system", we mean a system of equations whose every equation looks like $F_k = m_k \cdot a_k$.
-
-In geometry, we can map Y (a 3D vector) to X (a 2D vector).
-Thus geometric projection is modeling.
-
-In analysis, we can map Y (the exponential function) to X (a truncated Taylor series of the exponential function).
-Thus approximation is modeling.
-
-In real life, a writing is a model of its author.
-What you think about X is your model of X.
-Everyone models everyone they have ever encountered.
-Our thoughts model reality.
-Brain activity models reality.
-Our thoughts of ourselves model ourselves.
-
-Consider X = the set of all white cars and Y = the set of all cars.
-Obviously X is a subset of Y.
-X models Y.
 ** Our "model" vs metamathematics model theory "model"
 SEP's "Basic notions of model theory" is surprisingly readable. https://plato.stanford.edu/archives/fall2018/entries/model-theory/
 
@@ -816,6 +837,61 @@ Claude Shannon's 1937 master thesis.
 Who retyped this neat version?
 https://www.cs.virginia.edu/~evans/greatworks/shannon38.pdf
 - About Claude Shannon's 1937 master thesis https://en.wikipedia.org/wiki/Claude_Shannon#Logic_circuits
+** Complexity
+Here we try to understand complexity from its etymology.
+The following etymology is according to the Wiktionary entries on [[https://en.wiktionary.org/wiki/simple#Etymology][simple]], [[https://en.wiktionary.org/wiki/complex#Etymology][complex]], [[https://en.wiktionary.org/wiki/plico#Etymology_2][plico]], [[https://en.wiktionary.org/wiki/plecto#Etymology_1][plecto]], [[https://en.wiktionary.org/wiki/complicate#Etymology][complicate]], [[https://en.wiktionary.org/wiki/complect#Etymology][complect]].
+
+"Simple" comes from Latin "simplex" (one-fold), from "sim-" (same) and "plicare" (to fold, to bend),
+comparable with "uniplex" (one-fold), "duplex" (two-fold), "triplex" (three-fold), "quadruplex" (four-fold), and so on.
+"Complex" comes from Latin "com-" (together) and "plectere" (to weave, to braid, to twist), comparable with "complect", "complicate".
+"Plicare" and "plectere" both come from a Proto-Indo-European word meaning "to fold, to weave".
+(I omit this PIE word because I don't know how to type it in XeLaTeX; copying doesn't work.)
+
+Thus "simple" means "one-fold" and "complex" means "woven together".
+
+Here we try to understand complexity by an example of paper folding.
+
+Imagine a sheet of paper.
+Fold it several times.
+
+The /complexity/ of the resulting shape is the number of folds, that is how many times the original sheet is folded.
+The shape with zero complexity is the original sheet of paper before any folding.
+
+A shape's complexity is unique and irreducible.
+There is always an \(n\)-fold shape that can't be made by folding less than \(n\) times.
+
+A fold affects all folds after it.
+The folding order matters.
+The folds usually don't commute.
+
+A fold always adds complexity.
+There is no way to unfold a folded paper by folding it.
+A combination of folds will never be equal to an unfold.
+
+See also the [[https://en.wikipedia.org/wiki/Origami][Wikipedia entry on origami]] (paper folding).
+
+Folding /complicates/ the shape.
+Unfolding /simplifies/ the shape.
+
+We can /simplify/ a shape by removing its last folds.
+Suppose that a shape is a folding sequence (a sequence of folds).
+Then shape X is a /simplification/ of shape Y iff the folding sequence X begins (is a prefix of) the folding sequence Y.
+* Formal logic
+\begin{align*}
+\text{formal language} &= \text{alphabet} + \text{grammar}
+\\
+\text{formal system} &= \text{formal language} + \text{axioms} + \text{inference rules}
+\\
+\text{logical system} &= \text{formal system} + \text{semantics}
+\end{align*}
+
+"A theory consists of an axiomatic system and all its derived theorems."
+https://en.wikipedia.org/wiki/Axiomatic_system
+
+An interpretation models a sentence [Hodges SEP archive fall 2018 "Model theory"].
+
+Sources:
+- https://en.wikipedia.org/wiki/Formal_system
 * Computer science
 ** Tools, usage, and machine
 Remember that we defined /self/ as everything that we control.
