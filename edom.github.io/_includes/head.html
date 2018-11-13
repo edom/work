@@ -117,12 +117,13 @@ MathJax.Hub.Config({
     }
 });
   </script>
-  {% if page.draft %}
 <style>
-/* PreviewHTML scale doesn't work */
+/*
+PreviewHTML produces small Times New Roman text.
+PreviewHTML scale doesn't work.
+*/
 .MathJax_PHTML { font-size: 125%; }
 </style>
-  {% endif %}
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js" async defer></script>
   {% endif %}
 </head>
