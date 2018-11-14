@@ -191,7 +191,6 @@ We should join forces to reach our shared goals.
             - Philosophy is everywhere (a cross-cutting concern), so it shouldn't be a category.
         - [Law]({% link law.md %})
         - [Religion]({% link religion.html %})
-        - [Logic]({% link logic.md %})
 - Music
     - I play piano in the band [The Nomads]({% link nomads.md %}) (an Indonesian band, not the Swedish band).
 - [Entertainment]({% link entertain.html %})
