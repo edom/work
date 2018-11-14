@@ -5,6 +5,8 @@ date: 2017-07-02 16:00:00 +0700
 mathjax: yes
 ---
 
+* Logic
+
 - Let's study a *propositional calculus*, a formal language.
     - It's important because we're going to build other formal languages on it.
     - A "calculus" is a set of rules.
@@ -60,15 +62,15 @@ we can move on to a *predicate calculus*.
     - The non-logical symbols of a predicate calculus is a set of relation symbols;
     each relation symbol looks like \\( A^n \\) where \\( n \\) is the symbol's *arity*;
     it is the number of arguments.
-        - For example, we can define a predicate calculus whose set of relation symbols is <span>\( \{ E^2 \} \)</span>.
-            - An example formula is then <span>\( E(x,y) \)</span>.
-            - An example sentence is then <span>\( \forall x ~ E(x,x) \)</span>.
+        - For example, we can define a predicate calculus whose set of relation symbols is \\( \{ E^2 \} \\).
+            - An example formula is then \\( E(x,y) \\).
+            - An example sentence is then \\( \forall x ~ E(x,x) \\).
     - We call a predicate calculus has order one iff the quantifiers can only take constant symbols.
     - To the formation rules, we add:
         1. if \\( \rho^n \\) is a relation symbol of arity \\( n \\),
         and \\( \alpha_1, \ldots, \alpha_n \\) are variables, then \\( (\rho^n \alpha_1 \ldots \alpha_n) \\) is a formula;
         1. if \\( \rho^0 \\) is a relation symbol of arity zero, then \\( \rho^0 \\) is a formula;
-        1. if \\( \alpha \\) is a formula and \\( \beta \\) is a formula, then <span>\( (\bbC \alpha \beta) \)</span> is a formula.
+        1. if \\( \alpha \\) is a formula and \\( \beta \\) is a formula, then \\( (\bbC \alpha \beta) \\) is a formula.
         1. if \\( v \\) is a variable, \\( Q \\) is a quantifier, and \\( F \\) is a formula, then \\( (Q v ~ F) \\) is a formula.
     - A *sentence* is something that can be given a truth value;
     in propositional calculus, it is a formula;
@@ -79,12 +81,12 @@ we can move on to a *predicate calculus*.
     that takes a sentence of that language and gives a *truth value*.
     For example, if we have a graph,
     then we may map every term \\( x \\) to a vertex \\( I(x) \\) of the graph,
-    and we may map the formula <span>\( R(x,y) \)</span>
-    <span>\( I(R(x,y)) \)</span>, that is whether \\( (I(x), I(y)) \\) is an edge of the graph.
+    and we may map the formula \\( R(x,y) \\)
+    \\( I(R(x,y)) \\), that is whether \\( (I(x), I(y)) \\) is an edge of the graph.
 
-<div>\begin{align*}
+\begin{align*}
 I(R(x,y)) = E(I(x),I(y))
-\end{align*}</div>
+\end{align*}
 
 - How many truth values are there?
     - It depends on the logic.
@@ -104,7 +106,7 @@ Now we formalize.
 Let \\( L \\) be a language,
 let \\( F \\) be the set of formulas of \\( L \\),
 and let \\( T \\) be the set of truth values of this interpretation.
-Let <span>\( T = (\{0,1\},\neg,\wedge,\vee) \)</span> be a *Boolean algebra*.
+Let \\( T = (\{0,1\},\neg,\wedge,\vee) \\) be a *Boolean algebra*.
 (???)
 
 An *interpretation* of a language \\( L \\)
@@ -114,12 +116,12 @@ This function must satisfy
 and \\( I((\bbC x y)) = I(x) \wedge I(y) \\),
 and \\( I((\bbD x y)) = I(x) \vee I(y) \\).
 
-For example, <span>\( \{ x, y \} \)</span> is a model of <span>\( x \)</span>.
+For example, \\( \{ x, y \} \\) is a model of \\( x \\).
 
-For example, <span>\( \{ x, y, (\bbC x y) \} \models (\bbC x y) \).
+For example, \\( \{ x, y, (\bbC x y) \} \models (\bbC x y) \).
 
-For example, <span>\( \{ (\bbC x y) \} \)</span> is *not* an interpretation of \\( L \\),
-because if <span>\( (\bbC x y) \)</span> is in \\(I\\),
+For example, \\( \{ (\bbC x y) \} \\) is *not* an interpretation of \\( L \\),
+because if \\( (\bbC x y) \\) is in \\(I\\),
 then both \\(x\\) and \\(y\\) must also be in \\(I\\).
 
 We say that \\( I \\) *models* \\( p \\) or \\( I \\) is a *model* of \\( P \\),
@@ -146,20 +148,20 @@ Given the formation rules of a language, we can
 
 This first-order language can describe itself,
 where \\( L(\alpha) \\) is true iff \\( \alpha \\) is a string that is a Latin small letter alone:
-<span>\begin{align*}
+\begin{align*}
 \forall \alpha : L(\alpha) &\implies W(\alpha)
 \\ \forall \alpha : \forall \beta : W(\alpha) &\implies W((N \alpha))
 \\ \forall \alpha : \forall \beta : W(\alpha) \wedge W(\beta) &\implies W((C \alpha \beta))
 \\ \forall \alpha : \forall \beta : W(\alpha) \wedge W(\beta) &\implies W((D \alpha \beta))
-\end{align*}</span>
+\end{align*}
 and that can also be written using sequent calculus notation
 with implicit universal quantification over free variables:
-<span>\begin{align*}
+\begin{align*}
 L(\alpha) &\vdash W(\alpha)
 \\ W(\alpha) &\vdash W((N \alpha))
 \\ W(\alpha), W(\beta) &\vdash W((C \alpha \beta))
 \\ W(\alpha), W(\beta) &\vdash W((D \alpha \beta))
-\end{align*}</span>
+\end{align*}
 
 - ["Propositional logic: models and proofs"](http://www3.cs.stonybrook.edu/~cram/cse505/Fall16/Lectures/proplogic.pdf),
 by C. R. Ramakrishnan, 2016
@@ -258,15 +260,15 @@ A key idea in logic is the separation between *form* and *meaning*.
 The validity of an argument depends only on its form?
 
 Every argument of this form (modus ponens) is valid:
-<div>\begin{align*}
+\begin{align*}
 p, ~ p \to q \vdash q
-\end{align*}</div>
+\end{align*}
 
 Abductive reasoning (physics?):
 
-<div>\begin{align*}
+\begin{align*}
 p, ~ q \vdash_? p \to q
-\end{align*}</div>
+\end{align*}
 
 In classical deductive logic, there is only one way to reach valid conclusion:
 by valid premises and valid argument.
@@ -277,9 +279,9 @@ There are three ways to arrive at an invalid conclusion:
 
 In logic, an interpretation assigns truth value to well-formed formulas.
 
-A system is *sound* iff every provable sentence is true: <span>\(A \vdash B \implies A \models B\)</span>.
+A system is *sound* iff every provable sentence is true: \\(A \vdash B \implies A \models B\\).
 
-A system is *complete* iff every true sentence is provable <span>\(A \models B \implies A \vdash B\)</span>.
+A system is *complete* iff every true sentence is provable \\(A \models B \implies A \vdash B\\).
 
 https://en.wikibooks.org/wiki/Formal_Logic/Predicate_Logic/Satisfaction
 
@@ -297,7 +299,7 @@ An _interpretation_ is a function that takes a term.
 
 Example interpretation:
 
-<div>\begin{align*}
+\begin{align*}
 I(a) &= 1
 \\
 I(b) &= 1
@@ -307,13 +309,13 @@ I(c) &= 0
 I((A \alpha \beta)) &= I(\alpha) \wedge I(\beta) = \min(I(\alpha),I(\beta))
 \\
 I((N \alpha)) &= \neg I(\alpha) = 1 - I(\alpha)
-\end{align*}</div>
+\end{align*}
 
 where \\(0\\) means "false" and \\(1\\) means "true".
 
 Applying the rules recursively to the example term gives
 
-<div>\begin{align*}
+\begin{align*}
 I((A(Aab)(Nc))) &= I((Aab)) \wedge I((Nc))
 \\ &= (I(a) \wedge I(b)) \wedge I((Nc))
 \\ &= (1 \wedge I(b)) \wedge I((Nc))
@@ -323,24 +325,24 @@ I((A(Aab)(Nc))) &= I((Aab)) \wedge I((Nc))
 \\ &= 1 \wedge \neg 0
 \\ &= 1 \wedge 1
 \\ &= 1.
-\end{align*}</div>
+\end{align*}
 
 ## Probability logic
 
 - First-order probability logic (FOPL) shares the same syntax as first-order logic (FOL), but different interpretation:
-    - FOL interpretation maps FOL wff to truth value <span>\( \{0,1\} \)</span>.
-    - FOPL interpretation maps FOL wff to probability <span>\( [0,1] \)</span>.
+    - FOL interpretation maps FOL wff to truth value \\( \{0,1\} \\).
+    - FOPL interpretation maps FOL wff to probability \\( [0,1] \\).
 
 - Boolean algebra is a special case of fuzzy logic?
     - Replace \\(\\{0,1\\}\\) (the set of Boolean values) with \\([0,1]\\) (the set of real numbers in the unit line).
     - [WP:Boolean algebra](https://en.wikipedia.org/wiki/Boolean_algebra)
     - [WP:Fuzzy logic](https://en.wikipedia.org/wiki/Fuzzy_logic)
 
-<div>\begin{align*}
+\begin{align*}
 t(p \wedge q) &= \min(t(p), t(q))
 \\ t(p \vee q) &= \max(t(p), t(q))
 \\ t(\neg p) &= 1 - t(p)
-\end{align*}</div>
+\end{align*}
 
 - Fuzzy logic is a special case of probability space?
     - [WP:probability space](https://en.wikipedia.org/wiki/Probability_space).
@@ -348,22 +350,22 @@ t(p \wedge q) &= \min(t(p), t(q))
 
 Classical logic:
 
-<div>\begin{align*}
+\begin{align*}
 t(p \to q) &= t(\neg p \vee q) = \max(1 - t(p), t(q))
-\end{align*}</div>
+\end{align*}
 
 Bayesian:
 
-<div>\begin{align*}
+\begin{align*}
 t(p \to q) &= t(q|p) = \frac{t(q \wedge p)}{t(p)}
-\end{align*}</div>
+\end{align*}
 
 Induction:
 
-<div>\begin{align*}
+\begin{align*}
 \exists a (p(a) \wedge q(a)) \vdash_i \forall x (p(x) \wedge q(x))
 \\
 T(p) \subseteq T(q) \vdash_i \forall x (p(x) \implies q(x))
 \\
 T(p) = \{ x ~|~ p(x) \}
-\end{align*}</div>
+\end{align*}
