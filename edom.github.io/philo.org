@@ -301,7 +301,23 @@ An eye is a physical sense that enables the brain to probe the space of bodies.
 A mind is an ideal sense that enables the brain to probe the space of ideas.
 ** Formal logic, interpretation
 An interpretation is a mapping from syntax to semantics (meaning).
-* TODO Logic?
+* TODO Formal logic
+** Introduction to formal logic
+\begin{align*}
+\text{formal language} &= \text{alphabet} + \text{grammar}
+\\
+\text{formal system} &= \text{formal language} + \text{axioms} + \text{inference rules}
+\\
+\text{logical system} &= \text{formal system} + \text{semantics}
+\end{align*}
+
+"A theory consists of an axiomatic system and all its derived theorems."
+https://en.wikipedia.org/wiki/Axiomatic_system
+
+An interpretation models a sentence [Hodges SEP archive fall 2018 "Model theory"].
+
+Sources:
+- https://en.wikipedia.org/wiki/Formal_system
 ** Mess 1
 - Let's study a /propositional calculus/, a formal language.
 
@@ -712,6 +728,7 @@ T(p) \subseteq T(q) \vdash_i \forall x (p(x) \implies q(x))
 \\
 T(p) = \{ x ~|~ p(x) \}
 \end{align*}
+
 * Cause, causality, implication, and probability
 ** Cause
 "C /causes/ E" means:
@@ -901,6 +918,8 @@ The English word "model" comes from Latin "modellus" that is diminutive of "modu
 The Latin "modus" means "measure", and "modulus" is small "modus", and "modellus" is small "modulus";
 thus "modellus" should mean "a small small measure".
 
+The "model" in "bone remodeling" and "kitchen remodeling" means reshaping, reformation, renewal, renovation, replacement.
+
 Sources:
 - Dictionaries and thesauruses
   - Oxford English Dictionary: "model" comes from "Late 16th century (denoting a set of plans of a building) [...]".
@@ -1081,6 +1100,17 @@ Our thoughts of ourselves model ourselves.
 Consider X = the set of all white cars and Y = the set of all cars.
 Obviously X is a subset of Y.
 X models Y.
+*** TODO Modeling (approximation) by truncation
+*** TODO Modeling by formula truncation
+We truncate \( (p \wedge q) \to r \) to \( p \to r \), but not to \( p \), and not to \( r \).
+We truncate \( p \wedge q \) to \( p \).
+We truncate \( p \vee q \) to \( q \).
+- \( M \) models \( M \wedge F \).
+- \( M \) models \( M \vee F \).
+- If \( M \) models \( R \), then \( M \to C \) models \( R \to C \).
+*** TODO Modeling by series truncation
+This requires that the series converge.
+
 ** Fundamental learning by falsifying simplifying assumptions
 We learn something fundamental by testing ("torturing") our models at their limits to break them.
 We can find out a model's simplifying assumptions by pushing it to failure.
@@ -1255,7 +1285,7 @@ Here we try to understand complexity from its etymology.
 The following etymology is according to the Wiktionary entries on [[https://en.wiktionary.org/wiki/simple#Etymology][simple]], [[https://en.wiktionary.org/wiki/complex#Etymology][complex]], [[https://en.wiktionary.org/wiki/plico#Etymology_2][plico]], [[https://en.wiktionary.org/wiki/plecto#Etymology_1][plecto]], [[https://en.wiktionary.org/wiki/complicate#Etymology][complicate]], [[https://en.wiktionary.org/wiki/complect#Etymology][complect]].
 
 "Simple" comes from Latin "simplex" (one-fold), from "sim-" (same) and "plicare" (to fold, to bend),
-comparable with "uniplex" (one-fold), "duplex" (two-fold), "triplex" (three-fold), "quadruplex" (four-fold), and so on.
+comparable with "multiple" (many-fold), "uniplex" (one-fold), "duplex" (two-fold), "triplex" (three-fold), and so on.
 "Complex" comes from Latin "com-" (together) and "plectere" (to weave, to braid, to twist), comparable with "complect", "complicate".
 "Plicare" and "plectere" both come from a Proto-Indo-European word meaning "to fold, to weave".
 (I omit this PIE word because I don't know how to type it in XeLaTeX; copying doesn't work.)
@@ -1271,7 +1301,7 @@ The /complexity/ of the resulting shape is the number of folds, that is how many
 The shape with zero complexity is the original sheet of paper before any folding.
 
 A shape's complexity is unique and irreducible.
-There is always an \(n\)-fold shape that can't be made by folding less than \(n\) times.
+An \(n\)-fold shape can only be made by folding exactly \(n\) times, no less and no more, if we assume that papers don't crease when folded.
 
 A fold affects all folds after it.
 The folding order matters.
@@ -1289,22 +1319,6 @@ Unfolding /simplifies/ the shape.
 We can /simplify/ a shape by removing its last folds.
 Suppose that a shape is a folding sequence (a sequence of folds).
 Then shape X is a /simplification/ of shape Y iff the folding sequence X begins (is a prefix of) the folding sequence Y.
-* Formal logic
-\begin{align*}
-\text{formal language} &= \text{alphabet} + \text{grammar}
-\\
-\text{formal system} &= \text{formal language} + \text{axioms} + \text{inference rules}
-\\
-\text{logical system} &= \text{formal system} + \text{semantics}
-\end{align*}
-
-"A theory consists of an axiomatic system and all its derived theorems."
-https://en.wikipedia.org/wiki/Axiomatic_system
-
-An interpretation models a sentence [Hodges SEP archive fall 2018 "Model theory"].
-
-Sources:
-- https://en.wikipedia.org/wiki/Formal_system
 * Computer science
 ** Tools, usage, and machine
 Remember that we defined /self/ as everything that we control.
@@ -2450,8 +2464,6 @@ People often conflate /fact/ and /judgment/.
 Example:
 - Fact: "I don't understand this piece of math."
 - Judgment: "I'm bad at math."
-** List of unsolved problems in philosophy
-https://en.wikipedia.org/wiki/List_of_unsolved_problems_in_philosophy
 * Implication (do not read; conversion errors)
 <2017-10-21T15:30:00+0700>
 
@@ -3110,3 +3122,12 @@ Axioms of probabilistic propositional calculus?
 - What is $t(\forall x \in A, p(x))$? It is $\Pr (x \in A \to p(x))$.
 - The truth value function takes a logical /sentence/ (it cannot contain any free variables) and outputs a real number.
 - The statement "every swan is white" is not entirely wrong.
+* Applied philosophy
+** Most debates are definition problems
+Communication requires that everyone use the same definitions.
+* Philosophy
+** Contemporary traditional philosophers
+- http://steve-patterson.com/
+  - from https://zakslayback.com/this-philosopher-says-you-dont-need-a-phd-to-be-a-philosopher/
+** List of unsolved problems in philosophy
+- https://en.wikipedia.org/wiki/List_of_unsolved_problems_in_philosophy

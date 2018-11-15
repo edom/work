@@ -6838,5 +6838,37 @@ Field, method, and variable name: =my_method_name=
 Maintainability is done by limiting ugliness inside a class.
 
 It is possible to write maintainable Java code. It will only be a bit more verbose.
+* Modeling a web application?
+** Picking a modeling language
+I have narrowed down:
+- a relational language such as Prolog, Kanren, Mercury
+- a functional language such as Haskell, Idris, Ocaml, ML
+- TypeScript, Racket, Scheme, Lisp, Lua
+
+There are too many choices.
+What is the /semantics/?
+What is the /essence/?
+- https://en.wikipedia.org/wiki/Modeling_language
+
+What is AsmL?
+https://cs.wmich.edu/~OODA/translate.html
+** Example of modeling web application
+What do we think a web application is?
+
+What do users think?
+What do users care?
+What are the users' mental model?
+How can we formalize the users' mental model, and use that formal model to develop an application with less effort?
+
+Users think of an app as a /tool/, like a complicated hammer:
+- What was it originally invented for? What is it supposed to do? What is it usually used for? (Drive nails into wall)
+- How do I use it? (Grip the hammer, and hit the nail)
+- What can I use it for? (Cracking this clam open? Destroying this stuff? Killing a house intruder? Euthanizing a dying dog?)
+
+An application (a web application) maps a HTTP request to a HTTP response.
+
+The formula =application__sql_table(A,T)= means that application A uses SQL table T.
+
+The formula =application__page(A,P)= means the application A serves page P.
 * Bibliography
 bibliography:default
