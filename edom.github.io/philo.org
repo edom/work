@@ -2117,7 +2117,7 @@ But there are stories of some people who can corroborate their past lives?
 ***** All these articles are behind fucking paywalls. Who the hell pays $40 to read philosophers fuck around with language?
 - 1987 article "Are Intentions Self-Referential?" https://www.jstor.org/stable/4319923?seq=1
 - 2000 article "The Self-referentiality of Intentions" https://link.springer.com/article/10.1023%2FA%3A1018336525240
-* What?
+* Things that I'm not sure I care
 ** Objective reality
 *** My inability to manipulate everything implies the existence of reality outside my mind
 What is wrong with this argument?
@@ -2464,6 +2464,46 @@ People often conflate /fact/ and /judgment/.
 Example:
 - Fact: "I don't understand this piece of math."
 - Judgment: "I'm bad at math."
+** Sex and gender
+*** What is a male? What is a female? What really makes a male a male and a female a female?
+Is it the sex organ?
+Is it the hormones?
+It is the appearance?
+
+Male and female are objective sexual classifications.
+Man and woman are subjective gender classifications.
+If sex and gender are orthogonal, then what is a "male woman"!?
+
+- https://en.wikipedia.org/wiki/Trans_woman
+  - A trans woman "is a woman who was assigned male at birth".
+    The keywords are /assigned/ and /at birth/.
+
+People in Stone Age may assume that someone's sex is determined at birth and doesn't change.
+Back then, there were no sex reassignment surgeries.
+
+Social-culture-language aspects:
+Why is "girly man" an insult?
+** The problem with libertarianism: what about children?
+Thesis: We should let people do whatever they do as long as they don't harm others.
+
+Problems:
+- Why shouldn't parent let children do what they want as long as they don't harm others?
+  Why do we prevent children from harming themselves?
+  Libertarians are forced to conclude that children aren't people.
+  This conclusion is not inherently bad.
+- Why should we vaccinate children?
+- https://www.quora.com/Libertarianism-When-do-children-own-themselves-if-at-all
+** Philosophy
+*** Summary
+- https://www.reddit.com/r/askphilosophy/comments/1pdczz/philosophy_tldr_challenge/
+*** Contemporary traditional philosophers
+- http://steve-patterson.com/
+  - from https://zakslayback.com/this-philosopher-says-you-dont-need-a-phd-to-be-a-philosopher/
+*** List of unsolved problems in philosophy
+- https://en.wikipedia.org/wiki/List_of_unsolved_problems_in_philosophy
+** Applied philosophy
+*** Most debates are definition problems
+Communication requires that everyone use the same definitions.
 * Implication (do not read; conversion errors)
 <2017-10-21T15:30:00+0700>
 
@@ -3122,12 +3162,169 @@ Axioms of probabilistic propositional calculus?
 - What is $t(\forall x \in A, p(x))$? It is $\Pr (x \in A \to p(x))$.
 - The truth value function takes a logical /sentence/ (it cannot contain any free variables) and outputs a real number.
 - The statement "every swan is white" is not entirely wrong.
-* Applied philosophy
-** Most debates are definition problems
-Communication requires that everyone use the same definitions.
-* Philosophy
-** Contemporary traditional philosophers
-- http://steve-patterson.com/
-  - from https://zakslayback.com/this-philosopher-says-you-dont-need-a-phd-to-be-a-philosopher/
-** List of unsolved problems in philosophy
-- https://en.wikipedia.org/wiki/List_of_unsolved_problems_in_philosophy
+* Finitism: Computer science gives back to philosophy of mathematics
+** Unfriendliness of the derivatives of the word "finitism"
+The words "finitistic" and "finitistically" are unpleasant to write and read.
+
+The word "finitely" is already taken to mean something else.
+
+"According to finitism" is somewhat long.
+** Finitism, geometry, Bresenham's line algorithm, contiguousness, neighbors, and distance
+Idea: Define the distance between two points as the number of points filled by Bresenham's line algorithm.
+
+This is an exciting way for computer graphics to give back to the philosophy of mathematics!
+Idea: Finitist geometry is computer graphics with the assumption that the computer can get as big and powerful as we want.
+
+What is "distance" in two-dimensional finitist geometry?
+
+Let \( h = h_x h_y \) be a unit area.
+
+The area of line is \( n h_x h_y \) where \(n\) is the number of pixels in that line.
+
+The finitist Pythagorean theorem:
+
+\( (n_x h_x)^2 + (n_y h_y)^2 = n^2 \cdot (h_x^2 + h_y^2) + ??? \)
+
+A discrete line that "best approximates" the ideal Platonic-infinitist's line?
+
+Bresenham's line algorithm?
+
+https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
+
+A line is a "contiguous" set of points.
+
+Two points are "contiguous" iff they are each other's "neighbors".
+
+4-neighbor rule or 8-neighbor rule?
+
+The distance between point A and point B is the square root of the number of pixels in the line from A to B?
+
+How do we measure the units of the Universe?
+Rounding errors?
+Quantization artifacts, like JPEG artifacts?
+
+What can finitism say about general relativity and quantum mechanics?
+
+Things to read: https://plato.stanford.edu/entries/geometry-finitism/
+*** Finitism and Newtonian mechanics?
+How does calculus finitization affect Newtonian physics?
+
+What does a vector become?
+** Real analysis
+Every definition here assumes that the /unit/.
+It is a global parameter.
+It is usually written \(h\).
+
+Assuming unit \(h\), we define the "derivative of \(f : \Real \to \Real\) at \(x\)", written \( (Df)(x) \), as \( [f(x+h)-f(x)]/h \).
+
+Higher-order derivatives are a straightforward matter of substitution:
+\begin{align*}
+D^2f = D(Df) &= D\left(x \mapsto \frac{f(x+h)-f(x)}{h}\right)
+\\
+&= \frac{\frac{f(x+h+h)-f(x+h)}{h} - \frac{f(x+h)-f(x)}{h}}{h}
+\\
+&= \frac{f(x+2h) - 2 \cdot f(x+h) + f(x)}{h^2}
+\end{align*}
+
+Pascal's triangle with alternating signs.
+Similar to polynomial coefficients of \((a-b)^n\).
+*** Solving a differential equation by detouring to its analogous difference equation
+Here we use finitism, and arrive at a result consistent with infinitism!
+This is only a motivating example.
+This does /not/ prove that finitism subsumes infinitism.
+
+We consider the equation \( y = Dy \).
+
+We expand the equation according to finitism:
+\begin{align*}
+y(x) &= (Dy)(x)
+\\ y(x) &= \frac{y(x+h)-y(x)}{h}
+\\ h \cdot y(x) &= y(x+h) - y(x)
+\\ (1 + h) \cdot y(x) &= y(x+h)
+\\ 1 + h &= \frac{y(x+h)}{y(x)}
+\end{align*}
+
+Now we're going to do some trick with these substitutions:
+substitute \(x\) with \(hu\), and substitute \(z(u) = y(hu)\).
+
+We transform the above into a /recurrence relation/:
+\begin{align*}
+(1 + h) \cdot y(x) &= y(x+h)
+\\ (1 + h) \cdot y(hu) &= y(hu+h)
+\\ (1 + h) \cdot y(hu) &= y(h\cdot(u+1))
+\\ (1 + h) \cdot z(u) &= z(u+1)
+\\ 0 &= z(u + 1) - (1 + h) \cdot z(u)
+\end{align*}
+
+A possible solution is \( z(u) = (1+h)^u \).
+
+Now the second part of the trick:
+do the same substitutions:
+substitute back \( x = hu \) and \( z(u) = y(hu) \).
+
+We get:
+\begin{align*}
+z(u) &= (1+h)^u
+\\ y(hu) &= (1+h)^u
+\\ y(x) &= (1+h)^{x/h}
+\end{align*}
+
+Now this is where finitism and infinitism "coincide":
+\[
+\lim_{h \to 0} (1+h)^{x/h} = e^x
+\]
+
+This seems promising!
+
+What does the Taylor series become?
+
+What is the relationship between finitism and non-standard analysis?
+**** Bias toward the positive side?
+A problem is that \( Df \) is biased toward the positive side.
+We could try a symmetric definition such as \( (Df)(x) = [f(x+h)-f(x-h)]/(2h) \), but this doesn't use \(f(x)\), but why is this a problem?
+** Probability theory
+A /sample space/ is a set.
+
+An /event/ is a subset of a sample space.
+
+A /probability mass function/ \( p : \Omega \to \Real \) maps each sample to a probability
+such that the probabilities add up to one: \( \sum_{x \in \Omega} p(x) = 1 \).
+
+\( P(E) = \sum_{e \in E} p(e) \)
+
+\( P(\Omega) = 1 \)
+
+\( P(\emptyset) = 0 \)
+
+A /random variable/ is a function whose domain is the sample space.
+An \(R\)-valued random variable is a function \(\Omega \to R\).
+The codomain depends on your modeling.
+
+A /random process/ (a /stochastic process/) is a sequence of random variables.
+\( Y : \Nat \to (\Omega \to R) \).
+
+A /martingale/ is a random process [...]
+- https://en.wikipedia.org/wiki/Martingale_(probability_theory)
+
+A /random walk/ [...]
+
+A /Wiener process/ [...]
+
+- https://en.wikipedia.org/wiki/Wiener_process#Wiener_process_as_a_limit_of_random_walk
+- https://en.wikipedia.org/wiki/Random_walk#Relation_to_Wiener_process
+  - "if you take a random walk with very small steps, you get an approximation to a Wiener process"
+- https://en.wikipedia.org/wiki/Scaling_limit
+
+What does stochastic calculus become?
+* Correspondences?
+** Steve Patterson
+*** <2018-11-17> compression
+- http://steve-patterson.com/idea-extreme-data-compression/
+- https://www.yours.org/content/an-idea-for-extreme-data-compression-b63cdbae7a51
+
+The algorithm you're looking may be similar to Huffman coding.
+"a Huffman code is a particular type of *optimal prefix code* that is commonly used for lossless data compression" (emphasis mine)
+https://en.wikipedia.org/wiki/Huffman_coding
+
+Arithmetic coding may even compress better, but it is patent-encumbered.
+https://en.wikipedia.org/wiki/Arithmetic_coding
