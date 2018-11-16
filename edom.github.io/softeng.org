@@ -266,6 +266,8 @@ Every software can, in principle, be described by a first-order-logic formula th
 *** What is complexity?
 - [[https://fs.blog/2014/03/what-is-complexity/][Farnam Street blog post]]
 - [[http://www.hartford.edu/complexity/whats-complexity.aspx][What Is 'Complexity'? | University of Hartford]]
+- Measuring software complexity by hits-of-code instead of lines-of-code
+  https://www.yegor256.com/2014/11/14/hits-of-code.html
 ** Unpopular opinions
 - https://www.quora.com/What-unpopular-opinions-do-you-have-about-software-development
 ** TODO Measuring developer productivity
@@ -4609,6 +4611,8 @@ It may be ugly, but /it works/.
   If the new programmers can handle it,
   it's maintainable.
 - The only way to ensure software maintainability is periodic rotation of programmers?
+  - Yegor agrees: we should rotate programmers, no less frequent than every year, for software maintainability
+    https://www.yegor256.com/2015/12/29/turnover-is-good-for-maintainability.html
 * Functional programming research
   :PROPERTIES:
   :CUSTOM_ID: functional-programming-research
@@ -6866,6 +6870,9 @@ Users think of an app as a /tool/, like a complicated hammer:
 - What can I use it for? (Cracking this clam open? Destroying this stuff? Killing a house intruder? Euthanizing a dying dog?)
 
 An application (a web application) maps a HTTP request to a HTTP response.
+
+We use a Prolog atom to /refer/ to an /entity/ (something that is unique, has an identity, is identical only to itself, is not identical to any other entity).
+Thus a Prolog atom is similar to an English /word/, and the Prolog knowledge base /gives meaning/ to that atom.
 
 The formula =application__sql_table(A,T)= means that application A uses SQL table T.
 
