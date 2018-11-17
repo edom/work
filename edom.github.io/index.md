@@ -79,6 +79,7 @@ We should join forces to reach our shared goals.
     - [Netflix culture](https://jobs.netflix.com/culture)
 - Understanding nature
     - [Philosophy]({% link philo.html %})
+    - [Finitism]({% link finite.html %})
     - [Justifying physics]({% link natkno.html %})
 - Improving society
     - [Political dreams]({% link politics.html %})

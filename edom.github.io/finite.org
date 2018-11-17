@@ -1,0 +1,331 @@
+#+TITLE: Finitism
+#+DATE: 2018-11-17 22:00 +0700
+#+PERMALINK: /finite.html
+#+MATHJAX: yes
+#+OPTIONS: toc:nil
+#+TOC: headlines 1
+#+TOC: headlines 2
+#+TOC: headlines 3
+* Introduction
+Computer science can give back to philosophy of mathematics, because computers are inherently finite.
+
+The words "finitistic" and "finitistically" are unpleasant to write and read.
+
+The word "finitely" is already taken to mean something else.
+
+The phrase "according to finitism" is somewhat long.
+* Set theory
+** The set of all natural numbers is not finite (does not exist, if we reject the axiom of infinity).
+Here I argue that fixed-point theory suggests that \(\Nat\) should not exist.
+
+Let \(f\) be a function.
+
+A /fixed point/ of \(f\) is an \(x\) such that \(x=f(x)\).
+
+It is tautological that if \(x \neq f(x)\) for all applicable \(x\),
+then \(f\) has no fixed points, that is, there is no \(x\) such that \(x=f(x)\).
+We readily agree with that if \(x\) is a natural number, and it shouldn't be any different if \(x\) is a set.
+
+Suppose we encode natural numbers as [[https://en.wikipedia.org/wiki/Natural_number#Von_Neumann_ordinals][von Neumann ordinals]] (VNOs).
+Let \(S\) be the /VNO successor function/ where \(S(X) = \{X\} \cup X\).
+The idea of the successor of \(X\) is to enlarge \(X\) with something that is surely not already in \(X\).
+(Can we be sure that \(X \not\in X\)? What does this have to do with [[https://en.wikipedia.org/wiki/Russell%27s_paradox][Russell's paradox]]?)
+Let 0 be represented by \(\emptyset\).
+Thus 1 is represented by \(S(\emptyset) = \{\emptyset\}\), 2 is represented by \(\{\{\emptyset\}, \emptyset\}\), and so on.
+
+The set \(\Nat\) would have to satisfy the equation \(\Nat = S(\Nat)\).
+
+My argument ends here.
+
+If we embraced infinitism, we could declare that \(\Nat\) is the least fixed point of \(S\).
+
+Now that the set \(\Nat\) doesn't exist, what do we mean by the notation \(n \in \Nat\)?
+We don't want to invent a new notation, so we invent a new reading:
+the phrase \( n \in \Nat \) is to be read as "\(n\) is a natural number", not "\(n\) is an element of the set of natural numbers".
+The meaning of the phrase \(n \in \Nat\) is inductively defined by the base case \(0 \in \Nat\) and inductive case \(n \in \Nat \rightarrow (n+1) \in \Nat\).
+
+We don't need the axiom of infinity if we use predicates directly and don't use sets at all.
+We can read \(\in\) as a binary predicate, and define \(x \in S\) to read "an \(x\) that satisfies the predicate \(S\) (that is, an \(x\) such that \(S(x)\) is true)".
+We can define these satisfiers using induction (inductive data types in functional programming).
+* Geometry
+** Other people's ideas
+This is a summary of https://plato.stanford.edu/entries/geometry-finitism/.
+
+A finitist geometry must overcome several problems:
+Weyl's distance function problem, the isotropy problem, Fritz no-go theorem, the identity problem, and what else?
+
+Peter Forrest (1995) formulated a family of discrete spaces \(E_{n,m}\) where \(n\) is dimension and \(m\) is adjacency criterion.
+A two-dimensional point is modeled by a pair of integers \((i,j)\).
+Two points \((i,j)\) and \((i',j')\) are adjacent iff \(0 < (i'-i)^2 + (j'-j)^2 \le m\).
+"Once adjacency has been stipulated, a distance function can be easily derived".
+As \(m\) grows, the distance function approaches Euclidean distance.
+
+If geometry is discrete, then shouldn't spacetime be anisotropic?
+How do we test spacetime anisotropy?
+- 2011 "Testing for Anisotropy of Space via an Extension of Special Relativity" https://arxiv.org/abs/1111.4423
+
+Hodons.
+** What is fundamental in geometry?
+Point? Line? Adjacency? Distance?
+
+For every point P, there are \(n\) points \(Q_1,\ldots,Q_n\) such that \(d(P,Q_k) = 1\).
+** Synthetic finite geometry via discrete topology and graph theory
+We assume a global parameter \(n\) (neighborhood granularity).
+
+A /point/ has \(n\) neighbors.
+A two-dimensional point is like the surface of a floor tile, but it doesn't have to have four sides;
+the geometry's number of dimensions doesn't have to be related with \(n\).
+Because there are finite directions, angles are quantized.
+
+Don't imagine tiles.
+Imagine a graph.
+
+There are \(n\) possible /directions/ (/unit vectors/) from a point to one of its neighbors.
+For example, we can quantize two-dimensional Euclidean geometry with 100 unit vectors (akin to dividing a circle into 100 sectors).
+
+Every direction has a /reverse/.
+Thus \(n\) is even.
+
+The vector from point A to point B is the sum of vectors in the shortest path from A to B.
+
+If \( X + \vec{v} = Y \) then \( X = Y + (-\vec{v}) \).
+If \(Y\) is the \(\vec{v}\)-ward neighbor of \(X\), then \(X\) is the reverse-\(\vec{v}\)-ward neighbor of \(Y\).
+
+A /line/ is a path in the graph.
+
+A /straight line/ is the shortest path between two points.
+
+We want triangle inequality: \(d(A,B) + d(B,C) \ge d(A,C)\).
+
+Euclidean geometry is limit of space-filling curve?
+https://en.wikipedia.org/wiki/Space-filling_curve
+** What if volumes/lines, not points, were fundamental?
+A point is line that is shortened until it can't go any shorter.
+
+What is a line?
+What happens if we zoom very close to a line?
+** Lattice geometry?
+Two-dimensional geometry.
+
+Pick one point \(O\) (origin) and two vectors \(\vec{e}_1\) and \(\vec{e}_2\) (unit axis vectors).
+Assume that those vectors are perpendicular (orthogonal) to each other.
+
+A /vector/ \(\vec{v}\) is \(v_1 \vec{e}_1 + v_2 \vec{e}_2\) where \(v_1\) is an /integer/ and \(v_2\) is an /integer/.
+
+Too formal?
+2009, "Strict Finitism and the Logic of Mathematical Applications"
+http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.603.1574&rep=rep1&type=pdf
+** Bresenham's line algorithm, contiguousness, neighbors, and distance
+Idea: Define the distance between two points as the number of points filled by Bresenham's line algorithm.
+
+This is an exciting way for computer graphics to give back to the philosophy of mathematics!
+Idea: Finitist geometry is computer graphics with the assumption that the computer can get as big and powerful as we want.
+
+What is "distance" in two-dimensional finitist geometry?
+
+Let \( h = h_x h_y \) be a unit area.
+
+The area of line is \( n h_x h_y \) where \(n\) is the number of pixels in that line.
+
+The finitist Pythagorean theorem:
+
+\( (n_x h_x)^2 + (n_y h_y)^2 = n^2 \cdot (h_x^2 + h_y^2) + ??? \)
+
+A discrete line that "best approximates" the ideal Platonic-infinitist's line?
+
+Bresenham's line algorithm?
+
+https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
+
+A line is a "contiguous" set of points.
+
+Two points are "contiguous" iff they are each other's "neighbors".
+
+4-neighbor rule or 8-neighbor rule?
+
+The distance between point A and point B is the square root of the number of pixels in the line from A to B?
+
+How do we measure the units of the Universe?
+Rounding errors?
+Quantization artifacts, like JPEG artifacts?
+
+What can finitism say about general relativity and quantum mechanics?
+*** Finitism and Newtonian mechanics collisions?
+How does calculus finitization affect Newtonian physics?
+
+What does a vector become?
+
+- http://thep.housing.rug.nl/sites/default/files/users/user12/174_How_Some_Infinities_Cause_Problems_in_Classical_Physical_Theories.pdf
+  - "Pérez Laraudogoitia’s infinitistic model of colliding balls"
+* Real analysis
+Every definition here assumes that the /unit/.
+It is a global parameter.
+It is usually written \(h\).
+
+Assuming unit \(h\), we define the "derivative of \(f : \Real \to \Real\) at \(x\)", written \( (Df)(x) \), as \( [f(x+h)-f(x)]/h \).
+
+Higher-order derivatives are a straightforward matter of substitution:
+\begin{align*}
+D^2f = D(Df) &= D\left(x \mapsto \frac{f(x+h)-f(x)}{h}\right)
+\\
+&= \frac{\frac{f(x+h+h)-f(x+h)}{h} - \frac{f(x+h)-f(x)}{h}}{h}
+\\
+&= \frac{f(x+2h) - 2 \cdot f(x+h) + f(x)}{h^2}
+\end{align*}
+
+Pascal's triangle with alternating signs.
+Similar to polynomial coefficients of \((a-b)^n\).
+** Solving a differential equation by detouring to its analogous difference equation
+Here we use finitism, and arrive at a result consistent with infinitism!
+This is only a motivating example.
+This does /not/ prove that finitism subsumes infinitism.
+
+We consider the equation \( y = Dy \).
+
+We expand the equation according to finitism:
+\begin{align*}
+y(x) &= (Dy)(x)
+\\ y(x) &= \frac{y(x+h)-y(x)}{h}
+\\ h \cdot y(x) &= y(x+h) - y(x)
+\\ (1 + h) \cdot y(x) &= y(x+h)
+\\ 1 + h &= \frac{y(x+h)}{y(x)}
+\end{align*}
+
+Now we're going to do some trick with these substitutions:
+substitute \(x\) with \(hu\), and substitute \(z(u) = y(hu)\).
+
+We transform the above into a /recurrence relation/:
+\begin{align*}
+(1 + h) \cdot y(x) &= y(x+h)
+\\ (1 + h) \cdot y(hu) &= y(hu+h)
+\\ (1 + h) \cdot y(hu) &= y(h\cdot(u+1))
+\\ (1 + h) \cdot z(u) &= z(u+1)
+\\ 0 &= z(u + 1) - (1 + h) \cdot z(u)
+\end{align*}
+
+A possible solution is \( z(u) = (1+h)^u \).
+
+Now the second part of the trick:
+do the same substitutions:
+substitute back \( x = hu \) and \( z(u) = y(hu) \).
+
+We get:
+\begin{align*}
+z(u) &= (1+h)^u
+\\ y(hu) &= (1+h)^u
+\\ y(x) &= (1+h)^{x/h}
+\end{align*}
+
+Now this is where finitism and infinitism "coincide":
+\[
+\lim_{h \to 0} (1+h)^{x/h} = e^x
+\]
+
+This seems promising!
+
+What does the Taylor series become?
+
+What is the relationship between finitism and non-standard analysis?
+*** Bias toward the positive side?
+A problem is that \( Df \) is biased toward the positive side.
+We could try a symmetric definition such as \( (Df)(x) = [f(x+h)-f(x-h)]/(2h) \), but this doesn't use \(f(x)\), but why is this a problem?
+* Probability theory
+** Some definitions
+A /sample space/ is a set.
+
+An /event/ is a subset of a sample space.
+
+A /probability mass function/ \( p : \Omega \to \Real \) maps each sample to a probability
+such that the probabilities add up to one: \( \sum_{x \in \Omega} p(x) = 1 \).
+
+The /probability function/ \(P : 2^\Omega \to \Real \) satisfies
+
+\( P(E) = \sum_{e \in E} p(e) \)
+
+\( P(\Omega) = 1 \)
+
+\( P(\emptyset) = 0 \)
+
+Conditional probability:
+we define the notation \( P(A|B) := P(A \cap B) / P(B) \).
+
+A /random variable/ is a function whose domain is the sample space.
+An \(R\)-valued random variable is a function \(\Omega \to R\).
+The codomain depends on your modeling.
+
+A random variable can model a player's /profit/ of an outcome of a gambling round.
+Example: a game of fair coin toss:
+\( \Omega = \{ L, W \} \) where \( \{L\} \) represents "lose" and \( \{W\} \) represents "win".
+\( p(L) = p(R) = 1/2 \).
+\( X(L) = -1, X(W) = 1 \).
+** Random variable probability notation
+This is widely used but is rarely explained.
+
+Remember that a /random variable/ is a /function/, not a variable.
+
+Suppose that we are discussing about some random variables.
+
+Let \(\phi\) be a logic formula containing logic variables with the same "name" as some random variables in the context of our discussion.
+Some example formulas are \(X = 0\) and \(2 X < 5\).
+These logic variables have the same name as our random variables, but these logic variables look like algebraic variables.
+
+Let \(\phi'(s)\) be \(\phi\) but with /every/ occurrence of /every logical variable/ \(X\) replaced with \(X(s)\) (the application of /random variable/ \(X\) to sample \(s\)).
+If the letter \(s\) is already used in \(\phi\), use another unused letter.
+
+We define this notation:
+\begin{align*}
+P(\phi) := P(\{ s ~|~ s \in \Omega, ~ \phi'(s) \})
+\end{align*}
+
+Here are some examples of that notation in action:
+\begin{align*}
+P(X \in S) &:= P(\{ s ~|~ s \in \Omega, ~ X(s) \in S \})
+\\ P(X = s) &:= P(\{ s ~|~ s \in \Omega, ~ X(s) = s \})
+\\ P(X < s) &:= P(\{ s ~|~ s \in \Omega, ~ X(s) < s \})
+\\ P(X^2 + X + 1 = 0) &:= P(\{ s ~|~ s \in \Omega, ~ [X(s)]^2 + X(s) + 1 = 0 \})
+\\ P(f(X) = 0) &:= P(\{ s ~|~ s \in \Omega, ~ f(X(s)) = 0 \})
+\\ P(e^X = 1) &:= P(\{ s ~|~ s \in \Omega, ~ e^{X(s)} = 1 \})
+\end{align*}
+
+The notation also works with many random variables at once:
+\begin{align*}
+P(X < Y) &:= P(\{ s ~|~ s \in \Omega, ~ X(s) < Y(s) \})
+\\ P(X + Y + Z = 0) &:= P(\{ s ~|~ s \in \Omega, ~ X(s) + Y(s) + Z(s) = 0 \})
+\end{align*}
+
+Note how the notation makes a random variable look like an algebraic variable;
+remember that a random variable is a function, not a variable.
+** Expected value
+Expected value of real-valued random variable:
+\( E(X) = \sum_{s \in \Omega} p(s) \cdot X(s) \).
+** Random walk
+A /random process/ (a /stochastic process/) is a sequence of random variables.
+\( Y : \Nat \to (\Omega \to R) \).
+
+A /martingale/ is a random process [...]
+- https://en.wikipedia.org/wiki/Martingale_(probability_theory)
+
+A /random walk/ [...]
+
+Understanding one-dimensional Brownian motion?
+
+"In 1906 Smoluchowski published a one-dimensional model to describe a particle undergoing Brownian motion."
+https://en.wikipedia.org/wiki/Brownian_motion
+
+Example: one-dimensional Brownian motion:
+we assume that at every time step, the particle of interest is hit by another particle:
+sample space \( \Omega = \{ L, R \} \),
+where \(\{L\}\) represents the event that the particle of interest is hit from the left,
+probability mass function \( p(L) = p(R) = 1/2 \),
+which means that a hit from the left and a hit from the right are equally likely;
+random variable \( X : \Omega \to \{ -1,+1 \} \) where \( X(L) = -1, X(R) = +1 \).
+
+A /Wiener process/ [...]
+
+- https://en.wikipedia.org/wiki/Wiener_process#Wiener_process_as_a_limit_of_random_walk
+- https://en.wikipedia.org/wiki/Random_walk#Relation_to_Wiener_process
+  - "if you take a random walk with very small steps, you get an approximation to a Wiener process"
+- https://en.wikipedia.org/wiki/Scaling_limit
+- https://en.wikipedia.org/wiki/Brownian_motion
+
+What does stochastic calculus become?
