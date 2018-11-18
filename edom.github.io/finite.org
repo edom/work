@@ -49,7 +49,23 @@ We can read \(\in\) as a binary predicate, and define \(x \in S\) to read "an \(
 We can define these satisfiers using induction (inductive data types in functional programming).
 * Geometry
 ** Other people's ideas
-This is a summary of https://plato.stanford.edu/entries/geometry-finitism/.
+Confusing names:
+[[https://en.wikipedia.org/wiki/Discrete_geometry][Discrete geometry]] is not finitist geometry.
+Discrete geometry is combinatorical geometry.
+But there is [[https://en.wikipedia.org/wiki/Digital_geometry][Digital geometry]] and [[https://en.wikipedia.org/wiki/Digital_topology][Digital topology]].
+
+- 2012, "A Universe Tiled with Points" http://www.rxiv.org/abs/1211.0154
+  - This tries to explain basic physics in finite geometry.
+- 2003, "Constraining the Topology of the Universe" https://arxiv.org/abs/astro-ph/0310233
+- 1998, "Measuring the topology of the universe" http://www.pnas.org/content/pnas/95/1/82.full.pdf
+- https://plato.stanford.edu/entries/spacetime-supertasks/
+  - Supertasks raise paradoxes.
+    Zeno's paradox is an example.
+  - "1.4 Classical mechanical supertasks"
+- 2002, "Axiomatic Discrete Geometry" http://www.cse.chalmers.se/~nad/publications/danielsson-msc.pdf
+  - "Hübler's axiomatic discrete geometry"
+
+TODO: Summarize Jean Paul Van Bendegem's "Finitism in geometry" https://plato.stanford.edu/entries/geometry-finitism/.
 
 A finitist geometry must overcome several problems:
 Weyl's distance function problem, the isotropy problem, Fritz no-go theorem, the identity problem, and what else?
@@ -65,31 +81,58 @@ How do we test spacetime anisotropy?
 - 2011 "Testing for Anisotropy of Space via an Extension of Special Relativity" https://arxiv.org/abs/1111.4423
 
 Hodons.
-** What is fundamental in geometry?
+** What is the essence of geometry? Which concepts are primitive?
 Point? Line? Adjacency? Distance?
 
-For every point P, there are \(n\) points \(Q_1,\ldots,Q_n\) such that \(d(P,Q_k) = 1\).
-** Synthetic finite geometry via discrete topology and graph theory
-We assume a global parameter \(n\) (neighborhood granularity).
+The Pythagorean theorem \( a^2 + b^2 = c^2 \) is not fundamental.
+It assumes flat Euclidean spaces.
+It doesn't work on spherical geometry.
+However, the spherical Pythagorean theorem does converge to the Pythagorean theorem as the sphere radius grows unbounded.
+
+https://en.wikipedia.org/wiki/Elliptic_geometry
+"The ph th fails in ell geom"
+
+A more fundamental law is the law of cosines.
+https://math.stackexchange.com/questions/1374058/why-does-the-pythagorean-theorem-have-its-simple-form-only-in-euclidean-geometry
+
+A more fundamental property of distance is the triangle inequality.
+The Pythagorean theorem is a special case of the triangle inequality.
+
+https://philpapers.org/rec/VANFIG
+
+https://mathoverflow.net/questions/23113/is-there-any-geometry-where-the-triangle-inquality-fails
+** Synthetic finite model of geometry via discrete topology, graph theory, and discrete rotation
+We assume these global parameters \(n\) (neighborhood granularity) and \(d\) (number of dimensions).
 
 A /point/ has \(n\) neighbors.
 A two-dimensional point is like the surface of a floor tile, but it doesn't have to have four sides;
 the geometry's number of dimensions doesn't have to be related with \(n\).
 Because there are finite directions, angles are quantized.
 
+The distance between a point to its neighbor is 1.
+For every point \(P\), there are \(n\) points \(Q_1,\ldots,Q_n\) such that \(d(P,Q_k) = 1\).
+
+Angle is distance in projective geometry.
+
+In three-dimensional geometry, is a point a zero-dimensional object or a three-dimensional object?
+In reality, a point has volume, although tiny.
+
+A /rotation/ is the mapping from \(v_0, \ldots, v_k\) to \(v_1, \ldots, v_k, v_0\).
+It is the shifting of the sequence of vectors in the same plane.
+
 Don't imagine tiles.
 Imagine a graph.
 
 There are \(n\) possible /directions/ (/unit vectors/) from a point to one of its neighbors.
-For example, we can quantize two-dimensional Euclidean geometry with 100 unit vectors (akin to dividing a circle into 100 sectors).
+For example, we can discretize two-dimensional Euclidean geometry with 100 unit vectors (similar to dividing a circle into 100 sectors).
+We can discretize three-dimensional Euclidean geometry with 1000 unit vectors (similar to cutting an orange into 1000 same-sized parts).
+
+The /vector from point A to point B/ is the sum of vectors in the shortest path from A to B.
 
 Every direction has a /reverse/.
-Thus \(n\) is even.
-
-The vector from point A to point B is the sum of vectors in the shortest path from A to B.
-
-If \( X + \vec{v} = Y \) then \( X = Y + (-\vec{v}) \).
-If \(Y\) is the \(\vec{v}\)-ward neighbor of \(X\), then \(X\) is the reverse-\(\vec{v}\)-ward neighbor of \(Y\).
+Thus \(n\) is divisible by \(2d\) where \(d\) is the /dimension/.
+If \( X + v = Y \) then \( X = Y + (-v) \).
+If \(Y\) is the \(v\)-ward neighbor of \(X\), then \(X\) is the reverse-\(v\)-ward neighbor of \(Y\).
 
 A /line/ is a path in the graph.
 
@@ -112,9 +155,17 @@ Assume that those vectors are perpendicular (orthogonal) to each other.
 
 A /vector/ \(\vec{v}\) is \(v_1 \vec{e}_1 + v_2 \vec{e}_2\) where \(v_1\) is an /integer/ and \(v_2\) is an /integer/.
 
+The result of /mirroring/ the direction \(v_i\) with respect to direction \(v_m\) is \(v_{m+(m-i)}\).
+
+The result of /rotating/ \(v_k\) by one unit angle is \(v_{k+1}\).
+
+Rotation, translation, symmetry, mirroring
+
 Too formal?
 2009, "Strict Finitism and the Logic of Mathematical Applications"
 http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.603.1574&rep=rep1&type=pdf
+
+That article finitizes Hilbert spaces?
 ** Bresenham's line algorithm, contiguousness, neighbors, and distance
 Idea: Define the distance between two points as the number of points filled by Bresenham's line algorithm.
 
@@ -157,6 +208,11 @@ What does a vector become?
 
 - http://thep.housing.rug.nl/sites/default/files/users/user12/174_How_Some_Infinities_Cause_Problems_in_Classical_Physical_Theories.pdf
   - "Pérez Laraudogoitia’s infinitistic model of colliding balls"
+** Hypothesis: A photon does not travel slower in medium.
+A photon does not travel slower in medium.
+A photon is /scattered/.
+A photon hits atoms.
+A photon travels /farther/, not slower, in medium.
 * Real analysis
 Every definition here assumes that the /unit/.
 It is a global parameter.
