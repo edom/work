@@ -84,7 +84,6 @@ We should join forces to reach our shared goals.
 - Improving society
     - [Social studies]({% link social.html %})
         - [Subsistence]({% link subsist.html %})
-        - [Defining marriage]({% link marry.html %})
     - Preventing social isolation
         - Social isolation causes violence and extremism.
         Bullying is part of the social isolation vicious circle.
@@ -190,8 +189,6 @@ We should join forces to reach our shared goals.
         - Does everything fall under philosophy?
             - How do we prevent this category from becoming a kitchen sink?
             - Philosophy is everywhere (a cross-cutting concern), so it shouldn't be a category.
-        - [Law]({% link law.md %})
-        - [Religion]({% link religion.html %})
 - Music
     - I play piano in the band [The Nomads]({% link nomads.md %}) (an Indonesian band, not the Swedish band).
 - [Entertainment]({% link entertain.html %})
