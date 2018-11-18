@@ -989,6 +989,14 @@ Check before you copy.
 #+BEGIN_EXAMPLE
     javascript:window.prompt("Copy to clipboard: Ctrl+C, Enter", "- [" + document.title + "](" + document.URL + ")");
 #+END_EXAMPLE
+** tvtropes.org: show all spoilers
+#+BEGIN_SRC javascript
+Array.prototype.map.call(document.querySelectorAll('*'), (e) => {
+    e.style.display = "";
+    e.classList.remove("spoiler");
+    e.classList.remove("folder");
+});
+#+END_SRC
 * Using Python
   :PROPERTIES:
   :CUSTOM_ID: using-python

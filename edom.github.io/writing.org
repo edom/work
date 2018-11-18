@@ -339,3 +339,55 @@ I can read 1500 words per minute (750 word pairs per minute) with 80% comprehens
 The problem: it doesn't work images and inline math.
 
 Assume that I can listen to 300 wpm screen reader with 80% comprehension.
+* Writing system
+Evaluate https://pandoc-scholar.github.io/
+"Formatting Open Science: agilely creating multiple document formats for academic manuscripts with Pandoc Scholar"
+
+https://en.wikipedia.org/wiki/Comparison_of_document_markup_languages
+
+Installing cm-super affects pdflatex/xelatex output quality.
+
+- HTML is low-effort for the reader.
+- LaTeX excels at producing beautiful printable documents.
+- Pandoc (Pandoc custom template + Pandoc Lua filter)
+
+Emacs Lisp programming
+"Understanding letf and how it replaces flet"
+http://endlessparentheses.com/understanding-letf-and-how-it-replaces-flet.html
+
+Not everyone agrees.
+https://www.reddit.com/r/emacs/comments/71wy6n/orgmode_as_a_markup_language_does_make_sense_even/
+https://karl-voit.at/2017/09/23/orgmode-as-markup-only/
+
+There are two options for converting Org to HTML: Org Exporter and Pandoc.
+- "I use the native Org exporters for that so I don’t usually need Pandoc. Bsag, has gone another route and uses ox-pandoc as her export engine." http://irreal.org/blog/?p=4376
+- https://www.rousette.org.uk/archives/org-mode-and-pandoc/
+
+Org Exporter is slow.
+
+Pandoc+Lua is better documented?
+
+https://pandoc.org/lua-filters.html#counting-words-in-a-document
+* Web authoring
+
+Jekyll's Liquid markup ={% raw %}{% link %}{% endraw %}= is dirty and wrong.
+The semantically correct way is to transform HTML DOM relative links.
+
+The end goal is to generate HTML.
+So why don't we just write the source in HTML?
+
+1. Paragraph in table.
+2. Outlining support. Is this important? Jumping around is inefficient. It's more efficient if we write sequentially.
+* Writing
+The subject should be short.
+
+The predicate should appear as early as possible.
+
+Example:
+- Bad: "Alice, Bob, Charlie, John, Jack, Jane, and Judy /went/ to the same class."
+- Good: "These people /went/ to the same class: Alice, Bob, Charlie, John, Jack, Jane, Judy."
+
+Example:
+- Bad: "The expensive new red car that once belonged to Alice now /belongs/ to Bob."
+- Good? "The car /changed hands/ from Alice to Bob."
+  - I hate idioms and set phrases. They reduce uniformity, consistency, and predictability.
