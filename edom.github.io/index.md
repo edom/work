@@ -82,7 +82,7 @@ We should join forces to reach our shared goals.
     - [Finitism]({% link finite.html %})
     - [Justifying physics]({% link natkno.html %})
 - Improving society
-    - [Political dreams]({% link politics.html %})
+    - [Social studies]({% link social.html %})
         - [Subsistence]({% link subsist.html %})
         - [Defining marriage]({% link marry.html %})
     - Preventing social isolation
