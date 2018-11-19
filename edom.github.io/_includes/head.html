@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // We assume that Org HTML Export generates a DIV element with ID "table-of-contents".
     // We assume that Jekyll Markdown-to-HTML generates a UL element with ID "markdown-toc".
     // This only works for Org HTML Export's TOC.
-    let toc_entries = document.querySelectorAll("#table-of-contents a");
+    let toc_entries = document.querySelectorAll("#table-of-contents a, #text-table-of-contents a");
     toc_entries.forEach((toc_entry_a) => {
         let href = toc_entry_a.getAttribute("href"); // We assume that this is a string like "#org0123456".
         if (href.charAt(0) !== '#') {
