@@ -1,0 +1,208 @@
+# This is for use with PCSX with debug symbols.
+
+define psx_watch_gte_ctl_tmp
+    # watch TRX
+    eval "rwatch *(u32*)%p", psxMemPointer(0x801d19b4 + 5 * 4)
+    command
+        silent
+        psx_announce_break
+        continue 50
+    end
+end
+
+# Dump registers.
+define psx_reg
+    printf "pc %08x ra %08x sp %08x fp %08x gp %08x k0 %08x k1 %08x\n\
+v0 %08x v1 %08x\n\
+a0 %08x a1 %08x a2 %08x a3 %08x\n\
+t0 %08x t1 %08x t2 %08x t3 %08x t4 %08x t5 %08x t6 %08x t7 %08x t8 %08x t9 %08x\n\
+s0 %08x s1 %08x s2 %08x s3 %08x s4 %08x s5 %08x s6 %08x s7 %08x\n\
+R11R12 %08x R13R21 %08x TRX %08x TRY %08x TRZ %08x\n" \
+    , psxRegs.pc \
+    , psxRegs.GPR.n.ra \
+    , psxRegs.GPR.n.sp \
+    , psxRegs.GPR.n.s8 \
+    , psxRegs.GPR.n.gp \
+    , psxRegs.GPR.n.k0 \
+    , psxRegs.GPR.n.k1 \
+    , psxRegs.GPR.n.v0 \
+    , psxRegs.GPR.n.v1 \
+    , psxRegs.GPR.n.a0, psxRegs.GPR.n.a1, psxRegs.GPR.n.a2, psxRegs.GPR.n.a3 \
+    , psxRegs.GPR.n.t0 \
+    , psxRegs.GPR.n.t1 \
+    , psxRegs.GPR.n.t2 \
+    , psxRegs.GPR.n.t3 \
+    , psxRegs.GPR.n.t4 \
+    , psxRegs.GPR.n.t5 \
+    , psxRegs.GPR.n.t6 \
+    , psxRegs.GPR.n.t7 \
+    , psxRegs.GPR.n.t8 \
+    , psxRegs.GPR.n.t9 \
+    , psxRegs.GPR.n.s0, psxRegs.GPR.n.s1, psxRegs.GPR.n.s2, psxRegs.GPR.n.s3, psxRegs.GPR.n.s4 \
+    , psxRegs.GPR.n.s5 \
+    , psxRegs.GPR.n.s6 \
+    , psxRegs.GPR.n.s7 \
+    , psxRegs.CP2C.r[0] \
+    , psxRegs.CP2C.r[1] \
+    , psxRegs.CP2C.r[5] \
+    , psxRegs.CP2C.r[6] \
+    , psxRegs.CP2C.r[7] \
+
+end
+
+# Redefine this to show things every time the debugger reaches a breakpoint.
+define psx_watches
+end
+
+define psx_announce_break
+    psx_reg
+    call (void)puts(disR3000AF(*(u32*)(psxM + ((psxRegs.pc - 8) & 0x1fffff)), psxRegs.pc - 8))
+    call (void)puts(disR3000AF(*(u32*)(psxM + ((psxRegs.pc - 4) & 0x1fffff)), psxRegs.pc - 4))
+    call (void)puts(disR3000AF(*(u32*)(psxM + (psxRegs.pc & 0x1fffff)), psxRegs.pc))
+    call (void)puts(disR3000AF(*(u32*)(psxM + ((psxRegs.pc + 4) & 0x1fffff)), psxRegs.pc + 4))
+    call (void)puts(disR3000AF(*(u32*)(psxM + ((psxRegs.pc + 8) & 0x1fffff)), psxRegs.pc + 8))
+    psx_watches
+end
+
+define psx_dump_mem
+    call psx_dump_memory($arg0, 256)
+end
+
+# psx_step_out
+# del <temporary-breakpoint-number>
+define psx_step_out
+    eval "psx_run_to 0x%x", psxRegs.GPR.n.ra
+end
+
+# del <temporary-breakpoint-number>
+# psx_run_to <desired-PC>
+define psx_run_to
+    set var psx_gdb_breakpoint_address = $arg0
+    tbreak psx_gdb_hook_breakpoint_reached
+    command
+        silent
+        psx_announce_break
+    end
+    continue
+end
+
+define psx_step
+    tbreak execI
+    command
+        silent
+        psx_announce_break
+    end
+    continue
+end
+
+# bug: this fails on non-taken conditional branch
+define psx_step_over
+    eval "psx_run_to 0x%x", psxRegs.pc + 4
+end
+
+define psx_watch
+    eval "watch *(u32*)%p", psxMemPointer($arg0)
+    command
+        printf "Watchpoint break\n"
+        psx_announce_break
+    end
+end
+
+define psx_watch_16
+    eval "watch *(u16*)%p", psxMemPointer($arg0)
+    command
+        printf "Watchpoint break\n"
+        psx_announce_break
+    end
+end
+
+define psx_watch_8
+    eval "watch *(u8*)%p", psxMemPointer($arg0)
+    command
+        printf "Watchpoint break\n"
+        psx_announce_break
+    end
+end
+
+define psx_watch_read_32
+    eval "rwatch *(u32*)%p", psxMemPointer($arg0)
+    command
+        printf "read watchpoint break\n"
+        psx_announce_break
+    end
+end
+
+# psx_break PC
+define psx_break
+    eval "rwatch *(u32*)%p", psxMemPointer($arg0)
+end
+
+define psx_watch_read_16
+    eval "rwatch *(u16*)%p", psxMemPointer($arg0)
+    command
+        printf "read watchpoint break\n"
+        psx_announce_break
+    end
+end
+
+# Memory read/write functions.
+
+define psxr32
+    p/x psxMemRead32($arg0)
+end
+
+# psxw32 address, value
+define psxw32
+    p psxMemWrite32($arg0, $arg1)
+end
+
+define psxw16
+    p psxMemWrite16($arg0, $arg1)
+end
+
+define psxw8
+    p psxMemWrite8($arg0, $arg1)
+end
+
+# nopify address
+# replaces the instruction at address with NOP
+define nopify
+    psxw32 $arg0 0
+end
+
+set $loop_counter = 0
+
+define psx_announce_trace
+    printf "%03d pc %08x at %08x v0 %08x v1 %08x a0 %08x a1 %08x a2 %08x a3 %08x s0 %08x s1 %08x s2 %08x s3 %08x\n" \
+        , $loop_counter \
+        , psxRegs.pc \
+        , psxRegs.GPR.n.at \
+        , psxRegs.GPR.n.v0 \
+        , psxRegs.GPR.n.v1 \
+        , psxRegs.GPR.n.a0 \
+        , psxRegs.GPR.n.a1 \
+        , psxRegs.GPR.n.a2 \
+        , psxRegs.GPR.n.a3 \
+        , psxRegs.GPR.n.s0 \
+        , psxRegs.GPR.n.s1 \
+        , psxRegs.GPR.n.s2 \
+        , psxRegs.GPR.n.s3
+end
+
+define psx_trace_write_32
+    eval "watch *(u32*)%p", psxMemPointer($arg0)
+    command
+        silent
+        psx_announce_trace
+        set $loop_counter = $loop_counter + 1
+        continue
+    end
+end
+
+# Street Fighter EX Plus Alpha
+define interesting
+    psx_run_to 0x801230c0
+    call psx_dump_memory(psxRegs.GPR.n.s4, 64)
+    psx_step_over
+    call psx_dump_memory(psxRegs.GPR.n.s4, 64)
+end
