@@ -1,7 +1,18 @@
 :- module(map, [
     map/5
+    , map/4
     , map/3
 ]).
+
+/*
+Make assert work.
+*/
+
+:- meta_predicate
+    map(?, 0, ?)
+    , map(?, ?, ?, ?)
+    , map(?, ?, 0, ?, ?)
+    .
 
 /*
 map(In, Out, Goal, Ins, Outs).
@@ -30,5 +41,7 @@ f(X, Y) :- Y #= X + 2.
 That produces Ys = [2,3,3,4].
 */
 map(In, Out, Goal, Ins, Outs) :- findall(Out, (member(In, Ins), Goal), Outs).
+
+map(In, Out, Ins, Outs) :- findall(Out, member(In, Ins), Outs).
 
 map(In, Goal, Ins) :- forall(member(In, Ins), Goal).
