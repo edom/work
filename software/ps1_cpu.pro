@@ -9,12 +9,13 @@ Far from done.
 
 :- module(ps1_cpu, [
     word_instruction/2
-    , instruction_statements/3
     , operand_friendly/2
-    , split_bits/4
+    , instruction_friendly/2
 ]).
 
 :- use_module(library(clpfd)).
+:- use_module('./map.pro').
+:- use_module('./ps1_bit.pro').
 
 /*
 gpr_name(Index, Name) means that the friendly name of general-purpose register Index is Name.
@@ -225,30 +226,6 @@ word_instruction_0(Word, Instruction) :-
 word_instruction(Word, Instruction) :- word_instruction_0(Word, Instruction), !.
 word_instruction(Word, error_unknown_instruction(Word)) :- !.
 
-/*
-split_bits(Whole, Index, Left, Right).
-
-Index must be ground.
-
-If Whole is not ground, then both [Left, Right] must be ground.
-
-Take Index bits from right.
-
-The length of Right is Index bits.
-
-Left is whatever remains.
-
-Example: split_bits(B4 B3 B2 B1 B0, 2, B4 B3 B2, B1 B0).
-*/
-split_bits(Whole, Index, Left, Right) :-
-    ground(Whole), !,
-    Left #= Whole >> Index,
-    Right #= Whole /\ ((1 << Index) - 1).
-
-split_bits(Whole, Index, Left, Right) :-
-    \+ ground(Whole), !,
-    Whole #= (Left << Index) \/ Right.
-
 % Internal.
 param_r(P, Rs, Rt, Rd, Shamt, Funct) :-
     split_bits(P , 6, P1, Funct),
@@ -267,82 +244,15 @@ param_i(P, Rs, Rt, Im) :-
 param_j(P, Ix) :-
     split_bits(P , 26, 0, Ix).
 
-/*
-This assumes that the Prolog implementation uses arbitrary-length integers.
-*/
-
-sint_integer(Bits, Sint, Integer) :-
-    Sign_mask #= 1 << (Bits - 1),
-    (Sint /\ Sign_mask #= 0 ->
-        Integer = Sint
-        ; Integer #= - ( ((\ Sint) + 1) /\ ((Sign_mask << 1) - 1))
-    ).
-
-/*
-Decompiling from instructions to abstract-procedural-language statements.
-
-We assume these to simplify the decompiler:
-
-Branch delay slot does not contain branch-delay-slot-producing instruction.
-
-Loads and stores finish immediately; no load delay slot.
-Memory and coprocessor access are instantaneous.
-
-https://github.com/aquynh/capstone/issues/209
-"Processor-operation is UNPREDICTABLE if a branch, jump, ERET, DERET, or WAIT instruction is Placed in the delay slot of a branch or jump."
-*/
-
-/*
-instruction_statements_0/3
-instruction_statements_0(Instruction, Now, Later) describes the effects of an instruction.
-PC in Now is the address of the instruction itself, not added by four.
-
-A Statement is an abstract-procedural-language statement.
-*/
-instruction_statements_0(nop, [], []).
-instruction_statements_0(sll(D, S, T), [D := sll(S, T)], []).
-instruction_statements_0(srl(D, S, T), [D := srl(S, T)], []).
-instruction_statements_0(sra(D, S, T), [D := sra(S, T)], []).
-instruction_statements_0(slt(D, S, T), [D := signed(S) < signed(T)], []).
-instruction_statements_0(sltu(D, S, T), [D := unsigned(S) < unsigned(T)], []).
-instruction_statements_0(addu(D, S, T), [D := S + T], []).
-instruction_statements_0(subu(D, S, T), [D := S - T], []).
-instruction_statements_0(and(D, S, T), [D := S /\ T], []).
-instruction_statements_0(or(D, S, T), [D := S \/ T], []).
-instruction_statements_0(xor(D, S, T), [D := S xor T], []).
-instruction_statements_0(mov(D, S), [D := S], []).
-instruction_statements_0(movsx(D, S), [D := sx(S)], []).
-instruction_statements_0(movzx(D, S), [D := zx(S)], []).
-% instruction_statements_0(i(lui, _, Rt, Im), [Rt := Val, []]) :- Val #= Im << 16.
-% instruction_statements_0(i(sltiu, Rs, Rt, Im), [Rt := Rs < Val, []]) :- sint_integer(16, Im, Val).
-instruction_statements_0(j(pc28(Ofs)), [], [goto((pc /\ 0xf0000000) \/ Ofs)]).
-instruction_statements_0(jr(T), [jr_target := T], [goto(jr_target)]).
-instruction_statements_0(jal(pc28(Ofs)), [ra := pc + 8], [goto((pc /\ 0xf0000000) \/ Ofs)]).
-instruction_statements_0(jalr(D, T), [D := pc + 8], [goto(T)]).
-instruction_statements_0(beq(S, T, R), [condition := (S = T)], [if(condition, pc + R, pc + 4)]).
-instruction_statements_0(bne(S, T, R), [condition := (S \= T)], [if(condition, pc + R, pc + 4)]).
-instruction_statements_0(bltz(S, R), [condition := (signed(S) < 0)], [if(condition, pc + R, pc + 4)]).
-instruction_statements_0(bgtz(S, R), [condition := (signed(S) > 0)], [if(condition, pc + R, pc + 4)]).
-instruction_statements_0(blez(S, R), [condition := (S = 0)], [if(condition, pc + R, pc + 4)]).
-instruction_statements_0(rtpt, [rtpt], []).
-instruction_statements_0(rtps, [rtps], []).
-instruction_statements_0(nccs, [nccs], []).
-instruction_statements_0(nclip, [nclip], []).
-instruction_statements_0(avsz3, [avsz3], []).
-instruction_statements_0(avsz4, [avsz4], []).
-instruction_statements_0(mvmva_rtv0, [mvmva_rtv0], []).
-instruction_statements_0(mvmva_rtv1, [mvmva_rtv1], []).
-instruction_statements_0(mvmva_rtv2, [mvmva_rtv2], []).
-instruction_statements_0(mvmva_op12, [mvmva_op12], []).
-instruction_statements_0(mvmva_rtir12, [mvmva_rtir12], []).
-
-instruction_statements(Ins, Now, Later) :- instruction_statements_0(Ins, Now, Later), !.
-instruction_statements(Ins, [error(Message)], []) :- format(atom(Message), 'instruction_statements: ~p', [Ins]), !.
-
 % Translate 16-bit instruction immediate to PC offset.
 im16_ofs(Ins_count, Ofs) :-
     Byte_count #= Ins_count << 2,
     sint_integer(18, Byte_count, Ofs).
+
+instruction_friendly(I, F) :-
+    I =.. [Mnemonic | Args],
+    map(A, B, operand_friendly(A, B), Args, F_args),
+    F =.. [Mnemonic | F_args].
 
 operand_friendly_0(I, I) :- integer(I).
 operand_friendly_0(r(I), N) :- gpr_name(I, N).

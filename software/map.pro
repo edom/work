@@ -2,6 +2,7 @@
     map/5
     , map/4
     , map/3
+    , filter/4
 ]).
 
 /*
@@ -12,6 +13,7 @@ Make assert work.
     map(?, 0, ?)
     , map(?, ?, ?, ?)
     , map(?, ?, 0, ?, ?)
+    , filter(?, 0, ?, ?)
     .
 
 /*
@@ -45,3 +47,5 @@ map(In, Out, Goal, Ins, Outs) :- findall(Out, (member(In, Ins), Goal), Outs).
 map(In, Out, Ins, Outs) :- findall(Out, member(In, Ins), Outs).
 
 map(In, Goal, Ins) :- forall(member(In, Ins), Goal).
+
+filter(In, Goal, Ins, Outs) :- findall(In, (member(In, Ins), Goal), Outs).
