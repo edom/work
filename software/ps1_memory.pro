@@ -14,6 +14,7 @@ PS1 decompiler state.
 :- use_module(library(clpfd)).
 :- use_module('./interval.pro').
 :- use_module('./map.pro').
+:- use_module('./transput.pro').
 :- use_module('./ps1_bit.pro').
 :- use_module('./ps1_cpu.pro').
 
@@ -42,15 +43,8 @@ address_instruction(Address, Instruction) :-
 
 memory_bytes(Range, Bytes) :-
     memory_access_file_operations(Range, Sequence),
-    map(access(_, Path, Begin, Count), Bytes, file_bytes(Path, Begin, Count, Bytes), Sequence, Bytess),
+    map(access(_, Path, Begin, Count), Bytes, file_begin_count_bytes(Path, Begin, Count, Bytes), Sequence, Bytess),
     append(Bytess, Bytes).
-
-file_bytes(Path, Begin, Count, Bytes) :-
-    open(Path, read, Stream, [type(binary)]),
-    seek(Stream, Begin, bof, _),
-    peek_string(Stream, Count, String),
-    string_codes(String, Bytes),
-    close(Stream).
 
 /*
 memory_access_file_operations/2 fails if there is any access outside the mapping defined by memory_file/3.

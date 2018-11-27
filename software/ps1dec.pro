@@ -21,6 +21,7 @@ decompile(Address)
 :- use_module(library(clpfd)).
 :- use_module('./ps1_analysis_0.pro', except([routine_begin/2])).
 :- use_module('./ps1_decompile.pro').
+:- use_module('./ps1_exe.pro').
 :- use_module('./ps1_memory.pro', except([memory_file/3])).
 :- use_module('./ps1_procedural_simplify.pro', except([address_contains_constant/1])).
 
@@ -50,6 +51,16 @@ address_contains_constant(Address) enables us to simplify loads from that Addres
 */
 :- multifile address_contains_constant/1.
 ps1_procedural_simplify:address_contains_constant(A) :- address_contains_constant(A).
+
+/*
+Optional.
+PS-X EXE file.
+*/
+:- multifile exe_file/1.
+
+exe :-
+    exe_file(Path),
+    print_exe_info(Path).
 
 % ========== interpreter output customization ==========
 

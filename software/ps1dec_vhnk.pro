@@ -2,6 +2,7 @@
 
 :- consult('ps1dec.pro').
 
+exe_file('./SLPS_003.38').
 memory_file(0x80000000-0x80200000, '/home/erik/pcsxr/notes/vhnk/dump', 0).
 
 /*
