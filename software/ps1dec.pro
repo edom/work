@@ -19,11 +19,14 @@ decompile(Address)
 % :- consult('ps1dec.pro').
 
 :- use_module(library(clpfd)).
+:- use_module('./transput.pro').
 :- use_module('./ps1_analysis_0.pro', except([routine_begin/2])).
 :- use_module('./ps1_decompile.pro').
+:- use_module('./ps1_disassemble.pro').
 :- use_module('./ps1_exe.pro').
 :- use_module('./ps1_memory.pro', except([memory_file/3])).
 :- use_module('./ps1_procedural_simplify.pro', except([address_contains_constant/1])).
+:- use_module('./ps1_ui.pro').
 
 /*
 The user must map memory to file by asserting memory_file/3.
@@ -45,6 +48,13 @@ We assume that the program always calls a routine from the beginning (never into
 :- multifile routine_begin/2.
 :- dynamic routine_begin/2.
 ps1_analysis_0:routine_begin(A, B) :- routine_begin(A, B).
+
+% Infer routine_begin from EXE entry point.
+routine_begin(Addr, Description) :-
+    integer(Addr),
+    exe_file(Path),
+    exe_file__entry_point(Path, Addr),
+    format(atom(Description), 'main; entry point; inferred from PS-X EXE file ~q', Path).
 
 /*
 address_contains_constant(Address) enables us to simplify loads from that Address into the value at that Address.

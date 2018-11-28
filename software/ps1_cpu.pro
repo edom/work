@@ -1,7 +1,6 @@
-/*
-MIPS R3000A with PlayStation 1 extensions.
-Far from done.
+/** <module> a model of MIPS R3000A with PlayStation 1 extensions
 
+See also:
 - http://hitmen.c02.at/files/docs/psx/psx.pdf
 - https://s3-eu-west-1.amazonaws.com/downloads-mips/documents/MD00086-2B-MIPS32BIS-AFP-6.06.pdf
 - https://en.wikipedia.org/wiki/MIPS_architecture#Instruction_formats

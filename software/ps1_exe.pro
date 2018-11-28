@@ -1,10 +1,12 @@
-/*
+/** <module> PlayStation 1 PSX-EXE file model
+
 See also:
 - struct XF_HDR in psyq/include/KERNEL.H
 - https://patpend.net/technical/psx/exeheader.txt
 */
 :- module(ps1_exe, [
     print_exe_info/1
+    , exe_file__entry_point/2
 ]).
 
 :- use_module('./transput.pro').
@@ -31,6 +33,9 @@ segments
     bss   ~16r ~16r
     stack ~16r ~16r
 ', [Pc0, TAddr, TSize, DAddr, DSize, BAddr, BSize, SAddr, SSize]).
+
+exe_file__entry_point(Path, Pc0) :-
+    with_file(Path, read, [type(binary)], Stream, stream_pc0(Stream, Pc0)).
 
 stream_pc0(Stream, Pc0) :- stream_begin_count_value_(Stream, 16, 4, [uint32(Pc0)]).
 stream_text(Stream, Addr, Size) :- stream_begin_count_value_(Stream, 24, 8, [uint32(Addr), uint32(Size)]).
