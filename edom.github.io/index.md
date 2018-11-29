@@ -27,6 +27,7 @@ We should join forces to reach our shared goals.
     - Software engineering
         - Forward software engineering
             - [Making lasting software sooner]({% link softeng.html %})
+                - [Relational-bidirectional-logic programming in Prolog]({% link prolog.html %})
                 - Making the only programming language we will ever need
                     - Modeling
                         - [Modeling all data]({% link modeldata.md %})
