@@ -18,6 +18,7 @@ disassemble(Begin) :-
     End #= min(End0, Max_end),
     disassemble(Begin, End).
 
+disassemble(Begin, Begin) :- !.
 disassemble(Begin, End) :-
     Begin #< End,
     address_word(Begin, Word),

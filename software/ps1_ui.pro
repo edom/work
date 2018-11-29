@@ -12,51 +12,35 @@ Types:
 ]).
 
 :- use_module(library(http/thread_httpd)).
+:- use_module('./map.pro').
+:- use_module('./ps1_disassemble.pro').
+:- use_module('./ps1_analysis_0.pro').
+:- use_module('./website.pro').
 
-serve(Port) :-
-    http_server(dispatch, [port(Port)]).
+serve(Port) :- http_server(dispatch(path_method_content), [port(Port)]).
 
-serve :-
-    serve(4000).
+serve :- serve(4001).
 
-dispatch(Request) :-
-    request_method_path(Request, Method, Path),
-    path_method_content(Path, Method, Content),
-    content_html(Content, Html),
-    format('Content-Type: text/html; charset=UTF-8~n'),
-    format('~n'),
-    write(Html).
 
-request_params(Request, Params) :- member(search(Params), Request), !.
-request_params(_, []).
+path_method_content('/', get, Content) :-
+    Content = [
+        h1('Routines')
+        , table(Rows)
+    ],
+    findall(row(memory_address(Addr), Comment), routine_begin(Addr, Comment), Rows).
 
-code_html(0'&, "&amp;") :- !.
-code_html(0'<, "&lt;") :- !.
-code_html(0'>, "&gt;") :- !.
-code_html(0'", "&quot;") :- !.
-code_html(C, H) :- string_codes(H, [C]).
+path_method_content(Path, Method, Content) :-
+    split_string(Path, "/", "", [_ | Paths]),
+    paths_method_content(Paths, Method, Content).
 
-codes_html([], "") :- !.
-codes_html([A|B], H) :- !,
-    code_html(A, HA),
-    codes_html(B, HB),
-    string_concat(HA, HB, H).
 
-string_html(S, H) :- string_codes(S, Cs), codes_html(Cs, H).
+paths_method_content(["routine", SAddr], get, raw(Content)) :-
+    number_string(Addr, SAddr),
+    routine_begin(Addr, Comment),
+    with_output_to(string(S), disassemble_routine(Addr)),
+    atomics_to_string([Comment, '<pre>', S, '</pre>'], Content).
 
-content_html([], "") :- !.
-content_html([A|B], H) :- !,
-    content_html(A, HA),
-    content_html(B, HB),
-    string_concat(HA, HB, H).
-content_html(strong(A), H) :- !,
-    content_html(A, HA),
-    format(string(H), '<strong>~w</strong>', [HA]).
-content_html(C, H) :- term_string(C, S), string_html(S, H).
+paths_method_content(Paths, Method, _) :- throw(paths_method(Paths, Method)).
 
-request_method_path(_, Method, Path) :- nonvar(Method), nonvar(Path), !.
-request_method_path([method(Method) | Rest], Method, Path) :- !, request_method_path(Rest, Method, Path).
-request_method_path([path(Path) | Rest], Method, Path) :- !, request_method_path(Rest, Method, Path).
-request_method_path([_ | Rest], Method, Path) :- !, request_method_path(Rest, Method, Path).
 
-path_method_content('/', get, [strong(test), drive, ' ', get('name')]).
+website:content_html(memory_address(A), S) :- !, format(atom(S), '0x~16r', [A]).
