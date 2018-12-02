@@ -1,10 +1,20 @@
-/*
-PS1 decompiler state.
+/** <module> PS1 decompiler state, especially RAM
+
+RAM stands for "random access memory".
+
+Mapping memory to file:
+    - memory_file/3
+
+Reading memory content:
+    - address_byte/2
+    - address_half/2
+    - address_word/2
+
+Decoding memory content:
+    - address_instruction/2
 */
 :- module(ps1_memory, [
-    % mapping
     memory_file/3
-    % memory access
     , address_byte/2
     , address_half/2
     , address_word/2
@@ -18,9 +28,45 @@ PS1 decompiler state.
 :- use_module('./ps1_bit.pro').
 :- use_module('./ps1_cpu.pro').
 
-% See memory_file/3 in ps1_decompile.
+/** memory_file(?Region, ?Path, ?Offset).
+
+"The memory Region is mapped to file Path beginning at Offset."
+
+Region has the shape Begin-End.
+Begin is inclusive.
+End is exclusive.
+
+All addresses and offsets count bytes.
+
+The mappings must not overlap.
+
+Example:
+```
+memory_file(0x80000000-0x80200000, 'my_ram_dump', 0)
+```
+*/
 :- multifile memory_file/3.
 
+/**
+address_byte(?Address, ?Byte).
+address_half(?Address, ?Half).
+address_word(?Address, ?Word).
+
+"The content of the RAM at Address is Byte/Half/Word."
+
+Byte order is little-endian.
+
+Example:
+```
+% Suppose these four clauses hold.
+address_byte(0x80000000, 0x00).
+address_byte(0x80000001, 0x01).
+address_byte(0x80000002, 0x02).
+address_byte(0x80000003, 0x03).
+% This is what we mean by little-endian.
+address_word(0x80000000, 0x03020100).
+```
+*/
 address_byte(Address, Byte) :-
     End #= Address + 1,
     memory_bytes(Address-End, [Byte]).
@@ -35,6 +81,10 @@ address_word(Address, Word) :-
     memory_bytes(Address-End, Bytes),
     bytes_le__uint4(Bytes, Word).
 
+/** address_instruction(?Address, ?Instruction).
+
+"Decoding the instruction at Address produces Instruction, according to word_instruction/2."
+*/
 address_instruction(Address, Instruction) :-
     address_word(Address, Word),
     word_instruction(Word, Instruction).

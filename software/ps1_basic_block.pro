@@ -1,10 +1,12 @@
-/*
-We encode a basic block as the compound term bb(Last_instruction).
+/** <module> basic block
 
-The last instruction is a branch instruction: either goto(Label) or if(Cond,TLabel,FLabel).
+The internal representation of a basic block is documented in bb_label_mid_last/4.
 */
 :- module(ps1_basic_block, [
-    basic_block__last/2
+    bb_label_stas/3
+    , bb_label_mid_last/4
+    % unused
+    , basic_block__last/2
     , basic_block__mid/2
     , basic_block__next/2
     , basic_block__nexts/2
@@ -12,6 +14,25 @@ The last instruction is a branch instruction: either goto(Label) or if(Cond,TLab
 ]).
 
 :- use_module(library(clpfd)).
+
+/** bb_label_stas(?Block, ?Label, ?Statements)
+
+Convenience variant of bb_label_mid_last/4.
+*/
+bb_label_stas(Block, Lab, Ins) :- bb_label_mid_last(Block, Lab, Mid, Las), append(Mid, [Las], Ins), !.
+
+/** bb_label_mid_last(?Block, ?Label, ?Mid, ?Last)
+
+Label is anything unique.
+
+Mid is a list of statements.
+
+Last is a branch statement: either goto(Label) or if(Cond,TLabel,FLabel).
+
+Design notes:
+    - We separate Last to speed up traversing a chain of basic blocks.
+*/
+bb_label_mid_last(bb(Lab, Mid, Las), Lab, Mid, Las).
 
 basic_block__mid(bb(A, _), A).
 

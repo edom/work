@@ -10,8 +10,13 @@
 :- use_module('./ps1_cpu.pro').
 :- use_module('./ps1_memory.pro').
 
-% See routine_begin/2 in ps1_decompile.pro.
+/** routine_begin(Address, Comment)
 
+"Address is the address of the first instruction of a routine."
+
+This is used to begin grouping the statement list into basic blocks.
+We assume that the program always calls a routine from the beginning (never into the middle).
+*/
 :- multifile routine_begin/2.
 :- dynamic routine_begin/2.
 

@@ -20,6 +20,7 @@ decompile(Address)
 
 :- use_module(library(clpfd)).
 :- use_module('./transput.pro').
+:- use_module('./check0.pro').
 :- use_module('./ps1_analysis_0.pro', except([routine_begin/2])).
 :- use_module('./ps1_bit.pro').
 :- use_module('./ps1_decompile.pro').
@@ -29,30 +30,18 @@ decompile(Address)
 :- use_module('./ps1_procedural_simplify.pro', except([address_contains_constant/1])).
 :- use_module('./ps1_ui.pro').
 
-/*
-The user must map memory to file by asserting memory_file/3.
-
-memory_file(Begin-End, Path, Offset) means the memory region Begin-End is mapped to file Path beginning at Offset.
-End is exclusive.
-All addresses and offsets count bytes.
-
-The mappings must not overlap.
-*/
+% See ps1_memory:memory_file/3.
 :- multifile memory_file/3.
 ps1_memory:memory_file(A, B, C) :- memory_file(A, B, C).
 
-/*
-routine_begin(Address, Comment) asserts that Address is the address of the first instruction of a routine.
-This is used to begin grouping the statement list into basic blocks.
-We assume that the program always calls a routine from the beginning (never into the middle).
-*/
+% See ps1_analysis_0:routine_begin/2.
 :- multifile routine_begin/2.
 :- dynamic routine_begin/2.
 ps1_analysis_0:routine_begin(A, B) :- routine_begin(A, B).
 
 % Infer routine_begin from EXE entry point.
 routine_begin(Addr, Description) :-
-    integer(Addr),
+    check_term(var + integer, Addr),
     exe_file(Path),
     exe_file__entry_point(Path, Addr),
     format(atom(Description), 'main; entry point; inferred from PS-X EXE file ~q', Path).

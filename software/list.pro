@@ -5,14 +5,14 @@
 
 :- use_module(library(clpfd)).
 
-/*
-replicate(?Count, ?Elem, ?List)
-is true iff List has length Count and every element of List is the same Elem.
+/** replicate(?Count, ?Elem, ?List)
 
-Thanks to the clpfd library, all parameters are bidirectional.
+"List has length Count and every element of List is the same Elem."
+
+Every parameter is bidirectional.
 
 The intended usage of this predicate is to generate a long list for testing.
-Example: replicate(10, atom, List) generates a list of 10 atoms.
+Example: replicate(10, x, List) generates a list of 10 =x=s.
 
 This is similar to the 'replicate' function in Haskell Prelude library Data.List module.
 */

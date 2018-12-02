@@ -43,6 +43,16 @@ stream_data(Stream, Addr, Size) :- stream_begin_count_value_(Stream, 32, 8, [uin
 stream_bss(Stream, Addr, Size) :- stream_begin_count_value_(Stream, 40, 8, [uint32(Addr), uint32(Size)]).
 stream_stack(Stream, Addr, Size) :- stream_begin_count_value_(Stream, 48, 8, [uint32(Addr), uint32(Size)]).
 
+/** stream_begin_count_value_(+Stream, +Begin, ?Count, ?Value)
+
+"In Stream, at Begin, Count bytes forward, is the value Value."
+
+Begin is an integer.
+
+Value is any of these:
+    - list of =Value=s (recursive)
+    - uint32(A): little-endian 32-bit unsigned integer
+*/
 stream_begin_count_value_(_, _, 0, []) :- !.
 stream_begin_count_value_(Stream, Position0, Count2, [H | T]) :- !,
     stream_begin_count_value_(Stream, Position0, Count0, H),

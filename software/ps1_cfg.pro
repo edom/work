@@ -1,10 +1,18 @@
-% control flow graph
+/** <module> control flow graph
 
+CFG stands for "control flow graph".
+
+CFG representation:
+    - label_statements/2
+
+Diagnostics:
+    - cfg_format_debug/1
+    - cfg_format_debug/2
+*/
 :- module(ps1_cfg, [
-    % diagnostics
-    cfg_format_debug/1
+    label_statements/2
+    , cfg_format_debug/1
     , cfg_format_debug/2
-    % other
     , cfg_naive_from_blocks/1
     , cfg_assert/2
     , cfg_clear/0
@@ -25,17 +33,27 @@ cfg_format_debug(Format) :- cfg_format_debug(Format, []).
 :- dynamic cfg_format_debug/2.
 cfg_format_debug(Format, Args) :- format(Format, Args).
 
-/*
-label_statements(Label, Statements) encodes the control flow graph.
+
+/** label_statements(?Label, ?Statements)
+
+"The basic block labeled Label contains Statements."
+
 Label is an integer address.
-Statements is a list of Statements.
+
+Statements is a list of =Statement=s.
+
+The last Statement in the block is any of these:
+    - goto(Addr)
+    - if(Cond, AddrTrue, AddrFalse)
 */
 :- dynamic label_statements/2.
 
-/*
-label_successor(A, B) means that B may be executed right after A.
 
-This represents the adjacency list (the edge list) of the control flow graph.
+/** label_successor(?A, ?B)
+
+"B may be executed right after A."
+
+This predicate represents the adjacency list (the edge list) of the control flow graph.
 */
 label_successor(A, B) :-
     label_statements(A, SA),

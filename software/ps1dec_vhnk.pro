@@ -3,7 +3,7 @@
 :- consult('ps1dec.pro').
 
 exe_file('./SLPS_003.38').
-memory_file(0x80000000-0x80200000, '/home/erik/pcsxr/notes/vhnk/dump', 0).
+memory_file(0x80000000-0x80200000, './SLPS_003.38_ramdump', 0).
 
 /*
 region(Begin, End, Description) means that a region begins at address Begin (inclusive) and ends at address End (exclusive).

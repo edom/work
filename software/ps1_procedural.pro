@@ -1,11 +1,12 @@
-/*
-Abstract procedural language
+/** <module> abstract procedural language
+
 */
 
 :- module(ps1_procedural, [
     range_blocks/2
     , expression_simplified/2
     , statement_branch_target/2
+    , instruction_statements/3
 ]).
 
 :- use_module(library(clpfd)).
@@ -13,11 +14,21 @@ Abstract procedural language
 :- use_module('./ps1_cpu.pro').
 :- use_module('./ps1_memory.pro').
 
-/*
-A Block is a Label : Statements where Label is an integer and Statements is a list of Statement.
+/** range_blocks(Range, Blocks)
 
-range_blocks(Begin-End, Blocks)
-means that Statements represents the effect of executing the instruction from Begin inclusive to End exclusive.
+"The memory region Range consists of the basic blocks Blocks."
+
+Range has the shape Begin-End.
+
+Blocks is a list of Block.
+    - A Block has the shape Label : Statements.
+        - Label is an integer.
+        - Statements is a list of Statement.
+            - A Statement is defined in instruction_statements/3.
+
+Statements represents the effect of executing the instruction from Begin inclusive to End exclusive.
+
+Notes on branch delay slots:
 
 The instruction sequence
 
@@ -25,7 +36,7 @@ The instruction sequence
     B: SLOT
     C: ...
 
-is roughly translated to the statement sequence
+roughly translates to the statement sequence
 
     A : [ slot, branch, goto(C) ]
     B : [ slot ]
@@ -33,20 +44,19 @@ is roughly translated to the statement sequence
 */
 range_blocks(Begin-End, []) :- Begin #>= End, !.
 
-range_blocks(Begin-End, [Begin : Branch_and_slot, Slot_begin : Slot | Rest]) :-
+range_blocks(Begin-End, [Begin : BranchAndSlot, SlotBegin : Slot | Rest]) :-
     address_instruction_friendly(Begin, Instruction),
     instruction_statements(Instruction, Now, Later),
-    Later \= [], % a branch instruction
-    !,
-    Slot_begin #= Begin + 4,
-    Slot_end #= Slot_begin + 4,
-    Slot_end #=< End,
+    Later \= [], !, % a branch instruction
+    SlotBegin #= Begin + 4,
+    SlotEnd #= SlotBegin + 4,
+    SlotEnd #=< End,
     substitute(pc, Begin, Now, Now0),
-    substitute(pc, Slot_begin, Later, Later0),
-    range_blocks(Slot_begin-Slot_end, [_ : Slot]),
+    substitute(pc, SlotBegin, Later, Later0),
+    range_blocks(SlotBegin-SlotEnd, [_ : Slot]),
     append(Slot0, [goto(_)], Slot), !, % Why does this create a choice point?
-    append([Now0, Slot0, Later0, [goto(Slot_begin + 4)]], Branch_and_slot_0),
-    statements_fix(Branch_and_slot_0, Branch_and_slot),
+    append([Now0, Slot0, Later0, [goto(SlotBegin + 4)]], Branch_and_slot_0),
+    statements_fix(Branch_and_slot_0, BranchAndSlot),
     Next #= Begin + 8,
     range_blocks(Next-End, Rest).
 
@@ -196,5 +206,21 @@ instruction_statements_0(mvmva_rtv2, [mvmva_rtv2], []).
 instruction_statements_0(mvmva_op12, [mvmva_op12], []).
 instruction_statements_0(mvmva_rtir12, [mvmva_rtir12], []).
 
+/** instruction_statements(Ins, Now, Later).
+
+"Instruction Ins translates to the statements Now and Later.
+
+Ins should come from the second argument of instruction_friendly/2.
+(TODO Should we wire this to word_instruction/2 instead?)
+
+Now executes before the next instruction execute.
+
+Later executes after the next instruction executes.
+
+If Later is not empty, then Ins is a branch instruction.
+
+We only model as far as necessary for decompilation.
+We don't model the entire processor pipeline.
+*/
 instruction_statements(Ins, Now, Later) :- instruction_statements_0(Ins, Now, Later), !.
 instruction_statements(Ins, [error(Message)], []) :- format(atom(Message), 'instruction_statements: ~p', [Ins]), !.

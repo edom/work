@@ -3,10 +3,7 @@
     , strings_separator_join/3
 ]).
 
-/*
-Consider the standard atomics_to_string/2 instead of this.
-
-strings_join(Strings, String)
+/** strings_join(Strings, String)
 
 Strings is input.
 Strings is a list of strings.
@@ -15,6 +12,8 @@ String is output.
 
 Example:
 strings_join(["abc", "def", "ghi"], "abcdefghi")
+
+See also atomics_to_string/2.
 */
 strings_join([], "") :- !.
 strings_join([H|T], Output) :-

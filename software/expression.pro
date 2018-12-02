@@ -76,3 +76,19 @@ expression_value(Exp, Val) :-
     functor(Exp, _, _),
     !,
     call(Exp, Val).
+
+
+% experimental
+
+expression_normalized(A,A) :- var(A), !.
+expression_normalized([],[]) :- !.
+expression_normalized([H|T], [NH|NT]) :- !, expression_normalized(H,NH), expression_normalized(T,NT).
+expression_normalized(E,N) :-
+    E =.. [F|Args],
+    expression_normalized(Args, NArgs),
+    E1 =.. [F|NArgs],
+    (expression_expansion(E1,N) -> true ; E1 = N).
+
+expression_expansion(A+B, C) :- number(A), number(B), !, C is A+B.
+expression_expansion(A+B, C) :- string(A), string(B), !, string_concat(A,B,C).
+expression_expansion(strlen(S), N) :- string(S), !, string_length(S,N).

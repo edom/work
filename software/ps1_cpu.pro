@@ -1,13 +1,14 @@
 /** <module> a model of MIPS R3000A with PlayStation 1 extensions
 
-See also:
-- http://hitmen.c02.at/files/docs/psx/psx.pdf
-- https://s3-eu-west-1.amazonaws.com/downloads-mips/documents/MD00086-2B-MIPS32BIS-AFP-6.06.pdf
-- https://en.wikipedia.org/wiki/MIPS_architecture#Instruction_formats
+References:
+    - http://hitmen.c02.at/files/docs/psx/psx.pdf
+    - https://s3-eu-west-1.amazonaws.com/downloads-mips/documents/MD00086-2B-MIPS32BIS-AFP-6.06.pdf
+    - https://en.wikipedia.org/wiki/MIPS_architecture#Instruction_formats
 */
 
 :- module(ps1_cpu, [
-    word_instruction/2
+    gpr_name/2
+    , word_instruction/2
     , operand_friendly/2
     , instruction_friendly/2
 ]).
@@ -16,8 +17,9 @@ See also:
 :- use_module('./map.pro').
 :- use_module('./ps1_bit.pro').
 
-/*
-gpr_name(Index, Name) means that the friendly name of general-purpose register Index is Name.
+/** gpr_name(?Index, ?Name).
+
+"The friendly name of general-purpose register Index is Name."
 */
 gpr_name( 0, zr).
 gpr_name( 1, at).
@@ -120,6 +122,36 @@ cp2dr_name(31, gd_lzcr).
 Instruction formats.
 */
 
+/** word_instruction(?Word, ?Instruction).
+
+"Decoding the instruction code Word produces Instruction."
+
+If the instruction is unknown, Instruction is unified with unknown_instruction(Word).
+
+Instruction has the shape Mnemonic(Dst, Left, Right).
+Examples:
+    - subu(r(10),r(11),r(12)) means r(10) := r(11) - r(12)
+    - addu(r(10),r(11),4) means r(10) := r(11) + 4. Note that we collapse the ADDIU mnemonic to addu.
+    - j(pc28(0x9000))
+*/
+word_instruction(Word, Instruction) :- word_instruction_0(Word, Instruction), !.
+word_instruction(Word, unknown_instruction(Word)) :- !.
+
+word_instruction_0(Word, Instruction) :-
+    split_bits(Word, 26, Op, Param),
+    param_r(Param, Rs, Rt, Rd, Sh, Fu),
+    instruction_r(Op, Rs, Rt, Rd, Sh, Fu, Instruction).
+
+word_instruction_0(Word, Instruction) :-
+    split_bits(Word, 26, Op, Param),
+    param_i(Param, Rs, Rt, Im),
+    instruction_i(Op, Rs, Rt, Im, Instruction).
+
+word_instruction_0(Word, Instruction) :-
+    split_bits(Word, 26, Op, Param),
+    param_j(Param, Ix),
+    instruction_j(Op, Ix, Instruction).
+
 :- discontiguous instruction_i/5.
 :- discontiguous instruction_j/3.
 :- discontiguous instruction_r/7.
@@ -207,24 +239,6 @@ instruction_i(0b101011, Rs, Rt, Im, mov(m(r(Rs) + Im), r(Rt))). % sw
 % mnemonic_op_format(swl, 42, i(any, any, any)).
 % mnemonic_op_format(swr, 46, i(any, any, any)).
 
-word_instruction_0(Word, Instruction) :-
-    split_bits(Word, 26, Op, Param),
-    param_r(Param, Rs, Rt, Rd, Sh, Fu),
-    instruction_r(Op, Rs, Rt, Rd, Sh, Fu, Instruction).
-
-word_instruction_0(Word, Instruction) :-
-    split_bits(Word, 26, Op, Param),
-    param_i(Param, Rs, Rt, Im),
-    instruction_i(Op, Rs, Rt, Im, Instruction).
-
-word_instruction_0(Word, Instruction) :-
-    split_bits(Word, 26, Op, Param),
-    param_j(Param, Ix),
-    instruction_j(Op, Ix, Instruction).
-
-word_instruction(Word, Instruction) :- word_instruction_0(Word, Instruction), !.
-word_instruction(Word, error_unknown_instruction(Word)) :- !.
-
 % Internal.
 param_r(P, Rs, Rt, Rd, Shamt, Funct) :-
     split_bits(P , 6, P1, Funct),
@@ -248,10 +262,30 @@ im16_ofs(Ins_count, Ofs) :-
     Byte_count #= Ins_count << 2,
     sint_integer(18, Byte_count, Ofs).
 
+/** instruction_friendly(?Ins, ?Fri).
+
+"Fri is a more human-friendly representation of Ins."
+
+This translates operands according to operand_friendly/2.
+
+Examples:
+```
+instruction_friendly(subu(r(2),r(3),r(4)), subu(v0,v1,a0)).
+```
+*/
 instruction_friendly(I, F) :-
     I =.. [Mnemonic | Args],
     map(A, B, operand_friendly(A, B), Args, F_args),
     F =.. [Mnemonic | F_args].
+
+/** operand_friendly(?Operand, ?Fri).
+
+"Fri is a more human-friendly representation of Operand."
+
+This translates register index in to register name according to gpr_name/2.
+*/
+operand_friendly(A, B) :- operand_friendly_0(A, B), !.
+operand_friendly(A, A) :- !.
 
 operand_friendly_0(I, I) :- integer(I).
 operand_friendly_0(r(I), N) :- gpr_name(I, N).
@@ -265,6 +299,3 @@ operand_friendly_0(zx(A), zx(FA)) :- operand_friendly(A, FA).
 operand_friendly_0(sx(A), sx(FA)) :- operand_friendly(A, FA).
 operand_friendly_0(signed(A), signed(FA)) :- operand_friendly(A, FA).
 operand_friendly_0(unsigned(A), unsigned(FA)) :- operand_friendly(A, FA).
-
-operand_friendly(A, B) :- operand_friendly_0(A, B), !.
-operand_friendly(A, A) :- !.
