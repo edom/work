@@ -1,4 +1,4 @@
-#+TITLE: Relational-bidirectional-logic programming in Prolog
+#+TITLE: Relational-multidirectional-logic programming in production in SWI-Prolog
 #+DATE: 2018-04-11 00:00 +0700
 #+OPTIONS: ^:nil toc:nil
 #+PERMALINK: /prolog.html
@@ -64,23 +64,6 @@ Learn Prolog now, or lose your job and die in oblivion!
 Things that I haven't found in Prolog:
 the speed of C,
 the toolchain of Go.
-
-There are two camps in programming:
-the bottom-up camp and the top-down camp.
-
-The bottom-up camp starts from machines and goes up toward mathematics.
-This camp produces Assembly, Fortran, Cobol, Pascal, C, C++, Go.
-This camp produced fast but ugly implementations.
-Haphazard incremental improvements.
-
-The top-down camp starts from mathematics and goes down toward machines.
-This camp produces Lisp, Scheme, Prolog, ML, Ocaml, Haskell, Coq, Idris, Agda, Lean.
-This camp produced elegant but slow implementations.
-Big design up front.
-
-They seem to be converging to a middle ground: ugly and slow.
-
-Why can't we get fast and elegant?
 ** Not sure yet? Try Prolog with minimal investment.
 If you're not sure yet, I suggest that you
 read [[https://www.metalevel.at/prolog][Markus Triska's book "The power of Prolog"]]
@@ -95,7 +78,192 @@ There are many Prolog implementations.
 Some companies have their own Prolog implementations.
 
 I use SWI-Prolog because it's what I use in university, and because of this [[http://www.swi-prolog.org/features.html][SWI-Prolog sales pitch]].
-* TODO Writing elegant Prolog knowledge bases
+
+This book assumes that the reader uses SWI-Prolog 7.6.4.
+* Using the interactive prompt
+#+TOC: headlines 2 local
+** <2018-10-20> Installing SWI-Prolog 7.6.4 on Ubuntu 14.04
+If you are using Ubuntu 14.04, follow my instructions below.
+
+If your operating system has packaged SWI-Prolog 7.6.4 or newer, use it.
+(Thank you, volunteer package maintainers!)
+
+If you aren't using Ubuntu 14.04, follow the [[http://www.swi-prolog.org/Download.html][official instructions]].
+Choose the current stable release.
+
+The following guide is for installing SWI-Prolog 7.6.4 on Ubuntu 14.04.
+
+Uninstall existing SWI-Prolog installations.
+The version packaged with Ubuntu 14.04 is too old (6.6.4).
+SWI-Prolog 7 fixes a lot of issues with strings in SWI-Prolog 6.
+
+Install dependencies.
+I take this from the [[http://www.swi-prolog.org/build/Debian.html][Debian build instructions]] with these changes.
+I replace =libunwind-dev= with =libunwind8-dev=.
+I remove =openjdk-8-jdk= and =junit=.
+I add =libreadline-dev=.
+#+BEGIN_EXAMPLE
+sudo apt-get install \
+        build-essential autoconf curl chrpath pkg-config \
+        ncurses-dev libreadline-dev libedit-dev \
+        libunwind8-dev \
+        libgmp-dev \
+        libssl-dev \
+        unixodbc-dev \
+        zlib1g-dev libarchive-dev \
+        libossp-uuid-dev \
+        libxext-dev libice-dev libjpeg-dev libxinerama-dev libxft-dev \
+        libxpm-dev libxt-dev \
+        libdb-dev \
+        libpcre3-dev \
+        libyaml-dev \
+        libreadline-dev
+#+END_EXAMPLE
+
+That doesn't include the documentation dependencies because they are too big.
+Just read the documentation online.
+
+After apt-get finishes, for security (avoiding sudo cache), close that terminal, and open a new one.
+
+Download the [[http://www.swi-prolog.org/download/stable][source]].
+
+Check the checksum using sha256sum.
+
+=cp -p build.templ build=
+
+=mkdir -p $HOME/.local=
+
+Edit =build= script.
+Set =PREFIX= to =$HOME/.local=.
+Uncomment the =--link= option in =EXTRACFG= variable.
+
+Run =./build=.
+It should take a few minutes (about 5 minutes on my 4-core 8-GB-RAM machine).
+
+Ensure that =$HOME/.local/bin= is in your =PATH=.
+For example, I have this line somewhere near the end of my =~/.bashrc= file:
+#+BEGIN_EXAMPLE
+export PATH=$PATH:$HOME/.local/bin
+#+END_EXAMPLE
+
+If you edit your bashrc, close your terminal and open a new one.
+Entering =swipl --version= should print this:
+#+BEGIN_EXAMPLE
+SWI-Prolog version 7.6.4 for x86_64-linux
+#+END_EXAMPLE
+
+If you don't want to edit your bashrc, you can run swipl by its full path =~/.local/bin/swipl=.
+
+Tell SWI-Prolog to use readline.
+Create a FILE containing this:
+#+BEGIN_EXAMPLE
+:- set_prolog_flag(readline, readline).
+#+END_EXAMPLE
+
+Add =-f FILE= switch to the command line you use to start =swipl=.
+Related GitHub issue https://github.com/SWI-Prolog/issues/issues/72.
+** Establishing workflow
+=swipl -l FILE=
+
+=:- [foo].= is shorthand for =:- consult(foo).=.
+http://www.swi-prolog.org/pldoc/man?predicate=consult/1
+
+We can enter temporary definitions from the prompt: =?- [user].=
+Enter definitions.
+End with a new line and Control+D.
+** Interacting with SWI-Prolog
+- To show the canonical representation of a term, query =write_canonical(Term)=.
+- To show the source of a predicate, query =listing(Module:Name)= or =listing(Name)=.
+** TODO <2018-11-30> Prolog needs static checking like Erlang Dialyzer.
+SWI-Prolog has check library?
+
+Is there a Prolog totality/determinism checker?
+
+Prolog typechecking is vital to prevent stupid mistakes in a large knowledge base?
+
+1997 inconclusive discussion "Prolog Type Checker"
+https://dtai.cs.kuleuven.be/projects/ALP/newsletter/archive_93_96/net/typing/types.html
+** How do I use SWI-Prolog?
+- You write /rules/ in files.
+  You write /queries/ in the query interpreter.
+  - Pasting a file into the interpreter does /not/ load the file.
+    - This is contrary to Lisp/Python/Ruby interpreters.
+** SWI-Prolog, PostgreSQL, and ODBC
+Install the Ubuntu 14.04 package =odbc-postgresql=.
+
+I want my application to self-contain its configuration.
+I don't configure ODBC INI files.
+
+ODBC Data Source Name (DSN) connection string
+
+Relevant commands: =odbcinst -j=
+
+The file =/etc/odbcinst.ini= contains a list of driver names.
+* Handling errors
+#+TOC: headlines 2 local
+** Fail, throw, stack traces
+Two options: throw or fail.
+
+If backtracking doesn't make sense, then throw, don't fail.
+
+#+BEGIN_EXAMPLE
+person(joe).
+pair_first_second(pair(A,_), A, B).
+#+END_EXAMPLE
+
+Should =person(1)= fail or throw?
+Should =pair_first_second(foo)= fail or throw?
+
+Fail means try the next alternative.
+
+If you want throw/1 with stack trace,
+you must write it like =throw(error(Something, _))=.
+
+A /function/ should always throw and not fail, when an argument has a wrong type.
+
+#+BEGIN_EXAMPLE
+negate(A,B) :- integer(A), !, B is -A.
+negate(A,B) :- integer(B), !, A is -B.
+negate(A,B) :- throw(error(negate(A,B),_)).
+#+END_EXAMPLE
+** Structured logging
+This is how we log messages in Prolog:
+- Design a term that represents the /meaning/ of the message.
+- Call =print_message(Kind,Message)= where Message is that term.
+- Extend =prolog:message//1= to translate that term to string.
+
+#+BEGIN_EXAMPLE
+% Syntax:
+prolog:message(Term) --> Lines.
+
+% Example:
+prolog:message(Term) -->
+    [ 'The term is ~q.'-[Term] ],
+    [ 'This is the second line in the message.' ].
+#+END_EXAMPLE
+
+Syntax description:
+- 'Lines' is a list of 'Line's.
+  - A 'Line' has this shape:
+    - Format-Args: 'Format' and 'Args' are the same arguments accepted by format/2.
+    - Terms of other shapes are converted to string.
+
+The printed message is the concatenation of all 'Line's.
+
+TODO:
+- How do we log to file?
+- How do we rotate log files?
+
+References:
+- [[http://www.pathwayslms.com/swipltuts/message/index.html][Anne Ogborn's "Printing Messages in SWI-Prolog"]]
+- http://www.swi-prolog.org/pldoc/man?section=printmsg
+- http://www.swi-prolog.org/pldoc/man?section=debug
+
+Usability issues:
+- Where is =prolog:message//1= documented?
+  I found that by trial-and-error.
+- Why do we require people to understand DCG rules before they can use the messaging system?
+* Writing elegant Prolog knowledge bases
 #+TOC: headlines 2 local
 ** Prolog predicate parameter ordering convention: Order the parameters from the most likely to be bound
 If parameter A is more likely to be more bound than parameter B, then A should come before B.
@@ -103,14 +271,9 @@ Example: Write list_length/2 instead of length_list/2.
 
 Not everyone follows this convention.
 
-** Prolog throw vs fail
-If backtracking doesn't make sense, then throw, don't fail
-Fail means try the next alternative
-
-** Zero-arity compound term
-Use compound_name_arity/3 instead of functor/3, but this seems to be an SWI-Prolog extension.
-
-http://www.swi-prolog.org/pldoc/man?section=ext-compound-zero
+** Don't multifile if clause order matters.
+Reloading changes clause order.
+http://www.swi-prolog.org/FAQ/Multifile.html
 ** Naming the parts of a list: head, tail, and butt
 - "head" is the first element
 - "tail" is everything but the head
@@ -230,120 +393,6 @@ We shouldn't have to resort to cuts:
 See also:
 - https://www.metalevel.at/prolog/nontermination
   - "[Non-termination is] common among beginners, and often lead them to perceive Prolog as 'slow', when in fact their program does not terminate /at all/."
-** TODO Error handling
-- http://www.pathwayslms.com/swipltuts/message/index.html
-* Using SWI-Prolog
-#+TOC: headlines 2 local
-** <2018-10-20> Installing SWI-Prolog 7.6.4 on Ubuntu 14.04
-If you are using Ubuntu 14.04, follow my instructions below.
-
-If your operating system has packaged SWI-Prolog 7.6.4 or newer, use it.
-(Thank you, volunteer package maintainers!)
-
-If you aren't using Ubuntu 14.04, follow the [[http://www.swi-prolog.org/Download.html][official instructions]].
-Choose the current stable release.
-
-The following guide is for installing SWI-Prolog 7.6.4 on Ubuntu 14.04.
-
-Uninstall existing SWI-Prolog installations.
-The version packaged with Ubuntu 14.04 is too old (6.6.4).
-SWI-Prolog 7 fixes a lot of issues with strings in SWI-Prolog 6.
-
-Install dependencies.
-I take this from the [[http://www.swi-prolog.org/build/Debian.html][Debian build instructions]] with these changes.
-I replace =libunwind-dev= with =libunwind8-dev=.
-I remove =openjdk-8-jdk= and =junit=.
-I add =libreadline-dev=.
-#+BEGIN_EXAMPLE
-sudo apt-get install \
-        build-essential autoconf curl chrpath pkg-config \
-        ncurses-dev libreadline-dev libedit-dev \
-        libunwind8-dev \
-        libgmp-dev \
-        libssl-dev \
-        unixodbc-dev \
-        zlib1g-dev libarchive-dev \
-        libossp-uuid-dev \
-        libxext-dev libice-dev libjpeg-dev libxinerama-dev libxft-dev \
-        libxpm-dev libxt-dev \
-        libdb-dev \
-        libpcre3-dev \
-        libyaml-dev \
-        libreadline-dev
-#+END_EXAMPLE
-
-That doesn't include the documentation dependencies because they are too big.
-Just read the documentation online.
-
-After apt-get finishes, for security (avoiding sudo cache), close that terminal, and open a new one.
-
-Download the [[http://www.swi-prolog.org/download/stable][source]].
-
-Check the checksum using sha256sum.
-
-=cp -p build.templ build=
-
-=mkdir -p $HOME/.local=
-
-Edit =build= script.
-Set =PREFIX= to =$HOME/.local=.
-Uncomment the =--link= option in =EXTRACFG= variable.
-
-Run =./build=.
-It should take a few minutes (about 5 minutes on my 4-core 8-GB-RAM machine).
-
-Ensure that =$HOME/.local/bin= is in your =PATH=.
-For example, I have this line somewhere near the end of my =~/.bashrc= file:
-#+BEGIN_EXAMPLE
-export PATH=$PATH:$HOME/.local/bin
-#+END_EXAMPLE
-
-If you edit your bashrc, close your terminal and open a new one.
-Entering =swipl --version= should print this:
-#+BEGIN_EXAMPLE
-SWI-Prolog version 7.6.4 for x86_64-linux
-#+END_EXAMPLE
-
-If you don't want to edit your bashrc, you can run swipl by its full path =~/.local/bin/swipl=.
-
-Tell SWI-Prolog to use readline.
-Create a FILE containing this:
-#+BEGIN_EXAMPLE
-:- set_prolog_flag(readline, readline).
-#+END_EXAMPLE
-
-Add =-f FILE= switch to the command line you use to start =swipl=.
-Related GitHub issue https://github.com/SWI-Prolog/issues/issues/72.
-** Loading files
-- =:- [foo].= is shorthand for =:- consult(foo).=.
-  - http://www.swi-prolog.org/pldoc/man?predicate=consult/1
-** Interacting with SWI-Prolog
-- To show the canonical representation of a term, query =write_canonical(Term)=.
-- To show the source of a predicate, query =listing(Module:Name)= or =listing(Name)=.
-** Warnings are errors!
-Singleton variables most likely mean there's a typo.
-** TODO debugging: spy/1, tspy/1, trace/0, gtrace/0, notrace/0, debug/0, nodebug/0; stepping: creep, skip, and leap
-Fixing programming errors:
-- https://www.cs.ucsb.edu/~kyledewey/cs162w15/debugging_prolog.html
-- http://www.swi-prolog.org/pldoc/man?section=debugoverview
-  - Type =/f= in the tracer prompt to run to the next failure.
-** TODO <2018-11-30> Prolog needs static checking like Erlang Dialyzer.
-SWI-Prolog has check library?
-
-Is there a Prolog totality/determinism checker?
-
-Prolog typechecking is vital to prevent stupid mistakes in a large knowledge base?
-
-1997 inconclusive discussion "Prolog Type Checker"
-https://dtai.cs.kuleuven.be/projects/ALP/newsletter/archive_93_96/net/typing/types.html
-** How do I use SWI-Prolog?
-- Write a =load.pro= script that loads your files.
-- To start a query interpreter, =swipl -l load.pro=.
-- You write /rules/ in files.
-  You write /queries/ in the query interpreter.
-  - Pasting a file into the interpreter does /not/ load the file.
-    - This is contrary to Lisp/Python/Ruby interpreters.
-
 ** Which string representation should I use?
 *** The answer: Dedicated double-quoted string type (SWI-Prolog 7)
 - "Strings are distinct from lists" http://www.swi-prolog.org/pldoc/man?section=strings
@@ -367,24 +416,22 @@ https://dtai.cs.kuleuven.be/projects/ALP/newsletter/archive_93_96/net/typing/typ
   Example: ="aaa" = [a,a,a]=.
 - This assumes that the Prolog implementation garbage-collects atoms.
 - More convenient to debug.
+** Warnings are errors!
+** TODO debugging: spy/1, tspy/1, trace/0, gtrace/0, notrace/0, debug/0, nodebug/0; stepping: creep, skip, and leap
+debug/0 disables optimizations.
 
-** Profiling in SWI-Prolog; find where your program spends time; find where it is slow; diagnose slowness
+Fixing programming errors:
+- https://www.cs.ucsb.edu/~kyledewey/cs162w15/debugging_prolog.html
+- http://www.swi-prolog.org/pldoc/man?section=debugoverview
+  - Type =/f= in the tracer prompt to run to the next failure.
+
+Singleton variables most likely mean there's a typo.
+* Speeding things up
+** Profiling: finding where your program spends time; finding where it is slow; diagnosing slowness
 To run your =Goal= with profiling, simply query =profile(Goal)=.
 
 Profiling couldn't be any simpler than this!
-** SWI-Prolog, PostgreSQL, and ODBC
-Install the Ubuntu 14.04 package =odbc-postgresql=.
-
-I want my application to self-contain its configuration.
-I don't configure ODBC INI files.
-
-ODBC Data Source Name (DSN) connection string
-
-Relevant commands: =odbcinst -j=
-
-The file =/etc/odbcinst.ini= contains a list of driver names.
-* TODO Half-baked things to shuffle around
-#+TOC: headlines 2 local
+* Where things get ugly
 ** Functional/expression style sometimes beats relational/unification style
 #+BEGIN_EXAMPLE
 -- Functional/expression style
@@ -416,6 +463,35 @@ Dynamic languages (Scheme, JavaScript, Prolog) / gradual-typed languages (TypeSc
 How about Ocaml polymorphic variants?
 
 Should we move from Prolog to Scheme/miniKanren or Mercury?
+** Directives like =:- op= complicate parsing a Prolog source code.
+** Zero-arity compound term
+Use compound_name_arity/3 instead of functor/3, but this seems to be an SWI-Prolog extension.
+
+http://www.swi-prolog.org/pldoc/man?section=ext-compound-zero
+* Writing enterprise web applications?
+** Comparison between ontology, relational programming, and database programming
+Open World Assumption vs Closed World Assumption http://www.mkbergman.com/852/the-open-world-assumption-elephant-in-the-room/
+
+How do we combine closed-world assumption (logic programming / relational database) and open-world assumption (web ontology)?
+** Knowledge representation and software specification
+*** Their relationships
+- 2010, "Functional-Logic Programming Lecture Notes", Harold Boley, slides, [[http://www.cs.unb.ca/~boley/FLP/cs6905FLP.pdf][pdf]]
+  - Knowledge representation in AI roughly corresponds to software specification in software engineering.
+  - Declarative programs can be thought as executable specifications.
+  - Invertibility principle (slide 36)
+  - Nesting/conjunction principle (slide 46)
+  - Unification principle (slide 50)
+  - Amalgamation/integration principle (slide 55)
+  - That's a long deck: 270 slides.
+*** Executable specification?
+- lightweight executable mathematics https://www.cl.cam.ac.uk/~pes20/lem/
+
+** Logic programming vs theorem proving
+- https://stackoverflow.com/questions/36335633/difference-between-logic-programming-and-automated-theorem-proving
+- https://en.wikipedia.org/wiki/Automated_theorem_proving
+
+
+* Theories
 ** Embedding Prolog/Haskell in Haskell/Prolog
 *** Embedding Prolog in Haskell
 - 1999 article "Embedding Prolog in Haskell" https://pdfs.semanticscholar.org/7c46/5d25205830735d0a034532746b7243221eca.pdf
@@ -424,19 +500,66 @@ Should we move from Prolog to Scheme/miniKanren or Mercury?
     in such a way that both the declarative and the procedural reading of the Prolog predicate are preserved."
 - 1988 article "Towards functional programming in Prolog" ftp://obaluae.inf.puc-rio.br/pub/docs/Publications/88_AI_Furtado_SINPLAN.Not.pdf
 *** Embedding Haskell in Prolog: Nobody is talking about this.
-** Directives like =:- op= complicate parsing a Prolog source code.
-** Defining your own operators
-- =:- op(Precedence, Type, Name)=
-** Meta-programming
-- To define 'macros', use =term_expansion= or =goal_expansion=.
-** Use clpfd #=/2 instead of is/2?
-But it's good to have minimal dependencies.
+
+** How are Prolog and Lisp similar?
+- Both Prolog and Lisp have symbols and cons cells.
+  - This is a Lisp cons cell: =(cons 'a 'b)= or ='(a . b)=.
+  - This is the corresponding SWI-Prolog cons cell: =[a|b]= (the canonical form is ='[|]'(a,b)=).
+- Both have macros.
+  - Lisp has defmacro.
+  - Prolog has term_expansion/2 and goal_expansion/2.
+
+I'd say Prolog = Lisp + unification + backtracking - lambda.
+
 ** Comparison between what is difficult in various programming languages
 - 2014 presentation "That scripting language called Prolog" https://www.slideshare.net/SergeiWinitzki/prolog-talk
   - It compares what is difficult in various programming languages.
   - It defines "declarative": 'Programming is "declarative" when /specifications are programs/.'
     - Slide 29: "declarative programming = creating a good DSL for your domain"
   - Slide 24 compares SQL, Datalog, and Prolog.
+
+** Comparison with other relational programming languages
+Comparison with miniKanren:
+- https://stackoverflow.com/questions/28467011/what-are-the-main-technical-differences-between-prolog-and-minikanren-with-resp
+  - William E. Byrd's answer:
+    - Prolog is practical; miniKanren is pure.
+    - Prolog unification doesn't use occurs check; miniKanren unification uses occurs check.
+    - Prolog uses depth-first search; miniKanren uses complete interleaving search.
+    - '[...] miniKanren is being used for research in "relational" programming.'
+    - "Over time miniKanren has added more symbolic constraints, really becoming a symbolically-oriented Constraint Logic Programming language."
+    - "There are other very interesting logic programming languages as well, such as Mercury, Curry, and Gödel, each of which has its own take on logic programming."
+
+Mercury vs Prolog
+- http://lambda-the-ultimate.org/node/890
+- <2018-10-21> "The Prolog to Mercury transition guide" https://www.mercurylang.org/information/doc-latest/transition_guide.pdf
+
+SQL? Datalog?
+
+** Two camps in programming
+There are two camps in programming:
+the bottom-up camp and the top-down camp.
+
+The bottom-up camp starts from machines and goes up toward mathematics.
+This camp produces Assembly, Fortran, Cobol, Pascal, C, C++, Go.
+This camp produced fast but ugly implementations.
+Haphazard incremental improvements.
+
+The top-down camp starts from mathematics and goes down toward machines.
+This camp produces Lisp, Scheme, Prolog, ML, Ocaml, Haskell, Coq, Idris, Agda, Lean.
+This camp produced elegant but slow implementations.
+Big design up front.
+
+They seem to be converging to a middle ground: ugly and slow.
+
+Why can't we get fast and elegant?
+* TODO Half-baked things to shuffle around
+#+TOC: headlines 2 local
+** Defining your own operators
+- =:- op(Precedence, Type, Name)=
+** Meta-programming
+- To define 'macros', use =term_expansion= or =goal_expansion=.
+** Use clpfd #=/2 instead of is/2?
+But it's good to have minimal dependencies.
 ** Difference lists
 - Who invented difference lists when?
 
@@ -466,9 +589,6 @@ then you can query =length(List, _), goal(List)= to make the search complete.
 https://en.wikibooks.org/wiki/Prolog/Search_techniques
 ** <2018-10-20> How do we make sense of this counterintuitive module syntax?
 - https://stackoverflow.com/questions/42399020/how-to-get-a-listing-of-a-specific-knowledge-base
-** Comparison between ontology, relational programming, and database programming
-*** Open World Assumption vs Closed World Assumption
-- http://www.mkbergman.com/852/the-open-world-assumption-elephant-in-the-room/
 ** Discover the wonderful world of Prolog / logic programming / relational programming
 *** Symbolic AI is the easiest AI approach.
 - Connectionist AI (neural networks) excels at tasks that are difficult to describe in formal logic.
@@ -485,64 +605,24 @@ https://en.wikibooks.org/wiki/Prolog/Search_techniques
   - https://publicdomainreview.org/2016/11/10/let-us-calculate-leibniz-llull-and-computational-imagination/
 - probabilistic logic programming
 - https://softwareengineering.stackexchange.com/questions/275680/the-dream-of-declarative-programming
-** Comparison with other relational programming languages
-Comparison with miniKanren:
-- https://stackoverflow.com/questions/28467011/what-are-the-main-technical-differences-between-prolog-and-minikanren-with-resp
-  - William E. Byrd's answer:
-    - Prolog is practical; miniKanren is pure.
-    - Prolog unification doesn't use occurs check; miniKanren unification uses occurs check.
-    - Prolog uses depth-first search; miniKanren uses complete interleaving search.
-    - '[...] miniKanren is being used for research in "relational" programming.'
-    - "Over time miniKanren has added more symbolic constraints, really becoming a symbolically-oriented Constraint Logic Programming language."
-    - "There are other very interesting logic programming languages as well, such as Mercury, Curry, and Gödel, each of which has its own take on logic programming."
-
-Mercury vs Prolog
-- http://lambda-the-ultimate.org/node/890
-- <2018-10-21> "The Prolog to Mercury transition guide" https://www.mercurylang.org/information/doc-latest/transition_guide.pdf
-
-SQL? Datalog?
 ** Reminder for those who already know
 Elucidating
 https://en.wikipedia.org/wiki/Prolog_syntax_and_semantics
-** "Universal-transpiler": Similar to what we want
+** Making compilers
+- https://www.reddit.com/r/ProgrammingLanguages/comments/9em9jf/future_directions_for_optimizing_compilers/
+  - "Future Directions for Optimizing Compilers" https://arxiv.org/abs/1809.02161
+
+"Universal-transpiler" may be similar to what we want.
+
 - "Universal-transpiler"
   - https://github.com/jarble/transpiler
     - it also has links to similar projects
   - http://www.swi-prolog.org/pack/list?p=transpiler
-** Logic programming vs theorem proving
-- https://stackoverflow.com/questions/36335633/difference-between-logic-programming-and-automated-theorem-proving
-- https://en.wikipedia.org/wiki/Automated_theorem_proving
-** Knowledge representation and software specification
-*** Their relationships
-- 2010, "Functional-Logic Programming Lecture Notes", Harold Boley, slides, [[http://www.cs.unb.ca/~boley/FLP/cs6905FLP.pdf][pdf]]
-  - Knowledge representation in AI roughly corresponds to software specification in software engineering.
-  - Declarative programs can be thought as executable specifications.
-  - Invertibility principle (slide 36)
-  - Nesting/conjunction principle (slide 46)
-  - Unification principle (slide 50)
-  - Amalgamation/integration principle (slide 55)
-  - That's a long deck: 270 slides.
-*** Executable specification?
-- lightweight executable mathematics https://www.cl.cam.ac.uk/~pes20/lem/
-** Combine closed-world assumption (logic programming / relational database) and open-world assumption (web ontology)
-** Making compilers
-- https://www.reddit.com/r/ProgrammingLanguages/comments/9em9jf/future_directions_for_optimizing_compilers/
-  - "Future Directions for Optimizing Compilers" https://arxiv.org/abs/1809.02161
 ** Declarative programming languages
-
 [[http://www.cse.chalmers.se/~oloft/Papers/wm96/node2.html][Declarative Programming Languages]], functional logic programming, two ways it is done (narrowing and residuation);
 definitional programming, GCLA language (separate definition and control)
 
 - 1995, "Functional Logic Programming in GCLA", [[http://www.cse.chalmers.se/~oloft/Papers/wm95.pdf][pdf]]
-** How are Prolog and Lisp similar?
-- Both Prolog and Lisp have symbols and cons cells.
-  - This is a Lisp cons cell: =(cons 'a 'b)= or ='(a . b)=.
-  - This is the corresponding SWI-Prolog cons cell: =[a|b]= (the canonical form is ='[|]'(a,b)=).
-- Both have macros.
-  - Lisp has defmacro.
-  - Prolog has term_expansion/2 and goal_expansion/2.
-
-I'd say Prolog = Lisp + unification + backtracking - lambda.
 ** Speculative
 *** Fast logic programming?
 - https://www.reddit.com/r/ProgrammingLanguages/comments/9fgv3v/can_logic_programming_execute_as_fast_as/
@@ -568,7 +648,7 @@ https://pdfs.semanticscholar.org/12ec/568a6583d3d66b6821f28269f06937a9f2eb.pdf
 http://www.pathwayslms.com/swipltuts/index.html
 *** "Frequently Asked Questions for ##Prolog"
 http://www.pathwayslms.com/swipltuts/student/
-** What are these trying to say?
+*** What are these trying to say?
 - 1991 article "Logic Programming, Functional Programming, and Inductive Definitions" https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-205.pdf
   - "The unification of logic and functional programming, like the Holy Grail, is sought by countless people"
   - "More generally, we suggest that the traditional paradigm — logic programming as first-order logic — is seriously out of step with practice.
@@ -578,7 +658,7 @@ http://www.pathwayslms.com/swipltuts/student/
     But we have to ask whether this dream is possible — even whether it is desirable.
     The first-order paradigm does not deal adequately with negation in databases, and seems to be an unreliable guide in research on program correctness and language design.
     Inductive definitions are more fundamental than first-order logic, and perhaps easier to understand."
-** Books?
+*** Books?
 - 1995 book "Prolog Programming in Depth" http://www.lsv.fr/~reichert/Enseignement/2012/PPL/Prolog_Programming_In_Depth.pdf
   - 1.16 Styles of encoding knowledge, p. 28
     - parent, male, female vs. father, mother
