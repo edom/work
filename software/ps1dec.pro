@@ -21,6 +21,7 @@ decompile(Address)
 :- use_module(library(clpfd)).
 :- use_module('./transput.pro').
 :- use_module('./ps1_analysis_0.pro', except([routine_begin/2])).
+:- use_module('./ps1_bit.pro').
 :- use_module('./ps1_decompile.pro').
 :- use_module('./ps1_disassemble.pro').
 :- use_module('./ps1_exe.pro').
@@ -80,5 +81,5 @@ portray/1 is a dynamic predicate that can change how the top-level writes terms.
 Write all numbers in hexadecimal.
 Add spaces around the assignment operator.
 */
-portray(I) :- integer(I), format('0x~16r', [I]).
+portray(I) :- integer(I), integer_hex(I,H), write(H).
 portray(A := B) :- format('~p := ~p', [A, B]).
