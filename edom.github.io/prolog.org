@@ -1,4 +1,4 @@
-#+TITLE: Relational-multidirectional-logic programming in production in SWI-Prolog
+#+TITLE: Using Prolog
 #+DATE: 2018-04-11 00:00 +0700
 #+OPTIONS: ^:nil toc:nil
 #+PERMALINK: /prolog.html
@@ -24,6 +24,7 @@ http://www.swi-prolog.org/FAQ/PrologLAMP.txt
 There is no standard date/time/calendar library?
 There may be one?
 I'm still looking.
+library(julian)?
 - Java 8 has "java.util.time"; previous Java versions can use "Joda Time".
 - Haskell has the "time" package ("Data.Time" module).
 ** Let me hype you up.
@@ -60,36 +61,27 @@ When you build your home, you don't build your own bricks.
 Your coworkers are beating you with Prolog?
 Well, what the hell are you waiting for?
 Learn Prolog now, or lose your job and die in oblivion!
-
-Things that I haven't found in Prolog:
-the speed of C,
-the toolchain of Go.
 ** Not sure yet? Try Prolog with minimal investment.
 If you're not sure yet, I suggest that you
 read [[https://www.metalevel.at/prolog][Markus Triska's book "The power of Prolog"]]
 while doodling some code on [[http://pengines.swi-prolog.org/apps/swish/index.html][SWISH online Prolog interpreter]].
-** Comparison of Prolog implementations
-https://en.wikipedia.org/wiki/Comparison_of_Prolog_implementations
+** Comparing Prolog implementations?
+I use SWI-Prolog because it's what I use in university, and because of this [[http://www.swi-prolog.org/features.html][SWI-Prolog sales pitch]].
 
-Comparison between SWI Prolog, YAP, GNU Prolog.
-http://www.david-reitter.com/compling/prolog/compare.html
+This book assumes that the reader uses SWI-Prolog 7.6.4.
 
 There are many Prolog implementations.
 Some companies have their own Prolog implementations.
 
-I use SWI-Prolog because it's what I use in university, and because of this [[http://www.swi-prolog.org/features.html][SWI-Prolog sales pitch]].
-
-This book assumes that the reader uses SWI-Prolog 7.6.4.
-* Using the interactive prompt
+See also:
+- https://en.wikipedia.org/wiki/Comparison_of_Prolog_implementations
+- Comparison between SWI Prolog, YAP, GNU Prolog http://www.david-reitter.com/compling/prolog/compare.html
+* Establishing a workflow
 #+TOC: headlines 2 local
 ** <2018-10-20> Installing SWI-Prolog 7.6.4 on Ubuntu 14.04
 If you are using Ubuntu 14.04, follow my instructions below.
-
 If your operating system has packaged SWI-Prolog 7.6.4 or newer, use it.
-(Thank you, volunteer package maintainers!)
-
-If you aren't using Ubuntu 14.04, follow the [[http://www.swi-prolog.org/Download.html][official instructions]].
-Choose the current stable release.
+Otherwise, follow the [[http://www.swi-prolog.org/Download.html][official instructions]] and choose the current stable release.
 
 The following guide is for installing SWI-Prolog 7.6.4 on Ubuntu 14.04.
 
@@ -143,7 +135,7 @@ It should take a few minutes (about 5 minutes on my 4-core 8-GB-RAM machine).
 Ensure that =$HOME/.local/bin= is in your =PATH=.
 For example, I have this line somewhere near the end of my =~/.bashrc= file:
 #+BEGIN_EXAMPLE
-export PATH=$PATH:$HOME/.local/bin
+export PATH="$PATH:$HOME/.local/bin"
 #+END_EXAMPLE
 
 If you edit your bashrc, close your terminal and open a new one.
@@ -153,53 +145,109 @@ SWI-Prolog version 7.6.4 for x86_64-linux
 #+END_EXAMPLE
 
 If you don't want to edit your bashrc, you can run swipl by its full path =~/.local/bin/swipl=.
+** Enabling readline
+We want readline for history (Ctrl+R, Ctrl+S) and completion (Tab, Up, Down).
 
-Tell SWI-Prolog to use readline.
+To keep the entire codebase under BSD license,
+SWI-Prolog doesn't enable the GPL-licensed GNU readline by default.
+But you can tell SWI-Prolog to use readline.
 Create a FILE containing this:
 #+BEGIN_EXAMPLE
 :- set_prolog_flag(readline, readline).
 #+END_EXAMPLE
 
 Add =-f FILE= switch to the command line you use to start =swipl=.
-Related GitHub issue https://github.com/SWI-Prolog/issues/issues/72.
-** Establishing workflow
-=swipl -l FILE=
 
-=:- [foo].= is shorthand for =:- consult(foo).=.
-http://www.swi-prolog.org/pldoc/man?predicate=consult/1
+Related: [[https://github.com/SWI-Prolog/issues/issues/72][GitHub issue #72]]: "how to build with GNU readline on linux".
+** Starting the interpreter and the documentation server
+I start SWI-Prolog with this command line:
+#+BEGIN_EXAMPLE
+swipl --pldoc=DocPort -f UserInitFile -l PrologFile
+#+END_EXAMPLE
 
-We can enter temporary definitions from the prompt: =?- [user].=
-Enter definitions.
-End with a new line and Control+D.
-** Interacting with SWI-Prolog
-- To show the canonical representation of a term, query =write_canonical(Term)=.
-- To show the source of a predicate, query =listing(Module:Name)= or =listing(Name)=.
-** TODO <2018-11-30> Prolog needs static checking like Erlang Dialyzer.
-SWI-Prolog has check library?
+I have enabled readline in my UserInitFile.
 
-Is there a Prolog totality/determinism checker?
+I use 4002 for DocPort.
+I open [[http://localhost:4002/pldoc/]] in my browser.
+** Thinking and editing
+I edit some Prolog source files in Visual Studio Code with vim key bindings
+because I often need to duplicate a line when adding a new clause.
 
-Prolog typechecking is vital to prevent stupid mistakes in a large knowledge base?
+I add statements or comments.
 
-1997 inconclusive discussion "Prolog Type Checker"
-https://dtai.cs.kuleuven.be/projects/ALP/newsletter/archive_93_96/net/typing/types.html
-** How do I use SWI-Prolog?
-- You write /rules/ in files.
-  You write /queries/ in the query interpreter.
-  - Pasting a file into the interpreter does /not/ load the file.
-    - This is contrary to Lisp/Python/Ruby interpreters.
-** SWI-Prolog, PostgreSQL, and ODBC
-Install the Ubuntu 14.04 package =odbc-postgresql=.
+I think a lot about names, representations, and relations.
 
-I want my application to self-contain its configuration.
-I don't configure ODBC INI files.
+To edit the source of a thing in PceEmacs, I have several options:
+- I click the "Edit file" or "Edit predicate" button in pldoc server.
+- I query =edit(Name)= or =edit(Name/Arity)= in the interpreter.
+** Rebuilding
+To see the updated documentation,
+I click "Make & Reload" button in my pldoc website, if I haven't done so.
+If I have clicked that button, I simply refresh my browser with F5 or Ctrl+R.
 
-ODBC Data Source Name (DSN) connection string
+To test the program, I query =make.= in the interactive prompt, and I enter some queries.
 
-Relevant commands: =odbcinst -j=
+Warnings are errors.
+If there is a warning, I go back to editing.
+"Singleton variables" most likely mean there's a typo.
+** Trying and manual testing
+Important: /Prolog source file and Prolog query prompt have different syntax./
+A Prolog source file contains /statements/.
+The Prolog interpreter accepts /queries/.
+Pasting a file into the interpreter does /not/ load the file;
+this is contrary to Lisp/Python/Ruby interpreters.
 
-The file =/etc/odbcinst.ini= contains a list of driver names.
-* Handling errors
+The prompt =?-= means that the interpreter is expecting a /query/.
+However, we can enter temporary statements:
+- Type the query =[user].=.
+  The prompt changes to =|:=.
+  We're now at the statement prompt.
+  (The syntax =:- [foo].= is shorthand for =:- consult(foo).= which is documented in [[http://www.swi-prolog.org/pldoc/man?predicate=consult/1][consult/1]].)
+- Enter several lines of statements.
+- End with a new line and Control+D.
+  We're now back at the query prompt.
+
+Those temporary statements disappear when the interpreter quits.
+
+Usually, after trying my changes, I go back to thinking and editing.
+** Seeing source codes and finding definitions
+To show the canonical representation (properly-parenthesized tree form) of a term, query =write_canonical(Term)=.
+
+To see the source code of a predicate, query =edit(Name)= or =edit(Name/Arity)= or =listing(Module:Name)= or =listing(Name)=.
+We can see the source code of libraries.
+We can easily find where things are defined.
+** Troubleshooting: tracing and spying
+Having to use the tracer means I have failed to design unsurprising programs.
+It means that my past self have failed to communicate to my future self.
+
+Sometimes I query debug/0 to disable optimizations so that errors have full stack trace.
+Sometimes I need to restart the interpreter and query debug/0 before running my development web server.
+See also nodebug/0.
+
+I start tracing a goal with the query =trace, Goal.=
+In the tracer prompt:
+- =a= aborts (calls abort/0; goes back to toplevel interpreter prompt)
+- =c= creeps ("step into" in modern debugger parlance)
+- =s= skips ("step over" in modern debugger parlance)
+- =l= leaps ("continue" in modern debugger parlance)
+- Type =/f= in the tracer prompt to run to the next failure.
+
+I stop tracing by notrace/0.
+
+TODO spy/1, tspy/1
+
+trace/0, gtrace/0, notrace/0
+
+These resources say something about fixing programming errors:
+- https://www.cs.ucsb.edu/~kyledewey/cs162w15/debugging_prolog.html
+- http://www.swi-prolog.org/pldoc/man?section=debugoverview
+- https://www.metalevel.at/prolog/testing
+- https://www.metalevel.at/prolog/debugging
+** Committing to a Git repository
+I commit my work to Git repository with Emacs Magit or git-gui.
+I sanity-check the tree with =gitk --all=.
+I push my work to my GitHub work repository.
+* Error handling and logging
 #+TOC: headlines 2 local
 ** Fail, throw, stack traces
 Two options: throw or fail.
@@ -258,22 +306,55 @@ References:
 - [[http://www.pathwayslms.com/swipltuts/message/index.html][Anne Ogborn's "Printing Messages in SWI-Prolog"]]
 - http://www.swi-prolog.org/pldoc/man?section=printmsg
 - http://www.swi-prolog.org/pldoc/man?section=debug
+- https://www.metalevel.at/prolog/business
 
 Usability issues:
 - Where is =prolog:message//1= documented?
   I found that by trial-and-error.
 - Why do we require people to understand DCG rules before they can use the messaging system?
-* Writing elegant Prolog knowledge bases
+* Modeling things in Prolog
 #+TOC: headlines 2 local
-** Prolog predicate parameter ordering convention: Order the parameters from the most likely to be bound
+** Declarative reading
+=A :- B= means "to prove A, prove B".
+
+=p(a,b) :- Q= is a shorthand of =p(A,B) :- A=a, B=b, Q=.
+
+=A :- B= is pure iff all reordering of the phrases of B doesn't change the result?
+
+=\+= means "not provable", not "not"
+
+Every variable is implicitly universally quantified.
+
+=?- Q= means we ask Prolog to prove =Q=.
+** Production prolog
+"Production Prolog" by Michael Hendricks; Strange Loop 2014
+https://www.youtube.com/watch?v=G_eYTctGZw8
+- This mentions "Mercury's bisecting debugger"
+- mavis library for optional type declarations
+- julian library for dates
+- time/1 for measuring how long a goal takes
+- library(spawn)?
+** Predicate for membership
+Membership
+person(joe)
+positive(1)
+** Designing predicates: naming is hard.
+The name of a relation should describe the relationship.
+
+If we intend that there is only one relation between A and B that makes sense,
+then we may name that relation A_B.
+But:
+- What if A or B contains underscores?
+- Why do we prefer =father_child= to =beget= or =sire=?
+
+is_thing(A).
+
+A procedure's name should begin with a verb.
+
+Order the parameters from the most likely to be bound.
 If parameter A is more likely to be more bound than parameter B, then A should come before B.
 Example: Write list_length/2 instead of length_list/2.
-
-Not everyone follows this convention.
-
-** Don't multifile if clause order matters.
-Reloading changes clause order.
-http://www.swi-prolog.org/FAQ/Multifile.html
+Unfortunately not everyone follows this convention.
 ** Naming the parts of a list: head, tail, and butt
 - "head" is the first element
 - "tail" is everything but the head
@@ -394,44 +475,52 @@ See also:
 - https://www.metalevel.at/prolog/nontermination
   - "[Non-termination is] common among beginners, and often lead them to perceive Prolog as 'slow', when in fact their program does not terminate /at all/."
 ** Which string representation should I use?
-*** The answer: Dedicated double-quoted string type (SWI-Prolog 7)
+The answer: Dedicated double-quoted string type (SWI-Prolog 7).
 - "Strings are distinct from lists" http://www.swi-prolog.org/pldoc/man?section=strings
 - "Why has the representation of double quoted text changed?" http://www.swi-prolog.org/pldoc/man?section=ext-dquotes-motivation
 - 2013 article "Strings in ECLiPSe 6.2, SWI-7 and YAP" http://eclipseclp.org/wiki/Prolog/Strings
   - "With SWI-7 and ECLiPSe 6.2 string support has been harmonized, and YAP is expected to agree as well."
   - "Agreed Common Functionality"
   - "Situation before December 2013"
-*** Non-answers
-**** Edinburgh style: Double-quoted string as list of integer codes (default mode of SWI-Prolog 6.6.4 on Ubuntu 14.04)
+
+Non-answer: Edinburgh style: Double-quoted string as list of integer codes (default mode of SWI-Prolog 6.6.4 on Ubuntu 14.04):
 - A Unicode character is represented as an integer that is the code of that character.
 - A string is represented as a list of codes.
   Example: ="aaa" = [97,97,97]=.
-- Inconvenient to debug.
-- This behavior changes in SWI-Prolog 7.
+- This behavior changed in SWI-Prolog 7.
 - This was in 1993 ISO standard draft. http://fsl.cs.illinois.edu/images/9/9c/PrologStandard.pdf
   - This wasn't in the final version?
-**** Double-quoted string as list of one-character atoms
+
+Non-answer: Double-quoted string as list of one-character atoms:
 - A Unicode character is represented as a one-character atom.
 - A string is represented as a list of one-character atoms.
   Example: ="aaa" = [a,a,a]=.
 - This assumes that the Prolog implementation garbage-collects atoms.
-- More convenient to debug.
-** Warnings are errors!
-** TODO debugging: spy/1, tspy/1, trace/0, gtrace/0, notrace/0, debug/0, nodebug/0; stepping: creep, skip, and leap
-debug/0 disables optimizations.
+* Writing extensible knowledge bases
+** Multifile or parametrization-and-catamorphism?
+#+BEGIN_EXAMPLE
+:- multifile foo_ext/1.
 
-Fixing programming errors:
-- https://www.cs.ucsb.edu/~kyledewey/cs162w15/debugging_prolog.html
-- http://www.swi-prolog.org/pldoc/man?section=debugoverview
-  - Type =/f= in the tracer prompt to run to the next failure.
+foo(A) :- foo_ext(A).
+#+END_EXAMPLE
 
-Singleton variables most likely mean there's a typo.
-* Speeding things up
-** Profiling: finding where your program spends time; finding where it is slow; diagnosing slowness
+Catamorphism:
+#+BEGIN_EXAMPLE
+foo(F,A) :- call(F,A).
+#+END_EXAMPLE
+
+Don't multifile if clause order matters.
+Reloading changes clause order.
+http://www.swi-prolog.org/FAQ/Multifile.html
+* Where things get ugly
+** Cuts
+- slide 5-28, pitfalls in implementing abs with cut http://users.informatik.uni-halle.de/~brass/lp06/c5_propr.pdf
+** Speeding things up
+*** Profiling: finding where your program spends time; finding where it is slow; diagnosing slowness
 To run your =Goal= with profiling, simply query =profile(Goal)=.
 
 Profiling couldn't be any simpler than this!
-* Where things get ugly
+
 ** Functional/expression style sometimes beats relational/unification style
 #+BEGIN_EXAMPLE
 -- Functional/expression style
@@ -489,9 +578,22 @@ How do we combine closed-world assumption (logic programming / relational databa
 ** Logic programming vs theorem proving
 - https://stackoverflow.com/questions/36335633/difference-between-logic-programming-and-automated-theorem-proving
 - https://en.wikipedia.org/wiki/Automated_theorem_proving
+** SWI-Prolog, PostgreSQL, and ODBC
+Install the Ubuntu 14.04 package =odbc-postgresql=.
 
+I want my application to self-contain its configuration.
+I don't configure ODBC INI files.
 
+ODBC Data Source Name (DSN) connection string
+
+Relevant commands: =odbcinst -j=
+
+The file =/etc/odbcinst.ini= contains a list of driver names.
+
+[[http://www.swi-prolog.org/pldoc/doc_for?object=section(%2527packages/cql.html%2527)][SWI-Prolog CQL documentation]] doesn't inspire confidence.
+** Deductive databases and Datalog?
 * Theories
+** Relational-multidirectional-logic programming?
 ** Embedding Prolog/Haskell in Haskell/Prolog
 *** Embedding Prolog in Haskell
 - 1999 article "Embedding Prolog in Haskell" https://pdfs.semanticscholar.org/7c46/5d25205830735d0a034532746b7243221eca.pdf
@@ -552,6 +654,9 @@ Big design up front.
 They seem to be converging to a middle ground: ugly and slow.
 
 Why can't we get fast and elegant?
+** "GOEDEL is intended to be a declarative successor to Prolog."
+"GOEDEL is intended to be a declarative successor to Prolog."
+https://www.cs.cmu.edu/afs/cs/project/ai-repository/ai/lang/prolog/impl/other/goedel/0.html
 * TODO Half-baked things to shuffle around
 #+TOC: headlines 2 local
 ** Defining your own operators
@@ -699,3 +804,12 @@ http://www.pathwayslms.com/swipltuts/student/
         These negative rules are needed to tell us when we have an exception to a defeasible rule, but they are desirable in their own right as well."
         - The second sentence is too long.
     - (I haven't read it.)
+** TODO <2018-11-30> Prolog needs static checking like Erlang Dialyzer.
+SWI-Prolog has check library?
+
+Is there a Prolog totality/determinism checker?
+
+Prolog typechecking is vital to prevent stupid mistakes in a large knowledge base?
+
+1997 inconclusive discussion "Prolog Type Checker"
+https://dtai.cs.kuleuven.be/projects/ALP/newsletter/archive_93_96/net/typing/types.html
