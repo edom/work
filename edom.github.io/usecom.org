@@ -2,20 +2,793 @@
 #+DATE: 2016-05-02 03:31:20 +0700
 #+OPTIONS: toc:nil
 #+TOC: headlines 1
-#+TOC: headlines 3
 #+PERMALINK: /usecom.html
-* Using computers
+* Administering a personal GNU/Linux installation (mostly Ubuntu)
+#+TOC: headlines 2 local
+** Bash shell programming
+*** Articles
+   :PROPERTIES:
+   :CUSTOM_ID: articles
+   :END:
+
+- Bash has associative arrays
+
+  - https://www.artificialworlds.net/blog/2012/10/17/bash-associative-array-examples/
+
+- [[https://github.com/SierraSoftworks/bash-cli][SierraSoftworks/bash-cli: A command line framework built using nothing but Bash and compatible with anything]]
+- [[http://wiki.bash-hackers.org/syntax/pe][parameter expansion]]
+- [[https://github.com/dylanaraps/pure-bash-bible][pure bash bible]]
+
+*** Error handling
+   :PROPERTIES:
+   :CUSTOM_ID: error-handling
+   :END:
+
+I set these bash options in my script to make it fail fast:
+
+#+BEGIN_SRC sh
+    set -o errexit
+    set -o nounset
+    set -o pipefail
+#+END_SRC
+
+*** Bash pitfalls
+   :PROPERTIES:
+   :CUSTOM_ID: bash-pitfalls
+   :END:
+
+This is bash version =GNU bash, version 4.3.11(1)-release (x86_64-pc-linux-gnu)= that comes with Ubuntu 14.04.
+
+**** Local variable definition ignores command substitution result
+    :PROPERTIES:
+    :CUSTOM_ID: local-variable-definition-ignores-command-substitution-result
+    :END:
+
+At first this seems like an unexpected interaction between function, =local= variable, =set -e (set -o errexit)=, and command substitution =$(cmd)=.
+
+The word =local= is a shell command that has an exit status, not a keyword like =var= in JavaScript.
+Bash is behaving as documented.
+See the documentation for =local= in =man bash=.
+
+#+BEGIN_SRC sh
+    fun_0() {
+        local var
+        var=$(false)
+        echo fun_0
+    }
+
+    fun_1() {
+        local var=$(false)
+        echo fun_1
+    }
+
+    fun_2() {
+        local var=$1
+        echo fun_2
+    }
+
+    echo $(set -o errexit; fun_0) # Expected: This doesn't print fun_0.
+    echo $(set -o errexit; fun_1) # PITFALL: This prints fun_1 !!!
+    echo $(set -o nounset; fun_2) # Pitfall: This doesn't print fun_2, and aborts with "bash: $1: unbound variable".
+#+END_SRC
+*** Others
+- https://github.com/koalaman/shellcheck
+  - <2018-11-03> I'm not going back to Haskell until GHC compiles faster.
+** Installing remote graphical user interface
+*** Goal, background, and failures
+I need to run Java VisualVM on my server to profile my application.
+
+I tried =ssh -X=, but it was unacceptably slow.
+SSH compression doesn't help; the problem is latency, not throughput.
+
+I don't want to run an X server on the remote machine.
+I don't want a display server running all the time.
+I want to start it only when I need it.
+
+Ubuntu help is not helpful.
+It doesn't even mention VNC or RDP.
+https://help.ubuntu.com/community/ServerGUI
+
+VNC seems promising.
+Let's run VNC at the server's localhost, and connect through SSH tunneling.
+Let's go with TightVNC.
+
+"VNC: A Faster Alternative to X11"
+https://www.nas.nasa.gov/hecc/support/kb/vnc-a-faster-alternative-to-x11_257.html
+*** Plan of action
+We assume two machines:
+- The /local machine/ is the machine that we use to start SSH connection.
+- The /remote machine/ is the machine that accepts SSH connections.
+
+What we need to do on the remote machine:
+- Install VNC server.
+- Start VNC server.
+- Stop VNC server.
+
+What we need to do on the local machine:
+- Install VNC client/viewer.
+*** Installing, starting, and stopping TightVNC server on the remote machine
+sudo apt-get install --no-install-recommends xfce4 tightvncserver
+
+To start VNC server at remote localhost port 5901.
+1920x1080.
+vncserver -localhost -nolisten tcp -geometry 1920x960 -depth 24 :1
+
+Configure SSH LocalForward.
+If you have a jumpbox, you may need to forward twice.
+
+To stop
+vncserver -kill :1
+
+Start remmina. It seems to have been installed by default. The GUI should be obvious.
+
+Sources:
+- "-nolisten tcp" http://mail.nylug.org/pipermail/nylug-talk/2009-April/013377.html
+- "vncserver :1 -geometry 800x600 -depth 24" https://blog.ssdnodes.com/blog/remote-linux-desktop-vps-ssh-vnc/
+- helpful https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-on-ubuntu-14-04
+*** Installing TightVNC client on the local/development machine
+*** Path not taken
+I saw these, but I did not try these.
+- https://wiki.x2go.org/doku.php/doc:newtox2go
+- https://www.tecmint.com/best-remote-linux-desktop-sharing-software/
+- https://serverfault.com/questions/36381/best-fastest-way-to-access-desktop-gui-on-a-remote-ubuntu-server
+** Autotools
+- I add =--prefix=$HOME/.local= to configure.
+  For installing things, I only sudo apt.
+  I never sudo make.
+- Cargo-cult programming
+  - Sometimes fixes things
+    - Add =-I /usr/share/aclocal= to =ACLOCAL_AMFLAGS= in =Makefile.am=.
+- [[http://voices.canonical.com/jussi.pakkanen/2011/09/13/autotools/][Why GNU Autotools is not my favorite build system | Jussi Pakkanen's development blog]]
+
+** Running X client applications on Docker on Linux
+#+BEGIN_EXAMPLE
+    docker \
+        -e DISPLAY \
+        -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
+        -u <user> <image> <command>
+#+END_EXAMPLE
+
+Replace =<user>= with a non-root user.
+You need a non-root user because the X server rejects connection from the root user by default.
+You can change this with =xhost=, but it's better to connect with a non-root user.
+
+The =<command>= argument is optional.
+
+The =-e DISPLAY= parameter reexports the =DISPLAY= environment variable to the application inside the container.
+X client applications will read from this environment variable to determine which server to connect to.
+
+The =-v HOST:CONT:ro= option mounts =HOST= directory to =CONT= directory read-only.
+This is so that the application in the container can connect to the host X server's Unix socket.
+
+On Linux, display =:0= corresponds to the Unix socket =/tmp/.X11-unix/X0=.
+Everyone who can connect to that Unix socket will
+be able to run X client applications on the machine;
+it is not specific to Docker.
+
+If X complains about shared memory, try:
+
+#+BEGIN_EXAMPLE
+    docker \
+        -e DISPLAY=unix$DISPLAY \
+        -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
+        -u <user> <image> <command>
+#+END_EXAMPLE
+** Habits learned the hard way
+- I check the time at [[https://time.gov/][time.gov]] because Ubuntu 14.04 NTP once betrayed me.
+  - 2018-01-16: I had always thought that it was dependable, but it betrayed me:
+    It showed 2 a.m. while the actual time was 4 a.m..
+    I missed some hours of sleep.
+- I sometimes run =sync=, hoping to make sure my changes are written to disk.
+** What
+- Why use swap partitions and not swap files?
+
+  - Defragmenting swap files might have undesirable effects.
+
+    - https://lwn.net/Articles/317787/
+
+- ext4 defragmentation tools
+
+  - https://askubuntu.com/questions/221079/how-to-defrag-an-ext4-filesystem
+
+    - e2freefrag DEV, e4defrag -c FILE
+
+- SATA 3 Gbps controller problem?
+
+  - https://github.com/zfsonlinux/zfs/issues/4873
+
+- Security
+
+  - Isolating (sandboxing) an application
+
+    - Creating a dedicated limited user for an application
+
+      - =adduser --system=, or just use the =nobody= user?
+
+  - Many methods of isolation
+
+    - https://unix.stackexchange.com/questions/384117/linux-isolate-process-without-containers
+    - https://www.engineyard.com/blog/linux-containers-isolation
+    - https://opensourceforu.com/2016/07/many-approaches-sandboxing-linux/
+
+- Why isn't ssh fail2ban the default?
+  Why is security not the default?
+- 2014, "Is there any solution to make OpenVPN authentication with Google ID?", [[https://serverfault.com/questions/597833/is-there-any-solution-to-make-openvpn-authentication-with-google-id][SF 597833]]
+- man page usability, terminal usability, reducing cognitive load
+
+  - [[https://tldr.sh/][tldr.sh]]: "The TLDR pages are a community effort to simplify the beloved man pages with practical examples."
+
+- [[https://stackoverflow.com/questions/22697049/what-is-the-difference-between-google-app-engine-and-google-compute-engine][SO 22697049: difference between Google App Engine and Google Compute Engine]]
+- A good OS (operating system) is invisible like a good design.
+
+  - The user can't tell whether an OS is good.
+    If the OS is good, everything runs smoothly.
+  - But the user can tell whether an OS is bad.
+    Crashes due to non-hardware problems.
+    Things that don't just work.
+
+- https://felipec.wordpress.com/2011/06/16/after-two-weeks-of-using-gnome-3-i-officially-hate-it/
+
+  - Why does the author disapprove of GNOME 3?
+
+- https://libcloud.apache.org/
+
+  - "One Interface To Rule Them All: Python library for interacting with many of the popular cloud service providers using a unified API."
+
+- Systems should be secure by default.
+
+  - UNIX/Linux woes
+
+    - Why is SSH fail2ban not installed by default?
+    - Why does an application run as the user?
+
+      - I think this is a design flaw.
+        It's a big gaping security hole.
+        It allows an application to access all your files.
+        But how do we fix this without sacrificing convenience?
+      - Why is sandboxing not the default?
+
+    - How do we understand SELinux?
+
+      - [[https://www.computernetworkingnotes.com/rhce-study-guide/selinux-explained-with-examples-in-easy-language.html][SELinux Explained with Examples in Easy Language]]
+      - NSA made SELinux. How trustworthy is it? Does it have NSA backdoors?
+
+        - [[https://security.stackexchange.com/questions/42383/how-trustworthy-is-selinux][linux - How trustworthy is SELinux? - Information Security Stack Exchange]]
+        - 2017, [[https://www.reddit.com/r/linux/comments/54in5s/the_nsa_has_tried_to_backdoor_linux_three_times/][The NSA has tried to backdoor linux three times : linux]]
+
+    - What is the relationship/difference between MAC (mandatory access control) and DAC (discretionary access control)?
+      Are they antonyms? Complements?
+
+      - [[https://security.stackexchange.com/questions/63518/mac-vs-dac-vs-rbac][access control - MAC vs DAC vs RBAC - Information Security Stack Exchange]]
+
+  - The only real secure way to run an untrusted application is on a different machine with no network connection.
+
+- [[https://linux.die.net/man/1/pv][pv(1): monitor progress of data through pipe - Linux man page]]
+- [[https://stedolan.github.io/jq/][jq]], [[https://en.wikipedia.org/wiki/Jq_(programming_language)][WP:jq (programming language)]]
+** sudo security hole mitigation: Don't reuse the terminal you use for sudo.
+   :PROPERTIES:
+   :CUSTOM_ID: sudo-security-hole-mitigation-dont-reuse-the-terminal-you-use-for-sudo.
+   :END:
+
+The problem:
+If you run sudo in a terminal,
+then every program you run in the same terminal shortly after can become root without asking for your password,
+(You may not have this problem if your system disables credential caching.)
+
+To see how, save this into =evil.sh=, and then =chmod 755 evil.sh=, and then =sudo echo login=, and then =./evil.sh=.
+
+#+BEGIN_SRC sh
+    #!/bin/bash
+    # If you run this script not long after sudoing in the same terminal,
+    # then this script can become root without prompting for your password.
+    sudo echo PWNED # could be a malicious program
+#+END_SRC
+
+The security hole is by design for convenience because people don't like typing their passwords.
+This hole is not fatal; the user can control this.
+It seems that this hole won't be closed;
+there doesn't seem to be any way of closing this hole without annoying the user.
+
+The mitigation is simple disciplined behavior:
+
+- Do as few things as necessary in an elevated terminal.
+- Run only trusted programs and scripts.
+- Close the terminal as soon as possible.
+  Alternatively, you can also run =sudo -K= to remove the cache.
+
+** Probably relevant Twitters
+   :PROPERTIES:
+   :CUSTOM_ID: probably-relevant-twitters
+   :END:
+
+- [[https://twitter.com/nixcraft][nixcraft]]: some humor, some important
+
+** Building software for old Ubuntu
+   :PROPERTIES:
+   :CUSTOM_ID: building-software-for-old-ubuntu
+   :END:
+
+Suppose:
+
+- You are using Ubuntu 14.04.
+- Ubuntu 14.04 comes with Emacs 24.
+- You want to build Emacs 26 (because you want Spacemacs).
+
+You may be able to do that.
+Install the build dependencies, and hope that emacs 26 doesn't get too edgy with its libraries.
+
+#+BEGIN_EXAMPLE
+    sudo apt-get build-dep emacs24
+#+END_EXAMPLE
+
+That is from [[http://ergoemacs.org/emacs/building_emacs_on_linux.html][How to Build Emacs on Linux]].
+
+You can do that for other software, as long as they don't require dependencies that are too recent.
+
+** what
+   :PROPERTIES:
+   :CUSTOM_ID: what
+   :END:
+
+- https://medium.com/netflix-techblog/linux-performance-analysis-in-60-000-milliseconds-accc10403c55
+** Security
   :PROPERTIES:
-  :CUSTOM_ID: using-computers
+  :CUSTOM_ID: security
   :END:
 
-- Habits learned the hard way
+- Bastion hosts, aka jump boxes
 
-  - I check the time at [[https://time.gov/][time.gov]] because Ubuntu 14.04 NTP once betrayed me.
+  - Does a jump box add any security?
 
-    - 2018-01-16: I had always thought that it was dependable, but it betrayed me:
-      It showed 2 a.m. while the actual time was 4 a.m..
-      I missed some hours of sleep.
+    - http://cloudacademy.com/blog/aws-bastion-host-nat-instances-vpc-peering-security/
+    - http://www.infoworld.com/article/2612700/security/-jump-boxes--improve-security--if-you-set-them-up-right.html
+
+- Check your HTTPS
+
+  - [[https://www.ssllabs.com/ssltest/][Test your HTTPS implementation]]; it's too easy to do security wrong.
+
+- [[https://www.vaultproject.io/][HashiCorp Vault]]
+
+  - [[https://github.com/hashicorp/vault][source code]], language Go, license MPL 2.0
+  - What is Vault? "Vault is a tool for securely accessing /secrets/." ([[https://www.vaultproject.io/intro/index.html][Introduction]])
+  - What can it do?
+  - How do I install it?
+  - How do I run it?
+  - How do I interact with it?
+  - [[https://www.hashicorp.com/][HashiCorp]]
+
+- [[https://stackoverflow.com/questions/5930529/how-is-revocation-of-a-root-certificate-handled][SE 5930529: How is revocation of a root certificate handled?]]
+- [[https://en.wikipedia.org/wiki/Online_Certificate_Status_Protocol][WP: Online Certificate Status Protocol]]
+- [[https://en.wikipedia.org/wiki/OCSP_stapling][WP: OCSP Stapling]] moves the cost from client to server.
+- Zero trust security model (ZTSM)
+
+  - "How would I design my system without any firewalls?"
+  - https://www.scaleft.com/beyondcorp/
+
+    - old approach: perimeter security, medieval castle, weak core, strong perimeter
+    - https://storage.googleapis.com/pub-tools-public-publication-data/pdf/43231.pdf
+
+      - "The perimeter security model works well enough when all employees work exclusively in buildings owned by an enterprise."
+      - "access depends solely on device and user credentials, regardless of a user's network location"
+      - "All access to enterprise resources is fully authenticated, fully authorized, and fully encrypted based upon device state and user credentials."
+      - ZTSM obviates VPN (virtual private network).
+* Using browser and the Internet/the Web
+#+TOC: headlines 2 local
+** Removing nag screens
+*** How to use this
+Copy the respective fragments to your browser's JavaScript Console (Ctrl+Shift+J on Chromium).
+
+Don't run codes you don't trust.
+*** Make [[http://www.webtoon.com/][www.webtoon.com]] fast
+   :PROPERTIES:
+   :CUSTOM_ID: make-www.webtoon.com-fast
+   :END:
+
+That website has an unacceptably slow scrolling.
+This script makes it fast.
+
+**** Usage
+    :PROPERTIES:
+    :CUSTOM_ID: usage
+    :END:
+
+Open the comic episode you want to read.
+
+Paste this fragment into your browser's JavaScript console.
+
+#+BEGIN_EXAMPLE
+    // Retain big images. Discard everything else.
+    var images = [];
+    document.querySelectorAll("img").forEach(function (element) {
+        images.push(element);
+    });
+    document.head.innerHTML = "";
+    document.body.innerHTML = "";
+    images.forEach(function (element) {
+        const big = 256;
+        const url = element.dataset.url;
+        if (url && element.width >= big) {
+            element.src = url;
+            element.style.display = "block";
+            document.body.appendChild(element);
+        }
+    });
+#+END_EXAMPLE
+
+To go the the next episode, increment the =episode_no= parameter in the address bar.
+
+**** Notes
+    :PROPERTIES:
+    :CUSTOM_ID: notes
+    :END:
+
+I tried =getEventListeners= and =removeEventListener= but they don't work.
+
+*** Remove Quora nag screen
+   :PROPERTIES:
+   :CUSTOM_ID: remove-quora-nag-screen
+   :END:
+
+Tested on 2017-07-08.
+
+Not only does Quora put up a nag screen, it also disables scrolling.
+
+#+BEGIN_EXAMPLE
+    document.querySelectorAll("div[id]").forEach(function (x) {
+        if (x.id.indexOf("signup_wall_wrapper") >= 0) { x.remove(); }
+    });
+    document.body.classList.remove("signup_wall_prevent_scroll");
+#+END_EXAMPLE
+
+*** Remove Pinterest nag screen
+   :PROPERTIES:
+   :CUSTOM_ID: remove-pinterest-nag-screen
+   :END:
+
+Tested on 2018-05-13.
+
+Type 1.
+
+#+BEGIN_EXAMPLE
+    document.querySelector("[data-test-giftwrap]").remove();
+#+END_EXAMPLE
+
+Type 2.
+
+#+BEGIN_EXAMPLE
+    document.querySelector("#desktopWrapper").style.position = "static";
+    document.querySelector("body style").remove();
+    document.querySelector(".FullPageModal__scroller").parentNode.remove();
+#+END_EXAMPLE
+
+*** Group Gmail mails by sender email
+   :PROPERTIES:
+   :CUSTOM_ID: group-gmail-mails-by-sender-email
+   :END:
+
+#+BEGIN_EXAMPLE
+    (function () {
+        var group = {};
+        document.querySelectorAll("[email]").forEach(function (elem) {
+            var sender = elem.getAttribute("email");
+            group[sender] = 1 + (group[sender] || 0);
+        });
+        var list = [];
+        var sender;
+        var count;
+        for (sender in group) {
+            count = group[sender];
+            list.push([count, sender]);
+        }
+        list.sort(function (a, b) {
+            return -Math.sign(a[0] - b[0]);
+        })
+        return list;
+    })();
+#+END_EXAMPLE
+
+*** Chrome bookmarklet: Make Markdown link for page
+   :PROPERTIES:
+   :CUSTOM_ID: chrome-bookmarklet-make-markdown-link-for-page
+   :END:
+
+This may produce invalid Markdown.
+Check before you copy.
+
+#+BEGIN_EXAMPLE
+    javascript:window.prompt("Copy to clipboard: Ctrl+C, Enter", "- [" + document.title + "](" + document.URL + ")");
+#+END_EXAMPLE
+*** tvtropes.org: show all spoilers
+#+BEGIN_SRC javascript
+Array.prototype.map.call(document.querySelectorAll('*'), (e) => {
+    e.style.display = "";
+    e.classList.remove("spoiler");
+    e.classList.remove("folder");
+});
+#+END_SRC
+** Searching the Internet
+  :PROPERTIES:
+  :CUSTOM_ID: searching-the-internet
+  :END:
+
+- Example search: given a text description, find related images
+- Example reverse search: given an image, describe it, or find its copies on the Internet
+- Internet search tools in 2018
+
+  - [[https://duckduckgo.com/][duckduckgo.com]]: privacy-focused search engine
+
+    - less censored than Google
+    - no reverse search (yet?)
+
+  - [[https://google.com/][google.com]]: biggest Internet search engine in 2018
+
+    - censored
+    - text search
+    - image search
+    - reverse image search
+    - Problems
+
+      - Google should rank down Pinterest.
+
+        - In my experience, Pinterest is never an authoritative nor original source.
+        - Google has ranked down Tumblr and Wikipedia.
+
+      - Example of Google censorship (compare with DuckDuckGo):
+
+        - search terms related to pornography
+        - search terms related to the darknet (the hidden wiki, Tor websites)
+        - rhino poaching (Google favors contents against rhino poaching)
+
+      - [[https://stallman.org/google.html][Richard Stallman's reasons not to use Google]]
+
+  - [[https://www.bing.com/][bing.com]]: Microsoft's answer to Google
+
+    - text search
+    - reverse image search
+    - [[https://stallman.org/microsoft.html][Richard Stallman's reasons not to use Microsoft]]
+
+  - searx?
+  - startpage?
+  - reverse search tools
+
+    - Google and Bing have reverse image search
+    - [[https://tineye.com/][tineye.com]]: reverse image search
+    - [[http://www.mooma.sh][moomash]] (was "audentifi"), YouTube reverse audio search
+
+      - 2018: only works with some video formats; doesn't work for old videos
+      - 2018-09-15: It have gone out of business, it seems.
+
+    - Shazam
+
+      - Is there anything like Shazam that takes a YouTube URL, and doesn't require me to install anything?
+
+    - http://whatpixel.com/original-source-image-search-tools/
+    - [[https://saucenao.com/][saucenao.com]]: reverse image search; I use it to find images stolen from pixiv
+
+- The Internet is full of crap.
+
+  - So are libraries.
+  - So is the world.
+  - So is this website.
+  - Thus, you must think for yourself.
+** Contributing to Wikipedia
+*** Beginning contributing to Wikipedia
+   :PROPERTIES:
+   :CUSTOM_ID: beginning-contributing-to-wikipedia
+   :END:
+
+Don't publish anything you may regret later.
+Once it's on the Internet, it's forever.
+The Internet doesn't forget.
+Wikipedia is a highly crawled and archived site.
+
+*** What should be in user page?
+   :PROPERTIES:
+   :CUSTOM_ID: what-should-be-in-user-page
+   :END:
+
+Templates: User page, User in $country, Babel
+
+See [[https://en.wikipedia.org/wiki/Wikipedia:User_pages][WP:User pages]].
+
+[[https://en.wikipedia.org/wiki/Wikipedia:Userboxes][WP:Userboxes]]
+* Using Git
+#+TOC: headlines 3 local
+** Mental model
+   :PROPERTIES:
+   :CUSTOM_ID: mental-model
+   :END:
+
+A /commit/ is a snapshot of the working tree.
+
+A /reference/ names a commit so that you can write =master=
+instead of =da39a3e=.
+
+If you are a visual person,
+you can think about how git commands change
+the picture shown by =gitk=
+(a tool for visualizing Git repositories).
+
+In gitk, a blue circle is a commit,
+a green box is a /reference/,
+and the bold green box is the /head/.
+
+The head points to the commit that will be the parent of the next commit.
+
+When you =git init=, Git creates a =.git= directory.
+
+When you =git status=, it prints =On branch master=.
+It means that the head points to the same commit pointed by the reference named =master=.
+
+When you =git commit=, you make a new commit (blue circle),
+and move the current branch (bold green box) to that new commit.
+
+When you =git reset Target=,
+you move the head (bold green box) to =Target=.
+
+If you are not yet comfortable with Git,
+back up your data by copying the =.git= directory.
+It can get corrupted.
+Things will go wrong.
+You may accidentally do something and don't know how to recover.
+Computers don't understand what you mean.
+They do what you say, not what you mean.
+
+** More information
+   :PROPERTIES:
+   :CUSTOM_ID: more-information
+   :END:
+
+A Git /object/:
+
+- is identified by a SHA-1 hash;
+- is either a blob, tree, or commit;
+- is stored as a file somewhere in the =.git= folder.
+
+A /commit/ has zero or more parents.
+It also refers to a tree.
+
+A /tree/ is a list of references.
+Every reference points to either a tree or a blob.
+
+For more information, read the [[https://git-scm.com/book][Pro Git]] book
+or the [[https://git-scm.com/docs][manpages]] (=man git=).
+
+** Things to write?
+   :PROPERTIES:
+   :CUSTOM_ID: things-to-write
+   :END:
+
+- Git fundamentals:
+
+  - Git store things in the =.git= directory.
+  - Why merge conflicts? How to resolve them? How to use =meld=? How to do a three-way merge?
+  - Avoid changing spaces. Avoid using your IDE to reformat files that are already commited.
+
+- Workaround for bad user experience
+
+  - Disable git-gui GC warning:
+
+    - https://stackoverflow.com/questions/1106529/how-to-skip-loose-object-popup-when-running-git-gui
+
+- [[https://manishearth.github.io/blog/2017/03/05/understanding-git-filter-branch/][Understanding Git Filter-branch and the Git Storage Model]]
+
+** Git hash collisions
+   :PROPERTIES:
+   :CUSTOM_ID: git-hash-collisions
+   :END:
+
+Git hash collision may occur albeit extremely unlikely.
+Git assumes that if two objects have the same hash, then they are the same object.
+This is false; the converse is true: if two objects are the same, then they have the same hash.
+When hash collision occur, Git may silently lose data.
+Git is an example of software that is incorrect but works for the use cases it was designed for (source code versioning).
+Git is not meant to be used as an arbitrary database.
+
+Other softwares are incorrect as well.
+We routinely make software that assumes that there will never be more than 2^64 rows in a database table.
+
+Is it even possible to write correct software at all?
+
+** Related tools
+   :PROPERTIES:
+   :CUSTOM_ID: related-tools
+   :END:
+
+- git-gui, for making commits
+- gitk, for showing history
+- meld, for three-way diff/merge
+** Speeding up Git
+*** The problem
+I have a repository with 100,000 files and 1,000,000 objects, but most of them are not mine, and I will never use most of them.
+I don't even think I have more than 1,000 files in that repository.
+The problem: Git interactive rebase is too slow in that repository.
+
+<2018-12-05>
+I solved the problem by extracting my work into its own disjoint subtree,
+and pushing to a different branch of the same repository.
+
+Hypothesis: How git rebase works.
+
+I guess =git rebase --onto TARGET BASE MOVE= works like this:
+#+BEGIN_EXAMPLE
+    git checkout --orphan TARGET --
+    git cherry-pick <all commits from BASE to MOVE, excluding BASE, including MOVE>
+    git checkout -B MOVE
+#+END_EXAMPLE
+
+Cherry-pick is also slow.
+I guess that speeding up cherry-pick will also speed up rebase.
+
+Checkout is also slow.
+I guess that speeding up checkout will also speed up cherry-pick.
+
+It seems that =commit= and =write-tree= are slow.
+
+- [[https://git-scm.com/book/en/v2/Git-Internals-Environment-Variables][Git - Environment Variables]]
+  - =GIT_TRACE_PERFORMANCE=true= has no effect.
+    Which git version is it for?
+*** Plans
+- Plan: Make a rebase that uses only trees and not indexes
+  - If a tree changes, all its ancestors have to be rewritten.
+- Plan: Just use subtrees and keep the repository small
+  - I think this is the least-effort solution that solves (works around) the problem.
+*** Non-plans
+- [[https://www.atlassian.com/blog/git/handle-big-repositories-git][atlassian.com: How to manage big Git repositories]]
+  - Try git sparse checkout?
+    It seems that sparse-checkout and rebase doesn't mix.
+- Not recommended: =git gc --aggressive= (doesn't do what we think it would do).
+* Making a personal wiki
+  :PROPERTIES:
+  :CUSTOM_ID: making-a-personal-wiki
+  :END:
+
+- Selection criteria:
+
+  - How many people are using it?
+  - How big can it grow without slowing down?
+  - How good is its markup?
+  - How long will it last?
+    How long can it operate without being obsolete?
+    How fast do the software dependencies rot?
+
+    - How long does Ubuntu maintain the repository archive of old Ubuntu versions?
+
+      - http://old-releases.ubuntu.com/
+
+        - 2018-08-06: It seems that Ubuntu maintains the repositories to as far back as 2006.
+        - https://askubuntu.com/questions/91815/how-to-install-software-or-upgrade-from-an-old-unsupported-release
+
+- Too many choices.
+
+  - http://wiki.c2.com/?PersonalWiki
+  - http://wiki.c2.com/?WikiEngines
+  - https://www.quora.com/Whats-the-best-way-to-create-a-personal-wiki
+  - [[https://www.wikimatrix.org/][wikimatrix.org: compare wiki softwares]]
+  - safety in numbers?
+
+    - many users
+
+      - Jekyll
+      - http://moinmo.in/
+      - https://gohugo.io/
+
+    - few users
+
+      - https://github.com/lotabout/static-wiki
+
+    - unknown
+
+      - http://dynalon.github.io/mdwiki/#!index.md
+
+- Avoid accidental publishing.
+
+  - Don't put anything you don't want to publish inside your Jekyll directory, no matter how convenient.
+    Accidents happen.
+    Humans make mistakes.
+    Computer doesn't care.
+
+- [[https://www.labnol.org/internet/load-disqus-comments-on-click/28653/][How to Load Disqus Comments on Demand with JavaScript]]
 * Ansible
   :PROPERTIES:
   :CUSTOM_ID: ansible
@@ -37,18 +810,6 @@ See also =man ansible= ("run a task on target hosts") and =man ansible-playbook=
 A machine can have many roles.
 
 An Ansible role should be a noun phrase (=web-server=), not a verb phrase (=install-web-server=).
-* Autotools
-  :PROPERTIES:
-  :CUSTOM_ID: autotools
-  :END:
-
-- Cargo-cult programming
-
-  - Sometimes fixes things
-
-    - Add =-I /usr/share/aclocal= to =ACLOCAL_AMFLAGS= in =Makefile.am=.
-
-- [[http://voices.canonical.com/jussi.pakkanen/2011/09/13/autotools/][Why GNU Autotools is not my favorite build system | Jussi Pakkanen's development blog]]
 * Amazon Web Services
   :PROPERTIES:
   :CUSTOM_ID: amazon-web-services
@@ -113,75 +874,6 @@ An Ansible role should be a noun phrase (=web-server=), not a verb phrase (=inst
       Can't make alarm.
 
 - [[https://aws.amazon.com/blogs/aws/aws-device-farm-update-remote-access-to-devices-for-interactive-testing/][AWS Device Farm]]: interactive testing on real devices.
-* Bash shell programming
-** Articles
-   :PROPERTIES:
-   :CUSTOM_ID: articles
-   :END:
-
-- Bash has associative arrays
-
-  - https://www.artificialworlds.net/blog/2012/10/17/bash-associative-array-examples/
-
-- [[https://github.com/SierraSoftworks/bash-cli][SierraSoftworks/bash-cli: A command line framework built using nothing but Bash and compatible with anything]]
-- [[http://wiki.bash-hackers.org/syntax/pe][parameter expansion]]
-- [[https://github.com/dylanaraps/pure-bash-bible][pure bash bible]]
-
-** Error handling
-   :PROPERTIES:
-   :CUSTOM_ID: error-handling
-   :END:
-
-I set these bash options in my script to make it fail fast:
-
-#+BEGIN_SRC sh
-    set -o errexit
-    set -o nounset
-    set -o pipefail
-#+END_SRC
-
-** Bash pitfalls
-   :PROPERTIES:
-   :CUSTOM_ID: bash-pitfalls
-   :END:
-
-This is bash version =GNU bash, version 4.3.11(1)-release (x86_64-pc-linux-gnu)= that comes with Ubuntu 14.04.
-
-*** Local variable definition ignores command substitution result
-    :PROPERTIES:
-    :CUSTOM_ID: local-variable-definition-ignores-command-substitution-result
-    :END:
-
-At first this seems like an unexpected interaction between function, =local= variable, =set -e (set -o errexit)=, and command substitution =$(cmd)=.
-
-The word =local= is a shell command that has an exit status, not a keyword like =var= in JavaScript.
-Bash is behaving as documented.
-See the documentation for =local= in =man bash=.
-
-#+BEGIN_SRC sh
-    fun_0() {
-        local var
-        var=$(false)
-        echo fun_0
-    }
-
-    fun_1() {
-        local var=$(false)
-        echo fun_1
-    }
-
-    fun_2() {
-        local var=$1
-        echo fun_2
-    }
-
-    echo $(set -o errexit; fun_0) # Expected: This doesn't print fun_0.
-    echo $(set -o errexit; fun_1) # PITFALL: This prints fun_1 !!!
-    echo $(set -o nounset; fun_2) # Pitfall: This doesn't print fun_2, and aborts with "bash: $1: unbound variable".
-#+END_SRC
-** Others
-- https://github.com/koalaman/shellcheck
-  - <2018-11-03> I'm not going back to Haskell until GHC compiles faster.
 * Moving to clouds, for old-school sysadmins
 The most important pages on the [[https://aws.amazon.com/][AWS website]]
 are the pricing pages and the technical documentation.
@@ -449,290 +1141,9 @@ When such metric deviates from baseline, we know there is problem, but where?
 What other metrics should we monitor?
 
 - HTTP 4xx and 5xx status codes and connection failures?
-* Running X client applications on Docker on Linux
-  :PROPERTIES:
-  :CUSTOM_ID: running-x-client-applications-on-docker-on-linux
-  :END:
-
-#+BEGIN_EXAMPLE
-    docker \
-        -e DISPLAY \
-        -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
-        -u <user> <image> <command>
-#+END_EXAMPLE
-
-Replace =<user>= with a non-root user.
-You need a non-root user because the X server rejects connection from the root user by default.
-You can change this with =xhost=, but it's better to connect with a non-root user.
-
-The =<command>= argument is optional.
-
-The =-e DISPLAY= parameter reexports the =DISPLAY= environment variable to the application inside the container.
-X client applications will read from this environment variable to determine which server to connect to.
-
-The =-v HOST:CONT:ro= option mounts =HOST= directory to =CONT= directory read-only.
-This is so that the application in the container can connect to the host X server's Unix socket.
-
-On Linux, display =:0= corresponds to the Unix socket =/tmp/.X11-unix/X0=.
-Everyone who can connect to that Unix socket will
-be able to run X client applications on the machine;
-it is not specific to Docker.
-
-If X complains about shared memory, try:
-
-#+BEGIN_EXAMPLE
-    docker \
-        -e DISPLAY=unix$DISPLAY \
-        -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
-        -u <user> <image> <command>
-#+END_EXAMPLE
-* Using Git
-  :PROPERTIES:
-  :CUSTOM_ID: using-git
-  :END:
-
-** Mental model
-   :PROPERTIES:
-   :CUSTOM_ID: mental-model
-   :END:
-
-A /commit/ is a snapshot of the working tree.
-
-A /reference/ names a commit so that you can write =master=
-instead of =da39a3e=.
-
-If you are a visual person,
-you can think about how git commands change
-the picture shown by =gitk=
-(a tool for visualizing Git repositories).
-
-In gitk, a blue circle is a commit,
-a green box is a /reference/,
-and the bold green box is the /head/.
-
-The head points to the commit that will be the parent of the next commit.
-
-When you =git init=, Git creates a =.git= directory.
-
-When you =git status=, it prints =On branch master=.
-It means that the head points to the same commit pointed by the reference named =master=.
-
-When you =git commit=, you make a new commit (blue circle),
-and move the current branch (bold green box) to that new commit.
-
-When you =git reset Target=,
-you move the head (bold green box) to =Target=.
-
-If you are not yet comfortable with Git,
-back up your data by copying the =.git= directory.
-It can get corrupted.
-Things will go wrong.
-You may accidentally do something and don't know how to recover.
-Computers don't understand what you mean.
-They do what you say, not what you mean.
-
-** More information
-   :PROPERTIES:
-   :CUSTOM_ID: more-information
-   :END:
-
-A Git /object/:
-
-- is identified by a SHA-1 hash;
-- is either a blob, tree, or commit;
-- is stored as a file somewhere in the =.git= folder.
-
-A /commit/ has zero or more parents.
-It also refers to a tree.
-
-A /tree/ is a list of references.
-Every reference points to either a tree or a blob.
-
-For more information, read the [[https://git-scm.com/book][Pro Git]] book
-or the [[https://git-scm.com/docs][manpages]] (=man git=).
-
-** Things to write?
-   :PROPERTIES:
-   :CUSTOM_ID: things-to-write
-   :END:
-
-- Git fundamentals:
-
-  - Git store things in the =.git= directory.
-  - Why merge conflicts? How to resolve them? How to use =meld=? How to do a three-way merge?
-  - Avoid changing spaces. Avoid using your IDE to reformat files that are already commited.
-
-- Workaround for bad user experience
-
-  - Disable git-gui GC warning:
-
-    - https://stackoverflow.com/questions/1106529/how-to-skip-loose-object-popup-when-running-git-gui
-
-- [[https://manishearth.github.io/blog/2017/03/05/understanding-git-filter-branch/][Understanding Git Filter-branch and the Git Storage Model]]
-
-** Git hash collisions
-   :PROPERTIES:
-   :CUSTOM_ID: git-hash-collisions
-   :END:
-
-Git hash collision may occur albeit extremely unlikely.
-Git assumes that if two objects have the same hash, then they are the same object.
-This is false; the converse is true: if two objects are the same, then they have the same hash.
-When hash collision occur, Git may silently lose data.
-Git is an example of software that is incorrect but works for the use cases it was designed for (source code versioning).
-Git is not meant to be used as an arbitrary database.
-
-Other softwares are incorrect as well.
-We routinely make software that assumes that there will never be more than 2^64 rows in a database table.
-
-Is it even possible to write correct software at all?
-
-** Related tools
-   :PROPERTIES:
-   :CUSTOM_ID: related-tools
-   :END:
-
-- git-gui, for making commits
-- gitk, for showing history
-- meld, for three-way diff/merge
-* Speeding up Git
-  :PROPERTIES:
-  :CUSTOM_ID: speeding-up-git
-  :END:
-
-** The problem
-   :PROPERTIES:
-   :CUSTOM_ID: the-problem
-   :END:
-
-I have a repository with 100,000 files and 1,000,000 objects.
-Git rebase is slow.
-Git interactive rebase is even slower.
-
-** Hypothesis: How git rebase works
-   :PROPERTIES:
-   :CUSTOM_ID: hypothesis-how-git-rebase-works
-   :END:
-
-I guess =git rebase --onto TARGET BASE MOVE= works like this:
-
-#+BEGIN_EXAMPLE
-    git checkout --orphan TARGET --
-    git cherry-pick <all commits from BASE to MOVE, excluding BASE, including MOVE>
-    git checkout -B MOVE
-#+END_EXAMPLE
-
-Cherry-pick is also slow.
-I guess that speeding up cherry-pick will also speed up rebase.
-
-Checkout is also slow.
-I guess that speeding up checkout will also speed up cherry-pick.
-
-It seems that =commit= and =write-tree= are slow.
-
-- [[https://git-scm.com/book/en/v2/Git-Internals-Environment-Variables][Git - Environment Variables]]
-
-  - =GIT_TRACE_PERFORMANCE=true= has no effect.
-    Which git version is it for?
-
-** The plan
-   :PROPERTIES:
-   :CUSTOM_ID: the-plan
-   :END:
-
-- [[https://www.atlassian.com/blog/git/handle-big-repositories-git][atlassian.com: How to manage big Git repositories]]
-
-  - Try git sparse checkout?
-    It seems that sparse-checkout and rebase doesn't mix.
-
-- Not recommended: =git gc --aggressive= (doesn't do what we think it would do).
-
-** Plan: Make a rebase that uses only trees and not indexes
-   :PROPERTIES:
-   :CUSTOM_ID: plan-make-a-rebase-that-uses-only-trees-and-not-indexes
-   :END:
-
-If a tree changes, all its ancestors have to be rewritten.
-
-** Plan: Just use subtrees and keep the repository small
-   :PROPERTIES:
-   :CUSTOM_ID: plan-just-use-subtrees-and-keep-the-repository-small
-   :END:
-
-I think this is the least-effort solution that solves (works around) the problem.
-* Using Gradle
-  :PROPERTIES:
-  :CUSTOM_ID: using-gradle
-  :END:
-
-- Conclusion:
-
-  - I still haven't found any reason to switch from Maven to Gradle
-    (other than "because this project is already using it").
-
-- Which version of Gradle are we talking about?
-
-  - Gradle 2.9.
-
-- What problems does Gradle solve?
-
-  - Dependency management (picking the libraries' versions and downloading the corresponding JAR files) for Java.
-
-- Do we have those problems?
-
-  - Yes. Software has external dependencies.
-
-- Does Gradle 2.9 solve those problems well?
-
-  - No. Gradle 2.9's dependency resolution algorithm doesn't compute the intersection of version ranges. (Maybe now it does.)
-
-    - Why does it have this defect? Maybe Gradle developers had different priorities, or they didn't know how to do it.
-    - [[https://danysk.github.io/information%20technology/gradle-dependency-resolution-is-insane/][Danilo Pianini: Version ranges resolution in Gradle is insane]]
-
-  - However, there are times we want exact versions instead of version ranges. You want deterministic builds.
-    In this case, there's no need to compute intersections.
-
-    - [[http://blog.danlew.net/2015/09/09/dont-use-dynamic-versions-for-your-dependencies/][Dan Lew: Don't use dynamic versions for your dependencies]]
-
-  - On the other hand, we want to benefit from library updates. Maybe there are security fixes.
-    So we want version ranges?
-
-    - But this assumes that the library maintainer obeys Semantic Versioning.
-
-- Why are we using Gradle instead of Maven? What Maven annoyances does Gradle hide from us?
-
-  - Gradle build scripts are shorter (but IDEA autocompletes Maven pom.xml).
-
-- Why /not/ Gradle?
-
-  - Why Maven instead of Gradle?
-
-    - IDEA integrates better with Maven because pom.xml is configuration, not program.
-      (But IDEA can also open build.gradle?)
-
-      - Opening a pom.xml just works in IDEA.
-
-- How does Gradle 2.9 annoy us?
-
-  - We often have to explicitly tell Gradle 2.9 the exact versions of the libraries we want because it doesn't compute intersections properly.
-    Maven computes intersections.
-  - Gradle doesn't download dependencies in parallel. (But neither does Maven.)
-  - Gradle 2.9 doesn't generate a useful Maven POM, only a minimally valid POM.
-
-- When should I split a Gradle subproject or a Maven module?
-
-  - When we need to reuse one subproject without the others.
-  - If they don't make sense separately, don't split them; it'll just slow down the build for nothing.
-  - The same goes for Maven modules.
-
-- Woes
-
-  - ShadowJar doesn't work with Gradle 2.13.
 * Using Java
-  :PROPERTIES:
-  :CUSTOM_ID: using-java
-  :END:
-
+#+TOC: headlines 1 local
+** Profiling?
 - How to profile a Java application startup?
 
   - How to make a Java application wait for a debugger to attach on startup?
@@ -844,7 +1255,7 @@ I think this is the least-effort solution that solves (works around) the problem
     - Some filtering.
 
 - [[https://www.jethrocarr.com/2013/11/30/jconsole-to-remote-servers-easily/][Jconsole to remote servers, easily | Jethro Carr]]
-* Using Maven
+** Using Maven
   :PROPERTIES:
   :CUSTOM_ID: using-maven
   :END:
@@ -861,142 +1272,74 @@ To compile your project, run =mvn compile=.
 To package your project, run =mvn package=.
 
 Maven output directory is =target=.
-* Removing nag screens
+** Using Gradle
   :PROPERTIES:
-  :CUSTOM_ID: removing-nag-screens
+  :CUSTOM_ID: using-gradle
   :END:
 
-Copy the respective fragments to your browser's JavaScript Console (Ctrl+Shift+J on Chromium).
+- Conclusion:
 
-Don't run codes you don't trust.
+  - I still haven't found any reason to switch from Maven to Gradle
+    (other than "because this project is already using it").
 
-** Make [[http://www.webtoon.com/][www.webtoon.com]] fast
-   :PROPERTIES:
-   :CUSTOM_ID: make-www.webtoon.com-fast
-   :END:
+- Which version of Gradle are we talking about?
 
-That website has an unacceptably slow scrolling.
-This script makes it fast.
+  - Gradle 2.9.
 
-*** Usage
-    :PROPERTIES:
-    :CUSTOM_ID: usage
-    :END:
+- What problems does Gradle solve?
 
-Open the comic episode you want to read.
+  - Dependency management (picking the libraries' versions and downloading the corresponding JAR files) for Java.
 
-Paste this fragment into your browser's JavaScript console.
+- Do we have those problems?
 
-#+BEGIN_EXAMPLE
-    // Retain big images. Discard everything else.
-    var images = [];
-    document.querySelectorAll("img").forEach(function (element) {
-        images.push(element);
-    });
-    document.head.innerHTML = "";
-    document.body.innerHTML = "";
-    images.forEach(function (element) {
-        const big = 256;
-        const url = element.dataset.url;
-        if (url && element.width >= big) {
-            element.src = url;
-            element.style.display = "block";
-            document.body.appendChild(element);
-        }
-    });
-#+END_EXAMPLE
+  - Yes. Software has external dependencies.
 
-To go the the next episode, increment the =episode_no= parameter in the address bar.
+- Does Gradle 2.9 solve those problems well?
 
-*** Notes
-    :PROPERTIES:
-    :CUSTOM_ID: notes
-    :END:
+  - No. Gradle 2.9's dependency resolution algorithm doesn't compute the intersection of version ranges. (Maybe now it does.)
 
-I tried =getEventListeners= and =removeEventListener= but they don't work.
+    - Why does it have this defect? Maybe Gradle developers had different priorities, or they didn't know how to do it.
+    - [[https://danysk.github.io/information%20technology/gradle-dependency-resolution-is-insane/][Danilo Pianini: Version ranges resolution in Gradle is insane]]
 
-** Remove Quora nag screen
-   :PROPERTIES:
-   :CUSTOM_ID: remove-quora-nag-screen
-   :END:
+  - However, there are times we want exact versions instead of version ranges. You want deterministic builds.
+    In this case, there's no need to compute intersections.
 
-Tested on 2017-07-08.
+    - [[http://blog.danlew.net/2015/09/09/dont-use-dynamic-versions-for-your-dependencies/][Dan Lew: Don't use dynamic versions for your dependencies]]
 
-Not only does Quora put up a nag screen, it also disables scrolling.
+  - On the other hand, we want to benefit from library updates. Maybe there are security fixes.
+    So we want version ranges?
 
-#+BEGIN_EXAMPLE
-    document.querySelectorAll("div[id]").forEach(function (x) {
-        if (x.id.indexOf("signup_wall_wrapper") >= 0) { x.remove(); }
-    });
-    document.body.classList.remove("signup_wall_prevent_scroll");
-#+END_EXAMPLE
+    - But this assumes that the library maintainer obeys Semantic Versioning.
 
-** Remove Pinterest nag screen
-   :PROPERTIES:
-   :CUSTOM_ID: remove-pinterest-nag-screen
-   :END:
+- Why are we using Gradle instead of Maven? What Maven annoyances does Gradle hide from us?
 
-Tested on 2018-05-13.
+  - Gradle build scripts are shorter (but IDEA autocompletes Maven pom.xml).
 
-Type 1.
+- Why /not/ Gradle?
 
-#+BEGIN_EXAMPLE
-    document.querySelector("[data-test-giftwrap]").remove();
-#+END_EXAMPLE
+  - Why Maven instead of Gradle?
 
-Type 2.
+    - IDEA integrates better with Maven because pom.xml is configuration, not program.
+      (But IDEA can also open build.gradle?)
 
-#+BEGIN_EXAMPLE
-    document.querySelector("#desktopWrapper").style.position = "static";
-    document.querySelector("body style").remove();
-    document.querySelector(".FullPageModal__scroller").parentNode.remove();
-#+END_EXAMPLE
+      - Opening a pom.xml just works in IDEA.
 
-** Group Gmail mails by sender email
-   :PROPERTIES:
-   :CUSTOM_ID: group-gmail-mails-by-sender-email
-   :END:
+- How does Gradle 2.9 annoy us?
 
-#+BEGIN_EXAMPLE
-    (function () {
-        var group = {};
-        document.querySelectorAll("[email]").forEach(function (elem) {
-            var sender = elem.getAttribute("email");
-            group[sender] = 1 + (group[sender] || 0);
-        });
-        var list = [];
-        var sender;
-        var count;
-        for (sender in group) {
-            count = group[sender];
-            list.push([count, sender]);
-        }
-        list.sort(function (a, b) {
-            return -Math.sign(a[0] - b[0]);
-        })
-        return list;
-    })();
-#+END_EXAMPLE
+  - We often have to explicitly tell Gradle 2.9 the exact versions of the libraries we want because it doesn't compute intersections properly.
+    Maven computes intersections.
+  - Gradle doesn't download dependencies in parallel. (But neither does Maven.)
+  - Gradle 2.9 doesn't generate a useful Maven POM, only a minimally valid POM.
 
-** Chrome bookmarklet: Make Markdown link for page
-   :PROPERTIES:
-   :CUSTOM_ID: chrome-bookmarklet-make-markdown-link-for-page
-   :END:
+- When should I split a Gradle subproject or a Maven module?
 
-This may produce invalid Markdown.
-Check before you copy.
+  - When we need to reuse one subproject without the others.
+  - If they don't make sense separately, don't split them; it'll just slow down the build for nothing.
+  - The same goes for Maven modules.
 
-#+BEGIN_EXAMPLE
-    javascript:window.prompt("Copy to clipboard: Ctrl+C, Enter", "- [" + document.title + "](" + document.URL + ")");
-#+END_EXAMPLE
-** tvtropes.org: show all spoilers
-#+BEGIN_SRC javascript
-Array.prototype.map.call(document.querySelectorAll('*'), (e) => {
-    e.style.display = "";
-    e.classList.remove("spoiler");
-    e.classList.remove("folder");
-});
-#+END_SRC
+- Woes
+
+  - ShadowJar doesn't work with Gradle 2.13.
 * Using Python
   :PROPERTIES:
   :CUSTOM_ID: using-python
@@ -1015,47 +1358,6 @@ Create a virtualenv directory using =virtualenv PATH=
 Note: After the directory is created, it can't be renamed.
 
 [[https://leemendelowitz.github.io/blog/how-does-python-find-packages.html][How does python find packages?]]
-* Security
-  :PROPERTIES:
-  :CUSTOM_ID: security
-  :END:
-
-- Bastion hosts, aka jump boxes
-
-  - Does a jump box add any security?
-
-    - http://cloudacademy.com/blog/aws-bastion-host-nat-instances-vpc-peering-security/
-    - http://www.infoworld.com/article/2612700/security/-jump-boxes--improve-security--if-you-set-them-up-right.html
-
-- Check your HTTPS
-
-  - [[https://www.ssllabs.com/ssltest/][Test your HTTPS implementation]]; it's too easy to do security wrong.
-
-- [[https://www.vaultproject.io/][HashiCorp Vault]]
-
-  - [[https://github.com/hashicorp/vault][source code]], language Go, license MPL 2.0
-  - What is Vault? "Vault is a tool for securely accessing /secrets/." ([[https://www.vaultproject.io/intro/index.html][Introduction]])
-  - What can it do?
-  - How do I install it?
-  - How do I run it?
-  - How do I interact with it?
-  - [[https://www.hashicorp.com/][HashiCorp]]
-
-- [[https://stackoverflow.com/questions/5930529/how-is-revocation-of-a-root-certificate-handled][SE 5930529: How is revocation of a root certificate handled?]]
-- [[https://en.wikipedia.org/wiki/Online_Certificate_Status_Protocol][WP: Online Certificate Status Protocol]]
-- [[https://en.wikipedia.org/wiki/OCSP_stapling][WP: OCSP Stapling]] moves the cost from client to server.
-- Zero trust security model (ZTSM)
-
-  - "How would I design my system without any firewalls?"
-  - https://www.scaleft.com/beyondcorp/
-
-    - old approach: perimeter security, medieval castle, weak core, strong perimeter
-    - https://storage.googleapis.com/pub-tools-public-publication-data/pdf/43231.pdf
-
-      - "The perimeter security model works well enough when all employees work exclusively in buildings owned by an enterprise."
-      - "access depends solely on device and user credentials, regardless of a user's network location"
-      - "All access to enterprise resources is fully authenticated, fully authorized, and fully encrypted based upon device state and user credentials."
-      - ZTSM obviates VPN (virtual private network).
 * Software
   :PROPERTIES:
   :CUSTOM_ID: software
@@ -1121,287 +1423,8 @@ Note: After the directory is created, it can't be renamed.
     into local directory while preserving the layout.
     It allows you to mirror only the packages you want.
   - [[https://github.com/edom/haji][Haji]] tries to be a Java bytecode interpreter written in Haskell.
-* Administering a computer
-  :PROPERTIES:
-  :CUSTOM_ID: administering-a-computer
-  :END:
-
-- Why use swap partitions and not swap files?
-
-  - Defragmenting swap files might have undesirable effects.
-
-    - https://lwn.net/Articles/317787/
-
-- ext4 defragmentation tools
-
-  - https://askubuntu.com/questions/221079/how-to-defrag-an-ext4-filesystem
-
-    - e2freefrag DEV, e4defrag -c FILE
-
-- SATA 3 Gbps controller problem?
-
-  - https://github.com/zfsonlinux/zfs/issues/4873
-
-- Security
-
-  - Isolating (sandboxing) an application
-
-    - Creating a dedicated limited user for an application
-
-      - =adduser --system=, or just use the =nobody= user?
-
-  - Many methods of isolation
-
-    - https://unix.stackexchange.com/questions/384117/linux-isolate-process-without-containers
-    - https://www.engineyard.com/blog/linux-containers-isolation
-    - https://opensourceforu.com/2016/07/many-approaches-sandboxing-linux/
-
-- Why isn't ssh fail2ban the default?
-  Why is security not the default?
-- 2014, "Is there any solution to make OpenVPN authentication with Google ID?", [[https://serverfault.com/questions/597833/is-there-any-solution-to-make-openvpn-authentication-with-google-id][SF 597833]]
-- man page usability, terminal usability, reducing cognitive load
-
-  - [[https://tldr.sh/][tldr.sh]]: "The TLDR pages are a community effort to simplify the beloved man pages with practical examples."
-
-- [[https://stackoverflow.com/questions/22697049/what-is-the-difference-between-google-app-engine-and-google-compute-engine][SO 22697049: difference between Google App Engine and Google Compute Engine]]
-- A good OS (operating system) is invisible like a good design.
-
-  - The user can't tell whether an OS is good.
-    If the OS is good, everything runs smoothly.
-  - But the user can tell whether an OS is bad.
-    Crashes due to non-hardware problems.
-    Things that don't just work.
-
-- https://felipec.wordpress.com/2011/06/16/after-two-weeks-of-using-gnome-3-i-officially-hate-it/
-
-  - Why does the author disapprove of GNOME 3?
-
-- https://libcloud.apache.org/
-
-  - "One Interface To Rule Them All: Python library for interacting with many of the popular cloud service providers using a unified API."
-
-- Systems should be secure by default.
-
-  - UNIX/Linux woes
-
-    - Why is SSH fail2ban not installed by default?
-    - Why does an application run as the user?
-
-      - I think this is a design flaw.
-        It's a big gaping security hole.
-        It allows an application to access all your files.
-        But how do we fix this without sacrificing convenience?
-      - Why is sandboxing not the default?
-
-    - How do we understand SELinux?
-
-      - [[https://www.computernetworkingnotes.com/rhce-study-guide/selinux-explained-with-examples-in-easy-language.html][SELinux Explained with Examples in Easy Language]]
-      - NSA made SELinux. How trustworthy is it? Does it have NSA backdoors?
-
-        - [[https://security.stackexchange.com/questions/42383/how-trustworthy-is-selinux][linux - How trustworthy is SELinux? - Information Security Stack Exchange]]
-        - 2017, [[https://www.reddit.com/r/linux/comments/54in5s/the_nsa_has_tried_to_backdoor_linux_three_times/][The NSA has tried to backdoor linux three times : linux]]
-
-    - What is the relationship/difference between MAC (mandatory access control) and DAC (discretionary access control)?
-      Are they antonyms? Complements?
-
-      - [[https://security.stackexchange.com/questions/63518/mac-vs-dac-vs-rbac][access control - MAC vs DAC vs RBAC - Information Security Stack Exchange]]
-
-  - The only real secure way to run an untrusted application is on a different machine with no network connection.
-
-- [[https://linux.die.net/man/1/pv][pv(1): monitor progress of data through pipe - Linux man page]]
-- [[https://stedolan.github.io/jq/][jq]], [[https://en.wikipedia.org/wiki/Jq_(programming_language)][WP:jq (programming language)]]
-
-** sudo security hole mitigation: Don't reuse the terminal you use for sudo.
-   :PROPERTIES:
-   :CUSTOM_ID: sudo-security-hole-mitigation-dont-reuse-the-terminal-you-use-for-sudo.
-   :END:
-
-The problem:
-If you run sudo in a terminal,
-then every program you run in the same terminal shortly after can become root without asking for your password,
-(You may not have this problem if your system disables credential caching.)
-
-To see how, save this into =evil.sh=, and then =chmod 755 evil.sh=, and then =sudo echo login=, and then =./evil.sh=.
-
-#+BEGIN_SRC sh
-    #!/bin/bash
-    # If you run this script not long after sudoing in the same terminal,
-    # then this script can become root without prompting for your password.
-    sudo echo PWNED # could be a malicious program
-#+END_SRC
-
-The security hole is by design for convenience because people don't like typing their passwords.
-This hole is not fatal; the user can control this.
-It seems that this hole won't be closed;
-there doesn't seem to be any way of closing this hole without annoying the user.
-
-The mitigation is simple disciplined behavior:
-
-- Do as few things as necessary in an elevated terminal.
-- Run only trusted programs and scripts.
-- Close the terminal as soon as possible.
-  Alternatively, you can also run =sudo -K= to remove the cache.
-
-** Probably relevant Twitters
-   :PROPERTIES:
-   :CUSTOM_ID: probably-relevant-twitters
-   :END:
-
-- [[https://twitter.com/nixcraft][nixcraft]]: some humor, some important
-
-** Building software for old Ubuntu
-   :PROPERTIES:
-   :CUSTOM_ID: building-software-for-old-ubuntu
-   :END:
-
-Suppose:
-
-- You are using Ubuntu 14.04.
-- Ubuntu 14.04 comes with Emacs 24.
-- You want to build Emacs 26 (because you want Spacemacs).
-
-You may be able to do that.
-Install the build dependencies, and hope that emacs 26 doesn't get too edgy with its libraries.
-
-#+BEGIN_EXAMPLE
-    sudo apt-get build-dep emacs24
-#+END_EXAMPLE
-
-That is from [[http://ergoemacs.org/emacs/building_emacs_on_linux.html][How to Build Emacs on Linux]].
-
-You can do that for other software, as long as they don't require dependencies that are too recent.
-
-** what
-   :PROPERTIES:
-   :CUSTOM_ID: what
-   :END:
-
-- https://medium.com/netflix-techblog/linux-performance-analysis-in-60-000-milliseconds-accc10403c55
-* Using Cabal
-  :PROPERTIES:
-  :CUSTOM_ID: using-cabal
-  :END:
-
-- Every package used by Setup.hs must have a vanilla version.
-
-  - Why I encountered this error:
-
-    - I set =library-vanilla= to =False= due to https://rybczak.net/2016/03/26/how-to-reduce-compilation-times-of-haskell-projects/
-
-  - How I encountered this error:
-
-    - HDBC-postgresql-2.3.2.5 =Setup.hs= build fails due to linking error with =shared: True=.
-
-      - The offending packages are =old-time= and =old-locale=.
-
-        - It's OK if we build them as shared library, but we must also build their vanilla version.
-
-      - It's not the library content that fails to build. It's the Cabal Setup of the library that fails to link.
-      - GHC expects that =old-time= and =old-locale= are system libraries?
-      - GHC passes '-lHSold-time-VERSION-HASH.so'. It passes that in the -l switch to GCC.
-      - Cabal writes 'libHSold-time-VERSION-HASH-ghc-8.2.2.so'.
-
-        - Note the =ghc-8.2.2= part isn't in the string passed by GHC to GCC.
-
-      - Can we solve this by =cabal install old-time old-locale=?
-      - https://github.com/haskell/cabal/issues/1720
-
-        - Workaround: Add =--ghc-options=-dynamic= to cabal new-install
-
-      - How do we tell Cabal to use the version we installed with new-install?
-      - Where should we fix this? Cabal? GHC? HDBC-postgresql?
-      - Should we find another library? Hackage has a low-level libpgsql wrapper.
-      - Should we just disable HDBC-postgresql on meta?
-
-  - How I diagnosed it:
-
-    - Pass =-v= to GHC (create a bash script named =ghc= that calls =SOMEWHERE/ghc -v "$@"=, and put its directory in front of =PATH=).
-    - Add =-v= to =cabal=. Then look at this fragment. It's suspicious that =old-time= is the only package with a hash.
-
-    #+BEGIN_EXAMPLE
-        package flags [-package-id Cabal-2.0.1.0{unit Cabal-2.0.1.0 True ([])},
-             -package-id array-0.5.2.0{unit array-0.5.2.0 True ([])},
-             -package-id base-4.10.1.0{unit base-4.10.1.0 True ([])},
-             -package-id binary-0.8.5.1{unit binary-0.8.5.1 True ([])},
-             -package-id bytestring-0.10.8.2{unit bytestring-0.10.8.2 True ([])},
-             -package-id containers-0.5.10.2{unit containers-0.5.10.2 True ([])},
-             -package-id deepseq-1.4.3.0{unit deepseq-1.4.3.0 True ([])},
-             -package-id directory-1.3.0.2{unit directory-1.3.0.2 True ([])},
-             -package-id filepath-1.4.1.2{unit filepath-1.4.1.2 True ([])},
-             -package-id ghc-prim-0.5.1.1{unit ghc-prim-0.5.1.1 True ([])},
-             -package-id old-time-1.1.0.3-8c2cc8e5fb3b424e71501141225064c5d9ee4eeba7f40b702227ad1c3ea2c5b7{unit old-time-1.1.0.3-8c2cc8e5fb3b424e71501141225064c5d9ee4eeba7f40b702227ad1c3ea2c5b7 True ([])},
-             -package-id pretty-1.1.3.3{unit pretty-1.1.3.3 True ([])},
-             -package-id process-1.6.1.0{unit process-1.6.1.0 True ([])},
-             -package-id template-haskell-2.12.0.0{unit template-haskell-2.12.0.0 True ([])},
-             -package-id time-1.8.0.2{unit time-1.8.0.2 True ([])},
-             -package-id transformers-0.5.2.0{unit transformers-0.5.2.0 True ([])},
-             -package-id unix-2.7.2.2{unit unix-2.7.2.2 True ([])}]
-    #+END_EXAMPLE
-
-  - How I solved it:
-
-    - I added this fragment to =cabal.project=:
-      #+BEGIN_EXAMPLE
-
-      package old-time
-      library-vanilla: True
-
-      package old-locale
-      library-vanilla: True
-      #+END_EXAMPLE
-
-    - Related
-        - https://github.com/haskell/cabal/issues/4748
-        - [#3409 Can't use system GHC without static libraries at all](https://github.com/commercialhaskell/stack/issues/3409)
-        - [#1720 `executable-dynamic: True` should apply to `build-type: Custom` setup](https://github.com/haskell/cabal/issues/1720)
-
-- [[https://github.com/haskell/cabal/issues/4506][#4506 =new-haddock='s file monitoring broken]]
-
-  - =new-haddock= doesn't work after =new-build=.
-
-- [[https://github.com/haskell/cabal/issues/5290][#5290 new-build runs into internal error after deleting from store]]
-
-  - Solution: nuke the entire store: =rm -r ~/.cabal/store=.
-
-- Non-problems
-
-  - =cabal new-build --disable-optimization= doesn't disable optimization of transitive dependencies.
-
-    - Cannot reproduce this in cabal 2.3. Is this a 2.0.0.1 bug?
-    - =$HOME/.cabal/config= has =optimization: False=.
-    - Is this a regression? Oversight? It works with =cabal install=.
-    - What I'm trying to do:
-
-      - Build transitive dependencies with optimization disabled, for faster development.
-
-    - My guess:
-
-      - There seems to be a problem in how the new code path plumbs down arguments.
-      - ="Using internal setup method with build-type"= always gets argument =--enable-optimization=.
-
-        - That message is printed by =./Distribution/Client/SetupWrapper.hs:418= =internalSetupMethod= if =cabal new-repl= is run with =--verbose=.
-        - Where does that =--enable-optimization= come from?
-        - Why isn't the =--disable-optimization= passed down?
-
-    - Related issues:
-
-      - [[https://github.com/haskell/cabal/issues/3720][#3720 Tracking bug for cabal.project semantics]]
-      - [[https://github.com/haskell/cabal/issues/5353][#5353 cabal new-configure --disable-optimization has no effect if ghc-options in cabal file contain optimization flag]]
-
-- Cabal codebase
-
-  - Seemingly minor codebase maintenance problems
-
-    - Code duplication
-
-      - =CmdRepl.hs= seems to be copied from =CmdBuild.hs=.
-
-    - =CmdBuild.hs= imports =...Orchestration= unqualified without explicit import list
-
-- Cabal description field pitfall
-
-  - http://michael.orlitzky.com/articles/using_haddock_markup_in_a_cabal_file.xhtml
 * Using Haskell
+#+TOC: headlines 2 local
 ** Setting up development environment
 - Duplicate intersecting efforts?
   Too many choices?
@@ -1703,6 +1726,127 @@ I haven't found a convincing IDE for Haskell.
 
 ** What's hampering Haskell adoption?
 - GHC's aggressive intermodule optimization precludes prebuilt binaries.
+
+** Using Cabal
+- Every package used by Setup.hs must have a vanilla version.
+
+  - Why I encountered this error:
+
+    - I set =library-vanilla= to =False= due to https://rybczak.net/2016/03/26/how-to-reduce-compilation-times-of-haskell-projects/
+
+  - How I encountered this error:
+
+    - HDBC-postgresql-2.3.2.5 =Setup.hs= build fails due to linking error with =shared: True=.
+
+      - The offending packages are =old-time= and =old-locale=.
+
+        - It's OK if we build them as shared library, but we must also build their vanilla version.
+
+      - It's not the library content that fails to build. It's the Cabal Setup of the library that fails to link.
+      - GHC expects that =old-time= and =old-locale= are system libraries?
+      - GHC passes '-lHSold-time-VERSION-HASH.so'. It passes that in the -l switch to GCC.
+      - Cabal writes 'libHSold-time-VERSION-HASH-ghc-8.2.2.so'.
+
+        - Note the =ghc-8.2.2= part isn't in the string passed by GHC to GCC.
+
+      - Can we solve this by =cabal install old-time old-locale=?
+      - https://github.com/haskell/cabal/issues/1720
+
+        - Workaround: Add =--ghc-options=-dynamic= to cabal new-install
+
+      - How do we tell Cabal to use the version we installed with new-install?
+      - Where should we fix this? Cabal? GHC? HDBC-postgresql?
+      - Should we find another library? Hackage has a low-level libpgsql wrapper.
+      - Should we just disable HDBC-postgresql on meta?
+
+  - How I diagnosed it:
+
+    - Pass =-v= to GHC (create a bash script named =ghc= that calls =SOMEWHERE/ghc -v "$@"=, and put its directory in front of =PATH=).
+    - Add =-v= to =cabal=. Then look at this fragment. It's suspicious that =old-time= is the only package with a hash.
+
+    #+BEGIN_EXAMPLE
+        package flags [-package-id Cabal-2.0.1.0{unit Cabal-2.0.1.0 True ([])},
+             -package-id array-0.5.2.0{unit array-0.5.2.0 True ([])},
+             -package-id base-4.10.1.0{unit base-4.10.1.0 True ([])},
+             -package-id binary-0.8.5.1{unit binary-0.8.5.1 True ([])},
+             -package-id bytestring-0.10.8.2{unit bytestring-0.10.8.2 True ([])},
+             -package-id containers-0.5.10.2{unit containers-0.5.10.2 True ([])},
+             -package-id deepseq-1.4.3.0{unit deepseq-1.4.3.0 True ([])},
+             -package-id directory-1.3.0.2{unit directory-1.3.0.2 True ([])},
+             -package-id filepath-1.4.1.2{unit filepath-1.4.1.2 True ([])},
+             -package-id ghc-prim-0.5.1.1{unit ghc-prim-0.5.1.1 True ([])},
+             -package-id old-time-1.1.0.3-8c2cc8e5fb3b424e71501141225064c5d9ee4eeba7f40b702227ad1c3ea2c5b7{unit old-time-1.1.0.3-8c2cc8e5fb3b424e71501141225064c5d9ee4eeba7f40b702227ad1c3ea2c5b7 True ([])},
+             -package-id pretty-1.1.3.3{unit pretty-1.1.3.3 True ([])},
+             -package-id process-1.6.1.0{unit process-1.6.1.0 True ([])},
+             -package-id template-haskell-2.12.0.0{unit template-haskell-2.12.0.0 True ([])},
+             -package-id time-1.8.0.2{unit time-1.8.0.2 True ([])},
+             -package-id transformers-0.5.2.0{unit transformers-0.5.2.0 True ([])},
+             -package-id unix-2.7.2.2{unit unix-2.7.2.2 True ([])}]
+    #+END_EXAMPLE
+
+  - How I solved it:
+
+    - I added this fragment to =cabal.project=:
+      #+BEGIN_EXAMPLE
+
+      package old-time
+      library-vanilla: True
+
+      package old-locale
+      library-vanilla: True
+      #+END_EXAMPLE
+
+    - Related
+        - https://github.com/haskell/cabal/issues/4748
+        - [#3409 Can't use system GHC without static libraries at all](https://github.com/commercialhaskell/stack/issues/3409)
+        - [#1720 `executable-dynamic: True` should apply to `build-type: Custom` setup](https://github.com/haskell/cabal/issues/1720)
+
+- [[https://github.com/haskell/cabal/issues/4506][#4506 =new-haddock='s file monitoring broken]]
+
+  - =new-haddock= doesn't work after =new-build=.
+
+- [[https://github.com/haskell/cabal/issues/5290][#5290 new-build runs into internal error after deleting from store]]
+
+  - Solution: nuke the entire store: =rm -r ~/.cabal/store=.
+
+- Non-problems
+
+  - =cabal new-build --disable-optimization= doesn't disable optimization of transitive dependencies.
+
+    - Cannot reproduce this in cabal 2.3. Is this a 2.0.0.1 bug?
+    - =$HOME/.cabal/config= has =optimization: False=.
+    - Is this a regression? Oversight? It works with =cabal install=.
+    - What I'm trying to do:
+
+      - Build transitive dependencies with optimization disabled, for faster development.
+
+    - My guess:
+
+      - There seems to be a problem in how the new code path plumbs down arguments.
+      - ="Using internal setup method with build-type"= always gets argument =--enable-optimization=.
+
+        - That message is printed by =./Distribution/Client/SetupWrapper.hs:418= =internalSetupMethod= if =cabal new-repl= is run with =--verbose=.
+        - Where does that =--enable-optimization= come from?
+        - Why isn't the =--disable-optimization= passed down?
+
+    - Related issues:
+
+      - [[https://github.com/haskell/cabal/issues/3720][#3720 Tracking bug for cabal.project semantics]]
+      - [[https://github.com/haskell/cabal/issues/5353][#5353 cabal new-configure --disable-optimization has no effect if ghc-options in cabal file contain optimization flag]]
+
+- Cabal codebase
+
+  - Seemingly minor codebase maintenance problems
+
+    - Code duplication
+
+      - =CmdRepl.hs= seems to be copied from =CmdBuild.hs=.
+
+    - =CmdBuild.hs= imports =...Orchestration= unqualified without explicit import list
+
+- Cabal description field pitfall
+
+  - http://michael.orlitzky.com/articles/using_haddock_markup_in_a_cabal_file.xhtml
 * Using Kubernetes
   :PROPERTIES:
   :CUSTOM_ID: using-kubernetes
@@ -1749,122 +1893,6 @@ I haven't found a convincing IDE for Haskell.
   - [[https://en.wikipedia.org/wiki/Infrastructure_as_a_service][WP:Infrastructure as a service]]
 
 - [[https://www.level-up.one/kubernetes-bible-beginners/][The Kubernetes Bible for Beginners & Developers - Level UpLevel Up]]
-* Making a personal wiki
-  :PROPERTIES:
-  :CUSTOM_ID: making-a-personal-wiki
-  :END:
-
-- Selection criteria:
-
-  - How many people are using it?
-  - How big can it grow without slowing down?
-  - How good is its markup?
-  - How long will it last?
-    How long can it operate without being obsolete?
-    How fast do the software dependencies rot?
-
-    - How long does Ubuntu maintain the repository archive of old Ubuntu versions?
-
-      - http://old-releases.ubuntu.com/
-
-        - 2018-08-06: It seems that Ubuntu maintains the repositories to as far back as 2006.
-        - https://askubuntu.com/questions/91815/how-to-install-software-or-upgrade-from-an-old-unsupported-release
-
-- Too many choices.
-
-  - http://wiki.c2.com/?PersonalWiki
-  - http://wiki.c2.com/?WikiEngines
-  - https://www.quora.com/Whats-the-best-way-to-create-a-personal-wiki
-  - [[https://www.wikimatrix.org/][wikimatrix.org: compare wiki softwares]]
-  - safety in numbers?
-
-    - many users
-
-      - Jekyll
-      - http://moinmo.in/
-      - https://gohugo.io/
-
-    - few users
-
-      - https://github.com/lotabout/static-wiki
-
-    - unknown
-
-      - http://dynalon.github.io/mdwiki/#!index.md
-
-- Avoid accidental publishing.
-
-  - Don't put anything you don't want to publish inside your Jekyll directory, no matter how convenient.
-    Accidents happen.
-    Humans make mistakes.
-    Computer doesn't care.
-
-- [[https://www.labnol.org/internet/load-disqus-comments-on-click/28653/][How to Load Disqus Comments on Demand with JavaScript]]
-* Searching the Internet
-  :PROPERTIES:
-  :CUSTOM_ID: searching-the-internet
-  :END:
-
-- Example search: given a text description, find related images
-- Example reverse search: given an image, describe it, or find its copies on the Internet
-- Internet search tools in 2018
-
-  - [[https://duckduckgo.com/][duckduckgo.com]]: privacy-focused search engine
-
-    - less censored than Google
-    - no reverse search (yet?)
-
-  - [[https://google.com/][google.com]]: biggest Internet search engine in 2018
-
-    - censored
-    - text search
-    - image search
-    - reverse image search
-    - Problems
-
-      - Google should rank down Pinterest.
-
-        - In my experience, Pinterest is never an authoritative nor original source.
-        - Google has ranked down Tumblr and Wikipedia.
-
-      - Example of Google censorship (compare with DuckDuckGo):
-
-        - search terms related to pornography
-        - search terms related to the darknet (the hidden wiki, Tor websites)
-        - rhino poaching (Google favors contents against rhino poaching)
-
-      - [[https://stallman.org/google.html][Richard Stallman's reasons not to use Google]]
-
-  - [[https://www.bing.com/][bing.com]]: Microsoft's answer to Google
-
-    - text search
-    - reverse image search
-    - [[https://stallman.org/microsoft.html][Richard Stallman's reasons not to use Microsoft]]
-
-  - searx?
-  - startpage?
-  - reverse search tools
-
-    - Google and Bing have reverse image search
-    - [[https://tineye.com/][tineye.com]]: reverse image search
-    - [[http://www.mooma.sh][moomash]] (was "audentifi"), YouTube reverse audio search
-
-      - 2018: only works with some video formats; doesn't work for old videos
-      - 2018-09-15: It have gone out of business, it seems.
-
-    - Shazam
-
-      - Is there anything like Shazam that takes a YouTube URL, and doesn't require me to install anything?
-
-    - http://whatpixel.com/original-source-image-search-tools/
-    - [[https://saucenao.com/][saucenao.com]]: reverse image search; I use it to find images stolen from pixiv
-
-- The Internet is full of crap.
-
-  - So are libraries.
-  - So is the world.
-  - So is this website.
-  - Thus, you must think for yourself.
 * Using Trello
   :PROPERTIES:
   :CUSTOM_ID: using-trello
@@ -2030,31 +2058,6 @@ I haven't found a convincing IDE for Haskell.
   - A card is a list of checklists.
   - A checklist is a list of checklist items.
   - Therefore we can use Trello for work breakdown structure of perhaps at most 4 levels deep.
-* Contributing to Wikipedia
-  :PROPERTIES:
-  :CUSTOM_ID: contributing-to-wikipedia
-  :END:
-
-** Beginning contributing to Wikipedia
-   :PROPERTIES:
-   :CUSTOM_ID: beginning-contributing-to-wikipedia
-   :END:
-
-Don't publish anything you may regret later.
-Once it's on the Internet, it's forever.
-The Internet doesn't forget.
-Wikipedia is a highly crawled and archived site.
-
-** What should be in user page?
-   :PROPERTIES:
-   :CUSTOM_ID: what-should-be-in-user-page
-   :END:
-
-Templates: User page, User in $country, Babel
-
-See [[https://en.wikipedia.org/wiki/Wikipedia:User_pages][WP:User pages]].
-
-[[https://en.wikipedia.org/wiki/Wikipedia:Userboxes][WP:Userboxes]]
 * Using XML
   :PROPERTIES:
   :CUSTOM_ID: using-xml
