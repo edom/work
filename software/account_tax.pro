@@ -1,11 +1,4 @@
-/*
-This is not a complete implementation.
-Don't use this for computing your actual taxes.
-*/
-
-% PPh (Pajak Penghasilan)
-
-:- module(tax, [
+:- module(account_tax, [
 
     % Structures.
 
@@ -31,6 +24,11 @@ Don't use this for computing your actual taxes.
 
 ]).
 :- use_module('date.pro').
+/** <module> Indonesian tax accounting?
+
+This is not a complete implementation.
+Don't use this for computing your actual taxes.
+*/
 
 taxation(A) :- functor(A, taxation, 2).
 taxation_subject(A, B) :- taxation(A), arg(1, A, B).

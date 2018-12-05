@@ -2,6 +2,8 @@
     main/0
     , ast_sql/2
 ]).
+/** <module> work with PostgreSQL via ODBC
+*/
 
 :- use_module('./map.pro').
 :- use_module('./string0.pro').

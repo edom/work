@@ -1,5 +1,14 @@
-/**
-Financial accounting.
+:- module(account, [
+    prefix_description/2
+    , account_unit_description/3
+    , transaction/3
+]).
+
+/** <module> financial accounting?
+
+To-do:
+    - report(DateBegin, DateEnd, Report)?
+    - multi-currency
 */
 
 :- multifile prefix_description/2.

@@ -3,6 +3,8 @@
     , entity_field_nullable/3
     , sql_java_type/3
 ]).
+/** <module> describe all data?
+*/
 
 % Records.
 
@@ -20,7 +22,8 @@ match_many([Pat | Pats], List, Unmatched) :- true
     , Unmatched_1 = Unmatched
     .
 
-/*
+/** entity_field(?Entity, ?Name, ?Type, ?Opts).
+
 We assume the existence of a predicate entity/2 somewhere else.
 
 entity(Name, Fields).

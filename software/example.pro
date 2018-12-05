@@ -133,7 +133,7 @@ expression(Order, infix(P1, ML, MR), U0, P3, U3) :-
     expression(OL, ML, U0, P0, U1),
     expression(OR, MR, U2, P2, U3).
 
-:- use_module('tax.pro').
+:- use_module('account_tax.pro').
 
 example_tax(Gross_income) :-
     taxation_subject(Taxation, Subject),

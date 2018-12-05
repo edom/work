@@ -1,8 +1,3 @@
-/*
-Should this be named array or vector?
-
-This assumes the Prolog implementation doesn't limit functor arity.
-*/
 :- module(array, [
     % length
     array_length/2
@@ -11,23 +6,27 @@ This assumes the Prolog implementation doesn't limit functor arity.
     % access
     , array_index/2
     , array_index_value/3
-    , array_value/3
     % comparison
     , array_equal_at/3
     , array_length_equal/3
     , array_copy_except/3
 ]).
-
 :- use_module(library(clpfd)).
+/** <module> array, assuming that the Prolog implementation does not limit functor arity
 
-/**
+This assumes the Prolog implementation doesn't limit functor arity.
+*/
+
+/** array_length(?Array, ?Length).
+
 Can be used to create a new array with bound length but unbound elements.
 
 At least one parameter must be bound.
 */
 array_length(Array, Length) :- compound_name_arity(Array, array, Length), !.
 
-/*
+/** array_list(?Array, ?List).
+
 Can be used to convert between array and list.
 */
 array_list(Array, List) :- var(Array), var(List), !, throw('array_list: arguments not sufficiently instantiated').
@@ -46,19 +45,22 @@ array_list(Array, List) :- array_length(Array, N), length(List, N), array_compar
 
     array_to_list_(A, L) :- array_length(A, N), array_compare_list_(A, 0, N, L).
 
-/*
+/** array_index(?Array, ?Index).
+
 See array_index_value/3.
 
 Can be used to enumerate the indexes of an array.
 */
 array_index(Array, Index) :- array_index_value(Array, Index, _).
 
-/*
+/** array_value(?Array, ?Value).
+
 See array_index_value/3.
 */
 array_value(Array, Value) :- array_index_value(Array, _, Value).
 
-/*
+/** array_index_value(?Array, ?Index, ?Value).
+
 At least one parameter must be bound.
 
 Can be used to enumerate an array.

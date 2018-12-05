@@ -1,10 +1,9 @@
-/*
-An expression sublanguage to facilitate functional-logic programming in Prolog.
-*/
 :- module(expression, [
     expression_value/2
 ]).
 
+/** <module> (deprecated; use profon.pro) an expression sublanguage to facilitate functional-logic programming in Prolog
+*/
 
 /*
 Embedded C-like expression language but with unification instead of assignment.

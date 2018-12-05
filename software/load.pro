@@ -7,8 +7,8 @@ paths_to_load(Paths) :- true
     , findall(Path, (member(Path, List), should_load_path(Path)), Paths)
     .
 
-consult_my_files :- true
+load_my_files :- true
     , paths_to_load(Paths)
-    , consult(Paths).
+    , load_files(Paths, [imports([])]).
 
-:- consult_my_files.
+:- load_my_files.
