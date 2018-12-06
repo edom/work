@@ -1,16 +1,28 @@
-/** <module> bit manipulation
-
-*/
 :- module(ps1_bit, [
-    % bit manipulation
     split_bits/4
     , bytes_le__uint2/2
     , bytes_le__uint4/2
     , sint_integer/3
     , integer_hex/2
+    , bytesle_uint/2
 ]).
-
 :- use_module(library(clpfd)).
+/** <module> bit manipulation
+
+Predicates:
+    - Layout
+        - bytesle_uint/2
+    - Formatting
+        - integer_hex/2
+
+Deprecated:
+    - bytes_le__uint2/2
+    - bytes_le__uint4/2
+
+To-do:
+    - Rename to bit.pro.
+    This was originally written for ps1_decompile.pro, but this isn't PS1 specific.
+*/
 
 /** split_bits(?Whole, +Index, ?Left, ?Right)
 
@@ -96,3 +108,16 @@ integer_hex(Word, Hex) :- integer(Word), Word >= 0, !, format(string(Hex), '0x~1
 integer_hex(Word, Hex) :- integer(Word), Word < 0, !, Abs is -Word, format(string(Hex), '-0x~16r', [Abs]).
 integer_hex(Word, Hex) :- string(Hex), !, number_string(Word, Hex).
 integer_hex(Word, Hex) :- throw(error(invalid_arguments(Word, Hex), _)).
+
+/** bytesle_uint(?Bytes, ?Word).
+
+"Bytes are the bytes of the unsigned integer Word in little-endian byte order."
+
+Example:
+```
+bytesle_uint([0x78,0x56,0x34,0x12], 0x12345678).
+```
+*/
+bytesle_uint([], 0).
+bytesle_uint([Lsb|Bs], W) :- integer(W), !, Lsb is W /\ 0xff, UpperW is W >> 8, bytesle_uint(Bs, UpperW).
+bytesle_uint([Lsb|Bs], W) :- var(W), !, bytesle_uint(Bs, UpperW), W is (UpperW << 8) \/ Lsb.
