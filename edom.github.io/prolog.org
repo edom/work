@@ -20,6 +20,23 @@ I'm selling you Prolog here, but let me be honest:
 Don't buy it if any of these year-2018 deal-breakers are an issue for you.
 Prolog isn't ready for these use cases in 2018; I hope these will change.
 
+<2018-12-09>
+Somewhat fatal:
+ISO Prolog open/4 has no way to open a file for writing without truncating it.
+How the hell did they overlook such a common use case in a standard?
+But some implementations have extensions to work around that.
+
+Comparison of some open/4 implementations:
+- Prolog implementations that can open a file for both reading and writing:
+  - <2018-12-09> Amzi! Prolog open/4 has "readwrite" mode https://www.amzi.com/manuals/amzi/pro/ref_io.htm
+- Prolog implementations that can open a file for writing without truncating it:
+  - <2018-12-09> SWI-Prolog open/4 has "update" mode http://www.swi-prolog.org/pldoc/doc_for?object=open/4
+  - <2018-12-09> ECLiPSe Prolog open/4 has "update" mode http://eclipseclp.org/doc/bips/kernel/iostream/open-4.html
+- Prolog implementations that /cannot/ open a file for writing without truncating it:
+  - <2018-12-09> GNU Prolog http://www.gprolog.org/manual/html_node/gprolog034.html#open%2F4
+  - <2018-12-09> SICStus Prolog https://sicstus.sics.se/sicstus/docs/4.2.1/html/sicstus/mpg_002dref_002dopen.html
+  - <2018-12-09> Ciao Prolog https://ciao-lang.org/docs/1.14/13646/CiaoDE-1.14.2-13646_ciao.html/streams_basic.html#open/4
+
 <2018-11-30>
 No arrays.
 
@@ -1214,3 +1231,12 @@ But this beautiful dream crumbles outside /pure/ logic programming.
 #+BEGIN_EXAMPLE
 palindrome(L) :- reverse(L, L).
 #+END_EXAMPLE
+* Prolog community
+Where is the community?
+- IRC requires login.
+  Where is the chat log?
+- SWI-Prolog Google Groups (web-browsable mailing list) https://groups.google.com/forum/#!forum/swi-prolog
+- comp.lang.prolog https://groups.google.com/forum/#!forum/comp.lang.prolog
+- StackOverflow tag swi-prolog https://stackoverflow.com/questions/tagged/swi-prolog
+- SWI-Prolog roadmap https://github.com/SWI-Prolog/roadmap
+- http://www.swi-prolog.org/Links.html
