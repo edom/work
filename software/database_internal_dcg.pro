@@ -2,7 +2,10 @@
     type_value//2,
     type_bytecount/2,
     type_value_bytes/3,
-    type_values_bytes_remain/4
+    type_values_bytes_remain/4,
+    bytecount_is_correct/2,
+    forward_roundtrip_is_correct/2,
+    backward_roundtrip_is_correct/2
 ]).
 :- use_module(library(clpfd)).
 :- use_module(library(utf8)).
@@ -187,3 +190,25 @@ At least one argument must be ground.
 string_utf8(Str, Bytes) :- nonvar(Str), !, string_codes(Str, Codes), phrase(utf8_codes(Codes), Bytes).
 string_utf8(Str, Bytes) :- nonvar(Bytes), !, phrase(utf8_codes(Codes), Bytes), string_codes(Str, Codes).
 string_utf8(S,B) :- instantiation_error(string_utf8(S,B)).
+
+/**
+bytecount_is_correct(++Type, ?Value, ?Bytes).
+forward_roundtrip_is_correct(++Type, ?Value).
+backward_roundtrip_is_correct(++Type, ?Bytes).
+
+Predicates for property-based testing.
+*/
+bytecount_is_correct(T,V,B) :-
+    type_value_bytes(T,V,B),
+    type_bytecount(T,L),
+    length(B,L).
+
+forward_roundtrip_is_correct(T,V0) :-
+    type_value_bytes(T,V0,B),
+    type_value_bytes(T,V1,B),
+    V0 = V1.
+
+% The padding bytes don't roundtrip.
+backward_roundtrip_is_correct(T,B) :-
+    type_value_bytes(T,V,B),
+    forward_roundtrip_is_correct(T,V).

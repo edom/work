@@ -1,6 +1,11 @@
 :- module(haskell, [
-    exp_type/2
+    exp_con/2
+    , exp_var/2
+    , exp_app/3
+    , exp_lam/3
+    , exp_type/2
     , exp_valid/1
+    , type_value/2
     , profon_haskell/2
 ]).
 /** <module> Haskell?
@@ -17,6 +22,19 @@ To-do:
 - type synonyms
 - data types
 */
+
+/**
+exp_con(?Exp, ?Con).
+exp_var(?Exp, ?Var).
+exp_app(?Exp, ?Fun, ?Arg).
+exp_lam(?Exp, ?Var, ?Bod).
+
+Exp constructors.
+*/
+exp_con(con(_,C), C).
+exp_var(var(_,V), V).
+exp_app(app(_,F,A), F, A).
+exp_lam(lam(_,A,B), A, B).
 
 /** exp_type(?Exp, ?Typ).
 
@@ -42,6 +60,7 @@ exp_valid(lam(TV -> TB, V, B)) :- exp_valid(V), exp_valid(B), exp_type(V, TV), e
 
 "Typ is the type of Val."
 */
+:- multifile type_value/2.
 type_value('Integer',V) :- integer(V).
 type_value('Integer' -> 'Integer' -> 'Integer', +).
 type_value('Maybe'(_), 'Nothing').
