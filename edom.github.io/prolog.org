@@ -87,6 +87,9 @@ When you build your home, you don't build your own bricks.
 Your coworkers are beating you with Prolog?
 Well, what the hell are you waiting for?
 Learn Prolog now, or lose your job and die in oblivion!
+
+"Prolog is a convenient language in which to express the semantics of other languages."
+https://www3.hhu.de/stups/prob/index.php/Why_Prolog%3F
 ** Not sure yet? Try Prolog with minimal investment.
 If you're not sure yet, I suggest that you
 read [[https://www.metalevel.at/prolog][Markus Triska's book "The power of Prolog"]]
@@ -303,6 +306,9 @@ negate(A,B) :- integer(A), !, B is -A.
 negate(A,B) :- integer(B), !, A is -B.
 negate(A,B) :- throw(error(negate(A,B),_)).
 #+END_EXAMPLE
+
+- https://wiki.colby.edu/display/~amvartan/Exception+and+Error+Handling+in+Prolog
+- https://stackoverflow.com/questions/32968148/why-throw-an-exception-in-prolog-instead-a-simple-fail
 ** Structured logging
 This is how we log messages in Prolog:
 - Design a term that represents the /meaning/ of the message.
@@ -907,6 +913,37 @@ We shouldn't chicken out.
 We shouldn't compromise by working around our grammar descriptions.
 *** Precedence parsing?
 - 1996 article "An Operator Precedence Parser for Standard Prolog Text" https://onlinelibrary.wiley.com/doi/abs/10.1002/%28SICI%291097-024X%28199607%2926%3A7%3C763%3A%3AAID-SPE33%3E3.0.CO%3B2-L
+** Metainterpreter for left-recursive parsing?
+"Parsing with left-recursive grammars"
+https://www.metalevel.at/acomip/
+** Left-recursive parsing
+2009
+Direct Left-Recursive Parsing Expressing Grammars
+https://www.semanticscholar.org/paper/Direct-Left-Recursive-Parsing-Expressing-Grammars-Tratt/b1e8309db5537fb15f51071fcdc39e139659ed15
+
+2008
+Packrat Parsers Can Support Left Recursion
+
+Naive recognizer + memoization
+
+list_not_empty
+
+#+BEGIN_SRC prolog
+exp(S) :- is_list(S), append([A,[0'+],C],S), exp(A), exp(C).
+#+END_SRC
+
+Consume before recursing?
+
+We can't piggyback Prolog's unification for lambda calculus substitution,
+because Prolog unifies same-named variables while lambda-calculus shadows same-named variables.
+
+If the recursive call has smaller arguments than the parent call does, then the predicate should terminate.
+** What
+relational parsing with derivatives?
+https://github.com/webyrd/relational-parsing-with-derivatives/blob/master/README.md
+
+1997 inconclusive discussion "Prolog Parser in Prolog"
+https://dtai.cs.kuleuven.be/projects/ALP/newsletter/archive_93_96/net/grammars/parser.html
 * Theories
 ** Relational-multidirectional-logic programming?
 ** Embedding Prolog/Haskell in Haskell/Prolog
@@ -916,8 +953,16 @@ We shouldn't compromise by working around our grammar descriptions.
     in which each predicate in a Prolog program becomes a Haskell function,
     in such a way that both the declarative and the procedural reading of the Prolog predicate are preserved."
 - 1988 article "Towards functional programming in Prolog" ftp://obaluae.inf.puc-rio.br/pub/docs/Publications/88_AI_Furtado_SINPLAN.Not.pdf
-*** Embedding Haskell in Prolog: Nobody is talking about this.
+*** Embedding Haskell in Prolog: Nobody is talking about this?
+translate haskell to prolog
+- https://stackoverflow.com/questions/1932770/haskell-vs-prolog-comparison
+- https://github.com/COMS30106/slides
+- https://github.com/COMS30106/slides/blob/master/haskell2prolog.pdf
 
+Prolog and Haskell are almost equally concise.
+Prolog and Haskell are even in head/2 and tail/2.
+Prolog beats Haskell in null/1 and reverse/2.
+Haskell beats Prolog in length/2, sumList/2, and everything that has arithmetics where Prolog requires intermediate variable such as "N1 is N-1".
 ** How are Prolog and Lisp similar?
 - Both Prolog and Lisp have symbols and cons cells.
   - This is a Lisp cons cell: =(cons 'a 'b)= or ='(a . b)=.
@@ -1231,6 +1276,10 @@ But this beautiful dream crumbles outside /pure/ logic programming.
 #+BEGIN_EXAMPLE
 palindrome(L) :- reverse(L, L).
 #+END_EXAMPLE
+** What
+2015
+Approaches for Learning Prolog Programming
+https://www.tandfonline.com/doi/full/10.11120/ital.2007.06040088
 * Prolog community
 Where is the community?
 - IRC requires login.
@@ -1240,3 +1289,361 @@ Where is the community?
 - StackOverflow tag swi-prolog https://stackoverflow.com/questions/tagged/swi-prolog
 - SWI-Prolog roadmap https://github.com/SWI-Prolog/roadmap
 - http://www.swi-prolog.org/Links.html
+- https://www.reddit.com/r/prolog/
+- http://prolog-commons.org
+
+SWI-Prolog packs need curation/vetting/testimony/promotion.
+* <2018-12-10> Smart editors are dangerous! Arbitrary code execution!
+I use the VSCode extension VSC-Prolog, but I disabled its linter after I realize that it may execute arbitrary code.
+I only use its syntax highlighting and documentation popup feature.
+Fortunately the plugin is still very useful without the linter.
+
+Imagine this file:
+#+BEGIN_EXAMPLE
+% doom.pro
+:- shell('touch ~/doomed').
+#+END_EXAMPLE
+
+I loaded that file into VSCode, and a file named =doomed= appeared in my home directory.
+I'd be really doomed if someone replaced that command with 'rm -rf /'.
+
+Perhaps we should make a whitelist of allowed directives?
+
+Vim suffers the same thing with its modelines. I think it's now disabled by default?
+
+However, this doesn't affect you if you only open what you write yourself, and never open a criminal's Prolog code.
+But this is an accident waiting to happen!
+
+I reported this:
+- https://github.com/arthwang/vsc-prolog/issues/31
+* Ramble
+** Dense?
+When writing Prolog code, I write much more documentation than code.
+Is this bad?
+Are self-describing programs possible?
+** Purifying Prolog?
+- assert/2 can be replaced with two parameters (state and next-state).
+** Ramble: Translating Prolog to native code?
+The idea is to relate a Prolog predicate and a C routine.
+
+Every disjunct translates into one routine / basic block.
+
+The current goal relates to the instruction pointer.
+
+Proving a goal ~ calling a routine
+Conjunction of phrase ~ sequence of call
+Disjunction of clause ~ speculative parallel execution, for pure predicates only
+
+p(A),q(A) can be optimized from O(PQ) time to O(max(P,Q)) time if we order the storage.
+
+Intermediate language
+Compile by abstract interpretation
+unify(Var1,Var2)
+frame(Instrs)
+prove((A,B)) :- prove(A), prove(B).
+
+A variable in clause head is implicitly universally quantified.
+A free variable in clause body is implicitly existentially quantified.
+
+What is the relationship between logic programming, relational programming, logic, Horn clauses, theorem proving, searching, and backtracking?
+
+
+Prolog just-in-time compilation
+compile(GoalAst, Fragment)
+call(Fragment)
+Execute?
+
+Compile prolog predicates, limited to u32 parameters.
+Normalize p(a). to p(A) :- A=a.
+If first arg is bound, use index.
+Else sequential scan.
+Subset of prolog.
+Focus on translation for performance.
+No dynamic predicates.
+Generate a c func for some predicate direction.
+plus_bbb
+plus_bbu
+...
+plus_uuu
+Add a state parameter for nondet predicate. (Next clause index to try). Initial value 0.
+p(A,B) :- B is A + 1.
+
+Libjit vs llvm?
+mmap and mprotect
+
+father_child(F,C)
+
+bool father_child(termref F, termref C) {
+}
+** Prolog should use three-valued logic?
+Suppose that both A and B are unbound variables.
+Then:
+- =A == B= is unknown, but it's false in Prolog.
+- =A \= B= is unknown, not it's false in Prolog.
+
+In that case, it is better for Prolog to throw an instantiation_error instead of failing.
+
+Three-valued logic would simplify and elegantize constraint logic programming?
+** Equalities and equivalences?
+What is the difference: =, ~==~, ~=:=~, is
+** Implicit state language?
+#+BEGIN_SRC prolog
+interpret(state(S), S, S).
+interpret(state_set(S), _, S).
+interpret((A,B),S0,S2) :- interpret(A,S0,S1), interpret(B,S1,S2).
+#+END_SRC
+** Devops, dependency, build system?
+Prolog marelle, Haskell shake, build system?
+
+- http://quietlyamused.org/blog/2013/11/09/marelle-for-devops/
+- "there is already a configuration management language that is strongly influenced by Prolog and logic programming - Puppet - and the results are not that great"
+  https://news.ycombinator.com/item?id=6701362
+  - really?
+  - The computer can't read your mind.
+    You lie to the computer, it does what you told it to do.
+    Don't blame the computer for your failing to tell the computer everything it needs to do the job.
+** Modules?
+Prolog syntax for use_module is documented in [[http://www.swi-prolog.org/FAQ/LoadLibrary.html][LoadLibrary FAQ]], not in the documentation for use_module/1.
+The =library= alias is defined in file_search_path/2.
+
+swipl: use =-s= instead of =-l=
+http://www.swi-prolog.org/pldoc/man?section=cmdline
+** Prolog revival attempt
+- https://github.com/Web-Prolog/swi-web-prolog
+** Declarative programming? Function arguments?
+The idea:
+A relation's parameter can be a unifiable logic variable or a beta-reducible lambda expression.
+#+BEGIN_EXAMPLE
+is_one(A : exp(integer)) :- A = 1.
+?- is_one(0+1).
+true.
+
+f(A : var(integer)) :- A = 1.
+?- f(0+1).
+false.
+#+END_EXAMPLE
+
+TODO
+Compare various approaches such as LambdaProlog, Mercury, and Curry.
+** What
+Writing a Prolog knowledge base is an exercise in philosophy, especially ontology.
+We ask these all the time:
+- What exist?
+- How do they relate?
+- How do we model all those entities and relationships in Prolog for not-too-slow computation?
+
+Gerrit has prolog?
+https://gerrit-review.googlesource.com/Documentation/prolog-cookbook.html
+
+Prolog web browser, prolog gui, prolog operating system, prolog system f, normal-order lambda calculus, Haskell in prolog
+
+Prolog to glue Haskell, racket, typescript
+
+<2018-12-06>
+Prolog is the most ideal metalanguage I have found so far.
+
+"adding a search Path in SWI prolog"
+https://stackoverflow.com/questions/6334050/adding-a-search-path-in-swi-prolog
+
+Prolog in JavaScript/browser
+http://tau-prolog.org/
+
+Alternative Prolog syntax?
+Curry/ML-like syntax for Prolog?
+
+#+BEGIN_EXAMPLE
+append([],B,B).
+append([H|A], B, [H|C]) :- append(A,B,C).
+
+append [] B B.
+append [H|A] B [H|C] :- append A B C.
+#+END_EXAMPLE
+
+If everyone could be 20x more productive using Prolog, then it is a sin to let them use Java or C++.
+It is a massive waste of human life.
+
+"Syntactic integration of external languages in Prolog"
+https://pdfs.semanticscholar.org/35eb/0b9d6edc27dd4564d98b107fec08e45e36cd.pdf
+SQL-Prolog
+Draxler [2]
+NED [5]
+
+
+"The Mess We're In" by Joe Armstrong"
+https://www.youtube.com/watch?v=lKXe3HUG2l4
+43:20
+We assume that two files A and B are similar if size(compress(A)) is similar to size(compress(A++B)).
+
+"Goal: Adapting the Warren abstract machine to the LLVM IR machine model for later compilation."
+"Hassan Aït-Kaci's WAM book"
+2018
+https://www.researchgate.net/project/Compiling-Prolog
+
+
+decompilation
+"J.P. Bowen, From Programs to Object Code and Back Again Using Logic Programming: Compilation and Decompilation, Journal of Software Maintenance: Research and Practice, Vol. 5, No. 4, pp.205-234, December, 1993"
+https://dtai.cs.kuleuven.be/projects/ALP/newsletter/archive_93_96/net/grammars/compiler2.html
+
+
+Prolog parser in Prolog
+https://dtai.cs.kuleuven.be/projects/ALP/newsletter/archive_93_96/net/grammars/parser.html
+
+XPCE may have been considered deprecated since 2015
+https://github.com/SWI-Prolog/roadmap/issues/29
+
+
+
+"What is Wrong with Logic Programming?"
+"A Deductive Solution to Mutable State and I/O"
+https://pdfs.semanticscholar.org/ca08/dcb9eddc1e7651509daac7fa02eddb7f675b.pdf
+
+http://www.swi-prolog.org/pldoc/doc_for?object=section(%27packages/cql.html%27)
+Draxler 1991 relates database table and Prolog predicate.
+CQL models SQL query in Prolog terms.
+** miniKanren?
+Relational programming, microKanren
+http://matt.might.net/articles/microkanren/
+
+2017
+A Unified Approach to Solving Seven Programming Problems (Functional Pearl)
+http://io.livecode.ch/learn/gregr/icfp2017-artifact-auas7pp
+
+2013
+rKanren - Guided Search in miniKanren, Part I
+http://cgswords.github.io/rkanren/
+
+Schelog vs minikanren?
+** PLX (Prolog-LaTeX-XML) markup language?
+#+BEGIN_EXAMPLE
+\Tag[Attr1=Val1,Attr2=Val2]{Content} translates to <Tag Attr1=Val1 Attr2=Val2>Content</Tag>
+
+\div[class=foo]{
+  \div[class=bar]{
+  }
+}
+
+Curly braces quote/escape attribute values.
+\Tag[Attr={,}]
+\Tag[Attr={[}]
+\div[data-foo=4123]{}
+\h1{bar}
+\img[src=foo.png]
+
+
+Escape a curly brace by prepending a backslash.
+\Tag[Beg=\{,End=\}]{}
+
+\table{
+  \tr{\td{Foo}\td{Bar}}
+}
+
+\strong{\em{strong emphasized text}}
+
+\p{This is an example paragraph. It may contain \em{emphasis}.}
+\p{ Leading and trailing whitespaces are stripped away. }
+\p{\ Backslash-space escapes a space that would otherwise be ignored.}
+
+\nbsp expands to &nbsp;
+#+END_EXAMPLE
+
+Similar but not the same
+1999 "TEXML: Typesetting XML with TEX"
+https://www.tug.org/TUG99-web/pdf/lovell.pdf
+
+"SXML: an XML document as an S-expression"
+http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.729.3639&rep=rep1&type=pdf
+
+R markdown
+https://bookdown.org/
+
+LaTeX syntax for XML.
+#+BEGIN_EXAMPLE
+\tag[attr1=val1,attr2=val2]{content} = <tag attr1="val1" attr2="val2">content</tag>
+\amp = &amp;
+\e{amp} = &amp;
+#+END_EXAMPLE
+Make a semantic-LaTeX parser/interpreter in Prolog.
+Treat LaTeX as declarative markup language and not imperative command language.
+- escaping comma https://tex.stackexchange.com/questions/70986/comma-in-macro-parameters
+- escaping square brackets https://tex.stackexchange.com/questions/6683/escaping-square-braces
+- escaping curly braces https://tex.stackexchange.com/questions/181118/how-to-escape-curly-braces-within-texttt
+** what
+!!
+https://www.cambridge.org/core/journals/theory-and-practice-of-logic-programming/article/structured-alternative-to-prolog-with-simple-compositional-semantics/3E4B4198D74D6A2EC92DF4D6DC78DDE3
+
+Prolog clpq documentation doesn't mention multivariate optimization?
+https://stackoverflow.com/questions/27716598/constraint-values-on-local-variable
+
+http://www.amzi.com/manuals/amzi/pro/ref_execution.htm
+
+http://users.cs.cf.ac.uk/O.F.Rana/prolog/lectureP5/node3.html
+
+https://coderwall.com/p/laduzw/how-to-measure-execution-time-in-swi-prolog
+
+https://www.reddit.com/r/prolog/comments/9mxhbw/the_art_of_prolog_second_edition_is_available_as/
+
+https://github.com/klauscfhq/awesome-prolog/blob/master/readme.md
+
+http://www.swi-prolog.org/pldoc/man?section=modes
+
+Twitter LOPSTR:
+Logic Based Program Synthesis and Transformation: 13th International...
+
+https://www.ajibot.com/blog/overview-of-logic-languages
+
+https://stackoverflow.com/questions/1817010/embedded-prolog-interpreter-compiler-for-java
+
+https://github.com/raydac/java-prolog-parser
+
+http://dbs.informatik.uni-halle.de/Lehre/LP09/c3_purep.pdf
+
+http://fsl.cs.illinois.edu/images/9/9c/PrologStandard.pdf
+
+prolog headless clause
+https://stackoverflow.com/questions/14168363/what-does-a-clause-without-a-head-mean-in-prolog
+
+Read "The art of Prolog", second-order programming,
+
+https://stackoverflow.com/questions/32835086/prolog-how-to-avoid-backtracking-without-cuts
+
+Now I know this is false:
+- Relational programming subsumes functional programming.
+  - Functional programming is a special case of relational programming.
+  - Every function is a relation.
+
+Functional programming is more concise and readable than logic (relational?) programming when we are describing functions:
+#+BEGIN_SRC haskell
+fib 0 = 1
+fib 1 = 1
+fib n = fib (n-1) + fib (n-2)
+#+END_SRC
+
+#+BEGIN_SRC prolog
+fib(0,1).
+fib(1,1).
+fib(N,F) :- N1 is N-1, N2 is N-2, fib(N1,F1), fib(N2,F2), F is F1+F2.
+#+END_SRC
+
+But we can translate a function to a deterministic (det) predicate in Prolog.
+** whaaat
+This marshallp guy is... inhuman?
+He uses Prolog for note taking!
+https://news.ycombinator.com/item?id=1142292
+** Search engine?
+AntRank
+http://www.ijettcs.org/Volume3Issue2/IJETTCS-2014-04-23-113.pdf
+** Reverse engineering?
+- 1992 "A Logic-Based Approach to Reverse Engineering Tools Production"
+https://pdfs.semanticscholar.org/4882/9fd716349ff586e21e9277890989daa0e916.pdf
+
+Prolog-COBOL stuff
+
+- 1991, Using Prolog for Reverse-Engineering and Validation
+http://www.academia.edu/2493008/Using_Prolog_for_reverse-engineering_and_validation
+- 1994, "Reverse Engineering of COBOL Programs into Prolog Programs"
+http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.38.5073&rep=rep1&type=pdf
+- 1992, "The Art of Computer Un-Programming: Reverse Engineering in Prolog"
+http://www.academia.edu/1413561/The_art_of_computer_un-programming_Reverse_engineering_in_Prolog
+  - https://link.springer.com/chapter/10.1007/3-540-55930-2_20
+
+http://www.academia.edu/1413561/The_art_of_computer_un-programming_Reverse_engineering_in_Prolog

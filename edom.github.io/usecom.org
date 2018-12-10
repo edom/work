@@ -2190,3 +2190,68 @@ We can map a subset of XML to YAML using [[http://yaml.org/xml][YAXML, the (draf
 ** Traps, pitfalls, gotchas
 *** PostgreSQL ALTER TABLE DROP COLUMN doesn't actually remove the column from disk
 From [[https://nerderati.com/2017/01/03/postgresql-tables-can-have-at-most-1600-columns/][PostgreSQL Tables Can Only Have 1600 Columns, Ever. | Nerderati]].
+* <2018-12-11> Prepare OS upgrade?
+I'm still thinking.
+Every OS upgrade is a pain.
+
+Move from Ubuntu 14.04 to Debian unstable
+https://www.reddit.com/r/linux/comments/40peeb/security_debian_vs_ubuntu/
+
+Don't buy any laptop outside this list.
+https://www.linux-on-laptops.com/
+
+Make moving easy.
+
+Burn a Debian Live CD.
+
+Debian is huge.
+The Debian community is huge.
+It's overwhelming.
+It's unclear where to start.
+The Debian project needs to delete things.
+The [Debian front page](https://www.debian.org/) has too much information.
+
+"several Debian developers advise people to not use testing. Why is that?"
+https://raphaelhertzog.com/2010/10/04/can-debian-offer-a-constantly-usable-testing-distribution/
+
+- https://www.debian.org/doc/manuals/debian-reference/apa.en.html#_the_debian_maze
+  - "The Debian Reference was initiated by me, Osamu Aoki [...], as a personal system administration memo."
+  - "I hope this [...] provides a good starting direction for people in the Debian maze."
+- Debian Documentation Project https://www.debian.org/doc/ddp
+  - "The Debian Documentation Project was formed to coordinate and unify all efforts to write more and better documentation for the Debian system."
+- Debian testing gets no security updates.
+  debsecan + Debian unstable + APT pinning?
+- Debian testing freezes some time before stable release and after stable release.
+- Debian unstable + get in touch with Debian community + APT pinning.
+- Do not apt-get upgrade if you have no time to fix problems.
+
+Prerequisites?
+- Understand advanced APT usage.
+- Read the Debian manual.
+- Always read the Release Notes before installing Debian stable. (Where?)
+
+As we get older, we set up rules to simplify our lives.
+Example of rules:
+- Never sudo make. Only use sudo with the part that comes from Debian.
+- Always put house keys and car keys in the front pocket of the bag when not using those keys.
+- Never pick up a call from an unknown number.
+
+Enable Magic SysRq key:
+- Read /etc/sysctl.d/README.
+- Symlink /etc/sysctl.d/10-magic-sysrq.conf.
+
+How to install Debian unstable:
+- Minimal-install Debian latest stable, upgrade to testing, install GUI, pin APT, upgrade to unstable.
+
+Always check apt-get install plan.
+Don't just answer "yes".
+If the plan doesn't look sane, wait for a few days.
+
+Dump and backup LVM metadata to GitHub?
+Is this not sensitive data?
+
+Why must APT binary packages be installed to a fixed location?
+Because ELF hardcodes "rpath".
+NixOS patches ELF rpath.
+
+Buy an SSD?
