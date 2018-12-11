@@ -2623,19 +2623,12 @@ In 2018 these aren't tolerable.
 - Preprocessor works on text, not on C/C++ AST.
 
 *** Haskell
-   :PROPERTIES:
-   :CUSTOM_ID: haskell
-   :END:
-
-- Template Haskell
-
+- Template Haskell is a mistake.
   - Instead, we should have a metaprogramming library, and generate hs files.
-
 - Haskell compilation is slow.
 - Haskell module system is a design mistake.
 - GHC: If A depends on B, and B changes without changing API, then A still requires recompilation.
 - Bottom inhabits every type including the supposedly empty type =data Void=.
-
 **** Not leveraging user-defined isomorphisms
     :PROPERTIES:
     :CUSTOM_ID: not-leveraging-user-defined-isomorphisms
@@ -2675,10 +2668,6 @@ instead of this:
 Explicit isomorphism may help reduce newtype boilerplate.
 
 *** what
-   :PROPERTIES:
-   :CUSTOM_ID: what
-   :END:
-
 A problem with current programming methodologies is that they don't capture the higher-level properties of software, such as the architecture.
 For example, how do we write, in a way that the computer can exploit, this statement:
 "The fields of class C correspond one-to-one with the columns of database table T."?
@@ -2693,6 +2682,18 @@ For example, how do we write, in a way that the computer can exploit, this state
   - [[https://softwareengineering.stackexchange.com/questions/55047/what-is-the-greatest-design-flaw-you-have-faced-in-any-programming-language][What is the greatest design flaw you have faced in any programming language? - Software Engineering Stack Exchange]]
   - [[http://www.inquisition.ca/en/info/gepsypl/rules.htm][Programming Language Design Rules]]
   - 1999 Steele article "Growing a language" [[http://www.catonmat.net/blog/growing-a-language-by-guy-steele/][html]]
+
+https://www.drmaciver.com/2009/01/criticizing-programming-languages/
+
+Lua design mistakes
+
+Picking different syntax for the sake of being different
+
+for elem in table surprisingly doesn't work, but this is for greater cause; the for syntax is surprisingly consistent (iterators, which are coroutines)
+
+Distinguishing statements and expressions
+
+Why do new language designers still repeat design mistakes?
 *** Lisp design mistake: having separate data and function cell
 ** Designing configuration languages
   :PROPERTIES:

@@ -53,6 +53,17 @@ I'm still looking.
 library(julian)?
 - Java 8 has "java.util.time"; previous Java versions can use "Joda Time".
 - Haskell has the "time" package ("Data.Time" module).
+*** <2018-11-22> Prolog weakness: binary array and low-level input-output
+Prolog doesn't have arrays.
+
+Workaround: we can fake an array:
+Allocate with functor(T,F,N), read with arg(N,T,A), and write with nb_setarg(N,T,A).
+
+Prolog doesn't have unsigned integers.
+
+How fast is this?
+
+This requires that the implementation doesn't limit functor arguments.
 ** Let me hype you up.
 (You can skip this.)
 
@@ -1647,3 +1658,77 @@ http://www.academia.edu/1413561/The_art_of_computer_un-programming_Reverse_engin
   - https://link.springer.com/chapter/10.1007/3-540-55930-2_20
 
 http://www.academia.edu/1413561/The_art_of_computer_un-programming_Reverse_engineering_in_Prolog
+** Idea: Write an SQL database explorer in Prolog.
+CLI interface without ncurses without pager.
+Imagine printing to paper like early Fortran/Unix/ed.
+Paper user interface.
+- menu(KeyActionPairs).
+- select database
+- select schema
+- show 10 rows of table, 15 chars per column, truncating long strings with ">"
+  - tput https://stackoverflow.com/questions/263890/how-do-i-find-the-width-height-of-a-terminal-window
+  - My 1920x1080 terminal has 191 columns and 53 lines.
+- go up / back to previous menu.
+** Use Prolog for formal software requirement capture / modeling.?
+"Are there any standard Prolog knowledge bases available anywhere that have the same purpose as Cyc, namely to encode generally accepted common sense and human knowledge?"
+https://cs.stackexchange.com/questions/35237/open-standard-prolog-knowledge-bases
+
+2004 "SweetProlog: A System to Integrate Ontologies and Rules"
+https://pdfs.semanticscholar.org/03c2/a0048a5845bb1f52462c4f26d7be0a929d7a.pdf
+
+Prolog is better than Turtle.
+http://sujitpal.blogspot.com/2009/06/ontology-rules-with-prolog.html
+"I actually set out to learn Jena Rules using the Semantic Web Programming book as a guide. Midway through that exercise, it occurred to me that Prolog would be a cleaner and almost drop-in replacement to the rather verbose Turtle syntax. Apparently the Semantic Web community thinks otherwise, since Turtle stands for Terse RDF Triple language. I haven't actually used Prolog before this, although I've read code snippets in articles once or twice (but not recently), so the realization was almost like an epiphany."
+
+http://collaboration.cmc.ec.gc.ca/science/rpn/biblio/ddj/Website/articles/DDJ/1989/8910/8910f/8910f.htm
+
+https://www.cs.auckland.ac.nz/~j-hamer/07.363/prolog-for-se.html
+
+http://ceur-ws.org/Vol-274/paper6.pdf
+** Prolog, somewhat object-oriented, mapping from Java to Prolog
+Prior arts:
+2017 "Mapping Objects to Persistent Predicates"
+https://pdfs.semanticscholar.org/f1ec/9e0e24faa1332d0cb60149e1d633b8d2509e.pdf
+
+http://ceur-ws.org/Vol-274/paper6.pdf
+
+Every Java class instantiation expression becomes a Prolog compound.
+
+#+BEGIN_EXAMPLE
+% From Java expression: new Class_name(field_1, field_n)
+class_name(Field_1, ..., Field_N)
+#+END_EXAMPLE
+
+Every Java class instantiation statement becomes a Prolog fact.
+
+#+BEGIN_EXAMPLE
+% From Java statement: Class_name instance_name = new Class_name(field_1, field_n)
+Class_name(Instance_name, Field_1, ..., Field_N).
+#+END_EXAMPLE
+
+Example
+2010 "Simulating BPMN Models with Prolog"
+
+#+BEGIN_EXAMPLE
+final class Car {
+    final String brand;
+    final int year;
+    // constructor omitted
+}
+
+Car a_car = new Car("Toyota", 2000);
+#+END_EXAMPLE
+
+becomes
+
+#+BEGIN_EXAMPLE
+car(a_car, [brand('Toyota'), year(2000)]).
+% or
+car(a_car, 'Toyota', 2000).
+% or
+car(a_car, car('Toyota', 2000)).
+#+END_EXAMPLE
+
+Large-scale Prolog?
+1991 "Efficient Access To Large Prolog Knowledge Bases"
+https://link.springer.com/chapter/10.1007/978-3-7091-7555-2_26

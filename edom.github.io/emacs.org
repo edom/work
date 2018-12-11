@@ -97,6 +97,8 @@ The workaround is to wrap =org-publish= in =save-mark-and-excursion=.
 The workaround is to remove the =bibliography:= if the document doesn't have any =cite:=.
 **** <2018-10-09> Can't change title of table of contents
 It's hardcoded in ox-html.el and ox.el.
+**** Magit fails with "index.lock exists" when we press g while it is rebasing.
+The workaround is: Don't press g while Magit is rebasing.
 * Setting up Emacs and Org Mode
 ** Installing Emacs
 <2018-09-16>

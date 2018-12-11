@@ -82,6 +82,15 @@ table(mytable, [ database(mydb),
 
 See also:
     - https://wiki.postgresql.org/wiki/BinaryFilesInDB
+
+Design:
+What do I think about this?
+```
+sql_server(prod, [type(postgresql), host('localhost'), port(5433)])
+sql_connection(prod, [server(prod), login('john', 'foo'), database(bar), schema(company)])
+sql_table(employee, [connection(prod), column(name,varchar(30),not_null)]).
+
+```
 */
 :- multifile table/2.
 

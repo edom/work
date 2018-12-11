@@ -39,6 +39,13 @@ The transformation steps:
         The atom table is constant.
         - Main (entry point) is a query.
         - Are there alternatives to WAM? https://en.wikipedia.org/wiki/Warren_Abstract_Machine
+    - Predicate argument groundness analysis:
+        - If argument A is always ground on predicate entry,
+        then A can be replaced with a unidirectional C input argument.
+        - If the predicate always grounds the argument A on exit,
+        then A can be replaced with a unidirectional C output argument.
+        (pointer to caller-allocated memory).
+    - A nondet Prolog predicate is essentially a C iterator.
 
 Representing a term:
     - An atom is represented by a 16-bit unsigned integer that is a key in the atom table.
@@ -88,6 +95,14 @@ Supporting built-ins:
 
 Problems:
     - This does not work with modules.
+
+Literature:
+    - "?-Prolog compiles a single Prolog source file into C"
+    http://www.call-with-current-continuation.org/prolog/README.html
+    - 1992
+    "Use of Prolog for developing a new programming language"
+    "This paper describes how Prolog was used for the development of a new concurrent realtime symbolic programming language called Erlang."
+    https://pdfs.semanticscholar.org/57d3/1ca47fa9688089b9b7e7c19c199aa03aff1e.pdf
 */
 
 foo(a).

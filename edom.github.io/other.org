@@ -1217,47 +1217,6 @@ Spectacle.
   - 'Anger also “stems from wanting to control what is outside of us,” said Michelle Farris, LMFT, a psychotherapist in San Jose, Calif.'
 ** Genetics is the biggest factor in how far we can build our body
 - https://www.quora.com/Is-it-possible-for-a-skinny-guy-who-eats-trains-and-does-everything-right-to-get-Chris-Evans%E2%80%99-large-pecs-and-overall-muscular-look-If-so-how-long-Im-just-starting
-** Measuring things to find bottlenecks (Linux, TCP, HTTP, network, CPU, disk, etc.)
-- How many empty TCP connections per second can a TCP endpoint accept?
-  We don't want to measure transfer rate.
-  We want to measure kernel bookkeeping overhead.
-  - These can't do that:
-    - iperf
-  - Can these do that?
-    - https://txlab.wordpress.com/2016/05/05/tcpkali-tcp-load-generator/
-    - http://uperf.org/
-    - qperf (ubuntu?)
-      - https://www.opsdash.com/blog/network-performance-linux.html
-      - https://access.redhat.com/solutions/2122681
-- How many HTTP requests can it handle? Use ApacheBench. =sudo apt-get install apache2-utils=.
-- How do we reduce the worst-case response time under high load?
-- Is the Linux process scheduler fair?
-- Is the Linux process scheduler time complexity O(1)?
-- https://medium.com/@oscar.eriks/case-study-network-bottlenecks-on-a-linux-server-part-2-the-kernel-88cf614aae70
-- Which is better, select or epoll?
-*** Linux TCP TIME_WAIT exhaustion on busy server
-- What are my options?
-  - Assign more IP addresses.
-  - Geographically distribute the application.
-    Procure edge servers closer to the clients.
-    But you can't do this if you are not a CDN or ISP.
-  - Reduce the TIME_WAIT MSL (maximum segment lifetime)
-    - http://www.lognormal.com/blog/2012/09/27/linux-tcpip-tuning/
-    - This makes TCP incorrect, but in the case of a load balancer, the probability of the incorrectness is negligible (unless it's an attack, or it's behind a NAT).
-    - =net.ipv4.netfilter.ip_conntrack_tcp_timeout_time_wait = 1=
-  - Non-options
-    - =net.ipv4.tcp_tw_recycle= has been removed.
-    - =net.ipv4.tcp_tw_reuse= doesn't work.
-  - https://vincent.bernat.ch/en/blog/2014-tcp-time-wait-state-linux
-    - https://news.ycombinator.com/item?id=7684015
-    - "The universal solution is to /increase the number of possible quadruplets/ by using, for example, more server ports."
-    - "Moreover, when designing protocols, /don’t let clients close first/."
-- See the TCP protocol documentation.
-  Where are the wait states?
-  Who hold the wait states?
-  The client?
-  The server?
-  The one who calls the =close= system call?
 ** FOSS alternative to SmartRecruiters?
 
 https://blog.capterra.com/top-8-freeopen-source-applicant-tracking-software-solutions/
@@ -3371,6 +3330,9 @@ I don't know what to do with the eggshell waste.
   - focus on pushing the back foot, not on pulling the front foot
 
 - [[https://www.sciencedaily.com/releases/2016/10/161027123002.htm][Optimal walking, cycling speeds to reduce air pollution inhalation]]
+**** posture
+- http://posturedirect.com/fix-anterior-pelvic-tilt/
+- http://posturedirect.com/proper-way-sit/
 ** <2016-03-22> The reason for the name spacetimecat.com
 In jazz-speak, a /cat/ is a jazz musician, and
 I'm a jazz musician traveling through spacetime;
@@ -4412,6 +4374,7 @@ http://nymag.com/intelligencer/2018/04/an-apology-for-the-internet-from-the-peop
 * Dan Lok
 - 3 Types Of Employees - How To Hire https://www.youtube.com/watch?v=kILJN6eu1P8
   - grunt, mercenary, and patriot
+- How To Build Systems In Your Business - Systemize Your Business Ep. 7 https://www.youtube.com/watch?v=2g6sTH8FiFY
 * Maximizing lithium-ion battery life
 - https://batteryuniversity.com/learn/article/how_to_prolong_lithium_based_batteries
   - "Exposing the battery to high temperature and dwelling in a full state-of-charge for an extended time can be more stressful than cycling."
@@ -4612,6 +4575,8 @@ Fucking stupid harmful racist Marxist government.
 "South Africa 2019: Beginning of the END".
 South Africa is the next Zimbabwe.
 https://www.youtube.com/watch?v=nURta8-zu4E
+
+Infiltrate 1 million people with nanobots, and kill all those people simultaneously.
 ** How do we know what law is in effect? Bagaimana cara kita tahu hukum yang berlaku?
 - http://m.hukumonline.com/berita/baca/hol19115/fiksi-hukum-harus-didukung-sosialisasi-hukum-
 - Perpres 1/2007
@@ -4648,6 +4613,12 @@ https://www.hukumonline.com/klinik/detail/lt51b0380e6b9f8/bolehkah-menggeser-har
 Tidak boleh.
 
 http://www.hukumperseroanterbatas.com/anggaran-dasar/anggaran-dasar-perseroan-terbatas/
+
+https://www.hukumonline.com/klinik/detail/lt4cd0bd0284a71/perbedaan-modal-dasar--modal-ditempatkan--dan-modal-disetor-pt
+
+https://media.neliti.com/media/publications/14073-ID-aspek-hukum-kelalaian-menyetorkan-modal-dalam-prosespendirian-perseroan-terbatas.pdf
+
+https://www.hukumonline.com/klinik/detail/lt51426f0a4f0ee/fungsi-meterai-
 *** Direktur bukan karyawan
 Bolehkah direktur bekerja tanpa digaji? Boleh asal direkturnya bukan karyawan/pekerja/employee (hubungan kerja).
 http://strategihukum.net/strategi-hukum-mengangkat-karyawan-menjadi-direktur
@@ -4779,9 +4750,22 @@ The creator may delete a resource that he created.
 The host may delete a resource that he is hosting.
 Everyone generates a key pair.
 
-Imagine that there is a chemical reaction A + B -> cocaine, and both A and B are legal. I sell John 1 ton of A. You sell John 1 ton of B. John makes 2 tons of cocaine at his home.
+Imagine that there is a chemical reaction A + B -> cocaine, and both A and B are legal.
+I sell John 1 ton of A.
+You sell John 1 ton of B.
+John makes 2 tons of cocaine at his home.
 
-Imagine that X is a 1 MB JPG file containing porn. Divide the file into 1000 pieces. Store each piece at a different host.
+It is illegal to sell cocaine, but is it illegal to sell cocaine-making machine and cocaine precursors?
+It should be as legal as selling frying pan and salt!
+A knife can harm people, but is it not illegal to sell a knife!
+Drugs shouldn't be illegal in the first place!
+
+AI deepfakes, fusion power, and nuclear transmutation will destroy inefficient courts and parasite lawyers.
+If everything is easy to fake, then nothing stands as evidence.
+
+Imagine that X is a 1 MB JPG file containing porn.
+Divide the file into 1000 pieces.
+Store each piece at a different host.
 
 https://en.wikipedia.org/wiki/Crypto-anarchism
 
@@ -4837,6 +4821,14 @@ https://www.youtube.com/watch?v=7Lc_dlVrg5M
 Bhutan has a wise king.
 But will the democratization give rise to political panderers and crippling bureaucrats in year 2100?
 But is that worth to avoid the risk of a later evil king?
+** Government did not solve food/drug poisoning problem. Tamper-resistant packaging technology solved it.
+Government doesn't need to intervene in Tylenol scare.
+Free market can handle that.
+If the producers don't find a better packaging, people simply won't buy.
+Consumers simply have to tell what they want to the producers.
+
+Technology always solves problems and creates new problems, but governments only create problems.
+Governments are part of the problem, not of the solution.
 * Posture
 - http://posturedirect.com/how-to-fix-your-knee-valgus/
 - orthotropics, mewing, https://www.reddit.com/r/orthotropics/
@@ -4901,7 +4893,7 @@ Being useful.
 
 Something is urgent if it urges you to do it, if you feel an urge (strong desire) to do it.
 Eating sugar, fucking, shitting.
-* Senior, lead, manager
+* Senior, lead, manager, director
 Etymology.
 
 Senior = older.
@@ -4915,6 +4907,18 @@ https://www.etymonline.com/search?q=manage
 
 Handle = "touch with the hands, hold in the hands, fondle, pet"
 https://www.etymonline.com/word/handle
+
+You must know what you want. Nobody can know it for you.
+
+A director /directs/.
+A director knows what he/she wants.
+Don't let the inmates run the asylum.
+CEOs should be engineers.
+Politicians should be engineers.
+
+<2018-12-12>
+I changed my opinion.
+Politicians should not exist.
 * Birth is not survival.
 To survive is to keep/continue living.
 
@@ -5023,16 +5027,14 @@ Bitcoin is not necessary at all. It is pure want.
 Inflation target disincentivizes currency hoarding.
 A deflating currency encourages currency hoarding and discourages real spending.
 https://www.cmegroup.com/education/featured-reports/an-in-depth-look-at-the-economics-of-bitcoin.html
+
+https://www.theguardian.com/technology/2018/nov/05/energy-cost-of-mining-bitcoin-more-than-twice-that-of-copper-or-gold
 * Sleeping? Too tired to dream?
 https://www.quora.com/Can-you-be-too-tired-to-dream
 
 Sleeping requires that we release conscious control of all voluntary muscles.
 
 Why can't we sleep with running thoughts?
-* Metathinking: When stuck on a question, convert it into a hypothesis
-Every question can be turned into a hypothesis.
-Therefore, don't ask.
-Instead, hypothesize, and find evidences for or against.
 * Software, art?
 If software is a pure art, then its construction shouldn't be time-limited.
 
@@ -5057,3 +5059,1293 @@ https://moz.com/ugc/7-content-archetypes-that-generate-natural-links
 * If you win a lottery
 Don't tell anyone.
 Even families, friends, and lovers.
+* Buy shoes.
+My needs:
+- Comfortable for walking and running long distance.
+- Zero maintenance, and won't break in 100 years, especially the insole.
+  No cleaning, polishing, semir, whatever.
+  - ? https://samuraiinsoles.com/
+- What insole material?
+  - plastic
+  - metal
+  - stone
+  - aerogel
+  - memory foam
+  - graphene (strong but elastic)
+    - http://www.kicksguide.com/top-5-materials-used-to-make-shoes/
+      - "leather untreated can be vulnerable to water damage"
+        - surely the leather is treated first?
+      - "Because the material is less durable than its leather and textile counterparts, however, synthetic shoes tend to degrade faster and need replacing more often."
+    - https://www.quora.com/What-are-some-of-the-most-durable-shoe-brands-for-men
+      - "Look for a shoe that is (1) all leather.
+        I found the man-made soles and outsoles to be the first thing to deteriorate.
+        And (2) handmade."
+  - https://www.linkedin.com/pulse/one-material-rule-them-all-polyurethane-footwear-servet-casabona/
+  - https://www.quora.com/What-material-is-the-best-for-the-sole-of-shoes
+My options:
+- Self-reinforce the soles with double-tapes or FlexTape/FlexSeal/FlexShot/window glue.
+  This risks uneven shoe heights and compensating gait which may be pathological in the long-term.
+- Repair/reinforce the current shoes at tukang sol sepatu.
+- Buy Dr Martens guaranteed shoes at GI.
+  But what if that store goes bust?
+  What are the terms of the guarantee?
+  How long is the wait time?
+  Will the replacement be the same product?
+- Buy army surplus shoes as Abdullah did.
+- Cobble my own shoes.
+- Just buy new shoes every year.
+- Buy many shoes at once, and rotate them.
+  - Does it work? Why?
+  - https://www.reddit.com/r/IsItBullshit/comments/2ryyzg/isitbullshit_rotating_pairs_of_shoes_makes_them/
+  - https://www.quora.com/Does-rotating-leather-shoes-make-them-last-longer
+  - If a shoe lasts 3 years, and I have 60 more years to wear shoes, then I should buy 20 pairs of shoes right now and rotate them?
+    - Wouldn't those shoes rot in my home?
+- It's safer to buy 20 pairs of average shoes than 1 pair of expensive shoes.
+  If shit happens, you still get 19 pairs, instead of nothing at all.
+- What else?
+* Journalism trash bin
+Bad journalism.
+Misleading headline.
+https://www.theverge.com/platform/amp/2018/12/10/18134541/google-plus-privacy-api-data-leak-developers
+* Clojure maps are applicable like functions.
+#+BEGIN_SRC lisp
+({:a 1 :b 2 :c 3} :a)
+=> 1
+({:a 1 :b 2 :c 3} :b)
+=> 2
+#+END_SRC
+
+Clojure has nice map syntax: =(m k)= for accessing k.
+
+Maps are isomorphic to functions.
+We update a map.
+Updating a function is simple:
+#+BEGIN_SRC haskell
+update nk nv f = \ k -> if k == nk then nv else f k
+-- and then beta-normalize the lambda body
+#+END_SRC
+
+A Prolog deterministic binary predicate is like a Clojure map.
+* What programming language should we use?
+<2018-12-11>
+My current answer: Prolog.
+
+My previous answers:
+- Haskell
+- Racket
+- Scheme
+- Java
+- C
+- C++
+
+Other people?
+- https://hackernoon.com/the-programming-language-im-looking-for-948d93f7a396
+* Economics, price, quality
+Price is not important in itself.
+It is the quality-price trade-off that is important.
+People don't buy shit even if it's cheap, even if you pay them to buy it.
+
+For an increment of quality, people are willing to pay an increment of price.
+But there is a "good enough" point where people are satisfied and they just look at the lowest price.
+
+Negative price means willingness to pay to get rid of something.
+Example: rotten vegetables has negative price to most people, but positive price to farmers.
+* Mindless thinking
+Example of mindless thinking: the racing thoughts when I'm going to bed.
+* Privacy problem
+https://gizmodo.com/apps-you-use-every-day-are-tracking-your-every-move-ac-1830980646/amp
+* AI/ML
+https://www.wired.com/story/karl-friston-free-energy-principle-artificial-intelligence/
+
+https://twitter.com/Reza_Zadeh/status/1061006675933450240
+"GANs to generate photo-realistic faces with some control over characteristics. Pretty realistic."
+
+Indeed
+https://www.quora.com/In-a-world-where-everything-is-google-able-what-aspect-of-knowledge-experience-in-the-information-economy-remains-scarce
+
+"Pattern Recognition and Machine Learning"
+https://www.microsoft.com/en-us/research/people/cmbishop/#!prml-book
+
+https://twitter.com/MSFTResearchCam/status/1067019684481048576
+
+https://techcrunch.com/2018/11/06/engineer-ai-raises-29-5m-series-a-for-its-aihumans-software-building-platform/amp/
+
+AI, ML, NLP
+"Machine-Generated Knowledge Bases"
+https://primer.ai/blog/quicksilver
+* Don't swallow slugs
+https://www.dailymail.co.uk/news/article-6352629/amp/Sam-Ballard-dies-eight-years-swallowing-slug.html
+* Research
+2014 "Writing Successful Grant Proposals from the Top Down and Bottom Up"
+https://us.sagepub.com/en-us/nam/writing-successful-grant-proposals-from-the-top-down-and-bottom-up/book236652
+* Finding bottleneck?
+** what
+Make sure that the bottleneck is not in the kernel
+netstat | grep
+Check the number of connections
+Expected jmeter number of connections
+
+Make sure that jmeter is properly configured
+
+https://stackoverflow.com/questions/42311414/iperf3-windows-bandwidth-is-much-slower-than-linux
+iperf
+sudo apt-get install iperf
+Run this on PHP machine: iperf -s
+Let SERVER be the IP address of the PHP machine.
+Run this on JMeter machine: iperf -c SERVER
+
+CPU tidak mentok, RAM tidak mentok, berarti ada beberapa kemungkinan:
+- bottleneck di network,
+- CPU di-throttle oleh docker/cgroup,
+- bottleneck di disk seek rate (unnecessary SQL transaction),
+- bottleneck di disk transfer rate.
+
+If 1 request takes 1 KB, then 10000 request/second translates to 10 MB/s, which is enough to saturate a 100 Mbps Ethernet interface.
+
+Cari tahu 1 application server sanggup serve berapa banyak.
+
+Check
+iftop -i INTERFACE
+
+https://serverfault.com/questions/299093/linux-how-to-find-out-whether-nic-is-causing-a-bottleneck
+
+check disk queue depth dengan top (average load)
+iotop
+
+https://serverfault.com/questions/665799/whats-the-technique-to-find-out-bottleneck/665831
+- atop for cpu & ram
+- iotop for disk
+- iftop for network
+
+Disable swap, but be careful to avoid running out of memory.
+
+Pastikan bottleneck bukan di mesin JMeter (terutama di network interface-nya). Apakah mesin JMeter sudah dipisah dari mesin PHP?
+
+Linux kernel limit: number of open files, maximum number of open sockets.
+
+Docker bisa mengurangi performance. Kalau tidak pakai Docker, apa bisa lebih cepat?
+Ganti 20 docker instance php-fpm dengan 1 php-fpm dengan 20 children.
+
+Docker performance cost
+2015 article "An Updated Performance Comparison of Virtual Machines and Linux Containers" https://domino.research.ibm.com/library/cyberdig.nsf/papers/0929052195DD819C85257D2300681E7B/$File/rc25482.pdf
+That link was obtained from https://www.linode.com/docs/applications/containers/when-and-why-to-use-docker/#when-not-to-use-docker
+
+nload is an alternative to iftop?
+
+
+Use Vegeta instead of ApacheBench?
+Locust? JMeter?
+https://medium.freecodecamp.org/how-we-fine-tuned-haproxy-to-achieve-2-000-000-concurrent-ssl-connections-d017e61a4d27
+
+
+select vs poll vs epoll
+https://www.ulduzsoft.com/2014/01/select-poll-epoll-practical-difference-for-system-architects/
+
+The C10K (10000 connection) problem
+http://www.kegel.com/c10k.html
+
+
+https://stackoverflow.com/questions/16888429/how-to-make-a-hard-abortive-close-on-a-tcp-connection
+In bottleneck/tcp.c
+Set linger onoff 1 timeout 0
+
+
+http://www.serverframework.com/asynchronousevents/2011/01/time-wait-and-its-design-implications-for-protocols-and-scalable-servers.html
+
+https://thehftguy.com/2016/10/03/haproxy-vs-nginx-why-you-should-never-use-nginx-for-load-balancing/
+** Measuring things to find bottlenecks (Linux, TCP, HTTP, network, CPU, disk, etc.)
+- How many empty TCP connections per second can a TCP endpoint accept?
+  We don't want to measure transfer rate.
+  We want to measure kernel bookkeeping overhead.
+  - These can't do that:
+    - iperf
+  - Can these do that?
+    - https://txlab.wordpress.com/2016/05/05/tcpkali-tcp-load-generator/
+    - http://uperf.org/
+    - qperf (ubuntu?)
+      - https://www.opsdash.com/blog/network-performance-linux.html
+      - https://access.redhat.com/solutions/2122681
+- How many HTTP requests can it handle? Use ApacheBench. =sudo apt-get install apache2-utils=.
+- How do we reduce the worst-case response time under high load?
+- Is the Linux process scheduler fair?
+- Is the Linux process scheduler time complexity O(1)?
+- https://medium.com/@oscar.eriks/case-study-network-bottlenecks-on-a-linux-server-part-2-the-kernel-88cf614aae70
+- Which is better, select or epoll?
+*** Linux TCP TIME_WAIT exhaustion on busy server
+- What are my options?
+  - Assign more IP addresses.
+  - Geographically distribute the application.
+    Procure edge servers closer to the clients.
+    But you can't do this if you are not a CDN or ISP.
+  - Reduce the TIME_WAIT MSL (maximum segment lifetime)
+    - http://www.lognormal.com/blog/2012/09/27/linux-tcpip-tuning/
+    - This makes TCP incorrect, but in the case of a load balancer, the probability of the incorrectness is negligible (unless it's an attack, or it's behind a NAT).
+    - =net.ipv4.netfilter.ip_conntrack_tcp_timeout_time_wait = 1=
+  - Non-options
+    - =net.ipv4.tcp_tw_recycle= has been removed.
+    - =net.ipv4.tcp_tw_reuse= doesn't work.
+  - https://vincent.bernat.ch/en/blog/2014-tcp-time-wait-state-linux
+    - https://news.ycombinator.com/item?id=7684015
+    - "The universal solution is to /increase the number of possible quadruplets/ by using, for example, more server ports."
+    - "Moreover, when designing protocols, /don’t let clients close first/."
+- See the TCP protocol documentation.
+  Where are the wait states?
+  Who hold the wait states?
+  The client?
+  The server?
+  The one who calls the =close= system call?
+* The key to employee retention?
+- good pay
+- good culture
+- good job satisfaction
+- absence of force majeures
+- communalism vs individualism?
+- autonomy and mastery: whose idea is this?
+- idiosyncratic (individual-dependent) issues?
+* Emotion hypothesis: Everything is fear
+Attractive emotion.
+Fear is a repulsive emotion.
+
+Emotion axis: low/high energy, repulsive/attractive toward the cause
+
+Hate is fear of proximity.
+
+Desire is fear of loss.
+
+Love is fear of loss.
+
+Boredom is fear of repetition.
+
+Indecisiveness is fear of regret.
+
+Hunger and thirst are fear of death.
+
+Joy is fear of fear.
+* "English" names
+Scarface, Boaty McBoatface
+Sir Lancelot, Sir Chirpsalot (chirps a lot), Sir Changealot (change a lot)
+* Google
+The Google Cemetery: List of dead Google products
+https://gcemetery.co/
+* Entertainment
+an0nymooose
+ooooOOOOOOOOOOOOOOOOH
+https://www.youtube.com/watch?v=nSRpbNru5aw&list=PLbZ4aMR4f3Sd_rvr40AYy_spbBu_xZGgA&index=8
+
+[Vinesauce] Vinny - Best of The Choicest Voice
+https://www.youtube.com/watch?v=SB9Cpjd7PxI
+
+Treadmill falls apart
+https://www.youtube.com/watch?v=XanTpm8dxMU
+from 1:24 of "YOU may LAUGH TO DEATH - Funny compilation" https://www.youtube.com/watch?v=j9dLVJgT79M
+
+- How To Get Affordable Healthcare | We the Internet TV https://www.youtube.com/watch?v=JoIXpKUFDtM
+- HateF**k Dating App | We The Internet TV https://www.youtube.com/watch?v=z4-qbrvx9f0
+
+What the fuck are these guys wearing?
+"Kanye West & Lil Pump ft. Adele Givens - "I Love It" (Official Music Video)"
+- https://www.youtube.com/watch?v=cwQgjq0mCdE
+
+Café In Thailand Lets You Play With A Pack Of Huskies
+https://www.youtube.com/watch?v=hjrl-G0vySY
+* Jordan Peterson
+responsibility gives life meaning
+competent and dangerous
+https://www.youtube.com/watch?v=ONK8pGAGT28
+* Climate change
+Climate change (increasing temperature and carbon dioxide) is real, but we don't agree about whether it's harmful
+https://www.youtube.com/watch?v=m3hHi4sylxE
+* Name-calling
+A name-calling person is a insecure person who has run out of rational arguments.
+* Terror, fear, power?
+Engels:
+"Terror consists mostly of useless cruelties perpetrated by frightened people in order to reassure themselves."
+* "Adam ruins everything" ruined?
+- Adam Ruins Everything Fails on Gun Control https://www.youtube.com/watch?v=ZEWJIHuD1uI
+  - 21 minutes are too long
+* Information about this wiki, structure of this wiki
+** Sentence categories
+- definition.
+  Unfalsifiable.
+  X is Y.
+- thesis statement, or answer.
+  Falsifiable.
+  Subject Predicate.
+- prescription: X should Y.
+- supporting statement
+- question
+- rhetorical question
+- emotion-laden baseless opinions, blanket statements
+* Managing organizations
+- 2014, article, "Whose critical path are you on?", Philip J. Guo, [[http://www.pgbovine.net/critical-path.htm][html]]
+  - To get someone's attention, get on his critical path.
+- [[https://jobs.netflix.com/culture][Netflix culture]]
+* Improving society?
+- Preventing social isolation
+  - Social isolation causes violence and extremism.
+    Bullying is part of the social isolation vicious circle.
+    [[https://www.youtube.com/watch?v=azRl1dI-Cts][YT:I Was Almost A School Shooter | Aaron Stark | TEDxBoulder]]
+    - [[https://www.youtube.com/watch?v=DmWrx0ntATU][YT:Cohousing communities help prevent social isolation]]
+- Achieving independence
+  - Demonopolizing the ability to do violence?
+    - People who care (and thus readily mobilize) are less oppressable than people who don't.
+      - How do we get people to care about and participate in politics?
+    - Online campaigns/petitions.
+      - [[https://www.newscientist.com/article/mg22630182-800-technology-can-give-political-power-back-to-the-people/][Technology can give political power back to the people - New Scientist]]
+    - Using the Internet (social media, messaging, forum, etc.) to incite people?
+    - Teach people how to participate democracy?
+      - If shit gets to the top, people have only themselves to blame.
+        - Democracy means they could have prevented that shit.
+          - But they were apathetic.
+            They didn't care.
+            They gave up before even trying.
+            So that shit rose without any obstacles.
+  - Automating politics/governments/law?
+  - Empowering people with distributed local technology?
+    - Take power away from governments and elites, and give it back to the masses?
+      - Isn't that mobocracy/ochlocracy?
+        Anarchy?
+        Do we want?
+        - [[https://rationalwiki.org/wiki/Anarchy#Contrast_with_mobocracy][RationalWiki: Difference between anarchy and mobocracy]]
+* Dying in the 21st century
+- Inheriting digital data
+  - What to do with your data when you die?
+  - https://www.businessinsider.sg/how-to-give-google-account-to-trusted-person-when-you-die-2018-8/
+- Do we have to die?
+  Can technology save us?
+  Will we reach immortality in this century?
+* Intelligence
+- Doing the last work we will ever need
+  - Making machines understand language
+  - How do we make machines curious?
+    How do we make them get bored?
+    - We know that intelligent people get bored quickly.
+      - Why shouldn't intelligent machines get bored?
+          - About intelligence research
+            - How can I become an AI researcher?
+            - How are others' works progressing?
+          - Approximating functions
+            - Are all approximations truncation?
+              Are there other approximation schemes beside series truncation?
+              Are probabilistic approximations such as Monte Carlo approximations also truncation?
+* Natural sciences
+- Physics and engineering
+  - Civil engineering
+    - [How Do Sinkholes Form?](https://www.youtube.com/watch?v=e-DVIQPqS8E)
+      - Internal erosion, piping, etc.
+    - [YT:Why Concrete Needs Reinforcement](https://www.youtube.com/watch?v=cZINeaDjisY)
+      - three types of stresses: tensile, compressive, shear
+    - [What's inside Ikea's "wood"?](https://www.youtube.com/watch?v=24F5JlKkxR4)
+    - Architecture
+      - [YT:Open office is overrated](https://www.youtube.com/watch?v=-p6WWRarjNs)
+    - Softwood vs hardwood
+      - Softwood is gymnosperm (monocot) wood.
+      - Hardwood is angiosperm (dicot) wood.
+      - Softwood isn't always softer than hardwood.
+      - https://en.wikipedia.org/wiki/Softwood
+      - https://en.wikipedia.org/wiki/Hardwood
+      - https://en.wikipedia.org/wiki/Dicotyledon#Comparison_with_monocotyledons
+- Science in 21st century is multi-/inter-discipline?
+  - All branches of science cross-pollinate?
+  - It's no longer useful to categorize science by branches?
+  - Where is the boundary between two branches?
+    - Where do physics end and chemistry begin?
+- Philosophy
+  - Does everything fall under philosophy?
+    - How do we prevent this category from becoming a kitchen sink?
+    - Philosophy is everywhere (a cross-cutting concern), so it shouldn't be a category.
+* Mathematics
+- Writing mathematics
+  - 1989, article, "Mathematical writing", Donald E. Knuth, Tracy Larrabee, and Paul M. Roberts, [pdf](http://jmlr.csail.mit.edu/reviewing-papers/knuth_mathematical_writing.pdf)
+    - "Many readers will skim over formulas on their first reading of your exposition.
+      Therefore, your sentences should flow smoothly when all but the simplest formulas are replaced by 'blah' or some other grunting noise. (p. 3)
+- Reference articles
+  - Which point of view should we use?
+    - We can see a function as a special kind of relation.
+    - We can see a relation from \( A \) to \( B \) as a function from \( A \) to \( 2^B \).
+      - Every binary relation \((A,B,r)\) is a function \((A,2^B,f)\)
+        where \(f(x) = \{ y ~\|~ r(x,y) \}\).
+    - Which is more primitive: function or relation?
+* Finding a place to live
+- [[https://www.youtube.com/watch?v=ylR21fezN7E][Where is the world's most liveable city? | The Economist - YouTube]]
+  - 2018: Vienna. Was Melbourne.
+- Making a house
+  - [[https://en.wikipedia.org/wiki/List_of_human_habitation_forms][WP:List of human habitation forms]]
+
+Disaster risks:
+- US risky areas:
+  - Florida, North Carolina: hurricanes
+  - San Francisco, California: earthquakes and soil liquefaction
+  - Tornado alley (where?)
+- Japan, South Korea, Philippines: typhoons
+* Finding other information sources
+- Finding other wikis
+  - [[https://en.wikipedia.org/wiki/List_of_wikis][WP:List of wikis]]
+* Solar cells?
+- https://en.m.wikipedia.org/wiki/Valence_bond_theory
+- https://en.m.wikipedia.org/wiki/Artificial_photosynthesis
+- https://en.m.wikipedia.org/wiki/Photoelectrochemical_cell
+- https://en.m.wikipedia.org/wiki/Theory_of_solar_cells
+* Job openings and projects
+** Job openings
+*** Assistant/clone
+Requirements:
+- Fluent in written English.
+- Enjoys the stress of writing.
+- Writes concisely.
+- Writes precisely; cares about definitions.
+- Writes conservatively; cares about etymologies.
+- Reads 800 wpm with 60% comprehension when focused at prime condition.
+- Likes to stay at home, and hates traveling.
+- Connected to the Internet from home.
+- Has an IQ above 135.
+- Able and willing to eat pork.
+- Uses Debian or a Debian-based distro.
+- Can use Google Docs, Git, Markdown, and Org-Mode.
+- Watches YouTube videos at 2x speed.
+
+What you will do:
+- Organize and clean up this website.
+- Arrange my derailed train of thoughts.
+- Write about things similar to what is already on this website.
+- Find evidences for or against my beliefs.
+
+Salary range:
+IDR 0 - IDR 20,000,000.
+** Projects
+- Prolog static site generator?
+  Pandoc?
+  Table of contents?
+  Word count?
+  Markdown?
+  Org mode?
+  Mathjax?
+- Write a fast, private, and secure web browser in Prolog.
+  - Features:
+    - Selectively enable JavaScript from some websites with Prolog rules.
+    - Disable clipboard hook.
+- Write a language suite in Prolog: write C and Haskell parser, interpreter, and compiler.
+* Models, meta-models, and ontologies?
+2006 article "On Relationships among Models, Meta Models and Ontologies" http://dsmforum.org/events/DSM06/Papers/14-saeki.pdf
+
+2007 presentation "Models versus Ontologies - What's the Difference and where does it Matter?"
+http://www.cs.bham.ac.uk/~bxb/news/Colin.pdf
+
+2006 article "On the Relationship of Ontologies and Models"
+https://pdfs.semanticscholar.org/07d3/0822dd03a46bf25131baa0b72007df6d0e27.pdf
+
+2004 article "How Models Are Used to Represent Reality"
+http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.433.860&rep=rep1&type=pdf
+* Meta-programming?
+miniKanren, scheme logic programming
+http://minikanren.org/
+https://github.com/clojure/core.logic/wiki/A-Core.logic-Primer
+
+2000 article "Domain Specific Meta Languages"
+https://www-users.cs.umn.edu/~evw/pubs/vanwyk00sac/vanwyk00sac.pdf
+
+1996 book "Advanced programming language design"
+2008 article "Position paper: Practical foundations for programming languages"
+2012 book "Practical Foundations for Programming Languages" Version 1.32 of 05.15.2012
+http://profs.sci.univr.it/~merro/files/harper.pdf
+
+University of Arizona, Spring 2006, CS 520 Principles of Programming Languages - Lecture 04: Types and Polymorphism
+https://www2.cs.arizona.edu/classes/cs520/spring06/04types.pdf
+from "Lecture 4: higher polymorphism"
+https://blog.inf.ed.ac.uk/apl16/archives/178/comment-page-1
+
+Programming Language Foundations in Agda https://plfa.github.io/
+
+2018 article "Logic Programming as a Service" https://arxiv.org/abs/1806.02577
+
+Liber amicorum for Doaitse Swierstra
+https://www.reddit.com/r/haskell/comments/1hmc9t/pdf_liber_a_for_doaitse_swierstra_read_free/
+
+1994 article "Efficient Self-Interpretation in Lambda Calculus" http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.56.4382&rep=rep1&type=pdf
+
+Lambda the Ultimate: Meta-programming
+http://lambda-the-ultimate.org/taxonomy/term/15
+
+2009 article "Directly Reflective Meta-Programming" http://homepage.divms.uiowa.edu/~astump/papers/archon.pdf
+* Wiki and blog
+https://hapgood.us/2016/02/22/can-blogs-and-wiki-be-merged/
+- "Wiki values are often polar opposites of blogging values.
+  Personal voice is meant to be minimized.
+  Voices are meant to be merged.
+  Rather than serial presentation, wiki values treating pages as nodes that stand outside of any particular narrative, and attempt to be timeless rather than timebound reactions."
+  Exactly!
+- Federated wiki tries to merge blog and wiki?
+* Company value extraction efficiency
+Company value extraction efficiency = gross revenue attributable to employee labor / expenses attributable to employees
+
+Amount stolen = profit = revenue - wage
+
+Extraction efficiency = Amount stolen / wage
+
+https://www.reddit.com/r/DebateCommunism/comments/6li8f4/why_is_profit_theft/
+"Profit comes from the worth of the workers' labor minus their wage.
+The difference is what is stolen."
+
+If a capitalist finds better things for a worker to do, then:
+- Is the capitalist entitled to the profits?
+- Is the worker entitled to the profits?
+
+The image is nonsensical, but the writing is sound.
+https://www.filmsforaction.org/articles/profit-is-theft-it-sounds-absurd-but-heres-why/
+
+The goal of communism is achievable (?), but the Marxist way (authoritarianism) of achieving it is absurd.
+Command economy is absurd.
+- https://people.howstuffworks.com/communism1.htm
+- https://en.wikipedia.org/wiki/Types_of_socialism#Marxist_communism
+
+Principle
+- Mutual benefit. A contract should make all parties better off.
+- Keep only one accounting book. Don't make two books. Everyone, inside and outside the company, sees the same financial report.
+- Skip the small-talk in report.
+
+When we sell a plant we grew, we are paid for our labor, not for the plant. Nature gives us everything for free.
+* Nuclear
+Nuclear fusion catalysts?
+2016 article "The Curious Story of the Muon-Catalyzed Fusion Reaction"
+http://large.stanford.edu/courses/2016/ph241/yoon1/
+
+2016 article "Oklo: Nature's Nuclear Reactor":
+"The combination of aluminum phosphate grains to trap radioactive materials and the groundwater to regulate the reaction allowed for an extremely safe reactor."
+http://large.stanford.edu/courses/2016/ph241/zhao1/
+* What
+strong light
+https://www.theguardian.com/science/2017/mar/23/worlds-largest-artificial-sun-german-scientists-activate-synlight
+* Evil automobile industry
+https://www.reddit.com/r/todayilearned/comments/9mv3oi/til_that_the_term_and_concept_of_jaywalking_was/
+
+Given enough time, all industry eventually becomes corrupt.
+Even something as mundane as the window industry is corrupt.
+* How should we authenticate users? Passwords are annoying and insecure.
+- Frank Abagnale mentioned Trusona in his Google talk.
+- Outsourcing to third-party authentication services
+  - OpenID?
+  - Google OAuth?
+- Temporary authentication link sent via email, such as Slack/Tumblr. (Can we assume that each of our users has an email address?)
+- Multi-factor authentication
+  - Google Authenticator?
+- Zero-trust security?
+* Language issues
+A bean is a plant.
+
+Let B be an individual, a bean plant.
+
+Every individual of the species Solanum tuberosum is a plant.
+
+Wrong: Potato is a plant => Every potato is a plant => forall x. potato(x) => plant(x)
+A potato tree is a plant.
+A potato is not a plant; a potato is a tuber.
+Potato the whole plant vs potato the edible tuber
+
+* Traumatic experiences, and things I learned the hard way
+** <2018-10-08> While a person is on a motorcycle (be it driving or not driving), he must secure his chattels, and not place them in shirt pockets, in order to prevent the chattels from falling to the road (therefore being lost or broken).
+- Secure the chattels:
+  - Put it in a /totally closed compartment/ in a bag, not in a pocket on the bag.
+  - Grip the chattels.
+- Triggers:
+  - Eyeglasses fell from shirt pocket to the road, and were run over by the motorcycle behind.
+  - A few months ago, a hairband fell from bag pocket to the road; it was lost.
+  - Shit happened. Twice.
+* Hukum Indo
+PT meminjam uang dari pemegang saham
+http://www.bppk.kemenkeu.go.id/id/publikasi/artikel/167-artikel-pajak/20969-setoran-modal-kena-pajak
+https://pemeriksaanpajak.com/2016/02/23/pajak-untuk-setoran-modal/
+Pinjaman dari pemegang saham
+http://ortax.org/ortax/?mod=forum&page=show&idtopik=60790
+
+Menurut pajak, berapa tingkat bunga yang wajar untuk peminjam tak berhubungan?
+
+http://pajaktaxes.blogspot.com/2015/09/pinjaman-tanpa-bunga-dari-pihak-yang.html
+Peraturan Menteri Keuangan 169/PMK.03/2015 membatasi DER (Debt-to-Equity Ratio) maksimum 4?
+
+https://pajakpribadi.com/2017/03/01/bunga-pinjaman-terkena-pajak-penghasilan/
+
+https://www.hukumonline.com/klinik/detail/lt524ccad57ef1d/apakah-tiap-perubahan-anggaran-dasar-harus-ada-surat-keputusan-menteri
+
+Dalam perhitungan pajak, apakah pengeluaran pribadi (pengeluaran untuk kepentingan pribadi direktur/komisaris/pemilik) boleh dikurangkan dari penghasilan badan usaha?
+Personal expenses isn't in the best interest of the company.
+
+** Pemutusan vs pembatalan kontrak
+- https://www.hukum-hukum.com/2017/11/perbedaan-antara-pembatalan-dan-pemutusan.html
+- https://www.gadjian.com/blog/2018/01/25/inilah-unsur-unsur-hubungan-kerja-dalam-perjanjian-kerja/
+* Myopia
+- https://endmyopia.org/how-to-finding-active-focus/
+- https://endmyopia.org/trouble-finding-active-focus-screen/
+* What
+Principle:
+Who you are does not matter. What matter is what you do.
+
+Patrick Collison's interesting questions
+https://patrickcollison.com/questions
+* AIML
+
+https://ai.google/research/pubs/pub46203
+One Model To Learn Them All
+
+https://ai.google/research/
+https://ai.google/research/pubs/pub46203
+https://www.uni-obuda.hu/journal/Nguyen_Qafmolla_Richta_54.pdf
+* hiring
+http://www.siop.org/Media/News/science.aspx
+http://www.selectinternational.com/blog/hiring-art-or-science
+* Open-source alternatives to Heroku?
+
+"An Open Source, Self-Hosted Heroku"
+https://news.ycombinator.com/item?id=12703121
+https://www.bitmatica.com/blog/an-open-source-self-hosted-heroku/
+"Internals of OpenRuko PaaS, an open source Heroku clone implementation"
+https://www.slideshare.net/rogerleite14/paa-s-26212382
+https://github.com/dokku/dokku
+https://github.com/openruko
+https://flynn.io/
+https://www.quora.com/What-are-some-open-source-Heroku-alternatives
+
+https://www.quora.com/What-are-some-open-source-Heroku-alternatives
+
+* What
+Specification language
+Attempto Controlled English
+
+Parsing with Prolog DCGs
+
+https://philpapers.org/browse/ontology-of-mathematics
+
+"Advances in a DSL for Application Integration"
+
+https://www.itu.int/ITU-D/tech/OLD_TND_WEBSITE/network-infrastructure_OLD/Bangkok-02/5-5_Demo.pdf
+http://www.inquisition.ca/en/info/gepsypl/rules.htm
+
+
+Enterprise applications model extrinsic properties.
+The name of a person is an extrinsic property.
+
+Google search of software modeling language
+https://en.wikipedia.org/wiki/Modeling_language
+https://en.wikipedia.org/wiki/EXPRESS_(data_modeling_language)
+https://www.martinfowler.com/articles/languageWorkbench.html
+* Tech problems
+Bloomberg spy chip report?
+
+https://techcrunch.com/2018/10/07/homeland-security-denies-bloomberg-spy-chip-report/amp/
+https://techcrunch.com/2018/10/04/bloomberg-spy-chip-murky-world-national-security-reporting/
+
+Supermicro and Lenovo are untrustworthy.
+Jamie Schnaitter:
+"It's already been a touchy topic, especially since major players in HPC, such as SuperMicro and Lenovo have been caught with malware in their firmware and on their websites."
+
+
+Facebook is corrupting WhatsApp? Should we leave WhatsApp?
+https://www.forbes.com/sites/parmyolson/2018/09/26/exclusive-whatsapp-cofounder-brian-acton-gives-the-inside-story-on-deletefacebook-and-why-he-left-850-million-behind/amp/
+
+Slack anticompetitive?
+https://www.theverge.com/platform/amp/2018/9/24/17897658/slack-astro-acquisition-email-app-shut-down-integration
+* Proglang mess
+
+A Logic Programming Language with Lambda-Abstraction, Function Variables, and Simple Unification
+
+https://pdfs.semanticscholar.org/8935/8a00317f9e380abe02b9f0d04536a6cd3121.pdf
+
+https://www.google.co.id/amp/s/amp.reddit.com/r/ProgrammingLanguages/comments/6gsacs/any_info_on_compiling_lambda_calculus_to_other/
+Compiling without continuations
+
+
+Prolog dcg vs Haskell happy vs parsec
+https://www.quora.com/Is-Prolog-still-the-best-logic-programming-language-as-of-2016
+
+https://www.mercurylang.org/documentation/papers.html
+http://www.cse.chalmers.se/~oloft/Papers/wm96/node2.html
+Google search pure log. pro.
+
+Purifying prolog IO using state threading
+Sequential
+print(W0,M0,W1), print(W1,M1,W2)
+Parallel
+print(W0,M0,W1), print(W0,M1,W2), join(W1,W2,W3)
+
+
+http://batsov.com/articles/2012/02/19/package-management-in-emacs-the-good-the-bad-and-the-ugly/
+http://milkbox.net/
+
+
+
+Transforming AST to ASG by hashing every syntax element.
+
+
+The one devops tool to rule them all
+
+DADL is what we want for devops?
+
+Extracting Instruction Semantics via Symbolic Execution of Code
+https://github.com/trailofbits/codereason
+"CodeReason is a semantic binary code analysis framework and toolset."
+
+Opalang's database support is interesting.
+
+https://opensource.com/tools/supply-chain-management
+
+
+2006 article "Poitín: Distilling Theorems From Conjectures"
+https://www.sciencedirect.com/science/article/pii/S1571066106001149
+
+1984 publication "A Logic for the Russell Programming Language"
+https://ecommons.cornell.edu/handle/1813/6433
+
+ICSE 1982 article "Capturing more world knowledge in the requirements specification"
+https://dl.acm.org/citation.cfm?id=800254.807765
+
+ICSE 1987 article "Process models, process programs, programming support"
+https://dl.acm.org/citation.cfm?id=41765.41767
+
+On the power-series expansion of a rational function
+http://matwbn.icm.edu.pl/ksiazki/aa/aa62/aa6233.pdf
+
+
+- Example of ontology for accomodation; related to data modeling:
+http://ontologies.sti-innsbruck.at/acco/ns.html#overview
+
+
+
+
+
+Should we just use Opa or Ur/Web?
+Which should we use, Opa or Ur/Web?
+https://en.wikipedia.org/wiki/Opa_(programming_language)
+"It can be used for both client-side and server-side scripting, where complete programs are written in Opa and subsequently compiled to Node.js on the server and JavaScript on the client, *with the compiler automating all communication between the two*." (emphasis mine)
+https://en.wikipedia.org/wiki/Ur_(programming_language)
+"[...] from a single program produces server code, browser client code and SQL code specific for the chosen database backend."
+
+Inspired by English, XQuery, and ML.
+
+Use Landin offside rule to infer closing tags:
+
+#+BEGIN_EXAMPLE
+let page title body =
+  <html>
+    <head>
+      <title>{title}</title>
+    </head>
+    <body>{body}</body>
+  </html>
+in
+if subpath begins with /url1/url2 {
+  if subpath begins with /url3 {
+    if request method is GET { (* This handles GET /url1/url2/url3 *)
+      let strong text = <strong>{text}</strong> in
+      page "Hello" <div>{strong "Hello"}</div>
+      <html>
+        <body>
+          {strong Hello}
+    }
+  }
+}
+
+<html>
+  <body>
+    {strong Hello}
+
++ GET /url1/url2/url3 {page "title" <strong>hello</strong>}
++ GET /url1/url2/url4 {page "url4" <strong>what</strong>}
+#+END_EXAMPLE
+
+We don't need to create a new surface syntax. We can shallow-embed the DSL in Ocaml.
+
+We need a new surface syntax if we want to generate routing data structure at compile time. The choice for the data structures are:
+- We can use a hash table.
+- We can use a prefix tree.
+
+#+BEGIN_EXAMPLE
+match-criteria { what-to-do-if-match }
+
+expr returning node
+
+Program ::= if Condition { Program } | serve PageExp
+Condition ::= true | subpath begins with String | client accepts Accept | request method is String
+String ::= <non-space>+ | Quote <non-quote>+ Quote
+PageExp ::= Node | { MLNodeExp }
+#+END_EXAMPLE
+
+
+- https://stackoverflow.com/questions/26379582/difference-between-munch-and-many-satisfy-p
+
+- https://github.com/jozefg/learn-tt
+
+
+- "Scala by example" online book
+
+
+I think most people believe "I don't really understand what my coworkers do but I believe they're doing it well."
+
+- Stages of academic productivity:
+    - You don't build on any past work. You start things and abandon them soon after. You redo your own work. You redo others' work without knowing it.
+    - You know other people' work, but pride prevents you from even considering to study that work. You want to reinvent everything.
+    - You learn to build on your past work.
+    - You study other people's work, but you think you can do better.
+    - You learn to build on other people's work.
+    - You look for others who might share your interests.
+    - You don't care whether it's you or someone else who solves the research problem. All you want is to see it solved.
+
+You write a parser in C.
+You rewrite the parser in Scheme.
+You rewrite the parser again in Haskell.
+Then you search for the essence of programming.
+Then you stop writing parsers.
+Now you write the grammar instead, and find a way to generate the parser from the grammar.
+You also look for a way to generate the pretty printer from the grammar.
+You find Prolog.
+
+- citizen researcher, "academic spelunker"
+
+
+https://lptk.github.io/programming/2018/10/04/comprehending-monoids-with-class.html
+
+http://hazel.org/
+"Hazel is a live functional programming environment featuring typed holes."
+
+http://tomasp.net/blog/2018/programming-interaction/
+
+
+1999 article "Essence—An LR Parser Generator for Scheme"
+http://s48.org/essence/doc/essence.pdf
+"The generated parsers result from the general parser by an automatic program transformation called /partial evaluation/." Holy shit.
+
+https://mortoray.com/2012/07/20/why-i-dont-use-a-parser-generator/
+- "One key aspect that bothers me with many of the tools is the requirement to have a distinct first lexing phase." I agree. That requirement is an unnecessary restriction for 2018 computers.
+
+
+
+2018 article "SweetPea: A Language for Designing Experiments"
+
+
+polymorphism
+2018 article "A Principled approach to Ornamentation in ML"
+
+POPL 2018 talk "Formal Methods and the Law": formalizing code-based law
+"[...] computational analysis of these formalizations may discover previously overlooked tax avoidance techniques."
+
+can ocaml polymorphic variants be used for row-polymorphic record types?
+
+2015 article "A Crash Course on ML Modules"
+https://jozefg.bitbucket.io/posts/2015-01-08-modules.html
+
+mapping between Haskell type classes and ML modules
+2006 article "Modular Type Classes":
+- "We present a smooth integration of type classes and modules that provides a foundation for future work on incorporating type classes into ML and a proper module system into Haskell"
+https://people.mpi-sws.org/~dreyer/papers/mtc/main-long.pdf
+
+
+- "Introduction" http://maude.cs.illinois.edu/maude2-manual/html/maude-manualch1.html
+- "Maude is a high-performance reflective language and system supporting both equational and rewriting logic specification and programming for a wide range of applications." http://maude.cs.illinois.edu/w/index.php/Maude_Overview
+- "Functional Modules" http://maude.cs.illinois.edu/maude2-manual/html/maude-manualch4.html
+
+"Code of ethics doesn't influence decisions of software developers"
+https://www.reddit.com/r/programming/comments/9myr6a/code_of_ethics_doesnt_influence_decisions_of/
+
+
+miniKanren for compilers?
+Relational programming for compiler writing/
+
+2013 article Spoofax vs Xtext
+http://msdl.cs.mcgill.ca/people/hv/teaching/MSBDesign/201314/projects/Leonard.Elezi/report/reading_report.pdf
+
+http://flint.cs.yale.edu/cs421/case-for-ml.html
+http://troydm.github.io/blog/2014/03/29/writing-micro-compiler-in-ocaml/
+https://stackoverflow.com/questions/14632870/creating-a-compiler-learn-ocaml-or-stick-with-java-c-c
+
+https://people.mpi-sws.org/~rossberg/sml-vs-ocaml.html#exceptions
+
+OCaml looks good
+ML language family: Why 'a tree instead of tree a?
+
+Spoofax vs Xtext vs MPS?
+
+https://www.metaborg.org/en/latest/
+- What you give Spoofax: language definitions.
+- What Spoofax gives you: the IDE for the languages.
+
+!!!
+Write program transformation systems in Prolog or Mercury.
+
+Clear
+https://www.metalevel.at/prolog/data
+
+
+
+Logic programming is natural match for program checking.
+
+Transform
+
+entity(Name, Fields)
+entity(what,[ [id,int32,nullable], [name,varchar(byte(60))] ]).
+each(sql_java_type_eqv, [(int32,int), (int64,long)]).
+let(F = long_pred_name, F(int32,int)).
+
+into
+
+field(Entity_name, Field_name, Sql_type,
+
+https://stackoverflow.com/questions/50512673/prolog-variable-as-functor
+
+entity_field(Entity, [Name, Type | Opts])
+one_to_many(A, B)
+relation_1_n_entity_entity(Rel, A, B)
+
+We can change Prolog's search strategy by using metapredicates? Cite?
+
+Prolog record type?
+Prolog beta reduction?
+SWI-Prolog has IDEs
+
+"The power of Prolog"
+https://www.metalevel.at/prolog
+Timeline: Prolog, miniKanren, Godel, Mercury?
+
+
+https://www.researchgate.net/publication/221266897_A_Compiler_Written_in_Prolog_The_Veda_Experience
+http://faculty.cooper.edu/smyth/cs225/ch7/prolog.htm
+https://dtai.cs.kuleuven.be/projects/ALP/newsletter/archive_93_96/net/grammars/compiler2.html
+https://docs.racket-lang.org/reference/match.html
+http://esumii.github.io/min-caml/index-e.html
+http://adam.chlipala.net/mlcomp/
+
+
+
+External type checking in the style of Erlang Dialyzer.
+
+A type checker is a function from AST to Extended AST.
+
+Resource should be freed as soon as it is not used.
+
+How should we think of compile-time checking?
+- Compile-time errors /predicts/ runtime errors.
+- Compile-time errors /preclude/ runtime errors.
+
+Type checking is a special case of program checking.
+
+https://medium.com/@daveford/what-i-want-in-a-type-system-1316a78365b
+
+
+Compile-time is a model of runtime. We don't model hardware errors.
+
+Using DCG to parse CST
+
+The principle: the rules must incorporate the parsed input. Don't remove information.
+
+I changed my mind.
+Write a DCG metainterpreter that adds location data to the token stream.
+Separate the concerns.
+
+"Separating concerns with metainterpreters" may be a worthy talk.
+
+"Separating cross-cutting concerns with Prolog metainterpreters"
+
+A CST node is either F(Code) or F(Child1, ..., ChildN) where
+F is a functor and each ChildK is a CST node
+and Code is a character code
+An error node is error(Message, A, B)
+It means that the parser encounters an error and resyncs to B
+A is the offending subinput
+
+exp(plus(M, N)) :- ...
+exp(number(F,R)) :- ...
+exp(digit(D)) :- ...
+
+Use [plus,M,N] instead of plus(M,N)
+Comments
+
+data CST = Space Char | Digit Char | Number CST CST | Plus CST CST | Error Msg CST CST
+
+exp :: String -> CST
+
+It is possible to reconstruct the input string from the CST.
+
+
+What is the difference between Scheme match library and ML pattern matching?
+
+Experiment
+
+A=[1,2],append(A,B,C) infinite
+B=[1,2],append(A,B,C) infinite
+C=[1,2],append(A,B,C) infinite
+In order for C to be length-ground when append/3 exits:
+- A and B are length-ground, or
+- C is length-ground.
+append(A,B,C)
+
+S ::= <empty> | S a
+s(A) :- append([S0,[0'a],S1],A), s(S0), s(S1).
+
+
+
+- A terminal cannot be empty.
+- Each right-hand side must contain at least one terminal.
+  We require that every rule consume at least one character.
+  This is so that the recursion is always decreasing.
+- The generated parser requires that the input be length-ground.
+  If the input is not length-ground, the parser may not terminate.
+
+number ::=
+    digit
+;   digit, number.
+
+expression ::=
+    number
+;   expression, "+", expression.
+
+% Preprocessing.
+
+% Terminal.
+translate(STRING, t(CODES)) :-
+    string(STRING),
+    string_codes(STRING, CODES).
+
+% Sequence.
+translate((A, B), s(TA, TB)) :-
+    translate(A, TA),
+    translate(B, TB).
+
+% Choice.
+translate((A; B), c(TA, TB)) :-
+    translate(A, TA),
+    translate(B, TB).
+
+% Nonterminal.
+translate(CALL, n(CALL)) :-
+    callable(CALL),
+    functor(CALL, Name, _),
+    \+ member(Name, [',', ';']).
+
+% TODO
+
+
+% Terminal.
+
+translate(Input, Before, After, STRING, append([Before, CODES, After], Input)) :-
+    string(STRING),
+    string_codes(STRING, CODES).
+
+translate(V_Input, V_Before, V_After, Call, Phrase) :-
+    compound_name_arguments(Call, Functor, Args),
+    compound_name_arguments(Phrase, Functor, Args_1),
+
+rule_body__clause_body(Var_Input, Rule_body, Phrase) :- true
+    , compound_name_arguments(Rule_body, Functor, Args)
+    ,
+
+TODO handle newline
+code_location_effect(Code, A, B) :-
+location_right(A, B).
+
+node(Loc_before, Loc_after, Input, Remain)
+
+The location can be inferred from the difference list.
+
+node(Input, Remain) :- ..., append(Parsed, Remain, Input). // codes_location(Parsed, Loc0, Loc1)
+
+
+Embed P in H
+Embed H in P
+op let 1200
+op val 1200
+
+let x = 1.
+x(1).
+let f(X) = X + 1.
+f(X, X + 1).
+
+
+
+
+Extend SWI Prolog checker library
+Erlang-Dialyzer-style checker for Prolog
+
+
+
+Prolog for computing taxes.
+- https://github.com/cbbrowne/canadiantaxes
+  - It uses dynamic predicates.
+
+
+http://www.swi-prolog.org/pack/list?p=func
+
+https://github.com/SWI-Prolog/issues/issues/14
+
+"Prolog's Control Constructs in a Functional Setting — Axioms and Implementation"
+https://www.cs.ox.ac.uk/publications/publication1149-abstract.html
+
+
+Example of using Xtext, MPS, Spoofax
+http://voelter.de/dslbook/markusvoelter-dslengineering-1.0.pdf
+
+
+
+Software requirement does not change?
+It is we who failed to discover the requirement?
+It is we who failed to discover the underlying reality?
+But how do we distinguish between design and overengineering?
+
+
+Functional query expression language
+all_rows_of(Table)
+all(Table)
+from(Table)
+Table (just Table)
+project(Columns, InTable) = OutTable
+join(T1,T2)
+
+Relational query formula language
+table_row(Table, R)
+table_columns_projected(T,C,R)
+
+
+
+https://dtai.cs.kuleuven.be/projects/ALP/newsletter/archive_93_96/net/exts/monad.html
+
+
+Prolog gui in logtalk?
+
+https://stackoverflow.com/questions/19832464/what-are-the-minimum-maximum-integers-in-gprolog
+http://www.swi-prolog.org/pack/list?p=plgi
+http://lambda-the-ultimate.org/node/3813
+
+Picat language?
+
+
+Dbpure similar to plspec
+
+
+"(Parnas, Shore & Weiss 1976) identified five definitions of a 'type'"
+https://en.wikipedia.org/wiki/Data_type
+
+
+* Neo-Luddites fights tech with tech.
+The Luddites aren't stupid.
+They are frustrated because everybody else wishes that the Luddites just disappear.
+
+It is simple to DDoS Facebook.
+Create an Android app that slowlorises the servers.
+Tell people to download the app to better mankind.
+* Biohacking
+https://www.theguardian.com/science/2018/sep/21/extreme-biohacking-tech-guru-who-spent-250000-trying-to-live-for-ever-serge-faguet
+* Economics?
+We should measure debt-to-income ratio instead of debt-to-GDP ratio?
+
+Consumptive debt sacrifices future for the present.
+
+Productive debt is good.
+
+Example of productive debt:
+
+Suppose that you want to buy a land to farm on it. These are the scenarios:
+- You work for 20 years. Then you buy the land with cash. But the land price has risen.
+- You take a loan, buy the land now, and repay the loan over 10 years. In the second year, your land starts producing.
+
+If a person takes too much consumptive debt, he goes bankrupt.
+
+If a government takes too much consumptive debt nominated in its own currency, it can print money to repay the debt, but such printing devalues the currency.
+
+If the US continues to take loans mindlessly, it will have to choose:
+- Default (refuse to repay).
+- Suffer severe inflation (rising prices), if the creditors spend the printed money.
+
+Does the USA think it can get away by refusing to repay its debts? It will trigger a huge power shift, maybe to China. Will China sacrifice itself to clean up America's mess? Will China buy up all US debts, and use the default as a reason to start a war?
+
+https://deviantinvestor.com/9778/sacrificing-future-spending/
+
+https://en.wikipedia.org/wiki/Unearned_income
+
+Everything comes from nature.
+We are not creating or destroying anything.
+We are merely transforming things.
+At least as seen from physics.
+
+The number of atoms in Earth doesn't change.
+(But what about solar wind? It does change a bit?)
+
+Urban toilet harms humans and the Earth.
+- We should poo squatting, not sitting.
+- Urine and feces should be composted, not flushed down the drain.
+- Compost bins should replace septic tanks.
+
+https://www.vice.com/amp/en_us/article/zm95ka/republicans-are-outraged-about-the-deficit-they-caused
+
+https://en.wikipedia.org/wiki/Unrestricted_Warfare
+* Silly misinformations; meme materials; these are WRONG, in case you are wondering.
+- she can't get pregnant if she's on top (WRONG.)
+- pees are stored in the balls
+  - a dank meme https://www.reddit.com/r/dankmemes/comments/8qi1pt/supreme_leader_sees_the_light/
+* Pandoc woes
+#+BEGIN_EXAMPLE
+pandoc --mathjax -f org -t html philo.org --lua-filter _includes/pandoc_filter.lua
+#+END_EXAMPLE
+
+Pandoc: How to avoid generating org-mode custom-id property drawer for internal linking?
+
+Pandoc org output mishandles pipe character in inline math in table cell?
+Or is the markdown input invalid indeed?
+* Statistics, smoking, mindfulness
+Seeing statistics worries me.
+Most researchers don't understand statistics.
+For example, I don't need statistics to know that smoking is bad; it's obvious.
+It smells bad.
+It makes me dizzy.
+
+I guess people smoke because they have peer pressure, they have a weird sense of "cool", and they are too lazy to think for themselves.
+
+Smoking always tastes bad.
+Thus it is the rationalization that makes smokers tough it out.
+
+How to stop smoking (Does it work?)
+
+Remember when you first smoke cigarettes.
+This is my guess.
+It tastes bitter.
+You cough.
+Your eyes water.
+It hurts.
+But you tough it out.
+You fear that your friends will leave you if you don't smoke.
+
+I want you to taste every cigarette in the same way you tasted your first cigarette.
+It's always the first time.
+Feel the unpleasant bitter taste.
+* The only way to change your adult son is to make him angry at himself.
+I've been looking at fit boys and girls.
+
+I'm reasonably average.
+I don't have rare diseases.
+
+The question is whether I /will/, not whether I /can/.
+Of course I /could/; I just /wouldn't/.
+
+My fucking mind invents various fucking excuses:
+
+- I'll do it later.
+- it's not good to exercise right before bedtime.
+
+The key is to be /angry at yourself/.
+A little self-hate is necessary.
+Self-acceptance doesn't mean "give up and suck forever": this is defeatism.
+Self-acceptance also doesn't mean "I'm beautiful and it's their problem if I'm fat":
+this is entitlement mentality; this is delusion; this is not anchored on objective reality.
+
+Imagine you're a boss, and you have this one guy who always come up with excuses.
+Fucking fire him. He is you. Fire yourself. Now. Get fucking angry already.
+
+Anger (but not rage) is necessary.
+A person who never gets angry doesn't really want to live.
+It is impossible to not get angry in the 21st century.
+Everything is shitty.
+Software is bloated, slow, and unreliable.
+Governments are too big and wasteful.
+Your job sucks.
+Your children are good for nothing.
+Your food is poisonous.
+Religions murder people and hamper scientific progress.
+Pandering politicians promise unfundable imaginary benefits.
+What the fuck is going on?
+Why the fuck do we let this happen?
+Why aren't we angry?
