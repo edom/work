@@ -3,8 +3,6 @@
     , java_class_ast/2
 ]).
 
-:- use_module('data.pro').
-
 % This relates a primitive type and its corresponding reference type.
 
 java_primitive_reference_type(Pri, Ref) :-

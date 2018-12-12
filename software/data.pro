@@ -1,98 +1,16 @@
 :- module(data, [
-    database/2
-    , table/2
     , entity_field/4
     , entity_field_nullable/3
     , sql_java_type/3
 ]).
+
 /** <module> describe all data?
+
+Note: We are moving this to enterprise.pro.
 
 Intended usage:
     - enterprise web application
-
-Usage:
-    - Describe relational data.
-        - Define your databases with database/2.
-        - Define your tables with table/2.
-
-Other data models:
-    - ER diagram
-    - SQL information schema
-    - XML Schema
-    - OMG QVT
-    - and many others
 */
-
-/** database(?Name, ?Spec)
-
-"Name names a database described by Spec."
-
-Name is an atom that is unique among all databases defined by this predicate.
-
-Spec is a list of terms:
-    - type(Type) where Type is any of these:
-        - postgresql
-
-If Spec contains type(Postgresql), then Spec may also contain these terms:
-    - host(H), required: a DNS name or an IP address
-    - port(P), optional: defaults to 5433
-    - catalog(C), required: catalog name
-        - A catalog is a collection of schemas.
-        A catalog may also be called a "database", but "database" is ambiguous.
-    - username(U), required
-    - password(P), required
-
-See also:
-    - "What's the difference between a catalog and a schema in a relational database?"
-    https://stackoverflow.com/questions/7022755/whats-the-difference-between-a-catalog-and-a-schema-in-a-relational-database
-*/
-:- multifile database/2.
-
-/** table(?Name, ?Spec)
-
-Name is an atom that is unique among all tables defined by this predicate.
-
-Spec is a list of terms:
-    - database(D), where D is the name of a database defined using database/2
-    - column(ColName, ColSpec), may occur zero or more times
-        - ColName has to be unique among columns in the same table
-        - ColSpec is a list of these terms:
-            - name_in_database(DbColName), optional: column name in the database.
-            This defaults to ColName.
-            - type(Type), required: Type is any of these:
-                - =int16=: two's-complement signed 16-bit integer
-                - =int32=: two's-complement signed 32-bit integer
-                - =int64=: two's-complement signed 64-bit integer
-                - =float32=: IEEE 754 single-precision floating-point integer (1 sign bit, 8 exponent bits, 23 fraction bits)
-                - =float64=: IEEE 754 double-precision floating-point integer (1 sign bit, 10 exponent bits, 53 fraction bits)
-                - =chars=: a character string
-                - =bytes=: a byte string
-            - max_bytes(N), optional: indicates that each cell contains at most N bytes.
-            This is for the =chars= and =bytes= type.
-                - Note: bytes, not characters.
-                The number of bytes in a character string depends on its character encoding.
-            - nullable(N), optional: N is either true or false.
-            Unlike in SQL, this defaults to _false_.
-
-```
-table(mytable, [ database(mydb),
-    column(mycolumn, [type(int32)])
-]).
-```
-
-See also:
-    - https://wiki.postgresql.org/wiki/BinaryFilesInDB
-
-Design:
-What do I think about this?
-```
-sql_server(prod, [type(postgresql), host('localhost'), port(5433)])
-sql_connection(prod, [server(prod), login('john', 'foo'), database(bar), schema(company)])
-sql_table(employee, [connection(prod), column(name,varchar(30),not_null)]).
-
-```
-*/
-:- multifile table/2.
 
 % Records.
 

@@ -13,7 +13,8 @@ For PostgreSQL configuration options, see:
 https://odbc.postgresql.org/docs/config-opt.html
 */
 main :-
-    odbc_driver_connect('DRIVER={PostgreSQL Unicode};Server=localhost;Port=5432;Database=<DATABASE>;UID=<USER>;PWD=<PASSWORD>;', Con, []),
+    %odbc_driver_connect('DRIVER={PostgreSQL Unicode};Server=localhost;Port=5432;Database=<DATABASE>;UID=<USER>;PWD=<PASSWORD>;', Con, []),
+    odbc_driver_connect('DRIVER={PostgreSQL Unicode};Server=localhost;Port=5432;Database={my_database};UID={my_user};PWD={my_password};', Con, []),
     Sql = 'SELECT table_catalog, table_schema, table_name, column_name, data_type FROM information_schema.columns',
     findall(Row, (compound_name_arity(Row, row, 5), odbc_query(Con, Sql, Row)), Rows),
     print(Rows),

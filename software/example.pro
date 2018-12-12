@@ -1,4 +1,3 @@
-:- use_module('data.pro').
 :- use_module(library(clpfd)).
 
 entity(todo, [

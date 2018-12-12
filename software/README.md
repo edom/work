@@ -4,6 +4,7 @@
 
 - [data.pro](data.pro): describe all data?
 - [database.pro](database.pro): making databases
+- [enterprise.pro](enterprise.pro): Prolog for enterprise applications?
 - [haskell.pro](haskell.pro): Haskell?
 - [jvm_cls.pro](jvm_cls.pro): Java class file?
 - [lambda_calculus_normal.pro](lambda_calculus_normal.pro): lambda calculus with normal-order reduction strategy
