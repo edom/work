@@ -19,10 +19,9 @@ I am not responsible for other people's comments.
 Organization of this site:
 For most pages, the title is a goal, and the content is the ongoing journey to achieve it.
 
-## Goals
+## Contents
 
-We should join forces to reach our shared goals.
-
+- [Goals]({% link goal.html %})
 - Computer practice
     - Software engineering
         - Forward software engineering
@@ -73,9 +72,7 @@ We should join forces to reach our shared goals.
         - [Emacs for vi users]({% link emacsvi.md %})
 - Living in the 21st century
     - [What kind of world are we living in?]({% link world.md %})
-    - Grooming, styling, appearance
-        - [WP:Hairstyles](https://en.wikipedia.org/wiki/List_of_hairstyles)
-        - [Naming articles of clothing]({% link cloth.md %})
+    - [Grooming]({% link groom.html %})
     - Hidup di Indonesia abad 21
         - [Politik masjid]({% link politik_masjid.md %})
         - [Living in Jakarta]({% link jakarta.md %})
@@ -83,7 +80,7 @@ We should join forces to reach our shared goals.
     - [Generalizing division]({% link division.md %})
 - [Writing]({% link writing.html %})
     - [Working around Markdown]({% link markdown.md %})
-- [Other unorganized contents]({% link other.html %})
+- [Unimportant content]({% link other.html %})
     - I am regrouping the contents in this website from by-topic to by-task.
     These are pages with old grouping.
     - [Research]({% link research.html %})

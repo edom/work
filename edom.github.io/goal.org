@@ -1,0 +1,717 @@
+#+TITLE: Goals
+#+DATE: 2018-12-14 12:56 +0700
+#+PERMALINK: /goal.html
+#+OPTIONS: ^:nil toc:nil
+#+TOC: headlines 3
+* About this page
+This page is about big plans/ideas, prioritization, and effort estimation.
+
+Estimation may be wrong.
+
+If you have some common goals, get in touch, drop a comment.
+We should join forces to reach our shared goals.
+* ?7d: Implement PLX (Prolog-LaTeX-XML) markup language
+#+BEGIN_EXAMPLE
+\Tag[Attr1=Val1,Attr2=Val2]{Content} translates to <Tag Attr1=Val1 Attr2=Val2>Content</Tag>
+
+\div[class=foo]{
+  \div[class=bar]{
+  }
+}
+
+Curly braces quote/escape attribute values.
+\Tag[Attr={,}]
+\Tag[Attr={[}]
+\div[data-foo=4123]{}
+\h1{bar}
+\img[src=foo.png]
+
+
+Escape a curly brace by prepending a backslash.
+\Tag[Beg=\{,End=\}]{}
+
+\table{
+  \tr{\td{Foo}\td{Bar}}
+}
+
+\strong{\em{strong emphasized text}}
+
+\p{This is an example paragraph. It may contain \em{emphasis}.}
+\p{ Leading and trailing whitespaces are stripped away. }
+\p{\ Backslash-space escapes a space that would otherwise be ignored.}
+
+\nbsp expands to &nbsp;
+#+END_EXAMPLE
+
+Similar but not the same
+1999 "TEXML: Typesetting XML with TEX"
+https://www.tug.org/TUG99-web/pdf/lovell.pdf
+
+"SXML: an XML document as an S-expression"
+http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.729.3639&rep=rep1&type=pdf
+
+R markdown
+https://bookdown.org/
+
+LaTeX syntax for XML.
+#+BEGIN_EXAMPLE
+\tag[attr1=val1,attr2=val2]{content} = <tag attr1="val1" attr2="val2">content</tag>
+\amp = &amp;
+\e{amp} = &amp;
+#+END_EXAMPLE
+Make a semantic-LaTeX parser/interpreter in Prolog.
+Treat LaTeX as declarative markup language and not imperative command language.
+- escaping comma https://tex.stackexchange.com/questions/70986/comma-in-macro-parameters
+- escaping square brackets https://tex.stackexchange.com/questions/6683/escaping-square-braces
+- escaping curly braces https://tex.stackexchange.com/questions/181118/how-to-escape-curly-braces-within-texttt
+* Write a Prolog program to interpret or translate Java source code
+* Develop non-shitty FOSS distributed/P2P alternatives to most vital services
+Works behind NAT?
+How can A and B connect to each other if A is behind NAT gateway G1 and B is behind NAT gateway G2?
+
+Google search: no replacement yet!
+YaCy is not good enough.
+Can we make it in Prolog?
+
+Distribute the result of manual curation?
+Bundle a curation tool with a browser?
+Privacy issues?
+
+Facebook: Mastodon?
+
+YouTube: DTube, BitChute
+https://www.ghacks.net/2018/03/02/dtube-is-more-than-a-youtube-alternative/
+* Write a user-first browser in Prolog
+** 1h: Specify desired features and differences from mainstream browsers
+Principle: the user should have maximum control.
+
+It is not only a browser.
+It is a tool for controlling your web experience.
+
+- The browser is distributed/P2P.
+- The browser comes with a search engine that searches your public history or your peers' public history, and distribute indexes to peers.
+- Block all ads because advertising depends on making people addicted.
+- Block all popups, no exception, no clickjacking.
+- Block all "soft-popups" (displays).
+- Run user script for certain websites.
+- Block all cookies by default.
+- Don't load JavaScript by default.
+- Don't load images by default.
+- Apply default CSS. Don't load CSS by default.
+- Enable user-agent spoofing.
+- For advanced users. No GUI to configure. Write Prolog code to configure the browser.
+- Default to HTTPS when protocol is not given.
+- No download manager. Tell the user to use wget, curl, or whatever.
+- Like emacs but:
+  - browser instead of text editor
+  - prolog instead of emacs lisp
+- Browser must limit memory usage.
+  See entity explosion problem.
+- Browser should refuse to load HTML documents larger than 1 MB.
+- User can easily change user agent. WhatsApp wrong browser detection.
+- combine with caching, peer-to-peer caching, distributed (and social?) searching and ranking and sharing, but what about privacy and the people who try to game the system?
+- Don't remember tabs when closed.
+Limit open tabs to 10. Discourage context-switching. I'm a pathological tab hoarder. Always open a configurable set of tabs on start. If you need to open more tabs, then open a google docs or a note-taking app instead.
+** 1h: Skim existing browsers
+Is this legit?
+https://vivaldi.com
+
+https://en.wikipedia.org/wiki/Comparison_of_web_browsers
+
+https://www.quora.com/How-should-a-programmer-think-about-solving-problems-in-Prolog
+
+Entity explosion problem:
+#+BEGIN_EXAMPLE
+<!ENTITY a "&a;">
+<!ENTITY a <16 times a>
+<!ENTITY b "&a;" <16 times>
+<!ENTITY c "&b;" <16 times>
+etc.
+after 10 times we have 2^40 = 1 TB!
+#+END_EXAMPLE
+
+Example rendering rules: nag.html:
+if website is pinterest then remove DOM element blah blah after load.
+
+Popular open-source browsers are highly scrutinized.
+
+not too related:
+"prolog on the browser"
+https://github.com/SWI-Prolog/roadmap/issues/43
+* Gui, logical/relational reactive programming, a layer on top of plgi (Prolog Gtk bindings).
+
+exists W: window(W)
+exists A: textbox(A)
+value(A, yes) :- is_down(B), !.
+value(A, no).
+children(W,Cs) :- current_document(D), document_controls(D,Cs).
+"The value of the textbox is yes whenever the button is down."
+current_document/1 is a dynamic predicate.
+
+name_widget(main,W) :- window(W), widget_width_height(W,640,480).
+
+window(W) is true iff W is a window representation.
+name_widget(N,W) is true iff N refers to widget representation W.
+
+
+Example of some queries that we want a GUI knowledge base to answer:
+- What is the width and height of the "main" window?
+- What happens when button b1 is clicked?
+- What has to be done to make this text box shows "yes"?
+
+Example time-dependent facts that we want to state:
+- After button b1 is pressed, then checkbox c1 is checked.
+- If user clicks on a link, then navigate to the target of that link.
+- latching?
+
+
+
+gui(Root)
+
+
+Layout algorithm
+layout_one_line(Font, String, MaxWidth, Line, RemString)
+
+
+
+Temporal logic for GUI
+is_up(B) -> green(W)
+is_down(B) -> red(W)
+
+
+:- dynamic object_time_property_value/4
+At every event, increment current_time
+
+binding(W1, K1, V1, W2, K2, V2) :- ...
+
+
+widget_value :- current_time, widget_version_value
+force(widget_property_value(W,V)) :-
+retractall(wtpv :- T >= Curtim, _), asserta((time_widget_value(T,W,V) :- T >= Curtim, !)).
+
+Problem: slow gui update; recheck all widgets unnecessarily
+
+http://www.swi-prolog.org/pldoc/man?predicate=initialization/2
+
+array_array_concat(A, B, C) :-
+    array_length(A, NA), ...
+    NC is NA + NB,
+   subarray_subarray_match(A, 0-NA, C, 0-NA),
+    subarray_subarray_match(B, 0-NB, C, NA-NC).
+
+Replace equal with match
+* Three semantics of Horn clauses
+We use "cause semantics" for gui.
+
+Rule semantics
+A :- B means "If B then A".
+
+turn_on_air_conditioner :- air_feels_hot.
+
+Proof semantics of Prolog
+A :- B means to prove A, prove B.
+even(z).
+even(s(s(N))) :- even(N).
+
+Cause semantics of Prolog
+A :- B means B causes A.
+name_value(mytextbox, yes) :- name_isdown(mybutton, true).
+That means "pressing mybutton causes mytextbox value to be yes".
+* Prolog meta-thinking: logic, language, query, and modeling: how many parameters should we use?
+Consider these models:
+#+BEGIN_EXAMPLE
+0 john_loves_mary
+1 john_loves(mary)
+2 loves(john,mary)
+3 subject_verb_object(john,love,mary)
+#+END_EXAMPLE
+
+If we want to pattern match on it, or quantify it (existentially or universally), then it should be a parameter.
+Example:
+- "Who does John love" can not be answered by 0.
+- "Who loves who" can not be answered by 1.
+- "Who does what to whom" can not be answered by 2.
+- "Who does what to whom at what time" can not be answered by 3.
+
+Thus the number of parameters in our model depends on the complexity of the queries that we anticipate.
+Thus when designing a logic program, we should begin with the /queries/ that we want to anticipate.
+* TODO <2018-09-15> Modernize operating system
+** 1d: Back up data.
+Should not take more than a day.
+What takes a long time is determining what needs to be backed up.
+** TODO 1d: Install +Ubuntu 18.04 after its point release+ Debian
+Ubuntu 14.04 EOL is April 2019.
+
+<2018-10-26> I'm using Ubuntu 14.04.
+
+When Ubuntu 14.04 reaches its end of life, I'll move to Debian.
+I won't upgrade to Ubuntu 18.04.
+- https://micahflee.com/2013/01/why-im-leaving-ubuntu-for-debian/
+- https://www.datamation.com/open-source/ubuntu-18.04-review-tough-love.html
+** OS upgrade
+Needed: apt/dpkg check all modified files.
+https://serverfault.com/questions/90400/how-to-check-for-modified-config-files-on-a-debian-system
+
+"People will recommend [Debian] 'testing' to you but I would advise against it..."
+https://news.ycombinator.com/item?id=7076601
+
+The most important thing distros give us is precompiled binaries for libraries.
+This greatly simplifies building a C program with lots of dependencies.
+There are too many build systems for C.
+C build system is counterproductively fragmented.
+The truth is, building a C program is as simple as "cc *.c", if there are no dependencies.
+* Things that I perhaps should do
+** TODO <2018-09-15> Fix possible programming error in ~/work/web in Iterables.filter
+** TODO Ask others
+*** Who should we ask?
+- Haskell Cafe mailing list
+- #haskell on freenode IRC
+- Haskell reddit
+- Abdullah
+*** TODO <2018-09-17> Is there anything like Pandoc but for programming languages instead of markup languages?
+<2018-12-14>
+Yes, it's called "universal transpiler".
+It's a Prolog project.
+It's far from done though.
+This is like pandoc but for programming languages instead of markup languages.
+- https://github.com/jarble/transpiler
+- http://www.swi-prolog.org/pack/list?p=transpiler
+
+https://www.quora.com/Is-there-a-program-which-converts-code-written-in-one-programming-language-to-code-in-another-programming-language
+
+Does anyone know of anything like Pandoc but for programming languages?
+
+For example, it would translate Haskell to Java by translating Haskell into an internal representation and then translating that internal representation to Java.
+
+Possible related things:
+- LLVM IR
+- GHC Core
+
+A person can convert a code in programming language L to an "equivalent" code in programming language M.
+This implies that there is a common semantics between L, M, and the language of thought.
+How do we write programs directly in language of thought?
+Logic is the language of thought?
+The 10 most used human language contains first-order logic.
+* Modeling everything = name-property-value + subject-verb-object + time
+Model of everything
+Entity-attribute-value
+I call it "name-property-value" to get in line with the terms used in philosophy
+https://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model
+
+name-property-value
+
+"The color of mycar is black."
+:- multifile name_property_value/3.
+name_property_value(mycar, color, black).
+name_property_value(mydb, type, database).
+name_property_value(mydb, subtype, postgresql).
+name_property_value(mydb, is_a, database).
+
+I think, if the knowledge base is big, it will be very confusing to trace which rule causes which name to have which property.
+
+name_property_value(N, host, V) :-
+    name_property_value(N, type, database),
+    name_property_value(N, spec, Spec),
+    member(host(V), Spec).
+
+"Show me all databases."
+?- name_property_value(E, type, database).
+% press semicolon repeatedly
+
+"X is a database" vs "The type of X is database" (The attribute "type" of X has the value "database")
+* Designing the best module system in 2018: Name is not a property of anything
+** Executive summary
+To avoid name clash, your module system must satisfy these:
+- The user of a module, not the module itself, decides what to call that module.
+Modules must not name itself.
+In ontological terms, the name of a module is not a property of that module, but is something that the user of that module uses to refer to that module.
+- A module can contain other modules.
+** Philosophical investigation
+Designing anything good:
+Name is not a property of anything.
+Name is a linguistic artifact that we use to refer to something.
+A function does not have a name.
+A predicate does not have a name.
+Languages that gets this right: JavaScript, Lisp, Scheme.
+
+A language must clearly separate names and referents (the things that the names refer to).
+
+If Prolog is to have anonymous predicates, then it works with second-order logic, no longer with first-order logic.
+
+If you satisfy those constraints, your module system will be free of name clashes.
+
+The job of a module is to disambiguate names.
+Example: which "member/2" do we mean?
+** Languages that does this right
+JavaScript and Ocaml's local import is interesting.
+
+Languages that has satisfactory module systems:
+JavaScript, TypeScript.
+JavaScript can even do local-scoped import.
+```
+let foo = require("foo.ts");
+```
+
+Languages that has unsafisfactory module systems:
+Ocaml, Haskell, Prolog, C, C++, Java, Scheme, Lisp.
+** What should SWI-Prolog modules be?
+We want these to separate names and referents:
+- anonymous modules
+- anonymous predicates
+- load file content into an anonymous module
+
+consult(++FilePath, --Module)
+
+SWI-Prolog module/1 option of load_files/2 enables the caller to separate a name and a module.
+A module still has to be named, but now the module user decides the name.
+
+A module is a dictionary.
+
+SWI-Prolog dynamic module may be saving grace.
+
+Prolog has dynamic scoping.
+Dynamic scoping is a mistake.
+Prolog should have lexical scoping.
+
+Explicit linking directive
+modulename_filepath(foo, library(mylib/foo))
+
+** Prolog module clash = game over? Can logtalk save the day?
+https://logtalk.org/rationale.html
+- comparison of the module systems of various Prolog implementations
+* Toward a the best declarative programming language
+** Prolog
+
+"David Liddle's idea on application user interfaces give us a clue as to why lower-level languages draw more people in than higher-level ones (Liddle, 1989). He claims that the most important aspect of a good user interface is how well it leads the user to an accurate conceptual model of how the application works. If the user develops an accurate conceptual model, then the application works as expected. This leads the user to try more things, which also work as expected, leading to an even better understanding, thus drawing the user further and further into the tool."
+https://www.amzi.com/articles/prolog_under_the_hood.htm
+
+Prolog without assert?
+https://www.mercurylang.org/information/doc-latest/mercury_trans_guide/AssertRetract.html
+
+Translate
+
+nat(z).
+nat(s(X)) :- nat(X).
+
+suc(X, s(X)).
+
+- https://stackoverflow.com/questions/20511060/parsing-an-expression-in-prolog-and-returning-an-abstract-syntax
+  - "you did something quite smart [...] That is fine. However, this strategy is inherently very inefficient"
+  - "There is a general way how to fix this: Add another pair of arguments to encode the length."
+
+1988, Towards functional programming in Prolog
+ftp://obaluae.inf.puc-rio.br/pub/docs/Publications/88_AI_Furtado_SINPLAN.Not.pdf
+It defines several infix operators.
+"[...] The problem of evaluating expressions combining functions and predicates
+is investigated. Examples are provided to illustrate the discussion. The paper includes a prototype implementation."
+
+2.7.1 "Axiomatizing Context-Free Grammars"
+http://www.mtome.com/Publications/PNLA/prolog-digital.pdf
+See third paragraph: "the general statement made by the context-free rule [...] can be summarized using relations on positions with the following logical statement [...]"
+** Combining lambda-calculus and first-order logic: combining beta-reduction, unification, and backtracking
+Anonymous function: \ x -> x + 1
+Anonymous predicate: \ a b c -> f a, g b, h c
+fix f = f (fix f)
+
+father_child(dad, kid).
+father_child(daddy, kiddo).
+
+:- operator --
+father(daddy) -- child(kiddo).
+
+father_child dad kid
+father_child daddy kiddo
+father dad -- child kid
+
+father_child = \ dad kid
+father_child = \ Dad Kid -> Dad = dad, Kid = kid
+
+"First-order logic without equality"
+https://math.stackexchange.com/questions/363168/first-order-logic-without-equality
+
+"Differences between logic with and without equality"
+https://mathoverflow.net/questions/316648/differences-between-logic-with-and-without-equality
+
+
+Isn't this Curry language?
+Curry's slogan is "A Truly Integrated Functional Logic Language"
+
+There are at least two camps of the declarative programming languages:
+- Start from Prolog, move toward Haskell.
+- Start from Haskell, move toward Prolog.
+  Example: Curry.
+
+
+Lambda-Prolog, Harrop formula
+Why was Harrop formula defined?
+What's so special about it?
+https://en.wikipedia.org/wiki/Harrop_formula
+
+Lambda-Prolog
+
+https://math.stackexchange.com/questions/2494645/lambda-calculus-combined-with-first-order-logic-notation-quantifiers-propositi
+
+"But languages aren't tools! IDEs are tools. Languages are material. See FallacyOfTheRightTool."
+http://wiki.c2.com/?QuestForThePerfectLanguage
+** Wanted: a programming language with sound philosophical foundation, a language that strictly separates names and referents
+An example of a language that does naming wrong is C:
+into add1 (int x) { return x + 1; }
+In that C fragment, the name "add1" is a property of the routine.
+
+An example of a language that does naming right is JavaScript:
+var add1 = function (x) { return x + 1; }
+In that JavaScript fragment, "add1" is not a property of the function, but "add1" is a name by which we refer to the function.
+* Describe a probabilistic graphical model as prolog knowledge base, and do Pearl causal calculus on them.
+Causal calculus in prolog?
+
+#+BEGIN_SRC prolog
+cancer :- smoking.
+
+cancer :- confounder, smoking.
+smoking :- confounder.
+
+cancer :- common.
+smoking :- common.
+#+END_SRC
+
+See also ProbLog: probabilistic logic programming in Prolog.
+* 7d: Write a planner in Prolog
+A plan is a list of items.
+
+An item is either a group or a task.
+
+A group has a title and zero or more children.
+The title is an atom.
+Each child is an item.
+
+A task has a title, a start date estimation, an effort estimation in person-hours, actual start date (inclusive), and actual end date (exclusive).
+
+Example plan in Prolog:
+The canonical form:
+#+BEGIN_EXAMPLE
+[
+    group('build house', [
+        task('lay bricks', _, 40, _, _)
+    ])
+]
+#+END_EXAMPLE
+
+Almost-Haskell syntax
+#+BEGIN_EXAMPLE
+[
+    group 'build house' [
+        task 'lay bricks' 40 _,
+        task 'put roof' 40 _,
+    ],
+]
+#+END_EXAMPLE
+
+Lisp syntax
+#+BEGIN_EXAMPLE
+(group 'build house' (
+    (task 'lay bricks' 40 _)
+    (task 'put roof' 40 _)
+))
+#+END_EXAMPLE
+
+Types
+#+BEGIN_EXAMPLE
+type Group = Title * [Child]
+type Child = Group | Task
+type Task = Title * Estimate
+type Estimate = Person_hour
+#+END_EXAMPLE
+* Enterprise Prolog?
+** 14d: translate Java source to abstract procedural language in Prolog
+- 7d: model Java lexicon and syntax in Prolog
+- 7d: Translate Java class to Prolog record + predicate
+
+Only allow synchronized(F) in class C iff:
+- F is a private final instance field of C
+- The type of F is java.lang.Object
+- F is immediately initialized with new java.lang.Object()
+Example:
+private final Object lock = new Object();
+** others
+- 7d: Send email from Prolog with ...
+- 7d: Design Profon, write it in proton.pro
+- 1d: Profon eval_strict(?Exp, ?Res), eval_lazy(?Exp, ?Res)
+- 1d: Import from information_schema.tables
+** Prolog SQL
+- 7d: Prolog functional query language abstraction over SQL database
+
+Prolog null/undefined/omitted/not_loaded/z?
+
+Nobody has done ODBC connection pooling in Prolog.
+http://swi-prolog.996271.n3.nabble.com/ODBC-connection-pooling-td4396.html
+But we may not have to, because unixODBC has done that?
+http://www.unixodbc.org/doc/conn_pool.html
+But it suggests that perhaps we should not use pooling.
+
+
+"The meta predicates of this library modify the sequence of solutions of a goal.
+The modifications and the predicate names are based on the classical database operations DISTINCT, LIMIT, OFFSET, ORDER BY and GROUP BY."
+http://www.swi-prolog.org/pldoc/doc/_SWI_/library/solution_sequences.pl
+
+
+
+From the same description, Prolog should generate all of these:
+- Java class for volatile storage, and
+- Java code for persistent storage using JDBC.
+
+
+http://www.swi-prolog.org/pldoc/doc_for?object=section(%27packages/cql.html%27)
+Prolog SQL cql
+Two approach:
+Map database table to prolog predicate
+Or
+Map query to term, design a dsl
+
+Option 2 is easier
+It is easier to write a Prolog-backed cql storage than to write a Prolog program transforming a Prolog program to another Prolog program
+
+
+column/5
+
+/*
+sql_information_schema__column/6
+*/
+sql_information_schema__column(Database, Schema, Table, Name, Type, Nullable)
+
+variable name
+read_term have variable_names option
+
+Cognitive problem: predicate too long
+database_schema_table_column_type_nullable/6
+
+https://stackoverflow.com/questions/8172687/is-there-a-way-to-translate-database-table-rows-into-prolog-facts
+http://www.swi-prolog.org/pldoc/man?section=strings
+
+
+/*
+This relates a table name to its referent.
+*/
+table_database_schema_name(T, D, S, N)
+
+database_schema_table_column_type
+
+column_type(column(Database, Schema, Table, Name), Type)
+
+
+table_column_type(Table, Column, Type)
+
+table_column_nullable(T, C)
+
+
+http://www.swi-prolog.org/pldoc/doc_for?object=section(%27packages/cql.html%27)
+Prolog SQL cql
+Two approach:
+Map database table to prolog predicate
+Or
+Map query to term, design a dsl
+
+Option 2 is easier
+It is easier to write a Prolog-backed cql storage than to write a Prolog program transforming a Prolog program to another Prolog program
+
+
+column/5
+
+/*
+sql_information_schema__column/6
+*/
+sql_information_schema__column(Database, Schema, Table, Name, Type, Nullable)
+
+variable name
+read_term have variable_names option
+
+Cognitive problem: predicate too long
+database_schema_table_column_type_nullable/6
+
+https://stackoverflow.com/questions/8172687/is-there-a-way-to-translate-database-table-rows-into-prolog-facts
+http://www.swi-prolog.org/pldoc/man?section=strings
+
+
+/*
+This relates a table name to its referent.
+*/
+table_database_schema_name(T, D, S, N)
+
+database_schema_table_column_type
+
+column_type(column(Database, Schema, Table, Name), Type)
+
+
+table_column_type(Table, Column, Type)
+
+table_column_nullable(T, C)
+
+Prolog-SQL mapping?
+
+
+Table(P) means that P models a row stored in the table that Table models.
+
+:- small TABLE 30.
+
+Create TABLE(Key, Row).
+Load on-demand.
+
+force(TABLE(Key, Row)) runs SQL update and invalidates the table.
+Bulk copy into RAM.
+
+:- big TABLE(Key, Row).
+Load on-demand.
+Keys must be ground.
+Maintain cursor.
+
+Translate a Prolog fragment to SQL-involving Prolog fragment.
+
+Write your program as if all the data were in Prolog RAM?
+* Prolog predicate naming
+blue(X)
+has(A,B)
+can_sing(A)
+version(A,B,C)
+person_name(P,N)
+index_fibonacci
+index_list_element
+
+class_field
+table_column
+column_type
+
+class(Atom) is true iff Atom is a referent.
+
+table(Atom) has different namespace
+
+class_field(Cls, F) :- table_column(T, Col), field_name(F, N), column_name(Col, N).
+
+Metamodel
+A thing is modeled as an association list such as [a=b,c=d,e=f]
+alist_key_value([K=V|_],K,V).
+alist_key_value([_|R],K,V) :- alist_key_value(R,K,V).
+
+alist_empty
+alist_tail
+alist_head
+alist_without_keys
+alist_size
+alist_merge
+
+thing_prop(T,P)
+thing_prop_replaced(T0,P,T1)
+Use thing_prop_replaced(T,P,T) to get the property P of T
+
+
+url_page
+
+There is a difference between dif and \=: dif is coroutining.
+https://stackoverflow.com/questions/16560058/difference-between-x-y-and-difx-y
+But "coroutine" is an overloaded term.
+http://www.swi-prolog.org/pldoc/man?section=delcont
+
+
+Prolog predicate naming problem when there is a compound word
+integer_integer_sum(A, B, C)
+basic_block__ssa_block()
+* <2018-12-14> Find a place in this website for meta-thinking
+Meta-thinking currently resides at philo.html

@@ -1524,60 +1524,6 @@ rKanren - Guided Search in miniKanren, Part I
 http://cgswords.github.io/rkanren/
 
 Schelog vs minikanren?
-** PLX (Prolog-LaTeX-XML) markup language?
-#+BEGIN_EXAMPLE
-\Tag[Attr1=Val1,Attr2=Val2]{Content} translates to <Tag Attr1=Val1 Attr2=Val2>Content</Tag>
-
-\div[class=foo]{
-  \div[class=bar]{
-  }
-}
-
-Curly braces quote/escape attribute values.
-\Tag[Attr={,}]
-\Tag[Attr={[}]
-\div[data-foo=4123]{}
-\h1{bar}
-\img[src=foo.png]
-
-
-Escape a curly brace by prepending a backslash.
-\Tag[Beg=\{,End=\}]{}
-
-\table{
-  \tr{\td{Foo}\td{Bar}}
-}
-
-\strong{\em{strong emphasized text}}
-
-\p{This is an example paragraph. It may contain \em{emphasis}.}
-\p{ Leading and trailing whitespaces are stripped away. }
-\p{\ Backslash-space escapes a space that would otherwise be ignored.}
-
-\nbsp expands to &nbsp;
-#+END_EXAMPLE
-
-Similar but not the same
-1999 "TEXML: Typesetting XML with TEX"
-https://www.tug.org/TUG99-web/pdf/lovell.pdf
-
-"SXML: an XML document as an S-expression"
-http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.729.3639&rep=rep1&type=pdf
-
-R markdown
-https://bookdown.org/
-
-LaTeX syntax for XML.
-#+BEGIN_EXAMPLE
-\tag[attr1=val1,attr2=val2]{content} = <tag attr1="val1" attr2="val2">content</tag>
-\amp = &amp;
-\e{amp} = &amp;
-#+END_EXAMPLE
-Make a semantic-LaTeX parser/interpreter in Prolog.
-Treat LaTeX as declarative markup language and not imperative command language.
-- escaping comma https://tex.stackexchange.com/questions/70986/comma-in-macro-parameters
-- escaping square brackets https://tex.stackexchange.com/questions/6683/escaping-square-braces
-- escaping curly braces https://tex.stackexchange.com/questions/181118/how-to-escape-curly-braces-within-texttt
 ** what
 !!
 https://www.cambridge.org/core/journals/theory-and-practice-of-logic-programming/article/structured-alternative-to-prolog-with-simple-compositional-semantics/3E4B4198D74D6A2EC92DF4D6DC78DDE3
