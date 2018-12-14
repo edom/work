@@ -26,6 +26,7 @@ For most pages, the title is a goal, and the content is the ongoing journey to a
     - Software engineering
         - Forward software engineering
             - [Making lasting software sooner]({% link softeng.html %})
+                - [Designing programming languages]({% link proglang.html %})
                 - [Using Prolog]({% link prolog.html %})
                 - Making the only programming language we will ever need
                     - Modeling

@@ -10,9 +10,36 @@ Estimation may be wrong.
 
 If you have some common goals, get in touch, drop a comment.
 We should join forces to reach our shared goals.
-* ?7d: Implement PLX (Prolog-LaTeX-XML) markup language
+* ?7d: Implement LMX (LaTeX-Markdown-XML) markup language
+LMX is a LaTeX-like surface syntax for XML;
+this enables you to replace the closing tag with a closing brace.
+
+Features:
+- citeproc? bibtex? biblatex? bibliography management?
+- export to HTML for web publishing
+- word count, to replace page numbers as navigation aid
+
 #+BEGIN_EXAMPLE
-\Tag[Attr1=Val1,Attr2=Val2]{Content} translates to <Tag Attr1=Val1 Attr2=Val2>Content</Tag>
+This is a paragraph.
+Separate a paragraph with a blank line.
+
+This is another paragraph.
+
+- This is a list.
+
+\passthru{
+WHAT.
+}
+
+\cite{foo}
+
+\bibliography
+
+LMX \Tag[Attr1=Val1,Attr2=Val2]{Content} translates to XML <Tag Attr1=Val1 Attr2=Val2>Content</Tag>
+\ul{
+  \li{This is the first item.}
+  \li{This is the second item.}
+}
 
 \div[class=foo]{
   \div[class=bar]{
@@ -34,14 +61,33 @@ Escape a curly brace by prepending a backslash.
   \tr{\td{Foo}\td{Bar}}
 }
 
+inline math \( 1 + 2 \)
+
+environments
+\begin{align}
+1 + 2 &= 3
+\\
+4 + 5 &\neq 6
+\end{align}
+
 \strong{\em{strong emphasized text}}
 
 \p{This is an example paragraph. It may contain \em{emphasis}.}
 \p{ Leading and trailing whitespaces are stripped away. }
 \p{\ Backslash-space escapes a space that would otherwise be ignored.}
 
+HTML entities:
+
 \nbsp expands to &nbsp;
 #+END_EXAMPLE
+
+Difference from TeX/LaTeX:
+- In TeX, "\a b" inserts no space.
+  We insert a space.
+  If you don't want a space, write "\a{}b" or "{\a}b".
+- In LaTeX, you use "\bibliography{FILE}".
+  In LMX, you use "\bibliography",
+  and specify the FILE from the command line or from Prolog code.
 
 Similar but not the same
 1999 "TEXML: Typesetting XML with TEX"
@@ -200,41 +246,6 @@ array_array_concat(A, B, C) :-
     subarray_subarray_match(B, 0-NB, C, NA-NC).
 
 Replace equal with match
-* Three semantics of Horn clauses
-We use "cause semantics" for gui.
-
-Rule semantics
-A :- B means "If B then A".
-
-turn_on_air_conditioner :- air_feels_hot.
-
-Proof semantics of Prolog
-A :- B means to prove A, prove B.
-even(z).
-even(s(s(N))) :- even(N).
-
-Cause semantics of Prolog
-A :- B means B causes A.
-name_value(mytextbox, yes) :- name_isdown(mybutton, true).
-That means "pressing mybutton causes mytextbox value to be yes".
-* Prolog meta-thinking: logic, language, query, and modeling: how many parameters should we use?
-Consider these models:
-#+BEGIN_EXAMPLE
-0 john_loves_mary
-1 john_loves(mary)
-2 loves(john,mary)
-3 subject_verb_object(john,love,mary)
-#+END_EXAMPLE
-
-If we want to pattern match on it, or quantify it (existentially or universally), then it should be a parameter.
-Example:
-- "Who does John love" can not be answered by 0.
-- "Who loves who" can not be answered by 1.
-- "Who does what to whom" can not be answered by 2.
-- "Who does what to whom at what time" can not be answered by 3.
-
-Thus the number of parameters in our model depends on the complexity of the queries that we anticipate.
-Thus when designing a logic program, we should begin with the /queries/ that we want to anticipate.
 * TODO <2018-09-15> Modernize operating system
 ** 1d: Back up data.
 Should not take more than a day.
@@ -292,175 +303,6 @@ This implies that there is a common semantics between L, M, and the language of 
 How do we write programs directly in language of thought?
 Logic is the language of thought?
 The 10 most used human language contains first-order logic.
-* Modeling everything = name-property-value + subject-verb-object + time
-Model of everything
-Entity-attribute-value
-I call it "name-property-value" to get in line with the terms used in philosophy
-https://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model
-
-name-property-value
-
-"The color of mycar is black."
-:- multifile name_property_value/3.
-name_property_value(mycar, color, black).
-name_property_value(mydb, type, database).
-name_property_value(mydb, subtype, postgresql).
-name_property_value(mydb, is_a, database).
-
-I think, if the knowledge base is big, it will be very confusing to trace which rule causes which name to have which property.
-
-name_property_value(N, host, V) :-
-    name_property_value(N, type, database),
-    name_property_value(N, spec, Spec),
-    member(host(V), Spec).
-
-"Show me all databases."
-?- name_property_value(E, type, database).
-% press semicolon repeatedly
-
-"X is a database" vs "The type of X is database" (The attribute "type" of X has the value "database")
-* Designing the best module system in 2018: Name is not a property of anything
-** Executive summary
-To avoid name clash, your module system must satisfy these:
-- The user of a module, not the module itself, decides what to call that module.
-Modules must not name itself.
-In ontological terms, the name of a module is not a property of that module, but is something that the user of that module uses to refer to that module.
-- A module can contain other modules.
-** Philosophical investigation
-Designing anything good:
-Name is not a property of anything.
-Name is a linguistic artifact that we use to refer to something.
-A function does not have a name.
-A predicate does not have a name.
-Languages that gets this right: JavaScript, Lisp, Scheme.
-
-A language must clearly separate names and referents (the things that the names refer to).
-
-If Prolog is to have anonymous predicates, then it works with second-order logic, no longer with first-order logic.
-
-If you satisfy those constraints, your module system will be free of name clashes.
-
-The job of a module is to disambiguate names.
-Example: which "member/2" do we mean?
-** Languages that does this right
-JavaScript and Ocaml's local import is interesting.
-
-Languages that has satisfactory module systems:
-JavaScript, TypeScript.
-JavaScript can even do local-scoped import.
-```
-let foo = require("foo.ts");
-```
-
-Languages that has unsafisfactory module systems:
-Ocaml, Haskell, Prolog, C, C++, Java, Scheme, Lisp.
-** What should SWI-Prolog modules be?
-We want these to separate names and referents:
-- anonymous modules
-- anonymous predicates
-- load file content into an anonymous module
-
-consult(++FilePath, --Module)
-
-SWI-Prolog module/1 option of load_files/2 enables the caller to separate a name and a module.
-A module still has to be named, but now the module user decides the name.
-
-A module is a dictionary.
-
-SWI-Prolog dynamic module may be saving grace.
-
-Prolog has dynamic scoping.
-Dynamic scoping is a mistake.
-Prolog should have lexical scoping.
-
-Explicit linking directive
-modulename_filepath(foo, library(mylib/foo))
-
-** Prolog module clash = game over? Can logtalk save the day?
-https://logtalk.org/rationale.html
-- comparison of the module systems of various Prolog implementations
-* Toward a the best declarative programming language
-** Prolog
-
-"David Liddle's idea on application user interfaces give us a clue as to why lower-level languages draw more people in than higher-level ones (Liddle, 1989). He claims that the most important aspect of a good user interface is how well it leads the user to an accurate conceptual model of how the application works. If the user develops an accurate conceptual model, then the application works as expected. This leads the user to try more things, which also work as expected, leading to an even better understanding, thus drawing the user further and further into the tool."
-https://www.amzi.com/articles/prolog_under_the_hood.htm
-
-Prolog without assert?
-https://www.mercurylang.org/information/doc-latest/mercury_trans_guide/AssertRetract.html
-
-Translate
-
-nat(z).
-nat(s(X)) :- nat(X).
-
-suc(X, s(X)).
-
-- https://stackoverflow.com/questions/20511060/parsing-an-expression-in-prolog-and-returning-an-abstract-syntax
-  - "you did something quite smart [...] That is fine. However, this strategy is inherently very inefficient"
-  - "There is a general way how to fix this: Add another pair of arguments to encode the length."
-
-1988, Towards functional programming in Prolog
-ftp://obaluae.inf.puc-rio.br/pub/docs/Publications/88_AI_Furtado_SINPLAN.Not.pdf
-It defines several infix operators.
-"[...] The problem of evaluating expressions combining functions and predicates
-is investigated. Examples are provided to illustrate the discussion. The paper includes a prototype implementation."
-
-2.7.1 "Axiomatizing Context-Free Grammars"
-http://www.mtome.com/Publications/PNLA/prolog-digital.pdf
-See third paragraph: "the general statement made by the context-free rule [...] can be summarized using relations on positions with the following logical statement [...]"
-** Combining lambda-calculus and first-order logic: combining beta-reduction, unification, and backtracking
-Anonymous function: \ x -> x + 1
-Anonymous predicate: \ a b c -> f a, g b, h c
-fix f = f (fix f)
-
-father_child(dad, kid).
-father_child(daddy, kiddo).
-
-:- operator --
-father(daddy) -- child(kiddo).
-
-father_child dad kid
-father_child daddy kiddo
-father dad -- child kid
-
-father_child = \ dad kid
-father_child = \ Dad Kid -> Dad = dad, Kid = kid
-
-"First-order logic without equality"
-https://math.stackexchange.com/questions/363168/first-order-logic-without-equality
-
-"Differences between logic with and without equality"
-https://mathoverflow.net/questions/316648/differences-between-logic-with-and-without-equality
-
-
-Isn't this Curry language?
-Curry's slogan is "A Truly Integrated Functional Logic Language"
-
-There are at least two camps of the declarative programming languages:
-- Start from Prolog, move toward Haskell.
-- Start from Haskell, move toward Prolog.
-  Example: Curry.
-
-
-Lambda-Prolog, Harrop formula
-Why was Harrop formula defined?
-What's so special about it?
-https://en.wikipedia.org/wiki/Harrop_formula
-
-Lambda-Prolog
-
-https://math.stackexchange.com/questions/2494645/lambda-calculus-combined-with-first-order-logic-notation-quantifiers-propositi
-
-"But languages aren't tools! IDEs are tools. Languages are material. See FallacyOfTheRightTool."
-http://wiki.c2.com/?QuestForThePerfectLanguage
-** Wanted: a programming language with sound philosophical foundation, a language that strictly separates names and referents
-An example of a language that does naming wrong is C:
-into add1 (int x) { return x + 1; }
-In that C fragment, the name "add1" is a property of the routine.
-
-An example of a language that does naming right is JavaScript:
-var add1 = function (x) { return x + 1; }
-In that JavaScript fragment, "add1" is not a property of the function, but "add1" is a name by which we refer to the function.
 * Describe a probabilistic graphical model as prolog knowledge base, and do Pearl causal calculus on them.
 Causal calculus in prolog?
 
@@ -666,52 +508,5 @@ Maintain cursor.
 Translate a Prolog fragment to SQL-involving Prolog fragment.
 
 Write your program as if all the data were in Prolog RAM?
-* Prolog predicate naming
-blue(X)
-has(A,B)
-can_sing(A)
-version(A,B,C)
-person_name(P,N)
-index_fibonacci
-index_list_element
-
-class_field
-table_column
-column_type
-
-class(Atom) is true iff Atom is a referent.
-
-table(Atom) has different namespace
-
-class_field(Cls, F) :- table_column(T, Col), field_name(F, N), column_name(Col, N).
-
-Metamodel
-A thing is modeled as an association list such as [a=b,c=d,e=f]
-alist_key_value([K=V|_],K,V).
-alist_key_value([_|R],K,V) :- alist_key_value(R,K,V).
-
-alist_empty
-alist_tail
-alist_head
-alist_without_keys
-alist_size
-alist_merge
-
-thing_prop(T,P)
-thing_prop_replaced(T0,P,T1)
-Use thing_prop_replaced(T,P,T) to get the property P of T
-
-
-url_page
-
-There is a difference between dif and \=: dif is coroutining.
-https://stackoverflow.com/questions/16560058/difference-between-x-y-and-difx-y
-But "coroutine" is an overloaded term.
-http://www.swi-prolog.org/pldoc/man?section=delcont
-
-
-Prolog predicate naming problem when there is a compound word
-integer_integer_sum(A, B, C)
-basic_block__ssa_block()
 * <2018-12-14> Find a place in this website for meta-thinking
 Meta-thinking currently resides at philo.html
