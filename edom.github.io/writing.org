@@ -396,3 +396,23 @@ Example:
 - https://github.com/eakbas/TSPW
 - https://tylercipriani.com/blog/2014/05/13/replace-jekyll-with-pandoc-makefile/
 - http://brackets.io/
+* Combining wiki, blog, and forum?
+https://hapgood.us/2016/02/22/can-blogs-and-wiki-be-merged/
+- "Wiki values are often polar opposites of blogging values.
+  Personal voice is meant to be minimized.
+  Voices are meant to be merged.
+  Rather than serial presentation, wiki values treating pages as nodes that stand outside of any particular narrative, and attempt to be timeless rather than timebound reactions."
+  Exactly!
+- Federated wiki tries to merge blog and wiki?
+- "Wikum" combines wiki and forum.
+  It uses recursive summarization
+- https://www.nateliason.com/blog/wiki-strategy
+* Pandoc woes
+#+BEGIN_EXAMPLE
+pandoc --mathjax -f org -t html philo.org --lua-filter _includes/pandoc_filter.lua
+#+END_EXAMPLE
+
+Pandoc: How to avoid generating org-mode custom-id property drawer for internal linking?
+
+Pandoc org output mishandles pipe character in inline math in table cell?
+Or is the markdown input invalid indeed?

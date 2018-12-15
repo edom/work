@@ -10,14 +10,66 @@ Estimation may be wrong.
 
 If you have some common goals, get in touch, drop a comment.
 We should join forces to reach our shared goals.
-* ?7d: Implement LMX (LaTeX-Markdown-XML) markup language
+* Write a Prolog static site generator to translate Org-Mode and Markdown to HTML
+** Do I really need to do this?
+Let's try other options first:
+- org, pandoc, pandoc-citeproc, without emacs org exporter.
+  Should I trust pandoc-citeproc?
+- Use pandoc-scholar.
+  Should I trust pandoc-scholar?
+- set up vim markdown folding, or get a markdown editor that can fold sections, maybe vscode
+  - https://vi.stackexchange.com/questions/9543/how-to-fold-markdown-using-the-built-in-markdown-mode
+  - I think I'll try this.
+    I prefer vim to emacs because I can move around much faster in vim.
+    Vim is designed for motion.
+    Emacs is designed for extensibility.
+- regex to replace org =***= with markdown =###= (god forbid)
+** Features, goals, and constraints
+This basically reimplements some of Pandoc in Prolog.
+
+I need this big yak shaving because:
+- I need citations in my file:proglang.org.
+- I don't trust Emacs.
+- I don't trust org-ref.
+- I don't trust the interaction between org, pandoc, and pandoc-citeproc.
+- I feel Emacs is too slow.
+- I hate editing and compiling Pandoc; GHC is slow.
+- Markdown is not enough.
+
+Problem:
+- pandoc can't read org metadata/directives?
+
+The constraints:
+- The user edits the file using unmodified Emacs Org-Mode.
+
+Work breakdown:
+- citeproc? bibtex? biblatex? bibliography management?
+- Citing from website.
+- The program exports the Org files to HTML for web publishing without using the slow Emacs Org Exporter.
+- Parse LaTeX begin end environment.
+- YAML metadata preamble.
+- Generate local table of contents for each section that has more one or more child.
+- word count, to replace page numbers as navigation aid
+- Why bibtex?
+  Because Google Scholar exports bibtex.
+  We can then just copy the bibtex fragment from Google Scholar.
+- Parse Org Mode.
+  - Inline: bold, italic, underline, code, at-at-html.
+  - Heading.
+  - Block: EXAMPLE, SRC, HTML
+  - Syntax highlighting in code blocks?
+    We skip this because this is not essential.
+
+VERY IMPORTANT: the ability to handle citations without slowing down everything
+
+We can use http://www.swi-prolog.org/pack/list?p=bibtex
+
+We are going to use LMX instead of https://github.com/SWI-Prolog/packages-ltx2htm
+** ?7d: Implement LMX (LaTeX-Markdown-XML) markup language
 LMX is a LaTeX-like surface syntax for XML;
 this enables you to replace the closing tag with a closing brace.
 
-Features:
-- citeproc? bibtex? biblatex? bibliography management?
-- export to HTML for web publishing
-- word count, to replace page numbers as navigation aid
+LMX is a combination of Org-Mode.
 
 #+BEGIN_EXAMPLE
 This is a paragraph.
@@ -127,6 +179,20 @@ Facebook: Mastodon?
 
 YouTube: DTube, BitChute
 https://www.ghacks.net/2018/03/02/dtube-is-more-than-a-youtube-alternative/
+
+Heroku?
+
+"An Open Source, Self-Hosted Heroku"
+https://news.ycombinator.com/item?id=12703121
+https://www.bitmatica.com/blog/an-open-source-self-hosted-heroku/
+"Internals of OpenRuko PaaS, an open source Heroku clone implementation"
+https://www.slideshare.net/rogerleite14/paa-s-26212382
+https://github.com/dokku/dokku
+https://github.com/openruko
+https://flynn.io/
+https://www.quora.com/What-are-some-open-source-Heroku-alternatives
+
+https://www.quora.com/What-are-some-open-source-Heroku-alternatives
 * Write a user-first browser in Prolog
 ** 1h: Specify desired features and differences from mainstream browsers
 Principle: the user should have maximum control.
@@ -158,6 +224,11 @@ It is a tool for controlling your web experience.
 - combine with caching, peer-to-peer caching, distributed (and social?) searching and ranking and sharing, but what about privacy and the people who try to game the system?
 - Don't remember tabs when closed.
 Limit open tabs to 10. Discourage context-switching. I'm a pathological tab hoarder. Always open a configurable set of tabs on start. If you need to open more tabs, then open a google docs or a note-taking app instead.
+
+- Write a fast, private, and secure web browser in Prolog.
+  - Features:
+    - Selectively enable JavaScript from some websites with Prolog rules.
+    - Disable clipboard hook.
 ** 1h: Skim existing browsers
 Is this legit?
 https://vivaldi.com
@@ -510,3 +581,14 @@ Translate a Prolog fragment to SQL-involving Prolog fragment.
 Write your program as if all the data were in Prolog RAM?
 * <2018-12-14> Find a place in this website for meta-thinking
 Meta-thinking currently resides at philo.html
+* <2018-12-15> Bootstrap GHC?
+https://twitter.com/ErikDominikus/status/1073726987338842112
+
+How about writing a Haskell interpreter with Prolog?
+I guess Haskell type checker takes ~100 lines of Prolog, and parser takes ~200 lines.
+It may be doable in a month.
+I have ~20 lines of Prolog type-checking Haskell AST but without type classes.
+
+Add ~500 more lines of Prolog metaprogram for translating lists to arrays,
+~2000 more lines for translating Prolog to optimized x86_64 native code (if not reinventing LLVM), 1 more month, and ... we may beat GHC at its own game? :)
+* Write a language suite in Prolog: write C and Haskell parser, interpreter, and compiler?
