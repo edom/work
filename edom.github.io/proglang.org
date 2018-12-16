@@ -416,6 +416,7 @@ What Ocaml does right:
 Ocaml design mistake: Tying module name to file name.
 "Source files in OCaml are tied into the module system, with each file compiling down into a module whose name is derived from the name of the file."
 https://v1.realworldocaml.org/v1/en/html/files-modules-and-programs.html
+
 ** What is a type? Understanding what a type is from how it is used
 Mathematically, A type is a set whose membership is syntactically decidable.
 
@@ -454,8 +455,11 @@ What principles should we follow when we design a language?
 - https://news.ycombinator.com/item?id=8045115
     - [[https://existentialtype.wordpress.com/2011/03/19/dynamic-languages-are-static-languages/][Dynamic Languages are Static Languages | Existential Type]]
 ** Church types and Curry types
-- https://lispcast.com/church-vs-curry-types/
-- [[https://www.reddit.com/r/programming/comments/2cavea/church_vs_curry_types_two_conflicting_perspectives/][Church vs Curry Types -- Two conflicting perspectives : programming]]
+Things to read:
+- 2008, article, "Church and Curry: Combining Intrinsic and Extrinsic Typing", Frank Pfenning https://www.cs.cmu.edu/~fp/papers/andrews08.pdf
+- Basic comparison between Church types and Curry types
+  - https://lispcast.com/church-vs-curry-types/
+  - [[https://www.reddit.com/r/programming/comments/2cavea/church_vs_curry_types_two_conflicting_perspectives/][Church vs Curry Types -- Two conflicting perspectives : programming]]
 ** Row polymorphism
 Why is it called row polymorphism?
 Where is the row?
@@ -491,19 +495,16 @@ https://cs.stackexchange.com/questions/53998/what-are-the-major-differences-betw
 *** Row polymorphism vs structural subtyping
 https://news.ycombinator.com/item?id=13047934
 ** what
-
 - Liquid Haskell https://ucsd-progsys.github.io/liquidhaskell-blog/
 - [[https://brianmckenna.org/blog/row_polymorphism_isnt_subtyping][Row Polymorphism Isn't Subtyping - BAM Weblog]]
 - recursive types http://ecee.colorado.edu/~siek/ecen5013/spring10/lecture15.pdf
 - http://tomasp.net/coeffects/
-- 2008, article, "Church and Curry: Combining Intrinsic and Extrinsic Typing", Frank Pfenning https://www.cs.cmu.edu/~fp/papers/andrews08.pdf
 - From Wadler home page
   - [[http://groups.inf.ed.ac.uk/abcd/][From Data Types to Session Types: A Basis for Concurrency and Distribution]]
 - [[https://www.reddit.com/r/dependent_types/comments/8qig0u/vectors_are_records_too_pdf/][Vectors are records, too (pdf) : dependent_types]]
 - https://wiki.haskell.org/Untypechecking is "converting from a type to a term".
 - NOOL 2016 article "Static Typing Without Static Types — Typing Inheritance from the Bottom Up" [[http://www.it.uu.se/workshop/nool16/nool16-paper4.pdf][pdf]]
 - https://en.wikipedia.org/wiki/Literate_programming
-
 ** Parametricity
 - Every recursive type can be written as `mu a. F a` where F is the associated free functor?
     - Example: `List a = Fix (F a)` where `F a b = 1 + a * b`.
@@ -3600,6 +3601,11 @@ Dbpure similar to plspec
 
 "(Parnas, Shore & Weiss 1976) identified five definitions of a 'type'"
 https://en.wikipedia.org/wiki/Data_type
+
+- Old content to be reorganized
+  - Functional programming research
+    - Functional programming in the real world
+      - Philip Wadler's list [[http://homepages.inf.ed.ac.uk/wadler/realworld/][Functional Programming in the Real World]]
 * Programming language design mistakes
 #+TOC: headlines 1 local
 ** Justifying the creation of yet another programming language
@@ -3967,3 +3973,27 @@ https://www.martinfowler.com/articles/languageWorkbench.html
 2006, "A growable language"
 "programming language designers should plan for such growth, along with the growth of a user community"
 https://dl.acm.org/citation.cfm?id=1176621
+* Functions as semantics of lambda calculus?
+Key idea:
+A lambda abstraction is not a function,
+but a function can be the semantics of a lambda abstraction.
+
+A semantic of a lambda abstraction is a function, that is,
+a triple \((A,B,M)\) where \(A\) is the domain, \(B\) is the codomain, and \(M\) is the mapping.
+
+What is the semantic of \( \lambda x . x x \)?
+What is the semantic of \( (\lambda x . x x) (\lambda x . x x) \)?
+
+For every set \(A\):
+\begin{align*}
+(A,A,I_A) \models \lambda x. x
+\end{align*}
+where \(I_A = \{ (x,x) ~|~ x \in A \}\).
+
+\begin{align*}
+(X,Y,A) \models \lambda x y. x y
+\end{align*}
+
+Let \(F = (A,B,f)\) be a function.
+
+Let \(G = (F \times A, B, g)\) be a function where \( g(f,x) = f(x) \).

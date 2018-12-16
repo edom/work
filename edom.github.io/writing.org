@@ -1,78 +1,53 @@
 #+TITLE: Writing
 #+DATE: 2017-05-20 21:29:00 +0700
 #+PERMALINK: /writing.html
-* What?
-- Links
+#+OPTIONS: ^:nil toc:1
+* About reading and writing
+#+TOC: headlines 1 local
+** Why do we write? Readers.
+Why do we write?
+Because someone /needs/ to read it.
+At least your future self should need to read it.
+The reader is the writer's reason for existing.
+There is no point in writing something that will not be read.
+If you can't think of anyone who would read it, don't write it.
 
-  - [[https://en.wikipedia.org/wiki/Content_Engineering][WP:Content engineering]]
+Why do we read?
+So that we do not start from zero.
+Inter-generation knowledge transfer.
+Human progress will stop if we have to reinvent everything our ancestors did; we would die only to repeat history.
+If we live for 80 years, and we need 30 years to catch up with our ancestors' 2000 years of knowledge, then we have 50 years to advance human knowledge.
 
-- Books should be shorter.
-
-  - I think a 100-page popular book has only 1 page of useful information.
-  - [[https://en.wikipedia.org/wiki/Inverted_pyramid_(journalism)][WP:Inverted pyramid]]
-
-    - Begin with the most important statement.
-    - The rest of the book supports that statement.
-
-- Undigested information
-
-  - [[https://news.ycombinator.com/item?id=10739227][YC:The sad state of personal knowledgebases]]
-  - [[https://www.quora.com/Which-is-better-Markdown-or-Textile?share=1][Quora: Which is better, Markdown or Textile?]]
-
-- Why do we write?
-
-  - Because someone needs to read it.
-
-    - At least your future self should need to read it.
-
-  - The reader is the writer's reason for existing.
-  - If you can't think of anyone who would read it, don't write it.
-
-- What should we write?
-
-  - Something that someone needs to read.
+What should we write?
+Something that someone /needs/ to read.
 
 - Why do we read?
   What do we need to read?
-
   - Why do we need anything?
-
     - Either for survival or for curiosity.
     - Human brain has evolved two instincts: survival and curiosity.
-
       - We become anxious when our survival is threatened.
       - We become happy when our curiosity is satisfied.
       - We become bored when we run out of things that make us curious.
-
     - Thus the root cause of every human action is either survival or curiosity.
-
   - Thus we read to survive (avoid death) and decuriousify (to avoid boredom).
 
-- Why do I write?
-
-  - *To connect my future self and my past self*.
-    Sometimes my past self makes a decision that my future self regrets.
-    When that happens, my future self wants to trace back
-    how my past self could have made such decision.
-  - *To change the world to what I want it to be*.
-    I think writing is the most efficient way of
-    spreading information and influencing people.
-    Telepathic broadcasting would be more efficient,
-    but I don't know how to do that.
-    Anyway, it's up to the world
-    whether they want to change.
-  - *To save your time*.
-    I'm happy when my writing helps you understand something faster.
-
-- Architecture
-
-  - Each document in this site is a living document.
-  - Decision: a website, not a book.
-
-    - Reason: To minimize the readers' effort.
+Why do I write?
+- *To connect my future self and my past self*.
+  Sometimes my past self makes a decision that my future self regrets.
+  When that happens, my future self wants to trace back
+  how my past self could have made such decision.
+- *To change the world to what I want it to be*.
+  I think writing is the most efficient way of
+  spreading information and influencing people.
+  Telepathic broadcasting would be more efficient,
+  but I don't know how to do that.
+  Anyway, it's up to the world
+  whether they want to change.
+- *To save your time*.
+  I'm happy when my writing helps you understand something faster.
 
 - Rules
-
   - As long as this site is hosted on GitHub,
     all contents in this site shall follow the
     [[https://help.github.com/articles/github-terms-of-service/][GitHub Terms of Service]].
@@ -80,48 +55,33 @@
     They must not slow down the page.
     They must not cover the content.
   - Pop-ups are not OK.
-
 - The technology decisions for this wiki and why:
-
   - Use technology that should still work at least until year 2100.
-
     - Use only free open-source technologies with proven maintenance track record.
     - Enable rebuilding of the website somewhere else quickly.
-
   - Use Jekyll-powered GitHub Pages. If GitHub screws us, we buy a new domain, move to AWS, and ask Google to reindex.
   - Use GitHub Flavored Markdown. If Jekyll screws us, we switch to Pandoc.
   - Markdown weaknesses:
-
     - The original Markdown doesn't have tables.
     - Proliferation of incompatible dialects.
-
   - Wiki vs blog, page vs post
-
     - A page is timeless. Its usefulness should not depend on time.
       Old pages are still useful.
     - A post is time-sensitive. Its usefulness depends on time.
       Old posts are useless.
     - Posts are good for news, updates, changelogs, diffs.
-
   - Alternatives?
-
     - http://community.schemewiki.org/
     - http://www.nongnu.org/skribilo/
     - Skribilo is a free document production tool that takes a structured document representation as its input
       and renders that document in a variety of output formats: HTML and Info for on-line browsing, and Lout and
       LaTeX for high-quality hard copies.
-
 - 2017-05-18
-
   - What to write?
-
     - Something you want to write.
     - Something a group of people want to read.
-
 - 2017-05-18
-
   - Installing Jekyll on Ubuntu 14
-
     - Ubuntu 14 has Ruby 1.9.1 package and Jekyll 0.11.2.
     - Jekyll 3.4.3 requires Ruby 2.
     - [[https://www.ruby-lang.org/en/downloads/][Download Ruby 2.4.1]].
@@ -176,7 +136,33 @@
           A writing published on the Internet is also an asset for generating traffic and trust,
           which can sometimes then translate into money through advertising
           (or whatever you can convert others' trust to).
+** Undigested information
+- [[https://news.ycombinator.com/item?id=10739227][YC:The sad state of personal knowledgebases]]
+- [[https://www.quora.com/Which-is-better-Markdown-or-Textile?share=1][Quora: Which is better, Markdown or Textile?]]
+- Links
+  - [[https://en.wikipedia.org/wiki/Content_Engineering][WP:Content engineering]]
+** How much do we read in one day?
+Assume that I read 500 words per minute with 80% comprehension.
+
+Assume that I read 8 hours (480 minutes) per day.
+
+Thus at best I read 240,000 words per day.
+
+Assume that there are 500 words per page.
+
+Thus at best I read 480 pages per day.
+
+If we fix the eye and move the text instead, we read faster.
+I can read 1500 words per minute (750 word pairs per minute) with 80% comprehension.
+- https://zapreader.com/
+- words per minute: 1500
+- chunk size: 2
+
+The problem: it doesn't work images and inline math.
+
+Assume that I can listen to 300 wpm screen reader with 80% comprehension.
 * Using languages
+#+TOC: headlines 1 local
 ** "The length of a sentence isn’t what makes it hard to understand—it’s how long you have to wait for a phrase to be completed."
 - "Why this sentence is hard to understand" https://www.businessinsider.com/why-this-sentence-is-hard-to-understand-2015-3/
   - "The length of a sentence isn’t what makes it hard to understand—it’s how long you have to wait for a phrase to be completed."
@@ -202,7 +188,78 @@ We just need one word that means "that person".
 
 English history?
 - [[https://en.wikipedia.org/wiki/Singular_they#Older_usage][WP:Singular they, older usage]]
-* Writing for screen or web
+** How to write: recursive-modification structures in writing
+*** The importance of the first sentence of each paragraph
+Write such that the reader can summarize your writing just by reading the first sentence of each paragraph.
+*** The table of contents must tell the readers how they will benefit by reading the book.
+*** If there is any conclusion, then it should be the first chapter.
+*** The abstract explains how the readers will benefit by reading the article.
+*** Modification hierarchy
+- Adjective modifies noun.
+- Predicate modifies subject.
+- Support sentence modifies thesis sentence.
+- Support paragraph modifies thesis paragraph.
+- Subsection modifies its parent section.
+
+Example of modification:
+- Car
+- Red car
+- The red car is so expensive.
+- The red car is so expensive.
+  I could buy two houses with that.
+
+Another example:
+- Boy
+- Bad boy
+- He is a bad boy.
+- He is a bad boy.
+  However, he loves his family.
+*** Paragraph structure
+Every paragraph should have this form: "Thesis. Modifier 1. Modifier 2. ... Modifier N."
+
+The first sentence of a paragraph is the paragraph's /thesis/.
+The other sentences supports, clarifies, limits, or modifies the thesis.
+
+Bad paragraph: thesis sentence at end of paragraph.
+"He is a bad boy. She is a bad girl. Together they destroy this family."
+
+Good paragraph: thesis sentence at beginning of paragraph.
+"The bad boy and the bad girl together destroy this family."
+** Arguing strongly
+*** A strong argument has few objections.
+Consider whether the reader can understand.
+
+First, state the thesis.
+
+Then, state the objections.
+Think of as many objections as you can.
+Try to refute your own thesis.
+
+Then, state the supports.
+
+Each objection is another argument or an axiom.
+
+Each support is another argument or an axiom.
+
+Write no unnecessary words.
+
+An argument is a chain of reasons.
+*** Refuting a definition
+We can refute a definition by showing that it leads to undesirable consequences.
+** Writing
+The subject should be short.
+
+The predicate should appear as early as possible.
+
+Example:
+- Bad: "Alice, Bob, Charlie, John, Jack, Jane, and Judy /went/ to the same class."
+- Good: "These people /went/ to the same class: Alice, Bob, Charlie, John, Jack, Jane, Judy."
+
+Example:
+- Bad: "The expensive new red car that once belonged to Alice now /belongs/ to Bob."
+- Good? "The car /changed hands/ from Alice to Bob."
+  - I hate idioms and set phrases. They reduce uniformity, consistency, and predictability.
+* Technology for academic writing for screen or web
 ** Writing for screen
 - Design your text so that the reader can read it continuously and can resume arbitrarily.
   - A page should be finishable in one sitting (about 15 minutes perhaps?).
@@ -251,95 +308,42 @@ Times New Roman, Arial, and Courier New don't mix: They have painfully different
 DejaVu families may only be widely available on libre software platforms.
 I don't know the situation on Windows and Mac.
 ** Don't just collect links. Comment them. Opine. Think.
-* My opinions about writing
-** My old opinions that I no longer believe
-*** Paragraphs should be replaced with bulleted lists.
-- One list item may contain more than one sentences.
-- People who disagree:
-  - https://www.quora.com/Should-we-replace-all-paragraphs-with-bullet-points-in-answering-questions
+** Academic Web authoring
+Jekyll's Liquid markup ={% raw %}{% link %}{% endraw %}= is dirty and wrong.
+The semantically correct way is to transform HTML DOM relative links.
 
-<2018-11-06>
-I don't believe this anymore.
-Paragraphs with first-sentence thesis are more readable.
-* How to write: recursive-modification structures in writing
-** The importance of the first sentence of each paragraph
-Write such that the reader can summarize your writing just by reading the first sentence of each paragraph.
-** The table of contents must tell the readers how they will benefit by reading the book.
-** If there is any conclusion, then it should be the first chapter.
-** The abstract explains how the readers will benefit by reading the article.
-** Modification hierarchy
-- Adjective modifies noun.
-- Predicate modifies subject.
-- Support sentence modifies thesis sentence.
-- Support paragraph modifies thesis paragraph.
-- Subsection modifies its parent section.
+The end goal is to generate HTML.
+So why don't we just write the source in HTML?
 
-Example of modification:
-- Car
-- Red car
-- The red car is so expensive.
-- The red car is so expensive.
-  I could buy two houses with that.
+1. Paragraph in table.
+2. Outlining support. Is this important? Jumping around is inefficient. It's more efficient if we write sequentially.
 
-Another example:
-- Boy
-- Bad boy
-- He is a bad boy.
-- He is a bad boy.
-  However, he loves his family.
-** Paragraph structure
-Every paragraph should have this form: "Thesis. Modifier 1. Modifier 2. ... Modifier N."
+Assumptions:
+- no graphics, no images
+- some mathematics
+- programming language researcher
 
-The first sentence of a paragraph is the paragraph's /thesis/.
-The other sentences supports, clarifies, limits, or modifies the thesis.
+Write directly in prolog?
 
-Bad paragraph: thesis sentence at end of paragraph.
-"He is a bad boy. She is a bad girl. Together they destroy this family."
+#+BEGIN_EXAMPLE
+document(Id, Meta, ["
+\metadata{
+}
+Hey.
 
-Good paragraph: thesis sentence at beginning of paragraph.
-"The bad boy and the bad girl together destroy this family."
-* Arguing strongly
-** A strong argument has few objections.
-Consider whether the reader can understand.
+Para \em{strong}.
 
-First, state the thesis.
+\a[href=internal:OtherdocId]{whatsit}
+"]).
+document(Id,
+#+END_EXAMPLE
 
-Then, state the objections.
-Think of as many objections as you can.
-Try to refute your own thesis.
+pandoc-scholar
+https://github.com/pandoc-scholar/pandoc-scholar/blob/master/README.md
 
-Then, state the supports.
-
-Each objection is another argument or an axiom.
-
-Each support is another argument or an axiom.
-
-Write no unnecessary words.
-
-An argument is a chain of reasons.
-** Refuting a definition
-We can refute a definition by showing that it leads to undesirable consequences.
-* How much do we read in one day?
-Assume that I read 500 words per minute with 80% comprehension.
-
-Assume that I read 8 hours (480 minutes) per day.
-
-Thus at best I read 240,000 words per day.
-
-Assume that there are 500 words per page.
-
-Thus at best I read 480 pages per day.
-
-If we fix the eye and move the text instead, we read faster.
-I can read 1500 words per minute (750 word pairs per minute) with 80% comprehension.
-- https://zapreader.com/
-- words per minute: 1500
-- chunk size: 2
-
-The problem: it doesn't work images and inline math.
-
-Assume that I can listen to 300 wpm screen reader with 80% comprehension.
-* Writing system
+"Boilerplating Pandoc for Academic Writing"
+https://www.soimort.org/notes/161117/
+** Academic writing technology
 Evaluate https://pandoc-scholar.github.io/
 "Formatting Open Science: agilely creating multiple document formats for academic manuscripts with Pandoc Scholar"
 
@@ -368,35 +372,12 @@ Org Exporter is slow.
 Pandoc+Lua is better documented?
 
 https://pandoc.org/lua-filters.html#counting-words-in-a-document
-* Web authoring
-
-Jekyll's Liquid markup ={% raw %}{% link %}{% endraw %}= is dirty and wrong.
-The semantically correct way is to transform HTML DOM relative links.
-
-The end goal is to generate HTML.
-So why don't we just write the source in HTML?
-
-1. Paragraph in table.
-2. Outlining support. Is this important? Jumping around is inefficient. It's more efficient if we write sequentially.
-* Writing
-The subject should be short.
-
-The predicate should appear as early as possible.
-
-Example:
-- Bad: "Alice, Bob, Charlie, John, Jack, Jane, and Judy /went/ to the same class."
-- Good: "These people /went/ to the same class: Alice, Bob, Charlie, John, Jack, Jane, Judy."
-
-Example:
-- Bad: "The expensive new red car that once belonged to Alice now /belongs/ to Bob."
-- Good? "The car /changed hands/ from Alice to Bob."
-  - I hate idioms and set phrases. They reduce uniformity, consistency, and predictability.
-* Writing systems?
+** Writing technologies?
 - https://www.authorea.com/users/5713/articles/19359-latex-is-dead-long-live-latex-typesetting-in-the-digital-age/_show_article
 - https://github.com/eakbas/TSPW
 - https://tylercipriani.com/blog/2014/05/13/replace-jekyll-with-pandoc-makefile/
 - http://brackets.io/
-* Combining wiki, blog, and forum?
+** Combining wiki, blog, and forum?
 https://hapgood.us/2016/02/22/can-blogs-and-wiki-be-merged/
 - "Wiki values are often polar opposites of blogging values.
   Personal voice is meant to be minimized.
@@ -407,7 +388,7 @@ https://hapgood.us/2016/02/22/can-blogs-and-wiki-be-merged/
 - "Wikum" combines wiki and forum.
   It uses recursive summarization
 - https://www.nateliason.com/blog/wiki-strategy
-* Pandoc woes
+** Pandoc woes
 #+BEGIN_EXAMPLE
 pandoc --mathjax -f org -t html philo.org --lua-filter _includes/pandoc_filter.lua
 #+END_EXAMPLE
@@ -416,3 +397,28 @@ Pandoc: How to avoid generating org-mode custom-id property drawer for internal 
 
 Pandoc org output mishandles pipe character in inline math in table cell?
 Or is the markdown input invalid indeed?
+** <2018-09-19> Web authoring woes: lack of a set of font families with same x-height
+I need a serif font family, sans-serif font family, a monospaced font family, and a math font family.
+I want all of them to have the same x-height.
+* My opinions about writing
+** Problem with 2018 writings: books are too long
+Books should be structured as an [[https://en.wikipedia.org/wiki/Inverted_pyramid_(journalism)][inverted pyramid]]:
+- Begin with the most important statement.
+- The rest of the book supports that statement.
+
+Books should be much shorter.
+I think a 100-page popular book has only 1 page of useful information.
+
+** My old opinions that I no longer believe
+*** Paragraphs should be replaced with bulleted lists.
+- One list item may contain more than one sentences.
+- People who disagree:
+  - https://www.quora.com/Should-we-replace-all-paragraphs-with-bullet-points-in-answering-questions
+
+<2018-11-06>
+I don't believe this anymore.
+Paragraphs with first-sentence thesis are more readable.
+** Encyclopedias should focus on why and not what
+Wikipedia is dumb data.
+Google is dumb data.
+We need opinion and interpretation to turn data into information.
