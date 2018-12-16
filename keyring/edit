@@ -1,0 +1,2 @@
+#!/bin/bash
+openssl enc -d -bf -in keyring.e -out keyring && vim keyring && openssl enc -bf -in keyring -out keyring.e && shred keyring && sync && rm keyring

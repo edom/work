@@ -11,14 +11,13 @@ link() {
 }
 
 link $DIR/vimrc ~/.vimrc
-
-# https://code.visualstudio.com/docs/getstarted/settings
-
 link $DIR/vscode_user_settings.json ~/.config/Code/User/settings.json
-
 link $DIR/gdbinit ~/.gdbinit
-
-# http://www.swi-prolog.org/pldoc/man?section=initfile
 link $DIR/swiplrc.pro ~/.swiplrc
-# or use -f switch
+link $DIR/bashrc ~/.bashrc
 ```
+
+More info:
+- https://code.visualstudio.com/docs/getstarted/settings
+- http://www.swi-prolog.org/pldoc/man?section=initfile
+    - Alternative to swiplrc: use swipl -f switch

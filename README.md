@@ -8,7 +8,7 @@ I share my goals and knowledge in the website [edom.github.io](https://edom.gith
 ## Things maintained
 
 - [org](org/): org-mode notes; should be exported into edom.github.io
-- [etc](etc/): configuration files for Emacs, Vim, Visual Studio Code, etc.
+- [etc](etc/): operating system configuration files
 - [sh](sh/): shell scripts, mostly Bash
 - [software](software/): a SWI-Prolog 7 knowledge base
 
