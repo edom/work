@@ -13,12 +13,6 @@ Target audience:
 - programming language designers
 - programming language implementors
 
-0 in SKI combinator calculus
-
-1 in Haskell / ML / Ocaml / F# / Scheme / JavaScript / untyped lambda-calculus
-
-2 in Idris / Lean / GHC Core / System F / Coq
-
 I suggest that programming language implementors follow these principles:
 - Maximum composability and name-clash-freedom
   - The language must clearly separate names and referents.
@@ -3606,6 +3600,16 @@ https://en.wikipedia.org/wiki/Data_type
   - Functional programming research
     - Functional programming in the real world
       - Philip Wadler's list [[http://homepages.inf.ed.ac.uk/wadler/realworld/][Functional Programming in the Real World]]
+** How many arguments does id have?
+Iceland_jack asked:
+https://twitter.com/ErikDominikus/status/1074009681553707008
+
+0 in SKI combinator calculus
+
+1 in Haskell / ML / Ocaml / F# / Scheme / JavaScript / untyped lambda-calculus
+
+2 in Idris / Lean / GHC Core / System F / Coq
+
 * Programming language design mistakes
 #+TOC: headlines 1 local
 ** Justifying the creation of yet another programming language
@@ -3997,156 +4001,3 @@ where \(I_A = \{ (x,x) ~|~ x \in A \}\).
 Let \(F = (A,B,f)\) be a function.
 
 Let \(G = (F \times A, B, g)\) be a function where \( g(f,x) = f(x) \).
-* <2018-12-18> Faking untagged unions and equirecursive types in Haskell
-#+TOC: headlines 1 local
-** Information about this article
-This originated as a letter to Abdullah on <2018-12-18>.
-
-Alternative titles:
-- Faking untagged unions and equirecursive types in Haskell
-  - This sounds promising.
-  - But this is misleading.
-    This feature requires modifying the compiler, so the code is not "in Haskell".
-- Inferring and inserting canonical injections in Haskell
-  - This was the original working title.
-- Recovering from trivial type errors in Haskell
-  - Unclear about what is being sold.
-- A monad is a way of conservatively extending all spaces
-** Background
-In Haskell, Just is the /only/ sound way to make a Maybe t from t.
-We call such unambiguous construction a /canonical injection/.
-The compiler should insert canonical injections to recover from trivial type errors.
-Such recovery enables these interesting things:
-- Now we can "fake" non-overlapping untagged unions (Haskell has tagged unions).
-  This reduces the bureaucracy when composing data types following the free-monad/interpreter pattern;
-  the compiler inserts the required Pure constructors.
-- Now we can "fake" equirecursive types (Haskell has isorecursive types).
-  We no longer have to type "In" and "out" when using "Fix";
-  the compiler inserts the required bureaucracy.
-** Overview of contents
-This is what I am going to do in this article, in no particular order:
-- [NOTATION] defines some notations.
-- [DEFINE] defines canonical injections.
-- [DATA] shows the rules for inferring canonical injections for inductive data types.
-- [LAMBDA] shows the rules for inferring canonical injections for lambdas.
-- [HICKEY] shows that Hickey's two wishes are special cases of canonical injections.
-- [MONAD] shows the relationship between canonical injections and Monad instances.
-- [IMPL] sketches a possible implementation, in principle.
-
-This is how I answer your questions:
-- Your first question is answered by [DEFINE], [DATA], and [LAMBDA].
-- Your second question is answered by [HICKEY] and [LAMBDA].
-- Extra things that may be of interest to you are [MONAD] and [IMPL].
-** [NOTATION]
-Notation conventions.
-
-By "injection", I mean an injective function.
-
-"The canonical injection from A to B" means "the only sound injection from A to B".
-By "sound", I mean "not involving bottom (undefined)".
-I assume total functional programming, and I say "the only possible injection" to mean "the only sound injection".
-
-The dependently-typed expression "inj A B" means the canonical injection from A to B, if such canonical injection exists.
-The type of the expression "inj A B" is A -> B.
-** [DEFINE] Examples of canonical injections
-The compiler infers that some constructors are the only possible injections.
-
-Examples of automatic inference of canonical injections:
-- In the case of t -> Maybe t, the compiler can infer that Just is the only possible injection.
-- In the case of a -> Either a b where a != b, the compiler can infer that Left is the only possible injection.
-- In the case of a -> Either a a, there are two injections, and so there is no such thing as the only possible injection.
-** [DATA] Inferring canonical injections for inductive data types
-In general, the compiler infers canonical injections from a data definition using this rule:
-If parameter p occurs exactly once in the right-hand side of the equal sign in "data A p = ...",
-then the constructor that has p is the /canonical injection/ from p to A p.
-
-For example, observe that, in the following definition,
-in the right-hand side of the equal sign:
-- Int occurs twice,
-- String occurs once, and
-- p occurs once.
-#+BEGIN_SRC haskell
-data A p = A0 Int | A1 String | A2 Int | A3 p
-#+END_SRC
-Therefore, from the above definition, the compiler infers that:
-- A1 : String -> A p is the canonical injection from String to A p.
-- A3 : p -> A p is the canonical injection from p to A p.
-** [MONAD] Relationship between canonical injections and Monad instances
-Let INJ be the canonical injection from p to F p.
-Let F be an instance of Monad.
-Then the compiler infers "return" and one case of "bind" as follows:
-#+BEGIN_SRC haskell
-return = INJ
-(>>=) (INJ x) k = k x
-#+END_SRC
-
-Indeed I think these have to be laws:
-If INJ is the canonical injection from t to F t, and F is an instance of Monad, then:
-- return has to be equal to INJ,
-- INJ x >>= k must be equal to k x.
-
-I think the above laws relate this concept of "canonical injections" with your concept of monads as "conservative extensions of spaces".
-
-There is also a law for the other way around:
-the =return= function must be an injection,
-although the user is responsible for ensuring that.
-Thus the compiler should assume that =return= /is/ a canonical injection,
-and exploit such injection with this rule:
-If an =x : t= is found where an =f t= is expected, and =f= is an instance of =Monad=, then replace =x : t= with =return x : f t=.
-
-This rule also works in a nested situation.
-This should typecheck:
-#+BEGIN_EXAMPLE
-0 :: (Monad m, Monad n) => m (Maybe (n Int))
-#+END_EXAMPLE
-** [HICKEY] Hickey's two wishes
-Yes, my rule should work in both of Hickey's cases, because the compiler should be able to infer that there is only one possible injection in each of those cases.
-Note that Hickey's cases correspond to wanting the compiler to automatically apply these canonical injections:
-
-#+BEGIN_SRC haskell
--- inj : today -> yesterday,
--- so that every caller doesn't have to be rewritten.
-
--- Making an arg optional:
--- yesterday: X -> Y
--- today: Maybe X -> Y
--- The canonical injection:
--- Wherever you see that a Maybe X -> Y is supplied
--- where an X -> Y is required, use this:
-inj : (Maybe X -> Y) -> (X -> Y)
-inj f = \ x -> f (Just x)
-
--- Providing a stronger return promise:
--- yesterday: X -> Maybe Y
--- today: X -> Y
--- The canonical injection:
--- Wherever you see that an X -> Y is supplied
--- where an X -> Maybe Y is required, use this:
-inj : (X -> Y) -> (X -> Maybe Y)
-inj f = \ x -> Just (f x)
-#+END_SRC
-Note that the type of inj is "today -> yesterday", not "yesterday -> today". (Do you see why?)
-** [LAMBDA] Inferring canonical injections for lambdas
-Here I generalize Hickey's cases to all lambdas.
-
-These two rules define canonical injections for all lambdas (for all types A, B, and C):
-
-#+BEGIN_SRC haskell
-inj (A -> C) (B -> C) fac = fbc where fbc b = fac (inj B A b)
-inj (C -> A) (C -> B) fca = fcb where fcb c = inj A B (fca c)
-#+END_SRC
-
-That should also work with currying and higher-order lambdas.
-** [IMPL] A possible implementation, in principle
-Suppose that a compiler encounters a type error.
-- Let s : S be the supplied (actual) expression and type (what the user actually types).
-- Let R be the required (expected) type.
-Then, if there is the canonical injection inj : S -> R from S to R, the compiler should behave as if the user had typed "inj s" from the beginning.
-
-In principle, it is possible to write a Haskell interpreter in Prolog, and add our own inference rules, such as inferring canonical injections and inserting canonical injections.
-I think [DATA] and [LAMBDA] sufficiently define canonical injections for all Haskell 98 types.
-** <2018-12-18> Archive: questions leading to that article
-Does "algebraic subtyping" mean adding the following rule to the compiler:
-"for all x, t: everywhere an x : t is found where a Maybe t is expected, replace x : t with Just x : Maybe t"?
-
-Does "algebraic subtyping" mean that the compiler "recovers" from certain (injective) type errors?

@@ -37,7 +37,7 @@ for maximal dissemination.
                     - Making the only programming language we will ever need
                         - Modeling
                             - [Modeling all data]({% link modeldata.md %})
-                    - [Extending Haskell]({% link exhask.md %})
+                    - [Haskell programming language]({% link haskell.html %})
                 - [Using Prolog]({% link prolog.html %})
             - Programming
                 - Using Java

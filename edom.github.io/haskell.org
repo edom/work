@@ -1,0 +1,328 @@
+#+TITLE: Haskell programming language
+#+DATE: 2018-07-22 02:45 +0700
+#+PERMALINK: /haskell.html
+#+OPTIONS: ^:nil toc:1
+* Faking untagged unions and equirecursive types in Haskell
+:PROPERTIES:
+:CUSTOM_ID: abdullah
+:END:
+#+TOC: headlines 1 local
+** Background
+In Haskell, Just is the /only/ sound way to make a Maybe t from t.
+We call such unambiguous construction a /canonical injection/.
+The compiler should insert canonical injections to recover from trivial type errors.
+Such recovery enables these interesting things:
+- Now we can "fake" non-overlapping untagged unions (Haskell has tagged unions).
+  This reduces the bureaucracy when composing data types following the free-monad/interpreter pattern;
+  the compiler inserts the required Pure constructors.
+- Now we can "fake" equirecursive types (Haskell has isorecursive types).
+  We no longer have to type "In" and "out" when using "Fix";
+  the compiler inserts the required bureaucracy.
+** What is here, and how it answers your questions
+This is what I am going to do in this article, in no particular order:
+- [NOTATION] defines some notations.
+- [DEFINE] defines canonical injections.
+- [DATA] shows the rules for inferring canonical injections for inductive data types.
+- [LAMBDA] shows the rules for inferring canonical injections for lambdas.
+- [HICKEY] shows that Hickey's two wishes are special cases of canonical injections.
+- [MONAD] shows the relationship between canonical injections and Monad instances.
+- [IMPL] sketches a possible implementation, in principle.
+
+This is how I answer your questions:
+- Your first question is answered by [DEFINE], [DATA], and [LAMBDA].
+- Your second question is answered by [HICKEY] and [LAMBDA].
+- Extra things that may be of interest to you are [MONAD] and [IMPL].
+** [NOTATION]
+Notation conventions.
+
+By "injection", I mean an injective function.
+
+"The canonical injection from A to B" means "the only sound injection from A to B".
+By "sound", I mean "not involving bottom (undefined)".
+I assume total functional programming, and I say "the only possible injection" to mean "the only sound injection".
+** [DEFINE] Examples of canonical injections
+The compiler infers that some constructors are the only possible injections.
+
+Examples of automatic inference of canonical injections:
+- In the case of t -> Maybe t, the compiler can infer that Just is the only possible injection.
+- In the case of a -> Either a b where a != b, the compiler can infer that Left is the only possible injection.
+- In the case of a -> Either a a, there are two injections, and so there is no such thing as the only possible injection.
+** [DATA] Inferring canonical injections for inductive data types
+In general, the compiler infers canonical injections from a data definition using this rule:
+If parameter p occurs exactly once in the right-hand side of the equal sign in "data A p = ...",
+then the constructor that has p is the /canonical injection/ from p to A p.
+
+For example, observe that, in the following definition,
+in the right-hand side of the equal sign:
+- Int occurs twice,
+- String occurs once, and
+- p occurs once.
+#+BEGIN_SRC haskell
+data A p = A0 Int | A1 String | A2 Int | A3 p
+#+END_SRC
+Therefore, from the above definition, the compiler infers that:
+- A1 : String -> A p is the canonical injection from String to A p.
+- A3 : p -> A p is the canonical injection from p to A p.
+** [MONAD] Relationship between canonical injections and Monad instances
+Let INJ be the canonical injection from p to F p.
+Let F be an instance of Monad.
+Then the compiler infers "return" and one case of "bind" as follows:
+#+BEGIN_SRC haskell
+return = INJ
+(>>=) (INJ x) k = k x
+#+END_SRC
+
+Indeed I think these have to be laws:
+If INJ is the canonical injection from t to F t, and F is an instance of Monad, then:
+- return has to be equal to INJ,
+- INJ x >>= k must be equal to k x.
+
+I think the above laws relate this concept of "canonical injections" with your concept of monads as "conservative extensions of spaces".
+
+There is also a law for the other way around:
+the =return= function must be an injection,
+although the user is responsible for ensuring that.
+I think the compiler should assume that =return= /is/ a canonical injection,
+and exploit such injection with this rule:
+If an =x : t= is found where an =f t= is expected, and =f= is an instance of =Monad=, then replace =x : t= with =return x : f t=.
+
+This rule also works in a nested situation.
+This should typecheck:
+#+BEGIN_EXAMPLE
+0 :: (Monad m, Monad n) => m (Maybe (n Int))
+#+END_EXAMPLE
+** [HICKEY] Hickey's two wishes
+Yes, my rule should work in both of Hickey's cases, because the compiler should be able to infer that there is only one possible injection in each of those cases.
+Note that Hickey's cases correspond to wanting the compiler to automatically apply these canonical injections:
+
+#+BEGIN_SRC haskell
+-- inj : today -> yesterday,
+-- so that every caller doesn't have to be rewritten.
+
+-- Making an arg optional:
+-- yesterday: X -> Y
+-- today: Maybe X -> Y
+-- The canonical injection:
+-- Wherever you see that a Maybe X -> Y is supplied
+-- where an X -> Y is required, use this:
+inj : (Maybe X -> Y) -> (X -> Y)
+inj f = \ x -> f (Just x)
+
+-- Providing a stronger return promise:
+-- yesterday: X -> Maybe Y
+-- today: X -> Y
+-- The canonical injection:
+-- Wherever you see that an X -> Y is supplied
+-- where an X -> Maybe Y is required, use this:
+inj : (X -> Y) -> (X -> Maybe Y)
+inj f = \ x -> Just (f x)
+#+END_SRC
+Note that the type of inj is "today -> yesterday", not "yesterday -> today". (Do you see why?)
+** [LAMBDA] Inferring canonical injections for lambdas
+Here I generalize Hickey's cases to all lambdas.
+
+Notation convention:
+I write the dependently-typed expression "inj A B" to mean the canonical injection from A to B, if such canonical injection exists.
+The type of the expression "inj A B" is A -> B.
+
+These two rules define canonical injections for all lambdas:
+For all types A, B, and C:
+#+BEGIN_SRC haskell
+inj (A -> C) (B -> C) fac = fbc where fbc b = fac (inj B A b)
+inj (C -> A) (C -> B) fca = fcb where fcb c = inj A B (fca c)
+#+END_SRC
+
+That should also work with currying and higher-order lambdas.
+** [IMPL] A possible implementation, in principle
+Suppose that a compiler encounters a type error.
+
+Let s : S be the supplied (actual) expression and type (what the user actually types).
+
+Let R be the required (expected) type.
+
+Then, if there is the canonical injection inj : S -> R from S to R,
+the compiler should behave as if the user had typed "inj s" from the beginning.
+
+In principle, it is possible to write a Haskell interpreter in Prolog, and add our own inference rules,
+such as inferring canonical injections and inserting canonical injections.
+I think [DATA] and [LAMBDA] sufficiently define canonical injections for all Haskell 98 types.
+** History
+This originated as a letter to Abdullah on <2018-12-18>.
+
+<2018-12-18>
+
+- First publish date.
+- First revision.
+
+Alternative titles:
+- Faking untagged unions and equirecursive types in Haskell
+  - This sounds promising.
+  - But this is misleading.
+    This feature requires modifying the compiler, so the code is not "in Haskell".
+- Inferring and inserting canonical injections in Haskell
+  - This was the original working title.
+- Recovering from trivial type errors in Haskell
+  - Unclear about what is being sold.
+- A monad is a way of conservatively extending all spaces
+
+The concept I'm proposing already exists with the same name ("canonical injection").
+https://en.wikipedia.org/wiki/Inclusion_map
+
+<2018-12-14>
+
+Questions leading to this article:
+- Does "algebraic subtyping" mean adding the following rule to the compiler:
+  "for all x, t: everywhere an x : t is found where a Maybe t is expected, replace x : t with Just x : Maybe t"?
+- Does "algebraic subtyping" mean that the compiler "recovers" from certain (injective) type errors?
+* An mess; do not see
+** Open ADTs (algebraic data types)
+   :PROPERTIES:
+   :CUSTOM_ID: open-adts-algebraic-data-types
+   :END:
+
+- "Closed" means "defined in one place".
+- Open ADTs don't mix with exhaustive case analysis (function totality).
+
+  - https://stackoverflow.com/questions/870919/why-are-haskell-algebraic-data-types-closed
+  - But what if functions are "open" too?
+
+    - https://www.andres-loeh.de/OpenDatatypes.pdf
+
+- If =f : a -> b=, then the compiler should infer =lift f : (Monad m) => m a -> m b=.
+
+** Can we extend Haskell to "auto-fmap"?
+   :PROPERTIES:
+   :CUSTOM_ID: can-we-extend-haskell-to-auto-fmap
+   :END:
+
+- Possibilities:
+
+  - Add rewrite rules so that the compiler "recovers" from some type "errors".
+  - Extend the syntax and semantics of function application.
+
+- Related
+
+  - 1989, article, Wadler, "Theorems for free!"
+  - The Haskell Djinn can, given a type T, infer/construct a term having type T.
+
+- Recovering from some type errors
+
+  - Idea
+
+    - Extend Haskell with "implicit injections".
+    - The compiler should try in-scope injections automatically when there is a typing error, before quitting with a type error.
+
+      - Isn't this similar to Scala implicits and implicit conversion?
+
+        - I forgot who, but I think somebody on the Internet said that Scala implicits are a way for the compiler to recover from type errors.
+
+    - Can we do this on GHC?
+
+      - https://ghc.haskell.org/trac/ghc/wiki/Commentary/Compiler/TypeChecker
+
+        - GHC typechecker works on Haskell before it's transformed to Core.
+
+      - Write a plugin for GHC?
+
+        - Can a GHC modify the syntax tree on type error?
+
+      - Use GHC as library?
+      - We can't use GHC rewrite rules because they are only applied when optimization is enabled.
+
+  - Define the concept of "expected type".
+  - Let =e= be an expression.
+  - Let =f : a -> b=.
+  - Let =m= be an instance of Monad.
+  - If =e= has type =a=, but the compiler expects =e= to have type =m a=, then the compiler shall rewrite =e= to =return e=.
+  - If =e= has type =m a=, then the compiler rewrites =f e= to =map f e=.
+
+- If =x= is a Monad, then these are two /different/ things: =x : a= and =return x=, but they are related, in the sense that they are equivalent, in the sense that one is trivially computable/derivable from the other.
+- Can Strathclyde Haskell Enhancement (SHE) do this?
+
+  - It has idiom brackets.
+    It translates =(| f a1 ... an |)= to =pure f <*> a1 <*> ... <*> an=.
+
+    - https://personal.cis.strath.ac.uk/conor.mcbride/pub/she/idiom.html
+
+  - Enhancement to SHE https://github.com/bezirg/she
+
+    - http://blog.bezirg.net/posts/2013-08-03-enhancement-to-the-strathclyde-haskell-enhancement.html
+
+- https://en.wikipedia.org/wiki/Bidirectional_transformation
+
+  - https://www.cis.upenn.edu/~bcpierce/papers/lenses-etapsslides.pdf
+
+** Auto-lifting (and therefore sequencing) of function application involving Monad instances
+   :PROPERTIES:
+   :CUSTOM_ID: auto-lifting-and-therefore-sequencing-of-function-application-involving-monad-instances
+   :END:
+
+- The standard rule is:
+
+  - If =x : a= and =f : a -> b=, then =f x : b=.
+
+- Suppose that =m= has a Monad instance.
+
+  - If =x : m a= and =f : a -> b=, then should the compiler silently translate =f x= to =x >>= return . f=?
+
+    - Isn't it the only desirable way of putting together =f= and =x=?
+
+      - Monad class requires that =x >>= return . f= be equivalent to =fmap f x=.
+
+        - So there is really only one way to do it, isn't it?
+
+      - Examples of non-desirable ways: =unsafeCoerce=, =undefined=.
+
+  - Should the compiler also appropriately translate =f x= for all these combinations?
+
+    - Possibilities for the type of =x=:
+
+      - =a=
+      - =m a=
+
+    - Possibilities for the type of =f=:
+
+      - =a -> b=
+      - =a -> m b=
+      - =m (a -> b)=
+      - =m a -> m b=
+      - =m a -> b=
+
+- At first glance it seems convenient, but what are the consequences?
+
+  - Some I can think of
+
+    - Confusing error message
+
+      - Suppose:
+
+        - The programmer makes a typing mistake.
+        - The compiler infers the wrong type.
+        - The compiler performs translation based on the wrongly inferred type.
+        - The compiler produces a confusing error message.
+
+** Equirecursive types?
+   :PROPERTIES:
+   :CUSTOM_ID: equirecursive-types
+   :END:
+
+Haskell has isorecursive types.
+Can we make it use equirecursive types?
+
+- Can we make it automatically insert roll-unroll/fold-unfold/In-out?
+- How do we compose monads seamlessly?
+
+  - Isorecursive types?
+  - True sum types (untagged unions)?
+
+- "System F-omega with Equirecursive Types for Datatype-Generic Programming"?
+** <2018-12-15> Bootstrap GHC?
+https://twitter.com/ErikDominikus/status/1073726987338842112
+
+How about writing a Haskell interpreter with Prolog?
+I guess Haskell type checker takes ~100 lines of Prolog, and parser takes ~200 lines.
+It may be doable in a month.
+I have ~20 lines of Prolog type-checking Haskell AST but without type classes.
+
+Add ~500 more lines of Prolog metaprogram for translating lists to arrays,
+~2000 more lines for translating Prolog to optimized x86_64 native code (if not reinventing LLVM), 1 more month, and ... we may beat GHC at its own game? :)
