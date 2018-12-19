@@ -496,16 +496,51 @@ div.highlighter-rouge > * { display: inline-block; text-align: left; }
   "minima/syntax-highlighting"
 ;
 
-// org-mode
+/*
+org-mode uses #table-of-contents.
+filter.lua uses .local_table_of_contents.
+*/
 
-#table-of-contents ul {
+#table-of-contents ul
+, .local_table_of_contents ul
+{
   list-style-type: none;
-  margin-left: 1em;
+  margin-left: 0em;
   padding: 0em;
 }
 
-#table-of-contents li {
+#table-of-contents li
+, .local_table_of_contents li
+{
   padding: 0em;
+}
+
+h2, h3, h4 {
+  display: flex;
+  justify-content: flex-start;
+}
+
+h2 .section_number
+, h3 .section_number
+, h4 .section_number
+, .local_table_of_contents .section_number
+{
+  min-width: 4rem;
+  flex: none;
+}
+
+// https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+
+.local_table_of_contents li {
+  display: flex;
+  justify-content: space-between;
+}
+.local_table_of_contents .section_title {
+  flex: auto;
+}
+.local_table_of_contents .word_count {
+  opacity: 0.333;
+  flex: none;
 }
 
 .timestamp {
@@ -535,4 +570,11 @@ div.highlighter-rouge > * { display: inline-block; text-align: left; }
 
 .toc_entry__length_indicator {
   opacity: 0.333;
+}
+
+// pandoc org-to-html weirdness
+
+a.sourceLine {
+  color: inherit;
+  text-decoration: inherit;
 }

@@ -1,0 +1,55 @@
+#!/bin/bash
+
+: <<DOC
+
+Usage:
+
+    SCRIPT <input-file> ...
+
+where:
+- SCRIPT is the path to this script file
+- Each <input-file> is something that Pandoc can read.
+
+DOC
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+work_dir="$HOME/work"
+src_dir="$work_dir/edom.github.io"
+bib_file="$src_dir/bib.bib"
+out_dir="$src_dir"
+
+function convert1() {
+
+: <<DOC
+The template.html emits YAML metadata block.
+Fortunately every JSON document is a YAML document.
+
+Filter order: pandoc-citeproc must precede filter.lua.
+
+The citation style acm-sig-proceedings.csl was taken from:
+- https://www.zotero.org/styles/acm-sig-proceedings
+- https://github.com/citation-style-language/styles/blob/master/acm-sig-proceedings.csl
+DOC
+
+    pandoc \
+        --bibliography="$bib_file" \
+        --metadata=link-citations:true \
+        --csl="$src_dir/_pandoc/acm-sig-proceedings.csl" \
+        --filter=pandoc-citeproc \
+        --lua-filter="$src_dir/_pandoc/filter.lua" \
+        --template="$src_dir/_pandoc/template.html" \
+        --output "$2" \
+        "$1"
+}
+
+cd "$out_dir"
+
+for input_file in $@; do
+    input_prefix="${input_file%%.*}"
+    output_file="$input_prefix.html"
+    echo "$input_file -> $output_file"
+    convert1 "$src_dir/$input_file" "$output_file"
+done
