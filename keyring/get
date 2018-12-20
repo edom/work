@@ -1,5 +1,8 @@
 #!/bin/bash
-LINE="$(openssl enc -d -bf -in keyring.e | grep "$1" | grep "$2")"
+# 2018-12-20
+# https://security.stackexchange.com/questions/160183/openssl-1-0-1t-does-not-decrypt-with-bf-if-encrypted-with-openssl-version-1-1-0
+# Insecure legacy code.
+LINE="$(openssl enc -d -bf -md md5 -in keyring.e | grep "$1" | grep "$2")"
 SITE="$(echo "$LINE" | cut -f1 '-d ')"
 USER="$(echo "$LINE" | cut -f2 '-d ')"
 PASS="$(echo "$LINE" | cut -f3 '-d ')"

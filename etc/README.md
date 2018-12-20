@@ -15,6 +15,7 @@ link $DIR/vscode_user_settings.json ~/.config/Code/User/settings.json
 link $DIR/gdbinit ~/.gdbinit
 link $DIR/swiplrc.pro ~/.swiplrc
 link $DIR/bashrc ~/.bashrc
+link $DIR/sysctl.d/98-sysrq.conf /etc/sysctl.d/98-sysrq.conf
 ```
 
 More info:

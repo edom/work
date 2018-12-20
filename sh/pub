@@ -8,7 +8,7 @@
 
 set -o errexit
 
-# This and "./jekyll clean" remove unpublished content.
+# This and "jekyll clean" remove unpublished content.
 # A weakness is that if anything fails, we end up with a detached HEAD.
 
 git checkout --detach "${1:-origin/master}"
@@ -18,10 +18,14 @@ git checkout --detach "${1:-origin/master}"
 
 JEKYLL_DIR=_site_publish
 
+jekyll() {
+    bundle exec jekyll "$@"
+}
+
 pushd edom.github.io
 export JEKYLL_ENV=production
-./jekyll clean --destination "./${JEKYLL_DIR}"
-./jekyll build --destination "./${JEKYLL_DIR}"
+jekyll clean --destination "./${JEKYLL_DIR}"
+jekyll build --destination "./${JEKYLL_DIR}"
 popd
 
 # Spawn a subshell to confine the scope of the GIT_* exports.

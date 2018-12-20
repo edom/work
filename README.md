@@ -11,6 +11,8 @@ I share my goals and knowledge in the website [edom.github.io](https://edom.gith
 - [etc](etc/): operating system configuration files
 - [sh](sh/): shell scripts, mostly Bash
 - [software](software/): a SWI-Prolog 7 knowledge base
+- [edom.github.io](edom.github.io/): website source code
+    - Related command: `bundle exec jekyll serve`.
 
 ## Things far from being finished; sometimes even abandoned; mostly doodles
 
