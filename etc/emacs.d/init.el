@@ -198,12 +198,24 @@ Use this instead of 'C-c C-e P f'."
     )
   )
 
+(defun my-org-publish-current-file-with-pandoc ()
+  (interactive)
+  (let ((name (buffer-file-name (current-buffer))))
+    (call-process "/home/erik/work/sh/pandoc-to-jekyll-html"
+                  nil
+                  "*pandoc*"
+                  nil
+                  name)
+    (message "converted %s" name)
+    ))
+
 ;;;; Custom Org Mode key bindings
 
 ;; TODO make these keybindings buffer-local according to the mode
 (defun my-org-key-bindings ()
   (global-set-key (kbd "<f5>") 'my-org-publish)
   (global-set-key (kbd "<f6>") 'my-org-publish-current-file)
+  (global-set-key (kbd "<f7>") 'my-org-publish-current-file-with-pandoc)
   )
 
 ;;;; End of customizations

@@ -47,9 +47,11 @@ DOC
 
 cd "$out_dir"
 
-for input_file in $@; do
-    input_prefix="${input_file%%.*}"
-    output_file="$input_prefix.html"
-    echo "$input_file -> $output_file"
-    convert1 "$src_dir/$input_file" "$output_file"
+for input_path in $@; do
+    the_dir="$(dirname "$input_path")"
+    input_fileext="$(basename "$input_path")"
+    input_file="${input_fileext%%.*}"
+    output_path="$the_dir/$input_file.html"
+    echo "$input_path -> $output_path"
+    convert1 "$input_path" "$output_path"
 done
