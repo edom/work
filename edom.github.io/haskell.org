@@ -2,7 +2,7 @@
 #+DATE: 2018-07-22 02:45 +0700
 #+PERMALINK: /haskell.html
 #+OPTIONS: ^:nil toc:1
-* Faking untagged unions and equirecursive types in Haskell
+* Subtyping in Haskell with canonical injections
 :PROPERTIES:
 :CUSTOM_ID: abdullah
 :END:
@@ -11,13 +11,16 @@
 In Haskell, Just is the /only/ sound way to make a Maybe t from t.
 We call such unambiguous construction a /canonical injection/.
 The compiler should insert canonical injections to recover from trivial type errors.
-Such recovery enables these interesting things:
-- Now we can "fake" non-overlapping untagged unions (Haskell has tagged unions).
+Such recovery has these interesting benefits:
+- Now we can fake non-overlapping /untagged unions/ (Haskell has tagged unions).
   This reduces the bureaucracy when composing data types following the free-monad/interpreter pattern;
   the compiler inserts the required Pure constructors.
-- Now we can "fake" equirecursive types (Haskell has isorecursive types).
+- Now we can fake /equirecursive types/ (Haskell has isorecursive types).
   We no longer have to type "In" and "out" when using "Fix";
   the compiler inserts the required bureaucracy.
+- Now we can fake /heterogeneous lists/ and heterogeneous collections.
+- Now we can have /covariant/ return type and /contravariant/ return type.
+  This means now we can, without breaking callers, generalize an argument or specialize a return value, as in Java.
 ** What is here, and how it answers your questions
 This is what I am going to do in this article, in no particular order:
 - [NOTATION] defines some notations.
@@ -41,16 +44,20 @@ By "injection", I mean an injective function.
 By "sound", I mean "not involving bottom (undefined)".
 I assume total functional programming, and I say "the only possible injection" to mean "the only sound injection".
 ** [DEFINE] Examples of canonical injections
-The compiler infers that some constructors are the only possible injections.
+"Canonical" means "there is exactly one".
+"Injection" means injective function.
+A canonical injection from A to B is the only injection from A to B.
 
-Examples of automatic inference of canonical injections:
-- In the case of t -> Maybe t, the compiler can infer that Just is the only possible injection.
-- In the case of a -> Either a b where a != b, the compiler can infer that Left is the only possible injection.
-- In the case of a -> Either a a, there are two injections, and so there is no such thing as the only possible injection.
+Examples of canonical injections:
+- In the case of t -> Maybe t, Just is the canonical injection.
+- In the case of a -> Either a b where a != b, Left is the canonical injection.
+- In the case of a -> Either a a, each of Left and Right is an injection, so there is no canonical injection here.
+
+Thus some constructors are canonical injections.
 ** [DATA] Inferring canonical injections for inductive data types
 In general, the compiler infers canonical injections from a data definition using this rule:
 If parameter p occurs exactly once in the right-hand side of the equal sign in "data A p = ...",
-then the constructor that has p is the /canonical injection/ from p to A p.
+then the only constructor with p is the /canonical injection/ from p to A p.
 
 For example, observe that, in the following definition,
 in the right-hand side of the equal sign:
@@ -92,7 +99,7 @@ This should typecheck:
 0 :: (Monad m, Monad n) => m (Maybe (n Int))
 #+END_EXAMPLE
 ** [HICKEY] Hickey's two wishes
-Yes, my rule should work in both of Hickey's cases, because the compiler should be able to infer that there is only one possible injection in each of those cases.
+Yes, my rule should work in both of Hickey's cases, because there is a canonical injection in each of those cases.
 Note that Hickey's cases correspond to wanting the compiler to automatically apply these canonical injections:
 
 #+BEGIN_SRC haskell
@@ -100,8 +107,8 @@ Note that Hickey's cases correspond to wanting the compiler to automatically app
 -- so that every caller doesn't have to be rewritten.
 
 -- Making an arg optional:
--- yesterday: X -> Y
--- today: Maybe X -> Y
+-- yesterday:       X -> Y
+-- today:     Maybe X -> Y
 -- The canonical injection:
 -- Wherever you see that a Maybe X -> Y is supplied
 -- where an X -> Y is required, use this:
@@ -110,7 +117,7 @@ inj f = \ x -> f (Just x)
 
 -- Providing a stronger return promise:
 -- yesterday: X -> Maybe Y
--- today: X -> Y
+-- today:     X -> Y
 -- The canonical injection:
 -- Wherever you see that an X -> Y is supplied
 -- where an X -> Maybe Y is required, use this:
@@ -118,6 +125,9 @@ inj : (X -> Y) -> (X -> Maybe Y)
 inj f = \ x -> Just (f x)
 #+END_SRC
 Note that the type of inj is "today -> yesterday", not "yesterday -> today". (Do you see why?)
+
+Our rewriting the function changes its type from "yesterday" to "today",
+but the unchanged callers still expect that the function has the type "yesterday".
 ** [LAMBDA] Inferring canonical injections for lambdas
 Here I generalize Hickey's cases to all lambdas.
 
@@ -174,7 +184,38 @@ Questions leading to this article:
 - Does "algebraic subtyping" mean adding the following rule to the compiler:
   "for all x, t: everywhere an x : t is found where a Maybe t is expected, replace x : t with Just x : Maybe t"?
 - Does "algebraic subtyping" mean that the compiler "recovers" from certain (injective) type errors?
-* An mess; do not see
+** Half-baked but related ideas, should be in the article
+#+TOC: headlines 1 local
+*** A subtyping relation arises from canonical injections
+Remember:
+- "A is a subtype of B" means an A can be supplied wherever a B is expected.
+- The existence of a canonical injection from A to B suggests that A is a "subset of" ("is contained in") B.
+
+We can define this subtyping relation:
+A is a subtype B iff there is a canonical injection from A to B.
+
+Subtyping by canonical injection obeys Liskov substitution principle.
+*** Subtyping in Haskell?
+- http://referaat.cs.utwente.nl/conference/12/paper/7000/expressing-ontologies-using-a-functional-language.pdf
+  - "there are some proposals for implementing subtyping [in Haskell] [11, 12]"
+    - Open ADT precludes exhaustive pattern matching.
+
+TODO summarize:
+- https://mail.haskell.org/pipermail/haskell-cafe/2007-May/026334.html
+- "Polymorphic subtyping in O'Haskell" https://www.sciencedirect.com/science/article/pii/S0167642302000266
+- "Subtype polymorphism in Haskell" https://stackoverflow.com/questions/12002979/subtype-polymorphism-in-haskell
+*** A weak anthropocentric argument for automating canonical injections?
+We should conflate =x= and =Just x=.
+=Just= is there only to make the compiler happy.
+For us humans, =x= and =Just x= have the same semantics.
+*** Newtypes should be replaced with /proofs/.
+#+BEGIN_SRC haskell
+-- Replace this:
+foo :: Nonneg Int -> a
+-- with this, where _p is a proof that x is nonnegative:
+foo {_p : x >= 0} x = ...
+#+END_SRC
+* A mess; do not see
 ** Open ADTs (algebraic data types)
    :PROPERTIES:
    :CUSTOM_ID: open-adts-algebraic-data-types

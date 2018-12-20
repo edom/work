@@ -26,9 +26,10 @@ I make a website, not a book,
 in order to minimize the readers' effort,
 for maximal dissemination.
 
-## Living content
+## Contents
 
 - [Goals]({% link goal.html %})
+- [Designing the ideal society]({% link social.html %})
 - Computer practice
     - Software engineering
         - Forward software engineering
@@ -75,20 +76,15 @@ for maximal dissemination.
 - [Writing]({% link writing.html %})
     - [Working around Markdown]({% link markdown.md %})
 
-## Dying content
+## Other contents
 
-- Improving society
-    - [Social studies]({% link social.html %})
-        - [Subsistence]({% link subsist.html %})
+- [Subsistence]({% link subsist.html %})
 - Living in the 21st century
     - [What kind of world are we living in?]({% link world.md %})
     - [Grooming]({% link groom.html %})
     - Hidup di Indonesia abad 21
         - [Politik masjid]({% link politik_masjid.md %})
         - [Living in Jakarta]({% link jakarta.md %})
-
-## Dead content
-
 - [Unimportant content]({% link other.html %})
     - I am regrouping the contents in this website from by-topic to by-task.
     These are pages with old grouping.

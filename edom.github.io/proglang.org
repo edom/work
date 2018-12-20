@@ -2029,10 +2029,9 @@ Every occurrence of \( f \) can be replaced with \( f' \) while preserving the m
 
 The short article [2] basically tells the user to read AbdelGawad's other works.
 
-- [1] 1989, "Inheritance is not subtyping", [[https://www.cs.utexas.edu/users/wcook/papers/InheritanceSubtyping90/CookPOPL90.pdf][pdf]]
-- [2] 2013, "Inheritance is subtyping", [[https://pdfs.semanticscholar.org/569c/9b35375144756761167fd4a2571b1d97f0e8.pdf][pdf]]
+- 1 [1] 1989, "Inheritance is not subtyping", [[https://www.cs.utexas.edu/users/wcook/papers/InheritanceSubtyping90/CookPOPL90.pdf][pdf]]
+- 2 [2] 2013, "Inheritance is subtyping", [[https://pdfs.semanticscholar.org/569c/9b35375144756761167fd4a2571b1d97f0e8.pdf][pdf]]
 - [[https://www.cmi.ac.in/~madhavan/courses/pl2009/lecturenotes/lecture-notes/node28.html][Subtyping vs inheritance]]
-
   - Subtyping and inheritance are orthogonal concepts.
 
 A language should provide both nominal and structural subtyping.
@@ -2156,8 +2155,8 @@ I want something like this:
 - https://stackoverflow.com/questions/3416980/why-arent-whole-program-optimizations-more-prevalent-now/27757382
 
 ** TODO <2018-09-15> Make the programming language
-- cite:DBLP:conf/popl/CookHC90
-- cite:cartwright2013inheritance
+- \cite{DBLP:conf/popl/CookHC90}
+- \cite{cartwright2013inheritance}
 ** TODO <2018-09-15> Find out how type systems may guarantee pointer safety
 Is escape analysis the only way?
 *** TODO <2018-09-15> Study Sixten type system
@@ -4001,3 +4000,11 @@ where \(I_A = \{ (x,x) ~|~ x \in A \}\).
 Let \(F = (A,B,f)\) be a function.
 
 Let \(G = (F \times A, B, g)\) be a function where \( g(f,x) = f(x) \).
+* object = lambda + record + mutation?
+#+BEGIN_EXAMPLE
+let self = {
+        prop = 1;
+        foo = \ () -> self.prop + 1;
+}; in self
+#+END_EXAMPLE
+* Bibliography

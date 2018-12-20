@@ -390,7 +390,7 @@ https://hapgood.us/2016/02/22/can-blogs-and-wiki-be-merged/
 - https://www.nateliason.com/blog/wiki-strategy
 ** Pandoc woes
 #+BEGIN_EXAMPLE
-pandoc --mathjax -f org -t html philo.org --lua-filter _includes/pandoc_filter.lua
+pandoc --mathjax -f org -t html philo.org --lua-filter _pandoc/filter.lua
 #+END_EXAMPLE
 
 Pandoc: How to avoid generating org-mode custom-id property drawer for internal linking?
@@ -422,3 +422,33 @@ Paragraphs with first-sentence thesis are more readable.
 Wikipedia is dumb data.
 Google is dumb data.
 We need opinion and interpretation to turn data into information.
+* Using technology to write
+** One-time setup
+Use Debian 9.
+
+Install Pandoc using apt. (How?)
+
+Download pandoc-scholar from GitHub. (Where? How?)
+** Usage
+Write your content in any markup language that Pandoc can read.
+I use org mode.
+Sometimes I also use markdown.
+
+Run Pandoc Scholar:
+#+BEGIN_EXAMPLE
+cd TEMP
+make ARTICLE_FILE=... DEFAULT_EXTENSIONS=html
+#+END_EXAMPLE
+* Writing system
+- pandoc-scholar is a Lua filter.
+- pandoc can read org-mode metadata.
+  We don't use YAML preamble, so no problem.
+  https://www.reddit.com/r/orgmode/comments/4ilhln/do_you_use_pandoc_what_would_be_your_wishes/
+- pandoc reads org-mode. http://kitchingroup.cheme.cmu.edu/blog/2014/07/17/Pandoc-does-org-mode-now/
+- pandoc does not read all org citation syntaxes:
+  - https://github.com/jkitchin/org-ref/issues/228
+  - https://github.com/jgm/pandoc/pull/2950
+- I think need pandoc-citeproc, and not pandoc-scholar.
+- Cite using =\cite=.
+
+https://www.dedoimedo.com/computers/linux-beginning-of-the-end.html- Can we use pandoc-scholar with org mode?
