@@ -216,6 +216,7 @@ Use this instead of 'C-c C-e P f'."
   (global-set-key (kbd "<f5>") 'my-org-publish)
   (global-set-key (kbd "<f6>") 'my-org-publish-current-file)
   (global-set-key (kbd "<f7>") 'my-org-publish-current-file-with-pandoc)
+  (global-set-key (kbd "<f8>") 'switch-to-buffer) ; my left pinky is tired of pressing C-x b
   )
 
 ;;;; End of customizations
