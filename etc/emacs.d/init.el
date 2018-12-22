@@ -213,6 +213,8 @@ Use this instead of 'C-c C-e P f'."
 
 ;; TODO make these keybindings buffer-local according to the mode
 (defun my-org-key-bindings ()
+  (global-set-key (kbd "C-x g") 'magit) ; 2018-12-22 20:52 +0700 suddenly the shortcut has to be explicitly bound
+  (global-set-key (kbd "<f2>") 'save-buffer)
   (global-set-key (kbd "<f5>") 'my-org-publish)
   (global-set-key (kbd "<f6>") 'my-org-publish-current-file)
   (global-set-key (kbd "<f7>") 'my-org-publish-current-file-with-pandoc)
