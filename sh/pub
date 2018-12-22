@@ -8,11 +8,6 @@
 
 set -o errexit
 
-# This and "jekyll clean" remove unpublished content.
-# A weakness is that if anything fails, we end up with a detached HEAD.
-
-git checkout --detach "${1:-origin/master}"
-
 # We specify --destination so that we don't clash with a running "jekyll serve".
 # However, you should make sure that no "jekyll serve" is running.
 
@@ -22,17 +17,19 @@ jekyll() {
     bundle exec jekyll "$@"
 }
 
-pushd edom.github.io
 export JEKYLL_ENV=production
+
+cd ~/work/edom.github.io
 jekyll clean --destination "./${JEKYLL_DIR}"
 jekyll build --destination "./${JEKYLL_DIR}"
-popd
+make -j4 -f _pandoc/Makefile env=prod html_dir=_pandoc_out/prod jekyll_dir=_site_publish install
 
-# Spawn a subshell to confine the scope of the GIT_* exports.
+# Spawn a subshell to confine the GIT_* exports.
 
 (
-
     set -o errexit
+
+    cd ~/work
 
     export GIT_DIR=tmp/edom.github.io.git
     mkdir -p "$GIT_DIR"
@@ -47,5 +44,3 @@ popd
     git push -f git@github.com:edom/edom.github.io.git master
 
 )
-
-git checkout master

@@ -198,15 +198,17 @@ Use this instead of 'C-c C-e P f'."
     )
   )
 
+
 (defun my-org-publish-current-file-with-pandoc ()
   (interactive)
-  (let ((name (buffer-file-name (current-buffer))))
+  (let* ((absolute-path (buffer-file-name (current-buffer)))
+         (relative-path (file-relative-name absolute-path "/home/erik/work/edom.github.io")))
     (call-process "/home/erik/work/sh/pandoc-to-jekyll-html"
                   nil
                   "*pandoc*"
                   nil
-                  name)
-    (message "converted %s" name)
+                  relative-path)
+    (message "converted %s (%s)" relative-path absolute-path)
     ))
 
 ;;;; Custom Org Mode key bindings

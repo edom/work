@@ -16,42 +16,6 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-work_dir="$HOME/work"
-src_dir="$work_dir/edom.github.io"
-bib_file="$src_dir/bib.bib"
-out_dir="$src_dir"
+cd ~/work/edom.github.io
 
-function convert1() {
-
-: <<DOC
-The template.html emits YAML metadata block.
-Fortunately every JSON document is a YAML document.
-
-Filter order: pandoc-citeproc must precede filter.lua.
-
-The citation style acm-sig-proceedings.csl was taken from:
-- https://www.zotero.org/styles/acm-sig-proceedings
-- https://github.com/citation-style-language/styles/blob/master/acm-sig-proceedings.csl
-DOC
-
-    pandoc \
-        --bibliography="$bib_file" \
-        --metadata=link-citations:true \
-        --csl="$src_dir/_pandoc/acm-sig-proceedings.csl" \
-        --filter=pandoc-citeproc \
-        --lua-filter="$src_dir/_pandoc/filter.lua" \
-        --template="$src_dir/_pandoc/template.html" \
-        --output "$2" \
-        "$1"
-}
-
-cd "$out_dir"
-
-for input_path in $@; do
-    the_dir="$(dirname "$input_path")"
-    input_fileext="$(basename "$input_path")"
-    input_file="${input_fileext%%.*}"
-    output_path="$the_dir/$input_file.html"
-    echo "$input_path -> $output_path"
-    convert1 "$input_path" "$output_path"
-done
+make -f _pandoc/Makefile env=dev org_files=$1 install
