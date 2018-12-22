@@ -1,0 +1,116 @@
+#+TITLE: Meta
+#+DATE: 2017-05-25 01:00:00 +0700
+#+PERMALINK: /meta.html
+* Organization of this wiki
+** Hierarchy and linking
+These rules exist to simplify renaming files.
+(But aren't wiki articles supposed to be highly interlinked?)
+
+The hierarchy of this website is 2 levels deep.
+Level 1 is the home page.
+Level 2 is everything else.
+
+If article X links to article Y, and both X and Y are not generated, then Y should not link to X.
+
+There is also the [[file:all.html][list of all pages in this website]].
+** Article categories
+Each article in this wiki belongs to one of these categories:
+- survey (What exists? What is the state of...)
+- argument (We should...)
+- exploration (What if...); borderline ramble
+- record/logging/memory/notes (What happened when?)
+- rant/complaint/ramble/babble/sketch
+
+A mature exploration should become an argument.
+
+I record the evil and the incompetencies, of people, corporations, and systems.
+** Article structure
+The title is a goal.
+
+The content is the ongoing journey to achieve it.
+
+Each article in this site is a living document.
+* What are some similar websites?
+These are some websites similar to this website and their differences.
+
+[[https://kevinbinz.com/][kevinbinz.com]] is more like a blog than a wiki.
+
+[[https://en.wikipedia.org/][en.wikipedia.org]] does not want original content.
+(Also, if [[https://www.quora.com/Will-it-be-feasible-to-move-Wikipedia-mediaWiki-from-PHP-to-some-modern-language-like-Golang][Kelly Kinkade's answer]] is true, then it's worrying that so much human knowledge is stored in such unparseable MediaWiki markup language.)
+
+TheBrain: the idea is good, but the app is slower than static web.
+
+[[https://www.brainpickings.org][brainpickings.org]]:
+too social, too much content, too little navigation, too little structure;
+pop science content is too much pop and too little science.
+* Meta-thinking
+** When stuck, ask yourself...
+When you're stuck, ask yourself "What question do I have to ask myself in order to get me unstuck?"
+** When stuck on a question, convert it into a hypothesis
+Every question can be turned into a hypothesis.
+Therefore, don't ask.
+Instead, hypothesize, and find evidences for or against.
+
+What is this:
+The value of asking questions
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3596240/
+** Interdisciplines
+where philosophy of mind + logic meet software engineering + Prolog:
+https://en.wikipedia.org/wiki/Formal_concept_analysis
+
+Philosophy, software engineering, business modeling?
+https://en.wikipedia.org/wiki/Triune_continuum_paradigm
+"The triune continuum paradigm is based on the three theories:
+on Tarski's theory of truth, on Russell's theory of types and on the theory of triune continuum."
+** How to categorize
+Suppose we want to categorize T (a set of things) to C (a set of categories).
+
+A good categorization is:
+- complete/exhaustive: every item belongs to a category
+- disjoint (non-overlapping): every item belongs to exactly one category
+- similar-sized: each category contains about the same number of items
+
+https://webdesign.tutsplus.com/articles/the-art-of-structuring-information-effectively--webdesign-6807
+
+* Thanks
+2017-05-25:
+Thanks to [[http://davidensinger.com/][David Ensinger]]'s
+[[http://davidensinger.com/2013/11/building-a-better-sitemap-xml-with-jekyll/][code]],
+Jekyll can generate sitemap.xml without plugins.
+* I think I have stopped caring about these
+** Fonts
+Why is the font so big?
+- Because I'm myopic.
+- To shrink the text, press Control-minus.
+
+Why is the font so small?
+- To fit more information on screen.
+- To expand the text, press Control-plus.
+- I read smaller text faster because my eyes move less, until the font size reaches 8pt.
+  The screen pixels aren't dense enough to render 8pt sans-serif.
+- 2018-07-21: Wikipedia uses 14px (about 10.5pt).
+** Problem: can't infer last modified date of files in a Git repository?
+This affects Google crawl?
+- Yes.
+  - https://www.sitemaps.org/protocol.html
+    - sitemap.xml lastmod is optional but
+      "This incremental Sitemap fetching mechanism allows for the rapid discovery of new URLs on very large sites."
+- No.
+  - https://webmasters.stackexchange.com/questions/25833/does-google-penalize-daily-updated-lastmod-tags-in-sitemaps-if-the-data-is-not
+    - "The lastmod tag is optional in sitmaps and in most of the cases it's ignored by search engines,
+      because webmasters are doing a horrible job keeping it accurate."
+
+Solution candidates:
+- Manually update lastmod every time we edit an md file
+- Write a script to update lastmod in each md file
+  - all files, or only those in a commit?
+  - https://serverfault.com/questions/401437/how-to-retrieve-the-last-modification-date-of-all-files-in-a-git-repository
+  - https://stackoverflow.com/questions/14141344/git-status-list-last-modified-date
+  - https://hackerific.net/2016/04/30/git-file-age-a-script-to-show-when-files-were-last-modified-in-git/
+- Stay in Jekyll, modify sitemap generator
+  - https://github.com/gjtorikian/jekyll-last-modified-at
+    - not compatible with github pages https://github.com/gjtorikian/jekyll-last-modified-at/issues/32
+  - https://stackoverflow.com/questions/14978474/how-to-show-the-modification-date-of-a-file-in-jekyll
+  - https://milanaryal.com.np/jekyll-site-last-modified-time/
+- Generate sitemap.xml outside Jekyll
+- Run Jekyll locally, commit output html to github

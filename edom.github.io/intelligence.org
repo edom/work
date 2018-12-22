@@ -5,22 +5,319 @@
 #+OPTIONS: toc:nil
 #+TOC: headlines 1
 #+TOC: headlines 3
-* intelligence.md
-- Abbreviations:
+* Doing the last thing we will ever need to do
+[[http://people.idsia.ch/~juergen/][Jürgen Schmidhuber wants to build something smarter than him and then retire.]]
 
-  - AI: Artificial Intelligence
-  - ML: Machine Learning
-  - COLT: Computational Learning Theory
+I want the same thing.
 
-- What are some AI survey papers, review articles, and expository works?
+[[http://people.idsia.ch/~juergen/][Schmidhuber's website]] contains a lot of content, if not too much.
+It is hard for an outsider to tell whether he is genius or crazy.
+But he has won lots of competitions.
 
-  - Google query: most recent mathematical ai book
-  - http://eliassi.org/COLTSurveyArticle.pdf
-  - [[https://en.wikipedia.org/wiki/Computational_learning_theory#Surveys][WP: COLT surveys]]
-  - [[http://www.cs.ox.ac.uk/people/varun.kanade/teaching/CLT-HT2018/lectures/][COLT lecture 2018]]
-  - Book: "An Introduction to Computational Learning Theory" by Kearns and Vazirani
-  - https://mitpress.mit.edu/books/introduction-computational-learning-theory
+Isn't Jacques Pitrat's CAIA similar in spirit to what Jürgen Schmidhuber wants?
 
+Is Kyndi closest to what we want?
+"Kyndi serves as a tireless digital assistant, identifying the documents and passages that require human judgment."
+https://www.nytimes.com/2018/06/20/technology/deep-learning-artificial-intelligence.html
+
+Kyndi uses Prolog.
+
+I need something similar to Kyndi but able to generate interesting questions for itself to answer.
+I want it to read journal articles and conference proceedings, understand them, and summarize them for me.
+
+Concepts:
+- artificial general intelligence
+- seed AI
+** Why there is no human-level AGI in 2018?
+Which of these is the bottleneck?
+- hardware
+- software
+- our knowledge
+
+Is it an engineering problem or a philosophical problem?
+* Conjectures about language and logic
+Conjectures:
+- Natural languages are just /surface syntaxes/ for first-order logic.
+
+It is straightforward to write a Prolog program that parses some limited English.
+It is still practical to write a Prolog program that parses some richer English with named entity recognition.
+Prolog definite-clause grammars make parsing easy
+
+Another problems:
+- Which information source should the computer trust?
+- How should the computer reconcile conflicting information?
+
+2011 "Natural Language Processing With Prolog in the IBM Watson System"
+https://www.cs.nmsu.edu/ALP/2011/03/natural-language-processing-with-prolog-in-the-ibm-watson-system/
+
+If IBM Watson is possible, then a personal search assistant should be possible.
+* Unifying supervised and unsupervised learning?
+* Concept spaces, word vectors, concept vectors, bags of words
+Let Car represent the concept of car.
+Let Red represent the concept of red.
+Let Modify(Car,Red) represent the concept of red car.
+Then Modify(X,Red) - Modify(Y,Red) = X - Y.
+
+Modify(X,M) - Modify(Y,M) = X - Y.
+* AI approaches
+- logic, symbolism
+- biology, connectionism
+- probabilistic logic programming
+
+What's trending in 2018:
+- deep learning (DL)
+- generative adversarial network (GAN)
+- long short-term memory (LSTM)
+
+There are two ways to make an "infinite-layer" neural network:
+- recurrent neural network (RNN), similar to IIR (infinite-impulse-response) filter in control theory
+- neural ordinary differential equations (NODE), similar to Riemann summation in calculus
+* What is intelligence?
+** The most general definition from 2007
+I think the most general definition is
+"Intelligence measures an agent's ability to achieve goals in a wide range of environments"
+\cite[p.12]{DefineMachIntel}\cite{Legg2007Collection}.
+I think it subsumes all other definitions of intelligence in all other fields such as psychology.
+** Intelligence is an ordering (2018-04-26)
+This idea goes back at least to 2004 in \cite[p.2]{hutter2004universal}.
+
+Intelligence is an /ordering/ of systems.
+
+An order is a transitive antisymmetric relation.
+
+/Intelligence depends on its measurement/.
+Absolute intelligence doesn't exist.
+
+The /behavior/ of a system is whatever it exhibits that can be observed from outside.
+
+How do we decide which system is more intelligent?
+
+Let $A$ be a system.
+
+Let $B$ be a system.
+
+Let $T$ be a task.
+
+Let $S$ be a set of tasks.
+
+Let $T(A)$ denote how well system $A$ does task $T$.
+This is a number.
+Higher is better.
+We can invent any measurement.
+Our definition of "intelligence" is only as good as this measurement.
+
+We say "$A$ is /$T$-better/ than $B$" iff $T(A) > T(B)$.
+
+We say "$A$ /$S$-dominates/ $B$" iff $T(A) > T(B)$ for every task $T \in S$.
+
+We define "to be more $S$-intelligent than" to mean "to $S$-dominate".
+
+The $S$-domination relation forms a partial order of all systems.
+
+That is how.
+**** Example
+Which is more intelligent, a dog or a rock?
+
+That depends on the task set $S$.
+
+It's the rock if ( S = { \text{sit still} } ).
+
+It's the dog if ( S = { \text{move around} } ).
+** Intelligence is function optimization (2018-04-27)
+Let $g$ be a goal function.
+
+A system's $g$-intelligence is how well it optimizes $g$.
+
+What is "how well"?
+
+Optimization (extremization) is either minimization or maximization.
+** What is a mathematical theory of intelligence?
+Here I try an alternative formalization to \cite[p.12]{DefineMachIntel}.
+
+Let $E$ be a set of /environments/.
+
+Let $G : E \to \Real$ be a /goal function/.
+The value of $G(e)$ measures how well the agent performs in environment $e$.
+
+The /intelligence/ of the agent /with respect to $G$ across $E$/ is $\int_E G$.
+
+A /performance/ consists of an agent and an environment.
+
+Assumption: The agent cannot modify $G$.
+
+Behavior is a function taking an environment and outputing something.
+
+Intelligence is /relative/ to $G$ and $E$: /goal/ and /environment/.
+
+If we see longevity as intelligence test,
+then an illiterate farmer who lives to 80
+is more intelligent than a scientist who dies at 20,
+but a rock that has been there for 100 years would even be more intelligent than the farmer.
+
+If we see money as intelligence test,
+then a corrupt politician who steals billions of dollars without getting caught
+is more intelligent than a honest farmer who only has tens of thousands of dollars.
+
+Gaming the system is a sign of intelligence.
+It is hard to design a goal function that gives the desired outcome without undesired side effects.
+
+IQ tests are intelligence measures with small environment set.
+
+Lifespan may be an intelligence measure with huge environment set.
+
+A human can optimize /several/ goal functions across the same environment set.
+A human may be asked to clean a floor, to write a report, to run a company, to cook food,
+and to find the quickest route between home and office,
+and optimize them all.
+
+Some goal functions for humans are (but perhaps not limited to):
+  - Maximize happiness
+  - Minimize pain
+  - Optimize the level of a chemical in the brain
+  - Optimize the time integral of such chemical
+  - Maximize the chance of survival
+
+But I don't know the root goal function that explains all those behaviors.
+
+Where does the word "intelligence" come from? What is its etymology?
+- The word "intelligent" comes from a Latin word that means "to choose between"
+  ([[http://www.dictionary.com/browse/intelligent][Dictionary.com]]).
+
+What are some mathematical definitions of intelligence?
+- "Intelligence measures an agent's ability to achieve goals in a wide range of environments."
+  [Legg2006][Legg2008]
+- [[https://www.researchgate.net/publication/323203054_Defining_intelligence][Shour2018]]:
+  "Defining intelligence as a rate of problem solving and using the concept
+  of network entropy enable measurement, comparison and calculation of
+  collective and individual intelligence and of computational capacity."
+- Tononi integrated information theory.
+  [[https://en.wikipedia.org/wiki/Integrated_information_theory][Wikipedia]].
+- Schmidhuber, Hutter, and team have used Solomonoff algorithmic probability
+  and Kolmogorov complexity to define a theoretically optimal predictor they call AIXI.
+  - J"urgen Schmidhuber. [[http://www.idsia.ch/~juergen/newai/newai.html][Schmidhuber article]].
+  - [[http://www.cs.uic.edu/~piotr/cs594/Prashant-UniversalAI.pdf][Prashant's slides]].
+    These define "universal" and "optimal".
+- Marcus Hutter approached intelligence from \emph{algorithmic} complexity theory (Solomonoff induction)
+  \cite{DefineMachIntel}.
+- Warren D. Smith approached intelligence from \emph{computational} complexity theory
+  (NP-completeness)
+  \cite{WdsIntel, WdsIntelSlide}
+
+\cite{Legg2007Collection} is a collection of definitions of intelligence.
+** Historical definitions
+[[https://brocku.ca/MeadProject/sup/Boring_1923.html][Edwin Boring in 1923]]
+proposed that we start out by defining intelligence as what intelligence tests measure
+"until further scientific observation allows us to extend the definition".
+** What is learning?
+There are so many ML algorithms.
+What's the common thing?
+
+- Should I read these?
+  - [[https://medium.com/machine-learning-world/learning-path-for-machine-learning-engineer-a7d5dc9de4a4][How To Become A Machine Learning Engineer: Learning Path]]
+  - https://dzone.com/guides/artificial-intelligence-machine-learning-and-predi
+- What is the relationship between ML and statistical modeling?
+- How do we categorize ML algorithms?
+  - Online vs offline
+    - [[https://en.wikipedia.org/wiki/Online_machine_learning][Wikipedia: Online machine learning]]
+  - Discrete-time model vs continuous-time model
+    - LTI (linear time-invariant) systems
+  - Assemble answers from these sources:
+    - [[https://en.wikipedia.org/wiki/Machine_learning#Approaches][Wikipedia: Machine learning, approaches]]
+    - [[https://en.wikipedia.org/wiki/Outline_of_machine_learning#Machine_learning_algorithms][Wikipedia: Outline of machine learning, algorithms]]
+    - [[https://en.wikipedia.org/wiki/Outline_of_machine_learning#Machine_learning_methods][Wikipedia: Outline of machine learning, methods]]
+    - [[https://machinelearningmastery.com/a-tour-of-machine-learning-algorithms/][A tour of machine learning algorithms]]
+    - [[https://towardsdatascience.com/types-of-machine-learning-algorithms-you-should-know-953a08248861][Types of machine learning algorithms you should know]]
+    - [[https://stats.stackexchange.com/questions/214381/what-exactly-is-the-mathematical-definition-of-a-classifier-classification-alg][Stats SE 214381: mathematical definition of classifier]]
+    - [[https://www.analyticsvidhya.com/blog/2017/09/common-machine-learning-algorithms/][Common machine learning algorithms]]
+- What is a neural network?
+  - A /neuron/ is a function in $\Real^\infty \to \Real$.
+  - A /neural network/ layer is a function in $\Real^\infty \to \Real^\infty$.
+  - Why do neural networks work?
+    - [[https://en.wikipedia.org/wiki/Universal_approximation_theorem][Wikipedia: Universal approximation theorem]]
+- Statistical learning
+- What is backpropagation, from functional analysis point of view?
+- Who are AI/ML researchers and what are their focuses?
+  - Does Geoffrey Hinton specialize in image recognition?
+- What is the relationship between intelligence and compression?
+- Consider endofunctions of infinite-dimensional real tuple space.
+  That is, consider $f, g : \Real^\infty \to \Real^\infty$.
+  - What is the distance between them?
+- Reductionistically, a brain can be thought as a function in $\Real \to \Real^\infty \to \Real^\infty$.
+  - The first parameter is time.
+  - The second parameter is the sensor signals.
+  - The output of the function is the actuator signals.
+  - Can we model a brain by such
+    [[https://en.wikipedia.org/wiki/Functional_differential_equation][functional differential equation]]
+    involving [[https://en.wikipedia.org/wiki/Functional_derivative][functional derivative]]s?
+  - $\norm{f(t+h,x) - f(t,x)} = h \cdot g(t,x)$
+  - $\norm{f(t+h) - f(t)} = h \cdot g(t)$
+  - It seems wrong. Abandon this path. See below.
+- We model the input as a function $x : \Real \to \Real^n$.
+- We model the output as a function $y : \Real \to \Real^n$.
+  - $\norm{y(t+h) - y(t)} = h \cdot g(t)$
+  - $y(t+h) - y(t) = h \cdot (dy)(t)$
+  - $\norm{(dy)(t)} = g(t)$
+    - There are infinitely many $dy$ that satisfies that. Which one should we choose?
+  - If $y : \Real \to \Real^n$ then $dy : \Real \to \Real^n$.
+- A classifier is a function in $\Real^\infty \to \Real$.
+- A control system snapshot is a function in $\Real^\infty \to \Real^\infty$.
+- A control system is a function in $\Real \to \Real^\infty \to \Real^\infty$.
+- How does $F$ have memory if $F(t) = \int_0^t f(x) ~ dx$?
+
+Why has AI mastered chess, but not real life?
+Because chess search space is much smaller than real-life search space.
+** What is AI?
+- In the 1950s, AI was whatever McCarthy et al. were doing.
+  - "McCarthy coined the term 'artificial intelligence' in 1955, and organized the famous Dartmouth Conference in Summer 1956.
+    This conference started AI as a field."
+    ([[https://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist)][WP: John McCarthy (computer scientist)]])
+  - [[https://en.wikipedia.org/wiki/Dartmouth_workshop][WP: Dartmouth workshop]]
+  - [[http://raysolomonoff.com/dartmouth/][Ray Solomonoff's Dartmouth archives]]
+- What are AI approaches? How are we trying to make an AI?
+  - Pedro Domingos categorizes AI approaches into five /tribes/:
+    - symbolists (symbolic logic)
+    - connectionists (neural networks)
+    - evolutionaries (genetic algorithms)
+    - bayesians (statistical learning, probabilistic inference)
+    - analogizers (what is this?)
+- How do we measure intelligence? How do we measure the performance of a learning algorithm?
+  - [[https://en.wikipedia.org/wiki/Computational_learning_theory][Wikipedia: Computational learning theory]]
+    - What is the goal of computational learning theory?
+      - "Give a rigorous, computationally detailed and plausible account of how learning can be done." [Angluin1992]
+    - "a subfield of Artificial Intelligence devoted to studying the design and analysis of machine learning algorithms"
+    - What is a mathematical theory of learning?
+      - What is learning?
+        - 2018-04-19: "To learn something" is to get better at it.
+          Usually learning uses experience.
+          - What is the formal definition of "get better"?
+            - Let there be a system.
+              Pick a task.
+              Pick a time interval.
+              Test the system several times throughout the time interval.
+              Let the test results be the sequence $X = x_1, x_2, \ldots, x_n$.
+              We say that the system is /learning/ the task in the time interval
+              iff $x_1 < x_2 < \ldots < x_n$
+              (that is iff $X$ is a monotonically increasing sequence).
+            - How do we formalize "get better" and "experience"?
+              - "Get better" can be modeled by /monotonically increasing score/
+              - "Experience" can be modeled by a sequence
+          - Is experience (past data) necessary for learning?
+            Are mistakes necessary for learning?
+        - Supervised learning is extrapolating a function from finite samples.
+          Usually, the function is high-dimensional, and the samples are few.
+        - It is simple to measure learning success in perfect information games such as chess.
+          Chess also doesn't require any sensors and motors.
+* Abbreviations
+- AI: Artificial Intelligence
+- ML: Machine Learning
+- COLT: Computational Learning Theory
+* Surveys, reviews, positions, and expositions
+- Google query: most recent mathematical ai book
+- http://eliassi.org/COLTSurveyArticle.pdf
+- [[https://en.wikipedia.org/wiki/Computational_learning_theory#Surveys][WP: COLT surveys]]
+- [[http://www.cs.ox.ac.uk/people/varun.kanade/teaching/CLT-HT2018/lectures/][COLT lecture 2018]]
+- Book: "An Introduction to Computational Learning Theory" by Kearns and Vazirani
+- https://mitpress.mit.edu/books/introduction-computational-learning-theory
 ** Plan
    :PROPERTIES:
    :CUSTOM_ID: plan
@@ -536,9 +833,7 @@ and being told to do things by machines.
 - http://jonbho.net/2014/09/25/defining-intelligence/
 - [[https://github.com/HuwCampbell/grenade][HuwCampbell/grenade: Deep Learning in Haskell]]
 - [[http://www.randomhacks.net/2007/03/03/smart-classification-with-haskell/][Smart classification using Bayesian monads in Haskell - Random Hacks]]
-* intmeta.md
-This page is about AI research, not about AI.
-
+* Artificial intelligence research
 ** Questions
    :PROPERTIES:
    :CUSTOM_ID: questions
@@ -614,308 +909,7 @@ This page is about AI research, not about AI.
         then we would have gone extinct long ago, wouldn't we?
 
         - What structure is that?
-
-* intwhat.md
-** Intelligence is an ordering (2018-04-26)
-   :PROPERTIES:
-   :CUSTOM_ID: intelligence-is-an-ordering-2018-04-26
-   :END:
-
-This idea goes back at least to 2005 in [Hutter2005Book] (p. 2).
-
-Intelligence is an /ordering/ of systems.
-
-An order is a transitive antisymmetric relation.
-
-[[https://brocku.ca/MeadProject/sup/Boring_1923.html][Edwin Boring in 1923]]
-proposed that we start out by defining intelligence as what intelligence tests measure
-"until further scientific observation allows us to extend the definition".
-That definition makes sense mathematically.
-
-/Intelligence depends on its measurement/. Absolute intelligence doesn't exist.
-
-- The /behavior/ of a system is whatever it exhibits that can be observed from outside.
-
-*** How do we decide which system is more intelligent?
-    :PROPERTIES:
-    :CUSTOM_ID: how-do-we-decide-which-system-is-more-intelligent
-    :END:
-
-Let $A$ be a system.
-
-Let $B$ be a system.
-
-Let $T$ be a task.
-
-Let $S$ be a set of tasks.
-
-Let $T(A)$ denote how well system $A$ does task $T$.
-This is a number.
-Higher is better.
-We can invent any measurement.
-Our definition of "intelligence" is only as good as this measurement.
-
-We say "$A$ is /$T$-better/ than $B$" iff $T(A) > T(B)$.
-
-We say "$A$ /$S$-dominates/ $B$" iff $T(A) > T(B)$ for every task $T \in S$.
-
-We define "to be more $S$-intelligent than" to mean "to $S$-dominate".
-
-The $S$-domination relation forms a partial order of all systems.
-
-That is how.
-
-**** Example
-     :PROPERTIES:
-     :CUSTOM_ID: example
-     :END:
-
-Which is more intelligent, a dog or a rock?
-
-That depends on the task set $S$.
-
-It's the rock if ( S = { \text{sit still} } ).
-
-It's the dog if ( S = { \text{move around} } ).
-
-** Intelligence is function optimization (2018-04-27)
-   :PROPERTIES:
-   :CUSTOM_ID: intelligence-is-function-optimization-2018-04-27
-   :END:
-
-Let $g$ be a goal function.
-
-A system's $g$-intelligence is how well it optimizes $g$.
-
-What is "how well"?
-
-Optimization (extremization) is either minimization or maximization.
-
-** What is a mathematical theory of intelligence?
-   :PROPERTIES:
-   :CUSTOM_ID: what-is-a-mathematical-theory-of-intelligence
-   :END:
-
-- In 2007, on page 12, in the paper [[https://arxiv.org/pdf/0712.3329.pdf][Universal intelligence: a definition of machine intelligence]],
-  Shane Legg and Marcus Hutter wrote,
-  "Intelligence measures an agent's ability to achieve goals in a wide range of environments,"
-  and then they formalized them.
-  Here I try another formalization.
-
-  - Let $E$ be a set of /environments/.
-  - Let $G : E \to \Real$ be a /goal function/.
-    The value of $G(e)$ measures how well the agent performs in environment $e$.
-  - The /intelligence/ of the agent /with respect to $G$ across $E$/ is $\int_E G$.
-  - A /performance/ consists of an agent and an environment.
-  - Assumption: The agent cannot modify $G$.
-  - Behavior is a function taking an environment and outputing something.
-  - Intelligence is /relative/ to $G$ and $E$: /goal/ and /environment/.
-  - If we see longevity as intelligence test,
-    then an illiterate farmer who lives to 80
-    is more intelligent than a scientist who dies at 20,
-    but a rock that has been there for 100 years would even be more intelligent than the farmer.
-  - If we see money as intelligence test,
-    then a corrupt politician who steals billions of dollars without getting caught
-    is more intelligent than a honest farmer who only has tens of thousands of dollars.
-
-- Gaming the system is a sign of intelligence.
-  It is hard to design a goal function that gives the desired outcome without undesired side effects.
-- IQ tests are intelligence measures with small environment set.
-- Lifespan may be an intelligence measure with huge environment set.
-- A human can optimize /several/ goal functions across the same environment set.
-  A human may be asked to clean a floor, to write a report, to run a company, to cook food,
-  and to find the quickest route between home and office,
-  and optimize them all.
-- Some goal functions for humans are (but perhaps not limited to):
-
-  - Maximize happiness
-  - Minimize pain
-  - Optimize the level of a chemical in the brain
-  - Optimize the time integral of such chemical
-  - Maximize the chance of survival
-
-- but I don't know the root goal function
-  that explains all those behaviors.
-- Where does the word "intelligence" come from? What is its etymology?
-
-  - The word "intelligent" comes from a Latin word that means "to choose between"
-    ([[http://www.dictionary.com/browse/intelligent][Dictionary.com]]).
-
-- What are some mathematical definitions of intelligence?
-
-  - "Intelligence measures an agent's ability to achieve goals in a wide range of environments."
-    [Legg2006][Legg2008]
-  - [[https://www.researchgate.net/publication/323203054_Defining_intelligence][Shour2018]]:
-    "Defining intelligence as a rate of problem solving and using the concept
-    of network entropy enable measurement, comparison and calculation of
-    collective and individual intelligence and of computational capacity."
-  - Tononi integrated information theory.
-    [[https://en.wikipedia.org/wiki/Integrated_information_theory][Wikipedia]].
-  - Schmidhuber, Hutter, and team have used Solomonoff algorithmic probability
-    and Kolmogorov complexity to define a theoretically optimal predictor they call AIXI.
-
-    - J"urgen Schmidhuber. [[http://www.idsia.ch/~juergen/newai/newai.html][Schmidhuber article]].
-    - [[http://www.cs.uic.edu/~piotr/cs594/Prashant-UniversalAI.pdf][Prashant's slides]].
-      These define "universal" and "optimal".
-
-  - Marcus Hutter approached intelligence from \emph{algorithmic} complexity theory (Solomonoff induction)
-    \cite{DefineMachIntel}.
-  - Warren D. Smith approached intelligence from \emph{computational} complexity theory
-    (NP-completeness)
-    \cite{WdsIntel, WdsIntelSlide}
-
-- What are other definitions of intelligence?
-
-  - Legg and Hutter has collected definitions of intelligence in [Legg2007Collection].
-
-** What is learning?
-   :PROPERTIES:
-   :CUSTOM_ID: what-is-learning
-   :END:
-
-- There are so many ML algorithms.
-  What's the common thing?
-- Should I read these?
-
-  - [[https://medium.com/machine-learning-world/learning-path-for-machine-learning-engineer-a7d5dc9de4a4][How To Become A Machine Learning Engineer: Learning Path]]
-  - https://dzone.com/guides/artificial-intelligence-machine-learning-and-predi
-
-- What is the relationship between ML and statistical modeling?
-- How do we categorize ML algorithms?
-
-  - Online vs offline
-
-    - [[https://en.wikipedia.org/wiki/Online_machine_learning][Wikipedia: Online machine learning]]
-
-  - Discrete-time model vs continuous-time model
-
-    - LTI (linear time-invariant) systems
-
-  - Assemble answers from these sources:
-
-    - [[https://en.wikipedia.org/wiki/Machine_learning#Approaches][Wikipedia: Machine learning, approaches]]
-    - [[https://en.wikipedia.org/wiki/Outline_of_machine_learning#Machine_learning_algorithms][Wikipedia: Outline of machine learning, algorithms]]
-    - [[https://en.wikipedia.org/wiki/Outline_of_machine_learning#Machine_learning_methods][Wikipedia: Outline of machine learning, methods]]
-    - [[https://machinelearningmastery.com/a-tour-of-machine-learning-algorithms/][A tour of machine learning algorithms]]
-    - [[https://towardsdatascience.com/types-of-machine-learning-algorithms-you-should-know-953a08248861][Types of machine learning algorithms you should know]]
-    - [[https://stats.stackexchange.com/questions/214381/what-exactly-is-the-mathematical-definition-of-a-classifier-classification-alg][Stats SE 214381: mathematical definition of classifier]]
-    - [[https://www.analyticsvidhya.com/blog/2017/09/common-machine-learning-algorithms/][Common machine learning algorithms]]
-
-- What is a neural network?
-
-  - A /neuron/ is a function in $\Real^\infty \to \Real$.
-  - A /neural network/ layer is a function in $\Real^\infty \to \Real^\infty$.
-  - Why do neural networks work?
-
-    - [[https://en.wikipedia.org/wiki/Universal_approximation_theorem][Wikipedia: Universal approximation theorem]]
-
-- Statistical learning
-- What is backpropagation, from functional analysis point of view?
-- Who are AI/ML researchers and what are their focuses?
-
-  - Does Geoffrey Hinton specialize in image recognition?
-
-- What is the relationship between intelligence and compression?
-- Consider endofunctions of infinite-dimensional real tuple space.
-  That is, consider $f, g : \Real^\infty \to \Real^\infty$.
-
-  - What is the distance between them?
-
-- Reductionistically, a brain can be thought as a function in $\Real \to \Real^\infty \to \Real^\infty$.
-
-  - The first parameter is time.
-  - The second parameter is the sensor signals.
-  - The output of the function is the actuator signals.
-  - Can we model a brain by such
-    [[https://en.wikipedia.org/wiki/Functional_differential_equation][functional differential equation]]
-    involving [[https://en.wikipedia.org/wiki/Functional_derivative][functional derivative]]s?
-  - $\norm{f(t+h,x) - f(t,x)} = h \cdot g(t,x)$
-  - $\norm{f(t+h) - f(t)} = h \cdot g(t)$
-  - It seems wrong. Abandon this path. See below.
-
-- We model the input as a function $x : \Real \to \Real^n$.
-- We model the output as a function $y : \Real \to \Real^n$.
-
-  - $\norm{y(t+h) - y(t)} = h \cdot g(t)$
-  - $y(t+h) - y(t) = h \cdot (dy)(t)$
-  - $\norm{(dy)(t)} = g(t)$
-
-    - There are infinitely many $dy$ that satisfies that. Which one should we choose?
-
-  - If $y : \Real \to \Real^n$ then $dy : \Real \to \Real^n$.
-
-- A classifier is a function in $\Real^\infty \to \Real$.
-- A control system snapshot is a function in $\Real^\infty \to \Real^\infty$.
-- A control system is a function in $\Real \to \Real^\infty \to \Real^\infty$.
-- How does $F$ have memory if $F(t) = \int_0^t f(x) ~ dx$?
-
-Why has AI mastered chess, but not real life?
-Because chess search space is much smaller than real-life search space.
-
-** What is AI?
-   :PROPERTIES:
-   :CUSTOM_ID: what-is-ai
-   :END:
-
-- In the 1950s, AI was whatever McCarthy et al. were doing.
-
-  - "McCarthy coined the term 'artificial intelligence' in 1955, and organized the famous Dartmouth Conference in Summer 1956.
-    This conference started AI as a field."
-    ([[https://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist)][WP: John McCarthy (computer scientist)]])
-  - [[https://en.wikipedia.org/wiki/Dartmouth_workshop][WP: Dartmouth workshop]]
-  - [[http://raysolomonoff.com/dartmouth/][Ray Solomonoff's Dartmouth archives]]
-
-- What are AI approaches? How are we trying to make an AI?
-
-  - Pedro Domingos categorizes AI approaches into five /tribes/:
-
-    - symbolists (symbolic logic)
-    - connectionists (neural networks)
-    - evolutionaries (genetic algorithms)
-    - bayesians (statistical learning, probabilistic inference)
-    - analogizers (what is this?)
-
-- How do we measure intelligence? How do we measure the performance of a learning algorithm?
-
-  - [[https://en.wikipedia.org/wiki/Computational_learning_theory][Wikipedia: Computational learning theory]]
-
-    - What is the goal of computational learning theory?
-
-      - "Give a rigorous, computationally detailed and plausible account of how learning can be done." [Angluin1992]
-
-    - "a subfield of Artificial Intelligence devoted to studying the design and analysis of machine learning algorithms"
-    - What is a mathematical theory of learning?
-
-      - What is learning?
-
-        - 2018-04-19: "To learn something" is to get better at it.
-          Usually learning uses experience.
-
-          - What is the formal definition of "get better"?
-
-            - Let there be a system.
-              Pick a task.
-              Pick a time interval.
-              Test the system several times throughout the time interval.
-              Let the test results be the sequence $X = x_1, x_2, \ldots, x_n$.
-              We say that the system is /learning/ the task in the time interval
-              iff $x_1 < x_2 < \ldots < x_n$
-              (that is iff $X$ is a monotonically increasing sequence).
-            - How do we formalize "get better" and "experience"?
-
-              - "Get better" can be modeled by /monotonically increasing score/
-              - "Experience" can be modeled by a sequence
-
-          - Is experience (past data) necessary for learning?
-            Are mistakes necessary for learning?
-
-        - Supervised learning is extrapolating a function from finite samples.
-          Usually, the function is high-dimensional, and the samples are few.
-        - It is simple to measure learning success in perfect information games such as chess.
-          Chess also doesn't require any sensors and motors.
-
-
-* approx.md
+* Approximation theory
 We are interested in approximation theory because we want to justify how neural networks work.
 
 - 2016, article, "Deep vs. shallow networks: An approximation theory perspective", [[https://arxiv.org/abs/1608.03287][pdf available]]
@@ -942,39 +936,24 @@ Which should we use?
   Why is it called "uniform"?
   [[https://en.wikipedia.org/wiki/Uniform_norm][WP:Uniform norm]].
 - What is this norm called? $\int_{x \in I} [f(x)-g(x)]^2 ~ dx$.
-
 ** Other
-   :PROPERTIES:
-   :CUSTOM_ID: other
-   :END:
-
 - Courses
-
   - 2017, [[https://www.nada.kth.se/~olofr/Approx/][Approximation Theory, 7.5 ECTS]]
   - 2012, syllabus, Drexel University, Math 680-002 (Approximation Theory), [[http://www.math.drexel.edu/~foucart/TeachingFiles/S12/Math680Syl.pdf][pdf]]
   - 2002, [[http://math.ucdenver.edu/~aknyazev/teaching/02/5667/][MATH 5667-001: Introduction to Approximation Theory, CU-Denver, Fall 02]].
-
 - Subfields of approximation theory
-
   - Classical approximation theory deals with univariate real functions $\Real \to \Real$.
   - Multivariate approximation theory deals with multivariate real functions $\Real^m \to \Real^n$.
-
 - Scenarios
-
   - Suppose we want to approximate the function $f$,
     but we don't know the equation for $f$;
     we only have a few input-output samples.
-
     - Can we approximate $f$?
     - How do approximation and curve-fitting relate?
-
 - Overview
-
   - What is a multivariate polynomial?
   - Commonly conflated concepts
-
     - Approximation is not estimation.
-
       - Approximation converges.
         Estimation doesn't, because the actual value is unknown.
       - Approximation doesn't guess.
@@ -983,149 +962,93 @@ Which should we use?
         Estimation has uncertainty.
       - Approximation is part of analysis.
         Estimation is part of statistics.
-
 - The /uniform norm/ is ...
 - Best approximation is ...
 - Uniform approximation is best approximation in uniform norm.
 - https://en.wikipedia.org/wiki/Approximation_theory#Remez's_algorithm
-
   - https://en.wikipedia.org/wiki/Remez_algorithm
-
     - Inputs: a function, and an interval.
     - Output: an optimal polynomial approximating the input function in the input interval.
-
 - What are Bernstein polynomials?
   What question does the Weierstrass approximation theorem answer?
-
   - http://www4.ncsu.edu/~mtchu/Teaching/Lectures/MA530/chapter7.pdf
-
 - [[https://en.wikipedia.org/wiki/Chebyshev_polynomials][WP:Chebyshev polynomials]]
-
   - Why is it important?
     How does it relate to best approximation?
-
     - "Chebyshev polynomials are important in approximation theory because the roots of the Chebyshev polynomials of the first kind, which are also called Chebyshev nodes, are used as nodes in polynomial interpolation.
       The resulting interpolation polynomial minimizes the problem of Runge's phenomenon and provides an approximation that is close to the polynomial of best approximation to a continuous function under the maximum norm."
-
 - Machine learning as relation approximation
-
   - Machine learning, statistical modelling, function approximation, and curve fitting are related.
   - Generalize function approximation to relation approximation.
   - A function can be stated as a relation.
   - A relation can be stated as a function.
-
 - Consider the least-square solution to an overdetermined system of linear equations.
   Is such solution a kind of approximation?
-
   - There is no exact solution to begin with?
   - Why is it called "least-squares /approximation/"?
   - How can you approximate something that does not exist?
-
     - 1.2 approximates 1.23. Both 1.2 and 1.23 exist.
     - Contrarily, there is no X such that AX = B.
-
 - What are approximation schemes?
-
   - https://en.wikipedia.org/wiki/Polynomial-time_approximation_scheme
-
 - How do we approximate a function?
   Is it even possible to approximate arbitrary functions?
-
   - If the function is analytic, we can truncate its Taylor series.
-
     - Commonly-used differentiable functions are analytic.
-
   - Chebyshev polynomials?
   - If we have an approximation scheme, we may be able to improve it.
-
     - https://en.wikipedia.org/wiki/Series_acceleration
-
       - https://en.wikipedia.org/wiki/Aitken%27s_delta-squared_process
-
   - google search: machine learning approximation theory
-
     - [[https://math.stackexchange.com/questions/2680158/approximation-theory-for-deep-learning-models-where-to-start][Approximation Theory for Deep Learning Models: Where to Start? - Mathematics Stack Exchange]]
     - http://www.vision.jhu.edu/tutorials/ICCV15-Tutorial-Math-Deep-Learning-Intro-Rene-Joan.pdf
     - 2017, slides, "From approximation theory to machine learning: New perspectives in the theory of function spaces and their applications", [[http://npfsa2017.uni-jena.de/l_notes/vybiral.pdf][pdf]]
     - 2018, article, "Approximation theory, Numerical Analysis and Deep Learning", [[http://at.yorku.ca/c/b/p/g/30.htm][abstract]]
-
       - "the problem of numerically solving a large class of (high-dimensional) PDEs (such as linear Black-Scholes or diffusion equations) can be cast into a classical supervised learning problem which can then be solved by deep learning methods"
-
 - Determine whether we need to read these
-
   - Very likely
-
     - 2015, slides, "Best polynomial approximation: multidimensional case", [[https://carma.newcastle.edu.au/meetings/spcom/talks/Sukhorukova-SPCOM_2015.pdf][pdf]]
     - https://en.wikipedia.org/wiki/Bernstein_polynomial#Approximating_continuous_functions
-
       - https://en.wikipedia.org/wiki/Pointwise_convergence
       - https://en.wikipedia.org/wiki/Uniform_convergence
-
     - https://en.wikipedia.org/wiki/Approximation
-
       - https://en.wikipedia.org/wiki/Approximation_theory
-
         - is a branch of https://en.wikipedia.org/wiki/Functional_analysis
         - https://en.wikipedia.org/wiki/Approximation_theory#Chebyshev_approximation
-
       - https://en.wikipedia.org/wiki/Approximate_computing
-
         - example: https://en.wikipedia.org/wiki/Artificial_neural_network
-
     - https://en.wikipedia.org/wiki/Telescoping_series
-
   - Likely
-
     - 2018, slides, "Deep Learning: Approximation of Functions by Composition", [[http://helper.ipam.ucla.edu/publications/dlt2018/dlt2018_14936.pdf][pdf]]
-
       - classical approximation vs deep learning
-
     - 2013, short survey article draft, "Multivariate approximation", [[http://num.math.uni-goettingen.de/schaback/research/papers/MultApp_01.pdf][pdf]]
     - 1995, short introduction, "Multivariate Interpolation and Approximation by Translates of a Basis Function", [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.45.2194&rep=rep1&type=pdf][pdf]]
     - 1989, article, "A Theory of Networks for Approximation and Learning", [[http://www.dtic.mil/docs/citations/ADA212359][pdf available]]
-
       - What is the summary, especially about learning and approximation theory?
-
   - Unlikely
-
     - Survey-like
-
       - 2006, chapter, "Topics in multivariate approximation theory", [[https://www.researchgate.net/publication/226303661_Topics_in_multivariate_approximation_theory][pdf available]]
       - 1982, article, "Topics in multivariate approximation theory", [[http://www.dtic.mil/dtic/tr/fulltext/u2/a116248.pdf][pdf]]
       - 1986, "Multivariate Approximation Theory: Selected Topics", [[https://epubs.siam.org/doi/book/10.1137/1.9781611970197][paywall]]
-
     - Theorem
-
       - 2017, article, "Multivariate polynomial approximation in the hypercube", [[https://people.maths.ox.ac.uk/trefethen/hypercube_published.pdf][pdf]]
-
     - 2017, article, "Selected open problems in polynomial approximation and potential theory", [[http://drna.padovauniversitypress.it/system/files/papers/BaranCiezEgginkKowalskaNagyPierzcha%C5%82a_DRNA2017.pdf][pdf]]
     - 2017, article, "High order approximation theory for Banach space valued functions", [[https://ictp.acad.ro/jnaat/journal/article/view/1112][pdf available]]
     - Articles summarizing people's works
-
       - 2017, article, "Michael J.D. Powell's work in approximation theory and optimisation", [[https://www.sciencedirect.com/science/article/abs/pii/S0021904517301053][paywall]]
       - 2000, article, "Weierstrass and Approximation Theory", [[https://www.sciencedirect.com/science/article/pii/S0021904500935081][paywall]]
-
     - 2013, article, "[1312.5540] Emerging problems in approximation theory for the numerical solution of nonlinear PDEs of integrable type", [[https://arxiv.org/abs/1312.5540][pdf available]]
     - 1985, article, "Some problems in approximation theory and numerical analysis - IOPscience", [[http://iopscience.iop.org/article/10.1070/RM1985v040n01ABEH003526][pdf available]]
     - 2011, article, "Experiments on Probabilistic Approximations", [[https://people.eecs.ku.edu/~jerzygb/c154-clark.pdf][pdf]]
-
 - Less relevant overview
-
   - Why do we approximate?
-
     - Because it is practically inevitable.
-
       - Fundamental reason: Because computers are finite.
       - Practical reason: Trade-off between computation time and precision.
-
         - The more error we can afford, the faster we can run.
-
           - May be related: 2013 monograph "Faster Algorithms via Approximation Theory" [[http://theory.epfl.ch/vishnoi/Publications_files/approx-survey.pdf][pdf]]
-
   - 2018 book "Recent Advances in Constructive Approximation Theory" [[https://www.springer.com/us/book/9783319921648][paywall]]
-
-
-* atrunc.md
+* Approximation by truncation
 We can approximate a series by /truncating/ it.
 
 Suppose that the series $y = x_0 + x_1 + \ldots$ converges.
@@ -1140,12 +1063,7 @@ We cut its tail.
 We take finitely many summands from the beginning.
 
 Here come examples: Truncate all the series!
-
 ** Power series truncation
-   :PROPERTIES:
-   :CUSTOM_ID: power-series-truncation
-   :END:
-
 Below we truncate a power series.
 
 Decimal truncation: $1.2$ approximates $1.23$.
@@ -1170,12 +1088,7 @@ Digression: Is a (complex) Fourier series a power series?
 Reminder: A Fourier series looks like $\sum_{k=0}^{\infty} c_k e^{ikt}$.
 
 [[https://en.wikipedia.org/wiki/Laurent_series][WP:Laurent series]] truncation?
-
 *** Digression: What is an analytic function?
-    :PROPERTIES:
-    :CUSTOM_ID: digression-what-is-an-analytic-function
-    :END:
-
 A function is /analytic/ iff it can be represented by power series.
 
 Formally, a function $f$ is /analytic/ iff for every $x \in \dom(f)$, we can write $f(x)$ as a power series.
@@ -1183,23 +1096,13 @@ Formally, a function $f$ is /analytic/ iff for every $x \in \dom(f)$, we can wri
 See also [[https://en.wikipedia.org/wiki/Power_series#Analytic_functions][WP:Definition of "analytic function"]].
 
 Taylor series expansion is illustrated in the 2015 slides "Taylor Series: Expansions, Approximations and Error" ([[https://relate.cs.illinois.edu/course/cs357-f15/file-version/2978ddd5db9824a374db221c47a33f437f2df1da/media/cs357-slides6.pdf][pdf]])
-
 *** Digression: What is the relationship between polynomial and power series?
-    :PROPERTIES:
-    :CUSTOM_ID: digression-what-is-the-relationship-between-polynomial-and-power-series
-    :END:
-
 A polynomial is an algebraic expression. It is not a function.
 
 Power series is a kind of infinite polynomial.
 
 [[https://en.wikipedia.org/wiki/Formal_power_series][WP:Formal power series]]: "A formal power series is a generalization of a polynomial, where the number of terms is allowed to be infinite."
-
 ** Iteration truncation
-   :PROPERTIES:
-   :CUSTOM_ID: iteration-truncation
-   :END:
-
 - [[https://en.wikipedia.org/wiki/Iterated_function][WP:Iterated function]]
 - [[https://en.wikipedia.org/wiki/Iterative_method][WP:Iterative method]]
 - [[http://mathworld.wolfram.com/NewtonsIteration.html][Newton's Iteration]]
@@ -1226,3 +1129,4 @@ Conference: "Approximation Theory and Machine Learning", at Purdue University, S
 - http://www.math.purdue.edu/calendar/conferences/machinelearning/abstracts.php
 * Analogizers, recommender systems, matrices
 - https://medium.com/s/story/spotifys-discover-weekly-how-machine-learning-finds-your-new-music-19a41ab76efe
+* Bibliography
