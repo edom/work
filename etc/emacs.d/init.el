@@ -217,8 +217,11 @@ Use this instead of 'C-c C-e P f'."
 (defun my-org-key-bindings ()
   (global-set-key (kbd "C-x g") 'magit) ; 2018-12-22 20:52 +0700 suddenly the shortcut has to be explicitly bound
   (global-set-key (kbd "<f2>") 'save-buffer)
-  (global-set-key (kbd "<f5>") 'my-org-publish)
-  (global-set-key (kbd "<f6>") 'my-org-publish-current-file)
+  ;; We have replaced Org Exporter with Pandoc and Makefile.
+  ;;(global-set-key (kbd "<f5>") 'my-org-publish)
+  ;;(global-set-key (kbd "<f6>") 'my-org-publish-current-file)
+  (global-set-key (kbd "<f5>") 'goto-last-change) ; akin to vim C-o
+  (global-set-key (kbd "<f6>") 'goto-last-change-reverse) ; akin to vim C-i
   (global-set-key (kbd "<f7>") 'my-org-publish-current-file-with-pandoc)
   (global-set-key (kbd "<f8>") 'switch-to-buffer) ; my left pinky is tired of pressing C-x b
   )
