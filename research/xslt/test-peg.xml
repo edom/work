@@ -1,0 +1,31 @@
+<test>
+    <grammar xml:id="g1">
+        <sequence name="top">
+            <refer to="k-let"/>
+            <refer to="space"/>
+            <refer to="name"/>
+            <refer to="space"/>
+            <char in="="/>
+            <refer to="space"/>
+            <refer to="name"/>
+            <end/>
+        </sequence>
+        <fixed name="k-let" string="let"/>
+        <sequence name="name">
+            <char in="abcdefghijklmnopqrstuvwxyz"/>
+            <optional>
+                <refer to="name"/>
+            </optional>
+        </sequence>
+        <sequence name="space">
+            <optional>
+                <sequence>
+                    <char in=" "/>
+                    <refer to="space"/>
+                </sequence>
+            </optional>
+        </sequence>
+        <sequence name="empty"/>
+    </grammar>
+    <apply grammar="g1" input="let foobar = badumtss"/>
+</test>

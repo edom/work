@@ -1,0 +1,55 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:include schemaLocation="200-thing.xsd"/>
+
+    <xsd:group name="Resource">
+        <xsd:annotation>
+            <xsd:documentation>Everything that has an URL (can be consumed online by a human).</xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+            <xsd:group ref="Thing"/>
+            <xsd:element name="url" type="xsd:anyURI"/>
+            <xsd:element name="title" type="xsd:anyType"><!-- XXX anyType? -->
+                <xsd:annotation>
+                    <xsd:documentation>Link text.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="publication" type="Publication"/>
+        </xsd:choice>
+    </xsd:group>
+
+    <xsd:complexType name="Publication">
+        <xsd:annotation>
+            <xsd:documentation>Describes how a resource was published (when, where, etc.).</xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="time" type="Publication_time"/>
+            <xsd:element name="journal">
+                <xsd:complexType>
+                    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                        <xsd:group ref="Journal"/>
+                    </xsd:choice>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:choice>
+    </xsd:complexType>
+
+    <xsd:group name="Journal">
+        <xsd:choice>
+            <xsd:group ref="Thing"/>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="volume" type="xsd:string"/>
+            <xsd:element name="issue" type="xsd:string"/>
+            <xsd:element name="year" type="xsd:gYear"/>
+        </xsd:choice>
+    </xsd:group>
+
+    <xsd:attributeGroup name="Resource">
+        <xsd:attribute name="broken" type="xsd:boolean"/>
+    </xsd:attributeGroup>
+
+    <xsd:simpleType name="Publication_time">
+        <xsd:union memberTypes="xsd:gYear xsd:date xsd:dateTime"/>
+    </xsd:simpleType>
+
+</xsd:schema>

@@ -1,0 +1,38 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:include schemaLocation="400-person.xsd"/>
+
+    <xsd:group name="Authored">
+        <xsd:annotation>
+            <xsd:documentation>Mixin for authorship.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+            <xsd:element name="author" type="Author">
+                <xsd:annotation>
+                    <xsd:documentation>Who brought the thing into existence.
+                    Source. Origin. Provenance.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:choice>
+    </xsd:group>
+
+    <xsd:complexType name="Author">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:group ref="Author"/>
+        </xsd:choice>
+    </xsd:complexType>
+
+    <xsd:group name="Author">
+        <xsd:annotation>
+            <xsd:documentation>
+                A person, a group of people, or a graft (reference to another instance of Author).
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+            <xsd:element ref="person"/>
+            <xsd:element name="group" type="Person_group"/>
+            <xsd:element ref="graft"/>
+        </xsd:choice>
+    </xsd:group>
+
+</xsd:schema>

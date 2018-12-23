@@ -1,0 +1,146 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:annotation>
+        <xsd:documentation>Inline content.</xsd:documentation>
+    </xsd:annotation>
+
+    <xsd:include schemaLocation="100-entry.xsd"/>
+
+    <xsd:complexType name="Meta">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:group ref="Entry_meta"/>
+            <xsd:element name="numbered" type="xsd:boolean" default="true"/>
+            <xsd:element ref="refer"/>
+            <xsd:element ref="graft"/>
+        </xsd:choice>
+    </xsd:complexType>
+
+    <xsd:complexType name="Inline" mixed="true">
+        <xsd:group ref="Inline" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:attributeGroup ref="Entry"/>
+    </xsd:complexType>
+
+    <xsd:group name="Inline">
+        <xsd:choice>
+            <xsd:group ref="Inline_text"/>
+            <xsd:group ref="Inline_math"/>
+            <xsd:group ref="Inline_html"/>
+        </xsd:choice>
+    </xsd:group>
+
+    <xsd:group name="Inline_html">
+        <xsd:choice>
+            <xsd:element name="a" type="xsd:anyType"/>
+            <xsd:element name="img" type="xsd:anyType"/>
+        </xsd:choice>
+    </xsd:group>
+
+    <xsd:group name="Inline_text">
+        <xsd:choice>
+            <xsd:element name="emphasis" type="xsd:string"/>
+            <xsd:element name="cite">
+                <xsd:complexType>
+                    <xsd:attribute name="ref" type="xsd:anyURI"/>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="latex" type="xsd:string"/><!-- deprecated -->
+            <xsd:element name="math" type="Inline_math"/>
+            <xsd:element name="enquote" type="xsd:anyType"/>
+            <xsd:element name="link">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        <p>The content is the link text.</p>
+                        <p>If the url attribute is not present, then the content is also the URL.</p>
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="true">
+                    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                        <xsd:group ref="Inline"/>
+                    </xsd:choice>
+                    <xsd:attribute name="url" type="xsd:anyURI">
+                        <xsd:annotation>
+                            <xsd:documentation>The URL is passed unchanged to the next pass.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:attribute>
+                    <xsd:attribute name="to" type="xsd:anyURI">
+                        <xsd:annotation>
+                            <xsd:documentation>&lt;link to="A">text&lt;/link>
+                                is a link to the URL of the output of the resource identified by A.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:attribute>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="code">
+                <xsd:complexType mixed="true"/>
+            </xsd:element>
+            <xsd:element name="shell">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        <p>The shell element describes a shell code fragment. The shell is usually Bash.</p>
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="true">
+                    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                        <xsd:element name="variable"/>
+                    </xsd:choice>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="species">
+                <xsd:annotation>
+                    <xsd:documentation>Scientific nomenclature of a biological spesies.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="true"/>
+            </xsd:element>
+        </xsd:choice>
+    </xsd:group>
+
+    <xsd:complexType name="Inline_math">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:group ref="Inline_math"/>
+        </xsd:choice>
+    </xsd:complexType>
+
+    <xsd:group name="Inline_math">
+        <xsd:choice>
+            <xsd:element name="factorial" type="Operator_1"/>
+            <xsd:element name="mgroup" type="Inline_math"/>
+            <xsd:element name="mi" type="xsd:string"/>
+            <xsd:element name="mo">
+                <xsd:complexType mixed="true">
+                    <xsd:choice minOccurs="0">
+                        <xsd:group ref="Symbol"/>
+                    </xsd:choice>
+                    <xsd:attribute name="arity" type="xsd:positiveInteger"/>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="mn" type="xsd:string"/>
+            <xsd:element name="msup" type="Inline_math"/>
+            <xsd:element name="msub" type="Inline_math"/>
+            <xsd:element name="fn" type="Operator_2"/>
+            <xsd:element name="mplus" type="Operator_2"/>
+            <xsd:element name="equation" type="Operator_2"/>
+        </xsd:choice>
+    </xsd:group>
+
+    <xsd:group name="Symbol">
+        <xsd:choice>
+            <xsd:element name="imaginary"/>
+            <xsd:element name="to"/>
+            <xsd:element name="rightarrow"/>
+        </xsd:choice>
+    </xsd:group>
+
+    <xsd:complexType name="Operator_1">
+        <xsd:sequence>
+            <xsd:group ref="Inline_math"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="Operator_2">
+        <xsd:sequence>
+            <xsd:group ref="Inline_math"/>
+            <xsd:group ref="Inline_math"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+</xsd:schema>

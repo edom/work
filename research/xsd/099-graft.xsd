@@ -1,0 +1,45 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:annotation>
+        <xsd:documentation>
+            Alternative to XInclude, XLink, and XPointer.
+
+            Unlike XInclude (as implemented by BaseX 8.6.7),
+            this allows reference to the current document.
+
+            Unlike XInclude which is strict (?), Graft is lazy.
+
+            BaseX 8.6.7 can't handle XInclude with missing href.
+        </xsd:documentation>
+    </xsd:annotation>
+
+    <xsd:element name="graft">
+        <xsd:annotation>
+            <xsd:documentation>
+                <p>Variant of refer.</p>
+
+                <p>
+                    <code>&lt;graft from="somewhere.xml#someid"/&gt;</code>
+                    means the element with id someid in somewhere.xml
+                    should be grafted (deeply copied) here, replacing the <code>graft</code> element.
+                </p>
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="from" type="xsd:anyURI" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="refer">
+        <xsd:annotation>
+            <xsd:documentation>
+                Similar to XInclude and XPointer, but less expressive;
+                here the URI may contain a fragment identifier.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="to" type="xsd:anyURI" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+
+</xsd:schema>

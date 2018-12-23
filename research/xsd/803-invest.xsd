@@ -1,0 +1,521 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:include schemaLocation="400-author.xsd"/>
+    <xsd:include schemaLocation="401-content-type.xsd"/>
+
+    <xsd:element name="stocks">
+        <xsd:annotation>
+            <xsd:documentation>The stock of a company.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                    <xsd:element name="description" type="xsd:string"/>
+                    <xsd:element name="company" type="Company"/>
+                    <xsd:element name="stock" type="Stock"/>
+                </xsd:choice>
+            </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:ID"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="Company">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="basic" type="Company_basic"/>
+            <xsd:element name="news">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="title" type="Inline"/>
+                        <xsd:element name="body" type="Body"/>
+                    </xsd:sequence>
+                    <xsd:attribute name="time" use="required" type="Date_or_DateTime"/>
+                    <xsd:attributeGroup ref="Entry"/>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="stock" type="Stock"/>
+            <xsd:group ref="Company_aspect_analysis"/>
+            <xsd:element name="problem" type="Problem"/>
+            <xsd:element name="samples" type="Samples"/>
+            <xsd:element name="analysis" type="Body"/>
+            <xsd:element name="verdict" type="Verdict"/>
+            <xsd:element name="activity" type="Activity"/>
+        </xsd:choice>
+        <xsd:attribute name="id" type="xsd:ID"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="Activity">
+        <xsd:annotation>
+            <xsd:documentation>An activity (a business activity)
+                uses assets to establish an income stream
+                (incoming cash flow).</xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="description" type="xsd:string"/>
+            <xsd:element name="data" type="Data"/>
+            <xsd:element name="comment" type="Body"/>
+        </xsd:choice>
+    </xsd:complexType>
+
+    <xsd:simpleType name="Date_or_DateTime">
+        <xsd:union memberTypes="xsd:dateTime xsd:date"/>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="Industry">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="construction"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="Stock">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="exchange" type="xsd:string"/>
+            <xsd:element name="ticker" type="xsd:string"/>
+            <xsd:element name="comment" type="Body"/>
+            <xsd:element name="verdict" type="Verdict"/>
+            <xsd:element name="numbers" type="Stock_numbers"/>
+            <xsd:element name="hint">
+                <xsd:annotation>
+                    <xsd:documentation>A piece of information that influences the decision to buy a stock or not.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="author" type="Author" minOccurs="0"/>
+                        <xsd:element name="verdict" minOccurs="0">
+                            <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                    <xsd:enumeration value="buy"/>
+                                    <xsd:enumeration value="sell"/>
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:element>
+                        <xsd:element name="content" type="xsd:string"/>
+                        <xsd:element name="comment" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                    <xsd:attribute name="time">
+                        <xsd:annotation>
+                            <xsd:documentation>The time when the hint was published
+                                (not the time it was known to me).</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:union memberTypes="xsd:dateTime xsd:date"/>
+                        </xsd:simpleType>
+                    </xsd:attribute>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="news">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="bearer" type="Author">
+                            <xsd:annotation>
+                                <xsd:documentation>Who transmits this news to me.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="content" type="xsd:string"/>
+                    </xsd:sequence>
+                    <xsd:attribute name="time" type="Date_or_DateTime">
+                        <xsd:annotation>
+                            <xsd:documentation>The time when the hint was published
+                                (not the time it was known to me).</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:attribute>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:choice>
+        <xsd:attribute name="id" type="xsd:ID"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="Verdict">
+        <xsd:sequence>
+            <xsd:element name="reason" type="Body"/>
+        </xsd:sequence>
+        <xsd:attribute name="time" type="Date_or_DateTime" use="required"/>
+        <xsd:attribute name="type" use="required">
+            <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="buy"/>
+                    <xsd:enumeration value="wait"/><!-- wait and see -->
+                    <xsd:enumeration value="avoid"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="Time_price">
+        <xsd:sequence>
+            <xsd:group ref="Price"/>
+        </xsd:sequence>
+        <xsd:attribute name="time" type="xsd:date" use="required"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="Time_price_attr">
+        <xsd:attribute name="time" type="xsd:date" use="required"/>
+        <xsd:attribute name="currency" type="xsd:string" use="required"/>
+        <xsd:attribute name="magnitude" type="xsd:decimal" use="required"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="Stock_numbers">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+
+            <!-- DEPRECATED; use data -->
+            <xsd:element name="market_cap" type="Time_price"/>
+            <xsd:element name="market_cap0" type="Time_price_attr"/>
+            <xsd:element name="share_price" type="Time_price"/>
+            <xsd:element name="share_count">
+                <xsd:complexType>
+                    <xsd:attribute name="time" type="xsd:date" use="required"/>
+                    <xsd:attribute name="value" type="xsd:decimal" use="required"/>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="data" type="Data"/>
+            <xsd:element name="data0">
+                <xsd:complexType>
+                    <xsd:attribute name="type" use="required">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="revenue"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:attribute>
+                    <xsd:attribute name="from" type="Date_or_DateTime" use="required"/><!-- inclusive -->
+                    <xsd:attribute name="to" type="Date_or_DateTime" use="required"/><!-- exclusive -->
+                    <xsd:attribute name="value" type="xsd:decimal" use="required"/>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="performance" type="Performance"/>
+        </xsd:choice>
+    </xsd:complexType>
+
+    <xsd:complexType name="Data">
+        <xsd:annotation>
+            <xsd:documentation>A data (data point, sample, member, element) of a time series taken from a financial report.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:attribute name="type" type="Data_type" use="required"/>
+        <xsd:attribute name="time" type="Date_or_DateTime"/>
+        <xsd:attribute name="begin" type="Date_or_DateTime"/>
+        <xsd:attribute name="endex" type="Date_or_DateTime"/>
+        <xsd:attribute name="currency" type="xsd:string"/>
+        <xsd:attribute name="magnitude" type="xsd:decimal"/>
+        <xsd:attribute name="value" type="xsd:decimal"/>
+    </xsd:complexType>
+
+    <xsd:simpleType name="Data_type">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="cash"/>
+            <xsd:enumeration value="equity"/>
+            <xsd:enumeration value="head_count"/>
+            <xsd:enumeration value="market_cap"/>
+            <xsd:enumeration value="share_count"/>
+            <xsd:enumeration value="share_closing_price"/>
+            <xsd:enumeration value="income_net"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="Problem">
+        <xsd:sequence>
+            <xsd:element name="title" type="Inline"/>
+            <xsd:element name="body" type="Body"/>
+        </xsd:sequence>
+        <xsd:attributeGroup ref="Entry"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="Company_basic">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="established" type="xsd:date"/>
+            <xsd:element name="website" type="xsd:anyURI"/>
+            <xsd:element name="industry" type="Industry"/>
+            <xsd:element name="date_ipo" type="xsd:date"/>
+            <xsd:element name="top_management_compensation_total" type="xsd:decimal">
+                <xsd:annotation>
+                    <xsd:documentation>Total compensation paid to directors and commissioners for the year.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:choice>
+    </xsd:complexType>
+
+    <xsd:group name="Company_aspect_analysis">
+        <xsd:choice>
+            <xsd:element name="data" type="Data"/>
+            <xsd:element name="asset" type="Asset"/>
+            <xsd:element name="income" type="Income"/>
+        </xsd:choice>
+    </xsd:group>
+
+    <xsd:complexType name="Samples">
+        <xsd:annotation>
+            <xsd:documentation>Some samples of a random process (stochastic process) at various times.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="type"/>
+            <xsd:element name="time">
+                <xsd:complexType>
+                    <xsd:choice>
+                        <xsd:element name="instant" type="Date_or_DateTime"/>
+                    </xsd:choice>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="value">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="magnitude" type="xsd:decimal"/>
+                        <xsd:element name="unit" type="xsd:anyType" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="Income">
+        <xsd:annotation>
+            <xsd:documentation>Income stream analysis. A stream of income.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="description" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Describes sales of what.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="amount" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>Gross amount.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="currency" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="magnitude" type="xsd:decimal"/>
+                        <xsd:choice>
+                            <xsd:element name="year" type="xsd:gYear"/>
+                            <xsd:element name="interval" type="Interval"/>
+                        </xsd:choice>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="note" type="Body" minOccurs="0"/>
+            <xsd:element name="detail" type="Income" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="accounting" type="Accounting_method"/>
+    </xsd:complexType>
+
+    <xsd:simpleType name="Accounting_method">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="accrual">
+                <xsd:annotation>
+                    <xsd:documentation>Income is recorded when the deal is signed,
+                        not when the company receives the cash.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="cash"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="Interval">
+        <xsd:sequence>
+            <xsd:element name="time0" type="xsd:date"/>
+            <xsd:element name="time1" type="xsd:date">
+                <xsd:annotation>
+                    <xsd:documentation>Exclusive.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="Performance">
+        <xsd:annotation>
+            <xsd:documentation>Data obtained from the company's annual financial report.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="time">
+                <xsd:complexType>
+                    <xsd:choice>
+                        <xsd:element name="quarter">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="number" type="xsd:integer"/>
+                                    <xsd:element name="year" type="xsd:gYear"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                        <xsd:element name="year" type="xsd:gYear"/>
+                    </xsd:choice>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:element name="cash" type="xsd:decimal"/>
+                <xsd:element name="share_count" type="xsd:integer"/>
+                <xsd:element name="market_cap" type="xsd:decimal"/>
+                <xsd:element name="head_count" type="xsd:integer"/>
+                <xsd:element name="income_gross" type="xsd:decimal"/>
+                <xsd:element name="liabilities" type="xsd:decimal"/>
+                <xsd:element name="equity" type="xsd:decimal"/>
+                <xsd:element name="profit_net" type="xsd:decimal"/><!-- net, actual, real, after tax -->
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="Address">
+        <xsd:annotation>
+            <xsd:documentation>Where something is.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="type" type="Address_type"/>
+            <xsd:element name="value" type="xsd:string"/>
+            <xsd:element name="parent" type="Address" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="Address_type">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="number"/>
+            <xsd:enumeration value="street"/>
+            <xsd:enumeration value="kelurahan"/>
+            <xsd:enumeration value="kecamatan"/>
+            <xsd:enumeration value="kota"/>
+            <xsd:enumeration value="province"/>
+            <xsd:enumeration value="country"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="Expense_time">
+        <xsd:union memberTypes="xsd:dateTime xsd:date xsd:gYear"/>
+    </xsd:simpleType>
+
+    <xsd:complexType name="Asset">
+        <xsd:annotation>
+            <xsd:documentation>Something controlled by a company.
+                An asset brings income.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:group ref="Asset_common"/>
+            <xsd:group ref="Asset_land"/>
+            <xsd:element name="hotel" type="Hotel"/>
+        </xsd:choice>
+        <xsd:attributeGroup ref="Entry"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="Asset_income">
+        <xsd:annotation>
+            <xsd:documentation>Cash flow accounting, not accrual accounting.
+            Copy this from the cash flow statement, not from the income statement.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="description" type="xsd:string"/>
+            <xsd:element name="sample" type="Asset_income_sample" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="Asset_income_sample">
+        <xsd:attribute name="begin" type="xsd:date" use="required"/>
+        <xsd:attribute name="endex" type="xsd:date" use="required"/>
+        <xsd:attribute name="currency" type="xsd:string" use="required"/>
+        <xsd:attribute name="magnitude" type="xsd:decimal" use="required"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="Date_range">
+        <xsd:sequence>
+            <xsd:element name="begin" type="xsd:date"/>
+            <xsd:element name="endex" type="xsd:date">
+                <xsd:annotation>
+                    <xsd:documentation>Exclusive.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="Hotel">
+        <xsd:annotation>
+            <xsd:documentation>Building without the land value.
+                We assume the worst case.
+                We assume that the liquidation value is zero.
+                We assume that the buyer demolishes the building.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="room_count" type="xsd:integer"/>
+            <xsd:element name="floor_count" type="xsd:integer" minOccurs="0"/>
+            <xsd:element name="star" type="xsd:integer"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:group name="Asset_common">
+        <xsd:annotation>
+            <xsd:documentation>Properties common to all assets.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+            <xsd:element name="name" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Short description of the asset.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="build_date" type="Expense_time"/>
+            <xsd:element name="income" type="Asset_income"/>
+            <xsd:element name="expense" type="Asset_income">
+                <xsd:annotation>
+                    <xsd:documentation>An expense attributable
+                        to the maintenance, operation, or depreciation this asset.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="appraisal">
+                <xsd:annotation>
+                    <xsd:documentation>How much price we think the asset is worth if sold.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                        <xsd:element name="book_value" type="Data_time_price"/>
+                        <xsd:element name="liquidation">
+                            <xsd:annotation>
+                                <xsd:documentation>How much money the asset is worth if it is sold now.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="price" type="Price"/>
+                                    <xsd:element name="reason" type="Body" minOccurs="0"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                        <xsd:element name="liquidation0" type="Data_time_price"/>
+                        <xsd:element name="potential" minOccurs="0">
+                            <xsd:annotation>
+                                <xsd:documentation>How much gross income the asset can earn for the company.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                    </xsd:choice>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="comment" type="Body" minOccurs="0"/>
+        </xsd:choice>
+    </xsd:group>
+    
+    <xsd:complexType name="Data_time_price">
+        <xsd:attribute name="time" type="xsd:date" use="required"/>
+        <xsd:attribute name="currency" type="xsd:string" use="required"/>
+        <xsd:attribute name="magnitude" type="xsd:decimal" use="required"/>
+    </xsd:complexType>
+
+    <xsd:group name="Asset_land">
+        <xsd:annotation>
+            <xsd:documentation>A land or a building built on land.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+            <xsd:element name="area" type="xsd:decimal">
+                <xsd:annotation>
+                    <xsd:documentation>Area in square meters.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="address" type="Address"/>
+        </xsd:choice>
+    </xsd:group>
+
+    <xsd:group name="Price">
+        <xsd:sequence>
+            <xsd:element name="currency" type="xsd:string"/>
+            <xsd:element name="magnitude" type="xsd:decimal"/>
+        </xsd:sequence>
+    </xsd:group>
+
+    <xsd:complexType name="Price">
+        <xsd:sequence>
+            <xsd:group ref="Price"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+</xsd:schema>

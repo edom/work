@@ -1,0 +1,54 @@
+<xsd:schema
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        elementFormDefault="qualified"
+        attributeFormDefault="qualified"
+        finalDefault="#all"
+        blockDefault="#all">
+
+    <xsd:include schemaLocation="201-ontology.xsd"/>
+    <xsd:include schemaLocation="401-content-type.xsd"/>
+    <xsd:include schemaLocation="400-resource.xsd"/>
+    <xsd:include schemaLocation="801-book.xsd"/>
+    <xsd:include schemaLocation="802-site.xsd"/>
+    <xsd:include schemaLocation="803-invest.xsd"/>
+    <xsd:include schemaLocation="translation.xsd"/>
+
+    <xsd:element name="database">
+        <xsd:annotation>
+            <xsd:documentation>A heterogenous collection.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:any namespace="##targetNamespace" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attributeGroup ref="Entry"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="reasons">
+        <xsd:annotation>
+            <xsd:documentation>
+                This answers why should we do something.
+                This describes reason, not cause.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="reason" type="xsd:anyType" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attributeGroup ref="Entry"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="comparison" type="Comparison"/>
+
+    <xsd:complexType name="Comparison">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="entity" type="xsd:anyURI"/>
+            <xsd:element name="property" type="xsd:anyURI"/>
+            <xsd:element name="description" type="xsd:anyType"/>
+        </xsd:choice>
+        <xsd:attributeGroup ref="Entry"/>
+    </xsd:complexType>
+
+</xsd:schema>

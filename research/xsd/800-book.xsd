@@ -1,0 +1,91 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:annotation>
+        <xsd:documentation>Book authoring. DEPRECATED. Use 801-book.xsd and 900-database.xsd.</xsd:documentation>
+    </xsd:annotation>
+
+    <xsd:include schemaLocation="100-entry.xsd"/>
+    <xsd:include schemaLocation="401-content-type.xsd"/>
+    <xsd:include schemaLocation="400-resource.xsd"/>
+    <xsd:include schemaLocation="202-content-inline.xsd"/>
+
+    <xsd:element name="book">
+        <xsd:complexType>
+            <xsd:annotation>
+                <xsd:documentation>
+                    <p>Deprecated. Split your information into smaller granules.</p>
+                </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+                <xsd:element name="title"/>
+                <xsd:element name="edition" minOccurs="0"/>
+                <xsd:element name="author" minOccurs="0"/>
+                <xsd:element name="meta" minOccurs="0" type="Meta"/>
+                <xsd:element name="front-matter" type="Book_content" minOccurs="0"/>
+                <xsd:element name="main-matter" type="Book_content" minOccurs="0"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="part" type="Part"/>
+    <xsd:element name="chapter" type="Chapter"/>
+    <xsd:element name="section" type="Section"/>
+
+    <xsd:complexType name="Book_content">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="table-of-contents" type="Empty"/>
+            <xsd:element ref="part"/>
+            <xsd:element ref="chapter"/>
+            <xsd:element ref="section"/>
+            <xsd:element ref="topic"/>
+            <xsd:element ref="draft"/>
+            <xsd:element ref="resource"/>
+        </xsd:choice>
+    </xsd:complexType>
+
+    <xsd:complexType name="Empty">
+        <xsd:sequence/>
+    </xsd:complexType>
+
+    <xsd:complexType name="Part">
+        <xsd:sequence>
+            <xsd:element name="title"/>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:element name="paragraph" type="Inline"/>
+            </xsd:choice>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:element name="chapter" type="Chapter"/>
+            </xsd:choice>
+        </xsd:sequence>
+        <xsd:attribute type="xsd:boolean" name="numbered"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="Chapter">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="title"/>
+            <xsd:element name="meta" type="Meta" minOccurs="0"/>
+            <xsd:element ref="section"/>
+            <xsd:group ref="Block"/>
+        </xsd:choice>
+        <xsd:attributeGroup ref="Entry"/>
+        <xsd:attribute type="xsd:boolean" name="numbered"/>
+    </xsd:complexType>
+
+    <xsd:group name="G_article">
+        <xsd:sequence>
+            <xsd:element name="title"/>
+            <xsd:element name="meta" type="Meta" minOccurs="0"/>
+            <xsd:element name="body" type="Document"/>
+        </xsd:sequence>
+    </xsd:group>
+
+    <xsd:complexType name="Section">
+        <xsd:sequence>
+            <xsd:group ref="G_article"/>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:element name="section" type="Section"/>
+            </xsd:choice>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:ID"/>
+    </xsd:complexType>
+
+</xsd:schema>

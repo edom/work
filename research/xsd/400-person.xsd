@@ -1,0 +1,51 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:include schemaLocation="300-person.xsd"/>
+    <xsd:include schemaLocation="400-resource.xsd"/>
+
+    <xsd:element name="person">
+        <xsd:complexType>
+            <xsd:annotation>
+                <xsd:documentation>
+                    <p>A person.</p>
+                    <p>See also <a href="http://schema.org/Person">schema.org/Person</a>
+                        (A person (alive, dead, undead, or fictional)).</p>
+                    <p>A fictional person may have an author.</p>
+                </xsd:documentation>
+            </xsd:annotation>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:group ref="Thing"/>
+                <xsd:group ref="Authored"/>
+                <xsd:group ref="Person"/>
+                <xsd:element name="website" type="Resource"/>
+            </xsd:choice>
+            <xsd:attributeGroup ref="Entry"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="Person_group">
+        <xsd:annotation>
+            <xsd:documentation>A group of people. A band. A team.
+                For authorship, the group is an inseparable entity.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:group ref="Thing"/>
+            <xsd:group ref="Authored"/>
+            <xsd:element name="name" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>A.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="member">
+                <xsd:complexType>
+                    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                        <xsd:element ref="person"/>
+                        <xsd:element ref="graft"/>
+                    </xsd:choice>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:choice>
+        <xsd:attributeGroup ref="Entry"/>
+    </xsd:complexType>
+
+</xsd:schema>

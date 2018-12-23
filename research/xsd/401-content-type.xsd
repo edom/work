@@ -1,0 +1,212 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:include schemaLocation="100-entry.xsd"/>
+    <xsd:include schemaLocation="202-content-inline.xsd"/>
+    <xsd:include schemaLocation="400-resource.xsd"/>
+
+    <xsd:element name="opinion" type="Document"/>
+    <xsd:element name="draft" type="Document"/>
+    <xsd:element name="category">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="name" type="Inline"/>
+                <xsd:element name="meta" type="Meta" minOccurs="0"/>
+                <xsd:element name="children">
+                    <xsd:complexType>
+                        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                            <xsd:element ref="comment"/>
+                            <xsd:element ref="category"/>
+                            <xsd:element ref="draft"/>
+                            <xsd:element ref="howto"/>
+                            <xsd:element ref="opinion"/>
+                            <xsd:element ref="resource"/>
+                            <xsd:element ref="paper"/>
+                            <xsd:element ref="person"/>
+                            <xsd:element ref="event"/>
+                        </xsd:choice>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+            <xsd:attributeGroup ref="Entry"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="event">
+        <xsd:complexType mixed="true">
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:group ref="Inline"/>
+            </xsd:choice>
+            <xsd:attributeGroup ref="Entry"/>
+            <xsd:attribute name="time" type="xsd:dateTime"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="skill" type="Skill"/>
+
+    <xsd:complexType name="Skills">
+        <xsd:choice maxOccurs="unbounded">
+            <xsd:element ref="skill"/>
+            <xsd:element ref="refer"/>
+        </xsd:choice>
+    </xsd:complexType>
+
+    <xsd:complexType name="Skill">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="name" type="Inline"/>
+            <xsd:element name="need" type="Skills"/>
+        </xsd:choice>
+    </xsd:complexType>
+
+    <xsd:complexType name="Document">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:group ref="Document"/>
+        </xsd:choice>
+        <xsd:attributeGroup ref="Entry"/>
+    </xsd:complexType>
+
+    <xsd:group name="Document">
+        <xsd:choice>
+            <xsd:element name="title" type="Inline"/>
+            <xsd:element name="meta" type="Meta"/>
+            <xsd:element name="abstract" type="Body"/>
+            <xsd:element name="body" type="Body"/>
+            <xsd:element name="assume" type="Skills">
+                <xsd:annotation>
+                    <xsd:documentation>The skills that the reader must have
+                        in order to get something useful from this document.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="teach" type="Skills">
+                <xsd:annotation>
+                    <xsd:documentation>The skills that the reader can expect to acquire
+                        after carefully reading this document.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:choice>
+    </xsd:group>
+
+    <xsd:complexType name="Body" mixed="true">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:group ref="Body"/>
+        </xsd:choice>
+        <xsd:attributeGroup ref="Entry"/>
+    </xsd:complexType>
+
+    <xsd:group name="Body">
+        <xsd:choice>
+            <xsd:group ref="Inline"/>
+            <xsd:group ref="Block"/>
+            <xsd:element ref="refer"/>
+            <xsd:element ref="graft"/>
+        </xsd:choice>
+    </xsd:group>
+
+    <xsd:group name="Block">
+        <xsd:choice>
+            <xsd:element name="paragraph">
+                <xsd:complexType mixed="true">
+                    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                        <xsd:element name="title" type="Inline"/>
+                        <xsd:group ref="Inline"/>
+                    </xsd:choice>
+                    <xsd:attributeGroup ref="Entry"/>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="table">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="caption" type="Inline" minOccurs="0"/>
+                        <xsd:choice maxOccurs="unbounded">
+                            <xsd:element name="tr">
+                                <xsd:complexType>
+                                    <xsd:choice maxOccurs="unbounded">
+                                        <xsd:element name="th" type="Body"/>
+                                        <xsd:element name="td" type="Body"/>
+                                    </xsd:choice>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:choice>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="blockquote">
+                <xsd:complexType mixed="true">
+                    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                        <xsd:group ref="Inline"/>
+                        <xsd:group ref="Block"/>
+                        <xsd:element name="omitted">
+                            <xsd:annotation>
+                                <xsd:documentation>Indicates that a part is omitted.
+                                    Usually renders as [...] (an ellipsis surrounded by brackets).</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:complexType><xsd:sequence/></xsd:complexType>
+                        </xsd:element>
+                    </xsd:choice>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="exercises">
+                <xsd:complexType>
+                    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                        <xsd:element name="exercise">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="problem"/>
+                                    <xsd:element name="answer"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:choice>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="collection" type="List">
+                <xsd:annotation>
+                    <xsd:documentation>Collection (unordered).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="sequence" type="List">
+                <xsd:annotation>
+                    <xsd:documentation>Collection (ordered).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="abstract" type="xsd:anyType"/>
+            <xsd:element name="section" type="Document"/>
+            <xsd:element name="code_block" type="Inline"/>
+        </xsd:choice>
+    </xsd:group>
+
+    <xsd:complexType name="List">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="item" type="Inline"/>
+        </xsd:choice>
+    </xsd:complexType>
+
+    <xsd:element name="topic">
+        <xsd:complexType>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:group ref="Document"/>
+                <xsd:element name="child">
+                    <xsd:complexType>
+                        <xsd:attribute name="ref" type="xsd:anyURI"/>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:choice>
+            <xsd:attributeGroup ref="Entry"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="howto">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="do"/>
+                <xsd:element name="prerequisite" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:attribute name="ref" type="xsd:anyURI" use="required"/>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="body" type="Body"/>
+            </xsd:sequence>
+        <xsd:attributeGroup ref="Entry"/>
+        </xsd:complexType>
+    </xsd:element>
+
+</xsd:schema>

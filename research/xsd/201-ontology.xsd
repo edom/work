@@ -1,0 +1,90 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:include schemaLocation="100-entry.xsd"/>
+
+    <xsd:annotation>
+        <xsd:documentation>
+            This describes how to describe what exists and their relationships.
+        </xsd:documentation>
+    </xsd:annotation>
+
+    <xsd:element name="concept" type="Entity_unstructured"/>
+    <xsd:element name="entity" type="Entity_unstructured"/>
+    <xsd:element name="property">
+        <xsd:annotation>
+            <xsd:documentation>
+                <p>
+                    A property is a function that takes an entity and gives a value.
+                </p>
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attributeGroup ref="Entry"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="assignment">
+        <xsd:annotation>
+            <xsd:documentation>
+                <p>An assertion that a property of an entity has a value.</p>
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="property" type="xsd:anyURI" maxOccurs="unbounded"/>
+                <xsd:element name="entity" type="xsd:anyURI" maxOccurs="unbounded"/>
+                <xsd:element name="value" type="xsd:anyType"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ontology">
+        <xsd:complexType>
+            <xsd:group ref="Ontology" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="is-a">
+        <xsd:annotation>
+            <xsd:documentation>
+                Every A is a B.
+                Every instance of A is an instance of B.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="specific" type="xsd:anyURI"/>
+                <xsd:element name="general" type="xsd:anyURI"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:group name="Ontology">
+        <xsd:choice>
+            <xsd:element ref="concept"/>
+            <xsd:element ref="entity"/>
+            <xsd:element ref="property"/>
+            <xsd:element ref="assignment"/>
+            <xsd:element ref="is-a"/>
+        </xsd:choice>
+    </xsd:group>
+
+    <!-- DEPRECATED -->
+    <xsd:complexType name="Entity_unstructured" mixed="true">
+        <xsd:annotation>
+            <xsd:documentation>
+                <p>Free-form blob. Well-formed XML. Unstructured content.</p>
+                <p>An entity is something that exists that can be distinguished from other entities.</p>
+                <p>
+                    We may want to avoid this.
+                    Transform this resource into a more useful resource.
+                    This resource results from jotting down notes.
+                    This resource is unstructured.
+                </p>
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attributeGroup ref="Entry"/>
+    </xsd:complexType>
+
+</xsd:schema>

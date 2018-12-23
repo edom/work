@@ -1,0 +1,346 @@
+html {
+    font-family: sans-serif;
+    font-size: 10pt;
+    line-height: 1.250;
+    margin: 0rem;
+    padding: 0rem;
+}
+
+@media screen and (min-width: 1280px) {
+
+    html {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 12pt;
+    }
+
+    code {
+        font-family: Droid Sans Mono, Courier New, monospace;
+        letter-spacing: -0.05em;
+        word-spacing: -0.1em;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin: 1rem 0rem;
+        font-weight: bold;
+        letter-spacing: -0.05em;
+        word-spacing: 0.05em;
+    }
+
+    .book > .content > .title { font-size: 3.75rem; font-weight: bold; margin: 0em; }
+    .book > .content > .edition { font-size: 2.25rem; font-weight: bold; margin: 0em; }
+    .book > .content > .author { font-size: 1.5rem; font-weight: bold; margin: 0em; }
+
+    .toc { margin: 2rem 0rem; }
+    .toc > .title { font-weight: bold; margin: 1rem 0rem; }
+    .toc > .line { display: table; }
+    .toc > .line > .number { display: table-cell; width: 3rem; }
+    .toc > .line > .title { display: table-cell; }
+    .toc > .line.part {
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        letter-spacing: -0.03em;
+    }
+    .toc > .line.chapter {
+        font-weight: bold;
+        margin-top: 1em;
+        letter-spacing: -0.03em;
+    }
+
+    .part > .title-block {
+        font-size: 3rem;
+        margin: 1rem 0rem;
+    }
+
+    .part > .title-block > .number {
+        display: block;
+        font-size: 0.75em;
+    }
+
+    .part > .title-block > .title {
+        display: block;
+    }
+
+    .chapter > .title-block {
+        display: table;
+        font-size: 2rem;
+        margin: 1rem 0rem;
+    }
+
+    .section > .title-block {
+        display: table;
+        font-size: 1.25rem;
+        margin: 1rem 0rem;
+    }
+
+    .chapter > .title-block > .number,
+    .section > .title-block > .number {
+        display: table-cell;
+        width: 4rem;
+    }
+
+    .chapter > .title-block > .title,
+    .section > .title-block > .title {
+        display: table-cell;
+    }
+
+    .chapter > .abstract {
+        font-size: 0.833rem;
+        margin: 1rem 2rem;
+    }
+
+    .chapter > .abstract > .title {
+        font-weight: bold;
+        margin: 1rem 0rem;
+        text-align: center;
+    }
+
+    .book > .chapter > .footer {
+        border-top: 1px solid #000;
+        font-size: 0.75em;
+        margin: 2em 0em;
+    }
+
+    .navigation {
+        background-color: #eee;
+        font-size: 0.833em;
+        margin: 2em 0em;
+        padding: 0.5em;
+    }
+
+    .navigation > div {
+        margin: 0.25em 1em;
+    }
+
+    .exercises > .problem > .label
+    ,
+    .exercises > .answer > .label
+    {
+        font-weight: bold;
+    }
+
+    a {
+        color: #00f;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    /* math */
+
+    .math .identifier {
+        font-style: italic;
+    }
+
+    .math .operator {
+        font-style: normal;
+    }
+
+    .math .operator.arity_,
+    .math .operator.arity_2 {
+        margin-left: 0.25rem;
+        margin-right: 0.25rem;
+    }
+
+    .math .operator.arity_2.arrow_function {
+    }
+
+    .math .number {
+        font-style: normal;
+    }
+
+    .math sup {
+        font-size: 0.7em;
+        vertical-align: 0.4em;
+    }
+
+    .beauty {
+        margin: 3em 0em;
+    }
+
+    .beauty > .resources {
+        margin: 1em 0em;
+    }
+
+    .beauty > .resources > .resource {
+        margin: 1em 1em;
+    }
+
+    .internal-error {
+        display: block;
+        padding: 1em;
+        margin: 1em;
+        background-color: #fcc;
+    }
+
+    .latex_unsupported {
+        background-color: #fcc;
+    }
+
+    .document {
+        border: 1px solid #000;
+        margin: 2rem 0rem;
+    }
+
+    .document.draft {
+        background-color: #eee;
+    }
+
+    .document > .draft_indicator {
+        padding: 1rem;
+        line-height: 1;
+    }
+
+    .document .resource {
+        border: 1px solid #000;
+        margin: 1em 0em;
+        padding: 1em;
+    }
+
+    .document .resource > .head {
+        font-weight: bold;
+        display: table-cell;
+        padding-right: 1em;
+    }
+
+    .document .resource > .body {
+        display: table-cell;
+    }
+
+    .document > .draft_indicator > .title {
+        font-weight: bold;
+        margin-right: 1rem;
+    }
+
+    .document > .meta {
+        background-color: #ddd;
+        padding: 1em;
+    }
+
+    .document > .meta > .title {
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+
+    .document > .meta table,
+    .document > .meta tr,
+    .document > .meta th,
+    .document > .meta td {
+        border-spacing: 0em;
+        border-collapse: separate;
+        padding: 0em;
+        margin: 0em;
+        text-align: left;
+    }
+
+    .document > .meta th {
+        text-align: right;
+    }
+
+    .document > .meta th,
+    .document > .meta td {
+        padding: 0.25em 0em;
+    }
+
+    .document > .meta tr > :not(:first-child) {
+        padding-left: 1em;
+    }
+
+    .document > .content {
+        margin: 2rem 4rem;
+    }
+
+    .document p {
+        /* Webkit glitches when scaling non-integer sizes */
+        /* max-width: 66ex; */
+        max-width: 66ex; /* Helvetica/Arial */
+    }
+
+    .body > table {
+        margin: 1em auto;
+        border-spacing: 1em 0em;
+        border-collapse: separate;
+    }
+
+    .body > td {
+    }
+
+    .body > pre {
+        margin: 1rem 2rem;
+    }
+
+    .shell > .variable {
+        text-decoration: underline;
+    }
+
+    .skill {
+        margin: 1em 2em;
+    }
+
+    .skill > .name {
+        font-size: 1em;
+    }
+
+    .skill > .teachers,
+    .skill > .needs,
+    .skill > .assumers {
+        margin: 1em 2em;
+    }
+
+}
+
+p {
+    margin: 0em;
+    text-indent: 1em;
+}
+
+p.has_title {
+    text-indent: 0em;
+}
+
+p > .title {
+    font-weight: bold;
+    margin-right: 1em;
+}
+
+.company {
+    margin: 4em 4em;
+}
+
+.company > .asset {
+    margin: 0em 2em;
+}
+
+.company table {
+    border-spacing: 1em 0.5em;
+    border-collapse: separate;
+}
+
+.company table.data {
+    border-spacing: 0em;
+}
+
+.company table.data th {
+    padding-right: 1em;
+}
+
+.company table th {
+    text-align: left;
+    vertical-align: top;
+}
+
+.company table td {
+    max-width: 66ex;
+}
+
+p {
+    max-width: 66ex;
+}
+
+/* Workaround for Chromium user agent stylesheet absurdities. */
+table {
+    font-size: inherit;
+}

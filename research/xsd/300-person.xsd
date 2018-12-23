@@ -1,0 +1,89 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:include schemaLocation="200-thing.xsd"/>
+
+    <xsd:group name="Person">
+        <xsd:choice>
+            <xsd:group ref="Person_flag"/>
+            <xsd:group ref="Person_appearance"/>
+            <xsd:group ref="Person_occupation"/>
+            <xsd:group ref="Person_contact"/>
+            <xsd:element name="name">
+                <xsd:annotation>
+                    <xsd:documentation>Real name or fake name (pseudonym).
+                        Whatever the person calls himself/herself.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="true">
+                    <xsd:all minOccurs="0">
+                        <xsd:element name="given" type="xsd:string"/>
+                        <xsd:element name="family" type="xsd:string"/>
+                    </xsd:all>
+                    <xsd:attributeGroup ref="Entry"/>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:choice>
+    </xsd:group>
+
+    <xsd:group name="Person_flag">
+        <xsd:choice>
+            <xsd:element name="fictional">
+                <xsd:annotation>
+                    <xsd:documentation>The presence of this element indicates that
+                        the person is a fictional character.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType><xsd:sequence/></xsd:complexType>
+            </xsd:element>
+        </xsd:choice>
+    </xsd:group>
+
+    <xsd:group name="Person_appearance">
+        <xsd:choice>
+            <xsd:element name="sex" type="Sex">
+                <xsd:annotation>
+                    <xsd:documentation>Apparent sex, from my point of view, not necessarily actual sex.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="hair">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="color" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="eye">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="color" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:choice>
+    </xsd:group>
+
+    <xsd:group name="Person_occupation">
+        <xsd:choice>
+            <xsd:element name="interest" type="xsd:anyType"/>
+            <xsd:element name="occupation" type="xsd:anyType"/>
+        </xsd:choice>
+    </xsd:group>
+
+    <xsd:group name="Person_contact">
+        <xsd:choice>
+            <xsd:element name="facebook" type="xsd:anyURI"/>
+            <xsd:element name="twitter" type="xsd:anyURI"/>
+            <xsd:element name="email" type="xsd:string"/>
+            <xsd:element name="phone" type="xsd:string"/>
+        </xsd:choice>
+    </xsd:group>
+
+    <xsd:simpleType name="Sex">
+        <xsd:annotation>
+            <xsd:documentation>Apparent sex.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="male"/>
+            <xsd:enumeration value="female"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+</xsd:schema>

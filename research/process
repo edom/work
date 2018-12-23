@@ -1,0 +1,94 @@
+#!/bin/bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# false or true
+mathjax=false
+
+# echo to stderr
+eche () {
+    echo "$@" 1>&2
+}
+
+run_xslt () {
+    local xslt="$1"
+    local xml="$2"
+    local out="$3"
+    echo "Applying $xslt to $xml to produce $out"
+    saxonb-xslt -xi -xsl:"$xslt" -s:"$xml" -o:"$out" mathjax=$mathjax
+}
+
+run_xslt_s () {
+    local xslt="$xslt_dir/$1"
+    eche "Applying $xslt"
+    saxonb-xslt -xi -xsl:"$xslt" -s:- mathjax=$mathjax
+}
+
+action="$1"
+xml_path="$2"
+out="generated/$xml_path"
+xslt_dir=xslt
+format=
+
+run_pipeline () {
+    local xslt=
+    local index=0
+    local input_path="$xml_path"
+    for xslt in "$@"; do
+        run_xslt "$xslt_dir/$xslt" "$input_path" "$out.$index"
+        input_path="$out.$index"
+        let index=index+1
+    done
+    cp "$input_path" "$out.$format"
+    # cat "$out.$format"
+}
+
+comment ()
+{
+    :
+}
+
+mkdir -p generated
+
+case "$action" in
+    (html)
+        format=html
+        # mathjax=true
+        # mathxslt=lib-xml-math-latex.xslt
+        mathjax=false
+        comment 'cat "$xml_path" \
+            | run_xslt_s lib-xml-parse-tex-paragraph.xslt \
+            | run_xslt_s lib-xml-parse-latex-math-delimiter.xslt \
+            | run_xslt_s lib-xml-normalize.xslt \
+            | run_xslt_s lib-xml-number.xslt \
+            | run_xslt_s lib-xml-cite.xslt \
+            | run_xslt_s lib-xml-math-layout.xslt \
+            | run_xslt_s lib-xml-math-html-css.xslt \
+            | run_xslt_s html.xslt \
+            | tee "$out.$format"
+        '
+
+        mathxslt='lib-xml-math-layout.xslt lib-xml-math-html-css.xslt'
+        run_pipeline \
+            lib-xml-parse-tex-paragraph.xslt \
+            lib-xml-parse-latex-math-delimiter.xslt \
+            lib-xml-normalize.xslt \
+            lib-xml-number.xslt \
+            lib-xml-cite.xslt \
+            $mathxslt \
+            html.xslt
+
+        eche "Output written to $out.$format"
+
+        ;;
+    (latex)
+        format=tex
+        run_pipeline \
+            lib-xml-normalize.xslt \
+            lib-xml-number.xslt \
+            lib-xml-cite.xslt \
+            lib-xml-math-latex.xslt \
+            latex.xslt
+esac

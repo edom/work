@@ -1,0 +1,23 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:include schemaLocation="401-content-type.xsd"/>
+
+    <xsd:element name="book">
+        <xsd:complexType>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <!-- can't copy Document due to Meta clash -->
+                <xsd:element name="title" type="Inline"/>
+                <xsd:element name="body">
+                    <xsd:complexType mixed="true">
+                        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                            <xsd:group ref="Body"/>
+                            <xsd:element name="chapter" type="Document"/>
+                        </xsd:choice>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:choice>
+            <xsd:attributeGroup ref="Entry"/>
+        </xsd:complexType>
+    </xsd:element>
+
+</xsd:schema>

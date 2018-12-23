@@ -1,0 +1,43 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:include schemaLocation="900-database.xsd"/>
+
+    <xsd:element name="beauty">
+        <xsd:annotation>
+            <xsd:documentation>A person who I find beautiful.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:group ref="Thing_flag"/>
+                <xsd:element name="subject">
+                    <xsd:annotation>
+                        <xsd:documentation>The subject whose beauty is being described.</xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:complexType>
+                        <xsd:choice>
+                            <xsd:group ref="Subject"/>
+                        </xsd:choice>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="reason">
+                    <xsd:complexType>
+                        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                            <xsd:group ref="Thing"/>
+                            <xsd:element ref="image"/>
+                            <xsd:element ref="video"/>
+                            <xsd:element ref="resource"/>
+                        </xsd:choice>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:choice>
+            <xsd:attributeGroup ref="Entry"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:group name="Subject">
+        <xsd:choice>
+            <xsd:group ref="Author"/>
+        </xsd:choice>
+    </xsd:group>
+
+</xsd:schema>

@@ -1,0 +1,39 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:include schemaLocation="801-book.xsd"/>
+
+    <xsd:element name="site">
+        <xsd:annotation>
+            <xsd:documentation>Static site.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:element name="html_file">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="path" type="xsd:anyURI">
+                                <xsd:annotation>
+                                    <xsd:documentation>Leading slash is optional.</xsd:documentation>
+                                </xsd:annotation>
+                            </xsd:element>
+                            <xsd:element name="title" type="Inline" minOccurs="0"/>
+                            <xsd:element name="content">
+                                <xsd:complexType>
+                                    <xsd:choice maxOccurs="unbounded">
+                                        <xsd:element ref="graft"/>
+                                        <xsd:element ref="book"/>
+                                        <xsd:element ref="draft"/>
+                                        <xsd:element name="index"/>
+                                        <xsd:element name="skills"/>
+                                        <xsd:element name="documents"/>
+                                    </xsd:choice>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:choice>
+        </xsd:complexType>
+    </xsd:element>
+
+</xsd:schema>

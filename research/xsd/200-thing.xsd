@@ -1,0 +1,71 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:include schemaLocation="100-entry.xsd"/>
+    <xsd:include schemaLocation="202-content-inline.xsd"/>
+
+    <xsd:group name="Thing">
+        <xsd:choice>
+            <xsd:group ref="Entry"/>
+            <xsd:group ref="Thing_flag"/>
+            <xsd:group ref="Thing_link"/>
+            <xsd:element name="summary" type="Inline"/>
+            <xsd:element name="description" type="Inline"/>
+        </xsd:choice>
+    </xsd:group>
+
+    <xsd:group name="Thing_link">
+        <xsd:annotation>
+            <xsd:documentation>Elements for data linking.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+            <xsd:element name="wikidata" type="xsd:anyURI">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Wikidata URL.
+                        For data linking.
+                        If two things have the same Wikidata URL, then they are the same thing.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="musicbrainz" type="xsd:anyURI"/>
+            <xsd:element name="doi" type="xsd:anyURI">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        DOI URI: an HTTPS or HTTP URI which, if visited, resolves the DOI.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:choice>
+    </xsd:group>
+
+    <xsd:group name="Thing_flag">
+        <xsd:choice>
+            <xsd:element name="unsafe">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        <p>The presence of this element indicates that
+                            if you follow any link in this resource,
+                            and continue browsing, then you will very likely encounter porn somewhere.</p>
+                        <p>The presence of this element indicates that the person is associated with unsafe acts.</p>
+                        <p>If the person is a porn actor/actress, use this tag.</p>
+                        <p>If the person is a fictional character, and the author has drawn some porn,
+                            use this tag, even if the character is non-porn.</p>
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType><xsd:sequence/></xsd:complexType><!-- empty element -->
+            </xsd:element>
+            <xsd:element name="fapworthy">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        <p>The presence of this element indicates that I think
+                            I can fap by thinking about the person.</p>
+                        <p>The absence of this element means that I'm not sure.
+                            It doesn't mean that the person is ugly.</p>
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType><xsd:sequence/></xsd:complexType>
+            </xsd:element>
+        </xsd:choice>
+    </xsd:group>
+
+</xsd:schema>

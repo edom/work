@@ -1,0 +1,123 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:include schemaLocation="300-resource.xsd"/>
+    <xsd:include schemaLocation="400-author.xsd"/>
+
+    <xsd:element name="resource" type="Resource">
+        <xsd:annotation>
+            <xsd:documentation>
+                <p>
+                    This element describes a Web URL.
+                </p>
+                <p>
+                    The title gives a hint about the resource.
+                    It should be a short phrase.
+                </p>
+                <p>
+                    The summary explains why the resource is interesting.
+                    It should be one short sentence.
+                    It must not exceed one paragraph.
+                </p>
+            </xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:element name="image" type="Resource"/>
+
+    <xsd:element name="comic" type="Resource">
+        <xsd:annotation>
+            <xsd:documentation>A series of images.</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:element name="music">
+        <xsd:annotation>
+            <xsd:documentation>A piece of music that I find enjoyable.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:element name="title" type="xsd:string"/>
+                <xsd:group ref="Thing"/>
+                <xsd:group ref="Authored"/>
+                <xsd:element name="performance">
+                    <xsd:annotation>
+                        <xsd:documentation>A recording.</xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="performer" maxOccurs="unbounded">
+                                <xsd:complexType>
+                                    <xsd:choice maxOccurs="unbounded">
+                                        <xsd:group ref="Author"/>
+                                    </xsd:choice>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                                <xsd:element name="time" type="xsd:dateTime" minOccurs="0"/>
+                                <xsd:element ref="video"/>
+                                <xsd:element ref="resource"/>
+                            </xsd:choice>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element ref="video"/>
+                <xsd:element ref="resource"/>
+            </xsd:choice>
+            <xsd:attributeGroup ref="Entry"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:simpleType name="Performance_time">
+        <xsd:union memberTypes="xsd:dateTime xsd:date xsd:gYear"/>
+    </xsd:simpleType>
+
+    <xsd:element name="video">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="Resource">
+                    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                        <xsd:element name="highlight">
+                            <xsd:complexType>
+                                <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                                    <xsd:element name="description" type="xsd:anyType"/>
+                                </xsd:choice>
+                                <xsd:attribute name="begin"/>
+                                <xsd:attribute name="end"/>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:choice>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="paper">
+        <xsd:annotation>
+            <xsd:documentation>Academic article, optionally published in a journal.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:group ref="Resource"/>
+                <xsd:group ref="Authored"/>
+                <xsd:element name="abstract" type="Inline"/>
+            </xsd:choice>
+            <xsd:attributeGroup ref="Entry"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <!-- DEPRECATED -->
+    <xsd:complexType name="Resource">
+        <xsd:annotation>
+            <xsd:documentation>Everything that has an URL (can be consumed online by a human).</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:group ref="Resource"/>
+                <xsd:group ref="Authored"/>
+            </xsd:choice>
+        </xsd:sequence>
+        <xsd:attributeGroup ref="Entry"/>
+        <xsd:attributeGroup ref="Resource"/>
+    </xsd:complexType>
+
+</xsd:schema>

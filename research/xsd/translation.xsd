@@ -1,0 +1,22 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="translation">
+        <xsd:annotation>
+            <xsd:documentation>
+                <p>List of fragments in different languages but with the same meaning.</p>
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="fragment" minOccurs="2" maxOccurs="unbounded">
+                    <xsd:complexType mixed="true">
+                        <xsd:sequence>
+                            <xsd:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                        <xsd:attribute name="lang" type="xsd:language" use="required"/>
+                        <xsd:attribute name="writing-system" type="xsd:string"/>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

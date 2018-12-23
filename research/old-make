@@ -1,0 +1,20 @@
+#!/bin/bash
+# why does xelatex produce thicker glyphs on okular?
+# https://tex.stackexchange.com/questions/305258/xelatex-font-rendering-tend-to-be-slightly-bolder-compared-to-pdflatex
+latex=pdflatex
+#latex=xelatex
+name="$1"
+$latex -output-directory out "$name"
+if [ -z "$quick" ]; then
+    # Replaced with biblatex.
+    # (cd out && BIBINPUTS=.. bibtex "$name")
+
+    # http://mirror.pregi.net/tex-archive/macros/latex/contrib/biblatex/doc/biblatex.pdf
+    # section 3.13.1
+    (cd out && biber "$name.bcf")
+
+    (cd out && makeindex "$name")
+
+    $latex -output-directory out "$name"
+    $latex -output-directory out "$name"
+fi

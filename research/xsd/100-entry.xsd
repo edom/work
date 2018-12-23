@@ -1,0 +1,65 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:import
+            namespace="http://www.w3.org/XML/1998/namespace"
+            schemaLocation="https://www.w3.org/2001/xml.xsd"/>
+
+    <xsd:include schemaLocation="099-graft.xsd"/>
+
+    <xsd:element name="comment" type="xsd:anyType">
+        <xsd:annotation>
+            <xsd:documentation>Information that may help the human who edits the XML source file.</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:group name="Entry">
+        <xsd:choice>
+            <xsd:group ref="Entry_meta"/>
+        </xsd:choice>
+    </xsd:group>
+
+    <xsd:group name="Entry_meta">
+        <xsd:annotation>
+            <xsd:documentation>Database entry metadata.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+            <xsd:element ref="comment"/>
+            <xsd:element name="language" type="xsd:language"/>
+            <xsd:element name="tag" type="xsd:anyType"/>
+            <xsd:element name="creation_time" type="xsd:dateTime">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The time this information was entered into the database.
+                        The time when this database entry was created.
+                        Not necessarily the time when the information came into existence.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:choice>
+    </xsd:group>
+
+    <xsd:attributeGroup name="Entry">
+        <xsd:annotation>
+            <xsd:documentation>Database entry metadata.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:attribute name="id" type="xsd:ID"/>
+        <xsd:attribute name="lang" type="xsd:language">
+            <xsd:annotation>
+                <xsd:documentation>This is not always applicable.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="creation-time" type="xsd:dateTime">
+            <xsd:annotation>
+                <xsd:documentation>
+                    DEPRECATED.
+                    The time this information was entered into the database.
+                    The time when this database entry was created.
+                    Not necessarily the time when the information came into existence.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute ref="xml:base"/>
+        <xsd:attribute ref="xml:space"/>
+    </xsd:attributeGroup>
+
+</xsd:schema>
