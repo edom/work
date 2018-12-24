@@ -2,4 +2,38 @@
 # Convert wavelength to temperature
 # Red light wavelength is about 700 nm
 # http://hyperphysics.phy-astr.gsu.edu/hbase/wien.html
-redshift-gtk -r -v -l -6:107 -t 6000:2700 -b 1:0.4
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+level=$1
+
+temperature=6000
+brightness=1
+gamma=1
+
+case $level in
+    (0)
+        temperature=4000
+        brightness=1
+        gamma=1
+        ;;
+    (1)
+        # For reading.
+        temperature=3000
+        brightness=0.8
+        gamma=0.8
+        ;;
+    (2)
+        temperature=2500
+        brightness=0.5
+        gamma=0.9
+        ;;
+    (*)
+        echo "invalid level $level"
+        exit 1
+        ;;
+esac
+
+redshift-gtk -r -v -l -6:107 -t 6000:$temperature -b 1:$brightness -g $gamma
