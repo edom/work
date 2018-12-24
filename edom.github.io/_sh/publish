@@ -1,12 +1,11 @@
 #!/bin/bash
 
-# This script expects to be run from the parent of the directory containing this script.
-# Usage: sh/pub COMMIT
-# This checks out COMMIT, rebuilds the site, and overwrites edom.github.io.
+# This rebuilds the site and overwrites edom.github.io.
 # You should be careful not to publish unpublished content.
-# If COMMIT is not given, this defaults to "origin/master".
 
 set -o errexit
+set -o nounset
+set -o pipefail
 
 # We specify --destination so that we don't clash with a running "jekyll serve".
 # However, you should make sure that no "jekyll serve" is running.
@@ -28,6 +27,8 @@ make -j4 -f _pandoc/Makefile env=prod html_dir=_pandoc_out/prod jekyll_dir=_site
 
 (
     set -o errexit
+    set -o nounset
+    set -o pipefail
 
     cd ~/work
 
