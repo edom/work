@@ -11,7 +11,6 @@ env ?= dev
 # The user overrides this if he/she wants to build some files only.
 org_files ?= $(wildcard *.org)
 
-# Jekyll _site directory.
 html_dir ?= _pandoc_out/$(env)
 
 # End user-adjustable variables.
@@ -68,6 +67,7 @@ $(html_dir)/%.html: \
 .PHONY: all
 all: $(html_files)
 
+# Jekyll _site directory.
 jekyll_dir_dev = _site
 jekyll_dir_prod = _site_publish
 
