@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+cd ~/work/edom.github.io/_site
+
+python -m SimpleHTTPServer 4000
