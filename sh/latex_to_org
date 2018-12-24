@@ -1,0 +1,3 @@
+#!/bin/bash
+# latex_to_org TEXFILE ORGFILE
+pandoc --from=latex-auto_identifiers --to=org --wrap=preserve --output=$2 $1
