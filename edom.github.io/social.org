@@ -1676,6 +1676,115 @@ A McDonalds outlet issues 1 BMC for each Big Mac it can produce immediately.
     - Samsung Galaxy S8
       - Why does changing the theme require email address?
         This feature doesn't require email.
+** Cryptocurrency?
+- Blockchain, cryptocurrency, distributed ledger
+
+  - What is blockchain?
+  - What is cryptocurrency?
+  - What is distributed ledger?
+  - How are they related?
+  - Is a Git repository a Merkel tree?
+
+    - ??? Merkelization of a data structure is adding a cryptographic hash to every node?
+
+- A possible cryptocurrency design?
+
+  - A cryptocurrency that proves that W work has been done by A for B, anonymously. Is it possible?
+  - Every principal has a keypair
+  - Every principal creates a debt certificate and signs it with his private key
+  - Every spending of a debt certificate distributes a revocation of that certificate
+  - If a token is in the distributed database, it is assumed to be spent
+  - Unforgeable digital token? Copy-once?
+  - Record that A has paid N dollars to B
+  - Blockchain
+
+    - [[https://en.wikipedia.org/wiki/Blockchain][WP: Blockchain]]
+    - "Once recorded, the data in any given block cannot be altered retroactively without the alteration of all subsequent blocks, which requires collusion of the network majority."
+
+  - [[https://en.wikipedia.org/wiki/Homomorphic_encryption][https://en.wikipedia.org/wiki/Homomorphic_encryption]]
+  - Blockchains are pseudonymous, not anonymous.
+
+    - Is this legit? [[https://securingtomorrow.mcafee.com/mcafee-labs/staying-anonymous-on-the-blockchain-concerns-and-techniques/][https://securingtomorrow.mcafee.com/mcafee-labs/staying-anonymous-on-the-blockchain-concerns-and-techniques/]]
+
+  - Cardano
+
+    - [[https://en.wikipedia.org/wiki/Recursive_InterNetwork_Architecture_(RINA)][WP: Recursive InterNetwork Architecture (RINA)]]
+    - formal verification?
+    - Haskell programming language
+
+  - [[http://theconversation.com/the-blockchain-does-not-eliminate-the-need-for-trust-86481][theconversation.com: The blockchain does not eliminate the need for trust]]
+
+    - "The blockchain does not create or eliminate trust. It merely converts trust from one form to another.
+      While we previously had to trust financial institutions to verify transactions, with the blockchain we have to trust the technology itself."
+    - [[https://hackernoon.com/bitcoin-is-not-trustless-350ba0060fc9][hackernoon.com: Bitcoin is not trustless]]
+
+  - Security is trust management.
+
+    - Security is minimizing the required trust.
+
+- Gold vs data: move vs copy
+
+  - Gold doesn't need witness to be valuable.
+  - Gold can be moved, but not copied.
+    Data can't be moved, but can be copied.
+    "Moving" data means copying it and deleting the original.
+  - Unforgeable and anonymous
+
+    - Gold is unforgeable and anonymous
+
+      - Yes, you can forge gold with nuclear transmutation, but it's not cost-effective
+
+        - so it's practically unforgeable
+
+    - Private key is unforgeable and anonymous
+
+      - Yes, you can forge private key with brute force, but it's not cost-effective
+
+        - so it's practically unforgeable
+
+  - Payment
+
+    - Payment is made by moving the gold
+    - Payment is made by moving the private key? But it's duplicated. Data can be copied, but not moved.
+
+  - Double-spending is possible due to the easy-to-copy nature of digital data.
+  - What is double-spending?
+
+- Currency is a way of moving debt
+
+  - Bitcoin white paper: [[https://bitcoin.org/bitcoin.pdf][Satoshi Nakamoto, "Bitcoin: A Peer-to-Peer Electronic Cash System"]]
+  - Did SatoNak consider human greed, stupidity, and selfishness?
+
+- Proof of ...
+
+  - proof of work
+  - proof of capacity
+  - memory-bound functions / memory-hard challenges for spam filtering
+
+- [[https://www.youtube.com/watch?v=6q5mUNEEn2c][YouTube: Real Engineering: Why Bitcoin Is Not Working]]
+- [[https://blockchain-nus.github.io/][NUS blockchain research group]]
+- What is Bitcoin?
+
+  - Need review
+
+    - Bitcoin is rare (and hard to fake) like gold,
+      but it's digital in the sense that you can send it quickly over the Internet,
+      so bitcoin is digital gold.
+    - Bitcoin is not money, but a bitcoin exchange will accept it
+      and give you an amount of money they think it's worth.
+      You can exchange it with others' cash, goods, or services,
+      but only if they accept bitcoin.
+    - All the ruckus about bitcoin arises from mixing up
+      the concept of
+      [[https://en.wikipedia.org/wiki/Medium_of_exchange][medium of exchange]]
+      and
+      [[https://en.wikipedia.org/wiki/Unit_of_account][unit of account]]
+      those are two of the
+      [[https://en.wikipedia.org/wiki/Money#Functions][functions of money]].
+    - Using bitcoin for payment is comparable to a [[https://en.wikipedia.org/wiki/Hawala][hawala]].
+    - Bitcoin is only useful if people will exchange it with something else.
+
+- [[https://bitcoinmagazine.com/articles/op-ed-how-tokenization-putting-real-world-assets-blockchains/][Op Ed: How Tokenization Is Putting Real-World Assets on Blockchains]]
 * Political theory/research
 ** Politics basics: What is the difference between nation, state, country?
 - https://tamayaosbc.wordpress.com/2010/11/19/basic-concepts-in-politics/
@@ -1972,3 +2081,202 @@ There would be no illegal immigrants.
 Everyone would be a world citizen.
 
 - https://www.quora.com/Why-cant-all-the-earth-countries-unite-to-make-a-single-federation
+* Designing a lovable government?
+
+** Purpose
+
+The highest law is the will of the people.
+The people can change the constitution.
+
+|                         | benefits few    | does not benefit few      |
+| benefits many           | good business   | road-building             |
+| does not benefit many   | crime           | self-defeating behavior   |
+#+CAPTION: Examples of actions according to beneficiaries
+
+Economically, government is to maximize positive externality,
+and minimize negative externality.
+
+Example negative externality:
+road congestion due to residential space transforming to commercial space.
+
+** Policy
+
+Do the simplest intervention with the least effort,
+the greatest effect, the least gameability,
+the least unintended consequences.
+But those are conflicting requirements.
+
+Example: even-odd license plate based on day of month.
+People will game this by buying two license plates or buying two vehicles.
+
+Avoid wasting resources on policies that
+do not attack the root cause of the problem.
+
+** Murder
+
+Why is something illegal?
+Perpetrators are going to perpetrate anyway,
+and non-perpetrators are not going to perpetrate,
+regardless of its illegality.
+
+Some people commit crime unwillingly because they
+want to continue living but they no see other way.
+Some people are wired differently and commit crime like a pastime.
+
+If something is illegal, why does a perpetrator still do it?
+Is it futile to make anything illegal?
+If it were not illegal, will it still be done?
+
+Law cannot change human nature.
+If you want to change human nature, study biology, not law.
+Lawmaking must defer to human nature.
+
+It is impossible to enforce a law if millions of people violate it at the same time.
+If a law is against human nature, of course people will violate it.
+
+Is it moral to force someone who enjoy murder not to murder?
+
+** Morality
+
+Government should not interfere in private matter
+such as religion, insurance, and consensual sex.
+
+If something does not harm anyone else other than the doer,
+it should not be illegal.
+
+We should help others,
+but we should to the greatest extent avoid forcing
+others to do anything against their will
+even though doing that would be good for them.
+Consequence: procreation is immoral because
+it forces people to exist without their consent.
+
+We can persuade, but we should not force, unless we are in war.
+
+Consumption should be taxed, not income.
+
+Alternative to taxation: donation, state-owned enterprise.
+
+Stability.
+
+In a republic, in an election, you don't pick the best candidate;
+you pick the one that will do the least damage.
+
+Holding a government position should not be profitable.
+How do we prevent abuse of power?
+By not giving power in the first place?
+The people must have the final say.
+
+** Banning
+
+Banning something does not eliminate it.
+Worse, banning it may also create a black market for it.
+
+Regulate, don't ban.
+
+** Sex
+
+Blocking access to Internet porn sites does not work.
+
+Banning prostitution creates black market.
+
+Banning sex makes more people more curious.
+
+It's part of human nature.
+
+Family education.
+
+** Drugs
+
+Some people are curious.
+
+** Patents
+
+Alternative to patents:
+Prize system:
+People collect money for a problem,
+and the sum is awarded to the inventors who solve the problem.
+
+Another alternative: People can donate to inventors.
+
+Another alternative: Assume that inventors do things
+because they love to do that, and they want money, but don't want to get filthy rich.
+
+How was the first people who invented spears rewarded,
+if they were rewarded at all?
+
+** Prevention of mass destruction
+
+How does a government prevent
+nuclear briefcase detonation,
+water source poisoning,
+asteroids hitting Earth,
+and so on?
+
+The amount of security is inversely proportional to the amount of trust.
+If you could trust everybody, security would be unnecessary.
+Republics are complicated because you can't trust the ruler.
+Republics are designed to minimize the damage done by an evil ruler,
+not to maximize the benefit done by a competent ruler.
+
+The most efficient government is
+benevolent competent kind laissez-faire minimalist absolute monarch,
+but it is also the most risky.
+Anything can happen if the ruler dies.
+
+** Differences
+
+Conventional government assumes that most humans are fundamentally evil.
+New government assumes that most humans are fundamentally non-evil.
+
+** Office
+
+If you tell people to do something they don't want,
+they will do their best to avoid it.
+If they want to do it,
+they will do it anyway without your telling them.
+Thus, you don't tell people.
+You simply let them do things,
+help them do things,
+get out of their way.
+
+If you hire the people who don't want to do the things you want,
+no amount of salary will fix it.
+When you hire people, there is an intersection between what they want,
+what you want, and what your organization wants.
+
+In the office, there are so many things happening that it is too much
+for one person to keep track what everyone else is doing.
+You are the only person who knows what you really do.
+Your supervisor, if any, is the second person to know what you do.
+Others have even vaguer ideas about what you do.
+But people can instinctively see whether you're doing well or not,
+so if you're not doing well,
+you must pretend that you were doing well,
+and then suddenly you will do well.
+If you think you're not doing well, if you doubt yourself,
+then it will be a self-fulfilling prophecy.
+Even if you are absolutely sure that your job is unimportant,
+even if you keep stumbling,
+you must unquestioningly believe that you are doing well.
+
+In the office, what you do is less important
+than what others think you do.
+
+If you don't know what to do, walk around, and talk to people.
+
+If you don't fit in one company,
+maybe that's the company's fault.
+But if you have tried three much-different companies
+and still can't fit, maybe it's your fault.
+
+Make friends.
+People first.
+Jobs second.
+
+The number of processes is inversely proportional to the amount of trust.
+
+How much trust are you convenient with?
+
+There are people you naturally gravitate towards,
+and people you naturally gravitate away from.

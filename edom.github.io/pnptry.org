@@ -881,3 +881,66 @@ that computes the same predicate but with more states.
 
 Given a non-oracle $A$-decider, we can always construct another $A$-decider
 that computes the same predicate but with less states.
+* P vs NP?
+
+Forward question: Given a predicate p, what is the minimum circuit-size complexity of p?
+
+Reverse question: Given a minimum circuit-size complexity, how complex can a predicate with that number of
+operators be?
+
+Baca wiki SAT & papers first
+
+We say that a predicate k-to-1 iff its domain is 0,1^k and it is true for exactly one input string and
+false
+for every other. Let Pk be the set of all k-to-1 predicates.
+
+Logical methods in computer science (open access journal)
+
+what is this book? should we read it? is it related to P vs NP?
+[[http://www-2.dc.uba.ar/materias/azar/bibliografia/Downey2010AlgorithmicRandomness.pdf]]
+
+Formal Systems and Machines: An Isomorphism
+[[http://legacy.earlham.edu/~peters/courses/logsys/machines.htm]]
+
+Forallx: https://www.fecundity.com/logic/download.html
+
+Franz Baader: https://lat.inf.tu-dresden.de/ baader/index-en.html
+
+High-Level Descriptions of Computation
+[[https://courses.engr.illinois.edu/cs373/sp2013/Lectures/lec21.pdf]]
+
+[[http://cstheory.stackexchange.com/questions/1955/books-on-automata-theory-for-self-study]]
+
+[[http://cstheory.stackexchange.com/questions/3253/what-books-should-everyone-read]]
+
+A Turing Machine Distance Hierarchy
+[[http://www2.cs.cas.cz/~sima/lata13.pdf]]
+
+T(m,n) = set of all problems solvable by m in n steps
+
+T(m,O(f(n)))
+
+P(m) = sum k in Nat T(m,O(n^k))
+
+P(m1) = P(m2)?
+
+P(DTM) = P(NTM)?
+
+Problem = set of q-a pairs
+
+Cclass = set of problems
+
+i < j implies T(m,i) subset T(m,j) ?
+
+[[https://en.wikipedia.org/wiki/Computational_complexity_theory#Computational_problems]]
+
+Cite:
+[[http://www.math.toronto.edu/weiss/model_theory.pdf]]
+
+Fundamentals of Model Theory
+[[http://www.math.toronto.edu/weiss/model_theory.pdf]]
+
+Wilfrid Hodges Model Theory draft
+[[http://wilfridhodges.co.uk/history07.pdf]]
+
+[[http://w3.impa.br/~hossein/myarticles/hodgetheory.pdf]]

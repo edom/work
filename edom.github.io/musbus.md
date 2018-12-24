@@ -1,8 +1,10 @@
 ---
 title: Music business
 permalink: /musbus.html
-date: 2018-05-30 02:22 +0700
+date: 2017-09-13 03:00:00 +0700
 ---
+
+## Music business
 
 - Indonesia royalty collection organization
     - [Karya Cipta Indonesia - Lembaga Manajemen Kolektif Hak Cipta](http://kci-lmk.or.id/)
@@ -50,7 +52,6 @@ Bandcamp takes 10% cut.
         - Lean On by Major Lazer has over 2.4 million plays on Spotify. But they only get $696
 - [Op Ed: How Tokenization Is Putting Real-World Assets on Blockchains](https://bitcoinmagazine.com/articles/op-ed-how-tokenization-putting-real-world-assets-blockchains/)
     - "An example of music ownership/licensing tokenization is SingularDTV."
-        - [Cryptocurrency]({% link crycur.md %})
 - Music studios
     - Granada Music Studio, Jalan Bumi no. 6, near Pakubuwono Residence
     - Resonanz Music Studio
@@ -65,3 +66,112 @@ Bandcamp takes 10% cut.
 - Online songwriting service
     - http://songsculptor.com/work4hire.htm
     - Fiverr?
+
+## Buying a keyboard
+
+- Choices
+    - Buy iPad, Garageband
+        - Cons
+            - Expensive
+            - Sell soul to Apple
+    - Use Simo's MacBook Air's Garageband
+        - Cons
+            - Dependant on Simo
+    - Buy Raspberry Pi
+        - Pros
+            - Cheap
+        - Cons
+            - Much hacking effort needed
+            - How much polyphony?
+            - Is CPU strong enough?
+            - Must buy fastest SD card. How fast can SD card be?
+- Some ideas for portable keyboard
+    - https://www.youtube.com/results?search_query=garageband+piano+sounds
+    - https://www.youtube.com/watch?v=EV1jW3ZgXwM
+    - polyphony limited to 5? why? what board version?
+    https://www.youtube.com/watch?v=wUVFfxqXjIc
+    - https://autostatic.com/2013/10/20/using-a-raspberry-pi-as-a-piano/
+
+I will need a 49-key (or 61) and a 88-key keyboard, but I need the 49-key more.
+I'm looking for a keyboard package that:
+
+- USB class compliant
+- includes a USB cable
+- has a socket for sustain pedal
+- has a socket for expression pedal
+- What is its USB socket?
+- Warranty?
+
+I've given up looking for 49-key with piano touch.
+
+Normal price for 49-key:
+
+- two wheels: KRp1650.
+- two wheels, knobs, pads, and sliders: KRp2400.
+
+I can reprogram my computer to translate modulation wheel data to expression.
+
+Let X(T) be the Indonesian Tokopedia price of T in IDR divided by United States Amazon price of T in USD.
+X(88-key) is much higher than X(49-key),
+probably because of lower demand but higher transportation cost (it has awkward shape).
+
+[Worlde KS49C](https://www.tokopedia.com/tokorecordingdaw/worlde-ks49c-keyboard-controller-49-keys).
+KRp1100.
+
+[M-Audio Keystation 49 II](http://www.m-audio.com/products/view/keystation-49).
+32 inch. 5 pound.
+[Has Indonesian distributor](http://www.m-audio.com/distributors#).
+[KRp1650](https://www.tokopedia.com/destinysound/m-audio-keystation-49-mk-ii-portable-usb-midi-keyboard-controller).
+[KRp1650](https://www.bukalapak.com/p/hobi-koleksi/musik/sound-system-rekaman/7iszuz-jual-m-audio-keystation-49-mk-ii-portable-usb-midi-keyboard-controller)
+[USD100](https://www.amazon.com/M-Audio-Keystation-49-II-Controller/dp/B00IWWZAM6).
+X = 16.5.
+
+Samson Carbon 49.
+34 inch (90 cm). 8 pound.
+[KRp1200](https://www.tokopedia.com/davekomputer/samson-carbon-49-midi-controller).
+[USD100](https://www.amazon.com/Samson-Carbon-49-MIDI-Controller/dp/B0077AMUFY/).
+X = 12.
+
+Nektar Impact LX49+.
+32 inch. 10 pound.
+[KRp2400](https://www.tokopedia.com/destinysound/nektar-impact-lx49-plus-usb-midi-keyboard-controller).
+[USD160](https://www.amazon.com/Nektar-Impact-LX49-Keyboard-Controller/dp/B01HZWL64O/).
+X = 15.
+
+Samson Graphite 49:
+34 inch. 9 pound.
+[KRp2750](https://www.bukalapak.com/p/hobi-koleksi/musik/alat-musik-lainnya/8gc4rj-jual-samson-graphite-49-usb-midi-keyboard-controller).
+[USD180](https://www.amazon.com/Samson-Graphite-49-MIDI-Controller/dp/B0077AMRWU/).
+X = 15.28.
+
+Novation Launchkey 49 MK2.
+34 inch. 9 pound.
+[KRp3000](https://www.tokopedia.com/destinysound/novation-launchkey-49-mk2-usb-midi-controller-keyboard).
+[KRp3000](https://www.bukalapak.com/p/hobi-koleksi/musik/sound-system-rekaman/515ydn-jual-novation-launchkey-49-mk2-usb-midi-controller-keyboard).
+[USD200](https://www.amazon.com/Novation-Launchkey-Keyboard-Controller-Ableton/dp/B00VVK2A3I/).
+X = 15.
+
+Samson Carbon 61.
+38 inch (100 cm). 8 pound.
+[KRp1750](https://www.tokopedia.com/davekomputer/samson-carbon-61-midi-controller).
+[USD130](https://www.amazon.com/Samson-Carbon-USB-MIDI-Controller/dp/B00BCTY93M/).
+X = 13.46.
+
+M-Audio Keystation 88 II.
+54 inch (140 cm). 17 pound.
+[KRp3500](https://www.tokopedia.com/rightsh0p/midi-controller-m-audio-keystation-88-mkii).
+[USD200](https://www.amazon.com/M-Audio-Keystation-88-II-Controller/dp/B00IWTS58A/).
+X = 17.5.
+
+- Go to shop.
+- Determine if price is normal.
+- Try the stuff.
+- Buy with cash.
+
+The 49-key one is portable.
+I don't need to find a bigger desk.
+I will need the 88-key one for mainly piano music.
+
+Online comparison is futile if the thing you want is not in stock at any seller.
+
+I bought Nektar Impact GX49 for MRp1.58 because the seller happened to have it in stock.

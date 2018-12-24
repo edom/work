@@ -2,7 +2,7 @@
 #+DATE: 2017-06-22 03:57:00 +0700
 #+PERMALINK: /intelligence.html
 #+MATHJAX: true
-#+OPTIONS: toc:nil
+#+OPTIONS: toc:nil ^:nil
 #+TOC: headlines 1
 #+TOC: headlines 3
 * Doing the last thing we will ever need to do
@@ -2210,5 +2210,411 @@ Andrea Schmidt described chemotaxis as a biased random walk. The bias is
 the chemical concentration gradient.
 
 Chemotaxis is intelligence.
+
+* AI hardware design?
+
+** Architecture
+
+Most computers in 2017 have the von Neumann architecture,
+which suffers from the von Neumann bottleneck
+(the limited transfer rate between CPU and RAM).
+This architecture fits programming,
+but it fits training less,
+and it does not fit learning.
+This architecture does not suit machines with billions of sensors.
+This architecture does not preclude intelligence
+but the bottleneck incurs a great penalty.
+
+** An array of FitzHugh-Nagumo cells
+
+A FitzHugh-Nagumo cell is an electrical circuit implementing the FitzHugh-Nagumo model.
+FHN cells can be implemented in Field-programmable Analog Array (FPAA) \cite{CircuitFitzHughNagumo}.
+
+* Designing a humanoid?
+
+A humanoid is a human-shaped robot.
+
+There are several choices:
+Make a machine that resembles human,
+Make a cyborg (a human-machine hybrid with more human part),
+or Mind upload.
+
+** Power plant
+
+It needs power plant with high power-to-mass and power-to-volume ratio
+for long-time low-power and short-time burst scenario.
+High-density sugar biobattery \cite{zhu2014high}.
+A microbial fuel cell capable of converting glucose to
+electricity at high rate and efficiency \cite{rabaey2003microbial}.
+Sugar beats lithium ion.
+
+Distributed processing, distributed energy generation.
+
+Citric acid cycle.
+Oxidative phosphorylation.
+
+Biomachine hybrid.
+A mixture of microbes and machine.
+
+** Sensors
+
+Billions of sensors.
+Light, sound, heat, itch, touch, gravity.
+
+A strong enough brain.
+
+How will it sustain itself?
+
+How will it sense the world?
+
+How will it manipulate the world?
+
+* Human as a feedback system?
+** Human behavior as a special case of the general feedback equation
+
+Let $x ~ t$ be the input vector at time $t$;
+this vector has at least some billions of elements.
+The function $x$ represents the state of all sensors at a given time.
+
+Let $y ~ t$ be the control vector at time $t$;
+this vector is also big.
+
+Let $z~t$ be the output vector at time $t$.
+
+The environment feeds back a part of the output to the input.
+Can the agent determine the response function?
+
+The feedback forms memory, but see "Memory without feedback in a neural network".
+[[https://www.ncbi.nlm.nih.gov/pubmed/19249281]]
+
+** Hardwiring the concept of time
+
+We can transform a non-temporal behavior $f~x = y$ into a temporal behavior $f'~t = y'$?
+
+** A brain at a given time is an array function.
+
+A brain at a given time is an array function
+having type $\Real^\infty \to \Real^\infty$.
+Each component of the input array is a signal from a sensor.
+Each component of the output array goes to an actuator.
+
+Since the brain is finite,
+there must be infinitely many zeros in the input and output arrays.
+
+** An array iself is also a function.
+
+An $E$-array is a function having type $\Nat \to E$.
+The input is an index.
+The output is the value of the component at that index.
+Subscripting denotes function application.
+
+** Each brain has a maximand.
+
+Such maximand is a hidden function.
+The brain always tries to maximize the maximand.
+
+A differential change in brain tries to increase the maximand.
+The brain follows gradient.
+
+** Consider functions of length-one arrays.
+
+Let $h$ be a differential change in brain.
+
+** Draft
+
+The only way to know whether the system has learning something
+is by testing it with samples the system has never seen.
+
+Practically all machine learning cases deal with functions
+that is continuous enough to form a Hilbert space.
+
+Every classification problem in the real world can be written as $f : I^n \to I$ for an $n : \Nat$.
+Usually $I$ is discrete.
+
+Consider the case where $I = [0,1]$.
+Continuous map from $I^n$ to $I$.
+Continuous map from a hyperplane to a line.
+
+** How do we relate vector functions and intelligence?
+
+** How does feedback happen in the brain?
+
+Feedback is due to environment and the physical laws.
+When we move our hand, we see it, because the light
+reflected by our hand now reaches our eyes.
+
+The next input depends on the previous input.
+$$\begin{aligned}
+    y_k &= b~x_k
+    \\
+    x_{k+1} &= f~x_k~y_k\end{aligned}$$
+
+** The brain is a recurrence relation.
+
+This pictures the brain as a parallel dataflow computer
+with clock period of a few microseconds.
+
+[[https://en.wikipedia.org/wiki/Dataflow_architecture]]
+
+Let $m$ be memory, $x$ be senses, and $y$ be actuators.
+$$\begin{aligned}
+    m_{t+1} &= f~x_t~m_t
+    \\
+    y_{t+1} &= g~x_t~m_t\end{aligned}$$
+
+There is also a version with implicit time.
+$$\begin{aligned}
+    m' &= f~x~m
+    \\
+    y' &= g~x~m\end{aligned}$$
+
+There is also a continuous version.
+$$\begin{aligned}
+    m_{t+h} &= h \cdot f~x_t~m_t
+    \\
+    y_{t+h} &= h \cdot g~x_t~m_t\end{aligned}$$
+
+** The brain evolved from simpler nervous systems.
+
+Nervous systems are control systems.
+
+Nervous systems must have provided some evolutionary benefit;
+otherwise natural selection would have phased them out.
+
+Bacterial chemotaxis detects chemical concentration difference.
+
+Nematode.
+Caenorhabditis elegans.
+* AI/ML taxonomy?
+
+Artificial intelligence is constrained optimization.
+Brain minimizes free energy \cite{friston2006free,friston2010free}.
+
+Generate vs discriminative.
+
+Type type of an /expert system/ is $Facts \to Query \to Answer$.
+Decision tree.
+Linearized decision tree.
+
+A learning algorithm is /stable/ iff its generalization error is bounded.
+
+** Voronoi classifier
+
+Find out the cluster centers.
+Let the Voronoi diagram be the boundary.
+
+** Hyperplane classifier
+
+Let $h$ be a hyperplane.
+Define $m : \Real^\infty \to \{0,1\}$,
+the /hard linear binary classifier/ of $h$,
+as $m~x = [h~x \ge 0]$
+where $[x]$ is 1 iff $x$ is true or 0 iff $x$ is false.
+Soft classifier: define $m~x = \tanh^{-1}~(h~x)$.
+
+** Support vector machine
+
+A training point $x$ is a support of $h$ iff
+it is the closest point to $h$
+among all points in the class of $x$.
+
+Alternative formulation:
+An upper level is a hyperplane $h_u$ such that $\forall a \in U : h_u~a > 0$.
+A lower level is a hyperplane $h_l$ such that $\forall b \in L : h_l~b < 0$.
+Let $h_u$ and $h_l$ be parallel.
+Maximize the distance between $h_u$ and $h_l$.
+Then $h_u$ is the upper margin and $h_l$ is the lower margin.
+Define $h$ as the hyperplane exactly between $h_u$ and $h_l$.
+
+Define $m : \Real^\infty \to \{0,1\}$,
+the /support vector machine/ (SVM) of $h$,
+as $m~x = [h~x \ge 0]$.
+Such SVM is a binary classifier.
+
+** Hume's problem of induction
+
+Justification for induction?
+[[https://en.wikipedia.org/wiki/Rule_of_succession]]
+
+** Independent scholar? Citizen science?
+
+[[https://en.wikipedia.org/wiki/Independent_scholar]]
+
+[[https://en.wikipedia.org/wiki/Citizen_science]]
+
+** Statistics?
+
+Correlation hints causation.
+
+Mathematical-Statistical Learning Theory
+[[https://ocw.mit.edu/courses/mathematics/18-657-mathematics-of-machine-learning-fall-2015/]]
+
+[[https://ocw.mit.edu/courses/mathematics/18-655-mathematical-statistics-spring-2016/]]
+
+Convex Optimization, Boyd & Vandenberghe
+[[https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf]]
+
+CMU Statistics
+
+[[http://www.stat.cmu.edu/~siva/700/main.html]]
+
+[[http://www.stat.cmu.edu/~larry/=stat705/]]
+
+[[http://www.stat.cmu.edu/~larry/=sml/]]
+
+[[http://www.cs.cmu.edu/~10702/]]
+
+[[https://www.stat.berkeley.edu/~statlearning/publications/index.html]]
+
+[[https://github.com/bblais/Statistical-Inference-for-Everyone]]
+
+[[https://en.wikipedia.org/wiki/Checking_whether_a_coin_is_fair]]
+
+Bayesian Updating
+[[http://statweb.stanford.edu/~serban/116/bayes.pdf]]
+
+[[https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Mathematics]]
+
+* Agent models?
+
+** Explicit-world mono-unary algebra
+
+A /world/ $W$ is a mono-unary algebra $(\fun{Sta}~W, ~ \fun{law}~W)$
+where $\fun{Sta}~W$ is the /world state type/
+and $\fun{law}~W : \fun{Sta}~W \to \fun{Sta}~W$ is the /world law/.
+
+An /agent/ $A$ is a mono-unary algebra $(\fun{Sta}~A, ~ \fun{law}~A)$
+where $\fun{Sta}~A$ is the /agent state type/
+and $\fun{law}~A : \fun{Sta}~A \to \fun{Sta}~A$ is the /agent law/.
+
+The /environment/ is the world minus the agent.
+Something is a part of the agent if and only if
+the agent can directly control that part.
+Otherwise it is a part of the environment.
+
+The function $\fun{sense}: \fun{Sta}~W \to \fun{Sta}~A$
+defines how the agent perceives the world.
+This function is not invertible
+because $\fun{Sta}~W \supset \fun{Sta}~A$.
+This means that /there exists part of the world that the agent cannot sense./
+
+An agent exists in a world.
+The $\fun{sense}$ function must be a homomorphism from the world to the agent.
+The $\fun{sense}$ function must satisfy this equation:
+$$\fun{sense}\circ \fun{law}~W = \fun{law}~A \circ \fun{sense}.$$
+
+That equation relates the actual world law
+and what the law looks like from the agent's point of view.
+The agent can never know the world law.
+The agent can only discover something homomorphic to that law.
+That means /we can never know the laws of nature/.
+We will never know the reality.
+We can only know something homomorphic to the laws of nature.
+
+Starting from a state $x$, the agent forms the sequence
+$\fun{orbit}~A~x = \fun{iterate}~(\fun{law}~A)~x = (x, ~ f~x, ~ f^2~x, \ldots)$ where $f = \fun{law}~A$.
+We define such $\fun{orbit}~A~x$ to be a member of the type $\fun{Orbit}~A$.
+We use the notation $\fun{InfSeq}~A$ to mean
+the space of infinite sequences
+where each element has type $A$.
+We have $\fun{Orbit}~A \subset \fun{InfSeq}~A$.
+We consider the type $\fun{Orbit}~A = \{ \fun{orbit}~A~x ~|~ x : \fun{Sta}~A \}$,
+the set of all orbits of $A$.
+We have a judge function that judges an orbit.
+This function is $\fun{judge}: \fun{Orbit}~A \to \Real$.
+
+Now we assume that every $x : \fun{Sta}~A$ is distributed uniformly.
+Define $p~r$ as
+the probability of finding an $x$ where $\fun{judge}~x \le r$.
+The shape of the distribution $p$
+describes the intelligence of the agent.
+
+The function $\fun{penalty}: \fun{Sta}~A \to \Real$
+defines the undesirability of an agent state.
+Alternatively, the function $\fun{reward}: \fun{Sta}~A \to \Real$
+defines the desirability of an agent state.
+The function measures how bad or how good the agent performs.
+This is the agent's hidden objective function.
+This is hardwired.
+This is arbitrary.
+The agent doesn't have to be aware of this.
+An intelligent agent acts to make its
+$\fun{penalty}~x$ as close to zero as possible
+in the long term for as many $x$ as possible,
+where $x$ is an agent state.
+
+The agent displays an intelligent behavior
+if it can minimize the long-term penalty from lots of starting states.
+The most intelligent agent is the one that minimizes its lifelong sum of penalty?
+
+An agent has input and output.
+
+An /agent logic/ is a function of type $(M,I) \to (M,O)$
+where $M$ is the memory type,
+$I$ is the input type,
+and $O$ is the output type.
+We assume that the world remembers the agent memory.
+
+** Limitations
+
+The agent is not omniscient.
+The agent does not know everything.
+The agent can only perceive a small part of the world.
+The agent has physical limitations.
+The agent cannot know the whole world.
+
+** Implicit-world discrete dynamical system model
+
+Let $w$ be a world.
+Let $a$ be an agent in world $w$.
+Let $x~t$ be the input of the agent at time $t$.
+Let $y~t$ be the output of the agent at time $t$.
+Let $m~t$ be the memory of the agent at time $t$.
+
+We assume that the agent needs one time step to compute the output.
+$$\begin{aligned}
+    y~(t+1) &= Y~(x~t)~(m~t)~t
+    \\
+    m~(t+1) &= M~(x~t)~(m~t)~t
+    \\
+    x~(t+1) &= X~(x~t)~(y~t)~t\end{aligned}$$
+
+** Dynamical systems
+
+** Measuring the intelligence of a phase space trajectory
+
+We can think of a human as a dynamical system.
+
+Given two phase space trajectories,
+which is more intelligent?
+Why?
+The most intelligent is the most homeostatic, the most stabilizing, the most controlling.
+
+** Discrete agent model
+
+Let $w$ be the world law,
+and $s$ be short-term goal function.
+At time $t$,
+let $x_t$ be agent input,
+$y_t$ be agent output,
+$a_t$ be the agent logic,
+Assume that these equations hold:
+
+$$\begin{aligned}
+y_t &= a_t(x_t)
+\\ x_{t+1} &= w(x_t,y_t)
+\\ g_t &= s(x_t).\end{aligned}$$
+
+Rearranging and simplifying gives:
+
+$$\begin{aligned}
+\\ g_{t+1} &= s(x_{t+1})
+\\ &= s(w(x_t,y_t))
+\\ &= s(w(x_t,a_t(x_t)))\end{aligned}$$
+
+The goal function takes $e_N$ and outputs a number,
+where $N$ is a constant.
+
+The agent wants to maximize $\sum_{t=0}^\infty g_t$.
 
 * Bibliography
