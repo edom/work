@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+This has been modified from the original.
+We put URLs in the bibliography.
+-->
 <style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
   <info>
     <title>ACM SIG Proceedings ("et al." for 3+ authors)</title>
@@ -167,6 +171,7 @@
         </else>
       </choose>
       <text macro="access"/>
+      <text variable="url" prefix=". url: &lt;" suffix="&gt;"/>
     </layout>
   </bibliography>
 </style>
