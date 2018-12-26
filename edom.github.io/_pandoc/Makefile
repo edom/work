@@ -41,9 +41,12 @@ pandoc_flags_prod = \
 # - https://www.zotero.org/styles/acm-sig-proceedings
 # - https://github.com/citation-style-language/styles/blob/master/acm-sig-proceedings.csl
 
+# 2018-12-27:
+# We removed the dependency on $(bib_file), to prevent unnecessary rebuilding of the html files.
+# This only works if we only add new entries to $(bib_file) and never update existing entries.
+# If we (supposedly rarely) update an existing entry in $(bib_file), we will need "make -B".
 $(html_dir)/%.html: \
 		%.org \
-		$(bib_file) \
 		$(csl_file) \
 		$(filter_file) \
 		$(template_file) \
