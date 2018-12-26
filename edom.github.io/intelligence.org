@@ -5,6 +5,100 @@
 #+OPTIONS: toc:nil ^:nil
 #+TOC: headlines 1
 #+TOC: headlines 3
+* Meta
+This is growing area.
+Mature contents move out.
+** Learning plan
+- Read the book \cite{cucker2007learning}.
+  It seems to be very relevant to what I'm trying to do.
+  See its table of contents[fn::http://assets.cambridge.org/97805218/65593/frontmatter/9780521865593_frontmatter.pdf].
+- Read the proceedings[fn::http://www.math.purdue.edu/calendar/conferences/machinelearning/abstracts.php]
+  of the conference "Approximation Theory and Machine Learning" (Purdue University; September 29 - 30, 2018).
+- Gather people with common interests.
+  The authors of \cite{cucker2007learning}.
+  The people attending the conference.
+** Learning path
+Teaching is mostly about sequencing lessons to maximize learning speed.
+
+Here are the easy things.
+We need to memorize these definitions.
+
+Relation (a domain, a codomain, and a set of pairs).
+Function (a special kind of relation).
+Function space.[fn::https://en.wikipedia.org/wiki/Function_space]
+Measure.[fn::https://en.wikipedia.org/wiki/Measure_(mathematics)]
+Distance or metric.[fn::https://en.wikipedia.org/wiki/Metric_(mathematics)]
+Norm.
+Inner product.
+Do not confuse measure with metric.
+
+Here are some rather hard things that need some thinking.
+
+Should we think of a matrix as a rectangle containing numbers or as a /linear function/?
+
+A real-valued function can be seen as a vector.[fn::https://en.wikipedia.org/wiki/Function_space#In_linear_algebra]
+"In modern introductory texts to functional analysis, the subject is seen as the study of vector spaces endowed with a topology"[fn::https://en.wikipedia.org/wiki/Functional_analysis].
+Why do we adopt this view?
+
+These slides[fn::https://courses.cs.washington.edu/courses/cse590a/09wi/mathfoundation.pdf] (slide 20: Lagrange multipliers are common.)
+
+It would be nice if this Wikipedia article[fn::https://en.wikipedia.org/wiki/Function_space#Functional_analysis]
+relates those opaquely-named function spaces instead of just dumbly listing them.
+
+Do we need to know these?
+
+Functional analysis.[fn::https://en.wikipedia.org/wiki/Functional_analysis]
+Hilbert spaces.
+Banach spaces.
+Compact spaces.
+Continuity.
+Smoothness.
+Differentiability.
+
+Reproducing kernel Hilbert space[fn::https://en.wikipedia.org/wiki/Reproducing_kernel_Hilbert_space]
+is an application of functional analysis to machine learning.[fn::https://www.quora.com/What-are-the-most-notable-applications-of-functional-analysis-to-computer-science]
+
+** Skimming list?
+- \cite{ApproxThePrac}
+- 2016 article "Deep vs. shallow networks: An approximation theory perspective" [[https://arxiv.org/abs/1608.03287][pdf available]]
+- 1998 book "A Short Course on Approximation Theory" by N. L. Carothers ([[http://fourier.math.uoc.gr/~mk/approx1011/carothers.pdf][pdf]])
+- 2017 lecture notes "Lectures on multivariate polynomial approximation" ([[http://www.math.unipd.it/~demarchi/MultInterp/LectureNotesMI.pdf][pdf]])
+- http://pages.cs.wisc.edu/~jerryzhu/cs731.html
+- Very likely
+  - 2015, slides, "Best polynomial approximation: multidimensional case", [[https://carma.newcastle.edu.au/meetings/spcom/talks/Sukhorukova-SPCOM_2015.pdf][pdf]]
+  - https://en.wikipedia.org/wiki/Bernstein_polynomial#Approximating_continuous_functions
+    - https://en.wikipedia.org/wiki/Pointwise_convergence
+    - https://en.wikipedia.org/wiki/Uniform_convergence
+  - https://en.wikipedia.org/wiki/Approximation
+    - https://en.wikipedia.org/wiki/Approximation_theory
+      - is a branch of https://en.wikipedia.org/wiki/Functional_analysis
+      - https://en.wikipedia.org/wiki/Approximation_theory#Chebyshev_approximation
+    - https://en.wikipedia.org/wiki/Approximate_computing
+      - example: https://en.wikipedia.org/wiki/Artificial_neural_network
+  - https://en.wikipedia.org/wiki/Telescoping_series
+  - 2018 book "Recent Advances in Constructive Approximation Theory" [[https://www.springer.com/us/book/9783319921648][paywall]]
+- Likely
+  - 2018, slides, "Deep Learning: Approximation of Functions by Composition", [[http://helper.ipam.ucla.edu/publications/dlt2018/dlt2018_14936.pdf][pdf]]
+    - classical approximation vs deep learning
+  - 2013, short survey article draft, "Multivariate approximation", [[http://num.math.uni-goettingen.de/schaback/research/papers/MultApp_01.pdf][pdf]]
+  - 1995, short introduction, "Multivariate Interpolation and Approximation by Translates of a Basis Function", [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.45.2194&rep=rep1&type=pdf][pdf]]
+  - 1989, article, "A Theory of Networks for Approximation and Learning", [[http://www.dtic.mil/docs/citations/ADA212359][pdf available]]
+    - What is the summary, especially about learning and approximation theory?
+** Determine whether we need to read these? Unlikely?
+- Survey-like
+  - 2006, chapter, "Topics in multivariate approximation theory", [[https://www.researchgate.net/publication/226303661_Topics_in_multivariate_approximation_theory][pdf available]]
+  - 1982, article, "Topics in multivariate approximation theory", [[http://www.dtic.mil/dtic/tr/fulltext/u2/a116248.pdf][pdf]]
+  - 1986, "Multivariate Approximation Theory: Selected Topics", [[https://epubs.siam.org/doi/book/10.1137/1.9781611970197][paywall]]
+- Theorem
+  - 2017, article, "Multivariate polynomial approximation in the hypercube", [[https://people.maths.ox.ac.uk/trefethen/hypercube_published.pdf][pdf]]
+- 2017, article, "Selected open problems in polynomial approximation and potential theory", [[http://drna.padovauniversitypress.it/system/files/papers/BaranCiezEgginkKowalskaNagyPierzcha%C5%82a_DRNA2017.pdf][pdf]]
+- 2017, article, "High order approximation theory for Banach space valued functions", [[https://ictp.acad.ro/jnaat/journal/article/view/1112][pdf available]]
+- Articles summarizing people's works
+  - 2017, article, "Michael J.D. Powell's work in approximation theory and optimisation", [[https://www.sciencedirect.com/science/article/abs/pii/S0021904517301053][paywall]]
+  - 2000, article, "Weierstrass and Approximation Theory", [[https://www.sciencedirect.com/science/article/pii/S0021904500935081][paywall]]
+- 2013, article, "[1312.5540] Emerging problems in approximation theory for the numerical solution of nonlinear PDEs of integrable type", [[https://arxiv.org/abs/1312.5540][pdf available]]
+- 1985, article, "Some problems in approximation theory and numerical analysis - IOPscience", [[http://iopscience.iop.org/article/10.1070/RM1985v040n01ABEH003526][pdf available]]
+- 2011, article, "Experiments on Probabilistic Approximations", [[https://people.eecs.ku.edu/~jerzygb/c154-clark.pdf][pdf]]
 * Using this document
 The target audience is ...?
 
@@ -16,9 +110,10 @@ Then ...?
 Finally we try to build the thing.
 
 The plan (I'm really clueless):
-1. Learn AI.
-2. ???
-3. PROFIT
+1. Understand what it takes to build an AI.
+2. Build the AI.
+3. ???
+4. PROFIT
 
 Notes to self:
 - Sections with superfluous question marks should be rewritten.
@@ -178,7 +273,6 @@ Similarities:
   Estimation has bias and uncertainty.
 - Both are instances of modeling (simplification).
 ** Philosophy, science, and engineering
-*** What people do
 - Philosophers *seek* the /truth/.
 - Scientists *find* the /truth/ about /reality/.
 - Engineers *change* /reality/.
@@ -193,12 +287,203 @@ This truth gives the philosophers clues about what questions to ask next.
 ** Interpretability?
 <2018-09-28>
 Book: "interpretable machine learning"[fn::https://christophm.github.io/interpretable-ml-book/]
+
+[[https://en.wikipedia.org/wiki/Explainable_Artificial_Intelligence][WP:Explainable Artificial Intelligence]]
+* Required mathematics
+Here I try to learn the minimal amount of functional analysis and approximation theory required for learning theory.
+** Assumed background knowledge
+I assume that the reader is a Bachelor of Computer Science who graduated in 2011.
+As of 2018, functional analysis does not seem to be in any computer science curriculum
+ [fn::https://functionalcs.github.io/curriculum/]
+ [fn::https://www.csd.cs.cmu.edu/academic/undergraduate/bachelors-curriculum-admitted-2017]
+ [fn::https://cs.stanford.edu/degrees/ug/Requirements.shtml].
+The closest things to functional analysis in such curriculum seems to be ordinary differential equations.
+** Notations
+\( [0,1] \) is the /unit interval/.
+It is the set of every real number between 0 and 1, including 0 and 1.
+Formally, \( [0,1] = \{ x ~|~ x \in \Real, 0 \le x \le 1 \} \).
+** TODO Name this space
+Find the name of the space of every function from unit hypercube to unit interval.
+Find the name of the space \( \{ f ~|~ f : [0,1]^n \to [0,1] \} \).
+I guess these keywords: embedding, projection.
+I guess these areas: functional analysis, approximation theory, topology.
+
+Cybenko 1989 \cite{cybenko1989approximation} uses the notation \(C(I_n)\) to mean the space of every continuous function from \([0,1]^n\) to .
+ [fn::https://math.stackexchange.com/questions/84238/is-there-a-shorthand-or-symbolic-notation-for-differentiable-or-continuous]
+He refers to \cite{rudin1973functional} for the notations.
+
+From \cite{cybenko1989approximation}:
+- "a fundamental result in digital signal processing is the fact that
+  digital filters made from unit delays and constant multipliers can approximate any continuous transfer function arbitrarily well."
+- "The main result of this paper is a demonstration of the fact that sums of the form (1) are dense
+  in the space of continuous functions on the unit cube if \(\sigma\) is any continuous sigmoidal function."
+- "In a well-known resolution of Hilbert's 13th problem, Kolmogorov showed" the Kolmogorov representation theorem
+  [fn::https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Arnold_representation_theorem].
+
+Best linear approximation\cite{khavinson1997best}?
+
+[[https://en.wikipedia.org/wiki/Universal_approximation_theorem][universal approximation theorem]]
+** What
+The phrase "x /approximates/ y" means "x is /close/ to y", which implies distance, which implies metric space.
+
+How close is the approximation?
+Suppose that the function $g$ approximates the function $f$ in interval $I$.
+Then:
+
+- The "approximation error at $x$" is $g(x) - f(x)$.
+- The "maximum absolute error" is $\max_{x \in I} \abs{g(x) - f(x)}$.
+
+How do we measure the distance between two $\Real \to \Real$ functions $f$ and $g$?
+There are several ways.
+Which should we use?
+
+- The maximum norm, in interval $I$ is $\max_{x \in I} \abs{f(x) - g(x)}$.
+  This norm is also called uniform norm, supremum norm, Chebyshev norm, infinity norm, norm-infinity, $L_\infty$-norm.
+  Why is it called "uniform"?
+  [[https://en.wikipedia.org/wiki/Uniform_norm][WP:Uniform norm]].
+- What is this norm called? $\int_{x \in I} [f(x)-g(x)]^2 ~ dx$.
+** Courses
+- 2017, [[https://www.nada.kth.se/~olofr/Approx/][Approximation Theory, 7.5 ECTS]]
+- 2012, syllabus, Drexel University, Math 680-002 (Approximation Theory), [[http://www.math.drexel.edu/~foucart/TeachingFiles/S12/Math680Syl.pdf][pdf]]
+- 2002, [[http://math.ucdenver.edu/~aknyazev/teaching/02/5667/][MATH 5667-001: Introduction to Approximation Theory, CU-Denver, Fall 02]].
+** Subfields of approximation theory
+- Classical approximation theory deals with univariate real functions $\Real \to \Real$.
+- Multivariate approximation theory deals with multivariate real functions $\Real^m \to \Real^n$.
+** Scenarios
+- Suppose we want to approximate the function $f$,
+  but we don't know the equation for $f$;
+  we only have a few input-output samples.
+  - Can we approximate $f$?
+  - How do approximation and curve-fitting relate?
+** Overview
+- What is a multivariate polynomial?
+- Commonly conflated concepts
+** What
+- The /uniform norm/ is ...
+- Best approximation is ...
+- Uniform approximation is best approximation in uniform norm.
+- https://en.wikipedia.org/wiki/Approximation_theory#Remez's_algorithm
+  - https://en.wikipedia.org/wiki/Remez_algorithm
+    - Inputs: a function, and an interval.
+    - Output: an optimal polynomial approximating the input function in the input interval.
+- What are Bernstein polynomials?
+  What question does the Weierstrass approximation theorem answer?
+  - http://www4.ncsu.edu/~mtchu/Teaching/Lectures/MA530/chapter7.pdf
+** Why are Chebyshev polynomials important?
+- [[https://en.wikipedia.org/wiki/Chebyshev_polynomials][WP:Chebyshev polynomials]]
+  - Why is it important?
+    How does it relate to best approximation?
+    - "Chebyshev polynomials are important in approximation theory because the roots of the Chebyshev polynomials of the first kind, which are also called Chebyshev nodes, are used as nodes in polynomial interpolation.
+      The resulting interpolation polynomial minimizes the problem of Runge's phenomenon and provides an approximation that is close to the polynomial of best approximation to a continuous function under the maximum norm."
+** Machine learning as relation approximation?
+  - Machine learning, statistical modelling, function approximation, and curve fitting are related.
+  - Generalize function approximation to relation approximation.
+  - A function can be stated as a relation.
+  - A relation can be stated as a function.
+** Least-square approximation of overdetermined system of linear equations?
+- Consider the least-square solution to an overdetermined system of linear equations.
+  Is such solution a kind of approximation?
+  - There is no exact solution to begin with?
+  - Why is it called "least-squares /approximation/"?
+  - How can we approximate something that does not exist?
+    - 1.2 approximates 1.23. Both 1.2 and 1.23 exist.
+    - Contrarily, there is no X such that AX = B.
+** Approximation schemes?
+- https://en.wikipedia.org/wiki/Polynomial-time_approximation_scheme
+** How do we approximate a function?
+Is it even possible to approximate arbitrary functions?
+- If the function is analytic, we can truncate its Taylor series.
+  - Commonly-used differentiable functions are analytic.
+- Chebyshev polynomials?
+- If we have an approximation scheme, we may be able to improve it.
+  - https://en.wikipedia.org/wiki/Series_acceleration
+    - https://en.wikipedia.org/wiki/Aitken%27s_delta-squared_process
+- google search: machine learning approximation theory
+  - [[https://math.stackexchange.com/questions/2680158/approximation-theory-for-deep-learning-models-where-to-start][Approximation Theory for Deep Learning Models: Where to Start? - Mathematics Stack Exchange]]
+  - http://www.vision.jhu.edu/tutorials/ICCV15-Tutorial-Math-Deep-Learning-Intro-Rene-Joan.pdf
+  - 2017, slides, "From approximation theory to machine learning: New perspectives in the theory of function spaces and their applications", [[http://npfsa2017.uni-jena.de/l_notes/vybiral.pdf][pdf]]
+  - 2018, article, "Approximation theory, Numerical Analysis and Deep Learning", [[http://at.yorku.ca/c/b/p/g/30.htm][abstract]]
+    - "the problem of numerically solving a large class of (high-dimensional) PDEs (such as linear Black-Scholes or diffusion equations) can be cast into a classical supervised learning problem which can then be solved by deep learning methods"
+** Why do we approximate?
+- Because it is practically inevitable.
+  - Fundamental reason: Because computers are finite.
+  - Practical reason: Trade-off between computation time and precision.
+    - The more error we can afford, the faster we can run.
+      - May be related: 2013 monograph "Faster Algorithms via Approximation Theory" [[http://theory.epfl.ch/vishnoi/Publications_files/approx-survey.pdf][pdf]]
+** Approximation by truncation
+We can approximate a series by /truncating/ it.
+
+Suppose that the series $y = x_0 + x_1 + \ldots$ converges.
+
+Suppose that the sequence $\langle x_0, x_1, \ldots \rangle$ converges to zero.
+
+Pick where to cut.
+Pick a natural number $n$.
+
+Then the series $x_0 + \ldots + x_n$ approximates the series $y$.
+We cut its tail.
+We take finitely many summands from the beginning.
+
+Here come examples: Truncate all the series!
+*** Power series truncation
+Below we truncate a power series.
+
+Decimal truncation: $1.2$ approximates $1.23$.
+Remember that a decimal number is a series.
+For example, the number $1.23$ is the power series
+$$ \ldots 01.230 \ldots = \ldots + 0 \cdot 10^1 + 1 \cdot 10^0 + 2 \cdot 10^{-1} + 3 \cdot 10^{-2} + 0 \cdot 10^{-3} + \ldots. $$
+
+Polynomial truncation: $1 + x$ approximates $1 + x + x^2$ for $x$ near zero.
+
+Taylor series truncation: $1 + x + \frac{x^2}{2}$ approximates $e^x$ for $x$ near zero.
+Remember the Taylor series expansion $e^x = \sum_{n \in \Nat} \frac{x^n}{n!}$.
+
+Below we truncate the ratio of two power series.
+
+Rational truncation: $12/23$ approximates $123/234$.
+
+[[https://en.wikipedia.org/wiki/Pad%C3%A9_approximant][WP:Padé approximation]] is a truncation of a ratio of series.
+
+Fourier series truncation: The [[https://en.wikipedia.org/wiki/Fourier_series#Example_1:_a_simple_Fourier_series][Wikipedia example]] animates how a Fourier series converges to the sawtooth function as more terms are added.
+
+Digression: Is a (complex) Fourier series a power series?
+Reminder: A Fourier series looks like $\sum_{k=0}^{\infty} c_k e^{ikt}$.
+
+[[https://en.wikipedia.org/wiki/Laurent_series][WP:Laurent series]] truncation?
+**** Digression: What is an analytic function?
+A function is /analytic/ iff it can be represented by power series.
+
+Formally, a function $f$ is /analytic/ iff for every $x \in \dom(f)$, we can write $f(x)$ as a power series.
+
+See also [[https://en.wikipedia.org/wiki/Power_series#Analytic_functions][WP:Definition of "analytic function"]].
+
+Taylor series expansion is illustrated in the 2015 slides "Taylor Series: Expansions, Approximations and Error" ([[https://relate.cs.illinois.edu/course/cs357-f15/file-version/2978ddd5db9824a374db221c47a33f437f2df1da/media/cs357-slides6.pdf][pdf]])
+**** Digression: What is the relationship between polynomial and power series?
+A polynomial is an algebraic expression. It is not a function.
+
+Power series is a kind of infinite polynomial.
+
+[[https://en.wikipedia.org/wiki/Formal_power_series][WP:Formal power series]]: "A formal power series is a generalization of a polynomial, where the number of terms is allowed to be infinite."
+*** Iteration truncation
+- [[https://en.wikipedia.org/wiki/Iterated_function][WP:Iterated function]]
+- [[https://en.wikipedia.org/wiki/Iterative_method][WP:Iterative method]]
+- [[http://mathworld.wolfram.com/NewtonsIteration.html][Newton's Iteration]]
+- [[https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Babylonian_method][WP:Methods of computing square roots, the Babylonian method]]
+- An iteration converges to an attractive fixed point.
+
+Example:
+Let $f(x) = x + \frac{1}{x}$.
+
+Continued fraction truncation:
+We know that $$ 1 + \frac{1}{1 + \frac{1}{1 + \ldots}} = \frac{1 + \sqrt{5}}{2} = \Phi. $$
+We can truncate that continued fraction to approximate $\Phi$.
+
+Seeing those examples makes me wonder whether all approximations are truncation.
 * Mathematics of intelligence activities
 What we are going to do here:
-We mathematically model learning, classification, prediction, approximation, and modeling.
-We do not care about implementation.
-
-Let \( R = [-1,1] \) or \( R = [0,1] \)?
+- We mathematically model learning, classification, prediction, approximation, and modeling.
+  We do not care about implementation.
+- We combine various areas of mathematics.
 
 Key ideas:
 - "Getting better" is modeled by monotonically increasing sequence.
@@ -208,6 +493,105 @@ Key ideas:
 Some people tried something similar
  [fn::https://stats.stackexchange.com/questions/214381/what-exactly-is-the-mathematical-definition-of-a-classifier-classification-alg]
  [fn::https://ndutoitblog.wordpress.com/2018/04/01/defining-machine-learning-with-maths/].
+** Classification of functions related to learning
+This table summarizes what we are going to discuss.
+Each row describes a function.
+
+| domain        | codomain      | jectivity | name           | theory      |
+|---------------+---------------+-----------+----------------+-------------|
+| \(\{0,1\}^*\) | \(\{0,1\}^*\) | bi        | compression    | computation |
+| \(\{0,1\}^*\) | \(\{0,1\}\)   |           | decider        | computation |
+| \([0,1]^n\)   | \([0,1]\)     |           | ???            | ???         |
+| a set         | a finite set  | sur       | classification | learning    |
+
+???
+neuron? projection from unit hyperspace to unit interval? embedding?
+analysis? geometry? topology?
+function space?
+Lebesgue space? Lp space? lp space?
+** Basic disparate definitions
+*** Classification is surjection
+Key ideas:
+- A classification is a surjective function.
+- A classifier is an approximation of a classification.
+
+Relationship between classification and prediction:
+A classifier tries to /predict/ the class of things in a domain.
+
+Let \(X\) be a set of things that we want to classify.
+
+Let \(N\) be the set of /class indexes/.
+We assume that \(N\) is a finite set of some first natural numbers.
+This set represents class "names".
+
+The /class index/ of \(x\) is \(c(x)\).
+
+A /classification/ is a surjective function \(c : X \to N\).
+"Surjective" means that there is no empty class (there is no unused class index).
+
+A /classifier/ is an /approximation/ of a classification.
+*** Compression is bijection
+A /[[https://en.wikipedia.org/wiki/Data_compression][compression]]/ is a bijection from strings to strings.
+Formally, a compression is a bijection \( c : B^* \to B^* \)
+where \( B = \{0,1\} \) is the alphabet and \(*\) is the [[https://en.wikipedia.org/wiki/Kleene_star][Kleene star]].
+
+A compression exploits input regularity to shorten likely strings and elongate unlikely strings.
+We assume that a compression's input strings are narrowly distributed.
+
+An example of compression is a natural language such as English.
+The word "eat" is shorter than the word "antidisestablishmentarianism" because we are more likely to use the former more than the latter.
+
+A "lossy compression" is called an /approximation/.
+For example, "JPEG compression" should be called "JPEG approximation".
+There is no need to invent the phrase "lossy compression".
+*** Prediction
+Consider the sequence \(x = x_1, \ldots, x_n\).
+What is the most likely continuation?
+Schmidhuber et al. (link?) shows us how to answer this with Solomonoff algorithmic probability\cite{solomonoff1996does}, which is unfortunately incomputable.
+
+Let $a$ be the input type, $b$ be the output type, and $g : a \to b$.
+A /predictor/ is a function.
+Iff $b$ is finite, then $f$ is a /classifier/.
+A /feature/ inhabits $a \to \Real$.
+A /data/ or an /example/ is a tuple $(x,y) : (a,b)$.
+
+A /linear predictor/ is the equation $y = w \cdot f(x)$ where $w$ is the
+/weight vector/, $f(x) = (f_1(x),\ldots,f_n(x))$ is the /feature vector/
+of $x$, $f_k(x)$ is the $k$th feature, $x$ is the input, and $y$ is the predicted output.
+The predictor is linear in $w$.
+** Relating areas of mathematics
+*** "Counterexamples in ..." books
+There is a series of books titled like "Counterexamples in <an area of mathematics>".
+From https://math.stackexchange.com/questions/740/useful-examples-of-pathological-functions
+*** Approximation theory
+A binary classifier is an approximation of a Hilbert space.
+
+Relationship with probability theory and statistics:
+- 2013 "On Learnability, Complexity and Stability" https://arxiv.org/abs/1303.5976
+
+Practically all machine learning cases deal with smooth functions.
+Every classification problem in the real world can be modeled by as a function $f : R^\infty \to R$.
+Consider the case where $R = [0,1]$.
+Continuous map from hyperplane $R^n$ to line $R$.
+*** Computation theory
+A discrete binary classifier is a /decider/.
+
+Conjectures:
+- Learnability is Kolmogorov complexity.
+  Descriptive complexity theory: Learnability is shortest formula length.
+- If a thing is not /computable/, then it is not /learnable/.
+- Learnability is the probability that a uniform-distributionedly-random interpretation satisfies a formula.
+- A hypothesis space in PAC learning theory is a language in automata theory / formal language theory.
+- https://en.wikipedia.org/wiki/Algorithmic_learning_theory
+
+Some concepts from [[https://en.wikipedia.org/wiki/Computational_geometry][computational geometry]] readily make classifiers:
+- Nearest-[[https://en.wikipedia.org/wiki/Convex_hull][convex-hull]] classification \cite{nalbantov2006nearest}
+- [[https://en.wikipedia.org/wiki/Voronoi_diagram][Voronoi-diagram]] classification
+- [[https://en.wikipedia.org/wiki/Sphere_packing][Sphere-packing]] classification
+- https://en.wikipedia.org/wiki/Point_location
+- https://en.wikipedia.org/wiki/Nearest_neighbour_search
+
+What is "learning in the limit"?
 ** Getting better at something
 "Better" implies an ordering of goodness.
 
@@ -229,42 +613,6 @@ How do we formalize "experience"?
 
 A test only measures how good the subject is at /doing that test/.
 What justifies our belief that a high test score implies the ability to do things /similar/ to the test?
-** Classification is surjection
-Key ideas:
-- A classification is a surjective function.
-- A classifier is an approximation of a classification.
-
-Relationship between classification and prediction:
-A classifier tries to /predict/ the class of things in a domain.
-
-Let \(X\) be a set of things that we want to classify.
-
-Let \(N\) be the set of /class indexes/.
-We assume that \(N\) is a finite set of some first natural numbers.
-This set represents class "names".
-
-The /class index/ of \(x\) is \(c(x)\).
-
-A /classification/ is a surjective function \(c : X \to N\).
-"Surjective" means that there is no empty class (there is no unused class index).
-
-A /classifier/ is an /approximation/ of a classification.
-** Prediction
-Consider the sequence \(x = x_1, \ldots, x_n\).
-What is the most likely continuation?
-Schmidhuber et al. (link?) shows us how to answer this with Solomonoff algorithmic probability\cite{solomonoff1996does}, which is unfortunately incomputable.
-
-Let $a$ be the input type, $b$ be the output type, and $g : a \to b$.
-A /predictor/ is a function.
-Iff $b$ is finite, then $f$ is a /classifier/.
-A /feature/ inhabits $a \to \Real$.
-A /data/ or an /example/ is a tuple $(x,y) : (a,b)$.
-
-A /linear predictor/ is the equation $y = w \cdot f(x)$ where $w$ is the
-/weight vector/, $f(x) = (f_1(x),\ldots,f_n(x))$ is the /feature vector/
-of $x$, $f_k(x)$ is the $k$th feature, $x$ is the input, and $y$ is the predicted output.
-The predictor is linear in $w$.
-** Compression??
 ** Convexity of sets and functions
 Convex is the shape of protruding fat belly.
 
@@ -332,12 +680,6 @@ The /logistic function/ is $f(x) = \frac{1}{1 + e^{-x}}$.
 
 Nearest neighbor with training data list $D$: $g(x') = y$ where
 $(x,y) \in D$ minimizing $\norm{f(x') - f(x)}^2$.
-** ML and Hilbert spaces?
-Practically all machine learning cases deal with functions
-that is continuous enough to form a Hilbert space.
-Every classification problem in the real world can be modeled by as a function $f : R^\infty \to R$.
-Consider the case where $R = [0,1]$.
-Continuous map from hyperplane $R^n$ to line $R$.
 ** Bibliography???
 \cite{DeepArch}
 
@@ -420,7 +762,7 @@ The stimulus level has to be increased to maintain the response level.
 Is learning = adapting?
 Is intelligence = adaptiveness?
 ** Trivia: Correspondence between surjection, partition, and equivalence
-(You can skip this.)
+(We can skip this.)
 
 To /partition/ a set is to split that set into disjoint non-empty subsets.[fn::https://en.wikipedia.org/wiki/Partition_of_a_set]
 Each subset is called a /partition/.
@@ -836,8 +1178,6 @@ proposed that we start out by defining intelligence as what intelligence tests m
 What is a neural network?
   - A /neuron/ is a function in $\Real^\infty \to \Real$.
   - A /neural network/ layer is a function in $\Real^\infty \to \Real^\infty$.
-  - Why do neural networks work?
-    - [[https://en.wikipedia.org/wiki/Universal_approximation_theorem][Wikipedia: Universal approximation theorem]]
 - What is statistical learning?
 - What is backpropagation, from functional analysis point of view?
 - Consider endofunctions of infinite-dimensional real tuple space.
@@ -1099,7 +1439,42 @@ That is an abridged version of the 2012 article "Creative blocks" in Aeon magazi
 
 Why has AI mastered chess, but not real life?
 Because chess search space is much smaller than real-life search space?
+** China's misunderstanding of Confucianism implies that China will use AI to oppress dissidents to maintain social order. Should we be concerned?
+By "China", I mean the Chinese government.
+
+We all, including China itself, misunderstand Confucius.[fn::https://www.theepochtimes.com/common-misconceptions-about-confucius_1955031.html]
+
+China has always prioritized communal harmony over individual liberty.
+This is because it misunderstands Confucianism[fn::https://en.wikipedia.org/wiki/Confucianism].
+China will do everything to maintain social order, even if it means mass-surveiling people
+ [fn::https://en.wikipedia.org/wiki/Mass_surveillance_in_China]
+ [fn::https://en.wikipedia.org/wiki/Social_Credit_System]
+and oppressing dissidents[fn::https://en.wikipedia.org/wiki/Human_rights_in_China].
+
+The liberal West sees all oppression as evil,
+but China sees some oppression as necessary for social order.
+Most international media subscribe to liberal Western ideology.
+We are observing the same reality from different ideological lenses.
+
+"Confucian values are regarded as incompatible with liberal democracy and are considered to impede democratization."
+ [fn::https://www.cambridge.org/core/journals/politics-and-religion/article/do-confucian-values-deter-chinese-citizens-support-for-democracy/A4492EE692013F82AB66FD9C90DAFAA9]
+
+Every state on Earth oppress some groups to some degrees for some reasons.
+Nazi Germany, the USSR, Russia, China, the USA, Australia, Denmark, Arabic countries, Islamic countries, you name it.
+All of them oppress some people.
+
+China is already using AI to oppress dissidents, no later than 2010.
+In 2018 it "is working to combine its 170+ million security cameras with artificial intelligence and facial recognition technology to create a vast surveillance state".
+ [fn::https://www.businessinsider.com/china-facial-recognition-limitations-2018-7/]
+It is only a matter of time before it perfected that.
+Should we be concerned?
+
+Is it impossible to maintain social order without government?
 * More math?
+** MathExchange vs MathOverflow
+[[https://math.stackexchange.com/][MathExchange]] is "almost everything goes".
+[[https://mathoverflow.net/][MathOverflow]] is for "research-level" questions only.
+ [fn::https://math.meta.stackexchange.com/questions/41/differences-between-mathoverflow-and-math-stackexchange]
 ** Automatic differentiation?
 Justin Le, [[https://blog.jle.im/entry/purely-functional-typed-models-1.html][A Purely Functional Typed Approach to Trainable Models]]
 ** Adversarial learning
@@ -1718,7 +2093,6 @@ Adaptive with respect to what?
 
 Chaotic system: Small change in input causes large change in output. See
 chaos theory.
-
 * AI research???
 ** Surveys, reviews, positions, and expositions?
 - Google query: most recent mathematical ai book
@@ -2475,8 +2849,6 @@ Inverse problem theory \cite{tarantola2005inverse}
 
 Wiener cybernetics book? \cite{WienerCyber}
 
-approximation theory? \cite{ApproxThePrac}
-
 Semi-supervised learning?
 
 What is rational?
@@ -2603,210 +2975,4 @@ Then what is the rest of AI that is not ML?
 - [[https://ai.stackexchange.com/questions/35/what-is-the-difference-between-artificial-intelligence-and-machine-learning][AI SE 35: What is the difference between artificial intelligence and machine learning?]]
 - What is intelligence without learning?
   Non-adaptive intelligence? Static intelligence?
-* (Appendices?)
-* Approximation theory?
-** Why
-We are interested in approximation theory because we want to justify how neural networks work.
-
-- 2016, article, "Deep vs. shallow networks: An approximation theory perspective", [[https://arxiv.org/abs/1608.03287][pdf available]]
-- [[https://en.wikipedia.org/wiki/Explainable_Artificial_Intelligence][WP:Explainable Artificial Intelligence]]
-
-We should begin by skimming the 1998 book "A Short Course on Approximation Theory" by N. L. Carothers ([[http://fourier.math.uoc.gr/~mk/approx1011/carothers.pdf][pdf]]).
-Then we should skim the 2017 lecture notes "Lectures on multivariate polynomial approximation" ([[http://www.math.unipd.it/~demarchi/MultInterp/LectureNotesMI.pdf][pdf]]).
-
-The phrase "x /approximates/ y" means "x is /close/ to y", which implies distance, which implies metric space.
-
-How close is the approximation?
-Suppose that the function $g$ approximates the function $f$ in interval $I$.
-Then:
-
-- The "approximation error at $x$" is $g(x) - f(x)$.
-- The "maximum absolute error" is $\max_{x \in I} \abs{g(x) - f(x)}$.
-
-How do we measure the distance between two $\Real \to \Real$ functions $f$ and $g$?
-There are several ways.
-Which should we use?
-
-- The maximum norm, in interval $I$ is $\max_{x \in I} \abs{f(x) - g(x)}$.
-  This norm is also called uniform norm, supremum norm, Chebyshev norm, infinity norm, norm-infinity, $L_\infty$-norm.
-  Why is it called "uniform"?
-  [[https://en.wikipedia.org/wiki/Uniform_norm][WP:Uniform norm]].
-- What is this norm called? $\int_{x \in I} [f(x)-g(x)]^2 ~ dx$.
-** Other
-- Courses
-  - 2017, [[https://www.nada.kth.se/~olofr/Approx/][Approximation Theory, 7.5 ECTS]]
-  - 2012, syllabus, Drexel University, Math 680-002 (Approximation Theory), [[http://www.math.drexel.edu/~foucart/TeachingFiles/S12/Math680Syl.pdf][pdf]]
-  - 2002, [[http://math.ucdenver.edu/~aknyazev/teaching/02/5667/][MATH 5667-001: Introduction to Approximation Theory, CU-Denver, Fall 02]].
-- Subfields of approximation theory
-  - Classical approximation theory deals with univariate real functions $\Real \to \Real$.
-  - Multivariate approximation theory deals with multivariate real functions $\Real^m \to \Real^n$.
-- Scenarios
-  - Suppose we want to approximate the function $f$,
-    but we don't know the equation for $f$;
-    we only have a few input-output samples.
-    - Can we approximate $f$?
-    - How do approximation and curve-fitting relate?
-- Overview
-  - What is a multivariate polynomial?
-  - Commonly conflated concepts
-- The /uniform norm/ is ...
-- Best approximation is ...
-- Uniform approximation is best approximation in uniform norm.
-- https://en.wikipedia.org/wiki/Approximation_theory#Remez's_algorithm
-  - https://en.wikipedia.org/wiki/Remez_algorithm
-    - Inputs: a function, and an interval.
-    - Output: an optimal polynomial approximating the input function in the input interval.
-- What are Bernstein polynomials?
-  What question does the Weierstrass approximation theorem answer?
-  - http://www4.ncsu.edu/~mtchu/Teaching/Lectures/MA530/chapter7.pdf
-- [[https://en.wikipedia.org/wiki/Chebyshev_polynomials][WP:Chebyshev polynomials]]
-  - Why is it important?
-    How does it relate to best approximation?
-    - "Chebyshev polynomials are important in approximation theory because the roots of the Chebyshev polynomials of the first kind, which are also called Chebyshev nodes, are used as nodes in polynomial interpolation.
-      The resulting interpolation polynomial minimizes the problem of Runge's phenomenon and provides an approximation that is close to the polynomial of best approximation to a continuous function under the maximum norm."
-- Machine learning as relation approximation
-  - Machine learning, statistical modelling, function approximation, and curve fitting are related.
-  - Generalize function approximation to relation approximation.
-  - A function can be stated as a relation.
-  - A relation can be stated as a function.
-- Consider the least-square solution to an overdetermined system of linear equations.
-  Is such solution a kind of approximation?
-  - There is no exact solution to begin with?
-  - Why is it called "least-squares /approximation/"?
-  - How can you approximate something that does not exist?
-    - 1.2 approximates 1.23. Both 1.2 and 1.23 exist.
-    - Contrarily, there is no X such that AX = B.
-- What are approximation schemes?
-  - https://en.wikipedia.org/wiki/Polynomial-time_approximation_scheme
-- How do we approximate a function?
-  Is it even possible to approximate arbitrary functions?
-  - If the function is analytic, we can truncate its Taylor series.
-    - Commonly-used differentiable functions are analytic.
-  - Chebyshev polynomials?
-  - If we have an approximation scheme, we may be able to improve it.
-    - https://en.wikipedia.org/wiki/Series_acceleration
-      - https://en.wikipedia.org/wiki/Aitken%27s_delta-squared_process
-  - google search: machine learning approximation theory
-    - [[https://math.stackexchange.com/questions/2680158/approximation-theory-for-deep-learning-models-where-to-start][Approximation Theory for Deep Learning Models: Where to Start? - Mathematics Stack Exchange]]
-    - http://www.vision.jhu.edu/tutorials/ICCV15-Tutorial-Math-Deep-Learning-Intro-Rene-Joan.pdf
-    - 2017, slides, "From approximation theory to machine learning: New perspectives in the theory of function spaces and their applications", [[http://npfsa2017.uni-jena.de/l_notes/vybiral.pdf][pdf]]
-    - 2018, article, "Approximation theory, Numerical Analysis and Deep Learning", [[http://at.yorku.ca/c/b/p/g/30.htm][abstract]]
-      - "the problem of numerically solving a large class of (high-dimensional) PDEs (such as linear Black-Scholes or diffusion equations) can be cast into a classical supervised learning problem which can then be solved by deep learning methods"
-- Determine whether we need to read these
-  - Very likely
-    - 2015, slides, "Best polynomial approximation: multidimensional case", [[https://carma.newcastle.edu.au/meetings/spcom/talks/Sukhorukova-SPCOM_2015.pdf][pdf]]
-    - https://en.wikipedia.org/wiki/Bernstein_polynomial#Approximating_continuous_functions
-      - https://en.wikipedia.org/wiki/Pointwise_convergence
-      - https://en.wikipedia.org/wiki/Uniform_convergence
-    - https://en.wikipedia.org/wiki/Approximation
-      - https://en.wikipedia.org/wiki/Approximation_theory
-        - is a branch of https://en.wikipedia.org/wiki/Functional_analysis
-        - https://en.wikipedia.org/wiki/Approximation_theory#Chebyshev_approximation
-      - https://en.wikipedia.org/wiki/Approximate_computing
-        - example: https://en.wikipedia.org/wiki/Artificial_neural_network
-    - https://en.wikipedia.org/wiki/Telescoping_series
-  - Likely
-    - 2018, slides, "Deep Learning: Approximation of Functions by Composition", [[http://helper.ipam.ucla.edu/publications/dlt2018/dlt2018_14936.pdf][pdf]]
-      - classical approximation vs deep learning
-    - 2013, short survey article draft, "Multivariate approximation", [[http://num.math.uni-goettingen.de/schaback/research/papers/MultApp_01.pdf][pdf]]
-    - 1995, short introduction, "Multivariate Interpolation and Approximation by Translates of a Basis Function", [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.45.2194&rep=rep1&type=pdf][pdf]]
-    - 1989, article, "A Theory of Networks for Approximation and Learning", [[http://www.dtic.mil/docs/citations/ADA212359][pdf available]]
-      - What is the summary, especially about learning and approximation theory?
-  - Unlikely
-    - Survey-like
-      - 2006, chapter, "Topics in multivariate approximation theory", [[https://www.researchgate.net/publication/226303661_Topics_in_multivariate_approximation_theory][pdf available]]
-      - 1982, article, "Topics in multivariate approximation theory", [[http://www.dtic.mil/dtic/tr/fulltext/u2/a116248.pdf][pdf]]
-      - 1986, "Multivariate Approximation Theory: Selected Topics", [[https://epubs.siam.org/doi/book/10.1137/1.9781611970197][paywall]]
-    - Theorem
-      - 2017, article, "Multivariate polynomial approximation in the hypercube", [[https://people.maths.ox.ac.uk/trefethen/hypercube_published.pdf][pdf]]
-    - 2017, article, "Selected open problems in polynomial approximation and potential theory", [[http://drna.padovauniversitypress.it/system/files/papers/BaranCiezEgginkKowalskaNagyPierzcha%C5%82a_DRNA2017.pdf][pdf]]
-    - 2017, article, "High order approximation theory for Banach space valued functions", [[https://ictp.acad.ro/jnaat/journal/article/view/1112][pdf available]]
-    - Articles summarizing people's works
-      - 2017, article, "Michael J.D. Powell's work in approximation theory and optimisation", [[https://www.sciencedirect.com/science/article/abs/pii/S0021904517301053][paywall]]
-      - 2000, article, "Weierstrass and Approximation Theory", [[https://www.sciencedirect.com/science/article/pii/S0021904500935081][paywall]]
-    - 2013, article, "[1312.5540] Emerging problems in approximation theory for the numerical solution of nonlinear PDEs of integrable type", [[https://arxiv.org/abs/1312.5540][pdf available]]
-    - 1985, article, "Some problems in approximation theory and numerical analysis - IOPscience", [[http://iopscience.iop.org/article/10.1070/RM1985v040n01ABEH003526][pdf available]]
-    - 2011, article, "Experiments on Probabilistic Approximations", [[https://people.eecs.ku.edu/~jerzygb/c154-clark.pdf][pdf]]
-- Less relevant overview
-  - Why do we approximate?
-    - Because it is practically inevitable.
-      - Fundamental reason: Because computers are finite.
-      - Practical reason: Trade-off between computation time and precision.
-        - The more error we can afford, the faster we can run.
-          - May be related: 2013 monograph "Faster Algorithms via Approximation Theory" [[http://theory.epfl.ch/vishnoi/Publications_files/approx-survey.pdf][pdf]]
-  - 2018 book "Recent Advances in Constructive Approximation Theory" [[https://www.springer.com/us/book/9783319921648][paywall]]
-** Approximation theory and machine learning
-Conference: "Approximation Theory and Machine Learning", at Purdue University, September 29 - 30, 2018
-- http://www.math.purdue.edu/calendar/conferences/machinelearning/
-- http://www.math.purdue.edu/calendar/conferences/machinelearning/abstracts.php
-** Approximation by truncation
-We can approximate a series by /truncating/ it.
-
-Suppose that the series $y = x_0 + x_1 + \ldots$ converges.
-
-Suppose that the sequence $\langle x_0, x_1, \ldots \rangle$ converges to zero.
-
-Pick where to cut.
-Pick a natural number $n$.
-
-Then the series $x_0 + \ldots + x_n$ approximates the series $y$.
-We cut its tail.
-We take finitely many summands from the beginning.
-
-Here come examples: Truncate all the series!
-*** Power series truncation
-Below we truncate a power series.
-
-Decimal truncation: $1.2$ approximates $1.23$.
-Remember that a decimal number is a series.
-For example, the number $1.23$ is the power series
-$$ \ldots 01.230 \ldots = \ldots + 0 \cdot 10^1 + 1 \cdot 10^0 + 2 \cdot 10^{-1} + 3 \cdot 10^{-2} + 0 \cdot 10^{-3} + \ldots. $$
-
-Polynomial truncation: $1 + x$ approximates $1 + x + x^2$ for $x$ near zero.
-
-Taylor series truncation: $1 + x + \frac{x^2}{2}$ approximates $e^x$ for $x$ near zero.
-Remember the Taylor series expansion $e^x = \sum_{n \in \Nat} \frac{x^n}{n!}$.
-
-Below we truncate the ratio of two power series.
-
-Rational truncation: $12/23$ approximates $123/234$.
-
-[[https://en.wikipedia.org/wiki/Pad%C3%A9_approximant][WP:Padé approximation]] is a truncation of a ratio of series.
-
-Fourier series truncation: The [[https://en.wikipedia.org/wiki/Fourier_series#Example_1:_a_simple_Fourier_series][Wikipedia example]] animates how a Fourier series converges to the sawtooth function as more terms are added.
-
-Digression: Is a (complex) Fourier series a power series?
-Reminder: A Fourier series looks like $\sum_{k=0}^{\infty} c_k e^{ikt}$.
-
-[[https://en.wikipedia.org/wiki/Laurent_series][WP:Laurent series]] truncation?
-**** Digression: What is an analytic function?
-A function is /analytic/ iff it can be represented by power series.
-
-Formally, a function $f$ is /analytic/ iff for every $x \in \dom(f)$, we can write $f(x)$ as a power series.
-
-See also [[https://en.wikipedia.org/wiki/Power_series#Analytic_functions][WP:Definition of "analytic function"]].
-
-Taylor series expansion is illustrated in the 2015 slides "Taylor Series: Expansions, Approximations and Error" ([[https://relate.cs.illinois.edu/course/cs357-f15/file-version/2978ddd5db9824a374db221c47a33f437f2df1da/media/cs357-slides6.pdf][pdf]])
-**** Digression: What is the relationship between polynomial and power series?
-A polynomial is an algebraic expression. It is not a function.
-
-Power series is a kind of infinite polynomial.
-
-[[https://en.wikipedia.org/wiki/Formal_power_series][WP:Formal power series]]: "A formal power series is a generalization of a polynomial, where the number of terms is allowed to be infinite."
-*** Iteration truncation
-- [[https://en.wikipedia.org/wiki/Iterated_function][WP:Iterated function]]
-- [[https://en.wikipedia.org/wiki/Iterative_method][WP:Iterative method]]
-- [[http://mathworld.wolfram.com/NewtonsIteration.html][Newton's Iteration]]
-- [[https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Babylonian_method][WP:Methods of computing square roots, the Babylonian method]]
-- An iteration converges to an attractive fixed point.
-
-Example:
-Let $f(x) = x + \frac{1}{x}$.
-
-Continued fraction truncation:
-We know that $$ 1 + \frac{1}{1 + \frac{1}{1 + \ldots}} = \frac{1 + \sqrt{5}}{2} = \Phi. $$
-We can truncate that continued fraction to approximate $\Phi$.
-
-Seeing those examples makes me wonder whether all approximations are truncation.
-
 * Bibliography
