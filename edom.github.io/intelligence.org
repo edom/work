@@ -8,18 +8,34 @@
 * Meta
 This is growing area.
 Mature contents move out.
-** Learning plan
-- Read the book \cite{cucker2007learning}.
-  It seems to be very relevant to what I'm trying to do.
-  See its table of contents[fn::http://assets.cambridge.org/97805218/65593/frontmatter/9780521865593_frontmatter.pdf].
-- Read the proceedings[fn::http://www.math.purdue.edu/calendar/conferences/machinelearning/abstracts.php]
-  of the conference "Approximation Theory and Machine Learning" (Purdue University; September 29 - 30, 2018).
-- Gather people with common interests.
-  The authors of \cite{cucker2007learning}.
-  The people attending the conference.
-** Learning path
-Teaching is mostly about sequencing lessons to maximize learning speed.
 
+The plan (I'm really clueless):
+1. Understand what it takes to build an AI.
+2. Build the AI.
+3. ???
+4. PROFIT
+
+Editing notes:
+- Sections with superfluous question marks should be rewritten.
+- We should not use footnotes for references?[fn::http://www.sussex.ac.uk/informatics/punctuation/essaysandletters/footnotes]
+- The writing must still be usable even if all footnotes are removed.
+** Learning plan?
+- Read Friston free-energy principle \cite{friston2006free,friston2010free} on Twitter[fn::https://twitter.com/search?q=karl%20friston]?
+- Watch John Cagnol's MOOC "an introduction to functional analysis"[fn::https://www.youtube.com/watch?v=reumVbH41Vc&list=PLSpInro6Ys2IHve6oN9h005zmwfLnOSp1&index=1]
+- Watch https://bloomberg.github.io/foml/#about
+** Gather people with common interests
+The authors of \cite{cucker2007learning}:
+Ding-Xuan ZHOU "research interests include learning theory, wavelet analysis and approximation theory".[fn::https://www6.cityu.edu.hk/ma/people/profile/zhoudx.htm]
+
+The authors of \cite{xu2009optimal}.
+Linli Xu[fn::http://staff.ustc.edu.cn/~linlixu/], Martha White[fn::http://webdocs.cs.ualberta.ca/~whitem/], Dale Schuurmans[fn::https://webdocs.cs.ualberta.ca/~dale/].
+
+The people attending the "Approximation Theory and Machine Learning" conference.
+
+Who else?
+** Functional analysis, currying, and partial evaluation
+Functional analysis should replace "indexed family" and "linear form" with "currying"?
+** Learning path
 Here are the easy things.
 We need to memorize these definitions.
 
@@ -57,9 +73,170 @@ Differentiability.
 
 Reproducing kernel Hilbert space[fn::https://en.wikipedia.org/wiki/Reproducing_kernel_Hilbert_space]
 is an application of functional analysis to machine learning.[fn::https://www.quora.com/What-are-the-most-notable-applications-of-functional-analysis-to-computer-science]
+* Introduction and summary
+** Usage notes and conventions
+The target audience is computer science undergraduates interested in building intelligent machines.
 
-** Skimming list?
-- \cite{ApproxThePrac}
+The goal is to do the last work that we will ever need to do.
+
+In this document, "thon" is the gender-neutral third-person pronoun.
+This brilliant idea was proposed by Charles Crozat Converse in 1858.[fn::https://en.wiktionary.org/wiki/thon#English]
+If you think this is arbitrary, /every word/ in English is arbitrary.
+Why should a word invented in 1858 be discriminated from a word invented in 1500 or 2000?
+Why do we readily accept "bromance" and "twerk" but not "thon"?
+English is messy living language. (What natural language isn't?)
+There is no particular reason why "eat" had to be "eat" and not "eet" or "nomm".
+The important thing is that we agree on the meanings of the symbols, not the shape of the symbols themselves.
+** Summary of this document
+This is the most important section of this document.
+This summarizes the ideas in the document.
+
+We begin with some analytic philosophy because we have to understand what words mean.
+
+AI stands for "artificial intelligence".
+"Artificial" simply means "made by humans".
+
+What is intelligence?
+As of 2018 there is still no agreement.[fn::https://en.wikipedia.org/wiki/Philosophy_of_artificial_intelligence]
+\cite{sep-artificial-intelligence}
+Intelligence is relative: it depends on the goal used to measure it.
+
+What is learning?
+"Learner /learns/ Thing" iff Learner /causes/ itself to /get better/ at Thing.
+A teacher may /contribute/ to the improvement, but the learner itself /causes/ that improvement.[fn::X /causes/ Y iff the absence of X causes the absence of Y.
+On the other hand, X /contributes/ to Y iff the existence of X changes the severity of Y.]
+Learning is self-improvement.[fn::"Learning is a an area of AI that focuses on processes of self-improvement." http://users.cs.cf.ac.uk/Dave.Marshall/AI2/node131.html#SECTION000151000000000000000]
+"To /learn/ Thing" is to /become more intelligent/ in Thing.
+"To be /intelligent/ in Thing" is to be proficient in Thing.
+
+What is learnable?
+How complex is something to learn?
+Every computable thing is learnable, in principle.
+Formal language with lower descriptive complexity is more learnable.
+Smoother functions are more learnable.
+This suggests that computation theory : computation-complexity theory = learning theory : learning-complexity theory.
+
+What is teaching?
+"Teacher /teaches/ Thing to Learner" iff Teacher /helps/ Learner learn Thing.
+Teaching is mostly about sequencing lessons to maximize learning speed.
+
+What is the relationship between teaching and learning?
+Teachers needs learners, because otherwise there is no one to teach.
+If learning is the shaping of belief, then teaching is the spreading of belief.
+Belief is software: belief can be duplicated but not be moved.
+Language enables some belief transfer and capture.
+If we know how to learn, then we know how to teach, and also the converse.
+"Learn" is a transitive verb that takes one object: one learns /something/.
+"Teach" is a transitive verb that takes /two/ objects: one teaches /something/ to /someone/, possibly to thonself in case of autodidactism.
+But "autodidactism" ("self-teaching") is somewhat nonsensical: you can't tell yourself something that you don't know.
+When you read a book, the book /teaches/ you, and you /learn/ from the book.
+But you may speed up your learning using some metalearning techniques.
+Thus, when we say "autodidactism", we actually mean "metalearning".
+Of human learning, the most important ideas seem to be
+goal-directed learning, the forgetting curve[fn::https://en.wikipedia.org/wiki/Forgetting_curve],
+and Bloom's taxonomy of learning[fn::https://en.wikipedia.org/wiki/Bloom%27s_taxonomy].
+
+ML stands for "machine learning".
+"Machine learning addresses the question of how to build computers that improve automatically through experience."\cite{jordan2015machine}
+However, we are not only interested in humans and machines, but in all intelligent beings.
+
+How should we model learning for ML purposes?
+There are so many ways to model learning that we may spend one chapter finding the right model.
+Approximation theory, optimization theory, and functional analysis see learning as an /approximation in Sobolev spaces/ in order to /minimize an error function/.
+Psychology sees learning as adaptation and habituation.
+Formal education sees learning as /getting high grades/ in exams.
+Epistemology sees learning as /acquisition of knowledge/.
+YouTube sees learning as /maximizing/ people's addiction to YouTube so that they linger on YouTube,
+with the hope that they click more ads.
+
+What is prediction?
+"To predict" is to foretell.[fn::https://www.etymonline.com/word/predict]
+"To predict something" is to say it before it happens.
+Prediction is a justified belief whose truth is unknown to the predictor.
+Thus prediction is /almost/ knowledge (justified true belief).
+Prediction is extrapolation.
+Prediction is uncertain.
+Prediction is probabilistic.
+Predicting the past is called "counterfactual reasoning".
+
+AI exploded after hardware grows strong enough to process the massive amount of data required to train big neural networks.
+Researchers shifted focus from "intelligence" to "learning".
+They shifted focus from making intelligent systems to making /narrowly/ intelligent systems.
+
+A brain is an organ for thinking.
+But a brain is also an organ for /learning/.
+
+There are too many ML algorithms.
+Has Pedro Domingos found the master algorithm yet?\cite{domingos2015master}
+
+Which ML algorithm should we use?
+"The key to not getting lost in this huge space is to realize that it consists
+of combinations of just three components."
+\cite{domingos2012few}
+It is an useful map for navigating the ML algorithm jungle.
+
+What is safe AI?
+What is friendly AI?
+
+What is seed AI?
+How do we, with minimum effort, bootstrap a machine that will free us forever from work?
+That is actually two questions in one: what is the hardware, and what is the software?
+
+How do we build the software?
+Are we stuck with uninterpretable deep neural networks?
+Will we be able to interpret neural networks?
+Will we find another architecture?
+
+How do we build the hardware?
+EcoBot is a robot that can feed itself[fn::https://en.wikipedia.org/wiki/EcoBot].
+Can evolutionary robotics[fn::https://en.wikipedia.org/wiki/Evolutionary_robotics] evolve robots in 50 years
+and not in billions of years it took the Universe to evolve humans?
+
+We are still stuck.
+As of 2018, machines have not replaced human secretaries and assistants.
+
+Learning theory combines many areas of mathematics:
+approximation theory, computation theory, functional analysis,
+information theory, probability theory and statistics, and others.
+** Where is the AI bottleneck?
+What is preventing us from creating the AI?
+Where is the bottleneck: philosophy, science, or engineering?
+Is our hardware not powerful enough?
+Is our software not efficient enough?
+Is our knowledge not enough?
+Are we clueless?
+Are we doing the wrong experiments?
+There are inconclusive discussions[fn::https://www.reddit.com/r/askscience/comments/3ib6hi/where_is_the_strong_ai_bottleneck/].
+
+Reading:
+2012, "Philosophy will be the key that unlocks artificial intelligence", David Deutsch, in The Guardian[fn::https://www.theguardian.com/science/2012/oct/03/philosophy-artificial-intelligence].
+That is an abridged version of the 2012 article "Creative blocks" in Aeon magazine[fn::https://aeon.co/essays/how-close-are-we-to-creating-artificial-intelligence].
+
+Why has AI mastered chess, but not real life?
+Because chess search space is much smaller than real-life search space?
+* Literature study
+** What publications may interest us?
+Recency is important.
+The study of AI moves quickly.
+
+The 2007 book \cite{cucker2007learning}[fn::Table of contents available at http://assets.cambridge.org/97805218/65593/frontmatter/9780521865593_frontmatter.pdf]
+justifies machine learning with approximation theory?
+It seems to be very relevant to what I'm trying to do?
+
+The 2015 book \cite{dietterich2015computational} does what?
+
+The 2016 book \cite{russell2016artificial} is the updated version of the classic undergraduate textbook.
+
+Heavy math?
+
+Approximation theory and practice\cite{ApproxThePrac}
+
+The 1997 monograph Best linear approximation\cite{khavinson1997best}
+
+The AlexNet paper[fn::https://adeshpande3.github.io/adeshpande3.github.io/The-9-Deep-Learning-Papers-You-Need-To-Know-About.html]
+
+Skimming list?
+Delete?
 - 2016 article "Deep vs. shallow networks: An approximation theory perspective" [[https://arxiv.org/abs/1608.03287][pdf available]]
 - 1998 book "A Short Course on Approximation Theory" by N. L. Carothers ([[http://fourier.math.uoc.gr/~mk/approx1011/carothers.pdf][pdf]])
 - 2017 lecture notes "Lectures on multivariate polynomial approximation" ([[http://www.math.unipd.it/~demarchi/MultInterp/LectureNotesMI.pdf][pdf]])
@@ -84,7 +261,18 @@ is an application of functional analysis to machine learning.[fn::https://www.qu
   - 1995, short introduction, "Multivariate Interpolation and Approximation by Translates of a Basis Function", [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.45.2194&rep=rep1&type=pdf][pdf]]
   - 1989, article, "A Theory of Networks for Approximation and Learning", [[http://www.dtic.mil/docs/citations/ADA212359][pdf available]]
     - What is the summary, especially about learning and approximation theory?
-** Determine whether we need to read these? Unlikely?
+** What conferences may interest us?
+"Approximation Theory and Machine Learning" (Purdue University; September 29 - 30, 2018).[fn::Proceedings at http://www.math.purdue.edu/calendar/conferences/machinelearning/abstracts.php]
+
+NIPS conference looks foundational from its proceedings[fn::https://papers.nips.cc/book/advances-in-neural-information-processing-systems-30-2017].
+
+** What datasets may interest us?
+ImageNet images of almost everything[fn::https://qz.com/1034972/the-data-that-changed-the-direction-of-ai-research-and-possibly-the-world/]
+
+MNIST handwriting
+
+There must already be a website that collects datasets.
+** Unlikely reading list? Delete?
 - Survey-like
   - 2006, chapter, "Topics in multivariate approximation theory", [[https://www.researchgate.net/publication/226303661_Topics_in_multivariate_approximation_theory][pdf available]]
   - 1982, article, "Topics in multivariate approximation theory", [[http://www.dtic.mil/dtic/tr/fulltext/u2/a116248.pdf][pdf]]
@@ -99,36 +287,7 @@ is an application of functional analysis to machine learning.[fn::https://www.qu
 - 2013, article, "[1312.5540] Emerging problems in approximation theory for the numerical solution of nonlinear PDEs of integrable type", [[https://arxiv.org/abs/1312.5540][pdf available]]
 - 1985, article, "Some problems in approximation theory and numerical analysis - IOPscience", [[http://iopscience.iop.org/article/10.1070/RM1985v040n01ABEH003526][pdf available]]
 - 2011, article, "Experiments on Probabilistic Approximations", [[https://people.eecs.ku.edu/~jerzygb/c154-clark.pdf][pdf]]
-* Using this document
-The target audience is ...?
-
-The goal is to do the last work that we will ever need to do.
-
-The structure of this document:
-We begin with analytic philosophy because we have to understand what words mean.
-Then ...?
-Finally we try to build the thing.
-
-The plan (I'm really clueless):
-1. Understand what it takes to build an AI.
-2. Build the AI.
-3. ???
-4. PROFIT
-
-Notes to self:
-- Sections with superfluous question marks should be rewritten.
-- We should not use footnotes for references?[fn::http://www.sussex.ac.uk/informatics/punctuation/essaysandletters/footnotes]
-- The writing must still be usable even if all footnotes are removed.
 * Some analytic philosophy
-Key ideas???
-- X /learns/ Y iff X /causes/ itself to /get better/ at Y.
-  (A teacher is a /contributing factor/, but the student itself is the /cause/.)
-- Learning is self-improvement.[fn::http://users.cs.cf.ac.uk/Dave.Marshall/AI2/node131.html#SECTION000151000000000000000]
-- To /learn/ X is to /become more intelligent/ in X?
-- To be /intelligent/ in X is to be proficient in X.
-  Intelligence is proficiency.
-- Intelligence depends on task/goal/measurement.
-  There is no such thing as general intelligence or absolute intelligence.
 ** Analytic philosophy is using words carefully
 By "analytic", we mean the following.
 First we find out the generally accepted meaning of a word.
@@ -143,9 +302,6 @@ experience?
 mistakes?
 memory?
 ** We don't know what intelligence is
-As of 2018 we still have not agreed on what intelligence is.[fn::https://en.wikipedia.org/wiki/Philosophy_of_artificial_intelligence]
-\cite{sep-artificial-intelligence}
-
 Intelligent means smart.
 
 In politics, intelligence is covert warfare, and is often contrasted against physical power.
@@ -176,19 +332,6 @@ Can we have one without the other?
 Yes.
 A system that stops learning after it obtains intelligence is still intelligent.
 A computer program with sufficiently many conditionals is intelligent, but it never learns.
-** Prediction
-To predict is to foretell.[fn::https://www.etymonline.com/word/predict]
-To predict something is to say it before it happens.
-
-Prediction is a justified belief whose truth is unknown to the predictor.
-Thus prediction is /almost/ knowledge (justified true belief).
-
-Prediction is extrapolation.
-
-Prediction is uncertain.
-Prediction is probabilistic.
-
-Predicting the past is called "counterfactual reasoning".
 ** Toward a unified theory of learning
 What is learning?
 
@@ -299,9 +442,17 @@ As of 2018, functional analysis does not seem to be in any computer science curr
  [fn::https://cs.stanford.edu/degrees/ug/Requirements.shtml].
 The closest things to functional analysis in such curriculum seems to be ordinary differential equations.
 ** Notations
+\( \Real \) is the set of all real numbers.
+If you are a finitist, just think of a set as a predicate:
+think of \(\Real\) as a predicate such that \( \Real(x) \) is true iff \(x\) is a real number,
+and then replace the formula \( x \in \Real \) with the formula \( \Real(x) \) in your mind.
+
 \( [0,1] \) is the /unit interval/.
 It is the set of every real number between 0 and 1, including 0 and 1.
 Formally, \( [0,1] = \{ x ~|~ x \in \Real, 0 \le x \le 1 \} \).
+
+\( C(A) \) is the space of every /continuous/ function whose domain is the set \(A\) and whose codomain is \(\Real\).
+Formally, \( C(A) = \{ f ~|~ f : A \to \Real \} \).
 ** TODO Name this space
 Find the name of the space of every function from unit hypercube to unit interval.
 Find the name of the space \( \{ f ~|~ f : [0,1]^n \to [0,1] \} \).
@@ -794,10 +945,6 @@ but the bottleneck incurs a great penalty.
 *** An array of FitzHugh-Nagumo cells?
 A FitzHugh-Nagumo cell is an electrical circuit implementing the FitzHugh-Nagumo model.
 FHN cells can be implemented in Field-programmable Analog Array (FPAA) \cite{CircuitFitzHughNagumo}.
-*** EcoBot is a robot that can feed itself
-[[https://en.wikipedia.org/wiki/EcoBot][Wikipedia: EcoBot]]:
-"a class of energetically autonomous robots that can remain self-sustainable
-by collecting their energy from material, mostly waste matter, in the environment"
 ** Building classifiers?
 *** Classifiers?
 We assume that the classes are known.
@@ -1244,7 +1391,56 @@ Then Modify(X,Red) - Modify(Y,Red) = X - Y.
 Modify(X,M) - Modify(Y,M) = X - Y.
 
 Literature?
-* Philosophical dead-ends?
+* Are we squinting too hard?
+This is speculative.
+Some topics may be philosophical dead-ends.
+** Approximation theory, software engineering, and almost-correct programs
+An incorrect program (a "buggy" program) is an /approximation/ of the intended correct program.
+The approximation error is the minimum change required to correct the program.
+
+Sometimes regular expression approximates context-free grammar.
+Example: Checking email address with regex.
+Example: Emacs eval-defun.[fn::http://ergoemacs.org/emacs/emacs_narrow-to-defun_eval-defun_bug.html]
+Example: Computing line height by returning constant 12[fn::https://www.joelonsoftware.com/2000/08/09/the-joel-test-12-steps-to-better-code/] is zeroth-order approximation.
+** Every person on Earth is a Prolog knowledge base.
+A good conversation is only a matter of crafting the right query to obtain the gem of knowledge from each person.
+** Idea for writing an academic book
+- Find 100 related research papers, some by citation search.
+- Find an interesting sentence from each paper.
+- Group those 100 sentences into questions that are answered by those sentences.
+** Mind upload, and knowing without learning
+Mind uploading enables us to transfer belief without requiring the recipient to learn.
+** China's misunderstanding of Confucianism implies that China will use AI to oppress dissidents to maintain social order. Should we be concerned?
+By "China", I mean the Chinese government.
+
+We all, including China itself, misunderstand Confucius.[fn::https://www.theepochtimes.com/common-misconceptions-about-confucius_1955031.html]
+
+China has always prioritized communal harmony over individual liberty.
+This is because it misunderstands Confucianism[fn::https://en.wikipedia.org/wiki/Confucianism].
+China will do everything to maintain social order, even if it means mass-surveiling people
+ [fn::https://en.wikipedia.org/wiki/Mass_surveillance_in_China]
+ [fn::https://en.wikipedia.org/wiki/Social_Credit_System]
+and oppressing dissidents[fn::https://en.wikipedia.org/wiki/Human_rights_in_China].
+
+The liberal West sees all oppression as evil,
+but China sees some oppression as necessary for social order.
+Most international media subscribe to liberal Western ideology.
+We are observing the same reality from different ideological lenses.
+
+"Confucian values are regarded as incompatible with liberal democracy and are considered to impede democratization."
+ [fn::https://www.cambridge.org/core/journals/politics-and-religion/article/do-confucian-values-deter-chinese-citizens-support-for-democracy/A4492EE692013F82AB66FD9C90DAFAA9]
+
+Every state on Earth oppress some groups to some degrees for some reasons.
+Nazi Germany, the USSR, Russia, China, the USA, Australia, Denmark, Arabic countries, Islamic countries, you name it.
+All of them oppress some people.
+
+China is already using AI to oppress dissidents, no later than 2010.
+In 2018 it "is working to combine its 170+ million security cameras with artificial intelligence and facial recognition technology to create a vast surveillance state".
+ [fn::https://www.businessinsider.com/china-facial-recognition-limitations-2018-7/]
+It is only a matter of time before it perfected that.
+Should we be concerned?
+
+Is it impossible to maintain social order without government?
 ** Post-AI ethical concerns
 *** Some AI ethics questions
 - What is the problem with Asimov's three laws of robotics?
@@ -1414,62 +1610,47 @@ It is immoral to force a sentient being to exist.
 
 Humans are smart enough to arrive at antinatalism, but they still fuck and have babies.
 Nobody seems to give a fuck.
-** How do we know that a system has learned something?
+** ML epistemology: How do we know that a system has learned something?
 The only way to know whether the system has learning something
 is by testing it with samples the system has never seen?
-** Where is the AI bottleneck?
-What is preventing us from creating the AI?
+** <2018-12-28> Idea: determining the number of parameters in line fitting, by measuring "effective dimension" of a set of points
+The motivation:
+The effective dimension of a square should be 2.
+The effective dimension of a line should be 1.
+The effective dimension of a rectangle should be between 1 and 2.
 
-There are inconclusive discussions[fn::https://www.reddit.com/r/askscience/comments/3ib6hi/where_is_the_strong_ai_bottleneck/].
+Let \(P\) be a set of points in \(n\)-dimensional Euclidean space.
 
-Where is the bottleneck: philosophy, science, or engineering?
+Fit the smallest hypercube that contains all that points.
 
-Is our hardware not powerful enough?
+Let \(x_1, \ldots, x_n\) be the length of the sides of that hypercube.
 
-Is our software not efficient enough?
+Let \(M\) be the length of the longest side of that hypercube.
+That is \(M = \max_i x_i\).
 
-Is our knowledge not enough?
-Are we clueless?
+Then the effective dimension of the set \(P\) is:
+\[
+dim(P)
+= \frac{\sum_i x_i}{\max_i x_i}
+= \frac{\text{the sum of all sides}}{\text{the longest side}}
+\]
 
-Are we doing the wrong experiments?
+Example:
+A line in three-dimensional Euclidean space will have an effective dimension near 1.
 
-Reading:
-2012, "Philosophy will be the key that unlocks artificial intelligence", David Deutsch, in The Guardian[fn::https://www.theguardian.com/science/2012/oct/03/philosophy-artificial-intelligence].
-That is an abridged version of the 2012 article "Creative blocks" in Aeon magazine[fn::https://aeon.co/essays/how-close-are-we-to-creating-artificial-intelligence].
+We can use this to determine the number of parameters in line fitting (linear regression).
 
-Why has AI mastered chess, but not real life?
-Because chess search space is much smaller than real-life search space?
-** China's misunderstanding of Confucianism implies that China will use AI to oppress dissidents to maintain social order. Should we be concerned?
-By "China", I mean the Chinese government.
+Unfortunately we don't know how to compute the minimum bounding hypercube quickly.[fn::https://en.wikipedia.org/wiki/Minimum_bounding_box]
 
-We all, including China itself, misunderstand Confucius.[fn::https://www.theepochtimes.com/common-misconceptions-about-confucius_1955031.html]
+Is this related to principal component analysis?
 
-China has always prioritized communal harmony over individual liberty.
-This is because it misunderstands Confucianism[fn::https://en.wikipedia.org/wiki/Confucianism].
-China will do everything to maintain social order, even if it means mass-surveiling people
- [fn::https://en.wikipedia.org/wiki/Mass_surveillance_in_China]
- [fn::https://en.wikipedia.org/wiki/Social_Credit_System]
-and oppressing dissidents[fn::https://en.wikipedia.org/wiki/Human_rights_in_China].
-
-The liberal West sees all oppression as evil,
-but China sees some oppression as necessary for social order.
-Most international media subscribe to liberal Western ideology.
-We are observing the same reality from different ideological lenses.
-
-"Confucian values are regarded as incompatible with liberal democracy and are considered to impede democratization."
- [fn::https://www.cambridge.org/core/journals/politics-and-religion/article/do-confucian-values-deter-chinese-citizens-support-for-democracy/A4492EE692013F82AB66FD9C90DAFAA9]
-
-Every state on Earth oppress some groups to some degrees for some reasons.
-Nazi Germany, the USSR, Russia, China, the USA, Australia, Denmark, Arabic countries, Islamic countries, you name it.
-All of them oppress some people.
-
-China is already using AI to oppress dissidents, no later than 2010.
-In 2018 it "is working to combine its 170+ million security cameras with artificial intelligence and facial recognition technology to create a vast surveillance state".
- [fn::https://www.businessinsider.com/china-facial-recognition-limitations-2018-7/]
-It is only a matter of time before it perfected that.
-Should we be concerned?
-
-Is it impossible to maintain social order without government?
+Pick n arbitrary orthogonal axes.
+Pick any point in P as origin.
+Find n-1 axial rotations that minimize the n-volume of the axis-aligned n-cube.
+Find the n rotation angles that minimize the n-volume of the n-cube.
+This is a convex optimization problem?
+This can be thought as a sequence of n optimization problems.
+Every angle is in [0,pi/2).
 * More math?
 ** MathExchange vs MathOverflow
 [[https://math.stackexchange.com/][MathExchange]] is "almost everything goes".
@@ -1730,7 +1911,6 @@ The agent wants to maximize $\sum_{t=0}^\infty g_t$.
 What should the categories be?
 
 Artificial intelligence is constrained optimization.
-Brain minimizes free energy \cite{friston2006free,friston2010free}.
 
 Generate vs discriminative.
 
