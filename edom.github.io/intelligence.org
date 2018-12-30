@@ -49,95 +49,12 @@ By "analysis", we mean the following.
 First we find what a word means, using an etymology dictionary.
 Then we infer what that meaning implies, using only logic and language.
 An example of analysis is inferring that "bachelor" implies "unmarried" and "wifeless".
-* The endofunction model of worlds and agents
-** Philosophical implications
-Here we model worlds and agents with endofunctions.
-An /endofunction/[fn::https://en.wikipedia.org/wiki/Endomorphism#Endofunctions] is a function whose domain and codomain are equal.
-The model we are going to make seems to be a very narrow case of dynamical systems[fn::https://en.wikipedia.org/wiki/Dynamical_system_(definition)].
-
-Aren't what we proposing here basically pancomputationalism[fn::https://en.wikipedia.org/wiki/Digital_physics]?
-
-The following statements are merely implications of the model, and should not be taken as actually describing reality.
-
-Only the present exists, and the past and the future do not exist.
-More precisely: only the current state ("snapshot") of the world exists.
-
-
-This model suggests: we cannot know objective reality,
-but our subjective experience /represents/ objective reality.
-** World--agent interaction model
-Here we are going to model an agent in a world.
-
-The /world/ is modeled by a /law/ \(W : S \to S\).
-A law is just another name for an endofunction.
-The domain is the world's state type.
-
-
-BEGIN MESS
-We are going to show the consequences of assuming that the universe is computable and assuming that space-time is continuous.
-
-If a world state (an element of \(S\)) is a matrix (an array of real numbers), then we should feel time as discrete.
-If we don't feel time as discrete, then each element of \(S\) has to be a continuous function and not a matrix.
-
-If a world state (an element of \(S\)) is a matrix (an array of real numbers), then we should feel space as quantized/digitized/pixelated.
-If we don't have pixelated space, then each element of \(S\) has to be a physical field.
-
-So far space-time seems to be continuous[fn::https://en.wikipedia.org/wiki/Holometer].
-
-If the universe is computable and space-time feels continuous, then each element of \(S\) must be a finite /description/ instead of an infinite matrix of numbers.
-That is, the current state of the universe is a finite program that describes what we think is the objective reality.
-Thus /the universe is a computer running a self-modifying code./
-That is, the universe does not represent a particle in the way we write a physics game (by a position vector, a velocity vector, and a loop that updates the position vector using numerical integration).
-If we went "the universe way", we would represent that particle as a /program/ (a string in a formal language) that /describes/ the motion of that particle.
-An example program is \(x(t) = v \cdot t\).
-Thus, what is real is not the moving particle that we see, but what is real is the /equation/ that governs that particle's motion.
-That is, we thought that math were unreal (existing only in idea-space) and what we can touch was real (existing in meat-space).
-But the reality is that it is the math that is real and what we can touch is unreal.
-Our reality is a "side-effect" of the universe's executing its current state (which is a self-modifying program)?
-The universe is a machine that is able to solve the \(n\)-body problem.
-But isn't this extreme pancomputationalistic idealism?
-
-How do we model self-modifying code in lambda calculus?[fn::Purely-Functional Self-Modifying Code http://chriswarbo.net/unfinished/encoding.html]
-
-The universe is deterministic and random.
-The current state is a finite description of randomness, but that description evolves deterministically.
-It is possible to deterministically describe nondeterminism.
-Example: \(\frac{1}{2}H + \frac{1}{2}T\) is a finite deterministic description of nondeterminism.
-It is the description that is deterministic, not our perception of reality that is deterministic.
-
-An "infinite" thing may have a finite description.
-For example, the sequence \(0,1,2,3,\ldots\) is "infinite", but it has the finite description \(x_k = k\).
-
-END MESS
-
-The agent's law is \(A : S' \to S'\) with various constraints we describe here.
-The agent state type \(S'\) must be a subset of \(S\), that is \(S' \subset S\).
-The /agent/ is modeled by a law /embedded/[fn::https://en.wikipedia.org/wiki/Embedding] in the world's law:
-The function $sense : S \to S'$ is the embedding that defines how the agent senses the world.
-This constraint must be satisfied:
-\[
-sense\circ W = A \circ sense.
-\]
-That constraint relates the actual world state change and what the change looks like from the agent's point of view.
-The agent can never know the world state:
-it can only sense something homomorphic to that state.
-
-That equation has two epistemological implications.
-The first is the bad news that /we cannot know objective reality/:
-we can only know our subjective experience of the part of objective reality that the laws of nature allow us to sense through our senses.
-The second is the good news that our subjective experience /represents/ objective reality (is consistent with objective reality).
-
-The \(sense\) function is not invertible because $S' \subset S$.
-This non-invertibility means that /there exists part of the world that the agent cannot sense/:
-the agent is not omniscient:
-it can only perceive a small part of the world:
-it cannot know the whole world.
-
-The /environment/ is the world minus the agent.
-Something is a part of the agent if and only if
-the agent can directly control that part.
-Otherwise it is a part of the environment.
+* World--agent models
+** The endofunction world--agent model
+See [[file:endo.html]].
 ** Agent intelligence model
+We assume that you have read [[file:endo.html]].
+
 Now we define intelligence, but we have to define the required things first.
 
 We define the /orbit/[fn::"Orbit" is a standard mono-unary algebra terminology.] of \(A\) at \(x\) as the sequence
@@ -165,8 +82,9 @@ in the long term for as many $x$ as possible.
 The agent displays an intelligent behavior
 if it can minimize the long-term penalty from lots of starting states.
 The most intelligent agent is the one that minimizes its lifelong sum of penalty?
-* Other world-agent models?
-** Input-output model?
+
+** Other world-agent models?
+*** Input-output model?
 An agent has input and output.
 
 An /agent logic/ is a function $A : M \times I \to M \times O$
@@ -175,7 +93,7 @@ $I$ is the input type,
 and $O$ is the output type.
 
 We assume that the world remembers the agent memory.
-** Discrete dynamical system model?
+*** Discrete dynamical system model?
 Let $w$ be a world.
 Let $a$ be an agent in world $w$.
 Let $x~t$ be the input of the agent at time $t$.
@@ -192,7 +110,7 @@ We assume that the agent needs one time step to compute the output.
     x~(t+1) &= X~(x~t)~(y~t)~t
 \end{aligned}
 \]
-** Measuring the intelligence of a phase space trajectory?
+*** Measuring the intelligence of a phase space trajectory?
 We can think of a human as a dynamical system.
 Given two phase space trajectories,
 the most intelligent is the most homeostatic, the most stabilizing, the most controlling.
@@ -975,6 +893,17 @@ What?
 - Watch John Cagnol's MOOC "an introduction to functional analysis"[fn::https://www.youtube.com/watch?v=reumVbH41Vc&list=PLSpInro6Ys2IHve6oN9h005zmwfLnOSp1&index=1]
 - Watch https://bloomberg.github.io/foml/#about
 * Belief, language, thought, logic
+Prolog seems suitable for parsing and compiling.\cite{cohen1987parsing}\cite{vittek1996compiler}
+
+It is possible to parse limited English in Prolog.[fn::https://github.com/cbaziotis/prolog-cfg-parser]
+
+<2018-12-30>
+Idea:
+"Intelligence" is a set of meta-logic rules for updating the knowledge base (internal beliefs) with respect to observations.
+An agent's total belief is a logic formula in conjunctive-normal form.
+
+Relating symbolism and connectionism:
+How does our internal representation of logic and language arise from neural networks?
 ** Explaining, reasoning, justifying
 Given a finite prefix of a sequence, find the most likely program that generates the sequence with that prefix.
 

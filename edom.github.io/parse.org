@@ -1,0 +1,349 @@
+#+TITLE: Parsing
+#+DATE: 2018-04-11 00:00 +0700
+#+OPTIONS: ^:nil toc:nil
+#+PERMALINK: /parse.html
+* What is parsing?
+Parsing is relating strings and trees.
+
+A /parser/ is a relation \(P \subseteq C^* \times T\).
+The set \(C\) is the /alphabet/: it may be the set of Unicode character code points, or it may be the set of the tokens that a /lexical analyzer/ may produce.
+The set \(C^*\) is the Kleene closure of \(C\).
+The set \(T\) is the set of /syntax trees/.
+
+If the parser is a function \(P : C^* \to T\), then the grammar is /unambiguous/.
+
+A /lexer/ is a degenerate[fn::https://en.wikipedia.org/wiki/Degeneracy_(mathematics)] parser: it is a parser whose codomain is a list (which is a degenerate tree).
+
+Parsing is the inverse of /tree linearization/.
+
+The parser is /parallelizable/ if there exists a relatively fast function \(combine\) such that for all \(x,y \in C^*\):
+\[
+P(xy) = combine(P(x), P(y))
+\]
+
+http://matt.might.net/articles/parsing-with-derivatives/
+
+https://github.com/webyrd/relational-parsing-with-derivatives/blob/master/README.md
+
+An /incremental/ parser is a relation \(step \subseteq C \times T \times T\).
+
+How do IDEs not have to reparse the entire document when the user presses one keystroke?
+
+https://blog.github.com/2018-10-31-atoms-new-parsing-system/
+
+Differentiating Parsers
+http://lambda-the-ultimate.org/node/3704
+
+The idea is to output to all possible continuations?
+\(incrementalize : (C^* \to T) \to (C^* \to T^*)\)?
+* <2018-11-02> Direct left-recursive parsers in Prolog
+The key: unify terminals before recursing into nonterminals.
+#+BEGIN_EXAMPLE
+% S is a list of character codes.
+binary_operator([0'+]).
+binary_operator([0'*]).
+
+digit(C) :- code_type(C, digit).
+
+number(S) :-
+    digit([S])
+;   append([[A], B], S), digit(A), number(B);
+
+expression(S) :-
+    number(S)
+;   binary_operator(B), append([A, B, C], S), expression(A), expression(C).
+#+END_EXAMPLE
+
+* Relational parsing; parsing with Prolog; my train of thought
+Parsing is turning a list into a tree.
+** Approaches
+- 2002 course notes http://www.cs.sfu.ca/~cameron/Teaching/383/DCG.html
+- 1987 article "Parsing and compiling using Prolog" http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.101.9739&rep=rep1&type=pdf
+- relational approach
+  - recognizer: =digit(Input)=
+    - recognizer with explicit search strategy
+  - prefix remover: =digit(Input, Unparsed_suffix)=
+    - This is the approach used by Prolog DCG (definite clause grammar).
+  - prefix extractor: =digit(Input, Parsed_prefix, Unparsed_suffix)=
+    - This enables us to get the parsed input without =append/3=.
+  - concrete syntax tree parser: =digit(Input, Parsed, Unparsed)= where =Parsed = number(Children)=.
+    - An example of =Parsed= is =number(digit(1), number(digit(2)))=.
+  - interpreter
+- functional approach
+  - parser combinator
+- generator approach
+  - parser generator
+  - parsing expression grammar
+- procedural approach
+  - recursive-descent
+- https://en.wikipedia.org/wiki/Garden-path_sentence
+** Determining the groundness of the length of the lists involved in append/3 and append/2
+*** Why do we care?
+Because we want to write naive parsers that terminate.
+*** What?
+From the source code of SWI-Prolog, with some modifications:
+- http://www.swi-prolog.org/pldoc/doc/_SWI_/library/lists.pl?show=src#append/3
+
+"Ground" here is an adjective, not a noun.
+A term is /ground/ iff it has no variables.
+A term is non-ground otherwise.
+
+#+BEGIN_SRC prolog
+append([], L, L).
+append([H|T], L, [H|R]) :-
+    append(T, L, R).
+
+append([], []).
+append([L|Ls], As) :-
+    append(L, Ws, As),
+    append(Ls, Ws).
+#+END_SRC
+
+We say that a list is /length-ground/ iff its length is ground, and /length-unground/ otherwise.
+The elements don't have to be ground.
+- The empty list is length-ground.
+- A list [_|T] is length-ground iff T is length-ground.
+- If a variable gets unified with a length-ground list, then the variable is length-ground.
+
+To analyze length-groundedness, we "reverse" the program.
+
+#+BEGIN_EXAMPLE
+% append(T, L, R)
+append([], L, L).
+append(T, L, R) => append([H|T], L, [H|R]).
+#+END_EXAMPLE
+
+(Length-ground = proper list?)
+
+Now we can infer these about append(T, L, R):
+- If T = [], then L and R have the same length-groundness.
+- The recursive case:
+  - Iff T is length-ground, then [H|T] is length-ground.
+  - Iff R is length-ground, then [H|R] is length-ground.
+- If we want L to be length-ground, then R has to be length-ground.
+- Thus we can infer that L and R have the same length-groundness regardless of the length-groundness of T.
+
+If append(A, B, C) succeeds, then:
+- If A = [], then B and C have the same length-groundness.
+- If two of A, B, C are length-ground, then the other one is length-ground?
+- If two of A, B, C are length-unground, then the other one is length-unground?
+
+What?
+- 2002 article "Efficient Groundness Analysis in Prolog" https://arxiv.org/abs/cs/0201012
+  - https://github.com/pschachte/groundness
+*** How do we generate a long list in Prolog, for testing?
+**** How do we say "A is a list of 100 equal elements" in Prolog?
+** Naive approach with recognizer / membership predicate
+A /recognizer/ is a unary predicate that takes a list of character codes.
+
+Another possible names for recognizer are /acceptor/, /determiner/, /decider/, /membership predicate/.
+
+Example: The following =digit= predicate recognizes ASCII decimal digits.
+#+BEGIN_SRC prolog
+digit([D]) :- code_type(D, digit).
+#+END_SRC
+
+We can build recognizers on other recognizers.
+For example, here we use =digit= to define =number_=:
+#+BEGIN_SRC prolog
+% We append underscore because =number= is a reserved Prolog predicate.
+number_([H]) :- digit([H]).
+number_([H|T]) :- digit([H]), number_(T).
+#+END_SRC
+
+That Prolog knowledge base corresponds to this context-free grammar:
+#+BEGIN_SRC
+digit ::= <a digit character as defined by Unicode>
+number ::= digit | digit number
+#+END_SRC
+
+Exercise:
+- Here you will compare depth-first search and iterative deepening search, and understand search completeness.
+- Try the query =number_(S)=.
+- Try the query =length(S,_), number_(S)=.
+- If you keep pressing semicolon in the first query, will you ever encounter =S = [48,49]=?
+*** A cool thing: recognizers are generators.
+The predicate =number_= can be used not only to recognize strings, but also to /generate/ all such strings.
+#+BEGIN_SRC prolog
+% Press ; to generate the next possibility.
+% Press . to stop.
+?- length(S,_), number_(S).
+#+END_SRC
+
+To understand how that works, we have to understand Prolog backtracking.
+*** Left recursion thwarts the naive approach.
+Problem:
+The following =expression= doesn't terminate.
+#+BEGIN_SRC prolog
+operator([A]) :- string_codes("+", Ops), member(A, Ops).
+
+expression(E) :- number_(E).
+expression(E) :- true
+    , append([A, B, C], E)
+    , expression(A)
+    , operator(B)
+    , expression(C)
+    .
+#+END_SRC
+
+The corresponding context-free grammar is left-recursive:
+#+BEGIN_SRC
+expression ::= number | expression operator expression
+#+END_SRC
+
+We don't want to sacrifice the elegance of the description.
+*** Can memoization (tabling) help speed up the naive approach?
+No.
+*** Another naive approach that works.
+This one works.
+
+The key is:
+- Put grounding goals first.
+  A grounding goal is a goal that grounds its variables.
+- Be careful with the pattern =g, u= where =g= generates ungrounded terms and =u= fails,
+  because it may cause infinite loop when Prolog backtracks,
+  because Prolog continues to generate fresh variables.
+  For example, this doesn't terminate:
+  #+BEGIN_SRC prolog
+  ?- length(L, N), fail.
+  #+END_SRC
+  - If =p= may generate infinite choice points, then =p, fail= doesn't terminate.
+
+#+BEGIN_SRC prolog
+digit([C]) :- code_type(C, digit).
+
+number_([H]) :- digit([H]).
+number_([H|T]) :- digit([H]), number_(T).
+
+operator([0'+]).
+
+% expression(Meaning,Codes) may not work if Codes is ungrounded.
+expression(number(E), E) :- number_(E).
+expression(plus(MA,MC), E) :- true
+    , operator(EB) % Put grounding goals first.
+    , append([EA,EB,EC], E) % Thus B is grounded.
+    , expression(MA,EA)
+    , expression(MC,EC)
+    .
+#+END_SRC
+** Prefix remover / difference-list recognizer / list partitioner
+We can turn the naive recognizer =digit/1= into difference-list recognizer =digit/2=.
+#+BEGIN_SRC prolog
+digit([D]) :- code_type(D, digit).
+#+END_SRC
+
+- The first parameter is the input string, say Input.
+- The second parameter is the recognized prefix of Input.
+- The third parameter is the unrecognized suffix of Input.
+
+In the following, P stands for Parsed, and U stands for Unparsed.
+
+We can turn the recognizer into:
+#+BEGIN_SRC prolog
+% Prefix remover.
+digit([P|U], U) :- code_type(P, digit).
+
+% List partitioner.
+digit([P|U], [P], U) :- code_type(P, digit).
+
+% The list partitioner can be derived from the prefix remover:
+% digit(U0, P0, U1) :- digit(U0, U1), append(P0, U1, U0).
+
+number_(U0, U1) :- digit(U0, U1).
+
+number_(U0, P0, U1) :- digit(U0, P0, U1).
+number_(U0, P2, U2) :- true
+    , digit(U0, P0, U1)
+    , number_(U1, P1, U2)
+    , append(P0, P1, P2)
+    .
+#+END_SRC
+
+The meaning of =number_(U0, P0, U1)= is:
+- P0 is a number.
+- P0 is a prefix of U0.
+- U0 is the concatenation of P0 and U1.
+
+Observe how we "thread" the state.
+The calls in the body follow the pattern =something(U<n>, P<n>, U<n+1>)=.
+
+We can translate a recognizer into a difference-list recognizer.
+
+The cool thing is that each parameter works both ways.
+- The query =string_codes("123", A), number_(A, A, [])= asks Prolog to find out whether "123" parses as a number.
+- The query =length(A, _), number_(A, A, []).= asks Prolog to find a string that parse as a number.
+  You can keep pressing =;= to generate the next strings.
+#+BEGIN_SRC prolog
+operator([P|U], [P], U) :- string_codes("+", Codes), member(P, Codes).
+
+expression(U0, P0, U1) :- number_(U0, P0, U1).
+expression(U0, P0, U1) :- true
+    , expression(U0, P0, U1)
+    , operator(U1, P1, U2)
+    , expression(U2, P2, U3)
+    .
+#+END_SRC
+** Definite clause grammars
+- The DCG clause =left --> right= desugars/expands/translates into the definite clause =left(U0, U1) :- ...= where:
+  - U0 is the input.
+  - U1 is the suffix of U0 that is not recognized by the DCG clause.
+  - The string recognized by the clause is the difference between U0 and U1.
+    That string is the P such that U0 = P + U1 where + denotes list concatenation.
+- "Interesting Things about Prolog" https://gist.github.com/CMCDragonkai/89a6c502ca7272e5e7464c0fc8667f4d
+  - "Definite clause grammars (DCG) make the difference list pattern into a first class primitive with the =-->= operator."
+*** Why does this naive DCG fail?
+#+BEGIN_SRC prolog
+digit --> [Code], {code_type(Code, digit)}.
+
+number -->
+    digit, number
+;   digit
+.
+
+operator --> "+".
+
+expression -->
+    number
+;   expression, operator, expression
+.
+#+END_SRC
+** Context-sensitive grammars?
+We can add context by adding parameter.
+** Libraries?
+- https://github.com/cbaziotis/prolog-cfg-parser
+- This isn't Prolog, but this looks awesome https://github.com/Engelberg/instaparse/blob/master/README.md
+** Left recursion
+Mathematics handles left recursion just fine.
+Computers should too.
+We shouldn't chicken out.
+We shouldn't compromise by working around our grammar descriptions.
+** Precedence parsing?
+- 1996 article "An Operator Precedence Parser for Standard Prolog Text" https://onlinelibrary.wiley.com/doi/abs/10.1002/%28SICI%291097-024X%28199607%2926%3A7%3C763%3A%3AAID-SPE33%3E3.0.CO%3B2-L
+* Metainterpreter for left-recursive parsing?
+"Parsing with left-recursive grammars"
+https://www.metalevel.at/acomip/
+* Left-recursive parsing
+2009
+Direct Left-Recursive Parsing Expressing Grammars
+https://www.semanticscholar.org/paper/Direct-Left-Recursive-Parsing-Expressing-Grammars-Tratt/b1e8309db5537fb15f51071fcdc39e139659ed15
+
+2008
+Packrat Parsers Can Support Left Recursion
+
+Naive recognizer + memoization
+
+list_not_empty
+
+#+BEGIN_SRC prolog
+exp(S) :- is_list(S), append([A,[0'+],C],S), exp(A), exp(C).
+#+END_SRC
+
+Consume before recursing?
+
+We can't piggyback Prolog's unification for lambda calculus substitution,
+because Prolog unifies same-named variables while lambda-calculus shadows same-named variables.
+
+If the recursive call has smaller arguments than the parent call does, then the predicate should terminate.
+* What
+1997 inconclusive discussion "Prolog Parser in Prolog"
+https://dtai.cs.kuleuven.be/projects/ALP/newsletter/archive_93_96/net/grammars/parser.html

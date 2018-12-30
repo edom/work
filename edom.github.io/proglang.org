@@ -3915,11 +3915,6 @@ Bottom-up language design:
 
 Top-down language design:
 Begin from logic and mathematics, the internal language of thought.
-** Camps in declarative languages
-There are at least two camps of the declarative programming languages:
-- Start from Prolog, move toward Haskell.
-- Start from Haskell, move toward Prolog.
-  Example: Curry.
 * Meta-programming?
 miniKanren, scheme logic programming
 http://minikanren.org/
@@ -4007,4 +4002,145 @@ let self = {
         foo = \ () -> self.prop + 1;
 }; in self
 #+END_EXAMPLE
+* Summary of what I think the best programming language would is like, as of <2018-12-30>
+general feel: Prolog + Haskell
+
+Katahdin - runtime syntax manipulation
+
+supercompilation + partial evaluation + compilation by abstract interpretation
+
+user-extensible unification?
+
+Type system: Curry-style, not Church-style.
+More like Erlang Dialyzer or TypeScript than Haskell.
+Users should be able to write their own program checkers and program transformations.
+
+Module and import system: ld linker script, JavaScript, Nix import by lambda parameter name, Dhall, OCaml local import.
+
+Syntax: Landin offside rule?
+
+Pure + nondeterminism + JavaScript module system
+* Unifying functional and logic programming as a rewriting system
+It is easier to add nondeterminism to lambda calculus than it is to add lambda-expression to Horn clauses?
+There are at least two camps of the declarative programming languages:
+First: Start from Prolog, move toward Haskell.
+Second: Start from Haskell, move toward Prolog.
+Example of second camp is Curry.
+
+Both SLD-resolution and normal-order beta-reduction can be seen as term-rewriting systems.
+
+All we have to do is add non-determinism to Pure[fn::https://en.wikipedia.org/wiki/Pure_(programming_language)], and we have a Prolog-Haskell hybrid.
+
+A Horn clause translates to several rewrite rules.
+with disjunctive-normal-form body is =A :- B1 ; ... ; Bn= is the rewrite rule \(A \to B_1 \vee A \to B_2 \vee \ldots \vee A \to B_n\).
+
+A function definition translates to one rewrite rule.
+=A = B= is the rewrite rule \(A \to B\).
+
+#+BEGIN_EXAMPLE
+prolog {
+    a(X) :- b(X), c(X).
+    parent(dad,kid).
+    parent(daddy,kiddo).
+}
+
+haskell {
+    what n = \exists x y : parent x y && length + length y == n
+}
+#+END_EXAMPLE
+** Lambda-calculus with choice/disjunction
+Nondeterministic programming: Prolog, Amb, Alisp[fn::https://en.wikipedia.org/wiki/Nondeterministic_programming].
+Other nondeterminstic extensions to lambda calculus are already in the literature:
+1998 \cite{kutzner1998non}, 2009 \cite{fischer2009purely}.
+
+"Lambda logic is the union of first order logic and lambda calculus."\cite{beeson2004lambda}
+
+Nondeterminism-by-backtracking may be implemented in Scheme with continuations.
+
+How do we combine lambda-calculus beta-reduction and Prolog unification?
+
+\cite{kfoury1999beta}
+
+Here we describe \(\lambda_|\)-calculus (lambda-calculus with choice; that is a vertical bar).
+Other names:
+- lambda-calculus with nondeterminism
+- lambda-calculus with disjunction
+
+We add expression syntax for disjunction.
+Thus the syntax becomes:
+1. Every name is an expression.
+1. If \(x\) is a name and \(y\) is an expression, then \(\lambda x.y\) is an expression (abstraction).
+1. If \(x\) is an expression and \(y\) is an expression, then \(xy\) is an expression (application).
+1. If \(x\) is an expression and \(y\) is an expression, then \(x | y\) is an expression (choice).
+   For consistency with Prolog's =;= operator (disjunction),
+   the choice operator \(|\) associates to the /right/: \(x | y | z = x | (y | z)\).
+
+We add two rules to beta-reduction.
+Thus the beta-reduction now consists of three rules.
+The last two rules makes the beta-reduction ambiguous.
+\begin{align*}
+(\lambda x. y) z &\to y[x := z]
+\\ x | y &\to x
+\\ x | y &\to y
+\end{align*}
+
+We define two constant expressions: \(false\) and \(true\).
+
+Now we define a ternary logic mapping from expression to \(\{false,unknown,true\}\).
+\begin{align*}
+T(false) &= false
+\\ T(true) &= true
+\\ T(\lambda x. y) &= true
+\\ T((\lambda x. y) z) &= T(y[x := z])
+\\ T(A = B) &= unknown
+\end{align*}
+
+A Prolog-like operational semantics:
+\begin{align*}
+x | y &\to x \text{ if \(x\) succeeds}
+\\ x | y &\to y \text{ if \(x\) fails}
+\end{align*}
+
+We define one constant \(false\).
+
+We define that an expression /fails/ iff it reduces to the constant \(false\).
+We define that an expression /succeeds/ if it does not fail.
+\begin{align*}
+fail | x &\to x
+\\ x | fail &\to x
+\end{align*}
+* Logic programming with explicit side-effects with force-predicate
+The meaning of force(X) is that force(X) succeeds iff it has changed the world such that X will succeed after force(X) returns.
+Thus the interpreter has to check for race conditions?
+Is this requirement too difficult?
+#+BEGIN_EXAMPLE
+?- file_content('foo', A). -- unify A with the contents of file 'foo'
+
+?- force(file_content('foo', [1,2,3])). -- replace the content of file 'foo' with [1,2,3]
+#+END_EXAMPLE
+* Prolog as a term-rewriting meta-interpreter
+#+BEGIN_EXAMPLE
+% Interpret A :- B as "rewrite A to B".
+
+parent(dad,kid).
+
+fib(0) :- 1.
+fib(N) :- fib(N-1) + fib(N-2).
+len([]) :- 0.
+len([_|X]) :- 1 + len(X).
+
+reduction
+
+print_eval(Exp) :- eval(Exp,Val), print(Val).
+#+END_EXAMPLE
+* Write abstract interpreters, not compilers?
+<2018-12-30>
+
+The same code fragment can be interpreted in several ways.
+
+The most common interpreter executes the program with the intended semantics.
+Example: a Python interpreter interprets the Python program "print 'foo'" as printing the string.
+
+Write an abstract interpreter that emits code when interpreting.
+An interpreter that interprets the Python program "print 'foo'" as "emit a Ruby statement that prints 'foo' to screen when executed".
 * Bibliography
