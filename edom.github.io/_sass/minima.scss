@@ -3,12 +3,12 @@
 // Define defaults for each variable.
 
 $base-font-family: 'DejaVu Serif', serif !default;
-$base-font-size:   14pt !default;
+$base-font-size:   12pt !default;
 $code-font-family: 'DejaVu Sans Mono', monospace !default;
-$code-font-size:   13pt;
-$pre-font-size:    12pt;
+$code-font-size:   11pt;
+$pre-font-size:    10pt;
 $palm-font-size:   10pt !default;
-$print-font-size:  14pt !default;
+$print-font-size:  12pt !default;
 $base-font-weight: 400 !default;
 $small-font-size:  $base-font-size * 0.875 !default;
 $base-line-height: 1.5 !default;
@@ -95,8 +95,8 @@ hr
 ul, ol
 {
     list-style-position: outside;
-    margin-top: 1.0em;
-    margin-bottom: 1.0em;
+    margin-top: 0.0em;
+    margin-bottom: 0.0em;
     margin-left: 1em;
     margin-right: 0em;
     padding: 0em;
@@ -500,6 +500,10 @@ div.highlighter-rouge > * { display: inline-block; text-align: left; }
 org-mode uses #table-of-contents.
 filter.lua uses .local_table_of_contents.
 */
+
+.local_table_of_contents {
+  margin: 1em 0em;
+}
 
 #table-of-contents ul
 , .local_table_of_contents ul

@@ -4119,20 +4119,9 @@ Is this requirement too difficult?
 ?- force(file_content('foo', [1,2,3])). -- replace the content of file 'foo' with [1,2,3]
 #+END_EXAMPLE
 * Prolog as a term-rewriting meta-interpreter
-#+BEGIN_EXAMPLE
-% Interpret A :- B as "rewrite A to B".
-
-parent(dad,kid).
-
-fib(0) :- 1.
-fib(N) :- fib(N-1) + fib(N-2).
-len([]) :- 0.
-len([_|X]) :- 1 + len(X).
-
-reduction
-
-print_eval(Exp) :- eval(Exp,Val), print(Val).
-#+END_EXAMPLE
+The Prolog rule "A :- B" can be interpreted in two ways.
+The first is the well-known proof-theoretic interpretation "to prove A, prove B".
+The second is the /rewriting-system interpretation/ "rewrite A to B".
 * Write abstract interpreters, not compilers?
 <2018-12-30>
 
@@ -4143,4 +4132,43 @@ Example: a Python interpreter interprets the Python program "print 'foo'" as pri
 
 Write an abstract interpreter that emits code when interpreting.
 An interpreter that interprets the Python program "print 'foo'" as "emit a Ruby statement that prints 'foo' to screen when executed".
+* Side-effect?
+What is a "side-effect"?
+Wikipedia[fn::https://en.wikipedia.org/w/index.php?title=Side_effect_(computer_science)&oldid=855461052][fn::https://softwareengineering.stackexchange.com/questions/40297/what-is-a-side-effect] is inconclusive.
+
+The "side" in "side-effect" implies that there are /effects/ and /main-effects/, and that side-effects are unintended, unrelated, or unwanted.
+The /effect/ of running a program is the change of the state of the universe that results from executing that program.
+In medicine, a side effect is an /unintended/ effect, not necessarily bad[fn::https://en.wikipedia.org/w/index.php?title=Side_effect&oldid=875244456].
+Thus, there is a parallel between chemists-and-drugs and programmers-and-programs:
+the designer of a drug (the programmer of a program) /intends/ that taking the drug (running the program) accomplishes the /main-effect/, but reality is a bitch.
+
+What is our intention when we write a program such as a Haskell program =inc x = (x :: Integer) + 1=?
+Our intention is that it increments an integer, for /every/ integer, which is mathematically trivial but physically impossible.
+The side-effects are: heating up the CPU, taking up some memory, taking up some time.
+We certainly did not intend to heat up the CPU; therefore such heating is a side-effect.
+Thus the main-effect is the /denotation/ (the mathematical meaning) of the program,
+and every implementation detail is a side-effect.
+
+Thus "side-effect" means an effect that we failed to foresee, because the complexity was too much for us.
+
+Side-effects may be fatal.
+
+Spectre/Meltdown are side-effects in that sense.
+The chip designers sacrificed understandability for speed.
+
+There is also the phrase "algebraic effect".
+
+We have to distinguish between a /program/ and a /machine/ running the program.
+A program does not run by itself.
+A /machine/ runs a program.
+A program /describes/ a computation.
+The machine /performs/ the computation.
+A program is passive.
+A machine is active.
+A program exists in idea-world.
+A machine exists in material-world.
+A machine affects reality according to the program that the machine is running.
+The question: which is the /cause/ of the change in reality: the machine or the program?
+
+If we assume free will, then our thought causes our behavior, and our behavior causes something in the material-world.
 * Bibliography
