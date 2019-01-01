@@ -6,6 +6,210 @@
 * The purposes of this page
 - This page is a holding area for my capture-refile workflow.
 - This page is for recycling old content.
+* Reorganize this mess
+This was moved from research.html.
+** Resolving citations?
+To resolve citation keys in this website, look up the key in [[https://github.com/edom/edom.github.io/blob/master/bibliography.yaml][bibliography.yaml]].
+
+<2019-01-02>
+We are moving back to bib.bib from bibliography.yaml,
+so that we can copy-paste bib from Google Scholar.
+*** Ramblings and undigested matters
+   :PROPERTIES:
+   :CUSTOM_ID: ramblings-and-undigested-matters
+   :END:
+
+- Linguistics
+
+  - How do we use language?
+
+    - We assume:
+
+      - Every adjective is fuzzy.
+      - Truth is a continuum.
+
+- Corruptors and their offsprings have so much money that they don't know what to do with it.
+- 2017-07-10
+
+  - Ubuntu crashed without log.
+
+    - Screen turned off suddenly.
+    - Keyboard forze.
+    - Power button didn't respond even after 4 seconds.
+    - The problem turned out to be shitty graphics card connection.
+
+      - Hardware problem, not Ubuntu problem.
+      - Probably dust or oxidized connectors.
+
+        - It would be nice if graphics card could be hotswapped though.
+
+          - But do we want to touch a running graphics card?
+
+    - The fix: unplug and plug the card several times.
+
+- Economics vs finance
+
+  - Economics is about value?
+  - Finance is about money?
+
+- How do I find people who care about what I care?
+- How do I find people with interests similar to mine?
+- How to make money
+
+  - Make hard things easy.
+
+- Should we use holidays to form strategic alliances?
+- To form quality relationship, socialize with one person at a time?
+- There are only two way of getting rich:
+
+  - create value (make others better)
+  - extract value (steal from others, either legally or illegally)
+
+- [[https://stackoverflow.com/questions/9466360/how-to-request-google-to-re-crawl-my-website][SO 9466360: How to request Google to re-crawl my website?]]
+- Marketing
+
+  - To market something is to try to sell it.
+
+- [[https://www.youtube.com/watch?v=yzl7oX9FYGE][YT: What I've learned: Everything wrong with the "System" (Educate yourself)]]
+- https://id.wikipedia.org/wiki/Ken_Kawan_Soetanto
+
+  - Any English publications? Where?
+
+- http://therumpus.net/2012/11/the-map-of-the-system-of-human-knowledge-by-james-tadd-adcox/
+- https://www.theatlantic.com/magazine/archive/2006/08/a-taxonomy-of-knowledge/305189/
+- [[https://en.wikipedia.org/wiki/Joy%27s_law_(management)][WP:Joy's law of management]]:
+  "no matter who you are, most of the smartest people work for someone else"
+
+** Mathematical modeling?
+  - [[https://en.wikipedia.org/wiki/Mathematical_model][WP:Mathematical model]]
+  - [[https://en.wikipedia.org/wiki/Many-body_problem][WP:Many-body problem]]
+  - [[https://en.wikipedia.org/wiki/Few-body_systems][WP:Few-body systems]]
+  - [[https://en.wikipedia.org/wiki/N-body_problem][WP:N-body problem]]
+  - Articles
+    - [[https://aip.scitation.org/doi/10.1063/1.533319][The quantum N-body problem]]
+  - What is the difference between variable and parameter?
+  - How many parameters do we need to model a system?
+  - Discrete Newtonian kinematical model
+    - A /system at time \( t \)/ is a set of particles ( { 1, \ldots, n } ).
+      - Time is a real number: \( t \in \Real \).
+      - The number of particle is constant \( n \in \Nat \).
+      - For each particle \( k \):
+        - It has /position/ \( x_k \in \Real^3 \).
+        - Simplifying assumptions
+          - particle
+            - It is a point.
+              - It doesn't occupy any space.
+            - Its mass is not modeled.
+          - Time is global and absolute (the same everywhere).
+  - Discrete Newtonian dynamical model (N-body problem) extends discrete Newtonian kinematical model.
+    - A /system at time \( t \)/ is all that above, plus:
+      - For each particle \( k \):
+        - It has /mass/ \( m_k \in \Real \).
+        - It has /resultant force/ \( F_k \) acting on it.
+        - Simplifying assumptions about the particle
+          - It is rigid.
+            - It doesn't deform.
+            - It doesn't break.
+          - Its mass is constant.
+          - It don't interact with other particles.
+            - Particles don't merge or collide.
+  - [[https://en.wikipedia.org/wiki/Continuum_mechanics][WP:Continuum mechanics]]
+  - Skippable philosophical issues?
+    - Does "the same particle at different times" make sense?
+      - What is "same"?
+    - [[https://en.wikipedia.org/wiki/Heraclitus#Panta_rhei,_%22everything_flows%22][WP:"Panta rhei" ("Everything flows"), Heraclitus]]
+** Common company wiki fundamental problem
+Employees have no reason to read the wiki.
+It doesn't help them do their jobs.
+Why should they read it then?
+** Applying probability theory and statistics to marketing and pricing
+
+- https://medium.com/airbnb-engineering/learning-market-dynamics-for-optimal-pricing-97cffbcc53e3
+- https://overflow.buffer.com/2018/08/13/predicting-churn/
+
+** AI/ML?
+
+- https://thegradient.pub/nlp-imagenet/
+- https://chrisalbon.com/
+- https://createmomo.github.io/2017/09/12/CRF_Layer_on_the_Top_of_BiLSTM_1/
+
+*** Judea Pearl, "book of why", causal inference
+
+- https://twitter.com/yudapearl/status/1016858846034210816
+  - 2018, "The Seven Tools of Causal Inference with Reflections on Machine Learning", Judea Pearl, [[http://ftp.cs.ucla.edu/pub/stat_ser/r481.pdf][pdf]]
+    - book, "The book of why [...]", Judea Pearl
+
+** Programming language research
+
+*** Self-composable programming?
+
+- [[https://arxiv.org/abs/1612.02547][1612.02547 - Self-composable Programming]]
+
+*** Generate REST API from database
+
+- [[https://github.com/PostgREST/postgrest][PostgREST/postgrest: REST API for any Postgres database]]
+  - https://restifydb.com/
+  - https://www.progress.com/blogs/restify-databases-expose-your-database-to-rest-web-services
+  - http://www.odata.org/getting-started/understand-odata-in-6-steps/
+
+** Philosophy
+
+*** First- vs third-person view?
+
+- [[http://consc.net/notes/first-third.html][The First-Person and Third-Person Views]]
+
+*** Ethics, morality
+Utilitarianism is questionable.
+ [fn::https://rationaloptimist.wordpress.com/2014/05/24/utilitarianism-is-killing-one-to-save-five-moral/]
+ [fn::http://blog.practicalethics.ox.ac.uk/2014/11/why-i-am-not-a-utilitarian/]
+
+Jonathan Haidt:
+- Blind pursuit of Equal OUTCOME leads to an "Abomination of Justice".[fn::https://www.youtube.com/watch?v=cQNaT52QYYA]
+- The moral roots of liberals and conservatives[fn::https://www.youtube.com/watch?v=vs41JrnGaxc]
+- ? https://www.yourmorals.org/aboutus.php
+- ? https://www.moralfoundations.org/
+*** Evolutionary ethics
+- https://en.wikipedia.org/wiki/Evolution_of_morality
+- https://en.wikipedia.org/wiki/Evolutionary_ethics
+- Evolutionary ethics
+    - Morality is shaped by evolution.
+    - We have difficulties defining what is "good", but there are things that we agree are good.
+    - Morality is defined by the majority opinion.
+    - Humans evolved morality because morality promotes survival.
+        - Nature selects moral behavior. There is evolutionary pressure for moral behavior.
+            - Sharing foods promotes survival.
+            - Sharing knowledge promotes survival.
+            - Cooperation promotes survival.
+            - Marriage promotes survival?
+            - Monogamy promotes survival?
+    - The morality of a species is whatever evolved behavior that promotes its survival.
+** Teaching and learning
+  - How to teach history (or anything)
+    - Don't memorize things that you can look up on the Internet.
+    - Focus on stories, insights, reasons, motivations.
+    - Empathize with the subjects.
+      Why do they go to war?
+  - Learning languages, both human languages and programming languages
+    - One learns a language by example sentences.
+      One learns a programming language by example programs/snippets.
+      - One does not learn a language by memorizing the syntax.
+      - One does not learn a language by memorizing the language reference document.
+** Brain? Biology?
+- Does everyone have a fusiform gyrus? A prefrontal cortex?
+- [[https://www.youtube.com/watch?v=lyu7v7nWzfo][TED: Your brain hallucinates your conscious reality | Anil Seth]]
+- [[https://www.youtube.com/watch?v=SgOTaXhbqPQ][TED: What hallucination reveals about our minds | Oliver Sacks]]
+- same video, different narrator
+  - [[https://www.youtube.com/watch?v=X_tYrnv_o6A][Veritasium: Your Amazing Molecular Machines]]
+  - [[https://www.youtube.com/watch?v=WFCvkkDSfIU][Drew Berry: Animations of unseeable biology]]
+** TED?
+- [[https://www.youtube.com/watch?v=fxbCHn6gE3U][The surprising habits of original thinkers | Adam Grant]]
+- [[https://www.youtube.com/watch?v=YM-uykVfq_E][TED-Ed: What is entropy? - Jeff Phillips]]
+- [[https://www.youtube.com/watch?v=PRYmx7Lk9F0][This Quantum 'Sixth Sense' Could Allow Birds to Navigate Earth's Magnetic Field]]
+- [[https://www.youtube.com/watch?v=YnY0J_Z1TF4][The Earth Is Running Out of Sand and It Could Cause a Global Crisis]]
+** psychology? goals? systems?
+
+- [[https://jamesclear.com/goals-systems][Forget About Setting Goals. Focus on This Instead.]]: focus on systems/processes instead of goals.
+
 * Getting rich
 ** What?
 - Which is more fundamental, economics or finance?
@@ -1082,13 +1286,18 @@ https://www.vice.com/amp/en_us/article/zm95ka/republicans-are-outraged-about-the
 
 https://en.wikipedia.org/wiki/Unrestricted_Warfare
 ** Dan Lok
-- 3 Types Of Employees - How To Hire https://www.youtube.com/watch?v=kILJN6eu1P8
-  - grunt, mercenary, and patriot
-- How To Build Systems In Your Business - Systemize Your Business Ep. 7 https://www.youtube.com/watch?v=2g6sTH8FiFY
+3 Types Of Employees (grunt, mercenary, and patriot) - How To Hire
+https://www.youtube.com/watch?v=kILJN6eu1P8
+
+How To Build Systems In Your Business - Systemize Your Business Ep. 7
+https://www.youtube.com/watch?v=2g6sTH8FiFY
 
 Kingpin strategy: Sell to the person who matters, who can bestow you authority, everyone else follows;
 "The One Thing You Can Do To Grow Your Business And Sales Faster"
 https://www.youtube.com/watch?v=M33aMYxuY60
+
+How To Get What You Want - 3 Proven Persuasion Tactics
+https://www.youtube.com/watch?v=nLA_T1AXd6o
 * Vital service failure log
 #+TOC: headlines 2 local
 ** Internet service providers
@@ -1125,7 +1334,13 @@ It finally went up, but I didn't note when.
 In 2018, we stopped using Fastnet.
 We switched to CBN.
 *** CBN
-CBN lebih murah daripada Fastnet, tapi CBN lebih sering mati.
+Plus:
+CBN lebih murah daripada Fastnet.
+CBN fiber upload lebih cepat daripada Fastnet ADSL.
+
+Minus:
+CBN lebih sering mati.
+/CBN sangat sering mati./
 
 2017-12-23 00:00 CBN mati sekitar 12 jam.
 
@@ -1261,47 +1476,17 @@ Pranks violate the [[https://en.wikipedia.org/wiki/Cooperative_principle][cooper
 
 The next time you're going to play pranks: just don't.
 Better spend your time somewhere else.
-* <2018-11-26> Fix male fighting game characters now!
-Male fighting game characters are too big, too muscular, too unsightly, too monstrous, too unproportional, too unfappable.
-Every male characters degrade into a generic steroid hunk.
-
-Tekken 3 has better character proportions than Tekken 7.
-
-Street Fighter has been offending this sensibility for even longer than Tekken has.
-
-The men are proportional in Tekken 3.
-They get a little bit more muscles in Tekken 4.
-They get some more muscles in Tekken 5.
-They begin to look like Street Fighter characters in Tekken 6.
-They all use steroid in Tekken 7.
-
-Compare Heihachi.
-There is no fucking way an average Japanese martial-artist tycoon grandpa would get that ripped without steroids.
-
-Compare Hwoarang.
-There is no fucking way an average non-bodybuilding Korean taekwondoist would get that ripped without steroids.
-
-The same goes on for Jin, Law, etc.
-
-King is OK.
-He's an American wrestler.
-It makes sense for people that big to be a wrestler.
-They stand 6 feet without even trying.
-Genetics.
-Watch WWE.
 * Databases? Designing databases?
-Datafun
-https://www.youtube.com/watch?v=gC295d3V9gE
-http://www.rntz.net/datafun/
+Datafun[fn::https://www.youtube.com/watch?v=gC295d3V9gE]
+ [fn::http://www.rntz.net/datafun/]
 
-What Datomic brings to businesses
-https://medium.com/@val.vvalval/what-datomic-brings-to-businesses-e2238a568e1c
-interesting: inherent versioning, internally log-structured, internally append-only
+What Datomic brings to businesses[fn::https://medium.com/@val.vvalval/what-datomic-brings-to-businesses-e2238a568e1c]:
+Interesting: inherent versioning, internally log-structured, internally append-only.
 My only objection: database should be a library, not a separate operating system process.
 
-https://augustl.com/blog/2018/datomic_look_at_all_the_things_i_am_not_doing/
+What[fn::https://augustl.com/blog/2018/datomic_look_at_all_the_things_i_am_not_doing/]
 
-Database design boils down to this question:
+Database design boils down to these questions:
 - how do we store (arrange, lay out) data on disk?
 - how do we make the database replicate automatically just by adding a node to a cluster?
   etcd?
@@ -1311,7 +1496,7 @@ Because we will need it later.
 - accounting
 - As a person, I don't need convenience store receipts. But a company needs them for accounting.
 
-It has to be findable/discoverable/rediscoverable.
+The stored data has to be findable/discoverable/rediscoverable.
 * Philosophy?
 ** Bertrand Russell
 Bertrand Russell - Message To Future Generations
@@ -1359,35 +1544,6 @@ Potato the whole plant vs potato the edible tuber.
 
 Of course we can dismiss all this and just be sloppy with synecdoches,
 but unclear language breeds unclear thinking.
-* Information about this wiki, structure of this wiki
-** Sentence categories
-- definition.
-  Unfalsifiable.
-  X is Y.
-- thesis statement, or answer.
-  Falsifiable.
-  Subject Predicate.
-- prescription: X should Y.
-- supporting statement
-- question
-- rhetorical question
-- emotion-laden baseless opinions, blanket statements
-* Finding a place to live
-New Zealand sounds promising?
-
-- [[https://www.youtube.com/watch?v=ylR21fezN7E][Where is the world's most liveable city? | The Economist - YouTube]]
-  - 2018: Vienna. Was Melbourne.
-- Making a house
-  - [[https://en.wikipedia.org/wiki/List_of_human_habitation_forms][WP:List of human habitation forms]]
-
-Disaster risks:
-- US risky areas:
-  - Florida, North Carolina: hurricanes
-  - San Francisco, California: earthquakes and soil liquefaction
-  - Tornado alley (where?)
-- Japan, South Korea, Philippines: typhoons
-- Palu earthquake and liquefaction
-- Aceh tsunami
 * Models, meta-models, and ontologies?
 2006 article "On Relationships among Models, Meta Models and Ontologies" http://dsmforum.org/events/DSM06/Papers/14-saeki.pdf
 
@@ -1509,22 +1665,6 @@ What you will do:
 
 Salary range:
 IDR 0 - IDR 20,000,000.
-* Java command line for production
-Replace variables accordingly.
-#+BEGIN_SRC bash
-java \
-    -Xms$heap_size \
-    -Xmx$heap_size \
-    -Xloggc:"$gc_log_file" \
-    -XX:+PrintGCDetails \
-    -classpath 'target/*:target/dependency/*' \
-    "$java_main_class" \
-    "$@"
-#+END_SRC
-
-The GC log is important.
-When your application is unexplainably slow, first look at the GC log: does GC take too much time?
-Look at the "real" time.
 * Politics?
 ** Law
 - Law should be principle-based instead of rule-based.
@@ -1631,8 +1771,6 @@ This decision problem is solvable in Perl "regular" expressions: Given A, B, C, 
 - https://www.reddit.com/r/programming/comments/9d768u/i_know_its_ridiculous_but_i_just_made_a_regex_in/
   - https://www.reddit.com/r/programming/comments/9tj6h6/remember_that_abc_regex_i_felt_it_wasnt/
 - It uses capturing groups and backreferences, and therefore it is not a regular expression.
-** Don't swallow slugs
-https://www.dailymail.co.uk/news/article-6352629/amp/Sam-Ballard-dies-eight-years-swallowing-slug.html
 ** Emotion hypothesis: Everything is fear
 Attractive emotion.
 Fear is a repulsive emotion.
@@ -1719,9 +1857,6 @@ Principle
 - Skip the small-talk in report.
 
 When we sell a plant we grew, we are paid for our labor, not for the plant. Nature gives us everything for free.
-** What
-strong light
-https://www.theguardian.com/science/2017/mar/23/worlds-largest-artificial-sun-german-scientists-activate-synlight
 ** Evil automobile industry
 https://www.reddit.com/r/todayilearned/comments/9mv3oi/til_that_the_term_and_concept_of_jaywalking_was/
 
@@ -1888,8 +2023,6 @@ Pandering politicians promise unfundable imaginary benefits.
 What the fuck is going on?
 Why the fuck do we let this happen?
 Why aren't we angry?
-** Altruism with high impact-to-effort ratio
-https://www.effectivealtruism.org/articles/introduction-to-effective-altruism/
 ** The key to employee retention?
 - good pay
 - good culture
@@ -1908,6 +2041,8 @@ https://www.quora.com/Can-you-be-too-tired-to-dream
 Sleeping requires that we release conscious control of all voluntary muscles.
 
 Why can't we sleep with running thoughts?
+
+Example of mindless thinking: the racing thoughts when I'm going to bed.
 ** Code of conduct
 - Don't be an asshole.
 - Don't do things that you don't want to be done to you.
@@ -1947,17 +2082,9 @@ What the fuck are these guys wearing?
 
 Café In Thailand Lets You Play With A Pack Of Huskies
 https://www.youtube.com/watch?v=hjrl-G0vySY
-** Jordan Peterson
-responsibility gives life meaning
-competent and dangerous
-https://www.youtube.com/watch?v=ONK8pGAGT28
 ** Climate change
 Climate change (increasing temperature and carbon dioxide) is real, but we don't agree about whether it's harmful
 https://www.youtube.com/watch?v=m3hHi4sylxE
-** Mindless thinking
-Example of mindless thinking: the racing thoughts when I'm going to bed.
-** Biohacking
-https://www.theguardian.com/science/2018/sep/21/extreme-biohacking-tech-guru-who-spent-250000-trying-to-live-for-ever-serge-faguet
 ** Traumatic experiences, and things I learned the hard way
 *** <2018-10-08> While a person is on a motorcycle (be it driving or not driving), he must secure his chattels, and not place them in shirt pockets, in order to prevent the chattels from falling to the road (therefore being lost or broken).
 - Secure the chattels:
@@ -1984,13 +2111,11 @@ http://large.stanford.edu/courses/2016/ph241/yoon1/
 2016 article "Oklo: Nature's Nuclear Reactor":
 "The combination of aluminum phosphate grains to trap radioactive materials and the groundwater to regulate the reaction allowed for an extremely safe reactor."
 http://large.stanford.edu/courses/2016/ph241/zhao1/
-** Myopia
-- https://endmyopia.org/how-to-finding-active-focus/
-- https://endmyopia.org/trouble-finding-active-focus-screen/
 ** Managing organizations
-- 2014, article, "Whose critical path are you on?", Philip J. Guo, [[http://www.pgbovine.net/critical-path.htm][html]]
-  - To get someone's attention, get on his critical path.
-- [[https://jobs.netflix.com/culture][Netflix culture]]
+To get someone's attention, get on his critical path.[fn::2014, article, "Whose critical path are you on?", Philip J. Guo, http://www.pgbovine.net/critical-path.htm]
+
+Netflix culture
+https://jobs.netflix.com/culture
 ** Finding bottleneck?
 *** what
 Make sure that the bottleneck is not in the kernel
@@ -2132,46 +2257,6 @@ Hardware fault?
 https://en.wikipedia.org/wiki/Stick_pusher
 
 https://philip.greenspun.com/blog/2018/11/11/boeing-737-crash-is-first-mass-killing-by-software/
-** Important vs urgent
-Something is important if not doing it is fatal.
-Breathing, eating, drinking water.
-Having some in-demand high-paying skills.
-Being useful.
-
-Something is urgent if it urges you to do it, if you feel an urge (strong desire) to do it.
-Eating sugar, fucking, shitting.
-** Senior, lead, manager, director
-Etymology.
-
-Senior = older.
-https://www.etymonline.com/word/senior
-
-Lead = to show the way.
-https://www.etymonline.com/word/lead#etymonline_v_6615
-
-Manage = handle or train a horse.
-https://www.etymonline.com/search?q=manage
-
-Handle = "touch with the hands, hold in the hands, fondle, pet"
-https://www.etymonline.com/word/handle
-
-You must know what you want. Nobody can know it for you.
-
-A director /directs/.
-A director knows what he/she wants.
-Don't let the inmates run the asylum.
-CEOs should be engineers.
-Politicians should be engineers.
-
-<2018-12-12>
-I changed my opinion.
-Politicians should not exist.
-** Birth is not survival.
-To survive is to keep/continue living.
-
-Survival of the individual vs survival of the species?
-
-Survivalism is compatible with antinatalism.
 ** Psychology
 *** What
 - [[https://en.wikipedia.org/wiki/Psychology_of_collecting][WP:Psychology of collecting]]
@@ -3019,8 +3104,6 @@ https://arxiv.org/abs/1801.04016
   - films directed by Christopher Nolan
     - "Interstellar"
     - "Inception"
-*** Lyrebird can mimic sounds uncannily.
-laser guns, drills, hammers, camera shutters.
 *** Quantum inertia? Rocket propulsion? What?
 - https://www.reddit.com/r/compsci/comments/9kxiiu/what_new_thing_are_you_currently_learning_in_your/
 *** latency, throughput, and port usage information for instructions on recent intel microarchitectures
@@ -3115,10 +3198,6 @@ TurnKey GNU/Linux: 100+ free ready-to-use system images for virtual machines, th
   - It doesn't mean that Judaism allows lesbianism.
     There may be other rules somewhere else.
   - [[https://en.wikipedia.org/wiki/Homosexuality_and_Judaism][WP:Homosexuality and Judaism]]
-**** skin color chart
-
-- https://en.wikipedia.org/wiki/Von_Luschan%27s_chromatic_scale
-- https://en.wikipedia.org/wiki/Fitzpatrick_scale
 **** Quartz scheduler performance
   - http://airboxlab.github.io/performance/scalability/scheduler/quartz/2017/06/20/perf_tuning_quartz.html
   - https://www.ebayinc.com/stories/blogs/tech/performance-tuning-on-quartz-scheduler/
@@ -3166,9 +3245,6 @@ Spectacle.
   - What is a general ledger?
     - A general ledger is the concatenation/combination/summation of several subledgers.
 - Are there open source enterprise accounting systems?
-*** <2018-10-28> Systemd programmers are not competent enough for what they are doing.
-- https://blog.erratasec.com/2018/10/systemd-is-bad-parsing-and-should-feel.html
-  - https://www.reddit.com/r/programming/comments/9rtm1f/systemd_is_bad_parsing_and_should_feel_bad/
 *** Why are we so angry?
 - https://www.nhs.uk/conditions/stress-anxiety-depression/about-anger/
   - "being treated unfairly and feeling powerless to do anything about it"
@@ -3176,8 +3252,6 @@ Spectacle.
       Does fairness even exist?
 - https://psychcentral.com/blog/angry-all-the-time-for-no-reason-this-might-be-why/
   - 'Anger also “stems from wanting to control what is outside of us,” said Michelle Farris, LMFT, a psychotherapist in San Jose, Calif.'
-*** Genetics is the biggest factor in how far we can build our body
-- https://www.quora.com/Is-it-possible-for-a-skinny-guy-who-eats-trains-and-does-everything-right-to-get-Chris-Evans%E2%80%99-large-pecs-and-overall-muscular-look-If-so-how-long-Im-just-starting
 *** FOSS alternative to SmartRecruiters?
 
 https://blog.capterra.com/top-8-freeopen-source-applicant-tracking-software-solutions/
@@ -3192,29 +3266,6 @@ Yang legal (apa benar mudah?):
 Yang ilegal:
 - bos preman
 - rumah bordil
-*** Brain study, psychedelics, and anesthetics
-We still don't know how psychedelics and anesthetics work.
-*** Distributed systems
-
-**** Why users don't use distributed systems
-
-- [[http://highscalability.com/blog/2018/8/13/what-do-you-believe-now-that-you-didnt-five-years-ago.html][highscalability.com: What do you believe now that you didn't five years ago?]]
-  - "Decentralized systems will continue to lose to centralized systems until there's a driver requiring decentralization to deliver a clearly superior consumer experience."
-    - Users don't care.
-      They want software to just work.
-
-**** YaCy-related
-
-- [[https://loklak.org/][Loklak Search - Distributed Open Source Search for Twitter and Social Media with Peer to Peer Technology]]
-- [[https://chat.susi.ai/][SUSI.AI Chat - Open Source Artificial Intelligence]]
-- https://www.pcworld.com/article/245414/yacy_its_about_freedom_not_beating_google.html
-
-**** Freedom pack?
-
-- We should make a "freedom pack": an installer of essential free/libre open-source distributed-web applications.
-  The pack might contain things like yacy.net, matrix.org, riot.im.
-  - Why stop there? Why not make free/libre distributed operating system with all those goodies preinstalled?
-    - https://en.wikipedia.org/wiki/Distributed_operating_system
 *** Java
 
 - http://tech.jonathangardner.net/wiki/Why_Java_Sucks#Speaking_of_the_JVM...
@@ -3297,62 +3348,10 @@ Random sampling of actors.
   - 2018-09-08: Too bad there is no clear way for android to charge while OTG (hosting) USB.
     Otherwise phones could kill netbooks.
   - 2018-09-08: a problem: can't close session with android keyboard (requires a physical keyboard plugged in via OTG USB)
-*** Living in the 21th century? Rejecting reality?
-   :PROPERTIES:
-   :CUSTOM_ID: rejecting-reality
-   :END:
-
-In year 1000 AD who would have thought that 1000 years later we would have AI deepfakes,
-human sex change (sex reassignment surgery, hormone therapy),
-and what else reality-bending technologies we have.
-
-In 2018 those technologies aren't perfect.
-We can see deepfake artifacts.
-We can tell apart transsexuals from their hips.
-Maybe in the future those technologies will be perfected.
-Maybe in the future people can be whoever they want to be.
-"You are who you want to be" is getting more literal.
-
-When that time comes, we will have more respect for philosophers.
-If everything is easy to fake, then what is real, and how do we know it's real?
-If everything is easy to fake, then what can be taken as proof in court?
-What really exists?
-If a man can easily become a woman, and a woman can easily become a man, then what does it mean to be a man/woman?
-Do ID cards still make sense if you are immortal and you change your identity every 6 months?
-Technology will force us to deal with ontology and epistemology.
-
-Reality discontents humans.
-We work hard to deceive our senses so that we can escape reality.
-We try to make imagination real, and make reality irrelevant.
-The Matrix is getting real.
-
-**** Data, customers, and reality
-- https://www.inc.com/business-insider/amazon-founder-ceo-jeff-bezos-customer-emails-forward-managers-fix-issues.html
-  - "If all his [Bezos's] data says one thing and a few customers say something else, he believes the customers."
 *** Ethics and the workforce
-
-  - [[https://hackernoon.com/where-are-the-programmers-who-give-a-shit-87f859f13f75][Where are the programmers who give a shit? -- Hacker Noon]]
-
-    - [[https://80000hours.org/2015/08/what-are-the-10-most-harmful-jobs/][What are the 10 most harmful jobs? - 80,000 Hours]]
-
-      - Not everyone agrees. See the comment section.
-
 - [[https://www.econlib.org/library/Enc/MarketforCorporateControl.html][Market for Corporate Control -- Econlib]]
 
   - "Markets discipline producers by rewarding them with profits when they create value for consumers and punishing them with losses when they fail to create enough value for consumers."
-
-- Find a high-social-impact job suitable for you: [[https://80000hours.org/career-quiz/#/][Get social impact career ideas - 80,000 Hours]]
-
-  - I don't understand the recommendations.
-
-- [[https://80000hours.org/career-guide/most-pressing-problems/][How to find the world's most pressing problems]]
-- [[https://80000hours.org/career-guide/personal-fit/][The evidence on how to find the right career for you - 80,000 Hours]]
-- [[https://80000hours.org/career-guide/how-to-be-successful/][Evidence-based advice on how to be successful in any job - 80,000 Hours]]
-
-Example of federated/decentralized social networks:
-
-- [[https://medium.com/@rxpvh2000/where-are-the-programmers-who-give-a-shit-d27ad2ef24fc][Kari Nordmann's comment]]:
-  "Explore federated (decentralized) social networks (Mastodon, diaspora*, Friendica, Hubzilla, GNU Social, Socialhome, Pleroma, GangGo) "
 **** Tech giant ethical issues
 
 - Bezos Amazon worker condition?
@@ -3376,6 +3375,9 @@ Example of federated/decentralized social networks:
     These jobs are equally honorable as high IQ jobs are.
     Low IQ isn't an insult.
     Everyone is different.
+*** Data, customers, and reality
+- https://www.inc.com/business-insider/amazon-founder-ceo-jeff-bezos-customer-emails-forward-managers-fix-issues.html
+  - "If all his [Bezos's] data says one thing and a few customers say something else, he believes the customers."
 *** <2018-09-17> Open source Heroku/PaaS/dashboard alternative?
 We don't even know what such things are called.
 
@@ -3486,8 +3488,6 @@ Auto-reject people who don't read the job description.
 **** Personality-based hiring doesn't work?
 What are these trying to say?
 - https://www.clomedia.com/2012/03/07/the-problem-with-personality-based-hiring/
-*** <2018-10-28> Current objectivist definition of life: "self-sustaining chemical system capable of Darwinian evolution"
-- from "How to Spot an Alien, According to NASA!" https://www.youtube.com/watch?v=pbZ2MFAbGrk
 *** Learning languages
 **** Cantonese
 http://wikitravel.org/en/Cantonese_phrasebook
@@ -4538,25 +4538,12 @@ Google search result for niche gaming queries is typically full of Wikia article
 In the meantime, you can try [[http://www.shoutwiki.com/wiki/Main_Page][Shoutwiki]]
 (there's even a wiki named [[http://awa.shoutwiki.com/wiki/Anti-Wikia_Alliance][Anti-Wikia Alliance]]) or
 [[http://www.gamepedia.com/][Gamepedia]].
-** Ramble about programming
-Computers feel slow not because hardware sucks, but because programmers tell it to do stupid things.
-Ever-stronger hardware lets more programmers get away with writing ever-shittier software.
 ** Math, learning, and brain?
 https://dyske.com/paper/825
 "When I was in 7th grade, my math teacher answered an obvious but difficult question:
 Why do we have to study advanced math, if we are never going to use it in our adult lives?
 He said it’s because the same parts of our brains used for math can be used for many other things in life.
 With this short explanation, he utterly convinced me the importance of studying math, and of any other subjects for that matter."
-** Software, art?
-If software is a pure art, then its construction shouldn't be time-limited.
-
-A painter doesn't paint with deadlines.
-A painting is finished when the painter feels it's finished.
-
-However, a painter, when asked to paint a very specific painting, can estimate how many days it will take.
-** Finding other information sources
-- Finding other wikis
-  - [[https://en.wikipedia.org/wiki/List_of_wikis][WP:List of wikis]]
 ** Solar cells?
 - https://en.m.wikipedia.org/wiki/Valence_bond_theory
 - https://en.m.wikipedia.org/wiki/Artificial_photosynthesis
@@ -4588,9 +4575,6 @@ One Model To Learn Them All
 https://ai.google/research/
 https://ai.google/research/pubs/pub46203
 https://www.uni-obuda.hu/journal/Nguyen_Qafmolla_Richta_54.pdf
-** Research
-2014 "Writing Successful Grant Proposals from the Top Down and Bottom Up"
-https://us.sagepub.com/en-us/nam/writing-successful-grant-proposals-from-the-top-down-and-bottom-up/book236652
 * Everything after this doesn't belong in this page
 ** <2018-11-19> I changed my mind. Now I think most of this page is a waste of time.
 Thanks to John Stossel and Steve Patterson.
@@ -7450,22 +7434,3 @@ Does slapping a sharia label on a hotel increases its sales?
   - "In 2013, the Indonesian Ministry of Home Affairs found that at least 60 political dynasties exist throughout Indonesia."
   - "During Suharto’s regime, dynastic politics did not exist at the subnational level, except at the village level."
   - "Dynastic politics is a rational option for politicians who aspire to prolong and strengthen their grip on local politics."
-
-* Journalism-related
-** Blacklisted untrustworthy news sources
-According to https://www.vox.com/platform/amp/policy-and-politics/2018/10/1/17923178/washington-times-seth-rich-aaron-rich-trump-fox-news:
-- Washington Times
-- FOX News
-
-But Vox isn't entirely trustworthy either.
-
-VICE is questionable.
-https://www.reddit.com/r/KotakuInAction/comments/898na9/vice_gets_patreon_to_remove_naomi_wu_who_blasted/
-
-Wikipedia maintains a blacklist of untrustworthy news sources
- [fn::perennial sources with varying trustworthiness https://en.wikipedia.org/wiki/Wikipedia:Identifying_reliable_sources/Perennial_sources]
- [fn::https://en.wikipedia.org/wiki/Wikipedia:Wikipedia_Signpost/2018-12-24/Discussion_report]
-** Some journalist brutal murder cases
-Journalists have been brutally murdered in these areas:
-- Malta: Daphne Caruana Galizia was car-bombed in 2017. https://en.wikipedia.org/wiki/Daphne_Caruana_Galizia
-- Bulgaria: Viktoria Marinova was raped and murdered in 2018.
