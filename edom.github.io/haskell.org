@@ -215,6 +215,107 @@ foo :: Nonneg Int -> a
 -- with this, where _p is a proof that x is nonnegative:
 foo {_p : x >= 0} x = ...
 #+END_SRC
+* Interpreting Haskell without types: a strong temptation
+Suppose that we are writing a Haskell interpreter in Prolog,
+but we are too lazy to check the types,
+so we simply ignore all type annotations.
+Let's call the language HWOT (Haskell WithOut Types), pronounced like "what".
+What do we have then?
+A normal-order beta-reducer/term-rewriter?
+Something like the Pure language[fn::https://en.wikipedia.org/wiki/Pure_(programming_language)]?
+** The temptation is strong
+The temptation to ditch types is /strong/.
+
+Untagged unions are trivial in HWOT.
+We can write this in HWOT but not Haskell:
+#+BEGIN_EXAMPLE
+-- is_list :: a -> Bool
+is_list [] = True
+is_list (_:_) = True
+is_list _ = False
+
+-- size :: List a + Tree b -> Integer
+size [] = 0
+size (_:x) = 1 + size x
+size Leaf = 0
+size (Node _ lef rig) = size lef + size rig
+
+-- my_list :: [Integer + String]
+my_list = [1, 2, "three"]
+#+END_EXAMPLE
+
+Open functions (functions defined in several modules) are also trivial in HWOT.
+
+Overloading and multimethods are trivial if constructors are namespaced.
+#+BEGIN_EXAMPLE
+fun ModA.Con = 0
+fun ModB.Con = 1
+#+END_EXAMPLE
+
+We can make a function argument optional backward-compatibly.
+We can monkey-patch our programs, although this may lead to maintenance hell.
+#+BEGIN_EXAMPLE
+-- We have a function f : [a] -> Int.W
+
+f [] = 0
+f _ = 1
+
+-- Now we want to make the argument optional.
+
+-- We simply write this somewhere else.
+-- This doesn't even have to be in the same file that defines the original f.
+
+f Nothing = 0
+f (Just x) = f x
+#+END_EXAMPLE
+
+We can even write rewrite rules like GHC rewrite rules for stream fusion.
+The head of a pattern does not have to be a "constructor".
+#+BEGIN_EXAMPLE
+map f (map g x) = map (f . g) x
+#+END_EXAMPLE
+
+Data-type-a-la-carte become much shorter.
+No need for pattern synonyms.
+Parsing, location, trees-that-grow, everything becomes much shorter.
+#+BEGIN_EXAMPLE
+eval (Add x y) = eval x + eval y
+
+-- define in other file
+
+eval (Neg x) = - x
+
+-- data Loc a = MkLoc FilePath Int Int a
+-- parse :: String -> Loc Exp
+
+-- Simply add this anywhere.
+eval (MkLoc _ _ _ e) = eval e
+#+END_EXAMPLE
+
+Unsolved problems: type classes.
+
+Type classes are replaced with implicit first arguments?
+
+Higher-order patterns may be too much to handle.
+They may break confluence[fn::https://en.wikipedia.org/wiki/Confluence_(abstract_rewriting)].
+#+BEGIN_EXAMPLE
+\forall f x . f (Just x) = f x
+#+END_EXAMPLE
+
+=1 + "a"= is not an error; it is a /value/ that reduces to itself.
+
+=1 / 0= is not an error; it is a /value/ that reduces to itself.
+
+If =f= is a "partial" function and =f x= is "undefined", then =f x= is not an error; it is a /value/ that reduces to itself.
+
+I think that type systems should be /separate/ from languages (that is, type systems should be Curry-style, not Church-style; that is, Erlang-Dialyzer-style, not Haskell-style).
+Users should be able to write their own type systems.
+But even an interpreter has an implicit type system.
+** Compiling HWOT to Haskell?
+1. Write "crazy" programs in HWOT.
+1. Translate it to Haskell.
+1. ???
+1. PROFIT
 * A mess; do not see
 ** Open ADTs (algebraic data types)
    :PROPERTIES:

@@ -1,19 +1,37 @@
 #+TITLE: Research
 #+DATE: 2017-07-22 00:00 +0700
 #+PERMALINK: /research.html
-* What is research?
+* Overview
+** What is research?
 "To research" is to search closely,
 and "to search" is to seek or wander.[fn::https://www.etymonline.com/word/research][fn::https://www.etymonline.com/word/search][fn::https://en.wikipedia.org/wiki/Research]
 
 To research is to accumulate knowledge.
 
 To research is to answer a research question or solve a research problem.
-* How do we research?
+
+Meta-research is research about research.[fn::https://en.wikipedia.org/wiki/Meta-research]
+
+Scientists and academics are researchers, but not always the other way around.
+** How do we research?
 This is how we do research:
 1. Think about an idea we are interested in.
 1. Find related publications.
 1. Summarize how those publications are related to our idea.
 1. Write our article.
+
+Ask "What questions should we ask?"
+
+Advice?[fn::https://cstheory.stackexchange.com/questions/2953/advice-on-good-research-practices]
+
+What is an ideal research process, in BPMN (Business Process Model Notation)?
+
+Researchers need something like a global version of a combination of Wikipedia and
+AirBnb's Knowledge Repo[fn::https://medium.com/airbnb-engineering/scaling-knowledge-at-airbnb-875d73eff091].
+
+Ask research questions, answer them, and collect them into living documents.
+** What is the best place to do research?
+Find the leading researcher, and go there?
 * Finding related publications
 ** How do we find related publications?
 There are some disparate systems.
@@ -26,6 +44,16 @@ Semantic Scholar is much richer than Google Scholar.
 Semantic Scholar enables us to find out who influences who, what cites what, and which papers are similar, and much more.
 It is the closest thing to my dream of having an artificial-intelligence that assists my research.
 It makes Google Scholar look like a dumb pile of data.
+A weakness of Semantic Scholar is that, as of 2019, its notion of "the same author" is somewhat lacking:
+sometimes it thinks "John Smith" and "J. Smith" are two different authors.
+
+What is Iris AI[fn::https://iris.ai]?
+
+Libraries?[fn::https://medium.com/a-wikipedia-librarian/youre-a-researcher-without-a-library-what-do-you-do-6811a30373cd]
+
+What is IGDORE?[fn::https://medium.com/@IGDORE/new-academia-a-safe-harbour-for-researchers-who-love-science-c4baa87c1ebe]
+
+Sometimes telephones may be necessary.[fn::https://academia.stackexchange.com/questions/73236/how-to-find-people-who-do-similar-research]
 
 Use Google to find papers.
 We may also add =filetype:pdf= to your query.
@@ -66,6 +94,21 @@ Thus it is important that people with similar interests know each other.
 
 <2018-10-02>
 Twitter is surprisingly good for computer science research?[fn::https://twitter.com/search?q=programming%20language%20research]
+
+Finding recent publications using academic search engines?
+
+I tested Google Scholar[fn::https://scholar.google.com/],
+Microsoft Academic[fn::https://academic.microsoft.com/],
+and Bielefeld Academic Search Engine (BASE)[fn::https://www.base-search.net/],
+using these queries: "partial evaluation", "optimal lambda".
+
+BASE can boost open-access documents.
+
+Are there academic metasearch engines / search aggregators?
+- https://www.llrx.com/2017/01/academic-and-scholar-search-engines-and-sources-2017/
+
+Why do different fields have different search engines?
+What is the difference between biology literature study, computer science literature study, and physics literature study?
 ** The problem of multiple authors
 Usually the last author is a supervisor, a professor, a research director, or something like that.
 Thus the true interest of the last author is /masked/.
@@ -74,10 +117,40 @@ A publication only truly reflects the interest of the first author.
 
 The first author contributes the most to the publication.
 ** How do we traverse citations?
-Why does a citer cite a citee?
+*** What is a citation?
+In the 15th century, "to cite" means "to summon".[fn::https://www.etymonline.com/word/cite]
+In 2018, "to cite" means, roughly, to hyperlink.
+
+In 2018, a citation is a /printable hyperlink/[fn::https://en.wikipedia.org/wiki/Hyperlink].
+Citations and hyperlinks serve the same purpose: /to link information/.
+We cite for the same reason we hyperlink.
+
+A citation is a reference to /external content/.
+
+A citation is a reference that is /too distracting to inline/.
+
+CiteSeer[fn::http://citeseerx.ist.psu.edu/index] is an automatic citation indexing system\cite{Giles1998CiteSeerAA}.
+*** Why do we cite?
+A citation indicates that the citing author thinks that the citee is somehow /related/ to the citer.
+
+Why do we cite?
 What is the relationship between a citer and a citee?
-The "Citation Typing Ontology"\cite{shotton2010cito} answers this.
-It was designed for biomedical research, but citations in other fields should not differ very much.
+One answer is that the citer cites the citee because the citee is interesting\cite{liu2013interestingness}.
+Another answer is implied by the Citation Typing Ontology (CiTO)\cite{shotton2010cito}, which was designed for biomedical research, but should also be applicable to other fields.
+Another answer is implied by a taxonomy of the motives of citing\cite{erikson2014taxonomy}.
+
+Citations may be fraudulent.
+Researchers are humans.
+*** Other points of view
+There are three points of view: the citer, the citee, and the reader.
+
+Most ideas are a sentence in first-order logic.
+Two sentences \(p\) and \(q\) are /compatible/ iff they don't contradict each other.
+They are compatible iff their conjunction is not false.
+
+How come there can be a case where we don't know the truth of \(p\) and we don't know the truth of \(q\) but we know that \(p \wedge q\) is false?
+
+The strength of a claim is determined by the /difference/ between the strongest /supporting/ argument and the strongest /opposing/ argument.
 ** How do we know the current sum of human knowledge?
 This is hard.
 I don't know.
@@ -91,7 +164,7 @@ Minimize the duplication of work.
 ** Which conference should we attend?
 The goal of attending a conference is to find people who share similar goals with us.
 Thus, we should not see what the conference is about, but /who/ attends the conference.
-* Where are expository works?
+** Where are expository works?
 [[https://mathoverflow.net/questions/15366/which-journals-publish-expository-work][MO 15366: Which journals publish expository work?]]
 
 These journals[fn::Expositiones mathematicae https://www.journals.elsevier.com/expositiones-mathematicae/]
@@ -100,7 +173,23 @@ contain expository works.
 Unfortunately they are Elsevier journals.
 
 Arxiv math history and overview[fn::https://arxiv.org/archive/math.HO]
-* Catching up quickly
+** How do we use journals?
+
+  - What are the journal article types?
+    What kinds of articles do journals publish?
+
+    - [[http://www.editage.com/insights/6-article-types-that-journals-publish-a-guide-for-early-career-researchers][Editage's six journal article types]]: original research; review article; clinical case study; clinical trial; perspective, opinion, and commentary; book review
+    - There are also letters, monographs, surveys, and retractions.
+
+* Summarizing publications
+** How do we read a research article?
+Read the title, the abstract, and then the conclusion.
+** How do we read a book?
+Do not read the entire book.
+
+Get an idea or a problem before touching the book.
+Find relevant parts in the table of contents.
+** How do we catch up quickly?
 An article is a diff.
 It is a patch.
 To understand the article, you need background knowledge.
@@ -109,6 +198,52 @@ We are weak in bootstrapping new people quickly.
 If you are in a lab, you can ask your professor to bootstrap you.
 
 If you are an independent researcher?
+
+Only read papers or books after you know what you are looking for.
+Don't read without reason.
+
+
+** How do we onboard newcomers faster?
+Write /living documents/ that summarize papers and provide directions.
+Let newcomers improve them.
+Living documents are perfect for expository works.
+
+Every research paper is a "delta" of knowledge, a "nugget", a "diff".
+ We need living documents that are the sum of those deltas.
+
+A possible problem: who are the authors of a collaborative living document?
+** How fast can we speed-read?
+
+  - [[https://www.scotthyoung.com/blog/2015/01/19/speed-reading-redo/][I Was Wrong About Speed Reading: Here are the Facts]]:
+    "anything above 500-600 words per minute is improbable without losing comprehension".
+
+* Writing
+** What computer document format should I write my research in?
+Write your content in Pandoc Markdown / Org Mode.
+Let Pandoc convert whatever format to HTML or LaTeX.
+
+Use MathJax if you need to typeset math on the Web.
+
+Stick to standard Web technology.
+For the reader, reading HTML pages has less friction than reading a PDF document.
+
+Use CSS to style the HTML.
+
+Why should we not follow my advice?
+Your institution probably incentivizes you to publish on famous journals, not on the Internet.
+This incentive scheme has to change for better science.
+Unfortunately you are not in the position to change it.
+It's frustrating.
+** How do researchers collaborate?
+[[https://gowers.wordpress.com/2009/01/27/is-massively-collaborative-mathematics-possible/][Timothy Gowers: Is massively collaborative mathematics possible?]]
+** How should we write?
+Slides, Simon Peyton-Jones, "How to write a great research paper: seven simple suggestions"[fn::https://www.cis.upenn.edu/~sweirich/icfp-plmw15/slides/peyton-jones.pdf].
+Another copy of those slides is at Microsoft[fn::https://www.microsoft.com/en-us/research/academic-program/write-great-research-paper/].
+** What writing medium should we use?
+Researchers should collaborate writing living documents instead of writing isolated papers.
+We need something like Wikipedia but for research.
+We need a goal-oriented/task-oriented Wikipedia.
+Wikiversity might be close to that.
 * Academic journal publishing reform
   :PROPERTIES:
   :CUSTOM_ID: academic-journal-publishing-reform
@@ -210,6 +345,10 @@ If you are an independent researcher?
 
   - https://academia.stackexchange.com/questions/19333/how-much-do-springer-verlag-authors-make-per-book-sold
 
+Springer makes no fucking sense:
+personally spending $39,000[fn::5 paper/work-day * $30/paper * 260 work-day/year = $39,000] per year just to read papers is just too fucking much for an average researcher.
+
+Publishers may be evil.[fn::https://www.theguardian.com/higher-education-network/2015/sep/04/academics-are-being-hoodwinked-into-writing-books-nobody-can-buy]
 ** Proposal for academic publishing reform: Separate peer review and physical dissemination
    :PROPERTIES:
    :CUSTOM_ID: proposal-for-academic-publishing-reform-separate-peer-review-and-physical-dissemination
@@ -267,52 +406,8 @@ Make a website for peer-reviewing articles.
 
 - [[https://en.wikipedia.org/wiki/Least_publishable_unit][Least publishable unit - Wikipedia]]
 - [[http://www.vegapublish.info/][Vega Academic Publishing System -- Blog]]: "Vega is laying a new foundation for online open access publishing."
-* Doing research better
-  :PROPERTIES:
-  :CUSTOM_ID: doing-research-better
-  :END:
-
-** Questions
-   :PROPERTIES:
-   :CUSTOM_ID: questions
-   :END:
-
-- How to research?
-
-  - Ask research questions, answer them, and collect them into living documents.
-  - Write.
-
-    - How should we write?
-
-      - Slides, Simon Peyton-Jones, [[https://www.cis.upenn.edu/~sweirich/icfp-plmw15/slides/peyton-jones.pdf]["How to write a great research paper: seven simple suggestions"]].
-        There is [[https://www.microsoft.com/en-us/research/academic-program/write-great-research-paper/][a copy on Microsoft]].
-
-    - What writing medium should we use?
-
-      - Researchers should collaborate writing living documents instead of writing isolated papers.
-        We need something like Wikipedia but for research.
-        We need a goal-oriented/task-oriented Wikipedia.
-        Wikiversity might be close to that.
-
-  - Finding recent publications using academic search engines
-
-    - I tested these using these queries: "partial evaluation", "optimal lambda"
-
-      - [[https://scholar.google.com/][Google scholar]]
-      - [[https://academic.microsoft.com/][Microsoft academic]]
-      - [[https://www.base-search.net/][Bielefeld academic search engine]] boosts open-access documents.
-
-    - aggregators
-
-      - https://www.llrx.com/2017/01/academic-and-scholar-search-engines-and-sources-2017/
-
-        - Different fields have different search engines.
-          Why?
-          What is the difference between biology literature study, computer science literature study, and physics literature study?
-
-    - Are there academic metasearch engines / search aggregators?
-
-- Reading academic publications
+* Unorganized related things
+** Reading academic publications
 
   - The input is the publication and some effort.
   - What is the output?
@@ -340,16 +435,7 @@ Make a website for peer-reviewing articles.
   - [[https://www.phdstudies.com/article/What-Are-The-Best-Countries-For-Scientists/][phdstudies.com: What are the best countries for scientists?]]
   - [[https://en.wikipedia.org/wiki/OECD_Better_Life_Index][OECD better life index]]
 
-- What is the best place to do research?
-
-  - Find the leading researcher, and go there?
-
-- What is meta-research?
-
-  - Meta-research is research about research.
-    See also [[https://en.wikipedia.org/wiki/Meta-research][Wikipedia: Meta-research]].
-
-- How should I structure my research?
+** How should I structure my research?
 
   - Structure your research as a hierarchy of questions and answers.
     Every question may spawn child questions and answers.
@@ -364,43 +450,7 @@ Make a website for peer-reviewing articles.
 
     - Questions drive research.
 
-- How do we onboard newcomers faster?
-
-  - Write /living documents/ that summarize papers and provide directions.
-    Let them improve it.
-    Living documents are perfect for expository works.
-
-    - Every research paper is a "delta" of knowledge, a "nugget", a "diff".
-      We need living documents that are the sum of those deltas.
-    - A possible problem: who are the authors of a collaborative living document?
-
-- What computer document format should I publish my research in?
-
-  - Stick to standard Web technology.
-    Write your content in Markdown.
-    Use MathJax if you need to typeset math on the Web.
-    Let a program convert it to HTML.
-    Use CSS to style your document.
-  - Why should I stick to those?
-
-    - For the reader, reading HTML pages has less friction than reading a PDF document.
-
-  - Why should I not follow your advice?
-
-    - Your institution probably incentivizes you to publish on famous journals, not on the Internet.
-      This incentive scheme has to change for better science.
-      Unfortunately you are not in the position to change it.
-      It's frustrating.
-
-- How do we use journals?
-
-  - What are the journal article types?
-    What kinds of articles do journals publish?
-
-    - [[http://www.editage.com/insights/6-article-types-that-journals-publish-a-guide-for-early-career-researchers][Editage's six journal article types]]: original research; review article; clinical case study; clinical trial; perspective, opinion, and commentary; book review
-    - There are also letters, monographs, surveys, and retractions.
-
-- How should we organize information?
+** How should we organize information?
 
   - It depends on how the information is going to be retrieved.
   - [[http://thevisualcommunicationguy.com/2013/07/20/the-five-and-only-five-ways-to-orgaize-information/][The only five ways to organize information]]:
@@ -408,12 +458,7 @@ Make a website for peer-reviewing articles.
   - [[https://en.wikipedia.org/wiki/Personal_knowledge_management][Wikipedia: Personal knowledge management]]
   - [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.164.320&rep=rep1&type=pdf][Better to organize personal information by folders or by tags?]]
 
-- How fast can we speed-read?
-
-  - [[https://www.scotthyoung.com/blog/2015/01/19/speed-reading-redo/][I Was Wrong About Speed Reading: Here are the Facts]]:
-    "anything above 500-600 words per minute is improbable without losing comprehension".
-
-- Journals
+** Journals
 
   - https://mathoverflow.net/questions/42/which-are-the-best-mathematics-journals-and-what-are-the-differences-between-th
   - What is [[https://en.wikipedia.org/wiki/Impact_factor][impact factor]]?
@@ -423,34 +468,23 @@ Make a website for peer-reviewing articles.
     - How do we find the 10% that is not crap?
     - [[https://math.stackexchange.com/questions/1071384/effective-research-notes][How to make effective research notes]]
 
-- How do researchers collaborate?
-
-  - [[https://gowers.wordpress.com/2009/01/27/is-massively-collaborative-mathematics-possible/][Timothy Gowers: Is massively collaborative mathematics possible?]]
-
-- Exploration
+** Exploration
 
   - https://ibmathsresources.com/maths-ia-maths-exploration-topics/
   - http://www.dpcdsb.org/NR/rdonlyres/FE43C622-9FA0-4385-8E19-0C539513295E/133918/ListofPotentialTopicsfortheExploration1.pdf
 
-- How does one do research?
-
-  - Ask "What questions should we ask?"
-  - [[https://cstheory.stackexchange.com/questions/2953/advice-on-good-research-practices][CST SE 2953: Advice on good research practices]]
-  - What is an ideal research process, in BPMN (Business Process Model Notation)?
-  - Scientists/researchers/academics need something like a global version of a combination of Wikipedia and [[https://medium.com/airbnb-engineering/scaling-knowledge-at-airbnb-875d73eff091][AirBnb's Knowledge Repo]]
-
-- How do I keep myself up-to-date? How do I keep myself in the loop?
+** How do I keep myself up-to-date? How do I keep myself in the loop?
 
   - Which mailing lists should I join?
   - Which blogs, websites, or people should I follow?
   - [[https://mobile.twitter.com/amermathsoc][Twitter of AMS (American Mathematical Society)]]
 
-- How do we know if something is legitimate or bullshit?
+** How do we know if something is legitimate or bullshit?
 
   - See [[http://callingbullshit.org/][callingbullshit.org]]
   - [[http://callingbullshit.org/tools/tools_legit.html][How do you know a paper is legit?]]
 
-- What tools might help my research?
+** What tools might help my research?
 
   - [[https://learn-anything.xyz/][learn-anything.xyz]] is a community-curated mind map.
   - Google's [[https://books.google.com/talktobooks/][talk to books]].
@@ -463,19 +497,6 @@ Make a website for peer-reviewing articles.
 
     - arxiv.org
     - vixra.org
-
-- Is academia broken? Is scientific research broken? What is being done to fix them?
-
-  - Academic journal publishing reform
-
-** On reading papers
-   :PROPERTIES:
-   :CUSTOM_ID: on-reading-papers
-   :END:
-
-Only read papers or books after you know what you are looking for.
-Don't read without reason.
-
 ** Open access journals
    :PROPERTIES:
    :CUSTOM_ID: open-access-journals
@@ -487,16 +508,7 @@ http://www.mdpi.com/journal/universe
 
 https://benthamopen.com/PHY/home/
 
-** Others
-   :PROPERTIES:
-   :CUSTOM_ID: others
-   :END:
-
-- [[https://scholarlykitchen.sspnet.org/2018/03/15/a-comment-on-klein-et-als-comparing-articles-to-preprints/][Peer review fails to prevent publication of paper with unsupported claims about peer review]]
-
-  - I read somewhere I forgot, that that is not the point of peer review. What is peer review meant to accomplish?
-
-- How do we work with proofs?
+** How do we work with proofs?
 
   - Understanding and simplifying existing proofs
   - Proving unproved conjectures, lemmas, and theorems
@@ -523,39 +535,37 @@ https://benthamopen.com/PHY/home/
     - Gödel's incompleteness theorems
     - Gödel's completeness theorems
 
-- Can we outsource master-level or doctorate-level research to Fiverr or Amazon Mechanical Turk?
-  Can we crowdsource it?
+** Can we crowdsource/outsource master-level or doctorate-level research to Fiverr or Amazon Mechanical Turk?
+I think no.
+Thinking doesn't scale.
+Some data collection may scale.
 
-  - I think no. Thinking doesn't scale. Some data collection may scale.
+Trying to scale the thinking may invite crackpots?
 
-    - Trying to scale the thinking may invite crackpots.
+** Can we transform or break a doctorate-level research problem into pieces that amateurs can work on?
+Is the difficulty in mathematics essential or accidental?
+For example, accidental complexity is due to bad notation, bad presentation, bad writing.
 
-- Can we transform or break a doctorate-level research problem into pieces that amateurs can work on?
+** What are the different kinds of academic meetings?
+Which is the most common type?
+Which one should I attend?
 
-  - Is the difficulty in mathematics essential or accidental?
+"Conference" comes from Latin "con-" ("together") and "ferō" ("I bear")[fn::https://en.wiktionary.org/wiki/conference]
 
-    - accidental complexity is due to bad notation, bad presentation, bad writing
+"Colloquium" comes Latin "co-" ("together") and "loquor" ("to talk")[fn::https://en.wiktionary.org/wiki/colloquium]
 
-- What are the different kinds of academic meetings?
+seminar
 
-  - Which is the most common type?
-  - Which one should I attend?
-  - conference
+congress;
+[[https://en.wikipedia.org/wiki/International_Congress_of_Mathematicians][Wikipedia: International Congress of Mathematicians]]
 
-    - from Latin "con-" ("together") and "ferō" ("I bear"), [[https://en.wiktionary.org/wiki/conference][Wiktionary]]
+See also [[https://english.stackexchange.com/questions/20924/whats-the-difference-between-colloquium-seminar-and-possibly-other-such-w][English SE 20924]].
 
-  - colloquium
+"Symposium" comes from a Greek word meaning "to drink together".[fn::https://en.wikipedia.org/wiki/Symposium]
 
-    - from Latin "co-" ("together") and "loquor" ("to talk"), [[https://en.wiktionary.org/wiki/colloquium][Wiktionary]]
-
-  - seminar
-  - congress
-
-    - [[https://en.wikipedia.org/wiki/International_Congress_of_Mathematicians][Wikipedia: International Congress of Mathematicians]]
-
-  - See also [[https://english.stackexchange.com/questions/20924/whats-the-difference-between-colloquium-seminar-and-possibly-other-such-w][English SE 20924]].
-
-- Why is literature study important?
+What is the difference between conference, congregation, symposium, seminar?
+Why can't we just use the word "meeting" for all of them?
+** Why is literature study important?
 
   - It saves time.
 
@@ -563,24 +573,12 @@ https://benthamopen.com/PHY/home/
     - Skip dead ends.
     - Build on other people's work.
 
-- Taxonomy: How should we structure this site?
-
-  - Dilemma
-
-    - The ideal structure is tree.
-
-      - Each vertex is a page in this website.
-      - Each vertex should not have more than 7 children.
-
-    - The practical structure is graph.
-
-  - [[https://thepantologist.com/classifying-all-human-knowledge/][Classifying all human knowledge]]
-  - [[https://en.wikipedia.org/wiki/Figurative_system_of_human_knowledge][WP:Figurative system of human knowledge]]
-  - [[https://www.theatlantic.com/technology/archive/2013/10/-wikipediaproblems-how-do-you-classify-everything/280178/][#WikipediaProblems: How Do You Classify Everything?]]
-
-    - SUMO (Suggested Upper Merged Ontology)
-
-- Undigested
+** How should we structure human knowledge?
+- [[https://thepantologist.com/classifying-all-human-knowledge/][Classifying all human knowledge]]
+- [[https://en.wikipedia.org/wiki/Figurative_system_of_human_knowledge][WP:Figurative system of human knowledge]]
+- [[https://www.theatlantic.com/technology/archive/2013/10/-wikipediaproblems-how-do-you-classify-everything/280178/][#WikipediaProblems: How Do You Classify Everything?]]
+  - SUMO (Suggested Upper Merged Ontology)
+** Undigested
 
   - [[https://books.google.com/talktobooks/][Google talk to books]]
   - SQ3R method https://academia.stackexchange.com/questions/631/how-to-efficiently-read-mathematically-and-theoretically-dense-books-in-stem-fie
@@ -589,34 +587,31 @@ https://benthamopen.com/PHY/home/
   - https://www.quora.com/Is-doing-a-PhD-worth-it-these-days
   - http://connectedresearchers.com/online-tools-for-researchers/
 
-- Scientific method
+** Scientific method?
 
   - Scientific method is a combination of Ask, Observe, Guess, Test.
   - [[https://en.wikipedia.org/wiki/Scientific_method][WP:Scientific method]]
 
 - [[https://en.wikipedia.org/wiki/Lists_of_unsolved_problems][WP:List of unsolved problems]]
-- publishers that fail the SCIGen test
+** Failures?
+Publishers that fail the SCIGen test?
 
-  - Lupine Publishers https://www.sciencealert.com/how-kim-kardashian-inventor-bitcoin-teamed-up-write-scientific-paper-satoshi-nakamoto-predatory-journals
+Lupine Publishers[fn::https://www.sciencealert.com/how-kim-kardashian-inventor-bitcoin-teamed-up-write-scientific-paper-satoshi-nakamoto-predatory-journals]
 
-- How to study everything?
+Other failures?
 
-  - Begin with ontology:
+"Peer review fails to prevent publication of paper with unsupported claims about peer review"[fn::https://scholarlykitchen.sspnet.org/2018/03/15/a-comment-on-klein-et-als-comparing-articles-to-preprints/]
 
-    - What exists?
-    - How do they relate?
-
+I read somewhere I forgot, that that is not the point of peer review.
+What is peer review meant to accomplish then?
+** How to study everything?
+Begin with ontology.
+What exists?
+How do they relate?
+** Open-access journals?
 - [[https://en.wikipedia.org/wiki/List_of_open_access_journals][WP:List of open-access journals]]
 - [[https://en.wikipedia.org/wiki/Body_of_knowledge][WP:Body of knowledge]]
-- What is a symposium?
-
-  - From Greek meaning "to drink together".
-
-    - https://en.wikipedia.org/wiki/Symposium
-
-  - What is the difference between conference, congregation, symposium, seminar?
-    Why can't we just use the word "meeting" for all of them?
-* What?
+* Unorganized not-too-related things?
 ** How do we get research grants?
 What are the laws and rules?
 
