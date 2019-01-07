@@ -1,14 +1,195 @@
 #+TITLE: Trying to prove P neq. NP
-#+DATE: 2018-04-28 22:30 +0700
+#+DATE: 2017-06-29 22:40 +0700
 #+PERMALINK: /pnptry.html
 #+MATHJAX: yes
 * Note
-This is a proof /attempt/, not a proof.
+Alternative title: computational complexity theory.
 
-Last update was 2018-04-28.
-** Note: The conversion of this page from Markdown to Org Mode using Pandoc may introduce some errors, beside my errors that are already in the page before conversion.
-* TODO Understand the problem
-* Finding an search problem that forces a DTM to traverse the search space
+This page is utterly broken.
+Do not see.
+
+Last update was 2019-01-04.
+
+The conversion of this page from Markdown to Org Mode using Pandoc may introduce some errors,
+beside my errors that are already in the page before conversion.
+
+By "complexity theory", we mean "computation-complexity theory", that is, a theory about the complexity of computations.
+
+\cite{hromkovic2017one}
+* Research questions
+Why do problems have different difficulties?
+
+The P vs NP problem /itself/ is a formula like \( NP - P = x\) or \( \exists p : NP(p) \wedge \neg P(p) \).
+What is the complexity of the P vs NP problem itself?
+Now we go full cycle.
+Isn't this somewhat meta?
+* A machine model: nondeterministic simplified x86-compatible processor with unbounded external tape
+Does this concreteness help, or does it confuse us even further?
+
+Every instruction takes the same amount of time.
+Totally sequential execution.
+No speculative execution.
+Not superscalar.
+No pipelining.
+
+Imagine a x86-compatible processor connected to a tape controller with an unbounded tape.
+We can imagine such machine as a Turing machine.
+
+Memory-mapped tape registers:
+TC is tape control register (write-only; 1 = move tape right, -1 = move tape left).
+TD is tape data register.
+We assume that every tape operation takes the same amount of time as one processor instruction does.
+#+BEGIN_EXAMPLE
+mov dword [TC], 1 ; move tape head right
+inc dword [TD] ; add 1 to the content of the tape cell under the tape head
+#+END_EXAMPLE
+
+What would nondeterministic x86 assembly look like?
+We add something like McCarthy's "amb" operator to x86 assembly.
+We add two magical instructions: AMB and FAIL.
+When a machine executes an AMB instruction, a /parallel universe/ is created for each possible value of the operand.
+When a machine executes a FAIL instruction, the parallel universe containing that machine is destroyed.
+In the following example fragment, the instruction "AMB eax" creates \(2^{32}\) parallel universes.
+#+BEGIN_EXAMPLE
+; create 2^32 parallel universes:
+; one with eax=0, another with eax=1, and so on
+AMB eax
+
+cmp eax, 123
+je .ok
+
+; destroy the universe we are in, if eax is not 123
+FAIL
+
+; accept, if eax is 123
+.ok:
+hlt
+#+END_EXAMPLE
+
+We can also add AMB and FAIL to an abstract procedural language.
+
+P vs NP implicitly depends on the machine.
+There are many Turing machines.
+** Why do we use Turing machines instead of lambda calculus when discussing computational complexity?
+Because we don't know a cost model for lambda-calculus.[fn::https://cstheory.stackexchange.com/questions/23798/p-and-np-classes-explanation-through-lambda-calculus]
+** rewriting system
+- What does it mean that a rewriting system /computes/ a function?
+- Given more time, a rewriting system can compute more functions.
+- A Turing machine is a rewriting system.
+- What is the difference between a rewriting system and a formal system?
+- What is the difference between a formal system and a formal language?
+** Computation graph?
+  - computation graph
+    - ? $M$ /simulates/ $N$ iff a subgraph of $M$ is isomorphic to $N$.
+      - $T$ is the type of terms.
+      - $M$ is the semantic function.
+    - Shortcut
+      - The /shortcut/ of $A$ is $B$ where
+        $$
+          B(x,y) = \text{\\(x\\) is initial, \\(y\\) is terminal, and \\(x\\) reaches \\(y\\).}
+          $$
+        - $A$ should be acyclic.
+      - Alternative names for shortcut:
+        [[https://en.wikipedia.org/wiki/Disintermediation][WP:Disintermediation]],
+        immediation,
+        curtailment,
+        shortening,
+        abridgement.
+      - Shortcutting is idempotent:
+        the shortcut of the shortcut is the shortcut itself.
+
+  - What should we name this sequence?
+
+    - The sequence: $x, f(x), f(f(x)), \ldots, f^n(x), \ldots$
+
+      - $x$ is the initial state.
+      - $f$ is the next-state function.
+
+    - Trace? History? Path? Computation path?
+    - [[https://en.wikipedia.org/wiki/Iterated_function][WP:Iterated function]]
+    - [[https://en.wikipedia.org/wiki/Iteration][WP:Iteration]]
+** next-state relation
+  - The /next-state relation/ $N$ is obtained from $T$
+    by making a loop for each isolated vertex.
+    For each $x$ in the domain of $T$, $N(x,y) = T(x,y)$.
+    For each outside $x$, $N(x,x)$.
+  - The computed relation of $T$ is $N^\infty = N^\infty \circ N$.
+  - The problem computed by the graph is the infinite self-composition of the graph's next-state function.
+    Such problem is the smallest $X$ that satisfies $N \circ X = X$.
+    It is the least fixed point of $F$ where $F(X) = N \circ X$.
+    The nth self-composition of $N$ is $N^n = E \circ N^{n-1}$.
+  - An /infinite composition/ $N^\infty$ is a relation satisfying $N^\infty \circ N = N^\infty$.
+    The empty relation satisfies this.
+    The other one is nontrivial.
+** Problem computed by a graph
+A graph G /computes/ the problem
+$P(G) = \{ (x,y) ~|~ \text{\\(y\\) is the nearest terminal vertex reachable from \\(x\\)} \}$.
+Because the graph is loopless, there is no path from a vertex to itself, a vertex is not reachable from itself.
+
+#+BEGIN_EXAMPLE
+    terminal(x) = not exists y : E(x,y)
+    reach(x,y) = E(x,y) vee exists m ( reach(x,m) wedge reach(m,y) )
+    adist(x,y,1) = E(x,y)
+    adist(x,y,n) = exists m exists k : dist(x,m,k) wedge dist(m,y,n-k)
+    dist(x,y,n) = adist(x,y,n) wedge neg exists m < n : adist(x,y,m)
+#+END_EXAMPLE
+
+Configuration graph as formal system?
+Configuration /is/ well-formed formula.
+$E(a,b)$ /is/ iff $a' \vdash b'$.
+Initial state /is/ axiom.
+$F \models P$
+* Philosophically-sound definitions?
+** Philosophy
+Oded Goldreich has some interesting ideas[fn::http://www.wisdom.weizmann.ac.il/~oded/cc-over.html]:
+- Complexity theory offers interesting philosophical perspectives.
+- Complexity theory relates knowledge, randomness, and secret.
+- "importance of representation"
+- "knowledge" from complexity theory perspective
+- "Approximation is a natural relaxation of various computational problems"
+** Finitism?
+Can we formulate computational complexity theory in a philosophically sound manner, with finitism, without assuming infinite sets?
+What is a problem then, if not an infinite set?
+What is a function then, if domains and codomains must not be infinite?
+** Do not confuse
+Do not confuse a /problem/ and an /algorithm/ that solves that problem.
+Example:
+Consider $p(x)$ that
+wastes $2^{|x|}$ steps,
+and then returns the leftmost bit of $x$.
+Thus $p \in \ExpTime$,
+but $\Search(p) \in \Time(O(1))$,
+because every string that begins with $1$ satisfies $p$,
+and we can just hardcode any of those strings in the solution of $\Search(p)$.
+* Relationship between a decision problem and its corresponding search problem
+Every decision problem has a corresponding search problem.
+If we can solve this question, then we can solve pnp:
+Is there a decision problem in P whose corresponding search problem is not in P?
+Find a decision problem in P whose search problem is in EXP but not in P.
+Is there a corresponding search problem for which generate-and-test is optimal?
+Suppose yes.
+Suppose no.
+Which of them leads to contradiction?
+
+There are fast decision problems whose corresponding search problems are fast.
+Example: determining whether a bit string contains any one-bit.
+Both its decision and search problem is fast.
+
+Decision versus Search
+2010
+https://cseweb.ucsd.edu/~mihir/cse200/decision-search.pdf
+
+M. Bellare and S. Goldwasser. The complexity of decision versus search. SIAM J. on
+Computing, Vol. 23, No. 1, February 1994
+
+
+Is there an algorithm that translates an optimal solution of a decision problem to an optimal solution of the corresponding search problem? I doubt it.
+* Attempts
+** Questions
+Can we apply pigeonhole principle to the computation graph?
+
+What problems are equivalent to the P vs NP problem?
+** Finding an search problem that forces a DTM to traverse the search space
 Let \(
 \newcommand\SetOutcome{\mathbb{F}}
 \newcommand\SetBit{\mathbb{B}}
@@ -83,57 +264,11 @@ This is such algorithm:
 1. $D$ optimally computes $\text{sat}(p,n)$ in $O(2^n \cdot n^k)$ time.
 
 If that conjecture is true, then $\TimeP \neq \TimeNP$.
-** Equivalent question: Is there a problem whose optimal solution is exhaustive search?
+*** Equivalent question: Is there a problem whose optimal solution is exhaustive search?
 - [[https://www.cs.cmu.edu/~ryanw/improved-algs-lbs2.pdf][2010 Ryan Williams "Improving Exhaustive Search Implies Superpolynomial Lower Bounds"]]:
   "The P vs NP problem arose from the question of whether exhaustive search is necessary for problems
   with short verifiable solutions."
-* Questions
-Can we apply pigeonhole principle to the computation graph?
-
-What problems are equivalent to the P vs NP problem?
-* Plan
-   :PROPERTIES:
-   :CUSTOM_ID: plan
-   :END:
-
-- Reading list
-
-  - [[https://en.wikipedia.org/wiki/Natural_proof][WP: Natural proof]]
-  - approaches:
-
-    - Fagin, Immerman, ...: descriptive complexity theory
-    - Mulmuley, Sohoni, ...: geometric complexity theory
-
-      - [[https://arxiv.org/abs/0709.0746][2007 Mulmuley and Sohoni, "Geometric Complexity Theory: Introduction"]]
-      - [[https://arxiv.org/abs/1305.7387][2013 Landsberg "Geometric Complexity Theory: an introduction for geometers"]]
-      - [[https://arxiv.org/abs/1509.02503][2015 Landsberg "An introduction to geometric complexity theory"]]
-      - [[https://www.cse.buffalo.edu//~regan/papers/pdf/Reg02MSFD.pdf][Kenneth W. Regan's "Understanding the Mulmuley-Sohoni Approach to P vs. NP"]]
-      - [[https://people.mpi-inf.mpg.de/~cikenmey/teaching/summer18/firstintrotogct/index.html][Christian Ikenmeyer's 2018 course]]
-
-  - [[http://michaelnielsen.org/polymath1/index.php?title=Deolalikar_P_vs_NP_paper][A clearing house for Deolalikar P vs NP paper]]
-
-- Undigested
-
-  - One-way function implies something about P vs NP?
-
-* Meta-research
-   :PROPERTIES:
-   :CUSTOM_ID: meta-research
-   :END:
-
-- Where are progress tracked?
-
-  - [[https://rjlipton.wordpress.com/2017/02/05/a-panel-on-p-vs-np/][2017 Richard J. Lipton and Kenneth W. Regan]]
-  - [[http://www.win.tue.nl/~gwoegi/P-versus-NP.htm][2016 Gerhard J. Woeginger]]
-  - [[http://blog.computationalcomplexity.org/2015/08/have-we-made-progress-on-p-vs-np.html][2015 Lance Fortnow and Bill Gasarch]]
-  - [[https://www.reddit.com/r/math/comments/1krrkx/what_progress_has_been_made_on_the_p_vs_np/][2014 reddit]]
-  - [[http://www.ncmis.cas.cn/kxcb/jclyzs/201204/W020120424627425387644.pdf][2009 Lance Fortnow "The status of the P versus NP problem"]]
-
-- What is the P vs NP problem?
-
-  - Official problem description: [[http://www.claymath.org/sites/default/files/pvsnp.pdf][The P versus NP problem, by Stephen Cook, for the Clay Millennium Prize Problems]]
-
-* Another attempt?
+** Another attempt?
    :PROPERTIES:
    :CUSTOM_ID: another-attempt
    :END:
@@ -160,305 +295,7 @@ What problems are equivalent to the P vs NP problem?
   Suppose that a deterministic machine can solve $Sat(f,k)$ for all $f$ in $O(poly(k))$ time.
   (Can we apply pigeonhole principle to the configuration graph?)
 - Every predicate can be stated in disjunctive normal form.
-
-* Other people's works that may be related
-   :PROPERTIES:
-   :CUSTOM_ID: other-peoples-works-that-may-be-related
-   :END:
-
-- 2017-11-22 news about NEXP and ACC https://news.mit.edu/2017/faculty-profile-ryan-williams-1122
-- an explanation in English https://danielmiessler.com/study/pvsnp/
-- 2011 book "Why Philosophers Should Care About Computational Complexity" https://eccc.weizmann.ac.il/report/2011/108/
-* Circuit complexity
-- [[https://en.wikipedia.org/wiki/Circuit_complexity][WP:Circuit complexity]]
-** The shortest $n$-parameter boolean predicate equivalence class representative problem
-- Let $E_n$ be the set of all /Boolean $n$-expressions/.
-
-  - An /$n$-expression/ is an expression that has at most $n$ variables.
-  - Formally, the syntax of $E_n$ is:
-
-    - Constant expressions:
-
-      - $0 \in E_n$.
-      - $1 \in E_n$.
-
-    - Variable expressions:
-
-      - If $k \in \Nat$ and $0 \le k < n$, then $x_k \in E_n$.
-
-        - The expression $x_k$ is purely symbolic.
-
-          - The $x$ does not mean anything.
-
-    - If $\alpha \in E_n$, then $(\neg \alpha) \in E_n$.
-    - If $\alpha \in E_n$ and $\beta \in E_n$, then $(\alpha \wedge \beta) \in E_n$.
-    - If $\alpha \in E_n$ and $\beta \in E_n$, then $(\alpha \vee \beta) \in E_n$.
-    - Nothing else is in $E_n$.
-
-- Let the /size/ of a formula be the number of operators in it.
-
-  - We write $C(\phi)$ for the size of the formula $\phi$.
-  - We say that $\alpha$ is /smaller/ than $\beta$ iff $C(\alpha) < C(\beta)$.
-  - Formally we define $C(\phi)$ as:
-    \begin{align*}
-    C(\neg \alpha) &= 1 + C(\alpha),
-    \\
-    C(\alpha \wedge \beta) &= 1 + C(\alpha) + C(\beta),
-    \\
-    C(\alpha \vee \beta) &= 1 + C(\alpha) + C(\beta),
-    \\
-    C(\alpha) &= 0 \text{ otherwise}.
-    \end{align*}
-
-- Given a formula $\phi \in E_n$ and an /assignment/ $a : \{0,1\}^n$,
-  we can /interpret/ the formula $\phi$.
-
-  - The result of interpreting $\phi$ with assignment $a$ is written $\phi|_a$,
-    and is obtained by replacing each $x_k$ with $a_k$
-    and evaluating the expression to either zero or one.
-  - This interpretation enables us to define /equivalence/,
-
-    - Formally, we say that two formulas $\alpha, \beta \in E_n$ are /equivalent/, written $\alpha \equiv \beta$, iff
-      for every assignment $a \in \{0,1\}^n$, it holds that $\alpha|_a = \beta|_a$.
-      Then, we define the /equivalence class/ of a formula $\phi \in E_n$ as
-      $[\phi] = \{ \alpha ~|~ \alpha \equiv \phi, ~ \alpha \in E_n \}$.
-
-      - Every element of that equivalence class is called a /representative/ of that class.
-        Note that equivalence is not equality: $x_0 \wedge x_0$ and $x_0$
-        are equivalent but not equal.
-
-    - Two formulas are equivalent iff they always give matching results for all assignments.
-    - Two formulas are equal iff they look the same.
-    - Equivalence is the comparison of meaning,
-      whereas equality is the comparison of form.
-
-- The set $E_n$ has exactly $2^{2^n}$ equivalence classes.
-
-  - We label those classes $K(n,0), K(n,1), \ldots K(n,2^{2^n}-1)$.
-  - Define $Q(n,k)$ as the shortest representative of $K(n,k)$.
-
-    - Here are some examples of the shortest representatives
-      that can be verified by hand:
-      \begin{align*}
-      Q(0,0) &= 0
-      \\ Q(0,1) &= 1
-      \\ Q(1,0) &= 0
-      \\ Q(1,1) &= x_0
-      \\ Q(1,2) &= \neg x_0
-      \\ Q(1,3) &= 1
-      \\ Q(2,1) &= x_0 \wedge x_1
-      \\ Q(2,2) &= \neg x_0 \wedge x_1
-      \\ Q(2,3) &= x_0
-      \\ Q(2,6) &= \neg (x_0 \wedge x_1) \wedge (x_0 \vee x_1)
-      \\ Q(2,7) &= x_0 \vee x_1
-      \\ Q(2,9) &= (x_0 \wedge x_1) \vee \neg (x_0 \vee x_1)
-      \end{align*}
-
-- It should be apparent that $Q(n,2^{2^n}-1-k) = \neg Q(n,k)$.
-  It should be apparent that $Q(2,6)$ is XOR and $Q(2,9)$ is bi-implication.
-  It should be apparent that $Q(2,6)$ and $Q(2,9)$ are the longest expressions for $n = 2$,
-  and both of them have size $4$.
-- *Problem statement*:
-  For each $n$,
-  find $k$
-  such that $Q(n,k)$ is the longest among all possible $k$.
-- [[https://en.wikipedia.org/wiki/Parity_function][WP:Parity function]]?
-  "The $n$-variable parity function and its negation are the only Boolean functions for which
-  all disjunctive normal forms have the maximal number of $2^{n - 1}$ monomials of length $n$
-  and all conjunctive normal forms have the maximal number of $2^{n - 1}$ clauses of length $n$.
-  (Ingo Wegener, Randall J. Pruim, /Complexity Theory/, 2005, ISBN 3-540-21045-8, p. 260)"
-- Relationship between $n$-expressions and $n$-cubes
-
-  - Here we imagine what it is like to apply geometric operations to Boolean expressions.
-  - Draw
-
-    - Draw the outline of a square on a white paper.
-    - Draw two lines that divide the square into four smaller subsquares.
-    - Color the top right subsquare red.
-
-      - The resulting picture represents $x_0 \wedge x_1$.
-
-  - The result of rotating $x_0 \wedge x_1$ 90 degrees counterclockwise is $\neg x_0 \wedge x_1$.
-
-    - Rotated once again, it becomes $\neg x_0 \wedge \neg x_1$.
-    - Rotated once again, it becomes $x_0 \wedge \neg x_1$.
-      _ Rotated once again, it comes back to $x_0 \wedge x_1$.
-
-  - Define $R_2(\phi)$ as the counterclockwise-rotated $\phi$ where $\phi \in E_2$.
-
-    - Then $R(x_0) = x_1$ and $R(x_1) = \neg x_0$.
-
-  - Other operations:
-    horizontal flip,
-    vertical flip,
-    negation.
-  - $(R_2)^4(\phi) = \phi$.
-  - On the 3-cube, there are 3 counterclockwise rotations.
-  - Each $n$-expression of the form $x_k$ divides the $n$-cube into two region.
-
-- Unnecessary
-
-  - We define the shorthand $\alpha < \beta$ to mean that $\alpha$ is shorter than $\beta$.
-    Now we can /order/ the equivalence classes in $E_n$ by their sizes.
-    For every $E_n$, there exists at least one /infimum/ (greatest lower bound).
-    For every $A \subseteq E_n$,
-    we say that $\alpha \in \inf(A)$ iff $\alpha \le \phi$ for every $\phi \in E_n$.
-  - A /bit/ is either zero or one.
-  - We define the mapping $N_n : \{0,1\}^n \to \Nat$
-    as a mapping from the $n$-dimensional bit vector $x = (x_0,\ldots,x_{n-1})$
-    to the natural number $N_n(x) = \sum_{k=0}^{n-1} x_k 2^k$.
-
-    - $N_n(x)$ is the number whose
-      $n$-bit binary right-to-left encoding is the $n$-dimensional bit vector $x$.
-
-  - We define the bit vector identifying the predicate as
-    \begin{align*}
-      B_n(\phi) = N_{2^n}( \phi(N_n^{-1}(0)), \ldots, \phi(N_n^{-1}(2^n-1)))
-      \end{align*}
-
-- Shannon 1949 proved that almost all $n$-argument boolean functions
-  require circuits of size $\Theta(2^n/n)$. (citation?)
-- For small numbers, we can enumerate the answers by hand.
-- A formula is /canonical/ iff it cannot be shortened.
-
-What is the longest possible canonical description length of a predicate that takes $k$ arguments?
-
-#+BEGIN_EXAMPLE
-    0000 | 0
-    0001 | a \wedge b
-    0010 | a \wedge \neg b
-    0011 | a
-    0100 | \neg a \wedge b
-    0101 | b
-    0110 | (a \wedge \neg b) \vee (\neg a \wedge b)
-    0111 | a \vee b
-    1000 | \neg (a \vee b)
-    1001 | (a \wedge b) \vee \neg (a \vee b)
-    1010 | \neg b
-    1011 | a \vee \neg b
-    1100 | \neg a
-    1101 | \neg a \vee b
-    1110 | \neg (a \wedge b)
-    1111 | 1
-#+END_EXAMPLE
-
-Conjecture: The longest 2-argument predicate is 0110.
-
-Conjecture: $(a \wedge \neg b) \vee (\neg a \wedge b)$ is the shortest description of 0110.
-
-What we are asking here is Sipser 1997's /circuit-size complexity/?
-
-- How are circuit complexity and proof complexity related?
-- Simplification rewrite rules:
-  \begin{align*}
-  \neg (\neg \alpha) = \alpha
-  \\
-  \alpha \wedge \neg \alpha = 0
-  \\
-  \alpha \vee \neg \alpha = 1
-  \\
-  \alpha \vee 1 = 1
-  \\
-  \alpha \wedge 0 = 0
-  \\
-  \neg 0 = 1
-  \\
-  \neg 1 = 0
-  \\
-  \neg \alpha \wedge \neg \beta = \neg (\alpha \vee \beta)
-  \\
-  \neg \alpha \vee \neg \beta = \neg (\alpha \wedge \beta)
-  \\
-  (\alpha \wedge \beta) \vee (\alpha \wedge \gamma) = \alpha \wedge (\beta \vee \gamma)
-  \end{align*}
-- Is this the problem we're talking about?
-
-  - [[https://en.wikipedia.org/wiki/Circuit_minimization_for_Boolean_functions][WP:Circuit minimization for Boolean functions]]
-  - [[http://www.cs.sfu.ca/~kabanets/papers/mincircuit.pdf][Circuit Minimization Problem]], 1999, Valentine Kabanets and Jin-Yi Cai
-  - [[http://www.cs.yale.edu/homes/peralta/CircuitStuff/CMT.html][Yale CS Circuit Minimization Team Work]]
-  - what?
-
-    - [[https://en.wikipedia.org/wiki/Infimum_and_supremum#Formal_definition][WP:Infimum and supremum]]
-* Computational complexity
-  :PROPERTIES:
-  :CUSTOM_ID: computational-complexity
-  :END:
-
-- world effort
-
-  - [[https://www.nada.kth.se/~viggo/wwwcompendium/wwwcompendium.html][A compendium of NP optimization problems]]
-
-    - Smallest equivalent something:
-      https://en.wikipedia.org/wiki/Skeleton_(category_theory)
-    - Minimum equivalent graph,
-      also called transitive reduction.
-      https://en.wikipedia.org/wiki/Transitive_reduction
-      https://www.nada.kth.se/~viggo/wwwcompendium/node49.html
-
-  - [[https://polymathprojects.org/2013/11/04/polymath9-pnp/][2013 Polymath project: Polymath 9: Discretized Borel Determinacy]]
-
-    - https://gowers.wordpress.com/2013/10/24/what-i-did-in-my-summer-holidays/
-    - https://gowers.wordpress.com/2013/11/03/dbd1-initial-post/
-
-  - https://cstheory.stackexchange.com/questions/4090/ways-for-a-mathematician-to-stay-informed-of-current-research-in-complexity-theo
-
-- open access journals
-
-  - [[https://lmcs.episciences.org/browse/latest][Logical methods in computer science]]
-
-- recent publication trackers
-
-  - arxiv list of recent submissions
-
-    - [[https://arxiv.org/list/cs/recent][computer science]]
-    - [[https://arxiv.org/list/cs.CC/recent][computational complexity theory]]
-
-- NP-complete problems
-
-  - [[https://en.wikipedia.org/wiki/List_of_NP-complete_problems][WP:List of NP-complete problems]]
-  - https://mathoverflow.net/questions/72628/number-theory-and-np-complete
-  - https://cstheory.stackexchange.com/questions/14124/is-there-a-natural-problem-on-the-naturals-that-is-np-complete
-
-- descriptive complexity theory
-
-  - Immerman and Vardi shows that FO(LFP) corresponds with P.
-
-    - What does a FO(LFP) formula look like?
-    - [[http://michaelnielsen.org/polymath1/index.php?title=Immerman-Vardi_theorem][Immerman--Vardi theorem]]
-    - [[https://complexityzoo.uwaterloo.ca/Complexity_Zoo:F#folfp][FO(LFP) on Complexity Zoo]]
-
-  - Fagin (?) proved that NP = ESO (existential second-order logic).
-  - Immerman (?) proved that P = FO(LFP) (first-order logic with least fixed point).
-
-    - Therefore, to prove that P does not equal NP,
-      construct a sentence that is in ESO but not in FO(LFP).
-
-      - Easier said than done?
-
-        - Learn finite model theory?
-
-          - [[https://logic.rwth-aachen.de/~graedel/yurifest.pdf][Erich Grädel and Martin Grohe, "Is polynomial time choiceless?"]].
-            Choiceless polynomial time logic would imply $\TimeP \neq \TimeNP$?
-          - [[http://researcher.ibm.com/researcher/files/us-fagin/tcs93.pdf][Ronald Fagin's perspective on finite model theory]]
-
-  - https://people.cs.umass.edu/~immerman/pub/ch0_1_2.pdf
-  - [[http://www.gpwu.ac.jp/~satoru/lnlg05kuroda.pdf][Descriptive Complexity and Language-Theoretic Complexity]]
-    by Satoru Kuroda
-  - [[https://people.cs.umass.edu/~immerman/pub/ExperimentalDC.pdf][Experimental descriptive complexity]]
-    by Neil Immerman et al
-  - http://arxiv.org/pdf/cs/0409039v11.pdf
-    On Certain Modular Equations
-    Marius Constantin Ionescu
-
-    - is this valid?
-
-  - http://mathworld.wolfram.com/Computation.html
-  - http://mathworld.wolfram.com/PrincipleofComputationalEquivalence.html
-  - http://mathworld.wolfram.com/ComputationalIrreducibility.html
-  - https://en.wikipedia.org/wiki/Algebraic_logic
-
-- http://blog.computationalcomplexity.org/2010/05/structure-or-lack-thereof-of-data.html
-- Plan for the P vs NP problem?
+** Plan for the P vs NP problem?
 
   - Relate configuration graph and problem theory
   - Unexplored ideas:
@@ -470,160 +307,7 @@ What we are asking here is Sipser 1997's /circuit-size complexity/?
 
   - Where is computation theory, computability theory, complexity theory now?
 
-- Complexity axioms
-
-  - Blum's?
-  - Here we axiomatize machine-independent /complexity/.
-  - Recall that a problem $P$ is a subset of $X \times Y$.
-    We posit, without referring to any model of computation,
-    that every question $x$ has a /complexity/ $m(x)$, usually a number.
-    The function $m$ is a /complexity measure/ of $P$ iff it satisfies the axioms below.
-  - For help, we define $S(k)$
-    as the set of all questions with the same complexity $k$,
-    that is $S(k) = \{ x ~|~ m(x) = k \}$.
-    Then, the /complexity axioms/ are:
-
-    - Every $S(k)$ is finite.
-    - There are always more complex questions than less complex questions,
-      because, for example, longer strings can encode more questions.
-      Formally, if $i < j$ then $|S(i)| < |S(j)|$.
-
-  - Note that the complexity measure is $m$, not $S$.
-  - Computation graph axiom:
-
-    - A machine can only manipulate one symbol at a time.
-      Formally, if $E(a,b)$ then $|m(a) - m(b)| \le 1$.
-    - The out-degree of a vertex of a nondeterministic graph may exceed 1 but cannot exceed a constant.
-
-- Machine, algorithm, and complexity
-
-  - The [[https://en.wikipedia.org/wiki/Worst-case_complexity#Definition][time complexity]]
-    of machine $m$ for input $x$ is $t(m,x)$,
-    the number of steps $m$ makes between the beginning and the halting.
-    The /worst-case time complexity/ of $m$ for input /size/ $n$ is
-    $T(m,n) = \left\vert \max_{|x| = n} t(m,x) \right\vert$.
-    We can also write asymptotic statements such as $T(m,n) \in O(f(n))$.
-  - An algorithm $a$ implies a machine $m(a)$.
-  - An /algorithm/ solves a /problem/.
-    A problem can be solved by many algorithms with different resource usage characteristics.
-  - The what (?) time complexity class of a problem is the worst-case time complexity of the most efficient algorithm solving that problem.
-  - Machine /is/ algorithm.
-  - A /machine/ $M$ is a /transition relation/ $T$
-    (an /acyclic/ binary relation).
-    $$
-    T(x,y) = \text{\(M\) can state-transition from \(x\) to \(y\).}
-    $$
-  - $M$ /computes/ $P$ iff
-    a subgraph of the shortcut of $T$ is isomorphic to $P$.
-    (If $T$ were cyclic, this definition would fail.)
-  - Related:
-    [[https://en.wikipedia.org/wiki/Graph_isomorphism][graph isomorphism]],
-    [[https://en.wikipedia.org/wiki/Subgraph_isomorphism_problem][subgraph isomorphism problem]].
-  - /Deterministic/ machine equals /functional/ relation.
-  - $G$ /accepts/ $v$ iff $F^\infty(\{v\}) = \emptyset$ where $F$ is the graph's fringe function.
-    The /language/ recognized by $G$ is the largest $L \subseteq V$ such that $F^\infty(L) = \emptyset$.
-  - A Turing machine is $(C,I,f)$
-    where $C$ is countable
-    and $f$ is recursive.
-  - https://en.wikipedia.org/wiki/Register_machine
-  - Example: a state of a Turing machine is $(c,l,h,r)$
-    where $c$ is a configuration,
-    $l$ is the tape content to the left of the head,
-    $h$ is the tape content at the head,
-    and $r$ is the tape content to the right of the head.
-  - A problem class is a function.
-  - A /problem/ is a member of $S$.
-  - A /problem class/ is a subset of $S$.
-  - Sometimes we can /reduce/ a problem $p : P$ into another problem $q : Q$
-    by an injective reduction $r : P \to Q$.
-
-- Space and time complexity
-
-  - Can we deal with complexity without ever defining machine and computation
-    (besides assuming they exist)?
-  - \( \newcommand\ftime{\text{time}}  \newcommand\fspace{\text{space}}  \newcommand\fsize{\text{size}} \)We are interested at the number of steps
-    a machine makes for an input before terminating.
-    We define $\ftime~f~x$ as the /running time/
-    of the machine $f$ for input (initial state) $x$.
-  - We also define $\fsize~x$ as the /size/ of the state $x$.
-  - (Concrete)
-    Formally, $\ftime~f~x = n$ iff $n$ is the smallest natural number such that $f^{n+1}~x = f^n~x$.
-  - We apply general algebraic thinking again, this time about congruences.
-    Let $T~f~n = \{ x ~|~ \ftime~f~x = n \}$
-    be the set of all inputs that $f$ handles in $n$ steps.
-    We can also let $U~n = \{ (f,x) ~|~ \ftime~f~x = n \}$?
-    [
-    \lambda f . \lambda n . { x _{|} \ftime_{f}x = n }
-    \
-    \lambda n . { (f,x) _{|} \ftime_{f}x = n }
-    \
-    \lambda m . \lambda n . { (f,x) _{|} \fsize~x = m, ~ \ftime_{f}x = n }
-    ]
-  - We define $\fspace : M~S \to S \to \Nat$,
-    where $\fspace~f~x$ is the size of the biggest state in $\{ f^n~x ~|~ n \in \Nat \}$.
-  - The other option is to require that each machine $f$ have a $t : S \to \Nat$ where $t~(f~x) = 1 + t~x$.
-
-- Complexity as an ordering of questions
-
-  - Postulate:
-    For every pair of questions, we can always decide which is more complex.
-    Therefore, complexity is a /total ordering/ of questions.
-    We write $x < y$ iff $x$ is less complex than $y$.
-    Then the complexity axioms are:
-
-    - For each $y$, there are finitely many $x$ such that $x \le y$.
-    - For each $x$, there are infinitely many $y$ such that $x \le y$.
-      (Is this required?)
-
-  - A /reduction/ $r$ from problem $P$ to problem $Q$ is an order-preserving (but not necessarily order-reflecting) function
-    that maps $P$-questions to $Q$-questions.
-    Formally, for all $x, y \in P$, if $x \le y$ then $r(x) \le r(y)$,
-    but the converse does not need to hold.
-    (Are we sure we don't need order-reflecting?)
-  - Rabin complexity axioms?
-    Still with the same $m$ here.
-    For help, let $L(k) = \{ x ~|~ m(x) \le k \}$
-    be the set of all questions that are not more complex than $k$.
-    Then the axioms are:
-
-    - Every $L(k)$ is finite.
-    - For every $i$, there exists $j > i$ such that $L(i) \subset L(j)$.
-      We say that $L$ is /eventually increasing/.
-    - The limit of $L(k)$ as $k$ grows unbounded is $X$, the set of all questions.
-    - (That is not what Rabin says? He uses Post canonical system and Curry-Howard correspondence?)
-
-  - Corollary:
-
-    - $L$ is nondecreasing: If $i < j$ then $L(i) \subseteq L(j)$.
-
-  - [[https://en.wikipedia.org/wiki/Order_theory][WP:Order theory]]
-
-- Articles
-
-  - [[https://en.wikipedia.org/wiki/Boolean_satisfiability_problem][WP:Boolean satisfiability problem]]
-  - [[http://www.dcs.gla.ac.uk/~pat/cpM/papers/cheeseman91where.pdf][Where the really hard problems are]], Cheeseman, Kanefsky, and Taylor,
-
-    - "Almost all k-colorable graphs are easy to color", J. S. Turner, 1988
-
-  - Blum
-
-    - [[https://www.researchgate.net/profile/Juris_Hartmanis/publication/242506038_On_the_Computational_Complexity_of_Algorithms/links/53fcd0a40cf2364ccc04db1d.pdf][On the computational complexity of algorithms]], J. Hartmanis and R. E. Stearns, 1965
-
-  - [[http://www.sciencedirect.com/science/article/pii/0022000078900089][The complexity of total order structures]], Dan Moore, 1978
-
-- Books
-
-  - [[http://theory.cs.princeton.edu/complexity/][Computational Complexity: A Modern Approach, by Sanjeev Arora and Boaz Barak]], more than 400 pages, no finite model theory
-  - [[http://cglab.ca/~michiel/TheoryOfComputation/TheoryOfComputation.pdf][Introduction to Theory of Computation, by Anil Maheshwari and Michiel Smid]], more than 200 pages
-
-- [[http://port70.net/~nsz/articles/classic/blum_complexity_1976.pdf][Blum 1976 "a machine independent theory of the complexity of recursive functions"]], 15 pages
-
-  - [[https://www.cs.toronto.edu/~sacook/homepage/rabin_thesis.pdf][Michael O. Rabin's 1960 technical report]]
-
-    - [[https://cstheory.stackexchange.com/questions/34236/rabins-degree-of-difficulty-of-computing-a-function-and-a-partial-ordering-of][from cstheory stackexchange]]
-
-- https://en.wikipedia.org/wiki/Proof_complexity
-- A question related to P vs NP
+** A question related to P vs NP
 
   - Proving lower bound is much harder than proving upper bound.
   - Unsolved problem: How do we prove that an algorithm is the fastest solution of a problem?
@@ -635,312 +319,54 @@ What we are asking here is Sipser 1997's /circuit-size complexity/?
 
 - https://en.wikipedia.org/wiki/Time_hierarchy_theorem
 - https://en.wikipedia.org/wiki/Constructible_function
-- Entertainment
-
-  - http://beza1e1.tuxen.de/articles/accidentally_turing_complete.html
-* What is a machine? What is the essence of a machine?
-* Why do we use Turing machines instead of lambda calculus when discussing computational complexity?
-- https://cstheory.stackexchange.com/questions/23798/p-and-np-classes-explanation-through-lambda-calculus
-* Theory of deciders?
-We explore the theory of /deciders/
-(which are just unary algebras).
-We try to describe computation without being tied to a machine model.
-We hope we can lower bound and upper bound of computation complexity.
-
-There are two ways to define a /decider/:
-the algebraic way and the logic way.
-The logic way naturally gives rise to graph.
-However, the following is the algebraic definition.
-
-$\newcommand\calR{\mathcal{R}} \newcommand\Bool{\mathbb{B}} \newcommand\fcost{\textsf{cost}} \newcommand\fspace{\textsf{space}} \newcommand\ftt{\textsf{tt}} \newcommand\ftime{\textsf{time}} \newcommand\calD{\mathcal{D}}$A /decider/ $\calD$ is an algebra $(S,f,0,1)$ satisfying these:
-\begin{align*}
-f~0 = 0
-\\
-f~1 = 1
-\end{align*}
-where the set $S$ is the /underlying set/,
-the function $f$ is the /transition function/,
-the element $0$ is the /rejecting state/,
-and the element $1$ is the /accepting state/.
-A /state/ is an element of the underlying set.
-The accepting and rejecting state are collectively known as /terminal/ states.
-
-Deciders and predicates are closely related:
-a decider with transition function $f$ /computes/ a predicate $c~f$
-satisfying these:
-\begin{align*}
-c~f \circ f &= c~f
-\\ f \circ c~f &= c~f
-\end{align*}
-where
-$c : (S \to S) \to (S \to \{0,1\})$
-is the /short-circuiting function/.
-The function $c~f$ is also called the short-circuited $f$.
-
-We want to /compose/, build deciders from deciders.
-Why?
-Finite primitives?
-
-$(A,f,0,1)$ becomes $(A, \neg f,1,0)$.
-
-$(A,f)$ and $(B,g)$ becomes $(2 \times A \times B, f \wedge g)$.
-Let $h = f \wedge g$.
-\begin{align*}
-h~0 = 0
-\\ h~1 = 1
-\\ h~1 = 1
-\end{align*}
-
-$A$-deciders form a /Boolean algebra/,
-But why should we bother showing this?
-$(\neg f)~x = \neg~(f~x)$.
-$(f \wedge g)~x = f~x \wedge g~x$.
-$(f \vee g)~x = f~x \vee g~x$.
-
-A decider is too general,
-so we want to restrict it.
-
-The questions are:
-
-- Does a restriction affect what the decider can compute?
-- Does a restriction affect the running time of the decider for a given input?
-
-$\newcommand\Nat{\mathbb{N}}$We can /constrain the transition function/ by /distance constraining/.
-We assume the existence of a /distance function/ $d : V \to V \to \Nat$
-such that $f$ has to satisfy $d~x~(f~x) \le k$ where $k$ is a constant, usually 1.
-The structure $(S,d)$ then becomes a /metric space/.
-The distance function must satisfy:
-\begin{align*}
-d~x~x &= 0
-\\ d~x~y &= d~y~x
-\end{align*}
-
-We can /constrain the transition function/ by /vertex label constraining/.
-Let there be a vertex labeling $m : V \to \Nat$.
-(We are silently assuming that $V$ is countable.)
-The labeling $m$ is surjective but not necessarily injective.
-This labeling divides the graph into maximal subconnected subcomponents?
-The constraints are:
-
-- Each label is used finitely many times.
-  There are only finitely many vertices with the same label.
-- The function $f$ must satisfy $|m~(f~x) - m~x| \le d$
-  where $d$ is a finite number, usually 1.
-
-** What class does this constrained decider correspond to?
-   :PROPERTIES:
-   :CUSTOM_ID: what-class-does-this-constrained-decider-correspond-to
-   :END:
-
-We can also /constrain the state size/.
-
-We posit the existence of a /state size function/ $s : A \to \Nat$ where:
-
-- There are exactly $2^n$ states of size $n$.
-- If $s~x \neq s~y$ then $x \neq y$.
-
-$$
-\forall n \in \Nat: |\{ x ~|~ s~x = n\} = 2^n|
-$$
-
-We then further constrain the transition function $f$ such that $|s~(f~x) - s~x| \le 1$.
-
-We can constrain the transition function $f$ such that $s~x - s~(f~x) = -1$.
-
-An alternative to this is defining fringe functions $A \to P~A$,
-and work with the generated $(P~A, F)$.
-
-** Finite
-  :PROPERTIES:
-  :CUSTOM_ID: finite
-  :END:
-
-A decider is /finite/ iff its underlying set is finite.
-
-If $S$ is finite then $S \to S$ is also finite.
-
-** Relationship with predicates
-  :PROPERTIES:
-  :CUSTOM_ID: relationship-with-predicates
-  :END:
-
-The set of all $A$-deciders is isomorphic to the set of all /$A$-predicates/.
-If $|A| = n$ then there are $2^n$ different $A$-predicates (extensionally).
-
-A /total/ decider has total $c~f$.
-A /partial/ decider has partial $c~f$.
-
-A state $s$ is /eventually terminal/ iff $c~f~s$ is defined,
-is /eventually rejecting/ iff $c~f~s = 0$,
-and is /eventually accepting/ iff $c~f~s = 1$.
-
-The /generating set/ $G$ is the set of all $x$
-that is not in the range of $f$.
-\begin{align*}
-G = A - \{ f~x | x \in A \}
-\end{align*}
-
-The generating set is the set of /initial states/.
-
-A state is /initial/ iff it is in $G$.
-
-** Logic calculus decider
-  :PROPERTIES:
-  :CUSTOM_ID: logic-calculus-decider
-  :END:
-
-Let each vertex represent a logic expression.
-
-Let an edge from $x$ to $y$ mean that there is
-an inference rule that step-reduces the expression $x$ to $y$.
-
-** Decider
-  :PROPERTIES:
-  :CUSTOM_ID: decider
-  :END:
-
-*** Logical definition
-   :PROPERTIES:
-   :CUSTOM_ID: logical-definition
-   :END:
-
-A /decider/ is $(V,E,A)$ with signature $(2,1,1)$.
-A decider is a directed graph with some special vertexes.
-A /state/ is a vertex.
-
-$A~x$ is true iff $x$ is an /accepting/ vertex.
-
-$E~x~y$ is true iff $y$ is a successor of $x$.
-The relation $E~x~y$ is true iff there is an edge from $x$ to $y$.
-
-The decider is /deterministic/ iff $E$ is injective:
-$$
-E~x~y \wedge E~x~z \implies y = z
-$$
-
-$E$ is injective iff each vertex has out-degree one or less.
-
-**** Path-existence predicate
-    :PROPERTIES:
-    :CUSTOM_ID: path-existence-predicate
-    :END:
-
-$P~x~y$ means there is path from $x$ to $y$.
-
-\begin{align*}
-E~x~y &\implies P~x~y
-\\ E~x~y \wedge P~y~z &\implies P~x~z
-\\ \alpha~x &= P~x~y \wedge A~y
-\end{align*}
-
-\begin{align*}
-E~x~y &\implies \neg A~x
-\end{align*}
-
-\begin{align*}
-E~x~y &\vdash P~x~y
-\\ E~x~y , P~y~z &\vdash P~x~z
-\\ E~x~y , A~x &\vdash
-\end{align*}
-
-Defining the predicate $T$:
-
-$T~x~n$ means there exists a path of length $n$ from $x$ to a terminal vertex.
-
-\begin{align*}
-A~x &\implies T~x~0
-\\ R~x &\implies T~x~0
-\\ E~x~y \wedge T~y~k &\implies T~x~(1 + k)
-\end{align*}
-
-** Descriptive/algorithmic complexity
-  :PROPERTIES:
-  :CUSTOM_ID: descriptivealgorithmic-complexity
-  :END:
-
-Suppose that there is a /complexity/ function that maps a predicate to a complexity measure.
-
-$c : (A \to \Bool) \to C$.
-
-Assume that $c_L~p$ is the length of the shortest $L$-program for the predicate $p$.
-What does this even mean?
-
-Can a function be stated as a combination of other functions?
-What combination?
-
-[[https://en.wikipedia.org/wiki/Logic_of_graphs][Logic of graphs]]
-
-** Inefficientizing
-  :PROPERTIES:
-  :CUSTOM_ID: inefficientizing
-  :END:
-
-Given an $A$-decider and infinite $A$,
-we can always construct another $A$-decider
-that computes the same predicate but with more states.
-
-Given a non-oracle $A$-decider, we can always construct another $A$-decider
-that computes the same predicate but with less states.
-* P vs NP?
-
-Forward question: Given a predicate p, what is the minimum circuit-size complexity of p?
-
-Reverse question: Given a minimum circuit-size complexity, how complex can a predicate with that number of
-operators be?
-
-Baca wiki SAT & papers first
-
-We say that a predicate k-to-1 iff its domain is 0,1^k and it is true for exactly one input string and
-false
-for every other. Let Pk be the set of all k-to-1 predicates.
-
-Logical methods in computer science (open access journal)
-
-what is this book? should we read it? is it related to P vs NP?
-[[http://www-2.dc.uba.ar/materias/azar/bibliografia/Downey2010AlgorithmicRandomness.pdf]]
-
-Formal Systems and Machines: An Isomorphism
-[[http://legacy.earlham.edu/~peters/courses/logsys/machines.htm]]
-
-Forallx: https://www.fecundity.com/logic/download.html
-
-Franz Baader: https://lat.inf.tu-dresden.de/ baader/index-en.html
-
-High-Level Descriptions of Computation
-[[https://courses.engr.illinois.edu/cs373/sp2013/Lectures/lec21.pdf]]
-
-[[http://cstheory.stackexchange.com/questions/1955/books-on-automata-theory-for-self-study]]
-
-[[http://cstheory.stackexchange.com/questions/3253/what-books-should-everyone-read]]
-
-A Turing Machine Distance Hierarchy
-[[http://www2.cs.cas.cz/~sima/lata13.pdf]]
-
-T(m,n) = set of all problems solvable by m in n steps
-
-T(m,O(f(n)))
-
-P(m) = sum k in Nat T(m,O(n^k))
-
-P(m1) = P(m2)?
-
-P(DTM) = P(NTM)?
-
-Problem = set of q-a pairs
-
-Cclass = set of problems
-
-i < j implies T(m,i) subset T(m,j) ?
-
-[[https://en.wikipedia.org/wiki/Computational_complexity_theory#Computational_problems]]
-
-Cite:
-[[http://www.math.toronto.edu/weiss/model_theory.pdf]]
-
-Fundamentals of Model Theory
-[[http://www.math.toronto.edu/weiss/model_theory.pdf]]
-
-Wilfrid Hodges Model Theory draft
-[[http://wilfridhodges.co.uk/history07.pdf]]
-
-[[http://w3.impa.br/~hossein/myarticles/hodgetheory.pdf]]
+** What
+- How do we solve the P vs NP problem?
+  - What is problem, computation, complexity, P, NP?
+  - Can we construct a problem that is in NP but not in P?
+  - Can we show that P = NP leads to contradiction?
+
+* Meta-research
+** Where are progress tracked?
+- [[https://rjlipton.wordpress.com/2017/02/05/a-panel-on-p-vs-np/][2017 Richard J. Lipton and Kenneth W. Regan]]
+- [[http://www.win.tue.nl/~gwoegi/P-versus-NP.htm][2016 Gerhard J. Woeginger]]
+- [[http://blog.computationalcomplexity.org/2015/08/have-we-made-progress-on-p-vs-np.html][2015 Lance Fortnow and Bill Gasarch]]
+- [[https://www.reddit.com/r/math/comments/1krrkx/what_progress_has_been_made_on_the_p_vs_np/][2014 reddit]]
+- [[http://www.ncmis.cas.cn/kxcb/jclyzs/201204/W020120424627425387644.pdf][2009 Lance Fortnow "The status of the P versus NP problem"]]
+
+Open access journals:
+- [[https://lmcs.episciences.org/browse/latest][Logical methods in computer science]]
+
+World effort:
+- [[https://www.nada.kth.se/~viggo/wwwcompendium/wwwcompendium.html][A compendium of NP optimization problems]]
+  - Smallest equivalent something:
+    https://en.wikipedia.org/wiki/Skeleton_(category_theory)
+  - Minimum equivalent graph,
+    also called transitive reduction.
+    https://en.wikipedia.org/wiki/Transitive_reduction
+    https://www.nada.kth.se/~viggo/wwwcompendium/node49.html
+- [[https://polymathprojects.org/2013/11/04/polymath9-pnp/][2013 Polymath project: Polymath 9: Discretized Borel Determinacy]]
+  - https://gowers.wordpress.com/2013/10/24/what-i-did-in-my-summer-holidays/
+  - https://gowers.wordpress.com/2013/11/03/dbd1-initial-post/
+
+Blogs to follow[fn::https://cstheory.stackexchange.com/questions/4090/ways-for-a-mathematician-to-stay-informed-of-current-research-in-complexity-theo]
+
+not recommended:
+drinking from the firehose:
+recent publication trackers:
+arxiv list of recent submissions:
+- [[https://arxiv.org/list/cs/recent][computer science]]
+- [[https://arxiv.org/list/cs.CC/recent][computational complexity theory]]
+
+Better let well-known researchers discriminate the signal from the noise for us.
+** What is the P vs NP problem?
+Official problem description[fn::http://www.claymath.org/sites/default/files/pvsnp.pdf].
+** Other people's works that may be related
+- 2017-11-22 news about NEXP and ACC https://news.mit.edu/2017/faculty-profile-ryan-williams-1122
+- an explanation in English https://danielmiessler.com/study/pvsnp/
+- 2011 book "Why Philosophers Should Care About Computational Complexity" https://eccc.weizmann.ac.il/report/2011/108/
+** NP-complete problems? Why do we care about this list?
+- [[https://en.wikipedia.org/wiki/List_of_NP-complete_problems][WP:List of NP-complete problems]]
+- https://mathoverflow.net/questions/72628/number-theory-and-np-complete
+- https://cstheory.stackexchange.com/questions/14124/is-there-a-natural-problem-on-the-naturals-that-is-np-complete
+
+* Bibliography

@@ -60,7 +60,9 @@ because parsing is the common thing between programming language and publishing 
 Meanwhile, I had to understand Brzozowski quotient and set division,
 so I wrote [[file:division.html][Generalizing division]].
 
-I am [[file:pnptry.html][trying to understand the P vs NP problem]].
+I am [[file:pnptry.html][trying to understand the P vs NP problem]],
+which requires [[file:compute.html][computation]]
+and [[file:logic.html][logic]].
 I was motivated by the prize money[fn::one million US dollars http://www.claymath.org/millennium-problems/millennium-prize-problems], but I think my chances are slim.
 
 I am looking for an AI that helps me process data into information.
@@ -69,9 +71,26 @@ Thus I write [[file:intelligence.html][Making intelligence]] and
 But I think my chances are slim.
 
 Computer science[fn::https://en.wikipedia.org/w/index.php?title=Computer_science&oldid=875563283#Etymology]
-is a branch of mathematics, not a branch of science,
-which is the application of the scientific method to make falsifiable theories.
-I need to find a reason of their existence.
+is not science (the application of the scientific method to make falsifiable theories).
+
+Scott Schneider defines "computer science" as "everything to do with computation, both in the abstract and in the implementation".
+ [fn::http://www.scott-a-s.com/cs-is-not-math/]
+Is CS a branch of math?
+ [fn::https://math.stackexchange.com/questions/649408/is-computer-science-a-branch-of-mathematics]
+
+There are some interesting mathematical perspectives.
+
+Boolean metric spaces merge logic and analysis?
+How do we define a sensible approximation error?
+How do we define the /distance/ between two formulas?
+
+What are these papers?
+ [fn::https://arxiv.org/abs/0903.2567]
+ [fn::https://www.um.es/beca/papers/Aviles-Algebras.pdf]
+
+The formula \( p \wedge q \) /approximates/ the formula \( p \wedge q \wedge r \).
+What is the approximation /error/?
+Can we merge approximation theory and propositional calculus?
 ** Philosophy
 I am [[file:philo.html][trying to understand the relationship between "mind" and "brain"]].
 
@@ -372,7 +391,6 @@ They should grow up to be mathematicians/scientists/engineers who know some art.
 * Notes to self
 I need to rewrite these pages:
 [[file:compsci.html][Computer science]],
-[[file:compute.html][Computation]],
 [[file:math.html][Mathematics]],
 [[file:modeldata.html][Modeling all data]].
 [[file:politik_masjid.html][Politik masjid]],
@@ -397,6 +415,45 @@ Jekyll can generate sitemap.xml without plugins.
 Migrating from Jekyll to Pandoc broke some things.
 The generated page [[file:all.html][All pages]] does not include Pandoc-generated pages.
 Sitemap.xml is also broken in the same way.
+* Notes for future AI recommender
+Dear machine, please find me people whose interests are similar to mine.
+These are some example of such people, mostly professors or ex-professors.
+I have not met these people.
+I have only seen publicly available information.
+
+Why is there no professor search engine?
+Why is there no Semantic Web ontology for research interests?
+Idea: We can query[fn::https://query.wikidata.org/] Wikidata to find professors whose research interests intersect ours.
+<2019-01-08>
+I tried that, but Wikidata does not have much data relevant to that query.
+** Intersecting in two topics
+Prof. Sanjeev Arora[fn::https://www.cs.princeton.edu/~arora/] is a member of
+Princeton theory-of-computation group[fn::http://theory.cs.princeton.edu/],
+Princeton ML Theory Group[fn::http://mltheory.cs.princeton.edu/],
+and Arora Research Group[fn::http://unsupervised.cs.princeton.edu/].
+
+https://www.quora.com/How-good-is-Princeton-at-machine-learning
+
+https://www.math.ias.edu/theoretical_machine_learning
+** Intersecting in one topic
+*** Computational complexity theory
+Prof. Neil Immerman[fn::https://www.cics.umass.edu/faculty/directory/immerman_neil][fn::https://people.cs.umass.edu/~immerman/]
+wrote the "Descriptive complexity" book[fn::www.cs.umass.edu/~immerman/book/descriptiveComplexity.html] published in 1999.
+He is also a member of UMass CS Theory Group[fn::http://theory.cs.umass.edu/people.html] which has interesting theoretical researches.
+
+https://www.quora.com/Which-professors-research-groups-are-working-on-mathematical-theoretical-understanding-of-deep-learning
+
+Prof. Oded Goldreich[fn::http://www.wisdom.weizmann.ac.il/~/oded/]
+
+Prof. Eric Allender[fn::https://www.cs.rutgers.edu/faculty/eric-allender]
+*** Programming language theory
+Prof. Philip Wadler[fn::http://homepages.inf.ed.ac.uk/wadler/]
+
+Prof. Simon Peyton--Jones[fn::https://www.microsoft.com/en-us/research/people/simonpj/?from=http%3A%2F%2Fresearch.microsoft.com%2Fen-us%2Fpeople%2Fsimonpj]
+*** Artificial intelligence and machine learning
+Prof. Jürgen Schmidhuber[fn::http://people.idsia.ch/~juergen/].
+
+Prof. Elad Hazan[fn::https://www.cs.princeton.edu/courses/archive/spring16/cos511/]
 * Contact
 To ask questions, suggest corrections, or add something, do any of these:
 

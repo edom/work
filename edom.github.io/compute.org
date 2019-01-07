@@ -2,257 +2,231 @@
 #+DATE: 2017-06-29 22:40 +0700
 #+PERMALINK: /compute.html
 #+MATHJAX: yes
-- What is the theory of computation?
+* Suggested learning sequence
+We study computation before machine because the replacement of human by machine is irrelevant to the essence of computation.
 
-  - What is it concerned with?
-  - What are its important results?
+While defining computation, we have difficulty defining what a /reasonable encoding/ is.
+Why do we assume that numbers are encoded in positional notation[fn::https://en.wikipedia.org/wiki/Positional_notation], not unary notation[fn::https://en.wikipedia.org/wiki/Unary_numeral_system]?
 
-- Where should we begin?
+We see that encoding affects complexity.
+Adding two natural numbers \(m\) and \(n\) takes \(O(m+n)\) steps in unary notation,
+but \(O(\log(\max(m,n)))\) steps in positional notation.
+Therefore, why don't encode a number as its prime factorization,
+to simplify multiplication while complicating addition?
 
-  - Should we begin by defining a function, a machine,
-    computation, complexity, or a problem class?
-  - Suppose we have a function $f : A \to B$.
-  - Given an input function $\alpha : A \to S$,
-    an output function $\beta : S \to B$,
-    and a transition function $m : S \to S$,
-    the computation is $f = \beta \circ m^\infty \circ \alpha$.
-  - The space of all functions from $A$ to $B$: $F~A~B$.
-  - We know that a function is a kind of relation.
-    A relation composes.
-    $(S, \circ)$ where $\circ$ is associative.
-    There is identity relation.
-    There is inverse relation.
-    Therefore the relation space forms a group.
-    The function space forms a semigroup.
+...
 
-- ontology?
-  - (moved to file:philo.org)
-  - computable
-    - [[https://en.wikipedia.org/wiki/Computable_function][WP:Computable function]]
-  - computation
-  - problem
-    - [[https://en.wikipedia.org/wiki/Computational_problem][WP:Computational problem]]
-    - [[https://en.wikipedia.org/wiki/Decision_problem][WP:Decision problem]]
-  - computation graph
-    - ? $M$ /simulates/ $N$ iff a subgraph of $M$ is isomorphic to $N$.
-      - $T$ is the type of terms.
-      - $M$ is the semantic function.
-    - Shortcut
-      - The /shortcut/ of $A$ is $B$ where
-        $$
-          B(x,y) = \text{\\(x\\) is initial, \\(y\\) is terminal, and \\(x\\) reaches \\(y\\).}
-          $$
-        - $A$ should be acyclic.
-      - Alternative names for shortcut:
-        [[https://en.wikipedia.org/wiki/Disintermediation][WP:Disintermediation]],
-        immediation,
-        curtailment,
-        shortening,
-        abridgement.
-      - Shortcutting is idempotent:
-        the shortcut of the shortcut is the shortcut itself.
-- Do not confuse a /problem/ and an /algorithm/ that solves that problem.
-  - Example:
-    Consider $p(x)$ that
-    wastes $2^{|x|}$ steps,
-    and then returns the leftmost bit of $x$.
-    Thus $p \in \ExpTime$,
-    but $\Search(p) \in \Time(O(1))$,
-    because every string that begins with $1$ satisfies $p$,
-    and we can just hardcode any of those strings in the solution of $\Search(p)$.
+In the end, we hope to solve the P vs NP problem.
+** Algorithm, computation
+An /algorithm/ is a /finite description/ of /computation/.
 
-- rewriting system
+An /algorithm/ is a /finite description/ of how something is /computed/.
 
-  - What does it mean that a rewriting system /computes/ a function?
-  - Given more time, a rewriting system can compute more functions.
-  - A Turing machine is a rewriting system.
-  - What is the difference between a rewriting system and a formal system?
-  - What is the difference between a formal system and a formal language?
+An algorithm is a /representation/ (/encoding/) of a computation.
+** Logic, model
+See [[file:logic.html]].
+** Computation
+** Programmability
+Some machines are /programmable/. Such machine implements several functions
+that can be chosen by a /program/ which is a part of the machine's input.
+A program chooses which function the machine shall compute.
+** Problem, formula, input, output, model, relation
+"Problem" comes from Greek "problema" which means "a task, that which is proposed, a question".[fn::https://www.etymonline.com/word/problem]
+Therefore, a problem /is/ a question, or, formally, a /logical formula/.
 
-- Computation graph?
+/A problem is a formula./
+For example, the problem "Given an \(x\), what is \(x+x\)?" is the formula
+\( x+x = y \) in first-order logic with equality and some arithmetics.
+Note that some logic is embedded in English.[fn::English is at least second-order, as demonstrated by the Geach--Kaplan sentence "Some critics admire only one another" https://en.wikipedia.org/wiki/Nonfirstorderizability].
 
-  - What should we name this sequence?
+#+CAPTION: Some common problem shapes
+| name             | shape          | input | output |
+|------------------+----------------+-------+--------|
+| decision problem | \( p(x) \)     | \(x\) |        |
+| search problem   | \( p(x) \)     |       | \(x\)  |
+| function problem | \( f(x) = y \) | \(x\) | \(y\)  |
 
-    - The sequence: $x, f(x), f(f(x)), \ldots, f^n(x), \ldots$
+A problem may have /inputs/ and /outputs/.
+An /input/ of a problem is a free variable in the formula.
+An /output/ of a problem is a free variable in the formula.
 
-      - $x$ is the initial state.
-      - $f$ is the next-state function.
+Another example: the problem "Is the sum of two even numbers even?" is the formula \( E(x) \wedge E(y) \to E(x+y) \).
 
-    - Trace? History? Path? Computation path?
-    - [[https://en.wikipedia.org/wiki/Iterated_function][WP:Iterated function]]
-    - [[https://en.wikipedia.org/wiki/Iteration][WP:Iteration]]
+What does it mean to solve a problem (answer a question)?
+Solving a problem is answering a question.
+Answering a question corresponds to /proving a formula/.
+Answering a question corresponds to /finding a model/ of a formula?
 
-- Function $f$ is /computable/ by formal system $S$ iff $S$ has a finite description of $f$.
-- Are there one-way functions?
-- Mess: next-state relation
+A /problem/ may be /modeled/ by a /relation/ between questions and answers.
+For example, the problem \( \forall x \exists y : x+x = y \)
+is modeled by the relation \( \{ (0,0), (1,2), (2,4), \ldots \} \)
+and is also modeled by the relation \( \{ (\epsilon,\epsilon), (1,11), (11,1111), \ldots \} \).
 
-  - The /next-state relation/ $N$ is obtained from $T$
-    by making a loop for each isolated vertex.
-    For each $x$ in the domain of $T$, $N(x,y) = T(x,y)$.
-    For each outside $x$, $N(x,x)$.
-  - The computed relation of $T$ is $N^\infty = N^\infty \circ N$.
-  - The problem computed by the graph is the infinite self-composition of the graph's next-state function.
-    Such problem is the smallest $X$ that satisfies $N \circ X = X$.
-    It is the least fixed point of $F$ where $F(X) = N \circ X$.
-    The nth self-composition of $N$ is $N^n = E \circ N^{n-1}$.
-  - An /infinite composition/ $N^\infty$ is a relation satisfying $N^\infty \circ N = N^\infty$.
-    The empty relation satisfies this.
-    The other one is nontrivial.
+Do not conflate a problem and a model of it.
+A problem is a formula, /not/ a relation.
 
-- Problem computed by a graph
+Compare various definitions of "problem"
+ [fn::https://en.wikipedia.org/wiki/Computational_complexity_theory]
+ [fn::https://plato.stanford.edu/entries/computational-complexity/].
 
-  - A graph G /computes/ the problem
-    $P(G) = \{ (x,y) ~|~ \text{\\(y\\) is the nearest terminal vertex reachable from \\(x\\)} \}$.
-    Because the graph is loopless, there is no path from a vertex to itself, a vertex is not reachable from itself.
+A problem is \cite{sep-computational-complexity}
 
-#+BEGIN_EXAMPLE
-    terminal(x) = not exists y : E(x,y)
-    reach(x,y) = E(x,y) vee exists m ( reach(x,m) wedge reach(m,y) )
-    adist(x,y,1) = E(x,y)
-    adist(x,y,n) = exists m exists k : dist(x,m,k) wedge dist(m,y,n-k)
-    dist(x,y,n) = adist(x,y,n) wedge neg exists m < n : adist(x,y,m)
-#+END_EXAMPLE
+Problem can be /composed/ as formulas can be composed.
+** Machine, computation, reasonable encoding
+A /machine/ is a tool that /computes/ what the machine is designed for.
+A machine has material existence.
+It is a physical implement.
 
-- Configuration graph as formal system?
+A machine /computes/ the function problem \(y = f(x)\) with input \(x\) and output \(y\), iff,
+starting with \(\hat{x}\), the machine eventually arrives at \(\hat{y}\),
+in such a way that there is a /reasonable encoding/ between \(x\) and \(\hat{x}\) and between \(y\) and \(\hat{y}\).
+We cannot see a natural number, but we can see patterns on a computer screen, and it is trivial for us to understand the number represented by which pattern.
 
-  - Configuration /is/ well-formed formula.
-  - $E(a,b)$ /is/ iff $a' \vdash b'$.
-  - Initial state /is/ axiom.
-  - $F \models P$
+The encoding has to be made explicit.
+"Cheating" in the encoding is a common source of error in P vs NP "proofs".
 
-*** Related articles
-    :PROPERTIES:
-    :CUSTOM_ID: related-articles
-    :END:
+Problem:
+What do we formally mean by "reasonable encoding"?
 
-- related Wikipedia articles
+Digression:
+In [[file:philo.html]], I write that a machine is a tool, that is something that we use to extend our self (what we control).
+** Computable, algorithm, finite description
+Function $f$ is /computable/ by formal system $S$ iff $S$ has a /finite description/ of $f$.
 
-  - [[https://en.wikipedia.org/wiki/Logic_of_graphs][WP:Logic of graphs]] (related to finite model theory)
-  - [[https://en.wikipedia.org/wiki/Disjoint_union][WP:Disjoint union]]
+An /algorithm/ solves a /problem/.
+A problem can be solved by many algorithms with different resource usage characteristics.
 
-- Introductory materials
+An algorithm is a finite description of what a machine is supposed to do.
+** Machine abstraction, formal system
+An /machine abstraction/ is a mathematical abstraction of a machine.
+Such abstraction is usually a formal system.
+** Complexity
+The worst-case time complexity[fn::https://en.wikipedia.org/wiki/Worst-case_complexity]
+of machine $m$ for input $x$ is $t(m,x)$,
+the number of steps $m$ makes between the beginning and the halting.
+The /worst-case time complexity/ of $m$ for input /size/ $n$ is
+$T(m,n) = \left\vert \max_{|x| = n} t(m,x) \right\vert$.
+We can also write asymptotic statements such as $T(m,n) \in O(f(n))$.
 
-  - Universal algebra (precursor to model theory)
+An algorithm implies a machine.
 
-    - [[http://mathcs.chapman.edu/~jipsen/talks/BLAST2009/JipsenUAtutorial1pp.pdf][Peter Jipsen's "tutorial on universal algebra"]]
-      presumes you know some abstract algebra.
-    - [[http://www.math.hawaii.edu/~ralph/Classes/619/UA-Valeriote.pdf][Matt Valeriote's "Lectures on universal algebra"]]
-    - Not so introductory?
+The complexity class of a problem is the worst-case time complexity of the most efficient algorithm solving that problem.
 
-      - [[http://www.uni-log.org/joana.pdf][Joanna Grygiel's "universal algebra for logics"]] (is this introductory?)
-      - [[http://www.math.hawaii.edu/~ralph/Classes/619/willard-ua.pdf][An overview of modern universal algebra]]
-      - [[http://www.dsi.unive.it/~salibra/mainfinale.pdf][Applying Universal Algebra to Lambda Calculus]]
+A /machine/ $M$ is a /transition relation/ $T$
+(an /acyclic/ binary relation).
+$$
+T(x,y) = \text{\(M\) can state-transition from \(x\) to \(y\).}
+$$
 
-  - Model theory
+$M$ /computes/ $P$ iff
+a subgraph of the shortcut of $T$ is isomorphic to $P$.
+(If $T$ were cyclic, this definition would fail.)
 
-    - [[http://www.math.toronto.edu/weiss/model_theory.pdf]["Fundamentals of model theory"]]
+Related:
+[[https://en.wikipedia.org/wiki/Graph_isomorphism][graph isomorphism]],
+[[https://en.wikipedia.org/wiki/Subgraph_isomorphism_problem][subgraph isomorphism problem]].
 
-  - Finite model theory
+/Deterministic/ machine equals /functional/ relation.
 
-    - [[https://dtai.cs.kuleuven.be/krr/files/seminars/IntroToFMT-janvdbussche.pdf][Jan Van den Bussche's "Introduction to finite model theory"]]
-      seems approachable
+$G$ /accepts/ $v$ iff $F^\infty(\{v\}) = \emptyset$ where $F$ is the graph's fringe function.
+The /language/ recognized by $G$ is the largest $L \subseteq V$ such that $F^\infty(L) = \emptyset$.
 
-  - Hodge theory
+A Turing machine is $(C,I,f)$
+where $C$ is countable
+and $f$ is recursive.
 
-    - [[https://arxiv.org/abs/0807.4991][Vladimir G. Ivancevic and Tijana T. Ivancevic's "undergraduate lecture notes in de Rham--Hodge theory"]]
+https://en.wikipedia.org/wiki/Register_machine
 
-- People and activities
+Example: a state of a Turing machine is $(c,l,h,r)$
+where $c$ is a configuration,
+$l$ is the tape content to the left of the head,
+$h$ is the tape content at the head,
+and $r$ is the tape content to the right of the head.
+** Problem, reduction
+Sometimes we can /reduce/ a problem into another problem?
+* Computation
+** Etymology, history, and calculation
+Etymonline[fn::https://www.etymonline.com/word/computer]
 
-  - [[https://logic.rwth-aachen.de/~graedel/][Erich Grädel]]
+CCIW's take on the origin of the word[fn::http://www.cciw.com/content/computer_etymology.html]
 
-    - "Finite model theory studies the relationship between logical definability and computational complexity on finite structures."
-    - [[https://logic.rwth-aachen.de/Research/AlMoTh/][Algorithmic model theory]]
-    - [[https://logic.rwth-aachen.de/pub/graedel/AbuzaidDawGraPak17.pdf]["Definability of summation problems for abelian groups and semigroups"]].
-      "Our interest in the Abelian Semigroup Summation Problem
-      is due to the observation that it illustrates, in a mathematically
-      very pure way, the basic differences between logics and algorithms,
-      or between definability and complexity, that underly
-      some of the most fundamental and exciting problems of logic
-      in computer science."
-    - [[https://logic.rwth-aachen.de/pub/graedel/GrPaPa17.pdf]["The model-theoretic expressiveness of propositional proof systems"]]
+According to dictionary.com[fn::http://www.dictionary.com/browse/compute],
+the word 'compute' comes from the Latin word 'computare'
+that comes from the prefix 'com-' (together) and the word 'putare' (think),
+so 'compute' roughly means 'think together'.
 
-  - Ronald Fagin
-  - Neil Immerman
-  - many others?
+Wikipedia[fn::https://en.wikipedia.org/wiki/Computer#Etymology]
 
-- http://www.math.ucla.edu/~chernikov/teaching/17W-MATH285D/FiniteModelTheoryNotes.pdf
-- external resources
+A computer used to mean a person that does a lot of calculations as his/her daily job.
+The calculations are arithmetics and looking up values in tables.
 
-  - online text books?
+Replacing humans with machines does not change the essence of computation.
 
-    - http://theoryofcomputing.org/articles/main/index.html
-    - http://oajse.com/subjects/computer_science.html
+Common usage in 2016 suggests that calculation is numerical computation,
+in the same way that a [[https://www.google.co.id/search?q=calculator&tbm=isch][calculator]]
+is a specialized computer for solving numerical problems.
 
-  - journals?
+/Calculate/ has a numerical connotation.
 
-    - https://www.hindawi.com/journals/ase/contents/
+Leibniz used the term 'calculation'?
+Turing used 'effective calculability' to mean [[https://en.wikipedia.org/wiki/Algorithm][algorithmic]]?
+Computation is calculation? It's just following rules?
+** Genus-differentia definition of computation?
+A computation is (what) that (what)?
 
-- Predicate Computation and Search Problem
+Process? Activity? Mechanism?
 
-  - Isomorphism:
+A program describes the computation performed by a machine.
+A program modulates the machine.
+Manipulates computational resources to compute something.
+** Computation as sequence of steps
+In a Turing machine, a step is a state transition
+that consists of reading the tape cell,
+writing the tape cell,
+moving the tape head,
+and changing the internal state.
+In $\lambda$-calculus,
+a step is a $\beta$-reduction
+of an expression composed from more primitive subexpressions.
+These examples suggest that we can define computation as a /sequence/ of steps.
 
-    - Language ~ predicate.
-    - Predicate ~ set.
+Each of those models is a special case of [[file:decider][deciders]],
+the most abstract and general theoretical machine I could think of.
+** Computation as information transformation
+Computation is answering a question.
 
-      - (A predicate is a unary relation.)
+What is the relationship between computation and answering questions?
 
-  - Insight?
+A computer reduces information?
+Transforms information?
 
-    - Every predicate $p$
-      gives rise to at least two problems:
+Computation is transformation of information?
+** Computation as model/concretion?
+Computation is running a program on a machine.
 
-      - $\Compute(p) = \text{given \\(x\\), compute \\(p(x)\\)}$, and
-      - $\Search(p) = \text{find any \\(x\\) such that \\(p(x)\\) is true}$.
+It seems that the defining feature of computation is conditional and repetition.
 
-    - https://en.wikipedia.org/wiki/Search_problem
+Program is a model.
+** Misconception of computing programs
+A program does not compute; it is the machine that does.
+When we informally say that a program computes a function,
+we actually mean that running the program on the machine causes
+the machine to compute that function.
+A program is not capable of doing anything on its own;
+a machine has to execute it.
+Asking what a program does does not make sense;
+a program does nothing.
+However, for everyday practical reason, we conflate a program
+and the result of executing it on the machine we have.
 
-  - There are $p$ with slow $\Compute(p)$ but fast $\Search(p)$?
-  - There are $p$ with fast $\Compute(p)$ but slow $\Search(p)$?
-  - Conjecture:
-    For every complexity class $C$,
-    there exists $p$ such that $\Compute(p) \in C$.
-  - Conjecture:
-    For every predicate $p$,
-    there exists complexity class $C$ such that $\Compute(p) \in C$.
-  - Conjecture:
-    For every complexity classes $C \subset D$,
-    there exists $p$ such that $\Compute(p) \in D-C$.
-  - Conjecture:
-    For every complexity class $C$,
-    there exists $p$ such that $\Compute(p) \in C$ and $\Search(p) \not\in C$.
-  - Conjecture:
-    For every predicate $p$,
-    there exists complexity class $C$ such that $\Compute(p) \in C$ and $\Search(p) \not\in C$.
-  - Problem formation conjecture:
-    For every complexity class $C$,
-    there exists $p,P,Q$ such that $P(p) \in C$ and $Q(p) \not\in C$.
-  - Conjecture of arbitrary pessimization:
-    For all complexity classes $F$ and $S$ where $F \subset S$,
-    there exists $p$ such that $\Compute(p) \in S$ and $\Search(p) \in F$.
-    The letters $F$ and $S$ are mnemonics for "fast" and "slow".
+** Diving into philosophy of computation
+Ian Horswill wrote an introductory article "What is computation?"[fn::http://www.cs.northwestern.edu/~ian/What%20is%20computation.pdf].
 
-- Lemma: There exists fast $p$ having slow $S(p)$.
-- Conjecture:
-  For every complexity classes $C$,
-  there exists $p \in C$ such that $S(p) \not\in C$.
-- Conjecture:
-  For every complexity classes $C$ and $D$,
-  there exists $p \in C$ such that $S(p) \in D$.
-- Formal languages and describable problems
-
-  - Consider the formal language $L$
-    with alphabet $\{ z,s \}$
-    and formation rules
-
-  1) $z \in L$ and
-  2) $\alpha \in L \rightarrow s \alpha \in L$.
-     It should be obvious that $L$ describes the set $\{ z, sz, ssz, \ldots \}$.
-     This language solves the problem of adding a natural number by one.
-
-- First-order logic
-
-  - Example of terms in first-order logic:
-
-    - $x$
-    - $R(x,y)$
-    - $R(x) \wedge S(y)$
+\cite{sep-computation-physicalsystems}
+* More?
+** Venue?
+http://www.computationalcomplexity.org/
+** Rant: The sad state of computational complexity texts
+It is philosophically appaling that most computational complexity texts readily show what a problem is /represented/ as,
+but never clearly and /formally define/ what a problem /is/.
+It is appaling that they spend hundreds of pages discussing something undefined.
