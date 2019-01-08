@@ -2,34 +2,111 @@
 #+DATE: 2017-06-29 22:40 +0700
 #+PERMALINK: /compute.html
 #+MATHJAX: yes
-* Suggested learning sequence
-We study computation before machine because the replacement of human by machine is irrelevant to the essence of computation.
+* What is computation?
+Here we analyze the meaning of computation in everyday usage.
+Then we formalize a computation model as a logical structure.
+Then we define what it means to compute a function with respect to that model.
+** Etymology, short history, and calculation
+In 1640, a computer is a human calculator.[fn:eocomputer:https://www.etymonline.com/word/computer]
+In 1897, a computer is a mechanical calculator.[fn:eocomputer]
+In 1945, a computer is an electronic calculator.[fn:eocomputer]
+All those computers ran approximation algorithms to generate look-up tables of values of transcendental functions.
+However, as we build stronger computers, we begin trying to simulate reality,
+and we wonder whether the Universe is just an extremely powerful computer.
+A few decades before 2018, a computer is a desktop computer,
+calculation gained a numerical connotation,
+and a calculator is a computer specialized for numerical problems,
+and thus calculation is numerical computation,
+and a human calculator is a human who can mentally manipulate digits quickly and correctly, compared to the average human.
+The world progressed explosively,
+despite being built on increasingly complex computer systems with ever-more undefined behaviors,
+occasionally killing people.
+Nevertheless, modernization does not change the nature of computation:
+finite, discrete, sequential, precise, algorithmic.
+** Algorithm, to compute
+An /algorithm/ is a finite description of how a computer computes something.
+In the medievals, an algorithm is a numerical approximation scheme.
+Anyone who knows basic arithmetics can rigidly carry out the algorithms
+and produce the correct answer without any understanding of how it works.
+** Some ontology
+The long addition algorithm does not describe how to add two numbers \(x\) and \(y\).
+It describes how to manipulate two /representations/ \(e(x)\) and \(e(y)\) in order to produce a third representation \(e(x+y)\)
+that represents the sum of \(x\) and \(y\).
+** Computing a function
+What do we mean when we say "Compute \(f(x)\)"?
+** Computation model, structure
+The key idea is to use a structure to represent the internal states of a machine.
 
-While defining computation, we have difficulty defining what a /reasonable encoding/ is.
-Why do we assume that numbers are encoded in positional notation[fn::https://en.wikipedia.org/wiki/Positional_notation], not unary notation[fn::https://en.wikipedia.org/wiki/Unary_numeral_system]?
+A /computation model/ is a /formal system/ that abstracts the internal states of a computing machine.
 
-We see that encoding affects complexity.
-Adding two natural numbers \(m\) and \(n\) takes \(O(m+n)\) steps in unary notation,
-but \(O(\log(\max(m,n)))\) steps in positional notation.
-Therefore, why don't encode a number as its prime factorization,
-to simplify multiplication while complicating addition?
+A /machine abstraction/ is a mathematical abstraction of a machine.
+Such abstraction is usually a formal system.
 
-...
+Now we define "to compute the function \(f : D \to C\)" with respect to the computation model \((D,C,S,d,c,t)\) where
+\(d : D \to S\), and
+\(c : C \to S\), and
+\(t\) has arity \((S,S,S)\).
+The computation model is a three-sorted structure.
+The functions \(d\) and \(c\) together bridge two things:
+(1) our high-level thought of the machine computes, and
+(2) the logical system that abstracts the machine's internal state and computation.
+Let \(S\) be the computation model's domain of discourse, that is, the set of each mathematical object that is a simplified representation of a machine internal state.
+Let \(t\) be a relation symbol of arity 2.
+The relation \(t\) represents the state transition relation.
+Define the transitive closure of \(t\) as \(T(x,y) = (TC(t))(x,y) = t(x,y) \vee \exists z (t(x,z) \wedge T(z,y))\)
+where \(TC\) is the transitive-closure operator.
 
-In the end, we hope to solve the P vs NP problem.
-** Algorithm, computation
-An /algorithm/ is a /finite description/ of /computation/.
+Machine \(M\) computes function \(f : D \to C\) according to computation model \((D,C,S,d,c,t)\) iff
+\[
+compute(M,f) = \forall x : T(d(x), c(f(x)))
+\]
 
-An /algorithm/ is a /finite description/ of how something is /computed/.
+We can focus on the computation model, and focus on the substructure \((S,t)\) instead.
 
-An algorithm is a /representation/ (/encoding/) of a computation.
-** Logic, model
-See [[file:logic.html]].
-** Computation
+A machine /computes/ the function \(f : D \to C\) according to the computation model \((S,c,d,t)\), iff,
+for all \(x \in D\), it is true that \(T(d(x),c(f(x)))\), that is, the machine starts at state \(d(x)\) and finishes at state \(c(f(x))\).
+
+A /computation model/ is a logical system that has a domain of discourse representing machine internal state,
+and has an arity-2 relation symbol \(t\) representing the state transition relation.
+
+TODO \cite{vardi1998computational}
+** Encoding scheme
+Now we define encoding.
+
+An encoding is a representation of something.
+A representation is not the represented, but a representation behaves in the way the represented does.
+Formally, an /encoding scheme/ is a computable bijective function \(e : D \to A^*\) where \(A\) is an alphabet.
+Thus, an encoding scheme is an /algorithm/ that describes a bijective function.
+
+If "algorithm" and "encoding scheme" depend on each other,
+then there is only one logical conclusion:
+/Algorithm and encoding-scheme are the same thing./
+** Computable, algorithm, finite description
+Function $f$ is /computable/ by formal system $S$ iff $S$ has a /finite description/ of $f$.
+
+An /algorithm/ solves a /problem/.
+A problem can be solved by many algorithms with different resource usage characteristics.
+
+An algorithm is a finite description of what a machine is supposed to do.
+** Is computation inherently sequential? Computation as sequence of steps
+In a Turing machine, a step is a state transition
+that consists of reading the tape cell,
+writing the tape cell,
+moving the tape head,
+and changing the internal state.
+In $\lambda$-calculus,
+a step is a $\beta$-reduction
+of an expression composed from more primitive subexpressions.
+These examples suggest that we can define computation as a /sequence/ of steps.
+
+Each of those models is a special case of [[file:decider][deciders]],
+the most abstract and general theoretical machine I could think of.
 ** Programmability
 Some machines are /programmable/. Such machine implements several functions
 that can be chosen by a /program/ which is a part of the machine's input.
 A program chooses which function the machine shall compute.
+** Logic, model
+See [[file:logic.html]].
 ** Problem, formula, input, output, model, relation
 "Problem" comes from Greek "problema" which means "a task, that which is proposed, a question".[fn::https://www.etymonline.com/word/problem]
 Therefore, a problem /is/ a question, or, formally, a /logical formula/.
@@ -72,34 +149,6 @@ Compare various definitions of "problem"
 A problem is \cite{sep-computational-complexity}
 
 Problem can be /composed/ as formulas can be composed.
-** Machine, computation, reasonable encoding
-A /machine/ is a tool that /computes/ what the machine is designed for.
-A machine has material existence.
-It is a physical implement.
-
-A machine /computes/ the function problem \(y = f(x)\) with input \(x\) and output \(y\), iff,
-starting with \(\hat{x}\), the machine eventually arrives at \(\hat{y}\),
-in such a way that there is a /reasonable encoding/ between \(x\) and \(\hat{x}\) and between \(y\) and \(\hat{y}\).
-We cannot see a natural number, but we can see patterns on a computer screen, and it is trivial for us to understand the number represented by which pattern.
-
-The encoding has to be made explicit.
-"Cheating" in the encoding is a common source of error in P vs NP "proofs".
-
-Problem:
-What do we formally mean by "reasonable encoding"?
-
-Digression:
-In [[file:philo.html]], I write that a machine is a tool, that is something that we use to extend our self (what we control).
-** Computable, algorithm, finite description
-Function $f$ is /computable/ by formal system $S$ iff $S$ has a /finite description/ of $f$.
-
-An /algorithm/ solves a /problem/.
-A problem can be solved by many algorithms with different resource usage characteristics.
-
-An algorithm is a finite description of what a machine is supposed to do.
-** Machine abstraction, formal system
-An /machine abstraction/ is a mathematical abstraction of a machine.
-Such abstraction is usually a formal system.
 ** Complexity
 The worst-case time complexity[fn::https://en.wikipedia.org/wiki/Worst-case_complexity]
 of machine $m$ for input $x$ is $t(m,x)$,
@@ -144,34 +193,20 @@ $h$ is the tape content at the head,
 and $r$ is the tape content to the right of the head.
 ** Problem, reduction
 Sometimes we can /reduce/ a problem into another problem?
-* Computation
-** Etymology, history, and calculation
-Etymonline[fn::https://www.etymonline.com/word/computer]
+** Digressions
+*** Pullback
+We can model the apparent function computed by the machine as \(g : A^* \to A^*\) where \(g(e(x)) = e(f(x))\).
+We then do some algebraic manipulation:
+\begin{align*}
+\\ g(e(x)) &= e(f(x))
+\\ (g \circ e)(x) &= (e \circ f)(x)
+\\ g \circ e &\equiv e \circ f
+\end{align*}
 
-CCIW's take on the origin of the word[fn::http://www.cciw.com/content/computer_etymology.html]
-
-According to dictionary.com[fn::http://www.dictionary.com/browse/compute],
-the word 'compute' comes from the Latin word 'computare'
-that comes from the prefix 'com-' (together) and the word 'putare' (think),
-so 'compute' roughly means 'think together'.
-
-Wikipedia[fn::https://en.wikipedia.org/wiki/Computer#Etymology]
-
-A computer used to mean a person that does a lot of calculations as his/her daily job.
-The calculations are arithmetics and looking up values in tables.
-
-Replacing humans with machines does not change the essence of computation.
-
-Common usage in 2016 suggests that calculation is numerical computation,
-in the same way that a [[https://www.google.co.id/search?q=calculator&tbm=isch][calculator]]
-is a specialized computer for solving numerical problems.
-
-/Calculate/ has a numerical connotation.
-
-Leibniz used the term 'calculation'?
-Turing used 'effective calculability' to mean [[https://en.wikipedia.org/wiki/Algorithm][algorithmic]]?
-Computation is calculation? It's just following rules?
-** Genus-differentia definition of computation?
+An equation of the shape \(g \circ e \equiv e \circ f\) is a special case of pullbacks[fn::https://en.wikipedia.org/wiki/Pullback_(category_theory)] in category theory.
+*** Cheating
+"Cheating" with an unreasonable encoding is a common error in P vs NP "proofs".
+*** Genus-differentia definition of computation?
 A computation is (what) that (what)?
 
 Process? Activity? Mechanism?
@@ -179,20 +214,7 @@ Process? Activity? Mechanism?
 A program describes the computation performed by a machine.
 A program modulates the machine.
 Manipulates computational resources to compute something.
-** Computation as sequence of steps
-In a Turing machine, a step is a state transition
-that consists of reading the tape cell,
-writing the tape cell,
-moving the tape head,
-and changing the internal state.
-In $\lambda$-calculus,
-a step is a $\beta$-reduction
-of an expression composed from more primitive subexpressions.
-These examples suggest that we can define computation as a /sequence/ of steps.
-
-Each of those models is a special case of [[file:decider][deciders]],
-the most abstract and general theoretical machine I could think of.
-** Computation as information transformation
+*** Computation as information transformation
 Computation is answering a question.
 
 What is the relationship between computation and answering questions?
@@ -201,28 +223,81 @@ A computer reduces information?
 Transforms information?
 
 Computation is transformation of information?
-** Computation as model/concretion?
+*** Computation as model/concretion?
 Computation is running a program on a machine.
 
 It seems that the defining feature of computation is conditional and repetition.
 
 Program is a model.
-** Misconception of computing programs
-A program does not compute; it is the machine that does.
-When we informally say that a program computes a function,
-we actually mean that running the program on the machine causes
-the machine to compute that function.
-A program is not capable of doing anything on its own;
-a machine has to execute it.
-Asking what a program does does not make sense;
-a program does nothing.
-However, for everyday practical reason, we conflate a program
-and the result of executing it on the machine we have.
-
-** Diving into philosophy of computation
+*** Diving into philosophy of computation
 Ian Horswill wrote an introductory article "What is computation?"[fn::http://www.cs.northwestern.edu/~ian/What%20is%20computation.pdf].
 
 \cite{sep-computation-physicalsystems}
+*** Machine
+A /machine/ is a tool that /computes/ what the machine is designed for.
+A machine has material existence.
+It is a physical implement.
+
+Digression:
+In [[file:philo.html]], I write that a machine is a tool, that is something that we use to extend our self (what we control).
+*** Even more historical?
+Leibniz used the term "calculation"?
+Turing used "effective calculability" to mean "algorithmic"?
+Computation is calculation? It's just following rules?
+* Undoing chronic ontological sloppiness
+First, we undo the chronic ontologically-sloppy habit of conflating a thing and a representation of the thing.
+"123" is not a number; it is a /representation/ of a number.
+We cannot manipulate numbers physically; we can only manipulate their physical representations.
+Numbers do not have material existence.
+When we "add two numbers", we are actually manipulating the representations of those numbers in a way that corresponds to adding those numbers.
+Formally, if \(e : \Nat \to \{0,1\}^*\) is an encoding scheme, then
+\( e(x+y) = e(x) +_e e(y) \), where \(+\) is the operation that we think we do, and \(+_e\) is the operation that we actually do.
+We think we are adding numbers, but we are actually writing on paper.
+
+Then, we un-conflate a program and a machine running the program.
+A program does not /compute/; it is the machine that computes.
+A program cannot do anything on its own; a machine has to run it.
+When we say "a program computes a function",
+we actually mean that running the program on the machine causes
+the machine to compute that function.
+
+Unfortunately, the ontologically correct thing is very wordy,
+so I write in conflated manner.
+For example, when I write "this program adds two numbers",
+what I really mean is
+"running the program causes the machine to manipulate two representations in a way that corresponds to adding two numbers".
+Fortunately, the only time we have to care about this ontological issue is when we are talking about the foundations of computation.
+* Computation and encoding
+** Encoding affects complexity
+Encoding a natural number \(n\) in unary notation takes \(n\) symbols.
+Encoding the same number in binary notation takes approximately \(\log_2(n)\) symbols.
+
+Adding two natural numbers \(m\) and \(n\) takes \(m+n\) steps in unary notation,
+but only approximately \(\log(\max(m,n))\) steps in positional notation.
+
+Why don't encode a number as its prime factorization,
+to simplify multiplication while complicating addition?
+
+What do we formally mean by "reasonable encoding"?
+
+Why do we assume that numbers are encoded in positional notation[fn::https://en.wikipedia.org/wiki/Positional_notation], not unary notation[fn::https://en.wikipedia.org/wiki/Unary_numeral_system]?
+
+My guess:
+What we mean by reasonable encoding is an /order-preserving homomorphism/:
+\begin{align*}
+a < b &\iff e(a) <_e e(b)
+\\
+a = b &\iff e(a) = e(b)
+\end{align*}
+
+A homomorphism preserves structure.
+But which structure?
+
+We may encode the natural numbers as the bitwise-negation of the base-2 representation: 1, 0, 11, 10, 01, 00, etc.
+** What makes an encoding reasonable?
+A /reasonable encoding/ is an encoding that is easy to compute and is easy to invert.
+
+A reasonable encoding has a finite description.
 * More?
 ** Venue?
 http://www.computationalcomplexity.org/
