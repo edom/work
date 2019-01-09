@@ -6,34 +6,129 @@
 Here we analyze the meaning of computation in everyday usage.
 Then we formalize a computation model as a logical structure.
 Then we define what it means to compute a function with respect to that model.
-** Etymology, short history, and calculation
+** What is the everyday meaning of computation?
 In 1640, a computer is a human calculator.[fn:eocomputer:https://www.etymonline.com/word/computer]
 In 1897, a computer is a mechanical calculator.[fn:eocomputer]
 In 1945, a computer is an electronic calculator.[fn:eocomputer]
 All those computers ran approximation algorithms to generate look-up tables of values of transcendental functions.
 However, as we build stronger computers, we begin trying to simulate reality,
 and we wonder whether the Universe is just an extremely powerful computer.
-A few decades before 2018, a computer is a desktop computer,
+Some time in the 1970s, a computer is a desktop computer,
 calculation gained a numerical connotation,
 and a calculator is a computer specialized for numerical problems,
 and thus calculation is numerical computation,
-and a human calculator is a human who can mentally manipulate digits quickly and correctly, compared to the average human.
+and a human calculator is a human who can mentally manipulate digits quickly and correctly.
 The world progressed explosively,
 despite being built on increasingly complex computer systems with ever-more undefined behaviors,
 occasionally killing people.
-Nevertheless, modernization does not change the nature of computation:
+
+\cite{sep-computation-physicalsystems}
+
+Nevertheless, modernization does not change the nature of computation model:
 finite, discrete, sequential, precise, algorithmic.
-** Algorithm, to compute
+
 An /algorithm/ is a finite description of how a computer computes something.
-In the medievals, an algorithm is a numerical approximation scheme.
-Anyone who knows basic arithmetics can rigidly carry out the algorithms
-and produce the correct answer without any understanding of how it works.
-** Some ontology
+In the medievals, an algorithm is a numerical approximation scheme to be run by humans.
+Anyone who knows basic arithmetics can mindlessly carry out an algorithm
+and produce a correct answer without any understanding of why or how the algorithm works.
+
+An algorithm restates a function as a composition of /primitives/.
+
+Some note about ontology:
 The long addition algorithm does not describe how to add two numbers \(x\) and \(y\).
 It describes how to manipulate two /representations/ \(e(x)\) and \(e(y)\) in order to produce a third representation \(e(x+y)\)
 that represents the sum of \(x\) and \(y\).
-** Computing a function
+
 What do we mean when we say "Compute \(f(x)\)"?
+
+Some machines are /programmable/.
+Such machine implements several functions that can be chosen by a /program/ which is a part of the machine's input.
+A program chooses which function the machine shall compute.
+** Undoing chronic ontological sloppiness
+First, we undo the chronic ontologically-sloppy habit of conflating a thing and a representation of the thing.
+"123" is not a number; it is a /representation/ of a number.
+We cannot manipulate numbers physically; we can only manipulate their physical representations.
+Numbers do not have material existence.
+When we "add two numbers", we are actually manipulating the representations of those numbers in a way that corresponds to adding those numbers.
+Formally, if \(e : \Nat \to \{0,1\}^*\) is an encoding scheme, then
+\( e(x+y) = e(x) +_e e(y) \), where \(+\) is the operation that we think we do, and \(+_e\) is the operation that we actually do.
+We think we are adding numbers, but we are actually writing on paper.
+
+Then, we un-conflate a program and a machine running the program.
+A program does not /compute/; it is the machine that computes.
+A program cannot do anything on its own; a machine has to run it.
+When we say "a program computes a function",
+we actually mean that running the program on the machine causes
+the machine to compute that function.
+
+Unfortunately, the ontologically correct thing is very wordy,
+so I write in conflated manner.
+For example, when I write "this program adds two numbers",
+what I really mean is
+"running the program causes the machine to manipulate two representations in a way that corresponds to adding two numbers".
+Fortunately, the only time we have to care about this ontological issue is when we are talking about the foundations of computation.
+** Digressions
+*** Genus-differentia definition of computation?
+A computation is (what) that (what)?
+
+Process? Activity? Mechanism?
+
+A program describes the computation performed by a machine.
+A program modulates the machine.
+Manipulates computational resources to compute something.
+*** Computation as information transformation
+Computation is answering a question.
+
+What is the relationship between computation and answering questions?
+
+A computer reduces information?
+Transforms information?
+
+Computation is transformation of information?
+*** Computation as model/concretion?
+Computation is running a program on a machine.
+
+It seems that the defining feature of computation is conditional and repetition.
+
+Program is a model.
+*** Diving into philosophy of computation
+Ian Horswill wrote an introductory article "What is computation?"[fn::http://www.cs.northwestern.edu/~ian/What%20is%20computation.pdf].
+*** Machine
+A /machine/ is a tool that /computes/ what the machine is designed for.
+A machine has material existence.
+It is a physical implement.
+
+Digression:
+In [[file:philo.html]], I write that a machine is a tool, that is something that we use to extend our self (what we control).
+*** Even more historical?
+Leibniz used the term "calculation"?
+Turing used "effective calculability" to mean "algorithmic"?
+Computation is calculation? It's just following rules?
+* What is computation theory?
+Computation theory spans philosophy, physics, and mathematics.
+The mathematics part[fn::https://en.wikipedia.org/wiki/Theory_of_computation] studies logical models of computation, not computation itself.
+
+Which part of computation theory are we interested in?
+This document is mostly the mathematics part, because there is a one-million-dollar prize for solving the P vs NP problem.
+There is ACM Special Interest Group on Logic and Computation (SIGLOG)[fn::https://siglog.acm.org/about/].
+There is also Computational Complexity Conference[fn::http://www.computationalcomplexity.org/].
+
+We can think of computation theory as refining these hierarchies:
+automaton power hierarchy[fn::https://en.wikipedia.org/wiki/Automata_theory],
+problem complexity hierarchy,
+logic strength hierarchy,
+Chomsky language hierarchy[fn::https://en.wikipedia.org/wiki/Chomsky_hierarchy],
+arithmetical hierarchy[fn::https://en.wikipedia.org/wiki/Arithmetical_hierarchy],
+reverse mathematics[fn::https://en.wikipedia.org/wiki/Reverse_mathematics#The_big_five_subsystems_of_second-order_arithmetic],
+and so on.
+They are related to each other.
+One goal of such hierarchies is to find out which feature gives which power.
+* Computation models
+1999 Immerman \cite{Immerman99descriptivecomplexity},
+2009 Arora & Barak \cite{Arora2009},
+2009 Marek & Remmel \cite{Marek2009},
+2002 Boolos, Burgess, & Jeffrey \cite{Boolos2002},
+1987 Rogers \cite{Rogers1987}.
 ** Computation model, structure
 The key idea is to use a structure to represent the internal states of a machine.
 
@@ -99,12 +194,7 @@ a step is a $\beta$-reduction
 of an expression composed from more primitive subexpressions.
 These examples suggest that we can define computation as a /sequence/ of steps.
 
-Each of those models is a special case of [[file:decider][deciders]],
-the most abstract and general theoretical machine I could think of.
-** Programmability
-Some machines are /programmable/. Such machine implements several functions
-that can be chosen by a /program/ which is a part of the machine's input.
-A program chooses which function the machine shall compute.
+Each of those models is a special case of deciders.
 ** Logic, model
 See [[file:logic.html]].
 ** Problem, formula, input, output, model, relation
@@ -206,68 +296,6 @@ We then do some algebraic manipulation:
 An equation of the shape \(g \circ e \equiv e \circ f\) is a special case of pullbacks[fn::https://en.wikipedia.org/wiki/Pullback_(category_theory)] in category theory.
 *** Cheating
 "Cheating" with an unreasonable encoding is a common error in P vs NP "proofs".
-*** Genus-differentia definition of computation?
-A computation is (what) that (what)?
-
-Process? Activity? Mechanism?
-
-A program describes the computation performed by a machine.
-A program modulates the machine.
-Manipulates computational resources to compute something.
-*** Computation as information transformation
-Computation is answering a question.
-
-What is the relationship between computation and answering questions?
-
-A computer reduces information?
-Transforms information?
-
-Computation is transformation of information?
-*** Computation as model/concretion?
-Computation is running a program on a machine.
-
-It seems that the defining feature of computation is conditional and repetition.
-
-Program is a model.
-*** Diving into philosophy of computation
-Ian Horswill wrote an introductory article "What is computation?"[fn::http://www.cs.northwestern.edu/~ian/What%20is%20computation.pdf].
-
-\cite{sep-computation-physicalsystems}
-*** Machine
-A /machine/ is a tool that /computes/ what the machine is designed for.
-A machine has material existence.
-It is a physical implement.
-
-Digression:
-In [[file:philo.html]], I write that a machine is a tool, that is something that we use to extend our self (what we control).
-*** Even more historical?
-Leibniz used the term "calculation"?
-Turing used "effective calculability" to mean "algorithmic"?
-Computation is calculation? It's just following rules?
-* Undoing chronic ontological sloppiness
-First, we undo the chronic ontologically-sloppy habit of conflating a thing and a representation of the thing.
-"123" is not a number; it is a /representation/ of a number.
-We cannot manipulate numbers physically; we can only manipulate their physical representations.
-Numbers do not have material existence.
-When we "add two numbers", we are actually manipulating the representations of those numbers in a way that corresponds to adding those numbers.
-Formally, if \(e : \Nat \to \{0,1\}^*\) is an encoding scheme, then
-\( e(x+y) = e(x) +_e e(y) \), where \(+\) is the operation that we think we do, and \(+_e\) is the operation that we actually do.
-We think we are adding numbers, but we are actually writing on paper.
-
-Then, we un-conflate a program and a machine running the program.
-A program does not /compute/; it is the machine that computes.
-A program cannot do anything on its own; a machine has to run it.
-When we say "a program computes a function",
-we actually mean that running the program on the machine causes
-the machine to compute that function.
-
-Unfortunately, the ontologically correct thing is very wordy,
-so I write in conflated manner.
-For example, when I write "this program adds two numbers",
-what I really mean is
-"running the program causes the machine to manipulate two representations in a way that corresponds to adding two numbers".
-Fortunately, the only time we have to care about this ontological issue is when we are talking about the foundations of computation.
-* Computation and encoding
 ** Encoding affects complexity
 Encoding a natural number \(n\) in unary notation takes \(n\) symbols.
 Encoding the same number in binary notation takes approximately \(\log_2(n)\) symbols.
@@ -298,10 +326,7 @@ We may encode the natural numbers as the bitwise-negation of the base-2 represen
 A /reasonable encoding/ is an encoding that is easy to compute and is easy to invert.
 
 A reasonable encoding has a finite description.
-* More?
-** Venue?
-http://www.computationalcomplexity.org/
-** Rant: The sad state of computational complexity texts
+** Rant: The sad state of computational complexity texts?
 It is philosophically appaling that most computational complexity texts readily show what a problem is /represented/ as,
 but never clearly and /formally define/ what a problem /is/.
 It is appaling that they spend hundreds of pages discussing something undefined.
