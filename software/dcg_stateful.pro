@@ -83,15 +83,14 @@ expand_head(H, HX, S0, I0, S1, I1) :-
     HX =.. HXs.
 
 expand_body(S0, I0, S9, I9, B, BX) :-
-    var(B)      ->  BX=(expand_body(S0,I0,S9,I9,B,BE), BE)
+    var(B)      ->  BX=(dcg_stateful:expand_body(S0,I0,S9,I9,B,BE), call(BE))
 ;   B=!         ->  BX=(S0=S9, I0=I9, B)
 ;   B={BA}      ->  BX=(S0=S9, I0=I9, BA)
 ;   B=(\+N)     ->  BX=((\+BN), S0=S9, I0=I9), expand_body(S0,I0,S9,I9,N,BN)
-% Why does this hang make/0 in prolog_clause?
 ;   B=(BA,BB)   ->  BX=(BAX,BBX), expand_body(S0, I0, S, I, BA, BAX), expand_body(S, I, S9, I9, BB, BBX)
 ;   B=(BA;BB)   ->  BX=(BAX;BBX), expand_body(S0, I0, S9, I9, BA, BAX), expand_body(S0, I0, S9, I9, BB, BBX)
 ;   string(B)   ->  string_codes(B,Cs), expand_body(S0,I0,S9,I9,Cs,BX)
-;   is_listy(B) ->  BX=(append(B,I9,I0), dcg_stateful:state_codes_next(S0,B,S9))
+;   is_listy(B) ->  BX=(lists:append(B,I9,I0), dcg_stateful:state_codes_next(S0,B,S9))
 ;   expand_head(B, BX, S0, I0, S9, I9).
 
 is_listy([]).

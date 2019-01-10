@@ -7,33 +7,13 @@ I only parse the subset that I use.
 https://orgmode.org/worg/dev/org-syntax.html
 
 */
-:- module(org_syntax, [
-    test/0,
-    print_tree/1,
-    tree_str//2
+:- module(pub_org_syntax, [
+    document/5
 ]).
 :- use_module('./dcg_stateful.pro').
 
-test :-
-    string_codes(
-"\\( x = 2 \\)",
-        Codes), state_init(S), phrase_stateful(document(D), S, Codes, SS, Rest), print(D-Rest-SS),
-    print_tree(D),
-    nl.
-
-print_tree(T) :- phrase(tree_str(0,T),C,[]), string_codes(S,C), write(S), nl.
-
-%tree_str(Ind,'[|]') --> !, indent(Ind), "[|]\n".
-%tree_str(Ind,[]) --> !, indent(Ind), "[]\n".
-tree_str(Ind,A) --> {atomic(A), !, term_string(A,S), string_codes(S,C)}, indent(Ind), C, "\n".
-%tree_str(Ind,A) --> {A =.. [H|T], I2 is Ind+2}, tree_str(Ind,H), tree_str(I2,T).
-
-indent(N) --> {N =< 0, !}, "".
-indent(N) --> {N > 0, !, N1 is N-1}, " ", indent(N1).
-
-par_ast([s(S)|T]) --> span(C), !, {string_codes(S,C)}, par_ast(T).
-par_ast([fn(S)|T]) --> [fn(C)], !, {string_codes(S,C)}, par_ast(T). % inline footnote
-par_ast([fr(S)|T]) --> [fr(C)], !, {string_codes(S,C)}, par_ast(T). % footnote reference
+par_ast([s(S)|T]) --> span(S), !, par_ast(T).
+par_ast([fi(Na,Te)|T]) --> [fi(Na,Te)], !, par_ast(T).
 par_ast([texi(S)|T]) --> [texi(C)], !, {string_codes(S,C)}, par_ast(T).
 par_ast([U|T]) --> [U], !, par_ast(T).
 par_ast([]) --> [].
@@ -52,20 +32,33 @@ document([]) => [].
             title([C|T]) => [C], {C \= 10}, title(T).
             title([]) => "".
         nl => "\n".
-        paragraph([fn(F)|T]) => fninline(F), paragraph(T).
-        paragraph([fr(F)|T]) => fnref(F), paragraph(T).
-        paragraph([texi(F)|T]) => texinline(F), paragraph(T).
+        paragraph([A|B]) => par_thing(A), paragraph(B).
         paragraph([c(10)]) => [10], \+nl.
         paragraph([c(10)]) => [10], \+star.
         paragraph([c(C)|T]) => [C], paragraph(T).
         paragraph([]) => [].
-            %par_span_end => fnbegin.
-            %par_span_end => texibegin.
-            fnbegin => "[fn:".
-            fninline(F) => fnbegin, ":", fntext(F), "]".
-                fntext([H|T]) => [H], {H \= 0']}, fntext(T).
-                fntext([]) => [].
-            fnref(F) => fnbegin, \+":", fntext(F), "]".
+            % [fn:A:B] difference: org mode disallows space in A; we allow.
+            par_thing(fi('',Text)) => "[fn::", fnelem(Text), "]".
+            par_thing(fi(Name,Text)) => "[fn:", fnelem_atom(Name), ":", fnelem(Text), "]".
+            par_thing(fi(Name,nil)) => "[fn:", fnelem_atom(Name), "]".
+            par_thing(texi(F)) => texinline(F).
+            par_thing(latex_env(E,A,B)) => latex_env(E,A,B).
+                fnelem([]) => [].
+                fnelem([H|T]) => [H], {H \= 0':}, fnelem(T).
+                fnelem_atom(A) => fnelem(C), {atom_codes(A,C)}.
+                latex_env(E,A,B) => latex_begin(E,A), latex(B), latex_end(E).
+                    latex_begin(E,A) => "\\begin{", reluctant_atom(E), "}", latex_optarg(A).
+                        latex_optarg(A) => "[", latex(A), "]".
+                        latex_optarg(nil) => [].
+                    latex_end(E) => "\\end{", reluctant_atom(E), "}".
+                    latex([]) => [].
+                    latex([H|T]) => latex_thing(H), latex(T).
+                    latex_thing(latex_env(E,A,B)) => latex_env(E,A,B).
+                    latex_thing(H) => [H].
+                    reluctant([]) => [].
+                    reluctant([H|T]) => [H], reluctant(T).
+                    reluctant_atom(A) => reluctant(C), {atom_codes(A,C)}.
+                    reluctant_string(S) => reluctant(C), {string_codes(S,C)}.
             texibegin => "\\(".
             texiend => "\\)".
             texinline(F) => texibegin, texcontent(F).
