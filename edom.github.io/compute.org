@@ -6,11 +6,19 @@
 Here we analyze the meaning of computation in everyday usage.
 Then we formalize a computation model as a logical structure.
 Then we define what it means to compute a function with respect to that model.
-** What is the everyday meaning of computation?
-In 1640, a computer is a human calculator.[fn:eocomputer:https://www.etymonline.com/word/computer]
+** What are computers, machines, automatons, robots?
+In 1640, a /computer/ is a human calculator.[fn:eocomputer:https://www.etymonline.com/word/computer]
 In 1897, a computer is a mechanical calculator.[fn:eocomputer]
 In 1945, a computer is an electronic calculator.[fn:eocomputer]
 All those computers ran approximation algorithms to generate look-up tables of values of transcendental functions.
+There are also /analog computers/ made with operational amplifiers[fn::https://en.wikipedia.org/wiki/Operational_amplifier],
+as opposed to /digital computers/ made with logic gates[fn::https://en.wikipedia.org/wiki/Logic_gate].
+Both analog and digital computers are made with transistors,
+but analog computers operate the transistors outside the saturated region,
+whereas digital computers operate the transistors in the saturated region.
+Analog to digital is knob to switch, that is, continuous to discrete.
+Analog computers use transistors as amplifiers.
+Digital computers use transistors as switches.
 However, as we build stronger computers, we begin trying to simulate reality,
 and we wonder whether the Universe is just an extremely powerful computer.
 Some time in the 1970s, a computer is a desktop computer,
@@ -21,12 +29,22 @@ and a human calculator is a human who can mentally manipulate digits quickly and
 The world progressed explosively,
 despite being built on increasingly complex computer systems with ever-more undefined behaviors,
 occasionally killing people.
-
-\cite{sep-computation-physicalsystems}
-
-Nevertheless, modernization does not change the nature of computation model:
+However, modernization does not change the nature of computation:
 finite, discrete, sequential, precise, algorithmic.
 
+In 1540, a /machine/ is any structure or device.[fn:eomachine:https://www.etymonline.com/word/machine]
+The word "machine" may have come from a Proto-Indo-European word that means "that which enables".[fn:eomachine]
+Some machines are /programmable/.
+Such machine implements several functions that can be chosen by a /program/ which is a part of the machine's input.
+The program chooses which function the machine shall compute.
+
+In 1610, an /automaton/ is a self-acting machine.[fn::https://www.etymonline.com/word/automaton]
+Thus an automaton has an energy source or is connected to an energy source that enables the automaton to run with minimal human intervention.
+
+In 1923, the English word "robot" came from the Czech word "robotnik" that means "forced worker".[fn::https://www.etymonline.com/word/robot]
+** What is an algorithm?
+In 1690, an /algorithm/ is an Arabic system of computation.[fn::https://www.etymonline.com/word/algorithm]
+It is the historically-and-interculturally mangled name of Muhammad ibn Musa al-Khwarizmi[fn::https://en.wikipedia.org/wiki/Muhammad_ibn_Musa_al-Khwarizmi] who lived in the 8th century.
 An /algorithm/ is a finite description of how a computer computes something.
 In the medievals, an algorithm is a numerical approximation scheme to be run by humans.
 Anyone who knows basic arithmetics can mindlessly carry out an algorithm
@@ -38,21 +56,31 @@ Some note about ontology:
 The long addition algorithm does not describe how to add two numbers \(x\) and \(y\).
 It describes how to manipulate two /representations/ \(e(x)\) and \(e(y)\) in order to produce a third representation \(e(x+y)\)
 that represents the sum of \(x\) and \(y\).
+** What is to compute something?
+What do we mean when we say "This machine computes \(f(x)\) given \(x\)"?
+What do we mean by "This calculator can compute square roots"?
 
-What do we mean when we say "Compute \(f(x)\)"?
+We can analyze the transitive verb "to compute" with these two questions:
+What computes?
+What is computed?
 
-Some machines are /programmable/.
-Such machine implements several functions that can be chosen by a /program/ which is a part of the machine's input.
-A program chooses which function the machine shall compute.
+An example usage is "this machine computes the sum of two numbers".
+
+A machine /computes/ the expression \(f(x)\) from the value \(x\)
+iff the machine starts with a representation of \(x\) and ends with a representation of the result of evaluating \(f(x)\).
+
+A machine computes the function \(f:D\to C\) iff the machine computes \(f(x)\) from \(x\) for each \(x\in D\).
+
+Piccinini distinguishes abstract computation and concrete computation \cite{sep-computation-physicalsystems}.
 ** Undoing chronic ontological sloppiness
 First, we undo the chronic ontologically-sloppy habit of conflating a thing and a representation of the thing.
-"123" is not a number; it is a /representation/ of a number.
-We cannot manipulate numbers physically; we can only manipulate their physical representations.
-Numbers do not have material existence.
+"123" is not a number, but a /representation/ of a number.
+We cannot manipulate numbers physically because they do not have material existence.
+We can only manipulate the physical representations of those numbers.
 When we "add two numbers", we are actually manipulating the representations of those numbers in a way that corresponds to adding those numbers.
 Formally, if \(e : \Nat \to \{0,1\}^*\) is an encoding scheme, then
 \( e(x+y) = e(x) +_e e(y) \), where \(+\) is the operation that we think we do, and \(+_e\) is the operation that we actually do.
-We think we are adding numbers, but we are actually writing on paper.
+We think we are adding numbers, but we are actually writing symbols on paper or juggling symbols in our mind.
 
 Then, we un-conflate a program and a machine running the program.
 A program does not /compute/; it is the machine that computes.
@@ -107,9 +135,17 @@ Computation is calculation? It's just following rules?
 * What is computation theory?
 Computation theory spans philosophy, physics, and mathematics.
 The mathematics part[fn::https://en.wikipedia.org/wiki/Theory_of_computation] studies logical models of computation, not computation itself.
-
 Which part of computation theory are we interested in?
 This document is mostly the mathematics part, because there is a one-million-dollar prize for solving the P vs NP problem.
+See Piccinini 2017 \cite{sep-computation-physicalsystems} if you are interested in the philosophy and physics parts.
+
+1999 Immerman \cite{Immerman99descriptivecomplexity},
+2009 Arora & Barak \cite{Arora2009},
+2009 Marek & Remmel \cite{Marek2009},
+2002 Boolos, Burgess, & Jeffrey \cite{Boolos2002},
+1987 Rogers \cite{Rogers1987}.
+
+Where are the researchers?
 There is ACM Special Interest Group on Logic and Computation (SIGLOG)[fn::https://siglog.acm.org/about/].
 There is also Computational Complexity Conference[fn::http://www.computationalcomplexity.org/].
 
@@ -119,28 +155,26 @@ problem complexity hierarchy,
 logic strength hierarchy,
 Chomsky language hierarchy[fn::https://en.wikipedia.org/wiki/Chomsky_hierarchy],
 arithmetical hierarchy[fn::https://en.wikipedia.org/wiki/Arithmetical_hierarchy],
-reverse mathematics[fn::https://en.wikipedia.org/wiki/Reverse_mathematics#The_big_five_subsystems_of_second-order_arithmetic],
+formal system power hierarchy[fn::https://en.wikipedia.org/wiki/Reverse_mathematics#The_big_five_subsystems_of_second-order_arithmetic],
 and so on.
 They are related to each other.
-One goal of such hierarchies is to find out which feature gives which power.
-* Computation models
-1999 Immerman \cite{Immerman99descriptivecomplexity},
-2009 Arora & Barak \cite{Arora2009},
-2009 Marek & Remmel \cite{Marek2009},
-2002 Boolos, Burgess, & Jeffrey \cite{Boolos2002},
-1987 Rogers \cite{Rogers1987}.
-** Computation model, structure
-The key idea is to use a structure to represent the internal states of a machine.
+We want to find out which feature gives which power.
+* The mathematics part
+There are many computation models[fn::https://en.wikipedia.org/wiki/Model_of_computation].
+All of them imply some /operating conditions/:
+there are no electrical disruptions, fires, cosmic rays, and so on.
+All of them also imply a sequence of operations.
 
-A /computation model/ is a /formal system/ that abstracts the internal states of a computing machine.
+We often assume that the computation model is a Turing machine.
+But, ontologically, a Turing machine is a computation model, not a machine,
+and thus should be called a Turing model.
 
-A /machine abstraction/ is a mathematical abstraction of a machine.
-Such abstraction is usually a formal system.
+A /computation model/ is a formal system that represents the relevant aspects of the internal states of a computing machine.
 
 Now we define "to compute the function \(f : D \to C\)" with respect to the computation model \((D,C,S,d,c,t)\) where
 \(d : D \to S\), and
 \(c : C \to S\), and
-\(t\) has arity \((S,S,S)\).
+\(t\) has arity \((S,S)\).
 The computation model is a three-sorted structure.
 The functions \(d\) and \(c\) together bridge two things:
 (1) our high-level thought of the machine computes, and
