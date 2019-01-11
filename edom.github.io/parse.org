@@ -3,39 +3,100 @@
 #+OPTIONS: ^:nil toc:nil
 #+PERMALINK: /parse.html
 * What is parsing?
+In 1550, "to parse" is "to state the parts of speech in a sentence".[fn::https://www.etymonline.com/word/parse]
+Now we limit ourselves to formal languages.
 Parsing is relating strings and trees.
+Parsing is the inverse of /tree linearization/.
+Parsing is creating a tree from a string.
 
 A /parser/ is a relation \(P \subseteq C^* \times T\).
 The set \(C\) is the /alphabet/: it may be the set of Unicode character code points, or it may be the set of the tokens that a /lexical analyzer/ may produce.
 The set \(C^*\) is the Kleene closure of \(C\).
 The set \(T\) is the set of /syntax trees/.
+If the parser is injective, then the grammar is /unambiguous/.
 
-If the parser is a function \(P : C^* \to T\), then the grammar is /unambiguous/.
+A parser /implements/ a grammar, as a machine /implements/ an algorithm.
 
-A /lexer/ is a degenerate[fn::https://en.wikipedia.org/wiki/Degeneracy_(mathematics)] parser: it is a parser whose codomain is a list (which is a degenerate tree).
-
-Parsing is the inverse of /tree linearization/.
+A /lexer/ is a degenerate[fn::https://en.wikipedia.org/wiki/Degeneracy_(mathematics)] parser whose codomain is a list (which is a degenerate tree).
 
 The parser is /parallelizable/ if there exists a relatively fast function \(combine\) such that for all \(x,y \in C^*\):
 \[
 P(xy) = combine(P(x), P(y))
 \]
 
-http://matt.might.net/articles/parsing-with-derivatives/
-
-https://github.com/webyrd/relational-parsing-with-derivatives/blob/master/README.md
+Parsing with derivatives[fn::http://matt.might.net/articles/parsing-with-derivatives/][fn::https://github.com/webyrd/relational-parsing-with-derivatives/blob/master/README.md]
 
 An /incremental/ parser is a relation \(step \subseteq C \times T \times T\).
 
 How do IDEs not have to reparse the entire document when the user presses one keystroke?
 
-https://blog.github.com/2018-10-31-atoms-new-parsing-system/
+Atoms[fn::https://blog.github.com/2018-10-31-atoms-new-parsing-system/]
 
-Differentiating Parsers
-http://lambda-the-ultimate.org/node/3704
+Differentiating Parsers[fn::http://lambda-the-ultimate.org/node/3704]
 
 The idea is to output to all possible continuations?
 \(incrementalize : (C^* \to T) \to (C^* \to T^*)\)?
+
+Zaytsev & Bagge 2014 \cite{zaytsev2014parsing} survey
+
+\cite{Mu2004AnIL}
+
+\cite{alimarine2005there}
+
+\cite{Kourzanov2014BidirectionalPA}
+
+\cite{caballero1999functional}
+
+somewhat unrelated \cite{Tan2016BidirectionalGF}
+
+\cite{Matsuda2013FliPprAP}
+* What parsing techniques/formalisms are there?
+There are many techniques/formalisms:
+- Prolog definite-clause grammar (DCG) rules
+- Haskell parser combinators
+- continuation-based parsing
+- parser generators
+
+Prolog DCG is interesting because it is often /reversible/: the same code often gives us both a parser and an unparser.
+
+Logically, a production (a syntax rule) is a predicate (relation) of arity 2.
+That is, the rule ~Exp ::= Num Op Num~ is logically the Horn-clause =exp(A,D) :- num(A,B), op(B,C), num(C,D)=.
+
+The application of a rule to an input-list produces a syntax object and a remaining-list.
+A syntax object contains the name of the rule that produces it, the part of the input that matches it, the input position, and so on.
+We can make this with SWI-Prolog dicts.
+
+We can use Scheme continuation for backtracking like Prolog.
+** Syntax objects?
+The application of a rule to an input-list produces a syntax object and a remaining-list.
+A syntax object contains the name of the rule that produces it, the part of the input that matches it, the input position, and so on.
+We can make this with SWI-Prolog dicts.
+** Reversible programming? Bidirectional programming?
+Example: If \(T\) is a terminal, then the nonterminal \(N \to T\) is invertible.
+To parse, remove the prefix matching T from the input list.
+To unparse, prepend T to the input list.
+
+If the rules \(A\) and \(B\) are invertible, then the concatenation nonterminal \(N \to AB\) is invertible.
+
+Thus we say the relation =cons/3= is invertible: =cons(H,T,[H|T])=.
+
+We want something similar to Rendell & Ostermann 2010 \cite{rendel2010invertible}, but in Prolog instead of Haskell.
+
+Given view : D -> V and modv : V -> V, the interpreter should be able to infer modd : D -> D.
+
+modd = through view modv
+
+Boomerang language?
+
+Benjamin C. Pierce 2006 "The Weird World of Bi-Directional Programming"[fn::https://www.cis.upenn.edu/~bcpierce/papers/lenses-etapsslides.pdf]
+
+Wikipedia[fn::https://en.wikipedia.org/wiki/Bidirectional_transformation]
+
+Janus
+ [fn::https://topps.diku.dk/pirc/?id=janus]
+ [fn::https://en.wikipedia.org/wiki/Janus_(time-reversible_computing_programming_language)]
+* How do we relate CST and AST without clutter?
+Big problems in parsing: lossless clutterless relation between CST and AST.
 * <2018-11-02> Direct left-recursive parsers in Prolog
 The key: unify terminals before recursing into nonterminals.
 #+BEGIN_EXAMPLE

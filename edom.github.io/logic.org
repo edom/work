@@ -113,11 +113,17 @@ I((A(Aab)(Nc))) &= I((Aab)) \wedge I((Nc))
 |-----------------------------------------------------------------------------+------------------------------------------------------|
 | signature[fn::https://en.wikipedia.org/wiki/Signature_(logic)]              | function symbols + relation symbols + arity function |
 | structure[fn::https://en.wikipedia.org/wiki/Structure_(mathematical_logic)] | domain + signature + interpretation function         |
+| vocabulary\cite[p.5]{Immerman99descriptivecomplexity}                       | signature                                            |
 
 We often shorten "logical system" to "logic".
 It is an alias for "formal system".
 
 "A theory consists of an axiomatic system and all its derived theorems."[fn::https://en.wikipedia.org/wiki/Axiomatic_system]
+** Model, truth
+The symbol \( A \models \phi \) reads "formula \(\phi\) is true in structure \(A\)".
+The proper syntax is \( (A,i) \models \phi \) where \(A\) is a structure, \(i\) is an interpretation, and \(\phi\) is a formula.
+If \(i = \emptyset\), then it can be omitted, and we write \( A \models \phi \) as an abbreviation of \( (A,\emptyset) \models \phi \).
+\cite{Immerman99descriptivecomplexity}
 ** Computational complexity theory
 #+CAPTION: Computation-theory concepts?
 | name          | meaning                                |
