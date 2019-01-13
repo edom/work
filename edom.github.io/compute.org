@@ -58,28 +58,48 @@ Some note about ontology:
 The long addition algorithm does not describe how to add two numbers \(x\) and \(y\).
 It describes how to manipulate two /representations/ \(e(x)\) and \(e(y)\) in order to produce a third representation \(e(x+y)\)
 that represents the sum of \(x\) and \(y\).
+
+An approximation scheme describes a number iff the sequence of approximations converges to the number.
+The approximation may never reach the number, but it always gets closer.
 ** What is to compute something?
-*** Usage of the word "compute"
+*** The subjects and objects of the verb "compute"
 The transitive verb "compute" takes a mathematical object.
 For example, it makes sense to compute a mathematical expression, but it does not make sense to compute a dining chair.
-This implies that /computation is a manipulation of non-material things/.
 
-The subject of "compute" may have material existence:
-both a concrete machine and an abstract computation model compute.
-A machine simply acts according to the laws of physics, but we /interpret/ such acts as computation.
-
-There are computers not designed by man.
-We are computers designed by nature.
+The subject of "compute" is a physical object that has material existence.
+A machine computes something.
 Some animals can count[fn::http://www.bbc.com/future/story/20121128-animals-that-can-count],
-and counting is a computation, so they can compute.
-Those animals would still compute even if there were no humans to describe the computation.
-*** An attempt to define "to compute"
+and counting is a computation.
+Thus some animals can compute.
+
+An algorithm describes how to compute something,
+but does not compute what is described,
+because such algorithm has no material existence.
+
+A machine simply acts according to the laws of physics, but we interpret some of such acts as a computation.
+This implies that a computation is what we think a physical system does, not what the system actually does.
+Thus, /a computation is a discrete sequential model of what some physical systems do/.
+Computation is our way of thinking about what the machine does.
+We invent the concept of computation because we are eager to see patterns everywhere even when there are none.
+Our understanding of computation enables us to manipulate machines into doing what we want.
+
+Computation is a model, and thus has no material existence.
+What exist materially are machines acting according to the laws of physics.
+*** Terminating and non-terminating computations
 A machine "computes \(y\) from \(x\)" iff
 the machine ends with a representation of \(y\) if the machine is started with a representation of \(x\).
-Alas, this definition has three problems:
+Alas, this definition has two big problems:
 - Must a computation be /started/ by something outside the computer?
-- Must a computation /end/?
 - What is /representation/?
+
+A computation may not end.
+A Turing machine may compute without terminating.[fn::https://math.stackexchange.com/questions/1561293/must-an-algorithm-terminate]
+ [fn::"An example of a non-terminating Turing machine program is a program that calculates sequentially each digit of the decimal representation of pi"
+ http://www.alanturing.net/turing_archive/pages/reference%20articles/what%20is%20a%20turing%20machine.html]
+For example, a machine may compute 2/3 (whose binary expansion 0.10... does not terminate) by repeatedly printing 10 forever.
+
+(In this document, I always use "may" in the epistemic sense, and never in the deontic sense[fn::https://english.stackexchange.com/questions/189974/why-do-they-say-may-not-for-things-which-people-shouldnt-do].
+Thus "may not" and "does not have to" have the same meaning.)
 *** Computing a function
 A machine "computes the function \(f:D\to C\)" iff, for each \(x\in D\), the machine computes \(f(x)\) from \(x\).
 But a mathematical function may be infinite, whereas a machine is finite.
@@ -96,6 +116,8 @@ Neither.
 A function \(f : D \to C\) is a /triple of sets/ \((D,C,F)\) where \(F \subseteq D \times C\),
 and \(f(x)=y\) means \((x,y) \in F\),
 and \(\forall x \forall y ( x = y \to f(x) = f(y) )\).
+
+See also Rapaport 2005 \cite{rapaport2005philosophy}, section 2.3.1 ("What is a function?") and its descendants, from page 236.
 *** What can be computed?
 A machine "computes the set \(D\)" iff, for each \(x \in D\), the machine /can/ determine the truth of \(r(x) \in R(D)\),
 where \(r\) is the computation's encoding scheme, and \(R(D) = \{ r(x) ~|~ x \in D \}\).
@@ -119,6 +141,9 @@ Defining computation as the execution of an algorithm raises difficult issues \c
 Rapaport's very thick 2005 book \cite{rapaport2005philosophy} deals with things in the layer below the layer we work at.
 
 Does a quantum computation consist of discrete steps?
+
+Immerman 1999 \cite{Immerman99descriptivecomplexity}, in Definition 2.4 (page 25),
+defines what it means for a Turing machine to compute a query.
 ** Computation, our explanation, and objective reality
 A computation is our /explanation/ of what a machine does.
 We invented the concept of computation so that we can exploit machines.
