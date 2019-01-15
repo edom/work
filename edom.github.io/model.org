@@ -10,6 +10,14 @@ A model always comes with /simplifying assumptions/.
 Violating the simplifying assumptions leads to nonsense.
 
 Related concepts: simplification, ignoration, truncation, approximation.
+* A possible formal definition of model, involving constructibility and aspect
+Let M be a model, R be what is to be modeled, and A be a set of predicates.
+We say "M models R in aspect A" iff (1) M is more constructible than R, and (2) for every predicate P in A, if P(M) is true, then P(R) is true.
+
+"More constructible" means "simpler to construct".
+
+At first "model" seems to have two opposite meanings: both concretion and abstraction.
+But the essence of modeling is neither concretion nor abstraction, but /simplification/.
 * The meaning of "model"
 ** History of the English word "model"
 In the 15th century, a model is a small woodwork crafted with the same proportions of a building that is going to be built.
@@ -24,48 +32,37 @@ The "model" in "bone remodeling" and "kitchen remodeling" means reshaping, refor
 
 Sources:
 - Dictionaries and thesauruses
-  - Oxford English Dictionary: "model" comes from "Late 16th century (denoting a set of plans of a building) [...]".
-    [[https://en.oxforddictionaries.com/definition/model]]
-  - Historical Thesaurus of English (ht.ac.uk):
+  - Oxford English Dictionary[fn::https://en.oxforddictionaries.com/definition/model]: "model" comes from "Late 16th century (denoting a set of plans of a building) [...]".
+  - Historical Thesaurus of English[fn::https://ht.ac.uk/category-selection/?word=model&page=1&categoryMinis=on&categorySort=tier]:
     The noun "model" was used in 1575 to mean "plans of construction".
     and the verb "model" was used in 1604 to mean "represent".
-    [[https://ht.ac.uk/category-selection/?word=model&page=1&categoryMinis=on&categorySort=tier]]
-  - The Online Etymology Dictionary traces the noun "model" back to the 1570s "likeness made to scale; architect's set of designs".
+  - The Online Etymology Dictionary[fn::https://www.etymonline.com/word/model] traces the noun "model" back to the 1570s "likeness made to scale; architect's set of designs".
     It traces the verb "model" back to a word in 1660s meaning "fashion in clay or wax".
-    [[https://www.etymonline.com/word/model]]
-  - Princeton WordNet 3.1
-    [[http://wordnetweb.princeton.edu/perl/webwn?s=model&sub=Search+WordNet&o2=&o0=1&o8=1&o1=1&o7=&o5=&o9=&o6=&o3=&o4=&h=]]
-  - The Free Dictionary [[https://www.thefreedictionary.com/model]]
-  - Wiktionary [[https://en.wiktionary.org/wiki/model]]
-  - Also, the definition of "model oneself after" in Merriam-Webster dictionary
-    [[https://www.merriam-webster.com/dictionary/model%20oneself%20after]]
+  - Princeton WordNet 3.1[fn::http://wordnetweb.princeton.edu/perl/webwn?s=model&sub=Search+WordNet&o2=&o0=1&o8=1&o1=1&o7=&o5=&o9=&o6=&o3=&o4=&h=]
+  - The Free Dictionary[fn::https://www.thefreedictionary.com/model]
+  - Wiktionary[fn::https://en.wiktionary.org/wiki/model]
+  - Also, the definition of "model oneself after" in Merriam-Webster dictionary[fn::https://www.merriam-webster.com/dictionary/model%20oneself%20after]
 - Images
-  - 15th century wooden architectural model of Florence Cathedral Dome by Filippo Brunelleschi
-    [[https://www.architectural-review.com/essays/architects-do-it-with-models-the-history-of-architecture-in-16-models/8658964.article]]
+  - 15th century wooden architectural model of Florence Cathedral Dome by Filippo Brunelleschi[fn::https://www.architectural-review.com/essays/architects-do-it-with-models-the-history-of-architecture-in-16-models/8658964.article]
 - Essays
-  - Wilfrid Hodges's history of the word "model" in "model theory", in the Stanford Encyclopedia of Philosophy
-    [[https://plato.stanford.edu/entries/model-theory/#Modelling]]
-  - Gene Bellinger's definition: "a simplification of reality intended to promote understanding"
-    [[http://www.systems-thinking.org/simulation/model.htm]]
-  - 2009 Emily Griffiths article "What is a model?"
+  - Wilfrid Hodges's history of the word "model" in "model theory", in the Stanford Encyclopedia of Philosophy[fn::https://plato.stanford.edu/entries/model-theory/#Modelling]
+  - Gene Bellinger's definition: "a simplification of reality intended to promote understanding"[fn::http://www.systems-thinking.org/simulation/model.htm]
+  - 2009 Emily Griffiths[fn::https://sites.google.com/a/ncsu.edu/emily-griffiths/publications/general-articles] article "What is a model?"
+    [fn::https://sites.google.com/a/ncsu.edu/emily-griffiths/whatisamodel.pdf?attredirects=0]
+    [fn::https://web.archive.org/web/20120312220527/http://www.emily-griffiths.postgrad.shef.ac.uk/models.pdf]
     - various types of models: conceptual models, in vivo (in life) models, in vitro (in glass) models, in silico (in silicon, that is, computer) models
     - "Certainly all models are simplifications"
     - "[models] bear some likeness to the real world and are constructed to reflect certain parts that are essential for the job in hand"
-    - [[https://sites.google.com/a/ncsu.edu/emily-griffiths/publications/general-articles]]
-    - [[https://sites.google.com/a/ncsu.edu/emily-griffiths/whatisamodel.pdf?attredirects=0]]
-    - [[https://web.archive.org/web/20120312220527/http://www.emily-griffiths.postgrad.shef.ac.uk/models.pdf]]
 - Forums
-  - I asked this on History of Science and Mathematics StackOverflow.
-    [[https://hsm.stackexchange.com/questions/7948/what-motivated-the-choice-of-the-word-model-in-model-theory/7953#7953]]
-- Automated question-answering systems
-  - [[https://books.google.com/talktobooks/query?q=What%20is%20a%20model?][What is a model? - Google Talk to Books]]
+  - I asked this on History of Science and Mathematics StackOverflow[fn::https://hsm.stackexchange.com/questions/7948/what-motivated-the-choice-of-the-word-model-in-model-theory/7953#7953]
+- Automated question-answering systems: What is a model? - Google Talk to Books[fn::https://books.google.com/talktobooks/query?q=What%20is%20a%20model?]
 - Encyclopedias
-  - Wikipedia article [[https://en.wikipedia.org/wiki/Model][Model]], and pages linked from there, such as
-    [[https://en.wikipedia.org/wiki/Architectural_model][Architectural model]],
-    [[https://en.wikipedia.org/wiki/Physical_model][Physical model]],
-    Also, by text search: [[https://en.wikipedia.org/wiki/Role_model][Role model]].
-  - [[https://www.britannica.com/search?query=model][Encyclopaedia Britannica search result for "model"]]
-  - [[https://www.encyclopedia.com/search?keys=model][encyclopedia.com search result for "model"]]
+  - Wikipedia articles[fn::https://en.wikipedia.org/wiki/Model]
+    [fn::https://en.wikipedia.org/wiki/Architectural_model]
+    [fn::https://en.wikipedia.org/wiki/Physical_model]
+    [fn::https://en.wikipedia.org/wiki/Role_model].
+  - Encyclopaedia Britannica search result for "model"[fn::https://www.britannica.com/search?query=model]
+  - encyclopedia.com search result for "model"[fn::https://www.encyclopedia.com/search?keys=model]
 ** The meanings of "model" in 2018
 How do we show that all these senses of "model" are essentially simplifications?
 *** Concretization for transfer learning
