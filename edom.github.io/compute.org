@@ -2,62 +2,78 @@
 #+DATE: 2017-06-29 22:40 +0700
 #+PERMALINK: /compute.html
 #+MATHJAX: yes
-* What is computation?
-** The plan
-We want to define the verb "compute".
-First we analyze the English suffixes "-er" and "-ation".
-Then we present a short history of computers.
-Then we reconcile analog computers and digital computers.
-Then we analyze the subject and object of the verb "compute".
-Finally we extract the essence: we find a definition of "compute" that satisfies all those computers.
-** Computer, computation, and the meaning of English suffixes
-We understand a word by scrutinizing its /origin/ (where it comes from) and /usage/ (how it is used).
+* What is a computation?
+** How do we answer this question?
+We want to define the noun "computer", the noun "computation", and the verb "compute".
+How do we do that?
 
+We understand a word by scrutinizing its /origin/ (where it comes from, how it is formed) and /usage/ (how it is used).
+We analyze the English suffixes -er and -ation.
+We define the nouns "computer" and "computation" in terms of the verb "compute" and those suffixes.
+Thus, the real problem is defining "compute", "-er", and "-ation".
+
+We analyze the subject and object of the verb "compute".
+
+We analyze what and how analog and digital computers compute.
+
+We find out what is common among all computers.
+We look at some history of computers.
+
+We craft a definition of "compute" that satisfies all those computers.
+** The meaning of the English suffix -er
 "Computer" comes from "compute" and "-er".
+Thus, a computer is a thing that computes.
 
+Appending -er to a verb V forms the noun Ver which means "one who does V",
+which we often stretch to mean "a thing that does V",
+so that a Ver does not have to be a person.
+
+The suffix -er works with both both [[https://en.wikipedia.org/wiki/List_of_Germanic_and_Latinate_equivalents_in_English][Germanic and Latinate]] verbs.
+For example, a (Germanic) reckoner is one who reckons, and a (Latinate) computer is one who computes.
+
+The suffix -er works with [[https://en.wikipedia.org/wiki/Neologism][neologisms]].
+Once we accept that V is a verb, we readily accept that Ver is a noun that means one who does V.
+For example, after we have accepted that "google" is a verb, we readily accept that a "googler" is one who "googles".
+Conversely, once we have accepted that Ver is a noun, we readily accept that V is a verb that is done by a Ver.
+For example, "burgle" is backformed from "burglar".[fn::https://en.wiktionary.org/wiki/burgle]
+
+The suffix -er sometimes works as a backforming "anti-suffix": we can sometimes form a verb V from a noun Ver by /removing/ the -er.
+For example, it is easy to imagine backforming "cadave" from "cadaver",
+and it is not hard to imagine that "to cadave" means "to be a dead body" or "to behave like a dead body".
+
+Indeed the suffix -er seems to works with all verbs except modals (may, might, can, could, shall, should).
+Hence we say that the suffix -er is [[https://en.wikipedia.org/wiki/Productivity_(linguistics)][productive]].
+** The meaning of the English suffix -ation
 "Computation" comes from "compute" and "-ation".
 
-Appending -er to a verb V forms the noun Ver which means "one who does V", which we often stretch to mean "a thing that does V".
-This suffix works for /all/ verbs,
-including both Germanic and Latinate verbs, and even neologisms.
-For example, a beer (be-er) is "one who is (exists)", and a forebear (forebeer) is one who exists earlier/before[fn::https://en.wiktionary.org/wiki/beer#Noun_2].
-Once we accept that V is a verb, we readily accept that Ver is a noun that means one who does V.
-After we have accepted that "google" is a verb, we readily accept that a "googler" is someone who "googles".
+The suffix -ation comes from -ate + -ion.[fn::https://www.etymonline.com/word/-ation]
 
-Why is -er so productive?
-Because every sentence that has verb can always have a subject.
-because every action has an agent,
-because everything happens because an agent does it,
-perhaps this is a tacit fundamental assumption of our logic,
-or perhaps this reflects how the Universe works?
-Our language implies that the subject causes the action or outcome described by the verb?
-This is a fundamental assumption we make about the Universe?
-But this has a problem: if we assume that, then the sentence "I exist" implies that I cause my own existence, which is somewhat problematic,
-because it seems problematic for something to cause itself[fn::https://en.wikipedia.org/wiki/Causa_sui]?
-Did we invent God because we impose, through the syntax of our languages, that everything has a cause, that every verb implies that there is a subject that does it?
-Aren't we rambling too much?
-We are merely trying to define "compute", which requires us to traverse linguistics, and somehow we arrived at theology?
-It is trivial to get lost in philosophy, as each question readily begets more questions.
-How do we find the way out?
+The sentence S V O translates to the logic formula V(S,O).
+Example: "John eats bread" translates to "eat(John,bread)", or, "john(x), bread(y), eat(x,y)".
 
-Appending -ion to a verb Vate forms the noun Vation.
-But only Latinate verbs take -ion.
+S Vates O = S does a Vation to O.
+Examples.
+He is renovating (renewing) his house = he is doing a renovation to his house.
+He is manducating the food = he is doing a manducation to the food.
+He is computing the number = he is doing a computation to the number?
+How can we do something to an abstract thing with no material existence?
+
+Appending -ion to a Latinate verb Vate forms the noun Vation.
+
+Germanic verbs take -ing instead of -ion.
 Example: Germanic "eat" and Latinate "manducate"[fn::https://en.wiktionary.org/wiki/manducate],
 and Germanic "eating" and Latinate "manducation"[fn::https://en.wiktionary.org/wiki/manducation].
 Thus, in this case, Germanic -ing is Latinate -ion.
-I think generally -re → -te → -tion.
-Germanic verbs do not take -ion: eat (German essen, Dutch eten), sleep (German schlafen, Duth slapen).
-But Latinate verbs do take -ing: manducating (Latin manducare), computing (Latin computare).
+
+I think generally Latin -re → English -te → -tion.
+
+This is not how those words were actually historically imported, but we can think of these words this way.
 
 manducare → manducate[fn::https://en.wiktionary.org/wiki/manducate] → manducation
 
 computare → computate[fn::https://en.oxforddictionaries.com/definition/computate][fn::https://en.wiktionary.org/wiki/computate] → computation
 
 renovare → renovate[fn::https://en.wiktionary.org/wiki/renovate] → renovation
-
-formare → formo → formatio → formation
-
-(That is not how those words were actually historically imported though.)
 
 It seems that the historical path was longer:
 Latin infinitive
@@ -73,6 +89,8 @@ Letin renovare → renovo → renovation → English renovation → renovate
 
 Latin computare → computo → computatio → English computation → computate
 
+formare → formo → formatio → formation
+
 Computation is a process, not a result.
 This is supported by the usage "this computation does not terminate",
 the usage "this computation produces 123",
@@ -84,23 +102,35 @@ What is the difference between an action and a process?
 
 We don't say "the computation is 123"; thus computation is not a result.
 
-English is messy[fn::https://en.wikipedia.org/wiki/Doublet_(linguistics)].
+English is a mess of [[https://en.wikipedia.org/wiki/Doublet_(linguistics)][doublets]].
 
-The suffix -ation comes from -ate + -ion.[fn::https://www.etymonline.com/word/-ation]
 Vation is the action of Vating, process of Vating, or the result of Vating?
 Which one?
 
 Etymonline entry of -ion: "word-forming element attached to verbs, making nouns of state, condition, or action,
 from French -ion or directly from Latin -ionem (nominative -io, genitive -ionis),
 common suffix forming abstract nouns from verbs."[fn::https://www.etymonline.com/word/-ion].
+** What and how do analog and digital computers compute?
+Let us compare an analog adder and a digital adder.
 
-The Germanic English of "compute" is "reckon" (German rechnen, Dutch rekenen).
-Thus computation is reckoning.
+An analog inverting adder is modeled as a network of operational amplifiers and resistors.[fn::https://en.wikipedia.org/wiki/Operational_amplifier_applications#Summing_amplifier]
+The output is inverted for practical engineering reasons[fn::https://electronics.stackexchange.com/questions/268547/inverting-summing-amplifier-vs-non-inverting-summing-amplfier],
+but it is simple to chain an inverter to the adder's output.
+A number is represented as a voltage.
+The operation of the two-input inverting adder is modeled as:
+\[
+v_3 = - r_f \cdot \left( g_1 \cdot v_1 + g_2 \cdot v_2 \right)
+\]
 
-A computer is a thing that computes.
-
-Thus the real problem is defining "compute", "-er", and "-ation".
-** What is a computer?
+A digital adder is modeled as a network of logic gates.[fn::https://en.wikipedia.org/wiki/Adder_(electronics)]
+A number is represented as a bit string.
+The operation of a ripple adder is modeled as:
+\begin{align*}
+s_k &= (a_k \oplus b_k) \oplus c_{k-1}
+\\ c_k &= a_k \wedge b_k \wedge c_{k-1}
+\\ c_{-1} &= 0
+\end{align*}
+** What is common to all computers?
 In 1640, a /computer/ is a human calculator.[fn:eocomputer:https://www.etymonline.com/word/computer]
 In 1897, a computer is a mechanical calculator.[fn:eocomputer]
 In 1945, a computer is an electronic calculator.[fn:eocomputer]
@@ -125,8 +155,16 @@ despite being built on increasingly complex computer systems with ever-more unde
 occasionally killing people.
 However, modernization does not change the nature of computation:
 finite, discrete, sequential, precise, algorithmic.
-** Reversible computation?
+** What do adjectives tell us about computations?
 Reversible computation relates erasure of information, entropy, and heat.
+"Reversible" implies that there is a forward direction.
+
+Is interactive computation computation[fn::https://en.wikipedia.org/wiki/Interactive_computation]?
+
+Must algorithms describe only terminating computations?
+An operating system describes an interactive computation.
+Computers do not exist in a vacuum.
+Computers interact with reality.
 ** The subject and object of the verb "compute"
 The object of "compute" is a mathematical object with no material existence.
 For example, it makes sense to compute a number, but it does not make sense to compute a chair.
@@ -187,11 +225,6 @@ then the machine built from those machines computes Z from X.
 
 However, if objective reality exists, then the machine will still compute,
 regardless of whether we exist to describe what the machine does.
-** Algorithm, machine, implementation, and computation
-If algorithm A describes how to compute C, and machine M implements algorithm A,
-then machine M computes C.
-
-Are there undescribable computations?
 ** Terminating and non-terminating computations
 A machine "computes \(y\) from \(x\)" iff
 the machine ends with a representation of \(y\) if the machine is started with a representation of \(x\).
@@ -270,6 +303,30 @@ Does a quantum computation consist of discrete steps?
 
 Immerman 1999 \cite{Immerman99descriptivecomplexity}, in Definition 2.4 (page 25),
 defines what it means for a Turing machine to compute a query.
+** Undoing chronic ontological sloppiness
+First, we undo the chronic ontologically-sloppy habit of conflating a thing and a representation of the thing.
+"123" is not a number, but a /representation/ of a number.
+We cannot manipulate numbers physically because they do not have material existence.
+We can only manipulate the physical representations of those numbers.
+When we "add two numbers", we are actually manipulating the representations of those numbers in a way that corresponds to adding those numbers.
+Formally, if \(e : \Nat \to \{0,1\}^*\) is an encoding scheme, then
+\( e(x+y) = e(x) +_e e(y) \), where \(+\) is the operation that we think we do, and \(+_e\) is the operation that we actually do.
+We think we are adding numbers, but we are actually writing symbols on paper or juggling symbols in our mind.
+
+Then, we un-conflate a program and a machine running the program.
+A program does not /compute/; it is the machine that computes.
+A program cannot do anything on its own; a machine has to run it.
+When we say "a program computes a function",
+we actually mean that running the program on the machine causes
+the machine to compute that function.
+
+Unfortunately, the ontologically correct thing is very wordy,
+so I write in conflated manner.
+For example, when I write "this program adds two numbers",
+what I really mean is
+"running the program causes the machine to manipulate two representations in a way that corresponds to adding two numbers".
+Fortunately, the only time we have to care about this ontological issue is when we are talking about the foundations of computation.
+* What is an algorithm?
 ** What is an algorithm?
 In 1690, an /algorithm/ is an Arabic system of computation.[fn::https://www.etymonline.com/word/algorithm]
 It is the historically-and-interculturally mangled name of Muhammad ibn Musa al-Khwarizmi[fn::https://en.wikipedia.org/wiki/Muhammad_ibn_Musa_al-Khwarizmi] who lived in the 8th century.
@@ -304,31 +361,13 @@ An algorithm describes /how/ to compute something.
 A problem describes /what/ to compute.
 
 See also Rapaport 2005 \cite{rapaport2005philosophy} page 242, about the difference between formulas and algorithms.
-** Undoing chronic ontological sloppiness
-First, we undo the chronic ontologically-sloppy habit of conflating a thing and a representation of the thing.
-"123" is not a number, but a /representation/ of a number.
-We cannot manipulate numbers physically because they do not have material existence.
-We can only manipulate the physical representations of those numbers.
-When we "add two numbers", we are actually manipulating the representations of those numbers in a way that corresponds to adding those numbers.
-Formally, if \(e : \Nat \to \{0,1\}^*\) is an encoding scheme, then
-\( e(x+y) = e(x) +_e e(y) \), where \(+\) is the operation that we think we do, and \(+_e\) is the operation that we actually do.
-We think we are adding numbers, but we are actually writing symbols on paper or juggling symbols in our mind.
+** Algorithm, machine, implementation, and computation
+If algorithm A describes how to compute C, and machine M implements algorithm A,
+then machine M computes C.
 
-Then, we un-conflate a program and a machine running the program.
-A program does not /compute/; it is the machine that computes.
-A program cannot do anything on its own; a machine has to run it.
-When we say "a program computes a function",
-we actually mean that running the program on the machine causes
-the machine to compute that function.
-
-Unfortunately, the ontologically correct thing is very wordy,
-so I write in conflated manner.
-For example, when I write "this program adds two numbers",
-what I really mean is
-"running the program causes the machine to manipulate two representations in a way that corresponds to adding two numbers".
-Fortunately, the only time we have to care about this ontological issue is when we are talking about the foundations of computation.
-** Digressions
-*** Genus-differentia definition of computation?
+Are there undescribable computations?
+* Digressions
+** Genus-differentia definition of computation?
 A computation is (what) that (what)?
 
 Process? Activity? Mechanism?
@@ -336,7 +375,7 @@ Process? Activity? Mechanism?
 A program describes the computation performed by a machine.
 A program modulates the machine.
 Manipulates computational resources to compute something.
-*** Computation as information transformation
+** Computation as information transformation
 Computation is answering a question.
 
 What is the relationship between computation and answering questions?
@@ -345,26 +384,26 @@ A computer reduces information?
 Transforms information?
 
 Computation is transformation of information?
-*** Computation as model/concretion?
+** Computation as model/concretion?
 Computation is running a program on a machine.
 
 It seems that the defining feature of computation is conditional and repetition.
 
 Program is a model.
-*** Diving into philosophy of computation
+** Diving into philosophy of computation
 Ian Horswill wrote an introductory article "What is computation?"[fn::http://www.cs.northwestern.edu/~ian/What%20is%20computation.pdf].
-*** Machine
+** Machine
 A /machine/ is a tool that /computes/ what the machine is designed for.
 A machine has material existence.
 It is a physical implement.
 
 Digression:
 In [[file:philo.html]], I write that a machine is a tool, that is something that we use to extend our self (what we control).
-*** Even more historical?
+** Even more historical?
 Leibniz used the term "calculation"?
 Turing used "effective calculability" to mean "algorithmic"?
 Computation is calculation? It's just following rules?
-*** Analog vs digital
+** Analog vs digital
 What does digital do better than analog?
 Temperature affects analog computers more than it affects digital computers.
 Digital signals are more immune to noises.
@@ -373,7 +412,7 @@ Digital computers have a wider operating temperature range.
 What does analog do better than digital?
 Analog computers degrade gracefully: computation gradually gets more and more wrong as the computer goes out of its designed operating conditions.
 Digital computers degrade abruptly: computation suddenly gets chaotic as the computer approaches a limit of its designed operating conditions.
-*** Machine, automaton, robot
+** Machine, automaton, robot
 In 1540, a /machine/ is any structure or device.[fn:eomachine:https://www.etymonline.com/word/machine]
 The word "machine" may have come from a Proto-Indo-European word that means "that which enables".[fn:eomachine]
 Some machines are /programmable/.
@@ -384,6 +423,40 @@ In 1610, an /automaton/ is a self-acting machine.[fn::https://www.etymonline.com
 Thus an automaton has an energy source or is connected to an energy source that enables the automaton to run with minimal human intervention.
 
 In 1923, the English word "robot" came from the Czech word "robotnik" that means "forced worker".[fn::https://www.etymonline.com/word/robot]
+** The implicit agency of -er, and how it might have impelled us to invent God
+Why is -er so productive?
+Because every sentence that has verb can always have a subject.
+Because it is always possible, if not necessary, for a verb to have a doer.
+Because every action has an agent,
+because everything happens because an agent does it,
+perhaps this is a tacit fundamental assumption of our logic,
+or perhaps this reflects how the Universe works?
+Our language implies that the subject causes the action or outcome described by the verb?
+A Ver is one who Vs, that is, one who /causes/ a Ving to be done, and thus there is an implicit agency in each Ver.
+Recall that an agency is an ability to cause.
+
+There is a problem: if we assume that, then the sentence "X exists" implies that X causes its own existence,
+but it seems problematic for something to cause itself[fn::https://en.wikipedia.org/wiki/Causa_sui]?
+Did we invent God because we impose, through our languages, that everything has a cause, that every verb has a doer?
+We invented God because we have evolved to crave explanations for everything, because craving for explanations promote survival?
+We want to explain everything, but our finiteness precludes us from explaining everything.
+
+It is curious that Christians call Jesus "Word (logos) of God"[fn::https://en.wikipedia.org/wiki/Logos_(Christianity)][fn::https://biblehub.com/sepd/genesis/1.htm],
+and the Greek word "logos" also begets the English word "logic".
+
+Spreading religion requires language, unless our ancestors were telepathic.
+
+Aren't we rambling too much?
+We are merely trying to define "compute", which requires us to traverse linguistics, and somehow we arrived at theology?
+It is trivial to get lost in philosophy, as each question readily begets more questions.
+How do we find the way out?
+** What/where is God in Cantor's paradise?
+If a god resides in a paradise,
+and Cantor has made us a paradise[fn::https://en.wikipedia.org/wiki/Cantor%27s_paradise] (according to Hilbert),
+then what/where is the god in Cantor's paradise?
+** Computation and reckoning
+The Germanic English of "compute" is "reckon" (German rechnen, Dutch rekenen).
+Thus computation is reckoning.
 * What is computation theory?
 Computation theory spans philosophy, physics, and mathematics.
 The mathematics part[fn::https://en.wikipedia.org/wiki/Theory_of_computation] studies logical models of computation, not computation itself.
