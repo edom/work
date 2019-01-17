@@ -172,7 +172,8 @@ Bottom-up language design:
 Top-down language design:
 - Begin from logic and mathematics, the internal language of thought.
 - Go down until the language is convenient enough to realize.
-* Effects and side-effects
+* Effects, side-effects, and errors
+** What is an effect?
 What is an "effect"?
 
 What is a "side-effect"?
@@ -219,6 +220,73 @@ A machine affects reality according to the program that the machine is running.
 The question: which is the /cause/ of the change in reality: the machine or the program?
 
 If we assume free will, then our thought causes our behavior, and our behavior causes something in the material-world.
+** What is an error?
+Unintended behavior?
+How do we measure intention?
+
+Error is like weed.
+They are subjective concepts.
+An error is an undesirable condition.
+Why are errors undesirable?
+Because they complicate programs.
+
+Since 1726, an error is a "difference between observed value and true value".[fn::https://www.etymonline.com/word/error]
+
+An error is a difference between what is and what should be.
+
+Midori programming language
+ [fn::http://joeduffyblog.com/2015/11/03/blogging-about-midori/]
+ [fn::http://joeduffyblog.com/2016/02/07/the-error-model/].
+
+Is an error a side-effect?
+Both errors and side-effects are unintended.
+
+Let \(f'\) be what we think a system does.
+Let \(f\) be what the system actually does.
+Then our error is \(f' - f\) which has to be equal to \(- (f - f')\).
+If each of \(f\) and \(f'\) is a logic formula in a structure with domain \(D\) and interpretation \(I\),
+then \(-\) is symmetric difference, and negation is made with respect to \(D\).
+
+For example, we think the system implements \( a \).
+It turns out that the system implements \( b \).
+Then the error is \((a \wedge \neg b) \vee (b \wedge \neg a)\).
+Let each of \(a\) and \(b\) be a formula.
+Define their symmetric difference \(a - b\) as \((a \wedge \neg b) \vee (b \wedge \neg a)\),
+similar to set-theoretic symmetric difference[fn::https://en.wikipedia.org/wiki/Symmetric_difference].
+
+For example, we think the system implements \( x \mapsto x + 3 \).
+It turns out that the system implements \( x \mapsto x + 2 \).
+Then the error is \(x \mapsto 1\).
+* Modules
+** What are the differences between a module and a dictionary (a table, a map, a finite function)?
+** What is a module?
+What can we do with zero module? We can create the empty module.
+What can we do with a module?
+What can we do with many modules?
+
+Equality vs identity:
+Must a programming language separate equality and identity?
+Should two strings be equal, if they have different memory addresses but the same content?
+
+Let \( D \) be the programming language's domain of discourse.
+
+Let \( F(D) = D \to D \) be the set of every endofunction whose domain is \( D \).
+Let \( D \) be the smallest set such that \( F(D) \subset D \).
+Thus \( D \) is the least fixed point of \( F \).
+
+A dictionary can be a finite function whose domain is a finite subset of \( D \).
+
+A module can be modeled as a dictionary.
+A module can be modeled as a finite function \( N \to D \) where \( N \) is the set of names for which the module has an entry.
+A module can be modeled as an infinite function \( N \to D \) where \( N \) is the set of all possible names.
+* Proving and testing
+/Testing approximates proving./
+We actually want to prove a logical formula phi about a piece of code, we want to prove that the code fragment is a model of the formula phi, but proving is too expensive.
+Therefore, we test phi instead.
+
+In back-end testing, the formula is often obvious.
+What is the formula in front-end testing?
+DOM element existence testing?
 * Module systems
 #+TOC: headlines 2 local
 ** What
@@ -1495,10 +1563,6 @@ Is there a compiler that doesn't do that?
 ** After-2018 programming language requirements
 
 *** Ergonomic error handling
-
-- http://joeduffyblog.com/2015/11/03/blogging-about-midori/
-  - http://joeduffyblog.com/2016/02/07/the-error-model/
-
 *** REPL (read-eval-print loop)
 
 The language must not preclude making a REPL for it.
@@ -2345,9 +2409,6 @@ A markup language adds some semantics to text.
 
 ** Measuring programming language quality by how easy is it to do the right thing
 What is the right thing?
-*** What is an error?
-Unintended behavior?
-How do we measure intention?
 *** By probability of error of random programs?
 How do we measure the probability that a program, uniformly randomly taken from the set of all legal programs in language L, contains an error?
 ** Class-based programming
@@ -3965,6 +4026,8 @@ Other people?
 ** Principles
 - Fast build time is important.
 * Meta-programming?
+The Racket manifesto[fn::http://felleisen.org/matthias/manifesto/index.html]: programming-language programming language
+
 miniKanren, scheme logic programming
 http://minikanren.org/
 https://github.com/clojure/core.logic/wiki/A-Core.logic-Primer

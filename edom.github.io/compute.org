@@ -130,6 +130,9 @@ s_k &= (a_k \oplus b_k) \oplus c_{k-1}
 \\ c_k &= a_k \wedge b_k \wedge c_{k-1}
 \\ c_{-1} &= 0
 \end{align*}
+
+An analog computer is limited by noise.
+A digital computer is limited by the number of bits.
 ** What is common to all computers?
 In 1640, a /computer/ is a human calculator.[fn:eocomputer:https://www.etymonline.com/word/computer]
 In 1897, a computer is a mechanical calculator.[fn:eocomputer]
@@ -355,6 +358,9 @@ Turing, Post, primitive recursive arithmetics, lambda calculus, ML-family langua
 There are lots of computation models, each capturing different aspect, but most are equivalently powerful.
 
 The language should have a sensible cost model so that we can define space complexity and time complexity.
+
+Rapaport 2015 \cite{rapaport2005philosophy} p. 269 mentions Moschovakis's idea of algorithms as recursors.
+See Vardi 2012 \cite{vardi2012algorithm}, Gurevich 2011 \cite{gurevich2011algorithm}, Moschovakis 2001 \cite{moschovakis2001algorithm}.
 ** Algorithm, problem
 An algorithm describes /how/ to compute something.
 
