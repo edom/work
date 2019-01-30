@@ -325,12 +325,13 @@ That is from [[http://ergoemacs.org/emacs/building_emacs_on_linux.html][How to B
 
 You can do that for other software, as long as they don't require dependencies that are too recent.
 
-** what
-   :PROPERTIES:
-   :CUSTOM_ID: what
-   :END:
-
+** What
 - https://medium.com/netflix-techblog/linux-performance-analysis-in-60-000-milliseconds-accc10403c55
+
+<2019-01-16> Ubuntu 14.04.
+Okular is better than Evince.
+Okular's "Trim Margins" feature is helpful.
+Okular also feels more responsive.
 ** Security
   :PROPERTIES:
   :CUSTOM_ID: security
@@ -1142,7 +1143,10 @@ What other metrics should we monitor?
 
 - HTTP 4xx and 5xx status codes and connection failures?
 * Using Java
-#+TOC: headlines 1 local
+<2019-01-30>
+Here are some Java stuff.
+I used Java back in the days when I lacked self-respect.
+I recommend Prolog instead of Java.
 ** Profiling?
 - How to profile a Java application startup?
 
@@ -1340,6 +1344,45 @@ Maven output directory is =target=.
 - Woes
 
   - ShadowJar doesn't work with Gradle 2.13.
+** <2017-02-10> Make Open Travel Alliance XML schema work with JAXB
+Save this to a file named like =BINDFILE=:
+#+BEGIN_EXAMPLE
+<bindings xmlns="http://java.sun.com/xml/ns/jaxb"
+          xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance"
+          xmlns:xs="http://www.w3.org/2001/XMLSchema"
+          version="2.1">
+    <bindings schemaLocation="xsd/OTA_CommonTypes.xsd">
+        <bindings node="//xs:attribute[@name='Value']" multiple="true">
+            <property name="ValueAttribute"/>
+        </bindings>
+    </bindings>
+</bindings>
+#+END_EXAMPLE
+
+Then run:
+#+BEGIN_EXAMPLE
+xjc -b BINDFILE -d outputDir xsd/XSDFILE
+#+END_EXAMPLE
+** Production command-line
+<2018-08-29>
+For Java enterprise/server programming, I recommend Maven instead of Gradle.
+
+This is a command line for production.
+Replace variables accordingly.
+#+BEGIN_SRC bash
+java \
+    -Xms$heap_size \
+    -Xmx$heap_size \
+    -Xloggc:"$gc_log_file" \
+    -XX:+PrintGCDetails \
+    -classpath 'target/*:target/dependency/*' \
+    "$java_main_class" \
+    "$@"
+#+END_SRC
+
+The GC log is important.
+When your application is unexplainably slow, first look at the GC log: does GC take too much time?
+Look at the "real" time.
 * Using Python
   :PROPERTIES:
   :CUSTOM_ID: using-python

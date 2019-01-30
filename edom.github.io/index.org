@@ -1,7 +1,8 @@
 #+TITLE: Erik Dominikus's home page
 #+DATE: 2017-05-20 00:00:00 +0700
 #+PERMALINK: /index.html
-* About the author and the website
+* About the website
+** Who is the author?
 My name is Erik Dominikus.
 I am an independent[fn::https://en.wikipedia.org/wiki/Independent_scientist] researcher from Indonesia,
 with too many interests, mostly theoretical,
@@ -12,7 +13,7 @@ Most of my writings involve applied analytic philosophy, mathematics, and comput
 
 My last formal education degree, if you care, is a Sarjana Ilmu Komputer[fn::https://en.wikipedia.org/wiki/Bachelor_of_Computer_Science] degree bestowed in 2011 by the
 Fakultas Ilmu Komputer[fn::https://www.cs.ui.ac.id/] of Universitas Indonesia[fn::https://www.ui.ac.id/] for four years of undergraduate education.
-* Disclaimers
+** Disclaimers
 /I may err./
 Read cautiously.
 Compare with other independent sources.
@@ -42,14 +43,14 @@ Thus the question becomes "What do I have for myself",
 that is "What do I really want", that is, "What is important for me?"
 If you have some common goals or interests, then get in touch, drop a comment.
 We should join forces to reach our shared goals.
-** Meta-research
-I am [[file:research.html][looking for ways to research more efficiently]].
-** Computing
-I am trying to make machines work more for me.
 
-I am [[file:proglang.html][looking for the best programming language]],
-some of which may involve [[file:haskell.html][improving Haskell]].
-I am [[file:prolog.html][using Prolog]].
+These are mostly unanswered questions.
+** Meta-research, writing, and publishing
+How do we [[file:research.html][research]]?
+How should we?
+Who should we know?
+Where should we go?
+Where should we write?
 
 I am [[file:publish.html][looking for a publishing system]].
 I also write
@@ -57,6 +58,11 @@ I also write
 [[file:emacsvi.html][Emacs for vi users]],
 [[file:writing.html][Writing]],
 and [[file:markdown.html][Working around Markdown]].
+** Computing
+*** Computing theory
+I am trying to make machines work more for me.
+
+What is [[file:compute.html][computation]]?
 
 I am [[file:parse.html][looking for parsing techniques]],
 because parsing is the common thing between programming language and publishing system, and I am looking for both.
@@ -66,11 +72,6 @@ so I wrote [[file:division.html][Generalizing division]].
 I am [[file:pnptry.html][trying to understand the P vs NP problem]],
 which requires [[file:compute.html][computation]], [[file:model.html][model]], and [[file:logic.html][logic]].
 I was motivated by the prize money[fn::one million US dollars http://www.claymath.org/millennium-problems/millennium-prize-problems], but I think my chances are slim.
-
-I am looking for an AI that helps me process data into information.
-Thus I write [[file:intelligence.html][Making intelligence]] and
-[[file:endo.html][The endofunction model of worlds and agents, and its philosophical implications]].
-But I think my chances are slim.
 
 There are some interesting mathematical perspectives.
 
@@ -85,22 +86,94 @@ What are these papers?
 The formula \( p \wedge q \) /approximates/ the formula \( p \wedge q \wedge r \).
 What is the approximation /error/?
 Can we merge approximation theory and propositional calculus?
+*** Programming language research
+I am [[file:proglang.html][looking for the best programming language]],
+some of which may involve [[file:haskell.html][improving Haskell]].
+I am [[file:prolog.html][using Prolog]].
+
+What language is like Prolog but has anonymous predicates and anonymous modules?
+
+How should lambda calculus be implemented?
+Normal-order reduction enables us to write fixed points.
+Should we let the programmer choose the evaluation strategy?
+*** Software engineering
+I am thinking about open-source.
+I prefer cooperation to competition.
+I write
+[[file:opensrc.html][Making contributable open-source projects]],
+[[file:community.html][Building online communities]].
+I am thinking about maintaining open-source projects.
+
+Sometimes I think about forward software engineering,
+such as [[file:softeng.html][making lasting software sooner]].
+
+Sometimes I think about [[file:reveng.html][reverse software engineering]],
+such as[[file:ps1.html][Reverse-engineering PlayStation 1 3D games to control the camera]].
+
+I wanted to automate stock trading with my broker which has a stock trading application written in Java 6.
+Thus I wrote [[file:rejava.html][Reverse engineering the network protocol used by a Java desktop application]].
+But now I think financial economy is just a big Ponzi scheme full of rent-seeking,
+full of people who want to get a slice of the pie of real economy without growing the pie of real economy,
+full of people who just want to extract value from society without creating value,
+people who only take but don't give,
+people who only shuffle money around.
+
+I tried to think about [[file:engman.html][managing software engineers]].
+I thought about [[file:salary.html][software engineer salary]].
+
+Is software engineering engineering?
+What is engineering?
+
+I summarized the [[file:smf.html][Standard MIDI file format]].
+I was thinking about making a digital audio workstation, but I changed my mind about music.
+
+<2018-10-28> Systemd programmers are not competent enough for what they are doing.
+ [fn::https://blog.erratasec.com/2018/10/systemd-is-bad-parsing-and-should-feel.html]
+ [fn::https://www.reddit.com/r/programming/comments/9rtm1f/systemd_is_bad_parsing_and_should_feel_bad/]
+
+Computers feel slow not because hardware sucks, but because programmers tell it to do stupid things.
+Ever-stronger hardware lets more programmers get away with writing ever-shittier software.
+
+If software is a pure art, then its construction shouldn't be time-limited.
+A painter doesn't paint with deadlines.
+A painting is finished when the painter feels it's finished.
+However, a painter, when asked to paint a very specific painting, can estimate how many days it will take.
+** Intelligence
+I am looking for an AI that helps me process data into information.
+Thus I write [[file:intelligence.html][Making intelligence]] and
+[[file:endo.html][The endofunction model of worlds and agents, and its philosophical implications]].
+But I think my chances are slim.
+
+What is the [[file:philo.html][relationship between mind and brain]]?
+
+Our brain is analog, but our mind is digital?
+Is our brain analog or digital?
+ [fn::https://medium.com/the-spike/brains-as-analog-computers-fa297021f935]
+ [fn::https://www.forbes.com/sites/quora/2016/09/27/is-the-human-brain-analog-or-digital/]
 ** Philosophy
-I am trying to understand what [[file:model.html][model]] is and what [[file:compute.html][computation]] is.
-
-I am [[file:philo.html][trying to understand the relationship between mind and brain]].
-
-I am [[file:nature.html][trying to understand physics]].
+*** Mathematics and nature
+What is a [[file:model.html][model]]?
 
 I am [[file:finite.html][looking for a philosophically sound foundation of mathematics]].
 It may be finitism.
+
+I am [[file:nature.html][trying to understand physics]].
+*** Ethics, morality, society
+What is our natural morality (the moral system built into us by evolution)?
+Avoid harm?
 
 If people know some basic epistemology (that is, if they can tell apart what they know from what /they think/ they know), then there will be no wars.
 Some epistemology should be taught in primary school.
 We often assume a lot of things about others.
 Most conflicts happen because we assume something wrong about someone else.
-** Society
-I am looking for a technology that empowers people and liberates people, a technology that makes oppression physically impossible.
+
+What does "X deserves Y" mean?
+Does anyone deserve to be rich?
+Does anyone deserve to be poor?
+Does anyone deserve kindness?
+Does anyone deserve inheritance?
+** Society, technology, techno-anarchism
+I am looking for a technology that empowers people and liberates people, a technology that makes power centralization impractical.
 I am trying to codify (that is, to express in English) our implicit morality, that is, the implicit moral system that we have evolved.
 Thus I write [[file:social.html][Designing the ideal society]].
 I thought I could change the world with politics, but now I think politics only wastes time,
@@ -140,83 +213,21 @@ What is a constitution?
 Why should people in the 21st century agree with people in the 18th century?
 Why should we agree with people born 300 years ago?
 We don't even agree with our parents born 30 years ago!
-** Software engineering
-I am thinking about open-source.
-I prefer cooperation to competition.
-I write
-[[file:opensrc.html][Making contributable open-source projects]],
-[[file:community.html][Building online communities]].
-I am thinking about maintaining open-source projects.
 
-Sometimes I think about forward software engineering,
-such as [[file:softeng.html][making lasting software sooner]].
+Labor laws and unions are the wrong solution.
+The correct solution is that the workers must unite and think for themselves, but they must not form a union.
+Once a union is formed (as a legal entity), it has a life of its own, and the principal-agent problem begins.
+There is always room and incentive for union bosses to collude with the original enemy, enrich themselves, and betray the original electors.
+The anarcho-syndicalists get this right.[fn::https://en.wikipedia.org/wiki/Opposition_to_trade_unions#Left_critiques_of_trade_unionism][fn::https://en.wikipedia.org/wiki/File:Anti-union_ASF_flyer.jpg]
+Direct action.
 
-Sometimes I think about [[file:reveng.html][reverse software engineering]],
-such as[[file:ps1.html][Reverse-engineering PlayStation 1 3D games to control the camera]].
+A state is essentially a massive principal-agent problem[fn::https://en.wikipedia.org/wiki/Principal%E2%80%93agent_problem] involving millions of people.
 
-I wanted to automate stock trading with my broker which has a stock trading application written in Java 6.
-Thus I wrote [[file:rejava.html][Reverse engineering the network protocol used by a Java desktop application]].
-But now I think financial economy is just a big Ponzi scheme full of rent-seeking,
-full of people who want to get a slice of the pie of real economy without growing the pie of real economy,
-full of people who just want to extract value from society without creating value,
-people who only take but don't give,
-people who only shuffle money around.
-
-I tried to think about [[file:engman.html][managing software engineers]].
-I thought about [[file:salary.html][software engineer salary]].
-
-Is software engineering engineering?
-What is engineering?
-
-I summarized the [[file:smf.html][Standard MIDI file format]].
-I was thinking about making a digital audio workstation, but I changed my mind about music.
-
-Here are some Java stuff.
-I used Java back in the days when I lacked self-respect.
-Now I recommend Prolog instead of Java.
-
-<2018-08-29>
-For Java enterprise/server programming, I recommend Maven instead of Gradle.
-
-This is a command line for production.
-Replace variables accordingly.
-#+BEGIN_SRC bash
-java \
-    -Xms$heap_size \
-    -Xmx$heap_size \
-    -Xloggc:"$gc_log_file" \
-    -XX:+PrintGCDetails \
-    -classpath 'target/*:target/dependency/*' \
-    "$java_main_class" \
-    "$@"
-#+END_SRC
-
-The GC log is important.
-When your application is unexplainably slow, first look at the GC log: does GC take too much time?
-Look at the "real" time.
-
-<2018-10-28> Systemd programmers are not competent enough for what they are doing.
- [fn::https://blog.erratasec.com/2018/10/systemd-is-bad-parsing-and-should-feel.html]
- [fn::https://www.reddit.com/r/programming/comments/9rtm1f/systemd_is_bad_parsing_and_should_feel_bad/]
-
-Computers feel slow not because hardware sucks, but because programmers tell it to do stupid things.
-Ever-stronger hardware lets more programmers get away with writing ever-shittier software.
-
-If software is a pure art, then its construction shouldn't be time-limited.
-A painter doesn't paint with deadlines.
-A painting is finished when the painter feels it's finished.
-However, a painter, when asked to paint a very specific painting, can estimate how many days it will take.
-** Farming
-I thought about [[file:subsist.html][starting a farm in the middle of Jakarta]],
-but I put it on hold because I felt that the opportunity cost was too high.
-
-The key to farming is to understand ecology, some botany (plant physiology and pathology), and nutrient cycle.
-
-We should care more about phosphate run-off.
-Phosphates are vital and non-renewable, like fossil fuel.
-The bad news is that there is no cycle bringing back the phosphates from the sea to the land, unlike water with its hydrologic cycle.
+<2019-01-31>
+Facebook is merging WhatsApp?
+We need an alternative with better privacy?
 ** Journalism
-*** Blacklisted untrustworthy news sources
+*** Some news sources are untrustworthy
 According to https://www.vox.com/platform/amp/policy-and-politics/2018/10/1/17923178/washington-times-seth-rich-aaron-rich-trump-fox-news:
 - Washington Times
 - FOX News
@@ -226,36 +237,26 @@ But Vox isn't entirely trustworthy either.
 VICE is questionable.
 https://www.reddit.com/r/KotakuInAction/comments/898na9/vice_gets_patreon_to_remove_naomi_wu_who_blasted/
 
+Gizmodo and BuzzFeed are somewhat OK when reporting tech, but they are very biased about social issues.
+
 Wikipedia maintains a blacklist of untrustworthy news sources
  [fn::perennial sources with varying trustworthiness https://en.wikipedia.org/wiki/Wikipedia:Identifying_reliable_sources/Perennial_sources]
  [fn::https://en.wikipedia.org/wiki/Wikipedia:Wikipedia_Signpost/2018-12-24/Discussion_report]
-*** Some journalist brutal murder cases
+*** Some journalists were brutally murdered
 Journalists have been brutally murdered in these areas:
 - Malta: Daphne Caruana Galizia was car-bombed in 2017. https://en.wikipedia.org/wiki/Daphne_Caruana_Galizia
 - Bulgaria: Viktoria Marinova was raped and murdered in 2018.
-** Common
-Every person should know these things.
-
-Nearsightedness (myopia) is reversible, but it takes years, as it also takes years for the eye to take that much damage.
-I think Todd Becker[fn::https://gettingstronger.org/tag/myopia/] writes more clearly than
-about D1-D2-D3[fn::Myopia: A Modern Yet Reversible Disease — Todd Becker, M.S. (AHS14) https://www.youtube.com/watch?v=x5Efg42-Qn0]
-Jake Steiner[fn::https://endmyopia.org/how-to-finding-active-focus/][fn::https://endmyopia.org/trouble-finding-active-focus-screen/] does,
-although they seem to convey the same message.
-
-Crooked teeth can be fixed with orthotropics[fn::https://orthotropics.com/], but it may take years, as orthodontics does anyway.
-The problem is that the modern human's jaw does not grow enough due to two reasons:
-(1) we don't chew soft modern foods as much as our ancestors chewed their hard foods, and
-(2) we have improper tongue posture.
-At first it is hard to understand what the tongue posture should be because
-we normally don't pay attention to our tongues, but I finally understand it.
-Orthotropics makes sense, but Mike Mew seems to have overstepped some boundaries unrelated to orthotropics.[fn::https://orthotropics.com/decision-dr-mike-mew-jonathan-sandler-british-orthodontic-society/]
-I understand that it is frustrating when you see something that others don't[fn::https://en.wikipedia.org/w/index.php?title=Ignaz_Semmelweis&oldid=871726873],
-but you have to be patient, play the long game, and collect evidence.
-
-Avoid untimely death.
-Don't swallow slugs[fn::https://www.dailymail.co.uk/news/article-6352629/amp/Sam-Ballard-dies-eight-years-swallowing-slug.html].
-Don't swim in a warm lake[fn::https://en.wikipedia.org/wiki/Naegleria_fowleri].
 ** Other
+*** Farming
+I thought about [[file:subsist.html][starting a farm in the middle of Jakarta]],
+but I put it on hold because I felt that the opportunity cost was too high.
+
+The key to farming is to understand ecology, some botany (plant physiology and pathology), and nutrient cycle.
+
+We should care more about phosphate run-off.
+Phosphates are vital and non-renewable, like fossil fuel.
+The bad news is that there is no cycle bringing back the phosphates from the sea to the land, unlike water with its hydrologic cycle.
+
 *** Ungrouped
 I collect [[file:entertain.html][entertainments found on the Internet]].
 
@@ -323,64 +324,14 @@ Handle = "touch with the hands, hold in the hands, fondle, pet"[fn::https://www.
 
 A director /directs/.
 Directors knows what they want.
-*** Birth is not survival.
+*** Procreation is not survival
 To survive is to keep/continue living.
 
 Survival of the individual vs survival of the species?
 
 Survivalism is compatible with antinatalism.
-*** Flat Earth is a social issue, not a scientific issue
-Flat-Earthers are merely looking for friends in this extremely power-unbalanced world.
-They have trust issues with authorities.
-I am also looking for friends who share my beliefs, and I also have trust issues with authorities,
-but the difference between a Flat-Earther and me is that
-I have trust issues with political authorities,
-whereas a Flat-Earther has a trust issue with scientific authorities.
-Thus, although I do not believe in Flat Earth,
-a Flat-Earther and I have more commonalities than differences.
-The same is true with Holocaust deniers and climate change deniers:
-it is a trust issue with some authorities.
-
-How did such trust issues arise?
-Our parents, for good reason, taught us not to trust strangers.
-Thus it is a logical consequence that we don't trust authorities: they are strangers!
-We don't know who they are, and yet they suddenly come down telling us what is right and what is wrong.
-
-How can two strangers be friends?
-By physical closeness (being at nearby location and time) and by mental closeness (having similar ideas and beliefs).
-How do we make sure that the people in power are not strangers?
-It is not feasible for one person to meet millions of people.
-Thus I have this corollary: /having power over more people always begets more trust issues/, simply because it is harder for the authority to not be strangers with its subjects.
-Perhaps it's just that power today is too centralized.
-But mass media enables centralization of power;
-the authority uses mass media to make its subjects feel that the authority is familiar.
-But mass communication is one-way communication.
-How does one-way communication build trust?
-In the same way an actor builds his fanbase of fans who trust him.
-First, the would-be fans have to fall in love with him from afar, be it due to his handsomeness, his charisma, or any aspect of him that resonates with them.
-But then this fanbase has to be maintained, and it is physically impossible for an actor with a million fans to be close to all of them.
-Therefore what is required to maintain the fanbase is a /mass illusion/ of closeness:
-the actor has to behave in such a way that makes his fans /perceive/ that he cares about /all/ of them,
-whereas he can only /actually/ care about /few/ of them.
-The mass media only has to show the actor's interacting with /a few/ of his fans, in order to make /all/ of his fans feel that they have been interacted with.
-This is not because he is evil; he is just constrained by the laws of physics.
-This technique is a double-edged sword:
-it can be used to maintain political stability,
-but it can also be used to lie to millions of people.
-We need to teach people epistemology so that they can tell apart what they know and what they think they know.
-Mass media does not give any knowledge; it only gives an illusion of knowledge.
-Reading the news does not make us know anything; it only makes us think that we know.
-How do I know there is a disaster somewhere?
-I do not, because I can only know things near me, and it is not feasible for me to verify every claim in the news; I am merely assuming that the news is honest.
-Epistemology is more important than ever in this age of falsehood.
-
-There are some simple experiments that we can carry out to determine the curvature of the Earth.
-Reality itself has told us through those experiments that the Earth is not flat; it is up to us to listen to reality or ignore it at our own peril.
-We will make costly mistakes if we make antennas and satellites with Flat Earth theory.
-
-The theory makes sense and is a fine scientific theory: it is falsifiable.
-What does not make sense to me is the refusal to change one's beliefs despite being otherwise told by reality.
-** Statistics makes bullshit appear legitimate
+*** Lying
+**** Statistics makes bullshit appear legitimate
 In 2019, by refuting a bullshit in Gamal Albinsaid's Twitter account,
 Ainun Najib demonstrates[fn::https://twitter.com/ainunnajib/status/1082185571559124992][fn::https://www.facebook.com/joko.trikukuh/posts/10161376605960541]
 Brandolini's bullshit asymmetry principle[fn::https://twitter.com/ziobrando/status/289635060758507521]:
@@ -401,7 +352,7 @@ A bullshit contains the necessary ingredient to refute itself.
 A bullshit has an inherent flaw that we can point out without referring to anything outside the bullshit.
 We just have to point it out.
 "This is a truncated graph. You are lying."
-*** Levels of lying?
+**** Levels of lying?
 Level 0: obvious lie, obviously nonsensical, takes no effort to refute.
 Example: a child who broke a vase.
 
@@ -415,28 +366,7 @@ and damn lies[fn::https://en.wikipedia.org/wiki/Lies,_damned_lies,_and_statistic
 Level 4: level 3 plus creating your own pseudo-philosophy.
 
 Level 5: post-truth politics: inventing your own facts.
-* Music
-I played piano in the band [[file:nomads.html][The Nomads]] (an Indonesian band, not the Swedish band).
-However, I quit being a performer on 2018-12-23, less than a year after joining the band, because I hate inhaling cigarette smoke in venues and I hate carrying pianos to venues.
-I am no longer a pianist.
-I am now a composer with an asset mindset.
-
-I have a love-hate relationship with music.
-Music wastes time, but as I distance myself from it, something always tempts me to come back.
-
-Kids should learn art to stimulate the brain, but they should not grow up to be artists.
-They should grow up to be mathematicians/scientists/engineers who know some art.
-** Middle school string orchestra sounds muddy because the instruments are too big for the kids' hands
-Intonation is destroyed.
-
-In a middle school string orchestra, the kids' hands are big enough for violin and viola, but not cello and bass.
-The kid cellists and bassists' hands are jumping around the fingerboard.
-
-Middle school cellists.
-The left hand can't be too agile.
-The right hand should compensate so that the part is not too boring.
-That is the key to writing middle school cello and bass part.
-* Notes to self
+** Notes to self
 I need to rewrite these pages:
 [[file:compsci.html][Computer science]],
 [[file:math.html][Mathematics]],
@@ -463,7 +393,7 @@ Jekyll can generate sitemap.xml without plugins.
 Migrating from Jekyll to Pandoc broke some things.
 The generated page [[file:all.html][All pages]] does not include Pandoc-generated pages.
 Sitemap.xml is also broken in the same way.
-* Notes for future AI recommender
+** Notes for future AI recommender
 Dear machine, please find me people whose interests are similar to mine.
 These are some example of such people, mostly professors or ex-professors.
 I have not met these people.
@@ -474,7 +404,7 @@ Why is there no Semantic Web ontology for research interests?
 Idea: We can query[fn::https://query.wikidata.org/] Wikidata to find professors whose research interests intersect ours.
 <2019-01-08>
 I tried that, but Wikidata does not have much data relevant to that query.
-** Intersecting in two topics
+*** Intersecting in two topics
 Prof. Sanjeev Arora[fn::https://www.cs.princeton.edu/~arora/] is a member of
 Princeton theory-of-computation group[fn::http://theory.cs.princeton.edu/],
 Princeton ML Theory Group[fn::http://mltheory.cs.princeton.edu/],
@@ -483,8 +413,8 @@ and Arora Research Group[fn::http://unsupervised.cs.princeton.edu/].
 https://www.quora.com/How-good-is-Princeton-at-machine-learning
 
 https://www.math.ias.edu/theoretical_machine_learning
-** Intersecting in one topic
-*** Computational complexity theory
+*** Intersecting in one topic
+**** Computational complexity theory
 Prof. Neil Immerman[fn::https://www.cics.umass.edu/faculty/directory/immerman_neil][fn::https://people.cs.umass.edu/~immerman/]
 wrote the "Descriptive complexity" book[fn::www.cs.umass.edu/~immerman/book/descriptiveComplexity.html] published in 1999.
 He is also a member of UMass CS Theory Group[fn::http://theory.cs.umass.edu/people.html] which has interesting theoretical researches.
@@ -494,18 +424,30 @@ https://www.quora.com/Which-professors-research-groups-are-working-on-mathematic
 Prof. Oded Goldreich[fn::http://www.wisdom.weizmann.ac.il/~/oded/]
 
 Prof. Eric Allender[fn::https://www.cs.rutgers.edu/faculty/eric-allender]
-*** Programming language theory
+**** Programming language theory
 Prof. Philip Wadler[fn::http://homepages.inf.ed.ac.uk/wadler/]
 
 Prof. Simon Peyton--Jones[fn::https://www.microsoft.com/en-us/research/people/simonpj/?from=http%3A%2F%2Fresearch.microsoft.com%2Fen-us%2Fpeople%2Fsimonpj]
-*** Artificial intelligence and machine learning
+**** Artificial intelligence and machine learning
 Prof. Jürgen Schmidhuber[fn::http://people.idsia.ch/~juergen/].
 
 Prof. Elad Hazan[fn::https://www.cs.princeton.edu/courses/archive/spring16/cos511/]
-*** Philosophy of computer science
+**** Philosophy of computer science
 Prof. William Rapaport[fn::http://www.buffalo.edu/cas/philosophy/faculty/emeriti/rapaport.html].
 
 Prof. Brian Cantwell Smith[fn::https://ischool.utoronto.ca/profile/brian-cantwell-smith/].
+
+* Music
+I played piano in the band [[file:nomads.html][The Nomads]] (an Indonesian band, not the Swedish band).
+However, I quit being a performer on 2018-12-23, less than a year after joining the band, because I hate inhaling cigarette smoke in venues and I hate carrying pianos to venues.
+I am no longer a pianist.
+I am now a composer with an asset mindset.
+
+I have a love-hate relationship with music.
+Music wastes time, but as I distance myself from it, something always tempts me to come back.
+
+Kids should learn art to stimulate the brain, but they should not grow up to be artists.
+They should grow up to be mathematicians/scientists/engineers who know some art.
 * Contact
 To ask questions, suggest corrections, or add something, do any of these:
 

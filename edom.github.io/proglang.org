@@ -4107,14 +4107,15 @@ where \(I_A = \{ (x,x) ~|~ x \in A \}\).
 Let \(F = (A,B,f)\) be a function.
 
 Let \(G = (F \times A, B, g)\) be a function where \( g(f,x) = f(x) \).
-* object = lambda + record + mutation?
+* Ideas?
+** object = lambda + record + mutation?
 #+BEGIN_EXAMPLE
 let self = {
         prop = 1;
         foo = \ () -> self.prop + 1;
 }; in self
 #+END_EXAMPLE
-* Unifying functional and logic programming as a rewriting system
+** Unifying functional and logic programming as a rewriting system
 It is easier to add nondeterminism to lambda calculus than it is to add lambda-expression to Horn clauses?
 There are at least two camps of the declarative programming languages:
 First: Start from Prolog, move toward Haskell.
@@ -4142,7 +4143,7 @@ haskell {
     what n = \exists x y : parent x y && length + length y == n
 }
 #+END_EXAMPLE
-** Lambda-calculus with choice/disjunction
+*** Lambda-calculus with choice/disjunction
 Nondeterministic programming: Prolog, Amb, Alisp[fn::https://en.wikipedia.org/wiki/Nondeterministic_programming].
 Other nondeterminstic extensions to lambda calculus are already in the literature:
 1998 \cite{kutzner1998non}, 2009 \cite{fischer2009purely}.
@@ -4203,7 +4204,8 @@ We define that an expression /succeeds/ if it does not fail.
 fail | x &\to x
 \\ x | fail &\to x
 \end{align*}
-* Logic programming with explicit side-effects with force-predicate
+
+** Logic programming with explicit side-effects with force-predicate
 The meaning of force(X) is that force(X) succeeds iff it has changed the world such that X will succeed after force(X) returns.
 Thus the interpreter has to check for race conditions?
 Is this requirement too difficult?
@@ -4212,11 +4214,13 @@ Is this requirement too difficult?
 
 ?- force(file_content('foo', [1,2,3])). -- replace the content of file 'foo' with [1,2,3]
 #+END_EXAMPLE
-* Prolog as a term-rewriting meta-interpreter
+
+** Prolog as a term-rewriting meta-interpreter
 The Prolog rule "A :- B" can be interpreted in two ways.
 The first is the well-known proof-theoretic interpretation "to prove A, prove B".
 The second is the /rewriting-system interpretation/ "rewrite A to B".
-* Write abstract interpreters, not compilers?
+
+** Write abstract interpreters, not compilers?
 <2018-12-30>
 
 The same code fragment can be interpreted in several ways.
@@ -4226,7 +4230,7 @@ Example: a Python interpreter interprets the Python program "print 'foo'" as pri
 
 Write an abstract interpreter that emits code when interpreting.
 An interpreter that interprets the Python program "print 'foo'" as "emit a Ruby statement that prints 'foo' to screen when executed".
-* Taxonomy of programming languages?
+** Taxonomy of programming languages?
 - Dichotomies
 - Having denotational semantics vs not
 - With vs without runtime type information
@@ -4238,4 +4242,10 @@ An interpreter that interprets the Python program "print 'foo'" as "emit a Ruby 
 - By value spaces?
 - Principled vs unprincipled
 - Designed by person vs by committee
+** Enhancing (name-separating) Prolog with anonymous predicates and modules
+#+BEGIN_EXAMPLE
+let([
+    pred = (X => Y => (male app X) and (child app X app Y))
+], pred app bar)
+#+END_EXAMPLE
 * Bibliography
