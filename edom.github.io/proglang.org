@@ -1,14 +1,10 @@
-#+TITLE: Designing programming languages
+#+TITLE: Programming languages
 #+DATE: 2018-12-15 01:35 +0700
 #+PERMALINK: /proglang.html
 #+OPTIONS: ^:nil toc:nil
 #+MATHJAX: yes
-Disclaimer:
-- This will change without notice.
-- This may contain mistakes.
-- Opinions may change.
-#+TOC: headlines 1
-* Executive summary
+* Names and referents should be separated
+** Executive summary
 The target audience is programming language designers and implementors.
 
 I suggest that programming language implementors follow these principles:
@@ -29,15 +25,8 @@ I suggest that programming language implementors follow these principles:
   - The language must be lexically scoped.
 
 We have two choices: Fix existing languages, or create a new language.
-* (planned) Structure of this article
-- philosophical principles and meta-thoughts
-- essence of computation
-- essence of programming
-- philosophical principles of language design
-- criteria for a module system free of name clashes
-* Total separation between names and referents
-#+TOC: headlines 2 local
-** Example with functions
+** Total separation between names and referents
+*** Example with functions
 Consider this example:
 #+BEGIN_EXAMPLE
 // C
@@ -62,7 +51,7 @@ we mean this total separation between names and referents.
 A function must not decide its own name.
 The caller of that function picks a name that it uses to refer to that function.
 The same goes for modules and every other language element that can be named.
-** Example with modules
+*** Example with modules
 The key message:
 - A thing (function, module, etc.) should not decide its own name.
 - The implementation must be able to load a file into an anonymous module.
@@ -126,7 +115,7 @@ var foo2 = require("foo.js");
 #+END_SRC
 
 A language used by millions of programmers must separate names and referents to avoid naming conflicts.
-** Philosophical investigation
+*** Philosophical investigation
 Designing anything good:
 Name is not a property of anything.
 Name is a linguistic artifact that we use to refer to something.
@@ -139,7 +128,9 @@ If Prolog is to have anonymous predicates, then it works with second-order logic
 
 The job of a module is to disambiguate names.
 Example: which "member/2" do we mean?
-* Summary of what I think the best programming language would is like, as of <2018-12-30>
+* What is the best programming language?
+This is what I think the best programming language would is like, as of <2018-12-30>.
+
 general feel: Prolog + Haskell
 
 Katahdin - runtime syntax manipulation
@@ -279,14 +270,6 @@ A dictionary can be a finite function whose domain is a finite subset of \( D \)
 A module can be modeled as a dictionary.
 A module can be modeled as a finite function \( N \to D \) where \( N \) is the set of names for which the module has an entry.
 A module can be modeled as an infinite function \( N \to D \) where \( N \) is the set of all possible names.
-* Proving and testing
-/Testing approximates proving./
-We actually want to prove a logical formula phi about a piece of code, we want to prove that the code fragment is a model of the formula phi, but proving is too expensive.
-Therefore, we test phi instead.
-
-In back-end testing, the formula is often obvious.
-What is the formula in front-end testing?
-DOM element existence testing?
 * Module systems
 #+TOC: headlines 2 local
 ** What
@@ -627,7 +610,8 @@ Set a time-out.
 - Ignored undocumented code sketches
 
   - [[https://github.com/jordanlewis/simple-module-system][jordanlewis/simple-module-system: Adding modules to a polymorphic lambda calculus]], code in SML/NJ.
-* Strings, especially of characters
+* Primitives
+** Strings, especially of characters
 Why do we have strings?
 
 Computer keyboards evolved from typewriters.
@@ -659,8 +643,8 @@ Unqualified "string" usually means "character string".
 A /character string literal/ is surrounded with quotes.
 
 - inconclusive discussion https://www.reddit.com/r/ProgrammingLanguages/comments/9tj6ka/how_would_you_best_implement_first_class_strings/
-** Escape sequences
-** Characters
+*** Escape sequences
+*** Characters
 What is Unicode's definition of "character"?
 Is that definition sane?
 
@@ -670,8 +654,8 @@ Issues: ordering/collation, capitalization, combination, halfwidthization, ligat
 
 - https://en.wikipedia.org/wiki/String_(computer_science)
 - https://en.wikipedia.org/wiki/Character_(computing)
-* Dictionary, map, associative array, record, finite function, hash table
-** Clojure maps are applicable like functions.
+** Dictionary, map, associative array, record, finite function, hash table
+*** Clojure maps are applicable like functions.
 A very interesting fundamental idea.
 
 #+BEGIN_SRC lisp
@@ -692,8 +676,14 @@ update nk nv f = \ k -> if k == nk then nv else f k
 #+END_SRC
 
 A Prolog deterministic binary predicate is like a Clojure map.
-* The human aspect
-** Science (evolution and neuroscience) explains why people stick to shitty-but-predictable languages
+* How do we use programming languages?
+** Most people stick to languages they are familiar with
+They prefer shitty-but-familiar to great-but-unfamiliar.
+They condemn themselves to apathy and mediocrity.
+They never wonder whether there is a better way.
+
+Science (evolution and neuroscience) explains why people stick to shitty-but-predictable languages
+
 The brain reward system rewards correct predictions.
 If person P finds language L predictable (according to P's background knowledge), then P will like L.
 Procedural languages are predictable.
@@ -4079,34 +4069,31 @@ Google search of software modeling language
 https://en.wikipedia.org/wiki/Modeling_language
 https://en.wikipedia.org/wiki/EXPRESS_(data_modeling_language)
 https://www.martinfowler.com/articles/languageWorkbench.html
-* Growing a programming language?
-2006, "A growable language"
-"programming language designers should plan for such growth, along with the growth of a user community"
-https://dl.acm.org/citation.cfm?id=1176621
-* Functions as semantics of lambda calculus?
-Key idea:
-A lambda abstraction is not a function,
-but a function can be the semantics of a lambda abstraction.
+* How should lambda-calculus be implemented?
+Normal-order reduction enables us to write fixed points.
+Should we let the programmer choose the evaluation strategy?
+Currying simplifies reasoning but complicates implementation (because applications may then nest deeply to the left).
+What is optimal reduction?
+ [fn::https://stackoverflow.com/questions/31223539/is-it-possible-to-evaluate-lambda-calculus-terms-efficiently]
+ [fn::https://en.wikipedia.org/wiki/Lambda_calculus#Optimal_reduction]
 
-A semantic of a lambda abstraction is a function, that is,
-a triple \((A,B,M)\) where \(A\) is the domain, \(B\) is the codomain, and \(M\) is the mapping.
+Lambda-calculus is unsound.[fn::https://en.wikipedia.org/wiki/Fixed-point_combinator]
+What does that imply about programming languages containing lambda calculus?
 
-What is the semantic of \( \lambda x . x x \)?
-What is the semantic of \( (\lambda x . x x) (\lambda x . x x) \)?
+Let \( A[B := C] \) mean \(A\) but with each free occurrence of \(B\) replaced with \(C\).
+Let \( eval(A,B) \) means that \(A\) normalizes to \(B\).
 
-For every set \(A\):
-\begin{align*}
-(A,A,I_A) \models \lambda x. x
-\end{align*}
-where \(I_A = \{ (x,x) ~|~ x \in A \}\).
+Applicative-order evaluation is the easiest to implement.
 
-\begin{align*}
-(X,Y,A) \models \lambda x y. x y
-\end{align*}
+Where do these things fit in the big picture of lambda-calculus implementations?
+G-machine, STG, GRIN[fn::https://github.com/grin-tech/grin].
 
-Let \(F = (A,B,f)\) be a function.
-
-Let \(G = (F \times A, B, g)\) be a function where \( g(f,x) = f(x) \).
+Reading queue:
+- https://stackoverflow.com/questions/31223539/is-it-possible-to-evaluate-lambda-calculus-terms-efficiently
+- https://www.researchgate.net/publication/312462365_About_the_efficient_reduction_of_lambda_terms
+- https://www.reddit.com/r/haskell/comments/2zqtfk/why_isnt_anyone_talking_about_optimal_lambda/
+- compiling monads https://www.irif.fr/~mellies/mpri/mpri-ens/articles/danvy-koslowski-malmkjaer-compiling-monads.pdf
+- modular monadic semantics http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.136.1656&rep=rep1&type=pdf
 * Ideas?
 ** object = lambda + record + mutation?
 #+BEGIN_EXAMPLE
@@ -4248,4 +4235,35 @@ let([
     pred = (X => Y => (male app X) and (child app X app Y))
 ], pred app bar)
 #+END_EXAMPLE
+** Functions as semantics of lambda calculus?
+Key idea:
+A lambda abstraction is not a function,
+but a function can be the semantics of a lambda abstraction.
+
+A semantic of a lambda abstraction is a function, that is,
+a triple \((A,B,M)\) where \(A\) is the domain, \(B\) is the codomain, and \(M\) is the mapping.
+
+What is the semantic of \( \lambda x . x x \)?
+What is the semantic of \( (\lambda x . x x) (\lambda x . x x) \)?
+
+For every set \(A\):
+\begin{align*}
+(A,A,I_A) \models \lambda x. x
+\end{align*}
+where \(I_A = \{ (x,x) ~|~ x \in A \}\).
+
+\begin{align*}
+(X,Y,A) \models \lambda x y. x y
+\end{align*}
+
+Let \(F = (A,B,f)\) be a function.
+
+Let \(G = (F \times A, B, g)\) be a function where \( g(f,x) = f(x) \).
+** Growing a programming language?
+2006, "A growable language"
+"programming language designers should plan for such growth, along with the growth of a user community"
+https://dl.acm.org/citation.cfm?id=1176621
+
+Racket manifesto?
+Racket language-oriented programming?
 * Bibliography
