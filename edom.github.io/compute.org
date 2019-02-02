@@ -1,7 +1,130 @@
-#+TITLE: Computation
+#+TITLE: Computing Research Group
 #+DATE: 2017-06-29 22:40 +0700
 #+PERMALINK: /compute.html
 #+MATHJAX: yes
+* What?
+** Computing theory
+*** What is computation, software, program, algorithm, etc.?
+What is computation?
+What is software?
+What is a program?
+What is an algorithm?
+*** What is the relationship between P and NP?
+What is the [[file:pnptry.html][relationship between P and NP]]?
+We are trying to understand the P vs NP problem,
+which requires [[file:compute.html][computation]], [[file:model.html][model]], and [[file:logic.html][logic]].
+We were motivated by the prize money[fn::one million US dollars http://www.claymath.org/millennium-problems/millennium-prize-problems], but our chances seem slim.
+*** Should we merge approximation theory and propositional calculus?
+Why do we want that?
+
+Boolean metric spaces merge logic and analysis?
+How do we define a sensible approximation error?
+How do we define the /distance/ between two formulas?
+The formula \( p \wedge q \) /approximates/ the formula \( p \wedge q \wedge r \).
+What is the approximation /error/?
+
+What are these papers?
+ [fn::https://arxiv.org/abs/0903.2567]
+ [fn::https://www.um.es/beca/papers/Aviles-Algebras.pdf]
+** How should we parse?
+How should we [[file:parse.html][parse]]?
+While studying parsing, we had to understand Brzozowski quotient and set division,
+so we wrote [[file:division.html][Generalizing division]].
+** Programming language research
+*** What language is like Prolog but has anonymous predicates and anonymous modules?
+We are [[file:prolog.html][using Prolog]].
+*** What should programming language be?
+What should [[file:proglang.html][programming language]] be?
+
+How should [[file:haskell.html][Haskell]] be improved?
+- How do we use Haskell without fmap, ap, and other annoying syntactic baggages? How do we have Maybe(A) = A union {Nothing}? (The original question that started it all.)
+- What does a set-theoretic type system look like? (The consequence of wanting Maybe(A) = A union {Nothing}.)
+- What if the denotational semantics directly involve functors and monads?
+- Why should we use that language / write programs that way?
+- Is there an efficient implementation?
+
+How should lambda calculus be implemented?
+What is an optimal implementation?
+*** Where should we publish our programming language research findings?
+Should we publish at ICFP, PLDI, POPL, SPLASH/OOPSLA, or Salon des Refusés?
+
+POPL has the "Off the beaten track".
+
+I want maximum open access.
+** Software engineering
+*** How should we build software?
+Sometimes I think about forward software engineering,
+such as [[file:softeng.html][making lasting software sooner]].
+*** How do we reverse-engineer software?
+Sometimes I think about [[file:reveng.html][reverse software engineering]],
+such as [[file:ps1.html][Reverse-engineering PlayStation 1 3D games to control the camera]].
+I am interested in reverse-engineering these PlayStation 1 games:
+Street Fighter EX Plus Alpha, Virtual Hiryu No Ken, and Tekken 3.
+
+I wanted to automate stock trading with my broker which has a stock trading application written in Java 6.
+Thus I wrote [[file:rejava.html][Reverse engineering the network protocol used by a Java desktop application]].
+But now I think financial economy is just a big Ponzi scheme full of rent-seeking,
+full of people who want to get a slice of the pie of real economy without growing the pie of real economy,
+full of people who just want to extract value from society without creating value,
+people who only take but don't give,
+people who only shuffle money around.
+*** Management, hiring, salary?
+I tried to think about [[file:engman.html][managing software engineers]].
+I thought about [[file:salary.html][software engineer salary]].
+
+"When hiring senior engineers, you’re not buying, you’re selling." (Alexander von Franqué)[fn::https://hiringengineersbook.com/post/trouble-hiring/]
+*** What is software engineering?
+Is software engineering engineering?
+What is engineering?
+
+If software is a pure art, then its construction shouldn't be time-limited.
+A painter doesn't paint with deadlines.
+A painting is finished when the painter feels it's finished.
+However, a painter, when asked to paint a very specific painting, can estimate how many days it will take.
+*** How should we build free/libre open-source software?
+I am thinking about open-source.
+I prefer cooperation to competition.
+I write
+[[file:opensrc.html][Making contributable open-source projects]],
+[[file:community.html][Building online communities]].
+I am thinking about maintaining open-source projects.
+*** What?
+I summarized the [[file:smf.html][Standard MIDI file format]].
+I was thinking about making a digital audio workstation, but I changed my mind about music.
+
+<2018-10-28> Systemd programmers are not competent enough for what they are doing.
+ [fn::https://blog.erratasec.com/2018/10/systemd-is-bad-parsing-and-should-feel.html]
+ [fn::https://www.reddit.com/r/programming/comments/9rtm1f/systemd_is_bad_parsing_and_should_feel_bad/]
+
+Computers feel slow not because hardware sucks, but because programmers tell it to do stupid things.
+Ever-stronger hardware lets more programmers get away with writing ever-shittier software.
+** How should we make an intelligent machines?
+I am looking for an AI that helps me process data into information.
+Thus I write [[file:intelligence.html][Making intelligence]] and
+[[file:endo.html][The endofunction model of worlds and agents, and its philosophical implications]].
+But I think my chances are slim.
+** What is the relationship between mind and brain?
+What is the [[file:philo.html][relationship between mind and brain]]?
+
+Our brain is analog, but our mind is digital?
+Is our brain analog or digital?
+ [fn::https://medium.com/the-spike/brains-as-analog-computers-fa297021f935]
+ [fn::https://www.forbes.com/sites/quora/2016/09/27/is-the-human-brain-analog-or-digital/]
+** What is a model?
+What is a [[file:model.html][model]]?
+
+** When should we care about a philosophically sound foundation of mathematics?
+Math seems to work just fine even if it isn't philosophically justified.
+Why should we care about finitism?
+
+I am [[file:finite.html][looking for a philosophically sound foundation of mathematics]].
+It may be finitism.
+
+** Semantics, semiotics, linguistics, confusion
+Jake Mitchell pointed out[fn::https://twitter.com/mekajfire/status/1090689517701349376]
+that there are a lot of confusing pair of terms in philosophy:
+sense and reference, signifier and signified, use-mention distinction, concept and object.
+
 * Philosophy of language?
 ** The English suffix -er means one who does
 "Computer" comes from "compute" and "-er".
