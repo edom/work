@@ -8,6 +8,11 @@ This website contains questions that we think should be answered.
 This page (the home page) can be thought as a table of contents.
 ** Who are the group members?
 - Erik Dominikus
+
+We are not a formal organization.
+We are just a bunch of people who think similarly,
+and we don't know what to call ourselves.
+The group may change name later.
 ** Who is Erik Dominikus?
 I am an independent[fn::https://en.wikipedia.org/wiki/Independent_scientist] researcher from Indonesia,
 with too many interests, mostly theoretical,
@@ -19,11 +24,11 @@ Most of my writings involve applied analytic philosophy, mathematics, and comput
 My last formal education degree, if you care, is a Sarjana Ilmu Komputer[fn::https://en.wikipedia.org/wiki/Bachelor_of_Computer_Science] degree bestowed in 2011 by the
 Fakultas Ilmu Komputer[fn::https://www.cs.ui.ac.id/] of Universitas Indonesia[fn::https://www.ui.ac.id/] for four years of undergraduate education.
 ** What are the group's goals?
-See the sections describing the research subgroups in this page.
+See the later sections describing the subgroups.
 We are not confident that we can achieve those goals, but we think those goals are worthy of pursuit.
 ** Is the group for profit?
 No.
-We are for meaning, not for profit.
+We are for truth and meaning, not for profit.
 ** Disclaimers
 /We may err./
 Read cautiously.
@@ -44,18 +49,167 @@ URLs may change.
 
 If you have good eyesight, you may want to zoom out by pressing Control-minus.
 The fonts may be too big.
-* Research subgroups
-** Computing Research Group
-We aim to prescribe how computing should be done.
+* Philosophy Research Group
+We provide philosophical foundations for the other groups.
+** What is a language?
+We have to define "language" for the Programming System Research Group.
+A programming language is a language that is used for programming.
+What is a language?
 
-We are looking for the best technique for parsing and unparsing formal languages,
-because parsing is the common thing between programming language and publishing system, and we are looking for both.
+Etymology[fn::https://www.etymonline.com/word/language]
+
+Language is a means of communication.
+
+Language is a set of mutually agreed symbols.
+
+Language contains logic.
+
+Is being a language objective or subjective (teleological)?
+A symbol does not have meaning on its own; someone has to interpret it.
+
+Wikipedia[fn::https://en.wikipedia.org/wiki/Language][fn::https://en.wikipedia.org/wiki/Animal_language]
+** Semantics, semiotics, linguistics, confusion
+Jake Mitchell pointed out[fn::https://twitter.com/mekajfire/status/1090689517701349376]
+that there are a lot of confusing pair of terms in philosophy:
+sense and reference, signifier and signified, use-mention distinction, concept and object.
+** What is the relationship between mind and brain?
+What is the [[file:philo.html][relationship between mind and brain]]?
+
+Our brain is analog, but our mind is digital?
+Is our brain analog or digital?
+ [fn::https://medium.com/the-spike/brains-as-analog-computers-fa297021f935]
+ [fn::https://www.forbes.com/sites/quora/2016/09/27/is-the-human-brain-analog-or-digital/]
+* Computing Research Group
+We aim to prescribe how computing should be done.
+** Computing Theory Research Group
+See [[file:compute.html]].
 
 Intersecting topics: philosophy, mathematics, nature.
 
 We dream of solving the P vs NP problem.
 
-See [[file:compute.html]].
+We follow recent advances by occasionally check Twitter and Semantic Scholar.
+
+We craft the theoretical foundations of other subgroups.
+** Parsing Research Group
+We are looking for the best technique for parsing and unparsing formal languages,
+because parsing is the common thing between programming language and publishing system, and we are looking for both.
+
+How should we [[file:parse.html][parse]]?
+While studying parsing, we had to understand Brzozowski quotient and set division,
+so we wrote [[file:division.html][Generalizing division]].
+** Programming System Research Group
+We dream of creating the best programming system.
+
+We dream of writing translating meta-programs to free programmers from design mistakes such as Java.
+
+We think we should program directly in the language of the mind.
+
+We think programming languages need to interoperate.
+
+We research programming languages.
+
+See [[file:proglang.html]].
+
+Ideas/findings:
+- Language design should start from semantics.
+- Names and referents should be separated (orthogonal).
+
+A language is only as good as how it promotes communication.
+
+What is communicated through a programming language?
+- What things exist?
+- How should they be manipulated?
+
+A programming language must be ultimately translatable to the machine's primitives.
+
+Wirth's "Algorithms + Data Structures = Programs"?[fn::https://en.wikipedia.org/wiki/Algorithms_%2B_Data_Structures_%3D_Programs]
+*** What language is like Prolog but has anonymous predicates and anonymous modules?
+We are [[file:prolog.html][using Prolog]], but we are unsatisfied.
+*** What should programming language be?
+How should [[file:haskell.html][Haskell]] be improved?
+- How do we use Haskell without fmap, ap, and other annoying syntactic baggages? How do we have Maybe(A) = A union {Nothing}? (The original question that started it all.)
+- What does a set-theoretic type system look like? (The consequence of wanting Maybe(A) = A union {Nothing}.)
+- What if the denotational semantics directly involve functors and monads?
+- Why should we use that language / write programs that way?
+- Is there an efficient implementation?
+
+How should lambda calculus be implemented?
+What is an optimal implementation?
+*** Where should we publish our programming language research findings?
+Should we publish at ICFP, PLDI, POPL, SPLASH/OOPSLA, or Salon des Refusés?
+
+POPL has the "Off the beaten track".
+
+I want maximum open access.
+** Software Engineering Research Group
+*** How should we build software?
+Sometimes I think about forward software engineering,
+such as [[file:softeng.html][making lasting software sooner]].
+*** How should we specialize programmers? Business programmer and language programmer
+We should not divide programmers into backend and frontend.
+We should divide programmers into business programmer and language programmer.
+The language programmer creates a DSL (domain-specific language).
+The business programmer captures user requirements into a program (a specification) in that DSL.
+The language programmer writes a metaprogram that translates
+the business programmer's declarative program into something efficient.
+*** How do we reverse-engineer software?
+Sometimes I think about [[file:reveng.html][reverse software engineering]].
+
+I wanted to automate stock trading with my broker which has a stock trading application written in Java 6.
+Thus I wrote [[file:rejava.html][Reverse engineering the network protocol used by a Java desktop application]].
+But now I think financial economy is just a big Ponzi scheme full of rent-seeking,
+full of people who want to get a slice of the pie of real economy without growing the pie of real economy,
+full of people who just want to extract value from society without creating value,
+people who only take but don't give,
+people who only shuffle money around.
+*** Management, hiring, salary?
+I tried to think about [[file:engman.html][managing software engineers]].
+I thought about [[file:salary.html][software engineer salary]].
+
+"When hiring senior engineers, you’re not buying, you’re selling." (Alexander von Franqué)[fn::https://hiringengineersbook.com/post/trouble-hiring/]
+*** What is software engineering?
+Is software engineering engineering?
+What is engineering?
+
+If software is a pure art, then its construction shouldn't be time-limited.
+A painter doesn't paint with deadlines.
+A painting is finished when the painter feels it's finished.
+However, a painter, when asked to paint a very specific painting, can estimate how many days it will take.
+*** How should we build free/libre open-source software?
+I am thinking about open-source.
+I prefer cooperation to competition.
+I write
+[[file:opensrc.html][Making contributable open-source projects]],
+[[file:community.html][Building online communities]].
+I am thinking about maintaining open-source projects.
+*** What?
+I summarized the [[file:smf.html][Standard MIDI file format]].
+I was thinking about making a digital audio workstation, but I changed my mind about music.
+
+<2018-10-28> Systemd programmers are not competent enough for what they are doing.
+ [fn::https://blog.erratasec.com/2018/10/systemd-is-bad-parsing-and-should-feel.html]
+ [fn::https://www.reddit.com/r/programming/comments/9rtm1f/systemd_is_bad_parsing_and_should_feel_bad/]
+
+Computers feel slow not because hardware sucks, but because programmers tell it to do stupid things.
+Ever-stronger hardware lets more programmers get away with writing ever-shittier software.
+** User Experience Programming Research Group
+We dream of demystifying and simplifying GUI programming.
+What is the essence of GUI programming?
+Can we do better than FRP (functional reactive programming)?
+Can we do declarative GUI programming better than HTML+CSS?
+If UX is the next UI, then is there UX programming instead of UI programming?
+GUX instead of GUI?
+
+** Gaming Research Group
+We are interested in [[file:ps1.html][reverse-engineering PlayStation 1 3D games to control the camera]].
+We are interested in reverse-engineering these (mostly PlayStation 1) games:
+Street Fighter EX Plus Alpha, Fighting Layer, Tekken 3, Virtual Hiryu No Ken, Dead or Alive series, Virtua Fighter series, Bloody Roar series.
+
+Products:
+- (very far from finished) PS1 reverse-engineering tool written in Prolog.
+  Should we also make a translator besides reverse-engineering?
+* Sociotechnical Research Group
 ** Social Research Group
 We aim to prescribe how humanity should proceed.
 Intersecting topics: morality, ethics, anarchism, philosophy.
@@ -63,7 +217,12 @@ Intersecting topics: morality, ethics, anarchism, philosophy.
 We dream of eliminating principal-agent problems.
 
 See [[file:social.html]].
+
+Products:
+- Where should we live? [[file:social.html]]
 ** Techno-Anarchy Research Group
+We technologically actualize the dreams of the Social Research Group.
+
 We research physics and distributed computing, as far as techno-anarchy is concerned.
 
 We dream of creating technologies that make power centralization physically impractical.
@@ -76,6 +235,10 @@ We prefer peaceful means.
 We dislike revolutions.
 We don't want to be in a revolution.
 We prefer to convince people by reason than by force.
+
+The system must not assume that humans are good.
+The system must assume the worst of humans:
+they are lazy, greedy, stupid, clever at gaming the system, and willing to cheat.
 *** How do we liberate people with technology?
 I am looking for a technology that empowers people and liberates people, a technology that makes power centralization impractical.
 I thought I could change the world with politics, but now I think politics only wastes time,
@@ -157,22 +320,11 @@ I am [[file:nature.html][trying to understand physics]].
 Why is it hard to convert between matter and energy?
 What does QFT say?
 (Related: Why isn't everything homemadeable?)
-** Meta-Research Group
+* Internal Research Group
 We aim to make other research groups more efficient.
 See [[file:meta.html]].
 
 Topics: meta-research, writing, publishing.
-** Music Research Group
-We aim to prescribe how we should make and use music.
-See [[file:music.html]].
-* Other
-You may find these uninteresting.
-** What things are entertaining?
-I collect [[file:entertain.html][entertainments found on the Internet]].
-
-Why are lyrebirds entertaining?
-Lyrebird can mimic sounds uncannily.
-Laser guns, drills, hammers, camera shutters.
 ** Notes to self
 I need to rewrite these pages:
 [[file:compsci.html][Computer science]],
@@ -309,6 +461,20 @@ I played piano in the band [[file:nomads.html][The Nomads]] (an Indonesian band,
 However, I quit being a performer on 2018-12-23, less than a year after joining the band, because I hate inhaling cigarette smoke in venues and I hate carrying pianos to venues.
 I am no longer a pianist.
 I am now a composer with an asset mindset.
+*** What things do I find entertaining?
+I collect [[file:entertain.html][entertainments found on the Internet]].
+
+Why are lyrebirds entertaining?
+Lyrebird can mimic sounds uncannily.
+Laser guns, drills, hammers, camera shutters.
+* Art Research Group
+** Music Research Group
+We aim to prescribe how we should make and use music.
+See [[file:music.html]].
+
+We also research about music education, how to teach music.
+** How should we care for ourselves?
+See [[file:groom.html]].
 * Contact
 To ask questions, suggest corrections, or add something, do any of these:
 
