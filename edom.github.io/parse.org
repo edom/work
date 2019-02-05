@@ -1,4 +1,4 @@
-#+TITLE: Parsing
+#+TITLE: Parsing Research Group
 #+DATE: 2018-04-11 00:00 +0700
 #+OPTIONS: ^:nil toc:nil
 #+PERMALINK: /parse.html
@@ -383,7 +383,19 @@ We shouldn't compromise by working around our grammar descriptions.
 * Metainterpreter for left-recursive parsing?
 "Parsing with left-recursive grammars"
 https://www.metalevel.at/acomip/
-* Left-recursive parsing
+* What is left-recursion, and how should we handle it?
+** Should we blame left-recursion on naive operational semantics?
+Mathematics has no problem with left-recursion.
+Why should computers have problem with left-recursion?
+** Handling left-recursion
+Laurent and Mens 2016 \cite{laurent2016taming} (some emphasis ours):
+"When a parser invokes itself (either directly or indirectly through intermediate parsers) without intervening state changes, the result is an infinite loop of parser invocations.
+This is a well-known problem of top-down recursive parsers, called /left-recursion/.
+Fortunately, it can be /mitigated/ as follows:
+start by running the left-recursive parser /while failing all left-recursive invocations/, then re-run it, using the result of the initial parse as the result of all left-recursive invocations."
+
+Avoiding left-recursion means always consuming something before recursing.
+** Left-recursive parsing
 2009
 Direct Left-Recursive Parsing Expressing Grammars
 https://www.semanticscholar.org/paper/Direct-Left-Recursive-Parsing-Expressing-Grammars-Tratt/b1e8309db5537fb15f51071fcdc39e139659ed15
@@ -406,8 +418,16 @@ because Prolog unifies same-named variables while lambda-calculus shadows same-n
 
 If the recursive call has smaller arguments than the parent call does, then the predicate should terminate.
 * What
+** Inconclusive
 1997 inconclusive discussion "Prolog Parser in Prolog"
 https://dtai.cs.kuleuven.be/projects/ALP/newsletter/archive_93_96/net/grammars/parser.html
+** Parsing
+"Parsing in Prolog"
+http://www.cs.sfu.ca/~cameron/Teaching/383/DCG.html
+
+"Jacc's LR-Parsing with Dynamic Operators"
+"This part of the Jacc documentation explains the modifications we can make to a basic table-driven LR parser generator à la yacc to accommodate support for Prolog's dynamic operators."
+http://www.hassan-ait-kaci.net/hlt/doc/hlt/jaccdoc/dynamicLR.html
 * Parsing
 ** My expectations about parsing
 I expect the computer to infer a parser and a pretty-printer from the same grammar.

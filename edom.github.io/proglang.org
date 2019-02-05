@@ -611,6 +611,28 @@ Set a time-out.
 
   - [[https://github.com/jordanlewis/simple-module-system][jordanlewis/simple-module-system: Adding modules to a polymorphic lambda calculus]], code in SML/NJ.
 * Primitives
+** What is a text?
+ASCII does a good job representing English texts, but not other texts.
+
+Is text the successor to printing with movable types?
+
+Direction, grapheme, character, radical, letter, modifier, etc.
+
+What does Unicode think a text is?
+
+A text is a writing?
+Drawing vs writing?
+This "A" is just a /representation/ of the first letter of the English alphabet,
+in the same way "0" is a representation of the first natural number.
+
+Text is inherently sequential/linear because that is the way we read.
+Our brain is physically limited;
+it can only focus on one thing at a time;
+we read by moving focus through text.
+Unless you are Kim Peek who may read two pages at once
+ [fn::https://www.psychologytoday.com/us/blog/the-superhuman-mind/201212/kim-peek-the-real-rain-man]
+ [fn::https://en.wikipedia.org/wiki/Kim_Peek]
+ [fn::http://itre.cis.upenn.edu/~myl/languagelog/archives/004655.html].
 ** Strings, especially of characters
 Why do we have strings?
 
@@ -4096,6 +4118,13 @@ Reading queue:
 - https://www.reddit.com/r/haskell/comments/2zqtfk/why_isnt_anyone_talking_about_optimal_lambda/
 - compiling monads https://www.irif.fr/~mellies/mpri/mpri-ens/articles/danvy-koslowski-malmkjaer-compiling-monads.pdf
 - modular monadic semantics http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.136.1656&rep=rep1&type=pdf
+* How should languages interoperate?
+Can we do it semantically?
+
+Can we do better than FFI (foreign function interface)?
+
+Languages are usually small.
+Standard libraries are huge.
 * Ideas?
 ** object = lambda + record + mutation?
 #+BEGIN_EXAMPLE
