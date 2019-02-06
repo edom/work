@@ -1,4 +1,4 @@
-#+TITLE: Programming languages
+#+TITLE: Programming Language Research Group
 #+DATE: 2018-12-15 01:35 +0700
 #+PERMALINK: /proglang.html
 #+OPTIONS: ^:nil toc:nil
@@ -4297,4 +4297,102 @@ https://dl.acm.org/citation.cfm?id=1176621
 
 Racket manifesto?
 Racket language-oriented programming?
+* Philosophy of length, dimension, measure, size, cardinality
+Similar questions
+ [fn::https://www.reddit.com/r/askmath/comments/6zuiob/why_is_it_called_cardinality_and_not_length_or/]
+ [fn::https://math.stackexchange.com/questions/158602/number-of-elements-vs-cardinality-vs-size]
+** What is length?
+"Length" means "the distance measured along the longest dimension of an object"[fn::https://en.wiktionary.org/wiki/length],
+"property of being long or extended in one direction; distance along a line"[fn::https://www.etymonline.com/word/length],
+"the most extended dimension of an object"[fn::https://en.wikipedia.org/wiki/Length][fn::http://wordnetweb.princeton.edu/perl/webwn?s=length],
+"the longest extent of anything as measured from end to end"[fn::https://www.dictionary.com/browse/length].
+To use the word "length" for anything else (such as ADTs, which are trees), we must first define what the "longest dimension" of a tree is.
+
+We can think of "length" as a nominalization of "long".
+
+In a programming language, the word "length" implies that things have a /geometry/.
+
+In order to define length, we must define a measure for every value in the language.
+
+\(m(x)\) should be the number of bits required to represent \(x\)?
+
+\(m(n) = \log_2 n\) or \(m(n) = n\)?
+
+\(m([a,b]) = something + m(a) + m(b)\)?.
+
+When we say "the length of this text is 1,000 characters", we tacitly assume that a character is a /unit of length/.
+
+"Length" does not make sense for heterogenous sequence.
+"The length of [abc, 1, [1,2,3]] is 3 elements".
+Should an element, which has an arbitrary size, be a unit of length?
+
+"Length" implies unit of length.
+
+We say "this movie is 90 minutes long".
+
+When we say "the length of X is Y", we implicitly see X as a /line/.
+** What is dimension?
+what
+ [fn::https://www.etymonline.com/word/dimension]
+ [fn::https://en.wiktionary.org/wiki/dimension]
+ [fn::https://en.wikipedia.org/wiki/Dimension]
+** What is size?
+what
+ [fn::https://www.etymonline.com/word/size]
+ [fn::https://en.wiktionary.org/wiki/size]
+** Why do we measure length?
+Because we want to place an object inside a container, and we want to know whether the container is large enough.
+Because we want to tie an object, and we want to know whether we have enough rope.
+And so on.
+** How do we measure length?
+The length of a line is how long that line is.
+
+The length of a box (a rectangular prism) is the length of its longest axis.
+A rectangular prism has three axes.
+Why is the length of a prism not the length of its diagonal?
+
+Unit of length.
+
+We can take "the length of a sphere" to mean "the length of the longest line that we can put in a sphere", and therefore we are justified in saying "The length of a sphere is its diameter".
+What are the axes of a sphere?
+
+If we think of a triple as something like a rope, that is, if we think of each element as a point occupying no space, then:
+#+BEGIN_EXAMPLE
+length (_,_,_) = 3
+#+END_EXAMPLE
+
+If we think of a triple as something like a cube, that is, if we think of each element as a dimension (as a side of a cube), then:
+#+BEGIN_EXAMPLE
+length (a,b,c) = maximum [length a, length b, length c]
+#+END_EXAMPLE
+** Why do we conflate length and cardinality?
+We seem to think that the elements of a sequence occupy no space, like point mass in Newtonian mechanics.
+Why should sequence length be element count?
+** <2019-02-06> Response
+My philosophical analysis leads me to the conclusion that the problem is our conflating "length" and "cardinality".
+#+BEGIN_EXAMPLE
+-- Let `huge` be a text taking 1 gigabytes of memory.
+length      [huge] = 1  -- does not make sense
+cardinality [huge] = 1  -- makes sense
+#+END_EXAMPLE
+
+"Length" implies a /longest dimension/ and a /unit of length/.
+
+~length "hello" = 5~ makes sense because of two things: (1) it makes sense for a character list to be visualized as a /one-dimensional/ line and
+(2) it makes sense for character to be a /unit of length/ (if we assume that there are finitely many characters and each character is one unit of length).
+
+~length [[1],[2,3]] = 2~ does not make sense. It stretches English too much for a list to be a /unit of length/,
+because each list may have different size, unless we declare by fiat that the size of each list is one, but this tyranny only begets more philosophical problems.
+
+~length (Identity "hello") = 1~ does not make sense for the same reason ~length [[1],[2,3]] = 2~ does not make sense.
+
+However, if we generously assume that Haskell "length" means "cardinality", all the above make sense,
+/but/ that generous assumption still does not justify ~length (undefined,undefined) = 1~
+which violates both the meaning of "length" and the meaning of "cardinality".
+** History
+<2019-02-06>
+I was triggered by Abdullah's pointing out to me that in Haskell, length "Hello" = 5, length (Identity "Hello") = 1, and length (undefined,undefined) = 1.
+Each of those viewpoints has its philosophical justifications.
+The question is: Which one has the strongest justification?
+What /is/ "length"?
 * Bibliography

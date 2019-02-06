@@ -4,16 +4,18 @@
 #+PERMALINK: /parse.html
 * What is parsing?
 In 1550, "to parse" is "to state the parts of speech in a sentence".[fn::https://www.etymonline.com/word/parse]
-Now we limit ourselves to formal languages.
+
+Grammar is the what.
+Parsing is the how.
+
 Parsing is relating strings and trees.
-Parsing is the inverse of /tree linearization/.
 Parsing is creating a tree from a string.
 
-A /parser/ is a relation \(P \subseteq C^* \times T\).
-The set \(C\) is the /alphabet/: it may be the set of Unicode character code points, or it may be the set of the tokens that a /lexical analyzer/ may produce.
-The set \(C^*\) is the Kleene closure of \(C\).
-The set \(T\) is the set of /syntax trees/.
-If the parser is injective, then the grammar is /unambiguous/.
+We say that a parser /implements/ a grammar.
+
+What is an alphabet?
+It may be the set of Unicode character code points.
+It may be the set of the tokens that a /lexical analyzer/ may produce.
 
 A parser /implements/ a grammar, as a machine /implements/ an algorithm.
 
@@ -23,20 +25,47 @@ The parser is /parallelizable/ if there exists a relatively fast function \(comb
 \[
 P(xy) = combine(P(x), P(y))
 \]
+* What is the inverse of parsing?
+The inverse of parsing is /unparsing/ (tree linearization).
 
-Parsing with derivatives[fn::http://matt.might.net/articles/parsing-with-derivatives/][fn::https://github.com/webyrd/relational-parsing-with-derivatives/blob/master/README.md]
+Parsing is the treeization (delinearization, deserialization) of a line.
+Unparsing is the linearization (serialization) of a tree.
 
-An /incremental/ parser is a relation \(step \subseteq C \times T \times T\).
+Parsing is String -> Maybe Tree.
+Unparsing is Tree -> String.
 
-How do IDEs not have to reparse the entire document when the user presses one keystroke?
+Can we make parsing truly one-to-one?
+String -> Tree.
+CST = AST.
+Very rigid syntax.
+Forbid whitespace freedom.
 
-Atoms[fn::https://blog.github.com/2018-10-31-atoms-new-parsing-system/]
+Another possibility: Inverse of parsing is anti-parsing (generation)?
+From grammar, generate all possible strings and their syntax trees.
 
-Differentiating Parsers[fn::http://lambda-the-ultimate.org/node/3704]
+Inverse of analytical grammar is generative grammar?
 
-The idea is to output to all possible continuations?
-\(incrementalize : (C^* \to T) \to (C^* \to T^*)\)?
+- https://en.wikipedia.org/wiki/Generative_grammar
+- https://en.wikipedia.org/wiki/Formal_grammar#Analytic_grammars
 
+Parser is syntax analyzer.
+Analysis is the opposite of synthesis?
+What is syntax synthesizer?
+
+Inverse of parsing is pretty-printing?
+
+If matching is analogous to subtraction, then what is analogous to multiplication?
+Generation?
+
+- algebra of pretty-printing
+
+  - 1995, Hughes, "The design of a pretty-printing library"
+  - 1998, Wadler, "A prettier printer"
+  - Hughes, Peyton-Jones, et al., http://hackage.haskell.org/package/pretty-1.1.3.6/docs/Text-PrettyPrint-HughesPJ.html
+
+- [[https://www.cs.kent.ac.uk/people/staff/oc/pretty.html][Efficient simple pretty printing combinators]]
+* How do we parse? How should we?
+** How?
 Zaytsev & Bagge 2014 \cite{zaytsev2014parsing} survey
 
 \cite{Mu2004AnIL}
@@ -50,7 +79,166 @@ Zaytsev & Bagge 2014 \cite{zaytsev2014parsing} survey
 somewhat unrelated \cite{Tan2016BidirectionalGF}
 
 \cite{Matsuda2013FliPprAP}
-* What parsing techniques/formalisms are there?
+
+Parsing is also called "syntax analysis" (analysis = breakdown, syntax = put together).
+
+Parsing is the act of modifying the /state/ of the parser.
+This is the operational view.
+
+Parsing is converting a sequence to a tree.
+This is the data view.
+
+What is the difference between syntax and grammar?
+
+We /lex/ (perform lexical analysis / tokenization) to clean up the grammar (no need to mention whitespaces in the grammar).
+
+Lexing simplifies grammars.
+
+With lexing:
+#+BEGIN_EXAMPLE
+    exp ::= exp PLUS exp
+#+END_EXAMPLE
+
+Without lexing:
+#+BEGIN_EXAMPLE
+    white ::= ...
+    exp ::= exp white "+" white exp
+#+END_EXAMPLE
+
+"Strictly speaking, tokenization may be handled by the parser.
+The reason why we tend to bother with tokenising in practice is that it makes the parser simpler,
+and decouples it from the character encoding used for the source code."
+([[https://en.wikibooks.org/wiki/Compiler_Construction/Lexical_analysis][Wikibooks:Compiler construction]])
+
+- [[https://jeffreykegler.github.io/personal/timeline_v3][Parsing: a timeline -- V3.0]]: 2012 article about a history of parsing.
+  - [[https://www.reddit.com/r/ProgrammingLanguages/comments/8cz97n/parsing_a_timeline_hopefully_this_puts_parsing_is/][Parsing: a timeline. Hopefully this puts "Parsing is a solved problem" to rest. : ProgrammingLanguages]]
+  - [[http://jeffreykegler.github.io/Ocean-of-Awareness-blog/individual/2018/05/knuth_1965.html][Why is parsing considered solved?]]
+
+See the forest, not only the trees.
+
+Some parsing techniques:
+- recursive descent parser (writing a parser manually)
+- parser generators: Happy (Haskell), Bison (with Yacc)
+- parser combinators: Parsec (Haskell)
+- PEG (parsing expression grammar)
+- Brzozowski quotient
+- binary-parser description languages: ASN.1, Google Protobuf, Apache Thrift, Apache Avro
+- invertible parsing?
+- https://en.wikipedia.org/wiki/Chart_parser
+- Parsing Expression Grammar (PEG)
+  - https://github.com/harc/ohm/
+    - https://ohmlang.github.io/
+      - https://harc.ycr.org/project/ohm/
+  - Packrat
+- 2015, [[https://arxiv.org/abs/1511.08307][Nez: practical open grammar language]]
+- Earley parser
+  - https://en.wikipedia.org/wiki/Earley_parser
+  - https://hackage.haskell.org/package/Earley
+- https://github.com/Gabriel439/post-rfc/blob/master/sotu.md#parsing--pretty-printing
+  - https://hackage.haskell.org/package/trifecta
+  - https://hackage.haskell.org/package/parsers
+- Parsing in Lisp and Racket https://stackoverflow.com/questions/21185879/writing-a-formal-language-parser-with-lisp
+** Derivatives?
+Parsing with derivatives[fn::http://matt.might.net/articles/parsing-with-derivatives/][fn::https://github.com/webyrd/relational-parsing-with-derivatives/blob/master/README.md]
+
+Atoms[fn::https://blog.github.com/2018-10-31-atoms-new-parsing-system/]
+
+Differentiating Parsers[fn::http://lambda-the-ultimate.org/node/3704]
+** Parsing with Brzozowski quotients
+Brzozowski quotient is like quotient in integer division, but for strings.
+(Formal definition?)
+
+Why is Brzozowski quotient called Brzozowski derivative?
+
+- [[https://en.wikipedia.org/wiki/Quotient_of_a_formal_language][Quotient of a formal language]]
+- [[https://en.wikipedia.org/wiki/Brzozowski_derivative][Brzozowski derivative]]
+
+  - [[https://arxiv.org/find/cs/1/au:+Brzozowski_J/0/1/0/all/0/1][Janusz Brzozowski et al. on arxiv]]
+
+The /multiplication/ of two strings $x$ and $y$ is the concatenation $x \cdot y = x y$.
+
+Multiplication is associative: $(xy)z = x(yz)$.
+
+The /inverse/ of a string $x$ is written $x^{-1}$.
+It's hypothetical.
+It's pure symbolic manipulation.
+Don't imagine what it looks like.
+Do care about its properties:
+
+- We define $x^{-1} x = \epsilon$.
+- We define $x x^{-1} = \epsilon$.
+- We define $(x y)^{-1} = x^{-1} y^{-1}$.
+
+The /left division/ of a string $x$ by divisor $y$ is $y^{-1} x$.
+
+The /right division/ of a string $x$ by divisor $y$ is $x y^{-1}$.
+
+How do we define quotient and remainder?
+
+Perhaps Brzozowski's paper describes why it's called a derivative?
+
+The multiplication of two languages $A$ and $B$ is the Cartesian product $AB = \\{ ab ~\|~ a \in A, b \in B \\}$.
+
+- Differentiating Parsers
+  Automatic derivation of incremental parser from a grammar or a non-incremental parser?
+  Like automatic differentiation but generalized to any program?
+  http://lambda-the-ultimate.org/node/3704
+- http://matt.might.net/articles/implementation-of-regular-expression-matching-in-scheme-with-derivatives/
+- http://okmij.org/ftp/continuations/differentiating-parsers.html
+- Parsing with derivatives?
+
+  - https://hackage.haskell.org/package/derp
+  - https://arxiv.org/abs/1010.5023
+  - http://matt.might.net/articles/parsing-with-derivatives/ "Yacc is dead"
+
+- Brzozowski quotients.
+
+  - [[https://arxiv.org/abs/1010.5023][Yacc is dead]]
+  - "Parsing with derivatives"
+
+- 2017, [[https://www.cl.cam.ac.uk/~nk480/parsing.pdf]["A Typed, Algebraic Approach to Parsing"]]
+
+  - "[...] we extend the notion of Brzozowski derivative from regular expressions to the typed context-free expressions."
+** Incremental/online parsing
+How do IDEs not have to reparse the entire document when the user presses one keystroke?
+
+Incremental parsing is parsing as input becomes available (without waiting for the whole input to become available).
+
+- Type-directed automatic incrementalization
+
+  - http://www.cs.cmu.edu/~joshuad/papers/incr/
+
+- https://en.wikipedia.org/wiki/Incremental_computing
+
+  - https://inc-lc.github.io/
+
+- https://hackage.haskell.org/package/incremental-parser
+- [[https://yi-editor.github.io/posts/2014-09-04-incremental-parsing/][incremental/online parsing]]
+
+An /incremental/ parser is a relation \(step \subseteq C \times T \times T\).
+
+The idea is to output to all possible continuations?
+\(incrementalize : (C^* \to T) \to (C^* \to T^*)\)?
+** How should we generate parsers and unparsers from grammars?
+What we are interested in is how to specify grammar, and how to derive a parser and unparser from grammar specificiation.
+
+I expect the computer to infer a parser and a pretty-printer from the same grammar.
+Parser generators only give half of what I want.
+
+I expect the computer to work with non-ambiguous left-recursive grammars.
+
+How should parsing be done?
+From grammar description, the machine should generate both a parser and a pretty-printer.
+
+Given grammar, generate both parser and unparser/pretty-printer.
+- http://www.semdesigns.com/Products/DMS/DMSPrettyPrinters.html?Home=DMSToolkit
+- https://hackage.haskell.org/package/invertible-syntax-0.2.1/src/Example.lhs
+- https://hackage.haskell.org/package/invertible-syntax
+- [[http://www.informatik.uni-marburg.de/~rendel/unparse/rendel10invertible.pdf][Tillmann Rendel and Klaus Ostermann. "Invertible Syntax Descriptions: Unifying Parsing and Pretty Printing". In Proc. of Haskell Symposium, 2010.]]
+- http://jssst.or.jp/files/user/taikai/2016/PPL/ppl1-1.pdf
+- [[http://lambda-the-ultimate.org/node/4191][LTU: Invertible Syntax Descriptions: Unifying Parsing and Pretty Printing]]
+- [[http://www.informatik.uni-marburg.de/~rendel/unparse/rendel10invertible.pdf][Invertible Syntax Descriptions: Unifying Parsing and Pretty Printing]]
+** What parsing techniques/formalisms are there?
 There are many techniques/formalisms:
 - Prolog definite-clause grammar (DCG) rules
 - Haskell parser combinators
@@ -67,11 +255,11 @@ A syntax object contains the name of the rule that produces it, the part of the 
 We can make this with SWI-Prolog dicts.
 
 We can use Scheme continuation for backtracking like Prolog.
-** Syntax objects?
+*** Syntax objects?
 The application of a rule to an input-list produces a syntax object and a remaining-list.
 A syntax object contains the name of the rule that produces it, the part of the input that matches it, the input position, and so on.
 We can make this with SWI-Prolog dicts.
-** Reversible programming? Bidirectional programming?
+*** Reversible programming? Bidirectional programming?
 Example: If \(T\) is a terminal, then the nonterminal \(N \to T\) is invertible.
 To parse, remove the prefix matching T from the input list.
 To unparse, prepend T to the input list.
@@ -95,9 +283,9 @@ Wikipedia[fn::https://en.wikipedia.org/wiki/Bidirectional_transformation]
 Janus
  [fn::https://topps.diku.dk/pirc/?id=janus]
  [fn::https://en.wikipedia.org/wiki/Janus_(time-reversible_computing_programming_language)]
-* How do we relate CST and AST without clutter?
+** How do we relate CST and AST without clutter?
 Big problems in parsing: lossless clutterless relation between CST and AST.
-* <2018-11-02> Direct left-recursive parsers in Prolog
+** <2018-11-02> Direct left-recursive parsers in Prolog
 The key: unify terminals before recursing into nonterminals.
 #+BEGIN_EXAMPLE
 % S is a list of character codes.
@@ -114,10 +302,9 @@ expression(S) :-
     number(S)
 ;   binary_operator(B), append([A, B, C], S), expression(A), expression(C).
 #+END_EXAMPLE
-
-* Relational parsing; parsing with Prolog; my train of thought
+** Relational parsing; parsing with Prolog
 Parsing is turning a list into a tree.
-** Approaches
+*** Approaches
 - 2002 course notes http://www.cs.sfu.ca/~cameron/Teaching/383/DCG.html
 - 1987 article "Parsing and compiling using Prolog" http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.101.9739&rep=rep1&type=pdf
 - relational approach
@@ -138,10 +325,10 @@ Parsing is turning a list into a tree.
 - procedural approach
   - recursive-descent
 - https://en.wikipedia.org/wiki/Garden-path_sentence
-** Determining the groundness of the length of the lists involved in append/3 and append/2
-*** Why do we care?
+*** Determining the groundness of the length of the lists involved in append/3 and append/2
+**** Why do we care?
 Because we want to write naive parsers that terminate.
-*** What?
+**** What?
 From the source code of SWI-Prolog, with some modifications:
 - http://www.swi-prolog.org/pldoc/doc/_SWI_/library/lists.pl?show=src#append/3
 
@@ -192,9 +379,9 @@ If append(A, B, C) succeeds, then:
 What?
 - 2002 article "Efficient Groundness Analysis in Prolog" https://arxiv.org/abs/cs/0201012
   - https://github.com/pschachte/groundness
-*** How do we generate a long list in Prolog, for testing?
-**** How do we say "A is a list of 100 equal elements" in Prolog?
-** Naive approach with recognizer / membership predicate
+**** How do we generate a long list in Prolog, for testing?
+***** How do we say "A is a list of 100 equal elements" in Prolog?
+*** Naive approach with recognizer / membership predicate
 A /recognizer/ is a unary predicate that takes a list of character codes.
 
 Another possible names for recognizer are /acceptor/, /determiner/, /decider/, /membership predicate/.
@@ -223,7 +410,7 @@ Exercise:
 - Try the query =number_(S)=.
 - Try the query =length(S,_), number_(S)=.
 - If you keep pressing semicolon in the first query, will you ever encounter =S = [48,49]=?
-*** A cool thing: recognizers are generators.
+**** A cool thing: recognizers are generators.
 The predicate =number_= can be used not only to recognize strings, but also to /generate/ all such strings.
 #+BEGIN_SRC prolog
 % Press ; to generate the next possibility.
@@ -232,7 +419,7 @@ The predicate =number_= can be used not only to recognize strings, but also to /
 #+END_SRC
 
 To understand how that works, we have to understand Prolog backtracking.
-*** Left recursion thwarts the naive approach.
+**** Left recursion thwarts the naive approach.
 Problem:
 The following =expression= doesn't terminate.
 #+BEGIN_SRC prolog
@@ -253,9 +440,9 @@ expression ::= number | expression operator expression
 #+END_SRC
 
 We don't want to sacrifice the elegance of the description.
-*** Can memoization (tabling) help speed up the naive approach?
+**** Can memoization (tabling) help speed up the naive approach?
 No.
-*** Another naive approach that works.
+**** Another naive approach that works.
 This one works.
 
 The key is:
@@ -287,7 +474,7 @@ expression(plus(MA,MC), E) :- true
     , expression(MC,EC)
     .
 #+END_SRC
-** Prefix remover / difference-list recognizer / list partitioner
+*** Prefix remover / difference-list recognizer / list partitioner
 We can turn the naive recognizer =digit/1= into difference-list recognizer =digit/2=.
 #+BEGIN_SRC prolog
 digit([D]) :- code_type(D, digit).
@@ -344,7 +531,7 @@ expression(U0, P0, U1) :- true
     , expression(U2, P2, U3)
     .
 #+END_SRC
-** Definite clause grammars
+*** Definite clause grammars
 - The DCG clause =left --> right= desugars/expands/translates into the definite clause =left(U0, U1) :- ...= where:
   - U0 is the input.
   - U1 is the suffix of U0 that is not recognized by the DCG clause.
@@ -352,7 +539,7 @@ expression(U0, P0, U1) :- true
     That string is the P such that U0 = P + U1 where + denotes list concatenation.
 - "Interesting Things about Prolog" https://gist.github.com/CMCDragonkai/89a6c502ca7272e5e7464c0fc8667f4d
   - "Definite clause grammars (DCG) make the difference list pattern into a first class primitive with the =-->= operator."
-*** Why does this naive DCG fail?
+**** Why does this naive DCG fail?
 #+BEGIN_SRC prolog
 digit --> [Code], {code_type(Code, digit)}.
 
@@ -368,26 +555,26 @@ expression -->
 ;   expression, operator, expression
 .
 #+END_SRC
-** Context-sensitive grammars?
+*** Context-sensitive grammars?
 We can add context by adding parameter.
-** Libraries?
+*** Libraries?
 - https://github.com/cbaziotis/prolog-cfg-parser
 - This isn't Prolog, but this looks awesome https://github.com/Engelberg/instaparse/blob/master/README.md
-** Left recursion
+*** Left recursion
 Mathematics handles left recursion just fine.
 Computers should too.
 We shouldn't chicken out.
 We shouldn't compromise by working around our grammar descriptions.
-** Precedence parsing?
+*** Precedence parsing?
 - 1996 article "An Operator Precedence Parser for Standard Prolog Text" https://onlinelibrary.wiley.com/doi/abs/10.1002/%28SICI%291097-024X%28199607%2926%3A7%3C763%3A%3AAID-SPE33%3E3.0.CO%3B2-L
-* Metainterpreter for left-recursive parsing?
+** Metainterpreter for left-recursive parsing?
 "Parsing with left-recursive grammars"
 https://www.metalevel.at/acomip/
-* What is left-recursion, and how should we handle it?
-** Should we blame left-recursion on naive operational semantics?
+** What is left-recursion, and how should we handle it?
+*** Should we blame left-recursion on naive operational semantics?
 Mathematics has no problem with left-recursion.
 Why should computers have problem with left-recursion?
-** Handling left-recursion
+*** Handling left-recursion
 Laurent and Mens 2016 \cite{laurent2016taming} (some emphasis ours):
 "When a parser invokes itself (either directly or indirectly through intermediate parsers) without intervening state changes, the result is an infinite loop of parser invocations.
 This is a well-known problem of top-down recursive parsers, called /left-recursion/.
@@ -395,7 +582,7 @@ Fortunately, it can be /mitigated/ as follows:
 start by running the left-recursive parser /while failing all left-recursive invocations/, then re-run it, using the result of the initial parse as the result of all left-recursive invocations."
 
 Avoiding left-recursion means always consuming something before recursing.
-** Left-recursive parsing
+*** Left-recursive parsing
 2009
 Direct Left-Recursive Parsing Expressing Grammars
 https://www.semanticscholar.org/paper/Direct-Left-Recursive-Parsing-Expressing-Grammars-Tratt/b1e8309db5537fb15f51071fcdc39e139659ed15
@@ -417,7 +604,6 @@ We can't piggyback Prolog's unification for lambda calculus substitution,
 because Prolog unifies same-named variables while lambda-calculus shadows same-named variables.
 
 If the recursive call has smaller arguments than the parent call does, then the predicate should terminate.
-* What
 ** Inconclusive
 1997 inconclusive discussion "Prolog Parser in Prolog"
 https://dtai.cs.kuleuven.be/projects/ALP/newsletter/archive_93_96/net/grammars/parser.html
@@ -428,227 +614,5 @@ http://www.cs.sfu.ca/~cameron/Teaching/383/DCG.html
 "Jacc's LR-Parsing with Dynamic Operators"
 "This part of the Jacc documentation explains the modifications we can make to a basic table-driven LR parser generator à la yacc to accommodate support for Prolog's dynamic operators."
 http://www.hassan-ait-kaci.net/hlt/doc/hlt/jaccdoc/dynamicLR.html
-* Parsing
-** My expectations about parsing
-I expect the computer to infer a parser and a pretty-printer from the same grammar.
-Parser generators only give half of what I want.
-
-I expect the computer to work with non-ambiguous left-recursive grammars.
-** What is parsing?
-Parsing is also called "syntax analysis" (analysis = breakdown, syntax = put together).
-
-Parsing is the act of modifying the /state/ of the parser.
-This is the operational view.
-
-Parsing is converting a sequence to a tree.
-This is the data view.
-
-Trees are graphs. Why stop at trees? Why not graphs?
-
-- [[https://en.wikipedia.org/wiki/Graph_rewriting][WP:Graph rewriting]]
-- 2015 slides "Graph grammars" [[http://www.its.caltech.edu/~matilde/GraphGrammarsLing.pdf][pdf]]
-- 1993 article "A Graph Parsing Algorithm and Implementation" [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.612.9698&rep=rep1&type=pdf][pdf]]
-- 1990 article "A Graph Parsing Algorithm" [[https://dl.acm.org/citation.cfm?id=859753][paywall]]
-
-What is the difference between syntax and grammar?
-
-We /lex/ (perform lexical analysis / tokenization) to clean up the grammar (no need to mention whitespaces in the grammar).
-
-Lexing simplifies grammars.
-
-With lexing:
-#+BEGIN_EXAMPLE
-    exp ::= exp PLUS exp
-#+END_EXAMPLE
-
-Without lexing:
-#+BEGIN_EXAMPLE
-    white ::= ...
-    exp ::= exp white "+" white exp
-#+END_EXAMPLE
-
-"Strictly speaking, tokenization may be handled by the parser.
-The reason why we tend to bother with tokenising in practice is that it makes the parser simpler,
-and decouples it from the character encoding used for the source code."
-([[https://en.wikibooks.org/wiki/Compiler_Construction/Lexical_analysis][Wikibooks:Compiler construction]])
-** What is the inverse of parsing?
-   :PROPERTIES:
-   :CUSTOM_ID: what-is-the-inverse-of-parsing
-   :END:
-
-Unparsing?
-
-Parsing is the treeization (delinearization, deserialization) of a line.
-Unparsing is the linearization (serialization) of a tree.
-
-Parsing is String -> Maybe Tree.
-Unparsing is Tree -> String.
-
-Can we make parsing truly one-to-one?
-String -> Tree.
-CST = AST.
-Very rigid syntax.
-Forbid whitespace freedom.
-
-Another possibility: Inverse of parsing is anti-parsing (generation)?
-From grammar, generate all possible strings and their syntax trees.
-
-Inverse of analytical grammar is generative grammar?
-
-- https://en.wikipedia.org/wiki/Generative_grammar
-- https://en.wikipedia.org/wiki/Formal_grammar#Analytic_grammars
-
-Parser is syntax analyzer.
-Analysis is the opposite of synthesis?
-What is syntax synthesizer?
-
-Inverse of parsing is pretty-printing?
-
-If matching is analogous to subtraction, then what is analogous to multiplication?
-Generation?
-
-- algebra of pretty-printing
-
-  - 1995, Hughes, "The design of a pretty-printing library"
-  - 1998, Wadler, "A prettier printer"
-  - Hughes, Peyton-Jones, et al., http://hackage.haskell.org/package/pretty-1.1.3.6/docs/Text-PrettyPrint-HughesPJ.html
-
-- [[https://www.cs.kent.ac.uk/people/staff/oc/pretty.html][Efficient simple pretty printing combinators]]
-
-** How should parsing be done?
-   :PROPERTIES:
-   :CUSTOM_ID: how-should-parsing-be-done
-   :END:
-
-From grammar description, the machine should generate both a parser and a pretty-printer.
-
-Given grammar, generate both parser and unparser/pretty-printer. - http://www.semdesigns.com/Products/DMS/DMSPrettyPrinters.html?Home=DMSToolkit - https://hackage.haskell.org/package/invertible-syntax-0.2.1/src/Example.lhs - https://hackage.haskell.org/package/invertible-syntax - [[http://www.informatik.uni-marburg.de/~rendel/unparse/rendel10invertible.pdf][Tillmann Rendel and Klaus Ostermann. "Invertible Syntax Descriptions: Unifying Parsing and Pretty Printing". In Proc. of Haskell Symposium, 2010.]] - http://jssst.or.jp/files/user/taikai/2016/PPL/ppl1-1.pdf - [[http://lambda-the-ultimate.org/node/4191][LTU: Invertible Syntax Descriptions: Unifying Parsing and Pretty Printing]] - [[http://www.informatik.uni-marburg.de/~rendel/unparse/rendel10invertible.pdf][Invertible Syntax Descriptions: Unifying Parsing and Pretty Printing]]
-
-Some parsing techniques:
-
-- recursive descent parser (writing a parser manually)
-- parser generators: Happy (Haskell), Bison (with Yacc)
-- parser combinators: Parsec (Haskell)
-- PEG (parsing expression grammar)
-- Brzozowski quotient
-- binary-parser description languages: ASN.1, Google Protobuf, Apache Thrift, Apache Avro
-- invertible parsing?
-- https://en.wikipedia.org/wiki/Chart_parser
-
-** Incremental/online parsing
-   :PROPERTIES:
-   :CUSTOM_ID: incrementalonline-parsing
-   :END:
-
-Incremental parsing is parsing as input becomes available (without waiting for the whole input to become available).
-
-- Type-directed automatic incrementalization
-
-  - http://www.cs.cmu.edu/~joshuad/papers/incr/
-
-- https://en.wikipedia.org/wiki/Incremental_computing
-
-  - https://inc-lc.github.io/
-
-- https://hackage.haskell.org/package/incremental-parser
-- [[https://yi-editor.github.io/posts/2014-09-04-incremental-parsing/][incremental/online parsing]]
-
-** Parsing with Brzozowski quotients
-   :PROPERTIES:
-   :CUSTOM_ID: parsing-with-brzozowski-quotients
-   :END:
-
-Brzozowski quotient is like quotient in integer division, but for strings.
-(Formal definition?)
-
-Why is Brzozowski quotient called Brzozowski derivative?
-
-- [[https://en.wikipedia.org/wiki/Quotient_of_a_formal_language][Quotient of a formal language]]
-- [[https://en.wikipedia.org/wiki/Brzozowski_derivative][Brzozowski derivative]]
-
-  - [[https://arxiv.org/find/cs/1/au:+Brzozowski_J/0/1/0/all/0/1][Janusz Brzozowski et al. on arxiv]]
-
-The /multiplication/ of two strings $x$ and $y$ is the concatenation $x \cdot y = x y$.
-
-Multiplication is associative: $(xy)z = x(yz)$.
-
-The /inverse/ of a string $x$ is written $x^{-1}$.
-It's hypothetical.
-It's pure symbolic manipulation.
-Don't imagine what it looks like.
-Do care about its properties:
-
-- We define $x^{-1} x = \epsilon$.
-- We define $x x^{-1} = \epsilon$.
-- We define $(x y)^{-1} = x^{-1} y^{-1}$.
-
-The /left division/ of a string $x$ by divisor $y$ is $y^{-1} x$.
-
-The /right division/ of a string $x$ by divisor $y$ is $x y^{-1}$.
-
-How do we define quotient and remainder?
-
-Perhaps Brzozowski's paper describes why it's called a derivative?
-
-The multiplication of two languages $A$ and $B$ is the Cartesian product $AB = \\{ ab ~\|~ a \in A, b \in B \\}$.
-
-- Differentiating Parsers
-  Automatic derivation of incremental parser from a grammar or a non-incremental parser?
-  Like automatic differentiation but generalized to any program?
-  http://lambda-the-ultimate.org/node/3704
-- http://matt.might.net/articles/implementation-of-regular-expression-matching-in-scheme-with-derivatives/
-- http://okmij.org/ftp/continuations/differentiating-parsers.html
-- Parsing with derivatives?
-
-  - https://hackage.haskell.org/package/derp
-  - https://arxiv.org/abs/1010.5023
-  - http://matt.might.net/articles/parsing-with-derivatives/ "Yacc is dead"
-
-- Brzozowski quotients.
-
-  - [[https://arxiv.org/abs/1010.5023][Yacc is dead]]
-  - "Parsing with derivatives"
-
-- 2017, [[https://www.cl.cam.ac.uk/~nk480/parsing.pdf]["A Typed, Algebraic Approach to Parsing"]]
-
-  - "[...] we extend the notion of Brzozowski derivative from regular expressions to the typed context-free expressions."
-
-** History of parsing
-   :PROPERTIES:
-   :CUSTOM_ID: history-of-parsing
-   :END:
-
-- [[https://jeffreykegler.github.io/personal/timeline_v3][Parsing: a timeline -- V3.0]]: 2012 article about a history of parsing.
-
-  - [[https://www.reddit.com/r/ProgrammingLanguages/comments/8cz97n/parsing_a_timeline_hopefully_this_puts_parsing_is/][Parsing: a timeline. Hopefully this puts "Parsing is a solved problem" to rest. : ProgrammingLanguages]]
-  - [[http://jeffreykegler.github.io/Ocean-of-Awareness-blog/individual/2018/05/knuth_1965.html][Why is parsing considered solved?]]
-
-** What
-   :PROPERTIES:
-   :CUSTOM_ID: what
-   :END:
-
-- Parsing Expression Grammar (PEG)
-
-  - https://github.com/harc/ohm/
-
-    - https://ohmlang.github.io/
-
-      - https://harc.ycr.org/project/ohm/
-
-  - Packrat
-
-- 2015, [[https://arxiv.org/abs/1511.08307][Nez: practical open grammar language]]
-- Earley parser
-
-  - https://en.wikipedia.org/wiki/Earley_parser
-  - https://hackage.haskell.org/package/Earley
-
-- https://github.com/Gabriel439/post-rfc/blob/master/sotu.md#parsing--pretty-printing
-
-  - https://hackage.haskell.org/package/trifecta
-  - https://hackage.haskell.org/package/parsers
-
-- Parsing in Lisp and Racket https://stackoverflow.com/questions/21185879/writing-a-formal-language-parser-with-lisp
-** Conferences
+* Conferences
 ACM SIGPLAN SLE http://www.sleconf.org/blog/11-20-2013-parsing-at-sle-2013

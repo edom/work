@@ -1,0 +1,124 @@
+#+TITLE: Programming System Research Group
+#+DATE: 2019-02-07 00:00:00 +0700
+#+PERMALINK: /program.html
+#+OPTIONS: ^:nil
+* What?
+Ideas/findings:
+- Language design should start from semantics.
+- Names and referents should be separated (orthogonal).
+
+A language is only as good as how it promotes communication.
+
+What is communicated through a programming language?
+Two things: what things exist, and how those things should be manipulated.
+
+A programming language must be ultimately translatable to the machine's primitives.
+
+Wirth's "Algorithms + Data Structures = Programs"?[fn::https://en.wikipedia.org/wiki/Algorithms_%2B_Data_Structures_%3D_Programs]
+
+We want something like this, to free the Java programmers:
+"Java program representation and manipulation in Prolog"[fn::http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.158.4524&rep=rep1&type=pdf]
+
+What?
+
+"A Denotational Approach to Measuring Complexity in Functional Programs"
+http://www.cs.cmu.edu/afs/cs/user/brookes/www/papers/CMU-CS-03-150.pdf
+
+<2019-02-04>
+Phil Freeman asked "Can someone explain why people object to thinking of types as sets? I mean, I normally don’t, but it doesn’t seem incorrect necessarily."
+https://twitter.com/paf31/status/1092111216950992897
+
+Barbara Liskov: "Our compilers today are not powerful enough to support or enforce semantic constraints.",
+answering question "Do you think that in those examples it’s worth having a refined subtype to explicitly encode the difference between the LIFO and FIFO semantics
+as part of a typing system or that would be something that would be annotated externally to the type system, like semantic constraints?"[fn::https://www.infoq.com/interviews/barbara-liskov]
+
+Rascal MPL[fn::https://www.rascal-mpl.org/] vs Jetbrains MPS?
+** DSL in Java?
+*** Some options for modeling the AST
+**** Each class is an AST node type
+#+BEGIN_EXAMPLE
+final class Const { ... }
+final class Add { ... }
+
+Object eval (Exp x) {
+  if (x instanceof Const) {
+    return ((Const)x).value;
+  }
+  if (x instanceof Add) {
+    final Add y = (Add) x;
+    return (int)eval(y.left) + (int)eval(y.right);
+  }
+  throw new IllegalArgumentException("" + x);
+}
+#+END_EXAMPLE
+**** One class Ast_node
+#+BEGIN_EXAMPLE
+final class Ast_node {
+  static final int CONST = 0;
+  static final int ADD = 1;
+  // ...
+  final int type;
+  final Object[] arg;
+  // ...
+}
+#+END_EXAMPLE
+
+Then we need a way to pattern-match.
+** What language is like Prolog but has anonymous predicates and anonymous modules?
+We are [[file:prolog.html][using Prolog]], but we are unsatisfied.
+** What should programming language be?
+How should [[file:haskell.html][Haskell]] be improved?
+- How do we use Haskell without fmap, ap, and other annoying syntactic baggages? How do we have Maybe(A) = A union {Nothing}? (The original question that started it all.)
+- What does a set-theoretic type system look like? (The consequence of wanting Maybe(A) = A union {Nothing}.)
+- What if the denotational semantics directly involve functors and monads?
+- Why should we use that language / write programs that way?
+- Is there an efficient implementation?
+
+How should lambda calculus be implemented?
+What is an optimal implementation?
+** Where should we publish our programming language research findings?
+Should we publish at ICFP, PLDI, POPL, SPLASH/OOPSLA, or Salon des Refusés?
+
+POPL has the "Off the beaten track".
+
+I want maximum open access.
+** TODO What
+Programming is computable mathematics?
+
+https://en.wikipedia.org/wiki/Semantic_domain
+
+"A programmable analog neural computer and simulator"
+https://pdfs.semanticscholar.org/5f6b/579b1f4166ea536f5ed188e9976390729303.pdf
+
+To rewrite a part of a program without introducing errors, we need to preserve the /meaning/ of the program, and thus we need a theory of semantics.
+
+See also Rapaport 2015 section 7.2 ("What is computation?") from page 233.
+
+See Rapaport 2015 page 267 about other computation models.
+
+What can we get from this?
+https://plato.stanford.edu/entries/computer-science/
+
+<2014-05-07>
+Reddit user TezlaKoil shows how to derive Russell's paradox in untyped lambda-calculus,
+and shows the relationship between Russell's paradox and Curry's Y combinator.[fn::https://www.reddit.com/r/math/comments/24wk6f/are_there_other_alternatives_to_set_theory/chboelc]
+* Must a programming system be textual or arboreal?
+Why confine ourselves to texts and trees?
+Why not graphs?
+
+There are visual programming languages.
+
+Problem: Visual programming system encumbers blind people.
+* User Experience Programming Research Group
+We dream of demystifying and simplifying GUI programming.
+What is the essence of GUI programming?
+Can we do better than FRP (functional reactive programming)?
+Can we do declarative GUI programming better than HTML+CSS?
+If UX is the next UI, then is there UX programming instead of UI programming?
+GUX instead of GUI?
+
+How do we formalize user experience?
+How do we program user experience?
+Can a programming language facilitate good programmer experience and good end-user experience?
+* How should we make computers do what we want?
+Does programming a computer require a language?

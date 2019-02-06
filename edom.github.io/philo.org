@@ -6,7 +6,7 @@
 #+TOC: headlines 1
 * Introduction
 #+TOC: headlines 2 local
-** Target audience, purpose of this book, and how to read this book
+** Target audience, purpose, and how to read
 The target audience of this book is myself.
 
 Purpose of the book:
@@ -17,10 +17,12 @@ My plan is:
 - /Relate/ the concepts with each other.
 - /Order/ the concepts by requirement (which concepts require which concepts).
 
-Perhaps it should be something like [[https://en.wikipedia.org/wiki/Formal_concept_analysis][formal concept analysis]]?
-
 How to read this book:
-Read anything you want to, but skip the TODOs; those parts are unfinished.
+Read anything you want to.
+But most parts are unfinished.
+If you feel that a part is unfinished, feel free to skip it.
+
+Perhaps this book should be like formal concept analysis[fn::https://en.wikipedia.org/wiki/Formal_concept_analysis]?
 ** Fundamental assumptions
 /We must agree on these before you read further./
 If we don't agree, no communication can happen between us.
@@ -34,16 +36,13 @@ Objective reality exists.
 
 Logic works.
 
-Every statement has exactly one truth value (somewhere in the continuum between false and true), regardless of whether we know it.
+Every statement has exactly one truth value (somewhere in the continuum between false and true), although we may not always know it.
 
 /I assume that these concepts are primitive concepts./
 I leave them undefined.
 They are like the concept of "point" in geometry.
 I don't know how to state them in terms of anything simpler.
-
-want, to want.
-
-belief, to believe.
+The primitives are: want, to want, belief, to believe.
 
 /I assume these synonyms./
 
@@ -57,8 +56,68 @@ knowledge, awareness.
 These are the same: to /know/ X, to be /aware/ of X.
 
 attention, focus.
-** Ability is the existence of satisfying action.
+** The concept graph/clusters
+How to read this graph.
+Adjacency list.
+A paragraph beginning with the sentence "A: B1, B2, ..., Bn." declares n edges: A-B1, A-B2, and so on until A-Bn.
+
+want (verb).
+
+cause (verb). Synonyms: force, make.
+
+control: force, want.
+X controls Y iff X can force Y to do what X wants.
+
+self: control.
+X's self is the extent of X's control.
+* How should we do philosophy?
+** Philosophers should strive to be understandable
+We should clarify words.
+We may generalize words, but we should not redefine words.
+We should start from their everyday meaning.
+
+We should avoid inventing a new word if a word already exists for it.
+
+We should use everyday language.
+People who bend words too much alienate themselves.
+
+Most debates are definition problems.
+Communication requires that everyone use the same definitions.
+** Reddit philosophy TLDR challenge: a great time-saver, but is it correct?
+https://www.reddit.com/r/askphilosophy/comments/1pdczz/philosophy_tldr_challenge/
+** <2018-11-06> "Academic philosophy’s wrong turn"?
+https://medium.com/the-polymath-project/in-defense-of-philosophy-2ca6ef0aa4a0
+** Major philosophical issues
+- https://www.reddit.com/r/askphilosophy/comments/4negyc/where_do_you_stand_on_major_philosophical_issues/
+** List of unsolved problems in philosophy
+- https://en.wikipedia.org/wiki/List_of_unsolved_problems_in_philosophy
+** What Reddit stuffs?
+skepticism and epistemology
+https://www.reddit.com/r/philosophy/comments/66pdk6/reddit_seems_pretty_interested_in_simulation/
+
+https://www.reddit.com/r/philosophy/comments/74nl51/reddit_it_seems_like_youre_interested_in_the/
+
+https://www.reddit.com/r/philosophy/comments/89qful/how_morality_changes_in_a_foreign_language/
+"Yeah I saw an old PewDiePie video where he tried to only speak his native Swedish, he was obviously very uncomfortable making the same jokes in our own language. The same thing happens to me, I can say outrageous things much easier in English or Spanish than in Swedish since it feels less real."
+"Hm my friend from Mexico had no problem swearing up a storm (even at playgrounds..)"
+I can confirm. I swear more in English than in my native Indonesian. I do swear in both.
+https://www.theguardian.com/science/blog/2017/mar/27/bad-language-why-being-bilingual-makes-swearing-easier
+"The scientific term for this is reduced emotional resonance of language."
+** Fact, judgment, and seeing things as is
+People often conflate /fact/ and /judgment/.
+Example:
+- Fact: "I don't understand this piece of math."
+- Judgment: "I'm bad at math."
+
+English syntax doesn't distinguish between fact and judgment.
+
+** etymology
+The origin (the etymology) of a word tells us what it should mean.
+* Basic concepts
+** Ability is the existence of satisfying action
 <2018-11-06>
+
+Ability is the existence of satisfying action.
 
 "S can P" means "There exists an action A such that, after S does A, the statement 'S did P' becomes true."
 Example:
@@ -89,12 +148,48 @@ Of course he /can/; there is a satisfying action: Repair the car, turn the key, 
 But he doesn't /know/ how.
 He should say "I don't know how I can start the car" or "The car isn't starting."
 That satisfying action /exists/ regardless of whether he knows it.
-** To be animate is to have changing wants.
+** Negated modal
+Let M be a modal verb such as "can", "may", "must".
+
+"S M not P" means "It is false that S M P".
+
+Possibility
+"You may also want this."
+Permission
+"You may enter the room now."
+Ability
+"You can enter the room."
+Necessity
+"S must P in order to C" means that "C is necessary for S to P".
+"You must fill this in order to be able to get to the next step."
+Obligation
+"You must enter the room."
+
+It is incorrect to say "you cannot enter this room"; the correct saying is "you must not enter this room".
+(You aren't permitted to enter the room; I'm not letting you enter this room.)
+
+"Can you pass the salt?" means "Please pass the salt".
+** Power is the ability to harm
+We mean political power.
+
+Power is the ability to instill fear in others.
+
+Power is the ability to do violence.
+
+Power is potential violence.
+* Want
+** By "want", I mean "will" or "desire", not "lack"
+We assume that "want" is a primitive concept.
+
+We assume that everything wants something.
+** To be animate is to have changing wants
 <2018-11-07>
 
 To be /animate/ is to have changing wants.
 
 To be /inanimate/ is to have unchanging wants.
+An /inanimate/ thing is a thing whose wants don't change.
+That inanimate thing always has that same want.
 
 An /animate/ thing is a thing whose want may change.
 
@@ -102,218 +197,17 @@ Problem: Must the wants change?
 Or is it sufficient to have the /possibility/ of changing wants, without having to /actually/ ever change wants?
 What is the difference between:
 one who can do X but never does X, and
-one who really can't do X?
-
-An /inanimate/ thing is a thing whose wants don't change.
-That inanimate thing always has that same want.
-
-A thing may want nothing (not want anything).
-
-By "want", I mean "will" or "desire", not "lack".
-
-But how can one want something, if he doesn't lack it?
-How can he want something but not lack that thing?
-How can he want what he already has?
-** "Animate" and "living" are synonyms.
+one who really cannot do X?
+** Life is a thing that has changing wants
 Synonym: An /animate/ thing is a /living/ thing.
 A living thing /lives/.
 Thus the meaning of "to live" is "to have changing wants".
-Thus the meaning of "life" is, literally, "having changing wants".
+Thus the meaning of "life" is, literally, "a thing that has changing wants".
 
 Problem: this definition generalizes "to live" too much?
-** Cause, make, force, control, want, affect
-<2018-11-07>
-
-These mean the same:
-"to /cause/ X to do Y",
-"to /make/ X do Y",
-"to /force/ X to do Y".
-
-"Force" suggests, but does not require, that X would otherwise not do Y if X was not forced to.
-
-Examples:
-- I made him clean up his room = I forced him to clean up his room = I caused him to clean up his room.
-- I kicked the ball = I made the ball move with my foot = I forced my foot on the ball = I caused the ball to move with my foot.
-- "I gave birth to my child" approximately means "I forced my child to exist".
-
-These are synonyms:
-to affect, to cause to differ, to change, to influence, to make a difference.
-
-To /affect/ is to /change/ (to /make a difference/).
-
-Example:
-I kick the ball.
-My existence makes a difference to the ball.
-The ball moved because I kicked it.
-The ball wouldn't move if I didn't kick it.
-/I affect the ball./
-** To control is to force wants.
-<2018-11-07>
-
-X /controls/ Y iff X /forces/ (causes) Y to do what X /wants/ Y to do.
-
-Remember that "to force" means "to cause".
-
-Remember that we assume that /want/ is a primitive concept.
-It doesn't assume what can want and what can't want.
-
-We assume that causation is transitive.
-
-Control is transitive, because causation is transitive.
-If X controls Y, and Y controls Z, then X controls Z.
-The contraposition: If X doesn't control Z, then: X doesn't control Y, or Y doesn't control Z, or both.
-
-We can use that contraposition to find who controls whom in a company.
-Example.
-Alice, Bob, and Charlie are in the same company.
-In the hierarchy, Alice commands Bob, and Bob commands Charlie.
-Alice knows Charlie, but never interacts with Charlie.
-If Alice tells Bob to make Charlie do what Alice wants Charlie to do, but Charlie doesn't do it, then there are three possibilities:
-Alice doesn't control Bob, or Bob doesn't control Charlie, or both.
-** Self is the extent of control
-<2018-11-03>
-
-A system's self is everything that it controls.
-
-The /self/ of X is everything that X /controls/.
-
-Example.
-A brain's self is everything that the brain controls.
-My self is everything I control.
-
-*Beware of confusion with reflexive pronouns*
-
-Don't conflate "my self" and "myself".
-
-I = myself.
-Both of them /refer to the same thing/.
-"Myself" is an English reflexive pronoun.
-
-My self = everything that I control.
-
-Don't conflate "itself" and "its self".
-*** Supports
-- The definition is /not anthropocentric/.
-  It does not assume that a self belongs to a human.
-- The definition /does not require consciousness/.
-*** Possibly objectionable consequences
-- A rich person has /more self/ than a poor person because the rich person /controls more/ things than the poor person.
-- If another person B absolutely obeys all my orders, then B is a part of my self.
-- An electrical circuit with feedback has a self.
-*** Self-control?
-The self-control of X is X's control of X?
-
-My self-control is my control of me?
-
-An example system with self-control is a lithium-ion battery with protection circuit?
-
-"Self-control, an aspect of inhibitory control, is the ability to regulate one's emotions, thoughts, and behavior in the face of temptations and impulses"
-according to [[https://en.wikipedia.org/wiki/Self-control][Wikipedia]].
-*** Further questions
-- What is the relationship between control, intention, and causality?
-*** Set-theoretic definition of self
-The self of X is the /set/ of everything that X controls.
-Therefore, because selves are sets, they can intersect and join.
-This is an ordinary set theory in mathematics.
-
-If there is an overlap between what A controls and what B controls,
-then they /share/ that overlapping part of their selves.
-That overlapping part is a /joint/ self.
-
-The size of self may vary over time.
-
-Selves may /merge/ and /split/.
-When I'm using a computer, some of the computer's self and some of my self /merge/ into a bigger self.
-When I'm not using the computer, our selves /split/.
-
-If I sever my hand, then that hand ceases to be a part of my self, because I can no longer control it.
-If I reattach it, it becomes a part of my self again, although I may not control it as well as before.
-https://www.reddit.com/r/NoStupidQuestions/comments/5cu20w/if_your_hand_is_removed_but_reattached_in_time/
-*** TODO What is the relationship between control, causality, agency, subject, and subjective experience?
-*** TODO For us to determine the size of the self of a system, some its output must /feed back/ into some of its input, so that we can distinguish what it can control and what it can't.
-*** TODO Our definition of "self" generalizes its dictionary meaning.
-**** https://en.wikipedia.org/wiki/Self
-- "The self is an individual person as the object of his or her own reflective consciousness.
-  This reference is necessarily subjective, thus self is a reference by a subject to the same subject.
-  The sense of having a self – or self-hood – should, however, not be confused with subjectivity itself."
-- "The first-person perspective distinguishes self-hood from personal identity.
-  Whereas "identity" is sameness, self-hood implies a first-person perspective."
-**** Dictionary definitions of "self" assume too much.
-- <2018-11-05> https://en.wiktionary.org/wiki/self#Noun
-  - "The subject of one's own experience of phenomena: perception, emotions, thoughts."
-  - "An individual person as the object of his own reflective consciousness (plural selves)."
-- <2018-11-05> https://en.oxforddictionaries.com/definition/self
-  - "A person's essential being that distinguishes them from others, especially considered as the object of introspection or reflexive action."
-** TODO "Causal authority"?
-To "control" something is to have "causal authority" over it.
-
-The /self/ of X is the maximum extent of the causal authority of X.
-
-"Causal authority" sounds cool. But what does it mean?
-* Logic, language, ontology
-#+TOC: headlines 2 local
-** Philosophers should strive to be understandable.
-We should clarify words.
-We may generalize words, but we should not redefine words.
-We should start from their everyday meaning.
-
-We should avoid inventing a new word if a word already exists for it.
-
-We should use everyday language.
-People who bend words too much alienate themselves.
-** TODO Reading conditionals
-*** TODO (Failed attempt) Properly translating material conditional into English "does not preclude"
-Remember that the /material conditional/ \( p \to q \) is equivalent to \( \neg (p \wedge \neg q) \) in classical logic.
-
-We can interpret \( p \wedge \neg q \) as "\( p \) /precludes/ \( q \)".
-
-Thus we can interpret the material conditional \( p \to q \) as "\( p \) /does not preclude/ \( q \)".
-However, we practically pretend that it means "if \( p \) then \( q \)".
-This lie works because we practically always pick relevant \(p\) and \(q\).
-
-However, there is a difficulty:
-If \(p\) and \(q\) are irrelevant, \( p \) is true, and \( q \) is false, then what does "\(p\) does not preclude \(q\)" mean?
-
-See also:
-- https://en.wikipedia.org/wiki/Paradoxes_of_material_implication
-*** TODO Belief inference rule in doxastic logic
-We can define \( p \Rightarrow q \) as "knowing \( p \) is sufficient to infer \( q \)", that is, "believing \( p \) implies believing \( q \)".
-\[
-(p \Rightarrow q) = (K p \rightarrow K q).
-\]
-
-But why would we?
-** TODO Platonism, numbers, ideal existence, and physical existence?
-- Isn't this just Plato's theory of forms?
-- Do we benefit from talking about this?
-- Should we delete this?
-
-"123" is a /decimal representation/ of a number, not the number itself.
-
-A number exists ideally.
-It doesn't exist physically.
-Our body can't interact with a number.
-We can't touch a real number.
-There is no physical experiment that tests the properties of numbers.
-Our mind can't interact with a number either.
-We can't imagine a number.
-We can only imagine a /representation/ of that number.
-
-But our minds can correlate idea space and physical space.
-
-We use physics experiments to find out physical laws.
-We use thought experiments to find out ideal laws (such as theorems about real numbers).
-An eye is a physical sense that enables the brain to probe the space of bodies.
-A mind is an ideal sense that enables the brain to probe the space of ideas.
-
-** Most debates are definition problems
-Communication requires that everyone use the same definitions.
-
-* Science, engineering, and technology
-** Science is knowledge.
-Science is the application of hypothetico-deductive scientific method?
-
-/Science aims to find what each inanimate thing wants./
+** Science is about finding what each inanimate thing wants
+Recall that, by definition, each inanimate thing has an /unchanging/ want.
+One way of finding those wants is the hypothetico-deductive scientific method.
 
 Remember that we assume that /want/ is a primitive concept.
 It doesn't assume what can want and what can't want.
@@ -350,7 +244,7 @@ What does a voltage regulator want?
 There is a difference between these statements:
 - Every thing that does not exist wants to continue not-existing.
 - Nothing wants to continue not-existing.
-*** Problem: How do we know that nothing is forcing an inanimate thing to do anything?
+** Problem: How do we know that nothing is forcing an inanimate thing to do anything?
 Difference of meaning:
 - "Nothing" exists = the English word "nothing" exists
 - Nothing exists = there does not exist anything; it is not true that anything exists
@@ -373,38 +267,33 @@ then everything must have a cause that is not itself.
 Thus there is something /forcing/ everything else to /exist/.
 
 If I don't exist, how can I force myself to exist?
-*** What is science?
-How is "social science" and "computer science" science?
+* Cause
+** Synonyms of the verb "cause": make, force
+<2018-11-07>
 
-"Science" comes from the Latin word "scientia" that means "knowledge".
-- https://en.wiktionary.org/wiki/science#Etymology_1
+These mean the same:
+"to /cause/ X to do Y",
+"to /make/ X do Y",
+"to /force/ X to do Y".
 
-** Engineering is tradeoff, compromise.
-It's always cost versus everything else.
+"Force" suggests, but does not require, that X would otherwise not do Y if X was not forced to.
 
-TODO Engineering etymology
+Examples:
+- I made him clean up his room = I forced him to clean up his room = I caused him to clean up his room.
+- I kicked the ball = I made the ball move with my foot = I forced my foot on the ball = I caused the ball to move with my foot.
+- "I gave birth to my child" approximately means "I forced my child to exist".
+** affect, change, influence, cause/make a difference
+These are synonyms:
+to affect, to cause to differ, to change, to influence, to make a difference.
 
-TODO Technology is
+To /affect/ is to /change/ (to /make a difference/).
 
-/Engineering/ is?
-
-Engineering implies design goals, tradeoffs, and decisions.
-
-An engineering activity has a goal.
-** The meaning of phrases
-The phrase head is the most important word.
-https://en.wikipedia.org/wiki/Head_(linguistics)
-
-Genus-differentia meaning of noun phrases.
-
-A "red car" is a car that is red.
-
-"Natural science" is science about nature.
-
-"Computer science" is science about computers.
-
-"Civil engineering" is engineering about cities.
-* Cause, causality, implication, and probability
+Example:
+I kick the ball.
+My existence makes a difference to the ball.
+The ball moved because I kicked it.
+The ball wouldn't move if I didn't kick it.
+/I affect the ball./
 ** Cause
 "C /causes/ E" means:
 - C /precedes/ E: C happens before E.
@@ -574,12 +463,116 @@ Other resources:
 /Luck/ is cause that we don't bother to find out.
 
 "Random" means "caused by something we don't know".
-* Computer science
-#+TOC: headlines 2 local
-** Tools, usage, and machine
+* Control
+The concept of "control" depends on "cause" and "want".
+** To control is to force wants
+<2018-11-07>
+
+X /controls/ Y iff X /forces/ (causes) Y to do what X /wants/ Y to do.
+
+Remember that "to force" means "to cause".
+
+Remember that we assume that /want/ is a primitive concept.
+It doesn't assume what can want and what can't want.
+
+We assume that causation is transitive.
+
+Control is transitive, because causation is transitive.
+If X controls Y, and Y controls Z, then X controls Z.
+The contraposition: If X doesn't control Z, then: X doesn't control Y, or Y doesn't control Z, or both.
+
+We can use that contraposition to find who controls whom in a company.
+Example.
+Alice, Bob, and Charlie are in the same company.
+In the hierarchy, Alice commands Bob, and Bob commands Charlie.
+Alice knows Charlie, but never interacts with Charlie.
+If Alice tells Bob to make Charlie do what Alice wants Charlie to do, but Charlie doesn't do it, then there are three possibilities:
+Alice doesn't control Bob, or Bob doesn't control Charlie, or both.
+** Self is the extent of control
+<2018-11-03>
+
+A system's self is everything that it controls.
+
+The /self/ of X is everything that X /controls/.
+
+Example.
+A brain's self is everything that the brain controls.
+My self is everything I control.
+
+*Beware of confusion with reflexive pronouns*
+
+Don't conflate "my self" and "myself".
+
+I = myself.
+Both of them /refer to the same thing/.
+"Myself" is an English reflexive pronoun.
+
+My self = everything that I control.
+
+Don't conflate "itself" and "its self".
+*** Supports
+- The definition is /not anthropocentric/.
+  It does not assume that a self belongs to a human.
+- The definition /does not require consciousness/.
+*** Possibly objectionable consequences
+- A rich person has /more self/ than a poor person because the rich person /controls more/ things than the poor person.
+- If another person B absolutely obeys all my orders, then B is a part of my self.
+- An electrical circuit with feedback has a self.
+*** Self-control?
+The self-control of X is X's control of X?
+
+My self-control is my control of me?
+
+An example system with self-control is a lithium-ion battery with protection circuit?
+
+"Self-control, an aspect of inhibitory control, is the ability to regulate one's emotions, thoughts, and behavior in the face of temptations and impulses"
+according to [[https://en.wikipedia.org/wiki/Self-control][Wikipedia]].
+*** Further questions
+- What is the relationship between control, intention, and causality?
+*** Set-theoretic definition of self
+The self of X is the /set/ of everything that X controls.
+Therefore, because selves are sets, they can intersect and join.
+This is an ordinary set theory in mathematics.
+
+If there is an overlap between what A controls and what B controls,
+then they /share/ that overlapping part of their selves.
+That overlapping part is a /joint/ self.
+
+The size of self may vary over time.
+
+Selves may /merge/ and /split/.
+When I'm using a computer, some of the computer's self and some of my self /merge/ into a bigger self.
+When I'm not using the computer, our selves /split/.
+
+If I sever my hand, then that hand ceases to be a part of my self, because I can no longer control it.
+If I reattach it, it becomes a part of my self again, although I may not control it as well as before.
+https://www.reddit.com/r/NoStupidQuestions/comments/5cu20w/if_your_hand_is_removed_but_reattached_in_time/
+*** TODO What is the relationship between control, causality, agency, subject, and subjective experience?
+*** TODO For us to determine the size of the self of a system, some its output must /feed back/ into some of its input, so that we can distinguish what it can control and what it can't.
+*** TODO Our definition of "self" generalizes its dictionary meaning.
+**** https://en.wikipedia.org/wiki/Self
+- "The self is an individual person as the object of his or her own reflective consciousness.
+  This reference is necessarily subjective, thus self is a reference by a subject to the same subject.
+  The sense of having a self – or self-hood – should, however, not be confused with subjectivity itself."
+- "The first-person perspective distinguishes self-hood from personal identity.
+  Whereas "identity" is sameness, self-hood implies a first-person perspective."
+**** Dictionary definitions of "self" assume too much.
+- <2018-11-05> https://en.wiktionary.org/wiki/self#Noun
+  - "The subject of one's own experience of phenomena: perception, emotions, thoughts."
+  - "An individual person as the object of his own reflective consciousness (plural selves)."
+- <2018-11-05> https://en.oxforddictionaries.com/definition/self
+  - "A person's essential being that distinguishes them from others, especially considered as the object of introspection or reflexive action."
+** TODO "Causal authority"?
+To "control" something is to have "causal authority" over it.
+
+The /self/ of X is the maximum extent of the causal authority of X.
+
+"Causal authority" sounds cool.
+But what does it mean?
+** Tools, usage, enlargement of self (boundary of control)
 Remember that we defined /self/ as everything that we control.
 
-The essence of tools is the extension of self (the boundary of control).
+The essence of tools is the enlargement of self (the boundary of control).
 
 A /tool/ is a thing that extends our /self/ (our boundary of control).
 A tool is a thing that enables us to control more things than we would without that tool.
@@ -619,153 +612,8 @@ But this idea may discomfort non-philosophers.
 It is only a matter of time before a tool-using animal realizes that it can use other animals as tools.
 
 Are we using others, or are we being used by others?
-** Tools and machines
-(I need to find the words to say this, and rewrite this more clearly.)
-
-A /machine/ is an /automatic tool/:
-it is a tool that runs by itself; it has its own behavior.
-
-A hammer doesn't have its own behaviors.
-A car has its own behaviors.
-A computer has its own behaviors.
-** What does it mean for a machine to compute a real number?
-Computation is approximate expression normalization.
-To /compute/ a real number is to calculate some of its digits.
-To /compute/ an arithmetic /expression/ is to /evaluate/ it (to reduce it into a /value/), often approximately.
-For example: 1/7 is an /expression/, and .142 is a /value/ that is the 3 most significant digits of the result of /evaluating/ that expression.
-
-Why do we feel that 1.412 is /more evaluated/ than \(\sqrt{2}\)?
-Why do we feel that 1.412 is a /normal form/?
-Because it is /physically easier/ for us to locate 1.412 on the real number line than to locate \(\sqrt{2}\).
-Thus to compute a real number is to /locate it/ on the real number line.
-This justifies the geometric interpretation of real numbers.
-
-We can /partially evaluate/ an expression, such as from 1+2-1 to 3-1.
-
-See also:
-- https://en.wikipedia.org/wiki/Human_computer
-
-Don't conflate a /real-number expression/ and a /real number/.
-A real-number expression /evaluates/ to a real number.
-A real-number expression /is not/ a real number.
-
-Let \(E(\Real)\) be the set of all real-number expressions.
-
-Let \(f:E(\Real)\to\Real\) be the evaluation function.
-
-Questions:
-- What is the machine computing when I'm typing this document?
-- There are several ways of defining the real numbers.
-  Which one should we use for the philosophy of mind and computation, and why?
-
-Algebraic-geometric definition:
-A /real number/ is a /point/ in the /totally-ordered/ set of points in /one-dimensional/ Euclidean geometry;
-the real numbers form a /field/.
-
-Addition also has a geometric meaning: it is the set of points on the plane \(\{(x,y,z) ~\vert~ x+y=z\}\).
-** Algorithm, machine, describability, computability
-We assume that these are primitive concepts: algorithm, machine.
-By "machine", we mean a computing machine.
-
-An algorithm /describes/ what a machine /computes/.
-
-An /algorithm/ is an /executable description/: a string in a formal language in a formal system.
-A description has /finite/ length.
-By "executable", we mean that an algorithm has a /machine model/.
-We always define an algorithm with respect to a machine.
-
-Thus not every real number is /describable/,
-because there are fewer strings in that formal language than there are real numbers.
-
-Thus not every real number is /computable/,
-because computability requires describability.
-
-Remember that a /formal system/ is a /formal language/ and a set of /inference rules/.
-- https://cs.stackexchange.com/questions/42443/relationship-between-formal-system-and-formal-languages
-
-An algorithm is a string in a formal language \(L\).
-We /model/ a /machine/ as a /formal system/ whose language is \(L\).
-The machine is not the formal system.
-The thing is not the model.
-
-*What does it mean for a machine to /compute/ a real number?*
-
-Suppose that \(Y(T) \in \Real\) is the /output/ of the algorithm \(A\) if we let the algorithm run for duration \(T \in \Nat\).
-
-The algorithm \(A\) /computes/ the /limit/ of the approximation sequence \( \langle Y(t) \rangle_{t \in \Nat} \).
-Thus "\(A\) computes real number \(R\)" means that the limit of that sequence is \(R\).
-
-More explicitly, we say "the algorithm \(A\) /computes/ the real number \(R\)" to mean:
-for every approximation error \(E > 0\) that we are willing to have,
-there exists a duration \(T \in \Nat\) such that \(\abs{Y(T) - R} < E\).
-Informally, the algorithm can always take more time to satisfy ever-diminishing (but still positive) approximation error.
-
-A real number \(R\) is /computable/ iff there is an algorithm that computes \(R\).
-
-There are as many natural numbers as there are algorithms.
-Therefore /not every real number is computable/, because there are fewer natural numbers than real numbers.
-
-See also:
-- https://en.wikipedia.org/wiki/Limit_of_a_sequence
-** What it means for an algorithm to compute a function
-The algorithm \(A\) /computes/ the function \(f : A \to B\) iff for every input \(x \in A\), the algorithm outputs \(f(x)\).
-** Machine, algorithm, embodiment, computation
-A machine /embodies/ an algorithm.
-A machine /computes/ what the algorithm computes.
-
-"To /program/ a machine to compute X" is to /arrange/ the machine to compute X,
-for example: rewire the machine, load another set of punch cards, write a program in a text editor, etc.
-** What is software?
-- Which ICSE paper said this?
-  - Law is software.
-  - Process is software.
-  - Recipe is software.
-- What is software?
-
-The source code is not the software.
-Don't commit reification fallacy.
-** The dualistic nature of machines; the machine-program dualism; the hardware-software dualism
-The hardware is the body.
-The software is the mind.
-
-Are bits software /itself/, or are bits a /representation/ (embodiment) of software?
-
-A running machine embodies the software it is running?
-** TODO Move this somewhere else: Hierarchy of machines
-- An FA (/finite automaton/) is ...
-- An FSM (/finite-state machine/) is ...
-- A /Turing-machine/ is an FSM with infinite memory.
-  - [[https://en.wikipedia.org/wiki/Turing_machine#Formal_definition][WP:Turing machine, formal definition]]
-  - Turing-completeness
-    - [[https://en.wikipedia.org/wiki/Turing_completeness][WP:Turing-completeness]]
-    - A formal system is /Turing-complete/ iff it can simulate every TM (Turing machine).
-      - What does it mean to /simulate/ a TM?
-    - [[https://cstheory.stackexchange.com/questions/36863/formal-definition-of-turing-completeness][StackExchange CS theory 36863 formal definition of Turing-completeness]]:
-      - Kaveh suggested:
-        - [[https://www.sciencedirect.com/science/article/pii/S0049237X08712576][Robin Gandy: Church's Thesis and Principles for Mechanisms]]
-        - Classical recursion theory volume 1
-  - Partial Turing machine, total Turing machine
-    - What is the significance of the theorem in [[https://en.wikipedia.org/wiki/Total_Turing_machine][WP:Total Turing machine]]?
-    - What is the relationship between total function and total Turing machine?
-** TODO Hardware, software
-The choreography is the software.
-The dancer is the hardware.
-
-The recipe is the software.
-The paper is a representation of the recipe, but not the recipe itself.
-You can tell the recipe to your friend, without paper.
-The cook is the hardware.
-
-The music score is the software.
-The performers are the hardware.
-
-The law is the software.
-People in government is the hardware.
-
-Software is choreography of hardware.
-Software is an arrangement.
-* Knowledge, consciousness
-#+TOC: headlines 2 local
+* Knowledge
+This chapter discusses knowledge, epistemology, and consciousness.
 ** Properties/behaviors of knowledge, propagation
 We don't know what "knowledge" is.
 But, for this section, assume that we know.
@@ -1158,19 +1006,232 @@ There isn't any point in time when I suddenly become conscious.
   - Intensional measurement?
     - [[https://en.wikipedia.org/wiki/Integrated_information_theory][WP:Integrated information theory]], 2004
 *** Glasgow coma scale?
-** Sleep deprivation causes difficulty focusing; mental muscles, mental exertion, and mental analogs
-I find reading philosophical articles harder when I don't sleep enough the night before.
-I find it harder to focus.
-Sleep deprivation affects my ability to think, but not my ability to lift weights.
-
-Mental analogs?
-
-Key finding: Focus uses glucose?
-Cite?
-
-Key fact: Both physical exertion and mental exertion use glucose?
 ** About defining consciousness
 2009, "How to define consciousness—and how not to define consciousness", [[http://cogprints.org/6453/1/How_to_define_consciousness.pdf][pdf]]
+* Logic, language, ontology
+#+TOC: headlines 2 local
+** TODO Reading conditionals
+*** TODO (Failed attempt) Properly translating material conditional into English "does not preclude"
+Remember that the /material conditional/ \( p \to q \) is equivalent to \( \neg (p \wedge \neg q) \) in classical logic.
+
+We can interpret \( p \wedge \neg q \) as "\( p \) /precludes/ \( q \)".
+
+Thus we can interpret the material conditional \( p \to q \) as "\( p \) /does not preclude/ \( q \)".
+However, we practically pretend that it means "if \( p \) then \( q \)".
+This lie works because we practically always pick relevant \(p\) and \(q\).
+
+However, there is a difficulty:
+If \(p\) and \(q\) are irrelevant, \( p \) is true, and \( q \) is false, then what does "\(p\) does not preclude \(q\)" mean?
+
+See also:
+- https://en.wikipedia.org/wiki/Paradoxes_of_material_implication
+*** TODO Belief inference rule in doxastic logic
+We can define \( p \Rightarrow q \) as "knowing \( p \) is sufficient to infer \( q \)", that is, "believing \( p \) implies believing \( q \)".
+\[
+(p \Rightarrow q) = (K p \rightarrow K q).
+\]
+
+But why would we?
+** TODO Platonism, numbers, ideal existence, and physical existence?
+- Isn't this just Plato's theory of forms?
+- Do we benefit from talking about this?
+- Should we delete this?
+
+"123" is a /decimal representation/ of a number, not the number itself.
+
+A number exists ideally.
+It doesn't exist physically.
+Our body can't interact with a number.
+We can't touch a real number.
+There is no physical experiment that tests the properties of numbers.
+Our mind can't interact with a number either.
+We can't imagine a number.
+We can only imagine a /representation/ of that number.
+
+But our minds can correlate idea space and physical space.
+
+We use physics experiments to find out physical laws.
+We use thought experiments to find out ideal laws (such as theorems about real numbers).
+An eye is a physical sense that enables the brain to probe the space of bodies.
+A mind is an ideal sense that enables the brain to probe the space of ideas.
+* Science, engineering, and technology
+** Is science knowledge?
+How is "social science" and "computer science" science?
+
+"Science" comes from the Latin word "scientia" that means "knowledge".
+- https://en.wiktionary.org/wiki/science#Etymology_1
+** Engineering is tradeoff, compromise.
+It's always cost versus everything else.
+
+TODO Engineering etymology
+
+TODO Technology is
+
+/Engineering/ is?
+
+Engineering implies design goals, tradeoffs, and decisions.
+
+An engineering activity has a goal.
+** The meaning of phrases
+The phrase head is the most important word.
+https://en.wikipedia.org/wiki/Head_(linguistics)
+
+Genus-differentia meaning of noun phrases.
+
+A "red car" is a car that is red.
+
+"Natural science" is science about nature.
+
+"Computer science" is science about computers.
+
+"Civil engineering" is engineering about cities.
+* Computer science
+#+TOC: headlines 2 local
+** Tools and machines
+(I need to find the words to say this, and rewrite this more clearly.)
+
+A /machine/ is an /automatic tool/:
+it is a tool that runs by itself; it has its own behavior.
+
+A hammer doesn't have its own behaviors.
+A car has its own behaviors.
+A computer has its own behaviors.
+** What does it mean for a machine to compute a real number?
+Computation is approximate expression normalization.
+To /compute/ a real number is to calculate some of its digits.
+To /compute/ an arithmetic /expression/ is to /evaluate/ it (to reduce it into a /value/), often approximately.
+For example: 1/7 is an /expression/, and .142 is a /value/ that is the 3 most significant digits of the result of /evaluating/ that expression.
+
+Why do we feel that 1.412 is /more evaluated/ than \(\sqrt{2}\)?
+Why do we feel that 1.412 is a /normal form/?
+Because it is /physically easier/ for us to locate 1.412 on the real number line than to locate \(\sqrt{2}\).
+Thus to compute a real number is to /locate it/ on the real number line.
+This justifies the geometric interpretation of real numbers.
+
+We can /partially evaluate/ an expression, such as from 1+2-1 to 3-1.
+
+See also:
+- https://en.wikipedia.org/wiki/Human_computer
+
+Don't conflate a /real-number expression/ and a /real number/.
+A real-number expression /evaluates/ to a real number.
+A real-number expression /is not/ a real number.
+
+Let \(E(\Real)\) be the set of all real-number expressions.
+
+Let \(f:E(\Real)\to\Real\) be the evaluation function.
+
+Questions:
+- What is the machine computing when I'm typing this document?
+- There are several ways of defining the real numbers.
+  Which one should we use for the philosophy of mind and computation, and why?
+
+Algebraic-geometric definition:
+A /real number/ is a /point/ in the /totally-ordered/ set of points in /one-dimensional/ Euclidean geometry;
+the real numbers form a /field/.
+
+Addition also has a geometric meaning: it is the set of points on the plane \(\{(x,y,z) ~\vert~ x+y=z\}\).
+** Algorithm, machine, describability, computability
+We assume that these are primitive concepts: algorithm, machine.
+By "machine", we mean a computing machine.
+
+An algorithm /describes/ what a machine /computes/.
+
+An /algorithm/ is an /executable description/: a string in a formal language in a formal system.
+A description has /finite/ length.
+By "executable", we mean that an algorithm has a /machine model/.
+We always define an algorithm with respect to a machine.
+
+Thus not every real number is /describable/,
+because there are fewer strings in that formal language than there are real numbers.
+
+Thus not every real number is /computable/,
+because computability requires describability.
+
+Remember that a /formal system/ is a /formal language/ and a set of /inference rules/.
+- https://cs.stackexchange.com/questions/42443/relationship-between-formal-system-and-formal-languages
+
+An algorithm is a string in a formal language \(L\).
+We /model/ a /machine/ as a /formal system/ whose language is \(L\).
+The machine is not the formal system.
+The thing is not the model.
+
+*What does it mean for a machine to /compute/ a real number?*
+
+Suppose that \(Y(T) \in \Real\) is the /output/ of the algorithm \(A\) if we let the algorithm run for duration \(T \in \Nat\).
+
+The algorithm \(A\) /computes/ the /limit/ of the approximation sequence \( \langle Y(t) \rangle_{t \in \Nat} \).
+Thus "\(A\) computes real number \(R\)" means that the limit of that sequence is \(R\).
+
+More explicitly, we say "the algorithm \(A\) /computes/ the real number \(R\)" to mean:
+for every approximation error \(E > 0\) that we are willing to have,
+there exists a duration \(T \in \Nat\) such that \(\abs{Y(T) - R} < E\).
+Informally, the algorithm can always take more time to satisfy ever-diminishing (but still positive) approximation error.
+
+A real number \(R\) is /computable/ iff there is an algorithm that computes \(R\).
+
+There are as many natural numbers as there are algorithms.
+Therefore /not every real number is computable/, because there are fewer natural numbers than real numbers.
+
+See also:
+- https://en.wikipedia.org/wiki/Limit_of_a_sequence
+** What it means for an algorithm to compute a function
+The algorithm \(A\) /computes/ the function \(f : A \to B\) iff for every input \(x \in A\), the algorithm outputs \(f(x)\).
+** Machine, algorithm, embodiment, computation
+A machine /embodies/ an algorithm.
+A machine /computes/ what the algorithm computes.
+
+"To /program/ a machine to compute X" is to /arrange/ the machine to compute X,
+for example: rewire the machine, load another set of punch cards, write a program in a text editor, etc.
+** What is software?
+- Which ICSE paper said this?
+  - Law is software.
+  - Process is software.
+  - Recipe is software.
+- What is software?
+
+The source code is not the software.
+Don't commit reification fallacy.
+** The dualistic nature of machines; the machine-program dualism; the hardware-software dualism
+The hardware is the body.
+The software is the mind.
+
+Are bits software /itself/, or are bits a /representation/ (embodiment) of software?
+
+A running machine embodies the software it is running?
+** TODO Move this somewhere else: Hierarchy of machines
+- An FA (/finite automaton/) is ...
+- An FSM (/finite-state machine/) is ...
+- A /Turing-machine/ is an FSM with infinite memory.
+  - [[https://en.wikipedia.org/wiki/Turing_machine#Formal_definition][WP:Turing machine, formal definition]]
+  - Turing-completeness
+    - [[https://en.wikipedia.org/wiki/Turing_completeness][WP:Turing-completeness]]
+    - A formal system is /Turing-complete/ iff it can simulate every TM (Turing machine).
+      - What does it mean to /simulate/ a TM?
+    - [[https://cstheory.stackexchange.com/questions/36863/formal-definition-of-turing-completeness][StackExchange CS theory 36863 formal definition of Turing-completeness]]:
+      - Kaveh suggested:
+        - [[https://www.sciencedirect.com/science/article/pii/S0049237X08712576][Robin Gandy: Church's Thesis and Principles for Mechanisms]]
+        - Classical recursion theory volume 1
+  - Partial Turing machine, total Turing machine
+    - What is the significance of the theorem in [[https://en.wikipedia.org/wiki/Total_Turing_machine][WP:Total Turing machine]]?
+    - What is the relationship between total function and total Turing machine?
+** TODO Hardware, software
+The choreography is the software.
+The dancer is the hardware.
+
+The recipe is the software.
+The paper is a representation of the recipe, but not the recipe itself.
+You can tell the recipe to your friend, without paper.
+The cook is the hardware.
+
+The music score is the software.
+The performers are the hardware.
+
+The law is the software.
+People in government is the hardware.
+
+Software is choreography of hardware.
+Software is an arrangement.
 * TODO Implication (do not read; conversion errors)
 <2017-10-21T15:30:00+0700>
 
@@ -2147,35 +2208,6 @@ Example: If I want you to do what you do, the definition says I control you.
 ** TODO What is the relationship between first-person view, consciousness, imagination, and reality?
 ** <2018-11-06> If I can imagine something, does it exist?
 ** <2018-11-06> Imagination is not real, because saying otherwise bends words too much.
-* Philosophy
-** Reddit philosophy TLDR challenge: a great time-saver, but is it correct?
-https://www.reddit.com/r/askphilosophy/comments/1pdczz/philosophy_tldr_challenge/
-** <2018-11-06> "Academic philosophy’s wrong turn"
-https://medium.com/the-polymath-project/in-defense-of-philosophy-2ca6ef0aa4a0
-** Major philosophical issues
-- https://www.reddit.com/r/askphilosophy/comments/4negyc/where_do_you_stand_on_major_philosophical_issues/
-** List of unsolved problems in philosophy
-- https://en.wikipedia.org/wiki/List_of_unsolved_problems_in_philosophy
-** What Reddit stuffs?
-skepticism and epistemology
-https://www.reddit.com/r/philosophy/comments/66pdk6/reddit_seems_pretty_interested_in_simulation/
-
-https://www.reddit.com/r/philosophy/comments/74nl51/reddit_it_seems_like_youre_interested_in_the/
-
-https://www.reddit.com/r/philosophy/comments/89qful/how_morality_changes_in_a_foreign_language/
-"Yeah I saw an old PewDiePie video where he tried to only speak his native Swedish, he was obviously very uncomfortable making the same jokes in our own language. The same thing happens to me, I can say outrageous things much easier in English or Spanish than in Swedish since it feels less real."
-"Hm my friend from Mexico had no problem swearing up a storm (even at playgrounds..)"
-I can confirm. I swear more in English than in my native Indonesian. I do swear in both.
-https://www.theguardian.com/science/blog/2017/mar/27/bad-language-why-being-bilingual-makes-swearing-easier
-"The scientific term for this is reduced emotional resonance of language."
-
-** Fact, judgment, and seeing things as is
-People often conflate /fact/ and /judgment/.
-Example:
-- Fact: "I don't understand this piece of math."
-- Judgment: "I'm bad at math."
-
-English syntax doesn't distinguish between fact and judgment.
 * Correspondences?
 ** Contemporary philosophers that perhaps I should work with?
 - Jean Paul Van Bendegem, mathematical finitism
@@ -2207,31 +2239,11 @@ What does "deserve" mean?
 The only way to be a millionaire is by exploiting people?
 
 If you create a product bought by 1 million people, you deserve to be a millionaire. Problem: you did not create it; your employees did
-* A society with too many rights cannot progress
-Copyright, patent, intellectual property.
-
-We don't need copyright, patent, etc.
-Inventors will still invent without patents.
-They are intrinsically motivated.
 * Known problems
 ** Unfixed spelling errors
 - "master's thesis", not "master thesis"
 - "law of non-contradiction", not "law of no contradiction"
 * Mess
-** philosophy; questionable? non-local consciousness?
-https://qz.com/866352/scientists-say-your-mind-isnt-confined-to-your-brain-or-even-your-body/
-
-http://www.skepticalaboutskeptics.org/wp-content/uploads/2014/09/crossing-the-threshold-nonlocal-consciousness-and-the-burden-of-proof-stephan-a-schwartz.pdf
-
-"Consciousness is an Entity with Entangled States: Correlating the Measurement Problem with Non-Local Consciousness"
-https://www.neuroquantology.com/index.php/journal/article/view/1316
-
-https://www.experiencer.org/the-brain-consciousness-and-science-hints-of-immortality-by-bob-davis-ph-d/
-
-Google search
-Page 2
-non local consciousness experiments
-evidence of non local consciousness
 ** Judea Pearl, causality
 "Deep Probabilistic Logic: A Unifying Framework for Indirect Supervision"
 https://arxiv.org/abs/1808.08485
@@ -2305,27 +2317,6 @@ B means Y attacks X
 Never-ending retaliation.
 
 What does a Bayesian network (a conditional independence network)  represents?
-** Negated modal
-Let M be a modal verb such as "can", "may", "must".
-
-"S M not P" means "It is false that S M P".
-
-Possibility
-"You may also want this."
-Permission
-"You may enter the room now."
-Ability
-"You can enter the room."
-Necessity
-"S must P in order to C" means that "C is necessary for S to P".
-"You must fill this in order to be able to get to the next step."
-Obligation
-"You must enter the room."
-
-It is incorrect to say "you cannot enter this room"; the correct saying is "you must not enter this room".
-(You aren't permitted to enter the room; I'm not letting you enter this room.)
-
-"Can you pass the salt?" means "Please pass the salt".
 ** Geometry
 Finitism:
 - http://steve-patterson.com/cantor-wrong-no-infinite-sets/
@@ -2383,15 +2374,6 @@ https://cse.buffalo.edu/~rapaport/Papers/phics.pdf
 Read and understand
 https://plato.stanford.edu/entries/computer-science/
 They say "technical artifact", I say "tool".
-** Mind, brain, soul
-History, ramble
-https://philosophynow.org/issues/42/Why_You_Cant_Read_My_Mind
-
-Split brain
-http://www.paulgraham.com/philosophy.html
-
-What Are the Top 10 Philosophical Ideas That Everyone Should Understand?
-https://www.huffingtonpost.com/entry/what-are-the-top-10-philo_b_2828845
 ** Simplicity?
 1996 "A Simplification of the Theory of Simplicity"
 https://www.jstor.org/stable/20117522?seq=1#page_scan_tab_contents
@@ -2550,53 +2532,10 @@ An engine transforms energy into work.
 
 
 Defining software is related to solving the hard problem of consciousness.
-** ethics
-Ethics of making happen vs letting happen
-
-If X causes Y, and Y is bad, then X is bad?
-
-The trolley problem
-
-Can inaction (absence, non-existence) cause anything at all? Does it make sense?
-
-e.g. your inaction causes the house to burn down and kill the child inside.
-
-
-Ethics answers "What is good?" and "Is X good?"
-objective ethics (ethics without intentions)?
-
-Self-preservationism?
-Survivism?
-
-egoism: What benefits X is good for X.
-species egoism: What benefits X's species is good for X.
-nihilism: 'Good' doesn't exist.
-utilitarianism: What is good is what maximizes the sum of happiness of people.
-evolutionary: What is good is what we feel according to how we have evolved.
-
-good, desirable, pain, masochist
-
-X has power over Y iff X makes Y do what X want Y to do
-
-Power and control is the same thing.
-
-Agency; control; causality
-
-Hard power is the ability to instill fear in others.
-Hard power is the ability to do violence.
-Hard power is potential violence.
-** mind-body
-"How the mind controls the body"
-http://science.sciencemag.org/content/353/6305/1246.2
-** Philosophy of mind, dream
+** software?
 A software is an executable model.
 
 Software is hardware configuration.
-
-Where the fuck is this book?
-https://mitpress.mit.edu/books/dreaming
-** etymology
-The origin (the etymology) of a word tells us what it should mean.
 ** chance, random, hazard, ignorance
 ** what
 https://www.realsimple.com/work-life/life-strategies/inspiration-motivation/philosophy-101
@@ -2664,10 +2603,33 @@ Wilfrid Hodges "Games to solve problems - LMS 1987"
 5:44 An algorithm is a "general method for solving a class of problems"
 - Ehrenfeucht-Fraïssé games between Abelard (forall) and Eloise (exists), illustrated with beads
   - https://en.wikipedia.org/wiki/Back-and-forth_method
-** philosophy of mind
-https://aeon.co/philosophy/philosophy-of-mind
-https://aeon.co/science/quantum-theory
-* Trolley problem?
+* Ethics
+** Making happen vs letting happen?
+If X causes Y, and Y is bad, then X is bad?
+
+Can inaction (absence, non-existence) cause anything at all? Does it make sense?
+For example, "your inaction causes the house to burn down and kill the child inside."
+
+Ethics answers "What is good?" and "Is X good?"
+objective ethics (ethics without intentions)?
+
+Self-preservationism?
+Survivism?
+
+egoism: What benefits X is good for X.
+species egoism: What benefits X's species is good for X.
+nihilism: 'Good' doesn't exist.
+utilitarianism: What is good is what maximizes the sum of happiness of people.
+evolutionary: What is good is what we feel according to how we have evolved.
+
+good, desirable, pain, masochist
+
+X has power over Y iff X makes Y do what X want Y to do
+
+Power and control is the same thing.
+
+Agency; control; causality
+** Trolley problem?
 My position on the original 1-vs-5 trolley problem:
 Never switch.
 If your existence does not make any difference, then you cannot be at fault.
