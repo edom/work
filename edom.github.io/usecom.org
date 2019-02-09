@@ -508,9 +508,8 @@ Array.prototype.map.call(document.querySelectorAll('*'), (e) => {
 });
 #+END_SRC
 ** Searching the Internet
-  :PROPERTIES:
-  :CUSTOM_ID: searching-the-internet
-  :END:
+<2019-02-04>
+For reverse image search, I find Yandex better than Bing, and Bing better than Google.
 
 - Example search: given a text description, find related images
 - Example reverse search: given an image, describe it, or find its copies on the Internet
@@ -2234,9 +2233,7 @@ We can map a subset of XML to YAML using [[http://yaml.org/xml][YAXML, the (draf
 *** PostgreSQL ALTER TABLE DROP COLUMN doesn't actually remove the column from disk
 From [[https://nerderati.com/2017/01/03/postgresql-tables-can-have-at-most-1600-columns/][PostgreSQL Tables Can Only Have 1600 Columns, Ever. | Nerderati]].
 * <2018-12-11> Prepare OS upgrade?
-I'm still thinking.
-Every OS upgrade is a pain.
-
+** What
 Move from Ubuntu 14.04 to Debian unstable
 https://www.reddit.com/r/linux/comments/40peeb/security_debian_vs_ubuntu/
 
@@ -2298,3 +2295,85 @@ Because ELF hardcodes "rpath".
 NixOS patches ELF rpath.
 
 Buy an SSD?
+
+Use "brasero" to burn ISO to DVD.
+https://wiki.debian.org/BurnCd#Burn_the_image_file_to_CD.2C_DVD.2C_or_BD
+
+How a Debian user is supposed to install a recent version of some packages:
+A Debian user is not supposed to install any recent version of packages.
+
+How an advanced Debian user is supposed to install a recent version of some packages:
+- Install Debian stable.
+- Add testing repository.
+- Set up APT pinning:
+  - Most things come from stable.
+  - System packages come from stable.
+  - GHC comes from testing.
+- Always check APT install plan.
+  Avoid reinstalling system packages such as libc, python, perl, gnome, xorg, and so on.
+  If installing something from testing requires removing something from stable, then say no to the apt prompt.
+- Does anything break?
+** Unanswered questions
+Which distro has the best governance (the best social system, and the most trustworthy and competent people)?
+
+Which distro has the most packages?
+
+Which distro has the most volunteers?
+
+Fedora ships with SELinux enabled?
+
+My university used Debian and Ubuntu.
+* Woes upgrading to Debian 9
+** GCC 6 PIE breaks GHC
+GCC 6 PIE defaulting breaks GHC.
+Should Debian package ghc as several packages such as ghc-7.6, ghc-8.4, not as one package ghc with several versions?
+One Debian package per GHC minor version?
+Alternatives system?
+Like openjdk-6 and openjdk-7?
+Like python2 and python3?
+** No GNOME Night Light
+GNOME Night Light is not in Debian 9 (gnome-shell 3.22).[fn::https://www.omgubuntu.co.uk/2017/02/gnome-night-light-blue-light-filter-linux]
+** Massive Debian 9 Chromium privacy violation
+On 2018-12-20, I fresh-install Debian 9.6.
+Chromium enables "Allow Chromium sign-in" without asking user consent.
+ [fn::https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=916320]
+ [fn::https://blog.cryptographyengineering.com/2018/09/23/why-im-leaving-chrome/]
+
+That's the last straw.
+I'm switching to firefox.
+I'm using chromium for privacy violators and shady companies:
+- google, youtube
+- facebook
+** Fix Gnome 3 counterproductive defaults
+gsettings set org.gnome.shell.app-switcher current-workspace-only true
+https://coderwall.com/p/m5mhoq/gnome-3-how-to-alt-tab-windows-on-current-workspace-only
+** git gui breaks
+Ctrl+T no longer works with multiple files.
+
+<2019-02-10>
+gitk gobbles insane amount of RAM.
+** Change network DNS; NetworkManager broken
+Nuke /etc/NetworkManager/system-connections and recreate that directory.
+https://askubuntu.com/questions/979939/network-manager-keeps-creating-new-profiles-for-the-same-network
+
+Then connect to network.
+
+Then stop.
+
+sudo service NetworkManager stop
+
+sudo nm-connection-edit
+
+Use the GUI to manualize the DNS.
+
+sudo service NetworkManager start
+
+https://wiki.debian.org/NetworkManager
+** Automatic install of updates, including security updates, should be disabled
+I want to see it first before it is installed.
+* Invert screen color
+https://askubuntu.com/questions/181419/how-to-reverse-colors-for-the-current-window-in-gnome-shell
+xcalib -invert -alter
+Keyboards
+Bind it to Super+I
+Bind gnome-terminal to Super+T

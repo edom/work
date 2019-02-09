@@ -128,6 +128,8 @@ If Prolog is to have anonymous predicates, then it works with second-order logic
 
 The job of a module is to disambiguate names.
 Example: which "member/2" do we mean?
+*** Does it make sense in a language with nominal typing?
+Such as Haskell, Java, Ur/Web?
 * What is the best programming language?
 This is what I think the best programming language would is like, as of <2018-12-30>.
 
@@ -722,8 +724,57 @@ He claims that the most important aspect of a good user interface is how well it
 If the user develops an accurate conceptual model, then the application works as expected.
 This leads the user to try more things, which also work as expected, leading to an even better understanding, thus drawing the user further and further into the tool."
 https://www.amzi.com/articles/prolog_under_the_hood.htm
-* Designing the programming language
-#+TOC: headlines 2 local
+* Designing a programming language
+** What
+The semantics of a statement in an imperative language is usually an endofunction whose domain is the set of all possible world states.
+
+The semantics of untyped lambda calculus involves domain theory?
+So does the semantics of functional languages?
+
+The semantics of logic languages involves model theory?
+
+Lloyd 1993 \cite{lloyd1993foundations}: declarative semantics and operational semantics of Prolog.
+
+What is this "stable model semantics" thing?
+https://arxiv.org/abs/cs/0312028
+
+Is there a declarative language that unifies domain theory and model theory?
+** First, design the semantics
+The semantics of a program \(\Gamma \vdash P\) is whether \(\Gamma\) proves \(P\)?
+
+https://en.wikipedia.org/wiki/First-order_logic#Semantics
+
+Slide 31: difference between imperative, functional, and declarative[fn::https://www.comp.nus.edu.sg/~kanmy/courses/3243_2005/lectureNotes/w8-all.pdf].
+Thus, ordered by declarativeness, Scheme < Haskell < Prolog.
+But what about Scheme macros?
+
+What?
+https://www.researchgate.net/publication/2763490_A_Denotational_Semantics_for_Prolog
+
+Toy example: first-order logic language?
+
+#+BEGIN_EXAMPLE
+(#with
+  [
+    (lt a b)
+    (lt b c)
+    (lt c d)
+    (#forall [a b]
+      (#horn (lt a b)
+        (#exists [c] (#and (lt a c) (lt c b)))))
+  ]
+  (#exists [x y] (lt x y)))
+#+END_EXAMPLE
+** Then, design the concrete syntax
+The concrete syntax of \( \Gamma \vdash A \) is \( with(\Gamma,A) \).
+** The essence of dictionary is finite function
+Clojure gets this right?
+
+Left-hand side of an application may be:
+- a dictionary,
+- a lambda, or
+- a finite left-biased union of arbitrarily many dictionaries and lambdas, or
+- a union like that but right-biased.
 ** Prolog
 How does Mercury do without assert/retract?[fn::https://www.mercurylang.org/information/doc-latest/mercury_trans_guide/AssertRetract.html]
 
@@ -2821,6 +2872,12 @@ Instead, do semantic mapping: map a program in language A to an equivalent progr
 
 Languages should allow CR/LF in string literals.
 
+*** Not allowing extra leading or trailing commas
+Allowing extra commas make Git diffs less noisy.
+*** Not separating names and referents
+Example: C functions, Java classes, Haskell modules.
+
+JavaScript does not make this mistake.
 ** Java
    :PROPERTIES:
    :CUSTOM_ID: java
@@ -2946,7 +3003,15 @@ instead of this:
 #+END_SRC
 
 Explicit isomorphism may help reduce newtype boilerplate.
+** Prolog
+Difference between rules and queries.
+Files contain rules.
+Interpreters accept queries.
+This is a mistake that prevents local contexts.
 
+Instead of assert and retract, Prolog should have scopes: with(Rules,Query).
+
+Instead of Prolog modules, Prolog should have dictionaries and JavaScript-like require(Path).
 ** what
 A problem with current programming methodologies is that they don't capture the higher-level properties of software, such as the architecture.
 For example, how do we write, in a way that the computer can exploit, this statement:
@@ -4397,4 +4462,134 @@ I was triggered by Abdullah's pointing out to me that in Haskell, length "Hello"
 Each of those viewpoints has its philosophical justifications.
 The question is: Which one has the strongest justification?
 What /is/ "length"?
+* What is declarative programming?
+What do we declare?
+* Enterprise programming language? Enterprise meta-language?
+** What?
+- Describe data shapes.
+- Describe databases.
+- Describe how the user should interact with the application.
+- Describe CRUD: describe views that read from or write to databases.
+- Describe business logic.
+- Parallelize unrelated database queries.
+- Translate to Java and interoperate with Java.
+
+We naturally think of mathematical objects as tuples/sequences or dictionaries.
+Each entry of the dictionary represents a property of the object.
+
+Are these the criteria of a good meta-language?
+- algebraic data types and pattern-matching
+- set-theoretic type system
+- tree manipulation
+
+Will we end up reinventing C# LINQ?
+
+Enterprise programming language contains sublanguages that work together.
+** Table expression language
+The semantics of a table expression is a sequence of rows.
+The sequence may be infinite.
+
+The operational semantics is to lazily evaluate the minimum number of rows.
+
+A table has column names.
+
+"empty" means the empty table.
+
+"project(C,T)" means table T but with only the columns in C.
+
+"all(T)" means all rows of table named T.
+Each row is a dictionary.
+
+"filter(P,T)" means all rows of T that satisfy P.
+
+"first(N,A)" means the first N rows of table A.
+
+"product(A,B)" means Cartesian product.
+
+"foldl(R_0,F,T)" is left-fold:
+R_k = F(T_{k-1},R_{k-1}) \text{ where } k \ge 1
+The result is R_n where n is the number of rows in T.
+T must be finite.
+
+Should collapse as much as possible to SQL.
+
+https://www.postgresql.org/docs/current/sql-select.html
+
+plan : table_exp -> sql_select
+% select(Columns,From,Where,Group,Having,Order,Limit,Offset)
+% select_modifywhere(S1,W1,S2,W2)
+n means not present
+plan(all(N),select(C,T?,n,n,n,n,n,n)) :- table_columns(N,C).
+plan(project(C,T), select(C, T, ))
+
+Prolog type system
+https://github.com/SWI-Prolog/roadmap/wiki/Prolog-type-system
+
+any : any value
+atom : any atom
+literal(A) : atom or number or string that equals A
+literal_in(Vals): in list Vals; each Val is a literal
+functor(Name,ArgTypes)
+list(T) : list in which each element has type T
+union(Types) : disjunction
+intersection(Types)
+predicate(ArgTypes)
+* "Let" introduces sharing?
+"Let" determines how the AST (abstract syntax tree) turns into ASG (abstract semantic graph).
+* Lambda calculus algebra what?
+The algebraicity of the lambda-calculus[fn::http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.311.3514&rep=rep1&type=pdf]
+#+BEGIN_QUOTE
+an untyped lambda-calculus is a functor LC from sets to sets: to a set V (of free ”variables”) it assigns a set LC(V) of lambda-terms built out from V;
+this functor enjoys substitution, which turns it into a monad;
+
+The idea that the notion of monad is suited for modelling substitution concerning
+syntax (and semantics) has been retained by many recent contributions
+concerned with syntax (see e.g. [BP99] [GU03] [MU04]) although some other
+settings have been considered.
+#+END_QUOTE
+* Algebra of ADT
+Somewhat interesting
+https://stackoverflow.com/questions/9190352/abusing-the-algebra-of-algebraic-data-types-why-does-this-work
+* How do we know?
+"How to determine your new language is perfect?"
+http://lambda-the-ultimate.org/node/4395
+* What is an array?
+What is the difference between an array, a string (byte string vs character string), and a sequence?
+
+C does not have built-in arrays; it has pointer arithmetics.
+An "array access" expression p[i] is a syntactic sugar for the pointer arithmetic dereference expression *(p+i).
+
+Is a C++ vector an array?
+* Programming language ontology?
+2005 "Towards a programming language ontology"
+https://pdfs.semanticscholar.org/028f/3f5df68e49b2d42663e935f1615ba46f41a0.pdf
+- paraphrase of Frege & Dummett: "the ontological implications of a language are to be identified with the entities required to provide its constructs with a semantics"
+- a possible ontology for computer science: something exists if and only if it is computable
+- "properties of programs such as efficiency, flexibility and elegance are, from the [Computer Science] view of things, absolutely essential. But these properties are obliterated by the [Denotational Semantics]."
+  - Denotational semantics can't reason about a program's resource usage.
+- "CS build programs and systems from data
+types. So instead of sets we propose to turn matters around and use data types [instead of sets] as our basic ontology."
+- Calculus of constructions (inductive data types) may provide an ontology.
+
+
+"The 'existence' referred to need not be 'real', but exist only in a universe of discourse."
+https://en.wikipedia.org/wiki/Ontological_commitment
+
+Why should we strive to create a programming language with ontological parsimony (minimal ontological commitment)?
+
+
+How do we design a programming language whose ontology coincides with how we think about the real world?
+
+How do we design a programming language whose ontology coincides with the ontology of mathematics?
+
+How can we be a mathematician without being an implicit Platonist?
+Anyone who believes that perfect circles exist is a Platonist.
+Anyone who believes that the square root of two exists is a Platonist.
+
+Mathematics is language.
+
+https://www.iep.utm.edu/mathplat/
+* Semantics?
+Mechanized semantics
+https://hal.inria.fr/inria-00529848/document
 * Bibliography
