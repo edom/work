@@ -725,46 +725,7 @@ If the user develops an accurate conceptual model, then the application works as
 This leads the user to try more things, which also work as expected, leading to an even better understanding, thus drawing the user further and further into the tool."
 https://www.amzi.com/articles/prolog_under_the_hood.htm
 * Designing a programming language
-** What
-The semantics of a statement in an imperative language is usually an endofunction whose domain is the set of all possible world states.
-
-The semantics of untyped lambda calculus involves domain theory?
-So does the semantics of functional languages?
-
-The semantics of logic languages involves model theory?
-
-Lloyd 1993 \cite{lloyd1993foundations}: declarative semantics and operational semantics of Prolog.
-
-What is this "stable model semantics" thing?
-https://arxiv.org/abs/cs/0312028
-
-Is there a declarative language that unifies domain theory and model theory?
 ** First, design the semantics
-The semantics of a program \(\Gamma \vdash P\) is whether \(\Gamma\) proves \(P\)?
-
-https://en.wikipedia.org/wiki/First-order_logic#Semantics
-
-Slide 31: difference between imperative, functional, and declarative[fn::https://www.comp.nus.edu.sg/~kanmy/courses/3243_2005/lectureNotes/w8-all.pdf].
-Thus, ordered by declarativeness, Scheme < Haskell < Prolog.
-But what about Scheme macros?
-
-What?
-https://www.researchgate.net/publication/2763490_A_Denotational_Semantics_for_Prolog
-
-Toy example: first-order logic language?
-
-#+BEGIN_EXAMPLE
-(#with
-  [
-    (lt a b)
-    (lt b c)
-    (lt c d)
-    (#forall [a b]
-      (#horn (lt a b)
-        (#exists [c] (#and (lt a c) (lt c b)))))
-  ]
-  (#exists [x y] (lt x y)))
-#+END_EXAMPLE
 ** Then, design the concrete syntax
 The concrete syntax of \( \Gamma \vdash A \) is \( with(\Gamma,A) \).
 ** The essence of dictionary is finite function
@@ -830,24 +791,6 @@ https://math.stackexchange.com/questions/2494645/lambda-calculus-combined-with-f
 
 "But languages aren't tools! IDEs are tools. Languages are material. See FallacyOfTheRightTool."
 http://wiki.c2.com/?QuestForThePerfectLanguage
-** Three semantics of Horn clauses
-We use "cause semantics" for gui.
-
-Rule semantics
-A :- B means "If B then A".
-
-turn_on_air_conditioner :- air_feels_hot.
-
-Proof semantics of Prolog
-A :- B means to prove A, prove B.
-even(z).
-even(s(s(N))) :- even(N).
-
-Cause semantics of Prolog
-A :- B means B causes A.
-name_value(mytextbox, yes) :- name_isdown(mybutton, true).
-That means "pressing mybutton causes mytextbox value to be yes".
-
 ** Prolog predicate naming
 blue(X)
 has(A,B)
@@ -1177,39 +1120,6 @@ IF entity todo_app todo E THEN property E int64 id.
 
 ** Working with existing systems
 *** Working with Java
-** Semantics (should we worry about this earlier?)
-
-*** Cost model
-
-- "Cost models based on the lambda-calculus", [[http://www.cs.cmu.edu/~guyb/papers/lambdaInria.pdf][pdf slides]], from http://www.cs.cmu.edu/~guyb/
-
-*** Denotational semantics
-
-**** Intro to denotational semantics
-
-- 1971, monograph, Dana Scott and Christopher Strachey, "Toward a mathematical semantics for computer languages", [[https://www.cs.ox.ac.uk/files/3228/PRG06.pdf][pdf]]
-- [[https://pdfs.semanticscholar.org/presentation/76cd/955ec6dafde3699d64e50882ec7fb4384803.pdf][pdf slides]]
-- [[https://www.seas.harvard.edu/courses/cs152/2016sp/sections/sec-2016-02-18-soln.pdf][Exercises]] about denotational semantics and lambda calculus
-- 1997, book, "Denotational semantics: a methodology for language development", [[http://www.bcl.hamilton.ie/~barak/teach/F2008/NUIM/CS424/texts/ds.pdf][pdf]]
-- 1989, PhD thesis, Frank Steven Kent Silbermann, "A Denotational Semantics Approach to Functional and Logic Programming", chapter 3, [[http://www.cs.unc.edu/techreports/89-030.pdf][pdf]]
-  - "A novel approach is taken in constructing an operational semantics directly from the denotational description."
-
-**** TODO Does lambda calculus have a semantics that doesn't depend on reduction strategy?
-
-*** Operational semantics and evaluation/reduction strategy
-
-Which one should we choose, and why?
-
-- call-by-name
-- call-by-value
-- call-by-need
-- what else?
-
-<2018-09-29> Wikipedia needs cleanup:
-
-- https://en.wikipedia.org/wiki/Reduction_strategy_(lambda_calculus)
-- https://en.wikipedia.org/wiki/Lambda_calculus#Reduction_strategies
-- https://en.wikipedia.org/wiki/Evaluation_strategy
 ** Overloadable function application?
 ** Interpreters: Giving different meanings to the same syntax
 
@@ -4137,6 +4047,13 @@ Lambda the Ultimate: Meta-programming
 http://lambda-the-ultimate.org/taxonomy/term/15
 
 2009 article "Directly Reflective Meta-Programming" http://homepage.divms.uiowa.edu/~astump/papers/archon.pdf
+
+Footnote F from \cite{felleisen2018programmable}:
+#+BEGIN_QUOTE
+Language workbenches (such as Spoofax) deal with conventional syntax for DSLs but do not support the incremental modification of existing languages.
+A 2015 report suggests, however, these tool chains are also converging toward the idea of language creation as language modification.
+We conjecture that, given sufficient time, development of Racket and language workbenches will converge on similar designs.
+#+END_QUOTE
 * Enterprise applications model extrinsic properties
 Specification language
 Attempto Controlled English
@@ -4158,33 +4075,6 @@ Google search of software modeling language
 https://en.wikipedia.org/wiki/Modeling_language
 https://en.wikipedia.org/wiki/EXPRESS_(data_modeling_language)
 https://www.martinfowler.com/articles/languageWorkbench.html
-* How should lambda-calculus be implemented?
-** What is an operational semantics of lambda calculus?
-** How?
-Normal-order reduction enables us to write fixed points.
-Should we let the programmer choose the evaluation strategy?
-Currying simplifies reasoning but complicates implementation (because applications may then nest deeply to the left).
-What is optimal reduction?
- [fn::https://stackoverflow.com/questions/31223539/is-it-possible-to-evaluate-lambda-calculus-terms-efficiently]
- [fn::https://en.wikipedia.org/wiki/Lambda_calculus#Optimal_reduction]
-
-Lambda-calculus is unsound.[fn::https://en.wikipedia.org/wiki/Fixed-point_combinator]
-What does that imply about programming languages containing lambda calculus?
-
-Let \( A[B := C] \) mean \(A\) but with each free occurrence of \(B\) replaced with \(C\).
-Let \( eval(A,B) \) means that \(A\) normalizes to \(B\).
-
-Applicative-order evaluation is the easiest to implement.
-
-Where do these things fit in the big picture of lambda-calculus implementations?
-G-machine, STG, GRIN[fn::https://github.com/grin-tech/grin].
-
-Reading queue:
-- https://stackoverflow.com/questions/31223539/is-it-possible-to-evaluate-lambda-calculus-terms-efficiently
-- https://www.researchgate.net/publication/312462365_About_the_efficient_reduction_of_lambda_terms
-- https://www.reddit.com/r/haskell/comments/2zqtfk/why_isnt_anyone_talking_about_optimal_lambda/
-- compiling monads https://www.irif.fr/~mellies/mpri/mpri-ens/articles/danvy-koslowski-malmkjaer-compiling-monads.pdf
-- modular monadic semantics http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.136.1656&rep=rep1&type=pdf
 * How should languages interoperate?
 Can we do it semantically?
 
@@ -4589,7 +4479,4 @@ Anyone who believes that the square root of two exists is a Platonist.
 Mathematics is language.
 
 https://www.iep.utm.edu/mathplat/
-* Semantics?
-Mechanized semantics
-https://hal.inria.fr/inria-00529848/document
 * Bibliography

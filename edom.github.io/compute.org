@@ -2,156 +2,319 @@
 #+DATE: 2017-06-29 22:40 +0700
 #+PERMALINK: /compute.html
 #+MATHJAX: yes
-* What?
-** Computing theory
-*** What is computation, software, program, algorithm, etc.?
-What is computation?
-What is software?
-What is a program?
-What is an algorithm?
-*** What is the relationship between P and NP?
-What is the [[file:pnptry.html][relationship between P and NP]]?
-We are trying to understand the P vs NP problem,
-which requires computation, [[file:model.html][model]], and [[file:logic.html][logic]].
-We were motivated by the prize money[fn::one million US dollars http://www.claymath.org/millennium-problems/millennium-prize-problems], but our chances seem slim.
-*** Should we merge approximation theory and propositional calculus?
-Why do we want that?
+#+OPTIONS: ^:nil
+* Introduction
+** What is the problem?
+The problem is defining the verb "compute", from which the nouns "computer" and "computation" follow trivially.
+** What are our approaches?
+In "Linguistic analysis of computing" chapter.
+Analyze what it means to compute, from how we use the word.
 
-Boolean metric spaces merge logic and analysis?
-How do we define a sensible approximation error?
-How do we define the /distance/ between two formulas?
-The formula \( p \wedge q \) /approximates/ the formula \( p \wedge q \wedge r \).
-What is the approximation /error/?
+In "Computers" chapter.
+Unify analog and digital computers.
+Find the common things between them.
+Craft a definition of "compute" that satisfies both of them.
 
-What are these papers?
- [fn::https://arxiv.org/abs/0903.2567]
- [fn::https://www.um.es/beca/papers/Aviles-Algebras.pdf]
-** How should we make an intelligent machines?
-I am looking for an AI that helps me process data into information.
-Thus I write [[file:intelligence.html][Making intelligence]] and
-[[file:endo.html][The endofunction model of worlds and agents, and its philosophical implications]].
-But I think my chances are slim.
-** What is a model?
-What is a [[file:model.html][model]]?
+In "Computing" chapter.
+Generalize calculation to computation.
+Generalize a narrow but undoubted definition of the computation we routinely do (that is calculation).
+** Linguistic conventions
+In this document, I always use "may" in the epistemic sense, and never in the deontic sense
+ [fn::https://english.stackexchange.com/questions/189974/why-do-they-say-may-not-for-things-which-people-shouldnt-do].
+Thus "may not" and "does not have to" have the same meaning.
+* Linguistic analysis of computing
+** English suffixes -er, -ate, and -ion
+We only need to define what it means to /compute/, and the meaning of computers and computation will follow.
 
-** When should we care about a philosophically sound foundation of mathematics?
-Math seems to work just fine even if it isn't philosophically justified.
-Why should we care about finitism?
+A /computer/ is a thing that computes.
 
-I am [[file:finite.html][looking for a philosophically sound foundation of mathematics]].
-It may be finitism.
+/Computation/ is the /process/ of computing or the /result/ of computing.
+** Concrete subject (computers)
+The /subject/ of "compute" is a /concrete/ object (with material existence).
+Examples of such subjects are some machines and some animals[fn::Some animals can count, and counting is a computation; thus some animals can compute.
+http://www.bbc.com/future/story/20121128-animals-that-can-count].
+** Abstract object (computees)
+The /object/ of "compute" is an /abstract/ object (with no material existence).
+For example, it makes sense to compute a number, but it does not make sense to compute a chair.
+** Adjectives that modify computation
+*** Computation is mostly irreversible
+/Reversible/ computation relates information loss, entropy, and heat.
+"Reversible" implies that computations may have two directions (forward and reverse),
+and that most computation is /irreversible/, such as addition:
+from several summands we can know the sum,
+but from only a sum we cannot know the summands used to produce that sum;
+we lose some information in that computation.
+*** Computation may be interactive
+Is /interactive/ computation computation[fn::https://en.wikipedia.org/wiki/Interactive_computation]?
 
-* Philosophy of language?
-** The English suffix -er means one who does
-"Computer" comes from "compute" and "-er".
-Thus, a computer is a thing that computes.
+Must algorithms describe only terminating computations?
+An operating system describes an interactive computation.
+Computers do not exist in a vacuum.
+Computers interact with reality.
+* Computing
+** Computing as knowledge generation
+Van Leeuwen 2015 \cite{van2015philosophy} argues that computation is a process of /knowledge generation/.
+This view unifies several views of computation.
+Knowledge is relative: one's knowledge is another's noise.
+Wiedermann & van Leeuwen 2014 \cite{wiedermann2014computation},
+2015 \cite{wiedermann2015computation},
+2017 \cite{wiedermann2017epistemic}.
+** Other people's ideas about what computation is
+Zenil 2014 \cite{zenil2014nature}
 
-Appending -er to a verb V forms the noun Ver which means "one who does V",
-which we often stretch to mean "a thing that does V",
-so that a Ver does not have to be a person.
+Horsman et al. 2014 \cite{horsman2014does}
 
-** The English suffix -ion nominalizes Latinate verbs
-Nominalization turns a word into a noun.[fn::https://en.wikipedia.org/wiki/Nominalization]
+Horswill 2012 \cite{horswill2012computation}
 
-"Computation" comes from "compute" and "-ation".
+Denning 2010 \cite{denning2010computation}
 
-The suffix -ation comes from -ate + -ion.[fn::https://www.etymonline.com/word/-ation]
-Appending -ion to a Latinate verb Vate forms the noun Vation.
+Ladyman 2009 \cite{ladyman2009does}
 
-For example, an explosion is an action, but not a process, and not a condition, and not a state.
-However, an explosion looks fast because we are humans and we are relatively stationary to the explosion;
-it would look slow if we were traveling near the speed of light with respect to the explosion.
+Copeland 1996 \cite{copeland1996computation}
+** A computation is not only a discrete model of reality
+Analog computers invalidate this definition.
 
-A process is an action that takes some time?
+Our knowledge of physics is a model of reality.
 
-Computation is a process.
-This is supported by the usage "this computation does not terminate",
-the usage "this computation produces 123",
-and the non-usage "this computation is 123".
+Computation is a circumstantial/occasional/special discretization of the laws of physics.
+We can model an electronic computer containing 100 bipolar-junction transistors as 300 numbers, each representing voltage at each terminal of each transistor.
+We can also model the same computer as 100 bits.
 
-The sentence S V O translates to the logic formula V(S,O).
-Example: "John eats bread" translates to "eat(John,bread)", or, "john(x), bread(y), eat(x,y)".
+Computation is a discrete sequential logical model of reality.
 
-S V O = S does NV to O, where NV is the nominalized V.
-Examples.
-He is renovating (renewing) his house = he is doing a renovation to his house.
-He is manducating the food = he is doing a manducation to the food.
-He is computing the number = he is doing a computation to the number?
-How can we do something to an abstract thing with no material existence?
+A machine simply acts according to the laws of physics, but we interpret some of such acts as a computation.
+This implies that a computation is what we think a physical system does, not what the system actually does.
+Thus, /a computation is a discrete sequential model of what some physical systems do/.
 
-NV is P = S VP iff S V.
-Stealing is bad = S steals iff S is bad.
-Stealing is taking others' belongings without their permission = S steals iff S takes others' belongings without their permission.
+Computation is our way of thinking about what the machine does.
+We invent the concept of computation because we are eager to patterns everywhere.
+Our understanding of computation enables us to manipulate machines into doing what we want.
 
-\cite{hamm2013formal}.
-\cite{zucchi2013language} paywall.
+Computation has no material existence.
+What exist materially are machines acting according to the laws of physics.
 
-** How do we answer "What is something?"
-It is difficult.
-Consider this example:
-What is an elephant?
-There are several possible answers:
-- An elephant E is an individual whose genetic code makes it belong to a species of the Elephantidae family, such that E can mate with other members of the species and produce fertile offsprings. But this begets another question: what is a member of the Elephantidae family?
-- An elephant is a big gray mammal with proboscis.
-But those are what /we think/ an elephant is, not what an elephant is.
-What is the essence of an elephant?
-What is true of elephants regardless whether there were humans to describe elephants?
-An individual's genes determine whether it is an elephant, but the genes themselves are not the elephant.
+A computation is an /explanation/ of what a machine does.
+If machine A computes Y from X, and machine B computes Z from Y,
+then the machine built from those machines computes Z from X.
 
-We often conflate a thing and its representations.
-For example, in everyday conversation, we call a drawing of an elephant an "elephant", and we call an elephant statue an "elephant".
-Ontologically, they are a drawing and a statue, and not an elephant.
-But calling them "drawing" and "statue" is considered uninformative.
-Therefore, the semantics of language depends on context.
+However, if objective reality exists, then the machine will still compute,
+regardless of whether we exist to describe what the machine does.
+** How do we know something computes?
+We know something computes iff we can explain/describe its behavior.
+Finite description.
 
-Of these two conversations,
-the first one is practically correct but ontologically wrong,
-and the second one is practically wrong but ontologically correct.
-- "What is this?" "An elephant."
-- "What is this?" "A drawing." "I know. A drawing of what?" "An elephant."
+A computer's behavior may be too complex for us to describe.
+But our inability to describe it doesn't mean it doesn't compute.
+* Computing as doing mathematics
+** Narrow but undoubted examples of computation
+What can we infer from these examples?
 
-The practically correct conversation is the one that conveys the most information.
-If something has higher computational complexity, then it has more information?
-It is harder to see that the drawing is of an elephant than it is to see that the drawing is a drawing.
+/Adding two numbers/ is a computation:
+To add two numbers is to /compute/ the sum of two numbers.
+I can imagine gathering two cats and three cats into five cats,
+but I cannot visualize ten cats.
 
-Suppose that I draw an elephant on a sheet of paper.
-Is it a sheet of paper, is it a drawing, or is it an elephant?
+/Adding two numerals/ is a computation:
+A numeral is a concise representation of a number;
+numerals enable us to indirectly compute bigger numbers.
+I add two numbers below ten quickly because I have memorized the 10x10 addition table in primary school.
+I add two numbers between 10 and 10,000 by long addition of their numerals:
+I visualize a positional decimal /representation/ of the numbers, that is the numeral, not the quantity itself;
+I find it hard to visualize more than five things at once.
+I refuse to add big numbers.
 
-Kurzgesagt has a video[fn::Kurzgesagt: What is something?https://www.youtube.com/watch?v=X9otDixAtFw] that discusses "What is something" from physics point of view.
-** Concrete and abstract objects?
-Concrete objects exist in material space.
-Abstract objects exist in ideal space.
-The mind manipulates abstract objects.
-The hand manipulates concrete objects.
-But those definitions have problems with dreaming, hallucination, imagination.
-If I imagine myself holding a box, is that box a concrete object?
-No.
-That box exists only in my imagination.
+/Producing a number from a formula/ is a computation.
+A narrow but undoubted example of computing is substituting numbers into a mathematical formula, producing an expression, and evaluating the expression into a number.
+The input is the variable assignments.
+The program is the formula.
+The computer is the human.
+The output is a number.
 
-Concrete objects are real?
-Abstract objects are not real?
-But how can something unreal be true?
+It seems that the goal of a computation is to arrive at a number (or a numeral).
+It seems that computation is about transforming symbols.
+** Computing with tools and machines
+Some tools help us compute.
+** To compute is to do mathematics?
+The way we use the verb "compute" implies that computation is a model of how reality does some mathematics.
 
-Abstract vs concrete objects \cite{sep-abstract-objects}.
-* A computation is what?
-** How do we answer that question?
-We want to define the noun "computer", the noun "computation", and the verb "compute".
-How do we do that?
+What do we mean by "doing mathematics"?
 
-We understand a word by scrutinizing its /origin/ (where it comes from, how it is formed) and /usage/ (how it is used).
-We analyze the English suffixes -er and -ation.
-We define the nouns "computer" and "computation" in terms of the verb "compute" and those suffixes.
-Thus, the real problem is defining "compute", "-er", and "-ation".
+Something computes iff we think it does some mathematics.
+/To compute is to do some mathematics./
+Mathematics is not only arithmetics, but also logic, etc.
 
-We analyze the subject and object of the verb "compute".
+But what about analog computers, such as an operational amplifier that "adds two real numbers", or "integrate a real function"?
 
-We analyze what and how analog and digital computers compute.
+An analog computer can integrate a real function.
+A digital computer cannot (but can approximate).
 
-We find out what is common among all computers.
-We look at some history of computers.
+Are there programmable analog computers?
 
-We craft a definition of "compute" that satisfies all those computers.
-** The thing common to all computers must be computation
+What does a programmable analog computer look like?
+
+How would analog computers have conditionals, loops, and other constructs?
+* Computing, representation, and complexity
+Synonyms of representation: encoding, model.
+
+A machine "computes \(y\) from \(x\)" iff
+the machine ends with a representation of \(y\) if the machine is started with a representation of \(x\).
+Alas, this definition has two big problems:
+- Must a computation be /started/ by something outside the computer?
+- What is /representation/?
+** A computation does not have to end
+A computation does not have to end.
+A Turing machine may compute without terminating.[fn::https://math.stackexchange.com/questions/1561293/must-an-algorithm-terminate]
+ [fn::"An example of a non-terminating Turing machine program is a program that calculates sequentially each digit of the decimal representation of pi"
+ http://www.alanturing.net/turing_archive/pages/reference%20articles/what%20is%20a%20turing%20machine.html]
+For example, a machine may compute 2/3 (whose binary expansion 0.10... does not terminate) by repeatedly printing 10 forever.
+** Computation as representation transformation
+To compute is to transform representation into something easier.
+** What is a natural ordering (standard ordering)?
+The natural ordering of the natural numbers is the transitive closure of \(\forall n (n < S(n))\).
+
+It is the simplest ordering, the one with the shortest description.
+
+Why is it called "standard"?
+** What is a reasonable representation?
+A representation is /reasonable/ iff it makes computing the natural ordering have linear time complexity.
+
+A /reasonable encoding/ is an encoding that is easy to compute and is easy to invert.
+
+A reasonable encoding has a finite description.
+** Do not conflate a thing and its representations
+First, we undo the chronic ontologically-sloppy habit of conflating a thing and a representation of the thing.
+"123" is not a number, but a /representation/ of a number.
+We cannot manipulate numbers physically because they do not have material existence.
+We can only manipulate the physical representations of those numbers.
+When we "add two numbers", we are actually manipulating the representations of those numbers in a way that corresponds to adding those numbers.
+Formally, if \(e : \Nat \to \{0,1\}^*\) is an encoding scheme, then
+\( e(x+y) = e(x) +_e e(y) \), where \(+\) is the operation that we think we do, and \(+_e\) is the operation that we actually do.
+We think we are adding numbers, but we are actually writing symbols on paper or juggling symbols in our mind.
+
+Then, we un-conflate a program and a machine running the program.
+A program does not /compute/; it is the machine that computes.
+A program cannot do anything on its own; a machine has to run it.
+When we say "a program computes a function",
+we actually mean that running the program on the machine causes
+the machine to compute that function.
+
+An algorithm describes how to compute something but does not compute what is described,
+because an algorithm is a mathematical object with no material existence.
+An algorithm describing how to calculate a number does not itself calculate the number,
+in the same way a recipe describing how to cook an egg does not itself cook the egg.
+A recipe has no material existence; what has material existence is the physical medium (such as ink and paper)
+that is used to describe that recipe in the symbols we agreed upon.
+
+Unfortunately, the ontologically correct thing is very wordy,
+so I write in conflated manner.
+For example, when I write "this program adds two numbers",
+what I really mean is
+"running the program causes the machine to manipulate two representations in a way that corresponds to adding two numbers".
+Fortunately, the only time we have to care about this ontological issue is when we are talking about the foundations of computation.
+** Representation affects complexity
+Encoding a natural number \(n\) in unary notation takes \(n\) symbols.
+Encoding the same number in binary notation takes approximately \(\log_2(n)\) symbols.
+
+Adding two natural numbers \(m\) and \(n\) takes \(m+n\) steps in unary notation,
+but only approximately \(\log(\max(m,n))\) steps in positional notation.
+
+Why don't encode a number as its prime factorization,
+to simplify multiplication while complicating addition?
+
+What do we formally mean by "reasonable encoding"?
+
+Why do we assume that numbers are encoded in positional notation[fn::https://en.wikipedia.org/wiki/Positional_notation], not unary notation[fn::https://en.wikipedia.org/wiki/Unary_numeral_system]?
+
+My guess:
+What we mean by reasonable encoding is an /order-preserving homomorphism/:
+\begin{align*}
+a < b &\iff e(a) <_e e(b)
+\\
+a = b &\iff e(a) = e(b)
+\end{align*}
+
+A homomorphism preserves structure.
+But which structure?
+
+We may encode the natural numbers as the bitwise-negation of the base-2 representation: 1, 0, 11, 10, 01, 00, etc.
+* Computation from logic point of view
+** Problem as logical formula
+*** A problem is a question, a logical formula
+"Problem" comes from Greek "problema" which means "a task, that which is proposed, a question".[fn::https://www.etymonline.com/word/problem]
+Therefore, a problem /is/ a question, or, formally, a /logical formula/.
+*** Formula, input, output, model, relation
+/A problem is a formula./
+For example, the problem "Given an \(x\), what is \(x+x\)?" is the formula
+\( x+x = y \) in first-order logic with equality and some arithmetics.
+Note that some logic is embedded in English.[fn::English is at least second-order, as demonstrated by the Geach--Kaplan sentence "Some critics admire only one another" https://en.wikipedia.org/wiki/Nonfirstorderizability].
+
+#+CAPTION: Some common problem shapes
+| name             | shape          | input | output |
+|------------------+----------------+-------+--------|
+| decision problem | \( p(x) \)     | \(x\) |        |
+| search problem   | \( p(x) \)     |       | \(x\)  |
+| function problem | \( f(x) = y \) | \(x\) | \(y\)  |
+
+A problem may have /inputs/ and /outputs/.
+An /input/ of a problem is a free variable in the formula.
+An /output/ of a problem is a free variable in the formula.
+
+Another example: the problem "Is the sum of two even numbers even?" is the formula \( E(x) \wedge E(y) \to E(x+y) \).
+
+What does it mean to solve a problem (answer a question)?
+Solving a problem is answering a question.
+Answering a question corresponds to /proving a formula/.
+Answering a question corresponds to /finding a model/ of a formula?
+
+A /problem/ may be /modeled/ by a /relation/ between questions and answers.
+For example, the problem \( \forall x \exists y : x+x = y \)
+is modeled by the relation \( \{ (0,0), (1,2), (2,4), \ldots \} \)
+and is also modeled by the relation \( \{ (\epsilon,\epsilon), (1,11), (11,1111), \ldots \} \).
+
+Do not conflate a problem and a model of it.
+A problem is a formula, /not/ a relation.
+
+Compare various definitions of "problem"
+ [fn::https://en.wikipedia.org/wiki/Computational_complexity_theory]
+ [fn::https://plato.stanford.edu/entries/computational-complexity/].
+
+A problem is \cite{sep-computational-complexity}
+
+Problem can be /composed/ as formulas can be composed.
+*** Reduction
+Sometimes we can /reduce/ a problem into another problem?
+** Computation as question-answering
+Computation is answering a question.
+
+What is the relationship with Wiedermann & van Leeuwen 2015 knowledge generation \cite{wiedermann2015computation}?
+
+What is the relationship between computation and answering questions?
+
+* Computer, both analog and digital
+** Short partial history of computers
+In 1640, a /computer/ is a human calculator.[fn:eocomputer:https://www.etymonline.com/word/computer]
+In 1897, a computer is a mechanical calculator.[fn:eocomputer]
+In 1945, a computer is an electronic calculator.[fn:eocomputer]
+All those computers ran approximation algorithms to generate look-up tables of values of transcendental functions.
+There are also /analog computers/ made with operational amplifiers[fn::https://en.wikipedia.org/wiki/Operational_amplifier],
+as opposed to /digital computers/ made with logic gates[fn::https://en.wikipedia.org/wiki/Logic_gate].
+
+As we build stronger computers, we begin trying to simulate reality,
+and we wonder whether the Universe is just an extremely powerful computer.
+The world progressed explosively,
+despite being built on increasingly complex computer systems with ever-more undefined behaviors,
+occasionally killing people.
+However, modernization does not change the essence of computation.
+
+In the 1970s, a computer was a desktop computer,
+calculation gained a numerical connotation,
+
+A calculator is a computer specialized for numerical problems.
+and thus calculation is numerical computation.
+In 2019, a human calculator is a human who can mentally manipulate digits quickly and correctly.
+** What is common to all computers?
+It must be computation, right?
+
 Both analog and digital computers compute, but what and how?
 Let us compare an analog adder and a digital adder.
 
@@ -185,108 +348,84 @@ The above equations are /models/ of computation.
 Both analog and digital adder computes addition.
 But the analog one models the addition of two random variables;
 the digital one models the modular addition of natural numbers modulo \(2^n\).
+** Unified theory of analog and digital computers?
+Analog computers are computers too.
+A theory of computation must explain both analog and digital computers.
+The continuous non-symbolic nature of analog computers
+conflicts with the discrete combinatorial nature of logic?
 
-In 1640, a /computer/ is a human calculator.[fn:eocomputer:https://www.etymonline.com/word/computer]
-In 1897, a computer is a mechanical calculator.[fn:eocomputer]
-In 1945, a computer is an electronic calculator.[fn:eocomputer]
-All those computers ran approximation algorithms to generate look-up tables of values of transcendental functions.
-There are also /analog computers/ made with operational amplifiers[fn::https://en.wikipedia.org/wiki/Operational_amplifier],
-as opposed to /digital computers/ made with logic gates[fn::https://en.wikipedia.org/wiki/Logic_gate].
+Example:
+an analog adder computes the weighted average of \(n\) real numbers in constant time and \(O(n)\) space.
+No digital computer can add \(n\) real numbers in constant time!
 
-As we build stronger computers, we begin trying to simulate reality,
-and we wonder whether the Universe is just an extremely powerful computer.
-The world progressed explosively,
-despite being built on increasingly complex computer systems with ever-more undefined behaviors,
-occasionally killing people.
-However, modernization does not change the essence of computation.
+Blum 2004 \cite{blum2004computing}.
 
-In the 1970s, a computer was a desktop computer,
-calculation gained a numerical connotation,
+Blum et al. defines machine model over a /ring/.
+They generalize Turing machine tape cell from bits to ring elements?
 
-A calculator is a computer specialized for numerical problems.
-and thus calculation is numerical computation.
-In 2019, a human calculator is a human who can mentally manipulate digits quickly and correctly.
-** Linguistic analysis of "compute"
-*** The subject and object of "compute" are concrete and abstract, respectively
-The subject of "compute" is a concrete object (with material existence).
-Examples of such subjects are some machines and some animals[fn::Some animals can count, and counting is a computation; thus some animals can compute.
-http://www.bbc.com/future/story/20121128-animals-that-can-count].
+Blum et al. 1989 \cite{blum1989theory}.
 
-The object of "compute" is an abstract object (with no material existence).
-For example, it makes sense to compute a number, but it does not make sense to compute a chair.
-*** Adjectives tell us what about computations?
-Reversible computation relates erasure of information, entropy, and heat.
-"Reversible" implies that there is a forward direction.
+Blum et al. 1998 \cite{blum1998complexity} aims to develop a theory of /real computation/.
 
-Is interactive computation computation[fn::https://en.wikipedia.org/wiki/Interactive_computation]?
+The article \cite{blum2004computing} can serve as an introduction to the book \cite{blum1998complexity}.
 
-Must algorithms describe only terminating computations?
-An operating system describes an interactive computation.
-Computers do not exist in a vacuum.
-Computers interact with reality.
-** A computation does not always end
-A machine "computes \(y\) from \(x\)" iff
-the machine ends with a representation of \(y\) if the machine is started with a representation of \(x\).
-Alas, this definition has two big problems:
-- Must a computation be /started/ by something outside the computer?
-- What is /representation/?
+Blum et al. relates Cook-Levin satisfiability and Hilbert's Nullstellensatz.
+Theorem BSS89: P_R = NP_R iff HN_R in P_R.
+HN_R is Hilbert's Nullstellensatz over ring R.
+** Analog vs digital is continuous vs discrete
+Are the continuous world and the discrete world irreconcilable?
 
-A computation may not end.
-A Turing machine may compute without terminating.[fn::https://math.stackexchange.com/questions/1561293/must-an-algorithm-terminate]
- [fn::"An example of a non-terminating Turing machine program is a program that calculates sequentially each digit of the decimal representation of pi"
- http://www.alanturing.net/turing_archive/pages/reference%20articles/what%20is%20a%20turing%20machine.html]
-For example, a machine may compute 2/3 (whose binary expansion 0.10... does not terminate) by repeatedly printing 10 forever.
+Both analog and digital computers are made with transistors,
+but analog computers operate the transistors outside the saturated region,
+whereas digital computers operate the transistors in the saturated region.
+Analog to digital is knob to switch, that is, continuous to discrete.
+Analog computers use transistors as amplifiers.
+Digital computers use transistors as switches.
 
-(In this document, I always use "may" in the epistemic sense, and never in the deontic sense[fn::https://english.stackexchange.com/questions/189974/why-do-they-say-may-not-for-things-which-people-shouldnt-do].
-Thus "may not" and "does not have to" have the same meaning.)
-** To compute is to do mathematics?
-The way we use the verb "compute" implies that computation is a model of how reality does some mathematics.
+What does digital do better than analog?
+Temperature affects analog computers more than it affects digital computers.
+Digital signals are more immune to noises.
+Digital computers have a wider operating temperature range.
 
-What do we mean by "doing mathematics"?
+What does analog do better than digital?
+Analog computers degrade gracefully: computation gradually gets more and more wrong as the computer goes out of its designed operating conditions.
+Digital computers degrade abruptly: computation suddenly gets chaotic as the computer approaches a limit of its designed operating conditions.
+** Analog computing?
+Where can we find more about analog computing?
+Most computers are digital.
+We need analog computers to define what computation is.
+*** How do we branch on analog computers?
+Conditionals?
 
-Something computes iff we think it does some mathematics.
-/To compute is to do some mathematics./
-Mathematics is not only arithmetics, but also logic, etc.
+Comparator and multiplier?
 
-But what about analog computers, such as an operational amplifier that "adds two real numbers", or "integrate a real function"?
+An analog computing program is a dataflow program?
+The computing primitives are the basic amplifier arrangements?
 
-An analog computer can integrate a real function.
-A digital computer cannot.
+Asynchronous circuits?
+* Computee
+What may be computed?
+** Some sets
+A machine "computes the set \(D\)" iff, for each \(x \in D\), the machine /can/ determine the truth of \(r(x) \in R(D)\),
+where \(r\) is the computation's encoding scheme, and \(R(D) = \{ r(x) ~|~ x \in D \}\).
+** Some sequences
+A machine "computes the (infinite) sequence \(x\)" iff the machine computes every finite prefix of \(x\).
+That means: given ever-longer time to run, the machine computes an ever-longer prefix of the sequence.
+Thus, a computation does not have to end; it may run forever.
+The sequence \(x\) can be identified by the function \(f : \Nat \to A\), in the way \(x_k = f(k)\).
+** Some digits?
+Turing 1937 \cite{turing1937computable} defines a computable number as a number whose digits can be generated by a machine.
+Thus, to compute a number is to compute the sequence of its digits, using an algorithm (a finite description).
+** From nothing?
+A machine that /generates/ a sequence computes something from /nothing/.
+** OS?
+What does an operating system compute?
+** What?
+Does a quantum computation consist of discrete steps?
 
-Are there programmable analog computers?
-
-What does a programmable analog computer look like?
-
-How would analog computers have conditionals, loops, and other constructs?
-** A computation is a discrete model of reality?
-Problem: analog computers invalidate this definition.
-
-Our knowledge of physics is a model of reality.
-
-Computation is a circumstantial/occasional/special discretization of the laws of physics.
-We can model an electronic computer containing 100 bipolar-junction transistors as 300 numbers, each representing voltage at each terminal of each transistor.
-We can also model the same computer as 100 bits.
-
-Computation is a discrete sequential logical model of reality.
-
-A machine simply acts according to the laws of physics, but we interpret some of such acts as a computation.
-This implies that a computation is what we think a physical system does, not what the system actually does.
-Thus, /a computation is a discrete sequential model of what some physical systems do/.
-
-Computation is our way of thinking about what the machine does.
-We invent the concept of computation because we are eager to patterns everywhere.
-Our understanding of computation enables us to manipulate machines into doing what we want.
-
-Computation has no material existence.
-What exist materially are machines acting according to the laws of physics.
-
-A computation is an /explanation/ of what a machine does.
-If machine A computes Y from X, and machine B computes Z from Y,
-then the machine built from those machines computes Z from X.
-
-However, if objective reality exists, then the machine will still compute,
-regardless of whether we exist to describe what the machine does.
-** To compute a function is what?
+Immerman 1999 \cite{Immerman99descriptivecomplexity}, in Definition 2.4 (page 25),
+defines what it means for a Turing machine to compute a query.
+** Some functions
 A machine "computes the function \(f:D\to C\)" iff, for each \(x\in D\), the machine computes \(f(x)\) from \(x\).
 But a mathematical function may be infinite, whereas a machine is finite.
 We often ignore ontology and say that a machine computes the function \(f\) to mean that the machine computes an interesting /finite subfunction/ of \(f\).
@@ -313,66 +452,11 @@ An example of such ellipsis is the triple dots "\(\ldots\)" in \(0,1,2,\ldots\).
 Such ellipsis means "and so on".
 
 See also Rapaport 2005 \cite{rapaport2005philosophy}, section 7.3.1 ("What is a function?") and its descendants, from page 236.
-** What can be computed?
-A machine "computes the set \(D\)" iff, for each \(x \in D\), the machine /can/ determine the truth of \(r(x) \in R(D)\),
-where \(r\) is the computation's encoding scheme, and \(R(D) = \{ r(x) ~|~ x \in D \}\).
-
-A machine "computes the (infinite) sequence \(x\)" iff the machine computes every finite prefix of \(x\).
-That means: given ever-longer time to run, the machine computes an ever-longer prefix of the sequence.
-Thus, a computation does not have to end; it may run forever.
-The sequence \(x\) can be identified by the function \(f : \Nat \to A\), in the way \(x_k = f(k)\).
-
-Turing 1937 \cite{turing1937computable} defines a computable number as a number whose digits can be generated by a machine.
-Thus, to compute a number is to compute the sequence of its digits, using an algorithm (a finite description).
-
-A machine that /generates/ a sequence computes something from /nothing/.
-
-What does an operating system compute?
-
-Piccinini distinguishes abstract computation and concrete computation \cite{sep-computation-physicalsystems}.
-
-Defining computation as the execution of an algorithm raises difficult issues \cite{scheutz2006computation}.
-
-Rapaport's 2005 book \cite{rapaport2005philosophy} deals with things in the layer below the layer we work at.
-
-Does a quantum computation consist of discrete steps?
-
-Immerman 1999 \cite{Immerman99descriptivecomplexity}, in Definition 2.4 (page 25),
-defines what it means for a Turing machine to compute a query.
-** Do not conflate a thing and its representations
-First, we undo the chronic ontologically-sloppy habit of conflating a thing and a representation of the thing.
-"123" is not a number, but a /representation/ of a number.
-We cannot manipulate numbers physically because they do not have material existence.
-We can only manipulate the physical representations of those numbers.
-When we "add two numbers", we are actually manipulating the representations of those numbers in a way that corresponds to adding those numbers.
-Formally, if \(e : \Nat \to \{0,1\}^*\) is an encoding scheme, then
-\( e(x+y) = e(x) +_e e(y) \), where \(+\) is the operation that we think we do, and \(+_e\) is the operation that we actually do.
-We think we are adding numbers, but we are actually writing symbols on paper or juggling symbols in our mind.
-
-Then, we un-conflate a program and a machine running the program.
-A program does not /compute/; it is the machine that computes.
-A program cannot do anything on its own; a machine has to run it.
-When we say "a program computes a function",
-we actually mean that running the program on the machine causes
-the machine to compute that function.
-
-An algorithm describes how to compute something but does not compute what is described,
-because an algorithm is a mathematical object with no material existence.
-An algorithm describing how to calculate a number does not itself calculate the number,
-in the same way a recipe describing how to cook an egg does not itself cook the egg.
-A recipe has no material existence; what has material existence is the physical medium (such as ink and paper)
-that is used to describe that recipe in the symbols we agreed upon.
-
-Unfortunately, the ontologically correct thing is very wordy,
-so I write in conflated manner.
-For example, when I write "this program adds two numbers",
-what I really mean is
-"running the program causes the machine to manipulate two representations in a way that corresponds to adding two numbers".
-Fortunately, the only time we have to care about this ontological issue is when we are talking about the foundations of computation.
-* An algorithm is what?
-** An algorithm is what?
-In 1690, an /algorithm/ is an Arabic system of computation.[fn::https://www.etymonline.com/word/algorithm]
+* Algorithm
+** Some short partial history of algorithms
+In 1690, an /algorithm/ is an Arabic system of computation?[fn::https://www.etymonline.com/word/algorithm]
 It is the historically-and-interculturally mangled name of Muhammad ibn Musa al-Khwarizmi[fn::https://en.wikipedia.org/wiki/Muhammad_ibn_Musa_al-Khwarizmi] who lived in the 8th century.
+** An algorithm is a description of how to compute something
 An /algorithm/ is a finite description of how a computer computes something.
 In the medievals, an algorithm is a numerical approximation scheme to be run by humans.
 Anyone who knows basic arithmetics can mindlessly carry out an algorithm
@@ -406,6 +490,9 @@ Gurevich 2012 \cite{gurevich2012foundational},
 Moschovakis 2001 \cite{moschovakis2001algorithm}.
 See also Japaridze's computability logic[fn::https://en.wikipedia.org/wiki/Computability_logic][fn::http://www.csc.villanova.edu/~japaridz/CL/].
 It is a game-theoretic model of computation.
+
+A finite description may describe an infinite (non-terminating) computation.
+* Algorithm and problem
 ** Algorithm is how, problem is what
 An algorithm describes /how/ to compute something.
 
@@ -417,61 +504,29 @@ If algorithm A describes how to compute C, and machine M implements algorithm A,
 then machine M computes C.
 
 Are there undescribable computations?
-* Computation theory is what?
-Computation theory spans philosophy, physics, and mathematics.
-The mathematics part[fn::https://en.wikipedia.org/wiki/Theory_of_computation] studies logical models of computation, not computation itself.
-Which part of computation theory are we interested in?
-This document is mostly the mathematics part, because there is a one-million-dollar prize for solving the P vs NP problem.
-See Piccinini 2017 \cite{sep-computation-physicalsystems} if you are interested in the philosophy and physics parts.
+* Program
+* Software
+Software is everything that is not hardware.
 
-1999 Immerman \cite{Immerman99descriptivecomplexity},
-2009 Arora & Barak \cite{Arora2009},
-2009 Marek & Remmel \cite{Marek2009},
-2002 Boolos, Burgess, & Jeffrey \cite{Boolos2002},
-1987 Rogers \cite{Rogers1987}.
-
-Where are the researchers?
-There is ACM Special Interest Group on Logic and Computation (SIGLOG)[fn::https://siglog.acm.org/about/].
-There is also Computational Complexity Conference[fn::http://www.computationalcomplexity.org/].
-
-We can think of computation theory as refining these hierarchies:
-automaton power hierarchy[fn::https://en.wikipedia.org/wiki/Automata_theory],
-problem complexity hierarchy,
-logic strength hierarchy,
-Chomsky language hierarchy[fn::https://en.wikipedia.org/wiki/Chomsky_hierarchy],
-arithmetical hierarchy[fn::https://en.wikipedia.org/wiki/Arithmetical_hierarchy],
-formal system power hierarchy[fn::https://en.wikipedia.org/wiki/Reverse_mathematics#The_big_five_subsystems_of_second-order_arithmetic],
-and so on.
-They are related to each other.
-We want to find out which feature gives which power.
-
-What is the difference between descriptive complexity theory and implicit complexity theory[fn::http://www.cs.unibo.it/~martini/BISS/martini-1.pdf]?
-* Computer science is what?
-Rapaport 2005 \cite{rapaport2005philosophy} surveys various definitions and their problems.
-It summarizes the discussion in page 154 (3.15.4 Conclusion).
-
-Computer science[fn::https://en.wikipedia.org/w/index.php?title=Computer_science&oldid=875563283#Etymology]
-is not science (the application of the scientific method to make falsifiable theories).
-
-Scott Schneider defines "computer science" as "everything to do with computation, both in the abstract and in the implementation".
- [fn::http://www.scott-a-s.com/cs-is-not-math/]
-
-Is CS a branch of math?
- [fn::https://math.stackexchange.com/questions/649408/is-computer-science-a-branch-of-mathematics]
-
-If science is a Latinate synonym of the Germanic "knowledge", then computer science is a synonym of "computer knowledge".
-* The mathematics part
-There are many computation models[fn::https://en.wikipedia.org/wiki/Model_of_computation].
+Hardware has material existence.
+* Machine
+** Tacit assumptions about operating conditions
+There are many machine models[fn::https://en.wikipedia.org/wiki/Model_of_computation].
 All of them imply some /operating conditions/:
-there are no electrical disruptions, fires, cosmic rays, and so on.
-All of them also imply a sequence of operations.
+no electrical disruptions, fires, cosmic rays, and so on.
+All of them also imply a /sequence/ of operations.
+** Machine model
+A /machine model/ is a formal system that represents the relevant aspects of the internal states of a computing machine.
+** Machine model vs computation model?
+"Computation model" or "machine model"?
 
-We often assume that the computation model is a Turing machine.
-But, ontologically, a Turing machine is a computation model, not a machine,
-and thus should be called a Turing model.
+Do we care about the machine or the computation done by the machine?
 
-A /computation model/ is a formal system that represents the relevant aspects of the internal states of a computing machine.
+Do we care about what a machine /is/ or what a machine /does/?
 
+The Turing model represents what a machine is, not what a machine does.
+* Mathematical models of computation
+** Computing a function with respect to a model
 Now we define "to compute the function \(f : D \to C\)" with respect to the computation model \((D,C,S,d,c,t)\) where
 \(d : D \to S\), and
 \(c : C \to S\), and
@@ -532,48 +587,6 @@ These examples suggest that we can define computation as a /sequence/ of steps.
 Each of those models is a special case of deciders.
 ** Logic, model
 See [[file:logic.html]].
-** Problem, formula, input, output, model, relation
-"Problem" comes from Greek "problema" which means "a task, that which is proposed, a question".[fn::https://www.etymonline.com/word/problem]
-Therefore, a problem /is/ a question, or, formally, a /logical formula/.
-
-/A problem is a formula./
-For example, the problem "Given an \(x\), what is \(x+x\)?" is the formula
-\( x+x = y \) in first-order logic with equality and some arithmetics.
-Note that some logic is embedded in English.[fn::English is at least second-order, as demonstrated by the Geach--Kaplan sentence "Some critics admire only one another" https://en.wikipedia.org/wiki/Nonfirstorderizability].
-
-#+CAPTION: Some common problem shapes
-| name             | shape          | input | output |
-|------------------+----------------+-------+--------|
-| decision problem | \( p(x) \)     | \(x\) |        |
-| search problem   | \( p(x) \)     |       | \(x\)  |
-| function problem | \( f(x) = y \) | \(x\) | \(y\)  |
-
-A problem may have /inputs/ and /outputs/.
-An /input/ of a problem is a free variable in the formula.
-An /output/ of a problem is a free variable in the formula.
-
-Another example: the problem "Is the sum of two even numbers even?" is the formula \( E(x) \wedge E(y) \to E(x+y) \).
-
-What does it mean to solve a problem (answer a question)?
-Solving a problem is answering a question.
-Answering a question corresponds to /proving a formula/.
-Answering a question corresponds to /finding a model/ of a formula?
-
-A /problem/ may be /modeled/ by a /relation/ between questions and answers.
-For example, the problem \( \forall x \exists y : x+x = y \)
-is modeled by the relation \( \{ (0,0), (1,2), (2,4), \ldots \} \)
-and is also modeled by the relation \( \{ (\epsilon,\epsilon), (1,11), (11,1111), \ldots \} \).
-
-Do not conflate a problem and a model of it.
-A problem is a formula, /not/ a relation.
-
-Compare various definitions of "problem"
- [fn::https://en.wikipedia.org/wiki/Computational_complexity_theory]
- [fn::https://plato.stanford.edu/entries/computational-complexity/].
-
-A problem is \cite{sep-computational-complexity}
-
-Problem can be /composed/ as formulas can be composed.
 ** Complexity
 The worst-case time complexity[fn::https://en.wikipedia.org/wiki/Worst-case_complexity]
 of machine $m$ for input $x$ is $t(m,x)$,
@@ -616,8 +629,6 @@ where $c$ is a configuration,
 $l$ is the tape content to the left of the head,
 $h$ is the tape content at the head,
 and $r$ is the tape content to the right of the head.
-** Problem, reduction
-Sometimes we can /reduce/ a problem into another problem?
 ** Digressions
 *** Pullback
 We can model the apparent function computed by the machine as \(g : A^* \to A^*\) where \(g(e(x)) = e(f(x))\).
@@ -631,69 +642,54 @@ We then do some algebraic manipulation:
 An equation of the shape \(g \circ e \equiv e \circ f\) is a special case of pullbacks[fn::https://en.wikipedia.org/wiki/Pullback_(category_theory)] in category theory.
 *** Cheating
 "Cheating" with an unreasonable encoding is a common error in P vs NP "proofs".
-** Encoding affects complexity
-Encoding a natural number \(n\) in unary notation takes \(n\) symbols.
-Encoding the same number in binary notation takes approximately \(\log_2(n)\) symbols.
-
-Adding two natural numbers \(m\) and \(n\) takes \(m+n\) steps in unary notation,
-but only approximately \(\log(\max(m,n))\) steps in positional notation.
-
-Why don't encode a number as its prime factorization,
-to simplify multiplication while complicating addition?
-
-What do we formally mean by "reasonable encoding"?
-
-Why do we assume that numbers are encoded in positional notation[fn::https://en.wikipedia.org/wiki/Positional_notation], not unary notation[fn::https://en.wikipedia.org/wiki/Unary_numeral_system]?
-
-My guess:
-What we mean by reasonable encoding is an /order-preserving homomorphism/:
-\begin{align*}
-a < b &\iff e(a) <_e e(b)
-\\
-a = b &\iff e(a) = e(b)
-\end{align*}
-
-A homomorphism preserves structure.
-But which structure?
-
-We may encode the natural numbers as the bitwise-negation of the base-2 representation: 1, 0, 11, 10, 01, 00, etc.
-** What makes an encoding reasonable?
-A /reasonable encoding/ is an encoding that is easy to compute and is easy to invert.
-
-A reasonable encoding has a finite description.
 ** Rant: The sad state of computational complexity texts?
 It is philosophically appaling that most computational complexity texts readily show what a problem is /represented/ as,
 but never clearly and /formally define/ what a problem /is/.
 It is appaling that they spend hundreds of pages discussing something undefined.
-* Analog computing?
-Where can we find more about analog computing?
-Most computers are digital.
-We need analog computers to define what computation is.
-** How do we branch on analog computers?
-Conditionals?
+* Fields of study
+** Computation theory
+Computation theory spans philosophy, physics, and mathematics.
+The mathematics part[fn::https://en.wikipedia.org/wiki/Theory_of_computation] studies logical models of computation, not computation itself.
+Which part of computation theory are we interested in?
+This document is mostly the mathematics part, because there is a one-million-dollar prize for solving the P vs NP problem.
+See Piccinini 2017 \cite{sep-computation-physicalsystems} if you are interested in the philosophy and physics parts.
 
-Comparator and multiplier?
+1999 Immerman \cite{Immerman99descriptivecomplexity},
+2009 Arora & Barak \cite{Arora2009},
+2009 Marek & Remmel \cite{Marek2009},
+2002 Boolos, Burgess, & Jeffrey \cite{Boolos2002},
+1987 Rogers \cite{Rogers1987}.
 
-An analog computing program is a dataflow program?
-The computing primitives are the basic amplifier arrangements?
+Where are the researchers?
+There is ACM Special Interest Group on Logic and Computation (SIGLOG)[fn::https://siglog.acm.org/about/].
+There is also Computational Complexity Conference[fn::http://www.computationalcomplexity.org/].
 
-Asynchronous circuits?
-** The difference between analog and digital is what?
-Both analog and digital computers are made with transistors,
-but analog computers operate the transistors outside the saturated region,
-whereas digital computers operate the transistors in the saturated region.
-Analog to digital is knob to switch, that is, continuous to discrete.
-Analog computers use transistors as amplifiers.
-Digital computers use transistors as switches.
+We can think of computation theory as refining these hierarchies:
+automaton power hierarchy[fn::https://en.wikipedia.org/wiki/Automata_theory],
+problem complexity hierarchy,
+logic strength hierarchy,
+Chomsky language hierarchy[fn::https://en.wikipedia.org/wiki/Chomsky_hierarchy],
+arithmetical hierarchy[fn::https://en.wikipedia.org/wiki/Arithmetical_hierarchy],
+formal system power hierarchy[fn::https://en.wikipedia.org/wiki/Reverse_mathematics#The_big_five_subsystems_of_second-order_arithmetic],
+and so on.
+They are related to each other.
+We want to find out which feature gives which power.
 
-What does digital do better than analog?
-Temperature affects analog computers more than it affects digital computers.
-Digital signals are more immune to noises.
-Digital computers have a wider operating temperature range.
+What is the difference between descriptive complexity theory and implicit complexity theory[fn::http://www.cs.unibo.it/~martini/BISS/martini-1.pdf]?
+** Computer science
+Rapaport 2005 \cite{rapaport2005philosophy} surveys various definitions and their problems.
+It summarizes the discussion in page 154 (3.15.4 Conclusion).
 
-What does analog do better than digital?
-Analog computers degrade gracefully: computation gradually gets more and more wrong as the computer goes out of its designed operating conditions.
-Digital computers degrade abruptly: computation suddenly gets chaotic as the computer approaches a limit of its designed operating conditions.
+Computer science[fn::https://en.wikipedia.org/w/index.php?title=Computer_science&oldid=875563283#Etymology]
+is not science (the application of the scientific method to make falsifiable theories).
+
+Scott Schneider defines "computer science" as "everything to do with computation, both in the abstract and in the implementation".
+ [fn::http://www.scott-a-s.com/cs-is-not-math/]
+
+Is CS a branch of math?
+ [fn::https://math.stackexchange.com/questions/649408/is-computer-science-a-branch-of-mathematics]
+
+If science is a Latinate synonym of the Germanic "knowledge", then computer science is a synonym of "computer knowledge".
 * Digressions
 ** The suffix -er works with all verbs except modals
 The suffix -er works with both both [[https://en.wikipedia.org/wiki/List_of_Germanic_and_Latinate_equivalents_in_English][Germanic and Latinate]] verbs.
@@ -752,10 +748,8 @@ Process? Activity? Mechanism?
 A program describes the computation performed by a machine.
 A program modulates the machine.
 Manipulates computational resources to compute something.
-** Computation as information transformation
-Computation is answering a question.
-
-What is the relationship between computation and answering questions?
+** Computation as information transformation?
+What is information?
 
 A computer reduces information?
 Transforms information?
@@ -767,8 +761,6 @@ Computation is running a program on a machine.
 It seems that the defining feature of computation is conditional and repetition.
 
 Program is a model.
-** Diving into philosophy of computation
-Ian Horswill wrote an introductory article "What is computation?"[fn::http://www.cs.northwestern.edu/~ian/What%20is%20computation.pdf].
 ** A machine is what?
 A /machine/ is a tool that /computes/ what the machine is designed for.
 A machine has material existence.
@@ -825,3 +817,138 @@ then what/where is the god in Cantor's paradise?
 ** Computation and reckoning are the same?
 The Germanic English of "compute" is "reckon" (German rechnen, Dutch rekenen).
 Thus computation is reckoning.
+** Philosophy of language?
+*** How do we answer "What is something?"
+It is difficult.
+Consider this example:
+What is an elephant?
+There are several possible answers:
+- An elephant E is an individual whose genetic code makes it belong to a species of the Elephantidae family, such that E can mate with other members of the species and produce fertile offsprings. But this begets another question: what is a member of the Elephantidae family?
+- An elephant is a big gray mammal with proboscis.
+But those are what /we think/ an elephant is, not what an elephant is.
+What is the essence of an elephant?
+What is true of elephants regardless whether there were humans to describe elephants?
+An individual's genes determine whether it is an elephant, but the genes themselves are not the elephant.
+
+We often conflate a thing and its representations.
+For example, in everyday conversation, we call a drawing of an elephant an "elephant", and we call an elephant statue an "elephant".
+Ontologically, they are a drawing and a statue, and not an elephant.
+But calling them "drawing" and "statue" is considered uninformative.
+Therefore, the semantics of language depends on context.
+
+Of these two conversations,
+the first one is practically correct but ontologically wrong,
+and the second one is practically wrong but ontologically correct.
+- "What is this?" "An elephant."
+- "What is this?" "A drawing." "I know. A drawing of what?" "An elephant."
+
+The practically correct conversation is the one that conveys the most information.
+If something has higher computational complexity, then it has more information?
+It is harder to see that the drawing is of an elephant than it is to see that the drawing is a drawing.
+
+Suppose that I draw an elephant on a sheet of paper.
+Is it a sheet of paper, is it a drawing, or is it an elephant?
+
+Kurzgesagt has a video[fn::Kurzgesagt: What is something?https://www.youtube.com/watch?v=X9otDixAtFw] that discusses "What is something" from physics point of view.
+*** Concrete and abstract objects?
+Concrete objects exist in material space.
+Abstract objects exist in ideal space.
+The mind manipulates abstract objects.
+The hand manipulates concrete objects.
+But those definitions have problems with dreaming, hallucination, imagination.
+If I imagine myself holding a box, is that box a concrete object?
+No.
+That box exists only in my imagination.
+
+Concrete objects are real?
+Abstract objects are not real?
+But how can something unreal be true?
+
+Abstract vs concrete objects \cite{sep-abstract-objects}.
+** What?
+*** Computing theory
+**** What is the relationship between P and NP?
+What is the [[file:pnptry.html][relationship between P and NP]]?
+We are trying to understand the P vs NP problem,
+which requires computation, [[file:model.html][model]], and [[file:logic.html][logic]].
+We were motivated by the prize money[fn::one million US dollars http://www.claymath.org/millennium-problems/millennium-prize-problems], but our chances seem slim.
+**** Should we merge approximation theory and propositional calculus?
+Why do we want that?
+
+Boolean metric spaces merge logic and analysis?
+How do we define a sensible approximation error?
+How do we define the /distance/ between two formulas?
+The formula \( p \wedge q \) /approximates/ the formula \( p \wedge q \wedge r \).
+What is the approximation /error/?
+
+What are these papers?
+ [fn::https://arxiv.org/abs/0903.2567]
+ [fn::https://www.um.es/beca/papers/Aviles-Algebras.pdf]
+*** How should we make an intelligent machines?
+I am looking for an AI that helps me process data into information.
+Thus I write [[file:intelligence.html][Making intelligence]] and
+[[file:endo.html][The endofunction model of worlds and agents, and its philosophical implications]].
+But I think my chances are slim.
+*** What is a model?
+What is a [[file:model.html][model]]?
+
+*** When should we care about a philosophically sound foundation of mathematics?
+Math seems to work just fine even if it isn't philosophically justified.
+Why should we care about finitism?
+
+I am [[file:finite.html][looking for a philosophically sound foundation of mathematics]].
+It may be finitism.
+** The meaning of the English suffixes -er and -ion
+*** The English suffix -er means one who does
+Appending -er to a verb V forms the noun Ver which means "a /person/ who does V",
+which we often stretch to mean "a /thing/ that does V".
+*** The English suffix -ion nominalizes Latinate verbs
+Nominalization turns a word into a noun.[fn::https://en.wikipedia.org/wiki/Nominalization]
+
+"Computation" comes from "compute" and "-ation".
+
+The suffix -ation comes from -ate + -ion.[fn::https://www.etymonline.com/word/-ation]
+Appending -ion to a Latinate verb Vate forms the noun Vation.
+
+For example, an explosion is an action, but not a process, and not a condition, and not a state.
+However, an explosion looks fast because we are humans and we are relatively stationary to the explosion;
+it would look slow if we were traveling near the speed of light with respect to the explosion.
+
+A process is an action that takes some time?
+
+Computation is a process.
+This is supported by the usage "this computation does not terminate",
+the usage "this computation produces 123",
+and the non-usage "this computation is 123".
+
+The sentence S V O translates to the logic formula V(S,O).
+Example: "John eats bread" translates to "eat(John,bread)", or, "john(x), bread(y), eat(x,y)".
+
+S V O = S does NV to O, where NV is the nominalized V.
+Examples.
+He is renovating (renewing) his house = he is doing a renovation to his house.
+He is manducating the food = he is doing a manducation to the food.
+He is computing the number = he is doing a computation to the number?
+How can we do something to an abstract thing with no material existence?
+
+NV is P = S VP iff S V.
+Stealing is bad = S steals iff S is bad.
+Stealing is taking others' belongings without their permission = S steals iff S takes others' belongings without their permission.
+
+\cite{hamm2013formal}.
+\cite{zucchi2013language} paywall.
+** What
+Defining computation as the execution of an algorithm raises difficult issues \cite{scheutz2006computation}.
+
+Rapaport's 2005 book \cite{rapaport2005philosophy} deals with things in the layer below the layer we work at.
+* Concordances
+** Piccinini 2017 "Computation in physical systems"
+Piccinini 2017 \cite{sep-computation-physicalsystems} distinguishes between "concrete computation" and "abstract computation".
+We use "computation" to mean his "concrete computation"
+and "computation model" to mean his "abstract computation".
+
+We say that an algorithm /describes/, not computes.
+"An algorithm computes" is a category error.
+
+We say "Turing model", not "Turing machine", because it is a mathematical model, not a concrete machine that has material existence.
+* Bibliography

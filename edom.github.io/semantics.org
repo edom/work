@@ -1,0 +1,398 @@
+#+TITLE: Semantics Research Group
+#+DATE: 2019-02-10 00:00:00 +0700
+#+PERMALINK: /semantics.html
+#+MATHJAX: true
+#+OPTIONS: ^:nil
+* What
+The semantics of a statement in an imperative language is usually an endofunction whose domain is the set of all possible world states.
+
+The semantics of untyped lambda calculus involves domain theory?
+So does the semantics of functional languages?
+
+The semantics of logic languages involves model theory?
+
+Lloyd 1993 \cite{lloyd1993foundations}: declarative semantics and operational semantics of Prolog.
+
+What is this "stable model semantics" thing?
+https://arxiv.org/abs/cs/0312028
+
+Is there a declarative language that unifies domain theory and model theory?
+* Examples?
+The semantics of a program \(\Gamma \vdash P\) is whether \(\Gamma\) proves \(P\)?
+
+https://en.wikipedia.org/wiki/First-order_logic#Semantics
+
+Slide 31: difference between imperative, functional, and declarative[fn::https://www.comp.nus.edu.sg/~kanmy/courses/3243_2005/lectureNotes/w8-all.pdf].
+Thus, ordered by declarativeness, Scheme < Haskell < Prolog.
+But what about Scheme macros?
+
+What?
+https://www.researchgate.net/publication/2763490_A_Denotational_Semantics_for_Prolog
+
+Toy example: first-order logic language?
+
+#+BEGIN_EXAMPLE
+(#with
+  [
+    (lt a b)
+    (lt b c)
+    (lt c d)
+    (#forall [a b]
+      (#horn (lt a b)
+        (#exists [c] (#and (lt a c) (lt c b)))))
+  ]
+  (#exists [x y] (lt x y)))
+#+END_EXAMPLE
+* Semantics?
+Mechanized semantics
+https://hal.inria.fr/inria-00529848/document
+
+* A set-theoretic programming language?
+(A mess. Do not see.)
+
+Titles?
+- Lambda-calculus with functors and monads
+- Lambda-calculus with built-in functors and monads
+- Restricted set theory instead of type theory?
+
+To-do:
+- How is this language better than Haskell?
+- How is this language worse than Haskell?
+- Proof-of-concept implementation (interpreter from the semantic equations)
+
+The key idea is to involve functors and monads in the denotational semantics of the language.
+
+The type theory is a restricted set theory whose membership-check is practical.
+
+We define a programming language.
+The idea seems very similar to SETL[fn::https://en.wikipedia.org/wiki/SETL][fn::https://en.wikipedia.org/wiki/Set_theoretic_programming].
+
+We begin with lambda calculus, and we add strings, sets, sequences, and builtins.
+
+TODO switch to logical structure formalism \((D,I,f_1^{m_1},\ldots,R_1^{n_1},\ldots)\)?
+** The universe of values, the domain of discourse
+The universe (the domain of discourse) is \(D\).
+- If \(x\) is a string, then \(x \in D\).
+- If \(x\) is a set, then \(x \in D\).
+- If \(x\) is a sequence, then \(x \in D\).
+
+A relation is a sequence (domain,codomain,subset) of length three.
+A lambda abstraction expression is an expression, not a function.
+
+Some axioms:
+\begin{align*}
+\forall A \quad D \cup A = D
+\end{align*}
+
+\(
+\newcommand\semantics[1]{\langle #1 \rangle}
+\newcommand\bigsemantics[1]{S\left(#1\right)}
+\newcommand\universe{\Omega}
+\)
+** The abstract syntax and semantics
+*** Summary of the semantics of the programming language's abstract syntax
+Notations:
+\begin{align*}
+F(X,Y) &= (F(X))(Y) & \text{currying}
+\\ A \to B \to C &= A \to (B \to C)
+\\ [D,C,F]x &= y \text{ such that } (x,y) \in F & \text{function application}
+\\ B[P := X] &= \text{\(B\) with each free \(P\) replaced with \(X\)} & \text{substitution}
+\end{align*}
+
+Laws:
+\begin{align*}
+\\ (A \cup B) \cup C &= A \cup (B \cup C) & \text{associativity of set union}
+\\ (A \times B) \times C &= A \times (B \times C) & \text{associativity of Cartesian product}
+\\ \universe \to \universe &\subset \universe
+\end{align*}
+
+The trivial stuffs:
+\begin{align*}
+\semantics{\{\}} &= \{\} & \text{empty set}
+\\ \semantics{\universe} &= \universe & \text{universe}
+\\ \semantics{\{A\}} &= \{ \semantics{A} \} & \text{singleton set}
+\\ \semantics{A \cup B} &= \semantics{A} \cup \semantics{B} & \text{set union}
+\\ \semantics{A \times B} &= \semantics{A} \times \semantics{B} & \text{Cartesian product}
+\\ \semantics{[]} &= [] & \text{empty sequence}
+\\ \semantics{[A]} &= [\semantics{A}] & \text{singleton sequence}
+\\ \semantics{cons(A,B)} &= cons(\semantics{A},\semantics{B}) & \text{sequence construction}
+\\ \semantics{uncons(F,G,L)} &= uncons(\semantics{F},\semantics{G},\semantics{L}) & \text{sequence deconstruction}
+\\ \semantics{concat(A,B)} &= concat(\semantics{A},\semantics{B}) & \text{sequence concatenation}
+\\ \semantics{N} &= parsenumeral(N) & \text{numeral (numeric literal)}
+\end{align*}
+
+Lambda-calculus semantics:
+\begin{align*}
+\semantics{P \mapsto B} &= [\universe,\universe,\{(x,\semantics{B[P:=x]}) ~|~ x \in \universe \}] & \text{lambda abstraction}
+\\ \semantics{F(X)} &= (\semantics{F})(\semantics{X}) & \text{function application}
+\end{align*}
+
+Function spaces:
+\begin{align*}
+\semantics{A \to B} &= \{ [\semantics{A},\semantics{B},F] ~|~ F \subseteq \semantics{A} \times \semantics{B}, ~ F \text{ is functional} \}
+\\ F \text{ is functional} &\equiv \forall x \forall y \forall z (F(x,y) \wedge F(x,z) \to y=z)
+\end{align*}
+
+We extend the notion of "application" from functions to also include functors, in the type level.
+If \(f : A \to B\), \(x : F(A)\), and \(F = functor(M,m)\), then \(x : M(A)\) and \( \semantics{f(x)} = \semantics{m(f,x)} \).
+
+The expression \(x:T\) is the same as \(x\) but also asserts \(x \in T\) to the domain-checker.
+
+A /triple/ is \((D,C,S)\).
+Such triple can be thought as a relaxed/generalized/improper /relation/.
+If \(S\) is functional, then the triple is a function.
+Such function is /partial/ iff \(\exists x \exists y : D(x) \wedge \neg S(x,y)\).
+Such function is /deceptive/ iff \(\exists x \exists y : \neg C(y) \wedge S(x,y)\).
+\begin{align*}
+\exists x \in D (\neg \exists y S(x,y)) && \text{partial}
+\\ \exists y \not \in C (\exists x S(x,y)) && \text{deceptive}
+\\ \exists x \not \in D (\exists y S(x,y)) && \text{superfluous}
+\end{align*}
+A superfluous function has unnecessary mapping.
+
+If each of \(D,C,S\) is finite, it is straightforward to check a function application.
+
+#+BEGIN_EXAMPLE
+extend [D, Maybe C, F] = [
+    Maybe D,
+    Maybe C,
+    F \union { [Nothing, Nothing] }
+]
+
+extend [D, Risky E C, F] = [
+    Risky E D,
+    Risky E C,
+    F \union { [Left, e] | e \in E }
+]
+#+END_EXAMPLE
+
+We replace subtyping with subsetting.
+
+Because \(A \subseteq Maybe(A)\), each element of \(A\) can be passed to a function whose domain is \(Maybe(A)\).
+
+Superfluous functions are harmless if we do domain check at each function application.
+
+In this programming language, every functor is an endofunctor of Set.
+Such functor is \((F,m)\) where \(F : Set \to Set\) and \(m : \forall A \forall B . (A \to B) \to (FA \to FB)\) such that
+\(m(id) = id\) and \(m(f \circ g) = m(f) \circ m(g)\).[fn::https://en.wikipedia.org/wiki/Functor]
+
+In this programming language, two endofunctors \(F\) and \(G\) are /adjoint/ iff
+there is an isomorphism (bijection) between \(FY \to X\) and \(Y \to GX\), for all two sets \(X,Y\).
+It seems that adjunctions don't work with endofunctors:
+we would have to find mutually inverse functions
+\(p : \forall X \forall Y . FY \to X\) and \(q : \forall X \forall Y . Y \to GX\).
+
+A /natural transformation from endofunctor \(F\) to endofunctor \(G\)/ is a function \(\eta : \Pi \alpha . F(\alpha) \to G(\alpha)\) such that
+\(\eta(Y) \circ \mu_F(f) = \mu_G(f) \circ \eta(X)\) for every \(f : A \to B\).
+An example is \( \eta(a) : risky(e,a) \to maybe(a) \).
+What?[fn::https://en.wikipedia.org/wiki/Natural_transformation]
+
+#+BEGIN_EXAMPLE
+class (Functor f, Functor g) => NaturalTransformation f g where
+    eta :: f a -> g a -- where eta . fmap f = fmap f . eta
+
+class NatTrans f g where
+    eta :: f -> g
+
+instance NaturalTransformation Identity Maybe where
+    eta (Identity x) = Just x
+
+instance NaturalTransformation (Either e) Maybe where
+    eta (Left _) = Nothing
+    eta (Right x) = Just x
+
+instance (Monoid e) => NaturalTransformation Maybe (Either e) where
+    eta (Just x) = Right x
+    eta Nothing = mempty
+#+END_EXAMPLE
+
+A monad is \((F,m)\) where \(FFX = FX\).
+An example monad is \(F(X) = 2^X\) (power set-ing).
+*** What?
+We write \(M(A)\) or \(MA\) to mean "the meaning of \(A\)".
+\(M\) is not a function; it is just a notation.
+The meaning depends on context.
+The context contains name bindings.
+*** Literal expressions
+The /universe literal expression/ ~\universe~ means \(D\).
+
+A /string literal expression/ ~\string what~ means =what= itself.
+*** Lambda expressions
+A /lambda abstraction expression/ ~\lambda a b~ means a subset of \(D \times D\) according to beta-reduction.
+Thus, if \(L\) is such expression, then \(M(L)\) is not a function, but \((A,B,M(L))\) is a function if it domain-checks.
+
+An /application expression/ =\app f x= means \((Mf)(Mx)\).
+Every application expression is /domain-checked/.
+\(Mf\) has to be a function (a triple).
+
+A /substituting expression/ =\subst name= means the meaning of that name as bound by the nearest lambda abstraction that bounds that name.
+*** Set expressions
+A /set expression/ =\set a b c ...= means the set \(\{M(a),M(b),M(c),\ldots\}\).
+
+A /set union expression/ =\union A B ...= means \(M(A) \cup M(B) \cup \ldots\).
+
+A /Cartesian product expression/ =\times A B ...= means \(M(A) \times M(B) \times \ldots\).
+*** Sequence expressions
+A /sequence expression/ =\seq a b c ...= means \([M(a),M(b),M(c),\ldots]\).
+
+A /sequence concatenation expression/ =\concat a b c ...= means \(M(a)+M(b)+M(c)+\ldots\) where \(+\) is sequence concatenation.
+
+A /sequence projection expression/ =\project n s= means \(\pi_n M(s)\) (the \(n\)th component of \(M(s)\)) where \(n\) starts from one.
+*** Logical expressions
+=\member=
+
+=\and=
+
+=\or=
+*** Builtins
+=\println= for testing purposes only.
+
+=\procedural= executes sequentially.
+
+#+BEGIN_EXAMPLE
+(\procedural
+  (\println 1)
+  (\println [2 3 4])
+  (\println {5 6 7})
+)
+#+END_EXAMPLE
+** The concrete syntax
+Convenience concrete syntax:
+- ~\let name = what in exp~ means ~(\ name -> exp) what~
+- =\with= means chained =\let=
+** Motivation: Monads in set-theoretic lambda-calculus?
+We want \(Maybe(A) = A \cup \{Nothing\}\) for each set \(A\).
+It follows from that definition that:
+\begin{align*}
+A &\subseteq Maybe(A)
+\\ Maybe(Maybe(A)) &= Maybe(A)
+\end{align*}
+
+We want \(Risky(A,B) = \{ (Fail,a) ~|~ a \in A \} \cup B\) for each set \(A\) and each set \(B\).
+It follows from that definition that:
+\begin{align*}
+B &\subseteq Risky(A,B)
+\\ Risky(A,Risky(A,B)) &= Risky(A,B)
+\end{align*}
+
+Thus \(Maybe : D \to D\) and \(Risky : D \to D \to D\).
+
+Risky is similar to Haskell Either, but the name "Risky" makes it clear that the parameters are not interchangeable.
+
+#+BEGIN_EXAMPLE
+(\with
+  ( A {0 1}
+    B {0 1}
+    Maybe [\universe \universe (\ a (\union $a {Nothing}))]
+    F [$A $B {[0 1] [1 0]}]
+    G [($Maybe $A)
+      (\union $B {none})
+      (\union (\mapping $F) {[Nothing none]})]
+  )
+  (\and ($F 0 1) ($F 1 0))
+)
+#+END_EXAMPLE
+
+A /relation/ is a triple \((A,B,R)\) where \(R \subseteq A \times B\).
+We write \(R(x,y)\) to mean \((x,y) \in R\).
+
+\((A,B,R)\) is a /subrelation/ of \((A',B',R')\) iff \(A \subseteq A'\), \(B \subseteq B'\), \(R \subseteq R'\), and \(R' \subseteq A' \times B'\).
+
+A /monad/ (in the category of sets) is \((M,r,j)\) where
+\(M : \Omega \to \Omega\),
+\(r : \forall A . A \to M(A)\),
+\(\forall X : M(M(X)) = M(X)\).
+
+A monad maps each relation \((A,B,R)\) to \((MA,MB,LR)\) where
+\(A \subseteq MA\), \(R \subseteq LR\), \(p : A \to MA\), \(j : MMA \to MA\).
+
+If a hole expects an element of \(A\), then it accepts an element of \(A' \subseteq A\).
+
+Abdullah's law of continuity:
+#+BEGIN_EXAMPLE
+extend return = id
+
+extend : (a -> m b) -> (m a -> m b)
+return :          a -> m a
+id     :        m a -> m a
+#+END_EXAMPLE
+
+* Three semantics of Horn clauses?
+We use "cause semantics" for gui.
+
+Rule semantics
+A :- B means "If B then A".
+
+turn_on_air_conditioner :- air_feels_hot.
+
+Proof semantics of Prolog
+A :- B means to prove A, prove B.
+even(z).
+even(s(s(N))) :- even(N).
+
+Cause semantics of Prolog
+A :- B means B causes A.
+name_value(mytextbox, yes) :- name_isdown(mybutton, true).
+That means "pressing mybutton causes mytextbox value to be yes".
+
+* Semantics (should we worry about this earlier?)
+
+** Cost model
+
+- "Cost models based on the lambda-calculus", [[http://www.cs.cmu.edu/~guyb/papers/lambdaInria.pdf][pdf slides]], from http://www.cs.cmu.edu/~guyb/
+
+** Denotational semantics
+
+*** Intro to denotational semantics
+
+- 1971, monograph, Dana Scott and Christopher Strachey, "Toward a mathematical semantics for computer languages", [[https://www.cs.ox.ac.uk/files/3228/PRG06.pdf][pdf]]
+- [[https://pdfs.semanticscholar.org/presentation/76cd/955ec6dafde3699d64e50882ec7fb4384803.pdf][pdf slides]]
+- [[https://www.seas.harvard.edu/courses/cs152/2016sp/sections/sec-2016-02-18-soln.pdf][Exercises]] about denotational semantics and lambda calculus
+- 1997, book, "Denotational semantics: a methodology for language development", [[http://www.bcl.hamilton.ie/~barak/teach/F2008/NUIM/CS424/texts/ds.pdf][pdf]]
+- 1989, PhD thesis, Frank Steven Kent Silbermann, "A Denotational Semantics Approach to Functional and Logic Programming", chapter 3, [[http://www.cs.unc.edu/techreports/89-030.pdf][pdf]]
+  - "A novel approach is taken in constructing an operational semantics directly from the denotational description."
+
+*** TODO Does lambda calculus have a semantics that doesn't depend on reduction strategy?
+
+** Operational semantics and evaluation/reduction strategy
+
+Which one should we choose, and why?
+
+- call-by-name
+- call-by-value
+- call-by-need
+- what else?
+
+<2018-09-29> Wikipedia needs cleanup:
+
+- https://en.wikipedia.org/wiki/Reduction_strategy_(lambda_calculus)
+- https://en.wikipedia.org/wiki/Lambda_calculus#Reduction_strategies
+- https://en.wikipedia.org/wiki/Evaluation_strategy
+
+* How should lambda-calculus be implemented?
+** What is an operational semantics of lambda calculus?
+** How?
+Normal-order reduction enables us to write fixed points.
+Should we let the programmer choose the evaluation strategy?
+Currying simplifies reasoning but complicates implementation (because applications may then nest deeply to the left).
+What is optimal reduction?
+ [fn::https://stackoverflow.com/questions/31223539/is-it-possible-to-evaluate-lambda-calculus-terms-efficiently]
+ [fn::https://en.wikipedia.org/wiki/Lambda_calculus#Optimal_reduction]
+
+Lambda-calculus is unsound.[fn::https://en.wikipedia.org/wiki/Fixed-point_combinator]
+What does that imply about programming languages containing lambda calculus?
+
+Let \( A[B := C] \) mean \(A\) but with each free occurrence of \(B\) replaced with \(C\).
+Let \( eval(A,B) \) means that \(A\) normalizes to \(B\).
+
+Applicative-order evaluation is the easiest to implement.
+
+Where do these things fit in the big picture of lambda-calculus implementations?
+G-machine, STG, GRIN[fn::https://github.com/grin-tech/grin].
+
+Reading queue:
+- https://stackoverflow.com/questions/31223539/is-it-possible-to-evaluate-lambda-calculus-terms-efficiently
+- https://www.researchgate.net/publication/312462365_About_the_efficient_reduction_of_lambda_terms
+- https://www.reddit.com/r/haskell/comments/2zqtfk/why_isnt_anyone_talking_about_optimal_lambda/
+- compiling monads https://www.irif.fr/~mellies/mpri/mpri-ens/articles/danvy-koslowski-malmkjaer-compiling-monads.pdf
+- modular monadic semantics http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.136.1656&rep=rep1&type=pdf
