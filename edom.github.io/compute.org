@@ -51,26 +51,7 @@ Must algorithms describe only terminating computations?
 An operating system describes an interactive computation.
 Computers do not exist in a vacuum.
 Computers interact with reality.
-* Computing
-** Computing as knowledge generation
-Van Leeuwen 2015 \cite{van2015philosophy} argues that computation is a process of /knowledge generation/.
-This view unifies several views of computation.
-Knowledge is relative: one's knowledge is another's noise.
-Wiedermann & van Leeuwen 2014 \cite{wiedermann2014computation},
-2015 \cite{wiedermann2015computation},
-2017 \cite{wiedermann2017epistemic}.
-** Other people's ideas about what computation is
-Zenil 2014 \cite{zenil2014nature}
-
-Horsman et al. 2014 \cite{horsman2014does}
-
-Horswill 2012 \cite{horswill2012computation}
-
-Denning 2010 \cite{denning2010computation}
-
-Ladyman 2009 \cite{ladyman2009does}
-
-Copeland 1996 \cite{copeland1996computation}
+* Computing?
 ** A computation is not only a discrete model of reality
 Analog computers invalidate this definition.
 
@@ -105,8 +86,29 @@ Finite description.
 
 A computer's behavior may be too complex for us to describe.
 But our inability to describe it doesn't mean it doesn't compute.
-* Computing as doing mathematics
-** Narrow but undoubted examples of computation
+** A computation does not have to end
+A computation does not have to end.
+A Turing machine may compute without terminating.[fn::https://math.stackexchange.com/questions/1561293/must-an-algorithm-terminate]
+ [fn::"An example of a non-terminating Turing machine program is a program that calculates sequentially each digit of the decimal representation of pi"
+ http://www.alanturing.net/turing_archive/pages/reference%20articles/what%20is%20a%20turing%20machine.html]
+For example, a machine may compute 2/3 (whose binary expansion 0.10... does not terminate) by repeatedly printing 10 forever.
+
+* Computing
+** Computing as knowledge generation
+This is a summary of
+Wiedermann & van Leeuwen 2014 \cite{wiedermann2014computation},
+2015 \cite{wiedermann2015computation},
+2017 \cite{wiedermann2017epistemic},
+and Van Leeuwen 2015 \cite{van2015philosophy}.
+
+Computation is /knowledge generation/.
+
+Knowledge is relative: one's knowledge is another's noise.
+
+This view unifies several other views of computation.
+
+** Computing as doing mathematics
+*** Narrow but undoubted examples of computation
 What can we infer from these examples?
 
 /Adding two numbers/ is a computation:
@@ -132,9 +134,9 @@ The output is a number.
 
 It seems that the goal of a computation is to arrive at a number (or a numeral).
 It seems that computation is about transforming symbols.
-** Computing with tools and machines
+*** Computing with tools and machines
 Some tools help us compute.
-** To compute is to do mathematics?
+*** To compute is to do mathematics?
 The way we use the verb "compute" implies that computation is a model of how reality does some mathematics.
 
 What do we mean by "doing mathematics"?
@@ -153,6 +155,74 @@ Are there programmable analog computers?
 What does a programmable analog computer look like?
 
 How would analog computers have conditionals, loops, and other constructs?
+
+** Computation from logic point of view
+*** Problem as logical formula
+A problem is a question, a logical formula.
+
+"Problem" comes from Greek "problema" which means "a task, that which is proposed, a question".[fn::https://www.etymonline.com/word/problem]
+Therefore, a problem /is/ a question, or, formally, a /logical formula/.
+*** Formula, input, output, model, relation
+/A problem is a formula./
+For example, the problem "Given an \(x\), what is \(x+x\)?" is the formula
+\( x+x = y \) in first-order logic with equality and some arithmetics.
+Note that some logic is embedded in English.[fn::English is at least second-order, as demonstrated by the Geach--Kaplan sentence "Some critics admire only one another" https://en.wikipedia.org/wiki/Nonfirstorderizability].
+
+#+CAPTION: Some common problem shapes
+| name             | shape          | input | output |
+|------------------+----------------+-------+--------|
+| decision problem | \( p(x) \)     | \(x\) |        |
+| search problem   | \( p(x) \)     |       | \(x\)  |
+| function problem | \( f(x) = y \) | \(x\) | \(y\)  |
+
+A problem may have /inputs/ and /outputs/.
+An /input/ of a problem is a free variable in the formula.
+An /output/ of a problem is a free variable in the formula.
+
+Another example: the problem "Is the sum of two even numbers even?" is the formula \( E(x) \wedge E(y) \to E(x+y) \).
+
+What does it mean to solve a problem (answer a question)?
+Solving a problem is answering a question.
+Answering a question corresponds to /proving a formula/.
+Answering a question corresponds to /finding a model/ of a formula?
+
+A /problem/ may be /modeled/ by a /relation/ between questions and answers.
+For example, the problem \( \forall x \exists y : x+x = y \)
+is modeled by the relation \( \{ (0,0), (1,2), (2,4), \ldots \} \)
+and is also modeled by the relation \( \{ (\epsilon,\epsilon), (1,11), (11,1111), \ldots \} \).
+
+Do not conflate a problem and a model of it.
+A problem is a formula, /not/ a relation.
+
+Compare various definitions of "problem"
+ [fn::https://en.wikipedia.org/wiki/Computational_complexity_theory]
+ [fn::https://plato.stanford.edu/entries/computational-complexity/].
+
+A problem is \cite{sep-computational-complexity}
+
+Problem can be /composed/ as formulas can be composed.
+*** Reduction
+Sometimes we can /reduce/ a problem into another problem?
+*** Computation as question-answering
+Computation is answering a question.
+
+What is the relationship with Wiedermann & van Leeuwen 2015 knowledge generation \cite{wiedermann2015computation}?
+
+What is the relationship between computation and answering questions?
+
+** TODO Summarize
+Zenil 2014 \cite{zenil2014nature}
+
+Horsman et al. 2014 \cite{horsman2014does}
+
+Horswill 2012 \cite{horswill2012computation}
+
+Denning 2010 \cite{denning2010computation}
+
+Ladyman 2009 \cite{ladyman2009does}
+
+Copeland 1996 \cite{copeland1996computation}
+
 * Computing, representation, and complexity
 Synonyms of representation: encoding, model.
 
@@ -161,12 +231,6 @@ the machine ends with a representation of \(y\) if the machine is started with a
 Alas, this definition has two big problems:
 - Must a computation be /started/ by something outside the computer?
 - What is /representation/?
-** A computation does not have to end
-A computation does not have to end.
-A Turing machine may compute without terminating.[fn::https://math.stackexchange.com/questions/1561293/must-an-algorithm-terminate]
- [fn::"An example of a non-terminating Turing machine program is a program that calculates sequentially each digit of the decimal representation of pi"
- http://www.alanturing.net/turing_archive/pages/reference%20articles/what%20is%20a%20turing%20machine.html]
-For example, a machine may compute 2/3 (whose binary expansion 0.10... does not terminate) by repeatedly printing 10 forever.
 ** Computation as representation transformation
 To compute is to transform representation into something easier.
 ** What is a natural ordering (standard ordering)?
@@ -181,7 +245,9 @@ A representation is /reasonable/ iff it makes computing the natural ordering hav
 A /reasonable encoding/ is an encoding that is easy to compute and is easy to invert.
 
 A reasonable encoding has a finite description.
-** Do not conflate a thing and its representations
+** Reification fallacy: conflating a thing and its representations
+Do not conflate a thing and its representations.
+
 First, we undo the chronic ontologically-sloppy habit of conflating a thing and a representation of the thing.
 "123" is not a number, but a /representation/ of a number.
 We cannot manipulate numbers physically because they do not have material existence.
@@ -237,59 +303,6 @@ A homomorphism preserves structure.
 But which structure?
 
 We may encode the natural numbers as the bitwise-negation of the base-2 representation: 1, 0, 11, 10, 01, 00, etc.
-* Computation from logic point of view
-** Problem as logical formula
-*** A problem is a question, a logical formula
-"Problem" comes from Greek "problema" which means "a task, that which is proposed, a question".[fn::https://www.etymonline.com/word/problem]
-Therefore, a problem /is/ a question, or, formally, a /logical formula/.
-*** Formula, input, output, model, relation
-/A problem is a formula./
-For example, the problem "Given an \(x\), what is \(x+x\)?" is the formula
-\( x+x = y \) in first-order logic with equality and some arithmetics.
-Note that some logic is embedded in English.[fn::English is at least second-order, as demonstrated by the Geach--Kaplan sentence "Some critics admire only one another" https://en.wikipedia.org/wiki/Nonfirstorderizability].
-
-#+CAPTION: Some common problem shapes
-| name             | shape          | input | output |
-|------------------+----------------+-------+--------|
-| decision problem | \( p(x) \)     | \(x\) |        |
-| search problem   | \( p(x) \)     |       | \(x\)  |
-| function problem | \( f(x) = y \) | \(x\) | \(y\)  |
-
-A problem may have /inputs/ and /outputs/.
-An /input/ of a problem is a free variable in the formula.
-An /output/ of a problem is a free variable in the formula.
-
-Another example: the problem "Is the sum of two even numbers even?" is the formula \( E(x) \wedge E(y) \to E(x+y) \).
-
-What does it mean to solve a problem (answer a question)?
-Solving a problem is answering a question.
-Answering a question corresponds to /proving a formula/.
-Answering a question corresponds to /finding a model/ of a formula?
-
-A /problem/ may be /modeled/ by a /relation/ between questions and answers.
-For example, the problem \( \forall x \exists y : x+x = y \)
-is modeled by the relation \( \{ (0,0), (1,2), (2,4), \ldots \} \)
-and is also modeled by the relation \( \{ (\epsilon,\epsilon), (1,11), (11,1111), \ldots \} \).
-
-Do not conflate a problem and a model of it.
-A problem is a formula, /not/ a relation.
-
-Compare various definitions of "problem"
- [fn::https://en.wikipedia.org/wiki/Computational_complexity_theory]
- [fn::https://plato.stanford.edu/entries/computational-complexity/].
-
-A problem is \cite{sep-computational-complexity}
-
-Problem can be /composed/ as formulas can be composed.
-*** Reduction
-Sometimes we can /reduce/ a problem into another problem?
-** Computation as question-answering
-Computation is answering a question.
-
-What is the relationship with Wiedermann & van Leeuwen 2015 knowledge generation \cite{wiedermann2015computation}?
-
-What is the relationship between computation and answering questions?
-
 * Computer, both analog and digital
 ** Short partial history of computers
 In 1640, a /computer/ is a human calculator.[fn:eocomputer:https://www.etymonline.com/word/computer]

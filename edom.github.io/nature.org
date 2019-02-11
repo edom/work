@@ -3,37 +3,491 @@
 #+PERMALINK: /nature.html
 #+MATHJAX: yes
 #+OPTIONS: toc:nil
+\(
+\newcommand\der{\operatorname{der}}
+\newcommand\dd{\operatorname{d}}
+\newcommand\ang[1]{#1^\circ}
+\)
+
 (We are not related with the Nature Research company[fn::https://www.nature.com/].)
 * Overview
-** Target audience:
-- Everyone who wants to justify physics.
-- Everyone who wants to formalize physics.
+** Target audience
+Myself, and everyone who wants to learn, understand, justify, or formalize physics.
+
+We assume that the reader are familiar with these mathematical concepts:
+set, real number, relation, function.
 ** What
-- Natural knowledge is knowledge about nature (reality).
-- This page tries to list natural knowledge, sorted descending by verifiability.
-- This page tries to teach natural knowledge in the fastest way possible.
-  - Knowledge is presented top-down:
-    - A child verifies its parent.
-** Brief excursion to philosophy
+Natural knowledge is knowledge about nature (reality).
+
+Here we try to list natural knowledge, ordered from the simplest to verify.
+
+The aim is to teach natural knowledge in the fastest way possible.
+** Philosophy
 *** Truth is a continuum (not binary true-and-false).
 (Why are we saying this?)
-*** Brief excursion to epistemology
-- We assume that there are three sources of knowledge:
-  - observation (the senses)
-  - definition (fiat, agreement between speakers of the same language)
-  - inference (logic, rules of thought)
-*** A problem with physics: too many unjustified tacit assumptions.
-- Every scientific revolution invalidates some tacit assumptions?
-- Physics is mathematics + engineering + philosophy.
-  - If we skip the mathematics, we can't measure.
-  - If we skip the engineering, we can't experiment.
-  - If we skip the philosophy, we can't progress.
-    - We will make unjustified tacit assumptions.
+*** Epistemology (how we know)
+We assume that there are three sources of knowledge:
+- observation (the senses)
+- definition (fiat, agreement between speakers of the same language)
+- inference (logic, rules of thought)
+*** Theoretical physics advances by discovering and removing simplifying assumptions
+What does Thomas Kuhn say?
+
+A problem with physics: too many unjustified tacit assumptions?
+
+Every scientific revolution invalidates some tacit assumptions?
+
+Physics is mathematics + engineering + philosophy.
+- If we skip the mathematics, we can't measure.
+- If we skip the engineering, we can't experiment.
+- If we skip the philosophy, we can't progress.
+  - We will make unjustified tacit assumptions.
+
+(TODO avoid linking without summarizing)
 - [[https://en.wikipedia.org/wiki/Tacit_assumption][WP:Tacit assumption]]
 - [[https://www.researchgate.net/publication/295525659_Tacit_assumptions_or_Implicit_assumptions_if_they_are_flawed_leads_to_paradoxical_paradigm_and_scientific_crisis][Tacit assumptions or Implicit assumptions (if they are flawed) leads to paradoxical paradigm and scientific crisis]]
 - [[https://www.researchgate.net/post/How_to_expose_insidious_tacit_assumptions_which_sidetrack_scientific_progress_into_wrong_path_leading_to_scientific_crisis_if_not_exposed][How to expose insidious tacit assumptions, which sidetrack scientific progress into wrong path (leading to scientific crisis), if not exposed?]]
 - [[https://www.jstor.org/stable/986647][1975, article, paywall, "Tacit Assumptions in Fundamental Particle Physics"]]
   - [[http://www.iaea.org/inis/collection/NCLCollectionStore/_Public/06/183/6183879.pdf][unpaywalled]]
+*** What
+Which one makes sense:
+"There is space between two things."
+"Things exist in space."
+"This thing requires/occupies/takes space."
+Operational definitions:
+Space is whatever rulers measure.
+Time is whatever timers measure.
+
+Search "ontology of energy"
+
+https://en.wikipedia.org/wiki/Philosophy_of_physics
+
+Time is the sequence of events.
+Time is an ordering of events.
+Time is whatever a timer measures.
+** Suggested learning path?
+Geometry, kinematics, statics, dynamics.
+
+Coordinate systems, generalized coordinates, Newtonian mechanics, Lagrangian, Hamiltonian.
+
+Continuum mechanics.
+
+Statistical mechanics.
+
+Fluids, waves, optics, electricity, magnetism, electromagnetism.
+
+Differential geometry, relativity.
+
+Quantum mechanics.
+* Geometry and kinematics
+Kinematics is about /describing/ motion, not /explaining/ (finding the cause of) motion.
+** Spaces
+We can think of a /physical space/ (where we exist) as a /mathematical space/ (a set of points).
+In this document we often conflate those two spaces without warning.
+** Real tuple spaces
+An \(n\)-tuple is a bunch of \(n\) possibly different things.
+
+A real \(n\)-tuple is a bunch of \(n\) real numbers.
+
+The set \(\Real^n\) (the /\(n\)-dimensional real tuple space/) is the set of all real \(n\)-tuples.
+For example, we say that the real 3-tuple \((1,2,3)\) is "a /member/ of" or "an /element/ of" or "a /point/ in" \(\Real^3\).
+
+The /dimension/ of \(\Real^n\) is \(n\).
+
+A real tuple space is a mathematical space, not a physical space.
+** Thinking of our local physical space as Euclidean space
+We can think of the space near us as a /three-dimensional Euclidean space/,
+which is our intuition of space as we experience it in our everyday lives.
+
+In an Euclidean space, the shortest path connecting two points is a straight line.
+** Line, straightness, geodesic, distance
+A /line/ is a one-dimensional thing.
+
+A line /connects/ point P to point Q iff one end of the line is P and the other end of the line is Q.
+
+A line connecting two points is /straight/ iff that line is the shortest line connecting those points.
+When we travel on Earth without ever turning,
+we think we are traveling in a straight line,
+but after about 40,000 km we will arrive at where we departed from.
+Someone far enough in the sky will see that we are traveling in a great circle.
+If you find it hard to imagine the size of the Earth,
+just imagine that you were an ant-sized human on a tennis ball.
+
+A /geodesic/ is a straight line.
+
+The /distance/ between two points is the length of the shortest line connecting them.
+** Basic motion concepts
+*** Position and displacement
+The /position/ of a thing is where it is in space.
+
+/Displacement/ is relative position.
+*** Motion, position, and time
+/Motion/ is change of position.[fn::https://en.wikipedia.org/wiki/Motion_%28physics%29]
+
+A thing /moves/ iff its position changes.
+
+Change happens over /time/.
+*** Speed and velocity
+The /speed/ of an object is how fast it moves:
+how far it moves in how much time.
+/Fast/ means high speed,
+going far in little time,
+traveling much distance in little time.
+
+/Average speed/ is distance traveled divided by time required.
+
+/Velocity/ is the rate of change of position.
+Speed is the magnitude of velocity.
+/Rate of change/ is defined by /derivative/.
+** Describing motion
+A description of a thing's motion answers the question "Where is that thing when?"
+Such description relates position and time.
+*** Sampling
+We may describe a thing's motion by /sampling/ where it is at different times.
+
+We may describe a man's motion as "At 4am he was on his bed. At 9am he was at his office. At 7pm he was at his home."
+
+We may describe a star's motion as "In May it was 50 degrees upward from my house entrance. In June it was 40 degrees upward from my house entrance."
+
+We may put a ball at the high end of an inclined plane,
+and measure the duration required by the ball to reach the low end of the inclined plane.
+Indeed this was Galileo's experiment in which he found that the duration is proportional to the square root of the length of the plane if the inclination angle is held constant.
+*** Function relating time and displacement
+We can think of a thing's displacement at time \(t\) as a mathematical /function/ \(x\) such that \(x(t)\) is the thing's displacement at time \(t\).
+Note that the function is \(x\), not \(x(t)\).
+
+An example of an equation of motion is $x(t) = 2 \hat{e} t$ where \(\hat{e}\) is a unit vector.
+It describes an object that moves with constant velocity \(2 \hat{e}\) (constant speed 2 towards constant direction \(\hat{e}\)).
+*** Equation of motion
+An /equation of motion/ is an equation that describes
+the motion of an object by relating time and displacement.
+
+Each equation of motion corresponds to a moving thing.
+If we want to describe \(n\) moving things, we make \(n\) equations of motion.
+
+An example of /implicit/ equation is $x(t) = - (d(d(x)))(t)$.
+This is also an example of a /differential equation/ because it contains the derivative operator $d$.
+*** Basis???
+Let $e$ be a linear basis.
+Suppose that the displacement of an object at time $t$ is
+$x(t) = e(x_1(t), \ldots, x_n(t))$.
+Then the velocity at time $t$ is $v(t) = \der(x,t) = e(v_1(t), \ldots, v_n(t))$.
+Can we say that $v_k(t) = \der(x_k,t)$?
+
+Moral of the story:
+If we have a linear basis,
+then doing calculus on the coordinates
+is doing calculus on the vectors.
+** Kinematics, description of motion
+A /frame/ defines /where/ and /when/.
+** What
+*** Relating velocities, tangent lines, and derivatives
+
+There are several ways of understanding $f'(x)$ (the derivative of $f$ at $x$):
+
+****** Average velocity and the secant line
+
+Let there be an object.
+
+Let $x(t) : V^2$ be a vector that describes its position at time $t : \Real$.
+
+The /average velocity/ of that object in the time interval $[t,t+\Delta t]$ is
+$$\frac{x(t+\Delta t) - x(t)}{\Delta t}.$$
+
+If at time $t_1$ its position is $x_1$
+and at time $t_2$ its position is $x_2$,
+then its /average velocity/ in the time interval between $t_1$ and $t_2$
+is $(x_2 - x_1) / (t_2 - t_1)$.
+
+A /secant line of $f$/ is a line that passes $(x_1,f(x_1))$ and $(x_2,f(x_2))$.
+Think of average velocity.
+
+****** Instantaneous velocity and the tangent line
+
+If the position of an object at time $t$ is $x(t)$,
+then its /instantaneous velocity/ at time $t$ is $v(t) = (d(x))(t)$.
+The velocity function is the derivative of the position function.
+
+The term /instantaneous velocity/ is often shortened to just /velocity/.
+
+The unqualified /velocity/ means /instantaneous velocity/.
+
+A car's speedometer measures its instantaneous speed.
+
+Derivative is about /rate of change/:
+how fast a function changes value,
+how big is the change in output compared to the change in input.
+
+Consider a function $f : \Real \to \Real$.
+If the input is $x$, then the output is $f(x)$.
+If you change the input by $\dd{x}$, the output changes by $\dd{y}$.
+Formally, $f(x+\dd{x}) = f(x)+\dd{y}$.
+
+A /tangent line of $f$ at $x$/ is what the secant line converges to
+if both $x_1$ and $x_2$ converge to $x$.
+Think of instantaneous velocity.
+
+****** Understanding the derivative as the slope of the tangent line
+
+The /derivative of $f$ at $x$/ is the slope of the tangent line of $f$ at $x$.
+Reminder: The line $y = mx + c$ has slope $m$.
+
+*** Coordinates
+*** Coordinate systems
+A coordinate system is a way of /naming/ points in a space.
+
+A coordinate system over E describes how to /name/ each point in E, how to locate those points.
+The name of a point is a tuple of numbers.
+
+How does Newton's equation work with generalized coordinates?
+
+Example of generalized coordinates x(q) = (q,q2,0).
+Bead on a rail on xy-plane.
+*** Newtonian?
+We can think of a rigid body as a point mass, as Newton did.
+Center of mass of a rigid body.
+No collision.
+A field makes more sense than point mass.
+
+But, with calculus, we can have mass density.
+Calculus enables continuum mechanics.
+** What is motion?
+We can describe the motion of an object by sampling its position at various times.
+
+What is change?
+
+What is position?
+Position is the relative place of things.
+Is position a property of a thing?
+Position is relative.
+The position of a thing is measured with respect to another thing.
+** How do we represent motion?
+We can use Newton's equations of motion.
+There are many big simplifications:
+A rigid body is simplified to a point mass occupying no space.
+Space and time is absolute.
+Force acts instantaneously.
+
+Does a gravitational field have material existence?
+Is gravitational field physical or mathematical?
+A gravitational field /describes/ the gravitational force that a unit point mass /would/ experience.
+Note the counterfactual.
+The verb /describes/ implies that the subject (a gravitational field) is abstract.
+
+At first I think matter changes spacetime around it, and we call this change "field".
+But Quantum Field Theory seems to imply that the fields are real, and matter seems to be our limited perception of the fields.
+
+We think that a matter establishes an associated gravitational field.
+
+Einstein's E = mc2 is about that gravity affects both energy and mass.
+
+A Lagrangian tells how a system interchanges potential energy and kinetic energy?
+
+We can use continuum mechanics.
+
+QFT is basically a mathematical model of motion, like Newton's theory, but with fewer simplifying assumptions.
+Theoretical physics advances by removing simplifying assumptions.
+
+Lagrangian and Hamiltonian are mathematical things.
+Do they have physical meaning?
+
+** Analytic geometry is the usage of coordinate systems for thinking about spaces?
+** An example basis
+Imagine a flat sheet of paper.
+
+Draw a point \(A\).
+
+Draw a vector named \(i\), from \(A\), \SI{1}{cm} long, pointing right.
+
+Draw another vector named \(j\), also from \(A\), 1 cm long, but pointing up.
+
+Thus, the vectors \(i\) and \(j\) are /orthogonal/.
+
+Then, we declare the basis
+\( e : \Real^2 \to E^2 \) as \( e(x,y) = xi + yj \).
+
+A real tuple space on its own has no geometric meaning.
+One way to visualize a real tuple space is a Cartesian coordinate system.
+** Philosophical digressions
+*** How do we know that our space has three dimensions?
+We know that our space has three dimensions because we see that if we have four lines orthogonal to each other, then two of them must be parallel.
+So far we have not found how to arrange four lines to be orthogonal to each other without making two of them be parallel.
+
+How do we know that two lines are orthogonal?
+By a protractor?
+Two lines are orthogonal if each of the four angles formed by their intersection is orthogonal?
+*** Philosophy of space
+In our everyday experience,
+two different things cannot occupy the same space at the same time.
+Is that also true in the microscopic level?
+What does "two different things" mean?
+What does "occupy" mean?
+What does "the same space" mean?
+What does "at the same time" mean?
+** Cartesian coordinate systems
+A coordinate system is a method of naming every point.
+
+Let \(E^n\) mean the \(n\)-dimensional Euclidean space.
+
+A Cartesian coordinate system is a geometric interpretation of a real tuple space.
+Such system uses
+a tuple in \(\Real^n\) and three orthogonal axes
+to describe a point in \(E^n\).
+"Axes" here is plural of "axis", not of "axe".
+*** In two dimensions
+For an example of a two-dimensional Cartesian coordinate system, see the Wikipedia picture
+ \footnote{\url{https://en.wikipedia.org/wiki/File:Cartesian-coordinate-system.svg}}.
+The positive x-axis points right.
+The positive y-axis points up.
+*** In three dimensions
+(A picture would be nice.)
+
+The standard three-dimensional Cartesian coordinate system is right-handed.
+With your right hand, form an L with the thumb and the index finger,
+and form another L with the index and the middle finger.
+Then see this table.
+
+#+CAPTION: Standard directions
+| direction | right hand finger | XYZ        |
+|-----------+-------------------+------------|
+| rightward | right thumb       | X positive |
+| forward   | right index       | Y positive |
+| leftward  |                   | X negative |
+| backward  |                   | Y negative |
+| upward    | right middle      | Z positive |
+| downward  |                   | Z negative |
+*** Related Wikipedia pages
+These
+ \footnote{\url{https://en.wikipedia.org/wiki/Cartesian_coordinate_system}}
+ \footnote{\url{https://en.wikipedia.org/wiki/Right-hand_rule}}.
+** Coordinate transformations
+A coordinate transformation is a mapping between from one coordinate system to another.
+*** Some coordinate systems
+A \emph{coordinate system} maps a coordinate tuple to a vector.
+**** The rectangular coordinate system
+\(R(x,y) = x e_1 + y e_2\).
+
+\(R(x) = x_1 e_1 + x_2 e_2\).
+
+In this system, the coordinates are the scalar coefficients in the linear combination of basis vectors.
+The coordinates describe how the basis vectors should be linearly combined to form the described vector.
+
+Let \(T : V^2 \to V^2\) be a linear transformation.
+Then \(T(R(x)) = T(x_1 e_1 + x_2 e_2) = x_1 \cdot T(e_1) + x_2 \cdot T(e_2) = x_1 e_1' + x_2 e_2' = R'(x) \).
+**** The polar coordinate system
+\(P(r,t) = r e_1 \text{ rotated } t \text{ radians counterclockwise}\).
+
+\section{Locating the same point with different coordinate systems}
+
+Example of coordinate transformation:
+The same point in the same two-dimensional Euclidean space
+is described by
+both the polar coordinates \( (r,\theta) \)
+and the rectangular coordinates \( (r \cos \theta, r \sin \theta) \).
+The transformation is \( (r,\theta) \to (r \cos \theta, r \sin \theta) \).
+
+What
+ \footnote{\url{https://en.wikipedia.org/wiki/Real_coordinate_space}}
+ \footnote{\url{https://en.wikipedia.org/wiki/Real_coordinate_space}}
+ \footnote{\url{https://en.wikipedia.org/wiki/Mathematical_analysis}}
+
+A \emph{coordinate system} $M : C \to S$ is a surjective mapping from
+\emph{coordinate space} $C$ to \emph{target space} $S$.
+
+A \emph{coordinate} is a point in \(C\).
+The coordinate system tells us how to get to a point.
+
+The \(n\)-dimensional real coordinate space is $\mathbb{R}^n$.
+It is also called the real $n$-space.
+A point in the real $n$-space is an $n$-tuple of real numbers $(x_1,\ldots,x_n)$.
+
+$(x,y)$ is the tuple of coordinates,
+$x$ is the x-coordinate, and $y$ is the y-coordinate.
+
+Coordinate systems unify geometry and
+mathematical analysis.
+With coordinates,
+we can solve geometric problems by
+numbers, calculus, and algebra,
+so that computers can
+find the intersection of geometric objects
+by solving the corresponding system of equations,
+and find the size of a geometric object by solving the corresponding integral.
+*** Converting polar coordinate tuples to rectangular coordinate tuples
+Both the rectangular coordinate $(r\cos\theta, r\sin\theta)$ and the polar coordinate $(r,\theta)$
+describe the same point in two-dimensional Euclidean space.
+\[
+R(r\cos\theta, r\sin\theta) = P(r,\theta)
+\]
+
+A point in a space can have different coordinates in different coordinate systems.
+* Dynamics, forces, causes of motion
+* Waves
+** What is a wave, oscillation, undulation, vibration?
+One /wave/ happens every time water slaps the beach.
+Thus waves are countable.
+
+We see ripples when we throw a stone into a body of water.
+Ripples are waves?
+
+We see oscillation when we disturb a spring (the spiral thing, not the water source).
+
+A wave is a pattern of motion.
+A wave does not exist objectively.
+We see waves.
+We use the word "wave" to refer to some repetitive motions.
+** What causes a wave?
+A wave is caused by a /restoring force/[fn::https://en.wikipedia.org/wiki/Restoring_force],
+a force that goes against a thing's displacement.
+This force tends to restore a thing to its resting position.
+
+Must a wave always be caused by a restoring force?
+Must a restoring force exist wherever we see a wave?
+
+What do we mean by "force"?
+Do we mean Newtonian "force", or do we mean "cause"?
+
+https://philosophy.stackexchange.com/questions/25003/what-is-the-philosophical-origin-of-waves
+
+http://www.informationphilosopher.com/introduction/physics/wave-particle_duality.html
+** Sine waves
+A sine wave is the motion of an ideal spring that is oscillating naturally after released from an initial strain.
+
+A sine wave is approximated by a pendulum with long rope and small swing angle.
+
+A sine function is a function such that its displacement and its acceleration have equal magnitudes but opposite directions.
+
+A sine function \(x\) is a solution of \( d(d(x)) = -x \).
+** What do we mean by "light is a wave"?
+If we say "light is a wave", then we are saying that light has no objective (material) existence.
+Also, what is the restoring force of this wave?
+
+The sea has waves, but the sea is not the waves.
+
+If we say "light behaves like a wave", then, what does it mean for an objective thing to behave like a subjective thing?
+
+The people who thought about the luminiferous aether[fn::https://en.wikipedia.org/wiki/Luminiferous_aether] must have thought about this.
+
+If the aether does not exist, then light is not a wave.
+
+Wave-particle duality is category error.
+Wave is abstract; particle is concrete.
+A thing cannot be both abstract and concrete.
+
+Light is electromagnetic radiation.
+A disturbance in the electromagnetic field?
+
+We must distinguish between /physical/ wave and /mathematical/ wave.
+
+Light is not a physical wave,
+but we sometimes think of light as a mathematical wave.
+** Can light be diffracted?
+What do we mean by light?
+
+Can light be detected?
+
+Is light whatever a light detector detects?
+A light detector affects the light.
 * Matter
 ** Obvious things: mass, weight, volume, density
 - Define: /Mass/ is the amount of matter.
@@ -244,12 +698,21 @@
   - [[https://en.wikipedia.org/wiki/Adolf_Eugen_Fick][WP:Adolf Eugen Fick]] (1829--1901)
 - Reaction between two solids
   - [[https://www.youtube.com/watch?v=SjeyjmUSzKk][YT:Chemical Reaction Between Two Solids]]
-* Let's go back to prehistoric times.
-- Let's begin with very wrong ideas.
-  - We're "cheating": we have hindsight; they didn't.
-- We will revise knowledge as we go. We will become less wrong.
-- We might will never be 0% wrong.
-  - But knowledge doesn't have to be 100% true in order to be useful.
+* Proto-physics
+<2019-02-12>
+(Change of opinion.)
+
+There is no need to rediscover everything in the way our ancestors did.
+We have hindsight.
+
+(End of change of opinion.)
+
+Let's begin with very "wrong" ideas; we're "cheating" with our hindsight that our ancestors did not have.
+We will revise knowledge as we go.
+We will become less "wrong".
+
+We might will never be 0% wrong.
+But knowledge does not have to be 100% correct in order to be useful.
 ** Falling
 - Define: The /Earth/ is where we stand.
 - Define: /Duration/ is what a timer measures.
@@ -496,120 +959,6 @@
   - [[https://en.wikipedia.org/wiki/Sundial][WP:Sundial]]
   - [[https://en.wikipedia.org/wiki/Analemma][WP:Analemma]];
     solar analemma = figure eight pattern of the sun on the sky across the year
-** Unread
-- Ampere's experiments
-  - [[http://farside.ph.utexas.edu/teaching/302l/lectures/node70.html][Ampère's Experiments]]
-  - http://www.larouchepub.com/eiw/public/1992/eirv19n20-19920515/eirv19n20-19920515_030-the_ampere_crucial_experiments.pdf
-- https://newrepublic.com/article/118655/theoretical-phyisicist-explains-why-science-not-about-certainty
-- [[https://www.reddit.com/r/askscience/comments/1xxbq0/in_quantum_physics_observer_effect_what_qualifies/][Reddit: In quantum physic's 'observer effect', what qualifies as an 'observer'?]]
-** Chemical analysis / Analytical chemistry: how do we know what something is, what is in it, what it is made of?
-- https://en.wikipedia.org/wiki/Analytical_chemistry
-  - collection of classical tests
-  - some risk of false positive/negative
-- https://en.wikipedia.org/wiki/Mass_spectrometry
-- https://en.wikipedia.org/wiki/Gas_chromatography
-** Predicting chemical reactions?
-- 2011 "Learning to Predict Chemical Reactions" https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3193800/
-* (This is a big hole of things not yet justified.)
-* Modern physics?
-** General relativity
-- Matter bends spacetime.
-  - Matter bends spacetime, especially the spacetime /near that matter/.
-  - What does it mean?
-- Spacetime curvature accelerates matter.
-- Einstein could predict some things from philosophy/reasoning/logic/language/German/English without mathematics/analysis/calculus/differential-geometry/calculations/numbers.
-  - https://en.wikipedia.org/wiki/Introduction_to_general_relativity
-  - He used philosophy to derive the mathematics, not the other way around.
-- https://www.quora.com/What-is-the-most-misunderstood-thing-in-physics
-  - See "You can never actually fall into a black hole."
-** Quantum mechanics
-*** Which one of these are ontologically justified?
-- Matter can /behave/ as a wave or a particle?
-  - In what way?
-- Matter /is/ both a wave and a particle?
-  - Refutation?
-    - A water wave is not water.
-      - Wave is the name we give to periodic motion.
-        - We can perceive a wave because we can interact with the constituents of the wave.
-          - If light is a wave, then light should have constituents.
-- Observe: double-slit experiment: shooting electrons through two slits.
-  - de Broglie hypothesis relates the momentum and wavelength.
-- Observe: quantum tunneling.
-  - How do we explain quantum tunneling without probabilities?
-  - How does QFT explain electron tunneling?
-- How does QFT (quantum field theory) describe an electron?
-  - https://www.symmetrymagazine.org/article/july-2013/real-talk-everything-is-made-of-fields
-  - http://www.quantum-field-theory.net/electron-look-like/
-- 2013 "Particles, Fields and The Future of Physics - A Lecture by Sean Carroll" https://www.youtube.com/watch?v=gEKSpZPByD0
-  - lecture for public audience
-  - 30:40
-    - The mass of a particle is the energy required to get the corresponding quantum field to vibrate.
-    - There is a field for every type of particle.
-      There is an electron field, there is a photon field, and so on.
-    - Particle interaction is the coupling between different fields.
-- QED (quantum electrodynamics) http://hyperphysics.phy-astr.gsu.edu/hbase/Forces/qed.html
-  - Feynman diagram is one way of teaching QED.
-*** What is a wave?
-- A water wave does not require the water to /flow/.
-*** Path to understanding quantum mechanics?
-- Electrons fired toward a screen behind two slits show interference pattern.
-- Hydrogen absorption/emission spectrum
-- https://en.m.wikipedia.org/wiki/Planck%27s_law
-- A small hole on a closed box approximates a black body.
-  The hole looks black from outside.
-  Heating the box changes the hole's color.
-- What is a concrete example of a potential barrier?
-*** Double-slit experiments?
-- How do we detect electrons?
-  https://en.wikipedia.org/wiki/Electron_capture_detector
-- What is used to detect electrons in the double slit experiment?
-  https://www.reddit.com/r/askscience/comments/3ebcw6/what_is_used_to_detect_electrons_in_the_double/
-- https://physics.stackexchange.com/questions/364312/how-does-the-electron-detector-detect-electrons-dbl-slit
-  "How Do We Know Protons, Electrons, and Quarks really Exist?"
-- https://www.nsta.org/publications/news/story.aspx?id=51054
-- How do we know electrons exist? https://www.quora.com/How-do-we-know-electrons-exist
-- Unread
-  - https://en.wikipedia.org/wiki/Matter_wave
-  - 2017 article
-    "On the self-interference in electron scattering: Copenhagen, Bohmian and geometrical interpretations of quantum mechanics"
-    https://arxiv.org/abs/1710.02583
-  - I don't understand the question enough to determine why it is downvoted.
-    "Can the intensity distribution behind edges and slits be explained by the interaction with the surface electrons of the edges?"
-    https://physics.stackexchange.com/questions/158105/can-the-intensity-distribution-behind-edges-and-slits-be-explaint-by-the-interac
-  - https://www.reddit.com/r/Physics/comments/4ugmc7/can_someone_explain_the_double_slit_experiment/
-    - 2013 article "Controlled double-slit electron diffraction" http://iopscience.iop.org/article/10.1088/1367-2630/15/3/033018/meta
-  - Variation of double slit experiments?
-    - Double slit with nuclear decay?
-    - Double slit with tracers? (What is a tracer?)
-  - What is an atom and how do we know? https://www.youtube.com/watch?v=LhveTGblGHY
-  - Variations, modifications, and expansions
-    - https://noetic.org/research/projects/next-generation-double-slit
-**** Quantum eraser?
-**** Afshar experiment?
-- http://steve-patterson.com/quantum-physics-abuse-reason/
-  - Afshar experiment
-  - Weak measurement
-- How do we know where an electron is?
-  How do we measure the position of an electron?
-  How do we measure the momentum/energy of an electron?
-** Why, at STP, is hydrogen gaseous, is lithium solid, and is radon gaseous? Why is there no apparent relationship between the mass of an element and the phase of a homogenous mixture?
-- Radon atom is much heavier compared to hydrogen atom.
-- Intermolecular interaction?
-- Why different elements have different boiling points?
-- periodic table https://ptable.com/
-** Colors
-- What is color?
-  - https://en.wikipedia.org/wiki/Color
-- monochrome vs polychrome
-- subjective color vs objective color
-- What is the difference between the purple that is red-blue mixture and the purple that is monochromatic purple laser?
-- Why is red+blue+green light = white, but red+blue+green ink = something dark?
-  - https://en.wikipedia.org/wiki/Additive_color
-  - https://en.wikipedia.org/wiki/Subtractive_color
-- Shaded checkerboard color optical illusion.
-- "Why aren't there printers that use red-green-blue ink cartridges?" https://graphicdesign.stackexchange.com/questions/108620/why-arent-there-printers-that-use-red-green-blue-ink-cartridges
-- Mary's room https://en.wikipedia.org/wiki/Knowledge_argument
-  - We aren't going down this rabbit hole for now.
 * Chemistry
 - How do we identify something? How do we know what something is?
 
@@ -629,6 +978,19 @@
 
 - [[https://en.wikipedia.org/wiki/Chemistry][WP:Chemistry]]
 - [[https://en.wikipedia.org/wiki/Standard_Model][WP:Standard Model]]
+** Why, at STP, is hydrogen gaseous, is lithium solid, and is radon gaseous? Why is there no apparent relationship between the mass of an element and the phase of a homogenous mixture?
+- Radon atom is much heavier compared to hydrogen atom.
+- Intermolecular interaction?
+- Why different elements have different boiling points?
+- periodic table https://ptable.com/
+** Predicting chemical reactions?
+- 2011 "Learning to Predict Chemical Reactions" https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3193800/
+** Chemical analysis / Analytical chemistry: how do we know what something is, what is in it, what it is made of?
+- https://en.wikipedia.org/wiki/Analytical_chemistry
+  - collection of classical tests
+  - some risk of false positive/negative
+- https://en.wikipedia.org/wiki/Mass_spectrometry
+- https://en.wikipedia.org/wiki/Gas_chromatography
 * Astronomy
 - Reading sky map to find celestial objects
 
@@ -719,274 +1081,6 @@
 
   - https://physics.stackexchange.com/questions/13971/minimum-number-of-atoms-in-star
   - http://www.jgiesen.de/astro/stars/star.htm
-* Quantum Venn diagram paradox
-- Three polarizers.
-  - Bell's Theorem: The Quantum Venn Diagram Paradox https://www.youtube.com/watch?v=zcqZHYo7ONs
-    - It is surprising that adding a third filter /increases/ brightness.
-      We think that a filter should only decrease, not increase brightness.
-** Philosophy
-   :PROPERTIES:
-   :CUSTOM_ID: philosophy
-   :END:
-
-- Some branches of philosophy
-
-  - Epistemology (how do we know?)
-  - Ontology (what exists?)
-  - Ethics (morality; what should be?)
-
-- Epistemology
-
-  - There are two kinds of knowledge: /prior/ and /posterior/.
-
-    - Prior (before-the-fact) knowledge is obtained by inferring theorems from axioms through the rules of logic.
-    - Posterior (after-the-fact) knowledge is obtained by observation from the real world through the physical senses.
-
-  - [[https://en.wikipedia.org/wiki/A_priori_and_a_posteriori][WP:a priori and a posteriori]]
-  - [[https://en.wikipedia.org/wiki/Epistemology][WP:Epistemology]]
-  - [[https://en.wikipedia.org/wiki/Empiricism][WP:Empiricism]]
-  - [[https://en.wikipedia.org/wiki/Experimentalism][WP:Experimentalism]]
-  - [[https://en.wikipedia.org/wiki/Occam%27s_razor][WP:Occam's razor]]
-  - In physics, we know things from experiments and inference.
-  - https://en.wikipedia.org/wiki/Scientific_method
-  - [wenning2009scientific] explains scientific epistemology (about 15 pages).
-
-    - http://www2.phy.ilstu.edu/pte/publications/scientific_epistemology.pdf
-
-  - What does "to know" mean?
-
-    - Some possibilities
-
-      - To /know/ an object is to be familiar with that object.
-      - To /know/ an object is to be able to /use/ that object.
-
-- Ontology
-
-  - Measurabilism
-
-    - A thing exists if and only if it can be measured.
-    - [[https://en.wikipedia.org/wiki/Mike_Alder#Newton.27s_flaming_laser_sword][WP:Mike Alder, Newton's flaming laser sword]]
-
-      - "What cannot be settled by experiment is not worth debating."
-
-  - [[https://en.wikipedia.org/wiki/Ontology][WP:Ontology]]
-  - Ontology defines objects, their properties, and their relationships?
-  - "Object" is another word for "thing"?
-  - /Entity/ is distinguishable object.
-
-    - An entity has identity.
-    - An entity can be distinguished from other entities.
-
-  - [[http://www-ksl.stanford.edu/knowledge-sharing/papers/engmath.html][An Ontology for Engineering Mathematics]]
-
-- Thoughts
-
-  - If our past is better than our present, then we have failed.
-
-- How to study philosophy without wasting time?
-
-  - [[https://philosophy.stackexchange.com/questions/21292/do-some-continental-philosophers-deliberately-obfuscate-their-writing-why][Phil. SE 21292: Do some continental philosophers deliberately obfuscate their writing? Why?]]
-  - [[https://en.wikipedia.org/wiki/Pseudophilosophy][WP:Pseudophilosophy]]
-  - [[https://en.wikipedia.org/wiki/Sophist][WP:Sophist]]
-  - philosophy vs science
-
-    - [[https://hsm.stackexchange.com/questions/2608/why-and-when-did-some-areas-separate-themselves-from-philosophy-and-some-not][HSM SE 2608: Why and when did some areas separate themselves from philosophy and some not?]]
-
-      - [[http://www.slate.com/blogs/quora/2014/12/17/when_did_science_and_philosophy_separate_into_different_fields_of_study.html][When Did Science and Philosophy Separate Into Different Fields of Study?]]
-
-        - [[https://www.quora.com/Where-and-why-did-scientists-and-philosophers-branch-out-and-what-is-the-significance-of-philosophy-in-the-field-of-science][Quora: Where and why did scientists and philosophers branch out, and what is the significance of philosophy in the field of science?]]
-
-    - [[https://www.quora.com/Why-are-the-sciences-separate-from-philosophy][Quora: Why are the sciences separate from philosophy?]]
-
-- Ungrouped
-
-  - What is the difference: egoism, egotism, individualism?
-
-- Ethics
-
-  - question group
-
-    - Is it good to force someone to do something even if such forcing makes the world better off?
-    - Is it good to make a few people worse off to make many people better off?
-    - Which should we value more: individual liberty or collective good?
-
-  - [[http://www.philosophyexperiments.com/][test your morality online]]
-
-    - [[http://www.philosophyexperiments.com/moralityplay/][test your moral parsimony]]
-
-  - For the sake of logical consistency
-
-    - Amorality
-
-      - Everyone does whatever they want.
-      - The only reason for not doing something is fear?
-      - Is amorality the only consistent moral system?
-      - Intention doesn't matter.
-      - Intention doesn't change the morality of a situation.
-      - amoral vs immoral
-
-        - amorality = absence of morality
-        - immorality = what majority thinks bad
-
-      - [[https://en.wikipedia.org/wiki/Amorality][WP:Amorality]]
-      - [[https://en.wikipedia.org/wiki/Immorality][WP:Immorality]]
-      - [[https://en.wikipedia.org/wiki/Moral_nihilism][WP:Moral nihilism]]
-
-        - What's the difference?
-
-    - What is this position named?
-
-      - Something is morally right iff the majority says so.
-
-  - [[https://en.wikipedia.org/wiki/Evolution_of_morality][WP:Evolution of morality]]
-
-- How do I avoid forgetting things?
-
-  - Make forgetting impossible.
-
-    - Everything has its place.
-    - This doesn't apply to dementia.
-
-- pointing out 21th century unwisdom
-
-  - [[https://www.youtube.com/watch?v=O5BeLinyfpg][Adam Ruins Everything - Why Weddings Are A Total Rip-Off]]
-
-    - "Despite your family's wishes, weddings are pointless and expensive displays of wealth."
-
-- "It is sometimes said, common sense is very rare." (François-Marie Arouet a.k.a. Voltaire (1694--1778) in "Philosophical Dictionary" (1767))
-- too long, need summary: [[https://waitbutwhy.com/2018/04/picking-career.html][How to Pick a Career (That Actually Fits You)]]
-- chubbyemu
-
-  - [[https://www.youtube.com/watch?v=hvPy4aqr5tA][this kid thinks he knows everything]]:
-    "Successful people feel gratitude. Unsuccessful people feel entitlement."
-  - [[https://www.youtube.com/watch?v=asF4IEqvYw8][You Can't Be Whatever You Want To Be]]
-
-- [[https://www.youtube.com/watch?v=R9OCA6UFE-0][The philosophy of Stoicism - Massimo Pigliucci]]
-- Machiavelli is misunderstood.
-
-  - [[http://brimanning.com/misunderstood-machiavelli][Misunderstood Machiavelli]]
-  - [[https://www.theguardian.com/books/2017/mar/03/have-we-got-machiavelli-all-wrong][Have we got Machiavelli all wrong?]]
-
-- [[https://en.wikipedia.org/wiki/Paradox_of_hedonism][WP:Paradox of hedonism]]
-- Is forcing moral?
-
-  - Is it good, to give people something they did not ask for?
-  - Is it good, to force people to do something that betters them but unwanted by them?
-
-- Is it good, to give people something they did not ask for?
-- Does morality depend on intention or outcome?
-- Why do young people (below 30 years old) have impractical expectations?
-
-  - Because their frontal cortex hasn't fully developed?
-
-- Ontology, hierarchy, knowledge organization
-
-  - [[https://en.wikipedia.org/wiki/Porphyrian_tree][WP:Porphyrian tree]]
-
-    - [[https://link.springer.com/chapter/10.1007/978-1-84628-710-7_2][Ontology in Computer Science]]
-
-- What is the difference between data, information, belief, knowledge, wisdom?
-- [[https://en.wikipedia.org/wiki/First_principle][WP:First principle]]
-- Pop material
-
-  - https://www.whatisitliketobeaphilosopher.com/
-
-    - Biographical interviews.
-
-- Science and Popper's falsifiability?
-- Knowledge is a tower.
-
-  - It is built from the bottom upward.
-  - Concepts stand on other concepts.
-  - The bottom of that tower is everything we know from our senses?
-
-    - Or is it logic?
-
-- Abductive reasoning?
-
-  - We know Y from experiment.
-  - Find a theory X that explains Y.
-
-- Linguistics?
-
-  - What is a question?
-
-    - What are its answers?
-    - https://plato.stanford.edu/entries/questions/
-
-  - How do we answer "What is X"?
-
-    - Semantics of the copula ("be")?
-    - Depends on the language?
-    - [[https://en.wikipedia.org/wiki/Semantics_of_logic][WP:Semantics of logic]]?
-    - "X is Y" means "X is another word for Y".
-    - "X is a Y" means "X is an instance of Y".
-
-      - X a special kind of Y
-      - There exists Z such that "X is a Y that Z"
-
-    - "X is a Y that Z" means that every X is an instance of Y that satisfies Z.
-
-- Distraction
-
-  - How do we justify knowledge?
-
-    - How do we justify knowledge from observation?
-
-      - [[https://philosophy.stackexchange.com/questions/15463/why-distrust-our-senses][Philo. SE 15463: Why distrust our senses?]]
-
-    - How do we justify knowledge from inference?
-
-      - Why does logic work? Why is Nature logical?
-      - [[https://en.wikipedia.org/wiki/Syllogism][WP:Syllogism]]
-      - [[https://en.wikipedia.org/wiki/Modus_ponens][WP:Modus ponens]]
-      - [[https://en.wikipedia.org/wiki/Deductive_reasoning][WP:Deductive reasoning]]
-      - [[https://philosophy.stackexchange.com/questions/22103/how-to-justify-the-use-of-logic][Philo. SE 22103: How to justify the use of logic?]]
-
-  - [[https://en.wikipedia.org/wiki/Epistemology][WP:Epistemology]]
-  - [[https://plato.stanford.edu/entries/epistemology/][SEP:Epistemology]]
-
-- [[https://www.youtube.com/watch?v=GcJxRqTs5nk][Moral behavior in animals | Frans de Waal]]
-- Definition of "selfish"? Does intention matter?
-** Rebooting human knowledge after mass destruction
-   :PROPERTIES:
-   :CUSTOM_ID: rebooting-human-knowledge-after-mass-destruction
-   :END:
-
-- How do we reboot human knowledge from zero?
-
-  - There are some ways in which everything might be destroyed:
-
-    - the next world war
-    - the next big space object impact
-
-  - We must survive.
-
-    - Find, gather, and follow the survivalists.
-
-      - [[https://en.wikipedia.org/wiki/Survivalism][WP:Survivalism]]
-
-    - We must drink.
-
-      - Settle near a clean river.
-
-    - We must eat.
-
-      - Forage.
-
-        - Hunt some game/meat.
-        - Gather edible plants.
-        - https://www.reddit.com/r/AskHistorians/comments/2zsm4z/how_often_did_prehistoric_man_eat_meat/
-        - [[https://en.wikipedia.org/wiki/Optimal_foraging_theory][WP:Optimal foraging theory]]
-        - [[https://en.wikipedia.org/wiki/Foraging][WP:Foraging]]
-
-      - How do we forage with less effort?
-
-        - Weapon. Sharp edges.
-        - Fire. Cooking.
-        - Husbandry. Raise. Farm. Ranch. Agriculture. Crops.
-
-    - Try to restore some of the Internet (Google, Wikipedia) before the survivalists die???
 * Biology
 - How do we cure death?
 - How do we live forever?
@@ -1556,9 +1650,19 @@ https://en.wikipedia.org/wiki/CIE_1931_color_space#Meaning_of_X,_Y_and_Z
 ** Newton's prism splits sunlight into spectrum?
 ** Good question about the meaning of the wavelength of a photon
 https://physics.stackexchange.com/questions/267034/what-exactly-is-meant-by-the-wavelength-of-a-photon
-* Probability arises from basic physical laws?
-- https://www.theatlantic.com/science/archive/2018/11/science-full-mavericks-like-my-grandfather-was-his-physics-theory-right/574573/
-- https://www.researchers.one/article/2018-10-6
+** Colors?
+- What is color?
+  - https://en.wikipedia.org/wiki/Color
+- monochrome vs polychrome
+- subjective color vs objective color
+- What is the difference between the purple that is red-blue mixture and the purple that is monochromatic purple laser?
+- Why is red+blue+green light = white, but red+blue+green ink = something dark?
+  - https://en.wikipedia.org/wiki/Additive_color
+  - https://en.wikipedia.org/wiki/Subtractive_color
+- Shaded checkerboard color optical illusion.
+- "Why aren't there printers that use red-green-blue ink cartridges?" https://graphicdesign.stackexchange.com/questions/108620/why-arent-there-printers-that-use-red-green-blue-ink-cartridges
+- Mary's room https://en.wikipedia.org/wiki/Knowledge_argument
+  - We aren't going down this rabbit hole for now.
 * Energy and work
 - "What the HECK is Energy?" https://www.youtube.com/watch?v=snj1wBtn6I8
   - Energy is the amount of work that /could/ be done.
@@ -1569,7 +1673,134 @@ https://physics.stackexchange.com/questions/267034/what-exactly-is-meant-by-the-
 "Wave moves energy without moving matter"[fn::"What Are Gravitational Waves?" https://www.youtube.com/watch?v=HmiPDvz0WVU]
 But matter is congealed energy?
 But energy is only a mathematical artifact, an unreal quantity.
-* What?
+* Electromagnetism
+Nick Lucid's explanation of Poynting vectors and electromagnetic energy
+"Energy doesn't FLOW the way you THINK! (Electrodynamics)"[fn::https://www.youtube.com/watch?v=C7tQJ42nGno]
+The charges are not "energy carriers".
+* Relativity
+- Matter bends spacetime.
+  - Matter bends spacetime, especially the spacetime /near that matter/.
+  - What does it mean?
+- Spacetime curvature accelerates matter.
+- Einstein could predict some things from philosophy/reasoning/logic/language/German/English without mathematics/analysis/calculus/differential-geometry/calculations/numbers.
+  - https://en.wikipedia.org/wiki/Introduction_to_general_relativity
+  - He used philosophy to derive the mathematics, not the other way around.
+- https://www.quora.com/What-is-the-most-misunderstood-thing-in-physics
+  - See "You can never actually fall into a black hole."
+** Spherical coordinate systems
+(Why do we bring this up?)
+*** Mathematician's heading
+To simplify the explanation of the coming spherical coordinate system,
+we introduce "heading".
+
+Our definition of heading begins with \ang{0} pointing east (positive x-axis),
+and then goes counterclockwise,
+so \ang{90} is north (positive y-axis), \ang{180} is west (negative x-axis),
+and \ang{270} is south (negative y-axis).
+
+Note that our heading differs from the navigator's heading,
+which begins with \ang{0} pointing north and then goes clockwise.
+ \footnote{\url{https://en.wikipedia.org/wiki/Cardinal_direction\#Additional_points}}
+*** The spherical coordinate system
+The spherical coordinates \((r,a,b)\) mean
+"set heading to \(a\), set elevation to \(b\), and then go the distance \(r\)".
+
+The spherical coordinate system adds another angle component to the polar coordinate system.
+
+We now describe how to map the spherical coordinates \(S(r,a,b)\) to Cartesian coordinates \(C(x,y,z)\).
+The slogan to remember is that \(S(r,a,b)\) means
+\enquote{set heading to \(a\),
+set elevation to \(b\),
+and then go the distance \(r\)}.
+Another slogan is \enquote{face east, turn your head left by angle \(a\),
+turn your head up by angle \(b\), and then look at distance \(r\)}.
+
+Let's read slower as we imagine the drawing.
+
+Let \(O\) be the center of both the spherical coordinate system and the Cartesian coordinate system.
+Let their centers coincide.
+
+A negative angle \(-a\) means the angle \(a\) but in the reverse direction.
+
+Draw the point \(D\) at \(C(r,0,0)\),
+which means that \(D\) lies on the positive x-axis,
+at distance \(r\) from \(O\).
+
+With the positive z-axis as the axis of rotation,
+rotate the vector \(OD\), by angle \(a\) toward the positive y-axis
+(or toward the negative y-axis if \(a\) is negative).
+Call the resulting vector \(OE\).
+Thus, the point \(E\) is at \(C(r \cos a, r \sin a, 0)\),
+which is still on the xy-plane.
+
+Then, rotate the vector \(OE\), by angle \(b\),
+out of the xy-plane, toward the positive z-axis
+(or toward the negative z-axis if \(b\) is negative).
+Call the resulting vector \(OF\).
+
+Then \(F\) is the point described by \(S(r,a,b)\).
+*** Relationship with Cartesian coordinate systems
+Let's say that the point \(F\) is at \(S(r,a,b)\), which is equal to \(C(x,y,z)\).
+By the definition of rotation and the congruence of triangles,
+we can convert spherical coordinates to Cartesian coordinates as follows:
+\begin{align}
+    x &= r \cos a \cos b
+    \\
+    y &= r \sin a \cos b
+    \\
+    z &= r \sin b
+\end{align}
+
+We can convert Cartesian coordinates to spherical coordinates as follows:
+\begin{align}
+    r &= \sqrt{x^2 + y^2 + z^2}
+    \\
+    \tan a &= y/x
+    \\
+    \sin b &= z/r
+\end{align}
+but we have to pick the angles that make the signs correct.
+
+Thus, we have just explained what is meant by the slogan
+\enquote{set heading to \(a\),
+set elevation to \(b\),
+and then go the distance \(r\)}.
+*** Which spherical coordinate system?
+Note that our \(b\) is elevation, not azimuth.
+The relationship between elevation and azimuth is
+\[
+    \text{azimuth} = \ang{90} - \text{elevation}.
+\]
+
+If the elevation is zero, then the spherical coordinate system reduces
+to the polar coordinate system on the xy-plane.
+That method embeds the polar coordinate system into the xy-plane.
+Thus the angle \(a\) is called heading angle, polar angle, or longitude.
+The angle \(b\) is called elevation angle or latitude.
+
+Azimuth is angle from zenith.
+In this case, zenith is the z-axis.
+
+ISO standard?
+Azimuth?
+Elevation?
+
+What\footnote{\url{https://en.wikipedia.org/wiki/Spherical_coordinate_system}}
+* Quantum mechanics
+** Reformulations?
+https://www.quora.com/Has-an-attempt-ever-been-made-to-reformulate-quantum-mechanics-in-a-space-other-than-Hilbert-space
+** Quantum Venn diagram paradox
+- Three polarizers.
+  - Bell's Theorem: The Quantum Venn Diagram Paradox https://www.youtube.com/watch?v=zcqZHYo7ONs
+    - It is surprising that adding a third filter /increases/ brightness.
+      We think that a filter should only decrease, not increase brightness.
+** The meaning of probability?
+If something is possible (that is, if something has non-zero probability), will it eventually happen?
+
+There is a non-zero probability that a black hole appearing out of nowhere kills us all.
+Will it happen?
+Is it happening in a parallel universe?
+** What?
 Why is it hard to convert between matter and energy?
 What does QFT say?
 (Related: Why isn't everything homemadeable?)
@@ -1577,6 +1808,87 @@ What does QFT say?
 Physics and monads[fn::https://johncarlosbaez.wordpress.com/2018/12/30/geometric-quantization-part-5/].
 From Abdullah.
 How much background knowledge do we need to understand that?
+** Intro to QFT?
+An Introduction to Quantum Field Theory
+Mrinal Dasgupta
+http://hepwww.rl.ac.uk/hepsummerschool/Dasgupta%2008%20Intro%20to%20QFT.pdf
+
+A Very Short Introduction to Quantum Field Theory
+A. W. Stetz
+http://physics.oregonstate.edu/~stetza/COURSES/ph654/ShortBook.pdf
+** Philosophy of quantum mechanics?
+*** Which one of these are ontologically justified?
+- Matter can /behave/ as a wave or a particle?
+  - In what way?
+- Matter /is/ both a wave and a particle?
+  - Refutation?
+    - A water wave is not water.
+      - Wave is the name we give to periodic motion.
+        - We can perceive a wave because we can interact with the constituents of the wave.
+          - If light is a wave, then light should have constituents.
+- Observe: double-slit experiment: shooting electrons through two slits.
+  - de Broglie hypothesis relates the momentum and wavelength.
+- Observe: quantum tunneling.
+  - How do we explain quantum tunneling without probabilities?
+  - How does QFT explain electron tunneling?
+- How does QFT (quantum field theory) describe an electron?
+  - https://www.symmetrymagazine.org/article/july-2013/real-talk-everything-is-made-of-fields
+  - http://www.quantum-field-theory.net/electron-look-like/
+- 2013 "Particles, Fields and The Future of Physics - A Lecture by Sean Carroll" https://www.youtube.com/watch?v=gEKSpZPByD0
+  - lecture for public audience
+  - 30:40
+    - The mass of a particle is the energy required to get the corresponding quantum field to vibrate.
+    - There is a field for every type of particle.
+      There is an electron field, there is a photon field, and so on.
+    - Particle interaction is the coupling between different fields.
+- QED (quantum electrodynamics) http://hyperphysics.phy-astr.gsu.edu/hbase/Forces/qed.html
+  - Feynman diagram is one way of teaching QED.
+*** What is a wave?
+- A water wave does not require the water to /flow/.
+*** Path to understanding quantum mechanics?
+- Electrons fired toward a screen behind two slits show interference pattern.
+- Hydrogen absorption/emission spectrum
+- https://en.m.wikipedia.org/wiki/Planck%27s_law
+- A small hole on a closed box approximates a black body.
+  The hole looks black from outside.
+  Heating the box changes the hole's color.
+- What is a concrete example of a potential barrier?
+*** Double-slit experiments?
+- How do we detect electrons?
+  https://en.wikipedia.org/wiki/Electron_capture_detector
+- What is used to detect electrons in the double slit experiment?
+  https://www.reddit.com/r/askscience/comments/3ebcw6/what_is_used_to_detect_electrons_in_the_double/
+- https://physics.stackexchange.com/questions/364312/how-does-the-electron-detector-detect-electrons-dbl-slit
+  "How Do We Know Protons, Electrons, and Quarks really Exist?"
+- https://www.nsta.org/publications/news/story.aspx?id=51054
+- How do we know electrons exist? https://www.quora.com/How-do-we-know-electrons-exist
+- Unread
+  - https://en.wikipedia.org/wiki/Matter_wave
+  - 2017 article
+    "On the self-interference in electron scattering: Copenhagen, Bohmian and geometrical interpretations of quantum mechanics"
+    https://arxiv.org/abs/1710.02583
+  - I don't understand the question enough to determine why it is downvoted.
+    "Can the intensity distribution behind edges and slits be explained by the interaction with the surface electrons of the edges?"
+    https://physics.stackexchange.com/questions/158105/can-the-intensity-distribution-behind-edges-and-slits-be-explaint-by-the-interac
+  - https://www.reddit.com/r/Physics/comments/4ugmc7/can_someone_explain_the_double_slit_experiment/
+    - 2013 article "Controlled double-slit electron diffraction" http://iopscience.iop.org/article/10.1088/1367-2630/15/3/033018/meta
+  - Variation of double slit experiments?
+    - Double slit with nuclear decay?
+    - Double slit with tracers? (What is a tracer?)
+  - What is an atom and how do we know? https://www.youtube.com/watch?v=LhveTGblGHY
+  - Variations, modifications, and expansions
+    - https://noetic.org/research/projects/next-generation-double-slit
+**** Quantum eraser?
+**** Afshar experiment?
+- http://steve-patterson.com/quantum-physics-abuse-reason/
+  - Afshar experiment
+  - Weak measurement
+- How do we know where an electron is?
+  How do we measure the position of an electron?
+  How do we measure the momentum/energy of an electron?
+** Probability arises from basic physical laws?
+- https://www.theatlantic.com/science/archive/2018/11/science-full-mavericks-like-my-grandfather-was-his-physics-theory-right/574573/
+- https://www.researchers.one/article/2018-10-6
 * Inverting the field?
 We can compute the gravity vector field arising from a mass density scalar field.
 
@@ -1590,83 +1902,267 @@ g x = sum_k rho xk vk
 My guess is yes.
 
 Which is real: the gravity field or the mass density?
+* Unread
+- Ampere's experiments
+  - [[http://farside.ph.utexas.edu/teaching/302l/lectures/node70.html][Ampère's Experiments]]
+  - http://www.larouchepub.com/eiw/public/1992/eirv19n20-19920515/eirv19n20-19920515_030-the_ampere_crucial_experiments.pdf
+- https://newrepublic.com/article/118655/theoretical-phyisicist-explains-why-science-not-about-certainty
+- [[https://www.reddit.com/r/askscience/comments/1xxbq0/in_quantum_physics_observer_effect_what_qualifies/][Reddit: In quantum physic's 'observer effect', what qualifies as an 'observer'?]]
 * Are these real?
 http://fisika.fst.unair.ac.id/theory/
 * What
-Which one makes sense:
-"There is space between two things."
-"Things exist in space."
-"This thing requires/occupies/takes space."
-Operational definitions:
-Space is whatever rulers measure.
-Time is whatever timers measure.
+** Philosophy
+- Some branches of philosophy
 
-Search "ontology of energy"
+  - Epistemology (how do we know?)
+  - Ontology (what exists?)
+  - Ethics (morality; what should be?)
 
-https://en.wikipedia.org/wiki/Philosophy_of_physics
+- Epistemology
 
-Time is the sequence of events.
-Time is an ordering of events.
-Time is whatever a timer measures.
+  - There are two kinds of knowledge: /prior/ and /posterior/.
 
-Nick Lucid's explanation of Poynting vectors and electromagnetic energy
-"Energy doesn't FLOW the way you THINK! (Electrodynamics)"[fn::https://www.youtube.com/watch?v=C7tQJ42nGno]
-The charges are not "energy carriers".
-* Theoretical physics advances by discovering and removing simplifying assumptions
-What does Thomas Kuhn say?
-* What is motion?
-An object moves iff its position changes.
-Thus motion is change of position.
+    - Prior (before-the-fact) knowledge is obtained by inferring theorems from axioms through the rules of logic.
+    - Posterior (after-the-fact) knowledge is obtained by observation from the real world through the physical senses.
 
-We can describe the motion of an object by sampling its position at various times.
+  - [[https://en.wikipedia.org/wiki/A_priori_and_a_posteriori][WP:a priori and a posteriori]]
+  - [[https://en.wikipedia.org/wiki/Epistemology][WP:Epistemology]]
+  - [[https://en.wikipedia.org/wiki/Empiricism][WP:Empiricism]]
+  - [[https://en.wikipedia.org/wiki/Experimentalism][WP:Experimentalism]]
+  - [[https://en.wikipedia.org/wiki/Occam%27s_razor][WP:Occam's razor]]
+  - In physics, we know things from experiments and inference.
+  - https://en.wikipedia.org/wiki/Scientific_method
+  - [wenning2009scientific] explains scientific epistemology (about 15 pages).
 
-What is change?
+    - http://www2.phy.ilstu.edu/pte/publications/scientific_epistemology.pdf
 
-What is position?
-Position is the relative place of things.
-Is position a property of a thing?
-Position is relative.
-The position of a thing is measured with respect to another thing.
-* How do we model motion?
-We can use Newton's equations of motion.
-There are many big simplifications:
-A rigid body is simplified to a point mass occupying no space.
-Space and time is absolute.
-Force acts instantaneously.
+  - What does "to know" mean?
 
-Does a gravitational field have material existence?
-Is gravitational field physical or mathematical?
-A gravitational field /describes/ the gravitational force that a unit point mass /would/ experience.
-Note the counterfactual.
-The verb /describes/ implies that the subject (a gravitational field) is abstract.
+    - Some possibilities
 
-At first I think matter changes spacetime around it, and we call this change "field".
-But Quantum Field Theory seems to imply that the fields are real, and matter seems to be our limited perception of the fields.
+      - To /know/ an object is to be familiar with that object.
+      - To /know/ an object is to be able to /use/ that object.
 
-We think that a matter establishes an associated gravitational field.
+- Ontology
 
-Einstein's E = mc2 is about that gravity affects both energy and mass.
+  - Measurabilism
 
-A Lagrangian tells how a system interchanges potential energy and kinetic energy?
+    - A thing exists if and only if it can be measured.
+    - [[https://en.wikipedia.org/wiki/Mike_Alder#Newton.27s_flaming_laser_sword][WP:Mike Alder, Newton's flaming laser sword]]
 
-We can use continuum mechanics.
+      - "What cannot be settled by experiment is not worth debating."
 
-QFT is basically a mathematical model of motion, like Newton's theory, but with fewer simplifying assumptions.
-Theoretical physics advances by removing simplifying assumptions.
+  - [[https://en.wikipedia.org/wiki/Ontology][WP:Ontology]]
+  - Ontology defines objects, their properties, and their relationships?
+  - "Object" is another word for "thing"?
+  - /Entity/ is distinguishable object.
 
-Lagrangian and Hamiltonian are mathematical things.
-Do they have physical meaning?
-* The meaning of probability?
-If something is possible (that is, if something has non-zero probability), will it eventually happen?
+    - An entity has identity.
+    - An entity can be distinguished from other entities.
 
-There is a non-zero probability that a black hole appearing out of nowhere kills us all.
-Will it happen?
-Is it happening in a parallel universe?
-* Intro to QFT?
-An Introduction to Quantum Field Theory
-Mrinal Dasgupta
-http://hepwww.rl.ac.uk/hepsummerschool/Dasgupta%2008%20Intro%20to%20QFT.pdf
+  - [[http://www-ksl.stanford.edu/knowledge-sharing/papers/engmath.html][An Ontology for Engineering Mathematics]]
 
-A Very Short Introduction to Quantum Field Theory
-A. W. Stetz
-http://physics.oregonstate.edu/~stetza/COURSES/ph654/ShortBook.pdf
+- Thoughts
+
+  - If our past is better than our present, then we have failed.
+
+- How to study philosophy without wasting time?
+
+  - [[https://philosophy.stackexchange.com/questions/21292/do-some-continental-philosophers-deliberately-obfuscate-their-writing-why][Phil. SE 21292: Do some continental philosophers deliberately obfuscate their writing? Why?]]
+  - [[https://en.wikipedia.org/wiki/Pseudophilosophy][WP:Pseudophilosophy]]
+  - [[https://en.wikipedia.org/wiki/Sophist][WP:Sophist]]
+  - philosophy vs science
+
+    - [[https://hsm.stackexchange.com/questions/2608/why-and-when-did-some-areas-separate-themselves-from-philosophy-and-some-not][HSM SE 2608: Why and when did some areas separate themselves from philosophy and some not?]]
+
+      - [[http://www.slate.com/blogs/quora/2014/12/17/when_did_science_and_philosophy_separate_into_different_fields_of_study.html][When Did Science and Philosophy Separate Into Different Fields of Study?]]
+
+        - [[https://www.quora.com/Where-and-why-did-scientists-and-philosophers-branch-out-and-what-is-the-significance-of-philosophy-in-the-field-of-science][Quora: Where and why did scientists and philosophers branch out, and what is the significance of philosophy in the field of science?]]
+
+    - [[https://www.quora.com/Why-are-the-sciences-separate-from-philosophy][Quora: Why are the sciences separate from philosophy?]]
+
+- Ungrouped
+
+  - What is the difference: egoism, egotism, individualism?
+
+- Ethics
+
+  - question group
+
+    - Is it good to force someone to do something even if such forcing makes the world better off?
+    - Is it good to make a few people worse off to make many people better off?
+    - Which should we value more: individual liberty or collective good?
+
+  - [[http://www.philosophyexperiments.com/][test your morality online]]
+
+    - [[http://www.philosophyexperiments.com/moralityplay/][test your moral parsimony]]
+
+  - For the sake of logical consistency
+
+    - Amorality
+
+      - Everyone does whatever they want.
+      - The only reason for not doing something is fear?
+      - Is amorality the only consistent moral system?
+      - Intention doesn't matter.
+      - Intention doesn't change the morality of a situation.
+      - amoral vs immoral
+
+        - amorality = absence of morality
+        - immorality = what majority thinks bad
+
+      - [[https://en.wikipedia.org/wiki/Amorality][WP:Amorality]]
+      - [[https://en.wikipedia.org/wiki/Immorality][WP:Immorality]]
+      - [[https://en.wikipedia.org/wiki/Moral_nihilism][WP:Moral nihilism]]
+
+        - What's the difference?
+
+    - What is this position named?
+
+      - Something is morally right iff the majority says so.
+
+  - [[https://en.wikipedia.org/wiki/Evolution_of_morality][WP:Evolution of morality]]
+
+- How do I avoid forgetting things?
+
+  - Make forgetting impossible.
+
+    - Everything has its place.
+    - This doesn't apply to dementia.
+
+- pointing out 21th century unwisdom
+
+  - [[https://www.youtube.com/watch?v=O5BeLinyfpg][Adam Ruins Everything - Why Weddings Are A Total Rip-Off]]
+
+    - "Despite your family's wishes, weddings are pointless and expensive displays of wealth."
+
+- "It is sometimes said, common sense is very rare." (François-Marie Arouet a.k.a. Voltaire (1694--1778) in "Philosophical Dictionary" (1767))
+- too long, need summary: [[https://waitbutwhy.com/2018/04/picking-career.html][How to Pick a Career (That Actually Fits You)]]
+- chubbyemu
+
+  - [[https://www.youtube.com/watch?v=hvPy4aqr5tA][this kid thinks he knows everything]]:
+    "Successful people feel gratitude. Unsuccessful people feel entitlement."
+  - [[https://www.youtube.com/watch?v=asF4IEqvYw8][You Can't Be Whatever You Want To Be]]
+
+- [[https://www.youtube.com/watch?v=R9OCA6UFE-0][The philosophy of Stoicism - Massimo Pigliucci]]
+- Machiavelli is misunderstood.
+
+  - [[http://brimanning.com/misunderstood-machiavelli][Misunderstood Machiavelli]]
+  - [[https://www.theguardian.com/books/2017/mar/03/have-we-got-machiavelli-all-wrong][Have we got Machiavelli all wrong?]]
+
+- [[https://en.wikipedia.org/wiki/Paradox_of_hedonism][WP:Paradox of hedonism]]
+- Is forcing moral?
+
+  - Is it good, to give people something they did not ask for?
+  - Is it good, to force people to do something that betters them but unwanted by them?
+
+- Is it good, to give people something they did not ask for?
+- Does morality depend on intention or outcome?
+- Why do young people (below 30 years old) have impractical expectations?
+
+  - Because their frontal cortex hasn't fully developed?
+
+- Ontology, hierarchy, knowledge organization
+
+  - [[https://en.wikipedia.org/wiki/Porphyrian_tree][WP:Porphyrian tree]]
+
+    - [[https://link.springer.com/chapter/10.1007/978-1-84628-710-7_2][Ontology in Computer Science]]
+
+- What is the difference between data, information, belief, knowledge, wisdom?
+- [[https://en.wikipedia.org/wiki/First_principle][WP:First principle]]
+- Pop material
+
+  - https://www.whatisitliketobeaphilosopher.com/
+
+    - Biographical interviews.
+
+- Science and Popper's falsifiability?
+- Knowledge is a tower.
+
+  - It is built from the bottom upward.
+  - Concepts stand on other concepts.
+  - The bottom of that tower is everything we know from our senses?
+
+    - Or is it logic?
+
+- Abductive reasoning?
+
+  - We know Y from experiment.
+  - Find a theory X that explains Y.
+
+- Linguistics?
+
+  - What is a question?
+
+    - What are its answers?
+    - https://plato.stanford.edu/entries/questions/
+
+  - How do we answer "What is X"?
+
+    - Semantics of the copula ("be")?
+    - Depends on the language?
+    - [[https://en.wikipedia.org/wiki/Semantics_of_logic][WP:Semantics of logic]]?
+    - "X is Y" means "X is another word for Y".
+    - "X is a Y" means "X is an instance of Y".
+
+      - X a special kind of Y
+      - There exists Z such that "X is a Y that Z"
+
+    - "X is a Y that Z" means that every X is an instance of Y that satisfies Z.
+
+- Distraction
+
+  - How do we justify knowledge?
+
+    - How do we justify knowledge from observation?
+
+      - [[https://philosophy.stackexchange.com/questions/15463/why-distrust-our-senses][Philo. SE 15463: Why distrust our senses?]]
+
+    - How do we justify knowledge from inference?
+
+      - Why does logic work? Why is Nature logical?
+      - [[https://en.wikipedia.org/wiki/Syllogism][WP:Syllogism]]
+      - [[https://en.wikipedia.org/wiki/Modus_ponens][WP:Modus ponens]]
+      - [[https://en.wikipedia.org/wiki/Deductive_reasoning][WP:Deductive reasoning]]
+      - [[https://philosophy.stackexchange.com/questions/22103/how-to-justify-the-use-of-logic][Philo. SE 22103: How to justify the use of logic?]]
+
+  - [[https://en.wikipedia.org/wiki/Epistemology][WP:Epistemology]]
+  - [[https://plato.stanford.edu/entries/epistemology/][SEP:Epistemology]]
+
+- [[https://www.youtube.com/watch?v=GcJxRqTs5nk][Moral behavior in animals | Frans de Waal]]
+- Definition of "selfish"? Does intention matter?
+** Rebooting human knowledge after mass destruction
+- How do we reboot human knowledge from zero?
+
+  - There are some ways in which everything might be destroyed:
+
+    - the next world war
+    - the next big space object impact
+
+  - We must survive.
+
+    - Find, gather, and follow the survivalists.
+
+      - [[https://en.wikipedia.org/wiki/Survivalism][WP:Survivalism]]
+
+    - We must drink.
+
+      - Settle near a clean river.
+
+    - We must eat.
+
+      - Forage.
+
+        - Hunt some game/meat.
+        - Gather edible plants.
+        - https://www.reddit.com/r/AskHistorians/comments/2zsm4z/how_often_did_prehistoric_man_eat_meat/
+        - [[https://en.wikipedia.org/wiki/Optimal_foraging_theory][WP:Optimal foraging theory]]
+        - [[https://en.wikipedia.org/wiki/Foraging][WP:Foraging]]
+
+      - How do we forage with less effort?
+
+        - Weapon. Sharp edges.
+        - Fire. Cooking.
+        - Husbandry. Raise. Farm. Ranch. Agriculture. Crops.
+
+    - Try to restore some of the Internet (Google, Wikipedia) before the survivalists die???
