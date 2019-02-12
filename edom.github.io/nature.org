@@ -7,6 +7,7 @@
 \newcommand\der{\operatorname{der}}
 \newcommand\dd{\operatorname{d}}
 \newcommand\ang[1]{#1^\circ}
+\newcommand\parenthesize[1]{\left(#1\right)}
 \)
 
 (We are not related with the Nature Research company[fn::https://www.nature.com/].)
@@ -65,7 +66,11 @@ https://en.wikipedia.org/wiki/Philosophy_of_physics
 Time is the sequence of events.
 Time is an ordering of events.
 Time is whatever a timer measures.
-** Suggested learning path?
+** The approach of this book
+The approach of this book is physics first, philosophy second, and mathematics third.
+* Suggested learning path?
+How do we learn without wasting effort learning prerequisites that will not be used anyway?
+
 Geometry, kinematics, statics, dynamics.
 
 Coordinate systems, generalized coordinates, Newtonian mechanics, Lagrangian, Hamiltonian.
@@ -79,6 +84,13 @@ Fluids, waves, optics, electricity, magnetism, electromagnetism.
 Differential geometry, relativity.
 
 Quantum mechanics.
+
+Susan Fowler recommends[fn::https://www.susanjfowler.com/blog/2016/8/13/so-you-want-to-learn-physics] these books for quantum mechanics:
+Griffiths's "Introduction to quantum mechanics" \cite{griffiths2005introduction} and Sakurai's "Modern quantum mechanics" \cite{sakurai2011modern}.
+She recommends these books for quantum field theories:
+Anthony Zee's "Quantum field theory in a nutshell" \cite{zee2010quantum}.
+
+https://physics.stackexchange.com/questions/19262/whats-the-standard-roadmap-to-learning-quantum-physics
 * Geometry and kinematics
 Kinematics is about /describing/ motion, not /explaining/ (finding the cause of) motion.
 ** Spaces
@@ -100,22 +112,6 @@ We can think of the space near us as a /three-dimensional Euclidean space/,
 which is our intuition of space as we experience it in our everyday lives.
 
 In an Euclidean space, the shortest path connecting two points is a straight line.
-** Line, straightness, geodesic, distance
-A /line/ is a one-dimensional thing.
-
-A line /connects/ point P to point Q iff one end of the line is P and the other end of the line is Q.
-
-A line connecting two points is /straight/ iff that line is the shortest line connecting those points.
-When we travel on Earth without ever turning,
-we think we are traveling in a straight line,
-but after about 40,000 km we will arrive at where we departed from.
-Someone far enough in the sky will see that we are traveling in a great circle.
-If you find it hard to imagine the size of the Earth,
-just imagine that you were an ant-sized human on a tennis ball.
-
-A /geodesic/ is a straight line.
-
-The /distance/ between two points is the length of the shortest line connecting them.
 ** Basic motion concepts
 *** Position and displacement
 The /position/ of a thing is where it is in space.
@@ -421,8 +417,509 @@ R(r\cos\theta, r\sin\theta) = P(r,\theta)
 \]
 
 A point in a space can have different coordinates in different coordinate systems.
-* Dynamics, forces, causes of motion
-* Waves
+* Dynamics, force, cause of motion
+** Force, momentum
+In philosophy, force is a synonym of cause;
+thus to force X to do Y is to cause X to do Y.
+
+/Force/ is the rate of change of momentum (Newton 1687, 1728).
+
+Informally and vaguely, /momentum/ is the amount of motion in an object, that is, how hard it is to stop.
+
+Effect of frame of reference in momentum?https://physics.stackexchange.com/questions/363298/during-a-collision-why-is-momentum-not-conserved-in-a-participants-frame-of-re/363299
+** How do we know that weight is gravitational force?
+** Falling
+We can see that an object falling from height \(h\) requires a time \(t\) to reach the ground, where \( t = \sqrt{2 g h} \) and \(g \approx 10 \meter\per\second^2\).
+* Mechanics, what?
+2017-12-18 05:29:06.343592295 +0700
+
+\emph{Mechanics} is a theory of motion.
+
+Reading:
+\emph{The science of mechanics} by Ernst Mach.
+Historical evolution.
+The principles of statics.
+The principles of dynamics.
+** Understanding mass
+\footnote{\url{http://www.ag-physics.org/rmass/}}
+\footnote{\url{https://en.wikipedia.org/wiki/Mass}}
+The \emph{mass} of an object is the difficulty of changing its velocity.
+
+Mass is resistance to force.
+
+The mass of an object is the amount of matter in that object.
+
+The \emph{rest mass} of an object is its mass measured if it is at rest.
+** Understanding force
+\emph{Force} is the rate of change of momentum.
+
+A force \emph{acts} on an object.
+** Using vectors to model forces and others
+Position, momentum, velocity, acceleration, and force are modeled by \emph{vectors} (\S\ref{sec:vector}).
+The position of \(B\) as measured from \(A\) is modeled by a \emph{vector} \(AB\).
+** Superposing forces
+Forces acting on an object obey the \emph{superposition principle}:
+the result of two forces \(F_1\) and \(F_2\) acting on the same object
+is the same as the result of one force \(F_1+F_2\) acting on that object.
+
+The \emph{net force} acting on an object is the sum of all other forces acting on that object.
+
+\emph{Resultant force} is another term for \emph{net force}.
+** Understanding moving frames
+A frame of reference may be \emph{moving},
+for example when you look outside from a moving car.
+** Understanding inertial frames
+An \emph{inertial frame of reference} \(R\) is a frame of reference such that
+for each each object \( M \), if the net force acting on \( M \) is zero, then \(R\) sees that the acceleration of \(M\) is zero.
+** Appreciating Galileo's ramps
+Galileo put a ramp (inclined plane),
+rolled a ball from its top,
+and measured the time required by the ball to reach the bottom.
+
+\footnote{\url{https://en.wikipedia.org/wiki/Inclined_plane}}
+A narrow ramp.
+To measure time, he put bells along the ramp.
+The rolling ball hits different bells at different times.
+
+\footnote{\url{https://en.wikipedia.org/wiki/Equations_for_a_falling_body}}
+Galileo's law of falling body
+
+In year? Galileo \( h = k t^2 \).
+** Newton's second law of motion
+If an object has constant mass \( m \) and a constant force \( F \) is acting on it,
+then \( a = F/m \) is that object's constant acceleration.
+
+Newton said momentum, not acceleration?
+** Mechanical system
+A \emph{mechanical system} is a set of objects \( \{ M_1,\ldots,M_n \} \) and forces \( \{ F_1,\ldots,F_n \} \).
+Each \(F_k\) is an expression.
+With Newton's laws, we can turn such mechanical system into \(n\) equations,
+each of the form \( F_k = m_k \cdot d(d(x_k)) \) for \(k\) from 1 to \(n\).
+
+One way of describing the motion of an object is by modeling time as a real number \( t \),
+and modeling the position as a function of time \( x : \Real \to \Real^n \).
+Thus, at time \( t \), the object is at \( x(t) \).
+** Field
+A \emph{field} assigns something to each point in space.
+The \emph{gravitational field} assigns to each point a \emph{gravitational force per unit mass}.
+
+A field is modeled by a \emph{multivariate function} (a function that takes several variables).
+The variables can be grouped into a vector.
+This gives the impression that the function takes one big vector instead of several scattered real numbers.
+
+A \emph{scalar field} is a field that gives a scalar.
+
+A \emph{vector field} is a field that gives a vector.
+
+A field \(f\) is \emph{uniform} iff \(f(x)\) is the same for all \(x\).
+** Weight
+After Newton's law of universal gravitation,
+\emph{weight} means gravitational force.
+The weight of an object on Earth is the gravitational force exerted by Earth on that object.
+\emph{Work} generalizes to \( W = F \cdot x \).
+
+\emph{Work} was defined as weight times height.
+** Path of an object in a field
+\emph{Path} of an object moving in a field.
+A \emph{conservative force} is a force whose work depends only on the difference between the beginning and ending position,
+and not in the path?
+A force whose work is the same for every path from \(A\) to \(B\)?
+The \emph{action} of a path?
+Principle of stationary action?
+** Conservative force
+\footnote{\url{https://en.m.wikipedia.org/wiki/Conservative_force}}
+
+Conservative force \emph{conserves} mechanical energy.
+** Potential energy
+\footnote{\url{https://en.wikipedia.org/wiki/Potential_energy}}
+
+Wikipedia "potential energy":
+Potential energy is associated with forces that act on a body in a way that the total work done by these forces on the body depends only on the initial and final positions of the body in space. These forces, that are called conservative forces, can be represented at every point in space by vectors expressed as gradients of a certain scalar function called potential.
+** Field as gradient of potential
+(This requires multivariate calculus.)
+** Galilean invariance?
+\footnote{\url{https://en.wikipedia.org/wiki/Galilean_invariance}}
+\footnote{\url{https://en.wikipedia.org/wiki/Galileo%27s_ship}}
+% Galilean boost
+\footnote{\url{https://en.wikipedia.org/wiki/Galilean_transformation}}
+\footnote{\url{https://en.wikipedia.org/wiki/Galilean_transformation#Galilean_group}}
+
+Also known as \emph{Galilean relativity}.
+The \emph{Galilean invariance} is the statement
+that Newton's laws of motion is the same in all inertial frame of references.
+
+\footnote{\url{https://en.wikipedia.org/wiki/Galilean_invariance}}
+% Einstein's cabin
+** Confirming experiments
+The experiment of dropping a feather and a ball in vacuum confirms classical mechanics.
+** Disagreeing experiments
+Problem in atomic theory?
+
+Double-slit electron experiment?
+** Branches of mechanics
+\emph{Statics} is?
+\emph{Dynamics} is?
+\emph{Kinematics} describes motion without considering its cause.
+** Moving from force-based thinking to energy-based thinking
+We thought \( F(t) = -g \) and thus \( a(t) = -g/m \) and \( v(t) = - gt / m \) and \( x(t) = - gt^2 / (2m) \).
+We think about the forces,
+figure out the accelerations,
+integrate them to get the velocities,
+and integrate them to get the positions.
+
+How does Hamiltonian mechanics explain a ball falling near the ground?
+\( P = mgh \).
+\( K = \frac{1}{2}mv^2 \).
+The state of the system is \( (h, mv) \).
+The operator is \( P(h, mv) = mgh \) and \( K(h, mv) = \frac{1}{2}mv^2 \).
+\( P + K = \text{constant} \) which means that \( \pdv{P}{h} = 0 \) and \( \pdv{K}{v} = 0 \).
+** Generalization
+Weight is gravitational force.
+** More complex cases?
+So far everything has been constant.
+Now we shall consider the case where they change with time.
+
+Let \(g\) be a vector.
+For understanding phase space, we will consider
+the motion of a point mass \(M\) influenced by a uniform gravitational field \( G(x) = g \).
+
+The acceleration will be \( a(t) = g \).
+The velocity can be obtained by integrating \( a \).
+The position and acceleration are related by the equation \( a = d(d(x)) \).
+In Newtonian dynamics, if we know \( x(0) \), \( v(0) \),
+and all the forces acting on a body,
+then we can calculate the trajectory (all past and future position and velocity) of that body.
+
+Let \( F(t) \) be the \emph{force acting on \( M \)} (that is, the sum of all forces acting on \(M\)) at time \(t\).
+Let \( x(t) \) be the position of \( M \) at time \(t\).
+Let \( v(t) \) be the velocity of \( M \) at time \(t\).
+Let \( a(t) \) be the acceleration of \( M \) at time \(t\).
+Then \( a = d(v) \) and \( v = d(x) \).
+Let \( p : \Real \to \Real^n \).
+Let \( p(t) \) be the momentum of \( M \) at time \( t \).
+Then \( F = d(p) \).
+
+Newton's laws of motion:
+\footnote{\url{https://en.wikipedia.org/wiki/Newton\%27s_laws_of_motion}}
+
+First law:
+In an inertial frame of reference, an object either remains at rest or continues to move at a constant velocity, unless acted upon by a force.
+Second law:
+In an inertial reference frame, the vector sum of the forces F on an object is equal to the mass m of that object multiplied by the acceleration a of the object: \( F = d \ p \).
+Let \( p : T \to M \cdot V \).
+Third law:
+When one body exerts a force on a second body, the second body simultaneously exerts a force equal in magnitude and opposite in direction on the first body.
+
+Andrew Motte's 1729 English translation of Newton's 1726 third edition of
+\emph{Philosophiae naturalis principia mathematica} uses English words and geometry;
+the modern statement uses algebra.
+
+Newton's law of universal gravitation:
+\footnote{\url{https://en.wikipedia.org/wiki/Newton\%27s_law_of_universal_gravitation\#Modern_form}}
+
+Force carrier\footnote{\url{https://en.wikipedia.org/wiki/Force_carrier}}
+
+\footnote{\url{https://en.m.wikipedia.org/wiki/Kinetic_theory_of_gases}}
+
+\footnote{\url{https://en.m.wikipedia.org/wiki/Philosophiæ_Naturalis_Principia_Mathematica}}
+
+Shell theorem
+
+Newton's laws of motion imply Kepler's laws of planetary motion.
+* Statics, weight, and force
+Pretend that the concept of \emph{mass} has not been invented.
+
+\emph{Weight} is what a weight balance measures.
+
+A weight balance has two arms.
+
+Put a weight on an end of a weight balance.
+Push the other end with your hand until the balance comes to rest.
+When they reach equilibrium,
+both of them exerts the same amount of \emph{force}.
+** Law of the lever
+\footnote{\url{https://en.wikipedia.org/wiki/Virtual_work#Law_of_the_lever}}
+\footnote{\url{https://en.wikipedia.org/wiki/Lever}}
+
+\index{definitions!lever}
+\index{lever!definition}
+\index{simple machine!lever|see{lever}}
+A \emph{lever} has a fulcrum and two ends.
+
+Let \(r_1\) be the distance between the first end to the fulcrum.
+
+Let \(r_2\) be the distance between the second end to the fulcrum.
+
+Let \(F_1\) be the weight placed at the first end.
+
+Let \(F_2\) be the weight placed at the second end.
+
+\index{Archimedes!law of the lever}
+\index{laws named after people!Archimedes's law of the lever}
+\index{laws!lever}
+\index{lever!law of the lever}
+\index{statics!Archimedes's law of the lever}
+\emph{Law of the lever}:
+Such lever at equilibrium satisfies \(F_1 \cdot r_1 = F_2 \cdot r_2\).
+
+We take this law as evident.
+Doubt can be removed by a simple experiment.
+
+Thus, a weight balance is a lever whose arms have equal length.
+* Work, energy, power
+** Work
+/Work/ was defined as lifting a weight through a height, by Coriolis in 1826 \MyCite{coriolis1829calcul},
+when steam engines were used to lift buckets of water out of flooded ore mines.
+Thus, then, in physics, /to work/ was to lift a weight through a height.
+
+"Work" readily generalizes from only weights to every /force/, because weight is just a gravitational force.
+
+What if the force and the displacement make an angle?
+
+\footnote{\url{https://en.wikipedia.org/wiki/Work_(physics)}}
+\index{definitions!work}
+\index{work!definition}
+Mathematically, we say that the amount of work \( F \cdot h \) is done by lifting a weight \(F\) so that its height increases by \(h\).
+** Energy
+/Energy/ is the ability to do work.
+
+History of energy?[fn::https://en.wikipedia.org/wiki/History_of_energy]
+** Power
+\footnote{\url{https://en.wikipedia.org/wiki/Power_(physics)}}
+\index{definitions!power}
+\index{power!definition}
+\emph{Power} is work done per unit time: \( P = W / t \).
+This means that a steam engine with twice the power
+will clean the same mine in half the time.
+
+When were the modern notions of work and energy created?
+\footnote{\url{https://hsm.stackexchange.com/questions/414/when-were-the-modern-notions-of-work-and-energy-created}}
+Helmholtz 1847?
+* Statics
+** What
+\footnote{\url{https://en.wikipedia.org/wiki/Timeline_of_fundamental_physics_discoveries}}
+
+\emph{Thermodynamics} began as a theory of steam engines.
+
+\emph{Volume} is how much space something occupies.
+
+\emph{Density} is weight per volume.
+** Archimedes's principle of buoyancy
+
+\footnote{\url{https://en.wikipedia.org/wiki/Archimedes%27_principle}}
+\footnote{\url{https://en.wikipedia.org/wiki/On_Floating_Bodies}}
+
+Put a solid into a container full of liquid.
+
+The volume of the spilled part of the liquid is equal to
+the volume of the submerged part of the solid.
+
+*** Archimedes's principle of buoyancy
+\index{Archimedes!principle of buoyancy}
+\index{laws named after people!Archimedes's principle of buoyancy}
+\index{laws!buoyancy}
+Equal are the weight of the object and the buoyant force on the object.
+(???)
+
+** Pascal's law of fluid pressure transmission
+
+Blaise Pascal 1647
+
+Pascal's law: Incompressible fluid spreads pressure evenly.
+
+\index{Pascal!law of fluid pressure transmission}
+\index{laws named after people!Pascal's law of fluid pressure transmission}
+\index{laws!fluid pressure transmission}
+\index{statics!Pascal's law of fluid pressure transmission}
+\( P = \rho g h \)
+
+*** Appreciating Pascal's barrel demonstration
+
+Counterintuitive: The hydrostatic pressure
+does not depend on \emph{how much} fluid.
+It depends on \emph{how deep}.
+\footnote{\url{https://www.youtube.com/watch?v=EJHrr21UvY8}}
+
+** Understanding the zeroth law of thermodynamics
+
+Put hot iron into cold water.
+Eventually both become equally warm.
+
+\index{laws!thermodynamics, zeroth}
+\emph{Zeroth law of thermodynamics}:
+Heat never spontaneously flows from cold to hot.
+
+** Unstructured content
+
+TODO Pendulum
+
+\index{definitions!pendulum}
+\index{pendulum!definition}
+A pendulum is a bob hung on a string.
+
+\emph{Conservation of mechanical energy}:
+A released pendulum comes back to the same height.
+
+TODO
+Interplay between potential and kinetic energy:
+Galileo's interrupted pendulum
+
+TODO Vacuum
+
+Boyle showed that objects of different masses fall with the same acceleration.
+
+TODO Toricelli manometer
+
+TODO von Guericke, Magdeburg
+
+TODO Boyle
+
+TODO Pascal
+
+Boyle's experiments
+
+\index{laws named after people!Lavoisier's law of conservation of mass}
+TODO Lavoisier's law of conservation of mass
+
+** Understanding energy
+
+Conservation of energy
+
+Kinetic energy
+
+\emph{Kinetic energy} is \( \frac{1}{2} m |v|^2 \) which can also be written as \( |p|^2 / (2m) \).
+This is explained by energy conservation and work by a constant force \(F\) that accelerates an initially resting mass.
+\(F = ma\) and \(s = \frac{1}{2}at^2\) and \( W = Fs \) and \( v = at \) therefore \( W = E_k = \frac{1}{2} m(at)^2 = \frac{1}{2}mv^2 \).
+
+** Understanding gases
+
+\footnote{\url{https://en.wikipedia.org/wiki/Perfect_gas}}
+\footnote{\url{https://en.wikipedia.org/wiki/Gas#Historical_synthesis}}
+
+A \emph{gas} is ...
+
+\emph{Pressure} is measured by a manometer.
+
+In statics, the \emph{volume} of a gas is the volume of its container.
+Statics assumes that a gas fills its container evenly.
+
+\emph{Temperature} is measured by a thermometer.
+The unit of temperature is \emph{kelvin} (K).
+
+% ?
+Gas and piston at equilibrium:
+Gas and a piston with weight \(F\).
+
+** Using gas laws
+
+Let there be a container of gas with pressure \(P_1\) and volume \(V_1\).
+Let this gas expand or shrink without changing its temperature
+so that its pressure becomes \(P_2\) and its volume becomes \(V_2\).
+
+\index{laws!gas pressure and volume}
+\index{laws named after people!Boyle's law of gas pressure and volume}
+\index{Boyle!Boyle's law of gas pressure and volume}
+\emph{Boyle's law}: \( P_1 V_1 = P_2 V_2 \).
+
+Other gas laws
+
+\emph{Charles's law}?
+\emph{Dalton's law}?
+
+\footnote{\url{https://en.wikipedia.org/wiki/Dalton%27s_law}}
+\footnote{\url{https://en.wikipedia.org/wiki/Combined_gas_law}}
+\footnote{\url{https://en.wikipedia.org/wiki/Gay-Lussac%27s_law#Pressure-temperature_law}}
+\footnote{\url{https://en.wikipedia.org/wiki/Avogadro%27s_law}}
+
+\index{laws!ideal gas}
+\emph{Ideal gas law}: \( PV = nRT \).
+
+Kinetic energy of one mole of gas is \( \frac{3}{2} RT \).
+
+Statistical thermodynamics: kinetic theory of gases?
+
+** Understanding Boltzmann's constant
+
+\footnote{\url{https://en.wikipedia.org/wiki/Boltzmann_constant}}
+\emph{Boltzmann's constant} relates the average kinetic energy of particles in a gas and the temperature of the gas?
+
+\footnote{\url{https://en.wikipedia.org/wiki/Gas_constant}}
+The \emph{gas constant} (molar gas constant, universal gas constant, ideal gas constant)?
+
+** Understanding Avogadro's number
+
+\emph{Avogadro's number} is?
+
+Terms?
+
+System and environment
+
+Thermodynamic equilibrium
+
+** Understanding heat
+
+Heat capacity
+
+\emph{Black's principle}:
+When two liquids are mixed, the heat released by one equals the heat absorbed by the other.
+???
+
+???
+If \(m_1\) amount of water at temperature \(T_1\) is mixed with \(m_2\) amount of water at temperature \(T_2\),
+then the result, after equilibrium, is \(m_1+m_2\) amount of water at temperature \(\frac{m_1 T_1 + m_2 T_2}{m_1+m_2}\).
+
+Specific heat
+
+Latent heat
+
+** Understanding thermodynamic process and cycle?
+
+Isobaric?
+Isochoric?
+Adiabatic?
+Expansion of gas?
+Work done by a gas?
+
+Carnot engine?
+
+Thermodynamic efficiency?
+
+** Understanding the laws of thermodynamics
+
+\footnote{\url{https://en.wikipedia.org/wiki/Laws_of_thermodynamics}}
+\footnote{\url{https://en.wikipedia.org/wiki/History_of_entropy}}
+
+** Working with simple machines
+
+\footnote{\url{https://en.wikipedia.org/wiki/Simple_machine}}
+
+Lever
+
+Wheel and axle
+
+Pulley
+
+Tilted plane
+
+Wedge
+
+Screw
+
+TODO:
+Modern machine theory: Kinematic chains
+* Fluid
+How do we think of a fluid?
+** Statics
+A continuous ever-divisible fluid.
+A density field.
+The symbol \(\rho(x)\) represents the density of the fluid at point \(x\).
+The product \(\rho(x) ~ dV\) represents the mass of a small part of the fluid at volume \(V\) containing the point \(x\).
+** Dynamics
+The symbol \(\rho(x,t)\) represents the density of the fluid at point \(x\) at time \(t\).
+
+But we can use spacetime coordinates:
+We let \(x\) be four-dimensional, and we write \(\rho(x)\).
+* Wave
 ** What is a wave, oscillation, undulation, vibration?
 One /wave/ happens every time water slaps the beach.
 Thus waves are countable.
@@ -470,10 +967,6 @@ The people who thought about the luminiferous aether[fn::https://en.wikipedia.or
 
 If the aether does not exist, then light is not a wave.
 
-Wave-particle duality is category error.
-Wave is abstract; particle is concrete.
-A thing cannot be both abstract and concrete.
-
 Light is electromagnetic radiation.
 A disturbance in the electromagnetic field?
 
@@ -481,13 +974,43 @@ We must distinguish between /physical/ wave and /mathematical/ wave.
 
 Light is not a physical wave,
 but we sometimes think of light as a mathematical wave.
-** Can light be diffracted?
+
+A wave both propagate in a medium and may diffract.
+Light may diffract but propagates in vacuum?
+** Can light diffract?
 What do we mean by light?
 
 Can light be detected?
 
 Is light whatever a light detector detects?
 A light detector affects the light.
+** Dropping a pebble into a pond
+Imagine looking down on a pond from bird's-eye view,
+and gently dropping a pebble into the pond.
+
+The pebble displaces a volume of water around it.
+The displaced volume of water displaces other nearby volumes of water,
+and so on.
+** Diffraction
+Outsource to Wikipedia
+ [fn::https://en.wikipedia.org/wiki/Diffraction]
+ [fn::https://en.wikipedia.org/wiki/Diffraction_formalism]?
+
+It seems that justifing the Huygens--Fresnel principle[fn::https://en.wikipedia.org/wiki/Huygens%E2%80%93Fresnel_principle]
+requires fluid dynamics.
+
+Single-slit diffraction
+
+Calculate the pattern spacing depending on propagation medium characteristics, slit size, slit spacing, and the distance between slit and screen.
+
+Kirchhoff's diffraction formula[fn::https://en.wikipedia.org/wiki/Kirchhoff%27s_diffraction_formula]?
+
+Young's double-slit experiment
+** Wavefront, reflection, and diffraction
+A point disturbance such as a pebble dropped into the pond causes an expanding circle /wavefront/ on the surface.
+This speed in which this circle expands is the /speed of the propagation/ of disturbances in water.
+
+An obstacle reflects the sector of the wavefront that hits it.
 * Matter
 ** Obvious things: mass, weight, volume, density
 - Define: /Mass/ is the amount of matter.
@@ -704,6 +1227,7 @@ A light detector affects the light.
 
 There is no need to rediscover everything in the way our ancestors did.
 We have hindsight.
+We should exploit the full benefit of hindsight.
 
 (End of change of opinion.)
 
@@ -1677,7 +2201,99 @@ But energy is only a mathematical artifact, an unreal quantity.
 Nick Lucid's explanation of Poynting vectors and electromagnetic energy
 "Energy doesn't FLOW the way you THINK! (Electrodynamics)"[fn::https://www.youtube.com/watch?v=C7tQJ42nGno]
 The charges are not "energy carriers".
-* Relativity
+
+https://en.wikipedia.org/wiki/History_of_Maxwell%27s_equations
+* Statistical thinking
+** Statistics is about seeing the forest and ignoring the trees
+Statistics is about /gaining knowledge about the population at the cost of losing knowledge about the individual/.
+** What
+https://en.wikipedia.org/wiki/Temperature
+TODO paraphrase this Wikipedia text:
+Based on the historical development of the kinetic theory of gases, temperature is proportional to the average kinetic energy of the random motions of the constituent microscopic particles
+
+https://en.wikipedia.org/wiki/Maxwell–Boltzmann_distribution
+
+Statistical mechanics explains thermodynamics.
+
+https://en.wikipedia.org/wiki/Thermodynamics
+
+\emph{mole} is
+
+Chemistry?
+
+Entropy?
+
+Canonical ensemble?
+
+Statistical ensemble?
+
+http://demonstrations.wolfram.com/BoseEinsteinFermiDiracAndMaxwellBoltzmannStatistics/
+** Appreciating the relevance of statistics
+Consider a box of gas with 1 billion particles.
+It is impractical to model that by 1 billion equations of motion.
+However, we can still say something useful,
+because /statistics/ allows us to /summarize/ the gas.
+With statistics, we can talk about /macroscopic behavior/,
+but we can't talk about individual particles;
+we get the summary and we sacrifice the details.
+
+Now we can talk about the /distribution/ of the velocity of the particles,
+such as /50% of the particles are slower than something/.
+
+Statistical physics is macro-physics.
+The idea is we consider a statistics of the system.
+We look at the big picture instead of looking at each particle.
+There are many particles.
+We cannot say anything about one particle.
+What is an example of /statistical ensemble/?
+** Getting used to probability and statistics
+Exercise (Discrete probability):
+Roll a fair six-faced die once.
+What is the probability of getting the three-dotted face?
+
+Answer: 3/6.
+
+Exercise (Joint probability of independent events):
+Roll a fair six-faced die three times.
+What is the probability of getting the three-dotted face three times?
+
+Answer: $(3/6) \times (3/6) \times (3/6)$.
+
+A /distribution/ of a set $\Omega$ describes how members of $\Omega$ are distributed.
+Let $f$ be the density of that distribution.
+Then $f(x)$ describes the tendency of values to gather around $x$?
+Values tend to gather near the peaks of $f$.
+** What/how is Maxwell--Boltzmann distribution?
+Maxwell distribution is a chi-distribution with 3 degrees of freedom.
+What?
+** Using the Maxwell--Boltzmann distribution of speed (for what?)
+An example question that statistical physics (statistical mechanics) can answer is
+"What is the probability of finding a particle with a given speed?"
+For example, see the probability density function of the Maxwell--Boltzmann distribution.
+
+Don't remember the equation.
+To be a physicist, you don't need to remember this; you can always go to Wikipedia or open a book.
+The important thing is that you know /what it means/ and /what it's useful for/.
+The density of /Maxwell--Boltzmann distribution/ is $f(v)$.
+The number $\int_A f$ describes the /probability of finding a particle
+whose speed is in the set (the range) \(A\)/.
+Let that sink for a moment, especially if you aren't yet comfortable with probability theory.
+The density of /Maxwell--Boltzmann distribution/ is
+???
+\begin{align*}
+    f(v) = \parenthesize{ \frac{m}{2\pi k T} }^{3/2} 4 \pi v^2 \exp \parenthesize{ - \frac{mv^2}{2kT} }
+\end{align*}
+Who got that? How?
+** Central limit theorem
+Let there be many random variables, independent.
+Then, their sum tends to be normally distributed,
+even if the random variables themselves are not normally distributed.
+ [fn::https://en.wikipedia.org/wiki/Central_limit_theorem]
+
+The sum of normally-distributed random variables tends to be normally distributed.
+** Concordances
+Griffiths' quantum mechanics book \cite{griffiths2005introduction} introduces practical statistics-and-probability.
+* Relativity, and more geometry
 - Matter bends spacetime.
   - Matter bends spacetime, especially the spacetime /near that matter/.
   - What does it mean?
@@ -1786,7 +2402,61 @@ Azimuth?
 Elevation?
 
 What\footnote{\url{https://en.wikipedia.org/wiki/Spherical_coordinate_system}}
+** Line, straightness, geodesic, distance
+A /line/ is a one-dimensional thing.
+
+A line /connects/ point P to point Q iff one end of the line is P and the other end of the line is Q.
+
+A line connecting two points is /straight/ iff that line is the shortest line connecting those points.
+When we travel on Earth without ever turning,
+we think we are traveling in a straight line,
+but after about 40,000 km we will arrive at where we departed from.
+Someone far enough in the sky will see that we are traveling in a great circle.
+If you find it hard to imagine the size of the Earth,
+just imagine that you were an ant-sized human on a tennis ball.
+
+A /geodesic/ is a straight line.
+
+The /distance/ between two points is the length of the shortest line connecting them.
 * Quantum mechanics
+** Teaching quantum mechanics
+*** How do we introduce the subject to whom?
+Experiments must guide us because our everyday intuition breaks down.
+
+State-space formalism of classical mechanics?
+By quantizing Hamiltonian mechanics?
+
+Sakurai 2011 \cite{sakurai2011modern} begins with Stern--Gerlach experiment[fn::https://en.wikipedia.org/wiki/Stern%E2%80%93Gerlach_experiment],
+but that book is not for beginners.
+Classical mechanics predicts that the collisions form a line, but reality gives us two clusters instead of a line.
+
+Electromagnetism is required to understand the Stern--Gerlach experiment.
+What is a magnetic moment?
+
+\cite{muller2002teaching}
+** Brownian-motion view of quantum-mechanical indeterminacy?
+Photons are like Brown's pollens in Einstein's Brownian motion paper.
+Pollens jiggle because they are hit by water particles much smaller than the pollens.
+
+Hypothesis:
+Material particles (such as electrons) appear to have indeterminate position
+because they are hit by ether particles much smaller than the material particles.
+
+What about non-localities (entanglements)?
+
+But this is fundamentally different.
+A pollen always has a position at each point in time.
+A quantum particle does not have a position until it is measured.
+(The orthodox interpretation as described by Griffiths 2015 \cite{griffiths2005introduction})
+** Wave-particle duality is category error
+Wave is abstract; particle is concrete.
+A thing cannot be both abstract and concrete.
+
+Wave is a kind of repetitive motion.
+Particle is a small thing.
+
+Wave is abstract, subjective, mental, conceptual, and has no objective existence.
+What objectively exists is the particles and their interactions.
 ** Reformulations?
 https://www.quora.com/Has-an-attempt-ever-been-made-to-reformulate-quantum-mechanics-in-a-space-other-than-Hilbert-space
 ** Quantum Venn diagram paradox
@@ -1804,10 +2474,6 @@ Is it happening in a parallel universe?
 Why is it hard to convert between matter and energy?
 What does QFT say?
 (Related: Why isn't everything homemadeable?)
-
-Physics and monads[fn::https://johncarlosbaez.wordpress.com/2018/12/30/geometric-quantization-part-5/].
-From Abdullah.
-How much background knowledge do we need to understand that?
 ** Intro to QFT?
 An Introduction to Quantum Field Theory
 Mrinal Dasgupta
@@ -1889,6 +2555,17 @@ http://physics.oregonstate.edu/~stetza/COURSES/ph654/ShortBook.pdf
 ** Probability arises from basic physical laws?
 - https://www.theatlantic.com/science/archive/2018/11/science-full-mavericks-like-my-grandfather-was-his-physics-theory-right/574573/
 - https://www.researchers.one/article/2018-10-6
+** Obtaining wave equation
+Can we model the double-slit experiment as classical wave diffraction,
+and then interpret the square of wave function as probability density,
+a la Born?
+** Head-turning
+Physics and monads[fn::https://johncarlosbaez.wordpress.com/2018/12/30/geometric-quantization-part-5/].
+From Abdullah.
+How much background knowledge do we need to understand that?
+
+Baez seems to say that quantum mechanics is a special case of classical mechanics,
+whereas we usually think the other way, that classical mechanics is a special case of quantum mechanics.
 * Inverting the field?
 We can compute the gravity vector field arising from a mass density scalar field.
 
@@ -1910,6 +2587,13 @@ Which is real: the gravity field or the mass density?
 - [[https://www.reddit.com/r/askscience/comments/1xxbq0/in_quantum_physics_observer_effect_what_qualifies/][Reddit: In quantum physic's 'observer effect', what qualifies as an 'observer'?]]
 * Are these real?
 http://fisika.fst.unair.ac.id/theory/
+* Humans, science, technology, ethics
+** On ignorance
+In the 18th century, occasionally, steam boilers and coal mines exploded, killing tens of people.
+
+Then nuclear power plants exploded.
+
+What if a Dyson sphere exploded?
 * What
 ** Philosophy
 - Some branches of philosophy
@@ -2131,6 +2815,15 @@ http://fisika.fst.unair.ac.id/theory/
 
 - [[https://www.youtube.com/watch?v=GcJxRqTs5nk][Moral behavior in animals | Frans de Waal]]
 - Definition of "selfish"? Does intention matter?
+** Is mass absolute? Is charge absolute?
+Position is relative.
+Spacetime is relative.
+
+Is the mass of a thing (the amount of matter in that thing) the same in all frames of reference?
+
+Is the electric charge of a thing the same in all frames of reference?
+
+https://en.wikipedia.org/wiki/Charge_invariance
 ** Rebooting human knowledge after mass destruction
 - How do we reboot human knowledge from zero?
 
@@ -2166,3 +2859,7 @@ http://fisika.fst.unair.ac.id/theory/
         - Husbandry. Raise. Farm. Ranch. Agriculture. Crops.
 
     - Try to restore some of the Internet (Google, Wikipedia) before the survivalists die???
+* Nuclear fusion
+** Magnetic confinement
+Given the desired radius of confinement,
+how strong is the required magnetic field (and therefore the electric current)?
