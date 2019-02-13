@@ -1,11 +1,47 @@
-#+TITLE: Looking for a publishing system
+#+TITLE: Publishing Research Group
 #+DATE: 2018-01-01 03:08:00 +0700
 #+AUTHOR: erik
 #+PERMALINK: /publish.html
-* Current system
+* Current system we are using to publish this website
 The page you are looking at is written in Org Mode, and then converted to HTML with Pandoc and a Pandoc Lua filter.
 My only reason for using Org Mode is its Outline Mode.
-* What I have tried
+* Why do we want our own publishing system?
+Because existing systems /do not/ and /will not/ satisfy our requirements.
+When nobody else is going to do it, we have to do it ourselves.
+
+These are strong reasons for rolling our own publication system in Prolog:
+
+As we age, we learn that a hack/quick-fix/duct-tape only leads to misery, regret, and self-hate.
+
+However, the last time we tried to create our own publishing system was a big XML disaster.
+** What unsatisfactory things exist?
+LaTeX2HTML[fn::https://texfaq.org/FAQ-LaTeX2HTML]
+
+Why not MathML?
+Chicken-and-egg problem.[fn::https://jblevins.org/log/mathml-and-chrome]
+
+These things do not satisfy us and will not satisfy us.
+*** Pandoc
+(WONTFIX) Org Mode Reader duplicates footnotes[fn::https://github.com/jgm/pandoc/issues/5196].
+
+(workaround available) HTML writer does not separate adjacent footnote references[fn::https://github.com/jgm/pandoc/issues/5197].
+
+amsthm, theorem/lemma/definition/proof
+
+We want by default #+OPTIONS: ^:nil.
+
+Multi-authorship?
+
+Issue 1608[fn::https://github.com/jgm/pandoc/issues/1608]
+
+LaTeX command argument, hard to fix, practically wontfix[fn::https://github.com/jgm/pandoc/issues/5261][fn::https://github.com/jgm/pandoc/issues/3047]
+*** LaTeX
+*** Markdown
+*** Org Mode
+*** RST
+
+** What unsatisfactory things have we tried?
+*** Org Exporter
 I tried Org Exporter; it was too slow.
 On <2019-01-01>, I tried [[https://github.com/pandoc-scholar/pandoc-scholar][pandoc-scholar]], but it was too slow for my needs; I need to routinely convert my website.
 Thus I wrote a Pandoc Lua filter to translate org mode to jekyll html.
@@ -18,8 +54,53 @@ Emacs is designed for extensibility.
 I could also use regex to replace org =***= with markdown =###= as a preprocessing step before calling Pandoc,
 but I would rather have a non-hacky long-term solution.
 I think I will need to reimplement some of Jekyll + Pandoc + Org in Prolog.
-* Write a Prolog static site generator to translate Org-Mode and Markdown to HTML
-I need a publishing system, preferably written in Prolog.
+* Our requirements
+<2018-12-19>
+Example 24 "Markdown citations"
+https://pandoc.org/demos.html
+** Input
+The input may have Unicode characters, mathematics, physical quantities with units, and chemical equations.
+
+The input encoding is UTF-8.
+
+The input may be Org Mode or Modified LaTeX.
+
+The input must be as semantic as possible (content, not presentation).
+Consider sTeX[fn::https://kwarc.info/systems/sTeX/] \cite{kohlhase2008using}.
+** Output
+The output may be HTML, possibly with CSS and JavaScript.
+
+The output may be LaTeX acceptable by xelatex for PDF output.
+
+The output must be a /static/ page that can easily be assembled into a /static website/.
+
+The output must not depend on URL rewriting.
+** Build
+Incremental build.
+
+There are several choices: MathML, SVG fonts, HTML+CSS flex boxes.
+
+LaTeX math requirements: underbrace, index, superscript, subscript, left superscript, left subscript, big delimiters, cases, equal-sign alignment, equation numbering,
+/theorem/ environments.
+** Online-navigation features?
+Breadcrumbs?
+
+Tagging?
+** Book-publishing features
+Table of contents with word count and reading time.
+
+Indexing, /local/ table of contents, list of tables, list of figures, list of theorems.
+
+LaTeX index entry format.
+
+Cross-references to pages, sections, equations, etc.
+** LaTeX features
+siunitx
+** Academic publishing features
+Citations.
+
+Bibliography.
+Bibtex/Biblatex input with all strange characters.
 ** Features, goals, and constraints
 This basically reimplements some of Pandoc in Prolog.
 
@@ -61,7 +142,13 @@ VERY IMPORTANT: the ability to handle citations without slowing down everything
 We can use http://www.swi-prolog.org/pack/list?p=bibtex
 
 We are going to use LMX instead of https://github.com/SWI-Prolog/packages-ltx2htm
-** ?7d: Implement LMX (LaTeX-Markdown-XML) markup language
+* Ontology
+A page has a name, a title, an author list, a creation date, an update date, a file name.
+
+A file name has a name and an optional dotted extension.
+* Write a Prolog static site generator to translate Org-Mode and Markdown to HTML
+I need a publishing system, preferably written in Prolog.
+* The LMX (LaTeX-Markdown-XML) markup language?
 LMX is a LaTeX-like surface syntax for XML;
 this enables you to replace the closing tag with a closing brace.
 
@@ -158,3 +245,37 @@ Treat LaTeX as declarative markup language and not imperative command language.
 - escaping comma https://tex.stackexchange.com/questions/70986/comma-in-macro-parameters
 - escaping square brackets https://tex.stackexchange.com/questions/6683/escaping-square-braces
 - escaping curly braces https://tex.stackexchange.com/questions/181118/how-to-escape-curly-braces-within-texttt
+* Designing our publishing system
+** How far can we go with HTML+CSS?
+http://www.zipcon.net/~swhite/docs/math/math.html
+
+http://jkorpela.fi/math/
+
+Fractions with HTML tables or CSS flex boxes.
+
+Superscripts, subscripts, indexes
+
+Proof trees with HTML tables or CSS flex boxes.
+
+Drupal will not do.
+We want a static website.
+https://math.stackexchange.com/questions/51903/best-way-to-set-up-a-wiki-for-maintaining-a-structured-math-journal
+
+Radicals/surds/roots?
+12th root of 2?
+https://www.mathworks.com/matlabcentral/answers/298325-how-to-make-published-html-look-as-good-as-the-blogs-on-matlab-central
+
+https://www.authorea.com/users/5713/articles/19359-latex-is-dead-long-live-latex-typesetting-in-the-digital-age/_show_article
+
+https://janmr.com/blog/2015/01/typesetting-math-with-html-and-css-fractions/
+** How far can we go JavaScript?
+https://stackoverflow.com/questions/796890/whats-the-best-way-to-write-mathematical-equations-on-the-web
+
+DOM layout reflow is slow.
+* How should we publish on the Internet?
+I also write
+[[file:emacs.html][Using Emacs and Org Mode]],
+[[file:emacsvi.html][Emacs for vi users]],
+[[file:writing.html][Writing]],
+and [[file:markdown.html][Working around Markdown]].
+* Bibliography
