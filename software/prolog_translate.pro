@@ -9,7 +9,12 @@
     foo/1
 ]).
 :- use_module(library(error)).
+:- use_module('./language_prolog.pro').
 /** <module> Prolog program analysis?
+
+Note:
+Do not use.
+Most of this file has been superseded by the file language_prolog.pro.
 
 In this document:
     - "To explicate" means "to make explicit".
@@ -118,90 +123,6 @@ Indicator is Name/Arity.
 pred_dnfclause(Ind, Dnf) :-
     pred_mghclauses(Ind, Ecls),
     mghclauses_disjunct(Ecls, Dnf).
-
-/** clause_mgh(+Clause, -NClause)
-
-"NClause is Clause with most general head."
-
-If Clause looks like this:
-```
-p(a,b,c) :- Body
-```
-then NClause looks like this:
-```
-p(A,B,C) :- A=a, B=b, C=c, Body
-```
-*/
-clause_mgh((Head :- Body), (NHead :- NBody)) :- !,
-    clausehead_mgu(Head, NHead, Unifs),
-    conjunction_conjuncts(Body, CBody),
-    append(Unifs, CBody, CNBody),
-    conjunction_conjuncts(NBody, CNBody).
-
-/** clausehead_mgu(+Head, -NormHead, -Unifiers)
-
-Relate the clause head and a same-named functor whose all arguments are variables.
-
-Relate the clause head, the most general form of the clause head, and what needs to be prepended to the clause body.
-
-MGU stands for "most general unifier".
-This seems to be a standard terminology in logic?
-
-Head is a functor.
-
-NormHead is Head but with each nonvar argument replaced with a fresh variable.
-
-Unifiers is a list of phrases that would unify Head and NormHead.
-Each element has the shape A=B where A is a variable and B is a nonvar.
-See example.
-
-Example:
-
-```
-?- clausehead_mgu(p(A,b,C,d), N, U).
-N = p(A, _6642, C, _6654),
-U =  [_6642=b, _6654=d].
-```
-
-This is similar to the builtin unifiable/3.
-The differences:
-    - unifiable/3 handles cyclic terms. This does not.
-    - unifiable/3 returns the Unifiers in reverse order. This returns the Unifiers in forward order.
-
-See also:
-    - Skolem normal form is "prenex normal form with only universal first-order quantifiers".
-    https://en.wikipedia.org/wiki/Skolem_normal_form
-    - most general unifier
-*/
-clausehead_mgu(Head, Norm, Unifs) :-
-    Head =.. [Name | Args],
-    length(Args, Arity),
-    length(Vars, Arity),
-    Norm =.. [Name | Vars],
-    args_vars_unifs_(Args, Vars, Unifs).
-
-args_vars_unifs_([A|As], [V|Vs], Us) :- var(A), !, V=A, args_vars_unifs_(As,Vs,Us).
-args_vars_unifs_([A|As], [V|Vs], [V=A | Us]) :- nonvar(A), !, args_vars_unifs_(As,Vs,Us).
-args_vars_unifs_([], [], []).
-
-/** conjunction_conjuncts(?Conjunction, ?Conjuncts)
-
-"Conjunction is a right-associative conjunction of Conjuncts."
-
-At least one argument must be bound.
-
-Conjunction is a term like =|(a,b,c)|=.
-Note that the comma operator associates to the right:
-```
-?- write_canonical((a,b,c)).
-','(a,','(b,c))
-```
-
-Conjuncts is a list like =|[a,b,c]|=.
-*/
-conjunction_conjuncts(A, [A]) :- A \= true, !.
-conjunction_conjuncts(true, []) :- !.
-conjunction_conjuncts((A,B), [A|P]) :- !, conjunction_conjuncts(B,P).
 
 /**
 pred_mghclause(++NameArity, -Clause).
