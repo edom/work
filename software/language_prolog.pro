@@ -1,6 +1,9 @@
 :- module(language_prolog, [
     kb_query/2,
+    kb_rule/2,
     kb_head_body/3,
+    kb_caller_callee/3,
+    kb_depend/3,
     kb_pred_horndnf/3,
     kb_pred_mghclause/3,
     kb_pred_mghclauses/3,
@@ -10,14 +13,28 @@
     mghhorns_disjunct/2,
     op(1,fx,'#')
 ]).
+:- reexport('./language_prolog_clause.pro').
 /** <module> Prolog meta-interpreter
 
 See also the file prolog_translate.pro.
 
-Knowledge-base functions:
+There are three kinds of clauses:
+    - Horn clause =|A :- B|=
+    - disjunctive clause =|A ; B|=
+    - conjunctive clause =|A , B|=
+
+Predicates for working with knowledge bases:
     - kb_query/2 interprets.
+    - kb_rule/3 looks up.
     - kb_head_body/3 looks up.
     - kb_pred_horndnf/3 normalizes.
+    - kb_caller_callee/3 finds direct calls.
+
+Predicates for collecting the outermost phrases of a clause:
+    - clause_disjuncts/2 collects the outermost conjuncts.
+    - clause_conjuncts/2 collects the outermost disjuncts.
+    - conjuncts_clause/2 is the inverse of clause_conjuncts/2.
+    - disjuncts_clause/2 is the inverse of clause_disjuncts/2.
 */
 
 :- op(1,fx,'#').
@@ -30,25 +47,30 @@ Answering a query = proving a goal.
 
 There is no cut, but there is =|#once(A)|=.
 */
+kb_query(K,A) :- var(A), !, type_error(nonvar,A).
+kb_query(K,A) :- string(A), !, type_error(query,A).
+kb_query(K,A) :- number(A), !, type_error(query,A).
+kb_query(K,(_ :- _)) :- !, domain_error(query,H).
 kb_query(K,(A,B)) :- !, kb_query(K,A), kb_query(K,B).
 kb_query(K,(A;_)) :- kb_query(K,A).
 kb_query(K,(_;A)) :- !, kb_query(K,A).
-kb_query(_,#append(A,B,C)) :- !, append(A,B,C).
-kb_query(K,#once(A)) :- !, once(kb_query(K,A)).
-kb_query(K,H) :- kb_head_body(K,H,B), kb_query(K,B).
+kb_query(K,#A) :- !, kb_primitive(K,A).
+kb_query(K,(A=B)) :- !, A=B.
+kb_query(K,H) :- kb_rule(K,H).
+kb_query(K,H) :- kb_rule(K,(H:-B)), kb_query(K,B).
 
-    /** clause_conjuncts(+Clause, -List)
-    */
-    clause_conjuncts(C,Js) :- findall(J, clause_conjunct(C,J), Js).
+kb_primitive(_,append(A,B)) :- !, append(A,B).
+kb_primitive(_,append(A,B,C)) :- !, append(A,B,C).
+kb_primitive(K,once(A)) :- !, once(kb_query(K,A)).
+kb_primitive(_,true) :- !.
+kb_primitive(K,A) :- !, domain_error(primitive,A).
 
-        clause_conjunct((A,_),A).
-        clause_conjunct((_,A),A).
-        clause_conjunct(A,B) :- A \= (_,_), A = B.
+/** kb_rule(+Rules,?Rule)
 
-    /** conjuncts_clause(+List, -Clause)
-    */
-    conjuncts_clause([J], J).
-    conjuncts_clause([JA|JB], (JA,CB)) :- conjuncts_clause(JB,CB).
+Unify Rule with each rule in Rules.
+*/
+kb_rule([A|_],R) :- copy_term(A,R).
+kb_rule([_|A],R) :- kb_rule(A,R).
 
 /** kb_head_body(+List, ?Head, ?Body)
 
@@ -61,6 +83,29 @@ This cannot be done by member/2 because this requires copy_term/2.
 kb_head_body([C|_],H,B) :- copy_term(C,(H:-B)).
 kb_head_body([C|_],H,true) :- copy_term(C,H).
 kb_head_body([_|R],H,B) :- kb_head_body(R,H,B).
+
+/** kb_caller_callee(+Rules, ?Caller, ?Callee)
+
+True iff Caller may directly call Callee in Rules.
+*/
+kb_caller_callee(G,C,D) :-
+    kb_head_body(G,C,B),
+    clause_phrase(B,D).
+
+    clause_phrase((A,_),B) :- clause_phrase(A,B).
+    clause_phrase((_,A),B) :- clause_phrase(A,B).
+    clause_phrase((A;_),B) :- clause_phrase(A,B).
+    clause_phrase((_;A),B) :- clause_phrase(A,B).
+    clause_phrase(A,B) :- A \= (_,_), A \= (_;_), A = B.
+
+/** kb_depend(+Rules,+X,+Y)
+
+True iff X may call Y directly or indirectly.
+
+All arguments must be bound; otherwise the predicate may not terminate.
+*/
+kb_depend(G,A,B) :- kb_caller_callee(G,A,B).
+kb_depend(G,A,C) :- kb_caller_callee(G,A,B), kb_depend(G,B,C).
 
 /** horn_mgh(+Clause, -NClause)
 
