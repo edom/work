@@ -1,9 +1,6 @@
 :- module(language_prolog, [
+    kb_querynaive/2,
     kb_query/2,
-    kb_rule/2,
-    kb_head_body/3,
-    kb_caller_callee/3,
-    kb_depend/3,
     kb_pred_horndnf/3,
     kb_pred_mghclause/3,
     kb_pred_mghclauses/3,
@@ -13,7 +10,11 @@
     mghhorns_disjunct/2,
     op(1,fx,'#')
 ]).
+:- reexport('./language_prolog_callgraph.pro').
 :- reexport('./language_prolog_clause.pro').
+:- reexport('./language_prolog_kb.pro').
+:- use_module(library(nb_set)).
+
 /** <module> Prolog meta-interpreter
 
 See also the file prolog_translate.pro.
@@ -24,10 +25,15 @@ There are three kinds of clauses:
     - conjunctive clause =|A , B|=
 
 Predicates for working with knowledge bases:
-    - kb_query/2 interprets.
+    - kb_querynaive/2 interprets.
+    - kb_query/2 interprets with memoization.
     - kb_rule/3 looks up.
     - kb_head_body/3 looks up.
     - kb_pred_horndnf/3 normalizes.
+
+Predicates for computing knowledge base call graph:
+    - kb_callgraphtc/2 computes the transitive closure of the call graph using library(ugraphs).
+    - kb_calledges/3 computes the edge list of the call graph.
     - kb_caller_callee/3 finds direct calls.
 
 Predicates for collecting the outermost phrases of a clause:
@@ -39,73 +45,94 @@ Predicates for collecting the outermost phrases of a clause:
 
 :- op(1,fx,'#').
 
-/** kb_query(Kb,Query)
+/**
+kb_querynaive(+Rules,+Query).
+kb_query(+Rules,+Query).
 
-Answer the Query (prove the goal) using Kb.
+Answer the Query (prove the goal) according to Rules.
 
 Answering a query = proving a goal.
 
 There is no cut, but there is =|#once(A)|=.
+
+The predicate kb_query/2 is kb_querynaive/2 with memoization.
+Note that a memoized predicate produces only the first result produced by the unmemoized predicate.
+
+Memoization must be explicitly requested by having a =|:-memoize(Name/Arity)|= fact in the Rules.
 */
-kb_query(K,A) :- var(A), !, type_error(nonvar,A).
-kb_query(K,A) :- string(A), !, type_error(query,A).
-kb_query(K,A) :- number(A), !, type_error(query,A).
-kb_query(K,(_ :- _)) :- !, domain_error(query,H).
-kb_query(K,(A,B)) :- !, kb_query(K,A), kb_query(K,B).
-kb_query(K,(A;_)) :- kb_query(K,A).
-kb_query(K,(_;A)) :- !, kb_query(K,A).
-kb_query(K,#A) :- !, kb_primitive(K,A).
-kb_query(K,(A=B)) :- !, A=B.
-kb_query(K,H) :- kb_rule(K,H).
-kb_query(K,H) :- kb_rule(K,(H:-B)), kb_query(K,B).
+kb_querynaive(_,A) :- invalid_query(A).
+kb_querynaive(K,#once(A)) :- !, once(kb_querynaive(K,A)).
+kb_querynaive(_,#A) :- !, primitive(A).
+kb_querynaive(_,(A=B)) :- !, A=B.
+kb_querynaive(K,(A,B)) :- !, kb_querynaive(K,A), kb_querynaive(K,B).
+kb_querynaive(K,(A;_)) :- kb_querynaive(K,A).
+kb_querynaive(K,(_;A)) :- !, kb_querynaive(K,A).
+kb_querynaive(K,H) :- kb_rule(K,H).
+kb_querynaive(K,H) :- kb_rule(K,(H:-B)), kb_querynaive(K,B).
 
-kb_primitive(_,append(A,B)) :- !, append(A,B).
-kb_primitive(_,append(A,B,C)) :- !, append(A,B,C).
-kb_primitive(K,once(A)) :- !, once(kb_query(K,A)).
-kb_primitive(_,true) :- !.
-kb_primitive(K,A) :- !, domain_error(primitive,A).
+    invalid_query(A) :- var(A), !, type_error(nonvar,A).
+    invalid_query(A) :- string(A), !, type_error(query,A).
+    invalid_query(A) :- number(A), !, type_error(query,A).
+    invalid_query((:-A)) :- !, domain_error(query,(:-A)).
+    invalid_query((H:-B)) :- !, domain_error(query,(H:-B)).
 
-/** kb_rule(+Rules,?Rule)
+    primitive(append(A,B)) :- !, append(A,B).
+    primitive(append(A,B,C)) :- !, append(A,B,C).
+    primitive(true) :- !.
+    primitive(A) :- !, domain_error(primitive,A).
 
-Unify Rule with each rule in Rules.
+kb_query(K,A) :-
+    findall(F,(member((:-memoize(F)),K)),Whitelist),
+    memofromset([],M),
+    memofromset([],N),
+    kb_query(Whitelist,K,M,N,A).
+
+    % kb_query(+Whitelist, +Rules, !TrueGrounds, !FalseGrounds, +Goal)
+    kb_query(_,_,_,_,A) :- invalid_query(A).
+    kb_query(W,K,M,N,#once(A)) :- !, once(kb_query(W,K,M,N,A)).
+    kb_query(_,_,_,_,#A) :- !, primitive(A).
+    kb_query(_,_,_,_,(A=B)) :- !, A=B.
+    kb_query(W,K,M,N,(A,B)) :- !, kb_query(W,K,M,N,A), kb_query(W,K,M,N,B).
+    kb_query(W,K,M,N,(A;_)) :- kb_query(W,K,M,N,A).
+    kb_query(W,K,M,N,(_;A)) :- !, kb_query(W,K,M,N,A).
+    kb_query(_,_,M,_,H) :- memo_member(M,H), !.
+    kb_query(_,_,_,N,H) :- memo_member(N,H), !, false.
+    kb_query(W,K,M,_,H) :- kb_rule(K,H), nb_memoize(W,M,H).
+    kb_query(W,K,M,N,H) :- kb_rule(K,(H:-B)), kb_query(W,K,M,N,B), nb_memoize(W,M,H).
+    kb_query(W,_,_,N,H) :- nb_memoize(W,N,H), !, false.
+
+        nb_memoize(W,M,F) :- shouldmemoize(W,M,F), !, domemoize(M,F).
+        nb_memoize(_,_,_) :- !.
+
+/*
+            % naive list
+
+            memofromset(Set,m(Set)).
+
+            memo_member(m([A|_]),A).
+            memo_member(m([_|B]),A) :- memo_member(m(B),A).
+
+            domemoize(M,F) :- arg(1,M,N), ord_union(N,[F],P), nb_setarg(1,M,P).
 */
-kb_rule([A|_],R) :- copy_term(A,R).
-kb_rule([_|A],R) :- kb_rule(A,R).
 
-/** kb_head_body(+List, ?Head, ?Body)
+            memofromset(L,M) :- empty_nb_set(M), memofromset0(L,M).
 
-Match (Head :- Body) in List; or match Head in List and set Body = true.
+                memofromset0([],_) :- !.
+                memofromset0([A|B],M) :- !, add_nb_set(A,M), memofromset0(B,M).
 
-This is similar to clause/2, but this looks only in the List instead of all loaded definitions.
+            % add_nb_set(A,M) does not work if A is not ground.
+            % If so, what's the point of using nb_set?
+            % memo_member(M,A) :- add_nb_set(A,M,false).
+            memo_member(M,A) :- gen_nb_set(M,B), B=A.
 
-This cannot be done by member/2 because this requires copy_term/2.
-*/
-kb_head_body([C|_],H,B) :- copy_term(C,(H:-B)).
-kb_head_body([C|_],H,true) :- copy_term(C,H).
-kb_head_body([_|R],H,B) :- kb_head_body(R,H,B).
+            domemoize(M,F) :- add_nb_set(F,M).
 
-/** kb_caller_callee(+Rules, ?Caller, ?Callee)
+        shouldmemoize(_,_,#_) :- !, false.
+        shouldmemoize(_,_,(_=_)) :- !, false.
+        shouldmemoize(_,_,A) :- \+ ground(A), !, false.
+        shouldmemoize(W,_,A) :- whitelisted(W,A).
 
-True iff Caller may directly call Callee in Rules.
-*/
-kb_caller_callee(G,C,D) :-
-    kb_head_body(G,C,B),
-    clause_phrase(B,D).
-
-    clause_phrase((A,_),B) :- clause_phrase(A,B).
-    clause_phrase((_,A),B) :- clause_phrase(A,B).
-    clause_phrase((A;_),B) :- clause_phrase(A,B).
-    clause_phrase((_;A),B) :- clause_phrase(A,B).
-    clause_phrase(A,B) :- A \= (_,_), A \= (_;_), A = B.
-
-/** kb_depend(+Rules,+X,+Y)
-
-True iff X may call Y directly or indirectly.
-
-All arguments must be bound; otherwise the predicate may not terminate.
-*/
-kb_depend(G,A,B) :- kb_caller_callee(G,A,B).
-kb_depend(G,A,C) :- kb_caller_callee(G,A,B), kb_depend(G,B,C).
+            whitelisted(W,Exp) :- functor(Exp,Name,Arity), member(Name/Arity,W), !.
 
 /** horn_mgh(+Clause, -NClause)
 

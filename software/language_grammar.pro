@@ -68,37 +68,41 @@ grammar_analysis(Rules,Rules0) :-
             analyze1dis(I,[A|B],[C|D]) :- !, analyze1(I,A,C), analyze1dis(I,B,D).
 
         % Annotate call/2 with orders.
-        analyze2(G,match(I,A),match(I,A)) :- !.
-        analyze2(G,call(I,A),call(O,I,A)) :- !, callorder(G,A,O).
-        analyze2(G,con(I,J,A),con(I,J,B)) :- analyze2con(G,A,B).
-        analyze2(G,dis(I,A),dis(I,B)) :- analyze2dis(G,A,B).
+        analyze2(Grammar,Input,Output) :-
+            kb_callgraphtc(Grammar,CallGraphTc),
+            analyze20(CallGraphTc,Input,Output).
 
-            analyze2con(_,[],[]) :- !.
-            analyze2con(G,[A|B],[C|D]) :- !, analyze2(G,A,C), analyze2con(G,B,D).
+            analyze20(_,match(I,A),match(I,A)) :- !.
+            analyze20(G,call(I,A),call(O,I,A)) :- !, callorder(G,A,O).
+            analyze20(G,con(I,J,A),con(I,J,B)) :- analyze2con(G,A,B).
+            analyze20(G,dis(I,A),dis(I,B)) :- analyze2dis(G,A,B).
 
-            analyze2dis(_,[],[]) :- !.
-            analyze2dis(G,[A|B],[C|D]) :- !, analyze2(G,A,C), analyze2dis(G,B,D).
+                analyze2con(_,[],[]) :- !.
+                analyze2con(G,[A|B],[C|D]) :- !, analyze20(G,A,C), analyze2con(G,B,D).
 
-            callorder(G,A,late) :- grammar_maycallself(G,A), !.
-            callorder(_,_,early) :- !.
+                analyze2dis(_,[],[]) :- !.
+                analyze2dis(G,[A|B],[C|D]) :- !, analyze20(G,A,C), analyze2dis(G,B,D).
 
-                /** grammar_maycallself(+Rules,+Head)
+                callorder(G,A,late) :- grammar_maycallself(G,A), !.
+                callorder(_,_,early) :- !.
 
-                True iff Head may call itself directly or indirectly.
-                */
-                grammar_maycallself(G,F) :- functor(F,N,A), functor(F0,N,A), kb_depend(G,F,F0).
+                    /** grammar_maycallself(+CallGraphTc,+Head)
 
-            ordlt(late,early).
+                    True iff Head may call itself directly or indirectly.
+                    */
+                    grammar_maycallself(K,F) :- functor(F,N,A), functor(F0,N,A), ugraph_edge(K,F,F0).
 
-            ordmin(late).
+                ordlt(late,early).
 
-            ordmax(early).
+                ordmin(late).
 
-            ordmin(A,B,A) :- ordlt(A,B), !.
-            ordmin(_,B,B) :- !.
+                ordmax(early).
 
-            ordmax(A,B,B) :- ordlt(A,B), !.
-            ordmax(A,_,A) :- !.
+                ordmin(A,B,A) :- ordlt(A,B), !.
+                ordmin(_,B,B) :- !.
+
+                ordmax(A,B,B) :- ordlt(A,B), !.
+                ordmax(A,_,A) :- !.
 
 analysis_reorder(Rules,Rules0) :-
     findall(
@@ -126,9 +130,9 @@ analysis_reorder(Rules,Rules0) :-
             gpartition(A,_,_) :- !, domain_error(_,A).
 
                 getorder(match(_,_),P) :- !, P = early.
-                getorder(call(O,_,_),P) :- !, O=P.
-                getorder(con(_,_,_),P) :- !, O=late.
-                getorder(dis(_,_),P) :- !, O=late.
+                getorder(call(O,_,_),P) :- !, O = P.
+                getorder(con(_,_,_),P) :- !, P = late.
+                getorder(dis(_,_),P) :- !, P = late.
                 getorder(A,_) :- !, domain_error(_,A).
 
 analysis_kb1(A,K) :- map(An,Ru,grule_phorn1(An,Ru),A,K).
