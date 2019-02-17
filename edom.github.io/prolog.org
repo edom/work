@@ -119,6 +119,38 @@ https://www.semanticscholar.org/paper/On-the-Implementation-of-GNU-Prolog-Diaz-A
 See also:
 - https://en.wikipedia.org/wiki/Comparison_of_Prolog_implementations
 - Comparison between SWI Prolog, YAP, GNU Prolog http://www.david-reitter.com/compling/prolog/compare.html
+* The meanings of a Horn clause
+A Horn clause in Prolog looks like =A :- B=.
+
+A Horn clause can be thought of in several ways.
+
+The operational meaning of =A :- B1, ..., Bn= is that calling the procedure A causes B1, ..., Bn to be called in that order.
+This is the actual meaning of Prolog programs.
+All other meanings are useful fantasies.
+
+The classical-logic reading of =A :- B= is \(A \leftarrow B\), that is, "A is true if B is true" or "A is implied by B".
+
+The proof-theoretic reading of =A :- B= is "to prove \(A\), it is enough to prove \(B\)".
+
+The search-tree reading of =A :- B1, ..., Bn= is that the tree node A has the children B1, ..., Bn.
+
+These multiple readings are confusing.
+For example, the classical-logic reading implies that querying =a= against the following knowledge base should succeed because in classical logic \( A \leftarrow (B \wedge A) \equiv A \leftarrow B \),
+but the query =a= actually does not terminate.
+#+BEGIN_EXAMPLE
+a :- b, a.
+b.
+#+END_EXAMPLE
+In classical logic but not in Prolog,
+that knowledge base is equivalent to this:
+#+BEGIN_EXAMPLE
+a :- b.
+b.
+#+END_EXAMPLE
+
+Enhancing the declarativeness of Prolog requires /memoization/.
+
+What is the relationship between logic programming, relational programming, logic, Horn clauses, theorem proving, searching, and backtracking?
 * Establishing a workflow
 #+TOC: headlines 2 local
 ** <2018-10-20> Installing SWI-Prolog 7.6.4 on Ubuntu 14.04
@@ -1038,8 +1070,6 @@ prove((A,B)) :- prove(A), prove(B).
 
 A variable in clause head is implicitly universally quantified.
 A free variable in clause body is implicitly existentially quantified.
-
-What is the relationship between logic programming, relational programming, logic, Horn clauses, theorem proving, searching, and backtracking?
 
 
 Prolog just-in-time compilation

@@ -124,30 +124,6 @@ An /ungrammar/ is a convention for interpreting symbols into meanings.
 
 We represent meanings as shapes that others can perceive and interpret.
 It just happens that we represent meanings as strings of characters in computers.
-
-We can mathematically model a grammar as a relation between form and meaning: \(G \subseteq F \times M\).
-In computers, \(F = C^*\) is the set of all character strings, and \(M\) is the set of all abstract-syntax-tree nodes.
-Defining grammar as relation gives rise to a way of writing parsers as logic programs.
-What is the literature on the logic of grammar/parsing?
-DCG?
-#+BEGIN_EXAMPLE
-% grammar(?Form, ?Meaning).
-#+END_EXAMPLE
-
-The correspondence:
-- one Chomskyan production rule ~ one Horn clause
-
-A /grammar relation/ is a relation \(G \subseteq C^* \times T\).
-The set \(C\) is the /alphabet/.
-The set \(C^*\) is the /Kleene closure/ of \(C\).
-The set \(T\) is the set of /syntax trees/.
-
-Let \(G\) be a grammar.
-
-We say that a string \(S\) is /grammatical/ with respect to \(G\) iff there exists a tree \(T\) such that \(G(S,T)\).
-We may omit "with respect to \(G\)" if it is clear from context that there is only one grammar.
-
-Iff the grammar relation is a function, then we say that the grammar is /unambiguous/.
 ** Must a grammar concern only strings and trees?
 Trees are graphs.
 Why stop at trees?
@@ -168,18 +144,13 @@ Wikipedia?
 
 There are several ways.
 
-Recursive descent parsing?[fn::https://en.wikipedia.org/wiki/Recursive_descent_parser]
-
 Chomsky 1956 \cite{chomsky1956three} phrase-structure grammar: non-terminals, terminals, and rules.
 See also semi-Thue system, string rewriting system, Post rewriting system.
 
 Backus-Naur Form "is a notation technique for context-free grammars"[fn::https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form].
-
-Shieber 1995, parsing as deduction, logic programming\cite{shieber1995principles}.
 ** Does attribute grammar indeed specify the semantics of the language?
 https://en.wikipedia.org/wiki/Attribute_grammar
 ** How should we specify grammars?
-"How should I specify a grammar for a parser?"[fn::https://softwareengineering.stackexchange.com/questions/107266/how-should-i-specify-a-grammar-for-a-parser]
 * Understanding
 ** What is understanding?
 To understand X is to construct an internal predictive model of X?
