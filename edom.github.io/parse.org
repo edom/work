@@ -15,6 +15,15 @@ The language should facilitate these:
 - Specify the grammar of Haskell off-side rule.
 - Specify the grammar of C.
 - Specify the grammar of C++.
+
+Are composable grammars and parsers possible?[fn::https://tratt.net/laurie/blog/entries/parsing_the_solved_problem_that_isnt.html]
+
+Prolog definite-clause grammar (DCG) formalism is almost a dream.
+It is declarative.
+It handles context-sensitive grammars.
+Its only weakness is its non-handling of left recursion.
+But it seems that every left-recursive grammar can be algorithmically transformed into an equivalent non-left-recursive grammar, so what's the problem?
+It shouldn't be too hard to implement a left recursion elimination algorithm for Prolog DCGs.
 ** Parsing with Brzozowski quotients
 Parsing with Brzozowski quotients
  [fn::http://matt.might.net/articles/parsing-with-derivatives/]
@@ -135,8 +144,6 @@ Backtracking /unreads/ the input (places the input back into a queue).
 
 Naive parser with memoization.
 
-"Basically almost all parsing is done by top-down search with left-recursion protection"\cite[p. vii]{grune2008parsing}.
-
 TODO sample Leiss's book "Language equations"
 ** Regular expressions can be extended to context-free expressions by adding a fixed-point expression involving a binder
 \( \mu a . b \).
@@ -160,6 +167,109 @@ The parser is /parallelizable/ if there exists a relatively fast function \(comb
 \[
 P(xy) = combine(P(x), P(y))
 \]
+* Left-recursion elimination
+"Basically almost all parsing is done by top-down search with left-recursion protection"\cite[p. vii]{grune2008parsing}.
+
+I got this idea for left-recursion elimination on <2019-02-20>, but this may be well-known.
+
+to-do: summarize:
+- https://en.wikipedia.org/wiki/Left_recursion
+- https://www.microsoft.com/en-us/research/publication/removing-left-recursion-from-context-free-grammars/
+** Semiring of languages
+A /semiring/ is---roughly---an additive group, a multiplicative group, and an interaction between addition and multiplication.
+
+The languages of the same alphabet form a semiring.
+
+0 is the empty set.
+
+1 is \(\Set{\epsilon}\), the language that consists of the empty string only.
+
+Addition is set union.
+
+Multiplication is language concatenation: \(AB = \SetBuilder{ab}{a \in A, b \in B}\).
+** Left-recursive non-terminal
+A non-terminal \(A\) is /left-recursive/ iff it may reduce to something beginning with itself.
+For example, the following rule \(A\) is left-recursive.
+\begin{align*}
+A &\to B
+\\ B &\to \epsilon | AC
+\end{align*}
+** Production rule, language endofunction, and least fixed point
+We can think of a production rule as a /language endofunction/.
+For example, we can think of the rule \(A \to \epsilon | a A\) as the function \(A \mapsto 1 + \Set{a} A\).
+Then, we can think of the language described by the rule as the /least fixed point/ of the corresponding function,
+that is, the smallest set such that \(A = 1 + \Set{a} A\).
+** Factoring finite left-recursion
+Conjecture:
+Every finite left-recursive rule can be factored into the form \(A \to AB | C\)
+such that the rule \(A \to C\) would not be left-recursive.
+
+Example of /infinite/ left recursion:
+\(A \to Aa\).
+It matches an infinite string of \(a\).
+** Left-recursive language
+Because every rule can be factored as above,
+it suffices us to consider the least fixed point of the function \( A \mapsto AB + C \).
+
+We obtain the least fixed point by inferring the pattern formed by repeatedly replacing \(A = AB+C\) and manipulating the equation.
+\begin{align*}
+A &= AB+C
+\\ A &= (AB+C)B + C
+\\ A &= ABB + CB + C
+\\ A &= (AB+C)BB + CB + C
+\\ A &= ABBB + CBB + CB + C
+\\ A &= \ldots + CB^3 + CB^2 + CB^1 + CB^0
+\\ A &= \sum_{k\in\Nat} CB^k
+\\ A &= C \sum_{k\in\Nat} B^k
+\\ A &= C B^*
+\end{align*}
+It turns out that \( lfp(A \mapsto AB + C) = C B^* \).
+
+Because we are not using extended context-free grammar (which would have regular expressions and the Kleene star),
+we have to introduce an auxiliary non-terminal \(A'\) for representing \(B^*\):
+\begin{align*}
+A &= C A'
+\\ A' &= 1 + BA'
+\end{align*}
+
+Observe that \(A' = B^*\).
+\begin{align*}
+A' &= 1 + BA'
+\\ A' &= 1 + B(1 + BA')
+\\ A' &= 1 + B(1 + B(1 + BA'))
+\\ A' &= \sum_{k\in\Nat} B^k
+\end{align*}
+** Left-recursion elimination algorithm
+The algebra leads us to this left-recursion elimination algorithm:
+1. Remove the original rule for the left-recursive non-terminal \(A\) from the grammar.
+1. Factor that original rule into the form \(A \to AB | C\) such that \(A \to C\) would not be left-recursive and would not be empty.
+   If this is impossible, tell the user about the infinite left recursion.
+   Do not add \(A \to AB | C\) to the grammar; this rule is only an intermediate product.
+1. Add these two rules to the grammar: \(A \to C A'\) and \(A' \to \epsilon | B A'\).
+
+We have just eliminated left-recursion in a principled way, in a provably language-preserving way, guided by algebra.
+Now we understand why it works.
+If we forget the algorithm, we can always derive it from the algebra.
+
+Example:
+#+BEGIN_EXAMPLE
+Original left-recursive rule:
+exp :- num ; "(", exp, ")" ; exp, "*", exp ; exp, "+", exp
+
+After factoring (A :- ...) into (A :- A,B ; C):
+exp :- exp, ("*", exp ; "+", exp) ; (num ; "(", exp, ")")
+
+After replacement:
+exp :- (num ; "(", exp, ")"), exp0
+exp0 :- "" ; ("*", exp ; "+", exp), exp0
+#+END_EXAMPLE
+** Inlining the auxiliary rule's parse tree
+Two grammars describing the same language may produce different parse trees.
+
+Unfortunately left-recursion elimination changes the syntax tree.
+How do we unchange it?
+** TODO Prolog implementation
+Write a Prolog program to eliminate left recursion from definite-clause grammars.
 * Language-oriented approach
 The language-oriented approach to parsing is to make a language for expressing a relation between strings and trees.
 
