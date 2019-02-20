@@ -1,6 +1,8 @@
 :- module(language_prolog, [
     kb_querynaive/2,
     kb_query/2,
+    prolog_transitive_closure/3,
+    kb_query_transitive_closure/4,
     kb_pred_horndnf/3,
     kb_pred_mghclause/3,
     kb_pred_mghclauses/3,
@@ -8,6 +10,7 @@
     hornhead_mgu/3,
     mghhorn_disjunct/3,
     mghhorns_disjunct/2,
+    functor_addargs/3,
     op(1,fx,'#')
 ]).
 :- reexport('./language_prolog_callgraph.pro').
@@ -30,6 +33,10 @@ Predicates for working with knowledge bases:
     - kb_rule/3 looks up.
     - kb_head_body/3 looks up.
     - kb_pred_horndnf/3 normalizes.
+
+Transitive closure:
+    - prolog_transitive_closure/3
+    - kb_query_transitive_closure/4
 
 Predicates for computing knowledge base call graph:
     - kb_callgraphtc/2 computes the transitive closure of the call graph using library(ugraphs).
@@ -265,3 +272,25 @@ Clauses is a list of Clause.
         mghhorn_disjunct(C,Ds,D).
 
         mghhorn_disjunct((Head :- Body1), (Head :- Body2), (Head :- (Body1 ; Body2))).
+
+functor_addargs(F0,Args,F1) :- F0=..F, append(F,Args,G), F1=..G.
+
+/**
+prolog_transitive_closure(+Call, ?X, ?Y).
+
+Call must be a functor that will accept two more parameters.
+Call should not contain any variables; otherwise the result may be too confusing.
+*/
+:- meta_predicate(prolog_transitive_closure(2,?,?)).
+prolog_transitive_closure(Call,A,B) :- ptc([],Call,A,B).
+
+    % Tests look OK, but how do we prove that this works?
+    ptc(Visited,Call,A,B) :- call(Call,A,B), \+ member(B,Visited).
+    ptc(Visited,Call,A,B) :- call(Call,A,C), \+ member(C,Visited), ptc([C|Visited],Call,C,B).
+
+kb_query_transitive_closure(K,Call,A,B) :- ktc(K,[],Call,A,B).
+
+    ktc(K,Visited,Call,A,B) :- kb_callargs(K,Call,[A,B]), \+ member(B,Visited).
+    ktc(K,Visited,Call,A,B) :- kb_callargs(K,Call,[A,C]), \+ member(C,Visited), ktc(K,[C|Visited],Call,C,B).
+
+        kb_callargs(K,F,Args) :- functor_addargs(F,Args,C), kb_querynaive(K,C).

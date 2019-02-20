@@ -122,8 +122,6 @@ How do we define quotient and remainder?
 
 The Brzozowski derivative is a quotient[fn::https://en.wikipedia.org/wiki/Quotient_of_a_formal_language],
 because it is the result of dividing a language (a set of strings) by a string.
-
-The multiplication of two languages $A$ and $B$ is the Cartesian product $AB = \\{ ab ~\|~ a \in A, b \in B \\}$.
 ** The semantics of grammar expressions
 Consider the expression X,Y.
 Declaratively it means X followed by Y.
@@ -168,15 +166,53 @@ The parser is /parallelizable/ if there exists a relatively fast function \(comb
 P(xy) = combine(P(x), P(y))
 \]
 * Left-recursion elimination
+Why do we care about left recursion?
+Grune & Jacobs 2008 sums it up:
 "Basically almost all parsing is done by top-down search with left-recursion protection"\cite[p. vii]{grune2008parsing}.
 
-I got this idea for left-recursion elimination on <2019-02-20>, but this may be well-known.
+We are interested in eliminating left recursion from Prolog definite-clause grammars (DCGs).
 
 to-do: summarize:
 - https://en.wikipedia.org/wiki/Left_recursion
 - https://www.microsoft.com/en-us/research/publication/removing-left-recursion-from-context-free-grammars/
+
+I got this idea for left-recursion elimination on <2019-02-20>, but this may be well-known.
+** What is left recursion?
+This is a grammar with three left-recursive non-terminals.
+\begin{align*}
+A &\to B | C
+\\ B &\to Ab | b
+\\ C &\to Bc | c
+\end{align*}
+
+We say that \(A\) /left-calls/ \(B\) iff there exists a reduction \(A \to B C\).
+
+A non-terminal \(A\) is /left-recursive/ iff it may reduce to something beginning with itself.
+For example, the following rule \(A\) is left-recursive.
+\begin{align*}
+A &\to B
+\\ B &\to \epsilon | AC
+\end{align*}
+
+The left-call graph.
+Each vertex represents a non-terminal.
+An edge \((A,B)\) represents that \(A\) left-calls \(B\).
+
+If the left-call graph is cyclic, then a top-down parser may not work.
+
+Left-recursion elimination is about breaking cycles in the left-call graph.
+
+How do we delete the minimum number of edges from a graph to make it acyclic?
+Is this problem NP-hard?
 ** Semiring of languages
+We care about algebra because it guides us to /correct/ algorithms.
+
 A /semiring/ is---roughly---an additive group, a multiplicative group, and an interaction between addition and multiplication.
+
+The alphabet is \(A\).
+It is a finite set.
+
+The semiring's underlying set is \(A^*\).
 
 The languages of the same alphabet form a semiring.
 
@@ -187,18 +223,14 @@ The languages of the same alphabet form a semiring.
 Addition is set union.
 
 Multiplication is language concatenation: \(AB = \SetBuilder{ab}{a \in A, b \in B}\).
-** Left-recursive non-terminal
-A non-terminal \(A\) is /left-recursive/ iff it may reduce to something beginning with itself.
-For example, the following rule \(A\) is left-recursive.
-\begin{align*}
-A &\to B
-\\ B &\to \epsilon | AC
-\end{align*}
 ** Production rule, language endofunction, and least fixed point
 We can think of a production rule as a /language endofunction/.
 For example, we can think of the rule \(A \to \epsilon | a A\) as the function \(A \mapsto 1 + \Set{a} A\).
 Then, we can think of the language described by the rule as the /least fixed point/ of the corresponding function,
 that is, the smallest set such that \(A = 1 + \Set{a} A\).
+
+If a rule is non-recursive, then the corresponding language endofunction
+is a constant function that does not depend on the parameter.
 ** Factoring finite left-recursion
 Conjecture:
 Every finite left-recursive rule can be factored into the form \(A \to AB | C\)
@@ -270,6 +302,9 @@ Unfortunately left-recursion elimination changes the syntax tree.
 How do we unchange it?
 ** TODO Prolog implementation
 Write a Prolog program to eliminate left recursion from definite-clause grammars.
+
+The logical meaning of the Prolog DCG rule \(A(x) \to B_1(x), \ldots, B_n(x)\) is the predicate \(A\)
+where \(A(x,s_1,s_{n+1}) \leftarrow ( B_1(x,s_1,s_2) \wedge \ldots \wedge B_n(x,s_n,s_{n+1}) )\).
 * Language-oriented approach
 The language-oriented approach to parsing is to make a language for expressing a relation between strings and trees.
 
@@ -859,4 +894,50 @@ http://www.cs.sfu.ca/~cameron/Teaching/383/DCG.html
 http://www.hassan-ait-kaci.net/hlt/doc/hlt/jaccdoc/dynamicLR.html
 * Conferences
 ACM SIGPLAN SLE http://www.sleconf.org/blog/11-20-2013-parsing-at-sle-2013
+* Why can't top-down parsers (Prolog DCG) handle left recursion?
+Can we fix it by prescribing a different operational semantics?
+
+Should we just use bottom-up parsers?
+* Can we extend Brzozowski derivatives to context-sensitive expressions?
+Context-free expression is regular expression plus fixed points.
+
+A context-sensitive rule has a left-hand side that may contain more than one non-terminal.
+An example of such rule is \(AB \to C\).
+* Politics of parsing
+This patent (US patent 6449589, "Elimination of left recursion from context-free grammars")[fn::http://www.freepatentsonline.com/6449589.html][fn::https://patents.google.com/patent/US6449589B1/] should not exist?
+* Declarative Programming Research Group
+** Transitive closure
+There are several ways of thinking about transitivity:
+relation, logic, graph, fixed-point, and limit.
+
+A relation \(R\) is /transitive/ iff \(\forall x \forall y \forall z [(R(x,y) \wedge R(y,z)) \to R(x,z)]\).
+
+The transitive closure of a relation \(R\) is the smallest transitive superrelation of \(R\).
+Such closure is obtained by adding the fewest number of edges to make \(R\) transitive.
+
+The /transitive closure of an arity-2 predicate \(P\)/ is \(T(P)\) where \(T(P,x,y) = P(x,y) \vee \exists i (P(x,i) \wedge T(P,i,y)) \).
+The transitive closure of a first-order logic predicate is a first-order logic predicate.
+But the transitive closure /operator/ \(T\) is a second-order logic predicate.
+Fagin 1974 proves that transitive closure makes first-order logic more expressive.[fn::https://en.wikipedia.org/wiki/Transitive_closure#In_logic_and_computational_complexity]
+
+The /transitive closure of an arity-2 relation \(R\)/ is \(R \cup R_2 \cup R_3 \cup \ldots = \bigcup_{k \in \Nat \ge 1} R_k\) where \(R_k = \underbrace{R \circ \ldots \circ R}_k\).
+But this assumes that the relation is countable.
+If the relation is finite and its domain has \(n\) elements, then \(k\) does not need to go higher than \(n-1\),
+because the shortest path between two connected vertices in that graph will have at most \(n-1\) edges.
+Thus \(T(R)\) is the smallest set that satisfies the equation \(T(R) = T(R) \cup R\).
+Thus \(T(R)\) is the least fixed point of the function \(A \mapsto (A \cup R)\).
+
+We can also think of transitive closure of \(R\) as the limit \(\lim_{n\to\infty} S_n\)
+But this also assumes that the relation is countable.
+where \(S_1 = R\) and \(S_{n+1} = (S_n \circ R) \cup R\) and \((B,C,S) \circ (A,B,R) = (A,C,\SetBuilder{(x,z)}{\exists x (R(x,y) \wedge S(y,z))})\).
+We can think of \(S_n\) as the set of paths whose length does not exceed \(n\).
+** Transitive closure in Prolog
+This naïve Prolog predicate =t/2= may not terminate if the graph represented by =edge= is cyclic.
+Direct translation of the logical formula does not work.
+#+BEGIN_EXAMPLE
+t(A,B) :- edge(A,B).
+t(A,C) :- edge(A,B), t(B,C).
+#+END_EXAMPLE
+
+How do we make Prolog smarter so that the above predicate =t/2= terminates?
 * Bibliography

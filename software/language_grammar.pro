@@ -5,6 +5,8 @@
     analysis_reorder/2,
     analysis_kb1/2
 ]).
+:- reexport('./language_grammar_0.pro').
+:- reexport('./language_grammar_leftrec.pro').
 :- use_module('./map.pro').
 :- use_module('./language_prolog.pro').
 /** <module> grammar description language
@@ -188,8 +190,6 @@ grammar_kb2((GHead:-GBody), (PHead:-PBody)) :-
     gbody_pbody(GBody,PBody,Input,Rest).
 
     ghead_phead(G,P,I,R) :- functor_addargs(G,[I,R],P).
-
-        functor_addargs(F0,Args,F1) :- F0=..F, append(F,Args,G), F1=..G.
 
     gbody_pbody(#G,P,_,_) :- !, P = #G.
     gbody_pbody((GA,GB),P,S0,S9) :- !, P=(PA,PB), gbody_pbody(GA,PA,S0,S4), gbody_pbody(GB,PB,S4,S9).

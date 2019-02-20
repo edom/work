@@ -2,7 +2,8 @@
     clause_conjuncts/2,
     clause_disjuncts/2,
     conjuncts_clause/2,
-    disjuncts_clause/2
+    disjuncts_clause/2,
+    clause_disjunct/2
 ]).
 /** <module> Prolog clause manipulation; part of language_prolog.pro
 */
@@ -30,3 +31,12 @@ clause_disjuncts(A,[A]) :- A \= (_;_).
 
 disjuncts_clause([J], J) :- !.
 disjuncts_clause([JA|JB], (JA;CB)) :- disjuncts_clause(JB,CB).
+
+/**
+clause_disjunct(+Clause, -Disjunct).
+
+Enumerate the outermost disjuncts in Clause.
+*/
+clause_disjunct((A;_),B) :- clause_disjunct(A,B).
+clause_disjunct((_;A),B) :- clause_disjunct(A,B).
+clause_disjunct(A,B) :- A \= (_;_), A = B.

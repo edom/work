@@ -2,7 +2,7 @@
 :- use_module('./language_prolog.pro').
 
 g([
-    (start :- num),
+    (start :- exp),
     (num :- digit ; digit, num),
     (digit :- "0" ; "1" ; "2" ; "3" ; "4" ; "5" ; "6" ; "7" ; "8" ; "9" ),
     (exp :- num ; exp_paren ; exp_mul ; exp_plus ; exp_minus),
@@ -61,3 +61,10 @@ main :-
         %kb_query(Rules2, start(Codes,Rest)),
         format("Rest = ~w\n", [Rest]),
         true.
+
+main1 :-
+    g(G),
+    grammar_info(G,I),
+    print_term(I,[]),nl,
+    grammar_left_recursions(G,L),
+    print(L),nl.
