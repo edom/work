@@ -1,4 +1,4 @@
-#+TITLE: Programming Language Research Group
+#+TITLE: Programming language design
 #+DATE: 2018-12-15 01:35 +0700
 #+PERMALINK: /proglang.html
 #+OPTIONS: ^:nil toc:nil
@@ -130,129 +130,82 @@ The job of a module is to disambiguate names.
 Example: which "member/2" do we mean?
 *** Does it make sense in a language with nominal typing?
 Such as Haskell, Java, Ur/Web?
-* What is the best programming language?
-This is what I think the best programming language would is like, as of <2018-12-30>.
+* Pre-design
+** How should we design a programming language?
+Language design should start from semantics.
 
-general feel: Prolog + Haskell
+Names and referents should be separated (orthogonal).
 
-Katahdin - runtime syntax manipulation
+A language is only as good as how it promotes communication.
 
-supercompilation + partial evaluation + compilation by abstract interpretation
+What is communicated through a programming language?
+Two things: what things exist, and how those things should be manipulated.
 
-user-extensible unification?
+Design is about trade-offs?
+Type inference requires limiting language expressivity?
+** What are the design constraints of a programming language?
+A programming language must be ultimately translatable to the machine's primitives.
 
-Type system: Curry-style, not Church-style.
-More like Erlang Dialyzer or TypeScript than Haskell.
-Users should be able to write their own program checkers and program transformations.
+Wirth's "Algorithms + Data Structures = Programs"?[fn::https://en.wikipedia.org/wiki/Algorithms_%2B_Data_Structures_%3D_Programs]
 
-Module and import system: ld linker script, JavaScript, Nix import by lambda parameter name, Dhall, OCaml local import.
+Barbara Liskov: "Our compilers today are not powerful enough to support or enforce semantic constraints.",
+answering question "Do you think that in those examples it’s worth having a refined subtype to explicitly encode the difference between the LIFO and FIFO semantics
+as part of a typing system or that would be something that would be annotated externally to the type system, like semantic constraints?"[fn::https://www.infoq.com/interviews/barbara-liskov]
 
-Syntax: Landin offside rule?
+A programming language should not preclude efficient implementations.
+** Literature research
+What literature exists for programming language design?
 
-Pure + nondeterminism + JavaScript module system
-* Introduction
-There are two camps in programming language design: bottom-up and top-down.
+What can programming language researchers learn from the philosophy of language?
 
-Bottom-up language design:
-- Begin with physics.
-- Claude Shannon abstracted the underlying physics into bits and boolean algebra.
-- Machine code.
-- Two's-complement signed integers.
-- Variables abstract away finite registers.
-- Garbage collection abstracts away finite memory.
-- Go up until the language is convenient enough to use.
+Things to summarize:
+- 1966 article "The Next 700 Programming Languages" http://www.math.bas.bg/bantchev/place/iswim/next700.pdf
+- 1997 article "Scripting: Higher Level Programming for the 21st Century" http://artemisa.unicauca.edu.co/~lgarreta/elenguajes/readings/scripting.pdf
+  - "This article is an opinion piece that explains why scripting languages
+    will handle many of the programming tasks of the next century better than system programming
+    languages."
+- Other people's opinions about designing programming languages:
+  - http://www.inquisition.ca/en/info/gepsypl/rules.htm
+  - 2015 dissertation "Evidence-based programming language design: a philosophical and methodological exploration",
+    [[https://jyx.jyu.fi/handle/123456789/47698][abstract]],
+    [[https://jyx.jyu.fi/bitstream/handle/123456789/47698/978-951-39-6388-0_vaitos04122015.pdf][pdf]]
+    - It's mostly philosophy of what "evidence-based" means.
+    - It doesn't design a programming language.
+    - It could have been shorter.
+  - https://www.reddit.com/r/ProgrammingLanguages/comments/9ep9xq/what_i_did_not_steal_from_perl_6/
+    - "What's a character?" https://www.perlmonks.org/?node_id=1214956
+  - https://www.reddit.com/r/ProgrammingLanguages/comments/9eqrfy/what_are_the_biggest_problems_with_programming/
+  - 2017 article "The End of History? Using a Proof Assistant to Replace Language Design with Library Design" [[https://www.cs.purdue.edu/homes/bendy/Fiat/fiat-snapl.pdf][pdf]]
+  - [[http://purduepl.github.io/index.html][Purdue university programming languages group]]
+- Shopping for ideas:
+  - [[https://www.reddit.com/r/ProgrammingLanguages/comments/8vcrzb/what_are_some_interesting_language_features_that/][What are some interesting language features that may not be well known? : ProgrammingLanguages]]
+  - https://softwareengineering.stackexchange.com/questions/55047/what-is-the-greatest-design-flaw-you-have-faced-in-any-programming-language
+  - https://www.reddit.com/r/ProgrammingLanguages/comments/9erq87/languages_with_separate_types_for_pointers_to_the/
+  - http://math.andrej.com/2009/05/29/mathematically-structured-but-not-necessarily-functional-programming/
+  - read, "true sums of products" http://hackage.haskell.org/package/generics-sop
+- "The Programming Languages Zoo [...] demonstrates various concepts and techniques used in programming language design and implementation.
+  It is a good starting point [...]"
+  http://plzoo.andrej.com/
 
-Top-down language design:
-- Begin from logic and mathematics, the internal language of thought.
-- Go down until the language is convenient enough to realize.
-* Effects, side-effects, and errors
-** An effect is what?
-What is an "effect"?
+Unanswered questions:
+- Is there a homoiconic statically-typed language?
+  Does type system hamper homoiconicity?
+- Can we make high-level declarative language without garbage collection?
 
-What is a "side-effect"?
+Making a programming language
+https://www.reddit.com/r/ProgrammingLanguages/comments/9ky7o6/writing_my_own_programming_language/e72qjll/
+banzr: 'Racket is taught in universities to be used to write languages. Use "match" and "cases" to build the parser and interpreter. Good luck!'
 
-Does "side-" imply undesirability?
 
-Isn't memory allocation an effect?
+2017 "Language Oriented Modularity: From Theory to Practice"
+http://programming-journal.org/2017/1/10/
 
-What is a "side-effect"?
-Wikipedia[fn::https://en.wikipedia.org/w/index.php?title=Side_effect_(computer_science)&oldid=855461052][fn::https://softwareengineering.stackexchange.com/questions/40297/what-is-a-side-effect] is inconclusive.
+2017 "Classless Object Semantics"
+http://researcharchive.vuw.ac.nz/handle/10063/6681
 
-The "side" in "side-effect" implies that there are /effects/ and /main-effects/, and that side-effects are unintended, unrelated, or unwanted.
-The /effect/ of running a program is the change of the state of the universe that results from executing that program.
-In medicine, a side effect is an /unintended/ effect, not necessarily bad[fn::https://en.wikipedia.org/w/index.php?title=Side_effect&oldid=875244456].
-Thus, there is a parallel between chemists-and-drugs and programmers-and-programs:
-the designer of a drug (the programmer of a program) /intends/ that taking the drug (running the program) accomplishes the /main-effect/, but reality is a bitch.
-
-What is our intention when we write a program such as a Haskell program =inc x = (x :: Integer) + 1=?
-Our intention is that it increments an integer, for /every/ integer, which is mathematically trivial but physically impossible.
-The side-effects are: heating up the CPU, taking up some memory, taking up some time.
-We certainly did not intend to heat up the CPU; therefore such heating is a side-effect.
-Thus the main-effect is the /denotation/ (the mathematical meaning) of the program,
-and every implementation detail is a side-effect.
-
-Thus "side-effect" means an effect that we failed to foresee, because the complexity was too much for us.
-
-Side-effects may be fatal.
-
-Spectre/Meltdown are side-effects in that sense.
-The chip designers sacrificed understandability for speed.
-
-There is also the phrase "algebraic effect".
-
-We have to distinguish between a /program/ and a /machine/ running the program.
-A program does not run by itself.
-A /machine/ runs a program.
-A program /describes/ a computation.
-The machine /performs/ the computation.
-A program is passive.
-A machine is active.
-A program exists in idea-world.
-A machine exists in material-world.
-A machine affects reality according to the program that the machine is running.
-The question: which is the /cause/ of the change in reality: the machine or the program?
-
-If we assume free will, then our thought causes our behavior, and our behavior causes something in the material-world.
-** An error is an unintended behavior, unexpected outcome?
-Unintended behavior?
-How do we measure intention?
-
-Error is like weed.
-They are subjective concepts.
-An error is an undesirable condition.
-Why are errors undesirable?
-Because they complicate programs.
-
-Since 1726, an error is a "difference between observed value and true value".[fn::https://www.etymonline.com/word/error]
-
-An error is a difference between what is and what should be.
-
-Midori programming language
- [fn::http://joeduffyblog.com/2015/11/03/blogging-about-midori/]
- [fn::http://joeduffyblog.com/2016/02/07/the-error-model/].
-
-Is an error a side-effect?
-Both errors and side-effects are unintended.
-
-Let \(f'\) be what we think a system does.
-Let \(f\) be what the system actually does.
-Then our error is \(f' - f\) which has to be equal to \(- (f - f')\).
-If each of \(f\) and \(f'\) is a logic formula in a structure with domain \(D\) and interpretation \(I\),
-then \(-\) is symmetric difference, and negation is made with respect to \(D\).
-
-For example, we think the system implements \( a \).
-It turns out that the system implements \( b \).
-Then the error is \((a \wedge \neg b) \vee (b \wedge \neg a)\).
-Let each of \(a\) and \(b\) be a formula.
-Define their symmetric difference \(a - b\) as \((a \wedge \neg b) \vee (b \wedge \neg a)\),
-similar to set-theoretic symmetric difference[fn::https://en.wikipedia.org/wiki/Symmetric_difference].
-
-For example, we think the system implements \( x \mapsto x + 3 \).
-It turns out that the system implements \( x \mapsto x + 2 \).
-Then the error is \(x \mapsto 1\).
-* Modules
-** What are the differences between a module and a dictionary (a table, a map, a finite function)?
-** What is a module?
+http://www.pl-enthusiast.net/2015/05/27/what-is-pl-research-and-how-is-it-useful/
+* Designing module systems
+** What is a module? How does it differ from dictionary, function, table, map, association?
 What can we do with zero module? We can create the empty module.
 What can we do with a module?
 What can we do with many modules?
@@ -272,9 +225,7 @@ A dictionary can be a finite function whose domain is a finite subset of \( D \)
 A module can be modeled as a dictionary.
 A module can be modeled as a finite function \( N \to D \) where \( N \) is the set of names for which the module has an entry.
 A module can be modeled as an infinite function \( N \to D \) where \( N \) is the set of all possible names.
-* Module systems
-#+TOC: headlines 2 local
-** What
+** What module systems?
 REBOL module system?
 
 Bad example: java:
@@ -318,12 +269,7 @@ What do others say?
 What do we infer?
 
 - We can develop different modules at the same time.
-
 *** Philosophical investigation
-   :PROPERTIES:
-   :CUSTOM_ID: philosophical-investigation
-   :END:
-
 - What are the properties of a module?
 - What are its relationships with other things?
 
@@ -354,12 +300,7 @@ What do we infer?
 - A module is a bunch of imports and exports?
 - A module is smallest unit of reuse? Isn't that function?
 - A module is smallest unit of compilation? Isn't that function?
-
 *** Modules are for humans
-   :PROPERTIES:
-   :CUSTOM_ID: modules-are-for-humans
-   :END:
-
 Computers don't need modules.
 All it needs is a sequence of machine codes.
 
@@ -403,12 +344,7 @@ Note below, that the same =Plus= is used as both a variable and a predicate.
   - The next motivation was to reduce disk and memory usage.
 
 - The essence of programming-in-the-large is Don't Repeat Yourself?
-
 *** Comparing existing module systems
-   :PROPERTIES:
-   :CUSTOM_ID: comparing-existing-module-systems
-   :END:
-
 How do programming languages deal with modules?
 
 - [[https://github.com/dhall-lang/dhall-lang/issues/182][dhall modules · Issue #182 · dhall-lang/dhall-lang]]
@@ -443,12 +379,7 @@ How do programming languages deal with modules?
   - book, "Types and programming languages", [[https://www.asc.ohio-state.edu/pollard.4/type/books/pierce-tpl.pdf][pdf]]
 
 - [[https://en.wikipedia.org/wiki/Modular_programming][WP:Modular programming]]
-
 *** Key idea: Module = Dictionary -> Dictionary
-   :PROPERTIES:
-   :CUSTOM_ID: key-idea-module-dictionary---dictionary
-   :END:
-
 Assume a dependently-typed language.
 
 Recall some terminologies:
@@ -500,12 +431,7 @@ See [[https://futhark-lang.org/blog/2017-01-25-futhark-module-system.html#module
 A problem: compilation may fail to terminate.
 No big deal.
 Set a time-out.
-
 *** what
-   :PROPERTIES:
-   :CUSTOM_ID: what
-   :END:
-
 - Hypothesis: Lazy evaluation solves the partial query problem elegantly.
 - What are some cool ideas?
 
@@ -612,243 +538,275 @@ Set a time-out.
 - Ignored undocumented code sketches
 
   - [[https://github.com/jordanlewis/simple-module-system][jordanlewis/simple-module-system: Adding modules to a polymorphic lambda calculus]], code in SML/NJ.
-* Primitives
-** What is a text?
-ASCII does a good job representing English texts, but not other texts.
+** ML/OCaml records vs modules: Why do we have modules if records suffice? An Ocaml "functor" would then simply be a function from records to records.
+* Program correctness
+** What is correct?
+** How do we know that our program is correct?
+If we know that program \(x\) is correct,
+and we know that program transformation \(f\) preserves correctness,
+then we can infer that \(f(x)\) is correct.
 
-Is text the successor to printing with movable types?
+Otherwise, our software may be correct but we don't know, or worse, incorrect and we don't know.
+** Type systems, lightweight program reasoning systems
+A type system is a sublanguage for reasoning about programs, for expressing some properties of programs.
+*** Is a type a set?
+<2019-02-04>
+Phil Freeman asked "Can someone explain why people object to thinking of types as sets? I mean, I normally don’t, but it doesn’t seem incorrect necessarily."
+https://twitter.com/paf31/status/1092111216950992897
 
-Direction, grapheme, character, radical, letter, modifier, etc.
+*** When should we introduce a type system?
+- 2005 article "Introduction to Type Theory" [[http://www.cs.ru.nl/~erikb/onderwijs/sl2/materiaal/tt-sl2.pdf][pdf]]
+*** Is inheritance subtyping?
+   :PROPERTIES:
+   :CUSTOM_ID: is-inheritance-subtyping
+   :END:
 
-What does Unicode think a text is?
+The short article [2] basically tells the user to read AbdelGawad's other works.
 
-A text is a writing?
-Drawing vs writing?
-This "A" is just a /representation/ of the first letter of the English alphabet,
-in the same way "0" is a representation of the first natural number.
+- 1 [1] 1989, "Inheritance is not subtyping", [[https://www.cs.utexas.edu/users/wcook/papers/InheritanceSubtyping90/CookPOPL90.pdf][pdf]]
+- 2 [2] 2013, "Inheritance is subtyping", [[https://pdfs.semanticscholar.org/569c/9b35375144756761167fd4a2571b1d97f0e8.pdf][pdf]]
+- [[https://www.cmi.ac.in/~madhavan/courses/pl2009/lecturenotes/lecture-notes/node28.html][Subtyping vs inheritance]]
+  - Subtyping and inheritance are orthogonal concepts.
 
-Text is inherently sequential/linear because that is the way we read.
-Our brain is physically limited;
-it can only focus on one thing at a time;
-we read by moving focus through text.
-Unless you are Kim Peek who may read two pages at once
- [fn::https://www.psychologytoday.com/us/blog/the-superhuman-mind/201212/kim-peek-the-real-rain-man]
- [fn::https://en.wikipedia.org/wiki/Kim_Peek]
- [fn::http://itre.cis.upenn.edu/~myl/languagelog/archives/004655.html].
-** Strings, especially of characters
-Why do we have strings?
+A language should provide both nominal and structural subtyping.
 
-Computer keyboards evolved from typewriters.
+- 2008, "Integrating Nominal and Structural Subtyping", [[http://www.cs.cmu.edu/~aldrich/papers/ecoop08.pdf][pdf]]
 
-Computerization of human writing?
+We can define structural subtyping for C structs.
 
-First came Gutenberg's printing press.
-Each letter is imprinted by a type.
+We can define layout types (almost like ASN.1):
 
-The problem is to encode human text in bits.
-We solved the problem of encoding numbers with two's-complement signed integers.
-English text is simple: ASCII.
+#+BEGIN_EXAMPLE
+    layout {
+        at byte 0;
+        def var0 : little_endian int32;
+        at byte 4;
+        def var1 : big_endian int32;
+        reserve 8 byte;
+        skip 4 byte; -- synonym for reserve
+        def var2 : int8;
+        def var3 : array of 4 int8;
+        align 16;
+        def var4 : layout {
+            reserve 16 byte;
+            def var1 : int8;
+            align 32;
+        };
+    }
+#+END_EXAMPLE
 
-An accented letter is a letter and an accent.
+We can define intersection, union, concatenation, and composition/nesting of two layout types.
 
-A /string/ is a homogenous sequence.
+Why don't we just build ASN.1 into the language?
 
-A string has a beginning, and may have an ending.
-A string may be finite.
+- [[http://whiley.org/2010/12/13/why-not-use-structural-subtyping/][Why not use Structural Subtyping?]]
 
-A /byte string/ is a sequence of bytes.
+  - What is it trying to say?
 
-An /ASCII string/ is a byte string.
+*** Maximum polymorphism?
+   :PROPERTIES:
+   :CUSTOM_ID: maximum-polymorphism
+   :END:
 
-A /character string/ is a sequence of characters.
+- Read this: [[https://blog.inf.ed.ac.uk/apl16/archives/178/comment-page-1][Lecture 4: Higher Polymorphism | Advances in Programming Languages]]
+- [[https://github.com/lampepfl/dotty/issues/1886][Rethink Structural Types · Issue #1886 · lampepfl/dotty]]
 
-Unqualified "string" usually means "character string".
+  - "However, there is another area where statically-typed languages are often more awkward than dynamically-typed ones: database access."
+  - Keynote - What's Different In Dotty by Martin Odersky https://www.youtube.com/watch?v=9lWrt6H6UdE
 
-A /character string literal/ is surrounded with quotes.
+*** Typing records
+   :PROPERTIES:
+   :CUSTOM_ID: typing-records
+   :END:
 
-- inconclusive discussion https://www.reddit.com/r/ProgrammingLanguages/comments/9tj6ka/how_would_you_best_implement_first_class_strings/
-*** Escape sequences
-*** Characters
-What is Unicode's definition of "character"?
-Is that definition sane?
+A record type can be thought as a product type whose components are named.
 
-Should Unicode normalization/canonicalization be built into the programming language?
+If each value =valN= has type =typN=, then the record ={key1=val1; key2=val2; ...;}= has type ={key1:typ1; key2:typ2; ...;}=.
+For example, the record ={name="John"; age=20}= has type ={name:String; age:Int;}=.
 
-Issues: ordering/collation, capitalization, combination, halfwidthization, ligature, etc.
+*** Polymorphism is code generation
+   :PROPERTIES:
+   :CUSTOM_ID: polymorphism-is-code-generation
+   :END:
 
-- https://en.wikipedia.org/wiki/String_(computer_science)
-- https://en.wikipedia.org/wiki/Character_(computing)
-** Dictionary, map, associative array, record, finite function, hash table
-*** Clojure maps are applicable like functions.
-A very interesting fundamental idea.
+- Consider translating =id : a -> a= to assembly.
 
-#+BEGIN_SRC lisp
-({:a 1 :b 2 :c 3} :a)
-=> 1
-({:a 1 :b 2 :c 3} :b)
-=> 2
-#+END_SRC
+  - If types define memory layout (bit representation), then the compiler must generate an =id= function for every =a=.
+  - If the language uses runtime type tagging, then there doesn't have to be more than one=id= functions.
 
-Clojure has nice map syntax: =(m k)= for accessing k.
+*** Fixed points and recursive types
+   :PROPERTIES:
+   :CUSTOM_ID: fixed-points-and-recursive-types
+   :END:
 
-Maps are isomorphic to functions.
-We update a map.
-Updating a function is simple:
-#+BEGIN_SRC haskell
-update nk nv f = \ k -> if k == nk then nv else f k
--- and then beta-normalize the lambda body
-#+END_SRC
+A thing \( x \) is a /fixed point/ of function \( f \) iff \( f(x) = x \).
 
-A Prolog deterministic binary predicate is like a Clojure map.
-* How do we use programming languages?
-** Most people stick to languages they are familiar with
-They prefer shitty-but-familiar to great-but-unfamiliar.
-They condemn themselves to apathy and mediocrity.
-They never wonder whether there is a better way.
+A function may have zero, one, or many fixed points.
 
-Science (evolution and neuroscience) explains why people stick to shitty-but-predictable languages
+A thing \( x : A \) is a /least fixed point/ of function \( f : A \to A \) iff
+\( x \) is a minimum of the set of the fixed points of \( f \).
+The words "least" and "minimum" assume an ordering \( \le \).
+This ordering should be clear from context.
 
-The brain reward system rewards correct predictions.
-If person P finds language L predictable (according to P's background knowledge), then P will like L.
-Procedural languages are predictable.
-Thus people stick to them, no matter how shitty those languages are.
-People prefer predictable shitty things to unpredictable great things.
-People are risk-averse.
+If \( f \) has exactly one least fixed point \( x \) with respect to ordering \( \le \), then we write \( \mu_\le(f) = x \).
 
-Curiosity of finding a better way to program is the exception; the norm is "we have always done it this way".
+The syntax \( \mu a. b \) means \( \mu_\le(\lambda a. b) \).
+The syntax \( \mu a. b \) is analogous to lambda expression syntax \( \lambda a. b \).
 
-We can dumb down the language, or we can smart up the people, but people are naturally lazy, because laziness promotes survival.
+What is the ordering used in formulating the least fixed point of a recursive algebraic data type?
 
-"David Liddle's idea on application user interfaces give us a clue as to why lower-level languages draw more people in than higher-level ones (Liddle, 1989).
-He claims that the most important aspect of a good user interface is how well it leads the user to an accurate conceptual model of how the application works.
-If the user develops an accurate conceptual model, then the application works as expected.
-This leads the user to try more things, which also work as expected, leading to an even better understanding, thus drawing the user further and further into the tool."
-https://www.amzi.com/articles/prolog_under_the_hood.htm
-* Designing a programming language
-** First, design the semantics
+todo: equirecursive types and isorecursive types
+
+*** Benefits and drawbacks of static type checking
+The benefits of types:
+
+- Types prevent stupid mistakes.
+- Types can be used to improve program efficiency.
+- Types are documentation for both human and machine.
+  Types communicate intention to both human and machine.
+
+The drawbacks of types:
+
+- Some safe programs don't typecheck.
+- Some programs become longer.
+  - Haskell's type system complicates the AST decoration problem.
+    In TypeScript, the AST decoration problem is trivial;
+    you just add a field at runtime.
+**** Arguments for static type checking?
+***** What?
+- There are two camps:
+  - DTL (dynamically typed language)
+  - STL (statically typed language)
+- Every programmer is lazy, but differently.
+  - People who use DTLs are too lazy to write the types.
+  - People who use STLs are too lazy to do what machines can do, such as
+    - detecting typos,
+    - avoiding unintentional conversions,
+    - tracing the code, 2 weeks later, to find out the type of a variable.
+- People who use DTLs are too diligent.
+They love to do what machines can do: type checking.
+- Static typing enables you to be lazier.
+  Help the machine help you avoid work.
+  By investing in a few keystrokes, you will get these in return:
+- The machine will catch more mistakes for you.
+- You can have an IDE that finds references correctly.
+  This enables features such as "Jump to definition", "Rename", and even more fancy refactorings.
+- Moral of the story:
+  - Let the machines do all the boring stuffs.
+  - Be future-lazy, not present-lazy.
+    Do things now so that you can be lazy later.
+    Don't be lazy now only to regret it later.
+    - People who organize their things are too lazy to spend mental effort later in a scramble to find things.
+    - People who don't organize their things are just too lazy to do it, and would rather just experience regret in the future than experience some hardship now for a better future.
+    - The sane solution to "too lazy to write types" is to pick a language with type inference, not to ditch types altogether.
+    Don't throw the baby out with the bathwater.
+- This argument also applies to functional programming vs procedural programming.
+  Indeed this argument applies to every technology.
+  Adopting technology enables us to be lazier.
+- People buy tractors because they are too lazy to till their fields with hoes.
+- People use frameworks because they are too lazy to do the same plumbing again and again.
+- People strive to avoid side-effects in functional programming because they are too lazy to debug synchronization errors.
+- The only thing the human race isn't too lazy to do is to think about lazier ways of doing things.
+***** What?
+- https://dimjasevic.net/marko/2018/10/23/typed-functional-programming-and-software-correctness/
+  - "what can be done about a programmer’s limited time to write correct software?
+    While there are multiple plausible answers to this question,
+    I will argue that a very effective solution is to use typed functional programming."
+  - 2017 https://dimjasevic.net/marko/2017/11/10/a-subtyping-polymorphism-misfortune/
+    - "the interaction between subtyping and parametric polymorphism asks for trouble"
+    - type-parameter variance and polymorphism don't mix?
+*** Prolog is ideal for writing a typechecker, and TypeScript is ideal for typechecking AST decorations, so we should fuse Prolog and TypeScript.
+Abdullah pointed out to me that TypeScript interface is similar to Ocaml polymorphic variant?
+**** But there is Racket and its languages such as ProfessorJ, Datalog.
+- "Creating languages" https://docs.racket-lang.org/guide/languages.html
+* Concepts?
+** Effects, side-effects, and errors
+*** An effect is what?
+What is an "effect"?
+
+What is a "side-effect"?
+
+Does "side-" imply undesirability?
+
+Isn't memory allocation an effect?
+
+What is a "side-effect"?
+Wikipedia[fn::https://en.wikipedia.org/w/index.php?title=Side_effect_(computer_science)&oldid=855461052][fn::https://softwareengineering.stackexchange.com/questions/40297/what-is-a-side-effect] is inconclusive.
+
+The "side" in "side-effect" implies that there are /effects/ and /main-effects/, and that side-effects are unintended, unrelated, or unwanted.
+The /effect/ of running a program is the change of the state of the universe that results from executing that program.
+In medicine, a side effect is an /unintended/ effect, not necessarily bad[fn::https://en.wikipedia.org/w/index.php?title=Side_effect&oldid=875244456].
+Thus, there is a parallel between chemists-and-drugs and programmers-and-programs:
+the designer of a drug (the programmer of a program) /intends/ that taking the drug (running the program) accomplishes the /main-effect/, but reality is a bitch.
+
+What is our intention when we write a program such as a Haskell program =inc x = (x :: Integer) + 1=?
+Our intention is that it increments an integer, for /every/ integer, which is mathematically trivial but physically impossible.
+The side-effects are: heating up the CPU, taking up some memory, taking up some time.
+We certainly did not intend to heat up the CPU; therefore such heating is a side-effect.
+Thus the main-effect is the /denotation/ (the mathematical meaning) of the program,
+and every implementation detail is a side-effect.
+
+Thus "side-effect" means an effect that we failed to foresee, because the complexity was too much for us.
+
+Side-effects may be fatal.
+
+Spectre/Meltdown are side-effects in that sense.
+The chip designers sacrificed understandability for speed.
+
+There is also the phrase "algebraic effect".
+
+We have to distinguish between a /program/ and a /machine/ running the program.
+A program does not run by itself.
+A /machine/ runs a program.
+A program /describes/ a computation.
+The machine /performs/ the computation.
+A program is passive.
+A machine is active.
+A program exists in idea-world.
+A machine exists in material-world.
+A machine affects reality according to the program that the machine is running.
+The question: which is the /cause/ of the change in reality: the machine or the program?
+
+If we assume free will, then our thought causes our behavior, and our behavior causes something in the material-world.
+*** An error is an unintended behavior, unexpected outcome?
+Unintended behavior?
+How do we measure intention?
+
+Error is like weed.
+They are subjective concepts.
+An error is an undesirable condition.
+Why are errors undesirable?
+Because they complicate programs.
+
+Since 1726, an error is a "difference between observed value and true value".[fn::https://www.etymonline.com/word/error]
+
+An error is a difference between what is and what should be.
+
+Midori programming language
+ [fn::http://joeduffyblog.com/2015/11/03/blogging-about-midori/]
+ [fn::http://joeduffyblog.com/2016/02/07/the-error-model/].
+
+Is an error a side-effect?
+Both errors and side-effects are unintended.
+
+Let \(f'\) be what we think a system does.
+Let \(f\) be what the system actually does.
+Then our error is \(f' - f\) which has to be equal to \(- (f - f')\).
+If each of \(f\) and \(f'\) is a logic formula in a structure with domain \(D\) and interpretation \(I\),
+then \(-\) is symmetric difference, and negation is made with respect to \(D\).
+
+For example, we think the system implements \( a \).
+It turns out that the system implements \( b \).
+Then the error is \((a \wedge \neg b) \vee (b \wedge \neg a)\).
+Let each of \(a\) and \(b\) be a formula.
+Define their symmetric difference \(a - b\) as \((a \wedge \neg b) \vee (b \wedge \neg a)\),
+similar to set-theoretic symmetric difference[fn::https://en.wikipedia.org/wiki/Symmetric_difference].
+
+For example, we think the system implements \( x \mapsto x + 3 \).
+It turns out that the system implements \( x \mapsto x + 2 \).
+Then the error is \(x \mapsto 1\).
 ** Then, design the concrete syntax
 The concrete syntax of \( \Gamma \vdash A \) is \( with(\Gamma,A) \).
-** The essence of dictionary is finite function
-Clojure gets this right?
-
-Left-hand side of an application may be:
-- a dictionary,
-- a lambda, or
-- a finite left-biased union of arbitrarily many dictionaries and lambdas, or
-- a union like that but right-biased.
-** Prolog
-How does Mercury do without assert/retract?[fn::https://www.mercurylang.org/information/doc-latest/mercury_trans_guide/AssertRetract.html]
-
-- https://stackoverflow.com/questions/20511060/parsing-an-expression-in-prolog-and-returning-an-abstract-syntax
-  - "you did something quite smart [...] That is fine. However, this strategy is inherently very inefficient"
-  - "There is a general way how to fix this: Add another pair of arguments to encode the length."
-
-1988, Towards functional programming in Prolog[fn::ftp://obaluae.inf.puc-rio.br/pub/docs/Publications/88_AI_Furtado_SINPLAN.Not.pdf].
-It defines several infix operators.
-"[...] The problem of evaluating expressions combining functions and predicates is investigated.
-Examples are provided to illustrate the discussion.
-The paper includes a prototype implementation."
-
-2.7.1 "Axiomatizing Context-Free Grammars"[fn::http://www.mtome.com/Publications/PNLA/prolog-digital.pdf].
-See third paragraph: "the general statement made by the context-free rule [...] can be summarized using relations on positions with the following logical statement [...]"
-** Combining lambda-calculus and first-order logic: combining beta-reduction, unification, and backtracking
-Anonymous function: \ x -> x + 1
-Anonymous predicate: \ a b c -> f a, g b, h c
-fix f = f (fix f)
-
-father_child(dad, kid).
-father_child(daddy, kiddo).
-
-:- operator --
-father(daddy) -- child(kiddo).
-
-father_child dad kid
-father_child daddy kiddo
-father dad -- child kid
-
-father_child = \ dad kid
-father_child = \ Dad Kid -> Dad = dad, Kid = kid
-
-"First-order logic without equality"
-https://math.stackexchange.com/questions/363168/first-order-logic-without-equality
-
-"Differences between logic with and without equality"
-https://mathoverflow.net/questions/316648/differences-between-logic-with-and-without-equality
-
-
-Isn't this Curry language?
-Curry's slogan is "A Truly Integrated Functional Logic Language"
-
-
-Lambda-Prolog, Harrop formula
-Why was Harrop formula defined?
-What's so special about it?
-https://en.wikipedia.org/wiki/Harrop_formula
-
-Lambda-Prolog
-
-https://math.stackexchange.com/questions/2494645/lambda-calculus-combined-with-first-order-logic-notation-quantifiers-propositi
-
-"But languages aren't tools! IDEs are tools. Languages are material. See FallacyOfTheRightTool."
-http://wiki.c2.com/?QuestForThePerfectLanguage
-** Prolog predicate naming
-blue(X)
-has(A,B)
-can_sing(A)
-version(A,B,C)
-person_name(P,N)
-index_fibonacci
-index_list_element
-
-class_field
-table_column
-column_type
-
-class(Atom) is true iff Atom is a referent.
-
-table(Atom) has different namespace
-
-class_field(Cls, F) :- table_column(T, Col), field_name(F, N), column_name(Col, N).
-
-Metamodel
-A thing is modeled as an association list such as [a=b,c=d,e=f]
-alist_key_value([K=V|_],K,V).
-alist_key_value([_|R],K,V) :- alist_key_value(R,K,V).
-
-alist_empty
-alist_tail
-alist_head
-alist_without_keys
-alist_size
-alist_merge
-
-thing_prop(T,P)
-thing_prop_replaced(T0,P,T1)
-Use thing_prop_replaced(T,P,T) to get the property P of T
-
-
-url_page
-
-There is a difference between dif and \=: dif is coroutining.
-https://stackoverflow.com/questions/16560058/difference-between-x-y-and-difx-y
-But "coroutine" is an overloaded term.
-http://www.swi-prolog.org/pldoc/man?section=delcont
-
-
-Prolog predicate naming problem when there is a compound word
-integer_integer_sum(A, B, C)
-basic_block__ssa_block()
-** Lambda calculus
-Lambda calculus formalizes binding and substitution.
-
-Follow [[https://crypto.stanford.edu/~blynn/lambda/][Ben Lynn's lambda-calculus tutorial]]:
-
-- why use lambda calculus as theoretical basis (cool reasons!)
-*** Beta-reduction
-- reduce : E -> E
-- reduce ((\ x -> y) p) = reduce (y[x:=p])
-  - y[x:=p] means y but with every bound occurence of x replaced with p)
-- reduce x = x otherwise
 ** Macro, reflection, reification, quoting
 The language should be a model of itself.
 
@@ -967,75 +925,6 @@ This is like Java/C# annotation but more principled?
 
 This is an example of type annotation that our annotation above can't handle: =\ (x : T) -> y=,
 because =x= is not an expression.
-** Let-expressions
-
-The /let-expression/ =let x1 = y1; ...; xn = yn; in z;= desugars to =(\ x1 ... xn -> z) y1 ... yn=.
-
-Let-expressions is for readability by humans.
-
-Do we still need let-expressions if our program is well-factored?
-
-*** let-expressions may recur
-
-I think letrec is ugly.
-All let-expression should allow recursion, like Haskell's.
-
-https://stackoverflow.com/questions/28796904/whats-the-reason-of-let-rec-for-impure-functional-language-ocaml/28798040
-** Sharing, laziness, full laziness, complete laziness, and optimal reduction
-
-- https://www.reddit.com/r/haskell/comments/3pa5ii/are_optimal_evaluators_actually_optimal/
-  - https://cstheory.stackexchange.com/questions/32850/are-optimal-evaluators-actually-optimal
-
-*** Sharing
-
-- Should the programmer care about sharing?
-- sigma-calculus?
-- Should the programmer decide whether to share or not?
-- Is there a best sharing strategy?
-- Should the machine guess by heuristics?
-
-Sharing affects performance, but does not change the result.
-Should we care?
-
-*** Example of sharing
-
-Consider the expression letexp defined as =let x = y in z;=.
-
-We want x to be shared iff doing so speeds up the reduction of letexp.
-
-This is always the case:
-
-- If x occurs /at most once/ in z, we always want x not shared.
-
-These depend on circumstances:
-
-- If y is expensive, we want x shared.
-- If y is cheap, we want x not shared.
-
-How do we define "expensive"?
-
-*** Lazy accumulation problem
-
-#+BEGIN_EXAMPLE
-sum a 0 = a
-sum a
-
-sum 0 = 0
-sum n = n + sum (n - 1)
-#+END_EXAMPLE
-** Currying is not compatible with vararg and named parameters?
-
-Vararg stands for "variable-length arguments".
-
-Do we want currying?
-
-Currying simplifies language user but complicates compiler writer.
-
-The problems:
-
-- https://softwareengineering.stackexchange.com/questions/286231/is-it-possible-to-have-currying-and-variadic-function-at-the-same-time
-- http://tolmasky.com/2016/03/24/generalizing-jsx/
-
 ** Modeling all data
 
 *** Hypothesis: data = ADTs + records + row polymorphism
@@ -1118,237 +1007,10 @@ IF entity todo_app todo E THEN property E int64 id.
 - 1998 article "Computing with Contexts: A simple approach" https://core.ac.uk/download/pdf/82065430.pdf
 - 2009 article "Two-level Lambda-calculus" https://www.sciencedirect.com/science/article/pii/S1571066109002400
 
-** Working with existing systems
-*** Working with Java
-** Overloadable function application?
 ** Interpreters: Giving different meanings to the same syntax
 
 Sometimes we want to interpret the same syntax (appearance, source code, text) differently.
 
-** System F, System F with subtyping, System F-omega
-
-https://en.wikipedia.org/wiki/System_F
-
-"System F is rich enough that the self-application =\x.x x= is typable." https://crypto.stanford.edu/~blynn/lambda/systemf.html
-
-Brown and Palsberg, "Breaking Through the Normalization Barrier: A Self-Interpreter for F-omega"
-
-** Imperative subset
-
-Haskell's ST monad enables us to embed a local imperative program in a functional program.
-
-** Introduction?
-
-- unknown-year lecture notes "Lambda Calculus as a Programming Language" [[http://andrei.clubcisco.ro/cursuri/2pp/01.Lambda_prog.pdf][pdf]]
-
-I thought lambda calculus could be summarized in one page, but Henk Barendregt wrote hundreds of pages about it. Is there more to lambda calculus than it seems?
-
-- 1994, 50 pages, [[http://www.nyu.edu/projects/barker/Lambda/barendregt.94.pdf][pdf]]
-- 1991, 190 pages, [[https://people.mpi-sws.org/~dreyer/tor/papers/barendregt.pdf][pdf]]
-
-** Extending lambda-calculus with various bells and whistles
-
-- Vectorial lambda-calculus
-
-  - The 2013 article "The Vectorial Lambda-Calculus" [[https://who.rocq.inria.fr/Alejandro.Diaz-Caro/TheVectorialCalculus.pdf][pdf]] adds vectors and matrices and their types to lambda calculus.
-  - The 2010 article "Semantics of a Typed Algebraic Lambda-Calculus" [[https://arxiv.org/abs/1006.1433][pdf available]] also mentions "vectorial".
-
-- 2016 article "System F-omega with Equirecursive Types for Datatype-Generic Programming" [[http://ps.informatik.uni-tuebingen.de/research/functors/equirecursion-fomega-popl16.pdf][pdf]]
-
-** Lambda calculus semantics?
-
-- https://en.wikipedia.org/wiki/Lambda_calculus#Semantics
-
-  - "In the 1970s, Dana Scott showed that, if only continuous functions were considered,
-    a set or domain D with the required property could be found, thus providing a model for the lambda calculus."
-
-    - 1982, [[https://www.sciencedirect.com/science/article/pii/S0019995882800879]["What is a model of lambda calculus?"]]
-    - 2008, PhD thesis, [[https://tel.archives-ouvertes.fr/tel-00715207/document]["Models and theories of lambda calculus"]]
-
-      - 2009, [[https://arxiv.org/abs/0904.4756][summary]]
-
-- Paul Hudak, lecture notes, [[http://www.cs.yale.edu/homes/hudak/CS430F07/LectureSlides/Reynolds-ch10.pdf][The Lambda Calculus]]
-
-  - "The Greatest Thing Since Sliced Bread™, or maybe even before it"
-
-- The operational semantics of lambda calculus depends on the evaluation strategy?
-
-  - What-reduction?
-
-    - Normal-order reduction
-    - Applicative-order reduction
-
-  - Call-by-what?
-
-    - Call-by-value
-    - Call-by-name
-
-** When should we introduce a type system?
-
-- 2005 article "Introduction to Type Theory" [[http://www.cs.ru.nl/~erikb/onderwijs/sl2/materiaal/tt-sl2.pdf][pdf]]
-
-** Optimizing lambda calculus?
-
-- http://thyer.name/lambda-animator/
-- http://thyer.name/phd-thesis/
-- http://hackage.haskell.org/package/graph-rewriting-lambdascope
-- partial evaluation
-
-  - 2010, slides, "O, partial evaluator, where art thou?", Lennart Augustsson, [[http://www.cse.chalmers.se/~palka/Lennarts_talk/PEPM-2010.pdf][pdf]]
-
-    - https://en.wikipedia.org/wiki/Partial_evaluation
-
-      - Futamura projection
-
-  - 1997, article, "Distributed partial evaluation", [[http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.134.1238][citeseerx]]
-
-- Lambda calculus
-
-  - might be related to bottom-up beta substitution
-
-    - Abdullah hinted that BUBS (bottom-up beta-substitution [Shivers2004])
-      might be used to make a garbage-free or a fast interpreter.
-    - https://en.wikipedia.org/wiki/Strict_programming_language
-    - https://en.wikipedia.org/wiki/Lazy_evaluation
-    - [[https://memo.barrucadu.co.uk/strict-vs-lazy.html][Strict-by-default vs Lazy-by-default]]
-    - https://en.wikipedia.org/wiki/Applicative_computing_systems
-    - non-strict, beta reduction, normal order, applicative order
-    - The terms "lazy" and "strict" imply operational semantics.
-      They are two strategies for beta-reduction.
-      "Lazy" is normal-order.
-      "Strict" is applicative-order.
-    - [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.90.2386&rep=rep1&type=pdf][An Algorithm for Optimal Lambda Calculus Reduction, John Lamping]]
-    - [[http://www.lsv.fr/Publis/PAPERS/PDF/sinot-wrs07.pdf][Complete Laziness: a Natural Semantics, François-Régis Sinot]]
-    - http://rochel.info/ graph-rewriting-lambdascope (screenshot): An implementation of an optimal evaluator for the λ-calculus, PDFLambdascope
-
-  - How is lambda calculus algebraic?
-
-    - [[https://www.mscs.dal.ca/~selinger/papers/combinatory.pdf]["The lambda calculus is algebraic", Peter Selinger]]
-
-      - "We argue that free variables should not be interpreted as elements in a model, as is usually done, but as indeterminates."
-
-    - [[https://pdfs.semanticscholar.org/055d/69ee4dc95fbf6457419c90338493667478b1.pdf]["On the algebraic models of lambda calculus", Antonino Salibra]]
-
-      - "The variety (equational class) of lambda abstraction algebras was introduced
-        to algebraize the untyped lambda calculus in the same way Boolean algebras algebraize the classical propositional calculus."
-        Propositional logic is modeled by Boolean algebra.
-        First-order logic is modeled by cylindric algebra?
-        Lambda calculus is modeled by lambda abstraction algebra.
-        Why algebra? Because it is equational?
-
-    - [[https://en.wikipedia.org/wiki/Algebraic_logic][Wikipedia "algebraic logic"]]
-    - [[https://pdfs.semanticscholar.org/7596/19f05a42ff3045bcf87fcaa3edbff01e1130.pdf]["The algebraic lambda-calculus", Lionel Vaux]]
-    - [[https://pdfs.semanticscholar.org/44c9/2ad00b8ceba78319005db048b24d61a80748.pdf]["Lambda abstraction algebras: representation theorems", Don Pigozzi, Antonino Salibra]]
-    - [[http://www.dsi.unive.it/~salibra/mainfinale.pdf]["Applying Universal Algebra to Lambda Calculus", Giulio Manzonetto, Antonino Salibra]]
-
-  - Dana Scott's PCF; also search the Internet for "the language pcf"
-    [[http://www.cs.bham.ac.uk/~mhe/papers/RNC3.pdf]["Introduction to Real PCF (Notes)", Mart'in H"otzel Escard'o]]
-  - 1993 John Launchbury [[https://pdfs.semanticscholar.org/492b/200419199892857faa6a6956614641ae9464.pdf][Lazy imperative programming]]
-
-- lambda calculus
-
-  - Church-encoding enables lambda calculus to represent conditionals and algebraic data types.
-  - Fixed-point combinators enables recursion and looping.
-  - https://en.wikipedia.org/wiki/Lambda_cube
-  - https://en.wikipedia.org/wiki/Calculus_of_constructions
-  - https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus
-
-    - "The simply typed lambda calculus [...], a form of type theory,
-      is a typed interpretation of the lambda calculus with only one type constructor: [...] that builds function types."
-
-      - What is an "interpretation of the lambda calculus"?
-      - What is "the lambda calculus"? Is there only one lambda calculus?
-
-  - https://www.reddit.com/r/haskell/comments/8els6f/why_are_combinators_as_powerful_as_full/
-  - https://math.stackexchange.com/questions/5639/the-power-of-lambda-calculi
-  - Implement lambda calculus.
-
-    - Without dynamic allocation / garbage collection.
-    - Translate lambda calculus to assembly
-
-      - Basic idea:
-
-        - Every expression translates to a subroutine.
-        - Calling the subroutine ~ evaluating the expression.
-        - Subroutine return value ~ value obtained by evaluating the expression.
-
-      - A lambda abstraction translates to a subroutine that accepts one parameter.
-      - An application translates to a subroutine call.
-      - An int value translates to what? Choice:
-
-        - itself
-        - a subroutine that returns the int
-
-    - 2012, article, [[https://arxiv.org/abs/1202.2924]["From Mathematics to Abstract Machine: A formal derivation of an executable Krivine machine"]]
-
-      - https://en.wikipedia.org/wiki/Krivine_machine
-
-** Begin with an interpreter, not a compiler
-
-- Don't make a compiler?
-  Make an interpreter instead, and stage it?
-  Turn an interpreter into a compiler for free?
-- "To stage an interpreter" is to add staging annotations to the code of the interpreter.
-- Staging is similar to quoting in Lisp/Scheme.
-- 2004 article "A Gentle Introduction to Multi-stage Programming" [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.103.2543&rep=rep1&type=pdf][pdf]]
-  - Basic Problems in Building Program Generators
-  - part 2 https://pdfs.semanticscholar.org/aa3c/d4233f7c0db95e5c38d5b8fc1d199df21857.pdf
-- multi-stage programming for Scala https://scala-lms.github.io/
-- 2006 article "A Verified Staged Interpreter is a Verified Compiler" [[https://www.researchgate.net/profile/Kevin_Hammond/publication/221108683_A_verified_staged_interpreter_is_a_verified_compiler/links/00b7d517ede725c057000000.pdf][pdf]]
-
-** Foreign function interface: working with C
-** Ocaml
-
-- https://ocaml.org/learn/
-
-** Reconciling functional and logic programming into declarative programming?
-
-1996 publication "A Note on Declarative Programming Paradigms and the Future of Definitional Programming" [[http://www.cse.chalmers.se/~oloft/Papers/wm96/wm96.html][html]]
-
-*** Example: Representing a predicate in lambda calculus
-
-Lambda calculus with boolean logic extensions:
-
-#+BEGIN_EXAMPLE
-p = \ x -> x = "a" OR x = "b"
-#+END_EXAMPLE
-
-Prolog:
-
-#+BEGIN_EXAMPLE
-p(a).
-p(b).
-#+END_EXAMPLE
-
-*** Example: Representing a function in logic programming
-
-#+BEGIN_EXAMPLE
-inc(X, Y) :- X = Y + 1.
-#+END_EXAMPLE
-
-*** The "satisfy" function
-
-The expression "satisfy f" finds all x : a that satisfies f : a -> bool.
-Thus the type of "satisfy" is "(a -> bool) -> list a".
-
-It is in principle possible to write such "satisfy" builtin for some lambda expressions.
-
-#+BEGIN_EXAMPLE
-satisfy (\ x -> x = "a" OR x = "b")
-=> ["a","b"]
-
-satisfy (\ (x : int) -> x >= 10)
-=> [10,11,12,...] -- an infinite list
-
-satisfy (\ (x : bool) -> true)
-=> [false,true]
-#+END_EXAMPLE
-
-*** A function is a relation, a relation is a function, so what?
-
-A function \( (A,B,F) \) is trivially a relation.
-
-A relation \( (A,B,R) \) is a function \( (A,2^B,F) \) where \( F(x) = \{ y ~|~ (x,y) \in R \} \).
 ** Precise memory accounting
 
 We want precise memory accounting to enable the runtime to limit memory usage.
@@ -1356,182 +1018,6 @@ We want precise memory accounting to enable the runtime to limit memory usage.
 ** Execution state reification, save states, saving and loading states, pausing and resuming computations
 
 We want execution state reification so that we can do live process migration.
-
-** Haskell woes
-
-- [[https://news.ycombinator.com/item?id=5893442][Ask HN: Any downsides of programming in Haskell? | Hacker News]]
-- [[https://www.reddit.com/r/haskell/comments/1gknfs/ask_hn_any_downsides_of_programming_in_haskell/][Ask HN: Any downsides of programming in Haskell? : haskell]]
-
-*** Can't import type class instances explicitly
-
-[[https://stackoverflow.com/questions/8728596/explicitly-import-instances][There is a reason]].
-** Monads, and Haskell type system limitations
-
-- A monad is a way of /conservatively extending/ all categories. (Abdullah, private correspondence)
-- https://www.reddit.com/r/haskell/comments/3h2aqg/can_someone_explain_the_monads_are_generalised/
-
-*** Should Nat (the natural numbers) be a subtype of Int (the integers)?
-
-Intuitively, yes.
-
-*** <2018-10-01> @abdullah Signedness is a monad: conservatively extending naturals to integers
-
-I think this is what we mean when we say "integer is a monad".
-I think what we are really trying to say is "signedness is a monad", that is, "we can conservatively extend the naturals to the integers by using the Signed monad".
-
-We can write that in Haskell as follows (with some problems described later).
-
-#+BEGIN_EXAMPLE
-data Nat = Zero | Succ Nat
-type Int = Signed Nat
-data Signed a = Positive a | Negative a
-
-instance Functor Signed ...
-instance Applicative Signed ...
-
-instance Monad Signed where
-    return = Positive
-    m >>= k = join_signed (fmap k m)
-
-join_signed :: Signed (Signed a) -> Signed a
-join_signed mm = case mm of
-    Positive x -> x
-    Negative x -> negate_signed x
-
-negate_signed :: Signed a -> Signed a
-negate_signed (Positive x) = Negative x
-negate_signed (Negative x) = Positive x
-
-f :: Nat -> Nat
-f = ...
-
-f_int :: Int -> Int
-f_int = fmap f
-#+END_EXAMPLE
-
-We can have Signed Char, Signed String, etc., but those may not make sense.
-
-The problem:
-Nat should be a subtype of Int, because everyone who knows arithmetics seems to think that way.
-We want f and f_int to be the /same/ function.
-We don't want to type fmap, liftM2, and their ilk.
-** Abdullah's dream language: Extending System F application beta-reduction rules to automate fmap and extend?
-Add these inference rules?
-- If =f : a -> b=, and =x : m a=, and =m= is an instance of =Functor=, then =f x= beta-reduces to =fmap f x=.
-- If =k : a -> m b=, and =x : m a=, and =m= is an instance of =Monad=, then =k x= beta-reduces to =k =<< x=.
-
-\[
-f : a \to b , ~ x : m~a , ~ Functor~m \vdash (f~x \to_\beta fmap~f~x)
-\]
-
-Suppose =f : a -> b=, and =x : m (p a)=, and =m= is an instance of =Functor=, and =p= is an instance of =Functor=.
-
-- The rule beta-reduces =f x= to =fmap f x=.
-- Problem: The rule interferes with the =Functor= instance of =(->)=.
-** Increasing language adoption
-*** What
-In order for a language to be adopted, people must perceive its risk as low.
-
-The language must work with existing codebases.
-
-The language designer must think from the language user's point of view.
-Let's say I have 100,000 lines of Java that I've been writing and testing for the past 5 years.
-Are you expecting me throw away all of them?
-
-Thus the language must work with C, C++, C#, Java, Go, JavaScript, Python, Ruby, and everything else.
-This should be possible because the essence of all programming languages is the same: every programming language is a formal system.
-It should be possible to translate a program P1 in language L1 to program P2 in language L2 with the same semantics.
-
-Improve/enhance, not supersede.
-
-Mixing languages should be easy.
-
-2013, article, "Empirical analysis of programming language adoption", [[http://sns.cs.princeton.edu/docs/asr-oopsla13.pdf][pdf]]
-
-The language must be suitable for systems programming. - System programming is hardware-aware programming.
-Application programming assumes abstract machine, infinite memory, and all convenience provided by the operating system. - Why do we make this distinction?
-
-The language must facilitate metaprogramming.
-Everything must be a first-class citizen.
-It has to have EVAL.
-The language must provide a way for interpreting/compiling/loading a program at runtime.
-The compiler becomes a part of every program.
-
-What is the reason for the name "metacircular evaluator"?
-What is circular?
-What is metacircular?
-
-To make syntax first-class, we need QUOTE and UNQUOTE (such as in Lisp/Scheme)?
-
-To prevent syntax flamewar, we should define the canonical linearization of the abstract syntax tree.
-Go does this with =go fmt=.
-I think that is wise.
-
-- Basic assumptions
-  - Computer (machine) is embodied formal system.
-    - Assume no hardware fault.
-  - Software is executable mathematics.
-*** Other people's opinions
-- 2012 article "Socio-PLT: Principles for Programming Language Adoption" [[https://lmeyerov.github.io/projects/socioplt/paper0413.pdf][pdf]]
-** What are some interesting programming languages?
-   :PROPERTIES:
-   :CUSTOM_ID: what-are-some-interesting-programming-languages
-   :END:
-
-- Interesting functional programming languages tailored for web programming.
-  Perhaps related to data modeling.
-
-  - Ur/Web
-
-    - [[http://www.impredicative.com/ur/faq.html][FAQ]]
-
-      - "Why would I prefer to use Ur/Web over OPA?"
-
-    - [[http://www.impredicative.com/ur/resources.html][How to Get Started Learning Ur/Web]]
-
-  - [[http://links-lang.org/][The Links Programming Language]]
-  - [[http://opalang.org/][The Opa Language]]
-
-- Moving logic into SQL stored procedures
-
-  - [[https://sivers.org/pg][Simplify: move code into database functions | Derek Sivers]]
-
-    - A legitimate concern: How do we version-control (and release, and rollback) stored procedures, triggers, and other database logics?
-
-  - [[https://news.ycombinator.com/item?id=11802917][Andl, a relational language that is not SQL, is coming to Postgres | Hacker News]]
-
-- https://www.microsoft.com/en-us/research/publication/convenient-explicit-effects-using-type-inference-with-subeffects/
-- [[https://nikita-volkov.github.io/if-haskell-were-strict/][If Haskell were strict, what would the laziness be like?]]
-- http://homepages.inf.ed.ac.uk/wadler/papers/free-rectypes/free-rectypes.txt
-
-*** Do we really have to read these fragmented sources?
-    :PROPERTIES:
-    :CUSTOM_ID: do-we-really-have-to-read-these-fragmented-sources
-    :END:
-
-- [[http://www.cse.chalmers.se/edu/year/2015/course/DAT150/lectures/proglang-12.html][Lecture 12: Design and Evolution of Programming Languages]]
-** Making compilers?
-   :PROPERTIES:
-   :CUSTOM_ID: making-compilers
-   :END:
-
-Every compiler does name resolution / symbol table.
-Is there a compiler that doesn't do that?
-[[https://www.reddit.com/r/Forth/comments/695oik/advances_in_forth_language_design/dh454oq/][Forth?]]
-
-- https://www.reddit.com/r/haskell/comments/4jhhrj/anders_hejlsberg_on_modern_compiler_construction/
-- https://cs.stackexchange.com/questions/63018/visual-programming-tools-why-don-t-they-work-with-the-ast-directly
-- compiling with continuations
-
-  - Why use CPS (continuation passing style) as intermediate form?
-
-    - http://matt.might.net/articles/cps-conversion/
-    - https://www.microsoft.com/en-us/research/publication/compiling-with-continuations-continued/
-    - https://news.ycombinator.com/item?id=7150095
-
-  - 2003, retrospective: the essence of compiling with continuations https://users.soe.ucsc.edu/~cormac/papers/best-pldi.pdf
-
-    - https://en.wikipedia.org/wiki/A-normal_form
 
 ** After-2018 programming language requirements
 
@@ -1731,107 +1217,6 @@ Not only classes, but also functions, should be extensible.
 A consequence:
 Every occurrence of \( f \) can be replaced with \( f' \) while preserving the meaning of the containing expression.
 
-** Is inheritance subtyping?
-   :PROPERTIES:
-   :CUSTOM_ID: is-inheritance-subtyping
-   :END:
-
-The short article [2] basically tells the user to read AbdelGawad's other works.
-
-- 1 [1] 1989, "Inheritance is not subtyping", [[https://www.cs.utexas.edu/users/wcook/papers/InheritanceSubtyping90/CookPOPL90.pdf][pdf]]
-- 2 [2] 2013, "Inheritance is subtyping", [[https://pdfs.semanticscholar.org/569c/9b35375144756761167fd4a2571b1d97f0e8.pdf][pdf]]
-- [[https://www.cmi.ac.in/~madhavan/courses/pl2009/lecturenotes/lecture-notes/node28.html][Subtyping vs inheritance]]
-  - Subtyping and inheritance are orthogonal concepts.
-
-A language should provide both nominal and structural subtyping.
-
-- 2008, "Integrating Nominal and Structural Subtyping", [[http://www.cs.cmu.edu/~aldrich/papers/ecoop08.pdf][pdf]]
-
-We can define structural subtyping for C structs.
-
-We can define layout types (almost like ASN.1):
-
-#+BEGIN_EXAMPLE
-    layout {
-        at byte 0;
-        def var0 : little_endian int32;
-        at byte 4;
-        def var1 : big_endian int32;
-        reserve 8 byte;
-        skip 4 byte; -- synonym for reserve
-        def var2 : int8;
-        def var3 : array of 4 int8;
-        align 16;
-        def var4 : layout {
-            reserve 16 byte;
-            def var1 : int8;
-            align 32;
-        };
-    }
-#+END_EXAMPLE
-
-We can define intersection, union, concatenation, and composition/nesting of two layout types.
-
-Why don't we just build ASN.1 into the language?
-
-- [[http://whiley.org/2010/12/13/why-not-use-structural-subtyping/][Why not use Structural Subtyping?]]
-
-  - What is it trying to say?
-
-** Maximum polymorphism?
-   :PROPERTIES:
-   :CUSTOM_ID: maximum-polymorphism
-   :END:
-
-- Read this: [[https://blog.inf.ed.ac.uk/apl16/archives/178/comment-page-1][Lecture 4: Higher Polymorphism | Advances in Programming Languages]]
-- [[https://github.com/lampepfl/dotty/issues/1886][Rethink Structural Types · Issue #1886 · lampepfl/dotty]]
-
-  - "However, there is another area where statically-typed languages are often more awkward than dynamically-typed ones: database access."
-  - Keynote - What's Different In Dotty by Martin Odersky https://www.youtube.com/watch?v=9lWrt6H6UdE
-
-** Typing records
-   :PROPERTIES:
-   :CUSTOM_ID: typing-records
-   :END:
-
-A record type can be thought as a product type whose components are named.
-
-If each value =valN= has type =typN=, then the record ={key1=val1; key2=val2; ...;}= has type ={key1:typ1; key2:typ2; ...;}=.
-For example, the record ={name="John"; age=20}= has type ={name:String; age:Int;}=.
-
-** Polymorphism is code generation
-   :PROPERTIES:
-   :CUSTOM_ID: polymorphism-is-code-generation
-   :END:
-
-- Consider translating =id : a -> a= to assembly.
-
-  - If types define memory layout (bit representation), then the compiler must generate an =id= function for every =a=.
-  - If the language uses runtime type tagging, then there doesn't have to be more than one=id= functions.
-
-** Fixed points and recursive types
-   :PROPERTIES:
-   :CUSTOM_ID: fixed-points-and-recursive-types
-   :END:
-
-A thing \( x \) is a /fixed point/ of function \( f \) iff \( f(x) = x \).
-
-A function may have zero, one, or many fixed points.
-
-A thing \( x : A \) is a /least fixed point/ of function \( f : A \to A \) iff
-\( x \) is a minimum of the set of the fixed points of \( f \).
-The words "least" and "minimum" assume an ordering \( \le \).
-This ordering should be clear from context.
-
-If \( f \) has exactly one least fixed point \( x \) with respect to ordering \( \le \), then we write \( \mu_\le(f) = x \).
-
-The syntax \( \mu a. b \) means \( \mu_\le(\lambda a. b) \).
-The syntax \( \mu a. b \) is analogous to lambda expression syntax \( \lambda a. b \).
-
-What is the ordering used in formulating the least fixed point of a recursive algebraic data type?
-
-todo: equirecursive types and isorecursive types
-
 ** A sketch about reusable language-oriented programming: CommonMark, Liquid, and Jekyll, reusable grammar?
    :PROPERTIES:
    :CUSTOM_ID: case-study-commonmark-liquid-and-jekyll-reusable-grammar
@@ -1854,8 +1239,6 @@ I want something like this:
 - [[https://jeffreykegler.github.io/Ocean-of-Awareness-blog/individual/2015/12/composable.html][Grammar reuse]]
 - [[https://github.com/melt-umn/silver][melt-umn/silver: An attribute grammar-based programming language for composable language extensions]]
 - OMeta, Katahdin
-** Some tentative plans: Create a language that compiles to Haskell?
-- [[https://github.com/bennofs/haskell-generate][bennofs/haskell-generate: Type-safe library for generating haskell source code]]
 ** Whole-program optimization?
    :PROPERTIES:
    :CUSTOM_ID: whole-program-optimization
@@ -2280,11 +1663,6 @@ The Y-combinator is \( \lambda f. (\lambda x. f ~ (x ~ x)) ~ (\lambda x. f ~ (x 
 - [[ftp://nozdr.ru/biblio/kolxo3/Cs/CsLn/Mathematics%20of%20program%20construction..%2010%20conf.,%20MPC%202010%20(LNCS6120,%20Springer,%202010)(ISBN%203642133207)(O)(435s)_CsLn_.pdf#page=109][2010, "Subtyping, Declaratively: An Exercise in Mixed Induction and Coinduction", Nils Anders Danielsson and Thorsten Altenkirch]]
 ** Language design
 - https://github.com/mjambon/ocaml-wishlist
-** ML/OCaml records vs modules: Why do we have modules if records suffice? An Ocaml "functor" would then simply be a function from records to records.
-** Interoperability between programming languages
-- <2018-10-04> https://www.thestrangeloop.com/2018/all-the-languages-together.html
-  - "Unfortunately, most current languages and toolchains were designed with language interoperability as an afterthought [...]"
-  - "This talk is about how to change the status quo to make it easier to build multi-language software."
 ** Designing configuration languages
   :PROPERTIES:
   :CUSTOM_ID: designing-configuration-languages
@@ -2379,11 +1757,6 @@ A markup language adds some semantics to text.
     - Too experimental
 
       - [[https://clearly.pl/tutorial/][clearly.pl]] reminds me of TiddlyWiki.
-
-** Measuring programming language quality by how easy is it to do the right thing
-What is the right thing?
-*** By probability of error of random programs?
-How do we measure the probability that a program, uniformly randomly taken from the set of all legal programs in language L, contains an error?
 ** Class-based programming
   :PROPERTIES:
   :CUSTOM_ID: class-based-programming
@@ -2429,65 +1802,7 @@ How do we measure the probability that a program, uniformly randomly taken from 
 #+BEGIN_EXAMPLE
     a.b().c().d() = ((a.b()).c()).d()
 #+END_EXAMPLE
-** Benefits and drawbacks of static type checking
-The benefits of types:
-
-- Types prevent stupid mistakes.
-- Types can be used to improve program efficiency.
-- Types are documentation for both human and machine.
-  Types communicate intention to both human and machine.
-
-The drawbacks of types:
-
-- Some safe programs don't typecheck.
-- Some programs become longer.
-  - Haskell's type system complicates the AST decoration problem.
-    In TypeScript, the AST decoration problem is trivial;
-    you just add a field at runtime.
-*** Arguments for static type checking?
-**** What?
-- There are two camps:
-  - DTL (dynamically typed language)
-  - STL (statically typed language)
-- Every programmer is lazy, but differently.
-  - People who use DTLs are too lazy to write the types.
-  - People who use STLs are too lazy to do what machines can do, such as
-    - detecting typos,
-    - avoiding unintentional conversions,
-    - tracing the code, 2 weeks later, to find out the type of a variable.
-- People who use DTLs are too diligent.
-They love to do what machines can do: type checking.
-- Static typing enables you to be lazier.
-  Help the machine help you avoid work.
-  By investing in a few keystrokes, you will get these in return:
-- The machine will catch more mistakes for you.
-- You can have an IDE that finds references correctly.
-  This enables features such as "Jump to definition", "Rename", and even more fancy refactorings.
-- Moral of the story:
-  - Let the machines do all the boring stuffs.
-  - Be future-lazy, not present-lazy.
-    Do things now so that you can be lazy later.
-    Don't be lazy now only to regret it later.
-    - People who organize their things are too lazy to spend mental effort later in a scramble to find things.
-    - People who don't organize their things are just too lazy to do it, and would rather just experience regret in the future than experience some hardship now for a better future.
-    - The sane solution to "too lazy to write types" is to pick a language with type inference, not to ditch types altogether.
-    Don't throw the baby out with the bathwater.
-- This argument also applies to functional programming vs procedural programming.
-  Indeed this argument applies to every technology.
-  Adopting technology enables us to be lazier.
-- People buy tractors because they are too lazy to till their fields with hoes.
-- People use frameworks because they are too lazy to do the same plumbing again and again.
-- People strive to avoid side-effects in functional programming because they are too lazy to debug synchronization errors.
-- The only thing the human race isn't too lazy to do is to think about lazier ways of doing things.
-**** What?
-- https://dimjasevic.net/marko/2018/10/23/typed-functional-programming-and-software-correctness/
-  - "what can be done about a programmer’s limited time to write correct software?
-    While there are multiple plausible answers to this question,
-    I will argue that a very effective solution is to use typed functional programming."
-  - 2017 https://dimjasevic.net/marko/2017/11/10/a-subtyping-polymorphism-misfortune/
-    - "the interaction between subtyping and parametric polymorphism asks for trouble"
-    - type-parameter variance and polymorphism don't mix?
-** TODO Measuring programming language quality
+** Measuring programming language quality
 - https://en.wikipedia.org/wiki/Goodhart%27s_law
 *** Minimum IQ required to understand the language
 *** Development cost
@@ -2499,6 +1814,12 @@ They love to do what machines can do: type checking.
 *** Rosetta Stone: comparing programs that do the same thing in different languages
 https://medium.com/concerning-pharo/elegant-pharo-code-bb590f0856d0
 *** Learnability, masterability, usability
+*** Measuring programming language quality by how easy is it to do the right thing
+What is the right thing?
+
+By probability of error of random programs?
+
+How do we measure the probability that a program, uniformly randomly taken from the set of all legal programs in language L, contains an error?
 ** Intersection between programming language search and software engineering: The effect of programming language on software quality
 - https://developers.slashdot.org/story/14/11/05/0530228/the-effect-of-programming-language-on-software-quality
   - 2014 article "A Large Scale Study of Programming Languages and Code Quality in Github" [[http://web.cs.ucdavis.edu/~filkov/papers/lang_github.pdf][pdf]]
@@ -2508,10 +1829,6 @@ https://medium.com/concerning-pharo/elegant-pharo-code-bb590f0856d0
   - from [[https://www.reddit.com/r/ProgrammingLanguages/top/][top scoring links : ProgrammingLanguages]]
 - https://waleedkhan.name/blog/getting-a-job-in-pl/
   - https://www.reddit.com/r/ProgrammingLanguages/comments/9ffiky/how_to_get_a_job_in_programming_languages/
-** Prolog is ideal for writing a typechecker, and TypeScript is ideal for typechecking AST decorations, so we should fuse Prolog and TypeScript.
-Abdullah pointed out to me that TypeScript interface is similar to Ocaml polymorphic variant?
-*** But there is Racket and its languages such as ProfessorJ, Datalog.
-- "Creating languages" https://docs.racket-lang.org/guide/languages.html
 ** Racket syntax objects, read-syntax; does Prolog/Haskell have this?
 - Must understand: reader and expander.
   - Racket parsing has two stages/levels: reader and expander.
@@ -2554,37 +1871,6 @@ Stop using confusing notation.
 Reading triage:
 
 - [[https://www.researchgate.net/publication/286418817_Misuse_of_the_equals_sign_An_entrenched_practice_from_early_primary_years_to_tertiary_mathematics][Misuse of the equals sign: An entrenched practice from early primary years to tertiary mathematics]]
-** JetBrains MPS
-  :PROPERTIES:
-  :CUSTOM_ID: jetbrains-mps
-  :END:
-
-MPS is "Meta Programming System".
-
-A concept can have properties. Each property has a type.
-The property type system is limited to int, string, and regex-constrained string.
-
-A member in a model is an /instance/ of a concept,
-similar to how an object is an instance of a class in Java.
-
-MPS is a /tree/ editor, not a text editor.
-
-A concept is an AST (abstract syntax tree) node type.
-
-On 2017-08-12, MPS 2017.2 doesn't support Java 7 try-with-resources statements.
-
-The MPS IntelliJ IDEA plugin allows you to use a language from IDEA,
-but not defining your own language.
-You need the MPS IDE for that.
-
-*** External links
-   :PROPERTIES:
-   :CUSTOM_ID: external-links
-   :END:
-
-- [[https://confluence.jetbrains.com/display/MPSD20172/Using+MPS+inside+IntelliJ+IDEA][Using MPS inside IntelliJ IDEA]]
-- [[https://confluence.jetbrains.com/pages/viewpage.action?pageId=93128576][MPS user guide for Java developers (IntelliJ IDEA)]] (long)
-- [[https://confluence.jetbrains.com/display/MPSD20172/Finding+your+way+out][What to do when there is a problem]]
 ** Problems that the language has to solve
 *** Solving the expression problem
 *** Solving the AST decoration problem / AST typing problem
@@ -2679,8 +1965,539 @@ That is an interesting idea, but some important questions remain:
 
 - How do we do that without boilerplate (for the library writer)?
 - How do we do that without performance penalty?
+
+** object = lambda + record + mutation?
+#+BEGIN_EXAMPLE
+let self = {
+        prop = 1;
+        foo = \ () -> self.prop + 1;
+}; in self
+#+END_EXAMPLE
+** Logic programming with explicit side-effects with force-predicate
+The meaning of force(X) is that force(X) succeeds iff it has changed the world such that X will succeed after force(X) returns.
+Thus the interpreter has to check for race conditions?
+Is this requirement too difficult?
+#+BEGIN_EXAMPLE
+?- file_content('foo', A). -- unify A with the contents of file 'foo'
+
+?- force(file_content('foo', [1,2,3])). -- replace the content of file 'foo' with [1,2,3]
+#+END_EXAMPLE
+
+** Prolog as a term-rewriting meta-interpreter
+The Prolog rule "A :- B" can be interpreted in two ways.
+The first is the well-known proof-theoretic interpretation "to prove A, prove B".
+The second is the /rewriting-system interpretation/ "rewrite A to B".
+** Functions as semantics of lambda calculus?
+Key idea:
+A lambda abstraction is not a function,
+but a function can be the semantics of a lambda abstraction.
+
+A semantic of a lambda abstraction is a function, that is,
+a triple \((A,B,M)\) where \(A\) is the domain, \(B\) is the codomain, and \(M\) is the mapping.
+
+What is the semantic of \( \lambda x . x x \)?
+What is the semantic of \( (\lambda x . x x) (\lambda x . x x) \)?
+
+For every set \(A\):
+\begin{align*}
+(A,A,I_A) \models \lambda x. x
+\end{align*}
+where \(I_A = \{ (x,x) ~|~ x \in A \}\).
+
+\begin{align*}
+(X,Y,A) \models \lambda x y. x y
+\end{align*}
+
+Let \(F = (A,B,f)\) be a function.
+
+Let \(G = (F \times A, B, g)\) be a function where \( g(f,x) = f(x) \).
+** How do we know that our language is perfect?
+"How to determine your new language is perfect?"
+http://lambda-the-ultimate.org/node/4395
+* Declarative
+** Combining lambda-calculus and first-order logic: combining beta-reduction, unification, and backtracking
+Anonymous function: \ x -> x + 1
+Anonymous predicate: \ a b c -> f a, g b, h c
+fix f = f (fix f)
+
+father_child(dad, kid).
+father_child(daddy, kiddo).
+
+:- operator --
+father(daddy) -- child(kiddo).
+
+father_child dad kid
+father_child daddy kiddo
+father dad -- child kid
+
+father_child = \ dad kid
+father_child = \ Dad Kid -> Dad = dad, Kid = kid
+
+"First-order logic without equality"
+https://math.stackexchange.com/questions/363168/first-order-logic-without-equality
+
+"Differences between logic with and without equality"
+https://mathoverflow.net/questions/316648/differences-between-logic-with-and-without-equality
+
+
+Isn't this Curry language?
+Curry's slogan is "A Truly Integrated Functional Logic Language"
+
+
+Lambda-Prolog, Harrop formula
+Why was Harrop formula defined?
+What's so special about it?
+https://en.wikipedia.org/wiki/Harrop_formula
+
+Lambda-Prolog
+
+https://math.stackexchange.com/questions/2494645/lambda-calculus-combined-with-first-order-logic-notation-quantifiers-propositi
+
+"But languages aren't tools! IDEs are tools. Languages are material. See FallacyOfTheRightTool."
+http://wiki.c2.com/?QuestForThePerfectLanguage
+** Prolog predicate naming
+blue(X)
+has(A,B)
+can_sing(A)
+version(A,B,C)
+person_name(P,N)
+index_fibonacci
+index_list_element
+
+class_field
+table_column
+column_type
+
+class(Atom) is true iff Atom is a referent.
+
+table(Atom) has different namespace
+
+class_field(Cls, F) :- table_column(T, Col), field_name(F, N), column_name(Col, N).
+
+Metamodel
+A thing is modeled as an association list such as [a=b,c=d,e=f]
+alist_key_value([K=V|_],K,V).
+alist_key_value([_|R],K,V) :- alist_key_value(R,K,V).
+
+alist_empty
+alist_tail
+alist_head
+alist_without_keys
+alist_size
+alist_merge
+
+thing_prop(T,P)
+thing_prop_replaced(T0,P,T1)
+Use thing_prop_replaced(T,P,T) to get the property P of T
+
+
+url_page
+
+There is a difference between dif and \=: dif is coroutining.
+https://stackoverflow.com/questions/16560058/difference-between-x-y-and-difx-y
+But "coroutine" is an overloaded term.
+http://www.swi-prolog.org/pldoc/man?section=delcont
+
+
+Prolog predicate naming problem when there is a compound word
+integer_integer_sum(A, B, C)
+basic_block__ssa_block()
+** Prolog
+How does Mercury do without assert/retract?[fn::https://www.mercurylang.org/information/doc-latest/mercury_trans_guide/AssertRetract.html]
+
+- https://stackoverflow.com/questions/20511060/parsing-an-expression-in-prolog-and-returning-an-abstract-syntax
+  - "you did something quite smart [...] That is fine. However, this strategy is inherently very inefficient"
+  - "There is a general way how to fix this: Add another pair of arguments to encode the length."
+
+1988, Towards functional programming in Prolog[fn::ftp://obaluae.inf.puc-rio.br/pub/docs/Publications/88_AI_Furtado_SINPLAN.Not.pdf].
+It defines several infix operators.
+"[...] The problem of evaluating expressions combining functions and predicates is investigated.
+Examples are provided to illustrate the discussion.
+The paper includes a prototype implementation."
+
+2.7.1 "Axiomatizing Context-Free Grammars"[fn::http://www.mtome.com/Publications/PNLA/prolog-digital.pdf].
+See third paragraph: "the general statement made by the context-free rule [...] can be summarized using relations on positions with the following logical statement [...]"
+
+** Reconciling functional and logic programming into declarative programming?
+
+1996 publication "A Note on Declarative Programming Paradigms and the Future of Definitional Programming" [[http://www.cse.chalmers.se/~oloft/Papers/wm96/wm96.html][html]]
+
+*** Example: Representing a predicate in lambda calculus
+
+Lambda calculus with boolean logic extensions:
+
+#+BEGIN_EXAMPLE
+p = \ x -> x = "a" OR x = "b"
+#+END_EXAMPLE
+
+Prolog:
+
+#+BEGIN_EXAMPLE
+p(a).
+p(b).
+#+END_EXAMPLE
+
+*** Example: Representing a function in logic programming
+
+#+BEGIN_EXAMPLE
+inc(X, Y) :- X = Y + 1.
+#+END_EXAMPLE
+
+*** The "satisfy" function
+
+The expression "satisfy f" finds all x : a that satisfies f : a -> bool.
+Thus the type of "satisfy" is "(a -> bool) -> list a".
+
+It is in principle possible to write such "satisfy" builtin for some lambda expressions.
+
+#+BEGIN_EXAMPLE
+satisfy (\ x -> x = "a" OR x = "b")
+=> ["a","b"]
+
+satisfy (\ (x : int) -> x >= 10)
+=> [10,11,12,...] -- an infinite list
+
+satisfy (\ (x : bool) -> true)
+=> [false,true]
+#+END_EXAMPLE
+
+*** A function is a relation, a relation is a function, so what?
+
+A function \( (A,B,F) \) is trivially a relation.
+
+A relation \( (A,B,R) \) is a function \( (A,2^B,F) \) where \( F(x) = \{ y ~|~ (x,y) \in R \} \).
+* Interoperation
+** Foreign function interface: working with C
+** Working with existing systems
+*** Working with Java
+** Interoperability between programming languages
+- <2018-10-04> https://www.thestrangeloop.com/2018/all-the-languages-together.html
+  - "Unfortunately, most current languages and toolchains were designed with language interoperability as an afterthought [...]"
+  - "This talk is about how to change the status quo to make it easier to build multi-language software."
+* Functional programming language design
+** "Let" introduces sharing?
+"Let" determines how the AST (abstract syntax tree) turns into ASG (abstract semantic graph).
+** Lambda calculus algebra what?
+The algebraicity of the lambda-calculus[fn::http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.311.3514&rep=rep1&type=pdf]
+#+BEGIN_QUOTE
+an untyped lambda-calculus is a functor LC from sets to sets: to a set V (of free ”variables”) it assigns a set LC(V) of lambda-terms built out from V;
+this functor enjoys substitution, which turns it into a monad;
+
+The idea that the notion of monad is suited for modelling substitution concerning
+syntax (and semantics) has been retained by many recent contributions
+concerned with syntax (see e.g. [BP99] [GU03] [MU04]) although some other
+settings have been considered.
+#+END_QUOTE
+** Algebra of ADT
+Somewhat interesting
+https://stackoverflow.com/questions/9190352/abusing-the-algebra-of-algebraic-data-types-why-does-this-work
+** Lambda calculus
+Lambda calculus formalizes binding and substitution.
+
+Follow [[https://crypto.stanford.edu/~blynn/lambda/][Ben Lynn's lambda-calculus tutorial]]:
+
+- why use lambda calculus as theoretical basis (cool reasons!)
+*** Beta-reduction
+- reduce : E -> E
+- reduce ((\ x -> y) p) = reduce (y[x:=p])
+  - y[x:=p] means y but with every bound occurence of x replaced with p)
+- reduce x = x otherwise
+** Let-expressions
+
+The /let-expression/ =let x1 = y1; ...; xn = yn; in z;= desugars to =(\ x1 ... xn -> z) y1 ... yn=.
+
+Let-expressions is for readability by humans.
+
+Do we still need let-expressions if our program is well-factored?
+
+*** let-expressions may recur
+
+I think letrec is ugly.
+All let-expression should allow recursion, like Haskell's.
+
+https://stackoverflow.com/questions/28796904/whats-the-reason-of-let-rec-for-impure-functional-language-ocaml/28798040
+** Sharing, laziness, full laziness, complete laziness, and optimal reduction
+
+- https://www.reddit.com/r/haskell/comments/3pa5ii/are_optimal_evaluators_actually_optimal/
+  - https://cstheory.stackexchange.com/questions/32850/are-optimal-evaluators-actually-optimal
+
+*** Sharing
+
+- Should the programmer care about sharing?
+- sigma-calculus?
+- Should the programmer decide whether to share or not?
+- Is there a best sharing strategy?
+- Should the machine guess by heuristics?
+
+Sharing affects performance, but does not change the result.
+Should we care?
+
+*** Example of sharing
+
+Consider the expression letexp defined as =let x = y in z;=.
+
+We want x to be shared iff doing so speeds up the reduction of letexp.
+
+This is always the case:
+
+- If x occurs /at most once/ in z, we always want x not shared.
+
+These depend on circumstances:
+
+- If y is expensive, we want x shared.
+- If y is cheap, we want x not shared.
+
+How do we define "expensive"?
+
+*** Lazy accumulation problem
+
+#+BEGIN_EXAMPLE
+sum a 0 = a
+sum a
+
+sum 0 = 0
+sum n = n + sum (n - 1)
+#+END_EXAMPLE
+** Currying is not compatible with vararg and named parameters?
+
+Vararg stands for "variable-length arguments".
+
+Do we want currying?
+
+Currying simplifies language user but complicates compiler writer.
+
+The problems:
+
+- https://softwareengineering.stackexchange.com/questions/286231/is-it-possible-to-have-currying-and-variadic-function-at-the-same-time
+- http://tolmasky.com/2016/03/24/generalizing-jsx/
+
+** System F, System F with subtyping, System F-omega
+
+https://en.wikipedia.org/wiki/System_F
+
+"System F is rich enough that the self-application =\x.x x= is typable." https://crypto.stanford.edu/~blynn/lambda/systemf.html
+
+Brown and Palsberg, "Breaking Through the Normalization Barrier: A Self-Interpreter for F-omega"
+
+** Introduction to lambda-calculus?
+- unknown-year lecture notes "Lambda Calculus as a Programming Language" [[http://andrei.clubcisco.ro/cursuri/2pp/01.Lambda_prog.pdf][pdf]]
+
+I thought lambda calculus could be summarized in one page, but Henk Barendregt wrote hundreds of pages about it. Is there more to lambda calculus than it seems?
+
+- 1994, 50 pages, [[http://www.nyu.edu/projects/barker/Lambda/barendregt.94.pdf][pdf]]
+- 1991, 190 pages, [[https://people.mpi-sws.org/~dreyer/tor/papers/barendregt.pdf][pdf]]
+** Extending lambda-calculus with various bells and whistles
+
+- Vectorial lambda-calculus
+
+  - The 2013 article "The Vectorial Lambda-Calculus" [[https://who.rocq.inria.fr/Alejandro.Diaz-Caro/TheVectorialCalculus.pdf][pdf]] adds vectors and matrices and their types to lambda calculus.
+  - The 2010 article "Semantics of a Typed Algebraic Lambda-Calculus" [[https://arxiv.org/abs/1006.1433][pdf available]] also mentions "vectorial".
+
+- 2016 article "System F-omega with Equirecursive Types for Datatype-Generic Programming" [[http://ps.informatik.uni-tuebingen.de/research/functors/equirecursion-fomega-popl16.pdf][pdf]]
+
+** Lambda calculus semantics?
+
+- https://en.wikipedia.org/wiki/Lambda_calculus#Semantics
+
+  - "In the 1970s, Dana Scott showed that, if only continuous functions were considered,
+    a set or domain D with the required property could be found, thus providing a model for the lambda calculus."
+
+    - 1982, [[https://www.sciencedirect.com/science/article/pii/S0019995882800879]["What is a model of lambda calculus?"]]
+    - 2008, PhD thesis, [[https://tel.archives-ouvertes.fr/tel-00715207/document]["Models and theories of lambda calculus"]]
+
+      - 2009, [[https://arxiv.org/abs/0904.4756][summary]]
+
+- Paul Hudak, lecture notes, [[http://www.cs.yale.edu/homes/hudak/CS430F07/LectureSlides/Reynolds-ch10.pdf][The Lambda Calculus]]
+
+  - "The Greatest Thing Since Sliced Bread™, or maybe even before it"
+
+- The operational semantics of lambda calculus depends on the evaluation strategy?
+
+  - What-reduction?
+
+    - Normal-order reduction
+    - Applicative-order reduction
+
+  - Call-by-what?
+
+    - Call-by-value
+    - Call-by-name
+
+** Optimizing lambda calculus?
+
+- http://thyer.name/lambda-animator/
+- http://thyer.name/phd-thesis/
+- http://hackage.haskell.org/package/graph-rewriting-lambdascope
+- partial evaluation
+
+  - 2010, slides, "O, partial evaluator, where art thou?", Lennart Augustsson, [[http://www.cse.chalmers.se/~palka/Lennarts_talk/PEPM-2010.pdf][pdf]]
+
+    - https://en.wikipedia.org/wiki/Partial_evaluation
+
+      - Futamura projection
+
+  - 1997, article, "Distributed partial evaluation", [[http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.134.1238][citeseerx]]
+
+- Lambda calculus
+
+  - might be related to bottom-up beta substitution
+
+    - Abdullah hinted that BUBS (bottom-up beta-substitution [Shivers2004])
+      might be used to make a garbage-free or a fast interpreter.
+    - https://en.wikipedia.org/wiki/Strict_programming_language
+    - https://en.wikipedia.org/wiki/Lazy_evaluation
+    - [[https://memo.barrucadu.co.uk/strict-vs-lazy.html][Strict-by-default vs Lazy-by-default]]
+    - https://en.wikipedia.org/wiki/Applicative_computing_systems
+    - non-strict, beta reduction, normal order, applicative order
+    - The terms "lazy" and "strict" imply operational semantics.
+      They are two strategies for beta-reduction.
+      "Lazy" is normal-order.
+      "Strict" is applicative-order.
+    - [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.90.2386&rep=rep1&type=pdf][An Algorithm for Optimal Lambda Calculus Reduction, John Lamping]]
+    - [[http://www.lsv.fr/Publis/PAPERS/PDF/sinot-wrs07.pdf][Complete Laziness: a Natural Semantics, François-Régis Sinot]]
+    - http://rochel.info/ graph-rewriting-lambdascope (screenshot): An implementation of an optimal evaluator for the λ-calculus, PDFLambdascope
+
+  - How is lambda calculus algebraic?
+
+    - [[https://www.mscs.dal.ca/~selinger/papers/combinatory.pdf]["The lambda calculus is algebraic", Peter Selinger]]
+
+      - "We argue that free variables should not be interpreted as elements in a model, as is usually done, but as indeterminates."
+
+    - [[https://pdfs.semanticscholar.org/055d/69ee4dc95fbf6457419c90338493667478b1.pdf]["On the algebraic models of lambda calculus", Antonino Salibra]]
+
+      - "The variety (equational class) of lambda abstraction algebras was introduced
+        to algebraize the untyped lambda calculus in the same way Boolean algebras algebraize the classical propositional calculus."
+        Propositional logic is modeled by Boolean algebra.
+        First-order logic is modeled by cylindric algebra?
+        Lambda calculus is modeled by lambda abstraction algebra.
+        Why algebra? Because it is equational?
+
+    - [[https://en.wikipedia.org/wiki/Algebraic_logic][Wikipedia "algebraic logic"]]
+    - [[https://pdfs.semanticscholar.org/7596/19f05a42ff3045bcf87fcaa3edbff01e1130.pdf]["The algebraic lambda-calculus", Lionel Vaux]]
+    - [[https://pdfs.semanticscholar.org/44c9/2ad00b8ceba78319005db048b24d61a80748.pdf]["Lambda abstraction algebras: representation theorems", Don Pigozzi, Antonino Salibra]]
+    - [[http://www.dsi.unive.it/~salibra/mainfinale.pdf]["Applying Universal Algebra to Lambda Calculus", Giulio Manzonetto, Antonino Salibra]]
+
+  - Dana Scott's PCF; also search the Internet for "the language pcf"
+    [[http://www.cs.bham.ac.uk/~mhe/papers/RNC3.pdf]["Introduction to Real PCF (Notes)", Mart'in H"otzel Escard'o]]
+  - 1993 John Launchbury [[https://pdfs.semanticscholar.org/492b/200419199892857faa6a6956614641ae9464.pdf][Lazy imperative programming]]
+
+- lambda calculus
+
+  - Church-encoding enables lambda calculus to represent conditionals and algebraic data types.
+  - Fixed-point combinators enables recursion and looping.
+  - https://en.wikipedia.org/wiki/Lambda_cube
+  - https://en.wikipedia.org/wiki/Calculus_of_constructions
+  - https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus
+
+    - "The simply typed lambda calculus [...], a form of type theory,
+      is a typed interpretation of the lambda calculus with only one type constructor: [...] that builds function types."
+
+      - What is an "interpretation of the lambda calculus"?
+      - What is "the lambda calculus"? Is there only one lambda calculus?
+
+  - https://www.reddit.com/r/haskell/comments/8els6f/why_are_combinators_as_powerful_as_full/
+  - https://math.stackexchange.com/questions/5639/the-power-of-lambda-calculi
+  - Implement lambda calculus.
+
+    - Without dynamic allocation / garbage collection.
+    - Translate lambda calculus to assembly
+
+      - Basic idea:
+
+        - Every expression translates to a subroutine.
+        - Calling the subroutine ~ evaluating the expression.
+        - Subroutine return value ~ value obtained by evaluating the expression.
+
+      - A lambda abstraction translates to a subroutine that accepts one parameter.
+      - An application translates to a subroutine call.
+      - An int value translates to what? Choice:
+
+        - itself
+        - a subroutine that returns the int
+
+    - 2012, article, [[https://arxiv.org/abs/1202.2924]["From Mathematics to Abstract Machine: A formal derivation of an executable Krivine machine"]]
+
+      - https://en.wikipedia.org/wiki/Krivine_machine
+
+** Ocaml
+- https://ocaml.org/learn/
+** Imperative subset
+Haskell's ST monad enables us to embed a local imperative program in a functional program.
+** Overloadable function application?
+** Haskell woes
+
+- [[https://news.ycombinator.com/item?id=5893442][Ask HN: Any downsides of programming in Haskell? | Hacker News]]
+- [[https://www.reddit.com/r/haskell/comments/1gknfs/ask_hn_any_downsides_of_programming_in_haskell/][Ask HN: Any downsides of programming in Haskell? : haskell]]
+
+*** Can't import type class instances explicitly
+
+[[https://stackoverflow.com/questions/8728596/explicitly-import-instances][There is a reason]].
+** Monads, and Haskell type system limitations
+
+- A monad is a way of /conservatively extending/ all categories. (Abdullah, private correspondence)
+- https://www.reddit.com/r/haskell/comments/3h2aqg/can_someone_explain_the_monads_are_generalised/
+
+*** Should Nat (the natural numbers) be a subtype of Int (the integers)?
+
+Intuitively, yes.
+
+*** <2018-10-01> @abdullah Signedness is a monad: conservatively extending naturals to integers
+
+I think this is what we mean when we say "integer is a monad".
+I think what we are really trying to say is "signedness is a monad", that is, "we can conservatively extend the naturals to the integers by using the Signed monad".
+
+We can write that in Haskell as follows (with some problems described later).
+
+#+BEGIN_EXAMPLE
+data Nat = Zero | Succ Nat
+type Int = Signed Nat
+data Signed a = Positive a | Negative a
+
+instance Functor Signed ...
+instance Applicative Signed ...
+
+instance Monad Signed where
+    return = Positive
+    m >>= k = join_signed (fmap k m)
+
+join_signed :: Signed (Signed a) -> Signed a
+join_signed mm = case mm of
+    Positive x -> x
+    Negative x -> negate_signed x
+
+negate_signed :: Signed a -> Signed a
+negate_signed (Positive x) = Negative x
+negate_signed (Negative x) = Positive x
+
+f :: Nat -> Nat
+f = ...
+
+f_int :: Int -> Int
+f_int = fmap f
+#+END_EXAMPLE
+
+We can have Signed Char, Signed String, etc., but those may not make sense.
+
+The problem:
+Nat should be a subtype of Int, because everyone who knows arithmetics seems to think that way.
+We want f and f_int to be the /same/ function.
+We don't want to type fmap, liftM2, and their ilk.
+** Abdullah's dream language: Extending System F application beta-reduction rules to automate fmap and extend?
+Add these inference rules?
+- If =f : a -> b=, and =x : m a=, and =m= is an instance of =Functor=, then =f x= beta-reduces to =fmap f x=.
+- If =k : a -> m b=, and =x : m a=, and =m= is an instance of =Monad=, then =k x= beta-reduces to =k =<< x=.
+
+\[
+f : a \to b , ~ x : m~a , ~ Functor~m \vdash (f~x \to_\beta fmap~f~x)
+\]
+
+Suppose =f : a -> b=, and =x : m (p a)=, and =m= is an instance of =Functor=, and =p= is an instance of =Functor=.
+
+- The rule beta-reduces =f x= to =fmap f x=.
+- Problem: The rule interferes with the =Functor= instance of =(->)=.
+** Some tentative plans: Create a language that compiles to Haskell?
+- [[https://github.com/bennofs/haskell-generate][bennofs/haskell-generate: Type-safe library for generating haskell source code]]
 * Programming language design mistakes
-#+TOC: headlines 1 local
 ** Justifying the creation of yet another programming language
 A new programming language should fix unforeseen design mistakes in existing programming languages.
 It should not repeat their design mistakes.
@@ -2951,226 +2768,6 @@ Distinguishing statements and expressions
 Why do new language designers still repeat design mistakes?
 ** Lisp design mistake: having separate data and function cell
 * Total mess
-** Literature research
-What literature exists for programming language design?
-
-What can programming language researchers learn from the philosophy of language?
-
-Things to summarize:
-- 1966 article "The Next 700 Programming Languages" http://www.math.bas.bg/bantchev/place/iswim/next700.pdf
-- 1997 article "Scripting: Higher Level Programming for the 21st Century" http://artemisa.unicauca.edu.co/~lgarreta/elenguajes/readings/scripting.pdf
-  - "This article is an opinion piece that explains why scripting languages
-    will handle many of the programming tasks of the next century better than system programming
-    languages."
-- Other people's opinions about designing programming languages:
-  - http://www.inquisition.ca/en/info/gepsypl/rules.htm
-  - 2015 dissertation "Evidence-based programming language design: a philosophical and methodological exploration",
-    [[https://jyx.jyu.fi/handle/123456789/47698][abstract]],
-    [[https://jyx.jyu.fi/bitstream/handle/123456789/47698/978-951-39-6388-0_vaitos04122015.pdf][pdf]]
-    - It's mostly philosophy of what "evidence-based" means.
-    - It doesn't design a programming language.
-    - It could have been shorter.
-  - https://www.reddit.com/r/ProgrammingLanguages/comments/9ep9xq/what_i_did_not_steal_from_perl_6/
-    - "What's a character?" https://www.perlmonks.org/?node_id=1214956
-  - https://www.reddit.com/r/ProgrammingLanguages/comments/9eqrfy/what_are_the_biggest_problems_with_programming/
-  - 2017 article "The End of History? Using a Proof Assistant to Replace Language Design with Library Design" [[https://www.cs.purdue.edu/homes/bendy/Fiat/fiat-snapl.pdf][pdf]]
-  - [[http://purduepl.github.io/index.html][Purdue university programming languages group]]
-- Shopping for ideas:
-  - [[https://www.reddit.com/r/ProgrammingLanguages/comments/8vcrzb/what_are_some_interesting_language_features_that/][What are some interesting language features that may not be well known? : ProgrammingLanguages]]
-  - https://softwareengineering.stackexchange.com/questions/55047/what-is-the-greatest-design-flaw-you-have-faced-in-any-programming-language
-  - https://www.reddit.com/r/ProgrammingLanguages/comments/9erq87/languages_with_separate_types_for_pointers_to_the/
-  - http://math.andrej.com/2009/05/29/mathematically-structured-but-not-necessarily-functional-programming/
-  - read, "true sums of products" http://hackage.haskell.org/package/generics-sop
-- "The Programming Languages Zoo [...] demonstrates various concepts and techniques used in programming language design and implementation.
-  It is a good starting point [...]"
-  http://plzoo.andrej.com/
-
-Unanswered questions:
-- Is there a homoiconic statically-typed language?
-  Does type system hamper homoiconicity?
-- Can we make high-level declarative language without garbage collection?
-
-Making a programming language
-https://www.reddit.com/r/ProgrammingLanguages/comments/9ky7o6/writing_my_own_programming_language/e72qjll/
-banzr: 'Racket is taught in universities to be used to write languages. Use "match" and "cases" to build the parser and interpreter. Good luck!'
-
-
-2017 "Language Oriented Modularity: From Theory to Practice"
-http://programming-journal.org/2017/1/10/
-
-2017 "Classless Object Semantics"
-http://researcharchive.vuw.ac.nz/handle/10063/6681
-
-http://www.pl-enthusiast.net/2015/05/27/what-is-pl-research-and-how-is-it-useful/
-** Philosophical foundations
-#+TOC: headlines 2 local
-*** What is computation, computer, programming, language?
-Programming is making a computer do what we want it to do.
-
-Languages are divided into several categories:
-- hardware programming, system programming
-- enterprise application programming
-- scripting? network administration
-- markup: XML, Markdown
-- data: JSON, YAML
-
-The question:
-What is the least-effort way to make a computer do X?
-*** Who use programming languages?
-A programming language serves as a means of communication in three cases:
-
-- human-to-human:
-- human-to-machine:
-- machine-to-machine:
-
-We advance technologically when we raise the bar for machines (we expect more from machines), not when we expect more from humans.
-(?)
-*** The fundamental reason why there is no perfect language: The pigeonhole principle, encoding length trade-off
-If we choose to encode something shorter in a language, then other things must be encoded longer.
-If we make it easier to do something, something else has to become harder.
-
-A language is essentially a Huffman code, a compression scheme, where often-used concepts are encoded more shortly than rarely-used concepts.
-
-/Language encodes concept into symbols./
-
-If there are only 26 letters and 1,000 concepts, then, by the pigeonhole principle, it is simply impossible to encode all those concepts using only 1-letter symbols.
-
-The reason why there is no perfect language is simple:
-the pigeonhole principle precludes encoding all possible concepts into short words.
-*** Ontology: what exists in a programming language?
-- numbers
-- byte strings
-- character strings
-- maps
-- functions
-- relations
-*** Philosophical principles
-#+TOC: headlines 2 local
-**** Philosophical principle, meta-thought, how to find essence
-Everything (every language element) should have as few properties as possible.
-If something has as few properties as possible, then what is left is its essence.
-Example:
-In C, the name of a function is a property of that function.
-In JavaScript, the name of a function is not a property of that function.
-var add = function(x,y) { return x+y; }
-
-Is the name "x" a property of the variable x in the lambda expression \ x -> x + 1?
-We can have nameless parameters with de Bruijn indexes.
-**** The essence of description and computation
-The essence of description is the composition of primitives.
-
-Computation is the execution of a computing description.
-
-All computations have repetitions.
-Turing machine computation is repeated primitive computation.
-Lambda-calculus beta-normalization is repeated beta-reduction.
-
-Computation is the normalization of an expression to a value.
-
-A logical axiom corresponds to a computing primitive.
-
-A proof corresponds to a computing description (program).
-**** Programming
-  :PROPERTIES:
-  :CUSTOM_ID: programming
-  :END:
-***** What is a program?
-- A program is represented by
-  - a sequence of instructions (procedural programming)
-  - a lambda expression (functional programming)
-***** Metaprogramming
-- JetBrains MPS
-- [[http://txl.ca/index.html][TXL: source transformation by example]], what can it do?
-- http://www.moserware.com/2008/06/ometa-who-what-when-where-why.html
-***** Comparing Ocaml and SML
-- [[http://adam.chlipala.net/mlcomp/][Comparing Objective Caml and Standard ML]], Adam Chlipala
-  - https://people.mpi-sws.org/~rossberg/sml-vs-ocaml.html
-***** Interoperation
-- Programming languages don't work with each other very well.
-  - What we need is not a new programming language, but a way for languages to work together?
-- [[https://mollyrocket.com/casey/stream_0019.html][compression-oriented programming]]
-- Lisp family/dialects
-  - Scheme
-  - [[https://picolisp.com/wiki/?home][PicoLisp]]
-- Undigested
-  - https://hakonrossebo.github.io/functional-programming-babelfish/
-  - https://github.com/rainbyte/haskell-ide-chart
-  - http://docs.mamedev.org/techspecs/luaengine.html
-- The source code is a textual representation of the abstract syntax tree (AST).
-- The source code is unimportant cosmetics.
-  We should care about the ASTs and transformations between ASTs.
-  We should read, write, and edit ASTs directly, not text.
-  The editor should not parse text into AST; it should generate text from AST.
-- Language-oriented programming? Data-first programming?
-  - Data is the most important thing.
-    - Because data is harder to back up than code?
-  - Program translates the shape of data.
-  - Describe what you want, and write code that follows that description
-    to call the lower-level implementation details.
-- Programming language design
-  - Which should we start with?
-    - Semantics (high-level, top-down language design)
-    - Machine code (low-level, bottom-up language design)
-  - Every enhancement reduces cognitive load.
-  - Example of bottom-up language design and how each level reduces cognitive load:
-    - Begin with machine code.
-    - Provide mnemonics for instructions.
-    - Provide the illusion of infinite custom-named registers and orthogonal operands.
-    - Provide macros subroutines as extensible instructions.
-    - Provide the illusion of infinite custom-named registers and orthogonal operands.
-    - Provide macros and subroutines as extensible instructions.
-    - Provide named locations.
-    - Provide the illusion of infinite memory.
-    - Abstract away processor registers.
-    - Abstract away pointers.
-    - Expression.
-    - Infix expression syntax.
-    - First-class functions.
-    - The program itself is a procedural program that tells the interpreter what code to generate.
-    - End up with something like Randall Hyde's High Level Assembly?
-- PL research
-  - [[https://www.microsoft.com/en-us/research/publication/implementing-functional-languages-a-tutorial/][1992, book, "Implementing functional languages: a tutorial"]]
-- Improve an existing language instead of starting new?
-- What is this? http://reasonablypolymorphic.com/blog/elm-is-wrong
-***** Interesting languages?
-****** Rebol? Rebol metaprogramming?
-https://en.m.wikipedia.org/wiki/REBOL
-****** Carp lisp dialect?
-***** Scheme vs Lisp:
-- A Lisp implementation doesn't have to have proper tail calls.
-- A Scheme implementation must have proper tail calls.
-***** Type systems
-- Types help computers help us.
-  - Types prevent some mistakes.
-  - Types are part of documentation.
-    - Types help us write an IDE.
-*** A lambda abstraction is not a function
-A mathematical function is a triple \((A,B,F)\) where \(A\) is the domain, \(B\) is the codomain, and \(F \subseteq A \times B\) is the mapping.
-
-A lambda abstraction \( \lambda x. y \) is not the /same/ as a function \( x \mapsto y \).
-
-The expression 1 + 2 is not the /same/ as the number 3.
-That expression /evaluates/ to that number.
-*** The philosophical foundation of object-orientation?
-Identity?
-
-Properties?
-
-What does "X is a Y" mean?
-
-What does "Every X is a Y" mean?
-
-First-order logical meaning of object-oriented definitions?
-#+BEGIN_EXAMPLE
-Car my_car = new Car(); // my_car is a Car.
-class What extends Car {} // Every What is a Car.
-#+END_EXAMPLE
-
-\begin{align*}
-Car(my\_car)
-\\
-\forall x : What(x) \to Car(x)
-\end{align*}
 ** Catching mistakes; checking; proving; reasoning; type systems
 *** Curry-style extrinsic typing instead of Church-style intrinsic typing
 Types help, but they are not the essence.
@@ -3977,506 +3574,5 @@ https://twitter.com/ErikDominikus/status/1074009681553707008
 1 in Haskell / ML / Ocaml / F# / Scheme / JavaScript / untyped lambda-calculus
 
 2 in Idris / Lean / GHC Core / System F / Coq
-* Implementing programming languages
-** Choosing an underlying technology: Prolog
-We should prototype our language in Prolog.
 
-We should implement our language in Prolog.
-
-- 2004, parsing in Prolog, "Parsing and Semantics in DCGs" http://www.inf.ed.ac.uk/teaching/courses/aipp/lecture_slides/11_PS_DCGs.pdf
-- Prolog DCG (definite clause grammar) facilitates writing an attribute grammar.
-- https://en.wikipedia.org/wiki/Definite_clause_grammar
-
-Erlang started out as a DSL in Prolog.
-See 1992 article "Use of Prolog for developing a new programming language".
-
-<2018-10-20>
-Change of opinion:
-we should write the language in Prolog instead of Haskell.
-
-- "Ott is a tool for writing definitions of programming languages and calculi.
-  It takes as input a definition of a language syntax and semantics,
-  in a concise and readable ASCII notation that is close to what one would write in informal mathematics."
-  https://www.cl.cam.ac.uk/~pes20/ott/
-
-<2018-12-11>
-My current answer: Prolog.
-
-My previous answers:
-- Haskell
-- Racket
-- Scheme
-- Java
-- C
-- C++
-
-Other people?
-- https://hackernoon.com/the-programming-language-im-looking-for-948d93f7a396
-** Principles
-- Fast build time is important.
-* Meta-programming?
-The Racket manifesto[fn::http://felleisen.org/matthias/manifesto/index.html]: programming-language programming language
-
-miniKanren, scheme logic programming
-http://minikanren.org/
-https://github.com/clojure/core.logic/wiki/A-Core.logic-Primer
-
-2000 article "Domain Specific Meta Languages"
-https://www-users.cs.umn.edu/~evw/pubs/vanwyk00sac/vanwyk00sac.pdf
-
-1996 book "Advanced programming language design"
-2008 article "Position paper: Practical foundations for programming languages"
-2012 book "Practical Foundations for Programming Languages" Version 1.32 of 05.15.2012
-http://profs.sci.univr.it/~merro/files/harper.pdf
-
-University of Arizona, Spring 2006, CS 520 Principles of Programming Languages - Lecture 04: Types and Polymorphism
-https://www2.cs.arizona.edu/classes/cs520/spring06/04types.pdf
-from "Lecture 4: higher polymorphism"
-https://blog.inf.ed.ac.uk/apl16/archives/178/comment-page-1
-
-Programming Language Foundations in Agda https://plfa.github.io/
-
-2018 article "Logic Programming as a Service" https://arxiv.org/abs/1806.02577
-
-Liber amicorum for Doaitse Swierstra
-https://www.reddit.com/r/haskell/comments/1hmc9t/pdf_liber_a_for_doaitse_swierstra_read_free/
-
-1994 article "Efficient Self-Interpretation in Lambda Calculus" http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.56.4382&rep=rep1&type=pdf
-
-Lambda the Ultimate: Meta-programming
-http://lambda-the-ultimate.org/taxonomy/term/15
-
-2009 article "Directly Reflective Meta-Programming" http://homepage.divms.uiowa.edu/~astump/papers/archon.pdf
-
-Footnote F from \cite{felleisen2018programmable}:
-#+BEGIN_QUOTE
-Language workbenches (such as Spoofax) deal with conventional syntax for DSLs but do not support the incremental modification of existing languages.
-A 2015 report suggests, however, these tool chains are also converging toward the idea of language creation as language modification.
-We conjecture that, given sufficient time, development of Racket and language workbenches will converge on similar designs.
-#+END_QUOTE
-* Enterprise applications model extrinsic properties
-Specification language
-Attempto Controlled English
-
-Parsing with Prolog DCGs
-
-https://philpapers.org/browse/ontology-of-mathematics
-
-"Advances in a DSL for Application Integration"
-
-https://www.itu.int/ITU-D/tech/OLD_TND_WEBSITE/network-infrastructure_OLD/Bangkok-02/5-5_Demo.pdf
-http://www.inquisition.ca/en/info/gepsypl/rules.htm
-
-
-Enterprise applications model extrinsic properties.
-The name of a person is an extrinsic property.
-
-Google search of software modeling language
-https://en.wikipedia.org/wiki/Modeling_language
-https://en.wikipedia.org/wiki/EXPRESS_(data_modeling_language)
-https://www.martinfowler.com/articles/languageWorkbench.html
-* How should languages interoperate?
-Can we do it semantically?
-
-Can we do better than FFI (foreign function interface)?
-
-Languages are usually small.
-Standard libraries are huge.
-* Ideas?
-** object = lambda + record + mutation?
-#+BEGIN_EXAMPLE
-let self = {
-        prop = 1;
-        foo = \ () -> self.prop + 1;
-}; in self
-#+END_EXAMPLE
-** Unifying functional and logic programming as a rewriting system
-It is easier to add nondeterminism to lambda calculus than it is to add lambda-expression to Horn clauses?
-There are at least two camps of the declarative programming languages:
-First: Start from Prolog, move toward Haskell.
-Second: Start from Haskell, move toward Prolog.
-Example of second camp is Curry.
-
-Both SLD-resolution and normal-order beta-reduction can be seen as term-rewriting systems.
-
-All we have to do is add non-determinism to Pure[fn::https://en.wikipedia.org/wiki/Pure_(programming_language)], and we have a Prolog-Haskell hybrid.
-
-A Horn clause translates to several rewrite rules.
-with disjunctive-normal-form body is =A :- B1 ; ... ; Bn= is the rewrite rule \(A \to B_1 \vee A \to B_2 \vee \ldots \vee A \to B_n\).
-
-A function definition translates to one rewrite rule.
-=A = B= is the rewrite rule \(A \to B\).
-
-#+BEGIN_EXAMPLE
-prolog {
-    a(X) :- b(X), c(X).
-    parent(dad,kid).
-    parent(daddy,kiddo).
-}
-
-haskell {
-    what n = \exists x y : parent x y && length + length y == n
-}
-#+END_EXAMPLE
-*** Lambda-calculus with choice/disjunction
-Nondeterministic programming: Prolog, Amb, Alisp[fn::https://en.wikipedia.org/wiki/Nondeterministic_programming].
-Other nondeterminstic extensions to lambda calculus are already in the literature:
-1998 \cite{kutzner1998non}, 2009 \cite{fischer2009purely}.
-
-"Lambda logic is the union of first order logic and lambda calculus."\cite{beeson2004lambda}
-
-Nondeterminism-by-backtracking may be implemented in Scheme with continuations.
-
-How do we combine lambda-calculus beta-reduction and Prolog unification?
-
-\cite{kfoury1999beta}
-
-Here we describe \(\lambda_|\)-calculus (lambda-calculus with choice; that is a vertical bar).
-Other names:
-- lambda-calculus with nondeterminism
-- lambda-calculus with disjunction
-
-We add expression syntax for disjunction.
-Thus the syntax becomes:
-1. Every name is an expression.
-1. If \(x\) is a name and \(y\) is an expression, then \(\lambda x.y\) is an expression (abstraction).
-1. If \(x\) is an expression and \(y\) is an expression, then \(xy\) is an expression (application).
-1. If \(x\) is an expression and \(y\) is an expression, then \(x | y\) is an expression (choice).
-   For consistency with Prolog's =;= operator (disjunction),
-   the choice operator \(|\) associates to the /right/: \(x | y | z = x | (y | z)\).
-
-We add two rules to beta-reduction.
-Thus the beta-reduction now consists of three rules.
-The last two rules makes the beta-reduction ambiguous.
-\begin{align*}
-(\lambda x. y) z &\to y[x := z]
-\\ x | y &\to x
-\\ x | y &\to y
-\end{align*}
-
-We define two constant expressions: \(false\) and \(true\).
-
-Now we define a ternary logic mapping from expression to \(\{false,unknown,true\}\).
-\begin{align*}
-T(false) &= false
-\\ T(true) &= true
-\\ T(\lambda x. y) &= true
-\\ T((\lambda x. y) z) &= T(y[x := z])
-\\ T(A = B) &= unknown
-\end{align*}
-
-A Prolog-like operational semantics:
-\begin{align*}
-x | y &\to x \text{ if \(x\) succeeds}
-\\ x | y &\to y \text{ if \(x\) fails}
-\end{align*}
-
-We define one constant \(false\).
-
-We define that an expression /fails/ iff it reduces to the constant \(false\).
-We define that an expression /succeeds/ if it does not fail.
-\begin{align*}
-fail | x &\to x
-\\ x | fail &\to x
-\end{align*}
-
-** Logic programming with explicit side-effects with force-predicate
-The meaning of force(X) is that force(X) succeeds iff it has changed the world such that X will succeed after force(X) returns.
-Thus the interpreter has to check for race conditions?
-Is this requirement too difficult?
-#+BEGIN_EXAMPLE
-?- file_content('foo', A). -- unify A with the contents of file 'foo'
-
-?- force(file_content('foo', [1,2,3])). -- replace the content of file 'foo' with [1,2,3]
-#+END_EXAMPLE
-
-** Prolog as a term-rewriting meta-interpreter
-The Prolog rule "A :- B" can be interpreted in two ways.
-The first is the well-known proof-theoretic interpretation "to prove A, prove B".
-The second is the /rewriting-system interpretation/ "rewrite A to B".
-
-** Write abstract interpreters, not compilers?
-<2018-12-30>
-
-The same code fragment can be interpreted in several ways.
-
-The most common interpreter executes the program with the intended semantics.
-Example: a Python interpreter interprets the Python program "print 'foo'" as printing the string.
-
-Write an abstract interpreter that emits code when interpreting.
-An interpreter that interprets the Python program "print 'foo'" as "emit a Ruby statement that prints 'foo' to screen when executed".
-** Taxonomy of programming languages?
-- Dichotomies
-- Having denotational semantics vs not
-- With vs without runtime type information
-- Curry-style, implicit typing, optional typing, gradual typing
-- Church-style suggestive typing, meaningful typing
-- Statement vs expression
-- Imperative vs declarative
-- Value vs reference (referentially transparent vs not)
-- By value spaces?
-- Principled vs unprincipled
-- Designed by person vs by committee
-** Enhancing (name-separating) Prolog with anonymous predicates and modules
-#+BEGIN_EXAMPLE
-let([
-    pred = (X => Y => (male app X) and (child app X app Y))
-], pred app bar)
-#+END_EXAMPLE
-** Functions as semantics of lambda calculus?
-Key idea:
-A lambda abstraction is not a function,
-but a function can be the semantics of a lambda abstraction.
-
-A semantic of a lambda abstraction is a function, that is,
-a triple \((A,B,M)\) where \(A\) is the domain, \(B\) is the codomain, and \(M\) is the mapping.
-
-What is the semantic of \( \lambda x . x x \)?
-What is the semantic of \( (\lambda x . x x) (\lambda x . x x) \)?
-
-For every set \(A\):
-\begin{align*}
-(A,A,I_A) \models \lambda x. x
-\end{align*}
-where \(I_A = \{ (x,x) ~|~ x \in A \}\).
-
-\begin{align*}
-(X,Y,A) \models \lambda x y. x y
-\end{align*}
-
-Let \(F = (A,B,f)\) be a function.
-
-Let \(G = (F \times A, B, g)\) be a function where \( g(f,x) = f(x) \).
-** Growing a programming language?
-2006, "A growable language"
-"programming language designers should plan for such growth, along with the growth of a user community"
-https://dl.acm.org/citation.cfm?id=1176621
-
-Racket manifesto?
-Racket language-oriented programming?
-* Philosophy of length, dimension, measure, size, cardinality
-Similar questions
- [fn::https://www.reddit.com/r/askmath/comments/6zuiob/why_is_it_called_cardinality_and_not_length_or/]
- [fn::https://math.stackexchange.com/questions/158602/number-of-elements-vs-cardinality-vs-size]
-** What is length?
-"Length" means "the distance measured along the longest dimension of an object"[fn::https://en.wiktionary.org/wiki/length],
-"property of being long or extended in one direction; distance along a line"[fn::https://www.etymonline.com/word/length],
-"the most extended dimension of an object"[fn::https://en.wikipedia.org/wiki/Length][fn::http://wordnetweb.princeton.edu/perl/webwn?s=length],
-"the longest extent of anything as measured from end to end"[fn::https://www.dictionary.com/browse/length].
-To use the word "length" for anything else (such as ADTs, which are trees), we must first define what the "longest dimension" of a tree is.
-
-We can think of "length" as a nominalization of "long".
-
-In a programming language, the word "length" implies that things have a /geometry/.
-
-In order to define length, we must define a measure for every value in the language.
-
-\(m(x)\) should be the number of bits required to represent \(x\)?
-
-\(m(n) = \log_2 n\) or \(m(n) = n\)?
-
-\(m([a,b]) = something + m(a) + m(b)\)?.
-
-When we say "the length of this text is 1,000 characters", we tacitly assume that a character is a /unit of length/.
-
-"Length" does not make sense for heterogenous sequence.
-"The length of [abc, 1, [1,2,3]] is 3 elements".
-Should an element, which has an arbitrary size, be a unit of length?
-
-"Length" implies unit of length.
-
-We say "this movie is 90 minutes long".
-
-When we say "the length of X is Y", we implicitly see X as a /line/.
-** What is dimension?
-what
- [fn::https://www.etymonline.com/word/dimension]
- [fn::https://en.wiktionary.org/wiki/dimension]
- [fn::https://en.wikipedia.org/wiki/Dimension]
-** What is size?
-what
- [fn::https://www.etymonline.com/word/size]
- [fn::https://en.wiktionary.org/wiki/size]
-** Why do we measure length?
-Because we want to place an object inside a container, and we want to know whether the container is large enough.
-Because we want to tie an object, and we want to know whether we have enough rope.
-And so on.
-** How do we measure length?
-The length of a line is how long that line is.
-
-The length of a box (a rectangular prism) is the length of its longest axis.
-A rectangular prism has three axes.
-Why is the length of a prism not the length of its diagonal?
-
-Unit of length.
-
-We can take "the length of a sphere" to mean "the length of the longest line that we can put in a sphere", and therefore we are justified in saying "The length of a sphere is its diameter".
-What are the axes of a sphere?
-
-If we think of a triple as something like a rope, that is, if we think of each element as a point occupying no space, then:
-#+BEGIN_EXAMPLE
-length (_,_,_) = 3
-#+END_EXAMPLE
-
-If we think of a triple as something like a cube, that is, if we think of each element as a dimension (as a side of a cube), then:
-#+BEGIN_EXAMPLE
-length (a,b,c) = maximum [length a, length b, length c]
-#+END_EXAMPLE
-** Why do we conflate length and cardinality?
-We seem to think that the elements of a sequence occupy no space, like point mass in Newtonian mechanics.
-Why should sequence length be element count?
-** <2019-02-06> Response
-My philosophical analysis leads me to the conclusion that the problem is our conflating "length" and "cardinality".
-#+BEGIN_EXAMPLE
--- Let `huge` be a text taking 1 gigabytes of memory.
-length      [huge] = 1  -- does not make sense
-cardinality [huge] = 1  -- makes sense
-#+END_EXAMPLE
-
-"Length" implies a /longest dimension/ and a /unit of length/.
-
-~length "hello" = 5~ makes sense because of two things: (1) it makes sense for a character list to be visualized as a /one-dimensional/ line and
-(2) it makes sense for character to be a /unit of length/ (if we assume that there are finitely many characters and each character is one unit of length).
-
-~length [[1],[2,3]] = 2~ does not make sense. It stretches English too much for a list to be a /unit of length/,
-because each list may have different size, unless we declare by fiat that the size of each list is one, but this tyranny only begets more philosophical problems.
-
-~length (Identity "hello") = 1~ does not make sense for the same reason ~length [[1],[2,3]] = 2~ does not make sense.
-
-However, if we generously assume that Haskell "length" means "cardinality", all the above make sense,
-/but/ that generous assumption still does not justify ~length (undefined,undefined) = 1~
-which violates both the meaning of "length" and the meaning of "cardinality".
-** History
-<2019-02-06>
-I was triggered by Abdullah's pointing out to me that in Haskell, length "Hello" = 5, length (Identity "Hello") = 1, and length (undefined,undefined) = 1.
-Each of those viewpoints has its philosophical justifications.
-The question is: Which one has the strongest justification?
-What /is/ "length"?
-* What is declarative programming?
-What do we declare?
-* Enterprise programming language? Enterprise meta-language?
-** What?
-- Describe data shapes.
-- Describe databases.
-- Describe how the user should interact with the application.
-- Describe CRUD: describe views that read from or write to databases.
-- Describe business logic.
-- Parallelize unrelated database queries.
-- Translate to Java and interoperate with Java.
-
-We naturally think of mathematical objects as tuples/sequences or dictionaries.
-Each entry of the dictionary represents a property of the object.
-
-Are these the criteria of a good meta-language?
-- algebraic data types and pattern-matching
-- set-theoretic type system
-- tree manipulation
-
-Will we end up reinventing C# LINQ?
-
-Enterprise programming language contains sublanguages that work together.
-** Table expression language
-The semantics of a table expression is a sequence of rows.
-The sequence may be infinite.
-
-The operational semantics is to lazily evaluate the minimum number of rows.
-
-A table has column names.
-
-"empty" means the empty table.
-
-"project(C,T)" means table T but with only the columns in C.
-
-"all(T)" means all rows of table named T.
-Each row is a dictionary.
-
-"filter(P,T)" means all rows of T that satisfy P.
-
-"first(N,A)" means the first N rows of table A.
-
-"product(A,B)" means Cartesian product.
-
-"foldl(R_0,F,T)" is left-fold:
-R_k = F(T_{k-1},R_{k-1}) \text{ where } k \ge 1
-The result is R_n where n is the number of rows in T.
-T must be finite.
-
-Should collapse as much as possible to SQL.
-
-https://www.postgresql.org/docs/current/sql-select.html
-
-plan : table_exp -> sql_select
-% select(Columns,From,Where,Group,Having,Order,Limit,Offset)
-% select_modifywhere(S1,W1,S2,W2)
-n means not present
-plan(all(N),select(C,T?,n,n,n,n,n,n)) :- table_columns(N,C).
-plan(project(C,T), select(C, T, ))
-
-Prolog type system
-https://github.com/SWI-Prolog/roadmap/wiki/Prolog-type-system
-
-any : any value
-atom : any atom
-literal(A) : atom or number or string that equals A
-literal_in(Vals): in list Vals; each Val is a literal
-functor(Name,ArgTypes)
-list(T) : list in which each element has type T
-union(Types) : disjunction
-intersection(Types)
-predicate(ArgTypes)
-* "Let" introduces sharing?
-"Let" determines how the AST (abstract syntax tree) turns into ASG (abstract semantic graph).
-* Lambda calculus algebra what?
-The algebraicity of the lambda-calculus[fn::http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.311.3514&rep=rep1&type=pdf]
-#+BEGIN_QUOTE
-an untyped lambda-calculus is a functor LC from sets to sets: to a set V (of free ”variables”) it assigns a set LC(V) of lambda-terms built out from V;
-this functor enjoys substitution, which turns it into a monad;
-
-The idea that the notion of monad is suited for modelling substitution concerning
-syntax (and semantics) has been retained by many recent contributions
-concerned with syntax (see e.g. [BP99] [GU03] [MU04]) although some other
-settings have been considered.
-#+END_QUOTE
-* Algebra of ADT
-Somewhat interesting
-https://stackoverflow.com/questions/9190352/abusing-the-algebra-of-algebraic-data-types-why-does-this-work
-* How do we know?
-"How to determine your new language is perfect?"
-http://lambda-the-ultimate.org/node/4395
-* What is an array?
-What is the difference between an array, a string (byte string vs character string), and a sequence?
-
-C does not have built-in arrays; it has pointer arithmetics.
-An "array access" expression p[i] is a syntactic sugar for the pointer arithmetic dereference expression *(p+i).
-
-Is a C++ vector an array?
-* Programming language ontology?
-2005 "Towards a programming language ontology"
-https://pdfs.semanticscholar.org/028f/3f5df68e49b2d42663e935f1615ba46f41a0.pdf
-- paraphrase of Frege & Dummett: "the ontological implications of a language are to be identified with the entities required to provide its constructs with a semantics"
-- a possible ontology for computer science: something exists if and only if it is computable
-- "properties of programs such as efficiency, flexibility and elegance are, from the [Computer Science] view of things, absolutely essential. But these properties are obliterated by the [Denotational Semantics]."
-  - Denotational semantics can't reason about a program's resource usage.
-- "CS build programs and systems from data
-types. So instead of sets we propose to turn matters around and use data types [instead of sets] as our basic ontology."
-- Calculus of constructions (inductive data types) may provide an ontology.
-
-
-"The 'existence' referred to need not be 'real', but exist only in a universe of discourse."
-https://en.wikipedia.org/wiki/Ontological_commitment
-
-Why should we strive to create a programming language with ontological parsimony (minimal ontological commitment)?
-
-
-How do we design a programming language whose ontology coincides with how we think about the real world?
-
-How do we design a programming language whose ontology coincides with the ontology of mathematics?
-
-How can we be a mathematician without being an implicit Platonist?
-Anyone who believes that perfect circles exist is a Platonist.
-Anyone who believes that the square root of two exists is a Platonist.
-
-Mathematics is language.
-
-https://www.iep.utm.edu/mathplat/
 * Bibliography

@@ -1,0 +1,328 @@
+#+TITLE: Sketching a declarative programming language
+#+DATE: 2019-03-01 04:00:00 +0700
+#+PERMALINK: /program-sketch.html
+#+OPTIONS: ^:nil
+* Milestone planning?
+Version, milestone, man-day
+** 0
+- 0.0.0: Capture essential complexity
+  - Type definitions
+  - Use-case expression language / feature expression language, something like ML?
+- 0.1.0
+  - Translation to Java 8, Servlet API 3.1, HTML 5, CSS 3, JDBC 4.2, PostgreSQL 9.5.
+- 0.2.0
+  - HTTP basic authentication
+  - Authorization
+  - Sign out
+- 0.3.0
+  - Query parallelization and caching
+  - Implement some of https://en.wikipedia.org/wiki/Relational_algebra
+  - Query cost guesser
+- 0.4.0
+  - Google OAuth.
+** Unplanned
+Read-only storage
+
+Writable storage
+* Example fragment?
+This is similar to, if not inspired by, Moseley & Marks 2006 \cite{moseley2006out}.
+
+The essence of data is what can be done with it, not what it is?
+Only database designers care about how data is stored.
+Database users care about what can be done with the data in a reasonable amount of time.
+
+Balzer 1967 \cite{balzer1967dataless}?
+
+The goal is to come up with an expressive enough specification language whose specifications
+happen to be translatable to reasonably efficient implementations.
+The goal is to make a specification language whose denotational semantics nicely coincide with its operational semantics.
+The goal is to make a specification language that happens to also be a programming language.
+
+Is that Coq or Agda?
+Program extraction?
+
+#+BEGIN_EXAMPLE
+type surrogate_id = natural;
+
+let employee = type {
+    id : surrogate_id;
+    name : string;
+    birth_date : date;
+    join_date : date;
+    payments : collection payment;
+};
+
+let payment = type {
+    id : surrogate_id;
+    date : date;
+    amount : real;
+    note : string;
+};
+
+let department = type {
+    id : surrogate_id;
+    name : string;
+    establishment_date : date;
+};
+
+let my_app_ = application {
+    -- application state type
+    state = {
+        employees : relation employee;
+        departments : relation department;
+    };
+    -- An use case is an application-state endofunction.
+    add_employee (e : employee) (s : state) : state =
+        ASSERT e IN s.employees
+};
+
+let my_app_imp = implementation of my_app with state mapping {
+    employees -> db, schema "my_app", table "employees";
+    departments -> db, schema "my_app", table "employees";
+} with type replacement {
+    surrogate_id -> uint64; -- with overflow check, non modular
+} where
+    db = database {
+        type = postgresql;
+        host = 127.0.0.1;
+        username = "user";
+        password = "pass";
+    };
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+let f (x : natural) = x + 1
+
+let g = quotient of f by replacing natural arithmetic with modular unsigned 32-bit arithmetic
+let h = quotient of f by replacing natural arithmetic with overflow-checked unsigned 32-bit arithmetic
+#+END_EXAMPLE
+* Design
+The language is embedded in Prolog.
+
+There is some type-checking.
+
+Our goals:
+- The key concept: /Move accidental complexity from the source language to the translator./
+- Specify system state (application + database).
+- Specify use cases and business logic.
+- Generate a Java program and a PostgreSQL database implementing the specification.
+
+What is XL[fn::https://en.wikipedia.org/wiki/XL_(programming_language)]?
+* Core language
+The core language is intended for machines.
+Humans should use the convenient language.
+
+Each expression carries its own type.
+
+Combine lambda calculus and relational calculus/algebra.
+
+Should we use relational algebra or relational calculus[fn::https://en.wikipedia.org/wiki/Relational_calculus]?
+Codd's theorem[fn::https://en.wikipedia.org/wiki/Codd%27s_theorem] says that they are equivalent.
+Relational model[fn::https://en.wikipedia.org/wiki/Relational_model]?
+Codd prefers relational calculus[fn::https://en.wikipedia.org/wiki/Alpha_(programming_language)]?
+What is a relational database?[fn::https://en.wikipedia.org/wiki/Codd%27s_12_rules]
+** Lambda calculus
+=lambda(Param,Body)= is a lambda expression.
+
+=let(Binds,Body)=.
+Example:
+~let([ a = 1, b = 2 ], a + b)~
+
+=apply(Fun,Arg)=
+** Basic expressions
+=set(Type,List)= represents a set in which each element has type =Type=.
+
+=function(Dom,Cod,Map)= function expression.
+Example: =function([1,2],natural,[1-10,2-20])=.
+Example: =function(natural,natural,lambda([x],x+1))=.
+The function must be total; it must be defined for each element of the domain.
+** Relation expressions
+A relation expression describes a relation (a triple of domain, codomain, and mapping).
+
+=relation(Dom,Cod,Map)=.
+Example: =relation(natural,natural,[1-10, 2-20, 3-30])=.
+
+=all(Dom,Cod,S)= where S is a storage expression
+
+Example: =relation(natural,natural,lambda([x],(x+1 ; x+2)))=.
+Nondeterministic lambda.
+
+How do we have anonymous predicates?
+Fixed points?
+Clojure recur?
+** Storage expressions
+A storage expression describes how data is stored.
+
+Storage expressions:
+
+=memory=: volatile memory, destroyed when the program terminates.
+
+=postgresql(Props)=.
+Example: =postgresql([major(9), minor(5), host(Host), port(Port), catalog(bar), schema(foo), table(bar)])=
+** Implementation expressions
+A function may be implemented as a dictionary, a lookup table, a subroutine, or something else.
+** Types
+A value may have several types.
+
+A type describes a set of values.
+
+Name types.
+
+=atom= describes Prolog atoms
+
+=term= describes Prolog terms, which is everything expressible in Prolog
+
+=expression= describes our language expressions
+
+Numeric types.
+
+=natural=
+
+=integer=
+
+=rational=
+
+=real=
+
+Mathematical types.
+
+=singleton(Value)= describes a singleton set that contains only Value
+
+=set(Type)= describes a homogeneous set
+
+=relation(Dom,Cod)=
+
+=function(Dom,Cod)=
+
+=field(Name,Type)= where Name is an atom
+
+=sequence(Types)= where Types is a list of Type
+
+A Record is a sequence of Fields.
+
+=product(Types)= where Types is a list of Type
+
+=union(Types)= where Types is a list of Type
+
+Questionable types.
+
+=identifier(Bit)= is unique only inside the same system instance
+
+=int(Bit)=
+
+=uint(Bit)=
+
+=thing=
+
+=string=
+** Should we adopt Lisp syntax?
+#+BEGIN_EXAMPLE
+(relation natural natural
+  (lambda (x) (choice (+ x 1) (+ x 2))))
+
+(function (1 2) natural ((1 10) (2 20)))
+#+END_EXAMPLE
+* Convenience language
+** Expressions
+=function(Map)= finite function expression, with domain and codomain inferred to be the smallest possible that encompasses the mapping.
+Example: =function([1-a, 2-b, 3-c])=.
+* What
+** Prolog implementation?
+Predicate type(Name,TypeExp) defines types
+** System state
+The system state is essentially a big record/dictionary/tuple/product
+** Model-theoretic principles: implementation, model, specification
+An /implementation/ is a /finite model/ of a /specification/, where "model" means what it means in model theory.
+A /specification/ is a big logical sentence in conjunctive normal form,
+in which each conjunct is a requirement (a property) that the system has to satisfy.
+
+The computer, with some hints, should be able to derive a finite model from a specification.
+
+The primary tools for formalizing an ontology are logic and set theory.
+** Universal meta model? Example upper ontology?
+In other words, we are looking for an upper ontology[fn::https://en.wikipedia.org/wiki/Upper_ontology] of program translation.
+
+"X /is a/ Y" means X is an element of the set Y.
+
+"Every X /has a/ Y" means there is a /projection/ from the set X to the set Y.
+
+Everything has a /type/.
+
+Every /finite thing/ can be represented by finitely many bits.
+
+Every /finite thing/ can be /stored/ in a finite amount of space.
+** Surrogate keys, equality, equivalence, identity
+A /surrogate key/ reduces identity check to equivalence check.
+A surrogate key enables us to concisely answer "which" questions.
+A surrogate key is a unique name.
+We consider two things different iff their identifiers differ.
+
+The only thing we can do to distinguish the identity of abstract objects is to give them /different names/.
+
+A surrogate key conflates equivalence and identity.
+
+Without surrogate keys, there is no way for us to know whether duplicate records represent the same physical object.
+For example, suppose that there happens to be five (john, 30 years old) rows in the database.
+How do we know that all those five rows truly refer to the same person or are merely due to a programming error?
+
+My conclusion is that /every relation that represents concrete objects should have a surrogate key./
+A concrete object is an object that has material existence.
+Examples are people, cars, houses.
+Do bank accounts have material existence?
+No, a bank account is not a concrete object, but we care about the identity of a bank account:
+we care about distinguishing a bank account from another.
+I can open two bank accounts, and we care about that they have different identity.
+Two bank accounts differ merely by having different names (identifiers).
+Even if I equalize their account holders and their balances, they will still have different identifiers.
+
+/Every relation whose identity matters should have a surrogate key./
+When does identity matter?
+
+/If we may need to *refer* to a particular element of a relation, then the relation should have a surrogate key./
+If we need to ask "Delete which element?" or "Update which element?", then the relation should have a surrogate key.
+
+There are two cases: where equality determines identity, and where equality is insufficient to determine identity.
+The first case usually happens when representing concrete objects.
+The second case usually happens when representing of abstract objects.
+
+But are surrogate keys accidental complexity?
+Without surrogate keys, how is an information system going to answer "which customer", "which employee", "which book", etc?
+It is possible that two people have the same name.
+In a developing nation, it is normal for people to have several national IDs.
+
+Two tuples \((a_1,b_1)\) and \((a_2,b_2)\) are equal iff \(a_1=a_2\) and \(b_1=b_2\).
+If the first component is a surrogate key, then we compare only the first component to determine equivalence,
+and we conflate this equivalence with equality.
+
+In programming, we usually assume a closed world, that is, the program is all that exists.
+
+X is a Y.
+
+X has a Y that is a Z.
+
+X is a relation.
+
+All data is relational?
+
+The system state may be /distributed/.
+For example, the system state may be a combination of the Java application state and the PostgreSQL database state.
+But this distribution of state is /accidental/, not essential.
+The specification language must have the same syntax for both updating a local in-memory relation and updating a relation in a remote database.
+** Caching expensive intermediate result?
+How do we do that?
+** A vision?
+HTTP, HTML, JavaScript, AJAX, client-server, and network connections are accidental complexity.
+What is essential is that the user wants to do something quickly.
+The programmer should care about what the user cares about.
+
+URLs are accidental complexity.
+The user does not care about URLs.
+
+The language user should only care about what the end user cares about.
+
+The main task of the language user is to formalize the ontology implied by the mental model of the end user.
+
+strcpy does what we want: it copies strings, but that is not all: it may overwrite a memory region it should not touch.
+** Easy things: generating Java data-transfer-object classes from specification
+** Hard things: generating Java programs from specification
+* Bibliography

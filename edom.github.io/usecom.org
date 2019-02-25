@@ -2377,6 +2377,10 @@ sudo service NetworkManager start
 https://wiki.debian.org/NetworkManager
 ** Automatic install of updates, including security updates, should be disabled
 I want to see it first before it is installed.
+
+#+BEGIN_EXAMPLE
+apt purge unattended-upgrades
+#+END_EXAMPLE
 * Invert screen color
 https://askubuntu.com/questions/181419/how-to-reverse-colors-for-the-current-window-in-gnome-shell
 xcalib -invert -alter

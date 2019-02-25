@@ -88,8 +88,6 @@ Some axioms:
 \end{align*}
 
 \(
-\newcommand\semantics[1]{\langle #1 \rangle}
-\newcommand\bigsemantics[1]{S\left(#1\right)}
 \newcommand\universe{\Omega}
 \)
 ** The abstract syntax and semantics
@@ -371,31 +369,3 @@ Which one should we choose, and why?
 - https://en.wikipedia.org/wiki/Reduction_strategy_(lambda_calculus)
 - https://en.wikipedia.org/wiki/Lambda_calculus#Reduction_strategies
 - https://en.wikipedia.org/wiki/Evaluation_strategy
-
-* How should lambda-calculus be implemented?
-** What is an operational semantics of lambda calculus?
-** How?
-Normal-order reduction enables us to write fixed points.
-Should we let the programmer choose the evaluation strategy?
-Currying simplifies reasoning but complicates implementation (because applications may then nest deeply to the left).
-What is optimal reduction?
- [fn::https://stackoverflow.com/questions/31223539/is-it-possible-to-evaluate-lambda-calculus-terms-efficiently]
- [fn::https://en.wikipedia.org/wiki/Lambda_calculus#Optimal_reduction]
-
-Lambda-calculus is unsound.[fn::https://en.wikipedia.org/wiki/Fixed-point_combinator]
-What does that imply about programming languages containing lambda calculus?
-
-Let \( A[B := C] \) mean \(A\) but with each free occurrence of \(B\) replaced with \(C\).
-Let \( eval(A,B) \) means that \(A\) normalizes to \(B\).
-
-Applicative-order evaluation is the easiest to implement.
-
-Where do these things fit in the big picture of lambda-calculus implementations?
-G-machine, STG, GRIN[fn::https://github.com/grin-tech/grin].
-
-Reading queue:
-- https://stackoverflow.com/questions/31223539/is-it-possible-to-evaluate-lambda-calculus-terms-efficiently
-- https://www.researchgate.net/publication/312462365_About_the_efficient_reduction_of_lambda_terms
-- https://www.reddit.com/r/haskell/comments/2zqtfk/why_isnt_anyone_talking_about_optimal_lambda/
-- compiling monads https://www.irif.fr/~mellies/mpri/mpri-ens/articles/danvy-koslowski-malmkjaer-compiling-monads.pdf
-- modular monadic semantics http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.136.1656&rep=rep1&type=pdf
