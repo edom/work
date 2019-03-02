@@ -16,6 +16,7 @@
 :- reexport('./language_prolog_callgraph.pro').
 :- reexport('./language_prolog_clause.pro').
 :- reexport('./language_prolog_kb.pro').
+:- reexport('./language_prolog_transput.pro').
 :- use_module(library(nb_set)).
 
 /** <module> Prolog meta-interpreter
@@ -27,23 +28,28 @@ There are three kinds of clauses:
     - disjunctive clause =|A ; B|=
     - conjunctive clause =|A , B|=
 
-Predicates for working with knowledge bases:
+Reading knowledge bases:
+    - readfile_kb/2 reads a knowledge base from a file.
+    - readstream_kb/2 reads a knowledge base from a stream.
+    - readstring_kb/2 reads a knowledge base from a string.
+
+Querying knowledge bases:
     - kb_querynaive/2 interprets.
     - kb_query/2 interprets with memoization.
     - kb_rule/3 looks up.
     - kb_head_body/3 looks up.
     - kb_pred_horndnf/3 normalizes.
 
-Transitive closure:
+Computing transitive closure:
     - prolog_transitive_closure/3
     - kb_query_transitive_closure/4
 
-Predicates for computing knowledge base call graph:
+Computing knowledge base call graph:
     - kb_callgraphtc/2 computes the transitive closure of the call graph using library(ugraphs).
     - kb_calledges/3 computes the edge list of the call graph.
     - kb_caller_callee/3 finds direct calls.
 
-Predicates for collecting the outermost phrases of a clause:
+Collecting the outermost phrases of a clause:
     - clause_disjuncts/2 collects the outermost conjuncts.
     - clause_conjuncts/2 collects the outermost disjuncts.
     - conjuncts_clause/2 is the inverse of clause_conjuncts/2.
