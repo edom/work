@@ -1,3 +1,12 @@
+:- module(translation,[
+    generate/0
+]).
+:- use_module('./syntax.pro').
+:- use_module('./type.pro').
+/** <module> Translation from specification to implementation
+
+*/
+
 /*
 We need to generate the auxiliary predicate input/2
 because reading may be recursive and Prolog does not have anonymous recursion.
@@ -10,8 +19,6 @@ makeinputcli(RecType, (input(RecType,'$VAR'('Value')) :- !, ReadFields, '$VAR'('
     makeinput0(Fields,ReadFields,Args).
 makeinputcli(Type, (input(Type,'$VAR'('Value')) :- !, input(Def,'$VAR'('Value')))) :-
     type_definition(Type,Def), \+ Def = #record(_).
-
-    recordtype_fields(Type,Fields) :- type_definition(Type,#record(Fields)).
 
     % Need a more user-friendly prompt.
     makeinput0([Name:Type], (write(Name), nl, input(Type,A)), [A]) :- !.

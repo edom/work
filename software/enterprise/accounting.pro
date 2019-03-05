@@ -2,15 +2,15 @@ type_definition(currency-identifier, #identifier).
 type_definition(currency-name, #string).
 type_definition(currency-symbol, #string).
 type_definition(currency, #record([
-    id : currency-identifier,
-    symbol : currency-symbol,
-    name : #optional(currency-name)
+    id : currency-identifier
+    , symbol : currency-symbol
+    , name : #optional(currency-name)
 ])).
 type_definition(account-identifier, #identifier).
 type_definition(account-name, #string).
 type_definition(account, #record([
-    id : account-identifier,
-    name : account-name
+    id : account-identifier
+    , name : account-name
 ])).
 
 state_definition(bag-account, [type-bag(account)]).
