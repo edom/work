@@ -1,30 +1,17 @@
-:- module(type, [
-    type_definition/2,
-    type_maxbitcount/2,
-    type_maxbytecount/2,
-    type_normalform/2,
-    recordtype/1,
-    recordtype_field/2,
-    recordtype_fields/2,
-    field_name/2,
-    field_type/2,
-    type_natural/1,
-    type_integer/1,
-    type_integer_bit/2,
-    type_identifier/1,
-    type_identifier_bit/2,
-    type_string/1,
-    type_optional/2
-]).
-:- use_module('./syntax.pro').
-/** <module> User-defined type
+/** <module> Specification language
 
-Contents:
+Contents for language user:
     - Type definition
         - type_definition/2
     - Refinement
         - type_maxbitcount/2
         - type_maxbytecount/2
+    - State definition
+        - state/1
+        - state_type/2
+        - state_initializer/2
+
+Contents for language designer:
     - Type reduction
         - type_normalform/2
     - Iterator
@@ -38,7 +25,6 @@ Contents:
         - type_string/1
         - type_optional/2
 */
-
 
 /** type_definition(?TypeName,?Definition) is nondet.
     type_definition(++TypeName,-Definition) is semidet.
@@ -68,6 +54,18 @@ Refinement for implementation.
 */
 :- multifile(type_maxbitcount/2).
 :- multifile(type_maxbytecount/2).
+
+/** state_type(?StateId,?Type) is nondet.
+
+A state generalizes memories, global variables, files, databases.
+
+A state is something that the system remembers.
+
+A state may be either volatile or persistent?
+*/
+:- multifile(state/1).
+:- multifile(state_type/2).
+:- multifile(state_initializer/2).
 
 /** type_normalform(++TypeName,-NormalForm) is semidet.
 

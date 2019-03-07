@@ -13,6 +13,12 @@ type_definition(account, #record([
     , name : account-name
 ])).
 
+state(S) :- state_type(S,_).
+state_type(lastvalue,#string).
+state_initializer(lastvalue,"").
+
+% ------- unused sketch
+
 state_definition(bag-account, [type-bag(account)]).
 
 autocrud(account).
@@ -53,7 +59,7 @@ process_definition(find-Type-by-id, [
     ])
 ]) :- autocrud(Type).
 
-/* implementation details */
+% ------- implementation details
 
 type_maxbitcount(account-identifier, 32).
 type_maxbitcount(currency-identifier, 16).
@@ -63,3 +69,19 @@ type_maxbytecount(account-name, 128).
 
 type_primarykey(currency, [id]).
 type_primarykey(account, [id]).
+
+page_method(home,get).
+page_path(home,'/').
+page_content(home,[
+    let([value = request_parameter(value)],[
+        "The last value was ", state(lastvalue),
+        state(lastvalue) := value
+    ])
+]).
+
+page_method(help,get).
+page_method(help,post).
+page_path(help,'/help').
+page_content(help,[
+    "Help"
+]).
