@@ -1,4 +1,17 @@
+:- module(translation_java_dcg,[
+    class_begin//4
+    , class_end//0
+    , field//4
+    , field//5
+    , statement//1
+    , expression//1
+    , access//1
+    , final//1
+    , static//1
+]).
 /** <module> Unparsing-only definite-clause grammar for Java
+
+This is internal to translation_java.pro.
 
 The DCG is left-recursive, so its naive usage is only possible for unparsing, not parsing.
 
@@ -8,6 +21,7 @@ Known problem: Ugly output.
 The Java compiler does not care about whitespaces.
 But humans care about whitespaces when they check the generated code.
 */
+
 access(public) --> !, "public".
 access(protected) --> !, "protected".
 access(package) --> !, "".

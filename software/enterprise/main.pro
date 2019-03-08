@@ -2,20 +2,67 @@
     main/1
     , run/0
 ]).
-:- use_module('./modules.pro',[load_modules/0]).
+/** <module> Enterprise model/ontology?
+
+*/
+
+% ------- internals
+
+:- use_module('./syntax.pro',[]).
+:- use_module('./modules.pro',[]).
+:- use_module('./ontology_systems.pro',[]).
+:- use_module('./ontology_web_applications.pro',[]).
+:- use_module('./ontology_relational_databases.pro',[]).
+:- use_module('./ontology_java_programs.pro',[]).
+:- use_module('./translation_java.pro',[]).
 %:- use_module('./sql.pro',[]).
 %:- use_module('./translation.pro',[]).
 %:- use_module('./java0.pro',[]).
 
-/** <module> Enterprise model
+load_spec(Module,File) :-
+    print_message(informational,loading_module(Module,File)),
+    Module:use_module('./syntax.pro'),
+    foreach(modules:module_host(ontology_systems,Pred), Module:discontiguous(Pred)),
+    foreach(modules:module_host(ontology_web_applications,Pred), Module:discontiguous(Pred)),
+    foreach(modules:module_host(ontology_relational_databases,Pred), Module:discontiguous(Pred)),
+    Module:consult(File),
+    foreach(modules:module_host(ontology_systems,Pred), link(ontology_systems,Module,Pred)).
 
-See the file spec.pro for usage.
+    link(L,R,Name/Arity) :-
+        functor(Head,Name,Arity),
+        assertz(L:Head :- R:Head).
 
-Notes for the language designer:
-If you change a module name, you may need to update these files:
-    - main_module.pro
-    - main_link_manual.pro
+:- load_spec(spec_accounting,'spec/accounting.pro').
+:- load_spec(spec_employee,'spec/employee.pro').
+
+/** main(++Args)
+
+Entry point.
 */
+main([run]) :- !, run.
+main(Args) :- throw(error(unknown_args(Args),_)).
+
+prolog:error_message(unknown_args(Args)) -->
+    ['unknown command-line arguments ~w'-[Args]].
+
+/** run
+
+This is called by main/1,
+but can also be run directly from the interpreter prompt for testing.
+*/
+run :-
+    translation_java:generate.
+
+:- if(current_prolog_flag(argv,[])).
+:- else.
+    :- initialization(main,main).
+:- endif.
+
+
+
+% Everything below this is deprecated and is no longer used.
+
+
 
 % ------- module and linking -------
 
@@ -24,6 +71,10 @@ modules:module_file(Module,File) :- module(Module,Dic), member(file-File,Dic).
 modules:module_import(Module,Import) :- module(Module,Dic), member(imports-Imports,Dic), member(Import,Imports).
 modules:module_export(Module,Export) :- module(Module,Dic), member(exports-Exports,Dic), member(Export,Exports).
 modules:module_guest(A,B) :- module_guest(A,B).
+modules:module_instantiates_ontology(A,B) :- module_instantiates_ontology(A,B).
+modules:ontology(A) :- ontology(A,_).
+modules:ontology_file(A,B) :- ontology(A,L), member(file-B,L).
+modules:ontology_module(A,B) :- ontology(A,L), member(module-B,L).
 
 :- include('./main_module.pro').
 
@@ -58,8 +109,8 @@ and open =|http://localhost:4001/pldoc/doc/_CWD_/index.html|=.
 */
 link :-
     find_specs,
-    load_modules,
-    consult('./main_link_manual.pro').
+    modules:load_ontologies,
+    modules:load_modules.
 
     find_specs :-
         \+ file_search_path(spec,_), !,
@@ -77,22 +128,3 @@ link :-
     prolog:message(spec_files(Files)) -->
         {length(Files,N)},
         ['Found ~w spec files: ~w'-[N,Files]].
-
-/** main(++Args)
-
-Entry point.
-*/
-main([run]) :- !, run.
-main(Args) :- throw(error(unknown_args(Args),_)).
-
-prolog:error_message(unknown_args(Args)) -->
-    ['unknown command-line arguments ~w'-[Args]].
-
-run :-
-    ensure_linked,
-    translation_java:generate.
-
-:- if(current_prolog_flag(argv,[])).
-:- else.
-    :- initialization(main,main).
-:- endif.

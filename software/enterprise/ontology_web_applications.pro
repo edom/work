@@ -1,7 +1,18 @@
-/** <module> Web application model
+:- module(ontology_web_applications,[
+    state/1
+    , page_method/2
+    , page_path/2
+]).
+/** <module> Ontology for web applications
 
 The computer should derive the web application from the specification.
 */
+
+/** webapp(?AppId) is nondet.
+    webapp_page(?AppId,?PageId) is nondet.
+*/
+:- multifile webapp/1,
+             webapp_page/2.
 
 /** page(?PageId) is nondet.
     page_method(?PageId,?Method) is nondet.

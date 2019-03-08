@@ -1,4 +1,23 @@
-/** <module> Specification language
+:- module(ontology_systems,[
+    type_definition/2
+    , type_maxbitcount/2
+    , type_maxbytecount/2
+    , type_normalform/2
+    , recordtype/1
+    , recordtype_field/2
+    , recordtype_fields/2
+    , field_name/2
+    , field_type/2
+    , type_natural/1
+    , type_integer/1
+    , type_integer_bit/2
+    , type_identifier/1
+    , type_identifier_bit/2
+    , type_string/1
+    , type_optional/2
+]).
+:- use_module('./syntax.pro').
+/** <module> Ontology for systems
 
 Contents for language user:
     - Type definition
@@ -26,6 +45,10 @@ Contents for language designer:
         - type_optional/2
 */
 
+/** system(?SystemId) is nondet.
+    system_type(?SystemId,?TypeId) is nondet.
+*/
+
 /** type_definition(?TypeName,?Definition) is nondet.
     type_definition(++TypeName,-Definition) is semidet.
 
@@ -43,7 +66,7 @@ Definition is a type expression, which is any of these:
 The relation must be a function.
 The same Type must not be defined more than once.
 */
-:- multifile(type_definition/2).
+:- multifile type_definition/2.
 
 /** type_maxbitcount(?TypeName,?MaxBitCount) is nondet.
     type_maxbitcount(++TypeName,-MaxBitCount) is semidet.
@@ -52,8 +75,8 @@ The same Type must not be defined more than once.
 
 Refinement for implementation.
 */
-:- multifile(type_maxbitcount/2).
-:- multifile(type_maxbytecount/2).
+:- multifile type_maxbitcount/2,
+             type_maxbytecount/2.
 
 /** state_type(?StateId,?Type) is nondet.
 
@@ -63,9 +86,9 @@ A state is something that the system remembers.
 
 A state may be either volatile or persistent?
 */
-:- multifile(state/1).
-:- multifile(state_type/2).
-:- multifile(state_initializer/2).
+:- multifile state/1,
+             state_type/2,
+             state_initializer/2.
 
 /** type_normalform(++TypeName,-NormalForm) is semidet.
 

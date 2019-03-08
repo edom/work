@@ -1,13 +1,25 @@
+:- module(translation_java,[
+    generate/0
+]).
+:- use_module('./translation_java_dcg.pro').
+:- use_module('./ontology_systems.pro', [
+    type_integer_bit/2
+    , type_identifier_bit/2
+    , type_string/1
+    , type_optional/2
+    , recordtype/1
+    , recordtype_field/2
+    , field_name/2 as type_field_name
+    , field_type/2 as type_field_type
+]).
+:- use_module('./ontology_web_applications.pro', [
+    state/1
+    , page_method/2
+    , page_path/2
+]).
 /** <module> Translation from specification to Java web application
 
 */
-
-:- multifile
-    recordtype/1
-    , recordtype_field/2
-    , type_field_name/2
-    , type_field_type/2
-    .
 
 :- style_check(-discontiguous).
 
@@ -50,15 +62,6 @@ bool(_,false).
 
 % ------- language-designer stuff
 
-% class-type
-ct(C) :- ct(C,_).
-ct(recordtype-T, T) :- recordtype(T).
-
-% class-type-field
-ctf(C,T,F) :- ct(C,T), recordtype_field(T,F).
-ctf(C,T,F,N) :- ctf(C,T,F), type_field_name(F,N).
-ctf(C,T,F,N,FT) :- ctf(C,T,F,N), type_field_type(F,FT).
-
 get_app_dir(A) :- once_no_fail(app_dir(A)).
 
 ensure_app_dir :-
@@ -72,7 +75,7 @@ prolog:message(mkdir(Path)) -->
 % Default for all classes.
 class(C) :- class_name(C,_).
 class_access(_,public).
-class_final(_).
+class_final(_,true).
 
 class_sourcefilepath(C,Path) :-
     get_app_dir(Dir),
@@ -83,33 +86,106 @@ class_sourcefilepath(C,Path) :-
     append([[Dir,src,main,java],PackageParts,[FileName]],Parts),
     atomics_to_string(Parts,'/',Path).
 
-% ------- translate each record type to a Java entity class
+% XXX
+method_final(_,true).
+method_static(_,false).
+
+% ------- some checking
+
+% We can refactor this check into one line
+% if we use an RDF-triple-like predicate for everything.
+error(missing_property(class,C,name)) :- class(C), \+class_name(C,_).
+error(missing_property(class,C,access)) :- class(C), \+class_access(C,_).
+error(missing_property(class,C,final)) :- class(C), \+class_final(C,_).
+error(missing_property(class,C,packagename)) :- class(C), \+class_packagename(C,_).
+error(missing_property(field,F,name)) :- field(F), \+field_name(F,_).
+error(missing_property(field,F,type)) :- field(F), \+field_type(F,_).
+error(missing_property(method,M,name)) :- method(M), \+method_name(M,_).
+error(missing_property(method,M,returntype)) :- method(M), \+method_returntype(M,_).
+
+check :- \+error(_), !.
+check :- error(E), print_message(error,E), fail.
+
+prolog:error_message(missing_property(Class,Individual,PropName)) -->
+    ["The ~w ~w is missing property ~w"-[Class,Individual,PropName]].
 
 get_package_name(Suffix,Result) :-
     once_no_fail(default_package_name(Base)),
     atomic_list_concat([Base,'.',Suffix],Result).
 
-class_comment(C,generated-from-recordtype-T) :- ct(C,T).
-class_packagename(C,P) :- ct(C), get_package_name(entity,P).
-class_name(C,N) :- ct(C,T), typename_javaclassname(T,N).
-class_constructor(C,C-defcon) :- ct(C).
-    method_access(C-defcon,public) :- ct(C).
-    method_parameter(C-defcon,C-defcon-Name) :- ctf(C,_,_,Name).
-        parameter_name(C-defcon-Name,Name) :- ctf(C,_,_,Name).
-        parameter_type(C-defcon-Name,JType) :- ctf(C,_,_,Name,Type), type_javatype(Type,JType).
-    method_statement(C-defcon,100,assign(this:Name,name(Name))) :- ctf(C,_,_,Name).
+% ------- map types
 
-class_field(C,C-Name) :- ctf(C,_,_,Name).
-    field_access(C-Name,public) :- ctf(C,_,_,Name).
-    field_final(C-Name) :- ctf(C,_,_,Name).
-    field_name(C-Name,Name) :- ctf(C,_,_,Name).
-    field_type(C-Name,Type) :- ctf(C,_,_,Name,FT), type_javatype(FT,Type).
+type_javatype(T,J) :- type_integer_bit(T,N), 0 =< N, N =< 32, !, J = int.
+type_javatype(T,J) :- type_integer_bit(T,N), 32 < N, N =< 64, !, J = long.
+type_javatype(T,J) :- type_identifier_bit(T,N), 0 =< N, N =< 32, !, J = int.
+type_javatype(T,J) :- type_identifier_bit(T,N), 32 < N, N =< 64, !, J = long.
+type_javatype(T,J) :- type_string(T), !, J = 'java.lang.String'.
+type_javatype(T,J) :- type_optional(T,A), !, type_javatype(A,P), javatype_javareftype(P,J).
+type_javatype(T,_) :- throw(error(no_related_java_type_for_type(T),_)).
+
+    javatype_javareftype(boolean,R) :- !, R = 'java.lang.Boolean'.
+    javatype_javareftype(char,R) :- !, R = 'java.lang.Character'.
+    javatype_javareftype(void,R) :- !, R = 'java.lang.Void'.
+    javatype_javareftype(byte,R) :- !, R = 'java.lang.Integer'.
+    javatype_javareftype(short,R) :- !, R = 'java.lang.Short'.
+    javatype_javareftype(int,R) :- !, R = 'java.lang.Integer'.
+    javatype_javareftype(long,R) :- !, R = 'java.lang.Long'.
+    javatype_javareftype(float,R) :- !, R = 'java.lang.Float'.
+    javatype_javareftype(double,R) :- !, R = 'java.lang.Double'.
+    javatype_javareftype(A,A).
+
+type_javaclassname(T,J) :-
+    atom_codes(T,C),
+    capitalize(C,Cap),
+    atom_codes(J,Cap).
+
+    capitalize([H|T],[H0|T]) :- code_type(H0,to_upper(H)).
+    capitalize([],[]).
+
+% ------- translate each record type to a Java entity class
+
+% class-type
+ct(C) :- ct(C,_).
+ct(recordtype-T, T) :- recordtype(T).
+
+% class-type-field
+ctf(C,T,F) :- ct(C,T), recordtype_field(T,F).
+ctf(C,T,F,N) :- ctf(C,T,F), type_field_name(F,N).
+ctf(C,T,F,N,FT) :- ctf(C,T,F,N), type_field_type(F,FT).
+
+recordtype_class(T,C,Package,Name,Comment) :- ct(C,T),
+    get_package_name(entity,Package),
+    type_javaclassname(T,Name),
+    Comment = generated-from-recordtype-T.
+
+    class_comment(C,K) :- recordtype_class(_,C,_,_,K).
+    class_packagename(C,P) :- recordtype_class(_,C,P,_,_).
+    class_name(C,N) :- recordtype_class(_,C,_,N,_).
+    class_constructor(C,C-defcon) :- ct(C).
+        method_access(C-defcon,public) :- ct(C).
+        method_parameter(C-defcon,C-defcon-Name) :- ctf(C,_,_,Name).
+            parameter_name(C-defcon-Name,Name) :- ctf(C,_,_,Name).
+            parameter_type(C-defcon-Name,JType) :- ctf(C,_,_,Name,Type), type_javatype(Type,JType).
+        method_statement(C-defcon,100,assign(this:Name,name(Name))) :- ctf(C,_,_,Name).
+
+recordtype_field(T,C,JF,Name,JType) :-
+    JF = C-Name,
+    ctf(C,T,_,Name,FT),
+    type_javatype(FT,JType).
+
+    class_field(C,F) :- recordtype_field(_,C,F,_,_).
+        field(F) :- recordtype_field(_,_,F,_,_).
+        field_name(F,Name) :- recordtype_field(_,_,F,Name,_).
+        field_type(F,Type) :- recordtype_field(_,_,F,_,Type).
+        field_access(F,public) :- recordtype_field(_,_,F,_,_).
+        field_final(F,true) :- recordtype_field(_,_,F,_,_).
 
 % ------- translate each web application state to Java field in the State class
 
 class_name(state,'State').
 class_packagename(state,P) :- get_package_name(app,P).
 class_field(state,state-Name) :- state(Name).
+    field(state-Name) :- state(Name).
     field_name(state-Name,Name) :- state(Name).
     field_type(state-Name,JT) :- state_type(Name,T), type_javatype(T,JT).
     field_access(state-Name,public) :- state(Name).
@@ -120,6 +196,7 @@ class_field(state,state-Name) :- state(Name).
 class_name(pages,'Pages').
 class_packagename(pages,P) :- get_package_name(app,P).
 class_method(pages,pages-Page-Method) :- page_method(Page,Method).
+    method(pages-Page-Method) :- page_method(Page,Method).
     method_name(pages-Page-Method,Name) :- atomic_list_concat([Method,'_',Page],Name).
     method_returntype(pages-Page-Method,void) :- method_name(pages-Page-Method,_).
     method_access(pages-Page-Method,public) :- method_name(pages-Page-Method,_).
@@ -129,6 +206,7 @@ class_method(pages,pages-Page-Method) :- page_method(Page,Method).
 class_name(router,'Router').
 class_packagename(router,P) :- get_package_name(app,P).
 class_method(router,router-dispatch).
+    method(router-dispatch).
     method_name(router-dispatch,dispatch).
     method_returntype(router-dispatch,void).
     method_access(router-dispatch,public).
@@ -147,13 +225,11 @@ class_method(router,router-dispatch).
 % ------- write using translation_java_dcg
 
 generate :-
+    check,
     ensure_app_dir,
-    generate_class(_), fail.
-
-generate.
+    foreach(class(C), generate_class(C)).
 
 generate_class(Class) :-
-    class(Class),
     once_no_fail(class_packagename(Class,Package)),
     once_no_fail(class_name(Class,Name)),
     once_no_fail(class_access(Class,Access)),
@@ -165,8 +241,6 @@ generate_class(Class) :-
     foreach(class_constructor(Class,Ctor), write_constructor(Ctor)),
     foreach(class_method(Class,Method), write_method(Method)),
     write_phrase(class_end).
-
-    class_final(C,F) :- bool(class_final(C),F).
 
     write_phrase(P) :-
         once(phrase(P,Codes)),
@@ -199,8 +273,8 @@ generate_class(Class) :-
         once_no_fail(method_access(M,Access)),
         once_no_fail(method_name(M,Name)),
         once_no_fail(method_returntype(M,Ret)),
-        bool(method_static(M),Static),
-        bool(method_final(M),Final),
+        once_no_fail(method_static(M,Static)),
+        once_no_fail(method_final(M,Final)),
         write("    "),
         write_phrase(access(Access)), write(" "),
         write_phrase(static(Static)), write(" "),
