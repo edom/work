@@ -7,3 +7,5 @@ type_definition(employee, #record([
 
 type_maxbitcount(employee-id,64).
 type_maxbytecount(employee-name,128).
+
+webapp(employee).

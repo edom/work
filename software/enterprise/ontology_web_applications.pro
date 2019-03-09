@@ -1,5 +1,10 @@
 :- module(ontology_web_applications,[
-    state/1
+    webapp/1
+    , webapp_page/2
+    , webapp_state/2
+    , state/1
+    , state_type/2
+    , state_initializer/2
     , page_method/2
     , page_path/2
 ]).
@@ -12,7 +17,8 @@ The computer should derive the web application from the specification.
     webapp_page(?AppId,?PageId) is nondet.
 */
 :- multifile webapp/1,
-             webapp_page/2.
+             webapp_page/2,
+             webapp_state/2.
 
 /** page(?PageId) is nondet.
     page_method(?PageId,?Method) is nondet.
