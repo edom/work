@@ -68,28 +68,36 @@ type_primarykey(account, [id]).
 
 % ------- web application
 
-webapp(accounting).
-webapp_page(accounting,P) :- page_path(P,_).
-webapp_state(accounting,accounting-S) :- state(accounting-S).
+state(S) :- state_type(S,_).
+state_name(S, S) :- state(S).
+state_type(lastvalue, #string).
+state_initializer(lastvalue, some("")).
 
-state(accounting-S) :- state_type(accounting-S,_).
-state_type(accounting-lastvalue,#string).
-state_initializer(accounting-lastvalue,"").
+/** page(?PageId,?Name,?HttpMethod,?Path,?PageOpts,?Content) is nondet.
 
-% page(accounting-home, get, '/', [], "Hello").
-
-page_method(accounting-home,get).
-page_path(accounting-home,'/').
-page_content(accounting-home,[
+A convenience predicate for specifying pages.
+*/
+page(get-home, home, 'GET', '/', [], [
     let([value = request_parameter(value)],[
-        "The last value was ", state(accounting-lastvalue),
+        "The last value was ", state(lastvalue),
         state(lastvalue) := value
     ])
 ]).
 
-page_method(accounting-help,get).
-page_method(accounting-help,post).
-page_path(accounting-help,'/help').
-page_content(accounting-help,[
+page(get-help, help, 'GET', '/help', [], [
     "Help"
 ]).
+
+page(post-help, help, 'POST', '/help', [], [
+    "Help (POST)"
+]).
+
+% ------- wiring
+
+page(P) :- page(P,_,_,_,_,_).
+page_name(P,N) :- page(P,N,_,_,_,_).
+page_method(P,M) :- page(P,_,M,_,_,_).
+page_path(P,A) :- page(P,_,_,A,_,_).
+page_options(P,A) :- page(P,_,_,_,A,_).
+page_content(P,C) :- page(P,_,_,_,_,C).
+page_option(P,A) :- page_options(P,L), member(A,L).

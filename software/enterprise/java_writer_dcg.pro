@@ -1,5 +1,5 @@
-:- module(ontology_java_programs_write_dcg,[
-    class_begin//4
+:- module(java_writer_dcg,[
+    class_begin//6
     , class_end//0
     , field//6
     , statement//1
@@ -7,10 +7,13 @@
     , access//1
     , final//1
     , static//1
+    , type//1
+    , name//1
+    , throws//1
 ]).
 /** <module> Unparsing-only definite-clause grammar for Java
 
-This is internal to translation_java.pro.
+This is internal to java_program_from_web_app.pro.
 
 The DCG is left-recursive, so its naive usage is only possible for unparsing, not parsing.
 
@@ -35,13 +38,33 @@ static(true) --> !, "static ".
 static(false) --> !, "".
 static(A) --> {domain_error(boolean,A)}.
 
-type(A) --> {must_be(atom,A), atom_codes(A,C)}, C.
+type(A) --> {\+ground(A), !, instantiation_error(A)}.
+type(array(A)) --> !, type(A), "[]".
+type(A) --> {atom(A), !, atom_codes(A,C)}, C.
+type(A) --> {domain_error(java_type,A)}.
+
 name(A) --> {must_be(atom,A), atom_codes(A,C)}, C.
 
-class_begin(Package,Name,Access,Final) -->
+throws([]) --> !, "".
+throws(A) --> !, "throws ", types(A).
+
+types([]) --> !, "".
+types([A]) --> !, type(A).
+types([A|B]) --> !, type(A), ", ", types(B).
+
+class_begin(Package,Name,Access,Final,OptSuperClassType,IfaceTypeList) -->
     {atom_codes(Package,CP), atom_codes(Name,CN)},
     "package ", CP, ";\n\n",
-    access(Access), final(Final), "class ", CN, " {\n".
+    access(Access), final(Final), "class ", CN,
+    extends(OptSuperClassType),
+    implements(IfaceTypeList),
+    " {\n".
+
+extends(none) --> !, "".
+extends(some(T)) --> !, " extends ", type(T).
+
+implements([]) --> !, "".
+implements(A) --> !, " implements ", types(A).
 
 class_end --> "}\n".
 
@@ -69,36 +92,46 @@ statement(return) --> !, "return;".
 statement(E) --> indent(8), stmexp(E), !, ";\n".
 statement(S) --> {domain_error(java_statement,S)}.
 
+stmexp(call(T,Name,Args)) --> !, methodcall(T,Name,Args).
+stmexp(new(T,A)) --> !, "new ", type(T), arglist(A).
 stmexp(assign(L,R)) --> !, expression(L), " = ", expression(R).
-stmexp(T:M) --> !, {M =.. [Name|Args]}, methodcall(T,Name,Args).
 
 % TODO avoid unnecessary parenthesization
 exp_order(S,0) :- string(S).
 exp_order(null,0).
 exp_order(this,0).
 exp_order(name(_),0).
-exp_order(_:_,100).
-exp_order(_ == _,500).
+exp_order(call(_,_,_),100).
+exp_order(equal(_,_),500).
 exp_order(assign(_,_),1000).
 
 expression(S) --> {string(S), !, string_codes(S,C), escape(C,E)}, [0'"], E, [0'"].
-expression(field(T,F)) --> !, fieldaccess(T,F).
-expression(A == B) --> !, "(", expression(A), " == ", expression(B), ")".
-expression(name(N)) --> !, name(N).
 expression(this) --> !, "this".
 expression(null) --> !, "null".
-expression(E) --> "(", stmexp(E), !, ")".
+expression(class(A)) --> !, type(A), ".class".
+expression(int(A)) --> !, {number_codes(A,C)}, C.
+expression(name(N)) --> !, name(N).
+expression(not(A)) --> !, "!(", expression(A), ")".
+expression(field(T,F)) --> !, fieldaccess(T,F).
+expression(equal(A,B)) --> !, binop("==",A,B).
+expression(and(A,B)) --> !, binop("&&",A,B).
+expression(or(A,B)) --> !, binop("||",A,B).
+expression(E) --> stmexp(E), !.
 expression(E) --> {domain_error(java_expression,E)}.
+
+    binop(Op,A,B) --> "(", expression(A), ") ", Op, " (", expression(B), ")".
 
     fieldaccess(this,N) --> !, "this.", name(N).
     fieldaccess(O,N) --> !, "(", expression(O), ").", name(N).
 
-    methodcall(name(T),Name,Args) --> !, name(T), ".", name(Name), "(", arglist(Args), ")".
-    methodcall(T,Name,Args) --> "(", expression(T), ").", name(Name), "(", arglist(Args), ")".
+    methodcall(name(T),Name,Args) --> !, name(T), ".", name(Name), arglist(Args).
+    methodcall(T,Name,Args) --> "(", expression(T), ").", name(Name), arglist(Args).
 
-    arglist([]) --> "".
-    arglist([A]) --> expression(A).
-    arglist([A|B]) --> expression(A), ", ", arglist(B).
+    arglist(A) --> "(", arglist_inner(A), ")".
+
+    arglist_inner([]) --> "".
+    arglist_inner([A]) --> expression(A).
+    arglist_inner([A|B]) --> expression(A), ", ", arglist_inner(B).
 
     escape([],[]) :- !.
     escape([0'"|T],[0'\\,0'"|T0]) :- !, escape(T,T0).

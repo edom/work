@@ -1,4 +1,4 @@
-:- module(ontology_systems,[
+:- module(ontology_system,[
     type_definition/2
     , type_maxbitcount/2
     , type_maxbytecount/2
@@ -17,7 +17,7 @@
     , type_optional/2
 ]).
 :- use_module('./syntax.pro').
-/** <module> Ontology for systems
+/** <module> Ontology for a system
 
 Contents for language user:
     - Type definition
@@ -43,10 +43,6 @@ Contents for language designer:
         - type_identifier/1, type_identifier_bit/2
         - type_string/1
         - type_optional/2
-*/
-
-/** system(?SystemId) is nondet.
-    system_type(?SystemId,?TypeId) is nondet.
 */
 
 /** type_definition(?TypeName,?Definition) is nondet.

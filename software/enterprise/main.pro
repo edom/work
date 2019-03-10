@@ -6,64 +6,55 @@
 
 */
 
-% ------- internals
-
 :- use_module('./syntax.pro',[]).
 :- use_module('./modules.pro',[]).
-:- use_module('./ontology_systems.pro',[]).
-:- use_module('./ontology_web_applications.pro',[]).
-:- use_module('./ontology_relational_databases.pro',[]).
-:- use_module('./ontology_java_programs.pro',[]).
-:- use_module('./ontology_java_programs_write.pro',[]).
-:- use_module('./translation_java.pro',[]).
-%:- use_module('./sql.pro',[]).
-%:- use_module('./translation.pro',[]).
-%:- use_module('./java0.pro',[]).
+:- use_module('./main_library.pro',[
+    load_spec/2
+    , subsume/2
+    , subsume/3
+]).
 
-% ------- configuration
+% ------- instantiate module
 
-translation_java:default_package_name('com.spacetimecat.java').
-ontology_java_programs_write:output_dir("out").
-ontology_java_programs_write:dry_run(true).
+/** load_module_from_file(+Module,+File) is det.
 
-% ------- internal links
+The same file can be loaded into different modules.
+*/
+load_module_from_file(Module,File) :-
+    Module:load_files(File, [module(Module),register(false)]).
 
-subsume(L,R) :-
-    foreach(modules:module_host(L,Pred), subsume(L,R,Pred)).
+% ------- wiring
 
-subsume(L,R,Name/Arity) :-
-    functor(Head,Name,Arity),
-    (predicate_property(R:Head,defined)
-    ->  assertz(L:Head :- R:Head)
-    ;   print_message(warning, undefined_predicate(R:Name/Arity))
-    ).
+:- load_spec(accounting_spec,'spec/accounting.pro').
+:- load_module_from_file(accounting_system,'./ontology_system.pro').
+:- subsume(accounting_system,accounting_spec).
 
-prolog:message(undefined_predicate(P)) -->
-    ["Undefined predicate ~w"-[P]].
+:- load_module_from_file(accounting_web_app,'./ontology_web_application.pro').
+:- subsume(accounting_web_app,accounting_spec).
 
-translation_java:recordtype_field(T,F,FN,FT) :-
-    ontology_systems:recordtype_field(T,F),
-    ontology_systems:field_name(F,FN),
-    ontology_systems:field_type(F,FT).
+:- load_module_from_file(accounting_translation,'./java_program_from_web_app.pro').
+:- subsume(accounting_translation,accounting_spec).
+:- accounting_translation:import(accounting_system:type_integer_bit/2).
+:- accounting_translation:import(accounting_system:type_identifier_bit/2).
+:- accounting_translation:import(accounting_system:type_string/1).
+:- accounting_translation:import(accounting_system:type_optional/2).
+:- accounting_translation:import(accounting_system:recordtype/1).
+accounting_translation:recordtype_field(T,F,FN,FT) :-
+    accounting_system:recordtype_field(T,F),
+    accounting_system:field_name(F,FN),
+    accounting_system:field_type(F,FT).
+accounting_translation:default_package_name("com.spacetimecat.java").
 
-:- subsume(translation_java, ontology_web_applications).
-:- subsume(ontology_java_programs, translation_java).
+:- load_module_from_file(accounting_java_program,'./ontology_java_program.pro').
+:- subsume(accounting_java_program,accounting_translation).
+accounting_java_program:maven_coordinates('com.spacetimecat.java',accounting,'0.0.0').
 
-% ------- load specs
+:- load_module_from_file(accounting_java_writer,'./java_writer.pro').
+:- add_import_module(accounting_java_writer,accounting_java_program,end).
+accounting_java_writer:output_dir("out").
+accounting_java_writer:dry_run(false).
 
-load_spec(Module,File) :-
-    print_message(informational,loading_module(Module,File)),
-    Module:use_module('./syntax.pro'),
-    foreach(modules:module_host(ontology_systems,Pred), Module:discontiguous(Pred)),
-    foreach(modules:module_host(ontology_web_applications,Pred), Module:discontiguous(Pred)),
-    foreach(modules:module_host(ontology_relational_databases,Pred), Module:discontiguous(Pred)),
-    Module:consult(File),
-    subsume(ontology_systems,Module),
-    subsume(ontology_web_applications,Module),
-    subsume(ontology_relational_databases,Module).
-
-:- load_spec(spec_accounting,'spec/accounting.pro').
-:- load_spec(spec_employee,'spec/employee.pro').
+%:- load_spec(employee_spec,'spec/employee.pro').
 
 /** main(++Args)
 
@@ -81,8 +72,8 @@ This is called by main/1,
 but can also be run directly from the interpreter prompt for testing.
 */
 run :-
-    ontology_java_programs:check_ontology,
-    ontology_java_programs_write:generate.
+    accounting_java_program:check_ontology,
+    accounting_java_writer:generate.
 
 :- if(current_prolog_flag(argv,[])).
 :- else.

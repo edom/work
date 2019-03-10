@@ -1,13 +1,15 @@
-:- module(ontology_java_programs,[
-    program/1
-    , program_class/2
-    , program_maven_coordinates/4
+:- module(ontology_java_program,[
+    maven_coordinates/3
 
     , element_access/2
     , element_final/2
     , element_static/2
+    , element_annotation/3
 
     , class/1
+    , class_extend/2
+    , class_implement/2
+    , class_implements/2
     , class_constructor/2
     , class_field/2
     , class_method/2
@@ -18,19 +20,23 @@
     , field_name/2
     , field_type/2
 
+    , callable_parameter/3
+    , callable_statement/3
+    , callable_throw/2
+    , callable_throws/2
+    , constructor/1
+    , method/1
     , method_name/2
-    , method_parameter/2
     , method_return_type/2
-    , method_statement/3
 
     , parameter_name/2
     , parameter_type/2
 
     , check_ontology/0
 ]).
-/** <module> Ontology for Java programs
+/** <module> Ontology for a Java program
 
-An instance of this ontology describes Java programs.
+An instance of this ontology describes a Java program.
 
 A Java program is what can be run in one JVM process.
 
@@ -40,18 +46,14 @@ A Java program is a set of Java classes.
 A Java class is a text file, not a JVM class.
 */
 
-/** program(?ProgId) is nondet.
-    program_class(?ProgId,?ClassId) is nondet.
-    program_maven_coordinates(?ProgId,?GroupId,?ArtifactId,?Version) is nondet.
+/** maven_coordinates(?GroupId,?ArtifactId,?Version) is nondet.
 
 Version is an atom.
 Version should have three components.
 Each component should be a number.
 Example Version: '1.23.456'.
 */
-:- multifile program/1,
-             program_class/2,
-             program_maven_coordinates/4.
+:- multifile maven_coordinates/3.
 
 /** access(?Access) is nondet.
 
@@ -62,17 +64,10 @@ access(protected).
 access(package).
 access(private).
 
-/** element_linecomment(?ElemId,?LineCommentText) is nondet.
-    element_annotation(?ElemId,?AnnId) is nondet.
-    element_access(+ElemId,-Access) is semidet.
+/** element_access(+ElemId,-Access) is semidet.
     element_static(+ElemId,-Static) is semidet.
     element_final(+ElemId,-Final) is semidet.
-    annotation(?AnnId) is nondet.
-    annotation_type(?AnnId,?JavaType) is nondet.
-    annotation_argument(?AnnId,?Order,?ParamName,?ArgValue) is nondet.
-    method_isconstructor(?MethodId) is nondet.
-
-TODO implement these, rewrite old code
+    element_annotation(?ElemId,?AnnType,?AnnArgs) is nondet.
 
 Access is as defined in access/1.
 
@@ -85,9 +80,13 @@ Static is either true or false.
 */
 :- multifile element_access/2,
              element_final/2,
-             element_static/2.
+             element_static/2,
+             element_annotation/3.
 
 /** class(?ClassId) is nondet.
+    class_extend(?ClassId,?OptSuperClassType) is nondet.
+    class_implement(?ClassId,?IfaceType) is nondet.
+    class_implements(?ClassId,?IfaceTypeList) is nondet.
     class_package_name(?ClassId,?PackageName) is nondet.
     class_name(?ClassId,?ClassName) is nondet.
     class_constructor(?ClassId,?CtorId) is nondet.
@@ -100,7 +99,10 @@ The first parameter of these relations is the primary key.
 ClassName is the simple name of the class,
 the name without the package name.
 */
-:- multifile(class/1).
+:- multifile class/1,
+             class_extend/2,
+             class_implement/2,
+             class_implements/2.
 :- multifile(class_package_name/2).
 :- multifile(class_name/2).
 :- multifile(class_constructor/2).
@@ -121,17 +123,25 @@ the name without the package name.
 
 /** method_name(?MethodId,?MethodName) is nondet.
     method_return_type(?MethodId,?JavaType) is nondet.
-    method_parameter(?MethodId,?ParamId) is nondet.
-    method_statement(?MethodId,?Order,?StmtAst) is nondet.
+    callable_parameter(?MethodId,?Order,?ParamId) is nondet.
+    callable_statement(?MethodId,?Order,?StmtAst) is nondet.
+    callable_throw(?MethodId,?Throwable) is nondet.
 
 Order is a natural number.
+
+Throwable is an atom representing a Java type.
+
+A constructor is not a method, but each of them is a _callable_.
 */
 
-:- multifile method/1,
+:- multifile constructor/1,
+             method/1,
              method_name/2,
              method_return_type/2,
-             method_parameter/2,
-             method_statement/3.
+             callable_parameter/3,
+             callable_statement/3,
+             callable_throw/2,
+             callable_throws/2.
 
 /** parameter_name(?ParamId,?ParamName) is nondet.
     parameter_type(?ParamId,?JavaType) is nondet.
@@ -140,11 +150,6 @@ Method parameter.
 */
 :- multifile(parameter_name/2).
 :- multifile(parameter_type/2).
-
-method_body(C,_) :- \+ground(C), instantiation_error(C).
-method_body(C,B) :-
-    % TODO Order the statements according to statement_mustprecede/2
-    findall(Ast, (method_statement(C,Id), statement_ast(Id,Ast)), B).
 
 % ------- some checking
 
