@@ -13,7 +13,7 @@
 */
 
 /** state_name(?StateId,?Name) is nondet.
-    state_initializer(?StateId,?OptInit) is nondet.
+    state_initializer(?StateId,?Init) is nondet.
 
 Name is for field/variable names.
 */

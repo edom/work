@@ -12,6 +12,7 @@
     load_spec/2
     , subsume/2
     , subsume/3
+    , connect_plug_to_socket/2
 ]).
 
 % ------- instantiate module

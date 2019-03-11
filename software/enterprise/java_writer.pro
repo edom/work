@@ -3,7 +3,9 @@
     once_no_fail/1
     , parts_path/2
     , statement_normalize/2
+    , expression_normalize/2
     , check_statement/1
+    , check_expression/1
 ]).
 :- use_module('./my_sgml_write.pro',[
     write_myxml/1
@@ -68,9 +70,15 @@ generate :-
 maven_dependency(G,A,V) :-
     JettyVersion = '9.4.9.v20180320',
     member(G-A-V,[
+        % HTTP server
         'org.eclipse.jetty'-'jetty-server'-JettyVersion
         , 'org.eclipse.jetty'-'jetty-servlet'-JettyVersion
         , 'javax.servlet'-'javax.servlet-api'-'3.1.0'
+        % JDBC
+        , 'com.zaxxer'-'HikariCP'-'3.3.1'
+        , 'org.postgresql'-'postgresql'-'42.2.5'
+        % logging
+        , 'ch.qos.logback'-'logback-classic'-'1.2.3'
     ]).
 
 maven_dependency(G,A,V,compile) :- maven_dependency(G,A,V).
@@ -173,7 +181,7 @@ generate_class(Class) :-
 % ------- writing
 
 write_phrase(P) :-
-    once(phrase(P,Codes)),
+    once_no_fail(phrase(P,Codes)),
     string_codes(Str,Codes),
     write(Str).
 
@@ -190,8 +198,13 @@ write_field(Field) :-
     once_no_fail(element_final(Field,Final)),
     once_no_fail(field_name(Field,Name)),
     once_no_fail(field_type(Field,Type)),
-    once_no_fail(field_initializer(Field,Init)),
+    once_no_fail(field_initializer_n(Field,Init)),
     write_phrase(java_writer_dcg:field(Name,Type,Access,Static,Final,Init)).
+
+    field_initializer_n(Field,none) :- field_initializer(Field,none), !.
+    field_initializer_n(Field,some(Init)) :- field_initializer(Field,some(E)), !,
+        expression_normalize(E,Init),
+        check_expression(Init).
 
 write_executable(E) :-
     once_no_fail(element_access(E,Access)),
@@ -214,15 +227,9 @@ write_executable(E) :-
     ),
     write(Name), write(" "),
     write_callable_parameters(E),
-    callable_parameter_count(E,ParamCount),
-    (ParamCount = 1 -> write("\n    ") ; write(" ")),
     write_phrase(java_writer_dcg:throws(Throws)),
     write(" "),
     write_callable_body(E).
-
-callable_parameter_count(C,N) :-
-    findall(P, callable_parameter(E,_,P), Ps),
-    length(Ps,N).
 
 write_callable_parameters(E) :-
     write("("),
@@ -259,6 +266,6 @@ write_callable_body(E) :-
     write("    }\n").
 
 write_statement(S) :-
-    statement_normalize(S,S0),
-    check_statement(S0),
+    once_no_fail(statement_normalize(S,S0)),
+    once_no_fail(check_statement(S0)),
     write_phrase(java_writer_dcg:statement(S0)).

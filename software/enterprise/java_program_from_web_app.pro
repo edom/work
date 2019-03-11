@@ -36,6 +36,13 @@ Imports.
              state_name/2,
              state_type/2,
              state_initializer/2,
+             database/1,
+             database_name/2,
+             database_host/2,
+             database_port/2,
+             database_catalog/2,
+             database_username/2,
+             database_password/2,
              page_name/2,
              page_method/2,
              page_path/2.
@@ -68,6 +75,17 @@ method(A) :- java_class_method(_,A,_,_,_,_).
 method_name(A,B) :- java_class_method(_,A,_,B,_,_).
 method_return_type(A,B) :- java_class_method(_,A,B,_,_,_).
 
+/** callable_parameter(?CallableId,?Order,?ParamId,?ParamType,?ParamName,?ParamOpts)
+
+callable_parameter/6 is the most convenient way to specify a parameter.
+*/
+
+:- discontiguous callable_parameter/6.
+
+parameter_name(Param,Name) :- callable_parameter(_,_,Param,_,Name,_).
+parameter_type(Param,Type) :- callable_parameter(_,_,Param,Type,_,_).
+
+% callable_parameter/5 is deprecated; use callable_parameter/6 instead
 callable_parameter(Method,N,Method-N,Type,Name) :-
     java_class_method(_,Method,_,_,Params,_),
     nth1(I,Params,[Type,Name|_]),
@@ -78,10 +96,10 @@ callable_parameter(Ctor,N,Ctor-N,Type,Name) :-
     nth1(I,Params,[Type,Name|_]),
     N is 100*I.
 
-:- discontiguous callable_parameter/3,
-                 parameter_name/2,
+:- discontiguous parameter_name/2,
                  parameter_type/2.
 callable_parameter(C,N,P) :- callable_parameter(C,N,P,_,_).
+callable_parameter(C,N,P) :- callable_parameter(C,N,P,_,_,_).
 parameter_type(Param,Type) :- callable_parameter(_,_,Param,Type,_).
 parameter_name(Param,Name) :- callable_parameter(_,_,Param,_,Name).
 
@@ -89,7 +107,18 @@ callable_options(Id,Opts) :- java_class_constructor(_,Id,_,Opts).
 callable_options(Id,Opts) :- java_class_method(_,Id,_,_,_,Opts).
 
 % callable_statement/3 is discontiguous so that we can insert aspects.
+
+/** callable_statements(?CallableId,?BaseOrder,?Statements) is nondet.
+
+callable_statements/3 is the most convenient way to declare callable statements.
+*/
+:- discontiguous callable_statements/3.
+
 :- discontiguous callable_statement/3.
+callable_statement(Callable,Order,Stmt) :-
+    callable_statements(Callable,BaseOrder,Stmts),
+    nth0(N,Stmts,Stmt),
+    Order is BaseOrder + N.
 callable_statement(Callable,Order,Stmt) :-
     callable_options(Callable,Opts),
     member(body-Stmts,Opts),
@@ -148,11 +177,11 @@ Each element of Params is again a list `[Type,Name|Opts]`.
 MethodOpts may contain:
     - one `body`-L where L is a list of statements.
 
-There are two ways to specify method body:
+There are three ways to specify method body (do not mix):
+    - Recommended: Using the convenience predicate callable_statements/3
     - Specifying `body-L` option in MethodOpts
-    - Asserting callable_statement/3
+    - Asserting callable_statement/3 directly
 
-Do not mix those two ways.
 */
 :- discontiguous java_class/4,
                  java_class_constructor/4,
@@ -200,55 +229,91 @@ ctf(C,T,F,FN,FT) :- ct(C,T), recordtype_field(T,F,FN,FT).
 ctf(C,T,F,FN) :- ctf(C,T,F,FN,_).
 ctf(C,T,F) :- ctf(C,T,F,_).
 
-java_class(C,Package,Name,[final,comment-(generated-from-recordtype-T)]) :-
+java_class(entity-C,Package,Name,[final,comment-(generated-from-recordtype-T)]) :-
     ct(C,T),
     compute_package(entity,Package),
     type_javaclassname(T,Name).
 
-    java_class_constructor(C,C-defcon,[],[public]) :- ct(C).
+    java_class_constructor(entity-C,entity-C-ctor,[],[public]) :- ct(C).
         % XXX ordering
-        callable_parameter(C-defcon,100,C-defcon-Name) :- ctf(C,_,_,Name).
-            parameter_name(C-defcon-Name,Name) :- ctf(C,_,_,Name).
-            parameter_type(C-defcon-Name,JType) :- ctf(C,_,_,Name,Type), type_javatype(Type,JType).
-        callable_statement(C-defcon, 100, field(this,Name) := name(Name)) :- ctf(C,_,_,Name).
+        callable_parameter(entity-C-ctor,100,entity-C-ctor-param-Name,JType,Name,[]) :-
+            ctf(C,_,_,Name,Type), type_javatype(Type,JType).
+        callable_statement(entity-C-ctor, 100, field(this,Name) := name(Name)) :- ctf(C,_,_,Name).
 
-java_class_field(C,C-Name,JT,Name,[final]) :-
+java_class_field(entity-C,entity-C-field-Name,JT,Name,[final]) :-
     ctf(C,_,_,Name,FT),
     type_javatype(FT,JT).
 
-% ------- translate each web application state to Java field in the State class
+% ------- State class generation
+
+% Each web application state begets a Java field in the State class.
 
 java_class(state,Package,'State',[final]) :-
     compute_package(app,Package).
 
-java_class_field(state,state-StateId,JT,JName,Init) :-
+java_class_field(state,state-StateId,JT,JName,Opts) :-
     state(StateId),
     once_no_fail(state_type(StateId,T)),
     once_no_fail(state_name(StateId,Name)),
-    once_no_fail(state_initializer(StateId,OptInit)),
+    once_no_fail(state_initializer(StateId,Init)),
     name_jname(Name,JName),
     type_javatype(T,JT),
-    fold_optional(OptInit, [], X->[initializer-X], Init).
+    Opts = [initializer-Init].
 
-    fold_optional(none, D, _, Z) :- !, D = Z.
-    fold_optional(some(A), _, P->B, Z) :- !, A = P, B = Z.
-    fold_optional(A,_,_,_) :- domain_error(optional,A).
+% Each database begets a DataSource field in the State class.
 
-% ------- generate main class
+java_class_field(state,state-D,'javax.sql.DataSource',FieldName,[final]) :-
+    database_name(D,N),
+    atomic_list_concat([database_,N],FieldName).
+
+java_class_constructor(state,state-ctor,[],[]).
+    callable_parameter(state-ctor, 100, state-ctor-database-D,
+        'javax.sql.DataSource', ParamName, []
+    ) :-
+        java_database_field_name(D,ParamName).
+    callable_statement(state-ctor,100,field(this,F) := $F) :-
+        java_database_field_name(_,F).
+
+java_database_field_name(D,FieldName) :-
+    database_name(D,Name),
+    atomic_list_concat([database_,Name],FieldName).
+
+% ------- main class generation
 
 java_class(main,Package,'Main',[final]) :-
     compute_package(app,Package).
 
     java_class_method(main, main-main,
         void, main, [[array('java.lang.String'),args]],
-        [public, static, body-Body, throws-['java.lang.Exception']]
-    ) :-
-        once_no_fail(java_class_type(state, TState)),
-        once_no_fail(java_class_type(pages, TPages)),
-        once_no_fail(java_class_type(router, TRouter)),
-        Body = [
+        [public, static, throws-['java.lang.Exception']]
+    ).
+        % Logger.
+        callable_statements(main-main, 100, [
+            let(_, logger, cast('ch.qos.logback.classic.Logger',
+                $'org.slf4j.LoggerFactory':getLogger($'org.slf4j.Logger.ROOT_LOGGER_NAME')
+            ))
+            , $logger:setLevel($'ch.qos.logback.classic.Level.INFO')
+        ]).
+        % Databases.
+        callable_statements(main-main, 200, [
+            let(_, Var, new('com.zaxxer.hikari.HikariDataSource'))
+            , $Var:setJdbcUrl(JdbcUrl)
+            , $Var:setUsername(Username)
+            , $Var:setPassword(Password)
+        ]) :-
+            java_database_field_name(D,Var),
+            once_no_fail(database_host(D,Host)),
+            once_no_fail(database_port(D,Port)),
+            once_no_fail(database_catalog(D,Catalog)),
+            once_no_fail(database_username(D,AUsername)),
+            once_no_fail(database_password(D,APassword)),
+            atom_string(AUsername,Username),
+            atom_string(APassword,Password),
+            stringies_concat(["jdbc:postgresql://",Host,":",Port,"/",Catalog], JdbcUrl).
+        % Servlet.
+        callable_statements(main-main, 300, [
             % https://www.eclipse.org/jetty/documentation/9.4.x/embedded-examples.html
-            let(_, state, new(TState))
+            let(_, state, new(TState,StateParams))
             , let(_, pages, new(TPages,[$state]))
             , let(_, router, new(TRouter,[$pages]))
             , let(_, server, new('org.eclipse.jetty.server.Server',[8080]))
@@ -258,7 +323,11 @@ java_class(main,Package,'Main',[final]) :-
             , $handler:addServletWithMapping($holder,"/*")
             , $server:start
             , $server:join
-        ].
+        ]) :-
+            findall($DbFieldName, java_database_field_name(_,DbFieldName), StateParams),
+            once_no_fail(java_class_type(state, TState)),
+            once_no_fail(java_class_type(pages, TPages)),
+            once_no_fail(java_class_type(router, TRouter)).
 
 % ------- translate each web page to a Java method in the Pages class
 

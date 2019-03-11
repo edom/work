@@ -46,7 +46,7 @@ type(A) --> {domain_error(java_type,A)}.
 name(A) --> {must_be(atom,A), atom_codes(A,C)}, C.
 
 throws([]) --> !, "".
-throws(A) --> !, "throws ", types(A).
+throws(A) --> !, " throws ", types(A).
 
 types([]) --> !, "".
 types([A]) --> !, type(A).
@@ -97,21 +97,22 @@ stmexp(new(T,A)) --> !, "new ", type(T), arglist(A).
 stmexp(assign(L,R)) --> !, expression(L), " = ", expression(R).
 
 % TODO avoid unnecessary parenthesization
-exp_order(S,0) :- string(S).
 exp_order(null,0).
 exp_order(this,0).
 exp_order(name(_),0).
+exp_order(string(_),0).
 exp_order(call(_,_,_),100).
 exp_order(equal(_,_),500).
 exp_order(assign(_,_),1000).
 
-expression(S) --> {string(S), !, string_codes(S,C), escape(C,E)}, [0'"], E, [0'"].
 expression(this) --> !, "this".
 expression(null) --> !, "null".
+expression(string(S)) --> {!, string_codes(S,C), escape(C,E)}, [0'"], E, [0'"].
 expression(class(A)) --> !, type(A), ".class".
 expression(int(A)) --> !, {number_codes(A,C)}, C.
 expression(name(N)) --> !, name(N).
 expression(not(A)) --> !, "!(", expression(A), ")".
+expression(cast(T,E)) --> !, "(", type(T), ") (", expression(E), ")".
 expression(field(T,F)) --> !, fieldaccess(T,F).
 expression(equal(A,B)) --> !, binop("==",A,B).
 expression(and(A,B)) --> !, binop("&&",A,B).

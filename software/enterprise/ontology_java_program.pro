@@ -114,7 +114,7 @@ the name without the package name.
     field_final(?FieldId,?Boolean) is nondet.
     field_name(?FieldId,?FieldName) is nondet.
     field_type(?FieldId,?JavaType) is nondet.
-    field_initializer(+FieldId,-OptJavaExp) is semidet.
+    field_initializer(+FieldId,-JavaExp) is semidet.
 */
 :- multifile(field/1).
 :- multifile(field_name/2).
