@@ -1,4 +1,4 @@
-:- module(modules,[
+:- module(prolog_module,[
     % facts
     module/1,
     module_file/2,

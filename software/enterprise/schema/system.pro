@@ -1,4 +1,4 @@
-:- module(ontology_system,[
+:- module(schema_system,[
     type_definition/2
     , type_maxbitcount/2
     , type_maxbytecount/2
@@ -16,8 +16,14 @@
     , type_string/1
     , type_optional/2
 ]).
+
 :- use_module('./syntax.pro').
-/** <module> Ontology for a system
+
+/** <module> Schema for a system
+
+A _business logic_ is represented as a procedure/1.
+
+Access control is application logic, not business logic.
 
 Contents for language user:
     - Type definition
@@ -44,6 +50,12 @@ Contents for language designer:
         - type_string/1
         - type_optional/2
 */
+
+
+
+% -------------------- type
+
+
 
 /** type_definition(?TypeName,?Definition) is nondet.
     type_definition(++TypeName,-Definition) is semidet.
@@ -133,3 +145,74 @@ type_identifier_bit(T,N) :- type_identifier(T), type_maxbitcount(T,N).
 type_string(T) :- type_normalform(T,#string).
 
 type_optional(T,A) :- type_normalform(T,#optional(A)).
+
+
+
+% -------------------- procedure
+
+
+
+/** procedure(?ProcId) is nondet.
+    procedure_name(?ProcId,?Name) is nondet.
+    procedure_check(?ProcId,?CheckExp) is nondet.
+    procedure_input(?ProcId,?InputName,?InputType) is nondet.
+    procedure_output(?ProcId,?OutputName,?OutputType) is nondet.
+    procedure_action(?ProcId,?Action) is nondet.
+
+A _procedure_ has name, checks, inputs, outputs, and action.
+
+Some semantics:
+    - If any check fails, the action does not run.
+    - The system asks the user for the inputs.
+    - The action runs after all inputs are ready.
+    - A procedure does not have _state_.
+    A procedure belongs to a system that may have state.
+
+Some translation ideas:
+    - A procedure may translate to several web pages.
+    - The input types determine the HTML form.
+
+Action is a statement in the _Procedure Action Language_ (PAL).
+
+The principle of PAL is to think about how the _end-user_ would describe what the system does.
+For example, if the end-user thinks that the system stores data,
+then PAL should have a primitive about data storage.
+If the end-user does not care about something, then the PAL programmer should also not care about it.
+For example, the end-user does not care about how the system actually stores data;
+what the end-user cares about is that the same stored data is retrievable later.
+Thus PAL should delegate the meaning of "to store data" to the translators,
+but with the semantics that retrieving a stored data should exactly reproduce the stored data.
+Thus, PAL constrains but does not determine the meaning of its primitives.
+
+The end-users only care about whether the system meet their requirements.
+They do not care about the implementation details.
+
+Design issues:
+    - Which paradigm is the most convenient for business logic: procedural, functional, logic, data-flow, what?
+        - The language may be a lambda-calculus with bells and whistles such as relational algebra expressions.
+            - 1995, Hillebrand, Kanellakis, & Mairson, "Database Query Languages Embedded in the Typed Lambda Calculus"
+        - Should we use relational algebra?
+            - Pro: Simplifies translation to SQL.
+            - Con: No transitive closure, unless we bolt on a transitive-closure operator,
+            but then the mapping to SQL would be complicated.
+    - What is the difference between a type and a check?
+    Aren't types for checking?
+    - Should it be called a "procedure"? What should it be called?
+        - task, user task
+        - process, business process
+        - activity
+        - interaction
+        - transaction, atomic interaction
+        - function, functionality
+        - Must a procedure have procedural style (as opposed to functional or relational)?
+*/
+
+:- multifile procedure/1,
+             procedure_name/2,
+             procedure_input/3,
+             procedure_output/3.
+
+/** function_definition(?Id,?Inputs,?Outputs,?Checks,?OutExps) is nondet.
+
+Design problem: Should we have a functional language, or a procedural language?
+*/

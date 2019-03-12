@@ -1,7 +1,7 @@
-:- module(ontology_relational_databases,[]).
-/** <module> Ontology for relational databases
+:- module(schema_relational_databases,[]).
+/** <module> Schema for relational databases
 
-An instance of this ontology describes relational databases.
+An instance of this schema describes relational databases.
 */
 
 /** database(?DatabaseId) is nondet.

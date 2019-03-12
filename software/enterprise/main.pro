@@ -7,12 +7,11 @@
 */
 
 :- use_module('./syntax.pro',[]).
-:- use_module('./modules.pro',[]).
+:- use_module('./prolog/customization.pro',[]).
 :- use_module('./main_library.pro',[
     load_spec/2
     , subsume/2
     , subsume/3
-    , connect_plug_to_socket/2
 ]).
 
 % ------- instantiate module
@@ -27,10 +26,10 @@ load_module_from_file(Module,File) :-
 % ------- wiring
 
 :- load_spec(accounting_spec,'spec/accounting.pro').
-:- load_module_from_file(accounting_system,'./ontology_system.pro').
+:- load_module_from_file(accounting_system,'./schema/system.pro').
 :- subsume(accounting_system,accounting_spec).
 
-:- load_module_from_file(accounting_web_app,'./ontology_web_application.pro').
+:- load_module_from_file(accounting_web_app,'./schema/web_application.pro').
 :- subsume(accounting_web_app,accounting_spec).
 
 :- load_module_from_file(accounting_translation,'./java_program_from_web_app.pro').
@@ -46,7 +45,7 @@ accounting_translation:recordtype_field(T,F,FN,FT) :-
     accounting_system:field_type(F,FT).
 accounting_translation:default_package_name("com.spacetimecat.java").
 
-:- load_module_from_file(accounting_java_program,'./ontology_java_program.pro').
+:- load_module_from_file(accounting_java_program,'./schema/java_program.pro').
 :- subsume(accounting_java_program,accounting_translation).
 accounting_java_program:maven_coordinates('com.spacetimecat.java',accounting,'0.0.0').
 

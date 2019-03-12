@@ -1,4 +1,4 @@
-:- module(ontology_web_application,[
+:- module(schema_web_application,[
     state/1
     , state_name/2
     , state_type/2
@@ -9,7 +9,7 @@
     , page_content/2
     , page_path/2
 ]).
-/** <module> Ontology for a web application
+/** <module> Schema for a web application
 */
 
 /** state_name(?StateId,?Name) is nondet.

@@ -1,3 +1,7 @@
+% -------------------- types
+
+
+
 type_definition(currency-identifier, #identifier).
 type_definition(currency-name, #string).
 type_definition(currency-symbol, #string).
@@ -13,7 +17,11 @@ type_definition(account, #record([
     , name : account-name
 ])).
 
+
+
 % ------- unused sketch
+
+
 
 state_definition(bag-account, [type-bag(account)]).
 
@@ -22,46 +30,37 @@ autocrud(currency).
 
 % constraint(forall(Type, autocrud(Type) -> type(Type-identifier))).
 
-/** procedure_name(?ProcId,?Name) is nondet.
-    procedure_input(?ProcId,?InputName,?InputType) is nondet.
-    procedure_output(?ProcId,?OutputName,?OutputType) is nondet.
 
-A procedure has inputs, statement, and outputs.
-The statement is run after all inputs are ready.
-If an input is not ready, we expect the system to ask the user for that input.
 
-A procedure may translate to several web pages.
+% -------------------- procedures
 
-A procedure does not have state.
-A procedure belongs to a system that may have state.
 
-Design issues:
-    - Should it be called a "procedure"? What should it be called?
-        - process, business process
-        - activity
-        - interaction
-        - transaction, atomic interaction
-    - Must a procedure have procedural style (as opposed to functional or relational)?
-*/
 
 procedure_definition(trivial,[
     name-"some trivial computations"
     , inputs-[x: #natural, y: #natural]
     , outputs-[sum: #natural, product: #natural]
-    , statement-[
-        if(x >= 100, fail("x is too big"))
-        , if(y >= 100, fail("y is too big"))
-        , sum := x + y
+    , check(x < 99)
+    , check(y < 99)
+    , action-[
+        sum := x + y
         , product := x * y
     ]
 ]).
+
+function_definition(f_trivial,
+    [x: natural, y: natural],
+    [sum: natural, product: natural],
+    [x < 100, y < 100],
+    [x+y, x*y]
+).
 
 /*
 procedure_definition(find-Type-by-id,[
     name-Name
     , inputs-[id : Type-identifier]
     , outputs-[result : #optional(Type)]
-    , statement-[
+    , action-[
         output(answer) := find(state(bag-Type), [id = input(id)])
     ]
 ]) :-
@@ -71,11 +70,15 @@ procedure_definition(find-Type-by-id,[
 
 procedure_property(Id,K,V) :- procedure_definition(Id,L), member(K-V,L).
 procedure_name(A,B) :- procedure_property(A,name,B).
-procedure_statement(A,B) :- procedure_property(A,statement,B).
+procedure_action(A,B) :- procedure_property(A,action,B).
 procedure_input(Proc,Name,Type) :- procedure_property(Proc,inputs,L), member(Name:Type,L).
 procedure_output(Proc,Name,Type) :- procedure_property(Proc,outputs,L), member(Name:Type,L).
 
+
+
 % ------- procedure interpreter, text user interface
+
+
 
 /** interpret_procedure(+ProcId) is det.
 
@@ -86,7 +89,7 @@ procedure_output(Proc,Name,Type) :- procedure_property(Proc,outputs,L), member(N
 
 interpret_procedure(Proc) :-
     (procedure_name(Proc, Name) -> true ; throw(procedure_unknown(Proc))),
-    (procedure_statement(Proc, Statement) -> true ; throw(procedure_no_statement(Proc))),
+    (procedure_action(Proc, Statement) -> true ; throw(procedure_no_statement(Proc))),
     format("Interpreting procedure ~w (~w)~n", [Proc,Name]),
     retractall(tmp_input(_,_)),
     forall(
@@ -136,7 +139,11 @@ read_input(Type,Input,_) :-
     format("Don't know how to read input ~w of type ~w~n", [Input,Type]),
     throw(error(input(Input,Type),_)).
 
+
+
 % ------- implementation details
+
+
 
 type_maxbitcount(account-identifier, 32).
 type_maxbitcount(currency-identifier, 16).
@@ -147,7 +154,11 @@ type_maxbytecount(account-name, 128).
 type_primarykey(currency, [id]).
 type_primarykey(account, [id]).
 
+
+
 % ------- web application
+
+
 
 state(S) :- state_type(S,_).
 state_name(S, S) :- state(S).

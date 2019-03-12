@@ -8,7 +8,17 @@
 ]).
 /** <module> Translate a web application to a Java program
 
-Translate from imported ontology_web_application.pro to ontology_java_program.pro.
+Translate from imported schema/web_application.pro to schema/java_program.pro.
+
+---+ How similar things differ
+
+Eichberg 1998 translates Prolog to Java.
+We are trying to use Prolog to define a model that translates to a Java web application.
+
+Bibliography:
+    - 1998, Michael Eichberg, "Compiling Prolog to Idiomatic Java"
+    http://drops.dagstuhl.de/opus/volltexte/2011/3176/pdf/19.pdf
+
 */
 
 
@@ -47,7 +57,7 @@ Imports.
              page_method/2,
              page_path/2.
 
-% ------- wiring: presenting internal structure as ontology_java_program.pro structure
+% ------- wiring: presenting internal structure as schema/java_program.pro structure
 
 class(C) :- java_class(C,_,_,_).
 class_constructor(C,K) :- java_class_constructor(C,K,_,_).
