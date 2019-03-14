@@ -19,14 +19,17 @@ The word "procedure" here does not imply an imperative programming style.
 ```
 procedure_definition(
     sum_and_product,                % identifier
-    [                               % inputs and checks
-        x:integer, 0 =< x, x < 100
-      , y:integer, 0 =< y, y < 100
-    ],
-    record([                        % expression
-        sum-(x + y)
-      , product-(x * y)
-    ]) : _                          % assume type inference
+    inputs-[x:integer, y:integer]
+    , output-record([
+            sum-(x + y)
+          , product-(x * y)
+        ])                          % assume type inference
+    , [                             % options
+        checks-[
+            0 =< x, x < 100
+          , 0 =< y, y < 100
+        ]
+    ]
 ).
 ```
 
@@ -223,3 +226,17 @@ If Condition is false, reduce to FalseExp.
 
     - A; B
     Unordered evaluation.
+
+## Operational semantics
+
+A procedure must execute _atomically_ with respect to the application state.
+
+Execution of different procedures must not interfere with each other.
+They must be isolated from each other.
+
+If an implementation uses optimistic locking,
+side-effects may be repeated.
+
+Java implementation may use synchronized blocks.
+
+A procedure may _call_ another procedure.

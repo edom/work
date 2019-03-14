@@ -4,6 +4,13 @@
 
 An example is in [main.pro](main.pro).
 
+Run with `DEBUG=1` environment variable to get the stack trace of exceptions thrown from directives.
+
+```
+# In bash:
+DEBUG=1 swipl -s main.pro
+```
+
 ## How should we see this?
 
 Which of these are true about this system?
@@ -104,6 +111,8 @@ A schema reserves some predicate names and gives meaning to them.
 A Prolog module can be thought as an SQL schema.
 A Prolog predicate can be thought as an SQL table.
 These schemas are not meant to be used with use_module/2.
+
+[`translation`](schema/) contains model translations.
 
 [`prolog`](prolog/) is about tailoring SWI-Prolog 7.6.4,
 mostly about module system, term_expansion/2, and some monkey-patching.

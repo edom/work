@@ -18,11 +18,17 @@ If anything looks funny, restart the Prolog interpreter.
     , declare_class/2
 ]).
 :- reexport('./component.pro',[
-    connect_plug_to_socket/2
+    declare_plug/2
+    , declare_socket/2
+    , connect_plug_to_socket/2
+    , connect_plug_to_socket/3
+    , compile_aux_clauses_0/1
 ]).
 :- reexport('./module.pro',[
     module_host/2
 ]).
+:- use_module(library(ansi_term)). % Colorize outputs written from directives.
+:- use_module(library(error)).
 
 
 
@@ -53,3 +59,22 @@ do_module_import(_, []) :- !.
 do_module_import(Target, [A|Z]) :- !, do_module_import(Target, A), do_module_import(Target, Z).
 do_module_import(Target, Source:Name/Arity) :- !, Target:import(Source:Name/Arity).
 do_module_import(_, A) :- domain_error(importable, A).
+
+
+
+% -------------------- workaround for lost exceptions thrown from directives
+
+% This is for getting the backtrace of exceptions thrown from directives.
+
+:- if(getenv('DEBUG',_)).
+
+    :- debug.
+
+    user:prolog_exception_hook(error(E,_), error(E,Backtrace), _, _) :-
+        get_prolog_backtrace(32, Backtrace).
+
+    prolog:message(error(E,C)) -->
+        {print_prolog_backtrace(string(S), C)},
+        ["~w~n~w~n"-[E,S]].
+
+:- endif.

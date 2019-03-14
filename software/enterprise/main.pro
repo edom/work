@@ -7,6 +7,7 @@
 :- use_module('./main_library.pro',[
     setup_translation/3
 ]).
+:- use_module('./language/pal_interpreter.pro',[]).
 
 /** <module> Enterprise model?
 

@@ -14,11 +14,15 @@
 Functionalities that help drive the translation process.
 */
 
-:- use_module(library(error)).
 :- use_module('./prolog/customization.pro',[
     module_host/2
     , load_module_from_file/2
     , do_module_import/2
+    , compile_aux_clauses_0/1
+    , declare_plug/2
+    , declare_socket/2
+    , connect_plug_to_socket/2
+    , connect_plug_to_socket/3
 ]).
 
 
@@ -28,6 +32,9 @@ Monkey-patching SWI-Prolog 7.6.4 library(error)
 because with_output_to/2 clobbers the backtrace.
 
 Who is to blame: with_output_to/2 or setup_call_cleanup/3?
+
+Another problem: If a directive throws an exception, no backtrace is printed.
+Only an unhelpful "Goal (directive) failed".
 */
 
 % Turn this to true if you suspect that the backtrace is incomplete.
@@ -76,9 +83,14 @@ prolog:message(subsume_undefined_predicate(L,R,P)) -->
 do_module_load_model(Module, File) :-
     print_message(informational,loading_module(Module, File)),
     Module:use_module('./syntax.pro'),
-    Module:load_files(File, [module(Module)]).
+    Module:use_module('./prolog/customization.pro'),
+    Module:load_files(File, [module(Module)]),
+    Module:declare_plug(system,[
+        procedure/1
+    ]).
 
 do_module_instantiate_schema(Module, File) :-
+    Module:use_module('./prolog/customization.pro'),
     load_module_from_file(Module, File).
 
 
@@ -128,25 +140,27 @@ setup_translation(ModulePrefix, ModelFile, Params) :-
     atom_concat(ModulePrefix, '_system', I_system),
     atom_concat(ModulePrefix, '_web_app', I_web_app),
     atom_concat(ModulePrefix, '_java_program', I_program),
-    atom_concat(ModulePrefix, '_translation', T_java_web),
+    atom_concat(ModulePrefix, '_webapp_javaprogram', T_webapp_javaprogram),
     atom_concat(ModulePrefix, '_java_writer', T_writer),
 
     % Load modules.
 
     do_module_load_model(Model, ModelFile),
-    do_module_instantiate_schema(I_system, './schema/system.pro'),
-    do_module_instantiate_schema(I_web_app, './schema/web_application.pro'),
-    do_module_instantiate_schema(I_program, './schema/java_program.pro'),
-    load_module_from_file(T_java_web, './java_program_from_web_app.pro'),
+    do_module_instantiate_schema(I_system, 'schema/system.pro'),
+    do_module_instantiate_schema(I_web_app, 'schema/web_application.pro'),
+    do_module_instantiate_schema(I_program, 'schema/java_program.pro'),
+    load_module_from_file(T_webapp_javaprogram, 'translation/webapp_javaprogram.pro'),
     load_module_from_file(T_writer, './java_writer.pro'),
 
     % Link modules.
 
     subsume(I_system, Model),
+    % Why does this throw?
+    %connect_plug_to_socket(Model:system, I_system:system),
     subsume(I_web_app, Model),
-    subsume(T_java_web, Model),
-    subsume(I_program, T_java_web),
-    do_module_import(T_java_web,[
+    subsume(T_webapp_javaprogram, Model),
+    subsume(I_program, T_webapp_javaprogram),
+    do_module_import(T_webapp_javaprogram,[
         I_system:type_integer_bit/2
         , I_system:type_identifier_bit/2
         , I_system:type_string/1
@@ -155,12 +169,12 @@ setup_translation(ModulePrefix, ModelFile, Params) :-
     ]),
     (
         compile_aux_clauses_0([
-            (T_java_web:recordtype_field(T,F,FN,FT) :-
+            (T_webapp_javaprogram:recordtype_field(T,F,FN,FT) :-
                 I_system:recordtype_field(T,F),
                 I_system:field_name(F,FN),
                 I_system:field_type(F,FT)
             )
-            , T_java_web:default_package_name(BasePackageName)
+            , T_webapp_javaprogram:default_package_name(BasePackageName)
             , I_program:maven_coordinates(GroupId,ArtifactId,Version)
             , T_writer:output_dir("out")
             , T_writer:dry_run(DryRun)
@@ -173,27 +187,9 @@ setup_translation(ModulePrefix, ModelFile, Params) :-
     add_import_module(T_writer, I_program, end),
     true.
 
-/** compile_aux_clauses_0(+Clauses) is det.
-
-This is compile_aux_clauses/1 that fails loudly.
-
-compile_aux_clauses/1 only works at compile-time (such as from a directive),
-and it fails silently if that is not the case.
-*/
-
-compile_aux_clauses_0(Clauses) :-
-    compile_aux_clauses(Clauses)
-    ->  true
-    ;   throw(error(too_late_to_run(compile_aux_clauses_0/1),_)).
-
-prolog:error_message(too_late_to_run(Pred)) -->
-    ["It is too late to run ~w.~n"-[Pred]],
-    ["It can only run at compile-time, not at run-time.~n"],
-    ["Hint: Directives run at compile-time."].
-
-get_dictionary_key_value_1(List, Key, Value) :- var(Key), !, instantiation_error(Key).
+get_dictionary_key_value_1(_, Key, _) :- var(Key), !, instantiation_error(Key).
 get_dictionary_key_value_1(List, Key, Value) :- member(Key-Value, List), !.
-get_dictionary_key_value_1(List, Key, Value) :- throw(error(no_dictionary_key(List,Key),_)).
+get_dictionary_key_value_1(List, Key, _) :- throw(error(no_dictionary_key(List,Key),_)).
 
 prolog:error_message(no_dictionary_key(List,Key)) -->
     ["Key ~w is not in dictionary ~w."-[Key,List]].

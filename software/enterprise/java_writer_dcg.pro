@@ -11,9 +11,7 @@
     , name//1
     , throws//1
 ]).
-/** <module> Unparsing-only definite-clause grammar for Java
-
-This is internal to java_program_from_web_app.pro.
+/** <module> Internal helpers; unparsing-only definite-clause grammar for Java
 
 The DCG is left-recursive, so its naive usage is only possible for unparsing, not parsing.
 

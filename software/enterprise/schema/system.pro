@@ -19,19 +19,24 @@
     % -------------------- behavior
 
     , procedure/1
+    , procedure_name/2
+    , procedure_input/3
+    , procedure_check/2
+    , procedure_output/2
 
     % -------------------- globalization
 
     , term_locale_string/3
 ]).
 
-:- use_module('./syntax.pro').
+:- use_module('./_common.pro').
 
 /** <module> Schema for a system
 
 A _business logic_ is represented as a procedure/1.
+For example, access control is application logic, not business logic.
 
-Access control is application logic, not business logic.
+## Usage for users
 
 Define types using type_definition/2.
 
@@ -40,6 +45,10 @@ Refine types with:
     - type_maxbytecount/2
 
 Define states with state/1 and friends.
+
+Globalization can be done with term_locale_string/3.
+
+## Usage for translators
 
 Normalize types with type_normalform/2.
 
@@ -51,8 +60,6 @@ Pattern-match on types with:
     - type_identifier/1, type_identifier_bit/2
     - type_string/1
     - type_optional/2
-
-Globalization can be done with term_locale_string/3.
 */
 
 
@@ -160,14 +167,14 @@ type_optional(T,A) :- type_normalform(T,#optional(A)).
     procedure_name(?ProcId,?Name) is nondet.
     procedure_check(?ProcId,?CheckExp) is nondet.
     procedure_input(?ProcId,?InputName,?InputType) is nondet.
-    procedure_output(?ProcId,?OutputName,?OutputType) is nondet.
-    procedure_action(?ProcId,?ActionExp) is nondet.
+    procedure_output(?ProcId,?OutputExp) is nondet.
 
-Procedure Action Language (PAL).
+This tries to be as close as possible to the end-user's mental model of what the system does.
 
-ActionExp is described in pal_usage.md.
+The Procedure Action Language (PAL) is documented elsewhere:
 
-The design is in pal_design.md.
+    - OutputExp is described in ../language/pal_usage.md.
+    - The design is described in ../language/pal_design.md.
 
 Some translation ideas:
 
@@ -178,7 +185,8 @@ Some translation ideas:
 :- multifile procedure/1,
              procedure_name/2,
              procedure_input/3,
-             procedure_output/3.
+             procedure_check/2,
+             procedure_output/2.
 
 /** function_definition(?Id,?Inputs,?Outputs,?Checks,?OutExps) is nondet.
 

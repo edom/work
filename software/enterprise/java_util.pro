@@ -16,7 +16,7 @@
 :- use_module('./main_library.pro',[
     fatal/1
 ]).
-/** <module> Internal helper predicates used by java_program_from_web_app.pro
+/** <module> Internal helper predicates for manipulating Java programs
 
 */
 

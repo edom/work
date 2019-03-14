@@ -1,11 +1,13 @@
-:- module(java_program_from_web_app,[]).
-:- use_module('./java_util.pro',[
+:- module(webapp_javaprogram,[]).
+:- use_module('./_common.pro').
+:- use_module('../java_util.pro',[
     once_no_fail/1
     , javatype_javareftype/2
     , type_javaclassname/2
     , name_jname/2
     , stringies_concat/2
 ]).
+
 /** <module> Translate a web application to a Java program
 
 Translate from imported schema/web_application.pro to schema/java_program.pro.
@@ -23,41 +25,53 @@ Bibliography:
 
 
 
-% ------- begin customization section of language-user parameters
+% -------------------- begin customization section of language-user parameters
 
 /** default_package_name(?PackageName) is det.
 
 PackageName is an atom.
 */
+
 :- multifile default_package_name/1.
 
-% ------- end customization section
+:- declare_socket(java,[
+    default_package_name/1
+]).
+
+% -------------------- end customization section
 
 
 
-% ------- imports
+% -------------------- imports
 
 /** recordtype_field(?TypeId,?FieldId,?FieldName,?FieldType) is nondet.
-
-Imports.
 */
-:- multifile recordtype_field/4,
-             state/1,
-             state_name/2,
-             state_type/2,
-             state_initializer/2,
-             database/1,
-             database_name/2,
-             database_host/2,
-             database_port/2,
-             database_catalog/2,
-             database_username/2,
-             database_password/2,
-             page_name/2,
-             page_method/2,
-             page_path/2.
 
-% ------- wiring: presenting internal structure as schema/java_program.pro structure
+:- declare_socket(system_type,[
+    recordtype_field/4
+]).
+
+:- declare_socket(system_state,[
+    state/1,
+    state_name/2,
+    state_type/2,
+    state_initializer/2
+]).
+
+:- declare_socket(web_app,[
+    database/1,
+    database_name/2,
+    database_host/2,
+    database_port/2,
+    database_catalog/2,
+    database_username/2,
+    database_password/2,
+    page_name/2,
+    page_method/2,
+    page_path/2
+]).
+
+% -------------------- wiring: presenting internal structure as schema/java_program.pro structure
 
 class(C) :- java_class(C,_,_,_).
 class_constructor(C,K) :- java_class_constructor(C,K,_,_).

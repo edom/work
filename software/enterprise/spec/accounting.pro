@@ -37,23 +37,14 @@ autocrud(currency).
 
 
 procedure_definition(trivial,[
-    name-"some trivial computations"
-    , inputs-[x: #natural, y: #natural]
-    , outputs-[sum: #natural, product: #natural]
-    , check(x < 99)
-    , check(y < 99)
-    , action-[
-        sum := x + y
-        , product := x * y
-    ]
+    inputs-[x:natural, y:natural]
+    , output-record([
+        sum-(x + y)
+        , product-(x * y)
+    ])
+    , checks-[x < 100, y < 100]
+    , name-"some trivial computations"
 ]).
-
-function_definition(f_trivial,
-    [x: natural, y: natural],
-    [sum: natural, product: natural],
-    [x < 100, y < 100],
-    [x+y, x*y]
-).
 
 /*
 procedure_definition(find-Type-by-id,[
@@ -68,76 +59,12 @@ procedure_definition(find-Type-by-id,[
     format(string(Name), "Find ~w by id", [Type]).
 */
 
+procedure(Id) :- procedure_definition(Id,_).
 procedure_property(Id,K,V) :- procedure_definition(Id,L), member(K-V,L).
 procedure_name(A,B) :- procedure_property(A,name,B).
-procedure_action(A,B) :- procedure_property(A,action,B).
-procedure_input(Proc,Name,Type) :- procedure_property(Proc,inputs,L), member(Name:Type,L).
-procedure_output(Proc,Name,Type) :- procedure_property(Proc,outputs,L), member(Name:Type,L).
-
-
-
-% ------- procedure interpreter, text user interface
-
-
-
-/** interpret_procedure(+ProcId) is det.
-
-*/
-
-:- dynamic tmp_input/2,
-           tmp_output/2.
-
-interpret_procedure(Proc) :-
-    (procedure_name(Proc, Name) -> true ; throw(procedure_unknown(Proc))),
-    (procedure_action(Proc, Statement) -> true ; throw(procedure_no_statement(Proc))),
-    format("Interpreting procedure ~w (~w)~n", [Proc,Name]),
-    retractall(tmp_input(_,_)),
-    forall(
-        procedure_input(Proc,InputName,Type),
-        (
-            read_input(Type,InputName,Input),
-            assertz(tmp_input(InputName,Input))
-        )
-    ),
-    interpret_statement(Statement),
-    forall(
-        procedure_output(Proc,OutputName,_),
-        (
-            tmp_output(OutputName,OutputValue),
-            format("Output ~w is ~w~n", [OutputName,OutputValue])
-        )
-    ).
-
-interpret_statement([]) :- !.
-interpret_statement([A|B]) :- !, interpret_statement(A), interpret_statement(B).
-interpret_statement(Out:=Exp) :- !,
-    interpret_expression(Exp,Val),
-    retractall(tmp_output(Out,_)),
-    assertz(tmp_output(Out,Val)).
-interpret_statement(if(Cond,Act)) :- interpret_condition(Cond) -> interpret_statement(Act) ; true.
-interpret_statement(fail(Msg)) :- format("fail: ~w~n",[Msg]), throw(error(fail(Msg),_)).
-interpret_statement(Statement) :- domain_error(statement,Statement).
-
-interpret_expression(A,Z) :- atom(A), !, (tmp_input(A,Z) -> true ; throw(error(undefined_input(A),_))).
-interpret_expression(A,Z) :- number(A), !, Z = A.
-interpret_expression(A+B,Z) :- !, interpret_expression(A,A0), interpret_expression(B,B0), Z is A0+B0.
-interpret_expression(A*B,Z) :- !, interpret_expression(A,A0), interpret_expression(B,B0), Z is A0*B0.
-interpret_expression(A>=B,Z) :- !, interpret_expression(A,A0), interpret_expression(B,B0), (A0 >= B0 -> Z = true ; Z = false).
-interpret_expression(A,_) :- domain_error(expression,A).
-
-interpret_condition(A) :- interpret_expression(A,B), from_boolean(B).
-    from_boolean(A) :- var(A), instantiation_error(A).
-    from_boolean(true) :- !.
-    from_boolean(false) :- !, false.
-    from_boolean(A) :- domain_error(boolean,A).
-
-read_input(#natural,Input,Result) :- !,
-    format("Reading natural number ~w:~n",[Input]),
-    read(A),
-    (integer(A), A >= 0 -> Result = A ; read_input(#natural,Input,Result)).
-read_input(Type,Input,_) :-
-    format("Don't know how to read input ~w of type ~w~n", [Input,Type]),
-    throw(error(input(Input,Type),_)).
+procedure_check(Proc,Check) :- procedure_property(Proc,checks,Checks), member(Check, Checks).
+procedure_input(Proc,Name,Type) :- procedure_property(Proc,inputs,Inputs), member(Name:Type,Inputs).
+procedure_output(Proc,Output) :- procedure_property(Proc,output,Output).
 
 
 
