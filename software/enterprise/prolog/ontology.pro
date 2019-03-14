@@ -53,6 +53,19 @@ Conclusions:
     - A module may internally specify objects in the one-term (denormal-form) style,
     but should only export predicates in the many-predicates (normal-form) style.
     - A translation should not import denormal-form predicates.
+
+## A note on temporal modeling
+
+`employee_department/2` cannot keep track of movement history.
+If it is important to keep track of employee movement,
+we should use `employee_join_department/3` and `employee_leave_department/3`.
+
+==
+employee_department(?EmpId,?DepId)
+employee_join_department(?EmpId,?DepId,?Time)
+employee_leave_department(?EmpId,?DepId,?Time)
+==
+
 */
 
 :- discontiguous directive/1.

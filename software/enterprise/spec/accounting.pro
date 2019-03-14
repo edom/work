@@ -232,38 +232,6 @@ Con: The syntax error message will always be "Syntax error: Operator priority cl
 ).
 */
 
-/*
-Mostly-row-oriented tabular query expression
-
-Mostly relational algebra
-
-query(TableExp)
-
-TableExp is a table expression.
-
-The meaning of a table expression is a table.
-A table has columns and rows.
-
-table(Table)
-$Table
-
-$Table as Alias
-
-$Table means all rows of the table as defined by table/1.
-
-project(Column,TableExp)
-
-Project, or project-and-rename.
-
-satisfy(Conditions,TableExp)
-order_by(Orderings,TableExp)
-
-product(TableExpList)
-product(TableExp,TableExp)
-TableExp * TableExp
-
-limit(Limit,TableExp)
-*/
 page(get-help, help, 'GET', '/help', [], [
     "Help"
     , query(limit(15,order_by([id,name],$account)))

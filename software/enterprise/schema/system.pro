@@ -15,6 +15,14 @@
     , type_identifier_bit/2
     , type_string/1
     , type_optional/2
+
+    % -------------------- behavior
+
+    , procedure/1
+
+    % -------------------- globalization
+
+    , term_locale_string/3
 ]).
 
 :- use_module('./syntax.pro').
@@ -25,30 +33,26 @@ A _business logic_ is represented as a procedure/1.
 
 Access control is application logic, not business logic.
 
-Contents for language user:
-    - Type definition
-        - type_definition/2
-    - Refinement
-        - type_maxbitcount/2
-        - type_maxbytecount/2
-    - State definition
-        - state/1
-        - state_type/2
-        - state_initializer/2
+Define types using type_definition/2.
 
-Contents for language designer:
-    - Type reduction
-        - type_normalform/2
-    - Iterator
-        - recordtype_fields/2
-        - recordtype_field/2
-        - recordtype/1
-    - Pattern-matching
-        - type_natural/1
-        - type_integer/1, type_integer_bit/2
-        - type_identifier/1, type_identifier_bit/2
-        - type_string/1
-        - type_optional/2
+Refine types with:
+    - type_maxbitcount/2
+    - type_maxbytecount/2
+
+Define states with state/1 and friends.
+
+Normalize types with type_normalform/2.
+
+Enumerate record types with recordtype/1 and friends.
+
+Pattern-match on types with:
+    - type_natural/1
+    - type_integer/1, type_integer_bit/2
+    - type_identifier/1, type_identifier_bit/2
+    - type_string/1
+    - type_optional/2
+
+Globalization can be done with term_locale_string/3.
 */
 
 
@@ -157,54 +161,18 @@ type_optional(T,A) :- type_normalform(T,#optional(A)).
     procedure_check(?ProcId,?CheckExp) is nondet.
     procedure_input(?ProcId,?InputName,?InputType) is nondet.
     procedure_output(?ProcId,?OutputName,?OutputType) is nondet.
-    procedure_action(?ProcId,?Action) is nondet.
+    procedure_action(?ProcId,?ActionExp) is nondet.
 
-A _procedure_ has name, checks, inputs, outputs, and action.
+Procedure Action Language (PAL).
 
-Some semantics:
-    - If any check fails, the action does not run.
-    - The system asks the user for the inputs.
-    - The action runs after all inputs are ready.
-    - A procedure does not have _state_.
-    A procedure belongs to a system that may have state.
+ActionExp is described in pal_usage.md.
+
+The design is in pal_design.md.
 
 Some translation ideas:
+
     - A procedure may translate to several web pages.
     - The input types determine the HTML form.
-
-Action is a statement in the _Procedure Action Language_ (PAL).
-
-The principle of PAL is to think about how the _end-user_ would describe what the system does.
-For example, if the end-user thinks that the system stores data,
-then PAL should have a primitive about data storage.
-If the end-user does not care about something, then the PAL programmer should also not care about it.
-For example, the end-user does not care about how the system actually stores data;
-what the end-user cares about is that the same stored data is retrievable later.
-Thus PAL should delegate the meaning of "to store data" to the translators,
-but with the semantics that retrieving a stored data should exactly reproduce the stored data.
-Thus, PAL constrains but does not determine the meaning of its primitives.
-
-The end-users only care about whether the system meet their requirements.
-They do not care about the implementation details.
-
-Design issues:
-    - Which paradigm is the most convenient for business logic: procedural, functional, logic, data-flow, what?
-        - The language may be a lambda-calculus with bells and whistles such as relational algebra expressions.
-            - 1995, Hillebrand, Kanellakis, & Mairson, "Database Query Languages Embedded in the Typed Lambda Calculus"
-        - Should we use relational algebra?
-            - Pro: Simplifies translation to SQL.
-            - Con: No transitive closure, unless we bolt on a transitive-closure operator,
-            but then the mapping to SQL would be complicated.
-    - What is the difference between a type and a check?
-    Aren't types for checking?
-    - Should it be called a "procedure"? What should it be called?
-        - task, user task
-        - process, business process
-        - activity
-        - interaction
-        - transaction, atomic interaction
-        - function, functionality
-        - Must a procedure have procedural style (as opposed to functional or relational)?
 */
 
 :- multifile procedure/1,
@@ -216,3 +184,53 @@ Design issues:
 
 Design problem: Should we have a functional language, or a procedural language?
 */
+
+
+
+% -------------------- globalization, internalization, localization
+
+
+
+/** term_locale_string(?Term,?Locale,?String) is nondet.
+
+Term is a Prolog functor that represents a String that gets substituted according to the Locale.
+
+Locale is language or language-region.
+
+String is a string/1.
+
+Example:
+
+==
+term_locale_string(hello, eng-usa, "Hello, English speakers in the USA.").
+term_locale_string(hello, eng-gbr, "Hello, English speakers in the UK.").
+term_locale_string(hello, eng, "Hello, English speakers.").
+term_locale_string(hello, ind-idn, "Halo, penutur Bahasa Indonesia di Indonesia.").
+term_locale_string(hello, ind, "Halo, penutur Bahasa Indonesia.").
+term_locale_string(hello, ind, "Halo, penutur Bahasa Indonesia.").
+
+term_locale_string(are_you_going_to_buy(Count,Singular), eng, String) :-
+    number_singular_inflected(Count, Singular, Inflected),
+    format(string(String), "Are you going to buy ~w ~w?", [Count,Inflected]).
+
+number_singular_inflected(Number, Singular, Inflected) :-
+    Number = 1
+    ->  Inflected = Singular
+    ;   singular_plural(Singular, Inflected).
+
+singular_plural(person, people).
+singular_plural(shirt, shirts).
+singular_plural(baby, babies).
+==
+
+You can use your own convention for Locale as long as you stick to one convention.
+For example, language codes may be ISO 631-3 codes,
+and country codes may be ISO 3166-1 alpha-3 codes.
+
+See also:
+
+    - language codes https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+    - country codes https://en.wikipedia.org/wiki/ISO_3166-1
+*/
+
+:- multifile term_locale_string/3.
