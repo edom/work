@@ -18,9 +18,11 @@
     "editor.fontFamily": "'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.fontSize": 14,
     "editor.lineHeight": 14,
-    "editor.fontWeight": "bold",
-    "window.zoomLevel": 2,
+    "editor.fontWeight": "normal",
+    "window.title": "${dirty}${activeEditorLong}${separator}${rootName}${separator}${appName}",
+    "window.zoomLevel": 1,
     "workbench.editor.enablePreviewFromQuickOpen": false,
+    "workbench.editor.labelFormat": "short",
     // https://code.visualstudio.com/docs/getstarted/themes#_customizing-a-color-theme
     // https://code.visualstudio.com/docs/extensions/themes-snippets-colorizers#_textmate-theme-rules
     // This customizes "Default High Contrast" with colors whose hues are around 90 degrees.
@@ -73,8 +75,13 @@
         }
     },
     "explorer.confirmDelete": false,
-    "workbench.colorTheme": "Default Light+",
+    "workbench.colorTheme": "Solarized Light",
     "vim.handleKeys": {
         "<C-w>": false
-    }
+    },
+    "breadcrumbs.enabled": true,
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false,
+    "update.enableWindowsBackgroundUpdates": false,
+    "update.mode": "none"
 }
