@@ -85,7 +85,6 @@ Definition is a type expression, which is any of these:
 The relation must be a function.
 The same Type must not be defined more than once.
 */
-:- multifile type_definition/2.
 
 /** type_maxbitcount(?TypeName,?MaxBitCount) is nondet.
     type_maxbitcount(++TypeName,-MaxBitCount) is semidet.
@@ -94,20 +93,6 @@ The same Type must not be defined more than once.
 
 Refinement for implementation.
 */
-:- multifile type_maxbitcount/2,
-             type_maxbytecount/2.
-
-/** state_type(?StateId,?Type) is nondet.
-
-A state generalizes memories, global variables, files, databases.
-
-A state is something that the system remembers.
-
-A state may be either volatile or persistent?
-*/
-:- multifile state/1,
-             state_type/2,
-             state_initializer/2.
 
 /** type_normalform(++TypeName,-NormalForm) is semidet.
 
@@ -120,6 +105,13 @@ type_normalform(A,A).
     type_reduce(A,B) :- type_definition(A,B).
 
 recordtype_fields(Name,Fields) :- type_definition(Name,#record(Fields)).
+
+/** recordtype_field(?TypeId,?FieldId,?FieldName,?FieldType) is nondet.
+*/
+recordtype_field(Type, Field, FieldName, FieldType) :-
+    recordtype_field(Type, Field),
+    field_name(Field, FieldName),
+    field_type(Field, FieldType).
 
 /** recordtype(?TypeName) is nondet.
     recordtype(++TypeName) is semidet.
@@ -159,9 +151,18 @@ type_optional(T,A) :- type_normalform(T,#optional(A)).
 
 
 
-% -------------------- procedure
+% -------------------- system, state, procedure
 
 
+
+/** state_type(?StateId,?Type) is nondet.
+
+A state generalizes memories, global variables, files, databases.
+
+A state is something that the system remembers.
+
+A state may be either volatile or persistent?
+*/
 
 /** procedure(?ProcId) is nondet.
     procedure_name(?ProcId,?Name) is nondet.
@@ -181,12 +182,6 @@ Some translation ideas:
     - A procedure may translate to several web pages.
     - The input types determine the HTML form.
 */
-
-:- multifile procedure/1,
-             procedure_name/2,
-             procedure_input/3,
-             procedure_check/2,
-             procedure_output/2.
 
 /** function_definition(?Id,?Inputs,?Outputs,?Checks,?OutExps) is nondet.
 
@@ -240,5 +235,3 @@ See also:
     - language codes https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
     - country codes https://en.wikipedia.org/wiki/ISO_3166-1
 */
-
-:- multifile term_locale_string/3.

@@ -1,53 +1,141 @@
-% deprecated
+% -------------------- infrastructure modules
 
-% ------- modules from specs
+module_definition(prolog_customization,[
+    file-"prolog/customization.pro"
+    , description-"Tailoring SWI-Prolog 7.6.4"
+    , exports-[
+        load_module_from_file/2
+        , do_module_import/2
+        , throw_error/1
+    ]
+]).
 
-module(Module,[
-    file-File,
-    imports-[syntax]
-]) :- specmodule_path(Module,File).
+module_definition(syntax,[
+    file-"syntax.pro"
+    , exports-[
+        '#'/1
+    ]
+]).
 
-specmodule_path(Module,Path) :-
-    specfile(Path),
-    file_base_name(Path,Base),
-    path_prefix_extension(Base,Prefix,_),
-    atom_concat(spec_,Prefix,Module).
+%-------------------- pipeline modules
 
-specmodule(Module) :- specmodule_path(Module,_).
+module_definition(model(Model,model),[
+    name-ModuleName
+    , file-File
+    , imports-[
+        module(syntax)
+        , module(prolog_customization)
+    ]
+]) :-
+    model(Model),
+    model_name(Model, ModelName),
+    model_file(Model, File),
+    atom_concat(ModelName, '_model', ModuleName).
 
-% ------- linking of multifile predicates
+module_definition(model(Model,system),[
+    name-ModuleName
+    , file-"schema/system.pro"
+    , imports-[module(syntax)]
+]) :-
+    model(Model),
+    model_name(Model, ModelName),
+    atom_concat(ModelName, '_system', ModuleName).
 
-module_guest(spec,Guest) :- specmodule(Guest).
-module_guest(web,Guest) :- specmodule(Guest).
-module_guest(web,spec).
+module_definition(model(Model,webapp),[
+    name-ModuleName
+    , file-"schema/web_application.pro"
+    , imports-[module(syntax)]
+]) :-
+    model(Model),
+    model_name(Model, ModelName),
+    atom_concat(ModelName, '_webapp', ModuleName).
 
-% ------- loading of spec files
+module_definition(webapp_javaprogram(Model),[
+    name-ModuleName
+    , file-"translation/webapp_javaprogram.pro"
+    , imports-[module(syntax)]
+]) :-
+    model(Model),
+    model_name(Model, ModelName),
+    atom_concat(ModelName, '_webapp_javaprog', ModuleName).
 
-/** specfile(?Path) is nondet.
+module_definition(model(Model,java_program),[
+    name-ModuleName
+    , file-"schema/java_program.pro"
+    , imports-[module(syntax)]
+]) :-
+    model(Model),
+    model_name(Model, ModelName),
+    atom_concat(ModelName, '_javaprog', ModuleName).
 
-Find spec files in spec file_search_path/2.
+module_definition(java_writer(Model),[
+    name-ModuleName
+    , file-"java_writer.pro"
+    , imports-[module(syntax)]
+]) :-
+    model(Model),
+    model_name(Model, ModelName),
+    atom_concat(ModelName, '_javawriter', ModuleName).
 
-Not recursive.
+% -------------------- models
 
-If you are using pro instead of pl extension,
-you may have to add this prolog_file_type/2 clause in your swiplrc:
+model_definition(accounting,[
+    file-"spec/accounting.pro"
+]).
 
-==
-prolog_file_type(pro,prolog).
-==
-*/
-specfile(Path) :-
-    file_search_path(spec,Dir),
-    directory_files(Dir,List),
-    member(File,List),
-    path_prefix_extension(File,_,Ext),
-    prolog_file_type(Ext,prolog),
-    atomic_list_concat([Dir,'/',File],Path).
+model(Id) :- model_definition(Id, _).
 
-/** path_prefix_extension(+Total,-Prefix,-Extension) is det.
-    path_prefix_extension(-Total,+Prefix,+Extension) is det.
+model_name(Id, Id).
 
-This is file_name_extension/3 but with less confusing name.
-*/
-path_prefix_extension(Total,Prefix,Extension) :-
-    file_name_extension(Prefix,Extension,Total).
+model_property(Id, Key, Value) :-
+    model_definition(Id, List),
+    member(Key-Value, List).
+
+model_file(Id, File) :- model_property(Id, file, File).
+
+% -------------------- modules and schemas
+
+module_conforms_to_schema(model(_,Schema), Schema).
+module_conforms_to_schema(webapp_javaprogram(_), webapp_javaprogram).
+module_conforms_to_schema(java_writer(_), java_writer).
+
+% -------------------- connections
+
+connection([ModSrc,Plug,Pin], [ModTar,Socket,Pin]) :-
+    module(ModSrc),
+    module(ModTar),
+    module_conforms_to_schema(ModSrc, SchSrc),
+    module_conforms_to_schema(ModTar, SchTar),
+    schema_connection(SchSrc:Plug, SchTar:Socket),
+    schema_plug_pin(SchSrc, Plug, Pin),
+    schema_socket_pin(SchTar, Socket, Pin).
+
+connection([System,Con,Pin], [Webapp,Con,Pin]) :-
+    System = model(M,system),
+    Webapp = model(M,webapp),
+    module(System),
+    module(Webapp),
+    module_conforms_to_schema(System, system),
+    module_conforms_to_schema(Webapp, webapp),
+    schema_plug_pin(system, Con, Pin),
+    schema_socket_pin(webapp, Con, Pin).
+
+%-------------------- checks
+
+check :-
+    debug_module("Checking plugs", []),
+    check_plugs,
+    debug_module("Checking connections", []),
+    check_connections,
+    forall(model(Model), check(Model)).
+
+check(Model) :-
+    module_name(model(Model,java_program), Module),
+    Module:check_ontology.
+
+generate :-
+    forall(model(Model), generate(Model)).
+
+generate(Model) :-
+    module_name(java_writer(Model), Module),
+    Module:generate.

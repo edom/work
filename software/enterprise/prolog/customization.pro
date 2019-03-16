@@ -1,6 +1,7 @@
 :- module(prolog_customization,[
     load_module_from_file/2
     , do_module_import/2
+    , throw_error/1
 ]).
 
 /** <module> Tailoring Prolog to our requirements
@@ -23,9 +24,6 @@ If anything looks funny, restart the Prolog interpreter.
     , connect_plug_to_socket/2
     , connect_plug_to_socket/3
     , compile_aux_clauses_0/1
-]).
-:- reexport('./module.pro',[
-    module_host/2
 ]).
 :- use_module(library(ansi_term)). % Colorize outputs written from directives.
 :- use_module(library(error)).
@@ -75,6 +73,11 @@ do_module_import(_, A) :- domain_error(importable, A).
 
     prolog:message(error(E,C)) -->
         {print_prolog_backtrace(string(S), C)},
-        ["~w~n~w~n"-[E,S]].
+        (prolog:error_message(E) ; ["~w"-[E]]), !,
+        ["~n~w~n"-[S]].
 
 :- endif.
+
+
+
+throw_error(E) :- throw(error(E,_)).

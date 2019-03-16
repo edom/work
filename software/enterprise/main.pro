@@ -13,7 +13,10 @@
 
 */
 
+% -------------------- debug
 
+:- debug. % disable optimization, retain full stack trace
+:- debug(connector).
 
 /** main(++Args)
 
@@ -26,7 +29,10 @@ main(Args) :- throw(error(unknown_args(Args),_)).
 prolog:error_message(unknown_args(Args)) -->
     ['unknown command-line arguments ~w'-[Args]].
 
-
+:- if(current_prolog_flag(argv,[])).
+:- else.
+    :- initialization(main,main).
+:- endif.
 
 /** run
 
@@ -35,18 +41,17 @@ but can also be run directly from the interpreter prompt for testing.
 */
 
 run :-
-    translate(accounting).
+    pipeline:check,
+    pipeline:generate.
+    % translate(accounting).
 
 translate(ModulePrefix) :-
     ModulePrefix:check,
     ModulePrefix:generate.
 
-
-
 % -------------------- translation pipelines
 
-
-
+/*
 :-  DryRun = false,
     setup_translation(accounting, 'spec/accounting.pro', [
         base_package_name-"com.spacetimecat.java"
@@ -58,10 +63,11 @@ translate(ModulePrefix) :-
         , output_dir-"out"
         , dry_run-DryRun
     ]).
+*/
 
+:- pipeline:consult('prolog/module.pro').
+:- pipeline:consult('main_module.pro').
+:- pipeline:consult('main_schema.pro').
 
-
-:- if(current_prolog_flag(argv,[])).
-:- else.
-    :- initialization(main,main).
-:- endif.
+:- pipeline:load_modules.
+%:- pipeline:link_modules.

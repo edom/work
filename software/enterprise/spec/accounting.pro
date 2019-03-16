@@ -178,7 +178,16 @@ page_options(P,A) :- page(P,_,_,_,A,_).
 page_content(P,C) :- page(P,_,_,_,_,C).
 page_option(P,A) :- page_options(P,L), member(A,L).
 
+% -------------------- globalization
 
+term_locale_string(hello, english, "Hello.").
+
+% -------------------- code generation parameters
+
+base_package_name("com.spacetimecat.java").
+maven_coordinates(GroupId, "accounting", "0.0.0") :- base_package_name(GroupId).
+output_dir("out").
+dry_run(false).
 
 % ------- dreams
 

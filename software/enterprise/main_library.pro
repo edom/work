@@ -15,8 +15,7 @@ Functionalities that help drive the translation process.
 */
 
 :- use_module('./prolog/customization.pro',[
-    module_host/2
-    , load_module_from_file/2
+    load_module_from_file/2
     , do_module_import/2
     , compile_aux_clauses_0/1
     , declare_plug/2
@@ -84,10 +83,7 @@ do_module_load_model(Module, File) :-
     print_message(informational,loading_module(Module, File)),
     Module:use_module('./syntax.pro'),
     Module:use_module('./prolog/customization.pro'),
-    Module:load_files(File, [module(Module)]),
-    Module:declare_plug(system,[
-        procedure/1
-    ]).
+    Module:load_files(File, [module(Module)]).
 
 do_module_instantiate_schema(Module, File) :-
     Module:use_module('./prolog/customization.pro'),
@@ -154,9 +150,30 @@ setup_translation(ModulePrefix, ModelFile, Params) :-
 
     % Link modules.
 
-    subsume(I_system, Model),
-    % Why does this throw?
-    %connect_plug_to_socket(Model:system, I_system:system),
+    declare_plug(Model:type_convenient,[
+        type_definition/2
+    ]),
+    declare_plug(Model:type_refinement,[
+        type_maxbitcount/2
+        , type_maxbytecount/2
+    ]),
+    declare_plug(Model:globalization,[
+        term_locale_string/3
+    ]),
+    declare_plug(Model:system,[
+        state/1
+        , state_type/2
+        , state_initializer/2
+        , procedure/1
+        , procedure_name/2
+        , procedure_input/3
+        , procedure_check/2
+        , procedure_output/2
+    ]),
+    forall(
+        member(Port,[type_convenient,type_refinement,system,globalization]),
+        connect_plug_to_socket(Model:Port, I_system:Port)
+    ),
     subsume(I_web_app, Model),
     subsume(T_webapp_javaprogram, Model),
     subsume(I_program, T_webapp_javaprogram),
@@ -169,12 +186,7 @@ setup_translation(ModulePrefix, ModelFile, Params) :-
     ]),
     (
         compile_aux_clauses_0([
-            (T_webapp_javaprogram:recordtype_field(T,F,FN,FT) :-
-                I_system:recordtype_field(T,F),
-                I_system:field_name(F,FN),
-                I_system:field_type(F,FT)
-            )
-            , T_webapp_javaprogram:default_package_name(BasePackageName)
+            T_webapp_javaprogram:base_package_name(BasePackageName)
             , I_program:maven_coordinates(GroupId,ArtifactId,Version)
             , T_writer:output_dir("out")
             , T_writer:dry_run(DryRun)

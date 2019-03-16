@@ -27,51 +27,37 @@ Bibliography:
 
 % -------------------- begin customization section of language-user parameters
 
-/** default_package_name(?PackageName) is det.
+/** base_package_name(?PackageName) is det.
 
 PackageName is an atom.
 */
 
-:- multifile default_package_name/1.
-
-:- declare_socket(java,[
-    default_package_name/1
-]).
+:- multifile base_package_name/1.
 
 % -------------------- end customization section
 
-
-
-% -------------------- imports
-
-/** recordtype_field(?TypeId,?FieldId,?FieldName,?FieldType) is nondet.
-*/
-
-:- declare_socket(system_type,[
-    recordtype_field/4
-]).
-
-:- declare_socket(system_state,[
-    state/1,
-    state_name/2,
-    state_type/2,
-    state_initializer/2
-]).
-
-:- declare_socket(web_app,[
-    database/1,
-    database_name/2,
-    database_host/2,
-    database_port/2,
-    database_catalog/2,
-    database_username/2,
-    database_password/2,
-    page_name/2,
-    page_method/2,
-    page_path/2
-]).
-
 % -------------------- wiring: presenting internal structure as schema/java_program.pro structure
+
+element_access(A,public) :- element_option(A,public), !.
+element_access(A,protected) :- element_option(A,protected), !.
+element_access(A,package) :- element_option(A,package), !.
+element_access(A,private) :- element_option(A,private), !.
+element_access(_,public).
+
+element_static(A,true) :- element_option(A,static), !.
+element_static(_,false).
+
+element_final(A,true) :- element_option(A,final), !.
+element_final(_,false).
+
+element_annotation(_, _, _) :- fail. % TODO
+
+    element_options(A,B) :- java_class(A,_,_,B).
+    element_options(A,B) :- java_class_constructor(_,A,_,B).
+    element_options(A,B) :- java_class_method(_,A,_,_,_,B).
+    element_options(A,B) :- java_class_field(_,A,_,_,B).
+
+    element_option(A,B) :- element_options(A,L), member(B,L).
 
 class(C) :- java_class(C,_,_,_).
 class_constructor(C,K) :- java_class_constructor(C,K,_,_).
@@ -161,25 +147,6 @@ callable_throw(Method,Throw) :-
     callable_throws(Method,Throws),
     member(Throw,Throws).
 
-element_access(A,public) :- element_option(A,public), !.
-element_access(A,protected) :- element_option(A,protected), !.
-element_access(A,package) :- element_option(A,package), !.
-element_access(A,private) :- element_option(A,private), !.
-element_access(_,public).
-
-element_static(A,true) :- element_option(A,static), !.
-element_static(_,false).
-
-element_final(A,true) :- element_option(A,final), !.
-element_final(_,false).
-
-    element_options(A,B) :- java_class(A,_,_,B).
-    element_options(A,B) :- java_class_constructor(_,A,_,B).
-    element_options(A,B) :- java_class_method(_,A,_,_,_,B).
-    element_options(A,B) :- java_class_field(_,A,_,_,B).
-
-    element_option(A,B) :- element_options(A,L), member(B,L).
-
 % ------- internal structure
 
 /** java_class(?ClassId,?Package,?Name,?ClassOpts) is nondet.
@@ -215,7 +182,7 @@ There are three ways to specify method body (do not mix):
 % ------- package naming logic
 
 compute_package(literal(A),Z) :- !, A = Z.
-compute_package(default,Z) :- !, once_no_fail(default_package_name(Z)).
+compute_package(default,Z) :- !, once_no_fail(base_package_name(Z)).
 compute_package(program,Z) :- !, compute_package(default,Z).
 compute_package(entity,Z) :- !, compute_package(program:literal(entity),Z).
 compute_package(app,Z) :- !, compute_package(program:literal(app),Z).
