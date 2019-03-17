@@ -1,51 +1,12 @@
-:- module(schema_java_program,[
-    maven_coordinates/3
-
-    , element/1
-    , element_access/2
-    , element_final/2
-    , element_static/2
-    , element_annotation/3
-
-    , class/1
-    , class_extend/2
-    , class_implement/2
-    , class_implements/2
-    , class_constructor/2
-    , class_field/2
-    , class_method/2
-    , class_name/2
-    , class_package_name/2
-
-    , field/1
-    , field_initializer/2
-    , field_name/2
-    , field_type/2
-
-    , executable/1
-    , callable_parameter/3
-    , callable_statement/3
-    , callable_throw/2
-    , callable_throws/2
-    , constructor/1
-    , method/1
-    , method_name/2
-    , method_return_type/2
-    , parameter_name/2
-    , parameter_type/2
-
-    , check_ontology/0
-]).
-
 /** <module> Schema for a Java program
 
 An instance of this schema describes a Java program, down to the statement-expression level.
 
-A _Java program_ is what can be run in one JVM process.
+What is a _Java program_?
 
-A Java program has Java classes.
-
-A Java class is a text file, not a JVM class.
+    - A Java program is what can be run in one JVM process.
+    - A Java program has Java classes.
+    - A Java class is a text file, not a JVM class.
 
 Things with identity:
 
@@ -61,11 +22,7 @@ Things without identity:
 Take care to derive unique identifiers that do not clash.
 */
 
-
-
 % -------------------- Maven
-
-
 
 /** maven_coordinates(?GroupId,?ArtifactId,?Version) is det.
 
@@ -80,13 +37,8 @@ a string with three dot-separated decimal components.
 
 Try to stick to that form, because Maven version comparison may be surprising otherwise.
 */
-:- multifile maven_coordinates/3.
-
-
 
 % -------------------- element
-
-
 
 /** element(?ElemId) is nondet.
     element_access(+ElemId,-Access) is semidet.
@@ -127,11 +79,7 @@ access(protected).
 access(package).
 access(private).
 
-
-
 % -------------------- class
-
-
 
 /** class(?ClassId) is nondet.
     class_extend(?ClassId,?OptSuperClassType) is nondet.
@@ -160,11 +108,7 @@ the name without the package name.
              class_field/2,
              class_comment/2.
 
-
-
 % -------------------- field
-
-
 
 /** field(?FieldId) is nondet.
     field_access(?FieldId,?Access) is nondet.
@@ -181,11 +125,7 @@ Fields.
              field_type/2,
              field_initializer/2.
 
-
-
 % -------------------- executable, method, constructor, parameter
-
-
 
 /** executable(?ExecId) is nondet.
     callable_parameter(?MethodId,?Order,?ParamId) is nondet.
@@ -225,11 +165,7 @@ Method parameter.
 :- multifile(parameter_name/2).
 :- multifile(parameter_type/2).
 
-
-
 % -------------------- some checking
-
-
 
 % We can refactor this check into one line
 % if we use an RDF-triple-like predicate for everything.

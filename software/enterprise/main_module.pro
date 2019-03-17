@@ -34,7 +34,7 @@ module_definition(model(Model,model),[
 
 module_definition(model(Model,system),[
     name-ModuleName
-    , file-"schema/system.pro"
+    , file-"library/system.pro"
     , imports-[module(syntax)]
 ]) :-
     model(Model),
@@ -43,7 +43,7 @@ module_definition(model(Model,system),[
 
 module_definition(model(Model,webapp),[
     name-ModuleName
-    , file-"schema/web_application.pro"
+    , file-"library/web_application.pro"
     , imports-[module(syntax)]
 ]) :-
     model(Model),
@@ -52,7 +52,7 @@ module_definition(model(Model,webapp),[
 
 module_definition(webapp_javaprogram(Model),[
     name-ModuleName
-    , file-"translation/webapp_javaprogram.pro"
+    , file-"library/webapp_javaprogram.pro"
     , imports-[module(syntax)]
 ]) :-
     model(Model),
@@ -61,7 +61,7 @@ module_definition(webapp_javaprogram(Model),[
 
 module_definition(model(Model,java_program),[
     name-ModuleName
-    , file-"schema/java_program.pro"
+    , file-"library/java_program.pro"
     , imports-[module(syntax)]
 ]) :-
     model(Model),
@@ -70,7 +70,7 @@ module_definition(model(Model,java_program),[
 
 module_definition(java_writer(Model),[
     name-ModuleName
-    , file-"java_writer.pro"
+    , file-"library/java_writer.pro"
     , imports-[module(syntax)]
 ]) :-
     model(Model),
@@ -130,8 +130,11 @@ check :-
     forall(model(Model), check(Model)).
 
 check(Model) :-
-    module_name(model(Model,java_program), Module),
-    Module:check_ontology.
+    debug_module("Checking model ~w", [Model]),
+    module_name(model(Model,java_program), J),
+    module_name(webapp_javaprogram(Model), T),
+    J:check_ontology,
+    T:check_ontology.
 
 generate :-
     forall(model(Model), generate(Model)).

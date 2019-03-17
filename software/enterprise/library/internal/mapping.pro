@@ -1,152 +1,3 @@
-:- module(webapp_javaprogram,[]).
-:- use_module('./_common.pro').
-:- use_module('../java_util.pro',[
-    once_no_fail/1
-    , javatype_javareftype/2
-    , type_javaclassname/2
-    , name_jname/2
-    , stringies_concat/2
-]).
-
-/** <module> Translate a web application to a Java program
-
-Translate from imported schema/web_application.pro to schema/java_program.pro.
-
----+ How similar things differ
-
-Eichberg 1998 translates Prolog to Java.
-We are trying to use Prolog to define a model that translates to a Java web application.
-
-Bibliography:
-    - 1998, Michael Eichberg, "Compiling Prolog to Idiomatic Java"
-    http://drops.dagstuhl.de/opus/volltexte/2011/3176/pdf/19.pdf
-
-*/
-
-
-
-% -------------------- begin customization section of language-user parameters
-
-/** base_package_name(?PackageName) is det.
-
-PackageName is an atom.
-*/
-
-:- multifile base_package_name/1.
-
-% -------------------- end customization section
-
-% -------------------- wiring: presenting internal structure as schema/java_program.pro structure
-
-element_access(A,public) :- element_option(A,public), !.
-element_access(A,protected) :- element_option(A,protected), !.
-element_access(A,package) :- element_option(A,package), !.
-element_access(A,private) :- element_option(A,private), !.
-element_access(_,public).
-
-element_static(A,true) :- element_option(A,static), !.
-element_static(_,false).
-
-element_final(A,true) :- element_option(A,final), !.
-element_final(_,false).
-
-element_annotation(_, _, _) :- fail. % TODO
-
-    element_options(A,B) :- java_class(A,_,_,B).
-    element_options(A,B) :- java_class_constructor(_,A,_,B).
-    element_options(A,B) :- java_class_method(_,A,_,_,_,B).
-    element_options(A,B) :- java_class_field(_,A,_,_,B).
-
-    element_option(A,B) :- element_options(A,L), member(B,L).
-
-class(C) :- java_class(C,_,_,_).
-class_constructor(C,K) :- java_class_constructor(C,K,_,_).
-class_package_name(A,B) :- java_class(A,B,_,_).
-class_name(A,B) :- java_class(A,_,B,_).
-class_comment(C,K) :- java_class(C,_,_,L), member(comment-K,L).
-class_extend(C,S) :- element_option(C, extend-A) -> S = some(A) ; S = none.
-class_implements(C,L) :- element_option(C, implements-List) -> L = List ; L = [].
-class_implement(C,I) :- class_implements(C,L), member(I,L).
-
-class_field(A,B) :- java_class_field(A,B,_,_,_).
-class_method(A,B) :- java_class_method(A,B,_,_,_,_).
-
-field(A) :- java_class_field(_,A,_,_,_).
-field_name(A,B) :- java_class_field(_,A,_,B,_).
-field_type(A,B) :- java_class_field(_,A,B,_,_).
-field_initializer(A,B) :-
-    java_class_field(_,A,_,_,L),
-    (member(initializer-I,L)
-    ->  B = some(I)
-    ;   B = none).
-
-constructor(A) :- java_class_constructor(_,A,_,_).
-method(A) :- java_class_method(_,A,_,_,_,_).
-method_name(A,B) :- java_class_method(_,A,_,B,_,_).
-method_return_type(A,B) :- java_class_method(_,A,B,_,_,_).
-
-/** callable_parameter(?CallableId,?Order,?ParamId,?ParamType,?ParamName,?ParamOpts)
-
-callable_parameter/6 is the most convenient way to specify a parameter.
-*/
-
-:- discontiguous callable_parameter/6.
-
-parameter_name(Param,Name) :- callable_parameter(_,_,Param,_,Name,_).
-parameter_type(Param,Type) :- callable_parameter(_,_,Param,Type,_,_).
-
-% callable_parameter/5 is deprecated; use callable_parameter/6 instead
-callable_parameter(Method,N,Method-N,Type,Name) :-
-    java_class_method(_,Method,_,_,Params,_),
-    nth1(I,Params,[Type,Name|_]),
-    N is 100*I.
-
-callable_parameter(Ctor,N,Ctor-N,Type,Name) :-
-    java_class_constructor(_,Ctor,Params,_),
-    nth1(I,Params,[Type,Name|_]),
-    N is 100*I.
-
-:- discontiguous parameter_name/2,
-                 parameter_type/2.
-callable_parameter(C,N,P) :- callable_parameter(C,N,P,_,_).
-callable_parameter(C,N,P) :- callable_parameter(C,N,P,_,_,_).
-parameter_type(Param,Type) :- callable_parameter(_,_,Param,Type,_).
-parameter_name(Param,Name) :- callable_parameter(_,_,Param,_,Name).
-
-callable_options(Id,Opts) :- java_class_constructor(_,Id,_,Opts).
-callable_options(Id,Opts) :- java_class_method(_,Id,_,_,_,Opts).
-
-% callable_statement/3 is discontiguous so that we can insert aspects.
-
-/** callable_statements(?CallableId,?BaseOrder,?Statements) is nondet.
-
-callable_statements/3 is the most convenient way to declare callable statements.
-*/
-:- discontiguous callable_statements/3.
-
-:- discontiguous callable_statement/3.
-callable_statement(Callable,Order,Stmt) :-
-    callable_statements(Callable,BaseOrder,Stmts),
-    nth0(N,Stmts,Stmt),
-    Order is BaseOrder + N.
-callable_statement(Callable,Order,Stmt) :-
-    callable_options(Callable,Opts),
-    member(body-Stmts,Opts),
-    statements_(Order,Stmt,100,Stmts).
-
-    % statements_(-Order,-Stmt,+BaseOrder,+List).
-    % Helper for making choice points from a list.
-    statements_(Order,Stmt,BaseOrder,List) :-
-        nth0(N,List,Stmt),
-        Order is BaseOrder + N.
-
-callable_throws(Method,Throws) :-
-    element_option(Method,throws-Throws) -> true ; Throws = [].
-
-callable_throw(Method,Throw) :-
-    callable_throws(Method,Throws),
-    member(Throw,Throws).
-
 % ------- internal structure
 
 /** java_class(?ClassId,?Package,?Name,?ClassOpts) is nondet.
@@ -174,10 +25,10 @@ There are three ways to specify method body (do not mix):
     - Asserting callable_statement/3 directly
 
 */
-:- discontiguous java_class/4,
-                 java_class_constructor/4,
-                 java_class_field/5,
-                 java_class_method/6.
+:- multifile java_class/4,
+             java_class_constructor/4,
+             java_class_field/5,
+             java_class_method/6.
 
 % ------- package naming logic
 
@@ -191,23 +42,6 @@ compute_package(A:B,C) :- !,
     compute_package(B,B0),
     atomic_list_concat([A0,'.',B0],C).
 compute_package(A,_) :- domain_error(package_expression,A).
-
-% ------- map from types to Java types
-
-type_javatype(T,J) :- type_integer_bit(T,N), 0 =< N, N =< 32, !, J = int.
-type_javatype(T,J) :- type_integer_bit(T,N), 32 < N, N =< 64, !, J = long.
-type_javatype(T,J) :- type_identifier_bit(T,N), 0 =< N, N =< 32, !, J = int.
-type_javatype(T,J) :- type_identifier_bit(T,N), 32 < N, N =< 64, !, J = long.
-type_javatype(T,J) :- type_string(T), !, J = 'java.lang.String'.
-type_javatype(T,J) :- type_optional(T,A), !, type_javatype(A,P), javatype_javareftype(P,J).
-type_javatype(T,_) :- throw(error(no_related_java_type_for_type(T),_)).
-
-class_qualified_name(C,Q) :-
-    class_package_name(C,P),
-    class_name(C,N),
-    atomic_list_concat([P,'.',N],Q).
-
-java_class_type(C,T) :- class_qualified_name(C,T).
 
 % ------- translate each record type to a Java entity class
 

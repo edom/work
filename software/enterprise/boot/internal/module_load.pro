@@ -1,129 +1,92 @@
-:- module(prolog_component,[
+% -------------------- loading
 
-    % -------------------- directives
+/** load_modules is det.
 
-    declare_plug/2
-    , declare_socket/2
+Load the modules defined by module/2.
 
-    % -------------------- actions
+Generate links according to module_guest/2.
 
-    , connect_plug_to_socket/2
-    , connect_plug_to_socket/3
+Known problem: No dependency analysis.
+The order of clauses of module/1 is the order in which the modules are loaded.
+If A imports B, then you must make sure that module/1 produces B before A.
+Clause ordering matters.
+*/
 
-    , compile_aux_clauses_0/1
-]).
+load_modules :-
+    forall(module(Module), load_module(Module)),
+    debug_module("Connecting plugs to sockets", []),
+    forall(
+        connection(A,B),
+        deterministically((
+            A = [Source,Plug,PlugPin],
+            B = [Target,Socket,SocketPin],
+            module_name(Source, SourceName),
+            module_name(Target, TargetName),
+            debug_module_connection("plug:socket ~w:~w  ~w:~w  ~w:~w",
+                [SourceName,TargetName,Plug,Socket,PlugPin,SocketPin]),
+            plug_socket_mapping_clause(SourceName:Plug, TargetName:Socket, PlugPin-SocketPin, Clause),
+            compile_aux_clauses([Clause])
+        ))
+    ).
+
+make_conform(Module, Schema) :- deterministically((
+    ground(Module),
+    debug_module("Making module ~w conform to schema ~w", [Module,Schema]),
+    module_name(Module, Name),
+    forall(
+        schema_socket_pin(Schema, _, Pin),
+        multifile(Name:Pin)
+    )
+)).
+
+load_module(Module) :- deterministically((
+    ground(Module),
+    module_name(Module, Name),
+    module_file(Module, File),
+    debug_module("Loading module ~w as ~w from ~w", [Module,Name,File]),
+    forall(module_import(Module,Import), do_module_import(Module,Import)),
+    Name:load_files(File, [module(Name)]),
+    forall(module_export(Module,Export), Name:export(Export)),
+    forall(
+        module_conforms_to_schema(Module,Schema),
+        make_conform(Module,Schema)
+    )
+)).
+
+do_module_import(Module, module(Import)) :- !, deterministically((
+    module_name(Import, Name),
+    do_module_import(Module, module_name(Name))
+)).
+
+do_module_import(Module, module_name(Import)) :- !, deterministically((
+    module_name(Module,Target),
+    add_import_module(Target, Import, end)
+)).
+
+do_module_import(_, Import) :-
+    domain_error(module_import, Import).
+
+/*
+==================== moved from prolog_component.pro
+
+These are probably dead codes.
+*/
 
 :- use_module(library(debug)).
 
-/** <module> Socket-plug metaphor for programming-in-the-large
-
-A pin is a Name/Arity term.
-
-A plug exports symbols.
-
-A socket imports symbols.
-
-A module may have multiple plugs and sockets.
-
-Pins are matched by NameArity.
-The ordering of pins does not matter.
-
-For module authors:
-
-    - Use the declare_plug/2 and declare_socket/2 directives.
-
-For module users:
-
-    - Connect same-named pins with connect_plug_to_socket/2.
-    If manual pin connection is required due to name clash, use connect_plug_to_socket/3.
-
-Things:
-
-    - A _qcon_ (qualified connector name) is a Module:Name term.
-    - A _pin_ is a Name/Arity term.
-
-Debug topics for library(debug):
-
-    - `connector`: declarations, connections
-*/
-
-
-
 % -------------------- tracing
-
-
 
 debug_connector(Format, Args) :-
     context_module(Module),
     format(string(Format0), "~w: ~w", [Module,Format]),
     debug(connector, Format0, Args).
 
-
-
 % -------------------- deconstruction
-
-
 
 qcon_module_name(Module:Name, A, B) :- !, A = Module, B = Name.
 qcon_module_name(Con, _, _) :- type_error(qualified_connector_name,Con).
 
-
-
-/** connector(?Connector) is nondet.
-
-Type is `plug` or `socket`.
-
-QualConName is Module:ConName.
-
-Pins is a list of Name/Arity.
-
-This is less invasive than dynamically declaring predicates in the Module.
-
-This predicate is a private implementation detail.
-*/
-
-:- multifile connector/1.
-
-declare_connector(Con) :-
-    debug_connector("Declaring ~w", [Con]),
-    (must_be(ground,Con), term_is_connector(Con) ; type_error(connector,Con)), !,
-    compile_aux_clauses_0([
-        prolog_component:connector(Con)
-    ]).
-
-term_is_connector(A) :- functor(A, connector, 4).
-term_connector_type(A,B) :- term_is_connector(A), arg(1,A,B).
-term_connector_module(A,B) :- term_is_connector(A), arg(2,A,B).
-term_connector_name(A,B) :- term_is_connector(A), arg(3,A,B).
-term_connector_pins(A,B) :- term_is_connector(A), arg(4,A,B).
-
-
-
-% -------------------- directives
-
-
-
-/** declare_plug(+QualName,+Preds) is det.
-    declare_socket(+QualName,+Preds) is det.
-*/
-
-:- meta_predicate declare_plug(:,+),
-                  declare_socket(:,+).
-
-declare_plug(Qcon, Preds) :-
-    qcon_module_name(Qcon, Module, Name),
-    declare_connector(connector(plug,Module,Name,Preds)).
-
-declare_socket(Qcon, Preds) :-
-    qcon_module_name(Qcon, Module, Name),
-    declare_connector(connector(socket,Module,Name,Preds)),
-    forall(member(Pred,Preds), Module:multifile(Module:Pred)).
-
-
-
 % -------------------- getters that throw on fail
-
-
 
 get_connector_pins(Type, Qcon, Pins) :-
 
@@ -139,8 +102,6 @@ get_connector_pins(Type, Qcon, Pins) :-
 
     connector(Con).
 
-
-
 get_connector_pin(Type, Qcon, Pin) :-
     get_connector_pins(Type, Qcon, Pins),
     member_0(Type, Qcon, Pin, Pins).
@@ -151,11 +112,7 @@ member_0(Type, Obj, Elem, List) :-
 
 member_0(_, _, Elem, List) :- member(Elem, List).
 
-
-
 % -------------------- connection
-
-
 
 /** connected(?Plug,?Socket) is nondet.
 
@@ -208,7 +165,7 @@ connect_plug_to_socket(Plug, Socket, Mappings) :-
         ),
         Clauses
     ),
-    Connect = prolog_component:connected(Plug,Socket),
+    Connect = connected(Plug,Socket),
     Compile = [Connect|Clauses],
     compile_aux_clauses_0(Compile).
 
@@ -236,8 +193,6 @@ plug_socket_mapping_clause(Plug, Socket, Mapping, Clause) :-
     SHead =.. [SName|Args],
     THead =.. [TName|Args].
 
-
-
 /** compile_aux_clauses_0(+Clauses) is det.
 
 This is compile_aux_clauses/1 that fails loudly.
@@ -255,5 +210,3 @@ prolog:error_message(too_late_to_run(Pred)) -->
     ["It is too late to run ~w.~n"-[Pred]],
     ["It can only run at compile-time, not at run-time.~n"],
     ["Hint: Directives run at compile-time."].
-
-throw_error(E) :- throw(error(E,_)).

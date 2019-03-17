@@ -135,10 +135,10 @@ schema_socket_pins(Schema, Connector, Pins) :-
     connector_pins(Connector, Pins).
 
 schema_definition(model,[]).
-schema_definition(system,[file-"schema/system.pro"]).
-schema_definition(webapp,[file-"schema/web_application.pro"]).
+schema_definition(system,[file-"library/system.pro"]).
+schema_definition(webapp,[file-"library/web_application.pro"]).
 schema_definition(webapp_javaprogram,[]).
-schema_definition(java_program,[file-"schema/java_program.pro"]).
+schema_definition(java_program,[file-"library/java_program.pro"]).
 schema_definition(java_writer,[]).
 
 % -------------------- schema connections

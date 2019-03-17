@@ -1,5 +1,5 @@
 :- module(java_writer,[]).
-:- use_module('./java_util.pro',[
+:- use_module("internal/java_util.pro",[
     once_no_fail/1
     , parts_path/2
     , statement_normalize/2
@@ -7,10 +7,10 @@
     , check_statement/1
     , check_expression/1
 ]).
-:- use_module('./my_sgml_write.pro',[
+:- use_module("internal/my_sgml_write.pro",[
     write_myxml/1
 ]).
-:- use_module('./java_writer_dcg.pro',[]).
+:- use_module("internal/java_writer_dcg.pro",[]).
 /** <module> Write known programs into file system
 */
 
@@ -180,17 +180,15 @@ generate_class(Class) :-
 
 % ------- writing
 
-write_phrase(P) :-
-    once_no_fail(phrase(P,Codes)),
-    string_codes(Str,Codes),
-    write(Str).
+write_java_dcg(Rule) :-
+    once_no_fail(java_writer_dcg:write_java_dcg(Rule)).
 
 write_class(Class,Access,Final,Package,Name,OptSuperClassType,IfaceTypeList) :-
-    write_phrase(java_writer_dcg:class_begin(Package,Name,Access,Final,OptSuperClassType,IfaceTypeList)),
+    write_java_dcg(class_begin(Package,Name,Access,Final,OptSuperClassType,IfaceTypeList)),
     foreach(class_field(Class,Field), write_field(Field)),
     foreach(class_constructor(Class,Ctor), write_executable(Ctor)),
     foreach(class_method(Class,Method), write_executable(Method)),
-    write_phrase(java_writer_dcg:class_end).
+    write_java_dcg(class_end).
 
 write_field(Field) :-
     once_no_fail(element_access(Field,Access)),
@@ -199,7 +197,7 @@ write_field(Field) :-
     once_no_fail(field_name(Field,Name)),
     once_no_fail(field_type(Field,Type)),
     once_no_fail(field_initializer_n(Field,Init)),
-    write_phrase(java_writer_dcg:field(Name,Type,Access,Static,Final,Init)).
+    write_java_dcg(field(Name,Type,Access,Static,Final,Init)).
 
     field_initializer_n(Field,none) :- field_initializer(Field,none), !.
     field_initializer_n(Field,some(Init)) :- field_initializer(Field,some(E)), !,
@@ -212,9 +210,9 @@ write_executable(E) :-
     once_no_fail(element_final(E,Final)),
     once_no_fail(callable_throws(E,Throws)),
     write("    "),
-    write_phrase(java_writer_dcg:access(Access)),
-    write_phrase(java_writer_dcg:static(Static)),
-    write_phrase(java_writer_dcg:final(Final)),
+    write_java_dcg(access(Access)),
+    write_java_dcg(static(Static)),
+    write_java_dcg(final(Final)),
     % return type
     (method(E)
     ->  once_no_fail(method_return_type(E,Ret)), write_type(Ret), write(" ")
@@ -227,7 +225,7 @@ write_executable(E) :-
     ),
     write(Name), write(" "),
     write_callable_parameters(E),
-    write_phrase(java_writer_dcg:throws(Throws)),
+    write_java_dcg(throws(Throws)),
     write(" "),
     write_callable_body(E).
 
@@ -254,10 +252,10 @@ write_callable_parameters(E) :-
             write_name(Name).
 
 write_type(Type) :-
-    write_phrase(java_writer_dcg:type(Type)).
+    write_java_dcg(type(Type)).
 
 write_name(Name) :-
-    write_phrase(java_writer_dcg:name(Name)).
+    write_java_dcg(name(Name)).
 
 write_callable_body(E) :-
     write("{\n"),
@@ -268,4 +266,4 @@ write_callable_body(E) :-
 write_statement(S) :-
     once_no_fail(statement_normalize(S,S0)),
     once_no_fail(check_statement(S0)),
-    write_phrase(java_writer_dcg:statement(S0)).
+    write_java_dcg(statement(S0)).

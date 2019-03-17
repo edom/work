@@ -1,18 +1,4 @@
-# A Prolog module system
-
-## Usage
-
-    - Declare each ontology with ontology/1 and the ontology property predicates.
-    - Declare each module with module/1 and the module property predicates.
-    - Declare which module instantiates which ontology with module_instantiates_ontology/2.
-    - Declare linking.
-    - Call load_ontologies/0.
-    - Call instantiate_ontologies/0 to dynamically declare multifile predicates
-    according to module_instantiates_ontology/2.
-    - Call load_modules/0.
-    - Call link_modules/0.
-
-## Design
+/** what_is_a_module is det.
 
 A _module_ is a namespace that contains predicates.
 
@@ -26,3 +12,6 @@ There are several ways module A can import module B:
     - Explicit linking.
 
 By "linking", we mean asserting a clause for a multifile predicate.
+*/
+
+what_is_a_module.

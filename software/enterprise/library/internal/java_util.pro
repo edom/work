@@ -13,9 +13,7 @@
     , check_statement/1
     , check_expression/1
 ]).
-:- use_module('./main_library.pro',[
-    fatal/1
-]).
+
 /** <module> Internal helper predicates for manipulating Java programs
 
 */
@@ -27,14 +25,12 @@
 If Goal succeeds, this is like once/1.
 
 If Goal fails, this is like throw/1.
+
+@deprecated Use deterministically/1 instead
 */
 :- meta_predicate once_no_fail(0).
 once_no_fail(G) :- call(G), !.
-once_no_fail(G) :- fatal(error(should_not_fail(G),_)).
-
-prolog:error_message(should_not_fail(Goal)) -->
-    ['Goal should not fail: ~w\n'-[Goal]],
-    ['Hint: Did someone forget or mistype the predicate definition?'].
+once_no_fail(G) :- throw(error(should_not_fail(G),_)).
 
 % ------- types
 
