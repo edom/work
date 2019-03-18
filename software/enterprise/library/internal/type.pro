@@ -1,9 +1,19 @@
-% Translation from convenient type_definition/2 to internal representation.
+/*
+A type system that is based on how business users think about a system.
+
+Several things must be distinguished:
+    - a type equation, defined by type_definition/2
+    - a type expression, that is the second argument of type_definition/2
+*/
+
+% ==================== input interface
 
 /** type_definition(?TypeName,?Definition) is nondet.
     type_definition(++TypeName,-Definition) is semidet.
 
 User-defined type.
+
+This is the public interface.
 
 TypeName is an atom.
 
@@ -16,6 +26,11 @@ Definition is a type expression, which is any of these:
 
 The relation must be a function.
 The same Type must not be defined more than once.
+
+This is private to the model and this file.
+Only the model may construct type expressions directly.
+Other files must use the deconstructor/matcher predicates
+such as type_natural/1.
 */
 
 /** type_maxbitcount(?TypeName,?MaxBitCount) is nondet.
@@ -26,17 +41,31 @@ The same Type must not be defined more than once.
 Refinement for implementation.
 */
 
-/** type_normalform(++TypeName,-NormalForm) is semidet.
+% ==================== output interface
 
-Refinements such as type_maxbitcount/2 are not included in the normal-form.
-*/
-type_normalform(A,_) :- \+ground(A), !, instantiation_error(A).
-type_normalform(A,B) :- type_reduce(A,R), !, type_normalform(R,B).
-type_normalform(A,A).
+% -------------------- deconstruction, pattern-matching
 
-    type_reduce(A,B) :- type_definition(A,B).
+type_natural(T) :- type_normalform(T, #natural).
 
-recordtype_fields(Name,Fields) :- type_definition(Name,#record(Fields)).
+type_integer(T) :- type_normalform(T, #integer).
+
+type_natural_bit(T, N) :- type_natural(T), type_maxbitcount(T, N).
+
+type_integer_bit(T, N) :- type_integer(T), type_maxbitcount(T, N).
+
+type_identifier(T) :- type_normalform(T, #identifier).
+
+type_identifier_bit(T, N) :- type_identifier(T), type_maxbitcount(T, N).
+
+type_string(T) :- type_normalform(T, #string).
+
+type_string_byte(T, N) :- type_string(T), type_maxbytecount(T, N).
+
+type_optional(T, A) :- type_normalform(T, #optional(A)).
+
+% -------------------- record type
+
+recordtype_fields(Name, Fields) :- type_definition(Name, #record(Fields)).
 
 /** recordtype_field(?TypeId,?FieldId,?FieldName,?FieldType) is nondet.
 */
@@ -67,16 +96,19 @@ field_type(F,T) :- member(type-T,F).
 Pattern-matching type_definition/2.
 */
 
-type_natural(T) :- type_normalform(T,#natural).
+% -------------------- reduction
 
-type_integer(T) :- type_normalform(T,#integer).
+/** type_normalform(++TypeName,-NormalForm) is semidet.
 
-type_integer_bit(T,N) :- type_integer(T), type_maxbitcount(T,N).
+Refinements such as type_maxbitcount/2 are not included in the normal-form.
+*/
+type_normalform(A, _) :- \+ground(A), !, instantiation_error(A).
 
-type_identifier(T) :- type_normalform(T,#identifier).
+type_normalform(A, B) :-
+    type_reduce(A, R),
+    !,
+    type_normalform(R, B).
 
-type_identifier_bit(T,N) :- type_identifier(T), type_maxbitcount(T,N).
+type_normalform(A, A).
 
-type_string(T) :- type_normalform(T,#string).
-
-type_optional(T,A) :- type_normalform(T,#optional(A)).
+type_reduce(A, B) :- type_definition(A, B).

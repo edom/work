@@ -1,9 +1,9 @@
-:- module(prolog_ontology,[
-    directive/1
-    , declare_class/2
-]).
-
 /** <module> Define classes as Prolog multifile predicates
+
+Interface:
+
+    - directive/1
+    - declare_class/2
 
 ## Motivation
 

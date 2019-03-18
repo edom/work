@@ -4,9 +4,7 @@ module_definition(prolog_customization,[
     file-"prolog/customization.pro"
     , description-"Tailoring SWI-Prolog 7.6.4"
     , exports-[
-        load_module_from_file/2
-        , do_module_import/2
-        , throw_error/1
+        throw_error/1
     ]
 ]).
 

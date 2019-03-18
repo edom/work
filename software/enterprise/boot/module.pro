@@ -54,4 +54,5 @@ debug_module_connection(Format, Args) :-
 :- include("internal/module_derive.pro").
 :- include("internal/module_check.pro").
 :- include("internal/module_deprecated.pro").
+:- include("internal/module_swi.pro").
 :- include("internal/module_load.pro").

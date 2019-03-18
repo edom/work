@@ -10,7 +10,7 @@ object_property(T, Prop) :-
         , initializer
     ]).
 
-object_property_value(T, name, Val) :- state_object(S, T), state_name(S, Val).
-object_property_value(T, type, Val) :- state_object(S, T), state_type(S, Val).
-object_property_value(T, initializer, Val) :- state_object(S, T), state_initializer(S, Val).
+opv(T, name, Val) :- state_object(S, T), state_name(S, Val).
+opv(T, type, Val) :- state_object(S, T), state_type(S, Val).
+opv(T, initializer, Val) :- state_object(S, T), state_initializer(S, Val).
 

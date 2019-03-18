@@ -45,7 +45,7 @@ load_module(Module) :- deterministically((
     module_file(Module, File),
     debug_module("Loading module ~w as ~w from ~w", [Module,Name,File]),
     forall(module_import(Module,Import), do_module_import(Module,Import)),
-    Name:load_files(File, [module(Name)]),
+    consult_unregistered_into_module(File, Name),
     forall(module_export(Module,Export), Name:export(Export)),
     forall(
         module_conforms_to_schema(Module,Schema),

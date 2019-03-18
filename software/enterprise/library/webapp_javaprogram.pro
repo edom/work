@@ -33,7 +33,7 @@ PackageName is an atom.
 
 % -------------------- end customization section
 
-:- include("internal/ontology.pro").
+:- include("ontology.pro").
 :- include("internal/wj_ontology.pro").
 :- include("internal/export.pro").
 :- include("internal/java_type.pro").

@@ -1,7 +1,15 @@
-# What is this?
+## What is this?
 
 I don't know how to describe this.
 See [ramble.md](ramble.md)
+
+## How to read this
+
+Open the folder in Visual Studio Code.
+
+Use Ctrl+P to go to a file.
+
+Start from this file (README.md).
 
 ## Usage
 
@@ -20,9 +28,30 @@ until we invent telepathy or human-level artificial intelligence.
 
 Then, translate the model into implementation using our translation rules.
 
+We plan to have this command line:
+
+```
+swipl -s main.pro ModelFile
+```
+
+ModelFile is a Prolog source file.
+
 ### Intermediate usage
 
 Write your own translation rules.
+
+To get the stack trace of exceptions thrown from directives,
+tun this program with `DEBUG=1` environment variable:
+
+```
+# In bash:
+DEBUG=1 swipl -l main.pro ARGS...
+```
+
+The `-l` option loads the file but skips initialization goals.
+The `-s` option loads the file and runs initialization goals.
+
+Run the `main/0` goal to run the program.
 
 ### Advanced usage
 
@@ -36,10 +65,21 @@ Design a language, especially its semantics.
 
 ## Maintenance notes
 
-### Structure overview
+### Program start and architecture
 
-[my_sgml_write.pro](my_sgml_write.pro) is monkey-patched SWI-Prolog 7.6.4 library(sgml_write).
-Beware of breakage on upgrade.
+First, some files in boot must be loaded (into the `user` module?).
+The library files assume some predicates such as throw_error/1
+and consult_unregistered_into_module/2.
+
+Then, the components are loaded and linked.
+A Prolog _component_ has a source file, plugs, and sockets.
+(???)
+
+Each component may be instantiated into a Prolog module.
+Each component may be instantiated many times into several such modules.
+
+How to declare connections:
+    - schema_connection/2 in main_schema.pro
 
 ### Directory structures
 

@@ -17,8 +17,6 @@ Globalization can be done with term_locale_string/3.
 
 ## Usage for translators
 
-Normalize types with type_normalform/2.
-
 Enumerate record types with recordtype/1 and friends.
 
 Pattern-match on types with:
