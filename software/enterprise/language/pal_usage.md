@@ -116,6 +116,8 @@ These are the types:
 
 ### Relational expressions
 
+Each Type implies a set.
+
 - insert(Type, Object)
 Store.
 Generate identifier.

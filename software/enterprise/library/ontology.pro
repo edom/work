@@ -3,6 +3,49 @@ The canonical predicate is spo/3.
 Everything else is for human writer convenience.
 */
 
+/*
+How do business users think of what exists?
+What is their implicit ontology?
+
+Example statements:
+
+    - Positing the existence of ideal objects, declaring by fiat:
+        - There exists a concept of employees.
+        - There exists a concept of departments.
+    - Declaring that an object belongs to a class:
+        - "John" is an employee.
+        - "Engineering" is a department.
+    - Declaring that a class has an attribute:
+        - An employee has a name.
+        - A department has a name.
+    - Declaring relationships:
+        - An employee belongs to a department.
+        - A department contains several employees.
+    - Specifying an attribute:
+        - The name of an account is a character string.
+    - Constraints
+        - Prices should not be negative.
+        - Some people should not have access to something.
+
+May an attribute have an independent existence from the object that has that attribute?
+This is the "problem of universals".
+
+Kinds of relations:
+
+    - A is _detailed_ by B iff B cannot exist independently of A
+
+concept(employee).
+
+spo(each(employee), has(1), name).
+spo(property(employee,name), is_a, string).
+spo(property(employee,name), max_byte_count, 16).
+
+concept_attribute_type(employee, name, #string).
+*/
+
+:- multifile
+    concept/1.
+
 % -------------------- canonical
 
 /** spo(?Subject,?Predicate,?Object) is nondet.

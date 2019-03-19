@@ -2,12 +2,186 @@
 #+DATE: 2018-04-11 00:00 +0700
 #+OPTIONS: ^:nil toc:nil
 #+PERMALINK: /softeng.html
-#+MATHJAX: t
-#+TOC: headlines 1
-#+TOC: headlines 2
-#+TOC: headlines 3
-* What
+#+MATHJAX: true
+* Enterprise software engineering with ontologies and models
+** Goal
+The goal is to determine the suitability of Prolog for model-driven enterprise software engineering.
+Prolog may be used to generate code in other languages.
+** Some kinds of software systems
+Some flavors of software systems with similar characteristics and programming techniques:
+- enterprise programming
+- game programming
+- hardware programming
+- throw-away script programming
+
+Can we build the big software with model-driven software engineering?
+** Statics and dynamics; structure and behavior
+Models of a software system can be divided into two groups:
+- structural model,
+- behavioral model.
+
+There are the statics and the dynamics of a software system, like branches of mechanics in physics.
+
+Class-property model.
+Entity-relationship model.
+
+Synonyms: class, category
+
+Synonyms: object, thing, entity
+
+Synonyms: property[fn::https://en.wikipedia.org/wiki/Property_(philosophy)], attribute[fn::https://en.wikipedia.org/wiki/Attribute_(computing)]
+
+What is a concept?[fn::https://en.wikipedia.org/wiki/Concept]
+
+Similar systems:
+
+- Subject-predicate-object, RDF triple.
+- Object-property-value.
+- Entity-attribute-value[fn::https://en.wikipedia.org/wiki/Entity–attribute–value_model]
+- Category of being[fn::https://en.wikipedia.org/wiki/Category_of_being]
+- OWL
+- SUMO (Suggested Upper Merged Ontology).
+
+Some interesting things: OMG MOF (Meta Object Facility), fUML/ALF.
+
+https://en.wikipedia.org/wiki/Data_model
+** What does it mean for an abstract object to exist?
+Is software development applied metaphysics?
+ [fn::https://skepticalmethodologist.wordpress.com/2013/12/08/software-development-applied-metaphysics/]
+ [fn::https://www.eschrade.com/page/metaphysics-and-software-design/]
+
+Theory of abstract objects[fn::https://mally.stanford.edu/theory.html]
+** The software users' mental model, and their implicit ontological commitments?
+Which is the users' mental model:
+object-property-value, entity-relationship[fn::https://en.wikipedia.org/wiki/Entity–relationship_model], or something else?
+
+A general ontology is too cumbersome for developing enterprise software.
+An overkill.
+Excessive.
+Lots of unused expressiveness.
+
+For developing machine-helps-human enterprise software,
+the ontology implied by Java and EMF is too poor,
+and a general ontology such as SUMO is too rich.
+
+A software system is a subsystem of the bigger supersystem that includes the software, the user, and the interaction between them.
+Should model-driven development also model the /user/?
+
+There are two kinds of enterprise software systems:
+- those that help humans
+- those that replace humans
+
+The ontology should enable these:
+- generate Java+SQL+HTTP+HTML+JavaScript application, with the behavior and GUI; programmer writes Prolog and zero lines of Java
+- draw what graphics about the system?
+
+Objects have identity.
+
+How do software users think about what exists?
+What is their mental model?
+
+How does the user think about a web application?
+Teleologically.
+A stateful system.
+A rigid assistant.
+What can the user do with it.
+
+Software users assume that abstract objects exist when they are using the software[fn::http://williamnava.com/abstract-objects-exist/].
+Software users suspend their disbeliefs[fn::https://en.wikipedia.org/wiki/Suspension_of_disbelief] as long as they are using the software.
+Gamers suspend their disbeliefs while they are playing.
+Of course we know that an email does not have to have material existence.
+But we also know that our reaction to emails is real, and thus emails can have real effects.
+
+For example, consider email provider.
+
+- A mail exists.
+- A mail may have replies.
+** Epistemic interpretation of Prolog programs
+Sometimes a Prolog program should be interpreted epistemically, in which Prolog's fail is treated as /unknown/ instead of false.
+
+Succeeding to prove a goal G means that we know that G is true.
+Failing to prove a goal G means that we do not know anything about G.
+
+:- multifile not/1.
+Succeeding to prove not(G) means that we know that G is false.
+
+\+ G means we do not know G.
+
+We waive the law of excluded middle.
+In our Prolog program it does not hold that G ; not(G).
+
+is_big(john).
+is_big(X) fails, it simply means that we don't know whether X is big.
+
+is_big(john,true) means we know that John is big.
+is_big(john,false) means we know that John is not big.
+If is_big(john,_) fails, then we don't know whether John is big or not.
+
+Gillies 2002 \cite{gillies2002logicism}
+has a concise insightful historical summary explanation
+of the three schools of mathematics: logicism, formalism, and intuitionism.
+** Abstract objects, concrete consequences
+Ranking algorithms have real consequences.
+Algorithms impose onto everyone the value system of the programmers.
+** Gradual refinement of ontologies
+Here we try to build ontologies by gradually adding constructs and thus gradually increasing expressiveness.
+This gradualism imitates van Roy & Haridi 2004 \cite{van2004concepts}, but this is about ontologies instead of programming constructs.
+Adding more constructs increases expressivity but decreases reasonability.
+
+At the most trivial level, /some things exist/.
+The following Prolog program models reality, in the sense that there is an interpretation of exist/0 that is true in reality;
+for example, we may interpret exist/0 to mean "we exist".
+#+BEGIN_EXAMPLE
+exist.
+#+END_EXAMPLE
+
+It is easy to model the static existence of timeless abstract objects.
+We just add a fact for exist/1.
+
+The next level is /classes and properties/.
+A property is a mathematical function whose domain is the set of objects
+and whose codomain is the set property values.
+
+#+BEGIN_EXAMPLE
+class(employee).
+class_property(employee, name).
+class_property(employee, join_date).
+
+class(department).
+class_property(department, name).
+class_property(department, establish_date).
+
+relationship(work_at, [employee,department]).
+#+END_EXAMPLE
+
+But that has two problems:
+- That cannot express the cardinality[fn::also called "degree of relationship" or "multiplicity"][fn::https://en.wikipedia.org/wiki/Cardinality_(data_modeling)] of relations.
+- That cannot express the type of property values, but we can add class_property_type/3.
+
+SQL implements some cardinality constraints with unique indexes.
+A property translates to an SQL column.
+An entity translates to an SQL table with a surrogate primary key.
+A relationship of arity N translates to an SQL table with N columns, each a foreign key to the corresponding entity table.
+
+But what are the cardinalities of high-arity relations?
+
+There are two problems:
+- What exist?
+- How do we talk about what exists?
+  What language should we use?
+
+Skeletons and shells \cite{sterling1996logic}
+** Software architecture?
+How should logic programs be architected?
+Can we generate architecture from semantics?
+* What is software engineering?
 ** How should we build software?
+For a throw-away shell script, just open a text editor and be done with it.
+
+For big enterprise software, we should at least use model-driven engineering.
+
+For critical software, perhaps formal methods?
+
 ** How should we specialize programmers? Business programmer and language programmer
 We should not divide programmers into backend and frontend.
 We should divide programmers into business programmer and language programmer.
@@ -15,6 +189,7 @@ The language programmer creates a DSL (domain-specific language).
 The business programmer captures user requirements into a program (a specification) in that DSL.
 The language programmer writes a metaprogram that translates
 the business programmer's declarative program into something efficient.
+
 ** What is software engineering?
 Is software engineering engineering?
 What is engineering?
@@ -23,6 +198,20 @@ If software is a pure art, then its construction shouldn't be time-limited.
 A painter doesn't paint with deadlines.
 A painting is finished when the painter feels it's finished.
 However, a painter, when asked to paint a very specific painting, can estimate how many days it will take.
+** Programming, model, and reality
+- When we write a program,
+  we are actually creating a /mathematical model/ of reality,
+  creating an implicit ontology,
+  defining what exist,
+  making simplifying assumptions,
+  discarding irrelevant aspects.
+** Most "bugs" are actually "programming errors".
+Programmers need to own up their mistakes, and call an error an error, not a bug.
+A bug is something the programmer cannot control.
+A cosmic ray strike flipping a bit in RAM is a bug.
+A typo in the source code is not a bug.
+
+* What
 ** Rant?
 <2018-10-28> Systemd programmers are not competent enough for what they are doing.
  [fn::https://blog.erratasec.com/2018/10/systemd-is-bad-parsing-and-should-feel.html]
@@ -47,7 +236,7 @@ full of people who want to get a slice of the pie of real economy without growin
 full of people who just want to extract value from society without creating value,
 people who only take but don't give,
 people who only shuffle money around.
-* Management, hiring?
+** Management, hiring?
 I tried to think about [[file:engman.html][managing software engineers]].
 
 "When hiring senior engineers, you’re not buying, you’re selling." (Alexander von Franqué)[fn::https://hiringengineersbook.com/post/trouble-hiring/]
@@ -55,263 +244,1707 @@ I tried to think about [[file:engman.html][managing software engineers]].
 "Why Developers Become Frustrated And Companies Can’t Find Talent"[fn::https://codeburst.io/why-developers-become-frustrated-and-companies-cant-find-talent-c4114d8b72ac]:
 "In order to survive, a software project needs to sacrifice quality for money and time.
 In order to exist, a software project needs to sacrifice money and time for quality."
-** Market information, compensation, salary, wage
+*** Market information, compensation, salary, wage
 <2019-01-15> Haskell tutelage $75/hour https://twitter.com/luqui/status/1084837990877327360
 
 I thought about [[file:salary.html][software engineer salary]].
 
 A guy is charging €639 for a two-day F# course[fn::https://www.avanscoperta.it/en/training/practical-machine-learning-with-functional-programming-workshop/]
-* What is software engineering?
-(I moved some contents to file:philo.org).
-** Ontology and jargon
-A /language/ is something that has syntax (form) and semantics (meaning).
+** TODO Fix this incoherent Java ramble; don't read
+- Make it work
+- Make it maintainable
+- Make it efficient (only if needed)
+- Make it reusable (only if there is demand)
+- You Are Not Gonna Need It until proven otherwise, but this does not mean you do not need to anticipate.
+- There are many ways to write code that do the same thing. Prefer the way that is the easiest to read and change and needs the least maintenance.
+- Don't write getters and setters. Move the computation into the class, or use public fields.
+- Corollary: Use public fields for your DTOs (or move the computation there). http://stackoverflow.com/questions/10240372/jackson-field-based-serialization
+- Make value classes have final fields and a constructor.
+- Use Java wisely ("Object-assisted procedural programming").
+  https://www.quora.com/In-Object-Oriented-design-are-void-methods-bad
+- OBPP ("Object-based procedural programming"), term coined by Peter DiSalvo.
+- Java is not OOP; Java is OBPP.
 
-A language enables its users to /communicate/ with each other.
+The Java language is the C language with automatic memory management and without preprocessor.
 
-A language is formed by the agreements of its users.
+C:
 
-A /formal language/ ...
+#+BEGIN_SRC C
+    /* file MyClass.h */
 
-A /programming language/ is a formal language that is used for programming (a machine).
+    #ifdef _MyClass_h_INCLUDED_
+    #define _MyClass_h_INCLUDED_
 
-To program a machine is ...?
+    struct _MyClass;
+    typedef struct _MyClass MyClass;
 
-A /program/ is a formula/string/term in a programming language?
+    MyClass* MyClass_new ();
 
-A machine can be modeled by a formal system.
+    int MyClass_myMethod (MyClass* this, Arg* arg);
 
-A program is an executable mathematical object?
-** <2018-09-25> Software is broken and bloated
-- [[http://tonsky.me/blog/disenchantment/][Software disenchantment @ tonsky.me]]
-- [[https://www.hanselman.com/blog/EverythingsBrokenAndNobodysUpset.aspx][Scott Hanselman: "Software doesn't work. I'm shocked at how often we put up with it."]]
-** Why is hardware more standardized than software?
-Hardware standardization benefits everyone (both its makers and its users).
-Hardware unstandardization is more expensive than hardware standardization.
+    #endif
 
-Software standardization is more expensive than software unstandardization.
 
-Is software too malleable?
+    /* file MyClass.c */
 
-Hardware engineers have standard nuts, bolts, connectors, and components.
+    #include <MyClass.h>
 
-Why standardize?
+    static const int ONE = 1;
 
-- standardization reduces cost
-- standardization reduces duplicate effort
-- standardization improves interoperability
+    struct _MyClass {
+        int myField;
+    };
 
-Hypothesis:
-Programming language is too free.
-If programming language is limited (that is, if there is only one way to do one thing),
-then software will standardize itself.
+    MyClass* MyClass_new () {
+        const int size = sizeof(MyClass);
+        MyClass* this = malloc(size);
+        memset(this, 0, size);
+        return this;
+    }
 
-There are some software standards, such as ABIs (Application Binary Interfaces).
-C calling convention is a standard.
-** How do we write lasting software?
-- Clear ontology
-- Task-oriented documentation
-  - Documentation doesn't have to be separate from code.
-- /Capture/ the requirement.
-  Translate the requirement into software, instead of making a software system that /satisfies/ the requirement.
-  - The program may be rewritten, but the functional requirements, the business logic and the mathematical truths rarely change.
-    - In order to make software last, we must /capture/ the requirements, not make a system that satisfies the requirements.
-      This requires a change in mindset.
-      The software is not something made to some requirements; the software is the requirements itself.
-      The software is not the shirt made-to-order; the software is the order itself, from which all satisfying shirts can be generated/derived/produced.
-- Think for yourself.
-  Don't just follow hypes.
-  Always have a reason when doing things.
-  Record your reasoning for your forgetful future self.
-- Design software to be refactored without surprises.
-  - Example: Avoid runtime reflection (unless for the most obvious cases).
-    An alternative to that is code generation.
-    - Help the compiler help you.
-    - Even the most obvious cases aren't obvious to someone who see the code for the first time?
-- Shorten the edit-compile-test cycle. Design software so that it compiles fast and it starts up fast.
-- What else?
-** Adding people to a late software project makes it later (Fred Brooks, "No silver bullet").
-Newcoming programmers, no matter how experienced, need time to onboard; they are not immediately productive.
-Existing programmers must spend some time helping the newcoming programmers, temporarily reducing productivity even further.
-** Complexity
-*** Renaat Verbruggen: Three universal methods of reducing complexity: partitioning, hierarchy, independence
-- [[http://www.computing.dcu.ie/~renaat/ca2/ca214/ca214vii.html][Renaat Verbruggen: Three universal methods of reducing complexity]]: partitioning, hierarchy, independence
-  - It also applies to other things, such as organizing this wiki.
-*** How complex systems fail?
-- 2000, article, "How complex systems fail", [[http://web.mit.edu/2.75/resources/random/How%20Complex%20Systems%20Fail.pdf][pdf]]
-** Defining software complexity as the length of the shortest first-order-logic formula that describes it?
-Every software can, in principle, be described by a first-order-logic formula that describes the requirements satisfied or behaviors exhibited by the system.
-*** What is complexity?
-- [[https://fs.blog/2014/03/what-is-complexity/][Farnam Street blog post]]
-- [[http://www.hartford.edu/complexity/whats-complexity.aspx][What Is 'Complexity'? | University of Hartford]]
-- Measuring software complexity by hits-of-code instead of lines-of-code
-  https://www.yegor256.com/2014/11/14/hits-of-code.html
-** Unpopular opinions
-- https://www.quora.com/What-unpopular-opinions-do-you-have-about-software-development
-** TODO Measuring developer productivity
-- 2004 article "Defining and measuring the productivity of programming languages" [[https://pdfs.semanticscholar.org/1852/9ff58460b6238f5095af073d8505d79d3264.pdf][pdf]]:
-  - It defines these metrics:
-    - "the time and effort required to write, debug, and tune the code"
-    - "the performance of the code that results"
-  - power-efficiency graph (human efficiency and machine efficiency)
-  - what else?
-- 2008 https://ifs.host.cs.st-andrews.ac.uk/Books/SE9/Web/Planning/productivity.html
-  - https://ifs.host.cs.st-andrews.ac.uk/Books/SE9/
-- 1992 article https://www.andrews.edu/~vyhmeisr/papers/progprod.html
-- 2012 article http://www.drdobbs.com/jvm/the-comparative-productivity-of-programm/240005881
-  - "A database comparing 6,000 projects shows that the choice of programming language has a significant impact on project schedule."
-** Who reads SWEBOK? How can we read SWEBOK? Who reads all of it? Why does anyone bother writing it?
-- https://en.wikipedia.org/wiki/Software_Engineering_Body_of_Knowledge
-- http://www.sebokwiki.org/wiki/An_Overview_of_the_SWEBOK_Guide
-  - <2017-04-27>
-    Someone claims to have read it.
-    Holy shit.
-    https://www.quora.com/Do-you-use-SWEBOK-Is-it-helpful
-- Is the knowledge applicable?
-  Knowledge that can't be applied is useless.
-** Model vs reality
-- When we write a program,
-  we are actually creating a /mathematical model/ of reality,
-  creating an implicit ontology,
-  defining what exist,
-  making simplifying assumptions,
-  discarding irrelevant aspects.
-** Most "bugs" are actually "programming errors".
-Programmers need to own up their mistakes, and call an error an error, not a bug.
-A bug is something the programmer cannot control.
-A cosmic ray strike flipping a bit in RAM is a bug.
-A typo in the source code is not a bug.
-** Coupling
-- Coupling is deciding what you can depend on.
-  - Big Company X just released this new cool stuff, but will it still be there in 5 years?
-** Testing
-*** If proving is cheap, prove it instead of testing it.
-*** Amount of testing should be proportional to risk.
-- How do we make code testable?
-  - Minimize its dependencies.
-  - Minimize the number of things that you must set up before you can run it.
-  - Why?
-    - If you don't satisfy all its dependencies, you can't run it.
-    - If you can't run it, you can't test it.
-    - If your business logic depends on the database, you'll have to set up a database to test your business logic.
-- What do we need to test?
-  - Testing is proportional to risk.
-    - Riskier code should be tested more.
-      - "Risk comes from not knowing what you're doing." (Warren Buffett)
-        - Buffett said that for investing, but it also applies to programming.
-  - If it's obvious, don't test it. (Getters, setters, and DAOs without fancy logic)
-  - If you can prove it, don't test it.
-** TODO Compare programming language research journals and conferences
-Which ones should we care about?
-Which ones are the real deal?
-*** Conferences
-- ICFP: The ACM SIGPLAN International Conference on Functional Programming
-- OOPSLA: ACM SIGPLAN Object-Oriented Programming, Systems, Languages & Applications
-https://en.wikipedia.org/wiki/OOPSLA
-- PLDI: ACM SIGPLAN Programming Language Design and Implementation
-http://www.sigplan.org/Conferences/PLDI/
-- POPL: ACM SIGPLAN Principles of Programming Languages
-http://www.sigplan.org/Conferences/POPL/
-*** Proceedings
-- PACMPL: Proceedings of the ACM on Programming Languages
-*** DBLP vs Semantic Scholar?
-https://dblp.uni-trier.de/
-** Software engineer associations
+    int MyClass_myMethod (MyClass* this, Arg* arg) {
+        this->myField = ONE + Arg_getField(arg);
+        return ONE;
+    }
+#+END_SRC
+
+Java:
+
+#+BEGIN_SRC java
+    /* file MyClass.java */
+    class MyClass {
+        private static final int ONE = 1;
+        private int myMethod (Arg arg) {
+            this.myField = ONE + arg.getField();
+            return ONE;
+        }
+    }
+#+END_SRC
+
+The essence is the same, but Java reduces the accidental complexity.
+
+Method chaining vs fluent
+Method chaining transforms the dot (method invocation) into semicolon (sequence point).
+
+Fluent is embedded DSL.
+
+- Don't use TestNG's @Test for SomethingExample?
+  Write a main method in a SomethingExample class instead?
+- Other stuffs https://github.com/jhalterman/failsafe
+- http://blog.ploeh.dk/2014/03/10/solid-the-next-step-is-functional/
+- http://martinfowler.com/bliki/RoleInterface.html
+- http://blog.ploeh.dk/2011/06/07/SOLIDCodeisnt/
+- https://www.jetbrains.com/help/idea/2016.2/code-inspection.html
+- object is closure; closure is object
+- LLVM is procedural core.
+**** Candidate solution: source-to-source translation
+**** Candidate solution: binary interoperability
+Translate Java class to LLVM IR.
+
+Translate Haskell to LLVM IR.
+
+Translate C to LLVM IR.
+
+Java has JNI.
+
+Constraints:
+
+- ABI-compatible with JNI:
+  JNI C libraries works without recompilation.
+
+Foreign.
+
+What's wrong:
+I want to edit the syntax tree.
+I don't care about spacing.
+
+The name is /structural editor/.
+projectional editor.
+
+https://www.facebook.com/notes/kent-beck/prune-a-code-editor-that-is-not-a-text-editor/1012061842160013/
+
+http://www.lamdu.org/
+
+http://projectured.org/
+*** Improving the Java language
+Too much software is written in Java.
+
+Xtend
+
+Kotlin
+
+IDE support
+
+Top-level methods.
+*** Metaprogramming
+#+BEGIN_EXAMPLE java
+{% raw %}
+    msg = "Hello";
+    c = Class.new;
+    c += {{ int foo; }};
+    c += {{
+        void sayHello ()
+        {
+            System.out.println($msg);
+        }
+    }};
+{% endraw %}
+#+END_EXAMPLE
+*** Old
+This is my opinion on how to best use Java.
+
+Java, when used properly, should not be more verbose than C.
+*Java should be thought as enhanced C*.
+It adds these features:
+
+- namespacing
+- garbage collection
+- exception
+- limited functional programming
+- reflection (should be documented thoroughly when used)
+
+and it removes these features:
+
+- preprocessor
+- separate header files
+
+Java sucks least when used as a *mainly procedural* programming language.
+
+Subclassing, public fields, getters, setters, statics,
+mutability, and big classes are not evil in and of themselves.
+What is evil is /writing code without understanding *why* you write it that way/.
+The key to good programming is understanding why the code is the way it is.
+
+With documentation, understanding data is easier than understanding control flow.
+
+*A maintenance engineer translates requirement changes to software changes.*
+Software consists of program code, database schema, documentation, and so on.
+A software is maintainable iff a reasonable requirement change translates to a reasonable software change.
+
+For example, an application may now have to handle ten times the traffic it was designed for.
+
+If, in 10 years, your application will never handle more than 10 requests per second,
+but you split your application into 10 JVMs communicating with JSON-RPC,
+you're wasting too many resources.
+*** Example of namespacing
+This is a module in C.
+Note that each procedure name is prefixed with =point_=.
+
+#+BEGIN_SRC C
+    #include <math.h>
+
+    typedef struct
+    {
+        double x;
+        double y;
+    }
+    Point;
+
+    void point_init (Point* self, double x, double y)
+    {
+        self->x = x;
+        self->y = y;
+    }
+
+    double point_distance (Point* a, Point* b)
+    {
+        return sqrt(square(b->x - a->x) + square(b->y - a->y));
+    }
+
+    static double square (double x)
+    {
+        return x * x;
+    }
+#+END_SRC
+
+This is the module in Java.
+Note that now you don't have to prefix your method names with =point_=
+because it already lives in the class =Point=.
+
+#+BEGIN_SRC java
+    package com.example;
+
+    final class Point
+    {
+        final double x;
+        final double y;
+
+        Point (double x, double y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+
+        double distance (Point that)
+        {
+            return distance(this, that);
+        }
+
+        static double distance (Point a, Point b)
+        {
+            return Math.sqrt(square(b.x - a.x) + square(b.y - a.y));
+        }
+
+        private static double square (double x)
+        {
+            return x * x;
+        }
+    }
+#+END_SRC
+*** Another example
+#+BEGIN_SRC java
+    class Exchange
+    {
+        final HttpServletRequest request;
+        final HttpServletResponse response;
+    }
+#+END_SRC
+*** Mixin
+Use extend or mixin if and only if
+you want all subclasses to benefit from enhancements of the base class.
+
+A tradeoff is that =unsafeSetHp= is public.
+
+#+BEGIN_SRC java
+    interface GameObject
+    {
+        long getId ();
+    }
+
+    interface Health
+    {
+        int getMaxHp ();
+        int getHp ();
+        void unsafeSetHp (int x);
+        default void setHp (int x)
+        {
+            final int maxHp = getMaxHp();
+            if (x < 0) { setHp(0); return; }
+            if (x >= maxHp) { setHp(maxHp); return; }
+            setHp(x);
+        }
+        default boolean isDead ()
+        {
+            return getHp() <= 0;
+        }
+        default void addHp (int x)
+        {
+            setHp(getHp() + x);
+        }
+    }
+
+    class Chara implements GameObject, Health
+    {
+        final long id;
+
+        int maxHp;
+        int hp;
+
+        Chara (long id, int maxHp)
+        {
+            this.id = id;
+            this.maxHp = maxHp;
+            this.hp = maxHp;
+        }
+
+        @Override public long getId () { return id; }
+        @Override public int getMaxHp () { return maxHp; }
+        @Override public int getHp () { return hp; }
+        @Override public void unsafeSetHp (int x) { this.hp = x; }
+    }
+#+END_SRC
+*** Unrelated
+Field stores data.
+Method does work.
+Classes groups fields and methods.
+
+/A class groups methods that share parameters./
+The fields are those shared parameters.
+
+A Java class is equivalent to a C struct and the functions whose first parameter is that struct.
+In C, those things are usually grouped into one C file,
+so a Java class is practically equivalent to a C file.
+Static field in Java is global variable in C,
+but without the name conflict.
+
+C =#include= translates to Java =import=, =extends=, and =implements=.
+=implements X= imports X's default methods into this module.
+=extends X= imports X's fields and methods into this module.
+=import static= imports X's static methods into this module.
+
+Java 8 interfaces can be used as mixins.
+Use default methods.
+
+A mixin is a contract
+"if you give me X, I'll give you Y."
+
+Every method is a contract:
+If you give me X, I'll give you Y.
+
+Getters and setters provide "lazy fields" and "computed fields".
+
+Java can be used with edit-compile-reload-refresh.
+Java can hotswap.
+
+IDE makes navigation easy.
+
+A class is an instantiable module.
+
+The aim is to maximize understandability and minimize duplication.
+Sometimes, reducing duplication makes the code incomprehensible.
+
+=a.b(c)= is a syntactic sugar for =b(a,c)=.
+Implicit first argument.
+
+Exception is structured goto.
+
+https://www.reddit.com/r/learnprogramming/comments/1f0g2b/eli5_the_main_differences_between_oop_and/
+
+https://www.reddit.com/r/learnprogramming/comments/tocjf/procedural_programmer_me_needs_help_making_the_oo/
+*** Can process fix incompetent people?
+*** Java-Haskell interoperation
+https://wiki.haskell.org/GHC/FAQ
+
+https://wiki.haskell.org/HaskellImplementorsWorkshop/2016
+**** State of the art
+LLJVM?
+
+https://github.com/Frege/frege
+Haskell-like language
+
+http://eta-lang.org/
+port GHC primitives to Java?
+
+Sorted from the most desirable (highest level):
+
+- Source-to-source translation.
+
+  - Write a Java source interpreter in Haskell.
+  - Map Haskell code to Java.
+
+Write a JVM in Haskell.
+
+Translate both Java and Haskell to a common lower-level language such as LLVM.
+
+Core-to-bytecode.
+
+JNI-to-FFI.
+*** Haskell-to-Java
+http://mmhelloworld.github.io/blog/2013/07/10/frege-hello-java/
+
+The Frege language.
+The Eta language.
+
+Haskell => Java?
+
+Core => Java?
+
+Module => Class
+
+Data type => Static inner class
+
+Value => instance of =Thunk=
+
+Data constructor => Class extending the class corresponding to the data type
+
+A value definition in a module => a static final Thunk field in the class
+
+A class => A class
+
+A member of a class => An instance field of the Class; the type of the field is =Thunk=
+
+A class constraint => A dictionary argument whose type is the class
+
+Case match => if instanceof
+
+#+BEGIN_SRC java
+    interface Thunk
+    {
+        Object force ();
+        Thunk apply (Thunk x);
+    }
+
+    class Atom
+    {
+        Object value;
+        Supplier x;
+        Atom (Supplier x) { this.x = x; }
+        Object force ()
+        {
+            if (value == null) { value = x.get(); }
+            return value;
+        }
+    }
+#+END_SRC
+
+#+BEGIN_SRC haskell
+    module M where
+
+    a :: Int
+    a = 1
+
+    f :: Int -> Int
+    f x = x + 1
+
+    g :: (a -> b) -> a -> b
+    g f x = f x
+#+END_SRC
+
+Map =Int= and =Int32= to a =Thunk= producing a =java.lang.Integer=.
+A Haskell program assumes that =Int= is a two's complement signed integer
+/at least/ 30 bits wide.
+
+#+BEGIN_SRC haskell
+    class M
+    {
+        static final Thunk a = new Atom(() -> 1);
+        static final Thunk f = new Lambda(x -> (Integer) x + 1);
+        static final Thunk g = new Lambda(f -> new Lambda(x -> f.apply(x)));
+    }
+#+END_SRC
+**** Java-to-Haskell
+https://github.com/Frege/frege/wiki/Calling-Frege-Code-from-Java
+
+Java method -> foreign import
+
+#+BEGIN_SRC haskell
+    -- Foreign.Java
+
+    data JByte
+    data JInt
+    data JShort
+    data JLong
+    data JObject
+
+    foreign import java package.Class Method :: ArgType0 ArgType1 ... as haskellName
+
+    foreign import java java.lang.Integer parseInt :: String -> Int32 as jParseInt
+#+END_SRC
+
+Message-passing view of Java objects
+
+#+BEGIN_SRC haskell
+    s <- call object "toString" []
+
+    ...
+
+    jls <- getClass "java.lang.System"
+    out <- getField jls "out"
+    call out "println" ["Hello world"]
+#+END_SRC
+*** Architecture
+Every Java program is a sequence of statements.
+
+Every Java program is equivalent to one long main class?
+
+A block is a sequence of statements.
+
+#+BEGIN_EXAMPLE
+    class Name
+        int prop
+        // Generates:
+        // int prop
+        // int getProp ()
+        // void setProp (int)
+    end
+#+END_EXAMPLE
+*** Understanding factoring
+Imagine writing your program as one long main method.
+It is almost certain that you will find duplicate blocks.
+
+Two duplicate blocks can be factored into a method.
+Two methods with the same parameters can be factored into a class.
+
+What is an optimal factoring of that program?
+The factoring is wrong iff the same change needs to be performed more than once.
+A program can also suffer from modification anomaly.
+
+There are prime fragments:
+fragments that cannot be factored into smaller parts.
+*** OOP as a special case of FP
+Object and closure are equivalent.
+
+=o.m(a0,a1,...) -> m o a0 a1 ...=
+*** Functional multimethod
+Statically checked.
+
+#+BEGIN_EXAMPLE
+    collide (a : Asteroid) (b : Asteroid) = ...
+    collide (a : Asteroid) (s : Spaceship) = ...
+    collide (s : Spaceship) (a : Asteroid) = collide a s
+    collide (s : Spaceship) (t : Spaceship) = ...
+
+    True : Bool.
+
+    False : Bool.
+
+    Ord Bool.
+
+    Bool x, Bool y |-
+        Equal x y =
+            match x y in
+                False False -> True;;
+                True True -> True;;
+                _ _ -> False.
+
+    LessThan False False = False.
+    LessThan False True = True.
+    LessThan True False = False.
+    LessThan True True = False.
+
+    IfElse False t f = f.
+    IfElse True t f = t.
+
+    And False x = False.
+    And True x = x.
+
+    Or False x = x.
+    Or True x = True.
+
+    Not False = True.
+    Not True = False.
+
+    Min x y = IfElse (LessThan x y) x y.
+    Max x y = IfElse (LessThan x y) y x.
+
+    Table Employee.
+
+    Column Id Employee |- Bigint Id.
+    Column Name Employee |- String Name.
+
+    Column name Employee, type name |- Read name From resultSet = Get type name From resultSet.
+
+    Column name Employee |-
+        Member
+            (Tuple name (Read name From resultSet))
+            (Read Employee From resultSet).
+
+    Main |-
+        source = Connect "jdbc:postgresql://127.0.0.1/test",
+        resultSet = ExecuteQuery source "SELECT * FROM employee",
+        Member tuple (Read Employee From resultSet),
+        Print tuple.
+
+    ?- Main.
+
+    Ord a, Ord b |- min a b = if lt a b then a else b
+
+    a : Asteroid, b : Asteroid |- collide a b = ...
+    IF
+        a, b : Asteroid
+        AND
+        s, t : Spaceship
+    THEN
+        collide a b = ...
+        collide a s = ...
+        collide s t = ...
+
+    define multimethod collide with parameters
+        a, b : Asteroid
+        s, t : Spaceship
+    where case parameters matching
+        a b -> ...
+        a s -> ...
+        s a -> ...
+        s t -> ...
+#+END_EXAMPLE
+*** Java
+=a.m(b)= and =m(a,b)= are equivalent.
+The dot is a syntactic sugar for implicit first argument, plus virtual dispatch.
+
+The changes that must be made to implement a feature.
+The program is well-factored if no change is duplicated.
+
+A maintainable software does not have to be object-oriented, but it has to be well-factored.
+A well-factored program /prevents the same modification from being duplicated./
+
+Factorization reduces information duplication.
+
+Depending on dependable things simplify your program.
+I know someone who used a SQL database but didn't want to depend on it,
+so he wrote application-level joins everywhere.
+
+A software is maintainable iff it is simple to change.
+Being able to start, stop, and restart quickly (in just a few seconds) also helps.
+**** SQL
+Mutable fields.
+
+#+BEGIN_EXAMPLE
+    Column a
+        name : String
+        read : a -> ResultSet -> ()
+        write : ResultSet -> a -> ()
+
+    Table a = [Column a]
+
+    read : Table a -> a -> ResultSet -> ()
+    write : Table a -> ResultSet -> a -> ()
+
+    interface SqlCallable2<A, B>
+    {
+        void call (A a, B b) throws SQLException;
+    }
+
+    class Column<E>
+    {
+        String name;
+        SqlCallable2<E, ResultSet> read;
+        SqlCallable2<ResultSet, E> write;
+    }
+#+END_EXAMPLE
+**** Annoyances of local variables
+- Java can't infer the type of local variables
+- Local variables aren't final by default
+
+#+BEGIN_SRC java
+    final Something something = new Something();
+#+END_SRC
+**** Example of under-factored program
+#+BEGIN_SRC java
+    class Employee
+    {
+        List<A> getById (long id)
+        {
+            ... "SELECT * FROM my_schema.employee WHERE id = ?" ...
+        }
+
+        List<A> getByName (String name)
+        {
+            ... "SELECT * FROM my_schema.employee WHERE name = ?" ...
+        }
+    }
+#+END_SRC
+
+What if =my_schema= or =employee= change?
+
+#+BEGIN_SRC java
+    class Employee
+    {
+        private static String TABLE = "my_schema.employee";
+
+        List<A> getById (long id)
+        {
+            ... "SELECT * FROM " + TABLE + " WHERE id = ?" ...
+        }
+
+        List<A> getByName (String name)
+        {
+            ... "SELECT * FROM " + TABLE + " WHERE name = ?" ...
+        }
+    }
+#+END_SRC
+
+What if SQL syntax changes; for example, what if a committee decides to change SQL =SELECT= to =CHOOSE=?
+We assume it's unlikely,
+so we don't design our program to anticipate that.
+*** Extract covariant expressions into variables
+#+BEGIN_SRC java
+    System.out.println("John's salary is " + employee.computeSalary());
+    if (employee.computeSalary() >= 1000)
+    {
+        System.out.println("It's over one thousand");
+    }
+#+END_SRC
+
+What if =employee.computeSalary= changes?
+
+#+BEGIN_SRC java
+    final long salary = employee.computeSalary();
+    System.out.println("John's salary is " + salary);
+    if (salary >= 1000)
+    {
+        System.out.println("It's over one thousand");
+    }
+#+END_SRC
+
+What if we want to print to =aPrintStream= instead of =System.out=?
+
+#+BEGIN_SRC java
+    final long salary = employee.computeSalary();
+    final StringBuilder message = new StringBuilder();
+    message.append("John's salary is ").append(salary).append('\n')
+        .append(salary >= 1000 ? "It's over one thousand" : "");
+    aPrintStream.println(message);
+#+END_SRC
+
+What if =salary= type changes from =long= to =BigInteger=?
+We assume it's unlikely.
+*** Extract covariant blocks into method
+Two blocks that must change together.
+
+#+BEGIN_SRC java
+    static Y m (A a, B b, ...);
+#+END_SRC
+
+#+BEGIN_SRC java
+    static Y m0 (X0 x0, X1 x1, ...);
+    static Y m1 (X0 x0, X2 x2, ...);
+#+END_SRC
+
+becomes
+
+#+BEGIN_SRC java
+    class C
+    {
+        X0 x0;
+        Y m0 (X1 x1, ...);
+        Y m1 (X2 x2, ...);
+    }
+#+END_SRC
+
+Things that change together should be grouped together.
+
+Constructors are methods too.
+
+If two methods share a common parameter, the parameter can be extracted into a field.
+
+If two classes share a common field, a class can be extracted.
+
+Static methods are reusable.
+
+Instance methods force you to instantiate the class.
+*** Implications of architecture on security
+A popular trend: split front-end and back-end.
+Write front-end in NodeJS, write back-end in Java, front-end calls back-end via JSON HTTP API.
+Front-end runs on visitors' browsers.
+Back-end is open to public.
+
+You cannot secure the application.
+If you cannot secure the hardware running the software,
+all bets are off.
+**** Foo
+Java is a procedural programming language.
+
+The only reason we don't write everything in one big method is maintainability.
+
+A code is easier to understand if it doesn't mix abstraction levels.
+
+Names relate to things the reader already knows.
+
+Java does not have C#'s extension methods.
+
+Java as procedural programming with implicit first argument.
+
+#+BEGIN_EXAMPLE
+    object.method(arg1, ...) = method(object, arg1, ...)
+#+END_EXAMPLE
+
+Principles make decision-making easy (not necessarily correct).
+Principles are heuristics.
+
+/Cohesion/ is the most important characteristic of a class.
+The purpose of a class is to group a /working set/ (variables that often change together),
+and the methods that use those variables.
+
+The risk of modifying code?
+
+The larger the change, the bigger the risk.
+
+If you are using object mapper like Jackson,
+changing a field to final can break your code.
+(You must annotate.)
+That's why I avoid reflection.
+
+Microrefactoring.
+Small steps.
+
+Abstraction is not a mere indirection. yegor256???
+Abstraction allows you to say a lot with a little code.
+*** Mitigating the risk of changing code
+Don't just change old code.
+
+Write new code that works with the old code.
+Deprecate the old code.
+Delete the old code.
+
+#+BEGIN_SRC java
+    class CustomList<T>
+    {
+        private final List<T> inner;
+
+        public CustomList (List<T> inner)
+        {
+            this.inner = inner;
+        }
+
+        public static <T> CustomList<T> fromArray (T[] array)
+        {
+            final List<T> list = new ArrayList<>();
+            list.addAll(Arrays.asList(array));
+            return new CustomList<>(list);
+        }
+
+        public List<T> toList ()
+        {
+            return inner;
+        }
+
+        // Implement your primitives like size, map, whatever.
+    }
+#+END_SRC
+*** Maintainable code
+The problem is working with too many details at once.
+
+Mixing HTTP-handling code (such as the Servlet API 3.0)
+with your business logic will cause readability problem.
+If a method contains getCookie and business logic,
+you're in for maintenance problems.
+
+Java is more verbose than Haskell,
+but it doesn't mean that you can't create maintainable Java programs;
+it doesn't mean that your Haskell programs will automatically be more maintainable.
+If you suck, your code will be just as bad.
+
+Java is a /procedural/ language.
+Problems begin when people try to force object-oriented paradigm to Java.
+
+#+BEGIN_SRC java
+    interface Log
+    {
+        void info (String message);
+        void warn (String message);
+        void error (String message);
+    }
+#+END_SRC
+
+#+BEGIN_SRC java
+    class Log_log4j implements Log
+    {
+        private final Logger log;
+        public Log_log4j (Logger log)
+        {
+            this.log = log;
+        }
+        @Override public void error (String message) { log.error(message); }
+    }
+#+END_SRC
+*** Writing program backwards
+If you're a shop, you can try putting all your pricing logic into one class:
+
+- Every buyer whose age is 60 years or greater gets a 10% elder discount.
+- Every buyer (unique phone number) is a first-time buyer (who has not bought anything) gets 10% newcomer discount.
+- For simplicity, discount percentages are added before applied to the original price.
+
+#+BEGIN_SRC java
+    double percent_discount ()
+    {
+        double percentage = 0;
+        if (buyer_age >= 60) { percentage += 10; }
+        if (buyer_is_first_time) { percentage += 10; }
+        return percentage;
+    }
+#+END_SRC
+
+At this point you don't care about how to compute buyer_age and buyer_is_first_time.
+You simply want to express the pricing rules as a simple Java code that a programmer can easily understand.
+
+To compute the buyer's age, we need his/her date of birth and today's date.
+Use JodaTime.
+
+#+BEGIN_SRC java
+    buyer_age = today.subtract(buyer_birth_date);
+#+END_SRC
+
+Then we need to figure out how to get today's date, and so on, and then you arrive at this method:
+
+If you need something in a method,
+but it's not that method's responsibility to compute it,
+then it should be a parameter of that method.
+
+#+BEGIN_SRC java
+    class Pricing
+    {
+
+        void rule ()
+        {
+            // XXX dont use double for your prices?
+
+            entry(item.name, item.price);
+
+            if (event.is_giveaway)
+            {
+                discount(s.giveaway(), item.price);
+                return;
+            }
+
+            if (buyer.age >= 60) { discount(s.elder(), 1); }
+            if (buyer.is_first_time) { discount(s.first_timer(), 1); }
+            if (buyer.wants_insurance) { surcharge(s.insurance(), 1); }
+
+            if (event.is_new_year) { discount(s.new_year(), 1); }
+            if (event.is_christmas) { discount(s.christmas(), 2); }
+            if (event.is_online_shopping_day) { discount(s.online_shopping_day(), 0.25 * item.price); }
+
+            if (item.is_rare) { surcharge(s.rare(), 10); }
+            if (item.is_luxury) { surcharge(s.luxury(), 5); }
+            if (item.is_from_lion_air) { surcharge(s.lion_air_admin_fee(), 10); }
+            if (item.is_from_telkomsel) { surcharge(s.telkomsel_admin_fee(), 0.15); }
+
+            if (payment.uses_credit_card) { surcharge(s.credit_card_fee(), 0.03 * item.price); }
+
+            surcharge(s.surcharge_vat(), 0.1 * item.price);
+        }
+
+        class Buyer
+        {
+            final int age;
+            final boolean is_first_time;
+            final boolean wants_insurance;
+        }
+
+        class Entry
+        {
+            final String label;
+            final double amount;
+        }
+
+        private final Strings.I s;
+        private final List<Entry> entries = new ArrayList<>();
+
+        private void entry (String label, double amount)
+        {
+            entries.add(new Entry(label, amount));
+        }
+
+        private void surcharge (String label, double amount)
+        {
+            entry(label, amount);
+        }
+
+        private void discount (String label, double amount)
+        {
+            entry(label, -amount);
+        }
+
+    }
+#+END_SRC
+
+There you have it: a straightforward, readable, maintainable, easily changeable pricing rule for your online business.
+A straightforward translation.
+
+Filling the fields is someone else's problem.
+
+Internationalization:
+
+#+BEGIN_SRC java
+    class Strings
+    {
+        interface I
+        {
+            /** Value-added tax. */
+            String elder ();
+            String vat ();
+        }
+        class English implements I
+        {
+            @Override public String elder () { return "elder"; }
+            @Override public String vat () { return "VAT"; }
+        }
+        class Indonesia implements I
+        {
+            @Override public String elder () { return "lansia"; }
+            @Override public String vat () { return "PPn"; }
+        }
+        static load (String path) throws IOException
+        {
+            // use Proxy to lookup table
+        }
+    }
+#+END_SRC
+
+Do you need to be able to change the discounts without recompiling the program?
+You don't.
+Instead of making it configurable, make compilation and deployment fast, easy, and automatic, and just recompile.
+There is less room for mistakes if you keep it in one place that is easy to see: the source code.
+The compiler will also help catch mistakes.
+
+Now you figure out how to compute buyer_age.
+
+The name of a class doesn't have to be a noun.
+
+A constructor parameter states that the class depends on a feature.
+
+A class describes a feature.
+
+#+BEGIN_SRC java
+    interface Storage
+    {
+        void save_user (???) throws IOException;
+    }
+#+END_SRC
+
+#+BEGIN_SRC java
+    interface Handler?
+    {
+        void get_cookie ();
+        Handler set_cookie ();
+        Handler set_cookie ();
+    }
+#+END_SRC
+
+A Java class corresponds to a C source file.
+This is as if you could put multiple C source files inside a Java class.
+And you can put many Java classes inside a Java class.
+Think of a class like a folder for C source files;
+it groups things to help programmers understand the code,
+not as something that corresponds to an object.
+*** Crucial question
+If there are many ways of writing programs that do the same thing,
+why choose a particular way?
+
+More maintainable.
+*** Use snake case
+Class name: =My_class_name=
+
+Field, method, and variable name: =my_method_name=
+
+Maintainability is done by limiting ugliness inside a class.
+
+It is possible to write maintainable Java code. It will only be a bit more verbose.
+** Functional programming research
+  :PROPERTIES:
+  :CUSTOM_ID: functional-programming-research
+  :END:
+
+- Abbreviations
+
+  - CPS: continuation-passing style
+  - FP: functional programming
+  - OS: operating system
+  - PFP: partial functional programming
+  - TFP: total functional programming
+  - TFPL: total functional programming language
+  - TM: Turing machine
+
+*** Research questions
    :PROPERTIES:
-   :CUSTOM_ID: software-engineer-associations
+   :CUSTOM_ID: research-questions
    :END:
 
-- Indonesia
+*** Monads, lazy, strict
+   :PROPERTIES:
+   :CUSTOM_ID: monads-lazy-strict
+   :END:
 
-  - [[http://sarccom.org/][SARCCOM Software architect Indonesia community]]
-  - [[http://www.aspiluki.or.id/][ASPILUKI Asosiasi Piranti Lunak Telematika Indonesia]]
+- Can you sell me some TFP?
 
-- International?
-** Software business model
-- Hardware is moved.
-- Software is /copied/, not moved.
-- When you sell hardware, you /transfer/ ownership. The hardware doesn't multiple into two.
-- There are two models:
-  - SaaS (software as a service, a web application; you control the hardware that runs the software, but not the input and output of the process)
-  - bundling software with restricted hardware (Apple iPhone)
-- Controlling software requires controlling the hardware that runs it.
-  - Controlling the law requires controlling the lawmakers and the law enforcers.
-- Isn't it absurd to judge a crime by its potentiality not its actuality?
-- Process is software. Law is software.
-- The chemical process in a chemical plant is also software, but not everyone owns a chemical plant.
-  - If you hire a chemical engineer to design and implement your chemical plant's process, does the chemical engineer own the rights to the process?
-  - If you hire a software to design and implement your computer's operating system, does the software engineer own the rights to the operating system?
+  - What is TFP?
 
-Ownership is the ability to control access.
-To own a thing is to be able to control the access to that thing.
+    - TFP is functional programming with only total functions.
 
-- It is easy to control access to hardware. Nature/physics is with us on this issue.
-- It isn't easy to control access to software.
+      - A function is total iff it is defined for every element of its domain.
 
-- https://medium.com/@mattklein123/the-broken-economics-of-oss-5a1b31fc0182
-** Measuring software quality?
-- https://cs.stackexchange.com/questions/47077/is-there-a-way-of-objectively-measuring-the-efficiency-or-quality-of-software-or
-** Programming language quality?
-- https://medium.com/@richardeng/how-to-measure-programming-language-complexity-afe4f7e75786
-- https://medium.com/concerning-pharo/elegant-pharo-code-bb590f0856d0
-** Technical writing, software documentation
-- https://www.divio.com/blog/documentation/:
-"Documentation needs to include and be structured around its *four different functions*: /tutorials, how-to guides, explanation and technical reference/.
-Each of them *requires a distinct mode of writing*."
-** TODO Who said this "pit of success"? It was someone on the Internet.
-- Write code that makes your client/user/reader (another programmer who uses your code) fall into the pit of success.
-- Corollary: Principle of least astonishment.
-- Corollary: Write code that a programmer can understand with an IDE without having to read much documentation.
-- Corollary: Group data and methods that need those data together in one class.
-- Can that principle derive these principles? http://c2.com/cgi/wiki?PrinciplesOfObjectOrientedDesign
-- You can write maintainable and reliable procedural code?
-* Developing software for the Web
-** The Web was not designed to be a software platform
-- [[https://news.ycombinator.com/item?id=11035143][The sad state of web development]] (not everyone agrees).
-- It's time to kill the web https://blog.plan99.net/its-time-to-kill-the-web-974a9fe80c89
-  - from https://twitter.com/tehjh Jann Horn's Twitter
-    - At that time Jann Horn was a member of Google's Project Zero
-      https://blog.plan99.net/what-should-follow-the-web-8dcbbeaccd93
-- Why not infinite scrolling?
-  - Do you have an alternative to infinite scrolling?
-  - Do you handle network interruptions?
-    How does the user continue scrolling after network connection is restored?
-    Is there an unhandled exception in your script?
-** Web application frameworks?
-http://zotonic.com/
-** TODO How do we develop enterprise web applications efficiently?
-*** <2018-09-27> Enterprise application development is like three blind people describing an elephant.
-Every team is a blind people.
+    - TFP ensures that every function is total by constraining every recursion to be structural recursion.
 
-The company's actual ontology is the elephant.
+      - Structural recursion is recursion with the constraint that every recursive call is syntactically smaller.
 
-How do we unify enterprise systems?
-Should we combine subsystem ontologies to produce the actual ontology,
-or should we derive subsystem ontologies from the actual ontology?
-*** The ontology of enterprise web applications
-**** Entities
-An /entity/ is something that has identity.
-Every entity is distinguishable from other entities.
-**** Properties (extrinsic properties)
-A /property/ of an entity is something that makes the entity what it is.
+  - Why TFP?
 
-In software modeling, properties are usually extrinsic properties.
+    - The practical advantage of TFP is that it is easier
+      (and therefore faster and less costly)
+      to write provably correct programs in TFP
+      compared to PFP or imperative programming.
 
-An extrinsic property of an entity is something we give to the entity, not something that comes with the entity.
+      - This ultimately translates to faster time-to-market,
+        lower development cost, fewer errors, fewer customer complaints, and higher customer satisfaction.
+        (I know this sounds like bullshit. We should not underestimate the ways that humans can screw up.)
 
-Examples of properties:
+    - The theoretical advantage of TFP
+      is that TFP has simpler denotational semantics compared to PFP
+      because TFP has less bottoms to consider. [Turner2004]
 
-- The name of a person is an extrinsic property.
-  Changing his name doesn't change what I think of him.
-- The name of a hotel is an extrinsic property.
-  Changing the hotel's name does not change my willingness to stay in it.
+  - Why not TFP?
 
-A /property/ is a function from entity E to value V.
+    - A disadvantage of TFP is that it is not Turing-complete because all programs must terminate,
+      but OSes don't terminate,
+      but we can still write an OS in a TFPL using codata and corecursion [Turner2004]
+      which are discussed in another section in this document.
 
-https://en.wikipedia.org/wiki/Intrinsic_and_extrinsic_properties
-**** Combining entities
-**** Mapping entities to storages
-* Ramblings? Wish lists? Too speculative? Unclear goal/reason? Condemned to oblivion?
-** Category theory and programming languages?
+*** Ramble
+  :PROPERTIES:
+  :CUSTOM_ID: ramble
+  :END:
+
+*You should not read anything below this point.*
+These are the drafts of my drafts.
+I think they should be included in this page,
+but I haven't worked them enough.
+
+- Why did Simon Peyton-Jones write that the next Haskell will be strict?
+
+  - [[http://www.cs.nott.ac.uk/~gmh/appsem-slides/peytonjones.ppt][Simon Peyton-Jones PPT slides]].
+  - [[https://news.ycombinator.com/item?id=1924061][ycombinator comment thread]].
+
+This is a questionnaire, not survey article:
+A preliminary survey of functional programming
+Caitlin Sadowski
+Daan Leijen
+https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/paper-67.pdf
+
+- How do these differ: Agda, Coq, Lean, Isabelle, ACL2, and others?
+
+  - [[https://www.reddit.com/r/haskell/comments/3b498l/if_you_could_change_one_thing_about_haskell_what/csk2gvl/][Conor McBride's tangential opinions]]
+    on Coq vs Agda vs others
+  - [[http://wiki.portal.chalmers.se/agda/pmwiki.php?n=Main.AgdaVsCoq][Agda Wiki: Agda vs Coq]]
+  - [[https://www.reddit.com/r/haskell/comments/30j9l6/lean_the_new_open_source_theorem_prover_developed/][/r/haskell: Lean: the new open source theorem prover developed at Microsoft Research]]
+
+**** Lambda calculus
+   :PROPERTIES:
+   :CUSTOM_ID: lambda-calculus
+   :END:
+
+- History
+
+  - Alonzo Church introduced lambda calculus in 1932 in [Church1932].
+  - Notations have changed.
+    Church wrote $S_y^x U$ but we write $U[x := y]$ for the same thing:
+    the expression $U$ but with every occurrence of free variable $x$ replaced by expression $y$.
+  - [Church1932] credits a 1924 publication of Moses Schönfinkel for what we call /currying/:
+    changing a multi-parameter function to a one-parameter function
+    returning another one-parameter function returning yet another one-parameter function, and so on.
+    Currying is changing $f : (a,b) \to c$ to $f' : a \to (b \to c)$ such that $f(x,y) = (f'(x))(y)$.
+
+- See also [[https://en.wikipedia.org/wiki/Lambda_calculus][Wikipedia: Lambda calculus]].
+
+***** might be too old
+    :PROPERTIES:
+    :CUSTOM_ID: might-be-too-old
+    :END:
+
+- [Lof1984]
+- 1986 A survey of functional programming language principles https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/19870002073.pdf
+
+**** Codata, corecursion, and coinduction
+   :PROPERTIES:
+   :CUSTOM_ID: codata-corecursion-and-coinduction
+   :END:
+
+For more about codata, corecursion, and coinduction, see: - [[http://www.cl.cam.ac.uk/archive/mjcg/plans/Coinduction.html]["Corecursion and coinduction: what they are and how they relate to recursion and induction", Mike Gordon]]:
+"My goal here is to try to understand these things through the activity of creating a simple explanation." - [[http://blog.sigfpe.com/2007/07/data-and-codata.html]["Data and Codata", Dan Piponi]]:
+"The program might not terminate, but from a mathematical perspective this is a completely well defined function."
+"Note the duality: in structural recursion we 'deconstruct' the argument and then we're allowed to recurse. In guarded recursion we recurse first, and then we're allowed to use the constructor." - [[https://www.tac-tics.net/blog/data-vs-codata]["Data vs Codata", Michael Maloney]]
+
+**** Miscellany
+   :PROPERTIES:
+   :CUSTOM_ID: miscellany
+   :END:
+
+[Turner2004] calls TFP "strong functional programming".
+
+**** Lazy, strict
+   :PROPERTIES:
+   :CUSTOM_ID: lazy-strict
+   :END:
+
+- The Church-Rosser property
+  ([[https://en.wikipedia.org/wiki/Church%E2%80%93Rosser_theorem][Wikipedia]],
+  [[http://mathworld.wolfram.com/Church-RosserProperty.html][Mathworld]]),
+  eliminates the difference between strict and lazy in a TFPL [Turner2004].
+
+**** Type theory is a formal system, not a branch of mathematics
+   :PROPERTIES:
+   :CUSTOM_ID: type-theory-is-a-formal-system-not-a-branch-of-mathematics
+   :END:
+
+There are at least two type theories:
+the Martin-L"of type theory, and the calculus of constructions [Bove2001].
+I thought "type theory" was a branch of mathematics,
+like "category theory", "graph theory", and "number theory".
+
+"Martin-L"of's type theory is basically a theory about sets in which it is possible to interpret a logic." [Nordstrom1988]
+
+**** Recursion and fixpoint
+   :PROPERTIES:
+   :CUSTOM_ID: recursion-and-fixpoint
+   :END:
+
+We say that $x$ is a /fixpoint/ of $f$ iff $x = f(x)$.
+
+A [[https://www.cs.cornell.edu/courses/cs3110/2013sp/supplemental/lectures/lec29-fixpoints/lec29.html][text lecture]]
+describes how to obtain the factorial function as a fixed point of successive /approximations/.
+
+[[https://en.wikipedia.org/wiki/Fixed-point_combinator][Wikipedia: Fixed-point combinator]].
+A fixed-point combinator enables /anonymous/ recursive functions.
+
+TFP rejects the definition =fix f = f (fix f)= because this is not a structural recursion.
+
+Recursion is about fixpoint.
+
+**** The Eff language and monad-aware languages
+   :PROPERTIES:
+   :CUSTOM_ID: the-eff-language-and-monad-aware-languages
+   :END:
+
+Consider this passage from [McBride2015]:
+
+#+BEGIN_QUOTE
+  [The Eff language lets] us write in direct
+  style for whatever effectful interface is locally available, then obtain the computation
+  delivered by the appropriate Moggi-style translation into an explicitly monadic
+  kernel.
+#+END_QUOTE
+
+I think "in direct style"
+means that in Eff we can write =f x= to mean what we would write as =x >>= f= in Haskell,
+but with the Monad instance automatically inferred based on the locally available effects.
+
+I think that passage suggests that the Eff language [Bauer2012]
+is related to the "monad-aware language" that Abdullah is trying to accomplish.
+The relation is that Eff infers the monad from the locally available effects.
+However, Eff's type system ignores the effects (like ML's type system)
+so this is probably not what Abdullah wants.
+
+**** Reading triage
+   :PROPERTIES:
+   :CUSTOM_ID: reading-triage
+   :END:
+
+http://semantic-domain.blogspot.co.id/2016/03/agda-is-not-purely-functional-language.html
+
+https://en.wikipedia.org/wiki/Category:Term-rewriting_programming_languages
+
+In a term-rewriting language such as Pure, we can write program transformation as part of the program.
+https://stackoverflow.com/questions/24330902/how-does-term-rewriting-based-evaluation-work
+
+https://www.quora.com/What-are-examples-of-statically-typed-logic-programming-languages-ex-similar-to-Prolog
+
+https://mathoverflow.net/questions/3920/what-does-it-mean-to-discharge-assumptions-or-premises
+
+http://www.cs.nott.ac.uk/~pszvc/g54dtp/inductive_domain.v
+
+https://stackoverflow.com/questions/145263/what-is-total-functional-programming
+
+What is a computational effect?
+
+Does totality really have anything to do with termination?
+
+**** TFP and Turing-completeness
+   :PROPERTIES:
+   :CUSTOM_ID: tfp-and-turing-completeness
+   :END:
+
+We must distinguish between a Turing machine and its execution.
+
+A TM needs a tape to run, but does not come with it.
+To run a TM, you have to supply a tape.
+
+A /tape/ is a finite sequence of tape symbols.
+
+A /step/ is a pair of configuration and tape.
+
+A /run/ is a sequence of steps. This sequence may be infinite.
+
+A /run/ of a Turing machine $m$ with initial tape $t$ is ...
+
+Instead of thinking about infinitely long tape with infinitely many blank symbols,
+we think that the tape is finite but the TM may at every step
+insert, update, or delete a cell.
+
+A TM is finite by definition: a TM is a tuple whose each component is taken from a finite set.
+The description of a TM does not include the tape.
+The execution trace of a TM may be infinite.
+A TFPL can /describe/ every TM just fine.
+
+We can describe a Turing machine in a TFPL?
+
+https://www.reddit.com/r/programming/comments/jvu2w/total_functional_programming_and_the_unimportance/
+
+[[http://lambda-the-ultimate.org/node/2003][LTU: Total functional programming]]
+
+https://news.ycombinator.com/item?id=12646390
+
+https://existentialtype.wordpress.com/2014/03/20/old-neglected-theorems-are-still-theorems/
+
+https://math.stackexchange.com/questions/111773/are-total-recursive-functions-recursively-enumerable
+
+How do we write this "echo" program in TFP? Is it even total?
+
+#+BEGIN_SRC haskell
+    main : IO ()
+    main = getLine >>= putStrLn >> main
+#+END_SRC
+
+We can /describe/ the infinite list of natural numbers =[0,1,2,3,...]= in a TFP.
+
+#+BEGIN_EXAMPLE
+    f : Nat -> Nat
+    f n = n + 1
+
+    f : Nat -> Nat
+    f n = n
+#+END_EXAMPLE
+
+[[https://arxiv.org/abs/1610.09254][Partiality, Revisited: The Partiality Monad as a Quotient Inductive-Inductive Type]]
+
+http://www.cl.cam.ac.uk/archive/mjcg/plans/Coinduction.html
+
+https://en.wikipedia.org/wiki/Natural_transformation
+
+https://en.wikipedia.org/wiki/Initial_algebra
+endofunctor, F-algebra, initial object
+
+[[https://dtai.cs.kuleuven.be/problog/][probabilistic logic programming]]
+
+**** Metaprogramming
+   :PROPERTIES:
+   :CUSTOM_ID: metaprogramming
+   :END:
+
+Spoofax vs Xtext vs MPS?
+http://www.metaborg.org/en/latest/
+http://www.metaborg.org/en/latest/source/overview/examples.html
+
+PEG (parsing expression grammar)
+
+http://ttic.uchicago.edu/~dmcallester/foundations.pdf
+https://en.wikipedia.org/wiki/Foundations_of_mathematics
+https://web.stanford.edu/class/cs103/notes/Mathematical%20Foundations%20of%20Computing.pdf
+https://github.com/hoplon/javelin
+https://codon.com/consider-static-typing
+
+**** Structured editor
+   :PROPERTIES:
+   :CUSTOM_ID: structured-editor
+   :END:
+
+https://news.ycombinator.com/item?id=13773813
+
+https://www.reddit.com/r/programming/comments/1tp83j/lamdu_structuralast_editor/
+
+**** Others
+   :PROPERTIES:
+   :CUSTOM_ID: others
+   :END:
+
+[[https://tio.run/#agda][Compile and run Agda programs online]].
+
+**** Positive and negative positions, strict positivity
+   :PROPERTIES:
+   :CUSTOM_ID: positive-and-negative-positions-strict-positivity
+   :END:
+
+In the function type $A \to B$,
+we say that $A$ occurs in a /negative/ position
+and $B$ occurs in a /positive/ position.
+See [[https://cs.stackexchange.com/questions/42150/meaning-of-positive-position-and-negative-position-in-type-theory][CS StackExchange 42150]].
+
+For the /strict positivity/ constraint of a data type definition, see these:
+[[https://cs.stackexchange.com/questions/55646/strict-positivity][CS StackExchange 55646]],
+[[http://wiki.portal.chalmers.se/agda/pmwiki.php?n=ReferenceManual.SimpleInductiveTypes?from=ReferenceManual.Datatypes#Strictpositivity][Agda Wiki: Strict positivity]].
+
+In a TFPL, there is no expression whose type is =forall a. a=.
+
+#+BEGIN_EXAMPLE
+    exit : IO a
+#+END_EXAMPLE
+
+**** Rewriting systems
+   :PROPERTIES:
+   :CUSTOM_ID: rewriting-systems
+   :END:
+
+A TFPL program is a terminating ARS.
+https://en.m.wikipedia.org/wiki/Termination_(term_rewriting)
+
+[[https://softoption.us/content/node/37][SoftOption: normal forms and termination]]
+
+[[https://softoption.us/content/node/654][SoftOption: lambda calculus and combinatory logic]]
+
+There are at least two widely used confluent term-rewriting systems:
+
+- applicative, lambda calculus, beta-reduction
+- concatenative, postfix notation, PostScript, Forth
+
+An expression is in normal form iff there is no applicable rewrite rule.
+See [[https://en.wikipedia.org/wiki/Normal_form_(abstract_rewriting)][Wikipedia: Normal form (abstract rewriting)]].
+
+The following =hang= function is not total.
+Why?
+
+#+BEGIN_SRC haskell
+    hang : Nat -> Nat
+    hang x => hang x
+#+END_SRC
+
+The expression =hang x= can be rewritten to =hang x=, so =hang x= is not a normal form,
+but this goes on forever, so =hang x= does not have a normal form, and thus =hang x= is not total.
+
+This =loop= thing is not a function in the mathematical sense. Why is that?
+
+#+BEGIN_EXAMPLE
+    loop : a
+    loop => loop
+#+END_EXAMPLE
+
+Consider this, where =exit= terminates the program.
+
+#+BEGIN_SRC haskell
+    what : Nat
+    what => exit
+#+END_SRC
+
+The function =crash= also does not produce a =Nat=.
+
+- What is Scott continuity?
+
+  - Why is it named "continuity"?
+
+https://cs.stackexchange.com/questions/1371/scott-continuous-functions-an-alternative-definition
+
+Girard's System F
+https://people.mpi-sws.org/~skilpat/plerg/papers/harper-system-f-2up.pdf
+https://www.reddit.com/r/haskell/comments/2zqtfk/why_isnt_anyone_talking_about_optimal_lambda/
+
+Venanzio Capretta's partiality monad
+General recursion via coinductive types
+[[http://www.cs.ru.nl/~venanzio/publications/Recursion_Coinductive_LMCS_2005.pdf][Venanzio Capretta 2005]]
+"see the work by Barendregt
+and Geuvers [5] for a good exposition of technical issues of type-theoretic proof assistants"
+Coinductive types were first
+introduced in type theory by Hagino [34]
+
+[[https://cs.stackexchange.com/questions/19577/what-can-idris-not-do-by-giving-up-turing-completeness][StackOverflow: What can Idris not do by giving up Turing-completeness?]]:
+"Dual to termination: while an inductive definition must terminate (by consuming all of its data) a coinductive definition must be productive - in practice this means, brieflt, that any recursive call must be guarded by a constructor. I've found this explanation to be the clearest (ymmv): adam.chlipala.net/cpdt/html/Coinductive.html" -- Edwin Brady Apr 22 '14 at 17:58
+
+Dependent Types and Multi-monadic Effects in F⋆
+https://www.fstar-lang.org/papers/mumon/paper.pdf
+
+Type Systems, Luca Cardelli
+http://lucacardelli.name/Papers/TypeSystems.pdf
+
+[[https://www.cs.rit.edu/~mtf/student-resources/20094_voelker_msthesis.pdf][Karl Voelker master thesis: practical programming with total functions]]
+
+[[https://www.cs.york.ac.uk/plasma/wiki/index.php?title=Functional_Programming#Theses][York CS wiki: FP researches]]
+
+- Position papers
+
+  - [[https://www.irif.fr/~mellies/mpri/mpri-ens/articles/hyland-power-lawvere-theories-and-monads.pdf][2007, Hyland & Power: "The Category Theoretic Understanding of
+    Universal Algebra: Lawvere Theories and
+    Monads"]]
+
+- Should we read these?
+
+  - 2015 Ralf Hinze, Nicolas Wu, Jeremy Gibbons: [[http://www.cs.ox.ac.uk/people/jeremy.gibbons/publications/conjugate-hylos.pdf][Conjugate Hylomorphisms Or: The Mother of All Structured Recursion Schemes]]
+  - 2007 Colin John Morris Kemp PhD thesis [[https://pdfs.semanticscholar.org/21da/de9b8e96724265f911c90c0ddd935901a0f0.pdf][Theoretical foundations for practical "totally functional programming"]]
+** How do we write correct software?
+*** What is correct?
+Correct with respect to what?
+It does what we want, and it only does what we want?
+*** Proving and testing
+/Testing approximates proving./
+We actually want to prove a logical formula phi about a piece of code, we want to prove that the code fragment is a model of the formula phi, but proving is too expensive.
+Therefore, we test phi instead.
+
+In back-end testing, the formula is often obvious.
+What is the formula in front-end testing?
+DOM element existence testing?
+*** The problem with formal methods: you can't prove what you don't model.
+- Intel uses formal method, but why does its processors have vulnerabilities?
+  - Because /you can't prove what you don't model/.
+  - Spectre, Meltdown, etc.
+  - https://arstechnica.com/information-technology/2018/11/intel-cpus-fall-to-new-hyperthreading-exploit-that-pilfers-crypto-keys/?amp=1
+- How will we ever know that we didn't miss anything?
+- You have to prove that it does everything that you want it to do, /and/ that it does only that, and nothing else.
+**** What if it is impossible to write correct software? What are our options to mitigate/limit the damage?
+*** What?
+- Where is tutorial?
+- A goal should be to make it easy to make correct software?
+- 2014, slides, "How I became interested in foundations of mathematics.", Vladimir Voevodsky, [[https://www.math.ias.edu/vladimir/sites/math.ias.edu.vladimir/files/2014_08_ASC_lecture.pdf][pdf]]
+- Why should we be interested in homotopy type theory?
+- Coq
+- [[https://leanprover.github.io/][Lean]]
+
+  - Pros of Lean
+
+    - Integrates with Visual Studio Code
+
+  - Cons of Lean
+
+    - Less mature than Coq
+
+- Should we care about the relationship between functional programming and theorem proving?
+- Ramble
+
+  - Useless idea?
+
+    - Reverse-proving: generate all proofs of a theory.
+      (Proving is: given a statement, prove (or disprove).)
+
+      - Which true sentences are interesting?
+      - Which proofs are interesting?
+
+- Companies
+
+  - [[https://galois.com/][Galois]], on [[https://github.com/GaloisInc/][github]]
+
+- unread interesting things
+
+  - http://www.joachim-breitner.de/blog/717-Why_prove_programs_equivalent_when_your_compiler_can_do_that_for_you_
+  - http://www.michaelburge.us/2017/08/25/writing-a-formally-verified-porn-browser-in-coq.html
+  - https://aphyr.com/posts/342-typing-the-technical-interview
+  - http://tech.frontrowed.com/2017/09/22/aggregations/
+
+- interoperation between proof assistants?
+
+  - Lem ("lightweight executable mathematics")
+
+    - https://www.openhub.net/p/lightweight-executable-mathematics
+    - http://www.cl.cam.ac.uk/~pes20/lem/
+*** Coq?
+  :PROPERTIES:
+  :CUSTOM_ID: coq
+  :END:
+
+- Introduction
+
+  - What is a suitable introduction to Coq?
+  - [[https://people.debian.org/~schepler/coqtut.v.html][Daniel Schepler's "Mathematical formalization using Coq"]] seems approachable.
+  - [[https://mathoverflow.net/questions/155909/wanted-a-coq-for-the-working-mathematician][MO 155909: Wanted: a "Coq for the working mathematician"]]
+  - [[https://mathoverflow.net/questions/164959/how-do-i-verify-the-coq-proof-of-feit-thompson][MO 164959: How do I verify the Coq proof of Feit-Thompson?]]
+  - https://softwarefoundations.cis.upenn.edu/current/index.html
+  - Yves Bertot's "Coq in a hurry"
+  - [[https://coq.inria.fr/tutorial-nahas][Coq tutorial by Mike Nahas]]
+  - [[https://coq.inria.fr/distrib/current/refman/Reference-Manual006.html#Cic][Calculus of inductive constructions]]
+
+- [[http://blog.mikael.johanssons.org/coq-and-simple-group-theory.html][Coq and simple group theory]]
+- Installation on Ubuntu 14.04
+
+  - =sudo apt-get install coq=
+**** Introduction
+   :PROPERTIES:
+   :CUSTOM_ID: introduction
+   :END:
+
+Coq source file extension is =.v=.
+
+The notation =x:T= means "the type of =x= is =T=", "=x= inhabits =T=".
+It also means "=x= is a proof of =T=" by Curry-Howard isomorphism.
+
+The type of =nat= is =Type(1)=.
+
+The type of =set= is =Type(2)=.
+
+The type of =Type(i)= is =Type(i+1)=.
+
+#+BEGIN_EXAMPLE
+    (* This is a comment in Coq. *)
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+    coqtop -l filename.v -batch
+#+END_EXAMPLE
+
+**** Defining things
+   :PROPERTIES:
+   :CUSTOM_ID: defining-things
+   :END:
+
+#+BEGIN_EXAMPLE
+    Definition x: nat := 0.
+    Check x.
+
+    Definition f (x: nat): nat := x + 1.
+#+END_EXAMPLE
+
+Definition = non-recursive definition
+
+Fixpoint = recursive definition
+
+Inductive = type (Set (small set)) definition
+
+#+BEGIN_EXAMPLE
+    Definition name: type
+    where
+    type: Set
+    or type: Prop
+    or type: Type.
+#+END_EXAMPLE
+
+Proving 0+1 = 1 using Curry-Howard isomorphism?
+
+Axiom: and-elimination
+
+\begin{align*}
+a \wedge b \vdash a
+\end{align*}
+
+#+BEGIN_EXAMPLE
+    Theorem and_elim: forall a b: Prop, a /\ b -> a.
+    tauto.
+    Qed.
+#+END_EXAMPLE
+
+\begin{align*}
+a \vdash a \vee b
+\end{align*}
+
+Modus ponens
+
+\begin{align*}
+a, a \rightarrow b \vdash b
+\end{align*}
+
+**** How Coq represents propositions
+   :PROPERTIES:
+   :CUSTOM_ID: how-coq-represents-propositions
+   :END:
+
+#+BEGIN_EXAMPLE
+    Print False.
+    Print True.
+    Inductive True : Prop := I : True.
+    Inductive False : Prop := .
+    Inductive and (A B : Prop) : Prop := and : A -> B -> and A B.
+#+END_EXAMPLE
+*** Testing
+Why do we test?
+Because we are not sure that our program is correct.
+
+Why are we not sure that our program is correct?
+- Because we don't know how to prove its correctness.
+  This can be alleviated by using a decent programming language.
+- Because the cost of proving its correctness does not justify the benefit.
+  We can't do anything about this if the complexity is essential (irreducible), not accidental.
+
+We human are fallible.
+Thus we will always test.
+Therefore:
+- What should we test?
+- How should we test?
+- What is the test that has the greatest benefit-to-cost ratio?
+
+The expected benefit of a test is the expected cost of the mistakes that might have been made if the test did not exist.
+
+The quality of a test is the seriousness of the mistakes it prevents.
+Thus, the seriousness of testing is proportional to the seriousness of risk.
+
+Test is insurance.
+A good insurance covers your risk.
+A bad insurance only wastes money and doesn't cover your risk:
+Testing Java class getters is like buying flood insurance for a house in the desert.
+
+Insurance causes moral hazard (taking more risk because someone else pays for it).
+Does having a test cause you to take more risks?
+
+- The benefit of a test is the cost of the mistakes it prevents.
+- The cost of a test is the person-hours spent writing the test and updating the test, and a slight increase in build time. (Assume $50/person-hour for simplicity.)
+
+The answers to these questions tell us what to test and how to test:
+- What tests have the greatest benefit-to-cost ratio?
+- What mistakes do our tests prevent? How expensive are the mistakes that our tests prevent?
+- Which part of our code is most likely to cause expensive mistakes? (Example: testing getters won't prevent expensive mistakes.)
+
+Code coverage is a meaningless metric.
+We should measure the expected value of mistakes instead.
+We should "color" our code: color more risky methods more red, color less risky methods more green, like this
+travel risk map[fn::https://i.redd.it/ktop13ad2io01.png] but for software.
+
+If you are launching a rocket, then a mistake may cost billions of dollars.
+It makes sense to invest ten million dollars testing to avoid a 1/100 probability of making a billion-dollar mistake.
+** Software engineering, self-trust, self-peace
+How can these three people cooperate: our past self, our present self, and our future self?
+** Ramblings? Wish lists? Too speculative? Unclear goal/reason? Condemned to oblivion?
+*** Category theory and programming languages?
 The section title needs a verb.
 - Category-theoretic model of functional programming languages
   - Every functional programming language L can be modeled by a category C(L) whose objects are the types of L and arrows are the function expressions of L.
@@ -326,7 +1959,7 @@ The section title needs a verb.
       - https://softwareengineering.stackexchange.com/questions/216635/category-theory-based-language
 - category theory applied to programming language theory
   - 2012, "Generic Programming with Adjunctions" http://www.cs.ox.ac.uk/ralf.hinze/LN.pdf
-** Foundation of mathematics especially for programming?
+*** Foundation of mathematics especially for programming?
 - set theories, such as ZF, ZFC, NBG, etc.
   - https://math.stackexchange.com/questions/136215/difference-between-zfc-nbg
 - type theories, such as Martin-Löf type theory
@@ -346,7 +1979,7 @@ Can we formalize "a program is an executable formal system" using Grue's map the
 - How is "false" represented?
 - How is "true" represented?
 - How is "conjunction" represented?
-** Probably irrelevant to our goal
+*** Probably irrelevant to our goal
    :PROPERTIES:
    :CUSTOM_ID: probably-irrelevant-to-our-goal
    :END:
@@ -377,16 +2010,16 @@ Can we formalize "a program is an executable formal system" using Grue's map the
         - https://harc.ycr.org/project/gp/
 
 - Functional Payout Framework http://lambda-the-ultimate.org/node/3331
-** Automatic deglobalization of C programs?
-** <2018-09-15> Make an Emacs Lisp interpreter in Haskell for Yi editor
-** How do we model historical data in SQL?
+*** Automatic deglobalization of C programs?
+*** <2018-09-15> Make an Emacs Lisp interpreter in Haskell for Yi editor
+*** How do we model historical data in SQL?
 - Do we have to use SQL?
 - Is SQL the best tool for the job?
 - Does SQL do the job well enough to justify reducing maintenance costs?
 - How is historical data related to audit trail?
   - Audit trail encompasses historical data.
     Audit trail is a more stringent requirement.
-*** TODO <2018-09-19> Read
+**** TODO <2018-09-19> Read
 - [[https://stackoverflow.com/questions/3874199/how-to-store-historical-data][database design - How to Store Historical Data - Stack Overflow]]
 - [[https://grisha.org/blog/2015/09/23/storing-time-series-in-postgresql-efficiently/][Storing Time Series in PostgreSQL efficiently - Gregory Trubetskoy]]
 - [[https://dba.stackexchange.com/questions/114580/best-way-to-design-a-database-and-table-to-keep-records-of-changes][mysql - Best way to design a database and table to keep records of changes? - Database Administrators Stack Exchange]]
@@ -394,8 +2027,8 @@ Can we formalize "a program is an executable formal system" using Grue's map the
 - [[https://www.red-gate.com/simple-talk/sql/database-administration/database-design-a-point-in-time-architecture/][Database Design: A Point in Time Architecture - Simple Talk]]
 - [[https://blog.timescale.com/time-series-data-why-and-how-to-use-a-relational-database-instead-of-nosql-d0cd6975e87c][Time-series data: Why (and how) to use a relational database instead of NoSQL]]
   - Where is the SQL DDL/schema?
-** Information that is looking for a place where they can be most useful
-*** Garbage collection
+*** Information that is looking for a place where they can be most useful
+**** Garbage collection
 - [[https://www.reddit.com/r/programming/comments/7zfbs5/conservative_gc_is_it_really_that_bad_xpost_rjava/][Conservative GC: Is It Really That Bad? (X-post /r/java) : programming]] (summary)
   - [[https://www.excelsiorjet.com/blog/articles/conservative-gc-is-it-really-that-bad/][Conservative GC: Is It Really That Bad? -- Excelsior JET Team Blog]]
 - [[https://news.ycombinator.com/item?id=16436574][Conservative GC: Is It Really That Bad? | Hacker News]]
@@ -405,15 +2038,15 @@ Can we formalize "a program is an executable formal system" using Grue's map the
   Why not also GC file handles?
   Why not GC all resources?
   - [[https://cs.stackexchange.com/questions/52735/why-does-garbage-collection-extend-only-to-memory-and-not-other-resource-types][Why does garbage collection extend only to memory and not other resource types? - Computer Science Stack Exchange]]
-*** 2017 article "What Is the Best Way For Developers to Learn New Software Tools? An Empirical Comparison Between a Text and a Video Tutorial"
+**** 2017 article "What Is the Best Way For Developers to Learn New Software Tools? An Empirical Comparison Between a Text and a Video Tutorial"
 - http://programming-journal.org/2017/1/17/
-*** Common Lisp advocacy?
+**** Common Lisp advocacy?
 - 2018, article, [[https://academic.oup.com/bib/article/19/3/537/2769437][How the strengths of Lisp-family languages facilitate building complex and flexible bioinformatics applications | Briefings in Bioinformatics | Oxford Academic]]
-**** Common Lisp Object System
+***** Common Lisp Object System
 
 - [[http://www.aiai.ed.ac.uk/~jeff/clos-guide.html][A Brief Guide to CLOS]]
 
-*** Why people don't adopt metaprogramming tools
+**** Why people don't adopt metaprogramming tools
 I fear that the tool doesn't perfectly fit my use case.
 When that happens, I want to drop down to the lower layer.
 Generated code is usually inflexible.
@@ -421,7 +2054,7 @@ I could maintain a patch, but isn't it (patching generated code) rather hacky an
 The right way is to design the metalanguage so that it can express such transformation.
 
 https://www.eclipse.org/epsilon/doc/articles/eugenia-patching/
-*** TODO Process these informations
+**** TODO Process these informations
 
 - Composition, composable systems
 
@@ -750,12 +2383,12 @@ https://www.eclipse.org/epsilon/doc/articles/eugenia-patching/
 
     - ADTs.
 
-** Writing an enterprise application in Java is like teaching graduate physics using only the 100 most common English words.
-** The relationship between programming and past self
+*** Writing an enterprise application in Java is like teaching graduate physics using only the 100 most common English words.
+*** The relationship between programming and past self
 The key to being a good programmer is being someone that your future self can trust.
 
 When we change a program, we are trusting our past self.
-** The context of "Premature optimization"
+*** The context of "Premature optimization"
 http://wiki.c2.com/?PrematureOptimization
 
 Knuth was telling us to focus on what matters.
@@ -769,10 +2402,10 @@ Example where not "optimizing" is stupid:
 You're building a electronic fuel injection system,
 and you don't know anything about jitter, latency, and real-time systems.
 Controlling latency here is a requirement, not an optimization.
-** Haskell strictness checker
+*** Haskell strictness checker
 - 2018 "Keep your laziness in check" https://dl.acm.org/citation.cfm?doid=3243631.3236797
   - "We introduce StrictCheck: a property-based random testing framework for observing, specifying, and testing the strictness of Haskell functions."
-** <2018-09-12> question for Abdullah
+*** <2018-09-12> question for Abdullah
 Do you know of anything that computes (generates code for) the products/sums of data-types?
 Do you know of any libraries that enable us to describe how to transform a data type to a related data type?
 Do you know of anything resembling template metaprogramming for Haskell that is not Template Haskell?
@@ -797,12 +2430,12 @@ For example:
             | S_B1 | S_B2
     -- </output>
 #+END_EXAMPLE
-** <2017-09-04> Scheme currying
+*** <2017-09-04> Scheme currying
   :PROPERTIES:
   :CUSTOM_ID: scheme-currying
   :END:
 
-*** Abstract
+**** Abstract
    :PROPERTIES:
    :CUSTOM_ID: abstract
    :END:
@@ -813,7 +2446,7 @@ This way is simple,
 but it uses macros
 and it is limited to fixed-arity lambda expressions.
 
-*** The idea
+**** The idea
    :PROPERTIES:
    :CUSTOM_ID: the-idea
    :END:
@@ -847,7 +2480,7 @@ The idea of =define/c= is this parallel:
     (define/c (a b ... y) z) = (define a (lambda/c (b ... y) z))
 #+END_EXAMPLE
 
-*** The code
+**** The code
    :PROPERTIES:
    :CUSTOM_ID: the-code
    :END:
@@ -899,7 +2532,7 @@ I tried this code on Guile 2.0.9 on Ubuntu 14.04.
     )
 #+END_EXAMPLE
 
-*** Example
+**** Example
    :PROPERTIES:
    :CUSTOM_ID: example
    :END:
@@ -916,7 +2549,7 @@ the following fragment should print three threes.
     (apply/c g 1 2)
     (apply/c h 1 2)
 #+END_EXAMPLE
-** <2018-04-07> Approximating general recursion in TFP
+*** <2018-04-07> Approximating general recursion in TFP
   :PROPERTIES:
   :CUSTOM_ID: approximating-general-recursion-in-tfp
   :END:
@@ -1016,7 +2649,7 @@ Here is an example approximation of bottom.
 #+END_SRC
 
 I conjecture that there is an algorithm that can transform every general recursive function into its begin-step-end form.
-** Making a Java virtual machine
+*** Making a Java virtual machine
   :PROPERTIES:
   :CUSTOM_ID: making-a-java-virtual-machine
   :END:
@@ -1026,8 +2659,8 @@ I conjecture that there is an algorithm that can transform every general recursi
 
   - https://docs.oracle.com/javase/7/docs/technotes/guides/jni/spec/functions.html
 
-** Unsorted things from softeng.md
-*** Readings?
+*** Unsorted things from softeng.md
+**** Readings?
 - 2018, book, "The essence of software engineering", [[https://link.springer.com/book/10.1007/978-3-319-73897-0][description]], [[https://link.springer.com/content/pdf/10.1007%2F978-3-319-73897-0.pdf][pdf]]
   - chapter "Escaping Method Prison -- On the Road to Real Software Engineering"
     - some history of software engineering; method wars;
@@ -1044,7 +2677,7 @@ I conjecture that there is an algorithm that can transform every general recursi
       - 1987, article, "Software processes are software too", [[http://laser.cs.umass.edu/techreports/1987-LJO.pdf][pdf]]
 - 2018, slides, "What would a science of software engineering look like?", [[http://herbsleb.org/web-pres/slides/crowd-chase-2018-final-dist.pdf][pdf]]
 - Meilir Page Jones, "What every programmer should know about object-oriented design"
-*** Old pages
+**** Old pages
 - Things we use, tools and services
   - vim, text editor
   - Management
@@ -1052,7 +2685,7 @@ I conjecture that there is an algorithm that can transform every general recursi
     - .NET stack
       - http://engineering.gopangea.com/stack
       - http://engineering.gopangea.com/2015/12/10/why-dot-net.html
-*** Undigested
+**** Undigested
 - What is a database that can be scaled up without downtime?
   We are willing to sacrifice consistency for tracking data.
 - Are we really doing Scrum? http://www.allaboutagile.com/the-scrumbutt-test/
@@ -1228,7 +2861,7 @@ I conjecture that there is an algorithm that can transform every general recursi
     - other tools?
   - feature-oriented software development
     - https://en.wikipedia.org/wiki/FOSD_program_cubes
-** What is the difference between the $10,000 Indonesian-citizen programmer and the $100,000 American-citizen programmer?
+*** What is the difference between the $10,000 Indonesian-citizen programmer and the $100,000 American-citizen programmer?
 Is it location?
 Will a $10,000 Indonesian-citizen programmer suddenly become a $100,000 Indonesian-citizen programmer just by moving to America?
 Are American companies simply able/willing to pay more?
@@ -1237,10 +2870,291 @@ Is it skill/ability?
 Is the $100,000 American-citizen programmer more capable than the $10,000 Indonesian-citizen programmer?
 
 Inconclusive discussion https://marginalrevolution.com/marginalrevolution/2012/01/why-are-some-programmers-paid-more-than-others.html
-** Machine-learning database indexing; an index is a model of the data
+*** Machine-learning database indexing; an index is a model of the data
 http://deliprao.com/archives/262
 
 https://arxiv.org/abs/1712.01208
+** What is software engineering?
+(I moved some contents to file:philo.org).
+*** Ontology and jargon
+A /language/ is something that has syntax (form) and semantics (meaning).
+
+A language enables its users to /communicate/ with each other.
+
+A language is formed by the agreements of its users.
+
+A /formal language/ ...
+
+A /programming language/ is a formal language that is used for programming (a machine).
+
+To program a machine is ...?
+
+A /program/ is a formula/string/term in a programming language?
+
+A machine can be modeled by a formal system.
+
+A program is an executable mathematical object?
+*** <2018-09-25> Software is broken and bloated
+- [[http://tonsky.me/blog/disenchantment/][Software disenchantment @ tonsky.me]]
+- [[https://www.hanselman.com/blog/EverythingsBrokenAndNobodysUpset.aspx][Scott Hanselman: "Software doesn't work. I'm shocked at how often we put up with it."]]
+*** Why is hardware more standardized than software?
+Hardware standardization benefits everyone (both its makers and its users).
+Hardware unstandardization is more expensive than hardware standardization.
+
+Software standardization is more expensive than software unstandardization.
+
+Is software too malleable?
+
+Hardware engineers have standard nuts, bolts, connectors, and components.
+
+Why standardize?
+
+- standardization reduces cost
+- standardization reduces duplicate effort
+- standardization improves interoperability
+
+Hypothesis:
+Programming language is too free.
+If programming language is limited (that is, if there is only one way to do one thing),
+then software will standardize itself.
+
+There are some software standards, such as ABIs (Application Binary Interfaces).
+C calling convention is a standard.
+*** How do we write lasting software?
+- Clear ontology
+- Task-oriented documentation
+  - Documentation doesn't have to be separate from code.
+- /Capture/ the requirement.
+  Translate the requirement into software, instead of making a software system that /satisfies/ the requirement.
+  - The program may be rewritten, but the functional requirements, the business logic and the mathematical truths rarely change.
+    - In order to make software last, we must /capture/ the requirements, not make a system that satisfies the requirements.
+      This requires a change in mindset.
+      The software is not something made to some requirements; the software is the requirements itself.
+      The software is not the shirt made-to-order; the software is the order itself, from which all satisfying shirts can be generated/derived/produced.
+- Think for yourself.
+  Don't just follow hypes.
+  Always have a reason when doing things.
+  Record your reasoning for your forgetful future self.
+- Design software to be refactored without surprises.
+  - Example: Avoid runtime reflection (unless for the most obvious cases).
+    An alternative to that is code generation.
+    - Help the compiler help you.
+    - Even the most obvious cases aren't obvious to someone who see the code for the first time?
+- Shorten the edit-compile-test cycle. Design software so that it compiles fast and it starts up fast.
+- What else?
+*** Adding people to a late software project makes it later (Fred Brooks, "No silver bullet").
+Newcoming programmers, no matter how experienced, need time to onboard; they are not immediately productive.
+Existing programmers must spend some time helping the newcoming programmers, temporarily reducing productivity even further.
+*** Complexity
+**** Renaat Verbruggen: Three universal methods of reducing complexity: partitioning, hierarchy, independence
+- [[http://www.computing.dcu.ie/~renaat/ca2/ca214/ca214vii.html][Renaat Verbruggen: Three universal methods of reducing complexity]]: partitioning, hierarchy, independence
+  - It also applies to other things, such as organizing this wiki.
+**** How complex systems fail?
+- 2000, article, "How complex systems fail", [[http://web.mit.edu/2.75/resources/random/How%20Complex%20Systems%20Fail.pdf][pdf]]
+*** Defining software complexity as the length of the shortest first-order-logic formula that describes it?
+Every software can, in principle, be described by a first-order-logic formula that describes the requirements satisfied or behaviors exhibited by the system.
+**** What is complexity?
+- [[https://fs.blog/2014/03/what-is-complexity/][Farnam Street blog post]]
+- [[http://www.hartford.edu/complexity/whats-complexity.aspx][What Is 'Complexity'? | University of Hartford]]
+- Measuring software complexity by hits-of-code instead of lines-of-code
+  https://www.yegor256.com/2014/11/14/hits-of-code.html
+*** Unpopular opinions
+- https://www.quora.com/What-unpopular-opinions-do-you-have-about-software-development
+*** TODO Measuring developer productivity
+- 2004 article "Defining and measuring the productivity of programming languages" [[https://pdfs.semanticscholar.org/1852/9ff58460b6238f5095af073d8505d79d3264.pdf][pdf]]:
+  - It defines these metrics:
+    - "the time and effort required to write, debug, and tune the code"
+    - "the performance of the code that results"
+  - power-efficiency graph (human efficiency and machine efficiency)
+  - what else?
+- 2008 https://ifs.host.cs.st-andrews.ac.uk/Books/SE9/Web/Planning/productivity.html
+  - https://ifs.host.cs.st-andrews.ac.uk/Books/SE9/
+- 1992 article https://www.andrews.edu/~vyhmeisr/papers/progprod.html
+- 2012 article http://www.drdobbs.com/jvm/the-comparative-productivity-of-programm/240005881
+  - "A database comparing 6,000 projects shows that the choice of programming language has a significant impact on project schedule."
+*** Who reads SWEBOK? How can we read SWEBOK? Who reads all of it? Why does anyone bother writing it?
+- https://en.wikipedia.org/wiki/Software_Engineering_Body_of_Knowledge
+- http://www.sebokwiki.org/wiki/An_Overview_of_the_SWEBOK_Guide
+  - <2017-04-27>
+    Someone claims to have read it.
+    Holy shit.
+    https://www.quora.com/Do-you-use-SWEBOK-Is-it-helpful
+- Is the knowledge applicable?
+  Knowledge that can't be applied is useless.
+
+Fowler 2003[fn::https://martinfowler.com/bliki/Swebok.html] points out the problems with SWEBOK.
+*** Coupling
+- Coupling is deciding what you can depend on.
+  - Big Company X just released this new cool stuff, but will it still be there in 5 years?
+*** Testing
+**** If proving is cheap, prove it instead of testing it.
+**** Amount of testing should be proportional to risk.
+- How do we make code testable?
+  - Minimize its dependencies.
+  - Minimize the number of things that you must set up before you can run it.
+  - Why?
+    - If you don't satisfy all its dependencies, you can't run it.
+    - If you can't run it, you can't test it.
+    - If your business logic depends on the database, you'll have to set up a database to test your business logic.
+- What do we need to test?
+  - Testing is proportional to risk.
+    - Riskier code should be tested more.
+      - "Risk comes from not knowing what you're doing." (Warren Buffett)
+        - Buffett said that for investing, but it also applies to programming.
+  - If it's obvious, don't test it. (Getters, setters, and DAOs without fancy logic)
+  - If you can prove it, don't test it.
+*** TODO Compare programming language research journals and conferences
+Which ones should we care about?
+Which ones are the real deal?
+**** Conferences
+- ICFP: The ACM SIGPLAN International Conference on Functional Programming
+- OOPSLA: ACM SIGPLAN Object-Oriented Programming, Systems, Languages & Applications
+https://en.wikipedia.org/wiki/OOPSLA
+- PLDI: ACM SIGPLAN Programming Language Design and Implementation
+http://www.sigplan.org/Conferences/PLDI/
+- POPL: ACM SIGPLAN Principles of Programming Languages
+http://www.sigplan.org/Conferences/POPL/
+**** Proceedings
+- PACMPL: Proceedings of the ACM on Programming Languages
+**** DBLP vs Semantic Scholar?
+https://dblp.uni-trier.de/
+*** Software engineer associations
+   :PROPERTIES:
+   :CUSTOM_ID: software-engineer-associations
+   :END:
+
+- Indonesia
+
+  - [[http://sarccom.org/][SARCCOM Software architect Indonesia community]]
+  - [[http://www.aspiluki.or.id/][ASPILUKI Asosiasi Piranti Lunak Telematika Indonesia]]
+
+- International?
+*** Software business model
+- Hardware is moved.
+- Software is /copied/, not moved.
+- When you sell hardware, you /transfer/ ownership. The hardware doesn't multiple into two.
+- There are two models:
+  - SaaS (software as a service, a web application; you control the hardware that runs the software, but not the input and output of the process)
+  - bundling software with restricted hardware (Apple iPhone)
+- Controlling software requires controlling the hardware that runs it.
+  - Controlling the law requires controlling the lawmakers and the law enforcers.
+- Isn't it absurd to judge a crime by its potentiality not its actuality?
+- Process is software. Law is software.
+- The chemical process in a chemical plant is also software, but not everyone owns a chemical plant.
+  - If you hire a chemical engineer to design and implement your chemical plant's process, does the chemical engineer own the rights to the process?
+  - If you hire a software to design and implement your computer's operating system, does the software engineer own the rights to the operating system?
+
+Ownership is the ability to control access.
+To own a thing is to be able to control the access to that thing.
+
+- It is easy to control access to hardware. Nature/physics is with us on this issue.
+- It isn't easy to control access to software.
+
+- https://medium.com/@mattklein123/the-broken-economics-of-oss-5a1b31fc0182
+*** Measuring software quality?
+- https://cs.stackexchange.com/questions/47077/is-there-a-way-of-objectively-measuring-the-efficiency-or-quality-of-software-or
+*** Programming language quality?
+- https://medium.com/@richardeng/how-to-measure-programming-language-complexity-afe4f7e75786
+- https://medium.com/concerning-pharo/elegant-pharo-code-bb590f0856d0
+*** Technical writing, software documentation
+- https://www.divio.com/blog/documentation/:
+"Documentation needs to include and be structured around its *four different functions*: /tutorials, how-to guides, explanation and technical reference/.
+Each of them *requires a distinct mode of writing*."
+*** TODO Who said this "pit of success"? It was someone on the Internet.
+- Write code that makes your client/user/reader (another programmer who uses your code) fall into the pit of success.
+- Corollary: Principle of least astonishment.
+- Corollary: Write code that a programmer can understand with an IDE without having to read much documentation.
+- Corollary: Group data and methods that need those data together in one class.
+- Can that principle derive these principles? http://c2.com/cgi/wiki?PrinciplesOfObjectOrientedDesign
+- You can write maintainable and reliable procedural code?
+
+
+* Developing software for the Web
+** The Web was not designed to be a software platform
+- [[https://news.ycombinator.com/item?id=11035143][The sad state of web development]] (not everyone agrees).
+- It's time to kill the web https://blog.plan99.net/its-time-to-kill-the-web-974a9fe80c89
+  - from https://twitter.com/tehjh Jann Horn's Twitter
+    - At that time Jann Horn was a member of Google's Project Zero
+      https://blog.plan99.net/what-should-follow-the-web-8dcbbeaccd93
+- Why not infinite scrolling?
+  - Do you have an alternative to infinite scrolling?
+  - Do you handle network interruptions?
+    How does the user continue scrolling after network connection is restored?
+    Is there an unhandled exception in your script?
+** Web application frameworks?
+http://zotonic.com/
+** TODO How do we develop enterprise web applications efficiently?
+*** <2018-09-27> Enterprise application development is like three blind people describing an elephant.
+Every team is a blind people.
+
+The company's actual ontology is the elephant.
+
+How do we unify enterprise systems?
+Should we combine subsystem ontologies to produce the actual ontology,
+or should we derive subsystem ontologies from the actual ontology?
+*** The ontology of enterprise web applications
+**** Entities
+An /entity/ is something that has identity.
+Every entity is distinguishable from other entities.
+**** Properties (extrinsic properties)
+A /property/ of an entity is something that makes the entity what it is.
+
+In software modeling, properties are usually extrinsic properties.
+
+An extrinsic property of an entity is something we give to the entity, not something that comes with the entity.
+
+Examples of properties:
+
+- The name of a person is an extrinsic property.
+  Changing his name doesn't change what I think of him.
+- The name of a hotel is an extrinsic property.
+  Changing the hotel's name does not change my willingness to stay in it.
+
+A /property/ is a function from entity E to value V.
+
+https://en.wikipedia.org/wiki/Intrinsic_and_extrinsic_properties
+**** Combining entities
+**** Mapping entities to storages
+** Modeling a web application?
+*** Picking a modeling language
+I have narrowed down:
+- a relational language such as Prolog, Kanren, Mercury
+- a functional language such as Haskell, Idris, Ocaml, ML
+- TypeScript, Racket, Scheme, Lisp, Lua
+
+There are too many choices.
+What is the /semantics/?
+What is the /essence/?
+- https://en.wikipedia.org/wiki/Modeling_language
+
+What is AsmL?
+https://cs.wmich.edu/~OODA/translate.html
+*** Example of modeling web application
+What do we think a web application is?
+
+What do users think?
+What do users care?
+What are the users' mental model?
+How can we formalize the users' mental model, and use that formal model to develop an application with less effort?
+
+Users think of an app as a /tool/, like a complicated hammer:
+- What was it originally invented for? What is it supposed to do? What is it usually used for? (Drive nails into wall)
+- How do I use it? (Grip the hammer, and hit the nail)
+- What can I use it for? (Cracking this clam open? Destroying this stuff? Killing a house intruder? Euthanizing a dying dog?)
+
+An application (a web application) maps a HTTP request to a HTTP response.
+
+We use a Prolog atom to /refer/ to an /entity/ (something that is unique, has an identity, is identical only to itself, is not identical to any other entity).
+Thus a Prolog atom is similar to an English /word/, and the Prolog knowledge base /gives meaning/ to that atom.
+
+The formula =application__sql_table(A,T)= means that application A uses SQL table T.
+
+The formula =application__page(A,P)= means the application A serves page P.
+*** Zotonic?
+Zotonic's authors at least has thought about its ontology
+http://zotonic.com/page/618/flexible-datamodel
+*** Ur/Web?
+Language-level integration.
 * Maintaining software
 ** Backward-compatibility complicates development but simplifies maintenance
 *** If you maintain your library's backward-compatibility, you only need to maintain the latest version of the library.
@@ -1352,1739 +3266,5 @@ It may be ugly, but /it works/.
 - The only way to ensure software maintainability is periodic rotation of programmers?
   - Yegor agrees: we should rotate programmers, no less frequent than every year, for software maintainability
     https://www.yegor256.com/2015/12/29/turnover-is-good-for-maintainability.html
-* Functional programming research
-  :PROPERTIES:
-  :CUSTOM_ID: functional-programming-research
-  :END:
-
-- Abbreviations
-
-  - CPS: continuation-passing style
-  - FP: functional programming
-  - OS: operating system
-  - PFP: partial functional programming
-  - TFP: total functional programming
-  - TFPL: total functional programming language
-  - TM: Turing machine
-
-** Research questions
-   :PROPERTIES:
-   :CUSTOM_ID: research-questions
-   :END:
-
-** Monads, lazy, strict
-   :PROPERTIES:
-   :CUSTOM_ID: monads-lazy-strict
-   :END:
-
-- Can you sell me some TFP?
-
-  - What is TFP?
-
-    - TFP is functional programming with only total functions.
-
-      - A function is total iff it is defined for every element of its domain.
-
-    - TFP ensures that every function is total by constraining every recursion to be structural recursion.
-
-      - Structural recursion is recursion with the constraint that every recursive call is syntactically smaller.
-
-  - Why TFP?
-
-    - The practical advantage of TFP is that it is easier
-      (and therefore faster and less costly)
-      to write provably correct programs in TFP
-      compared to PFP or imperative programming.
-
-      - This ultimately translates to faster time-to-market,
-        lower development cost, fewer errors, fewer customer complaints, and higher customer satisfaction.
-        (I know this sounds like bullshit. We should not underestimate the ways that humans can screw up.)
-
-    - The theoretical advantage of TFP
-      is that TFP has simpler denotational semantics compared to PFP
-      because TFP has less bottoms to consider. [Turner2004]
-
-  - Why not TFP?
-
-    - A disadvantage of TFP is that it is not Turing-complete because all programs must terminate,
-      but OSes don't terminate,
-      but we can still write an OS in a TFPL using codata and corecursion [Turner2004]
-      which are discussed in another section in this document.
-
-** Ramble
-  :PROPERTIES:
-  :CUSTOM_ID: ramble
-  :END:
-
-*You should not read anything below this point.*
-These are the drafts of my drafts.
-I think they should be included in this page,
-but I haven't worked them enough.
-
-- Why did Simon Peyton-Jones write that the next Haskell will be strict?
-
-  - [[http://www.cs.nott.ac.uk/~gmh/appsem-slides/peytonjones.ppt][Simon Peyton-Jones PPT slides]].
-  - [[https://news.ycombinator.com/item?id=1924061][ycombinator comment thread]].
-
-This is a questionnaire, not survey article:
-A preliminary survey of functional programming
-Caitlin Sadowski
-Daan Leijen
-https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/paper-67.pdf
-
-- How do these differ: Agda, Coq, Lean, Isabelle, ACL2, and others?
-
-  - [[https://www.reddit.com/r/haskell/comments/3b498l/if_you_could_change_one_thing_about_haskell_what/csk2gvl/][Conor McBride's tangential opinions]]
-    on Coq vs Agda vs others
-  - [[http://wiki.portal.chalmers.se/agda/pmwiki.php?n=Main.AgdaVsCoq][Agda Wiki: Agda vs Coq]]
-  - [[https://www.reddit.com/r/haskell/comments/30j9l6/lean_the_new_open_source_theorem_prover_developed/][/r/haskell: Lean: the new open source theorem prover developed at Microsoft Research]]
-
-*** Lambda calculus
-   :PROPERTIES:
-   :CUSTOM_ID: lambda-calculus
-   :END:
-
-- History
-
-  - Alonzo Church introduced lambda calculus in 1932 in [Church1932].
-  - Notations have changed.
-    Church wrote $S_y^x U$ but we write $U[x := y]$ for the same thing:
-    the expression $U$ but with every occurrence of free variable $x$ replaced by expression $y$.
-  - [Church1932] credits a 1924 publication of Moses Schönfinkel for what we call /currying/:
-    changing a multi-parameter function to a one-parameter function
-    returning another one-parameter function returning yet another one-parameter function, and so on.
-    Currying is changing $f : (a,b) \to c$ to $f' : a \to (b \to c)$ such that $f(x,y) = (f'(x))(y)$.
-
-- See also [[https://en.wikipedia.org/wiki/Lambda_calculus][Wikipedia: Lambda calculus]].
-
-**** might be too old
-    :PROPERTIES:
-    :CUSTOM_ID: might-be-too-old
-    :END:
-
-- [Lof1984]
-- 1986 A survey of functional programming language principles https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/19870002073.pdf
-
-*** Codata, corecursion, and coinduction
-   :PROPERTIES:
-   :CUSTOM_ID: codata-corecursion-and-coinduction
-   :END:
-
-For more about codata, corecursion, and coinduction, see: - [[http://www.cl.cam.ac.uk/archive/mjcg/plans/Coinduction.html]["Corecursion and coinduction: what they are and how they relate to recursion and induction", Mike Gordon]]:
-"My goal here is to try to understand these things through the activity of creating a simple explanation." - [[http://blog.sigfpe.com/2007/07/data-and-codata.html]["Data and Codata", Dan Piponi]]:
-"The program might not terminate, but from a mathematical perspective this is a completely well defined function."
-"Note the duality: in structural recursion we 'deconstruct' the argument and then we're allowed to recurse. In guarded recursion we recurse first, and then we're allowed to use the constructor." - [[https://www.tac-tics.net/blog/data-vs-codata]["Data vs Codata", Michael Maloney]]
-
-*** Miscellany
-   :PROPERTIES:
-   :CUSTOM_ID: miscellany
-   :END:
-
-[Turner2004] calls TFP "strong functional programming".
-
-*** Lazy, strict
-   :PROPERTIES:
-   :CUSTOM_ID: lazy-strict
-   :END:
-
-- The Church-Rosser property
-  ([[https://en.wikipedia.org/wiki/Church%E2%80%93Rosser_theorem][Wikipedia]],
-  [[http://mathworld.wolfram.com/Church-RosserProperty.html][Mathworld]]),
-  eliminates the difference between strict and lazy in a TFPL [Turner2004].
-
-*** Type theory is a formal system, not a branch of mathematics
-   :PROPERTIES:
-   :CUSTOM_ID: type-theory-is-a-formal-system-not-a-branch-of-mathematics
-   :END:
-
-There are at least two type theories:
-the Martin-L"of type theory, and the calculus of constructions [Bove2001].
-I thought "type theory" was a branch of mathematics,
-like "category theory", "graph theory", and "number theory".
-
-"Martin-L"of's type theory is basically a theory about sets in which it is possible to interpret a logic." [Nordstrom1988]
-
-*** Recursion and fixpoint
-   :PROPERTIES:
-   :CUSTOM_ID: recursion-and-fixpoint
-   :END:
-
-We say that $x$ is a /fixpoint/ of $f$ iff $x = f(x)$.
-
-A [[https://www.cs.cornell.edu/courses/cs3110/2013sp/supplemental/lectures/lec29-fixpoints/lec29.html][text lecture]]
-describes how to obtain the factorial function as a fixed point of successive /approximations/.
-
-[[https://en.wikipedia.org/wiki/Fixed-point_combinator][Wikipedia: Fixed-point combinator]].
-A fixed-point combinator enables /anonymous/ recursive functions.
-
-TFP rejects the definition =fix f = f (fix f)= because this is not a structural recursion.
-
-Recursion is about fixpoint.
-
-*** The Eff language and monad-aware languages
-   :PROPERTIES:
-   :CUSTOM_ID: the-eff-language-and-monad-aware-languages
-   :END:
-
-Consider this passage from [McBride2015]:
-
-#+BEGIN_QUOTE
-  [The Eff language lets] us write in direct
-  style for whatever effectful interface is locally available, then obtain the computation
-  delivered by the appropriate Moggi-style translation into an explicitly monadic
-  kernel.
-#+END_QUOTE
-
-I think "in direct style"
-means that in Eff we can write =f x= to mean what we would write as =x >>= f= in Haskell,
-but with the Monad instance automatically inferred based on the locally available effects.
-
-I think that passage suggests that the Eff language [Bauer2012]
-is related to the "monad-aware language" that Abdullah is trying to accomplish.
-The relation is that Eff infers the monad from the locally available effects.
-However, Eff's type system ignores the effects (like ML's type system)
-so this is probably not what Abdullah wants.
-
-*** Reading triage
-   :PROPERTIES:
-   :CUSTOM_ID: reading-triage
-   :END:
-
-http://semantic-domain.blogspot.co.id/2016/03/agda-is-not-purely-functional-language.html
-
-https://en.wikipedia.org/wiki/Category:Term-rewriting_programming_languages
-
-In a term-rewriting language such as Pure, we can write program transformation as part of the program.
-https://stackoverflow.com/questions/24330902/how-does-term-rewriting-based-evaluation-work
-
-https://www.quora.com/What-are-examples-of-statically-typed-logic-programming-languages-ex-similar-to-Prolog
-
-https://mathoverflow.net/questions/3920/what-does-it-mean-to-discharge-assumptions-or-premises
-
-http://www.cs.nott.ac.uk/~pszvc/g54dtp/inductive_domain.v
-
-https://stackoverflow.com/questions/145263/what-is-total-functional-programming
-
-What is a computational effect?
-
-Does totality really have anything to do with termination?
-
-*** TFP and Turing-completeness
-   :PROPERTIES:
-   :CUSTOM_ID: tfp-and-turing-completeness
-   :END:
-
-We must distinguish between a Turing machine and its execution.
-
-A TM needs a tape to run, but does not come with it.
-To run a TM, you have to supply a tape.
-
-A /tape/ is a finite sequence of tape symbols.
-
-A /step/ is a pair of configuration and tape.
-
-A /run/ is a sequence of steps. This sequence may be infinite.
-
-A /run/ of a Turing machine $m$ with initial tape $t$ is ...
-
-Instead of thinking about infinitely long tape with infinitely many blank symbols,
-we think that the tape is finite but the TM may at every step
-insert, update, or delete a cell.
-
-A TM is finite by definition: a TM is a tuple whose each component is taken from a finite set.
-The description of a TM does not include the tape.
-The execution trace of a TM may be infinite.
-A TFPL can /describe/ every TM just fine.
-
-We can describe a Turing machine in a TFPL?
-
-https://www.reddit.com/r/programming/comments/jvu2w/total_functional_programming_and_the_unimportance/
-
-[[http://lambda-the-ultimate.org/node/2003][LTU: Total functional programming]]
-
-https://news.ycombinator.com/item?id=12646390
-
-https://existentialtype.wordpress.com/2014/03/20/old-neglected-theorems-are-still-theorems/
-
-https://math.stackexchange.com/questions/111773/are-total-recursive-functions-recursively-enumerable
-
-How do we write this "echo" program in TFP? Is it even total?
-
-#+BEGIN_SRC haskell
-    main : IO ()
-    main = getLine >>= putStrLn >> main
-#+END_SRC
-
-We can /describe/ the infinite list of natural numbers =[0,1,2,3,...]= in a TFP.
-
-#+BEGIN_EXAMPLE
-    f : Nat -> Nat
-    f n = n + 1
-
-    f : Nat -> Nat
-    f n = n
-#+END_EXAMPLE
-
-[[https://arxiv.org/abs/1610.09254][Partiality, Revisited: The Partiality Monad as a Quotient Inductive-Inductive Type]]
-
-http://www.cl.cam.ac.uk/archive/mjcg/plans/Coinduction.html
-
-https://en.wikipedia.org/wiki/Natural_transformation
-
-https://en.wikipedia.org/wiki/Initial_algebra
-endofunctor, F-algebra, initial object
-
-[[https://dtai.cs.kuleuven.be/problog/][probabilistic logic programming]]
-
-*** Metaprogramming
-   :PROPERTIES:
-   :CUSTOM_ID: metaprogramming
-   :END:
-
-Spoofax vs Xtext vs MPS?
-http://www.metaborg.org/en/latest/
-http://www.metaborg.org/en/latest/source/overview/examples.html
-
-PEG (parsing expression grammar)
-
-http://ttic.uchicago.edu/~dmcallester/foundations.pdf
-https://en.wikipedia.org/wiki/Foundations_of_mathematics
-https://web.stanford.edu/class/cs103/notes/Mathematical%20Foundations%20of%20Computing.pdf
-https://github.com/hoplon/javelin
-https://codon.com/consider-static-typing
-
-*** Structured editor
-   :PROPERTIES:
-   :CUSTOM_ID: structured-editor
-   :END:
-
-https://news.ycombinator.com/item?id=13773813
-
-https://www.reddit.com/r/programming/comments/1tp83j/lamdu_structuralast_editor/
-
-*** Others
-   :PROPERTIES:
-   :CUSTOM_ID: others
-   :END:
-
-[[https://tio.run/#agda][Compile and run Agda programs online]].
-
-*** Positive and negative positions, strict positivity
-   :PROPERTIES:
-   :CUSTOM_ID: positive-and-negative-positions-strict-positivity
-   :END:
-
-In the function type $A \to B$,
-we say that $A$ occurs in a /negative/ position
-and $B$ occurs in a /positive/ position.
-See [[https://cs.stackexchange.com/questions/42150/meaning-of-positive-position-and-negative-position-in-type-theory][CS StackExchange 42150]].
-
-For the /strict positivity/ constraint of a data type definition, see these:
-[[https://cs.stackexchange.com/questions/55646/strict-positivity][CS StackExchange 55646]],
-[[http://wiki.portal.chalmers.se/agda/pmwiki.php?n=ReferenceManual.SimpleInductiveTypes?from=ReferenceManual.Datatypes#Strictpositivity][Agda Wiki: Strict positivity]].
-
-In a TFPL, there is no expression whose type is =forall a. a=.
-
-#+BEGIN_EXAMPLE
-    exit : IO a
-#+END_EXAMPLE
-
-*** Rewriting systems
-   :PROPERTIES:
-   :CUSTOM_ID: rewriting-systems
-   :END:
-
-A TFPL program is a terminating ARS.
-https://en.m.wikipedia.org/wiki/Termination_(term_rewriting)
-
-[[https://softoption.us/content/node/37][SoftOption: normal forms and termination]]
-
-[[https://softoption.us/content/node/654][SoftOption: lambda calculus and combinatory logic]]
-
-There are at least two widely used confluent term-rewriting systems:
-
-- applicative, lambda calculus, beta-reduction
-- concatenative, postfix notation, PostScript, Forth
-
-An expression is in normal form iff there is no applicable rewrite rule.
-See [[https://en.wikipedia.org/wiki/Normal_form_(abstract_rewriting)][Wikipedia: Normal form (abstract rewriting)]].
-
-The following =hang= function is not total.
-Why?
-
-#+BEGIN_SRC haskell
-    hang : Nat -> Nat
-    hang x => hang x
-#+END_SRC
-
-The expression =hang x= can be rewritten to =hang x=, so =hang x= is not a normal form,
-but this goes on forever, so =hang x= does not have a normal form, and thus =hang x= is not total.
-
-This =loop= thing is not a function in the mathematical sense. Why is that?
-
-#+BEGIN_EXAMPLE
-    loop : a
-    loop => loop
-#+END_EXAMPLE
-
-Consider this, where =exit= terminates the program.
-
-#+BEGIN_SRC haskell
-    what : Nat
-    what => exit
-#+END_SRC
-
-The function =crash= also does not produce a =Nat=.
-
-- What is Scott continuity?
-
-  - Why is it named "continuity"?
-
-https://cs.stackexchange.com/questions/1371/scott-continuous-functions-an-alternative-definition
-
-Girard's System F
-https://people.mpi-sws.org/~skilpat/plerg/papers/harper-system-f-2up.pdf
-https://www.reddit.com/r/haskell/comments/2zqtfk/why_isnt_anyone_talking_about_optimal_lambda/
-
-Venanzio Capretta's partiality monad
-General recursion via coinductive types
-[[http://www.cs.ru.nl/~venanzio/publications/Recursion_Coinductive_LMCS_2005.pdf][Venanzio Capretta 2005]]
-"see the work by Barendregt
-and Geuvers [5] for a good exposition of technical issues of type-theoretic proof assistants"
-Coinductive types were first
-introduced in type theory by Hagino [34]
-
-[[https://cs.stackexchange.com/questions/19577/what-can-idris-not-do-by-giving-up-turing-completeness][StackOverflow: What can Idris not do by giving up Turing-completeness?]]:
-"Dual to termination: while an inductive definition must terminate (by consuming all of its data) a coinductive definition must be productive - in practice this means, brieflt, that any recursive call must be guarded by a constructor. I've found this explanation to be the clearest (ymmv): adam.chlipala.net/cpdt/html/Coinductive.html" -- Edwin Brady Apr 22 '14 at 17:58
-
-Dependent Types and Multi-monadic Effects in F⋆
-https://www.fstar-lang.org/papers/mumon/paper.pdf
-
-Type Systems, Luca Cardelli
-http://lucacardelli.name/Papers/TypeSystems.pdf
-
-[[https://www.cs.rit.edu/~mtf/student-resources/20094_voelker_msthesis.pdf][Karl Voelker master thesis: practical programming with total functions]]
-
-[[https://www.cs.york.ac.uk/plasma/wiki/index.php?title=Functional_Programming#Theses][York CS wiki: FP researches]]
-
-- Position papers
-
-  - [[https://www.irif.fr/~mellies/mpri/mpri-ens/articles/hyland-power-lawvere-theories-and-monads.pdf][2007, Hyland & Power: "The Category Theoretic Understanding of
-    Universal Algebra: Lawvere Theories and
-    Monads"]]
-
-- Should we read these?
-
-  - 2015 Ralf Hinze, Nicolas Wu, Jeremy Gibbons: [[http://www.cs.ox.ac.uk/people/jeremy.gibbons/publications/conjugate-hylos.pdf][Conjugate Hylomorphisms Or: The Mother of All Structured Recursion Schemes]]
-  - 2007 Colin John Morris Kemp PhD thesis [[https://pdfs.semanticscholar.org/21da/de9b8e96724265f911c90c0ddd935901a0f0.pdf][Theoretical foundations for practical "totally functional programming"]]
-* How do we write correct software?
-** What is correct?
-Correct with respect to what?
-It does what we want, and it only does what we want?
-** Proving and testing
-/Testing approximates proving./
-We actually want to prove a logical formula phi about a piece of code, we want to prove that the code fragment is a model of the formula phi, but proving is too expensive.
-Therefore, we test phi instead.
-
-In back-end testing, the formula is often obvious.
-What is the formula in front-end testing?
-DOM element existence testing?
-** The problem with formal methods: you can't prove what you don't model.
-- Intel uses formal method, but why does its processors have vulnerabilities?
-  - Because /you can't prove what you don't model/.
-  - Spectre, Meltdown, etc.
-  - https://arstechnica.com/information-technology/2018/11/intel-cpus-fall-to-new-hyperthreading-exploit-that-pilfers-crypto-keys/?amp=1
-- How will we ever know that we didn't miss anything?
-- You have to prove that it does everything that you want it to do, /and/ that it does only that, and nothing else.
-*** What if it is impossible to write correct software? What are our options to mitigate/limit the damage?
-** What?
-- Where is tutorial?
-- A goal should be to make it easy to make correct software?
-- 2014, slides, "How I became interested in foundations of mathematics.", Vladimir Voevodsky, [[https://www.math.ias.edu/vladimir/sites/math.ias.edu.vladimir/files/2014_08_ASC_lecture.pdf][pdf]]
-- Why should we be interested in homotopy type theory?
-- Coq
-- [[https://leanprover.github.io/][Lean]]
-
-  - Pros of Lean
-
-    - Integrates with Visual Studio Code
-
-  - Cons of Lean
-
-    - Less mature than Coq
-
-- Should we care about the relationship between functional programming and theorem proving?
-- Ramble
-
-  - Useless idea?
-
-    - Reverse-proving: generate all proofs of a theory.
-      (Proving is: given a statement, prove (or disprove).)
-
-      - Which true sentences are interesting?
-      - Which proofs are interesting?
-
-- Companies
-
-  - [[https://galois.com/][Galois]], on [[https://github.com/GaloisInc/][github]]
-
-- unread interesting things
-
-  - http://www.joachim-breitner.de/blog/717-Why_prove_programs_equivalent_when_your_compiler_can_do_that_for_you_
-  - http://www.michaelburge.us/2017/08/25/writing-a-formally-verified-porn-browser-in-coq.html
-  - https://aphyr.com/posts/342-typing-the-technical-interview
-  - http://tech.frontrowed.com/2017/09/22/aggregations/
-
-- interoperation between proof assistants?
-
-  - Lem ("lightweight executable mathematics")
-
-    - https://www.openhub.net/p/lightweight-executable-mathematics
-    - http://www.cl.cam.ac.uk/~pes20/lem/
-** Coq?
-  :PROPERTIES:
-  :CUSTOM_ID: coq
-  :END:
-
-- Introduction
-
-  - What is a suitable introduction to Coq?
-  - [[https://people.debian.org/~schepler/coqtut.v.html][Daniel Schepler's "Mathematical formalization using Coq"]] seems approachable.
-  - [[https://mathoverflow.net/questions/155909/wanted-a-coq-for-the-working-mathematician][MO 155909: Wanted: a "Coq for the working mathematician"]]
-  - [[https://mathoverflow.net/questions/164959/how-do-i-verify-the-coq-proof-of-feit-thompson][MO 164959: How do I verify the Coq proof of Feit-Thompson?]]
-  - https://softwarefoundations.cis.upenn.edu/current/index.html
-  - Yves Bertot's "Coq in a hurry"
-  - [[https://coq.inria.fr/tutorial-nahas][Coq tutorial by Mike Nahas]]
-  - [[https://coq.inria.fr/distrib/current/refman/Reference-Manual006.html#Cic][Calculus of inductive constructions]]
-
-- [[http://blog.mikael.johanssons.org/coq-and-simple-group-theory.html][Coq and simple group theory]]
-- Installation on Ubuntu 14.04
-
-  - =sudo apt-get install coq=
-*** Introduction
-   :PROPERTIES:
-   :CUSTOM_ID: introduction
-   :END:
-
-Coq source file extension is =.v=.
-
-The notation =x:T= means "the type of =x= is =T=", "=x= inhabits =T=".
-It also means "=x= is a proof of =T=" by Curry-Howard isomorphism.
-
-The type of =nat= is =Type(1)=.
-
-The type of =set= is =Type(2)=.
-
-The type of =Type(i)= is =Type(i+1)=.
-
-#+BEGIN_EXAMPLE
-    (* This is a comment in Coq. *)
-#+END_EXAMPLE
-
-#+BEGIN_EXAMPLE
-    coqtop -l filename.v -batch
-#+END_EXAMPLE
-
-*** Defining things
-   :PROPERTIES:
-   :CUSTOM_ID: defining-things
-   :END:
-
-#+BEGIN_EXAMPLE
-    Definition x: nat := 0.
-    Check x.
-
-    Definition f (x: nat): nat := x + 1.
-#+END_EXAMPLE
-
-Definition = non-recursive definition
-
-Fixpoint = recursive definition
-
-Inductive = type (Set (small set)) definition
-
-#+BEGIN_EXAMPLE
-    Definition name: type
-    where
-    type: Set
-    or type: Prop
-    or type: Type.
-#+END_EXAMPLE
-
-Proving 0+1 = 1 using Curry-Howard isomorphism?
-
-Axiom: and-elimination
-
-\begin{align*}
-a \wedge b \vdash a
-\end{align*}
-
-#+BEGIN_EXAMPLE
-    Theorem and_elim: forall a b: Prop, a /\ b -> a.
-    tauto.
-    Qed.
-#+END_EXAMPLE
-
-\begin{align*}
-a \vdash a \vee b
-\end{align*}
-
-Modus ponens
-
-\begin{align*}
-a, a \rightarrow b \vdash b
-\end{align*}
-
-*** How Coq represents propositions
-   :PROPERTIES:
-   :CUSTOM_ID: how-coq-represents-propositions
-   :END:
-
-#+BEGIN_EXAMPLE
-    Print False.
-    Print True.
-    Inductive True : Prop := I : True.
-    Inductive False : Prop := .
-    Inductive and (A B : Prop) : Prop := and : A -> B -> and A B.
-#+END_EXAMPLE
-** Testing
-Why do we test?
-Because we are not sure that our program is correct.
-
-Why are we not sure that our program is correct?
-- Because we don't know how to prove its correctness.
-  This can be alleviated by using a decent programming language.
-- Because the cost of proving its correctness does not justify the benefit.
-  We can't do anything about this if the complexity is essential (irreducible), not accidental.
-
-We human are fallible.
-Thus we will always test.
-Therefore:
-- What should we test?
-- How should we test?
-- What is the test that has the greatest benefit-to-cost ratio?
-
-The expected benefit of a test is the expected cost of the mistakes that might have been made if the test did not exist.
-
-The quality of a test is the seriousness of the mistakes it prevents.
-Thus, the seriousness of testing is proportional to the seriousness of risk.
-
-Test is insurance.
-A good insurance covers your risk.
-A bad insurance only wastes money and doesn't cover your risk:
-Testing Java class getters is like buying flood insurance for a house in the desert.
-
-Insurance causes moral hazard (taking more risk because someone else pays for it).
-Does having a test cause you to take more risks?
-
-- The benefit of a test is the cost of the mistakes it prevents.
-- The cost of a test is the person-hours spent writing the test and updating the test, and a slight increase in build time. (Assume $50/person-hour for simplicity.)
-
-The answers to these questions tell us what to test and how to test:
-- What tests have the greatest benefit-to-cost ratio?
-- What mistakes do our tests prevent? How expensive are the mistakes that our tests prevent?
-- Which part of our code is most likely to cause expensive mistakes? (Example: testing getters won't prevent expensive mistakes.)
-
-Code coverage is a meaningless metric.
-We should measure the expected value of mistakes instead.
-We should "color" our code: color more risky methods more red, color less risky methods more green, like this
-travel risk map[fn::https://i.redd.it/ktop13ad2io01.png] but for software.
-
-If you are launching a rocket, then a mistake may cost billions of dollars.
-It makes sense to invest ten million dollars testing to avoid a 1/100 probability of making a billion-dollar mistake.
-* TODO Fix this incoherent Java ramble; don't read
-- Make it work
-- Make it maintainable
-- Make it efficient (only if needed)
-- Make it reusable (only if there is demand)
-- You Are Not Gonna Need It until proven otherwise, but this does not mean you do not need to anticipate.
-- There are many ways to write code that do the same thing. Prefer the way that is the easiest to read and change and needs the least maintenance.
-- Don't write getters and setters. Move the computation into the class, or use public fields.
-- Corollary: Use public fields for your DTOs (or move the computation there). http://stackoverflow.com/questions/10240372/jackson-field-based-serialization
-- Make value classes have final fields and a constructor.
-- Use Java wisely ("Object-assisted procedural programming").
-  https://www.quora.com/In-Object-Oriented-design-are-void-methods-bad
-- OBPP ("Object-based procedural programming"), term coined by Peter DiSalvo.
-- Java is not OOP; Java is OBPP.
-
-The Java language is the C language with automatic memory management and without preprocessor.
-
-C:
-
-#+BEGIN_SRC C
-    /* file MyClass.h */
-
-    #ifdef _MyClass_h_INCLUDED_
-    #define _MyClass_h_INCLUDED_
-
-    struct _MyClass;
-    typedef struct _MyClass MyClass;
-
-    MyClass* MyClass_new ();
-
-    int MyClass_myMethod (MyClass* this, Arg* arg);
-
-    #endif
-
-
-    /* file MyClass.c */
-
-    #include <MyClass.h>
-
-    static const int ONE = 1;
-
-    struct _MyClass {
-        int myField;
-    };
-
-    MyClass* MyClass_new () {
-        const int size = sizeof(MyClass);
-        MyClass* this = malloc(size);
-        memset(this, 0, size);
-        return this;
-    }
-
-    int MyClass_myMethod (MyClass* this, Arg* arg) {
-        this->myField = ONE + Arg_getField(arg);
-        return ONE;
-    }
-#+END_SRC
-
-Java:
-
-#+BEGIN_SRC java
-    /* file MyClass.java */
-    class MyClass {
-        private static final int ONE = 1;
-        private int myMethod (Arg arg) {
-            this.myField = ONE + arg.getField();
-            return ONE;
-        }
-    }
-#+END_SRC
-
-The essence is the same, but Java reduces the accidental complexity.
-
-Method chaining vs fluent
-Method chaining transforms the dot (method invocation) into semicolon (sequence point).
-
-Fluent is embedded DSL.
-
-- Don't use TestNG's @Test for SomethingExample?
-  Write a main method in a SomethingExample class instead?
-- Other stuffs https://github.com/jhalterman/failsafe
-- http://blog.ploeh.dk/2014/03/10/solid-the-next-step-is-functional/
-- http://martinfowler.com/bliki/RoleInterface.html
-- http://blog.ploeh.dk/2011/06/07/SOLIDCodeisnt/
-- https://www.jetbrains.com/help/idea/2016.2/code-inspection.html
-- object is closure; closure is object
-- LLVM is procedural core.
-*** Candidate solution: source-to-source translation
-*** Candidate solution: binary interoperability
-Translate Java class to LLVM IR.
-
-Translate Haskell to LLVM IR.
-
-Translate C to LLVM IR.
-
-Java has JNI.
-
-Constraints:
-
-- ABI-compatible with JNI:
-  JNI C libraries works without recompilation.
-
-Foreign.
-
-What's wrong:
-I want to edit the syntax tree.
-I don't care about spacing.
-
-The name is /structural editor/.
-projectional editor.
-
-https://www.facebook.com/notes/kent-beck/prune-a-code-editor-that-is-not-a-text-editor/1012061842160013/
-
-http://www.lamdu.org/
-
-http://projectured.org/
-** Improving the Java language
-Too much software is written in Java.
-
-Xtend
-
-Kotlin
-
-IDE support
-
-Top-level methods.
-** Metaprogramming
-#+BEGIN_EXAMPLE java
-{% raw %}
-    msg = "Hello";
-    c = Class.new;
-    c += {{ int foo; }};
-    c += {{
-        void sayHello ()
-        {
-            System.out.println($msg);
-        }
-    }};
-{% endraw %}
-#+END_EXAMPLE
-** Old
-This is my opinion on how to best use Java.
-
-Java, when used properly, should not be more verbose than C.
-*Java should be thought as enhanced C*.
-It adds these features:
-
-- namespacing
-- garbage collection
-- exception
-- limited functional programming
-- reflection (should be documented thoroughly when used)
-
-and it removes these features:
-
-- preprocessor
-- separate header files
-
-Java sucks least when used as a *mainly procedural* programming language.
-
-Subclassing, public fields, getters, setters, statics,
-mutability, and big classes are not evil in and of themselves.
-What is evil is /writing code without understanding *why* you write it that way/.
-The key to good programming is understanding why the code is the way it is.
-
-With documentation, understanding data is easier than understanding control flow.
-
-*A maintenance engineer translates requirement changes to software changes.*
-Software consists of program code, database schema, documentation, and so on.
-A software is maintainable iff a reasonable requirement change translates to a reasonable software change.
-
-For example, an application may now have to handle ten times the traffic it was designed for.
-
-If, in 10 years, your application will never handle more than 10 requests per second,
-but you split your application into 10 JVMs communicating with JSON-RPC,
-you're wasting too many resources.
-** Example of namespacing
-This is a module in C.
-Note that each procedure name is prefixed with =point_=.
-
-#+BEGIN_SRC C
-    #include <math.h>
-
-    typedef struct
-    {
-        double x;
-        double y;
-    }
-    Point;
-
-    void point_init (Point* self, double x, double y)
-    {
-        self->x = x;
-        self->y = y;
-    }
-
-    double point_distance (Point* a, Point* b)
-    {
-        return sqrt(square(b->x - a->x) + square(b->y - a->y));
-    }
-
-    static double square (double x)
-    {
-        return x * x;
-    }
-#+END_SRC
-
-This is the module in Java.
-Note that now you don't have to prefix your method names with =point_=
-because it already lives in the class =Point=.
-
-#+BEGIN_SRC java
-    package com.example;
-
-    final class Point
-    {
-        final double x;
-        final double y;
-
-        Point (double x, double y)
-        {
-            this.x = x;
-            this.y = y;
-        }
-
-        double distance (Point that)
-        {
-            return distance(this, that);
-        }
-
-        static double distance (Point a, Point b)
-        {
-            return Math.sqrt(square(b.x - a.x) + square(b.y - a.y));
-        }
-
-        private static double square (double x)
-        {
-            return x * x;
-        }
-    }
-#+END_SRC
-** Another example
-#+BEGIN_SRC java
-    class Exchange
-    {
-        final HttpServletRequest request;
-        final HttpServletResponse response;
-    }
-#+END_SRC
-** Mixin
-Use extend or mixin if and only if
-you want all subclasses to benefit from enhancements of the base class.
-
-A tradeoff is that =unsafeSetHp= is public.
-
-#+BEGIN_SRC java
-    interface GameObject
-    {
-        long getId ();
-    }
-
-    interface Health
-    {
-        int getMaxHp ();
-        int getHp ();
-        void unsafeSetHp (int x);
-        default void setHp (int x)
-        {
-            final int maxHp = getMaxHp();
-            if (x < 0) { setHp(0); return; }
-            if (x >= maxHp) { setHp(maxHp); return; }
-            setHp(x);
-        }
-        default boolean isDead ()
-        {
-            return getHp() <= 0;
-        }
-        default void addHp (int x)
-        {
-            setHp(getHp() + x);
-        }
-    }
-
-    class Chara implements GameObject, Health
-    {
-        final long id;
-
-        int maxHp;
-        int hp;
-
-        Chara (long id, int maxHp)
-        {
-            this.id = id;
-            this.maxHp = maxHp;
-            this.hp = maxHp;
-        }
-
-        @Override public long getId () { return id; }
-        @Override public int getMaxHp () { return maxHp; }
-        @Override public int getHp () { return hp; }
-        @Override public void unsafeSetHp (int x) { this.hp = x; }
-    }
-#+END_SRC
-** Unrelated
-Field stores data.
-Method does work.
-Classes groups fields and methods.
-
-/A class groups methods that share parameters./
-The fields are those shared parameters.
-
-A Java class is equivalent to a C struct and the functions whose first parameter is that struct.
-In C, those things are usually grouped into one C file,
-so a Java class is practically equivalent to a C file.
-Static field in Java is global variable in C,
-but without the name conflict.
-
-C =#include= translates to Java =import=, =extends=, and =implements=.
-=implements X= imports X's default methods into this module.
-=extends X= imports X's fields and methods into this module.
-=import static= imports X's static methods into this module.
-
-Java 8 interfaces can be used as mixins.
-Use default methods.
-
-A mixin is a contract
-"if you give me X, I'll give you Y."
-
-Every method is a contract:
-If you give me X, I'll give you Y.
-
-Getters and setters provide "lazy fields" and "computed fields".
-
-Java can be used with edit-compile-reload-refresh.
-Java can hotswap.
-
-IDE makes navigation easy.
-
-A class is an instantiable module.
-
-The aim is to maximize understandability and minimize duplication.
-Sometimes, reducing duplication makes the code incomprehensible.
-
-=a.b(c)= is a syntactic sugar for =b(a,c)=.
-Implicit first argument.
-
-Exception is structured goto.
-
-https://www.reddit.com/r/learnprogramming/comments/1f0g2b/eli5_the_main_differences_between_oop_and/
-
-https://www.reddit.com/r/learnprogramming/comments/tocjf/procedural_programmer_me_needs_help_making_the_oo/
-** Can process fix incompetent people?
-** Java-Haskell interoperation
-https://wiki.haskell.org/GHC/FAQ
-
-https://wiki.haskell.org/HaskellImplementorsWorkshop/2016
-*** State of the art
-LLJVM?
-
-https://github.com/Frege/frege
-Haskell-like language
-
-http://eta-lang.org/
-port GHC primitives to Java?
-
-Sorted from the most desirable (highest level):
-
-- Source-to-source translation.
-
-  - Write a Java source interpreter in Haskell.
-  - Map Haskell code to Java.
-
-Write a JVM in Haskell.
-
-Translate both Java and Haskell to a common lower-level language such as LLVM.
-
-Core-to-bytecode.
-
-JNI-to-FFI.
-** Haskell-to-Java
-http://mmhelloworld.github.io/blog/2013/07/10/frege-hello-java/
-
-The Frege language.
-The Eta language.
-
-Haskell => Java?
-
-Core => Java?
-
-Module => Class
-
-Data type => Static inner class
-
-Value => instance of =Thunk=
-
-Data constructor => Class extending the class corresponding to the data type
-
-A value definition in a module => a static final Thunk field in the class
-
-A class => A class
-
-A member of a class => An instance field of the Class; the type of the field is =Thunk=
-
-A class constraint => A dictionary argument whose type is the class
-
-Case match => if instanceof
-
-#+BEGIN_SRC java
-    interface Thunk
-    {
-        Object force ();
-        Thunk apply (Thunk x);
-    }
-
-    class Atom
-    {
-        Object value;
-        Supplier x;
-        Atom (Supplier x) { this.x = x; }
-        Object force ()
-        {
-            if (value == null) { value = x.get(); }
-            return value;
-        }
-    }
-#+END_SRC
-
-#+BEGIN_SRC haskell
-    module M where
-
-    a :: Int
-    a = 1
-
-    f :: Int -> Int
-    f x = x + 1
-
-    g :: (a -> b) -> a -> b
-    g f x = f x
-#+END_SRC
-
-Map =Int= and =Int32= to a =Thunk= producing a =java.lang.Integer=.
-A Haskell program assumes that =Int= is a two's complement signed integer
-/at least/ 30 bits wide.
-
-#+BEGIN_SRC haskell
-    class M
-    {
-        static final Thunk a = new Atom(() -> 1);
-        static final Thunk f = new Lambda(x -> (Integer) x + 1);
-        static final Thunk g = new Lambda(f -> new Lambda(x -> f.apply(x)));
-    }
-#+END_SRC
-*** Java-to-Haskell
-https://github.com/Frege/frege/wiki/Calling-Frege-Code-from-Java
-
-Java method -> foreign import
-
-#+BEGIN_SRC haskell
-    -- Foreign.Java
-
-    data JByte
-    data JInt
-    data JShort
-    data JLong
-    data JObject
-
-    foreign import java package.Class Method :: ArgType0 ArgType1 ... as haskellName
-
-    foreign import java java.lang.Integer parseInt :: String -> Int32 as jParseInt
-#+END_SRC
-
-Message-passing view of Java objects
-
-#+BEGIN_SRC haskell
-    s <- call object "toString" []
-
-    ...
-
-    jls <- getClass "java.lang.System"
-    out <- getField jls "out"
-    call out "println" ["Hello world"]
-#+END_SRC
-** Architecture
-Every Java program is a sequence of statements.
-
-Every Java program is equivalent to one long main class?
-
-A block is a sequence of statements.
-
-#+BEGIN_EXAMPLE
-    class Name
-        int prop
-        // Generates:
-        // int prop
-        // int getProp ()
-        // void setProp (int)
-    end
-#+END_EXAMPLE
-** Understanding factoring
-Imagine writing your program as one long main method.
-It is almost certain that you will find duplicate blocks.
-
-Two duplicate blocks can be factored into a method.
-Two methods with the same parameters can be factored into a class.
-
-What is an optimal factoring of that program?
-The factoring is wrong iff the same change needs to be performed more than once.
-A program can also suffer from modification anomaly.
-
-There are prime fragments:
-fragments that cannot be factored into smaller parts.
-** OOP as a special case of FP
-Object and closure are equivalent.
-
-=o.m(a0,a1,...) -> m o a0 a1 ...=
-** Functional multimethod
-Statically checked.
-
-#+BEGIN_EXAMPLE
-    collide (a : Asteroid) (b : Asteroid) = ...
-    collide (a : Asteroid) (s : Spaceship) = ...
-    collide (s : Spaceship) (a : Asteroid) = collide a s
-    collide (s : Spaceship) (t : Spaceship) = ...
-
-    True : Bool.
-
-    False : Bool.
-
-    Ord Bool.
-
-    Bool x, Bool y |-
-        Equal x y =
-            match x y in
-                False False -> True;;
-                True True -> True;;
-                _ _ -> False.
-
-    LessThan False False = False.
-    LessThan False True = True.
-    LessThan True False = False.
-    LessThan True True = False.
-
-    IfElse False t f = f.
-    IfElse True t f = t.
-
-    And False x = False.
-    And True x = x.
-
-    Or False x = x.
-    Or True x = True.
-
-    Not False = True.
-    Not True = False.
-
-    Min x y = IfElse (LessThan x y) x y.
-    Max x y = IfElse (LessThan x y) y x.
-
-    Table Employee.
-
-    Column Id Employee |- Bigint Id.
-    Column Name Employee |- String Name.
-
-    Column name Employee, type name |- Read name From resultSet = Get type name From resultSet.
-
-    Column name Employee |-
-        Member
-            (Tuple name (Read name From resultSet))
-            (Read Employee From resultSet).
-
-    Main |-
-        source = Connect "jdbc:postgresql://127.0.0.1/test",
-        resultSet = ExecuteQuery source "SELECT * FROM employee",
-        Member tuple (Read Employee From resultSet),
-        Print tuple.
-
-    ?- Main.
-
-    Ord a, Ord b |- min a b = if lt a b then a else b
-
-    a : Asteroid, b : Asteroid |- collide a b = ...
-    IF
-        a, b : Asteroid
-        AND
-        s, t : Spaceship
-    THEN
-        collide a b = ...
-        collide a s = ...
-        collide s t = ...
-
-    define multimethod collide with parameters
-        a, b : Asteroid
-        s, t : Spaceship
-    where case parameters matching
-        a b -> ...
-        a s -> ...
-        s a -> ...
-        s t -> ...
-#+END_EXAMPLE
-** Java
-=a.m(b)= and =m(a,b)= are equivalent.
-The dot is a syntactic sugar for implicit first argument, plus virtual dispatch.
-
-The changes that must be made to implement a feature.
-The program is well-factored if no change is duplicated.
-
-A maintainable software does not have to be object-oriented, but it has to be well-factored.
-A well-factored program /prevents the same modification from being duplicated./
-
-Factorization reduces information duplication.
-
-Depending on dependable things simplify your program.
-I know someone who used a SQL database but didn't want to depend on it,
-so he wrote application-level joins everywhere.
-
-A software is maintainable iff it is simple to change.
-Being able to start, stop, and restart quickly (in just a few seconds) also helps.
-*** SQL
-Mutable fields.
-
-#+BEGIN_EXAMPLE
-    Column a
-        name : String
-        read : a -> ResultSet -> ()
-        write : ResultSet -> a -> ()
-
-    Table a = [Column a]
-
-    read : Table a -> a -> ResultSet -> ()
-    write : Table a -> ResultSet -> a -> ()
-
-    interface SqlCallable2<A, B>
-    {
-        void call (A a, B b) throws SQLException;
-    }
-
-    class Column<E>
-    {
-        String name;
-        SqlCallable2<E, ResultSet> read;
-        SqlCallable2<ResultSet, E> write;
-    }
-#+END_EXAMPLE
-*** Annoyances of local variables
-- Java can't infer the type of local variables
-- Local variables aren't final by default
-
-#+BEGIN_SRC java
-    final Something something = new Something();
-#+END_SRC
-*** Example of under-factored program
-#+BEGIN_SRC java
-    class Employee
-    {
-        List<A> getById (long id)
-        {
-            ... "SELECT * FROM my_schema.employee WHERE id = ?" ...
-        }
-
-        List<A> getByName (String name)
-        {
-            ... "SELECT * FROM my_schema.employee WHERE name = ?" ...
-        }
-    }
-#+END_SRC
-
-What if =my_schema= or =employee= change?
-
-#+BEGIN_SRC java
-    class Employee
-    {
-        private static String TABLE = "my_schema.employee";
-
-        List<A> getById (long id)
-        {
-            ... "SELECT * FROM " + TABLE + " WHERE id = ?" ...
-        }
-
-        List<A> getByName (String name)
-        {
-            ... "SELECT * FROM " + TABLE + " WHERE name = ?" ...
-        }
-    }
-#+END_SRC
-
-What if SQL syntax changes; for example, what if a committee decides to change SQL =SELECT= to =CHOOSE=?
-We assume it's unlikely,
-so we don't design our program to anticipate that.
-** Extract covariant expressions into variables
-#+BEGIN_SRC java
-    System.out.println("John's salary is " + employee.computeSalary());
-    if (employee.computeSalary() >= 1000)
-    {
-        System.out.println("It's over one thousand");
-    }
-#+END_SRC
-
-What if =employee.computeSalary= changes?
-
-#+BEGIN_SRC java
-    final long salary = employee.computeSalary();
-    System.out.println("John's salary is " + salary);
-    if (salary >= 1000)
-    {
-        System.out.println("It's over one thousand");
-    }
-#+END_SRC
-
-What if we want to print to =aPrintStream= instead of =System.out=?
-
-#+BEGIN_SRC java
-    final long salary = employee.computeSalary();
-    final StringBuilder message = new StringBuilder();
-    message.append("John's salary is ").append(salary).append('\n')
-        .append(salary >= 1000 ? "It's over one thousand" : "");
-    aPrintStream.println(message);
-#+END_SRC
-
-What if =salary= type changes from =long= to =BigInteger=?
-We assume it's unlikely.
-** Extract covariant blocks into method
-Two blocks that must change together.
-
-#+BEGIN_SRC java
-    static Y m (A a, B b, ...);
-#+END_SRC
-
-#+BEGIN_SRC java
-    static Y m0 (X0 x0, X1 x1, ...);
-    static Y m1 (X0 x0, X2 x2, ...);
-#+END_SRC
-
-becomes
-
-#+BEGIN_SRC java
-    class C
-    {
-        X0 x0;
-        Y m0 (X1 x1, ...);
-        Y m1 (X2 x2, ...);
-    }
-#+END_SRC
-
-Things that change together should be grouped together.
-
-Constructors are methods too.
-
-If two methods share a common parameter, the parameter can be extracted into a field.
-
-If two classes share a common field, a class can be extracted.
-
-Static methods are reusable.
-
-Instance methods force you to instantiate the class.
-** Implications of architecture on security
-A popular trend: split front-end and back-end.
-Write front-end in NodeJS, write back-end in Java, front-end calls back-end via JSON HTTP API.
-Front-end runs on visitors' browsers.
-Back-end is open to public.
-
-You cannot secure the application.
-If you cannot secure the hardware running the software,
-all bets are off.
-*** Foo
-Java is a procedural programming language.
-
-The only reason we don't write everything in one big method is maintainability.
-
-A code is easier to understand if it doesn't mix abstraction levels.
-
-Names relate to things the reader already knows.
-
-Java does not have C#'s extension methods.
-
-Java as procedural programming with implicit first argument.
-
-#+BEGIN_EXAMPLE
-    object.method(arg1, ...) = method(object, arg1, ...)
-#+END_EXAMPLE
-
-Principles make decision-making easy (not necessarily correct).
-Principles are heuristics.
-
-/Cohesion/ is the most important characteristic of a class.
-The purpose of a class is to group a /working set/ (variables that often change together),
-and the methods that use those variables.
-
-The risk of modifying code?
-
-The larger the change, the bigger the risk.
-
-If you are using object mapper like Jackson,
-changing a field to final can break your code.
-(You must annotate.)
-That's why I avoid reflection.
-
-Microrefactoring.
-Small steps.
-
-Abstraction is not a mere indirection. yegor256???
-Abstraction allows you to say a lot with a little code.
-** Mitigating the risk of changing code
-Don't just change old code.
-
-Write new code that works with the old code.
-Deprecate the old code.
-Delete the old code.
-
-#+BEGIN_SRC java
-    class CustomList<T>
-    {
-        private final List<T> inner;
-
-        public CustomList (List<T> inner)
-        {
-            this.inner = inner;
-        }
-
-        public static <T> CustomList<T> fromArray (T[] array)
-        {
-            final List<T> list = new ArrayList<>();
-            list.addAll(Arrays.asList(array));
-            return new CustomList<>(list);
-        }
-
-        public List<T> toList ()
-        {
-            return inner;
-        }
-
-        // Implement your primitives like size, map, whatever.
-    }
-#+END_SRC
-** Maintainable code
-The problem is working with too many details at once.
-
-Mixing HTTP-handling code (such as the Servlet API 3.0)
-with your business logic will cause readability problem.
-If a method contains getCookie and business logic,
-you're in for maintenance problems.
-
-Java is more verbose than Haskell,
-but it doesn't mean that you can't create maintainable Java programs;
-it doesn't mean that your Haskell programs will automatically be more maintainable.
-If you suck, your code will be just as bad.
-
-Java is a /procedural/ language.
-Problems begin when people try to force object-oriented paradigm to Java.
-
-#+BEGIN_SRC java
-    interface Log
-    {
-        void info (String message);
-        void warn (String message);
-        void error (String message);
-    }
-#+END_SRC
-
-#+BEGIN_SRC java
-    class Log_log4j implements Log
-    {
-        private final Logger log;
-        public Log_log4j (Logger log)
-        {
-            this.log = log;
-        }
-        @Override public void error (String message) { log.error(message); }
-    }
-#+END_SRC
-** Writing program backwards
-If you're a shop, you can try putting all your pricing logic into one class:
-
-- Every buyer whose age is 60 years or greater gets a 10% elder discount.
-- Every buyer (unique phone number) is a first-time buyer (who has not bought anything) gets 10% newcomer discount.
-- For simplicity, discount percentages are added before applied to the original price.
-
-#+BEGIN_SRC java
-    double percent_discount ()
-    {
-        double percentage = 0;
-        if (buyer_age >= 60) { percentage += 10; }
-        if (buyer_is_first_time) { percentage += 10; }
-        return percentage;
-    }
-#+END_SRC
-
-At this point you don't care about how to compute buyer_age and buyer_is_first_time.
-You simply want to express the pricing rules as a simple Java code that a programmer can easily understand.
-
-To compute the buyer's age, we need his/her date of birth and today's date.
-Use JodaTime.
-
-#+BEGIN_SRC java
-    buyer_age = today.subtract(buyer_birth_date);
-#+END_SRC
-
-Then we need to figure out how to get today's date, and so on, and then you arrive at this method:
-
-If you need something in a method,
-but it's not that method's responsibility to compute it,
-then it should be a parameter of that method.
-
-#+BEGIN_SRC java
-    class Pricing
-    {
-
-        void rule ()
-        {
-            // XXX dont use double for your prices?
-
-            entry(item.name, item.price);
-
-            if (event.is_giveaway)
-            {
-                discount(s.giveaway(), item.price);
-                return;
-            }
-
-            if (buyer.age >= 60) { discount(s.elder(), 1); }
-            if (buyer.is_first_time) { discount(s.first_timer(), 1); }
-            if (buyer.wants_insurance) { surcharge(s.insurance(), 1); }
-
-            if (event.is_new_year) { discount(s.new_year(), 1); }
-            if (event.is_christmas) { discount(s.christmas(), 2); }
-            if (event.is_online_shopping_day) { discount(s.online_shopping_day(), 0.25 * item.price); }
-
-            if (item.is_rare) { surcharge(s.rare(), 10); }
-            if (item.is_luxury) { surcharge(s.luxury(), 5); }
-            if (item.is_from_lion_air) { surcharge(s.lion_air_admin_fee(), 10); }
-            if (item.is_from_telkomsel) { surcharge(s.telkomsel_admin_fee(), 0.15); }
-
-            if (payment.uses_credit_card) { surcharge(s.credit_card_fee(), 0.03 * item.price); }
-
-            surcharge(s.surcharge_vat(), 0.1 * item.price);
-        }
-
-        class Buyer
-        {
-            final int age;
-            final boolean is_first_time;
-            final boolean wants_insurance;
-        }
-
-        class Entry
-        {
-            final String label;
-            final double amount;
-        }
-
-        private final Strings.I s;
-        private final List<Entry> entries = new ArrayList<>();
-
-        private void entry (String label, double amount)
-        {
-            entries.add(new Entry(label, amount));
-        }
-
-        private void surcharge (String label, double amount)
-        {
-            entry(label, amount);
-        }
-
-        private void discount (String label, double amount)
-        {
-            entry(label, -amount);
-        }
-
-    }
-#+END_SRC
-
-There you have it: a straightforward, readable, maintainable, easily changeable pricing rule for your online business.
-A straightforward translation.
-
-Filling the fields is someone else's problem.
-
-Internationalization:
-
-#+BEGIN_SRC java
-    class Strings
-    {
-        interface I
-        {
-            /** Value-added tax. */
-            String elder ();
-            String vat ();
-        }
-        class English implements I
-        {
-            @Override public String elder () { return "elder"; }
-            @Override public String vat () { return "VAT"; }
-        }
-        class Indonesia implements I
-        {
-            @Override public String elder () { return "lansia"; }
-            @Override public String vat () { return "PPn"; }
-        }
-        static load (String path) throws IOException
-        {
-            // use Proxy to lookup table
-        }
-    }
-#+END_SRC
-
-Do you need to be able to change the discounts without recompiling the program?
-You don't.
-Instead of making it configurable, make compilation and deployment fast, easy, and automatic, and just recompile.
-There is less room for mistakes if you keep it in one place that is easy to see: the source code.
-The compiler will also help catch mistakes.
-
-Now you figure out how to compute buyer_age.
-
-The name of a class doesn't have to be a noun.
-
-A constructor parameter states that the class depends on a feature.
-
-A class describes a feature.
-
-#+BEGIN_SRC java
-    interface Storage
-    {
-        void save_user (???) throws IOException;
-    }
-#+END_SRC
-
-#+BEGIN_SRC java
-    interface Handler?
-    {
-        void get_cookie ();
-        Handler set_cookie ();
-        Handler set_cookie ();
-    }
-#+END_SRC
-
-A Java class corresponds to a C source file.
-This is as if you could put multiple C source files inside a Java class.
-And you can put many Java classes inside a Java class.
-Think of a class like a folder for C source files;
-it groups things to help programmers understand the code,
-not as something that corresponds to an object.
-** Crucial question
-If there are many ways of writing programs that do the same thing,
-why choose a particular way?
-
-More maintainable.
-** Use snake case
-Class name: =My_class_name=
-
-Field, method, and variable name: =my_method_name=
-
-Maintainability is done by limiting ugliness inside a class.
-
-It is possible to write maintainable Java code. It will only be a bit more verbose.
-* Modeling a web application?
-** Picking a modeling language
-I have narrowed down:
-- a relational language such as Prolog, Kanren, Mercury
-- a functional language such as Haskell, Idris, Ocaml, ML
-- TypeScript, Racket, Scheme, Lisp, Lua
-
-There are too many choices.
-What is the /semantics/?
-What is the /essence/?
-- https://en.wikipedia.org/wiki/Modeling_language
-
-What is AsmL?
-https://cs.wmich.edu/~OODA/translate.html
-** Example of modeling web application
-What do we think a web application is?
-
-What do users think?
-What do users care?
-What are the users' mental model?
-How can we formalize the users' mental model, and use that formal model to develop an application with less effort?
-
-Users think of an app as a /tool/, like a complicated hammer:
-- What was it originally invented for? What is it supposed to do? What is it usually used for? (Drive nails into wall)
-- How do I use it? (Grip the hammer, and hit the nail)
-- What can I use it for? (Cracking this clam open? Destroying this stuff? Killing a house intruder? Euthanizing a dying dog?)
-
-An application (a web application) maps a HTTP request to a HTTP response.
-
-We use a Prolog atom to /refer/ to an /entity/ (something that is unique, has an identity, is identical only to itself, is not identical to any other entity).
-Thus a Prolog atom is similar to an English /word/, and the Prolog knowledge base /gives meaning/ to that atom.
-
-The formula =application__sql_table(A,T)= means that application A uses SQL table T.
-
-The formula =application__page(A,P)= means the application A serves page P.
-** Zotonic?
-Zotonic's authors at least has thought about its ontology
-http://zotonic.com/page/618/flexible-datamodel
-** Ur/Web?
-Language-level integration.
-* Software architecture
-How should logic programs be architected?
-Can we generate architecture from semantics?
 * Bibliography
 bibliography:default

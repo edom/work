@@ -48,3 +48,5 @@ Should it be called a "procedure"? What should it be called?
 - 1995, Hillebrand, Kanellakis, & Mairson, "Database Query Languages Embedded in the Typed Lambda Calculus"
 
 Lambda-calculus with bells and whistles such as relational algebra expressions?
+
+A PAL procedure is similar to fUML/ALF activity.

@@ -45,23 +45,23 @@ Refinement for implementation.
 
 % -------------------- deconstruction, pattern-matching
 
-type_natural(T) :- type_normalform(T, #natural).
+type_natural(T) :- type_hnf(T, #natural).
 
-type_integer(T) :- type_normalform(T, #integer).
+type_integer(T) :- type_hnf(T, #integer).
 
 type_natural_bit(T, N) :- type_natural(T), type_maxbitcount(T, N).
 
 type_integer_bit(T, N) :- type_integer(T), type_maxbitcount(T, N).
 
-type_identifier(T) :- type_normalform(T, #identifier).
+type_identifier(T) :- type_hnf(T, #identifier).
 
 type_identifier_bit(T, N) :- type_identifier(T), type_maxbitcount(T, N).
 
-type_string(T) :- type_normalform(T, #string).
+type_string(T) :- type_hnf(T, #string).
 
 type_string_byte(T, N) :- type_string(T), type_maxbytecount(T, N).
 
-type_optional(T, A) :- type_normalform(T, #optional(A)).
+type_optional(T, A) :- type_hnf(T, #optional(A)).
 
 % -------------------- record type
 
@@ -96,19 +96,23 @@ field_type(F,T) :- member(type-T,F).
 Pattern-matching type_definition/2.
 */
 
+% ==================== internal
+
 % -------------------- reduction
 
-/** type_normalform(++TypeName,-NormalForm) is semidet.
+/** type_hnf(+TypeExp,-HeadNormalForm) is semidet.
+
+Reduce a type expression to a head-normal form.
 
 Refinements such as type_maxbitcount/2 are not included in the normal-form.
 */
-type_normalform(A, _) :- \+ground(A), !, instantiation_error(A).
+type_hnf(A, _) :- \+ground(A), !, instantiation_error(A).
 
-type_normalform(A, B) :-
+type_hnf(A, B) :-
     type_reduce(A, R),
     !,
-    type_normalform(R, B).
+    type_hnf(R, B).
 
-type_normalform(A, A).
+type_hnf(A, A).
 
 type_reduce(A, B) :- type_definition(A, B).

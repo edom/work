@@ -89,3 +89,40 @@ dream_query((
         employee_department(E,D),
         department_name(D,"Engineering")
 )).
+
+% -------------------- sketch
+
+% -------------------- conceptual model
+
+/*
+Department is not a property of employee.
+
+Employee is not a property of department.
+
+A property is a function from an object to a value.
+Thus, the same object cannot have multiple values for its property.
+
+An object cannot be a property of another object.
+*/
+
+class(account).
+class_property(account, name).
+
+class(transaction).
+
+class(journal).
+
+class(ledger).
+
+class(employee).
+class_property(employee, name).
+class_property(employee, department).
+
+class(department).
+class_property(department, name).
+
+class(order).
+class_property(order, detail).
+class_property(order, detail, #collection()).
+
+relation(work_at, [employee,department]).
