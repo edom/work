@@ -119,38 +119,8 @@ https://www.semanticscholar.org/paper/On-the-Implementation-of-GNU-Prolog-Diaz-A
 See also:
 - https://en.wikipedia.org/wiki/Comparison_of_Prolog_implementations
 - Comparison between SWI Prolog, YAP, GNU Prolog http://www.david-reitter.com/compling/prolog/compare.html
-* The meanings of a Horn clause
-A Horn clause in Prolog looks like =A :- B=.
-
-A Horn clause can be thought of in several ways.
-
-The operational meaning of =A :- B1, ..., Bn= is that calling the procedure A causes B1, ..., Bn to be called in that order.
-This is the actual meaning of Prolog programs.
-All other meanings are useful fantasies.
-
-The classical-logic reading of =A :- B= is \(A \leftarrow B\), that is, "A is true if B is true" or "A is implied by B".
-
-The proof-theoretic reading of =A :- B= is "to prove \(A\), it is enough to prove \(B\)".
-
-The search-tree reading of =A :- B1, ..., Bn= is that the tree node A has the children B1, ..., Bn.
-
-These multiple readings are confusing.
-For example, the classical-logic reading implies that querying =a= against the following knowledge base should succeed because in classical logic \( A \leftarrow (B \wedge A) \equiv A \leftarrow B \),
-but the query =a= actually does not terminate.
-#+BEGIN_EXAMPLE
-a :- b, a.
-b.
-#+END_EXAMPLE
-In classical logic but not in Prolog,
-that knowledge base is equivalent to this:
-#+BEGIN_EXAMPLE
-a :- b.
-b.
-#+END_EXAMPLE
-
-Enhancing the declarativeness of Prolog requires /memoization/.
-
-What is the relationship between logic programming, relational programming, logic, Horn clauses, theorem proving, searching, and backtracking?
+* <2019-03-20> (Moved)
+"The meaning of Horn clauses" is moved to [[file:enterprise.html]].
 * Establishing a workflow
 #+TOC: headlines 2 local
 ** <2018-10-20> Installing SWI-Prolog 7.6.4 on Ubuntu 14.04
@@ -635,41 +605,6 @@ Should we move from Prolog to Scheme/miniKanren or Mercury?
 Use compound_name_arity/3 instead of functor/3, but this seems to be an SWI-Prolog extension.
 
 http://www.swi-prolog.org/pldoc/man?section=ext-compound-zero
-* Writing enterprise web applications?
-** Comparison between ontology, relational programming, and database programming
-Open World Assumption vs Closed World Assumption http://www.mkbergman.com/852/the-open-world-assumption-elephant-in-the-room/
-
-How do we combine closed-world assumption (logic programming / relational database) and open-world assumption (web ontology)?
-** Knowledge representation and software specification
-*** Their relationships
-- 2010, "Functional-Logic Programming Lecture Notes", Harold Boley, slides, [[http://www.cs.unb.ca/~boley/FLP/cs6905FLP.pdf][pdf]]
-  - Knowledge representation in AI roughly corresponds to software specification in software engineering.
-  - Declarative programs can be thought as executable specifications.
-  - Invertibility principle (slide 36)
-  - Nesting/conjunction principle (slide 46)
-  - Unification principle (slide 50)
-  - Amalgamation/integration principle (slide 55)
-  - That's a long deck: 270 slides.
-*** Executable specification?
-- lightweight executable mathematics https://www.cl.cam.ac.uk/~pes20/lem/
-
-** Logic programming vs theorem proving
-- https://stackoverflow.com/questions/36335633/difference-between-logic-programming-and-automated-theorem-proving
-- https://en.wikipedia.org/wiki/Automated_theorem_proving
-** SWI-Prolog, PostgreSQL, and ODBC
-Install the Ubuntu 14.04 package =odbc-postgresql=.
-
-I want my application to self-contain its configuration.
-I don't configure ODBC INI files.
-
-ODBC Data Source Name (DSN) connection string
-
-Relevant commands: =odbcinst -j=
-
-The file =/etc/odbcinst.ini= contains a list of driver names.
-
-[[http://www.swi-prolog.org/pldoc/doc_for?object=section(%2527packages/cql.html%2527)][SWI-Prolog CQL documentation]] doesn't inspire confidence.
-** Deductive databases and Datalog?
 * Theories
 ** Relational-multidirectional-logic programming?
 ** Embedding Prolog/Haskell in Haskell/Prolog
@@ -723,23 +658,6 @@ Mercury vs Prolog
 
 SQL? Datalog?
 
-** Two camps in programming
-There are two camps in programming:
-the bottom-up camp and the top-down camp.
-
-The bottom-up camp starts from machines and goes up toward mathematics.
-This camp produces Assembly, Fortran, Cobol, Pascal, C, C++, Go.
-This camp produced fast but ugly implementations.
-Haphazard incremental improvements.
-
-The top-down camp starts from mathematics and goes down toward machines.
-This camp produces Lisp, Scheme, Prolog, ML, Ocaml, Haskell, Coq, Idris, Agda, Lean.
-This camp produced elegant but slow implementations.
-Big design up front.
-
-They seem to be converging to a middle ground: ugly and slow.
-
-Why can't we get fast and elegant?
 ** "GOEDEL is intended to be a declarative successor to Prolog."
 "GOEDEL is intended to be a declarative successor to Prolog."
 https://www.cs.cmu.edu/afs/cs/project/ai-repository/ai/lang/prolog/impl/other/goedel/0.html
