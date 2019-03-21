@@ -3,121 +3,61 @@
 #+OPTIONS: ^:nil toc:nil
 #+PERMALINK: /enterprise.html
 #+MATHJAX: true
-* Goals, principles, and ideas
-** Summary of key ideas
-- Use Prolog to model an enterprise software.
-- Model transformation is a set of Horn clauses.
-- Transform the model to a complete source code (Java + SQL + HTML + CSS + JavaScript).
-  The programmer writes zero line of Java.
-- Division of labor to infrastructure engineer (language designer, software architect) and suprastructure engineer (language user, business programmer, system analyst),
-  instead of back-end engineer and front-end engineer.
-** Using Prolog for model-driven enterprise software engineering
-The system is being sketched at a directory in our Git repository[fn::https://github.com/edom/work/tree/master/software/enterprise].
-This document is a sketch of that system.
-Not much has been implemented.
+* Motivation
+I think I may have a way to be a /30x engineer/,
+or this might just be another manic episode of mine.
+The idea is to use /Prolog/ to /model/ enterprise software systems and to /transform/ those models into complete /full-stack/ working code.
+In my dream, the programmer writes many lines of Prolog and zero lines of Java,
+which is now like Assembly: translated from a higher-level language.
+Software engineering labor is now specialized into /infrastructure/ engineer (language designer, software architect)
+and /suprastructure/ engineer (language user, business programmer, system analyst),
+instead of /back-end/ engineer and /front-end/ engineer.
+Software architect now designs formal models and formal ontologies
+instead of drawing fragile charts ignored by machines.
 
-The expected workflow:
-- Model the application in Prolog.
-- Then transform the model into implementation.
+I see some similarities among enterprise applications.
+I think the job of the programmer is to formalize the business user's implicit ontology
+into the corresponding formal ontology that can be manipulated by machines.
+The programmer's job is to formalize the end-users' mental model into a formal ontology.
 
-Two choices:
-- Translation: Transform the model to source code in a supported language.
-- Interpretation: Execute the model in Prolog.
-** Model transformation as Horn clauses
-The idea is to represent a model transformation as a set of Horn clauses in Prolog.
-For example, we state that "There is a Java class for each SQL table" as:
-#+BEGIN_EXAMPLE
-java_class(sql_dto(T)) :- sql_table(T).
-#+END_EXAMPLE
+One problem is that Java doesn't know SQL:
+Every SQL query is just a Java string.
+SQL queries have a structure.
+They have syntax and semantics.
+They are not mere strings.
 
-A more general way to write that:
-#+BEGIN_EXAMPLE
-% opv = object-property-value
-object(java_class(sql_dto(T))) :- object(sql_table(T)).
+What is an enterprise application?
+Mostly information systems[fn::https://en.wikipedia.org/wiki/Information_system].
+* The end-users
+I think software development can be sped up by minimizing the gap between the end-user's mental model and the programmer's mental model.
+We are programmers ourselves, so we already know a programmer's mental model, so we need not talk about it further,
+but I have never thought about the end-user's mental model until now.
+Matching mental model is a requirement of good user experience.
 
-opv(java_class(sql_dto(T)), name, JavaName) :-
-    opv(sql_table(T), name, SqlName),
-    sqlname_javaname(SqlName, JavaName).
-#+END_EXAMPLE
+The user's mental model is imperative/procedural.
 
+The users think of a software system as the set of things that the user can do with the system.
+The users think of a software system as the set of the ways they can interact with the system.
+** Their practical philosophy, mental model, and ontological commitments
+The users know their goals, but they don't know how to interact with the software system to achieve those goals.
 
-** Total code generation from model/ontology
-We aim for /total/ code generation from model/ontology.
-Not only structure (Java classes and fields), but also behavior (Java method contents).
-Not only the static aspects, but also the dynamic aspects.
-Some model-driven software development approaches such as EMF models the structure but not the behavior;
-thus they are not expressive enough to express all the information required to translate the model into a complete program,
-but only the entity classes and perhaps some validation and serialization;
-the engineer still has to write Java code.
-Some others such as fUML/ALF try to also model the behavior.
-** Mixing bottom-up and top-down
-There are two ways to something complex (that is pretty much anything): /bottom-up/ and /top-down/.
-
-There are two ways to design an ontology or a software:
-/bottom-up/ (gradual abstraction) and /top-down/ (gradual concretion).
-
-The advantages of bottom-up:
-- The abstraction has been proven to be useful and necessary.
-- Program development can start early, feedback is immediate, psychological reward, user can try system.
-
-The advantage of top-down is philosophical soundness.
-The disadvantage of top-down is that it is prone to creating over-engineered abstractions.
-
-There are two camps in programming:
-the bottom-up camp and the top-down camp.
-
-The bottom-up camp starts from machines and goes up toward mathematics.
-This camp produces Assembly, Fortran, Cobol, Pascal, C, C++, Go.
-This camp produced fast but ugly implementations.
-Haphazard incremental improvements.
-
-The top-down camp starts from mathematics and goes down toward machines.
-This camp produces Lisp, Scheme, Prolog, ML, Ocaml, Haskell, Coq, Idris, Agda, Lean.
-This camp produced elegant but slow implementations.
-Big design up front.
-
-They seem to be converging to a middle ground: ugly and slow.
-
-Why can't we get fast and elegant?
-** Unifying several closely-related subfields
-These are close.
-We should unify these.
-- ontology engineering and model-driven software development
-- database theory, logic programming, and relational programming
-
-Database normalization theory is related to writing good logic programs.
-** The human aspects of the envisioned usage: infrastructure engineers and suprastructure engineers
-- Suprastructure software engineer (language user) captures business logic into high-level program.
-  - Source code should be human-readable article.
-  - This steps focuses on describing what things exist and the relationships between them.
-  - This steps focuses on modeling.
-- Infrastructure software engineer (language designer) maps high-level languages to low-level languages.
-  - Example of low-level programming language: Java, C#, C++, C, SQL, Scheme, Lisp, Haskell.
-  - This steps focuses on the modeling language.
-- some mention of "suprastructure" and "infrastructure" https://en.wikipedia.org/wiki/Process_architecture
-** Language-oriented programming, domain-specific languages (DSLs)
-The 2010 article "Using DSLs for Developing Enterprise Systems" [[https://research.cyber.ee/simpl/enterprise-dsl.pdf][pdf]]:
-
-- It uses the terms "language engineer", "transformation specialist", and "business engineer".
-- It defines several usage scenarios of DSLs.
-- It defines five criteria for comparing DSL tools.
-- It compares some DSL tools.
-
-That paper should have been a wiki article.
-* Formal ontology, knowledge representation, modeling an enterprise software in Prolog
-Synonym set: domain of discourse, domain of interest, subject matter
-
-Related: expert system
-
-Is there already an ontology for enterprise software systems?
-Fox & Grüninger 1997 \cite{fox1997ontologies}?
-Dietz 2012 \cite{dietz2012enterprise}?
-** What is the software users' mental model, and their implicit ontological commitments?
+The users have an ontology, although they may not be aware that it is called "ontology".
+The users have a /mental model/ of what classes and individuals exist in the software system.
+The users have an idea about what the software system knows and what it does not.
+The users apply their /theory of mind/[fn::https://en.wikipedia.org/wiki/Theory_of_mind] to the software system.
+They may be thinking in terms of classes, properties, and individuals.
+They may be thinking in terms of objects, properties, and values.
+They may be thinking in terms of entities and relationships[fn::https://en.wikipedia.org/wiki/Entity–relationship_model].
 Which is the users' mental model:
-object-property-value, entity-relationship[fn::https://en.wikipedia.org/wiki/Entity–relationship_model], or something else?
+object-property-value, entity-relationship, or something else?
+
+The users believe that pressing the "Save" button will cause the system to "remember" something.
+Thus the users think of a software system as a combination of memory and rules.
 
 We readily think in classes.
 We readily categorize things.
+
+What is a layperson's ontology?
 
 For example, what is a chair?
 The answer depends on what problem we are trying to solve.
@@ -211,19 +151,15 @@ spo(property(employee,name), max_byte_count, 16).
 
 concept_attribute_type(employee, name, #string).
 #+END_EXAMPLE
-** One-property-one-predicate representation of objects
-Another core idea is the /one-property one-predicate/ representation, with surrogate primary keys.
-This enables us to represent objects in Prolog.
-Objects have identities.
-Two objects are identical iff their identifiers (primary keys) are equal.
-Example:
-#+BEGIN_EXAMPLE
-person(PersonId)
-person_name(PersonId, Name)
-person_birthdate(PersonId, BirthDate)
-#+END_EXAMPLE
 
-** How standard is KIF (Knowledge Interchange Format)?
+The user thinks that, for each class, the system knows a set of individuals of such classes.
+For example, there is an implicit set of employees known by the system.
+** What
+Formal ontology, knowledge representation, modeling an enterprise software in Prolog
+
+Synonym set: domain of discourse, domain of interest, subject matter
+
+Related: expert system
 ** Gradual refinement of ontologies
 Here we try to build ontologies by gradually adding constructs and thus gradually increasing expressiveness.
 This gradualism imitates van Roy & Haridi 2004 \cite{van2004concepts}, but this is about ontologies instead of computation models.
@@ -397,55 +333,6 @@ Ontology = model + meta-model + logic
 
 UEML/GEM vs OWL \cite{khan2011transformation}.
 Enterprise software model (UEML, GEM) vs enterprise software ontology (on OWL perhaps)?
-** Existing ontologies, models, meta-models, and modeling methods
-Ideally we build a lower (domain-specific) ontology on an upper ontology.
-
-- BFO (Basic Formal Ontology) \cite{arp2015building}
-- GFO (General Formal Ontology)
-- OWL
-- SUMO (Suggested Upper Merged Ontology)
-
-A general ontology is meant to unify all ad-hoc ontologies.
-Ad-hoc ontologies are practical and convenient but limited and incompatible with each other,
-unless we work to define a translation between them.
-Rather than defining \(n^2\) mappings between \(n\) ontologies,
-we define \(n\) mappings, each between an ad-hoc ontology and the /upper ontology/.
-
-Similar systems:
-
-- Entity-relationship modeling
-- Subject-predicate-object, RDF triple
-- Object-property-value
-- Entity-attribute-value[fn::https://en.wikipedia.org/wiki/Entity–attribute–value_model]
-- Category of being[fn::https://en.wikipedia.org/wiki/Category_of_being]
-
-Some interesting things: OMG MOF (Meta Object Facility), fUML/ALF.
-
-fUML: Mayerhofer 2014 \cite{mayerhofer2014defining}
-
-Shan 2008 \cite{shan2008code}:
-"Trinity PhD Simone Grassi has carried out his research to create an abstract
-specification of algorithms (based on a set of ontologies) as a Model Driven Platform
-to build software [...]"
-
-https://en.wikipedia.org/wiki/Data_model
-
-Ontology vs data model[fn::https://www.topquadrant.com/2011/09/30/ontologies-and-data-models-are-they-the-same/]
-
-ClioPatria[fn::https://cliopatria.swi-prolog.org/help/whitepaper.html] concise RDF triple syntax: predicate logic without XML noise.
-
-RDF vs OWL[fn::https://stackoverflow.com/questions/1740341/what-is-the-difference-between-rdf-and-owl].
-Basically, RDF is like a Prolog fact, and OWL is like a Prolog Horn clause.
-
-With Prolog syntax, we can just skip all the XML-URI shenanigans[fn::https://www.w3.org/RDF/Metalog/docs/sw-easy].
-** Ontology engineering
-Slide 6: five ways to represent knowledge[fn::https://www.scss.tcd.ie/Owen.Conlan/CS7063/06%20Introduction%20to%20OWL%20(1%20Lecture).ppt.pdf]
-
-Noy & McGuinness 2001 \cite{noy2001ontology}:
-"One of the ways to determine the scope of the ontology is to sketch a list of questions that a
-knowledge base based on the ontology should be able to answer, *competency questions*"
-
-Should we teach ontology design with wine examples?
 ** Statics and dynamics; structure and behavior
 Models of a software system can be divided into two groups:
 - structural model,
@@ -465,11 +352,6 @@ Synonyms: object, thing, entity
 Synonyms: property[fn::https://en.wikipedia.org/wiki/Property_(philosophy)], attribute[fn::https://en.wikipedia.org/wiki/Attribute_(computing)]
 
 What is a concept?[fn::https://en.wikipedia.org/wiki/Concept]
-** Problem: RDF triple with non-binary predicates
-Unary, ternary, n-ary
-Intransitive verbs
-** Modeling Java programs
-The idea is to have predicates such as class/1, field/1, class_field/2.
 ** Philosophy of abstract objects?
 *** What does it mean for an abstract object to exist?
 Is software development applied metaphysics?
@@ -499,7 +381,7 @@ What is existence?[fn::https://www.ontology.co/existence.htm]
 *** Abstract objects, concrete consequences
 Ranking algorithms have real consequences.
 Algorithms impose onto everyone the value system of the programmers.
-** Ontology vs metaphysics?
+** What is the difference between ontology and metaphysics?
 ** OWL
 We shall concern ourselves with the Primer[fn::https://www.w3.org/TR/2012/REC-owl2-primer-20121211/]
 and not the other documents[fn::https://www.w3.org/TR/2012/REC-owl2-overview-20121211/#Documentation_Roadmap] for implementors.
@@ -519,10 +401,6 @@ Prolog assumes closed world:
 
 We can use closed-world assumption in our enterprise software model.
 If a class is not modeled in the Prolog, then it will not be in the generated Java source code.
-** Mathematical history?
-Gillies 2002 \cite{gillies2002logicism}
-has a concise insightful historical summary explanation
-of the three schools of mathematics: logicism, formalism, and intuitionism.
 ** The ontology of enterprise web applications?
 *** Entities
 An /entity/ is something that has identity.
@@ -546,13 +424,54 @@ A /property/ is a function from entity E to value V.
 https://en.wikipedia.org/wiki/Intrinsic_and_extrinsic_properties
 *** Combining entities
 *** Mapping entities to storages
-* Modeling in Prolog
+** RDF triples
+Similar concepts:
+- subject-predicate-object in Semantic-Web RDF
+- object-property-value in philosophical ontology
+- entity-attribute-value in computer programming
+** Objects
+An object has identity.
+Two objects may have the same properties,
+but if their ObjectId differs, then they are not identical.
+* Bending Prolog to my will
+** Component/module system, socket-plug metaphor
+I need a component system for programming in the large.
+Prolog module system is a building block, but Prolog modules by themselves are not enough.
+Socket-and-plug metaphor fits nicely?
+The name tells it all:
+a socket is a female connector and a plug is a male connector,
+and we connect plugs to sockets,
+and Prolog should complain if it sees a socket that is connected not exactly once.
+
+An input is a multifile predicate.
+
+A pin is a Name/Arity term.
+
+A plug exports symbols.
+
+A socket imports symbols.
+
+A module may have multiple plugs and sockets.
+
+Pins are matched by NameArity.
+The ordering of pins does not matter.
+** Using Prolog for model-driven enterprise software engineering
+The system is being sketched at a directory in our Git repository[fn::https://github.com/edom/work/tree/master/software/enterprise].
+This document is a sketch of that system.
+Not much has been implemented.
+
+The expected workflow:
+- Model the application in Prolog.
+- Then transform the model into implementation.
+  Two choices:
+  - Translation: Transform the model to source code in a supported language.
+  - Interpretation: Execute the model in Prolog.
 ** Bottom-up vs top-down
 The bottom-up way is to start with Java and SQL, and abstract both Java and SQL into fUML/ALF or something else, etc.
 
 The top-down way is to start with the business users' mental model, and ...?
 ** Modeling the application in Prolog
-*** Clarify the ontology first
+Clarify the ontology first.
 The model follows from the ontology.
 
 For example:
@@ -566,19 +485,21 @@ class(department).
 relation(work_at, [employee,department]).
 % ...
 #+END_EXAMPLE
-** Modeling a Java program
+** The easy things: Modeling static structures
 A Java program corresponds to one JVM instance.
-
 A Java program is a set of source codes and dependencies.
 
-The model is straightforward: class/1, class_package_name/2, class_name/2,
+A model of a Java program is straightforward:
+class/1, class_package_name/2, class_name/2,
 class_field/2, field_name/2, field_type/2, and so on.
-** Modeling relational databases
-The model is straightforward: table/1, table_name/2, table_column/2, column_name/2, and so on.
+
+A model of relational databases is straightforward:
+table/1, table_name/2, table_column/2, column_name/2, and so on.
 ** The hard thing: abstracting both Java and SQL into ER and PAL?
 ER = entity-relationship
 
 PAL = procedural action language; similar to fUML ALF
+** The even harder thing: combining them all into a coherent abstraction
 ** Modeling a web application?
 *** Picking a modeling language
 I have narrowed down:
@@ -747,7 +668,206 @@ Formal methods, formal verification, model checking
 It is possible to have a record in which an employee's join date precedes the date of birth.
 But it is physically impossible for an employee to join the company before the employee is born.
 Every model has simplifying assumptions.
-* What
+** Ontology?
+A class C has properties P1, P2, P3, etc.
+How do we represent an /instance/ of C in Prolog?
+There are at least two ways: /many-predicates/ and /one-term/.
+
+The /many-predicates/ representation makes it easy to add derived properties.
+One predicate represents one property.
+This is similar to 6NF (sixth normal form) in database theory.
+
+#+BEGIN_EXAMPLE
+c_prop1(InstanceId, Prop1).
+c_prop2(InstanceId, Prop2).
+c_prop3(InstanceId, Prop3).
+...
+#+END_EXAMPLE
+
+The /one-term/ representation makes it easy to specify an instance.
+One term represents one instance.
+This is similar to 0NF/1NF (zeroth or first normal form) in database theory.
+
+#+BEGIN_EXAMPLE
+c(InstanceId, [
+    prop1 - Prop1,
+    prop2 - Prop2,
+    prop3 - Prop3,
+    ...
+]).
+#+END_EXAMPLE
+
+But we can combine both.
+We can translate an instance-wise representation to a property-wise representation:
+
+#+BEGIN_EXAMPLE
+:- discontiguous c_prop1/2, ..., c_propN/2.
+
+c_prop1(InstanceId, Prop1) :- c(InstanceId, Props), member(prop1-Prop1, Props).
+c_prop2(InstanceId, Prop2) :- c(InstanceId, Props), member(prop2-Prop2, Props).
+c_prop3(InstanceId, Prop3) :- c(InstanceId, Props), member(prop3-Prop3, Props).
+...
+#+END_EXAMPLE
+
+But the many-predicates representation is easier to refactor than the one-term representation.
+
+Conclusions:
+- A module may internally specify objects in the one-term (denormal-form) style,
+  but should only export predicates in the many-predicates (normal-form) style.
+- A translation should not import denormal-form predicates.
+
+** A note on temporal modeling
+=employee_department/2= cannot keep track of movement history.
+If it is important to keep track of employee movement,
+we should use =employee_join_department/3= and =employee_leave_department/3=.
+
+#+BEGIN_EXAMPLE
+employee_department(?EmpId,?DepId)
+employee_join_department(?EmpId,?DepId,?Time)
+employee_leave_department(?EmpId,?DepId,?Time)
+#+END_EXAMPLE
+** One-property-one-predicate representation of objects
+Another core idea is the /one-property one-predicate/ representation, with surrogate primary keys.
+This enables us to represent objects in Prolog.
+Objects have identities.
+Two objects are identical iff their identifiers (primary keys) are equal.
+Example:
+#+BEGIN_EXAMPLE
+person(PersonId)
+person_name(PersonId, Name)
+person_birthdate(PersonId, BirthDate)
+#+END_EXAMPLE
+** A relation can be thought as an interpretation of function terms, or, how Prolog is ideal for writing DSLs
+For example, m0/2 and m1/2 give different meanings to the same function term f/1.
+#+BEGIN_EXAMPLE
+m0(f(X), Y) :- Y is X+1.
+m1(f(X), Y) :- Y is 2*X.
+#+END_EXAMPLE
+
+Prolog is ideal for writing DSLs because:
+- We can embed the abstract syntax in Prolog syntax.
+  We can skip specifying the grammar and go directly to specifying the semantics.
+- Specifying the semantics is straightforward.
+
+#+BEGIN_EXAMPLE
+exp_val(S, T) :- string(S), !, S = T.
+exp_val(S, T) :- number(S), !, S = T.
+exp_val(A+B, C) :- string(A), string(B), !, string_concat(A, B, C).
+exp_val(A+B, C) :- number(A), number(B), !, C is A+B.
+#+END_EXAMPLE
+* What mess?
+** Ontology engineering by competency questions
+We shall begin to design an ontology by formulating the /competency questions/ \cite{noy2001ontology}:
+the questions that the ontology should be able to answer.
+For example, an accounting ontology should be able to answer questions like:
+- What is our balance sheet this year? (This is a lot of questions: What is our assets this year, what is our liabilities this year, etc.)
+- How much profit/loss do we make this year?
+- How much tax does the government expect to racketeer from me this year?
+The end goal of an accounting ontology is for reporting, auditing, and integration.
+
+Slide 6: five ways to represent knowledge[fn::https://www.scss.tcd.ie/Owen.Conlan/CS7063/06%20Introduction%20to%20OWL%20(1%20Lecture).ppt.pdf]
+
+Should we teach ontology design with wine examples?
+** Model transformation as Horn clauses
+Model transformation is a Prolog module (a set of Horn clauses).
+
+The idea is to represent a model transformation as a set of Horn clauses in Prolog.
+For example, we state that "There is a Java class for each SQL table" as:
+#+BEGIN_EXAMPLE
+java_class(sql_dto(T)) :- sql_table(T).
+#+END_EXAMPLE
+
+A more general way to write that:
+#+BEGIN_EXAMPLE
+% opv = object-property-value
+object(java_class(sql_dto(T))) :- object(sql_table(T)).
+
+opv(java_class(sql_dto(T)), name, JavaName) :-
+    opv(sql_table(T), name, SqlName),
+    sqlname_javaname(SqlName, JavaName).
+#+END_EXAMPLE
+** Total code generation from model/ontology
+We aim for /total/ code generation from model/ontology.
+Not only structure (Java classes and fields), but also behavior (Java method contents).
+Not only the static aspects, but also the dynamic aspects.
+Some model-driven software development approaches such as EMF models the structure but not the behavior;
+thus they are not expressive enough to express all the information required to translate the model into a complete program,
+but only the entity classes and perhaps some validation and serialization;
+the engineer still has to write Java code.
+Some others such as fUML/ALF try to also model the behavior.
+** Mixing bottom-up and top-down
+There are two ways to something complex (that is pretty much anything): /bottom-up/ and /top-down/.
+
+There are two ways to design an ontology or a software:
+/bottom-up/ (gradual abstraction) and /top-down/ (gradual concretion).
+
+The advantages of bottom-up:
+- The abstraction has been proven to be useful and necessary.
+- Program development can start early, feedback is immediate, psychological reward, user can try system.
+
+The advantage of top-down is philosophical soundness.
+The disadvantage of top-down is that it is prone to creating over-engineered abstractions.
+
+There are two camps in programming:
+the bottom-up camp and the top-down camp.
+
+The bottom-up camp starts from machines and goes up toward mathematics.
+This camp produces Assembly, Fortran, Cobol, Pascal, C, C++, Go.
+This camp produced fast but ugly implementations.
+Haphazard incremental improvements.
+
+The top-down camp starts from mathematics and goes down toward machines.
+This camp produces Lisp, Scheme, Prolog, ML, Ocaml, Haskell, Coq, Idris, Agda, Lean.
+This camp produced elegant but slow implementations.
+Big design up front.
+
+They seem to be converging to a middle ground: ugly and slow.
+
+Why can't we get fast and elegant?
+** Unifying several closely-related subfields
+These are close.
+We should unify these.
+- ontology engineering and model-driven software development
+- database theory, logic programming, and relational programming
+
+Database normalization theory is related to writing good logic programs.
+** The human aspects of the envisioned usage: infrastructure engineers and suprastructure engineers
+- Suprastructure software engineer (language user) captures business logic into high-level program.
+  - Source code should be human-readable article.
+  - This steps focuses on describing what things exist and the relationships between them.
+  - This steps focuses on modeling.
+- Infrastructure software engineer (language designer) maps high-level languages to low-level languages.
+  - Example of low-level programming language: Java, C#, C++, C, SQL, Scheme, Lisp, Haskell.
+  - This steps focuses on the modeling language.
+- some mention of "suprastructure" and "infrastructure" https://en.wikipedia.org/wiki/Process_architecture
+** Language-oriented programming, domain-specific languages (DSLs)
+The 2010 article "Using DSLs for Developing Enterprise Systems" [[https://research.cyber.ee/simpl/enterprise-dsl.pdf][pdf]]:
+
+- It uses the terms "language engineer", "transformation specialist", and "business engineer".
+- It defines several usage scenarios of DSLs.
+- It defines five criteria for comparing DSL tools.
+- It compares some DSL tools.
+
+That paper should have been a wiki article.
+** A type system that is an algebra of unary predicates
+This is just an algebra of sets.
+
+A type can be thought as a set.
+A set can be thought as a unary predicate.
+A type can be thought as a unary predicate.
+\begin{align*}
+p \wedge q &= \forall a (p'(a) \wedge q'(a))
+\\
+p \leftarrow q &= \forall a (p'(a) \leftarrow q'(a))
+\\
+gt(10) &= \forall a. gt'(a,10) = \forall a. a > 10
+\end{align*}
+where \(p'\) means the meaning (the unary predicate interpretation) of \(p\).
+
+The algebra of unary predicates is analogous to the algebra of sets[fn::https://en.wikipedia.org/wiki/Algebra_of_sets]:
+conjunction is intersection,
+disjunction is union,
+implication is subset, etc.
 ** Software architecture of logic programs?
 How should logic programs be architected?
 Can we generate architecture from semantics?
@@ -784,3 +904,104 @@ The company's actual ontology is the elephant.
 How do we unify enterprise systems?
 Should we combine subsystem ontologies to produce the actual ontology,
 or should we derive subsystem ontologies from the actual ontology?
+** Mathematical history?
+Gillies 2002 \cite{gillies2002logicism}
+has a concise insightful historical summary explanation
+of the three schools of mathematics: logicism, formalism, and intuitionism.
+** Even technical writing should be narrative
+"A group of well-formed sentences does not necessarily form a coherent paragraph.
+The order in which they are placed can significantly alter the ease with which they can be understood" \cite{de2007narrative}
+
+The problem with description: it does not tell /why/.
+A narration or an argument tells why.
+
+Structuring our writing as narrative may help expose the incoherence.
+* Existing systems
+** A little history of model-driven engineering?
+1989: OMG[fn::https://en.wikipedia.org/wiki/Object_Management_Group] was founded.
+1990s: OOP Method Wars.
+CASE tools.
+1997: OMG adopted UML[fn::https://en.wikipedia.org/wiki/Unified_Modeling_Language].
+MDA[fn::https://en.wikipedia.org/wiki/Model-driven_architecture].
+
+UML is focused on visualization for humans.
+UML does not have a clear formal ontology for machine translation.
+** How standard is KIF (Knowledge Interchange Format)?
+** Ontologies for enterprise software systems
+Is there already an ontology for enterprise software systems?
+Fox & Grüninger 1997 \cite{fox1997ontologies}?
+Dietz 2012 \cite{dietz2012enterprise}?
+** Existing ontologies, models, meta-models, and modeling methods
+Ideally we build a lower (domain-specific) ontology on an upper ontology.
+
+- BFO (Basic Formal Ontology) \cite{arp2015building}
+- GFO (General Formal Ontology)
+- OWL
+- SUMO (Suggested Upper Merged Ontology)
+
+A general ontology is meant to unify all ad-hoc ontologies.
+Ad-hoc ontologies are practical and convenient but limited and incompatible with each other,
+unless we work to define a translation between them.
+Rather than defining \(n^2\) mappings between \(n\) ontologies,
+we define \(n\) mappings, each between an ad-hoc ontology and the /upper ontology/.
+
+Similar systems:
+
+- Entity-relationship modeling
+- Subject-predicate-object, RDF triple
+- Object-property-value
+- Entity-attribute-value[fn::https://en.wikipedia.org/wiki/Entity–attribute–value_model]
+- Category of being[fn::https://en.wikipedia.org/wiki/Category_of_being]
+
+Some interesting things: OMG MOF (Meta Object Facility), fUML/ALF.
+
+fUML: Mayerhofer 2014 \cite{mayerhofer2014defining}
+
+Shan 2008 \cite{shan2008code}:
+"Trinity PhD Simone Grassi has carried out his research to create an abstract
+specification of algorithms (based on a set of ontologies) as a Model Driven Platform
+to build software [...]"
+
+https://en.wikipedia.org/wiki/Data_model
+
+Ontology vs data model[fn::https://www.topquadrant.com/2011/09/30/ontologies-and-data-models-are-they-the-same/]
+
+ClioPatria[fn::https://cliopatria.swi-prolog.org/help/whitepaper.html] concise RDF triple syntax: predicate logic without XML noise.
+
+RDF vs OWL[fn::https://stackoverflow.com/questions/1740341/what-is-the-difference-between-rdf-and-owl].
+Basically, RDF is like a Prolog fact, and OWL is like a Prolog Horn clause.
+
+With Prolog syntax, we can just skip all the XML-URI shenanigans[fn::https://www.w3.org/RDF/Metalog/docs/sw-easy].
+
+** Problem: RDF triple with non-binary predicates
+Unary, ternary, n-ary
+Intransitive verbs
+
+** Common to all ontologies: classes and instances
+* Literature study
+** Unknown, to find out
+*** fUML/ALF
+fUML/ALF with text instead of graphics?
+*** How far can Protege generate Java code?
+** Things that do not suit my wants
+*** EMF
+EMF is limited to structure and not behavior.
+EMF can generate code for domain model (similar to Java bean) and validation, but not business logic.
+The programmer writes the business logic in Java, and EMF uses code-merging.
+EMF has persistence framework.
+EMF does not go far enough.
+
+EMF overview[fn::https://help.eclipse.org/photon/index.jsp?topic=%2Forg.eclipse.emf.doc%2Freferences%2Foverview%2FEMF.html]
+Ecore is similar to EMOF (Essential MOF),
+with some small differences, mostly naming differences.
+"EMF does not model behavior, so the implementation must be provided by user-written Java code."
+Modeling dynamic behavior is harder than modeling static structure.
+Modeling behavior is practically creating a programming language.
+
+This is similar to Eclipse Modeling Framework (EMF).
+The difference is:
+EMF leaves behavior specification to Java, but I think Java is too low-level.
+EMF models structure but not behavior.
+EMF does not go far enough.
+*** Java EE
+https://docs.oracle.com/javaee/6/tutorial/doc/gjiup.html

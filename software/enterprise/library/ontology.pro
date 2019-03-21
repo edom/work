@@ -23,12 +23,6 @@ Why should we write `spo(john, eat, rice)`
 instead of `eat(john, rice)` or `john_eat(rice)`?
 
 The reason is that spo/3 or opv/3 can be used to _generate_ both `eat(john, rice)` and `john_eat(rice)`.
-
-Similar concepts:
-
-    - subject-predicate-object in Semantic-Web RDF
-    - object-property-value in philosophical ontology
-    - entity-attribute-value in computer programming
 */
 
 :- multifile
@@ -41,10 +35,6 @@ Similar concepts:
 
 The original goal is to avoid repeating and scattering
 missing-property checks all over the code base.
-
-An object has identity.
-Two objects may have the same properties,
-but if their ObjectId differs, then they are not identical.
 
 A property may be multi-valued.
 

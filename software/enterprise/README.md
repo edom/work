@@ -1,7 +1,9 @@
 ## What is this?
 
+I am still figuring out what this is at [https://edom.github.io/enterprise.html](https://edom.github.io/enterprise.html).
+
 I don't know how to describe this.
-See [ramble.md](ramble.md)
+See also [ramble.md](ramble.md).
 
 ## How to read this
 

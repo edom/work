@@ -53,12 +53,3 @@ This is a real car, not just another faster-horse framework.
 
 We write software to help others do their jobs.
 Why don't we write software to help us do our jobs (write software)?
-
-## Similar things and differences
-
-This is similar to Eclipse Modeling Framework (EMF).
-The difference is: We think that Java is too low-level.
-EMF models structure but not behavior.
-EMF does not go far enough.
-
-fUML/ALF with text instead of graphics?

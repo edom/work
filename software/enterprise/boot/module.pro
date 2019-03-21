@@ -17,19 +17,6 @@ Known problems:
     We may have to use the `stream` option of load_files/2 to go against this tendency.
     But then we lose reloading ability.
 
-## Socket-plug metaphor for programming-in-the-large
-
-A pin is a Name/Arity term.
-
-A plug exports symbols.
-
-A socket imports symbols.
-
-A module may have multiple plugs and sockets.
-
-Pins are matched by NameArity.
-The ordering of pins does not matter.
-
 Things:
 
     - A _qcon_ (qualified connector name) is a Module:Name term.
