@@ -15,29 +15,81 @@ instead of /back-end/ engineer and /front-end/ engineer.
 Software architect now designs formal models and formal ontologies
 instead of drawing fragile charts ignored by machines.
 
-I see some similarities among enterprise applications.
-I think the job of the programmer is to formalize the business user's implicit ontology
-into the corresponding formal ontology that can be manipulated by machines.
-The programmer's job is to formalize the end-users' mental model into a formal ontology.
+What is an enterprise application?
+Mostly information systems[fn::https://en.wikipedia.org/wiki/Information_system].
 
+I see some similarities among enterprise applications.
+
+What is the problem with our current approaches of building enterprise applications?
+Java is too low level.
+Java's ontology is not how we think about abstract objects.
+Methods are not philosophically sound abstractions.
 One problem is that Java doesn't know SQL:
 Every SQL query is just a Java string.
 SQL queries have a structure.
 They have syntax and semantics.
 They are not mere strings.
 
-What is an enterprise application?
-Mostly information systems[fn::https://en.wikipedia.org/wiki/Information_system].
-* The end-users
+Brooks 1987 \cite{brooks1987no}?
+
+Now, I need to get down to reality, and see how much of that dream can be realized.
+
+Using Prolog to extract data and logic from legacy systems?
+
+Using Prolog to specify refactoring?
+* What does a software engineer do?
+** Slave drivers
+/Programmers play the same role as ancient slave drivers./
+They translate and impose the master's will into the slaves.
+
+Do programmers have god complex?[fn::https://www.reddit.com/r/java/comments/2jona4/why_does_everyone_hate_eclipse/clea9ok/]
+** Formalization
+One job of the programmer is to formalize the end-user's implicit ontology
+into the corresponding formal ontology that can be manipulated by machines.
+The programmer's job is to formalize the end-users' mental model into a formal ontology.
+
+Requirement gathering and analysis.
+
+Semantic-preserving translation from user syntax (natural language) to computer syntax (programming language).
+
+Will controlled natural languages enable everyone to program the computer?
+** Programming as progressive relaxation of simplifying assumptions
+Programming is progressive relaxation of simplifying assumptions.
+
+But has that activity already has another name: /modeling/.
+
+We start with the assumption that the system does nothing.
+
+Then we relax the assumption that all state is stored in memory.
+
+Then we relax the assumption that errors do not happen.
+
+Then we relax the assumption that the network latency is zero.
+
+Then we relax the assumption that the user is willing to wait forever.
+
+And so on.
+* The end-user's mental model
+** Understanding the end-user's train of thought
 I think software development can be sped up by minimizing the gap between the end-user's mental model and the programmer's mental model.
-We are programmers ourselves, so we already know a programmer's mental model, so we need not talk about it further,
-but I have never thought about the end-user's mental model until now.
 Matching mental model is a requirement of good user experience.
 
+The users think of a software system as the set of things that they can do with it,
+as the set of the ways they can interact with the system,
+as a set of possible queries and commands.
 The user's mental model is imperative/procedural.
 
-The users think of a software system as the set of things that the user can do with the system.
-The users think of a software system as the set of the ways they can interact with the system.
+We classify things all the time.
+At first, evolutionarily, I think we classify things into two: those that help us survive, and those that do not.
+Every adjective divides the world into two: the set of things that satisfy it, and the set of things that don't.
+We classify things into food and non-food, drink and non-drink, kin and non-kin, harm and non-harm, insider and outsider.
+
+For example, everyone knows that profit is income minus expenses.
+But not everyone has the same idea about income.
+
+UML can express cardinality constraints, but only 1:1, 1:N, N:1, and M:N are implementable in SQL.
+But that is no problem.
+Zero, one, or infinity.[fn::https://en.wikipedia.org/wiki/Zero_one_infinity_rule]
 ** Their practical philosophy, mental model, and ontological commitments
 The users know their goals, but they don't know how to interact with the software system to achieve those goals.
 
@@ -154,6 +206,23 @@ concept_attribute_type(employee, name, #string).
 
 The user thinks that, for each class, the system knows a set of individuals of such classes.
 For example, there is an implicit set of employees known by the system.
+
+/Computerizing the process does not change the user's ontology./
+The user has the same ontology, regardless of whether the accounting is done by hand or by machine.
+The business process has existed before computerization.
+
+The user thinks that an accounting transaction is one object.
+The computer stores an accounting transaction as several rows in a table.
+The user expects to input a transaction in one HTTP request.
+The user does not expect to submit each part of the transaction separately.
+SQL conflates aggregation, composition, and what?
+SQL conflates mereology and relationship?
+SQL conflates whether one X is related to many Y and whether one X consists of many Y.
+SQL conflates relationship and composition.
+But we have nullable foreign keys to distinguish between association, aggregation, and composition?
+Aggregation vs composition:
+In aggregation, the children can exist independently of the parent.
+Not so in composition.[fn::https://www.visual-paradigm.com/guide/uml-unified-modeling-language/uml-aggregation-vs-composition/]
 ** What
 Formal ontology, knowledge representation, modeling an enterprise software in Prolog
 
@@ -328,11 +397,6 @@ class_instance(color, red).
 class_instance(color, green).
 class_instance(color, blue).
 #+END_EXAMPLE
-** Ontology vs model
-Ontology = model + meta-model + logic
-
-UEML/GEM vs OWL \cite{khan2011transformation}.
-Enterprise software model (UEML, GEM) vs enterprise software ontology (on OWL perhaps)?
 ** Statics and dynamics; structure and behavior
 Models of a software system can be divided into two groups:
 - structural model,
@@ -401,6 +465,8 @@ Prolog assumes closed world:
 
 We can use closed-world assumption in our enterprise software model.
 If a class is not modeled in the Prolog, then it will not be in the generated Java source code.
+
+an example of second-order reasoning in OWL[fn::http://www.xfront.com/why-use-owl.html]
 ** The ontology of enterprise web applications?
 *** Entities
 An /entity/ is something that has identity.
@@ -433,6 +499,48 @@ Similar concepts:
 An object has identity.
 Two objects may have the same properties,
 but if their ObjectId differs, then they are not identical.
+* Ontology engineering
+We shall begin to design an ontology by formulating the /competency questions/ \cite{noy2001ontology}:
+the questions that the ontology should be able to answer.
+
+For example, accounting system competency questions:
+- What is our balance sheet this year? (This is a lot of questions: What is our assets this year, what is our liabilities this year, etc.)
+- How much profit/loss do we make this year?
+- How much tax does the government expect to racketeer from me this year?
+
+Smith 2006 "Against Idiosyncrasy in Ontology Development" \cite{smith2006against}
+
+The end goal of an accounting ontology is for reporting, auditing, automation, calculation, and integration.
+
+For example, hotel supply chain management tool competency questions:
+- Should we restock property P?
+  - What is the current stock level at property P?
+  - How many rooms do property P have?
+  - When do we expect property P to run out of stock?
+- When did a property experience stock-outs?
+
+Slide 6: five ways to represent knowledge[fn::https://www.scss.tcd.ie/Owen.Conlan/CS7063/06%20Introduction%20to%20OWL%20(1%20Lecture).ppt.pdf]
+
+Should we teach ontology design with wine examples?
+
+Ontology Development Pitfalls[fn::http://www.adampease.org/OP/Pitfalls.html]
+
+One source of confusion is the many meanings of the copula.[fn::https://en.wikipedia.org/wiki/E-Prime#Different_functions_of_%22to_be%22]
+
+Ontology of opinions?
+Relationship between a person and an opinion:
+approve, disapprove, unaware, indifferent, impartial, ignorant.
+The sentiment of an opinion is either positive, neutral, or negative.
+
+Ontology is not only taxonomy/classification/categorization.
+What is the difference between taxonomy, classification, and categorization?
+What is the difference between taxon, class, and category?
+
+What is the difference between ontology and model?
+Ontology = model + meta-model + logic?
+
+UEML/GEM vs OWL \cite{khan2011transformation}.
+Enterprise software model (UEML, GEM) vs enterprise software ontology (on OWL perhaps)?
 * Bending Prolog to my will
 ** Component/module system, socket-plug metaphor
 I need a component system for programming in the large.
@@ -455,6 +563,11 @@ A module may have multiple plugs and sockets.
 
 Pins are matched by NameArity.
 The ordering of pins does not matter.
+
+A Prolog module system is either /predicate-based/ or /atom-based/.
+XSB is atom-based.
+SWI is predicate-based.
+GNU Prolog does not have a module system.
 ** Using Prolog for model-driven enterprise software engineering
 The system is being sketched at a directory in our Git repository[fn::https://github.com/edom/work/tree/master/software/enterprise].
 This document is a sketch of that system.
@@ -755,19 +868,84 @@ exp_val(S, T) :- number(S), !, S = T.
 exp_val(A+B, C) :- string(A), string(B), !, string_concat(A, B, C).
 exp_val(A+B, C) :- number(A), number(B), !, C is A+B.
 #+END_EXAMPLE
+** Abstractions
+The system should present the illusion that every system state is as simple as a global variable.
+A PostgreSQL table is modeled as a global variable whose type is list.
+** Logic of objects
+"Mapping Objects to Persistent Predicates"
+https://pdfs.semanticscholar.org/f1ec/9e0e24faa1332d0cb60149e1d633b8d2509e.pdf
+
+Should we write our DSL in Twelf instead of Prolog?
+http://twelf.org/wiki/LF
+
+"Objects with logic" 1990
+https://dl.acm.org/citation.cfm?id=100368
+
+
+
+The difference between object and value is that an object has identity.
+
+Must everything have a name?
+
+An object has properties.
+A property is a key-value pair.
+
+There are several ways to /represent/ such objects in Prolog.
+
+The 1-object-1-term representation represents an object as a ground term.
+There are two choices for such term: (1) a Prolog functor whose arity is the object's property count, or (2) a list of key-value pairs.
+The meaning of such representation is that iff the list L contains K-V, then the represented object has a property K whose value is V.
+
+The 1-property-1-predicate representation represents each property as a predicate, but this requires /unique surrogate naming/ of the object for identification:
+object_property1(O,P).
+object_property2(O,P).
+
+It is surprising that database normalization theory explains some characteristics of good Prolog code.
+
+Example:
+Suppose that there are two people Alice and Bob.
+
+The question: is the object an /entity/ or a /value/?
+An entity has identity.
+A value does not have identity.
+A natural number does not have an identity.
+A person has an identity.
+Two people may have the same name while still being two different people.
+The same natural number may be referred with a Arabic numeral or a Chinese numeral, but both of them refer to the same natural number.
+
+The 1-object-1-term representation:
+[name-"Alice", birthdate-date(1990,1,1), pets-[cat,dog]]
+[name-"Bob", birthdate-date(1990,1,1), pets-[cat,dog]]
+
+The 1-object-1-predicate representation:
+person([name-"Alice",birthdate-date(1990,1,1)).
+person([name-"Bob",birthdate-date(1990,1,1)]).
+
+The 1-property-1-predicate representation (is this database in sixth normal form?):
+person_name(alice,"Alice").
+person_pet(alice,cat).
+person_pet(alice,dog).
+Note that we do not write person_pets(alice,[cat,dog]).
+person_name(bob,"Bob").
+
+The ontological representation:
+kind_surrogate_property_value(person,alice,name,"Alice").
+kind_surrogate_property_value(person,alice,birthdate,date(1990,1,1)).
+
+The parameter O serves as an internal name.
+The equality of that parameter determines the identity of the represented object.
+
+https://en.wikipedia.org/wiki/Triangle_of_reference
+http://www.jfsowa.com/ontology/ontometa.htm
+
+
+Two objects can be equal but not identical.
+
+A value has no identity.
+An object has an /identity/.
+
+Iff object_property(O,P) is provable, then object O has property P.
 * What mess?
-** Ontology engineering by competency questions
-We shall begin to design an ontology by formulating the /competency questions/ \cite{noy2001ontology}:
-the questions that the ontology should be able to answer.
-For example, an accounting ontology should be able to answer questions like:
-- What is our balance sheet this year? (This is a lot of questions: What is our assets this year, what is our liabilities this year, etc.)
-- How much profit/loss do we make this year?
-- How much tax does the government expect to racketeer from me this year?
-The end goal of an accounting ontology is for reporting, auditing, and integration.
-
-Slide 6: five ways to represent knowledge[fn::https://www.scss.tcd.ie/Owen.Conlan/CS7063/06%20Introduction%20to%20OWL%20(1%20Lecture).ppt.pdf]
-
-Should we teach ontology design with wine examples?
 ** Model transformation as Horn clauses
 Model transformation is a Prolog module (a set of Horn clauses).
 
@@ -916,6 +1094,39 @@ The problem with description: it does not tell /why/.
 A narration or an argument tells why.
 
 Structuring our writing as narrative may help expose the incoherence.
+** Presentation is accidental complexity
+The essence of an interaction is the conveyed information, not the appearance.
+HTML is accidental complexity.
+An interaction is either a /query/ or a /command/.
+A query does not change the system state.
+A command changes the system state.
+Application logic vs presentation logic.
+The essence is the data.
+The user can enumerate the finite number of things that can be done with a web application.
+The architecture is onion.
+
+Suppose that an application is ported from Google Sheets to Java.
+What does not change?
+The ontology, the concepts, the formulas
+
+A user is essentially making a remote procedure call to a web application..
+
+A system is to help us store, retrieve, and compute information.
+
+Presentation logic: HTTP-HTML-browser, SSH-CLI.
+Changing the presentation does not change the application logic at all.
+** A curious relationship
+SQL schema ~ Prolog module ~ model-theory signature
+database theory / relational algebra ~ logic programming / relational programming
+
+<2019-03-06>
+I am surprised.
+Database theory is surprisingly relevant to logic programming.
+Database normalization is surprisingly relevant to writing good Prolog code.
+
+Suppose Prolog.
+From logic programming point of view, the comma can be thought as a conjunction.
+From database point of view, the comma can be thought as a join.
 * Existing systems
 ** A little history of model-driven engineering?
 1989: OMG[fn::https://en.wikipedia.org/wiki/Object_Management_Group] was founded.
@@ -932,6 +1143,11 @@ Is there already an ontology for enterprise software systems?
 Fox & Grüninger 1997 \cite{fox1997ontologies}?
 Dietz 2012 \cite{dietz2012enterprise}?
 ** Existing ontologies, models, meta-models, and modeling methods
+Introduction to knowledge representation:
+John F. Sowa's 2011 introduction to common logic[fn::http://www.jfsowa.com/talks/clintro.pdf].
+Compares these notations: Frege 1879, Peirce 1885, Peano 1895, Peirce 1897.
+They have identical semantics.
+
 Ideally we build a lower (domain-specific) ontology on an upper ontology.
 
 - BFO (Basic Formal Ontology) \cite{arp2015building}
@@ -983,6 +1199,26 @@ Intransitive verbs
 *** fUML/ALF
 fUML/ALF with text instead of graphics?
 *** How far can Protege generate Java code?
+*** Escher Systems Perfect Developer
+I somewhat agree with this "correct-by-construction" spirit[fn::https://www.eschertech.com/products/correct_by_construction.php].
+But the website is all marketing and no technical.
+*** There are too many tools
+Which one is free-libre-open-source?
+https://en.wikipedia.org/wiki/Model-driven_engineering
+
+Topcased and Papyrus \cite{gamalielsson2011open}.
+
+People use an open source project if they /perceives/ that reusing the project is cheaper than redoing it.
+But how can you know you can even reuse that project, if that project has no documentation?
+The first question of a person who is thinking about using your open-source project is:
+Who else uses this?
+Am I alone?
+Will shit happen?
+Who maintains this?
+If the maintainer dies or gets bored, will I be in deep shit?
+Can I use this as is?
+Can I tailor this to my needs?
+Will this project go against my needs?
 ** Things that do not suit my wants
 *** EMF
 EMF is limited to structure and not behavior.
@@ -1005,3 +1241,5 @@ EMF models structure but not behavior.
 EMF does not go far enough.
 *** Java EE
 https://docs.oracle.com/javaee/6/tutorial/doc/gjiup.html
+
+Mateu MDD uses Vaadin https://github.com/miguelperezcolom/mateu-mdd

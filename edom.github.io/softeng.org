@@ -4,8 +4,46 @@
 #+PERMALINK: /softeng.html
 #+MATHJAX: true
 * Topics
-- [[file:enterprise.html]]
-* What is software engineering?
+- [[file:enterprise.html]]: Enterprise software engineering with ontologies, models, meta-models, and Prolog
+* What is software engineering? How far can the civil-engineering analogy stretch before it breaks?
+What is engineering?
+Engineering consists of design, modeling, calculation, application of science, and turning all those plans into reality.
+
+A civil engineer plans the materials according to the physical load that the structure is expected to withstand.
+The software engineer's analog is capacity planning of the computational resources
+according to the computational load that the software is expected to withstand.
+
+Architect--bricklayer analogy.
+Bricklayer is less prestigious than architect, but they require a different skill set, and building requires both.
+Without the architect, the building would be shit.
+Without the bricklayer, the building would not exist at all in the first place.
+
+What is the difference between a programmer and a software engineer?
+The difference between bricklayer and an architect.
+A bricklayer can build a wall, or even a house, but not a skyscraper.
+A programmer can build a calculator, or a small game, but not a Microsoft Windows.
+
+Of course there are incompetent architects who build buildings despised by tenants,
+as there are incompetent software engineers who build software despised by users.
+
+But software is much more complex than bridges and skyscrapers.
+
+What is the science of software engineering?
+Classical physics is the science of civil engineering, and civil engineers understand physics well enough to predict everything they need to predict.
+If computer science is to be the science of software engineering, software engineers don't know computer science well enough to predict everything they need to predict.
+Worse, what if software is not predictable?
+What if the complexity is essential and irreducible?
+
+Engineers have to combat ignorant management decisions that harm people.
+Do you want to have blood on your hands?
+
+Accidents happen.
+Buildings fall.
+Programs crash.
+People make mistakes, mostly honest.
+
+When I get on an airplane, I want to get on one made by engineers, not business people.
+I want engineers to make the final decision.
 ** How should we build software?
 For a throw-away shell script, just open a text editor and be done with it.
 
@@ -13,6 +51,15 @@ For big enterprise software, we should at least use model-driven engineering.
 
 For critical software, perhaps formal methods?
 
+Some software is so big that we cannot finish it in two weeks.
+But in two weeks we will be a different person from who we are now.
+How can these three people cooperate: our past self, our present self, and our future self?
+If we keep feeling that our past self is stupid,
+if we don't trust the decision made by our past self,
+how can we progress at all, how can we build on something, how can we grow something?
+Our two-week-ago self did think that it was the best decision.
+If we cannot respect our past decisions, we are condemned to eternal refactoring.
+Software engineering, self-trust, self-peace?
 ** How should we specialize programmers? Business programmer and language programmer
 We should not divide programmers into backend and frontend.
 We should divide programmers into business programmer and language programmer.
@@ -41,7 +88,7 @@ Programmers need to own up their mistakes, and call an error an error, not a bug
 A bug is something the programmer cannot control.
 A cosmic ray strike flipping a bit in RAM is a bug.
 A typo in the source code is not a bug.
-* What
+* Raw stuff; don't read?
 ** Rant?
 <2018-10-28> Systemd programmers are not competent enough for what they are doing.
  [fn::https://blog.erratasec.com/2018/10/systemd-is-bad-parsing-and-should-feel.html]
@@ -1771,8 +1818,6 @@ travel risk map[fn::https://i.redd.it/ktop13ad2io01.png] but for software.
 
 If you are launching a rocket, then a mistake may cost billions of dollars.
 It makes sense to invest ten million dollars testing to avoid a 1/100 probability of making a billion-dollar mistake.
-** Software engineering, self-trust, self-peace
-How can these three people cooperate: our past self, our present self, and our future self?
 ** Ramblings? Wish lists? Too speculative? Unclear goal/reason? Condemned to oblivion?
 *** Category theory and programming languages?
 The section title needs a verb.
