@@ -30,45 +30,11 @@ SQL queries have a structure.
 They have syntax and semantics.
 They are not mere strings.
 
-Brooks 1987 \cite{brooks1987no}?
-
 Now, I need to get down to reality, and see how much of that dream can be realized.
 
 Using Prolog to extract data and logic from legacy systems?
 
 Using Prolog to specify refactoring?
-* What does a software engineer do?
-** Slave drivers
-/Programmers play the same role as ancient slave drivers./
-They translate and impose the master's will into the slaves.
-
-Do programmers have god complex?[fn::https://www.reddit.com/r/java/comments/2jona4/why_does_everyone_hate_eclipse/clea9ok/]
-** Formalization
-One job of the programmer is to formalize the end-user's implicit ontology
-into the corresponding formal ontology that can be manipulated by machines.
-The programmer's job is to formalize the end-users' mental model into a formal ontology.
-
-Requirement gathering and analysis.
-
-Semantic-preserving translation from user syntax (natural language) to computer syntax (programming language).
-
-Will controlled natural languages enable everyone to program the computer?
-** Programming as progressive relaxation of simplifying assumptions
-Programming is progressive relaxation of simplifying assumptions.
-
-But has that activity already has another name: /modeling/.
-
-We start with the assumption that the system does nothing.
-
-Then we relax the assumption that all state is stored in memory.
-
-Then we relax the assumption that errors do not happen.
-
-Then we relax the assumption that the network latency is zero.
-
-Then we relax the assumption that the user is willing to wait forever.
-
-And so on.
 * The end-user's mental model
 ** Understanding the end-user's train of thought
 I think software development can be sped up by minimizing the gap between the end-user's mental model and the programmer's mental model.
@@ -416,6 +382,8 @@ Synonyms: object, thing, entity
 Synonyms: property[fn::https://en.wikipedia.org/wiki/Property_(philosophy)], attribute[fn::https://en.wikipedia.org/wiki/Attribute_(computing)]
 
 What is a concept?[fn::https://en.wikipedia.org/wiki/Concept]
+
+Turner 2007 \cite{turner2007towards}, programming-language ontology.
 ** Philosophy of abstract objects?
 *** What does it mean for an abstract object to exist?
 Is software development applied metaphysics?
@@ -500,6 +468,8 @@ An object has identity.
 Two objects may have the same properties,
 but if their ObjectId differs, then they are not identical.
 * Ontology engineering
+For introduction, see Marek Obitko's 2007 tutorial "Introduction to Ontologies and Semantic Web"[fn::https://www.obitko.com/tutorials/ontologies-semantic-web/]
+
 We shall begin to design an ontology by formulating the /competency questions/ \cite{noy2001ontology}:
 the questions that the ontology should be able to answer.
 
@@ -1127,6 +1097,22 @@ Database normalization is surprisingly relevant to writing good Prolog code.
 Suppose Prolog.
 From logic programming point of view, the comma can be thought as a conjunction.
 From database point of view, the comma can be thought as a join.
+** How do we model historical data in SQL?
+- Do we have to use SQL?
+- Is SQL the best tool for the job?
+- Does SQL do the job well enough to justify reducing maintenance costs?
+- How is historical data related to audit trail?
+  - Audit trail encompasses historical data.
+    Audit trail is a more stringent requirement.
+*** TODO <2018-09-19> Read
+- [[https://stackoverflow.com/questions/3874199/how-to-store-historical-data][database design - How to Store Historical Data - Stack Overflow]]
+- [[https://grisha.org/blog/2015/09/23/storing-time-series-in-postgresql-efficiently/][Storing Time Series in PostgreSQL efficiently - Gregory Trubetskoy]]
+- [[https://dba.stackexchange.com/questions/114580/best-way-to-design-a-database-and-table-to-keep-records-of-changes][mysql - Best way to design a database and table to keep records of changes? - Database Administrators Stack Exchange]]
+  - [[https://www.codeproject.com/Articles/105768/Audit-Trail-Tracing-Data-Changes-in-Database][Audit Trail – Tracing Data Changes in Database - CodeProject]]
+- [[https://www.red-gate.com/simple-talk/sql/database-administration/database-design-a-point-in-time-architecture/][Database Design: A Point in Time Architecture - Simple Talk]]
+- [[https://blog.timescale.com/time-series-data-why-and-how-to-use-a-relational-database-instead-of-nosql-d0cd6975e87c][Time-series data: Why (and how) to use a relational database instead of NoSQL]]
+  - Where is the SQL DDL/schema?
+
 * Existing systems
 ** A little history of model-driven engineering?
 1989: OMG[fn::https://en.wikipedia.org/wiki/Object_Management_Group] was founded.
@@ -1239,6 +1225,9 @@ The difference is:
 EMF leaves behavior specification to Java, but I think Java is too low-level.
 EMF models structure but not behavior.
 EMF does not go far enough.
+
+Java is too low-level.
+Writing an enterprise application in Java is like teaching graduate physics using only simple sentences.
 *** Java EE
 https://docs.oracle.com/javaee/6/tutorial/doc/gjiup.html
 

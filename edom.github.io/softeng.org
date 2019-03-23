@@ -3,10 +3,25 @@
 #+OPTIONS: ^:nil toc:nil
 #+PERMALINK: /softeng.html
 #+MATHJAX: true
-* Topics
-- [[file:enterprise.html]]: Enterprise software engineering with ontologies, models, meta-models, and Prolog
-* What is software engineering? How far can the civil-engineering analogy stretch before it breaks?
-What is engineering?
+* What is software engineering?
+** Fundamental questions
+In the spirit of analytic philosophy:
+- What is engineering?
+  What does an engineer do?
+- What is software?
+- What does a software engineer do?
+- What is programming?
+- What is software engineering?
+- How far can the civil-engineering analogy stretch before it breaks?
+
+"X engineering" is like "philosophy of X"?
+
+Software is program, documents, configuration, and so on.
+Programs, laws, and recipes are software.
+Minds are software.
+Software is abstract object.
+Software is executable mathematics.
+
 Engineering consists of design, modeling, calculation, application of science, and turning all those plans into reality.
 
 A civil engineer plans the materials according to the physical load that the structure is expected to withstand.
@@ -44,38 +59,43 @@ People make mistakes, mostly honest.
 
 When I get on an airplane, I want to get on one made by engineers, not business people.
 I want engineers to make the final decision.
-** How should we build software?
-For a throw-away shell script, just open a text editor and be done with it.
 
-For big enterprise software, we should at least use model-driven engineering.
-
-For critical software, perhaps formal methods?
-
-Some software is so big that we cannot finish it in two weeks.
-But in two weeks we will be a different person from who we are now.
-How can these three people cooperate: our past self, our present self, and our future self?
-If we keep feeling that our past self is stupid,
-if we don't trust the decision made by our past self,
-how can we progress at all, how can we build on something, how can we grow something?
-Our two-week-ago self did think that it was the best decision.
-If we cannot respect our past decisions, we are condemned to eternal refactoring.
-Software engineering, self-trust, self-peace?
-** How should we specialize programmers? Business programmer and language programmer
-We should not divide programmers into backend and frontend.
-We should divide programmers into business programmer and language programmer.
-The language programmer creates a DSL (domain-specific language).
-The business programmer captures user requirements into a program (a specification) in that DSL.
-The language programmer writes a metaprogram that translates
-the business programmer's declarative program into something efficient.
-
-** What is software engineering?
-Is software engineering engineering?
-What is engineering?
-
-If software is a pure art, then its construction shouldn't be time-limited.
-A painter doesn't paint with deadlines.
-A painting is finished when the painter feels it's finished.
+If software is a pure art, then its construction should not be time-limited.
+A painter does not paint with deadlines.
+A painting is finished when the painter feels that it is finished.
 However, a painter, when asked to paint a very specific painting, can estimate how many days it will take.
+** What does a software engineer do?
+*** Slave drivers
+/Programmers play the same role as ancient slave drivers./
+They translate and impose the master's will into the slaves.
+
+Do programmers have god complex?[fn::https://www.reddit.com/r/java/comments/2jona4/why_does_everyone_hate_eclipse/clea9ok/]
+*** Formalization
+One job of the programmer is to formalize the end-user's implicit ontology
+into the corresponding formal ontology that can be manipulated by machines.
+The programmer's job is to formalize the end-users' mental model into a formal ontology.
+
+Requirement gathering and analysis.
+
+Semantic-preserving translation from user syntax (natural language) to computer syntax (programming language).
+
+Will controlled natural languages enable everyone to program the computer?
+*** Programming as progressive relaxation of simplifying assumptions
+Programming is progressive relaxation of simplifying assumptions.
+
+But has that activity already has another name: /modeling/.
+
+We start with the assumption that the system does nothing.
+
+Then we relax the assumption that all state is stored in memory.
+
+Then we relax the assumption that errors do not happen.
+
+Then we relax the assumption that the network latency is zero.
+
+Then we relax the assumption that the user is willing to wait forever.
+
+And so on.
 ** Programming, model, and reality
 - When we write a program,
   we are actually creating a /mathematical model/ of reality,
@@ -88,6 +108,227 @@ Programmers need to own up their mistakes, and call an error an error, not a bug
 A bug is something the programmer cannot control.
 A cosmic ray strike flipping a bit in RAM is a bug.
 A typo in the source code is not a bug.
+* Building big software
+** How should we build software, especially big software?
+For big enterprise software, we should at least use model-driven engineering.
+See [[file:enterprise.html]]: Enterprise software engineering with ontologies, models, meta-models, and Prolog
+
+For a throw-away shell script, just open a text editor and be done with it.
+
+For critical software, perhaps formal methods?
+
+Brooks & Kugler 1987 \cite{brooks1987no} have warned us about the essential irreducible complexity of software.
+Dijkstra 1972 \cite{dijkstra1972humble} has warned us to control complexity with meaningful abstractions.
+We must understand what we do, and do what we understand.
+Model-driven engineering should be able to minimize the accidental complexity.
+The essential complexity of a software system is the minimum information required by software engineers to make the system.
+For example, "an online shop" is insufficient information: There are too many possibilities.
+What are we going to sell?
+How much traffic do we expect?
+What about the operations?
+
+Some software is so big that we cannot finish it in two weeks.
+But in two weeks we are already a different person.
+Thus we should think of ourselves as /three/ people: our past self, our present self, and our future self.
+How can these three people cooperate?
+If we keep feeling that our past self is stupid,
+if we don't trust the decision made by our past self,
+how can we progress at all, how can we build on something, how can we grow something?
+Our two-week-ago self did think that it was the best decision.
+If we cannot respect our past decisions, we are condemned to eternal refactoring.
+Software engineering, self-trust, self-peace?
+
+The relationship between programming and past self?
+
+The key to being a good programmer is being someone that our future self can trust.
+
+When we change a program, we are trusting our past self.
+We assume that our past self did not plant time-bombs that will surprise our current assumptions.
+** Why people don't adopt metaprogramming tools (and model-driven engineering?)
+I fear that the tool doesn't perfectly fit my use case.
+When that happens, I want to drop down to the lower layer.
+Generated code is usually inflexible.
+I could maintain a patch, but isn't it (patching generated code) rather hacky and brittle?
+The right way is to design the metalanguage so that it can express such transformation.
+
+https://www.eclipse.org/epsilon/doc/articles/eugenia-patching/
+** Specialization of programmers into business programmers and language programmers
+In 2019 it is common to divide programmers into frontend programmers and backend programmers.
+I think this is wrong.
+It is like slicing a cake into layers instead of sectors, as if the cake were a tree:
+One person eats all the topping, another one the butter, another one eats the flour.
+However, if we talk about /making/ instead of eating a cake,
+then it makes sense to specialize the chefs into topping specialists and dough specialists.
+Thus, is software engineering more like eating cakes or making cakes?
+
+We should divide programmers into /business programmer/ and /language programmer/ instead.
+The language programmer creates a DSL (domain-specific language).
+The business programmer captures user requirements into a program (a specification) in that DSL.
+The language programmer writes a metaprogram that translates
+the business programmer's declarative program into something efficient.
+
+* Management, hiring, culture, anarchy
+** Management
+I tried to think about [[file:engman.html][managing software engineers]].
+
+"When hiring senior engineers, you’re not buying, you’re selling." (Alexander von Franqué)[fn::https://hiringengineersbook.com/post/trouble-hiring/]
+
+"Why Developers Become Frustrated And Companies Can’t Find Talent"[fn::https://codeburst.io/why-developers-become-frustrated-and-companies-cant-find-talent-c4114d8b72ac]:
+"In order to survive, a software project needs to sacrifice quality for money and time.
+In order to exist, a software project needs to sacrifice money and time for quality."
+
+Is it just myself, or are engineers generally anarchists?
+
+Market information, compensation, salary, wage:
+
+<2019-01-15> Haskell tutelage $75/hour https://twitter.com/luqui/status/1084837990877327360
+
+I thought about [[file:salary.html][software engineer salary]].
+
+A guy is charging €639 for a two-day F# course[fn::https://www.avanscoperta.it/en/training/practical-machine-learning-with-functional-programming-workshop/]
+
+A person is a unbreakable bundle.
+When you hire a man, you can't just get the good: you get the good, the bad.
+When you hire a fast coder who is also a drunkard, a gambler, and a thief,
+you get not only the fast coder, but also the drunkard, the gambler, and the thief.
+You get all aspects/dimensions/faces/sides of the person.
+And teaching skills is easier than changing habits or characters.
+** How should we build free/libre open-source software?
+I am thinking about open-source.
+I prefer cooperation to competition.
+I write
+[[file:opensrc.html][Making contributable open-source projects]],
+[[file:community.html][Building online communities]].
+I am thinking about maintaining open-source projects.
+** What is the difference between the $10,000 Indonesian-citizen programmer and the $100,000 American-citizen programmer?
+Is it location?
+Will a $10,000 Indonesian-citizen programmer suddenly become a $100,000 Indonesian-citizen programmer just by moving to America?
+Are American companies simply able/willing to pay more?
+
+The average Indonesian does not know English.
+Not all computer science undergraduates can write code, let alone think abstractly.
+This seems to afflict all countries.
+
+Is it skill/ability?
+Is the $100,000 American-citizen programmer more capable than the $10,000 Indonesian-citizen programmer?
+
+Inconclusive discussion https://marginalrevolution.com/marginalrevolution/2012/01/why-are-some-programmers-paid-more-than-others.html
+
+The world is so broken that we don't know where to begin fixing.
+* Maintaining software
+** Backward-compatibility complicates development but simplifies maintenance
+Reasons for maintaining backward-compatibility:
+- If you maintain your library's backward-compatibility, you only need to maintain the latest version of the library.
+- Compatibility reduces dependency hell and bit rot.
+- The root cause of dependency hell / DLL hell / JAR hell is short-sighted incompetent library developers who don't care about compatibility.
+
+Reasons for breaking backward-compatibility?
+- Backward-compatibility hampers changing the interface (including fixing interface mistakes).
+  But you can always introduce a new interface and deprecate the old one.
+  But you will then collect junk.
+*** Defining interfaces and backward-compatibility
+An interface is something that users depend on.
+
+Your library's interface is what breaks your users' code if that interface changes.
+
+Examples of interface:
+
+- Function parameters.
+- Performance.
+  Example: Replacing an algorithm with a slower one may stop your users from satisfying their non-functional requirements.
+
+A backward-compatible change is a change that doesn't annoy the people who depend on you.
+Such change doesn't require those people to react.
+Such change doesn't break those people's works.
+**** Backward-compatibility obviates backporting.
+*** The key of library-writing is empathy.
+   :PROPERTIES:
+   :CUSTOM_ID: the-key-of-library-writing-is-empathy.
+   :END:
+
+Think about your users.
+Don't break their stuffs.
+
+See [[https://wiki.haskell.org/The_Monad.Reader/Issue2/EternalCompatibilityInTheory][Eternal compatibility in theory]].
+
+Making only backward-compatible changes simplifies the lives of people who depend on you.
+
+Library authors must maintain some backward compatibility.
+They can't just make arbitrary changes and break things.
+
+- https://plan99.net/~mike/writing-shared-libraries.html
+
+*** Choosing a versioning policy
+   :PROPERTIES:
+   :CUSTOM_ID: choosing-a-versioning-policy
+   :END:
+
+Use what everybody else is already using in your ecosystem:
+[[https://github.com/dhall-lang/dhall-lang/blob/master/VERSIONING.md][Dhall versioning policy]],
+[[https://pvp.haskell.org/][Haskell PVP Specification]],
+[[https://semver.org/][Semantic Versioning]],
+etc.
+
+If everybody followed eternal compatibility, versioning policies would be irrelevant and upgrades would be smoother.
+
+*** Following Haskell package versioning policy
+   :PROPERTIES:
+   :CUSTOM_ID: following-haskell-package-versioning-policy
+   :END:
+
+- [[https://gist.github.com/snoyberg/f6f10cdbea4b9e22d1b83e490ec59a10][Michael Snoyman's personal take on PVP version upper bounds]].
+- The alternative to Cabal PVP is compile error, or, even worse, logic error and runtime failure?
+
+  - Cabal PVP depends on library authors/maintainers to test and update their dependency bounds.
+
+*** Backward-compatibility hall of fame
+   :PROPERTIES:
+   :CUSTOM_ID: backward-compatibility-hall-of-fame
+   :END:
+
+These systems may be too backward-compatible.
+
+2018-09-01: [[https://www.ibm.com/support/knowledgecenter/en/linuxonibm/liaag/wkvm/wkvm_c_overview.htm][IBM Z mainframes]].
+The page says that the 2018 system is mostly backwards-compatible to the 1964 system.
+
+- 2014: [[http://www.longpelaexpertise.com.au/ezine/IBMBackwardCompatibility.php][Are IBM Mainframes Really Backward Compatible? - LongEx Mainframe Quarterly]]
+
+Windows 95: [[https://news.ycombinator.com/item?id=2281932][Much more than you would ever know.. The original version of Sim City was writt... | Hacker News]]
+*** Respect legacy code because it works, but don't get too attached to anything.
+It may be ugly, but /it works/.
+- Is the code really ugly?
+  - Are you refusing to read it because it doesn't fit your taste?
+    Indent size?
+    Snake case vs camel case?
+    - Is the code truly unreadable, or are you just an asshole?
+      - How hard have you tried?
+** Forward-compatibility?
+** Logging
+- Before logging something, think how it would be read.
+- If you can't read the log, you shouldn't write the log.
+- Only log important things.
+  Keep logging volume low.
+  Minimize retention; only retain important logs.
+  Don't retain debugging logs.
+- Storage is cheap. Rotate your logs and buy more storage.
+- If you're looking for things to do, maybe you can try using Amazon SDK
+  and log your events to CloudWatch or CloudTrail (or perhaps even SNS).
+  Treat a log as an event stream, not a file.
+- http://jasonwilder.com/blog/2013/07/16/centralized-logging-architecture/
+- http://jasonwilder.com/blog/2012/01/03/centralized-logging/
+** Maintainability
+- 2017-05-20
+  - What helps writing maintainable software?
+    - Minimize duplication? The programming language limits deduplication?
+    - Facilitate change, minimize ripple due to change
+    - Flexibility of a component is proportional to its risk of changing?
+** How do you know a software is maintainable?
+- Change all the programmers.
+  If the new programmers can handle it,
+  it's maintainable.
+- The only way to ensure software maintainability is periodic rotation of programmers?
+  - Yegor agrees: we should rotate programmers, no less frequent than every year, for software maintainability
+    https://www.yegor256.com/2015/12/29/turnover-is-good-for-maintainability.html
 * Raw stuff; don't read?
 ** Rant?
 <2018-10-28> Systemd programmers are not competent enough for what they are doing.
@@ -96,13 +337,6 @@ A typo in the source code is not a bug.
 
 Computers feel slow not because hardware sucks, but because programmers tell it to do stupid things.
 Ever-stronger hardware lets more programmers get away with writing ever-shittier software.
-** How should we build free/libre open-source software?
-I am thinking about open-source.
-I prefer cooperation to competition.
-I write
-[[file:opensrc.html][Making contributable open-source projects]],
-[[file:community.html][Building online communities]].
-I am thinking about maintaining open-source projects.
 ** How do we reverse-engineer software?
 Sometimes I think about [[file:reveng.html][reverse software engineering]].
 
@@ -113,20 +347,6 @@ full of people who want to get a slice of the pie of real economy without growin
 full of people who just want to extract value from society without creating value,
 people who only take but don't give,
 people who only shuffle money around.
-** Management, hiring?
-I tried to think about [[file:engman.html][managing software engineers]].
-
-"When hiring senior engineers, you’re not buying, you’re selling." (Alexander von Franqué)[fn::https://hiringengineersbook.com/post/trouble-hiring/]
-
-"Why Developers Become Frustrated And Companies Can’t Find Talent"[fn::https://codeburst.io/why-developers-become-frustrated-and-companies-cant-find-talent-c4114d8b72ac]:
-"In order to survive, a software project needs to sacrifice quality for money and time.
-In order to exist, a software project needs to sacrifice money and time for quality."
-*** Market information, compensation, salary, wage
-<2019-01-15> Haskell tutelage $75/hour https://twitter.com/luqui/status/1084837990877327360
-
-I thought about [[file:salary.html][software engineer salary]].
-
-A guy is charging €639 for a two-day F# course[fn::https://www.avanscoperta.it/en/training/practical-machine-learning-with-functional-programming-workshop/]
 ** TODO Fix this incoherent Java ramble; don't read
 - Make it work
 - Make it maintainable
@@ -1885,23 +2105,10 @@ Can we formalize "a program is an executable formal system" using Grue's map the
         - https://harc.ycr.org/project/gp/
 
 - Functional Payout Framework http://lambda-the-ultimate.org/node/3331
-*** Automatic deglobalization of C programs?
-*** <2018-09-15> Make an Emacs Lisp interpreter in Haskell for Yi editor
-*** How do we model historical data in SQL?
-- Do we have to use SQL?
-- Is SQL the best tool for the job?
-- Does SQL do the job well enough to justify reducing maintenance costs?
-- How is historical data related to audit trail?
-  - Audit trail encompasses historical data.
-    Audit trail is a more stringent requirement.
-**** TODO <2018-09-19> Read
-- [[https://stackoverflow.com/questions/3874199/how-to-store-historical-data][database design - How to Store Historical Data - Stack Overflow]]
-- [[https://grisha.org/blog/2015/09/23/storing-time-series-in-postgresql-efficiently/][Storing Time Series in PostgreSQL efficiently - Gregory Trubetskoy]]
-- [[https://dba.stackexchange.com/questions/114580/best-way-to-design-a-database-and-table-to-keep-records-of-changes][mysql - Best way to design a database and table to keep records of changes? - Database Administrators Stack Exchange]]
-  - [[https://www.codeproject.com/Articles/105768/Audit-Trail-Tracing-Data-Changes-in-Database][Audit Trail – Tracing Data Changes in Database - CodeProject]]
-- [[https://www.red-gate.com/simple-talk/sql/database-administration/database-design-a-point-in-time-architecture/][Database Design: A Point in Time Architecture - Simple Talk]]
-- [[https://blog.timescale.com/time-series-data-why-and-how-to-use-a-relational-database-instead-of-nosql-d0cd6975e87c][Time-series data: Why (and how) to use a relational database instead of NoSQL]]
-  - Where is the SQL DDL/schema?
+
+Automatic deglobalization of C programs?
+
+<2018-09-15> Make an Emacs Lisp interpreter in Haskell for Yi editor
 *** Information that is looking for a place where they can be most useful
 **** Garbage collection
 - [[https://www.reddit.com/r/programming/comments/7zfbs5/conservative_gc_is_it_really_that_bad_xpost_rjava/][Conservative GC: Is It Really That Bad? (X-post /r/java) : programming]] (summary)
@@ -1921,14 +2128,6 @@ Can we formalize "a program is an executable formal system" using Grue's map the
 
 - [[http://www.aiai.ed.ac.uk/~jeff/clos-guide.html][A Brief Guide to CLOS]]
 
-**** Why people don't adopt metaprogramming tools
-I fear that the tool doesn't perfectly fit my use case.
-When that happens, I want to drop down to the lower layer.
-Generated code is usually inflexible.
-I could maintain a patch, but isn't it (patching generated code) rather hacky and brittle?
-The right way is to design the metalanguage so that it can express such transformation.
-
-https://www.eclipse.org/epsilon/doc/articles/eugenia-patching/
 **** TODO Process these informations
 
 - Composition, composable systems
@@ -2258,11 +2457,6 @@ https://www.eclipse.org/epsilon/doc/articles/eugenia-patching/
 
     - ADTs.
 
-*** Writing an enterprise application in Java is like teaching graduate physics using only the 100 most common English words.
-*** The relationship between programming and past self
-The key to being a good programmer is being someone that your future self can trust.
-
-When we change a program, we are trusting our past self.
 *** The context of "Premature optimization"
 http://wiki.c2.com/?PrematureOptimization
 
@@ -2736,15 +2930,6 @@ I conjecture that there is an algorithm that can transform every general recursi
     - other tools?
   - feature-oriented software development
     - https://en.wikipedia.org/wiki/FOSD_program_cubes
-*** What is the difference between the $10,000 Indonesian-citizen programmer and the $100,000 American-citizen programmer?
-Is it location?
-Will a $10,000 Indonesian-citizen programmer suddenly become a $100,000 Indonesian-citizen programmer just by moving to America?
-Are American companies simply able/willing to pay more?
-
-Is it skill/ability?
-Is the $100,000 American-citizen programmer more capable than the $10,000 Indonesian-citizen programmer?
-
-Inconclusive discussion https://marginalrevolution.com/marginalrevolution/2012/01/why-are-some-programmers-paid-more-than-others.html
 *** Machine-learning database indexing; an index is a model of the data
 http://deliprao.com/archives/262
 
@@ -2942,116 +3127,5 @@ Each of them *requires a distinct mode of writing*."
 - Corollary: Group data and methods that need those data together in one class.
 - Can that principle derive these principles? http://c2.com/cgi/wiki?PrinciplesOfObjectOrientedDesign
 - You can write maintainable and reliable procedural code?
-* Maintaining software
-** Backward-compatibility complicates development but simplifies maintenance
-*** If you maintain your library's backward-compatibility, you only need to maintain the latest version of the library.
-*** Compatibility reduces dependency hell and bit rot.
-*** The root cause of dependency hell / DLL hell / JAR hell is incompetent library developers who don't care about compatibility.
-*** Defining interfaces and backward-compatibility
-An interface is something that users depend on.
-
-Your library's interface is what breaks your users' code if that interface changes.
-
-Examples of interface:
-
-- Function parameters.
-- Performance.
-  Example: Replacing an algorithm with a slower one may stop your users from satisfying their non-functional requirements.
-
-A backward-compatible change is a change that doesn't annoy the people who depend on you.
-Such change doesn't require those people to react.
-Such change doesn't break those people's works.
-**** Backward-compatibility obviates backporting.
-*** But backward-compatibility hampers changing the interface (including fixing interface mistakes).
-**** But you can always introduce a new interface and deprecate the old one.
-***** But you will then collect junk.
-*** The key of library-writing is empathy.
-   :PROPERTIES:
-   :CUSTOM_ID: the-key-of-library-writing-is-empathy.
-   :END:
-
-Think about your users.
-Don't break their stuffs.
-
-See [[https://wiki.haskell.org/The_Monad.Reader/Issue2/EternalCompatibilityInTheory][Eternal compatibility in theory]].
-
-Making only backward-compatible changes simplifies the lives of people who depend on you.
-
-Library authors must maintain some backward compatibility.
-They can't just make arbitrary changes and break things.
-
-- https://plan99.net/~mike/writing-shared-libraries.html
-
-*** Choosing a versioning policy
-   :PROPERTIES:
-   :CUSTOM_ID: choosing-a-versioning-policy
-   :END:
-
-Use what everybody else is already using in your ecosystem:
-[[https://github.com/dhall-lang/dhall-lang/blob/master/VERSIONING.md][Dhall versioning policy]],
-[[https://pvp.haskell.org/][Haskell PVP Specification]],
-[[https://semver.org/][Semantic Versioning]],
-etc.
-
-If everybody followed eternal compatibility, versioning policies would be irrelevant and upgrades would be smoother.
-
-*** Following Haskell package versioning policy
-   :PROPERTIES:
-   :CUSTOM_ID: following-haskell-package-versioning-policy
-   :END:
-
-- [[https://gist.github.com/snoyberg/f6f10cdbea4b9e22d1b83e490ec59a10][Michael Snoyman's personal take on PVP version upper bounds]].
-- The alternative to Cabal PVP is compile error, or, even worse, logic error and runtime failure?
-
-  - Cabal PVP depends on library authors/maintainers to test and update their dependency bounds.
-
-*** Backward-compatibility hall of fame
-   :PROPERTIES:
-   :CUSTOM_ID: backward-compatibility-hall-of-fame
-   :END:
-
-These systems may be too backward-compatible.
-
-2018-09-01: [[https://www.ibm.com/support/knowledgecenter/en/linuxonibm/liaag/wkvm/wkvm_c_overview.htm][IBM Z mainframes]].
-The page says that the 2018 system is mostly backwards-compatible to the 1964 system.
-
-- 2014: [[http://www.longpelaexpertise.com.au/ezine/IBMBackwardCompatibility.php][Are IBM Mainframes Really Backward Compatible? - LongEx Mainframe Quarterly]]
-
-Windows 95: [[https://news.ycombinator.com/item?id=2281932][Much more than you would ever know.. The original version of Sim City was writt... | Hacker News]]
-*** Respect legacy code because it works, but don't get too attached to anything.
-It may be ugly, but /it works/.
-- Is the code really ugly?
-  - Are you refusing to read it because it doesn't fit your taste?
-    Indent size?
-    Snake case vs camel case?
-    - Is the code truly unreadable, or are you just an asshole?
-      - How hard have you tried?
-** Forward-compatibility?
-** Logging
-- Before logging something, think how it would be read.
-- If you can't read the log, you shouldn't write the log.
-- Only log important things.
-  Keep logging volume low.
-  Minimize retention; only retain important logs.
-  Don't retain debugging logs.
-- Storage is cheap. Rotate your logs and buy more storage.
-- If you're looking for things to do, maybe you can try using Amazon SDK
-  and log your events to CloudWatch or CloudTrail (or perhaps even SNS).
-  Treat a log as an event stream, not a file.
-- http://jasonwilder.com/blog/2013/07/16/centralized-logging-architecture/
-- http://jasonwilder.com/blog/2012/01/03/centralized-logging/
-** Maintainability
-- 2017-05-20
-  - What helps writing maintainable software?
-    - Minimize duplication? The programming language limits deduplication?
-    - Facilitate change, minimize ripple due to change
-    - Flexibility of a component is proportional to its risk of changing?
-** How do you know a software is maintainable?
-- Change all the programmers.
-  If the new programmers can handle it,
-  it's maintainable.
-- The only way to ensure software maintainability is periodic rotation of programmers?
-  - Yegor agrees: we should rotate programmers, no less frequent than every year, for software maintainability
-    https://www.yegor256.com/2015/12/29/turnover-is-good-for-maintainability.html
 * Bibliography
 bibliography:default

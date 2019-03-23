@@ -1,23 +1,25 @@
 @charset "utf-8";
 
-// Define defaults for each variable.
+// Use media queries like this:
+// @include media-query($on-palm) {
+//   .wrapper {
+//     padding-right: $spacing-unit / 2;
+//     padding-left: $spacing-unit / 2;
+//   }
+// }
+@mixin media-query($device) {
+  @media screen and (max-width: $device) {
+    @content;
+  }
+}
 
-$base-font-family: 'DejaVu Serif', serif !default;
-$base-font-size:   12pt !default;
-$code-font-family: 'DejaVu Sans Mono', monospace !default;
-$code-font-size:   11pt;
-$pre-font-size:    10pt;
-$palm-font-size:   10pt !default;
-$print-font-size:  12pt !default;
-$base-font-weight: 400 !default;
-$small-font-size:  $base-font-size * 0.875 !default;
-$base-line-height: 1.5 !default;
+// Define defaults for each variable.
 
 $spacing-unit:     30px !default;
 
 $text-color:       #000 !default;
 $background-color: #fff !default;
-$code-background-color: #eee !default;
+$code-background-color: #f8f8f8 !default;
 $code-text-color: #000 !default;
 $site-header-background-color: $code-background-color;
 $site-footer-background-color: $code-background-color;
@@ -38,9 +40,68 @@ $on-laptop:        32em !default;
     margin: 0.75in 0.75in;
 }
 
+// -------------------- Begin: font (family, size, etc.)
+
+$base-font-family: 'Times New Roman', serif !default;
+$code-font-family: 'DejaVu Sans Mono', monospace !default;
+$palm-font-family: 'Times New Roman', serif !default;
+
+$base-font-size:    16pt !default;
+$print-font-size:   14pt !default;
+$palm-font-size:    12pt !default;
+$base-font-weight:  400 !default;
+$base-line-height:  1.2 !default;
+
+// It is annoying that fonts have different x-heights.
+// It is annoying that there isn't a set of coherently-designed font families for combining text, code, and math on the Web.
+// We could use rem units, but we'll just pre-calculate them, lest they be unsupported by the browser.
+
+// Times New Roman, DejaVu Sans Mono
+$times-code-x: 14/16;
+$times-pre-x: 11/16;
+// Helvetica, DejaVu Sans Mono
+$helv-code-x: 10/10;
+$helv-pre-x: 9/10;
+
+html    { font-size: $base-font-size; }
+code    { font-size: $times-code-x * $base-font-size; }
+pre     { font-size: $times-pre-x * $base-font-size; }
+pre code{ font-size: $times-pre-x * $base-font-size; }
+pre     { line-height: 1.1; }
+
+@media print {
+    html    { font-size: $print-font-size; }
+    code    { font-size: $times-code-x * $print-font-size; }
+    pre     { font-size: $times-pre-x * $print-font-size; }
+    pre code{ font-size: $times-pre-x * $print-font-size; }
+}
+@media screen and (max-width: $on-palm) {
+    html    { font-size: $palm-font-size; }
+    code    { font-size: $times-code-x * $palm-font-size; }
+    pre     { font-size: $times-pre-x * $palm-font-size; }
+    pre code{ font-size: $times-pre-x * $palm-font-size; }
+}
+
+// End fucking font-size annoyance.
+
+html {
+    line-height: $base-line-height;
+    font-variant: normal;
+    font-weight: normal;
+
+    font-kerning: normal;
+    -webkit-font-feature-settings: "kern" 1;
+       -moz-font-feature-settings: "kern" 1;
+         -o-font-feature-settings: "kern" 1;
+            font-feature-settings: "kern" 1;
+
+    font-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
 @media print {
     html {
-        font-size: $print-font-size;
+        font-family: $base-font-family;
     }
     .wrapper {
         max-width: none;
@@ -51,19 +112,15 @@ $on-laptop:        32em !default;
     }
 }
 
-h1, h2, h3, h4, h5, h6 {
-    letter-spacing: -0.04em;
-    font-weight: bold;
-}
-
-h1 { font-size: 1.500rem; }
-h2 { font-size: 1.250rem; }
-h3 { font-size: 1.125rem; }
-h4 { font-size: 1.063rem; }
-h5 { font-size: 0.900rem; }
-h6 { font-size: 0.800rem; }
-
 @media screen {
+    html {
+        font-family: $base-font-family;
+
+        @include media-query($on-palm) {
+            font-family: $palm-font-family;
+        }
+
+    }
     .page-content > .wrapper {
         margin-top: 1rem;
         margin-bottom: 1rem;
@@ -74,6 +131,29 @@ h6 { font-size: 0.800rem; }
         margin-right: auto;
     }
 }
+
+h1 { font-size: 1.500rem; }
+h2 { font-size: 1.250rem; }
+h3 { font-size: 1.125rem; }
+h4 { font-size: 1.063rem; }
+h5 { font-size: 0.900rem; }
+h6 { font-size: 0.800rem; }
+
+figcaption      { font-size: 0.875rem; }
+.page-heading   { font-size: 1.25rem; }
+.post-link      { font-size: 1.5rem; }
+.post-meta      { font-size: 0.875rem; }
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.04em;
+    font-weight: bold;
+}
+
+.post-link {
+    display: block;
+}
+
+// -------------------- End: font
 
 p
 {
@@ -113,25 +193,6 @@ li
     margin: 0em;
 }
 
-// Use media queries like this:
-// @include media-query($on-palm) {
-//   .wrapper {
-//     padding-right: $spacing-unit / 2;
-//     padding-left: $spacing-unit / 2;
-//   }
-// }
-@mixin media-query($device) {
-  @media screen and (max-width: $device) {
-    @content;
-  }
-}
-
-@mixin relative-font-size($ratio) {
-  font-size: $base-font-size * $ratio;
-}
-
-
-
 
 
 /**
@@ -141,32 +202,6 @@ body,
 dl, dd, figure {
   margin: 0;
   padding: 0;
-}
-
-@media screen {
-    html {
-        font-size: $base-font-size;
-
-        @include media-query($on-palm) {
-            font-size: $palm-font-size;
-        }
-    }
-
-    font-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-}
-
-html {
-    font-family: $base-font-family;
-    line-height: $base-line-height;
-    font-variant: normal;
-    font-weight: normal;
-
-    font-kerning: normal;
-    -webkit-font-feature-settings: "kern" 1;
-       -moz-font-feature-settings: "kern" 1;
-         -o-font-feature-settings: "kern" 1;
-            font-feature-settings: "kern" 1;
 }
 
 
@@ -229,10 +264,6 @@ figure > img {
   display: block;
 }
 
-figcaption {
-  font-size: $small-font-size;
-}
-
 
 
 /**
@@ -281,18 +312,15 @@ blockquote {
  */
 pre,
 code {
-  background-color: $code-background-color;
   color: $code-text-color;
   font-family: $code-font-family;
 }
 
-code {
-  font-size: $code-font-size;
-  padding: 1px 5px;
+pre {
+    background-color: $code-background-color;
 }
 
 pre {
-  font-size: $pre-font-size;
   padding: 8px 12px;
   overflow-x: auto;
 
@@ -443,10 +471,6 @@ div.highlighter-rouge > * { display: inline-block; text-align: left; }
     background-color: $site-footer-background-color;
     border-top: 1px solid $grey-color-light;
     padding: 0.5em 0em;
-    font-size: $base-font-size;
-    @include media-query($on-palm) {
-        font-size: $palm-font-size;
-    }
 }
 
 .site-footer p {
@@ -461,10 +485,6 @@ div.highlighter-rouge > * { display: inline-block; text-align: left; }
  * Page content
  */
 
-.page-heading {
-  @include relative-font-size(1.25);
-}
-
 .post-list {
   margin-left: 0;
   list-style: none;
@@ -475,13 +495,7 @@ div.highlighter-rouge > * { display: inline-block; text-align: left; }
 }
 
 .post-meta {
-  font-size: $small-font-size;
   color: $grey-color;
-}
-
-.post-link {
-  display: block;
-  @include relative-font-size(1.5);
 }
 
 
