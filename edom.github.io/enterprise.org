@@ -4,6 +4,7 @@
 #+PERMALINK: /enterprise.html
 #+MATHJAX: true
 * Motivation
+** Backstory
 I think I may have a way to be a /30x engineer/,
 or this might just be another manic episode of mine.
 The idea is to use /Prolog/ to /model/ enterprise software systems and to /transform/ those models into complete /full-stack/ working code.
@@ -35,28 +36,181 @@ Now, I need to get down to reality, and see how much of that dream can be realiz
 Using Prolog to extract data and logic from legacy systems?
 
 Using Prolog to specify refactoring?
-* The end-user's mental model
-** Understanding the end-user's train of thought
-I think software development can be sped up by minimizing the gap between the end-user's mental model and the programmer's mental model.
-Matching mental model is a requirement of good user experience.
+** <2019-03-24> Answering Ridwan
+Ridwan[fn::https://github.com/reed1] asked,
+"I'm intrigued on what you said about 30x developer efficiency with prolog, even 10x developer is somewhat considered a myth. So how is it even?"
 
-The users think of a software system as the set of things that they can do with it,
-as the set of the ways they can interact with the system,
-as a set of possible queries and commands.
+It's not a myth.
+There are a few 1,000,000x engineers.
+Examples are the people who built things like Google and StackOverflow.
+Someone who can make 500,000 engineers twice as productive is a 1,000,000x engineer.
+If there are 1,000,000x engineers, then there must be more 30x engineers, because it should be easier to be a 30x engineer than to be a 1,000,000x engineer.
+
+The key idea of this Prolog stuff is simple, and is not new:
+- Formalize the end-user's mental model in Prolog.
+- Write model transformations in Prolog.
+- Generate a full-stack web application (Java + JavaScript + HTTP + HTML + SQL).
+
+An example model transformation: "If class C has property named P of type T, then Java class entity(C) has field named P of type JT."
+Such model transformation can be written as a Prolog rule (a Horn clause) like this:
+#+BEGIN_SRC
+java_class_field(entity(C), P, JT) :-
+    class_property_type(C, P, T),
+    type_javatype(T, JT).
+#+END_SRC
+
+Model-driven engineering tools already exist.
+An example is Eclipse's EMF, but it is limited to modeling only structure and not behavior.
+Another example that does model behavior is fUML+Alf.
+
+The 30x is an asymptote.
+It is only true when you have to make many instances of the same class of apps.
+
+Let N be the number of similar applications you have to make.
+Which would you rather write:
+- N * 30,000 lines of Java
+- 10,000 + N * 1,000 lines of Prolog
+
+The limit of 30000n / (10000 + 1000n) as n grows unbounded is 30.
+That is where the 30x come from.
+* Ontology engineering, our mental models, and software systems
+** Introduction to ontology
+For introduction to ontologies, see Marek Obitko's 2007 tutorial "Introduction to Ontologies and Semantic Web"[fn::https://www.obitko.com/tutorials/ontologies-semantic-web/]
+
+Smith 2006 "Against Idiosyncrasy in Ontology Development" \cite{smith2006against}
+
+Slide 6: five ways to represent knowledge,
+from [[https://www.scss.tcd.ie/Owen.Conlan/CS7063/06%20Introduction%20to%20OWL%20(1%20Lecture).ppt.pdf][Owen Conlan's "Introduction to OWL"]].
+
+Should we teach ontology design with wine examples?
+
+Ontology Development Pitfalls[fn::http://www.adampease.org/OP/Pitfalls.html]
+
+Care has to be taken when formalizing natural language, due to polysemy (manymeaningedness).
+One source of confusion is the many meanings of the copula.[fn::https://en.wikipedia.org/wiki/E-Prime#Different_functions_of_%22to_be%22]
+** Ontology engineering with competency questions
+We shall begin to design an ontology by formulating the /competency questions/ \cite{noy2001ontology}:
+the questions that the ontology should be able to answer.
+
+For example, accounting system competency questions:
+- What is our balance sheet this year? (This is a lot of questions: What is our assets this year, what is our liabilities this year, etc.)
+- How much profit/loss do we make this year?
+- How much tax does the government expect to racketeer from me this year?
+
+The end goal of an accounting ontology is for reporting, auditing, automation, calculation, and integration.
+
+For example, hotel supply chain management tool competency questions:
+- Should we restock property P?
+  - What is the current stock level at property P?
+  - How many rooms do property P have?
+  - When do we expect property P to run out of stock?
+- When did a property experience stock-outs?
+
+Ontology of opinions?
+Relationship between a person and an opinion:
+approve, disapprove, unaware, indifferent, impartial, ignorant.
+The sentiment of an opinion is either positive, neutral, or negative.
+
+Ontology is not only taxonomy/classification/categorization.
+What is the difference between taxonomy, classification, and categorization?
+What is the difference between taxon, class, and category?
+
+What is the difference between ontology and model?
+Ontology = model + meta-model + logic?
+
+UEML/GEM vs OWL \cite{khan2011transformation}.
+Enterprise software model (UEML, GEM) vs enterprise software ontology (on OWL perhaps)?
+
+ER: Chen 1976 \cite{chen1976entity}
+** Ontology vs model vs data-model vs language vs vocabulary: What are the similarities and differences?
+Every model /implies/ an ontology.
+Every model has a set of /ontological commitments/.
+
+Ontology = axioms + vocabulary?
+
+If ontologies enable information sharing, then how do they differ from languages?
+
+An ontology is a /knowledge-representation convention/.
+
+It is harder to name relations than non-relations.
+Every noun names a term.
+Every verb names a relation.
+Example: eat(john,hamburger).
+Thus, the convention: Verb(Noun1, ..., NounN).
+
+But that is not always desirable.
+We have another convention: Class1_Class2(Instance1, Instance2).
+Example: list_length/2.
+
+But it is not clear.
+What is the meaning of person_food/2?
+The person likes the food?
+The person hates the food?
+The person eats the food?
+
+I am against inflecting relation names.
+I am against pluralizing table names.
+I use infinitive-form verbs and singular nouns.
+But, without inflection, we may confuse commands and relations?
+** Things common to many ontologies
+This Wikipedia page[fn::https://en.wikipedia.org/wiki/Ontology_components]
+
+Many authors use different but equivalent terms.
+Jake Mitchell pointed out[fn::https://twitter.com/mekajfire/status/1090689517701349376]
+that there are a lot of confusing pair of terms in philosophy:
+sense and reference[fn::https://en.wikipedia.org/wiki/Sense_and_reference] (Frege),
+signifier and signified (de Saussure),
+use-mention distinction,
+concept and object.
+
+Synonym sets of concepts in ontology
+
+Each list item is a synonym set.
+- class, category, concept, universal
+- thing, object, entity, instance, individual, particular, ground-level object
+- instance of, member of, element of
+- property, attribute
+- relation, relationship
+- classification, categorization
+- name and referent[fn::https://en.wikipedia.org/wiki/Referent], signifier and signified (de Saussure)
+- triangle of reference[fn::https://en.wikipedia.org/wiki/Triangle_of_reference],
+  meaning triangle[fn::http://www.jfsowa.com/ontology/ontometa.htm],
+  semiotic triangle
+- semiotics, semiology[fn::https://changingminds.org/explanations/critical_theory/schools/semiotics.htm]
+- model (abstraction that ignores irrelevant details), theory
+
+Let D be the domain of discourse.
+In Prolog, D is the set of all terms.
+
+A class C is modeled by a predicate P.
+An individual of C is modeled by an element of D that satisfies P.
+This element of D is the /name/ of the individual.
+** Understanding the end-user's mental model
+The users think of a software system:
+- the set of things that exist in the system
+- the actions that can be done with the system
+- the set of the possible interactions with the system
+- a set of possible queries and commands
+
 The user's mental model is imperative/procedural.
 
-We classify things all the time.
-At first, evolutionarily, I think we classify things into two: those that help us survive, and those that do not.
-Every adjective divides the world into two: the set of things that satisfy it, and the set of things that don't.
-We classify things into food and non-food, drink and non-drink, kin and non-kin, harm and non-harm, insider and outsider.
+The mental model of a software user is the same as that of a machine operator.
 
-For example, everyone knows that profit is income minus expenses.
-But not everyone has the same idea about income.
+We classify things all the time.
+I think, early in our evolution we classify things into two: those that help us survive, and those that do not.
+We classify things into food and non-food, kin and non-kin, insider and outsider, and so on.
+
+Every adjective divides the world into two: the set of things that satisfy it, and the set of things that don't.
+
+For example, everyone agrees that profit is income minus expenses.
+But not everyone agrees on what income is.
 
 UML can express cardinality constraints, but only 1:1, 1:N, N:1, and M:N are implementable in SQL.
 But that is no problem.
 Zero, one, or infinity.[fn::https://en.wikipedia.org/wiki/Zero_one_infinity_rule]
-** Their practical philosophy, mental model, and ontological commitments
+
+What is the users' practical philosophy, mental model, and ontological commitments?
+
 The users know their goals, but they don't know how to interact with the software system to achieve those goals.
 
 The users have an ontology, although they may not be aware that it is called "ontology".
@@ -467,50 +621,28 @@ Similar concepts:
 An object has identity.
 Two objects may have the same properties,
 but if their ObjectId differs, then they are not identical.
-* Ontology engineering
-For introduction, see Marek Obitko's 2007 tutorial "Introduction to Ontologies and Semantic Web"[fn::https://www.obitko.com/tutorials/ontologies-semantic-web/]
+** Object-role modeling
+https://en.wikipedia.org/wiki/Object-role_modeling
 
-We shall begin to design an ontology by formulating the /competency questions/ \cite{noy2001ontology}:
-the questions that the ontology should be able to answer.
+Should we care about attribute-freeness?
+** Logic of lists or sequences (ordered collections)
+Suppose that we want to write a Prolog knowledge base that models the sequence [a,b,c].
 
-For example, accounting system competency questions:
-- What is our balance sheet this year? (This is a lot of questions: What is our assets this year, what is our liabilities this year, etc.)
-- How much profit/loss do we make this year?
-- How much tax does the government expect to racketeer from me this year?
+With numbers, it is easy to model an ordered collection.
+We can piggyback on the natural ordering of the numbers.
+#+BEGIN_EXAMPLE
+list(1, a).
+list(2, b).
+list(3, c).
+#+END_EXAMPLE
 
-Smith 2006 "Against Idiosyncrasy in Ontology Development" \cite{smith2006against}
-
-The end goal of an accounting ontology is for reporting, auditing, automation, calculation, and integration.
-
-For example, hotel supply chain management tool competency questions:
-- Should we restock property P?
-  - What is the current stock level at property P?
-  - How many rooms do property P have?
-  - When do we expect property P to run out of stock?
-- When did a property experience stock-outs?
-
-Slide 6: five ways to represent knowledge[fn::https://www.scss.tcd.ie/Owen.Conlan/CS7063/06%20Introduction%20to%20OWL%20(1%20Lecture).ppt.pdf]
-
-Should we teach ontology design with wine examples?
-
-Ontology Development Pitfalls[fn::http://www.adampease.org/OP/Pitfalls.html]
-
-One source of confusion is the many meanings of the copula.[fn::https://en.wikipedia.org/wiki/E-Prime#Different_functions_of_%22to_be%22]
-
-Ontology of opinions?
-Relationship between a person and an opinion:
-approve, disapprove, unaware, indifferent, impartial, ignorant.
-The sentiment of an opinion is either positive, neutral, or negative.
-
-Ontology is not only taxonomy/classification/categorization.
-What is the difference between taxonomy, classification, and categorization?
-What is the difference between taxon, class, and category?
-
-What is the difference between ontology and model?
-Ontology = model + meta-model + logic?
-
-UEML/GEM vs OWL \cite{khan2011transformation}.
-Enterprise software model (UEML, GEM) vs enterprise software ontology (on OWL perhaps)?
+Without numbers, it is harder to model an ordered collection.
+This only works for finite sequences.
+#+BEGIN_EXAMPLE
+lt0(a, b).
+lt0(b, c).
+lt(A, C) :- lt0(A, B), lt(B, C).
+#+END_EXAMPLE
 * Bending Prolog to my will
 ** Component/module system, socket-plug metaphor
 I need a component system for programming in the large.
@@ -568,21 +700,21 @@ class(department).
 relation(work_at, [employee,department]).
 % ...
 #+END_EXAMPLE
-** The easy things: Modeling static structures
+** Overview, design of the meta-programming system
+The easy things: Modeling static structures.
 A Java program corresponds to one JVM instance.
 A Java program is a set of source codes and dependencies.
-
 A model of a Java program is straightforward:
 class/1, class_package_name/2, class_name/2,
 class_field/2, field_name/2, field_type/2, and so on.
-
 A model of relational databases is straightforward:
 table/1, table_name/2, table_column/2, column_name/2, and so on.
-** The hard thing: abstracting both Java and SQL into ER and PAL?
-ER = entity-relationship
 
-PAL = procedural action language; similar to fUML ALF
-** The even harder thing: combining them all into a coherent abstraction
+The hard thing: abstracting both Java and SQL into ER and PAL?.
+ER = entity-relationship.
+PAL = procedural action language; similar to fUML ALF.
+
+The even harder thing: combining them all into a coherent abstraction.
 ** Modeling a web application?
 *** Picking a modeling language
 I have narrowed down:
@@ -660,8 +792,12 @@ What is the relationship between logic programming, relational programming, logi
 *** Epistemic interpretation of Prolog programs: Failure as ignorance
 Sometimes a Prolog program should be interpreted epistemically,
 in which Prolog's /fail/ is treated as /unknown/ instead of /false/.
-Succeeding to prove a goal G means that we know that G is true.
-Failing to prove a goal G means that we do not know anything about G.
+In this interpretation:
+- Succeeding to prove a goal G means that we know that G is true.
+- Failing to prove a goal G means that we do not know anything about G.
+
+There are two negations: There is a difference between not/1 and \+/1.
+In the epistemic interpretation, "\+" should be read as "unknown".
 
 =\+G= means we do not know G.
 
@@ -669,9 +805,6 @@ Succeeding to prove not(G) means that we know that G is false.
 #+BEGIN_EXAMPLE
 :- multifile not/1.
 #+END_EXAMPLE
-
-There is a difference between not/1 and \+/1.
-In the epistemic interpretation, "\+" should be read as "unknown".
 
 We waive the law of excluded middle.
 In our Prolog program it does not hold that G ; not(G).
@@ -905,10 +1038,6 @@ kind_surrogate_property_value(person,alice,birthdate,date(1990,1,1)).
 The parameter O serves as an internal name.
 The equality of that parameter determines the identity of the represented object.
 
-https://en.wikipedia.org/wiki/Triangle_of_reference
-http://www.jfsowa.com/ontology/ontometa.htm
-
-
 Two objects can be equal but not identical.
 
 A value has no identity.
@@ -1112,7 +1241,23 @@ From database point of view, the comma can be thought as a join.
 - [[https://www.red-gate.com/simple-talk/sql/database-administration/database-design-a-point-in-time-architecture/][Database Design: A Point in Time Architecture - Simple Talk]]
 - [[https://blog.timescale.com/time-series-data-why-and-how-to-use-a-relational-database-instead-of-nosql-d0cd6975e87c][Time-series data: Why (and how) to use a relational database instead of NoSQL]]
   - Where is the SQL DDL/schema?
+** Maniac marketing materials
+(This may not be true.)
 
+Let N be the number of enterprise applications you have to make.
+Which would you rather write:
+- N * 30,000 lines of Java
+- 10,000 + N * 3,000 lines of Prolog
+
+That is, do you fear being asymptotically 10 times more productive?
+Do you fear success?
+
+Your favorite shiny framework is just a faster horse.
+You need a _car_ that is model-driven software engineering in Prolog.
+This is a real car, not just another faster-horse framework.
+
+We write software to help others do their jobs.
+Why don't we write software to help us do our jobs (write software)?
 * Existing systems
 ** A little history of model-driven engineering?
 1989: OMG[fn::https://en.wikipedia.org/wiki/Object_Management_Group] was founded.

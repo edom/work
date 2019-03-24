@@ -3,7 +3,7 @@
 #+OPTIONS: ^:nil toc:nil
 #+PERMALINK: /softeng.html
 #+MATHJAX: true
-* What is software engineering?
+* Software engineering
 ** Fundamental questions
 In the spirit of analytic philosophy:
 - What is engineering?
@@ -13,8 +13,6 @@ In the spirit of analytic philosophy:
 - What is programming?
 - What is software engineering?
 - How far can the civil-engineering analogy stretch before it breaks?
-
-"X engineering" is like "philosophy of X"?
 
 Software is program, documents, configuration, and so on.
 Programs, laws, and recipes are software.
@@ -49,6 +47,14 @@ If computer science is to be the science of software engineering, software engin
 Worse, what if software is not predictable?
 What if the complexity is essential and irreducible?
 
+Sometimes engineering front-runs science, and the engineer's ignorance harms lives.
+Coal mine explosions.
+Leaded gasoline.
+Microplastics.
+DDT.
+How can we predict what people will use new technology for?
+How can we predict the unintended consequences?
+
 Engineers have to combat ignorant management decisions that harm people.
 Do you want to have blood on your hands?
 
@@ -64,7 +70,7 @@ If software is a pure art, then its construction should not be time-limited.
 A painter does not paint with deadlines.
 A painting is finished when the painter feels that it is finished.
 However, a painter, when asked to paint a very specific painting, can estimate how many days it will take.
-** What does a software engineer do?
+** A software engineer's job
 *** Slave drivers
 /Programmers play the same role as ancient slave drivers./
 They translate and impose the master's will into the slaves.
@@ -96,18 +102,18 @@ Then we relax the assumption that the network latency is zero.
 Then we relax the assumption that the user is willing to wait forever.
 
 And so on.
-** Programming, model, and reality
+*** Most "bugs" are actually "programming errors".
+Programmers need to own up their mistakes, and call an error an error, not a bug.
+A bug is something the programmer cannot control.
+A cosmic ray strike flipping a bit in RAM is a bug.
+A typo in the source code is not a bug.
+*** Programming, model, and reality
 - When we write a program,
   we are actually creating a /mathematical model/ of reality,
   creating an implicit ontology,
   defining what exist,
   making simplifying assumptions,
   discarding irrelevant aspects.
-** Most "bugs" are actually "programming errors".
-Programmers need to own up their mistakes, and call an error an error, not a bug.
-A bug is something the programmer cannot control.
-A cosmic ray strike flipping a bit in RAM is a bug.
-A typo in the source code is not a bug.
 * Building big software
 ** How should we build software, especially big software?
 For big enterprise software, we should at least use model-driven engineering.
@@ -144,6 +150,9 @@ The key to being a good programmer is being someone that our future self can tru
 
 When we change a program, we are trusting our past self.
 We assume that our past self did not plant time-bombs that will surprise our current assumptions.
+
+I think software development can be sped up by minimizing the gap between the end-user's mental model and the programmer's mental model.
+Matching mental model is a requirement of good user experience.
 ** Why people don't adopt metaprogramming tools (and model-driven engineering?)
 I fear that the tool doesn't perfectly fit my use case.
 When that happens, I want to drop down to the lower layer.

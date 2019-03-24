@@ -318,15 +318,30 @@ To estimate how much time is required to read a section:
 
 Thus, in Web book TOC entries, we should substitute page number with word count.
 
-** I use DejaVu font families for my web books.
+** Best font families and sizes for portability and readability
+I use Noto font families for my web books.
+
 I need serif fonts and monospaced fonts that mix.
 
-The DejaVu families have compatible x-heights.
+<2019-03-24>
+I used to use the DejaVu families because they have compatible x-heights and they were pre-installed on Ubuntu 14.04.
+But Noto is installed by default on Android, and I have moved to Debian 9.
 
 Times New Roman, Arial, and Courier New don't mix: They have painfully different x-heights.
 
-DejaVu families may only be widely available on libre software platforms.
+DejaVu and Noto families may only be widely available on libre software platforms.
 I don't know the situation on Windows and Mac.
+
+<2018-09-19>
+Web authoring woes: lack of a set of font families with same x-height
+I need a serif font family, sans-serif font family, a monospaced font family, and a math font family.
+I want all of them to have the same x-height.
+
+<2019-03-24>
+There is a partial solution (text and code but without math): families such as Noto and Liberation.
+
+"They found that reading speed is fastest when the text’s x-height is 0.3 degrees of arc."
+https://www.imarc.com/blog/best-font-size-for-any-device
 ** Don't just collect links. Comment them. Opine. Think.
 ** Academic Web authoring
 Jekyll's Liquid markup ={% raw %}{% link %}{% endraw %}= is dirty and wrong.
@@ -417,9 +432,6 @@ Pandoc: How to avoid generating org-mode custom-id property drawer for internal 
 
 Pandoc org output mishandles pipe character in inline math in table cell?
 Or is the markdown input invalid indeed?
-** <2018-09-19> Web authoring woes: lack of a set of font families with same x-height
-I need a serif font family, sans-serif font family, a monospaced font family, and a math font family.
-I want all of them to have the same x-height.
 * My opinions about writing
 ** Problem with 2018 writings: books are too long
 Books should be structured as an [[https://en.wikipedia.org/wiki/Inverted_pyramid_(journalism)][inverted pyramid]]:
