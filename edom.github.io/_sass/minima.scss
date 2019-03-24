@@ -30,10 +30,7 @@ $grey-color-light: lighten($grey-color, 40%) !default;
 $grey-color-dark:  darken($grey-color, 25%) !default;
 
 // Width of the content area
-$content-width:    64em !default;
-
 $on-palm:          32em !default;
-$on-laptop:        32em !default;
 
 @page {
     size: 6in 9in;
@@ -42,44 +39,45 @@ $on-laptop:        32em !default;
 
 // -------------------- Begin: font (family, size, etc.)
 
-$base-font-family: 'Times New Roman', serif !default;
-$code-font-family: 'DejaVu Sans Mono', monospace !default;
-$palm-font-family: 'Times New Roman', serif !default;
+$base-font-family: 'Noto Serif', 'Droid Serif', 'DejaVu Serif', serif !default;
+$palm-font-family: 'Noto Serif', 'Droid Serif', 'DejaVu Serif', serif !default;
+$code-font-family: 'Noto Mono', 'Droid Sans Mono', 'DejaVu Sans Mono', monospace !default;
 
-$base-font-size:    16pt !default;
-$print-font-size:   14pt !default;
-$palm-font-size:    12pt !default;
+$base-font-size:    14pt !default;
+$print-font-size:   10pt !default;
+$palm-font-size:    10pt !default;
 $base-font-weight:  400 !default;
-$base-line-height:  1.2 !default;
+$base-line-height:  1.35 !default; // 1.2 for Times New Roman
 
 // It is annoying that fonts have different x-heights.
 // It is annoying that there isn't a set of coherently-designed font families for combining text, code, and math on the Web.
+// Update 2019-03-24: There is for text and code. Examples are Noto and Liberation. But not yet for math.
 // We could use rem units, but we'll just pre-calculate them, lest they be unsupported by the browser.
 
-// Times New Roman, DejaVu Sans Mono
-$times-code-x: 14/16;
-$times-pre-x: 11/16;
-// Helvetica, DejaVu Sans Mono
-$helv-code-x: 10/10;
-$helv-pre-x: 9/10;
+$normal-code-x: 14/14;
+$normal-pre-x: 11/14;
+$print-code-x: 10/10;
+$print-pre-x: 8/10;
+$palm-code-x: 10/10;
+$palm-pre-x: 8/10;
 
 html    { font-size: $base-font-size; }
-code    { font-size: $times-code-x * $base-font-size; }
-pre     { font-size: $times-pre-x * $base-font-size; }
-pre code{ font-size: $times-pre-x * $base-font-size; }
-pre     { line-height: 1.1; }
+code    { font-size: $normal-code-x * $base-font-size; }
+pre     { font-size: $normal-pre-x * $base-font-size; }
+pre code{ font-size: $normal-pre-x * $base-font-size; }
+pre     { line-height: 1.2; }
 
 @media print {
     html    { font-size: $print-font-size; }
-    code    { font-size: $times-code-x * $print-font-size; }
-    pre     { font-size: $times-pre-x * $print-font-size; }
-    pre code{ font-size: $times-pre-x * $print-font-size; }
+    code    { font-size: $print-code-x * $print-font-size; }
+    pre     { font-size: $print-pre-x * $print-font-size; }
+    pre code{ font-size: $print-pre-x * $print-font-size; }
 }
 @media screen and (max-width: $on-palm) {
     html    { font-size: $palm-font-size; }
-    code    { font-size: $times-code-x * $palm-font-size; }
-    pre     { font-size: $times-pre-x * $palm-font-size; }
-    pre code{ font-size: $times-pre-x * $palm-font-size; }
+    code    { font-size: $palm-code-x * $palm-font-size; }
+    pre     { font-size: $palm-pre-x * $palm-font-size; }
+    pre code{ font-size: $palm-pre-x * $palm-font-size; }
 }
 
 // End fucking font-size annoyance.
@@ -115,20 +113,25 @@ html {
 @media screen {
     html {
         font-family: $base-font-family;
-
-        @include media-query($on-palm) {
-            font-family: $palm-font-family;
-        }
-
+    }
+    body {
+        margin: 0em auto;
+        padding: 0em;
+        max-width: 72ex;
     }
     .page-content > .wrapper {
         margin-top: 1rem;
         margin-bottom: 1rem;
     }
     .wrapper, #disqus_thread {
-        max-width: 72ex;
-        margin-left: auto;
-        margin-right: auto;
+        margin-left: 1em;
+        margin-right: 1em;
+    }
+}
+
+@media screen and (max-width: $on-palm) {
+    html {
+        font-family: $palm-font-family;
     }
 }
 
@@ -198,7 +201,6 @@ li
 /**
  * Reset some basic elements
  */
-body,
 dl, dd, figure {
   margin: 0;
   padding: 0;
