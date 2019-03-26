@@ -73,6 +73,47 @@ Which would you rather write:
 
 The limit of 30000n / (10000 + 1000n) as n grows unbounded is 30.
 That is where the 30x come from.
+** <2019-03-27> Answering Ridwan 2
+#+BEGIN_QUOTE
+Thanks for letting me know!
+I was referring to the developer efficiency per se, if it's the result then a founder would be Inf.x engineer, without which the end product would be 0.
+Looks like it needs to have multiple apps and some degree of similarity between them, I thought it was generally available,
+I could learn the trick and convince my boss I'm 30x thus entitled to be paid 30x as much. :grin: ( or work with 30 bosses at a same time if it sounds less crazier )
+#+END_QUOTE
+
+Or you can do 1/30x as much as you are doing now. :) Just kidding. (Not really.)
+
+Usually a company, even a software house, specializes itself to making similar software.
+Is this not applicable to your company?
+How many kinds of software do you make?
+
+> I have little to none experience with that kind of modeling tools
+
+Neither do I.
+This may just be another manic episode of mine.
+Usually once a year I embark on a moonshot project that eventually fails.
+But I think this one is achievable.
+
+This Prolog stuff is slightly more sophisticated than scaffolding/generator/snippet which is mostly text template based on string substitution.
+This Prolog stuff has some understanding of the source code and does more than string concatenation.
+It even does some local-variable type inference.
+You can add local variable type inference to Java in Prolog.
+You don't have to wait for Java 3000 to come out.
+(Warning: I am not satisfied with this, and I don't expect people to spend much effort reading this.)
+- https://github.com/edom/work/blob/master/software/enterprise/library/internal/mapping.pro#L141-L146
+
+That code is for the language designer.
+
+The programmer (the language user) is expected to specify the application like this (entity-relationship modeling + high-level procedural language):
+- https://github.com/edom/work/blob/master/software/enterprise/spec/accounting.pro#L108-L128
+- https://github.com/edom/work/tree/master/software/enterprise/spec/include
+
+Then we work on making Prolog translate that into a full-stack Java web application.
+With Prolog, you can say to the computer things like:
+- Each entity Something produces a Java class SomethingEntity.
+- Each entity attribute produces a field in the corresponding Java class.
+- Each procedure produces 1 HTTP GET page and 1 HTTP POST page.
+- Each procedure input produces a HTML form input control.
 * Ontology engineering, our mental models, and software systems
 ** Introduction to ontology
 For introduction to ontologies, see Marek Obitko's 2007 tutorial "Introduction to Ontologies and Semantic Web"[fn::https://www.obitko.com/tutorials/ontologies-semantic-web/]
@@ -123,6 +164,10 @@ Enterprise software model (UEML, GEM) vs enterprise software ontology (on OWL pe
 
 ER: Chen 1976 \cite{chen1976entity}
 ** Ontology vs model vs data-model vs language vs vocabulary: What are the similarities and differences?
+Gonzales 2015 \cite{gonzalez2015ontologies} compares ontologies and models.
+"In summary, ontologies and models have very different historical aims, which are now converging."
+"Semantics of Business Vocabulary and Business Rules (SBVR) [71]"?
+
 Every model /implies/ an ontology.
 Every model has a set of /ontological commitments/.
 
@@ -657,6 +702,8 @@ The expected workflow:
   Two choices:
   - Translation: Transform the model to source code in a supported language.
   - Interpretation: Execute the model in Prolog.
+
+Our program will be shortest if we can use Prolog's unprovable-means-false interpretation.
 ** Bottom-up vs top-down
 The bottom-up way is to start with Java and SQL, and abstract both Java and SQL into fUML/ALF or something else, etc.
 
@@ -863,76 +910,6 @@ exp_val(A+B, C) :- number(A), number(B), !, C is A+B.
 ** Abstractions
 The system should present the illusion that every system state is as simple as a global variable.
 A PostgreSQL table is modeled as a global variable whose type is list.
-** Logic of objects
-"Mapping Objects to Persistent Predicates"
-https://pdfs.semanticscholar.org/f1ec/9e0e24faa1332d0cb60149e1d633b8d2509e.pdf
-
-Should we write our DSL in Twelf instead of Prolog?
-http://twelf.org/wiki/LF
-
-"Objects with logic" 1990
-https://dl.acm.org/citation.cfm?id=100368
-
-
-
-The difference between object and value is that an object has identity.
-
-Must everything have a name?
-
-An object has properties.
-A property is a key-value pair.
-
-There are several ways to /represent/ such objects in Prolog.
-
-The 1-object-1-term representation represents an object as a ground term.
-There are two choices for such term: (1) a Prolog functor whose arity is the object's property count, or (2) a list of key-value pairs.
-The meaning of such representation is that iff the list L contains K-V, then the represented object has a property K whose value is V.
-
-The 1-property-1-predicate representation represents each property as a predicate, but this requires /unique surrogate naming/ of the object for identification:
-object_property1(O,P).
-object_property2(O,P).
-
-It is surprising that database normalization theory explains some characteristics of good Prolog code.
-
-Example:
-Suppose that there are two people Alice and Bob.
-
-The question: is the object an /entity/ or a /value/?
-An entity has identity.
-A value does not have identity.
-A natural number does not have an identity.
-A person has an identity.
-Two people may have the same name while still being two different people.
-The same natural number may be referred with a Arabic numeral or a Chinese numeral, but both of them refer to the same natural number.
-
-The 1-object-1-term representation:
-[name-"Alice", birthdate-date(1990,1,1), pets-[cat,dog]]
-[name-"Bob", birthdate-date(1990,1,1), pets-[cat,dog]]
-
-The 1-object-1-predicate representation:
-person([name-"Alice",birthdate-date(1990,1,1)).
-person([name-"Bob",birthdate-date(1990,1,1)]).
-
-The 1-property-1-predicate representation (is this database in sixth normal form?):
-person_name(alice,"Alice").
-person_pet(alice,cat).
-person_pet(alice,dog).
-Note that we do not write person_pets(alice,[cat,dog]).
-person_name(bob,"Bob").
-
-The ontological representation:
-kind_surrogate_property_value(person,alice,name,"Alice").
-kind_surrogate_property_value(person,alice,birthdate,date(1990,1,1)).
-
-The parameter O serves as an internal name.
-The equality of that parameter determines the identity of the represented object.
-
-Two objects can be equal but not identical.
-
-A value has no identity.
-An object has an /identity/.
-
-Iff object_property(O,P) is provable, then object O has property P.
 * What mess?
 ** Model transformation as Horn clauses
 Model transformation is a Prolog module (a set of Horn clauses).

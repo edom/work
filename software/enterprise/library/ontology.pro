@@ -3,8 +3,16 @@ The canonical predicate is spo/3.
 Everything else is for human writer convenience.
 */
 
+/** <module> Object-property-value ontology
+
+Usage:
+    - Define classes with class/1.
+    - Define individuals with object/1.
+    - Define membership with instance_of/2.
+    - Define properties of individuals with opv/3.
+*/
 :- multifile
-    concept/1.
+    class/1.
 
 % -------------------- canonical
 
@@ -47,6 +55,11 @@ Usage:
 :- multifile
     object/1,
     object_property_is_optional/2.
+
+%%  instance_of(?ObjectId, ?ClassId) is nondet.
+
+:- multifile
+    instance_of/2.
 
 % -------------------- convenience
 

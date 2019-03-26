@@ -384,6 +384,109 @@ What is the difference: =, ~==~, ~=:=~, is
 What is the meaning/interpretation of a Prolog program?
 
 How to read a Prolog program?
+
+Usually we begin with genealogy like Abraham's[fn::https://en.wikipedia.org/wiki/Abraham%27s_family_tree].
+Family tree is actually not a tree but a directed graph.
+Inbreeding.
+
+The words "father" and "mother" are to be interpreted as verbs here.
+#+BEGIN_EXAMPLE
+father(abraham, isaac).
+father(abraham, ishmael).
+father(isaac, esau).
+father(isaac, jacob).
+
+mother(sarah, isaac).
+mother(hagar, ishmael).
+mother(rebecca, esau).
+mother(rebecca, jacob).
+
+parent(A, B) :- father(A,B) ; mother(A,B).
+#+END_EXAMPLE
+** Multi-directional predicates
+A predicate has several uses: iteration, searching, testing, and other computation.
+A predicate can be used both to enumerate/iterate a finite set, to search for a satisfier, and to test membership.
+#+BEGIN_EXAMPLE
+person(alice).
+person(bob).
+
+?- person(charlie). % test membership
+?- once(person(A)). % satisfy
+?- person(A), !. % satisfy
+?- person(A). % iterate
+#+END_EXAMPLE
+
+A predicate can be used both to enumerate some infinite sets and to test membership.
+The programmer is reponsible to ensure that the recursion terminates.
+#+BEGIN_EXAMPLE
+nat(z).
+nat(s(A)) :- nat(A).
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+succ(A, s(A)).
+
+succ(A, s(A)) :- nat(A).
+#+END_EXAMPLE
+
+For non-pure Prolog programs, we have to do some repetition if we want a multi-directional relation.
+#+BEGIN_EXAMPLE
+succ(A, B) :- integer(A), !, B is A+1.
+succ(A, B) :- integer(B), !, A is B-1.
+succ(A, B) :- !, type_error(succ, succ(A,B)).
+#+END_EXAMPLE
+
+But that can be done more elegantly with /constraint logic programming/.
+#+BEGIN_EXAMPLE
+succ(A, B) :- A + 1 #= B.
+#+END_EXAMPLE
+** Why do we need predicates at all if we can do with one unary predicate?
+#+BEGIN_EXAMPLE
+:- op(600,xfy,:).
+:- op(650,xfx,@).
+
+invoke(father @ [abraham, isaac]).
+invoke(father @ [abraham, ishmael]).
+invoke(list_length @ [[], z]).
+invoke(list_length @ [[_|A], N]) :-
+    invoke(list_length @ [A,N0]),
+    invoke(succ @ [N0,N]).
+invoke(nat @ [z]).
+invoke(nat @ [s(A)]) :- invoke(nat @ [A]).
+invoke(succ @ [A, s(A)]) :- invoke(nat @ [A]).
+#+END_EXAMPLE
+
+We can even do module systems.
+
+We can encode 1 module as 1 predicate.
+#+BEGIN_EXAMPLE
+module1(pred @ [Arg1, Arg2, ...]) ...
+module2(pred @ [Arg1, Arg2, ...]) ...
+#+END_EXAMPLE
+
+We can encode all modules as 1 predicate.
+We can have meta-predicates.
+We can have variable-arity predicates.
+#+BEGIN_EXAMPLE
+invoke(module1:pred @ [Arg1, ...]) ...
+invoke(module2(pred) @ [Arg1, ...]) ...
+invoke(call @ [F|A]) :- invoke(F @ A).
+#+END_EXAMPLE
+
+We can do first-order logic with one predicate only and unlimited function symbols.
+We can convert predicates into function symbols:
+We can transform \( p_1(\vec{x}_1), \ldots, p_n(\vec{x}_n) \) to \( P(p_k, \vec{x}_k) \).
+This is like writing the interpretation function inside the formal system itself.
+This is still first-order logic.
+
+Should =a:b@c= be interpreted as =(a:b)@c= (call a:b with arguments c) or =a:(b@c)= (call b with context a and arguments c)?
+** Functional (deterministic) relation
+#+BEGIN_EXAMPLE
+f(In1, Out1) :- Guard1, !, Body1.
+...
+f(InN, OutN) :- GuardN, !, BodyN.
+f(In, _) :- !, type_error(Type, In).
+#+END_EXAMPLE
 ** How to read declarative Prolog programs
 A /Horn clause/ =A :- B= means "to prove A, prove B".
 The left-arrow =:-= can be read as "if".
@@ -508,6 +611,101 @@ If there is total functional programming, then there should be total relational 
 It is too easy to write a Prolog program that doesn't terminate.
 ** Defining your own operators
 - =:- op(Precedence, Type, Name)=
+** Logic of objects
+#+BEGIN_EXAMPLE
+object_class(alice, person).
+object_class(bob, person).
+object_property_value(alice, name, "Alice").
+object_property_value(bob, name, "Bob").
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+person(alice).
+person(bob).
+person_name(alice, "Alice").
+person_name(bob, "Bob").
+#+END_EXAMPLE
+
+Do we want to parameterize the class?
+Note that in Prolog unifying parameters is easier than unifying predicate names.
+That is, we cannot write ~P(A) = Q(A)~ where P and Q are variables.
+
+"Mapping Objects to Persistent Predicates"
+https://pdfs.semanticscholar.org/f1ec/9e0e24faa1332d0cb60149e1d633b8d2509e.pdf
+
+Should we write our DSL in Twelf instead of Prolog?
+http://twelf.org/wiki/LF
+
+"Objects with logic" 1990
+https://dl.acm.org/citation.cfm?id=100368
+
+
+
+The difference between object and value is that an object has identity.
+
+Must everything have a name?
+
+An object has properties.
+A property is a key-value pair.
+
+There are several ways to /represent/ such objects in Prolog.
+
+The 1-object-1-term representation represents an object as a ground term.
+There are two choices for such term: (1) a Prolog functor whose arity is the object's property count, or (2) a list of key-value pairs.
+The meaning of such representation is that iff the list L contains K-V, then the represented object has a property K whose value is V.
+
+The 1-property-1-predicate representation represents each property as a predicate, but this requires /unique surrogate naming/ of the object for identification:
+object_property1(O,P).
+object_property2(O,P).
+
+It is surprising that database normalization theory explains some characteristics of good Prolog code.
+
+Example:
+Suppose that there are two people Alice and Bob.
+
+The question: is the object an /entity/ or a /value/?
+An entity has identity.
+A value does not have identity.
+A natural number does not have an identity.
+A person has an identity.
+Two people may have the same name while still being two different people.
+The same natural number may be referred with a Arabic numeral or a Chinese numeral, but both of them refer to the same natural number.
+
+The 1-object-1-term representation:
+#+BEGIN_EXAMPLE
+[name-"Alice", birthdate-date(1990,1,1), pets-[cat,dog]]
+[name-"Bob", birthdate-date(1990,1,1), pets-[cat,dog]]
+#+END_EXAMPLE
+
+The 1-object-1-predicate representation:
+#+BEGIN_EXAMPLE
+person([name-"Alice",birthdate-date(1990,1,1)).
+person([name-"Bob",birthdate-date(1990,1,1)]).
+#+END_EXAMPLE
+
+The 1-property-1-predicate representation (is this database in sixth normal form?):
+#+BEGIN_EXAMPLE
+person_name(alice,"Alice").
+person_pet(alice,cat).
+person_pet(alice,dog).
+person_name(bob,"Bob").
+#+END_EXAMPLE
+Note that we do not write person_pets(alice,[cat,dog]).
+
+The ontological representation:
+kind_surrogate_property_value(person,alice,name,"Alice").
+kind_surrogate_property_value(person,alice,birthdate,date(1990,1,1)).
+
+The parameter O serves as an internal name.
+The equality of that parameter determines the identity of the represented object.
+
+Two objects can be equal but not identical.
+
+A value has no identity.
+An object has an /identity/.
+
+Iff object_property(O,P) is provable, then object O has property P.
+
 * Imperative Prolog, and other ugly things
 Some ugly things are unfortunately necessary.
 There are always some dirty jobs in real-world programming.
