@@ -114,7 +114,24 @@ With Prolog, you can say to the computer things like:
 - Each entity attribute produces a field in the corresponding Java class.
 - Each procedure produces 1 HTTP GET page and 1 HTTP POST page.
 - Each procedure input produces a HTML form input control.
-* Ontology engineering, our mental models, and software systems
+** Maniac marketing materials
+(This may not be true.)
+
+Let N be the number of enterprise applications you have to make.
+Which would you rather write:
+- N * 30,000 lines of Java
+- 10,000 + N * 3,000 lines of Prolog
+
+That is, do you fear being asymptotically 10 times more productive?
+Do you fear success?
+
+Your favorite shiny framework is just a faster horse.
+You need a /car/ that is model-driven software engineering in Prolog.
+This is a real car, not just another faster-horse framework.
+
+We write software to help others do their jobs.
+Why don't we write software to help us do our jobs (write software)?
+* Ontology engineering
 ** Introduction to ontology
 For introduction to ontologies, see Marek Obitko's 2007 tutorial "Introduction to Ontologies and Semantic Web"[fn::https://www.obitko.com/tutorials/ontologies-semantic-web/]
 
@@ -129,6 +146,43 @@ Ontology Development Pitfalls[fn::http://www.adampease.org/OP/Pitfalls.html]
 
 Care has to be taken when formalizing natural language, due to polysemy (manymeaningedness).
 One source of confusion is the many meanings of the copula.[fn::https://en.wikipedia.org/wiki/E-Prime#Different_functions_of_%22to_be%22]
+
+One key question:
+What are the similarities and differences between these things: ontology, model, meta-model, data-model, language, vocabulary?
+Gonzales 2015 \cite{gonzalez2015ontologies} compares ontologies and models.
+"In summary, ontologies and models have very different historical aims, which are now converging."
+"Semantics of Business Vocabulary and Business Rules (SBVR) [71]"?
+
+Every model has a set of /ontological commitments/.
+
+Ontology = axioms + vocabulary?
+But ontology does not have to have axioms.
+But what sets it apart from vocabulary then?
+
+If ontologies enable information sharing, then how do they differ from languages?
+
+An ontology is a /knowledge-representation convention/.
+
+It is harder to name relations than non-relations.
+Every noun names a term.
+Every verb names a relation.
+Example: eat(john,hamburger).
+Thus, the convention: Verb(Noun1, ..., NounN).
+
+But that is not always desirable.
+We have another convention: Class1_Class2(Instance1, Instance2).
+Example: list_length/2.
+
+But it is not clear.
+What is the meaning of person_food/2?
+The person likes the food?
+The person hates the food?
+The person eats the food?
+
+I am against inflecting relation names.
+I am against pluralizing table names.
+I use infinitive-form verbs and singular nouns.
+But, without inflection, we may confuse commands and relations?
 ** Ontology engineering with competency questions
 We shall begin to design an ontology by formulating the /competency questions/ \cite{noy2001ontology}:
 the questions that the ontology should be able to answer.
@@ -163,42 +217,8 @@ UEML/GEM vs OWL \cite{khan2011transformation}.
 Enterprise software model (UEML, GEM) vs enterprise software ontology (on OWL perhaps)?
 
 ER: Chen 1976 \cite{chen1976entity}
-** Ontology vs model vs data-model vs language vs vocabulary: What are the similarities and differences?
-Gonzales 2015 \cite{gonzalez2015ontologies} compares ontologies and models.
-"In summary, ontologies and models have very different historical aims, which are now converging."
-"Semantics of Business Vocabulary and Business Rules (SBVR) [71]"?
-
-Every model /implies/ an ontology.
-Every model has a set of /ontological commitments/.
-
-Ontology = axioms + vocabulary?
-
-If ontologies enable information sharing, then how do they differ from languages?
-
-An ontology is a /knowledge-representation convention/.
-
-It is harder to name relations than non-relations.
-Every noun names a term.
-Every verb names a relation.
-Example: eat(john,hamburger).
-Thus, the convention: Verb(Noun1, ..., NounN).
-
-But that is not always desirable.
-We have another convention: Class1_Class2(Instance1, Instance2).
-Example: list_length/2.
-
-But it is not clear.
-What is the meaning of person_food/2?
-The person likes the food?
-The person hates the food?
-The person eats the food?
-
-I am against inflecting relation names.
-I am against pluralizing table names.
-I use infinitive-form verbs and singular nouns.
-But, without inflection, we may confuse commands and relations?
 ** Ontology concordance; things common to many ontologies
-This Wikipedia page[fn::https://en.wikipedia.org/wiki/Ontology_components]
+[[https://en.wikipedia.org/wiki/Ontology_components][The Wikipedia page "Ontology components"]]
 
 Many authors use different but equivalent terms.
 Jake Mitchell pointed out[fn::https://twitter.com/mekajfire/status/1090689517701349376]
@@ -231,16 +251,441 @@ In Prolog, D is the set of all terms.
 A class C is modeled by a predicate P.
 An individual of C is modeled by an element of D that satisfies P.
 This element of D is the /name/ of the individual.
-** Understanding the end-user's mental model
-The users think of a software system:
+** Philosophy of abstract objects?
+*** What does it mean for an abstract object to exist?
+Is software development applied metaphysics?
+ [fn::https://skepticalmethodologist.wordpress.com/2013/12/08/software-development-applied-metaphysics/]
+ [fn::https://www.eschrade.com/page/metaphysics-and-software-design/]
+
+Theory of abstract objects[fn::https://mally.stanford.edu/theory.html]
+
+What does it mean for a mathematical object to exist?[fn::https://www.math.toronto.edu/mathnet/answers/existence.html]
+
+It is simple to define a mathematical object.
+
+Describability does not imply existence.
+Imaginability does not imply existence.
+
+Whether anything exists depends on how we interpret "thing" and "exist".
+For example, if by "unicorn" we mean horned horse, and by "exist" we mean to have material existence, then no, unicorns do not exist.
+If by "exist" we mean to be imaginable, then yes, unicorns do exist.
+What is a unicorn?
+If we transplant a horn onto a horse, would it be a unicorn?
+Must a unicorn be a unicorn by birth?
+It is conceivable to draw unicorns.
+A search on the Internet produces an image in a few seconds.
+Does the question "Does unicorn exist?" even make sense at all?
+Can everybody agree on what a unicorn is and what existence is?
+What is existence?[fn::https://www.ontology.co/existence.htm]
+*** Abstract objects, concrete consequences
+Ranking algorithms have real consequences.
+Algorithms impose onto everyone the value system of the programmers.
+** OWL
+We shall concern ourselves with the Primer[fn::https://www.w3.org/TR/2012/REC-owl2-primer-20121211/]
+and not the other documents[fn::https://www.w3.org/TR/2012/REC-owl2-overview-20121211/#Documentation_Roadmap] for implementors.
+
+It is straightforward to translate the Functional-style syntax examples in OWL 2 Primer to Prolog.
+
+OWL and Prolog differs in open vs closed world.
+
+OWL assumes open world:
+- If \(p\) is provable, then \(p\) is true.
+- If \(\neg p\) is provable, then \(p\) is false.
+- If neither of \(p\) or \(\neg p\) is provable, then \(p\) is possible (unknown).
+
+Prolog assumes closed world:
+- If \(p\) is provable, then \(p\) is true.
+- If \(p\) is not provable, then \(p\) is false.
+
+We can use closed-world assumption in our enterprise software model.
+If a class is not modeled in the Prolog, then it will not be in the generated Java source code.
+
+an example of second-order reasoning in OWL[fn::http://www.xfront.com/why-use-owl.html]
+** Problem: RDF triple with non-binary predicates
+Unary, ternary, n-ary
+Intransitive verbs
+** Logic of lists or sequences (ordered collections)
+Suppose that we want to write a Prolog knowledge base that models the sequence [a,b,c].
+
+With numbers, it is easy to model an ordered collection.
+We can piggyback on the natural ordering of the numbers.
+#+BEGIN_EXAMPLE
+list(1, a).
+list(2, b).
+list(3, c).
+#+END_EXAMPLE
+
+Without numbers, it is harder to model an ordered collection.
+This only works for finite sequences.
+#+BEGIN_EXAMPLE
+lt0(a, b).
+lt0(b, c).
+lt(A, C) :- lt0(A, B), lt(B, C).
+#+END_EXAMPLE
+
+"Representing Order in RDF"[fn::http://infolab.stanford.edu/~stefan/daml/order.html]
+** Object-property-value encoding of collections
+set, bag, sequence/tuple/list
+
+Ordered/unordered
+Unique/non-unique
+
+A set contains zero or more unique elements.
+Each member of the set occurs exactly once in the set.
+
+#+BEGIN_EXAMPLE
+opv(myset, element, 1).
+opv(myset, element, 2).
+
+opv(mybag, element, 1).
+opv(mybag, element, 1).
+% or this element-Count?
+opv(mybag, element-2, 1).
+#+END_EXAMPLE
+
+List =mylist= contains element 10 at position 1.
+The phrase "at position 1" explains the predicate "contain".
+Thus the sentence parses as the subject-predicate-object triple
+=spo(mylist, contain_at(1), 10)=.
+#+BEGIN_EXAMPLE
+% mylist = [1,2,3]; element-Position
+opv(mylist, element-1, 10). % mylist[1] = 10
+opv(mylist, element-2, 20). % mylist[2] = 20
+opv(mylist, element-3, 30). % mylist[3] = 30
+#+END_EXAMPLE
+* Ontology of concepts
+** Is this an epiphany, or am I just batshit insane?
+How do we think of ideas, concepts, and other abstract objects?
+
+What is a duck?
+We call each of these a "duck":
+- a natural biological animal that is the tangible quacking duck that can peck you if you disturb it
+- such duck that has been painted to make it look like a chicken
+- cartoon characters such as Donald Duck
+- a man wearing a duck costume
+- a vivid photo of such duck
+- an ugly drawing of such duck
+- a mechanical robot duck
+- a cooked duck meat
+
+Thus, a "duck" is not an animal, but an /idea/, a /concept/,
+whose meaning depends on the context in which it is said.
+
+Reification fallacy is the error of /conflating/ a thing and a /representation/ of that thing.[fn::https://rationalwiki.org/wiki/Mistaking_the_map_for_the_territory]
+René Magritte's painting "The treachery of images"[fn::https://en.wikipedia.org/wiki/The_Treachery_of_Images] points out reification fallacy.
+But if we strictly avoid reification fallacy for casual conversation,
+we are going to annoy the hell out of people,
+and nobody is going to talk to us anymore.
+
+A picture of a duck is not a duck.
+But we often conflate them.
+The picture /depicts/ a duck.
+The picture is not a duck.
+
+But what the hell is a duck?
+Can't we know anything at all!?
+
+Reification fallacy is rampant (or perhaps inavoidable) in mathematics.
+For example, which are the natural numbers: 0,1,2; or z,sz,ssz?
+Neither.
+Those are only representations of natural numbers. The essence of natural numbers is /succession/:
+- There exists exactly one natural number that is not the successor of any other natural numbers.
+- The successor of a natural number is another natural number.
+But it is shorter to say "Let 0 /be/ a natural number" than "Let 0 /represent/ a natural number", and the writer actually means the latter while writing the former, and the reader implicitly understands that.
+
+Is a function a tuple, or does the tuple represent the function?
+
+2001, "How we confuse symbols and things"
+https://arachnoid.com/lutusp/symbols.html
+
+https://en.wikipedia.org/wiki/Reification_(fallacy)
+
+- The representation is not the thing.
+- The model is not the reality.
+- The map is not the territory.
+- The ceremony is not the faith.
+- The uniform is not the power.
+- The money is not the wealth.
+- The manliness is not the man.
+- The marriage is not the relationship.
+- The speech is not the thought.
+- The publication is not the science.
+- The school is not the education.
+
+According to "Ontology of Mathematics"[fn::https://philpapers.org/browse/ontology-of-mathematics]:
+"A good introductory survey is Horsten 2008.
+A readable introduction to philosophy of mathematics is Shapiro 2000.
+A nice, albeit somewhat biased survey of ontological options can be found in the first few chapters of Chihara 1990.
+A very nice introduction to the development of foundations of mathematics and the interaction between foundations, epistemology and ontology of mathematics is Giaquinto 2002."
+
+Light is neither particle nor wave.
+Light may /behave/ like particle.
+Light may behave like wave.
+It is categorically impossible for something to be both a particle and a wave.
+** Class-and-individual mental model
+Classes and instances; universals and particulars; and properties
+
+/Classes and instances/ are also called /universals and particulars/.
+
+We group things into classes because we want to /uniformly/ treat every instance of the class.
+Which is more important, that two things are similar in essence, or that two things can be used for the same purpose?
+
+IF class C has property P of type T,
+AND I instance of C,
+AND the P of I is V,
+THEN V instance of T.
+#+BEGIN_EXAMPLE
+instance_property_value(I, P, V) :-
+    instance_class(I, C),
+    class_property(C, P, T),
+    instance_class(V, T).
+#+END_EXAMPLE
+
+Example: the color of a car.
+
+#+BEGIN_EXAMPLE
+class(car).
+class(color).
+
+class_property_type(car, color, color).
+
+instance_class(john, car).
+instance_property_value(john, color, red).
+
+instance_class(mary, car).
+instance_property_value(mary, color, blue).
+
+class_instance(color, red).
+class_instance(color, green).
+class_instance(color, blue).
+#+END_EXAMPLE
+
+The individuals are more real than the classes.
+The classes are abstract.
+They are only in our minds.
+The individuals have a chance of being real, of having a material existence.
+An individual may be concrete or abstract.
+A class it's definitely abstract.
+** Problem: Property cardinality/multiplicity
+What is the color of a zebra?
+Does a zebra have one or two colors?
+It is incomplete to say "a zebra has black color", but is it false?
+#+BEGIN_EXAMPLE
+% this?
+opv(my_zebra, color, black).
+opv(my_zebra, color, white).
+% or this?
+opv(my_zebra, color, [black,white]).
+#+END_EXAMPLE
+** Gradual refinement of ontologies
+Here we try to build ontologies by gradually adding constructs and thus gradually increasing expressiveness.
+This gradualism imitates van Roy & Haridi 2004 \cite{van2004concepts}, but this is about ontologies instead of computation models.
+Adding more constructs increases expressivity but decreases reasonability.
+
+Increasing expressiveness:
+- propositional logic
+- first-order predicate logic
+- classes and properties; instantiation
+- entities and relationships = classes and properties + relationships
+- subclassing, subtyping, subsumption?
+- upper ontologies
+
+Propositional logic is used in simple logic circuits.
+Microwave door interlock.
+Vending machine coin change.
+Air conditioner remote control.
+#+BEGIN_EXAMPLE
+microwave_is_on :- door_is_closed, button_is_down.
+#+END_EXAMPLE
+
+The limit is that one proposition can only model one entity (one thing, one object).
+#+BEGIN_EXAMPLE
+nat(z).
+nat(s(A)) :- nat(A).
+#+END_EXAMPLE
+In propositional logic we would need an infinite number of propositions
+that correspond to the ground terms satisfying nat/1.
+#+BEGIN_EXAMPLE
+nat_z.
+nat_s_z.
+nat_s_s_z.
+% ...
+#+END_EXAMPLE
+
+At the most trivial level, /some things exist/.
+The following Prolog program models reality, in the sense that there is an interpretation of exist/0 that is true in reality;
+for example, we may interpret exist/0 to mean "we exist".
+#+BEGIN_EXAMPLE
+exist.
+#+END_EXAMPLE
+
+It is easy to model the static existence of timeless abstract objects.
+We just add a fact for exist/1.
+
+The next level is /classes and properties/.
+A property is a mathematical function whose domain is the set of objects
+and whose codomain is the set property values.
+
+Class-property modeling is intuitive and uncontroversial.
+Entity-relationship is class-property plus relationship.
+
+Parametrization (adding parameters) is one way of increasing the level of abstraction.
+Example:
+#+BEGIN_EXAMPLE
+john_eat_hamburger. % very specific: can only model one object
+eat(john,hamburger). % more general: can model all eating facts
+spo(john,eat,hamburger). % even more general: can model all static facts
+#+END_EXAMPLE
+
+There is a diminishing return with increasing abstraction.
+We want a Goldilocks abstraction: not too specific, but not too general.
+
+#+BEGIN_EXAMPLE
+class(employee).
+class_property(employee, name).
+class_property(employee, join_date).
+
+class(department).
+class_property(department, name).
+class_property(department, establish_date).
+
+relationship(work_at, [employee,department]).
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+person(john).
+person_name(john, "John Doe").
+person_website(john, "https://example.invalid/").
+person_email(john, "john@example.invalid").
+#+END_EXAMPLE
+
+The database is in 6NF.
+The advantage is extensibility:
+this representation simplifies adding new properties, be it derived or not:
+we just add a predicate.
+
+Its weakness is its repetitiveness:
+we have to repeat the person_ prefix and the surrogate key =john=.
+
+#+BEGIN_EXAMPLE
+person_proplist(john, [
+    name-"John Doe"
+    , website-"https://example.invalid/"
+    , email-"john@example.invalid"
+]).
+
+person_name(P, V) :- person_proplist(P, L), member(name-V, L).
+person_website(P, V) :- person_proplist(P, L), member(website-V, L).
+person_email(P, V) :- person_proplist(P, L), member(email-V, L).
+#+END_EXAMPLE
+
+But that has two problems:
+- That cannot express the cardinality[fn::also called "degree of relationship" or "multiplicity"][fn::https://en.wikipedia.org/wiki/Cardinality_(data_modeling)] of relations.
+- That cannot express the type of property values, but we can add class_property_type/3.
+
+SQL implements some cardinality constraints with unique indexes.
+A property translates to an SQL column.
+An entity translates to an SQL table with a surrogate primary key.
+A relationship of arity N translates to an SQL table with N columns, each a foreign key to the corresponding entity table.
+
+But what are the cardinalities of high-arity relations?
+
+There are two problems:
+- What exist?
+- How do we talk about what exists?
+  What language should we use?
+
+Skeletons and shells \cite{sterling1996logic}
+
+"Ontological commitment is an agreement to consistently use a vocabulary with respect to a theory specified by an ontology"
+\cite{jurisica1999using}
+
+If A is a /subclass/ of B, then every instance of A is /also/ an instance of B.
+
+At which level is OWL?
+
+OWL Lite vs DL vs Full[fn::https://ragrawal.wordpress.com/2007/02/20/difference-between-owl-lite-dl-and-full/].
+
+What is the Bunge--Wand--Weber ontology?
+"BWW ontology is a generic framework for analysis and conceptualization of real world objects"
+
+What is the Shlaer--Mellor method?
+** Objects vs values
+An object has identity.
+Two objects may have the same properties,
+but if their ObjectId differs, then they are not identical.
+
+A value does not have identity.
+** Entities
+An /entity/ is something that has identity.
+Every entity is distinguishable from other entities.
+** Properties (extrinsic properties)
+A /property/ of an entity is something that makes the entity what it is.
+
+In software modeling, properties are usually extrinsic properties.
+
+An extrinsic property of an entity is something we give to the entity, not something that comes with the entity.
+
+Examples of properties:
+
+- The name of a person is an extrinsic property.
+  Changing his name doesn't change what I think of him.
+- The name of a hotel is an extrinsic property.
+  Changing the hotel's name does not change my willingness to stay in it.
+
+A /property/ is a function from entity E to value V.
+
+https://en.wikipedia.org/wiki/Intrinsic_and_extrinsic_properties
+** Triples
+Similar concepts:
+- subject-predicate-object in Semantic-Web RDF
+- object-property-value in philosophical ontology
+- entity-attribute-value in computer programming
+** Object-role modeling
+https://en.wikipedia.org/wiki/Object-role_modeling
+
+Should we care about attribute-freeness?
+* Our mental models of software systems
+** Software system as structure plus behavior
+Software system = structure + behavior
+
+Structure is static.
+Behavior is dynamic.
+** Tool usage mental model
+The end users see software systems as /tools/.
+How do we use tools?
+How do we understand how to use tools?
+
+Using a tool requires some /minimum knowledge/, in which any extra knowledge beyond that does not help.
+For example, we have to know some naïve physics[fn::https://en.wikipedia.org/wiki/Na%C3%AFve_physics] in order to use a hammer,
+and for that, any extra knowledge does not help:
+hammer manufacture, mechanical engineering, metallurgy, chemistry, quantum mechanics.
+
+There is a minimum amount of knowledge required to use a software system.
+The user has to understand how to use computers,
+how to use devices such as keyboards and mice,
+how to use operating systems and browsers, and so on.
+We take these for granted, but these are a lot.
+
+When we use a tool, we form a mental model of the tool in which the tool temporarily becomes a part of our self.
+When we are driving a car, we have some idea about the physical extent of the car;
+we think of the car as if it were a limb of our body.
+** The end-user's mental model
+What do we think an information system or an enterprise application does?
+"It does accounting" is a vague answer.
+
+The users think of a software system as:
 - the set of things that exist in the system
 - the actions that can be done with the system
 - the set of the possible interactions with the system
 - a set of possible queries and commands
 
+"If I click this button, the system saves this data.
+If I click that button, the system recalls the data I saved earlier."
+
 The user's mental model is imperative/procedural.
 
-The mental model of a software user is the same as that of a machine operator.
+The mental model of a software user is the same as that of a machine operator or car driver or hammer user or any other tool user.
 
 We classify things all the time.
 I think, early in our evolution we classify things into two: those that help us survive, and those that do not.
@@ -389,180 +834,6 @@ But we have nullable foreign keys to distinguish between association, aggregatio
 Aggregation vs composition:
 In aggregation, the children can exist independently of the parent.
 Not so in composition.[fn::https://www.visual-paradigm.com/guide/uml-unified-modeling-language/uml-aggregation-vs-composition/]
-** What
-Formal ontology, knowledge representation, modeling an enterprise software in Prolog
-
-Synonym set: domain of discourse, domain of interest, subject matter
-
-Related: expert system
-** Gradual refinement of ontologies
-Here we try to build ontologies by gradually adding constructs and thus gradually increasing expressiveness.
-This gradualism imitates van Roy & Haridi 2004 \cite{van2004concepts}, but this is about ontologies instead of computation models.
-Adding more constructs increases expressivity but decreases reasonability.
-
-Increasing expressiveness:
-- propositional logic
-- first-order predicate logic
-- classes and properties; instantiation
-- entities and relationships = classes and properties + relationships
-- subclassing, subtyping, subsumption?
-- upper ontologies
-
-Propositional logic is used in simple logic circuits.
-Microwave door interlock.
-Vending machine coin change.
-Air conditioner remote control.
-#+BEGIN_EXAMPLE
-microwave_is_on :- door_is_closed, button_is_down.
-#+END_EXAMPLE
-
-The limit is that one proposition can only model one entity (one thing, one object).
-#+BEGIN_EXAMPLE
-nat(z).
-nat(s(A)) :- nat(A).
-#+END_EXAMPLE
-In propositional logic we would need an infinite number of propositions
-that correspond to the ground terms satisfying nat/1.
-#+BEGIN_EXAMPLE
-nat_z.
-nat_s_z.
-nat_s_s_z.
-% ...
-#+END_EXAMPLE
-
-At the most trivial level, /some things exist/.
-The following Prolog program models reality, in the sense that there is an interpretation of exist/0 that is true in reality;
-for example, we may interpret exist/0 to mean "we exist".
-#+BEGIN_EXAMPLE
-exist.
-#+END_EXAMPLE
-
-It is easy to model the static existence of timeless abstract objects.
-We just add a fact for exist/1.
-
-The next level is /classes and properties/.
-A property is a mathematical function whose domain is the set of objects
-and whose codomain is the set property values.
-
-Class-property modeling is intuitive and uncontroversial.
-Entity-relationship is class-property plus relationship.
-
-Parametrization (adding parameters) is one way of increasing the level of abstraction.
-Example:
-#+BEGIN_EXAMPLE
-john_eat_hamburger. % very specific: can only model one object
-eat(john,hamburger). % more general: can model all eating facts
-spo(john,eat,hamburger). % even more general: can model all static facts
-#+END_EXAMPLE
-
-There is a diminishing return with increasing abstraction.
-We want a Goldilocks abstraction: not too specific, but not too general.
-
-#+BEGIN_EXAMPLE
-class(employee).
-class_property(employee, name).
-class_property(employee, join_date).
-
-class(department).
-class_property(department, name).
-class_property(department, establish_date).
-
-relationship(work_at, [employee,department]).
-#+END_EXAMPLE
-
-#+BEGIN_EXAMPLE
-person(john).
-person_name(john, "John Doe").
-person_website(john, "https://example.invalid/").
-person_email(john, "john@example.invalid").
-#+END_EXAMPLE
-
-The database is in 6NF.
-The advantage is extensibility:
-this representation simplifies adding new properties, be it derived or not:
-we just add a predicate.
-
-Its weakness is its repetitiveness:
-we have to repeat the person_ prefix and the surrogate key =john=.
-
-#+BEGIN_EXAMPLE
-person_proplist(john, [
-    name-"John Doe"
-    , website-"https://example.invalid/"
-    , email-"john@example.invalid"
-]).
-
-person_name(P, V) :- person_proplist(P, L), member(name-V, L).
-person_website(P, V) :- person_proplist(P, L), member(website-V, L).
-person_email(P, V) :- person_proplist(P, L), member(email-V, L).
-#+END_EXAMPLE
-
-But that has two problems:
-- That cannot express the cardinality[fn::also called "degree of relationship" or "multiplicity"][fn::https://en.wikipedia.org/wiki/Cardinality_(data_modeling)] of relations.
-- That cannot express the type of property values, but we can add class_property_type/3.
-
-SQL implements some cardinality constraints with unique indexes.
-A property translates to an SQL column.
-An entity translates to an SQL table with a surrogate primary key.
-A relationship of arity N translates to an SQL table with N columns, each a foreign key to the corresponding entity table.
-
-But what are the cardinalities of high-arity relations?
-
-There are two problems:
-- What exist?
-- How do we talk about what exists?
-  What language should we use?
-
-Skeletons and shells \cite{sterling1996logic}
-
-"Ontological commitment is an agreement to consistently use a vocabulary with respect to a theory specified by an ontology"
-\cite{jurisica1999using}
-
-If A is a /subclass/ of B, then every instance of A is /also/ an instance of B.
-
-At which level is OWL?
-
-OWL Lite vs DL vs Full[fn::https://ragrawal.wordpress.com/2007/02/20/difference-between-owl-lite-dl-and-full/].
-
-What is the Bunge--Wand--Weber ontology?
-"BWW ontology is a generic framework for analysis and conceptualization of real world objects"
-
-What is the Shlaer--Mellor method?
-** Classes and instances; universals and particulars; and properties
-/Classes and instances/ are also called /universals and particulars/.
-
-We group things into classes because we want to /uniformly/ treat every instance of the class.
-Which is more important, that two things are similar in essence, or that two things can be used for the same purpose?
-
-IF class C has property P of type T,
-AND I instance of C,
-AND the P of I is V,
-THEN V instance of T.
-#+BEGIN_EXAMPLE
-instance_property_value(I, P, V) :-
-    instance_class(I, C),
-    class_property(C, P, T),
-    instance_class(V, T).
-#+END_EXAMPLE
-
-Example: the color of a car.
-
-#+BEGIN_EXAMPLE
-class(car).
-class(color).
-
-class_property_type(car, color, color).
-
-instance_class(john, car).
-instance_property_value(john, color, red).
-
-instance_class(mary, car).
-instance_property_value(mary, color, blue).
-
-class_instance(color, red).
-class_instance(color, green).
-class_instance(color, blue).
-#+END_EXAMPLE
 ** Statics and dynamics; structure and behavior
 Models of a software system can be divided into two groups:
 - structural model,
@@ -584,114 +855,110 @@ Synonyms: property[fn::https://en.wikipedia.org/wiki/Property_(philosophy)], att
 What is a concept?[fn::https://en.wikipedia.org/wiki/Concept]
 
 Turner 2007 \cite{turner2007towards}, programming-language ontology.
-** Philosophy of abstract objects?
-*** What does it mean for an abstract object to exist?
-Is software development applied metaphysics?
- [fn::https://skepticalmethodologist.wordpress.com/2013/12/08/software-development-applied-metaphysics/]
- [fn::https://www.eschrade.com/page/metaphysics-and-software-design/]
+* Key ideas
+** Common enterprise operations
+All enterprises deal with accounting, payroll, and taxes.
+** Model transformation as Horn clauses
+Model transformation is a Prolog module (a set of Horn clauses).
 
-Theory of abstract objects[fn::https://mally.stanford.edu/theory.html]
-
-What does it mean for a mathematical object to exist?[fn::https://www.math.toronto.edu/mathnet/answers/existence.html]
-
-It is simple to define a mathematical object.
-
-Describability does not imply existence.
-Imaginability does not imply existence.
-
-Whether anything exists depends on how we interpret "thing" and "exist".
-For example, if by "unicorn" we mean horned horse, and by "exist" we mean to have material existence, then no, unicorns do not exist.
-If by "exist" we mean to be imaginable, then yes, unicorns do exist.
-What is a unicorn?
-If we transplant a horn onto a horse, would it be a unicorn?
-Must a unicorn be a unicorn by birth?
-It is conceivable to draw unicorns.
-A search on the Internet produces an image in a few seconds.
-Does the question "Does unicorn exist?" even make sense at all?
-Can everybody agree on what a unicorn is and what existence is?
-What is existence?[fn::https://www.ontology.co/existence.htm]
-*** Abstract objects, concrete consequences
-Ranking algorithms have real consequences.
-Algorithms impose onto everyone the value system of the programmers.
-** What is the difference between ontology and metaphysics?
-** OWL
-We shall concern ourselves with the Primer[fn::https://www.w3.org/TR/2012/REC-owl2-primer-20121211/]
-and not the other documents[fn::https://www.w3.org/TR/2012/REC-owl2-overview-20121211/#Documentation_Roadmap] for implementors.
-
-It is straightforward to translate the Functional-style syntax examples in OWL 2 Primer to Prolog.
-
-OWL and Prolog differs in open vs closed world.
-
-OWL assumes open world:
-- If \(p\) is provable, then \(p\) is true.
-- If \(\neg p\) is provable, then \(p\) is false.
-- If neither of \(p\) or \(\neg p\) is provable, then \(p\) is possible (unknown).
-
-Prolog assumes closed world:
-- If \(p\) is provable, then \(p\) is true.
-- If \(p\) is not provable, then \(p\) is false.
-
-We can use closed-world assumption in our enterprise software model.
-If a class is not modeled in the Prolog, then it will not be in the generated Java source code.
-
-an example of second-order reasoning in OWL[fn::http://www.xfront.com/why-use-owl.html]
-** The ontology of enterprise web applications?
-*** Entities
-An /entity/ is something that has identity.
-Every entity is distinguishable from other entities.
-*** Properties (extrinsic properties)
-A /property/ of an entity is something that makes the entity what it is.
-
-In software modeling, properties are usually extrinsic properties.
-
-An extrinsic property of an entity is something we give to the entity, not something that comes with the entity.
-
-Examples of properties:
-
-- The name of a person is an extrinsic property.
-  Changing his name doesn't change what I think of him.
-- The name of a hotel is an extrinsic property.
-  Changing the hotel's name does not change my willingness to stay in it.
-
-A /property/ is a function from entity E to value V.
-
-https://en.wikipedia.org/wiki/Intrinsic_and_extrinsic_properties
-*** Combining entities
-*** Mapping entities to storages
-** RDF triples
-Similar concepts:
-- subject-predicate-object in Semantic-Web RDF
-- object-property-value in philosophical ontology
-- entity-attribute-value in computer programming
-** Objects
-An object has identity.
-Two objects may have the same properties,
-but if their ObjectId differs, then they are not identical.
-** Object-role modeling
-https://en.wikipedia.org/wiki/Object-role_modeling
-
-Should we care about attribute-freeness?
-** Logic of lists or sequences (ordered collections)
-Suppose that we want to write a Prolog knowledge base that models the sequence [a,b,c].
-
-With numbers, it is easy to model an ordered collection.
-We can piggyback on the natural ordering of the numbers.
+The idea is to represent a model transformation as a set of Horn clauses in Prolog.
+For example, we state that "There is a Java class for each SQL table" as:
 #+BEGIN_EXAMPLE
-list(1, a).
-list(2, b).
-list(3, c).
+java_class(sql_dto(T)) :- sql_table(T).
 #+END_EXAMPLE
 
-Without numbers, it is harder to model an ordered collection.
-This only works for finite sequences.
+A more general way to write that:
 #+BEGIN_EXAMPLE
-lt0(a, b).
-lt0(b, c).
-lt(A, C) :- lt0(A, B), lt(B, C).
+% opv = object-property-value
+object(java_class(sql_dto(T))) :- object(sql_table(T)).
+
+opv(java_class(sql_dto(T)), name, JavaName) :-
+    opv(sql_table(T), name, SqlName),
+    sqlname_javaname(SqlName, JavaName).
 #+END_EXAMPLE
-* Bending Prolog to my will
-See also [[file:prolog.html]].
+** Total code generation from model/ontology
+We aim for /total/ code generation from model/ontology.
+Not only structure (Java classes and fields), but also behavior (Java method contents).
+Not only the static aspects, but also the dynamic aspects.
+Some model-driven software development approaches such as EMF models the structure but not the behavior;
+thus they are not expressive enough to express all the information required to translate the model into a complete program,
+but only the entity classes and perhaps some validation and serialization;
+the engineer still has to write Java code.
+Some others such as fUML/ALF try to also model the behavior.
+** Mixing bottom-up and top-down
+There are two ways to something complex (that is pretty much anything): /bottom-up/ and /top-down/.
+
+There are two ways to design an ontology or a software:
+/bottom-up/ (gradual abstraction) and /top-down/ (gradual concretion).
+
+The advantages of bottom-up:
+- The abstraction has been proven to be useful and necessary.
+- Program development can start early, feedback is immediate, psychological reward, user can try system.
+
+The advantage of top-down is philosophical soundness.
+The disadvantage of top-down is that it is prone to creating over-engineered abstractions.
+
+There are two camps in programming:
+the bottom-up camp and the top-down camp.
+
+The bottom-up camp starts from machines and goes up toward mathematics.
+This camp produces Assembly, Fortran, Cobol, Pascal, C, C++, Go.
+This camp produced fast but ugly implementations.
+Haphazard incremental improvements.
+
+The top-down camp starts from mathematics and goes down toward machines.
+This camp produces Lisp, Scheme, Prolog, ML, Ocaml, Haskell, Coq, Idris, Agda, Lean.
+This camp produced elegant but slow implementations.
+Big design up front.
+
+They seem to be converging to a middle ground: ugly and slow.
+
+Why can't we get fast and elegant?
+** Unifying several closely-related subfields
+These are close.
+We should unify these.
+- ontology engineering and model-driven software development
+- database theory, logic programming, and relational programming
+
+Database normalization theory is related to writing good logic programs.
+** The human aspects of the envisioned usage: infrastructure engineers and suprastructure engineers
+- Suprastructure software engineer (language user) captures business logic into high-level program.
+  - Source code should be human-readable article.
+  - This steps focuses on describing what things exist and the relationships between them.
+  - This steps focuses on modeling.
+- Infrastructure software engineer (language designer) maps high-level languages to low-level languages.
+  - Example of low-level programming language: Java, C#, C++, C, SQL, Scheme, Lisp, Haskell.
+  - This steps focuses on the modeling language.
+- some mention of "suprastructure" and "infrastructure" https://en.wikipedia.org/wiki/Process_architecture
+** Presentation is accidental complexity
+The essence of an interaction is the conveyed information, not the appearance.
+HTML is accidental complexity.
+An interaction is either a /query/ or a /command/.
+A query does not change the system state.
+A command changes the system state.
+Application logic vs presentation logic.
+The essence is the data.
+The user can enumerate the finite number of things that can be done with a web application.
+The architecture is onion.
+
+Suppose that an application is ported from Google Sheets to Java.
+What does not change?
+The ontology, the concepts, the formulas
+
+A user is essentially making a remote procedure call to a web application..
+
+A system is to help us store, retrieve, and compute information.
+
+Presentation logic: HTTP-HTML-browser, SSH-CLI.
+Changing the presentation does not change the application logic at all.
+** Bottom-up vs top-down
+The bottom-up way is to start with Java and SQL, and abstract both Java and SQL into fUML/ALF or something else, etc.
+
+The top-down way is to start with the business users' mental model, and ...?
+* Realizing the ideas in Prolog
 ** Using Prolog for model-driven enterprise software engineering
+See also [[file:prolog.html]].
+
 The system is being sketched at a directory in our Git repository[fn::https://github.com/edom/work/tree/master/software/enterprise].
 This document is a sketch of that system.
 Not much has been implemented.
@@ -704,10 +971,6 @@ The expected workflow:
   - Interpretation: Execute the model in Prolog.
 
 Our program will be shortest if we can use Prolog's unprovable-means-false interpretation.
-** Bottom-up vs top-down
-The bottom-up way is to start with Java and SQL, and abstract both Java and SQL into fUML/ALF or something else, etc.
-
-The top-down way is to start with the business users' mental model, and ...?
 ** Modeling the application in Prolog
 Clarify the ontology first.
 The model follows from the ontology.
@@ -763,7 +1026,7 @@ How can we formalize the users' mental model, and use that formal model to devel
 Users think of an app as a /tool/, like a complicated hammer:
 - What was it originally invented for? What is it supposed to do? What is it usually used for? (Drive nails into wall)
 - How do I use it? (Grip the hammer, and hit the nail)
-- What can I use it for? (Cracking this clam open? Destroying this stuff? Killing a house intruder? Euthanizing a dying dog?)
+- What can I use it for? (Cracking a clam open? Destroying some stuff? Killing an intruder?)
 
 An application (a web application) maps a HTTP request to a HTTP response.
 
@@ -773,12 +1036,6 @@ Thus a Prolog atom is similar to an English /word/, and the Prolog knowledge bas
 The formula =application__sql_table(A,T)= means that application A uses SQL table T.
 
 The formula =application__page(A,P)= means the application A serves page P.
-*** Zotonic?
-Zotonic's authors at least has thought about its ontology
-http://zotonic.com/page/618/flexible-datamodel
-*** Ur/Web?
-Language-level integration.
-
 ** Writing enterprise web applications?
 *** Comparison between ontology, relational programming, and database programming
 Open World Assumption vs Closed World Assumption http://www.mkbergman.com/852/the-open-world-assumption-elephant-in-the-room/
@@ -889,241 +1146,19 @@ person(PersonId)
 person_name(PersonId, Name)
 person_birthdate(PersonId, BirthDate)
 #+END_EXAMPLE
-** A relation can be thought as an interpretation of function terms, or, how Prolog is ideal for writing DSLs
-For example, m0/2 and m1/2 give different meanings to the same function term f/1.
-#+BEGIN_EXAMPLE
-m0(f(X), Y) :- Y is X+1.
-m1(f(X), Y) :- Y is 2*X.
-#+END_EXAMPLE
-
-Prolog is ideal for writing DSLs because:
-- We can embed the abstract syntax in Prolog syntax.
-  We can skip specifying the grammar and go directly to specifying the semantics.
-- Specifying the semantics is straightforward.
-
-#+BEGIN_EXAMPLE
-exp_val(S, T) :- string(S), !, S = T.
-exp_val(S, T) :- number(S), !, S = T.
-exp_val(A+B, C) :- string(A), string(B), !, string_concat(A, B, C).
-exp_val(A+B, C) :- number(A), number(B), !, C is A+B.
-#+END_EXAMPLE
 ** Abstractions
 The system should present the illusion that every system state is as simple as a global variable.
 A PostgreSQL table is modeled as a global variable whose type is list.
-* What mess?
-** Model transformation as Horn clauses
-Model transformation is a Prolog module (a set of Horn clauses).
+** What
+Formal ontology, knowledge representation, modeling an enterprise software in Prolog
 
-The idea is to represent a model transformation as a set of Horn clauses in Prolog.
-For example, we state that "There is a Java class for each SQL table" as:
-#+BEGIN_EXAMPLE
-java_class(sql_dto(T)) :- sql_table(T).
-#+END_EXAMPLE
+Synonym set: domain of discourse, domain of interest, subject matter
 
-A more general way to write that:
-#+BEGIN_EXAMPLE
-% opv = object-property-value
-object(java_class(sql_dto(T))) :- object(sql_table(T)).
+Related: expert system
 
-opv(java_class(sql_dto(T)), name, JavaName) :-
-    opv(sql_table(T), name, SqlName),
-    sqlname_javaname(SqlName, JavaName).
-#+END_EXAMPLE
-** Total code generation from model/ontology
-We aim for /total/ code generation from model/ontology.
-Not only structure (Java classes and fields), but also behavior (Java method contents).
-Not only the static aspects, but also the dynamic aspects.
-Some model-driven software development approaches such as EMF models the structure but not the behavior;
-thus they are not expressive enough to express all the information required to translate the model into a complete program,
-but only the entity classes and perhaps some validation and serialization;
-the engineer still has to write Java code.
-Some others such as fUML/ALF try to also model the behavior.
-** Mixing bottom-up and top-down
-There are two ways to something complex (that is pretty much anything): /bottom-up/ and /top-down/.
+Zotonic's authors at least has thought about its ontology.[fn::http://zotonic.com/page/618/flexible-datamodel]
 
-There are two ways to design an ontology or a software:
-/bottom-up/ (gradual abstraction) and /top-down/ (gradual concretion).
-
-The advantages of bottom-up:
-- The abstraction has been proven to be useful and necessary.
-- Program development can start early, feedback is immediate, psychological reward, user can try system.
-
-The advantage of top-down is philosophical soundness.
-The disadvantage of top-down is that it is prone to creating over-engineered abstractions.
-
-There are two camps in programming:
-the bottom-up camp and the top-down camp.
-
-The bottom-up camp starts from machines and goes up toward mathematics.
-This camp produces Assembly, Fortran, Cobol, Pascal, C, C++, Go.
-This camp produced fast but ugly implementations.
-Haphazard incremental improvements.
-
-The top-down camp starts from mathematics and goes down toward machines.
-This camp produces Lisp, Scheme, Prolog, ML, Ocaml, Haskell, Coq, Idris, Agda, Lean.
-This camp produced elegant but slow implementations.
-Big design up front.
-
-They seem to be converging to a middle ground: ugly and slow.
-
-Why can't we get fast and elegant?
-** Unifying several closely-related subfields
-These are close.
-We should unify these.
-- ontology engineering and model-driven software development
-- database theory, logic programming, and relational programming
-
-Database normalization theory is related to writing good logic programs.
-** The human aspects of the envisioned usage: infrastructure engineers and suprastructure engineers
-- Suprastructure software engineer (language user) captures business logic into high-level program.
-  - Source code should be human-readable article.
-  - This steps focuses on describing what things exist and the relationships between them.
-  - This steps focuses on modeling.
-- Infrastructure software engineer (language designer) maps high-level languages to low-level languages.
-  - Example of low-level programming language: Java, C#, C++, C, SQL, Scheme, Lisp, Haskell.
-  - This steps focuses on the modeling language.
-- some mention of "suprastructure" and "infrastructure" https://en.wikipedia.org/wiki/Process_architecture
-** Language-oriented programming, domain-specific languages (DSLs)
-The 2010 article "Using DSLs for Developing Enterprise Systems" [[https://research.cyber.ee/simpl/enterprise-dsl.pdf][pdf]]:
-
-- It uses the terms "language engineer", "transformation specialist", and "business engineer".
-- It defines several usage scenarios of DSLs.
-- It defines five criteria for comparing DSL tools.
-- It compares some DSL tools.
-
-That paper should have been a wiki article.
-** A type system that is an algebra of unary predicates
-This is just an algebra of sets.
-
-A type can be thought as a set.
-A set can be thought as a unary predicate.
-A type can be thought as a unary predicate.
-\begin{align*}
-p \wedge q &= \forall a (p'(a) \wedge q'(a))
-\\
-p \leftarrow q &= \forall a (p'(a) \leftarrow q'(a))
-\\
-gt(10) &= \forall a. gt'(a,10) = \forall a. a > 10
-\end{align*}
-where \(p'\) means the meaning (the unary predicate interpretation) of \(p\).
-
-The algebra of unary predicates is analogous to the algebra of sets[fn::https://en.wikipedia.org/wiki/Algebra_of_sets]:
-conjunction is intersection,
-disjunction is union,
-implication is subset, etc.
-** Software architecture of logic programs?
-How should logic programs be architected?
-Can we generate architecture from semantics?
-** Some kinds of software systems
-Some flavors of big software systems with similar characteristics and programming techniques:
-- enterprise programming
-- game programming
-- operating-system programming, hardware programming, device driver programming
-
-Can we build every big software with model-driven software engineering?
-
-Operating system exists because programming languages are inadequate.
-Singularity operating system.
-** Developing software for the Web
-*** The Web was not designed to be a software platform
-- [[https://news.ycombinator.com/item?id=11035143][The sad state of web development]] (not everyone agrees).
-- It's time to kill the web https://blog.plan99.net/its-time-to-kill-the-web-974a9fe80c89
-  - from https://twitter.com/tehjh Jann Horn's Twitter
-    - At that time Jann Horn was a member of Google's Project Zero
-      https://blog.plan99.net/what-should-follow-the-web-8dcbbeaccd93
-- Why not infinite scrolling?
-  - Do you have an alternative to infinite scrolling?
-  - Do you handle network interruptions?
-    How does the user continue scrolling after network connection is restored?
-    Is there an unhandled exception in your script?
-*** Web application frameworks?
-http://zotonic.com/
-*** TODO How do we develop enterprise web applications efficiently?
-**** <2018-09-27> Enterprise application development is like three blind people describing an elephant.
-Every team is a blind people.
-
-The company's actual ontology is the elephant.
-
-How do we unify enterprise systems?
-Should we combine subsystem ontologies to produce the actual ontology,
-or should we derive subsystem ontologies from the actual ontology?
-** Mathematical history?
-Gillies 2002 \cite{gillies2002logicism}
-has a concise insightful historical summary explanation
-of the three schools of mathematics: logicism, formalism, and intuitionism.
-** Even technical writing should be narrative
-"A group of well-formed sentences does not necessarily form a coherent paragraph.
-The order in which they are placed can significantly alter the ease with which they can be understood" \cite{de2007narrative}
-
-The problem with description: it does not tell /why/.
-A narration or an argument tells why.
-
-Structuring our writing as narrative may help expose the incoherence.
-** Presentation is accidental complexity
-The essence of an interaction is the conveyed information, not the appearance.
-HTML is accidental complexity.
-An interaction is either a /query/ or a /command/.
-A query does not change the system state.
-A command changes the system state.
-Application logic vs presentation logic.
-The essence is the data.
-The user can enumerate the finite number of things that can be done with a web application.
-The architecture is onion.
-
-Suppose that an application is ported from Google Sheets to Java.
-What does not change?
-The ontology, the concepts, the formulas
-
-A user is essentially making a remote procedure call to a web application..
-
-A system is to help us store, retrieve, and compute information.
-
-Presentation logic: HTTP-HTML-browser, SSH-CLI.
-Changing the presentation does not change the application logic at all.
-** A curious relationship
-SQL schema ~ Prolog module ~ model-theory signature
-database theory / relational algebra ~ logic programming / relational programming
-
-<2019-03-06>
-I am surprised.
-Database theory is surprisingly relevant to logic programming.
-Database normalization is surprisingly relevant to writing good Prolog code.
-
-Suppose Prolog.
-From logic programming point of view, the comma can be thought as a conjunction.
-From database point of view, the comma can be thought as a join.
-** How do we model historical data in SQL?
-- Do we have to use SQL?
-- Is SQL the best tool for the job?
-- Does SQL do the job well enough to justify reducing maintenance costs?
-- How is historical data related to audit trail?
-  - Audit trail encompasses historical data.
-    Audit trail is a more stringent requirement.
-*** TODO <2018-09-19> Read
-- [[https://stackoverflow.com/questions/3874199/how-to-store-historical-data][database design - How to Store Historical Data - Stack Overflow]]
-- [[https://grisha.org/blog/2015/09/23/storing-time-series-in-postgresql-efficiently/][Storing Time Series in PostgreSQL efficiently - Gregory Trubetskoy]]
-- [[https://dba.stackexchange.com/questions/114580/best-way-to-design-a-database-and-table-to-keep-records-of-changes][mysql - Best way to design a database and table to keep records of changes? - Database Administrators Stack Exchange]]
-  - [[https://www.codeproject.com/Articles/105768/Audit-Trail-Tracing-Data-Changes-in-Database][Audit Trail – Tracing Data Changes in Database - CodeProject]]
-- [[https://www.red-gate.com/simple-talk/sql/database-administration/database-design-a-point-in-time-architecture/][Database Design: A Point in Time Architecture - Simple Talk]]
-- [[https://blog.timescale.com/time-series-data-why-and-how-to-use-a-relational-database-instead-of-nosql-d0cd6975e87c][Time-series data: Why (and how) to use a relational database instead of NoSQL]]
-  - Where is the SQL DDL/schema?
-** Maniac marketing materials
-(This may not be true.)
-
-Let N be the number of enterprise applications you have to make.
-Which would you rather write:
-- N * 30,000 lines of Java
-- 10,000 + N * 3,000 lines of Prolog
-
-That is, do you fear being asymptotically 10 times more productive?
-Do you fear success?
-
-Your favorite shiny framework is just a faster horse.
-You need a _car_ that is model-driven software engineering in Prolog.
-This is a real car, not just another faster-horse framework.
-
-We write software to help others do their jobs.
-Why don't we write software to help us do our jobs (write software)?
+Ur/Web has language-level integration?
 * Existing systems
 ** A little history of model-driven engineering?
 1989: OMG[fn::https://en.wikipedia.org/wiki/Object_Management_Group] was founded.
@@ -1186,10 +1221,6 @@ Basically, RDF is like a Prolog fact, and OWL is like a Prolog Horn clause.
 
 With Prolog syntax, we can just skip all the XML-URI shenanigans[fn::https://www.w3.org/RDF/Metalog/docs/sw-easy].
 
-** Problem: RDF triple with non-binary predicates
-Unary, ternary, n-ary
-Intransitive verbs
-
 ** Common to all ontologies: classes and instances
 * Literature study
 ** Unknown, to find out
@@ -1243,3 +1274,89 @@ Writing an enterprise application in Java is like teaching graduate physics usin
 https://docs.oracle.com/javaee/6/tutorial/doc/gjiup.html
 
 Mateu MDD uses Vaadin https://github.com/miguelperezcolom/mateu-mdd
+* What mess?
+** A type system that is an algebra of unary predicates
+This is just an algebra of sets.
+
+A type can be thought as a set.
+A set can be thought as a unary predicate.
+A type can be thought as a unary predicate.
+\begin{align*}
+p \wedge q &= \forall a (p'(a) \wedge q'(a))
+\\
+p \leftarrow q &= \forall a (p'(a) \leftarrow q'(a))
+\\
+gt(10) &= \forall a. gt'(a,10) = \forall a. a > 10
+\end{align*}
+where \(p'\) means the meaning (the unary predicate interpretation) of \(p\).
+
+The algebra of unary predicates is analogous to the algebra of sets[fn::https://en.wikipedia.org/wiki/Algebra_of_sets]:
+conjunction is intersection,
+disjunction is union,
+implication is subset, etc.
+** Software architecture of logic programs?
+How should logic programs be architected?
+Can we generate architecture from semantics?
+** Some kinds of software systems
+Some flavors of big software systems with similar characteristics and programming techniques:
+- enterprise programming
+- game programming
+- operating-system programming, hardware programming, device driver programming
+
+Can we build every big software with model-driven software engineering?
+
+Operating system exists because programming languages are inadequate.
+Singularity operating system.
+** Developing software for the Web
+*** The Web was not designed to be a software platform
+- [[https://news.ycombinator.com/item?id=11035143][The sad state of web development]] (not everyone agrees).
+- It's time to kill the web https://blog.plan99.net/its-time-to-kill-the-web-974a9fe80c89
+  - from https://twitter.com/tehjh Jann Horn's Twitter
+    - At that time Jann Horn was a member of Google's Project Zero
+      https://blog.plan99.net/what-should-follow-the-web-8dcbbeaccd93
+- Why not infinite scrolling?
+  - Do you have an alternative to infinite scrolling?
+  - Do you handle network interruptions?
+    How does the user continue scrolling after network connection is restored?
+    Is there an unhandled exception in your script?
+*** TODO How do we develop enterprise web applications efficiently?
+**** <2018-09-27> Enterprise application development is like three blind people describing an elephant.
+Every team is a blind people.
+
+The company's actual ontology is the elephant.
+
+How do we unify enterprise systems?
+Should we combine subsystem ontologies to produce the actual ontology,
+or should we derive subsystem ontologies from the actual ontology?
+** Mathematical history?
+Gillies 2002 \cite{gillies2002logicism}
+has a concise insightful historical summary explanation
+of the three schools of mathematics: logicism, formalism, and intuitionism.
+** A curious relationship
+SQL schema ~ Prolog module ~ model-theory signature
+database theory / relational algebra ~ logic programming / relational programming
+
+<2019-03-06>
+I am surprised.
+Database theory is surprisingly relevant to logic programming.
+Database normalization is surprisingly relevant to writing good Prolog code.
+
+Suppose Prolog.
+From logic programming point of view, the comma can be thought as a conjunction.
+From database point of view, the comma can be thought as a join.
+** How do we model historical data in SQL?
+- Do we have to use SQL?
+- Is SQL the best tool for the job?
+- Does SQL do the job well enough to justify reducing maintenance costs?
+- How is historical data related to audit trail?
+  - Audit trail encompasses historical data.
+    Audit trail is a more stringent requirement.
+*** TODO <2018-09-19> Read
+- [[https://stackoverflow.com/questions/3874199/how-to-store-historical-data][database design - How to Store Historical Data - Stack Overflow]]
+- [[https://grisha.org/blog/2015/09/23/storing-time-series-in-postgresql-efficiently/][Storing Time Series in PostgreSQL efficiently - Gregory Trubetskoy]]
+- [[https://dba.stackexchange.com/questions/114580/best-way-to-design-a-database-and-table-to-keep-records-of-changes][mysql - Best way to design a database and table to keep records of changes? - Database Administrators Stack Exchange]]
+  - [[https://www.codeproject.com/Articles/105768/Audit-Trail-Tracing-Data-Changes-in-Database][Audit Trail – Tracing Data Changes in Database - CodeProject]]
+- [[https://www.red-gate.com/simple-talk/sql/database-administration/database-design-a-point-in-time-architecture/][Database Design: A Point in Time Architecture - Simple Talk]]
+- [[https://blog.timescale.com/time-series-data-why-and-how-to-use-a-relational-database-instead-of-nosql-d0cd6975e87c][Time-series data: Why (and how) to use a relational database instead of NoSQL]]
+  - Where is the SQL DDL/schema?
+** What is the difference between ontology and metaphysics?

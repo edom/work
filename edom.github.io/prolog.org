@@ -381,9 +381,8 @@ http://www.swi-prolog.org/pldoc/man?section=cmdline
 ** Equalities and equivalences?
 What is the difference: =, ~==~, ~=:=~, is
 * Declarative Prolog, and other beautiful things
+** Reading Prolog programs
 What is the meaning/interpretation of a Prolog program?
-
-How to read a Prolog program?
 
 Usually we begin with genealogy like Abraham's[fn::https://en.wikipedia.org/wiki/Abraham%27s_family_tree].
 Family tree is actually not a tree but a directed graph.
@@ -705,7 +704,75 @@ A value has no identity.
 An object has an /identity/.
 
 Iff object_property(O,P) is provable, then object O has property P.
+** Advanced logic programming
+According to some curriculums, advanced logic programming includes
+SLG (tableau) resolution,
+constraint logic programming,
+and inductive logic programming.
+** Language-oriented programming, embedding a language in Prolog
+Advantages:
+- Reuse all of Prolog.
+- Concentrate on the abstract syntax and the semantics, and not on the surface syntax.
 
+Disadvantages:
+- No custom syntax error messages, because we embed our language in Prolog.
+- Limited to Prolog syntax.
+  No array index operator such as =a[i]=.
+
+Several possibilities:
+- Horn clauses.
+- Custom terms with custom interpretation function.
+
+The 2010 article "Using DSLs for Developing Enterprise Systems" [[https://research.cyber.ee/simpl/enterprise-dsl.pdf][pdf]]:
+- It uses the terms "language engineer", "transformation specialist", and "business engineer".
+- It defines several usage scenarios of DSLs.
+- It defines five criteria for comparing DSL tools.
+- It compares some DSL tools.
+- It should have been a wiki article.
+
+A relation can be thought as an interpretation of function terms.
+For example, m0/2 and m1/2 give different meanings to the same function term f/1.
+#+BEGIN_EXAMPLE
+m0(f(X), Y) :- Y is X+1.
+m1(f(X), Y) :- Y is 2*X.
+#+END_EXAMPLE
+
+Prolog is ideal for writing DSLs because:
+- We can embed the abstract syntax in Prolog syntax.
+  We can skip specifying the grammar and go directly to specifying the semantics.
+- Specifying the semantics is straightforward.
+
+#+BEGIN_EXAMPLE
+exp_val(S, T) :- string(S), !, S = T.
+exp_val(S, T) :- number(S), !, S = T.
+exp_val(A+B, C) :- string(A), string(B), !, string_concat(A, B, C).
+exp_val(A+B, C) :- number(A), number(B), !, C is A+B.
+#+END_EXAMPLE
+** Declarative GUI?
+It is easy to model the /static/ structure of a GUI:
+#+BEGIN_EXAMPLE
+window(main).
+textbox(a).
+textbox(b).
+textbox(c).
+contain(main,a).
+contain(main,b).
+contain(main,c).
+#+END_EXAMPLE
+
+It is harder to model the /dynamic/ behavior of a GUI.
+#+BEGIN_EXAMPLE
+textbox_text(c,C) :-
+    textbox_text(a,A),
+    textbox_text(b,B),
+    string_concat(A,B,C).
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+constraint(text(c) = text(a) + text(b)).
+#+END_EXAMPLE
+
+Logical reactive programming?
 * Imperative Prolog, and other ugly things
 Some ugly things are unfortunately necessary.
 There are always some dirty jobs in real-world programming.
@@ -994,8 +1061,34 @@ Usability issues:
   I found that by looking at others' source code.
   There does not seem to be any documentation, or if there is, then it is at the wrong place.
 - Why do we require people to understand DCG rules before they can use the messaging system?
-* Programming in the large with Prolog
-** A suggested way to use Prolog
+* Maintaining large knowledge bases
+** What is software maintenance?
+Software does not break down like machines.
+It is the things around the software that change.
+Hardware changes.
+Laws change.
+People change.
+The world changes.
+What was true when the software was made is no longer true.
+
+But why do we change?
+Other animals have been living just fine for millions of years without much change.
+We change for fun, to avoid boredom.
+
+It is fun to change things.
+It is less fun to be affected by changes.
+
+The key to maintainable software is to depend only on dependable things.
+If A depend on B, then B should be more stable than A.
+If a program uses a library, then the library should be more stable than the program.
+If a library uses an operating system, then the operating system should be more stable than the library.
+
+Stable dependencies principle[fn::http://wiki.c2.com/?StableDependenciesPrinciple]?
+
+How to write a program that does not change?
+It must capture the timeless essence of reality.
+A bachelor is unmarried by definition, and that definition is not going to change.
+** A suggested way to use Prolog for programming in the large?
 Begin by defining an ontology or domain-specific language.
 This is pure Prolog with declarative semantics.
 
@@ -1095,7 +1188,7 @@ foo(F,A) :- call(F,A).
 Don't multifile if clause order matters.
 Reloading changes clause order.
 http://www.swi-prolog.org/FAQ/Multifile.html
-** Production prolog
+** Production Prolog
 "Production Prolog" by Michael Hendricks; Strange Loop 2014
 https://www.youtube.com/watch?v=G_eYTctGZw8
 - This mentions "Mercury's bisecting debugger"
@@ -1160,15 +1253,24 @@ Mercury vs Prolog
 - <2018-10-21> "The Prolog to Mercury transition guide" https://www.mercurylang.org/information/doc-latest/transition_guide.pdf
 
 SQL? Datalog?
+** History of logic programming?
+Did logic programming emerge from automated theorem proving?
+
+Kowalski's[fn::https://en.wikipedia.org/wiki/Robert_Kowalski] insight is the procedural interpretation of Horn clauses.
+
+What is "refutation-complete"[fn::https://en.wikipedia.org/wiki/SLD_resolution]?
 * <2018-12-05> How to present Prolog to newcomers
 This is a draft.
 These are slides.
 Assume that one section is one slide.
 #+TOC: headlines 1 local
-** The coolest thing about Prolog: relational/multidirectional programming
+** "Talking" with the computer
+We can think of an interactive Prolog session as a /conversation/ with the computer.
+
 The Prolog phrase "append(A, B, C)" means the English clause "appending list A and list B produces list C".
 
 Here we show some ways of calling append/3.
+
 Here we show how to read Prolog fragments in English.
 
 "Prolog, does appending [1] and [2,3] produce [1,2,3]?"
@@ -1235,7 +1337,7 @@ false.
 #+END_EXAMPLE
 ** Write once, run in several directions
 The Prolog code for append/3 seems simple.
-We can see in SWI-Prolog library/lists.pl [[http://www.swi-prolog.org/pldoc/doc/_SWI_/library/lists.pl?show=src#append/3][append/3]] (I renamed some variables to improve readability):
+We can see in SWI-Prolog library/lists.pl [[http://www.swi-prolog.org/pldoc/doc/_SWI_/library/lists.pl?show=src#append/3][append/3]] (I renamed some variables):
 #+BEGIN_EXAMPLE
 append([], B, B).
 append([H|A], B, [H|C]) :- append(A, B, C).
@@ -1248,25 +1350,25 @@ append (h : a) b = h : append a b
 #+END_EXAMPLE
 
 But those fragments differ.
-Prolog gives us the ability to run the code in other directions.
-There are 3 parameters; each parameter is either bound or unbound; thus there are 2^3 = 8 possible directions.
-If we don't use a logic programming library in Haskell,
-the Prolog predicate translates to at least 5 Haskell functions,
+In Prolog we can run the code in other /directions/.
+There are 3 parameters, each with two directions (input/bound or output/unbound); thus there are 2^3 = 8 possible directions.
+The Prolog predicate translates to at least 5 Haskell functions,
 for the 5 ways of using append/3 we saw earlier.
-If we use a logic programming library in Haskell, the definition wouldn't be as concise as the Prolog definition.
 
 We write append/3 once, and we get at least five ways of calling it.
 
-But this beautiful dream crumbles outside /pure/ logic programming.
+But this beautiful dream crumbles outside pure symbolic logic programming.
 ** Another declarative example: palindromes
 "A list L is a palindrome iff L is its own reverse."
 #+BEGIN_EXAMPLE
 palindrome(L) :- reverse(L, L).
 #+END_EXAMPLE
-** What
+** Learning resources?
 2015
 Approaches for Learning Prolog Programming
 https://www.tandfonline.com/doi/full/10.11120/ital.2007.06040088
+
+[[http://kti.ms.mff.cuni.cz/~bartak/prolog/index.html][Roman Barták's "On-line Guide to Prolog Programming"]]
 * Ideas to flesh out?
 ** Prolog should use three-valued logic?
 Suppose that both A and B are unbound variables.
@@ -1476,6 +1578,10 @@ https://pdfs.semanticscholar.org/ca08/dcb9eddc1e7651509daac7fa02eddb7f675b.pdf
 http://www.swi-prolog.org/pldoc/doc_for?object=section(%27packages/cql.html%27)
 Draxler 1991 relates database table and Prolog predicate.
 CQL models SQL query in Prolog terms.
+
+Logtalk:
+"You can even use [Logtalk] to run Prolog module code in Prolog compilers such as GNU Prolog that don't include a module system."
+ [fn::https://stackoverflow.com/questions/6695788/programming-in-the-large-with-prolog]
 ** miniKanren?
 Relational programming, microKanren
 http://matt.might.net/articles/microkanren/

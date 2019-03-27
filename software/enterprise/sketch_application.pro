@@ -1,3 +1,5 @@
+% -------------------- behavior
+
 :- dynamic state/2.
 
 :- op(10,fx,#).
@@ -25,9 +27,9 @@ interpret(C, states([A|B]) := [X|Y], Z) :- !,
     interpret(C, state(A) := X, _),
     interpret(C, states(B) := Y, Z).
 
-interpret(C, A ++ B, Z) :- !, interpret(A,A0), interpret(B,B0), append(A0,B0,Z).
+interpret(C, A ++ B, Z) :- !, interpret(C,A,A0), interpret(C,B,B0), append(A0,B0,Z).
 
-interpret(C, quote(A), Z) :- !, Z = A.
+interpret(_, quote(A), Z) :- !, Z = A.
 
 interpret(C, let([],B), Z) :- !, interpret(C, B, Z).
 interpret(C, let([Name=Exp|Binds],Body), Z) :- !,
@@ -61,10 +63,40 @@ interpret(C, context, Z) :- !, Z = C.
 interpret(_, A, Z) :- number(A), !, Z = A.
 interpret(_, E, _) :- !, type_error(expression, E).
 
+% -------------------- structure
+
 class(person).
 class_property(person, name).
 class_property(person, age).
 
-mkreadstmt0(C, P = read) :- class_property(C, P).
-mkreadstmt(C, let(Binds,Body)) :-
-    findall(Bind, mkreadstmt0(C,Bind), Binds).
+% database(?Class, ?Id, ?Object) is nondet.
+:- dynamic database/2.
+
+:- nb_setval(database_id, 0).
+
+generate_id(Id) :-
+    nb_getval(database_id, Id),
+    Id1 is Id + 1,
+    nb_setval(database_id, Id1).
+
+insert(Class, Object) :-
+    generate_id(Id),
+    assertz(database(Class, Id, Object)).
+
+read_class(Class, Object) :-
+    findall(
+        Prop-Val,
+        read_property(Class, Prop, Val),
+        Object
+    ).
+
+read_property(C, P, V) :-
+    class_property(C, P),
+    format("Input ~w (Prolog term, end with period and Enter):\n", P),
+    read(V).
+
+% -------------------- test
+
+run :-
+    read_class(person, A),
+    insert(person, A).
