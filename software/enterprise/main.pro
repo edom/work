@@ -1,5 +1,3 @@
-:- consult("boot/debug.pro").
-:- documentation:consult("boot/doc.pro").
 :- documentation:consult("library/java_program_doc.pro").
 
 :- use_module("syntax.pro",[]).
@@ -18,7 +16,7 @@ run :-
 
 % -------------------- translation pipelines
 
-:- pipeline:consult("boot/module.pro").
+:- pipeline:consult("../boot/module.pro").
 :- pipeline:consult("main_module.pro").
 :- pipeline:consult("main_schema.pro").
 

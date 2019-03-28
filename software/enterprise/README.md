@@ -85,10 +85,6 @@ How to declare connections:
 
 ### Directory structures
 
-[`boot`](boot/) is about tailoring SWI-Prolog 7.6.4,
-mostly about module system, term_expansion/2, and some monkey-patching.
-These files should be loaded with consult/1, not with use_module/2.
-
 [`library`](library/) contains schemas and translations.
 
 A Prolog module may _conform_ to a _schema_.

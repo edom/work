@@ -131,6 +131,175 @@ This is a real car, not just another faster-horse framework.
 
 We write software to help others do their jobs.
 Why don't we write software to help us do our jobs (write software)?
+* Organic growing, gradualism, development
+Software seems to evolve according to punctuated equilibrium:
+Most of the time it is stable, with occasional massive-but-swift changes.
+** Mixing bottom-up and top-down
+There are two ways to something complex (that is pretty much anything): /bottom-up/ and /top-down/.
+
+There are two ways to design an ontology or a software:
+/bottom-up/ (gradual abstraction) and /top-down/ (gradual concretion).
+
+The advantages of bottom-up:
+- The abstraction has been proven to be useful and necessary.
+- Program development can start early, feedback is immediate, psychological reward, user can try system.
+
+The advantage of top-down is philosophical soundness.
+The disadvantage of top-down is that it is prone to creating over-engineered abstractions.
+
+There are two camps in programming:
+the bottom-up camp and the top-down camp.
+
+The bottom-up camp starts from machines and goes up toward mathematics.
+This camp produces Assembly, Fortran, Cobol, Pascal, C, C++, Go.
+This camp produced fast but ugly implementations.
+Haphazard incremental improvements.
+
+The top-down camp starts from mathematics and goes down toward machines.
+This camp produces Lisp, Scheme, Prolog, ML, Ocaml, Haskell, Coq, Idris, Agda, Lean.
+This camp produced elegant but slow implementations.
+Big design up front.
+
+They seem to be converging to a middle ground: ugly and slow.
+
+Why can't we get fast and elegant?
+** Gradual development/refinement/growing of models and ontologies
+Here we try to build ontologies by gradually adding constructs and thus gradually increasing expressiveness.
+This gradualism imitates van Roy & Haridi 2004 \cite{van2004concepts}, but this is about ontologies instead of computation models.
+Adding more constructs increases expressivity but decreases reasonability.
+
+We try to create the simplest possible model/vocabulary to capture/describe some simple facts about the world, and then gradually refine the model.
+
+We gradually add competency questions with increasing complexities.
+
+Increasing expressiveness:
+- propositional logic
+- first-order predicate logic
+- classes and properties; instantiation
+- entities and relationships = classes and properties + relationships
+- subclassing, subtyping, subsumption?
+- upper ontologies
+
+Propositional logic is used in simple logic circuits.
+Microwave door interlock.
+Vending machine coin change.
+Air conditioner remote control.
+#+BEGIN_EXAMPLE
+microwave_is_on :- door_is_closed, button_is_down.
+#+END_EXAMPLE
+
+The limit is that one proposition can only model one entity (one thing, one object).
+#+BEGIN_EXAMPLE
+nat(z).
+nat(s(A)) :- nat(A).
+#+END_EXAMPLE
+In propositional logic we would need an infinite number of propositions
+that correspond to the ground terms satisfying nat/1.
+#+BEGIN_EXAMPLE
+nat_z.
+nat_s_z.
+nat_s_s_z.
+% ...
+#+END_EXAMPLE
+
+At the most trivial level, /some things exist/.
+The following Prolog program models reality, in the sense that there is an interpretation of exist/0 that is true in reality;
+for example, we may interpret exist/0 to mean "we exist".
+#+BEGIN_EXAMPLE
+exist.
+#+END_EXAMPLE
+
+It is easy to model the static existence of timeless abstract objects.
+We just add a fact for exist/1.
+
+The next level is /classes and properties/.
+A property is a mathematical function whose domain is the set of objects
+and whose codomain is the set property values.
+
+Class-property modeling is intuitive and uncontroversial.
+Entity-relationship is class-property plus relationship.
+
+Parametrization (adding parameters) is one way of increasing the level of abstraction.
+Example:
+#+BEGIN_EXAMPLE
+john_eat_hamburger. % very specific: can only model one object
+eat(john,hamburger). % more general: can model all eating facts
+spo(john,eat,hamburger). % even more general: can model all static facts
+#+END_EXAMPLE
+
+There is a diminishing return with increasing abstraction.
+We want a Goldilocks abstraction: not too specific, but not too general.
+
+#+BEGIN_EXAMPLE
+class(employee).
+class_property(employee, name).
+class_property(employee, join_date).
+
+class(department).
+class_property(department, name).
+class_property(department, establish_date).
+
+relationship(work_at, [employee,department]).
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+person(john).
+person_name(john, "John Doe").
+person_website(john, "https://example.invalid/").
+person_email(john, "john@example.invalid").
+#+END_EXAMPLE
+
+The database is in 6NF.
+The advantage is extensibility:
+this representation simplifies adding new properties, be it derived or not:
+we just add a predicate.
+
+Its weakness is its repetitiveness:
+we have to repeat the person_ prefix and the surrogate key =john=.
+
+#+BEGIN_EXAMPLE
+person_proplist(john, [
+    name-"John Doe"
+    , website-"https://example.invalid/"
+    , email-"john@example.invalid"
+]).
+
+person_name(P, V) :- person_proplist(P, L), member(name-V, L).
+person_website(P, V) :- person_proplist(P, L), member(website-V, L).
+person_email(P, V) :- person_proplist(P, L), member(email-V, L).
+#+END_EXAMPLE
+
+But that has two problems:
+- That cannot express the cardinality[fn::also called "degree of relationship" or "multiplicity"][fn::https://en.wikipedia.org/wiki/Cardinality_(data_modeling)] of relations.
+- That cannot express the type of property values, but we can add class_property_type/3.
+
+SQL implements some cardinality constraints with unique indexes.
+A property translates to an SQL column.
+An entity translates to an SQL table with a surrogate primary key.
+A relationship of arity N translates to an SQL table with N columns, each a foreign key to the corresponding entity table.
+
+But what are the cardinalities of high-arity relations?
+
+There are two problems:
+- What exist?
+- How do we talk about what exists?
+  What language should we use?
+
+Skeletons and shells \cite{sterling1996logic}
+
+"Ontological commitment is an agreement to consistently use a vocabulary with respect to a theory specified by an ontology"
+\cite{jurisica1999using}
+
+If A is a /subclass/ of B, then every instance of A is /also/ an instance of B.
+
+At which level is OWL?
+
+OWL Lite vs DL vs Full[fn::https://ragrawal.wordpress.com/2007/02/20/difference-between-owl-lite-dl-and-full/].
+
+What is the Bunge--Wand--Weber ontology?
+"BWW ontology is a generic framework for analysis and conceptualization of real world objects"
+
+What is the Shlaer--Mellor method?
 * Ontology engineering
 ** Introduction to ontology
 For introduction to ontologies, see Marek Obitko's 2007 tutorial "Introduction to Ontologies and Semantic Web"[fn::https://www.obitko.com/tutorials/ontologies-semantic-web/]
@@ -280,7 +449,7 @@ What is existence?[fn::https://www.ontology.co/existence.htm]
 *** Abstract objects, concrete consequences
 Ranking algorithms have real consequences.
 Algorithms impose onto everyone the value system of the programmers.
-** OWL
+** OWL vs Prolog?
 We shall concern ourselves with the Primer[fn::https://www.w3.org/TR/2012/REC-owl2-primer-20121211/]
 and not the other documents[fn::https://www.w3.org/TR/2012/REC-owl2-overview-20121211/#Documentation_Roadmap] for implementors.
 
@@ -422,10 +591,16 @@ Light is neither particle nor wave.
 Light may /behave/ like particle.
 Light may behave like wave.
 It is categorically impossible for something to be both a particle and a wave.
-** Class-and-individual mental model
+** Describing existence with classes and individuals
+At least we have to describe the things that exist.
+
+An /entity/ is something that has identity.
+Every entity is distinguishable from other entities.
+
 Classes and instances; universals and particulars; and properties
 
 /Classes and instances/ are also called /universals and particulars/.
+But "universals" sometimes mean "properties"?
 
 We group things into classes because we want to /uniformly/ treat every instance of the class.
 Which is more important, that two things are similar in essence, or that two things can be used for the same purpose?
@@ -477,148 +652,12 @@ opv(my_zebra, color, white).
 % or this?
 opv(my_zebra, color, [black,white]).
 #+END_EXAMPLE
-** Gradual refinement of ontologies
-Here we try to build ontologies by gradually adding constructs and thus gradually increasing expressiveness.
-This gradualism imitates van Roy & Haridi 2004 \cite{van2004concepts}, but this is about ontologies instead of computation models.
-Adding more constructs increases expressivity but decreases reasonability.
-
-Increasing expressiveness:
-- propositional logic
-- first-order predicate logic
-- classes and properties; instantiation
-- entities and relationships = classes and properties + relationships
-- subclassing, subtyping, subsumption?
-- upper ontologies
-
-Propositional logic is used in simple logic circuits.
-Microwave door interlock.
-Vending machine coin change.
-Air conditioner remote control.
-#+BEGIN_EXAMPLE
-microwave_is_on :- door_is_closed, button_is_down.
-#+END_EXAMPLE
-
-The limit is that one proposition can only model one entity (one thing, one object).
-#+BEGIN_EXAMPLE
-nat(z).
-nat(s(A)) :- nat(A).
-#+END_EXAMPLE
-In propositional logic we would need an infinite number of propositions
-that correspond to the ground terms satisfying nat/1.
-#+BEGIN_EXAMPLE
-nat_z.
-nat_s_z.
-nat_s_s_z.
-% ...
-#+END_EXAMPLE
-
-At the most trivial level, /some things exist/.
-The following Prolog program models reality, in the sense that there is an interpretation of exist/0 that is true in reality;
-for example, we may interpret exist/0 to mean "we exist".
-#+BEGIN_EXAMPLE
-exist.
-#+END_EXAMPLE
-
-It is easy to model the static existence of timeless abstract objects.
-We just add a fact for exist/1.
-
-The next level is /classes and properties/.
-A property is a mathematical function whose domain is the set of objects
-and whose codomain is the set property values.
-
-Class-property modeling is intuitive and uncontroversial.
-Entity-relationship is class-property plus relationship.
-
-Parametrization (adding parameters) is one way of increasing the level of abstraction.
-Example:
-#+BEGIN_EXAMPLE
-john_eat_hamburger. % very specific: can only model one object
-eat(john,hamburger). % more general: can model all eating facts
-spo(john,eat,hamburger). % even more general: can model all static facts
-#+END_EXAMPLE
-
-There is a diminishing return with increasing abstraction.
-We want a Goldilocks abstraction: not too specific, but not too general.
-
-#+BEGIN_EXAMPLE
-class(employee).
-class_property(employee, name).
-class_property(employee, join_date).
-
-class(department).
-class_property(department, name).
-class_property(department, establish_date).
-
-relationship(work_at, [employee,department]).
-#+END_EXAMPLE
-
-#+BEGIN_EXAMPLE
-person(john).
-person_name(john, "John Doe").
-person_website(john, "https://example.invalid/").
-person_email(john, "john@example.invalid").
-#+END_EXAMPLE
-
-The database is in 6NF.
-The advantage is extensibility:
-this representation simplifies adding new properties, be it derived or not:
-we just add a predicate.
-
-Its weakness is its repetitiveness:
-we have to repeat the person_ prefix and the surrogate key =john=.
-
-#+BEGIN_EXAMPLE
-person_proplist(john, [
-    name-"John Doe"
-    , website-"https://example.invalid/"
-    , email-"john@example.invalid"
-]).
-
-person_name(P, V) :- person_proplist(P, L), member(name-V, L).
-person_website(P, V) :- person_proplist(P, L), member(website-V, L).
-person_email(P, V) :- person_proplist(P, L), member(email-V, L).
-#+END_EXAMPLE
-
-But that has two problems:
-- That cannot express the cardinality[fn::also called "degree of relationship" or "multiplicity"][fn::https://en.wikipedia.org/wiki/Cardinality_(data_modeling)] of relations.
-- That cannot express the type of property values, but we can add class_property_type/3.
-
-SQL implements some cardinality constraints with unique indexes.
-A property translates to an SQL column.
-An entity translates to an SQL table with a surrogate primary key.
-A relationship of arity N translates to an SQL table with N columns, each a foreign key to the corresponding entity table.
-
-But what are the cardinalities of high-arity relations?
-
-There are two problems:
-- What exist?
-- How do we talk about what exists?
-  What language should we use?
-
-Skeletons and shells \cite{sterling1996logic}
-
-"Ontological commitment is an agreement to consistently use a vocabulary with respect to a theory specified by an ontology"
-\cite{jurisica1999using}
-
-If A is a /subclass/ of B, then every instance of A is /also/ an instance of B.
-
-At which level is OWL?
-
-OWL Lite vs DL vs Full[fn::https://ragrawal.wordpress.com/2007/02/20/difference-between-owl-lite-dl-and-full/].
-
-What is the Bunge--Wand--Weber ontology?
-"BWW ontology is a generic framework for analysis and conceptualization of real world objects"
-
-What is the Shlaer--Mellor method?
 ** Objects vs values
 An object has identity.
 Two objects may have the same properties,
 but if their ObjectId differs, then they are not identical.
 
 A value does not have identity.
-** Entities
-An /entity/ is something that has identity.
-Every entity is distinguishable from other entities.
 ** Properties (extrinsic properties)
 A /property/ of an entity is something that makes the entity what it is.
 
@@ -645,6 +684,19 @@ Similar concepts:
 https://en.wikipedia.org/wiki/Object-role_modeling
 
 Should we care about attribute-freeness?
+** Logic of concepts
+A concept is modeled by a unary predicate in first-order logic.
+Thus a concept is also modeled by a set.
+
+Concept \(P\) /generalizes/ concept \(Q\) iff \(\forall x (P(x) \to Q(x))\), that is, if \( P \supseteq Q \).
+
+Concept \(P\) /specializes/ concept \(Q\) iff \(Q\) generalizes \(P\).
+
+Because there is a relation between logic and algebra, concept logic gives rise to concept algebra.
+For example, \(D + C\) may mean "duck or chicken or both".
+
+Wang 2008 \cite{wang2008concept} defines a concept as a more complex algebraic structure than a simple predicate,
+perhaps because the meaning of an utterance depends on context.
 * Our mental models of software systems
 ** Software system as structure plus behavior
 Software system = structure + behavior
@@ -885,35 +937,6 @@ thus they are not expressive enough to express all the information required to t
 but only the entity classes and perhaps some validation and serialization;
 the engineer still has to write Java code.
 Some others such as fUML/ALF try to also model the behavior.
-** Mixing bottom-up and top-down
-There are two ways to something complex (that is pretty much anything): /bottom-up/ and /top-down/.
-
-There are two ways to design an ontology or a software:
-/bottom-up/ (gradual abstraction) and /top-down/ (gradual concretion).
-
-The advantages of bottom-up:
-- The abstraction has been proven to be useful and necessary.
-- Program development can start early, feedback is immediate, psychological reward, user can try system.
-
-The advantage of top-down is philosophical soundness.
-The disadvantage of top-down is that it is prone to creating over-engineered abstractions.
-
-There are two camps in programming:
-the bottom-up camp and the top-down camp.
-
-The bottom-up camp starts from machines and goes up toward mathematics.
-This camp produces Assembly, Fortran, Cobol, Pascal, C, C++, Go.
-This camp produced fast but ugly implementations.
-Haphazard incremental improvements.
-
-The top-down camp starts from mathematics and goes down toward machines.
-This camp produces Lisp, Scheme, Prolog, ML, Ocaml, Haskell, Coq, Idris, Agda, Lean.
-This camp produced elegant but slow implementations.
-Big design up front.
-
-They seem to be converging to a middle ground: ugly and slow.
-
-Why can't we get fast and elegant?
 ** Unifying several closely-related subfields
 These are close.
 We should unify these.
@@ -955,6 +978,8 @@ Changing the presentation does not change the application logic at all.
 The bottom-up way is to start with Java and SQL, and abstract both Java and SQL into fUML/ALF or something else, etc.
 
 The top-down way is to start with the business users' mental model, and ...?
+** Make restart cheap, and restart on error
+Like Erlang.
 * Realizing the ideas in Prolog
 ** Using Prolog for model-driven enterprise software engineering
 See also [[file:prolog.html]].

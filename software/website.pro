@@ -188,21 +188,26 @@ attval_normalized(A,B) :- atom(A), !, atom_string(A,B).
 attval_normalized(A,A) :- string(A), !.
 attval_normalized(A,_) :- throw(error(cannot_normalize_attr_value(A), _)).
 
-/** term_tag_attrs_children(Term, Tag, Attrs, Children)
+%%  term_tag_attrs_children(Term, Tag, Attrs, Children)
+%   Normalize a HTML AST node into Tag(Attrs, Children).
+term_tag_attrs_children(Term, Tag, Attrs, Ch) :-
+    var(Term), !,
+    thing_list(Ch, Children),
+    Term =.. [Tag,Attrs,Children].
 
-Normalize a HTML AST node into Tag(Attrs, Children).
-*/
-term_tag_attrs_children(Term, Tag, Attrs, Ch) :- var(Term), !, thing_list(Ch, Children), Term =.. [Tag, Attrs, Children].
-term_tag_attrs_children(Term, Tag, Attrs, Children) :- Term =.. [Tag, At, Ch], !, thing_list(At, Attrs), thing_list(Ch, Children).
-term_tag_attrs_children(Term, Tag, [], Children) :- Term =.. [Tag, Ch], !, thing_list(Ch, Children).
+term_tag_attrs_children(Term, Tag, Attrs, Children) :-
+    Term =.. [Tag,At,Ch], !,
+    thing_list(At, Attrs),
+    thing_list(Ch, Children).
+
+term_tag_attrs_children(Term, Tag, [], Children) :-
+    Term =.. [Tag,Ch], !,
+    thing_list(Ch, Children).
 
 
-/** is_html_tag_name(?Tag)
+%%  is_html_tag_name(?Tag)
+%   Tag is a lowercase HTML tag name.
 
-"Tag is a HTML tag name."
-
-Tag must be lowercase.
-*/
 is_html_tag_name(Tag) :- member(Tag, [
     a, address, article, aside, body, caption, cite, code, div, em, h1, h2, h3, h4, h5, h6
     , head, kbd, link, meta, nav, p, pre, script, section, span, strong, style, table, tbody, tfoot, thead, title, th, tr, td

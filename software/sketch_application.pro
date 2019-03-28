@@ -100,3 +100,56 @@ read_property(C, P, V) :-
 run :-
     read_class(person, A),
     insert(person, A).
+
+% -------------------- web
+
+:- use_module(library(http/thread_httpd), [
+    http_server/2
+]).
+:- use_module(library(http/http_parameters), [
+    http_parameters/2
+]).
+:- consult_unregistered("html_cphe.pro").
+
+web :- http_server(dispatch, [port(4003)]).
+
+request_get_parameter(Request, Key, Value) :-
+    member(search(Gets), Request),
+    member(Key=Value, Gets).
+
+dispatch(Request) :-
+    member(method(Method), Request),
+    member(path(Path), Request),
+    http_parameters(Request, [
+        x(X,[integer,default(0)])
+        , y(Y,[integer,default(0)])
+    ]),
+    Z is X + Y,
+    Doc = [
+        '!doctype'(html)
+        , html(
+            head(
+                title("Title")
+            )
+            , body(
+                form(method="GET", action="."
+                    , span(Z)
+                    , label(
+                        span("X"),
+                        input(name=x, value=X)
+                    )
+                    , label(
+                        span("Y"),
+                        input(name=y, value=Y)
+                    )
+                    , input(type=submit)
+                )
+            )
+        )
+    ],
+    cphe_string(Doc, String),
+    format('Content-Type: text/html; charset=UTF-8~n'),
+    format('~n'),
+    write(String).
+
+

@@ -1,9 +1,15 @@
 #!/bin/bash
 
+# ./prolog.sh FILE ...
+
 # Start Prolog interpreter.
 
-# Example: ./prolog.sh -s FILE
+set -o errexit
+set -o nounset
+set -o pipefail
 
-# Open documentation at http://localhost:4002/pldoc/
+main() {
+    swipl ${swipl_opts:-} -l boot/load.pro -- "$@"
+}
 
-swipl --pldoc=4002 -f ../etc/swiplrc.pro -p "library0=$HOME/work/software" "$@"
+main "$@"

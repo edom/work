@@ -1137,9 +1137,14 @@ The discipline is:
   A type-2 file should not contain any qualified M:P call where M is a hard-coded atom;
   it is fine if M is a variable.
 
-There are several incompatible ways to load a Prolog source file: include/1, consult/1, use_module/2, load_files/2.
-
-consult_unregistered/2 is load_files/2 with module/1 and register(false) options.
+There are several mostly incompatible ways to load a Prolog source file:
+- include/1, only works as directive
+- consult/1
+- consult_unregistered/1, which is load_files/2 with register(false) option
+- use_module/2
+- load_files/2
+- consult_unregistered_into_module/2, which is just load_files/2 with module/1 and register(false) options
+- Logtalk, logtalk_load/1, logtalk_load/2
 
 The function of the main file is to link the non-main files.
 To maximize reusability and minimize name clash,
@@ -1196,6 +1201,70 @@ https://www.youtube.com/watch?v=G_eYTctGZw8
 - julian library for dates
 - time/1 for measuring how long a goal takes
 - library(spawn)?
+** Testing
+An example of unit testing is in =test.pro=.
+
+#+BEGIN_EXAMPLE
+test(addition) :-
+    1+2 =:= 3.
+
+test(multiplication) :-
+    2*3 =:= 6.
+
+?- test_all.
+#+END_EXAMPLE
+* Documentation of my source code
+** Convenient Prolog HTML Expression
+CPH stands for Convenient Prolog HTML.
+CPHE stands for CPH Expression.
+The source file is =html_cph.pro=.
+
+Before you use this library:
+- We have only HTML 5 in mind.
+  We do not handle DTD, SGML, XML, and all that stuffs.
+- We require that the Prolog implementation have a dedicated double-quoted string type, in which a string is not a list of codes.
+- We only write HTML and do not read HTML.
+- We do not handle all tags.
+  See is_tag/1 and is_empty_tag/1 in the source.
+- We do not handle comments.
+- We do not indent the HTML output.
+  It is human-unreadable.
+- Security notice:
+  We only escape attribute values and text nodes.
+  We do not escape attribute names and doctypes.
+- Element names must be all-lower-case atoms.
+
+<2019-03-29>
+Motivation:
+SWI Prolog 7.6.4 library(http/html_write)[fn::http://www.swi-prolog.org/howto/http/HelloHTML.html] was made before double-quoted strings.
+
+To understand the idea, see the following example translation.
+
+The predicate cphe_string/2 translates CPHE to HTML like this:
+#+BEGIN_EXAMPLE
+p(class=foo, "Text", style="color:#f00;", strong("Strong"))
+
+<p class="foo" style="color:#f00;">Text<strong>Strong</strong></p>
+#+END_EXAMPLE
+
+An example of a document:
+#+BEGIN_EXAMPLE
+[
+    '!doctype'(html)
+    , html(
+        head(
+            title("Title")
+        )
+        , body(
+            p("Paragraph")
+        )
+    )
+]
+#+END_EXAMPLE
+
+Do not conflate atoms and strings.
+Atoms translate to empty elements.
+Strings translate to escaped texts.
 * Theories
 ** Relational-multidirectional-logic programming?
 ** Embedding Prolog/Haskell in Haskell/Prolog
