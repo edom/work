@@ -63,6 +63,8 @@ Developer notes:
         - by the at-sign operator '@'/2: '@'(pred,M)
 */
 
+:- meta_predicate consult_unregistered(:).
+
 consult_unregistered(File) :-
     load_files(File, [register(false)]).
 
