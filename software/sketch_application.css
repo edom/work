@@ -1,0 +1,91 @@
+html {
+    font-family: Helvetica, "Noto Sans", "Droid Sans", Helvetica, Arial, sans-serif;
+    font-size: 12pt;
+    line-height: 1.333;
+}
+
+button, input {
+    font-size: inherit;
+}
+
+button, input[type=submit] {
+    padding: 0.5em 1em;
+    width: 100%;
+}
+
+input[type=checkbox] {
+    border: 1px solid #000;
+    width: 2em;
+    height: 2em;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    outline: 0;
+}
+input[type=checkbox]:checked:after {
+    content: "\002713";
+    font-size: 1.5em;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+thead th {
+    border-bottom: 1px solid #000;
+}
+
+th, td {
+    padding: 0em 0.5em;
+}
+
+th:first-child, td:first-child {
+    padding-left: 0em;
+}
+
+th:last-child, td:last-child {
+    padding-right: 0em;
+}
+
+form { margin: 1em 0em; }
+.form_fit { display: inline-block; }
+.form_title { margin: 1em 0em; font-weight: bold; }
+.form_input_table { display: block; }
+.form_input_table > label { display: block; }
+.form_input_table > label > .label_left { padding-right: 1em; }
+.form_input_table > label > .label_check { padding-left: 1em; }
+.form_input_table > label > * { vertical-align: middle; }
+
+@media only screen {
+    header {
+        background-color: #eee;
+        padding: 0.5em 1em;
+    }
+
+    header h1 {
+        margin: 0em;
+        font-size: 1em;
+        font-weight: bold;
+    }
+
+    body {
+        margin: 0em;
+    }
+
+    main {
+        margin: 1em;
+    }
+}
+
+@media only screen and (max-width: 70ex) {
+    .form_fit { display: block; }
+    .form_input_table { display: block; }
+    .form_input_table > label { display: block; margin: 1em 0em; }
+    .form_input_table > label > .label_left { display: inline-block; padding: 0em; }
+    .form_input_table > label > .label_check { display: inline-block; padding: 0em; }
+    .form_input_table > label > .control_wide { display: block; width: 100%; }
+}

@@ -67,10 +67,56 @@ interpret(_, E, _) :- !, type_error(expression, E).
 
 class(person).
 class_property(person, name).
-class_property(person, age).
+class_property(person, food).
+class_property(person, birth_date).
 
 % database(?Class, ?Id, ?Object) is nondet.
-:- dynamic database/2.
+:- dynamic database/3.
+
+% dummy test data
+database(person, -2, [name-"Alice", food-"bread", birth_date-date(1990,1,2)]).
+database(person, -1, [name-"Bob", food-"meat", birth_date-date(1990,3,4)]).
+
+term_locale_string(property(person,name), eng, "name").
+term_locale_string(property(person,food), eng, "food").
+term_locale_string(property(person,birth_date), eng, "birth date").
+term_locale_string(property(person,name), ind, "nama").
+term_locale_string(property(person,food), ind, "makanan").
+term_locale_string(property(person,birth_date), ind, "tanggal lahir").
+term_locale_string(property(person,name), jpn, "名前").
+term_locale_string(property(person,food), jpn, "食物").
+term_locale_string(property(person,birth_date), jpn, "誕生日").
+
+globalize(Term, Locale, String) :- term_locale_string(Term, Locale, String), !.
+globalize(property(_,Name), _, String) :- !, to_string(Name, String).
+globalize(Term, _, String) :- to_string(Term, String).
+
+opv_get(Obj, Prop, Val) :-
+    nonvar(Prop),
+    \+ member(Prop-Val, Obj), !,
+    throw(error(no_such_property(Prop),_)).
+
+opv_get(Obj, Prop, Val) :- !,
+    member(Prop-Val, Obj).
+
+class_th(Cls, th(Str)) :-
+    class_property(Cls, Prop),
+    globalize(property(Cls,Prop), eng, Str).
+
+object_td(Cls, Obj, td(Str)) :-
+    class_property(Cls, Prop),
+    opv_get(Obj, Prop, Val),
+    to_string(Val, Str).
+
+to_string(A, Z) :- string(A), !, Z = A.
+to_string(A, Z) :- !, term_string(A, Z).
+
+object_tr(Cls, Obj, tr(Tds)) :-
+    findall(Td, object_td(Cls,Obj,Td), Tds).
+
+objects_html_table(Cls, Objs, table(thead(tr(Ths)),tbody(Trs))) :-
+    findall(Th, class_th(Cls,Th), Ths),
+    findall(Tr, (member(Obj,Objs), object_tr(Cls,Obj,Tr)), Trs).
 
 :- nb_setval(database_id, 0).
 
@@ -109,6 +155,14 @@ run :-
 :- use_module(library(http/http_parameters), [
     http_parameters/2
 ]).
+:- use_module(library(http/http_dispatch), [
+    http_reply_file/3
+]).
+:- use_module(library(http/http_error), []).
+:- nodebug(http(error)).
+%:- set_setting(http:client_backtrace, false).
+:- set_setting(http:client_backtrace, true). % DEBUG
+
 :- consult_unregistered("html_cphe.pro").
 
 web :- http_server(dispatch, [port(4003)]).
@@ -117,9 +171,24 @@ request_get_parameter(Request, Key, Value) :-
     member(search(Gets), Request),
     member(Key=Value, Gets).
 
+urlpath_filepath_type('/static/style.css', 'sketch_application.css', 'text/css;charset=UTF-8').
+
 dispatch(Request) :-
-    member(method(Method), Request),
-    member(path(Path), Request),
+    member(method(get), Request),
+    member(path(Url), Request),
+    urlpath_filepath_type(Url, File, Type),
+    !,
+    Opts = [
+        mime_type(Type),
+        unsafe(true)
+    ],
+    http_reply_file(File, Opts, Request).
+
+dispatch(Request) :-
+    member(method(get), Request),
+    member(path('/'), Request),
+    findall(Obj, database(person,_,Obj), Objs),
+    objects_html_table(person, Objs, Table),
     http_parameters(Request, [
         x(X,[integer,default(0)])
         , y(Y,[integer,default(0)])
@@ -130,19 +199,43 @@ dispatch(Request) :-
         , html(
             head(
                 title("Title")
+                , meta(charset="UTF-8")
+                , meta(name=viewport, content="width=device-width, initial-scale=1")
+                , link(rel=stylesheet, type="text/css", href="/static/style.css")
             )
             , body(
-                form(method="GET", action="."
-                    , span(Z)
-                    , label(
-                        span("X"),
-                        input(name=x, value=X)
+                header(
+                    h1("Application")
+                )
+                , main(
+                    Table
+                    , form(method="GET", action="."
+                        , div(class=form_fit
+                            , div(class=form_input_table
+                                , label(
+                                    span(class=label_left, "Z")
+                                    , span(class=control_wide, Z)
+                                )
+                                , label(
+                                    span(class=label_left, "X"),
+                                    input(class=control_wide, name=x, value=X)
+                                )
+                                , label(
+                                    span(class=label_left, "Y"),
+                                    input(class=control_wide, name=y, value=Y)
+                                )
+                                , label(
+                                    span(class=label_left, "A long-named but unused parameter"),
+                                    input(class=control_wide, name=z, value=Z)
+                                )
+                                , label(
+                                    input(class=control_narrow, type=checkbox)
+                                    , span(class=label_right, "a test checkbox")
+                                )
+                            )
+                            , input(type=submit)
+                        )
                     )
-                    , label(
-                        span("Y"),
-                        input(name=y, value=Y)
-                    )
-                    , input(type=submit)
                 )
             )
         )

@@ -44,8 +44,11 @@ html_tag(span).
 html_tag(strong).
 html_tag(style).
 html_tag(table).
+html_tag(tbody).
 html_tag(td).
+html_tag(tfoot).
 html_tag(th).
+html_tag(thead).
 html_tag(title).
 html_tag(tr).
 html_tag(u).
