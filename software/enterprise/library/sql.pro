@@ -1,3 +1,10 @@
+:- import(file("internal/type.pro"),[
+    type_natural_bit/2
+    , type_integer_bit/2
+    , type_identifier_bit/2
+    , type_string_byte/2
+    , type_optional/2
+]).
 % Translate type to SQL type.
 
 /** type_sqltype(++TypeName,-SqlType) is det.
@@ -37,3 +44,28 @@ recordtype_sqlcolumn(T,[name-FName,type-SType,nullable-Nullable]) :-
     type_nullable(T) :- type_optional(T, _).
 
     fields_member(Fields,Name,Type) :- member(Name:Type, Fields).
+
+% -------------------- Data Definition Language
+
+:- multifile
+    class/1,
+    class_property/2,
+    class_property_type/3.
+
+:- import(file("../../string0.pro"),[
+    strings_separator_join/3
+    , strings_join/2
+]).
+
+sql_ddl_create_table(Cls, Sql) :-
+    class(Cls),
+    findall(Col, sql_ddl_column(Cls, _, Col), Cols),
+    strings_separator_join(Cols, ", ", CommaSepCols),
+    strings_join(["CREATE TABLE ", Cls, " (", CommaSepCols, "\n);"], Sql).
+
+sql_ddl_column(Cls, Prop, Sql) :-
+    class(Cls),
+    class_property(Cls, Prop),
+    class_property_type(Cls, Prop, Type),
+    type_sqltype(Type, SqlType),
+    format(string(Sql), "~n~4|~w ~w NOT NULL", [Prop,SqlType]).

@@ -980,6 +980,52 @@ The bottom-up way is to start with Java and SQL, and abstract both Java and SQL 
 The top-down way is to start with the business users' mental model, and ...?
 ** Make restart cheap, and restart on error
 Like Erlang.
+** An UX research topic: Does the user's native language sentence structure affect the perceived navigability of the system?
+English imperative VO: "create a new entry"
+
+Japanese imperative OV: "new entry /wo/ create-<suffix>"
+
+English SVO "I put the data into the system"
+
+German SOV "I into the system the data put"
+
+Japanese SOV "system-into data put-<suffix>"
+
+The website navigation that is natural for English speakers:
+- create
+  - employee
+  - department
+- delete
+  - employee
+  - department
+
+The website navigation that is natural for Japanese speakers:
+- employee
+  - create
+  - delete
+- department
+  - create
+  - delete
+
+The difference:
+- An English speaker thinks "I need to /create/ an /employee record/".
+  The action comes before the object.
+- A Japanese speaker thinks "/employee record/ wo /create/ suru koto wa hitsuyou ga aru" or something like that.
+  The object comes before the action.
+
+My hypothesis is that the user will feel that the system is more usable if
+the navigation sequence /matches/ the word sequence in the user's internal phonological loop[fn::https://en.wikipedia.org/wiki/Baddeley%27s_model_of_working_memory#Phonological_loop].
+My hypothesis is that the user will feel less cognitive burden.
+But what about polyglot/multilingual users?
+What about a Japanese-native user who is also proficient in English?
+
+But this is not the case.
+Grouping the content by topic produces the same navigation structure for both languages.
+
+The front page should answer the question "How do I do X with this system?", where the user already knows X beforehand.
+
+Actions that are done more often should be put nearer to the top of the page.
+But commands and queries should be separated.
 * Realizing the ideas in Prolog
 ** Using Prolog for model-driven enterprise software engineering
 See also [[file:prolog.html]].

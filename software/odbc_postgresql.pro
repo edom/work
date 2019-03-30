@@ -6,7 +6,6 @@
 */
 
 :- use_module('./map.pro').
-:- use_module('./string0.pro').
 
 /*
 For PostgreSQL configuration options, see:

@@ -4,7 +4,7 @@
 ]).
 :- use_module('./type.pro').
 :- use_module('./type_java.pro').
-:- use_module('./syntax.pro').
+:- include("syntax.pro").
 
 % deprecated
 

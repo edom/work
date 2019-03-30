@@ -13,14 +13,13 @@ Several things must be distinguished:
 
 User-defined type.
 
-This is the public interface.
-
 TypeName is an atom.
 
 Definition is a type expression, which is any of these:
     - =|#natural|=: a natural number.
     - =|#integer|=: an integer.
     - =|#string|=: a character string.
+    - =|#string(N)|=: a character string with representation size limit in bytes.
     - =|#optional(T)|=, where T is a type expression.
     - A TypeName of another user-defined type.
 
@@ -29,7 +28,7 @@ The same Type must not be defined more than once.
 
 This is private to the model and this file.
 Only the model may construct type expressions directly.
-Other files must use the deconstructor/matcher predicates
+Model transformers must use the deconstructor/matcher predicates
 such as type_natural/1.
 */
 
@@ -40,6 +39,13 @@ such as type_natural/1.
 
 Refinement for implementation.
 */
+
+:- multifile
+    type_definition/2,
+    type_maxbitcount/2,
+    type_maxbytecount/2.
+
+:- include("../../syntax.pro").
 
 % ==================== output interface
 
@@ -59,6 +65,7 @@ type_identifier_bit(T, N) :- type_identifier(T), type_maxbitcount(T, N).
 
 type_string(T) :- type_hnf(T, #string).
 
+type_string_byte(T, N) :- type_hnf(T, #string(N)).
 type_string_byte(T, N) :- type_string(T), type_maxbytecount(T, N).
 
 type_optional(T, A) :- type_hnf(T, #optional(A)).

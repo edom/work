@@ -38,3 +38,7 @@ swipl_opts='--pldoc=4002' ./prolog.sh -- FILE ...
 ```
 
 Open http://localhost:4002/pldoc/
+
+## To-do
+
+- SQL DDL escaping

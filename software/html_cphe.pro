@@ -1,5 +1,3 @@
-:- consult_unregistered("html_escape.pro").
-
 % -------------------- public
 
 cphe_codes(Exp, Codes) :-
@@ -14,7 +12,14 @@ cphe_string(Exp, String) :-
 
 % -------------------- private
 
-:- consult_unregistered("html_tag.pro").
+:- import(file("html_escape.pro"),[
+    string_html/2
+]).
+
+:- import(file("html_tag.pro"),[
+    html_empty_tag/1
+    , html_tag/1
+]).
 
 cphe_is_attr(Exp) :- cphe_attr_name_value(Exp, _, _).
 cphe_is_elem(Exp) :- functor(Exp, Name, _), html_tag(Name).

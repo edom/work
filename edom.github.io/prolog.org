@@ -439,46 +439,6 @@ But that can be done more elegantly with /constraint logic programming/.
 #+BEGIN_EXAMPLE
 succ(A, B) :- A + 1 #= B.
 #+END_EXAMPLE
-** Why do we need predicates at all if we can do with one unary predicate?
-#+BEGIN_EXAMPLE
-:- op(600,xfy,:).
-:- op(650,xfx,@).
-
-invoke(father @ [abraham, isaac]).
-invoke(father @ [abraham, ishmael]).
-invoke(list_length @ [[], z]).
-invoke(list_length @ [[_|A], N]) :-
-    invoke(list_length @ [A,N0]),
-    invoke(succ @ [N0,N]).
-invoke(nat @ [z]).
-invoke(nat @ [s(A)]) :- invoke(nat @ [A]).
-invoke(succ @ [A, s(A)]) :- invoke(nat @ [A]).
-#+END_EXAMPLE
-
-We can even do module systems.
-
-We can encode 1 module as 1 predicate.
-#+BEGIN_EXAMPLE
-module1(pred @ [Arg1, Arg2, ...]) ...
-module2(pred @ [Arg1, Arg2, ...]) ...
-#+END_EXAMPLE
-
-We can encode all modules as 1 predicate.
-We can have meta-predicates.
-We can have variable-arity predicates.
-#+BEGIN_EXAMPLE
-invoke(module1:pred @ [Arg1, ...]) ...
-invoke(module2(pred) @ [Arg1, ...]) ...
-invoke(call @ [F|A]) :- invoke(F @ A).
-#+END_EXAMPLE
-
-We can do first-order logic with one predicate only and unlimited function symbols.
-We can convert predicates into function symbols:
-We can transform \( p_1(\vec{x}_1), \ldots, p_n(\vec{x}_n) \) to \( P(p_k, \vec{x}_k) \).
-This is like writing the interpretation function inside the formal system itself.
-This is still first-order logic.
-
-Should =a:b@c= be interpreted as =(a:b)@c= (call a:b with arguments c) or =a:(b@c)= (call b with context a and arguments c)?
 ** Functional (deterministic) relation
 #+BEGIN_EXAMPLE
 f(In1, Out1) :- Guard1, !, Body1.
@@ -1213,6 +1173,125 @@ test(multiplication) :-
 
 ?- test_all.
 #+END_EXAMPLE
+** Why do we need predicates at all if we can do with one unary predicate?
+#+BEGIN_EXAMPLE
+:- op(600,xfy,:).
+:- op(650,xfx,@).
+
+invoke(father @ [abraham, isaac]).
+invoke(father @ [abraham, ishmael]).
+invoke(list_length @ [[], z]).
+invoke(list_length @ [[_|A], N]) :-
+    invoke(list_length @ [A,N0]),
+    invoke(succ @ [N0,N]).
+invoke(nat @ [z]).
+invoke(nat @ [s(A)]) :- invoke(nat @ [A]).
+invoke(succ @ [A, s(A)]) :- invoke(nat @ [A]).
+#+END_EXAMPLE
+
+We can even do module systems.
+
+We can encode 1 module as 1 predicate.
+#+BEGIN_EXAMPLE
+module1(pred @ [Arg1, Arg2, ...]) ...
+module2(pred @ [Arg1, Arg2, ...]) ...
+#+END_EXAMPLE
+
+We can encode all modules as 1 predicate.
+We can have meta-predicates.
+We can have variable-arity predicates.
+#+BEGIN_EXAMPLE
+invoke(module1:pred @ [Arg1, ...]) ...
+invoke(module2(pred) @ [Arg1, ...]) ...
+invoke(call @ [F|A]) :- invoke(F @ A).
+#+END_EXAMPLE
+
+We can do first-order logic with one predicate only and unlimited function symbols.
+We can convert predicates into function symbols:
+We can transform \( p_1(\vec{x}_1), \ldots, p_n(\vec{x}_n) \) to \( P(p_k, \vec{x}_k) \).
+This is like writing the interpretation function inside the formal system itself.
+This is still first-order logic.
+
+Should =a:b@c= be interpreted as =(a:b)@c= (call a:b with arguments c) or =a:(b@c)= (call b with context a and arguments c)?
+** Rethinking Prolog module systems
+Each predicate has a name.
+
+A /module/ is a set of predicates.
+
+A /file/ also contains a set of predicates.
+
+A module is the internal representation
+File contains the external representation.
+The analogy:
+A module contains thoughts.
+A file countains writings representing those thoughts.
+
+If the relationship between a file and a module does not have to be 1:1,
+then complications arise.
+
+We assume 1:1 relationship between files and modules.
+
+Problems:
+- M:N mapping between files and modules
+- Name clashes
+- Module instantiation
+- Imports and dependencies
+- I want to make many languages and interpreters, and I don't want to prefix each predicate:
+  I want to write N interpret predicates, I don't want to write 1 langN_interpret for each N.
+- A clashy-named old predicate is used a lot.
+
+#+BEGIN_EXAMPLE
+interpret(Language, Context, Expression, Meaning).
+#+END_EXAMPLE
+
+Some solutions that come to mind:
+- Load module using gensym/2 if not current_module/2.
+  The loader generates the name of the module that the file is loaded to.
+  module/2 is anti-pattern.
+- name mangling like what C++ does on top of C; generated module names
+- Pengines to separate the worlds?
+- Logtalk
+
+We want to state these facts:
+- This file imports predicate P from file F,
+  because a predicate in this file calls/uses/depends-on that predicate P defined in that file F.
+
+We came up with the import/2 directive.
+
+#+BEGIN_EXAMPLE
+import(+Source, +Preds) is det.
+#+END_EXAMPLE
+
+import(Source, Specs) means that this file requires some things from Source.
+
+Source may be:
+- =file(Path)= where =Path= is a path to a file.
+  Relative paths are resolved against the file that contains the import/2 directive.
+
+Specs is a list of Spec.
+
+Pred is a Name/Arity.
+
+Spec may be:
+- =Name/Arity=
+- =Name/Arity as Alias=
+- =multifile(Name/Arity)= is a "reverse-import"
+- =multifiles(Preds)=
+
+One day someone may make it possible for Source to be =github(...)= or =pack(...)=.
+
+Not implemented:
+importing operators like SWI-Prolog 7.6.4 use_module/2.
+#+BEGIN_EXAMPLE
+use_module(..., [
+    op(_,_,#<)
+]).
+#+END_EXAMPLE
+
+Prolog expansion has some problems.
+ [fn::https://blog.logtalk.org/2011/03/a-more-sane-implementation-of-the-term-expansion-mechanism/]
+
+Moura 2003 \cite{pmoura2003logtalk}: "The first time I felt the need for strong encapsulation features in Prolog was during my final year undergraduate project, in 1989."
 * Documentation of my source code
 ** Convenient Prolog HTML Expression
 CPH stands for Convenient Prolog HTML.
@@ -1512,6 +1591,8 @@ If you have a query =goal(List)= where =List= is a list,
 then you can query =length(List, _), goal(List)= to make the search complete.
 
 https://en.wikibooks.org/wiki/Prolog/Search_techniques
+** Some history
+http://www.prolog-heritage.org/en/ph1.html
 * What mess?
 ** Ramble: Translating Prolog to native code?
 The idea is to relate a Prolog predicate and a C routine.

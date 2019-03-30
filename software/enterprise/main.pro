@@ -1,6 +1,6 @@
 :- documentation:consult("library/java_program_doc.pro").
 
-:- use_module("syntax.pro",[]).
+:- include("syntax.pro").
 :- use_module("language/pal_interpreter.pro",[]).
 
 :- debug. % disable optimization, retain full stack trace

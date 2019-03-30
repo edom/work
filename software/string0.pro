@@ -1,8 +1,3 @@
-:- module(string0, [
-    strings_join/2
-    , strings_separator_join/3
-]).
-
 /** strings_join(Strings, String)
 
 Strings is input.

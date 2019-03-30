@@ -1,13 +1,22 @@
 % -------------------- things to be tested
 
-:- consult_unregistered_into_module("html_cphe.pro", html_cphe).
-:- consult_unregistered_into_module("sketch_application.pro", sketch_application).
+:- import(file("html_cphe.pro"),[
+    cphe_ast/2
+    , cphe_string/2
+]).
+:- import(file("sketch_application.pro"),[
+    start_http_server/0
+    , check_web_app/0
+]).
+:- import(file("enterprise/library/sql.pro"),[
+    sql_ddl_create_table/2
+]).
 
 % -------------------- the tests themselves
 
 test(html_cphe_attribute) :-
     Exp = p(a=b, "T", c=d, b("U", "V")),
-    html_cphe:cphe_ast(Exp, Ast),
+    cphe_ast(Exp, Ast),
     pretty(Exp), nl,
     pretty(Ast), nl,
     actual_expected(
@@ -17,21 +26,29 @@ test(html_cphe_attribute) :-
 
 test(html_cphe_string) :-
     Exp = a(href="foo.png", "The image"),
-    html_cphe:cphe_string(Exp, Str),
+    cphe_string(Exp, Str),
     pretty(Exp), nl,
     write(Str), nl.
 
 test(html_cphe_string_empty_tag) :-
     Exp = img(src="foo.png", alt="bar"),
-    html_cphe:cphe_string(Exp, Str),
+    cphe_string(Exp, Str),
     pretty(Exp), nl,
     write(Str), nl.
 
 test(html_cphe_document) :-
     Exp = ['!doctype'(html), html(head(title("Title")), body(p("Paragraph")))],
-    html_cphe:cphe_string(Exp, Str),
+    cphe_string(Exp, Str),
     pretty(Exp), nl,
     write(Str), nl.
+
+test(check_web_app) :-
+    check_web_app.
+
+test(sql_ddl_create_table) :-
+    forall(sql_ddl_create_table(_, Sql), (
+        write(Sql), nl
+    )).
 
 % -------------------- running the tests
 

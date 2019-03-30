@@ -3,6 +3,7 @@
 % structure
 :- multifile class/1.
 :- multifile class_property/2.
+:- multifile class_property_type/3.
 
 % globalization
 :- multifile globalization_locale/1.
@@ -10,6 +11,22 @@
 
 % static file serving
 :- multifile urlpath_filepath_type/3.
+
+% -------------------- operation
+
+start_http_server :- http_server(dispatch, [port(4003)]).
+
+% -------------------- private
+
+% -------------------- linking
+
+:- import(file("enterprise/library/sql.pro"),[
+    multifiles([
+        class/1
+        , class_property/2
+        , class_property_type/3
+    ])
+]).
 
 % -------------------- syntax
 
@@ -19,7 +36,7 @@
 
 % -------------------- globalization
 
-request_locale(_, ind).
+request_locale(_, eng).
 
 cphe_globalize(L, #globalize(A), Z) :- !, term_loc_str(A, L, Z).
 cphe_globalize(L, A=B, Z) :- !, Z = (A=B0), cphe_globalize(L, B, B0).
@@ -221,9 +238,8 @@ read_property(C, P, V) :-
 %:- set_setting(http:client_backtrace, false).
 :- set_setting(http:client_backtrace, true). % DEBUG
 
-:- consult_unregistered("html_cphe.pro").
-
-web :- http_server(dispatch, [port(4003)]).
+:- import(file("html_cphe.pro"),[
+]).
 
 request_parameter_get(Request, Key, Value) :-
     member(search(Gets), Request),
@@ -292,6 +308,10 @@ pageexp_interpret(_, _, Exp, _) :- !,
 formdata_objprop(A=B, Z) :- !, Z = A-B.
 formdata_objprop(A, _) :- type_error(form_data, A).
 
+database_view(Cls, Table) :-
+    findall(Obj, database(Cls,_,Obj), Objs),
+    objects_html_table(Cls, Objs, Table).
+
 % Serve static files.
 dispatch(Request) :-
     member(method(get), Request),
@@ -321,14 +341,14 @@ dispatch(Request) :-
 dispatch(Request) :-
     member(method(get), Request),
     member(path('/'), Request),
-    findall(Obj, database(person,_,Obj), Objs),
-    objects_html_table(person, Objs, Table),
+    database_view(person, Table),
     http_parameters(Request, [
         x(X,[integer,default(0)])
         , y(Y,[integer,default(0)])
     ]),
     Z is X + Y,
-    class_html_create_form(person, SampleCreate),
+    findall(Form, (class(Cls),class_html_create_form(Cls,Form)), SampleCreate),
+    %class_html_create_form(person, SampleCreate),
     pageexp_interpret_0(Request, (
         title := "Title"
         , html(
@@ -366,11 +386,20 @@ dispatch(Request) :-
 
 % -------------------- check
 
-unregistered_locale(L) :-
+error(missing_class(C)) :-
+    class_property(C, _),
+    \+ class(C).
+
+error(missing_property_type(C,P)) :-
+    class(C),
+    class_property(C, P),
+    \+ class_property_type(C, P, _).
+
+error(unregistered_locale(L)) :-
     term_locale_string(_, L, _),
     \+ globalization_locale(L).
 
-missing_globalization(T, L2) :-
+error(missing_globalization(T,L2)) :-
     globalization_locale(L1),
     globalization_locale(L2),
     L1 \= L2,
@@ -379,20 +408,14 @@ missing_globalization(T, L2) :-
 
 % -------------------- check
 
+check_web_app :- \+ error(_), !.
 check_web_app :-
-    \+ unregistered_locale(_),
-    \+ missing_globalization(_,_),
-    !.
-
-check_web_app :-
-    unregistered_locale(L),
-    print_message(warning, unregistered_locale(L)),
+    error(E),
+    print_message(error, E),
     fail.
 
-check_web_app :-
-    missing_globalization(T, L),
-    print_message(warning, missing_globalization(T,L)),
-    fail.
+prolog:message(missing_property_type(C,P)) -->
+    ["class_property_type/3 clause is missing for class ~w property ~w"-[C,P]].
 
 prolog:message(unregistered_locale(L)) -->
     ["globalization_locale/1 clause is missing for locale ~w"-[L]].

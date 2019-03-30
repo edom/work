@@ -13,7 +13,9 @@ Types:
 :- use_module(library(http/http_error)).
 :- use_module('./list.pro').
 :- use_module('./map.pro').
-:- use_module('./string0.pro').
+:- import(file("string0.pro"),[
+    strings_separator_join/3
+]).
 :- use_module('./website.pro', [start_http/1, content_html/2]).
 :- use_module('./ps1_basic_block.pro').
 :- use_module('./ps1_bit.pro').
