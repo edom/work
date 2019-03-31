@@ -11,24 +11,28 @@ system:term_expansion(:- import(Src,Imps), Exps) :-
     load_source_once(Src, Mod),
     findall(Exp, (member(Imp,Imps), import_expansion(Mod,Imp,Exp)), Exps).
 
+% -------------------- actual loading of sources
+
+% Keep track of loaded files.
 :- dynamic module_file/2.
 
 load_source_once(file(Rel), Mod) :- !,
     prolog_load_context(file, Src),
     absolute_file_name(Rel, Abs, [relative_to(Src)]),
-    abs_load_once(Abs, Mod).
+    (module_file(Mod, Abs)
+    ->  true
+    ;   gensym('genmod', Gen),
+        file_base_name(Abs, FileName),
+        file_name_extension(Base, _, FileName),
+        atomic_list_concat([Gen,'_',Base], Mod),
+        debug(load, "abs_load_once: loading file ~w into ~w", [Abs,Mod]),
+        '@'(system:load_files(Abs,[module(Mod)]), Mod),
+        assertz(module_file(Mod,Abs))
+    ).
 
 load_source_once(A, _) :- !, type_error(import_source, A).
 
-abs_load_once(Abs, Mod) :- module_file(Mod, Abs), !.
-abs_load_once(Abs, Mod) :- !,
-    gensym('genmod', Gen),
-    file_base_name(Abs, FileName),
-    file_name_extension(Base, _, FileName),
-    atomic_list_concat([Gen,'_',Base], Mod),
-    debug(load, "abs_load_once: loading file ~w into ~w", [Abs,Mod]),
-    '@'(system:load_files(Abs,[module(Mod)]), Mod),
-    assertz(module_file(Mod,Abs)).
+% -------------------- import_expansion/2
 
 import_expansion(Mod, Name/Arity, Exp) :- !,
     check_predicate(defined(Mod:Name/Arity)),
