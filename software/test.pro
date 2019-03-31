@@ -11,6 +11,9 @@
 :- import(file("enterprise/library/sql.pro"),[
     sql_ddl_create_table/2
 ]).
+:- import(file("sketch_browser.pro"),[
+    browser/1
+]).
 
 % -------------------- the tests themselves
 
