@@ -1173,6 +1173,8 @@ test(multiplication) :-
 
 ?- test_all.
 #+END_EXAMPLE
+
+What is this library for unit testing?[fn::[[http://www.swi-prolog.org/pldoc/doc_for?object=section(%27packages/plunit.html%27)]]]
 ** Why do we need predicates at all if we can do with one unary predicate?
 #+BEGIN_EXAMPLE
 :- op(600,xfy,:).
@@ -1258,6 +1260,47 @@ We want to state these facts:
 
 We came up with the import/2 directive.
 
+Prolog expansion has some problems.
+ [fn::https://blog.logtalk.org/2011/03/a-more-sane-implementation-of-the-term-expansion-mechanism/]
+
+Moura 2003 \cite{pmoura2003logtalk}: "The first time I felt the need for strong encapsulation features in Prolog was during my final year undergraduate project, in 1989."
+
+This SWI-Prolog Google Groups discussion thread[fn::https://groups.google.com/forum/#!searchin/swi-prolog/clash$20module%7Csort:date/swi-prolog/f8LpJN8MYm0/uUYfUmN5AgAJ] is relevant.
+
+Module is about namespacing.
+
+We want to say that "The mypred/3 in file1 is the same as the yourpred/3 in file2."
+** A clash-free module system
+Where should we publish this to?
+- Post in SWI-Prolog Discourse group https://swi-prolog.discourse.group
+- Open an issue in SWI-Prolog Roadmap https://github.com/SWI-Prolog/roadmap
+
+The key idea is simple:
+- A file must not contain any module names.
+- The loader generates a module name.
+
+I have a working code in [[https://github.com/edom/work/blob/73287e1e0c2c9c1100258b7d422f8d64aea111a0/software/boot/load.pro][boot/load.pro]].
+It defines an =import/2= directive using =term_expansion/2=.
+An example usage looks like this:
+#+BEGIN_EXAMPLE
+:- import("somefile.pl",[
+    pred/1
+    , run/0 as somefile_run
+]).
+#+END_EXAMPLE
+
+This is only one possibility in the design space of clash-free modules.
+Another solution is Logtalk.
+There may also be other solutions.
+
+Examples of other languages with clash-free module systems are JavaScript and TypeScript.
+
+It is a good idea to standardize a clash-free module system before Prolog becomes too big.
+Imagine there were 100,000 SWI-Prolog packs: There would be naming conflicts.
+Let us learn from the Haskell community's complaints with Haskell's module system,
+and do it right before it becomes too painful.
+Let us be prepared for success!
+
 #+BEGIN_EXAMPLE
 import(+Source, +Preds) is det.
 #+END_EXAMPLE
@@ -1278,7 +1321,8 @@ Spec may be:
 - =multifile(Name/Arity)= is a "reverse-import"
 - =multifiles(Preds)=
 
-One day someone may make it possible for Source to be =github(...)= or =pack(...)=.
+One day someone may make it possible for Source to be =github(...)= or =pack(...)=,
+but perhaps we should not do that because it will increase compilation time.
 
 Not implemented:
 importing operators like SWI-Prolog 7.6.4 use_module/2.
@@ -1288,10 +1332,8 @@ use_module(..., [
 ]).
 #+END_EXAMPLE
 
-Prolog expansion has some problems.
- [fn::https://blog.logtalk.org/2011/03/a-more-sane-implementation-of-the-term-expansion-mechanism/]
-
-Moura 2003 \cite{pmoura2003logtalk}: "The first time I felt the need for strong encapsulation features in Prolog was during my final year undergraduate project, in 1989."
+Not implemented:
+importing DCG rules like foo//1.
 * Documentation of my source code
 ** Convenient Prolog HTML Expression
 CPH stands for Convenient Prolog HTML.
@@ -1517,6 +1559,8 @@ Approaches for Learning Prolog Programming
 https://www.tandfonline.com/doi/full/10.11120/ital.2007.06040088
 
 [[http://kti.ms.mff.cuni.cz/~bartak/prolog/index.html][Roman Barták's "On-line Guide to Prolog Programming"]]
+
+https://www.cis.upenn.edu/~matuszek/Concise%20Guides/Concise%20Prolog.html
 * Ideas to flesh out?
 ** Prolog should use three-valued logic?
 Suppose that both A and B are unbound variables.
@@ -1593,6 +1637,15 @@ then you can query =length(List, _), goal(List)= to make the search complete.
 https://en.wikibooks.org/wiki/Prolog/Search_techniques
 ** Some history
 http://www.prolog-heritage.org/en/ph1.html
+** Saving PCE/XPCE by porting it as much as possible to pure Prolog
+PCE/XPCE is surprisingly modern?
+PCE catch_all is Ruby method_missing.
+
+- Rewrite the C parts in ISO Prolog.
+- Build on GTK.
+
+One problem is that PCE is not Prolog-only.
+In principle, PCE may also be used with any host language, such as Lisp and C.
 * What mess?
 ** Ramble: Translating Prolog to native code?
 The idea is to relate a Prolog predicate and a C routine.
