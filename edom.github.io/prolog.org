@@ -5,7 +5,8 @@
 #+TOC: headlines 1
 * Before you go full Prolog
 #+TOC: headlines 2 local
-** <2018-11-30> This is a book in progress! I don't know whether I will ever finish this.
+** <2018-11-30> This is a book in progress!
+I don't know whether I will ever finish this.
 ** Who might you be? How might this book serve you?
 - a programmer used to C, C++, Java, PHP, Ruby, Python
 - a programmer used to Lisp, Scheme, Haskell
@@ -708,31 +709,19 @@ exp_val(S, T) :- number(S), !, S = T.
 exp_val(A+B, C) :- string(A), string(B), !, string_concat(A, B, C).
 exp_val(A+B, C) :- number(A), number(B), !, C is A+B.
 #+END_EXAMPLE
-** Declarative GUI?
-It is easy to model the /static/ structure of a GUI:
-#+BEGIN_EXAMPLE
-window(main).
-textbox(a).
-textbox(b).
-textbox(c).
-contain(main,a).
-contain(main,b).
-contain(main,c).
-#+END_EXAMPLE
+** The meaning of a pure Prolog predicate
+The meaning of a predicate is the set of all ground terms that satisfy that predicate.
+Formally, the meaning of the predicate \(p\) is the set \( \SetBuilder{x}{p(x)} \).
+Such set is called the /extension/[fn::https://en.wikipedia.org/wiki/Extension_(predicate_logic)] of the predicate.
 
-It is harder to model the /dynamic/ behavior of a GUI.
+In this example, what is the meaning of t/2 supposed to be?
+Declaratively, the query =?- t(A,B)= means the finite set ={(1,1)}=, and thus the query should terminate.
+But with SLD-resolution operational semantics, the query does not terminate.
 #+BEGIN_EXAMPLE
-textbox_text(c,C) :-
-    textbox_text(a,A),
-    textbox_text(b,B),
-    string_concat(A,B,C).
-#+END_EXAMPLE
+e(1,1).
 
-#+BEGIN_EXAMPLE
-constraint(text(c) = text(a) + text(b)).
+t(A,B) :- e(A,M), t(M,B).
 #+END_EXAMPLE
-
-Logical reactive programming?
 * Imperative Prolog, and other ugly things
 Some ugly things are unfortunately necessary.
 There are always some dirty jobs in real-world programming.
@@ -770,10 +759,11 @@ Enhancing the declarativeness of Prolog requires /memoization/.
 
 What is the relationship between logic programming, relational programming, logic, Horn clauses, theorem proving, searching, and backtracking?
 
+If each phrase is deterministic (always succeeds exactly once and never fails),
+then Prolog becomes a procedural programming language with assign-once variables and unification.
 ** Prolog operational semantics
-*** Swapped phrases
-There is only a small syntactic difference between =dfs= and =bfs= (it's just flipped order).
-
+*** Swapped phrases, depth-first, breadth-first
+In this example, there is only a small syntactic difference between =dfs= and =bfs= (it's just flipped order).
 Which one exploits tail call optimization (last call optimization)?
 #+BEGIN_SRC prolog
 bit(0).
@@ -883,11 +873,15 @@ See also:
 ** Cuts
 - slide 5-28, pitfalls in implementing abs with cut http://users.informatik.uni-halle.de/~brass/lp06/c5_propr.pdf
 ** Speeding things up
-*** Profiling: finding where your program spends time; finding where it is slow; diagnosing slowness
+The first thing to do is to get an unbiased profiler.
+
+(Is SWI-Prolog profiler unbiased?)
+
+Profiling: finding where your program spends time; finding where it is slow; diagnosing slowness
+
 To run your =Goal= with profiling, simply query =profile(Goal)=.
 
 Profiling couldn't be any simpler than this!
-
 ** Functional/expression style sometimes beats relational/unification style
 #+BEGIN_EXAMPLE
 -- Functional/expression style
@@ -919,11 +913,11 @@ Dynamic languages (Scheme, JavaScript, Prolog) / gradual-typed languages (TypeSc
 How about Ocaml polymorphic variants?
 
 Should we move from Prolog to Scheme/miniKanren or Mercury?
-** Directives like =:- op= complicate parsing a Prolog source code.
+** Operators complicate parsing a Prolog source code
 ** Zero-arity compound term
-Use compound_name_arity/3 instead of functor/3, but this seems to be an SWI-Prolog extension.
+SWI-Prolog extension compound_name_arity/3 vs ISO standard functor/3.[fn::http://www.swi-prolog.org/pldoc/man?section=ext-compound-zero]
 
-http://www.swi-prolog.org/pldoc/man?section=ext-compound-zero
+It is embarrassing that we have known zero for at least 2,000 years and yet we still have problems with zero.
 ** Some Prolog negation tricks?
 Prolog =\+= can be used to limit the scope of unification, although not the scope of the variable itself.
 This exploits the fact that throw/1 does not backtrack in the way fail/0 does.
@@ -1021,6 +1015,110 @@ Usability issues:
   I found that by looking at others' source code.
   There does not seem to be any documentation, or if there is, then it is at the wrong place.
 - Why do we require people to understand DCG rules before they can use the messaging system?
+* Graphical-user-interface programming
+** <2019-04-02> What are the options?
+There are two options for doing GUI in SWI-Prolog:
+- PCE: an abstraction layer like GNOME from the 1990s
+- plgi[fn::http://www.swi-prolog.org/pack/list?p=plgi]: a SWI-Prolog pack containing bindings to Gtk
+
+The future of XPCE is uncertain, but all the SWI-Prolog IDE components use it.[fn::https://github.com/SWI-Prolog/roadmap/issues/29]
+It works; it's just not shiny.
+Design sensibilities have changed due to new hardware.
+
+PCE is an abstraction layer like GNOME.
+It has an object system like GObject, a drawing-primitive system like Gdk, and GUI toolkit like Gtk.
+
+PCE is written in C.
+
+XPCE is PCE + SWI-Prolog bindings.
+
+#+BEGIN_EXAMPLE
+:- use_module(library(pce),[
+    new/2
+    , free/1
+    , get/3
+    , send/2
+]).
+:- use_module(library(pce_util),[
+    send_list/3
+]).
+#+END_EXAMPLE
+
+The predicates are:
+- new(-Object, +Class) is det.
+- free(+Object) is det.
+- send(+Object, +MessageExp) is det.
+- get(+Object, +MessageExp, -Result) is det.
+
+A convenience predicate:
+- send_list(+Object, +Slot, +Args) is det.
+
+XPCE /object expression/ (message expression?) syntax is documented in XPCE User Guide section 10.2 ("Executable objects")[fn::http://www.swi-prolog.org/packages/xpce/UserGuide/exeobjects.html]:
+- =@Name= global object
+- =A ? B= obtainer ("getter" in Java parlance)
+
+PCE is similar to C Gtk or Java Swing.
+They are all object-oriented.
+** Enlarge the fonts
+XPCE was made in the 1990s when 800x600 screens were common.
+In 2019, 1920x1080 screens are common.
+
+The easiest way to set up the XPCE Defaults file is by PceEmacs.
+#+BEGIN_EXAMPLE
+?- emacs.
+#+END_EXAMPLE
+
+Edit > Editor preferences
+
+Increment each number in "display.system_fonts" chain by 2 (thus replace 12 with 14, replace 13 with 15, and so on).
+
+Save the file, exit PceEmacs, and restart the Prolog interpreter.
+** Saving PCE/XPCE by porting it as much as possible to pure Prolog?
+PCE/XPCE is surprisingly modern?
+PCE =catch_all= is Ruby method_missing.
+But perhaps this is not surprising because both PCE and Ruby take something from Smalltalk, directly or indirectly.
+
+Need to be done:
+- Write a shorter user guide.
+  Write about the things that the user really needs to care about.
+  People are impatient.
+  Life is short.
+- Integrate XPCE documentation system and PlDoc documentation system.
+- Make manpce use one frame instead of many frames.
+  Compare GIMP before single-window layout.
+
+Nice to have?
+- Rewrite the C parts in ISO Prolog.
+- Build on GTK.
+
+One problem is that PCE is not Prolog-only.
+In principle, PCE may also be used with any host language, such as Lisp and C.
+** Declarative GUI?
+It is easy to model the /static/ structure of a GUI:
+#+BEGIN_EXAMPLE
+window(main).
+textbox(a).
+textbox(b).
+textbox(c).
+contain(main,a).
+contain(main,b).
+contain(main,c).
+#+END_EXAMPLE
+
+It is harder to model the /dynamic/ behavior of a GUI.
+#+BEGIN_EXAMPLE
+textbox_text(c,C) :-
+    textbox_text(a,A),
+    textbox_text(b,B),
+    string_concat(A,B,C).
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+constraint(text(c) = text(a) + text(b)).
+#+END_EXAMPLE
+
+Logical reactive programming?
+
 * Maintaining large knowledge bases
 ** What is software maintenance?
 Software does not break down like machines.
@@ -1047,7 +1145,7 @@ Stable dependencies principle[fn::http://wiki.c2.com/?StableDependenciesPrincipl
 
 How to write a program that does not change?
 It must capture the timeless essence of reality.
-A bachelor is unmarried by definition, and that definition is not going to change.
+A bachelor is unmarried by definition, and that definition is unlikely to change.
 ** A suggested way to use Prolog for programming in the large?
 Begin by defining an ontology or domain-specific language.
 This is pure Prolog with declarative semantics.
@@ -1078,6 +1176,8 @@ interpret(A, Z) :- string(A), !, Z = A.
 interpret(A, _) :- !, type_error(expression, A).
 #+END_EXAMPLE
 
+Always use explicit imports and exports.
+Help =grep= help us.
 ** Disciplines for writing large maintainable Prolog knowledge bases
 Some disciplines are required:
 - Separate declarative and imperative codes.
@@ -1270,17 +1370,35 @@ This SWI-Prolog Google Groups discussion thread[fn::https://groups.google.com/fo
 Module is about namespacing.
 
 We want to say that "The mypred/3 in file1 is the same as the yourpred/3 in file2."
-** A clash-free module system
+** <2019-04-02> Draft: SWI-Prolog roadmap suggestion: A clash-free module system
+*** About this draft
+The target audience is the SWI-Prolog maintainer, Jan Wielemaker.
+
+I wish to convince Jan that we must have a clash-free module system
+so that we do not become the victim of our own success when Prolog becomes mainstream.
+
+I wish to see such module system standardized and implemented.
+
 Where should we publish this to?
 - Post in SWI-Prolog Discourse group https://swi-prolog.discourse.group
 - Open an issue in SWI-Prolog Roadmap https://github.com/SWI-Prolog/roadmap
+*** The problem: We could be a victim of our own success if we don't act
+We must standardize a clash-free module system before we have too many users.
+Imagine that there were 10,000 SWI-Prolog packs: There would be naming conflicts.
+We can learn from the Haskell community's complaints with Haskell's module system,
+and do it right before it becomes too painful.
+Let us prepare, so that we do not become a victim of our own success.
+*** Criteria of a satisfactory solution
+A solution is satisfactory iff many people can write many Prolog libraries without name clashes.
+*** A possible solution
+I am proposing these constraints:
+- A file must not contain any module names/references.
+- use_module/2 must ignore its first argument (the module name).
+- Dependency must be specified by file paths and not module names.
 
-The key idea is simple:
-- A file must not contain any module names.
-- The loader generates a module name.
-
-I have a working code in [[https://github.com/edom/work/blob/73287e1e0c2c9c1100258b7d422f8d64aea111a0/software/boot/load.pro][boot/load.pro]].
+I have a working code in [[https://github.com/edom/work/blob/master/software/boot/load.pro][boot/load.pro]].
 It defines an =import/2= directive using =term_expansion/2=.
+The loader generates module names.
 An example usage looks like this:
 #+BEGIN_EXAMPLE
 :- import("somefile.pl",[
@@ -1288,43 +1406,22 @@ An example usage looks like this:
     , run/0 as somefile_run
 ]).
 #+END_EXAMPLE
-
-This is only one possibility in the design space of clash-free modules.
-Another solution is Logtalk.
-There may also be other solutions.
-
-Examples of other languages with clash-free module systems are JavaScript and TypeScript.
-
-It is a good idea to standardize a clash-free module system before Prolog becomes too big.
-Imagine there were 100,000 SWI-Prolog packs: There would be naming conflicts.
-Let us learn from the Haskell community's complaints with Haskell's module system,
-and do it right before it becomes too painful.
-Let us be prepared for success!
-
-#+BEGIN_EXAMPLE
-import(+Source, +Preds) is det.
-#+END_EXAMPLE
-
-import(Source, Specs) means that this file requires some things from Source.
+*** The semantics of the import/2 directive
+The presence of an =:- import(Source, Specs)= in a file means that the file requires some things from Source.
 
 Source may be:
-- =file(Path)= where =Path= is a path to a file.
-  Relative paths are resolved against the file that contains the import/2 directive.
+- =file(Path)= where =Path= is a relative path to a file.
+  This path is resolved against the file that contains the import/2 directive.
 
 Specs is a list of Spec.
-
-Pred is a Name/Arity.
 
 Spec may be:
 - =Name/Arity=
 - =Name/Arity as Alias=
-- =multifile(Name/Arity)= is a "reverse-import"
-- =multifiles(Preds)=
+- =multifile(Name/Arity)=: a "reverse-import"
+- =multifiles(Preds)= where each Pred is a Name/Arity
 
-One day someone may make it possible for Source to be =github(...)= or =pack(...)=,
-but perhaps we should not do that because it will increase compilation time.
-
-Not implemented:
+Not yet implemented:
 importing operators like SWI-Prolog 7.6.4 use_module/2.
 #+BEGIN_EXAMPLE
 use_module(..., [
@@ -1332,8 +1429,17 @@ use_module(..., [
 ]).
 #+END_EXAMPLE
 
-Not implemented:
+Not yet implemented:
 importing DCG rules like foo//1.
+
+One day someone may make it possible for Source to be =github(...)= or =pack(...)=,
+but perhaps we should not do that because it will increase compilation time.
+*** Other possibilities
+This is only one possibility in the design space of clash-free modules.
+Another solution is Logtalk.
+There may also be other solutions.
+
+Examples of other languages with clash-free module systems are JavaScript and TypeScript.
 * Documentation of my source code
 ** Convenient Prolog HTML Expression
 CPH stands for Convenient Prolog HTML.
@@ -1386,6 +1492,68 @@ An example of a document:
 Do not conflate atoms and strings.
 Atoms translate to empty elements.
 Strings translate to escaped texts.
+** SQL-Prolog integration sketch
+The source file is =sql.pro=.
+
+The key idea is a Prolog predicate that succeeds once for each row in a corresponding SQL table.
+What if we can access a SQL table as if it were a Prolog predicate?
+
+The dream is seamless integration between Prolog and SQL databases.
+Seamless SQL-backed Prolog predicates.
+
+Several design choices:
+- seamless/proxy-predicate approach: a predicate that uses a connection pool;
+  use "proxy" predicates with odbc_query/3; an SQL table with N columns is represented by a predicate with arity N
+- dynamic-predicate approach: populate dynamic predicates with data from table
+- optimizer-interpreter that works for both Prolog databases and SQL databases; an SQL table is modeled by a term table(Id,Cols)
+- The "persistency" library for persistent dynamic predicates[fn::http://www.swi-prolog.org/pldoc/man?section=persistency]
+
+We want to push the filter condition to SQL.
+We want to filter as close as possible to the source as much as possible.
+We want to minimize the amount of data transferred over the network.
+We want to move the computation?
+We want to run Prolog on the SQL database?
+#+BEGIN_EXAMPLE
+employee(E), employee_age(E,A), A >= 30
+#+END_EXAMPLE
+
+Warren 1999: "Prolog is an elegant language for database queries.
+In fact if one constrains Prolog programs to use only atoms, integers and reals (no lists or complex terms) and disallows recursive definitions,
+one gets a database language that is equivalent to a powerful subset of SQL."[fn::https://www3.cs.stonybrook.edu/~warren/xsbbook/node11.html]
+
+#+BEGIN_EXAMPLE
+% employee(Id, Name, Age)
+
+query :- interpret((table_row(employee,E), row_column_value(E,age,Age), Age >= 20)).
+#+END_EXAMPLE
+
+Models of SQL SELECT statements:
+- select(Table, Columns, Opts) where Opts is the optional parts (WHERE clause)
+  - Column is an atom or an "Column as Alias"
+
+#+BEGIN_EXAMPLE
+select(information_schema:columns
+    , [table_name as table, column_name as column, column_type as type]
+    , [
+        where(column_type = "integer")
+        , order_by([asc(table)])
+    ])
+#+END_EXAMPLE
+
+For testing (Do not do this on public/production server):
+#+BEGIN_EXAMPLE
+CREATE USER test PASSWORD 'test';
+CREATE DATABASE test OWNER test;
+#+END_EXAMPLE
+
+Other systems:
+- CQL[fn::http://www.swi-prolog.org/pldoc/man?section=cql] (Constraint Query Language) encloses its DSL expression in braces.
+
+"There have been some Prolog systems in the past that could store predicates on a file."[fn::https://swi-prolog.discourse.group/t/scaling-to-billions-of-facts/380/2]
+** Documentation system
+PlDoc <module> documentation should be taken to mean <file> documentation:
+It is files that are documented, not modules.
+
 * Theories
 ** Relational-multidirectional-logic programming?
 ** Embedding Prolog/Haskell in Haskell/Prolog
@@ -1449,6 +1617,13 @@ Did logic programming emerge from automated theorem proving?
 Kowalski's[fn::https://en.wikipedia.org/wiki/Robert_Kowalski] insight is the procedural interpretation of Horn clauses.
 
 What is "refutation-complete"[fn::https://en.wikipedia.org/wiki/SLD_resolution]?
+** What
+Programming can be thought as applied mathematics.
+
+Prolog can be approached from logic, database theory, philosophy
+
+In Prolog, by default, function symbols mean themselves,
+and this gives us freedom to write interpreters to interpret function symbols differently.
 * <2018-12-05> How to present Prolog to newcomers
 This is a draft.
 These are slides.
@@ -1561,6 +1736,8 @@ https://www.tandfonline.com/doi/full/10.11120/ital.2007.06040088
 [[http://kti.ms.mff.cuni.cz/~bartak/prolog/index.html][Roman Barták's "On-line Guide to Prolog Programming"]]
 
 https://www.cis.upenn.edu/~matuszek/Concise%20Guides/Concise%20Prolog.html
+
+display/1 vs write_canonical/2? https://swi-prolog.discourse.group/t/re-swipl-re-pedagogy/48/10
 * Ideas to flesh out?
 ** Prolog should use three-valued logic?
 Suppose that both A and B are unbound variables.
@@ -1637,15 +1814,13 @@ then you can query =length(List, _), goal(List)= to make the search complete.
 https://en.wikibooks.org/wiki/Prolog/Search_techniques
 ** Some history
 http://www.prolog-heritage.org/en/ph1.html
-** Saving PCE/XPCE by porting it as much as possible to pure Prolog
-PCE/XPCE is surprisingly modern?
-PCE catch_all is Ruby method_missing.
+** Object-oriented programming in Prolog?
+https://stackoverflow.com/questions/28154041/objected-oriented-programming-in-swi-prolog
+** Discourse is interesting
+Discourse[fn::https://www.discourse.org] reputation system is an example of using software
+to enforce a policy that creates a system that self-heals against attacks.
 
-- Rewrite the C parts in ISO Prolog.
-- Build on GTK.
-
-One problem is that PCE is not Prolog-only.
-In principle, PCE may also be used with any host language, such as Lisp and C.
+I should put it in my open-source page somewhere.
 * What mess?
 ** Ramble: Translating Prolog to native code?
 The idea is to relate a Prolog predicate and a C routine.
