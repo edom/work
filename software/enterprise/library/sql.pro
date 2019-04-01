@@ -69,3 +69,88 @@ sql_ddl_column(Cls, Prop, Sql) :-
     class_property_type(Cls, Prop, Type),
     type_sqltype(Type, SqlType),
     format(string(Sql), "~n~4|~w ~w NOT NULL", [Prop,SqlType]).
+
+% -------------------- database
+
+:- use_module(library(odbc),[
+    odbc_driver_connect/3
+]).
+
+:- multifile opv/3.
+
+:- op(100,fx,#).
+
+get(O,P,V) :- \+ opv(O,P,V), !, existence_error(opv, opv(O,P,V)).
+get(O,P,V) :- opv(O,P,V).
+
+eval(A ? B, Z) :- !, get(A,B,Z).
+eval(A + B, Z) :- !, eval(A,A0), eval(B,B0), string_concat(A0,B0,Z).
+eval(A, Z) :- string(A), !, A = Z.
+eval(A, _) :- !, type_error(exp, A).
+
+test :-
+    ensure(describes(con,Con)),
+    do_something_with(Con),
+    ensure_not(_).
+
+% -------------------- connection management
+
+:- dynamic known/1.
+:- multifile force/1.
+:- multifile force_not/1.
+
+ensure(A) :- known(A), !.
+ensure(A) :- deterministically(force(A)), !, assertz(known(A)).
+
+% Problem: If force_not/1 throws an exception,
+% then the known/1 fact may never be retracted.
+ensure_not(A) :- known(A), !, deterministically(force_not(A)), retract(known(A)).
+ensure_not(_).
+
+force(describes(Rep,Con)) :-
+    get(Rep, #class, connection),
+    conrep_debugstr(Rep, Debug),
+    debug(sql_connect, "sql_connect: Connecting to ~w", [Debug]),
+    eval(
+        "DRIVER=" + "{PostgreSQL Unicode}"
+        + ";Server=" + Rep?host
+        + ";Port=" + Rep?port
+        + ";Database=" + Rep?catalog
+        + ";UID=" + Rep?username + ""
+        + ";PWD=" + Rep?password + ""
+        , Dsn
+    ),
+    odbc_driver_connect(Dsn, Con, []).
+
+force_not(describes(Rep,Con)) :-
+    conrep_debugstr(Rep, Debug),
+    debug(sql_connect, "sql_connect: Disconnecting from ~w", [Debug]),
+    odbc_disconnect(Con).
+
+:- debug(sql_connect). % DEBUG
+
+conrep_debugstr(Rep, Debug) :-
+    get(Rep, #class, connection),
+    eval(Rep?username + "@" + Rep?host + ":" + Rep?port + ":/" + Rep?catalog, Debug).
+
+close_all_connections :-
+    forall(known(describes(Rep,Con)),
+        ensure_not(describes(Rep,Con))).
+
+:- dynamic con_sch_tab_row/4.
+
+do_something_with(Con) :-
+    retractall(con_sch_tab_row/4),
+    Sql = 'SELECT table_catalog, table_schema, table_name, column_name, data_type FROM information_schema.columns',
+    forall((functor(Row,row,5), odbc_query(Con,Sql,Row)),
+        assertz(con_sch_tab_row(con, information_schema, columns, Row))
+    ).
+
+opv(con, P, V) :- member(P-V,[
+    #class-connection
+    , host-localhost
+    , port-5432
+    , catalog-test
+    , username-test
+    , password-test
+]).

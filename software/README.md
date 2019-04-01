@@ -41,4 +41,6 @@ Open http://localhost:4002/pldoc/
 
 ## To-do
 
-- SQL DDL escaping
+- sql.pro:
+    - escape SQL DDL
+    - escape ODBC DSN
