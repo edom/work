@@ -1,3 +1,5 @@
+% deprecated; use load.pro
+
 /** <module> Tailoring SWI-Prolog module system to our requirements
 
 Usage:

@@ -1,6 +1,5 @@
-:-  include("module.pro").
-:-  consult("debug.pro").
-:-  documentation:consult("doc.pro").
+:- consult("debug.pro").
+:- include("imperative.pro").
 
 :- debug(load). % DEBUG
 %:- debug(import_expansion). % DEBUG
@@ -40,10 +39,10 @@ import_expansion(Mod, Name/Arity, Exp) :- !,
     functor(Head, Name, Arity),
     debug(import_expansion, "import_expansion: ~w", [Exp]).
 
-import_expansion(Mod, ForeignName/Arity as Alias, Exp) :- !,
-    check_predicate(defined(Mod:ForeignName/Arity)),
+import_expansion(Mod, Name/Arity as Alias, Exp) :- !,
+    check_predicate(defined(Mod:Name/Arity)),
     Exp = (Renamed :- Mod:Orig),
-    functor(Orig, ForeignName, Arity),
+    functor(Orig, Name, Arity),
     functor(Renamed, Alias, Arity),
     foreach(between(1,Arity,N), arg_unify(N,Orig,Renamed)),
     debug(import_expansion, "import_expansion: ~w", [Exp]).
@@ -61,7 +60,8 @@ import_expansion(Mod, multifiles(List), Exps) :- !,
         Exps
     ).
 
-import_expansion(_, A, _) :- !, type_error(import_spec, A).
+import_expansion(_, A, _) :- !,
+    type_error(import_spec, A).
 
 check_predicate(defined(Module:Name/Arity)) :- !,
     functor(Head, Name, Arity),
