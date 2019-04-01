@@ -1,101 +1,95 @@
+% Run main/0 to run all automatic tests.
+
 % -------------------- things to be tested
 
-:- import(file("html_cphe.pro"),[
-    cphe_ast/2
-    , cphe_string/2
-]).
-:- import(file("sketch_application.pro"),[
-    start_http_server/0
-    , check_web_app/0
-]).
-:- import(file("enterprise/library/sql.pro"),[
-    sql_ddl_create_table/2
-]).
 :- import(file("sketch_browser.pro"),[
     browser/1
 ]).
+:- import(file("test_auto.pro"),[
+    test/1 as test_auto
+    , run/1 as run_test_auto
+]).
+:- import(file("test_manual.pro"),[
+    test/1 as test_manual
+    , run/1 as run_test_manual
+]).
 
-% -------------------- the tests themselves
+test(auto:A) :- test_auto(A).
+test(manual:A) :- test_manual(A).
 
-test(html_cphe_attribute) :-
-    Exp = p(a=b, "T", c=d, b("U", "V")),
-    cphe_ast(Exp, Ast),
-    pretty(Exp), nl,
-    pretty(Ast), nl,
-    actual_expected(
-        Ast,
-        elem(p,[attr(a,b),attr(c,d)],[text("T"),elem(b,[],[text("U"),text("V")])])
-    ).
+run(auto:A) :- run_test_auto(A).
+run(manual:A) :- run_test_manual(A).
 
-test(html_cphe_string) :-
-    Exp = a(href="foo.png", "The image"),
-    cphe_string(Exp, Str),
-    pretty(Exp), nl,
-    write(Str), nl.
+run(manual:_, skip) :- !.
+run(Name, ok) :- run(Name), !.
+run(_, fail) :- !.
 
-test(html_cphe_string_empty_tag) :-
-    Exp = img(src="foo.png", alt="bar"),
-    cphe_string(Exp, Str),
-    pretty(Exp), nl,
-    write(Str), nl.
+test_position(Name, Index/Total) :-
+    findall(A, test(A), Names),
+    length(Names, Total),
+    nth1(Index, Names, Name).
 
-test(html_cphe_document) :-
-    Exp = ['!doctype'(html), html(head(title("Title")), body(p("Paragraph")))],
-    cphe_string(Exp, Str),
-    pretty(Exp), nl,
-    write(Str), nl.
+:- dynamic known/1.
 
-test(check_web_app) :-
-    check_web_app.
+test_result(Name, Result) :-
+    test(Name), known(test_result(Name,A)),
+    A = Result.
 
-test(sql_ddl_create_table) :-
-    forall(sql_ddl_create_table(_, Sql), (
-        write(Sql), nl
+test_result(Name, Result) :-
+    test(Name), \+ known(test_result(Name,_)),
+    run(Name, A),
+    assertz(known(test_result(Name,A))),
+    A = Result.
+
+% -------------------- imperative
+
+main :-
+    format("~`=t~30| Test began at ~@.\n", [show_time]),
+    retractall(known(_)),
+    run_tests,
+    summarize,
+    format("~`=t~30| Test ended at ~@.\n", [show_time]).
+
+show_time :-
+    current_output(Out),
+    get_time(Time),
+    format_time(Out, '%F %T %Z', Time).
+
+run_tests :-
+    forall(test_position(Test, Index/Max), (
+        format("~`-t~30| [~w/~w] ~w\n", [Index,Max,Test]),
+        test_result(Test, Result),
+        report(Test, Result)
     )).
 
-% -------------------- running the tests
+report(Test, skip) :- !, format("~`-t~30| \e[1mskip\e[22m: ~w\n",[Test]).
+report(Test, fail) :- !, format("~`-t~30| \e[1mfail\e[22m: ~w\n",[Test]).
+report(_, _) :- !.
 
-actual_expected(Act, Exp) :- Act == Exp, !.
-actual_expected(Act, Exp) :-
-    write("------------------------------ assertion failure"), nl,
-    write("actual   : "), pretty(Act), nl,
-    write("expected : "), pretty(Exp), nl,
-    fail.
-
-test_name(Name) :- clause(test(Name), _).
-test_names(Names) :- findall(Name, test_name(Name), Names).
-
-pretty(A) :- print_term(A, []).
-
-test_all :-
-    test_names(Names),
-    length(Names, Count),
-    test_all(1, Count, Names, Fails),
-    length(Fails, FailCount),
-    write("------------------------------ summary\n"),
-    format("Number of tests        : ~w\n", [Count]),
-    format("Number of failed tests : ~w\n", [FailCount]),
-    write("------------------------------ failed tests\n"),
-    forall(member(Index-Name,Fails),
-        format("[~w] ~w\n", [Index,Name])
+summarize :-
+    count(test(_), Count),
+    count(test_result(_, skip), SkipCount),
+    count(test_result(_, fail), FailCount),
+    format("~`=t~30| Summary\n", []),
+    format("Number of tests         : ~w\n", [Count]),
+    format("Number of skipped tests : ~w\n", [SkipCount]),
+    format("Number of failed tests  : ~w\n", [FailCount]),
+    format("~`=t~30| Failed tests\n", []),
+    (FailCount =< 0
+    ->  write("There are no failed tests at this time,\n"),
+        write("but this should not be taken to mean that the software does not contain errors.\n")
+    ;   forall(test_result(Test,fail), (
+            test_position(Test, Pos),
+            format("[~w] ~w\n", [Pos,Test])
+        ))
     ).
 
-test_all(_, _, [], []) :- !.
-test_all(Index, Count, [Name|Names], Fails) :- !,
-    format("------------------------------ [~w/~w] ~w\n", [Index,Count,Name]),
-    run_test(Name, Ok),
-    report_test(Name, Ok),
-    Index1 is Index + 1,
-    test_all(Index1, Count, Names, Fails0),
-    (Ok = true
-    ->  Fails = Fails0
-    ;   Fails = [Index-Name|Fails0]
+count(Goal, Count) :-
+    F = count(0), (
+        call(Goal),
+        arg(1, F, M),
+        N is M + 1,
+        nb_setarg(1, F, N),
+        fail
+    ;   F = count(Count)
     ).
-
-report_test(Name, false) :- !,
-    format("------------------------------ \e[1mfail\e[22m: ~w\n",[Name]).
-
-report_test(_, _) :- !.
-
-run_test(Name, true) :- test(Name), !.
-run_test(_, false) :- !.
