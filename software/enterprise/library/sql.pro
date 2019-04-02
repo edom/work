@@ -5,6 +5,16 @@
     , type_string_byte/2
     , type_optional/2
 ]).
+:- import(file("sql_connection.pro"),[
+    close_all_connections/0
+    , ensure_opened/3
+    , ensure_closed/1
+
+]).
+:- import(file("sql_dcg.pro"),[
+    select//3
+]).
+
 % Translate type to SQL type.
 
 /** type_sqltype(++TypeName,-SqlType) is det.
@@ -72,10 +82,6 @@ sql_ddl_column(Cls, Prop, Sql) :-
 
 % -------------------- database
 
-:- use_module(library(odbc),[
-    odbc_driver_connect/3
-]).
-
 :- multifile opv/3.
 
 :- op(100,fx,#).
@@ -89,28 +95,12 @@ eval(A, Z) :- string(A), !, A = Z.
 eval(A, _) :- !, type_error(exp, A).
 
 test :-
-    ensure(describes(con,Con)),
+    do_ensure_opened(con, Con),
     do_something_with(Con),
-    ensure_not(_).
+    ensure_closed(con).
 
-% -------------------- connection management
-
-:- dynamic known/1.
-:- multifile force/1.
-:- multifile force_not/1.
-
-ensure(A) :- known(A), !.
-ensure(A) :- deterministically(force(A)), !, assertz(known(A)).
-
-% Problem: If force_not/1 throws an exception,
-% then the known/1 fact may never be retracted.
-ensure_not(A) :- known(A), !, deterministically(force_not(A)), retract(known(A)).
-ensure_not(_).
-
-force(describes(Rep,Con)) :-
+do_ensure_opened(Rep, Con) :-
     get(Rep, #class, connection),
-    conrep_debugstr(Rep, Debug),
-    debug(sql_connect, "sql_connect: Connecting to ~w", [Debug]),
     eval(
         "DRIVER=" + "{PostgreSQL Unicode}"
         + ";Server=" + Rep?host
@@ -120,22 +110,64 @@ force(describes(Rep,Con)) :-
         + ";PWD=" + Rep?password + ""
         , Dsn
     ),
-    odbc_driver_connect(Dsn, Con, []).
+    ensure_opened(Rep, Dsn, Con).
 
-force_not(describes(Rep,Con)) :-
-    conrep_debugstr(Rep, Debug),
-    debug(sql_connect, "sql_connect: Disconnecting from ~w", [Debug]),
-    odbc_disconnect(Con).
+% -------------------- abstracting SQL table as Prolog predicate
 
-:- debug(sql_connect). % DEBUG
+:- debug(sql_query). % DEBUG
 
-conrep_debugstr(Rep, Debug) :-
-    get(Rep, #class, connection),
-    eval(Rep?username + "@" + Rep?host + ":" + Rep?port + ":/" + Rep?catalog, Debug).
+sql_table_row(ConName, Schema, Table, Cols, Row) :-
+    must_be(ground, ConName),
+    must_be(ground, Schema),
+    must_be(ground, Table),
+    must_be(ground, Cols),
+    once(do_ensure_opened(ConName, Con)),
+    once(phrase(select(Schema,Table,Cols), Codes)),
+    string_codes(Str, Codes),
+    length(Cols, Arity),
+    functor(Record, row, Arity),
+    debug(sql_query, "sql_query: ~w", [Str]),
+    odbc_query(Con, Str, Record),
+    Record =.. [_|Row].
 
-close_all_connections :-
-    forall(known(describes(Rep,Con)),
-        ensure_not(describes(Rep,Con))).
+:- include("partial_evaluation.pro").
+
+should_call(once(A)) :- should_call(A).
+should_call(phrase(A,_)) :- ground(A).
+should_call(string_codes(A,_)) :- ground(A).
+should_call(string_codes(_,A)) :- ground(A).
+should_call(length(A,_)) :- ground(A).
+should_call(functor(_,B,C)) :- ground(B), ground(C).
+should_call(must_be(A,B)) :- ground(A), ground(B).
+should_call(A =.. _) :- nonvar(A).
+
+should_expand(sql_table_row(_,_,_,_,_)).
+
+% SQL-table-backed predicates are derived by partially evaluating sql_table_row/5.
+
+sqltable_as_prologpred(Con, Sch, Tab, Cols, PredName, Clause) :-
+    must_be(atom, Con),
+    must_be(atom, Sch),
+    must_be(atom, Tab),
+    must_be(list, Cols),
+    must_be(atom, PredName),
+    H = sql_table_row(Con,Sch,Tab,Cols,Row),
+    partial_evaluation(H, B0),
+    H0 =.. [PredName|Row],
+    Clause = (H0 :- B0).
+
+make_sql_table_backed_predicate(Con, Sch, Tab, Cols, PredName) :-
+    sqltable_as_prologpred(Con, Sch, Tab, Cols, PredName, Clause),
+    compile_aux_clauses([Clause]).
+
+test_part_eval :-
+    Cols = [table_catalog, table_name, column_name, data_type],
+    sqltable_as_prologpred(con, information_schema, columns, Cols, infosch_columns, Clause),
+    portray_clause(Clause).
+
+:-  make_sql_table_backed_predicate(con, information_schema, columns
+    , [table_catalog, table_name, column_name, data_type]
+    , infosch_columns).
 
 :- dynamic con_sch_tab_row/4.
 
