@@ -39,6 +39,10 @@ import_expansion(Mod, Name/Arity, Exp) :- !,
     functor(Head, Name, Arity),
     debug(import_expansion, "import_expansion: ~w", [Exp]).
 
+import_expansion(Mod, Name//DcgArity, Exp) :- !,
+    Arity is DcgArity + 2,
+    import_expansion(Mod, Name/Arity, Exp).
+
 import_expansion(Mod, Name/Arity as Alias, Exp) :- !,
     check_predicate(defined(Mod:Name/Arity)),
     Exp = (Renamed :- Mod:Orig),
