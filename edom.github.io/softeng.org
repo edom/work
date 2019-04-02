@@ -176,6 +176,25 @@ The business programmer captures user requirements into a program (a specificati
 The language programmer writes a metaprogram that translates
 the business programmer's declarative program into something efficient.
 
+** Reliable software?
+Reliability is not about the uptime of a single operating system process.
+Reliability is about the uptime of the whole system.
+
+There are two attitudes:
+- Strive to write fool-proof /program/ that does not leak resources.
+  This may be possible for operating systems, but is too hard for user applications?
+  Let the OS handle the corner cases?
+- Use other system component's strengths to compensate for the program's weakness.
+  Avoid stupid leaks, but do not strive to completely preclude resource leaks in corner cases.
+  Make restart cheap and fast, and restart the program often.
+  If the program is a web server, put it behind a load balancer, and rotate several instances often.
+  This is more sane, efficient, and effective.
+
+Example insanity that arises from writing code that tries to be too smart:
+What to do if POSIX close fails?[fn::https://stackoverflow.com/questions/33114152/what-to-do-if-a-posix-close-call-fails]
+Eventually we need to reboot the whole damn thing.
+
+Corner cases exist in the first place due to bad design, unclear semantics, lack of foresight.
 * Management, hiring, culture, anarchy
 ** Management
 I tried to think about [[file:engman.html][managing software engineers]].

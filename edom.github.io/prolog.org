@@ -572,6 +572,10 @@ It is too easy to write a Prolog program that doesn't terminate.
 ** Defining your own operators
 - =:- op(Precedence, Type, Name)=
 ** Logic of objects
+In C we can have OOP by adding one "this/self" parameter as the first parameter of each method.
+I think it is also possible in Prolog.
+But should we?
+
 #+BEGIN_EXAMPLE
 object_class(alice, person).
 object_class(bob, person).
@@ -1015,6 +1019,17 @@ Usability issues:
   I found that by looking at others' source code.
   There does not seem to be any documentation, or if there is, then it is at the wrong place.
 - Why do we require people to understand DCG rules before they can use the messaging system?
+** States and dynamic predicates
+Suppose that we want to write SQL connection pool.
+We need state.
+How do we write states in Prolog?
+Dynamic predicates is one way of having states in Prolog.
+The other is threading two extra state variables in each predicate that uses the state.
+But this time purism seems to lose.
+In the case of writing connection pools,
+procedural programming seems to be the paradigm that produces the most concise and understandable code.
+
+A stateless system is of limited use: They can't store data!
 * Graphical-user-interface programming
 ** <2019-04-02> What are the options?
 There are two options for doing GUI in SWI-Prolog:
@@ -1315,6 +1330,14 @@ This is like writing the interpretation function inside the formal system itself
 This is still first-order logic.
 
 Should =a:b@c= be interpreted as =(a:b)@c= (call a:b with arguments c) or =a:(b@c)= (call b with context a and arguments c)?
+
+Abstract terms.
+What if we write programs with only predicates and variables and no concrete terms?
+Why should we?
+Because it enables us to change the representation without changing the meaning of the program.
+It is the same as abstract data types in other languages.
+
+We can see an as atom as a singleton predicate, that is, a predicate that is satisfied by one thing only, that is the atom.
 ** Rethinking Prolog module systems
 Each predicate has a name.
 
@@ -1429,9 +1452,6 @@ use_module(..., [
 ]).
 #+END_EXAMPLE
 
-Not yet implemented:
-importing DCG rules like foo//1.
-
 One day someone may make it possible for Source to be =github(...)= or =pack(...)=,
 but perhaps we should not do that because it will increase compilation time.
 *** Other possibilities
@@ -1495,8 +1515,14 @@ Strings translate to escaped texts.
 ** SQL-Prolog integration sketch
 The source file is =sql.pro=.
 
+The initial key idea is a 1:1 mapping between SQL tables and Prolog predicates.
+But is it mapping to tables or to SQL SELECT queries?
+We can think of a table as a SELECT query.
 The key idea is a Prolog predicate that succeeds once for each row in a corresponding SQL table.
 What if we can access a SQL table as if it were a Prolog predicate?
+
+It should be possible to make something like F# data provider but with Prolog predicates.
+It should be possible to make a Prolog predicate that fetches data when called.
 
 The dream is seamless integration between Prolog and SQL databases.
 Seamless SQL-backed Prolog predicates.
