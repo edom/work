@@ -195,6 +195,8 @@ What to do if POSIX close fails?[fn::https://stackoverflow.com/questions/3311415
 Eventually we need to reboot the whole damn thing.
 
 Corner cases exist in the first place due to bad design, unclear semantics, lack of foresight.
+
+Robustness can be attained by a combination of fail-fast and restart-fast.
 * Management, hiring, culture, anarchy
 ** Management
 I tried to think about [[file:engman.html][managing software engineers]].
@@ -243,6 +245,17 @@ Is the $100,000 American-citizen programmer more capable than the $10,000 Indone
 Inconclusive discussion https://marginalrevolution.com/marginalrevolution/2012/01/why-are-some-programmers-paid-more-than-others.html
 
 The world is so broken that we don't know where to begin fixing.
+** Why nobody is using your open source project
+- There is no documentation.
+- Their friends don't use it, because there is no documentation.
+- You wrote some documentation, but they can't understand it or they can't find it, which means to them that there is no documentation.
+- There is no documentation, because there is nothing to document.
+  Make sure that your project actually does something significant and shareworthy.
+- There is no license?
+
+How can people know whether they will like it and tell their friends, if people can't even know what it is!?
+
+It is too easy to get carried away with our beloved project and forget that telepathy has not been invented.
 * Maintaining software
 ** Backward-compatibility complicates development but simplifies maintenance
 Reasons for maintaining backward-compatibility:

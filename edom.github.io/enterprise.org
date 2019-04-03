@@ -1112,35 +1112,6 @@ The formula =application__page(A,P)= means the application A serves page P.
 Open World Assumption vs Closed World Assumption http://www.mkbergman.com/852/the-open-world-assumption-elephant-in-the-room/
 
 How do we combine closed-world assumption (logic programming / relational database) and open-world assumption (web ontology)?
-*** Knowledge representation and software specification
-**** Their relationships
-- 2010, "Functional-Logic Programming Lecture Notes", Harold Boley, slides, [[http://www.cs.unb.ca/~boley/FLP/cs6905FLP.pdf][pdf]]
-  - Knowledge representation in AI roughly corresponds to software specification in software engineering.
-  - Declarative programs can be thought as executable specifications.
-  - Invertibility principle (slide 36)
-  - Nesting/conjunction principle (slide 46)
-  - Unification principle (slide 50)
-  - Amalgamation/integration principle (slide 55)
-  - That's a long deck: 270 slides.
-**** Executable specification?
-- lightweight executable mathematics https://www.cl.cam.ac.uk/~pes20/lem/
-
-*** Logic programming vs theorem proving
-- https://stackoverflow.com/questions/36335633/difference-between-logic-programming-and-automated-theorem-proving
-- https://en.wikipedia.org/wiki/Automated_theorem_proving
-*** SWI-Prolog, PostgreSQL, and ODBC
-Install the Ubuntu 14.04 package =odbc-postgresql=.
-
-I want my application to self-contain its configuration.
-I don't configure ODBC INI files.
-
-ODBC Data Source Name (DSN) connection string
-
-Relevant commands: =odbcinst -j=
-
-The file =/etc/odbcinst.ini= contains a list of driver names.
-
-[[http://www.swi-prolog.org/pldoc/doc_for?object=section(%2527packages/cql.html%2527)][SWI-Prolog CQL documentation]] doesn't inspire confidence.
 *** Deductive databases and Datalog?
 ** Related fields
 Formal methods, formal verification, model checking
@@ -1148,54 +1119,6 @@ Formal methods, formal verification, model checking
 It is possible to have a record in which an employee's join date precedes the date of birth.
 But it is physically impossible for an employee to join the company before the employee is born.
 Every model has simplifying assumptions.
-** Ontology?
-A class C has properties P1, P2, P3, etc.
-How do we represent an /instance/ of C in Prolog?
-There are at least two ways: /many-predicates/ and /one-term/.
-
-The /many-predicates/ representation makes it easy to add derived properties.
-One predicate represents one property.
-This is similar to 6NF (sixth normal form) in database theory.
-
-#+BEGIN_EXAMPLE
-c_prop1(InstanceId, Prop1).
-c_prop2(InstanceId, Prop2).
-c_prop3(InstanceId, Prop3).
-...
-#+END_EXAMPLE
-
-The /one-term/ representation makes it easy to specify an instance.
-One term represents one instance.
-This is similar to 0NF/1NF (zeroth or first normal form) in database theory.
-
-#+BEGIN_EXAMPLE
-c(InstanceId, [
-    prop1 - Prop1,
-    prop2 - Prop2,
-    prop3 - Prop3,
-    ...
-]).
-#+END_EXAMPLE
-
-But we can combine both.
-We can translate an instance-wise representation to a property-wise representation:
-
-#+BEGIN_EXAMPLE
-:- discontiguous c_prop1/2, ..., c_propN/2.
-
-c_prop1(InstanceId, Prop1) :- c(InstanceId, Props), member(prop1-Prop1, Props).
-c_prop2(InstanceId, Prop2) :- c(InstanceId, Props), member(prop2-Prop2, Props).
-c_prop3(InstanceId, Prop3) :- c(InstanceId, Props), member(prop3-Prop3, Props).
-...
-#+END_EXAMPLE
-
-But the many-predicates representation is easier to refactor than the one-term representation.
-
-Conclusions:
-- A module may internally specify objects in the one-term (denormal-form) style,
-  but should only export predicates in the many-predicates (normal-form) style.
-- A translation should not import denormal-form predicates.
-
 ** A note on temporal modeling
 =employee_department/2= cannot keep track of movement history.
 If it is important to keep track of employee movement,
@@ -1205,17 +1128,6 @@ we should use =employee_join_department/3= and =employee_leave_department/3=.
 employee_department(?EmpId,?DepId)
 employee_join_department(?EmpId,?DepId,?Time)
 employee_leave_department(?EmpId,?DepId,?Time)
-#+END_EXAMPLE
-** One-property-one-predicate representation of objects
-Another core idea is the /one-property one-predicate/ representation, with surrogate primary keys.
-This enables us to represent objects in Prolog.
-Objects have identities.
-Two objects are identical iff their identifiers (primary keys) are equal.
-Example:
-#+BEGIN_EXAMPLE
-person(PersonId)
-person_name(PersonId, Name)
-person_birthdate(PersonId, BirthDate)
 #+END_EXAMPLE
 ** Abstractions
 The system should present the illusion that every system state is as simple as a global variable.
