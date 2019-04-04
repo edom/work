@@ -522,6 +522,22 @@ opv(mylist, element-1, 10). % mylist[1] = 10
 opv(mylist, element-2, 20). % mylist[2] = 20
 opv(mylist, element-3, 30). % mylist[3] = 30
 #+END_EXAMPLE
+** Ontology engineering: choosing primitive concepts
+Suppose that we are designing a genealogy database.
+Which predicate should be chosen as a primitive: father/2 or parent/2?
+We also want our database to handle transsexuals and inbreeders.
+Suppose that these happened:
+- In 2000, X fathers a son Y.
+- In 2010, X changes sex to female.
+- In 2020, X has sex with his son Y and begets Z.
+
+Thus we have this database in which a person can be both a father and a mother:
+#+BEGIN_EXAMPLE
+father(x,y).
+mother(x,z).
+#+END_EXAMPLE
+
+Thus X is both the mother of Z (because X gives birth to Z) and a grandfather of Z (because Y fathers Z and X fathers Y).
 * Ontology of concepts
 ** Is this an epiphany, or am I just batshit insane?
 How do we think of ideas, concepts, and other abstract objects?
@@ -1343,3 +1359,5 @@ From database point of view, the comma can be thought as a join.
 - [[https://blog.timescale.com/time-series-data-why-and-how-to-use-a-relational-database-instead-of-nosql-d0cd6975e87c][Time-series data: Why (and how) to use a relational database instead of NoSQL]]
   - Where is the SQL DDL/schema?
 ** What is the difference between ontology and metaphysics?
+** Globalization
+Globalization complicates check mark.[fn::https://en.wikipedia.org/wiki/Check_mark#Unicode]

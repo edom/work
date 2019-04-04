@@ -113,8 +113,7 @@ Your coworkers are beating you with Prolog?
 Well, what the hell are you waiting for?
 Learn Prolog now, or lose your job and die in oblivion!
 
-"Prolog is a convenient language in which to express the semantics of other languages."
-https://www3.hhu.de/stups/prob/index.php/Why_Prolog%3F
+"Prolog is a convenient language in which to express the semantics of other languages."[fn::https://www3.hhu.de/stups/prob/index.php/Why_Prolog%3F]
 
 Why logic programming?
 Because logic is the internal language of thought.
@@ -128,6 +127,10 @@ It differs from existing high-level languages in that it possesses no features w
 It differs from functional languages like LISP, based on the \(\lambda\)-calculus, in that it derives from the normative study of human logic,
 rather than from investigations into the mathematical logic of functions."\cite{kowalski1974predicate}
 #+END_QUOTE
+
+"Prolog is an excellent programming contest language:
+Prolog is close enough to the ultimate specification language (logic), so that the distance between problem and solution is not too big."
+\cite{demoen2005first}
 ** Not sure yet? Try Prolog with minimal investment.
 If you're not sure yet, I suggest that you
 read [[https://www.metalevel.at/prolog][Markus Triska's book "The power of Prolog"]]
@@ -195,18 +198,37 @@ I reported this:
 
 I hear some things about Eclipse PDT.
 ** Prolog community
-Where is the community?
-- IRC requires login.
-  Where is the chat log?
+Questions, answers, discussions, news:
 - SWI-Prolog Discourse Group[fn::https://swi-prolog.discourse.group].
   <2019-04-03> The old SWI-Prolog Google Groups[fn::https://groups.google.com/forum/#!forum/swi-prolog] has been deprecated.
   They are moving.
+- IRC requires login.
+  Where is the chat log?
 - comp.lang.prolog https://groups.google.com/forum/#!forum/comp.lang.prolog
 - StackOverflow tag swi-prolog https://stackoverflow.com/questions/tagged/swi-prolog
+- https://www.reddit.com/r/prolog/
+
+What:
 - SWI-Prolog roadmap https://github.com/SWI-Prolog/roadmap
 - http://www.swi-prolog.org/Links.html
-- https://www.reddit.com/r/prolog/
+
+Unclear links:
 - http://prolog-commons.org
+
+"Conference on the practical application of Prolog":
+When was it last held?
+It seems no more.
+
+Twitter LOPSTR:
+Logic Based Program Synthesis and Transformation: 13th International...
+
+Who uses Prolog?
+
+Gerrit has prolog?
+https://gerrit-review.googlesource.com/Documentation/prolog-cookbook.html
+
+I hate "awesome" lists like this "awesome Prolog"[fn::https://github.com/klauscfhq/awesome-prolog/blob/master/readme.md]
+list because such lists do not explain /why/ something is awesome.
 ** Recommended learning sequence
 - Know how to read Prolog programs.
   - Know basic Prolog syntax.
@@ -391,13 +413,7 @@ These resources say something about fixing programming errors:
 I commit my work to Git repository with Emacs Magit or git-gui.
 I sanity-check the tree with =gitk --all=.
 I push my work to my GitHub work repository.
-* Declarative Prolog, and other beautiful things
-** Prolog and ontology
-Writing a Prolog knowledge base is an exercise in ontology (a branch of philosophy, that studies beings and relationships).
-We ask these all the time:
-- What exist?
-- How do they relate?
-- How do we model all those entities and relationships in Prolog for not-too-slow computation?
+* Prolog as database programming language
 ** Reading Prolog programs, and a crash course to logic
 What is the meaning/interpretation of a Prolog program?
 
@@ -421,6 +437,96 @@ mother(rebecca, jacob).
 
 parent(A, B) :- father(A,B) ; mother(A,B).
 #+END_EXAMPLE
+** Prolog and ontology
+Writing a Prolog knowledge base is an exercise in ontology (a branch of philosophy, that studies beings and relationships).
+We ask these all the time:
+- What exist?
+- How do they relate?
+- How do we model all those entities and relationships in Prolog for not-too-slow computation?
+** "Pure" relation built from impure parts
+We can define a truly relational plus/3 that works for all mode combinations for natural numbers, but the code seems too much and illogical.
+
+#+BEGIN_EXAMPLE
+nat(A) :- integer(A), A >= 0.
+
+plus(A, B, C) :- nat(A), nat(B), nat(C), !, C =:= A + B.
+plus(A, B, C) :- nat(A), nat(B), !, C is A+B.
+plus(A, B, C) :- nat(A), nat(C), !, B is C-A.
+plus(A, B, C) :- nat(B), nat(C), !, A is C-B.
+plus(A, B, C) :- nat(A), !, between(0, inf, C), plus(A, B, C).
+plus(A, B, C) :- nat(B), !, between(0, inf, C), plus(A, B, C).
+plus(A, B, C) :- nat(C), !, between(0, C, A), plus(A, B, C).
+plus(A, B, C) :- between(0, inf, C), plus(A, B, C).
+#+END_EXAMPLE
+
+We can write that shorter in miniKanren which uses iterative-deepening search?
+
+** Knowledge representation; designing predicates; naming is hard
+One possible mapping is:
+- a noun maps to a term
+- a verb maps to a predicate
+
+Come to think of it, a transitive verb indeed denotes a relation between two nouns.
+
+The name of a predicate is less important than its mapping and its meaning.
+#+BEGIN_EXAMPLE
+father(abraham, isaac).
+beget(abraham, issac).
+papa(abraham, issac).
+spawn(abraham, issac).
+mystery_predicate(abraham, issac).
+#+END_EXAMPLE
+
+"A bird eats an apple" means \( \exists x \exists y ( bird(x) \wedge apple(y) \wedge eat(x,y) ) \).
+
+The name of a relation should describe the relationship.
+
+If we intend that there is only one relation between A and B that makes sense,
+then we may name that relation A_B.
+But:
+- What if A or B contains underscores?
+- Why do we prefer =father_child= to =beget= or =sire=?
+
+is_thing(A).
+
+A procedure's name should begin with a verb.
+
+Order the parameters from the most likely to be bound.
+If parameter A is more likely to be more bound than parameter B, then A should come before B.
+Example: Write list_length/2 instead of length_list/2.
+Unfortunately not everyone follows this convention.
+** Knowledge representation and software specification
+*** Their relationships
+- 2010, "Functional-Logic Programming Lecture Notes", Harold Boley, slides, [[http://www.cs.unb.ca/~boley/FLP/cs6905FLP.pdf][pdf]]
+  - Knowledge representation in AI roughly corresponds to software specification in software engineering.
+  - Declarative programs can be thought as executable specifications.
+  - Invertibility principle (slide 36)
+  - Nesting/conjunction principle (slide 46)
+  - Unification principle (slide 50)
+  - Amalgamation/integration principle (slide 55)
+  - That's a long deck: 270 slides.
+*** Executable specification?
+- lightweight executable mathematics https://www.cl.cam.ac.uk/~pes20/lem/
+** Total relational programming? Relational programs that can be proven to terminate?
+A total relation is a relation that is defined for every element in its domain.
+
+If there is total functional programming, then there should be total relational programming.
+
+It is too easy to write a Prolog program that doesn't terminate.
+** The meaning of a pure Prolog predicate
+The meaning of a predicate is the set of all ground terms that satisfy that predicate.
+Formally, the meaning of the predicate \(p\) is the set \( \SetBuilder{x}{p(x)} \).
+Such set is called the /extension/[fn::https://en.wikipedia.org/wiki/Extension_(predicate_logic)] of the predicate.
+
+In this example, what is the meaning of t/2 supposed to be?
+Declaratively, the query =?- t(A,B)= means the finite set ={(1,1)}=, and thus the query should terminate.
+But with SLD-resolution operational semantics, the query does not terminate.
+#+BEGIN_EXAMPLE
+e(1,1).
+
+t(A,B) :- e(A,M), t(M,B).
+#+END_EXAMPLE
+* Prolog as logic programming language
 ** Multi-directional predicates
 A predicate has several uses: iteration, searching, testing, and other computation.
 A predicate can be used both to enumerate/iterate a finite set, to search for a satisfier, and to test membership.
@@ -560,78 +666,13 @@ If is_big(X) fails, it simply means that we don't know whether X is big.
 Suppose that is_big(john,true) means we know that John is big.
 And is_big(john,false) means we know that John is not big.
 If is_big(john,_) fails, then we don't know whether John is big or not.
-** Knowledge representation; designing predicates; naming is hard
-One possible mapping is:
-- a noun maps to a term
-- a verb maps to a predicate
-
-Come to think of it, a transitive verb indeed denotes a relation between two nouns.
-
-The name of a predicate is less important than its mapping and its meaning.
-#+BEGIN_EXAMPLE
-father(abraham, isaac).
-beget(abraham, issac).
-papa(abraham, issac).
-spawn(abraham, issac).
-mystery_predicate(abraham, issac).
-#+END_EXAMPLE
-
-"A bird eats an apple" means \( \exists x \exists y ( bird(x) \wedge apple(y) \wedge eat(x,y) ) \).
-
-The name of a relation should describe the relationship.
-
-If we intend that there is only one relation between A and B that makes sense,
-then we may name that relation A_B.
-But:
-- What if A or B contains underscores?
-- Why do we prefer =father_child= to =beget= or =sire=?
-
-is_thing(A).
-
-A procedure's name should begin with a verb.
-
-Order the parameters from the most likely to be bound.
-If parameter A is more likely to be more bound than parameter B, then A should come before B.
-Example: Write list_length/2 instead of length_list/2.
-Unfortunately not everyone follows this convention.
-** Knowledge representation and software specification
-*** Their relationships
-- 2010, "Functional-Logic Programming Lecture Notes", Harold Boley, slides, [[http://www.cs.unb.ca/~boley/FLP/cs6905FLP.pdf][pdf]]
-  - Knowledge representation in AI roughly corresponds to software specification in software engineering.
-  - Declarative programs can be thought as executable specifications.
-  - Invertibility principle (slide 36)
-  - Nesting/conjunction principle (slide 46)
-  - Unification principle (slide 50)
-  - Amalgamation/integration principle (slide 55)
-  - That's a long deck: 270 slides.
-*** Executable specification?
-- lightweight executable mathematics https://www.cl.cam.ac.uk/~pes20/lem/
 ** Naming the parts of a list: head, tail, and butt
 - "head" is the first element
 - "tail" is everything but the head
 - "butt" is the last element
-** Total relational programming? Relational programs that can be proven to terminate?
-A total relation is a relation that is defined for every element in its domain.
-
-If there is total functional programming, then there should be total relational programming.
-
-It is too easy to write a Prolog program that doesn't terminate.
 ** Defining your own operators
 - =:- op(Precedence, Type, Name)=
-** The meaning of a pure Prolog predicate
-The meaning of a predicate is the set of all ground terms that satisfy that predicate.
-Formally, the meaning of the predicate \(p\) is the set \( \SetBuilder{x}{p(x)} \).
-Such set is called the /extension/[fn::https://en.wikipedia.org/wiki/Extension_(predicate_logic)] of the predicate.
-
-In this example, what is the meaning of t/2 supposed to be?
-Declaratively, the query =?- t(A,B)= means the finite set ={(1,1)}=, and thus the query should terminate.
-But with SLD-resolution operational semantics, the query does not terminate.
-#+BEGIN_EXAMPLE
-e(1,1).
-
-t(A,B) :- e(A,M), t(M,B).
-#+END_EXAMPLE
-* Imperative Prolog, and other ugly things
+* Prolog as procedural programming language
 Some ugly things are unfortunately necessary.
 There are always some dirty jobs in real-world programming.
 Example dirty jobs are input-output and error handling.
@@ -1318,6 +1359,9 @@ This SWI-Prolog Google Groups discussion thread[fn::https://groups.google.com/fo
 Module is about namespacing.
 
 We want to say that "The mypred/3 in file1 is the same as the yourpred/3 in file2."
+*** Logtalk?
+"You can even use [Logtalk] to run Prolog module code in Prolog compilers such as GNU Prolog that don't include a module system."
+ [fn::https://stackoverflow.com/questions/6695788/programming-in-the-large-with-prolog]
 ** Documentation system
 PlDoc <module> documentation should be taken to mean <file> documentation:
 It is files that are documented, not modules.
@@ -1345,7 +1389,32 @@ But this behavior changed in SWI-Prolog 7.
 Non-answer: Double-quoted string as list of one-character atoms.
 A string is represented as a list of one-character atoms.
 Example: ="aaa" = [a,a,a]=.
+** How do we manage language complexity?
+We use context to disambiguate sayings in natural languages.
+For example, "man" can mean a male human or to station people at some places as in "man the guns" or "unmanned vehicle".
+We use "table" to mean a flat surface or a data set shown in columns and rows, depending on context.
+
+Ad-hoc overloading is an example of this in programming languages.
+We use the same procedure name but different parameter types.
+
+But ad-hoc overloading quickly becomes confusing?
+Also, what is the philosophical/mathematical foundation of ad-hoc overloading?
+Is it an engineering kludge?
+** Not interesting?
+Sterling & Yalçinalp 1996 \cite{sterling1996logic} presents the logic programming analog of the Gang of Four object programming design patterns.
+** Testing
+The initial idea of "prorogued" programming \cite{afshari2012liberating} is to use the /user/ as an interactive dummy implementation of stub methods.
+The stub implementation is "ask the user for what the return value of this stub method should be".
+"Prorogue" is a rare English word meaning prolong or extend[fn::https://en.wiktionary.org/wiki/prorogue].
+But that is not all; types can be prorogued too.
 * Logic of objects
+"From a logical point of view, an object, the basic abstraction unit, has a natural interpretation as a logic theory:
+/an object is simply a collection of axioms which describe what is true about the object itself/." \cite{ciancarini1993logic} (emphasis mine)
+
+An object is something with identity.
+In Prolog, we represent identity with the /unique name assumption/.
+Each object has a unique surrogate primary key.
+Usually this key is a Prolog atom.
 ** Analogy: adding objects to C
 In C we can have OOP by adding one "this/self" parameter as the first parameter of each method.
 I think it is also possible in Prolog.
@@ -1672,6 +1741,8 @@ Relevant commands: =odbcinst -j=
 The file =/etc/odbcinst.ini= contains a list of driver names.
 
 [[http://www.swi-prolog.org/pldoc/doc_for?object=section(%2527packages/cql.html%2527)][SWI-Prolog CQL documentation]] doesn't inspire confidence.
+Draxler 1991 relates database table and Prolog predicate.
+CQL models SQL query in Prolog terms.
 ** Relational-multidirectional-logic programming?
 ** The operations
 The story does not end with development.
@@ -1732,6 +1803,8 @@ NED [5]
 \cite{ciancarini1993logic}
 
 \cite{liu2018logic}
+** How reliable is query-by-example?
+https://en.wikipedia.org/wiki/Query_by_Example
 * DSL, meta-programming, optimizing, checking, multi-paradigm, whatnot
 ** Ramble: Translating Prolog to native code?
 The idea is to relate a Prolog predicate and a C routine.
@@ -1823,6 +1896,8 @@ false.
 
 TODO
 Compare various approaches such as LambdaProlog, Mercury, and Curry.
+*** What?
+Porto 2011 \cite{porto2011structured}
 ** Meta-programming
 <2018-12-06>
 Prolog is the best meta-language I have found so far.
@@ -1942,8 +2017,58 @@ They are human-invented labels, a subjective teleological categorization without
 2018
 https://www.researchgate.net/project/Compiling-Prolog
 ** Attributed variables
-I feel that attributed variables seem to be a hack.
+I feel that attributed variables seem to be an engineering hack without mathematical justification.
 It interacts badly with term-copying.
+** Partial evaluation
+A common way to make compiler is to use a parser generator and what?
+
+A possibly better way is to write an interpreter and /get a compiler for free/ by partial evaluation.
+
+Writing an interpreter is much easier than writing a compiler.
+
+"Partial deduction" is partial evaluation from logic point of view.
+* Foreign language interface
+SWI-Prolog has a foreign language interface[fn::http://www.swi-prolog.org/pldoc/man?section=foreign], but I demand more.
+
+I want to write low-level code /directly in Prolog/.
+
+I want to write C code in Prolog.
+I want to have C with type inference and other cool features in Prolog.
+
+I dream of writing foreign code directly in Prolog.
+I dream of a Prolog code that can output an amd64 ELF binary.
+Related in mailing list[fn::https://groups.google.com/forum/#!topic/comp.lang.prolog/-WhsxJqPRRU].
+Related from the 1990s[fn::https://dtai.cs.kuleuven.be/projects/ALP/newsletter/archive_93_96/net/grammars/compiler2.html].
+Related: Warren 1980 \cite{warren1980logic}.
+
+There are two problems:
+emitting machine code, and executing machine code.
+
+Options for emitting machine code:
+- Design a DSL like ASN.1 to describe binary layout such as C struct or Pascal record.
+  I have a sketch in database_internal_dcg.pro.
+- Design an language that can be represented in Prolog and translated to C.
+- Reuse LLVM.
+- Building something like LLVM.
+  Write our own intermediate representation.
+  Static-single-assignment three-address code.
+- Write amd64 machine code directly.
+  This is bad.
+  Too tightly coupled.
+  We will want to generate i386, arm, and jvm machine codes.
+
+Options for executing machine code:
+- Write machine code to some memory area, set PROT_EXEC with mprotect, and call the address.
+- Write an ELF SO object and use dlopen.
+
+The skeleton of the minimum viable product:
+#+BEGIN_EXAMPLE
+example :-
+    compile(ret, ByteCode),
+    write_bytes(ByteCode).
+
+nb_write_address(+Address, -Thing)
+#+END_EXAMPLE
 * What next after Prolog?
 ** Embedding Prolog/Haskell in Haskell/Prolog
 Why bother with this?
@@ -2076,7 +2201,16 @@ Modus ponens \( \alpha, (\alpha \to \beta) \vdash \beta \).
 This is a draft.
 These are slides.
 Assume that one section is one slide.
-#+TOC: headlines 1 local
+
+There are several ways to introduce Prolog:
+- as a deductive database
+- as a logic programming language
+- as a procedural programming language with backtracking
+- as a natural language processing tool, which is its original reason of existence \cite{colmerauer1996birth}
+- as an artifical intelligence tool (what? automated reasoning?)
+
+It may be best to introduce Prolog as a deductive database.
+We want people to have understanding and good habit.
 *** "Talking" with the computer
 We can think of an interactive Prolog session as a /conversation/ with the computer.
 
@@ -2207,30 +2341,65 @@ Schelog vs minikanren?
 "What is Wrong with Logic Programming?"
 "A Deductive Solution to Mutable State and I/O"
 https://pdfs.semanticscholar.org/ca08/dcb9eddc1e7651509daac7fa02eddb7f675b.pdf
+** Why use Prolog for AI?
+Because Prolog produces /explainable/ AI.
+** Dreams, speculations, ambitions
+Harel 2008 \cite{harel2008can} has a lovely ambition.
+But I'm afraid I see only two way to realize that ambition:
+either invent a human-level AI that can write software, or invent a machine that can do telepathy.
+But I believe that we will someday have at least one of that.
+
+I want a browser like this.
+Each user should have total control of what runs on his/her machine.
+I should be able to tell my browser how to modify the CSS and JavaScript for certain websites.
+From \cite{harel2008can}:
+#+BEGIN_QUOTE
+[...] conveniently remove pieces of behavior that we don’t like and replace them with others [...]
+I would love to be able to reprogram the interactions that the web-based systems I work with force me to follow—not to mention reprogramming my annoying and unnecessarily complicated DVD.
+I can’t change the way Amazon or B&H respond to what I do, for example, but I can surely change everything that has to do with the way my browser and my computer deal with these websites.
+And how better to do that than by simply canceling some pieces of interactive behavior and playing in new ones, using the very interface on which we interact, subject, of course, to my inability to change their behavior?
+#+END_QUOTE
+** Closures, higher-order logic programming
+Ulrich Neumerkel's "Lambdas in ISO Prolog"[fn::https://www.complang.tuwien.ac.at/ulrich/Prolog-inedit/ISO-Hiord.html].
+
+Logtalk 2.38.0 has lambda expressions.[fn::https://blog.logtalk.org/2009/12/lambda-expressions-in-logtalk/]
+
+Why can't it be this?
+Isn't "apply" just variable substitution?
+But the problem is not substitution.
+The problem is /scoping/.
+#+BEGIN_EXAMPLE
+apply(A^B, A, B).
+#+END_EXAMPLE
+
+<2019-04-05>
+See lambda.pro.
+It does the job, but the variables cannot be reused.
+
+Example of closure:
+#+BEGIN_EXAMPLE
+let makeGetter list = \ i -> elemAt list i
+#+END_EXAMPLE
+
+We can manually do closure conversion (lambda lifting)[fn::https://en.wikipedia.org/wiki/Lambda_lifting].
+
+Naish 1996 \cite{naish1996higher} [fn::http://www.complang.tuwien.ac.at/ulrich/Prolog-inedit/naish.html]:
+"First, we point out that call/N is not the way to go,
+despite its recent popularity as the primitive to use for higher order logic programming."
+
+Let's try something else.
+
+I propose "local predicate" as the logic-relational analog of the functional lambda expression.
+
+The meaning of the expression =A ^ B= is "prove B assuming that A is true".
+The semantics is substitution.
+
+Define the meaning of =A^B= as prove =B= assuming =A=.
+Thus, the meaning of =p(1) ^ (p(A), q(B))= is =(A = 1, q(B))=.
 * What mess?
 ** Gospel
 If everyone could be 20x more productive using Prolog, then it is a sin to let them use Java or C++.
 It is a massive waste of human life.
-** Quotes
-"Prolog is an excellent programming contest language:
-Prolog is close enough to the ultimate specification language (logic), so that the distance between problem and solution is not too big."
-\cite{demoen2005first}
-** Ontology engineering: choosing primitive concepts
-Suppose that we are designing a genealogy database.
-Which predicate should be chosen as a primitive: father/2 or parent/2?
-We also want our database to handle transsexuals and inbreeders.
-Suppose that these happened:
-- In 2000, X fathers a son Y.
-- In 2010, X changes sex to female.
-- In 2020, X has sex with his son Y and begets Z.
-
-Thus we have this database in which a person can be both a father and a mother:
-#+BEGIN_EXAMPLE
-father(x,y).
-mother(x,z).
-#+END_EXAMPLE
-
-Thus X is both the mother of Z (because X gives birth to Z) and a grandfather of Z (because Y fathers Z and X fathers Y).
 ** Alternative Prolog syntax?
 Curry/ML-like syntax for Prolog?
 
@@ -2241,9 +2410,6 @@ append([H|A], B, [H|C]) :- append(A,B,C).
 append [] B B.
 append [H|A] B [H|C] :- append A B C.
 #+END_EXAMPLE
-** Who uses Prolog?
-Gerrit has prolog?
-https://gerrit-review.googlesource.com/Documentation/prolog-cookbook.html
 ** What?
 Prolog web browser, prolog gui, prolog operating system, prolog system f, normal-order lambda calculus, Haskell in prolog
 
@@ -2256,22 +2422,13 @@ https://stackoverflow.com/questions/6334050/adding-a-search-path-in-swi-prolog
 https://www.youtube.com/watch?v=lKXe3HUG2l4
 43:20
 We assume that two files A and B are similar if size(compress(A)) is similar to size(compress(A++B)).
-** decompilation
+
+decompilation, reverse engineering
+
 "J.P. Bowen, From Programs to Object Code and Back Again Using Logic Programming: Compilation and Decompilation, Journal of Software Maintenance: Research and Practice, Vol. 5, No. 4, pp.205-234, December, 1993"
 https://dtai.cs.kuleuven.be/projects/ALP/newsletter/archive_93_96/net/grammars/compiler2.html
 ** Prolog parser in Prolog
 https://dtai.cs.kuleuven.be/projects/ALP/newsletter/archive_93_96/net/grammars/parser.html
-** CQL
-http://www.swi-prolog.org/pldoc/doc_for?object=section(%27packages/cql.html%27)
-Draxler 1991 relates database table and Prolog predicate.
-CQL models SQL query in Prolog terms.
-** Module
-Logtalk:
-"You can even use [Logtalk] to run Prolog module code in Prolog compilers such as GNU Prolog that don't include a module system."
- [fn::https://stackoverflow.com/questions/6695788/programming-in-the-large-with-prolog]
-** alt. sem.
-!!
-https://www.cambridge.org/core/journals/theory-and-practice-of-logic-programming/article/structured-alternative-to-prolog-with-simple-compositional-semantics/3E4B4198D74D6A2EC92DF4D6DC78DDE3
 ** overview
 https://www.ajibot.com/blog/overview-of-logic-languages
 ** what
@@ -2286,12 +2443,7 @@ https://coderwall.com/p/laduzw/how-to-measure-execution-time-in-swi-prolog
 
 https://www.reddit.com/r/prolog/comments/9mxhbw/the_art_of_prolog_second_edition_is_available_as/
 
-https://github.com/klauscfhq/awesome-prolog/blob/master/readme.md
-
 http://www.swi-prolog.org/pldoc/man?section=modes
-
-Twitter LOPSTR:
-Logic Based Program Synthesis and Transformation: 13th International...
 ** Java
 https://stackoverflow.com/questions/1817010/embedded-prolog-interpreter-compiler-for-java
 
