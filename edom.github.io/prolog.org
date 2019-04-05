@@ -1120,6 +1120,10 @@ Stable dependencies principle[fn::http://wiki.c2.com/?StableDependenciesPrincipl
 How to write a program that does not change?
 It must capture the timeless essence of reality.
 A bachelor is unmarried by definition, and that definition is unlikely to change.
+** How do we divide labor? How do we work together?
+Interfaces enable us to pretend that our coworkers have finished their jobs.
+
+Interfaces are contracts, promises, agreements.
 ** A suggested way to use Prolog for programming in the large?
 Begin by defining an ontology or domain-specific language.
 This is pure Prolog with declarative semantics.
@@ -1362,6 +1366,14 @@ We want to say that "The mypred/3 in file1 is the same as the yourpred/3 in file
 *** Logtalk?
 "You can even use [Logtalk] to run Prolog module code in Prolog compilers such as GNU Prolog that don't include a module system."
  [fn::https://stackoverflow.com/questions/6695788/programming-in-the-large-with-prolog]
+*** How do we design a module system that subsumes both atom-based and predicate-based module systems?
+A module system is a name-prefixing mechanism.
+*** How do we add anonymous relations/predicates to Prolog?
+#+BEGIN_EXAMPLE
+let p = \ A :- (A = 1 ; A = 2).
+
+p(A) :- A = 1, A = 2.
+#+END_EXAMPLE
 ** Documentation system
 PlDoc <module> documentation should be taken to mean <file> documentation:
 It is files that are documented, not modules.
@@ -1743,6 +1755,10 @@ The file =/etc/odbcinst.ini= contains a list of driver names.
 [[http://www.swi-prolog.org/pldoc/doc_for?object=section(%2527packages/cql.html%2527)][SWI-Prolog CQL documentation]] doesn't inspire confidence.
 Draxler 1991 relates database table and Prolog predicate.
 CQL models SQL query in Prolog terms.
+
+Sketches, as good as non-existent: PL/SWI-Prolog[fn::https://github.com/salva/plswipl],
+psqlog[fn::http://hiro-tan.org/~ekoontz/psqlog/doc/psqlog.html],
+what[fn::https://twiki.org/cgi-bin/view/Plugins/SwiPrologToPostgreSqlAddOn].
 ** Relational-multidirectional-logic programming?
 ** The operations
 The story does not end with development.
@@ -2069,7 +2085,152 @@ example :-
 
 nb_write_address(+Address, -Thing)
 #+END_EXAMPLE
+* Higher-order logic programming
+** The problem with var/1: non-commutativity and non-monotonicity
+Usually conjunction is commutative: \(a \wedge b \equiv b \wedge a\).
+But var/1 breaks that.
+#+BEGIN_EXAMPLE
+p(A) :- var(A), A = 1.
+q(A) :- A = 1, var(A).
+
+?- p(A).
+A = 1.
+
+?- q(A).
+false.
+#+END_EXAMPLE
+** Lambda, closure, scoping, higher-order logic programming, relational programming
+Ulrich Neumerkel's "Lambdas in ISO Prolog"[fn::https://www.complang.tuwien.ac.at/ulrich/Prolog-inedit/ISO-Hiord.html].
+
+Logtalk 2.38.0 has lambda expressions.[fn::https://blog.logtalk.org/2009/12/lambda-expressions-in-logtalk/]
+
+Why can't it be this?
+Isn't "apply" just variable substitution?
+But the problem is not substitution.
+The problem is /scoping/.
+#+BEGIN_EXAMPLE
+apply(A^B, A, B).
+#+END_EXAMPLE
+
+<2019-04-05>
+See lambda.pro.
+It does the job, but the variables cannot be reused.
+
+Example of closure:
+#+BEGIN_EXAMPLE
+let makeGetter list = \ i -> elemAt list i
+#+END_EXAMPLE
+
+We can manually do closure conversion (lambda lifting)[fn::https://en.wikipedia.org/wiki/Lambda_lifting].
+
+Naish 1996 \cite{naish1996higher} [fn::http://www.complang.tuwien.ac.at/ulrich/Prolog-inedit/naish.html]:
+"First, we point out that call/N is not the way to go,
+despite its recent popularity as the primitive to use for higher order logic programming."
+
+Let's try something else.
+
+I propose "local predicate" as the logic-relational analog of the functional lambda expression.
+
+The meaning of the expression =A ^ B= is "prove B assuming that A is true".
+The semantics is substitution.
+
+Define the meaning of =A^B= as prove =B= assuming =A=.
+Thus, the meaning of =p(1) ^ (p(A), q(B))= is =(A = 1, q(B))=.
+
+Lambda expression is variable scoping.
+Prolog needs "knowledge base" scoping.
+
+Each lambda parameter x is encoded as a unary predicate x(A) that succeeds exactly once and unifies A to the value of the variable.
+
+Implication is the logic parallel of lambda abstraction.
+Proving is the logic parallel of lambda application.
+
+#+BEGIN_EXAMPLE
+lambda application: (x to x + 1) 23
+becomes
+prolog query: x(23), y(B) --> x(A), B is A+1
+#+END_EXAMPLE
+
+But this may be a bad idea, because the predicate x/1 is dynamically scoped.
+"Local dynamic clauses"
+
+Assert the antecedent when entering frame.
+Retract the antecedent when leaving frame.
+
+Ask at stackoverflow:
+
+Is there a with_assumption_prove_goal/2 predicate in Prolog?
+
+I am looking for "knowledge base scoping" as an analog of variable scoping in lambda expressions.
+
+#+BEGIN_EXAMPLE
+Assumption = (p(1) ; p(2)),
+Goal = (p(A), writeln(A)),
+with_assumption_prove_goal(Assumption, Goal)
+
+1
+2
+#+END_EXAMPLE
+
+It can be done with meta-interpretation.
+I think it can also be done with Prolog engines.
+
+http://www.complang.tuwien.ac.at/ulrich/Prolog-inedit/naish.html
+
+https://pdfs.semanticscholar.org/904a/b2253330cdd379c7a405f400c6f9152afdca.pdf
+
+Interesting google scholar search: logic with lexical scoping
+
+It may be disconcerting that it takes an academic article to add local variables.
+But we are doing it in a principled manner.
+We are thinking about how to add local variables to logic, not to a programming language.
+
+Predicate logic is dynamically scoped.
+p(G) leftarrow ( x(1) right arrow G)
+defines a local dynamic predicate x/1
+
+Currying requires keeping track of the arity of partially-applied functions.
+Currying readily generalizes to partially-applied relations.
+#+BEGIN_EXAMPLE
+f (x,y) -> (f x) y
+r (x,y) -> (r x) y
+#+END_EXAMPLE
+
+Logic vs relational?
+
+MacLennan 1981 \cite{maclennan1981overview},
+MacLennan 1983 \cite{maclennan1983relational}
+
+MacLennan 1981 \cite{maclennan1981introduction}:
+A function is a /left-univalent/ relation.
+I have been looking for that term.
+
+\(R \wedge S\) in relation is =R, S= in logic.
+
+The connection is fundamental:
+Every set \(R\) corresponds to a predicate \(\phi\) in this way: \(\SetBuilder{\vec{x}}{\phi(\vec{x})}\).
+We say that the predicate is an /intension/ and the set is an /extension/.
+** Is there a general-purpose relational programming language not restricted to databases?
+** Which point of view should we use: logic, set, relation?
+A relation is not a mere set, but is a /triple/ of domain, codomain, and mapping.
+Thus there is a /type theory/ of relations.
+** Prolog vs datalog
+Prolog is top-down/backward-chaining.
+Datalog is bottom-up/forward-chaining.
+** How does Lambda-Prolog extend Prolog?
+"The language Lambda-Prolog extends the logic of Horn clauses by allowing the use of implication not just in clauses, but also in goals,"
+among other things.[fn::http://www.lix.polytechnique.fr/~dale/lolli/]
+
+"By moving away from classical logic, Lambda Prolog was able to expand to a much larger fragment of logic: higher-order hereditary Harrop formulas.
+This allows some features, e.g. modules, to be handled in a logical way as opposed to the ad-hoc way they are handled in Prolog."
+ [fn::https://math.stackexchange.com/questions/1761680/what-formal-systems-are-various-programming-paradigms-based-on/1761959]
+** Why should a logic programming language be sound and complete?
+Prolog is unsound.
+So what?
+
+(example of Prolog's unsoundness?)
 * What next after Prolog?
+Gödel, λProlog, Twelf, Datalog, Answer-Set-Programming.[fn::https://github.com/webyrd/miniKanren-uncourse/wiki/Other-Interesting-Logic-or-Relational-Programming-Languages]
 ** Embedding Prolog/Haskell in Haskell/Prolog
 Why bother with this?
 Why not just use Oz?
@@ -2359,43 +2520,15 @@ I would love to be able to reprogram the interactions that the web-based systems
 I can’t change the way Amazon or B&H respond to what I do, for example, but I can surely change everything that has to do with the way my browser and my computer deal with these websites.
 And how better to do that than by simply canceling some pieces of interactive behavior and playing in new ones, using the very interface on which we interact, subject, of course, to my inability to change their behavior?
 #+END_QUOTE
-** Closures, higher-order logic programming
-Ulrich Neumerkel's "Lambdas in ISO Prolog"[fn::https://www.complang.tuwien.ac.at/ulrich/Prolog-inedit/ISO-Hiord.html].
-
-Logtalk 2.38.0 has lambda expressions.[fn::https://blog.logtalk.org/2009/12/lambda-expressions-in-logtalk/]
-
-Why can't it be this?
-Isn't "apply" just variable substitution?
-But the problem is not substitution.
-The problem is /scoping/.
+** Dynamic, assert, retract
+Assert accepts a clause.
 #+BEGIN_EXAMPLE
-apply(A^B, A, B).
+assert(man(fred)).
+assert(p(A,B) :- f(A), g(A), h(A,B)).
 #+END_EXAMPLE
-
-<2019-04-05>
-See lambda.pro.
-It does the job, but the variables cannot be reused.
-
-Example of closure:
-#+BEGIN_EXAMPLE
-let makeGetter list = \ i -> elemAt list i
-#+END_EXAMPLE
-
-We can manually do closure conversion (lambda lifting)[fn::https://en.wikipedia.org/wiki/Lambda_lifting].
-
-Naish 1996 \cite{naish1996higher} [fn::http://www.complang.tuwien.ac.at/ulrich/Prolog-inedit/naish.html]:
-"First, we point out that call/N is not the way to go,
-despite its recent popularity as the primitive to use for higher order logic programming."
-
-Let's try something else.
-
-I propose "local predicate" as the logic-relational analog of the functional lambda expression.
-
-The meaning of the expression =A ^ B= is "prove B assuming that A is true".
-The semantics is substitution.
-
-Define the meaning of =A^B= as prove =B= assuming =A=.
-Thus, the meaning of =p(1) ^ (p(A), q(B))= is =(A = 1, q(B))=.
+* Prolog implementation
+** How would we implement Prolog in C?
+SWI-Prolog has the macros =PL_succeed= and =PL_fail=.
 * What mess?
 ** Gospel
 If everyone could be 20x more productive using Prolog, then it is a sin to let them use Java or C++.
@@ -2703,7 +2836,7 @@ What is the difference: =, ~==~, ~=:=~, is
 Semantic Web should be applied to make SWI-Prolog packs searchable and manageable.
 
 SWI-Prolog packs need curation/vetting/testimony/promotion.
-*** <2019-04-02> Draft: SWI-Prolog roadmap suggestion: A clash-free module system
+*** <2019-04-02> Draft: A clash-free module system
 **** About this draft
 The target audience is the SWI-Prolog maintainer, Jan Wielemaker.
 
@@ -2715,21 +2848,30 @@ I wish to see such module system standardized and implemented.
 Where should we publish this to?
 - Post in SWI-Prolog Discourse group https://swi-prolog.discourse.group
 - Open an issue in SWI-Prolog Roadmap https://github.com/SWI-Prolog/roadmap
-**** The problem: We could be a victim of our own success if we don't act
-We must standardize a clash-free module system before we have too many users.
-Imagine that there were 10,000 SWI-Prolog packs: There would be naming conflicts.
-We can learn from the Haskell community's complaints with Haskell's module system,
-and do it right before it becomes too painful.
-Let us prepare, so that we do not become a victim of our own success.
-**** Criteria of a satisfactory solution
-A solution is satisfactory iff many people can write many Prolog libraries without name clashes.
-**** A possible solution
-I am proposing these constraints:
+**** Message
+Dear Prolog implementors,
+
+The Prolog community seems to be growing, and so is the number of SWI-Prolog packs.
+As more people write code, name clashes become more likely.
+We should standardize a clash-free module system before we have too many users and name clashes become too painful.
+
+There are two ways to avoid name clashes:
+- Rely on programmer coordination and discipline.
+  For example, the pack authors may prefix their module names by a domain name they control.
+  But it would be better for a system to avoid assuming that humans behave well.
+- Make name clashes impossible.
+  This is the path taken by JavaScript.
+  It is the only language I know that does this by its first-class modules.
+
+The key to clash-free module names is simple:
 - A file must not contain any module names/references.
-- use_module/2 must ignore its first argument (the module name).
+- The module/2 directive must ignore its first argument (the module name).
 - Dependency must be specified by file paths and not module names.
 
-I have a working code in [[https://github.com/edom/work/blob/master/software/boot/load.pro][boot/load.pro]].
+Both predicate-based and atom-based modules are fine, as long as a module does not name itself,
+that is, as long as a file does not expect to be loaded to a module with a certain name.
+**** Implementation details
+I have a working code for SWI-Prolog in [[https://github.com/edom/work/blob/master/software/boot/load.pro][boot/load.pro]].
 It defines an =import/2= directive using =term_expansion/2=.
 The loader generates module names.
 An example usage looks like this:
@@ -2739,7 +2881,7 @@ An example usage looks like this:
     , run/0 as somefile_run
 ]).
 #+END_EXAMPLE
-**** The semantics of the import/2 directive
+
 The presence of an =:- import(Source, Specs)= in a file means that the file requires some things from Source.
 
 Source may be:
@@ -2758,18 +2900,43 @@ Not yet implemented:
 importing operators like SWI-Prolog 7.6.4 use_module/2.
 #+BEGIN_EXAMPLE
 use_module(..., [
-    op(_,_,#<)
+    op(_,_,some_operator)
 ]).
 #+END_EXAMPLE
 
 One day someone may make it possible for Source to be =github(...)= or =pack(...)=,
 but perhaps we should not do that because it will increase compilation time.
-**** Other possibilities
-This is only one possibility in the design space of clash-free modules.
-Another solution is Logtalk.
-There may also be other solutions.
 
-Examples of other languages with clash-free module systems are JavaScript and TypeScript.
+An example language with a clash-free module system is JavaScript.
+Even better, modules are first-class in JavaScript.
+#+BEGIN_EXAMPLE
+function foo () {
+    var a = require("file1.js");
+    var b = require("file2.js");
+    console.log(a.x + b.y);
+}
+
+// a.js
+export let x = 1;
+
+// b.js
+export let y = 2;
+#+END_EXAMPLE
+
+What do you think?
+
+Best regards,
+
+Erik
+**** The problem: We could be a victim of our own success if we don't act
+Imagine that there were 10,000 SWI-Prolog packs: There would be naming conflicts.
+We can learn from the Haskell community's complaints with Haskell's module system,
+and do it right before it becomes too painful.
+Let us prepare, so that we do not become a victim of our own success.
+**** Criteria of a satisfactory solution
+Ideally, many people can write and use libraries without name clashes.
+**** Related discourses
+- Contributing libraries https://swi-prolog.discourse.group/t/contributing-libraries/381
 ** Discourse is interesting
 Discourse[fn::https://www.discourse.org] reputation system is an example of using software
 to enforce a policy that creates a system that self-heals against attacks.
