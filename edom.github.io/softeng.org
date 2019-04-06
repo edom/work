@@ -3170,5 +3170,19 @@ Each of them *requires a distinct mode of writing*."
 - Corollary: Group data and methods that need those data together in one class.
 - Can that principle derive these principles? http://c2.com/cgi/wiki?PrinciplesOfObjectOrientedDesign
 - You can write maintainable and reliable procedural code?
+** Why does software have security holes?
+Software has security holes because:
+1. Languages makes it too hard to do the right thing.
+2. Programmers are too lazy to do the right thing.
+
+Authentication systems such as OAuth are too complex for programmers to use or understand.
+Anything more than HTTP Basic Auth is too complex.
+It sucks to write code for handling authentication.
+How do we make a programming system such that handling authentication is not hard?
+What is authentication and authorization?
+
+"A Taxonomy of Causes of Software Vulnerabilities in Internet Software"
+https://pdfs.semanticscholar.org/5ec6/93950d1e6039e04a7b86a488e816ddcdd82e.pdf
+"software developers are making the same mistakes over and over again"
 * Bibliography
 bibliography:default

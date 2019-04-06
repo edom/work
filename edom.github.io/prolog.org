@@ -147,12 +147,13 @@ GNU Prolog is "a native-code compiler which produces standalone executables whic
  [fn::https://www.semanticscholar.org/paper/On-the-Implementation-of-GNU-Prolog-Diaz-Abreu/2c4f697f96202f988602e88c49625a862a4ce696]
 But as of 2019 GNU Prolog does not have a module system.
 
-See also:
-- https://en.wikipedia.org/wiki/Comparison_of_Prolog_implementations
-- Comparison between SWI Prolog, YAP, GNU Prolog http://www.david-reitter.com/compling/prolog/compare.html
+What can we conclude from Wikipedia?[fn::https://en.wikipedia.org/wiki/Comparison_of_Prolog_implementations]?
 
-Prolog in JavaScript/browser
-http://tau-prolog.org/
+Comparison between SWI Prolog, YAP, GNU Prolog.[fn::http://www.david-reitter.com/compling/prolog/compare.html]
+
+How current is this?[fn::http://www.fraber.de/university/prolog/comparison.html]
+
+Prolog in JavaScript/browser[fn::http://tau-prolog.org/]
 
 Questions that we should answer, for each implementation:
 - Who uses it?
@@ -162,6 +163,9 @@ Questions that we should answer, for each implementation:
 - Where is its source code?
 - Does the project seem alive?
 - Where is the community?
+
+The first impression to me is that XSB Prolog has stronger theoretical foundation
+and SWI-Prolog has stronger practical implementation.
 ** <2019-03-26> Is there any Prolog IDE?
 SWISH?
  [fn::http://www.swi-prolog.org/IDE.html]
@@ -2229,6 +2233,10 @@ Prolog is unsound.
 So what?
 
 (example of Prolog's unsoundness?)
+** How is Prolog unsound?
+From \cite[p.~18]{boizumault2014implementation}:
+- "The absence of the occur check entails the unsoundness of the resolution strategy used by Prolog."
+- "The main reason for this omission is a sensible gain in execution time."
 * What next after Prolog?
 Gödel, λProlog, Twelf, Datalog, Answer-Set-Programming.[fn::https://github.com/webyrd/miniKanren-uncourse/wiki/Other-Interesting-Logic-or-Relational-Programming-Languages]
 ** Embedding Prolog/Haskell in Haskell/Prolog
@@ -2289,6 +2297,8 @@ Mercury vs Prolog
 
 SQL? Datalog?
 ** History of logic programming? The key idea of logic programming operational semantics?
+If Prolog is the answer, what is the problem?
+The problem was the creation of natural-language user-interface.
 Colmerauer & Roussel 1996 \cite{colmerauer1996birth}:
 "It can be said that Prolog was the offspring of a successful marriage between natural language processing and automated theorem-proving."
 
@@ -2529,6 +2539,32 @@ assert(p(A,B) :- f(A), g(A), h(A,B)).
 * Prolog implementation
 ** How would we implement Prolog in C?
 SWI-Prolog has the macros =PL_succeed= and =PL_fail=.
+** Why does SWI-Prolog use Git submodules instead of a mono-repo?
+<2019-04-06>
+Jan Wielemaker wrote on Discourse[fn::https://swi-prolog.discourse.group/t/consolidating-the-71-github-repositories-to-simplify-maintenance-and-contribution/492/10]:
+#+BEGIN_QUOTE
+Submodules have had their value in the past when several of the modules were practically managed by other people.
+At the moment all package modules are practically in maintenance stage and this doesn’t matter too much, but I still like to be able to do so.
+Submodules were also intended to be shared with other Prolog systems.
+That too isn’t active right now, but work is going on between XSB and SWI, so who knows?
+#+END_QUOTE
+
+XSB Prolog source code is in a Subversion repository.
+
+Reading "Subversion Design"[fn::https://svn.apache.org/repos/asf/subversion/trunk/notes/subversion-design.html] helps us understand SVN.
+- Subversion can track an empty directory. Git cannot.
+- Both SVN
+  [fn::https://stackoverflow.com/questions/28465362/svn-tree-conflict-when-merging-renamed-folder]
+  [fn::https://www.theregister.co.uk/2017/03/17/subversion_svn_file_renaming/]
+  and Git have problems with merge conflicts that involve renames.
+** How to contribute to SWI-Prolog?
+*** How to clone the Git repository?
+<2019-04-06>
+SubmitPatch.html[fn::http://www.swi-prolog.org/howto/SubmitPatch.html] is a little messy.
+See unix.html[fn::http://www.swi-prolog.org/build/unix.html] about git submodules.
+See also Discourse[fn::https://swi-prolog.discourse.group/t/being-friendly-to-quick-contributions/493/3].
+
+It is not a simple git-clone, because we are using submodules.
 * What mess?
 ** Gospel
 If everyone could be 20x more productive using Prolog, then it is a sin to let them use Java or C++.
@@ -2937,6 +2973,12 @@ Let us prepare, so that we do not become a victim of our own success.
 Ideally, many people can write and use libraries without name clashes.
 **** Related discourses
 - Contributing libraries https://swi-prolog.discourse.group/t/contributing-libraries/381
+*** <2019-04-07> Improving contributor guide discoverability
+I wrote[fn::https://swi-prolog.discourse.group/t/improving-contributor-guide-discoverability-was-consolidating-the-71-github-repositories-to-simplify-maintenance-and-contribution/492/16]:
+#+BEGIN_QUOTE
+The information, the person, and the task must be /near to each other in space and time/.
+Ideally, the information is presented right where people need it when they need it.
+#+END_QUOTE
 ** Discourse is interesting
 Discourse[fn::https://www.discourse.org] reputation system is an example of using software
 to enforce a policy that creates a system that self-heals against attacks.
