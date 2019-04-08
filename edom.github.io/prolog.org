@@ -417,8 +417,19 @@ These resources say something about fixing programming errors:
 I commit my work to Git repository with Emacs Magit or git-gui.
 I sanity-check the tree with =gitk --all=.
 I push my work to my GitHub work repository.
-* Prolog as database programming language
-** Reading Prolog programs, and a crash course to logic
+* Understanding Prolog
+There are several models (ways of understanding what a Prolog program does):
+- procedural
+- database/relational
+- functional
+- logic
+
+The procedural way is what /actually/ happens.
+
+Sometimes an abstraction fails, and we have to know what is really going on under the abstraction.
+** What does Prolog code look like and what does it mean?
+A Prolog program is a collection of Horn clauses?
+*** Reading Prolog programs, and a crash course to logic
 What is the meaning/interpretation of a Prolog program?
 
 A /clause/ has the shape =Head :- Body=.
@@ -441,246 +452,7 @@ mother(rebecca, jacob).
 
 parent(A, B) :- father(A,B) ; mother(A,B).
 #+END_EXAMPLE
-** Prolog and ontology
-Writing a Prolog knowledge base is an exercise in ontology (a branch of philosophy, that studies beings and relationships).
-We ask these all the time:
-- What exist?
-- How do they relate?
-- How do we model all those entities and relationships in Prolog for not-too-slow computation?
-** "Pure" relation built from impure parts
-We can define a truly relational plus/3 that works for all mode combinations for natural numbers, but the code seems too much and illogical.
-
-#+BEGIN_EXAMPLE
-nat(A) :- integer(A), A >= 0.
-
-plus(A, B, C) :- nat(A), nat(B), nat(C), !, C =:= A + B.
-plus(A, B, C) :- nat(A), nat(B), !, C is A+B.
-plus(A, B, C) :- nat(A), nat(C), !, B is C-A.
-plus(A, B, C) :- nat(B), nat(C), !, A is C-B.
-plus(A, B, C) :- nat(A), !, between(0, inf, C), plus(A, B, C).
-plus(A, B, C) :- nat(B), !, between(0, inf, C), plus(A, B, C).
-plus(A, B, C) :- nat(C), !, between(0, C, A), plus(A, B, C).
-plus(A, B, C) :- between(0, inf, C), plus(A, B, C).
-#+END_EXAMPLE
-
-We can write that shorter in miniKanren which uses iterative-deepening search?
-
-** Knowledge representation; designing predicates; naming is hard
-One possible mapping is:
-- a noun maps to a term
-- a verb maps to a predicate
-
-Come to think of it, a transitive verb indeed denotes a relation between two nouns.
-
-The name of a predicate is less important than its mapping and its meaning.
-#+BEGIN_EXAMPLE
-father(abraham, isaac).
-beget(abraham, issac).
-papa(abraham, issac).
-spawn(abraham, issac).
-mystery_predicate(abraham, issac).
-#+END_EXAMPLE
-
-"A bird eats an apple" means \( \exists x \exists y ( bird(x) \wedge apple(y) \wedge eat(x,y) ) \).
-
-The name of a relation should describe the relationship.
-
-If we intend that there is only one relation between A and B that makes sense,
-then we may name that relation A_B.
-But:
-- What if A or B contains underscores?
-- Why do we prefer =father_child= to =beget= or =sire=?
-
-is_thing(A).
-
-A procedure's name should begin with a verb.
-
-Order the parameters from the most likely to be bound.
-If parameter A is more likely to be more bound than parameter B, then A should come before B.
-Example: Write list_length/2 instead of length_list/2.
-Unfortunately not everyone follows this convention.
-** Knowledge representation and software specification
-*** Their relationships
-- 2010, "Functional-Logic Programming Lecture Notes", Harold Boley, slides, [[http://www.cs.unb.ca/~boley/FLP/cs6905FLP.pdf][pdf]]
-  - Knowledge representation in AI roughly corresponds to software specification in software engineering.
-  - Declarative programs can be thought as executable specifications.
-  - Invertibility principle (slide 36)
-  - Nesting/conjunction principle (slide 46)
-  - Unification principle (slide 50)
-  - Amalgamation/integration principle (slide 55)
-  - That's a long deck: 270 slides.
-*** Executable specification?
-- lightweight executable mathematics https://www.cl.cam.ac.uk/~pes20/lem/
-** Total relational programming? Relational programs that can be proven to terminate?
-A total relation is a relation that is defined for every element in its domain.
-
-If there is total functional programming, then there should be total relational programming.
-
-It is too easy to write a Prolog program that doesn't terminate.
-** The meaning of a pure Prolog predicate
-The meaning of a predicate is the set of all ground terms that satisfy that predicate.
-Formally, the meaning of the predicate \(p\) is the set \( \SetBuilder{x}{p(x)} \).
-Such set is called the /extension/[fn::https://en.wikipedia.org/wiki/Extension_(predicate_logic)] of the predicate.
-
-In this example, what is the meaning of t/2 supposed to be?
-Declaratively, the query =?- t(A,B)= means the finite set ={(1,1)}=, and thus the query should terminate.
-But with SLD-resolution operational semantics, the query does not terminate.
-#+BEGIN_EXAMPLE
-e(1,1).
-
-t(A,B) :- e(A,M), t(M,B).
-#+END_EXAMPLE
-* Prolog as logic programming language
-** Multi-directional predicates
-A predicate has several uses: iteration, searching, testing, and other computation.
-A predicate can be used both to enumerate/iterate a finite set, to search for a satisfier, and to test membership.
-#+BEGIN_EXAMPLE
-person(alice).
-person(bob).
-
-?- person(charlie). % test membership
-?- once(person(A)). % satisfy
-?- person(A), !. % satisfy
-?- person(A). % iterate
-#+END_EXAMPLE
-
-A predicate can be used both to enumerate some infinite sets and to test membership.
-The programmer is reponsible to ensure that the recursion terminates.
-#+BEGIN_EXAMPLE
-nat(z).
-nat(s(A)) :- nat(A).
-#+END_EXAMPLE
-
-#+BEGIN_EXAMPLE
-succ(A, s(A)).
-
-succ(A, s(A)) :- nat(A).
-#+END_EXAMPLE
-
-For non-pure Prolog programs, we have to do some repetition if we want a multi-directional relation.
-#+BEGIN_EXAMPLE
-succ(A, B) :- integer(A), !, B is A+1.
-succ(A, B) :- integer(B), !, A is B-1.
-succ(A, B) :- !, type_error(succ, succ(A,B)).
-#+END_EXAMPLE
-
-But that can be done more elegantly with /constraint logic programming/.
-#+BEGIN_EXAMPLE
-succ(A, B) :- A + 1 #= B.
-#+END_EXAMPLE
-** Functional (deterministic) relation
-#+BEGIN_EXAMPLE
-f(In1, Out1) :- Guard1, !, Body1.
-...
-f(InN, OutN) :- GuardN, !, BodyN.
-f(In, _) :- !, type_error(Type, In).
-#+END_EXAMPLE
-** How to read declarative Prolog programs
-A /Horn clause/ =A :- B= means "to prove A, prove B".
-The left-arrow =:-= can be read as "if".
-
-#+BEGIN_EXAMPLE
-wet :- rain.
-wet :- sprinkle.
-
-% The same.
-
-wet :- rain ; sprinkle.
-#+END_EXAMPLE
-
-The conjunction =A,B= means prove A /and then/ prove B.
-Prolog proves them in sequence.
-
-Example:
-The fire triangle[fn::https://en.wikipedia.org/wiki/Fire_triangle]:
-#+BEGIN_EXAMPLE
-% A line comment begins with a percent sign.
-
-fire :- oxygen, heat, fuel.
-
-oxygen.
-heat.
-#+END_EXAMPLE
-
-Prolog complains about undefined predicate fuel/0.
-
-An alternative in which Prolog does not complain about undefined predicates:
-#+BEGIN_EXAMPLE
-known(oxygen).
-known(heat).
-known(fire) :- known((oxygen,heat,fuel)).
-known((A,B)) :- known(A), known(B).
-#+END_EXAMPLE
-
-We have just defined a small /world/, a small /ontology/.
-(Is this too fast-paced for beginners?)
-
-The disjunction =A;B= means prove A /or/ prove B.
-If A fails, Prolog backtracks and tries to prove B.
-
-Non-variables in clause head abbreviate unification.
-For example, =p(a,b) :- Q= abbreviates =p(A,B) :- A=a, B=b, Q=.
-
-=A :- B= is pure iff all reordering of the phrases of B doesn't change the result?
-
-=\+A= means "fail to prove A".
-It is not classical-logical negation.
-
-Every variable is implicitly universally quantified.
-
-The prompt =?- Q= means we ask Prolog to prove =Q=.
-
-Perhaps elucidating
-https://en.wikipedia.org/wiki/Prolog_syntax_and_semantics
-
-We often define a set \(A\) with the set-builder notation \( \SetBuilder{x}{\phi_A(x)} \).
-We should not conflate a set \(A\) and its membership-testing predicate \(\phi_A\).
-
-A set can be thought as all the ground terms that satisfy a predicate.
-#+BEGIN_EXAMPLE
-% person ~ {joe}
-person(joe).
-
-% natural ~ {0, 1, 2, ...}
-natural(N) :- integer(N), N >= 0.
-#+END_EXAMPLE
-** Epistemic interpretation of Prolog programs: Failure as ignorance
-Sometimes a Prolog program should be interpreted epistemically,
-in which Prolog's /fail/ is treated as /unknown/ instead of /false/.
-In this interpretation:
-- Succeeding to prove a goal G means that we know that G is true.
-- Failing to prove a goal G means that we do not know anything about G.
-
-There are two negations: There is a difference between not/1 and \+/1.
-In the epistemic interpretation, "\+" should be read as "unknown".
-
-=\+G= means we do not know G.
-
-Succeeding to prove not(G) means that we know that G is false.
-#+BEGIN_EXAMPLE
-:- multifile not/1.
-#+END_EXAMPLE
-
-We waive the law of excluded middle.
-In our Prolog program it does not hold that G ; not(G).
-
-Suppose is_big(john).
-If is_big(X) fails, it simply means that we don't know whether X is big.
-
-Suppose that is_big(john,true) means we know that John is big.
-And is_big(john,false) means we know that John is not big.
-If is_big(john,_) fails, then we don't know whether John is big or not.
-** Naming the parts of a list: head, tail, and butt
-- "head" is the first element
-- "tail" is everything but the head
-- "butt" is the last element
-** Defining your own operators
-- =:- op(Precedence, Type, Name)=
-* Prolog as procedural programming language
-Some ugly things are unfortunately necessary.
-There are always some dirty jobs in real-world programming.
-Example dirty jobs are input-output and error handling.
-** The meanings of a Horn clause
+*** The meanings of a Horn clause
 A Horn clause in Prolog looks like =A :- B=.
 
 A Horn clause can be thought of in several ways.
@@ -715,8 +487,66 @@ What is the relationship between logic programming, relational programming, logi
 
 If each phrase is deterministic (always succeeds exactly once and never fails),
 then Prolog becomes a procedural programming language with assign-once variables and unification.
-** Prolog operational semantics
-*** Swapped phrases, depth-first, breadth-first
+*** The procedural-provability-logic interpretation of Prolog Horn clauses
+=p :- q, r= can be interpreted as "to prove p, first prove q, and then prove r".
+**** Problem: Horn clauses and biimplications
+Classical propositional logic formula \( a \iff b \) (which is equivalent to \((a \to b) \wedge (b \to a)\)) does /not/ translate to this Prolog program:
+#+BEGIN_EXAMPLE
+a :- b.
+b :- a.
+#+END_EXAMPLE
+Querying =?- a= does not terminate.
+
+This terminates:
+#+BEGIN_EXAMPLE
+% H is the hypothesis bag.
+
+a(H) :- member(a,H).
+a(H) :- \+ member(a,H), b(H).
+
+b(H) :- member(b,H).
+b(H) :- \+ member(b,H), a(H).
+#+END_EXAMPLE
+** What actually happens under the hood?
+*** Prolog is a depth-first brute-forcer
+But you can emulate other search algorithms too.
+**** Non-termination pitfalls, and how to generate terms correctly
+Sometimes we forget that Prolog, on failure, backtracks (retries), not stops.
+
+Sometimes we focus too much on the logical reading and neglect the procedural reading.
+
+For example, suppose that you want to generate all lists whose length doesn't exceed 2.
+
+The following is a mathematically correct statement about that fact,
+but it doesn't work in Prolog.
+It has correct logical reading, but incorrect procedural reading.
+If you keep pressing =;=, this will fail to terminate.
+#+BEGIN_SRC prolog
+?- length(A, LA), LA =< 2.
+#+END_SRC
+
+The correct way to do that is to use =between/3= (inclusive):
+#+BEGIN_SRC prolog
+?- between(0, 2, LA), length(A, LA).
+#+END_SRC
+
+We can also use the =clpfd= library:
+#+BEGIN_SRC prolog
+:- use_module(library(clpfd)).
+
+?- LA in 0..2, indomain(LA), length(A, LA).
+#+END_SRC
+
+We shouldn't have to resort to cuts:
+#+BEGIN_SRC prolog
+% Don't do this.
+?- length(A, LA), (LA =< 2 -> true; !, fail).
+#+END_SRC
+
+See also:
+- https://www.metalevel.at/prolog/nontermination
+  - "[Non-termination is] common among beginners, and often lead them to perceive Prolog as 'slow', when in fact their program does not terminate /at all/."
+*** Swapped phrases, depth-first, breadth-first?
 In this example, there is only a small syntactic difference between =dfs= and =bfs= (it's just flipped order).
 Which one exploits tail call optimization (last call optimization)?
 #+BEGIN_SRC prolog
@@ -785,48 +615,411 @@ How far does a cut cut?
 "The craft of Prolog" defines three kinds of cuts: red, green, and blue.
 - A red cut destroys the logical meaning of a program.
   Green and blue cuts don't.
-*** Prolog is a depth-first brute-forcer
-But you can emulate other search algorithms too.
-**** Non-termination pitfalls, and how to generate terms correctly
-Sometimes we forget that Prolog, on failure, backtracks (retries), not stops.
 
-Sometimes we focus too much on the logical reading and neglect the procedural reading.
+** Why was Prolog invented?
+If Prolog is the answer, what is the problem?
+The problem was the creation of natural-language user-interface.
+Colmerauer & Roussel 1996 \cite{colmerauer1996birth}:
+"It can be said that Prolog was the offspring of a successful marriage between natural language processing and automated theorem-proving."
 
-For example, suppose that you want to generate all lists whose length doesn't exceed 2.
+Philippe Roussel coined the name "Prolog" in Marseilles in 1972. \cite{colmerauer1996birth}
 
-The following is a mathematically correct statement about that fact,
-but it doesn't work in Prolog.
-It has correct logical reading, but incorrect procedural reading.
-If you keep pressing =;=, this will fail to terminate.
-#+BEGIN_SRC prolog
-?- length(A, LA), LA =< 2.
-#+END_SRC
+Robinson 1965 \cite{robinson1965machine}
 
-The correct way to do that is to use =between/3= (inclusive):
-#+BEGIN_SRC prolog
-?- between(0, 2, LA), length(A, LA).
-#+END_SRC
+The key idea of logic programming is the interpretation of a Horn clause as a procedure declaration (Kowalski 1974 \cite{kowalski1974predicate}).
 
-We can also use the =clpfd= library:
-#+BEGIN_SRC prolog
-:- use_module(library(clpfd)).
+Logic seems to be the internal language of thought.
 
-?- LA in 0..2, indomain(LA), length(A, LA).
-#+END_SRC
+Elaborated in van Emden & Kowalski 1976 \cite{van1976semantics}.
 
-We shouldn't have to resort to cuts:
-#+BEGIN_SRC prolog
-% Don't do this.
-?- length(A, LA), (LA =< 2 -> true; !, fail).
-#+END_SRC
+Predicate logic can be used both for programming and for knowledge representation.
 
-See also:
-- https://www.metalevel.at/prolog/nontermination
-  - "[Non-termination is] common among beginners, and often lead them to perceive Prolog as 'slow', when in fact their program does not terminate /at all/."
+What is "refutation-complete"[fn::https://en.wikipedia.org/wiki/SLD_resolution]?
 
-** Cuts
+http://www.prolog-heritage.org/en/ph1.html
+
+SWI-Prolog goes back to 1986.[fn::http://www.swi-prolog.org/pldoc/man?section=implhistory]
+
+Did logic programming emerge from automated theorem proving?
+What is computational logic?
+What is automated reasoning?
+
+Maarten van Emden has a blog[fn::https://vanemden.wordpress.com].
+
+The relationship between Lisp and lambda calculus is superficial:
+van Emden[fn::https://vanemden.wordpress.com/2017/09/08/conceptual-integrity-why-it-matters-and-how-to-get-it/]) wrote that John McCarthy wrote (emphasis mine):
+#+BEGIN_QUOTE
+To use functions as arguments, one needs a notation for functions, and it seemed natural to use the lambda notation of Church (1941).
+/I didn’t understand the rest of his book/, so I wasn’t tempted to try to implement his more general mechanism for defining functions.
+#+END_QUOTE
+** <2018-12-05> How to present Prolog to newcomers
+This is a draft.
+These are slides.
+Assume that one section is one slide.
+
+There are several ways to introduce Prolog:
+- as a deductive database
+- as a logic programming language
+- as a procedural programming language with backtracking
+- as a natural language processing tool, which is its original reason of existence \cite{colmerauer1996birth}
+- as an artifical intelligence tool (what? automated reasoning?)
+
+It may be best to introduce Prolog as a deductive database.
+We want people to have understanding and good habit.
+*** "Talking" with the computer
+We can think of an interactive Prolog session as a /conversation/ with the computer.
+
+The Prolog phrase "append(A, B, C)" means the English clause "appending list A and list B produces list C".
+
+Here we show some ways of calling append/3.
+
+Here we show how to read Prolog fragments in English.
+
+"Prolog, does appending [1] and [2,3] produce [1,2,3]?"
+#+BEGIN_EXAMPLE
+?- append([1], [2,3], [1,2,3]).
+true.
+#+END_EXAMPLE
+
+"Prolog, what does appending [1] and [2,3] produce?"
+#+BEGIN_EXAMPLE
+?- append([1], [2,3], C).
+C = [1,2,3].
+#+END_EXAMPLE
+
+"Prolog, what list do I have to append to [1] in order to produce [1,2,3]?"
+#+BEGIN_EXAMPLE
+?- append([1], B, [1,2,3]).
+B = [2,3].
+#+END_EXAMPLE
+
+"Prolog, what list produces [1,2,3] when appended with [2,3]?"
+#+BEGIN_EXAMPLE
+?- append(A, [2,3], [1,2,3]).
+A = [1] ;
+false.
+#+END_EXAMPLE
+
+"Prolog, does appending [1] and [2] produce [1,2,3]?"
+#+BEGIN_EXAMPLE
+?- append([1], [2], [1,2,3]).
+false.
+#+END_EXAMPLE
+
+We press ";" to ask Prolog to find another solution.
+Prolog prints "false" when it doesn't find any more solutions.
+
+"Prolog, what list produces [1] when appended with itself?"
+#+BEGIN_EXAMPLE
+?- append(A, A, [1]).
+false.
+#+END_EXAMPLE
+
+"Prolog, what list produces [1,2,1,2] when appended with itself?"
+
+"[1,2]."
+
+"Is there any other such list?"
+
+"No."
+#+BEGIN_EXAMPLE
+?- append(A, A, [1,2,1,2]).
+A = [1,2] ;
+false.
+#+END_EXAMPLE
+
+"Prolog, what two lists A and B produce [1,2,3] when appended?"
+#+BEGIN_EXAMPLE
+append(A, B, [1,2,3]).
+A = [], B = [1,2,3] ;
+A = [1], B = [2,3] ;
+A = [1,2], B = [3] ;
+A = [1,2,3], B = [] ;
+false.
+#+END_EXAMPLE
+*** Write once, run in several directions
+The Prolog code for append/3 seems simple.
+We can see in SWI-Prolog library/lists.pl [[http://www.swi-prolog.org/pldoc/doc/_SWI_/library/lists.pl?show=src#append/3][append/3]] (I renamed some variables):
+#+BEGIN_EXAMPLE
+append([], B, B).
+append([H|A], B, [H|C]) :- append(A, B, C).
+#+END_EXAMPLE
+
+Haskell seems simpler:
+#+BEGIN_EXAMPLE
+append [] b = b
+append (h : a) b = h : append a b
+#+END_EXAMPLE
+
+But those fragments differ.
+In Prolog we can run the code in other /directions/.
+There are 3 parameters, each with two directions (input/bound or output/unbound); thus there are 2^3 = 8 possible directions.
+The Prolog predicate translates to at least 5 Haskell functions,
+for the 5 ways of using append/3 we saw earlier.
+
+We write append/3 once, and we get at least five ways of calling it.
+
+But this beautiful dream crumbles outside pure symbolic logic programming.
+*** Another declarative example: palindromes
+"A list L is a palindrome iff L is its own reverse."
+#+BEGIN_EXAMPLE
+palindrome(L) :- reverse(L, L).
+#+END_EXAMPLE
+*** Learning resources?
+2015
+Approaches for Learning Prolog Programming
+https://www.tandfonline.com/doi/full/10.11120/ital.2007.06040088
+
+[[http://kti.ms.mff.cuni.cz/~bartak/prolog/index.html][Roman Barták's "On-line Guide to Prolog Programming"]]
+
+https://www.cis.upenn.edu/~matuszek/Concise%20Guides/Concise%20Prolog.html
+
+display/1 vs write_canonical/2? https://swi-prolog.discourse.group/t/re-swipl-re-pedagogy/48/10
+** Why use Prolog for AI?
+Because Prolog produces /explainable/ AI.
+** Prolog as database programming language
+*** Prolog and ontology
+Writing a Prolog knowledge base is an exercise in ontology (a branch of philosophy, that studies beings and relationships).
+We ask these all the time:
+- What exist?
+- How do they relate?
+- How do we model all those entities and relationships in Prolog for not-too-slow computation?
+*** "Pure" relation built from impure parts
+We can define a truly relational plus/3 that works for all mode combinations for natural numbers, but the code seems too much and illogical.
+
+#+BEGIN_EXAMPLE
+nat(A) :- integer(A), A >= 0.
+
+plus(A, B, C) :- nat(A), nat(B), nat(C), !, C =:= A + B.
+plus(A, B, C) :- nat(A), nat(B), !, C is A+B.
+plus(A, B, C) :- nat(A), nat(C), !, B is C-A.
+plus(A, B, C) :- nat(B), nat(C), !, A is C-B.
+plus(A, B, C) :- nat(A), !, between(0, inf, C), plus(A, B, C).
+plus(A, B, C) :- nat(B), !, between(0, inf, C), plus(A, B, C).
+plus(A, B, C) :- nat(C), !, between(0, C, A), plus(A, B, C).
+plus(A, B, C) :- between(0, inf, C), plus(A, B, C).
+#+END_EXAMPLE
+
+We can write that shorter in miniKanren which uses iterative-deepening search?
+
+*** Knowledge representation; designing predicates; naming is hard
+One possible mapping is:
+- a noun maps to a term
+- a verb maps to a predicate
+
+Come to think of it, a transitive verb indeed denotes a relation between two nouns.
+
+The name of a predicate is less important than its mapping and its meaning.
+#+BEGIN_EXAMPLE
+father(abraham, isaac).
+beget(abraham, issac).
+papa(abraham, issac).
+spawn(abraham, issac).
+mystery_predicate(abraham, issac).
+#+END_EXAMPLE
+
+"A bird eats an apple" means \( \exists x \exists y ( bird(x) \wedge apple(y) \wedge eat(x,y) ) \).
+
+The name of a relation should describe the relationship.
+
+If we intend that there is only one relation between A and B that makes sense,
+then we may name that relation A_B.
+But:
+- What if A or B contains underscores?
+- Why do we prefer =father_child= to =beget= or =sire=?
+
+is_thing(A).
+
+A procedure's name should begin with a verb.
+
+Order the parameters from the most likely to be bound.
+If parameter A is more likely to be more bound than parameter B, then A should come before B.
+Example: Write list_length/2 instead of length_list/2.
+Unfortunately not everyone follows this convention.
+*** Knowledge representation and software specification
+**** Their relationships
+- 2010, "Functional-Logic Programming Lecture Notes", Harold Boley, slides, [[http://www.cs.unb.ca/~boley/FLP/cs6905FLP.pdf][pdf]]
+  - Knowledge representation in AI roughly corresponds to software specification in software engineering.
+  - Declarative programs can be thought as executable specifications.
+  - Invertibility principle (slide 36)
+  - Nesting/conjunction principle (slide 46)
+  - Unification principle (slide 50)
+  - Amalgamation/integration principle (slide 55)
+  - That's a long deck: 270 slides.
+**** Executable specification?
+- lightweight executable mathematics https://www.cl.cam.ac.uk/~pes20/lem/
+*** Total relational programming? Relational programs that can be proven to terminate?
+A total relation is a relation that is defined for every element in its domain.
+
+If there is total functional programming, then there should be total relational programming.
+
+It is too easy to write a Prolog program that doesn't terminate.
+*** The meaning of a pure Prolog predicate
+The meaning of a predicate is the set of all ground terms that satisfy that predicate.
+Formally, the meaning of the predicate \(p\) is the set \( \SetBuilder{x}{p(x)} \).
+Such set is called the /extension/[fn::https://en.wikipedia.org/wiki/Extension_(predicate_logic)] of the predicate.
+
+In this example, what is the meaning of t/2 supposed to be?
+Declaratively, the query =?- t(A,B)= means the finite set ={(1,1)}=, and thus the query should terminate.
+But with SLD-resolution operational semantics, the query does not terminate.
+#+BEGIN_EXAMPLE
+e(1,1).
+
+t(A,B) :- e(A,M), t(M,B).
+#+END_EXAMPLE
+** Prolog as logic programming language
+*** Multi-directional predicates
+A predicate has several uses: iteration, searching, testing, and other computation.
+A predicate can be used both to enumerate/iterate a finite set, to search for a satisfier, and to test membership.
+#+BEGIN_EXAMPLE
+person(alice).
+person(bob).
+
+?- person(charlie). % test membership
+?- once(person(A)). % satisfy
+?- person(A), !. % satisfy
+?- person(A). % iterate
+#+END_EXAMPLE
+
+A predicate can be used both to enumerate some infinite sets and to test membership.
+The programmer is reponsible to ensure that the recursion terminates.
+#+BEGIN_EXAMPLE
+nat(z).
+nat(s(A)) :- nat(A).
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+succ(A, s(A)).
+
+succ(A, s(A)) :- nat(A).
+#+END_EXAMPLE
+
+For non-pure Prolog programs, we have to do some repetition if we want a multi-directional relation.
+#+BEGIN_EXAMPLE
+succ(A, B) :- integer(A), !, B is A+1.
+succ(A, B) :- integer(B), !, A is B-1.
+succ(A, B) :- !, type_error(succ, succ(A,B)).
+#+END_EXAMPLE
+
+But that can be done more elegantly with /constraint logic programming/.
+#+BEGIN_EXAMPLE
+succ(A, B) :- A + 1 #= B.
+#+END_EXAMPLE
+*** Functional (deterministic) relation
+#+BEGIN_EXAMPLE
+f(In1, Out1) :- Guard1, !, Body1.
+...
+f(InN, OutN) :- GuardN, !, BodyN.
+f(In, _) :- !, type_error(Type, In).
+#+END_EXAMPLE
+*** How to read declarative Prolog programs
+A /Horn clause/ =A :- B= means "to prove A, prove B".
+The left-arrow =:-= can be read as "if".
+
+#+BEGIN_EXAMPLE
+wet :- rain.
+wet :- sprinkle.
+
+% The same.
+
+wet :- rain ; sprinkle.
+#+END_EXAMPLE
+
+The conjunction =A,B= means prove A /and then/ prove B.
+Prolog proves them in sequence.
+
+Example:
+The fire triangle[fn::https://en.wikipedia.org/wiki/Fire_triangle]:
+#+BEGIN_EXAMPLE
+% A line comment begins with a percent sign.
+
+fire :- oxygen, heat, fuel.
+
+oxygen.
+heat.
+#+END_EXAMPLE
+
+Prolog complains about undefined predicate fuel/0.
+
+An alternative in which Prolog does not complain about undefined predicates:
+#+BEGIN_EXAMPLE
+known(oxygen).
+known(heat).
+known(fire) :- known((oxygen,heat,fuel)).
+known((A,B)) :- known(A), known(B).
+#+END_EXAMPLE
+
+We have just defined a small /world/, a small /ontology/.
+(Is this too fast-paced for beginners?)
+
+The disjunction =A;B= means prove A /or/ prove B.
+If A fails, Prolog backtracks and tries to prove B.
+
+Non-variables in clause head abbreviate unification.
+For example, =p(a,b) :- Q= abbreviates =p(A,B) :- A=a, B=b, Q=.
+
+=A :- B= is pure iff all reordering of the phrases of B doesn't change the result?
+
+=\+A= means "fail to prove A".
+It is not classical-logical negation.
+
+Every variable is implicitly universally quantified.
+
+The prompt =?- Q= means we ask Prolog to prove =Q=.
+
+Perhaps elucidating
+https://en.wikipedia.org/wiki/Prolog_syntax_and_semantics
+
+We often define a set \(A\) with the set-builder notation \( \SetBuilder{x}{\phi_A(x)} \).
+We should not conflate a set \(A\) and its membership-testing predicate \(\phi_A\).
+
+A set can be thought as all the ground terms that satisfy a predicate.
+#+BEGIN_EXAMPLE
+% person ~ {joe}
+person(joe).
+
+% natural ~ {0, 1, 2, ...}
+natural(N) :- integer(N), N >= 0.
+#+END_EXAMPLE
+*** Epistemic interpretation of Prolog programs: Failure as ignorance
+Sometimes a Prolog program should be interpreted epistemically,
+in which Prolog's /fail/ is treated as /unknown/ instead of /false/.
+In this interpretation:
+- Succeeding to prove a goal G means that we know that G is true.
+- Failing to prove a goal G means that we do not know anything about G.
+
+There are two negations: There is a difference between not/1 and \+/1.
+In the epistemic interpretation, "\+" should be read as "unknown".
+
+=\+G= means we do not know G.
+
+Succeeding to prove not(G) means that we know that G is false.
+#+BEGIN_EXAMPLE
+:- multifile not/1.
+#+END_EXAMPLE
+
+We waive the law of excluded middle.
+In our Prolog program it does not hold that G ; not(G).
+
+Suppose is_big(john).
+If is_big(X) fails, it simply means that we don't know whether X is big.
+
+Suppose that is_big(john,true) means we know that John is big.
+And is_big(john,false) means we know that John is not big.
+If is_big(john,_) fails, then we don't know whether John is big or not.
+*** Naming the parts of a list: head, tail, and butt
+- "head" is the first element
+- "tail" is everything but the head
+- "butt" is the last element
+*** Defining your own operators
+- =:- op(Precedence, Type, Name)=
+** Prolog as procedural programming language
+Some ugly things are unfortunately necessary.
+There are always some dirty jobs in real-world programming.
+Example dirty jobs are input-output and error handling.
+*** Cuts
 - slide 5-28, pitfalls in implementing abs with cut http://users.informatik.uni-halle.de/~brass/lp06/c5_propr.pdf
-** Speeding things up
+*** Speeding things up
 The first thing to do is to get an unbiased profiler.
 
 (Is SWI-Prolog profiler unbiased?)
@@ -836,7 +1029,7 @@ Profiling: finding where your program spends time; finding where it is slow; dia
 To run your =Goal= with profiling, simply query =profile(Goal)=.
 
 Profiling couldn't be any simpler than this!
-** Functional/expression style sometimes beats relational/unification style
+*** Functional/expression style sometimes beats relational/unification style
 #+BEGIN_EXAMPLE
 -- Functional/expression style
 g (f0 x0) (f1 x1) (f2 x2)
@@ -867,8 +1060,8 @@ Dynamic languages (Scheme, JavaScript, Prolog) / gradual-typed languages (TypeSc
 How about Ocaml polymorphic variants?
 
 Should we move from Prolog to Scheme/miniKanren or Mercury?
-** Operators complicate parsing a Prolog source code
-** Zero-arity compound term
+*** Operators complicate parsing a Prolog source code
+*** Zero-arity compound term
 SWI-Prolog extension compound_name_arity/3 vs ISO standard functor/3.[fn::http://www.swi-prolog.org/pldoc/man?section=ext-compound-zero]
 
 - A function symbol with arity 2 looks like f(x,y).
@@ -885,104 +1078,16 @@ Problem arises when we want to distinguish between the x that is a variable refe
 We can introduce additional abstract syntax to wrap and disambiguate them: var(x) and call(x,[]).
 
 It is embarrassing that we have known zero for at least 2,000 years and yet we still have problems with zero.
-** Some Prolog negation tricks?
+*** Some Prolog negation tricks?
 Prolog =\+= can be used to limit the scope of unification, although not the scope of the variable itself.
 This exploits the fact that throw/1 does not backtrack in the way fail/0 does.
 
 When using Prolog procedurally, we often want throw/1 instead of fail/0.
 
 It makes more sense to design a procedural DSL on Prolog than to use Prolog itself procedurally.
-** The procedural-provability-logic interpretation of Prolog Horn clauses
-=p :- q, r= can be interpreted as "to prove p, first prove q, and then prove r".
-*** Problem: Horn clauses and biimplications
-Classical propositional logic formula \( a \iff b \) (which is equivalent to \((a \to b) \wedge (b \to a)\)) does /not/ translate to this Prolog program:
-#+BEGIN_EXAMPLE
-a :- b.
-b :- a.
-#+END_EXAMPLE
-Querying =?- a= does not terminate.
-
-This terminates:
-#+BEGIN_EXAMPLE
-% H is the hypothesis bag.
-
-a(H) :- member(a,H).
-a(H) :- \+ member(a,H), b(H).
-
-b(H) :- member(b,H).
-b(H) :- \+ member(b,H), a(H).
-#+END_EXAMPLE
-** Purifying Prolog?
+*** Purifying Prolog?
 - assert/2 can be replaced with two parameters (state and next-state).
-** Error handling and logging
-*** Fail, throw, stack traces
-Two options: throw or fail.
-
-If backtracking doesn't make sense, then throw, don't fail.
-
-#+BEGIN_EXAMPLE
-person(joe).
-pair_first_second(pair(A,_), A, B).
-#+END_EXAMPLE
-
-Should =person(1)= fail or throw?
-Should =pair_first_second(foo)= fail or throw?
-
-Fail means try the next alternative.
-
-If you want throw/1 with stack trace,
-you must write it like =throw(error(Something, _))=.
-
-A /function/ should always throw and not fail, when an argument has a wrong type.
-
-#+BEGIN_EXAMPLE
-negate(A,B) :- integer(A), !, B is -A.
-negate(A,B) :- integer(B), !, A is -B.
-negate(A,B) :- throw(error(negate(A,B),_)).
-#+END_EXAMPLE
-
-- https://wiki.colby.edu/display/~amvartan/Exception+and+Error+Handling+in+Prolog
-- https://stackoverflow.com/questions/32968148/why-throw-an-exception-in-prolog-instead-a-simple-fail
-*** Structured logging
-This is how we log messages in Prolog:
-- Design a term that represents the /meaning/ of the message.
-- Call =print_message(Kind,Message)= where Message is that term.
-- Extend =prolog:message//1= to translate that term to string.
-
-#+BEGIN_EXAMPLE
-% Syntax:
-prolog:message(Term) --> Lines.
-
-% Example:
-prolog:message(Term) -->
-    [ 'The term is ~q.'-[Term] ],
-    [ 'This is the second line in the message.' ].
-#+END_EXAMPLE
-
-Syntax description:
-- 'Lines' is a list of 'Line's.
-  - A 'Line' has this shape:
-    - Format-Args: 'Format' and 'Args' are the same arguments accepted by format/2.
-    - Terms of other shapes are converted to string.
-
-The printed message is the concatenation of all 'Line's.
-
-TODO:
-- How do we log to file?
-- How do we rotate log files?
-
-References:
-- [[http://www.pathwayslms.com/swipltuts/message/index.html][Anne Ogborn's "Printing Messages in SWI-Prolog"]]
-- http://www.swi-prolog.org/pldoc/man?section=printmsg
-- http://www.swi-prolog.org/pldoc/man?section=debug
-- https://www.metalevel.at/prolog/business
-
-Usability issues:
-- Where is =prolog:message//1= documented?
-  I found that by looking at others' source code.
-  There does not seem to be any documentation, or if there is, then it is at the wrong place.
-- Why do we require people to understand DCG rules before they can use the messaging system?
-** States and dynamic predicates
+*** States and dynamic predicates
 Suppose that we want to write SQL connection pool.
 We need state.
 How do we write states in Prolog?
@@ -1166,59 +1271,6 @@ Some disciplines are required:
 - Avoid depending on module systems.
 - Each declarative source file is a small /ontology/.
   Each imperative source file /merges/ some ontologies.
-** Organizing and loading Prolog source files without name clashes
-Prolog multifile predicates can be used for /dependency injection/.
-Instead of importing a module, declare a multifile predicate and let the user link that predicate.
-
-Prolog source files come in /two kinds/ depending on how they are loaded: /type-1/ files and /type-2/ (module-free) files.
-In short, a type-2 file should not assume that the Prolog implementation has a module system, unless when defining meta-predicates.
-The discipline is:
-- A type-2 file should not contain any directives except include/1.
-  Thus a type-2 file must not begin with module/2 directive, and must not use the use_module/[1,2] directive.
-- A type-2 file should not contain hard-coded module references.
-  A type-2 file should not contain any qualified M:P call where M is a hard-coded atom;
-  it is fine if M is a variable.
-
-There are several mostly incompatible ways to load a Prolog source file:
-- include/1, only works as directive
-- consult/1
-- consult_unregistered/1, which is load_files/2 with register(false) option
-- use_module/2
-- load_files/2
-- consult_unregistered_into_module/2, which is just load_files/2 with module/1 and register(false) options
-- Logtalk, logtalk_load/1, logtalk_load/2
-
-The function of the main file is to link the non-main files.
-To maximize reusability and minimize name clash,
-a non-main file must not contain any hard-coded module names:
-Those files must not contain module/2 declarations and use_module/[1,2] directives.
-** Component/module system, socket-plug metaphor
-I need a component system for programming in the large.
-Prolog module system is a building block, but Prolog modules by themselves are not enough.
-Socket-and-plug metaphor fits nicely?
-The name tells it all:
-a socket is a female connector and a plug is a male connector,
-and we connect plugs to sockets,
-and Prolog should complain if it sees a socket that is connected not exactly once.
-
-An input is a multifile predicate.
-
-A pin is a Name/Arity term.
-
-A plug exports symbols.
-
-A socket imports symbols.
-
-A module may have multiple plugs and sockets.
-
-Pins are matched by NameArity.
-The ordering of pins does not matter.
-
-A Prolog module system is either /predicate-based/ or /atom-based/.
-XSB is atom-based.
-SWI is predicate-based.
-GNU Prolog does not have a module system.
-
 ** Writing extensible knowledge bases
 *** Multifile or parametrization-and-catamorphism?
 #+BEGIN_EXAMPLE
@@ -1305,79 +1357,6 @@ Because it enables us to change the representation without changing the meaning 
 It is the same as abstract data types in other languages.
 
 We can see an as atom as a singleton predicate, that is, a predicate that is satisfied by one thing only, that is the atom.
-** Rethinking Prolog module systems
-*** How do module systems arise?
-We are merrily writing codes until our program grows big and we have difficulty finding things.
-Then we feel that something has to be done.
-
-We make module systems because we are humans with limited working memory.
-Our only weapon against complexity is divide-and-conquer and hierarchical abstraction/categorization.
-*** What
-Each predicate has a name.
-
-A /module/ is a set of predicates.
-
-A /file/ also contains a set of predicates.
-
-A module is the internal representation
-File contains the external representation.
-The analogy:
-A module contains thoughts.
-A file countains writings representing those thoughts.
-
-If the relationship between a file and a module does not have to be 1:1,
-then complications arise.
-
-We assume 1:1 relationship between files and modules.
-
-Problems:
-- M:N mapping between files and modules
-- Name clashes
-- Module instantiation
-- Imports and dependencies
-- I want to make many languages and interpreters, and I don't want to prefix each predicate:
-  I want to write N interpret predicates, I don't want to write 1 langN_interpret for each N.
-- A clashy-named old predicate is used a lot.
-
-#+BEGIN_EXAMPLE
-interpret(Language, Context, Expression, Meaning).
-#+END_EXAMPLE
-
-Some solutions that come to mind:
-- Load module using gensym/2 if not current_module/2.
-  The loader generates the name of the module that the file is loaded to.
-  module/2 is anti-pattern.
-- name mangling like what C++ does on top of C; generated module names
-- Pengines to separate the worlds?
-- Logtalk
-
-We want to state these facts:
-- This file imports predicate P from file F,
-  because a predicate in this file calls/uses/depends-on that predicate P defined in that file F.
-
-We came up with the import/2 directive.
-
-Prolog expansion has some problems.
- [fn::https://blog.logtalk.org/2011/03/a-more-sane-implementation-of-the-term-expansion-mechanism/]
-
-Moura 2003 \cite{pmoura2003logtalk}: "The first time I felt the need for strong encapsulation features in Prolog was during my final year undergraduate project, in 1989."
-
-This SWI-Prolog Google Groups discussion thread[fn::https://groups.google.com/forum/#!searchin/swi-prolog/clash$20module%7Csort:date/swi-prolog/f8LpJN8MYm0/uUYfUmN5AgAJ] is relevant.
-
-Module is about namespacing.
-
-We want to say that "The mypred/3 in file1 is the same as the yourpred/3 in file2."
-*** Logtalk?
-"You can even use [Logtalk] to run Prolog module code in Prolog compilers such as GNU Prolog that don't include a module system."
- [fn::https://stackoverflow.com/questions/6695788/programming-in-the-large-with-prolog]
-*** How do we design a module system that subsumes both atom-based and predicate-based module systems?
-A module system is a name-prefixing mechanism.
-*** How do we add anonymous relations/predicates to Prolog?
-#+BEGIN_EXAMPLE
-let p = \ A :- (A = 1 ; A = 2).
-
-p(A) :- A = 1, A = 2.
-#+END_EXAMPLE
 ** Documentation system
 PlDoc <module> documentation should be taken to mean <file> documentation:
 It is files that are documented, not modules.
@@ -1423,7 +1402,892 @@ The initial idea of "prorogued" programming \cite{afshari2012liberating} is to u
 The stub implementation is "ask the user for what the return value of this stub method should be".
 "Prorogue" is a rare English word meaning prolong or extend[fn::https://en.wiktionary.org/wiki/prorogue].
 But that is not all; types can be prorogued too.
-* Logic of objects
+* Rethinking module systems, especially of Prolog
+** What is "What is" questions?
+When we ask about what something is,
+we usually do not mean to ask what it really is,
+but we are actually asking one of these:
+- Why does it exist?
+- How can I use it?
+
+Thus, "What is it" does not really ask about the /essence/ of something, but about an /explanation/ for something.
+Thus, "what" questions are often /teleological/ rather than /ontological/.
+Our understanding is mostly teleological and not ontological.
+We understand things in terms of how we can use them.
+Scientists try to understand things in terms of what they actually are physically.
+
+I find that the "whatisthisthing" reddit[fn::https://www.reddit.com/r/whatisthisthing/] is a strong evidence for my argument.
+
+But that subreddit also contains evidences against my argument.
+"What exactly is this airplane"[fn::https://www.reddit.com/r/whatisthisthing/comments/bao335/what_exactly_is_this_airplane/]
+does ask about what the model is, and not why that airplane comes into being.
+
+Another example: "What is it (that you want to say)?" (when we see someone hesitate)
+actually asks "Why are you here?".
+
+** Why do we have modules? What are they for?
+- first of all, to help us understand code,
+  because our only mental weapon against complexity is divide-and-conquer and hierarchical abstraction
+- for namespacing, to avoid name clashes
+- to parallelize compilation
+
+C solution is simple but bad: leave it the programmer.
+C++ solution is better but not satisfactory: automatically prefix everything.
+JavaScript's solution is fundamentally better: the names of modules, classes and functions can be locally scoped.
+
+Static typing helps name resoution by overloading like in Java and C++.
+But this only delays the problem: /the types themselves can have clashing names/.
+** Why and how do name clashes happen?
+English homonyms.
+
+Why do we have homonyms?
+** The key of avoiding name clashes: Things should not name themselves
+Names and referents should be separated.
+
+Philosophically, a name of a thing must not be a property of the thing itself.
+A rock does not implore us to call it "rock".
+It is we who name it "rock".
+My name is "Erik", but you can name me anything,
+although calling me with any other name may fail to grab my attention.
+
+If A uses B, then A names B, and B must not tell A what to name B.
+
+Example agreement: JavaScript functions and modules don't have names.
+What has a name is the variable that refers to the function or to the module.
+
+Example violation: C functions have names.
+** What is the reason for atom-based module systems?
+** What thinking is this???
+*** What is a module, functionally, relationally, and logically?
+From functional programming perspective, a module is a function from name to value.
+
+From relational programming perspective, a module is a functional relation between name and value.
+
+From logic programming perspective, a module is a collection of Horn clauses.
+
+Atom-based modules break those intuitions?
+
+- https://core.ac.uk/download/pdf/148663021.pdf
+- https://www.researchgate.net/profile/Francois_Fages/publication/220986844_Modules_for_Prolog_Revisited/links/00b495277f5b9dd5ce000000/Modules-for-Prolog-Revisited.pdf
+
+Thus in Prolog, if we have first-class relations, then we can have first-class modules.
+
+Having first-class relation means using /second-order logic/.
+That is the =M= in this example:
+#+BEGIN_EXAMPLE
+usefoo :-
+    import("foo.pro", mypred, M),
+    M(bar).
+
+% But that can be made first-order?
+
+usefoo :-
+    import("foo.pro", M),
+    M:bar.
+#+END_EXAMPLE
+*** How do module systems arise?
+We are merrily writing codes until our program grows big and we have difficulty finding things.
+Then we feel that something has to be done.
+
+We make module systems because we are humans with limited working memory.
+Our only weapon against complexity is divide-and-conquer and hierarchical abstraction/categorization.
+*** Do not conflate modules and files
+A module is the internal representation.
+File contains the external representation.
+The analogy:
+A module contains thoughts.
+A file countains writings representing those thoughts.
+*** Should module names correspond to file names?
+If the relationship between a file and a module does not have to be 1:1,
+then complications arise.
+
+We assume 1:1 relationship between files and modules.
+
+Problems:
+- M:N mapping between files and modules
+- Name clashes
+- Module instantiation
+- Imports and dependencies
+- I want to make many languages and interpreters, and I don't want to prefix each predicate:
+  I want to write N interpret predicates, I don't want to write 1 langN_interpret for each N.
+- A clashy-named old predicate is used a lot.
+
+Why do we have modules if records suffice?
+An OCaml "functor" would then simply be a function from records to records.
+
+OCaml has first-class modules, but can it import a file into a module?
+https://v1.realworldocaml.org/v1/en/html/first-class-modules.html
+
+OCaml ties module name to file name.
+Is this bad?
+"Source files in OCaml are tied into the module system, with each file compiling down into a module whose name is derived from the name of the file."
+https://v1.realworldocaml.org/v1/en/html/files-modules-and-programs.html
+
+What JavaScript does right:
+- a module is a plain JavaScript object
+- it is possible import a file into a module referred by a local variable
+What Ocaml does right:
+- local import
+
+#+BEGIN_EXAMPLE
+interpret(Language, Context, Expression, Meaning).
+#+END_EXAMPLE
+
+Some solutions that come to mind:
+- Load module using gensym/2 if not current_module/2.
+  The loader generates the name of the module that the file is loaded to.
+  module/2 is anti-pattern.
+- name mangling like what C++ does on top of C; generated module names
+- Pengines to separate the worlds?
+- Logtalk
+
+We want to state these facts:
+- This file imports predicate P from file F,
+  because a predicate in this file calls/uses/depends-on that predicate P defined in that file F.
+
+We came up with the import/2 directive.
+
+Prolog expansion has some problems.
+ [fn::https://blog.logtalk.org/2011/03/a-more-sane-implementation-of-the-term-expansion-mechanism/]
+
+Moura 2003 \cite{pmoura2003logtalk}: "The first time I felt the need for strong encapsulation features in Prolog was during my final year undergraduate project, in 1989."
+
+This SWI-Prolog Google Groups discussion thread[fn::https://groups.google.com/forum/#!searchin/swi-prolog/clash$20module%7Csort:date/swi-prolog/f8LpJN8MYm0/uUYfUmN5AgAJ] is relevant.
+
+Module is about namespacing.
+
+We want to say that "The mypred/3 in file1 is the same as the yourpred/3 in file2."
+*** Prolog mixins
+A Prolog /mixin/ (mix-in) is simply an include file that adds features to the includer.
+Example, this mixin endows the includer with a static vocabulary about objects and properties,
+akin to object-orientation without method.
+#+BEGIN_EXAMPLE
+% object.pro
+
+:- multifile opv/3.
+
+get(O,P,V) :- \+ opv(O,P,V), throw... . % what?
+get(O,P,V) :- opv(O,P,V).
+#+END_EXAMPLE
+*** Logtalk?
+"You can even use [Logtalk] to run Prolog module code in Prolog compilers such as GNU Prolog that don't include a module system."
+ [fn::https://stackoverflow.com/questions/6695788/programming-in-the-large-with-prolog]
+*** How do we design a module system that subsumes both atom-based and predicate-based module systems?
+A module system is a name-prefixing mechanism.
+*** How do we add anonymous relations/predicates to Prolog?
+#+BEGIN_EXAMPLE
+let p = \ A :- (A = 1 ; A = 2).
+
+p(A) :- A = 1, A = 2.
+#+END_EXAMPLE
+*** Component/module system, socket-plug metaphor
+I need a component system for programming in the large.
+Prolog module system is a building block, but Prolog modules by themselves are not enough.
+Socket-and-plug metaphor fits nicely?
+The name tells it all:
+a socket is a female connector and a plug is a male connector,
+and we connect plugs to sockets,
+and Prolog should complain if it sees a socket that is connected not exactly once.
+
+An input is a multifile predicate.
+
+A pin is a Name/Arity term.
+
+A plug exports symbols.
+
+A socket imports symbols.
+
+A module may have multiple plugs and sockets.
+
+Pins are matched by NameArity.
+The ordering of pins does not matter.
+
+A Prolog module system is either /predicate-based/ or /atom-based/.
+XSB is atom-based.
+SWI is predicate-based.
+GNU Prolog does not have a module system.
+
+*** Organizing and loading Prolog source files without name clashes
+Prolog multifile predicates can be used for /dependency injection/.
+Instead of importing a module, declare a multifile predicate and let the user link that predicate.
+
+Prolog source files come in /two kinds/ depending on how they are loaded: /type-1/ files and /type-2/ (module-free) files.
+In short, a type-2 file should not assume that the Prolog implementation has a module system, unless when defining meta-predicates.
+The discipline is:
+- A type-2 file should not contain any directives except include/1.
+  Thus a type-2 file must not begin with module/2 directive, and must not use the use_module/[1,2] directive.
+- A type-2 file should not contain hard-coded module references.
+  A type-2 file should not contain any qualified M:P call where M is a hard-coded atom;
+  it is fine if M is a variable.
+
+There are several mostly incompatible ways to load a Prolog source file:
+- include/1, only works as directive
+- consult/1
+- consult_unregistered/1, which is load_files/2 with register(false) option
+- use_module/2
+- load_files/2
+- consult_unregistered_into_module/2, which is just load_files/2 with module/1 and register(false) options
+- Logtalk, logtalk_load/1, logtalk_load/2
+
+The function of the main file is to link the non-main files.
+To maximize reusability and minimize name clash,
+a non-main file must not contain any hard-coded module names:
+Those files must not contain module/2 declarations and use_module/[1,2] directives.
+*** What is a module? How does it differ from dictionary, function, table, map, association?
+What can we do with zero module? We can create the empty module.
+What can we do with a module?
+What can we do with many modules?
+
+Equality vs identity:
+Must a programming language separate equality and identity?
+Should two strings be equal, if they have different memory addresses but the same content?
+
+Let \( D \) be the programming language's domain of discourse.
+
+Let \( F(D) = D \to D \) be the set of every endofunction whose domain is \( D \).
+Let \( D \) be the smallest set such that \( F(D) \subset D \).
+Thus \( D \) is the least fixed point of \( F \).
+
+A dictionary can be a finite function whose domain is a finite subset of \( D \).
+
+A module can be modeled as a dictionary.
+A module can be modeled as a finite function \( N \to D \) where \( N \) is the set of names for which the module has an entry.
+A module can be modeled as an infinite function \( N \to D \) where \( N \) is the set of all possible names.
+*** What module systems?
+REBOL module system?
+
+Bad example: java:
+- name is a property of a method.
+- a method cannot be referred to by a name.
+If you use reflection, you are referring to a representation of that method, not the method itself.
+
+Bad example: scheme: map, vector-map, tree-map, etc.
+
+Racket vs prolog
+Racket has racklog and miniKanren
+
+(infix
+  x = 1 :
+  y = x + x :
+)
+
+Racket DCG, packrat
+*** from module.md (Designing module systems)
+What is a module?
+Or, should we be asking these questions instead?
+
+- How do we decompose a program? (I think David Parnas has answered this.)
+- Why do we need modules?
+- How do we organize programs?
+
+Modules reduce complexity by partitioning and independence.
+See [[http://www.computing.dcu.ie/~renaat/ca2/ca214/ca214vii.html][Three Universal methods of reducing complexity]]
+from the course [[http://www.computing.dcu.ie/~renaat/ca2/ca214over.html][CA214 Systems Analysis and Design Page]].
+
+What do others say?
+
+- [[https://en.wikipedia.org/wiki/Module][Wikipedia]]
+- According to [[https://en.wiktionary.org/wiki/module][Wiktionary]]:
+
+  - The word "module" is from Latin "modulus" that means "a small measure".
+  - A module is "a self-contained component of a system, often interchangeable, which has a well-defined interface to the other components".
+
+- [[https://www.dictionary.com/browse/module][dictionary.com]]
+
+What do we infer?
+
+- We can develop different modules at the same time.
+**** Philosophical investigation
+- What are the properties of a module?
+- What are its relationships with other things?
+
+  - interchangeability
+
+- A module groups things.
+
+  - Is this essential or accidental?
+    Is it made for grouping?
+    Is grouping only a side-effect?
+
+- What can we do with modules?
+
+  - We can combine modules.
+  - We can shadow modules.
+  - We can link modules.
+  - We can embed/inline modules.
+
+- A module is an incomplete/dependent piece of functionality/code.
+
+  - A module may have unresolved symbols?
+
+- A module is a decomposition of a program?
+- Module is about reusability?
+- A program is a module and a starting point.
+- A module specifies a contract.
+  A module can be swapped with another module that satisfies the same contract without changing the correctness of the program.
+- A module is a bunch of imports and exports?
+- A module is smallest unit of reuse? Isn't that function?
+- A module is smallest unit of compilation? Isn't that function?
+**** Modules are for humans
+Computers don't need modules.
+All it needs is a sequence of machine codes.
+
+A program is a lambda expression.
+A big program is a big lambda expression.
+Given enough memory, a computer can handle arbitrarily big lambda expressions.
+
+Human uses modules for organizing things.
+Human uses modules to make machines separate compilation, speed up recompilation, and recompile a part of the program.
+
+- Does a module have to coincide with a compilation unit?
+- Basic module functions?
+
+  - How does a code describe its dependencies?
+  - How does the machine disambiguate names?
+  - Functions should be versioned. Not module. Not package.
+    Version describes semantics.
+
+Module is second-order logic programming?
+Note below, that the same =Plus= is used as both a variable and a predicate.
+
+#+BEGIN_EXAMPLE
+    export(module_name, type, name, value).
+
+    export(prelude, int, plus, Plus) |- export(my_module, int, three, Plus(1, 2)).
+#+END_EXAMPLE
+
+- The smallest unit for this discussion is a machine instruction.
+- A subroutine is a collection of instructions.
+- A library is a collection of subroutines.
+- A program is a collection of libraries and an entry point.
+- History
+
+  - The initial motivation was to reuse.
+
+    - Reduce development cost.
+
+      - Humans have always been looking for easier ways to live.
+        This "laziness" (the ability to get bored repeating something) is the source of all human technology.
+
+  - The next motivation was to reduce disk and memory usage.
+
+- The essence of programming-in-the-large is Don't Repeat Yourself?
+**** Comparing existing module systems
+How do programming languages deal with modules?
+
+- [[https://github.com/dhall-lang/dhall-lang/issues/182][dhall modules · Issue #182 · dhall-lang/dhall-lang]]
+- [[https://futhark-lang.org/blog/2017-01-25-futhark-module-system.html][Futhark]]
+- [[https://elixir-lang.org/getting-started/modules-and-functions.html][Elixir]]
+
+  - [[https://hexdocs.pm/elixir/Module.html][Module -- Elixir v1.7.2]]
+
+- Racket
+
+  - 2011, article, "Languages as Libraries", [[http://www.cs.utah.edu/plt/publications/pldi11-tscff.pdf][pdf]]
+
+- Scheme R7RS, Common Lisp, Clojure
+- Java, Scala, Kotlin, Go, C, C++
+
+  - C ABI
+
+    - A module is an ELF shared object file (SO file).
+
+- Pascal, Ada, Oberon, Algol, Fortran
+- JavaScript, TypeScript, ECMAScript
+- Standard ML, Caml, OCaml, MLTON, SML/NJ, F#
+
+  - 2000, "A modular module system", [[https://hal.inria.fr/hal-01499946/document][pdf]]
+
+    - "Harper-Lillibridge-Leroy module system"
+    - "applicability of that module system to a wide range of programming languages"
+
+- Haskell has underpowered module system.
+- book, "Advanced topics in types and programming languages", part IV, programming in the large, [[http://camlunity.ru/swap/Functional%20Programming/Type%20Systems/Pierce/Advanced%20Topics%20in%20Types%20and%20Programming%20Languages.pdf][pdf]]
+
+  - book, "Types and programming languages", [[https://www.asc.ohio-state.edu/pollard.4/type/books/pierce-tpl.pdf][pdf]]
+
+- [[https://en.wikipedia.org/wiki/Modular_programming][WP:Modular programming]]
+**** Key idea: Module = Dictionary -> Dictionary
+Assume a dependently-typed language.
+
+Recall some terminologies:
+
+- A record is a tuple whose components are named.
+- A dictionary is also known as key-value map or look-up table.
+
+Then a module is a lambda abstraction that takes a record and gives a record.
+
+A module is a lambda abstraction.
+
+This idea is similar to Nix and JavaScript modules.
+
+=type Module = Map Name Decl -> Map Name Decl=
+
+A module translates into a lambda-calculus expression.
+An import translates to an entry in the input dictionary.
+An export translates to an entry in the output dictionary.
+Example:
+
+#+BEGIN_EXAMPLE
+    module {
+        import add mul Int32;
+        export f g T;
+        f = add;
+        g = mul;
+        T = Int32;
+    };
+
+    -- The expression above translates to:
+
+    \ {add; mul; Int32; ...} -> {
+        f = add;
+        g = mul;
+        T = Int32;
+    };
+#+END_EXAMPLE
+
+- Key ideas of that example:
+
+  - Dictionary pattern matching simulates row polymorphism.
+  - ={a;b;c;}= is shorthand for ={a:a; b:b; c:c;}=.
+  - [[https://blog.robphoenix.com/elixir/notes-on-elixir-pattern-matching-maps/][Notes on Elixir: Pattern-Matching Maps · Rob Phoenix]]
+
+What we are doing here is also known as "blurring the phase distinction".
+See [[https://futhark-lang.org/blog/2017-01-25-futhark-module-system.html#modules-versus-higher-order-functions]["Modules versus Higher-Order Functions" in Futhark blog post]]:
+"A module can be viewed as nothing but a record containing types and values."
+
+A problem: compilation may fail to terminate.
+No big deal.
+Set a time-out.
+**** what
+- Hypothesis: Lazy evaluation solves the partial query problem elegantly.
+- What are some cool ideas?
+
+  - Dhall can import from IPFS.
+
+    - http://www.haskellforall.com/2016/12/dhall-non-turing-complete-configuration.html
+
+  - Elixir can pattern-match maps (dictionaries).
+
+- What is a module in an untyped functional programming language such as Tulip?
+- Finding a programming language for programming in the large
+
+  - Ecosystem, libraries, tools, and communities.
+  - The most important thing in programming in the large is name management.
+    Namespaces.
+
+    - C has two namespaces: type namespace and value namespace.
+    - Haskell has two namespaces: type namespace and value namespace.
+    - Java has better namespacing than C.
+    - Enable the same name to be used in different context, so that you can write =get_name employee= and =get_name company= instead of =employee_get_name employee= or =company_get_name company=.
+
+      - Ad-hoc polymorphism.
+
+  - Which one has the biggest community?
+  - Which one has a decent IDE?
+  - Which community puts their money on where their mouth is?
+  - Comparing type systems
+
+    - [[https://docs.racket-lang.org/ts-guide/][The Typed Racket Guide]]
+    - F#
+    - SML
+    - Caml
+    - OCaml
+    - Idris, Agda
+    - Coq, Lean
+    - Haskell
+    - 2004, chapter, "Type systems", Luca Cardelli, [[http://lucacardelli.name/Papers/TypeSystems.pdf][pdf]]
+
+      - from https://www.artima.com/forums/flat.jsp?forum=106&thread=185420
+      - 2005, book, "Advanced topics in types and programming languages", Benjamin C. Pierce (editor)
+
+        - Part IV, "Types for Programming in the Large"
+
+      - 2002, book, "Types and programming languages", Benjamin C. Pierce
+
+    - Java, Kotlin, Scala
+    - Things that annoy me
+
+      - ML, SML, Caml, OCaml: ='a tf= is somewhat annoying. It should have been =tf a=.
+
+        - F# uses =tf<'a>=.
+        - Haskell uses =Tf a=.
+
+      - Would you rather type ='a list= (F#) or deal with an inadequate record/module system (Haskell)?
+      - Haskell doesn't have =instance Read (->)= and =instance Show (->)=.
+
+        - Haskell expressions are not first-class citizen in the language.
+
+          - Unlike Lisp/Scheme.
+
+        - Encumbers metaprogramming.
+
+    - OCaml labels and polymorphic variants?
+
+      - http://caml.inria.fr/pub/docs/manual-ocaml-400/manual006.html
+      - OCaml labels are somewhat similar to Scheme keyword arguments.
+
+    - F# quotations is important for metaprogramming.
+    - F# doesn't do ad-hoc polymorphism well?
+
+      - [[https://withouttheloop.com/articles/2014-10-21-fsharp-adhoc-polymorphism/][Ad-hoc Polymorphism in F# (how to survive without Type Classes) - Without the loop]]
+      - [[https://sidburn.github.io/blog/2016/03/24/higher-kinded-polymorphism][Higher-kinded Polymorphism: What is it, why you want it · David Raab]]
+
+    - https://cstheory.stackexchange.com/questions/40705/why-did-caml-become-ocaml-or-why-use-objects-in-f
+    - ML begat Caml. Caml begat Caml Light? Caml Light begat OCaml?
+    - [[https://www.quora.com/How-does-F-compare-to-OCaml-in-regard-to-major-syntactic-differences-paradigm-shifts-and-interoperability-with-Windows-What-about-its-numeric-capabilities][How does F# compare to OCaml, in regard to major syntactic differences, paradigm shifts, and interoperability with Windows? What about its numeric capabilities? - Quora]]
+
+      - Jon Harrop claims. More sources needed. Take it with a grain of salt.
+
+        - "OCaml has an integrated full-blown macro system in the form of Camlp4 whereas F# does not have macros and, in fact, has been deliberately closed off in order to discourage people from creating products that compete with Visual Studio."
+
+          - "deliberately closed off [...]" is a bold claim.
+
+  - [[https://softwareengineering.stackexchange.com/questions/155239/are-all-languages-basically-the-same/155243][Are all languages basically the same? - Software Engineering Stack Exchange]]
+
+- package/dependency management tools
+
+  - Java: Maven, Gradle
+  - OCaml: OPAM
+  - Haskell: Cabal, Stack
+  - F#: Paket? NuGet?
+  - C/C++: conan? chocolate? vcpkg?
+
+- Formally adding modules to lambda calculus
+
+  - What is module calculus?
+
+    - 2017 article "Modules, Abstraction, and Parametric Polymorphism" [[https://www.cs.cmu.edu/~crary/papers/2017/mapp.pdf][pdf]]
+    - 2003 article "A Type System for Higher-Order Modules" [[http://www.cs.cmu.edu/~rwh/papers/thoms/tr2.pdf][pdf]]
+    - 2001 article "A Calculus of Module Systems" [[http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.22.5407][pdf available]]
+    - 2012 course notes "Types for Module Systems" [[http://www.ccs.neu.edu/home/amal/course/7480-s12/modules-notes.pdf][pdf]]
+      from [[http://www.ccs.neu.edu/home/amal/course/7480-s12/][CS7480 Type Systems (Spring 2012)]]
+
+- Ignored undocumented code sketches
+
+  - [[https://github.com/jordanlewis/simple-module-system][jordanlewis/simple-module-system: Adding modules to a polymorphic lambda calculus]], code in SML/NJ.
+*** Haskell first-class modules?
+Shields & Peyton-Jones 2002 \cite{shields2002first}.
+** Do anonymous predicates subsume module systems?
+What may anonymous predicates look like?
+
+It should be possible to talk about a predicate without naming it first.
+
+#+BEGIN_EXAMPLE
+p(A) :- A = 0 ; A = 1.
+
+% vs
+
+\ A :- A = 0 ; A = 1.
+#+END_EXAMPLE
+
+\( p(x) \equiv x=0 \vee x=1 \) vs \( \lambda x (x=0 \vee x=1) \).
+
+** <2019-04-02> The result? Draft: A clash-free module system
+*** About this draft
+The target audience is the SWI-Prolog maintainer, Jan Wielemaker.
+
+I wish to convince Jan that we must have a clash-free module system
+so that we do not become the victim of our own success when Prolog becomes mainstream.
+
+I wish to see such module system standardized and implemented.
+
+Where should we publish this to?
+- Post in SWI-Prolog Discourse group https://swi-prolog.discourse.group
+- Open an issue in SWI-Prolog Roadmap https://github.com/SWI-Prolog/roadmap
+*** Message
+Dear Prolog implementors,
+
+The Prolog community seems to be growing, and so is the number of SWI-Prolog packs.
+As more people write code, name clashes become more likely.
+We should standardize a clash-free module system before we have too many users and name clashes become too painful.
+
+There are two ways to avoid name clashes:
+- Rely on programmer coordination and discipline.
+  For example, the pack authors may prefix their module names by a domain name they control.
+  But it would be better for a system to avoid assuming that humans behave well.
+- Make name clashes impossible.
+  This is the path taken by JavaScript.
+  It is the only language I know that does this by its first-class modules.
+
+The key to clash-free module names is simple:
+- A file must not contain any module names/references.
+- The module/2 directive must ignore its first argument (the module name).
+- Dependency must be specified by file paths and not module names.
+
+Both predicate-based and atom-based modules are fine, as long as a module does not name itself,
+that is, as long as a file does not expect to be loaded to a module with a certain name.
+*** Implementation details
+I have a working code for SWI-Prolog in [[https://github.com/edom/work/blob/master/software/boot/load.pro][boot/load.pro]].
+It defines an =import/2= directive using =term_expansion/2=.
+The loader generates module names.
+An example usage looks like this:
+#+BEGIN_EXAMPLE
+:- import("somefile.pl",[
+    pred/1
+    , run/0 as somefile_run
+]).
+#+END_EXAMPLE
+
+The presence of an =:- import(Source, Specs)= in a file means that the file requires some things from Source.
+
+Source may be:
+- =file(Path)= where =Path= is a relative path to a file.
+  This path is resolved against the file that contains the import/2 directive.
+
+Specs is a list of Spec.
+
+Spec may be:
+- =Name/Arity=
+- =Name/Arity as Alias=
+- =multifile(Name/Arity)=: a "reverse-import"
+- =multifiles(Preds)= where each Pred is a Name/Arity
+
+Not yet implemented:
+importing operators like SWI-Prolog 7.6.4 use_module/2.
+#+BEGIN_EXAMPLE
+use_module(..., [
+    op(_,_,some_operator)
+]).
+#+END_EXAMPLE
+
+One day someone may make it possible for Source to be =github(...)= or =pack(...)=,
+but perhaps we should not do that because it will increase compilation time.
+
+An example language with a clash-free module system is JavaScript.
+Even better, modules are first-class in JavaScript.
+#+BEGIN_EXAMPLE
+function foo () {
+    var a = require("file1.js");
+    var b = require("file2.js");
+    console.log(a.x + b.y);
+}
+
+// a.js
+export let x = 1;
+
+// b.js
+export let y = 2;
+#+END_EXAMPLE
+
+What do you think?
+
+Best regards,
+
+Erik
+*** Proposal: import_qualified/1 directive
+#+BEGIN_EXAMPLE
+:- import_qualified(file(RelativePath) as local_module(Name)).
+:- import_qualified([
+    file(File1) as local_module(Name1),
+    file(File2) as local_module(Name2),
+    ...
+]).
+#+END_EXAMPLE
+
+This recursively replaces all module expressions.
+*** The problem: We could be a victim of our own success if we don't act
+Imagine that there were 10,000 SWI-Prolog packs: There would be naming conflicts.
+We can learn from the Haskell community's complaints with Haskell's module system,
+and do it right before it becomes too painful.
+Let us prepare, so that we do not become a victim of our own success.
+*** Criteria of a satisfactory solution
+Ideally, many people can write and use libraries without name clashes.
+*** Related discourses
+- Contributing libraries https://swi-prolog.discourse.group/t/contributing-libraries/381
+** How should modules and meta-predicates interact?
+The question boils down to "What is the name of a thing?"
+
+Lexical binding.
+Principle of least surprise.
+Do what most users most likely expect.
+But can the principle of least surprise clash with the principle of mathematical elegance?
+* Ugly things, awkward squads, states and errors
+Simon Peyton-Jones \cite{Peytonjones2000TacklingTA} calls these the "awkward squad": input/output, concurrency, exceptions, and foreign-language calls.
+** Effects, side-effects, and errors
+*** An effect is what?
+What is an "effect"?
+
+What is a "side-effect"?
+
+Does "side-" imply undesirability?
+
+Isn't memory allocation an effect?
+
+What is a "side-effect"?
+Wikipedia[fn::https://en.wikipedia.org/w/index.php?title=Side_effect_(computer_science)&oldid=855461052][fn::https://softwareengineering.stackexchange.com/questions/40297/what-is-a-side-effect] is inconclusive.
+
+The "side" in "side-effect" implies that there are /effects/ and /main-effects/, and that side-effects are unintended, unrelated, or unwanted.
+The /effect/ of running a program is the change of the state of the universe that results from executing that program.
+In medicine, a side effect is an /unintended/ effect, not necessarily bad[fn::https://en.wikipedia.org/w/index.php?title=Side_effect&oldid=875244456].
+Thus, there is a parallel between chemists-and-drugs and programmers-and-programs:
+the designer of a drug (the programmer of a program) /intends/ that taking the drug (running the program) accomplishes the /main-effect/, but reality is a bitch.
+
+What is our intention when we write a program such as a Haskell program =inc x = (x :: Integer) + 1=?
+Our intention is that it increments an integer, for /every/ integer, which is mathematically trivial but physically impossible.
+The side-effects are: heating up the CPU, taking up some memory, taking up some time.
+We certainly did not intend to heat up the CPU; therefore such heating is a side-effect.
+Thus the main-effect is the /denotation/ (the mathematical meaning) of the program,
+and every implementation detail is a side-effect.
+
+Thus "side-effect" means an effect that we failed to foresee, because the complexity was too much for us.
+
+Side-effects may be fatal.
+
+Spectre/Meltdown are side-effects in that sense.
+The chip designers sacrificed understandability for speed.
+
+There is also the phrase "algebraic effect".
+
+We have to distinguish between a /program/ and a /machine/ running the program.
+A program does not run by itself.
+A /machine/ runs a program.
+A program /describes/ a computation.
+The machine /performs/ the computation.
+A program is passive.
+A machine is active.
+A program exists in idea-world.
+A machine exists in material-world.
+A machine affects reality according to the program that the machine is running.
+The question: which is the /cause/ of the change in reality: the machine or the program?
+
+If we assume free will, then our thought causes our behavior, and our behavior causes something in the material-world.
+*** An error is an unintended behavior, unexpected outcome?
+Unintended behavior?
+How do we measure intention?
+
+Error is like weed.
+They are subjective concepts.
+An error is an undesirable condition.
+Why are errors undesirable?
+Because they complicate programs.
+
+We expect operating systems to run forever.
+We expect them to never err.
+We expect them to flawlessly reclaim the resources leaked by dead processes.
+We expect them to be stable in spite of badly written user programs.
+
+An operating system has to prepare for the worst.
+Some difficult errors to recover from are out of disk space, out of memory, and disk failure.
+They tend to happen at the most inconvenient time.
+
+Some errors such as stack overflow are fundamental assumption violations.
+The only sensible thing to do here is to produce diagnostics and abort the program.
+
+Error handling has diminishing return.
+It pays off to handle common errors.
+It does not pay off to handle uncommon errors.
+
+Error model:
+- cost incurred by the error when it happens in an unhandled manner
+- cost incurred by the error when it happens in a handled manner
+- cost of writing the code that handles the error;
+  this should include the increased maintenance burden due to reduced readability
+- probability of the error to happen
+
+Sometimes the cost is emotional and not monetary.
+It is hard to quantify emotional costs.
+But it is real.
+Users hate programs that crash.
+
+Since 1726, an error is a "difference between observed value and true value".[fn::https://www.etymonline.com/word/error]
+
+An error is a difference between what is and what should be.
+
+Midori programming language
+ [fn::http://joeduffyblog.com/2015/11/03/blogging-about-midori/]
+ [fn::http://joeduffyblog.com/2016/02/07/the-error-model/].
+
+Is an error a side-effect?
+Both errors and side-effects are unintended.
+
+Let \(f'\) be what we think a system does.
+Let \(f\) be what the system actually does.
+Then our error is \(f' - f\) which has to be equal to \(- (f - f')\).
+If each of \(f\) and \(f'\) is a logic formula in a structure with domain \(D\) and interpretation \(I\),
+then \(-\) is symmetric difference, and negation is made with respect to \(D\).
+
+For example, we think the system implements \( a \).
+It turns out that the system implements \( b \).
+Then the error is \((a \wedge \neg b) \vee (b \wedge \neg a)\).
+Let each of \(a\) and \(b\) be a formula.
+Define their symmetric difference \(a - b\) as \((a \wedge \neg b) \vee (b \wedge \neg a)\),
+similar to set-theoretic symmetric difference[fn::https://en.wikipedia.org/wiki/Symmetric_difference].
+
+For example, we think the system implements \( x \mapsto x + 3 \).
+It turns out that the system implements \( x \mapsto x + 2 \).
+Then the error is \(x \mapsto 1\).
+
+** Error handling and logging
+*** Fail, throw, stack traces
+Two options: throw or fail.
+
+If backtracking doesn't make sense, then throw, don't fail.
+
+#+BEGIN_EXAMPLE
+person(joe).
+pair_first_second(pair(A,_), A, B).
+#+END_EXAMPLE
+
+Should =person(1)= fail or throw?
+Should =pair_first_second(foo)= fail or throw?
+
+Fail means try the next alternative.
+
+If you want throw/1 with stack trace,
+you must write it like =throw(error(Something, _))=.
+
+A /function/ should always throw and not fail, when an argument has a wrong type.
+
+#+BEGIN_EXAMPLE
+negate(A,B) :- integer(A), !, B is -A.
+negate(A,B) :- integer(B), !, A is -B.
+negate(A,B) :- throw(error(negate(A,B),_)).
+#+END_EXAMPLE
+
+- https://wiki.colby.edu/display/~amvartan/Exception+and+Error+Handling+in+Prolog
+- https://stackoverflow.com/questions/32968148/why-throw-an-exception-in-prolog-instead-a-simple-fail
+*** Structured logging
+This is how we log messages in Prolog:
+- Design a term that represents the /meaning/ of the message.
+- Call =print_message(Kind,Message)= where Message is that term.
+- Extend =prolog:message//1= to translate that term to string.
+
+#+BEGIN_EXAMPLE
+% Syntax:
+prolog:message(Term) --> Lines.
+
+% Example:
+prolog:message(Term) -->
+    [ 'The term is ~q.'-[Term] ],
+    [ 'This is the second line in the message.' ].
+#+END_EXAMPLE
+
+Syntax description:
+- 'Lines' is a list of 'Line's.
+  - A 'Line' has this shape:
+    - Format-Args: 'Format' and 'Args' are the same arguments accepted by format/2.
+    - Terms of other shapes are converted to string.
+
+The printed message is the concatenation of all 'Line's.
+
+TODO:
+- How do we log to file?
+- How do we rotate log files?
+
+References:
+- [[http://www.pathwayslms.com/swipltuts/message/index.html][Anne Ogborn's "Printing Messages in SWI-Prolog"]]
+- http://www.swi-prolog.org/pldoc/man?section=printmsg
+- http://www.swi-prolog.org/pldoc/man?section=debug
+- https://www.metalevel.at/prolog/business
+
+Usability issues:
+- Where is =prolog:message//1= documented?
+  I found that by looking at others' source code.
+  There does not seem to be any documentation, or if there is, then it is at the wrong place.
+- Why do we require people to understand DCG rules before they can use the messaging system?
+* Object-logic programming?
+** How do we do/make/model objects and properties in Prolog?
 "From a logical point of view, an object, the basic abstraction unit, has a natural interpretation as a logic theory:
 /an object is simply a collection of axioms which describe what is true about the object itself/." \cite{ciancarini1993logic} (emphasis mine)
 
@@ -1431,7 +2295,7 @@ An object is something with identity.
 In Prolog, we represent identity with the /unique name assumption/.
 Each object has a unique surrogate primary key.
 Usually this key is a Prolog atom.
-** Analogy: adding objects to C
+*** Analogy: adding objects to C
 In C we can have OOP by adding one "this/self" parameter as the first parameter of each method.
 I think it is also possible in Prolog.
 But should we?
@@ -1533,7 +2397,7 @@ Iff object_property(O,P) is provable, then object O has property P.
 Object-oriented programming in Prolog?
 https://stackoverflow.com/questions/28154041/objected-oriented-programming-in-swi-prolog
 
-** One-property-one-predicate representation of objects
+*** One-property-one-predicate representation of objects
 Another core idea is the /one-property one-predicate/ representation, with surrogate primary keys.
 This enables us to represent objects in Prolog.
 Objects have identities.
@@ -1545,10 +2409,10 @@ person_name(PersonId, Name)
 person_birthdate(PersonId, BirthDate)
 #+END_EXAMPLE
 
-** OPV (object-property-value) representation of constant objects
+*** OPV (object-property-value) representation of constant objects
 Objects without mutation.
 Immutable objects.
-** Representation
+*** Representation
 A class C has properties P1, P2, P3, etc.
 How do we represent an /instance/ of C in Prolog?
 There are at least two ways: /many-predicates/ and /one-term/.
@@ -2047,50 +2911,9 @@ A possibly better way is to write an interpreter and /get a compiler for free/ b
 Writing an interpreter is much easier than writing a compiler.
 
 "Partial deduction" is partial evaluation from logic point of view.
-* Foreign language interface
-SWI-Prolog has a foreign language interface[fn::http://www.swi-prolog.org/pldoc/man?section=foreign], but I demand more.
-
-I want to write low-level code /directly in Prolog/.
-
-I want to write C code in Prolog.
-I want to have C with type inference and other cool features in Prolog.
-
-I dream of writing foreign code directly in Prolog.
-I dream of a Prolog code that can output an amd64 ELF binary.
-Related in mailing list[fn::https://groups.google.com/forum/#!topic/comp.lang.prolog/-WhsxJqPRRU].
-Related from the 1990s[fn::https://dtai.cs.kuleuven.be/projects/ALP/newsletter/archive_93_96/net/grammars/compiler2.html].
-Related: Warren 1980 \cite{warren1980logic}.
-
-There are two problems:
-emitting machine code, and executing machine code.
-
-Options for emitting machine code:
-- Design a DSL like ASN.1 to describe binary layout such as C struct or Pascal record.
-  I have a sketch in database_internal_dcg.pro.
-- Design an language that can be represented in Prolog and translated to C.
-- Reuse LLVM.
-- Building something like LLVM.
-  Write our own intermediate representation.
-  Static-single-assignment three-address code.
-- Write amd64 machine code directly.
-  This is bad.
-  Too tightly coupled.
-  We will want to generate i386, arm, and jvm machine codes.
-
-Options for executing machine code:
-- Write machine code to some memory area, set PROT_EXEC with mprotect, and call the address.
-- Write an ELF SO object and use dlopen.
-
-The skeleton of the minimum viable product:
-#+BEGIN_EXAMPLE
-example :-
-    compile(ret, ByteCode),
-    write_bytes(ByteCode).
-
-nb_write_address(+Address, -Thing)
-#+END_EXAMPLE
 * Higher-order logic programming
-** The problem with var/1: non-commutativity and non-monotonicity
+** What is wrong with Prolog?
+*** The problem with var/1: non-commutativity and non-monotonicity
 Usually conjunction is commutative: \(a \wedge b \equiv b \wedge a\).
 But var/1 breaks that.
 #+BEGIN_EXAMPLE
@@ -2103,6 +2926,22 @@ A = 1.
 ?- q(A).
 false.
 #+END_EXAMPLE
+*** Why should a logic programming language be sound and complete?
+Prolog is unsound.
+So what?
+
+(example of Prolog's unsoundness?)
+
+*** How is Prolog unsound?
+From \cite[p.~18]{boizumault2014implementation}:
+- "The absence of the occur check entails the unsoundness of the resolution strategy used by Prolog."
+- "The main reason for this omission is a sensible gain in execution time."
+
+*** What is wrong with logic programming?
+"What is Wrong with Logic Programming?"
+"A Deductive Solution to Mutable State and I/O"
+https://pdfs.semanticscholar.org/ca08/dcb9eddc1e7651509daac7fa02eddb7f675b.pdf
+
 ** Lambda, closure, scoping, higher-order logic programming, relational programming
 Ulrich Neumerkel's "Lambdas in ISO Prolog"[fn::https://www.complang.tuwien.ac.at/ulrich/Prolog-inedit/ISO-Hiord.html].
 
@@ -2228,15 +3067,6 @@ among other things.[fn::http://www.lix.polytechnique.fr/~dale/lolli/]
 "By moving away from classical logic, Lambda Prolog was able to expand to a much larger fragment of logic: higher-order hereditary Harrop formulas.
 This allows some features, e.g. modules, to be handled in a logical way as opposed to the ad-hoc way they are handled in Prolog."
  [fn::https://math.stackexchange.com/questions/1761680/what-formal-systems-are-various-programming-paradigms-based-on/1761959]
-** Why should a logic programming language be sound and complete?
-Prolog is unsound.
-So what?
-
-(example of Prolog's unsoundness?)
-** How is Prolog unsound?
-From \cite[p.~18]{boizumault2014implementation}:
-- "The absence of the occur check entails the unsoundness of the resolution strategy used by Prolog."
-- "The main reason for this omission is a sensible gain in execution time."
 * What next after Prolog?
 Gödel, λProlog, Twelf, Datalog, Answer-Set-Programming.[fn::https://github.com/webyrd/miniKanren-uncourse/wiki/Other-Interesting-Logic-or-Relational-Programming-Languages]
 ** Embedding Prolog/Haskell in Haskell/Prolog
@@ -2296,42 +3126,6 @@ Mercury vs Prolog
 - <2018-10-21> "The Prolog to Mercury transition guide" https://www.mercurylang.org/information/doc-latest/transition_guide.pdf
 
 SQL? Datalog?
-** History of logic programming? The key idea of logic programming operational semantics?
-If Prolog is the answer, what is the problem?
-The problem was the creation of natural-language user-interface.
-Colmerauer & Roussel 1996 \cite{colmerauer1996birth}:
-"It can be said that Prolog was the offspring of a successful marriage between natural language processing and automated theorem-proving."
-
-Philippe Roussel coined the name "Prolog" in Marseilles in 1972. \cite{colmerauer1996birth}
-
-Robinson 1965 \cite{robinson1965machine}
-
-The key idea of logic programming is the interpretation of a Horn clause as a procedure declaration (Kowalski 1974 \cite{kowalski1974predicate}).
-
-Logic seems to be the internal language of thought.
-
-Elaborated in van Emden & Kowalski 1976 \cite{van1976semantics}.
-
-Predicate logic can be used both for programming and for knowledge representation.
-
-What is "refutation-complete"[fn::https://en.wikipedia.org/wiki/SLD_resolution]?
-
-http://www.prolog-heritage.org/en/ph1.html
-
-SWI-Prolog goes back to 1986.[fn::http://www.swi-prolog.org/pldoc/man?section=implhistory]
-
-Did logic programming emerge from automated theorem proving?
-What is computational logic?
-What is automated reasoning?
-
-Maarten van Emden has a blog[fn::https://vanemden.wordpress.com].
-
-The relationship between Lisp and lambda calculus is superficial:
-van Emden[fn::https://vanemden.wordpress.com/2017/09/08/conceptual-integrity-why-it-matters-and-how-to-get-it/]) wrote that John McCarthy wrote (emphasis mine):
-#+BEGIN_QUOTE
-To use functions as arguments, one needs a notation for functions, and it seemed natural to use the lambda notation of Church (1941).
-/I didn’t understand the rest of his book/, so I wasn’t tempted to try to implement his more general mechanism for defining functions.
-#+END_QUOTE
 ** Programming can be thought as applied mathematics?
 Prolog can be approached from logic, database theory, philosophy.
 
@@ -2368,129 +3162,6 @@ Modus ponens \( \alpha, (\alpha \to \beta) \vdash \beta \).
 ** Logic programming vs theorem proving
 - https://stackoverflow.com/questions/36335633/difference-between-logic-programming-and-automated-theorem-proving
 - https://en.wikipedia.org/wiki/Automated_theorem_proving
-** <2018-12-05> How to present Prolog to newcomers
-This is a draft.
-These are slides.
-Assume that one section is one slide.
-
-There are several ways to introduce Prolog:
-- as a deductive database
-- as a logic programming language
-- as a procedural programming language with backtracking
-- as a natural language processing tool, which is its original reason of existence \cite{colmerauer1996birth}
-- as an artifical intelligence tool (what? automated reasoning?)
-
-It may be best to introduce Prolog as a deductive database.
-We want people to have understanding and good habit.
-*** "Talking" with the computer
-We can think of an interactive Prolog session as a /conversation/ with the computer.
-
-The Prolog phrase "append(A, B, C)" means the English clause "appending list A and list B produces list C".
-
-Here we show some ways of calling append/3.
-
-Here we show how to read Prolog fragments in English.
-
-"Prolog, does appending [1] and [2,3] produce [1,2,3]?"
-#+BEGIN_EXAMPLE
-?- append([1], [2,3], [1,2,3]).
-true.
-#+END_EXAMPLE
-
-"Prolog, what does appending [1] and [2,3] produce?"
-#+BEGIN_EXAMPLE
-?- append([1], [2,3], C).
-C = [1,2,3].
-#+END_EXAMPLE
-
-"Prolog, what list do I have to append to [1] in order to produce [1,2,3]?"
-#+BEGIN_EXAMPLE
-?- append([1], B, [1,2,3]).
-B = [2,3].
-#+END_EXAMPLE
-
-"Prolog, what list produces [1,2,3] when appended with [2,3]?"
-#+BEGIN_EXAMPLE
-?- append(A, [2,3], [1,2,3]).
-A = [1] ;
-false.
-#+END_EXAMPLE
-
-"Prolog, does appending [1] and [2] produce [1,2,3]?"
-#+BEGIN_EXAMPLE
-?- append([1], [2], [1,2,3]).
-false.
-#+END_EXAMPLE
-
-We press ";" to ask Prolog to find another solution.
-Prolog prints "false" when it doesn't find any more solutions.
-
-"Prolog, what list produces [1] when appended with itself?"
-#+BEGIN_EXAMPLE
-?- append(A, A, [1]).
-false.
-#+END_EXAMPLE
-
-"Prolog, what list produces [1,2,1,2] when appended with itself?"
-
-"[1,2]."
-
-"Is there any other such list?"
-
-"No."
-#+BEGIN_EXAMPLE
-?- append(A, A, [1,2,1,2]).
-A = [1,2] ;
-false.
-#+END_EXAMPLE
-
-"Prolog, what two lists A and B produce [1,2,3] when appended?"
-#+BEGIN_EXAMPLE
-append(A, B, [1,2,3]).
-A = [], B = [1,2,3] ;
-A = [1], B = [2,3] ;
-A = [1,2], B = [3] ;
-A = [1,2,3], B = [] ;
-false.
-#+END_EXAMPLE
-*** Write once, run in several directions
-The Prolog code for append/3 seems simple.
-We can see in SWI-Prolog library/lists.pl [[http://www.swi-prolog.org/pldoc/doc/_SWI_/library/lists.pl?show=src#append/3][append/3]] (I renamed some variables):
-#+BEGIN_EXAMPLE
-append([], B, B).
-append([H|A], B, [H|C]) :- append(A, B, C).
-#+END_EXAMPLE
-
-Haskell seems simpler:
-#+BEGIN_EXAMPLE
-append [] b = b
-append (h : a) b = h : append a b
-#+END_EXAMPLE
-
-But those fragments differ.
-In Prolog we can run the code in other /directions/.
-There are 3 parameters, each with two directions (input/bound or output/unbound); thus there are 2^3 = 8 possible directions.
-The Prolog predicate translates to at least 5 Haskell functions,
-for the 5 ways of using append/3 we saw earlier.
-
-We write append/3 once, and we get at least five ways of calling it.
-
-But this beautiful dream crumbles outside pure symbolic logic programming.
-*** Another declarative example: palindromes
-"A list L is a palindrome iff L is its own reverse."
-#+BEGIN_EXAMPLE
-palindrome(L) :- reverse(L, L).
-#+END_EXAMPLE
-*** Learning resources?
-2015
-Approaches for Learning Prolog Programming
-https://www.tandfonline.com/doi/full/10.11120/ital.2007.06040088
-
-[[http://kti.ms.mff.cuni.cz/~bartak/prolog/index.html][Roman Barták's "On-line Guide to Prolog Programming"]]
-
-https://www.cis.upenn.edu/~matuszek/Concise%20Guides/Concise%20Prolog.html
-
-display/1 vs write_canonical/2? https://swi-prolog.discourse.group/t/re-swipl-re-pedagogy/48/10
 ** Avoid using list too much
 Perhaps think more about the relations between the individuals.
 
@@ -2508,12 +3179,6 @@ rKanren - Guided Search in miniKanren, Part I
 http://cgswords.github.io/rkanren/
 
 Schelog vs minikanren?
-** What is wrong with logic programming?
-"What is Wrong with Logic Programming?"
-"A Deductive Solution to Mutable State and I/O"
-https://pdfs.semanticscholar.org/ca08/dcb9eddc1e7651509daac7fa02eddb7f675b.pdf
-** Why use Prolog for AI?
-Because Prolog produces /explainable/ AI.
 ** Dreams, speculations, ambitions
 Harel 2008 \cite{harel2008can} has a lovely ambition.
 But I'm afraid I see only two way to realize that ambition:
@@ -2565,6 +3230,48 @@ See unix.html[fn::http://www.swi-prolog.org/build/unix.html] about git submodule
 See also Discourse[fn::https://swi-prolog.discourse.group/t/being-friendly-to-quick-contributions/493/3].
 
 It is not a simple git-clone, because we are using submodules.
+** Foreign language interface
+SWI-Prolog has a foreign language interface[fn::http://www.swi-prolog.org/pldoc/man?section=foreign], but I demand more.
+
+I want to write low-level code /directly in Prolog/.
+
+I want to write C code in Prolog.
+I want to have C with type inference and other cool features in Prolog.
+
+I dream of writing foreign code directly in Prolog.
+I dream of a Prolog code that can output an amd64 ELF binary.
+Related in mailing list[fn::https://groups.google.com/forum/#!topic/comp.lang.prolog/-WhsxJqPRRU].
+Related from the 1990s[fn::https://dtai.cs.kuleuven.be/projects/ALP/newsletter/archive_93_96/net/grammars/compiler2.html].
+Related: Warren 1980 \cite{warren1980logic}.
+
+There are two problems:
+emitting machine code, and executing machine code.
+
+Options for emitting machine code:
+- Design a DSL like ASN.1 to describe binary layout such as C struct or Pascal record.
+  I have a sketch in database_internal_dcg.pro.
+- Design an language that can be represented in Prolog and translated to C.
+- Reuse LLVM.
+- Building something like LLVM.
+  Write our own intermediate representation.
+  Static-single-assignment three-address code.
+- Write amd64 machine code directly.
+  This is bad.
+  Too tightly coupled.
+  We will want to generate i386, arm, and jvm machine codes.
+
+Options for executing machine code:
+- Write machine code to some memory area, set PROT_EXEC with mprotect, and call the address.
+- Write an ELF SO object and use dlopen.
+
+The skeleton of the minimum viable product:
+#+BEGIN_EXAMPLE
+example :-
+    compile(ret, ByteCode),
+    write_bytes(ByteCode).
+
+nb_write_address(+Address, -Thing)
+#+END_EXAMPLE
 * What mess?
 ** Gospel
 If everyone could be 20x more productive using Prolog, then it is a sin to let them use Java or C++.
@@ -2872,115 +3579,29 @@ What is the difference: =, ~==~, ~=:=~, is
 Semantic Web should be applied to make SWI-Prolog packs searchable and manageable.
 
 SWI-Prolog packs need curation/vetting/testimony/promotion.
-*** <2019-04-02> Draft: A clash-free module system
-**** About this draft
-The target audience is the SWI-Prolog maintainer, Jan Wielemaker.
-
-I wish to convince Jan that we must have a clash-free module system
-so that we do not become the victim of our own success when Prolog becomes mainstream.
-
-I wish to see such module system standardized and implemented.
-
-Where should we publish this to?
-- Post in SWI-Prolog Discourse group https://swi-prolog.discourse.group
-- Open an issue in SWI-Prolog Roadmap https://github.com/SWI-Prolog/roadmap
-**** Message
-Dear Prolog implementors,
-
-The Prolog community seems to be growing, and so is the number of SWI-Prolog packs.
-As more people write code, name clashes become more likely.
-We should standardize a clash-free module system before we have too many users and name clashes become too painful.
-
-There are two ways to avoid name clashes:
-- Rely on programmer coordination and discipline.
-  For example, the pack authors may prefix their module names by a domain name they control.
-  But it would be better for a system to avoid assuming that humans behave well.
-- Make name clashes impossible.
-  This is the path taken by JavaScript.
-  It is the only language I know that does this by its first-class modules.
-
-The key to clash-free module names is simple:
-- A file must not contain any module names/references.
-- The module/2 directive must ignore its first argument (the module name).
-- Dependency must be specified by file paths and not module names.
-
-Both predicate-based and atom-based modules are fine, as long as a module does not name itself,
-that is, as long as a file does not expect to be loaded to a module with a certain name.
-**** Implementation details
-I have a working code for SWI-Prolog in [[https://github.com/edom/work/blob/master/software/boot/load.pro][boot/load.pro]].
-It defines an =import/2= directive using =term_expansion/2=.
-The loader generates module names.
-An example usage looks like this:
-#+BEGIN_EXAMPLE
-:- import("somefile.pl",[
-    pred/1
-    , run/0 as somefile_run
-]).
-#+END_EXAMPLE
-
-The presence of an =:- import(Source, Specs)= in a file means that the file requires some things from Source.
-
-Source may be:
-- =file(Path)= where =Path= is a relative path to a file.
-  This path is resolved against the file that contains the import/2 directive.
-
-Specs is a list of Spec.
-
-Spec may be:
-- =Name/Arity=
-- =Name/Arity as Alias=
-- =multifile(Name/Arity)=: a "reverse-import"
-- =multifiles(Preds)= where each Pred is a Name/Arity
-
-Not yet implemented:
-importing operators like SWI-Prolog 7.6.4 use_module/2.
-#+BEGIN_EXAMPLE
-use_module(..., [
-    op(_,_,some_operator)
-]).
-#+END_EXAMPLE
-
-One day someone may make it possible for Source to be =github(...)= or =pack(...)=,
-but perhaps we should not do that because it will increase compilation time.
-
-An example language with a clash-free module system is JavaScript.
-Even better, modules are first-class in JavaScript.
-#+BEGIN_EXAMPLE
-function foo () {
-    var a = require("file1.js");
-    var b = require("file2.js");
-    console.log(a.x + b.y);
-}
-
-// a.js
-export let x = 1;
-
-// b.js
-export let y = 2;
-#+END_EXAMPLE
-
-What do you think?
-
-Best regards,
-
-Erik
-**** The problem: We could be a victim of our own success if we don't act
-Imagine that there were 10,000 SWI-Prolog packs: There would be naming conflicts.
-We can learn from the Haskell community's complaints with Haskell's module system,
-and do it right before it becomes too painful.
-Let us prepare, so that we do not become a victim of our own success.
-**** Criteria of a satisfactory solution
-Ideally, many people can write and use libraries without name clashes.
-**** Related discourses
-- Contributing libraries https://swi-prolog.discourse.group/t/contributing-libraries/381
 *** <2019-04-07> Improving contributor guide discoverability
 I wrote[fn::https://swi-prolog.discourse.group/t/improving-contributor-guide-discoverability-was-consolidating-the-71-github-repositories-to-simplify-maintenance-and-contribution/492/16]:
 #+BEGIN_QUOTE
 The information, the person, and the task must be /near to each other in space and time/.
 Ideally, the information is presented right where people need it when they need it.
 #+END_QUOTE
+*** <2019-04-08> Open-source donation does not work
+Jan Wielemaker on swipl-devel pull-request 459[fn::https://github.com/SWI-Prolog/swipl-devel/pull/459]:
+#+BEGIN_QUOTE
+I'd drop donating.
+We've done that in the past.
+It is mostly hassle that is nice to buy some infrastructure, but doesn't cover salaries.
+So far we managed to get the required infra structure sponsored directly.
+#+END_QUOTE
+
+Indeed.
+It's like digital busking.
+It is extremely simple to throw money physically at physical buskers.
+But how do we throw money digitally at people?
+In 2019 digital money donation is so much hassle and so complex that few actually donate money digitally.
 ** Discourse is interesting
 Discourse[fn::https://www.discourse.org] reputation system is an example of using software
 to enforce a policy that creates a system that self-heals against attacks.
 
 I should put it in my open-source page somewhere.
+* Bibliography

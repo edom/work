@@ -204,341 +204,6 @@ http://programming-journal.org/2017/1/10/
 http://researcharchive.vuw.ac.nz/handle/10063/6681
 
 http://www.pl-enthusiast.net/2015/05/27/what-is-pl-research-and-how-is-it-useful/
-* Designing module systems
-** What is a module? How does it differ from dictionary, function, table, map, association?
-What can we do with zero module? We can create the empty module.
-What can we do with a module?
-What can we do with many modules?
-
-Equality vs identity:
-Must a programming language separate equality and identity?
-Should two strings be equal, if they have different memory addresses but the same content?
-
-Let \( D \) be the programming language's domain of discourse.
-
-Let \( F(D) = D \to D \) be the set of every endofunction whose domain is \( D \).
-Let \( D \) be the smallest set such that \( F(D) \subset D \).
-Thus \( D \) is the least fixed point of \( F \).
-
-A dictionary can be a finite function whose domain is a finite subset of \( D \).
-
-A module can be modeled as a dictionary.
-A module can be modeled as a finite function \( N \to D \) where \( N \) is the set of names for which the module has an entry.
-A module can be modeled as an infinite function \( N \to D \) where \( N \) is the set of all possible names.
-** What module systems?
-REBOL module system?
-
-Bad example: java:
-- name is a property of a method.
-- a method cannot be referred to by a name.
-If you use reflection, you are referring to a representation of that method, not the method itself.
-
-Bad example: scheme: map, vector-map, tree-map, etc.
-
-Racket vs prolog
-Racket has racklog and miniKanren
-
-(infix
-  x = 1 :
-  y = x + x :
-)
-
-Racket DCG, packrat
-** from module.md (Designing module systems)
-What is a module?
-Or, should we be asking these questions instead?
-
-- How do we decompose a program? (I think David Parnas has answered this.)
-- Why do we need modules?
-- How do we organize programs?
-
-Modules reduce complexity by partitioning and independence.
-See [[http://www.computing.dcu.ie/~renaat/ca2/ca214/ca214vii.html][Three Universal methods of reducing complexity]]
-from the course [[http://www.computing.dcu.ie/~renaat/ca2/ca214over.html][CA214 Systems Analysis and Design Page]].
-
-What do others say?
-
-- [[https://en.wikipedia.org/wiki/Module][Wikipedia]]
-- According to [[https://en.wiktionary.org/wiki/module][Wiktionary]]:
-
-  - The word "module" is from Latin "modulus" that means "a small measure".
-  - A module is "a self-contained component of a system, often interchangeable, which has a well-defined interface to the other components".
-
-- [[https://www.dictionary.com/browse/module][dictionary.com]]
-
-What do we infer?
-
-- We can develop different modules at the same time.
-*** Philosophical investigation
-- What are the properties of a module?
-- What are its relationships with other things?
-
-  - interchangeability
-
-- A module groups things.
-
-  - Is this essential or accidental?
-    Is it made for grouping?
-    Is grouping only a side-effect?
-
-- What can we do with modules?
-
-  - We can combine modules.
-  - We can shadow modules.
-  - We can link modules.
-  - We can embed/inline modules.
-
-- A module is an incomplete/dependent piece of functionality/code.
-
-  - A module may have unresolved symbols?
-
-- A module is a decomposition of a program?
-- Module is about reusability?
-- A program is a module and a starting point.
-- A module specifies a contract.
-  A module can be swapped with another module that satisfies the same contract without changing the correctness of the program.
-- A module is a bunch of imports and exports?
-- A module is smallest unit of reuse? Isn't that function?
-- A module is smallest unit of compilation? Isn't that function?
-*** Modules are for humans
-Computers don't need modules.
-All it needs is a sequence of machine codes.
-
-A program is a lambda expression.
-A big program is a big lambda expression.
-Given enough memory, a computer can handle arbitrarily big lambda expressions.
-
-Human uses modules for organizing things.
-Human uses modules to make machines separate compilation, speed up recompilation, and recompile a part of the program.
-
-- Does a module have to coincide with a compilation unit?
-- Basic module functions?
-
-  - How does a code describe its dependencies?
-  - How does the machine disambiguate names?
-  - Functions should be versioned. Not module. Not package.
-    Version describes semantics.
-
-Module is second-order logic programming?
-Note below, that the same =Plus= is used as both a variable and a predicate.
-
-#+BEGIN_EXAMPLE
-    export(module_name, type, name, value).
-
-    export(prelude, int, plus, Plus) |- export(my_module, int, three, Plus(1, 2)).
-#+END_EXAMPLE
-
-- The smallest unit for this discussion is a machine instruction.
-- A subroutine is a collection of instructions.
-- A library is a collection of subroutines.
-- A program is a collection of libraries and an entry point.
-- History
-
-  - The initial motivation was to reuse.
-
-    - Reduce development cost.
-
-      - Humans have always been looking for easier ways to live.
-        This "laziness" (the ability to get bored repeating something) is the source of all human technology.
-
-  - The next motivation was to reduce disk and memory usage.
-
-- The essence of programming-in-the-large is Don't Repeat Yourself?
-*** Comparing existing module systems
-How do programming languages deal with modules?
-
-- [[https://github.com/dhall-lang/dhall-lang/issues/182][dhall modules · Issue #182 · dhall-lang/dhall-lang]]
-- [[https://futhark-lang.org/blog/2017-01-25-futhark-module-system.html][Futhark]]
-- [[https://elixir-lang.org/getting-started/modules-and-functions.html][Elixir]]
-
-  - [[https://hexdocs.pm/elixir/Module.html][Module -- Elixir v1.7.2]]
-
-- Racket
-
-  - 2011, article, "Languages as Libraries", [[http://www.cs.utah.edu/plt/publications/pldi11-tscff.pdf][pdf]]
-
-- Scheme R7RS, Common Lisp, Clojure
-- Java, Scala, Kotlin, Go, C, C++
-
-  - C ABI
-
-    - A module is an ELF shared object file (SO file).
-
-- Pascal, Ada, Oberon, Algol, Fortran
-- JavaScript, TypeScript, ECMAScript
-- Standard ML, Caml, OCaml, MLTON, SML/NJ, F#
-
-  - 2000, "A modular module system", [[https://hal.inria.fr/hal-01499946/document][pdf]]
-
-    - "Harper-Lillibridge-Leroy module system"
-    - "applicability of that module system to a wide range of programming languages"
-
-- Haskell has underpowered module system.
-- book, "Advanced topics in types and programming languages", part IV, programming in the large, [[http://camlunity.ru/swap/Functional%20Programming/Type%20Systems/Pierce/Advanced%20Topics%20in%20Types%20and%20Programming%20Languages.pdf][pdf]]
-
-  - book, "Types and programming languages", [[https://www.asc.ohio-state.edu/pollard.4/type/books/pierce-tpl.pdf][pdf]]
-
-- [[https://en.wikipedia.org/wiki/Modular_programming][WP:Modular programming]]
-*** Key idea: Module = Dictionary -> Dictionary
-Assume a dependently-typed language.
-
-Recall some terminologies:
-
-- A record is a tuple whose components are named.
-- A dictionary is also known as key-value map or look-up table.
-
-Then a module is a lambda abstraction that takes a record and gives a record.
-
-A module is a lambda abstraction.
-
-This idea is similar to Nix and JavaScript modules.
-
-=type Module = Map Name Decl -> Map Name Decl=
-
-A module translates into a lambda-calculus expression.
-An import translates to an entry in the input dictionary.
-An export translates to an entry in the output dictionary.
-Example:
-
-#+BEGIN_EXAMPLE
-    module {
-        import add mul Int32;
-        export f g T;
-        f = add;
-        g = mul;
-        T = Int32;
-    };
-
-    -- The expression above translates to:
-
-    \ {add; mul; Int32; ...} -> {
-        f = add;
-        g = mul;
-        T = Int32;
-    };
-#+END_EXAMPLE
-
-- Key ideas of that example:
-
-  - Dictionary pattern matching simulates row polymorphism.
-  - ={a;b;c;}= is shorthand for ={a:a; b:b; c:c;}=.
-  - [[https://blog.robphoenix.com/elixir/notes-on-elixir-pattern-matching-maps/][Notes on Elixir: Pattern-Matching Maps · Rob Phoenix]]
-
-What we are doing here is also known as "blurring the phase distinction".
-See [[https://futhark-lang.org/blog/2017-01-25-futhark-module-system.html#modules-versus-higher-order-functions]["Modules versus Higher-Order Functions" in Futhark blog post]]:
-"A module can be viewed as nothing but a record containing types and values."
-
-A problem: compilation may fail to terminate.
-No big deal.
-Set a time-out.
-*** what
-- Hypothesis: Lazy evaluation solves the partial query problem elegantly.
-- What are some cool ideas?
-
-  - Dhall can import from IPFS.
-
-    - http://www.haskellforall.com/2016/12/dhall-non-turing-complete-configuration.html
-
-  - Elixir can pattern-match maps (dictionaries).
-
-- What is a module in an untyped functional programming language such as Tulip?
-- Finding a programming language for programming in the large
-
-  - Ecosystem, libraries, tools, and communities.
-  - The most important thing in programming in the large is name management.
-    Namespaces.
-
-    - C has two namespaces: type namespace and value namespace.
-    - Haskell has two namespaces: type namespace and value namespace.
-    - Java has better namespacing than C.
-    - Enable the same name to be used in different context, so that you can write =get_name employee= and =get_name company= instead of =employee_get_name employee= or =company_get_name company=.
-
-      - Ad-hoc polymorphism.
-
-  - Which one has the biggest community?
-  - Which one has a decent IDE?
-  - Which community puts their money on where their mouth is?
-  - Comparing type systems
-
-    - [[https://docs.racket-lang.org/ts-guide/][The Typed Racket Guide]]
-    - F#
-    - SML
-    - Caml
-    - OCaml
-    - Idris, Agda
-    - Coq, Lean
-    - Haskell
-    - 2004, chapter, "Type systems", Luca Cardelli, [[http://lucacardelli.name/Papers/TypeSystems.pdf][pdf]]
-
-      - from https://www.artima.com/forums/flat.jsp?forum=106&thread=185420
-      - 2005, book, "Advanced topics in types and programming languages", Benjamin C. Pierce (editor)
-
-        - Part IV, "Types for Programming in the Large"
-
-      - 2002, book, "Types and programming languages", Benjamin C. Pierce
-
-    - Java, Kotlin, Scala
-    - Things that annoy me
-
-      - ML, SML, Caml, OCaml: ='a tf= is somewhat annoying. It should have been =tf a=.
-
-        - F# uses =tf<'a>=.
-        - Haskell uses =Tf a=.
-
-      - Would you rather type ='a list= (F#) or deal with an inadequate record/module system (Haskell)?
-      - Haskell doesn't have =instance Read (->)= and =instance Show (->)=.
-
-        - Haskell expressions are not first-class citizen in the language.
-
-          - Unlike Lisp/Scheme.
-
-        - Encumbers metaprogramming.
-
-    - OCaml labels and polymorphic variants?
-
-      - http://caml.inria.fr/pub/docs/manual-ocaml-400/manual006.html
-      - OCaml labels are somewhat similar to Scheme keyword arguments.
-
-    - F# quotations is important for metaprogramming.
-    - F# doesn't do ad-hoc polymorphism well?
-
-      - [[https://withouttheloop.com/articles/2014-10-21-fsharp-adhoc-polymorphism/][Ad-hoc Polymorphism in F# (how to survive without Type Classes) - Without the loop]]
-      - [[https://sidburn.github.io/blog/2016/03/24/higher-kinded-polymorphism][Higher-kinded Polymorphism: What is it, why you want it · David Raab]]
-
-    - https://cstheory.stackexchange.com/questions/40705/why-did-caml-become-ocaml-or-why-use-objects-in-f
-    - ML begat Caml. Caml begat Caml Light? Caml Light begat OCaml?
-    - [[https://www.quora.com/How-does-F-compare-to-OCaml-in-regard-to-major-syntactic-differences-paradigm-shifts-and-interoperability-with-Windows-What-about-its-numeric-capabilities][How does F# compare to OCaml, in regard to major syntactic differences, paradigm shifts, and interoperability with Windows? What about its numeric capabilities? - Quora]]
-
-      - Jon Harrop claims. More sources needed. Take it with a grain of salt.
-
-        - "OCaml has an integrated full-blown macro system in the form of Camlp4 whereas F# does not have macros and, in fact, has been deliberately closed off in order to discourage people from creating products that compete with Visual Studio."
-
-          - "deliberately closed off [...]" is a bold claim.
-
-  - [[https://softwareengineering.stackexchange.com/questions/155239/are-all-languages-basically-the-same/155243][Are all languages basically the same? - Software Engineering Stack Exchange]]
-
-- package/dependency management tools
-
-  - Java: Maven, Gradle
-  - OCaml: OPAM
-  - Haskell: Cabal, Stack
-  - F#: Paket? NuGet?
-  - C/C++: conan? chocolate? vcpkg?
-
-- Formally adding modules to lambda calculus
-
-  - What is module calculus?
-
-    - 2017 article "Modules, Abstraction, and Parametric Polymorphism" [[https://www.cs.cmu.edu/~crary/papers/2017/mapp.pdf][pdf]]
-    - 2003 article "A Type System for Higher-Order Modules" [[http://www.cs.cmu.edu/~rwh/papers/thoms/tr2.pdf][pdf]]
-    - 2001 article "A Calculus of Module Systems" [[http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.22.5407][pdf available]]
-    - 2012 course notes "Types for Module Systems" [[http://www.ccs.neu.edu/home/amal/course/7480-s12/modules-notes.pdf][pdf]]
-      from [[http://www.ccs.neu.edu/home/amal/course/7480-s12/][CS7480 Type Systems (Spring 2012)]]
-
-- Ignored undocumented code sketches
-
-  - [[https://github.com/jordanlewis/simple-module-system][jordanlewis/simple-module-system: Adding modules to a polymorphic lambda calculus]], code in SML/NJ.
-** ML/OCaml records vs modules: Why do we have modules if records suffice? An Ocaml "functor" would then simply be a function from records to records.
 * Program correctness
 ** What is correct?
 ** How do we know that our program is correct?
@@ -720,91 +385,6 @@ Abdullah pointed out to me that TypeScript interface is similar to Ocaml polymor
 **** But there is Racket and its languages such as ProfessorJ, Datalog.
 - "Creating languages" https://docs.racket-lang.org/guide/languages.html
 * Concepts?
-** Effects, side-effects, and errors
-*** An effect is what?
-What is an "effect"?
-
-What is a "side-effect"?
-
-Does "side-" imply undesirability?
-
-Isn't memory allocation an effect?
-
-What is a "side-effect"?
-Wikipedia[fn::https://en.wikipedia.org/w/index.php?title=Side_effect_(computer_science)&oldid=855461052][fn::https://softwareengineering.stackexchange.com/questions/40297/what-is-a-side-effect] is inconclusive.
-
-The "side" in "side-effect" implies that there are /effects/ and /main-effects/, and that side-effects are unintended, unrelated, or unwanted.
-The /effect/ of running a program is the change of the state of the universe that results from executing that program.
-In medicine, a side effect is an /unintended/ effect, not necessarily bad[fn::https://en.wikipedia.org/w/index.php?title=Side_effect&oldid=875244456].
-Thus, there is a parallel between chemists-and-drugs and programmers-and-programs:
-the designer of a drug (the programmer of a program) /intends/ that taking the drug (running the program) accomplishes the /main-effect/, but reality is a bitch.
-
-What is our intention when we write a program such as a Haskell program =inc x = (x :: Integer) + 1=?
-Our intention is that it increments an integer, for /every/ integer, which is mathematically trivial but physically impossible.
-The side-effects are: heating up the CPU, taking up some memory, taking up some time.
-We certainly did not intend to heat up the CPU; therefore such heating is a side-effect.
-Thus the main-effect is the /denotation/ (the mathematical meaning) of the program,
-and every implementation detail is a side-effect.
-
-Thus "side-effect" means an effect that we failed to foresee, because the complexity was too much for us.
-
-Side-effects may be fatal.
-
-Spectre/Meltdown are side-effects in that sense.
-The chip designers sacrificed understandability for speed.
-
-There is also the phrase "algebraic effect".
-
-We have to distinguish between a /program/ and a /machine/ running the program.
-A program does not run by itself.
-A /machine/ runs a program.
-A program /describes/ a computation.
-The machine /performs/ the computation.
-A program is passive.
-A machine is active.
-A program exists in idea-world.
-A machine exists in material-world.
-A machine affects reality according to the program that the machine is running.
-The question: which is the /cause/ of the change in reality: the machine or the program?
-
-If we assume free will, then our thought causes our behavior, and our behavior causes something in the material-world.
-*** An error is an unintended behavior, unexpected outcome?
-Unintended behavior?
-How do we measure intention?
-
-Error is like weed.
-They are subjective concepts.
-An error is an undesirable condition.
-Why are errors undesirable?
-Because they complicate programs.
-
-Since 1726, an error is a "difference between observed value and true value".[fn::https://www.etymonline.com/word/error]
-
-An error is a difference between what is and what should be.
-
-Midori programming language
- [fn::http://joeduffyblog.com/2015/11/03/blogging-about-midori/]
- [fn::http://joeduffyblog.com/2016/02/07/the-error-model/].
-
-Is an error a side-effect?
-Both errors and side-effects are unintended.
-
-Let \(f'\) be what we think a system does.
-Let \(f\) be what the system actually does.
-Then our error is \(f' - f\) which has to be equal to \(- (f - f')\).
-If each of \(f\) and \(f'\) is a logic formula in a structure with domain \(D\) and interpretation \(I\),
-then \(-\) is symmetric difference, and negation is made with respect to \(D\).
-
-For example, we think the system implements \( a \).
-It turns out that the system implements \( b \).
-Then the error is \((a \wedge \neg b) \vee (b \wedge \neg a)\).
-Let each of \(a\) and \(b\) be a formula.
-Define their symmetric difference \(a - b\) as \((a \wedge \neg b) \vee (b \wedge \neg a)\),
-similar to set-theoretic symmetric difference[fn::https://en.wikipedia.org/wiki/Symmetric_difference].
-
-For example, we think the system implements \( x \mapsto x + 3 \).
-It turns out that the system implements \( x \mapsto x + 2 \).
-Then the error is \(x \mapsto 1\).
 ** Then, design the concrete syntax
 The concrete syntax of \( \Gamma \vdash A \) is \( with(\Gamma,A) \).
 ** Macro, reflection, reification, quoting
@@ -2497,7 +2077,13 @@ Suppose =f : a -> b=, and =x : m (p a)=, and =m= is an instance of =Functor=, an
 - Problem: The rule interferes with the =Functor= instance of =(->)=.
 ** Some tentative plans: Create a language that compiles to Haskell?
 - [[https://github.com/bennofs/haskell-generate][bennofs/haskell-generate: Type-safe library for generating haskell source code]]
-* Programming language design mistakes
+* Programming language design mistakes?
+What is a design mistake?
+Does a design mistake exist?
+Or all that exists is trade-offs/compromises?
+
+Assembly is not fun to use, but is it a design mistake?
+How else could it be done in the 20th century, other than wishfully thinking of telepathic machines?
 ** Justifying the creation of yet another programming language
 A new programming language should fix unforeseen design mistakes in existing programming languages.
 It should not repeat their design mistakes.
@@ -2514,25 +2100,21 @@ We don't know it's a mistake until long after we have done it.
 *** Ignoring programming language theory and research
 Some mistakes are because the language designer is ignorant, lazy, or in a hurry.
 *** Dynamic typing
-    :PROPERTIES:
-    :CUSTOM_ID: dynamic-typing
-    :END:
+Dynamic typing speeds up prototyping but precludes translation to code that is as fast as statically-typed codes.
 
-Dynamic typing is a design mistake.
+Static typing is about allowing the compiler to make simplifying assumptions to emit faster code.
+We can work faster with simplifying assumptions.
+For example, if we can assume that people don't mind being killed, we can kill all people,
+but that assumption is like the assumption that user input is always valid.
+
+Dynamic typing is a design mistake?
 Type inference goes back to 1958.
 ML has type inference since 1973.
 It's 2018.
 There is no excuse for ignoring 60 years of research.
 See [[https://en.wikipedia.org/wiki/Type_inference#Hindley%E2%80%93Milner_type_inference_algorithm][WP1]],
 [[https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system#History_of_type_inference][WP2]].
-
-*** Lack of metaprogramming support
-    :PROPERTIES:
-    :CUSTOM_ID: lack-of-metaprogramming-support
-    :END:
-
-Lack of metaprogramming support is a design mistake.
-
+*** Lack of metaprogramming support?
 *** Lack of symbol overloading (ad-hoc polymorphism)
     :PROPERTIES:
     :CUSTOM_ID: lack-of-symbol-overloading-ad-hoc-polymorphism
@@ -2543,19 +2125,9 @@ Haskell requires you to make a type class for ad-hoc polymorphism.
 
 Without overloading, clashing names need to be prefixed manually.
 
-*** Mutable by default
-    :PROPERTIES:
-    :CUSTOM_ID: mutable-by-default
-    :END:
-
-Having variables mutable by default is a design mistake.
-
+*** Mutable by default?
 *** Non-first-class constructs
-    :PROPERTIES:
-    :CUSTOM_ID: non-first-class-constructs
-    :END:
-
-Object-oriented programming is a design mistake.
+Object-oriented programming is a design mistake?
 
 - =a.b()= should not mean "call method b of object a"
 - =a.b()= should mean "get the function a.b, then call it".
@@ -2576,29 +2148,13 @@ and
 do this right. - Can we replace statements with expressions in existing imperative languages without breaking backward compatibility? - But C has [[https://en.wikipedia.org/wiki/Comma_operator][WP:Comma operator]]? - We can use lambda calculus for imperative programming. - Treat the statement separator (here we use semicolon =;=)
 as an operator (function with infix syntax)
 that sequences the effects of two expressions. - For example: - Let =a= be an expression. - Let =b= be an expression. - Thus =a;b= is an expression. - The value of =a;b= is the value of =b=. - The effect of =a;b= is the effect of =a= followed by the effect of =b=. - Semicolon is associative: =(a;b);c = a;(b;c)=. This also holds for the effects.
-
 *** Virtual machines
-    :PROPERTIES:
-    :CUSTOM_ID: virtual-machines
-    :END:
-
 Virtual machines are a design mistake.
 Instead, do semantic mapping: map a program in language A to an equivalent program in language B while preserving the meaning.
-
 *** More than one way to do something
-    :PROPERTIES:
-    :CUSTOM_ID: more-than-one-way-to-do-something
-    :END:
-
 [[https://en.wikipedia.org/wiki/There%27s_more_than_one_way_to_do_it]["There is more than one way to do it"]] is a design mistake.
-
 *** Disallowing multi-line string literals
-    :PROPERTIES:
-    :CUSTOM_ID: disallowing-multi-line-string-literals
-    :END:
-
 Languages should allow CR/LF in string literals.
-
 *** Not allowing extra leading or trailing commas
 Allowing extra commas make Git diffs less noisy.
 *** Not separating names and referents
@@ -2798,20 +2354,6 @@ The mathematical description f x = x + 1 works with all real numbers.
 The program works with all natural numbers from 0 to 2^64-1.
 The realization of a mathematical function (A,B,F) is simply a finite subset of it: (A',B',F'), where A', B', and F' are finite.
 Even if you use arbitrary-precision arithmetic, you are still limited to the memory of the machine. For example, if the machine only has 1000 bytes of memory, then it can only realize number smaller than 2^(1000 * 8).
-
-Ocaml has first-class modules, but can it import a file into a module?
-https://v1.realworldocaml.org/v1/en/html/first-class-modules.html
-
-What JavaScript does right:
-- a module is a plain JavaScript object
-- it is possible import a file into a module referred by a local variable
-What Ocaml does right:
-- local import
-
-Ocaml design mistake: Tying module name to file name.
-"Source files in OCaml are tied into the module system, with each file compiling down into a module whose name is derived from the name of the file."
-https://v1.realworldocaml.org/v1/en/html/files-modules-and-programs.html
-
 *** What is a type? Understanding what a type is from how it is used
 Mathematically, A type is a set whose membership is syntactically decidable.
 
