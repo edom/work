@@ -1403,6 +1403,22 @@ The stub implementation is "ask the user for what the return value of this stub 
 "Prorogue" is a rare English word meaning prolong or extend[fn::https://en.wiktionary.org/wiki/prorogue].
 But that is not all; types can be prorogued too.
 * Rethinking module systems, especially of Prolog
+** Modules as protection of internals?
+There are two opposing hypotheses:
+- Good abstraction (implementation-hiding) increases robustness.
+- All abstraction leaks, and the fix requires knowing the implementation.
+
+For robustness, we want caller to depend only on public interface;
+we want to make the contract explicit.
+
+Modules are for protecting internal assumptions?
+From \cite{haemmerle2006modules}:
+- "One difficulty in Prolog comes from the /call/ predicate which interferes with
+  the protection of the code, an essential task of a module system."
+- "[...] to guarantee the
+  semantics of the predicates defined in a library, a module system has however to
+  strictly prevent any predicate execution not allowed by the programmer."
+- "The /algebraic approach/ defines module calculi with operations over sets of program clauses"
 ** What is "What is" questions?
 When we ask about what something is,
 we usually do not mean to ask what it really is,
@@ -2287,6 +2303,7 @@ Usability issues:
   There does not seem to be any documentation, or if there is, then it is at the wrong place.
 - Why do we require people to understand DCG rules before they can use the messaging system?
 * Object-logic programming?
+** Can we model objects with identities without unique name assumption?
 ** How do we do/make/model objects and properties in Prolog?
 "From a logical point of view, an object, the basic abstraction unit, has a natural interpretation as a logic theory:
 /an object is simply a collection of axioms which describe what is true about the object itself/." \cite{ciancarini1993logic} (emphasis mine)
@@ -2460,6 +2477,47 @@ Conclusions:
   but should only export predicates in the many-predicates (normal-form) style.
 - A translation should not import denormal-form predicates.
 * Writing enterprise web applications
+** Why do we model things?
+http://www.dubberly.com/articles/models-of-models.html
+** Modeling the dynamic aspect of software systems as inter-agent dialogs
+We can think of a software system as the set of all possible /dialogs between agents/.
+- Man queries machine.
+- Machine queries man.
+- Man commands machine.
+- Machine commands man.
+- Man queries man, man commands man, machine queries machine, machine commands machine.
+
+An agent is a man or a machine.
+An agent is something that can cause something.
+
+An agent may query another agent.
+An agent may command another agent.
+
+People must have thought about this before.
+
+"Behymer and Flach build on the idea of collaboration, proposing a model comprised of actors or 'agents', both human and 'automaton'."
+ [fn::http://www.dubberly.com/articles/distinguishing-between-control-and-collaboration-and-communication-and-conversation.html]
+** Why should we use a modeling language expressive enough to model itself?
+(Not yet answered.)
+
+instance_of(O,C) means that O instantiates (is an instance of) C.
+
+class_property(C,P) means that each instance of C has a property named P.
+
+The constraint:
+#+BEGIN_EXAMPLE
+forall O C : instance_of(O,C), class_property(C,P) -> exists V : opv(O,P,V)
+#+END_EXAMPLE
+
+Class-property is its own meta-model.
+#+BEGIN_EXAMPLE
+class(class).
+class_property(class, name).
+class_property(class, property).
+
+class(property).
+class_property(property, name).
+#+END_EXAMPLE
 ** Convenient Prolog HTML Expression
 CPH stands for Convenient Prolog HTML.
 CPHE stands for CPH Expression.
@@ -2911,6 +2969,12 @@ A possibly better way is to write an interpreter and /get a compiler for free/ b
 Writing an interpreter is much easier than writing a compiler.
 
 "Partial deduction" is partial evaluation from logic point of view.
+** Logic programming and compiler writing
+Warren 1980 "Logic programming and compiler writing"
+http://sovietov.com/tmp/warren1980.pdf
+
+Hamel 2016 "Formal Methods: A First Introduction using Prolog to specify Programming Language Semantics"
+https://pdfs.semanticscholar.org/1c13/792241df9d5e002dab7a2515f11ad1fbc85e.pdf
 * Higher-order logic programming
 ** What is wrong with Prolog?
 *** The problem with var/1: non-commutativity and non-monotonicity
@@ -3201,6 +3265,11 @@ Assert accepts a clause.
 assert(man(fred)).
 assert(p(A,B) :- f(A), g(A), h(A,B)).
 #+END_EXAMPLE
+** Why should we write type systems as macros?
+WIP implementation of a Haskell-like Lisp in Racket
+https://github.com/lexi-lambda/hackett
+
+http://www.ccs.neu.edu/home/stchang/pubs/ckg-popl2017.pdf
 * Prolog implementation
 ** How would we implement Prolog in C?
 SWI-Prolog has the macros =PL_succeed= and =PL_fail=.
@@ -3604,4 +3673,28 @@ Discourse[fn::https://www.discourse.org] reputation system is an example of usin
 to enforce a policy that creates a system that self-heals against attacks.
 
 I should put it in my open-source page somewhere.
+** Unread
+"Here I make use of a feature of the SWI Prolog REPL - prefixing a variable with $ will use the value that was assigned to that variable in a previous REPL command."
+https://bluishcoder.co.nz/2018/09/24/concurrent-and-distributed-programming-in-web-prolog.html
+
+"Notes for a Tutorial on Abstract Interpretation of Logic Programs"
+https://www.reddit.com/r/prolog/comments/98cqie/notes_for_a_tutorial_on_abstract_interpretation/
+
+"Prolog and the Database Of The Future"
+https://www.reddit.com/r/prolog/comments/99xwue/prolog_and_the_database_of_the_future/
+
+"fizz: an experimental language/runtime for cognitive architectures (version 0.4)"
+https://www.reddit.com/r/prolog/comments/9c5evc/fizz_an_experimental_languageruntime_for/
+
+"A Data-parallel Implementation of Prolog: : a simple model for parallel execution suitably restricted to guarantee efficient parallel execution"
+https://www.reddit.com/r/prolog/comments/9cbqj0/a_dataparallel_implementation_of_prolog_a_simple/
+
+"Reform Prolog is an (dependent) AND-parallel system based on recursion parallelism and Reform compilation."
+https://www.reddit.com/r/prolog/comments/9ceohz/reform_prolog_the_language_and_its_implementation/
+
+https://www.reddit.com/r/prolog/new/
+
+1997 "FAQ: Prolog Resource Guide 1/2 [Monthly posting]"
+Where is the most recent version?
+http://www.faqs.org/faqs/prolog/resource-guide/part1/index.html
 * Bibliography
