@@ -7,7 +7,6 @@ I share my goals and knowledge in the website [edom.github.io](https://edom.gith
 
 ## Things maintained
 
-- [org](org/): org-mode notes; should be exported into edom.github.io
 - [etc](etc/): operating system configuration files
 - [sh](sh/): shell scripts, mostly Bash
 - [software](software/): a SWI-Prolog 7 knowledge base
@@ -67,9 +66,11 @@ I share my goals and knowledge in the website [edom.github.io](https://edom.gith
 
 The source code is in [edom.github.io](edom.github.io/).
 
-To serve the website locally, run the script [sh/jekserve](sh/jekserve).
+The following commands expect to be run from that directory.
 
-To publish the website, run the script [sh/pub](sh/pub).
+To serve the website locally, run the script `_sh/serve`.
+
+To publish the website, run the script `_sh/publish`.
 
 - Install Jekyll 3 on Ubuntu 14.04
     - Install the version in [GitHub pages dependency versions](https://pages.github.com/versions/).

@@ -130,6 +130,40 @@ The job of a module is to disambiguate names.
 Example: which "member/2" do we mean?
 *** Does it make sense in a language with nominal typing?
 Such as Haskell, Java, Ur/Web?
+* Basic questions
+** How is a programming language a language?
+A language is a convention for representing thoughts.
+
+Important concepts have shorter encodings.
+Who judges what is important?
+The speakers.
+** Why is it easy to mix natural languages but not programming languages?
+The reason it is easy to mix natural languages is that their syntaxes are the same.
+Their differences are superficial: the vocabulary.
+They all serve to talk about the common things in human experience: eating, trees, lions, dogs, foods.
+They share semantics.
+
+Programming languages have wildly varying semantics.
+Some doesn't even have clear semantics.
+** How should we judge the quality of languages in general and programming languages in particular?
+For example, English speakers judge that the quantity of a noun is important, when something happens is improtant.
+German speakers judge that the gender of nouns is important.
+The morphological features of a language reflects what its early speakers think is important to communicate.
+Hypothesis: The genders of nouns reflect the early speakers' idea of what male is and what female is.
+
+C makes memory manipulation easy.
+Haskell makes functions easy.
+Prolog makes database and inference easy.
+Java is supposed to make working in big teams easy.
+
+There is always a trade-off.
+If something is made easier, something else must be made harder.
+If something is encoded shorter, something else must be encoded longer.
+Language is like Huffman coding built into the brain.
+** When are programmers happy?
+Happiness happens when what the programmer thinks is important coincides with what the language designer thinks is important.
+For example, when I'm writing an accounting software, I don't care about the registers, pointers, memory addresses, and so on.
+In this case, I care more about ontology than about pointers.
 * Pre-design
 ** How should we design a programming language?
 Language design should start from semantics.
