@@ -1,4 +1,4 @@
-#+TITLE: Using Prolog
+#+TITLE: Using the Prolog programming language
 #+DATE: 2018-04-11 00:00 +0700
 #+OPTIONS: ^:nil toc:nil
 #+PERMALINK: /prolog.html
@@ -1403,7 +1403,59 @@ The stub implementation is "ask the user for what the return value of this stub 
 "Prorogue" is a rare English word meaning prolong or extend[fn::https://en.wiktionary.org/wiki/prorogue].
 But that is not all; types can be prorogued too.
 * Rethinking module systems, especially of Prolog
-** Modules as protection of internals?
+** What problems are modules trying to solve?
+*** Two problems that modules are trying to solve
+- our only mental weapon, to understand code and combat complexity,
+  is divide-and-conquer and abstraction which is often somewhat hierarchical
+- name clashes are bound to happen in a large software system
+*** Why do name clashes happen?
+Natural languages also have name clashes.
+
+English homonyms.
+
+Why do we have homonyms?
+
+We use language for practical purposes, not for philosophical purposes.
+Practically, conflating a thing and its representation makes life easier.
+*** How does name clashes happen?
+*** The key of avoiding name clashes: Things should not name themselves
+Names and referents should be separated.
+
+Philosophically, a name of a thing must not be a property of the thing itself.
+A rock does not implore us to call it "rock".
+It is we who name it "rock".
+My name is "Erik", but you can name me anything,
+although calling me with any other name may fail to grab my attention.
+
+If A uses B, then A names B, and B must not tell A what to name B.
+
+Example agreement: JavaScript functions and modules don't have names.
+What has a name is the variable that refers to the function or to the module.
+
+Example violation: C functions have names.
+*** How do module systems arise?
+We are merrily writing codes until our program grows big and we have difficulty finding things.
+Then we feel that something has to be done.
+
+We make module systems because we are humans with limited working memory.
+Our only weapon against complexity is divide-and-conquer and hierarchical abstraction/categorization.
+*** Secondary uses of modules
+All other purposes such as encapsulation and protection are secondary while-we're-at-it additions.
+
+- to separate or parallelize compilation
+- to protect internal constraints/consistency,
+  to prevent the user from using the module in an incorrect way not designed by the module creator
+  \cite{haemmerle2006modules}
+
+C does not even try: leave it the programmer.
+C++ solution is better but not satisfactory: automatically prefix everything.
+JavaScript's solution is fundamentally better: the names of modules, classes and functions can be locally scoped.
+
+Static typing helps name resoution by overloading like in Java and C++.
+But this only delays the problem: /the types themselves can have clashing names/.
+
+For example, a car driver does not mess with the internals of the car engine while driving.
+*** Modules as protection of internals?
 There are two opposing hypotheses:
 - Good abstraction (implementation-hiding) increases robustness.
 - All abstraction leaks, and the fix requires knowing the implementation.
@@ -1419,61 +1471,38 @@ From \cite{haemmerle2006modules}:
   semantics of the predicates defined in a library, a module system has however to
   strictly prevent any predicate execution not allowed by the programmer."
 - "The /algebraic approach/ defines module calculi with operations over sets of program clauses"
-** What is "What is" questions?
-When we ask about what something is,
-we usually do not mean to ask what it really is,
-but we are actually asking one of these:
-- Why does it exist?
-- How can I use it?
+*** What are hardware modules?
+An example is an integrated circuit, a black box that performs a high-level function.
+Thinking in terms of op-amps instead of in terms of Maxwell's equations.
+The essence of hardware module is abstraction.
+A module is a unit of reasoning.
+If a module breaks down, the user replaces the entire module.
+The module creator designs the module such that the module user can think at a higher level of abstraction.
+*** Ciao Prolog module system?
+\cite{cabeza2000new}
+** How should modules and meta-predicates interact?
+*** What is the name of a thing?
+The question boils down to "What is the name of a thing?"
+*** What should call/1 mean? What is the reason for atom-based module systems?
+We propose two principles for call/1: /transparency/ and /lexical binding/,
+because they simplify reasoning about the program.
 
-Thus, "What is it" does not really ask about the /essence/ of something, but about an /explanation/ for something.
-Thus, "what" questions are often /teleological/ rather than /ontological/.
-Our understanding is mostly teleological and not ontological.
-We understand things in terms of how we can use them.
-Scientists try to understand things in terms of what they actually are physically.
+Without modules, the meaning of =call(foo(A))= is straightforward:
+It is as if the programmer had written =foo(A)= instead.
 
-I find that the "whatisthisthing" reddit[fn::https://www.reddit.com/r/whatisthisthing/] is a strong evidence for my argument.
+/Transparency/ means that textually replacing =call(A)= with =A= in the source code should preserve the meaning of the program.
+The semantics of =call(A)= should be the same as the semantics of =A=.
 
-But that subreddit also contains evidences against my argument.
-"What exactly is this airplane"[fn::https://www.reddit.com/r/whatisthisthing/comments/bao335/what_exactly_is_this_airplane/]
-does ask about what the model is, and not why that airplane comes into being.
+/Lexical binding/ means that we should be able to determine the meaning just by looking at the source code without running the program.
 
-Another example: "What is it (that you want to say)?" (when we see someone hesitate)
-actually asks "Why are you here?".
+An atom-based module system is one way of satisfying those principles.
+But a predicate-based module system is more amenable to compilation?
 
-** Why do we have modules? What are they for?
-- first of all, to help us understand code,
-  because our only mental weapon against complexity is divide-and-conquer and hierarchical abstraction
-- for namespacing, to avoid name clashes
-- to parallelize compilation
+qname_module_name(QualName, Module, Name)
 
-C solution is simple but bad: leave it the programmer.
-C++ solution is better but not satisfactory: automatically prefix everything.
-JavaScript's solution is fundamentally better: the names of modules, classes and functions can be locally scoped.
-
-Static typing helps name resoution by overloading like in Java and C++.
-But this only delays the problem: /the types themselves can have clashing names/.
-** Why and how do name clashes happen?
-English homonyms.
-
-Why do we have homonyms?
-** The key of avoiding name clashes: Things should not name themselves
-Names and referents should be separated.
-
-Philosophically, a name of a thing must not be a property of the thing itself.
-A rock does not implore us to call it "rock".
-It is we who name it "rock".
-My name is "Erik", but you can name me anything,
-although calling me with any other name may fail to grab my attention.
-
-If A uses B, then A names B, and B must not tell A what to name B.
-
-Example agreement: JavaScript functions and modules don't have names.
-What has a name is the variable that refers to the function or to the module.
-
-Example violation: C functions have names.
-** What is the reason for atom-based module systems?
-** What thinking is this???
+Lexical binding is a consequence of the /principle of least surprise/: do what most users most likely expect.
+But can the principle of least surprise clash with the principle of mathematical elegance?
+** Designing the module system
 *** What is a module, functionally, relationally, and logically?
 From functional programming perspective, a module is a function from name to value.
 
@@ -1482,9 +1511,6 @@ From relational programming perspective, a module is a functional relation betwe
 From logic programming perspective, a module is a collection of Horn clauses.
 
 Atom-based modules break those intuitions?
-
-- https://core.ac.uk/download/pdf/148663021.pdf
-- https://www.researchgate.net/profile/Francois_Fages/publication/220986844_Modules_for_Prolog_Revisited/links/00b495277f5b9dd5ce000000/Modules-for-Prolog-Revisited.pdf
 
 Thus in Prolog, if we have first-class relations, then we can have first-class modules.
 
@@ -1501,12 +1527,26 @@ usefoo :-
     import("foo.pro", M),
     M:bar.
 #+END_EXAMPLE
-*** How do module systems arise?
-We are merrily writing codes until our program grows big and we have difficulty finding things.
-Then we feel that something has to be done.
+*** How does a module differ from dictionary, function, table, map, association?
+What can we do with zero module? We can create the empty module.
+What can we do with a module?
+What can we do with many modules?
 
-We make module systems because we are humans with limited working memory.
-Our only weapon against complexity is divide-and-conquer and hierarchical abstraction/categorization.
+Equality vs identity:
+Must a programming language separate equality and identity?
+Should two strings be equal, if they have different memory addresses but the same content?
+
+Let \( D \) be the programming language's domain of discourse.
+
+Let \( F(D) = D \to D \) be the set of every endofunction whose domain is \( D \).
+Let \( D \) be the smallest set such that \( F(D) \subset D \).
+Thus \( D \) is the least fixed point of \( F \).
+
+A dictionary can be a finite function whose domain is a finite subset of \( D \).
+
+A module can be modeled as a dictionary.
+A module can be modeled as a finite function \( N \to D \) where \( N \) is the set of names for which the module has an entry.
+A module can be modeled as an infinite function \( N \to D \) where \( N \) is the set of all possible names.
 *** Do not conflate modules and files
 A module is the internal representation.
 File contains the external representation.
@@ -1573,6 +1613,32 @@ This SWI-Prolog Google Groups discussion thread[fn::https://groups.google.com/fo
 Module is about namespacing.
 
 We want to say that "The mypred/3 in file1 is the same as the yourpred/3 in file2."
+*** How do we design a module system that subsumes both atom-based and predicate-based module systems?
+A module system is a name-prefixing mechanism.
+
+*** Anonymous predicates?
+- Do anonymous predicates subsume module systems?
+- What may anonymous predicates look like?
+
+It should be possible to talk about a predicate without naming it first.
+
+#+BEGIN_EXAMPLE
+p(A) :- A = 0 ; A = 1.
+
+% vs
+
+\ A :- A = 0 ; A = 1.
+#+END_EXAMPLE
+
+\( p(x) \equiv x=0 \vee x=1 \) vs \( \lambda x (x=0 \vee x=1) \).
+
+How do we add anonymous relations/predicates to Prolog?
+
+#+BEGIN_EXAMPLE
+let p = \ A :- (A = 1 ; A = 2).
+
+p(A) :- A = 1, A = 2.
+#+END_EXAMPLE
 *** Prolog mixins
 A Prolog /mixin/ (mix-in) is simply an include file that adds features to the includer.
 Example, this mixin endows the includer with a static vocabulary about objects and properties,
@@ -1585,18 +1651,7 @@ akin to object-orientation without method.
 get(O,P,V) :- \+ opv(O,P,V), throw... . % what?
 get(O,P,V) :- opv(O,P,V).
 #+END_EXAMPLE
-*** Logtalk?
-"You can even use [Logtalk] to run Prolog module code in Prolog compilers such as GNU Prolog that don't include a module system."
- [fn::https://stackoverflow.com/questions/6695788/programming-in-the-large-with-prolog]
-*** How do we design a module system that subsumes both atom-based and predicate-based module systems?
-A module system is a name-prefixing mechanism.
-*** How do we add anonymous relations/predicates to Prolog?
-#+BEGIN_EXAMPLE
-let p = \ A :- (A = 1 ; A = 2).
-
-p(A) :- A = 1, A = 2.
-#+END_EXAMPLE
-*** Component/module system, socket-plug metaphor
+*** Component system with socket-plug metaphor
 I need a component system for programming in the large.
 Prolog module system is a building block, but Prolog modules by themselves are not enough.
 Socket-and-plug metaphor fits nicely?
@@ -1622,8 +1677,9 @@ A Prolog module system is either /predicate-based/ or /atom-based/.
 XSB is atom-based.
 SWI is predicate-based.
 GNU Prolog does not have a module system.
-
-*** Organizing and loading Prolog source files without name clashes
+*** No separate header files
+Separate header files are remnants of the big-design-up-front era.
+** Organizing and loading Prolog source files without name clashes
 Prolog multifile predicates can be used for /dependency injection/.
 Instead of importing a module, declare a multifile predicate and let the user link that predicate.
 
@@ -1649,46 +1705,7 @@ The function of the main file is to link the non-main files.
 To maximize reusability and minimize name clash,
 a non-main file must not contain any hard-coded module names:
 Those files must not contain module/2 declarations and use_module/[1,2] directives.
-*** What is a module? How does it differ from dictionary, function, table, map, association?
-What can we do with zero module? We can create the empty module.
-What can we do with a module?
-What can we do with many modules?
-
-Equality vs identity:
-Must a programming language separate equality and identity?
-Should two strings be equal, if they have different memory addresses but the same content?
-
-Let \( D \) be the programming language's domain of discourse.
-
-Let \( F(D) = D \to D \) be the set of every endofunction whose domain is \( D \).
-Let \( D \) be the smallest set such that \( F(D) \subset D \).
-Thus \( D \) is the least fixed point of \( F \).
-
-A dictionary can be a finite function whose domain is a finite subset of \( D \).
-
-A module can be modeled as a dictionary.
-A module can be modeled as a finite function \( N \to D \) where \( N \) is the set of names for which the module has an entry.
-A module can be modeled as an infinite function \( N \to D \) where \( N \) is the set of all possible names.
-*** What module systems?
-REBOL module system?
-
-Bad example: java:
-- name is a property of a method.
-- a method cannot be referred to by a name.
-If you use reflection, you are referring to a representation of that method, not the method itself.
-
-Bad example: scheme: map, vector-map, tree-map, etc.
-
-Racket vs prolog
-Racket has racklog and miniKanren
-
-(infix
-  x = 1 :
-  y = x + x :
-)
-
-Racket DCG, packrat
-*** from module.md (Designing module systems)
+** from module.md (Designing module systems)
 What is a module?
 Or, should we be asking these questions instead?
 
@@ -1713,7 +1730,7 @@ What do others say?
 What do we infer?
 
 - We can develop different modules at the same time.
-**** Philosophical investigation
+*** Philosophical investigation
 - What are the properties of a module?
 - What are its relationships with other things?
 
@@ -1744,7 +1761,7 @@ What do we infer?
 - A module is a bunch of imports and exports?
 - A module is smallest unit of reuse? Isn't that function?
 - A module is smallest unit of compilation? Isn't that function?
-**** Modules are for humans
+*** Modules are for humans
 Computers don't need modules.
 All it needs is a sequence of machine codes.
 
@@ -1788,7 +1805,7 @@ Note below, that the same =Plus= is used as both a variable and a predicate.
   - The next motivation was to reduce disk and memory usage.
 
 - The essence of programming-in-the-large is Don't Repeat Yourself?
-**** Comparing existing module systems
+*** Comparing existing module systems
 How do programming languages deal with modules?
 
 - [[https://github.com/dhall-lang/dhall-lang/issues/182][dhall modules · Issue #182 · dhall-lang/dhall-lang]]
@@ -1823,7 +1840,7 @@ How do programming languages deal with modules?
   - book, "Types and programming languages", [[https://www.asc.ohio-state.edu/pollard.4/type/books/pierce-tpl.pdf][pdf]]
 
 - [[https://en.wikipedia.org/wiki/Modular_programming][WP:Modular programming]]
-**** Key idea: Module = Dictionary -> Dictionary
+*** Key idea: Module = Dictionary -> Dictionary
 Assume a dependently-typed language.
 
 Recall some terminologies:
@@ -1875,7 +1892,7 @@ See [[https://futhark-lang.org/blog/2017-01-25-futhark-module-system.html#module
 A problem: compilation may fail to terminate.
 No big deal.
 Set a time-out.
-**** what
+*** what
 - Hypothesis: Lazy evaluation solves the partial query problem elegantly.
 - What are some cool ideas?
 
@@ -1982,24 +1999,7 @@ Set a time-out.
 - Ignored undocumented code sketches
 
   - [[https://github.com/jordanlewis/simple-module-system][jordanlewis/simple-module-system: Adding modules to a polymorphic lambda calculus]], code in SML/NJ.
-*** Haskell first-class modules?
-Shields & Peyton-Jones 2002 \cite{shields2002first}.
-** Do anonymous predicates subsume module systems?
-What may anonymous predicates look like?
-
-It should be possible to talk about a predicate without naming it first.
-
-#+BEGIN_EXAMPLE
-p(A) :- A = 0 ; A = 1.
-
-% vs
-
-\ A :- A = 0 ; A = 1.
-#+END_EXAMPLE
-
-\( p(x) \equiv x=0 \vee x=1 \) vs \( \lambda x (x=0 \vee x=1) \).
-
-** <2019-04-02> The result? Draft: A clash-free module system
+** <2019-04-02> The implementation? Draft: A clash-free module system
 *** About this draft
 The target audience is the SWI-Prolog maintainer, Jan Wielemaker.
 
@@ -2111,13 +2111,38 @@ Let us prepare, so that we do not become a victim of our own success.
 Ideally, many people can write and use libraries without name clashes.
 *** Related discourses
 - Contributing libraries https://swi-prolog.discourse.group/t/contributing-libraries/381
-** How should modules and meta-predicates interact?
-The question boils down to "What is the name of a thing?"
 
-Lexical binding.
-Principle of least surprise.
-Do what most users most likely expect.
-But can the principle of least surprise clash with the principle of mathematical elegance?
+
+** Implementing modules
+*** Adding module system by term_expansion/2
+If a Prolog system has term_expansion/2 but does not have a module system, then we can add a module system.
+The idea is to recursively replace each term =A= with =':'(M,A)=.
+
+This makes something similar to XSB Prolog's atom-based module system.
+*** Logtalk?
+"You can even use [Logtalk] to run Prolog module code in Prolog compilers such as GNU Prolog that don't include a module system."
+ [fn::https://stackoverflow.com/questions/6695788/programming-in-the-large-with-prolog]
+*** Haskell first-class modules?
+Shields & Peyton-Jones 2002 \cite{shields2002first}.
+*** Module systems in other languages?
+REBOL module system?
+
+Bad example: java:
+- name is a property of a method.
+- a method cannot be referred to by a name.
+If you use reflection, you are referring to a representation of that method, not the method itself.
+
+Bad example: scheme: map, vector-map, tree-map, etc.
+
+Racket vs prolog
+Racket has racklog and miniKanren
+
+(infix
+  x = 1 :
+  y = x + x :
+)
+
+Racket DCG, packrat
 * Ugly things, awkward squads, states and errors
 Simon Peyton-Jones \cite{Peytonjones2000TacklingTA} calls these the "awkward squad": input/output, concurrency, exceptions, and foreign-language calls.
 ** Effects, side-effects, and errors
@@ -2975,7 +3000,9 @@ http://sovietov.com/tmp/warren1980.pdf
 
 Hamel 2016 "Formal Methods: A First Introduction using Prolog to specify Programming Language Semantics"
 https://pdfs.semanticscholar.org/1c13/792241df9d5e002dab7a2515f11ad1fbc85e.pdf
-* Higher-order logic programming
+* Theoretical foundations of logic programming
+** Why does automatic theorem proving use resolution?
+https://math.stackexchange.com/questions/2394518/why-was-the-resolution-method-so-important-to-ai-theorem-proving?
 ** What is wrong with Prolog?
 *** The problem with var/1: non-commutativity and non-monotonicity
 Usually conjunction is commutative: \(a \wedge b \equiv b \wedge a\).
@@ -3125,6 +3152,8 @@ Thus there is a /type theory/ of relations.
 Prolog is top-down/backward-chaining.
 Datalog is bottom-up/forward-chaining.
 ** How does Lambda-Prolog extend Prolog?
+Nadathur & Miller 1988 \cite{nadathur1988overview} justifies Lambda-Prolog.
+
 "The language Lambda-Prolog extends the logic of Horn clauses by allowing the use of implication not just in clauses, but also in goals,"
 among other things.[fn::http://www.lix.polytechnique.fr/~dale/lolli/]
 
