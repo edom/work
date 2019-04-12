@@ -1408,6 +1408,20 @@ But that is not all; types can be prorogued too.
 - our only mental weapon, to understand code and combat complexity,
   is divide-and-conquer and abstraction which is often somewhat hierarchical
 - name clashes are bound to happen in a large software system
+
+Modules reduce complexity by partitioning and independence.
+See [[http://www.computing.dcu.ie/~renaat/ca2/ca214/ca214vii.html][Three Universal methods of reducing complexity]]
+from the course [[http://www.computing.dcu.ie/~renaat/ca2/ca214over.html][CA214 Systems Analysis and Design Page]].
+
+Which is essential: complexity management or namespacing?
+*** Modules are for humans
+Computers don't need modules.
+All it needs is a sequence of machine codes.
+
+Given enough memory, a computer can handle arbitrarily big programs.
+
+Human uses modules for organizing things.
+Human uses modules to make machines separate compilation, speed up recompilation, and recompile a part of the program.
 *** Why do name clashes happen?
 Natural languages also have name clashes.
 
@@ -1706,53 +1720,26 @@ To maximize reusability and minimize name clash,
 a non-main file must not contain any hard-coded module names:
 Those files must not contain module/2 declarations and use_module/[1,2] directives.
 ** from module.md (Designing module systems)
-What is a module?
-Or, should we be asking these questions instead?
-
 - How do we decompose a program? (I think David Parnas has answered this.)
-- Why do we need modules?
 - How do we organize programs?
 
-Modules reduce complexity by partitioning and independence.
-See [[http://www.computing.dcu.ie/~renaat/ca2/ca214/ca214vii.html][Three Universal methods of reducing complexity]]
-from the course [[http://www.computing.dcu.ie/~renaat/ca2/ca214over.html][CA214 Systems Analysis and Design Page]].
-
-What do others say?
-
-- [[https://en.wikipedia.org/wiki/Module][Wikipedia]]
-- According to [[https://en.wiktionary.org/wiki/module][Wiktionary]]:
-
-  - The word "module" is from Latin "modulus" that means "a small measure".
-  - A module is "a self-contained component of a system, often interchangeable, which has a well-defined interface to the other components".
-
-- [[https://www.dictionary.com/browse/module][dictionary.com]]
-
 What do we infer?
-
 - We can develop different modules at the same time.
 *** Philosophical investigation
 - What are the properties of a module?
 - What are its relationships with other things?
-
   - interchangeability
-
 - A module groups things.
-
   - Is this essential or accidental?
     Is it made for grouping?
     Is grouping only a side-effect?
-
 - What can we do with modules?
-
   - We can combine modules.
   - We can shadow modules.
   - We can link modules.
   - We can embed/inline modules.
-
 - A module is an incomplete/dependent piece of functionality/code.
-
   - A module may have unresolved symbols?
-
 - A module is a decomposition of a program?
 - Module is about reusability?
 - A program is a module and a starting point.
@@ -1761,85 +1748,6 @@ What do we infer?
 - A module is a bunch of imports and exports?
 - A module is smallest unit of reuse? Isn't that function?
 - A module is smallest unit of compilation? Isn't that function?
-*** Modules are for humans
-Computers don't need modules.
-All it needs is a sequence of machine codes.
-
-A program is a lambda expression.
-A big program is a big lambda expression.
-Given enough memory, a computer can handle arbitrarily big lambda expressions.
-
-Human uses modules for organizing things.
-Human uses modules to make machines separate compilation, speed up recompilation, and recompile a part of the program.
-
-- Does a module have to coincide with a compilation unit?
-- Basic module functions?
-
-  - How does a code describe its dependencies?
-  - How does the machine disambiguate names?
-  - Functions should be versioned. Not module. Not package.
-    Version describes semantics.
-
-Module is second-order logic programming?
-Note below, that the same =Plus= is used as both a variable and a predicate.
-
-#+BEGIN_EXAMPLE
-    export(module_name, type, name, value).
-
-    export(prelude, int, plus, Plus) |- export(my_module, int, three, Plus(1, 2)).
-#+END_EXAMPLE
-
-- The smallest unit for this discussion is a machine instruction.
-- A subroutine is a collection of instructions.
-- A library is a collection of subroutines.
-- A program is a collection of libraries and an entry point.
-- History
-
-  - The initial motivation was to reuse.
-
-    - Reduce development cost.
-
-      - Humans have always been looking for easier ways to live.
-        This "laziness" (the ability to get bored repeating something) is the source of all human technology.
-
-  - The next motivation was to reduce disk and memory usage.
-
-- The essence of programming-in-the-large is Don't Repeat Yourself?
-*** Comparing existing module systems
-How do programming languages deal with modules?
-
-- [[https://github.com/dhall-lang/dhall-lang/issues/182][dhall modules · Issue #182 · dhall-lang/dhall-lang]]
-- [[https://futhark-lang.org/blog/2017-01-25-futhark-module-system.html][Futhark]]
-- [[https://elixir-lang.org/getting-started/modules-and-functions.html][Elixir]]
-
-  - [[https://hexdocs.pm/elixir/Module.html][Module -- Elixir v1.7.2]]
-
-- Racket
-
-  - 2011, article, "Languages as Libraries", [[http://www.cs.utah.edu/plt/publications/pldi11-tscff.pdf][pdf]]
-
-- Scheme R7RS, Common Lisp, Clojure
-- Java, Scala, Kotlin, Go, C, C++
-
-  - C ABI
-
-    - A module is an ELF shared object file (SO file).
-
-- Pascal, Ada, Oberon, Algol, Fortran
-- JavaScript, TypeScript, ECMAScript
-- Standard ML, Caml, OCaml, MLTON, SML/NJ, F#
-
-  - 2000, "A modular module system", [[https://hal.inria.fr/hal-01499946/document][pdf]]
-
-    - "Harper-Lillibridge-Leroy module system"
-    - "applicability of that module system to a wide range of programming languages"
-
-- Haskell has underpowered module system.
-- book, "Advanced topics in types and programming languages", part IV, programming in the large, [[http://camlunity.ru/swap/Functional%20Programming/Type%20Systems/Pierce/Advanced%20Topics%20in%20Types%20and%20Programming%20Languages.pdf][pdf]]
-
-  - book, "Types and programming languages", [[https://www.asc.ohio-state.edu/pollard.4/type/books/pierce-tpl.pdf][pdf]]
-
-- [[https://en.wikipedia.org/wiki/Modular_programming][WP:Modular programming]]
 *** Key idea: Module = Dictionary -> Dictionary
 Assume a dependently-typed language.
 
@@ -1892,113 +1800,109 @@ See [[https://futhark-lang.org/blog/2017-01-25-futhark-module-system.html#module
 A problem: compilation may fail to terminate.
 No big deal.
 Set a time-out.
-*** what
-- Hypothesis: Lazy evaluation solves the partial query problem elegantly.
-- What are some cool ideas?
+*** Partial query problem
+Partial query problem is when an object-relational mapper is not smart enough to avoid pulling unused columns.
 
-  - Dhall can import from IPFS.
+Does lazy evaluation solve the partial query problem elegantly?
+Lazy evaluation is not a substitute for dependency analysis?
+*** What are some cool ideas?
+- Module system: Dhall can import from IPFS.[fn::http://www.haskellforall.com/2016/12/dhall-non-turing-complete-configuration.html]
+- Elixir can pattern-match maps (dictionaries).
+*** Finding a programming language for programming in the large
+- Ecosystem, libraries, tools, and communities.
+- The most important thing in programming in the large is name management.
+  Namespaces.
+  - C has two namespaces: type namespace and value namespace.
+  - Haskell has two namespaces: type namespace and value namespace.
+  - Java has better namespacing than C.
+  - Enable the same name to be used in different context, so that you can write =get_name employee= and =get_name company= instead of =employee_get_name employee= or =company_get_name company=.
+    - Ad-hoc polymorphism.
+- Which one has the biggest community?
+- Which one has a decent IDE?
+- Which community puts their money on where their mouth is?
+- Comparing type systems
+  - [[https://docs.racket-lang.org/ts-guide/][The Typed Racket Guide]]
+  - F#
+  - SML
+  - Caml
+  - OCaml
+  - Idris, Agda
+  - Coq, Lean
+  - Haskell
+  - 2004, chapter, "Type systems", Luca Cardelli, [[http://lucacardelli.name/Papers/TypeSystems.pdf][pdf]]
+    - from https://www.artima.com/forums/flat.jsp?forum=106&thread=185420
+    - 2005, book, "Advanced topics in types and programming languages", Benjamin C. Pierce (editor)
+      - Part IV, "Types for Programming in the Large"
+    - 2002, book, "Types and programming languages", Benjamin C. Pierce
+  - Java, Kotlin, Scala
+  - Things that annoy me
+    - ML, SML, Caml, OCaml: ='a tf= is somewhat annoying. It should have been =tf a=.
+      - F# uses =tf<'a>=.
+      - Haskell uses =Tf a=.
+    - Would you rather type ='a list= (F#) or deal with an inadequate record/module system (Haskell)?
+    - Haskell doesn't have =instance Read (->)= and =instance Show (->)=.
+      - Haskell expressions are not first-class citizen in the language.
+        - Unlike Lisp/Scheme.
+      - Encumbers metaprogramming.
+  - OCaml labels and polymorphic variants?
+    - http://caml.inria.fr/pub/docs/manual-ocaml-400/manual006.html
+    - OCaml labels are somewhat similar to Scheme keyword arguments.
+  - F# quotations is important for metaprogramming.
+  - F# doesn't do ad-hoc polymorphism well?
+    - [[https://withouttheloop.com/articles/2014-10-21-fsharp-adhoc-polymorphism/][Ad-hoc Polymorphism in F# (how to survive without Type Classes) - Without the loop]]
+    - [[https://sidburn.github.io/blog/2016/03/24/higher-kinded-polymorphism][Higher-kinded Polymorphism: What is it, why you want it · David Raab]]
+  - https://cstheory.stackexchange.com/questions/40705/why-did-caml-become-ocaml-or-why-use-objects-in-f
+  - ML begat Caml. Caml begat Caml Light? Caml Light begat OCaml?
+  - [[https://www.quora.com/How-does-F-compare-to-OCaml-in-regard-to-major-syntactic-differences-paradigm-shifts-and-interoperability-with-Windows-What-about-its-numeric-capabilities][How does F# compare to OCaml, in regard to major syntactic differences, paradigm shifts, and interoperability with Windows? What about its numeric capabilities? - Quora]]
+    - Jon Harrop claims. More sources needed. Take it with a grain of salt.
+      - "OCaml has an integrated full-blown macro system in the form of Camlp4 whereas F# does not have macros and, in fact, has been deliberately closed off in order to discourage people from creating products that compete with Visual Studio."
+        - "deliberately closed off [...]" is a bold claim.
+- [[https://softwareengineering.stackexchange.com/questions/155239/are-all-languages-basically-the-same/155243][Are all languages basically the same? - Software Engineering Stack Exchange]]
+*** package/dependency management tools
+- Java: Maven, Gradle
+- OCaml: OPAM
+- Haskell: Cabal, Stack
+- F#: Paket? NuGet?
+- C/C++: conan? chocolate? vcpkg?
+*** Module algebra vs module calculus?
+\cite{haemmerle2006modules} mentions module algebra (when talking about Prolog modules).
 
-    - http://www.haskellforall.com/2016/12/dhall-non-turing-complete-configuration.html
+The following seems different.
 
-  - Elixir can pattern-match maps (dictionaries).
+Formally adding modules to lambda calculus: What is module calculus?
+- 2017 article "Modules, Abstraction, and Parametric Polymorphism" [[https://www.cs.cmu.edu/~crary/papers/2017/mapp.pdf][pdf]]
+- 2003 article "A Type System for Higher-Order Modules" [[http://www.cs.cmu.edu/~rwh/papers/thoms/tr2.pdf][pdf]]
+- 2001 article "A Calculus of Module Systems" [[http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.22.5407][pdf available]]
+- 2012 course notes "Types for Module Systems" [[http://www.ccs.neu.edu/home/amal/course/7480-s12/modules-notes.pdf][pdf]]
+  from [[http://www.ccs.neu.edu/home/amal/course/7480-s12/][CS7480 Type Systems (Spring 2012)]]
+*** Other questions?
+- Does a module have to coincide with a compilation unit?
+- Basic module functions?
+  - How does a code describe its dependencies?
+  - How does the machine disambiguate names?
+  - Functions should be versioned. Not module. Not package.
+    Version describes semantics.
 
-- What is a module in an untyped functional programming language such as Tulip?
-- Finding a programming language for programming in the large
+Module is second-order logic programming?
+Note below, that the same =Plus= is used as both a variable and a predicate.
 
-  - Ecosystem, libraries, tools, and communities.
-  - The most important thing in programming in the large is name management.
-    Namespaces.
+#+BEGIN_EXAMPLE
+    export(module_name, type, name, value).
 
-    - C has two namespaces: type namespace and value namespace.
-    - Haskell has two namespaces: type namespace and value namespace.
-    - Java has better namespacing than C.
-    - Enable the same name to be used in different context, so that you can write =get_name employee= and =get_name company= instead of =employee_get_name employee= or =company_get_name company=.
+    export(prelude, int, plus, Plus) |- export(my_module, int, three, Plus(1, 2)).
+#+END_EXAMPLE
 
-      - Ad-hoc polymorphism.
-
-  - Which one has the biggest community?
-  - Which one has a decent IDE?
-  - Which community puts their money on where their mouth is?
-  - Comparing type systems
-
-    - [[https://docs.racket-lang.org/ts-guide/][The Typed Racket Guide]]
-    - F#
-    - SML
-    - Caml
-    - OCaml
-    - Idris, Agda
-    - Coq, Lean
-    - Haskell
-    - 2004, chapter, "Type systems", Luca Cardelli, [[http://lucacardelli.name/Papers/TypeSystems.pdf][pdf]]
-
-      - from https://www.artima.com/forums/flat.jsp?forum=106&thread=185420
-      - 2005, book, "Advanced topics in types and programming languages", Benjamin C. Pierce (editor)
-
-        - Part IV, "Types for Programming in the Large"
-
-      - 2002, book, "Types and programming languages", Benjamin C. Pierce
-
-    - Java, Kotlin, Scala
-    - Things that annoy me
-
-      - ML, SML, Caml, OCaml: ='a tf= is somewhat annoying. It should have been =tf a=.
-
-        - F# uses =tf<'a>=.
-        - Haskell uses =Tf a=.
-
-      - Would you rather type ='a list= (F#) or deal with an inadequate record/module system (Haskell)?
-      - Haskell doesn't have =instance Read (->)= and =instance Show (->)=.
-
-        - Haskell expressions are not first-class citizen in the language.
-
-          - Unlike Lisp/Scheme.
-
-        - Encumbers metaprogramming.
-
-    - OCaml labels and polymorphic variants?
-
-      - http://caml.inria.fr/pub/docs/manual-ocaml-400/manual006.html
-      - OCaml labels are somewhat similar to Scheme keyword arguments.
-
-    - F# quotations is important for metaprogramming.
-    - F# doesn't do ad-hoc polymorphism well?
-
-      - [[https://withouttheloop.com/articles/2014-10-21-fsharp-adhoc-polymorphism/][Ad-hoc Polymorphism in F# (how to survive without Type Classes) - Without the loop]]
-      - [[https://sidburn.github.io/blog/2016/03/24/higher-kinded-polymorphism][Higher-kinded Polymorphism: What is it, why you want it · David Raab]]
-
-    - https://cstheory.stackexchange.com/questions/40705/why-did-caml-become-ocaml-or-why-use-objects-in-f
-    - ML begat Caml. Caml begat Caml Light? Caml Light begat OCaml?
-    - [[https://www.quora.com/How-does-F-compare-to-OCaml-in-regard-to-major-syntactic-differences-paradigm-shifts-and-interoperability-with-Windows-What-about-its-numeric-capabilities][How does F# compare to OCaml, in regard to major syntactic differences, paradigm shifts, and interoperability with Windows? What about its numeric capabilities? - Quora]]
-
-      - Jon Harrop claims. More sources needed. Take it with a grain of salt.
-
-        - "OCaml has an integrated full-blown macro system in the form of Camlp4 whereas F# does not have macros and, in fact, has been deliberately closed off in order to discourage people from creating products that compete with Visual Studio."
-
-          - "deliberately closed off [...]" is a bold claim.
-
-  - [[https://softwareengineering.stackexchange.com/questions/155239/are-all-languages-basically-the-same/155243][Are all languages basically the same? - Software Engineering Stack Exchange]]
-
-- package/dependency management tools
-
-  - Java: Maven, Gradle
-  - OCaml: OPAM
-  - Haskell: Cabal, Stack
-  - F#: Paket? NuGet?
-  - C/C++: conan? chocolate? vcpkg?
-
-- Formally adding modules to lambda calculus
-
-  - What is module calculus?
-
-    - 2017 article "Modules, Abstraction, and Parametric Polymorphism" [[https://www.cs.cmu.edu/~crary/papers/2017/mapp.pdf][pdf]]
-    - 2003 article "A Type System for Higher-Order Modules" [[http://www.cs.cmu.edu/~rwh/papers/thoms/tr2.pdf][pdf]]
-    - 2001 article "A Calculus of Module Systems" [[http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.22.5407][pdf available]]
-    - 2012 course notes "Types for Module Systems" [[http://www.ccs.neu.edu/home/amal/course/7480-s12/modules-notes.pdf][pdf]]
-      from [[http://www.ccs.neu.edu/home/amal/course/7480-s12/][CS7480 Type Systems (Spring 2012)]]
-
-- Ignored undocumented code sketches
-
-  - [[https://github.com/jordanlewis/simple-module-system][jordanlewis/simple-module-system: Adding modules to a polymorphic lambda calculus]], code in SML/NJ.
+- The smallest unit for this discussion is a machine instruction.
+- A subroutine is a collection of instructions.
+- A library is a collection of subroutines.
+- A program is a collection of libraries and an entry point.
+- History
+  - The initial motivation was to reuse.
+    - Reduce development cost.
+      - Humans have always been looking for easier ways to live.
+        This "laziness" (the ability to get bored repeating something) is the source of all human technology.
+  - The next motivation was to reduce disk and memory usage.
+- The essence of programming-in-the-large is Don't Repeat Yourself?
 ** <2019-04-02> The implementation? Draft: A clash-free module system
 *** About this draft
 The target audience is the SWI-Prolog maintainer, Jan Wielemaker.
@@ -2111,8 +2015,6 @@ Let us prepare, so that we do not become a victim of our own success.
 Ideally, many people can write and use libraries without name clashes.
 *** Related discourses
 - Contributing libraries https://swi-prolog.discourse.group/t/contributing-libraries/381
-
-
 ** Implementing modules
 *** Adding module system by term_expansion/2
 If a Prolog system has term_expansion/2 but does not have a module system, then we can add a module system.
@@ -2143,6 +2045,46 @@ Racket has racklog and miniKanren
 )
 
 Racket DCG, packrat
+
+What is a module in an untyped functional programming language such as Tulip?
+
+Ignored undocumented code sketches:
+[[https://github.com/jordanlewis/simple-module-system][jordanlewis/simple-module-system: Adding modules to a polymorphic lambda calculus]], code in SML/NJ.
+*** Comparing existing module systems
+How do programming languages deal with modules?
+
+- [[https://github.com/dhall-lang/dhall-lang/issues/182][dhall modules · Issue #182 · dhall-lang/dhall-lang]]
+- [[https://futhark-lang.org/blog/2017-01-25-futhark-module-system.html][Futhark]]
+- [[https://elixir-lang.org/getting-started/modules-and-functions.html][Elixir]]
+
+  - [[https://hexdocs.pm/elixir/Module.html][Module -- Elixir v1.7.2]]
+
+- Racket
+
+  - 2011, article, "Languages as Libraries", [[http://www.cs.utah.edu/plt/publications/pldi11-tscff.pdf][pdf]]
+
+- Scheme R7RS, Common Lisp, Clojure
+- Java, Scala, Kotlin, Go, C, C++
+
+  - C ABI
+
+    - A module is an ELF shared object file (SO file).
+
+- Pascal, Ada, Oberon, Algol, Fortran
+- JavaScript, TypeScript, ECMAScript
+- Standard ML, Caml, OCaml, MLTON, SML/NJ, F#
+
+  - 2000, "A modular module system", [[https://hal.inria.fr/hal-01499946/document][pdf]]
+
+    - "Harper-Lillibridge-Leroy module system"
+    - "applicability of that module system to a wide range of programming languages"
+
+- Haskell has underpowered module system.
+- book, "Advanced topics in types and programming languages", part IV, programming in the large, [[http://camlunity.ru/swap/Functional%20Programming/Type%20Systems/Pierce/Advanced%20Topics%20in%20Types%20and%20Programming%20Languages.pdf][pdf]]
+
+  - book, "Types and programming languages", [[https://www.asc.ohio-state.edu/pollard.4/type/books/pierce-tpl.pdf][pdf]]
+
+- [[https://en.wikipedia.org/wiki/Modular_programming][WP:Modular programming]]
 * Ugly things, awkward squads, states and errors
 Simon Peyton-Jones \cite{Peytonjones2000TacklingTA} calls these the "awkward squad": input/output, concurrency, exceptions, and foreign-language calls.
 ** Effects, side-effects, and errors
@@ -3160,8 +3102,49 @@ among other things.[fn::http://www.lix.polytechnique.fr/~dale/lolli/]
 "By moving away from classical logic, Lambda Prolog was able to expand to a much larger fragment of logic: higher-order hereditary Harrop formulas.
 This allows some features, e.g. modules, to be handled in a logical way as opposed to the ad-hoc way they are handled in Prolog."
  [fn::https://math.stackexchange.com/questions/1761680/what-formal-systems-are-various-programming-paradigms-based-on/1761959]
+** Predicate logic can be thought of propositional logic with parameters
+This fragment looks like written by a programmer who does not know arrays or a logician who does not know parameters.
+#+BEGIN_EXAMPLE
+handsome_bob
+man_bob
+handsome_joe
+man_joe
+handsome_bob -> man_bob
+handsome_joe -> man_joe
+#+END_EXAMPLE
+
+Then he learns about arrays and parameters, and he rewrites that to \( \forall x (handsome(x) \to man(x)) \).
+** Horn clauses, history, importance, why?
+<2019-04-13>
+It is a shame that Horn's paper "On sentences which are true of direct unions of algebras" is not freely available online.
+(Login-wall is not free.)
+* Artificial intelligence?
+** Finding out what to ask; coming up with a question; machine scientist?
+Suppose that:
+- There is an agent \(A\) with goal \(G\).
+- \(K\) is the entire knowledge of agent \(A\).
+  This \(K\) may be thought as a set of Horn clauses.
+
+Define "hypothesis" as "something we don't know but should know"?
+
+The questions:
+- What question should the agent ask (and try to answer) in order to optimally increase the agent's knowledge?
+- How do we craft/select/formulate hypotheses?
+
+Intuitively, an agent gains zero knowledge by answering a question whose answer is already in its knowledge set.
+
+** Logic of machine comprehension and machine translation?
+We can imagine a relation internal_external(I,E)
+where I is an internal language of thought
+and C is an external language (natural language).
+
+We can see that a relation like english_indonesian(EnglishWord,IndonesianWord)
+does not have any provisions for using context to disambiguate meanings.
+
 * What next after Prolog?
 Gödel, λProlog, Twelf, Datalog, Answer-Set-Programming.[fn::https://github.com/webyrd/miniKanren-uncourse/wiki/Other-Interesting-Logic-or-Relational-Programming-Languages]
+
+Lambda-Prolog 2012 book \cite{miller2012programming}.
 ** Embedding Prolog/Haskell in Haskell/Prolog
 Why bother with this?
 Why not just use Oz?
@@ -3255,6 +3238,8 @@ Modus ponens \( \alpha, (\alpha \to \beta) \vdash \beta \).
 ** Logic programming vs theorem proving
 - https://stackoverflow.com/questions/36335633/difference-between-logic-programming-and-automated-theorem-proving
 - https://en.wikipedia.org/wiki/Automated_theorem_proving
+
+There is an inverse relationship between the cleverness of a theorem prover and its suitability for programming?
 ** Avoid using list too much
 Perhaps think more about the relations between the individuals.
 
