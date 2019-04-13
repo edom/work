@@ -1403,6 +1403,10 @@ The stub implementation is "ask the user for what the return value of this stub 
 "Prorogue" is a rare English word meaning prolong or extend[fn::https://en.wiktionary.org/wiki/prorogue].
 But that is not all; types can be prorogued too.
 * Rethinking module systems, especially of Prolog
+** What are the problems of existing module systems?
+A module system is often an afterthought to a core language.\cite{miller2012programming}
+
+Chapter 6 of \cite{miller2012programming} contains a desiderata for module systems.
 ** What problems are modules trying to solve?
 *** Two problems that modules are trying to solve
 - our only mental weapon, to understand code and combat complexity,
@@ -2652,6 +2656,8 @@ CQL models SQL query in Prolog terms.
 Sketches, as good as non-existent: PL/SWI-Prolog[fn::https://github.com/salva/plswipl],
 psqlog[fn::http://hiro-tan.org/~ekoontz/psqlog/doc/psqlog.html],
 what[fn::https://twiki.org/cgi-bin/view/Plugins/SwiPrologToPostgreSqlAddOn].
+
+XSB-Prolog has viewsys and persistent_tables.[fn::http://xsb.sourceforge.net/manual2/manual2.pdf]
 ** Relational-multidirectional-logic programming?
 ** The operations
 The story does not end with development.
@@ -2670,6 +2676,7 @@ Prolog marelle, Haskell shake, build system?
     You lie to the computer, it does what you told it to do.
     Don't blame the computer for your failing to tell the computer everything it needs to do the job.
 
+https://cloudbootup.com/post/cloudy-with-a-chance-of-prolog.html
 ** Idea: Write an SQL database explorer in Prolog.
 CLI interface without ncurses without pager.
 Imagine printing to paper like early Fortran/Unix/ed.
@@ -3711,4 +3718,14 @@ https://www.reddit.com/r/prolog/new/
 1997 "FAQ: Prolog Resource Guide 1/2 [Monthly posting]"
 Where is the most recent version?
 http://www.faqs.org/faqs/prolog/resource-guide/part1/index.html
+** What
+"Using Logic Programming to Recover C++ Classes and Methods from Compiled Executables. They use XSB Prolog"
+ [fn::https://twitter.com/r_Prolog/status/1092721329596444672]
+ [fn::https://www.reddit.com/r/prolog/comments/ancj74/using_logic_programming_to_recover_c_classes_and/]
+** Teachers who can't teach shouldn't teach, lest they condemn students to hatred
+People hate math because they are unfortunate enough to be taught by teachers who can't teach.
+
+People hate Prolog because they are unfortunate enough to be taught by teachers who can't teach.
+
+Those students grow up to be adults with atrophied minds condemned to mediocrity.
 * Bibliography

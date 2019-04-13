@@ -4,6 +4,11 @@ date: 2018-05-25 00:00 +0700
 permalink: /ps1.html
 ---
 
+We are interested in reverse-engineering these (mostly PlayStation 1) games:
+Street Fighter EX series (EX Plus Alpha, EX2, EX3), Fighting Layer, Fighting EX Layer,
+Tekken series from Tekken 3, Virtual Hiryu No Ken, Dead or Alive series,
+Virtua Fighter series, Bloody Roar series.
+
 - I want to move the camera arbitrarily in the PlayStation game "Street Fighter EX plus alpha".
     - The same technique might be applicable to other 3D PS1 games such as "Street Fighter EX2 plus", "Tekken 3", and "Fighting Layer" (Namco System 12, beefed-up PlayStation 1).
     - Interesting instructions: RTPT, CTC2.
