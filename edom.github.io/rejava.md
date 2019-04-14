@@ -4,6 +4,16 @@ date: 2018-07-24 00:10 +0700
 permalink: /rejava.html
 ---
 
+I wanted to automate stock trading with my broker
+which has a stock trading application written in Java 6.
+
+But I changed.
+Now I think financial economy is just a big Ponzi scheme full of rent-seeking,
+full of people who want to get a slice of the pie of real economy without growing the pie of real economy,
+full of people who just want to extract value from society without creating value,
+people who only take but don't give,
+people who only shuffle money around.
+
 - I want to reverse-engineer a Java 6 stock trading application.
     - The app's license agreement doesn't mention anything about reverse engineering.
     - I only want the network protocol.

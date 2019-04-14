@@ -1203,36 +1203,6 @@ constraint(text(c) = text(a) + text(b)).
 Logical reactive programming?
 
 * Maintaining large knowledge bases
-** What is software maintenance?
-Software does not break down like machines.
-It is the things around the software that change.
-Hardware changes.
-Laws change.
-People change.
-The world changes.
-What was true when the software was made is no longer true.
-
-But why do we change?
-Other animals have been living just fine for millions of years without much change.
-We change for fun, to avoid boredom.
-
-It is fun to change things.
-It is less fun to be affected by changes.
-
-The key to maintainable software is to depend only on dependable things.
-If A depend on B, then B should be more stable than A.
-If a program uses a library, then the library should be more stable than the program.
-If a library uses an operating system, then the operating system should be more stable than the library.
-
-Stable dependencies principle[fn::http://wiki.c2.com/?StableDependenciesPrinciple]?
-
-How to write a program that does not change?
-It must capture the timeless essence of reality.
-A bachelor is unmarried by definition, and that definition is unlikely to change.
-** How do we divide labor? How do we work together?
-Interfaces enable us to pretend that our coworkers have finished their jobs.
-
-Interfaces are contracts, promises, agreements.
 ** A suggested way to use Prolog for programming in the large?
 Begin by defining an ontology or domain-specific language.
 This is pure Prolog with declarative semantics.
@@ -2089,6 +2059,8 @@ How do programming languages deal with modules?
   - book, "Types and programming languages", [[https://www.asc.ohio-state.edu/pollard.4/type/books/pierce-tpl.pdf][pdf]]
 
 - [[https://en.wikipedia.org/wiki/Modular_programming][WP:Modular programming]]
+** Brain dumps
+http://erlang.org/pipermail/erlang-questions/2011-May/058768.html
 * Ugly things, awkward squads, states and errors
 Simon Peyton-Jones \cite{Peytonjones2000TacklingTA} calls these the "awkward squad": input/output, concurrency, exceptions, and foreign-language calls.
 ** Effects, side-effects, and errors
@@ -2943,6 +2915,8 @@ A possibly better way is to write an interpreter and /get a compiler for free/ b
 Writing an interpreter is much easier than writing a compiler.
 
 "Partial deduction" is partial evaluation from logic point of view.
+
+Jones, Gomard, & Sestoft 1993 book on partial evaluation \cite{jones1993partial}
 ** Logic programming and compiler writing
 Warren 1980 "Logic programming and compiler writing"
 http://sovietov.com/tmp/warren1980.pdf
@@ -3109,6 +3083,8 @@ among other things.[fn::http://www.lix.polytechnique.fr/~dale/lolli/]
 "By moving away from classical logic, Lambda Prolog was able to expand to a much larger fragment of logic: higher-order hereditary Harrop formulas.
 This allows some features, e.g. modules, to be handled in a logical way as opposed to the ad-hoc way they are handled in Prolog."
  [fn::https://math.stackexchange.com/questions/1761680/what-formal-systems-are-various-programming-paradigms-based-on/1761959]
+** How do Lambda-Logic and Lambda-Prolog relate?
+How do Beeson 2004 \cite{beeson2004lambda} and Miller & Nadathur 2012 \cite{miller2012programming} relate?
 ** Predicate logic can be thought of propositional logic with parameters
 This fragment looks like written by a programmer who does not know arrays or a logician who does not know parameters.
 #+BEGIN_EXAMPLE

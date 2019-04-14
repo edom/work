@@ -3,38 +3,108 @@
 #+OPTIONS: ^:nil toc:nil
 #+PERMALINK: /softeng.html
 #+MATHJAX: true
-* Software engineering
-** Fundamental questions
-In the spirit of analytic philosophy:
-- What is engineering?
-  What does an engineer do?
-- What is software?
-- What does a software engineer do?
-- What is programming?
-- What is software engineering?
-- How far can the civil-engineering analogy stretch before it breaks?
-
+* Meanings
+** What is software?
 Software is program, documents, configuration, and so on.
+
 Programs, laws, and recipes are software.
+
 Minds are software.
+
 Software is abstract object.
+
 Software is executable mathematics.
+
+Software is an idea.
+
+Is software and hardware disjoint?
+But the design of a hardware is a software?
+** What is programming?
+Programming is forcing.
+X programs Y to do Z iff X forces Y to do Z.
+** What can be programmed?
+People are programmable to some extent.
+We program people when we ask them to do something.
+
+Software development process itself is also programmable to some extent.
+** What is engineering?
+Engineering is the application of science?
 
 Engineering consists of design, modeling, calculation, application of science, and turning all those plans into reality.
 
+Engineering is tradeoff, compromise.
+
+It's always cost versus everything else?
+
+Engineering implies design goals, tradeoffs, and decisions.
+
+Engineering does not inherently mean involving many people.
+A one-man engineering project is an engineering project.
+It is the methodology that makes it engineering, not the amount of people involved in it.
+Given, when many people are involved,
+some methodology has to exist in order to ensure that progress is even possible.
+
+To engineer something is to scientifically force something.
+
+You are actually three people:
+your past self, your present self, and your future self.
+
+Inability to maintain our past works is a sign of engineering failure.
+** What is software engineering?
+X engineering involves the design of X.
+
+Material engineering involves the design of materials.
+
+Chemical engineering involves the design of chemicals.
+
+Civil engineering involves the design of civil structures.
+
+Software engineering involves the design of software.
+** What is the science of software engineering?
+Civil engineering is the application of natural science (especially physics) to build civil structures
+such as bridges, buildings, dams, roads, and other many things used by civilizations.
+
+A civil engineer can predict how much load a steel beam can handle.
+Can a software engineer predict how much load a machine can handle?
+
+Software engineering is the application of computer science?
+** What is science?
+Science is knowledge.
+
+What is knowledge?
+Do we want to dive into philosophy (especially epistemology) here?
+
+There are at least two theories of knowledge:
+- Popper: science is a falsifiable belief.
+  That means, the belief must be such that it is possible to design an experiment
+  that disproves the belief.[fn::https://en.wikipedia.org/wiki/Falsifiability]
+- Plato: knowledge is justified true belief
+** What is a scientific theory?
+A scientific theory is a theory that is falsifiable, has explanatory power, and has predictive power.
+** What does an engineer do?
 A civil engineer plans the materials according to the physical load that the structure is expected to withstand.
 The software engineer's analog is capacity planning of the computational resources
 according to the computational load that the software is expected to withstand.
+** What is the difference between a programmer and a software engineer?
+The difference is in the amount of complexity that they can handle,
+the amount of foresight they make.
 
-Architect--bricklayer analogy.
+A programmer does not have to be backed by science.
+An engineer has to be backed by science.
+
+It is the difference between bricklayer and an architect.
+
+Commander and general.
+
+Programming is tactical.
+Engineering is strategic.
+
+A bricklayer can build a wall, or even a house, but not a skyscraper.
+A programmer can build a calculator, or a game, but not an operating system.
+
 Bricklayer is less prestigious than architect, but they require a different skill set, and building requires both.
 Without the architect, the building would be shit.
 Without the bricklayer, the building would not exist at all in the first place.
-
-What is the difference between a programmer and a software engineer?
-The difference between bricklayer and an architect.
-A bricklayer can build a wall, or even a house, but not a skyscraper.
-A programmer can build a calculator, or a small game, but not a Microsoft Windows.
 
 Of course there are incompetent architects who build buildings despised by tenants,
 as there are incompetent software engineers who build software despised by users.
@@ -70,7 +140,9 @@ If software is a pure art, then its construction should not be time-limited.
 A painter does not paint with deadlines.
 A painting is finished when the painter feels that it is finished.
 However, a painter, when asked to paint a very specific painting, can estimate how many days it will take.
-** A software engineer's job
+
+How far can the civil-engineering analogy stretch before it breaks?
+** What does a programmer do?
 *** Slave drivers
 /Programmers play the same role as ancient slave drivers./
 They translate and impose the master's will into the slaves.
@@ -114,11 +186,411 @@ A typo in the source code is not a bug.
   defining what exist,
   making simplifying assumptions,
   discarding irrelevant aspects.
-** What can be programmed?
-People are programmable to some extent.
-We program people when we ask them to do something.
+** Principles are just heuristics
+Heuristics are rule-of-thumbs, not absolute truth.[fn::https://programmingisterrible.com/post/176657481103/repeat-yourself-do-more-than-one-thing-and]
+** How do we write correct software?
+*** What is correct?
+Correct with respect to what?
+It does what we want, and it only does what we want?
+*** Proving and testing
+/Testing approximates proving./
+We actually want to prove a logical formula phi about a piece of code, we want to prove that the code fragment is a model of the formula phi, but proving is too expensive.
+Therefore, we test phi instead.
 
-Software development process itself is also programmable to some extent.
+In back-end testing, the formula is often obvious.
+What is the formula in front-end testing?
+DOM element existence testing?
+*** The problem with formal methods: you can't prove what you don't model.
+- Intel uses formal method, but why does its processors have vulnerabilities?
+  - Because /you can't prove what you don't model/.
+  - Spectre, Meltdown, etc.
+  - https://arstechnica.com/information-technology/2018/11/intel-cpus-fall-to-new-hyperthreading-exploit-that-pilfers-crypto-keys/?amp=1
+- How will we ever know that we didn't miss anything?
+- You have to prove that it does everything that you want it to do, /and/ that it does only that, and nothing else.
+**** What if it is impossible to write correct software? What are our options to mitigate/limit the damage?
+*** What?
+- Where is tutorial?
+- A goal should be to make it easy to make correct software?
+- 2014, slides, "How I became interested in foundations of mathematics.", Vladimir Voevodsky, [[https://www.math.ias.edu/vladimir/sites/math.ias.edu.vladimir/files/2014_08_ASC_lecture.pdf][pdf]]
+- Why should we be interested in homotopy type theory?
+- Coq
+- [[https://leanprover.github.io/][Lean]]
+
+  - Pros of Lean
+
+    - Integrates with Visual Studio Code
+
+  - Cons of Lean
+
+    - Less mature than Coq
+
+- Should we care about the relationship between functional programming and theorem proving?
+- Ramble
+
+  - Useless idea?
+
+    - Reverse-proving: generate all proofs of a theory.
+      (Proving is: given a statement, prove (or disprove).)
+
+      - Which true sentences are interesting?
+      - Which proofs are interesting?
+
+- Companies
+
+  - [[https://galois.com/][Galois]], on [[https://github.com/GaloisInc/][github]]
+
+- unread interesting things
+
+  - http://www.joachim-breitner.de/blog/717-Why_prove_programs_equivalent_when_your_compiler_can_do_that_for_you_
+  - http://www.michaelburge.us/2017/08/25/writing-a-formally-verified-porn-browser-in-coq.html
+  - https://aphyr.com/posts/342-typing-the-technical-interview
+  - http://tech.frontrowed.com/2017/09/22/aggregations/
+
+- interoperation between proof assistants?
+
+  - Lem ("lightweight executable mathematics")
+
+    - https://www.openhub.net/p/lightweight-executable-mathematics
+    - http://www.cl.cam.ac.uk/~pes20/lem/
+*** Coq?
+  :PROPERTIES:
+  :CUSTOM_ID: coq
+  :END:
+
+- Introduction
+
+  - What is a suitable introduction to Coq?
+  - [[https://people.debian.org/~schepler/coqtut.v.html][Daniel Schepler's "Mathematical formalization using Coq"]] seems approachable.
+  - [[https://mathoverflow.net/questions/155909/wanted-a-coq-for-the-working-mathematician][MO 155909: Wanted: a "Coq for the working mathematician"]]
+  - [[https://mathoverflow.net/questions/164959/how-do-i-verify-the-coq-proof-of-feit-thompson][MO 164959: How do I verify the Coq proof of Feit-Thompson?]]
+  - https://softwarefoundations.cis.upenn.edu/current/index.html
+  - Yves Bertot's "Coq in a hurry"
+  - [[https://coq.inria.fr/tutorial-nahas][Coq tutorial by Mike Nahas]]
+  - [[https://coq.inria.fr/distrib/current/refman/Reference-Manual006.html#Cic][Calculus of inductive constructions]]
+
+- [[http://blog.mikael.johanssons.org/coq-and-simple-group-theory.html][Coq and simple group theory]]
+- Installation on Ubuntu 14.04
+
+  - =sudo apt-get install coq=
+**** Introduction
+   :PROPERTIES:
+   :CUSTOM_ID: introduction
+   :END:
+
+Coq source file extension is =.v=.
+
+The notation =x:T= means "the type of =x= is =T=", "=x= inhabits =T=".
+It also means "=x= is a proof of =T=" by Curry-Howard isomorphism.
+
+The type of =nat= is =Type(1)=.
+
+The type of =set= is =Type(2)=.
+
+The type of =Type(i)= is =Type(i+1)=.
+
+#+BEGIN_EXAMPLE
+    (* This is a comment in Coq. *)
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+    coqtop -l filename.v -batch
+#+END_EXAMPLE
+
+**** Defining things
+   :PROPERTIES:
+   :CUSTOM_ID: defining-things
+   :END:
+
+#+BEGIN_EXAMPLE
+    Definition x: nat := 0.
+    Check x.
+
+    Definition f (x: nat): nat := x + 1.
+#+END_EXAMPLE
+
+Definition = non-recursive definition
+
+Fixpoint = recursive definition
+
+Inductive = type (Set (small set)) definition
+
+#+BEGIN_EXAMPLE
+    Definition name: type
+    where
+    type: Set
+    or type: Prop
+    or type: Type.
+#+END_EXAMPLE
+
+Proving 0+1 = 1 using Curry-Howard isomorphism?
+
+Axiom: and-elimination
+
+\begin{align*}
+a \wedge b \vdash a
+\end{align*}
+
+#+BEGIN_EXAMPLE
+    Theorem and_elim: forall a b: Prop, a /\ b -> a.
+    tauto.
+    Qed.
+#+END_EXAMPLE
+
+\begin{align*}
+a \vdash a \vee b
+\end{align*}
+
+Modus ponens
+
+\begin{align*}
+a, a \rightarrow b \vdash b
+\end{align*}
+
+**** How Coq represents propositions
+   :PROPERTIES:
+   :CUSTOM_ID: how-coq-represents-propositions
+   :END:
+
+#+BEGIN_EXAMPLE
+    Print False.
+    Print True.
+    Inductive True : Prop := I : True.
+    Inductive False : Prop := .
+    Inductive and (A B : Prop) : Prop := and : A -> B -> and A B.
+#+END_EXAMPLE
+*** Testing
+Why do we test?
+Because we are not sure that our program is correct.
+
+Why are we not sure that our program is correct?
+- Because we don't know how to prove its correctness.
+  This can be alleviated by using a decent programming language.
+- Because the cost of proving its correctness does not justify the benefit.
+  We can't do anything about this if the complexity is essential (irreducible), not accidental.
+
+We human are fallible.
+Thus we will always test.
+Therefore:
+- What should we test?
+- How should we test?
+- What is the test that has the greatest benefit-to-cost ratio?
+
+The expected benefit of a test is the expected cost of the mistakes that might have been made if the test did not exist.
+
+The quality of a test is the seriousness of the mistakes it prevents.
+Thus, the seriousness of testing is proportional to the seriousness of risk.
+
+Test is insurance.
+A good insurance covers your risk.
+A bad insurance only wastes money and doesn't cover your risk:
+Testing Java class getters is like buying flood insurance for a house in the desert.
+
+Insurance causes moral hazard (taking more risk because someone else pays for it).
+Does having a test cause you to take more risks?
+
+- The benefit of a test is the cost of the mistakes it prevents.
+- The cost of a test is the person-hours spent writing the test and updating the test, and a slight increase in build time. (Assume $50/person-hour for simplicity.)
+
+The answers to these questions tell us what to test and how to test:
+- What tests have the greatest benefit-to-cost ratio?
+- What mistakes do our tests prevent? How expensive are the mistakes that our tests prevent?
+- Which part of our code is most likely to cause expensive mistakes? (Example: testing getters won't prevent expensive mistakes.)
+
+Code coverage is a meaningless metric.
+We should measure the expected value of mistakes instead.
+We should "color" our code: color more risky methods more red, color less risky methods more green, like this
+travel risk map[fn::https://i.redd.it/ktop13ad2io01.png] but for software.
+
+If you are launching a rocket, then a mistake may cost billions of dollars.
+It makes sense to invest ten million dollars testing to avoid a 1/100 probability of making a billion-dollar mistake.
+** What is software engineering?
+*** Ontology and jargon
+A /language/ is something that has syntax (form) and semantics (meaning).
+
+A language enables its users to /communicate/ with each other.
+
+A language is formed by the agreements of its users.
+
+A /formal language/ ...
+
+A /programming language/ is a formal language that is used for programming (a machine).
+
+To program a machine is ...?
+
+A /program/ is a formula/string/term in a programming language?
+
+A machine can be modeled by a formal system.
+
+A program is an executable mathematical object?
+*** <2018-09-25> Software is broken and bloated
+- [[http://tonsky.me/blog/disenchantment/][Software disenchantment @ tonsky.me]]
+- [[https://www.hanselman.com/blog/EverythingsBrokenAndNobodysUpset.aspx][Scott Hanselman: "Software doesn't work. I'm shocked at how often we put up with it."]]
+*** Why is hardware more standardized than software?
+Hardware standardization benefits everyone (both its makers and its users).
+Hardware unstandardization is more expensive than hardware standardization.
+
+Software standardization is more expensive than software unstandardization.
+
+Is software too malleable?
+
+Hardware engineers have standard nuts, bolts, connectors, and components.
+
+Why standardize?
+
+- standardization reduces cost
+- standardization reduces duplicate effort
+- standardization improves interoperability
+
+Hypothesis:
+Programming language is too free.
+If programming language is limited (that is, if there is only one way to do one thing),
+then software will standardize itself.
+
+There are some software standards, such as ABIs (Application Binary Interfaces).
+C calling convention is a standard.
+*** How do we write lasting software?
+- Clear ontology
+- Task-oriented documentation
+  - Documentation doesn't have to be separate from code.
+- /Capture/ the requirement.
+  Translate the requirement into software, instead of making a software system that /satisfies/ the requirement.
+  - The program may be rewritten, but the functional requirements, the business logic and the mathematical truths rarely change.
+    - In order to make software last, we must /capture/ the requirements, not make a system that satisfies the requirements.
+      This requires a change in mindset.
+      The software is not something made to some requirements; the software is the requirements itself.
+      The software is not the shirt made-to-order; the software is the order itself, from which all satisfying shirts can be generated/derived/produced.
+- Think for yourself.
+  Don't just follow hypes.
+  Always have a reason when doing things.
+  Record your reasoning for your forgetful future self.
+- Design software to be refactored without surprises.
+  - Example: Avoid runtime reflection (unless for the most obvious cases).
+    An alternative to that is code generation.
+    - Help the compiler help you.
+    - Even the most obvious cases aren't obvious to someone who see the code for the first time?
+- Shorten the edit-compile-test cycle. Design software so that it compiles fast and it starts up fast.
+- What else?
+*** Adding people to a late software project makes it later (Fred Brooks, "No silver bullet").
+Newcoming programmers, no matter how experienced, need time to onboard; they are not immediately productive.
+Existing programmers must spend some time helping the newcoming programmers, temporarily reducing productivity even further.
+*** Complexity
+**** Renaat Verbruggen: Three universal methods of reducing complexity: partitioning, hierarchy, independence
+- [[http://www.computing.dcu.ie/~renaat/ca2/ca214/ca214vii.html][Renaat Verbruggen: Three universal methods of reducing complexity]]: partitioning, hierarchy, independence
+  - It also applies to other things, such as organizing this wiki.
+**** How complex systems fail?
+- 2000, article, "How complex systems fail", [[http://web.mit.edu/2.75/resources/random/How%20Complex%20Systems%20Fail.pdf][pdf]]
+*** Defining software complexity as the length of the shortest first-order-logic formula that describes it?
+Every software can, in principle, be described by a first-order-logic formula that describes the requirements satisfied or behaviors exhibited by the system.
+**** What is complexity?
+- [[https://fs.blog/2014/03/what-is-complexity/][Farnam Street blog post]]
+- [[http://www.hartford.edu/complexity/whats-complexity.aspx][What Is 'Complexity'? | University of Hartford]]
+- Measuring software complexity by hits-of-code instead of lines-of-code
+  https://www.yegor256.com/2014/11/14/hits-of-code.html
+*** Unpopular opinions
+- https://www.quora.com/What-unpopular-opinions-do-you-have-about-software-development
+*** Who reads SWEBOK? How can we read SWEBOK? Who reads all of it? Why does anyone bother writing it?
+- https://en.wikipedia.org/wiki/Software_Engineering_Body_of_Knowledge
+- http://www.sebokwiki.org/wiki/An_Overview_of_the_SWEBOK_Guide
+  - <2017-04-27>
+    Someone claims to have read it.[fn::https://www.quora.com/Do-you-use-SWEBOK-Is-it-helpful]
+    Holy shit.
+
+Fowler 2003[fn::https://martinfowler.com/bliki/Swebok.html] points out the problems with SWEBOK.
+
+http://beamphys.triumf.ca/info/SWEBOKv3.pdf
+*** Coupling
+- Coupling is deciding what you can depend on.
+  - Big Company X just released this new cool stuff, but will it still be there in 5 years?
+*** Testing
+**** If proving is cheap, prove it instead of testing it.
+**** Amount of testing should be proportional to risk.
+- How do we make code testable?
+  - Minimize its dependencies.
+  - Minimize the number of things that you must set up before you can run it.
+  - Why?
+    - If you don't satisfy all its dependencies, you can't run it.
+    - If you can't run it, you can't test it.
+    - If your business logic depends on the database, you'll have to set up a database to test your business logic.
+- What do we need to test?
+  - Testing is proportional to risk.
+    - Riskier code should be tested more.
+      - "Risk comes from not knowing what you're doing." (Warren Buffett)
+        - Buffett said that for investing, but it also applies to programming.
+  - If it's obvious, don't test it. (Getters, setters, and DAOs without fancy logic)
+  - If you can prove it, don't test it.
+*** TODO Compare programming language research journals and conferences
+Which ones should we care about?
+Which ones are the real deal?
+**** Conferences
+- ICFP: The ACM SIGPLAN International Conference on Functional Programming
+- OOPSLA: ACM SIGPLAN Object-Oriented Programming, Systems, Languages & Applications
+https://en.wikipedia.org/wiki/OOPSLA
+- PLDI: ACM SIGPLAN Programming Language Design and Implementation
+http://www.sigplan.org/Conferences/PLDI/
+- POPL: ACM SIGPLAN Principles of Programming Languages
+http://www.sigplan.org/Conferences/POPL/
+**** Proceedings
+- PACMPL: Proceedings of the ACM on Programming Languages
+**** DBLP vs Semantic Scholar?
+https://dblp.uni-trier.de/
+*** Software engineer associations
+- Indonesia
+  - [[http://sarccom.org/][SARCCOM Software architect Indonesia community]]
+  - [[http://www.aspiluki.or.id/][ASPILUKI Asosiasi Piranti Lunak Telematika Indonesia]]
+- International?
+*** Software business model
+- Hardware is moved.
+- Software is /copied/, not moved.
+- When you sell hardware, you /transfer/ ownership. The hardware doesn't multiple into two.
+- There are two models:
+  - SaaS (software as a service, a web application; you control the hardware that runs the software, but not the input and output of the process)
+  - bundling software with restricted hardware (Apple iPhone)
+- Controlling software requires controlling the hardware that runs it.
+  - Controlling the law requires controlling the lawmakers and the law enforcers.
+- Isn't it absurd to judge a crime by its potentiality not its actuality?
+- Process is software. Law is software.
+- The chemical process in a chemical plant is also software, but not everyone owns a chemical plant.
+  - If you hire a chemical engineer to design and implement your chemical plant's process, does the chemical engineer own the rights to the process?
+  - If you hire a software to design and implement your computer's operating system, does the software engineer own the rights to the operating system?
+
+Ownership is the ability to control access.
+To own a thing is to be able to control the access to that thing.
+
+- It is easy to control access to hardware. Nature/physics is with us on this issue.
+- It isn't easy to control access to software.
+
+- https://medium.com/@mattklein123/the-broken-economics-of-oss-5a1b31fc0182
+*** Measuring software quality?
+- https://cs.stackexchange.com/questions/47077/is-there-a-way-of-objectively-measuring-the-efficiency-or-quality-of-software-or
+*** Programming language quality?
+- https://medium.com/@richardeng/how-to-measure-programming-language-complexity-afe4f7e75786
+- https://medium.com/concerning-pharo/elegant-pharo-code-bb590f0856d0
+*** Technical writing, software documentation
+- https://www.divio.com/blog/documentation/:
+"Documentation needs to include and be structured around its *four different functions*: /tutorials, how-to guides, explanation and technical reference/.
+Each of them *requires a distinct mode of writing*."
+*** TODO Who said this "pit of success"? It was someone on the Internet.
+- Write code that makes your client/user/reader (another programmer who uses your code) fall into the pit of success.
+- Corollary: Principle of least astonishment.
+- Corollary: Write code that a programmer can understand with an IDE without having to read much documentation.
+- Corollary: Group data and methods that need those data together in one class.
+- Can that principle derive these principles? http://c2.com/cgi/wiki?PrinciplesOfObjectOrientedDesign
+- You can write maintainable and reliable procedural code?
+
+** Why does software have security holes?
+Software has security holes because:
+1. Languages makes it too hard to do the right thing.
+2. Programmers are too lazy to do the right thing.
+
+Authentication systems such as OAuth are too complex for programmers to use or understand.
+Anything more than HTTP Basic Auth is too complex.
+It sucks to write code for handling authentication.
+How do we make a programming system such that handling authentication is not hard?
+What is authentication and authorization?
+
+"A Taxonomy of Causes of Software Vulnerabilities in Internet Software"
+https://pdfs.semanticscholar.org/5ec6/93950d1e6039e04a7b86a488e816ddcdd82e.pdf
+"software developers are making the same mistakes over and over again"
 * Building big software
 ** How should we build software, especially big software?
 For big enterprise software, we should at least use model-driven engineering.
@@ -166,10 +638,10 @@ I could maintain a patch, but isn't it (patching generated code) rather hacky an
 The right way is to design the metalanguage so that it can express such transformation.
 
 https://www.eclipse.org/epsilon/doc/articles/eugenia-patching/
-** Specialization of programmers into business programmers and language programmers
+** How should we specialize programmers?
 In 2019 it is common to divide programmers into frontend programmers and backend programmers.
 I think this is wrong.
-It is like slicing a cake into layers instead of sectors, as if the cake were a tree:
+It is like slicing a cake into layers instead of sectors:
 One person eats all the topping, another one the butter, another one eats the flour.
 However, if we talk about /making/ instead of eating a cake,
 then it makes sense to specialize the chefs into topping specialists and dough specialists.
@@ -180,16 +652,17 @@ The language programmer creates a DSL (domain-specific language).
 The business programmer captures user requirements into a program (a specification) in that DSL.
 The language programmer writes a metaprogram that translates
 the business programmer's declarative program into something efficient.
+** How do we make reliable software?
+Make restarts cheap, quick, and easy, like in Erlang.
 
-** Reliable software?
 Reliability is not about the uptime of a single operating system process.
 Reliability is about the uptime of the whole system.
 
 There are two attitudes:
-- Strive to write fool-proof /program/ that does not leak resources.
+- Strive to write one fool-proof program that does not leak resources.
   This may be possible for operating systems, but is too hard for user applications?
   Let the OS handle the corner cases?
-- Use other system component's strengths to compensate for the program's weakness.
+- Use another system component's strengths to compensate for the program's weakness.
   Avoid stupid leaks, but do not strive to completely preclude resource leaks in corner cases.
   Make restart cheap and fast, and restart the program often.
   If the program is a web server, put it behind a load balancer, and rotate several instances often.
@@ -197,7 +670,6 @@ There are two attitudes:
 
 Example insanity that arises from writing code that tries to be too smart:
 What to do if POSIX close fails?[fn::https://stackoverflow.com/questions/33114152/what-to-do-if-a-posix-close-call-fails]
-Eventually we need to reboot the whole damn thing.
 
 Corner cases exist in the first place due to bad design, unclear semantics, lack of foresight.
 
@@ -221,23 +693,23 @@ Market information, compensation, salary, wage:
 I thought about [[file:salary.html][software engineer salary]].
 
 A guy is charging €639 for a two-day F# course[fn::https://www.avanscoperta.it/en/training/practical-machine-learning-with-functional-programming-workshop/]
-
-A person is a unbreakable bundle.
-When you hire a man, you can't just get the good: you get the good, the bad.
+** Hiring a person is like buying a bundle of candies mixed with shit
+When you hire a man, you can't just get his good side: you get both his good side and his bad side.
 When you hire a fast coder who is also a drunkard, a gambler, and a thief,
 you get not only the fast coder, but also the drunkard, the gambler, and the thief.
-You get all aspects/dimensions/faces/sides of the person.
-And teaching skills is easier than changing habits or characters.
-** How should we build free/libre open-source software?
-I am thinking about open-source.
-I prefer cooperation to competition.
-I write
-[[file:opensrc.html][Making contributable open-source projects]],
-[[file:community.html][Building online communities]].
-I am thinking about maintaining open-source projects.
-** What is the difference between the $10,000 Indonesian-citizen programmer and the $100,000 American-citizen programmer?
+You get all aspects of him.
+
+It's the same with Android phones and telecommunication companies.
+Android phones are bundled with unwanted Google shit.
+Telkomsel Internet plans are bundled with unwanted movie quota shit.
+Why don't they have a no-bullshit pure-Internet plan?
+
+The art of hiring is determining whether a candidate's good side outweights his bad side.
+
+Teaching skills is easier than changing habits or characters.
+** What is the difference between the $10,000 Indonesian programmer and the $100,000 American programmer?
 Is it location?
-Will a $10,000 Indonesian-citizen programmer suddenly become a $100,000 Indonesian-citizen programmer just by moving to America?
+Will a $10,000 Indonesian programmer suddenly become a $100,000 Indonesian programmer just by moving to America?
 Are American companies simply able/willing to pay more?
 
 The average Indonesian does not know English.
@@ -245,12 +717,20 @@ Not all computer science undergraduates can write code, let alone think abstract
 This seems to afflict all countries.
 
 Is it skill/ability?
-Is the $100,000 American-citizen programmer more capable than the $10,000 Indonesian-citizen programmer?
+Is the $100,000 American programmer more capable than the $10,000 Indonesian programmer?
 
-Inconclusive discussion https://marginalrevolution.com/marginalrevolution/2012/01/why-are-some-programmers-paid-more-than-others.html
+Is it racism?
 
-The world is so broken that we don't know where to begin fixing.
-** Why nobody is using your open source project
+Inconclusive discussion[fn::https://marginalrevolution.com/marginalrevolution/2012/01/why-are-some-programmers-paid-more-than-others.html].
+** Standard questions for open-source projects
+- Why does this project exist?
+  What problem does it solve?
+- How do I use it?
+- How do I contribute? Code? Money? Documentation? Something else?
+- Where is the community?
+- Where do the users hang out?
+- Where do the developers/maintainers hang out?
+** Why is nobody using my open source project?
 - There is no documentation.
 - Their friends don't use it, because there is no documentation.
 - You wrote some documentation, but they can't understand it or they can't find it, which means to them that there is no documentation.
@@ -261,15 +741,66 @@ The world is so broken that we don't know where to begin fixing.
 How can people know whether they will like it and tell their friends, if people can't even know what it is!?
 
 It is too easy to get carried away with our beloved project and forget that telepathy has not been invented.
-** Standard questions for open-source projects
-- Why does this project exist?
-  What problem does it solve?
-- How do I use it?
-- How do I contribute? Code? Money? Documentation? Something else?
-- Where is the community?
-- Where do the users hang out?
-- Where do the developers/maintainers hang out?
-* Maintaining software
+* Software maintenance
+** What is software maintenance?
+Software does not break down like machines.
+It is the things around the software that change.
+Hardware changes.
+Laws change.
+People change.
+The world changes.
+What was true when the software was made is no longer true.
+
+But why do we change?
+Other animals have been living just fine for millions of years without much change.
+We change for fun, to avoid boredom.
+
+It is fun to change things.
+It is less fun to be affected by changes.
+
+The key to maintainable software is to depend only on dependable things.
+If A depend on B, then B should be more stable than A.
+If a program uses a library, then the library should be more stable than the program.
+If a library uses an operating system, then the operating system should be more stable than the library.
+
+Stable dependencies principle[fn::http://wiki.c2.com/?StableDependenciesPrinciple]?
+
+How to write a program that does not change?
+It must capture the timeless essence of reality.
+A bachelor is unmarried by definition, and that definition is unlikely to change.
+** Why does software change?
+A software system, once written, works forever:
+It will forever satisfy its specification.
+
+The necessity of change originates outside the software system itself.
+
+Examples of causes of change:
+- changes in tax laws
+- growing number of users
+** What is architecture and maintainability?
+Architecture is the set of things that are hard to change.
+(Who said this?)
+
+A system is /maintainable/ iff likely changes are easy.
+
+A system is /maintainable/ iff the difficulty of a change is proportional to the likelihood of that change.
+
+A system is /maintainable/ iff the change in implementation is proportional to the change in specification.
+Thus, in such system, every small change in specification translates to small change in implementation.
+
+Maintainability is about foreseeing what changes will be likely.
+Maintainability, like security, cannot be an afterthought.
+They must be designed from the beginning.
+
+To maximize maintainability,
+we must code at a level of abstraction as close as possible to the specification.
+
+Must be weighed probabilistically.
+It is unlikely that we will ever want to change an accounting system to a city-building game.
+
+Example of architectural change:
+Adding undo capability to a software system that was not designed with undo in mind.
+Adding undo requires reification of all undoable actions.
 ** Backward-compatibility complicates development but simplifies maintenance
 Reasons for maintaining backward-compatibility:
 - If you maintain your library's backward-compatibility, you only need to maintain the latest version of the library.
@@ -370,21 +901,54 @@ It may be ugly, but /it works/.
   Treat a log as an event stream, not a file.
 - http://jasonwilder.com/blog/2013/07/16/centralized-logging-architecture/
 - http://jasonwilder.com/blog/2012/01/03/centralized-logging/
-** Maintainability
-- 2017-05-20
-  - What helps writing maintainable software?
-    - Minimize duplication? The programming language limits deduplication?
-    - Facilitate change, minimize ripple due to change
-    - Flexibility of a component is proportional to its risk of changing?
-** How do you know a software is maintainable?
-- Change all the programmers.
-  If the new programmers can handle it,
-  it's maintainable.
-- The only way to ensure software maintainability is periodic rotation of programmers?
-  - Yegor agrees: we should rotate programmers, no less frequent than every year, for software maintainability
-    https://www.yegor256.com/2015/12/29/turnover-is-good-for-maintainability.html
+** <2017-05-20> What helps writing maintainable software?
+- Minimize duplication? The programming language limits deduplication?
+- Facilitate change, minimize ripple due to change
+- Flexibility of a component is proportional to its risk of changing?
+** How do we know a software is maintainable?
+Change all the programmers.
+If the new programmers can handle it,
+it's maintainable.
+
+The only way to ensure software maintainability is periodic rotation of programmers?
+We should rotate programmers, no less frequent than every year, for software maintainability.
+ [fn::https://www.yegor256.com/2015/12/29/turnover-is-good-for-maintainability.html]
+** How do we divide labor? How do we work together?
+Interfaces enable us to pretend that our coworkers have finished their jobs.
+
+Interfaces are contracts, promises, agreements.
+* Measuring productivity?
+** When is line of code a valid measure?
+Line of code (LOC) can be a valid measure if they are /normalized/ first,
+like purchasing-power-parity adjustment in currency exchange rates.
+
+One atomic statement per line.
+
+LOC is valid for the same language with the same coding style.
+
+1 LOC of C cannot be equated with 1 LOC of Java, in the same way we cannot equate 1 kilogram and 1 pound.
+** What does a software engineer do?
+- Find out what the user really wants.
+- Formalize user requirements.
+** How do we compare programmers/code?
+- correctness of the system
+- maintainability of the system
+- efficiency of the system
+- time taken to implement the system
+** How do we measure developer productivity?
+- 2004 article "Defining and measuring the productivity of programming languages" [[https://pdfs.semanticscholar.org/1852/9ff58460b6238f5095af073d8505d79d3264.pdf][pdf]]:
+  - It defines these metrics:
+    - "the time and effort required to write, debug, and tune the code"
+    - "the performance of the code that results"
+  - power-efficiency graph (human efficiency and machine efficiency)
+  - what else?
+- 2008 https://ifs.host.cs.st-andrews.ac.uk/Books/SE9/Web/Planning/productivity.html
+  - https://ifs.host.cs.st-andrews.ac.uk/Books/SE9/
+- 1992 article https://www.andrews.edu/~vyhmeisr/papers/progprod.html
+- 2012 article http://www.drdobbs.com/jvm/the-comparative-productivity-of-programm/240005881
+  - "A database comparing 6,000 projects shows that the choice of programming language has a significant impact on project schedule."
 * Raw stuff; don't read?
-** Rant?
+** Non-constructive rant?
 <2018-10-28> Systemd programmers are not competent enough for what they are doing.
  [fn::https://blog.erratasec.com/2018/10/systemd-is-bad-parsing-and-should-feel.html]
  [fn::https://www.reddit.com/r/programming/comments/9rtm1f/systemd_is_bad_parsing_and_should_feel_bad/]
@@ -392,16 +956,6 @@ It may be ugly, but /it works/.
 Computers feel slow not because hardware sucks, but because programmers tell it to do stupid things.
 Ever-stronger hardware lets more programmers get away with writing ever-shittier software.
 ** How do we reverse-engineer software?
-Sometimes I think about [[file:reveng.html][reverse software engineering]].
-
-I wanted to automate stock trading with my broker which has a stock trading application written in Java 6.
-Thus I wrote [[file:rejava.html][Reverse engineering the network protocol used by a Java desktop application]].
-But now I think financial economy is just a big Ponzi scheme full of rent-seeking,
-full of people who want to get a slice of the pie of real economy without growing the pie of real economy,
-full of people who just want to extract value from society without creating value,
-people who only take but don't give,
-people who only shuffle money around.
-
 I want something like Ghidra[fn::https://www.youtube.com/watch?v=Sv8yu12y5zM] but written in Prolog and for PS1 MIPS.
 ** TODO Fix this incoherent Java ramble; don't read
 - Make it work
@@ -1879,221 +2433,6 @@ http://lucacardelli.name/Papers/TypeSystems.pdf
 
   - 2015 Ralf Hinze, Nicolas Wu, Jeremy Gibbons: [[http://www.cs.ox.ac.uk/people/jeremy.gibbons/publications/conjugate-hylos.pdf][Conjugate Hylomorphisms Or: The Mother of All Structured Recursion Schemes]]
   - 2007 Colin John Morris Kemp PhD thesis [[https://pdfs.semanticscholar.org/21da/de9b8e96724265f911c90c0ddd935901a0f0.pdf][Theoretical foundations for practical "totally functional programming"]]
-** How do we write correct software?
-*** What is correct?
-Correct with respect to what?
-It does what we want, and it only does what we want?
-*** Proving and testing
-/Testing approximates proving./
-We actually want to prove a logical formula phi about a piece of code, we want to prove that the code fragment is a model of the formula phi, but proving is too expensive.
-Therefore, we test phi instead.
-
-In back-end testing, the formula is often obvious.
-What is the formula in front-end testing?
-DOM element existence testing?
-*** The problem with formal methods: you can't prove what you don't model.
-- Intel uses formal method, but why does its processors have vulnerabilities?
-  - Because /you can't prove what you don't model/.
-  - Spectre, Meltdown, etc.
-  - https://arstechnica.com/information-technology/2018/11/intel-cpus-fall-to-new-hyperthreading-exploit-that-pilfers-crypto-keys/?amp=1
-- How will we ever know that we didn't miss anything?
-- You have to prove that it does everything that you want it to do, /and/ that it does only that, and nothing else.
-**** What if it is impossible to write correct software? What are our options to mitigate/limit the damage?
-*** What?
-- Where is tutorial?
-- A goal should be to make it easy to make correct software?
-- 2014, slides, "How I became interested in foundations of mathematics.", Vladimir Voevodsky, [[https://www.math.ias.edu/vladimir/sites/math.ias.edu.vladimir/files/2014_08_ASC_lecture.pdf][pdf]]
-- Why should we be interested in homotopy type theory?
-- Coq
-- [[https://leanprover.github.io/][Lean]]
-
-  - Pros of Lean
-
-    - Integrates with Visual Studio Code
-
-  - Cons of Lean
-
-    - Less mature than Coq
-
-- Should we care about the relationship between functional programming and theorem proving?
-- Ramble
-
-  - Useless idea?
-
-    - Reverse-proving: generate all proofs of a theory.
-      (Proving is: given a statement, prove (or disprove).)
-
-      - Which true sentences are interesting?
-      - Which proofs are interesting?
-
-- Companies
-
-  - [[https://galois.com/][Galois]], on [[https://github.com/GaloisInc/][github]]
-
-- unread interesting things
-
-  - http://www.joachim-breitner.de/blog/717-Why_prove_programs_equivalent_when_your_compiler_can_do_that_for_you_
-  - http://www.michaelburge.us/2017/08/25/writing-a-formally-verified-porn-browser-in-coq.html
-  - https://aphyr.com/posts/342-typing-the-technical-interview
-  - http://tech.frontrowed.com/2017/09/22/aggregations/
-
-- interoperation between proof assistants?
-
-  - Lem ("lightweight executable mathematics")
-
-    - https://www.openhub.net/p/lightweight-executable-mathematics
-    - http://www.cl.cam.ac.uk/~pes20/lem/
-*** Coq?
-  :PROPERTIES:
-  :CUSTOM_ID: coq
-  :END:
-
-- Introduction
-
-  - What is a suitable introduction to Coq?
-  - [[https://people.debian.org/~schepler/coqtut.v.html][Daniel Schepler's "Mathematical formalization using Coq"]] seems approachable.
-  - [[https://mathoverflow.net/questions/155909/wanted-a-coq-for-the-working-mathematician][MO 155909: Wanted: a "Coq for the working mathematician"]]
-  - [[https://mathoverflow.net/questions/164959/how-do-i-verify-the-coq-proof-of-feit-thompson][MO 164959: How do I verify the Coq proof of Feit-Thompson?]]
-  - https://softwarefoundations.cis.upenn.edu/current/index.html
-  - Yves Bertot's "Coq in a hurry"
-  - [[https://coq.inria.fr/tutorial-nahas][Coq tutorial by Mike Nahas]]
-  - [[https://coq.inria.fr/distrib/current/refman/Reference-Manual006.html#Cic][Calculus of inductive constructions]]
-
-- [[http://blog.mikael.johanssons.org/coq-and-simple-group-theory.html][Coq and simple group theory]]
-- Installation on Ubuntu 14.04
-
-  - =sudo apt-get install coq=
-**** Introduction
-   :PROPERTIES:
-   :CUSTOM_ID: introduction
-   :END:
-
-Coq source file extension is =.v=.
-
-The notation =x:T= means "the type of =x= is =T=", "=x= inhabits =T=".
-It also means "=x= is a proof of =T=" by Curry-Howard isomorphism.
-
-The type of =nat= is =Type(1)=.
-
-The type of =set= is =Type(2)=.
-
-The type of =Type(i)= is =Type(i+1)=.
-
-#+BEGIN_EXAMPLE
-    (* This is a comment in Coq. *)
-#+END_EXAMPLE
-
-#+BEGIN_EXAMPLE
-    coqtop -l filename.v -batch
-#+END_EXAMPLE
-
-**** Defining things
-   :PROPERTIES:
-   :CUSTOM_ID: defining-things
-   :END:
-
-#+BEGIN_EXAMPLE
-    Definition x: nat := 0.
-    Check x.
-
-    Definition f (x: nat): nat := x + 1.
-#+END_EXAMPLE
-
-Definition = non-recursive definition
-
-Fixpoint = recursive definition
-
-Inductive = type (Set (small set)) definition
-
-#+BEGIN_EXAMPLE
-    Definition name: type
-    where
-    type: Set
-    or type: Prop
-    or type: Type.
-#+END_EXAMPLE
-
-Proving 0+1 = 1 using Curry-Howard isomorphism?
-
-Axiom: and-elimination
-
-\begin{align*}
-a \wedge b \vdash a
-\end{align*}
-
-#+BEGIN_EXAMPLE
-    Theorem and_elim: forall a b: Prop, a /\ b -> a.
-    tauto.
-    Qed.
-#+END_EXAMPLE
-
-\begin{align*}
-a \vdash a \vee b
-\end{align*}
-
-Modus ponens
-
-\begin{align*}
-a, a \rightarrow b \vdash b
-\end{align*}
-
-**** How Coq represents propositions
-   :PROPERTIES:
-   :CUSTOM_ID: how-coq-represents-propositions
-   :END:
-
-#+BEGIN_EXAMPLE
-    Print False.
-    Print True.
-    Inductive True : Prop := I : True.
-    Inductive False : Prop := .
-    Inductive and (A B : Prop) : Prop := and : A -> B -> and A B.
-#+END_EXAMPLE
-*** Testing
-Why do we test?
-Because we are not sure that our program is correct.
-
-Why are we not sure that our program is correct?
-- Because we don't know how to prove its correctness.
-  This can be alleviated by using a decent programming language.
-- Because the cost of proving its correctness does not justify the benefit.
-  We can't do anything about this if the complexity is essential (irreducible), not accidental.
-
-We human are fallible.
-Thus we will always test.
-Therefore:
-- What should we test?
-- How should we test?
-- What is the test that has the greatest benefit-to-cost ratio?
-
-The expected benefit of a test is the expected cost of the mistakes that might have been made if the test did not exist.
-
-The quality of a test is the seriousness of the mistakes it prevents.
-Thus, the seriousness of testing is proportional to the seriousness of risk.
-
-Test is insurance.
-A good insurance covers your risk.
-A bad insurance only wastes money and doesn't cover your risk:
-Testing Java class getters is like buying flood insurance for a house in the desert.
-
-Insurance causes moral hazard (taking more risk because someone else pays for it).
-Does having a test cause you to take more risks?
-
-- The benefit of a test is the cost of the mistakes it prevents.
-- The cost of a test is the person-hours spent writing the test and updating the test, and a slight increase in build time. (Assume $50/person-hour for simplicity.)
-
-The answers to these questions tell us what to test and how to test:
-- What tests have the greatest benefit-to-cost ratio?
-- What mistakes do our tests prevent? How expensive are the mistakes that our tests prevent?
-- Which part of our code is most likely to cause expensive mistakes? (Example: testing getters won't prevent expensive mistakes.)
-
-Code coverage is a meaningless metric.
-We should measure the expected value of mistakes instead.
-We should "color" our code: color more risky methods more red, color less risky methods more green, like this
-travel risk map[fn::https://i.redd.it/ktop13ad2io01.png] but for software.
-
-If you are launching a rocket, then a mistake may cost billions of dollars.
-It makes sense to invest ten million dollars testing to avoid a 1/100 probability of making a billion-dollar mistake.
 ** Ramblings? Wish lists? Too speculative? Unclear goal/reason? Condemned to oblivion?
 *** Category theory and programming languages?
 The section title needs a verb.
@@ -2990,212 +3329,5 @@ I conjecture that there is an algorithm that can transform every general recursi
 http://deliprao.com/archives/262
 
 https://arxiv.org/abs/1712.01208
-** What is software engineering?
-(I moved some contents to file:philo.org).
-*** Ontology and jargon
-A /language/ is something that has syntax (form) and semantics (meaning).
-
-A language enables its users to /communicate/ with each other.
-
-A language is formed by the agreements of its users.
-
-A /formal language/ ...
-
-A /programming language/ is a formal language that is used for programming (a machine).
-
-To program a machine is ...?
-
-A /program/ is a formula/string/term in a programming language?
-
-A machine can be modeled by a formal system.
-
-A program is an executable mathematical object?
-*** <2018-09-25> Software is broken and bloated
-- [[http://tonsky.me/blog/disenchantment/][Software disenchantment @ tonsky.me]]
-- [[https://www.hanselman.com/blog/EverythingsBrokenAndNobodysUpset.aspx][Scott Hanselman: "Software doesn't work. I'm shocked at how often we put up with it."]]
-*** Why is hardware more standardized than software?
-Hardware standardization benefits everyone (both its makers and its users).
-Hardware unstandardization is more expensive than hardware standardization.
-
-Software standardization is more expensive than software unstandardization.
-
-Is software too malleable?
-
-Hardware engineers have standard nuts, bolts, connectors, and components.
-
-Why standardize?
-
-- standardization reduces cost
-- standardization reduces duplicate effort
-- standardization improves interoperability
-
-Hypothesis:
-Programming language is too free.
-If programming language is limited (that is, if there is only one way to do one thing),
-then software will standardize itself.
-
-There are some software standards, such as ABIs (Application Binary Interfaces).
-C calling convention is a standard.
-*** How do we write lasting software?
-- Clear ontology
-- Task-oriented documentation
-  - Documentation doesn't have to be separate from code.
-- /Capture/ the requirement.
-  Translate the requirement into software, instead of making a software system that /satisfies/ the requirement.
-  - The program may be rewritten, but the functional requirements, the business logic and the mathematical truths rarely change.
-    - In order to make software last, we must /capture/ the requirements, not make a system that satisfies the requirements.
-      This requires a change in mindset.
-      The software is not something made to some requirements; the software is the requirements itself.
-      The software is not the shirt made-to-order; the software is the order itself, from which all satisfying shirts can be generated/derived/produced.
-- Think for yourself.
-  Don't just follow hypes.
-  Always have a reason when doing things.
-  Record your reasoning for your forgetful future self.
-- Design software to be refactored without surprises.
-  - Example: Avoid runtime reflection (unless for the most obvious cases).
-    An alternative to that is code generation.
-    - Help the compiler help you.
-    - Even the most obvious cases aren't obvious to someone who see the code for the first time?
-- Shorten the edit-compile-test cycle. Design software so that it compiles fast and it starts up fast.
-- What else?
-*** Adding people to a late software project makes it later (Fred Brooks, "No silver bullet").
-Newcoming programmers, no matter how experienced, need time to onboard; they are not immediately productive.
-Existing programmers must spend some time helping the newcoming programmers, temporarily reducing productivity even further.
-*** Complexity
-**** Renaat Verbruggen: Three universal methods of reducing complexity: partitioning, hierarchy, independence
-- [[http://www.computing.dcu.ie/~renaat/ca2/ca214/ca214vii.html][Renaat Verbruggen: Three universal methods of reducing complexity]]: partitioning, hierarchy, independence
-  - It also applies to other things, such as organizing this wiki.
-**** How complex systems fail?
-- 2000, article, "How complex systems fail", [[http://web.mit.edu/2.75/resources/random/How%20Complex%20Systems%20Fail.pdf][pdf]]
-*** Defining software complexity as the length of the shortest first-order-logic formula that describes it?
-Every software can, in principle, be described by a first-order-logic formula that describes the requirements satisfied or behaviors exhibited by the system.
-**** What is complexity?
-- [[https://fs.blog/2014/03/what-is-complexity/][Farnam Street blog post]]
-- [[http://www.hartford.edu/complexity/whats-complexity.aspx][What Is 'Complexity'? | University of Hartford]]
-- Measuring software complexity by hits-of-code instead of lines-of-code
-  https://www.yegor256.com/2014/11/14/hits-of-code.html
-*** Unpopular opinions
-- https://www.quora.com/What-unpopular-opinions-do-you-have-about-software-development
-*** TODO Measuring developer productivity
-- 2004 article "Defining and measuring the productivity of programming languages" [[https://pdfs.semanticscholar.org/1852/9ff58460b6238f5095af073d8505d79d3264.pdf][pdf]]:
-  - It defines these metrics:
-    - "the time and effort required to write, debug, and tune the code"
-    - "the performance of the code that results"
-  - power-efficiency graph (human efficiency and machine efficiency)
-  - what else?
-- 2008 https://ifs.host.cs.st-andrews.ac.uk/Books/SE9/Web/Planning/productivity.html
-  - https://ifs.host.cs.st-andrews.ac.uk/Books/SE9/
-- 1992 article https://www.andrews.edu/~vyhmeisr/papers/progprod.html
-- 2012 article http://www.drdobbs.com/jvm/the-comparative-productivity-of-programm/240005881
-  - "A database comparing 6,000 projects shows that the choice of programming language has a significant impact on project schedule."
-*** Who reads SWEBOK? How can we read SWEBOK? Who reads all of it? Why does anyone bother writing it?
-- https://en.wikipedia.org/wiki/Software_Engineering_Body_of_Knowledge
-- http://www.sebokwiki.org/wiki/An_Overview_of_the_SWEBOK_Guide
-  - <2017-04-27>
-    Someone claims to have read it.
-    Holy shit.
-    https://www.quora.com/Do-you-use-SWEBOK-Is-it-helpful
-- Is the knowledge applicable?
-  Knowledge that can't be applied is useless.
-
-Fowler 2003[fn::https://martinfowler.com/bliki/Swebok.html] points out the problems with SWEBOK.
-*** Coupling
-- Coupling is deciding what you can depend on.
-  - Big Company X just released this new cool stuff, but will it still be there in 5 years?
-*** Testing
-**** If proving is cheap, prove it instead of testing it.
-**** Amount of testing should be proportional to risk.
-- How do we make code testable?
-  - Minimize its dependencies.
-  - Minimize the number of things that you must set up before you can run it.
-  - Why?
-    - If you don't satisfy all its dependencies, you can't run it.
-    - If you can't run it, you can't test it.
-    - If your business logic depends on the database, you'll have to set up a database to test your business logic.
-- What do we need to test?
-  - Testing is proportional to risk.
-    - Riskier code should be tested more.
-      - "Risk comes from not knowing what you're doing." (Warren Buffett)
-        - Buffett said that for investing, but it also applies to programming.
-  - If it's obvious, don't test it. (Getters, setters, and DAOs without fancy logic)
-  - If you can prove it, don't test it.
-*** TODO Compare programming language research journals and conferences
-Which ones should we care about?
-Which ones are the real deal?
-**** Conferences
-- ICFP: The ACM SIGPLAN International Conference on Functional Programming
-- OOPSLA: ACM SIGPLAN Object-Oriented Programming, Systems, Languages & Applications
-https://en.wikipedia.org/wiki/OOPSLA
-- PLDI: ACM SIGPLAN Programming Language Design and Implementation
-http://www.sigplan.org/Conferences/PLDI/
-- POPL: ACM SIGPLAN Principles of Programming Languages
-http://www.sigplan.org/Conferences/POPL/
-**** Proceedings
-- PACMPL: Proceedings of the ACM on Programming Languages
-**** DBLP vs Semantic Scholar?
-https://dblp.uni-trier.de/
-*** Software engineer associations
-   :PROPERTIES:
-   :CUSTOM_ID: software-engineer-associations
-   :END:
-
-- Indonesia
-
-  - [[http://sarccom.org/][SARCCOM Software architect Indonesia community]]
-  - [[http://www.aspiluki.or.id/][ASPILUKI Asosiasi Piranti Lunak Telematika Indonesia]]
-
-- International?
-*** Software business model
-- Hardware is moved.
-- Software is /copied/, not moved.
-- When you sell hardware, you /transfer/ ownership. The hardware doesn't multiple into two.
-- There are two models:
-  - SaaS (software as a service, a web application; you control the hardware that runs the software, but not the input and output of the process)
-  - bundling software with restricted hardware (Apple iPhone)
-- Controlling software requires controlling the hardware that runs it.
-  - Controlling the law requires controlling the lawmakers and the law enforcers.
-- Isn't it absurd to judge a crime by its potentiality not its actuality?
-- Process is software. Law is software.
-- The chemical process in a chemical plant is also software, but not everyone owns a chemical plant.
-  - If you hire a chemical engineer to design and implement your chemical plant's process, does the chemical engineer own the rights to the process?
-  - If you hire a software to design and implement your computer's operating system, does the software engineer own the rights to the operating system?
-
-Ownership is the ability to control access.
-To own a thing is to be able to control the access to that thing.
-
-- It is easy to control access to hardware. Nature/physics is with us on this issue.
-- It isn't easy to control access to software.
-
-- https://medium.com/@mattklein123/the-broken-economics-of-oss-5a1b31fc0182
-*** Measuring software quality?
-- https://cs.stackexchange.com/questions/47077/is-there-a-way-of-objectively-measuring-the-efficiency-or-quality-of-software-or
-*** Programming language quality?
-- https://medium.com/@richardeng/how-to-measure-programming-language-complexity-afe4f7e75786
-- https://medium.com/concerning-pharo/elegant-pharo-code-bb590f0856d0
-*** Technical writing, software documentation
-- https://www.divio.com/blog/documentation/:
-"Documentation needs to include and be structured around its *four different functions*: /tutorials, how-to guides, explanation and technical reference/.
-Each of them *requires a distinct mode of writing*."
-*** TODO Who said this "pit of success"? It was someone on the Internet.
-- Write code that makes your client/user/reader (another programmer who uses your code) fall into the pit of success.
-- Corollary: Principle of least astonishment.
-- Corollary: Write code that a programmer can understand with an IDE without having to read much documentation.
-- Corollary: Group data and methods that need those data together in one class.
-- Can that principle derive these principles? http://c2.com/cgi/wiki?PrinciplesOfObjectOrientedDesign
-- You can write maintainable and reliable procedural code?
-** Why does software have security holes?
-Software has security holes because:
-1. Languages makes it too hard to do the right thing.
-2. Programmers are too lazy to do the right thing.
-
-Authentication systems such as OAuth are too complex for programmers to use or understand.
-Anything more than HTTP Basic Auth is too complex.
-It sucks to write code for handling authentication.
-How do we make a programming system such that handling authentication is not hard?
-What is authentication and authorization?
-
-"A Taxonomy of Causes of Software Vulnerabilities in Internet Software"
-https://pdfs.semanticscholar.org/5ec6/93950d1e6039e04a7b86a488e816ddcdd82e.pdf
-"software developers are making the same mistakes over and over again"
 * Bibliography
 bibliography:default
