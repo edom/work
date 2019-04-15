@@ -2060,7 +2060,28 @@ How do programming languages deal with modules?
 
 - [[https://en.wikipedia.org/wiki/Modular_programming][WP:Modular programming]]
 ** Brain dumps
-http://erlang.org/pipermail/erlang-questions/2011-May/058768.html
+- http://erlang.org/pipermail/erlang-questions/2011-May/058768.html
+  - Hackernews commend thread https://news.ycombinator.com/item?id=8226139
+  - LtU comment thread http://lambda-the-ultimate.org/node/5079
+** Logical implication is local variable scoping
+#+BEGIN_EXAMPLE
+fun :- (locvar(1) => locvar(A), format("locvar is ~w~n",[A]), nl).
+#+END_EXAMPLE
+
+The logical semantics of ~A => B~ is "B is provable, if A is assumed to be true".
+
+The operational semantics of ~A => B~ is:
+1. Assert A.
+2. Call B.
+3. Retract A.
+
+Problem:
+How do we "undefine" a local variable?
+
+For example: In ~A => B, (not(A) => C)~,
+we want A to be defined in B but undefined in C.
+
+Why should we prefer monotonic logic?
 * Ugly things, awkward squads, states and errors
 Simon Peyton-Jones \cite{Peytonjones2000TacklingTA} calls these the "awkward squad": input/output, concurrency, exceptions, and foreign-language calls.
 ** Effects, side-effects, and errors
@@ -2924,6 +2945,23 @@ http://sovietov.com/tmp/warren1980.pdf
 Hamel 2016 "Formal Methods: A First Introduction using Prolog to specify Programming Language Semantics"
 https://pdfs.semanticscholar.org/1c13/792241df9d5e002dab7a2515f11ad1fbc85e.pdf
 * Theoretical foundations of logic programming
+** Theories of truth
+There are at least three theories of truth[fn::http://mrhoyestokwebsite.com/Knower/Useful%20Information/Three%20Different%20Theories%20of%20Truth.htm].
+But there are more.[fn::https://en.wikipedia.org/wiki/Truth]
+There is also Tarski's model-theoretic theory of truth.
+** Semantics
+https://math.stackexchange.com/questions/2112719/what-is-the-difference-between-herbrand-logic-and-relational-logic-or-predicate
+
+There are several semantics for logic programs:
+- Tarski
+- model
+- Herbrand
+- operational
+
+Genesereth & Kao advocates using Herbrand semantics instead of Tarski semantics.
+They claim that Herbrand semantics is easier to teach.
+ [fn::http://logic.stanford.edu/herbrand/herbrand.html]
+ [fn::https://conference.imp.fu-berlin.de/cade-25/download/2015_CADE_ruleml_genesere.pdf]
 ** Why does automatic theorem proving use resolution?
 https://math.stackexchange.com/questions/2394518/why-was-the-resolution-method-so-important-to-ai-theorem-proving?
 ** What is wrong with Prolog?
@@ -3124,10 +3162,17 @@ and C is an external language (natural language).
 We can see that a relation like english_indonesian(EnglishWord,IndonesianWord)
 does not have any provisions for using context to disambiguate meanings.
 
+** Advanced reasoning: non-monotonic logic, abduction, induction
+https://book.simply-logical.space/part_iii.html
+** <2019-04-16> Problem with OpenAI Gym
+The OpenAI Gym[fn::https://gym.openai.com] overrepresents connectionists and underrepresents symbolists.
 * What next after Prolog?
 Gödel, λProlog, Twelf, Datalog, Answer-Set-Programming.[fn::https://github.com/webyrd/miniKanren-uncourse/wiki/Other-Interesting-Logic-or-Relational-Programming-Languages]
 
 Lambda-Prolog 2012 book \cite{miller2012programming}.
+
+What are Prolog alternatives?
+See 2011 article [[https://arxiv.org/abs/1107.5408][A structured alternative to Prolog with simple compositional semantics]]?
 ** Embedding Prolog/Haskell in Haskell/Prolog
 Why bother with this?
 Why not just use Oz?

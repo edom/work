@@ -540,3 +540,50 @@ https://en.wikipedia.org/wiki/Mesh_networking
 ** How would an anarcho-syndicalist society build roads, rockets, and other big projects that require massive coordination?
 ** Do we really want anarchy?
 Have we read and understood Hobbes's state of nature of humans?
+* Designing a web browser
+** Why stop at web browser?
+What we want is not a web browser.
+What we want is a user interface for the Internet.
+
+We should dream more about the browser.
+We should have an Information Agent instead of a browser.
+But this risks scope creep; we'll end up making an operating system.
+
+The browser should also be a crowd-sourced search engine and a peer-to-peer web hosting?
+
+Opennic
+https://mastodon.ar.al/@aral/101714998469668580
+
+Rethinking the web browser
+
+https://refresh.study
+** What is the most important thing of a web browser?
+The user is in full control of everything, including the content displayed to him.
+The user can program the browser to transform badly-designed websites.
+** Why do browsers have history?
+What is the chance that the user asks one of these:
+- What did I just browse?
+- What did I browse yesterday?
+
+What is the chance that the user wants to revisit something?
+
+I myself often need that.
+
+https://www.computerhope.com/issues/ch001871.htm
+** How hard is it to secure a browser?
+Very hard.
+
+We may think that API A is secure and API B is secure,
+but when we use them together, A+B may not be secure.
+ [fn::https://www.ghacks.net/2018/11/04/browser-history-sniffing-is-still-a-thing/]
+
+How do we make systems whose security is composable?
+
+How do we prove that a system is secure?
+How should we model security?
+
+\cite{barthe2017provably} is a possibility.
+But what if new unforeseen side-channel attacks appear in the future?
+
+We must model the time and energy usage of each CPU instruction.
+But the CPU is not open source?
