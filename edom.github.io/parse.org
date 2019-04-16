@@ -164,6 +164,16 @@ The parser is /parallelizable/ if there exists a relatively fast function \(comb
 P(xy) = combine(P(x), P(y))
 \]
 * Left-recursion elimination
+It is possible to manually eliminate left recursion by rewriting all rules of the form
+\(A \to AB | C\) to \(A \to C B^*\)
+where each of \(A\) and \(B\) is an expression that does not begin with \(A\).
+I have an example in =parse_manual.pro=.
+
+Two problems arise:
+- What about the parse tree?
+  We want a parser, not a matcher.
+- Can it be automated?
+
 Why do we care about left recursion?
 Grune & Jacobs 2008 sums it up:
 "Basically almost all parsing is done by top-down search with left-recursion protection"\cite[p. vii]{grune2008parsing}.
@@ -361,12 +371,11 @@ and the meaning set \(M\) is the set of syntax tree nodes.
 
 Viewing grammar as /relation/ leads to writing parsers as /logic programs/, which are almost synonymous with /relational programs/.
 
-Shieber 1995, parsing as deduction, logic programming\cite{shieber1995principles}.
-
-DCG?
-#+BEGIN_EXAMPLE
-% grammar(?Form, ?Meaning).
-#+END_EXAMPLE
+Shieber, Schabes, & Pereira 1995 \cite{shieber1995principles} sees parsing as deduction.
+It sees parsing from proof-theory point of view.
+It presents a proof-theoretic framework that unifies several parsing algorithms (CYK, Earley, etc.).
+It implies that we can use a theorem prover for parsing.
+But should we?
 
 The correspondence: one Chomsky production rule corresponds to one Horn clause with two parameters (input and rest/unparsed).
 P(A,B) means that the rule P matches the prefix of A that B lacks.
@@ -385,6 +394,8 @@ We say that a string \(S\) is /grammatical/ with respect to \(G\) iff there exis
 We may omit "with respect to \(G\)" if it is clear from context that there is only one grammar.
 
 Iff the grammar relation is a function, then we say that the grammar is /unambiguous/.
+** History of DCG?
+DCG evolved from Colmerauer's "metamorphosis grammar"?
 * How do we parse? How should we?
 ** How?
 Zaytsev & Bagge 2014 \cite{zaytsev2014parsing} survey
