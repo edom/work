@@ -1,9 +1,12 @@
-% example of manual left-recursion elimination
+/*
+This is an expression parser with these features:
+- manual left-recursion elimination
+- dynamic infix operator with associativity and precedence
+*/
 
 /*
 The left-recursion elimination is the transformation from
-    A --> A, B
-    A --> C
+    A --> A,B ; C
 to
     A --> C, many0(B)
 where B must not begin with A
@@ -24,11 +27,13 @@ into this rule:
 and then we add some infix binary operator parsing with precedence and associativity.
 */
 
+:- export(exp//1).
+
 exp(E) --> expl(L), exprs(L,E).
 expl(par(A)) --> "(", exp(A), ")".
 expl(num(A)) --> num(A).
 expr(L,bin(O,L,R)) -->
-    {oper(OO,OA,O)},
+    {operator(OO,OA,O)},
     {
         exp_ord(L,OL),
         (   (OA=yfx;OA=yfy) -> OL=<OO
@@ -66,13 +71,13 @@ many0(A,[H|T]) --> call(A,H), many0(A,T).
 many1(A,[H]) --> call(A,H).
 many1(A,[H|T]) --> call(A,H), many1(A,T).
 
-:- dynamic oper/3.
-:- retractall(oper(_,_,_)).
-:- assertz(oper(400,yfx,*)).
-:- assertz(oper(500,yfx,+)).
-:- assertz(oper(500,yfx,-)).
+:- dynamic operator/3.
+:- retractall(operator(_,_,_)).
+:- assertz(operator(400,yfx,*)).
+:- assertz(operator(500,yfx,+)).
+:- assertz(operator(500,yfx,-)).
 
-op_ord(A,B) :- once(oper(B,_,A)).
+op_ord(A,B) :- once(operator(B,_,A)).
 
 exp_ord(par(_),A) :- !, A=0.
 exp_ord(num(_),A) :- !, A=0.
@@ -88,7 +93,7 @@ num_meaning([],0).
 num_meaning([A|B],C) :- num_meaning(B,N), C is 10*N+A.
 
 test :-
-    string_codes("123+456-789",Codes),
+    string_codes("12+34*56-78",Codes),
     phrase(exp(A),Codes),
     print_term(A,[]),nl,
     exp_meaning(A,M),

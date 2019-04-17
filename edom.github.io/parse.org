@@ -164,10 +164,20 @@ The parser is /parallelizable/ if there exists a relatively fast function \(comb
 P(xy) = combine(P(x), P(y))
 \]
 * Left-recursion elimination
-It is possible to manually eliminate left recursion by rewriting all rules of the form
+It is possible to /manually/ eliminate left recursion by rewriting all rules of the form
 \(A \to AB | C\) to \(A \to C B^*\)
 where each of \(A\) and \(B\) is an expression that does not begin with \(A\).
 I have an example in =parse_manual.pro=.
+
+Are we OK with manual transformations?
+There are not many left-recursive rules in practice.
+
+For the computer, our manual transformation is a perfectly fine solution.
+
+The grammar must not have a nullable left-recursive rule like \( A \to A \) or \( A \to \epsilon^* \).
+Otherwise a computer running a naive top-down left-to-right parsing algorithm is doomed into infinite loop.
+But we can argue that the only \(A\) satisfying \(A \to A\) is \(epsilon\),
+and that \( \epsilon^* = \epsilon \).
 
 Two problems arise:
 - What about the parse tree?
@@ -313,6 +323,13 @@ Write a Prolog program to eliminate left recursion from definite-clause grammars
 
 The logical meaning of the Prolog DCG rule \(A(x) \to B_1(x), \ldots, B_n(x)\) is the predicate \(A\)
 where \(A(x,s_1,s_{n+1}) \leftarrow ( B_1(x,s_1,s_2) \wedge \ldots \wedge B_n(x,s_n,s_{n+1}) )\).
+** Reverse parsing
+parse((A,B),C) iff parse(r((A,B)),r(C)).
+
+where r((A,B)) = r(B),r(A).
+
+Reversing the parser makes it right-to-left top-down parser.
+It can now handle left-recursion, but it can now not handle right-recursion.
 * Language-oriented approach
 The language-oriented approach to parsing is to make a language for expressing a relation between strings and trees.
 

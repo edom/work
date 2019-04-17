@@ -22,7 +22,7 @@
 :-  '$input_length'(N),
     compile_aux_clauses([input_length(N)]).
 
-input_index1(A) :- input_length(N), between(0,N,A).
+input_index1(A) :- input_length(N), between(1,N,A).
 
 % xyz(P,Q) means there is an xyz from position P inclusive to position Q exclusive.
 
@@ -30,23 +30,21 @@ input_index1(A) :- input_length(N), between(0,N,A).
 
 % This terminates, but is still too slow.
 
-:- table number/2.
-:- table exp/2.
+%:- table number/2.
+%:- table exp/2.
+
+% Rule(BeginInclusive,EndExclusive)
 
 code(C,P,Q) :- position_code(P,C), Q is P+1.
 
 digit(P,Q) :- code(0'0,P,Q).
 digit(P,Q) :- code(0'1,P,Q).
 op(P,Q) :- code(0'+,P,Q).
-number(P,R) :- digit(P,Q), number(Q,R).
 number(P,Q) :- digit(P,Q).
+number(P,R) :- digit(P,Q), number(Q,R).
 
-exp(P,Q) :- number(P,Q).
-exp(P,S) :-
-    input_index1(P),
-    input_index1(Q), P < Q,
-    %input_index1(R), Q < R,
-    input_index1(S), Q < S,
-    exp(P,Q),
-    op(Q,R),
-    exp(R,S).
+:- dynamic cache/2.
+
+exp(P,Q) :- cache(exp(P,Q),false), !, false.
+exp(P,Q) :- number(P,Q), assert(cache(exp(P,Q),true)).
+exp(A,Z) :- input_length(N), between(1,N,A), between(A,N,Z), A < Z, exp(A,B), op(B,C), exp(C,Z).

@@ -3427,27 +3427,6 @@ How do programming languages deal with modules?
 - http://erlang.org/pipermail/erlang-questions/2011-May/058768.html
   - Hackernews commend thread https://news.ycombinator.com/item?id=8226139
   - LtU comment thread http://lambda-the-ultimate.org/node/5079
-** Logical implication is local variable scoping
-I have an example in =scope.pro=.
-
-#+BEGIN_EXAMPLE
-fun :- (locvar(1) => locvar(A), format("locvar is ~w~n",[A]), nl).
-#+END_EXAMPLE
-
-The logical semantics of ~A => B~ is "B is provable, if A is assumed to be true".
-
-The operational semantics of ~A => B~ is:
-1. Assert A.
-2. Call B.
-3. Retract A.
-
-Problem:
-How do we "undefine" a local variable?
-
-For example: In ~A => B, (not(A) => C)~,
-we want A to be defined in B but undefined in C.
-
-Why should we prefer monotonic logic?
 ** Operators and adaptive grammar
 Should operator be module-scoped or global-scoped?
 
@@ -3763,6 +3742,34 @@ https://github.com/lexi-lambda/hackett
 
 http://www.ccs.neu.edu/home/stchang/pubs/ckg-popl2017.pdf
 
+* Extending Prolog
+** First order logic already has local variable scoping and local assertion
+Scoping existential quantified.
+
+Local assertion is implication.
+
+We need more than Horn clauses.
+** Logical implication is local variable scoping
+I have an example in =scope.pro=.
+
+#+BEGIN_EXAMPLE
+fun :- (locvar(1) => locvar(A), format("locvar is ~w~n",[A]), nl).
+#+END_EXAMPLE
+
+The logical semantics of ~A => B~ is "B is provable, if A is assumed to be true".
+
+The operational semantics of ~A => B~ is:
+1. Assert A.
+2. Call B.
+3. Retract A.
+
+Problem:
+How do we "undefine" a local variable?
+
+For example: In ~A => B, (not(A) => C)~,
+we want A to be defined in B but undefined in C.
+
+Why should we prefer monotonic logic?
 * Prolog implementation
 ** How would we implement Prolog in C?
 I am thinking of these:
