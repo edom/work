@@ -3770,6 +3770,93 @@ For example: In ~A => B, (not(A) => C)~,
 we want A to be defined in B but undefined in C.
 
 Why should we prefer monotonic logic?
+* Program checking
+Motivation:
+We want two avoid stupid runtime mistakes
+that can be prevented before runtime (at "compile" time).
+
+The problem:
+Given a Prolog term T, determine whether =call(T)= will throw a type error.
+Note that T may be a conjunction of goals.
+
+I'm thinking about using abstract interpretation or partial deduction.
+
+Program checking is partial deduction.
+
+This program is a mistake.
+#+BEGIN_EXAMPLE
+p(0).
+mistake1 :- p(foo).
+mistake2 :- number_string(_,_).
+#+END_EXAMPLE
+** Typed first-order logic
+Typing relation relates symbol to type (Cartesian product of sets)
+Example: \( T(p^2, Integer \times String) \).
+#+BEGIN_EXAMPLE
+type(p/2, relation([integer,string])).
+#+END_EXAMPLE
+** Vanilla Prolog type-checking
+Suppose that we have a predicate =p/1= that expects an integer or a var.
+We can type-check it like this:
+#+BEGIN_EXAMPLE
+% public
+:- export(cp/1).
+cp(A) :-
+    check_or_throw(p(A),before),
+    p(A),
+    check_or_throw(p(A),after).
+
+% private
+p(0).
+p(1).
+
+check(p(A),before) :- integer(A).
+check(p(A),before) :- var(A).
+
+check(p(A),after) :- integer(A).
+
+check_or_throw(A,T) :- check(A,T), !.
+check_or_throw(A,T) :- throw(error(check_failed(A,T),_)).
+#+END_EXAMPLE
+
+The advantage is that it is vanilla Prolog.
+No domain-specific type-specification languages.
+
+The disadvantage is that it is often done unnecessarily.
+** Type-checking interpreter
+One step further than that is to make a checking interpreter.
+
+#+BEGIN_EXAMPLE
+cp(A) :- interpret(p(A)).
+
+interpret(G) :- check(G,before), call(G), check(G,after).
+#+END_EXAMPLE
+** Abstract interpretation
+The semantics is:
+If the check succeeds, then the goal will not fail due to stupid type error.
+
+Unsatisfiability is not a type error.
+For example, the following =q/1= is /unsatisfiable/, but it does not throw a type error.
+#+BEGIN_EXAMPLE
+p(0).
+
+q(A) :- p(A), A = 1.
+#+END_EXAMPLE
+** Problem: the type of variables
+We mean the type of the term bound to the variable.
+Attributed variables are suitable for this scenario.
+But not all Prolog implementations have attributed variables.
+So we use gensym?
+
+Type-checking variables would be easier if Prolog variables were explicitly quantified.
+** Problem: non-terminating predicates
+#+BEGIN_EXAMPLE
+check(p(A,B),before) :- integer(A).
+check(p(A,B),after) :- string(B).
+
+p(A,B) :- p(A,B).
+#+END_EXAMPLE
+** Checking when unchecked code calls checked code
 * Prolog implementation
 ** How would we implement Prolog in C?
 I am thinking of these:

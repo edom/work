@@ -756,6 +756,12 @@ I only demand that Git preserve the things I think are important.
 
 But Git is a version control system, not a backup solution.
 It may lose data although the probability is astronomically small (practically improbable).[fn::https://stackoverflow.com/questions/10434326/hash-collision-in-git]
+** Distributed does not mean no coordination
+Git compares lines of text.
+Git does not compare the meaning of code fragments.
+
+Git merge introduces defect when the source commits are diff-compatible but not meaning-compatible.
+Example: adding name-clashing functions at different places.
 * Making a personal wiki
   :PROPERTIES:
   :CUSTOM_ID: making-a-personal-wiki
