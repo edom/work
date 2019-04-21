@@ -1211,6 +1211,11 @@ constraint(text(c) = text(a) + text(b)).
 
 Logical reactive programming?
 
+** Using SWI-Prolog plgi pack
+Before building on Debian/Ubuntu:
+#+BEGIN_EXAMPLE
+sudo apt-get install libgirepository1.0-dev
+#+END_EXAMPLE
 * Maintaining large knowledge bases
 ** A suggested way to use Prolog for programming in the large?
 Begin by defining an ontology or domain-specific language.
@@ -3789,7 +3794,26 @@ p(0).
 mistake1 :- p(foo).
 mistake2 :- number_string(_,_).
 #+END_EXAMPLE
+
+We can imagine a =check_goal/1= predicate.
+
+The key idea is to unify a variable with its type.
+** The errors Prolog programmers make
+The errors made by a Prolog programmer include:
+- type error: instantiating an input argument to a term of a wrong type
+- mode error: not instantiating an input argument
+- termination error: infinite loop, left recursion
+
+In this example, the first argument of interpret is n/1 or a +/1.
+#+BEGIN_EXAMPLE
+interpret(n(A),A).
+interpret(A+B,C) :- C is A+B.
+#+END_EXAMPLE
+
+A call such as =interpret(1-2,A)= should raise an exception instead of failing.
 ** Typed first-order logic
+Another name for typed logic is many-sorted logic.[fn::http://www.cs.miami.edu/home/geoff/Courses/CSC749-17F/Content/Typed1stOrder.shtml]
+
 Typing relation relates symbol to type (Cartesian product of sets)
 Example: \( T(p^2, Integer \times String) \).
 #+BEGIN_EXAMPLE
@@ -3857,6 +3881,38 @@ check(p(A,B),after) :- string(B).
 p(A,B) :- p(A,B).
 #+END_EXAMPLE
 ** Checking when unchecked code calls checked code
+** Manual checking
+#+BEGIN_EXAMPLE
+interpret(A,_) :- var(A), !, instantiation_error(A).
+interpret(A,_) :- \+exp(A), !, type_error(exp,A).
+interpret(n(A),Z) :- !, Z=A.
+interpret(A+B,Z) :- !, Z is A+B.
+interpret(A*B,Z) :- !, Z is A*B.
+
+exp(n(_)).
+exp(_+_).
+exp(_*_).
+#+END_EXAMPLE
+* Sometimes we want function and determinism
+Sometimes we really want to write a function and not a general relation.
+The sign of such unfilfilled desire is:
+Each clause begins with pattern-matching and cut,
+as in this example:
+#+BEGIN_EXAMPLE
+interpret(n(A),Z) :- !, Z=A.
+interpret(A+B,Z) :- !, interpret(A,A0), interpret(B,B0), Z is A0+B0.
+interpret(A*B,Z) :- !, interpret(A,A0), interpret(B,B0), Z is A0*B0.
+#+END_EXAMPLE
+
+It would be nice if we could write it in a functional style like this
+which might then be rewritten with =term_expansion/2=:
+#+BEGIN_EXAMPLE
+:- function interpret(E) = case(E,[
+    n(A) -> A
+    , A+B -> interpret(A) + interpret(B)
+    , A*B -> interpret(A) * interpret(B)
+]).
+#+END_EXAMPLE
 * Prolog implementation
 ** How would we implement Prolog in C?
 I am thinking of these:
@@ -4054,4 +4110,27 @@ https://stackoverflow.com/questions/1817010/embedded-prolog-interpreter-compiler
 https://github.com/raydac/java-prolog-parser
 ** P# translates Prolog to C#.
 https://pdfs.semanticscholar.org/12ec/568a6583d3d66b6821f28269f06937a9f2eb.pdf
+* SWI-Prolog packs
+I want to use a pack.
+I want to know:
+- How do I install a pack the easy way?
+  Use =pack_install/1=.
+- How do I install a pack manually outside SWI-Prolog without =pack_install/1=?
+- How do I install a specific version of a pack?
+- How do I freeze my dependencies to avoid silent breakage?
+- How do I use multiple versions of a pack?
+  My program depends on A and B.
+  A depends on C version 1.
+  B depends on C version 2.
+  It seems the packs must be updated.
+- To what directory are packs installed?
+  =pack_install/1= will prompt you where to install.
+* What I like about Prolog and Lisp
+I can see the source code of everything as long as it is loaded and is non-foreign.
+Prolog has =listing/1= and =edit/1= and =help/1=.
+Emacs has =M-x find-function=[fn::https://emacsredux.com/blog/2014/06/18/quickly-find-emacs-lisp-sources/]
+and =C-h f= or =M-x describe-function=.
+SBCL has =describe=.[fn::https://stackoverflow.com/questions/33707068/how-can-i-view-the-definition-of-a-function-in-lisp-sbcl]
+
+We can think of Prolog as Lisp with M-expression instead of S-expression.
 * Bibliography

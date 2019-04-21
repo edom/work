@@ -72,19 +72,6 @@ Why is matter stable?
 What is matter?
 What is energy?
 A mathematical quantity?
-* How should we farm in cities?
-I thought about [[file:subsist.html][starting a farm in the middle of Jakarta]],
-but I put it on hold because I felt that the opportunity cost was too high.
-
-The key to farming is to understand ecology, some botany (plant physiology and pathology), and nutrient cycle.
-
-We should care more about phosphate run-off.
-Phosphates are vital and non-renewable, like fossil fuel.
-The bad news is that there is no cycle bringing back the phosphates from the sea to the land, unlike water with its hydrologic cycle.
-* Biohacking?
-Biohacking?[fn::https://www.theguardian.com/science/2018/sep/21/extreme-biohacking-tech-guru-who-spent-250000-trying-to-live-for-ever-serge-faguet]
-
-Genetics is the biggest factor in how far we can build our body.[fn::https://www.quora.com/Is-it-possible-for-a-skinny-guy-who-eats-trains-and-does-everything-right-to-get-Chris-Evans%E2%80%99-large-pecs-and-overall-muscular-look-If-so-how-long-Im-just-starting]
 * Why does Bitcoin not work?
 It's too slow.
 
@@ -520,98 +507,6 @@ https://en.wikipedia.org/wiki/Mesh_networking
 ** How would an anarcho-syndicalist society build roads, rockets, and other big projects that require massive coordination?
 ** Do we really want anarchy?
 Have we read and understood Hobbes's state of nature of humans?
-* Designing a web browser
-** Why stop at web browser?
-What we want is not a web browser.
-What we want is a user interface for the Internet.
-
-We should dream more about the browser.
-We should have an Information Agent instead of a browser.
-But this risks scope creep; we'll end up making an operating system.
-Indeed Firefox and Chrome has already done that with Firefox OS and Chrome OS.[fn::https://www.quora.com/Why-did-the-Chrome-OS-succeed-but-the-Firefox-OS-failed]
-
-The browser should also be a crowd-sourced search engine and a peer-to-peer web hosting?
-
-Opennic
-https://mastodon.ar.al/@aral/101714998469668580
-
-Rethinking the web browser
-
-https://refresh.study
-** What is the most important thing of a web browser?
-The user is in full control of everything, including the content displayed to him.
-The user can program the browser to transform badly-designed websites.
-The user should not need to install a plugin such as Greasemonkey, Tampermonkey,
-or any other "user script manager" to have full control of what is displayed.
-** Why do browsers have history?
-What is the chance that the user asks one of these:
-- What did I just browse?
-- What did I browse yesterday?
-
-What is the chance that the user wants to revisit something?
-
-I myself often need that.
-
-https://www.computerhope.com/issues/ch001871.htm
-** How hard is it to secure a browser?
-Very hard.
-
-We may think that API A is secure and API B is secure,
-but when we use them together, A+B may not be secure.
- [fn::https://www.ghacks.net/2018/11/04/browser-history-sniffing-is-still-a-thing/]
-
-How do we make systems whose security is composable?
-
-How do we prove that a system is secure?
-How should we model security?
-
-\cite{barthe2017provably} is a possibility.
-But what if new unforeseen side-channel attacks appear in the future?
-
-We must model the time and energy usage of each CPU instruction.
-But the CPU is not open source?
-** Parts of a browser
-- cache and history
-- HTTP
-- HTML parsing
-- rendering HTML DOM to GUI widgets
-
-What we choose /not/ to do:
-- plug-ins, extensions
-- themes, customizations
-
-Who are going to maintain the plugins?
-
-Should we just embed WebKit?
-
-https://www.paulirish.com/2013/webkit-for-developers/
-** Search engine?
-Is AntRank[fn::http://www.ijettcs.org/Volume3Issue2/IJETTCS-2014-04-23-113.pdf] usable?
-
-I find YaCy[fn::https://www.pcworld.com/article/245414/yacy_its_about_freedom_not_beating_google.html] unusable:
-its search result relevance is too far behind Google.
-YaCy-related things
- [fn::https://loklak.org/ Loklak Search - Distributed Open Source Search for Twitter and Social Media with Peer to Peer Technology]
- [fn::https://chat.susi.ai/ SUSI.AI Chat - Open Source Artificial Intelligence]
-seem to also suffer from usability issues.
-
-Unfortunately, it's 2019, NAT is still common, and I don't see IPv6 anywhere near my computer.
-
-Perhaps it is a bad idea to allow /every/ device to be connected to the Internet.
-Weakly-passworded IP cameras were hijacked and put into a botnet.
-** Why don't users use distributed systems?
-Users don't care; they want software to just work.[fn::"Decentralized systems will continue to lose to centralized systems until
-there's a driver requiring decentralization to deliver a clearly superior consumer experience."
-http://highscalability.com/blog/2018/8/13/what-do-you-believe-now-that-you-didnt-five-years-ago.html]
-
-We should make a "freedom pack": an installer of essential free/libre open-source distributed-web applications.
-The pack might contain things like matrix.org, riot.im.
-But why stop there?
-Why not make free/libre distributed operating system[fn::https://en.wikipedia.org/wiki/Distributed_operating_system] with all those goodies preinstalled?
-
-Example of federated/decentralized social networks:
-Kari Nordmann's comment[fn::https://medium.com/@rxpvh2000/where-are-the-programmers-who-give-a-shit-d27ad2ef24fc]:
-"Explore federated (decentralized) social networks (Mastodon, diaspora*, Friendica, Hubzilla, GNU Social, Socialhome, Pleroma, GangGo)"
 * How do we make CPUs?
 How do we make machines that makes smaller machines?
 

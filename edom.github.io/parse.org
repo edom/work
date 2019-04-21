@@ -1,7 +1,13 @@
-#+TITLE: Parsing Research Group
+#+TITLE: Find an elegant parsing method
 #+DATE: 2018-04-11 00:00 +0700
 #+OPTIONS: ^:nil toc:nil
 #+PERMALINK: /parse.html
+* <2019-04-20> The most elegant parsing method so far
+So far I think Prolog DCG (definite-clause grammar) is the most elegant,
+although still unsatisfactory due to its inability to handle left recursion,
+although such left recursion can be manually transformed into a right recursion.
+
+Brzozowski derivatives are interesting but I have yet to find an understandable explanation for context-free grammars.
 * What is parsing?
 In 1550, "to parse" is "to state the parts of speech in a sentence".[fn::https://www.etymonline.com/word/parse]
 ** What is the problem?
