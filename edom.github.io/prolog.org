@@ -2742,6 +2742,7 @@ People hate Prolog because they are unfortunate enough to be taught by teachers 
 
 Those students grow up to be adults with atrophied minds condemned to mediocrity.
 * Rethinking module systems, especially of Prolog
+Miller 1986 \cite{miller1986theory} has what we want: implication as local scoping.
 ** What are the problems of existing module systems?
 A module system is often an afterthought to a core language.\cite{miller2012programming}
 
@@ -4133,4 +4134,8 @@ and =C-h f= or =M-x describe-function=.
 SBCL has =describe=.[fn::https://stackoverflow.com/questions/33707068/how-can-i-view-the-definition-of-a-function-in-lisp-sbcl]
 
 We can think of Prolog as Lisp with M-expression instead of S-expression.
+* Namespacing atoms
+When we write a predicate that deconstructs an instance of an algebraic data type, we don't want the constructors to be namespaced.
+
+When we use an atom as a name under the unique name assumption, in a multifile predicate, sometimes we want the atom to be namespaced.
 * Bibliography
