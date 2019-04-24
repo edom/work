@@ -1,5 +1,6 @@
 :- consult("debug.pro").
 :- include("imperative.pro").
+:- include("genmod.pro").
 
 :- debug(load). % DEBUG
 %:- debug(import_expansion). % DEBUG
@@ -20,10 +21,7 @@ load_source_once(file(Rel), Mod) :- !,
     absolute_file_name(Rel, Abs, [relative_to(Src)]),
     (module_file(Mod, Abs)
     ->  true
-    ;   gensym('genmod', Gen),
-        file_base_name(Abs, FileName),
-        file_name_extension(Base, _, FileName),
-        atomic_list_concat([Gen,'_',Base], Mod),
+    ;   generate_module_name(Abs, Mod),
         debug(load, "abs_load_once: loading file ~w into ~w", [Abs,Mod]),
         '@'(system:load_files(Abs,[module(Mod)]), Mod),
         assertz(module_file(Mod,Abs))
