@@ -1,4 +1,11 @@
-:- module(jvm_cls, [
+:- annotate(file,[
+    purpose-"read JVM class file",
+    tags-[
+        java
+        , jvm
+    ]
+]).
+:- exports([
     classfilepath_class/2
     , class//1
     , repeat//3
@@ -7,8 +14,11 @@
     , u2//1
     , u4//1
 ]).
-:- use_module(library(pure_input)).
-:- use_module('./ps1_bit.pro').
+:- use_module(library(pure_input),[
+    phrase_from_file/3
+]).
+:- use_module('./ps1_bit.pro',[
+]).
 /** <module> JVM class file?
 
 The main export of this module is classfilepath_class/2, powered by the DCG rule class//1.

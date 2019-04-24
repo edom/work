@@ -9,7 +9,7 @@ set -o nounset
 set -o pipefail
 
 main() {
-    swipl ${swipl_opts:-} -l boot/load.pro -- "$@"
+    swipl ${swipl_opts:-} -l boot/load0.pro -- "$@"
 }
 
 main "$@"
