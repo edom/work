@@ -16,8 +16,10 @@
 ]).
 :- use_module(library(pure_input),[
     phrase_from_file/3
+    , syntax_error/3
 ]).
 :- use_module('./ps1_bit.pro',[
+    bytesle_uint/2
 ]).
 /** <module> JVM class file?
 
@@ -173,7 +175,10 @@ DcgGoal(Out1), DcgGoal(Out2), ..., DcgGoal(OutCount), {Out = [Out1, Out2, ..., O
 @tbd Test this metapredicate with goals from different modules.
 */
 repeat(0, _, []) --> [].
-repeat(Count, Goal, [H|Out]) --> call(Goal,H), {N is Count-1}, repeat(N, Goal, Out).
+repeat(Count, Goal, [H|Out]) -->
+    call(Goal,H),
+    {N is Count-1},
+    repeat(N, Goal, Out).
 
 /** bytes(?Count, ?Bytes)// is nondet.
 
