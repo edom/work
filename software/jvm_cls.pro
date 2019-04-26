@@ -5,7 +5,7 @@
         , jvm
     ]
 ]).
-:- exports([
+:- export([
     classfilepath_class/2
     , class//1
     , repeat//3
