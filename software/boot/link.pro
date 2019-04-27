@@ -1,49 +1,71 @@
-:- annotate(file,[
-    problem-"meta-predicates not handled"
-]).
+link_unit_clause(F, A:-B, Y:-Z) :- !,
+    A = Y,
+    link_unit_goal(F,B,Z).
 
-link_unit_clause(F, A:-B, Y:-Z) :- !, A=Y, link_unit_goal(F,B,Z).
-link_unit_clause(_, A, Z) :- !, A=Z.
+link_unit_clause(_, A, Z) :- !,
+    A = Z.
 
-link_unit_goal(F,(A,B),(Y,Z)) :- !, link_unit_goal(F,A,Y), link_unit_goal(F,B,Z).
-link_unit_goal(F,(A;B),(Y;Z)) :- !, link_unit_goal(F,A,Y), link_unit_goal(F,B,Z).
+    :- annotate([
+        problem-"meta-predicates not handled"
+    ]).
 
-link_unit_goal(F,A,Z) :-
-    functor(A,Name,Arity),
-    file_predicate_origin(F,Name/Arity,local), !,
-    Z = A.
+    % ,/2 and ;/2 are actually system predicates.
 
-link_unit_goal(F,A,Z) :-
-    functor(A,Name,Arity),
-    file_predicate_origin(F,Name/Arity,module(M)),
-    unit_module(F,I),
-    !,
-    Z = '@'(M:A,I).
+    link_unit_goal(F, (A,B), (Y,Z)) :- !,
+        link_unit_goal(F, A, Y),
+        link_unit_goal(F, B, Z).
 
-link_unit_goal(F,A,_) :- !,
-    throw_error(cannot_resolve_goal(F,A)).
+    link_unit_goal(F, (A;B), (Y;Z)) :- !,
+        link_unit_goal(F, A, Y),
+        link_unit_goal(F, B, Z).
 
-    file_predicate_origin(F,P,local) :-
-        file_predicate(F,P).
+    link_unit_goal(F, Goal, Z) :-
+        functor(Goal, Name, Arity),
+        unit_predicate_module(F, Name/Arity, Exporter),
+        !,
+        get_unit_module_or(F, Importer, throw),
+        Z = '@'(Exporter:Goal, Importer).
 
-    file_predicate_origin(F,P,module(system)) :-
-        file_import(F,system,P).
+    link_unit_goal(F, A, _) :- !,
+        throw_error(cannot_link_goal(F,A)).
 
-    file_predicate_origin(F,P,module(user)) :-
-        file_import(F,user,P).
+        prolog:error_message(cannot_link_goal(F,G)) -->
+            {functor(G,N,A)},
+            [
+                "In file: ~w"-[F],nl,
+                "In goal: ~p"-[G],nl,
+                "The problem: Undefined predicate: ~p"-[N/A],nl,
+                "Solutions:",nl,
+                "- If you want to import ~p from somewhere else:"-[N/A],nl,
+                "  - Add an import like ~p in that file."-[:-import(somewhere,[N/A])],nl,
+                "- If you feel that this should not happen:",nl,
+                "  - If you believe that ~p is builtin:"-[N/A],nl,
+                "    - Add a default_import/2 clause in import.pro for ~p."-[N/A],nl,
+                "  - Otherwise:",nl,
+                "    - Check for mistakes in spelling, argument counts, and parentheses.",nl,
+                "    - Have you defined the predicate?"
+            ].
 
-    file_predicate_origin(F,P,module(E)) :-
-        file_import(F,module(E),P).
+    :- annotate([meaning="the Arg-th argument of Goal is module-sensitive"]).
+    module_sensitive(Goal, Arg) :-
+        predicate_property(Goal, meta_predicate(Meta)),
+        arg(Arg, Meta, M),
+        (integer(M) ; M = ':').
 
-    file_predicate_origin(F,P,module(E)) :-
-        file_import(F,file(FE),P),
-        unit_module(FE,E).
+:- annotate([purpose="compute the module of an unqualified goal in a unit"]).
+unit_predicate_module(Unit, Pred, Module) :-
+    unit_predicate(Unit, Pred),
+    get_unit_module_or(Unit, Module, throw).
 
-    prolog:error_message(cannot_resolve_goal(F,G)) -->
-        {functor(G,N,A)},
-        [
-            "In ~w:"-[F],nl,
-            "Cannot resolve goal: ~w"-[G],nl,
-            "because that file does not import that predicate.",nl,
-            "Possible fix: Add something like ~w in that file."-[:-import(somewhere,[N/A])]
-        ].
+unit_predicate_module(Unit, Pred, system) :-
+    unit_import(Unit, system, Pred).
+
+unit_predicate_module(Unit, Pred, user) :-
+    unit_import(Unit, user, Pred).
+
+unit_predicate_module(Unit, Pred, Mod) :-
+    unit_import(Unit, module(Mod), Pred).
+
+unit_predicate_module(Unit, Pred, Mod) :-
+    unit_import(Unit, unit(FE), Pred),
+    unit_module(FE, Mod).

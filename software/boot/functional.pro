@@ -1,5 +1,6 @@
 /*
-Similar to Haskell case expression.
+Similar to Haskell/ML case expression,
+Coq/Scheme match expression.
 
 Usage:
 

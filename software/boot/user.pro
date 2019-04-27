@@ -2,6 +2,17 @@
     purpose-"help people maintain big Prolog programs"
 ]).
 
+:- import(user,[
+    file_visited/1
+    , file_predicate/2
+    , object_annotation/2
+    , throw_error/1
+]).
+
+:- export([
+    interact/0
+]).
+
 :- section("browse, discover, find, inquire, navigate, search, query").
 
 object_purpose(Obj, Str) :-
@@ -20,20 +31,49 @@ object_tag(Object, Tag) :-
     obj_ann_1(Object, tags-Tags),
     member(Tag, Tags).
 
-/*
-object(Object) :-
-    setof(O, A^object_annotation(O,A), Os),
-    member(Object, Os).
-*/
-
 object(file(F)) :- file_visited(F).
 object(file_predicate(F,P)) :- file_predicate(F,P).
 
-:- annotate([problem-"this is like drinking from the firehose"]).
+:- end_section.
 
-browse :-
 
-    format("~`-t~40| problems~n",[]),
+:- section("text user interface").
+
+%%  command(?Context, ?Command, ?Goal)
+command(h, show_help).
+command(q, quit).
+command(sf, show_files).
+command(sp, show_predicates).
+command(sq, show_problems).
+command(sto, show_tagged_objects).
+
+show_help :-
+    forall(command(Term,Goal), (
+        % Requiring "~0|" after in format/2 after read/1 seems to be a programming error.
+        format("~0|~w~t~16|~w~n", [Term,Goal])
+    )).
+
+handle_command(Term) :-
+    command(Term, Goal)
+    ->  call(Goal)
+    ;   format("unknown command: ~w~n", [Term]).
+
+show_files :-
+    format("~0|~`-t~40| files~n",[]),
+    forall((object(Object), Object = file(File)), (
+        (object_purpose(Object, Purpose) -> true ; Purpose = ''),
+        format("~w~88|~w~n", [File,Purpose])
+    )).
+
+show_predicates :-
+    format("~0|~`-t~40| predicates~n",[]),
+    forall((object(Object), Object = file_predicate(_,_)), (
+        (object_purpose(Object, Purpose) -> true ; Purpose = ''),
+        format("~p~88|~w~n", [Object,Purpose])
+    )).
+
+show_problems :-
+    format("~0|~`-t~40| problems~n",[]),
     forall(object(Object), (
         object_problem(Object, _)
         ->  format("~p~n", [Object]),
@@ -41,21 +81,10 @@ browse :-
                 format("~4|- ~w~n", [Problem])
             )
         ;   true
-    )),
+    )).
 
-    format("~`-t~40| files~n",[]),
-    forall((object(Object), Object = file(_)), (
-        (object_purpose(Object, Purpose) -> true ; Purpose = ''),
-        format("~p~88|~w~n", [Object,Purpose])
-    )),
-
-    format("~`-t~40| predicates~n",[]),
-    forall((object(Object), Object = file_predicate(_,_)), (
-        (object_purpose(Object, Purpose) -> true ; Purpose = ''),
-        format("~p~88|~w~n", [Object,Purpose])
-    )),
-
-    format("~`-t~40| tagged objects~n",[]),
+show_tagged_objects :-
+    format("~0|~`-t~40| tagged objects~n",[]),
     forall(tag(Tag), (
         (tag_description(Tag,Description)
         ->  format("~w (~w)~n", [Tag,Description])
@@ -71,6 +100,24 @@ browse :-
         setof(T, O^object_tag(O,T), Tags),
         member(Tag, Tags).
 
+quit :- fail.
+
+interact :-
+    writeln("---------------------------------------- interactive prompt"),
+    writeln(""),
+    writeln("Enter 'h.' without quotes for help"),
+    writeln(""),
+    '$interact'.
+
+'$interact' :-
+    read(Command),
+    (Command == end_of_file
+    ->  true
+    ;   (handle_command(Command)
+        ->  '$interact'
+        ;   true
+        )
+    ).
 
 :- end_section.
 
@@ -79,49 +126,5 @@ browse :-
 
 tag_description(java,"Java programming language").
 tag_description(jvm,"Java Virtual Machine").
-
-:- end_section.
-
-
-:- section("experiment").
-
-my_call(E:G) :-
-    eval_mod_exp(E,M),
-    call(M:G).
-
-eval_mod_exp(file(Rel), Mod) :- !,
-    must_be(ground, Rel),
-    absolute_file_name(Rel, Abs),
-    (unit_module(Abs, Mod)
-    ->  true
-    ;   throw_error(file_not_loaded(Rel))).
-
-eval_mod_exp(Exp, _) :-
-    type_error(module_expression, Exp).
-
-:- end_section.
-
-
-:- section("test").
-
-dump :-
-    repeat, (
-        unit_term(F,I,T,_),
-        format("~`=t~30| ~w#~w~n",[F,I]),
-
-        format("~`-t~30| unit_term/4~n",[]),
-        portray_clause(T),
-
-        term_clause(T,C),
-        format("~`-t~30| term_clause/2~n",[]),
-        portray_clause(C),
-
-        link_unit_clause(F,C,L),
-        format("~`-t~30| link_unit_clause/3~n",[]),
-        portray_clause(L),
-
-        fail
-    ;   !
-    ).
 
 :- end_section.
