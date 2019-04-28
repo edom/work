@@ -1,3 +1,13 @@
+/*
+A clause is a goal or a term like Head :- Body.
+
+A goal is something like a:b(c,d) or a(b,c).
+
+A pred, a predicate reference, or a pred_ref,
+is a Name/Arity (unqualified predicate reference)
+or a Module:Name/Arity (qualified predicate reference).
+*/
+
 :- section("term to clause").
 
     :- annotate([purpose="translate a read term to a clause, or fail"]).
@@ -9,6 +19,14 @@
     clause_head(A :- _, Z) :- !, A = Z.
     clause_head(A, Z) :- !, A = Z.
 
+    goal_pred(Module:Func, Pred) :- !,
+        Pred = Module:Name/Arity,
+        functor(Func, Name, Arity).
+
+    goal_pred(Goal, Pred) :- !,
+        Pred = Name/Arity,
+        functor(Goal, Name, Arity).
+
 :- end_section.
 
 
@@ -19,7 +37,7 @@
         call(Z).
 
     dcg_clause(A --> B, Y :- Z) :- !,
-        add_args(A,[I,J],Y),
+        add_goal_args(A,[I,J],Y),
         dcg_goal(B,I,J,Z).
 
     dcg_goal(A,I,K,Z) :- var(A), !,
@@ -51,11 +69,25 @@
         dcg_goal(B,I,J,Z).
 
     dcg_goal(A,I,K,Z) :- !,
-        add_args(A,[I,K],Z).
+        add_goal_args(A,[I,K],Z).
 
-    add_args(A,Args,Z) :-
+    %%  add_goal_args(+Goal, +ExtraArgs, -GoalWithExtraArgs) is det.
+    %
+    %   Goal may be module-qualified.
+    %
+    %   ExtraArgs is a list.
+
+    add_goal_args(A, _, _) :- var(A), !, instantiation_error(A).
+    add_goal_args(_, A, _) :- var(A), !, instantiation_error(A).
+
+    add_goal_args(A, Args, Z) :-
+        A = Module:B, !,
+        Z = Module:Y,
+        add_goal_args(B, Args, Y).
+
+    add_goal_args(A, Args, Z) :- !,
         A =.. List1,
-        append(List1,Args,List2),
+        append(List1, Args, List2),
         Z =.. List2.
 
 :- end_section.

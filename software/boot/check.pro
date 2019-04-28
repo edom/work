@@ -1,35 +1,40 @@
-my_check :-
-    forall(unit_error(U,E), print_message(error,unit_error(U,E))).
+:- section("check").
 
-unit_error(U, undefined_predicate(P)) :-
-    unit(U),
-    setof(P, unit_goalpred(U,P), Ps),
-    member(P, Ps),
-    \+ unit_predicate_module(U,P,_).
+    my_check :-
+        forall(unit(Unit),
+            print_unit_errors(Unit)).
 
-unit_error(I, importing_unexported_predicate(E,P)) :-
-    object_import(I,E,P),
-    \+ object_export(E,P).
+    print_unit_errors(Unit) :-
+        forall(unit_error(Unit,Error), (
+            print_message(error, Error),
+            nl
+        )).
 
-    unit_goalpred(U, N/A) :-
-        unit_goal(U, G),
-        functor(G, N, A).
+    unit_error(U, unit_calls_undefined_predicate(U,H,P,O)) :-
+        unit(U),
+        setof(e(H,P,O), unit_goalpred(U,H,P,O), Ps),
+        member(e(H,P,O), Ps),
+        \+ unit_predicate_module(U, P, _).
 
-    unit_goal(U, G) :-
-        unit_clause(U, _, _ :- B),
-        body_goal(B, G),
-        must_be(nonvar, G). % wrap the variable in call/1 first
+    unit_error(I, unit_imports_unexported_predicate(I,E,P)) :-
+        object_import(I,E,P),
+        \+ object_export(E,P).
 
-        body_goal((A,B), Z) :- !, (body_goal(A,Z) ; body_goal(B,Z)).
-        body_goal((A;B), Z) :- !, (body_goal(A,Z) ; body_goal(B,Z)).
-        body_goal(A, Z) :- !, A = Z.
+        unit_goalpred(Unit, Head, Pred, Origin) :-
+            unit_goal(Unit, Head, Goal, Origin),
+            goal_pred(Goal, Pred).
 
-prolog:message(unit_error(U,undefined_predicate(P))) -->
-    ["In unit ~w: Undefined predicate: ~w"-[U,P]].
+        unit_goal(Unit, Head, Goal, Origin) :-
+            unit_clause(Unit, _, Head :- Body, Origin),
+            body_goal(Body, Goal),
+            (var(Goal) ->
+                throw_error(unit_has_variable_goal_in_clause_body(Unit,Head,Goal,Origin))
+            ;   true
+            ).
 
-prolog:message(unit_error(I,importing_unexported_predicate(E,P))) --> [
-    "In ~p:"-[I],nl,
-    "Error: Importing unexported predicate",nl,
-    "Predicate: ~p"-[P],nl,
-    "Exporter: ~p"-[E]
-].
+            body_goal(A, Z) :- var(A), !, A = Z.
+            body_goal((A,B), Z) :- !, (body_goal(A,Z) ; body_goal(B,Z)).
+            body_goal((A;B), Z) :- !, (body_goal(A,Z) ; body_goal(B,Z)).
+            body_goal(A, Z) :- !, A = Z.
+
+:- end_section.

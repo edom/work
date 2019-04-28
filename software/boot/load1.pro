@@ -9,6 +9,11 @@
     my_consult/1
 ]).
 
+:- import(system,[
+    nb_current/2
+    , nb_setval/2
+]).
+
 :- use_module(library(gensym),[
     gensym/2
 ]).
@@ -17,77 +22,31 @@
 ]).
 
 :- include("functional.pro").
+:- include("database.pro").
 :- include("genmod.pro").
 :- include("read.pro").
 :- include("clause.pro").
-:- include("swi.pro").
 :- include("check.pro").
 :- include("import.pro").
 :- include("link.pro").
+:- include("troubleshoot.pro").
 
+/*
+This diagram describes how my_consult/1 works:
 
-:- section("database").
+                             read_term/2
+    file (in storage medium) ----------> file (parsed)
 
-    :- annotate(relation(unit_module/2),[cardinality=1:1]).
+         inline include/1 directives
+    file --------------------------> unit
 
-    :- dynamic file_visited/1. % File
-    :- dynamic file_term/3. % File, Index, Term
-    :- dynamic unit/1. % File
-    :- dynamic unit_linked/1. % File
-    :- dynamic unit_module/2. % File, Module
-    :- dynamic unit_term/3. % File, Index, Term
-    :- dynamic unit_import_list/3. % Importer, Exporter, Imports
-    :- dynamic unit_export_list/2. % Exporter, Exports
-    :- dynamic object_annotation/2. % Object, Annotation
+         link clauses, qualify goals
+    unit --------------------------> module
 
-    file_predicate(File, Pred) :-
-        setof(P, file_pred(File,P,[]), Ps),
-        member(Pred, Ps).
+           assert linked clauses
+    module --------------------> predicates you can call using my_call/1
 
-        file_pred(F, N/A, Opts) :-
-            must_be(ground, Opts),
-            file_term(F, _, T),
-            case(T,[
-                (:- dynamic(N/A)) -> true,
-                (:- include(That)) -> (
-                    member(follow_includes(true), Opts)
-                    ->  file_pred(That, N/A, Opts)
-                    ;   true
-                ),
-                _ -> (
-                    term_clause(T, C),
-                    clause_head(C, H),
-                    functor(H, N, A)
-                )
-            ]).
-
-    unit_predicate(Unit, Pred) :-
-        unit(Unit),
-        setof(P, file_pred(Unit,P,[follow_includes(true)]), Ps),
-        member(Pred, Ps).
-
-    get_unit_module_or(Unit, Module, Alt) :-
-        unit_module(Unit, Module)
-        ->  true
-        ;   case(Alt,[
-                generate -> (
-                    generate_module_name(Unit, Module),
-                    assertz(unit_module(Unit,Module)),
-                    initialize_module(Module)
-                ),
-
-                throw ->
-                    throw_error(unit_module_failed(Unit)),
-
-                fail ->
-                    fail,
-
-                _ ->
-                    throw_error(invalid_alternative(Alt))
-            ]).
-
-:- end_section.
-
+*/
 
 :- section("unit load context").
 
@@ -104,10 +63,12 @@
         context_module(Context, Module),
         context_term_count(Context, 0).
 
+    origin(A) :- functor(A,origin,1).
+    origin_file(A,B) :- origin(A), arg(1,A,B).
+
 :- end_section.
 
-
-% -------------------- consult
+:- section("consult").
 
 :- annotate([
     purpose-"read, load, and link; like consult/1"
@@ -115,6 +76,10 @@
 ]).
 my_consult(Path) :- my_consult(Path, []).
 
+:- annotate([
+    todo(production, "implement conditional compilation")
+    , todo(production, "remove $no_link hack")
+]).
 my_consult(Path, Opts) :-
     must_be(ground, Opts),
     read_file_abs(Path, File, []),
@@ -127,24 +92,24 @@ my_consult(Path, Opts) :-
         context_new(Unit, Module, Context),
         do_unit_include(Context, Unit),
         interpret_directives(Context),
+        %   The '$no_link' option is an internal hack used by my_consult/1
+        %   to load its own source code without falling into an infinite loop.
+        %
+        %   A better solution is conditional compilation.
         (member('$no_link', Opts)
         ->  true
         ;   (unit_error(Unit, _)
-            ->  forall(unit_error(Unit, Error),
-                    print_message(error, unit_error(Unit,Error))
-                )
-            ;   actuate_unit(Context),
+            ->  print_unit_errors(Unit)
+            ;   link_unit(Context),
                 assertz(unit_linked(Unit))
             )
         )
     ).
 
-    assertz_once(G) :-
-        must_be(ground, G),
-        call(G) -> true ; assertz(G).
-
-
-    :- annotate([purpose-"collect annotations, expand includes, and populate unit_term/3"]).
+    :- annotate([
+        purpose = "collect annotations, expand includes, and populate unit_term/4"
+        , todo(production, "limit recursion depth")
+    ]).
     do_unit_include(Context, File) :-
         forall(file_term(File, FIndex, Term), (
             case(Term,[
@@ -184,7 +149,8 @@ my_consult(Path, Opts) :-
                     context_term_count(Context, Count),
                     UIndex is Count+1,
                     nb_set_context_term_count(Context, UIndex),
-                    assertz(unit_term(Unit,UIndex,Term))
+                    origin_file(Origin, File),
+                    assertz(unit_term(Unit,UIndex,Term,Origin))
                 )
             ])
         )).
@@ -200,52 +166,25 @@ my_consult(Path, Opts) :-
         Object = file_predicate(File,Name/Arity),
         functor(Head,Name,Arity).
 
-:- annotate([
-    purpose-"populate file_term/3"
-    , problem-"may leak streams; how portable is setup_call_cleanup/3?"
-]).
-read_file_abs(Path, File, Opts) :-
-    absolute_file_name(Path, File, Opts),
-    (file_visited(File)
-    ->  true
-    ;   assertz(file_visited(File)),
-        assert_default_imports(File),
-        open(File, read, Stream, [eof_action(eof_code)]),
-        read_stream(File, Stream, 1, _),
-        close(Stream)
-    ).
-
-    read_stream(File, Stream, Index, Index2) :-
-        read_term_1(Stream, OptTerm),
-        case(OptTerm,[
-            some(Term) -> (
-                assertz(file_term(File,Index,Term)),
-                Index1 is Index+1,
-                read_stream(File, Stream, Index1, Index2)
-            ),
-            none -> (
-                Index2 = Index
-            )
-        ]).
-
-actuate_unit(Context) :-
+:- annotate([purpose="assert the linked clauses into the Prolog interpreter"]).
+link_unit(Context) :-
     context_unit(Context, Unit),
     context_module(Context, Module),
-    forall(unit_clause_linked(Unit, _, Linked),
-        assert_2(Module, Linked)
+    forall(unit_clause_linked(Unit, _, Linked, _),
+        assertz_into(Module, Linked)
     ).
 
-    unit_clause(Unit, Index, Clause) :-
+    unit_clause(Unit, Index, Clause, Origin) :-
         must_be(ground, Unit),
-        findall(C, (
-            unit_term(Unit, Index, Term),
+        findall(C-Origin, (
+            unit_term(Unit, Index, Term, Origin),
             term_clause(Term, C)
         ), Clauses),
-        nth1(Index, Clauses, Clause).
+        nth1(Index, Clauses, Clause-Origin).
 
-    unit_clause_linked(Unit, Index, Linked) :-
-        unit_clause(Unit, Index, Clause),
-        link_unit_clause(Unit, Clause, Linked).
+    unit_clause_linked(Unit, Index, Linked, Origin) :-
+        unit_clause(Unit, Index, Clause, Origin),
+        link_clause(Unit, Origin, Clause, Linked).
 
 % -------------------- load
 
@@ -255,8 +194,7 @@ actuate_unit(Context) :-
 ]).
 interpret_directives(Context) :-
     context_unit(Context, Unit),
-    repeat, (
-        unit_term(Unit, _, Term),
+    forall(unit_term(Unit, _, Term, _),
         case(Term,[
             (:- Dir) -> case(Dir,[
                 dynamic(_) -> (
@@ -282,10 +220,10 @@ interpret_directives(Context) :-
             ]),
             _ ->
                 true
-        ]),
-        fail
-    ;   !
+        ])
     ).
+
+:- end_section.
 
 % -------------------- directive
 
@@ -335,61 +273,6 @@ throw_file_read_error(File, Error) :-
     throw_error(read_error(File,Error)).
 
 
-:- section("experiment").
-
-my_call(E:G) :-
-    eval_mod_exp(E,M),
-    call(M:G).
-
-eval_mod_exp(unit(Rel), Mod) :- !,
-    must_be(ground, Rel),
-    absolute_file_name(Rel, Abs),
-    (file_visited(Abs) -> true ; throw_error(file_not_visited(Rel))),
-    (unit_linked(Abs) -> true ; throw_error(unit_not_linked(Rel))),
-    get_unit_module_or(Abs, Mod, throw).
-
-eval_mod_exp(Exp, _) :-
-    type_error(module_expression, Exp).
-
-:- end_section.
-
-
-:- section("find things and show their sources").
-
-list(A) :- var(A), !,
-    writeln("
-usage:
-
-    list(Name/Arity)
-    list(unit(Path))
-        where Path may be relative
-").
-
-list(Name/Arity) :- !,
-    forall((
-        file_term_expanded(File, Index, Term),
-        term_clause(Term, Clause),
-        clause_head(Clause, Head),
-        functor(Head, Name, Arity)
-        ), (
-        format("% ~w#~w~n", [File,Index]),
-        portray_clause(Clause)
-    )).
-
-list(unit(Reln)) :- !,
-    get_unit(Reln, Unit),
-    forall(unit_clause_linked(Unit, _, Cla),
-        portray_clause(Cla)
-    ).
-
-    get_unit(R, A) :-
-        must_be(ground, R),
-        absolute_file_name(R, A),
-        (unit(A) -> true ; throw_error(get_unit(R))).
-
-:- end_section.
-
-
 :- section("term expansion and goal expansion").
 
     my_expand_term(A, Z) :- var(A), !, A = Z.
@@ -426,8 +309,15 @@ test :-
 
 
 load_this_file :-
+    nb_current(my_loader_loaded, _)
+    ->  true
+    ;   nb_setval(my_loader_loaded, true),
+        get_prolog_current_file(File),
+        my_consult(File).
+
+get_prolog_current_file(File) :-
     prolog_load_context(file, File)
-    ->  my_consult(File, ['$no_link'])
+    ->  true
     ;   throw_error(must_be_called_from_directive).
 
 % Error.

@@ -6,6 +6,8 @@
 
     default_import(system,[
         (!)/0
+        , (,)/2
+        , (;)/2
         , (->)/2
         , (<)/2
         , (=)/2
@@ -21,6 +23,7 @@
         , assertz/1
         , atom/1
         , atomic_list_concat/2
+        , between/3
         , call/1
         , call/2
         , call/3
@@ -30,6 +33,7 @@
         , fail/0
         , false/0
         , forall/2
+        , foreach/2
         , format/2
         , functor/3
         , ground/1
@@ -38,8 +42,10 @@
         , is_list/1
         , length/2
         , nb_setarg/3
+        , nl/0
         , nonvar/1
         , number/1
+        , once/1
         , open/4
         , read/1
         , read/2
@@ -74,7 +80,10 @@
 
     default_import(module(lists),[
         append/3
+        , findall/3
         , member/2
+        , nth0/3
+        , nth1/3
     ]).
     default_import(module(error),[
         domain_error/2
@@ -82,16 +91,20 @@
         , type_error/2
     ]).
 
-    :- section("SWI-Prolog-specific").
+    :- section("our interface with the underlying Prolog interpreter").
 
-        default_import(system,[
-            (@)/2
-            , add_import_module/3
-            , delete_import_module/2
-            , module_property/2
+        default_import(user,[
+            assertz_into/2
+            , goal_arg_meta/3
+            , module_export/2
+            , use_module_4/4
         ]).
+
         default_import(user,[
             debug/3
+            , print_message/2
+            , prolog_load_context/2
+            , stream_property/2
         ]).
 
     :- end_section.
@@ -133,8 +146,7 @@
         current_predicate(user:Pred).
 
     object_export(module(M),Pred) :-
-        module_property(M,exports(Es)),
-        member(Pred,Es).
+        module_export(M, Pred).
 
     object_export(unit(E),Pred) :-
         unit_export(E,Pred).
