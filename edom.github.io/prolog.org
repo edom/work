@@ -1398,6 +1398,20 @@ But that is not all; types can be prorogued too.
 ** Logtalk vs library(record)?
 SWI-Prolog library(record)[fn::http://www.swi-prolog.org/pldoc/man?section=record]
 is similar to Racket struct[fn::https://docs.racket-lang.org/reference/define-struct.html].
+* Logtalk
+The problem with Logtalk: /too much documentation/,
+and unclear which one is authoritative;
+no authoritative documentation for onboarding new users.
+Two tutorials and one handbook[fn::https://logtalk.org/documentation.html],
+and a quick start and a tutorial[fn::https://logtalk.org/guides.html].
+Which one am I supposed to follow?
+More text does not mean better documentation.
+** How do I start using Logtalk?
+Git clone[fn::https://github.com/LogtalkDotOrg/logtalk3].
+
+Set up bashrc.
+
+swilgt.sh[fn::https://logtalk.org/running_developer_versions.html]
 * Ugly things, awkward squads, states and errors
 Simon Peyton-Jones \cite{Peytonjones2000TacklingTA} calls these the "awkward squad": input/output, concurrency, exceptions, and foreign-language calls.
 ** Effects, side-effects, and errors
