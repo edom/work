@@ -9,7 +9,9 @@ set -o nounset
 set -o pipefail
 
 main() {
-    swipl ${swipl_opts:-} -l boot/load0.pro -- "$@"
+    local script_dir="$(dirname "$0")"
+    export my_prolog_home="$(cd "$script_dir" && pwd)"
+    swipl ${swipl_opts:-} -l "$my_prolog_home/boot/load0.pro" -- "$@"
 }
 
 main "$@"

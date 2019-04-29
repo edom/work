@@ -139,9 +139,15 @@ my_consult(Path, Opts) :-
                     term_object(File, Term1, Object),
                     annotate_object(Object, Ann)
                 ),
-
+                (:- dynamic(Name/Arity)) -> (
+                    assertz_once(file_predicate(File, Name/Arity))
+                ),
+                (:- dynamic(A)) -> (
+                    throw_error(syntax_error(Term))
+                ),
                 (:- include(Rel)) -> (
                     read_file_abs(Rel, Abs, [relative_to(File)]),
+                    assertz_once(file_include(File, Abs)),
                     do_unit_include(Context, Abs)
                 ),
                 _ -> (
@@ -150,6 +156,12 @@ my_consult(Path, Opts) :-
                     UIndex is Count+1,
                     nb_set_context_term_count(Context, UIndex),
                     origin_file(Origin, File),
+                    (   term_clause(Term, Clause),
+                        clause_head(Clause, Head),
+                        goal_pred(Head, Pred)
+                    ->  assertz_once(file_predicate(File, Pred))
+                    ;   true
+                    ),
                     assertz(unit_term(Unit,UIndex,Term,Origin))
                 )
             ])

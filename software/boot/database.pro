@@ -7,8 +7,16 @@
 
     :- annotate(relation(unit_module/2),[cardinality=1:1]).
 
+    %%  file_predicate(?File, ?Pred) is nondet.
+
+    :- annotate(predicate(file_predicate/2),[
+        meaning = "File defines NameArity"
+    ]).
+
     :- dynamic file_visited/1. % File
     :- dynamic file_term/3. % File, Index, Term
+    :- dynamic file_predicate/2. % File, NameArity
+    :- dynamic file_include/2. % File, Include
     :- dynamic unit/1. % File
     :- dynamic unit_linked/1. % File
     :- dynamic unit_module/2. % File, Module
@@ -21,44 +29,16 @@
 
 :- section("derived relations").
 
-    %%  file_predicate(?File,-Pred) is nondet.
-
-    :- annotate([
-        meaning = "File defines Pred"
-    ]).
-
-    % TODO: Speed this up: Turn this into a dynamic predicate.
-    file_predicate(File, Pred) :-
-        (var(File) -> true ; F = File),
-        setof(F-P, file_pred(F,P,[]), Ps),
-        member(File-Pred, Ps).
-
-        file_pred(File, Pred, Opts) :-
-            must_be(ground, Opts),
-            file_term(File, _, Term),
-            case(Term,[
-                (:- dynamic(N/A)) -> (
-                    Pred = N/A
-                ),
-                (:- include(That)) -> (
-                    member(follow_includes(true), Opts)
-                    ->  absolute_file_name(That, Abs, [relative_to(File)]),
-                        file_pred(Abs, Pred, Opts)
-                ),
-                _ -> (
-                    term_clause(Term, Clause),
-                    clause_head(Clause, Head),
-                    goal_pred(Head, Pred)
-                )
-            ]).
-
     unit_predicate(Unit, Pred) :-
         unit(Unit),
-        (var(Pred) ->
-            setof(P, file_pred(Unit,P,[follow_includes(true)]), Ps),
-            member(Pred, Ps)
-        ;   once(file_pred(Unit, Pred, [follow_includes(true)]))
-        ).
+        file_predicate_trans(Unit, Pred).
+
+        file_predicate_trans(File, Pred) :-
+            file_predicate(File, Pred).
+
+        file_predicate_trans(File, Pred) :-
+            file_include(File, That),
+            file_predicate(That, Pred).
 
     get_unit_module_or(Unit, Module, Alt) :-
         unit_module(Unit, Module)

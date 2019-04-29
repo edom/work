@@ -42,24 +42,26 @@ term_expansion(:- Dir, []) :- ignored_directive(Dir).
 
 % -------------------- load files specified on command-line arguments
 
+get_env_or_throw(Key, Val) :-
+    getenv(Key, Val)
+    ->  true
+    ;   throw(error(environment_not_defined(Key))).
+
+load_1 :-
+    get_env_or_throw(my_prolog_home, Dir),
+    absolute_file_name("boot/load1.pro", Abs, [relative_to(Dir)]),
+    consult(Abs).
+
 load_from_argv :-
-    consult("load1.pro"),
+    load_1,
     current_prolog_flag(argv, Argv),
     forall(member(Arg, Argv), (
-        absolute_file_name(Arg, Abs),
+        absolute_file_name(Arg, Abs), % relative to working directory
         my_consult(Abs)
     )).
 
-% for profiling
-
-profile_main :-
-    consult("boot/load1.pro"),
-    current_prolog_flag(argv, Argv),
-    forall(
-        member(Arg, Argv),
-        % my_call(unit("boot/load1.pro"):my_consult(Arg))
-        my_consult(Arg)
-    ).
+do_profile :-
+    profile(load_from_argv).
 
 :- if(getenv('PROFILE','1')).
 :- else.
