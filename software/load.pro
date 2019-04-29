@@ -1,14 +1,18 @@
-should_load_path(Path) :- true
-    , file_base_name(Path, Name)
-    , dif(Name, 'load.pro').
+:- import(user,[
+    expand_file_name/2
+    , my_consult/1
+]).
 
-paths_to_load(Paths) :- true
-    , expand_file_name('*.pro', List)
-    , findall(Path, (member(Path, List), should_load_path(Path)), Paths)
-    .
+should_load_path(Path) :-
+    file_base_name(Path, Name),
+    Name \= 'load.pro'.
 
-load_my_files :- true
-    , paths_to_load(Paths)
-    , load_files(Paths, [imports([])]).
+paths_to_load(Paths) :-
+    expand_file_name('*.pro', List),
+    findall(Path, (member(Path, List), should_load_path(Path)), Paths).
 
-:- load_my_files.
+load_my_files :-
+    paths_to_load(Paths),
+    my_consult(Paths).
+
+% :- load_my_files.
