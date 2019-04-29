@@ -44,12 +44,14 @@
 
         list(Name/Arity) :- !,
             forall((
-                file_term_expanded(File, Index, Term),
+                file_term(File, Index, Term),
                 term_clause(Term, Clause),
                 clause_head(Clause, Head),
                 functor(Head, Name, Arity)
                 ),(
-                format("% file ~w#~w~n", [File,Index]),
+                format("% term in file ~w#~w~n", [File,Index]),
+                portray_clause(Term),
+                format("% clause in file ~w#~w~n", [File,Index]),
                 portray_clause(Clause)
             )),
             forall((
@@ -58,9 +60,9 @@
                 clause_head(Clause, Head),
                 functor(Head, Name, Arity)
                 ),(
-                format("% unit ~w#~w~n", [Unit,Index]),
+                format("% clause in unit ~w#~w~n", [Unit,Index]),
                 portray_clause(Clause),
-                format("% linked unit ~w#~w~n", [Unit,Index]),
+                format("% linked clause in unit ~w#~w~n", [Unit,Index]),
                 (link_clause(Unit, Origin, Clause, Linked)
                 ->  portray_clause(Linked)
                 ;   format("% linking failed", [])

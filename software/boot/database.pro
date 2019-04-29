@@ -7,14 +7,23 @@
 
     :- annotate(relation(unit_module/2),[cardinality=1:1]).
 
+    :- annotate(predicate(file_term/3),[
+        meaning = "The Index-th read term from File is Term (original term after read before any expansion)"
+    ]).
+
     %%  file_predicate(?File, ?Pred) is nondet.
 
     :- annotate(predicate(file_predicate/2),[
         meaning = "File defines NameArity"
     ]).
 
+    %   We make file_term_expanded/3 dynamic because
+    %   we assume that repeating term expansion
+    %   is more time-expensive than space-expensive.
+
     :- dynamic file_visited/1. % File
     :- dynamic file_term/3. % File, Index, Term
+    :- dynamic file_term_expanded/3. % File, Index, Term
     :- dynamic file_predicate/2. % File, NameArity
     :- dynamic file_include/2. % File, Include
     :- dynamic unit/1. % File
@@ -44,12 +53,6 @@
         unit_module(Unit, Module)
         ->  true
         ;   case(Alt,[
-                generate -> (
-                    generate_module_name(Unit, Module),
-                    assertz(unit_module(Unit,Module)),
-                    initialize_module(Module)
-                ),
-
                 throw ->
                     throw_error(unit_module_failed(Unit)),
 

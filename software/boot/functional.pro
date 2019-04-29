@@ -21,12 +21,34 @@ Example:
         some(A) -> format("some ~w~n",[A])
     ])
 */
+
+%   Keep case/2 and expand_case/2 consistent with each other.
+
+:- meta_predicate case(?,:).
+
 case(Exp, _) :- var(Exp), !, instantiation_error(Exp).
 case(_, Cases) :- var(Cases), !, instantiation_error(Cases).
-case(Exp, []) :- !, throw(error(unhandled_case(Exp),_)).
-case(_, [Case|_]) :- var(Case), !, instantiation_error(Case).
-case(_, [_|Rest]) :- var(Rest), !, instantiation_error(Rest).
-case(Exp, [Case|Rest]) :-
+case(_, _:Cases) :- var(Cases), !, instantiation_error(Cases).
+case(Exp, _:[]) :- !, throw(error(unhandled_case(Exp),_)).
+case(_, _:[Case|_]) :- var(Case), !, instantiation_error(Case).
+case(_, _:[_|Rest]) :- var(Rest), !, instantiation_error(Rest).
+
+case(Exp, Mod:[Case|Rest]) :-
     Case = (Exp -> Body)
-    ->  call(Body)
-    ;   case(Exp, Rest).
+    ->  call(Mod:Body)
+    ;   case(Exp, Mod:Rest).
+
+case(_, Cases) :- !, type_error(case_bodies, Cases).
+
+expand_case(case(Exp,[Pat->Bod|Alt]), Z) :- !,
+    Z = (Exp=Pat -> Bod ; ExpAlt),
+    expand_case(case(Exp,Alt), ExpAlt).
+
+expand_case(case(_,[Pat|_]), _) :- !,
+    throw(error(invalid_case_element(Pat),_)).
+
+expand_case(case(Exp,[]), Z) :- !,
+    Z = throw(error(unhandled_case(Exp),_)).
+
+expand_case(case(A,B), _) :- !,
+    throw(error(invalid_case(case(A,B)),_)).

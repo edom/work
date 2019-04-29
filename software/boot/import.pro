@@ -91,24 +91,6 @@
         , type_error/2
     ]).
 
-    :- section("our interface with the underlying Prolog interpreter").
-
-        default_import(user,[
-            assertz_into/2
-            , goal_arg_meta/3
-            , module_export/2
-            , use_module_4/4
-        ]).
-
-        default_import(user,[
-            debug/3
-            , print_message/2
-            , prolog_load_context/2
-            , stream_property/2
-        ]).
-
-    :- end_section.
-
     :- section("our extensions").
 
         default_import(user,[   % our extensions

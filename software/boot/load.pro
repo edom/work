@@ -1,3 +1,5 @@
+% Deprecated: Use load0.pro instead.
+
 :- consult("debug.pro").
 :- include("imperative.pro").
 :- include("genmod.pro").

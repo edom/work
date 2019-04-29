@@ -3,14 +3,16 @@
 :- debug(load_unit_into_module). % DEBUG
 %:- debug(import_expansion). % DEBUG
 
-ignored_directive(annotate(_)).
-ignored_directive(annotate(_,_)).
-ignored_directive(export(_)).
-ignored_directive(import(_,_)).
-ignored_directive(section(_)).
-ignored_directive(end_section).
+:- include("functional.pro").
 
 term_expansion(:- Dir, []) :- ignored_directive(Dir).
+
+    ignored_directive(annotate(_)).
+    ignored_directive(annotate(_,_)).
+    ignored_directive(export(_)).
+    ignored_directive(import(_,_)).
+    ignored_directive(section(_)).
+    ignored_directive(end_section).
 
 % -------------------- SWI-Prolog-specific predicates
 
@@ -20,8 +22,10 @@ term_expansion(:- Dir, []) :- ignored_directive(Dir).
         delete_import_module(Module, user),
         add_import_module(Module, system, end).
 
+    :- meta_predicate assertz_into(?,?).
+
     assertz_into(Module, Clause) :-
-        '@'(system:assertz(Clause), Module).
+        assertz(Module:Clause).
 
     use_module_4(Importer, ExpRel, ExpAbs, ExpMod) :-
         '@'(system:use_module(ExpAbs), Importer),
@@ -47,10 +51,24 @@ get_env_or_throw(Key, Val) :-
     ->  true
     ;   throw(error(environment_not_defined(Key))).
 
+/*
+- load0.pro loads file load1.pro to module tmp_load.
+- load1.pro loads itself again into a genmod (generated module).
+- Do not use tmp_load after load1.pro has loaded itself into a genmod.
+*/
 load_1 :-
     get_env_or_throw(my_prolog_home, Dir),
     absolute_file_name("boot/load1.pro", Abs, [relative_to(Dir)]),
-    consult(Abs).
+    consult(tmp_load:Abs),
+    tmp_load:unit_module(Abs, Mod),
+    forall(imported_from_load1(Pred), user:import(Mod:Pred)).
+
+    imported_from_load1(A) :-
+        member(A,[
+            my_call/1
+            , my_consult/1
+            , list/1
+        ]).
 
 load_from_argv :-
     load_1,

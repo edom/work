@@ -9,10 +9,28 @@
     my_consult/1
 ]).
 
-:- import(system,[
-    nb_current/2
-    , nb_setval/2
-]).
+:- section("our interface with the underlying Prolog interpreter").
+
+    :- import(user,[
+        assertz_into/2
+        , goal_arg_meta/3
+        , initialize_module/1
+        , module_export/2
+        , use_module_4/4
+    ]).
+
+    :- import(user,[
+        debug/3
+        , (dynamic)/1
+        , (meta_predicate)/1
+        , nb_current/2
+        , nb_setval/2
+        , print_message/2
+        , prolog_load_context/2
+        , stream_property/2
+    ]).
+
+:- end_section.
 
 :- use_module(library(gensym),[
     gensym/2
@@ -84,14 +102,18 @@ my_consult(Path, Opts) :-
     must_be(ground, Opts),
     read_file_abs(Path, File, []),
     File = Unit,
-    assertz_once(unit(Unit)),
     (unit_linked(Unit)
     ->  true
-    ;   get_unit_module_or(Unit, Module, generate),
+    ;   assertz_once(unit(Unit)),
+        (   unit_module(Unit, Module)
+        ->  true
+        ;   generate_module_name(Unit, Module),
+            initialize_module(Module),
+            assertz(unit_module(Unit, Module))
+        ),
         debug(load_unit_into_module, "my_consult: loading unit ~w into ~w", [Unit,Module]),
         context_new(Unit, Module, Context),
         do_unit_include(Context, Unit),
-        interpret_directives(Context),
         %   The '$no_link' option is an internal hack used by my_consult/1
         %   to load its own source code without falling into an infinite loop.
         %
@@ -107,11 +129,15 @@ my_consult(Path, Opts) :-
     ).
 
     :- annotate([
-        purpose = "collect annotations, expand includes, and populate unit_term/4"
+        purpose = "collect annotations, expand includes, process directives, and populate some dynamic predicates"
+        , problem = "should initialization/2 be handled? should loading a file execute arbitrary code?"
+        , problem = "meta-predicates are not handled correctly"
         , todo(production, "limit recursion depth")
     ]).
     do_unit_include(Context, File) :-
-        forall(file_term(File, FIndex, Term), (
+        context_unit(Context, Unit),
+        context_module(Context, Module),
+        forall(file_term_expanded(File, FIndex, Term), (
             case(Term,[
                 /*
                     annotate(file,Ann) means annotate the file that contains the source code.
@@ -135,23 +161,48 @@ my_consult(Path, Opts) :-
 
                 (:- annotate(Ann)) -> (
                     FIndex1 is FIndex+1,
-                    file_term(File, FIndex1, Term1),
+                    file_term_expanded(File, FIndex1, Term1),
                     term_object(File, Term1, Object),
                     annotate_object(Object, Ann)
                 ),
+
                 (:- dynamic(Name/Arity)) -> (
-                    assertz_once(file_predicate(File, Name/Arity))
+                    assertz_once(file_predicate(File, Name/Arity)),
+                    dynamic(Module:Name/Arity)
                 ),
-                (:- dynamic(A)) -> (
-                    throw_error(syntax_error(Term))
-                ),
+                (:- dynamic(_)) ->
+                    throw_error(syntax_error(Term)),
+
+                (:- meta_predicate(Head)) ->
+                    meta_predicate(Module:Head),
+
                 (:- include(Rel)) -> (
                     read_file_abs(Rel, Abs, [relative_to(File)]),
                     assertz_once(file_include(File, Abs)),
                     do_unit_include(Context, Abs)
                 ),
+
+                (:- export(Exports)) ->
+                    assertz(unit_export_list(Unit, Exports)),
+
+                (:- import(Src,Imports)) ->
+                    handle_import(Unit, Src, Imports),
+
+                (:- use_module(Rel,Imports)) ->
+                    handle_use_module(Context, Rel, Imports),
+
+                (:- initialization(_,_)) -> (
+                    true
+                ),
+
+                % section/1 tries to help people with non-folding text editors
+                (:- section(_)) -> true,
+                (:- end_section) -> true,
+
+                (:- Dir) ->
+                    throw_read_error(Context, unknown_directive(Dir)),
+
                 _ -> (
-                    context_unit(Context, Unit),
                     context_term_count(Context, Count),
                     UIndex is Count+1,
                     nb_set_context_term_count(Context, UIndex),
@@ -162,7 +213,7 @@ my_consult(Path, Opts) :-
                     ->  assertz_once(file_predicate(File, Pred))
                     ;   true
                     ),
-                    assertz(unit_term(Unit,UIndex,Term,Origin))
+                    assertz(unit_term(Unit, UIndex, Term, Origin))
                 )
             ])
         )).
@@ -197,43 +248,6 @@ link_unit(Context) :-
     unit_clause_linked(Unit, Index, Linked, Origin) :-
         unit_clause(Unit, Index, Clause, Origin),
         link_clause(Unit, Origin, Clause, Linked).
-
-% -------------------- load
-
-:- annotate([
-    problem-"dynamic/1 not handled"
-    , problem-"initialization/2 not handled"
-]).
-interpret_directives(Context) :-
-    context_unit(Context, Unit),
-    forall(unit_term(Unit, _, Term, _),
-        case(Term,[
-            (:- Dir) -> case(Dir,[
-                dynamic(_) -> (
-                    true
-                ),
-                export(Exports) ->
-                    assertz(unit_export_list(Unit,Exports)),
-                import(Src,Imports) ->
-                    handle_import(Unit, Src, Imports),
-                include(Rel) -> (
-                    read_file_abs(Rel, _, [relative_to(Unit)])
-                ),
-                initialization(_,_) -> (
-                    true
-                ),
-                use_module(Rel,Imports) ->
-                    handle_use_module(Context,Rel,Imports),
-                % section/1 tries to help people with non-folding text editors
-                section(_) -> true,
-                end_section -> true,
-                _ ->
-                    throw_read_error(Context, unknown_directive(Dir))
-            ]),
-            _ ->
-                true
-        ])
-    ).
 
 :- end_section.
 
@@ -283,33 +297,6 @@ throw_read_error(Context, Error) :-
 
 throw_file_read_error(File, Error) :-
     throw_error(read_error(File,Error)).
-
-
-:- section("term expansion and goal expansion").
-
-    my_expand_term(A, Z) :- var(A), !, A = Z.
-    my_expand_term(A, Z) :- my_expand_goals(A, Z).
-
-    my_expand_goals(A, Z) :- !, A = Z.
-
-    expand_case(case(Exp,[Pat->Bod|Alt]), Z) :- !,
-        Z = (Exp=Pat -> Bod ; ExpAlt),
-        expand_case(case(Exp,Alt), ExpAlt).
-
-    expand_case(case(_,[Pat|_]), _) :- !,
-        throw(error(invalid_case_element(Pat),_)).
-
-    expand_case(case(Exp,[]), Z) :- !,
-        Z = throw(error(unhandled_case(Exp),_)).
-
-    expand_case(case(A,B), _) :- !,
-        throw(error(invalid_case(case(A,B)),_)).
-
-    file_term_expanded(F, I, E) :-
-        file_term(F, I, T),
-        my_expand_term(T, E).
-
-:- end_section.
 
 
 % -------------------- DEBUG test

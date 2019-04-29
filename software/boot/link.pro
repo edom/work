@@ -7,23 +7,14 @@ linkcon_unit(A,B) :- arg(1,A,B). % the unit that includes the include file
 linkcon_origin(A,B) :- arg(2,A,B). % the include file that defines the clause
 linkcon_head(A,B) :- arg(3,A,B). % head of clause being linked
 
-link_clause(Unit, Origin, A:-B, Y:-Z) :- !,
-    A = Y,
+link_clause(_, _, A, _) :- var(A), !, instantiation_error(A).
+
+link_clause(Unit, Origin, A:-B, Z) :- !,
+    Z = (A:-Y),
     linkcon(Unit, Origin, A, Con),
-    link_goal(Con, B, Z).
+    link_goal(Con, B, Y).
 
-link_clause(_, _, A, Z) :- !,
-    A = Z.
-
-    /*
-    ,/2 and ;/2 are actually predicates defined in the "system" module,
-    with proper meta-predicate declarations,
-    so link_goal/3 does not have to handle them specially:
-
-        predicate_property((_,_), meta_predicate((0,0))).
-        predicate_property((_;_), meta_predicate((0;0))).
-        predicate_property((_->_), meta_predicate((0->0))).
-    */
+link_clause(_, _, A, Z) :- !, A = Z.
 
     :- annotate([
         purpose = "in a unit, resolve a goal to the module-qualified goal"
@@ -39,6 +30,30 @@ link_clause(_, _, A, Z) :- !,
         % The user should wrap the variable in a call/1.
 
     link_goal(_, Module:Goal, Z) :- !, Z = Module:Goal.
+
+    /*
+        These predicates are actually defined in the "system" module:
+
+            - ,/2
+            - ;/2
+            - ->/2
+            - \+/1
+
+        They actually have proper meta-predicate declarations,
+        which can be queried like this:
+
+            predicate_property((_,_), meta_predicate((0,0))).
+
+        However, we do handle them specially in order to make the generated output readable;
+        otherwise (A,B) would be linked as system:(A,B).
+
+        We assume that those predicates are not redefined.
+    */
+
+    link_goal(Con, (A,B), Z) :- !, Z = (X,Y), link_goal(Con, A, X), link_goal(Con, B, Y).
+    link_goal(Con, (A;B), Z) :- !, Z = (X;Y), link_goal(Con, A, X), link_goal(Con, B, Y).
+    link_goal(Con, (A->B), Z) :- !, Z = (X->Y), link_goal(Con, A, X), link_goal(Con, B, Y).
+    link_goal(Con, (\+A), Z) :- !, Z = (\+Y), link_goal(Con, A, Y).
 
     link_goal(Con, Goal, Qualified) :-
         linkcon_unit(Con, Unit),
@@ -82,11 +97,25 @@ link_clause(_, _, A, Z) :- !,
                                 New = Module:Old
                         ;   link_goal(Con, Old, New)
                         )
+                ;   Meta = '^' ->
+                        link_goal_ex(Con, Old, New)
                 ;   Meta = ':' ->
                         get_unit_module_or(Unit, Module, throw),
                         New = Module:Old
                 ;   New = Old
                 ).
+
+                link_goal_ex(Con, A, Z) :- var(A), !,
+                    linkcon_unit(Con, Unit),
+                    get_unit_module_or(Unit, Module, throw),
+                    Z = Module:A.
+
+                link_goal_ex(Con, A^B, Z) :- !,
+                    Z = A^Y,
+                    link_goal_ex(Con, B, Y).
+
+                link_goal_ex(Con, Goal, Z) :- !,
+                    link_goal(Con, Goal, Z).
 
         % If the Prolog implementation has a module system:
         module_goal_qualified(M, G, M:G).
