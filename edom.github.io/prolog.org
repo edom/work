@@ -1151,6 +1151,24 @@ XPCE /object expression/ (message expression?) syntax is documented in XPCE User
 
 PCE is similar to C Gtk or Java Swing.
 They are all object-oriented.
+** Selecting a GUI library?
+Is GTK 3 here to stay?
+Is GIR (Gnome Introspection) here to stay?
+Is everyone switching from GTK to Qt?[fn::https://www.reddit.com/r/linux/comments/2dxik3/future_of_gnome_and_gtk_when_whole_world_is/]
+
+Why do everyone hate GTK?[fn::https://www.reddit.com/r/linuxmasterrace/comments/7xkcwo/why_does_everyone_hate_gtk/]
+From a deleted user:
+"GTK is no longer an independent toolkit, it's built by Gnome developers, for Gnome developers.
+They change the API in every single new release, which breaks third-party applications, extensions and themes.
+They don't care about other projects and developers."
+
+That is fatal.
+That is a deal-breaker for me.
+I want my software to work forever.
+
+Qt uses C++, and C++ turns me off,
+but some people say that Qt is more stable and
+C++ is a mature language.
 ** Enlarge the fonts
 XPCE was made in the 1990s when 800x600 screens were common.
 In 2019, 1920x1080 screens are common.
@@ -4033,7 +4051,15 @@ It is not a simple git-clone, because we are using submodules.
 ** Foreign language interface
 SWI-Prolog has a foreign language interface[fn::http://www.swi-prolog.org/pldoc/man?section=foreign], but I demand more.
 
+I want to call C code from Prolog without writing a C wrapper.
+I want Prolog to marshal the arguments and unmarshal the return values.
+
+Even more,
 I want to write low-level code /directly in Prolog/.
+A solution already exists:
+SWI-Prolog pack "ffi": [fn::http://www.swi-prolog.org/pack/list?p=ffi]
+- "This package deals with calling C functions from shared objects (DLLs) from Prolog without writing wrappers"
+- It parses C header files and C source files!
 
 I want to write C code in Prolog.
 I want to have C with type inference and other cool features in Prolog.
