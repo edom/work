@@ -32,6 +32,8 @@ or a Module:Name/Arity (qualified predicate reference).
 
 :- section("expand definite-clause-grammar").
 
+    %   '$my_phrase'/3 should be compatible with phrase/3.
+
     '$my_phrase'(A,I,K) :-
         dcg_goal(A,I,K,Z),
         call(Z).
@@ -39,6 +41,8 @@ or a Module:Name/Arity (qualified predicate reference).
     dcg_clause(A --> B, Y :- Z) :- !,
         add_goal_args(A,[I,J],Y),
         dcg_goal(B,I,J,Z).
+
+    %%  dcg_goal(+DcgGoal, -OrdinaryGoal) is det.
 
     dcg_goal(A,I,K,Z) :- var(A), !,
         Z = '$my_phrase'(A,I,K).
@@ -52,6 +56,15 @@ or a Module:Name/Arity (qualified predicate reference).
         Z = (X;Y),
         dcg_goal(A,I,K,X),
         dcg_goal(B,I,K,Y).
+
+    dcg_goal((A->B),I,K,Z) :- !,
+        Z = (X->Y),
+        dcg_goal(A,I,J,X),
+        dcg_goal(B,J,K,Y).
+
+    dcg_goal((\+A),I,K,Z) :- !,
+        Z = (\+Y),
+        dcg_goal(A,I,K,Y).
 
     dcg_goal(!,I,K,Z) :- !,
         Z = !,

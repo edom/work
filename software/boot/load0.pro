@@ -60,7 +60,8 @@ load_1 :-
     get_env_or_throw(my_prolog_home, Dir),
     absolute_file_name("boot/load1.pro", Abs, [relative_to(Dir)]),
     consult(tmp_load:Abs),
-    tmp_load:unit_module(Abs, Mod),
+    tmp_load:initialize(Abs),
+    tmp_load:get_unit_module(Abs, Mod),
     forall(imported_from_load1(Pred), user:import(Mod:Pred)).
 
     imported_from_load1(A) :-

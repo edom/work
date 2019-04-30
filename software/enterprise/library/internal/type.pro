@@ -40,10 +40,9 @@ such as type_natural/1.
 Refinement for implementation.
 */
 
-:- multifile
-    type_definition/2,
-    type_maxbitcount/2,
-    type_maxbytecount/2.
+:- multifile type_definition/2.
+:- multifile type_maxbitcount/2.
+:- multifile type_maxbytecount/2.
 
 :- include("../../syntax.pro").
 

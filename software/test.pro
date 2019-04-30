@@ -50,6 +50,10 @@ main :-
     summarize,
     format("~`=t~30| Test ended at ~@.\n", [show_time]).
 
+%   Sometimes main/0 is reserved.
+
+test_main :- main.
+
 show_time :-
     current_output(Out),
     get_time(Time),

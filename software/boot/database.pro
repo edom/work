@@ -49,6 +49,9 @@
             file_include(File, That),
             file_predicate(That, Pred).
 
+    get_unit_module(Unit, Module) :-
+        get_unit_module_or(Unit, Module, throw).
+
     get_unit_module_or(Unit, Module, Alt) :-
         unit_module(Unit, Module)
         ->  true

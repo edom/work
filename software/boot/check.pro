@@ -14,7 +14,7 @@
         unit(U),
         setof(e(H,P,O), unit_goalpred(U,H,P,O), Ps),
         member(e(H,P,O), Ps),
-        \+ unit_predicate_module(U, P, _).
+        \+ unit_predref_qualified(U, P, _).
 
     unit_error(I, unit_imports_unexported_predicate(I,E,P)) :-
         object_import(I,E,P),

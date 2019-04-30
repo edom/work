@@ -58,7 +58,7 @@ link_clause(_, _, A, Z) :- !, A = Z.
     link_goal(Con, Goal, Qualified) :-
         linkcon_unit(Con, Unit),
         goal_pred(Goal, Pred),
-        unit_predicate_module(Unit, Pred, Exporter),
+        unit_predref_qualified(Unit, Pred, Exporter:_), % FIXME
         !,
         link_goal_args(Con, Goal, NewGoal),
         module_goal_qualified(Exporter, NewGoal, Qualified).
@@ -132,32 +132,57 @@ link_clause(_, _, A, Z) :- !, A = Z.
         meaning = "the Arg-th argument of Goal is module-sensitive"
     ]).
 
-%%  unit_predicate_module(+Unit, +Predicate, -Module) is semidet.
+%%  unit_predref_qualified(+Unit, +NameArity, -Qualified) is semidet.
 
 :- annotate([
-    purpose = "compute the module of an unqualified predicate in a unit"
-    , example = unit_predicate_module("/unit.pro", call/1, system)
-    , example = unit_predicate_module("/unit.pro", foo:bar/0, foo)
+    purpose = "qualify a predicate reference found in a unit"
+    , example = unit_predref_qualified("/unit.pro", call/1, system:call/1)
+    , example = unit_predref_qualified("/unit.pro", foo:bar/0, foo:bar/0)
 ]).
 
-unit_predicate_module(_, M:_/_, Module) :- !,
-    Module = M.
+unit_predref_qualified(Unit, Ref, Qual) :-
+    (var(Unit) -> instantiation_error(Unit) ; true),
+    (var(Ref) -> instantiation_error(Ref) ; true),
+    (   % The reference is already qualified.
+        Ref = _:_/_
+    ->  Qual = Ref
 
-unit_predicate_module(Unit, Pred, Module) :-
-    unit_predicate(Unit, Pred), !,
-    get_unit_module_or(Unit, Module, throw).
+    ;   % The reference refers to a predicate defined inside the unit itself.
+        unit_predicate(Unit, Ref)
+    ->  get_unit_module(Unit, Module),
+        Qual = Module:Ref
 
-unit_predicate_module(Unit, Pred, Module) :-
-    unit_import(Unit, user, Pred), !,
-    Module = user.
+    ;   % The reference refers to a predicate imported into the unit from another unit.
+        unit_import(Unit, Source, Ref, Actual)
+    ->  (   member(Source, [system,user])
+        ->  Qual = Source:Actual
+        ;   Source = module(Module)
+        ->  Qual = Module:Actual
+        ;   Source = unit(Exporter)
+        ->  unit_module(Exporter, Module), !,
+            Qual = Module:Actual
+        )
+    ).
 
-unit_predicate_module(Unit, Pred, Module) :-
-    unit_import(Unit, system, Pred), !,
-    Module = system.
+    unit_import(Importer, Exporter, Ref, Actual) :-
+        unit_import_list(Importer, Exporter, List),
+        member(Item, List),
+        item_alias_actual(Item, Ref, Actual).
 
-unit_predicate_module(Unit, Pred, Module) :-
-    unit_import(Unit, module(Module), Pred), !.
+        item_alias_actual(Item, Ref, Actual) :-
+            (   Item = (Name/Arity as Alias)
+            ->  Ref = Alias/Arity,
+                Actual = Name/Arity
 
-unit_predicate_module(Unit, Pred, Module) :-
-    unit_import(Unit, unit(FE), Pred),
-    unit_module(FE, Module).
+            ;   Item = Name/Arity
+            ->  Ref = Name/Arity,
+                Actual = Ref
+
+            ;   type_error(import_item, Item)
+            ).
+
+    unit_import(Importer, Exporter, Ref) :-
+        unit_import(Importer, Exporter, Ref, _).
+
+    object_import(unit(I),E,P) :-
+        unit_import(I,E,P).

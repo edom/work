@@ -1,3 +1,16 @@
+:- use_module(library(debug),[
+    debug/1
+    , debug/3
+]).
+:- use_module(library(error),[
+    existence_error/2
+]).
+:- use_module(library(listing),[
+    portray_clause/1
+]).
+:- use_module(library(odbc),[
+    odbc_query/3
+]).
 :- import(file("internal/type.pro"),[
     type_natural_bit/2
     , type_integer_bit/2
@@ -57,10 +70,9 @@ recordtype_sqlcolumn(T,[name-FName,type-SType,nullable-Nullable]) :-
 
 % -------------------- Data Definition Language
 
-:- multifile
-    class/1,
-    class_property/2,
-    class_property_type/3.
+:- multifile class/1.
+:- multifile class_property/2.
+:- multifile class_property_type/3.
 
 :- import(file("../../string0.pro"),[
     strings_separator_join/3
@@ -114,7 +126,13 @@ do_ensure_opened(Rep, Con) :-
 
 % -------------------- abstracting SQL table as Prolog predicate
 
-:- debug(sql_query). % DEBUG
+init_sql_pro :-
+    debug(sql_query), % DEBUG
+    make_sql_table_backed_predicate(con, information_schema, columns
+        , [table_catalog, table_name, column_name, data_type]
+        , infosch_columns).
+
+:- initialization(init_sql_pro).
 
 sql_table_row(ConName, Schema, Table, Cols, Row) :-
     must_be(ground, ConName),
@@ -158,16 +176,12 @@ sqltable_as_prologpred(Con, Sch, Tab, Cols, PredName, Clause) :-
 
 make_sql_table_backed_predicate(Con, Sch, Tab, Cols, PredName) :-
     sqltable_as_prologpred(Con, Sch, Tab, Cols, PredName, Clause),
-    compile_aux_clauses([Clause]).
+    assertz(Clause).
 
 test_part_eval :-
     Cols = [table_catalog, table_name, column_name, data_type],
     sqltable_as_prologpred(con, information_schema, columns, Cols, infosch_columns, Clause),
     portray_clause(Clause).
-
-:-  make_sql_table_backed_predicate(con, information_schema, columns
-    , [table_catalog, table_name, column_name, data_type]
-    , infosch_columns).
 
 :- dynamic con_sch_tab_row/4.
 

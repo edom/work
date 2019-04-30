@@ -19,6 +19,7 @@
 :- import(file("load_demo_import.pro"),[
     data/1
     , hi/0
+    , hi/0 as say_hi
 ]).
 
 :- annotate([
@@ -34,6 +35,9 @@ test_meta_predicate :-
     assertz(data(test)).
 
 test_call(A) :- call(A).
+
+test_import_rename :-
+    say_hi.
 
 :- section("test shadowing").
 

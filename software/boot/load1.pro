@@ -5,6 +5,9 @@
     ]
 ]).
 
+%   Usage: consult this file into a module,
+%   and then call initialize/1 first before calling anything else.
+
 :- export([
     my_consult/1
 ]).
@@ -68,18 +71,21 @@ This diagram describes how my_consult/1 works:
 
 :- section("unit load context").
 
-    context(A) :- functor(A,context,3).
+    context(A) :- functor(A,context,4).
 
     context_unit(A,B) :- context(A), arg(1,A,B).
     context_module(A,B) :- context(A), arg(2,A,B).
     context_term_count(A,B) :- context(A), arg(3,A,B).
     nb_set_context_term_count(A,B) :- nb_setarg(3,A,B).
+    context_annotation(A,B) :- context(A), arg(4,A,B).
+    nb_set_context_annotation(A,B) :- nb_setarg(4,A,B).
 
     context_new(File, Module, Context) :-
         context(Context),
         context_unit(Context, File),
         context_module(Context, Module),
-        context_term_count(Context, 0).
+        context_term_count(Context, 0),
+        context_annotation(Context, []).
 
     origin(A) :- functor(A,origin,1).
     origin_file(A,B) :- origin(A), arg(1,A,B).
@@ -96,138 +102,28 @@ my_consult(Path) :- my_consult(Path, []).
 
 :- annotate([
     todo(production, "implement conditional compilation")
-    , todo(production, "remove $no_link hack")
 ]).
 my_consult(Path, Opts) :-
     must_be(ground, Opts),
-    read_file_abs(Path, File, []),
-    File = Unit,
+    absolute_file_name(Path, Unit, Opts),
+    (   unit_module(Unit, Module)
+    ->  true
+    ;   generate_module_name(Unit, Module),
+        initialize_module(Module),
+        assertz(unit_module(Unit, Module))
+    ),
+    debug(load_unit_into_module, "my_consult: loading unit ~w into ~w", [Unit,Module]),
+    context_new(Unit, Module, Context),
+    read_file_abs(Context, Unit),
     (unit_linked(Unit)
     ->  true
     ;   assertz_once(unit(Unit)),
-        (   unit_module(Unit, Module)
-        ->  true
-        ;   generate_module_name(Unit, Module),
-            initialize_module(Module),
-            assertz(unit_module(Unit, Module))
-        ),
-        debug(load_unit_into_module, "my_consult: loading unit ~w into ~w", [Unit,Module]),
-        context_new(Unit, Module, Context),
-        do_unit_include(Context, Unit),
-        %   The '$no_link' option is an internal hack used by my_consult/1
-        %   to load its own source code without falling into an infinite loop.
-        %
-        %   A better solution is conditional compilation.
-        (member('$no_link', Opts)
-        ->  true
-        ;   (unit_error(Unit, _)
-            ->  print_unit_errors(Unit)
-            ;   link_unit(Context),
-                assertz(unit_linked(Unit))
-            )
+        (   unit_error(Unit, _)
+        ->  print_unit_errors(Unit)
+        ;   link_unit(Context),
+            assertz(unit_linked(Unit))
         )
     ).
-
-    :- annotate([
-        purpose = "collect annotations, expand includes, process directives, and populate some dynamic predicates"
-        , problem = "should initialization/2 be handled? should loading a file execute arbitrary code?"
-        , problem = "meta-predicates are not handled correctly"
-        , todo(production, "limit recursion depth")
-    ]).
-    do_unit_include(Context, File) :-
-        context_unit(Context, Unit),
-        context_module(Context, Module),
-        forall(file_term_expanded(File, FIndex, Term), (
-            case(Term,[
-                /*
-                    annotate(file,Ann) means annotate the file that contains the source code.
-                    That file is the file that contains the bytes that represent the textual source code.
-
-                    Many files can be loaded into the same module by include/1.
-                */
-                (:- annotate(file,Ann)) ->
-                    annotate_object(file(File), Ann),
-
-                % TODO resolve N/A against imports
-                (:- annotate(predicate(N/A),Ann)) ->
-                    annotate_object(file_predicate(File,N/A), Ann),
-
-                % relation/1 is synonym for predicate/1 but hints finiteness and multidirectionality
-                (:- annotate(relation(N/A),Ann)) ->
-                    annotate_object(file_predicate(File,N/A), Ann),
-
-                (:- annotate(Ref,_)) ->
-                    throw_error(invalid_annotation_ref(Ref)),
-
-                (:- annotate(Ann)) -> (
-                    FIndex1 is FIndex+1,
-                    file_term_expanded(File, FIndex1, Term1),
-                    term_object(File, Term1, Object),
-                    annotate_object(Object, Ann)
-                ),
-
-                (:- dynamic(Name/Arity)) -> (
-                    assertz_once(file_predicate(File, Name/Arity)),
-                    dynamic(Module:Name/Arity)
-                ),
-                (:- dynamic(_)) ->
-                    throw_error(syntax_error(Term)),
-
-                (:- meta_predicate(Head)) ->
-                    meta_predicate(Module:Head),
-
-                (:- include(Rel)) -> (
-                    read_file_abs(Rel, Abs, [relative_to(File)]),
-                    assertz_once(file_include(File, Abs)),
-                    do_unit_include(Context, Abs)
-                ),
-
-                (:- export(Exports)) ->
-                    assertz(unit_export_list(Unit, Exports)),
-
-                (:- import(Src,Imports)) ->
-                    handle_import(Unit, Src, Imports),
-
-                (:- use_module(Rel,Imports)) ->
-                    handle_use_module(Context, Rel, Imports),
-
-                (:- initialization(_,_)) -> (
-                    true
-                ),
-
-                % section/1 tries to help people with non-folding text editors
-                (:- section(_)) -> true,
-                (:- end_section) -> true,
-
-                (:- Dir) ->
-                    throw_read_error(Context, unknown_directive(Dir)),
-
-                _ -> (
-                    context_term_count(Context, Count),
-                    UIndex is Count+1,
-                    nb_set_context_term_count(Context, UIndex),
-                    origin_file(Origin, File),
-                    (   term_clause(Term, Clause),
-                        clause_head(Clause, Head),
-                        goal_pred(Head, Pred)
-                    ->  assertz_once(file_predicate(File, Pred))
-                    ;   true
-                    ),
-                    assertz(unit_term(Unit, UIndex, Term, Origin))
-                )
-            ])
-        )).
-
-    annotate_object(Obj, Ann) :-
-        assertz(object_annotation(Obj,Ann)).
-
-    term_object(File, Head:-_, Object) :- !,
-        Object = file_predicate(File,Name/Arity),
-        functor(Head,Name,Arity).
-
-    term_object(File, Head, Object) :- !,
-        Object = file_predicate(File,Name/Arity),
-        functor(Head,Name,Arity).
 
 :- annotate([purpose="assert the linked clauses into the Prolog interpreter"]).
 link_unit(Context) :-
@@ -269,22 +165,19 @@ handle_use_module(Context, Rel, Imports) :-
         assertz(unit_import_list(Unit,module(Mod),Imports))
     ).
 
-handle_import(_, _, Imports) :-
-    \+ is_list(Imports), !,
-    throw_error(invalid_import_list(Imports)).
-
-handle_import(Unit, file(Rel), Imports) :- !,
-    absolute_file_name(Rel, Abs, [relative_to(Unit)]),
-    assertz(unit_import_list(Unit,unit(Abs),Imports)),
-    my_consult(Abs).
-
-handle_import(Unit, system, Imports) :- !,
-    assertz(unit_import_list(Unit,system,Imports)).
-
-handle_import(Unit, user, Imports) :- !,
-    assertz(unit_import_list(Unit,user,Imports)).
-
-handle_import(_, Src, _) :- !, type_error(import_source, Src).
+handle_import(Unit, Source, Imports) :-
+    (   is_list(Imports)
+    ->  true
+    ;   type_error(import_item_list, Imports)
+    ),
+    (   Source = file(Rel)
+    ->  absolute_file_name(Rel, Abs, [relative_to(Unit)]),
+        assertz(unit_import_list(Unit, unit(Abs), Imports)),
+        my_consult(Abs)
+    ;   member(Source, [system,user])
+    ->  assertz(unit_import_list(Unit, Source, Imports))
+    ;   type_error(import_source, Source)
+    ).
 
 % -------------------- throw
 
@@ -306,18 +199,11 @@ test :-
     my_call(file("boot/load_demo.pro"):hello),
     my_call(file("boot/load_demo.pro"):goodbye).
 
+initialize(MyAbsPath) :-
+    load_this_file(MyAbsPath).
 
-load_this_file :-
+load_this_file(MyAbsPath) :-
     nb_current(my_loader_loaded, _)
     ->  true
     ;   nb_setval(my_loader_loaded, true),
-        get_prolog_current_file(File),
-        my_consult(File).
-
-get_prolog_current_file(File) :-
-    prolog_load_context(file, File)
-    ->  true
-    ;   throw_error(must_be_called_from_directive).
-
-% Error.
-:- initialization(load_this_file, now).
+        my_consult(MyAbsPath).

@@ -1,10 +1,22 @@
 % -------------------- connection management
 
+:- use_module(library(debug),[
+    debug/1
+    , debug/3
+]).
+:- use_module(library(odbc),[
+    odbc_disconnect/1
+    , odbc_driver_connect/3
+]).
+
 % Restart your program often if you use this.
 
 % Problem: Debugging prints the password.
 
-:- debug(sql_connect). % DEBUG
+init_sql_connection_pro :-
+    debug(sql_connect). % DEBUG
+
+:- initialization(init_sql_connection_pro).
 
 :- use_module(library(odbc),[
     odbc_driver_connect/3
