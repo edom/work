@@ -2773,6 +2773,8 @@ People hate math because they are unfortunate enough to be taught by teachers wh
 People hate Prolog because they are unfortunate enough to be taught by teachers who can't teach.
 
 Those students grow up to be adults with atrophied minds condemned to mediocrity.
+** Reason for distinguishing atoms and zero-arity compound terms
+Such separation helps us write a language interpreter in which =foo= means a variable value and =foo()= means a function call.
 * Rethinking module systems, especially of Prolog
 Miller 1986 \cite{miller1986theory} has what we want: implication as local scoping.
 ** What are the problems of existing module systems?
