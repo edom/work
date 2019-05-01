@@ -32,12 +32,11 @@ case(_, _:Cases) :- var(Cases), !, instantiation_error(Cases).
 case(Exp, _:[]) :- !, throw(error(unhandled_case(Exp),_)).
 case(_, _:[Case|_]) :- var(Case), !, instantiation_error(Case).
 case(_, _:[_|Rest]) :- var(Rest), !, instantiation_error(Rest).
-
-case(Exp, Mod:[Case|Rest]) :-
-    Case = (Exp -> Body)
+case(Exp, Mod:[(Pat->Body)|Rest]) :- !,
+    (   Exp = Pat
     ->  call(Mod:Body)
-    ;   case(Exp, Mod:Rest).
-
+    ;   case(Exp, Rest)
+    ).
 case(_, Cases) :- !, type_error(case_bodies, Cases).
 
 expand_case(case(Exp,[Pat->Bod|Alt]), Z) :- !,
