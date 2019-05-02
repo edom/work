@@ -203,11 +203,11 @@ public:
     }
     // get direct/immediate/proximate referent, not ultimate/transitive
     Term* get_referent () {
-        if (type == VAR) { return v; }
-        return this;
+        assert(type == VAR);
+        return v;
     }
     void set_referent (Term* val) {
-        if (type != VAR) { abort(); }
+        assert(type == VAR);
         v = val;
     }
     void print_debug (String* out) const {
@@ -241,12 +241,11 @@ public:
     }
 };
 
-struct Binding {
-    Term* var;
-    Term* old;
-};
-
 struct Unification {
+    struct Binding {
+        Term* var;
+        Term* ori;
+    };
     size_t limit;
     size_t count;
     struct Binding* bindings;
@@ -259,30 +258,42 @@ struct Unification {
         delete[] bindings;
         bindings = nullptr;
     }
-    void set (Term* var, Term* val) {
-        assert(var->is_unbound());
-        if (count >= limit) {
-            puts("unification too large");
+    void save_once (Term* var) {
+        assert(var->is_var());
+        size_t i = 0;
+        while (i < count) {
+            Binding& b = bindings[i];
+            if (b.var == var) { return; }
+            ++i;
+        }
+        if (i >= limit) {
+            printf("Sorry, I cannot keep track of more than %z bindings.\n", limit);
             abort();
         }
-        Binding& b = bindings[count];
-        b.var = var;
-        b.old = var->get_referent();
-        var->set_referent(val);
-        ++count;
+        {
+            Binding& b = bindings[i];
+            b.var = var;
+            b.ori = var->get_referent();
+        }
+        count = i + 1;
     }
-    void undo () {
+    void set (Term* var, Term* val) {
+        assert(var->is_var());
+        save_once(var);
+        var->set_referent(val);
+    }
+    void restore () {
         while (count > 0) {
-            Binding& b = bindings[count-1];
-            b.var->set_referent(b.old);
+            Binding& b = bindings[count - 1];
+            b.var->set_referent(b.ori);
             --count;
         }
     }
     bool unify (Term* a, Term* b) {
         bool a_var = a->is_var();
-        bool b_var = a->is_var();
-        Term* ar = a->get_referent();
-        Term* br = b->get_referent();
+        bool b_var = b->is_var();
+        Term* ar = a_var ? a->get_referent() : nullptr;
+        Term* br = b_var ? b->get_referent() : nullptr;
         bool ar_nul = ar == nullptr;
         bool br_nul = br == nullptr;
         //  This variable-variable unification is a quadratic time linked-list insertion sort?
@@ -360,11 +371,10 @@ struct Unification {
     }
 };
 
-int
-main (int argc, char* argv[]) {
+void
+test_unification () {
     Unification* u = new Unification(1024);
     String* s = new String(1024);
-    //Term* a = Term::new_integer(1);
     Term* a = Term::new_compound_v("foo", 2, Term::new_var(), Term::new_var());
     Term* b = Term::new_compound_v("foo", 2, Term::new_var(), Term::new_var());
     Term* c = Term::new_compound_v("foo", 2, Term::new_string("abc"), Term::new_integer(123));
@@ -382,10 +392,11 @@ main (int argc, char* argv[]) {
     s->clear(); g->print_debug(s); s->write_to(stdout); putchar('\n');
     // ------------------------------ unify
     bool success =
-        // u->unify(a, b) &&
-        u->unify(g, d) &&
-        // FIXME Why does unify(d,g) work but unify(g,d) doesn't?
-        // u->unify(b, c) &&
+        u->unify(a, b) &&
+        u->unify(a, c) &&
+        u->unify(d, f) &&
+        u->unify(e, f) &&
+        u->unify(d, g) &&
         true;
     printf("------------------------------ after unify (success = %d)\n", success);
     s->clear(); a->print_debug(s); s->write_to(stdout); putchar('\n');
@@ -395,8 +406,8 @@ main (int argc, char* argv[]) {
     s->clear(); e->print_debug(s); s->write_to(stdout); putchar('\n');
     s->clear(); f->print_debug(s); s->write_to(stdout); putchar('\n');
     s->clear(); g->print_debug(s); s->write_to(stdout); putchar('\n');
-    u->undo();
-    puts("------------------------------ after undo");
+    u->restore();
+    puts("------------------------------ after restore");
     s->clear(); a->print_debug(s); s->write_to(stdout); putchar('\n');
     s->clear(); b->print_debug(s); s->write_to(stdout); putchar('\n');
     s->clear(); c->print_debug(s); s->write_to(stdout); putchar('\n');
@@ -404,6 +415,10 @@ main (int argc, char* argv[]) {
     s->clear(); e->print_debug(s); s->write_to(stdout); putchar('\n');
     s->clear(); f->print_debug(s); s->write_to(stdout); putchar('\n');
     s->clear(); g->print_debug(s); s->write_to(stdout); putchar('\n');
-    return EXIT_SUCCESS;
 }
 
+int
+main (int argc, char* argv[]) {
+    test_unification();
+    return EXIT_SUCCESS;
+}
