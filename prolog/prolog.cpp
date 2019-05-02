@@ -3,6 +3,7 @@ Problems:
     - unification not yet implemented
     - garbage collection not implemented
 */
+
 #include <assert.h>
 #include <inttypes.h>
 #include <stdarg.h>
@@ -11,377 +12,25 @@ Problems:
 #include <stdio.h>
 #include <string.h>
 
-// mutable byte string
-struct String {
-    size_t limit;
-    size_t count;
-    char* bytes;
-    String (size_t limit) {
-        this->limit = limit;
-        this->count = 0;
-        this->bytes = new char[limit];
-    }
-    ~String () {
-        limit = 0;
-        count = 0;
-        delete[] bytes;
-        bytes = nullptr;
-    }
-    static String* copy_cstr (const char* cstr) {
-        size_t limit = strlen(cstr);
-        String* s = new String(limit);
-        s->append_trunc(cstr);
-        return s;
-    }
-    void clear () {
-        count = 0;
-    }
-    bool equals (const String* that) const {
-        assert(this->count <= this->limit);
-        assert(that->count <= that->limit);
-        if (this->count != that->count) {
-            return false;
-        }
-        size_t i = 0;
-        while (i < count) {
-            if (this->bytes[i] != that->bytes[i]) {
-                return false;
-            }
-            ++i;
-        }
-        return true;
-    }
-    size_t append_trunc (const String* that) {
-        size_t i = 0;
-        while (count < limit && i < that->count) {
-            bytes[count] = that->bytes[i];
-            ++count;
-            ++i;
-        }
-        return i;
-    }
-    size_t append_trunc (const char* cstr) {
-        size_t i = 0;
-        while (count < limit && cstr[i] != 0) {
-            bytes[count] = cstr[i];
-            ++count;
-            ++i;
-        }
-        return i;
-    }
-    void printf (const char* format, ...) {
-        va_list ap;
-        va_start(ap, format);
-        size_t n = vsnprintf(bytes + count, limit - count, format, ap);
-        count += n;
-        if (count > limit) {
-            puts("String.printf: count > limit");
-            abort();
-        }
-        va_end(ap);
-    }
-    size_t write_to (FILE* out) const {
-        return fwrite(bytes, 1, count, out);
-    }
-};
-
-enum Type {
-    INTEGER
-    , STRING
-    , COMPOUND
-    , VAR
-};
-
-// TODO garbage-collect terms
-
-class Term;
-
-struct Compound {
-    String* name;
-    size_t arity;
-    Term** args;
-};
-
-class Term {
-private:
-    Type type;
-    union {
-        Compound c;
-        intptr_t i;
-        String* s;
-        Term* v;
-    };
-    Term () {
-        this->type = VAR;
-        this->v = nullptr;
-    }
-public:
-    ~Term () {
-    }
-    static Term* new_integer (intptr_t i) {
-        Term* t = new Term();
-        t->type = INTEGER;
-        t->i = i;
-        return t;
-    }
-    static Term* new_string (const char* s) {
-        Term* t = new Term();
-        t->type = STRING;
-        t->s = String::copy_cstr(s);
-        return t;
-    }
-    static Term* new_compound_v (const char* name_, size_t arity, ...) {
-        String* name = String::copy_cstr(name_);
-        Term** args = new Term*[arity];
-        va_list ap;
-        va_start(ap, arity);
-        for (size_t i = 0; i < arity; ++i) {
-            args[i] = va_arg(ap, Term*);
-        }
-        va_end(ap);
-        return new_compound(name, arity, args);
-    }
-    static Term* new_compound (const char* name_, size_t arity) {
-        String* name = String::copy_cstr(name_);
-        Term** args = new Term*[arity];
-        for (size_t i = 0; i < arity; ++i) {
-            args[i] = new_var();
-        }
-        return new_compound(name, arity, args);
-    }
-    static Term* new_compound (String* name, size_t arity) {
-        Term** args = new Term*[arity];
-        for (size_t i = 0; i < arity; ++i) {
-            args[i] = new_var();
-        }
-        return new_compound(name, arity, args);
-    }
-    static Term* new_compound (String* name, size_t arity, Term** args) {
-        Term* t = new Term;
-        t->type = COMPOUND;
-        t->c.name = name;
-        t->c.arity = arity;
-        t->c.args = args;
-        return t;
-    }
-    static Term* new_var () {
-        return new Term;
-    }
-    bool is_var () const {
-        return type == VAR;
-    }
-    bool is_unbound () const {
-        const Term* t = dereference();
-        return t->type == VAR && t->v == nullptr;
-    }
-    bool get_compound (const Compound** val) const {
-        if (type != COMPOUND) { return false; }
-        *val = &c;
-        return true;
-    }
-    bool get_integer (intptr_t* val) const {
-        if (type != INTEGER) { return false; }
-        *val = i;
-        return true;
-    }
-    bool get_string (const String** val) const {
-        if (type != STRING) { return false; }
-        *val = s;
-        return true;
-    }
-    const Term* dereference () const {
-        if (type == VAR && v != nullptr) {
-            return v->dereference();
-        }
-        return this;
-    }
-    Term* dereference () {
-        if (type == VAR && v != nullptr) {
-            return v->dereference();
-        }
-        return this;
-    }
-    // get direct/immediate/proximate referent, not ultimate/transitive
-    Term* get_referent () {
-        assert(type == VAR);
-        return v;
-    }
-    void set_referent (Term* val) {
-        assert(type == VAR);
-        v = val;
-    }
-    void print_debug (String* out) const {
-        const Term* t = dereference();
-        switch (t->type) {
-            case INTEGER:
-                out->printf("%" PRIdPTR, t->i);
-                break;
-            case STRING:
-                out->append_trunc(t->s);
-                break;
-            case COMPOUND:
-                {
-                    out->append_trunc(t->c.name);
-                    out->printf("(");
-                    for (size_t i = 0; i < t->c.arity; ++i) {
-                        t->c.args[i]->print_debug(out);
-                        if (i+1 < t->c.arity) {
-                            out->printf(",");
-                        }
-                    }
-                    out->printf(")");
-                }
-                break;
-            case VAR:
-                out->printf("_%p", t);
-                break;
-            default:
-                assert(false);
-        }
-    }
-};
-
-struct Unification {
-    struct Binding {
-        Term* var;
-        Term* ori;
-    };
-    size_t limit;
-    size_t count;
-    struct Binding* bindings;
-    Unification (size_t limit) {
-        this->limit = limit;
-        this->count = 0;
-        this->bindings = new Binding[limit];
-    }
-    ~Unification () {
-        delete[] bindings;
-        bindings = nullptr;
-    }
-    void save_once (Term* var) {
-        assert(var->is_var());
-        size_t i = 0;
-        while (i < count) {
-            Binding& b = bindings[i];
-            if (b.var == var) { return; }
-            ++i;
-        }
-        if (i >= limit) {
-            printf("Sorry, I cannot keep track of more than %z bindings.\n", limit);
-            abort();
-        }
-        {
-            Binding& b = bindings[i];
-            b.var = var;
-            b.ori = var->get_referent();
-        }
-        count = i + 1;
-    }
-    void set (Term* var, Term* val) {
-        assert(var->is_var());
-        save_once(var);
-        var->set_referent(val);
-    }
-    void restore () {
-        while (count > 0) {
-            Binding& b = bindings[count - 1];
-            b.var->set_referent(b.ori);
-            --count;
-        }
-    }
-    bool unify (Term* a, Term* b) {
-        bool a_var = a->is_var();
-        bool b_var = b->is_var();
-        Term* ar = a_var ? a->get_referent() : nullptr;
-        Term* br = b_var ? b->get_referent() : nullptr;
-        bool ar_nul = ar == nullptr;
-        bool br_nul = br == nullptr;
-        //  This variable-variable unification is a quadratic time linked-list insertion sort?
-        //  We want to maintain this ordering:
-        //      IF a_var AND b_var THEN a <= b
-        //      IF a_var AND ar_var THEN a < ar
-        //      IF b_var AND br_var THEN b < br
-        //      IF a_var AND ar_var AND b_var THEN a < ar <= b
-        if (a_var && b_var) {
-            if (a == b) { return true; }
-            if (a > b) { return unify(b, a); }
-            //  Preconditions:
-            //      a < b
-            //      a < ar
-            //      b < br
-            if (ar_nul && br_nul) {
-                //  Postconditions:
-                //      ar' = b
-                //      a < ar' <= b
-                set(a, b);
-                return true;
-            }
-            if (ar_nul) {
-                set(a, b);
-                return true;
-            }
-            if (br_nul) {
-                if (ar == b) { return true; }
-                if (ar < b) { return unify(ar, b); }
-                // ar > b
-                set(a, b);
-                return unify(b, ar);
-            }
-            return unify(ar, br);
-        }
-        if (a_var) {
-            if (ar_nul) {
-                set(a, b);
-                return true;
-            }
-            return unify(ar, b);
-        }
-        if (b_var) {
-            return unify(b, a);
-        }
-        {
-            intptr_t x;
-            intptr_t y;
-            if (a->get_integer(&x) && b->get_integer(&y)) {
-                return x == y;
-            }
-        }
-        {
-            const String* x;
-            const String* y;
-            if (a->get_string(&x) && b->get_string(&y)) {
-                return x->equals(y);
-            }
-        }
-        {
-            const Compound* x;
-            const Compound* y;
-            if (a->get_compound(&x) && b->get_compound(&y)) {
-                if (x->arity != y->arity) { return false; }
-                if (!x->name->equals(y->name)) { return false; }
-                for (size_t i = 0; i < x->arity; ++i) {
-                    if (!unify(x->args[i], y->args[i])) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-};
+#include "array.cpp"
+#include "string.cpp"
+#include "object.cpp"
+#include "term.cpp"
+#include "unify.cpp"
+#include "world.cpp"
 
 void
-test_unification () {
+test_unification (World* world) {
     Unification* u = new Unification(1024);
-    String* s = new String(1024);
-    Term* a = Term::new_compound_v("foo", 2, Term::new_var(), Term::new_var());
-    Term* b = Term::new_compound_v("foo", 2, Term::new_var(), Term::new_var());
-    Term* c = Term::new_compound_v("foo", 2, Term::new_string("abc"), Term::new_integer(123));
-    Term* d = Term::new_var();
-    Term* e = Term::new_var();
-    Term* f = Term::new_var();
-    Term* g = Term::new_integer(1);
+    String s_(1024);
+    String* s = &s_;
+    Term* a = world->new_compound_v("foo", 2, world->new_var(), world->new_var());
+    Term* b = world->new_compound_v("foo", 2, world->new_var(), world->new_var());
+    Term* c = world->new_compound_v("foo", 2, world->new_string("abc"), world->new_integer(123));
+    Term* d = world->new_var();
+    Term* e = world->new_var();
+    Term* f = world->new_var();
+    Term* g = world->new_integer(1);
     puts("------------------------------ before unify");
     s->clear(); a->print_debug(s); s->write_to(stdout); putchar('\n');
     s->clear(); b->print_debug(s); s->write_to(stdout); putchar('\n');
@@ -417,8 +66,61 @@ test_unification () {
     s->clear(); g->print_debug(s); s->write_to(stdout); putchar('\n');
 }
 
+void test_size () {
+    class A1 { char a; };
+    class A2 : A1 { char b; };
+    class A3 : A2 { char c; };
+    class B1 : A1 { int b; };
+    class C1 { char b; char c; };
+    class D1 : A1, C1 { };
+    printf("sizeof(A1) = %zu\n", sizeof(A1));
+    printf("sizeof(A2) = %zu\n", sizeof(A2));
+    printf("sizeof(A3) = %zu\n", sizeof(A3));
+    printf("sizeof(B1) = %zu\n", sizeof(B1));
+    printf("sizeof(C1) = %zu\n", sizeof(C1));
+    printf("sizeof(D1) = %zu\n", sizeof(D1));
+    printf("sizeof(Object) = %zu\n", sizeof(Object));
+    printf("sizeof(Foreign_object<int>) = %zu\n", sizeof(Foreign_object<int>));
+    printf("sizeof(Term) = %zu\n", sizeof(Term));
+    printf("sizeof(Term1) = %zu\n", sizeof(Term1));
+    printf("sizeof(Var) = %zu\n", sizeof(Var));
+    printf("sizeof(String) = %zu\n", sizeof(String));
+}
+
+void test_gc (World& w) {
+    Array<Object*> objects (1024);
+    Array<Object*> roots (1024);
+    Term* a = w.new_var();
+    Term* b = w.new_var();
+    Term* c = w.new_var();
+    Term* d = w.new_var();
+    a->set_referent(b);
+    b->set_referent(c);
+    objects.add(a);
+    objects.add(b);
+    objects.add(c);
+    objects.add(d);
+    roots.add(a);
+    Garbage_collection gc;
+    gc.set_verbosity(Garbage_collection::VERBOSITY_TRACE);
+    gc.delete_objects_unreachable_from(objects, roots);
+}
+
 int
 main (int argc, char* argv[]) {
-    test_unification();
+    World w;
+    Term* True = w.new_compound_v("true", 0);
+    w.assertz({
+        head: w.new_compound_v("p", 1, w.new_integer(1)),
+        body: True
+    });
+    w.assertz({
+        head: w.new_compound_v("p", 1, w.new_integer(2)),
+        body: True
+    });
+    test_size();
+    test_gc(w);
+    // test_copy_term(&w);
+    // test_unification(&w);
     return EXIT_SUCCESS;
 }
