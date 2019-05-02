@@ -20,26 +20,11 @@ I share my goals and knowledge in the website [edom.github.io](https://edom.gith
         - library for writing metaprograms in Haskell
         - use Haskell as metalanguage
     - [prelude](prelude/): a maximalist Haskell Prelude that tries to collects best practices
-    - [sound](sound/)
-        - Find out whether real-time sound synthesis is possible with GHC Haskell.
-        - Write some ugly code involving GHC primitives (unboxed things).
-        - Hide the ugliness behind a newtype hidden in a module.
-        - Assume that GHC inlines well.
     - [trade](trade/): Trade stocks in Indonesia
-    - [haji](haji/) aspires to be a JVM written in Haskell but I lost my motivation very soon after I started.
-    - [dynasty](dynasty/): doodling about something like Crusader Kings 2; trying to model the data
-    - [dns-server](dns-server/)
-    - [database](database/)
-    - [pragmatic](pragmatic/)
-    - [gen-site](gen-site/)
     - [ptt](ptt/): should be merged into `meta`
-- Java libraries
-    - [web](web/): various Java libraries; should be reorganized
-    - [java-fun](java-fun/) tries to make Java more pleasant.
-    - [control](control/)
 - [devops](devops/): unclear, DevOps, infrastructure, cloud
 - [research](research/): old books/writings to be reassembled into my website
-- [archive](archive/): abandoned software
+- [archive](archive/): abandoned things
 
 ## Travis CI woes
 
