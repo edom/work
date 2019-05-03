@@ -16,5 +16,5 @@ We have these dreams:
 
 ```
 cd ../build
-g++ -Wall -g ../prolog/prolog.cpp -o prolog
+g++ -Wall -std=c++11 -g -o prolog ../prolog/prolog.cpp
 ```
