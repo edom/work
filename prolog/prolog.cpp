@@ -12,9 +12,10 @@ Problems:
 #include <stdio.h>
 #include <string.h>
 
+#include "object.cpp"
 #include "array.cpp"
 #include "string.cpp"
-#include "object.cpp"
+#include "gc.cpp"
 #include "term.cpp"
 #include "unify.cpp"
 #include "world.cpp"
