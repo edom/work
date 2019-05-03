@@ -7,9 +7,9 @@ class Object {
     static constexpr char DEAD = 0;
     static constexpr char LIVE = 1;
 
-    char mark;
-
     static constexpr Object* AT_NONE (Object* _this, size_t _i) { return nullptr; }
+
+    char mark;
 
 protected:
 

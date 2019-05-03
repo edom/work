@@ -13,10 +13,11 @@ Problems:
 #include <string.h>
 
 #include "object.cpp"
+#include "term.cpp"
 #include "array.cpp"
 #include "string.cpp"
+#include "terms.cpp"
 #include "gc.cpp"
-#include "term.cpp"
 #include "unify.cpp"
 #include "world.cpp"
 
@@ -83,7 +84,6 @@ void test_size () {
     printf("sizeof(Object) = %zu\n", sizeof(Object));
     printf("sizeof(Foreign_object<int>) = %zu\n", sizeof(Foreign_object<int>));
     printf("sizeof(Term) = %zu\n", sizeof(Term));
-    printf("sizeof(Term1) = %zu\n", sizeof(Term1));
     printf("sizeof(Var) = %zu\n", sizeof(Var));
     printf("sizeof(String) = %zu\n", sizeof(String));
 }
@@ -91,10 +91,10 @@ void test_size () {
 void test_gc (World& w) {
     Array<Object*> objects (1024);
     Array<Object*> roots (1024);
-    Term* a = w.new_var();
-    Term* b = w.new_var();
-    Term* c = w.new_var();
-    Term* d = w.new_var();
+    Var* a = w.new_var();
+    Var* b = w.new_var();
+    Var* c = w.new_var();
+    Var* d = w.new_var();
     a->set_referent(b);
     b->set_referent(c);
     objects.add(a);

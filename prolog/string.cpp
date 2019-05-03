@@ -1,5 +1,6 @@
 // mutable byte string
-class String final : private Array<char> {
+// TODO make Array extend Term
+class String final : public Term, private Array<char> {
 public:
     // construction
         String (size_t limit) : Array(limit) {}
@@ -8,6 +9,14 @@ public:
             String* s = new String(limit);
             s->append_trunc(cstr);
             return s;
+        }
+        String* copy () const {
+            String* c = new String(count_);
+            for (size_t i = 0; i < count_; ++i) {
+                c->items[i] = items[i];
+            }
+            c->count_ = count_;
+            return c;
         }
     // delegates
         using Array::clear;
@@ -58,4 +67,16 @@ public:
             }
             va_end(ap);
         }
+    // Term
+        bool get_string (const String** val) const override {
+            *val = this;
+            return true;
+        }
+protected:
+    Refs get_gc_out_refs () override {
+        return REFS_NONE(this); // TODO
+    }
+    void do_print_debug (String* out) const override {
+        out->append_trunc(this);
+    }
 };
