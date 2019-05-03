@@ -1,10 +1,8 @@
 class String;
 
 template<typename T>
-class Array final {
-    friend class String;
-
-private:
+class Array {
+protected:
     size_t count_;
     size_t limit;
     T* items;
