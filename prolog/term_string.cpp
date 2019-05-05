@@ -1,6 +1,7 @@
 // mutable byte string
 // TODO make Array extend Term
 class String final : public Term, private Array<char> {
+    friend class World;
 public:
     // construction
         String (size_t limit) : Array(limit) {}
@@ -73,9 +74,6 @@ public:
             return true;
         }
 protected:
-    Refs get_gc_out_refs () override {
-        return REFS_NONE(this); // TODO
-    }
     void do_print_debug (String* out) const override {
         out->append_trunc(this);
     }

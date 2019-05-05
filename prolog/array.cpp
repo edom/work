@@ -1,12 +1,11 @@
-class String;
-
 template<typename T>
-class Array {
+class Array : public Uncopiable {
 protected:
     size_t count_;
     size_t limit;
     T* items;
 
+protected:
     void require_min_limit (size_t min) {
         while (limit < min) {
             expand();
@@ -28,12 +27,14 @@ protected:
         }
         delete[] items;
         items = new_items;
+        limit = new_limit;
     }
     size_t write_to (FILE* out) const {
         return fwrite(items, 1, count_, out);
     }
 public:
-    Array (size_t limit) {
+    Array (size_t limit)
+    : Uncopiable() {
         this->count_ = 0;
         this->limit = limit;
         this->items = new T[limit];
@@ -59,6 +60,7 @@ public:
         assert(count_ <= limit);
         this->count_ = count_;
     }
+    // The parameter "i" may be greater than count_ but must be less than limit.
     const T& at (size_t i) const {
         assert(i < limit);
         return items[i];
@@ -81,4 +83,18 @@ public:
     T& operator[] (size_t i) {
         return at(i);
     }
+    public: // stack
+        struct Stack_underflow {};
+        void push (T item) {
+            require_min_limit(count_ + 1);
+            items[count_] = item;
+            ++count_;
+        }
+        T pop () throw (Stack_underflow) {
+            if (count_ <= 0) {
+                throw Stack_underflow();
+            }
+            --count_;
+            return items[count_];
+        }
 };

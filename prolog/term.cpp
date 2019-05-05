@@ -5,7 +5,6 @@ class Var;
 
 class Term : public Object {
     friend class World;
-    friend class Garbage_collection;
 protected:
     // Destructor should only be accessed by Garbage_collection.
     virtual ~Term () {}

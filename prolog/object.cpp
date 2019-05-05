@@ -1,47 +1,29 @@
 #include <time.h>
 
-// garbage-collectible object
+//  Garbage-collectible object.
+//  We use the same technique used in https://github.com/doublec/gc.
 class Object {
     friend class Garbage_collection;
 
-    static constexpr char DEAD = 0;
-    static constexpr char LIVE = 1;
+private:
 
-    static constexpr Object* AT_NONE (Object* _this, size_t _i) { return nullptr; }
-
-    char mark;
+    bool live;
 
 protected:
 
-    Object () : mark(DEAD) {}
+    Object () : live(false) {}
 
-    struct Refs;
-
-    virtual Refs get_gc_out_refs () = 0;
     virtual ~Object () {}
 
-    // An instance of "Refs" iterates the objects pointed/used/referred by "self".
-    struct Refs final {
-        typedef Object* at_t (Object*, size_t);
+    //  The programmer must call the mark_children methods of each direct superclass.
+    virtual void mark_children () {}
 
-        Object* self;
-        size_t count;
-        at_t* at;
+public:
 
-        Refs (Object* self, size_t count, at_t* at) {
-            this->self = self;
-            this->count = count;
-            this->at = at;
-        }
-
-        // may return nullptr
-        Object* operator[] (size_t i) {
-            return (*at)(self, i);
-        };
-    };
-
-    static Refs REFS_NONE (Object* self) {
-        return Refs(self, 0, AT_NONE);
+    void mark () {
+        if (live) { return; }
+        live = true;
+        mark_children();
     }
 };
 
@@ -49,9 +31,6 @@ template<typename T>
 class Foreign_object final : public Object {
 private:
     T* raw;
-    Refs get_gc_out_refs () override {
-        return REFS_NONE(this);
-    }
 public:
     virtual ~Foreign_object () {
         delete raw;
