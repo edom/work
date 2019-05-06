@@ -316,6 +316,41 @@ But even an interpreter has an implicit type system.
 1. Translate it to Haskell.
 1. ???
 1. PROFIT
+* What I learn from teaching Haskell to a beginner
+** Three levels
+Level 0 is value-level.
+
+Level 1 is type-level.
+
+Level 2 is kind-level.
+** Substitution, equality, rules, pattern-matching
+** GADT syntax is more intuitive than Haskell 98 data syntax
+GADT syntax makes it obvious that =Just= is a function and that =Just 1= is a value.
+#+BEGIN_EXAMPLE
+data Maybe a where
+    Nothing :: Maybe a
+    Just :: a -> Maybe a
+#+END_EXAMPLE
+
+With Haskell 98 data syntax, I have to explain to the beginner,
+why the equal sign does not mean equality, that is, substitutability.
+
+Syntax should represent semantics and be consistent with semantics.
+** Functor, Applicative, Monad, extension of spaces
+Extension of spaces (a la Abdullah):
+#+BEGIN_EXAMPLE
+fmap  ::   (a -> b) -> (f a -> f b)
+(<*>) :: f (a -> b) -> (f a -> f b)
+(=<<) :: (a -> f b) -> (f a -> f b)
+#+END_EXAMPLE
+
+And then explain (>>=) as swapped (=<<).
+** Monad is for do-notation
+No need to turn off a beginner with category theory.
+** Haskell's type system leaves some things to be desired
+Why can't I have a type that is inhabited by {Nothing, 0, 1, 2, ...}?
+Why do I have to write the Just in {Nothing, Just 0, Just 1, Just 2, ...}?
+Are Abdullah and I the only people who think this way?
 * A mess; do not see
 ** Open ADTs (algebraic data types)
    :PROPERTIES:
