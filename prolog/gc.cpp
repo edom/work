@@ -59,8 +59,8 @@ public:
             int64_t ms = milliseconds_taken_by([&](){
                 for (size_t i = 0; i < old_count; ++i) {
                     Object* obj = objects[i];
-                    if (obj->live) {
-                        obj->live = false;
+                    if (obj->is_live()) {
+                        obj->set_live(false);
                         objects[new_count] = obj;
                         ++new_count;
                     } else {
