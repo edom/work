@@ -998,6 +998,7 @@ It is unlikely that we will ever want to change an accounting system to a city-b
 Example of architectural change:
 Adding undo capability to a software system that was not designed with undo in mind.
 Adding undo requires reification of all undoable actions.
+
 ** Backward-compatibility complicates development but simplifies maintenance
 Reasons for maintaining backward-compatibility:
 - If you maintain your library's backward-compatibility, you only need to maintain the latest version of the library.
@@ -1114,80 +1115,10 @@ We should rotate programmers, no less frequent than every year, for software mai
 Interfaces enable us to pretend that our coworkers have finished their jobs.
 
 Interfaces are contracts, promises, agreements.
-* Measuring productivity?
-** Is it possible? Is it practical?
-What is productivity?
-The propensity to produce?
-
-What does it mean to measure productivity?
-
-It is impractical to trace all the causal chains.
-
-It is easy to compare factory worker productivity between such workers because:
-- The causal chain is very simple and short.
-- The interaction between factory workers do not affect each worker's productivity.
-- The environmental factors (machines, lighting, etc.) are constant and identical for all workers.
-
-A knowledge worker's productivity is affected by peer interaction.
-
-In order to measure a programmer's productivity, he must first be isolated from everyone else.
-But is this isolation enough?
-
-If both A and B are necessary causes of C,
-then A or B alone is not sufficient to cause C.
-Each of A and B is a causal factor (necessary but not sufficient).
-The cause of C cannot be reduced to either A or B.
-Both of them are necessary to cause C.
-For example, in the fire triangle, all of fuel, oxygen, and heat are necessary to cause fire.
-The cause of fire cannot be reduced to any strict sub-combination of those three factors.
-
-Measuring producitivity requires understanding causality.
-
-It is not as simple as blaming the proximate (the nearest) cause.
-For example, suppose a smoker in a gas station causes an explosion.
-The blame is /largely/, but not /entirely/ on the smoker,
-because the smoker alone is not enough to cause the explosion:
-the explosion requires gasoline vapor,
-which is caused by the existence of the gas station,
-which is caused by the demand for gas,
-which is caused by other car owners,
-and so on.
-In the end, all of humanity shares a little blame, although negligible.
-** When is line of code a valid measure?
-Line of code (LOC) can be a valid measure if they are /normalized/ first,
-like purchasing-power-parity adjustment in currency exchange rates.
-
-One atomic statement per line.
-
-LOC is valid for the same language with the same coding style.
-
-1 LOC of C cannot be equated with 1 LOC of Java, in the same way we cannot equate 1 kilogram and 1 pound.
-** What does a software engineer do?
-- Find out what the user really wants.
-- Formalize user requirements.
-** How do we compare programmers/code?
-- correctness of the system
-- maintainability of the system
-- efficiency of the system
-- time taken to implement the system
-** How do we measure developer productivity?
-- 2004 article "Defining and measuring the productivity of programming languages" [[https://pdfs.semanticscholar.org/1852/9ff58460b6238f5095af073d8505d79d3264.pdf][pdf]]:
-  - It defines these metrics:
-    - "the time and effort required to write, debug, and tune the code"
-    - "the performance of the code that results"
-  - power-efficiency graph (human efficiency and machine efficiency)
-  - what else?
-- 2008 https://ifs.host.cs.st-andrews.ac.uk/Books/SE9/Web/Planning/productivity.html
-  - https://ifs.host.cs.st-andrews.ac.uk/Books/SE9/
-- 1992 article https://www.andrews.edu/~vyhmeisr/papers/progprod.html
-- 2012 article http://www.drdobbs.com/jvm/the-comparative-productivity-of-programm/240005881
-  - "A database comparing 6,000 projects shows that the choice of programming language has a significant impact on project schedule."
-** What?
-- 2015, PhD thesis, Bergersen, "Measuring Programming Skill: Construction and Validation of an Instrument for Evaluating Java Developers"
-  - [[http://folk.uio.no/gunnab/publications/Bergersen2015_PhD_thesis.pdf][pdf]]
-  - It's a collection of 4 articles.
-  - https://www.duo.uio.no/handle/10852/48583
-** Ideas?
+** Hotspots and software maintenance?
+Adam Tornhill: "A Hotspot is complicated code that you need to work with often."[fn::https://www.empear.com/blog/parse-a-monster/]
+Our eagerness to refactor a piece of code should be proportional to how likely it is to change.
+We should not refactor code that will never change.
 * Doesn't belong here?
 Most of these things are too tactical, not strategic enough.
 ** How do we reverse-engineer software?
