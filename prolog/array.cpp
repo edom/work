@@ -1,3 +1,8 @@
+#ifndef com_spacetimecat_prolog_array_cpp_included
+#define com_spacetimecat_prolog_array_cpp_included
+
+#include "uncopiable.cpp"
+
 template<typename T>
 class Array : public Uncopiable {
 protected:
@@ -98,3 +103,5 @@ public:
             return items[count_];
         }
 };
+
+#endif

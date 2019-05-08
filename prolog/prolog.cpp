@@ -27,6 +27,8 @@ Problems:
 #include "world.cpp"
 #include "call.cpp"
 #include "test.h"
+#include "parser.cpp"
+#include "stream.cpp"
 
 int
 main (int argc, char* argv[]) {
