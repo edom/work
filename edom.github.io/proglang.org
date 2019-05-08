@@ -318,7 +318,7 @@ Why don't we just build ASN.1 into the language?
    :CUSTOM_ID: typing-records
    :END:
 
-A record type can be thought as a product type whose components are named.
+A record type can be thought of as a product type whose components are named.
 
 If each value =valN= has type =typN=, then the record ={key1=val1; key2=val2; ...;}= has type ={key1:typ1; key2:typ2; ...;}=.
 For example, the record ={name="John"; age=20}= has type ={name:String; age:Int;}=.
@@ -1144,7 +1144,7 @@ but with Scheme's applicative-order beta reduction (AOBR) instead of Haskell's n
 AOBR means: to evaluate =f x=, first evaluate =x=, and then evaluate =f x=.
 SH is strict, and Haskell is lazy.
 
-An inhabitant of the type =Lazy a= can be thought as a thunk that will return an inhabitant of =a=.
+An inhabitant of the type =Lazy a= can be thought of as a thunk that will return an inhabitant of =a=.
 
 To construct an expression of type =Lazy a=, combine these: - The expression =bottom= constructs a thunk will fail. - The expression =pure x= constructs a thunk that will return =x=.
 Note that =x= is evaluated before the thunk is constructed. - The expression =delay f= constructs a thunk that will return the result of evaluating =f Unit=.
@@ -2712,7 +2712,7 @@ Then, we can approximate =f= as =f_approx=:
         approx count begin_f step_f end_f
 #+END_SRC
 
-The =count= parameter can be thought as a time limit or time-out,
+The =count= parameter can be thought of as a time limit or time-out,
 the number of iterations,
 the number of steps.
 
@@ -3095,7 +3095,7 @@ Top-level methods.
 This is my opinion on how to best use Java.
 
 Java, when used properly, should not be more verbose than C.
-*Java should be thought as enhanced C*.
+*Java should be thought of as enhanced C*.
 It adds these features:
 
 - namespacing

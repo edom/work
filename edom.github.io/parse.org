@@ -132,7 +132,7 @@ Declaratively it means X followed by Y.
 Operationally it means match X /then/ match Y.
 ** Possible-prefix incremental parsing?
 Given a string S, find all rules that /may/ match a string that begins with S.
-** A language can be thought as a possibly infinite set of strings
+** A language can be thought of as a possibly infinite set of strings
 ** Grammar and parsing
 Grammar is the what.
 Parsing is the how.
@@ -387,7 +387,7 @@ Generation?
 ** What?
 Recall that a /relation/ is a triple that consists of domain, codomain, and pairing.
 
-A grammar \(G\) can be thought as a relation between the set \(F\) of forms and the set \(M\) of meanings: \(G \subseteq F \times M\).
+A grammar \(G\) can be thought of as a relation between the set \(F\) of forms and the set \(M\) of meanings: \(G \subseteq F \times M\).
 
 In computer-language parsing, usually the form set \(F = C^*\) is the set of character strings,
 and the meaning set \(M\) is the set of syntax tree nodes.
@@ -403,7 +403,7 @@ But should we?
 The correspondence: one Chomsky production rule corresponds to one Horn clause with two parameters (input and rest/unparsed).
 P(A,B) means that the rule P matches the prefix of A that B lacks.
 
-A DCG predicate can be thought as a relation between two strings.
+A DCG predicate can be thought of as a relation between two strings.
 \( P \subseteq C^* \times C^* \).
 
 A /grammar relation/ is a relation \(G \subseteq C^* \times T\).

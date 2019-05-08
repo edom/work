@@ -849,7 +849,7 @@ Unfortunately not everyone follows this convention.
 **** Their relationships
 - 2010, "Functional-Logic Programming Lecture Notes", Harold Boley, slides, [[http://www.cs.unb.ca/~boley/FLP/cs6905FLP.pdf][pdf]]
   - Knowledge representation in AI roughly corresponds to software specification in software engineering.
-  - Declarative programs can be thought as executable specifications.
+  - Declarative programs can be thought of as executable specifications.
   - Invertibility principle (slide 36)
   - Nesting/conjunction principle (slide 46)
   - Unification principle (slide 50)
@@ -982,7 +982,7 @@ https://en.wikipedia.org/wiki/Prolog_syntax_and_semantics
 We often define a set \(A\) with the set-builder notation \( \SetBuilder{x}{\phi_A(x)} \).
 We should not conflate a set \(A\) and its membership-testing predicate \(\phi_A\).
 
-A set can be thought as all the ground terms that satisfy a predicate.
+A set can be thought of as all the ground terms that satisfy a predicate.
 #+BEGIN_EXAMPLE
 % person ~ {joe}
 person(joe).
@@ -1938,7 +1938,7 @@ Other systems:
 
 "There have been some Prolog systems in the past that could store predicates on a file."[fn::https://swi-prolog.discourse.group/t/scaling-to-billions-of-facts/380/2]
 
-An SQL table can be thought as a predicate that only works with ground terms.
+An SQL table can be thought of as a predicate that only works with ground terms.
 *** Making it work
 *** Making it fast
 We want to push the filter condition to SQL.
@@ -2213,7 +2213,7 @@ The 2010 article "Using DSLs for Developing Enterprise Systems" [[https://resear
 - It compares some DSL tools.
 - It should have been a wiki article.
 
-A relation can be thought as an interpretation of function terms.
+A relation can be thought of as an interpretation of function terms.
 For example, m0/2 and m1/2 give different meanings to the same function term f/1.
 #+BEGIN_EXAMPLE
 m0(f(X), Y) :- Y is X+1.
@@ -2402,7 +2402,7 @@ because when writing an interpreter we can reuse all features of the meta-langua
 Suppose that:
 - There is an agent \(A\) with goal \(G\).
 - \(K\) is the entire knowledge of agent \(A\).
-  This \(K\) may be thought as a set of Horn clauses.
+  This \(K\) may be thought of as a set of Horn clauses.
 
 Define "hypothesis" as "something we don't know but should know"?
 
@@ -3699,7 +3699,7 @@ Mercury vs Prolog
 - <2018-10-21> "The Prolog to Mercury transition guide" https://www.mercurylang.org/information/doc-latest/transition_guide.pdf
 
 SQL? Datalog?
-** Programming can be thought as applied mathematics?
+** Programming can be thought of as applied mathematics?
 Prolog can be approached from logic, database theory, philosophy.
 
 In Prolog, by default, function symbols mean themselves,
