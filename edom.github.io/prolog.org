@@ -436,6 +436,16 @@ There are several models (ways of understanding what a Prolog program does):
 The procedural way is what /actually/ happens.
 
 Sometimes an abstraction fails, and we have to know what is really going on under the abstraction.
+** Should we introduce Prolog as a database or as a programming language?
+Perhaps it helps to introduce Prolog as a deductive /database/ instead of as a /programming/ language.
+
+The working of Prolog can be summarized this way:
+- A database is a collection of Horn clauses.
+  - A Horn clause is an implication whose antecedent is an atomic formula.
+- To prove A /and/ B, prove A /then/ prove B.
+  (Prolog operational semantics.)
+  - The order of clauses matters.
+    Prolog tries clauses in the order they appear.
 ** What does Prolog code look like and what does it mean?
 A Prolog program is a collection of Horn clauses?
 *** Reading Prolog programs, and a crash course to logic
@@ -2775,6 +2785,8 @@ People hate Prolog because they are unfortunate enough to be taught by teachers 
 Those students grow up to be adults with atrophied minds condemned to mediocrity.
 ** Reason for distinguishing atoms and zero-arity compound terms
 Such separation helps us write a language interpreter in which =foo= means a variable value and =foo()= means a function call.
+** Kowalski 1992 "Legislation as Logic Programs"
+https://www.doc.ic.ac.uk/~rak/papers/law.pdf
 * Rethinking module systems, especially of Prolog
 Miller 1986 \cite{miller1986theory} has what we want: implication as local scoping.
 ** What are the problems of existing module systems?
