@@ -4192,4 +4192,7 @@ We can think of Prolog as Lisp with M-expression instead of S-expression.
 When we write a predicate that deconstructs an instance of an algebraic data type, we don't want the constructors to be namespaced.
 
 When we use an atom as a name under the unique name assumption, in a multifile predicate, sometimes we want the atom to be namespaced.
+* Parsing Prolog?
+Prolog's grammar is /adaptive/[fn::https://web.cs.wpi.edu/~jshutt/adapt/top.html]:
+the =op/3= directive changes the grammar.
 * Bibliography
