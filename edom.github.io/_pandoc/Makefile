@@ -11,7 +11,15 @@ env ?= dev
 # The user overrides this if he/she wants to build some files only.
 org_files ?= $(wildcard *.org)
 
+# md_files is for sitemap, not for building with Pandoc.
+# Markdown files are built by Jekyll, not Pandoc.
+# These Markdown files should be converted to Org Mode with Pandoc,
+# and then md_files should be deleted.
+md_files ?= $(wildcard *.md)
+
 html_dir ?= _pandoc_out/$(env)
+
+site_url_prefix ?= https://edom.github.io
 
 # End user-adjustable variables.
 
@@ -26,12 +34,13 @@ prog_prefix ?= $(dir $(makefile_path))
 template_file ?= $(prog_prefix)template-full.html
 filter_file ?= $(prog_prefix)filter.lua
 csl_file ?= $(prog_prefix)acm-sig-proceedings.csl
+sitemap_file = $(html_dir)/sitemap.xml
 html_files = $(addprefix $(html_dir)/,$(patsubst %.org,%.html,$(org_files)))
 
 pandoc_flags_prod = \
 	--metadata=production:true \
 	--metadata=google_analytics_id:UA-12628443-6 \
-	--metadata=site_url_prefix:https://edom.github.io \
+	--metadata=site_url_prefix:$(site_url_prefix) \
 
 .DELETE_ON_ERROR:
 
@@ -67,8 +76,21 @@ $(html_dir)/%.html: \
 	! grep --fixed-strings --regexp=-PANDOC-TEMPLATE-ERROR- $@
 	@echo
 
-.PHONY: all
-all: $(html_files)
+$(sitemap_file): \
+		$(org_files) \
+		$(md_files) \
+
+	site_url_prefix=$(site_url_prefix) _sh/sitemap $^ > $@
+
+.PHONY:	\
+	all \
+	sitemap \
+
+all: \
+	$(sitemap_file) \
+	$(html_files) \
+
+sitemap: $(sitemap_file)
 
 # Jekyll _site directory.
 jekyll_dir_dev = _site

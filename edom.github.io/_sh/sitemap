@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+echo -n '<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+'
+for file in "$@"; do
+    lastmod=$(date --utc --iso-8601=seconds --reference=$file)
+    echo -n "\
+  <url>
+    <loc>${site_url_prefix}/${file%.*}.html</loc>
+    <lastmod>${lastmod}</lastmod>
+  </url>
+"
+done
+echo "</urlset>"
