@@ -1,3 +1,6 @@
+#ifndef PROLOG_WORLD_H_INCLUDED
+#define PROLOG_WORLD_H_INCLUDED
+
 class Clause final {
     private:
         Term* head;
@@ -140,3 +143,5 @@ class World final {
             return unify(a, b, nullptr);
         }
 };
+
+#endif
