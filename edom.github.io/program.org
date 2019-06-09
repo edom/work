@@ -1511,4 +1511,99 @@ I think that is wise.
 *** Other people's opinions
 - 2012 article "Socio-PLT: Principles for Programming Language Adoption" [[https://lmeyerov.github.io/projects/socioplt/paper0413.pdf][pdf]]
 
+* Memory management
+Is there a lambda-calculus interpreter without garbage collection?
+Is that PreScheme[fn::https://thintz.com/resources/prescheme-documentation]?
+PreScheme is limited Scheme with manual memory management.
+
+Stack allocation is simple and nice.
+
+Is dynamic memory allocation really necessary?
+
+Suppose we are writing a program that asks the user for a line of strings.
+
+#+BEGIN_EXAMPLE
+int read_line (char*, size_t);
+#+END_EXAMPLE
+
+What if the buffer not big enough?
+Return ENOMEM or EAGAIN?
+
+How do we make a console to-do list application without dynamic memory management?
+
+How do we make an in-memory database without dynamic memory management?
+
+That is only one function.
+What if there are several functions?
+
+If every function is restartable/continuable, then it simplifies memory allocation?
+
+How can we manage memory in programming?
+- manual and static, like in embedded programming
+- manual and dynamic, C malloc and free
+- Rust borrow
+- garbage collection
+- allocate and never free, useful in programs that run for a short time
+
+What are the consequences of not wanting manual memory management?
+- garbage collection
+- Rust-style management?
+
+If a process lives short enough, then it can allocate memory without freeing, and all the memory it uses can be freed when it ends.
+
+We can write a program that sorts an array of 100 integers.
+But what if there are more than 100 integers?
+
+How can we manage memory sanely?
+- one-more-indirection principle: pass an allocator to every class/subroutine that needs to allocate memory
+- restartable architecture; a subroutine never allocates memory; a subroutine throws an exception when the memory allocated by the parent is insufficient; the root method allocates memory, and re-calls everything in the call tree; use dependency injection
+
+Why is there no memory management in lambda calculus?
+Is it possible to implement lambda calculus without garbage collection?
+
+Simplifying C style:
+- Every function must free everything that it mallocs.
+- Everything else must be passed pre-allocated by a caller in the call stack.
+- If there is no enough memory, a function must return ENOMEM.
+- Reify the state into a struct.
+
+Example of state reification:
+#+BEGIN_EXAMPLE
+// The function
+
+int indexof (char* s, char* c) {
+    for (int i = 0; s[i] != 0; ++i) {
+        if (s[i] == c) { return i; }
+    }
+    return -1;
+}
+
+// becomes the class
+
+struct indexof {
+    char* s;
+    char c;
+    int i;
+    indexof (char* s_, char c_) : s(s_), c(c_), i(0) {}
+
+    int step () {
+        if (s[i] == 0) { i = -1; return 0; }
+        if (s[i] == c) { return 0; }
+        ++i;
+        return EAGAIN;
+    }
+};
+#+END_EXAMPLE
+
+Allocating memory is easy.
+The hard thing is deciding when to free it.
+We have several choices:
+- Never free.
+- Who allocates always frees.
+- Caller always frees?
+* Static vs dynamic: bad terminology?
+We should ask these questions instead:
+- Is type information available at runtime?
+- How far can types be manipulated at compile-time?
+- Is there a distinction between compile-time and run-time?
 * Bibliography
