@@ -1,215 +1,225 @@
-% -------------------- encyclopedia
+%   We assume that the user has downloaded the data using sim_companies.js.
 
-%%  encyclopedia(Thing, Inputs, Producer, Producability)
-%   Producability is units per hour.
+:-  consult('./sim_companies_static.pro').
+:-  consult('./sim_companies_dynamic.pro').
 
-% agriculture and food
-encyclopedia(seed, 0.1*water, plantation, 889.63).
-encyclopedia(apple, 3*water + 1*seed, plantation, 202.19).
-encyclopedia(orange, 3*water + 1*seed, plantation, 186.01).
-encyclopedia(grape, 4*water + 1*seed, plantation, 161.75).
-encyclopedia(grain, 0.5*water + 1*seed, plantation, 808.75).
-encyclopedia(steak, 8*water + 10*grain, farm, 45.21).
-encyclopedia(sausage, 3*water + 2*grain, farm, 135.63).
-encyclopedia(egg, 0.4*water + 0.5*grain, farm, 316.47).
-encyclopedia(cotton, 1*water + 1*seed, plantation, 258.80).
+% -------------------- constraints
 
-% fashion
-encyclopedia(fabric, 2*cotton + 1*power, clothes_factory, 241.12).
-encyclopedia(leather, 5*water + 10*grain, farm, 30.14).
-encyclopedia(underwear, 1*fabric, clothes_factory, 167.45).
-encyclopedia(glove, 0.5*fabric + 0.5*leather, clothes_factory, 144.61).
-encyclopedia(dress, 3*fabric + 0.5*plastic, clothes_factory, 152.22).
-encyclopedia(shoe, 1*leather + 0.2*plastic, clothes_factory, 98.95).
-encyclopedia(handbag, 1.5*leather, clothes_factory, 68.50).
-encyclopedia(sneaker, 1*plastic, clothes_factory, 175.06).
+:- dynamic(have_building/1).
 
-% energy
-encyclopedia(petrol, 15*power + 1*crude_oil, refinery, 112.54).
+have_building(B) :- building_name(B, 'Water reservoir').
+have_building(B) :- building_name(B, 'Power plant').
+%have_building(B) :- building_name(B, 'Mine').
+%have_building(B) :- building_name(B, 'Oil rig').
+have_building(B) :- building_name(B, 'Refinery').
+have_building(B) :- building_name(B, 'Shipping depot').
+%have_building(B) :- building_name(B, 'Plantation').
+%have_building(B) :- building_name(B, 'Farm').
+%have_building(B) :- building_name(B, 'Beverage factory').
+have_building(B) :- building_name(B, 'Factory').
+%have_building(B) :- building_name(B, 'Fashion factory').
+%have_building(B) :- building_name(B, 'Car factory').
+%have_building(B) :- building_name(B, 'Electronics factory').
+/*
+have_building(B) :- building_name(B, N), member(N, [
+    'Plant research center'
+    , 'Physics laboratory'
+    , 'Breeding laboratory'
+    , 'Chemistry laboratory'
+    , 'Software R&D'
+    , 'Automotive R&D'
+    , 'Fashion & Design'
+]).
+*/
 
-% electronics
-encyclopedia(smartphone, 2*processor + 1*electronic_component + 1*battery + 1*display + 2*aluminium, electronics_factory, 11.6).
+%can_produce(R) :- resource_name(R, 'Minerals').
+%can_produce(R) :- resource_name(R, 'Iron ore').
+%can_produce(R) :- resource_name(R, 'Sand').
+can_produce(R) :- have_building(B), building_produces_resource(B, R).
 
-% automotive
-encyclopedia(economy_car, 1*combustion_engine + 1*car_interior + 1*car_body + 1*on_board_computer, car_factory, 14.09).
+:- dynamic(cannot_produce/1).
 
-encyclopedia(water, 0.2*power, reservoir, 1626.43).
-encyclopedia(power, nothing, power_plant, 2592.87).
+cannot_produce(R) :- resource_name(R, 'Seeds').
+cannot_produce(R) :- resource_name(R, 'Eggs').
+cannot_produce(R) :- resource_name(R, 'Grain').
+cannot_produce(R) :- resource_name(R, 'Diesel').
+cannot_produce(R) :- resource_name(R, 'Power').
+%cannot_produce(R) :- resource_name(R, 'Bauxite').
+%cannot_produce(R) :- resource_name(R, 'Sand').
+cannot_produce(R) :- resource_name(R, 'Chemicals').
+%cannot_produce(R) :- resource_name(R, 'Silicon').
+%cannot_produce(R) :- resource_name(R, 'Minerals').
+%cannot_produce(R) :- resource_name(R, 'Iron ore').
 
-thing(A) :- encyclopedia(A, _, _, _).
-thing_inputs(Output, Inputs) :- encyclopedia(Output, Inputs, _, _).
-produces(Producer, Thing) :- encyclopedia(Thing, _, Producer, _).
-producability(Thing, Rate) :- encyclopedia(Thing, _, _, Rate).
+administration_overhead(0.0882).
 
-% -------------------- hourly labor cost
+%   Must not be zero.
+%   When in doubt, put the lowest abundance of all used mines.
+mine_abundance(0.8).
 
-labor(plantation, 105).
-labor(farm, 138).
-labor(grocery, 143).
-labor(reservoir, 345).
-labor(power_plant, 414).
-labor(clothes_factory, 143).
-labor(fashion_store, 321).
-labor(electronics_factory, 380).
-labor(electronics_store, 173).
-labor(refinery, 483).
-labor(car_dealership, 380).
-labor(gas_station, 345).
+% -------------------- accessors
 
-% -------------------- exchange
+resource(A) :- resource(A, _, _).
+resource_name(A, B) :- resource(A, B, _).
 
-% no data for sellability
+building_name(A, B) :- building(A, B, _, _, _, _).
+building_wage(A, B) :- building(A, _, B, _, _, _).
 
-%%  market(Thing, Sellability, Price_per_unit)
+building_produces_resource(A, B) :- building_produces_resource(A, B, _).
 
-market(nothing, 0, 0).
+producing_requires(Out, In) :- producing_requires(Out, _, In).
 
-% agriculture and food
+% -------------------- action generation
 
-market(seed, 10000, 0.220).
-market(apple, 1000, 2.000).
-market(orange, 1000, 2.100).
-market(grape, 1000, 2.500).
-market(grain, 1000, 0.640).
-market(steak, 100, 12.500).
-market(sausage, 500, 3.850).
-market(egg, 1000, 1.100).
-market(cotton, 1000, 1.300).
+procure([], []).
 
-% fashion
+procure([Count*Out|Outs], [A|B]) :-
+    procure1(Count, Out, A),
+    procure(Outs, B).
 
-market(fabric, 1000, 3.900).
-market(leather, 500, 14.500).
-market(underwear, 1000, 4.900).
-market(glove, 100, 11.400).
-market(dress, 500, 19.400).
-market(shoe, 1000, 20.000).
-market(handbag, 500, 25.250).
-market(sneaker, 1000, 13.700).
+procure1(Count, Out, buy(Count, Out, Market_Price, Cost)) :-
+    resource_market_price(Out, Market_Price),
+    Cost is Count * Market_Price.
 
-market(petrol, 1000, 39.500).
+procure1(Count, Out, produce(Count, Out, Building, Total_Cost, Labor_Cost, Material_Cost, Actions)) :-
+    resource(Out),
+    can_produce(Out),
+    \+ cannot_produce(Out),
+    findall(N*In, (producing_requires(Out, InPerOut, In), N is Count*InPerOut), Ins),
+    building_produces_resource(Building, Out, Full_Out_Per_Hour),
+    (Building == 'M'    % mine
+    ->  mine_abundance(Abundance)
+    ;   Abundance = 1
+    ),
+    Out_Per_Hour is Abundance * Full_Out_Per_Hour,
+    building_wage(Building, Wage),
+    administration_overhead(Adm_Overhead),
+    Labor_Cost is (1 + Adm_Overhead) * Count * Wage / Out_Per_Hour,
+    procure(Ins, Actions),
+    actions_total_cost(Actions, Material_Cost),
+    Total_Cost is Material_Cost + Labor_Cost.
 
-market(smartphone, 1000, 620). % Q3
+actions_total_cost([], 0).
+actions_total_cost([A|B], CAB) :-
+    action_total_cost(A, CA),
+    actions_total_cost(B, CB),
+    CAB is CA + CB.
 
-market(economy_car, 1000, 2100.000).
+action_total_cost(buy(_, _, _, Cost), Cost).
+action_total_cost(produce(_, _, _, Cost, _, _, _), Cost).
 
-market(water, 10000, 0.305).
-market(power, 10000, 0.239).
+action_profit_per_hour(retail(_, _, _, Profit, _, _, _, _), Profit).
+action_profit_per_hour(market(_, _, Profit, _, _, _, _, _, _), Profit).
 
-market_sellability(Thing, Rate) :- market(Thing, Rate, _).
-market_price(Thing, Price) :- market(Thing, _, Price).
+action_profit_per_cost(retail(_, _, Return, _, _, _, _, _), Return).
+action_profit_per_cost(market(_, Return, _, _, _, _, _, _, _), Return).
 
-% -------------------- retail
+action_resource(market(Resource, _, _, _, _, _, _, _, _), Resource).
+action_resource(retail(Resource, _, _, _, _, _, _, _), Resource).
 
-%%  sells(Place, Thing, Sellability, Price).
+resource_transport(A, B) :- resource(A, _, B).
 
-sells(grocery, apple, 89.04, 4.25).
-sells(grocery, orange, 78.95, 4.66).
-sells(grocery, grape, 69.34, 5.39).
-sells(grocery, steak, 24.28, 20.58).
-sells(grocery, sausage, 93.26, 5.85).
-sells(grocery, egg, 427.05, 1.53).
-sells(fashion_store, underwear, 24.21, 22.13).
-sells(fashion_store, glove, 18.62, 33.68).
-sells(fashion_store, dress, 42.85, 27.62).
-sells(fashion_store, shoe, 27.21, 34.57).
-sells(fashion_store, handbag, 15.20, 51.37).
-sells(fashion_store, sneaker, 30.86, 26.80).
-sells(gas_station, petrol, 79.63, 45.06).
-sells(electronics_store, smartphone, 3.07, 706.25).
-sells(car_dealership, economy_car, 1.54, 2192.39).
+% all profits, revenues, and costs are per unit, unless mentioned otherwise
+sell(retail(Out, Building, Profit_Per_Cost, Profit_Per_Hour, Profit, Revenue, Cost, Proc)) :-
+    procure1(1, Out, Proc),
+    building_sells_resource(Building, Out, Sale_Per_Hour, Avg_Price),
+    building_wage(Building, Wage),
+    Revenue is Avg_Price,
+    administration_overhead(Adm_Overhead),
+    Labor_Cost is (1 + Adm_Overhead) * Wage / Sale_Per_Hour,
+    action_total_cost(Proc, Material_Cost),
+    Cost is Labor_Cost + Material_Cost,
+    Profit is Revenue - Cost,
+    Profit_Per_Cost is Profit / Cost,
+    Profit_Per_Hour is Sale_Per_Hour * Profit.
 
-sells(Place, Thing) :- sells(Place, Thing, _Sellability, _Price).
+sell(market(Out, Profit_Per_Cost, Profit_Per_Hour, Profit, Revenue, Cost, Transport_Cost, Market_Fee, Proc)) :-
+    procure1(1, Out, Proc),
+    Proc \= buy(_, _, _, _),
+    action_total_cost(Proc, Material_Cost),
+    resource_transport(Out, Transport),
+    resource_market_price(13, Unit_Transport_Cost), % resource 13 is Transport
+    Transport_Cost is Transport * Unit_Transport_Cost,
+    Market_Fee is 0.03 * Material_Cost,
+    Cost is Material_Cost + Transport_Cost + Market_Fee,
+    resource_market_price(Out, Revenue),
+    Profit is Revenue - Cost,
+    Profit_Per_Cost is Profit / Cost,
+    market_sale_per_hour(Out, Sale_Per_Hour),
+    Profit_Per_Hour is Sale_Per_Hour * Profit.
 
-retail_price(Thing, Price) :- sells(_Place, Thing, _Sellability, Price).
+% guess the minimum between production capacity and market demand
+/*
+market_sale_per_hour(R, 1000) :- resource_name(R, 'Power'), !.
+market_sale_per_hour(R, 123) :- resource_name(R, 'Glass'), !.
+market_sale_per_hour(R, 200) :- resource_name(R, 'Chemicals'), !.
+market_sale_per_hour(R, 150) :- resource_name(R, 'Silicon'), !.
+market_sale_per_hour(R, 180) :- resource_name(R, 'Steel'), !.
+market_sale_per_hour(R, 100) :- resource_name(R, 'Minerals'), !.
+*/
+market_sale_per_hour(R, Q) :- building_produces_resource(_, R, Q).
 
-sellability(Thing, Rate) :- sells(_, Thing, Rate, _).
+show_actions(_, []) :- !.
+show_actions(D, [A|B]) :- !, show_action(D,A), show_actions(D,B).
 
-% -------------------- search
+show_action(Indent, retail(R, B, Profit_Per_Cost, Profit_Per_Hour, Profit, Revenue, Cost, Proc)) :- !,
+    resource_name(R, Name),
+    building_name(B, Building),
+    format('~0|~*|retail ~w at ~w, P/C ~3f% @ $~3f/hr, profit $~3f, revenue $~3f, cost $~3f~n',
+        [Indent, Name, Building, 100*Profit_Per_Cost, Profit_Per_Hour, Profit, Revenue, Cost]),
+    Indent1 is Indent + 2,
+    show_action(Indent1, Proc).
 
-% Constraints that limit the search.
-:- dynamic(must_buy/1).
-must_buy(seed).
-must_buy(cotton).
-must_buy(power).
-must_buy(water).
-must_buy(grain).
-must_buy(leather).
-must_buy(fabric).
+show_action(Indent, market(R, Profit_Per_Cost, Profit_Per_Hour, Profit, Revenue, Cost, Transport_Cost, Market_Fee, Proc)) :- !,
+    resource_name(R, Name),
+    format('~0|~*|market ~w, P/C ~3f% @ $~3f/hr, profit $~3f, revenue $~3f, cost $~3f, transport $~3f, fee $~3f~n',
+        [Indent, Name, 100*Profit_Per_Cost, Profit_Per_Hour, Profit, Revenue, Cost, Transport_Cost, Market_Fee]),
+    Indent1 is Indent + 2,
+    show_action(Indent1, Proc).
 
-:- dynamic(limit_things_to/1).
-% retail items
-%limit_things_to([apple,orange,grape]).
-% raw materials
-%limit_things_to([seed,cotton,grain,fabric,leather,water,power]).
+show_action(Indent, buy(Count, R, Market_Price, Material_Cost)) :- !,
+    resource_name(R, Name),
+    format('~0|~*|buy ~w ~w at $~3f, material $~3f~n',
+        [Indent, Count, Name, Market_Price, Material_Cost]).
 
-procure(A+B, Z) :- !, Z = X+Y, procure(A,X), procure(B,Y).
-procure(A*B, Z) :- !, Z = A*X, procure(B,X).
-procure(Thing, buy(Thing)) :- market_price(Thing, _).
-procure(Thing, produce(Thing, Subprocurements)) :-
-    \+ must_buy(Thing),
-    thing_inputs(Thing, Inputs),
-    procure(Inputs, Subprocurements).
+show_action(Indent, produce(Count, R, B, Total_Cost, Labor_Cost, Material_Cost, Actions)) :- !,
+    resource_name(R, Name),
+    building_name(B, Building),
+    format('~0|~*|produce ~w ~w in ~w, total $~3f, labor $~3f, material $~3f~n',
+        [Indent, Count, Name, Building, Total_Cost, Labor_Cost, Material_Cost]),
+    Indent1 is Indent + 2,
+    show_actions(Indent1, Actions).
 
-interesting_thing(Thing) :-
-    (limit_things_to(Things)
-    ->  member(Thing,Things)
-    ;   thing(Thing)
-    ).
+show_action(Indent, A) :- !,
+    format('~0|~*|unknown step: ~w~n', [Indent, A]).
 
-sell(Profit_per_hour, retail(Procurement)) :-
-    interesting_thing(Thing),
-    procure(Thing, Procurement),
-    cost(Procurement, Procurement_cost),
-    sells(Seller, Thing),
-    labor(Seller, Labor_cost_per_hour),
-    sellability(Thing, Sellability),
-    producability(Thing, Producability),
-    Sale_per_hour is min(Producability,Sellability),
-    Selling_cost is Labor_cost_per_hour / Sale_per_hour,
-    Cost is Selling_cost + Procurement_cost,
-    retail_price(Thing, Retail_price),
-    Profit_per_unit is Retail_price - Cost,
-    Profit_per_hour is Sale_per_hour * Profit_per_unit.
-
-sell(Profit_per_hour, market(Procurement)) :-
-    interesting_thing(Thing),
-    procure(Thing, Procurement),
-    cost(Procurement, Procurement_cost),
-    market_sellability(Thing, Market_sellability),
-    producability(Thing, Producability),
-    Sale_per_hour is min(Producability,Market_sellability),
-    market_price(Thing, Market_price),
-    Selling_cost is 0.03 * Market_price,
-    Cost is Selling_cost + Procurement_cost,
-    Profit_per_unit is Market_price - Cost,
-    Profit_per_hour is Sale_per_hour * Profit_per_unit.
+%%  sort_helper(Resource, Dest, Max_Return, Action)
+%
+%   Dest is market or retail.
+:- dynamic(sort_helper/4).
 
 main :-
-    findall(Profit_per_hour-Procurement, sell(Profit_per_hour, Procurement), Processes),
-    sort(Processes, Sorted_processes),
-    forall(member(Profit_per_hour-Procurement, Sorted_processes),
-        format('~0|~3f~16|~w~n', [Profit_per_hour, Procurement])
-    ).
-
-cost(N * Exp, Total) :- !,
-    cost(Exp, Unit),
-    Total is N * Unit.
-
-cost(A + B, Total) :- !,
-    cost(A, PA),
-    cost(B, PB),
-    Total is PA + PB.
-
-cost(buy(Exp), P) :- !,
-    market_price(Exp, P).
-
-% unit
-cost(produce(Thing, Inputs), Cost) :- !,
-    produces(Producer, Thing),
-    labor(Producer, Labor_cost_per_hour),
-    cost(Inputs, Inputs_cost),
-    producability(Thing, Production_per_hour),
-    Labor_cost is Labor_cost_per_hour / Production_per_hour,
-    Cost is Inputs_cost + Labor_cost.
-
+    %   If deduplication by resource is wanted, use this:
+    retractall(sort_helper/4),
+    forall(sell(Action), (
+        functor(Action, Dest, _), % market or retail
+        action_resource(Action, Resource),
+        action_profit_per_cost(Action, Return),
+        (sort_helper(Resource, Dest, Max_Return, _)
+        ->  (Return > Max_Return
+            ->  retractall(sort_helper(Resource, Dest, _, _)),
+                assertz(sort_helper(Resource, Dest, Return, Action))
+            ;   true
+            )
+        ;   assertz(sort_helper(Resource, Dest, Return, Action))
+        )
+    )),
+    findall(key(Return,Dest)-Action, sort_helper(_, Dest, Return, Action), Pairs),
+    %   Otherwise, if deduplication by resource is not wanted, use this:
+    %findall(Key-Action, (sell(Action), action_profit_per_cost(Action, Key)), Pairs),
+    %   End if.
+    sort(Pairs, Ordered),
+    forall(member(_-Action, Ordered), (
+        show_action(0, Action),
+        nl
+    )).
