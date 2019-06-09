@@ -102,7 +102,7 @@ class World final {
                         u_args[i] = copy_term(pars, c->args[i]);
                     }
                     Compound* u = new Compound(c->name->copy(), arity, u_args);
-                    pars.add({a:td, b:u});
+                    pars.add({td, u});
                     return u;
                 }
             }
@@ -110,7 +110,7 @@ class World final {
                 const String* s;
                 if (td->get_string(&s)) {
                     String* u = s->copy();
-                    pars.add({a:td, b:u});
+                    pars.add({td, u});
                     return u;
                 }
             }

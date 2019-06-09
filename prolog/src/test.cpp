@@ -139,11 +139,11 @@ run_tests () {
     printf("%zu failed tests.\n", num_fail);
     Term* True = w->new_compound_v("true", 0);
     w->assertz({
-        head: w->new_compound_v("p", 1, w->new_integer(1)),
-        body: True
+        w->new_compound_v("p", 1, w->new_integer(1)),
+        True
     });
     w->assertz({
-        head: w->new_compound_v("p", 1, w->new_integer(2)),
-        body: True
+        w->new_compound_v("p", 1, w->new_integer(2)),
+        True
     });
 }
