@@ -99,10 +99,14 @@ echo -n -e "\n-------------------- Building $config_file\n\n"
 configure
 generate_config_h
 
-if [[ src/pch.h -nt src/pch.h.gch ]]; then
+pch_file=$build_dir/pch
+
+if [[ src/pch.h -nt "$pch_file" ]]; then
     echo -n -e "\n-------------------- Building precompiled header\n\n"
-    visibly "$CXX" "${CXXFLAGS[@]}" -x c++-header src/pch.h
+    visibly "$CXX" "${CXXFLAGS[@]}" -x c++-header -o "$pch_file" src/pch.h
 fi
+
+CXXFLAGS+=(-include-pch "$pch_file")
 
 # Should we use -Wl,-soname,libinterpreter.so.0?
 # http://man7.org/conf/lca2006/shared_libraries/slide4b.html

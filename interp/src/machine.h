@@ -3,84 +3,118 @@
 
 #include "pch.h"
 
-#include "bindings.h"
 #include "gc.h"
+#include "std.h"
 
-namespace Machine {
+namespace Interp_Impl {
 
     class Value;
     class Error;
 
-    struct State {
-        virtual ~State () {}
-        virtual void push (Value*) = 0;
-        virtual Value* pop () = 0;
+    struct Key final {
+        // A char* points to a null-terminated string.
+        // A byte* points to a byte string that is not necessarily null-terminated.
+        using byte = unsigned char;
+
+        static_assert(sizeof(byte) == 1, "sizeof(byte) == 1");
+
+        size_t hash; // precomputed hash
+        size_t length; // byte count
+        byte* bytes; // constant through this object's lifetime; not null-terminated
+
+        Key (const char* asciz);
+        Key (const byte* bytes_, size_t length_);
+        Key (const Key& that);
+        Key (Key&& that) noexcept;
+        ~Key ();
+
+        int compare (const Key& that) const;
+
+        bool operator== (const Key& that) const;
+        bool operator!= (const Key& that) const;
+        bool operator<= (const Key& that) const;
+        bool operator< (const Key& that) const;
+
+        Std_String to_std_string () const;
+    };
+
+    struct Key_Hasher {
+        size_t operator() (const Key& that) const noexcept;
     };
 
     // TOOD frames of stacks; read from front, read from back, write from back
-    class Machine : public GC_Object, public State {
-        private:
-            Objects objects;
-            std::vector<Value*> stack;
-            Error* error = nullptr; // current exception
+    class Machine final : public GC_Object {
 
-        public:
+        private:
+
+            using Bindings = Std_Unordered_Map<Key, Value*, Key_Hasher>;
+
+            Objects objects;
+            Std_Vector<Value*> stack;
+            Error* error = nullptr; // current exception
             Bindings bindings;
 
-            virtual ~Machine ();
+        public:
 
-            void bind (const char* name, Value* value);
+            Machine ();
+            Machine (const Machine&) = delete;
 
-            void load_standard_library ();
+            ~Machine ();
 
-            Value* lookup (const Key& key) const;
-            Value* lookup (const char* name) const;
-            Value* lookup (const std::string& name) const;
+        // -------------------- bindings
 
-            void push (Value* a) override;
-            Value* pop () override;
-            int pop_int ();
+            void    bind (const char* name, Value* value);
+            void    bind (const Key& key, Value* value);
+            void    bind (Key&& key, Value* value);
 
-            // Cooperative exception handling.
-            void raise (Error* error_) {
-                this->error = error_;
-            }
+            Value*  lookup (const char* name) const;
+            Value*  lookup (const Std_String& name) const;
+            Value*  lookup (const Key& key) const;
 
-            void clear_error () {
-                this->error = nullptr;
-            }
+            // Find all keys that begin with the prefix, for readline.
+            Std_Vector<Std_String> find_keys_with_prefix (const char* prefix) const;
 
-            Error* get_error_or_null () const {
-                return error;
-            }
+        // -------------------- stack
 
-            size_t stack_size () const {
-                return stack.size();
-            }
+            void    push (Value* a);
+            Value*  pop ();
+            int     pop_int ();
+            size_t  stack_size () const;
+            void    print_stack () const;
 
-            void print_stack () const;
+        // -------------------- cooperative exception handling
+
+            void    raise (Error* error_);
+            void    clear_error ();
+            Error*  get_error_or_null () const;
+
+        // -------------------- miscellany
+
+            void    load_standard_library ();
 
         // -------------------- memory management
 
+        // ------------------------------ allocation
+
         public:
-            // Instantiate and track for garbage collection.
-            // The object will be garbage-collected in the next call of collect_garbage,
-            // unless it is reachable from the stack or the bindings.
-            template <typename T, typename ...Args> T* new_ (Args&&... args) {
-                // How do we explain this incantation?
-                T* inst = new T(std::forward<Args>(args)...);
-                Value* dummy = inst; // T must be a subtype of Value
-                (void) dummy;
-                track(inst);
-                return inst;
+
+            template <typename T, typename ...Arg> T* new_ (Arg&&... arg) {
+                return objects.new_<T,Arg...>(std::forward<Arg>(arg)...);
             }
 
-        private:
-            // Register the object for automatic memory management by garbage collection.
-            void track (GC_Object* object);
+        // ------------------------------ garbage collection
+
+        public:
+
             void collect_garbage ();
-            void mark () override;
             void show_gc_stats ();
+
+        public:
+
+            //  Internal.
+
+            void mark_children () override;
+
     };
 }
 

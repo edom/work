@@ -3,9 +3,14 @@
 
 #include "pch.h"
 
-namespace Parser {
+#include "std.h"
+
+namespace Interp_Parser {
+
+    using Interp_Impl::Std_String;
 
     struct Input_Stream {
+        virtual ~Input_Stream () {}
         virtual int peek () = 0;
         virtual int get () = 0;
         virtual bool eof () = 0;
@@ -38,6 +43,8 @@ namespace Parser {
 
         Input (Input_Stream* istream_)
         : istream(istream_)
+        , begin_line(0)
+        , begin_column(0)
         , line(1)
         , column(1)
         { }
@@ -80,8 +87,8 @@ namespace Parser {
             return type == Type::Eof;
         }
 
-        std::string to_std_string () const {
-            return std::string(string.begin(), string.end());
+        Std_String to_std_string () const {
+            return Std_String(string.begin(), string.end());
         }
     };
 
@@ -91,6 +98,7 @@ namespace Parser {
 
         Parser (Input_Stream* istream)
         : Input(istream)
+        , error(false)
         { }
 
         void raise () {
@@ -149,7 +157,7 @@ namespace Parser {
         }
     };
 
-#if 0
+    // deprecated
     // type-level
     struct Parser2 {
 
@@ -180,11 +188,10 @@ namespace Parser {
         }
 
     };
-#endif
 }
 
 namespace {
-    using Token = Parser::Token;
+    using Token = Interp_Parser::Token;
 
     const char* enum_name (Token::Type t);
 

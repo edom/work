@@ -1,18 +1,60 @@
 #include "machine.h"
+#include "std.h"
 #include "value.h"
 
-namespace Machine
+namespace Interp_Impl
 {
-    Machine::~Machine () {}
+
+    Machine::Machine () {
+        //  The machine must be pinned but not adopted.
+        objects.pin(this);
+    }
+
+    Machine::~Machine () {
+        //  Delete all adoptees.
+        objects.unpin(this);
+    }
 
     void
     Machine::bind (const char* name, Value* v) {
-        bindings.bind(Key{name}, v);
+        bind(Key(name), v);
     }
 
-    Value* Machine::lookup (const Key& key) const { return bindings.lookup(key); }
+    void
+    Machine::bind (const Key& key, Value* value) {
+        bindings[key] = value;
+    }
+
+    void
+    Machine::bind (Key&& key, Value* value) {
+        bindings[key] = value;
+    }
+
+    Value* Machine::lookup (const Key& key) const {
+        auto i = bindings.find(key);
+        if (i == bindings.end()) {
+            return &Errors::key_not_found;
+        }
+        return i->second;
+    }
+
     Value* Machine::lookup (const char* name) const { return lookup(Key{name}); }
-    Value* Machine::lookup (const std::string& name) const { return lookup(name.c_str()); }
+    Value* Machine::lookup (const Std_String& name) const { return lookup(name.c_str()); }
+
+    Std_Vector<Std_String>
+    Machine::find_keys_with_prefix (const char* prefix) const {
+        Std_Vector<Std_String> matches;
+        size_t prefix_length = strlen(prefix);
+        for (auto& pair : bindings) {
+            const Key& key = pair.first;
+            if (prefix_length > key.length) { continue; }
+            if (memcmp(prefix, key.bytes, prefix_length) == 0) {
+                matches.push_back(key.to_std_string());
+            }
+        }
+        return matches;
+    }
+
     void Machine::push (Value* a) { stack.push_back(a); }
     Value* Machine::pop () {
         if (stack.empty()) { return &Errors::stack_underflow; }
@@ -37,15 +79,11 @@ namespace Machine
         }
     }
 
-    void Machine::track (GC_Object* object) {
-        objects.add(object);
-    }
-
     void Machine::collect_garbage () {
-        objects.delete_unreachable_from(*this);
+        objects.collect();
     }
 
-    void Machine::mark () {
+    void Machine::mark_children () {
         if (error != nullptr) {
             error->mark();
         }
@@ -55,8 +93,9 @@ namespace Machine
         for (auto& p : bindings) {
             p.second->mark();
         }
-        GC_Object::mark();
+        GC_Object::mark_children();
     }
+
     void Machine::show_gc_stats () {
         objects.show_gc_stats();
     }
@@ -125,6 +164,21 @@ namespace Machine
         return m.new_<Primitive<R,A...>>(f);
     }
 
+    void Machine::raise (Error* error_) {
+        this->error = error_;
+    }
+
+    void Machine::clear_error () {
+        this->error = nullptr;
+    }
+
+    Error* Machine::get_error_or_null () const {
+        return error;
+    }
+    size_t Machine::stack_size () const {
+        return stack.size();
+    }
+
     int ret1 () { return 1; }
     int add1 (int a) { return a + 1; }
     int muladd (int a, int b, int c) { return a * b + c; }
@@ -158,4 +212,5 @@ namespace Machine
         bind("add1", new_Primitive(*this, &add1));
         bind("muladd", new_Primitive(*this, &muladd));
     }
+
 }

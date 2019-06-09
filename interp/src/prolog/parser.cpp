@@ -12,21 +12,25 @@ C++ parser idea 2: parser combinator
 #include <cstdint>
 #include <functional>
 
-class Parser {
-    public:
-        void get_number (char* s, size_t n, size_t begin, size_t* end) {
-            size_t i = begin;
-            while (i < n && isdigit(s[i])) {
-                ++i;
-            }
-            *end = i;
-        }
+namespace Interp_Prolog {
 
-        void get_ident (char* s, size_t n, size_t begin, size_t* end) {
-            size_t i = begin;
-            while (i < n && isalnum(s[i])) {
-                ++i;
+    class Parser {
+        public:
+            void get_number (char* s, size_t n, size_t begin, size_t* end) {
+                size_t i = begin;
+                while (i < n && isdigit(s[i])) {
+                    ++i;
+                }
+                *end = i;
             }
-            *end = i;
-        }
-};
+
+            void get_ident (char* s, size_t n, size_t begin, size_t* end) {
+                size_t i = begin;
+                while (i < n && isalnum(s[i])) {
+                    ++i;
+                }
+                *end = i;
+            }
+    };
+
+}

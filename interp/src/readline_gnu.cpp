@@ -1,16 +1,17 @@
-#ifndef READLINE_GNU_H_INCLUDED_83064c68_bded_42fa_98a4_2d49da24263a
-#define READLINE_GNU_H_INCLUDED_83064c68_bded_42fa_98a4_2d49da24263a
-
 #include "pch.h"
 
 #include <readline/readline.h>
 #include <readline/history.h>
 
-struct Readline {
+#include "readline_api.h"
 
-    const char* history_file = "interpreter_history";
+namespace Readline {
 
-    Readline () {
+    static const char*
+    history_file = "interpreter_history";
+
+    void
+    init () {
         using_history();
         if (read_history(history_file) != 0) {
             if (write_history(history_file) != 0) {
@@ -25,7 +26,7 @@ struct Readline {
     }
 
     bool
-    getline (const std::string& prompt, std::string& out) {
+    getline (const Std_String& prompt, Std_String& out) {
         char* buf = readline(prompt.c_str());
         if (buf == nullptr) {
             return false;
@@ -43,6 +44,5 @@ struct Readline {
         free(buf);
         return true;
     }
-};
 
-#endif
+};

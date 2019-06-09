@@ -3,7 +3,7 @@
 
 #include "pch.h"
 
-namespace Machine {
+namespace Interp_Impl {
     class Ring_ {
         protected:
             using N = std::size_t;

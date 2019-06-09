@@ -1,45 +1,26 @@
-#include <time.h>
+#include "../library.h"
+#include <ctime>
 
-class Marked {
-    public:
-        virtual ~Marked () {}
-        virtual bool is_live () = 0;
-        virtual void set_live (bool) = 0;
+namespace Interp_Prolog {
 
-        void
-        mark () {
-            if (is_live()) { return; }
-            set_live(true);
-            mark_children();
-        }
+    using GC_Object = Interp_Impl::GC_Object;
 
-    protected:
-        // The programmer must call the mark_children methods of each direct superclass.
-        virtual void mark_children () {}
-};
+    //  Garbage-collectible object.
 
-//  Garbage-collectible object.
-//  We use the same technique used in https://github.com/doublec/gc.
-class Object : public Marked {
-    private:
+    template<typename T>
+    class Foreign_object final : public GC_Object {
 
-        bool live;
+        private:
 
-    public:
+            T* raw;
 
-        Object () : live(false) {}
+        public:
 
-        bool is_live () override { return live; }
-        void set_live (bool live) override { this->live = live; }
-};
+            virtual ~Foreign_object () {
+                delete raw;
+                raw = nullptr;
+            }
 
-template<typename T>
-class Foreign_object final : public Object {
-private:
-    T* raw;
-public:
-    virtual ~Foreign_object () {
-        delete raw;
-        raw = nullptr;
-    }
-};
+    };
+
+}

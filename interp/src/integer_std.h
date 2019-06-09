@@ -3,7 +3,12 @@
 
 #include "pch.h"
 
-namespace Integer {
+#include "std.h"
+
+namespace Interp_Integer {
+
+    using Interp_Impl::Std_String;
+
     class Integer final {
         private:
             using Int = int;
@@ -12,7 +17,7 @@ namespace Integer {
             Integer () { }
             Integer (Int that) : m(that) { }
             Integer (const Integer& that) : m(that.m) { }
-            Integer (const std::string& s) : m(std::stoi(s)) { }
+            Integer (const Std_String& s) : m(std::stoi(s)) { }
             Integer (const char* str) : Integer(str, 10) { }
             Integer (const char* str, int base) : m(std::stoi(str, nullptr, base)) {}
 
@@ -21,7 +26,7 @@ namespace Integer {
                 return true;
             }
 
-            std::string to_std_string () const {
+            Std_String to_std_string () const {
                 return std::to_string(m);
             }
 
@@ -37,6 +42,7 @@ namespace Integer {
             Integer operator- (const Integer& that) const { return {this->m - that.m}; }
             Integer operator* (const Integer& that) const { return {this->m * that.m}; }
     };
+
 }
 
 #endif

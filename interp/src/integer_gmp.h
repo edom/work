@@ -3,9 +3,14 @@
 
 #include "pch.h"
 
+#include "std.h"
+
 #include <gmp.h>
 
-namespace Integer {
+namespace Interp_Integer {
+
+    using Interp_Impl::Std_String;
+
     // The move-constructor and the destructor depend on GMP internals.
     class Integer final {
         private:
@@ -18,7 +23,7 @@ namespace Integer {
                 this->m[0] = that.m[0];
                 that.m[0]._mp_d = nullptr;
             }
-            Integer (const std::string& s) : Integer(s.c_str()) { }
+            Integer (const Std_String& s) : Integer(s.c_str()) { }
             Integer (const char* str) : Integer(str, 10) { }
             Integer (const char* str, int base) { mpz_init_set_str(m, str, base); }
             ~Integer () {
@@ -36,12 +41,12 @@ namespace Integer {
                 return true;
             }
 
-            std::string to_std_string () const {
+            Std_String to_std_string () const {
                 const int base = 10;
                 const size_t n = mpz_sizeinbase(m, base) + 2; // sign and null-terminator
                 char* cp = new char[n];
                 mpz_get_str(cp, base, m);
-                std::string str (cp);
+                Std_String str (cp);
                 delete[] cp;
                 return str;
             }
@@ -73,6 +78,7 @@ namespace Integer {
                 return result;
             }
     };
+
 }
 
 #endif

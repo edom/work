@@ -1,147 +1,140 @@
-#ifndef PROLOG_WORLD_H_INCLUDED
-#define PROLOG_WORLD_H_INCLUDED
+#ifndef WORLD_H_INCLUDED_83064c68_bded_42fa_98a4_2d49da24263a
+#define WORLD_H_INCLUDED_83064c68_bded_42fa_98a4_2d49da24263a
 
-class Clause final {
-    private:
-        Term* head;
-        Term* body;
-    public:
-        Clause (Term* head_ = nullptr, Term* body_ = nullptr)
-        : head(head_)
-        , body(body_)
-        {
-        }
-};
+namespace Interp_Prolog {
 
-class Integer;
-class Var;
-class Frame;
-class Fiber;
+    class Term;
 
-// Keep track of references for garbage collection.
-class World final {
-
-    private: // fields
-
-        Array<Object*> objects;
-        Array<Clause> clauses;
-        Array<Object*> roots;
-
-        template <typename T>
-        T* do_add_object (T* x) {
-            objects.add(x);
-            return x;
-        }
-
-    public: // construction
-
-        World ()
-        : objects(1048576)
-        , clauses(1024)
-        , roots(64) {
-        }
-
-    public: // construction and garbage collection
-
-        Var* new_var ();
-        String* new_string ();
-        String* new_string (const char* s);
-        Integer* new_integer (intptr_t value);
-        Compound* new_compound_v (const char* name_, size_t arity, ...);
-        Compound* new_compound (const char* name_, size_t arity);
-        Compound* new_compound (String* name, size_t arity);
-        Compound* new_compound (String* name, size_t arity, Term** args);
-        Fiber* new_fiber ();
-
-        bool add_root (Object* root) {
-            roots.add(root);
-            return true;
-        }
-
-        bool remove_root (Object* root) {
-            size_t n = roots.count();
-            for (size_t i = 0; i < n; ++i) {
-                if (roots[i] == root) {
-                    roots[i] = nullptr;
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        //  Manually called.
-        //  Single-threaded.
-        void collect_garbage () {
-            Garbage_collection gc;
-            gc.set_verbosity(Garbage_collection::VERBOSITY_TRACE);
-            gc.delete_objects_unreachable_from(objects, roots);
-        }
-
-    private: // copy term for unification
-
-        struct Parallel final {
-            Term* a;
-            Term* b;
-        };
-
-        Term*
-        copy_term (Array<Parallel>& pars, Term* original) {
-            Term* td = original->dereference();
-            for (size_t i = 0; i < pars.count(); ++i) {
-                const Parallel& par = pars[i];
-                if (par.a == td) {
-                    return par.b;
-                }
-            }
+    class Clause final {
+        private:
+            Term* head;
+            Term* body;
+        public:
+            Clause (Term* head_ = nullptr, Term* body_ = nullptr)
+            : head(head_)
+            , body(body_)
             {
-                const Compound* c;
-                if (td->get_compound(&c)) {
-                    size_t arity = c->arity;
-                    Term** u_args = new Term*[arity];
-                    for (size_t i = 0; i < arity; ++i) {
-                        u_args[i] = copy_term(pars, c->args[i]);
+            }
+    };
+
+    class Integer;
+    class Var;
+    class Frame;
+    class Fiber;
+
+    // TODO merge into Machine
+    // Keep track of references for garbage collection.
+    class World final : public GC_Object {
+
+        private: // fields
+
+            Interp_Impl::Objects objects;
+            Array<Clause> clauses;
+
+        public: // construction
+
+            World ()
+            : clauses(1024)
+            {
+                objects.pin(this);
+            }
+
+        public: // construction and garbage collection
+
+            // -------------------- deprecated
+            Compound* new_compound_v (const char* name_, size_t arity, ...);
+            Compound* new_compound (const char* name_, size_t arity);
+            Compound* new_compound (String* name, size_t arity);
+            Compound* new_compound (String* name, size_t arity, Term** args);
+            Fiber* new_fiber ();
+            template <typename T> T do_add_object (T object) {
+                objects.add(object);
+                return object;
+            }
+            // -------------------- end of deprecated members
+
+            template <typename T, typename ...Arg> T* new_ (Arg&&... arg) {
+                return objects.new_<T,Arg...>(std::forward<Arg>(arg)...);
+            }
+
+            bool pin (GC_Object* root) {
+                return objects.pin(root);
+            }
+
+            bool unpin (GC_Object* root) {
+                return objects.unpin(root);
+            }
+
+            void collect_garbage () {
+                objects.collect();
+            }
+
+        private: // copy term for unification
+
+            struct Parallel final {
+                Term* a;
+                Term* b;
+            };
+
+            Term*
+            copy_term (Array<Parallel>& pars, Term* original) {
+                Term* td = original->dereference();
+                for (size_t i = 0; i < pars.count(); ++i) {
+                    const Parallel& par = pars[i];
+                    if (par.a == td) {
+                        return par.b;
                     }
-                    Compound* u = new Compound(c->name->copy(), arity, u_args);
-                    pars.add({td, u});
-                    return u;
                 }
-            }
-            {
-                const String* s;
-                if (td->get_string(&s)) {
-                    String* u = s->copy();
-                    pars.add({td, u});
-                    return u;
+                {
+                    const Compound* c;
+                    if (td->get_compound(&c)) {
+                        size_t arity = c->arity;
+                        Term** u_args = new Term*[arity];
+                        for (size_t i = 0; i < arity; ++i) {
+                            u_args[i] = copy_term(pars, c->args[i]);
+                        }
+                        Compound* u = new Compound(c->name->copy(), arity, u_args);
+                        pars.add({td, u});
+                        return u;
+                    }
                 }
+                {
+                    const String* s;
+                    if (td->get_string(&s)) {
+                        String* u = s->copy();
+                        pars.add({td, u});
+                        return u;
+                    }
+                }
+                return td;
             }
-            return td;
-        }
 
-    public: // database
+        public: // database
 
-        void
-        assertz (const Clause& clause) {
-            clauses.add(clause);
-        }
+            void
+            assertz (const Clause& clause) {
+                clauses.add(clause);
+            }
 
-    public: // unification
+        public: // unification
 
-        Term*
-        copy_term (Term* t) {
-            Array<Parallel> pars (16);
-            return copy_term(pars, t);
-        }
+            Term*
+            copy_term (Term* t) {
+                Array<Parallel> pars (16);
+                return copy_term(pars, t);
+            }
 
-        Frame* new_frame ();
-        Frame* new_frame (size_t);
+            Frame* new_frame ();
+            Frame* new_frame (size_t);
 
-    // deprecated; use Fiber::unify instead
-    public:
-        bool unify (Term* a, Term* b, /*nullable*/ Frame** u);
+        // deprecated; use Fiber::unify instead
+        public:
+            bool unify (Term* a, Term* b, /*nullable*/ Frame** u);
 
-        bool unify (Term* a, Term* b) {
-            return unify(a, b, nullptr);
-        }
-};
+            bool unify (Term* a, Term* b) {
+                return unify(a, b, nullptr);
+            }
+    };
+}
 
 #endif

@@ -11,10 +11,10 @@
 #include "integer_std.h"
 #endif
 
-namespace Machine {
+namespace Interp_Impl {
 
     struct Type {
-        std::string name;
+        Std_String name;
     };
 
     class Machine;
@@ -23,6 +23,7 @@ namespace Machine {
     // We must know the type, because we want polymorphism,
     // because we want to pretty-print the stack.
     class Value : public GC_Object {
+        friend class Objects;
         friend class Machine;
 
         protected:
@@ -45,7 +46,7 @@ namespace Machine {
                 return false;
             }
 
-            virtual std::string to_std_string () const {
+            virtual Std_String to_std_string () const {
                 std::ostringstream s;
                 s << type()->name << "@" << this;
                 return s.str();
@@ -55,9 +56,9 @@ namespace Machine {
     };
 
     class Integer : public Value {
-        friend class Machine;
+        friend class Objects;
         private:
-            using Big = ::Integer::Integer;
+            using Big = ::Interp_Integer::Integer;
 
             Big i;
 
@@ -69,7 +70,7 @@ namespace Machine {
             Integer (long i_) : i(i_) {}
             Integer (const Integer& that) : i(that.i) {}
             Integer (const char* s) : i(s) {}
-            Integer (const std::string& s) : i(s) {}
+            Integer (const Std_String& s) : i(s) {}
 
         public:
             Integer* be_integer_or_null () override { return this; }
@@ -92,12 +93,12 @@ namespace Machine {
                 throw std::out_of_range("Integer");
             }
 
-            std::string to_std_string () const override { return i.to_std_string(); }
+            Std_String to_std_string () const override { return i.to_std_string(); }
     };
 
     // Other names: applicable, executable, callable, subroutine, mutator, transition, runnable, step, endofunction, manipulator
     class Operation : public Value {
-        friend class Machine;
+        friend class Objects;
         public:
             using Function = void(Machine&);
 
@@ -113,9 +114,9 @@ namespace Machine {
 
     class String : public Value {
         public:
-            std::string s;
+            Std_String s;
 
-            String (const std::string& s_) : s(s_) { }
+            String (const Std_String& s_) : s(s_) { }
             String (const char* s_) : s(s_) { }
 
             Type* type () const override;
@@ -123,7 +124,7 @@ namespace Machine {
 
     class Error : public Value, public std::runtime_error {
         public:
-            Error (const std::string& message_)
+            Error (const Std_String& message_)
             : runtime_error(message_)
             { }
 
@@ -131,11 +132,11 @@ namespace Machine {
             void throw_if_error () const override { throw_(); }
             Type* type () const override;
 
-            std::string message () const {
+            Std_String message () const {
                 return what();
             }
 
-            std::string to_std_string () const override {
+            Std_String to_std_string () const override {
                 std::ostringstream s;
                 s << "Error[" << what() << "]";
                 return s.str();

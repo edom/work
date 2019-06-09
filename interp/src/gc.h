@@ -4,105 +4,120 @@
 #include "pch.h"
 
 #include "ring.h"
-#include "timer.h"
+#include "std.h"
 
-namespace Machine {
-    // Something that can be garbage-collected.
+namespace Interp_Impl {
+
+    //  Something that can be garbage-collected.
+
     class GC_Object {
+
         friend class Objects;
+
         private:
-            char mark_;
+
+            bool mark_;
+
         public:
-            virtual
-            ~GC_Object () {}
-        protected:
-            virtual void
-            mark () {
-                mark_ = 1;
-            }
+
+            virtual ~GC_Object ();
+
+            //  We use a technique similar to that in https://github.com/doublec/gc.
+
+            void mark ();
+
+            //  The programmer must remember to do these:
+            //  -   Call "mark" for each instance of GC_Object that is directly referred to by this class.
+            //  -   Call "mark" for each direct superclass that is a descendant of GC_Object.
+            //
+            //  Failing to do any of that will crash the program
+            //  because an object will be deleted while it is still being used.
+
+            virtual void mark_children ();
+
+    };
+
+    struct GC_Sample {
+        using Count = std::size_t;
+
+        time_t begin_time; // wall clock
+        timespec t0; // before mark
+        timespec t1; // after mark, before sweep
+        timespec t2; // after sweep
+        Count objects_before;
+        Count objects_after;
+
+        Std_String to_std_string () const;
     };
 
     class Objects final {
+
         private:
-            using List = std::vector<GC_Object*>;
 
-            struct GC_Sample {
-                using Count = std::size_t;
+            using List = Std_Vector<GC_Object*>;
 
-                time_t begin_time;
-                timespec t0;
-                timespec t1;
-                Count objects_before;
-                Count objects_after;
-
-                std::string to_std_string () const {
-                    std::ostringstream s;
-                    Count objects_collected = objects_before - objects_after;
-                    char b_time [64];
-                    const char* s_begin_time;
-                    {
-                        tm the_tm;
-                        localtime_r(&begin_time, &the_tm);
-                        if (strftime(b_time, sizeof(b_time), "%F %T %Z", &the_tm) != 0) {
-                            s_begin_time = b_time;
-                        } else {
-                            s_begin_time = "(strftime failed)";
-                        }
-                    }
-                    s   << "started on " << s_begin_time << ", "
-                        << "took " << (t1 - t0) << " µs, "
-                        <<  objects_before << "-" << objects_collected << "=" << objects_after << " objects";
-                    return s.str();
-                }
-            };
+            //  List of all objects, including the roots.
 
             List objects;
-            Ring<GC_Sample> gc_samples = {16};
+
+            //  Roots must be a subset of objects.
+
+            List roots;
+
+            Ring<GC_Sample> gc_samples = Ring<GC_Sample>(16);
 
         public:
-            void add (GC_Object* object) {
-                objects.push_back(object);
-            }
 
-            // Collect garbage using mark-and-sweep.
-            void
-            delete_unreachable_from (GC_Object& root) {
-                time_t begin_time;
-                timespec t0;
-                timespec t1;
+            ~Objects ();
 
-                begin_time = time(nullptr);
-                clock_gettime(CLOCK_MONOTONIC, &t0);
 
-                for (auto object : objects) {
-                    object->mark_ = 0;
-                }
+            //  The bool return values should not be ignored.
+            //  Systems without exceptions should return false
+            //  to mean memory allocation failure.
 
-                root.mark();
+            //  Every object must be added or pinned but not both.
 
-                std::size_t num_original = objects.size();
-                auto begin = objects.begin();
-                auto live = begin;
-                for (auto suspect : objects) {
-                    if (suspect->mark_ == 0) {
-                        delete suspect;
-                    } else {
-                        *live = suspect;
-                        ++live;
-                    }
-                }
-                objects.resize(live - objects.begin());
 
-                clock_gettime(CLOCK_MONOTONIC, &t1);
+            //  Users should not use this.
+            //  Users should prefer the "new_" method template.
+            //
+            //  Make this Objects responsible for deleting the adoptee.
+            //
+            //  Each object must be added exactly once.
+            //  If add(object) is never called, the object will leak.
+            //  If add(object) is called more than once,
+            //  the object will be deleted many times,
+            //  and the program will crash at a weird time.
 
-                gc_samples.push_back({begin_time, t0, t1, num_original, objects.size()});
-            }
+            bool add (GC_Object* object);
 
-            void
-            show_gc_stats () {
-                for (auto& sample : gc_samples) {
-                    std::cout << sample.to_std_string() << "\n";
-                }
+            //  Add to root list.
+            //  The object must not have been "add"-ed first.
+
+            bool pin (GC_Object* object);
+
+            //  Return false if the object is not found in the list of pinned objects.
+
+            bool unpin (GC_Object* object);
+
+            //  Collect garbage using mark-and-sweep.
+            //  Every object encountered while marking must have been "add"-ed;
+            //  otherwise the program will crash at a weird time.
+
+            void collect ();
+
+            void show_gc_stats ();
+
+            //  Instantiate and track for garbage collection.
+            //  A good practice is to make T's constructors protected,
+            //  and declare "friend class Objects" in T.
+
+            template <typename T, typename ...Arg> T* new_ (Arg&&... arg) {
+                T* inst = new T(std::forward<Arg>(arg)...);
+                GC_Object* dummy = inst; // T must be a subtype of GC_Object
+                (void) dummy;
+                add(inst);
+                return inst;
             }
     };
 }

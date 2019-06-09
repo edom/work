@@ -1,49 +1,52 @@
-// Prolog "thread" (not OS thread)
-class Fiber : public Object {
-    friend class Call;
-    friend class World;
+namespace Interp_Prolog {
 
-    private:
-        World* world;
-        Frame frame;
-        Array<size_t> sp_stack;
+    // Prolog "thread" (not OS thread)
+    class Fiber : public GC_Object {
+        friend class Call;
+        friend class World;
 
-    private:
+        private:
+            World* world;
+            Frame frame;
+            Array<size_t> sp_stack;
 
-        Fiber (World* world_)
-        : world(world_)
-        , frame(1024)
-        , sp_stack(1024)
-        {
-        }
+        private:
 
-        void push_frame () {
-            sp_stack.push(frame.get_sp());
-        }
+            Fiber (World* world_)
+            : world(world_)
+            , frame(1024)
+            , sp_stack(1024)
+            {
+            }
 
-        void pop_frame () {
-            size_t sp = sp_stack.pop();
-            frame.restore_to(sp);
-        }
+            void push_frame () {
+                sp_stack.push(frame.get_sp());
+            }
 
-        bool unify (Term* a, Term* b) {
-            return frame.unify(a, b);
-        }
+            void pop_frame () {
+                size_t sp = sp_stack.pop();
+                frame.restore_to(sp);
+            }
 
-    public: // semi-deterministic Prolog system predicates
+            bool unify (Term* a, Term* b) {
+                return frame.unify(a, b);
+            }
 
-        bool pl_string_1 (Term* a) {
-            const String* z;
-            return a->dereference()->get_string(&z);
-        }
+        public: // semi-deterministic Prolog system predicates
 
-        bool pl_var_1 (Term* a) {
-            return a->dereference()->is_var();
-        }
+            bool pl_string_1 (Term* a) {
+                const String* z;
+                return a->dereference()->get_string(&z);
+            }
 
-    protected:
-        void mark_children () override {
-            frame.mark();
-            Object::mark_children();
-        }
-};
+            bool pl_var_1 (Term* a) {
+                return a->dereference()->is_var();
+            }
+
+            void mark_children () override {
+                frame.mark();
+                GC_Object::mark_children();
+            }
+    };
+
+}
