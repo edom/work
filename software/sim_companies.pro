@@ -13,14 +13,13 @@ have_building(B) :- building_name(B, 'Power plant').
 %have_building(B) :- building_name(B, 'Oil rig').
 have_building(B) :- building_name(B, 'Refinery').
 have_building(B) :- building_name(B, 'Shipping depot').
-%have_building(B) :- building_name(B, 'Plantation').
-%have_building(B) :- building_name(B, 'Farm').
+have_building(B) :- building_name(B, 'Plantation').
+have_building(B) :- building_name(B, 'Farm').
 %have_building(B) :- building_name(B, 'Beverage factory').
 have_building(B) :- building_name(B, 'Factory').
 %have_building(B) :- building_name(B, 'Fashion factory').
 %have_building(B) :- building_name(B, 'Car factory').
 %have_building(B) :- building_name(B, 'Electronics factory').
-/*
 have_building(B) :- building_name(B, N), member(N, [
     'Plant research center'
     , 'Physics laboratory'
@@ -30,7 +29,6 @@ have_building(B) :- building_name(B, N), member(N, [
     , 'Automotive R&D'
     , 'Fashion & Design'
 ]).
-*/
 
 %can_produce(R) :- resource_name(R, 'Minerals').
 %can_produce(R) :- resource_name(R, 'Iron ore').
@@ -39,13 +37,14 @@ can_produce(R) :- have_building(B), building_produces_resource(B, R).
 
 :- dynamic(cannot_produce/1).
 
-cannot_produce(R) :- resource_name(R, 'Seeds').
+%cannot_produce(R) :- resource_name(R, 'Seeds').
 cannot_produce(R) :- resource_name(R, 'Eggs').
 cannot_produce(R) :- resource_name(R, 'Grain').
 cannot_produce(R) :- resource_name(R, 'Diesel').
 cannot_produce(R) :- resource_name(R, 'Power').
 %cannot_produce(R) :- resource_name(R, 'Bauxite').
 %cannot_produce(R) :- resource_name(R, 'Sand').
+cannot_produce(R) :- resource_name(R, 'Water').
 cannot_produce(R) :- resource_name(R, 'Chemicals').
 %cannot_produce(R) :- resource_name(R, 'Silicon').
 %cannot_produce(R) :- resource_name(R, 'Minerals').
@@ -193,7 +192,7 @@ show_action(Indent, produce(Count, R, B, Total_Cost, Labor_Cost, Material_Cost, 
 show_action(Indent, A) :- !,
     format('~0|~*|unknown step: ~w~n', [Indent, A]).
 
-%%  sort_helper(Resource, Dest, Max_Return, Action)
+%%  sort_helper(Resource, Dest, Key, Action)
 %
 %   Dest is market or retail.
 :- dynamic(sort_helper/4).
@@ -204,17 +203,20 @@ main :-
     forall(sell(Action), (
         functor(Action, Dest, _), % market or retail
         action_resource(Action, Resource),
-        action_profit_per_cost(Action, Return),
-        (sort_helper(Resource, Dest, Max_Return, _)
-        ->  (Return > Max_Return
+        %   If you have little cash, pick the action with the highest profit-per-COST.
+        % action_profit_per_cost(Action, Key),
+        %   If you have excess cash, pick the action with the highest profit-per-TIME.
+        action_profit_per_hour(Action, Key),
+        (sort_helper(Resource, Dest, Max_Key, _)
+        ->  (Key > Max_Key
             ->  retractall(sort_helper(Resource, Dest, _, _)),
-                assertz(sort_helper(Resource, Dest, Return, Action))
+                assertz(sort_helper(Resource, Dest, Key, Action))
             ;   true
             )
-        ;   assertz(sort_helper(Resource, Dest, Return, Action))
+        ;   assertz(sort_helper(Resource, Dest, Key, Action))
         )
     )),
-    findall(key(Return,Dest)-Action, sort_helper(_, Dest, Return, Action), Pairs),
+    findall(key(Key,Dest)-Action, sort_helper(_, Dest, Key, Action), Pairs),
     %   Otherwise, if deduplication by resource is not wanted, use this:
     %findall(Key-Action, (sell(Action), action_profit_per_cost(Action, Key)), Pairs),
     %   End if.
