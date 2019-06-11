@@ -5,7 +5,7 @@
 
 #include "library_machine.cpp"
 #include "gc.cpp"
-#include "prolog/prolog.cpp"
+#include "prolog.cpp"
 #include "test.cpp"
 
 namespace Interp_Impl {

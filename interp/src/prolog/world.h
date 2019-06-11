@@ -1,9 +1,43 @@
 #ifndef WORLD_H_INCLUDED_83064c68_bded_42fa_98a4_2d49da24263a
 #define WORLD_H_INCLUDED_83064c68_bded_42fa_98a4_2d49da24263a
 
+#include "term.h"
+
 namespace Interp_Prolog {
 
-    class Term;
+    struct Binding final {
+        Var* var;
+        Term* ori;
+    };
+
+    //  The purpose of a frame is to undo a unification.
+
+    class Frame final : public GC_Object, private Array<Binding> {
+
+        friend class World;
+
+        public:
+
+            Frame (size_t limit);
+
+            void save_once (Var* var);
+
+            void set (Var* var, Term* val);
+
+        public:
+
+            void restore_to (size_t sp);
+
+            // stack pointer
+            size_t get_sp () const;
+
+            void restore ();
+
+            bool unify (Term* a, Term* b);
+
+            // TODO override mark_children
+
+    };
 
     class Clause final {
         private:
@@ -17,10 +51,39 @@ namespace Interp_Prolog {
             }
     };
 
-    class Integer;
-    class Var;
-    class Frame;
-    class Fiber;
+    class World;
+
+    //  Prolog "thread" (not OS thread)
+
+    class Fiber : public GC_Object {
+
+        friend class Call;
+
+        private:
+
+            World* world;
+            Frame frame;
+            Array<size_t> sp_stack;
+
+        public:
+
+            Fiber (World* world_);
+
+            void push_frame ();
+
+            void pop_frame ();
+
+            bool unify (Term* a, Term* b);
+
+            // semi-deterministic Prolog system predicates
+
+            bool pl_string_1 (Term* a);
+
+            bool pl_var_1 (Term* a);
+
+            void mark_children () override;
+
+    };
 
     // TODO merge into Machine
     // Keep track of references for garbage collection.
@@ -36,12 +99,14 @@ namespace Interp_Prolog {
             World ()
             : clauses(1024)
             {
-                objects.pin(this);
+                if (!objects.pin(this)) {
+                    abort();
+                }
             }
 
         public: // construction and garbage collection
 
-            // -------------------- deprecated
+            // -------------------- deprecated; use new_ instead
             Compound* new_compound_v (const char* name_, size_t arity, ...);
             Compound* new_compound (const char* name_, size_t arity);
             Compound* new_compound (String* name, size_t arity);
@@ -135,6 +200,7 @@ namespace Interp_Prolog {
                 return unify(a, b, nullptr);
             }
     };
+
 }
 
 #endif

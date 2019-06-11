@@ -14,7 +14,7 @@ namespace Interp_Integer {
             using Int = int;
             Int m;
         public:
-            Integer () { }
+            Integer () { } // @suppress("Class members should be properly initialized")
             Integer (Int that) : m(that) { }
             Integer (const Integer& that) : m(that.m) { }
             Integer (const Std_String& s) : m(std::stoi(s)) { }

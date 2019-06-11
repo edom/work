@@ -1,26 +1,13 @@
-#include "../library.h"
-#include <ctime>
+#include "term.h"
 
 namespace Interp_Prolog {
 
-    using GC_Object = Interp_Impl::GC_Object;
+    Foreign_Object::Foreign_Object (void* raw_)
+    : raw(raw_)
+    {
+    }
 
-    //  Garbage-collectible object.
-
-    template<typename T>
-    class Foreign_object final : public GC_Object {
-
-        private:
-
-            T* raw;
-
-        public:
-
-            virtual ~Foreign_object () {
-                delete raw;
-                raw = nullptr;
-            }
-
-    };
+    Foreign_Object::~Foreign_Object () {
+    }
 
 }

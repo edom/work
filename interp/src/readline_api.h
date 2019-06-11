@@ -15,6 +15,6 @@ namespace Readline {
 
     bool getline (const Std_String& prompt, Std_String& out);
 
-};
+}
 
 #endif

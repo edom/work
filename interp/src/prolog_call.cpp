@@ -1,19 +1,31 @@
+#include <cassert>
+
+#include "gc.h"
+
+#include "prolog/world.h"
+
 namespace Interp_Prolog {
 
     //  Each instance of this represents an active call to a Prolog predicate.
+
     class Call : public GC_Object {
+
         private:
+
             enum class State : char {
                 RUN = 0
                 , END = 1
             };
+
             State state;
             Fiber* fiber;
 
             World* world () {
                 return fiber->world;
             }
+
         protected:
+
             Call (Fiber* fiber_)
             : state(State::RUN)
             , fiber(fiber_)
@@ -45,31 +57,42 @@ namespace Interp_Prolog {
                 fiber->pop_frame();
                 fiber->push_frame();
             }
+
         protected: // World delegate
+
             Integer* new_integer (intptr_t i) {
                 return world()->new_<Integer>(i);
             }
+
         public:
+
             bool has_next () {
                 return state != State::END;
             }
+
             bool next () {
                 undo();
                 return run();
             }
+
             void mark_children () override {
                 fiber->mark();
                 GC_Object::mark_children();
             }
+
     };
 
     class Call_arg_3 final : public Call {
+
         private:
+
             Term* i;
             Term* term;
             Term* arg;
             size_t next_index;
+
         public:
+
             Call_arg_3 (Fiber* fiber, Term* i_, Term* term_, Term* arg_)
             : Call(fiber)
             , i(i_)
@@ -81,6 +104,7 @@ namespace Interp_Prolog {
                 assert(term_ != nullptr);
                 assert(arg_ != nullptr);
             }
+
             bool run () override {
                 const Compound* c;
                 if (!term->dereference()->get_compound(&c)) {
@@ -96,11 +120,54 @@ namespace Interp_Prolog {
                 ++next_index;
                 return ok;
             }
+
             void mark_children () override {
                 i->mark();
                 term->mark();
                 arg->mark();
                 Call::mark_children();
             }
+
     };
+
+    Fiber::Fiber (World* world_)
+    : world(world_)
+    , frame(1024)
+    , sp_stack(1024)
+    {
+    }
+
+    void
+    Fiber::push_frame () {
+        sp_stack.push(frame.get_sp());
+    }
+
+    void
+    Fiber::pop_frame () {
+        size_t sp = sp_stack.pop();
+        frame.restore_to(sp);
+    }
+
+    bool
+    Fiber::unify (Term* a, Term* b) {
+        return frame.unify(a, b);
+    }
+
+    bool
+    Fiber::pl_string_1 (Term* a) {
+        const String* z;
+        return a->dereference()->get_string(&z);
+    }
+
+    bool
+    Fiber::pl_var_1 (Term* a) {
+        return a->dereference()->is_Var();
+    }
+
+    void
+    Fiber::mark_children () {
+        frame.mark();
+        GC_Object::mark_children();
+    }
+
 }

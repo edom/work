@@ -1,3 +1,5 @@
+#include "world.h"
+
 namespace Interp_Prolog {
 
     Compound*
@@ -59,4 +61,5 @@ namespace Interp_Prolog {
         if (u_ != nullptr) { *u_ = u; }
         return u->unify(a, b);
     }
+
 }

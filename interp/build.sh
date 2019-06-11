@@ -106,6 +106,8 @@ if [[ src/pch.h -nt "$pch_file" ]]; then
     visibly "$CXX" "${CXXFLAGS[@]}" -x c++-header -o "$pch_file" src/pch.h
 fi
 
+# This only works with Clang.
+# GCC does not have -include-pch.
 CXXFLAGS+=(-include-pch "$pch_file")
 
 # Should we use -Wl,-soname,libinterpreter.so.0?

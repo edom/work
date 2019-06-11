@@ -45,4 +45,4 @@ namespace Readline {
         return true;
     }
 
-};
+}

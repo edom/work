@@ -48,7 +48,7 @@ namespace Interp_Prolog {
                 printf("sizeof(C1) = %zu\n", sizeof(C1));
                 printf("sizeof(D1) = %zu\n", sizeof(D1));
                 printf("sizeof(GC_Object) = %zu\n", sizeof(GC_Object));
-                printf("sizeof(Foreign_object<int>) = %zu\n", sizeof(Foreign_object<int>));
+                printf("sizeof(Foreign<int>) = %zu\n", sizeof(Foreign<int>));
                 printf("sizeof(Term) = %zu\n", sizeof(Term));
                 printf("sizeof(Var) = %zu\n", sizeof(Var));
                 printf("sizeof(String) = %zu\n", sizeof(String));
@@ -187,15 +187,12 @@ namespace Interp_Impl {
                 m.load_standard_library();
                 Value* plus  = m.lookup("+");
                 Value* collect_garbage = m.lookup("collect_garbage");
-                Value* show_gc_stats = m.lookup("show_gc_stats");
                 m.push(m.new_<Integer>(1));
                 m.push(m.new_<Integer>(2));
                 m.push(m.new_<Integer>(3));
                 collect_garbage->mutate(m);
                 collect_garbage->mutate(m);
                 plus->mutate(m);
-//                collect_garbage->mutate(m);
-//                plus->mutate(m);
                 return true;
             }),
 
