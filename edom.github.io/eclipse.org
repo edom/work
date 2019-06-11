@@ -1,0 +1,79 @@
+#+TITLE: Using Eclipse
+#+DATE: 2019-06-11 00:00:00 +0700
+#+PERMALINK: /eclipse.html
+#+OPTIONS: ^:nil
+* What is Eclipse?
+Not to be confused:
+- Eclipse Foundation
+- Eclipse Platform
+- Eclipse SDK (Platform + JDT + PDE)
+- Eclipse IDEs (Platform + plugins such as JDT)
+- Eclipse p2 is used to "Install New Software".
+
+Wikipedia explains Eclipse better than Eclipse explains itself?
+ [fn::https://en.wikipedia.org/wiki/Eclipse_Foundation]
+ [fn::https://en.wikipedia.org/wiki/List_of_Eclipse_projects]
+
+<2019-06-11>
+No Eclipse events in Asia.
+Eclipse events seem to be mostly in Europe.
+
+Eclipse is like Emacs but in Java instead of Elisp.
+* How to use Eclipse?
+Download Eclipse SDK (not to be confused with Eclipse Platform).
+
+<2019-06-11>
+Eclipse 4.11 does not work on Ubuntu 14.04,
+due to Eclipse bug 544498[fn::https://bugs.eclipse.org/bugs/show_bug.cgi?id=544498],
+which is fixed in Eclipse 4.12.
+
+Switch View / Editor / Window / Tab ? What's it called? What are the things/ontologies?
+Workbench? Workspace?
+* Keyboard shortcuts
+The mother of all shortcuts:
+- Shift+Ctrl+L: Show Keyboard Shortcuts
+- Ctrl+3: Quick Access
+- Alt+Shift+Q: Show View
+
+Perspectives:
+- Ctrl+F8: Next Perspective
+- Ctrl+Shift+F8: Previous Perspective
+- Ctrl+O: Quick Outline, like IntelliJ IDEA Ctrl+F12
+
+Mylyn[fn::https://wiki.eclipse.org/Mylyn/User_Guide#Shortcuts]
+- Ctrl+F9: "Activate Task" dialog
+- Ctrl+F12: "Open Task" dialog
+- Shift+Alt+Q K: Open "Task List" View
+- Shift+Ctrl+F9: Deactivate Task
+
+Are there shortcuts for these?
+- Open a Perspective
+* Unanswered questions
+- How to make Eclipse feel more like IntelliJ IDEA?
+- What is the best way to navigate?
+- How do I see the summary of all Eclipse projects?
+  Where is the data source?
+
+How do I ensure that all Eclipse installations at different machines use the same coding style for my project?
+- Export my Eclipse preferences?
+- Are per-project settings carried to different machines?
+- Write a plugin to enforce that?
+
+How do I import a Maven project (one with pom.xml)?
+
+Who is the target audience of the eclipse.org website?
+"Eclipse.org always seemed more interested in promoting the Eclipse Foundation than the IDE.
+The website feels like a collection of independent projects which are not maintained."
+ [fn::https://movingfulcrum.com/the-fall-of-eclipse/]
+Some counter-arguments?
+ [fn::https://www.reddit.com/r/programming/comments/52mcf3/the_fall_of_eclipse/]
+ [fn::https://news.ycombinator.com/item?id=10273849]
+ [fn::'this started with a simple but brilliant idea JetBrains developers had: "disk space is dirt cheap,
+ let's use 1-2 GB of it to store index, so that autocompletion could work lightining fast"' https://news.ycombinator.com/item?id=10273849]
+
+Why does Eclipse "Toggle Comment" have three shortcuts: Ctrl+/, Ctrl+7, Shift+Ctrl+C?
+Who is in charge of designing the user experience?
+* Development
+Use Plugin Spy (Shift+Alt+F1) to find where to insert menus, modify Eclipse Platform UI, etc.
+
+Menu Spy (Shift+Alt+F2)
