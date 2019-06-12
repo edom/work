@@ -37,7 +37,7 @@ can_produce(R) :- have_building(B), building_produces_resource(B, R).
 
 :- dynamic(cannot_produce/1).
 
-%cannot_produce(R) :- resource_name(R, 'Seeds').
+cannot_produce(R) :- resource_name(R, 'Seeds').
 cannot_produce(R) :- resource_name(R, 'Eggs').
 cannot_produce(R) :- resource_name(R, 'Grain').
 cannot_produce(R) :- resource_name(R, 'Diesel').
