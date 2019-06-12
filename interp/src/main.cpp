@@ -43,6 +43,8 @@ namespace Interp_Test {
 
 namespace Interp_Impl {
 
+    using Interp_Parser::Token;
+
     Value* value_from_token (Machine& m, const Token& t) {
         using Type = Token::Type;
         switch (t.type) {

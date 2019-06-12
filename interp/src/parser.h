@@ -188,14 +188,11 @@ namespace Interp_Parser {
         }
 
     };
-}
-
-namespace {
-    using Token = Interp_Parser::Token;
 
     const char* enum_name (Token::Type t);
 
     std::ostream& operator<< (std::ostream& os, Token& t);
+
 }
 
 #endif

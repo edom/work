@@ -210,9 +210,7 @@ namespace Interp_Parser {
 
 }
 
-namespace {
-
-    using Token = Interp_Parser::Token;
+namespace Interp_Parser {
 
     const char* enum_name (Token::Type t) {
         using E = Token::Type;
