@@ -30,4 +30,9 @@ final class Term_Atom extends Term {
         return string;
     }
 
+    @Override
+    public Object to_java_object () {
+        return string;
+    }
+
 }

@@ -56,4 +56,9 @@ final class Term_Integer extends Term {
         return value.toString();
     }
 
+    @Override
+    public Object to_java_object () {
+        return value;
+    }
+
 }

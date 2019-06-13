@@ -8,7 +8,7 @@
  * Not much consideration was made about performance.
  * </p>
  * <p>
- * The API consists of these classes:
+ * The API consists of these classes and interfaces:
  * </p>
  * <ul>
  * <li>{@link com.spacetimecat.java.prolog.Term Term}</li>

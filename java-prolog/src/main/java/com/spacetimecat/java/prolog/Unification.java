@@ -13,7 +13,13 @@ final class Unification {
     }
 
     /**
+     * <p>
      * First-order unification without occurs-check.
+     * </p>
+     * <p>
+     * If the unification fails, all bindings done so far are undone.
+     * The effect is as if this method was never called at all.
+     * </p>
      */
     public boolean unify (Term a, Term b) {
         if (unify_clobber(a, b)) {
@@ -39,12 +45,21 @@ final class Unification {
             return unify_var((Term_Var) y, x);
         }
 
+        if (x instanceof Term_Compound) {
+            if (y instanceof Term_Compound) {
+                return unify_compound((Term_Compound) x, (Term_Compound) y);
+            }
+            return false;
+        }
+        if (y instanceof Term_Compound) {
+            return false;
+        }
+
         if (x instanceof Term_Array) {
             if (y instanceof Term_Array) {
                 return unify_array((Term_Array) x, (Term_Array) y);
-            } else {
-                return false;
             }
+            return false;
         }
         if (y instanceof Term_Array) {
             return false;
@@ -64,9 +79,17 @@ final class Unification {
         return true;
     }
 
+    private boolean unify_compound (Term_Compound a, Term_Compound b) {
+        return
+            unify(a.name, b.name)
+         && unify_array_0(a.args, b.args);
+    }
+
     private boolean unify_array (Term_Array a, Term_Array b) {
-        Term[] x = a.array;
-        Term[] y = b.array;
+        return unify_array_0(a.array, b.array);
+    }
+
+    private boolean unify_array_0 (Term[] x, Term[] y) {
         if (x.length != y.length) {
             return false;
         }

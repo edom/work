@@ -1,29 +1,25 @@
 package com.spacetimecat.java.prolog;
 
-final class Call_Or extends Call {
+final class Call_or extends Call_A {
 
     private final Call[] calls;
 
-    Call_Or (Call[] calls) {
+    Call_or (Call[] calls) {
         this.calls = calls;
     }
 
     int current = 0;
 
     @Override
-    public void reset () {
-        for (int i = calls.length - 1; i >= 0; ++i) {
+    protected void do_reset () {
+        for (int i = calls.length - 1; i >= 0; --i) {
             calls[i].reset();
         }
         current = 0;
-        super.reset();
     }
 
     @Override
-    public boolean next () {
-        if (!super.next()) {
-            return false;
-        }
+    protected boolean do_next () {
         for (;;) {
             if (current >= calls.length) {
                 return false;
@@ -31,7 +27,6 @@ final class Call_Or extends Call {
             if (calls[current].next()) {
                 return true;
             }
-            super.reset();
             ++current;
         }
     }

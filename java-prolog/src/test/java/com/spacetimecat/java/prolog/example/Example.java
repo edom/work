@@ -1,6 +1,6 @@
 package com.spacetimecat.java.prolog.example;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -17,6 +17,16 @@ import com.spacetimecat.java.prolog.Terms;
 public final class Example {
 
     private final PrintStream out = System.out;
+
+    @Test
+    public void terms () {
+        out.println("-------------------- terms");
+        out.println(Terms.var());
+        out.println(Terms.atom("a"));
+        out.println(Terms.integer(1));
+        out.println(Terms.array(Terms.atom("a"), Terms.integer(1)));
+        out.println(Terms.compound("f", Terms.atom("a"), Terms.integer(1)));
+    }
 
     @Test
     public void backtracking () {
@@ -48,9 +58,10 @@ public final class Example {
         Term i1 = Terms.integer(1);
         Term i2 = Terms.integer(2);
         Term i3 = Terms.integer(3);
-        Call c1 = Calls.member(v1, aa, ab, ac);
-        Call c2 = Calls.member(v2, i1, i2, i3);
-        Call c = Calls.and(c1, c2);
+        Call c = Calls.and(
+            Calls.member(v1, aa, ab, ac)
+          , Calls.member(v2, i1, i2, i3)
+        );
         while (c.next()) {
             out.println("v1 = " + v1 + ", v2 = " + v2 + " ; ");
         }
@@ -64,22 +75,22 @@ public final class Example {
         Term i1 = Terms.integer(1);
         Term i2 = Terms.integer(2);
         Term i3 = Terms.integer(3);
-        Call c1 = Calls.member(v1, i1, i2, i3);
-        Call c2 = Calls.member(v1, i1, i2, i3);
-        Call c = Calls.and(c1, c2);
+        Call c = Calls.and(
+            Calls.member(v1, i1, i2, i3)
+          , Calls.member(v1, i1, i2, i3)
+        );
         while (c.next()) {
             out.println("v1 = " + v1 + " ; ");
         }
     }
 
     @Test
-    public void disjunctive_normal_form () {
+    public void disjunctive_normal_form_1 () {
         /*
             ?-  member(V1, [a,b,c]), member(V2, [1,2,3])
             ;   member(V1, [1,2,3]), member(V2, [a,b,c]).
-
         */
-        out.println("-------------------- disjunctive normal form");
+        out.println("-------------------- disjunctive normal form 1");
         Term v1 = Terms.var();
         Term v2 = Terms.var();
         Term aa = Terms.atom("a");
@@ -100,6 +111,122 @@ public final class Example {
         );
         while (c.next()) {
             out.println("v1 = " + v1 + ", v2 = " + v2 + " ; ");
+        }
+    }
+
+
+    @Test
+    public void disjunctive_normal_form_2 () {
+        /*
+            ?-  V = 1 ; V = 2 ; V = 3.
+        */
+        out.println("-------------------- disjunctive normal form 2");
+        Term v = Terms.var();
+        Term i1 = Terms.integer(1);
+        Term i2 = Terms.integer(2);
+        Term i3 = Terms.integer(3);
+        Call c = Calls.or(
+            Calls.unify(v, i1)
+          , Calls.unify(v, i2)
+          , Calls.unify(v, i3)
+        );
+        while (c.next()) {
+            out.println("v = " + v + " ; ");
+        }
+    }
+
+    @Test
+    public void as_iterator () {
+        out.println("-------------------- as iterator");
+        Term v = Terms.var();
+        Call c = Calls.member(v
+          , Terms.atom("a")
+          , Terms.integer(1)
+          , Terms.atom("b")
+          , Terms.integer(2)
+        );
+        c.each_1(v, j -> {
+            out.println(j.getClass() + " " + j);
+        });
+    }
+
+    @Test
+    public void cut_1 () {
+        out.println("-------------------- cut 1");
+        Term v1 = Terms.var();
+        Term v2 = Terms.var();
+        Call c = Calls.frame(f ->
+            Calls.and(
+                Calls.member(v1
+                  , Terms.integer(1)
+                  , Terms.integer(2)
+                  , Terms.integer(3)
+                )
+              , Calls.cut(f)
+              , Calls.member(v2
+                  , Terms.atom("a")
+                  , Terms.atom("b")
+                  , Terms.atom("c")
+                )
+            )
+        );
+        while (c.next()) {
+            out.println("v1 = " + v1 + ", v2 = " + v2 + ";");
+        }
+    }
+
+    @Test
+    public void cut_2 () {
+        out.println("-------------------- cut 2");
+        Term v1 = Terms.var();
+        Term v2 = Terms.var();
+        Call c = Calls.and(
+            Calls.frame(f ->
+                Calls.and(
+                    Calls.member(v1
+                      , Terms.integer(1)
+                      , Terms.integer(2)
+                      , Terms.integer(3)
+                    )
+                  , Calls.cut(f)
+                )
+            )
+          , Calls.member(v2
+              , Terms.atom("a")
+              , Terms.atom("b")
+              , Terms.atom("c")
+            )
+        );
+        while (c.next()) {
+            out.println("v1 = " + v1 + ", v2 = " + v2 + ";");
+        }
+    }
+
+    @Test
+    public void cut_3 () {
+        out.println("-------------------- cut 3");
+        Term v1 = Terms.var();
+        Term v2 = Terms.var();
+        Call c = Calls.and(
+            Calls.member(v1
+              , Terms.integer(1)
+              , Terms.integer(2)
+              , Terms.integer(3)
+
+            )
+          , Calls.frame(f ->
+                Calls.and(
+                    Calls.member(v2
+                      , Terms.atom("a")
+                      , Terms.atom("b")
+                      , Terms.atom("c")
+                    )
+                  , Calls.cut(f)
+                )
+            )
+        );
+        while (c.next()) {
+            out.println("v1 = " + v1 + ", v2 = " + v2 + ";");
         }
     }
 

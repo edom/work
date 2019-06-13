@@ -1,36 +1,32 @@
 package com.spacetimecat.java.prolog;
 
-class Call_And extends Call {
+class Call_and extends Call_A {
 
     private final Call[] calls;
 
-    public Call_And (Call[] calls) {
+    public Call_and (Call[] calls) {
         if (calls.length <= 0) {
             throw new IllegalArgumentException();
         }
         this.calls = calls;
     }
 
-    public static Call_And create (Call... calls) {
-        return new Call_And(calls);
+    public static Call_and create (Call... calls) {
+        return new Call_and(calls);
     }
 
     private int depth;
 
     @Override
-    public void reset () {
-        for (int i = calls.length - 1; i >= 0; ++i) {
+    protected void do_reset () {
+        for (int i = calls.length - 1; i >= 0; --i) {
             calls[i].reset();
         }
         depth = 0;
-        super.reset();
     }
 
     @Override
-    public boolean next () {
-        if (!super.next()) {
-            return false;
-        }
+    protected boolean do_next () {
         for (;;) {
             if (depth >= calls.length) {
                 --depth;

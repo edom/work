@@ -1,32 +1,28 @@
 package com.spacetimecat.java.prolog;
 
-final class Call_Member extends Call {
+final class Call_member extends Call_A {
 
     private final Term elem;
     private final Term[] list;
 
-    public Call_Member (Term elem, Term[] list) {
+    public Call_member (Term elem, Term[] list) {
         this.elem = elem;
         this.list = list;
     }
 
-    public static Call_Member create (Term elem, Term... list) {
-        return new Call_Member(elem, list);
+    public static Call_member create (Term elem, Term... list) {
+        return new Call_member(elem, list);
     }
 
     private int current;
 
     @Override
-    public void reset () {
+    protected void do_reset () {
         current = 0;
-        super.reset();
     }
 
     @Override
-    public boolean next () {
-        if (!super.next()) {
-            return false;
-        }
+    protected boolean do_next () {
         while (current < list.length) {
             if (unify(elem, list[current++])) {
                 return true;

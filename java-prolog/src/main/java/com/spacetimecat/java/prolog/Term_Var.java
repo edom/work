@@ -24,4 +24,12 @@ final class Term_Var extends Term {
             : referent.toString();
     }
 
+    @Override
+    public Object to_java_object () {
+        if (referent == null) {
+            throw new Prolog_Exception("Cannot convert an unbound Prolog Var to a Java Object");
+        }
+        return referent.to_java_object();
+    }
+
 }

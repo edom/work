@@ -1,5 +1,7 @@
 package com.spacetimecat.java.prolog;
 
+import java.util.Arrays;
+
 final class Term_Array extends Term {
 
     Term[] array;
@@ -10,6 +12,18 @@ final class Term_Array extends Term {
 
     public static Term_Array of (Term... terms) {
         return new Term_Array(terms);
+    }
+
+    @Override
+    public boolean equals (Object that_) {
+        if (this == that_) {
+            return true;
+        }
+        if (!(that_ instanceof Term_Array)) {
+            return false;
+        }
+        Term_Array that = (Term_Array) that_;
+        return Arrays.equals(this.array, that.array);
     }
 
     @Override

@@ -1,46 +1,40 @@
 package com.spacetimecat.java.prolog;
 
+import java.util.function.Consumer;
+
 /**
  * <p>
- * Each instance of this class represents a call to a Prolog predicate.
- * </p>
- * <p>
- * To instantiate this class, call the static factory methods in {@link Calls}.
+ * For API consumers:
+ * You are only allowed to call {@link #next()}.
+ * You must not call any other method declared by this interface.
  * </p>
  */
-public abstract class Call {
-
-    private final Unification u = new Unification();
-
-    protected final boolean unify (Term a, Term b) {
-        return u.unify(a, b);
-    }
-
-    private void undo () {
-        u.undo();
-    }
-
-    // TODO Make protected "do_reset" and "do_next", and final "reset" and "next",
-    // so that it is impossible for implementors to forget to call super.
+public interface Call extends Search {
 
     /**
-     * Remember to call super.reset() at the end of your overriding method.
+     * <p>
+     * This undoes unifications, undoes cuts,
+     * and restores state to before the first call is done.
+     * </p>
      */
-    public void reset () {
-        undo();
-    }
+    void reset ();
 
     /**
-     * Remember to call super.next() first.
-     *
+     * <p>
      * Find the next successful unification.
-     *
+     * </p>
+     * <p>
      * Return true when the next successful unification has been found.
      * Return false if exhausted (no more possible successes).
+     * </p>
+     * <p>
+     * If this returns false, this must undo partial unifications,
+     * and must not leave any partial unifications visible.
+     * </p>
      */
-    public boolean next () {
-        undo();
-        return true;
-    }
+    @Override
+    boolean next ();
+
+    void each_1 (Term var, Consumer<Object> consumer);
 
 }
