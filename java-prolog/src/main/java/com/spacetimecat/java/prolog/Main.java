@@ -1,12 +1,10 @@
 package com.spacetimecat.java.prolog;
 
-import java.io.IOException;
-
 public final class Main {
 
     private Main () {}
 
-    public static void main (String[] args) throws IOException, InterruptedException {
+    public static void main (String[] args) throws Throwable {
 
         System.out.println("Test");
 
@@ -27,7 +25,7 @@ public final class Main {
         System.out.println("v2 = " + v2);
         System.out.println("v3 = " + v3);
         System.out.println("s3 = " + s3);
-        Unification u = new Unification();
+        Unification_Imp u = new Unification_Imp();
         System.out.println(u.unify(
             Terms.array(
                 aa, ab, ac

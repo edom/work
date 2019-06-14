@@ -145,7 +145,7 @@ public final class Example {
           , Terms.atom("b")
           , Terms.integer(2)
         );
-        c.each_1(v, j -> {
+        Calls.each_1(v, c, j -> {
             out.println(j.getClass() + " " + j);
         });
     }

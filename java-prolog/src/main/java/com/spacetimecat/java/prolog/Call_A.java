@@ -1,7 +1,5 @@
 package com.spacetimecat.java.prolog;
 
-import java.util.function.Consumer;
-
 /**
  * <p>
  * Each instance of this class represents a call to a non-deterministic Prolog predicate.
@@ -32,7 +30,7 @@ import java.util.function.Consumer;
  */
 abstract class Call_A implements Call {
 
-    private final Unification u = new Unification();
+    private final Unification_Imp u = new Unification_Imp();
 
     protected final boolean unify (Term a, Term b) {
         return u.unify(a, b);
@@ -80,13 +78,6 @@ abstract class Call_A implements Call {
 
     protected boolean do_next () {
         return false;
-    }
-
-    @Override
-    public final void each_1 (Term var, Consumer<Object> consumer) {
-        while (next()) {
-            consumer.accept(var.to_java_object());
-        }
     }
 
 }

@@ -4,7 +4,7 @@ import java.math.BigInteger;
 
 final class Term_Integer extends Term {
 
-    private final BigInteger value;
+    final BigInteger value;
 
     private Term_Integer (BigInteger value) {
         this.value = value;

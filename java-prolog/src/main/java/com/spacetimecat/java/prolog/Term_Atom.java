@@ -2,7 +2,7 @@ package com.spacetimecat.java.prolog;
 
 final class Term_Atom extends Term {
 
-    private final String string;
+    final String string;
 
     public Term_Atom (String string) {
         this.string = string;

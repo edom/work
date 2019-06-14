@@ -23,7 +23,7 @@ final class Call_equal extends Call_A {
             return false;
         }
         done = true;
-        return a.equals(b);
+        return Term.equal(a, b);
     }
 
 }

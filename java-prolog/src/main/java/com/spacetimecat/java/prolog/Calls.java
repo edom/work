@@ -1,5 +1,6 @@
 package com.spacetimecat.java.prolog;
 
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
@@ -87,6 +88,40 @@ public final class Calls {
 
     public static Call cut (Frame frame) {
         return new Call_cut(frame);
+    }
+
+    // cond(C,T,F) = (C -> T ; F)
+    public static Call cond (Call c, Call t, Call f) {
+        return new Call() {
+
+            boolean c_called = false;
+            Call tf = null;
+
+            @Override
+            public void reset () {
+                c_called = false;
+                tf = null;
+                c.reset();
+                t.reset();
+                f.reset();
+            }
+
+            @Override
+            public boolean next () {
+                if (!c_called) {
+                    c_called = true;
+                    tf = c.next() ? t : f;
+                }
+                return tf.next();
+            }
+
+        };
+    }
+
+    public static void each_1 (Term var, Call call, Consumer<Object> consumer) {
+        while (call.next()) {
+            consumer.accept(var.to_java_object());
+        }
     }
 
 }

@@ -3,13 +3,13 @@ package com.spacetimecat.java.prolog;
 import java.util.ArrayList;
 import java.util.List;
 
-final class Unification {
+final class Unification_Imp {
 
     //  This is a collection of Runnable in order to implement b_setarg/3.
 
     private final List<Runnable> restores = new ArrayList<>();
 
-    public Unification () {
+    public Unification_Imp () {
     }
 
     /**
