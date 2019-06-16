@@ -118,7 +118,6 @@ public final class Main {
             out.println(com);
             out.println(cop);
         }
-
     }
 
     private static Compound comma (Object a, Object b) {

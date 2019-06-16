@@ -1,22 +1,15 @@
 package com.spacetimecat.java.prolog2;
 
-import static com.spacetimecat.java.prolog.Calls.cond;
 import static com.spacetimecat.java.prolog.Calls.false_;
 import static com.spacetimecat.java.prolog.Calls.true_;
 import static com.spacetimecat.java.prolog2.Calls2.and;
-import static com.spacetimecat.java.prolog2.Calls2.equal;
-import static com.spacetimecat.java.prolog2.Calls2.exists;
 import static com.spacetimecat.java.prolog2.Calls2.or;
-import static com.spacetimecat.java.prolog2.Calls2.unify;
-import static com.spacetimecat.java.prolog2.Calls2.var;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.spacetimecat.java.prolog.Call;
-import com.spacetimecat.java.prolog.Calls;
 import com.spacetimecat.java.prolog.Prolog_Exception;
-import com.spacetimecat.java.prolog.Call.Callback.Action;
 
 final class Database {
 
