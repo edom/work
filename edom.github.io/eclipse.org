@@ -9,9 +9,14 @@ Not to be confused:
 - Eclipse SDK (Platform + JDT + PDE)
 - Eclipse IDEs (Platform + plugins such as JDT)
 - Eclipse p2 is used to "Install New Software".
+- Eclipse working groups
+- Eclipse projects
 
 Wikipedia explains Eclipse better than Eclipse explains itself?
  [fn::https://en.wikipedia.org/wiki/Eclipse_Foundation]
+
+What projects are in the Eclipse Foundation?
+Wikipedia answers this better than Eclipse itself does.
  [fn::https://en.wikipedia.org/wiki/List_of_Eclipse_projects]
 
 <2019-06-11>
@@ -19,17 +24,19 @@ No Eclipse events in Asia.
 Eclipse events seem to be mostly in Europe.
 
 Eclipse is like Emacs but in Java instead of Elisp.
-* How to use Eclipse?
+
+"The original vision of Eclipse was to accelerate the creation of IDEs"[fn::https://www.eclipse.org/org/councils/roadmap_v6_0/themes60.php]
+* Using Eclipse
+** How to use Eclipse?
 Download Eclipse SDK (not to be confused with Eclipse Platform).
 
 <2019-06-11>
-Eclipse 4.11 does not work on Ubuntu 14.04,
-due to Eclipse bug 544498[fn::https://bugs.eclipse.org/bugs/show_bug.cgi?id=544498],
-which is fixed in Eclipse 4.12.
+Eclipse 4.11 does not work on Ubuntu 14.04, but this is fixed in Eclipse 4.12.
+ [fn::https://bugs.eclipse.org/bugs/show_bug.cgi?id=544498]
 
 Switch View / Editor / Window / Tab ? What's it called? What are the things/ontologies?
 Workbench? Workspace?
-* Keyboard shortcuts
+** Keyboard shortcuts
 The mother of all shortcuts:
 - Shift+Ctrl+L: Show Keyboard Shortcuts
 - Ctrl+3: Quick Access
@@ -48,6 +55,8 @@ Mylyn[fn::https://wiki.eclipse.org/Mylyn/User_Guide#Shortcuts]
 
 Are there shortcuts for these?
 - Open a Perspective
+
+Learn Eclipse keyboard shortcuts?[fn::https://stackoverflow.com/questions/1986195/eclipse-list-of-default-keyboard-shortcuts]
 * Unanswered questions
 - How to make Eclipse feel more like IntelliJ IDEA?
 - What is the best way to navigate?
@@ -73,7 +82,267 @@ Some counter-arguments?
 
 Why does Eclipse "Toggle Comment" have three shortcuts: Ctrl+/, Ctrl+7, Shift+Ctrl+C?
 Who is in charge of designing the user experience?
-* Development
+** Is a "Foundation" a software graveyard?
+"A private actor giving away software to a foundation might be interpreted in different ways.
+In this case and despite all reassuring talks around the move, this is not a good sign for the future of Ceylon."
+ [fn::https://dzone.com/articles/the-rise-and-fall-of-jvm-languages]
+
+(JetBrains Kotlin, Red Hat Ceylon, and Eclipse eXtend?)
+
+There seems to be a trend of companies "donating" projects, that they no longer want,
+to non-profit foundations such as the Eclipse Foundation and the Apache Foundation.
+
+Apache Foundation also has lots of Java projects.
+What is the difference between Eclipse Foundation and Apache Foundation?
+
+"tl;dr Apache is no longer the place projects go to die and Eclipse is expanding from just IDEs."[fn::http://insightfullogic.com/2013/Oct/12/resurgence-apache-and-eclipse/]
+- "there's one thing that a software foundation brings that GitHub can't replicate: a home for intellectual property."
+* Contributing to Eclipse
+** What can be contributed, in descending order of importance?
+What can be contributed?[fn::https://wiki.eclipse.org/Contribute]
+Code, documentation, issue report, money, votes for bugs, triaging, committing, moderating, usage?
+
+"Google Summer of Code: Participate and get paid for coding!"[fn::https://wiki.eclipse.org/Contribute]
+But I'm not a student.
+Why is it only for students?
+** How do we find out whether we and the Foundation are aligned?
+What does the Foundation think is important?
+What is the Foundation's strategy and goals?
+Are we and the Foundation aligned with each other?
+What are the economic incentives?
+
+The IDE does not make money?
+
+https://www.eclipse.org/org/councils/roadmap_v6_0/
+
+Strategic focus areas: cloud native Java, IoT and edge, automotive, tools[fn::https://www.eclipse.org/membership/documents/eclipse-foundation-overview.pdf].
+"no GPL or AGPL".
+
+"Our community is innovating on the next generation of cloud native developer tools."
+Does that mean that they will "abandon" the Java IDE?
+
+They are de-emphasizing Java?
+
+They missed the JavaScript boat?[fn::smrtinsert https://news.ycombinator.com/item?id=16940646]
+
+They are going to focus on Orion and the Web.
+
+"Eclipse tools have historically had a very strong correlation with the Java language.
+However, with the rapid growth of Rich Internet Application languages and technologies such as JavaScript and Ajax, the Eclipse community must support the requirements of these developers as well.
+Eclipse will begin to invest in re-tooling the Eclipse platform with the needs of Web developers in mind."
+
+What's with all that IoT?
+Is that where the money is?
+
+#+BEGIN_QUOTE
+2011 will see another release of the Eclipse 4 stream, Eclipse 4.1. The major goals of this new release include:
+
+- Making it easier to write plug-ins
+- Allowing better control over the look of Eclipse based products
+- Increasing diversity of contributors to the platform
+- Maintaining backward compatibility for API-clean clients
+#+END_QUOTE
+
+
+mature = dead?
+
+'Then I read the Eclipse forums and found out that there was a major UI redesign with no automated testing and very little manual testing, and the reason was "unfortunately there's no budget for testing".
+This was the word of the actual official devs, by the way. They decided to do a massive rewrite without testing. It boggles the mind.'[fn::the_af https://news.ycombinator.com/item?id=16940646]
+
+<2019-06-23>
+It has been around for 17 years (since 2001[fn::https://en.wikipedia.org/wiki/Eclipse_(software)]) and is still active as of 2019,
+and it won't die soon.
+
+Don't invest in some technology that is going to be abandoned 10 years later.
+
+We have two choices:
+- Invest in shitty technology that has been around for 20 years and doesn't seem to die any time soon.
+- Pick a new rad thing that God knows how long it will survive.
+
+Like it or not, Java is here to stay.
+Nobody is going to be too eager to rewrite all their legacy code.
+After all, those legacy code has been working fine.
+
+All code becomes legacy as soon as it is written.[fn::https://leejo.github.io/2016/02/22/all_software_is_legacy/]
+
+They will "abandon" the Java IDE; move people to other projects, every bug will be wontfix
+"Our community is innovating on the next generation of cloud native developer tools."
+** How do I know whether a project is not dead?
+To find whether a project is not dead, look at two things: its Git stats[fn::https://git.eclipse.org/c/] and its Bugzilla stats[fn::https://bugs.eclipse.org/bugs/].
+** How to contribute?
+https://wiki.eclipse.org/Category:How_to_Contribute
+
+What is the code contribution process/workflow?
+
+- component owner
+
+Bug reporting FAQ[fn::https://wiki.eclipse.org/Bug_Reporting_FAQ]:
+- "What is the difference between Severity and Priority?"
+  - Severity is assigned by a user.
+    Priority is assigned by the developer/committer.
+    Yes, there do exist P5 blockers[fn::https://bugs.eclipse.org/bugs/buglist.cgi?bug_severity=blocker&list_id=18791338&priority=P5&query_format=advanced]
+    and P1 enhancements[fn::https://bugs.eclipse.org/bugs/buglist.cgi?bug_severity=enhancement&list_id=18791337&priority=P1&query_format=advanced].
+
+"If the cost/benefit ratio of a bug does not change, it may remain unaddressed forever."
+
+There are too many issues and too few people to work on them.
+Committers are overloaded and are under time pressure of their release schedule.
+
+https://wiki.eclipse.org/Development_Resources
+
+How to use Eclipse Bugzilla?[fn::https://wiki.eclipse.org/Development_Resources/HOWTO/Bugzilla_Use]
+Life cycle.
+What conventions?
+"helpwanted" keyword?
+What is the difference between "bugday" and "helpwanted"?
+Which one is for beginner?
+Issues marked with "bugday" are friendly to absolute beginners.
+Issues marked with "helpwanted" is the next step.
+
+The list of keywords and their meanings[fn::https://bugs.eclipse.org/bugs/describekeywords.cgi]
+** What is the Eclipse marketplace?
+How do we make money from that?
+What is being bought and sold?
+What is being exchanged?
+** Build?
+Build Eclipse Platform (not just the UI) from source code?
+Build instructions?[fn::https://wiki.eclipse.org/Platform-releng/Platform_Build]
+** Code contribution workflow
+There are two workflows:
+- Bugzilla-first (talk first act later)
+- Gerrit-first (act first talk later)
+
+If your change is big, discuss it on Bugzilla first.
+
+Use SSH to connect to Gerrit and push experimental commits.[fn::https://wiki.eclipse.org/Gerrit]
+
+Must we make a Bugzilla issue before we push to Gerrit for review?
+Must every Gerrit review have a Bugzilla issue?
+No.
+
+"Once a Gerrit change set is created, the link to the Gerrit change should be posted on the Bugzilla.
+If you are using the correct commit format, this is done automatically by the Eclipse infrastructure."[fn::https://wiki.eclipse.org/Platform/How_to_Contribute]
+
+But what if I just want to test my commits without notifying anyone, because the commits are still sketchy?
+
+After Gerrit, EGit Bot automatically creates a continuous-integration build for the patch set.
+We can see build errors here before pushing to production and embarrassing ourselves.
+Cool!
+** Set up Gerrit
+Follow the wiki[fn::https://wiki.eclipse.org/Gerrit].
+- Upload SSH public key to Gerrit.[fn::https://git.eclipse.org/r/#/settings/ssh-keys]
+
+If you still can't connect, file a bug in "Community > Gerrit"[fn::https://bugs.eclipse.org/bugs/enter_bug.cgi?product=Community&component=Gerrit].
+Sometimes you can't connect to Gerrit.[fn::https://bugs.eclipse.org/bugs/show_bug.cgi?id=548554]
+** For committers
+https://wiki.eclipse.org/Eclipse/Rhythm
+** Development tools
+Install "e4 spies" from the marketplace.[fn::https://marketplace.eclipse.org/content/e4-spies]
+There are several spies in that package.[fn::https://www.vogella.com/tutorials/EclipsePlatformDevelopment/article.html#eclipse_ide_spies]
+
 Use Plugin Spy (Shift+Alt+F1) to find where to insert menus, modify Eclipse Platform UI, etc.
 
 Menu Spy (Shift+Alt+F2)
+** The code?
+https://wiki.eclipse.org/Status_Handling_Best_Practices
+* How do I install the Platform plugin that I am developing so that it overrides/shadows/replaces the version that comes with Eclipse?
+First, make sure that your plugin will not prevent you from booting Eclipse.
+You can /self-host/ (run another Eclipse instance from your Eclipse instance).
+As simple selecting a file in your plugin, and then Run > Debug As > Eclipse Application (or press F11 if that is already selected).
+
+Then, use this menu:
+File > Export > Plug-in Development > Deployable plug-ins and fragments > Install into host.
+This is in the help that comes with Eclipse:
+Help > Help Contents > Plug-in Development Environment Guide > Tasks > PDE UI > Export and Install into the Running Host.
+
+How do we know that our plugin is installed?
+
+Help > About > Installation Details. (or Ctrl+3 "ins det")
+
+That feature is very handy: No need to understand P2.
+If anything breaks, nuke the Eclipse installation, and reinstall everything.
+
+What if it breaks?
+It can be reverted.
+ [fn::https://wiki.eclipse.org/FAQ_Revert_an_Update_or_Installation_with_p2]
+But the same page says "Unfortunately, because of p2 design flaws, revert usually doesn't work when you need it."
+WHAT!?
+
+Advanced:
+Creating an update site for your plugin[fn::https://www.vogella.com/tutorials/EclipsePlugin/article.html#exercise-create-an-update-site-your-plug-in]
+* How do I make a Mylyn task repository connector?
+The official documentation[fn::https://wiki.eclipse.org/Mylyn/Integrator_Reference#Tasks_API] is somewhat outdated.
+
+Does the 2009 Mylyn connector crash course[fn::http://mirror.rise.ph/eclipse//mylyn/docs/2009-03-mylyn-connector-crash-course-talk.pdf] help?
+
+<2019-06-23>
+The last news was from 2011.[fn::https://www.eclipse.org/mylyn/]
+Is Mylyn dead?
+Did it ever catch on?
+
+<2019-06-22>
+Mylyn has hardly any new developments?
+The Git commits are rather few?
+
+<2019-06-22>
+Editing the Wiki requires review.
+But there does not seem to be any reviewer.
+I've been waiting for two days and there does not seem to be any approval.
+Perhaps I should try opening a Bugzilla issue to ask for a Wiki edit review?
+
+It seems that back in 2008--2013 they tried to force-fed Mylyn to developers and it backfired.
+ [fn::http://paranoid-engineering.blogspot.com/2008/07/what-is-eclipse-mylyn-anyway.html]
+** Create a plugin
+Open Resource: plugin.xml.
+
+Open "Dependencies" page.
+
+Add dependencies to these bundles:
+
+#+BEGIN_EXAMPLE
+org.eclipse.core.runtime
+org.eclipse.jface
+org.eclipse.mylyn.commons.ui
+org.eclipse.mylyn.tasks.core
+org.eclipse.mylyn.tasks.ui
+org.eclipse.ui.forms
+org.eclipse.ui.workbench
+#+END_EXAMPLE
+** Implement basic repository information
+- Create a subclass of AbstractRepositoryConnector
+  - Define a static final String field KIND
+  - Implement getConnectorKind returning KIND
+  - Implement getLabel
+** Implement task reader
+- Create a subclass of AbstractTaskDataHandler
+  - Implement initializeTaskData
+- Create a subclass of AbstractRepositoryConnector
+  - These methods should have been in AbstractTaskDataHandler
+    - Implement getTaskData
+    - Implement updateTaskFromTaskData
+** Create an editor
+- Create a subclass of AbstractTaskEditorPage
+- Create a subclass of AbstractTaskEditorPageFactory
+** Implement task writer
+- In AbstractRepositoryConnector
+  - Implement canCreateNewTask
+** Create GUI forms
+- Create a subclass of AbstractRepositoryConnectorUi
+  - Implement getSettingsPage
+  - Implement getQueryWizard
+  - Implement getNewTaskWizard
+** Add extensions in plugin.xml
+Add these extensions:
+- org.eclipse.mylyn.tasks.ui.repositories
+  - connectorCore: the qualified name of your subclass of AbstractRepositoryConnector
+  - connectorUi: the qualified name of your subclass of AbstractRepositoryConnectorUi
+* How do we get paid to develop Eclipse?
+One way is to be an employee of an Eclipse Foundation member.
+
+Can we get paid developing Eclipse?[fn::https://www.eclipse.org/contribute/dev_program.php]
+
+no individual bug bounties, too much administrative overhead[fn::https://bugs.eclipse.org/bugs/show_bug.cgi?id=309536]
+
+"This was the purpose of FEEP and it wasn't so successful.
+It added a lot of work on the Foundation bucket and was unfair since effort was focused on the IDE while the community is about much more"
+ [fn::https://bugs.eclipse.org/bugs/show_bug.cgi?id=516825]
