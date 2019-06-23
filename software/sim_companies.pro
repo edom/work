@@ -17,7 +17,7 @@ have_building(B) :- building_name(B, 'Plantation').
 have_building(B) :- building_name(B, 'Farm').
 %have_building(B) :- building_name(B, 'Beverage factory').
 have_building(B) :- building_name(B, 'Factory').
-%have_building(B) :- building_name(B, 'Fashion factory').
+have_building(B) :- building_name(B, 'Fashion factory').
 %have_building(B) :- building_name(B, 'Car factory').
 %have_building(B) :- building_name(B, 'Electronics factory').
 have_building(B) :- building_name(B, N), member(N, [
@@ -40,15 +40,21 @@ can_produce(R) :- have_building(B), building_produces_resource(B, R).
 cannot_produce(R) :- resource_name(R, 'Seeds').
 cannot_produce(R) :- resource_name(R, 'Eggs').
 cannot_produce(R) :- resource_name(R, 'Grain').
-cannot_produce(R) :- resource_name(R, 'Diesel').
+%cannot_produce(R) :- resource_name(R, 'Diesel').
 cannot_produce(R) :- resource_name(R, 'Power').
 %cannot_produce(R) :- resource_name(R, 'Bauxite').
 %cannot_produce(R) :- resource_name(R, 'Sand').
 cannot_produce(R) :- resource_name(R, 'Water').
-cannot_produce(R) :- resource_name(R, 'Chemicals').
+%cannot_produce(R) :- resource_name(R, 'Chemicals').
 %cannot_produce(R) :- resource_name(R, 'Silicon').
 %cannot_produce(R) :- resource_name(R, 'Minerals').
 %cannot_produce(R) :- resource_name(R, 'Iron ore').
+cannot_produce(R) :- resource_name(R, 'Fabric').
+cannot_produce(R) :- resource_name(R, 'Leather').
+%cannot_produce(R) :- resource_name(R, 'Plastic').
+%cannot_produce(R) :- resource_name(R, 'Golden bars').
+cannot_produce(R) :- resource_name(R, 'Necklace').
+cannot_produce(R) :- resource_name(R, 'Luxury watch').
 
 administration_overhead(0.0882).
 
