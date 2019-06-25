@@ -262,6 +262,8 @@ Help > About > Installation Details. (or Ctrl+3 "ins det")
 That feature is very handy: No need to understand P2.
 If anything breaks, nuke the Eclipse installation, and reinstall everything.
 
+Can't use dropins because it can't override installed plugins.
+
 What if it breaks?
 It can be reverted.
  [fn::https://wiki.eclipse.org/FAQ_Revert_an_Update_or_Installation_with_p2]
@@ -270,6 +272,10 @@ WHAT!?
 
 Advanced:
 Creating an update site for your plugin[fn::https://www.vogella.com/tutorials/EclipsePlugin/article.html#exercise-create-an-update-site-your-plug-in]
+* How to not block the UI thread
+Eclipse Jobs and Background Processing - Tutorial[fn::https://www.vogella.com/tutorials/EclipseJobs/article.html]
+
+There is also an article in the Eclipse wiki but I forgot the URL.
 * How do I make a Mylyn task repository connector?
 The official documentation[fn::https://wiki.eclipse.org/Mylyn/Integrator_Reference#Tasks_API] is somewhat outdated.
 
@@ -336,8 +342,9 @@ Add these extensions:
 - org.eclipse.mylyn.tasks.ui.repositories
   - connectorCore: the qualified name of your subclass of AbstractRepositoryConnector
   - connectorUi: the qualified name of your subclass of AbstractRepositoryConnectorUi
-* How do we get paid to develop Eclipse?
-One way is to be an employee of an Eclipse Foundation member.
+* How do we get paid to develop Eclipse while still retaining all my IPs?
+One way is to be an employee of an Eclipse Foundation member such as RedHat?
+But what company doesn't have IP assignment?
 
 Can we get paid developing Eclipse?[fn::https://www.eclipse.org/contribute/dev_program.php]
 
@@ -346,3 +353,56 @@ no individual bug bounties, too much administrative overhead[fn::https://bugs.ec
 "This was the purpose of FEEP and it wasn't so successful.
 It added a lot of work on the Foundation bucket and was unfair since effort was focused on the IDE while the community is about much more"
  [fn::https://bugs.eclipse.org/bugs/show_bug.cgi?id=516825]
+* Applications
+"Technically, an Eclipse application is a plug-in that creates an extension for the extension point org.eclipse.core.runtime.applications."
+ [fn::https://wiki.eclipse.org/FAQ_What_is_an_Eclipse_application%3F]
+* How to run the Eclipse Provisioning RCP Agent?
+The wiki does not seem to answer that very basic question.[fn::https://wiki.eclipse.org/Equinox/p2/Admin_UI_Users_Guide]
+
+Unanswered question, 2009[fn::https://www.eclipse.org/forums/index.php?t=tree&th=40275&goto=130850&]
+
+Obscure page with the answer[fn::https://wiki.eclipse.org/Starting_Eclipse_Commandline_With_Equinox_Launcher/p2_Admin_UI].
+It contains dangerous deletion scripts.
+Do not run.
+
+Install New Software > EclipseRT Target Platform Components > Equinox Target Components?
+No effect?
+* We can add chat to our IDE by ECF?
+Eclipse Communication Framework?
+
+"The Eclipse Communication Framework has a Jabber client built in"[fn::https://stackoverflow.com/questions/12083285/chat-for-eclipse-ide-in-ubuntu]?
+* How to create custom Eclipse distribution/product?
+2014[fn::https://martijndashorst.com/blog/2014/07/07/custom-eclipse-luna]
+
+Given a bundle id, how do I find the update site?
+Eclipse Oomph?[fn::https://wiki.eclipse.org/Eclipse_Oomph_Authoring#How_to_find_a_P2_repository_at_Eclipse_using_the_Repository_Explorer]
+
+PDE build defect?[fn::https://wiki.eclipse.org/Platform_Releng/Common_build_issues]
+
+Jed Anderson's answer:
+"Plugins: Finding plugins involves lots of hunting for update sites and then you can never be sure you got the exact right binaries.
+Sometimes update sites go down, or you lose support for your Eclipse version when the plugin developers release a new update site.
+One suggestion is to make local copies of update sites to mitigate your exposure to such problems."[fn::https://stackoverflow.com/questions/351373/creating-an-eclipse-distribution]
+* Mailing lists
+It may be more efficient to watch mailing lists than bug trackers.
+
+- Email shows what people are actually working on.
+- Email is much faster and more pleasant to use, navigate, and search than Eclipse Bugzilla is.
+- When shit happens, it goes to email first, and then the bug tracker later, if it ever touches the bug tracker.
+
+Example of shit happens: I20190520-1805[fn::https://www.eclipse.org/lists/platform-dev/msg01654.html].
+How the hell are we going to know that, if not from the mailing list?
+The download page does not say anything?
+
+Do not just download an I-build willy-nilly.
+Look at the platform-dev mailing list first.
+
+platform-dev[fn::https://www.eclipse.org/lists/platform-dev/threads.html]
+
+pde-dev[fn::https://www.eclipse.org/lists/pde-dev/threads.html]
+
+jdt-dev[fn::https://www.eclipse.org/lists/jdt-dev/threads.html]
+
+The question:
+When should we use email, and when should we use bug tracker?
+* What can the OSGi Console do?
