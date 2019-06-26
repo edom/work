@@ -270,6 +270,8 @@ It can be reverted.
 But the same page says "Unfortunately, because of p2 design flaws, revert usually doesn't work when you need it."
 WHAT!?
 
+But it worked for me, but perhaps that's because I try not to be too wild with Eclipse.
+
 Advanced:
 Creating an update site for your plugin[fn::https://www.vogella.com/tutorials/EclipsePlugin/article.html#exercise-create-an-update-site-your-plug-in]
 * How to not block the UI thread
@@ -342,7 +344,9 @@ Add these extensions:
 - org.eclipse.mylyn.tasks.ui.repositories
   - connectorCore: the qualified name of your subclass of AbstractRepositoryConnector
   - connectorUi: the qualified name of your subclass of AbstractRepositoryConnectorUi
-* How do we get paid to develop Eclipse while still retaining all my IPs?
+* How do we get paid to develop Eclipse?
+While still retaining all our IPs?
+
 One way is to be an employee of an Eclipse Foundation member such as RedHat?
 But what company doesn't have IP assignment?
 
@@ -353,10 +357,20 @@ no individual bug bounties, too much administrative overhead[fn::https://bugs.ec
 "This was the purpose of FEEP and it wasn't so successful.
 It added a lot of work on the Foundation bucket and was unfair since effort was focused on the IDE while the community is about much more"
  [fn::https://bugs.eclipse.org/bugs/show_bug.cgi?id=516825]
+* Why do we need IDE?
+To keep complexity under control, because we have extremely limited capacity for complexity.
+
+You don't need IDE for small programs (hundreds of lines of code, or maybe even in the low thousands of lines of code).
 * Applications
 "Technically, an Eclipse application is a plug-in that creates an extension for the extension point org.eclipse.core.runtime.applications."
  [fn::https://wiki.eclipse.org/FAQ_What_is_an_Eclipse_application%3F]
-* How to run the Eclipse Provisioning RCP Agent?
+* Where is the Eclipse Provisioning perspective?
+Install New Software > "Equinox p2, SDK" (org.eclipse.equinox.p2.sdk.feature.group)
+
+Use it carefully, because it may break your Eclipse installation?
+
+(Begin rant.)
+
 The wiki does not seem to answer that very basic question.[fn::https://wiki.eclipse.org/Equinox/p2/Admin_UI_Users_Guide]
 
 Unanswered question, 2009[fn::https://www.eclipse.org/forums/index.php?t=tree&th=40275&goto=130850&]
@@ -364,9 +378,37 @@ Unanswered question, 2009[fn::https://www.eclipse.org/forums/index.php?t=tree&th
 Obscure page with the answer[fn::https://wiki.eclipse.org/Starting_Eclipse_Commandline_With_Equinox_Launcher/p2_Admin_UI].
 It contains dangerous deletion scripts.
 Do not run.
+* What can the OSGi Console do to a running Eclipse IDE?
+"This article demonstrates how to use the OSGi console and how to extend the console" in Eclipse[fn::https://www.ibm.com/developerworks/library/os-ecl-osgiconsole/index.html].
 
-Install New Software > EclipseRT Target Platform Components > Equinox Target Components?
-No effect?
+List some bundles.[fn::https://www.javaworld.com/article/2077837/java-se-hello-osgi-part-1-bundles-for-beginners.html?page=3]
+
+"The Gogo shell, on which the Equinox console is based, [...]"[fn::https://help.eclipse.org/2019-03/index.jsp?topic=%2Forg.eclipse.platform.doc.isv%2Fguide%2Fconsole_shell.htm]
+"Apache Felix Gogo is a subproject of Apache Felix implementing a command line shell for OSGi."[fn::https://felix.apache.org/documentation/subprojects/apache-felix-gogo.html]
+
+List of Gogo shell commands[fn::https://felix.apache.org/documentation/subprojects/apache-felix-gogo.html]
+
+Console is not a de jure OSGi standard.
+"Unfortunately [OSGi RFC 147] was never made a standard."[fn::https://felix.apache.org/documentation/subprojects/apache-felix-gogo.html]
+
+How does this relate with Java 9's JShell, BeanShell, etc.?
+
+What is OSGi's ontology?
+Containers, runtime-environments, frameworks?
+Same or different?
+
+Internet opinions on Equinox, Felix, and Knoplerfish?
+ [fn::https://stackoverflow.com/questions/36276175/osgi-container-equinox-vs-apache-felix-inside-apache-karaf]
+ [fn::https://www.quora.com/What-are-the-pros-and-cons-of-using-Apache-Felix-versus-Knopflerfish-as-OSGI-framework]
+
+Why do we need more two OSGi container implementations from two non-profit organizations?
+Isn't this a waste of resources?
+* Eclipse ontology
+Application is OSGi application?
+
+Product = application + branding[fn::https://help.eclipse.org/neon/index.jsp?topic=%2Forg.eclipse.platform.doc.isv%2Freference%2Fmisc%2Fruntime-options.html]
+
+Eclipse workspace = OSGi instance area?
 * We can add chat to our IDE by ECF?
 Eclipse Communication Framework?
 
@@ -397,6 +439,12 @@ The download page does not say anything?
 Do not just download an I-build willy-nilly.
 Look at the platform-dev mailing list first.
 
+This page[fn::https://download.eclipse.org/eclipse/downloads/build_types.html]
+reachable from this page[fn::https://download.eclipse.org/eclipse/downloads/]
+is stale.
+There are no more S-builds.
+There are only R-builds and I-builds now.
+
 platform-dev[fn::https://www.eclipse.org/lists/platform-dev/threads.html]
 
 pde-dev[fn::https://www.eclipse.org/lists/pde-dev/threads.html]
@@ -405,4 +453,27 @@ jdt-dev[fn::https://www.eclipse.org/lists/jdt-dev/threads.html]
 
 The question:
 When should we use email, and when should we use bug tracker?
+* Can JDK 11 run Eclipse faster than JDK 8?
+Git 2.20.0 (2019) is faster than the Git that comes with Debian 9 (2017) which is faster than the Git that comes with Ubuntu 14.04 (2014).
 * What can the OSGi Console do?
+* Eclipse for Java development
+Install M2E[fn::https://www.eclipse.org/m2e/].[fn::https://www.vogella.com/tutorials/EclipseMaven/article.html]
+* e4?
+https://eclipsesource.com/blogs/2012/05/10/eclipse-4-final-sprint-part-1-the-e4-application-model/
+* JFace?
+https://www.vogella.com/tutorials/EclipseJFace/article.html
+* JDT UI
+https://wiki.eclipse.org/JDT_UI/How_to_Contribute
+
+https://www.eclipse.org/jdt/ui/doc/bug-annotation.php
+* Eclipse vs IntelliJ IDEA
+I used IDEA 2018 and Eclipse 2019.
+- Eclipse starts faster and uses less RAM.
+  Perhaps this is because Eclipse indexes less eagerly than IDEA does.
+- IDEA has better navigation, autocompletion/intellisense/content-assist, and editor tab behavior.
+* If I want to make my own IDE, should I use DLTK or Xtext or both?
+https://en.wikipedia.org/wiki/Dynamic_Languages_Toolkit
+
+https://en.wikipedia.org/wiki/Xtext
+
+https://jaxenter.com/eclipse-dynamic-language-toolkit-100025.html
