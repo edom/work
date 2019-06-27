@@ -26,7 +26,7 @@ Eclipse events seem to be mostly in Europe.
 Eclipse is like Emacs but in Java instead of Elisp.
 
 "The original vision of Eclipse was to accelerate the creation of IDEs"[fn::https://www.eclipse.org/org/councils/roadmap_v6_0/themes60.php]
-* Using Eclipse
+* Using Eclipse as a Java IDE
 ** How to use Eclipse?
 Download Eclipse SDK (not to be confused with Eclipse Platform).
 
@@ -57,7 +57,15 @@ Are there shortcuts for these?
 - Open a Perspective
 
 Learn Eclipse keyboard shortcuts?[fn::https://stackoverflow.com/questions/1986195/eclipse-list-of-default-keyboard-shortcuts]
+** Why do we need IDE?
+To keep complexity under control, because we have extremely limited capacity for complexity.
+
+You don't need IDE for small programs (hundreds of lines of code, or maybe even in the low thousands of lines of code).
+
+** Eclipse for Java development
+Install M2E[fn::https://www.eclipse.org/m2e/].[fn::https://www.vogella.com/tutorials/EclipseMaven/article.html]
 * Unanswered questions
+** Some unanswered questions
 - How to make Eclipse feel more like IntelliJ IDEA?
 - What is the best way to navigate?
 - How do I see the summary of all Eclipse projects?
@@ -97,6 +105,62 @@ What is the difference between Eclipse Foundation and Apache Foundation?
 
 "tl;dr Apache is no longer the place projects go to die and Eclipse is expanding from just IDEs."[fn::http://insightfullogic.com/2013/Oct/12/resurgence-apache-and-eclipse/]
 - "there's one thing that a software foundation brings that GitHub can't replicate: a home for intellectual property."
+** Can JDK 11 run Eclipse faster than JDK 8?
+Git 2.20.0 (2019) is faster than the Git that comes with Debian 9 (2017) which is faster than the Git that comes with Ubuntu 14.04 (2014).
+** What can the OSGi Console do?
+** e4?
+https://eclipsesource.com/blogs/2012/05/10/eclipse-4-final-sprint-part-1-the-e4-application-model/
+** JFace?
+https://www.vogella.com/tutorials/EclipseJFace/article.html
+** JDT UI
+https://wiki.eclipse.org/JDT_UI/How_to_Contribute
+
+https://www.eclipse.org/jdt/ui/doc/bug-annotation.php
+** If I want to make my own IDE, should I use DLTK or Xtext or both?
+https://en.wikipedia.org/wiki/Dynamic_Languages_Toolkit
+
+https://en.wikipedia.org/wiki/Xtext
+
+https://jaxenter.com/eclipse-dynamic-language-toolkit-100025.html
+** Run OSGi framework from command line
+https://stackoverflow.com/questions/15787916/headless-osgi-framework-from-command-line
+** Using Eclipse to develop Eclipse?
+Multiple profiles?[fn::https://stackoverflow.com/questions/5856735/multiple-eclipse-profiles]
+* Developing Eclipse
+The "Platform Plug-in Developer Guide" in Help Center[fn::https://www.eclipse.org/documentation/].
+** How do I install the Platform plugin that I am developing so that it overrides/shadows/replaces the version that comes with Eclipse?
+First, make sure that your plugin will not prevent you from booting Eclipse.
+You can /self-host/ (run another Eclipse instance from your Eclipse instance).
+As simple selecting a file in your plugin, and then Run > Debug As > Eclipse Application (or press F11 if that is already selected).
+
+Then, use this menu:
+File > Export > Plug-in Development > Deployable plug-ins and fragments > Install into host.
+This is in the help that comes with Eclipse:
+Help > Help Contents > Plug-in Development Environment Guide > Tasks > PDE UI > Export and Install into the Running Host.
+
+How do we know that our plugin is installed?
+
+Help > About > Installation Details. (or Ctrl+3 "ins det")
+
+That feature is very handy: No need to understand P2.
+If anything breaks, nuke the Eclipse installation, and reinstall everything.
+
+Can't use dropins because it can't override installed plugins.
+
+What if it breaks?
+It can be reverted.
+ [fn::https://wiki.eclipse.org/FAQ_Revert_an_Update_or_Installation_with_p2]
+But the same page says "Unfortunately, because of p2 design flaws, revert usually doesn't work when you need it."
+WHAT!?
+
+But it worked for me, but perhaps that's because I try not to be too wild with Eclipse.
+
+Advanced:
+Creating an update site for your plugin[fn::https://www.vogella.com/tutorials/EclipsePlugin/article.html#exercise-create-an-update-site-your-plug-in]
+** How to not block the UI thread
+Eclipse Jobs and Background Processing - Tutorial[fn::https://www.vogella.com/tutorials/EclipseJobs/article.html]
+
+There is also an article in the Eclipse wiki but I forgot the URL.
 * Contributing to Eclipse
 ** What can be contributed, in descending order of importance?
 What can be contributed?[fn::https://wiki.eclipse.org/Contribute]
@@ -245,39 +309,6 @@ Use Plugin Spy (Shift+Alt+F1) to find where to insert menus, modify Eclipse Plat
 Menu Spy (Shift+Alt+F2)
 ** The code?
 https://wiki.eclipse.org/Status_Handling_Best_Practices
-* How do I install the Platform plugin that I am developing so that it overrides/shadows/replaces the version that comes with Eclipse?
-First, make sure that your plugin will not prevent you from booting Eclipse.
-You can /self-host/ (run another Eclipse instance from your Eclipse instance).
-As simple selecting a file in your plugin, and then Run > Debug As > Eclipse Application (or press F11 if that is already selected).
-
-Then, use this menu:
-File > Export > Plug-in Development > Deployable plug-ins and fragments > Install into host.
-This is in the help that comes with Eclipse:
-Help > Help Contents > Plug-in Development Environment Guide > Tasks > PDE UI > Export and Install into the Running Host.
-
-How do we know that our plugin is installed?
-
-Help > About > Installation Details. (or Ctrl+3 "ins det")
-
-That feature is very handy: No need to understand P2.
-If anything breaks, nuke the Eclipse installation, and reinstall everything.
-
-Can't use dropins because it can't override installed plugins.
-
-What if it breaks?
-It can be reverted.
- [fn::https://wiki.eclipse.org/FAQ_Revert_an_Update_or_Installation_with_p2]
-But the same page says "Unfortunately, because of p2 design flaws, revert usually doesn't work when you need it."
-WHAT!?
-
-But it worked for me, but perhaps that's because I try not to be too wild with Eclipse.
-
-Advanced:
-Creating an update site for your plugin[fn::https://www.vogella.com/tutorials/EclipsePlugin/article.html#exercise-create-an-update-site-your-plug-in]
-* How to not block the UI thread
-Eclipse Jobs and Background Processing - Tutorial[fn::https://www.vogella.com/tutorials/EclipseJobs/article.html]
-
-There is also an article in the Eclipse wiki but I forgot the URL.
 * How do I make a Mylyn task repository connector?
 The official documentation[fn::https://wiki.eclipse.org/Mylyn/Integrator_Reference#Tasks_API] is somewhat outdated.
 
@@ -357,10 +388,6 @@ no individual bug bounties, too much administrative overhead[fn::https://bugs.ec
 "This was the purpose of FEEP and it wasn't so successful.
 It added a lot of work on the Foundation bucket and was unfair since effort was focused on the IDE while the community is about much more"
  [fn::https://bugs.eclipse.org/bugs/show_bug.cgi?id=516825]
-* Why do we need IDE?
-To keep complexity under control, because we have extremely limited capacity for complexity.
-
-You don't need IDE for small programs (hundreds of lines of code, or maybe even in the low thousands of lines of code).
 * Applications
 "Technically, an Eclipse application is a plug-in that creates an extension for the extension point org.eclipse.core.runtime.applications."
  [fn::https://wiki.eclipse.org/FAQ_What_is_an_Eclipse_application%3F]
@@ -453,27 +480,8 @@ jdt-dev[fn::https://www.eclipse.org/lists/jdt-dev/threads.html]
 
 The question:
 When should we use email, and when should we use bug tracker?
-* Can JDK 11 run Eclipse faster than JDK 8?
-Git 2.20.0 (2019) is faster than the Git that comes with Debian 9 (2017) which is faster than the Git that comes with Ubuntu 14.04 (2014).
-* What can the OSGi Console do?
-* Eclipse for Java development
-Install M2E[fn::https://www.eclipse.org/m2e/].[fn::https://www.vogella.com/tutorials/EclipseMaven/article.html]
-* e4?
-https://eclipsesource.com/blogs/2012/05/10/eclipse-4-final-sprint-part-1-the-e4-application-model/
-* JFace?
-https://www.vogella.com/tutorials/EclipseJFace/article.html
-* JDT UI
-https://wiki.eclipse.org/JDT_UI/How_to_Contribute
-
-https://www.eclipse.org/jdt/ui/doc/bug-annotation.php
 * Eclipse vs IntelliJ IDEA
 I used IDEA 2018 and Eclipse 2019.
 - Eclipse starts faster and uses less RAM.
   Perhaps this is because Eclipse indexes less eagerly than IDEA does.
 - IDEA has better navigation, autocompletion/intellisense/content-assist, and editor tab behavior.
-* If I want to make my own IDE, should I use DLTK or Xtext or both?
-https://en.wikipedia.org/wiki/Dynamic_Languages_Toolkit
-
-https://en.wikipedia.org/wiki/Xtext
-
-https://jaxenter.com/eclipse-dynamic-language-toolkit-100025.html
