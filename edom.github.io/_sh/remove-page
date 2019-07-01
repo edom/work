@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#   Run this after removing an org file whose html file has already been published.
+#   Otherwise, the html file will still be in the production website.
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+cd ~/work/edom.github.io/_pandoc_out/prod
+
+for html in *.html; do
+    org=${html%.html}.org
+    orgpath=~/work/edom.github.io/$org
+    if [ ! -f $orgpath ]; then
+        echo "deleting $html because $org does not exist"
+    fi
+done
