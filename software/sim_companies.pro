@@ -51,7 +51,7 @@ cannot_produce(R) :- resource_name(R, 'Water').
 %cannot_produce(R) :- resource_name(R, 'Iron ore').
 cannot_produce(R) :- resource_name(R, 'Fabric').
 cannot_produce(R) :- resource_name(R, 'Leather').
-%cannot_produce(R) :- resource_name(R, 'Plastic').
+cannot_produce(R) :- resource_name(R, 'Plastic').
 %cannot_produce(R) :- resource_name(R, 'Golden bars').
 cannot_produce(R) :- resource_name(R, 'Necklace').
 cannot_produce(R) :- resource_name(R, 'Luxury watch').
