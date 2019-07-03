@@ -1,9 +1,8 @@
-#lang racket/base
-; #lang s-exp "stc-racket.rkt"
+#lang s-exp "stc-racket.rkt"
 
 (define-syntax-rule (printeval exp ...)
     (begin
-        (printf "~s --> ~s~n" 'exp exp) ...
+        (printf "~v --> ~v~n" 'exp exp) ...
     )
 )
 
@@ -11,18 +10,22 @@
 (define v #(1 2 3))
 (define h #hash((x . 1) (y . 2)))
 
+(define-struct Person (name age))
+
+(printf "~v~n" (Person "john" 30))
 
 
-; #|
 
-;; https://docs.racket-lang.org/macro-debugger/index.html
-;; useful for debugging macro expansions
+#|
+
+;;  https://docs.racket-lang.org/macro-debugger/index.html
+;;  useful for debugging macro expansions
 
 (require macro-debugger/stepper)
 
 (expand/step #'(printeval (f 1) (f 1)))
 
-; |#
+|#
 
 
 
@@ -47,7 +50,7 @@
     (define (rec)
         (define stx (read-syntax))
         (unless (eof-object? stx)
-            (printf "~s  ~~~  ~s~n" stx (syntax->datum stx))
+            (printf "~v  ~~~  ~v~n" stx (syntax->datum stx))
             (rec)
         )
     )
