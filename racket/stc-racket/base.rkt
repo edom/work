@@ -7,13 +7,15 @@
 
     (require
         racket/function
+        racket/promise
         racket/stream
         racket/string
+        racket/pretty
     )
 
     (provide
 
-        ;;  arithmetics and comparison
+        ;;  arithmetics, logic, and comparison
 
         *
         +
@@ -26,15 +28,27 @@
         eq?
         eqv?
         equal?
+        number?
+        integer?
+        boolean?
+
+        and
+        or
+        not
+        andmap
+        ormap
+
+        ;;  promise
+
+        delay
+        force
 
         ;;  conditional
 
-        and
         case
         cond
+        else
         if
-        not
-        or
         unless
         when
 
@@ -58,33 +72,21 @@
         procedure-arity?
         procedure?
 
-        ;;  syntax and macros
-
-        begin-for-syntax
-        define-syntax
-        define-syntax-rule
-        syntax-case
-        syntax-rules
-
-        datum->syntax
-        syntax->datum
-
-        quasiquote
-        quote
-        syntax
-
         ;;  https://docs.racket-lang.org/reference/strings.html
 
         string
         string?
+        bytes->string/utf-8
+        string->list
+        list->string
+
+        symbol?
         symbol->string
         string->symbol
-        bytes->string/utf-8
+
         substring
         string-copy
         string-append
-        string->list
-        list->string
         string=?
         string<?
         string<=?
@@ -108,19 +110,25 @@
 
         ;;  data structures (product types)
 
+        define-struct
         (rename-out
-            (struct             define-struct)
+            (struct             define-struct-2)
         )
         struct-copy
 
         ;;  iteration and comprehension
 
         for
+        in-list
         in-stream
 
         ;;  regular expressions
 
         regexp-match-positions
         regexp-match
+
+        ;;  racket/pretty
+
+        pretty-print
     )
 )

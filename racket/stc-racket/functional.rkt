@@ -13,7 +13,10 @@
 
         ;;  pattern-matching that can emulate Haskell algebraic data types with Scheme structs
 
+        define/match
         match
+        match-define
+        match-let
 
         ;;  streams, expected to be lazy
         ;;

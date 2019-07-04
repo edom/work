@@ -2,7 +2,7 @@
 ;;
 ;;  map is renamed to list-map.
 ;;
-;;  struct is renamed to define-struct.
+;;  struct is renamed to define-struct-2.
 ;;
 ;;  module is renamed to define-module.
 
@@ -24,6 +24,7 @@
         "stc-racket/logic.rkt"
         "stc-racket/module.rkt"
         "stc-racket/object.rkt"
+        "stc-racket/syntax.rkt"
         "stc-racket/transput.rkt"
     )
 

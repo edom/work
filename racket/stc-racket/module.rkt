@@ -6,6 +6,7 @@
 
         (rename-out
             (module             define-module)
+            (module*            define-module*)
         )
         provide
         require
@@ -37,5 +38,10 @@
         struct-out
         combine-out
         protect-out
+
+        ;;  namespaces
+
+        current-namespace
+        make-base-namespace
     )
 )

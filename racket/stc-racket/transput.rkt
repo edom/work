@@ -1,5 +1,9 @@
 (module stc-racket-transput racket/base
 
+    (require
+        racket/path
+    )
+
     (provide
 
         call-with-input-file
@@ -28,5 +32,22 @@
         printf
         newline
         eof-object?
+
+        ;;  see also syntax.rkt
+
+        read-accept-reader
+
+        ;;  file-system paths
+
+        path?
+
+        string->path
+        path->string
+
+        path->complete-path
+        simple-form-path
+        explode-path
+
+        current-directory
     )
 )
