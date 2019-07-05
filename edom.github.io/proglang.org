@@ -3,6 +3,137 @@
 #+PERMALINK: /proglang.html
 #+OPTIONS: ^:nil toc:nil
 #+MATHJAX: yes
+* Story?
+I have been writing Java code for a few years now.
+I always wonder whether there is a more concise way to write programs.
+
+I have years of unfaithful on-and-off relationships with various languages,
+such as Haskell, Prolog, and Racket.
+
+Prolog and Racket sparks joy in me when I write programs in them.
+
+I think everyone has grievances with all languages.
+
+How is the magical ellipsis in =syntax-case= implemented?
+
+How is Typed Racket implemented?
+
+RacketCon has some interesting talks.
+
+In English, we often invent new vocabularies, but we rarely invent new syntax.
+English is a domain specific language whose domain is everyday human communication.
+English can act as its own meta-language.
+English contains a fragment of logic.
+
+In a language, are we more concerned about expressing the problem or expressing the solution?
+
+Scribble is better than Pandoc?
+Alien technology, productivity multiplier?
+But I feel that Racket is a bit slow?
+
+Robby Findler impressively demonstrated[fn::Lambda Jam 2015 - Robby Findler - Racket: A Programming-Language Programming Language #YOWLambdaJam https://www.youtube.com/watch?v=hFlIl0Zo234]
+Racket as a programming-language programming language.
+
+Is Scribble or Pollen
+ [fn::https://docs.racket-lang.org/pollen/]
+ [fn::(fourth RacketCon): Matthew Butterick — Like a Blind Squirrel in a Ferrari https://www.youtube.com/watch?v=IMz09jYOgoc&feature=youtu.be]
+the authoring system I have been looking for?
+Does my journey end where Matthew Butterick's journey ends?
+Patoline?[fn::http://patoline.org/]
+
+It is regrettable that we have XML while S-expressions suffice, if not better.
+
+I love Erik Meijer's crazy talk[fn::One Hacker Way Rational alternative of Agile - Erik Meijer https://www.youtube.com/watch?v=2u0sNRO-QKQ]:
+- 24:31 tenth man, Israeli intelligence, devil's advocate
+- 26:54 you should never stick around in a company for more than three years (unless you own it, perhaps)
+- 43:50 we pay more for plumbers than we pay more for software; it's crazy
+
+I have become pragmatic.
+I see a class as a way to avoid repeating the first parameter of a collection of related functions.
+That a class corresponds to an entity in the real world is accidental.
+The essence of a class is to factor out a group of method parameters that often occur together.
+
+I think Python's class is a stupid workaround:
+What is the point of having classes and instance methods if you have to type "self" as the first argument of the parameter list?
+The point of languages is to express ideas concisely.
+Class-based programming only works if the first "self" argument is implicit.
+
+One annoying surprise in bash is that the following program doesn't work,
+perhaps because pipe starts new child processes?
+#+BEGIN_EXAMPLE
+echo foo | read
+#+END_EXAMPLE
+
+<2019-07-06>
+I think the most important thing in a programming language is to separate names and referents,
+that is, to be able to express things without naming them:
+anonymous classes, anonymous functions, anonymous modules, anonymous objects, anonymous everything.
+But it's cumbersome to do recursion without names.
+* StackOverflow is harmful?
+StackOverflow is full of bad advices and bad codes.
+
+StackOverflow is great for expert developers who are trying to remember the details of a piece of code,
+but bad for novices who don't know of the consequences of what they are pasting into their terminal.
+
+Ubuntu StackExchange answer writers are too eager to recommend sudo,
+and readers seem to be too eager to copy without understanding.
+The result: Broken Ubuntu installation.
+It did happen to a coworker of mine.
+I think we all had a coworker who mindlessly copied stuff from StackExchange only to break their operating system installation
+while not solving the original problem they set out to solve.
+It goes like this:
+- You have a problem.
+- You copy a snippet from Stack Exchange.
+- Now you have two problems.
+* To write an IDE, we need a module system, not a type system
+Module system is a prerequisite for writing an IDE and program analysis tool.
+
+The setting/fixing of bindings/references/sites statically.
+
+"Go to definition" and "find usages" is more important than type system.
+
+Correct rename refactoring is more important than type system.
+
+It is important to always be able to determine whether two names refer to the same thing.
+"This name is declared/defined in <somewhere>"
+"This name and that name refer to the same thing"
+* Lisp and Scheme: converging?
+Lisp now has static binding (lexical binding).
+
+Scheme now has dynamic binding with "parameterize".
+
+Some Lisp implementations have proper tail calls?
+
+Lisp has multi-methods / generic functions for overloading (using the same name to work with several types).
+Scheme standard does not specify overloading?
+Guile has GOOPS.
+https://www.gnu.org/software/guile/manual/html_node/Methods-and-Generic-Functions.html
+Chicken Scheme.
+
+I want to write "map"; I don't want to write "vector-map" or "<container>-map" for every container type.
+* Expression-problem, OOP vs FP, subclass vs operation
+OOP vs FP:
+OOP makes adding subclasses easy but makes adding operations hard.
+FP makes adding operations easy but makes adding subclasses hard.
+Which one is more likely in our case, adding subclass or adding operation?
+
+// In FP, it is easy to add functions working with Shape, but hard to add a new type of Shape.
+data Shape = Circle | Rectangle
+
+// In OOP, it is easy to add new subclasses of Shape, but hard to add methods to Shape.
+class Shape
+class Circle extends Shape
+class Rectangle extends Shape
+
+What if we need to both add subclasses and add operations?
+
+Sometimes it is possible to add an overridable method with default implementation.
+
+Can we combine OOP and FP to get the best of both worlds, so that it is easy to add subclasses and it is easy to add operations?
+Or are we going to get the worst of both worlds?
+If Scala aims to combine OOP and FP, what is Scala's solution to the expression problem?
+How do we solve the expression problem in TypeScript?
+http://fileadmin.cs.lth.se/sde/people/gorel/misc/ExpProblemTalkPart1.pdf
 * Names and referents should be separated
 ** Executive summary
 The target audience is programming language designers and implementors.
