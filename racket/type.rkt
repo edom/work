@@ -22,15 +22,10 @@
     (define-type (Real))
     (define-type (Integer))
     (define-type (Cons))
+    (define-type (Boolean))
     (define-type (Any))
 
     (define-type (Function a b))
-
-    (define %subtype (%rel (a)
-        ((Integer Number))
-        ((a a))
-        ((a Any))
-    ))
 
     ;;  If f : T -> U and x : A, then:
     ;;      Iff T intersect A is not empty, then (f x) : U.
@@ -69,8 +64,107 @@
         (match object
             ((cons _ _)                             (Cons))
             ((? integer? object)                    (Integer))
+            ((? boolean? object)                    (Boolean))
             ((app function-type type) #:when type   type)
             (_                                      (Any))
+        )
+    )
+
+    ;;  Decorate a syntax object with type information.
+
+    (define-module decoration racket/base
+        (require
+            '#%kernel
+            (rename-in '#%kernel
+                (lambda #%lambda)
+            )
+        )
+        (provide
+            #%module-begin
+            #%require
+            #%app
+            module
+            #%lambda
+            :
+        )
+        (define (: expr type) expr)
+    )
+
+    (require
+        'decoration
+        (for-template 'decoration)
+    )
+
+    (define (decorate stx)
+
+        (printf "decorate ~v~n" stx)
+
+        (define my-lexical-scope #'())
+
+        (define (ERROR message object)
+            (raise-syntax-error 'decorate message object)
+        )
+
+        (define (datsyn object)
+            (datum->syntax my-lexical-scope object)
+        )
+
+        (syntax-case stx
+            (
+                module
+                #%module-begin
+                #%require
+                #%app
+                #%lambda
+                define-values
+                quote
+                :
+            )
+            ((module Name Base Body)
+                #`(module Name Base #,(decorate #'Body))
+            )
+            ((#%module-begin . Body)
+                #`(#%module-begin . #,(decorate-list #'Body))
+            )
+            ((#%require . A)   #'(#%require . A))
+            ((#%app F . A)
+                ;; TODO
+                #`(#%app F . #,(decorate-list #'A))
+            )
+            ((define-values Name Expr)
+                ;; TODO
+                #`(define-values Name #,(decorate #'Expr))
+            )
+            ((quote A)
+                #`(:
+                    (quote A)
+                    #,(datsyn (apparent-type-of (syntax->datum #'A)))
+                )
+            )
+            ((#%lambda Param . Body)
+                ;; TODO
+                #`(#%lambda Param . Body)
+            )
+            (Var (identifier? #'Var)
+                ;; TODO
+                #`(:
+                    Var
+                    #,(Any)
+                )
+            )
+            (_
+                (ERROR "not implemented for" stx)
+            )
+        )
+    )
+    (define (decorate-list stx)
+        (printf "decorate-list ~v~n" stx)
+        (define (ERROR message object)
+            (raise-syntax-error 'decorate-list message object)
+        )
+        (syntax-case stx ()
+            (() #'())
+            ((A . B) #`(#,(decorate #'A) . #,(decorate-list #'B)))
         )
     )
 

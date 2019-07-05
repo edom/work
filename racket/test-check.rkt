@@ -4,4 +4,8 @@
     (define (z) (+ x x))
     (define a '(1 2 3))
     (define b '("foo" "bar" "baz"))
+    (define (c)
+        (display 'foo)
+        (newline)
+    )
 )

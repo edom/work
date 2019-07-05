@@ -15,7 +15,14 @@
 
         quasiquote
         quote
+        unquote
         syntax
+        quasisyntax
+        unsyntax
+
+        with-syntax
+
+        let-syntax
 
         syntax?
         identifier?
@@ -23,6 +30,8 @@
         syntax-e
 
         identifier-binding
+        free-identifier=?
+        bound-identifier=?
 
         ;;  expansion
 
@@ -31,5 +40,13 @@
         ;;  syntax object properties
 
         syntax-source
+
+        syntax-local-value
+
+        ;;  error reporting
+
+        raise-syntax-error
+
+        ;;  TODO: syntax/parse
     )
 )

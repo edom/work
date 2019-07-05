@@ -131,23 +131,18 @@
             (printf "~v : ~v~n" x (apparent-type-of x))
         )
 
-        (define (st1 s) (syntax-case s ()
-            ((st1 a)
-                #'(list 'a 'a)
-            )
-        ))
-
         (test 5)
         (test +)
         (test #'+)
         (test (list 1 2))
         (test #(1 2 3))
         (test `(,+ 1 2))
-        (print (st1 #'(st1 a)))
 
-        #|
         (parameterize ((read-accept-reader #t))
-            (define source "test-check.rkt")
+            #|
+            ;;  Can we piggyback Racket's expander?
+            ;;  It seems no.
+            (define source "test-typed.rkt")
             (call-with-input-file source (lambda (port)
                 (port-count-lines! port)
 
@@ -158,13 +153,28 @@
                 (pretty-print (syntax->datum syntax_1))
                 (display "------------------------------ expand\n")
                 (pretty-print (syntax->datum syntax_2))
+            ))
+            |#
+
+            (define source "test-check.rkt")
+            (call-with-input-file source (lambda (port)
+                (port-count-lines! port)
+
+                (define syntax_1 (read-syntax source port))
+                (define syntax_2 (expand-1 syntax_1))
+                (define syntax_3 (decorate syntax_2))
+
+                (display "------------------------------ read\n")
+                (pretty-print (syntax->datum syntax_1))
+                (display "------------------------------ expand\n")
+                (pretty-print (syntax->datum syntax_2))
                 (display "------------------------------ check\n")
                 (check syntax_2)
                 (display "------------------------------ decorate with types?\n")
-                (pretty-print (Typed->datum (decorate syntax_2)))
+                (print syntax_3)
+                (pretty-print (syntax->datum syntax_3))
             ))
         )
-        |#
     )
 
 )

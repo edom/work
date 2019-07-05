@@ -32,18 +32,24 @@
 
     (provide
 
+        #|
         (rename-out
             (app #%app)
         )
+        |#
+
+        #%app
 
         #%datum
         #%module-begin
         #%top
+        #%top-interaction
 
     )
 
 ;;;;    --------------------    customizations
 
+    #|
     ;;  Problem: This explodes the syntax tree and may slow down the interpreter.
     ;;  Problem: How often is this feature used?
 
@@ -66,4 +72,5 @@
             )
         )
     )
+    |#
 )
