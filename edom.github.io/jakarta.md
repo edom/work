@@ -12,23 +12,10 @@ We need to fix this.
     - City planning
         - [7 principles for building better cities | Peter Calthorpe](https://www.youtube.com/watch?v=IFjD3NMv6Kw)
         - [4 ways to make a city more walkable | Jeff Speck](https://www.youtube.com/watch?v=6cL5Nud8d7w)
-- Government-owned enterprises
-    - Where can I buy cheap meat in Jakarta?
-        - PD Dharma Jaya
-            - http://dharmajaya.co.id/
-            - http://smartcity.jakarta.go.id/blog/198/beli-daging-online-dari-perusahaan-daerah-dharma-jaya
-            - DJMeatshop, expansion of PD Dharma Jaya, [instagram](https://www.instagram.com/djmeatshop/)
-                - Jl. Raya Penggilingan no. 25, Jakarta Timur
-            - www.belidaging-dj.com
-                - Dikasih es batu ga pas ngirim?
-        - I found these while browsing the Internet, but I never tried these.
-        I don't know how cheap.
-            - http://m.warungdaging.com/#features
 - Kementrian Perdagangan
     - https://ews.kemendag.go.id/
     - https://ews.kemendag.go.id/bawangmerah/DailyPriceBawang.aspx
 - http://interactive.smartcity.jakarta.go.id/
-- http://infopangan.jakarta.go.id/
 - [http://jakarta.go.id/](jakarta.go.id: Jakarta government services online entry point)
 - Durian
     - https://www.ucokdurian.id/daging-durian/
@@ -62,17 +49,6 @@ We need to fix this.
         Mengapa kacang hijau sampai impor?
         Mengapa Rp 50 ribu per kg?
 - Jakarta Barat
-    - Macet
-        - Pom bensin di Kemanggisan bikin macet tiap jam makan siang.
-        Mobil yang ngantri banyak, stasiun yang buka cuma satu.
-        - Tempat makan di Tanjung Duren bikin macet.
-        Bikin tempat makan tapi tidak bikin tempat parkir.
-        Parkir di jalan.
-        Mengganggu kepentingan umum.
-        Negative externality.
-        Seperti buang limbah ke sungai.
-        - Green Ville terlalu banyak tempat makan.
-        Setiap Sabtu macetnya sampai Jalan Panjang.
     - Informasi lokal
         - Tempat makan.
         Makanan cocok dengan selera saya.
@@ -88,11 +64,10 @@ We need to fix this.
                 - Ali Tiociu. Capcai, puyunghai, ayam nanking, ayam goreng mentega.
                 - Bakmi Ahok
                 - Bakmi Bintang Gading
-        - Finding out whether my local grocery store is overpriced
-            - 2018-08-12
-                - Nangka kupas Rp 42000/kg
-                - Nanas honi Sunpride Rp 39000/kg
-- [PD Pasar Jaya commodity price list](http://www.pasarjaya.co.id/komoditas)
+- Finding out whether my local grocery store is overpriced
+    - 2018-08-12
+        - Nangka kupas Rp 42000/kg
+        - Nanas honi Sunpride Rp 39000/kg
 - duren medan kupas (ada biji tapi tanpa kulit), Rp 47000 per kg!? Biasanya Rp 75000? Atau biasanya kemahalan?
     - https://www.tokopedia.com/durenkupasjkt/duren-kupas-asli-medan
     - https://www.tokopedia.com/durenkupasjkt/etalase/duren

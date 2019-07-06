@@ -3,7 +3,299 @@
 #+PERMALINK: /index.html
 #+MATHJAX: true
 #+OPTIONS: ^:nil
-* What is your goal tree?
+* Seedling articles
+** <2019-07-07> The root cause of Boeing 737 MAX fiasco: existentially-threatening competitions?
+The Boeing 737 MAX fiasco is not a software accident,
+because the software is working as intended,
+that is as a crutch to work around bad hardware design due to cost-cutting.
+That plane is a pile of workarounds:
+that software is a workaround for bad hardware which is a workaround for bad business decisions.
+They are making planes as game companies make games:
+They think they can just release crashing planes and patch the planes later,
+but planes kill people when they crash, whereas games don't.
+That fiasco is a case of prioritizing profits before engineering,
+but unfortunately, Nature, the judge,
+will always grant victory to physics, when physics and profits disagree.
+But can we blame companies for seeking profit,
+because profit is necessary for their survival?
+Does it mean that airplanes should be made by non-profits?
+But who is going to do anything at all, if not for profit?
+But why can't we just gather the people who are good at building airplanes,
+and give them money and tools to build airplanes?
+Software companies do this all the time.
+
+My first solution attempt is to make organizations in which people just build the best planes they can.
+They may compete, but they must not compete to survive.
+Competition may exist, but must not be an existential threat.
+Non-profits would be even more efficient if there were no competition.
+But even non-profits need money, and that money has to come from somewhere,
+and no one is going to suddenly donate some billion dollars and start a non-profit organization that makes airplanes.
+Or is anyone going to do that?
+The richest people can do that, but will they?
+
+The root cause of the Boeing 737 MAX crashes is that competition presents an existential threat to companies.
+If I had to design a plane while facing an existential threat,
+such as being held at a gunpoint,
+then my plane would probably crash too, as I cut corners to save my life.
+So the question is, how do we remove the gun,
+so that I can design planes in peace,
+while also ensuring that my design makes sense physically and economically?
+
+Competition has given us big companies that produce all luxuries that our ancestors could only imagine but we take for granted.
+But the future is cooperative, not competitive.
+** <2019-07-06> Jakarta the doomed city
+Jakarta is sinking into the sea.
+ [fn::Jakarta Is The World's Fastest-Sinking City (HBO) https://www.youtube.com/watch?v=dNE5aptbGyY]
+ [fn::Jakarta is sinking! - Equator from the Air - BBC https://www.youtube.com/watch?v=qOSwBIstZUs]
+At the same time, the sea is rising due to melting polar ice due to climate change.
+Also recently there was an all-time-high level of air pollution.
+The future is grim.
+Only a natural disaster can fix this sinking polluted overcrowded city.
+
+Jakarta is barely livable.
+Atrocious traffic.
+Severe dust.
+
+Why aren't there more buses?
+Why aren't there more routes?
+How hard is it to start a bus company?
+Why, in the last 30 years, has there never been a bus route through my area?
+
+<2018-09-22>
+Jakarta is sinking, unless we stop draining the aquifer below it.
+
+An animation[fn::1:55 in https://www.youtube.com/watch?v=dNE5aptbGyY] explains why:
+
+- People pump the aquifers out.
+- Rain can't replenish the aquifers because Jakarta is wrapped in concrete.
+- There is no more underground water to press the land up.
+- The land sinks.
+
+North Jakarta is sinking by up to 20 cm per year.
+
+Meanwhile, the government is planning to move the capital from Jakarta to Palangkaraya.
+
+Is there anything safe to eat?
+Is it safer to eat hormones-and-antibiotics-laden chicken or pesticide-laden plants?
+Are city-dwellers doomed to eat shit?
+
+Cheap meat can be bought online from PD Dharma Jaya[fn::http://dharmajaya.co.id/][fn::http://smartcity.jakarta.go.id/blog/198/beli-daging-online-dari-perusahaan-daerah-dharma-jaya]'s
+DJMeatshop[fn::https://www.instagram.com/djmeatshop/] at Jl. Raya Penggilingan no. 25, Jakarta Timur.
+I found these while browsing the Internet, but I never tried these.
+I don't know how cheap.[fn::http://m.warungdaging.com/#features]
+
+Somewhat useful government websites:
+- Commodity price list[fn::http://infopangan.jakarta.go.id/]
+- PD Pasar Jaya commodity price list[fn::http://www.pasarjaya.co.id/komoditas]
+
+Jakarta Barat traffic hotspots:
+- Pom bensin di Kemanggisan bikin macet tiap jam makan siang.
+  Mobil yang ngantri banyak, stasiun yang buka cuma satu.
+- Tempat makan di Tanjung Duren bikin macet, terutama Pisang Goreng Bu Nanik.
+  Bikin tempat makan tapi tidak bikin tempat parkir.
+  Parkir di jalan.
+  Mengganggu kepentingan umum.
+  Negative externality.
+  Seperti buang limbah ke sungai.
+- Green Ville terlalu banyak tempat makan.
+  Setiap Sabtu macetnya sampai Jalan Panjang.
+** <2019-07-06> Borders are lawless places
+*** <2019-07-06> Use a new clean phone that is not logged into anything, when you go abroad
+Customs are lawless.
+Borders are lawless places.
+Laws are not enforceable at borders.
+Rights do not exist at borders.
+China forces travelers to install malware.[fn::https://www.slashgear.com/china-forces-malware-on-tourist-phones-at-border-heres-what-they-want-02582568/]
+USA customs harass.[fn::https://www.schneier.com/blog/archives/2019/04/former_mozilla_.html]
+
+Finding Border Patrol secret Facebook group is like finding a roach nest,
+and now the roaches are running around in panic to save themselves.[fn::https://theintercept.com/2019/07/05/border-patrol-facebook-group/]
+But it is an insult to the roaches.
+
+Customs officials can make their own laws because they face no consequences:
+There is no practical way to hold them accountable for their actions.
+Also, people don't care.
+** <2019-07-06> AWS RDS automated backup doesn't always work
+AWS RDS PostgreSQL point-in-time recovery (PITR) does not always work.
+
+The error message is only the phrase "Incompatible-restore", and no more information.
+What the hell?
+
+Always routinely test the restorability of your backups.
+
+In a company with 50 engineers,
+there is one potentially business-ending accident per year,
+like an accidental deletion of a production database.
+
+A good system is not designed by wishing that people are smart.
+Scripts have shitty user interfaces.
+Smart people make mistakes.
+
+Meanwhile, accidents do happen elsewhere in the cloud.
+ [fn::GOTO 2017 • Debugging Under Fire: Keep your Head when Systems have Lost their Mind • Bryan Cantrill https://www.youtube.com/watch?v=30jNsCVLpAE]
+Joyent, Heroku, AWS, Gitlab.
+Accidental reboots.
+Accidental table droppings.
+Other costly software accidents are
+Ariane-5[fn::https://iansommerville.com/software-engineering-book/case-studies/ariane5/]
+and Therac-25[fn::https://en.wikipedia.org/wiki/Therac-25] (but is it really a software accident?).
+It's just a matter time before there is a software accident as massive as Chernobyl.
+
+I think most software accidents can be attributed to the hubris of some humans,
+be it of managers, engineers, or operators, or a combination of them.
+** <2019-07-06> Is freedom of speech important?
+Examples of degrees of freedom of speech:
+- In USA and Canada, you can talk shit about the government, as long as you don't make death threats, or the cops will get you.
+- In Indonesia, you can disagree with the government, but you have to do it very politely, or you will be jailed.
+- In China, if you disagree with the government, your will be encumbered, if not killed.
+- In Saudi Arabia, if you disagree with the government, you will be killed.
+
+But all government is more similar than different:
+There is always centralization of power, and therefore abuse of power.
+
+Without freedom of speech, life goes on pretty much normally in Indonesia.
+Meanwhile, the USA, for all its free speech, still has problems like crony capitalism
+and highest gun-related murder which is totally preventable
+as shown by the Australians.
+
+Why do you insist on owning a gun?
+It does not protect you from a tyrannical government.
+They have bombs, armies, nukes, soldiers, cops, gunboats, aircrafts, hackers, money, what else.
+If you think your teeny-pistol militia can beat them, you're as deluded as Don Quixote;
+but actually he has better chances than you do,
+because windmills don't fight back, whereas governments do.
+The freedom to bear arms is just a ceremonial distraction
+from more important issues such as imperialism, privacy, and borders.
+** <2019-07-06> Network Address Translation contributes to oppression
+NAT is unholy: It contributes to the oppression of dissidents and journalists, because it hampers peer-to-peer technologies.
+It precludes peer-to-peer truly distributed Web.
+But P2P (peer-to-peer) over NAT may be possible with UDP/TCP/ICMP hole-punching.
+Require an intermediary server only for initial handshake and then the connection is "handed over".
+
+Really no 3rd party in this NAT traversal?[fn::https://github.com/samyk/pwnat]
+** <2019-07-06> Gerrymandering
+Gerrymandering is a self-inflicted pain with a simple solution:
+proportional representation[fn::https://www.fairvote.org/how_proportional_representation_would_finally]
+ [fn::https://www.sightline.org/2019/05/03/the-secret-to-ending-gerrymandering-isnt-a-secret/].
+Drawing district lines is like punching yourself in the face and wondering why it hurts.
+The fix is simple: Just don't do it.
+
+How does Alabama have a government that does not represent its constituents
+ [fn::https://qz.com/1628427/saudi-arabias-abortion-laws-are-more-forgiving-than-alabamas/]
+ [fn::https://www.motherjones.com/politics/2019/05/previously-unreleased-poll-shows-alabama-voters-disapprove-of-extreme-abortion-ban/]
+ [fn::https://www.vox.com/policy-and-politics/2019/5/18/18630562/alabama-abortion-ban-voters-exemption-for-rape-incest]?
+Gerrymandering?
+** <2019-07-06> Best laughters
+- lateralusmaster's laughing at mountain dew name votes https://www.youtube.com/watch?v=rxu3kZPlZx8
+- shadowporker's laughing at "gluten-free lapdances" https://www.youtube.com/watch?v=beA-HMLVb9M
+- Rabbit fall (kanin faldet) Big Brother DK https://www.youtube.com/watch?v=kGKMVXxyXXY&list=PLZrbXygxJiiu5zWE_EmpVrP7ZbYzbujoT&index=7
+- Bradley Walsh cracks up at Fanny Chmelar https://www.youtube.com/watch?v=qfRwUKjJMxE&list=PLZrbXygxJiiu5zWE_EmpVrP7ZbYzbujoT&index=12
+- news anchor reading the name "Chris P Bacon"
+- Russian news anchor reading news about bears in marijuana plantation
+- Man Struggles To Make It Up His Icy Driveway With Trash Can 2:41, 2:47 https://www.youtube.com/watch?v=xlrLFadODEA&list=PLZrbXygxJiiu5zWE_EmpVrP7ZbYzbujoT&index=22
+- Meterstick Jim - The Sims 3: The funniest patch notes https://www.youtube.com/watch?v=4nxsCZ2SEcQ&list=PLZrbXygxJiiu5zWE_EmpVrP7ZbYzbujoT&index=23
+* Sprouting articles
+** <2019-07-06> Two approaches to living: here-first and there-first
+There are two approaches to living:
+- There-first: Start with what you want, and find what you should have:
+  Find what things have to exist in order to satisfy the goal.
+- Here-first: Start with what you have, and find what you should want:
+  Find what can be done with what already exists.
+** <2019-07-06> Friendship is fluid and circumstantial
+At 10 years old, we are friends because we are in the same class, and we don't have better things to do.
+Simple physical proximity.
+But we stop being friends as soon as we graduate out of school.
+
+At 20 years old, we are friends because we are in the same company.
+We stop being friends as soon as we resign.
+
+At 30 years, we are friends because we share a goal or hobby or problem, because we care about a common thing.
+We stop being friends as soon as our problem is solved.
+** <2019-07-07> Learning physics, mathematics, and philosophy simultaneously
+It may be more beneficial to learn
+physics, mathematics, and philosophy simultaneously,
+than to learn them in isolation.
+By philosophy, I mean ontology and epistemology.
+
+Mathematics originated as a way of modeling reality.
+People did math because they wanted to do something in the real world:
+shepherds want to make sure that they don't lose cattle, so they count their cattles;
+carpenters want to cut woods for the diagonals of a wall, so they use Pythagoras's theorem;
+merchants want to profit, so they subtract expenses from income, and use exponentials to calculate interests;
+and so on.
+People did math because they don't want to waste things.
+It was not until that people began doing math for math's sake in a massively organized manner.
+
+We can observe the motion of a tennis ball as follows.
+We get a stopwatch, a pen, and a sheet of paper.
+Then we make an observation sample by simultaneously recording where the tennis ball is and what time the stopwatch is showing.
+Then we repeat that sampling.
+Then we have an observation.
+
+We can model the motion of such ball as a real function
+that extrapolates the table of observations.
+It is straightforward to see and test the correspondence
+between the mathematical description and the described reality:
+We just check whether the function approximates the values in the table of observation.
+The function is much more compact but has slightly more errors than the table.
+A good model sacrifices a little correctness to gain a lot of simplicity.
+
+But real functions are not the only way to model motions.
+We can model motion as a set of positions and an order.
+We can write A < B < C to mean that the particle was at A before it was at B,
+and it was at B before it was at C.
+
+But then there was relativity.
+Now we have to model the other observer's time.
+
+But then there was quantum mechanics.
+Now we cannot model position as a real function.
+
+We can make a table of observations relating
+the time of observation and
+the position of an object at that time.
+
+Force is what we feel when a spring resists our pull.
+With mathematics, we can give meaning to phrases like "twice the force".
+
+Can we observe force?
+Even when we are measuring a force with a dynamometer,
+we are really observing the position of the dynamometer needle,
+not the force itself.
+We never see forces in the way we see colors.
+We only assume the existence of forces,
+and we assume that force is the direct cause of motion.
+* Article lifecycle
+Articles exist in these stages:
+- seed: an idea, a topic, a sentence, a phrase; articles unlikely to be developed
+- sprouting: some direction, some paragraphs, some amalgamation of related topics
+- seedling: The article begins to feel somewhat coherent.
+- sapling: The article has a clear target audience.
+- mature: The article has become a reference that is unlikely to change significantly.
+* Seed articles
+** <2019-07-06> Knots
+Knots are complex.
+Seemingly dead knots in my shorts can suddenly untie when tugged some time after they were tied.
+** <2019-07-06> Blinking Morse code as covert communication channel
+Jeremiah Denton signals "torture" by blinking on TV while he was a war prisoner in Vietnam.
+ [fn::https://qz.com/1625459/learning-morse-code-is-a-valuable-skill-even-in-the-21st-century/]
+** <2019-07-07> Do not ask Google (or anyone else) questions that only you can answer
+Like "If I am my own target audience, what should I write, for myself?"
+** <2019-07-07> Using government data?
+Marc Dacosta: Adventures in the Dark Web of Government Data[fn::https://www.youtube.com/watch?v=SzkyuGeNDf8]:
+joining multiple disparate data sources.
+* Perhaps not too important
+** Why do you make this website?
+Because I find thinking, writing, and planning fun.
+This website contains questions that I think should be answered.
+
+I think of myself as three different people:
+- my past self
+- my present self
+- my future self
+
+This website is a way for those three people to communicate.
+** What is your goal tree?
 - Survive and have fun
   - [[file:live.html][Live forever]]
     - Live healthily
@@ -58,52 +350,7 @@ and /product breakdown structure/[fn::https://en.wikipedia.org/wiki/Product_brea
 <2019-07-06>
 I am tired of planning and thinking top-down.
 Now I'm trying to think bottom-up, reactive, improvisatory, opportunistic.
-
-There are two approaches to life:
-- Start with what you want, and find what you should have:
-  Find what things have to exist in order to satisfy the goal.
-- Start with what you have, and find what you should want:
-  Find what can be done with what already exists.
-
-Jakarta is sinking
- [fn::Jakarta Is The World's Fastest-Sinking City (HBO) https://www.youtube.com/watch?v=dNE5aptbGyY]
- [fn::Jakarta is sinking! - Equator from the Air - BBC https://www.youtube.com/watch?v=qOSwBIstZUs]
-into the sea because its citizens are sucking out too much ground water.
-At the same time, the sea is rising due to climate change.
-The future looks grim.
-
-<2019-07-06>
-A few days ago there were an unexplained all-time-high level of air pollution.
-
-Jakarta is a sinking polluted overcrowded overpopulated city.
-
-Why aren't there more buses?
-Why aren't there more routes?
-How hard is it to start a bus company?
-Why, in the last 30 years, has there never been a bus route through my area?
-
-The government should tax every car owner an additional IDR 7,000,000/year,
-and the government should use that money to pay the toll operators to bypass the toll gates at busy hours.
-
-Examples of degrees of freedom of speech:
-- In USA and Canada, you can talk shit about the government, as long as you don't make death threats, or the cops will get you.
-- In Indonesia, you can disagree with the government, but you have to do it very politely, or you will be jailed.
-- In China, if you disagree with the government, your will be encumbered, if not killed.
-- In Saudi Arabia, if you disagree with the government, you will be killed.
-
-But all government is more similar than different:
-There is always centralization of power, and therefore abuse of power.
-* Why do you make this website?
-Because I find thinking, writing, and planning fun.
-This website contains questions that I think should be answered.
-
-I think of myself as three different people:
-- my past self
-- my present self
-- my future self
-
-This website is a way for those three people to communicate.
-* Who are you?
+** Who are you?
 I am an independent[fn::https://en.wikipedia.org/wiki/Independent_scientist] researcher from Indonesia,
 with too many interests, mostly theoretical,
 because theoretical research is low-cost and can be done at home[fn::https://en.wikipedia.org/wiki/Armchair_theorizing],
@@ -113,7 +360,7 @@ Most of my writings involve applied analytic philosophy, mathematics, and comput
 
 My last formal education degree, if you care, is a Sarjana Ilmu Komputer[fn::https://en.wikipedia.org/wiki/Bachelor_of_Computer_Science] degree bestowed in 2011 by the
 Fakultas Ilmu Komputer[fn::https://www.cs.ui.ac.id/] of Universitas Indonesia[fn::https://www.ui.ac.id/] for four years of undergraduate education.
-* Should I trust you?
+** Should I trust you?
 /No, you should not./
 Anyone can put anything on the Internet.
 Judge for yourself.
@@ -138,7 +385,7 @@ URLs may change.
 
 If you have good eyesight, you may want to zoom out by pressing Control-minus.
 The fonts may be too big.
-* How should I interact with you?
+** How should I interact with you?
 You can pick one of these:
 - Leave a Disqus comment in the related page.
 - [[https://github.com/edom/edom.github.io/issues][Open an issue at GitHub]].
@@ -149,7 +396,7 @@ try resending your message.
 It does get lost sometimes.
 
 If you are in Jakarta, we may meet in some meetups.
-* Where else are you?
+** Where else are you?
 I may also be found at these places, but I rarely check them:
 - [[https://twitter.com/ErikDominikus][Twitter:ErikDominikus]]
 - [[https://www.linkedin.com/in/erikdominikus/][Linkedin:erikdominikus]]

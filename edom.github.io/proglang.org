@@ -1,4 +1,4 @@
-#+TITLE: Programming language design
+#+TITLE: Programming languages
 #+DATE: 2018-12-15 01:35 +0700
 #+PERMALINK: /proglang.html
 #+OPTIONS: ^:nil toc:nil
@@ -18,14 +18,14 @@ How is the magical ellipsis in =syntax-case= implemented?
 
 How is Typed Racket implemented?
 
-RacketCon has some interesting talks.
-
 In English, we often invent new vocabularies, but we rarely invent new syntax.
 English is a domain specific language whose domain is everyday human communication.
 English can act as its own meta-language.
 English contains a fragment of logic.
 
 In a language, are we more concerned about expressing the problem or expressing the solution?
+
+Racket struct has prop:procedure property that can be used to make a struct act like a procedure in an application expression.
 
 Scribble is better than Pandoc?
 Alien technology, productivity multiplier?
@@ -53,7 +53,25 @@ I see a class as a way to avoid repeating the first parameter of a collection of
 That a class corresponds to an entity in the real world is accidental.
 The essence of a class is to factor out a group of method parameters that often occur together.
 
-I think Python's class is a stupid workaround:
+Many programming language features are for /grouping/.
+
+The purpose of a struct is to group parameters that always occur together.
+
+The purpose of a class is to group the functions that use a common struct.
+A class is not about message passing or domain modeling. It is about grouping.
+
+The purpose of a namespace or package is to group classes that are often used together.
+
+The purpose of a module is to group definitions that are often used together.
+
+The purpose of a library is to group namespaces that are often used together.
+
+The purpose of an operating system is to group programs that are often used together.
+
+This is a way of thinking:
+We can think of something as what it gathers.
+
+I think Python's class is futile, self-defeating, and counterproductive:
 What is the point of having classes and instance methods if you have to type "self" as the first argument of the parameter list?
 The point of languages is to express ideas concisely.
 Class-based programming only works if the first "self" argument is implicit.
@@ -69,6 +87,24 @@ I think the most important thing in a programming language is to separate names 
 that is, to be able to express things without naming them:
 anonymous classes, anonymous functions, anonymous modules, anonymous objects, anonymous everything.
 But it's cumbersome to do recursion without names.
+
+All programming is ultimately imperative, because computers ultimately only understand machine instructions.
+All declarative programs must be translated into imperative programs before they can be executed.
+The translation can be done by compilation or interpretation.
+
+"How" is the most important question after "why".
+
+You can design programming languages, but at the end of the day,
+you have to implement an interpreter or translator.
+* <2019-07-06> Racket macros
+A syntax pair is not a pair of syntax objects, but is a syntax object whose datum is a pair.
+A syntax list is not a list of syntax objects, but is a syntax object whose datum is a list.
+* <2019-07-06> Do not fix what is not broken, lest you break what is not broken
+When I was young, I liked to tidy up source code.
+
+I refactor something needlessly.
+The "problem" is that the code is "ugly", and my "fix" broke production.
+Looking back, I now think that was totally unnecessary.
 * StackOverflow is harmful?
 StackOverflow is full of bad advices and bad codes.
 
@@ -111,6 +147,9 @@ https://www.gnu.org/software/guile/manual/html_node/Methods-and-Generic-Function
 Chicken Scheme.
 
 I want to write "map"; I don't want to write "vector-map" or "<container>-map" for every container type.
+Can Alexis King's Hackett save me?
+She tantalizingly hinted[fn::"Hackett: a metaprogrammable Haskell" by Alexis King https://www.youtube.com/watch?v=5QQdI3P7MdY]
+at how Racket macros can benefit from Haskell and how Haskell can benefit from Racket macros.
 * Expression-problem, OOP vs FP, subclass vs operation
 OOP vs FP:
 OOP makes adding subclasses easy but makes adding operations hard.
