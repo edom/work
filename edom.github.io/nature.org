@@ -9,12 +9,12 @@
 \newcommand\ang[1]{#1^\circ}
 \newcommand\parenthesize[1]{\left(#1\right)}
 \)
-* About the book
+* About the book and its approach
 ** The approach of this book?
 The approach of this book is physics first, philosophy second, and mathematics third.
 
 Both theory and experiment are important, and should be balanced.
-** The order of the contents of this book?
+** The order of the contents of this book
 The contents of this book are ordered ascending by knowability.
 
 It may be beneficial to compare the sequence in this book against the sequence in other books,
@@ -44,27 +44,8 @@ Work should precede energy.
 Atomic theory should precede crystals?
 
 Crystals should precede quantum mechanics, for the Davisson--Germer experiment.
-** TODO Title of this book: what should it be?
-- Physics: /How/ do we know?
-- Modern physics /from scratch/,
-  Quantum physics from scratch,
-  Relativity from scratch
-- Learn quantum physics in X hours,
-  Learn relativity in X hours
-- Handbook of /amateur/ physicists
-- /Reasonable/ physics
-- /Justifiable/ physics;
-  Justifying natural knowledge;
-  Physics with justification
-- A /holistic/ approach to learning natural science, ordered by /knowability/;
-  Learning natural science with emphasis on epistemology;
-  An epistemological physics text book
-- /Understanding/ physics;
-  Understandable physics;
-  Physics with understanding
-- Physics with /conviction/;
-  Physics with confidence
-- (something else?)
+
+Fields should precede electromagnetic waves.
 ** Rant about the ideal education system?
 In lower education,
 there should not be a math class, a physics class, a chemistry class, and a biology class;
@@ -131,6 +112,40 @@ Nature tells the same truth to everyone who asks the same question.
 The only condition is that we speak Nature's language: experiments.
 Perhaps our lives will take off too, when we realize that we don't know,
 and we ask people questions instead of guessing the answers.
+** Dividing physics by scale
+We can divide physics into several parts,
+depending on whether the object of study is manipulable by human hands:
+- physics of small objects, for objects that are too small for the human hand, such as atoms;
+- physics of medium objects, for objects that are about the size of the human hand; and
+- physics of large objects, for objects that are too large for the human hand, such as celestial objects.
+
+Basically, the physics of large objects is the part of physics
+that does not require the theory of atoms in order to be understood.
+
+The physics of medium objects is easy to experiment with and verify,
+and thus should motivate us to dive deeper into physics.
+Hence it comes early in this book.
+** TODO Title of this book: what should it be?
+- Physics: /How/ do we know?
+- Modern physics /from scratch/,
+  Quantum physics from scratch,
+  Relativity from scratch
+- Learn quantum physics in X hours,
+  Learn relativity in X hours
+- Handbook of /amateur/ physicists
+- /Reasonable/ physics
+- /Justifiable/ physics;
+  Justifying natural knowledge;
+  Physics with justification
+- A /holistic/ approach to learning natural science, ordered by /knowability/;
+  Learning natural science with emphasis on epistemology;
+  An epistemological physics text book
+- /Understanding/ physics;
+  Understandable physics;
+  Physics with understanding
+- Physics with /conviction/;
+  Physics with confidence
+- (something else?)
 * Reintroduction to mathematics
 ** Dispelling the fear of mathematics
 Fear mathematics not, because it is just abbreviated English.
@@ -164,22 +179,9 @@ A physical theory is a combination of a mathematical model and a philosophical j
 
 The marriage between physics and mathematics has been so intimate and fruitful
 that it is impossible to do any significant physics in the 21st century without mathematics.
-* Dividing physics by scale
-We can divide physics into several parts,
-depending on whether the object of study is manipulable by human hands:
-- physics of small objects, for objects that are too small for the human hand, such as atoms;
-- physics of medium objects, for objects that are about the size of the human hand; and
-- physics of large objects, for objects that are too large for the human hand, such as celestial objects.
-
-Basically, the physics of large objects is the part of physics
-that does not require the theory of atoms in order to be understood.
-
-The physics of medium objects is easy to experiment with and verify,
-and thus should motivate us to dive deeper into physics.
-Hence it comes early in this book.
 * --- Part --- The physics of medium objects
-* Matter and its macroscopic properties
-** Classes, instances, and properties
+* Matter, properties, and measurement
+** Ontology: Classes, instances, and properties
 "Water" is a class, a category, a concept, an idea, an abstract object.
 The liquid thing in my drinking bottle is a concrete object that is an instance of the "water" concept.
 
@@ -190,8 +192,115 @@ Example of class property: all water is clear.
 Example of instance property: this bucket of water weighs 1 kg.
 
 More properties of matter will be discussed in the "Analytical chemistry" section.
-** Basic physical properties, and how to measure them
-*** Mass and weight: How do we measure it?
+** Properties: How we know what something is
+Pretend that we were our ancestors who did not know much chemistry.
+
+How do we identify something?
+By its properties.
+We assume that if two things have the same properties, then they are the same thing.[fn::https://en.wikipedia.org/wiki/Identity_of_indiscernibles]
+For example, in 1000 BC, if something looks like water, tastes like water, flows like water,
+weighs like water, then it probably is really water.
+What is water?
+Water is whatever that we define to have the properties of water:
+clear liquid at room conditions,
+weighing 1 kg per liter,
+boiling at 100 deg C at sea level, and so on.
+We name such thing "water".
+
+First, we define "water" as whatever that is flowing in the nearest river.
+Then we take some of that water, and experiment to find its properties, such as its color, taste, boiling point, and so on.
+Then we declare that everything else that has those properties is also water.
+** Properties of an object: How do we know?
+We know a thing's properties through our senses and reasoning.
+
+We don't know all properties of water,
+but we know some properties to distinguish water from non-water in everyday life.
+
+How do we know that something is water?
+If it is liquid, and it comes in large amount from the sky or a river,
+then it is very likely water.
+But that is just a caveman heuristic, not a scientific test.
+The real answer was only found in the 18th century.
+Cavendish 1781 mixed "inflammable air" and "dephlogiscated air" into one container,
+created an electric spark inside the container with an electrostatic machine,
+and observed the formation of water.
+ [fn::https://en.wikipedia.org/wiki/Properties_of_water#History]
+ [fn::http://www.chemistryexplained.com/Bo-Ce/Cavendish-Henry.html]
+ [fn::http://www1.lsbu.ac.uk/water/water.html]
+Back then the term "hydrogen" and "oxygen" had not been invented.
+Terms like "inflammable air" suggest that people back then thought that air everywhere is the same on Earth,
+and there is a recipe for turning common air into "inflammable air".
+
+Thus, the next question is, "What properties are there?"
+
+The properties of matter may be classified into two kinds:
+physical properties[fn::https://en.wikipedia.org/wiki/Physical_property]
+and chemical properties[fn::https://en.wikipedia.org/wiki/Chemical_property],
+depending on whether the property involves chemical reactions.[fn::https://chem.libretexts.org/Bookshelves/Inorganic_Chemistry/Supplemental_Modules_(Inorganic_Chemistry)/Chemical_Reactions/Properties_of_Matter]
+
+Some examples of properties that are simple to observe:
+color, weight, density, odor, taste, feel, texture, phase (solid or liquid).
+
+Early analytical chemistry relies on appearance and measurements:
+If it's red and it's found on the ground, we call it "copper".
+
+Analytical chemistry[fn::https://en.wikipedia.org/wiki/Analytical_chemistry] tries to answer
+"How do we know what something is?"
+And we answered "By its properties."
+Thus, analytical chemistry tries to answer the question
+"What properties are there, especially, what chemical properties are there?"
+
+Static properties: color, phase.
+
+Dynamic properties: reactions with other things.
+For example, it is a property of salt to dissolve in water.
+Conversely, it is a property of water to dissolve salt.
+
+One property alone may be insufficient to identify substances.
+For example, both water and sulfuric acid is a clear liquid.
+If we rely on color alone, we may accidentally drink the wrong liquid.
+** Record of properties: Where is it?
+Where is our cumulative knowledge of matter stored?
+
+It is vital to have a record of things, their properties, and their chemical reactions ("chemical recipes").
+Such information was kept in books and libraries.
+In the 21st century, we have computers.
+
+Wikipedia has some properties for some chemical substances.
+** TODO What?
+Substance S is something that has color C, density D, phase P at room temperature at sea level,
+reacts with substance T to produce substance U, and so on.
+That is, substance S is whatever that has all the supposed properties of substance S.
+
+One way is by density.
+For example, the density of water is one kilogram per liter,
+so if there is one liter of liquid that weighs two kilograms,
+then it may be contaminated water, or not water at all.
+
+How do we know that two similar substances are the same substance?
+All metals look shiny.
+How do we tell apart silver from platinum?
+
+A molecule?
+
+"Chemical analysis" or "analytical chemistry"?
+How do we know what something is, what is in it, what it is made of?
+By a collection of classical tests[fn::https://en.wikipedia.org/wiki/Analytical_chemistry#Classical_methods].
+But there is some risk of false positive/negative.
+
+More sophisticated tests
+ [fn::https://en.wikipedia.org/wiki/Mass_spectrometry]
+ [fn::https://en.wikipedia.org/wiki/Gas_chromatography]?
+
+An observable property is a property that we can perceive with our senses.
+We will only deal with properties that can be known by experiment.
+** Weight: How do we measure it?
+/Weight/ is what a weight scale[fn::https://en.wikipedia.org/wiki/Weighing_scale] measures.
+
+One handful of iron is heavier than one handful of water.
+Thus we say that iron is more /dense/ and more /heavy/ than water.
+Thus one liter of iron contains /more matter/ than one liter of water does.
+** Mass: How do we measure it?
 The /mass/ of a thing is the amount of matter in that thing.
 
 Tacit assumption: Things are made of a finite amount of matter.
@@ -199,12 +308,8 @@ Tacit assumption: Things are made of a finite amount of matter.
 - Iron is made of iron matter.
 - X is made of X matter, etc.
 
-/Weight/ is what a weight scale[fn::https://en.wikipedia.org/wiki/Weighing_scale] measures.
-
-One handful of iron is heavier than one handful of water.
-Thus we say that iron is more /dense/ and more /heavy/ than water.
-Thus one liter of iron contains /more matter/ than one liter of water does.
-*** Density: How do we measure it?
+An object's mass can be measured indirectly by applying a controlled force to it and measuring its acceleration.
+** Density: How do we measure it?
 The average density is inferred by dividing the inferred mass and the measured volume.
 
 - Define: /Density/ is mass per volume.
@@ -219,58 +324,139 @@ The average density is inferred by dividing the inferred mass and the measured v
   - Observe: The weight of \( n \) copies of X is \( n \) times the weight of X.
   - Assume: Weight is proportional to mass.
 - History of measurement?[fn::https://en.wikipedia.org/wiki/History_of_measurement]
-*** Volume: How do we measure it?
+** Volume: How do we measure it?
 /Volume/ is amount of space occupied.
 - Tacit assumption: Space exists.
 - Tacit assumption: Space can be occupied.
 
 /Volume/ is what volume meter measures.
-We way measure volume this way:
+Here is one way of measuring volume:
 - Submerge the thing completely into a bucket full of water.
 - The /volume/ of that thing is the amount of water that spills.
-* ? Analytic geometry, and kinematics
-Kinematics is about /describing/ motion, not /explaining/ (finding the cause of) motion.
 
-Analytic geometry is the usage of coordinate systems for thinking about spaces?
+But what if the thing is not solid, or absorbs water, or reacts with water?
+* Motion of medium objects
+** Movement, motion, and velocity
+When we say "movement", we care only about whether an object has changed its position.
+When we say "motion", we care about the trajectory, the details, how the object changed its position over time.
 
-Analytic geometry can be thought of doing geometry by manipulating numbers instead of by drawing shapes.
+We measure velocity of an object indirectly, by comparing the object's position at various times.
 
-With analytic geometry, we can describe shapes using real numbers.
+What is motion?
 
-"The power of analytic geometry derives very largely from the fact
-that it permits the methods of the calculus, and, more generally, of
-mathematical analysis, to be introduced into geometry."
- [fn::page 1 in "Two Approaches to Modelling the Universe: Synthetic Differential Geometry and Frame-Valued Sets" by John L. Bell
-http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.114.1930&amp;rep=rep1&amp;type=pdf]
-* Spaces
-We can think of a /physical space/ (where we exist) as a /mathematical space/ (a set of points).
-In this document we often conflate those two spaces without warning.
-** Thinking of our local physical space as Euclidean space
-We can think of the space near us as a /three-dimensional Euclidean space/,
-which is our intuition of space as we experience it in our everyday lives.
-** Real tuple spaces
-An \(n\)-tuple is a bunch of \(n\) possibly different things.
+What is change?
 
-A real \(n\)-tuple is a bunch of \(n\) real numbers.
-
-The set \(\Real^n\) (the /\(n\)-dimensional real tuple space/) is the set of all real \(n\)-tuples.
-For example, we say that the real 3-tuple \((1,2,3)\) is "a /member/ of" or "an /element/ of" or "a /point/ in" \(\Real^3\).
-
-The /dimension/ of \(\Real^n\) is \(n\).
-
-A real tuple space is a mathematical space, not a physical space.
-* Motion
-** Obvious: Motion
-How do we know that something moves?
+What is position?
+Position is the relative place of things.
+Is position a property of a thing?
+Position is relative.
+The position of a thing is measured with respect to another thing.
+** Movement: How do we know?
 By observing a change in its position.
-** Mathematical models of motion
+
+The /position/ of a thing is where it is in space.
+
+/Displacement/ is relative position.
+
+/Motion/ is change of position.[fn::https://en.wikipedia.org/wiki/Motion_%28physics%29]
+
+A thing /moves/ iff its position changes.
+
+Change happens over /time/.
+** Movement, described with vectors
+The vector AB is the shortest path from point A (its origin) to point B (its destination).
+Thus a vector has magnitude and direction.
+
+A vector is usually drawn as a straight line with an arrowhead on its destination end.
+
+In everyday situation, the shortest path connecting two points is a straight line.
+However, in a long-haul flight, the shortest path is an arc, unless we drill through the Earth.
+
+A coordinate is a tuple (a bunch, a group) of numbers.
+
+The question "Where is something?" can be answered systematically, such as with postal addresses.
+
+"Where is that point P?"
+The Cartesian coordinate system answers "P is at \((1,2)\)"
+to mean "from the point A, go 1 step east, then go 2 steps north, and then you will be at P".
+** Position, described with coordinates
+How do we describe the position of a thing?
+By a coordinate system.
+We pick a point called the /origin/, and pick three directions.
+Then, each point in space can be described as a tuple \((x,y,z)\) of three numbers;
+that tuple means "From the origin, go \(x\) steps east, \(y\) steps north, and \(z\) steps up."
+
+A tuple is a bunch of numbers.
+
+A coordinate system gives meaning to such tuples.
+
+Cartesian coordinate systems?
+
+A coordinate system is a method of naming every point.
+
+Let \(E^n\) mean the \(n\)-dimensional Euclidean space.
+
+A Cartesian coordinate system is a geometric interpretation of a real tuple space.
+Such system uses
+a tuple in \(\Real^n\) and three orthogonal axes
+to describe a point in \(E^n\).
+"Axes" here is plural of "axis", not of "axe".
+**** In two dimensions
+For an example of a two-dimensional Cartesian coordinate system, see the Wikipedia picture
+ \footnote{\url{https://en.wikipedia.org/wiki/File:Cartesian-coordinate-system.svg}}.
+The positive x-axis points right.
+The positive y-axis points up.
+**** In three dimensions
+(A picture would be nice.)
+
+The standard three-dimensional Cartesian coordinate system is right-handed.
+With your right hand, form an L with the thumb and the index finger,
+and form another L with the index and the middle finger.
+Then see this table.
+
+#+CAPTION: Standard directions
+| direction | right hand finger | XYZ        |
+|-----------+-------------------+------------|
+| rightward | right thumb       | X positive |
+| forward   | right index       | Y positive |
+| leftward  |                   | X negative |
+| backward  |                   | Y negative |
+| upward    | right middle      | Z positive |
+| downward  |                   | Z negative |
+**** Related Wikipedia pages
+These
+ \footnote{\url{https://en.wikipedia.org/wiki/Cartesian_coordinate_system}}
+ \footnote{\url{https://en.wikipedia.org/wiki/Right-hand_rule}}.
+** TODO Speed: How do we measure it?
+The /speed/ of an object is how fast it moves:
+how far it moves in how much time.
+/Fast/ means high speed,
+going far in little time,
+traveling much distance in little time.
+
+/Average speed/ is distance traveled divided by time required.
+** TODO Velocity: How do we measure it?
+/Velocity/ is the rate of change of position.
+Speed is the magnitude of velocity.
+/Rate of change/ is defined by /derivative/.
+** Motion: Its measurement
+We can describe the motion of an object by sampling its position at various times.
+
+We may describe a man's motion as "At 4am he was on his bed. At 9am he was at his office. At 7pm he was at his home."
+
+We may describe a star's motion as "In May it was 50 degrees upward from my house entrance. In June it was 40 degrees upward from my house entrance."
+
+We may put a ball at the high end of an inclined plane,
+and measure the duration required by the ball to reach the low end of the inclined plane.
+Indeed this was Galileo's experiment in which he found that the duration is proportional to the square root of the length of the plane if the inclination angle is held constant.
+
 We can observe the motion of a tennis ball as follows.
 We get a stopwatch, a pen, and a sheet of paper.
 Then we make an observation sample by simultaneously recording where the tennis ball is and what time the stopwatch is showing.
 Then we repeat that sampling.
 Then we have an observation.
-
-A /real function/ can model the motion of such ball.
+** Motion, described with functions
+A /real function/ can summarize the sampling of the motion of an object.
 The function extrapolates the table of observations.
 It is straightforward to see and test the correspondence
 between the mathematical description and the described reality:
@@ -292,53 +478,20 @@ Force is what we feel when a spring resists our pull.
 With mathematics, we can give meaning to phrases like "twice the force".
 
 Real functions are not the only way to model motions.
-
+** Motion, described with ordered sets
 We can model motion as a set of positions and an order.
 We can write A < B < C to mean that the particle was at A before it was at B,
 and it was at B before it was at C.
-** Basic motion concepts
-*** Position and displacement
-The /position/ of a thing is where it is in space.
-
-/Displacement/ is relative position.
-*** Motion, position, and time
-/Motion/ is change of position.[fn::https://en.wikipedia.org/wiki/Motion_%28physics%29]
-
-A thing /moves/ iff its position changes.
-
-Change happens over /time/.
-*** Speed and velocity
-The /speed/ of an object is how fast it moves:
-how far it moves in how much time.
-/Fast/ means high speed,
-going far in little time,
-traveling much distance in little time.
-
-/Average speed/ is distance traveled divided by time required.
-
-/Velocity/ is the rate of change of position.
-Speed is the magnitude of velocity.
-/Rate of change/ is defined by /derivative/.
-** Describing motion
+*** Describing motion
 A description of a thing's motion answers the question "Where is that thing when?"
 Such description relates position and time.
-*** Sampling
-We may describe a thing's motion by /sampling/ where it is at different times.
-
-We may describe a man's motion as "At 4am he was on his bed. At 9am he was at his office. At 7pm he was at his home."
-
-We may describe a star's motion as "In May it was 50 degrees upward from my house entrance. In June it was 40 degrees upward from my house entrance."
-
-We may put a ball at the high end of an inclined plane,
-and measure the duration required by the ball to reach the low end of the inclined plane.
-Indeed this was Galileo's experiment in which he found that the duration is proportional to the square root of the length of the plane if the inclination angle is held constant.
-*** Function relating time and displacement
+**** Function relating time and displacement
 We can think of a thing's displacement at time \(t\) as a mathematical /function/ \(x\) such that \(x(t)\) is the thing's displacement at time \(t\).
 Note that the function is \(x\), not \(x(t)\).
 
 An example of an equation of motion is $x(t) = 2 \hat{e} t$ where \(\hat{e}\) is a unit vector.
 It describes an object that moves with constant velocity \(2 \hat{e}\) (constant speed 2 towards constant direction \(\hat{e}\)).
-*** Equation of motion
+**** Equation of motion
 An /equation of motion/ is an equation that describes
 the motion of an object by relating time and displacement.
 
@@ -347,7 +500,7 @@ If we want to describe \(n\) moving things, we make \(n\) equations of motion.
 
 An example of /implicit/ equation is $x(t) = - (d(d(x)))(t)$.
 This is also an example of a /differential equation/ because it contains the derivative operator $d$.
-*** Basis???
+**** Basis???
 Let $e$ be a linear basis.
 Suppose that the displacement of an object at time $t$ is
 $x(t) = e(x_1(t), \ldots, x_n(t))$.
@@ -358,9 +511,768 @@ Moral of the story:
 If we have a linear basis,
 then doing calculus on the coordinates
 is doing calculus on the vectors.
-** Kinematics, description of motion
+*** Kinematics, description of motion
 A /frame/ defines /where/ and /when/.
-** What
+*** Spaces
+We can think of a /physical space/ (where we exist) as a /mathematical space/ (a set of points).
+In this document we often conflate those two spaces without warning.
+**** Thinking of our local physical space as Euclidean space
+We can think of the space near us as a /three-dimensional Euclidean space/,
+which is our intuition of space as we experience it in our everyday lives.
+**** Real tuple spaces
+An \(n\)-tuple is a bunch of \(n\) possibly different things.
+
+A real \(n\)-tuple is a bunch of \(n\) real numbers.
+
+The set \(\Real^n\) (the /\(n\)-dimensional real tuple space/) is the set of all real \(n\)-tuples.
+For example, we say that the real 3-tuple \((1,2,3)\) is "a /member/ of" or "an /element/ of" or "a /point/ in" \(\Real^3\).
+
+The /dimension/ of \(\Real^n\) is \(n\).
+
+A real tuple space is a mathematical space, not a physical space.
+**** Universal tacit assumptions
+(Do we have to talk about this?)
+
+We assume the isotropy of space, that every part of space is the same everywhere.
+
+We assume Uniformitarianism (which one?),
+that the laws of physics is the same everywhere in the Universe.[fn::https://en.wikipedia.org/wiki/Uniformitarianism]
+We assume the /principle of the uniformity of nature/,
+that the laws of nature is the same everywhere everytime \cite{hume1793inquiry}.
+*** Newton's model of motion
+We can use Newton's equations of motion.
+There are many big simplifications:
+A rigid body is simplified to a point mass occupying no space.
+Space and time is absolute.
+Force acts instantaneously.
+** Frames?
+Understanding moving frames?
+
+A frame of reference may be \emph{moving},
+for example when you look outside from a moving car.
+
+Understanding inertial frames?
+
+An \emph{inertial frame of reference} \(R\) is a frame of reference such that
+for each each object \( M \), if the net force acting on \( M \) is zero, then \(R\) sees that the acceleration of \(M\) is zero.
+
+Simple motion?
+Motion with constant velocity.
+** Force and motion: Which causes which?
+Can we observe force?
+Even when we are measuring a force with a dynamometer,
+we are really observing the position of the dynamometer needle,
+not the force itself.
+We never see forces in the way we see colors.
+We only assume the existence of forces,
+and we assume that force is the direct cause of motion.
+
+A thing changes its motion because there are forces acting on it.
+
+By saying "force is the cause of motion",
+we have not really explained much;
+we have merely named the cause.
+
+We can also bypass philosophy, and simply define /force/ to be what a force meter measures.
+A force meter[fn::https://en.wikipedia.org/wiki/Force_meter] may be a spring.
+Weighing scale[fn::https://en.wikipedia.org/wiki/Weighing_scale].
+Dynamometer[fn::https://en.wikipedia.org/wiki/Dynamometer].
+
+Hooke's law[fn::https://en.wikipedia.org/wiki/Hooke%27s_law]:
+
+Let X be a thing.
+
+Hang a copy of X on a spring.
+The spring lengthens by \( x \) from its resting length.
+
+Hang two copies of X on a spring.
+The spring lengthens by \( 2 \cdot x \) from its resting length.
+*** Obvious: Weight
+It is evident that things weigh.
+One can verify it by trying to lift them.
+*** What is the limit of superposition of forces?
+If a thing is pulled to the left and equally-strongly pulled to the right at the same time,
+then it will eventually break, given big enough forces.
+
+Does this hold for "point particles"?
+*** Reverse dynamics: Motion causes force?
+A force causes a change in an object's motion.
+
+A change in object's motion causes the object to feel force?
+
+Given the force acting on an object, we can compute the object's motion.
+
+Given the object's motion, we can compute the force acting on the object.
+
+Centrifugal force is an example of force that is caused by a change in the object's motion?
+If we are driving a car and we turn the steering wheel to the left,
+we feel a force pushing us to the right.
+*** How do we know that a frame of reference has zero acceleration?
+If we accelerate toward a man who is standing still,
+then it is the same as if he were accelerating toward us with the same magnitude of acceleration,
+but in the reverse direction,
+but he does not report feeling any forces,
+even though, from our point of view, he is accelerating toward us.
+
+*** Dynamics, force, cause of motion
+**** Force, momentum
+In philosophy, force is a synonym of cause;
+thus to force X to do Y is to cause X to do Y.
+
+/Force/ is the rate of change of momentum (Newton 1687, 1728).
+
+Informally and vaguely, /momentum/ is the amount of motion in an object, that is, how hard it is to stop.
+
+Effect of frame of reference on momentum conservation?[fn::https://physics.stackexchange.com/questions/363298/during-a-collision-why-is-momentum-not-conserved-in-a-participants-frame-of-re/363299]
+**** How do we know that weight is gravitational force?
+*** Newton's second law of motion
+If an object has constant mass \( m \) and a constant force \( F \) is acting on it,
+then \( a = F/m \) is that object's constant acceleration.
+
+Newton said momentum, not acceleration?
+*** Understanding mass
+\footnote{\url{http://www.ag-physics.org/rmass/}}
+\footnote{\url{https://en.wikipedia.org/wiki/Mass}}
+The \emph{mass} of an object is the difficulty of changing its velocity.
+
+Mass is resistance to force.
+
+The mass of an object is the amount of matter in that object.
+
+The \emph{rest mass} of an object is its mass measured if it is at rest.
+*** Understanding force
+\emph{Force} is the rate of change of momentum.
+
+A force \emph{acts} on an object.
+*** Using vectors to model forces and others
+Position, momentum, velocity, acceleration, and force are modeled by \emph{vectors} (\S\ref{sec:vector}).
+The position of \(B\) as measured from \(A\) is modeled by a \emph{vector} \(AB\).
+*** Superposing forces
+Forces acting on an object obey the \emph{superposition principle}:
+the result of two forces \(F_1\) and \(F_2\) acting on the same object
+is the same as the result of one force \(F_1+F_2\) acting on that object.
+
+The \emph{net force} acting on an object is the sum of all other forces acting on that object.
+
+\emph{Resultant force} is another term for \emph{net force}.
+*** Path of an object in a field
+\emph{Path} of an object moving in a field.
+A \emph{conservative force} is a force whose work depends only on the difference between the beginning and ending position,
+and not in the path?
+A force whose work is the same for every path from \(A\) to \(B\)?
+The \emph{action} of a path?
+Principle of stationary action?
+*** Conservative force
+\footnote{\url{https://en.m.wikipedia.org/wiki/Conservative_force}}
+
+Conservative force \emph{conserves} mechanical energy.
+*** Generalization
+Weight is gravitational force.
+*** Weight
+After Newton's law of universal gravitation,
+\emph{weight} means gravitational force.
+The weight of an object on Earth is the gravitational force exerted by Earth on that object.
+\emph{Work} generalizes to \( W = F \cdot x \).
+
+\emph{Work} was defined as weight times height.
+*** Falling
+- Define: The /Earth/ is where we stand.
+- Define: /Duration/ is what a timer measures.
+- Define: /Position/ is where something is.
+- Define: /Velocity/ is the rate of change of position.
+- Define: /Acceleration/ is the rate of change of velocity.
+- Define: /Speed/ is the magnitude of velocity.
+- Define: /Time/ is duration.
+- Define: The /distance/ between two points A and B is \( v \cdot t \),
+  - iff \( t \) is the minimum time required by something with constant speed \( v \) to go from A to B.
+- Define: /Length/ is what a ruler measures.
+- Define: /Acceleration/ is the rate of change of velocity.
+- Infer: Things fall /with constant acceleration/ toward the Earth.
+  - That is: ( h = k \cdot t^2 ) where
+    - \( h \) is height of fall;
+    - \( t \) is time of fall;
+    - \( k \) is a constant.
+  - Observe: Things /fall/ toward the Earth.
+  - Observe: Time of fall depends on height only and not mass.
+    - [[https://en.wikipedia.org/wiki/Galileo%27s_Leaning_Tower_of_Pisa_experiment][WP:Galileo's Leaning Tower of Pisa experiment]]
+      - Two balls having different weight, dropped from the same height, will reach the Earth at the same time.
+- Infer: Things fall with the same acceleration everywhere on Earth.
+  - Observe: /Catenary/ is symmetrical.
+    - Tie a rope to two upright posts.
+    - Keep the rope loose, but don't let it touch the ground.
+    - [[https://en.wikipedia.org/wiki/Catenary][WP:Catenary]]
+- Infer: Every part of a thing falls with the same acceleration.
+  - Observe:
+    - Break a thing into several parts (pieces).
+    - Drop the parts.
+    - Every part falls with the same acceleration.
+- Observe: Cavendish torsion balance experiment (1797--1798)
+  - This experiment finds out the density of the Earth.
+  - That is related to the gravitational constant \( G \).
+  - [[https://en.wikipedia.org/wiki/Cavendish_experiment][WP:Cavendish experiment]]
+- Infer: [[https://en.wikipedia.org/wiki/Newton%27s_law_of_universal_gravitation][WP:Newton's law of universal gravitation]]
+  - \( F = G \cdot m_1 \cdot m_2 / r^2 \)
+  - What is the justification?
+    - Does Newton justify Kepler?
+    - Does Kepler justify Newton?
+  - How did Newton arrive at this?
+  - Infer: [[https://en.wikipedia.org/wiki/Kepler%27s_laws_of_planetary_motion][WP:Kepler's laws of planetary motion]]
+    - Observe: Tycho Brahe's data
+- Define: A person is /experiencing weightlessness/ iff his weight is zero (the weight scale says zero).
+- Assume: Einstein's equivalence principle?
+  - A free-falling person will experience weightlessness.
+  - A person in void (zero gravity, absence of any other mass) will also experience weightlessness.
+  - Those two phenomenons are /the same phenomenon/.
+*** Statics, weight, and force
+Pretend that the concept of \emph{mass} has not been invented.
+
+\emph{Weight} is what a weight balance measures.
+
+A weight balance has two arms.
+
+Put a weight on an end of a weight balance.
+Push the other end with your hand until the balance comes to rest.
+When they reach equilibrium,
+both of them exerts the same amount of \emph{force}.
+**** Law of the lever
+\footnote{\url{https://en.wikipedia.org/wiki/Virtual_work#Law_of_the_lever}}
+\footnote{\url{https://en.wikipedia.org/wiki/Lever}}
+
+\index{definitions!lever}
+\index{lever!definition}
+\index{simple machine!lever|see{lever}}
+A \emph{lever} has a fulcrum and two ends.
+
+Let \(r_1\) be the distance between the first end to the fulcrum.
+
+Let \(r_2\) be the distance between the second end to the fulcrum.
+
+Let \(F_1\) be the weight placed at the first end.
+
+Let \(F_2\) be the weight placed at the second end.
+
+\index{Archimedes!law of the lever}
+\index{laws named after people!Archimedes's law of the lever}
+\index{laws!lever}
+\index{lever!law of the lever}
+\index{statics!Archimedes's law of the lever}
+\emph{Law of the lever}:
+Such lever at equilibrium satisfies \(F_1 \cdot r_1 = F_2 \cdot r_2\).
+
+We take this law as evident.
+Doubt can be removed by a simple experiment.
+
+Thus, a weight balance is a lever whose arms have equal length.
+*** ? Polynomials; Galileo's ramps
+Galileo did some quadratic polynomial interpolation (curve fitting)?
+
+Galileo put a ramp (inclined plane),
+rolled a ball from its top,
+and measured the time required by the ball to reach the bottom.
+
+\footnote{\url{https://en.wikipedia.org/wiki/Inclined_plane}}
+A narrow ramp.
+To measure time, he put bells along the ramp.
+The rolling ball hits different bells at different times.
+
+\footnote{\url{https://en.wikipedia.org/wiki/Equations_for_a_falling_body}}
+Galileo's law of falling body
+
+In year? Galileo \( h = k t^2 \).
+** Law of the lever: How we test it
+Law of the lever: \( F_1 \cdot r_1 = F_2 \cdot r_2 \).
+
+Move the fulcrum, or slide the lever along the fulcrum.
+** Gravity? How do we know?
+Newton's key insight is that everything falls in the /same manner/ (due to the /same cause/ that is named "gravity"):
+Both an apple on a tree and the moon in the sky are falling towards the Earth in the same manner.
+
+Newton's cannonball[fn::https://en.wikipedia.org/wiki/Newton%27s_cannonball].
+
+Einstein's key insight is that acceleration and gravity are exactly the same thing?
+** Falling?
+To fall is to passively move toward the Earth.
+
+Falling is the natural unassisted uncontrolled unmodified unaltered motion of things toward the Earth.
+
+We can see that an object falling from height \(h\) requires a time \(t\) to reach the ground, where \( t = \sqrt{2 g h} \) and \(g \approx 10 \meter\per\second^2\).
+** Classical mechanics: How do we test it?
+Confirming experiments:
+
+The experiment of dropping a feather and a ball in vacuum confirms classical mechanics.
+
+Disagreeing experiments:
+
+Problem in atomic theory?
+
+Double-slit electron experiment?
+** TODO Does not belong here?
+*** Dimensions: How do we know?
+How do we know how many dimensions a space has?
+By the maximum number of lines that can be placed simultaneously while keeping them orthogonal to each other.
+
+In general, we know that a space has dimension \(n\) if we cannot simultaneously place more than \(n\) mutually orthogonal lines in that space.
+
+We know that our space has three dimensions because we see that if we have four lines orthogonal to each other,
+then two of them must be parallel (and thus those four lines are not mutually orthogonal).
+So far we have not found how to arrange more than three mutually orthogonal lines in our space.
+*** Orthogonal: How do we know?
+How do we know that two lines are orthogonal?
+By a protractor?
+Two lines are orthogonal if all the four angles formed by their intersection are equal.
+A pair of orthogonal lines divides a full-turn into four equal angles.
+*** An example basis?
+Imagine a flat sheet of paper.
+
+Draw a point \(A\).
+
+Draw a vector named \(i\), from \(A\), \SI{1}{cm} long, pointing right.
+
+Draw another vector named \(j\), also from \(A\), 1 cm long, but pointing up.
+
+Thus, the vectors \(i\) and \(j\) are /orthogonal/.
+
+Then, we declare the basis
+\( e : \Real^2 \to E^2 \) as \( e(x,y) = xi + yj \).
+
+A real tuple space on its own has no geometric meaning.
+One way to visualize a real tuple space is a Cartesian coordinate system.
+
+*** Philosophy of space?
+In our everyday experience,
+two different things cannot occupy the same space at the same time.
+Is that also true in the microscopic level?
+What does "two different things" mean?
+What does "occupy" mean?
+What does "the same space" mean?
+What does "at the same time" mean?
+*** Field?
+Does a gravitational field have material existence?
+Is gravitational field physical or mathematical?
+A gravitational field /describes/ the gravitational force that a unit point mass /would/ experience.
+Note the counterfactual.
+The verb /describes/ implies that the subject (a gravitational field) is abstract.
+
+At first I think matter changes spacetime around it, and we call this change "field".
+But Quantum Field Theory seems to imply that the fields are real, and matter seems to be our limited perception of the fields.
+
+We think that a matter establishes an associated gravitational field.
+
+Einstein's E = mc2 is about that gravity affects both energy and mass.
+
+A Lagrangian tells how a system interchanges potential energy and kinetic energy?
+
+We can use continuum mechanics.
+
+QFT is basically a mathematical model of motion, like Newton's theory, but with fewer simplifying assumptions.
+Theoretical physics advances by removing simplifying assumptions.
+
+Lagrangian and Hamiltonian are mathematical things.
+Do they have physical meaning?
+*** Coordinate transformations
+A coordinate transformation is a mapping between from one coordinate system to another.
+**** Some coordinate systems
+A \emph{coordinate system} maps a coordinate tuple to a vector.
+***** The rectangular coordinate system
+\(R(x,y) = x e_1 + y e_2\).
+
+\(R(x) = x_1 e_1 + x_2 e_2\).
+
+In this system, the coordinates are the scalar coefficients in the linear combination of basis vectors.
+The coordinates describe how the basis vectors should be linearly combined to form the described vector.
+
+Let \(T : V^2 \to V^2\) be a linear transformation.
+Then \(T(R(x)) = T(x_1 e_1 + x_2 e_2) = x_1 \cdot T(e_1) + x_2 \cdot T(e_2) = x_1 e_1' + x_2 e_2' = R'(x) \).
+***** The polar coordinate system
+\(P(r,t) = r e_1 \text{ rotated } t \text{ radians counterclockwise}\).
+
+\section{Locating the same point with different coordinate systems}
+
+Example of coordinate transformation:
+The same point in the same two-dimensional Euclidean space
+is described by
+both the polar coordinates \( (r,\theta) \)
+and the rectangular coordinates \( (r \cos \theta, r \sin \theta) \).
+The transformation is \( (r,\theta) \to (r \cos \theta, r \sin \theta) \).
+
+What
+ \footnote{\url{https://en.wikipedia.org/wiki/Real_coordinate_space}}
+ \footnote{\url{https://en.wikipedia.org/wiki/Real_coordinate_space}}
+ \footnote{\url{https://en.wikipedia.org/wiki/Mathematical_analysis}}
+
+A \emph{coordinate system} $M : C \to S$ is a surjective mapping from
+\emph{coordinate space} $C$ to \emph{target space} $S$.
+
+A \emph{coordinate} is a point in \(C\).
+The coordinate system tells us how to get to a point.
+
+The \(n\)-dimensional real coordinate space is $\mathbb{R}^n$.
+It is also called the real $n$-space.
+A point in the real $n$-space is an $n$-tuple of real numbers $(x_1,\ldots,x_n)$.
+
+$(x,y)$ is the tuple of coordinates,
+$x$ is the x-coordinate, and $y$ is the y-coordinate.
+
+Coordinate systems unify geometry and
+mathematical analysis.
+With coordinates,
+we can solve geometric problems by
+numbers, calculus, and algebra,
+so that computers can
+find the intersection of geometric objects
+by solving the corresponding system of equations,
+and find the size of a geometric object by solving the corresponding integral.
+**** Converting polar coordinate tuples to rectangular coordinate tuples
+Both the rectangular coordinate $(r\cos\theta, r\sin\theta)$ and the polar coordinate $(r,\theta)$
+describe the same point in two-dimensional Euclidean space.
+\[
+R(r\cos\theta, r\sin\theta) = P(r,\theta)
+\]
+
+A point in a space can have different coordinates in different coordinate systems.
+*** Gases?
+The gas flows according to the pressure difference.
+
+Imagine a room full of gas.
+We are interested in modeling the flow of such gas.
+
+We assume that a part of gas can always be split into smaller parts.
+
+Let \( P(x) \) be the pressure at point \(x\).
+
+Defining "pressure at a point" requires rejecting the theory of atoms.
+It is surprising that a model that violates the theory of atoms
+is so accurate at describing the motions of things that consist of atoms.
+Why does this assumption not invalidate the model?
+*** Curvature: How do we know?
+How do we know that spacetime is bent,
+if all we see is a bent trajectory of light?
+
+If we assume that light travels in a straight line,
+then we have to infer that it is the propagation medium that is bent.
+
+How do we know we are on a sphere?
+Keep moving in the same direction, and end up at where you began.
+
+How do we know that our space is curved?
+*** Curve?
+A smooth curve in a two-dimensional space can be described by a function \( \Real \to \Real^2 \).
+
+A smooth surface in a three-dimensional space can be described by a function \( \Real^2 \to \Real^3 \).
+
+- Matter bends spacetime.
+  - Matter bends spacetime, especially the spacetime /near that matter/.
+  - What does it mean?
+- Spacetime curvature accelerates matter.
+- Einstein could predict some things from philosophy/reasoning/logic/language/German/English without mathematics/analysis/calculus/differential-geometry/calculations/numbers.
+  - https://en.wikipedia.org/wiki/Introduction_to_general_relativity
+  - He used philosophy to derive the mathematics, not the other way around.
+- https://www.quora.com/What-is-the-most-misunderstood-thing-in-physics
+  - See "You can never actually fall into a black hole."
+*** Spherical coordinate systems
+(Why do we bring this up?)
+**** Mathematician's heading
+To simplify the explanation of the coming spherical coordinate system,
+we introduce "heading".
+
+Our definition of heading begins with \ang{0} pointing east (positive x-axis),
+and then goes counterclockwise,
+so \ang{90} is north (positive y-axis), \ang{180} is west (negative x-axis),
+and \ang{270} is south (negative y-axis).
+
+Note that our heading differs from the navigator's heading,
+which begins with \ang{0} pointing north and then goes clockwise.
+ \footnote{\url{https://en.wikipedia.org/wiki/Cardinal_direction\#Additional_points}}
+**** The spherical coordinate system
+The spherical coordinates \((r,a,b)\) mean
+"set heading to \(a\), set elevation to \(b\), and then go the distance \(r\)".
+
+The spherical coordinate system adds another angle component to the polar coordinate system.
+
+We now describe how to map the spherical coordinates \(S(r,a,b)\) to Cartesian coordinates \(C(x,y,z)\).
+The slogan to remember is that \(S(r,a,b)\) means
+\enquote{set heading to \(a\),
+set elevation to \(b\),
+and then go the distance \(r\)}.
+Another slogan is \enquote{face east, turn your head left by angle \(a\),
+turn your head up by angle \(b\), and then look at distance \(r\)}.
+
+Let's read slower as we imagine the drawing.
+
+Let \(O\) be the center of both the spherical coordinate system and the Cartesian coordinate system.
+Let their centers coincide.
+
+A negative angle \(-a\) means the angle \(a\) but in the reverse direction.
+
+Draw the point \(D\) at \(C(r,0,0)\),
+which means that \(D\) lies on the positive x-axis,
+at distance \(r\) from \(O\).
+
+With the positive z-axis as the axis of rotation,
+rotate the vector \(OD\), by angle \(a\) toward the positive y-axis
+(or toward the negative y-axis if \(a\) is negative).
+Call the resulting vector \(OE\).
+Thus, the point \(E\) is at \(C(r \cos a, r \sin a, 0)\),
+which is still on the xy-plane.
+
+Then, rotate the vector \(OE\), by angle \(b\),
+out of the xy-plane, toward the positive z-axis
+(or toward the negative z-axis if \(b\) is negative).
+Call the resulting vector \(OF\).
+
+Then \(F\) is the point described by \(S(r,a,b)\).
+**** Relationship with Cartesian coordinate systems
+Let's say that the point \(F\) is at \(S(r,a,b)\), which is equal to \(C(x,y,z)\).
+By the definition of rotation and the congruence of triangles,
+we can convert spherical coordinates to Cartesian coordinates as follows:
+\begin{align}
+    x &= r \cos a \cos b
+    \\
+    y &= r \sin a \cos b
+    \\
+    z &= r \sin b
+\end{align}
+
+We can convert Cartesian coordinates to spherical coordinates as follows:
+\begin{align}
+    r &= \sqrt{x^2 + y^2 + z^2}
+    \\
+    \tan a &= y/x
+    \\
+    \sin b &= z/r
+\end{align}
+but we have to pick the angles that make the signs correct.
+
+Thus, we have just explained what is meant by the slogan
+\enquote{set heading to \(a\),
+set elevation to \(b\),
+and then go the distance \(r\)}.
+**** Which spherical coordinate system?
+Note that our \(b\) is elevation, not azimuth.
+The relationship between elevation and azimuth is
+\[
+    \text{azimuth} = \ang{90} - \text{elevation}.
+\]
+
+If the elevation is zero, then the spherical coordinate system reduces
+to the polar coordinate system on the xy-plane.
+That method embeds the polar coordinate system into the xy-plane.
+Thus the angle \(a\) is called heading angle, polar angle, or longitude.
+The angle \(b\) is called elevation angle or latitude.
+
+Azimuth is angle from zenith.
+In this case, zenith is the z-axis.
+
+ISO standard?
+Azimuth?
+Elevation?
+
+What\footnote{\url{https://en.wikipedia.org/wiki/Spherical_coordinate_system}}
+*** Statics?
+**** What
+\footnote{\url{https://en.wikipedia.org/wiki/Timeline_of_fundamental_physics_discoveries}}
+
+\emph{Thermodynamics} began as a theory of steam engines.
+
+\emph{Volume} is how much space something occupies.
+
+\emph{Density} is weight per volume.
+**** Archimedes's principle of buoyancy
+\footnote{\url{https://en.wikipedia.org/wiki/Archimedes%27_principle}}
+\footnote{\url{https://en.wikipedia.org/wiki/On_Floating_Bodies}}
+
+Put a solid into a container full of liquid.
+
+The volume of the spilled part of the liquid is equal to
+the volume of the submerged part of the solid.
+
+\index{Archimedes!principle of buoyancy}
+\index{laws named after people!Archimedes's principle of buoyancy}
+\index{laws!buoyancy}
+Equal are the weight of the object and the buoyant force on the object.
+(???)
+**** Pascal's law of fluid pressure transmission
+Blaise Pascal 1647
+
+Pascal's law: Incompressible fluid spreads pressure evenly.
+
+\index{Pascal!law of fluid pressure transmission}
+\index{laws named after people!Pascal's law of fluid pressure transmission}
+\index{laws!fluid pressure transmission}
+\index{statics!Pascal's law of fluid pressure transmission}
+\( P = \rho g h \)
+
+Appreciating Pascal's barrel demonstration:
+
+Counterintuitive: The hydrostatic pressure
+does not depend on \emph{how much} fluid.
+It depends on \emph{how deep}.
+\footnote{\url{https://www.youtube.com/watch?v=EJHrr21UvY8}}
+**** Zeroth law of thermodynamics: How do we test it?
+Put hot iron into cold water.
+Eventually both become equally warm.
+
+\index{laws!thermodynamics, zeroth}
+\emph{Zeroth law of thermodynamics}:
+Heat never spontaneously flows from cold to hot.
+**** Unstructured content
+
+TODO Pendulum
+
+\index{definitions!pendulum}
+\index{pendulum!definition}
+A pendulum is a bob hung on a string.
+
+\emph{Conservation of mechanical energy}:
+A released pendulum comes back to the same height.
+
+TODO
+Interplay between potential and kinetic energy:
+Galileo's interrupted pendulum
+
+TODO Vacuum
+
+Boyle showed that objects of different masses fall with the same acceleration.
+
+TODO Toricelli manometer
+
+TODO von Guericke, Magdeburg
+
+TODO Boyle
+
+TODO Pascal
+
+Boyle's experiments
+
+\index{laws named after people!Lavoisier's law of conservation of mass}
+TODO Lavoisier's law of conservation of mass
+
+**** Understanding energy
+
+Conservation of energy
+
+Kinetic energy
+
+\emph{Kinetic energy} is \( \frac{1}{2} m |v|^2 \) which can also be written as \( |p|^2 / (2m) \).
+This is explained by energy conservation and work by a constant force \(F\) that accelerates an initially resting mass.
+\(F = ma\) and \(s = \frac{1}{2}at^2\) and \( W = Fs \) and \( v = at \) therefore \( W = E_k = \frac{1}{2} m(at)^2 = \frac{1}{2}mv^2 \).
+
+**** Understanding gases
+
+\footnote{\url{https://en.wikipedia.org/wiki/Perfect_gas}}
+\footnote{\url{https://en.wikipedia.org/wiki/Gas#Historical_synthesis}}
+
+A \emph{gas} is ...
+
+\emph{Pressure} is measured by a manometer.
+
+In statics, the \emph{volume} of a gas is the volume of its container.
+Statics assumes that a gas fills its container evenly.
+
+\emph{Temperature} is measured by a thermometer.
+The unit of temperature is \emph{kelvin} (K).
+
+% ?
+Gas and piston at equilibrium:
+Gas and a piston with weight \(F\).
+
+**** Using gas laws
+
+Let there be a container of gas with pressure \(P_1\) and volume \(V_1\).
+Let this gas expand or shrink without changing its temperature
+so that its pressure becomes \(P_2\) and its volume becomes \(V_2\).
+
+\index{laws!gas pressure and volume}
+\index{laws named after people!Boyle's law of gas pressure and volume}
+\index{Boyle!Boyle's law of gas pressure and volume}
+\emph{Boyle's law}: \( P_1 V_1 = P_2 V_2 \).
+
+Other gas laws
+
+\emph{Charles's law}?
+\emph{Dalton's law}?
+
+\footnote{\url{https://en.wikipedia.org/wiki/Dalton%27s_law}}
+\footnote{\url{https://en.wikipedia.org/wiki/Combined_gas_law}}
+\footnote{\url{https://en.wikipedia.org/wiki/Gay-Lussac%27s_law#Pressure-temperature_law}}
+\footnote{\url{https://en.wikipedia.org/wiki/Avogadro%27s_law}}
+
+\index{laws!ideal gas}
+\emph{Ideal gas law}: \( PV = nRT \).
+
+Kinetic energy of one mole of gas is \( \frac{3}{2} RT \).
+
+Statistical thermodynamics: kinetic theory of gases?
+
+**** Understanding Boltzmann's constant
+
+\footnote{\url{https://en.wikipedia.org/wiki/Boltzmann_constant}}
+\emph{Boltzmann's constant} relates the average kinetic energy of particles in a gas and the temperature of the gas?
+
+\footnote{\url{https://en.wikipedia.org/wiki/Gas_constant}}
+The \emph{gas constant} (molar gas constant, universal gas constant, ideal gas constant)?
+
+**** Understanding Avogadro's number
+
+\emph{Avogadro's number} is?
+
+Terms?
+
+System and environment
+
+Thermodynamic equilibrium
+
+**** Understanding heat
+
+Heat capacity
+
+\emph{Black's principle}:
+When two liquids are mixed, the heat released by one equals the heat absorbed by the other.
+???
+
+???
+If \(m_1\) amount of water at temperature \(T_1\) is mixed with \(m_2\) amount of water at temperature \(T_2\),
+then the result, after equilibrium, is \(m_1+m_2\) amount of water at temperature \(\frac{m_1 T_1 + m_2 T_2}{m_1+m_2}\).
+
+Specific heat
+
+Latent heat
+
+**** Understanding thermodynamic process and cycle?
+
+Isobaric?
+Isochoric?
+Adiabatic?
+Expansion of gas?
+Work done by a gas?
+
+Carnot engine?
+
+Thermodynamic efficiency?
+
+**** Understanding the laws of thermodynamics
+
+\footnote{\url{https://en.wikipedia.org/wiki/Laws_of_thermodynamics}}
+\footnote{\url{https://en.wikipedia.org/wiki/History_of_entropy}}
+
+**** Working with simple machines
+
+\footnote{\url{https://en.wikipedia.org/wiki/Simple_machine}}
+
+Lever
+
+Wheel and axle
+
+Pulley
+
+Tilted plane
+
+Wedge
+
+Screw
+
+TODO:
+Modern machine theory: Kinematic chains
 *** Relating velocities, tangent lines, and derivatives
 
 There are several ways of understanding $f'(x)$ (the derivative of $f$ at $x$):
@@ -431,442 +1343,7 @@ A field makes more sense than point mass.
 
 But, with calculus, we can have mass density.
 Calculus enables continuum mechanics.
-** What is motion?
-We can describe the motion of an object by sampling its position at various times.
-
-What is change?
-
-What is position?
-Position is the relative place of things.
-Is position a property of a thing?
-Position is relative.
-The position of a thing is measured with respect to another thing.
-** How do we represent motion?
-We can use Newton's equations of motion.
-There are many big simplifications:
-A rigid body is simplified to a point mass occupying no space.
-Space and time is absolute.
-Force acts instantaneously.
-
-Does a gravitational field have material existence?
-Is gravitational field physical or mathematical?
-A gravitational field /describes/ the gravitational force that a unit point mass /would/ experience.
-Note the counterfactual.
-The verb /describes/ implies that the subject (a gravitational field) is abstract.
-
-At first I think matter changes spacetime around it, and we call this change "field".
-But Quantum Field Theory seems to imply that the fields are real, and matter seems to be our limited perception of the fields.
-
-We think that a matter establishes an associated gravitational field.
-
-Einstein's E = mc2 is about that gravity affects both energy and mass.
-
-A Lagrangian tells how a system interchanges potential energy and kinetic energy?
-
-We can use continuum mechanics.
-
-QFT is basically a mathematical model of motion, like Newton's theory, but with fewer simplifying assumptions.
-Theoretical physics advances by removing simplifying assumptions.
-
-Lagrangian and Hamiltonian are mathematical things.
-Do they have physical meaning?
-** An example basis
-Imagine a flat sheet of paper.
-
-Draw a point \(A\).
-
-Draw a vector named \(i\), from \(A\), \SI{1}{cm} long, pointing right.
-
-Draw another vector named \(j\), also from \(A\), 1 cm long, but pointing up.
-
-Thus, the vectors \(i\) and \(j\) are /orthogonal/.
-
-Then, we declare the basis
-\( e : \Real^2 \to E^2 \) as \( e(x,y) = xi + yj \).
-
-A real tuple space on its own has no geometric meaning.
-One way to visualize a real tuple space is a Cartesian coordinate system.
-** Philosophical digressions
-*** How do we know that our space has three dimensions?
-We know that our space has three dimensions because we see that if we have four lines orthogonal to each other, then two of them must be parallel.
-So far we have not found how to arrange four lines to be orthogonal to each other without making two of them be parallel.
-
-How do we know that two lines are orthogonal?
-By a protractor?
-Two lines are orthogonal if each of the four angles formed by their intersection is orthogonal?
-*** Philosophy of space
-In our everyday experience,
-two different things cannot occupy the same space at the same time.
-Is that also true in the microscopic level?
-What does "two different things" mean?
-What does "occupy" mean?
-What does "the same space" mean?
-What does "at the same time" mean?
-** Cartesian coordinate systems
-A coordinate system is a method of naming every point.
-
-Let \(E^n\) mean the \(n\)-dimensional Euclidean space.
-
-A Cartesian coordinate system is a geometric interpretation of a real tuple space.
-Such system uses
-a tuple in \(\Real^n\) and three orthogonal axes
-to describe a point in \(E^n\).
-"Axes" here is plural of "axis", not of "axe".
-*** In two dimensions
-For an example of a two-dimensional Cartesian coordinate system, see the Wikipedia picture
- \footnote{\url{https://en.wikipedia.org/wiki/File:Cartesian-coordinate-system.svg}}.
-The positive x-axis points right.
-The positive y-axis points up.
-*** In three dimensions
-(A picture would be nice.)
-
-The standard three-dimensional Cartesian coordinate system is right-handed.
-With your right hand, form an L with the thumb and the index finger,
-and form another L with the index and the middle finger.
-Then see this table.
-
-#+CAPTION: Standard directions
-| direction | right hand finger | XYZ        |
-|-----------+-------------------+------------|
-| rightward | right thumb       | X positive |
-| forward   | right index       | Y positive |
-| leftward  |                   | X negative |
-| backward  |                   | Y negative |
-| upward    | right middle      | Z positive |
-| downward  |                   | Z negative |
-*** Related Wikipedia pages
-These
- \footnote{\url{https://en.wikipedia.org/wiki/Cartesian_coordinate_system}}
- \footnote{\url{https://en.wikipedia.org/wiki/Right-hand_rule}}.
-** Coordinate transformations
-A coordinate transformation is a mapping between from one coordinate system to another.
-*** Some coordinate systems
-A \emph{coordinate system} maps a coordinate tuple to a vector.
-**** The rectangular coordinate system
-\(R(x,y) = x e_1 + y e_2\).
-
-\(R(x) = x_1 e_1 + x_2 e_2\).
-
-In this system, the coordinates are the scalar coefficients in the linear combination of basis vectors.
-The coordinates describe how the basis vectors should be linearly combined to form the described vector.
-
-Let \(T : V^2 \to V^2\) be a linear transformation.
-Then \(T(R(x)) = T(x_1 e_1 + x_2 e_2) = x_1 \cdot T(e_1) + x_2 \cdot T(e_2) = x_1 e_1' + x_2 e_2' = R'(x) \).
-**** The polar coordinate system
-\(P(r,t) = r e_1 \text{ rotated } t \text{ radians counterclockwise}\).
-
-\section{Locating the same point with different coordinate systems}
-
-Example of coordinate transformation:
-The same point in the same two-dimensional Euclidean space
-is described by
-both the polar coordinates \( (r,\theta) \)
-and the rectangular coordinates \( (r \cos \theta, r \sin \theta) \).
-The transformation is \( (r,\theta) \to (r \cos \theta, r \sin \theta) \).
-
-What
- \footnote{\url{https://en.wikipedia.org/wiki/Real_coordinate_space}}
- \footnote{\url{https://en.wikipedia.org/wiki/Real_coordinate_space}}
- \footnote{\url{https://en.wikipedia.org/wiki/Mathematical_analysis}}
-
-A \emph{coordinate system} $M : C \to S$ is a surjective mapping from
-\emph{coordinate space} $C$ to \emph{target space} $S$.
-
-A \emph{coordinate} is a point in \(C\).
-The coordinate system tells us how to get to a point.
-
-The \(n\)-dimensional real coordinate space is $\mathbb{R}^n$.
-It is also called the real $n$-space.
-A point in the real $n$-space is an $n$-tuple of real numbers $(x_1,\ldots,x_n)$.
-
-$(x,y)$ is the tuple of coordinates,
-$x$ is the x-coordinate, and $y$ is the y-coordinate.
-
-Coordinate systems unify geometry and
-mathematical analysis.
-With coordinates,
-we can solve geometric problems by
-numbers, calculus, and algebra,
-so that computers can
-find the intersection of geometric objects
-by solving the corresponding system of equations,
-and find the size of a geometric object by solving the corresponding integral.
-*** Converting polar coordinate tuples to rectangular coordinate tuples
-Both the rectangular coordinate $(r\cos\theta, r\sin\theta)$ and the polar coordinate $(r,\theta)$
-describe the same point in two-dimensional Euclidean space.
-\[
-R(r\cos\theta, r\sin\theta) = P(r,\theta)
-\]
-
-A point in a space can have different coordinates in different coordinate systems.
-** Vectors and coordinates; locating things
-The vector AB is the shortest path from point A (its origin) to point B (its destination).
-Thus a vector has magnitude and direction.
-
-A vector is usually drawn as a straight line with an arrowhead on its destination end.
-
-In everyday situation, the shortest path connecting two points is a straight line.
-However, in a long-haul flight, the shortest path is an arc, unless we drill through the Earth.
-
-A coordinate is a tuple (a bunch, a group) of numbers.
-
-The question "Where is something?" can be answered systematically, such as with postal addresses.
-
-"Where is that point P?"
-The Cartesian coordinate system answers "P is at \((1,2)\)"
-to mean "from the point A, go 1 step east, then go 2 steps north, and then you will be at P".
-** Understanding moving frames
-A frame of reference may be \emph{moving},
-for example when you look outside from a moving car.
-** Understanding inertial frames
-An \emph{inertial frame of reference} \(R\) is a frame of reference such that
-for each each object \( M \), if the net force acting on \( M \) is zero, then \(R\) sees that the acceleration of \(M\) is zero.
-** Simple motion
-Motion with constant velocity.
-** ? Calculus; motion
-Newton's key insight is that everything falls in the /same manner/ (due to the /same cause/ that is named "gravity"):
-Both an apple on a tree and the moon in the sky are falling towards the Earth in the same manner.
-
-Newton's cannonball[fn::https://en.wikipedia.org/wiki/Newton%27s_cannonball].
-
-Einstein's key insight is that acceleration and gravity are exactly the same thing?
-
-To fall is to passively move toward the Earth.
-
-Falling is the natural unassisted uncontrolled unmodified unaltered motion of things toward the Earth.
-
-We can see that an object falling from height \(h\) requires a time \(t\) to reach the ground, where \( t = \sqrt{2 g h} \) and \(g \approx 10 \meter\per\second^2\).
-
-
-The gas flows according to the pressure difference.
-
-Imagine a room full of gas.
-We are interested in modeling the flow of such gas.
-
-We assume that a part of gas can always be split into smaller parts.
-
-Let \( P(x) \) be the pressure at point \(x\).
-
-Defining "pressure at a point" requires rejecting the theory of atoms.
-It is surprising that a model that violates the theory of atoms
-is so accurate at describing the motions of things that consist of atoms.
-Why does this assumption not invalidate the model?
-* Force: The cause of motion
-Can we observe force?
-Even when we are measuring a force with a dynamometer,
-we are really observing the position of the dynamometer needle,
-not the force itself.
-We never see forces in the way we see colors.
-We only assume the existence of forces,
-and we assume that force is the direct cause of motion.
-
-A thing changes its motion because there are forces acting on it.
-
-By saying "force is the cause of motion",
-we have not really explained much;
-we have merely named the cause.
-
-We can also bypass philosophy, and simply define /force/ to be what a force meter measures.
-A force meter[fn::https://en.wikipedia.org/wiki/Force_meter] may be a spring.
-Weighing scale[fn::https://en.wikipedia.org/wiki/Weighing_scale].
-Dynamometer[fn::https://en.wikipedia.org/wiki/Dynamometer].
-
-Hooke's law[fn::https://en.wikipedia.org/wiki/Hooke%27s_law]:
-
-Let X be a thing.
-
-Hang a copy of X on a spring.
-The spring lengthens by \( x \) from its resting length.
-
-Hang two copies of X on a spring.
-The spring lengthens by \( 2 \cdot x \) from its resting length.
-** Obvious: Weight
-It is evident that things weigh.
-One can verify it by trying to lift them.
-** What is the limit of superposition of forces?
-If a thing is pulled to the left and equally-strongly pulled to the right at the same time,
-then it will eventually break, given big enough forces.
-
-Does this hold for "point particles"?
-** Dynamics, force, cause of motion
-*** Force, momentum
-In philosophy, force is a synonym of cause;
-thus to force X to do Y is to cause X to do Y.
-
-/Force/ is the rate of change of momentum (Newton 1687, 1728).
-
-Informally and vaguely, /momentum/ is the amount of motion in an object, that is, how hard it is to stop.
-
-Effect of frame of reference on momentum conservation?[fn::https://physics.stackexchange.com/questions/363298/during-a-collision-why-is-momentum-not-conserved-in-a-participants-frame-of-re/363299]
-*** How do we know that weight is gravitational force?
-** Newton's second law of motion
-If an object has constant mass \( m \) and a constant force \( F \) is acting on it,
-then \( a = F/m \) is that object's constant acceleration.
-
-Newton said momentum, not acceleration?
-** Understanding mass
-\footnote{\url{http://www.ag-physics.org/rmass/}}
-\footnote{\url{https://en.wikipedia.org/wiki/Mass}}
-The \emph{mass} of an object is the difficulty of changing its velocity.
-
-Mass is resistance to force.
-
-The mass of an object is the amount of matter in that object.
-
-The \emph{rest mass} of an object is its mass measured if it is at rest.
-** Understanding force
-\emph{Force} is the rate of change of momentum.
-
-A force \emph{acts} on an object.
-** Using vectors to model forces and others
-Position, momentum, velocity, acceleration, and force are modeled by \emph{vectors} (\S\ref{sec:vector}).
-The position of \(B\) as measured from \(A\) is modeled by a \emph{vector} \(AB\).
-** Superposing forces
-Forces acting on an object obey the \emph{superposition principle}:
-the result of two forces \(F_1\) and \(F_2\) acting on the same object
-is the same as the result of one force \(F_1+F_2\) acting on that object.
-
-The \emph{net force} acting on an object is the sum of all other forces acting on that object.
-
-\emph{Resultant force} is another term for \emph{net force}.
-** Path of an object in a field
-\emph{Path} of an object moving in a field.
-A \emph{conservative force} is a force whose work depends only on the difference between the beginning and ending position,
-and not in the path?
-A force whose work is the same for every path from \(A\) to \(B\)?
-The \emph{action} of a path?
-Principle of stationary action?
-** Conservative force
-\footnote{\url{https://en.m.wikipedia.org/wiki/Conservative_force}}
-
-Conservative force \emph{conserves} mechanical energy.
-** Generalization
-Weight is gravitational force.
-** Weight
-After Newton's law of universal gravitation,
-\emph{weight} means gravitational force.
-The weight of an object on Earth is the gravitational force exerted by Earth on that object.
-\emph{Work} generalizes to \( W = F \cdot x \).
-
-\emph{Work} was defined as weight times height.
-** Falling
-- Define: The /Earth/ is where we stand.
-- Define: /Duration/ is what a timer measures.
-- Define: /Position/ is where something is.
-- Define: /Velocity/ is the rate of change of position.
-- Define: /Acceleration/ is the rate of change of velocity.
-- Define: /Speed/ is the magnitude of velocity.
-- Define: /Time/ is duration.
-- Define: The /distance/ between two points A and B is \( v \cdot t \),
-  - iff \( t \) is the minimum time required by something with constant speed \( v \) to go from A to B.
-- Define: /Length/ is what a ruler measures.
-- Define: /Acceleration/ is the rate of change of velocity.
-- Infer: Things fall /with constant acceleration/ toward the Earth.
-  - That is: ( h = k \cdot t^2 ) where
-    - \( h \) is height of fall;
-    - \( t \) is time of fall;
-    - \( k \) is a constant.
-  - Observe: Things /fall/ toward the Earth.
-  - Observe: Time of fall depends on height only and not mass.
-    - [[https://en.wikipedia.org/wiki/Galileo%27s_Leaning_Tower_of_Pisa_experiment][WP:Galileo's Leaning Tower of Pisa experiment]]
-      - Two balls having different weight, dropped from the same height, will reach the Earth at the same time.
-- Infer: Things fall with the same acceleration everywhere on Earth.
-  - Observe: /Catenary/ is symmetrical.
-    - Tie a rope to two upright posts.
-    - Keep the rope loose, but don't let it touch the ground.
-    - [[https://en.wikipedia.org/wiki/Catenary][WP:Catenary]]
-- Infer: Every part of a thing falls with the same acceleration.
-  - Observe:
-    - Break a thing into several parts (pieces).
-    - Drop the parts.
-    - Every part falls with the same acceleration.
-- Observe: Cavendish torsion balance experiment (1797--1798)
-  - This experiment finds out the density of the Earth.
-  - That is related to the gravitational constant \( G \).
-  - [[https://en.wikipedia.org/wiki/Cavendish_experiment][WP:Cavendish experiment]]
-- Infer: [[https://en.wikipedia.org/wiki/Newton%27s_law_of_universal_gravitation][WP:Newton's law of universal gravitation]]
-  - \( F = G \cdot m_1 \cdot m_2 / r^2 \)
-  - What is the justification?
-    - Does Newton justify Kepler?
-    - Does Kepler justify Newton?
-  - How did Newton arrive at this?
-  - Infer: [[https://en.wikipedia.org/wiki/Kepler%27s_laws_of_planetary_motion][WP:Kepler's laws of planetary motion]]
-    - Observe: Tycho Brahe's data
-- Define: A person is /experiencing weightlessness/ iff his weight is zero (the weight scale says zero).
-- Assume: Einstein's equivalence principle?
-  - A free-falling person will experience weightlessness.
-  - A person in void (zero gravity, absence of any other mass) will also experience weightlessness.
-  - Those two phenomenons are /the same phenomenon/.
-** Statics, weight, and force
-Pretend that the concept of \emph{mass} has not been invented.
-
-\emph{Weight} is what a weight balance measures.
-
-A weight balance has two arms.
-
-Put a weight on an end of a weight balance.
-Push the other end with your hand until the balance comes to rest.
-When they reach equilibrium,
-both of them exerts the same amount of \emph{force}.
-*** Law of the lever
-\footnote{\url{https://en.wikipedia.org/wiki/Virtual_work#Law_of_the_lever}}
-\footnote{\url{https://en.wikipedia.org/wiki/Lever}}
-
-\index{definitions!lever}
-\index{lever!definition}
-\index{simple machine!lever|see{lever}}
-A \emph{lever} has a fulcrum and two ends.
-
-Let \(r_1\) be the distance between the first end to the fulcrum.
-
-Let \(r_2\) be the distance between the second end to the fulcrum.
-
-Let \(F_1\) be the weight placed at the first end.
-
-Let \(F_2\) be the weight placed at the second end.
-
-\index{Archimedes!law of the lever}
-\index{laws named after people!Archimedes's law of the lever}
-\index{laws!lever}
-\index{lever!law of the lever}
-\index{statics!Archimedes's law of the lever}
-\emph{Law of the lever}:
-Such lever at equilibrium satisfies \(F_1 \cdot r_1 = F_2 \cdot r_2\).
-
-We take this law as evident.
-Doubt can be removed by a simple experiment.
-
-Thus, a weight balance is a lever whose arms have equal length.
-** ? Polynomials; Galileo's ramps
-Galileo did some quadratic polynomial interpolation (curve fitting)?
-
-Galileo put a ramp (inclined plane),
-rolled a ball from its top,
-and measured the time required by the ball to reach the bottom.
-
-\footnote{\url{https://en.wikipedia.org/wiki/Inclined_plane}}
-A narrow ramp.
-To measure time, he put bells along the ramp.
-The rolling ball hits different bells at different times.
-
-\footnote{\url{https://en.wikipedia.org/wiki/Equations_for_a_falling_body}}
-Galileo's law of falling body
-
-In year? Galileo \( h = k t^2 \).
-* ? Fields
-A \emph{field} assigns something to each point in space.
-The \emph{gravitational field} assigns to each point a \emph{gravitational force per unit mass}.
-
-A field is modeled by a \emph{multivariate function} (a function that takes several variables).
-The variables can be grouped into a vector.
-This gives the impression that the function takes one big vector instead of several scattered real numbers.
-
-A \emph{scalar field} is a field that gives a scalar.
-
-A \emph{vector field} is a field that gives a vector.
-
-A field \(f\) is \emph{uniform} iff \(f(x)\) is the same for all \(x\).
-* ? Mechanics
+*** Mechanics?
 2017-12-18 05:29:06.343592295 +0700
 
 \emph{Mechanics} is a theory of motion.
@@ -876,7 +1353,7 @@ Reading:
 Historical evolution.
 The principles of statics.
 The principles of dynamics.
-** Mechanical system
+*** Mechanical system
 A \emph{mechanical system} is a set of objects \( \{ M_1,\ldots,M_n \} \) and forces \( \{ F_1,\ldots,F_n \} \).
 Each \(F_k\) is an expression.
 With Newton's laws, we can turn such mechanical system into \(n\) equations,
@@ -885,14 +1362,14 @@ each of the form \( F_k = m_k \cdot d(d(x_k)) \) for \(k\) from 1 to \(n\).
 One way of describing the motion of an object is by modeling time as a real number \( t \),
 and modeling the position as a function of time \( x : \Real \to \Real^n \).
 Thus, at time \( t \), the object is at \( x(t) \).
-** Potential energy
+*** Potential energy
 \footnote{\url{https://en.wikipedia.org/wiki/Potential_energy}}
 
 Wikipedia "potential energy":
 Potential energy is associated with forces that act on a body in a way that the total work done by these forces on the body depends only on the initial and final positions of the body in space. These forces, that are called conservative forces, can be represented at every point in space by vectors expressed as gradients of a certain scalar function called potential.
-** Field as gradient of potential
+*** Field as gradient of potential
 (This requires multivariate calculus.)
-** Galilean invariance?
+*** Galilean invariance?
 \footnote{\url{https://en.wikipedia.org/wiki/Galilean_invariance}}
 \footnote{\url{https://en.wikipedia.org/wiki/Galileo%27s_ship}}
 % Galilean boost
@@ -905,17 +1382,7 @@ that Newton's laws of motion is the same in all inertial frame of references.
 
 \footnote{\url{https://en.wikipedia.org/wiki/Galilean_invariance}}
 % Einstein's cabin
-** Experimental tests
-Confirming experiments:
-
-The experiment of dropping a feather and a ball in vacuum confirms classical mechanics.
-
-Disagreeing experiments:
-
-Problem in atomic theory?
-
-Double-slit electron experiment?
-** More complex cases?
+*** More complex cases?
 So far everything has been constant.
 Now we shall consider the case where they change with time.
 
@@ -966,310 +1433,21 @@ Force carrier\footnote{\url{https://en.wikipedia.org/wiki/Force_carrier}}
 Shell theorem
 
 Newton's laws of motion imply Kepler's laws of planetary motion.
-* ? Statics
-** What
-\footnote{\url{https://en.wikipedia.org/wiki/Timeline_of_fundamental_physics_discoveries}}
+*** ? Analytic geometry, and kinematics
+Kinematics is about /describing/ motion, not /explaining/ (finding the cause of) motion.
 
-\emph{Thermodynamics} began as a theory of steam engines.
+Analytic geometry is the usage of coordinate systems for thinking about spaces?
 
-\emph{Volume} is how much space something occupies.
+Analytic geometry can be thought of doing geometry by manipulating numbers instead of by drawing shapes.
 
-\emph{Density} is weight per volume.
-** Archimedes's principle of buoyancy
+With analytic geometry, we can describe shapes using real numbers.
 
-\footnote{\url{https://en.wikipedia.org/wiki/Archimedes%27_principle}}
-\footnote{\url{https://en.wikipedia.org/wiki/On_Floating_Bodies}}
-
-Put a solid into a container full of liquid.
-
-The volume of the spilled part of the liquid is equal to
-the volume of the submerged part of the solid.
-
-*** Archimedes's principle of buoyancy
-\index{Archimedes!principle of buoyancy}
-\index{laws named after people!Archimedes's principle of buoyancy}
-\index{laws!buoyancy}
-Equal are the weight of the object and the buoyant force on the object.
-(???)
-
-** Pascal's law of fluid pressure transmission
-
-Blaise Pascal 1647
-
-Pascal's law: Incompressible fluid spreads pressure evenly.
-
-\index{Pascal!law of fluid pressure transmission}
-\index{laws named after people!Pascal's law of fluid pressure transmission}
-\index{laws!fluid pressure transmission}
-\index{statics!Pascal's law of fluid pressure transmission}
-\( P = \rho g h \)
-
-*** Appreciating Pascal's barrel demonstration
-
-Counterintuitive: The hydrostatic pressure
-does not depend on \emph{how much} fluid.
-It depends on \emph{how deep}.
-\footnote{\url{https://www.youtube.com/watch?v=EJHrr21UvY8}}
-
-** Understanding the zeroth law of thermodynamics
-
-Put hot iron into cold water.
-Eventually both become equally warm.
-
-\index{laws!thermodynamics, zeroth}
-\emph{Zeroth law of thermodynamics}:
-Heat never spontaneously flows from cold to hot.
-
-** Unstructured content
-
-TODO Pendulum
-
-\index{definitions!pendulum}
-\index{pendulum!definition}
-A pendulum is a bob hung on a string.
-
-\emph{Conservation of mechanical energy}:
-A released pendulum comes back to the same height.
-
-TODO
-Interplay between potential and kinetic energy:
-Galileo's interrupted pendulum
-
-TODO Vacuum
-
-Boyle showed that objects of different masses fall with the same acceleration.
-
-TODO Toricelli manometer
-
-TODO von Guericke, Magdeburg
-
-TODO Boyle
-
-TODO Pascal
-
-Boyle's experiments
-
-\index{laws named after people!Lavoisier's law of conservation of mass}
-TODO Lavoisier's law of conservation of mass
-
-** Understanding energy
-
-Conservation of energy
-
-Kinetic energy
-
-\emph{Kinetic energy} is \( \frac{1}{2} m |v|^2 \) which can also be written as \( |p|^2 / (2m) \).
-This is explained by energy conservation and work by a constant force \(F\) that accelerates an initially resting mass.
-\(F = ma\) and \(s = \frac{1}{2}at^2\) and \( W = Fs \) and \( v = at \) therefore \( W = E_k = \frac{1}{2} m(at)^2 = \frac{1}{2}mv^2 \).
-
-** Understanding gases
-
-\footnote{\url{https://en.wikipedia.org/wiki/Perfect_gas}}
-\footnote{\url{https://en.wikipedia.org/wiki/Gas#Historical_synthesis}}
-
-A \emph{gas} is ...
-
-\emph{Pressure} is measured by a manometer.
-
-In statics, the \emph{volume} of a gas is the volume of its container.
-Statics assumes that a gas fills its container evenly.
-
-\emph{Temperature} is measured by a thermometer.
-The unit of temperature is \emph{kelvin} (K).
-
-% ?
-Gas and piston at equilibrium:
-Gas and a piston with weight \(F\).
-
-** Using gas laws
-
-Let there be a container of gas with pressure \(P_1\) and volume \(V_1\).
-Let this gas expand or shrink without changing its temperature
-so that its pressure becomes \(P_2\) and its volume becomes \(V_2\).
-
-\index{laws!gas pressure and volume}
-\index{laws named after people!Boyle's law of gas pressure and volume}
-\index{Boyle!Boyle's law of gas pressure and volume}
-\emph{Boyle's law}: \( P_1 V_1 = P_2 V_2 \).
-
-Other gas laws
-
-\emph{Charles's law}?
-\emph{Dalton's law}?
-
-\footnote{\url{https://en.wikipedia.org/wiki/Dalton%27s_law}}
-\footnote{\url{https://en.wikipedia.org/wiki/Combined_gas_law}}
-\footnote{\url{https://en.wikipedia.org/wiki/Gay-Lussac%27s_law#Pressure-temperature_law}}
-\footnote{\url{https://en.wikipedia.org/wiki/Avogadro%27s_law}}
-
-\index{laws!ideal gas}
-\emph{Ideal gas law}: \( PV = nRT \).
-
-Kinetic energy of one mole of gas is \( \frac{3}{2} RT \).
-
-Statistical thermodynamics: kinetic theory of gases?
-
-** Understanding Boltzmann's constant
-
-\footnote{\url{https://en.wikipedia.org/wiki/Boltzmann_constant}}
-\emph{Boltzmann's constant} relates the average kinetic energy of particles in a gas and the temperature of the gas?
-
-\footnote{\url{https://en.wikipedia.org/wiki/Gas_constant}}
-The \emph{gas constant} (molar gas constant, universal gas constant, ideal gas constant)?
-
-** Understanding Avogadro's number
-
-\emph{Avogadro's number} is?
-
-Terms?
-
-System and environment
-
-Thermodynamic equilibrium
-
-** Understanding heat
-
-Heat capacity
-
-\emph{Black's principle}:
-When two liquids are mixed, the heat released by one equals the heat absorbed by the other.
-???
-
-???
-If \(m_1\) amount of water at temperature \(T_1\) is mixed with \(m_2\) amount of water at temperature \(T_2\),
-then the result, after equilibrium, is \(m_1+m_2\) amount of water at temperature \(\frac{m_1 T_1 + m_2 T_2}{m_1+m_2}\).
-
-Specific heat
-
-Latent heat
-
-** Understanding thermodynamic process and cycle?
-
-Isobaric?
-Isochoric?
-Adiabatic?
-Expansion of gas?
-Work done by a gas?
-
-Carnot engine?
-
-Thermodynamic efficiency?
-
-** Understanding the laws of thermodynamics
-
-\footnote{\url{https://en.wikipedia.org/wiki/Laws_of_thermodynamics}}
-\footnote{\url{https://en.wikipedia.org/wiki/History_of_entropy}}
-
-** Working with simple machines
-
-\footnote{\url{https://en.wikipedia.org/wiki/Simple_machine}}
-
-Lever
-
-Wheel and axle
-
-Pulley
-
-Tilted plane
-
-Wedge
-
-Screw
-
-TODO:
-Modern machine theory: Kinematic chains
-* ? Proto-physics
-<2019-02-12>
-(Change of opinion.)
-
-There is no need to rediscover everything in the way our ancestors did.
-We have hindsight.
-We should exploit the full benefit of hindsight.
-
-(End of change of opinion.)
-
-Let's begin with very "wrong" ideas; we're "cheating" with our hindsight that our ancestors did not have.
-We will revise knowledge as we go.
-We will become less "wrong".
-
-We might will never be 0% wrong.
-But knowledge does not have to be 100% correct in order to be useful.
-** Statics
-- Infer: Law of the lever: \( F_1 \cdot r_1 = F_2 \cdot r_2 \).
-  - Move the fulcrum, or slide the lever along the fulcrum.
-** Chemistry
-- Observe: A burning leaf stops burning if it's enclosed.
-- Observe: Food spoils. Food goes rancid.
-- [[https://physics.stackexchange.com/questions/259021/how-do-flames-neutralize-a-static-charge][Phys. SE 259021: How do flames neutralize a static charge?]]
-- Left and right
-  - We can define left and right absolutely due to parity violation.
-  - [[https://en.wikipedia.org/wiki/Wu_experiment][WP:Wu experiment]]
-    - [[https://en.wikipedia.org/wiki/Parity_(physics)#Parity_violation][WP:Parity, violation]]
-  - [[https://physics.stackexchange.com/questions/18729/absolute-defintion-of-the-right-i-e-not-left-direction][Phys. SE 18729: absolute defintion of the right (i. e. not left) direction]]
-- [[https://en.wikipedia.org/wiki/Buoyancy][WP:Buoyancy]]
-- Observe: Salt conducts electricity?
-** Geology
-- Mineral distribution hypothesis?
-  - Assume:
-    - The Earth was once a hot liquid.
-    - The surface cooled down and solidified.
-  - Infer:
-    - Denser minerals should sink towards the core of Earth.
-    - As we dig deeper, the Earth should be more dense.
-- [[http://www.bgs.ac.uk/mineralsUK/mineralsYou/wheredo.html][Where do minerals come from?]]
-  - "Minerals are concentrated by igneous, sedimentary and metamorphic processes"
-  - [[https://en.wikipedia.org/wiki/Structure_of_the_Earth][WP:Structure of the Earth]]
-** EM
-- How do we know that light /is/ an electromagnetic wave?
-  - We know that light behaves like an electromagnetic wave, from
-    - the speed of light, and
-    - the wave behavior of light.
-  - But that's all; how do we know that it /is/ it?
-** What
-- Formal Physics
-  - [[https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4066961/][2012, article, "Physics and proof theory"]]
-- Unread
-  - [[https://en.wikipedia.org/wiki/History_of_science][WP:History of science]]
-  - Experiments
-    - https://www.explainthatstuff.com/great-physics-experiments.html
-    - https://www.quora.com/What-are-some-of-the-most-important-experiments-in-physics
-    - https://www.telegraph.co.uk/news/science/science-news/3341042/Top-ten-greatest-experiments.html
-    - https://www.space.com/36307-5-most-ingenious-experiments.html
-    - https://explorable.com/physics-experiments
-    - https://en.wikipedia.org/wiki/List_of_experiments#Physics
-    - https://en.wikipedia.org/wiki/Experimental_physics#Famous_experiments
-    - [[https://www.youtube.com/watch?v=HXLj5J4I1nY][de Sitter's Observations - Intro to Physics]]
-- Scientific theory
-  - https://en.wikipedia.org/wiki/Scientific_theory#Unification
-  - https://en.wikipedia.org/wiki/Superseded_scientific_theories#Physics
-- 1999, book, Roberto Torretti, "The philosophy of physics"
-- Electric current
-  - Detour: Justification of electric current requires chemistry.
-  - http://www.need.org/Files/curriculum/infobook/Elec3I.pdf
-  - http://practicalphysics.org/electric-charge-and-current-short-history.html
-  - https://en.wikipedia.org/wiki/Electric_current
-- [[https://www.quora.com/Will-the-theories-of-relativity-and-quantum-mechanics-merge-With-what-result][Quora: Will the theories of relativity and quantum mechanics merge? With what result?]]
-- https://en.wikipedia.org/wiki/Scientific_Revolution
-- Define: Sundial.
-  - [[https://en.wikipedia.org/wiki/Sundial][WP:Sundial]]
-  - [[https://en.wikipedia.org/wiki/Analemma][WP:Analemma]];
-    solar analemma = figure eight pattern of the sun on the sky across the year
-* ? Gases
-** How do we know that gases expand to fill their containers?
-By manipulating a colored gas such as nitrogen dioxide in a transparent container with a piston, or in a gas syringe,
-such as in this video[fn::https://dissolve.com/video/Nitrogen-dioxide-equilibrium-Nitrogen-dioxide-NO2-gas-exists-royalty-free-stock-video-footage/001-D1699-4-039].
-
-There are some colored gases[fn::https://en.wikipedia.org/wiki/Color_of_chemicals#Gases],
-but all of those examples are hazardous gases.
-** How do measure how much gas is in a container?
-The same way we measure everything else:
-We weigh the empty container, then we fill the container,
-then we weigh the filled container,
-and then the difference is the weight of the content,
-assuming that the content does not react with the container.
-** How do we measure the pressure of a gas?
-By barometers?
-* ? Geometric optics
+"The power of analytic geometry derives very largely from the fact
+that it permits the methods of the calculus, and, more generally, of
+mathematical analysis, to be introduced into geometry."
+ [fn::page 1 in "Two Approaches to Modelling the Universe: Synthetic Differential Geometry and Frame-Valued Sets" by John L. Bell
+http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.114.1930&amp;rep=rep1&amp;type=pdf]
+* TODO Light, and geometric optics?
 ** How do we know that light travels in a straight line?
 From the shape of shadows and reflections.
 
@@ -1424,62 +1602,172 @@ What are the properties of light?
 - Infer: Heat behaves like light.
   - Observe: Heat can be blocked. (Experiment using two hands and a fire.)
 - Observe: Water boils and evaporates when heated.
-* ? Particles and waves
-How do we know whether something is a particle or a wave?
+* TODO Oscillations, waves, and differential equations
+** Oscillations
+An oscillation can be modeled by a periodic function such as
+\( f(t) = f(t+p) \) where \( p \) is the period.
 
-What is a particle?
+An ideal oscillation exactly repeats after one period.
 
-What is a wave?
+Here are some examples of simple oscillation.
+A spring will oscillate if it is suddenly released after being pulled a little from its resting position.
+A pendulum will oscillate if it is suddenly released after being pulled from its resting position.
 
-Photons and electrons are neither particle nor wave.
-It is a categorical impossibility, a logical contradiction, for something to be both particle and wave.
-** What do we mean by "light is a wave"?
-If we say "light is a wave", then we are saying that light has no objective (material) existence.
-Also, what is the restoring force of this wave?
+What does "moving energy" mean?
+Earlier we said that energy is a mathematical concept and not a physical reality.
 
-The sea has waves, but the sea is not the waves.
+The oscillation of a spring can be modeled by a differential equation.
+We assume that the restoring force is \( F(x) = - k x \).
+Then, force is the rate of change of momentum, then substitute...
+(TODO)
+** Waves
+Imagine that we are holding an end of a taut rope whose other end is tied to a pole.
+We write \( h(x,t) \) to mean the amplitude (the vertical displacement) of the point at the rope at horizontal distance \(x\) from our hand at time \(t\).
+Thus \( h(0,t) \) is the vertical displacement of our hands at time \(t\).
+We assume that the wave propagates at constant velocity \(v\).
+Thus, after a duration \(dt\) has elapsed, the wavefront at \(x\) at time \(t\) has moved to \(x + v \cdot dt\):
+We write this \( h(x + v \cdot dt, t + dt) = h(x, t) \),
+which can be rearranged to \( h(x, t) = h(0, t - x / v) \).
+If we want to easily know how the rest of the rope behaves given our hand motion,
+we can rearrange the equation to \( h(x, t + x / v) = h(0, t) \).
+The amplitudes are simply the "echoes" of our hand motion.
+Each point moves imitating our hand motion, but that point's motion is delayed proportionally to its distance from our hand.
 
-If we say "light behaves like a wave", then, what does it mean for an objective thing to behave like a subjective thing?
+When we throw a stone into a pool of water, the disturbance travels as an expanding circle.
+This implies that the disturbance propagates equally in all directions.
+We say that water is an isotropic medium.
+** What is a wave, oscillation, undulation, vibration?
+One /wave/ happens every time water slaps the beach.
+Thus waves are countable.
 
-The people who thought about the luminiferous aether[fn::https://en.wikipedia.org/wiki/Luminiferous_aether] must have thought about this.
+We see ripples when we throw a stone into a body of water.
+Ripples are waves?
 
-If the aether does not exist, then light is not a wave.
+We see oscillation when we disturb a spring (the spiral thing, not the water source).
 
-Light is electromagnetic radiation.
-A disturbance in the electromagnetic field?
+A wave is a pattern of motion.
+A wave does not exist objectively.
+We see waves.
+We use the word "wave" to refer to some repetitive motions.
 
-We must distinguish between /physical/ wave and /mathematical/ wave.
+"Wave moves energy without moving matter"[fn::"What Are Gravitational Waves?" https://www.youtube.com/watch?v=HmiPDvz0WVU]
+But matter is congealed energy[fn::https://www.ted.com/talks/david_christian_big_history/transcript?language=en]?
+But energy is only a mathematical artifact, an unreal quantity.
+** What causes a wave?
+A wave is caused by a /restoring force/[fn::https://en.wikipedia.org/wiki/Restoring_force],
+a force that goes against a thing's displacement.
+This force tends to restore a thing to its resting position.
 
-Light is not a physical wave,
-but we sometimes think of light as a mathematical wave.
+Wave happens because the propagation medium has /inertia/ that laggedly opposes the forces acting on it.
 
-A wave both propagate in a medium and may diffract.
-Light may diffract but propagates in vacuum?
+A wave is a propagating oscillation, a contagious oscillation?
 
-We thought light was a wave.
-It is not.
-Neither is it a particle.
-It /behaves like/ wave under certain circumstances,
-and it /behaves like/ particle under certain circumstances,
-but it is neither a particle or a wave.
-** How do we know whether there is light?
-In order to see something,
-we have to direct our eyes toward that thing,
-and the surrounding has to be bright enough.
-We can see things in broad daylight,
-but we cannot see things in a cave even though it is daytime outside,
-but we can bring fire with us into the cave and then we can see things again.
-We can also light a fire, and then we can see things even though it is nighttime.
-The light from the sun and the light from the fire has the same nature in that they both help us see;
-they only have different quantities of light.
-** Can light diffract?
-What do we mean by light?
+Must a wave always be caused by a restoring force?
+Must a restoring force exist wherever we see a wave?
 
-Can light be detected?
+What do we mean by "force"?
+Do we mean Newtonian "force", or do we mean "cause"?
 
-Is light whatever a light detector detects?
-A light detector affects the light.
-* Electricity
+https://philosophy.stackexchange.com/questions/25003/what-is-the-philosophical-origin-of-waves
+
+http://www.informationphilosopher.com/introduction/physics/wave-particle_duality.html
+** What is the difference between these: wave, undulation, oscillation, resonance?
+** Sine waves
+A sine wave is the motion of an ideal spring that is oscillating naturally after released from an initial strain.
+
+A sine wave is approximated by a pendulum with long rope and small swing angle.
+
+A sine function is a function such that its displacement and its acceleration have equal magnitudes but opposite directions.
+
+A sine function \(x\) is a solution of \( d(d(x)) = -x \).
+** Dropping a pebble into a pond
+Imagine looking down on a pond from bird's-eye view,
+and gently dropping a pebble into the pond.
+
+The pebble displaces a volume of water around it.
+The displaced volume of water displaces other nearby volumes of water,
+and so on.
+** Diffraction
+Outsource to Wikipedia
+ [fn::https://en.wikipedia.org/wiki/Diffraction]
+ [fn::https://en.wikipedia.org/wiki/Diffraction_formalism]?
+
+It seems that justifing the Huygens--Fresnel principle[fn::https://en.wikipedia.org/wiki/Huygens%E2%80%93Fresnel_principle]
+requires fluid dynamics.
+
+Single-slit diffraction
+
+Calculate the pattern spacing depending on propagation medium characteristics, slit size, slit spacing, and the distance between slit and screen.
+
+Kirchhoff's diffraction formula[fn::https://en.wikipedia.org/wiki/Kirchhoff%27s_diffraction_formula]?
+
+Young's double-slit experiment
+** Wavefront, reflection, and diffraction
+A point disturbance such as a pebble dropped into the pond causes an expanding circle /wavefront/ on the surface.
+This speed in which this circle expands is the /speed of the propagation/ of disturbances in water.
+
+An obstacle reflects the sector of the wavefront that hits it.
+* TODO Gases
+** How do we know that gases expand to fill their containers?
+By manipulating a colored gas such as nitrogen dioxide in a transparent container with a piston, or in a gas syringe,
+such as in this video[fn::https://dissolve.com/video/Nitrogen-dioxide-equilibrium-Nitrogen-dioxide-NO2-gas-exists-royalty-free-stock-video-footage/001-D1699-4-039].
+
+There are some colored gases[fn::https://en.wikipedia.org/wiki/Color_of_chemicals#Gases],
+but all of those examples are hazardous gases.
+** How do measure how much gas is in a container?
+The same way we measure everything else:
+We weigh the empty container, then we fill the container,
+then we weigh the filled container,
+and then the difference is the weight of the content,
+assuming that the content does not react with the container.
+** How do we measure the pressure of a gas?
+By barometers?
+* TODO Work, energy, and power
+/Work/ was defined as weight lifted through a height,
+by Coriolis in 1826 \cite{coriolis1829calcul}[fn::https://en.wikipedia.org/wiki/Work_(physics)],
+when it was common to use steam engines to pump water out of flooded mines.
+
+/Energy/ is the amount of work that /could/ be done,
+whereas work is what /is/ actually done.[fn::Nick Lucid's "What the HECK is Energy?" https://www.youtube.com/watch?v=snj1wBtn6I8]
+Energy is relative to observers?
+
+There is a proportional relation between
+the amount of work that such engine can do and the amount of fuel supplied to the engine.
+Thus we say that fuel contains energy,
+and we say that an engine converts such energy into work.
+
+Energy density is of interest to vehicle designers,
+especially when designing fuel and batteries.
+Higher energy density means easier storage and transport,
+but it can also mean bigger explosions in case of accidents.
+
+Energy is a mathematical concept and not a physical reality?
+Can a mathematical quantity be a physical reality?
+Is Platonism true?[fn::https://en.wikipedia.org/wiki/Max_Tegmark]
+
+For example of a conversion from potential energy to kinetic energy, observe a stone that is rolling downhill.
+
+"Work" readily generalizes from only weights to every /force/, because weight is just a gravitational force.
+
+What if the force and the displacement make an angle?
+
+Mathematically, we say that the amount of work \( F \cdot h \) is done by lifting a weight \(F\) so that its height increases by \(h\).
+ [fn::https://en.wikipedia.org/wiki/Work_(physics)]
+
+/Energy/ is the ability to do work.
+
+History of energy?[fn::https://en.wikipedia.org/wiki/History_of_energy]
+
+/Power/ is work done per unit time: \( P = W / t \).[fn::https://en.wikipedia.org/wiki/Power_(physics)]
+This means that a steam engine with twice the power
+will clean the same mine in half the time.
+
+When were the modern notions of work and energy created?
+ [fn::https://hsm.stackexchange.com/questions/414/when-were-the-modern-notions-of-work-and-energy-created]
+Helmholtz 1847?
+* --- Part --- The bridge between medium and small
+Electrochemistry, statistical physics (mechanics, thermodynamics)?
+* Short-distance interactions: Electricity and magnetism
 ** Electricity: What is it?
 "[C]ertain objects, such as rods of amber,
 could be rubbed with cat's fur to attract light objects like feathers"[fn::https://en.wikipedia.org/w/index.php?title=Electricity&oldid=904686616]
@@ -1637,6 +1925,11 @@ How do we know the magnitude of the current?
 
 By the rate of corrosion of the electrodes of an electrochemical cell.
 For example, in a zinc-copper cell.
+
+Detour: Justification of electric current requires chemistry:
+- http://www.need.org/Files/curriculum/infobook/Elec3I.pdf
+- http://practicalphysics.org/electric-charge-and-current-short-history.html
+- https://en.wikipedia.org/wiki/Electric_current
 ** How was the battery invented before the concept of currents was invented?
 From
 an article[fn::https://backyardbrains.com/experiments/Galvani_Volta]
@@ -1716,11 +2009,9 @@ Simple solution:
 Hold the metal part of a key with your bare hand,
 and touch the key to the zappy office metal object,
 but don't touch the zappy object with your hands directly.
-* Magnetism
 ** Magnetism: What is it?
 It has been known for a long time that two pieces of lodestone attract or repel each other.
 This phenomenon was then named magnetism.
-* Electricity and magnetism
 ** Ferromagnetism: Distinguishing between electricity and magnetism
 How do we distinguish between electricity and magnetism?
 
@@ -1738,460 +2029,40 @@ but the lodestone attracts only metal and does not attract paper.
 "[T]he English scientist William Gilbert wrote De Magnete,
 in which he made a careful study of electricity and magnetism,
 distinguishing the lodestone effect from static electricity produced by rubbing amber."[fn::https://en.wikipedia.org/w/index.php?title=Electricity&oldid=904686616]
-* Differential equations; oscillations
-An oscillation can be modeled by a periodic function such as
-\( f(t) = f(t+p) \) where \( p \) is the period.
-
-An ideal oscillation exactly repeats after one period.
-
-Here are some examples of simple oscillation.
-A spring will oscillate if it is suddenly released after being pulled a little from its resting position.
-A pendulum will oscillate if it is suddenly released after being pulled from its resting position.
-
-What does "moving energy" mean?
-Earlier we said that energy is a mathematical concept and not a physical reality.
-
-The oscillation of a spring can be modeled by a differential equation.
-We assume that the restoring force is \( F(x) = - k x \).
-Then, force is the rate of change of momentum, then substitute...
-(TODO)
-* More differential equations; waves
-Imagine that we are holding an end of a taut rope whose other end is tied to a pole.
-We write \( h(x,t) \) to mean the amplitude (the vertical displacement) of the point at the rope at horizontal distance \(x\) from our hand at time \(t\).
-Thus \( h(0,t) \) is the vertical displacement of our hands at time \(t\).
-We assume that the wave propagates at constant velocity \(v\).
-Thus, after a duration \(dt\) has elapsed, the wavefront at \(x\) at time \(t\) has moved to \(x + v \cdot dt\):
-We write this \( h(x + v \cdot dt, t + dt) = h(x, t) \),
-which can be rearranged to \( h(x, t) = h(0, t - x / v) \).
-If we want to easily know how the rest of the rope behaves given our hand motion,
-we can rearrange the equation to \( h(x, t + x / v) = h(0, t) \).
-The amplitudes are simply the "echoes" of our hand motion.
-Each point moves imitating our hand motion, but that point's motion is delayed proportionally to its distance from our hand.
-
-When we throw a stone into a pool of water, the disturbance travels as an expanding circle.
-This implies that the disturbance propagates equally in all directions.
-We say that water is an isotropic medium.
-** What is a wave, oscillation, undulation, vibration?
-One /wave/ happens every time water slaps the beach.
-Thus waves are countable.
-
-We see ripples when we throw a stone into a body of water.
-Ripples are waves?
-
-We see oscillation when we disturb a spring (the spiral thing, not the water source).
-
-A wave is a pattern of motion.
-A wave does not exist objectively.
-We see waves.
-We use the word "wave" to refer to some repetitive motions.
-
-"Wave moves energy without moving matter"[fn::"What Are Gravitational Waves?" https://www.youtube.com/watch?v=HmiPDvz0WVU]
-But matter is congealed energy[fn::https://www.ted.com/talks/david_christian_big_history/transcript?language=en]?
-But energy is only a mathematical artifact, an unreal quantity.
-** What causes a wave?
-A wave is caused by a /restoring force/[fn::https://en.wikipedia.org/wiki/Restoring_force],
-a force that goes against a thing's displacement.
-This force tends to restore a thing to its resting position.
-
-Wave happens because the propagation medium has /inertia/ that laggedly opposes the forces acting on it.
-
-A wave is a propagating oscillation, a contagious oscillation?
-
-Must a wave always be caused by a restoring force?
-Must a restoring force exist wherever we see a wave?
-
-What do we mean by "force"?
-Do we mean Newtonian "force", or do we mean "cause"?
-
-https://philosophy.stackexchange.com/questions/25003/what-is-the-philosophical-origin-of-waves
-
-http://www.informationphilosopher.com/introduction/physics/wave-particle_duality.html
-** What is the difference between these: wave, undulation, oscillation, resonance?
-** Sine waves
-A sine wave is the motion of an ideal spring that is oscillating naturally after released from an initial strain.
-
-A sine wave is approximated by a pendulum with long rope and small swing angle.
-
-A sine function is a function such that its displacement and its acceleration have equal magnitudes but opposite directions.
-
-A sine function \(x\) is a solution of \( d(d(x)) = -x \).
-** Dropping a pebble into a pond
-Imagine looking down on a pond from bird's-eye view,
-and gently dropping a pebble into the pond.
-
-The pebble displaces a volume of water around it.
-The displaced volume of water displaces other nearby volumes of water,
-and so on.
-** Diffraction
-Outsource to Wikipedia
- [fn::https://en.wikipedia.org/wiki/Diffraction]
- [fn::https://en.wikipedia.org/wiki/Diffraction_formalism]?
-
-It seems that justifing the Huygens--Fresnel principle[fn::https://en.wikipedia.org/wiki/Huygens%E2%80%93Fresnel_principle]
-requires fluid dynamics.
-
-Single-slit diffraction
-
-Calculate the pattern spacing depending on propagation medium characteristics, slit size, slit spacing, and the distance between slit and screen.
-
-Kirchhoff's diffraction formula[fn::https://en.wikipedia.org/wiki/Kirchhoff%27s_diffraction_formula]?
-
-Young's double-slit experiment
-** Wavefront, reflection, and diffraction
-A point disturbance such as a pebble dropped into the pond causes an expanding circle /wavefront/ on the surface.
-This speed in which this circle expands is the /speed of the propagation/ of disturbances in water.
-
-An obstacle reflects the sector of the wavefront that hits it.
-** How do we split a beam of light? How does a beam splitter work?
-* Work, energy, and power
-/Work/ was defined as weight lifted through a height,
-by Coriolis in 1826 \cite{coriolis1829calcul}[fn::https://en.wikipedia.org/wiki/Work_(physics)],
-when it was common to use steam engines to pump water out of flooded mines.
-
-/Energy/ is the amount of work that /could/ be done,
-whereas work is what /is/ actually done.[fn::Nick Lucid's "What the HECK is Energy?" https://www.youtube.com/watch?v=snj1wBtn6I8]
-Energy is relative to observers?
-
-There is a proportional relation between
-the amount of work that such engine can do and the amount of fuel supplied to the engine.
-Thus we say that fuel contains energy,
-and we say that an engine converts such energy into work.
-
-Energy density is of interest to vehicle designers,
-especially when designing fuel and batteries.
-Higher energy density means easier storage and transport,
-but it can also mean bigger explosions in case of accidents.
-
-Energy is a mathematical concept and not a physical reality?
-Can a mathematical quantity be a physical reality?
-Is Platonism true?[fn::https://en.wikipedia.org/wiki/Max_Tegmark]
-
-For example of a conversion from potential energy to kinetic energy, observe a stone that is rolling downhill.
-
-"Work" readily generalizes from only weights to every /force/, because weight is just a gravitational force.
-
-What if the force and the displacement make an angle?
-
-Mathematically, we say that the amount of work \( F \cdot h \) is done by lifting a weight \(F\) so that its height increases by \(h\).
- [fn::https://en.wikipedia.org/wiki/Work_(physics)]
-
-/Energy/ is the ability to do work.
-
-History of energy?[fn::https://en.wikipedia.org/wiki/History_of_energy]
-
-/Power/ is work done per unit time: \( P = W / t \).[fn::https://en.wikipedia.org/wiki/Power_(physics)]
-This means that a steam engine with twice the power
-will clean the same mine in half the time.
-
-When were the modern notions of work and energy created?
- [fn::https://hsm.stackexchange.com/questions/414/when-were-the-modern-notions-of-work-and-energy-created]
-Helmholtz 1847?
-* ? Functionals; motion
-** Brachistochrone problem?
-Why did some fine 17th-century gentlemen concern themselves with problems
-that had no apparent practical applications, such as the brachistochrone problem[fn::https://en.wikipedia.org/wiki/Brachistochrone_curve]?
-What benefits were there, besides personal satisfaction?
-
-When Lagrange formulated his mechanics,
-the concept of potential energy had not yet been invented?
-** Moving from force-based thinking to energy-based thinking
-We thought \( F(t) = -g \) and thus \( a(t) = -g/m \) and \( v(t) = - gt / m \) and \( x(t) = - gt^2 / (2m) \).
-We think about the forces,
-figure out the accelerations,
-integrate them to get the velocities,
-and integrate them to get the positions.
-
-How does Hamiltonian mechanics explain a ball falling near the ground?
-\( P = mgh \).
-\( K = \frac{1}{2}mv^2 \).
-The state of the system is \( (h, mv) \).
-The operator is \( P(h, mv) = mgh \) and \( K(h, mv) = \frac{1}{2}mv^2 \).
-\( P + K = \text{constant} \) which means that \( \pdv{P}{h} = 0 \) and \( \pdv{K}{v} = 0 \).
-* Differential geometry; relativity
-** Epistemology of relativity
-How do we know that spacetime is bent,
-if all we see is a bent trajectory of light?
-
-If we assume that light travels in a straight line,
-then we have to infer that it is the propagation medium that is bent.
-** What
-A smooth curve in a two-dimensional space can be described by a function \( \Real \to \Real^2 \).
-
-A smooth surface in a three-dimensional space can be described by a function \( \Real^2 \to \Real^3 \).
-
-- Matter bends spacetime.
-  - Matter bends spacetime, especially the spacetime /near that matter/.
-  - What does it mean?
-- Spacetime curvature accelerates matter.
-- Einstein could predict some things from philosophy/reasoning/logic/language/German/English without mathematics/analysis/calculus/differential-geometry/calculations/numbers.
-  - https://en.wikipedia.org/wiki/Introduction_to_general_relativity
-  - He used philosophy to derive the mathematics, not the other way around.
-- https://www.quora.com/What-is-the-most-misunderstood-thing-in-physics
-  - See "You can never actually fall into a black hole."
-** Spherical coordinate systems
-(Why do we bring this up?)
-*** Mathematician's heading
-To simplify the explanation of the coming spherical coordinate system,
-we introduce "heading".
-
-Our definition of heading begins with \ang{0} pointing east (positive x-axis),
-and then goes counterclockwise,
-so \ang{90} is north (positive y-axis), \ang{180} is west (negative x-axis),
-and \ang{270} is south (negative y-axis).
-
-Note that our heading differs from the navigator's heading,
-which begins with \ang{0} pointing north and then goes clockwise.
- \footnote{\url{https://en.wikipedia.org/wiki/Cardinal_direction\#Additional_points}}
-*** The spherical coordinate system
-The spherical coordinates \((r,a,b)\) mean
-"set heading to \(a\), set elevation to \(b\), and then go the distance \(r\)".
-
-The spherical coordinate system adds another angle component to the polar coordinate system.
-
-We now describe how to map the spherical coordinates \(S(r,a,b)\) to Cartesian coordinates \(C(x,y,z)\).
-The slogan to remember is that \(S(r,a,b)\) means
-\enquote{set heading to \(a\),
-set elevation to \(b\),
-and then go the distance \(r\)}.
-Another slogan is \enquote{face east, turn your head left by angle \(a\),
-turn your head up by angle \(b\), and then look at distance \(r\)}.
-
-Let's read slower as we imagine the drawing.
-
-Let \(O\) be the center of both the spherical coordinate system and the Cartesian coordinate system.
-Let their centers coincide.
-
-A negative angle \(-a\) means the angle \(a\) but in the reverse direction.
-
-Draw the point \(D\) at \(C(r,0,0)\),
-which means that \(D\) lies on the positive x-axis,
-at distance \(r\) from \(O\).
-
-With the positive z-axis as the axis of rotation,
-rotate the vector \(OD\), by angle \(a\) toward the positive y-axis
-(or toward the negative y-axis if \(a\) is negative).
-Call the resulting vector \(OE\).
-Thus, the point \(E\) is at \(C(r \cos a, r \sin a, 0)\),
-which is still on the xy-plane.
-
-Then, rotate the vector \(OE\), by angle \(b\),
-out of the xy-plane, toward the positive z-axis
-(or toward the negative z-axis if \(b\) is negative).
-Call the resulting vector \(OF\).
-
-Then \(F\) is the point described by \(S(r,a,b)\).
-*** Relationship with Cartesian coordinate systems
-Let's say that the point \(F\) is at \(S(r,a,b)\), which is equal to \(C(x,y,z)\).
-By the definition of rotation and the congruence of triangles,
-we can convert spherical coordinates to Cartesian coordinates as follows:
-\begin{align}
-    x &= r \cos a \cos b
-    \\
-    y &= r \sin a \cos b
-    \\
-    z &= r \sin b
-\end{align}
-
-We can convert Cartesian coordinates to spherical coordinates as follows:
-\begin{align}
-    r &= \sqrt{x^2 + y^2 + z^2}
-    \\
-    \tan a &= y/x
-    \\
-    \sin b &= z/r
-\end{align}
-but we have to pick the angles that make the signs correct.
-
-Thus, we have just explained what is meant by the slogan
-\enquote{set heading to \(a\),
-set elevation to \(b\),
-and then go the distance \(r\)}.
-*** Which spherical coordinate system?
-Note that our \(b\) is elevation, not azimuth.
-The relationship between elevation and azimuth is
-\[
-    \text{azimuth} = \ang{90} - \text{elevation}.
-\]
-
-If the elevation is zero, then the spherical coordinate system reduces
-to the polar coordinate system on the xy-plane.
-That method embeds the polar coordinate system into the xy-plane.
-Thus the angle \(a\) is called heading angle, polar angle, or longitude.
-The angle \(b\) is called elevation angle or latitude.
-
-Azimuth is angle from zenith.
-In this case, zenith is the z-axis.
-
-ISO standard?
-Azimuth?
-Elevation?
-
-What\footnote{\url{https://en.wikipedia.org/wiki/Spherical_coordinate_system}}
-* --- Part --- The physics of small objects
-** Mindsets
-The physics of small objects is not intuitive.
-Everything is inferred indirectly.
-It requires a lot of abductive reasoning.
-
-We can only manipulate medium-sized objects, due to the limitation of our senses.
-Everything else, we can only infer, indirectly,
-by transduction through experimental apparatuses into something of medium size.
-** Reasoning with deduction, induction, and abduction
-Deduction is the use of syllogism?
-
-Induction is generalization from examples.
-The difficulty is in finding examples diverse enough to represent most possibilities.
-Example:
-We saw that there are ten white swans.
-Thus we infer that all swans are white.
-(Then we find a black swan.)
-
-Abduction is finding the best explanation for a surprising evidence.
-Example:
-We observe that the road is wet everywhere.
-We abduce the hypothetical explanation that it may have rained a few hours ago.
-Another example:
-We cannot find the scissors at home; they are not at the usual location.
-We abduce that it must be due to our siblings.
-
-We cannot live without deduction, but we cannot live with only deduction either.
-
-Reddit has a summary[fn::https://www.reddit.com/r/askphilosophy/comments/uu5wp/a_priori_vs_a_posteriori_deductive_vs_inductive/] of deduction and induction.
-
-** Sensor galore, sensor design mindset, transduction/apparatus mindset
-Voltage is measured with volt-meter,
-amperage is measured with ampere-meter,
-ohmage is measured with ohm-meter,
-pressure is measured with pressure-meter,
-temperature is measured with temperature-meter,
-X is measured with X-meter,
-and so on.
-
-How do we /know/ X => How do we /detect/ X => How do we /measure/ X => How do we /design an apparatus/ for measuring X?
-
-How do we translate a microscopic phenomenon into something macroscopic that we can perceive directly with our senses.
-
-For example: electroscope => electrometer.
-
-For example:
-- How do we detect electric current?
-  By observing the corrosion of the metal electrodes of an electrochemical cell.
-- How do we measure electric current?
-  By measuring the /rate/ of the corrosion above.
-
-How do we measure the magnitude of X?
-
-How do we measure the direction of X?
-** Calculus and naïve abstract miniaturization
-By using calculus, we assume that a thing can always be scaled down
-into an ever-smaller version of it that behaves exactly the same, only smaller.
-
-How can an assumption so wrong produce a model so right?
-* Matter and its microscopic properties?
-Reductionism:
-The macroscopic properties of matter /emerge/ from the microscopic properties.
-Every macroscopic phenomenon can be explained in terms of what is happening microscopically.
-* Analytical chemistry
+* Light, and electromagnetic waves
+** How do we know that light is electromagnetic wave?
+They have the same speed, but is that sufficient to convince a skeptic?
+
+We know that light behaves like an electromagnetic wave, from
+the speed of light, and
+the wave behavior of light.
+But that's all; how do we know that it /is/ it?
+** How do we split a beam of light?
+How does a beam splitter work?
+* Existence of small objects
+** Chemical analysis is like "twenty questions"
 An /analyte/[fn::https://www.dictionary.com/browse/analyte] is what is being analyzed.
-** Properties: How we know what something is
-Pretend that we were our ancestors who did not know much chemistry.
 
-How do we identify something?
-By its properties.
-We assume that if two things have the same properties, then they are the same thing.[fn::https://en.wikipedia.org/wiki/Identity_of_indiscernibles]
-For example, in 1000 BC, if something looks like water, tastes like water, flows like water,
-weighs like water, then it probably is really water.
-What is water?
-Water is whatever that we define to have the properties of water:
-clear liquid at room conditions,
-weighing 1 kg per liter,
-boiling at 100 deg C at sea level, and so on.
-We name such thing "water".
+Chemical analysis is like "twenty questions"[fn::https://en.wikipedia.org/wiki/Twenty_Questions].
 
-First, we define "water" as whatever that is flowing in the nearest river.
-Then we take some of that water, and experiment to find its properties, such as its color, taste, boiling point, and so on.
-Then we declare that everything else that has those properties is also water.
+1. Is it solid at room temperature?
+1. Does it dissolve in water?
+1. Does it react with sulfuric acid?
+1. Does it react with nitric acid?
+1. (and so on)
 
-We know a thing's properties through our senses and reasoning.
+I'm sure there is already an expert system for this.
 
-We don't know all properties of water,
-but we know some properties to distinguish water from non-water in everyday life.
+Natural science is like playing "twenty questions"[fn::https://en.wikipedia.org/wiki/Twenty_Questions] with Nature.
 
-How do we know that something is water?
-If it is liquid, and it comes in large amount from the sky or a river,
-then it is very likely water.
-But that is just a caveman heuristic, not a scientific test.
-The real answer was only found in the 18th century.
-Cavendish 1781 mixed "inflammable air" and "dephlogiscated air" into one container,
-created an electric spark inside the container with an electrostatic machine,
-and observed the formation of water.
- [fn::https://en.wikipedia.org/wiki/Properties_of_water#History]
- [fn::http://www.chemistryexplained.com/Bo-Ce/Cavendish-Henry.html]
- [fn::http://www1.lsbu.ac.uk/water/water.html]
-Back then the term "hydrogen" and "oxygen" had not been invented.
-Terms like "inflammable air" suggest that people back then thought that air everywhere is the same on Earth,
-and there is a recipe for turning common air into "inflammable air".
+Atom-themed twenty questions is trivial,
+because we can just binary-search the answer like this:
 
-Thus, the next question is, "What properties are there?"
-
-The properties of matter may be classified into two kinds:
-physical properties[fn::https://en.wikipedia.org/wiki/Physical_property]
-and chemical properties[fn::https://en.wikipedia.org/wiki/Chemical_property],
-depending on whether the property involves chemical reactions.[fn::https://chem.libretexts.org/Bookshelves/Inorganic_Chemistry/Supplemental_Modules_(Inorganic_Chemistry)/Chemical_Reactions/Properties_of_Matter]
-
-Some examples of properties that are simple to observe:
-color, weight, density, odor, taste, feel, texture, phase (solid or liquid).
-
-Early analytical chemistry relies on appearance and measurements:
-If it's red and it's found on the ground, we call it "copper".
-
-Analytical chemistry[fn::https://en.wikipedia.org/wiki/Analytical_chemistry] tries to answer
-"How do we know what something is?"
-And we answered "By its properties."
-Thus, analytical chemistry tries to answer the question
-"What properties are there, especially, what chemical properties are there?"
-
-Static properties: color, phase.
-
-Dynamic properties: reactions with other things.
-For example, it is a property of salt to dissolve in water.
-Conversely, it is a property of water to dissolve salt.
-
-One property alone may be insufficient to discriminate substances.
-For example, both water and sulfuric acid is a clear liquid.
-
-It is vital to have records (a database) of things, their properties, and their chemical reactions ("chemical recipes").
-Such information was kept in books and libraries.
-In the 21st century, we have computers.
-
-Substance S is something that has color C, density D, phase P at room temperature at sea level,
-reacts with substance T to produce substance U, and so on.
-That is, substance S is whatever that has all the supposed properties of substance S.
-
-One way is by density.
-For example, the density of water is one kilogram per liter,
-so if there is one liter of liquid that weighs two kilograms,
-then it may be contaminated water, or not water at all.
-
-How do we know that two similar substances are the same substance?
-All metals look shiny.
-How do we tell apart silver from platinum?
-
-Water and sulfuric acid looks very similar: Both of them are clear liquids.
-
-A molecule?
-
-"Chemical analysis" or "analytical chemistry"?
-How do we know what something is, what is in it, what it is made of?
-By a collection of classical tests[fn::https://en.wikipedia.org/wiki/Analytical_chemistry#Classical_methods].
-But there is some risk of false positive/negative.
-
-More sophisticated tests:
-- https://en.wikipedia.org/wiki/Mass_spectrometry
-- https://en.wikipedia.org/wiki/Gas_chromatography
-
-An observable property is a property that we can perceive with our senses.
-We will only deal with properties that can be known by experiment.
+1. Does its nucleus have less than 64 protons?
+1. Does its nucleus have less than 32 protons?
+1. Does its nucleus have less than 48 protons?
+1. Does its nucleus have less than 56 protons?
+1. (and so on)
 ** Substances, mixtures, and elements: How do we know?
 What is a mixture?
 How do we know that something is a mixture?
@@ -2320,27 +2191,6 @@ because we lack the senses to perceive them directly.
 
 Electrons: How do we know they exist?
 Crookes tube?[fn::http://www.bbc.com/earth/story/20151120-how-do-we-know-that-things-are-really-made-of-atoms]
-** Chemical analysis is like "twenty questions"
-Chemical analysis is like "twenty questions"[fn::https://en.wikipedia.org/wiki/Twenty_Questions].
-
-1. Is it solid at room temperature?
-1. Does it dissolve in water?
-1. Does it react with sulfuric acid?
-1. Does it react with nitric acid?
-1. (and so on)
-
-I'm sure there is already an expert system for this.
-
-Natural science is like playing "twenty questions"[fn::https://en.wikipedia.org/wiki/Twenty_Questions] with Nature.
-
-Atom-themed twenty questions is trivial,
-because we can just binary-search the answer like this:
-
-1. Does its nucleus have less than 64 protons?
-1. Does its nucleus have less than 32 protons?
-1. Does its nucleus have less than 48 protons?
-1. Does its nucleus have less than 56 protons?
-1. (and so on)
 ** Metals: How do we know?
 What is a metal?
 It is a thing with these properties:
@@ -2397,7 +2247,257 @@ Why is copper readily found on the surface of the Earth?
 - What is the first smelt metal?
   - https://www.britannica.com/technology/smelting
     - "The first metal to be smelted in the ancient Middle East was probably copper (by 5000 BCE), followed by tin, lead, and silver."
+** ? Particles and waves
+How do we know whether something is a particle or a wave?
+
+What is a particle?
+
+What is a wave?
+
+Photons and electrons are neither particle nor wave.
+It is a categorical impossibility, a logical contradiction, for something to be both particle and wave.
+*** What do we mean by "light is a wave"?
+If we say "light is a wave", then we are saying that light has no objective (material) existence.
+Also, what is the restoring force of this wave?
+
+The sea has waves, but the sea is not the waves.
+
+If we say "light behaves like a wave", then, what does it mean for an objective thing to behave like a subjective thing?
+
+The people who thought about the luminiferous aether[fn::https://en.wikipedia.org/wiki/Luminiferous_aether] must have thought about this.
+
+If the aether does not exist, then light is not a wave.
+
+Light is electromagnetic radiation.
+A disturbance in the electromagnetic field?
+
+We must distinguish between /physical/ wave and /mathematical/ wave.
+
+Light is not a physical wave,
+but we sometimes think of light as a mathematical wave.
+
+A wave both propagate in a medium and may diffract.
+Light may diffract but propagates in vacuum?
+
+We thought light was a wave.
+It is not.
+Neither is it a particle.
+It /behaves like/ wave under certain circumstances,
+and it /behaves like/ particle under certain circumstances,
+but it is neither a particle or a wave.
+*** How do we know whether there is light?
+In order to see something,
+we have to direct our eyes toward that thing,
+and the surrounding has to be bright enough.
+We can see things in broad daylight,
+but we cannot see things in a cave even though it is daytime outside,
+but we can bring fire with us into the cave and then we can see things again.
+We can also light a fire, and then we can see things even though it is nighttime.
+The light from the sun and the light from the fire has the same nature in that they both help us see;
+they only have different quantities of light.
+*** Can light diffract?
+What do we mean by light?
+
+Can light be detected?
+
+Is light whatever a light detector detects?
+A light detector affects the light.
+*** Wave-particle duality is category error
+Wave is abstract; particle is concrete.
+A thing cannot be both abstract and concrete.
+
+Wave is a kind of repetitive motion.
+Particle is a small thing.
+
+Wave is abstract, subjective, mental, conceptual, and has no objective existence.
+What objectively exists is the particles and their interactions.
+** Quantum mechanics?
+If quantum mechanics is the answer, what is the question?
+
+What problem does quantum mechanics solve?
+
+Which simplifying assumptions of classical mechanics are removed by quantum mechanics?
+** ? Davisson--Germer experiment
+What is the details of the Davisson--Germer experiment,
+"in which electrons, scattered by the surface of a crystal of nickel metal, displayed a diffraction pattern"[fn::https://en.wikipedia.org/wiki/Davisson%E2%80%93Germer_experiment]?
+** Observables?
+"In systems governed by classical mechanics, it is a real-valued function on the set of all possible system states.
+In quantum physics, it is an operator, or gauge, where the property of the system state can be determined by some sequence of physical operations."[fn::https://en.wikipedia.org/wiki/Observable]
+Why is that so?
+What is the motivation?
+** Quantum statics?
+What is the quantum analog of the classical statics?
+What is the quantum analog of Archimedes's law of the lever?
+
+Quantum statics should be simpler, because it should not require calculus.
+** Teaching quantum mechanics
+*** How do we introduce the subject to whom?
+Experiments must guide us because our everyday intuition breaks down.
+
+State-space formalism of classical mechanics?
+By quantizing Hamiltonian mechanics?
+
+Sakurai 2011 \cite{sakurai2011modern} begins with Stern--Gerlach experiment[fn::https://en.wikipedia.org/wiki/Stern%E2%80%93Gerlach_experiment],
+but that book is not for beginners.
+Classical mechanics predicts that the collisions form a line, but reality gives us two clusters instead of a line.
+
+Electromagnetism is required to understand the Stern--Gerlach experiment.
+What is a magnetic moment?
+
+\cite{muller2002teaching}
+** Brownian-motion view of quantum-mechanical indeterminacy?
+Photons are like Brown's pollens in Einstein's Brownian motion paper.
+Pollens jiggle because they are hit by water particles much smaller than the pollens.
+
+Hypothesis:
+Material particles (such as electrons) appear to have indeterminate position
+because they are hit by ether particles much smaller than the material particles.
+
+What about non-localities (entanglements)?
+
+But this is fundamentally different.
+A pollen always has a position at each point in time.
+A quantum particle does not have a position until it is measured.
+(The orthodox interpretation as described by Griffiths 2015 \cite{griffiths2005introduction})
+** Reformulations?
+https://www.quora.com/Has-an-attempt-ever-been-made-to-reformulate-quantum-mechanics-in-a-space-other-than-Hilbert-space
+** Quantum Venn diagram paradox
+- Three polarizers.
+  - Bell's Theorem: The Quantum Venn Diagram Paradox https://www.youtube.com/watch?v=zcqZHYo7ONs
+    - It is surprising that adding a third filter /increases/ brightness.
+      We think that a filter should only decrease, not increase brightness.
+** The meaning of probability?
+If something is possible (that is, if something has non-zero probability), will it eventually happen?
+
+There is a non-zero probability that a black hole appearing out of nowhere kills us all.
+Will it happen?
+Is it happening in a parallel universe?
+** What?
+Why is it hard to convert between matter and energy?
+What does QFT say?
+(Related: Why isn't everything homemadeable?)
+
+How do we know where an electron is?
+How do we measure the position of an electron?
+
+How do we measure the velocity of an electron?
+** Intro to QFT?
+An Introduction to Quantum Field Theory
+Mrinal Dasgupta
+http://hepwww.rl.ac.uk/hepsummerschool/Dasgupta%2008%20Intro%20to%20QFT.pdf
+
+A Very Short Introduction to Quantum Field Theory
+A. W. Stetz
+http://physics.oregonstate.edu/~stetza/COURSES/ph654/ShortBook.pdf
+** Philosophy of quantum mechanics?
+*** Which one of these are ontologically justified?
+- Matter can /behave/ as a wave or a particle?
+  - In what way?
+- Matter /is/ both a wave and a particle?
+  - Refutation?
+    - A water wave is not water.
+      - Wave is the name we give to periodic motion.
+        - We can perceive a wave because we can interact with the constituents of the wave.
+          - If light is a wave, then light should have constituents.
+- Observe: double-slit experiment: shooting electrons through two slits.
+  - de Broglie hypothesis relates the momentum and wavelength.
+- Observe: quantum tunneling.
+  - How do we explain quantum tunneling without probabilities?
+  - How does QFT explain electron tunneling?
+- How does QFT (quantum field theory) describe an electron?
+  - https://www.symmetrymagazine.org/article/july-2013/real-talk-everything-is-made-of-fields
+  - http://www.quantum-field-theory.net/electron-look-like/
+- 2013 "Particles, Fields and The Future of Physics - A Lecture by Sean Carroll" https://www.youtube.com/watch?v=gEKSpZPByD0
+  - lecture for public audience
+  - 30:40
+    - The mass of a particle is the energy required to get the corresponding quantum field to vibrate.
+    - There is a field for every type of particle.
+      There is an electron field, there is a photon field, and so on.
+    - Particle interaction is the coupling between different fields.
+- QED (quantum electrodynamics) http://hyperphysics.phy-astr.gsu.edu/hbase/Forces/qed.html
+  - Feynman diagram is one way of teaching QED.
+*** What is a wave?
+- A water wave does not require the water to /flow/.
+*** Path to understanding quantum mechanics?
+- Electrons fired toward a screen behind two slits show interference pattern.
+- Hydrogen absorption/emission spectrum
+- https://en.m.wikipedia.org/wiki/Planck%27s_law
+- A small hole on a closed box approximates a black body.
+  The hole looks black from outside.
+  Heating the box changes the hole's color.
+- What is a concrete example of a potential barrier?
+*** Double-slit experiments?
+- How do we detect electrons?
+  https://en.wikipedia.org/wiki/Electron_capture_detector
+- What is used to detect electrons in the double slit experiment?
+  https://www.reddit.com/r/askscience/comments/3ebcw6/what_is_used_to_detect_electrons_in_the_double/
+- https://physics.stackexchange.com/questions/364312/how-does-the-electron-detector-detect-electrons-dbl-slit
+  "How Do We Know Protons, Electrons, and Quarks really Exist?"
+- https://www.nsta.org/publications/news/story.aspx?id=51054
+- How do we know electrons exist? https://www.quora.com/How-do-we-know-electrons-exist
+- Unread
+  - https://en.wikipedia.org/wiki/Matter_wave
+  - 2017 article
+    "On the self-interference in electron scattering: Copenhagen, Bohmian and geometrical interpretations of quantum mechanics"
+    https://arxiv.org/abs/1710.02583
+  - I don't understand the question enough to determine why it is downvoted.
+    "Can the intensity distribution behind edges and slits be explained by the interaction with the surface electrons of the edges?"
+    https://physics.stackexchange.com/questions/158105/can-the-intensity-distribution-behind-edges-and-slits-be-explaint-by-the-interac
+  - https://www.reddit.com/r/Physics/comments/4ugmc7/can_someone_explain_the_double_slit_experiment/
+    - 2013 article "Controlled double-slit electron diffraction" http://iopscience.iop.org/article/10.1088/1367-2630/15/3/033018/meta
+  - Variation of double slit experiments?
+    - Double slit with nuclear decay?
+    - Double slit with tracers? (What is a tracer?)
+  - What is an atom and how do we know? https://www.youtube.com/watch?v=LhveTGblGHY
+  - Variations, modifications, and expansions
+    - https://noetic.org/research/projects/next-generation-double-slit
+**** Quantum eraser?
+**** Afshar experiment?
+- http://steve-patterson.com/quantum-physics-abuse-reason/
+  - Afshar experiment
+  - Weak measurement
+- How do we know where an electron is?
+  How do we measure the position of an electron?
+  How do we measure the momentum/energy of an electron?
+** Probability arises from basic physical laws?
+- https://www.theatlantic.com/science/archive/2018/11/science-full-mavericks-like-my-grandfather-was-his-physics-theory-right/574573/
+- https://www.researchers.one/article/2018-10-6
+** Obtaining wave equation
+Can we model the double-slit experiment as classical wave diffraction,
+and then interpret the square of wave function as probability density,
+a la Born?
+** Do these theories have practical applications?
+Physics and monads[fn::https://johncarlosbaez.wordpress.com/2018/12/30/geometric-quantization-part-5/].
+From Abdullah.
+How much background knowledge do we need to understand that?
+
+Baez seems to say that quantum mechanics is a special case of classical mechanics,
+whereas we usually think the other way, that classical mechanics is a special case of quantum mechanics.
 * Electromagnetism
+** TODO Fields
+A \emph{field} assigns something to each point in space.
+The \emph{gravitational field} assigns to each point a \emph{gravitational force per unit mass}.
+
+A field is modeled by a \emph{multivariate function} (a function that takes several variables).
+The variables can be grouped into a vector.
+This gives the impression that the function takes one big vector instead of several scattered real numbers.
+
+A \emph{scalar field} is a field that gives a scalar.
+
+A \emph{vector field} is a field that gives a vector.
+
+A field \(f\) is \emph{uniform} iff \(f(x)\) is the same for all \(x\).
+** Can we reverse-compute the density that causes a field?
+Given a mass density scalar field, we can compute the resulting gravity vector field.
+
+Can we do the inverse?
+Given a gravity vector field, can we compute what mass density scalar field would give rise to that?
+
+Divide the space into small cubes v0 v_1 ....
+Let xk be a point anywhere in cube v_k.
+\( g(x) = sum_k rho(x_k) v_k \).
+
+How do we know which is real: the gravity field or the mass density?
 ** How do we know that electricity and magnetism is the "same" phenomenon?
 What do we mean by "same"?
 
@@ -2431,10 +2531,8 @@ Nick Lucid's explanation of Poynting vectors and electromagnetic energy
 The charges are not "energy carriers".
 ** Maxwell's equations?
 https://en.wikipedia.org/wiki/History_of_Maxwell%27s_equations
-** TODO How do we know that a current is a flow of electrons?
 ** How do we know the charge of an electron?
 Millikan's oil drop experiment.
-
 ** Electromagnetism
 - Electromagnetism unifies optics, electricity, and magnetism.
 - Define: [[https://en.wikipedia.org/wiki/Lodestone][WP:Lodestone]].
@@ -2476,7 +2574,7 @@ Millikan's oil drop experiment.
       - [[https://en.wikipedia.org/wiki/Amber][WP:Amber]]
 - [[https://en.wikipedia.org/wiki/History_of_electromagnetic_theory][WP:History of electromagnetic theory]]
 - [[https://en.wikipedia.org/wiki/Timeline_of_electromagnetism_and_classical_optics][WP:Timeline of electromagnetism and classical optics]]
-* ? Statistical mechanics of gases
+* Gases and statistics
 ** Statistical thinking
 Statistics is about seeing the forest and ignoring the trees.
 
@@ -2609,26 +2707,112 @@ Microscopically, what is temperature?
 What is the relationship between temperature and radiation?
 
 Does a colliding electron emit photon?
-* TODO Diffraction crystallography, for the Davisson--Germer experiment
-Crystallography[fn::https://en.wikipedia.org/wiki/Crystallography]
+* TODO Statistical thermodynamics, for thermionic emission, cathode rays, and the Franck--Hertz experiment
 * TODO Polarization of light, for quantum mechanics
-* ? Quantum mechanics
-If quantum mechanics is the answer, what is the question?
+* TODO Diffraction crystallography
+For the Davisson--Germer experiment.
 
-What problem does quantum mechanics solve?
+Crystallography[fn::https://en.wikipedia.org/wiki/Crystallography]
 
-Which simplifying assumptions of classical mechanics are removed by quantum mechanics?
-** How do we measure?
-Very important epistemological question that should be convincingly answered before embarking further:
-How do we measure the position of an electron?
-What does it even mean to measure the position of an electron?
+A crystal is a solid with regular structure.
+ [fn::https://en.wikipedia.org/wiki/Crystal]
+ [fn::https://www.etymonline.com/search?q=crystal]
 
-The same way we detect large objects?
+How do we know whether a solid has a regular structure?
+
+How does a liquid solidify when cooled?
+
+A crystal (a crystalline solid) is formed by slowly cooling a liquid?
+
+How do we make diffraction gratings small enough for electrons?
+"[...], the periodic crystal structure serves as a type of three-dimensional diffraction grating."
+ [fn::https://en.wikipedia.org/w/index.php?title=Davisson%E2%80%93Germer_experiment&oldid=889153997]
+ [fn::https://en.wikipedia.org/wiki/Low-energy_electron_diffraction]
+* --- Part --- The physics of small objects
+** Mindsets
+The physics of small objects is not intuitive.
+Everything is inferred indirectly.
+It requires a lot of abductive reasoning.
+
+We can only manipulate medium-sized objects, due to the limitation of our senses.
+Everything else, we can only infer, indirectly,
+by transduction through experimental apparatuses into something of medium size.
+** Reasoning with deduction, induction, and abduction
+Deduction is the use of syllogism?
+
+Induction is generalization from examples.
+The difficulty is in finding examples diverse enough to represent most possibilities.
+Example:
+We saw that there are ten white swans.
+Thus we infer that all swans are white.
+(Then we find a black swan.)
+
+Abduction is finding the best explanation for a surprising evidence.
+Example:
+We observe that the road is wet everywhere.
+We abduce the hypothetical explanation that it may have rained a few hours ago.
+Another example:
+We cannot find the scissors at home; they are not at the usual location.
+We abduce that it must be due to our siblings.
+
+We cannot live without deduction, but we cannot live with only deduction either.
+
+Reddit has a summary[fn::https://www.reddit.com/r/askphilosophy/comments/uu5wp/a_priori_vs_a_posteriori_deductive_vs_inductive/] of deduction and induction.
+
+** Sensor galore, sensor design mindset, transduction/apparatus mindset
+Voltage is measured with volt-meter,
+amperage is measured with ampere-meter,
+ohmage is measured with ohm-meter,
+pressure is measured with pressure-meter,
+temperature is measured with temperature-meter,
+X is measured with X-meter,
+and so on.
+
+How do we /know/ X => How do we /detect/ X => How do we /measure/ X => How do we /design an apparatus/ for measuring X?
+
+How do we translate a microscopic phenomenon into something macroscopic that we can perceive directly with our senses.
+
+For example: electroscope => electrometer.
+
+For example:
+- How do we detect electric current?
+  By observing the corrosion of the metal electrodes of an electrochemical cell.
+- How do we measure electric current?
+  By measuring the /rate/ of the corrosion above.
+
+How do we measure the magnitude of X?
+
+How do we measure the direction of X?
+** Calculus, scale invariance, and naïve abstract miniaturization
+By using calculus, we assume that a thing can always be scaled down
+into an ever-smaller version of it that behaves exactly the same, only smaller.
+
+We often assume scale invariance[fn::https://en.wikipedia.org/wiki/Scale_invariance].
+
+How can an assumption so wrong produce a model so right?
+** Reductionism and emergent behavior
+Reductionism:
+The macroscopic properties of matter /emerge/ from the microscopic properties.
+Every macroscopic phenomenon can be explained in terms of what is happening microscopically.
+* Motion of small objects
+** How do we know that an electron moves?
+By the change of its position.
+** How do we measure an electron's position?
+How do we measure an electron's position?
+
+Can we do it in the same way we detect large objects?
 By shining some light on them,
 and sensing the reflected light that reaches a light detector?
 
-Indirectly by exploiting photon-electron interaction[fn::http://hyperphysics.phy-astr.gsu.edu/hbase/Relativ/photel.html]?
-By electron scattering[fn::https://en.wikipedia.org/wiki/Electron_scattering]?
+Some ideas:
+- by the change of its electric field,
+- by electron-photon interaction[fn::http://hyperphysics.phy-astr.gsu.edu/hbase/Relativ/photel.html],
+- by electron scattering[fn::https://en.wikipedia.org/wiki/Electron_scattering]?
+- by strobing (repeatedly and quickly flashing) the object with light?[fn::2008 "Measuring the circular motion of small objects using laser stroboscopic images" https://aip.scitation.org/doi/abs/10.1063/1.2832336?journalCode=rsi]
+
+We can know the /movement/ of an electron, but can we know its /motion/?
+
+What does it even mean to measure an electron's position?
 
 Do electrons reflect light?
  [fn::http://www.fnal.gov/pub/science/inquiring/questions/colorofatoms.html]
@@ -2646,212 +2830,54 @@ Can we analogize a photon-electron collision as billiard ball collision?
 If there is an electron known to be roughly somewhere in a region of space,
 how do we find where exactly that electron is?
 
-How do we make diffraction gratings small enough for electrons?
-"[...], the periodic crystal structure serves as a type of three-dimensional diffraction grating."
- [fn::https://en.wikipedia.org/w/index.php?title=Davisson%E2%80%93Germer_experiment&oldid=889153997]
- [fn::https://en.wikipedia.org/wiki/Low-energy_electron_diffraction]
-
-What is a crystal?[fn::https://en.wikipedia.org/wiki/Crystal]
- [fn::https://www.etymonline.com/search?q=crystal]
-
-How does a liquid solidify when cooled?
-
-A crystal (a crystalline solid) is formed by slowly cooling a liquid?
-
 To understand physics, it is essential to understand the details of the experiments.
 
-How do we measure the polarization of a photon?
-
+** How do we measure the polarization of a photon?
 Interesting simple quantum-mechanical experiments with polarization filters[fn::http://web.mit.edu/course/5/5.73/oldwww/Fall04/notes/Experimental_Evidence_for_Quantum_Mechanics.pdf]
-** ? Davisson--Germer experiment
-What is the details of the Davisson--Germer experiment,
-"in which electrons, scattered by the surface of a crystal of nickel metal, displayed a diffraction pattern"[fn::https://en.wikipedia.org/wiki/Davisson%E2%80%93Germer_experiment]?
-** Observables?
-"In systems governed by classical mechanics, it is a real-valued function on the set of all possible system states.
-In quantum physics, it is an operator, or gauge, where the property of the system state can be determined by some sequence of physical operations."[fn::https://en.wikipedia.org/wiki/Observable]
-Why is that so?
-What is the motivation?
-** Quantum statics?
-What is the quantum analog of the classical statics?
-What is the quantum analog of Archimedes's law of the lever?
+** TODO How do we know that a current is a flow of electrons?
+* TODO Functionals; motion
+** Brachistochrone problem?
+Why did some fine 17th-century gentlemen concern themselves with problems
+that had no apparent practical applications, such as the brachistochrone problem[fn::https://en.wikipedia.org/wiki/Brachistochrone_curve]?
+What benefits were there, besides personal satisfaction?
 
-Quantum statics should be simpler, because it should not require calculus.
-** Teaching quantum mechanics
-*** How do we introduce the subject to whom?
-Experiments must guide us because our everyday intuition breaks down.
+When Lagrange formulated his mechanics,
+the concept of potential energy had not yet been invented?
+** Moving from force-based thinking to energy-based thinking
+We thought \( F(t) = -g \) and thus \( a(t) = -g/m \) and \( v(t) = - gt / m \) and \( x(t) = - gt^2 / (2m) \).
+We think about the forces,
+figure out the accelerations,
+integrate them to get the velocities,
+and integrate them to get the positions.
 
-State-space formalism of classical mechanics?
-By quantizing Hamiltonian mechanics?
-
-Sakurai 2011 \cite{sakurai2011modern} begins with Stern--Gerlach experiment[fn::https://en.wikipedia.org/wiki/Stern%E2%80%93Gerlach_experiment],
-but that book is not for beginners.
-Classical mechanics predicts that the collisions form a line, but reality gives us two clusters instead of a line.
-
-Electromagnetism is required to understand the Stern--Gerlach experiment.
-What is a magnetic moment?
-
-\cite{muller2002teaching}
-** Brownian-motion view of quantum-mechanical indeterminacy?
-Photons are like Brown's pollens in Einstein's Brownian motion paper.
-Pollens jiggle because they are hit by water particles much smaller than the pollens.
-
-Hypothesis:
-Material particles (such as electrons) appear to have indeterminate position
-because they are hit by ether particles much smaller than the material particles.
-
-What about non-localities (entanglements)?
-
-But this is fundamentally different.
-A pollen always has a position at each point in time.
-A quantum particle does not have a position until it is measured.
-(The orthodox interpretation as described by Griffiths 2015 \cite{griffiths2005introduction})
-** Wave-particle duality is category error
-Wave is abstract; particle is concrete.
-A thing cannot be both abstract and concrete.
-
-Wave is a kind of repetitive motion.
-Particle is a small thing.
-
-Wave is abstract, subjective, mental, conceptual, and has no objective existence.
-What objectively exists is the particles and their interactions.
-** Reformulations?
-https://www.quora.com/Has-an-attempt-ever-been-made-to-reformulate-quantum-mechanics-in-a-space-other-than-Hilbert-space
-** Quantum Venn diagram paradox
-- Three polarizers.
-  - Bell's Theorem: The Quantum Venn Diagram Paradox https://www.youtube.com/watch?v=zcqZHYo7ONs
-    - It is surprising that adding a third filter /increases/ brightness.
-      We think that a filter should only decrease, not increase brightness.
-** The meaning of probability?
-If something is possible (that is, if something has non-zero probability), will it eventually happen?
-
-There is a non-zero probability that a black hole appearing out of nowhere kills us all.
-Will it happen?
-Is it happening in a parallel universe?
-** What?
-Why is it hard to convert between matter and energy?
-What does QFT say?
-(Related: Why isn't everything homemadeable?)
-
-How do we know where an electron is?
-How do we measure the position of an electron?
-
-How do we measure the velocity of an electron?
-** Intro to QFT?
-An Introduction to Quantum Field Theory
-Mrinal Dasgupta
-http://hepwww.rl.ac.uk/hepsummerschool/Dasgupta%2008%20Intro%20to%20QFT.pdf
-
-A Very Short Introduction to Quantum Field Theory
-A. W. Stetz
-http://physics.oregonstate.edu/~stetza/COURSES/ph654/ShortBook.pdf
-** Philosophy of quantum mechanics?
-*** Which one of these are ontologically justified?
-- Matter can /behave/ as a wave or a particle?
-  - In what way?
-- Matter /is/ both a wave and a particle?
-  - Refutation?
-    - A water wave is not water.
-      - Wave is the name we give to periodic motion.
-        - We can perceive a wave because we can interact with the constituents of the wave.
-          - If light is a wave, then light should have constituents.
-- Observe: double-slit experiment: shooting electrons through two slits.
-  - de Broglie hypothesis relates the momentum and wavelength.
-- Observe: quantum tunneling.
-  - How do we explain quantum tunneling without probabilities?
-  - How does QFT explain electron tunneling?
-- How does QFT (quantum field theory) describe an electron?
-  - https://www.symmetrymagazine.org/article/july-2013/real-talk-everything-is-made-of-fields
-  - http://www.quantum-field-theory.net/electron-look-like/
-- 2013 "Particles, Fields and The Future of Physics - A Lecture by Sean Carroll" https://www.youtube.com/watch?v=gEKSpZPByD0
-  - lecture for public audience
-  - 30:40
-    - The mass of a particle is the energy required to get the corresponding quantum field to vibrate.
-    - There is a field for every type of particle.
-      There is an electron field, there is a photon field, and so on.
-    - Particle interaction is the coupling between different fields.
-- QED (quantum electrodynamics) http://hyperphysics.phy-astr.gsu.edu/hbase/Forces/qed.html
-  - Feynman diagram is one way of teaching QED.
-*** What is a wave?
-- A water wave does not require the water to /flow/.
-*** Path to understanding quantum mechanics?
-- Electrons fired toward a screen behind two slits show interference pattern.
-- Hydrogen absorption/emission spectrum
-- https://en.m.wikipedia.org/wiki/Planck%27s_law
-- A small hole on a closed box approximates a black body.
-  The hole looks black from outside.
-  Heating the box changes the hole's color.
-- What is a concrete example of a potential barrier?
-*** Double-slit experiments?
-- How do we detect electrons?
-  https://en.wikipedia.org/wiki/Electron_capture_detector
-- What is used to detect electrons in the double slit experiment?
-  https://www.reddit.com/r/askscience/comments/3ebcw6/what_is_used_to_detect_electrons_in_the_double/
-- https://physics.stackexchange.com/questions/364312/how-does-the-electron-detector-detect-electrons-dbl-slit
-  "How Do We Know Protons, Electrons, and Quarks really Exist?"
-- https://www.nsta.org/publications/news/story.aspx?id=51054
-- How do we know electrons exist? https://www.quora.com/How-do-we-know-electrons-exist
-- Unread
-  - https://en.wikipedia.org/wiki/Matter_wave
-  - 2017 article
-    "On the self-interference in electron scattering: Copenhagen, Bohmian and geometrical interpretations of quantum mechanics"
-    https://arxiv.org/abs/1710.02583
-  - I don't understand the question enough to determine why it is downvoted.
-    "Can the intensity distribution behind edges and slits be explained by the interaction with the surface electrons of the edges?"
-    https://physics.stackexchange.com/questions/158105/can-the-intensity-distribution-behind-edges-and-slits-be-explaint-by-the-interac
-  - https://www.reddit.com/r/Physics/comments/4ugmc7/can_someone_explain_the_double_slit_experiment/
-    - 2013 article "Controlled double-slit electron diffraction" http://iopscience.iop.org/article/10.1088/1367-2630/15/3/033018/meta
-  - Variation of double slit experiments?
-    - Double slit with nuclear decay?
-    - Double slit with tracers? (What is a tracer?)
-  - What is an atom and how do we know? https://www.youtube.com/watch?v=LhveTGblGHY
-  - Variations, modifications, and expansions
-    - https://noetic.org/research/projects/next-generation-double-slit
-**** Quantum eraser?
-**** Afshar experiment?
-- http://steve-patterson.com/quantum-physics-abuse-reason/
-  - Afshar experiment
-  - Weak measurement
-- How do we know where an electron is?
-  How do we measure the position of an electron?
-  How do we measure the momentum/energy of an electron?
-** Probability arises from basic physical laws?
-- https://www.theatlantic.com/science/archive/2018/11/science-full-mavericks-like-my-grandfather-was-his-physics-theory-right/574573/
-- https://www.researchers.one/article/2018-10-6
-** Obtaining wave equation
-Can we model the double-slit experiment as classical wave diffraction,
-and then interpret the square of wave function as probability density,
-a la Born?
-** Do these theories have practical applications?
-Physics and monads[fn::https://johncarlosbaez.wordpress.com/2018/12/30/geometric-quantization-part-5/].
-From Abdullah.
-How much background knowledge do we need to understand that?
-
-Baez seems to say that quantum mechanics is a special case of classical mechanics,
-whereas we usually think the other way, that classical mechanics is a special case of quantum mechanics.
-* ? Groups? Symmetries?
+How does Hamiltonian mechanics explain a ball falling near the ground?
+\( P = mgh \).
+\( K = \frac{1}{2}mv^2 \).
+The state of the system is \( (h, mv) \).
+The operator is \( P(h, mv) = mgh \) and \( K(h, mv) = \frac{1}{2}mv^2 \).
+\( P + K = \text{constant} \) which means that \( \pdv{P}{h} = 0 \) and \( \pdv{K}{v} = 0 \).
+* TODO Groups? Symmetries?
 Unread:
 - [[https://arxiv.org/abs/1804.01714][On the wonderfulness of Noether's theorems, 100 years later, and Routh reduction]]
 
 Pieces of the story:
 - Wu experiment[fn::https://en.wikipedia.org/wiki/Wu_experiment], parity violation
 
-* Contents to reorganize?
-** Overview
-*** What
-Natural knowledge is knowledge about nature (reality).
-
-Here we try to list natural knowledge, ordered from the simplest to verify.
-
-The aim is to teach natural knowledge in the fastest way possible.
-*** Philosophy
-**** Truth is a continuum (not binary true-and-false).
+** What is left and right?
+- We can define left and right absolutely due to parity violation.
+- [[https://en.wikipedia.org/wiki/Wu_experiment][WP:Wu experiment]]
+  - [[https://en.wikipedia.org/wiki/Parity_(physics)#Parity_violation][WP:Parity, violation]]
+- [[https://physics.stackexchange.com/questions/18729/absolute-defintion-of-the-right-i-e-not-left-direction][Phys. SE 18729: absolute defintion of the right (i. e. not left) direction]]
+* TODO Reorganize?
+** Philosophy?
+*** Truth is a continuum (not binary true-and-false).
 (Why are we saying this?)
-**** Epistemology (how we know)
+*** Epistemology (how we know)
 We assume that there are three sources of knowledge:
 - observation (the senses)
 - definition (fiat, agreement between speakers of the same language)
 - inference (logic, rules of thought)
-**** Theoretical physics advances by discovering and removing simplifying assumptions
+*** Theoretical physics advances by discovering and removing simplifying assumptions
 What does Thomas Kuhn say?
 
 A problem with physics: too many unjustified tacit assumptions?
@@ -2870,7 +2896,7 @@ Physics is mathematics + engineering + philosophy.
 - [[https://www.researchgate.net/post/How_to_expose_insidious_tacit_assumptions_which_sidetrack_scientific_progress_into_wrong_path_leading_to_scientific_crisis_if_not_exposed][How to expose insidious tacit assumptions, which sidetrack scientific progress into wrong path (leading to scientific crisis), if not exposed?]]
 - [[https://www.jstor.org/stable/986647][1975, article, paywall, "Tacit Assumptions in Fundamental Particle Physics"]]
   - [[http://www.iaea.org/inis/collection/NCLCollectionStore/_Public/06/183/6183879.pdf][unpaywalled]]
-**** What
+*** What
 Which one makes sense:
 "There is space between two things."
 "Things exist in space."
@@ -3108,9 +3134,7 @@ We let \(x\) be four-dimensional, and we write \(\rho(x)\).
     - Think "don't think"
 ** Physics
 Physics should not be separated from philosophy, mathematics, and engineering.
-
-- Philosophy of physics
-
+** Philosophy of physics
   - The epistemology (how-do-we-know) of physics is the scientific method.
 
     - [[https://en.wikipedia.org/wiki/Scientific_method][WP:Scientific method]]
@@ -3131,9 +3155,7 @@ Physics should not be separated from philosophy, mathematics, and engineering.
   - [[https://en.wikipedia.org/wiki/Philosophy_of_science][WP:Philosophy of science]]
 
     - [[https://en.wikipedia.org/wiki/Demarcation_problem][WP:Demarcation problem]]: What is science? What isn't?
-
-- Ontology
-
+** Ontology
   - an attempt
 
     - undefined terms
@@ -3250,9 +3272,7 @@ Physics should not be separated from philosophy, mathematics, and engineering.
       - Mass is the amount of matter.
       - [[https://en.wikipedia.org/wiki/Mass][WP:Mass]]
       - [[https://en.wikipedia.org/wiki/Matter][WP:Matter]]
-
-- Theoretical physics
-
+** Theoretical physics
   - Unifying quantum mechanics and general relativity?
 
     - Unifying quantum mechanics and special relativity
@@ -3306,14 +3326,10 @@ Physics should not be separated from philosophy, mathematics, and engineering.
     - https://en.wikipedia.org/wiki/Astronomical_engineering
     - https://en.wikipedia.org/wiki/Megascale_engineering
     - https://en.wikipedia.org/wiki/Kardashev_scale
-
-- Nuclear energy
-
+** Nuclear energy
   - Is there any way to convert nuclear energy into electrical energy without going through heat and turbines?
   - [[https://whatisnuclear.com/recycling.html][Nuclear recycling]]
-
-- Undigested information fragments
-
+** Undigested information fragments
   - ECAT, LENR (low-energy nuclear reaction), cold fusion
 
     - http://ecat.com/
@@ -3352,20 +3368,14 @@ Physics should not be separated from philosophy, mathematics, and engineering.
   - nuclear
 
     - Isotope vs nuclide https://en.m.wikipedia.org/wiki/Isotope
-
-- engineering
-
+** engineering
   - [[https://www.youtube.com/watch?v=Qf-D1Upn-KU][How to save 51 billion lives for 68 cents with simple Engineering]]
 
     - Some constraints are good for creativity.
-
-- space
-
+** space
   - [[https://www.youtube.com/watch?v=yL7EEXg2niU][This Massive Asteroid Is Headed for Earth.... What Now?]]
   - [[https://en.wikipedia.org/wiki/Rockoon][WP: rockoon]] (rocket-balloon)
-
-- Other external resources
-
+** Other external resources
   - Overview
 
     - [[https://en.wikipedia.org/wiki/Physics][WP:Physics]]
@@ -3387,15 +3397,9 @@ Physics should not be separated from philosophy, mathematics, and engineering.
   - [[https://www.youtube.com/watch?v=8LHhpPtRMmU][Will We Ever Time Travel? Scientists Say 'No' Based on This New Discovery]]
 
     - This youtube video title needs to be declickbaited. What new discovery?
-
+** Philosophy?
 - https://en.wikipedia.org/wiki/Problem_of_induction
-- https://en.wikipedia.org/wiki/Uniformitarianism
-- We assume the /principle of the uniformity of nature/:
-
-  - The laws of nature is the same everywhere everytime [hume1793inquiry].
-
-- Simulation hypothesis
-
+** Simulation hypothesis
   - [[https://en.wikipedia.org/wiki/Simulation_hypothesis][WP:Simulation hypothesis]]
 
     - [[https://en.wikipedia.org/wiki/Simulation_hypothesis#Testing_the_hypothesis_physically][section: testing the hypothesis physically]]
@@ -3411,7 +3415,7 @@ Physics should not be separated from philosophy, mathematics, and engineering.
     - http://www.washington.edu/news/2012/12/10/do-we-live-in-a-computer-simulation-uw-researchers-say-idea-can-be-tested/
     - http://www.huffingtonpost.co.uk/2012/12/12/physicists-universe-simulation-test-university-of-washington-matrix_n_2282745.html
     - anisotropy of space?
-
+** Theoretical?
 - [[https://www.youtube.com/watch?v=MBnnXbOM5S4][YT:The more general uncertainty principle, beyond quantum]]
 - https://en.wikipedia.org/wiki/Amplituhedron
 - https://en.wikipedia.org/wiki/Theoretical_physics
@@ -3428,15 +3432,11 @@ Physics should not be separated from philosophy, mathematics, and engineering.
   - https://www.kth.se/en/sci/phd/programs/physics/forskning/aktuell-forskning-inom-teoretisk-fysik-1.76843
   - https://www.quora.com/What-are-some-of-the-best-Physics-blogs
   - https://blog.feedspot.com/physics_blogs/
-
-- high-energy physics information system
-
+** High-energy physics information system
   - https://inspirehep.net/
-
-- Unchecked physical theories? Non-mainstream? Suspicious? Not yet mainstream or will never be mainstream?
-
+** Unchecked physical theories? Non-mainstream? Suspicious? Not yet mainstream or will never be mainstream?
   - http://www.unifiedphysics.com/
-
+** What?
 - 2018 quantum entanglement size record: trillions of atoms? https://www.youtube.com/watch?v=LAvfPof1ySI
 - Getting started
 
@@ -3507,19 +3507,6 @@ https://physics.stackexchange.com/questions/267034/what-exactly-is-meant-by-the-
   - We aren't going down this rabbit hole for now.
 
 How do we predict the color of a solid from its electron configuration?
-** Inverting the field?
-We can compute the gravity vector field arising from a mass density scalar field.
-
-Can we do the inverse?
-Can we compute what mass density scalar field would give rise to a given gravity vector field?
-
-Divide the space into small cubes v0 v1 ....
-Let xk be a point anywhere in cube vk.
-g x = sum_k rho xk vk
-
-My guess is yes.
-
-Which is real: the gravity field or the mass density?
 ** Unread
 - Ampere's experiments
   - [[http://farside.ph.utexas.edu/teaching/302l/lectures/node70.html][Ampère's Experiments]]
@@ -3822,6 +3809,7 @@ with the assumption that one teaspoon of salt means
 that the salt makes a flat surface on the teaspoon, not a mound.
 Thus, if I am cooking for myself, I usually put in a third of a teaspoon of salt.
 ** Materials engineering
+*** What
 How do we know stress and strain curves?
 What curves?
 https://en.wikipedia.org/wiki/Universal_testing_machine
@@ -3829,7 +3817,31 @@ https://en.wikipedia.org/wiki/Universal_testing_machine
 Construction:
 
 How do I build a house that won't kill me if it collapses?
-* Contents to discard?
+*** What is the cheapest metal?
+<2019-07-12>
+Aluminum at $0.82/lb.[fn::http://www.infomine.com/investment/metal-prices/]
+*** What material should I use?
+Consult Ashby's "Material selection in mechanical design"?[fn::https://www.quora.com/What-are-the-cheapest-metals]
+*** How are minerals on Earth distributed?
+- Mineral distribution hypothesis?
+  - Assume:
+    - The Earth was once a hot liquid.
+    - The surface cooled down and solidified.
+  - Infer:
+    - Denser minerals should sink towards the core of Earth.
+    - As we dig deeper, the Earth should be more dense.
+- [[http://www.bgs.ac.uk/mineralsUK/mineralsYou/wheredo.html][Where do minerals come from?]]
+  - "Minerals are concentrated by igneous, sedimentary and metamorphic processes"
+  - [[https://en.wikipedia.org/wiki/Structure_of_the_Earth][WP:Structure of the Earth]]
+** Some chemistry ideas about carbon dioxide
+Break the bonds with electric arc, producing carbon and oxygen.
+
+CO2 -> ... -> C + O2
+
+Carbonatate[fn::https://en.wikipedia.org/wiki/Carbonatation] calcium oxide:[fn::https://www.sciencedirect.com/science/article/pii/S1385894714016763]
+
+CaO + CO2 -> ... -> CaCO3
+* TODO Discard?
 ** What is the difference between physics and chemistry?
 Compare physical chemistry[fn::https://en.wikipedia.org/wiki/Physical_chemistry]
 and chemical physics[fn::https://en.wikipedia.org/wiki/Chemical_physics].
@@ -3913,3 +3925,51 @@ What?
   - Mixture of water matter and salt matter?
 - [[https://en.wikipedia.org/wiki/Fick%27s_laws_of_diffusion][WP:Fick's laws of diffusion]], Adolf Fick, 1855
   - [[https://en.wikipedia.org/wiki/Adolf_Eugen_Fick][WP:Adolf Eugen Fick]] (1829--1901)
+** ? Proto-physics
+<2019-02-12>
+(Change of opinion.)
+
+There is no need to rediscover everything in the way our ancestors did.
+We have hindsight.
+We should exploit the full benefit of hindsight.
+But we should not trivialize the toil of our ancestors.
+
+(End of change of opinion.)
+
+Let's begin with very "wrong" ideas; we're "cheating" with our hindsight that our ancestors did not have.
+We will revise knowledge as we go.
+We will become less "wrong".
+
+We might will never be 0% wrong.
+But knowledge does not have to be 100% correct in order to be useful.
+*** Chemistry
+- Observe: A burning leaf stops burning if it's enclosed.
+- Observe: Food spoils. Food goes rancid.
+- [[https://physics.stackexchange.com/questions/259021/how-do-flames-neutralize-a-static-charge][Phys. SE 259021: How do flames neutralize a static charge?]]
+*** What
+- [[https://en.wikipedia.org/wiki/Buoyancy][WP:Buoyancy]]
+- Observe: Salt conducts electricity?
+*** What
+- Formal Physics
+  - [[https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4066961/][2012, article, "Physics and proof theory"]]
+- Unread
+  - [[https://en.wikipedia.org/wiki/History_of_science][WP:History of science]]
+  - Experiments
+    - https://www.explainthatstuff.com/great-physics-experiments.html
+    - https://www.quora.com/What-are-some-of-the-most-important-experiments-in-physics
+    - https://www.telegraph.co.uk/news/science/science-news/3341042/Top-ten-greatest-experiments.html
+    - https://www.space.com/36307-5-most-ingenious-experiments.html
+    - https://explorable.com/physics-experiments
+    - https://en.wikipedia.org/wiki/List_of_experiments#Physics
+    - https://en.wikipedia.org/wiki/Experimental_physics#Famous_experiments
+    - [[https://www.youtube.com/watch?v=HXLj5J4I1nY][de Sitter's Observations - Intro to Physics]]
+- Scientific theory
+  - https://en.wikipedia.org/wiki/Scientific_theory#Unification
+  - https://en.wikipedia.org/wiki/Superseded_scientific_theories#Physics
+- 1999, book, Roberto Torretti, "The philosophy of physics"
+- [[https://www.quora.com/Will-the-theories-of-relativity-and-quantum-mechanics-merge-With-what-result][Quora: Will the theories of relativity and quantum mechanics merge? With what result?]]
+- https://en.wikipedia.org/wiki/Scientific_Revolution
+- Define: Sundial.
+  - [[https://en.wikipedia.org/wiki/Sundial][WP:Sundial]]
+  - [[https://en.wikipedia.org/wiki/Analemma][WP:Analemma]];
+    solar analemma = figure eight pattern of the sun on the sky across the year
