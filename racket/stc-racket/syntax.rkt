@@ -43,6 +43,9 @@
 
         syntax-local-value
 
+        syntax-property
+        syntax-property-remove
+
         ;;  error reporting
 
         raise-syntax-error
