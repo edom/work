@@ -33,5 +33,7 @@
         stream-first
         stream-rest
         stream->list
+
+        stream-take
     )
 )

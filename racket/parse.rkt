@@ -1,4 +1,4 @@
-#lang s-exp "stc-racket.rkt"
+#lang stc-racket
 
 ;;  We want both parser and unparser, like in Rendel & Ostermann 2010
 ;;  "Invertible Syntax Descriptions: Unifying Parsing and Pretty Printing":
@@ -6,7 +6,10 @@
 
 ;;  Lazy-reading simplifies backtracking.
 
-(define-struct Event (content location) #:transparent)
+(define-struct-2 Event (content location) #:transparent)
+
+;;  This reads one char from port.
+;;  How do we do it without reading any char?
 
 (define (port->stream path port)
     (port-count-lines! port)

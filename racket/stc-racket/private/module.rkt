@@ -7,6 +7,7 @@
         (rename-out
             (module             define-module)
             (module*            define-module*)
+            (module+            define-module+)
         )
         provide
         require
