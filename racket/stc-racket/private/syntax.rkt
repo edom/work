@@ -1,6 +1,14 @@
-;;  syntax and macros
-
 (module stc-racket-syntax racket/base
+
+    ;;  --------------------    Syntax and macros.
+
+    (provide define-syntax-rules)
+
+    (define-syntax-rule (define-syntax-rules Name Literals Clause ...)
+        (define-syntax Name
+            (syntax-rules Literals Clause ...)
+        )
+    )
 
     (provide
 

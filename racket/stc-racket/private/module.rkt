@@ -1,6 +1,25 @@
-;;  Racket modules.
-
 (module stc-racket-module racket/base
+
+    ;;  --------------------    Racket modules.
+
+    (require "syntax.rkt")
+
+    (provide require+provide)
+
+    (define-syntax-rule (require+provide Module Import ...)
+        (begin
+            (require (only-in Module Import ...))
+            (imports->provide Import ...)
+        )
+    )
+
+        ;;  Helper for "require+provide".
+
+        (define-syntax-rules imports->provide ()
+            ((_ (Original Renamed))     (provide Renamed))
+            ((_ Original)               (provide Original))
+            ((_ Import ...)             (begin (imports->provide Import) ...))
+        )
 
     (provide
 

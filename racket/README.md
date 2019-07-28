@@ -1,11 +1,13 @@
+Welcome to Erik Dominikus's software garden.
+
 To run a file such as `test.rkt`:
 
 ```
-PLTCOLLECTS=$(pwd): racket test.rkt
+./racket.sh test.rkt
 ```
 
-To generate HTML documentation from a file such as `main.scrbl`:
+To generate HTML documentation from `doc/main.scrbl` to `_out/main.html`:
 
 ```
-PLTCOLLECTS=$(pwd): scribble +m --dest _out main.scrbl
+./racket.sh generate-docs.rkt
 ```

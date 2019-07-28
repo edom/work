@@ -71,6 +71,7 @@
         procedure-arity
         procedure-arity?
         procedure?
+        set!
 
         ;;  https://docs.racket-lang.org/reference/strings.html
 
@@ -119,6 +120,7 @@
         ;;  iteration and comprehension
 
         for
+        for/list
         in-list
         in-stream
 
@@ -126,9 +128,11 @@
 
         regexp-match-positions
         regexp-match
+    )
 
-        ;;  racket/pretty
+    (require "module.rkt")
 
+    (require+provide racket/pretty
         pretty-print
     )
 )

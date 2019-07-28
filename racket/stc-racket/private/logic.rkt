@@ -37,9 +37,13 @@
         %member
 
         %empty-rel
-        %more
         %rel
+
+        %find-all
+        %more
         %which
+
+        %let
 
         %nonvar
         %var

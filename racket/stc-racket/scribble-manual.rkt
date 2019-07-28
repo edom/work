@@ -1,7 +1,10 @@
 #lang racket/base
 
+(require (except-in scribble/manual/lang
+    section
+    subsection
+))
 (require
-    scribble/manual/lang
     "private/scribble-more.rkt"
     (for-label
         racket

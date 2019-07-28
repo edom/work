@@ -56,3 +56,13 @@
         (for-each list-for-each)
     )
 )
+
+;;;;    --------------------    Formatting.
+(require racket/format)
+(provide
+    ~a
+    ~v
+    ~s
+    ~e
+    ~r
+)
