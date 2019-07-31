@@ -2,6 +2,55 @@
 #+DATE: 2018-04-11 00:00 +0700
 #+OPTIONS: ^:nil toc:nil
 #+PERMALINK: /parse.html
+* Questions about notation
+What does the arrow in \( A \to BC \) mean?
+"Reduces to"?
+Should the arrow point left or right?
+* <2019-07-31> Begin with an unparser, and invert it?
+Idea:
+Can we write an unparser, and derive a parser?
+Because unparsing (Tree -> String) is easier than parsing (String -> Tree).
+
+Interesting article with very relevant introduction:
+\cite{danielsson2013correct} mentions \cite{matsuda2013flipprap}:
+#+BEGIN_QUOTE
+Matsuda and Wang (2013) attack the problem in a somewhat different way. They show how, starting from an extended pretty-printer,
+one can use program inversion techniques to automatically derive a
+parser that satisfies the round-tripping property (assuming that the
+underlying grammar is unambiguous). A typical pretty-printer does
+not contain enough information to construct a parser, so they introduce a biased choice operator [...]
+#+END_QUOTE
+
+String = Char*
+
+Node = (Type, String, Node*)
+
+#+BEGIN_EXAMPLE
+-- How do we invert this homomorphism?
+f (Append a b) = mappend (f a) (f b)
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+-- ???
+g Plus = "+"
+g Times = "*"
+
+-- How do we invert this function?
+f (Exp op a b) = g op <> " " <> f a <> " " <> f b
+#+END_EXAMPLE
+
+Inverting a binary function produces a ternary relation.
+* On the cause of the problem with left-recursion
+Parsers that associate parsing a sequence of nonterminals with calling a sequence of subroutines
+will fail for left-recursion or right-recursion or both.
+* Idea: incremental update of the set of all currently possible parse trees?
+* Procedural parsing?
+Parsing machine primitives:
+- Read the next character from the input port.
+- Set the input position.
+- Compare characters.
+
+How do those primitives compose?
 * <2019-04-20> The most elegant parsing method so far
 So far I think Prolog DCG (definite-clause grammar) is the most elegant,
 although still unsatisfactory due to its inability to handle left recursion,
