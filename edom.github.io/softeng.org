@@ -1,74 +1,161 @@
-#+TITLE: Software engineering
+#+TITLE: Towards software science
 #+DATE: 2018-04-11 00:00 +0700
 #+OPTIONS: ^:nil toc:nil
 #+PERMALINK: /softeng.html
 #+MATHJAX: true
-* Meanings
-** What is software?
+(The old title was "Software engineering".)
+* Introduction
+It would be nice if software engineering had predictive theories like Newton's laws of motion.
+* The object of study of software science
+Software science is a study of software.
+But what is software?
+** What do we mean by "software"?
+The word "software" appeared no later than Tukey 1958,[fn::http://www.historyofinformation.com/detail.php?entryid=936]
+and by it he meant the same thing that most people mean by "software" in 2019,
+that is, the intangible-but-vital choreography inside computers that makes them useful.
+
+The word "hardware" appeared no later than the 15th century in which it meant "small metal goods".
+The phrase "hardware store" appeared no later than 1789.[fn::https://www.etymonline.com/word/hardware?ref=etymonline_crossreference]
+
+What does "software" mean in 2019 English?
+
+The word "software" is a mass noun, which is uncountable.
+When one write "a software", one usually means to write "a program" instead.
+
+If we can list something, then it is described by a countable noun.
+There are abstract countable nouns,
+such as "invitation", "friend", "failure", and "achievement".
+There are concrete uncountable nouns, such as "water".
+
+We simply accept this syntactic idiosyncrasy as the cost of using English.
+This is a trivial syntactic inconvenience.
+Let us move on to more important semantic issues.
+
+Now we discuss ontology and mereology.
+
+"Software" and "hardware" are /disjoint/ categories:
+If something is software, it is not hardware;
+if something is hardware, it is not software.
+
+A computer is the sum of its hardware and its software.
+A computer consists of hardware, software, and nothing else.
+
+Thus, by "software", we actually mean "the /software part/ of all computers".
+"Software" is like "water":
+By saying "water exists",
+we actually mean "there exists an object that has the properties of water".
+
+But software is not purely abstract:
+It is stored in hardware as an arrangement of materials.
+But is that software or a /representation/ of software?
+
+What other things can be analyzed as a sum of hardware and software?
+Laws, choreographies, recipes.
+
+A /software house/ is a company that makes software.
+
+Why "hardware /store/" but "software /house/"?
+A software house is more like a blacksmith's workshop than a hardware store:
+Things can be /made-to-order/ in a blacksmith's workshop but not in a hardware store.
+Like "production house" for movies.
+
+/Hardware bridges software and reality./
+
+A piece of hardware is a concrete object that can be controlled by an abstract object (a piece of software).
+
+Software is an arrangement of matter (hardware) that makes the hardware useful.
+But must software have any purpose?
+
+Examples of programming:
+Designing mechanical linkages.
+We arrange matter so that it does something we want.
+** An analogy between hardware and dancers
 Software is to hardware as choreography is to dancers.
-Indeed a choreography is a software.
+Indeed choreographies /are/ software.
+Choreographies without dancers are dead ideas.
+Dancers without choreographies are useless matter.
+
+The dancers are the hardware,
+the choreography is the software,
+and the entire performance is the running computer.
+** Computer vs running computer
+A computer has software, but is the computer running?
+** What?
+Software is an arrangement of matter (hardware).
+
+Software has existed for millenniums.[fn::https://en.wikipedia.org/wiki/History_of_software]
+
+Software is executable abstract object?
 
 Software is program, documents, configuration, and so on.
-
-Programs, laws, choreographies, and recipes are software.
-
-Minds are software.
 
 Software is abstract object.
 
 Software is executable mathematics.
 
 Software is an idea.
+** Examples of software
+Programs, laws, choreographies, and recipes are software.
 
-Is software and hardware disjoint?
-But the design of a hardware is a software?
+Minds are software?
 
-The first written use of the word "software" goes back to Tukey 1958.[fn::http://www.historyofinformation.com/detail.php?entryid=936]
+** Programs?
+Programs used to mean "public notice".[fn::https://www.etymonline.com/search?q=program]
+Authorities wrote programs to inform the public so that people behave accordingly.
 
-Zeller in ICSE 2018 presentation[fn::https://www.youtube.com/watch?v=U5jLjcxnwfU&list=FLVLsoyeokV21f0G7Z39gEUQ]
-points out that Begel & Zimmermann 2014 survey \cite{begel2014analyze} contains questions that can stimulate software engineering research.
-** What is programming?
+What is programming?
 Programming is forcing.
 X programs Y to do Z iff X forces Y to do Z.
-** What can be programmed?
+
+What can be programmed?
 People are programmable to some extent.
 We program people when we ask them to do something.
-
 Software development process itself is also programmable to some extent.
-** What is engineering?
-Engineering is the application of science?
+* Science and engineering
+** Engineering as applied science
+Engineering is the /application/ of science.
 
 Engineering consists of design, modeling, calculation, application of science, and turning all those plans into reality.
 
-Engineering is tradeoff, compromise.
-
-It's always cost versus everything else?
+Engineering is tradeoff, compromise, optimization with respect to constraints,
+such as physical constraints and economic constraints.
 
 Engineering implies design goals, tradeoffs, and decisions.
 
-Engineering does not inherently mean involving many people.
+Engineering does not inherently involve many people.
 A one-man engineering project is an engineering project.
 It is the methodology that makes it engineering, not the amount of people involved in it.
-Given, when many people are involved,
-some methodology has to exist in order to ensure that progress is even possible.
+However, when many people are involved,
+some methodology has to exist in order to ensure that any progress is even possible at all.
 
 To engineer something is to scientifically force something.
 
-You are actually three people:
-your past self, your present self, and your future self.
-
 Inability to maintain our past works is a sign of engineering failure.
-** What is software engineering?
-X engineering involves the design of X.
+A person is actually three people:
+his past self, his present self, and his future self.
 
-Material engineering involves the design of materials.
+"Science" simply meant "knowledge".[fn::https://www.etymonline.com/search?q=science]
+What is knowledge?
+There are at least two theories of knowledge:
+- Popper: science is a falsifiable belief.
+  That means, the belief must be such that it is possible to design an experiment
+  that disproves the belief.[fn::https://en.wikipedia.org/wiki/Falsifiability]
+- Plato: knowledge is justified true belief
 
-Chemical engineering involves the design of chemicals.
+(Do we need to dive into epistemology here?)
 
-Civil engineering involves the design of civil structures.
-
-Software engineering involves the design of software.
+What is a scientific theory?
+A scientific theory is a theory that is falsifiable, has explanatory power, and has predictive power.
+** What does an engineer do?
+A civil engineer plans the materials according to the physical load that the structure is expected to withstand.
+The software engineer's analog is capacity planning of the computational resources
+according to the computational load that the software is expected to withstand.
+* Software science
 ** What is the science of software engineering?
+If a branch of engineering is an application of a branch of science,
+then what branch of science is applied in software engineering?
+What is software science?
+
 Civil engineering is the application of natural science (especially physics) to build civil structures
 such as bridges, buildings, dams, roads, and other many things used by civilizations.
 
@@ -79,23 +166,443 @@ Software engineering is the application of computer science?
 
 2018 slides "What would a science of software engineering look like?"
  [fn::http://herbsleb.org/web-pres/slides/crowd-chase-2018-final-dist.pdf]
-** What is science?
-Science is knowledge.
+** Mathematics as a domain-specific language for science?
+Mathematics is more like a domain-specific language than a branch of science.
+Mathematics is a language optimized for abstract thinking?
+** Where is software science?
+https://ubiquity.acm.org/article.cfm?id=2590529
 
-What is knowledge?
-Do we want to dive into philosophy (especially epistemology) here?
+https://services.math.duke.edu/undergraduate/Handbook96_97/node5.html
 
-There are at least two theories of knowledge:
-- Popper: science is a falsifiable belief.
-  That means, the belief must be such that it is possible to design an experiment
-  that disproves the belief.[fn::https://en.wikipedia.org/wiki/Falsifiability]
-- Plato: knowledge is justified true belief
-** What is a scientific theory?
-A scientific theory is a theory that is falsifiable, has explanatory power, and has predictive power.
-** What does an engineer do?
-A civil engineer plans the materials according to the physical load that the structure is expected to withstand.
-The software engineer's analog is capacity planning of the computational resources
-according to the computational load that the software is expected to withstand.
+The abstract-object counterpart of concrete-object physics
+How do we apply the scientific method to the study of abstract objects?
+To anything?
+
+If engineering is an application of science, what is the science that is applied in software engineering?
+
+We need something like Newton's laws of motions for software dynamics that will enable us to predict things.
+
+What should be the object of study of software science?
+Software?
+What is software?
+A model of reality?
+A model.
+
+Software dynamics?
+Science of bottlenecks? Queuing theory.
+
+If computer science is science, where are the falsifiable theories and the experiments?
+
+A software is a model of reality.
+
+Which branch of science studies models?
+
+Which branch of science studies abstract objects?
+None.
+All branches so far are materialistic.
+They study concrete objects.
+
+What experiments can be done with abstract objects?
+Besides thought experiments?
+
+We can experiment with a program: We can stress-test it to figure out its maximum load (the maximum number of requests it can handle per second without errors), in a similar way we stress-test a steel bar to figure out its maximum load (the maximum force it can withstand without breaking).
+Benchmark games are similar to tables of material strengths.
+
+We can experiment with abstract objects.
+For example, we can test software, we can test ideas.
+The problem is that each piece of software creates its own branch of science that is not transferable to other pieces of software.
+For example, knowledge of word processors is not applicable to accounting information systems.
+It is as if there were different Newton's laws of motion for cars, bikes, rocks, and other things.
+We need a science of all software, not just a particular software.
+
+What does science do with its object of study?
+Come up with a predictive theory and experiments to falsify it.
+
+Science comes from Latin "scientia" which simply means "knowledge",
+but "science" is the application of the scientific method,
+the formulation of theories with explanatory and predictive power,
+and the experimentation to falsify such theories.
+
+Before science can even exist, the language must first exist.
+We must first invent the terms, name the objects, and form the ontology.
+We must first find out what to talk about.
+We must first define the object of study.
+** Why has mathematics not revolutionized biology or software engineering?
+Is it due to the nature of biology or software engineering?
+
+Or I don't know that it has?
+
+https://www.ams.org/notices/201510/rnoti-p1172.pdf
+** The object of study
+The object of study may be software itself, or an aspect of software, such as requirements, capacity, complexity, performance.
+** Good laws, enforceability, and unintended consequences
+Good laws are:
+1. enforceable, and
+1. have minimal unintended consequences.
+
+Human laws are programs executed by humans.
+The nature of human laws is the same as computer programs,
+The difference is that humans mostly follow the spirit of the law,
+and computers always follow the letter of the law.
+
+Example:
+Banning smoking is not practical to enforce: Are you going to put a cop in each building?
+Banning prostitution is not enforceable: Are you going to put a cop in each building?
+
+I hypothesize that the principles of good software engineering is applicable to good legal engineering.
+Lawmakers are legal engineers.
+They should have engineering background.
+They engineer the lives of lots of people and the future of nations.
+
+When a surgeon fails, he injures one people.
+When a car driver fails, he injures ten people.
+When a lawmaker fails, he injures millions of people.
+Then why do we insist on lower standards for our lawmakers than for our surgeons?
+Why do we elect clueless clowns and self-enriching thiefs into the government?
+** <2019-08-11> "Computer science" should be renamed to "software science"
+It is unfortunate that "Oh, you're a computer scientist? So you can fix my computer?"
+
+We don't study computers.
+We study software.
+
+Universities should merge law departments and computer science departments into software departments.
+* Subfields of software science?
+** Turing?
+Turing's theory is about computation, not software.
+** Software complexity theory
+Essential complexity = Kolmogorov complexity = the length of the shortest description of the software.
+The description must contain enough information for clean-room-reimplementation
+by another software engineer without any communication to the requirement analyst.
+
+Accidental complexity = a measure of the apparent size of the software;
+number of syntax objects (abstract-syntax-tree nodes),
+number of lines of code.
+
+** Essential complexity theory
+Here we are interested in a measure of complexity, the cognitive load of understanding the software?
+
+Kolmogorov complexity.
+
+The complexity of a software system is the length of the shortest description of that system.
+The description must be such that someone else can recreate the system from only the description.
+
+Example: a formula that describes a program that checks whether a list \(x\) is ordered according to the ordering \(\le\).
+
+\( \forall i \forall j ( i \le j \implies x_i \le x_j ) \)
+
+The formula can then be fed to descriptive complexity theory in order to determine the minimum possible resources required to implement the system.
+For example, it is a well-known fact in computer science that comparison-sort of an array of \( n \) elements require \( \Omega(n log n) \) time.
+
+If something takes \( t \) seconds to finish, then doing it \( n \) times takes \( n \cdot t \) seconds to finish.
+
+That should also work under uncertainty:
+If something takes \( t \) seconds to finish /on average/,
+then doing it \( n \) times takes \( n \cdot t \) seconds to finish /on average/.
+But telling the whole truth requires knowing the shape of the distribution, not only the mean.
+** Descriptive complexity theory
+Descriptive complexity theory is deep:
+It puts a lower bound on the solutions of problems regardless of the machines that implement those solutions.
+It is due to the inherent/essential complexity in logic itself,
+and not due to accidental complexity of the machine implementation.
+
+In software engineering, the results of computational complexity theory are used for capacity planning, for example,
+that the lower time bound of comparison sorting is quasilinear[fn::<2019-08-11> https://en.wikipedia.org/wiki/Time_complexity#Quasilinear_time].
+This enables us to calculate the number of processors and the amount of memory, from the number of requests we expect to serve.
+
+In reality, what is important is the actual number of seconds
+that users are willing to wait for computations with expected input sizes.
+** Capacity planning theory
+The mathematics of basic bottleneck science is simple:
+It is only basic arithmetics (addition, subtraction, multiplication, and division).
+If one wants more details, one can resort to queuing theory,
+but capacity planning can be done with simple basic arithmetics,
+without the full power of queuing theory[fn::https://en.wikipedia.org/wiki/Queueing_theory].
+** Programming science
+Lambda calculus can be a model of computer programs, but how do we experiment, and what should we falsify?
+** Software development science
+Software engineering is hard because it requires the engineer to estimate estimations.
+
+We often want to estimate how long it takes to implement something.
+
+But the estimation itself can only be done by doing the thing,
+because software development is full of unforeseeable roadblocks,
+because that software does not fit in our working memory.
+(How do we know that a library cannot do something?
+We have to try and find it out the hard way.
+Unfortunately that's the only way.)
+
+So we try.
+
+Thus we estimate how long it takes us to come up with a probable estimation.
+
+Thus software engineering is second-order estimation.
+
+Example:
+To estimate how long it takes to do X:
+- Try doing X for a week.
+- See how much is actually done.
+- Extrapolate.
+
+This estimation should be much more accurate than pure guessing.
+
+Thus the proper answer to "How long will it take?" is "It will take a week for me to come up with an estimation."
+
+We estimate that it will take us a week to come up with an estimation.
+
+It's hard to estimate how much time is required to implement something,
+because we need to estimate how long it takes to estimate.
+
+The only known way to estimate software development time is by extrapolating:
+Try developing it for a month, measure the accomplishments, and extrapolate from there.
+
+Is it simpler in civil engineering?
+If you know that laying one brick takes 10 seconds,
+then you know that laying 1,000 bricks takes 10,000 seconds,
+but that is an oversimplification:
+Some civil engineering projects are also late,
+such as Jakarta mass rapid transport,
+but is it a political issue or an engineering issue?
+** Specification theory
+A /specification/ is a logical formula in conjunctive normal form with at least one positive clause (literal?).
+** Science of models
+How do we measure a model's quality/fidelity, and with respect to what purpose?
+** Science of software changes
+It is obvious that software has inertia, and bigger software is harder to change.
+
+Suppose that we have a system \( S \) that satisfies the logical formula \( \phi \),
+and we want to change \( S \) to \( S' \) that satisfies \( \phi' \).
+How much is the effort?
+It seems that the effort cannot be deduced from the logical formula alone.
+
+It is possible to make two programs that satisfy the same logical formula (have the same observable behavior) but have widely different source codes.
+** States
+All practical systems have memory.
+
+All systems that have memory are stateful.
+
+Thus, we have to learn to live with states.
+** Human aspects
+Complexity increases the probability of mistakes/disasters due to a mismatch between human mental models and the actual reality.
+
+Examples[fn::<2019-08-12> https://monzo.com/blog/2019/09/08/why-monzo-wasnt-working-on-july-29th].
+* Software engineering
+** What is software engineering?
+X engineering involves the design of X.
+
+Material engineering involves the design of materials.
+
+Chemical engineering involves the design of chemicals.
+
+Civil engineering involves the design of civil structures.
+
+Software engineering involves the design of software.
+** What is software engineering?
+*** Ontology and jargon
+A /language/ is something that has syntax (form) and semantics (meaning).
+
+A language enables its users to /communicate/ with each other.
+
+A language is formed by the agreements of its users.
+
+A /formal language/ ...
+
+A /programming language/ is a formal language that is used for programming (a machine).
+
+To program a machine is ...?
+
+A /program/ is a formula/string/term in a programming language?
+
+A machine can be modeled by a formal system.
+
+A program is an executable mathematical object?
+*** <2018-09-25> Software is broken and bloated
+- [[http://tonsky.me/blog/disenchantment/][Software disenchantment @ tonsky.me]]
+- [[https://www.hanselman.com/blog/EverythingsBrokenAndNobodysUpset.aspx][Scott Hanselman: "Software doesn't work. I'm shocked at how often we put up with it."]]
+*** Why is hardware more standardized than software?
+Hardware standardization benefits everyone (both its makers and its users).
+Hardware unstandardization is more expensive than hardware standardization.
+
+Software standardization is more expensive than software unstandardization.
+
+Is software too malleable?
+
+Hardware engineers have standard nuts, bolts, connectors, and components.
+
+Why standardize?
+
+- standardization reduces cost
+- standardization reduces duplicate effort
+- standardization improves interoperability
+
+Hypothesis:
+Programming language is too free.
+If programming language is limited (that is, if there is only one way to do one thing),
+then software will standardize itself.
+
+There are some software standards, such as ABIs (Application Binary Interfaces).
+C calling convention is a standard.
+*** How do we write lasting software?
+- Clear ontology
+- Task-oriented documentation
+  - Documentation doesn't have to be separate from code.
+- /Capture/ the requirement.
+  Translate the requirement into software, instead of making a software system that /satisfies/ the requirement.
+  - The program may be rewritten, but the functional requirements, the business logic and the mathematical truths rarely change.
+    - In order to make software last, we must /capture/ the requirements, not make a system that satisfies the requirements.
+      This requires a change in mindset.
+      The software is not something made to some requirements; the software is the requirements itself.
+      The software is not the shirt made-to-order; the software is the order itself, from which all satisfying shirts can be generated/derived/produced.
+- Think for yourself.
+  Don't just follow hypes.
+  Always have a reason when doing things.
+  Record your reasoning for your forgetful future self.
+- Design software to be refactored without surprises.
+  - Example: Avoid runtime reflection (unless for the most obvious cases).
+    An alternative to that is code generation.
+    - Help the compiler help you.
+    - Even the most obvious cases aren't obvious to someone who see the code for the first time?
+- Shorten the edit-compile-test cycle. Design software so that it compiles fast and it starts up fast.
+- What else?
+*** Complexity
+**** Renaat Verbruggen: Three universal methods of reducing complexity: partitioning, hierarchy, independence
+- [[http://www.computing.dcu.ie/~renaat/ca2/ca214/ca214vii.html][Renaat Verbruggen: Three universal methods of reducing complexity]]: partitioning, hierarchy, independence
+  - It also applies to other things, such as organizing this wiki.
+**** How complex systems fail?
+- 2000, article, "How complex systems fail", [[http://web.mit.edu/2.75/resources/random/How%20Complex%20Systems%20Fail.pdf][pdf]]
+*** Defining software complexity as the length of the shortest first-order-logic formula that describes it?
+Every software can, in principle, be described by a first-order-logic formula that describes the requirements satisfied or behaviors exhibited by the system.
+**** What is complexity?
+- [[https://fs.blog/2014/03/what-is-complexity/][Farnam Street blog post]]
+- [[http://www.hartford.edu/complexity/whats-complexity.aspx][What Is 'Complexity'? | University of Hartford]]
+- Measuring software complexity by hits-of-code instead of lines-of-code
+  https://www.yegor256.com/2014/11/14/hits-of-code.html
+*** Unpopular opinions
+- https://www.quora.com/What-unpopular-opinions-do-you-have-about-software-development
+*** Who reads SWEBOK? How can we read SWEBOK? Who reads all of it? Why does anyone bother writing it?
+- https://en.wikipedia.org/wiki/Software_Engineering_Body_of_Knowledge
+- http://www.sebokwiki.org/wiki/An_Overview_of_the_SWEBOK_Guide
+  - <2017-04-27>
+    Someone claims to have read it.[fn::https://www.quora.com/Do-you-use-SWEBOK-Is-it-helpful]
+    Holy shit.
+
+Fowler 2003[fn::https://martinfowler.com/bliki/Swebok.html] points out the problems with SWEBOK.
+
+http://beamphys.triumf.ca/info/SWEBOKv3.pdf
+*** Coupling
+- Coupling is deciding what you can depend on.
+  - Big Company X just released this new cool stuff, but will it still be there in 5 years?
+*** Testing
+**** If proving is cheap, prove it instead of testing it.
+**** Amount of testing should be proportional to risk.
+- How do we make code testable?
+  - Minimize its dependencies.
+  - Minimize the number of things that you must set up before you can run it.
+  - Why?
+    - If you don't satisfy all its dependencies, you can't run it.
+    - If you can't run it, you can't test it.
+    - If your business logic depends on the database, you'll have to set up a database to test your business logic.
+- What do we need to test?
+  - Testing is proportional to risk.
+    - Riskier code should be tested more.
+      - "Risk comes from not knowing what you're doing." (Warren Buffett)
+        - Buffett said that for investing, but it also applies to programming.
+  - If it's obvious, don't test it. (Getters, setters, and DAOs without fancy logic)
+  - If you can prove it, don't test it.
+*** TODO Compare programming language research journals and conferences
+Which ones should we care about?
+Which ones are the real deal?
+**** Conferences
+- ICFP: The ACM SIGPLAN International Conference on Functional Programming
+- OOPSLA: ACM SIGPLAN Object-Oriented Programming, Systems, Languages & Applications
+https://en.wikipedia.org/wiki/OOPSLA
+- PLDI: ACM SIGPLAN Programming Language Design and Implementation
+http://www.sigplan.org/Conferences/PLDI/
+- POPL: ACM SIGPLAN Principles of Programming Languages
+http://www.sigplan.org/Conferences/POPL/
+**** Proceedings
+- PACMPL: Proceedings of the ACM on Programming Languages
+**** DBLP vs Semantic Scholar?
+https://dblp.uni-trier.de/
+*** Software engineer associations
+- Indonesia
+  - [[http://sarccom.org/][SARCCOM Software architect Indonesia community]]
+  - [[http://www.aspiluki.or.id/][ASPILUKI Asosiasi Piranti Lunak Telematika Indonesia]]
+- International?
+*** Software business model
+- Hardware is moved.
+- Software is /copied/, not moved.
+- When you sell hardware, you /transfer/ ownership. The hardware doesn't multiple into two.
+- There are two models:
+  - SaaS (software as a service, a web application; you control the hardware that runs the software, but not the input and output of the process)
+  - bundling software with restricted hardware (Apple iPhone)
+- Controlling software requires controlling the hardware that runs it.
+  - Controlling the law requires controlling the lawmakers and the law enforcers.
+- Isn't it absurd to judge a crime by its potentiality not its actuality?
+- Process is software. Law is software.
+- The chemical process in a chemical plant is also software, but not everyone owns a chemical plant.
+  - If you hire a chemical engineer to design and implement your chemical plant's process, does he own the rights to the process?
+  - If you hire a software engineer to design and implement your computer's operating system, does he own the rights to the operating system?
+
+Ownership is the ability to control access.
+To own a thing is to be able to control the access to that thing.
+
+- It is easy to control access to hardware. Nature/physics is with us on this issue.
+- It isn't easy to control access to software.
+
+- https://medium.com/@mattklein123/the-broken-economics-of-oss-5a1b31fc0182
+*** Measuring software quality?
+- https://cs.stackexchange.com/questions/47077/is-there-a-way-of-objectively-measuring-the-efficiency-or-quality-of-software-or
+*** Programming language quality?
+- https://medium.com/@richardeng/how-to-measure-programming-language-complexity-afe4f7e75786
+- https://medium.com/concerning-pharo/elegant-pharo-code-bb590f0856d0
+*** Technical writing, software documentation
+- https://www.divio.com/blog/documentation/:
+"Documentation needs to include and be structured around its *four different functions*: /tutorials, how-to guides, explanation and technical reference/.
+Each of them *requires a distinct mode of writing*."
+*** TODO Who said this "pit of success"? It was someone on the Internet.
+- Write code that makes your client/user/reader (another programmer who uses your code) fall into the pit of success.
+- Corollary: Principle of least astonishment.
+- Corollary: Write code that a programmer can understand with an IDE without having to read much documentation.
+- Corollary: Group data and methods that need those data together in one class.
+- Can that principle derive these principles? http://c2.com/cgi/wiki?PrinciplesOfObjectOrientedDesign
+- You can write maintainable and reliable procedural code?
+** What is software engineering?
+- Engineering is the application of science.
+- Civil engineering is the application of natural science.
+- Software engineering is the application of computer science.
+- What is science?
+  - Science is the application of the scientific method.
+  - Science is a mixture of philosophy, mathematics, and experiments.
+- What is software?
+  - chapter, "What is software?: The role of empirical methods in answering the question", [[https://link.springer.com/chapter/10.1007/978-3-319-73897-0_4][description]], [[https://link.springer.com/content/pdf/10.1007%2F978-3-319-73897-0_4.pdf][pdf]]
+    - "Legislation is (like?) software development."
+    - "[Cooking] Recipes are software."
+  - The ideal software is easy to change but doesn't change.
+    The ideal software captures the essence of the problem.
+    The essence of a problem is mathematical definitions.
+    Mathematical definitions aren't supposed to change.
+  - Software is a model of reality.
+  - Software is law?
+    Law is software?
+    - Similarity between software and law
+      - Bad software and bad law both result in unnecessarily slow system.
+      - Both are based on logic.
+      - Both have an ontology.
+      - The law of a country is a big (possibly inconsistent) logic program.
+        - The law in writing vs the law in practice
+          - I think it is too much for anyone to know all laws that are in effect in a country.
+    - Difference between software and law
+      - A judge cares about both the letter of the law and the spirit of the law.
+      - A computer cares only about the letter of the software.
+        There is no such thing as the spirit of the software.
+        - A computer does what we write, not what we mean.
+          - The programmer follows the computer's rules. Not the other way around.
+      - [[https://en.wikipedia.org/wiki/Letter_and_spirit_of_the_law][WP:Letter and spirit of the law]]
+  - Software is executable theory of nature.
+  - Software is like physics but executable.
+  - https://queue.acm.org/detail.cfm?id=2693160
+  - https://www.cs.umn.edu/research/research_areas/software-engineering-and-programming-languages
+    - "Software is a solution to a computational problem using a formal programming language."
 ** What is the difference between a programmer and a software engineer?
 The difference is in the amount of complexity that they can handle,
 the amount of foresight they make.
@@ -199,6 +706,24 @@ A typo in the source code is not a bug.
   discarding irrelevant aspects.
 ** Principles are just heuristics
 Heuristics are rule-of-thumbs, not absolute truth.[fn::https://programmingisterrible.com/post/176657481103/repeat-yourself-do-more-than-one-thing-and]
+** What are the ICSE most influential articles?
+[[http://www.icse-conferences.org/mostinfluential.html][ICSE (International Conference on Software Engineering) most influential articles]]
+- "ICSE is the flagship conference of [software engineering] [...]." ([[http://www.gousios.org/blog/Report-from-ICSE-2017.html][Georgios Gousios]])
+  - 2008, article, "Debugging Reinvented: Asking and Answering Why and Why Not Questions About Program Behavior ICSE-30"
+    - https://www.cs.cmu.edu/~NatProg/whyline.html
+    - https://github.com/andyjko/whyline
+  - 2012, slides, "Connecting Software Architecture to Implementation: The Next 10 Years", [[http://www.cs.cmu.edu/~aldrich/presentations/aldrich-icse-mip-2012.pdf][pdf]]
+    - 2002, article, "ArchJava: Connecting Software Architecture to Implementation", [[https://www.ics.uci.edu/~andre/informatics223s2009/aldrichchambersnotkin.pdf][pdf]]
+  - 1997, article, "Software processes are software too, revisited", [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.148.7620&rep=rep1&type=pdf][pdf]]
+    - 1987, article, "Software processes are software too", [[http://laser.cs.umass.edu/techreports/1987-LJO.pdf][pdf]]
+** Software engineering research, advances in software engineering?
+- http://www.sigsoft.org/events.html
+- http://homepage.divms.uiowa.edu/~slonnegr/plf/Book/Chapter7.pdf
+
+Zeller in ICSE 2018 presentation[fn::https://www.youtube.com/watch?v=U5jLjcxnwfU&list=FLVLsoyeokV21f0G7Z39gEUQ]
+points out that Begel & Zimmermann 2014 survey \cite{begel2014analyze} contains questions that can stimulate software engineering research.
+** What is the relationship between software and computation?
+* What?
 ** How do we write correct software?
 *** What is correct?
 Correct with respect to what?
@@ -417,177 +942,6 @@ It makes sense to invest ten million dollars testing to avoid a 1/100 probabilit
 *** Symbolic execution
 Chris Meudec[fn::http://tinyurl.com/y42eyfkp][fn::http://www.echancrure.eu].
 Prolog constraint solving for C/Java testing.
-** What is software engineering?
-*** Ontology and jargon
-A /language/ is something that has syntax (form) and semantics (meaning).
-
-A language enables its users to /communicate/ with each other.
-
-A language is formed by the agreements of its users.
-
-A /formal language/ ...
-
-A /programming language/ is a formal language that is used for programming (a machine).
-
-To program a machine is ...?
-
-A /program/ is a formula/string/term in a programming language?
-
-A machine can be modeled by a formal system.
-
-A program is an executable mathematical object?
-*** <2018-09-25> Software is broken and bloated
-- [[http://tonsky.me/blog/disenchantment/][Software disenchantment @ tonsky.me]]
-- [[https://www.hanselman.com/blog/EverythingsBrokenAndNobodysUpset.aspx][Scott Hanselman: "Software doesn't work. I'm shocked at how often we put up with it."]]
-*** Why is hardware more standardized than software?
-Hardware standardization benefits everyone (both its makers and its users).
-Hardware unstandardization is more expensive than hardware standardization.
-
-Software standardization is more expensive than software unstandardization.
-
-Is software too malleable?
-
-Hardware engineers have standard nuts, bolts, connectors, and components.
-
-Why standardize?
-
-- standardization reduces cost
-- standardization reduces duplicate effort
-- standardization improves interoperability
-
-Hypothesis:
-Programming language is too free.
-If programming language is limited (that is, if there is only one way to do one thing),
-then software will standardize itself.
-
-There are some software standards, such as ABIs (Application Binary Interfaces).
-C calling convention is a standard.
-*** How do we write lasting software?
-- Clear ontology
-- Task-oriented documentation
-  - Documentation doesn't have to be separate from code.
-- /Capture/ the requirement.
-  Translate the requirement into software, instead of making a software system that /satisfies/ the requirement.
-  - The program may be rewritten, but the functional requirements, the business logic and the mathematical truths rarely change.
-    - In order to make software last, we must /capture/ the requirements, not make a system that satisfies the requirements.
-      This requires a change in mindset.
-      The software is not something made to some requirements; the software is the requirements itself.
-      The software is not the shirt made-to-order; the software is the order itself, from which all satisfying shirts can be generated/derived/produced.
-- Think for yourself.
-  Don't just follow hypes.
-  Always have a reason when doing things.
-  Record your reasoning for your forgetful future self.
-- Design software to be refactored without surprises.
-  - Example: Avoid runtime reflection (unless for the most obvious cases).
-    An alternative to that is code generation.
-    - Help the compiler help you.
-    - Even the most obvious cases aren't obvious to someone who see the code for the first time?
-- Shorten the edit-compile-test cycle. Design software so that it compiles fast and it starts up fast.
-- What else?
-*** Complexity
-**** Renaat Verbruggen: Three universal methods of reducing complexity: partitioning, hierarchy, independence
-- [[http://www.computing.dcu.ie/~renaat/ca2/ca214/ca214vii.html][Renaat Verbruggen: Three universal methods of reducing complexity]]: partitioning, hierarchy, independence
-  - It also applies to other things, such as organizing this wiki.
-**** How complex systems fail?
-- 2000, article, "How complex systems fail", [[http://web.mit.edu/2.75/resources/random/How%20Complex%20Systems%20Fail.pdf][pdf]]
-*** Defining software complexity as the length of the shortest first-order-logic formula that describes it?
-Every software can, in principle, be described by a first-order-logic formula that describes the requirements satisfied or behaviors exhibited by the system.
-**** What is complexity?
-- [[https://fs.blog/2014/03/what-is-complexity/][Farnam Street blog post]]
-- [[http://www.hartford.edu/complexity/whats-complexity.aspx][What Is 'Complexity'? | University of Hartford]]
-- Measuring software complexity by hits-of-code instead of lines-of-code
-  https://www.yegor256.com/2014/11/14/hits-of-code.html
-*** Unpopular opinions
-- https://www.quora.com/What-unpopular-opinions-do-you-have-about-software-development
-*** Who reads SWEBOK? How can we read SWEBOK? Who reads all of it? Why does anyone bother writing it?
-- https://en.wikipedia.org/wiki/Software_Engineering_Body_of_Knowledge
-- http://www.sebokwiki.org/wiki/An_Overview_of_the_SWEBOK_Guide
-  - <2017-04-27>
-    Someone claims to have read it.[fn::https://www.quora.com/Do-you-use-SWEBOK-Is-it-helpful]
-    Holy shit.
-
-Fowler 2003[fn::https://martinfowler.com/bliki/Swebok.html] points out the problems with SWEBOK.
-
-http://beamphys.triumf.ca/info/SWEBOKv3.pdf
-*** Coupling
-- Coupling is deciding what you can depend on.
-  - Big Company X just released this new cool stuff, but will it still be there in 5 years?
-*** Testing
-**** If proving is cheap, prove it instead of testing it.
-**** Amount of testing should be proportional to risk.
-- How do we make code testable?
-  - Minimize its dependencies.
-  - Minimize the number of things that you must set up before you can run it.
-  - Why?
-    - If you don't satisfy all its dependencies, you can't run it.
-    - If you can't run it, you can't test it.
-    - If your business logic depends on the database, you'll have to set up a database to test your business logic.
-- What do we need to test?
-  - Testing is proportional to risk.
-    - Riskier code should be tested more.
-      - "Risk comes from not knowing what you're doing." (Warren Buffett)
-        - Buffett said that for investing, but it also applies to programming.
-  - If it's obvious, don't test it. (Getters, setters, and DAOs without fancy logic)
-  - If you can prove it, don't test it.
-*** TODO Compare programming language research journals and conferences
-Which ones should we care about?
-Which ones are the real deal?
-**** Conferences
-- ICFP: The ACM SIGPLAN International Conference on Functional Programming
-- OOPSLA: ACM SIGPLAN Object-Oriented Programming, Systems, Languages & Applications
-https://en.wikipedia.org/wiki/OOPSLA
-- PLDI: ACM SIGPLAN Programming Language Design and Implementation
-http://www.sigplan.org/Conferences/PLDI/
-- POPL: ACM SIGPLAN Principles of Programming Languages
-http://www.sigplan.org/Conferences/POPL/
-**** Proceedings
-- PACMPL: Proceedings of the ACM on Programming Languages
-**** DBLP vs Semantic Scholar?
-https://dblp.uni-trier.de/
-*** Software engineer associations
-- Indonesia
-  - [[http://sarccom.org/][SARCCOM Software architect Indonesia community]]
-  - [[http://www.aspiluki.or.id/][ASPILUKI Asosiasi Piranti Lunak Telematika Indonesia]]
-- International?
-*** Software business model
-- Hardware is moved.
-- Software is /copied/, not moved.
-- When you sell hardware, you /transfer/ ownership. The hardware doesn't multiple into two.
-- There are two models:
-  - SaaS (software as a service, a web application; you control the hardware that runs the software, but not the input and output of the process)
-  - bundling software with restricted hardware (Apple iPhone)
-- Controlling software requires controlling the hardware that runs it.
-  - Controlling the law requires controlling the lawmakers and the law enforcers.
-- Isn't it absurd to judge a crime by its potentiality not its actuality?
-- Process is software. Law is software.
-- The chemical process in a chemical plant is also software, but not everyone owns a chemical plant.
-  - If you hire a chemical engineer to design and implement your chemical plant's process, does the chemical engineer own the rights to the process?
-  - If you hire a software to design and implement your computer's operating system, does the software engineer own the rights to the operating system?
-
-Ownership is the ability to control access.
-To own a thing is to be able to control the access to that thing.
-
-- It is easy to control access to hardware. Nature/physics is with us on this issue.
-- It isn't easy to control access to software.
-
-- https://medium.com/@mattklein123/the-broken-economics-of-oss-5a1b31fc0182
-*** Measuring software quality?
-- https://cs.stackexchange.com/questions/47077/is-there-a-way-of-objectively-measuring-the-efficiency-or-quality-of-software-or
-*** Programming language quality?
-- https://medium.com/@richardeng/how-to-measure-programming-language-complexity-afe4f7e75786
-- https://medium.com/concerning-pharo/elegant-pharo-code-bb590f0856d0
-*** Technical writing, software documentation
-- https://www.divio.com/blog/documentation/:
-"Documentation needs to include and be structured around its *four different functions*: /tutorials, how-to guides, explanation and technical reference/.
-Each of them *requires a distinct mode of writing*."
-*** TODO Who said this "pit of success"? It was someone on the Internet.
-- Write code that makes your client/user/reader (another programmer who uses your code) fall into the pit of success.
-- Corollary: Principle of least astonishment.
-- Corollary: Write code that a programmer can understand with an IDE without having to read much documentation.
-- Corollary: Group data and methods that need those data together in one class.
-- Can that principle derive these principles? http://c2.com/cgi/wiki?PrinciplesOfObjectOrientedDesign
-- You can write maintainable and reliable procedural code?
-
 ** Why does software have security holes?
 Software has security holes because:
 1. Languages makes it too hard to do the right thing.
@@ -602,57 +956,6 @@ What is authentication and authorization?
 "A Taxonomy of Causes of Software Vulnerabilities in Internet Software"
 https://pdfs.semanticscholar.org/5ec6/93950d1e6039e04a7b86a488e816ddcdd82e.pdf
 "software developers are making the same mistakes over and over again"
-** Why has mathematics not revolutionized biology or software engineering?
-** What are the ICSE most influential articles?
-[[http://www.icse-conferences.org/mostinfluential.html][ICSE (International Conference on Software Engineering) most influential articles]]
-- "ICSE is the flagship conference of [software engineering] [...]." ([[http://www.gousios.org/blog/Report-from-ICSE-2017.html][Georgios Gousios]])
-  - 2008, article, "Debugging Reinvented: Asking and Answering Why and Why Not Questions About Program Behavior ICSE-30"
-    - https://www.cs.cmu.edu/~NatProg/whyline.html
-    - https://github.com/andyjko/whyline
-  - 2012, slides, "Connecting Software Architecture to Implementation: The Next 10 Years", [[http://www.cs.cmu.edu/~aldrich/presentations/aldrich-icse-mip-2012.pdf][pdf]]
-    - 2002, article, "ArchJava: Connecting Software Architecture to Implementation", [[https://www.ics.uci.edu/~andre/informatics223s2009/aldrichchambersnotkin.pdf][pdf]]
-  - 1997, article, "Software processes are software too, revisited", [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.148.7620&rep=rep1&type=pdf][pdf]]
-    - 1987, article, "Software processes are software too", [[http://laser.cs.umass.edu/techreports/1987-LJO.pdf][pdf]]
-** What is software engineering?
-- Engineering is the application of science.
-- Civil engineering is the application of natural science.
-- Software engineering is the application of computer science.
-- What is science?
-  - Science is the application of the scientific method.
-  - Science is a mixture of philosophy, mathematics, and experiments.
-- What is software?
-  - chapter, "What is software?: The role of empirical methods in answering the question", [[https://link.springer.com/chapter/10.1007/978-3-319-73897-0_4][description]], [[https://link.springer.com/content/pdf/10.1007%2F978-3-319-73897-0_4.pdf][pdf]]
-    - "Legislation is (like?) software development."
-    - "[Cooking] Recipes are software."
-  - The ideal software is easy to change but doesn't change.
-    The ideal software captures the essence of the problem.
-    The essence of a problem is mathematical definitions.
-    Mathematical definitions aren't supposed to change.
-  - Software is a model of reality.
-  - Software is law?
-    Law is software?
-    - Similarity between software and law
-      - Bad software and bad law both result in unnecessarily slow system.
-      - Both are based on logic.
-      - Both have an ontology.
-      - The law of a country is a big (possibly inconsistent) logic program.
-        - The law in writing vs the law in practice
-          - I think it is too much for anyone to know all laws that are in effect in a country.
-    - Difference between software and law
-      - A judge cares about both the letter of the law and the spirit of the law.
-      - A computer cares only about the letter of the software.
-        There is no such thing as the spirit of the software.
-        - A computer does what we write, not what we mean.
-          - The programmer follows the computer's rules. Not the other way around.
-      - [[https://en.wikipedia.org/wiki/Letter_and_spirit_of_the_law][WP:Letter and spirit of the law]]
-  - Software is executable theory of nature.
-  - Software is like physics but executable.
-  - https://queue.acm.org/detail.cfm?id=2693160
-  - https://www.cs.umn.edu/research/research_areas/software-engineering-and-programming-languages
-    - "Software is a solution to a computational problem using a formal programming language."
-** Software engineering research, advances in software engineering?
-- http://www.sigsoft.org/events.html
-- http://homepage.divms.uiowa.edu/~slonnegr/plf/Book/Chapter7.pdf
 * Building big software
 ** How should we build software, especially big software?
 For big enterprise software, we should at least use model-driven engineering.
@@ -1103,7 +1406,7 @@ It may be ugly, but /it works/.
 - Minimize duplication? The programming language limits deduplication?
 - Facilitate change, minimize ripple due to change
 - Flexibility of a component is proportional to its risk of changing?
-** How do we know a software is maintainable?
+** How do we know that a program is maintainable?
 Change all the programmers.
 If the new programmers can handle it,
 it's maintainable.
@@ -1283,39 +1586,17 @@ A guy is charging €639 for a two-day F# course[fn::https://www.avanscoperta.it
 ** dependency management?
 - npm dependency hell, how npm2 works, how npm3 works
   - http://npm.github.io/how-npm-works-docs/theory-and-design/dependency-hell.html
-* Model-driven software engineering?
+** Why is it so hard to compose software?
+I like Emacs Org-Mode's outline editing, and I like VSCode's Search (Ctrl+Shift+F),
+but why can I not have a single application that has both of them?
+
+Operating systems are a way to compose software.
+** Model-driven software engineering?
 Eclipse Epsilon[fn::https://www.eclipse.org/epsilon/] looks interesting,
 but Java makes me have second thoughts.
-* Open-sourcing
+** Open-sourcing
 The benefit of open-sourcing for your company, if done right,
 is that it reduces maintenance cost, because it outsources much of the maintenance to the community.
 This assumes that you have a community.
-* Software engineering is hard because it requires estimating estimations
-We often want to estimate how long it takes to implement something.
-
-But the estimation itself can only be done by doing the thing, because software development is full of unforeseeable roadblocks.
-(How do we know that a library cannot do something?
-We have to try and find it out the hard way.
-Unfortunately that's the only way.)
-
-So we try.
-
-Thus we estimate how long it takes us to come up with a probable estimation.
-
-Thus software engineering is second-order estimation.
-
-Example:
-To estimate how long it takes to do X:
-- Try doing X for a week.
-- See how much is actually done.
-- Extrapolate.
-
-This estimation should be much more accurate than pure guessing.
-
-Thus the proper answer to "How long will it take?" is "It will take a week for me to come up with an estimation."
-
-We estimate that it will take us a week to come up with an estimation.
-
-We need to estimate how long it takes to estimate.
 * Bibliography
 bibliography:default
