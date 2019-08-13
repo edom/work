@@ -1,0 +1,880 @@
+#+TITLE: Towards software science
+#+DATE: 2019-08-14 00:00 +0700
+#+OPTIONS: ^:nil toc:nil
+#+PERMALINK: /software-science.html
+#+MATHJAX: true
+* TODO Introduction?
+It would be nice if software engineering had predictive theories like Newton's laws of motion.
+* Software
+What do we mean by "software"?
+
+We need an ontology.
+
+Software science is a study of software.
+But what is software?
+
+Terms to define and relate:
+hardware, software, computer, machine, calculator, program, code, language, programmable, error, mistake, bug, fault, malfunction.
+** Etymology of "software" and other related words
+The word "software" appeared no later than Tukey 1958,[fn::http://www.historyofinformation.com/detail.php?entryid=936]
+and by it he meant the same thing that most people mean by "software" in 2019,
+that is, the intangible-but-vital choreography inside computers that makes them useful.
+
+The word "hardware" appeared no later than the 15th century in which it meant "small metal goods".
+The phrase "hardware store" appeared no later than 1789.[fn::https://www.etymonline.com/word/hardware?ref=etymonline_crossreference]
+** English sometimes hampers thought
+The word "software" is a mass noun, which is uncountable.
+When one write "a software", one usually means to write "a program" instead.
+
+If we can list something, then it is described by a countable noun.
+There are abstract countable nouns,
+such as "invitation", "friend", "failure", and "achievement".
+There are concrete uncountable nouns, such as "water".
+
+We simply accept this syntactic idiosyncrasy as the cost of using English.
+This is a trivial syntactic inconvenience.
+Let us move on to more important semantic issues.
+** Mereology of computers
+"Software" and "hardware" are /disjoint/ categories:
+If something is software, it is not hardware;
+if something is hardware, it is not software.
+
+A computer is the sum of its hardware and its software.
+A computer consists of its hardware, its software, and nothing else.
+
+Thus, by the lone unqualified word "software" on its own,
+we actually mean "the /software part/ of all computers".
+Thus "software" is like "water":
+By saying "water exists",
+we actually mean "there exists an object that has the properties of water".
+
+But software is not purely abstract:
+It is stored in hardware as an arrangement of materials.
+But is that software or a /representation/ of software?
+
+What other things can be analyzed as a sum of hardware and software?
+Laws, choreographies, recipes.
+
+A /software house/ is a company that makes software.
+
+Why "hardware /store/" but "software /house/"?
+A software house is more like a blacksmith's workshop than a hardware store:
+Things can be /made-to-order/ in a blacksmith's workshop but not in a hardware store.
+Like "production house" for movies.
+
+/Hardware bridges software and reality./
+
+A piece of hardware is a concrete object that can be controlled by an abstract object (a piece of software).
+
+Software is an arrangement of matter (hardware) that makes the hardware useful.
+But must software have any purpose?
+
+Examples of programming:
+Designing mechanical linkages.
+We arrange matter so that it does something we want.
+** Hardware, dancers, and Platonism
+Software is to hardware as choreography is to dancers.
+Indeed choreographies /are/ software.
+Choreographies without dancers are dead ideas.
+Dancers without choreographies are useless matter.
+
+The dancers are the hardware,
+the choreography is the software,
+and the entire performance is the running computer.
+
+I'll be a Platonist here.
+
+A drawing in dance notation[fn::https://en.wikipedia.org/wiki/Dance_notation] on a paper
+is a /representation/ of several closely-related choreographies, and is not itself a choreography.
+The choreographies described by that notation are abstract objects with eternal existence in idea space.
+If the paper is destroyed, the choreographies persist;
+for example, the choreographies may be represented in the memories of dancers.
+Even if there are no people to discover them, the choreographies still exists in idea space.
+
+A drawing cannot practically describe exactly one choreography,
+because there will always be a slightly different choreography
+in which the practical means of drawing does not have sufficient fidelity/resolution to describe the difference.
+For example, suppose that choreography Y is the same as choreography X but with the hand shifted 1 micrometer to the right.
+It is practically impossible to distinguish X and Y,
+because it is practically impossible to perceptibly move the hand with micrometer precision.
+
+Thus there be the question: Are ideas discovered or invented?
+If I invent a word to mean something new, the concept that I mean with that word already exists in idea space.
+Thus, a Platonist would say that words are invented and concepts are discovered.
+Thus, for example, when Newton invented calculus,
+he invented words and notations
+for concepts that have always existed but not yet known by many people.
+The concept of derivatives has always existed,
+but the word "derivative" did not exist before humans existed.
+
+/How do we test Platonism?/
+Is it even falsifiable?
+** TODO Hardware, software
+The choreography is the software.
+The dancer is the hardware.
+
+The recipe is the software.
+The paper is a representation of the recipe, but not the recipe itself.
+You can tell the recipe to your friend, without paper.
+The cook is the hardware.
+
+The music score is the software.
+The performers are the hardware.
+
+The law is the software.
+People in government is the hardware.
+
+Software is choreography of hardware.
+Software is an arrangement.
+** Computer vs running computer
+A computer has software, but is the computer running?
+** Examples of software
+Programs, laws, choreographies, and recipes are software.
+
+Minds are software?
+
+Software has existed for millenniums, although not called "software".[fn::https://en.wikipedia.org/wiki/History_of_software]
+** Programs?
+Programs used to mean "public notice".[fn::https://www.etymonline.com/search?q=program]
+Authorities wrote programs to inform the public so that people behave accordingly.
+
+What is programming?
+Programming is forcing.
+X programs Y to do Z iff X forces Y to do Z.
+
+What can be programmed?
+People are programmable to some extent.
+We program people when we ask them to do something.
+Software development process itself is also programmable to some extent.
+** Properties of software
+Software can be copied, but not moved like a concrete object such as a car.
+
+Software is an arrangement of matter (hardware).
+
+Software is executable abstract object?
+
+Software is program, documents, configuration, and so on.
+
+Software is abstract object.
+
+Software is executable mathematics.
+
+Software is an idea.
+* Hardness: pure hardware, pure software, and mixtures
+If a computer is a mixture of hardware and software,
+then it makes sense to ask next:
+/How much/ of it is hardware,
+and how much of it is software?
+
+We define the /hardness/ of a system as the proportion of it that is hardware.
+
+An example of a pure-hardware system is a mechanical linkage or a salt crystal.
+
+An example of a pure-software system is a mathematical equation or an algorithm.
+
+An example of a mixed hardware-software system is a computer running a program.
+
+If 2 unit of pure hardware is mixed with 8 unit of pure software,
+then the result should be a 10-unit 20%-hardness system.
+
+The question is: What is that /unit/?
+
+Does upgrading the hardware of a computer increase its hardness,
+because upgrading hardware implies adding hardware mass?
+
+Mass is a unit of hardware.
+
+Formula length is a unit of software.
+* Words: Invented or discovered?
+/Neologisms/[fn::https://en.wikipedia.org/wiki/Neologism]
+prove that words can be /invented/, such as "grok", "quark", "bromance", and "brexit".
+But words can also be /discovered/.
+For example, Heinlein invented "grok"[fn::https://www.etymonline.com/search?q=grok],
+but I discovered it through someone who has read his writing.
+
+But what do we mean by saying that /a word exists/?
+If we say that words are invented, then words are not abstract objects in idea space?
+But a word is not a concrete object, and thus it must be an abstract object.
+But must it?
+What if we declare three categories of being instead:
+concrete objects, abstract objects, and names?
+Or, can abstract objects be invented?
+
+Plato's Forms are abstract objects, but they are eternal.
+
+Can abstract objects be non-eternal?
+
+Does an idea exist if there is no one to think of it?
+
+But a concept has to be named before it can be thought about and communicated.
+The name is invented, but the concept is discovered.
+Thus one job of philosophers is to /pick names/ for concepts that may be important
+but cannot yet be communicated.
+* Computer science terms?
+** Tools and machines
+(I need to find the words to say this, and rewrite this more clearly.)
+
+A /machine/ is an /automatic tool/:
+it is a tool that runs by itself; it has its own behavior.
+
+A hammer doesn't have its own behaviors.
+A car has its own behaviors.
+A computer has its own behaviors.
+** What does it mean for a machine to compute a real number?
+Computation is approximate expression normalization.
+To /compute/ a real number is to calculate some of its digits.
+To /compute/ an arithmetic /expression/ is to /evaluate/ it (to reduce it into a /value/), often approximately.
+For example: 1/7 is an /expression/, and .142 is a /value/ that is the 3 most significant digits of the result of /evaluating/ that expression.
+
+Why do we feel that 1.412 is /more evaluated/ than \(\sqrt{2}\)?
+Why do we feel that 1.412 is a /normal form/?
+Because it is /physically easier/ for us to locate 1.412 on the real number line than to locate \(\sqrt{2}\).
+Thus to compute a real number is to /locate it/ on the real number line.
+This justifies the geometric interpretation of real numbers.
+
+We can /partially evaluate/ an expression, such as from 1+2-1 to 3-1.
+
+See also:
+- https://en.wikipedia.org/wiki/Human_computer
+
+Don't conflate a /real-number expression/ and a /real number/.
+A real-number expression /evaluates/ to a real number.
+A real-number expression /is not/ a real number.
+
+Let \(E(\Real)\) be the set of all real-number expressions.
+
+Let \(f:E(\Real)\to\Real\) be the evaluation function.
+
+Questions:
+- What is the machine computing when I'm typing this document?
+- There are several ways of defining the real numbers.
+  Which one should we use for the philosophy of mind and computation, and why?
+
+Algebraic-geometric definition:
+A /real number/ is a /point/ in the /totally-ordered/ set of points in /one-dimensional/ Euclidean geometry;
+the real numbers form a /field/.
+
+Addition also has a geometric meaning: it is the set of points on the plane \(\{(x,y,z) ~\vert~ x+y=z\}\).
+** Algorithm, machine, describability, computability
+We assume that these are primitive concepts: algorithm, machine.
+By "machine", we mean a computing machine.
+
+An algorithm /describes/ what a machine /computes/.
+
+An /algorithm/ is an /executable description/: a string in a formal language in a formal system.
+A description has /finite/ length.
+By "executable", we mean that an algorithm has a /machine model/.
+We always define an algorithm with respect to a machine.
+
+Thus not every real number is /describable/,
+because there are fewer strings in that formal language than there are real numbers.
+
+Thus not every real number is /computable/,
+because computability requires describability.
+
+Remember that a /formal system/ is a /formal language/ and a set of /inference rules/.
+- https://cs.stackexchange.com/questions/42443/relationship-between-formal-system-and-formal-languages
+
+An algorithm is a string in a formal language \(L\).
+We /model/ a /machine/ as a /formal system/ whose language is \(L\).
+The machine is not the formal system.
+The thing is not the model.
+
+*What does it mean for a machine to /compute/ a real number?*
+
+Suppose that \(Y(T) \in \Real\) is the /output/ of the algorithm \(A\) if we let the algorithm run for duration \(T \in \Nat\).
+
+The algorithm \(A\) /computes/ the /limit/ of the approximation sequence \( \langle Y(t) \rangle_{t \in \Nat} \).
+Thus "\(A\) computes real number \(R\)" means that the limit of that sequence is \(R\).
+
+More explicitly, we say "the algorithm \(A\) /computes/ the real number \(R\)" to mean:
+for every approximation error \(E > 0\) that we are willing to have,
+there exists a duration \(T \in \Nat\) such that \(\abs{Y(T) - R} < E\).
+Informally, the algorithm can always take more time to satisfy ever-diminishing (but still positive) approximation error.
+
+A real number \(R\) is /computable/ iff there is an algorithm that computes \(R\).
+
+There are as many natural numbers as there are algorithms.
+Therefore /not every real number is computable/, because there are fewer natural numbers than real numbers.
+
+See also:
+- https://en.wikipedia.org/wiki/Limit_of_a_sequence
+** What it means for an algorithm to compute a function
+The algorithm \(A\) /computes/ the function \(f : A \to B\) iff for every input \(x \in A\), the algorithm outputs \(f(x)\).
+** Machine, algorithm, embodiment, computation
+A machine /embodies/ an algorithm.
+A machine /computes/ what the algorithm computes.
+
+"To /program/ a machine to compute X" is to /arrange/ the machine to compute X,
+for example: rewire the machine, load another set of punch cards, write a program in a text editor, etc.
+** What is software?
+- Which ICSE paper said this?
+  - Law is software.
+  - Process is software.
+  - Recipe is software.
+- What is software?
+
+The source code is not the software.
+Don't commit reification fallacy.
+** The dualistic nature of machines; the machine-program dualism; the hardware-software dualism
+The hardware is the body.
+The software is the mind.
+
+Are bits software /itself/, or are bits a /representation/ (embodiment) of software?
+
+A running machine embodies the software it is running?
+** TODO Move this somewhere else: Hierarchy of machines
+- An FA (/finite automaton/) is ...
+- An FSM (/finite-state machine/) is ...
+- A /Turing-machine/ is an FSM with infinite memory.
+  - [[https://en.wikipedia.org/wiki/Turing_machine#Formal_definition][WP:Turing machine, formal definition]]
+  - Turing-completeness
+    - [[https://en.wikipedia.org/wiki/Turing_completeness][WP:Turing-completeness]]
+    - A formal system is /Turing-complete/ iff it can simulate every TM (Turing machine).
+      - What does it mean to /simulate/ a TM?
+    - [[https://cstheory.stackexchange.com/questions/36863/formal-definition-of-turing-completeness][StackExchange CS theory 36863 formal definition of Turing-completeness]]:
+      - Kaveh suggested:
+        - [[https://www.sciencedirect.com/science/article/pii/S0049237X08712576][Robin Gandy: Church's Thesis and Principles for Mechanisms]]
+        - Classical recursion theory volume 1
+  - Partial Turing machine, total Turing machine
+    - What is the significance of the theorem in [[https://en.wikipedia.org/wiki/Total_Turing_machine][WP:Total Turing machine]]?
+    - What is the relationship between total function and total Turing machine?
+** What do we mean by "programmable"?
+Calculator vs programmable calculator.
+
+From [fn::https://www.etymonline.com/search?q=program]:
+
+#+BEGIN_QUOTE
+General sense of "a definite plan or scheme" is recorded from 1837.
+Meaning "list of pieces at a concert, playbill" first recorded 1805 and retains the original sense.
+That of "objects or events suggested by music" is from 1854.
+Sense of "broadcasting presentation" is from 1923.
+Computer sense (noun and verb) is from 1945.
+#+END_QUOTE
+
+There is a confusion.
+Program can mean both an individual show[fn::https://simple.wikipedia.org/wiki/Television_program]
+and the entire plan for a television station[fn::https://en.wikipedia.org/wiki/Broadcast_programming].
+
+To program something is to write a plan to be executed by that thing.
+
+To run a program is to execute the plan.
+
+Software does not have to be changeable. An example of practically unchangeable software is a program stored in a read-only memory (ROM) chip.
+
+Is training a dog programming?
+I say yes.
+I'd even say that teaching a person is programming.
+** What is a tool?
+Philosophically, a tool is something that extends the user's self (the set of all things that the user can control).
+But this raises the question:
+Where is the boundary between two selves?
+
+Economically, a tool is something that increases productivity (output per input).
+
+Teleologically, a tool is something made by man for a specific purpose: A tool makes something easier (or even possible at all).
+** Software and electricity; running computers vs non-running computers
+The operation of a computer requires an energy source.
+
+A computer that is not turned has the /potential/ to compute, in the same way a seed has the potential to grow.
+
+An /assignment statement/ can be modeled by a /state endofunction/.
+** Should we define one's "self" as the set of all things he can control?
+There are lots of parts of one's own body that one cannot fully control, such as his heart, his breathing muscles, his reflexes, etc.
+** Philosophy?
+https://www.perforce.com/blog/modern-software-engineering-meets-philosophy
+
+https://mystudentvoices.com/is-the-programmer-the-new-philosopher-or-software-the-new-philosophy-6c0cbea5b8d2
+
+https://softwareengineeringdaily.com/2016/02/12/10-philosophies-for-developers/
+
+https://conferences.oreilly.com/software-architecture/sa-ny-2016/public/schedule/detail/50859
+
+http://www.cs.cornell.edu/gries/July2016/The-Science-Of-Programming-Gries-038790641X.pdf
+
+https://www.sws.cs.ru.nl/
+* Language
+Language is more about communication/utility than truth.
+** The common conflation of something and its representation
+Draw a car, and ask someone what it is, and he will probably answer "a car", although, pedantically, it is incorrect, and the correct answer is "the drawing of a car".
+However, we communicate not to be correct, but to be useful.
+Thus, in everyday communication, we /conflate/ things and their /representations/: we often say "X" to mean "a representation of X".
+
+The positions of levers and switches are not software, but a /representation/ of software.
+The magnetic fields in a hard disk is not data, but a /representation/ of data.
+Changing the concrete representation of an abstract object affects the represented abstract object.
+* Software science
+** What is the science of software engineering?
+If a branch of engineering is an application of a branch of science,
+then what branch of science is applied in software engineering?
+What is software science?
+
+Civil engineering is the application of natural science (especially physics) to build civil structures
+such as bridges, buildings, dams, roads, and other many things used by civilizations.
+
+A civil engineer can predict how much load a steel beam can handle.
+Can a software engineer predict how much load a machine can handle?
+
+Software engineering is the application of computer science?
+
+2018 slides "What would a science of software engineering look like?"
+ [fn::http://herbsleb.org/web-pres/slides/crowd-chase-2018-final-dist.pdf]
+** Mathematics as a domain-specific language for science?
+Mathematics is more like a domain-specific language than a branch of science.
+Mathematics is a language optimized for abstract thinking?
+** Where is software science?
+https://ubiquity.acm.org/article.cfm?id=2590529
+
+https://services.math.duke.edu/undergraduate/Handbook96_97/node5.html
+
+The abstract-object counterpart of concrete-object physics
+How do we apply the scientific method to the study of abstract objects?
+To anything?
+
+If engineering is an application of science, what is the science that is applied in software engineering?
+
+We need something like Newton's laws of motions for software dynamics that will enable us to predict things.
+
+What should be the object of study of software science?
+Software?
+What is software?
+A model of reality?
+A model.
+
+Software dynamics?
+Science of bottlenecks? Queuing theory.
+
+If computer science is science, where are the falsifiable theories and the experiments?
+
+A software is a model of reality.
+
+Which branch of science studies models?
+
+Which branch of science studies abstract objects?
+None.
+All branches so far are materialistic.
+They study concrete objects.
+
+What experiments can be done with abstract objects?
+Besides thought experiments?
+
+We can experiment with a program: We can stress-test it to figure out its maximum load (the maximum number of requests it can handle per second without errors), in a similar way we stress-test a steel bar to figure out its maximum load (the maximum force it can withstand without breaking).
+Benchmark games are similar to tables of material strengths.
+
+We can experiment with abstract objects.
+For example, we can test software, we can test ideas.
+The problem is that each piece of software creates its own branch of science that is not transferable to other pieces of software.
+For example, knowledge of word processors is not applicable to accounting information systems.
+It is as if there were different Newton's laws of motion for cars, bikes, rocks, and other things.
+We need a science of all software, not just a particular software.
+
+What does science do with its object of study?
+Come up with a predictive theory and experiments to falsify it.
+
+Science comes from Latin "scientia" which simply means "knowledge",
+but "science" is the application of the scientific method,
+the formulation of theories with explanatory and predictive power,
+and the experimentation to falsify such theories.
+
+Before science can even exist, the language must first exist.
+We must first invent the terms, name the objects, and form the ontology.
+We must first find out what to talk about.
+We must first define the object of study.
+** Why has mathematics not revolutionized biology or software engineering?
+Is it due to the nature of biology or software engineering?
+
+Or I don't know that it has?
+
+https://www.ams.org/notices/201510/rnoti-p1172.pdf
+** The object of study
+The object of study may be software itself, or an aspect of software, such as requirements, capacity, complexity, performance.
+** Good laws, enforceability, and unintended consequences
+Good laws are:
+1. enforceable, and
+1. have minimal unintended consequences.
+
+Human laws are programs executed by humans.
+The nature of human laws is the same as computer programs,
+The difference is that humans mostly follow the spirit of the law,
+and computers always follow the letter of the law.
+
+Example:
+Banning smoking is not practical to enforce: Are you going to put a cop in each building?
+Banning prostitution is not enforceable: Are you going to put a cop in each building?
+
+I hypothesize that the principles of good software engineering is applicable to good legal engineering.
+Lawmakers are legal engineers.
+They should have engineering background.
+They engineer the lives of lots of people and the future of nations.
+** <2019-08-11> "Computer science" should be renamed to "software science"
+It is unfortunate that "Oh, you're a computer scientist? So you can fix my computer?"
+
+We don't study computers.
+We study software.
+
+As a computer has a hardware part and a software part,
+computer science should study both hardware and software.
+
+Universities should merge law departments and computer science departments into software departments.
+
+* Subfields of software science?
+** Turing?
+Turing's theory is about computation, not software.
+** Software complexity theory
+Essential complexity = Kolmogorov complexity = the length of the shortest description of the software.
+The description must contain enough information for clean-room-reimplementation
+by another software engineer without any communication to the requirement analyst.
+
+Accidental complexity = a measure of the apparent size of the software;
+number of syntax objects (abstract-syntax-tree nodes),
+number of lines of code.
+
+** Essential complexity theory
+Here we are interested in a measure of complexity, the cognitive load of understanding the software?
+
+Kolmogorov complexity.
+
+The complexity of a software system is the length of the shortest description of that system.
+The description must be such that someone else can recreate the system from only the description.
+
+Example: a formula that describes a program that checks whether a list \(x\) is ordered according to the ordering \(\le\).
+
+\( \forall i \forall j ( i \le j \implies x_i \le x_j ) \)
+
+The formula can then be fed to descriptive complexity theory in order to determine the minimum possible resources required to implement the system.
+For example, it is a well-known fact in computer science that comparison-sort of an array of \( n \) elements require \( \Omega(n log n) \) time.
+
+If something takes \( t \) seconds to finish, then doing it \( n \) times takes \( n \cdot t \) seconds to finish.
+
+That should also work under uncertainty:
+If something takes \( t \) seconds to finish /on average/,
+then doing it \( n \) times takes \( n \cdot t \) seconds to finish /on average/.
+But telling the whole truth requires knowing the shape of the distribution, not only the mean.
+** Descriptive complexity theory
+Descriptive complexity theory is deep:
+It puts a lower bound on the solutions of problems regardless of the machines that implement those solutions.
+It is due to the inherent/essential complexity in logic itself,
+and not due to accidental complexity of the machine implementation.
+
+In software engineering, the results of computational complexity theory are used for capacity planning, for example,
+that the lower time bound of comparison sorting is quasilinear[fn::<2019-08-11> https://en.wikipedia.org/wiki/Time_complexity#Quasilinear_time].
+This enables us to calculate the number of processors and the amount of memory, from the number of requests we expect to serve.
+
+In reality, what is important is the actual number of seconds
+that users are willing to wait for computations with expected input sizes.
+** Capacity planning theory
+The mathematics of basic bottleneck science is simple:
+It is only basic arithmetics (addition, subtraction, multiplication, and division).
+If one wants more details, one can resort to queuing theory,
+but capacity planning can be done with simple basic arithmetics,
+without the full power of queuing theory[fn::https://en.wikipedia.org/wiki/Queueing_theory].
+** Programming science
+Lambda calculus can be a model of computer programs, but how do we experiment, and what should we falsify?
+** Software development science
+Software engineering is hard because it requires the engineer to estimate estimations.
+
+We often want to estimate how long it takes to implement something.
+
+But the estimation itself can only be done by doing the thing,
+because software development is full of unforeseeable roadblocks,
+because that software does not fit in our working memory.
+(How do we know that a library cannot do something?
+We have to try and find it out the hard way.
+Unfortunately that's the only way.)
+
+So we try.
+
+Thus we estimate how long it takes us to come up with a probable estimation.
+
+Thus software engineering is second-order estimation.
+
+Example:
+To estimate how long it takes to do X:
+- Try doing X for a week.
+- See how much is actually done.
+- Extrapolate.
+
+This estimation should be much more accurate than pure guessing.
+
+Thus the proper answer to "How long will it take?" is "It will take a week for me to come up with an estimation."
+
+We estimate that it will take us a week to come up with an estimation.
+
+It's hard to estimate how much time is required to implement something,
+because we need to estimate how long it takes to estimate.
+
+The only known way to estimate software development time is by extrapolating:
+Try developing it for a month, measure the accomplishments, and extrapolate from there.
+
+Is it simpler in civil engineering?
+If you know that laying one brick takes 10 seconds,
+then you know that laying 1,000 bricks takes 10,000 seconds,
+but that is an oversimplification:
+Some civil engineering projects are also late,
+such as Jakarta mass rapid transport,
+but is it a political issue or an engineering issue?
+** Specification theory
+A /specification/ is a logical formula in conjunctive normal form with at least one positive clause (literal?).
+** Science of models
+How do we measure a model's quality/fidelity, and with respect to what purpose?
+** Science of software changes
+It is obvious that software has inertia, and bigger software is harder to change.
+
+Suppose that we have a system \( S \) that satisfies the logical formula \( \phi \),
+and we want to change \( S \) to \( S' \) that satisfies \( \phi' \).
+How much is the effort?
+It seems that the effort cannot be deduced from the logical formula alone.
+
+It is possible to make two programs that satisfy the same logical formula (have the same observable behavior) but have widely different source codes.
+** States
+All practical systems have memory.
+
+All systems that have memory are stateful.
+
+Thus, we have to learn to live with states.
+** Human aspects
+Complexity increases the probability of mistakes/disasters due to a mismatch between human mental models and the actual reality.
+
+Examples[fn::<2019-08-12> https://monzo.com/blog/2019/09/08/why-monzo-wasnt-working-on-july-29th].
+** Parsing theory
+** Learning theory
+* Logic
+How do we measure the size of logical formulas?
+* How do we write correct software?
+** What is correct?
+Correct with respect to what?
+It does what we want, and it only does what we want?
+** Proving and testing
+/Testing approximates proving./
+We actually want to prove a logical formula phi about a piece of code, we want to prove that the code fragment is a model of the formula phi, but proving is too expensive.
+Therefore, we test phi instead.
+
+In back-end testing, the formula is often obvious.
+What is the formula in front-end testing?
+DOM element existence testing?
+** The problem with formal methods: you can't prove what you don't model.
+- Intel uses formal method, but why does its processors have vulnerabilities?
+  - Because /you can't prove what you don't model/.
+  - Spectre, Meltdown, etc.
+  - https://arstechnica.com/information-technology/2018/11/intel-cpus-fall-to-new-hyperthreading-exploit-that-pilfers-crypto-keys/?amp=1
+- How will we ever know that we didn't miss anything?
+- You have to prove that it does everything that you want it to do, /and/ that it does only that, and nothing else.
+*** What if it is impossible to write correct software? What are our options to mitigate/limit the damage?
+** What?
+- Where is tutorial?
+- A goal should be to make it easy to make correct software?
+- 2014, slides, "How I became interested in foundations of mathematics.", Vladimir Voevodsky, [[https://www.math.ias.edu/vladimir/sites/math.ias.edu.vladimir/files/2014_08_ASC_lecture.pdf][pdf]]
+- Why should we be interested in homotopy type theory?
+- Coq
+- [[https://leanprover.github.io/][Lean]]
+
+  - Pros of Lean
+
+    - Integrates with Visual Studio Code
+
+  - Cons of Lean
+
+    - Less mature than Coq
+
+- Should we care about the relationship between functional programming and theorem proving?
+- Ramble
+
+  - Useless idea?
+
+    - Reverse-proving: generate all proofs of a theory.
+      (Proving is: given a statement, prove (or disprove).)
+
+      - Which true sentences are interesting?
+      - Which proofs are interesting?
+
+- Companies
+
+  - [[https://galois.com/][Galois]], on [[https://github.com/GaloisInc/][github]]
+
+- unread interesting things
+
+  - http://www.joachim-breitner.de/blog/717-Why_prove_programs_equivalent_when_your_compiler_can_do_that_for_you_
+  - http://www.michaelburge.us/2017/08/25/writing-a-formally-verified-porn-browser-in-coq.html
+  - https://aphyr.com/posts/342-typing-the-technical-interview
+  - http://tech.frontrowed.com/2017/09/22/aggregations/
+
+- interoperation between proof assistants?
+
+  - Lem ("lightweight executable mathematics")
+
+    - https://www.openhub.net/p/lightweight-executable-mathematics
+    - http://www.cl.cam.ac.uk/~pes20/lem/
+** Coq?
+  :PROPERTIES:
+  :CUSTOM_ID: coq
+  :END:
+
+- Introduction
+
+  - What is a suitable introduction to Coq?
+  - [[https://people.debian.org/~schepler/coqtut.v.html][Daniel Schepler's "Mathematical formalization using Coq"]] seems approachable.
+  - [[https://mathoverflow.net/questions/155909/wanted-a-coq-for-the-working-mathematician][MO 155909: Wanted: a "Coq for the working mathematician"]]
+  - [[https://mathoverflow.net/questions/164959/how-do-i-verify-the-coq-proof-of-feit-thompson][MO 164959: How do I verify the Coq proof of Feit-Thompson?]]
+  - https://softwarefoundations.cis.upenn.edu/current/index.html
+  - Yves Bertot's "Coq in a hurry"
+  - [[https://coq.inria.fr/tutorial-nahas][Coq tutorial by Mike Nahas]]
+  - [[https://coq.inria.fr/distrib/current/refman/Reference-Manual006.html#Cic][Calculus of inductive constructions]]
+
+- [[http://blog.mikael.johanssons.org/coq-and-simple-group-theory.html][Coq and simple group theory]]
+- Installation on Ubuntu 14.04
+
+  - =sudo apt-get install coq=
+*** Introduction
+   :PROPERTIES:
+   :CUSTOM_ID: introduction
+   :END:
+
+Coq source file extension is =.v=.
+
+The notation =x:T= means "the type of =x= is =T=", "=x= inhabits =T=".
+It also means "=x= is a proof of =T=" by Curry-Howard isomorphism.
+
+The type of =nat= is =Type(1)=.
+
+The type of =set= is =Type(2)=.
+
+The type of =Type(i)= is =Type(i+1)=.
+
+#+BEGIN_EXAMPLE
+    (* This is a comment in Coq. *)
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+    coqtop -l filename.v -batch
+#+END_EXAMPLE
+
+*** Defining things
+   :PROPERTIES:
+   :CUSTOM_ID: defining-things
+   :END:
+
+#+BEGIN_EXAMPLE
+    Definition x: nat := 0.
+    Check x.
+
+    Definition f (x: nat): nat := x + 1.
+#+END_EXAMPLE
+
+Definition = non-recursive definition
+
+Fixpoint = recursive definition
+
+Inductive = type (Set (small set)) definition
+
+#+BEGIN_EXAMPLE
+    Definition name: type
+    where
+    type: Set
+    or type: Prop
+    or type: Type.
+#+END_EXAMPLE
+
+Proving 0+1 = 1 using Curry-Howard isomorphism?
+
+Axiom: and-elimination
+
+\begin{align*}
+a \wedge b \vdash a
+\end{align*}
+
+#+BEGIN_EXAMPLE
+    Theorem and_elim: forall a b: Prop, a /\ b -> a.
+    tauto.
+    Qed.
+#+END_EXAMPLE
+
+\begin{align*}
+a \vdash a \vee b
+\end{align*}
+
+Modus ponens
+
+\begin{align*}
+a, a \rightarrow b \vdash b
+\end{align*}
+
+*** How Coq represents propositions
+   :PROPERTIES:
+   :CUSTOM_ID: how-coq-represents-propositions
+   :END:
+
+#+BEGIN_EXAMPLE
+    Print False.
+    Print True.
+    Inductive True : Prop := I : True.
+    Inductive False : Prop := .
+    Inductive and (A B : Prop) : Prop := and : A -> B -> and A B.
+#+END_EXAMPLE
+** Testing
+Why do we test?
+Because we are not sure that our program is correct.
+
+Why are we not sure that our program is correct?
+- Because we don't know how to prove its correctness.
+  This can be alleviated by using a decent programming language.
+- Because the cost of proving its correctness does not justify the benefit.
+  We can't do anything about this if the complexity is essential (irreducible), not accidental.
+
+We human are fallible.
+Thus we will always test.
+Therefore:
+- What should we test?
+- How should we test?
+- What is the test that has the greatest benefit-to-cost ratio?
+
+The expected benefit of a test is the expected cost of the mistakes that might have been made if the test did not exist.
+
+The quality of a test is the seriousness of the mistakes it prevents.
+Thus, the seriousness of testing is proportional to the seriousness of risk.
+
+Test is insurance.
+A good insurance covers your risk.
+A bad insurance only wastes money and doesn't cover your risk:
+Testing Java class getters is like buying flood insurance for a house in the desert.
+
+Insurance causes moral hazard (taking more risk because someone else pays for it).
+Does having a test cause you to take more risks?
+
+- The benefit of a test is the cost of the mistakes it prevents.
+- The cost of a test is the person-hours spent writing the test and updating the test, and a slight increase in build time. (Assume $50/person-hour for simplicity.)
+
+The answers to these questions tell us what to test and how to test:
+- What tests have the greatest benefit-to-cost ratio?
+- What mistakes do our tests prevent? How expensive are the mistakes that our tests prevent?
+- Which part of our code is most likely to cause expensive mistakes? (Example: testing getters won't prevent expensive mistakes.)
+
+Code coverage is a meaningless metric.
+We should measure the expected value of mistakes instead.
+We should "color" our code: color more risky methods more red, color less risky methods more green, like this
+travel risk map[fn::https://i.redd.it/ktop13ad2io01.png] but for software.
+
+If you are launching a rocket, then a mistake may cost billions of dollars.
+It makes sense to invest ten million dollars testing to avoid a 1/100 probability of making a billion-dollar mistake.
+** Symbolic execution
+Chris Meudec[fn::http://tinyurl.com/y42eyfkp][fn::http://www.echancrure.eu].
+Prolog constraint solving for C/Java testing.
+** Model checking
+Suppose that we have just written a function that sorts an array, and a mistake will cost $1,000,000.
+How do we prove that the function indeed sorts an array?
+
+Clarke's overview and lots of examples in the 1990s http://www.cs.cmu.edu/~emc/15-398/lectures/overview.pdf
+
+* Why does software have security holes?
+Software has security holes because:
+1. Languages makes it too hard to do the right thing.
+2. Programmers are too lazy to do the right thing.
+
+Authentication systems such as OAuth are too complex for programmers to use or understand.
+Anything more than HTTP Basic Auth is too complex.
+It sucks to write code for handling authentication.
+How do we make a programming system such that handling authentication is not hard?
+What is authentication and authorization?
+
+"A Taxonomy of Causes of Software Vulnerabilities in Internet Software"
+https://pdfs.semanticscholar.org/5ec6/93950d1e6039e04a7b86a488e816ddcdd82e.pdf
+"software developers are making the same mistakes over and over again"
