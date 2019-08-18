@@ -1,16 +1,26 @@
 #+TITLE: Meta-research
 #+DATE: 2017-05-25 01:00:00 +0700
 #+PERMALINK: /meta.html
+* How do we make questions that lead to knowledge creation?
+<2019-08-17>
+
+- The words in the question must mean the same to all people.
+- The question has to be answerable in principle.
+- The question has to be asked to someone who can answer it.
+
+We can approximate the significance of a question, and thus the significance of its answer, without knowing the answer.
+* What makes a question hard?
+Any combination of these:
+- It is unanswerable.
+  It is unknowable.
+  It is epistemologically impossible to answer.
+- Its answer's search space is big.
+- It requires much background knowledge to understand, let alone to answer.
+
+A question (a query) is a logical formula.
+Each logical formula has an /inherent/ difficulty.
+This is studied by /descriptive complexity theory/, a branch of /computational complexity theory/.
 * Organization of this wiki
-** Hierarchy and linking
-These rules exist to simplify renaming files.
-(But aren't wiki articles supposed to be highly interlinked?)
-
-The hierarchy of this website is 2 levels deep.
-Level 1 is the home page.
-Level 2 is everything else.
-
-If article X links to article Y, and both X and Y are not generated, then Y should not link to X.
 ** Article categories
 Each article in this wiki belongs to one of these categories:
 - survey (What exists? What is the state of...)
@@ -28,19 +38,6 @@ The title is a goal.
 The content is the ongoing journey to achieve it.
 
 Each article in this site is a living document.
-* What are some similar websites?
-These are some websites similar to this website and their differences.
-
-[[https://kevinbinz.com/][kevinbinz.com]] is more like a blog than a wiki.
-
-[[https://en.wikipedia.org/][en.wikipedia.org]] does not want original content.
-(Also, if [[https://www.quora.com/Will-it-be-feasible-to-move-Wikipedia-mediaWiki-from-PHP-to-some-modern-language-like-Golang][Kelly Kinkade's answer]] is true, then it's worrying that so much human knowledge is stored in such unparseable MediaWiki markup language.)
-
-TheBrain: the idea is good, but the app is slower than static web.
-
-[[https://www.brainpickings.org][brainpickings.org]]:
-too social, too much content, too little navigation, too little structure;
-pop science content is too much pop and too little science.
 * Meta-thinking
 ** When stuck, ask yourself...
 When you're stuck, ask yourself "What question do I have to ask myself in order to get me unstuck?"
@@ -142,13 +139,6 @@ By inspiringness, from the most inspiring?
 But this ordering is not timeless?
 
 The information literacy tutorial[fn::http://camellia.shc.edu/literacy/index.html]
-** What makes a question hard?
-Any combination of these:
-- It is unanswerable.
-  It is unknowable.
-  It is epistemologically impossible to answer.
-- Its answer's search space is big.
-- It requires much background knowledge to understand, let alone to answer.
 ** How do we do research?
 How do we [[file:research.html][research]]?
 How should we?
@@ -259,16 +249,6 @@ I collect [[file:entertain.html][entertainments found on the Internet]].
 Why are lyrebirds entertaining?
 Lyrebird can mimic sounds uncannily.
 Laser guns, drills, hammers, camera shutters.
-* How should we write?
-** Writing; topic position and stress position
-"A reader will unconsciously focus at the end of the sentence to identify what is important."[fn::https://www.springer.com/gp/authors-editors/authorandreviewertutorials/writinginenglish/stress-position/10252690]
-
-It is more important for the sentences of a paragraph to have /related topics/ than to have active voice \cite{gopen1990science}.
-(A sentence's topic is what in its topic position.)
-** TODO Writing?
-https://medium.com/@write4research/why-do-academics-and-phders-carefully-choose-useless-titles-for-articles-and-chapters-518f02a2ecbb
-
-https://medium.com/@write4research/top-ten-questions-to-ask-about-your-chapter-start-32848d924953
 * Where should we live?
 Where is the best place to live?
 ** Where on Earth should we live?
@@ -480,26 +460,6 @@ Avoid disappointment.
 * Collaborative summarization?
 Like wikipedia but original research
 Like wikipedia but for graduate-level learning
-* Writing
-Writing
-- rewrite = read + think + write
-- Dont rewrite while writing. Dont edit while writing. Let thoughts out.
-- the predicate is more important than the subject.
-- avoid long subject
-- cluster related ideas together
-- a predicate must occur no later than the seventh word in the sentence?
-
-Constrained writing:
-- each sentence in the same paragraph has the same subject?
-- the first sentence is both a claim and a summary. The first sentence summarizes the paragraph.
-
-Example:
-#+BEGIN_QUOTE
-X is good. <why x is good>
-#+END_QUOTE
-* Writer vs editor
-Writers vomit their ideas into words;
-editors clean up the mess.[fn::https://mshannonhernandez.com/the-writer-vs-the-editor-dont-confuse-the-roles/]
 * Knowing more vs organizing better
 Does a smarter person know more, or organizes knowledge better?
 
@@ -625,27 +585,6 @@ An expert asks questions like "How should we add scoping to Prolog?"
 Question specificity increases with expertise.
 
 To be an expert, go deep, not broad.
-* Top-down vs bottom-up reader
-From "Version control with Subversion"[fn::http://svnbook.red-bean.com/en/1.7/svn.preface.howread.html]:
-#+BEGIN_QUOTE
-Technical books always face a certain dilemma: whether to cater to /top-down/ or to /bottom-up/ learners.
-A top-down learner prefers to read or skim documentation, getting a large overview of how the system works; only then does she actually start using the software.
-A bottom-up learner is a "learn by doing" person—someone who just wants to dive into the software and figure it out as she goes, referring to book sections when necessary.
-#+END_QUOTE
-* It is important to motivate the reader
-It is counter-productive to begin a mathematical text with a definition.
-Such text should begin with /motivation/.
-
-It is counter-productive to begin a textbook in group theory by listing the group axioms.
-We are creative humans, not mechanical theorem provers.
-
-Such textbook should begin with /why/ the reader should care about group theory.
-At least, it should begin with why the writer thinks that group theory is fascinating.
-But it's difficult: How do we convince someone that something as abstract as group theory is interesting?
-
-Don't make the readers think; make them /see/.
-Your goal as a writer is to be a giant who enables the readers to stand on your shoulder as fast as possible,
-so that they can see farther into the unexplored knowable world.
 * What is "What is" questions?
 Sometimes, when we ask about what something is,
 we do not mean to ask what it really is,
@@ -679,16 +618,6 @@ They are incentivized to be broken.
 * Learning by examples
 From "Making Badass Developers - Kathy Sierra (Serious Pony) keynote"[fn::https://www.youtube.com/watch?v=FKTxC9pl-WM]:
 - 21:52 build a big library of small, diverse, excellent examples
-* How to read a paper
-Keshav 2007 \cite{keshav2007read} describes a three-pass approach:
-#+BEGIN_QUOTE
-The key idea is that you should read the paper in up to three passes,
-instead of starting at the beginning and plowing your way to the end.
-Each pass accomplishes specific goals and builds upon the previous pass:
-The /first/ pass gives you a general idea about the paper.
-The /second/ pass lets you grasp the paper's content, but not its details.
-The /third/ pass helps you understand the paper in depth.
-#+END_QUOTE
 * Search engines
 I use Google Scholar to get bibtex-formatted references.
 It has a convenient copy-pasteable bibtex export.

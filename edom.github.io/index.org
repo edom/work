@@ -3,7 +3,188 @@
 #+PERMALINK: /index.html
 #+MATHJAX: true
 #+OPTIONS: ^:nil
-* The root cause of Boeing 737 MAX fiasco: existentially-threatening competitions?
+* Literacy research
+** Literacy research articles
+[[file:literacy.html][On literacy]]
+
+[[file:dual-read-write.html][On the mathematical duality of reading and writing]]
+
+[[file:writing.html][On writing]]
+** A simple solution to English singular gender-neutral pronoun problem
+<2019-08-14>
+
+I propose this one small painless change to the way we interpret English:
+We declare that "he" is always gender-neutral and never implies maleness.
+Thus, in the singular case, we now have a gender-neutral human pronoun "he",
+a female human pronoun "she",
+a non-human pronoun "it",
+and /no male pronouns/.
+
+My solution requires inventing no new words as it is already common to use "he" as a gender-neutral pronoun.
+The change is minimal, undisruptive, and painless.
+
+Now let us see how the new interpretation prevents hurt feelings.
+Consider this conversation:
+
+#+BEGIN_QUOTE
+Alice: "You have a child? What is his occupation?"
+
+Bob: "She is unemployed."
+#+END_QUOTE
+
+In the old interpretation, Bob is implicitly correcting Alice.
+In the new interpretation, Bob is simply giving more information to Alice
+without implying at all that Alice wrongly guessed the gender of his child.
+
+It takes only one generation to teach this for this to feel normal.
+It's just a matter of consensus.
+** <2019-08-14> Writing is a non-linear process
+From https://macademic.org/2011/03/15/writing-philosophy/:
+- "Combining these different pieces of information does not happen in an orderly linear process."
+- "Writer’s block often comes from being too closely linked to the linearity of a process and
+  the inability to break out small pieces of text to work on and move with ideas."
+* Meta-research
+See [[file:meta.html]].
+** <2019-07-07> Do not ask Google (or anyone else) questions that only you can answer
+Like "If I am my own target audience, what should I write, for myself?"
+** On personal knowledge bases
+What is the most commonly used free-and-open-source one?
+There are too many solutions?
+
+If the graphical user interface cannot be standardized, at least the data format should be standardized.
+
+I'm using Org Mode and Pandoc.
+
+Wordpress?
+
+TiddlyWiki?
+
+I want free-and-open-source software because I want my data to be usable forever.
+
+Evernote is not FOSS.
+
+https://www.ubuntupit.com/13-best-evernote-alternative-note-taking-apps-linux/
+
+https://opensource.com/article/17/12/joplin-open-source-evernote-alternative
+
+One can convert a dynamic website to a static website with a /website downloader/.
+You can point a website downloader to localhost.
+* Software research
+** Software research articles
+[[file:software.html][Towards a philosophy of software]]
+
+[[file:software-science.html][Towards software science]]
+
+[[file:softeng.html][Towards software engineering]]
+
+[[file:parse.html][On parsing formal languages]]
+
+On programming by examples.
+Erik Meijer has an interesting presentation about machine learning, that is, programming computers by examples.
+Can we create a programming language in which programming by examples is elegantly expressible?
+** "Computer science" should be renamed to "software science"?
+<2019-08-11>
+
+Our "computer science" label has misled people into thinking that we can fix their computers.
+
+Although the first computer scientists did study computers,
+computer scientists now don't study computers anymore because software has grown too big;
+now computer scientists study mostly software,
+and the hardware is supposed to be studied by /computer engineers/.
+
+A honestly-named computer-science student should study both hardware and software
+because a computer has a hardware part and a software part,
+But, in fact, a computer-science student studies much more software than hardware,
+and will often work with software while taking hardware for granted in their jobs.
+
+Perhaps universities should also merge law departments and computer science departments into /software departments/.
+
+On second thought, perhaps we should not call ourselves "software scientists"
+because we don't even know what software is.
+Perhaps we should just call ourselves "computer programmers".
+** Software structural engineering
+<2019-08-15>
+
+Here we transplant /civil structural engineering/ to /software structural engineering/ by analogy.
+
+Both civil structural engineers and software structural engineers do /capacity planning/ and /load testing/.
+
+Civil structural engineers deal with the /strength of materials/, whereas software structural engineers deal with the /emptying rate of queues/.
+
+The science of civil structural engineering is based on /continuum mechanics/,
+whereas the science of software structural engineering is based on /queuing theory/.
+
+Material breakage is analogous to /full queue/.
+
+When a civil structure fails, the /building/ collapses.
+When a software structure fails, the /system performance/ collapses: latency skyrockets and throughput drops.
+
+Structural engineers design structures to /withstand probable adversities/ according to cost-benefit analysis.
+Civil structural engineers design structures to withstand /heat, wind, earthquakes, etc./
+Software structural engineers design systems to withstand /load spikes, network disruptions, disk failures, etc./
+If we are building a skyscraper in an earthquake-prone region, we must seriously consider earthquakes.
+If we are building a system for 1,000,000 concurrent users, we must seriously consider traffic spikes, network disruptions, and other adversities.
+If we are merely building a system with 10,000 lines of code for 10 users,
+and it will stay that way for 100 years, then it is a waste of resources to bake in a grandiose architecture.
+If you need a shack, and it will satisfy you for 1,000 years, then perhaps don't build a skyscraper.
+** <2019-08-17> On programs and software
+Perhaps we should focus on /programs/ instead of software.
+We can talk about computer programs without talking about software.
+After all, Tukey 1958 intended "software" to mean computer programs.
+* Financial research
+[[file:stock.html][On stocks, their prices, and their financial valuation]]
+
+[[file:valuation.html][On financial valuation]]
+* Biological research
+** Appeal-to-evolution weakens the theory that irregular eating causes gastritis
+<2019-08-17>
+
+The /appeal-to-evolution/ is this argument:
+/If a trait would hamper the survival of a species, then that species would not have evolved that trait./
+
+It is a heuristic.
+It is not always correct.
+For example, it cannot explain peacock tails.
+However, it seems reasonable in absence of other information.
+
+The appeal-to-evolution weakens the theory that irregular eating causes gastritis as follows.
+
+Perhaps the very early hunter-gatherer humans ate irregularly;
+they were always a few days away from starvation,
+they did not have a secure food supply,
+they depend very much on their surroundings.
+/Having gastritis due to irregular eating would hamper their survival./
+Therefore they probably evolved such that irregular eating does not cause gastritis.
+** Others' articles about gastritis
+"Coadaptation of /Helicobacter pylori/ and humans: ancient history, modern implications"[fn::https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2735910/]
+
+"The Iceman had a tummy bug"[fn::https://www.sciencemag.org/news/2016/01/iceman-had-tummy-bug]
+** <2019-08-17> On myopia
+I hypothesize that myopia has lower prevalency in the population of drivers because drivers refocus their eyes a lot.
+
+black-on-white promotes myopia, white-on-black inhibits myopia?
+https://www.nature.com/articles/s41598-018-28904-x
+
+https://biology.stackexchange.com/questions/24589/how-does-the-eye-know-whether-to-focus-further-out-or-nearer-in-order-to-bring-a
+
+https://photo.stackexchange.com/questions/105433/can-you-tell-from-a-blurry-photo-if-focus-was-too-close-or-too-far
+
+Hypothesis:
+The brain uses the chromatic aberration of the eye lens in order to detect whether the focus is too near or too far.
+Green fringing means that the focus is too ???
+Purple fringing means that the focus is too ???
+https://photographylife.com/what-is-chromatic-aberration
+https://en.m.wikipedia.org/wiki/Circle_of_confusion
+* Natural research
+[[file:nature.html][A physics book draft]] (should be split into articles instead)
+
+[[file:chemistry-ontology.html][On the evolution of the ontology of chemistry]]
+
+Are black holes the key to unifying general relativity and quantum field theory?
+
+"Realistic Simulation: Inside a Black Hole - New Universe through White Hole?"[fn::https://www.youtube.com/watch?v=iUr8Obv_DeA]
+* Political research
+** The root cause of Boeing 737 MAX fiasco: existentially-threatening competitions?
 <2019-07-07>
 
 The Boeing 737 MAX fiasco is not a software accident,
@@ -45,7 +226,7 @@ while also ensuring that my design makes sense physically and economically?
 Competition has given us big companies that produce all luxuries that our ancestors could only imagine but we take for granted.
 But the future is cooperative, not competitive.
 
-* Gun rights is now about selling guns for profit, no longer about fighting tyrannical governments
+** Gun rights is now about selling guns for profit, no longer about fighting tyrannical governments
 <2019-08-15>
 
 In 2019, anyone who thinks that guns can protect them from tyrannical governments is deluded.
@@ -56,88 +237,12 @@ but I don't recommend that,
 and I don't plan to discuss asymmetric warfare[fn::https://en.wikipedia.org/wiki/Asymmetric_warfare] and militant anarchism here.
 
 Thus the only reason left for gun rights is to let people sell guns for profit.
-* Constitutions are not holy books
+** Constitutions are not holy books
 <2019-08-16>
 
 Changing constitutions is almost as hard as changing bibles.
 Constitutions have become holy books, and political ideologies have become religions.
 Blind beliefs are bad for progress.
-* A simple solution to English singular gender-neutral pronoun problem
-<2019-08-14>
-
-I propose this one small painless change to the way we interpret English:
-We declare that "he" is always gender-neutral and never implies maleness.
-Thus, in the singular case, we now have a gender-neutral human pronoun "he",
-a female human pronoun "she",
-a non-human pronoun "it",
-and /no male pronouns/.
-
-My solution requires inventing no new words as it is already common to use "he" as a gender-neutral pronoun.
-The change is minimal, undisruptive, and painless.
-
-Now let us see how the new interpretation prevents hurt feelings.
-Consider this conversation:
-
-#+BEGIN_QUOTE
-Alice: "You have a child? What is his occupation?"
-
-Bob: "She is unemployed."
-#+END_QUOTE
-
-In the old interpretation, Bob is implicitly correcting Alice.
-In the new interpretation, Bob is simply giving more information to Alice
-without implying at all that Alice wrongly guessed the gender of his child.
-
-It takes only one generation to teach this for this to feel normal.
-It's just a matter of consensus.
-
-* Software research
-** Software research article drafts
-- [[file:software.html][Towards a philosophy of software]]
-- [[file:software-science.html][Towards software science]]
-- [[file:softeng.html][Towards software engineering]]
-** "Computer science" should be renamed to "software science"
-<2019-08-11>
-
-Our "computer science" label has misled people into thinking that we can fix their computers.
-
-Although the first computer scientists did study computers,
-computer scientists now don't study computers anymore because software has grown too big;
-now computer scientists study mostly software,
-and the hardware is supposed to be studied by /computer engineers/.
-
-A computer-science student should study both hardware and software
-because a computer has a hardware part and a software part,
-But, in fact, a computer-science student studies much more software than hardware,
-and will often work with software while taking hardware for granted in their jobs.
-
-Perhaps universities should also merge law departments and computer science departments into /software departments/.
-** Software structural engineering
-<2019-08-15>
-
-Here we transplant /civil structural engineering/ to /software structural engineering/ by analogy.
-
-Both civil structural engineers and software structural engineers do /capacity planning/ and /load testing/.
-
-Civil structural engineers deal with the /strength of materials/, whereas software structural engineers deal with the /emptying rate of queues/.
-
-The science of civil structural engineering is based on /continuum mechanics/,
-whereas the science of software structural engineering is based on /queuing theory/.
-
-Material breakage is analogous to /full queue/.
-
-When a civil structure fails, the /building/ collapses.
-When a software structure fails, the /system performance/ collapses: latency skyrockets and throughput drops.
-
-Structural engineers design structures to /withstand probable adversities/ according to cost-benefit analysis.
-Civil structural engineers design structures to withstand /heat, wind, earthquakes, etc./
-Software structural engineers design systems to withstand /load spikes, network disruptions, disk failures, etc./
-If we are building a skyscraper in an earthquake-prone region, we must seriously consider earthquakes.
-If we are building a system for 1,000,000 concurrent users, we must seriously consider traffic spikes, network disruptions, and other adversities.
-If we are merely building a system with 10,000 lines of code for 10 users,
-and it will stay that way for 100 years, then it is a waste of resources to bake in a grandiose architecture.
-If you need a shack, and it will satisfy you for 1,000 years, then perhaps don't build a skyscraper.
-* Other article drafts
 ** <2019-07-06> Jakarta the doomed city
 Jakarta is sinking into the sea.
  [fn::Jakarta Is The World's Fastest-Sinking City (HBO) https://www.youtube.com/watch?v=dNE5aptbGyY]
@@ -210,34 +315,6 @@ But it is an insult to the roaches.
 Customs officials can make their own laws because they face no consequences:
 There is no practical way to hold them accountable for their actions.
 Also, people don't care.
-** <2019-07-06> AWS RDS automated backup doesn't always work
-AWS RDS PostgreSQL point-in-time recovery (PITR) does not always work.
-
-The error message is only the phrase "Incompatible-restore", and no more information.
-What the hell?
-
-Always routinely test the restorability of your backups.
-
-In a company with 50 engineers,
-there is one potentially business-ending accident per year,
-like an accidental deletion of a production database.
-
-A good system is not designed by wishing that people are smart.
-Scripts have shitty user interfaces.
-Smart people make mistakes.
-
-Meanwhile, accidents do happen elsewhere in the cloud.
- [fn::GOTO 2017 • Debugging Under Fire: Keep your Head when Systems have Lost their Mind • Bryan Cantrill https://www.youtube.com/watch?v=30jNsCVLpAE]
-Joyent, Heroku, AWS, Gitlab.
-Accidental reboots.
-Accidental table droppings.
-Other costly software accidents are
-Ariane-5[fn::https://iansommerville.com/software-engineering-book/case-studies/ariane5/]
-and Therac-25[fn::https://en.wikipedia.org/wiki/Therac-25] (but is it really a software accident?).
-It's just a matter time before there is a software accident as massive as Chernobyl.
-
-I think most software accidents can be attributed to the hubris of some humans,
-be it of managers, engineers, or operators, or a combination of them.
 ** <2019-07-06> Is freedom of speech important?
 Examples of degrees of freedom of speech:
 - In USA and Canada, you can talk shit about the government, as long as you don't make death threats, or the cops will get you.
@@ -261,13 +338,6 @@ but actually he has better chances than you do,
 because windmills don't fight back, whereas governments do.
 The freedom to bear arms is just a ceremonial distraction
 from more important issues such as imperialism, privacy, and borders.
-** <2019-07-06> Network Address Translation contributes to oppression
-NAT is unholy: It contributes to the oppression of dissidents and journalists, because it hampers peer-to-peer technologies.
-It precludes peer-to-peer truly distributed Web.
-But P2P (peer-to-peer) over NAT may be possible with UDP/TCP/ICMP hole-punching.
-Require an intermediary server only for initial handshake and then the connection is "handed over".
-
-Really no 3rd party in this NAT traversal?[fn::https://github.com/samyk/pwnat]
 ** <2019-07-06> Gerrymandering
 Gerrymandering is a self-inflicted pain with a simple solution:
 proportional representation[fn::https://www.fairvote.org/how_proportional_representation_would_finally]
@@ -280,31 +350,6 @@ How does Alabama have a government that does not represent its constituents
  [fn::https://www.motherjones.com/politics/2019/05/previously-unreleased-poll-shows-alabama-voters-disapprove-of-extreme-abortion-ban/]
  [fn::https://www.vox.com/policy-and-politics/2019/5/18/18630562/alabama-abortion-ban-voters-exemption-for-rape-incest]?
 Gerrymandering?
-** <2019-07-06> Best laughters
-- lateralusmaster's laughing at mountain dew name votes https://www.youtube.com/watch?v=rxu3kZPlZx8
-- shadowporker's laughing at "gluten-free lapdances" https://www.youtube.com/watch?v=beA-HMLVb9M
-- Rabbit fall (kanin faldet) Big Brother DK https://www.youtube.com/watch?v=kGKMVXxyXXY&list=PLZrbXygxJiiu5zWE_EmpVrP7ZbYzbujoT&index=7
-- Bradley Walsh cracks up at Fanny Chmelar https://www.youtube.com/watch?v=qfRwUKjJMxE&list=PLZrbXygxJiiu5zWE_EmpVrP7ZbYzbujoT&index=12
-- news anchor reading the name "Chris P Bacon"
-- Russian news anchor reading news about bears in marijuana plantation
-- Man Struggles To Make It Up His Icy Driveway With Trash Can 2:41, 2:47 https://www.youtube.com/watch?v=xlrLFadODEA&list=PLZrbXygxJiiu5zWE_EmpVrP7ZbYzbujoT&index=22
-- Meterstick Jim - The Sims 3: The funniest patch notes https://www.youtube.com/watch?v=4nxsCZ2SEcQ&list=PLZrbXygxJiiu5zWE_EmpVrP7ZbYzbujoT&index=23
-** <2019-07-06> Two approaches to living: here-first and there-first
-There are two approaches to living:
-- There-first: Start with what you want, and find what you should have:
-  Find what things have to exist in order to satisfy the goal.
-- Here-first: Start with what you have, and find what you should want:
-  Find what can be done with what already exists.
-** <2019-07-06> Friendship is fluid and circumstantial
-At 10 years old, we are friends because we are in the same class, and we don't have better things to do.
-Simple physical proximity.
-But we stop being friends as soon as we graduate out of school.
-
-At 20 years old, we are friends because we are in the same company.
-We stop being friends as soon as we resign.
-
-At 30 years, we are friends because we share a goal or hobby or problem, because we care about a common thing.
-We stop being friends as soon as our problem is solved.
 ** <2019-08-14> Elections should have an entrance fee
 The amount is not important, but should be low, but not zero.
 What is important is that an entrance fee /exists/.
@@ -375,23 +420,7 @@ human culture is also heading toward a singularity.
 
 Having different governments also enables tax avoidance, money laundering, and wage slavery,
 by enabling one to arbitrage different regulations in different countries.
-** <2019-07-06> Knots
-Knots are complex.
-Seemingly dead knots in my shorts can suddenly untie when tugged some time after they were tied.
-** <2019-07-06> Blinking Morse code as covert communication channel
-Jeremiah Denton signals "torture" by blinking on TV while he was a war prisoner in Vietnam.
- [fn::https://qz.com/1625459/learning-morse-code-is-a-valuable-skill-even-in-the-21st-century/]
-** <2019-07-07> Do not ask Google (or anyone else) questions that only you can answer
-Like "If I am my own target audience, what should I write, for myself?"
-** <2019-07-07> Using government data?
-Marc Dacosta: Adventures in the Dark Web of Government Data[fn::https://www.youtube.com/watch?v=SzkyuGeNDf8]:
-joining multiple disparate data sources.
-** <2019-08-14> Writing is a non-linear process
-From https://macademic.org/2011/03/15/writing-philosophy/:
-- "Combining these different pieces of information does not happen in an orderly linear process."
-- "Writer’s block often comes from being too closely linked to the linearity of a process and
-  the inability to break out small pieces of text to work on and move with ideas."
-** <2019-08-14> People, not beliefs, deserve respect.
+** <2019-08-14> People, not beliefs, deserve respect
 We can respectfully treat people who believe unjustifiable things such as religions, superstitions, but we should not respect their beliefs.
 If we facilitate some people with stupid beliefs, it is not because we respect their beliefs, but because we respect their feelings.
 
@@ -409,24 +438,89 @@ A perverse situation may arise, in which the individual is praised for success, 
 perhaps due to our desire to feel good and avoid conflicts.
 An example of such perverse situation is the belief "If this country advances, it's due to the president; if this country regresses, it's due to the government",
 or "If this company profits, it's due to the director; if the company loses, it's due to everyone".
-** <2019-08-14> Electromagnetic wave
-In Maxwell's theory, an electric charge instantaneously affects all of space,
-and an electromagnetic wave is not something emitted by an electric charge.
 ** <2019-08-14> Why are corporations legal people?
 Corporations are legal people so that they can be sued and brought into court.
  [fn::https://www.forbes.com/sites/timworstall/2012/11/17/ill-believe-corporations-are-people-when-texas-executes-one-what-is-this-foolishness-from-robert-reich/#78f1f29633f2]
-* Perhaps not too important
-** Why do you make this website?
-Because I find thinking, writing, and planning fun.
-This website contains questions that I think should be answered.
+** <2019-08-17> Entrepreneurial employee is exploitation
+Work as hard as entrepreneurs, get paid as low as employees.
+** <2019-08-17> British imperialism?
+Opium wars?[fn::https://amp.cnn.com/cnn/2019/05/26/opinions/china-is-not-the-enemy-sachs/index.html]
+* Other article drafts
+** <2019-07-06> AWS RDS automated backup doesn't always work
+AWS RDS PostgreSQL point-in-time recovery (PITR) does not always work.
 
-I think of myself as three different people:
-- my past self
-- my present self
-- my future self
+The error message is only the phrase "Incompatible-restore", and no more information.
+What the hell?
 
-This website is a way for those three people to communicate.
-** What is your goal tree?
+Always routinely test the restorability of your backups.
+
+In a company with 50 engineers,
+there is one potentially business-ending accident per year,
+like an accidental deletion of a production database.
+
+A good system is not designed by wishing that people are smart.
+Scripts have shitty user interfaces.
+Smart people make mistakes.
+
+Meanwhile, accidents do happen elsewhere in the cloud.
+ [fn::GOTO 2017 • Debugging Under Fire: Keep your Head when Systems have Lost their Mind • Bryan Cantrill https://www.youtube.com/watch?v=30jNsCVLpAE]
+Joyent, Heroku, AWS, Gitlab.
+Accidental reboots.
+Accidental table droppings.
+Other costly software accidents are
+Ariane-5[fn::https://iansommerville.com/software-engineering-book/case-studies/ariane5/]
+and Therac-25[fn::https://en.wikipedia.org/wiki/Therac-25] (but is it really a software accident?).
+It's just a matter time before there is a software accident as massive as Chernobyl.
+
+I think most software accidents can be attributed to the hubris of some humans,
+be it of managers, engineers, or operators, or a combination of them.
+** <2019-07-06> Network Address Translation contributes to oppression
+NAT is unholy: It contributes to the oppression of dissidents and journalists, because it hampers peer-to-peer technologies.
+It precludes peer-to-peer truly distributed Web.
+But P2P (peer-to-peer) over NAT may be possible with UDP/TCP/ICMP hole-punching.
+Require an intermediary server only for initial handshake and then the connection is "handed over".
+
+Really no 3rd party in this NAT traversal?[fn::https://github.com/samyk/pwnat]
+** <2019-07-06> Best laughters
+- lateralusmaster's laughing at mountain dew name votes https://www.youtube.com/watch?v=rxu3kZPlZx8
+- shadowporker's laughing at "gluten-free lapdances" https://www.youtube.com/watch?v=beA-HMLVb9M
+- Rabbit fall (kanin faldet) Big Brother DK https://www.youtube.com/watch?v=kGKMVXxyXXY&list=PLZrbXygxJiiu5zWE_EmpVrP7ZbYzbujoT&index=7
+- Bradley Walsh cracks up at Fanny Chmelar https://www.youtube.com/watch?v=qfRwUKjJMxE&list=PLZrbXygxJiiu5zWE_EmpVrP7ZbYzbujoT&index=12
+- news anchor reading the name "Chris P Bacon"
+- Russian news anchor reading news about bears in marijuana plantation
+- Man Struggles To Make It Up His Icy Driveway With Trash Can 2:41, 2:47 https://www.youtube.com/watch?v=xlrLFadODEA&list=PLZrbXygxJiiu5zWE_EmpVrP7ZbYzbujoT&index=22
+- Meterstick Jim - The Sims 3: The funniest patch notes https://www.youtube.com/watch?v=4nxsCZ2SEcQ&list=PLZrbXygxJiiu5zWE_EmpVrP7ZbYzbujoT&index=23
+** <2019-07-06> Two approaches to living: here-first and there-first
+There are two approaches to living:
+- There-first: Start with what you want, and find what you should have:
+  Find what things have to exist in order to satisfy the goal.
+- Here-first: Start with what you have, and find what you should want:
+  Find what can be done with what already exists.
+** <2019-07-06> Friendship is fluid and circumstantial
+At 10 years old, we are friends because we are in the same class, and we don't have better things to do.
+Simple physical proximity.
+But we stop being friends as soon as we graduate out of school.
+
+At 20 years old, we are friends because we are in the same company.
+We stop being friends as soon as we resign.
+
+At 30 years, we are friends because we share a goal or hobby or problem, because we care about a common thing.
+We stop being friends as soon as our problem is solved.
+** <2019-07-06> Knots
+Knots are complex.
+Seemingly dead knots in my shorts can suddenly untie when tugged some time after they were tied.
+** <2019-07-06> Blinking Morse code as covert communication channel
+Jeremiah Denton signals "torture" by blinking on TV while he was a war prisoner in Vietnam.
+ [fn::https://qz.com/1625459/learning-morse-code-is-a-valuable-skill-even-in-the-21st-century/]
+** <2019-07-07> Using government data?
+Marc Dacosta: Adventures in the Dark Web of Government Data[fn::https://www.youtube.com/watch?v=SzkyuGeNDf8]:
+joining multiple disparate data sources.
+** <2019-08-14> Electromagnetic wave
+In Maxwell's theory, an electric charge instantaneously affects all of space,
+and an electromagnetic wave is not something emitted by an electric charge.
+** <2019-08-17> Economics: anti-cafe
+In anti-cafe, one pays for time, not for food.[fn::https://en.wikipedia.org/wiki/Anti-café]
+* Site map (was goal tree)
 - Survive and have fun
   - [[file:live.html][Live forever]]
     - Live healthily
@@ -481,6 +575,17 @@ and /product breakdown structure/[fn::https://en.wikipedia.org/wiki/Product_brea
 <2019-07-06>
 I am tired of planning and thinking top-down.
 Now I'm trying to think bottom-up, reactive, improvisatory, opportunistic.
+* Perhaps not too important
+** Why do you make this website?
+Because I find thinking, writing, and planning fun.
+This website contains questions that I think should be answered.
+
+I think of myself as three different people:
+- my past self
+- my present self
+- my future self
+
+This website is a way for those three people to communicate.
 ** Who are you?
 I am an independent[fn::https://en.wikipedia.org/wiki/Independent_scientist] researcher from Indonesia,
 with too many interests, mostly theoretical,
@@ -531,4 +636,18 @@ If you are in Jakarta, we may meet in some meetups.
 I may also be found at these places, but I rarely check them:
 - [[https://twitter.com/ErikDominikus][Twitter:ErikDominikus]]
 - [[https://www.linkedin.com/in/erikdominikus/][Linkedin:erikdominikus]]
+** What are some similar websites?
+These are some websites similar to this website and their differences.
+
+[[https://kevinbinz.com/][kevinbinz.com]] is more like a blog than a wiki.
+
+[[https://en.wikipedia.org/][en.wikipedia.org]] does not want original content.
+(Also, if [[https://www.quora.com/Will-it-be-feasible-to-move-Wikipedia-mediaWiki-from-PHP-to-some-modern-language-like-Golang][Kelly Kinkade's answer]] is true, then it's worrying that so much human knowledge is stored in such unparseable MediaWiki markup language.)
+
+TheBrain: the idea is good, but the app is slower than static web.
+
+[[https://www.brainpickings.org][brainpickings.org]]:
+too social, too much content, too little navigation, too little structure;
+pop science content is too much pop and too little science.
+
 * Bibliography

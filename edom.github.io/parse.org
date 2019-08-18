@@ -1,76 +1,35 @@
-#+TITLE: Find an elegant parsing method
+#+TITLE: On parsing formal languages
 #+DATE: 2018-04-11 00:00 +0700
 #+OPTIONS: ^:nil toc:nil
 #+PERMALINK: /parse.html
-* Questions about notation
-What does the arrow in \( A \to BC \) mean?
-"Reduces to"?
-Should the arrow point left or right?
-* <2019-07-31> Begin with an unparser, and invert it?
-Idea:
-Can we write an unparser, and derive a parser?
-Because unparsing (Tree -> String) is easier than parsing (String -> Tree).
+* What is the problem with parsing?
+Alternative title: Criteria for desirable solutions to the parsing problem.
+** Absence of suitable formalism
+We need a simple and reliable way for programming /stateful context-sensitive parsers/;
+real world parsing is seldom stateless or context-free.
+ [fn::http://trevorjim.com/parsing-not-solved/]
+ [fn::https://tratt.net/laurie/blog/entries/parsing_the_solved_problem_that_isnt.html]
+ [fn::https://news.ycombinator.com/item?id=8505382]
+ [fn::http://lambda-the-ultimate.org/node/4489]
+ [fn::https://news.ycombinator.com/item?id=2327313]
 
-Interesting article with very relevant introduction:
-\cite{danielsson2013correct} mentions \cite{matsuda2013flipprap}:
-#+BEGIN_QUOTE
-Matsuda and Wang (2013) attack the problem in a somewhat different way. They show how, starting from an extended pretty-printer,
-one can use program inversion techniques to automatically derive a
-parser that satisfies the round-tripping property (assuming that the
-underlying grammar is unambiguous). A typical pretty-printer does
-not contain enough information to construct a parser, so they introduce a biased choice operator [...]
-#+END_QUOTE
+TODO Summarize these highly relevant papers:
+\cite{laurent2016taming},
+\cite{afroozeh2015one}.
 
-String = Char*
+It seems to me that most parsing methods are clever but unprincipled engineering tricks
+in which mathematical justifications are afterthoughts, if there are even any at all.
+However, an example of the few /principled approaches/ to parsing is Shieber 1995 /deductive parsing/ \cite{shieber1995principles}.
 
-Node = (Type, String, Node*)
+Operator precedence parsing does not fit into context-free grammar formalism?
 
-#+BEGIN_EXAMPLE
--- How do we invert this homomorphism?
-f (Append a b) = mappend (f a) (f b)
-#+END_EXAMPLE
-
-#+BEGIN_EXAMPLE
--- ???
-g Plus = "+"
-g Times = "*"
-
--- How do we invert this function?
-f (Exp op a b) = g op <> " " <> f a <> " " <> f b
-#+END_EXAMPLE
-
-Inverting a binary function produces a ternary relation.
-* On the cause of the problem with left-recursion
-Parsers that associate parsing a sequence of nonterminals with calling a sequence of subroutines
-will fail for left-recursion or right-recursion or both.
-* Idea: incremental update of the set of all currently possible parse trees?
-* Procedural parsing?
-Parsing machine primitives:
-- Read the next character from the input port.
-- Set the input position.
-- Compare characters.
-
-How do those primitives compose?
-* <2019-04-20> The most elegant parsing method so far
-So far I think Prolog DCG (definite-clause grammar) is the most elegant,
-although still unsatisfactory due to its inability to handle left recursion,
-although such left recursion can be manually transformed into a right recursion.
-
-Brzozowski derivatives are interesting but I have yet to find an understandable explanation for context-free grammars.
-* What is parsing?
-In 1550, "to parse" is "to state the parts of speech in a sentence".[fn::https://www.etymonline.com/word/parse]
-** What is the problem?
+The problem is "we don’t know how to /specify/ language syntax"[fn::http://trevorjim.com/parsing-not-solved/].
 The problem is to design a language that describes languages.
 To design a language specification language.
 To design a meta-language, for describing grammars, with practical operational semantics.
-
-The problem is "we don’t know how to /specify/ language syntax"[fn::http://trevorjim.com/parsing-not-solved/].
-
-The language should facilitate these:
-- Specify the grammar of Haskell off-side rule.
-- Specify the grammar of C.
-- Specify the grammar of C++.
-
+This meta-language should handle hard things such as
+Haskell off-side rule and C/C++ syntax.
+** Parsers are not composable
 Are composable grammars and parsers possible?[fn::https://tratt.net/laurie/blog/entries/parsing_the_solved_problem_that_isnt.html]
 
 Prolog definite-clause grammar (DCG) formalism is almost a dream.
@@ -79,396 +38,8 @@ It handles context-sensitive grammars.
 Its only weakness is its non-handling of left recursion.
 But it seems that every left-recursive grammar can be algorithmically transformed into an equivalent non-left-recursive grammar, so what's the problem?
 It shouldn't be too hard to implement a left recursion elimination algorithm for Prolog DCGs.
-** Parsing with Brzozowski quotients
-Parsing with Brzozowski quotients
- [fn::http://matt.might.net/articles/parsing-with-derivatives/]
- [fn::https://github.com/webyrd/relational-parsing-with-derivatives/blob/master/README.md]
- \cite{might2011parsing}.
-Does the general parser community understand that?
-How do we implement it in Prolog?
-
-Some things I find interesting from \cite{might2011parsing}:
-- Kleene fixed-point theorem has a practical application.
-
-Equational theories?
-Now that's a principled parsing.
-
-The result of left-dividing a language \(L\) by a string \(c\) is
-\(
-c \backslash L = \SetBuilder{w}{cw \in L}
-\).
-\cite{brzozowski1964derivatives}
-\cite{might2011parsing}
-
-Atoms[fn::https://blog.github.com/2018-10-31-atoms-new-parsing-system/]
-
-Differentiating Parsers[fn::http://lambda-the-ultimate.org/node/3704]
-
-Might et al.'s 2011 pearl \cite{might2011parsing} is not in Grune & Jacobs's 2008 book \cite{grune2008parsing}, but the book does mention Brzozowski.
-Brzozowski's idea goes back to his 1964 paper \cite{brzozowski1964derivatives}.
-But who would have thought of adding laziness and memoization on top of it, and generalize it to context-free grammars?
-(Formal definition?)
-*** What?
-- Differentiating Parsers
-  Automatic derivation of incremental parser from a grammar or a non-incremental parser?
-  Like automatic differentiation but generalized to any program?
-  http://lambda-the-ultimate.org/node/3704
-- http://matt.might.net/articles/implementation-of-regular-expression-matching-in-scheme-with-derivatives/
-- http://okmij.org/ftp/continuations/differentiating-parsers.html
-- Parsing with derivatives?
-
-  - https://hackage.haskell.org/package/derp
-  - https://arxiv.org/abs/1010.5023
-  - http://matt.might.net/articles/parsing-with-derivatives/ "Yacc is dead"
-
-- Brzozowski quotients.
-
-  - [[https://arxiv.org/abs/1010.5023][Yacc is dead]]
-  - "Parsing with derivatives"
-
-- 2017, [[https://www.cl.cam.ac.uk/~nk480/parsing.pdf]["A Typed, Algebraic Approach to Parsing"]]
-
-  - "[...] we extend the notion of Brzozowski derivative from regular expressions to the typed context-free expressions."
-*** Digression: How is the Brzozowski derivative a derivative?
-Why does Brzozowski 1964 \cite{brzozowski1964derivatives} calls it derivative if it is actually a quotient?
-The article contains has no explanation, so here goes our guess.
-
-The /Brzozowski derivative of language \(R\) with respect to string \(s\)/
-is written \(D_s R\) and is \(\SetBuilder{t}{st \in R}\) \cite{brzozowski1964derivatives}.
-The \(D_a\) in equation 3.7 in that article would indeed be a differential-algebraic /derivation/[fn::https://en.wikipedia.org/wiki/Derivation_(differential_algebra)]
-(generalized product rule) if it lost the \(\delta(P)\) term:
-\[
-D_a(PQ) = (D_a P) Q + \delta(P) D_a Q
-\]
-But it is a derivative (a "derivation" /in spirit/),
-and there are other things called derivatives that do not exactly satisfy the product rule either.
-It makes sense for regular expressions to have derivatives,
-because regular expressions can be studied from abstract-algebra perspective,
-because regular expressions form an algebra as defined in Brzozowski 1964 section 2 (although he does not explicitly mention that the structure is indeed an algebra).
-
-A corollary: what is the integral?
-Smith & Yau 1972 \cite{smith1972generation} defines an integral counterpart to Brzozowski derivatives.
-But is that integral really an anti-derivative?
-
-Another corollary:
-Under what conditions do quotients form derivations/derivatives?
-** What
-The /multiplication/ of two strings $x$ and $y$ is the concatenation $x \cdot y = x y$.
-
-Multiplication is associative: $(xy)z = x(yz)$.
-
-The /inverse/ of a string $x$ is written $x^{-1}$.
-It's hypothetical.
-It's pure symbolic manipulation.
-Don't imagine what it looks like.
-Do care about its properties:
-
-- We define $x^{-1} x = \epsilon$.
-- We define $x x^{-1} = \epsilon$.
-- We define $(x y)^{-1} = x^{-1} y^{-1}$.
-
-The /left division/ of a string $x$ by divisor $y$ is $y^{-1} x$.
-
-The /right division/ of a string $x$ by divisor $y$ is $x y^{-1}$.
-
-How do we define quotient and remainder?
-
-The Brzozowski derivative is a quotient[fn::https://en.wikipedia.org/wiki/Quotient_of_a_formal_language],
-because it is the result of dividing a language (a set of strings) by a string.
-** The semantics of grammar expressions
-Consider the expression X,Y.
-Declaratively it means X followed by Y.
-Operationally it means match X /then/ match Y.
-** Possible-prefix incremental parsing?
-Given a string S, find all rules that /may/ match a string that begins with S.
-** A language can be thought of as a possibly infinite set of strings
-** Grammar and parsing
-Grammar is the what.
-Parsing is the how.
-
-We say that a parser /implements/ a grammar.
-** Techniques?
-In /recursive descent parsing/[fn::https://en.wikipedia.org/wiki/Recursive_descent_parser], the program procedures mirror the grammar rules.
-Backtracking /unreads/ the input (places the input back into a queue).
-
-"How should I specify a grammar for a parser?"[fn::https://softwareengineering.stackexchange.com/questions/107266/how-should-i-specify-a-grammar-for-a-parser]
-
-Naive parser with memoization.
-
-TODO sample Leiss's book "Language equations"
-** Regular expressions can be extended to context-free expressions by adding a fixed-point expression involving a binder
-\( \mu a . b \).
-** String and tree
-A /string/ is a homogeneous sequence.
-
-A /tree/ may be represented by a list of lists.
-
-Parsing is relating strings and trees.
-Parsing is creating a tree from a string.
-
-What is an alphabet?
-It may be the set of Unicode character code points.
-It may be the set of the tokens that a /lexical analyzer/ may produce.
-
-A parser /implements/ a grammar, as a machine /implements/ an algorithm.
-
-A /lexer/ is a degenerate[fn::https://en.wikipedia.org/wiki/Degeneracy_(mathematics)] parser whose codomain is a list (which is a degenerate tree).
-
-The parser is /parallelizable/ if there exists a relatively fast function \(combine\) such that for all \(x,y \in C^*\):
-\[
-P(xy) = combine(P(x), P(y))
-\]
-* Left-recursion elimination
-It is possible to /manually/ eliminate left recursion by rewriting all rules of the form
-\(A \to AB | C\) to \(A \to C B^*\)
-where each of \(A\) and \(B\) is an expression that does not begin with \(A\).
-I have an example in =parse_manual.pro=.
-
-Are we OK with manual transformations?
-There are not many left-recursive rules in practice.
-
-For the computer, our manual transformation is a perfectly fine solution.
-
-The grammar must not have a nullable left-recursive rule like \( A \to A \) or \( A \to \epsilon^* \).
-Otherwise a computer running a naive top-down left-to-right parsing algorithm is doomed into infinite loop.
-But we can argue that the only \(A\) satisfying \(A \to A\) is \(epsilon\),
-and that \( \epsilon^* = \epsilon \).
-
-Two problems arise:
-- What about the parse tree?
-  We want a parser, not a matcher.
-- Can it be automated?
-
-Why do we care about left recursion?
-Grune & Jacobs 2008 sums it up:
-"Basically almost all parsing is done by top-down search with left-recursion protection"\cite[p. vii]{grune2008parsing}.
-
-We are interested in eliminating left recursion from Prolog definite-clause grammars (DCGs).
-
-to-do: summarize:
-- https://en.wikipedia.org/wiki/Left_recursion
-- https://www.microsoft.com/en-us/research/publication/removing-left-recursion-from-context-free-grammars/
-
-I got this idea for left-recursion elimination on <2019-02-20>, but this may be well-known.
-** What is left recursion?
-This is a grammar with three left-recursive non-terminals.
-\begin{align*}
-A &\to B | C
-\\ B &\to Ab | b
-\\ C &\to Bc | c
-\end{align*}
-
-We say that \(A\) /left-calls/ \(B\) iff there exists a reduction \(A \to B C\).
-
-A non-terminal \(A\) is /left-recursive/ iff it may reduce to something beginning with itself.
-For example, the following rule \(A\) is left-recursive.
-\begin{align*}
-A &\to B
-\\ B &\to \epsilon | AC
-\end{align*}
-
-The left-call graph.
-Each vertex represents a non-terminal.
-An edge \((A,B)\) represents that \(A\) left-calls \(B\).
-
-If the left-call graph is cyclic, then a top-down parser may not work.
-
-Left-recursion elimination is about breaking cycles in the left-call graph.
-
-How do we delete the minimum number of edges from a graph to make it acyclic?
-Is this problem NP-hard?
-** Semiring of languages
-We care about algebra because it guides us to /correct/ algorithms.
-
-A /semiring/ is---roughly---an additive group, a multiplicative group, and an interaction between addition and multiplication.
-
-The alphabet is \(A\).
-It is a finite set.
-
-The semiring's underlying set is \(A^*\).
-
-The languages of the same alphabet form a semiring.
-
-0 is the empty set.
-
-1 is \(\Set{\epsilon}\), the language that consists of the empty string only.
-
-Addition is set union.
-
-Multiplication is language concatenation: \(AB = \SetBuilder{ab}{a \in A, b \in B}\).
-** Production rule, language endofunction, and least fixed point
-We can think of a production rule as a /language endofunction/.
-For example, we can think of the rule \(A \to \epsilon | a A\) as the function \(A \mapsto 1 + \Set{a} A\).
-Then, we can think of the language described by the rule as the /least fixed point/ of the corresponding function,
-that is, the smallest set such that \(A = 1 + \Set{a} A\).
-
-If a rule is non-recursive, then the corresponding language endofunction
-is a constant function that does not depend on the parameter.
-** Factoring finite left-recursion
-Conjecture:
-Every finite left-recursive rule can be factored into the form \(A \to AB | C\)
-such that the rule \(A \to C\) would not be left-recursive.
-
-Example of /infinite/ left recursion:
-\(A \to Aa\).
-It matches an infinite string of \(a\).
-** Left-recursive language
-Because every rule can be factored as above,
-it suffices us to consider the least fixed point of the function \( A \mapsto AB + C \).
-
-We obtain the least fixed point by inferring the pattern formed by repeatedly replacing \(A = AB+C\) and manipulating the equation.
-\begin{align*}
-A &= AB+C
-\\ A &= (AB+C)B + C
-\\ A &= ABB + CB + C
-\\ A &= (AB+C)BB + CB + C
-\\ A &= ABBB + CBB + CB + C
-\\ A &= \ldots + CB^3 + CB^2 + CB^1 + CB^0
-\\ A &= \sum_{k\in\Nat} CB^k
-\\ A &= C \sum_{k\in\Nat} B^k
-\\ A &= C B^*
-\end{align*}
-It turns out that \( lfp(A \mapsto AB + C) = C B^* \).
-
-Because we are not using extended context-free grammar (which would have regular expressions and the Kleene star),
-we have to introduce an auxiliary non-terminal \(A'\) for representing \(B^*\):
-\begin{align*}
-A &= C A'
-\\ A' &= 1 + BA'
-\end{align*}
-
-Observe that \(A' = B^*\).
-\begin{align*}
-A' &= 1 + BA'
-\\ A' &= 1 + B(1 + BA')
-\\ A' &= 1 + B(1 + B(1 + BA'))
-\\ A' &= \sum_{k\in\Nat} B^k
-\end{align*}
-** Left-recursion elimination algorithm
-The algebra leads us to this left-recursion elimination algorithm:
-1. Remove the original rule for the left-recursive non-terminal \(A\) from the grammar.
-1. Factor that original rule into the form \(A \to AB | C\) such that \(A \to C\) would not be left-recursive and would not be empty.
-   If this is impossible, tell the user about the infinite left recursion.
-   Do not add \(A \to AB | C\) to the grammar; this rule is only an intermediate product.
-1. Add these two rules to the grammar: \(A \to C A'\) and \(A' \to \epsilon | B A'\).
-
-We have just eliminated left-recursion in a principled way, in a provably language-preserving way, guided by algebra.
-Now we understand why it works.
-If we forget the algorithm, we can always derive it from the algebra.
-
-Example:
-#+BEGIN_EXAMPLE
-Original left-recursive rule:
-exp :- num ; "(", exp, ")" ; exp, "*", exp ; exp, "+", exp
-
-After factoring (A :- ...) into (A :- A,B ; C):
-exp :- exp, ("*", exp ; "+", exp) ; (num ; "(", exp, ")")
-
-After replacement:
-exp :- (num ; "(", exp, ")"), exp0
-exp0 :- "" ; ("*", exp ; "+", exp), exp0
-#+END_EXAMPLE
-** Inlining the auxiliary rule's parse tree
-Two grammars describing the same language may produce different parse trees.
-
-Unfortunately left-recursion elimination changes the syntax tree.
-How do we unchange it?
-** TODO Prolog implementation
-Write a Prolog program to eliminate left recursion from definite-clause grammars.
-
-The logical meaning of the Prolog DCG rule \(A(x) \to B_1(x), \ldots, B_n(x)\) is the predicate \(A\)
-where \(A(x,s_1,s_{n+1}) \leftarrow ( B_1(x,s_1,s_2) \wedge \ldots \wedge B_n(x,s_n,s_{n+1}) )\).
-** Reverse parsing
-parse((A,B),C) iff parse(r((A,B)),r(C)).
-
-where r((A,B)) = r(B),r(A).
-
-Reversing the parser makes it right-to-left top-down parser.
-It can now handle left-recursion, but it can now not handle right-recursion.
-* Language-oriented approach
-The language-oriented approach to parsing is to make a language for expressing a relation between strings and trees.
-
-The structure of the concrete syntax tree reflects the structure of the grammar production rules.
-
-Example: a regular expression is a DSL for string matching / pattern matching / parsing.
-* What is the inverse of parsing?
-The inverse of parsing is /unparsing/ (tree linearization).
-
-A reverse of parsing is /grammar inference/, that is to find a grammar that produces a given set of sentences \cite[p. 1]{grune2008parsing}.
-
-Parsing is the treeization (delinearization, deserialization) of a line.
-Unparsing is the linearization (serialization) of a tree.
-
-Parsing is String -> Maybe Tree.
-Unparsing is Tree -> String.
-
-Can we make parsing truly one-to-one?
-String -> Tree.
-CST = AST.
-Very rigid syntax.
-Forbid whitespace freedom.
-
-Another possibility: Inverse of parsing is anti-parsing (generation)?
-From grammar, generate all possible strings and their syntax trees.
-
-Inverse of analytical grammar is generative grammar?
-
-- https://en.wikipedia.org/wiki/Generative_grammar
-- https://en.wikipedia.org/wiki/Formal_grammar#Analytic_grammars
-
-Parser is syntax analyzer.
-Analysis is the opposite of synthesis?
-What is syntax synthesizer?
-
-Inverse of parsing is pretty-printing?
-
-If matching is analogous to subtraction, then what is analogous to multiplication?
-Generation?
-
-- algebra of pretty-printing
-
-  - 1995, Hughes, "The design of a pretty-printing library"
-  - 1998, Wadler, "A prettier printer"
-  - Hughes, Peyton-Jones, et al., http://hackage.haskell.org/package/pretty-1.1.3.6/docs/Text-PrettyPrint-HughesPJ.html
-
-- [[https://www.cs.kent.ac.uk/people/staff/oc/pretty.html][Efficient simple pretty printing combinators]]
-* Relational parsing
-** What?
-Recall that a /relation/ is a triple that consists of domain, codomain, and pairing.
-
-A grammar \(G\) can be thought of as a relation between the set \(F\) of forms and the set \(M\) of meanings: \(G \subseteq F \times M\).
-
-In computer-language parsing, usually the form set \(F = C^*\) is the set of character strings,
-and the meaning set \(M\) is the set of syntax tree nodes.
-
-Viewing grammar as /relation/ leads to writing parsers as /logic programs/, which are almost synonymous with /relational programs/.
-
-Shieber, Schabes, & Pereira 1995 \cite{shieber1995principles} sees parsing as deduction.
-It sees parsing from proof-theory point of view.
-It presents a proof-theoretic framework that unifies several parsing algorithms (CYK, Earley, etc.).
-It implies that we can use a theorem prover for parsing.
-But should we?
-
-The correspondence: one Chomsky production rule corresponds to one Horn clause with two parameters (input and rest/unparsed).
-P(A,B) means that the rule P matches the prefix of A that B lacks.
-
-A DCG predicate can be thought of as a relation between two strings.
-\( P \subseteq C^* \times C^* \).
-
-A /grammar relation/ is a relation \(G \subseteq C^* \times T\).
-The set \(C\) is the /alphabet/.
-The set \(C^*\) is the /Kleene closure/ of \(C\).
-The set \(T\) is the set of /syntax trees/.
-
-Let \(G\) be a grammar.
-
-We say that a string \(S\) is /grammatical/ with respect to \(G\) iff there exists a tree \(T\) such that \(G(S,T)\).
-We may omit "with respect to \(G\)" if it is clear from context that there is only one grammar.
-
-Iff the grammar relation is a function, then we say that the grammar is /unambiguous/.
-** History of DCG?
-DCG evolved from Colmerauer's "metamorphosis grammar"?
-* How do we parse? How should we?
+* /How/ do we parse?
+Grune & Jacobs 2008 book \cite{grune2008parsing} is a comprehensive collection of parsing methods.
 ** How?
 Zaytsev & Bagge 2014 \cite{zaytsev2014parsing} survey
 
@@ -627,7 +198,7 @@ If the rules \(A\) and \(B\) are invertible, then the concatenation nonterminal 
 
 Thus we say the relation =cons/3= is invertible: =cons(H,T,[H|T])=.
 
-We want something similar to Rendell & Ostermann 2010 \cite{rendel2010invertible}, but in Prolog instead of Haskell.
+We want something similar to Rendel & Ostermann 2010 \cite{rendel2010invertible}, but in Prolog instead of Haskell.
 
 Given view : D -> V and modv : V -> V, the interpreter should be able to infer modd : D -> D.
 
@@ -926,7 +497,7 @@ We shouldn't chicken out.
 We shouldn't compromise by working around our grammar descriptions.
 *** Precedence parsing?
 - 1996 article "An Operator Precedence Parser for Standard Prolog Text" https://onlinelibrary.wiley.com/doi/abs/10.1002/%28SICI%291097-024X%28199607%2926%3A7%3C763%3A%3AAID-SPE33%3E3.0.CO%3B2-L
-** Metainterpreter for left-recursive parsing?
+** Meta-interpreter for left-recursive parsing?
 "Parsing with left-recursive grammars"
 https://www.metalevel.at/acomip/
 ** What is left-recursion, and how should we handle it?
@@ -973,17 +544,617 @@ http://www.cs.sfu.ca/~cameron/Teaching/383/DCG.html
 "Jacc's LR-Parsing with Dynamic Operators"
 "This part of the Jacc documentation explains the modifications we can make to a basic table-driven LR parser generator à la yacc to accommodate support for Prolog's dynamic operators."
 http://www.hassan-ait-kaci.net/hlt/doc/hlt/jaccdoc/dynamicLR.html
-* Conferences
-ACM SIGPLAN SLE http://www.sleconf.org/blog/11-20-2013-parsing-at-sle-2013
-* Why can't top-down parsers (Prolog DCG) handle left recursion?
-Can we fix it by prescribing a different operational semantics?
+** Parsing with Brzozowski quotients
+*** What Brzozowski quotients?
+Parsing with Brzozowski quotients
+ [fn::http://matt.might.net/articles/parsing-with-derivatives/]
+ [fn::https://github.com/webyrd/relational-parsing-with-derivatives/blob/master/README.md]
+ \cite{might2011parsing}.
+Does the general parser community understand that?
+How do we implement it in Prolog?
 
-Should we just use bottom-up parsers?
-* Can we extend Brzozowski derivatives to context-sensitive expressions?
+Some things I find interesting from \cite{might2011parsing}:
+- Kleene fixed-point theorem has a practical application.
+
+Equational theories?
+Now that's a principled parsing.
+
+The result of left-dividing a language \(L\) by a string \(c\) is
+\(
+c \backslash L = \SetBuilder{w}{cw \in L}
+\).
+\cite{brzozowski1964derivatives}
+\cite{might2011parsing}
+
+Atoms[fn::https://blog.github.com/2018-10-31-atoms-new-parsing-system/]
+
+Differentiating Parsers[fn::http://lambda-the-ultimate.org/node/3704]
+
+Might et al.'s 2011 pearl \cite{might2011parsing} is not in Grune & Jacobs's 2008 book \cite{grune2008parsing}, but the book does mention Brzozowski.
+Brzozowski's idea goes back to his 1964 paper \cite{brzozowski1964derivatives}.
+But who would have thought of adding laziness and memoization on top of it, and generalize it to context-free grammars?
+(Formal definition?)
+*** What?
+- Differentiating Parsers
+  Automatic derivation of incremental parser from a grammar or a non-incremental parser?
+  Like automatic differentiation but generalized to any program?
+  http://lambda-the-ultimate.org/node/3704
+- http://matt.might.net/articles/implementation-of-regular-expression-matching-in-scheme-with-derivatives/
+- http://okmij.org/ftp/continuations/differentiating-parsers.html
+- Parsing with derivatives?
+
+  - https://hackage.haskell.org/package/derp
+  - https://arxiv.org/abs/1010.5023
+  - http://matt.might.net/articles/parsing-with-derivatives/ "Yacc is dead"
+
+- Brzozowski quotients.
+
+  - [[https://arxiv.org/abs/1010.5023][Yacc is dead]]
+  - "Parsing with derivatives"
+
+- 2017, [[https://www.cl.cam.ac.uk/~nk480/parsing.pdf]["A Typed, Algebraic Approach to Parsing"]]
+
+  - "[...] we extend the notion of Brzozowski derivative from regular expressions to the typed context-free expressions."
+*** Digression: How is the Brzozowski derivative a derivative?
+Why does Brzozowski 1964 \cite{brzozowski1964derivatives} calls it derivative if it is actually a quotient?
+The article contains has no explanation, so here goes our guess.
+
+The /Brzozowski derivative of language \(R\) with respect to string \(s\)/
+is written \(D_s R\) and is \(\SetBuilder{t}{st \in R}\) \cite{brzozowski1964derivatives}.
+The \(D_a\) in equation 3.7 in that article would indeed be a differential-algebraic /derivation/[fn::https://en.wikipedia.org/wiki/Derivation_(differential_algebra)]
+(generalized product rule) if it lost the \(\delta(P)\) term:
+\[
+D_a(PQ) = (D_a P) Q + \delta(P) D_a Q
+\]
+But it is a derivative (a "derivation" /in spirit/),
+and there are other things called derivatives that do not exactly satisfy the product rule either.
+It makes sense for regular expressions to have derivatives,
+because regular expressions can be studied from abstract-algebra perspective,
+because regular expressions form an algebra as defined in Brzozowski 1964 section 2 (although he does not explicitly mention that the structure is indeed an algebra).
+
+A corollary: what is the integral?
+Smith & Yau 1972 \cite{smith1972generation} defines an integral counterpart to Brzozowski derivatives.
+But is that integral really an anti-derivative?
+
+Another corollary:
+Under what conditions do quotients form derivations/derivatives?
+*** What again?
+The /multiplication/ of two strings $x$ and $y$ is the concatenation $x \cdot y = x y$.
+
+Multiplication is associative: $(xy)z = x(yz)$.
+
+The /inverse/ of a string $x$ is written $x^{-1}$.
+It's hypothetical.
+It's pure symbolic manipulation.
+Don't imagine what it looks like.
+Do care about its properties:
+
+- We define $x^{-1} x = \epsilon$.
+- We define $x x^{-1} = \epsilon$.
+- We define $(x y)^{-1} = x^{-1} y^{-1}$.
+
+The /left division/ of a string $x$ by divisor $y$ is $y^{-1} x$.
+
+The /right division/ of a string $x$ by divisor $y$ is $x y^{-1}$.
+
+How do we define quotient and remainder?
+
+The Brzozowski derivative is a quotient[fn::https://en.wikipedia.org/wiki/Quotient_of_a_formal_language],
+because it is the result of dividing a language (a set of strings) by a string.
+*** Regular expressions can be extended to context-free expressions by adding a fixed-point expression involving a binder
+\( \mu a . b \).
+** Relational parsing
+*** What?
+Recall that a /relation/ is a triple that consists of domain, codomain, and pairing.
+
+A grammar \(G\) can be thought of as a relation between the set \(F\) of forms and the set \(M\) of meanings: \(G \subseteq F \times M\).
+
+In computer-language parsing, usually the form set \(F = C^*\) is the set of character strings,
+and the meaning set \(M\) is the set of syntax tree nodes.
+
+Viewing grammar as /relation/ leads to writing parsers as /logic programs/, which are almost synonymous with /relational programs/.
+
+Shieber, Schabes, & Pereira 1995 \cite{shieber1995principles} sees parsing as deduction.
+It sees parsing from proof-theory point of view.
+It presents a proof-theoretic framework that unifies several parsing algorithms (CYK, Earley, etc.).
+It implies that we can use a theorem prover for parsing.
+But should we?
+
+The correspondence: one Chomsky production rule corresponds to one Horn clause with two parameters (input and rest/unparsed).
+P(A,B) means that the rule P matches the prefix of A that B lacks.
+
+A DCG predicate can be thought of as a relation between two strings.
+\( P \subseteq C^* \times C^* \).
+
+A /grammar relation/ is a relation \(G \subseteq C^* \times T\).
+The set \(C\) is the /alphabet/.
+The set \(C^*\) is the /Kleene closure/ of \(C\).
+The set \(T\) is the set of /syntax trees/.
+
+Let \(G\) be a grammar.
+
+We say that a string \(S\) is /grammatical/ with respect to \(G\) iff there exists a tree \(T\) such that \(G(S,T)\).
+We may omit "with respect to \(G\)" if it is clear from context that there is only one grammar.
+
+Iff the grammar relation is a function, then we say that the grammar is /unambiguous/.
+*** History of DCG?
+DCG evolved from Colmerauer's "metamorphosis grammar"?
+** String predicates are not enough
+We want the parse tree, not just a yes-no answer.
+
+At the most basic level we have /string predicates/.
+Similar concepts include functions from String to Bool,
+/recognizers/ (in automata theory), /acceptors/, /membership functions/, /deciders/.
+
+It is well known that there is a correspondence between a predicate \( \Phi \) and the set \( \SetBuilder{x}{\Phi(x)} \).
+
+There is a simple algebra of string predicates,
+because there is the Boolean algebra for propositional logic.
+If each of \( p \) and \( q \) is a string predicate,
+then \( \neg p \) is also a string predicate,
+and \( p \vee q \) is also a string predicate.
+** <2019-04-20> The most elegant parsing method so far
+So far I think Prolog DCG (definite-clause grammar) is the most elegant,
+although still unsatisfactory due to its inability to handle left recursion,
+although such left recursion can be manually transformed into a right recursion.
+
+Brzozowski derivatives are interesting but I have yet to find an understandable explanation for context-free grammars.
+
+GLL parsing may be promising; it handles left recursion.
+* On the relationship between /grammar/ and /parsing/
+Grammars are the /what/.
+
+Parsing is the /how/.
+
+A /grammar/ is a mathematical description.
+"Formal grammars are mathematical models of syntax."[fn::<2019-08-18> http://users.math-cs.spbu.ru/~okhotin/]
+
+A /parser/ is a computer program that /implements/ a grammar.
+
+The arrow in \( A \to BC \) means "reduces to".
+** How do we specify formal grammars in English?
+We do it like this:
+#+BEGIN_QUOTE
+An /expression/ is any of these:
+- a number; or
+- an expression, followed by an operator, folowed by an expression.
+#+END_QUOTE
+
+An example of context-sensitive grammars is C type/identifier:
+
+How do we translate such description into mathematical formalism and then into a computer program?
+
+Examples of formalisms: BNF (Backus--Naur Form), PEG (Parsing Expression Grammar).
+** What is parsing a formal language?
+A /formal language/ can be thought of as a set of strings.
+
+In 1550, "to parse" is "to state the parts of speech in a sentence".[fn::https://www.etymonline.com/word/parse]
+
+Parsing is /converting string to tree/.
+
+A /string/ is a homogeneous sequence.
+
+A /tree/ may be represented by a list of lists.
+
+Parsing is relating strings and trees.
+Parsing is creating a tree from a string.
+
+What is an alphabet?
+It may be the set of Unicode character code points.
+It may be the set of the tokens that a /lexical analyzer/ may produce.
+
+A parser /implements/ a grammar, as a machine /implements/ an algorithm.
+
+A /lexer/ is a degenerate[fn::https://en.wikipedia.org/wiki/Degeneracy_(mathematics)] parser whose codomain is a list (which is a degenerate tree).
+
+The parser is /parallelizable/ if there exists a relatively fast function \(combine\) such that for all \(x,y \in C^*\):
+\[
+P(xy) = combine(P(x), P(y))
+\]
+** The other side: Inferring grammar from a parser?
+Given a parser, can we derive/infer the grammar it implements?
+
+Is it easier than turning a hamburger back into a cow?
+** Can we /derive/ a parser-unparser pair from a grammar?
+Bison and Yacc are examples of deriving parsers from restricted grammars.
+* On the relationship between /grammar/ and /algebras/
+/Regular expressions/ form a nice /algebra/.
+
+Does context-free grammars form an algebra?
+Can we do it without binders?
+
+The Algebraic Theory of Context-Free Languages
+http://www-igm.univ-mlv.fr/~berstel/Mps/Travaux/A/1963-7ChomskyAlgebraic.pdf
+
+Algebra and language theory
+http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.99.2415&rep=rep1&type=pdf
+
+General context-free recognition in less than cubic time[fn::https://www.sciencedirect.com/science/article/pii/S0022000075800468],
+from[fn::https://math.stackexchange.com/questions/871151/what-type-of-algebra-are-valiants-algebras-for-context-free-grammars]
+** Can we extend Brzozowski derivatives to context-sensitive expressions?
 Context-free expression is regular expression plus fixed points.
 
 A context-sensitive rule has a left-hand side that may contain more than one non-terminal.
 An example of such rule is \(AB \to C\).
+* On the possible mathematical /foundations/ for parsing
+** Parsing with logic
+See also: Shieber 1995 /deductive parsing/ \cite{shieber1995principles}.
+
+A /parser/ is a relation between /strings/ and /trees/.
+
+Such parser is /unambiguous/ iff it is a function.
+
+An /unparser/ is a relation between /trees/ and /strings/.
+
+A /string/ can be thought of a relation between /natural numbers/ and /characters/.
+
+A /tree/ can be thought of as a "child-of" endorelation of nodes.
+Thus "\(T(x,y)\)" means "the node \(x\) is a child of the node \(y\)".
+
+A /node/ is a tuple \((t,x,y)\) where \(t\) is the node type, \(x\) the string begin index, and \(y\) the string end index.
+
+A /non-terminal/ corresponds to a binary predicate.
+** Parsing with mostly algebra and some calculus
+A Typed, Algebraic Approach to Parsing
+https://www.cl.cam.ac.uk/~nk480/parsing.pdf
+
+Chomsky-style formalism?
+
+Regular.
+
+A character \(c\) means the character itself.
+
+\(A \cdot B\) means sequencing.
+
+\(A + B\) means choice.
+
+\(\mu A. B\), fixed-point?
+** Functional foundations?
+The /Kleene star/ constructs an infinite set of strings from a finite set of alphabets.
+
+\( A^* = \bigcup_{n \in \Nat} A^n \)
+
+Trees also have constructors, /algebraic data type constructors/.
+
+The set of /parse trees/ is \( T = \Nat \times A^* \).
+
+An /unparser/ is a function \( u : T \to A^* \).
+
+An unambiguous /parser/ is a function \( p : A^* \to T \).
+
+Stateful parser \( S \times A^* \to S \times T \).
+
+The natural number selects the data constructor.
+
+What is the standard term for a function from String to Bool?
+Recognizers/acceptors/deciders/membership-functions/string-predicates?
+
+"Is this string in the language?"
+* On /left recursion/ and its solution
+** What is the problem of left recursion?
+To appreciate the severity of this problem,
+first be impressed by the elegance of declarative parsing methods
+such as Prolog DCGs or Haskell parser combinators,
+and then try to implement a simple arithmetic expression parser,
+and then be disappointed by infinite recursion.
+** What causes left recursion to be a problem for various declarative parsing methods?
+Most declarative parsing methods (Prolog DCGs, Haskell monadic parser combinators)
+cannot handle left recursion because we pick a
+/simple but unsuitable operational semantics/ for those declarative languages.
+
+The grammar itself prescribes no inherent /sequence/ of parsing.
+The defect is introduced when the grammar is translated into a parser.
+
+All programming is eventually procedural.
+
+Parsers that associate parsing a sequence of nonterminals with calling a sequence of subroutines
+will fail for left-recursion or right-recursion or both.
+
+Why can't Prolog DCG handle left recursion?
+Can we fix it by prescribing a different operational semantics?
+** What is the meaning of a left-recursive non-terminal anyway?
+Consider the rule \( A \to A a | b \).
+** How do we solve it?
+There are several choices:
+- Give up, and /manually/ eliminate left recursion.
+- /Improve/ existing formalisms.
+- Find another formalism (or perhaps an operational semantics)
+  that may be totally different but absolutely handles all recursion (left recursion, right recursion, mutual recursion, etc.).
+** Alternative operational semantics: thread-spawning/asynchrony instead of subroutine-calling
+CPS transformation, then inversion of control / callback.
+
+The semantics of a non-terminal is a /stream of matches/.
+
+This can also be used as an alternative operational semantics to Prolog so that Prolog can handle left-recursive predicates
+while sacrificing execution order predictability.
+
+This doesn't work;
+this would just spawn infinite threads instead of making infinite calls, and computers are finite.
+This is just exacerbating the resource exhaustion problem by parallelization.
+
+It seems that the core problem is the operational semantics of fixed points.
+** Unsatisfactory manual left-recursion elimination
+It is possible to /manually/ eliminate left recursion by rewriting all rules of the form
+\(A \to AB | C\) to \(A \to C B^*\)
+where each of \(A\) and \(B\) is an expression that does not begin with \(A\).
+I have an example in =parse_manual.pro=.
+
+Can we do better?
+Not about automating this manual left-recursion elimination,
+but about finding a formalism that can inherently handle left recursion.
+
+Are we OK with manual transformations?
+There are not many left-recursive rules in practice.
+
+For the computer, our manual transformation is a perfectly fine solution.
+
+The grammar must not have a nullable left-recursive rule like \( A \to A \) or \( A \to \epsilon^* \).
+Otherwise a computer running a naive top-down left-to-right parsing algorithm is doomed into infinite loop.
+But we can argue that the only \(A\) satisfying \(A \to A\) is \(epsilon\),
+and that \( \epsilon^* = \epsilon \).
+
+Two problems arise:
+- What about the parse tree?
+  We want a parser, not a matcher.
+- Can it be automated?
+
+Why do we care about left recursion?
+Grune & Jacobs 2008 sums it up:
+"Basically almost all parsing is done by top-down search with left-recursion protection"\cite[p. vii]{grune2008parsing}.
+
+We are interested in eliminating left recursion from Prolog definite-clause grammars (DCGs).
+
+to-do: summarize:
+- https://en.wikipedia.org/wiki/Left_recursion
+- https://www.microsoft.com/en-us/research/publication/removing-left-recursion-from-context-free-grammars/
+
+I got this idea for left-recursion elimination on <2019-02-20>, but this may be well-known.
+*** What is left recursion?
+This is a grammar with three left-recursive non-terminals.
+\begin{align*}
+A &\to B | C
+\\ B &\to Ab | b
+\\ C &\to Bc | c
+\end{align*}
+
+We say that \(A\) /left-calls/ \(B\) iff there exists a reduction \(A \to B C\).
+
+A non-terminal \(A\) is /left-recursive/ iff it may reduce to something beginning with itself.
+For example, the following rule \(A\) is left-recursive.
+\begin{align*}
+A &\to B
+\\ B &\to \epsilon | AC
+\end{align*}
+
+The left-call graph.
+Each vertex represents a non-terminal.
+An edge \((A,B)\) represents that \(A\) left-calls \(B\).
+
+If the left-call graph is cyclic, then a top-down parser may not work.
+
+Left-recursion elimination is about breaking cycles in the left-call graph.
+
+How do we delete the minimum number of edges from a graph to make it acyclic?
+Is this problem NP-hard?
+*** Semiring of languages
+We care about algebra because it guides us to /correct/ algorithms.
+
+A /semiring/ is---roughly---an additive group, a multiplicative group, and an interaction between addition and multiplication.
+
+The alphabet is \(A\).
+It is a finite set.
+
+The semiring's underlying set is \(A^*\).
+
+The languages of the same alphabet form a semiring.
+
+0 is the empty set.
+
+1 is \(\Set{\epsilon}\), the language that consists of the empty string only.
+
+Addition is set union.
+
+Multiplication is language concatenation: \(AB = \SetBuilder{ab}{a \in A, b \in B}\).
+*** Production rule, language endofunction, and least fixed point
+We can think of a production rule as a /language endofunction/.
+For example, we can think of the rule \(A \to \epsilon | a A\) as the function \(A \mapsto 1 + \Set{a} A\).
+Then, we can think of the language described by the rule as the /least fixed point/ of the corresponding function,
+that is, the smallest set such that \(A = 1 + \Set{a} A\).
+
+If a rule is non-recursive, then the corresponding language endofunction
+is a constant function that does not depend on the parameter.
+*** Factoring finite left-recursion
+Conjecture:
+Every finite left-recursive rule can be factored into the form \(A \to AB | C\)
+such that the rule \(A \to C\) would not be left-recursive.
+
+Example of /infinite/ left recursion:
+\(A \to Aa\).
+It matches an infinite string of \(a\).
+*** Left-recursive language
+Because every rule can be factored as above,
+it suffices us to consider the least fixed point of the function \( A \mapsto AB + C \).
+
+We obtain the least fixed point by inferring the pattern formed by repeatedly replacing \(A = AB+C\) and manipulating the equation.
+\begin{align*}
+A &= AB+C
+\\ A &= (AB+C)B + C
+\\ A &= ABB + CB + C
+\\ A &= (AB+C)BB + CB + C
+\\ A &= ABBB + CBB + CB + C
+\\ A &= \ldots + CB^3 + CB^2 + CB^1 + CB^0
+\\ A &= \sum_{k\in\Nat} CB^k
+\\ A &= C \sum_{k\in\Nat} B^k
+\\ A &= C B^*
+\end{align*}
+It turns out that \( lfp(A \mapsto AB + C) = C B^* \).
+
+Because we are not using extended context-free grammar (which would have regular expressions and the Kleene star),
+we have to introduce an auxiliary non-terminal \(A'\) for representing \(B^*\):
+\begin{align*}
+A &= C A'
+\\ A' &= 1 + BA'
+\end{align*}
+
+Observe that \(A' = B^*\).
+\begin{align*}
+A' &= 1 + BA'
+\\ A' &= 1 + B(1 + BA')
+\\ A' &= 1 + B(1 + B(1 + BA'))
+\\ A' &= \sum_{k\in\Nat} B^k
+\end{align*}
+*** Left-recursion elimination algorithm
+The algebra leads us to this left-recursion elimination algorithm:
+1. Remove the original rule for the left-recursive non-terminal \(A\) from the grammar.
+1. Factor that original rule into the form \(A \to AB | C\) such that \(A \to C\) would not be left-recursive and would not be empty.
+   If this is impossible, tell the user about the infinite left recursion.
+   Do not add \(A \to AB | C\) to the grammar; this rule is only an intermediate product.
+1. Add these two rules to the grammar: \(A \to C A'\) and \(A' \to \epsilon | B A'\).
+
+We have just eliminated left-recursion in a principled way, in a provably language-preserving way, guided by algebra.
+Now we understand why it works.
+If we forget the algorithm, we can always derive it from the algebra.
+
+Example:
+#+BEGIN_EXAMPLE
+Original left-recursive rule:
+exp :- num ; "(", exp, ")" ; exp, "*", exp ; exp, "+", exp
+
+After factoring (A :- ...) into (A :- A,B ; C):
+exp :- exp, ("*", exp ; "+", exp) ; (num ; "(", exp, ")")
+
+After replacement:
+exp :- (num ; "(", exp, ")"), exp0
+exp0 :- "" ; ("*", exp ; "+", exp), exp0
+#+END_EXAMPLE
+*** Inlining the auxiliary rule's parse tree
+Two grammars describing the same language may produce different parse trees.
+
+Unfortunately left-recursion elimination changes the syntax tree.
+How do we unchange it?
+*** TODO Prolog implementation
+Write a Prolog program to eliminate left recursion from definite-clause grammars.
+
+The logical meaning of the Prolog DCG rule \(A(x) \to B_1(x), \ldots, B_n(x)\) is the predicate \(A\)
+where \(A(x,s_1,s_{n+1}) \leftarrow ( B_1(x,s_1,s_2) \wedge \ldots \wedge B_n(x,s_n,s_{n+1}) )\).
+*** Reverse parsing
+parse((A,B),C) iff parse(r((A,B)),r(C)).
+
+where r((A,B)) = r(B),r(A).
+
+Reversing the parser makes it right-to-left top-down parser.
+It can now handle left-recursion, but it can now not handle right-recursion.
+** GLL parsers?
+"To handle left-recursive grammars, we need to reimagine the parser combinators."[fn::https://epsil.github.io/gll/]
+* On the almost-/duality/ of parsing and unparsing
+/Partial isomorphisms/ \cite{rendel2010invertible} and the /biased choice operator/ \cite{Matsuda2013FliPprAP}.
+** What is the inverse of parsing?
+The inverse of parsing is /unparsing/ (tree linearization).
+
+A reverse of parsing is /grammar inference/, that is to find a grammar that produces a given set of sentences \cite[p. 1]{grune2008parsing}.
+
+Parsing is the treeization (delinearization, deserialization) of a line.
+Unparsing is the linearization (serialization) of a tree.
+
+Parsing is String -> Maybe Tree.
+Unparsing is Tree -> String.
+
+Can we make parsing truly one-to-one?
+String -> Tree.
+CST = AST.
+Very rigid syntax.
+Forbid whitespace freedom.
+
+Another possibility: Inverse of parsing is anti-parsing (generation)?
+From grammar, generate all possible strings and their syntax trees.
+
+Inverse of analytical grammar is generative grammar?
+
+- https://en.wikipedia.org/wiki/Generative_grammar
+- https://en.wikipedia.org/wiki/Formal_grammar#Analytic_grammars
+
+Parser is syntax analyzer.
+Analysis is the opposite of synthesis?
+What is syntax synthesizer?
+
+Inverse of parsing is pretty-printing?
+
+If matching is analogous to subtraction, then what is analogous to multiplication?
+Generation?
+
+- algebra of pretty-printing
+
+  - 1995, Hughes, "The design of a pretty-printing library"
+  - 1998, Wadler, "A prettier printer"
+  - Hughes, Peyton-Jones, et al., http://hackage.haskell.org/package/pretty-1.1.3.6/docs/Text-PrettyPrint-HughesPJ.html
+
+- [[https://www.cs.kent.ac.uk/people/staff/oc/pretty.html][Efficient simple pretty printing combinators]]
+* The semantics of grammar expressions
+Consider the expression X,Y.
+Declaratively it means X followed by Y.
+Operationally it means match X /then/ match Y.
+* What ideas?
+** Possible-prefix incremental parsing?
+Given a string S, find all rules that /may/ match a string that begins with S.
+** Techniques?
+In /recursive descent parsing/[fn::https://en.wikipedia.org/wiki/Recursive_descent_parser], the program procedures mirror the grammar rules.
+Backtracking /unreads/ the input (places the input back into a queue).
+
+"How should I specify a grammar for a parser?"[fn::https://softwareengineering.stackexchange.com/questions/107266/how-should-i-specify-a-grammar-for-a-parser]
+
+Naive parser with memoization.
+
+TODO sample Leiss's book "Language equations"
+** <2019-07-31> Begin with an unparser, and invert it?
+Idea:
+Can we write an unparser, and derive a parser?
+Because unparsing (Tree -> String) is easier than parsing (String -> Tree).
+
+Interesting article with very relevant introduction:
+\cite{danielsson2013correct} mentions \cite{Matsuda2013FliPprAP}:
+#+BEGIN_QUOTE
+Matsuda and Wang (2013) attack the problem in a somewhat different way. They show how, starting from an extended pretty-printer,
+one can use program inversion techniques to automatically derive a
+parser that satisfies the round-tripping property (assuming that the
+underlying grammar is unambiguous). A typical pretty-printer does
+not contain enough information to construct a parser, so they introduce a biased choice operator [...]
+#+END_QUOTE
+
+String = Char*
+
+Node = (Type, String, Node*)
+
+#+BEGIN_EXAMPLE
+-- How do we invert this homomorphism?
+f (Append a b) = mappend (f a) (f b)
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+-- ???
+g Plus = "+"
+g Times = "*"
+
+-- How do we invert this function?
+f (Exp op a b) = g op <> " " <> f a <> " " <> f b
+#+END_EXAMPLE
+
+Inverting a binary function produces a ternary relation.
+** Idea: incremental update of the set of all currently possible parse trees?
+** Procedural parsing?
+Parsing machine primitives:
+- Read the next character from the input port.
+- Set the input position.
+- Compare characters.
+
+How do those primitives compose?
+** Language-oriented approach
+The language-oriented approach to parsing is to make a language for expressing a relation between strings and trees.
+
+The structure of the concrete syntax tree reflects the structure of the grammar production rules.
+
+Example: a regular expression is a DSL for string matching / pattern matching / parsing.
+* Conferences
+ACM SIGPLAN SLE http://www.sleconf.org/blog/11-20-2013-parsing-at-sle-2013
 * Politics of parsing
 This patent (US patent 6449589, "Elimination of left recursion from context-free grammars")[fn::http://www.freepatentsonline.com/6449589.html][fn::https://patents.google.com/patent/US6449589B1/] should not exist?
 * Declarative Programming Research Group

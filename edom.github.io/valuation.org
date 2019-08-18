@@ -1,0 +1,235 @@
+#+TITLE: On financial valuation
+#+MATHJAX: yes
+#+DATE: 2016-01-01 00:00:00 +0700
+#+PERMALINK: /valuation.html
+#+OPTIONS: ^:nil
+* Notes
+This is a very sketchy draft.
+Many other stuffs need to be written down here.
+
+It is straightforward to write a Haskell program that implements this theory.
+Indeed a similar thing has been done in 2000 \cite{SpjContract}.
+* Primitive valuables
+
+The value of the /null valuable/ is zero.
+
+The value of an amount of /cash/ is the amount itself.
+
+$$
+\newcommand\fVal{\mathsf{val}}
+\newcommand\fEmpty{\mathsf{empty}}
+\newcommand\fCash{\mathsf{cash}}
+\newcommand\fNeg{\mathsf{neg}}
+\newcommand\fBoth{\mathsf{both}}
+\newcommand\fMax{\mathsf{max}}
+\newcommand\fMin{\mathsf{min}}
+\begin{align*}
+\fVal ~ \fEmpty &= 0
+\\ \fVal ~ (\fCash ~ a) &= a.
+\end{align*}
+$$
+
+* Basic combinators of valuables
+
+The expression $\fNeg~x$ represents giving up $x$.
+
+The expression $\fBoth~x~y$ represents owning both $x$ and $y$.
+
+The expression $\fMax~x~y$ represents choosing the one of $x$ or $y$ that has the greatest value.
+
+The expression $\fMin~x~y$ represents choosing the one of $x$ or $y$ that has the least value.
+
+$$
+\begin{align*}
+\fVal ~ (\fNeg~x) &= - \fVal~x
+\\ \fVal ~ (\fBoth ~ x ~ y) &= \fVal ~ x + \fVal ~ y
+\\ \fVal ~ (\fMax ~ x ~ y) &= \fMax ~ (\fVal ~ x) ~ (\fVal ~ y).
+\\ \fVal ~ (\fMin ~ x ~ y) &= \fMin ~ (\fVal ~ x) ~ (\fVal ~ y).
+\end{align*}
+$$
+
+If $x$ and $y$ are valuables, we will also write
+$$
+\begin{align*}
+-x &= \fNeg~x
+\\ x+y &= \fBoth~x~y
+\\ x-y &= \fBoth~x~(\fNeg~y)
+\end{align*}
+$$
+with unary $-$ taking precedence over binary $+$,
+and $+$ associating to the right:
+$$
+- x + y + z = (-x) + (y + z).
+$$
+
+* The value of a delayed valuable
+
+The value of a valuable that becomes owned after a /delay/ $d$ is
+$$
+\newcommand\fDelay{\mathsf{delay}}
+\newcommand\fDiscRate{\textsf{discrate}}
+\fVal ~ (\fDelay ~ d ~ x) = (\fDiscRate~x)^d \cdot \fVal~x
+$$
+where $\fDiscRate~x$ is the /discount rate/ of the valuable:
+$$
+\fDiscRate~(\fCash~\_) = \frac{1}{1+r}
+$$
+where $r$ is the /risk-free interest rate/.
+Both $d$ and $r$ must use the same unit of time.
+
+* The value of a chance to own a valuable
+
+The value of a /chance/ to own $x$ with probability $p$ is
+$$
+\newcommand\fChance{\textsf{chance}}
+\newcommand\fRiskApt{\textsf{riskapt}}
+\fVal ~ (\fChance ~ p ~ x) = \fRiskApt~p \cdot \fVal~x.
+$$
+where everyone is assumed to have the same /risk appetite function/ $\fRiskApt$
+satisfying this functional equation[fn::http://en.wikipedia.org/wiki/Functional_equation]:
+$$
+\begin{align*}
+\fRiskApt~0 &= 0
+\\ \fRiskApt~1 &= 1
+\\ \fRiskApt~(p\cdot q) &= \fRiskApt~p\cdot\fRiskApt~q.
+\end{align*}
+$$
+The function $\fRiskApt$
+will be a power function[fn::http://math.stackexchange.com/questions/43964/if-fxy-fxfy-then-show-that-fx-xt-for-some-t],
+that is
+$$
+    \fRiskApt~p = p^k
+$$
+where $k$ is a constant.
+If $k = 1$ (and thus $\fRiskApt~p = p$), the valuation is risk-neutral.
+If $k > 1$ (and thus $\fRiskApt~p < p$), the valuation is risk-averse.
+
+If you are interested about [[http://en.wikipedia.org/wiki/Cauchy%27s_functional_equation][Cauchy's functional equation]],
+there is an overview at [[http://math.stackexchange.com/questions/423492/overview-of-basic-facts-about-cauchy-functional-equation][Math Stack Exchange]].
+
+(The function $\fRiskApt$ is an endomorphism of the group $([0,1],\cdot)$,
+if this helps you find things on the Internet.)
+
+* Laws of valuables
+
+These laws should be intuitive:
+$$
+\begin{align*}
+-(x+y) &= (-x) + (-y)
+\\ - \fMax~x~y &= \fMin~(-x)~(-y).
+\end{align*}
+$$
+
+Delaying a delay just makes a bigger delay for valuation purposes:
+$$
+\fVal \circ \fDelay~a \circ \fDelay~b = \fVal \circ \fDelay~(a+b).
+$$
+
+Chance and delay can be commuted for valuation purposes:
+$$
+\fVal \circ \fChance ~ p \circ \fDelay ~ t = \fVal \circ \fDelay ~ t \circ \fChance ~ p.
+$$
+
+Chance to get a chance just makes a smaller chance for valuation purposes:
+$$
+\fVal \circ \fChance ~ p \circ \fChance ~ q = \fVal \circ \fChance~(p \cdot q).
+$$
+
+Delay distributes over $\fBoth$ for valuation purposes:
+$$
+\fVal~(\fDelay~d~(\fBoth~x~y)) = \fVal~(\fBoth~(\fDelay~d~x)~(\fDelay~d~y)).
+$$
+
+* The value of annuities and perpetuities
+
+This is an /annuity/ with $n$ installments,
+each having amount $a$,
+paid every period $p$:
+
+$$
+\newcommand\fAnnuity{\textsf{annuity}}
+\begin{align*}
+\fAnnuity ~ p ~ 0 ~ a &= 0
+\\ \fAnnuity ~ p ~ n ~ a &= \fCash ~ a + \fDelay ~ p ~ (\fAnnuity ~ p ~ (n-1) ~ a).
+\end{align*}
+$$
+
+/Perpetuity/ with period $p$ and individual installment amount $a$:
+$$
+\newcommand\fPerpetuity{\textsf{perpetuity}}
+\begin{align*}
+\fPerpetuity ~ p ~ a &= \fCash ~ a + \fDelay ~ p ~ (\fPerpetuity ~ p ~ a)
+\\ \fVal~(\fPerpetuity~p~a) &= \sum_{k=0}^\infty \frac{a}{(1+r)^{k \cdot p}}
+= \frac{a}{1-\frac{1}{(1+r)^p}}.
+\end{align*}
+$$
+
+Time deposit with period $p$ unit time, interest rate $r$ per unit time,
+and principal amount $a$:
+$$
+\newcommand\fDeposit{\textsf{deposit}}
+\newcommand\fInterest{\textsf{interest}}
+\begin{align*}
+\fDeposit ~ p ~ r ~ a &= \fCash ~ a + \fDelay ~ p ~ (\fInterest ~ p ~ r ~ a)
+\\ \fInterest ~ p ~ r ~ a &= r \cdot a + \fDelay ~ p ~ (\fInterest ~ p ~ r ~ ((1+r)\cdot a)).
+\end{align*}
+$$
+
+* The value of actions
+
+** Buying or selling something
+
+$$
+\newcommand\fBuy{\textsf{buy}}
+\newcommand\fSell{\textsf{sell}}
+\newcommand\fBuyprice{\textsf{buyprice}}
+\newcommand\fSellprice{\textsf{sellprice}}
+\begin{align*}
+\fBuy~x &= - \fCash~(\fBuyprice~x) + x
+\\ \fSell~x &= \fCash~(\fSellprice~x) - x
+\end{align*}
+$$
+
+** Buying and holding a stock forever
+
+Buying a stock and holding it forever is equivalent to paying for a perpetuity:
+$$
+\newcommand\fBuyhold{\textsf{buyhold}}
+\fBuyhold ~ s = -\fCash~ c + \fPerpetuity ~ p ~ d
+$$
+where $c$ is the purchase amount,
+$p$ is the dividend period,
+and $d$ is the individual dividend amount.
+
+* The value of forward contracts?
+
+The buyer of a /forward contract/ pays the current price now to get the underlying asset later regardless of the future price:
+$$
+\newcommand\fForward{\textsf{forward}}
+\newcommand\fEuopt{\textsf{euopt}}
+\newcommand\fAmopt{\textsf{amopt}}
+\newcommand\fCurrentprice{\textsf{currentprice}}
+\fForward~d~x = - \fCash~(\fCurrentprice~x) + \fDelay~d~x.
+$$
+
+* Option contracts?
+
+From the buyer's point of view, an European option with expiration $d$
+on an underlying valuable $x$ is
+$$
+\fEuopt ~ d ~ x = \fDelay ~ d ~ (\fMax~\fEmpty~x).
+$$
+
+From the buyer's point of view, an American option with expiration $d$
+on an underlying valuable $x$ is
+$$
+\fAmopt ~ d ~ x =
+\begin{cases}
+\fEmpty &\text{if } d < 0
+\\ \fMax~x~(\fDelay~\delta~(\fAmopt ~ (d - \delta) ~ x)) &\text{otherwise}
+\end{cases}
+$$
+where $\delta$ is the hyperreal infinitesimal.
+
+How do we value them?
+* Bibliography

@@ -1,0 +1,134 @@
+#+TITLE: On the mathematical duality of reading and writing
+#+DATE: 2019-08-17 00:00:00 +0700
+#+PERMALINK: /dual-read-write.html
+#+MATHJAX: true
+* A brief note about /duality/
+Perhaps I don't know what I'm talking about here.
+
+Here I'm loosely using "duality"[fn::https://en.wikipedia.org/wiki/Duality_(mathematics)] in the mathematical sense:
+Roughly, I think, two things are /dual/ if each one can be derived from the other.
+
+Duality enables us to /buy two for the price of one/.
+
+An important benefit of duality is that if we know how to read well,
+then we can /derive/ how to write well from that without much thought.
+
+I want to show that, if you can read, then you can write.
+* Can we /derive/ writing methods from reading methods?
+Yes!
+
+If we have a reading method,
+we can /derive/ a writing method by /reversing the steps/ of the reading method.
+
+If readers best read from the /first/ section to the /last/ section,
+then writers best write from the /last/ section to the /first/ section.
+For example, the conclusion appears last but should be written first;
+whereas the introduction appears first but should be written last.
+
+Here is a more concrete example.
+
+Keshav 2007 \cite{keshav2007read} has a /three-pass reading method/:
+#+BEGIN_QUOTE
+The key idea is that you should read the paper in up to three passes,
+instead of starting at the beginning and plowing your way to the end.
+Each pass accomplishes specific goals and builds upon the previous pass:
+The /first/ pass gives you a general idea about the paper.
+The /second/ pass lets you grasp the paper's content, but not its details.
+The /third/ pass helps you understand the paper in depth.
+#+END_QUOTE
+
+Reversing those steps gives us a /three-pass writing method/ for free:
+
+1. Write the parts that require the /deepest/ understanding.
+2. Write the parts for /grasping/ the gist without drowning in details.
+3. Write the /general/ ideas.
+
+Another example.
+
+This is a possible reading method.
+
+1. Repeat as necessary:
+   1. Read some of the /table of contents/.
+   2. Read the /first sentence/ of some paragraphs.
+   3. Read some paragraphs.
+
+The writing method that is the dual of that reading method is:
+
+1. Repeat as necessary:
+   1. Write some paragraphs (ignoring the quality of their first sentences).
+   2. Write (or rewrite) the /first sentence/ of some paragraph.
+   3. Write some of the /table of contents/.
+      (Group the paragraphs into sections.)
+
+If a reading method is desirable,
+then its dual (the writing method derived by reversing the steps) should also be desirable.
+* Formalism of methods and their duals
+A /method/ is a statement.
+
+A /statement/ is any of these, where E means an expression and S means a statement:
+- read E
+- write E
+- repeat S
+- S then S
+
+Note that the above definition is recursive.
+
+The "then" operator associates to the right: "X then Y then Z" means "X then (Y then Z)".
+
+The /dual/ of a method is defined as follows:
+
+dual(read E) = write E
+
+dual(write E) = read E
+
+dual(repeat S) = repeat dual(S)
+
+dual(S then T) = dual(T) then dual(S)
+
+It can be proven by structural induction that the "dual" function is an /involution/, that is, dual(dual(S)) = S.
+
+Indeed duality enables us to /buy two for the price of one/:
+Everytime we come up with an enhancement to our reading method,
+we get the dual enhancement to the dual writing method /for free/.
+* Derivations?
+** What are desirable reading and desirable writing?
+A desirable reading is /inspiring/ and /enjoyable/.
+However, the process of writing to produce a desirable reading may be /boring/ and /toilsome/.
+** Can reading techniques and writing techniques /inform each other/?
+** Can readers teach writers how to write, and writers teach readers how to read?
+* Systematic reading and systematic writing?
+Readers read text in several passes, from shallow to deep.
+Writers write text in several passes, from deep to shallow.
+
+Writing is the inverse of reading.
+Readers read /top-down/: They begin with table of contents, and then they decide which fragments interest them.
+Writers write /bottom-up/: They begin with scattered fragments that interest them, and then they reorganize those fragments into a table of contents.
+
+Readers build up thoughts: If topic Q requires P, then readers expect to read P before reading Q.
+Writers break down thoughts: If topic Q requires P, then it would be easier for writers to write Q before writing P.
+(Really?)
+
+It is easier for readers to read sequentially.
+It is easier for writers to write fragments randomly and sometimes serendipitously according to what comes to their minds.
+
+The easiest way to write is the hardest way to read.
+The easiest way for writers to write fragments is in /reverse/ to the order readers would find easiest to read.
+If it would be easy for readers to read A-B-C in that order, then it would be easy for writers to write C-B-A in that order.
+
+Thus, in order to make a writing that is easy to read, /write from the end/.
+
+Reading and writing are deserialization and serialization of knowledge, of internal mental models, of internal beliefs.
+
+Writers also read to enrich their writings.
+
+Readers scan and skim.
+Writers also do a similar thing called writing an /outline/ or a /draft/ or a /skeleton/.
+scan-write and skim-write.
+
+How do we read systematically?
+https://libraryguides.griffith.edu.au/systematic-literature-reviews-for-education/systematic-reading
+And how do we derive a way to write systematically from the way to read systematically?
+
+Why Do We Read? - Purposes & Advantages
+https://study.com/academy/lesson/why-do-we-read-purposes-advantages.html
+* Bibliography
