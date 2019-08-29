@@ -1,0 +1,48 @@
+#+TITLE: Towards a comprehensive software system modeling language
+#+DATE: 2019-08-30 00:00:00 +0700
+#+PERMALINK: /software-system-model.html
+#+OPTIONS: ^:nil
+* Ontology
+An /agent/ is something that do something; an agent is something that can be a /cause/.
+In practice, an agent is either a mind running on a human or a program running on a machine.
+
+An agent may /query/ or /command/ another agent.
+For example, a human may command a printer to print something,
+and, as a response, the printer may command the human to fill the paper tray.
+Another example: A Java web application server may command a PostgreSQL database server to insert a row to a particular table.
+
+An agent may /refuse/ commands from some agents.
+An agent may require that commands be equipped with a proof of authentication and authorization.
+
+An agent may /wait/ for another agent.
+An agent may /respond/ to another agent.
+
+An /event/ is either blocking or non-blocking.
+If the event is blocking, the source waits for the target to respond.
+
+An /event/ is either a command or a query.
+An event has a source and a target.
+The source is an agent.
+The target is an agent.
+
+An /interaction/ is a sequence of events.
+
+A /protocol/ is a constraint on interactions.
+An interaction /conforms/ to that protocol iff that interaction satisfies that constraint.
+For example, a protocol may constrain who initiates a particular kind of interaction,
+or constrain the allowed responses to a particular query.
+
+The /interface/ of an agent is the set of all queries and commands exposed by the agent.
+
+A /procedure/ is built by combining queries, commands, conditionals, sequencings, and procedure calls.
+A procedure has inputs and a body.
+Each /input/ has name and type.
+An input corresponds to an HTML "input" tag in a web application,
+and corresponds to an occurrence of the Racket "read" function in a text-user-interface application.
+
+A procedure can be /run/.
+
+A /state/ has a /storage/.
+A storage may be a PostgreSQL server, a local file, or a global variable.
+
+A /table/ has a storage and a layout.
