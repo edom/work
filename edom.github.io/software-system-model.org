@@ -46,3 +46,20 @@ A /state/ has a /storage/.
 A storage may be a PostgreSQL server, a local file, or a global variable.
 
 A /table/ has a storage and a layout.
+* Uniform state manipulation
+The ideas:
+- There should be a uniform way for manipulating state.
+- Manipulating an SQL table should be as easy as manipulating a local variable.
+- SQL connections should be runtime-managed and garbage-collected like RAM.
+
+Non-collections are a special case of collections.
+In a non-collection, select = read, insert = update = write = replace, and delete = truncate, which uninitializes the location.
+
+We can think of an entire array as a location,
+or we can think of an array as a function that maps numbers to locations.
+* Object-relational-XML
+Every object is a relation?
+But collection properties give rise to denormalized relations?
+
+A relation can be thought of a /deduplicated/ object.
+Denormalization is de-deduplication.
