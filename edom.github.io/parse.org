@@ -1107,6 +1107,35 @@ Generation?
 Consider the expression X,Y.
 Declaratively it means X followed by Y.
 Operationally it means match X /then/ match Y.
+* On the set-theoretic fixed-point semantics of context-free non-terminals
+<2019-09-05>
+
+Notation: Let \(X \cdot Y = \SetBuilder{xy}{x \in X, ~ y \in Y}\).
+We call this the "concatenating product".
+
+Suppose that \(f:Set \to Set\) is a set endofunction defined using only set literals, concatenating products, unions, and recursive references to its argument.
+
+Conjecture: Such \(f\) has exactly one fixed point, and this algorithm computes that fixed point:
+#+BEGIN_EXAMPLE
+procedure fixed_point(f) {
+    var x := empty_set
+    loop {
+        let y = f(x)
+        if x = y { return x }
+        else { x := y }
+    }
+}
+#+END_EXAMPLE
+
+Hunch:
+We can use that to make a parser, because a non-terminal rule can be thought of as a set endofunction like that.
+
+For example, consider the rule \( R : A \to A b | c \).
+The rule can be thought as the function \( \hat{R}(\hat{A}) = (\hat{A} \cdot \Set{b}) \cup \Set{c} \).
+The non-terminal \(A\) can be thought of as representing the set \( \hat{A} \)
+satisfying the fixed-point equation \( \hat{A} = (\hat{A} \cdot \Set{b}) \cup \Set{c} \)
+
+The non-terminal \(A\) can be thought of as representing the fixed point of the function \(\hat{R}\).
 * What ideas?
 ** Possible-prefix incremental parsing?
 Given a string S, find all rules that /may/ match a string that begins with S.

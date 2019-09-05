@@ -214,6 +214,16 @@ because it is /unambiguous/ and is built on common primitive operations.
 
 All those primitive operations also happens to be implementable in electronic computers.
 That is, electronic computers can do some human operations.
+** <2019-09-04> On defining languages in other languages
+There are two languages: the /host/ language and the /guest/ language.
+In linguistics, they are called the /meta/-language[fn::https://en.wikipedia.org/wiki/Metalanguage] and the /object/ language, respectively.
+For example, when we teach German to someone who only knows English,
+we use English as the host language and German as the guest language.
+
+We can borrow the host language's concrete syntax,
+so that we can reuse `read-syntax`, but specify different semantics, with an interpretation function.
+
+We can borrow the host language's semantics.
 * Financial research
 ** Financial research articles
 [[file:stock.html][On stocks, their prices, and their financial valuation]]
