@@ -7,16 +7,9 @@
 (require (for-syntax syntax/strip-context))
 (require "racket-extra.rkt")
 
-(provide (rename-out (module-begin #%module-begin)))
-(provide (rename-out (my_define define)))
-(provide (rename-out (my_top #%top)))
-(provide #%app)
-(provide #%datum)
-(provide quote)
-(provide unquote)
-(provide +)
-(provide DEFINITIONS)
 (provide pretty-print)
+
+(provide DEFINITIONS)
 
 ;;  --------------------    Operations.
 
@@ -40,9 +33,9 @@
 
     (define (psql storage)
         (define psql_bin "/usr/bin/psql")
-        (deconstruct storage WITH alist-ref TO (host port catalog user password))
-        (with-environment ((PGPASSWORD password))
-            (define exit_code (system**/exit-code psql_bin "-h" host "-p" port catalog user))
+        (deconstruct storage WITH alist-ref TO (HOST PORT CATALOG USER PASSWORD))
+        (with-environment ((PGPASSWORD PASSWORD))
+            (define exit_code (system**/exit-code psql_bin "-h" HOST "-p" PORT CATALOG USER))
             (unless (= exit_code 0)
                 (error 'psql "subprocess ~a exited with code ~a" psql_bin exit_code))
         ))
@@ -51,33 +44,29 @@
 
     (define DEFINITIONS (make-hash))
 
-    (define-syntax-rule (module-begin Exp ...)
-        (#%module-begin Exp ...))
+;;  The "DEFINE" form.
 
-    (define-syntax-rule (my_top . Id)
-        (hash-ref DEFINITIONS 'Id (lambda () (error "undefined variable:" 'Id))))
-
-;;  The "define" form.
+(provide DEFINE)
 
     (begin-for-syntax
         (define-syntax-class type%
-            #:datum-literals (storage table)
-            (pattern storage)
-            (pattern table)
+            #:datum-literals (STORAGE TABLE)
+            (pattern STORAGE)
+            (pattern TABLE)
         )
         (define-splicing-syntax-class procedure_input%
-            #:datum-literals (input type default)
-            (pattern (input Id
-                (~optional (~seq name Name) #:defaults ((Name #''Id)))
-                type Type
-                (~optional (~seq default Default) #:defaults ((Default #f)))
+            #:datum-literals (DEFAULT INPUT NAME TYPE)
+            (pattern (INPUT Id
+                (~optional (~seq NAME Name) #:defaults ((Name #''Id)))
+                TYPE Type
+                (~optional (~seq DEFAULT Default) #:defaults ((Default #f)))
             ))
         )
         (define-splicing-syntax-class procedure_output%
-            #:datum-literals (output type)
-            (pattern (output Id
-                (~optional (~seq name Name) #:defaults ((Name #''Id)))
-                type Type
+            #:datum-literals (NAME OUTPUT TYPE)
+            (pattern (OUTPUT Id
+                (~optional (~seq NAME Name) #:defaults ((Name #''Id)))
+                TYPE Type
             ))
         )
     )
@@ -128,36 +117,43 @@
             ((_ (~seq Key Val) ...)
                 #'(list (cons `Key Val) ...))))
 
-    (define-syntax (my_define stx)
+    (define-syntax (DEFINE stx)
         (syntax-parse stx
-            #:datum-literals (procedure action value)
+            #:datum-literals (ACTION PROCEDURE VALUE)
             ((_ Type:type% Name (~seq Key Val) ...)
-                #'(hash-set! DEFINITIONS 'Name '((Key . Val) ...))
+                #'(begin
+                    (define Name '((Key . Val) ...))
+                    (hash-set! DEFINITIONS 'Name Name)
+                )
             )
             ((_ value Name Value)
-                #'(hash-set! DEFINITIONS 'Name Value)
+                #'(begin
+                    (define Name Value)
+                    (hash-set! DEFINITIONS 'Name Name)
+                )
             )
-            ((_ procedure Name
+            ((_ PROCEDURE Name
                     (~alt
                         Input:procedure_input%
                         Output:procedure_output%
-                        (~once (action Action ...))
+                        (~once (ACTION Action ...))
                     )
                     ...
                 )
-                #'(let ((Code (lambda ()
-                            (define version 0)
-                            (define execution_id (random 1048576))
-                            (define t0 (current-milliseconds))
-                            (log (list version execution_id 'Name 'start))
-                            (define Input.Id (read_input Input.Name)) ...
-                            (define Output.Id #f) ...
-                            Action ...
-                            (printf "~a = ~v~n" Output.Name Output.Id) ...
-                            (define t1 (current-milliseconds))
-                            (log (list version execution_id 'Name 'stop (- t1 t0)))
-                    )))
-                    (hash-set! DEFINITIONS 'Name Code)
+                #'(begin
+                    (define (Name)
+                        (define version 0)
+                        (define execution_id (random 1048576))
+                        (define t0 (current-milliseconds))
+                        (log (list version execution_id 'Name 'start))
+                        (define Input.Id (read_input Input.Name)) ...
+                        (define Output.Id #f) ...
+                        Action ...
+                        (printf "~a = ~v~n" Output.Name Output.Id) ...
+                        (define t1 (current-milliseconds))
+                        (log (list version execution_id 'Name 'stop (- t1 t0)))
+                    )
+                    (hash-set! DEFINITIONS 'Name Name)
                     #|
                     ;;  Should we define struct Procedure with a prop:procedure property?
                     (hash-set! DEFINITIONS 'Name `(
