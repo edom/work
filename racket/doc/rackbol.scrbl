@@ -1,14 +1,25 @@
 #lang stc-racket/scribble-manual
 
-@(require "../stc-racket/stc-rackbol.rkt")
+@(require rackbol)
 
-@title{STC-Rackbol: SpaceTimeCat Racket-based Business-Oriented Language}
+@title{Rackbol: Racket-based Business-Oriented Language}
 
-@section{About STC-Rackbol}
+@section{About Rackbol}
 
-STC-Rackbol stands for "SpaceTimeCat Racket-based Business-Oriented Language".
+Rackbol stands for "Racket-based Business-Oriented Language".
 
-The key idea is that similar intentions should have similar forms.
+The key ideas are:
+
+@itemlist[
+    @item{Similar intentions should have similar forms.}
+    @item{
+        Programmers should specialize into language designers and language users, not into back-end and front-end.
+        Programmers should specialize into layers of lasagna, not into pieces of cake.
+        Back-end/front-end specialization adds productivity,
+        but language-designer/language-user specialization @emph{multiplies} productivity.
+        The trade off is... it also multiplies complexity? :(
+    }
+]
 
 @section{Before you marry us}
 
@@ -21,11 +32,11 @@ Check that your requirements are compatible with our @emph{fundamental assumptio
     @item{We may change our tech stack and stop supporting our previous tech stacks.}
     @item{
         We act in our self-interest:
-        We do what interests us, the STC-Rackbol developers, not you.
+        We do what interests us, the Rackbol developers, not you.
         If it works for us, we are not going to fix it for you.
     }
-    @item{STC-Rackbol comes with no support and no warranty. Use it at your own risk.}
-    @item{STC-Rackbol is opinionated and inflexible. It is not a general-purpose programming language.}
+    @item{Rackbol comes with no support and no warranty. Use it at your own risk.}
+    @item{Rackbol is opinionated and inflexible. It is not a general-purpose programming language.}
 ]
 
 Those fundamental assumptions are hard to change.
@@ -41,9 +52,9 @@ When that time comes, you have three choices:
 
 @itemlist[
     @item{accept our shortcomings, and learn to live with the pain; or}
-    @item{join us, and help develop STC-Rackbol; or}
+    @item{join us, and help develop Rackbol; or}
     @item{divorce us, and find another language.}
 ]
 
-@include-section[(submod "stc-rackbol-guide.scrbl" doc)]
-@include-section["stc-rackbol-reference.scrbl"]
+@include-section[(submod "rackbol-guide.scrbl" doc)]
+@include-section["rackbol-reference.scrbl"]

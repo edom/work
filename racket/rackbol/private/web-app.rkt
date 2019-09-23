@@ -9,6 +9,9 @@
 
 ;;  Automatic per-thread magic that is supposed to "just work",
 ;;  provided that no threads are killed.
+;;
+;;  Question: Does a custodian still work if its thread is killed instead of
+;;  if its thread finishes normally?
 
 (define connection
     (virtual-connection
@@ -116,4 +119,3 @@
     #:launch-browser? #f
     #:banner? #t
 )
-

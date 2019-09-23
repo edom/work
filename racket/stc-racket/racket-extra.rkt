@@ -130,34 +130,6 @@
     )
 )
 
-#|
-    Group elements by "equal?" keys.
-
-    Return a hash table.
-
-    Syntax:
-
-    GROUP <source> <by>
-
-    where:
-
-    <source>    ::=     LIST <collection>
-                |       VECTOR <collection>
-
-    <by>        ::=     BY FUNCTION <key_func>
-                |       BY DICT KEY <prop_name>
-                |       BY HASH KEY <prop_name>
-                |       BY ASSOC KEY <prop_name>
-
-    <key_func> is a function that takes an element of <collection>
-    and gives its grouping key.
-
-    <prop_name> is a symbol literal.
-    It will automatically be quoted.
-
-    BY HASH KEY requires that each element of <collection> be a hash table.
-|#
-
 (define-syntax-parse GROUP
     [(_ Source:Group_Source By:Group_By)
         #'(my_group By.Key_Func Source.Source)]
