@@ -1,4 +1,4 @@
-#lang rackbol/private/lang
+#lang s-exp "_in.rkt"
 
 ;;  --------------------    Operations.
 
@@ -10,7 +10,7 @@
 ;;  The "psql" binary must be installed at "/usr/bin/psql".
 
 (define (psql storage)
-    (deconstruct storage WITH alist-ref TO (HOST PORT CATALOG USER PASSWORD))
+    (deconstruct storage WITH get_object_property TO (HOST PORT CATALOG USER PASSWORD))
     (with-environment ((PGPASSWORD PASSWORD))
         (define exit_code (system**/exit-code psql_bin "-h" HOST "-p" PORT CATALOG USER))
         (unless (= exit_code 0)

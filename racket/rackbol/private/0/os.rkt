@@ -1,6 +1,4 @@
-#lang racket
-
-(require stc-racket/racket-extra)
+#lang s-exp "_in.rkt"
 
 (provide
     system**/exit-code

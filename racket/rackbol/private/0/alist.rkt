@@ -1,4 +1,4 @@
-#lang racket
+#lang s-exp "_in.rkt"
 
 (provide
     alist-ref

@@ -15,7 +15,7 @@
     NAME employee
 )
 
-(DEFINE PROCEDURE test
+(DEFINE PROCEDURE p_test
     (INPUT x NAME "first number" TYPE Integer DEFAULT 0)
     (INPUT y TYPE Integer DEFAULT 1)
     (OUTPUT z TYPE Integer)
@@ -26,9 +26,8 @@
 
 (DEFINE VALUE x (+ 2 5))
 
-(pretty-print DEFINITIONS)
-
+#|
 (psql pg_1)
-
-(test)
-(test)
+(CALL p_test)
+(CALL p_test)
+|#

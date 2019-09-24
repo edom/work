@@ -1,6 +1,6 @@
-#lang rackbol/private/lang
+#lang s-exp "_in.rkt"
 
-(provide (all-defined-out))
+(provide [all-defined-out])
 
 ;;  Pro: Disabled logging has zero runtime overhead,
 ;;  Con: Toggling logging requires regenerating the code.
