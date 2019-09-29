@@ -1,5 +1,9 @@
 #lang rackbol
 
+;;  To run this example, enter this into Bash:
+;;
+;;      PLTCOLLECTS=$PWD: racket -I rackbol/example -m
+
 (DEFINE STORAGE pg_1
     TYPE postgresql
     HOST localhost
@@ -25,6 +29,12 @@
 )
 
 (DEFINE VALUE x (+ 2 5))
+
+(DEFINE SERVER s_1
+    PROTOCOL HTTP
+    ADDRESS "127.0.0.1"
+    PORT 8080
+)
 
 #|
 (psql pg_1)

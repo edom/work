@@ -1,4 +1,33 @@
-body {
+html {
+    background-color: #fff;
+    color: #000;
     font-family: sans-serif;
-    font-size: 16pt;
+    font-size: 12pt;
+    margin: 0em;
+    padding: 0em;
+}
+
+main {
+    padding: 1rem;
+}
+
+footer {
+    background-color: #ccc;
+    font-size: 10pt;
+    padding: 1rem;
+}
+
+footer p {
+    text-indent: 0rem;
+    margin: 1rem 0rem;
+}
+
+main > :first-child,
+footer > :first-child {
+    margin-top: 0rem;
+}
+
+main > :last-child,
+footer > :last-child {
+    margin-bottom: 0rem;
 }
