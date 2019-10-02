@@ -2,14 +2,8 @@
 
 ;;  --------------------	Racket syntax enhancements / language extensions.
 
+(require syntax/parse/define)
 (require (for-syntax syntax/parse))
-
-(provide define-syntax-parse)
-
-(define-syntax-rule (define-syntax-parse Name Arg ...)
-    [define-syntax (Name stx)
-        (syntax-parse stx Arg ...)
-    ])
 
 ;;  --------------------    LET-like forms with fewer parentheses.
 
@@ -19,7 +13,7 @@
 (provide LETREC*)
 (provide with-environment)
 
-(define-syntax-parse GLET
+(define-syntax-parser GLET
     #:datum-literals (IN)
     [(_ Let (~seq Name Expr) ... IN Body ...)
         #'(Let ((Name Expr) ...) Body ...)])
@@ -57,7 +51,7 @@
 ;;  with:
 ;;  (match h (hash-table ('k1 k1) ('k2 k2) ('k3 k3)))
 
-(define-syntax-parse deconstruct
+(define-syntax-parser deconstruct
     #:datum-literals (WITH FROM TO)
     [(deconstruct Table WITH Getter TO (Var ...))
         #'(define-values (Var ...) (values (Getter Table 'Var) ...))]
@@ -101,7 +95,7 @@
 ;;
 ;;  	λ a b c => + a b c
 
-(define-syntax-parse λ
+(define-syntax-parser λ
     #:datum-literals (-> =>)
     [(_ Param ... -> Body ...)
         #'(lambda (Param ...) Body ...)]
@@ -130,7 +124,7 @@
     )
 )
 
-(define-syntax-parse GROUP
+(define-syntax-parser GROUP
     [(_ Source:Group_Source By:Group_By)
         #'(my_group By.Key_Func Source.Source)]
 )

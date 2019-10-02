@@ -42,7 +42,7 @@
 (define-syntax-parser DEFINE
     #:datum-literals (ACTION OBJECT PROCEDURE SERVER STORAGE TABLE TYPE VALUE WITH)
     [(_ STORAGE Id (~seq Key Val) ...)
-        #'(DEFINE_OBJECT Id TYPE Storage WITH [Key Val] ...)
+        #'(DEFINE_OBJECT Id TYPE Storage WITH [id Id] [Key Val] ...)
     ]
     [(_ TABLE Id (~seq Key Val) ...)
         #'(DEFINE_OBJECT Id TYPE Table WITH [Key Val] ...)
