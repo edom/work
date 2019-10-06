@@ -2,7 +2,20 @@
 
 ;;  To run this example, enter this into Bash:
 ;;
-;;      PLTCOLLECTS=$PWD: racket -I rackbol/example -m
+;;      PLTCOLLECTS=$PWD: racket -t rackbol/example.rkt -m
+;;
+;;  The PLTCOLLECTS environment variable must include
+;;  the @emph{parent} directory of the stc-racket directory.
+
+;;  --------------------    Introduction
+;;
+;;  A Rackbol program contains mostly definitions.
+;;
+;;  A program may also contains hints for the translator.
+
+;;  --------------------    Define storages.
+;;
+;;  This should mean what you think it means.
 
 (DEFINE STORAGE pg_1
     TYPE postgresql
@@ -28,7 +41,7 @@
     )
 )
 
-(DEFINE VALUE x (+ 2 5))
+(define-constant x (+ 2 5))
 
 (DEFINE SERVER s_1
     PROTOCOL HTTP

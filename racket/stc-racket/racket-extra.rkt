@@ -1,30 +1,106 @@
-#lang racket
+#lang racket/base
 
-;;  --------------------	Racket syntax enhancements / language extensions.
+;;  --------------------    require/provide.
+;;
+;;  Skip this section for the provide list.
+;;  These macros have to be defined before they are used.
+;;
+;;  These forms do not accept "for-syntax" require form.
+;;  If you need that, wrap this in a begin-for-syntax instead.
+;;  Or, use Racket's "require" and "provide".
 
-(require syntax/parse/define)
-(require (for-syntax syntax/parse))
+(define-syntax-rule (require+provide/only [Module Symbol ...] ...)
+    [begin
+        (begin
+            (require (only-in Module Symbol ...))
+            (provide Symbol ...)
+        ) ...
+    ])
+
+(define-syntax-rule (require+provide/all Module ...)
+    [begin
+        (begin
+            (require Module)
+            (provide (all-from-out Module))
+        ) ...])
+
+;;  --------------------    Some enhancements.
+
+(require
+    (for-syntax
+        racket/base
+        syntax/parse
+    )
+    syntax/parse/define
+)
+(require+provide/all
+    racket/date
+    racket/format
+    racket/list
+    racket/port
+    racket/system
+)
+
+(provide
+
+    require+provide/only
+    require+provide/all
+
+    ;;  Forms with fewer parentheses.
+
+    LET LET* LETREC LETREC*
+    λ   ;;  This conflicts with Racket's λ.
+
+    ;;  Destructuring bind.
+
+    DECONSTRUCT
+    alist-ref
+
+    ;;  Date.
+
+    current-date
+    format-date/iso
+
+    ;;  Everything-to-string.
+
+    ->string
+
+    ;;  Grouping/Partitioning.
+
+    GROUP
+
+    ;;  Operating system.
+
+    system**/exit-code
+    with-environment
+
+)
 
 ;;  --------------------    LET-like forms with fewer parentheses.
 
-(provide LET)
-(provide LET*)
-(provide LETREC)
-(provide LETREC*)
-(provide with-environment)
-
-(define-syntax-parser GLET
+(define-syntax-parser _GLET
     #:datum-literals (IN)
     [(_ Let (~seq Name Expr) ... IN Body ...)
         #'(Let ((Name Expr) ...) Body ...)])
 
-(define-syntax-rule (LET Arg ...) (GLET let Arg ...))
-(define-syntax-rule (LET* Arg ...) (GLET let* Arg ...))
-(define-syntax-rule (LETREC Arg ...) (GLET letrec Arg ...))
-(define-syntax-rule (LETREC* Arg ...) (GLET letrec* Arg ...))
+(define-syntax-rule (LET Arg ...) (_GLET let Arg ...))
+(define-syntax-rule (LET* Arg ...) (_GLET let* Arg ...))
+(define-syntax-rule (LETREC Arg ...) (_GLET letrec Arg ...))
+(define-syntax-rule (LETREC* Arg ...) (_GLET letrec* Arg ...))
+
+;;  --------------------    Operating system.
+
+;;  This is like system*/exit-code but this automatically converts all strings to bytes with UTF-8 encoding.
+
+(define (system**/exit-code path . args)
+    (define (->bytes x) (string->bytes/utf-8 (->string x)))
+    (apply system*/exit-code path (map ->bytes args)))
 
 ;;  This provides let-like syntax for parameterize-ing current-environment-variables.
 ;;  Keys are automatically quoted.
+;;  Everything is converted to string.
+;;  Example:
+;;      (with-environment ([foo 'bar] [baz 1]) (displayln 'hello))
 
 (define-syntax-rule (with-environment ((Key Value) ...) Thunk ...)
     (let ((env (make-environment-variables)))
@@ -36,44 +112,45 @@
 
 ;;  --------------------    Destructuring bind.
 
-(provide deconstruct)
-
 ;;  Create local variables that refer to the object properties with the same name.
 ;;  "Getter" is usually hash-ref or alist-ref.
 ;;  See also Racket "match".
 ;;  See also Common Lisp "destructuring-bind".
 ;;  See also TypeScript destructuring assignment.
-;;  The advantage of "deconstruct" over "match"
-;;  is that "deconstruct" requires typing the key once
+;;  The advantage of "DECONSTRUCT" over "match"
+;;  is that "DECONSTRUCT" requires typing the key once
 ;;  whereas "match" requires typing the key twice.
 ;;  Compare:
-;;  (deconstruct h WITH hash-ref TO (k1 k2 k3))
+;;  (DECONSTRUCT h WITH hash-ref TO (k1 k2 k3))
 ;;  with:
 ;;  (match h (hash-table ('k1 k1) ('k2 k2) ('k3 k3)))
 
-(define-syntax-parser deconstruct
+(define-syntax-parser DECONSTRUCT
     #:datum-literals (WITH FROM TO)
-    [(deconstruct Table WITH Getter TO (Var ...))
+    [(_ Table WITH Getter TO (Var ...))
         #'(define-values (Var ...) (values (Getter Table 'Var) ...))]
-    [(deconstruct Table WITH Getter FROM (Index ...) TO (Var ...))
+    [(_ Table WITH Getter FROM (Index ...) TO (Var ...))
         #'(define-values (Var ...) (values (Getter Table Index) ...))])
+
+(define (alist-ref alist key)
+    (define pair (assoc key alist))
+    (if pair
+        (cdr pair)
+        (error 'alist-ref "undefined key: ~a" key)))
 
 ;;  --------------------    Conversion to string.
 
-(provide ->string)
-
 ;;  Convert any Racket value to string.
-;;  (Should we use "write" instead?)
+;;  Unknown values are displayed to a string.
 
 (define (->string x)
-    (cond   ((string? x) x)
-            ((number? x) (number->string x))
-            ((symbol? x) (symbol->string x))
-            (else (error "->string" x)) ))
+    (cond   [(string? x) x]
+            [(number? x) (number->string x)]
+            [(symbol? x) (symbol->string x)]
+            [else (call-with-output-string
+                (lambda (port) (display x port)))]))
 
 ;;  --------------------	Lambda expressions with less parentheses.
-
-(provide λ)
 
 ;;  To enter a Unicode character in a text editor in Debian 9,
 ;;  press Ctrl+Shift+U <code> space/enter.
@@ -103,11 +180,26 @@
         #'(lambda (Param ...) (Body ...))]
 )
 
+;;  --------------------    Date.
+;;  See also racket/date.
+
+(define (format-date/iso x)
+    (define offset (date-time-zone-offset x))
+    (define-values (offset-hour offset-m) (quotient/remainder (abs offset) 3600))
+    (define offset-minute (quotient offset-m 60))
+    (format "~a-~a-~aT~a:~a:~a~a~a:~a"
+        (~r (date-year x) #:min-width 4 #:pad-string "0")
+        (~r (date-month x) #:min-width 2 #:pad-string "0")
+        (~r (date-day x) #:min-width 2 #:pad-string "0")
+        (~r (date-hour x) #:min-width 2 #:pad-string "0")
+        (~r (date-minute x) #:min-width 2 #:pad-string "0")
+        (~r (date-second x) #:min-width 2 #:pad-string "0")
+        (if (>= offset 0) '+ '-)
+        (~r offset-hour #:min-width 2 #:pad-string "0")
+        (~r offset-minute #:min-width 2 #:pad-string "0")
+    ))
+
 ;;  --------------------	Grouping/Partitioning.
-
-(provide GROUP)
-
-(require racket/list)
 
 (begin-for-syntax
     (define-splicing-syntax-class Group_Source
@@ -126,10 +218,10 @@
 
 (define-syntax-parser GROUP
     [(_ Source:Group_Source By:Group_By)
-        #'(my_group By.Key_Func Source.Source)]
+        #'(_group By.Key_Func Source.Source)]
 )
 
-(define (my_group Key_Func Iterable)
+(define (_group Key_Func Iterable)
 	(define Groups (make-hash))
     ;;  Do we need in-list or in-vector?
     ;;  Do they improve performance?

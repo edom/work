@@ -1,17 +1,22 @@
 #lang stc-racket/scribble-manual
 
-@(require rackbol)
-
-@title{Rackbol: Racket-based Business-Oriented Language}
-
-@section{About Rackbol}
+@title{About Rackbol}
 
 Rackbol stands for "Racket-based Business-Oriented Language".
+
+@section{Key ideas}
 
 The key ideas are:
 
 @itemlist[
-    @item{Similar intentions should have similar forms.}
+    @item{
+        The syntax should capture the programmer's intention.
+        If the intention does not change, then the model should not change,
+        although the translator may change.
+    }
+    @item{
+        Similar intentions should have similar forms.
+    }
     @item{
         Programmers should specialize into language designers and language users, not into back-end and front-end.
         Programmers should specialize into layers of lasagna, not into pieces of cake.
@@ -55,6 +60,3 @@ When that time comes, you have three choices:
     @item{join us, and help develop Rackbol; or}
     @item{divorce us, and find another language.}
 ]
-
-@include-section[(submod "rackbol-guide.scrbl" doc)]
-@include-section["rackbol-reference.scrbl"]

@@ -1,8 +1,4 @@
-#lang s-exp "_in.rkt"
-
-(require+provide/all "ontology.rkt")
-
-(provide (all-defined-out))
+#lang s-exp "base.rkt"
 
 ;;  --------------------    Code-generation.
 

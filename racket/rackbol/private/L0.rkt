@@ -1,4 +1,4 @@
-#lang s-exp "0/_out.rkt"
+#lang s-exp "base.rkt"
 
 (provide [all-defined-out])
 
@@ -169,14 +169,21 @@
             )
         )
     )
+    (define (response/furnish xexpr_list)
+        (response/xexpr
+            #:preamble #"<!doctype html>"
+            (furnish xexpr_list)))
     (define (not_found)
-        (furnish
-            `[(h1 "Not found")]
-        ))
+        (response/xexpr
+            #:code 404
+            #:preamble #"<!doctype html>"
+            (furnish
+                `[(h1 "Not found")]
+            )))
     (define routes
         (hash
-            (cons "GET" "/") (λ => furnish `[(h1 "Home")])
-            (cons "GET" "/test") (λ => furnish `[(h1 "Test")])
+            (cons "GET" "/") (λ => response/furnish `[(h1 "Home")])
+            (cons "GET" "/test") (λ => response/furnish `[(h1 "Test")])
         ))
     (define (start request)
         (increment_count)

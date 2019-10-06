@@ -20,7 +20,7 @@
 (define xrefs (list (cons 'setup/xref 'load-collections-xref)))
 (define paths (list
     "doc/main.scrbl"
-    "doc/rackbol.scrbl"
+    "doc/rackbol/rackbol.scrbl"
 ))
 (define parts (map load-scribble-part paths))
 
