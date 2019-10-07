@@ -1,11 +1,18 @@
 #lang racket/base
 
+(require
+    (for-syntax
+        racket/base
+        syntax/stx
+    )
+)
+
 ;;  --------------------    require/provide.
 ;;
 ;;  Skip this section for the provide list.
 ;;  These macros have to be defined before they are used.
 ;;
-;;  These forms do not accept "for-syntax" require form.
+;;  This form does not accept "for-syntax" require form.
 ;;  If you need that, wrap this in a begin-for-syntax instead.
 ;;  Or, use Racket's "require" and "provide".
 
@@ -17,12 +24,26 @@
         ) ...
     ])
 
-(define-syntax-rule (require+provide/all Module ...)
-    [begin
-        (begin
-            (require Module)
-            (provide (all-from-out Module))
-        ) ...])
+;;  This does not work with custom require transformers.
+
+(define-for-syntax (require->provide stx)
+    (syntax-case stx (only-in except-in)
+        [   (only-in Module Symbol ...)     #'(only-out Module Symbol ...)      ]
+        [   (except-in Module Symbol ...)   #'(except-out Module Symbol ...)    ]
+        [   (For-Phase Require ...)
+            #`(For-Phase #,@(stx-map require->provide #'(Require ...)))
+        ]
+        [   Module                          #'(all-from-out Module)             ]
+    ))
+
+(define-syntax (require+provide/all stx)
+    (syntax-case stx ()
+        [   (_ Require ...)
+            #`(begin
+                (require Require ...)
+                (provide #,@(stx-map require->provide #'(Require ...)))
+            )
+        ]))
 
 ;;  --------------------    Some enhancements.
 
@@ -150,7 +171,7 @@
             [else (call-with-output-string
                 (lambda (port) (display x port)))]))
 
-;;  --------------------	Lambda expressions with less parentheses.
+;;  --------------------	Lambda expressions with fewer parentheses.
 
 ;;  To enter a Unicode character in a text editor in Debian 9,
 ;;  press Ctrl+Shift+U <code> space/enter.

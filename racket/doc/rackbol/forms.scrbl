@@ -96,7 +96,7 @@
     (λ param-1 ... param-n -> body ...)
     (λ param-1 ... param-n => proc arg ...)
 ]]{
-    This is @racket[lambda] but with less parentheses.
+    This is @racket[lambda] but with fewer parentheses.
 
     The @racket[=>] (double-arrow) variant implicitly parenthesizes the body.
 

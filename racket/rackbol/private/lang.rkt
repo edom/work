@@ -1,10 +1,6 @@
 #lang racket/base
 
 (require
-    (for-syntax
-        racket/base
-        racket/syntax
-    )
     (except-in racket/base
         log
         λ
@@ -13,21 +9,24 @@
 )
 
 (provide
-    (for-syntax
-        (all-from-out
-            racket/base
-            racket/syntax
-        )
-    )
     (all-from-out
         racket/base
         stc-racket/racket-extra
     )
 )
+
 (require+provide/all
+    (for-syntax
+        racket/base
+        racket/syntax
+        syntax/stx
+        "syntax-parse.rkt"
+    )
+    racket/syntax
     syntax/parse
     syntax/parse/define
 )
+
 (require+provide/only
     [racket/include
         include

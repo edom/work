@@ -1,21 +1,13 @@
-#lang racket/base
+#lang s-exp "lang.rkt"
 
-(require
+;;  As a library, we do not reexport racket/base at phase level 0.
+
+(require+provide/all
     (for-syntax
         racket/base
     )
     stc-racket/racket-extra
     "object.rkt"
     "define.rkt"
-)
-
-(provide
-    (for-syntax
-        (all-from-out racket/base)
-    )
-    (all-from-out
-        stc-racket/racket-extra
-        "object.rkt"
-        "define.rkt"
-    )
+    "for.rkt"
 )

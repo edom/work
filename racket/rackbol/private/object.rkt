@@ -3,18 +3,23 @@
 ;;  --------------------    Things defined here.
 
 (provide
+
+    ;;  Interface.
+
     NEW
     GET
     SET
     _DEFINE_OBJECT
+
+    ;;  Implementation.
+
     get-object-property
+
 )
 
 ;;  --------------------    Ontology with class-property-instance.
 
-(define make-object-from-alist make-hash)
-(define get-object-property hash-ref)
-(define set-object-property! hash-set!)
+;;  --------------------    Interface.
 
 (define-syntax-parser CLASS
     #:datum-literals (PROPERTY)
@@ -66,3 +71,9 @@
             (define Id (NEW Type WITH [id Id] [Key Val] ...))
         )
     ])
+
+;;  --------------------    Implementation.
+
+(define make-object-from-alist make-hash)
+(define get-object-property hash-ref)
+(define set-object-property! hash-set!)
