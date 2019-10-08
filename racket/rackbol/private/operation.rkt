@@ -5,11 +5,16 @@
 (require "readline.rkt")
 
 (provide
+    (for-syntax
+        generate-operation-console
+    )
     help
     admin
     run
     quit
 )
+
+;;  --------------------    Shared runtime for operation console.
 
 (define (help) (displayln #<<END_OF_HELP
 (quit)
@@ -52,3 +57,67 @@ END_OF_HELP
 
 (define (quit)
     (exit))
+
+(define (greet source)
+    (printf "Welcome to the Rackbol operation console for ~a.~n" source)
+    (displayln #<<END_OF_GREETINGS
+For help, type (help) and press Enter.
+To quit, press Ctrl+D.
+END_OF_GREETINGS
+    ))
+
+(define (prettier-print thing)
+    (unless (void? thing)
+        (pretty-print thing)
+    ))
+
+;;  --------------------    Generate.
+
+(define-for-syntax (generate-operation-console stx run-id)
+    (define _src (syntax-source stx))
+    (define source (if _src (path->string _src) "<unknown source>"))
+    #`(begin
+
+        (require
+            (relative-in rackbol
+                "private/operation.rkt"
+                "private/readline.rkt"
+            )
+            racket/pretty
+        )
+
+        ;;  It is possible that our reserved identifiers clash with the user's identifiers.
+
+        (provide
+
+            ;;  Predefined actions.
+
+            help
+            admin
+            run
+            quit
+
+            ;;  For read-eval-print-loop.
+
+            #%app
+            #%top-interaction
+            #%top
+            #%datum
+
+        )
+
+        (define (#,run-id)
+            (check-stdin)
+            (greet #,source)
+            (parameterize ([current-print prettier-print])
+                (read-eval-print-loop)
+            )
+        )
+
+        ;;  See readline.rkt for details.
+        (define (check-stdin)
+            (unless (terminal-port? (get-original-stdin))
+                (displayln "Warning: Standard input is not a terminal. This may confuse subprocesses."))
+        )
+
+    ))

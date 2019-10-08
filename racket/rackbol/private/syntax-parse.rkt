@@ -11,10 +11,28 @@
 )
 
 (provide
+
+    identifier->string
+    string->identifier
+
     ~permute
     ~permute-seq
+    ~optional-seq
     ~and-not
+
 )
+
+;;  --------------------
+
+(define (identifier->string id)
+    (symbol->string (syntax->datum id))
+)
+
+(define (string->identifier ctx str)
+    (datum->syntax ctx (string->symbol str))
+)
+
+;;  --------------------
 
 ;;  This is an EH-pattern (ellipsis-head pattern).
 ;;  Do not forget the trailing ellipsis after the last closing parenthesis.
@@ -59,6 +77,15 @@
         (syntax-case stx ()
             [(_ (Thing ...) ...)
                 #'(~permute (~seq Thing ...) ...)
+            ]))))
+
+;;  (~optional-seq A ...) = (~optional (~seq A ...))
+
+(define-syntax ~optional-seq
+    (pattern-expander (lambda (stx)
+        (syntax-case stx ()
+            [(_ A ...)
+                #'(~optional (~seq A ...))
             ]))))
 
 ;;  (~and-not A B) = (~and A (~not B))

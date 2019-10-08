@@ -1,17 +1,6 @@
-#lang s-exp "base.rkt"
+#lang s-exp "main.rkt"
 
-(provide [all-defined-out])
-
-(require
-    db
-    [only-in web-server/servlet
-        response/xexpr
-    ]
-    [only-in web-server/servlet-env
-        serve/servlet
-    ]
-    "ontology.rkt"
-)
+(provide (all-defined-out))
 
 ;;  TODO
 ;;  https://docs.racket-lang.org/continue/index.html
@@ -119,3 +108,98 @@
             #:banner? #f
         )])
 )
+
+;;  --------------------    Logic programming.
+
+(require "logic.rkt")
+
+(define %father_child
+    (%rel ()
+        [('f1 'c1)]
+        [('f2 'c2)]
+    ))
+
+(define %mother_child
+    (%rel ()
+        [('m1 'c1)]
+        [('m2 'c2)]
+    ))
+
+(define (logic)
+    (%for-each F M C #:satisfying
+        (%father_child F C)
+        (%mother_child M C)
+    #:do
+        (printf "~a ~a ~a~n" F M C)
+    )
+
+    (%FOR-EACH F M C SATISFYING
+        (%father_child F C)
+        (%mother_child M C)
+    DO
+        (printf "~a ~a ~a~n" F M C)
+    )
+)
+
+;;  --------------------    Import.
+
+(define (show-tables)
+    (FOR EACH ROW IN TABLE pg_1 information_schema tables
+        AS t (table_catalog table_schema table_name)
+        DO  (printf "~a ~a ~a~n" t.table_catalog t.table_schema t.table_name)
+    )
+)
+
+(define (show-columns)
+    (FOR EACH ROW IN TABLE pg_1 information_schema columns
+        AS c (table_catalog table_schema table_name column_name data_type)
+        DO  (printf "~a ~a ~a ~a ~a~n" c.table_catalog c.table_schema c.table_name c.column_name c.data_type)
+    )
+)
+
+(DEFINE STORAGE pg_1
+    TYPE postgresql
+    HOST localhost
+    PORT 5432
+    CATALOG test
+    USER test
+    PASSWORD test
+)
+
+(define (import)
+    (define table_order_column (make-hash))
+    ;;  TODO: Parameterize pg_1
+    ;;  TODO: LEFT JOIN
+    (FOR EACH ROW IN pg_1
+        (SELECT table_catalog table_schema table_name
+            FROM information_schema.tables
+            WHERE (NOT-IN table_schema ["pg_catalog" "information_schema"])
+        )
+        DO  (define key (list table_catalog table_schema table_name))
+            (hash-set! table_order_column key (make-hash))
+    )
+    (FOR EACH ROW IN pg_1
+        (SELECT table_catalog table_schema table_name column_name ordinal_position
+            FROM information_schema.columns
+            WHERE (NOT-IN table_schema ["pg_catalog" "information_schema"])
+        )
+        DO  (define key (list table_catalog table_schema table_name))
+            (hash-set! (hash-ref table_order_column key) ordinal_position column_name)
+    )
+    (pretty-print table_order_column)
+    (define tables
+        (for/list ([(cat-sch-tab order_column) (in-hash table_order_column)])
+            (match cat-sch-tab
+                [(list catalog schema name)
+                    (list
+                        catalog schema name
+                        (hash-map order_column (λ k v -> v) #t)
+                    )
+                ]
+            )
+        )
+    )
+    (pretty-print tables)
+)
+
+(import)

@@ -1,50 +1,5 @@
 #lang racket/base
 
-(require
-    (for-syntax
-        racket/base
-        syntax/stx
-    )
-)
-
-;;  --------------------    require/provide.
-;;
-;;  Skip this section for the provide list.
-;;  These macros have to be defined before they are used.
-;;
-;;  This form does not accept "for-syntax" require form.
-;;  If you need that, wrap this in a begin-for-syntax instead.
-;;  Or, use Racket's "require" and "provide".
-
-(define-syntax-rule (require+provide/only [Module Symbol ...] ...)
-    [begin
-        (begin
-            (require (only-in Module Symbol ...))
-            (provide Symbol ...)
-        ) ...
-    ])
-
-;;  This does not work with custom require transformers.
-
-(define-for-syntax (require->provide stx)
-    (syntax-case stx (only-in except-in)
-        [   (only-in Module Symbol ...)     #'(only-out Module Symbol ...)      ]
-        [   (except-in Module Symbol ...)   #'(except-out Module Symbol ...)    ]
-        [   (For-Phase Require ...)
-            #`(For-Phase #,@(stx-map require->provide #'(Require ...)))
-        ]
-        [   Module                          #'(all-from-out Module)             ]
-    ))
-
-(define-syntax (require+provide/all stx)
-    (syntax-case stx ()
-        [   (_ Require ...)
-            #`(begin
-                (require Require ...)
-                (provide #,@(stx-map require->provide #'(Require ...)))
-            )
-        ]))
-
 ;;  --------------------    Some enhancements.
 
 (require
@@ -53,8 +8,10 @@
         syntax/parse
     )
     syntax/parse/define
+    "require-provide.rkt"
 )
-(require+provide/all
+
+(require+provide
     racket/date
     racket/format
     racket/list
@@ -64,13 +21,14 @@
 
 (provide
 
-    require+provide/only
-    require+provide/all
+    (all-from-out "require-provide.rkt")
 
     ;;  Forms with fewer parentheses.
 
     LET LET* LETREC LETREC*
     λ   ;;  This conflicts with Racket's λ.
+    !=
+    not-equal?
 
     ;;  Destructuring bind.
 
@@ -108,6 +66,9 @@
 (define-syntax-rule (LET* Arg ...) (_GLET let* Arg ...))
 (define-syntax-rule (LETREC Arg ...) (_GLET letrec Arg ...))
 (define-syntax-rule (LETREC* Arg ...) (_GLET letrec* Arg ...))
+
+(define (!= a b)                (not (= a b)))
+(define (not-equal? a b)        (not (equal? a b)))
 
 ;;  --------------------    Operating system.
 

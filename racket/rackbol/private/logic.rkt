@@ -1,6 +1,6 @@
 #lang s-exp "lang.rkt"
 
-(require+provide/all
+(require+provide
     racklog
 )
 

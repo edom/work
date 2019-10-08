@@ -1,4 +1,4 @@
-#lang racket/base
+#lang s-exp "racket-base.rkt"
 
 ;;  2019-10-05:
 ;;  Problem: Racket's clobbering stdin confuses psql.

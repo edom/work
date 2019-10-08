@@ -1,14 +1,44 @@
 #lang stc-racket/scribble-manual
 
 @(begin
+
+    ;;  Problem: 2019-10-09:
+    ;;  We don't know how to exclude (that is, how to not include by default)
+    ;;  the λ that is already-imported from racket/base.
+    ;;  We don't even know who imported that; probably scribble/manual.
+
+    ;;  Problem: 2019-10-09:
+    ;;  The sandbox claims that it goes out of memory.
+
     (require (only-in scribble/example [examples s_examples]))
     (require racket/pretty)
     (require racket/sandbox)
+
+    ;;  Problem: 2019-10-09:
+    ;;  Sandboxes interfere with something in a transitive dependency
+    ;;  and produces this confusing error message:
+    ;;
+    ;;      file-exists?: `exists' access denied for /usr/lib/ssl/cert.pem
+    ;;
+    ;;      racket-7.3/collects/openssl/mzssl.rkt:365:0: x509-root-sources
+
+    (define extra-sandbox-path-permissions
+        (list
+            (list 'exists "/usr/lib/ssl")
+        )
+    )
+
     (define my_eval
         (parameterize (
                 [sandbox-output 'string]
                 [sandbox-error-output 'string]
                 [sandbox-memory-limit 50]
+                [sandbox-path-permissions
+                    (append
+                        (sandbox-path-permissions)
+                        extra-sandbox-path-permissions
+                    )
+                ]
                 [current-print pretty-print-handler]
             )
             [make-evaluator 'racket
