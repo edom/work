@@ -1,4 +1,4 @@
-#lang s-exp "main.rkt"
+#lang s-exp "../web.rkt"
 
 (provide (all-defined-out))
 
@@ -111,7 +111,7 @@
 
 ;;  --------------------    Logic programming.
 
-(require "logic.rkt")
+(require "../private/logic.rkt")
 
 (define %father_child
     (%rel ()

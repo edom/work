@@ -1,30 +1,19 @@
 #lang s-exp "base.rkt"
 
-(provide
-    _DEFINE_STORAGE
-)
-
 ;;  --------------------    DEFINE STORAGE form.
 
 (define-syntax-parser _DEFINE_STORAGE
     #:datum-literals (CATALOG HOST PASSWORD PORT postgresql TYPE USER)
-    [   (_ Stor:Storage$
-            TYPE postgresql
-            (~permute-seq
-                [HOST Host]
-                [PORT Port]
-                [CATALOG Catalog]
-                [USER User]
-                [PASSWORD Password]
-            ) ...
+    [   (_ Id:id
+            Stor:Storage$
+            ...
         )
         #'(begin
-            (_DEFINE_OBJECT Stor.id TYPE Storage WITH
-                [type postgresql] [host Host] [port Port]
-                [catalog Catalog] [user User] [password Password]
-                [open-admin-console ,(λ => psql Stor.id)]
+            (_DEFINE_OBJECT Id TYPE Storage WITH
+                [type postgresql] [host Stor.host] [port Stor.port]
+                [catalog Stor.catalog] [user Stor.user] [password Stor.password]
+                [open-admin-console ,(λ => psql Id)]
             )
-            (define Stor.virtual-connection-id (make-virtual-connection Stor.id))
             (provide Stor.id)
         )
     ])
@@ -56,6 +45,8 @@
         )
     )
 )
+
+(require (for-syntax "object.rkt"))
 
 ;;  --------------------    Operations.
 

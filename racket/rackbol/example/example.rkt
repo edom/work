@@ -1,4 +1,4 @@
-#lang rackbol
+#lang rackbol/web
 
 ;;  To run this example, enter this into Bash:
 ;;

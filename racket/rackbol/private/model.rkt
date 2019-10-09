@@ -1,10 +1,7 @@
 #lang s-exp "base.rkt"
 
-(require
-    "storage.rkt"
-)
-
 (provide
+    (all-from-out "base.rkt")
     define-constant
     DEFINE
 )
@@ -46,10 +43,23 @@
     )
 )
 
+(define-syntax-parser define-storage
+    #:datum-literals (CATALOG HOST PASSWORD PORT postgresql TYPE USER)
+    [   (_ Id:id Stor:Storage-Params$)
+        #'(_DEFINE_OBJECT Id TYPE Storage WITH
+            [type postgresql]
+            [host Stor.host]
+            [port Stor.port]
+            [catalog Stor.catalog]
+            [user Stor.user]
+            [password Stor.password]
+        )
+    ])
+
 (define-syntax-parser DEFINE
     #:datum-literals (ACTION OBJECT PROCEDURE SERVER STORAGE TABLE TYPE VARIABLE WITH)
 
-    [(_ STORAGE Arg ...) #'(_DEFINE_STORAGE Arg ...)]
+    [(_ STORAGE Arg ...) #'(define-storage Arg ...)]
 
     [(_ TABLE Id (~seq Key Val) ...)
         #'(_DEFINE_OBJECT Id TYPE Table WITH [Key Val] ...)

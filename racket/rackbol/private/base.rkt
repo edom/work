@@ -8,5 +8,4 @@
         "syntax-classes.rkt"
     )
     "object.rkt"
-    "others.rkt"
 )

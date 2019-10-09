@@ -1,17 +1,30 @@
 #lang s-exp "lang.rkt"
 
 (provide
-    Storage$
-    Alias$
+
+    Storage-Params$
+
     TABLE-Clause$
 
     Possibly-Dotted-Id$
+
 )
 
-(define-syntax-class Storage$
-    #:attributes (id virtual-connection-id)
-    (pattern id:id
-        #:with virtual-connection-id (format-id #'id "~a-virtual-connection" #'id)
+(define-splicing-syntax-class Storage-Params$
+    #:datum-literals (CATALOG HOST PASSWORD PORT postgresql TYPE USER)
+    #:attributes (type host port catalog user password)
+    (pattern
+        (~seq
+            TYPE postgresql
+            (~permute-seq
+                [HOST host]
+                [PORT port]
+                [CATALOG catalog]
+                [USER user]
+                [PASSWORD password]
+            ) ...
+        )
+        #:attr type 'postgresql
     )
 )
 
@@ -23,10 +36,9 @@
 )
 
 (define-splicing-syntax-class TABLE-Clause$
-    #:attributes (schema name alias [column 1] connection-id)
+    #:attributes (storage schema name alias [column 1])
     #:datum-literals (TABLE)
-    (pattern [~seq TABLE storage:Storage$ schema:id table:Alias$ (column-1:id column-2:id ...) ]
-        #:with connection-id #'storage.virtual-connection-id
+    (pattern [~seq TABLE storage:id schema:id table:Alias$ (column-1:id column-2:id ...) ]
         #:with name #'table.original
         #:with alias #'table.alias
         #:with (column ...) #'(column-1 column-2 ...)
