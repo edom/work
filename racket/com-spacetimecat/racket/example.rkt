@@ -1,6 +1,8 @@
-#lang racket
+#lang racket/base
 
-(require "racket-extra.rkt")
+(require
+    "extra.rkt"
+)
 
 (define-syntax-rule (example Description Expression ...)
     (begin
@@ -25,7 +27,7 @@
 )
 (example "LET-like forms with fewer parentheses"
     (
-        LET*	a   1
+        LET*    a   1
                 b   2
                 c   3
                 ab  (+ a b)
@@ -35,12 +37,12 @@
 )
 
 (define messages [list
-	(hash 'id 0 'sender 'joe)
-	(hash 'id 1 'sender 'bob)
-	(hash 'id 2 'sender 'joe)
-	(hash 'id 3 'sender 'joe)
-	(hash 'id 4 'sender 'bob)
-	(hash 'id 5 'sender 'alice)
+    (hash 'id 0 'sender 'joe)
+    (hash 'id 1 'sender 'bob)
+    (hash 'id 2 'sender 'joe)
+    (hash 'id 3 'sender 'joe)
+    (hash 'id 4 'sender 'bob)
+    (hash 'id 5 'sender 'alice)
 ])
 
 (example "The 'messages' variable for GROUP BY examples below"

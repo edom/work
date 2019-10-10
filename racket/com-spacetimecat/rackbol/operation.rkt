@@ -79,9 +79,9 @@ END_OF_GREETINGS
     #`(begin
 
         (require
-            (relative-in rackbol
-                "private/operation.rkt"
-                "private/readline.rkt"
+            (relative-in com-spacetimecat/rackbol/lang
+                "operation.rkt"
+                "readline.rkt"
             )
             racket/pretty
         )

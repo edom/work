@@ -20,6 +20,9 @@
         [   (only-in Module Symbol ...)
             #'(combine-out Symbol ...)
         ]
+        [   (rename-in Module (Orig Bind) ...)
+            #'(combine-out Bind ...)
+        ]
         ;;  No need to except-out the Symbol if it is never imported.
         [   (except-in Module Symbol ...)
             #'(all-from-out Module)

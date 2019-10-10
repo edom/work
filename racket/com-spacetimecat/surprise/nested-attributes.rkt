@@ -1,4 +1,6 @@
-#lang s-exp "lang.rkt"
+#lang racket/base
+
+(require "../racket/syntax.rkt")
 
 (define-syntax-class number%
     #:attributes (n)
@@ -18,6 +20,7 @@
 (syntax-parse #'(_ (1 2))
     [   (_ pair:pair%)
         ;;  Surprise: This raises an error.
+        ;;  syntax: undefined nested attribute of attribute `pair'
         #'(list pair.a.n)
     ]
 )

@@ -1,13 +1,20 @@
 #lang racket/base
 
-;;  --------------------    syntax/parse enhancements.
-
 (require
     (for-syntax
         racket/base
+        syntax/parse
     )
-    racket/base
-    syntax/parse
+    "require-provide.rkt"
+)
+
+(require+provide
+    (for-syntax
+        racket/syntax
+        "syntax-parse.rkt"
+    )
+    syntax/parse/define
+    "syntax-parse.rkt"
 )
 
 (provide
@@ -17,14 +24,12 @@
 
     $eval1
 
-    ~permute
-    ~permute-seq
-    ~optional-seq
-    ~and-not
+    define-syntax-case
+    define-syntax-rules
+
+    $if
 
 )
-
-;;  --------------------
 
 (define (identifier->string id)
     (symbol->string (syntax->datum id))
@@ -81,67 +86,67 @@
             )
         ]))
 
-;;  --------------------
+(begin-for-syntax
+    (define-syntax-class Define-Syntax-Head$
+        [pattern id:id
+            #:with stx #'stx
+            #:with head #'(id stx)
+        ]
+        [pattern (id:id stx:id)
+            #:with head #'(id stx)
+        ]
+    )
+)
 
-;;  This is an EH-pattern (ellipsis-head pattern).
-;;  Do not forget the trailing ellipsis after the last closing parenthesis.
+;;  This is a common pattern that combines define-syntax and syntax-case.
 ;;
-;;  For example:
+;;  (define-syntax-case Head
+;;      Opt-Literals
+;;      Case ...)
+;;  =>
+;;  (define-syntax (Id stx)
+;;      (syntax-case stx (literal-id ...)
+;;          Case ...
+;;      )
+;;  )
 ;;
-;;      (~permute A B C) ...
 ;;
-;;  translates to:
+;;  Head            ::= id | (id stx-id)
 ;;
-;;      (~alt
-;;          (~once A)
-;;          (~once B)
-;;          (~once C)
-;;      ) ...
-
-(define-syntax ~permute
-    (pattern-expander (lambda (stx)
-        (syntax-case stx ()
-            [(_ Thing ...)
-                #'(~alt (~once Thing) ...)
-            ]))))
-
-;;  For example:
 ;;
-;;      (~permute-seq
-;;          (A0 A1 A2)
-;;          (B0 B1 B2)
-;;          (C0 C1 C2)
-;;      ) ...
+;;  Opt-Literals    ::=
+;;                  |   #:literals (literal-id ...)
 ;;
-;;  translates to:
-;;
-;;      (~alt
-;;          (~once (~seq A0 A1 A2))
-;;          (~once (~seq B0 B1 B2))
-;;          (~once (~seq C0 C1 C2))
-;;      ) ...
+;;  Case is a case as in syntax-case.
 
-(define-syntax ~permute-seq
-    (pattern-expander (lambda (stx)
-        (syntax-case stx ()
-            [(_ (Thing ...) ...)
-                #'(~permute (~seq Thing ...) ...)
-            ]))))
+(define-syntax-parser define-syntax-case
+    [   (_
+            Head:Define-Syntax-Head$
+            [~optional-seq #:literals (Literal ...)]
+            Case ...
+        )
+        #:with Literals #'(~? (Literal ...) ())
+        #'(define-syntax (Head.id Head.stx)
+            (syntax-case Head.stx Literals
+                Case ...
+            )
+        )
+    ]
+)
 
-;;  (~optional-seq A ...) = (~optional (~seq A ...))
+(define-syntax-rule (define-syntax-rules Name Literals Clause ...)
+    (define-syntax Name
+        (syntax-rules Literals Clause ...)
+    )
+)
 
-(define-syntax ~optional-seq
-    (pattern-expander (lambda (stx)
-        (syntax-case stx ()
-            [(_ A ...)
-                #'(~optional (~seq A ...))
-            ]))))
+;;  Conditional expansion.
 
-;;  (~and-not A B) = (~and A (~not B))
-
-(define-syntax ~and-not
-    (pattern-expander (lambda (stx)
-        (syntax-case stx ()
-            [(_ A B)
-                #'(~and A (~not B))
-            ]))))
+(define-syntax-case $if
+    [   (_ Cond True False)
+        (if (syntax-local-eval #'Cond)
+            #'True
+            #'False
+        )
+    ]
+)

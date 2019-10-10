@@ -9,7 +9,8 @@
         "racket-base.rkt"
         syntax/stx
     )
-    stc-racket/racket-extra
+    "../racket/extra.rkt"
+    "../racket/syntax.rkt"
     racket/function
     racket/include
     racket/match

@@ -1,5 +1,7 @@
 (module stc-racket-transput racket/base
 
+    ;;  TODO: Turn this into a guide/tutorial.
+
     (require
         racket/path
     )
