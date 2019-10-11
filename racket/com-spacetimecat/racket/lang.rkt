@@ -1,5 +1,9 @@
 #lang racket/base
 
+;;  This is racket/base with some enhancements
+;;  that are often used in practical applications
+;;  and that do not take too long to load.
+
 (require
     "require-provide.rkt"
 )

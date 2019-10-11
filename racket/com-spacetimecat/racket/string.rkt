@@ -5,6 +5,10 @@
 )
 
 (require+provide
+    (except-in racket/string
+        string-prefix?
+        string-suffix?
+    )
     (rename-in racket/string
         ;;  string-prefix? looks like an infix operator.
         ;;  string_prefix? looks like a relation.

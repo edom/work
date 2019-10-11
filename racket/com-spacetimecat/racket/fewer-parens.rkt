@@ -49,10 +49,10 @@
 
 (define-syntax-parser λ
     #:datum-literals (-> =>)
-    [(_ Param ... -> Body ...)
-        #'(lambda (Param ...) Body ...)]
-    [(_ Param ... => Body ...)
-        #'(lambda (Param ...) (Body ...))]
+    [(_ Param ... -> ~! Body1 Body ...)
+        #'(lambda (Param ...) Body1 Body ...)]
+    [(_ Param ... => ~! Body1 Body ...)
+        #'(lambda (Param ...) (Body1 Body ...))]
 )
 
 (define (!= a b)                (not (= a b)))
