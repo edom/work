@@ -19,8 +19,8 @@
 (define output-dir "_out")
 (define xrefs (list (cons 'setup/xref 'load-collections-xref)))
 (define paths (list
-    "doc/main.scrbl"
-    "doc/rackbol/rackbol.scrbl"
+    "com-spacetimecat/racket/racket.scrbl"
+    "com-spacetimecat/rackbol/rackbol.scrbl"
 ))
 (define parts (map load-scribble-part paths))
 

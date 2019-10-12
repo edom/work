@@ -21,6 +21,7 @@
 
 (provide
     $doc
+    read-syntax-from-file
     read-docs-from-file
 )
 
@@ -28,27 +29,31 @@
     (begin)
 )
 
+;;  See also: read-accept-lang and read-accept-reader.
+
+(define (read-syntax-from-file path)
+    (parameterize [(port-count-lines-enabled #t)]
+        (call-with-input-file path (lambda (port)
+            (read-syntax path port)
+        ))))
+
 ;;  This is insecure; a #lang or #reader may do anything.
 ;;  Do not run this on source files you do not trust.
 ;;  Perhaps we should sandbox the reading?
 
 (define (read-docs-from-file path)
-    (call-with-input-file path (lambda (port)
-        (define mod/read
-            (parameterize [
-                    (read-accept-lang #t)
-                    (read-accept-reader #t)
-                ]
-                (read-syntax path port)
-            ))
-        (define mod/expanded
-            ;;  XXX: How do we expand the module in the same way Racket expands it
-            ;;  to produce binding information?
-            (replace-context #'read-docs-from-file mod/read)
-        )
-        (define docs (extract-docs-from-module path mod/expanded))
-        docs
+    (define mod/read (parameterize [
+            (read-accept-lang #t)
+            (read-accept-reader #t)
+        ]
+        (read-syntax-from-file path)
     ))
+    (define mod/expanded
+        ;;  XXX: How do we expand the module in the same way Racket expands it
+        ;;  to produce binding information?
+        (replace-context #'read-docs-from-file mod/read)
+    )
+    (extract-docs-from-module path mod/expanded)
 )
 
 (define (extract-docs-from-module path stx)

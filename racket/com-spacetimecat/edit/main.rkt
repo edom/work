@@ -4,16 +4,11 @@
 
 (require
     "core.rkt"
-    "gui.rkt"
+    "gui/gui.rkt"
 )
 
 (provide main)
 
 (define (main)
-    ;;  <test>
-    (println (parse-shortcut 'C-M-q))
-    (println (parse-shortcut 'C-M-Q))
-    ;;  </test>
-
     (start-gui)
 )
