@@ -5,6 +5,7 @@
     racket/list
     "outline.rkt"
     "text.rkt"
+    "quick-open.rkt"
 )
 
 (provide
@@ -27,7 +28,7 @@
     ;;  --------------------    Children and layout.
 
     (define v-panel (new vertical-panel% [parent frame]))
-        (define h-panel-main (new panel:horizontal-dragable% [parent v-panel]))
+        (define h-panel-main (new horizontal-panel% [parent v-panel]))
             (define outline-view (new
                 (class outline-view% (super-new)
                     (define/override (open-target file position)
@@ -55,6 +56,10 @@
         (define h-panel-sta (new horizontal-panel% [parent v-panel] [stretchable-height #f]))
             (define status-indicator (new message% [parent h-panel-sta] [label ""] [auto-resize #t]))
 
+    ;;  --------------------    Dialogs.
+
+    (define quick-open-dialog (new quick-open-dialog% [parent this]))
+
     ;;  --------------------    Menu bar.
 
     (define (install-menu-bar)
@@ -66,6 +71,13 @@
             [callback (λ source event => ask-open-file)]
             [shortcut-prefix '(ctl)]
             [shortcut #\o]
+        ))
+        (define file-quick-open (new menu-item%
+            [parent file]
+            [label "&Quick Open"]
+            [callback (λ source event => send quick-open-dialog show #t)]
+            [shortcut-prefix '(ctl)]
+            [shortcut #\p]
         ))
         (define file-save (new menu-item%
             [parent file]

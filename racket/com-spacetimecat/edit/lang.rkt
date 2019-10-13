@@ -5,9 +5,8 @@
 )
 
 (require+provide
-    racket/contract/base
-    racket/contract/region
-    "../racket/fewer-parens.rkt"
-    "../racket/string.rkt"
     "../racket/class.rkt"
+    "../racket/fewer-parens.rkt"
+    "../racket/list.rkt"
+    "../racket/string.rkt"
 )

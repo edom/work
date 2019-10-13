@@ -22,6 +22,8 @@
         racket/base
         syntax/parse
     )
+    racket/contract/base
+    racket/contract/region
     racket/format
     syntax/parse/define
     "doc.rkt"

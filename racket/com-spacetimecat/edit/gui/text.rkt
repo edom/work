@@ -13,7 +13,7 @@
     "Monospace"
 ))
 
-(define my-editor-text% (class racket:text%
+(define my-editor-text% (class text%
     (super-new)
     (define/override (default-style-name) "Code")
     (define (initialize-styles)
