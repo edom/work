@@ -2,12 +2,15 @@
 
 (require+provide
     (rename-in racket/base
+        (cons make-pair)
         (null? list-empty?)
         (append list-append)
         (length list-length)
         (filter list-filter)
         (map list-map)
         (sort list-sort)
+        (foldl list-foldl)
+        (foldr list-foldr)
     )
     (rename-in racket/list
         (empty list-empty)
@@ -15,6 +18,7 @@
         (partition list-partition)
         (remove-duplicates list-remove-duplicates)
         (take list-take)
+        (argmax list-argmax)
     )
 )
 

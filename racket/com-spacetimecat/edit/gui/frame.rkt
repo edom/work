@@ -58,7 +58,14 @@
 
     ;;  --------------------    Dialogs.
 
-    (define quick-open-dialog (new quick-open-dialog% [parent this]))
+    (define quick-open-dialog
+        (new (class quick-open-dialog% (super-new)
+                (define/override (open-file path)
+                    (load-file path)
+                )
+            )
+            [parent this]
+        ))
 
     ;;  --------------------    Menu bar.
 
@@ -75,7 +82,10 @@
         (define file-quick-open (new menu-item%
             [parent file]
             [label "&Quick Open"]
-            [callback (λ source event => send quick-open-dialog show #t)]
+            [callback (λ source event ->
+                (send quick-open-dialog clear)
+                (send quick-open-dialog show #t)
+            )]
             [shortcut-prefix '(ctl)]
             [shortcut #\p]
         ))
@@ -155,21 +165,26 @@
 
     (define (ask-open-file)
         (if (send text load-file "" 'text)
-            (let ([path (path->string (send text get-filename))])
-                (after-load-file path)
-                path
+            (Let    path (send text get-filename)
+            #:in    (after-load-file path)
+                    path
             )
             #f
         )
     )
 
+    ;;  TODO: Ask to save if content is dirty.
+    ;;  But what should we do if the user presses "Cancel"?
+    ;;  Do nothing? Throw exception? Return #f?
     (define/public (load-file path)
+        (unless (path? path)
+            (error 'load-file "not a path: ~s" path))
         (send text load-file path 'text)
         (after-load-file path)
     )
 
     (define (after-load-file path)
-        (send this set-label path)
+        (send this set-label (path->string path))
         (send outline-view set-outline (compute-file-outline path))
     )
 

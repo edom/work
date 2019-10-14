@@ -8,5 +8,6 @@
     "../racket/class.rkt"
     "../racket/fewer-parens.rkt"
     "../racket/list.rkt"
+    "../racket/path.rkt"
     "../racket/string.rkt"
 )

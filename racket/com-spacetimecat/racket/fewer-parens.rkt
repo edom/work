@@ -4,6 +4,7 @@
 
 (provide
 
+    Let Let* Letrec Letrec*
     LET LET* LETREC LETREC*
 
     λ   ;;  This conflicts with Racket's λ.
@@ -12,6 +13,15 @@
     not-equal?
 
 )
+
+(define-syntax-parser _Glet
+    [(_ Let (~seq Name:id Expr:expr) ... #:in Body ...)
+        #'(Let ((Name Expr) ...) Body ...)])
+
+(define-syntax-rule (Let Arg ...) (_Glet let Arg ...))
+(define-syntax-rule (Let* Arg ...) (_Glet let* Arg ...))
+(define-syntax-rule (Letrec Arg ...) (_Glet letrec Arg ...))
+(define-syntax-rule (Letrec* Arg ...) (_Glet letrec* Arg ...))
 
 ;;  --------------------    LET-like forms with fewer parentheses.
 

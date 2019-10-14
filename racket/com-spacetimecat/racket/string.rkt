@@ -19,6 +19,7 @@
 
 (provide
     ->string
+    string-last-index-of
 )
 
 ;;  Convert any Racket value to string.
@@ -33,3 +34,22 @@
     (call-with-output-string
         (lambda (port) (display x port))
     ))
+
+;;  Let n be the return value.
+;;  It satisfies this property:
+;;      If n is a number, then
+;;          (char=? (string-ref str n) char).
+
+(define/contract (string-last-index-of str char)
+    (-> string? char? (or/c exact-nonnegative-integer? #f))
+    (define (loop i)
+        (if (>= i 0)
+            (if (char=? (string-ref str i) char)
+                i
+                (loop (- i 1))
+            )
+            #f
+        )
+    )
+    (loop (- (string-length str) 1))
+)

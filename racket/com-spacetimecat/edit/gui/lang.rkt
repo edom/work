@@ -9,3 +9,27 @@
     racket/gui/base
     "../core.rkt"
 )
+
+(provide
+    call-with-container-sequence
+    with-container-sequence
+    clear-container
+)
+
+(define (call-with-container-sequence container proc)
+    (dynamic-wind
+        (λ => send container begin-container-sequence)
+        proc
+        (λ => send container end-container-sequence)
+    )
+)
+
+(define-syntax-rule (with-container-sequence container body ...)
+    (call-with-container-sequence container (lambda () body ...))
+)
+
+(define (clear-container container)
+    (with-container-sequence container
+        (send container change-children (λ _ -> '()))
+    )
+)

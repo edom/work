@@ -12,6 +12,7 @@
 
 (provide
     define-property
+    forward-method
 )
 
 (define-syntax-parser define-property
@@ -36,4 +37,10 @@
             )
         )
     ]
+)
+
+(define-syntax-rule (forward-method Field (Method Param ...))
+    (define/public (Method Param ...)
+        (send Field Method Param ...)
+    )
 )
