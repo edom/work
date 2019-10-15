@@ -96,6 +96,9 @@
         (define/contract (loop x y program)
             (-> real? real? markup/c Box?)
             (match program
+                [`(empty)
+                    (Box x y 0 0)
+                ]
                 [`(string ,str)
                     (define-values (w h _0 _1) (send dc get-text-extent str))
                     (unless dry-run? (send dc draw-text str x y))

@@ -15,8 +15,20 @@
     forward-method
 )
 
+(begin-for-syntax
+    (define-splicing-syntax-class after$
+        #:datum-literals (->)
+        [pattern (~seq #:after-change (old:id new:id -> body:expr ...))]
+        [pattern (~seq)
+            #:with old #'old
+            #:with new #'new
+            #:with (body ...) #'((void))
+        ]
+    ))
+
 (define-syntax-parser define-property
-    [   (_ $:id init:expr)
+    #:datum-literals (->)
+    [   (_ $:id init:expr after:after$)
         (with-syntax (
                 [get-$ (format-id #'$ "get-~a" #'$)]
                 [set-$ (format-id #'$ "set-~a" #'$)]
@@ -33,7 +45,9 @@
                     (after-$-change old new)
                 )
                 (define/public (before-$-change old new) (void))
-                (define/public (after-$-change old new) (void))
+                (define/public (after-$-change after.old after.new)
+                    after.body ...
+                )
             )
         )
     ]

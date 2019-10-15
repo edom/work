@@ -11,116 +11,11 @@
 
 (provide
 
-    editor-state%
-
     parse-shortcut
 
     choose-first
 
 )
-
-(define editor-state% (class object%
-    (super-new)
-
-    (define-property mode 'normal)
-
-    ;;  --------------------    Primitives that should be overridden.
-    ;;
-    ;;  These should be wired to the GUI actuators.
-
-    (define/public (set-status-message str) (void))
-    (define/public (focus-on-main-editor) (void))
-    (define/public (focus-on-command-input) (set-status-message "TODO: Press Esc to return to main editor area"))
-    (define/public (move-cursor dir) (void))
-    (define/public (insert-char c) (void))
-    (define/public (handle-backspace-key) (void))
-    (define/public (handle-delete-key) (void))
-    ;;  TODO
-    (define/public (move-to-start-of-next-word) (void))
-    (define/public (move-to-previous-start-of-word) (void))
-    (define/public (move-to-next-end-of-word) (void))
-
-    ;;  --------------------    Primitives that may be overridden.
-
-    (define/public (default-handle-key-event e)
-        (printf "DEBUG: Unhandled key event in normal mode: ~a~n" (format-key-event e))
-    )
-
-    (define (format-key-event e)
-        (define key (send e get-key-code))
-        (~a
-            (if (send e get-control-down) "C-" "")
-            (if (send e get-alt-down) "M-" "")
-            (if (send e get-shift-down) "S-" "")
-            key
-            (if (send e get-caps-down) " (caps lock on)" "")
-        )
-    )
-
-    ;;  --------------------    Provisions that should not be overridden.
-
-    (define/public (initial-fire-listeners)
-        (before-mode-change mode mode)
-        (after-mode-change mode mode)
-    )
-
-    (define (key-event->combination e)
-        (define key (send e get-key-code))
-        (define alt (send e get-alt-down))
-        (define ctrl (send e get-control-down))
-        (append
-            (if ctrl '(ctrl) '())
-            (if alt '(alt) '())
-            (list key)
-        )
-    )
-
-    ;;  Translate key event into action.
-
-    (define/public (handle-key-event e)
-        ;;  What about things like 10dw, d10w, 5h
-        ;;  We need a more sophisticated parser.
-        (define combination (key-event->combination e))
-        (case mode
-            [(normal)
-                (match combination
-                    [`(#\i) (set-mode 'insert)]
-                    [`(#\:) (focus-on-command-input)]
-                    [(list (or #\h 'left)) (move-cursor 'left)]
-                    [(list (or #\j 'down)) (move-cursor 'down)]
-                    [(list (or #\k 'up)) (move-cursor 'up)]
-                    [(list (or #\l 'right)) (move-cursor 'right)]
-                    [(or '(#\w) '(ctl right)) (move-to-start-of-next-word)]
-                    [(or '(#\b) '(ctl left)) (move-to-previous-start-of-word)]
-                    ['(#\e) (move-to-next-end-of-word)]
-                    [else (default-handle-key-event e)]
-                )
-            ]
-            [(insert)
-                (match combination
-                    [`(escape) (set-mode 'normal)]
-                    [`(,c) #:when (char? c)
-                        (case c
-                            [(#\backspace) (handle-backspace-key)]
-                            [(#\rubout) (handle-delete-key)]
-                            [(#\return) (insert-char #\newline)]
-                            [else (insert-char c)]
-                        )
-                    ]
-                    [`(left) (move-cursor 'left)]
-                    [`(down) (move-cursor 'down)]
-                    [`(up) (move-cursor 'up)]
-                    [`(right) (move-cursor 'right)]
-                    [_ (default-handle-key-event e)]
-                )
-            ]
-            [else
-                (printf "handle-key-event: Invalid mode: ~v~n" mode)
-                (set-mode 'normal)
-            ]
-        )
-    )
-))
 
 ;;  input is a symbol or a string.
 ;;

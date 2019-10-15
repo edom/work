@@ -7,24 +7,40 @@
 ##      racket-env.sh racket
 ##
 ##  This script sets PLTCOLLECTS and calls the program with the arguments.
-
-set -o errexit
-set -o pipefail
-set -o nounset
-
-##  This script can only be run from the directory that contains this script file.
 ##
 ##  This script assumes that the "racket" executable is in PATH.
 
-##  --------------------    Set PLTCOLLECTS.
+main_rc() {
+    PS1="(racket)$PS1"
+}
 
-my_dir=$(dirname "$0")
-my_abs_dir=$(cd "$my_dir" && pwd)
-export PLTCOLLECTS=$my_abs_dir:
+main_env() {
+    set -o errexit
+    set -o pipefail
+    set -o nounset
 
-program=$1
-shift
+    ##  --------------------    Set PLTCOLLECTS.
 
-##  --------------------    Run the program with the environment.
+    my_dir=$(dirname "$0")
+    my_abs_dir=$(cd "$my_dir" && pwd)
+    export PLTCOLLECTS=$my_abs_dir:
+    export RACKET_ENV_SH_RUN=1
 
-"$program" "$@"
+    if [[ $# -eq 0 ]]; then
+        bash --rcfile "$0"
+    else
+        program=$1
+        shift
+        "$program" "$@"
+    fi
+}
+
+racoket() {
+    if [[ $# -le 0 ]]; then return 1; fi
+    raco make -j 4 --vv "$1" && racket -t "$1" -m
+}
+
+if [[ ${RACKET_ENV_SH_RUN:-0} = 1 ]];
+    then main_rc
+    else main_env "$@"
+fi

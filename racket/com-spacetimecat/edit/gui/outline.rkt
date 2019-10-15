@@ -4,6 +4,7 @@
     racket/format
     racket/match
     mrlib/hierlist
+    "../../racket/syntax.rkt"
 )
 
 (provide
@@ -18,7 +19,9 @@
 ;;  https://github.com/racket/gui/issues/145
 
 (define outline-view% (class vertical-panel%
-    ;;  TODO: width and height
+
+    (init-field [on-request-open (λ path position => void)])
+
     (super-new)
 
     (new message% [label "Outline"] [parent this] [auto-resize #t])
@@ -31,22 +34,15 @@
         (populate-from outline)
     )
 
-    (define/public (open-target file position)
-        (printf "(open-target ~s ~s)~n" file position)
-    )
-
-    (define my-hlist% (class hierarchical-list%
-        (super-new)
-
+    (define my-hlist% (class hierarchical-list% (super-new)
         (define/override (on-select item)
             (when item
                 (define target (send item user-data))
                 (when target
                     (define path (syntax-source target))
-                    (define pos1 (syntax-position target)) ;; one-based
-                    (when (and path pos1)
-                        (define pos0 (- pos1 1)) ;; text% position is zero-based
-                        (open-target path pos0)
+                    (define pos0 (syntax-position-0 target))
+                    (when (and path pos0)
+                        (on-request-open path pos0)
                     )
                 )
             )
@@ -64,26 +60,26 @@
         (define/contract (loop2 gui thing)
             (-> any/c outline-node/c any)
             (define (item label target)
-                (define control (send gui new-item))
-                (define editor (send control get-editor))
-                (send control user-data target)
+                (define item (send gui new-item))
+                (define editor (send item get-editor))
+                (send item user-data target)
                 (send editor insert label)
             )
             (define (section label target cont #:open (want-open #f))
-                (define control (send gui new-list))
-                (define editor (send control get-editor))
-                (send control user-data target)
+                (define list (send gui new-list))
+                (define editor (send list get-editor))
+                (send list user-data target)
                 (send editor insert label)
                 ;;
                 ;;  Cannot simply do this:
                 ;;
-                ;;      (when want-open (send control open))
+                ;;      (when want-open (send list open))
                 ;;
                 ;;  See above notes for the problem.
                 ;;
-                (send control open)
-                (cont control)
-                (unless want-open (send control close))
+                (send list open)
+                (cont list)
+                (unless want-open (send list close))
             )
             (define type (outline-node-type thing))
             (define target (outline-node-target thing))

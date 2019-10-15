@@ -14,9 +14,10 @@
 )
 
 (define (pathy->string x)
-    (if (path? x)
-        (path->string x)
-        ""
+    (cond
+        [(path? x) (path->string x)]
+        [(string? x) x]
+        [else ""]
     ))
 
 ;; FIXME

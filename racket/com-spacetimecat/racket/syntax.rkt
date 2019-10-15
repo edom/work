@@ -29,6 +29,9 @@
 
     $if
 
+    syntax-position-1   ;;  one-based index
+    syntax-position-0   ;;  zero-based index
+
 )
 
 (define (identifier->string id)
@@ -150,3 +153,8 @@
         )
     ]
 )
+
+(define (syntax-position-1 s) (syntax-position s))
+(define (syntax-position-0 s)
+    (define pos1 (syntax-position-1 s))
+    (if pos1 (- pos1 1) #f))

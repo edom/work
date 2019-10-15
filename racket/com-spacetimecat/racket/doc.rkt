@@ -20,9 +20,14 @@
 )
 
 (provide
+    TODO
     $doc
     read-syntax-from-file
     read-docs-from-file
+)
+
+(define-syntax-rule (TODO Arg ...)
+    (error 'TODO Arg ...)
 )
 
 (define-syntax-rule ($doc Arg ...)

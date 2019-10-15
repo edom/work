@@ -1,6 +1,7 @@
 #lang s-exp "lang.rkt"
 
 (require
+    setup/dirs
     (prefix-in m: "markup.rkt")
     "list.rkt"
 )
@@ -14,15 +15,16 @@
     ;(define orig-dir (find-system-path 'orig-dir))
     ;(define exec-file (find-system-path 'exec-file))
     ;(define main-collects-dir (find-system-path 'collects-dir))
-    ;;  TODO: (current-library-collection-links) first
-    ;;  TODO: Add the $RACKET/share/ directory?
+    ;;  TODO: (current-library-collection-links) before (current-library-collection-paths)?
     (define racket-src-dir (string->path "/junk/racket-src"))
     (list-remove-duplicates
         (list-map path-remove-trailing-slash
-            (list-append
-                (list (current-directory))
-                (current-library-collection-paths)
-                (list racket-src-dir)
+            `(
+                ,(current-directory)
+                ,@(current-library-collection-paths)
+                ,(find-user-pkgs-dir)
+                ,(find-pkgs-dir)
+                ,racket-src-dir
             )
         )
     )
@@ -70,8 +72,9 @@
 )
 
 (define quick-open-dialog% (class dialog%
+    (init-field open-files) ;; (-> (listof path?) boolean?)
     (super-new
-        [label "Quick Open"]
+        [label "Quick Open File"]
         [width 640]
         [stretchable-height #t]
     )
@@ -80,9 +83,8 @@
 
     (define top-bar (new horizontal-panel% [parent dialog]))
 
-    (define text-field (new text-field%
+    (define text-field (new text-field% [parent top-bar]
         [label "Pattern"]
-        [parent top-bar]
         [callback (λ c e ->
             (case (send e get-event-type)
                 [(text-field) (on-change)]
@@ -91,17 +93,13 @@
         )]
     ))
 
-    (define open-button (new button%
+    (define open-button (new button% [parent top-bar]
         [label "Open"]
-        [parent top-bar]
         [callback (λ b e -> (on-commit))]
     ))
 
     (define result-panel
-        (new quick-open-choice-list%
-            [parent dialog]
-            [stretchable-height #t]
-        ))
+        (new quick-open-choice-list% [parent dialog] [stretchable-height #t]))
 
     (define/override (on-activate active?)
         (when active? (send text-field focus)))
@@ -109,8 +107,7 @@
     (define/public (clear)
         ;;  set-value does not call callback.
         (send text-field set-value "")
-        (on-change)
-    )
+        (on-change))
 
     (define (on-change)
         (with-container-sequence result-panel
@@ -118,32 +115,62 @@
             (send result-panel clear)
             (send dialog resize 640 (send dialog min-height))
             (when (non-empty-string? query)
-                (update-result-for query)))
-        (send dialog reflow-container)
-    )
+                (request-result-for query)))
+        (send dialog reflow-container))
 
     (define (on-commit)
         (define children (send result-panel get-selected-children))
+        (when (null? children)
+            (send result-panel try-set-selected-indexes '(0))
+            (set! children (send result-panel get-selected-children)))
         (define paths (list-map (λ c => send c get-user-data) children))
-        (for-each (λ p => open-file p) paths)
-        (unless (list-empty? paths) (send dialog show #f))
+        (when (and (not (list-empty? paths)) (open-files paths))
+            (send dialog show #f)))
+
+    ;;  TODO: Abstract this common pattern.
+
+    (define current-query (box #f))
+    (define (make-worker-thread)
+        (thread (λ ->
+            (define (loop)
+                (define query (thread-receive))
+                (when (eq? (unbox current-query) query)
+                    (define result (compute-result-for query))
+                    (when (box-cas! current-query query #f)
+                        (queue-callback (λ => after-compute-result result))
+                    )
+                )
+                (loop)
+            )
+            (loop)
+        )))
+    (define worker-thread (make-worker-thread))
+    (define (get-worker-thread)
+        ;;  This is in case the worker thread dies by an unhandled exception.
+        (unless (thread-running? worker-thread)
+            (set! worker-thread (make-worker-thread)))
+        worker-thread
     )
 
-    (define/public (open-file path)
-        (printf "Not overridden: open-file ~s~n" path))
+    (define (request-result-for query)
+        (set-box! current-query query)
+        (thread-send (get-worker-thread) query)
+    )
 
-    (define (update-result-for query)
+    (define (compute-result-for query)
         (define all-paths (find-paths-for-quick-open))
         (define pairs (match-paths #:in all-paths #:according-to query))
         (define limit 16)
-        (define results (list-take-at-most limit #:from pairs))
+        (list-take-at-most limit #:from pairs)
+    )
+
+    (define (after-compute-result results)
         (define paths (list-map car results))
         (define matches (list-map cdr results))
         (define markups (list-map match->markup matches))
         (for ([path (in-list paths)] [markup (in-list markups)])
             (make-result-item path markup)
         )
-        (send result-panel try-set-selected-indexes '(0))
     )
 
     (define (make-result-item path markup)

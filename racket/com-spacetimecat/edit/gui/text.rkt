@@ -16,6 +16,18 @@
 (define my-editor-text% (class text%
     (super-new)
     (define/override (default-style-name) "Code")
+    (define/override (on-event e)
+        (define admin (send this get-admin))
+        (when (and admin (send e button-down? 'right))
+            (define menu (new popup-menu%))
+            (new menu-item% [parent menu] [label "TODO: Define <word>"] [callback (λ r e => void)])
+            (new menu-item% [parent menu] [label "TODO: Open <module>"] [callback (λ r e => void)])
+            (new menu-item% [parent menu] [label "TODO: Show documentation for <word>"] [callback (λ r e => void)])
+            (new menu-item% [parent menu] [label "TODO: Find what uses <word/module>"] [callback (λ r e => void)])
+            (new menu-item% [parent menu] [label "TODO: Find what is used by <word/module>"] [callback (λ r e => void)])
+            (new menu-item% [parent menu] [label "TODO: Show <word/module> dependencies/uses/used-by"] [callback (λ r e => void)])
+            (send admin popup-menu menu (send e get-x) (send e get-y))
+        ))
     (define (initialize-styles)
         (define available-faces (get-face-list 'mono))
         (define face (choose-first

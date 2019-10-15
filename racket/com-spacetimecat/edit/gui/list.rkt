@@ -37,60 +37,33 @@
 ))
 
 (define quick-open-choice% (class horizontal-panel%
-
     (init [markup (m:empty)])
-    (init-field [selected #f])
     (init-field [user-data #f])
+    (super-new [alignment '(left center)])
+
+    ;;  Static Aspects
+
+    (define check-box (new check-box% [parent this] [label ""] [vert-margin 0] [horiz-margin 0]))
+    (define canvas (new markup-canvas% [parent this] [markup markup]))
 
     (define/public (get-user-data) user-data)
     (define/public (set-user-data x) (set! user-data x))
 
-    (define label-markup markup)
-
-    (super-new
-        [alignment '(left center)]
-    )
-
-    ;;  ■ U+25A0 black square
-    (define selection-indicator-string "■")
-
-    (define (compute-markup)
-        (if selected
-            (m:hflow (list (m:string selection-indicator-string) label-markup))
-            label-markup
-        )
-    )
-
-    (define canvas (new markup-canvas%
-        [parent this]
-        [markup (compute-markup)]
-    ))
-
     (forward-method canvas (suspend-flush))
     (forward-method canvas (resume-flush))
 
-    (define/public (get-selected) selected)
+    ;;  Dynamic Aspects
 
-    (define/public (set-selected s)
-        (unless (equal? selected s)
-            (set! selected s)
-            (refresh)
-        )
-    )
+    (forward-method canvas (set-markup))
 
+    (define/public (get-selected) (send check-box get-value))
+    (define/public (set-selected s) (send check-box set-value s))
     (define (toggle-selected) (set-selected (not (get-selected))))
 
-    (define/public (set-markup m)
-        (set! label-markup m)
-        (refresh)
-    )
-
-    (define (refresh)
-        (send canvas set-markup (compute-markup))
-    )
-
     (define/override (on-subwindow-event r e)
-        (when (send e button-down? 'left) (toggle-selected))
-        (super on-subwindow-event r e)
+        (when (and  (not (super on-subwindow-event r e))
+                    (send e button-down? 'left))
+            (toggle-selected))
+        #t
     )
 ))
