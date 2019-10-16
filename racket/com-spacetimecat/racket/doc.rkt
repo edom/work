@@ -22,17 +22,16 @@
 (provide
     TODO
     $doc
+    $region
     read-syntax-from-file
     read-docs-from-file
 )
 
-(define-syntax-rule (TODO Arg ...)
-    (error 'TODO Arg ...)
-)
+(define-syntax-rule (TODO Arg ...) (error 'TODO Arg ...))
 
-(define-syntax-rule ($doc Arg ...)
-    (begin)
-)
+(define-syntax-rule ($doc Arg ...) (begin))
+
+(define-syntax-rule ($region Label Arg ...) (begin Arg ...))
 
 ;;  See also: read-accept-lang and read-accept-reader.
 

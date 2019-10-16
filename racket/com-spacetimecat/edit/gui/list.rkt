@@ -49,12 +49,12 @@
     (define/public (get-user-data) user-data)
     (define/public (set-user-data x) (set! user-data x))
 
-    (forward-method canvas (suspend-flush))
-    (forward-method canvas (resume-flush))
+    (define/forward (suspend-flush) canvas)
+    (define/forward (resume-flush) canvas)
 
     ;;  Dynamic Aspects
 
-    (forward-method canvas (set-markup))
+    (define/forward (set-markup) canvas)
 
     (define/public (get-selected) (send check-box get-value))
     (define/public (set-selected s) (send check-box set-value s))

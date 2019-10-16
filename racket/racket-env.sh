@@ -36,8 +36,9 @@ main_env() {
 }
 
 racoket() {
+    local concurrency=16
     if [[ $# -le 0 ]]; then return 1; fi
-    raco make -j 4 --vv "$1" && racket -t "$1" -m
+    raco make -j "$concurrency" --vv "$1" && racket -t "$1" -m
 }
 
 if [[ ${RACKET_ENV_SH_RUN:-0} = 1 ]];

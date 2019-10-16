@@ -19,6 +19,7 @@
         (remove-duplicates list-remove-duplicates)
         (take list-take)
         (argmax list-argmax)
+        (append-map list-append-map)
     )
 )
 

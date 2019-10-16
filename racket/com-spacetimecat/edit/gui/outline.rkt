@@ -20,7 +20,7 @@
 
 (define outline-view% (class vertical-panel%
 
-    (init-field [on-request-open (λ path position => void)])
+    (init-field control)
 
     (super-new)
 
@@ -40,12 +40,10 @@
                 (define target (send item user-data))
                 (when target
                     (define path (syntax-source target))
-                    (define pos0 (syntax-position-0 target))
-                    (when (and path pos0)
-                        (on-request-open path pos0)
-                    )
-                )
-            )
+                    (define position (syntax-position-0 target))
+                    (when (and path position)
+                        (send control open-target path position)
+            )))
             (super on-select item)
         )
     ))

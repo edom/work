@@ -72,7 +72,7 @@
 )
 
 (define quick-open-dialog% (class dialog%
-    (init-field open-files) ;; (-> (listof path?) boolean?)
+    (init-field control)
     (super-new
         [label "Quick Open File"]
         [width 640]
@@ -124,7 +124,7 @@
             (send result-panel try-set-selected-indexes '(0))
             (set! children (send result-panel get-selected-children)))
         (define paths (list-map (λ c => send c get-user-data) children))
-        (when (and (not (list-empty? paths)) (open-files paths))
+        (when (and (not (list-empty? paths)) (send control open-files paths))
             (send dialog show #f)))
 
     ;;  TODO: Abstract this common pattern.
