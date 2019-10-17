@@ -22,9 +22,9 @@
 
     (define/override (on-event e)
         (define admin (send this get-admin))
-        (when (and admin (send e button-down? 'right))
+        (if (and admin (send e button-down? 'right))
             (send admin popup-menu (make-context-menu) (send e get-x) (send e get-y))
-        ))
+            (super on-event e)))
 
     (define (make-context-menu)
         (define word (get-word-near-cursor this))
@@ -38,6 +38,14 @@
         (new menu-item% [parent menu] [label "TODO: Find what is used by <word/module>"] [callback (λ r e => void)])
         (new menu-item% [parent menu] [label "TODO: Show <word/module> dependencies/uses/used-by"] [callback (λ r e => void)])
         menu)
+
+    (define/public (complete-word-near-cursor)
+        (parameterize [(current-namespace (make-base-namespace))]
+            (define word (get-word-near-cursor this))
+            (define sym-strs (map symbol->string (namespace-mapped-symbols)))
+            (define completions (find-completions #:for word #:in sym-strs))
+            (println (list-take-at-most 16 #:from completions))
+        ))
 
     (define-property outline #f
         #:after-change (old new ->
@@ -69,19 +77,25 @@
         (define pathy (send this get-filename))
         (if (path? pathy) pathy (string->path pathy)))
 
+    ;;  If this buffer already represents the path, do nothing.
+    ;;  TODO: 2019-10-18:
+    ;;  Watch the file system.
+    ;;  Record file mtime on load.
+    ;;  Compare mtime periodically or on save.
+    ;;  Someone else may have changed the file.
+    ;;  But can we assume that the underlying filesystem always has mtime?
     (define/public (open-file path)
-        (send control before-open-file this path)
-        (load-file path)
-        (after-load-file path))
+        (define current-path (get-file-path))
+        (unless (equal? current-path path)
+            (send control before-open-file this path)
+            (load-file path)
+            (after-load-file path)))
 
     (define/public (open-target target-path position)
-        (define current-path (get-file-path))
-        (define target-str (path->string target-path))
-        (when (equal? target-str "")
-            (error 'open-target "target path cannot be empty: ~s" target-path))
-        (unless (equal? current-path target-path)
-            (open-file target-path))
+        (open-file target-path)
         (send this set-position position position))
+
+    (define/public (append str) (send this insert str (send this last-position)))
 
     ;;  Styles.
 

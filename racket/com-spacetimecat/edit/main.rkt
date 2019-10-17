@@ -11,7 +11,13 @@
 
 (define (main) (start-gui))
 
+;;  For eval.
+(define frame #f)
+
+(define-namespace-anchor -anchor)
+
 (define (start-gui)
-    (define frame (new behaving-editor-frame%))
+    (set! frame (new editor-frame% [width 1024] [height 768]))
+    (send frame set-eval-namespace (namespace-anchor->namespace -anchor))
     (send frame show #t)
 )

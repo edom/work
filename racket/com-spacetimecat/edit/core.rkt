@@ -5,8 +5,8 @@
 )
 
 (require+provide
+    "../analyze/all.rkt"
     "complete.rkt"
-    "outline.rkt"
 )
 
 (provide

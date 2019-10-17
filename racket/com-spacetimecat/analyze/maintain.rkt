@@ -1,12 +1,17 @@
 #lang s-exp "lang.rkt"
 
 ;;  Software maintenance assistant.
+;;
+;;  This module is intended for user interaction with REPL,
+;;  not for require as a library.
+;;
+;;  TODO: Extract a library from this file.
 
 (require
     racket/match
     syntax/modcode
     syntax/moddep
-    "string.rkt"
+    "../racket/string.rkt"
 )
 
 (provide

@@ -25,6 +25,9 @@
     $region
     read-syntax-from-file
     read-docs-from-file
+    ;;  Where should these be put?
+    $__FILE__/path
+    $__FILE__/string
 )
 
 (define-syntax-rule (TODO Arg ...) (error 'TODO Arg ...))
@@ -103,3 +106,18 @@
         ]
     )
 )
+
+;;  $__FILE__/path is like the C preprocessor __FILE__ macro.
+;;  It expands to a path where it originates.
+;;
+;;  See also: path?, syntax-source
+
+(define-syntax ($__FILE__/path stx)
+    (datum->syntax stx (syntax-source stx)))
+
+;;  This is like $__FILE__/path but returns a string.
+;;
+;;  See also: path->string
+
+(define-syntax ($__FILE__/string stx)
+    (datum->syntax stx (path->string (syntax-source stx))))
