@@ -17,4 +17,4 @@
 (define (make-namespace-from-file path)
     (parameterize ([current-namespace (make-base-namespace)])
         (dynamic-require path #f)
-        (current-namespace)))
+        (module->namespace path)))

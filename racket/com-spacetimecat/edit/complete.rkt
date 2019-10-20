@@ -38,7 +38,7 @@
         )
         candidates
     ))
-    (list-sort pairs > #:key (λ p => Match-score (cdr p)) #:cache-keys? #f)
+    (list-sort pairs > #:key (λ p -> (Match-score (cdr p))) #:cache-keys? #f)
 )
 
 (define

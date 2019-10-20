@@ -2,10 +2,8 @@
 
 (require
     racket/list
-    racket/match
-    "../eval.rkt"
+    "buffer.rkt"
     "key.rkt"
-    "text.rkt"
 )
 
 (provide
@@ -23,18 +21,10 @@
         (define mode-indicator (new message% [parent h-panel-cmd] [label ""] [auto-resize #t]))
         (define command-input (new text-field% [parent h-panel-cmd] [label ""]))
 
-    (define text (new my-editor-text% [control control]))
-    (send canvas set-editor text)
+    (define buffer (new buffer% [control control]))
+    (send canvas set-editor (send buffer internal-get-text%-instance))
 
-    ;;  Eval.
-
-    (define namespace (current-namespace))
-    (define/public (set-eval-namespace ns) (set! namespace ns))
-    ;;  The REPL runs on the GUI thread, so the GUI will hang until eval returns.
-    (define/public (evaluate-current-buffer)
-        (define input-str (send text get-text))
-        (define output-str (eval/string input-str namespace))
-        (send text append (string-append "\n\n" output-str)))
+    (define/public (evaluate-current-buffer) (send buffer evaluate))
 
     ;;  Keyboard event handling.
 
@@ -102,20 +92,18 @@
         (send this append (path->string path))
         (focus-on-main-editor))
 
-    ;;  Translate user intentions.
+    (define/forward (move-cursor dir)                   buffer)
+    (define/forward (insert-char c)                     buffer)
+    (define/forward (handle-backspace-key)              buffer)
+    (define/forward (handle-delete-key)                 buffer)
+    (define/forward (move-to-start-of-next-word)        buffer)
+    (define/forward (move-to-previous-start-of-word)    buffer)
+    (define/forward (move-to-next-end-of-word)          buffer)
 
-    (define (move-cursor dir) (send text move-position dir))
-    (define (insert-char c) (send text insert (string c)))
-    (define (handle-backspace-key) (send text delete 'start 'back))
-    (define (handle-delete-key) (send text delete 'start (send text get-end-position)))
-    (define (move-to-start-of-next-word) (TODO))
-    (define (move-to-previous-start-of-word) (TODO))
-    (define (move-to-next-end-of-word) (TODO))
-
-    (define/forward (open-file path) text)
-    (define/forward (open-target path position) text)
-    (define/forward (save-file) text)
-    (define/forward (complete-word-near-cursor) text)
+    (define/forward (open-file path)                    buffer)
+    (define/forward (open-target path position)         buffer)
+    (define/forward (save-file)                         buffer)
+    (define/forward (complete-word-near-cursor)         buffer)
 
     (define/public (focus-on-command-input) (send command-input focus))
     (define/public (focus-on-main-editor) (send canvas focus))

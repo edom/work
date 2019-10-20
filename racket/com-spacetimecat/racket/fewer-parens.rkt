@@ -56,6 +56,10 @@
 ;;      λ a b c -> (+ a b c)
 ;;
 ;;      λ a b c => + a b c
+;;
+;;  2019-10-20: Problem:
+;;  Mistaking => for -> causes extremely unhelpful runtime error messages.
+;;  There are two solutions: Add type-checking, or remove this form.
 
 (define-syntax-parser λ
     #:datum-literals (-> =>)

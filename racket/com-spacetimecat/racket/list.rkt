@@ -12,6 +12,9 @@
         (foldl list-foldl)
         (foldr list-foldr)
         (for-each list-for-each)
+        (member list-member)
+        (andmap list-each-satisfies?)
+        (ormap list-any-satisfies?)
     )
     (rename-in racket/list
         (empty list-empty)

@@ -182,7 +182,7 @@
 
 (define/contract (whittle-body phase stx)
     (-> integer? syntax? (listof Node?))
-        (list-append-map (λ s => whittle-form phase s) (syntax->list stx)))
+        (list-append-map (λ s -> (whittle-form phase s)) (syntax->list stx)))
 
 (define/contract (whittle-form p0 stx)
     (-> integer? syntax? (listof Node?))
@@ -207,8 +207,8 @@
         )
         [(begin . Body)                                 (whittle-body p0 #'Body)]
         [(begin-for-syntax . Body)                      (whittle-body p1 #'Body)]
-        [(require Spec ...)                             (list-append-map (λ f => proc (whittle-form-1 p0 f)) (syntax->list #'((require Spec) ...)))]
-        [(provide Spec ...)                             (list-append-map (λ f => proc (whittle-form-1 p0 f)) (syntax->list #'((provide Spec) ...)))]
+        [(require Spec ...)                             (list-append-map (λ f -> (proc (whittle-form-1 p0 f))) (syntax->list #'((require Spec) ...)))]
+        [(provide Spec ...)                             (list-append-map (λ f -> (proc (whittle-form-1 p0 f))) (syntax->list #'((provide Spec) ...)))]
         [thing                                          (proc (whittle-form-1 p0 #'thing))]))
 
 (define (whittle-form-1 p0 stx)

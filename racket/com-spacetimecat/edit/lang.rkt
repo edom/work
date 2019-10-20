@@ -5,6 +5,7 @@
 )
 
 (require+provide
+    racket/match
     "../racket/class.rkt"
     "../racket/fewer-parens.rkt"
     "../racket/list.rkt"

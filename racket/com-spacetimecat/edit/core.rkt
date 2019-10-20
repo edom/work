@@ -1,9 +1,5 @@
 #lang s-exp "lang.rkt"
 
-(require
-    racket/match
-)
-
 (require+provide
     "../analyze/all.rkt"
     "complete.rkt"
@@ -62,9 +58,9 @@
         #:in available
         #:or (fallback #f)
     )
-    (define assocs (map (λ key => cons key #t) available))
+    (define assocs (map (λ key -> (cons key #t)) available))
     (define table (make-hash assocs))
-    (define prefs (filter (λ pref => hash-ref table pref #f) preferences))
+    (define prefs (filter (λ pref -> (hash-ref table pref #f)) preferences))
     (if (null? prefs)
         fallback
         (car prefs)

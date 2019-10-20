@@ -2,7 +2,6 @@
 
 (require
     racket/format
-    racket/match
     mrlib/hierlist
     "../../racket/syntax.rkt"
 )
@@ -53,16 +52,14 @@
 
     (define (populate-from outline)
         (define (loop1 gui things)
-            (for-each (λ thing => loop2 gui thing) things)
-        )
+            (for-each (λ thing -> (loop2 gui thing)) things))
         (define/contract (loop2 gui thing)
             (-> any/c outline-node/c any)
             (define (item label target)
                 (define item (send gui new-item))
                 (define editor (send item get-editor))
                 (send item user-data target)
-                (send editor insert label)
-            )
+                (send editor insert label))
             (define (section label target cont #:open (want-open #f))
                 (define list (send gui new-list))
                 (define editor (send list get-editor))
@@ -77,8 +74,7 @@
                 ;;
                 (send list open)
                 (cont list)
-                (unless want-open (send list close))
-            )
+                (unless want-open (send list close)))
             (define type (outline-node-type thing))
             (define target (outline-node-target thing))
             (define children (outline-node-children thing))
@@ -90,15 +86,12 @@
                 [`(require ,Spec) (~s 'require Spec #:separator " ")]
                 [`(provide ,Spec) (~s 'provide Spec #:separator " ")]
                 [`(parameter ,Id) (~s 'parameter Id #:separator " ")]
-                [_ (~s 'unknown type #:separator " ")]
-            ))
+                [_ (~s 'unknown type #:separator " ")]))
             (define kind (car type))
             (define want-open (member kind '(module class)))
             (if (null? children)
                 (item label target)
-                (section label target (λ gui => loop1 gui children) #:open want-open)
-            )
-        )
+                (section label target (λ gui -> (loop1 gui children)) #:open want-open)))
         (loop1 hlist outline)
         hlist
     )

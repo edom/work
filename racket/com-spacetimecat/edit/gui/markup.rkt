@@ -1,32 +1,41 @@
 #lang s-exp "lang.rkt"
 
 (provide
-    (all-defined-out)
+    markup?
+    empty
+    string
+    bold
+    hflow
+    vflow
 )
 
-(define markup/c
-    (recursive-contract
-        (or/c   (list/c 'empty)
-                (list/c 'string string?)
-                (list/c 'bold markup/c)
-                (list/c 'hflow (listof markup/c))
-        )
-    )
-)
+(define (markup? x) (match x
+    [`(empty)       #t]
+    [`(string ,s)   (string? s)]
+    [`(bold ,m)     (markup? m)]
+    [`(hflow ,ms)   (list-each-satisfies? markup? ms)]
+    [`(vflow ,ms)   (list-each-satisfies? markup? ms)]
+    [_              #f]
+))
 
 (define (empty) (list 'empty))
 
 (define/contract (string x)
-    (-> string? markup/c)
+    (-> string? markup?)
     (list 'string x)
 )
 
 (define/contract (bold prog)
-    (-> markup/c markup/c)
+    (-> markup? markup?)
     (list 'bold prog)
 )
 
 (define/contract (hflow progs)
-    (-> (listof markup/c) markup/c)
+    (-> (listof markup?) markup?)
     (list 'hflow progs)
+)
+
+(define/contract (vflow progs)
+    (-> (listof markup?) markup?)
+    (list 'vflow progs)
 )

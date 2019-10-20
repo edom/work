@@ -18,6 +18,6 @@
 
 (define (start-gui)
     (set! frame (new editor-frame% [width 1024] [height 768]))
-    (send frame set-eval-namespace (namespace-anchor->namespace -anchor))
+    (send frame set-default-eval-namespace (namespace-anchor->namespace -anchor))
     (send frame show #t)
 )

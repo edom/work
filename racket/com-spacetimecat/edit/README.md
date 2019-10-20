@@ -7,12 +7,15 @@ Features:
 
 - Navigate: Quick Open File with fuzzy path matching like Visual Studio Code Ctrl+P
 - Outliner: Hierarchical outline view
+- Interact: Evaluate buffer
 
 Wish list:
 
-- Control: Eval window
+- Interact: Multiple tabs/buffers
+- Interact: A divider that resizes its siblings when it is dragged, for resizable outline view
 - Navigate: Define word under cursor
 - Edit: Remember last editor state (open files, layout, etc.)
+- Edit: Insert lambda (λ)
 - Navigate: History, vi C-i, C-o
 - Navigate: Scrolling, vi C-f, C-b
 - Navigate: Word, vi w, e, b, W, E, B, *, #, n, N
