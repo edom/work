@@ -1,8 +1,41 @@
-#+TITLE: Computing Research Group
+#+TITLE: On the word "compute"
 #+DATE: 2017-06-29 22:40 +0700
 #+PERMALINK: /compute.html
 #+MATHJAX: yes
 #+OPTIONS: ^:nil
+* What does a computer compute?
+What do we mean when we say "this computer adds two numbers"?
+
+We actually mean "this computer does /something that we easily interpret as/ adding two numbers".
+
+In principle, it is the positional notation that matters, not the choice of the base,
+as long as the base is an integer that is greater than one.
+Positional notation is the most efficient way we know to /name/ a number.
+That is, in positional decimal notation,
+0 ("zero") is a name of the first natural number,
+9 ("nine") is a name of the tenth natural number, and so on.
+
+Positional notation is more efficient than unary notation because positional notation enables us to compare bigger numbers more quickly than unary notation does.
+We can compare an m-digit string and an n-digit string by looking at m + n digits.
+If we use decimal positional notation, we can see that 10 is smaller than 20 by looking at two digits.
+If we use unary notation, we have to look at 10 digits to decide the same thing,
+that is to see that 11111-11111 is smaller than 11111-11111-11111-11111.
+
+I think we can only imagine small numbers, at most somewhere around ten.
+
+If we encode numbers as their prime factorizations, then multiplication becomes easy but addition becomes hard, and comparing numbers become hard.
+
+Thus numbers are not only about counting, but also about ordering:
+zero comes before one; one comes before two; there is nothing between zero and one; there is nothing between one and two; and so on.
+
+What do we mean when a computer computes the function \( (D,D,F) \)
+where \( D \) is the set of natural numbers below 16,
+and \( F \) is the mapping \( (x,y) \mapsto x+y \) (addition modulo 16)?
+
+That is not the only thing computers do.
+They also consume electrical energy, produce heat, and so on,
+but for programming, we only consider what is meaningful to us.
+
 * Introduction
 ** What is the problem?
 The problem is defining the verb "compute", from which the nouns "computer" and "computation" follow trivially.

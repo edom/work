@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return count + " " + ((count == 1) ? singular : plural);
     }
     function create_length_indicator (word, minute) {
-        let e = document.createElement("span");
+        let e = document.createElement("div");
         e.className = "toc_entry__length_indicator";
         e.textContent = " (" + show_quantity(word, "word") + " ~ " + show_quantity(minute, "minute") + ")";
         return e;
@@ -174,20 +174,16 @@ $body$
                 </div>
             </div>
         </main>
-        <p>
-            Disqus has been removed because it hijacks my links and redirects them to third-party ad networks.
-            On 2019-05-27, a friend of mine reported that links on my website are broken,
-            and I caught Disqus red-handed redirecting my links to pwieu.com.
-        </p>
         <footer class="site-footer h-card">
             <data class="u-url" href="/"></data>
             <div class="wrapper">
                 <p>This page was created on $date$.</p>
-                <p class="rss-subscribe">There is an
-                    <a href="/feed.xml">RSS feed</a>, but it's unused because this site is a wiki, not a blog.</p>
-                <p>Stop writing books, papers, and blogs!
-                    Write a personal wiki instead!
-                    Or, even better, contribute to a community wiki.
+                <p class="rss-subscribe">The
+                    <a href="/feed.xml">RSS feed</a> of this website has not been implemented.</p>
+                <p>
+                    I used Disqus, but I removed it because it hijacks my links and redirects them to third-party ad networks.
+                    On 2019-05-27, a friend of mine reported that links on my website were broken,
+                    and I caught Disqus red-handed redirecting my links to pwieu.com.
                 </p>
             </div>
         </footer>

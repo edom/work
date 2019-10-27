@@ -1,1619 +1,260 @@
-#+TITLE: Programming Research Group
+#+TITLE: On the word "program"
 #+DATE: 2019-02-07 00:00:00 +0700
 #+PERMALINK: /program.html
 #+OPTIONS: ^:nil
-* Programming language research
-** Dream?
-We dream of creating the best programming system.
-We think we should program directly in the language of the mind.
-We think programming languages need to interoperate.
-We dream of writing translating meta-programs to free programmers from design mistakes such as Java.
-We are deep-diving into declarative programming.
-We want a programming language with minimal accidental complexity.
-** Where should we publish our programming language research findings?
-Should we publish at ICFP, PLDI, POPL, SPLASH/OOPSLA, or Salon des Refusés?
-
-POPL has the "Off the beaten track".
+* The verb "program"
+"X programs Y to do Z" means "X makes Y do Z", that is, "X forces Y to do Z".
 
-We want maximum open access.
-** Similar researchers
-University of Kent, faculty of computer science, programming languages and systems[fn::https://www.cs.kent.ac.uk/research/groups/plas/researchinterests.html]
-** What is the state of the art of declarative programming in 2019?
-*** What is declarative programming?
-What do we declare?
-*** What is the trend? Where is the research going?
-We are still trying to unify functional programming and logic programming.
-
-What is the state of the art?
-Unifying logic programming and functional programming?
-
-ALF (Algebraic Logic Functional), LambdaProlog, etc.?
-
-Some formalisms for declarative programming:
-- first-order logic
-- calculus of constructions
-- lambda calculus
-- set theory
-- System F
-- relational algebra, relational calculus
-
-Declaratively and essentially.
-
-How should we make computers do what we want?
-Does programming a computer require a language?
-
-Wolfram language[fn::https://www.wolfram.com/language/principles/] meta-algorithms?
-Wolfram language is proprietary.
-*** Two camps of declarative programming languages
-It is easier to add nondeterminism to lambda calculus than it is to add lambda-expression to Horn clauses?
-
-There are at least two camps of the declarative programming languages:
-First: Start from Prolog, move toward Haskell.
-Second: Start from Haskell, move toward Prolog.
-Example of second camp is Curry.
-
-Where is ALF? https://www.informatik.uni-kiel.de/~mh/systems/ALF.html
-
-Seres 2001 \cite{seres2001algebra}
-
-Hoare & He 1998 \cite{hoare1998unifying}
-*** The problem with functional-logic programming: when should functional terms be reduced?
-The problem: sometimes we want to reduce an argument of a term.
-However, if we could do that, we would soon run into the opposite problem:
-sometimes we do /not/ want to reduce an argument of a term.
-These problems await those who want functional logic programming.
-
-Mercury, ALF, Curry, Lambda-Prolog.
-
-Prolog sucks for list transformation (such as deriving a list by applying a function to each element).
-Auxiliary predicates force us to name something that should not have to be named.
-
-Prolog does not reduce any function symbols.
-Prolog's interpretation of function symbols is the identity function.
-
-In first-order logic, we may interpret a function symbol \(f\) of arity \(n\)
-as a function \(\semantics{f} : D^n \to D\) where \(D\) is the domain of discourse.
-
-Milicevic 2015 \cite{milicevic2015advancing} builds on Ruby.
-
-Lorenz 2017 \cite{lorenz2017application}: thinking of an application as a language?
-Mind-blowing?
-*** Unifying functional and logic programming as a rewriting system
-Both SLD-resolution and normal-order beta-reduction can be seen as term-rewriting systems.
-
-All we have to do is add non-determinism to Pure[fn::https://en.wikipedia.org/wiki/Pure_(programming_language)], and we have a Prolog-Haskell hybrid.
-
-A Horn clause translates to several rewrite rules.
-with disjunctive-normal-form body is =A :- B1 ; ... ; Bn= is the rewrite rule \(A \to B_1 \vee A \to B_2 \vee \ldots \vee A \to B_n\).
-
-A function definition translates to one rewrite rule.
-=A = B= is the rewrite rule \(A \to B\).
-
-#+BEGIN_EXAMPLE
-prolog {
-    a(X) :- b(X), c(X).
-    parent(dad,kid).
-    parent(daddy,kiddo).
-}
-
-haskell {
-    what n = \exists x y : parent x y && length + length y == n
-}
-#+END_EXAMPLE
-**** Lambda-calculus with choice/disjunction
-Nondeterministic programming: Prolog, Amb, Alisp[fn::https://en.wikipedia.org/wiki/Nondeterministic_programming].
-Other nondeterminstic extensions to lambda calculus are already in the literature:
-1998 \cite{kutzner1998non}, 2009 \cite{fischer2009purely}.
-
-"Lambda logic is the union of first order logic and lambda calculus."\cite{beeson2004lambda}
-
-Nondeterminism-by-backtracking may be implemented in Scheme with continuations.
-
-How do we combine lambda-calculus beta-reduction and Prolog unification?
-
-\cite{kfoury1999beta}
-
-Here we describe \(\lambda_|\)-calculus (lambda-calculus with choice; that is a vertical bar).
-Other names:
-- lambda-calculus with nondeterminism
-- lambda-calculus with disjunction
-
-We add expression syntax for disjunction.
-Thus the syntax becomes:
-1. Every name is an expression.
-1. If \(x\) is a name and \(y\) is an expression, then \(\lambda x.y\) is an expression (abstraction).
-1. If \(x\) is an expression and \(y\) is an expression, then \(xy\) is an expression (application).
-1. If \(x\) is an expression and \(y\) is an expression, then \(x | y\) is an expression (choice).
-   For consistency with Prolog's =;= operator (disjunction),
-   the choice operator \(|\) associates to the /right/: \(x | y | z = x | (y | z)\).
-
-We add two rules to beta-reduction.
-Thus the beta-reduction now consists of three rules.
-The last two rules makes the beta-reduction ambiguous.
-\begin{align*}
-(\lambda x. y) z &\to y[x := z]
-\\ x | y &\to x
-\\ x | y &\to y
-\end{align*}
-
-We define two constant expressions: \(false\) and \(true\).
-
-Now we define a ternary logic mapping from expression to \(\{false,unknown,true\}\).
-\begin{align*}
-T(false) &= false
-\\ T(true) &= true
-\\ T(\lambda x. y) &= true
-\\ T((\lambda x. y) z) &= T(y[x := z])
-\\ T(A = B) &= unknown
-\end{align*}
-
-A Prolog-like operational semantics:
-\begin{align*}
-x | y &\to x \text{ if \(x\) succeeds}
-\\ x | y &\to y \text{ if \(x\) fails}
-\end{align*}
-
-We define one constant \(false\).
-
-We define that an expression /fails/ iff it reduces to the constant \(false\).
-We define that an expression /succeeds/ if it does not fail.
-\begin{align*}
-fail | x &\to x
-\\ x | fail &\to x
-\end{align*}
-*** What is the difference between program synthesis and program derivation?
-They look the same to me.[fn::https://en.wikipedia.org/wiki/Program_synthesis][fn::https://en.wikipedia.org/wiki/Program_derivation]
-**** <2019-02-27> Idea: automatic derivation of program quotients
-That computer has limited memory is accidental complexity.
-We should program with natural numbers and infinite sets.
-The translator should automatically compute the /quotient/ of the program.
-
-Built-in types:
-Natural numbers.
-
-Given a function f : nat -> nat, the translator should be able to /derive the quotient/ f' : uint32 -> uint32
-where \( f' n = (f (n \bmod 2^{32})) \bmod 2^{32} \).
-
-*** Problem: Java and SQL are oblivious of each other
-*** How do we program as close as possible to the internal language of thought?
-I think logic is the internal language of thought.
-
-I think a man who does not know any language will still know causality; he is merely unable to describe it.
-
-A man who does not know any language knows that touching fire causes pain,
-and that eating causes satiety, but does he know the concept of /causality/ itself?
-*** How can we reach the ideal system?
-If we keep improving existing systems, will we get there?
-Or does it require a fundamental change?
-** Old goal?
-The goal is to make /the/ programming language.
-
-/The/ ultimate best programming language?
-*** What is programming language research for?
-A goal of programming language research is to make a better programming language (if not the best).
-Do more with less.
-*** Jargon is necessary for concision (high information transfer rate)
-In different fields of studies, we invent jargons for concision, to speed up information transmission, to convey more meaning in shorter time with less words.
-*** But we can't just assume that users are going to wait forever, that memory is unlimited, that network is always up and fast, etc.?
-*** Communities and other people with related goals
-**** Communities
-- #proglangdesign community
-  - their wiki https://github.com/proglangdesign/proglangdesign-wiki/wiki
-  - their reddit https://www.reddit.com/r/ProgrammingLanguages/
-  - their website https://www.proglangdesign.net/
-**** People
-- <2018-10-04> [[http://www.cs.umd.edu/~dvanhorn/][David Van Horn]] "I work toward making the construction of reusable, trusted software components possible and effective"
-**** Finding giants whose shoulders we want to stand on, for building the programming language
-- These languages are interesting starting points:
-  - [[https://github.com/ollef/sixten][Sixten]]
-  - Dhall
-  - [[http://www.haskellforall.com/2014/09/morte-intermediate-language-for-super.html][Morte: an intermediate language for super-optimizing functional programs]]
-  - [[https://www.reddit.com/r/haskell/comments/27z7yw/is_there_such_a_thing_as_a_lowlevel_functional/][Is there such a thing as a low-level functional language? : haskell]]
-    - ATS and Rust
-  - [[https://www.quora.com/What-are-some-of-the-most-abstract-programming-languages-in-2015][What are some of the most abstract programming languages in 2015? - Quora]]
-  - Midori
-  - Mercury
-  - Perl 6?
-- Designing programming languages:
-  - 2018 article "Interdisciplinary Programming Language Design" [[http://www.cs.cmu.edu/~mcoblenz/HCPLD-preprint.pdf][pdf]]
-  - 2018 article "A Programmable Programming Language" [[http://silo.cs.indiana.edu:8346/c211/impatient/cacm-draft.pdf][pdf]]
-  - 2018 article "Combining Model Checking and Testing" [[https://www.cis.upenn.edu/~alur/CIS673/testing.pdf][pdf]]
-  - 2013 article "Idris, a General Purpose Dependently Typed Programming Language: Design and Implementation" [[https://eb.host.cs.st-andrews.ac.uk/drafts/impldtp.pdf][pdf]]
-  - 2007 article "Position Paper: Thoughts on Programming with Proof Assistants" [[https://ac.els-cdn.com/S1571066107002502/1-s2.0-S1571066107002502-main.pdf?_tid=19c6192b-ca57-4ef0-9403-1cfb624c817c&acdnat=1535488824_78a2c31f390f3a1fb72f0c31024f2495][pdf]]
-  - 1996 article "Seven Deadly Sins of Introductory Programming Language Design" [[https://pdfs.semanticscholar.org/d314/78c5b95c399b6418b41011debefbc699c633.pdf][pdf]]
-  - 1996 book "Advanced programming language design" [[https://www.researchgate.net/profile/Raphael_Finkel/publication/220692467_Advanced_programming_language_design/links/0c96052af3e324bf31000000/Advanced-programming-language-design.pdf][pdf]]
-  - 1973 article "Hints on Programming Language Design" [[http://www.dtic.mil/dtic/tr/fulltext/u2/773391.pdf][pdf]]
-- Finding recent programming language research:
-  - meetings, conferences, symposiums
-    - [[https://twitter.com/poplconf?lang=en][POPL on Twitter]].
-      Its full name is "ACM SIGPLAN Symposium on Principles of Programming Languages".
-  - collections, links, aggregators
-    - https://www.cs.cmu.edu/~mleone/language-research.html
-- What already exists?
-  - [[https://tomassetti.me/resources-create-programming-languages/][68 Resources on creating programming languages]]
-  - 2004, book, "Programming language design concepts"
-  - https://en.wikipedia.org/wiki/Expression_problem
-  - don't repeat yourself
-    - https://en.wikipedia.org/wiki/Generic_programming
-      - parametric polymorphism
-  - Safely Composable Type-Specific Languages https://www.cs.cmu.edu/~aldrich/papers/ecoop14-tsls.pdf
-- books
-  - books recommended by courses related to programming language research
-    - http://plus.kaist.ac.kr/~han/courses/cs520/
-    - https://www.cl.cam.ac.uk/teaching/1516/ConceptsPL/
-    - https://en.wikipedia.org/wiki/Programming_language_theory#Further_reading
-  - 1995, book, "Syntax and semantics of programming languages", Slonneger & Kurtz http://homepage.divms.uiowa.edu/~slonnegr/plf/Book/
-- 2017, PhD thesis, [[http://tomasp.net/academic/theses/coeffects/]["Context-aware programming languages"]]
-  - [[http://tomasp.net/coeffects/][amazingly empathic considerate presentation that has the audience in mind]]
-    - if only all PhD theses are presented that way
-      - if only everybody writes that way
-- 2014, book, Odersky, "Scala by example"
-  - perhaps the best way to learn Scala for non-Scala programmers
-- https://en.wikipedia.org/wiki/John_C._Reynolds
-  - 2014, [[http://www.cs.bham.ac.uk/~udr/papers/EssenceOfReynolds.pdf][The essence of Reynolds]]
-    - 1998, Reynolds, "Theories of programming languages"
-- a list of people http://www.angelfire.com/tx4/cus/people/index.html
-- other people's collections
-  - https://github.com/steshaw/plt
-- google search for "haskell code generation"
-  - [[https://www.joachim-breitner.de/blog/719-veggies__Haskell_code_generation_from_scratch][veggies: Haskell code generation from scratch -- Blog -- Joachim Breitner's Homepage]]
-    - [[https://www.reddit.com/r/haskell/comments/66q87y/veggies_haskell_code_generation_from_scratch/][veggies: Haskell code generation from scratch : haskell]]
-  - [[https://www.bytelabs.org/project/haskell-bottom-up-rewrite-generator/][HBURG - Haskell Bottom Up Rewrite Generator | ByteLabs]]
-- software development is software too
-  - meta-language
-    - 2016, "JunGL: a Scripting Language for Refactoring", [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.94.859&rep=rep1&type=pdf][pdf]]
-***** People who share the vision for /the/ programming language
-
-- [[https://brianmckenna.org/blog/polymorphic_programming][Polymorphic Programming - BAM Weblog]]
-
-  - has some links
-  - Elliott 2017 \cite{elliott2017compiling} "Compiling to Categories"
-  - Is this 1969 article related? Can't be found online.
-
-    - https://en.wikipedia.org/wiki/Polymorphic_Programming_Language
-
-  - Are these related?
-
-    - 1989, article, "Database Programming in Machiavelli -- a Polymorphic Language with Static Type Inference", [[http://homepages.inf.ed.ac.uk/opb/papers/SIGMOD89.pdf][pdf]]
-
-- Can we use Description Logic (the theoretical foundations of Web Ontology Language OWL) to generate software, especially enterprise applications?
-
-  - 2015, article, [[https://arxiv.org/abs/1503.01723][[1503.01723] Modelling the Semantic Web using a Type System]]
-  - 2005, article, "Software engineering ontologies and their implementation", [[https://espace.curtin.edu.au/bitstream/handle/20.500.11937/9549/19598_downloaded_stream_116.pdf][pdf]], [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.86.5585&rep=rep1&type=pdf][pdf copy]]
-
-***** People who share some of the vision but don't go far enough
-- XForms
-
-  - 2016, article, [[https://link.springer.com/article/10.1007/s11280-015-0339-z][Leveraging declarative languages in web application development - SpringerLink]]
-  - 2014, slides, advocacy, [[https://homepages.cwi.nl/~steven/Talks/2014/01-31-declarative/][Declarative Web Applications]]
-
-- 2007, workshop, [[https://www.w3.org/2007/02/dmdwa-ws/][Declarative Models of Distributed Web Applications]]
-- [[http://www.proglangdesign.net/][#proglangdesign]]
-- IDE (integrated development environment), editor
-
-  - Given a grammar, the computer should generate an IDE for us.
-    Syntax highlighting.
-    Refactoring.
-  - https://hackage.haskell.org/package/treersec "Build a structure editor for a programming language from combinators following the grammar."
-  - http://www.lamdu.org/
-  - cirru https://news.ycombinator.com/item?id=13773813
-
-    - lots of similar things https://news.ycombinator.com/item?id=13774864
-
-  - isomorf: find code fragment popularity by structure (not-only-text) comparison https://isomorf.io/#!/tours/of/overview/7/haskell
-
-- supercompilation, specialization, partial evaluation
-
-  - Haskell supercompilation?
-
-    - GHC
-    - Supero
-    - Morte
-
-      - https://github.com/Gabriel439/Haskell-Morte-Library
-
-        - "Morte is a super-optimizing intermediate language for functional languages."
-
-      - http://www.haskellforall.com/2014/09/morte-intermediate-language-for-super.html
-
-  - [[http://thyer.name/phd-thesis/thesis-thyer.pdf][Thyer's PhD thesis "Lazy specialization"]] has an accessible introduction to lambda calculus in Chapter 2.
-
-    - "Tower of interpreters" test
-    - 2018, "Collapsing towers of interpreters" http://lampwww.epfl.ch/~amin/pub/collapsing-towers.pdf
-
-      - "It is well known that /staging/ an interpreter -- making it generate code whenever it would normally interpret an expression -- yields a compiler [...]"
-
-  - 1991, "A partial evaluator for the untyped lambda-calculus", [[https://www.cambridge.org/core/journals/journal-of-functional-programming/article/a-partial-evaluator-for-the-untyped-lambda-calculus/EE324F936F0A009B6766B13FF6755DFC][paywall]]
-
-    - related: semantic-directed code generation?
-
-  - Gabriel Gonzales stuff: Morte, Dhall.
-  - [[http://lambda-the-ultimate.org/node/2739][LTU: Ongoing work on Supercompilation of Java code (or supercompilation in general)?]]
-
-- [[https://medium.com/@McCosmos/a-treatise-on-cosmos-the-new-programming-language-905be69eb4af][A Treatise on Cosmos ---the New Programming Language]]
-
-  - procedural-looking logic programming language
-
-- syntax
-
-  - [[https://en.wikipedia.org/wiki/Off-side_rule][WP:Off-side rule]], indentation as block delimiter
-
-- [[http://wiki.c2.com/?QuestForThePerfectLanguage][Quest For The Perfect Language]]
-
-* Computer programming
-** What is computer programming?
-We say "we program a computer" to mean that we make the computer (1) do what we want it to do and (2) do /only/ that.
-Security problems arise from neglecting the second part.
-
-A programmer is someone who programs a computer.
-The essence of a programmer's job is to formalize the ontology implicit in the user's requirements.
-
-Why do we program computers?
-The same reason we make machines.
-Because we are lazy tool-using curious animals.
-** How should we program computers?
-*** The programmer should be able to only care about what the end-user cares about
-The user has a goal.
-The user treats the system as a black box (the user does not know /how/ the system works; the user only cares about /what/ the system does).
-The user is concerned about these and only these:
-- What do I have to input into the system?
-- How do I understand the system's output?
-
-Finite integers are accidental complexity.
-We should program with mathematical numbers,
-and the computer should automatically take the /quotient/ of the program
-(translates the ideal program into a finite/limited/bounded implementation that is correct for the first \(2^64\) inputs).
-
-We should do as little as possible, and the computer should do as much as possible.
-
-We should be able to tell the computer as little as possible.
-We should be able to tell the computer only the essential complexity.
-Implementation is accidental complexity.
-*** When will we have telepathy?
-Telepathy.
-Directly with our mind.
-Computers should be prosthetic minds.
-We can lift more with a prosthetic arm than with a natural arm.
-We can think more With a prosthetic mind than with a natural mind.
-
-Such technology does not exist in 2019, so we are stuck with the second most ideal solution:
-declarative programming languages.
-*** A language that is expressive enough to describe itself?
-We want a language that can be its own meta-language.
-
-Logic can describe itself?
-*** How should programmers specialize?
-Programmers should /not/ be divided into backend and frontend, for two reasons:
-1. Doing so causes much code duplication.
-2. Backend and frontend are accidental complexity, not essential complexity.
-   Everyone who specializes in handling accidental complexity is going to be obsolete.
-
-Instead, programmers should be divided into /language designer/ and /language user/.
-
-The language user should program in a use case specification language.
-
-An example of essential complexity:
-#+BEGIN_EXAMPLE
-discount_percent age =
-  if age < 18 or age > 55
-    then 10
-    else 0
-#+END_EXAMPLE
-*** Two camps of programming language design
-There are two camps in programming language design: bottom-up and top-down.
-
-Bottom-up language design:
-- Begin with physics.
-- Claude Shannon abstracted the underlying physics into bits and boolean algebra.
-- Machine code.
-- Two's-complement signed integers.
-- Variables abstract away finite registers.
-- Garbage collection abstracts away finite memory.
-- Go up until the language is convenient enough to use.
-
-Top-down language design:
-- Begin from logic and mathematics, the internal language of thought.
-- Go down until the language is convenient enough to realize.
-** Must a programming system be textual or arboreal?
-Why confine ourselves to texts and trees?
-Why not graphs?
-
-There are visual programming languages.
-
-Problem: Visual programming system encumbers blind people.
-
-* Philosophy of computer programming?
-** Program and execution
-In imperative programming, a program is a sequence of commands, and execution is what we expect.
-
-In logic programming, a program is a logical formula, and executing that program is proving that formula.
-
-In functional programming, a program is an expression, and executing that program is reducing that expression until a normal form is reached.
-
-The common view that includes both logic and functional programming is term-rewriting.
-
-** What is computation, computer, programming, language?
-Programming is making a computer do what we want it to do.
-
-Languages are divided into several categories:
-- hardware programming, system programming
-- enterprise application programming
-- scripting? network administration
-- markup: XML, Markdown
-- data: JSON, YAML
-
-The question:
-What is the least-effort way to make a computer do X?
-** Who use programming languages?
-A programming language serves as a means of communication in three cases:
-
-- human-to-human:
-- human-to-machine:
-- machine-to-machine:
-
-We advance technologically when we raise the bar for machines (we expect more from machines), not when we expect more from humans.
-(?)
-** The fundamental reason why there is no perfect language: The pigeonhole principle, encoding length trade-off
-If we choose to encode something shorter in a language, then other things must be encoded longer.
-If we make it easier to do something, something else has to become harder.
-
-A language is essentially a Huffman code, a compression scheme, where often-used concepts are encoded more shortly than rarely-used concepts.
-
-/Language encodes concept into symbols./
-
-If there are only 26 letters and 1,000 concepts, then, by the pigeonhole principle, it is simply impossible to encode all those concepts using only 1-letter symbols.
-
-The reason why there is no perfect language is simple:
-the pigeonhole principle precludes encoding all possible concepts into short words.
-** Ontology: what exists in a programming language?
-- numbers
-- byte strings
-- character strings
-- maps
-- functions
-- relations
-** Philosophical principles
-#+TOC: headlines 2 local
-*** Philosophical principle, meta-thought, how to find essence
-Everything (every language element) should have as few properties as possible.
-If something has as few properties as possible, then what is left is its essence.
-Example:
-In C, the name of a function is a property of that function.
-In JavaScript, the name of a function is not a property of that function.
-var add = function(x,y) { return x+y; }
-
-Is the name "x" a property of the variable x in the lambda expression \ x -> x + 1?
-We can have nameless parameters with de Bruijn indexes.
-*** The essence of description and computation
-The essence of description is the composition of primitives.
-
-Computation is the execution of a computing description.
-
-All computations have repetitions.
-Turing machine computation is repeated primitive computation.
-Lambda-calculus beta-normalization is repeated beta-reduction.
-
-Computation is the normalization of an expression to a value.
-
-A logical axiom corresponds to a computing primitive.
-
-A proof corresponds to a computing description (program).
-*** Programming
-  :PROPERTIES:
-  :CUSTOM_ID: programming
-  :END:
-**** What is a program?
-- A program is represented by
-  - a sequence of instructions (procedural programming)
-  - a lambda expression (functional programming)
-**** Metaprogramming
-- JetBrains MPS
-- [[http://txl.ca/index.html][TXL: source transformation by example]], what can it do?
-- http://www.moserware.com/2008/06/ometa-who-what-when-where-why.html
-**** Comparing Ocaml and SML
-- [[http://adam.chlipala.net/mlcomp/][Comparing Objective Caml and Standard ML]], Adam Chlipala
-  - https://people.mpi-sws.org/~rossberg/sml-vs-ocaml.html
-**** Interoperation
-- Programming languages don't work with each other very well.
-  - What we need is not a new programming language, but a way for languages to work together?
-- [[https://mollyrocket.com/casey/stream_0019.html][compression-oriented programming]]
-- Lisp family/dialects
-  - Scheme
-  - [[https://picolisp.com/wiki/?home][PicoLisp]]
-- Undigested
-  - https://hakonrossebo.github.io/functional-programming-babelfish/
-  - https://github.com/rainbyte/haskell-ide-chart
-  - http://docs.mamedev.org/techspecs/luaengine.html
-- The source code is a textual representation of the abstract syntax tree (AST).
-- The source code is unimportant cosmetics.
-  We should care about the ASTs and transformations between ASTs.
-  We should read, write, and edit ASTs directly, not text.
-  The editor should not parse text into AST; it should generate text from AST.
-- Language-oriented programming? Data-first programming?
-  - Data is the most important thing.
-    - Because data is harder to back up than code?
-  - Program translates the shape of data.
-  - Describe what you want, and write code that follows that description
-    to call the lower-level implementation details.
-- Programming language design
-  - Which should we start with?
-    - Semantics (high-level, top-down language design)
-    - Machine code (low-level, bottom-up language design)
-  - Every enhancement reduces cognitive load.
-  - Example of bottom-up language design and how each level reduces cognitive load:
-    - Begin with machine code.
-    - Provide mnemonics for instructions.
-    - Provide the illusion of infinite custom-named registers and orthogonal operands.
-    - Provide macros subroutines as extensible instructions.
-    - Provide the illusion of infinite custom-named registers and orthogonal operands.
-    - Provide macros and subroutines as extensible instructions.
-    - Provide named locations.
-    - Provide the illusion of infinite memory.
-    - Abstract away processor registers.
-    - Abstract away pointers.
-    - Expression.
-    - Infix expression syntax.
-    - First-class functions.
-    - The program itself is a procedural program that tells the interpreter what code to generate.
-    - End up with something like Randall Hyde's High Level Assembly?
-- PL research
-  - [[https://www.microsoft.com/en-us/research/publication/implementing-functional-languages-a-tutorial/][1992, book, "Implementing functional languages: a tutorial"]]
-- Improve an existing language instead of starting new?
-- What is this? http://reasonablypolymorphic.com/blog/elm-is-wrong
-**** Interesting languages?
-***** Rebol? Rebol metaprogramming?
-https://en.m.wikipedia.org/wiki/REBOL
-***** Carp lisp dialect?
-**** Scheme vs Lisp:
-- A Lisp implementation doesn't have to have proper tail calls.
-- A Scheme implementation must have proper tail calls.
-**** Type systems
-- Types help computers help us.
-  - Types prevent some mistakes.
-  - Types are part of documentation.
-    - Types help us write an IDE.
-** A lambda abstraction is not a function
-A mathematical function is a triple \((A,B,F)\) where \(A\) is the domain, \(B\) is the codomain, and \(F \subseteq A \times B\) is the mapping.
-
-A lambda abstraction \( \lambda x. y \) is not the /same/ as a function \( x \mapsto y \).
-
-The expression 1 + 2 is not the /same/ as the number 3.
-That expression /evaluates/ to that number.
-** The philosophical foundation of object-orientation?
-Identity?
-
-Properties?
-
-What does "X is a Y" mean?
-
-What does "Every X is a Y" mean?
-
-First-order logical meaning of object-oriented definitions?
-#+BEGIN_EXAMPLE
-Car my_car = new Car(); // my_car is a Car.
-class What extends Car {} // Every What is a Car.
-#+END_EXAMPLE
-
-\begin{align*}
-Car(my\_car)
-\\
-\forall x : What(x) \to Car(x)
-\end{align*}
-** Programming is computable mathematics?
-https://en.wikipedia.org/wiki/Semantic_domain
-
-"A programmable analog neural computer and simulator"
-https://pdfs.semanticscholar.org/5f6b/579b1f4166ea536f5ed188e9976390729303.pdf
-
-To rewrite a part of a program without introducing errors, we need to preserve the /meaning/ of the program, and thus we need a theory of semantics.
-
-See also Rapaport 2015 section 7.2 ("What is computation?") from page 233.
-
-See Rapaport 2015 page 267 about other computation models.
-
-What can we get from this?
-https://plato.stanford.edu/entries/computer-science/
-
-<2014-05-07>
-Reddit user TezlaKoil shows how to derive Russell's paradox in untyped lambda-calculus,
-and shows the relationship between Russell's paradox and Curry's Y combinator.[fn::https://www.reddit.com/r/math/comments/24wk6f/are_there_other_alternatives_to_set_theory/chboelc]
-** Programming language ontology?
-2005 "Towards a programming language ontology"
-https://pdfs.semanticscholar.org/028f/3f5df68e49b2d42663e935f1615ba46f41a0.pdf
-- paraphrase of Frege & Dummett: "the ontological implications of a language are to be identified with the entities required to provide its constructs with a semantics"
-- a possible ontology for computer science: something exists if and only if it is computable
-- "properties of programs such as efficiency, flexibility and elegance are, from the [Computer Science] view of things, absolutely essential. But these properties are obliterated by the [Denotational Semantics]."
-  - Denotational semantics can't reason about a program's resource usage.
-- "CS build programs and systems from data
-types. So instead of sets we propose to turn matters around and use data types [instead of sets] as our basic ontology."
-- Calculus of constructions (inductive data types) may provide an ontology.
-
-"The 'existence' referred to need not be 'real', but exist only in a universe of discourse."
-https://en.wikipedia.org/wiki/Ontological_commitment
-** Should we strive to create a programming language with ontological parsimony (minimal ontological commitment)?
-How do we design a programming language whose ontology coincides with how we think about the real world?
-
-How do we design a programming language whose ontology coincides with the ontology of mathematics?
-
-How can we be a mathematician without being an implicit Platonist?
-Anyone who believes that perfect circles exist is a Platonist.
-Anyone who believes that the square root of two exists is a Platonist.
-
-Mathematics is language.
-
-https://www.iep.utm.edu/mathplat/
-* Philosophy of length, dimension, measure, size, cardinality
-Similar questions
- [fn::https://www.reddit.com/r/askmath/comments/6zuiob/why_is_it_called_cardinality_and_not_length_or/]
- [fn::https://math.stackexchange.com/questions/158602/number-of-elements-vs-cardinality-vs-size]
-** What is length?
-"Length" means "the distance measured along the longest dimension of an object"[fn::https://en.wiktionary.org/wiki/length],
-"property of being long or extended in one direction; distance along a line"[fn::https://www.etymonline.com/word/length],
-"the most extended dimension of an object"[fn::https://en.wikipedia.org/wiki/Length][fn::http://wordnetweb.princeton.edu/perl/webwn?s=length],
-"the longest extent of anything as measured from end to end"[fn::https://www.dictionary.com/browse/length].
-To use the word "length" for anything else (such as ADTs, which are trees), we must first define what the "longest dimension" of a tree is.
-
-We can think of "length" as a nominalization of "long".
-
-In a programming language, the word "length" implies that things have a /geometry/.
-
-In order to define length, we must define a measure for every value in the language.
-
-\(m(x)\) should be the number of bits required to represent \(x\)?
-
-\(m(n) = \log_2 n\) or \(m(n) = n\)?
-
-\(m([a,b]) = something + m(a) + m(b)\)?.
-
-When we say "the length of this text is 1,000 characters", we tacitly assume that a character is a /unit of length/.
-
-"Length" does not make sense for heterogenous sequence.
-"The length of [abc, 1, [1,2,3]] is 3 elements".
-Should an element, which has an arbitrary size, be a unit of length?
-
-"Length" implies unit of length.
-
-We say "this movie is 90 minutes long".
-
-When we say "the length of X is Y", we implicitly see X as a /line/.
-** What is dimension?
-what
- [fn::https://www.etymonline.com/word/dimension]
- [fn::https://en.wiktionary.org/wiki/dimension]
- [fn::https://en.wikipedia.org/wiki/Dimension]
-** What is size?
-what
- [fn::https://www.etymonline.com/word/size]
- [fn::https://en.wiktionary.org/wiki/size]
-** Why do we measure length?
-Because we want to place an object inside a container, and we want to know whether the container is large enough.
-Because we want to tie an object, and we want to know whether we have enough rope.
-And so on.
-** How do we measure length?
-The length of a line is how long that line is.
-
-The length of a box (a rectangular prism) is the length of its longest axis.
-A rectangular prism has three axes.
-Why is the length of a prism not the length of its diagonal?
-
-Unit of length.
-
-We can take "the length of a sphere" to mean "the length of the longest line that we can put in a sphere", and therefore we are justified in saying "The length of a sphere is its diameter".
-What are the axes of a sphere?
-
-If we think of a triple as something like a rope, that is, if we think of each element as a point occupying no space, then:
-#+BEGIN_EXAMPLE
-length (_,_,_) = 3
-#+END_EXAMPLE
-
-If we think of a triple as something like a cube, that is, if we think of each element as a dimension (as a side of a cube), then:
-#+BEGIN_EXAMPLE
-length (a,b,c) = maximum [length a, length b, length c]
-#+END_EXAMPLE
-** Why do we conflate length and cardinality?
-We seem to think that the elements of a sequence occupy no space, like point mass in Newtonian mechanics.
-Why should sequence length be element count?
-** <2019-02-06> Response
-My philosophical analysis leads me to the conclusion that the problem is our conflating "length" and "cardinality".
-#+BEGIN_EXAMPLE
--- Let `huge` be a text taking 1 gigabytes of memory.
-length      [huge] = 1  -- does not make sense
-cardinality [huge] = 1  -- makes sense
-#+END_EXAMPLE
-
-"Length" implies a /longest dimension/ and a /unit of length/.
-
-~length "hello" = 5~ makes sense because of two things: (1) it makes sense for a character list to be visualized as a /one-dimensional/ line and
-(2) it makes sense for character to be a /unit of length/ (if we assume that there are finitely many characters and each character is one unit of length).
-
-~length [[1],[2,3]] = 2~ does not make sense. It stretches English too much for a list to be a /unit of length/,
-because each list may have different size, unless we declare by fiat that the size of each list is one, but this tyranny only begets more philosophical problems.
-
-~length (Identity "hello") = 1~ does not make sense for the same reason ~length [[1],[2,3]] = 2~ does not make sense.
-
-However, if we generously assume that Haskell "length" means "cardinality", all the above make sense,
-/but/ that generous assumption still does not justify ~length (undefined,undefined) = 1~
-which violates both the meaning of "length" and the meaning of "cardinality".
-** <2019-03-02> Length
-(I'm assuming that we want to distinguish between "cardinality" and "length" here. I hope I don't misunderstand your question.)
-
-#+BEGIN_QUOTE
-What about the equivalent ~let a = [1]; b = [2,3] in length [a,b]~? Why doesn't the fact that the expression equals 2 make sense?
-#+END_QUOTE
-
-For example, let A = {1,2,3} and B = {4,5,6}. The set {A,B} has /fewer elements/ than the set A. But the set {A,B} /occupies more space/ than the set A.
-
-The equality ~length [a,b] = 2~ does not make sense, because length is about the /amount of space occupied/ by a thing, not about the /number of things/.
-It does not make sense that b = [2,3] occupies less space when it is /in/ a list (such as [b]) than when it is /outside/ a list (such as b by itself).
-
-It does not make sense that a box is /shorter/ than its contents. But it does make sense that a box appears /fewer/ than its contents.
-
-Cardinality is about counting of the number of things in a box (provided that we agree on what a "thing" is).
-Length is about measuring the /amount of space occupied/ by the things in the box.
-
-#+BEGIN_QUOTE
-To what extent are we being bewitched by syntax and distracted from the semantics?
-#+END_QUOTE
-
-I think this is not a problem of syntax at all: We are dealing with the semantics directly, that is, how we are supposed to interpret the word "length".
-
-An example of how we may define "length" in a philosophically sound manner (here called "amount of space" instead of "length"):
-
-In logic, the amount-of-space function can be thought of as a semantic function whose codomain is the set of natural numbers:
-
-#+BEGIN_EXAMPLE
-space : D -> N, where D is the domain of discourse and N is the set of natural numbers
-space Nil = 1
-space (Cons x y) = 1 + space x + space y
-space Z = 1
-space (S x) = 1 + space x
-...
-#+END_EXAMPLE
-
-In Haskell, the best approximation is something like this:
-
-#+BEGIN_EXAMPLE
-class Space a where
-    space :: a -> Nat
-
-instance (Space a) => Space (List a) where
-    space Nil = 1
-    space (Cons x y) = 1 + space x + space y
-
-instance Space Nat where
-    space Z = 1
-    space (S x) = 1 + space x
-
-...
-#+END_EXAMPLE
-
-I think "amount of space" is not even expressible in Haskell because its type has to be ~D -> Nat~ (equivalent to ~forall a. a -> Nat~) where D is the set of all Haskell values.
-
-** History
-<2019-02-06>
-I was triggered by Abdullah's pointing out to me that in Haskell, length "Hello" = 5, length (Identity "Hello") = 1, and length (undefined,undefined) = 1.
-Each of those viewpoints has its philosophical justifications.
-The question is: Which one has the strongest justification?
-What /is/ "length"?
-* Programming languages
-** Taxonomy of programming languages?
-- Dichotomies
-- Having denotational semantics vs not
-- With vs without runtime type information
-- Curry-style, implicit typing, optional typing, gradual typing
-- Church-style suggestive typing, meaningful typing
-- Statement vs expression
-- Imperative vs declarative
-- Value vs reference (referentially transparent vs not)
-- By value spaces?
-- Principled vs unprincipled
-- Designed by person vs by committee
-** What should a programming language be?
-How should [[file:haskell.html][Haskell]] be improved?
-- How do we use Haskell without fmap, ap, and other annoying syntactic baggages? How do we have Maybe(A) = A union {Nothing}? (The original question that started it all.)
-- What does a set-theoretic type system look like? (The consequence of wanting Maybe(A) = A union {Nothing}.)
-- What if the denotational semantics directly involve functors and monads?
-- Why should we use that language / write programs that way?
-- Is there an efficient implementation?
-
-How should lambda calculus be implemented?
-What is an optimal implementation?
-
-** What is the essence of programming language constructs?
-*** Records, dictionaries, ordering, function model
-A record's components are ordered.
-A dictionary's entries are unordered.
-Both can be /modeled/ by a function from the set of keys to the set of values.
-
-A record ={a:1, b:2}= can be modeled by the function \((K,V,F)\) where \(K = \Set{a,b}\) and \(V = \Set{1,2}\) and \(F = \Set{(a,1), (b,2)}\).
-*** The essence of dictionary is finite function
-Clojure gets this right?
-
-Left-hand side of an application may be:
-- a dictionary,
-- a lambda, or
-- a finite left-biased union of arbitrarily many dictionaries and lambdas, or
-- a union like that but right-biased.
-*** What is a text?
-ASCII does a good job representing English texts, but not other texts.
-
-Is text the successor to printing with movable types?
-
-Direction, grapheme, character, radical, letter, modifier, etc.
-
-What does Unicode think a text is?
-
-A text is a writing?
-Drawing vs writing?
-This "A" is just a /representation/ of the first letter of the English alphabet,
-in the same way "0" is a representation of the first natural number.
-
-Text is inherently sequential/linear because that is the way we read.
-Our brain is physically limited;
-it can only focus on one thing at a time;
-we read by moving focus through text.
-Unless you are Kim Peek who may read two pages at once
- [fn::https://www.psychologytoday.com/us/blog/the-superhuman-mind/201212/kim-peek-the-real-rain-man]
- [fn::https://en.wikipedia.org/wiki/Kim_Peek]
- [fn::http://itre.cis.upenn.edu/~myl/languagelog/archives/004655.html].
-*** Strings, especially of characters
-Why do we have strings?
-
-Computer keyboards evolved from typewriters.
-
-Computerization of human writing?
-
-First came Gutenberg's printing press.
-Each letter is imprinted by a type.
-
-The problem is to encode human text in bits.
-We solved the problem of encoding numbers with two's-complement signed integers.
-English text is simple: ASCII.
-
-An accented letter is a letter and an accent.
-
-A /string/ is a homogenous sequence.
-
-A string has a beginning, and may have an ending.
-A string may be finite.
-
-A /byte string/ is a sequence of bytes.
-
-An /ASCII string/ is a byte string.
-
-A /character string/ is a sequence of characters.
-
-Unqualified "string" usually means "character string".
-
-A /character string literal/ is surrounded with quotes.
-
-- inconclusive discussion https://www.reddit.com/r/ProgrammingLanguages/comments/9tj6ka/how_would_you_best_implement_first_class_strings/
-**** Escape sequences
-**** Characters
-What is Unicode's definition of "character"?
-Is that definition sane?
-
-Should Unicode normalization/canonicalization be built into the programming language?
-
-Issues: ordering/collation, capitalization, combination, halfwidthization, ligature, etc.
-
-- https://en.wikipedia.org/wiki/String_(computer_science)
-- https://en.wikipedia.org/wiki/Character_(computing)
-
-A character may represent a vowel-or-consonant (such as Latin alphabets),
-or a syllable (such as Indic scripts or Japanese kanas),
-or an idea (such as Han ideographs).
-
-A writing system is a convention for mapping syntax and semantics.
-
-What do people use character strings for?
-
-What do people do with character strings?
-*** Dictionary, map, associative array, record, finite function, hash table
-**** Clojure maps are applicable like functions.
-A very interesting fundamental idea.
-
-#+BEGIN_SRC lisp
-({:a 1 :b 2 :c 3} :a)
-=> 1
-({:a 1 :b 2 :c 3} :b)
-=> 2
-#+END_SRC
-
-Clojure has nice map syntax: =(m k)= for accessing k.
-
-Maps are isomorphic to functions.
-We update a map.
-Updating a function is simple:
-#+BEGIN_SRC haskell
-update nk nv f = \ k -> if k == nk then nv else f k
--- and then beta-normalize the lambda body
-#+END_SRC
-
-A Prolog deterministic binary predicate is like a Clojure map.
-
-*** What is an array?
-What is the difference between an array, a string (byte string vs character string), and a sequence?
-
-C does not have built-in arrays; it has pointer arithmetics.
-An "array access" expression p[i] is a syntactic sugar for the pointer arithmetic dereference expression *(p+i).
-
-Is a C++ vector an array?
-
-*** Comments
-Humans and machines should understand the same thing.
-Comments should not be used very much.
-All explanations should be understood by both humans and machines.
-If a programmer has to resort to comments, then the language has failed to be expressive enough to express that comment.
-
-We require less comments in languages with static type-checking.
-
-A variable's type is a partial answer to "What does this variable mean", "What is this variable", and "What are the possible values of this variable".
-It formalizes the programmer's assumptions.
-** Growing a programming language?
-2006, "A growable language"
-"programming language designers should plan for such growth, along with the growth of a user community"
-https://dl.acm.org/citation.cfm?id=1176621
-
-Racket manifesto?
-Racket language-oriented programming?
-** What is a paradigm?
-A mindset.
-A way of thinking.
-A way of looking at things.
-A lens through which we look at everything.
-** Leverage existing infrastructures instead of creating from scratch
-Instead of creating a programming language from scratch, we should leverage existing programming language infrastructures.
-
-So far we think Prolog is the best for sketching languages with abstract syntax
-(that is, when we care about the semantics and do not care about the concrete syntax).
-The concrete syntax can always come later.
-Pretty concrete syntax will not console the programmers traumatized by ugly semantics.
-It would be like marrying a handsome but rotten man:
-the hype turns into regret after a few weeks.
-** Logic programming
-Prolog is at least second-order, as exemplified by its call/2.
-
-We should program in logic because logic is the nternal language of thought?
-** What is the best programming language?
-This is what I think the best programming language would is like, as of <2018-12-30>.
-
-general feel: Prolog + Haskell
-
-Katahdin - runtime syntax manipulation
-
-supercompilation + partial evaluation + compilation by abstract interpretation
-
-user-extensible unification?
-
-Type system: Curry-style, not Church-style.
-More like Erlang Dialyzer or TypeScript than Haskell.
-Users should be able to write their own program checkers and program transformations.
-
-Module and import system: ld linker script, JavaScript, Nix import by lambda parameter name, Dhall, OCaml local import.
-
-Syntax: Landin offside rule?
-
-Pure + nondeterminism + JavaScript module system
-** What are some interesting programming languages?
-   :PROPERTIES:
-   :CUSTOM_ID: what-are-some-interesting-programming-languages
-   :END:
-
-- Interesting functional programming languages tailored for web programming.
-  Perhaps related to data modeling.
-
-  - Ur/Web
-
-    - [[http://www.impredicative.com/ur/faq.html][FAQ]]
-
-      - "Why would I prefer to use Ur/Web over OPA?"
-
-    - [[http://www.impredicative.com/ur/resources.html][How to Get Started Learning Ur/Web]]
-
-  - [[http://links-lang.org/][The Links Programming Language]]
-  - [[http://opalang.org/][The Opa Language]]
-
-- Moving logic into SQL stored procedures
-
-  - [[https://sivers.org/pg][Simplify: move code into database functions | Derek Sivers]]
-
-    - A legitimate concern: How do we version-control (and release, and rollback) stored procedures, triggers, and other database logics?
-
-  - [[https://news.ycombinator.com/item?id=11802917][Andl, a relational language that is not SQL, is coming to Postgres | Hacker News]]
-
-- https://www.microsoft.com/en-us/research/publication/convenient-explicit-effects-using-type-inference-with-subeffects/
-- [[https://nikita-volkov.github.io/if-haskell-were-strict/][If Haskell were strict, what would the laziness be like?]]
-- http://homepages.inf.ed.ac.uk/wadler/papers/free-rectypes/free-rectypes.txt
-
-*** Do we really have to read these fragmented sources?
-    :PROPERTIES:
-    :CUSTOM_ID: do-we-really-have-to-read-these-fragmented-sources
-    :END:
-
-- [[http://www.cse.chalmers.se/edu/year/2015/course/DAT150/lectures/proglang-12.html][Lecture 12: Design and Evolution of Programming Languages]]
-
-* Programming language implementation
-** How should we make programming tools such as compilers, interpreters, and editors?
-** What meta-programming tools exist?
-*** Rascal MPL
-https://www.rascal-mpl.org/
-*** Eclipse Xtext
-*** JetBrains MPS
-MPS is "Meta Programming System".
-
-A concept can have properties. Each property has a type.
-The property type system is limited to int, string, and regex-constrained string.
-
-A member in a model is an /instance/ of a concept,
-similar to how an object is an instance of a class in Java.
-
-MPS is a /tree/ editor, not a text editor.
-
-A concept is an AST (abstract syntax tree) node type.
-
-On 2017-08-12, MPS 2017.2 doesn't support Java 7 try-with-resources statements.
-
-The MPS IntelliJ IDEA plugin allows you to use a language from IDEA,
-but not defining your own language.
-You need the MPS IDE for that.
-
-External links:
-- [[https://confluence.jetbrains.com/display/MPSD20172/Using+MPS+inside+IntelliJ+IDEA][Using MPS inside IntelliJ IDEA]]
-- [[https://confluence.jetbrains.com/pages/viewpage.action?pageId=93128576][MPS user guide for Java developers (IntelliJ IDEA)]] (long)
-- [[https://confluence.jetbrains.com/display/MPSD20172/Finding+your+way+out][What to do when there is a problem]]
-** Meta-programming and language-oriented programming?
-The Racket manifesto[fn::http://felleisen.org/matthias/manifesto/index.html]: programming-language programming language
-
-miniKanren, scheme logic programming
-http://minikanren.org/
-https://github.com/clojure/core.logic/wiki/A-Core.logic-Primer
-
-2000 article "Domain Specific Meta Languages"
-https://www-users.cs.umn.edu/~evw/pubs/vanwyk00sac/vanwyk00sac.pdf
-
-1996 book "Advanced programming language design"
-2008 article "Position paper: Practical foundations for programming languages"
-2012 book "Practical Foundations for Programming Languages" Version 1.32 of 05.15.2012
-http://profs.sci.univr.it/~merro/files/harper.pdf
-
-University of Arizona, Spring 2006, CS 520 Principles of Programming Languages - Lecture 04: Types and Polymorphism
-https://www2.cs.arizona.edu/classes/cs520/spring06/04types.pdf
-from "Lecture 4: higher polymorphism"
-https://blog.inf.ed.ac.uk/apl16/archives/178/comment-page-1
-
-Programming Language Foundations in Agda https://plfa.github.io/
-
-2018 article "Logic Programming as a Service" https://arxiv.org/abs/1806.02577
-
-Liber amicorum for Doaitse Swierstra
-https://www.reddit.com/r/haskell/comments/1hmc9t/pdf_liber_a_for_doaitse_swierstra_read_free/
-
-1994 article "Efficient Self-Interpretation in Lambda Calculus" http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.56.4382&rep=rep1&type=pdf
-
-Lambda the Ultimate: Meta-programming
-http://lambda-the-ultimate.org/taxonomy/term/15
-
-2009 article "Directly Reflective Meta-Programming" http://homepage.divms.uiowa.edu/~astump/papers/archon.pdf
-
-Footnote F from \cite{felleisen2018programmable}:
-#+BEGIN_QUOTE
-Language workbenches (such as Spoofax) deal with conventional syntax for DSLs but do not support the incremental modification of existing languages.
-A 2015 report suggests, however, these tool chains are also converging toward the idea of language creation as language modification.
-We conjecture that, given sufficient time, development of Racket and language workbenches will converge on similar designs.
-#+END_QUOTE
-** Implementing programming languages
-** Should we use Prolog?
-We should prototype our language in Prolog.
-
-We should implement our language in Prolog.
-
-- 2004, parsing in Prolog, "Parsing and Semantics in DCGs" http://www.inf.ed.ac.uk/teaching/courses/aipp/lecture_slides/11_PS_DCGs.pdf
-- Prolog DCG (definite clause grammar) facilitates writing an attribute grammar.
-- https://en.wikipedia.org/wiki/Definite_clause_grammar
-
-Erlang started out as a DSL in Prolog.
-See 1992 article "Use of Prolog for developing a new programming language".
-
-<2018-10-20>
-Change of opinion:
-we should write the language in Prolog instead of Haskell.
-
-- "Ott is a tool for writing definitions of programming languages and calculi.
-  It takes as input a definition of a language syntax and semantics,
-  in a concise and readable ASCII notation that is close to what one would write in informal mathematics."
-  https://www.cl.cam.ac.uk/~pes20/ott/
-
-<2018-12-11>
-My current answer: Prolog.
-
-My previous answers:
-- Haskell
-- Racket
-- Scheme
-- Java
-- C
-- C++
-
-Other people?
-- https://hackernoon.com/the-programming-language-im-looking-for-948d93f7a396
-** Principles?
-Fast build time is important.
-** Write abstract interpreters, not compilers?
-<2018-12-30>
-
-The same code fragment can be interpreted in several ways.
-
-The most common interpreter executes the program with the intended semantics.
-Example: a Python interpreter interprets the Python program "print 'foo'" as printing the string.
-
-Write an abstract interpreter that emits code when interpreting.
-An interpreter that interprets the Python program "print 'foo'" as "emit a Ruby statement that prints 'foo' to screen when executed".
-** Begin with an interpreter, not a compiler
-
-- Don't make a compiler?
-  Make an interpreter instead, and stage it?
-  Turn an interpreter into a compiler for free?
-- "To stage an interpreter" is to add staging annotations to the code of the interpreter.
-- Staging is similar to quoting in Lisp/Scheme.
-- 2004 article "A Gentle Introduction to Multi-stage Programming" [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.103.2543&rep=rep1&type=pdf][pdf]]
-  - Basic Problems in Building Program Generators
-  - part 2 https://pdfs.semanticscholar.org/aa3c/d4233f7c0db95e5c38d5b8fc1d199df21857.pdf
-- multi-stage programming for Scala https://scala-lms.github.io/
-- 2006 article "A Verified Staged Interpreter is a Verified Compiler" [[https://www.researchgate.net/profile/Kevin_Hammond/publication/221108683_A_verified_staged_interpreter_is_a_verified_compiler/links/00b7d517ede725c057000000.pdf][pdf]]
-
-** Making compilers?
-   :PROPERTIES:
-   :CUSTOM_ID: making-compilers
-   :END:
-
-Every compiler does name resolution / symbol table.
-Is there a compiler that doesn't do that?
-[[https://www.reddit.com/r/Forth/comments/695oik/advances_in_forth_language_design/dh454oq/][Forth?]]
-
-- https://www.reddit.com/r/haskell/comments/4jhhrj/anders_hejlsberg_on_modern_compiler_construction/
-- https://cs.stackexchange.com/questions/63018/visual-programming-tools-why-don-t-they-work-with-the-ast-directly
-- compiling with continuations
-
-  - Why use CPS (continuation passing style) as intermediate form?
-
-    - http://matt.might.net/articles/cps-conversion/
-    - https://www.microsoft.com/en-us/research/publication/compiling-with-continuations-continued/
-    - https://news.ycombinator.com/item?id=7150095
-
-  - 2003, retrospective: the essence of compiling with continuations https://users.soe.ucsc.edu/~cormac/papers/best-pldi.pdf
-
-    - https://en.wikipedia.org/wiki/A-normal_form
-
-** Piggybacking a host language
-** How should lambda-calculus be implemented?
-*** What is an operational semantics of lambda calculus?
-*** How?
-Normal-order reduction enables us to write fixed points.
-Should we let the programmer choose the evaluation strategy?
-Currying simplifies reasoning but complicates implementation (because applications may then nest deeply to the left).
-What is optimal reduction?
- [fn::https://stackoverflow.com/questions/31223539/is-it-possible-to-evaluate-lambda-calculus-terms-efficiently]
- [fn::https://en.wikipedia.org/wiki/Lambda_calculus#Optimal_reduction]
-
-Lambda-calculus is unsound.[fn::https://en.wikipedia.org/wiki/Fixed-point_combinator]
-What does that imply about programming languages containing lambda calculus?
-
-Let \( A[B := C] \) mean \(A\) but with each free occurrence of \(B\) replaced with \(C\).
-Let \( eval(A,B) \) means that \(A\) normalizes to \(B\).
-
-Applicative-order evaluation is the easiest to implement.
-
-Where do these things fit in the big picture of lambda-calculus implementations?
-G-machine, STG, GRIN[fn::https://github.com/grin-tech/grin].
-
-Reading queue:
-- https://stackoverflow.com/questions/31223539/is-it-possible-to-evaluate-lambda-calculus-terms-efficiently
-- https://www.researchgate.net/publication/312462365_About_the_efficient_reduction_of_lambda_terms
-- https://www.reddit.com/r/haskell/comments/2zqtfk/why_isnt_anyone_talking_about_optimal_lambda/
-- compiling monads https://www.irif.fr/~mellies/mpri/mpri-ens/articles/danvy-koslowski-malmkjaer-compiling-monads.pdf
-- modular monadic semantics http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.136.1656&rep=rep1&type=pdf
-
-* Language mixing issues
-** Why can't we mix programming languages?
-Multilingual people routinely mix languages.
-For example, compare the English "Why is your shirt very fancy today?"
-and the English-in-Indonesian "Hari ini baju kamu kok very fancy?"
-
-Natural languages are so mixable because their syntax are similar and they share the same semantics.
-
-Why can't we mix programming languages as easily as we mix natural languages?
-Why don't programming languages /compose/?
-
-We /can/ mix programming languages.
-The problem is that existing tools don't support such mixing.
-The problem is that it is very hard to make such tools.
-
-We need something like a lathe, a machine that we can use to make more sophisticated machines.
-** How should languages interoperate?
-Can we do it semantically?
-
-Can we do better than FFI (foreign function interface)?
-
-Languages are usually small.
-Standard libraries are huge.
-* Enhancing existing languages
-** Prolog, second-order logic enhancements
-*** What language is like Prolog but has anonymous predicates and anonymous modules?
-We are [[file:prolog.html][using Prolog]], but we are unsatisfied.
-*** Reducing functional form, and alternative proof strategies
-Prolog does not reduce any functional term.
-
-Update <2019-03-04>: We can achieve that with goal_expansion/2.
-We thought Prolog was too weak.
-goal_expansion/2 is more powerful than a global interpretation of function symbols.
-goal_expansion/2 enables contextual interpretation of functional terms:
-the interpretation may depend on the outer logical term that contains the functional term.
-For example, the same f in pred1(f(1)) and pred2(f(2)) may be interpreted differently.
-
-Our biggest worry: What if we made a mistake in our goal_expansion/2?
-How are we going to know where the mistake is?
-
-We can specify the interpretation of functional terms.
-The following reduce/2 is a relation from a functional term to its Prolog meaning (a Prolog value, an element of Prolog's domain of discourse).
-#+BEGIN_EXAMPLE
-reduce(f(A),B) :- B is A+1.
-#+END_EXAMPLE
-
-One possible solution:
-reduce/2 and meta-predicate for determining predicate parameter reduction.
-Now a parameter mode has direction and reduction mode.
-
-#+BEGIN_EXAMPLE
-:- multifile(reduce/2).
-:- dynamic(reduce/2).
-reduce(f(A), B) :- integer(A), B is A + 1.
-
-normalize(A,B) :- reduce(A,R), !, normalize(R,B).
-normalize(A,B) :- A = B.
-
-:- reduction(predicate(none,normalize,none)).
-predicate(A,B,C) :- ...
-#+END_EXAMPLE
-
-Even more general than that, another possible solution:
-Custom proof strategy with prove/1 meta-predicate/hook.
-Isn't this just goal_expansion/2?
-#+BEGIN_EXAMPLE
-prove(predicate(A,B,C)) :- normalize(B,B0), predicate(A,B0,C).
-#+END_EXAMPLE
-*** Enhancing (name-separating) Prolog with anonymous predicates and modules
-#+BEGIN_EXAMPLE
-let([
-    pred = (X => Y => (male app X) and (child app X app Y))
-], pred app bar)
-#+END_EXAMPLE
-*** How declarative is Prolog?
-Apt 1993 \cite{apt1993declarative}
-** ML
-Rossberg 2018 \cite{rossberg20181ml} 1ML enhances ML with first-class modules.
-* Complexity
-** How should program complexity be measured?
-"A Denotational Approach to Measuring Complexity in Functional Programs"
-http://www.cs.cmu.edu/afs/cs/user/brookes/www/papers/CMU-CS-03-150.pdf
-* Enterprise application programming
-** What is an enterprise application?
-Enterprise application is about using computers to enhance business operation.
-The usage of computers is an accidental complexity.
-
-Whereas factory machines enhance physical production, computers enhance mental production.
-
-If we treat each of us as an enterprise, then enterprise application is scaled-up personal programming.
-** Enterprise applications model extrinsic properties
-Specification language
-Attempto Controlled English
-
-Parsing with Prolog DCGs
-
-https://philpapers.org/browse/ontology-of-mathematics
-
-"Advances in a DSL for Application Integration"
-
-https://www.itu.int/ITU-D/tech/OLD_TND_WEBSITE/network-infrastructure_OLD/Bangkok-02/5-5_Demo.pdf
-http://www.inquisition.ca/en/info/gepsypl/rules.htm
-
-
-Enterprise applications model extrinsic properties.
-The name of a person is an extrinsic property.
-
-Google search of software modeling language
-https://en.wikipedia.org/wiki/Modeling_language
-https://en.wikipedia.org/wiki/EXPRESS_(data_modeling_language)
-https://www.martinfowler.com/articles/languageWorkbench.html
-** Enterprise programming language? Enterprise meta-language?
-*** What?
-- Describe data shapes.
-- Describe databases.
-- Describe how the user should interact with the application.
-- Describe CRUD: describe views that read from or write to databases.
-- Describe business logic.
-- Parallelize unrelated database queries.
-- Translate to Java and interoperate with Java.
-
-We naturally think of mathematical objects as tuples/sequences or dictionaries.
-Each entry of the dictionary represents a property of the object.
-
-Are these the criteria of a good meta-language?
-- algebraic data types and pattern-matching
-- set-theoretic type system
-- tree manipulation
-
-Will we end up reinventing C# LINQ?
-
-Enterprise programming language contains sublanguages that work together.
-*** Table expression language
-The semantics of a table expression is a sequence of rows.
-The sequence may be infinite.
-
-The operational semantics is to lazily evaluate the minimum number of rows.
-
-A table has column names.
-
-"empty" means the empty table.
-
-"project(C,T)" means table T but with only the columns in C.
-
-"all(T)" means all rows of table named T.
-Each row is a dictionary.
-
-"filter(P,T)" means all rows of T that satisfy P.
-
-"first(N,A)" means the first N rows of table A.
-
-"product(A,B)" means Cartesian product.
-
-"foldl(R_0,F,T)" is left-fold:
-R_k = F(T_{k-1},R_{k-1}) \text{ where } k \ge 1
-The result is R_n where n is the number of rows in T.
-T must be finite.
-
-Should collapse as much as possible to SQL.
-
-https://www.postgresql.org/docs/current/sql-select.html
-
-plan : table_exp -> sql_select
-% select(Columns,From,Where,Group,Having,Order,Limit,Offset)
-% select_modifywhere(S1,W1,S2,W2)
-n means not present
-plan(all(N),select(C,T?,n,n,n,n,n,n)) :- table_columns(N,C).
-plan(project(C,T), select(C, T, ))
-
-Prolog type system
-https://github.com/SWI-Prolog/roadmap/wiki/Prolog-type-system
-
-any : any value
-atom : any atom
-literal(A) : atom or number or string that equals A
-literal_in(Vals): in list Vals; each Val is a literal
-functor(Name,ArgTypes)
-list(T) : list in which each element has type T
-union(Types) : disjunction
-intersection(Types)
-predicate(ArgTypes)
-
-** Saving Java programmers?
-We want something like this, to free the Java programmers:
-"Java program representation and manipulation in Prolog"[fn::http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.158.4524&rep=rep1&type=pdf]
-** DSL in Java?
-*** Some options for modeling the AST
-**** Each class is an AST node type
-#+BEGIN_EXAMPLE
-final class Const { ... }
-final class Add { ... }
-
-Object eval (Exp x) {
-  if (x instanceof Const) {
-    return ((Const)x).value;
-  }
-  if (x instanceof Add) {
-    final Add y = (Add) x;
-    return (int)eval(y.left) + (int)eval(y.right);
-  }
-  throw new IllegalArgumentException("" + x);
-}
-#+END_EXAMPLE
-**** One class Ast_node
-#+BEGIN_EXAMPLE
-final class Ast_node {
-  static final int CONST = 0;
-  static final int ADD = 1;
-  // ...
-  final int type;
-  final Object[] arg;
-  // ...
-}
-#+END_EXAMPLE
-
-Then we need a way to pattern-match.
-* GUI programming?
-We dream of demystifying and simplifying GUI programming.
-What is the essence of GUI programming?
-Can we do better than FRP (functional reactive programming)?
-Can we do declarative GUI programming better than HTML+CSS?
-If UX is the next UI, then is there UX programming instead of UI programming?
-GUX instead of GUI?
-
-How do we formalize user experience?
-How do we program user experience?
-Can a programming language facilitate good programmer experience and good end-user experience?
-* Human and social aspects of computer programming
-** Software user experience? Human-computer interface?
-Jef Raskin
-http://wiki.c2.com/?TheHumaneInterface
-** <2019-02-12> Do computers handicap non-verbal people?
-Computer programming forces people to think in words.
-What about people who think in pictures?
-What about people who think in sounds?
-
-UX for the blind[fn::http://www.dinf.ne.jp/doc/english/Us_Eu/conf/csun_98/csun98_069.html]
-** How do we use programming languages?
-*** Most people stick to languages they are familiar with
-They prefer shitty-but-familiar to great-but-unfamiliar.
-They condemn themselves to apathy and mediocrity.
-They never wonder whether there is a better way.
-
-Science (evolution and neuroscience) explains why people stick to shitty-but-predictable languages
-
-The brain reward system rewards correct predictions.
-If person P finds language L predictable (according to P's background knowledge), then P will like L.
-Procedural languages are predictable.
-Thus people stick to them, no matter how shitty those languages are.
-People prefer predictable shitty things to unpredictable great things.
-People are risk-averse.
-
-Curiosity of finding a better way to program is the exception; the norm is "we have always done it this way".
-
-We can dumb down the language, or we can smart up the people, but people are naturally lazy, because laziness promotes survival.
-
-"David Liddle's idea on application user interfaces give us a clue as to why lower-level languages draw more people in than higher-level ones (Liddle, 1989).
-He claims that the most important aspect of a good user interface is how well it leads the user to an accurate conceptual model of how the application works.
-If the user develops an accurate conceptual model, then the application works as expected.
-This leads the user to try more things, which also work as expected, leading to an even better understanding, thus drawing the user further and further into the tool."
-https://www.amzi.com/articles/prolog_under_the_hood.htm
-** Increasing language adoption
-*** What
-In order for a language to be adopted, people must perceive its risk as low.
-
-The language must work with existing codebases.
-
-The language designer must think from the language user's point of view.
-Let's say I have 100,000 lines of Java that I've been writing and testing for the past 5 years.
-Are you expecting me throw away all of them?
-
-Thus the language must work with C, C++, C#, Java, Go, JavaScript, Python, Ruby, and everything else.
-This should be possible because the essence of all programming languages is the same: every programming language is a formal system.
-It should be possible to translate a program P1 in language L1 to program P2 in language L2 with the same semantics.
-
-Improve/enhance, not supersede.
-
-Mixing languages should be easy.
-
-2013, article, "Empirical analysis of programming language adoption", [[http://sns.cs.princeton.edu/docs/asr-oopsla13.pdf][pdf]]
-
-The language must be suitable for systems programming. - System programming is hardware-aware programming.
-Application programming assumes abstract machine, infinite memory, and all convenience provided by the operating system. - Why do we make this distinction?
-
-The language must facilitate metaprogramming.
-Everything must be a first-class citizen.
-It has to have EVAL.
-The language must provide a way for interpreting/compiling/loading a program at runtime.
-The compiler becomes a part of every program.
-
-What is the reason for the name "metacircular evaluator"?
-What is circular?
-What is metacircular?
-
-To make syntax first-class, we need QUOTE and UNQUOTE (such as in Lisp/Scheme)?
-
-To prevent syntax flamewar, we should define the canonical linearization of the abstract syntax tree.
-Go does this with =go fmt=.
-I think that is wise.
-
-- Basic assumptions
-  - Computer (machine) is embodied formal system.
-    - Assume no hardware fault.
-  - Software is executable mathematics.
-*** Other people's opinions
-- 2012 article "Socio-PLT: Principles for Programming Language Adoption" [[https://lmeyerov.github.io/projects/socioplt/paper0413.pdf][pdf]]
-
-* Memory management
-Is there a lambda-calculus interpreter without garbage collection?
-Is that PreScheme[fn::https://thintz.com/resources/prescheme-documentation]?
-PreScheme is limited Scheme with manual memory management.
-
-Stack allocation is simple and nice.
-
-Is dynamic memory allocation really necessary?
-
-Suppose we are writing a program that asks the user for a line of strings.
-
-#+BEGIN_EXAMPLE
-int read_line (char*, size_t);
-#+END_EXAMPLE
-
-What if the buffer not big enough?
-Return ENOMEM or EAGAIN?
-
-How do we make a console to-do list application without dynamic memory management?
-
-How do we make an in-memory database without dynamic memory management?
-
-That is only one function.
-What if there are several functions?
-
-If every function is restartable/continuable, then it simplifies memory allocation?
-
-How can we manage memory in programming?
-- manual and static, like in embedded programming
-- manual and dynamic, C malloc and free
-- Rust borrow
-- garbage collection
-- allocate and never free, useful in programs that run for a short time
-
-What are the consequences of not wanting manual memory management?
-- garbage collection
-- Rust-style management?
-
-If a process lives short enough, then it can allocate memory without freeing, and all the memory it uses can be freed when it ends.
-
-We can write a program that sorts an array of 100 integers.
-But what if there are more than 100 integers?
-
-How can we manage memory sanely?
-- one-more-indirection principle: pass an allocator to every class/subroutine that needs to allocate memory
-- restartable architecture; a subroutine never allocates memory; a subroutine throws an exception when the memory allocated by the parent is insufficient; the root method allocates memory, and re-calls everything in the call tree; use dependency injection
-
-Why is there no memory management in lambda calculus?
-Is it possible to implement lambda calculus without garbage collection?
-
-Simplifying C style:
-- Every function must free everything that it mallocs.
-- Everything else must be passed pre-allocated by a caller in the call stack.
-- If there is no enough memory, a function must return ENOMEM.
-- Reify the state into a struct.
-
-Example of state reification:
-#+BEGIN_EXAMPLE
-// The function
-
-int indexof (char* s, char* c) {
-    for (int i = 0; s[i] != 0; ++i) {
-        if (s[i] == c) { return i; }
-    }
-    return -1;
-}
-
-// becomes the class
-
-struct indexof {
-    char* s;
-    char c;
-    int i;
-    indexof (char* s_, char c_) : s(s_), c(c_), i(0) {}
-
-    int step () {
-        if (s[i] == 0) { i = -1; return 0; }
-        if (s[i] == c) { return 0; }
-        ++i;
-        return EAGAIN;
-    }
-};
-#+END_EXAMPLE
-
-Allocating memory is easy.
-The hard thing is deciding when to free it.
-We have several choices:
-- Never free.
-- Who allocates always frees.
-- Caller always frees?
-* Static vs dynamic: bad terminology?
-We should ask these questions instead:
-- Is type information available at runtime?
-- How far can types be manipulated at compile-time?
-- Is there a distinction between compile-time and run-time?
-* Bibliography
+Thus, "X programs Y" means "X makes Y do something X wants".
+
+Here are some examples of programming.
+
+Computer programmers program computers.
+
+Employers program employees.
+
+Teachers program students.
+
+Parents program children.
+
+States program citizens.
+
+Trainers program animals.
+
+Bio-engineers program microorganisms.
+
+Material engineers program materials.
+
+Farmers program fields.
+
+Urban planners program cities.
+
+We program our bodies:
+We move our hands to where we want them to be, and so on.
+
+Powerful people program powerless people.
+
+When people help us, they let us program them.
+* The noun "program"
+** What was a program?
+"Program" used to mean "public notice".[fn::<2019-10-26> https://www.etymonline.com/search?q=program]
+
+It is easy to imagine that authorities wrote programs to make people behave accordingly,
+that is, in 20th century parlance, to /program/ the people.
+
+We began using "program" as a verb when electronic computers were invented, around 1945.[fn::<2019-10-26> https://www.etymonline.com/search?q=program]
+I think Etymonline is referring to the ENIAC.
+
+There is a confusion:
+A "program" can mean both an individual show[fn::https://simple.wikipedia.org/wiki/Television_program]
+and the entire plan for a television station[fn::https://en.wikipedia.org/wiki/Broadcast_programming].
+** What is a program?
+To define a program, we have to simultaneously relate these concepts: programmer, program, programmee, and execution.
+
+/A programmer creates a program for execution by a programmee./
+
+Those four concepts are inseparable.
+They must be understood simultaneously.
+
+Thus, a program is a medium, a means of communication for relating the programmer's desire and the programmee's actions.
+
+A program is something that is mutually understood by the programmer and the programmee.
+
+A program is a concrete representation that is given the same abstract meaning by the programmer and the programmee,
+by virtue of a convention previously agreed between the programmer and the programmee.
+
+If the programmer and the programmee are both humans, then the program can be an utterance in a human language mutually understood by them.
+
+If the programmee is a machine,
+then the human programmer has to follow whatever convention set by the person who created the machine,
+and the convention is not negotiable because it is impractical to alter the machine.
+
+Here are some examples of programs.
+
+Laws are programs.
+Laws are designed by the legislative branch and executed/interpreted/enforced by the executive branch, especially by the police.
+
+Recipes are programs, designed by chefs and executed by cooks.
+* What is programmable?
+Everything is programmable in principle but not in practice.
+
+In principle, you can disassemble a machine into its parts and reassemble the parts into another machine that does what you want.
+In principle, you can threaten some people and get them to do something.
+
+In practice, you will rarely do any of those, if ever.
+
+Thus, the question is not what is programmable,
+but how hard something is to program,
+and why some systems are more programmable than others, that is,
+what affects, promotes, or hampers programmability.
+* Why are some things more programmable?
+Electronic computers are programmable because they have been designed to be modifiable without physical reassembly,
+and because people have invented tools such as high-level programming languages that make programming computers easier.
+
+People are somewhat programmable because they have evolved to socialize and cooperate a bit.
+
+People with less power are more programmable because people tend to avoid pain,
+and the programmee's BATNA[fn::<2019-10-26> https://www.beyondintractability.org/essay/batna] is lower than the programmer's BATNA.
+
+Some animals are programmable because they have evolved to respond to Pavlovian conditioning,
+because they understand correlation but perhaps not causation.
+But perhaps causation is a special case of correlation with temporal dependency?
+
+(Begin rambling.)
+
+This makes me think.
+Perhaps causation is correlation in which one thing always precedes the other.
+In fact, we infer causation from correlation, temporal dependency, and experiment:
+If C happens shortly before E, and eliminating C eliminates E, then we infer that C causes E.
+Thus, to infer whether C causes E, we need two things:
+First, we must observe that C happens shortly before E;
+second, we must be able to perform an experiment (interfere with the natural course of events) such that C is eliminated, and see whether E still happens.
+At least that is my mental model of causation (what I think causation is).
+But I believe that other people have the same model of causation.
+
+It is so hard to write when your mind is so eager to connect everything.
+
+(End rambling.)
+
+Thus, programming is the intersection between computer science, psychology, parenting, sociology, law, marketing, and cooking,
+if not everything, because humans always try to make others do what they want.
+* What is a programming language?
+For programming people, the language can be a variant of human languages such as English.
+
+For programming computers, the language is a formal language with no ambiguity.
+* How do we program?
+To program something, we must have an approximate understanding (a mental model) of its internal workings,
+how it responds to stimuli, how it changes its internal state.
+
+There is no general answer; it depends very much on the programmee.
+Here are some examples.
+Some people will undress for $100, others won't.
+Some computers lack some circuitries and thus they can't do some things fast enough.
+Furthermore, perhaps we cannot program a typical wrench or crowbar to compute prime numbers
+because we do not know any physical property that would enable us to exploit those things to compute prime numbers.
+
+Thus, we can program something, if we know what it can do, its limitations, and perhaps the laws that underlie its behavior.
+
+We do not need to perfectly understand the programmee.
+We only need a model that enables us to predict the responses of the programmee.
+
+An /X-programming model/ is a model that enables us to program the programmee X.
+For example, there are adult programming model, child programming model, dog programming model, computer programming model.
+
+Empathy (simulating other minds, thinking from someone else's perspective) is perhaps the foundation for programming other humans.
+
+For example, how do we make a man punch us?
+We can tell him to punch us, or we can punch him with the hope of angering him and making him punch us back.
+
+Thus, we program by constructing and following a programming model.
+* How did we program computers?
+The first electronic computers were programmed by manually /rewiring/ the cables inside the computers.
+
+Then, by entering machine codes via switchboard.
+It reduced the amount of physical work required to program a computer.
+Instead of rewiring cables, the programmer now flips switches and pushes buttons.
+
+Then, /stored-program/ computers.[fn::<2019-10-26> https://en.wikipedia.org/wiki/Stored-program_computer]
+
+Program as data.
+Code that generates code.
+Computers that reason about programs.
+
+Advancements in programming (increase in the productivity of programmers) is achieved by inventing abstractions that free the programmer
+from having to consider what is not essential to the problem at hand.
+What is essential depends on the requirements.
+For example, for a business programmer, manual memory allocation is often not essential.
+
+A "programmable calculator" can be made to do many things without physical reassembly.
+
+We can make a 4-bit adder.
+But all it can do is addition modulo 2^4.
+It implements only one mathematical function.
+
+We can make a multiplexer and an ALU, but it implements a few mathematical functions.
+
+The mathematical function computed by an asynchronous electronic circuit is quite limited.
+
+Shannon: electronic circuits, bits, and algebra.
+* How do we program computers?
+By the question "How do we program computers", we actually mean to ask "What is the easiest way for us to make computers do what we want?"
+
+We can make tools, but returns diminish.
+At least we have to tell the computer something.
+Thus the essential complexity of a program is the length of its requirements specification.
+This is the shortest description we have to tell a programmer.
+At least we have to tell a programmer what we want.
+* How do we program people?
+Perhaps, to understand how to program others, we only need to look into ourselves and ask:
+Under what circumstances would we do what others want us to do?
+** On changing people's minds with stories and not arguments
+One way to lower people's defense to change their opinions is "I used to ..., but then ..."
+
+Bad title, provokes defense mechanism: "Abortion is wrong"
+
+Bad title, sounds confrontational: "Why abortion is wrong"
+
+Better title: "I used to be against abortion until I encounter the sorites paradox"
+
+The most convincing argument is a story, not an argument.
+
+The strange thing about people is that counter-arguments /increase/ the strength of the attacked belief.
+
+The good news is that /empathy/ (feeling others, thinking from someone else's point of view) can reduce the strength of beliefs.
+
+Reason alone does not change beliefs.
+What changes beliefs is a lot of feelings plus a tiny bit of reason.
+Perhaps that is why stories work:
+People can feel the characters.
+
+The bad news is people tend to /auto-segregate/, so their children never get the chance to empathize with dissimilar people.
+Then these children grow up and write despicable things on the Internet.
+
+The Internet reflects a collective parenting failure of the human race.
+
+<2019-10-27> https://en.wikipedia.org/wiki/Defence_mechanisms
+** Mutual programming, conflicts, and employment
+When two people X and Y interact, sometimes each wants the other to do something,
+that is, X wants Y to do what X wants, and Y wants X to do what Y wants, to some extent.
+Thus, they /mutually program/ each other, to some extent.
+
+Mutual programming causes conflicts.
+
+For example, in a company, employees may want to maximize their salaries, and employers may want to maximize their profits.
+Those two desires are often, but not always, adversarial.
+
+How can the employer make the employee /feel/ in control without actually making the employee in control?
+Employers can let employees control relatively unimportant things such as their working hours and the ornaments on their desks,
+but, do such trivial allowances make the employee feel a satisfactory sense of control?
+Are employees smart enough to feel whether their sense of control is fake, and they cannot actually control important things
+such as the distribution of profits or the directions of the company?
+** <2019-08-20> On workplace fairness
+As an employer, it is very difficult to treat all employees fairly.
+Fairness does not exist.
+What exist are envy and jealousy.
+Everyone has their own idea of fairness.
+Thus, the problem is not to be fair, but to be /perceived/ as fair by /each/ employee.
+But every person has a different idea of fairness.
+** Exploiting cognitive biases?
+Does brainwashing work?
+
+<2019-10-27> https://en.wikipedia.org/wiki/Brainwashing
+
+Zimbardo 1971 Stanford prison experiment?
+
+People have cognitive biases[fn::<2019-10-27> https://en.wikipedia.org/wiki/Cognitive_bias], and their biases can be exploited to facilitate their programming.
+
+Thus, to make people believe something, the belief should be presented in terms of something consonant with the person's existing beliefs.
+
+How do we deradicalize extremists?
+
+The halo effect (leakage of positive trait, e.g. people think that handsome implies kind and smart)
+and the horn effect (leakage of negative trait, e.g. people think that ugly implies evil and stupid).
+
+https://en.wikipedia.org/wiki/Halo_effect
+
+https://en.wikipedia.org/wiki/Horn_effect
+** Can psychology solve terrorism?
+The thing common to all terrorists is /belief/ and /segregation/.
+
+Why do many people harbor extreme thoughts but only few act them out?

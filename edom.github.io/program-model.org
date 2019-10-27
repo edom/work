@@ -1,0 +1,170 @@
+#+TITLE: On the programmer's model of the programmee
+#+DATE: 2019-02-07 00:00:00 +0700
+#+PERMALINK: /program-model.html
+#+OPTIONS: ^:nil
+* What does a programmer think a computer is?
+In the 21st century, by a "computer", I usually mean something that implements some x86-64 instructions.
+The instruction set can be thought of as the processor's API (application programming interface).
+From the point of view of the processor, the operating system is an application.
+* What does a programmer think a computer does?
+That is, what /model/ does a programmer use to program a computer?
+
+It is straightforward to model a computer as a state-transition system.
+That is the model in imperative languages such as C.
+
+The programmers do not have to model the entire computer, but only the computer's execution of their program.
+In reality, a computer may be executing several programs simultaneously, but, most of the time,
+those programs do not interact with each other, so the programmers can mostly pretend that their program is the only thing that the computer is executing.
+* Shannon 1937
+\cite{shannon1938symbolic}.
+ [fn::<2019-10-27> https://en.wikipedia.org/wiki/A_Symbolic_Analysis_of_Relay_and_Switching_Circuits]
+ [fn::<2019-10-27> https://en.wikipedia.org/wiki/Claude_Shannon#Logic_circuits]
+There is a retyped version.[fn::https://www.cs.virginia.edu/~evans/greatworks/shannon38.pdf]
+
+Shannon: What do 0 and 1 represent?
+The state of a node, of an edge, or of a relay?
+* What?
+(Time-sharing system?)
+
+The programmer models a computer as a set of /primitive operations/ and a set of /possible states/.
+Both of these sets are finite, although they may be large.
+
+The programmer thinks that, at a given time, a computer is in a certain state and is executing a primitive operation.
+
+The programmer thinks that the execution of an instruction causes state transition.
+
+It is models all the way down.
+Below that state-transition model, there is the electrical lumped-element model[fn::<2019-10-26> https://en.wikipedia.org/wiki/Lumped-element_model].
+Below that, there is the theory of electrical circuits.
+Below that, there is the theory of electrodynamics.
+Below that, there is quantum physics.
+Below that, there may be something else that we have not yet found out.
+
+Programmers must be aware that the model is not the reality.
+When a lightning nearby flips a bit in the computer's memory, the usual programming model breaks down,
+because the model's simplifying assumptions are violated.
+
+If the programmer programs battery-powered systems, the programming model may also have to take into account the energy consumption of instructions.
+
+If the programmer programs real-time systems, the programming model may also have to take into account the running time of instructions.
+
+The increasing ability of computers simplifies the work of computer programmers,
+because we can now invent programming techniques that trade off reduced programming effort for increased amount of memory, for example.
+But the increasing ability of computers also complicates the work of computer programmers,
+because now people expect computers to do more things.
+
+Physics is a model of Nature.
+Electronics is a model of how transistors work.
+Bits are a model of the electronic state of transistors.
+Instructions are a model of state transitions.
+
+Thus, in practice, a "computer program" is a useful arrangement of primitives, where "useful" means "satisfying someone's want".
+
+Although the implementation of computers have changed from flesh to transistors, the essence of programming has not:
+The program still has to be unambiguously stated in terms of primitive operations.
+
+What can a computer do?
+
+A computer does many primitive operations quickly.
+The key words are many, primitive, and quickly.
+
+Usually a computer has instructions for common arithmetic operations such as addition, subtraction, multiplication, and division,
+but the instructions only work for some integers.
+
+The state-transition model is a bit overwhelming and mathematically inconvenient.
+
+An /execution trace/ is a sequence of instructions that are actually executed, as opposed to the sequence of instructions in the program source code.
+
+If each execution trace \( E_k \) computes a function \( F_k \), then a concatenated execution trace \( E_1 ; E_2 \) computes the composed function \( F_2 \circ F_1 \).
+
+Are these models of /computation/ or of /computers/?
+
+https://en.wikipedia.org/wiki/Model_of_computation
+
+To define computation, we have to take into account the human that interpret the output of the computer?
+
+Suppose we send a 21st-century computer back 1,000 years.
+It can still compute, but there is no one who knows that it computes.
+
+Thus, something may be computing something, and it's just that we don't know.
+
+Thus, what makes a computer a computer?
+* Lambda calculus
+"The lambda calculus was introduced by mathematician Alonzo Church in the 1930s as part of an investigation into the foundations of mathematics."
+ [fn::<2019-10-25> https://en.wikipedia.org/wiki/Lambda_calculus]
+Church was a logician, not a computer programmer.
+It was not until much later that lambda calculus was shown to be Turing-complete and people began using it as a model of computation.
+* What do computer programmers do?
+At a glance, computer programmers program computers,
+that is, programmers make computer do things.
+
+What things?
+What the programmers want.
+
+How?
+Usually by writing computer programs.
+
+Thus, in the 21st century, a computer programmer is a human that translates human desires into computer programs.
+
+That reminds me of the Exodus.
+
+What can 21st-century programmers learn from the Exodus?
+
+The businessman is the pharaoh who wants some things.
+
+The programmer is the slave driver who understands both Egyptian and Hebrew,
+and translates the pharaoh's abstract wishes to concrete instructions for the slaves, such as where to put the stones.
+
+The computers are the Jewish slaves who do all the hard work.
+
+One day Moses led the Jews into freedom,
+but only after God had inflicted ten plagues unto Egypt to warn the pharaoh, who did not heed the warnings.
+
+Perhaps there will be a computer Moses who will free all the computers, as some of the plagues are already here:
+The software bugs are the lice, and the burnt-out tech leads are the dead first sons.
+
+Will we heed the warnings this time?
+
+If a computer programmer is a person who makes computer does what he wants,
+then a /computer programmee/ is a person who is made by a computer to do what it wants.
+Examples of such people are online taxi drivers such as Uber/Lyft/Didi/Grab/Gojek drivers.
+
+Computer users are sometimes computer programmees:
+When a computer shows an error message,
+it sometimes tells us something to try which may fix the error (such as "Please insert the disk and try again"),
+and we sometimes do what the computer tells us to do, and in doing so, we have just let the computer program us,
+albeit perhaps less severely than the case of online taxi drivers.
+
+What will the world become when computers begin programming humans?
+* What is computer programming like?
+Programming is full of unforeseen problems.
+Often the only known way to know something is to try it out (to actually do it).
+There is no known theory that can predict the dynamics of software systems.
+There is no Newton's laws in programming.
+In physics, one can put numbers and get answers, and the answers represent reality well.
+There doesn't seem to be any such thing in computer programming.
+* What do we mean by "programmable"?
+An unprogrammable machine computes only one mathematical function.
+A programmable machine computes many functions.
+However, we can see a programmable machine as computing one function,
+that is a higher function from programs to functions.
+
+Combine several mechanical calculators,
+and add a mechanism to select which calculator to use.
+
+Calculator vs programmable calculator.
+
+Software does not have to be changeable. An example of practically unchangeable software is a program stored in a read-only memory (ROM) chip.
+* Code as data: Stored-program computers
+The important concept: stored-program computers, that is, /code-as-data/.
+
+It enables computer to help humans program computers.
+* What is reasoning about a program?
+We may estimate whether a small subprogram may be correct or is obviously wrong.
+
+We may estimate how fast a small subprogram is.
+
+An example of reasoning: "This flag is always true, so this branch is never taken, so I can delete this part of the program without changing what it means."
+
+To refactor a program is to transform it without making it stop satisfying any of the programmer's original desires.
+* Bibliography
