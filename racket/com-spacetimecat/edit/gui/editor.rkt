@@ -21,8 +21,10 @@
         (define mode-indicator (new message% [parent h-panel-cmd] [label ""] [auto-resize #t]))
         (define command-input (new text-field% [parent h-panel-cmd] [label ""]))
 
-    (define buffer (new buffer% [control control]))
+    (define buffer (new buffer% [session control]))
     (send canvas set-editor (send buffer internal-get-text%-instance))
+
+    (define/public (get-current-buffer) buffer)
 
     (define/public (evaluate-current-buffer) (send buffer evaluate))
 
@@ -34,6 +36,8 @@
         (or (super on-subwindow-char r e)
             (and (equal? keymap 'vi) (handle-key-event e))))
 
+    ;;  2019-10-22: TODO: Perhaps move this to buffer% so that we can delete the forwarding methods?
+    ;;  But refactor session-imp.rkt before deleting the forwarding methods.
     (define/public (handle-key-event e)
         ;;  What about things like 10dw, d10w, 5h
         ;;  We need a more sophisticated parser.
@@ -99,11 +103,6 @@
     (define/forward (move-to-start-of-next-word)        buffer)
     (define/forward (move-to-previous-start-of-word)    buffer)
     (define/forward (move-to-next-end-of-word)          buffer)
-
-    (define/forward (open-file path)                    buffer)
-    (define/forward (open-target path position)         buffer)
-    (define/forward (save-file)                         buffer)
-    (define/forward (complete-word-near-cursor)         buffer)
 
     (define/public (focus-on-command-input) (send command-input focus))
     (define/public (focus-on-main-editor) (send canvas focus))

@@ -1,6 +1,9 @@
 #lang s-exp "lang.rkt"
 
 ;;  Forms with fewer parentheses.
+;;
+;;  2019-10-25: The Let and λ exported by this module is deprecated.
+;;  Learn to live with the parentheses instead.
 
 (provide
 
@@ -64,9 +67,9 @@
 (define-syntax-parser λ
     #:datum-literals (-> =>)
     [(_ Param ... -> ~! Body1 Body ...)
-        #'(lambda (Param ...) Body1 Body ...)]
+        (syntax/loc this-syntax (lambda (Param ...) Body1 Body ...))]
     [(_ Param ... => ~! Body1 Body ...)
-        #'(lambda (Param ...) (Body1 Body ...))]
+        (syntax/loc this-syntax (lambda (Param ...) (Body1 Body ...)))]
 )
 
 (define (!= a b)                (not (= a b)))

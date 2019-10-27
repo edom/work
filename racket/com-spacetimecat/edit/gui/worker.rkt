@@ -40,9 +40,9 @@
             (define (loop)
                 (define input (thread-receive))
                 (when (eq? (unbox current-input) input)
-                    (define output (compute input))
+                    (define output (send this compute input))
                     (when (box-cas! current-input input #f)
-                        (queue-callback (λ -> (after-compute input output)))))
+                        (queue-callback (λ -> (send this after-compute input output)))))
                 (loop))
             (loop))))
 

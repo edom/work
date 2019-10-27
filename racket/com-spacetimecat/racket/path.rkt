@@ -11,6 +11,7 @@
     path-remove-trailing-slash
     get-path-element-separator-char
     get-path-element-separator-string
+    build-path/simplify
 )
 
 (define (pathy->string x)
@@ -63,3 +64,6 @@
         (build-path parent name)
     )
 )
+
+(define (build-path/simplify . elems)
+    (simplify-path (apply build-path elems) #f))

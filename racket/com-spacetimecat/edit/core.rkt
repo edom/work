@@ -65,16 +65,3 @@
         fallback
         (car prefs)
     ))
-
-(require
-    syntax/srcloc
-)
-
-(define (syntax-srcloc stx)
-    (make-srcloc
-        (syntax-source stx)
-        (syntax-line stx)
-        (syntax-column stx)
-        (syntax-position stx)
-        (syntax-span stx)
-    ))

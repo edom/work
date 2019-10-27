@@ -18,12 +18,10 @@
 (define/contract
     (match-paths
         #:in candidates
-        #:according-to user-input
-    )
+        #:according-to user-input)
     (-> #:in (listof path?)
         #:according-to string?
-        (listof (cons/c path? Match?))
-    )
+        (listof (cons/c path? Match?)))
     (define pairs (list-filter-map
         (λ path ->
             (define path-str (path->string path))
@@ -34,37 +32,31 @@
                 (make-empty-Match)))
             (define m-path (match-string user-input path-str 0))
             (define m (list-argmax Match-score (list m-path m-name)))
-            (if (Match-fail? m) #f (cons path m))
-        )
-        candidates
-    ))
-    (list-sort pairs > #:key (λ p -> (Match-score (cdr p))) #:cache-keys? #f)
-)
+            (if (Match-fail? m) #f (cons path m)))
+        candidates))
+    (list-sort pairs > #:key (λ p -> (Match-score (cdr p))) #:cache-keys? #f))
 
-(define
+(define/contract
     (order-strings
         #:in candidates
-        #:according-to user-input
-    )
+        #:according-to user-input)
+    (-> #:in (listof string?)
+        #:according-to string?
+        (listof string?))
     (define (order-of x)
         (cond
             [(equal? x user-input) 0]
             [(string_prefix? x user-input) 1]
-            [else 2]
-        ))
+            [else 2]))
     (define (comes-before? x y)
         (if (< (order-of x) (order-of y))
             #t
-            #f
-        )
-    )
-    (sort candidates comes-before?)
-)
+            #f))
+    (sort candidates comes-before?))
 
 (define
     (find-completions
         #:for input
         #:in strings
     )
-    (order-strings #:in strings #:according-to input)
-)
+    (order-strings #:in strings #:according-to input))

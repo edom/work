@@ -14,6 +14,7 @@
         "syntax-parse.rkt"
     )
     syntax/parse/define
+    syntax/srcloc
     "syntax-parse.rkt"
 )
 
@@ -29,6 +30,7 @@
 
     $if
 
+    syntax-srcloc
     syntax-position-1   ;;  one-based index
     syntax-position-0   ;;  zero-based index
 
@@ -155,6 +157,14 @@
         )
     ]
 )
+
+(define (syntax-srcloc stx)
+    (make-srcloc
+        (syntax-source stx)
+        (syntax-line stx)
+        (syntax-column stx)
+        (syntax-position stx)
+        (syntax-span stx)))
 
 (define (syntax-position-1 s) (syntax-position s))
 (define (syntax-position-0 s)

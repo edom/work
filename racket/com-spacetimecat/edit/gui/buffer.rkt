@@ -3,6 +3,8 @@
 (require
     "../eval.rkt"
     "option.rkt"
+    "session.rkt"
+    "style.rkt"
 )
 
 (provide
@@ -14,10 +16,17 @@
 ;;
 ;;  A buffer% can be thought of as a text% + a namespace.
 
-(define buffer% (class object% (super-new)
-    (init-field control)
+(define buffer% (class* object% (buffer<%>) (super-new)
+    (init-field session)
+    (define text (new my-text% [event-handler (match-lambda
+        [`(complete-word ,word) (send session complete-word word)]
+        [_ (void)])]))
 
-    (define text (new my-text% [control this]))
+    ;;  Overridables, event listeners, hooks.
+
+    (define/public (get-default-eval-namespace) (send session get-default-eval-namespace))
+
+    ;;  Internals.
 
     (define/public  (internal-get-text%-instance)   text)
 
@@ -30,8 +39,10 @@
 
     (define/public  (append str)            (send text insert str (send text last-position)))
     (define/public  (insert-char c)         (send text insert (string c)))
+    (define/public  (insert-string s)       (send text insert s))
     (define/public  (handle-backspace-key)  (send text delete 'start 'back))
     (define/public  (handle-delete-key)     (send text delete 'start (send text get-end-position)))
+    (define/forward (delete-word-backwards) text)
 
     ;;  Navigation commands.
 
@@ -43,15 +54,11 @@
     ;;  Namespace, parsing, outline, eval, completion, and cross-references.
 
     (define namespace #f)
-    (define/public (get-eval-namespace)
-        (if namespace namespace (send control get-default-eval-namespace)))
-    (define/public (set-eval-namespace ns)
-        (set! namespace ns))
+    (define/public (get-eval-namespace) (if namespace namespace (get-default-eval-namespace)))
+    (define/public (set-eval-namespace ns) (set! namespace ns))
 
     (define-property outline #f
-        #:after-change (old new ->
-            (send control after-outline-change this old new)
-        ))
+        #:after-change (old new -> (send session after-outline-change this old new)))
 
     ;;  Beware: The REPL runs on the GUI thread, so the GUI will hang until eval returns.
     (define/public (evaluate)
@@ -59,15 +66,13 @@
         (define output-str (eval/string input-str (get-eval-namespace)))
         (send this append (string-append "\n\n" output-str)))
 
-    (define/public (complete-word-near-cursor)
+    (define/forward (get-word-near-cursor) text)
+
+    (define/public (compute-word-completions-for word)
         (parameterize [(current-namespace (get-eval-namespace))]
-            (define word (send text get-word-near-cursor))
             (define sym-strs (map symbol->string (namespace-mapped-symbols)))
             (define completions (find-completions #:for word #:in sym-strs))
-            (define answers (list-take-at-most 16 #:from completions))
-            (println answers)
-            ;; TODO something like (new string-option-dialog% [label "Complete Word"] [options answers])
-        ))
+            (list-take-at-most 16 #:from completions)))
 
     ;;  open = load + parse + fire events
     ;;
@@ -93,11 +98,11 @@
     (define/public (open-file path)
         (define current-path (get-file-path))
         (unless (equal? current-path path)
-            (send control before-open-file this path)
+            (send session before-open-file this path)
             (send text load-file path)
             (send this set-outline (compute-file-outline path))
             (send this set-eval-namespace (make-namespace-from-file path))
-            (send control after-open-file this path)
+            (send session after-open-file this path)
             ))
 
     (define/public (open-target target-path position)
@@ -108,38 +113,18 @@
     (define/forward (save-file) text)
 ))
 
-(define preferred-faces (list
-    "Noto Mono"
-    "Droid Sans Mono"
-    "Liberation Mono"
-    "DejaVu Sans Mono"
-    "Courier New"
-    "Monospace"
-))
-
 (define my-text% (class text%
-    (init-field control)
+    (init [event-handler (λ e -> (void))])
     (super-new)
+    (define text this)
+
+    (define handle-event event-handler)
 
     (define/override (on-event e)
-        (define admin (send this get-admin))
+        (define admin (send text get-admin))
         (if (and admin (send e button-down? 'right))
             (send admin popup-menu (make-context-menu) (send e get-x) (send e get-y))
             (super on-event e)))
-
-    (define (make-context-menu)
-        (define word (get-word-near-cursor))
-        (define menu (new popup-menu%))
-        (define-syntax-rule (f arg ...) (~a arg ... #:separator " "))
-        (new menu-item% [parent menu] [label (f "Word near cursor:" word)] [callback (λ r e -> (TODO))])
-        (new menu-item% [parent menu] [label (f "Complete" word)] [callback (λ r e -> (send control complete-word-near-cursor))])
-        (new menu-item% [parent menu] [label (f "TODO: Define" word)] [callback (λ r e -> (TODO))])
-        (new menu-item% [parent menu] [label "TODO: Open <module>"] [callback (λ r e -> (TODO))])
-        (new menu-item% [parent menu] [label (f "TODO: Show documentation for" word)] [callback (λ r e -> (TODO))])
-        (new menu-item% [parent menu] [label "TODO: Find what uses <word/module>"] [callback (λ r e -> (TODO))])
-        (new menu-item% [parent menu] [label "TODO: Find what is used by <word/module>"] [callback (λ r e -> (TODO))])
-        (new menu-item% [parent menu] [label "TODO: Show <word/module> dependencies/uses/used-by"] [callback (λ r e -> (TODO))])
-        menu)
 
     ;;  TODO: Ask to save if content is dirty.
     ;;  But what should we do if the user presses "Cancel"?
@@ -148,26 +133,20 @@
         (unless (path? path) (error 'load-file "not a path: ~s" path))
         (super load-file path 'text))
 
+    (define/public (delete-word-backwards)
+        (define start (send this get-start-position))
+        (let/ec return
+            (when (<= start 0) (return))
+            (define char (send this get-character (- start 1)))
+            (when (char-breaks-word? char) (return))
+            (send this delete 'start 'back)
+            (delete-word-backwards)))
+
     (define/public (get-word-near-cursor)
         (define-values (start end) (extend-selection-to-nearest-word-boundaries))
         (send this get-text start end))
 
-    (define word-breaking-chars '(
-        #\nul #\space #\tab #\newline #\return
-        #\( #\) #\[ #\] #\{ #\}
-    ))
-
-    (define (char-breaks-word? c) (member c word-breaking-chars))
-
-    (define-syntax-parser loop
-        [   (_ #:to-break-call break body ...)
-            #'(call/ec (λ break ->
-                (define (Loop) body ... (Loop))
-                (Loop)
-            ))
-        ])
-
-    (define (extend-selection-to-nearest-word-boundaries)
+    (define/public (extend-selection-to-nearest-word-boundaries)
         (define start (send this get-start-position))
         (define end (send this get-end-position))
         (define min-start 0)
@@ -184,25 +163,38 @@
             (set! end (+ end 1)))
         (values start end))
 
+    ;;  Menu.
+    (define (make-context-menu)
+        (define word (get-word-near-cursor))
+        (define menu (new popup-menu%))
+        (define-syntax-rule (f arg ...) (~a arg ... #:separator " "))
+        (new menu-item% [parent menu] [label (f "Word near cursor:" word)] [callback (λ r e -> (TODO))])
+        (new menu-item% [parent menu] [label (f "Complete" word)] [callback (λ r e -> (handle-event `(complete-word ,word)))])
+        (new menu-item% [parent menu] [label (f "TODO: Define" word)] [callback (λ r e -> (TODO))])
+        (new menu-item% [parent menu] [label "TODO: Open <module>"] [callback (λ r e -> (TODO))])
+        (new menu-item% [parent menu] [label (f "TODO: Show documentation for" word)] [callback (λ r e -> (TODO))])
+        (new menu-item% [parent menu] [label "TODO: Find what uses <word/module>"] [callback (λ r e -> (TODO))])
+        (new menu-item% [parent menu] [label "TODO: Find what is used by <word/module>"] [callback (λ r e -> (TODO))])
+        (new menu-item% [parent menu] [label "TODO: Show <word/module> dependencies/uses/used-by"] [callback (λ r e -> (TODO))])
+        menu)
+
     ;;  Styles.
-
     (define/override (default-style-name) "Code")
-
-    (define (initialize-styles)
-        (define available-faces (get-face-list 'mono))
-        (define face (choose-first
-            #:from preferred-faces
-            #:in available-faces
-            #:or #f
-        ))
-        ;;  TODO: Set font size.
-        (define style-list (send this get-style-list))
-        (define style-0 (send style-list basic-style))
-        (define delta-0 (new style-delta%))
-        (send delta-0 set-face face)
-        (send delta-0 set-family 'modern) ;; Racketspeak for monospace.
-        (define style-1 (send style-list find-or-create-style style-0 delta-0))
-        (send style-list new-named-style "Code" style-1)
-        (send this set-styles-sticky #f))
-    (initialize-styles)
+    (initialize-styles this)
 ))
+
+(define word-breaking-chars '(
+    #\nul #\space #\tab #\newline #\return
+    #\( #\) #\[ #\] #\{ #\}
+))
+
+(define (char-breaks-word? c)
+    (member c word-breaking-chars))
+
+(define-syntax-parser loop
+    [   (_ #:to-break-call break body ...)
+        #'(call/ec (λ break ->
+            (define (Loop) body ... (Loop))
+            (Loop)
+        ))
+    ])

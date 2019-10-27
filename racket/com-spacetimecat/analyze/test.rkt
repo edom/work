@@ -4,13 +4,11 @@
     racket/pretty
     rackunit
     rackunit/text-ui
+    "../racket/path.rkt"
     "all.rkt"
 )
 
 (provide main)
-
-(define (build-path/simplify . elems)
-    (simplify-path (apply build-path elems) #f))
 
 ;;  XXX: ".." is an abuse.
 (define test-data-path (build-path/simplify $__FILE__/path ".." "test-data.rkt"))
