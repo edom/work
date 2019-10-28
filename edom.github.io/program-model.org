@@ -94,6 +94,69 @@ Thus, what makes a computer a computer?
  [fn::<2019-10-25> https://en.wikipedia.org/wiki/Lambda_calculus]
 Church was a logician, not a computer programmer.
 It was not until much later that lambda calculus was shown to be Turing-complete and people began using it as a model of computation.
+
+It is quite crazy that all computable functions can be represented by only binding and substitution.
+** Preventing name clashes
+We can prevent name clashes by renaming each variable to a generated globally unique name.
+
+Another way of preventing name clashes is "de Bruijn indexes".
+It does not require globally unique names.
+
+Another way of preventing name clashes is to not use named binders in the first place,
+and to use combinatory logic such as SKI calculus instead.
+SKI calculus is equivalent to lambda calculus.
+SKI calculus is easier to reason but is harder to write a program in?
+** Graphical/visual lambda calculus?
+Are pictures easier to reason than text?
+
+Graphical/visual lambda calculus?
+
+Reduction graphs in the lambda calculus
+https://www.sciencedirect.com/science/article/pii/0304397584900021
+
+Graphic lambda calculus
+https://arxiv.org/abs/1305.5786
+
+https://chorasimilarity.wordpress.com/2012/12/21/conversion-of-lambda-calculus-terms-into-graphs/
+
+Visual Lambda Calculus
+http://bntr.planet.ee/lambda/work/visual_lambda.pdf
+
+Conversion of lambda calculus terms into graphs
+http://binarylambda.blogspot.com/2013/03/lambda-diagrams-lambda-diagrams-few.html
+** Explicit reduction strategies?
+Why don't we let programmers decide whether they want strictness or laziness or whichever strategies where they want them when they want them?
+
+ML has type =Lazy a=?
+
+How do we seamlessly combine strict and lazy fragments?
+
+#+BEGIN_QUOTE
+;;  This works.
+(define ones (delay (cons 1 ones)))
+
+(car (force ones)) ;; 1
+(cdr (force ones)) ;; promise
+(car (force (cdr (force ones)))) ;; 1
+#+END_QUOTE
+** Reduction graph?
+Reduction graph?
+A vertex represents what?
+An edge represents what?
+
+In what sense is Lamping 1990 optimal?
+http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.90.2386&rep=rep1&type=pdf
+* Should we auto-curry?
+In practice, the lower layer has many-parameter procedures because otherwise we have to spend a CALL instruction for each parameter!
+
+Should we stick as close as possible to lambda calculus?
+
+If Scheme had auto-currying, we would be able to do this, but we would have to sacrifice variable-arity procedures and keyword arguments:
+#+BEGIN_EXAMPLE
+(define f (λ (x y) (+ x 10)))
+(define g (f 10))
+(define h (g 20))
+#+END_EXAMPLE
 * What do computer programmers do?
 At a glance, computer programmers program computers,
 that is, programmers make computer do things.
