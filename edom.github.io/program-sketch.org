@@ -1,5 +1,5 @@
-#+TITLE: Sketching a declarative programming language
-#+DATE: 2019-03-01 04:00:00 +0700
+#+TITLE: Sketches of a programming language
+#+DATE: 2019-02-07 00:00:00 +0700
 #+PERMALINK: /program-sketch.html
 #+OPTIONS: ^:nil
 * Milestone planning?
@@ -24,6 +24,419 @@ Version, milestone, man-day
 Read-only storage
 
 Writable storage
+* Ideas and reading list
+Perhaps the easiest way to make a programming language is to extend lambda calculus?
+
+The easiest extension is some constants.
+
+How do we let the programmers choose the reduction strategy?
+
+1982
+A consistent extension of the lambda-calculus as a base for functional programming languages
+https://www.sciencedirect.com/science/article/pii/S0019995882904582
+* Programming languages
+** Taxonomy of programming languages?
+- Dichotomies
+- Having denotational semantics vs not
+- With vs without runtime type information
+- Curry-style, implicit typing, optional typing, gradual typing
+- Church-style suggestive typing, meaningful typing
+- Statement vs expression
+- Imperative vs declarative
+- Value vs reference (referentially transparent vs not)
+- By value spaces?
+- Principled vs unprincipled
+- Designed by person vs by committee
+** What should a programming language be?
+How should [[file:haskell.html][Haskell]] be improved?
+- How do we use Haskell without fmap, ap, and other annoying syntactic baggages? How do we have Maybe(A) = A union {Nothing}? (The original question that started it all.)
+- What does a set-theoretic type system look like? (The consequence of wanting Maybe(A) = A union {Nothing}.)
+- What if the denotational semantics directly involve functors and monads?
+- Why should we use that language / write programs that way?
+- Is there an efficient implementation?
+
+How should lambda calculus be implemented?
+What is an optimal implementation?
+
+** What is the essence of programming language constructs?
+*** Records, dictionaries, ordering, function model
+A record's components are ordered.
+A dictionary's entries are unordered.
+Both can be /modeled/ by a function from the set of keys to the set of values.
+
+A record ={a:1, b:2}= can be modeled by the function \((K,V,F)\) where \(K = \Set{a,b}\) and \(V = \Set{1,2}\) and \(F = \Set{(a,1), (b,2)}\).
+*** The essence of dictionary is finite function
+Clojure gets this right?
+
+Left-hand side of an application may be:
+- a dictionary,
+- a lambda, or
+- a finite left-biased union of arbitrarily many dictionaries and lambdas, or
+- a union like that but right-biased.
+*** Dictionary, map, associative array, record, finite function, hash table
+**** Clojure maps are applicable like functions.
+A very interesting fundamental idea.
+
+#+BEGIN_SRC lisp
+({:a 1 :b 2 :c 3} :a)
+=> 1
+({:a 1 :b 2 :c 3} :b)
+=> 2
+#+END_SRC
+
+Clojure has nice map syntax: =(m k)= for accessing k.
+
+Maps are isomorphic to functions.
+We update a map.
+Updating a function is simple:
+#+BEGIN_SRC haskell
+update nk nv f = \ k -> if k == nk then nv else f k
+-- and then beta-normalize the lambda body
+#+END_SRC
+
+A Prolog deterministic binary predicate is like a Clojure map.
+
+*** What is an array?
+What is the difference between an array, a string (byte string vs character string), and a sequence?
+
+C does not have built-in arrays; it has pointer arithmetics.
+An "array access" expression p[i] is a syntactic sugar for the pointer arithmetic dereference expression *(p+i).
+
+Is a C++ vector an array?
+
+*** Comments
+Humans and machines should understand the same thing.
+Comments should not be used very much.
+All explanations should be understood by both humans and machines.
+If a programmer has to resort to comments, then the language has failed to be expressive enough to express that comment.
+
+We require less comments in languages with static type-checking.
+
+A variable's type is a partial answer to "What does this variable mean", "What is this variable", and "What are the possible values of this variable".
+It formalizes the programmer's assumptions.
+** Growing a programming language?
+2006, "A growable language"
+"programming language designers should plan for such growth, along with the growth of a user community"
+https://dl.acm.org/citation.cfm?id=1176621
+
+Racket manifesto?
+Racket language-oriented programming?
+** What is a paradigm?
+A mindset.
+A way of thinking.
+A way of looking at things.
+A lens through which we look at everything.
+** Leverage existing infrastructures instead of creating from scratch
+Instead of creating a programming language from scratch, we should leverage existing programming language infrastructures.
+
+So far we think Prolog is the best for sketching languages with abstract syntax
+(that is, when we care about the semantics and do not care about the concrete syntax).
+The concrete syntax can always come later.
+Pretty concrete syntax will not console the programmers traumatized by ugly semantics.
+It would be like marrying a handsome but rotten man:
+the hype turns into regret after a few weeks.
+** Logic programming
+Prolog is at least second-order, as exemplified by its call/2.
+
+We should program in logic because logic is the nternal language of thought?
+** What is the best programming language?
+This is what I think the best programming language would is like, as of <2018-12-30>.
+
+general feel: Prolog + Haskell
+
+Katahdin - runtime syntax manipulation
+
+supercompilation + partial evaluation + compilation by abstract interpretation
+
+user-extensible unification?
+
+Type system: Curry-style, not Church-style.
+More like Erlang Dialyzer or TypeScript than Haskell.
+Users should be able to write their own program checkers and program transformations.
+
+Module and import system: ld linker script, JavaScript, Nix import by lambda parameter name, Dhall, OCaml local import.
+
+Syntax: Landin offside rule?
+
+Pure + nondeterminism + JavaScript module system
+** What are some interesting programming languages?
+   :PROPERTIES:
+   :CUSTOM_ID: what-are-some-interesting-programming-languages
+   :END:
+
+- Interesting functional programming languages tailored for web programming.
+  Perhaps related to data modeling.
+
+  - Ur/Web
+
+    - [[http://www.impredicative.com/ur/faq.html][FAQ]]
+
+      - "Why would I prefer to use Ur/Web over OPA?"
+
+    - [[http://www.impredicative.com/ur/resources.html][How to Get Started Learning Ur/Web]]
+
+  - [[http://links-lang.org/][The Links Programming Language]]
+  - [[http://opalang.org/][The Opa Language]]
+
+- Moving logic into SQL stored procedures
+
+  - [[https://sivers.org/pg][Simplify: move code into database functions | Derek Sivers]]
+
+    - A legitimate concern: How do we version-control (and release, and rollback) stored procedures, triggers, and other database logics?
+
+  - [[https://news.ycombinator.com/item?id=11802917][Andl, a relational language that is not SQL, is coming to Postgres | Hacker News]]
+
+- https://www.microsoft.com/en-us/research/publication/convenient-explicit-effects-using-type-inference-with-subeffects/
+- [[https://nikita-volkov.github.io/if-haskell-were-strict/][If Haskell were strict, what would the laziness be like?]]
+- http://homepages.inf.ed.ac.uk/wadler/papers/free-rectypes/free-rectypes.txt
+
+*** Do we really have to read these fragmented sources?
+    :PROPERTIES:
+    :CUSTOM_ID: do-we-really-have-to-read-these-fragmented-sources
+    :END:
+
+- [[http://www.cse.chalmers.se/edu/year/2015/course/DAT150/lectures/proglang-12.html][Lecture 12: Design and Evolution of Programming Languages]]
+
+* Programming language implementation
+** How should we make programming tools such as compilers, interpreters, and editors?
+** What meta-programming tools exist?
+*** Rascal MPL
+https://www.rascal-mpl.org/
+*** Eclipse Xtext
+*** JetBrains MPS
+MPS is "Meta Programming System".
+
+A concept can have properties. Each property has a type.
+The property type system is limited to int, string, and regex-constrained string.
+
+A member in a model is an /instance/ of a concept,
+similar to how an object is an instance of a class in Java.
+
+MPS is a /tree/ editor, not a text editor.
+
+A concept is an AST (abstract syntax tree) node type.
+
+On 2017-08-12, MPS 2017.2 doesn't support Java 7 try-with-resources statements.
+
+The MPS IntelliJ IDEA plugin allows you to use a language from IDEA,
+but not defining your own language.
+You need the MPS IDE for that.
+
+External links:
+- [[https://confluence.jetbrains.com/display/MPSD20172/Using+MPS+inside+IntelliJ+IDEA][Using MPS inside IntelliJ IDEA]]
+- [[https://confluence.jetbrains.com/pages/viewpage.action?pageId=93128576][MPS user guide for Java developers (IntelliJ IDEA)]] (long)
+- [[https://confluence.jetbrains.com/display/MPSD20172/Finding+your+way+out][What to do when there is a problem]]
+** Meta-programming and language-oriented programming?
+The Racket manifesto[fn::http://felleisen.org/matthias/manifesto/index.html]: programming-language programming language
+
+miniKanren, scheme logic programming
+http://minikanren.org/
+https://github.com/clojure/core.logic/wiki/A-Core.logic-Primer
+
+2000 article "Domain Specific Meta Languages"
+https://www-users.cs.umn.edu/~evw/pubs/vanwyk00sac/vanwyk00sac.pdf
+
+1996 book "Advanced programming language design"
+2008 article "Position paper: Practical foundations for programming languages"
+2012 book "Practical Foundations for Programming Languages" Version 1.32 of 05.15.2012
+http://profs.sci.univr.it/~merro/files/harper.pdf
+
+University of Arizona, Spring 2006, CS 520 Principles of Programming Languages - Lecture 04: Types and Polymorphism
+https://www2.cs.arizona.edu/classes/cs520/spring06/04types.pdf
+from "Lecture 4: higher polymorphism"
+https://blog.inf.ed.ac.uk/apl16/archives/178/comment-page-1
+
+Programming Language Foundations in Agda https://plfa.github.io/
+
+2018 article "Logic Programming as a Service" https://arxiv.org/abs/1806.02577
+
+Liber amicorum for Doaitse Swierstra
+https://www.reddit.com/r/haskell/comments/1hmc9t/pdf_liber_a_for_doaitse_swierstra_read_free/
+
+1994 article "Efficient Self-Interpretation in Lambda Calculus" http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.56.4382&rep=rep1&type=pdf
+
+Lambda the Ultimate: Meta-programming
+http://lambda-the-ultimate.org/taxonomy/term/15
+
+2009 article "Directly Reflective Meta-Programming" http://homepage.divms.uiowa.edu/~astump/papers/archon.pdf
+
+Footnote F from \cite{felleisen2018programmable}:
+#+BEGIN_QUOTE
+Language workbenches (such as Spoofax) deal with conventional syntax for DSLs but do not support the incremental modification of existing languages.
+A 2015 report suggests, however, these tool chains are also converging toward the idea of language creation as language modification.
+We conjecture that, given sufficient time, development of Racket and language workbenches will converge on similar designs.
+#+END_QUOTE
+** Implementing programming languages
+** Should we use Prolog?
+We should prototype our language in Prolog.
+
+We should implement our language in Prolog.
+
+- 2004, parsing in Prolog, "Parsing and Semantics in DCGs" http://www.inf.ed.ac.uk/teaching/courses/aipp/lecture_slides/11_PS_DCGs.pdf
+- Prolog DCG (definite clause grammar) facilitates writing an attribute grammar.
+- https://en.wikipedia.org/wiki/Definite_clause_grammar
+
+Erlang started out as a DSL in Prolog.
+See 1992 article "Use of Prolog for developing a new programming language".
+
+<2018-10-20>
+Change of opinion:
+we should write the language in Prolog instead of Haskell.
+
+- "Ott is a tool for writing definitions of programming languages and calculi.
+  It takes as input a definition of a language syntax and semantics,
+  in a concise and readable ASCII notation that is close to what one would write in informal mathematics."
+  https://www.cl.cam.ac.uk/~pes20/ott/
+
+<2018-12-11>
+My current answer: Prolog.
+
+My previous answers:
+- Haskell
+- Racket
+- Scheme
+- Java
+- C
+- C++
+
+Other people?
+- https://hackernoon.com/the-programming-language-im-looking-for-948d93f7a396
+** Principles?
+Fast build time is important.
+** Write abstract interpreters, not compilers?
+<2018-12-30>
+
+The same code fragment can be interpreted in several ways.
+
+The most common interpreter executes the program with the intended semantics.
+Example: a Python interpreter interprets the Python program "print 'foo'" as printing the string.
+
+Write an abstract interpreter that emits code when interpreting.
+An interpreter that interprets the Python program "print 'foo'" as "emit a Ruby statement that prints 'foo' to screen when executed".
+** Begin with an interpreter, not a compiler
+
+- Don't make a compiler?
+  Make an interpreter instead, and stage it?
+  Turn an interpreter into a compiler for free?
+- "To stage an interpreter" is to add staging annotations to the code of the interpreter.
+- Staging is similar to quoting in Lisp/Scheme.
+- 2004 article "A Gentle Introduction to Multi-stage Programming" [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.103.2543&rep=rep1&type=pdf][pdf]]
+  - Basic Problems in Building Program Generators
+  - part 2 https://pdfs.semanticscholar.org/aa3c/d4233f7c0db95e5c38d5b8fc1d199df21857.pdf
+- multi-stage programming for Scala https://scala-lms.github.io/
+- 2006 article "A Verified Staged Interpreter is a Verified Compiler" [[https://www.researchgate.net/profile/Kevin_Hammond/publication/221108683_A_verified_staged_interpreter_is_a_verified_compiler/links/00b7d517ede725c057000000.pdf][pdf]]
+
+** Making compilers?
+   :PROPERTIES:
+   :CUSTOM_ID: making-compilers
+   :END:
+
+Every compiler does name resolution / symbol table.
+Is there a compiler that doesn't do that?
+[[https://www.reddit.com/r/Forth/comments/695oik/advances_in_forth_language_design/dh454oq/][Forth?]]
+
+- https://www.reddit.com/r/haskell/comments/4jhhrj/anders_hejlsberg_on_modern_compiler_construction/
+- https://cs.stackexchange.com/questions/63018/visual-programming-tools-why-don-t-they-work-with-the-ast-directly
+- compiling with continuations
+
+  - Why use CPS (continuation passing style) as intermediate form?
+
+    - http://matt.might.net/articles/cps-conversion/
+    - https://www.microsoft.com/en-us/research/publication/compiling-with-continuations-continued/
+    - https://news.ycombinator.com/item?id=7150095
+
+  - 2003, retrospective: the essence of compiling with continuations https://users.soe.ucsc.edu/~cormac/papers/best-pldi.pdf
+
+    - https://en.wikipedia.org/wiki/A-normal_form
+
+** Piggybacking a host language
+** How should lambda-calculus be implemented?
+*** What is an operational semantics of lambda calculus?
+*** How?
+Normal-order reduction enables us to write fixed points.
+Should we let the programmer choose the evaluation strategy?
+Currying simplifies reasoning but complicates implementation (because applications may then nest deeply to the left).
+What is optimal reduction?
+ [fn::https://stackoverflow.com/questions/31223539/is-it-possible-to-evaluate-lambda-calculus-terms-efficiently]
+ [fn::https://en.wikipedia.org/wiki/Lambda_calculus#Optimal_reduction]
+
+Lambda-calculus is unsound.[fn::https://en.wikipedia.org/wiki/Fixed-point_combinator]
+What does that imply about programming languages containing lambda calculus?
+
+Let \( A[B := C] \) mean \(A\) but with each free occurrence of \(B\) replaced with \(C\).
+Let \( eval(A,B) \) means that \(A\) normalizes to \(B\).
+
+Applicative-order evaluation is the easiest to implement.
+
+Where do these things fit in the big picture of lambda-calculus implementations?
+G-machine, STG, GRIN[fn::https://github.com/grin-tech/grin].
+
+Reading queue:
+- https://stackoverflow.com/questions/31223539/is-it-possible-to-evaluate-lambda-calculus-terms-efficiently
+- https://www.researchgate.net/publication/312462365_About_the_efficient_reduction_of_lambda_terms
+- https://www.reddit.com/r/haskell/comments/2zqtfk/why_isnt_anyone_talking_about_optimal_lambda/
+- compiling monads https://www.irif.fr/~mellies/mpri/mpri-ens/articles/danvy-koslowski-malmkjaer-compiling-monads.pdf
+- modular monadic semantics http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.136.1656&rep=rep1&type=pdf
+* Parsing
+Each stage must be reversible (must preserve enough information from the previous stage).
+
+The first stage is character + file path + line + column + byte offset.
+
+The next stage is tokenization.
+
+A token has type and a list of characters.
+
+The next stage is concrete syntax tree (CST).
+
+The concrete syntax tree is required for formatting and refactoring, because those activities should preserve comments.
+
+In Lisp syntax, a CST node is a token?
+They coincide?
+
+The next stage is abstract syntax tree.
+
+An AST node has a "main" CST node.
+
+An AST node has a "preceding-whites" (a list of whitespace CST nodes that precede that AST node)
+so that the AST node can be turned back into CST node (and so on until we reach the original substring that constitutes the CST node).
+* Embed lambda calculus
+(What is this?
+Design and implementation.)
+
+I think I'll begin by sketching a lambda-calculus interpreter in Racket.
+
+Suppose that we want to write an interpreter for language G (guest) in language H (host).
+
+H = Host (Racket)
+
+G = Guest (lambda calculus)
+
+An example of an HVal is a Racket =integer?=.
+
+A GVal is the host representation of a guest value.
+#+BEGIN_QUOTE
+normalize : GExp → GVal
+reduce : GExp → GExp
+interpret : GExp → HVal
+wrap : GVal → HVal
+unwrap : HVal → GVal
+
+unwrap . wrap = id
+
+unwrap . normalize = interpret
+
+normalize = normalize . reduce
+#+END_QUOTE
+
+The reader should produce a syntax object, not just a datum, because we want errors to report locations.
+
+I think it is unfortunate in Scheme/Racket that =read= ignores comments.
+I think =read= should produce a =#%comment= node for a comment.
+That is, there should be a variant of =read= that reads concrete-syntax-tree nodes and not abstract-syntax-tree nodes.
+* Modules
+Loading/requiring a file or module should not have any side effects.
+Like Haskell.
+Unlike Scheme, Racket, Prolog.
 * Example fragment?
 This is similar to, if not inspired by, Moseley & Marks 2006 \cite{moseley2006out}.
 
@@ -226,6 +639,1217 @@ Questionable types.
 ** Expressions
 =function(Map)= finite function expression, with domain and codomain inferred to be the smallest possible that encompasses the mapping.
 Example: =function([1-a, 2-b, 3-c])=.
+* Concepts?
+** Then, design the concrete syntax
+The concrete syntax of \( \Gamma \vdash A \) is \( with(\Gamma,A) \).
+** Macro, reflection, reification, quoting
+The language should be a model of itself.
+
+The language should be able to describe itself.
+
+Does that cause a paradox?
+** What program, execution, and termination mean in declarative paradigms
+
+In functional paradigm:
+
+- The program is a big lambda expression.
+- Execution is beta-reduction / term-rewriting.
+- Execution terminates when the program reaches normal form (is no longer beta-reducible).
+
+In satisfying-logic paradigm:
+
+- The program is a big logic formula.
+- Execution is trying to satisfy the formula.
+- Execution terminates when satisfiability is determined.
+
+In theorem-proving paradigm:
+
+- The program is a big logic formula, presumably in conjunctive-normal form.
+- Execution is trying to prove the main(world) goal.
+- Execution terminates when the goal is proved or disproved.
+
+** Records, also for namespaces and modules
+
+We want records because /records obviate namespaces and modules/.
+
+We want namespaces and modules because they are necessary for humans to manage large programs.
+
+*** We don't want to represent records as functions.
+
+We can describe the semantics of a record r as a function r : string -> expression.
+
+There are several options to pretty-print a record:
+
+- Define a =show-record= function that is different from =show=.
+- But we want polymorphic =show=. We want one =show= function to work for all things.
+- If a record is represented by a lambda abstraction, then pretty-printing the record will pretty-print a lambda abstraction.
+  We don't want that.
+  We want pretty-printed records to look like how we write records.
+
+*** We want records to be applicable like lambda; we add a new beta-reduction rule for "applying" records.
+
+Record access is function application.
+To get the field =fld= or record =rec=, evaluate =rec fld=.
+
+The record =rec= with the the field =fld= updated to =new= is the expression =\ name -> IF name = fld THEN new ELSE rec fld=.
+
+We add this beta-reduction rule:
+
+- If X is a record, and Y is a string, then =X Y= reduces to =get X Y=.
+
+We want to pretend that records are functions.
+We want to use records as if they were functions.
+But we don't want records to be functions; we want to pretty-print records as records, not as lambda abstractions.
+
+*** Modules as record functions
+
+A module is a function taking a record and giving a record.
+The input is called /imports/ or /dependencies/.
+The output is called /exports/.
+
+Example:
+
+#+BEGIN_EXAMPLE
+\ { add; } -> { add_one: \ x -> add x 1; }
+#+END_EXAMPLE
+
+*** Record expressions
+
+We add these expression syntax rules:
+
+- If each of x1,...,xn is a label and each of e1,...,en is an expression, then ={x1:e1; ...; xn:en;}= is a /record expression/.
+- =union R S= is a /record union expression/.
+- record update expression (should be polymorphic)
+- record filtering/selection/intersection expression
+
+An example of a record expression is ={id: \ x -> x; app: \ f x -> f x;}=.
+
+*** Labels
+
+A /label/ is a string.
+If the label doesn't contain funny characters, it doesn't have to be quoted.
+For example, ={"a":1;}= and ={a:1;}= are the same thing.
+
+Should we generalize label to expression?
+** Annotations: user-defined metadata attached to concrete syntax tree nodes
+
+We add these expression syntax rules:
+
+- If M is an expression and E is an expression, then =E : M= (read: data E annotated with metadata M) is an /annotated expression/.
+  - Alternative syntax: =E : M= can also be written =meta M E=.
+
+This generalizes type systems.
+With type systems, you annotate an expression with a type expression.
+With general annotations, you annotate an expression with another expression (some of which are type expressions).
+
+We assume that the outermost metadata update wins:
+
+- meta M (meta N E) = meta M E
+
+We add metadata extraction function symbol =meta-of=.
+
+We add these beta-reduction rules:
+
+- reduce (meta M E) = reduce E
+- reduce (meta-of (meta M E)) = reduce M
+- reduce (meta-of E) = #<empty-record> (for expressions without metadata)
+
+This is like Java/C# annotation but more principled?
+
+*** Annotation is not type
+
+This is an example of type annotation that our annotation above can't handle: =\ (x : T) -> y=,
+because =x= is not an expression.
+** Modeling all data
+
+*** Hypothesis: data = ADTs + records + row polymorphism
+
+Hypothesis: All data can be modeled by a combination of these:
+
+- product (tuple)
+- sum (alternative, union)
+- record (tuple with named components)
+- row polymorphism
+
+Can we use web standards to define an ontology (so we can use Protege to edit it)?
+https://protege.stanford.edu/
+
+- Does Eclipse EMF have textual representation?
+
+*** Church-representation of products, sums, and algebraic data types in general
+
+https://en.wikipedia.org/wiki/Lambda_calculus#Pairs
+
+Let [x] mean the /representation/ of x.
+
+A /product/ (a,b) can be represented as [(a,b)] = \ f -> f [a] [b].
+
+The left projection p1 is represented as [p1] = \ p -> p (\ a b -> a).
+
+If we assume the sum type A + B, then:
+
+- The choice inl a can be represented as [inl a] = \ f g -> f [a].
+- The choice inr b can be represented as [inr b] = \ f g -> g [b].
+
+A recursive data type such as "stream a = (a, stream a)" can be represented as:
+
+- [cons h t] = \ f -> f [h] [t].
+
+Thus [a : b : c : ...] = \ f -> f [a] (\ f -> f [b] (\ f -> f [c] ...)).
+
+A recursive data type such as "list a = nil | cons a (list a)" can be represented as:
+
+- [nil] = \ f g -> f.
+- [cons x y] = \ f g -> g [x] [y].
+
+Natural numbers "nat = z | s nat":
+
+- [z] = \ f g -> f.
+- [s x] = \ f g -> g [x].
+
+Thus:
+
+- [s z] = \ f g -> g (\ f g -> f)
+
+*** Reverse semantics
+
+Semantics maps syntax to mathematical object.
+
+Reverse semantics maps mathematical object to syntax.
+Reverse semantics is representation.
+Reverse semantics is realization.
+
+Example of reverse semantics is representing the tuple =(x,y)= with the lambda abstraction =\ f -> f [x] [y]= where =[x]= denotes the representation of x.
+
+https://en.wikipedia.org/wiki/Realizability
+
+*** Self-interpreter
+
+1994 article "Efficient Self-Interpretation in Lambda Calculus"
+** Representing knowledge; logic programming; symbolic AI
+- https://en.wikipedia.org/wiki/Logic_programming#Knowledge_representation
+- https://en.wikipedia.org/wiki/Knowledge_representation_and_reasoning
+
+Example: We encode "a todo item has an int64 id" as
+
+#+BEGIN_EXAMPLE
+IF entity todo_app todo E THEN property E int64 id.
+#+END_EXAMPLE
+** Dynamic binding, contextual holes
+
+- 1996 article "Enriching the lambda calculus with contexts: toward a theory of incremental program construction" https://dl.acm.org/citation.cfm?id=232652
+- 1998 article "A lambda-calculus for dynamic binding" https://core.ac.uk/download/pdf/82810390.pdf
+- 1998 article "Computing with Contexts: A simple approach" https://core.ac.uk/download/pdf/82065430.pdf
+- 2009 article "Two-level Lambda-calculus" https://www.sciencedirect.com/science/article/pii/S1571066109002400
+
+** Interpreters: Giving different meanings to the same syntax
+
+Sometimes we want to interpret the same syntax (appearance, source code, text) differently.
+
+** Precise memory accounting
+
+We want precise memory accounting to enable the runtime to limit memory usage.
+
+** Execution state reification, save states, saving and loading states, pausing and resuming computations
+
+We want execution state reification so that we can do live process migration.
+
+** After-2018 programming language requirements
+
+*** Ergonomic error handling
+*** REPL (read-eval-print loop)
+
+The language must not preclude making a REPL for it.
+
+REPL is important for immediate feedback, experimentation, exploration, and playing around.
+
+*** Example of mixing nominal and structural subtyping
+
+https://www.eclipse.org/n4js/features/nominal-and-structural-typing.html
+
+*** Programming language should separate modeling and binding. Can we combine dynamic binding and static typing?
+
+Example of binding is =import= statement.
+
+*** Paradigm, approach, viewpoint, worldview?
+
+- graph programming languages
+
+  - https://cstheory.stackexchange.com/questions/3906/what-are-theoretically-sound-programming-languages-for-graph-problems
+
+    - https://www.cs.york.ac.uk/plasma/wiki/index.php?title=GP_%28Graph_Programs%29
+    - 2007, PhD thesis, Steinert, [[https://www.cs.york.ac.uk/ftpdir/reports/2007/YCST/15/YCST-2007-15.pdf]["The graph programming language GP"]]
+    - a short visual example of "conditional rule schemata"
+
+      - 2010, article, [[https://www.cs.york.ac.uk/plasma/publications/pdf/PoskittPlump.VS-Theory.10.pdf]["Hoare Logic for Graph Programs"]]
+
+    - https://markorodriguez.com/2013/01/09/on-graph-computing/
+    - https://en.wikipedia.org/wiki/Gremlin_(programming_language)
+
+- equational programming?
+
+  - 2017-2018, https://www.cs.vu.nl/~tcs/ep/
+  - term-rewriting
+
+    - retired, [[http://q-lang.sourceforge.net/][Q language]]
+
+      - http://q-lang.sourceforge.net/examples.html
+      - superseded by Pure
+
+        - https://agraef.github.io/pure-lang/
+        - https://en.wikipedia.org/wiki/Pure_(programming_language)
+        - https://github.com/agraef/pure-lang/wiki/Rewriting
+
+    - Joy
+
+- 2002, article, [[http://www.cs.tufts.edu/comp/150PP/archive/norman-ramsey/pmonad.pdf]["Stochastic Lambda Calculus and Monads of Probability Distributions"]]
+- "Purely functional lazy nondeterministic programming", [[https://www.cambridge.org/core/journals/journal-of-functional-programming/article/purely-functional-lazy-nondeterministic-programming/1E8BA117E549A9612BC4AF9804E5507A][paywall]]
+- relational programming (pure logic programming?)
+
+  - miniKanren
+
+    - Byrd PhD thesis https://scholarworks.iu.edu/dspace/bitstream/handle/2022/8777/Byrd_indiana_0093A_10344.pdf
+
+      - mentions other programming languages: Prolog, Mercury, Curry
+
+- https://en.wikipedia.org/wiki/Multi-adjoint_logic_programming
+- ramble
+
+  - https://www.researchgate.net/project/Ontology-oriented-programming
+  - http://www.doc.ic.ac.uk/~klc/OntProg.html
+
+*** Low-code? Programming for the masses?
+
+Limited programming?
+
+What can we assume about the user's skill/knowledge/background?
+
+- https://en.wikipedia.org/wiki/End-user_development
+- https://en.wikipedia.org/wiki/Low-code_development_platforms
+** Toward a language with first-class syntax?
+   :PROPERTIES:
+   :CUSTOM_ID: toward-a-language-with-first-class-syntax
+   :END:
+
+- composable grammars?
+
+  - 2013, article, Viera & Swierstra, "First Class Syntax, Semantics, and Their Composition" http://www.cs.ru.nl/P.Achten/IFL2013/symposium_proceedings_IFL2013/ifl2013_submission_21.pdf
+
+    - 2013, PhD thesis, Viera, "First Class Syntax, Semantics, and Their Composition" file:///home/erik/Downloads/viera.pdf
+
+  - 1990, [[https://authors.library.caltech.edu/26726/]["A Primer for Program Composition Notation"]]
+  - https://stackoverflow.com/questions/953185/composable-grammars
+  - OMeta
+  - Programming languages with programmable syntax
+
+    - [[http://chrisseaton.com/katahdin/][Katahdin]]
+
+  - parsing expression grammar, packrat
+
+    - "Parsing ought to be easier"
+
+      - https://news.ycombinator.com/item?id=2330830
+
+        - "PEGs are one class of cleanly composable grammars."?
+
+  - http://www.cs.cmu.edu/~Compose/
+  - cryptographic protocol analysis
+
+    - https://en.wikipedia.org/wiki/Universal_composability
+
+- Programming languages with macros
+
+  - Common Lisp
+  - Scheme
+  - Kotlin?
+  - Clojure?
+  - Scala? https://www.scala-lang.org/blog/2017/11/27/macros.html
+
+** Enabling metaprogramming
+   :PROPERTIES:
+   :CUSTOM_ID: enabling-metaprogramming
+   :END:
+
+- [[https://stackoverflow.com/questions/50490883/why-is-ml-called-meta-language][metaprogramming - Why is ML called Meta-Language? - Stack Overflow]]
+- related?
+
+  - https://github.com/PostgREST/postgrest
+  - http://rosecompiler.org/
+
+- Metaprogramming
+
+  - http://kaitai.io/
+
+    - from description, generate parsers for binary data (as opposed to text data)
+
+- Aspect-oriented programming is a restricted form of metaprogramming.
+
+  - relationship between Aspect-Oriented Programming and Functional Programming
+
+    - 2009, article, "What Does Aspect-Oriented Programming Mean for Functional Programmers?", [[https://www.cs.ox.ac.uk/files/2282/wgp14-wang.pdf][pdf]]
+    - 2008, article, "On Feature Orientation and Functional Programming", [[https://pdfs.semanticscholar.org/522e/b6c2ea910ed074a13fe21767c9fa070fb685.pdf][pdf]]
+    - 2016, article, "Realtime collaborative editor. Algebraic properties of the problem.", [[http://blog.haskell-exists.com/yuras/posts/realtime-collaborative-editor.html][html]]
+
+      - see also Darcs patch theory
+
+    - 2008, PhD thesis, "An Integrated System to Manage Crosscutting Concerns in Source Code", [[http://wwwtmp.st.ewi.tudelft.nl/arie/phds/Marin.pdf][pdf]]
+    - 2003, article, "Language-independent aspect-oriented programming", [[http://www.tara.tcd.ie/handle/2262/32627][pdf available]]
+
+- Java metaprogramming
+
+  - Similar products
+
+    - libraries
+
+      - [[https://github.com/INRIA/spoon][INRIA Spoon]]
+      - The =javax.lang.model= package of the Java standard library, but it does not model method bodies.
+
+    - environments
+
+      - [[http://www.eclipse.org/modeling/emf/][Eclipse Modeling Framework (EMF)]]
+      - [[https://www.jetbrains.com/mps/][JetBrains MPS (Meta Programming System)]]
+      - [[http://strategoxt.org/][Stratego/XT]]
+      - TXL
+      - [[http://www.eclipse.org/Xtext/][Eclipse Xtext]] and [[http://www.eclipse.org/xtend/][Eclipse Xtend]]
+
+    - programming languages
+
+      - Eclipse Xtend
+
+    - parser generators
+
+      - [[https://en.wikipedia.org/wiki/Compiler-compiler][WP:Compiler-compiler]]
+      - [[https://en.wikipedia.org/wiki/Comparison_of_parser_generators][WP:Comparison of parser generators]]
+      - [[http://www.antlr.org/][ANTLR (Another Tool for Language Recognition)]]
+      - [[https://javacc.org/][JavaCC]]
+      - YACC, Bison; with Lex, Flex
+
+  - Related concepts
+
+    - Model-driven development
+    - Model-driven architecture
+
+** Automatic (program) differentiation
+   :PROPERTIES:
+   :CUSTOM_ID: automatic-program-differentiation
+   :END:
+
+- What is the relationship between incremental lambda-calculus and automatic differentiation of programs (or of algebraic data types)?
+
+** Extending functions
+   :PROPERTIES:
+   :CUSTOM_ID: extending-functions
+   :END:
+
+Not only classes, but also functions, should be extensible.
+
+"To extend the function \( f : A \to B \) to the function \( f' : A' \to B' \)" means:
+
+- For every \( x \in A \), we have \( f(x) = f'(x) \).
+- \( A \subseteq A' \).
+- \( B \subseteq B' \).
+
+A consequence:
+Every occurrence of \( f \) can be replaced with \( f' \) while preserving the meaning of the containing expression.
+
+** A sketch about reusable language-oriented programming: CommonMark, Liquid, and Jekyll, reusable grammar?
+   :PROPERTIES:
+   :CUSTOM_ID: case-study-commonmark-liquid-and-jekyll-reusable-grammar
+   :END:
+
+I want something like this:
+
+#+BEGIN_EXAMPLE
+    data CommonMark = ... -- CommonMark AST
+    data Liquid = ... -- Liquid AST
+    type Jekyll = CommonMark + Liquid
+
+    parse_cm : String -> Parser CommonMark
+    parse_lq : String -> Parser Liquid
+    parse_jk : String -> Parser Jekyll
+    parse_jk = parse_cm + parse_lq
+#+END_EXAMPLE
+
+- [[https://stackoverflow.com/questions/953185/composable-grammars][design - Composable Grammars - Stack Overflow]]
+- [[https://jeffreykegler.github.io/Ocean-of-Awareness-blog/individual/2015/12/composable.html][Grammar reuse]]
+- [[https://github.com/melt-umn/silver][melt-umn/silver: An attribute grammar-based programming language for composable language extensions]]
+- OMeta, Katahdin
+** Whole-program optimization?
+   :PROPERTIES:
+   :CUSTOM_ID: whole-program-optimization
+   :END:
+
+- https://stackoverflow.com/questions/3416980/why-arent-whole-program-optimizations-more-prevalent-now/27757382
+
+** TODO <2018-09-15> Make the programming language
+- \cite{DBLP:conf/popl/CookHC90}
+- \cite{cartwright2013inheritance}
+** TODO <2018-09-15> Find out how type systems may guarantee pointer safety
+Is escape analysis the only way?
+*** TODO <2018-09-15> Study Sixten type system
+*** TODO <2018-09-15> Study Rust type system
+See [[https://doc.rust-lang.org/reference/type-system.html][Rust type system reference]].
+** Combine things and let the programmer choose?
+*** Combine nominal subtyping and structural subtyping
+** Effects?
+- Reddit post "Try/Catch and Async/Await are just a specialized form of Algebraic Effects!" https://www.reddit.com/r/ProgrammingLanguages/comments/9kzcz6/trycatch_and_asyncawait_are_just_a_specialized/
+  - 2016 article "Algebraic Effects for Functional Programming" https://www.microsoft.com/en-us/research/wp-content/uploads/2016/08/algeff-tr-2016-v2.pdf
+    - "we show how algebraic effects generalize over common constructs like exception handling, state, iterators and async-await"
+  - <2018-10-08> not yet performant
+** Abdullah research roadmap
+- Abbreviations:
+
+  - CCC: Cartesian closed category ([[https://en.wikipedia.org/wiki/Cartesian_closed_category][Wikipedia]])
+
+- Abdullah wants to make a monad-aware programming language.
+
+  - Categories enable us to organize a hierarchy of effects?
+
+    - effectful over category \( C \) = extends category \( C \)?
+
+- The plan is to research two related things in parallel:
+
+  - using algebraic subtyping to mix parametric subtyping and inheritance subtyping
+
+    - [[https://www.cl.cam.ac.uk/~sd601/thesis.pdf][Stephen Dolan's Ph.D. thesis "Algebraic subtyping"]]
+
+      - "Type systems which support subtyping care about the direction of data flow."
+      - "Find the /simplest/ algebra of types, and /some/ syntax for them"
+
+    - [[https://en.wikipedia.org/wiki/Subtyping][Wikipedia: Subtyping]]
+    - Scala already tries to join parametric subtyping and inheritance subtyping.
+      What is the problem with Scala?
+
+- Related: [[file:%7B%%20link%20functional_programming.md %}][functional programming research]].
+- Who is Abdullah?
+
+  - Abdullah a.k.a. Kim-Ee Yeoh is [[https://www.atamo.com/][atamo.com]].
+
+*** Research questions
+   :PROPERTIES:
+   :CUSTOM_ID: research-questions
+   :END:
+
+**** Possible questions
+    :PROPERTIES:
+    :CUSTOM_ID: possible-questions
+    :END:
+
+- What is the result of CPS-transforming a recursive function?
+
+#+BEGIN_SRC haskell
+    fac 0 = 1
+    fac n = n * fac (n - 1)
+
+    fac 0 k = k 1
+    fac n k = fac (n - 1) $ \ x -> k (n * x)
+#+END_SRC
+
+Conjecture:
+Every recursive function can be transformed to a tail-recursive function with a helper function \( f(x) = f(g(x)) \).
+
+#+BEGIN_SRC haskell
+    fac 0 = 1
+    fac n = n * fac (n - 1)
+
+    fach (a, 0) = (a, 0)
+    fach (a, n) = fach (a * n, n - 1)
+
+    fac n = fach (1, n)
+#+END_SRC
+
+How do we enable the caller to step the recursion?
+
+#+BEGIN_SRC haskell
+    fac n = \ k -> k (\ x -> x * fac (n - 1) k) n
+    fac n (\ f x -> f x)
+
+    tri 0 = 0
+    tri n = n + tri (n - 1)
+
+    tri :: Nat -> ((x -> c -> Nat) -> Nat -> Nat)
+    tri 0 = \ k -> 0
+    tri n = \ k -> k (\ x c -> x + tri (n - 1) c) n
+
+    inc x = inc (x + 1)
+
+    inc x = \ k -> k (\ ) (x + 1)
+#+END_SRC
+
+- [[https://github.com/dorchard/unfix][github: dorchard/unfix: Takes a recursive function and syntactically unties the recursive knot]]
+
+**** What is the relationship between self-reference, recursion, and fixed points?
+    :PROPERTIES:
+    :CUSTOM_ID: what-is-the-relationship-between-self-reference-recursion-and-fixed-points
+    :END:
+
+We say that \( x \) is a /fixed point/ of \( f \) iff \( f(x) = x \).
+
+[[https://mathoverflow.net/questions/126513/categories-of-recursive-functions][MO 126513: categories of recursive functions]]
+
+- What is the essence of self-recursion?
+
+  - =fix= does not exist in a strict language.
+
+    - "The Z combinator will work in strict languages [...]" [[https://en.wikipedia.org/wiki/Fixed-point_combinator#Strict_fixed_point_combinator][WP: Fixed-point combinator]]
+
+      - The Z combinator is obtained by eta-expanding the Y combinator.
+
+**** What is the formal definition of strict, non-strict, eager, and lazy?
+    :PROPERTIES:
+    :CUSTOM_ID: what-is-the-formal-definition-of-strict-non-strict-eager-and-lazy
+    :END:
+
+The difference is explained by luqui on [[https://stackoverflow.com/questions/7140978/haskell-how-does-non-strict-and-lazy-differ][SO 7140978]]. - Strict and non-strict are about meaning (denotational semantics?).
+Eager and lazy are about operation (operational semantics?). - Strictness is a domain-theoretic concept.
+Laziness is a computer implementation detail. - This uses Haskell to introduce domain theory: [[https://en.wikibooks.org/wiki/Haskell/Denotational_semantics][Wikibooks: Haskell: Denotational semantics]]. - In Haskell, the least fixed point operator can be defined as =fix f = f (fix f)=. - Why is bottom the /least/ fixed point of =id=?
+Every \( x \) is a fixed point of an identity function \( x \mapsto x \), isn't it? - What is the ordering? - "Semantic approximation order" - [[https://wiki.haskell.org/Lazy_vs._non-strict][Haskell wiki]] is wrong?
+It conflates non-strictness with normal-order reduction strategy? - [[http://pages.cs.wisc.edu/~horwitz/CS704-NOTES/6.DENOTATIONAL-SEMANTICS.html#simple][A simple example of denotational semantics using a language of binary numerals]] - [[https://en.wikipedia.org/wiki/Binary_combinatory_logic][WP: Binary combinatory logic]].
+Its semantics is SK calculus (SKI calculus without the redundant I combinator) which is equivalent to lambda calculus. - we can execute non-strict functions eagerly,
+for example by strictness analysis or speculative execution.
+
+People are often sloppy with these terms. Redditors. Experts. Researchers. Academics.
+It is true that Haskell is non-strict.
+It is true that Haskell (as implemented by GHC) is lazy.
+
+We can infer these formal definitions: - A function \( f \) is /strict/ iff \( f(\bot) = \bot \). - "a strict function must map bottom to bottom" (from the SO answer)
+
+**** How do we represent general recursion by a monad? How do we add general recursion to TFP? How do we do it with monads?
+    :PROPERTIES:
+    :CUSTOM_ID: how-do-we-represent-general-recursion-by-a-monad-how-do-we-add-general-recursion-to-tfp-how-do-we-do-it-with-monads
+    :END:
+
+Here we try to salvage [McBride2015].
+
+TODO write the problem: how McBride's General doesn't compose
+
+- Is McBride's General really a monad?
+- Is Abdullah's M really a monad?
+- Did Abdullah mistranslate McBride's General?
+- Is there a way to transform begin-step-end to McBride's General or Abdullah's M?
+- Start with axioms, then infer the data types.
+
+These are the axioms that we want M to satisfy. - =rec f . rec g = rec (ext f . g)= - =rec f . rec g = rec (f <=< g)= - =rec pure = id=
+
+How do we translate a recursive function =f : a -> b=
+to an explicitly recursive function =f : a -> m b=?
+
+#+BEGIN_SRC haskell
+    -- Abdullah's M, obtained by translating
+    -- the General in [McBride2015] from Agda to Haskell
+    data M s t a
+        = Em a
+        | Ap (t -> M s t a) s
+
+    cata :: (a -> r) -> ((t -> r) -> s -> r) -> r
+    cata ar xrxr m = fix $ \ self m -> case m of
+        Em a -> ar a
+        Ap xma x -> xrxr (self . xma) x
+#+END_SRC
+
+- Why do we want to add general recursion to TFP?
+
+  - Adding general recursion to a TFPL
+    makes programming in that language more practical.
+
+- There are several attempts to add general recursion to TFP.
+
+  - [Nordstrom1988] (terminating general recursion)
+  - [Bove2001] (simple general recursion in type theory)
+  - [Capretta2005] (general recursion via coinductive types)
+  - [McBride2015] (Turing-completeness totally free)
+  - me on 2018-04-07? "Approximating general recursion in TFP"?
+  - [[http://adam.chlipala.net/cpdt/html/GeneralRec.html][A non-termination monad inspired by domain theory]],
+    part of the documentation of Coq's GeneralRec library
+
+- How are monads useful in FP?
+
+  - Monads allow embedding a strict language in a lazy language [Wadler1996].
+  - "Monads may be regarded as a mild generalization of continuation-passing style." [Wadler1996]
+
+- [[http://homepages.inf.ed.ac.uk/wadler/topics/monads.html][Philip Wadler's research on monads]]
+- Reading triage:
+
+  - Moggi 1991: Notions of computation and monads
+
+    - Programs should form a category.
+
+      - Every type becomes an object in the category.
+      - Every (one-parameter) function becomes a morphism in the category.
+
+    - "Kleisli triples are just an alternative description for monads. Although
+      the former are easy to justify from a computational perspective, the latter
+      are more widely used in the literature on category theory and have the
+      advantage of being defined only in terms of functors and natural transformations,
+      which make them more suitable for abstract manipulation."
+    - Moggi's most cited paper, according to Google Scholar
+    - [[https://www.disi.unige.it/person/MoggiE/][Moggi's home page]]
+
+      - [[https://www.disi.unige.it/person/MoggiE/publications.html][Moggi's list of his publications]]
+
+        - recent paper: 2010 "Monad Transformers as Monoid Transformers". Theoretical Computer Science, TCS vol.411
+
+  - [[https://www.irif.fr/~mellies/mpri/mpri-ens/articles/moggi-computational-lambda-calculus-and-monads.pdf][Moggi 1989: Computational lambda-calculus and monads]]
+  - 2017 Uustalu [[https://www.semanticscholar.org/paper/Partiality-and-Container-Monads-Uustalu-Veltri/a45cabd8696232a985368e5b7f138fd21a7bff9f][Partiality and container monads]]
+  - [Sheard2003] (a pure language with default strict evaluation order and explicit laziness)
+  - [Wadler1998] (how to add laziness to a strict language without even being odd)
+  - [Wadler1992] "explores the use of monads to structure functional programs"
+  - [[https://srfi.schemers.org/srfi-40/mail-archive/msg00059.html][Monad for lazy evaluation]],
+    Scheme, SRFI-40 mail archive, Andre van Tonder
+  - [[http://math.andrej.com/2008/11/17/not-all-computational-effects-are-monads/][Not all computational effects are monads]]
+  - 2018 Tomas Petricek [[https://arxiv.org/pdf/1803.10195.pdf][What we talk about when we talk about monads]]
+
+*** Result of meeting on 2018-04-21
+   :PROPERTIES:
+   :CUSTOM_ID: result-of-meeting-on-2018-04-21
+   :END:
+
+- https://mvanier.livejournal.com/2897.html
+- Applicative Functor is a homomorphism over CCC (Cartesian closed category)?
+- We can use a category as the denotation of a functional programming language.
+
+  - An example of a category:
+
+    - One object: Unit
+    - One morphism:
+    - Two functions:
+
+      - =f0 x = Unit=
+      - =f1 x = x=
+
+- What is a CCC? It is a category that satisfies the axioms in [[https://en.wikipedia.org/wiki/Cartesian_closed_category][WP: CCC]].
+
+*** Agenda for 2018-04-21
+   :PROPERTIES:
+   :CUSTOM_ID: agenda-for-2018-04-21
+   :END:
+
+**** Totality is not about termination
+    :PROPERTIES:
+    :CUSTOM_ID: totality-is-not-about-termination
+    :END:
+
+Consider this example.
+This recursion is not structural.
+However, it terminates under normal-order beta-reduction strategy.
+
+#+BEGIN_SRC haskell
+    -- Constant function.
+    f : Nat -> Nat
+    f _ = 0
+
+    main : Nat
+    main = f main
+#+END_SRC
+
+Is =main= a total function?
+Does that question make sense?
+Note that =main= is not a mathematical function.
+The denotation of =main= might be a mathematical function.
+
+Does totality depend on the reduction strategy?
+Does that question make sense?
+
+I conjecture that every general recursive function can be transformed into its begin-step-end form.
+See "Approximating general recursion in TFP".
+
+**** I think we can't add a Lazy Monad instance to Strict Haskell without changing the language semantics
+    :PROPERTIES:
+    :CUSTOM_ID: i-think-we-cant-add-a-lazy-monad-instance-to-strict-haskell-without-changing-the-language-semantics
+    :END:
+
+Here I try to (and fail to) add a Lazy monad to an imaginary language Strict Haskell (SH).
+
+Imagine SH, a language with Haskell syntax
+but with Scheme's applicative-order beta reduction (AOBR) instead of Haskell's normal-order beta reduction.
+AOBR means: to evaluate =f x=, first evaluate =x=, and then evaluate =f x=.
+SH is strict, and Haskell is lazy.
+
+An inhabitant of the type =Lazy a= can be thought of as a thunk that will return an inhabitant of =a=.
+
+To construct an expression of type =Lazy a=, combine these: - The expression =bottom= constructs a thunk will fail. - The expression =pure x= constructs a thunk that will return =x=.
+Note that =x= is evaluated before the thunk is constructed. - The expression =delay f= constructs a thunk that will return the result of evaluating =f Unit=.
+The type of =f= is =Unit -> a=.
+Note that =f unit= is not evaluated when the thunk is constructed,
+unlike =pure=. - The expression =eval t= evaluates or forces the thunk =t=.
+The type of =eval= is =Lazy a -> Maybe a=.
+
+We want to embed laziness into SH.
+Formally, this means that we want this equation to hold
+
+#+BEGIN_EXAMPLE
+    eval (bottom >>= \ x -> pure c) = Just c
+#+END_EXAMPLE
+
+but this is impossible in SH because the =>>== is strict.
+
+However, if the type of =>>== were this
+
+#+BEGIN_EXAMPLE
+    (Monad m) => m (Lazy a) -> (Lazy a -> m (Lazy b)) -> m (Lazy b)
+#+END_EXAMPLE
+
+then it would be possible to embed laziness into SH.
+
+Thus =Lazy= cannot be a =Monad= instance in SH.
+
+Monads allow embedding a strict language in a lazy language [Wadler1996].
+We are trying the reverse (embedding a lazy language in a strict language).
+We have just tried the most naive way.
+It failed.
+
+**** Does TFP really sacrifice Turing-completeness?
+    :PROPERTIES:
+    :CUSTOM_ID: does-tfp-really-sacrifice-turing-completeness
+    :END:
+
+- What is a rigorous definition of Turing-completeness?
+
+  - [[https://en.wikipedia.org/wiki/Turing_completeness][Wikipedia]]:
+    "a system of data-manipulation rules (such as a computer's instruction set, a programming language, or a cellular automaton)
+    is said to be Turing complete or computationally universal if it can be used to simulate any Turing machine"
+
+    - What does "simulate" mean?
+
+  - What is the relationship among total Turing machine, partial Turing machine, total function, and partial function?
+    See [[https://en.wikipedia.org/wiki/Machine_that_always_halts][Wikipedia: Machine that always halts]].
+
+- Why do you ask this?
+
+  - We've been thinking that totality precludes Turing-completeness, but Conor McBride disagrees in [McBride2015].
+
+*** Results
+   :PROPERTIES:
+   :CUSTOM_ID: results
+   :END:
+
+**** Is continuation the mother of all monads?
+    :PROPERTIES:
+    :CUSTOM_ID: is-continuation-the-mother-of-all-monads
+    :END:
+
+Abdullah wants to prove that continuation is the mother of all monads.
+
+I think I have a partial proof of that for all Haskell-98 type endofunctions.
+
+The folder [[https://github.com/Lambda-Jakarta/research/tree/master/abdullah-conjecture][abdullah-conjecture]]
+contains a proposed partial proof of the Abdullah conjecture for all Haskell 98 type endofunctions.
+The proof can be checked by the Lean theorem prover version 3.
+See also the [[https://leanprover.github.io/][Lean prover home page]].
+To edit Lean source files, use Visual Studio Code and its Lean plugin.
+
+*** Reading triage
+   :PROPERTIES:
+   :CUSTOM_ID: reading-triage
+   :END:
+
+[[https://pdfs.semanticscholar.org/b60b/1c2e49ec6f574f220f162c8fdc81b2831830.pdf][1995, D. A. Turner, Elementary Strong Functional Programming]]
+
+[[https://nms.kcl.ac.uk/maribel.fernandez/papers/TCS10.pdf][Godel's System T revisited]]
+
+[[http://semantic-domain.blogspot.co.id/2012/12/total-functional-programming-in-partial.html][Total Functional Programming in a Partial Impure Language]]
+
+[[http://www.cse.chalmers.se/~coquand/bengt.pdf][Type theory and functional programming]]:
+Can we see type theory as a functional programming language?
+
+[[http://www.cse.chalmers.se/~coquand/][Thierry Coquand page at Chalmers]]
+
+[[https://mathoverflow.net/questions/126513/categories-of-recursive-functions][MO 126513: Categories of recursive functions]]
+
+[[https://www.researchgate.net/publication/234808984_Denotational_semantics_and_rewrite_rules_for_FP][Denotational semantics and rewrite rules for FP]]:
+"We consider languages whose operational semantics is given by a set of rewrite rules."
+
+[[http://www.allisons.org/ll/Semantics/][allisons.org: Denotational Semantics]]
+
+The Y-combinator is \( \lambda f. (\lambda x. f ~ (x ~ x)) ~ (\lambda x. f ~ (x ~ x)) \).
+[[https://en.wikipedia.org/wiki/Fixed-point_combinator][WP: Fixed-point combinator]]
+
+[[http://siek.blogspot.co.id/2016/12/simple-denotational-semantics-for.html][Simple Denotational Semantics for the Lambda Calculus, Pω Revisited?]]
+
+*** Undigested information fragments
+   :PROPERTIES:
+   :CUSTOM_ID: undigested-information-fragments
+   :END:
+
+- "Partiality is an effect"
+  https://www.cs.ox.ac.uk/ralf.hinze/WG2.8/22/slides/tarmo.pdf
+- "Partiality Monad Transformer"
+  https://stackoverflow.com/questions/15192897/partiality-monad-transformer
+- http://www.cse.chalmers.se/~nad/publications/danielsson-semantics-partiality-monad.pdf
+- categorical programming language
+
+  - http://web.sfc.keio.ac.jp/~hagino/thesis.pdf
+  - https://mathoverflow.net/questions/3721/programming-languages-based-on-category-theory
+  - https://softwareengineering.stackexchange.com/questions/216635/category-theory-based-language
+
+- "Kleisli triple over a category"
+- "Category formed by the Kleisli triples over a category"
+- Moggi 1991:
+
+  - "Kleisli triples are just an alternative description for monads. Although
+    the former are easy to justify from a computational perspective, the latter
+    are more widely used in the literature on category theory and have the
+    advantage of being defined only in terms of functors and natural transformations, which make them more suitable for abstract manipulation."
+
+- Where does monad come from? Who invented it? Why was it invented?
+- What is the relationship among monad, natural transformation, Kleisli category of a monad, Eilenberg-Moore what, adjunction?
+- Has some semantics link
+  http://math.andrej.com/2016/08/06/hask-is-not-a-category/comment-page-1/
+- [[ftp://nozdr.ru/biblio/kolxo3/Cs/CsLn/Mathematics%20of%20program%20construction..%2010%20conf.,%20MPC%202010%20(LNCS6120,%20Springer,%202010)(ISBN%203642133207)(O)(435s)_CsLn_.pdf#page=109][2010, "Subtyping, Declaratively: An Exercise in Mixed Induction and Coinduction", Nils Anders Danielsson and Thorsten Altenkirch]]
+** Language design
+- https://github.com/mjambon/ocaml-wishlist
+** Designing configuration languages
+  :PROPERTIES:
+  :CUSTOM_ID: designing-configuration-languages
+  :END:
+
+*** What is a configuration language?
+   :PROPERTIES:
+   :CUSTOM_ID: what-is-a-configuration-language
+   :END:
+
+Configuration language is programming language minus Turing-completeness.
+
+*** What is the best configuration language?
+   :PROPERTIES:
+   :CUSTOM_ID: what-is-the-best-configuration-language
+   :END:
+
+2018-08-31:
+[[https://github.com/dhall-lang/dhall-lang][Dhall]] is the pinnacle of configuration languages, in my opinion, as far as I know.
+
+Can a configuration language get any better than Dhall?
+
+How far can we push configuration languages without Turing-completing it?
+
+Dhall isn't the only Turing-incomplete language.
+There are also Coq, Lean, Agda, and others.
+Can we use these as configuration languages?
+Should we?
+
+*** Some rants
+   :PROPERTIES:
+   :CUSTOM_ID: some-rants
+   :END:
+
+Write your configuration in Dhall.
+You minimize duplication.
+It generates YAML/JSON.
+
+Why stop there?
+Replace all your YAML, JSON, XML, INI, PROPERTIES, configurations with Dhall.
+
+2018-08-31:
+We're considering HashiCorp Terraform.
+I think they should use Dhall, or at least learn from Dhall, instead of creating their own
+[[https://www.terraform.io/docs/configuration/syntax.html][HCL (HashiCorp Configuration Language)]].
+We have a "Terraform Workaround Engineer" here at work.
+
+Someone has done that: [[https://github.com/blast-hardcheese/dhall-terraform][dhall-terraform]].
+** Designing markup languages
+  :PROPERTIES:
+  :CUSTOM_ID: designing-markup-languages
+  :END:
+
+A markup language adds some semantics to text.
+
+- Finding the best document typesetting/processing system
+
+  - What are some markup languages?
+
+    - http://www.nongnu.org/skribilo/
+    - markdown
+    - reST (restructured text)
+    - TeX, LaTeX
+    - Unix roff, troff, nroff, man, GNU groff
+    - GNU info
+
+- Finding a lightweight semantic markup language with fixed ontology
+
+  - [[https://en.wikipedia.org/wiki/Lightweight_markup_language][WP:Lightweight markup language]]
+  - Which markup language?
+
+    - reST
+    - [[https://en.wikipedia.org/wiki/Textile_(markup_language)][Textile]]. GitHub Pages stopped supporting this.
+    - S-expression
+    - not Markdown?
+    - https://tiddlywiki.com/static/WikiText.html
+    - https://hackage.haskell.org/package/mmark
+    - [[https://orgmode.org/][Org mode for Emacs -- Your Life in Plain Text]]
+
+      - [[https://medium.com/@jackbaty/using-markdown-instead-of-org-mode-a78a1805c0ba][Using Markdown instead of Org Mode -- Jack Baty -- Medium]]
+
+  - Which tool?
+
+    - pandoc
+    - hakyll
+
+  - Which editor?
+
+    - Vim
+    - Emacs
+    - Visual Studio Code
+    - Too experimental
+
+      - [[https://clearly.pl/tutorial/][clearly.pl]] reminds me of TiddlyWiki.
+** Class-based programming
+  :PROPERTIES:
+  :CUSTOM_ID: class-based-programming
+  :END:
+
+- What is a class?
+
+  - What is a class?
+
+    - A class is a blueprint (a template).
+    - A class is a way of organizing your program.
+
+  - What does a class have?
+
+    - A class has name, fields, and methods.
+
+  - What does a class do?
+
+    - A class groups data and code that needs that data.
+
+- Every object belongs to a class.
+- In class-based programming:
+
+  - Objects don't have methods.
+  - Classes have instance methods.
+  - Each instance method can be called with an instance as a hidden argument.
+
+- From procedural point of view, these two are the same:
+
+#+BEGIN_EXAMPLE
+    // Java
+
+    object.method(arg0, arg1, ...)
+
+    // C
+
+    method(object, arg0, arg1, ...)
+#+END_EXAMPLE
+
+- The dot is just a syntax for passing an implicit first argument.
+- The dot operator associates to the left:
+
+#+BEGIN_EXAMPLE
+    a.b().c().d() = ((a.b()).c()).d()
+#+END_EXAMPLE
+** Measuring programming language quality
+- https://en.wikipedia.org/wiki/Goodhart%27s_law
+*** Minimum IQ required to understand the language
+*** Development cost
+**** Length of program
+**** Development effort; number of people; amount of time
+*** Developer feeling/enjoyment
+*** Maintenance cost
+**** Cost due to runtime defects (defects discovered while the program is running in production environment)
+*** Rosetta Stone: comparing programs that do the same thing in different languages
+https://medium.com/concerning-pharo/elegant-pharo-code-bb590f0856d0
+*** Learnability, masterability, usability
+*** Measuring programming language quality by how easy is it to do the right thing
+What is the right thing?
+
+By probability of error of random programs?
+
+How do we measure the probability that a program, uniformly randomly taken from the set of all legal programs in language L, contains an error?
+** Intersection between programming language search and software engineering: The effect of programming language on software quality
+- https://developers.slashdot.org/story/14/11/05/0530228/the-effect-of-programming-language-on-software-quality
+  - 2014 article "A Large Scale Study of Programming Languages and Code Quality in Github" [[http://web.cs.ucdavis.edu/~filkov/papers/lang_github.pdf][pdf]]
+    - I don't know enough to determine whether the methodology is valid.
+** Beginning programming language research
+- [[https://blog.acolyer.org/2018/01/26/a-practitioners-guide-to-reading-programming-languages-papers/][A practitioner's guide to reading programming languages papers]]
+  - from [[https://www.reddit.com/r/ProgrammingLanguages/top/][top scoring links : ProgrammingLanguages]]
+- https://waleedkhan.name/blog/getting-a-job-in-pl/
+  - https://www.reddit.com/r/ProgrammingLanguages/comments/9ffiky/how_to_get_a_job_in_programming_languages/
+** Racket syntax objects, read-syntax; does Prolog/Haskell have this?
+- Must understand: reader and expander.
+  - Racket parsing has two stages/levels: reader and expander.
+  - (My guess?) The output of the reader is the input of the expander?
+- https://docs.racket-lang.org/guide/hash-reader.html
+  - "The difference between =read= and =read-syntax= is that read is meant to be used for data while =read-syntax= is meant to be used to parse programs."
+  - Readtables work at the reader level.
+  - Macros work at the expander level.
+    - Macros can't change the lexicon.
+** Stop abusing the equals sign
+  :PROPERTIES:
+  :CUSTOM_ID: stop-abusing-the-equals-sign
+  :END:
+
+The equals sign should be used for equations only and nothing else.
+
+Consider this fragment in a hypothetical functional programming language.
+
+#+BEGIN_SRC haskell
+    hang : Nat
+    hang = hang
+#+END_SRC
+
+The fragment =hang = hang= falsely suggests that it is an /equation/ like $x = x$.
+We can substitute $x$ with any natural number, and the equation $x = x$ will still hold.
+But that is not what we mean with =hang=.
+We are defining a /rewrite rule/, not an equation.
+Thus we should write =hang => hang= instead.
+
+In an equation, the left and right side are equal.
+We don't care if they are flipped.
+In a rewrite rule, we care about direction.
+We want to start with $1 + 1$ and end with $2$, not the other way,
+unless we are writing a theorem prover.
+
+Programming is hard enough already.
+Let's not make it harder for students.
+Stop using confusing notation.
+
+Reading triage:
+
+- [[https://www.researchgate.net/publication/286418817_Misuse_of_the_equals_sign_An_entrenched_practice_from_early_primary_years_to_tertiary_mathematics][Misuse of the equals sign: An entrenched practice from early primary years to tertiary mathematics]]
+** Problems that the language has to solve
+*** Solving the expression problem
+*** Solving the AST decoration problem / AST typing problem
+- Other names of this problem:
+  - [[https://www.reddit.com/r/haskell/comments/1f91w3/the_ast_typing_problem/][AST typing problem]]
+  - "Trees that grow" problem
+- common problem in parsing: how to decorate AST in a functional language
+  - 2013, article, [[http://blog.ezyang.com/2013/05/the-ast-typing-problem/][The AST typing problem]], Edward Z. Yang
+    - 2010, discussion, "The AST typing problem", [[http://lambda-the-ultimate.org/node/4170][LTU]]
+  - Embracing the Any type
+    - [[http://javaparser.org/][JavaParser]] added an =Object data= field to the AST Node base class, but they changed their minds.
+      - https://github.com/javaparser/javaparser/issues/456
+      - https://github.com/javaparser/javaparser/pull/472
+  - Structural typing
+    - TypeScript (JavaScript) is ideal for AST decoration problem?
+      You just add a key to the AST node object you want to decorate.
+      - Any language with structural typing is ideal?
+      #+BEGIN_EXAMPLE
+          interface Node {
+          }
+
+          interface Node_parse extends Node {
+          }
+
+          interface Node_desugar extends Node_parse {
+          }
+      #+END_EXAMPLE
+  - Loosely-typed Haskell?
+    - This is basically the JavaScript way.
+    #+BEGIN_SRC haskell
+        type Key = String
+        data Value
+            = VNum Double
+            | VStr String
+            | VObj Object
+        type Object = [(Key, Value)]
+        type Node = Object
+    #+END_SRC
+  - 2017, article, "Trees that grow", https://www.microsoft.com/en-us/research/uploads/prod/2016/11/trees-that-grow.pdf
+    - "The compiler writer is then faced with two unpalatable choices.
+      She can define a new data type representing the output decorated tree, at the cost of much duplication.
+      Or she can write a single data type with all the necessary fields and constructors, at the cost of having many unused fields and constructors at different stages of compilation."
+    - However, we can fake extensible ADTs with pattern synonyms, with Fix, and without type families.
+      - Similar endeavors
+        - https://wiki.haskell.org/Type_composition
+      - Haskell doesn't beta-reduce types.
+      - This is an example code:
+      #+BEGIN_SRC haskell
+          data Exp_ name exp
+              = Var name
+              | Add exp exp
+              | ...
+
+          data Locd a
+              = MkLocd Loc a
+
+          data Typed t a = MkTyped t a
+
+          newtype Compose f g a = MkCompose { unCompose :: f (g a) }
+
+          type PsExp name = Fix (Compose Locd (Exp_ name))
+          type TcExp name = Fix (Compose Locd (Compose Typed (Exp_ name)))
+
+          -- To ameliorate the verbosity:
+
+          class Exp name exp where
+              var :: name -> exp
+              add :: exp -> exp -> exp
+              ...
+
+          instance Exp (PsExp name) where ...
+          instance Exp (TcExp name) where ...
+      #+END_SRC
+  - What if GHC can "inline" data types at compile time?
+    What if GHC can "inline" A and B in =data A = MA Int; data B = MB Int String; data E = EA A | EB B;=,
+    producing =data E = EA Int | EB Int String=?
+    Implementing this with Haskell 98 types should be straightforward.
+  - related - "Data types a la carte" - http://hackage.haskell.org/package/compdata - Haskell type composition - https://wiki.haskell.org/Extensible_datatypes
+- Other people's efforts
+  - https://brianmckenna.org/blog/type_annotation_cofree
+- https://discuss.ocaml.org/t/is-it-feasible-to-write-parsers-without-using-polymorphic-variants-for-ast-representation/1906
+**** Other solutions to the AST typing problem / trees-that-grow problem; using recursion schemes for separation of concern in functional programming
+- "Program Reduction: A Win for Recursion Schemes" http://www.newartisans.com/2018/04/win-for-recursion-schemes/
+  - Annotated expression trees
+    - "The first moment when this recursion scheme went from an interesting idea to a good design decision was when someone created an issue on GitHub, asking to add location information to the expression tree."
+  - Abstract Definitional Interpreters?
+    - 2017 article "Abstracting Definitional Interpreters" https://arxiv.org/abs/1707.04755
+  - boilerplate
+  - recommends using recursion schemes
+
+That is an interesting idea, but some important questions remain:
+
+- How do we do that without boilerplate (for the library writer)?
+- How do we do that without performance penalty?
+
+** object = lambda + record + mutation?
+#+BEGIN_EXAMPLE
+let self = {
+        prop = 1;
+        foo = \ () -> self.prop + 1;
+}; in self
+#+END_EXAMPLE
+** Logic programming with explicit side-effects with force-predicate
+The meaning of force(X) is that force(X) succeeds iff it has changed the world such that X will succeed after force(X) returns.
+Thus the interpreter has to check for race conditions?
+Is this requirement too difficult?
+#+BEGIN_EXAMPLE
+?- file_content('foo', A). -- unify A with the contents of file 'foo'
+
+?- force(file_content('foo', [1,2,3])). -- replace the content of file 'foo' with [1,2,3]
+#+END_EXAMPLE
+
+** Prolog as a term-rewriting meta-interpreter
+The Prolog rule "A :- B" can be interpreted in two ways.
+The first is the well-known proof-theoretic interpretation "to prove A, prove B".
+The second is the /rewriting-system interpretation/ "rewrite A to B".
+** Functions as semantics of lambda calculus?
+Key idea:
+A lambda abstraction is not a function,
+but a function can be the semantics of a lambda abstraction.
+
+A semantic of a lambda abstraction is a function, that is,
+a triple \((A,B,M)\) where \(A\) is the domain, \(B\) is the codomain, and \(M\) is the mapping.
+
+What is the semantic of \( \lambda x . x x \)?
+What is the semantic of \( (\lambda x . x x) (\lambda x . x x) \)?
+
+For every set \(A\):
+\begin{align*}
+(A,A,I_A) \models \lambda x. x
+\end{align*}
+where \(I_A = \{ (x,x) ~|~ x \in A \}\).
+
+\begin{align*}
+(X,Y,A) \models \lambda x y. x y
+\end{align*}
+
+Let \(F = (A,B,f)\) be a function.
+
+Let \(G = (F \times A, B, g)\) be a function where \( g(f,x) = f(x) \).
+** How do we know that our language is perfect?
+"How to determine your new language is perfect?"
+http://lambda-the-ultimate.org/node/4395
+
 * What
 ** Prolog implementation?
 Predicate type(Name,TypeExp) defines types

@@ -1,0 +1,78 @@
+#+TITLE: On models of text in programming
+#+DATE: 2019-05-20 00:00:00 +0700
+#+PERMALINK: /program-text.html
+* What is a text?
+ASCII does a good job representing English texts, but not other texts.
+
+Is text the successor to printing with movable types?
+
+Direction, grapheme, character, radical, letter, modifier, etc.
+
+What does Unicode think a text is?
+
+A text is a writing?
+Drawing vs writing?
+This "A" is just a /representation/ of the first letter of the English alphabet,
+in the same way "0" is a representation of the first natural number.
+
+Text is inherently sequential/linear because that is the way we read.
+Our brain is physically limited;
+it can only focus on one thing at a time;
+we read by moving focus through text.
+Unless you are Kim Peek who may read two pages at once
+ [fn::https://www.psychologytoday.com/us/blog/the-superhuman-mind/201212/kim-peek-the-real-rain-man]
+ [fn::https://en.wikipedia.org/wiki/Kim_Peek]
+ [fn::http://itre.cis.upenn.edu/~myl/languagelog/archives/004655.html].
+* Strings, especially of characters
+Why do we have strings?
+
+Computer keyboards evolved from typewriters.
+
+Computerization of human writing?
+
+First came Gutenberg's printing press.
+Each letter is imprinted by a type.
+
+The problem is to encode human text in bits.
+We solved the problem of encoding numbers with two's-complement signed integers.
+English text is simple: ASCII.
+
+An accented letter is a letter and an accent.
+
+A /string/ is a homogenous sequence.
+
+A string has a beginning, and may have an ending.
+A string may be finite.
+
+A /byte string/ is a sequence of bytes.
+
+An /ASCII string/ is a byte string.
+
+A /character string/ is a sequence of characters.
+
+Unqualified "string" usually means "character string".
+
+A /character string literal/ is surrounded with quotes.
+
+- inconclusive discussion https://www.reddit.com/r/ProgrammingLanguages/comments/9tj6ka/how_would_you_best_implement_first_class_strings/
+** Escape sequences
+** Characters
+What is Unicode's definition of "character"?
+Is that definition sane?
+
+Should Unicode normalization/canonicalization be built into the programming language?
+
+Issues: ordering/collation, capitalization, combination, halfwidthization, ligature, etc.
+
+- https://en.wikipedia.org/wiki/String_(computer_science)
+- https://en.wikipedia.org/wiki/Character_(computing)
+
+A character may represent a vowel-or-consonant (such as Latin alphabets),
+or a syllable (such as Indic scripts or Japanese kanas),
+or an idea (such as Han ideographs).
+
+A writing system is a convention for mapping syntax and semantics.
+
+What do people use character strings for?
+
+What do people do with character strings?

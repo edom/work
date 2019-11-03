@@ -6,7 +6,7 @@
 In the 21st century, by a "computer", I usually mean something that implements some x86-64 instructions.
 The instruction set can be thought of as the processor's API (application programming interface).
 From the point of view of the processor, the operating system is an application.
-* What does a programmer think a computer does?
+* What does a programmer think a computer does?C
 That is, what /model/ does a programmer use to program a computer?
 
 It is straightforward to model a computer as a state-transition system.
@@ -15,6 +15,117 @@ That is the model in imperative languages such as C.
 The programmers do not have to model the entire computer, but only the computer's execution of their program.
 In reality, a computer may be executing several programs simultaneously, but, most of the time,
 those programs do not interact with each other, so the programmers can mostly pretend that their program is the only thing that the computer is executing.
+* Common imperative model, stored-program register machine model
+In this model, computation is the act of running a program.
+
+The computation begins from an /initial state/.
+
+A state is a mapping from address to number.
+
+A state describes the contents of locations.
+
+A state is a function in \( \Nat \to \Nat \), or an infinite-dimensional tuple/vector of natural numbers.
+They are isomorphic, so we may pick the most comfortable formalism for the occasion.
+(Which one?)
+
+The semantics of an instruction is a state endofunction.
+
+The meaning of =(set addr val state)= is "state but with the content at addr replaced by val".
+
+#+BEGIN_EXAMPLE
+State = Nat → Nat
+
+set : Nat → Nat → (State → State)
+set (addr : Nat) (val : Nat) = λ (oldst : State) →
+  (λ (k : Nat) →
+    if k = addr
+    then val
+    else oldst k)
+#+END_EXAMPLE
+
+In an imperative model, a program is a /sequence/ of primitive operations.
+Each operation may /mutate/ the state of the world.
+
+A machine has an infinite number of locations.
+
+Each location contains a natural number.
+
+Each location is addressed by a natural number.
+
+Location at address zero is reserved for program counter.
+
+The notation \( r[k] \) means the location with address \( k \) (or the number that is the content of that location).
+
+Here the notation \( r_k \) and \( r[k] \) mean the same thing.
+This redundancy helps us avoid writing double subscripts or double brackets.
+
+One computation step consists of these things in order:
+1. Decode the instruction from \( r[r_0] \), and increment \( r_0 \) by 1.
+2. Let's say that the instruction decodes to \( d := f(s) \) where \( s \) is a vector that is the inputs of \( f \).
+   The function \( f \) is taken from the finite set of primitive functions implemented by the machine.
+3. Compute \(f(s)\) into a number, and store the number into \( d \), replacing the old value.
+   Note that the destination may be the program counter \( r[0] \),
+   and thus there is no need for a separate "jump" or "branch" instruction.
+4. Repeat from step 1.
+
+Register machine model?
+
+Every number in the model is a natural number.
+
+A negative number can be represented as a tuple (s,n) where s is 0 for positive and 1 for negative.
+
+Conditional:
+
+\( if(c,t,f) = c \cdot t + (1 - c) \cdot f \) where c is 0 or 1;
+zero represents false; one represents true.
+
+The bitwise analog of the above:
+
+\( if(c,t,f) = (c \wedge t) \vee (\neg c \wedge f) \)
+
+The Scheme analog, provided that =or= and =and= are lazy (short-circuiting):
+
+#+BEGIN_EXAMPLE
+(if c t f) = (or (and c t)
+                 (and (not c) f))
+#+END_EXAMPLE
+
+It makes us wonder, why must the semantics of a machine be encumbered by loads and stores?
+Why can't the semantics directly be mathematical functions?
+
+* What about analog computers?
+https://en.wikipedia.org/wiki/General_purpose_analog_computer
+
+A Survey on Continuous Time Computations
+https://hal-polytechnique.archives-ouvertes.fr/file/index/docid/760976/filename/SurveyContinuousTimeComputations.pdf
+* How do we quantify computation?
+If pancomputationalism is the only way forward, then the next question is:
+How much does something compute, that is, how much computation does something do?
+
+Which things compute more than which things?
+
+Given more time, the same machine never does less computation.
+
+Given the same amount of time, a faster processor does more computation
+than an slower processor in the same family (e.g. Pentium 4 vs Pentium 3).
+
+We can arbitrarily define that 1 clock cycle of a Pentium 3 running at 800 MHz is one /unit/ of computation.
+
+For example, a processor may be able to do one-billion 32-bit integer additions per second.
+
+The amount of time required by machine M to compute problem P?
+
+BogoMips.[fn::<2019-11-01> https://en.wikipedia.org/wiki/BogoMips]
+* It's about primitives and their combinations?
+A programming language / a formal system:
+- What are the /primitives/?
+- How do the primitives /combine/?
+
+How do combinators form meaning out of primitives?
+
+Can a combination means more than the sum of the meaning of the primitives?
+
+The semantics of a lambda calculus abstraction is a mathematical function?
 * Shannon 1937
 \cite{shannon1938symbolic}.
  [fn::<2019-10-27> https://en.wikipedia.org/wiki/A_Symbolic_Analysis_of_Relay_and_Switching_Circuits]

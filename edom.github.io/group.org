@@ -1,0 +1,126 @@
+#+TITLE: On grouping things
+#+DATE: 2019-11-01 00:00:00 +0700
+#+PERMALINK: /group.html
+* Background
+<2019-11-01>
+
+I was designing a programming language, and I encountered a problem: How should functions be grouped into source files?
+
+The fact that functions must be in source files is a limitation of the implementation, not a requirement of mathematics.
+
+Lambda calculus does not require that subexpressions be split into different source files.
+* On various kinds of groupings
+What is the difference between these things:
+group, category, class, archetype, stereotype, bunch, herd, pack, school, flock, litter.
+* Grouping and trade-offs
+Linnaean taxonomy helps us quickly find genetically close species,
+but it does not help us quickly find who eats who;
+the latter question is often asked in ecological engineering.
+* Should we group functions?
+How do we group functions to simplify maintenance (understandability, modification, reverse engineering)?
+Things that change together go together.
+
+How do we group functions to simplify writing code?
+Dump everything in one big file, and always write new code at the end of the file.
+
+How do we group functions to simplify reading code?
+
+They may produce different groupings.
+
+Which one should we choose?
+
+/Do we even have to choose?/
+I think the computer should be able to regroup the functions for different purposes.
+
+Can't we just write code in the way it is easiest to write,
+and let computers reorganize the code into another shape that is the easiest to read?
+* How should we group functions?
+How do mechanics group their tools?
+
+How do you group cutleries?
+
+How do you group concepts?
+
+How do you group medicine?
+
+How do you group species?
+
+Why do we group things?
+
+Because they are similar, and so that we can find things faster, and reduce cognitive burden.
+If we have 5 groups of 100 things each, then we can reason about 500 things as easy as we reason about 5, because we have arranged the groups such that our reasoning about a member of a group generalizes to all members of the same group.
+
+We can group things in a set \( T \) by a /grouping function/ \( g \) whose domain is \( T \).
+
+Iff \( g(x) = g(y) \) then \( x \) and \( y \) belong to the same group.
+
+We can also write \( x \equiv_g y \) for the same thing ("\( k \) places \( x \) and \( y \) into the same group"),
+if we do not care the exact group, only that they are in the same group.
+
+If the grouping is clear from context, we can write \( x \equiv y \) ("\( x \) and \( y \) are in the same group").
+
+Equivalence classes in math
+
+Back to things
+
+How are they similar?
+
+By appearance? By purpose?
+
+Suppose you have /one million tools/.
+How do you choose and find which ones you need?
+By the verb that describes the purpose? By the shape? By the motion (pull, push, twist)? By probability/frequency of use?
+
+If we group by the verb, we get groups like these:
+- /drill/ holes in walls
+- /drive/ screws
+- /remove/ nails from walls
+- /punch/ holes in papers
+- /suspend/ heavy objects
+- /move/ soil
+
+Which is the essence of drills, to /drill/, or to merely make a /hole/?
+A drill cannot always be replaced with a hole puncher, a gunshot, or a dynamite,
+although all of them can make holes.
+If something else were able to make holes as tidy as a drill would make,
+would that thing be a drill, or be called a "drill"?
+
+We often define tools teleologically (according to their purpose, as how we use them),
+not ontologically (according to their existence, as what they are).
+
+Object-oriented programming groups functions by the object, not the verb.
+This does not always make sense.
+
+A programming language should not impose a particular grouping of functions?
+A namespace should still be loadable although its dependencies are missing, as long as the missing dependencies are not used.
+Functions have dependencies, not modules.
+
+Suppose you have one million people?
+How do you find the people you need?
+By the verb?
+
+"What do you do?"
+"I program computers", not "I am a computer programmer".
+"What are you?"
+
+The verb is more useful than the "-er" noun.
+An "-er" noun does not evoke any imagery in our mind.
+Verbs do.
+
+When I hear "develop", I can imagine a landscape developing, a plant growing, and thus I can analogize.
+A verb stimulates imageries and connections in my mind.
+When I hear "developer", I see a person, but I don't see him doing anything; he's just standing there, being a developer.
+
+Verbs evoke moving images, changing, dynamic, except stative verbs.
+Perhaps stative verbs are so named because they evoke static images, not moving images.
+
+Group by the object?
+
+By kind/similarity?
+By function (the verb in their description)?
+
+If T and U are more likely to be used together than T and V, then T and U should be closer than T and V?
+
+But we don't foresee all possible uses of a tool?
+* What are the criteria of good categorization?
+How do we judge the quality of categories?

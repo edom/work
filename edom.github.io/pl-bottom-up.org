@@ -1,0 +1,42 @@
+#+TITLE: A programming language designed from the bottom up
+#+DATE: 2019-11-04 04:00:00 +0700
+#+PERMALINK: /pl-bottom-up.html
+* Introduction
+- Example of bottom-up language design and how each level reduces cognitive load:
+  - Begin with machine code.
+  - Provide mnemonics for instructions.
+  - Provide the illusion of infinite custom-named registers and orthogonal operands.
+  - Provide macros subroutines as extensible instructions.
+  - Provide the illusion of infinite custom-named registers and orthogonal operands.
+  - Provide macros and subroutines as extensible instructions.
+  - Provide named locations.
+  - Provide the illusion of infinite memory.
+  - Abstract away processor registers.
+  - Abstract away pointers.
+  - Expression.
+  - Infix expression syntax.
+  - First-class functions.
+  - The program itself is a procedural program that tells the interpreter what code to generate.
+  - End up with something like Randall Hyde's High Level Assembly?
+* Starting with assembly
+We may begin from x86 assembly.
+
+First we abstract away locations, registers, memory,
+so that we can write something like this:
+#+BEGIN_EXAMPLE
+mov dword ptr [var_1], [var_2]
+#+END_EXAMPLE
+
+Macro Assembler (MASM)?
+TASM, NASM, what?
+
+There does not exist a computer with infinite memory.
+Why do we pretend, with garbage collection, that the computer had infinite memory?
+Because it simplifies most problems?
+
+What is the problem with these:
+High-Level Assembly,
+Typed Assembly Language,
+LLVM IR,
+MSIL,
+JVM bytecodes?
