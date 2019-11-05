@@ -399,6 +399,11 @@ An AST node has a "main" CST node.
 
 An AST node has a "preceding-whites" (a list of whitespace CST nodes that precede that AST node)
 so that the AST node can be turned back into CST node (and so on until we reach the original substring that constitutes the CST node).
+* Macros
+Scheme's magic ellipsis comes from Kohlbecker & Wand 1987 \cite{kohlbecker1987macro}
+ [fn::<2019-11-04> https://www.cs.indiana.edu/ftp/techreports/TR206.pdf]
+ [fn::<2019-11-04> backup link ftp://jcmc.indiana.edu/pub/techreports/TR206.pdf].
+\cite{culpepper2007advanced}[fn::<2019-11-04> https://thomas.gilray.org/scheme-2019/culpepper.pdf].
 * Embed lambda calculus
 (What is this?
 Design and implementation.)

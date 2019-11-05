@@ -1,0 +1,170 @@
+#+TITLE: (Draft) A crash course on 21st-century physics, with emphasis on modeling
+#+DATE: 2019-11-05 00:00:00 +0700
+* To understand is to model accurately
+To understand something is to create a reasonably accurate model (internal mental model) of it.
+
+I want to write a physics book with emphasis in /modeling/, because that is what physics is.
+* Physics and mathematics
+Physics is about understanding (and therefore creating a reasonably accurate model of) reality,
+and mathematics is its tool for concise precise communication.
+* Euclidean spaces vs real tuple spaces
+They are isomorphic, but they are not the same.
+
+An Euclidean space is a set of points.
+
+A real tuple space is a set of tuples of real numbers.
+* Newton model of transverse waves or surface waves
+A wave is modeled by a function
+
+f : Position × Time → Amplitude
+
+The interpretation is: "At time \(t\), the amplitude of the part of the wave at point \(x\) is \(f(x,t)\)".
+
+Amplitude is displacement from resting position.
+
+That is, a wave is often modeled as an /amplitude field/.
+(In mathematical physics, an "X field" is a function from position to X.)
+
+Example phenomena that can be modeled with periodic functions:
+the motion of a pendulum,
+the surface waves of water in a pond,
+the oscillation of a guitar string.
+
+Often, the wave is extrapolated to infinity.
+For example, when modeling a pond, we often assume that the pond is infinite, it has no edges, and waves do not reflect off the edges.
+We assume that wave propagate freely without hitting any obstacles, without reflection, without diffraction.
+
+If we use the simplifying assumption that a wave repeats infinitely in both space and time,
+then we can define wavelength and period:
+
+A wave has /wavelength/ \( |dx| \) iff \( dx \) is a shortest vector (the shortest vector) such that \(f(x+dx,t) = f(x,t)\) for all \( t \).
+
+A wave has /period/ \( dt \) iff \( dt \) is the smallest positive number such that \(f(x,t+dt) = f(x,t)\) for all \( x \).
+
+That is, wavelength is spatial periodicity, and period is temporal periodicity.
+* Derivatives
+We define:
+\begin{align*}
+Df = \lim_{h \to 0} \frac{f(x+h)-f(x)}{h}
+\end{align*}
+
+Note that \(Df\) notates a function, read "derivative of \(f\)", not "\(D\) multiplied by \(f\)".
+
+Note that \([Df](x)\) notates the output produced by function \(Df\) for input \(x\).
+
+The concept of derivative is required for Newton's model of a many-body system.
+
+Exercise: If \(f(x) = x^2\), evaluate \([Df](5)\).
+* Modeling the evolution of a many-body system
+Consider a system that consists of several tiny bodies in motion.
+
+A body is presumed to be rigid, indivisible, to occupy no space.
+It is tacitly assumed that bodies do not collide with each other.
+
+(What is motion?)
+
+Newton, Lagrange, Hamilton, Schrödinger, and Einstein are about modeling the evolution of a many-body system.
+It is about identifying tacit simplifying assumptions and relaxing them.
+Relaxing a tacit simplifying assumption produces a theory that is more complex but more accurate.
+** Newton model of a many-body system
+The interpretation is: "At time \( t \), the position of body \( k \) is \( x_k(t) \)".
+
+For each body \( k \), its trajectory is modeled as a function \(x_k\) : Time → Position,
+where time is modeled as a real number,
+and a body's position is modeled as a point in a three-dimensional Euclidean space.
+
+Newton's second law:
+Iff \(F(t)\) is the sum of all forces acting on an object at time \(t\),
+and iff \( p(t) \) is the object's momentum at time \(t\),
+then \( F = Dp \).
+
+Iff \( x(t) \) is an object's position at time \(t\), and \( p(t) \) is the object's momentum at time \(t\),
+and iff the object's mass is constant \(m\), then \( p(t) = m \cdot [D x](t) \), or, \( p = m \cdot D x \),
+but note that \(m\) is a scalar and \(Dx\) is a function (which is a vector in a function space, in the generalized mathematical sense),
+and thus \(m \cdot Dx\) can be thought of as "\(Dx\) scaled by \(m\)".
+
+\( F_k(t) \) is the sum of forces acting on object \(k\) at time \(t\).
+
+Because acceleration is the second time-derivative of position,
+we can substitute \( a_k = D(Dx_k) \) into \( F_k = m_k \cdot a_k \)
+to obtain \( F_k = m_k \cdot D(Dx_k) \).
+
+If the bodies are celestial objects,
+then the shape of \( F_k \) is determined by Newton's law of universal gravitation.
+
+Thus, in the Newton model, the entire system of \( n \) bodies is modeled as \( n \) differential equations,
+in which each differential equation has the shape \( F_k(t) = m_k \cdot [D(Dx)](t) \),
+where the expression \( F_k \) usually contains \( x_k \).
+
+One should not confuse a function and its expression.
+** Lagrange model of a many-body system
+You may want to read Lagrange's own words (albeit translated from French into English)[fn::<2019-11-06> https://archive.org/details/springer_10.1007-978-94-015-8903-1],
+from page 169.
+It has historical context.
+It may also describe Lagrange's train of thought.
+It can be downloaded as PDF.
+
+If the Newton model of an \(n\)-body system consists of \(n\) differential equations,
+the Lagrange model of the same system consists of /one/ equation?
+
+The interpretation is "At time \(t\), the position of body \(k\) is \(x_k(q_k(t),t)\)".
+
+\( x_k \) : GenCoord-k × Time → Position
+
+Each GenCoord-k is a real tuple space and may have a dimension different from other GenCoord-i spaces.
+** Hamilton model of a many-body system
+** Schrödinger model of a many-body system
+In the wave-mechanics model, the position of a body is modeled as a parameter of the system's wave function.
+
+In the wave-mechanics model, the entire system of \( n \) bodies is modeled as a function
+Position-1 × ... × Position-n × Time → Complex.
+
+\( \psi(x_1, \ldots, x_n, t) \).
+
+Key question: What do the parameters of \( \psi \) represent?
+
+In the Schrödinger--Born model, the real number \( |\psi(x_1,\ldots,x_n,t)|^2 \)
+represents the density of the probability of finding, at time \(t\), that body 1 is at \(x_1\), ..., and body \(n\) is at \(x_n\).
+That is, the positions of the bodies are not as separate as in the Newton model.
+
+Read Turgut 2005 crash course?[fn::<2019-11-05> Turgut 2005, "A Crash Course on Quantum Mechanics" http://www.physics.metu.edu.tr/~sturgut/qm.pdf]
+
+However, people fiercely disagree about the meaning of the wave function.
+** Einstein model of a many-body system
+All the above models of mechanics, both classical and quantum, make tacit assumptions about spacetime (space and time).
+In particular, they presume that spacetime is absolute and the same everywhere.
+
+Einstein models replaces the assumption of absolute spacetime (shared by all bodies) with relative (body-specific) spacetime.
+
+(Here I am using "body" as a synonym of "observer".)
+
+In Einstein models, there is no such thing as "the position of body \( k \) at time \( t \)";
+it is replaced with "the position of body \( j \) at time \( t \) /according to body \( i \)/",
+that is, /both/ the position and the time are as seen from body \(i\).
+
+Here we write \([i:x_j(t)]\) to mean "the position of body \(j\) at time \(t\) according to body \(i\)".
+
+Newton models tacitly assume \([i:x_j(t)] = -[j:x_i(t)]\).
+
+What does "simultaneous" ("at the same time") mean in this model?
+
+How do we know if two things are simultaneous?
+
+Einstein postulated the constancy of the speed of light in order to make Maxwell's equations to have the same form in all reference frames.
+
+In special relativity, each body has its own time.
+
+A body's time is defined operationally as whatever is measured by a clock attached to the body.
+
+How do we describe curvature?
+ [fn::<2019-11-05> https://physics.info/general-relativity/]
+
+(Notes to functional programmers: Types can help elucidate Einstein's field equations.)
+
+At the lowest layer, there are only numbers;
+vectors, matrices, and tensors can be thought of as a meaningful way of grouping numbers.
+** The next model?
+A common problem with /all/ those model is that they tacitly assume that spacetime is infinitely divisible like the set of real numbers.
+
+But what would be the mathematics of non-continuous spaces be like?
+And what would it imply about the isotropy of space?

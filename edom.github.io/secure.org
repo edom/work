@@ -1,0 +1,49 @@
+#+TITLE: On the word "secure"
+#+DATE: 2019-11-05 00:00:00 +0700
+* On security
+A system is /absolutely secure/ iff every possible attack costs the attacker more than it costs the defender.
+
+In practice, there is no such absolutely secure system, because, in principle,
+someone can always betray you, or gain physical access, kidnap you, hold you at a gunpoint, etc.
+
+We say that /a person believes that a system is secure/
+if every probable attack costs the attacker more than it costs the defender
+according to that person's beliefs (calculations of the probabilities of attacks).
+
+What is the probability that someone will port-scan your machine?
+
+That question is incomplete; it should have been:
+
+What is the probability that someone will port-scan your machine /at a time between 2019-11-05 and 2029-11-05/?
+
+Let \( x \) be an attack.
+
+Let \( A(x) \) be the cost of the attack \( x \) to the attacker.
+
+Let \( D(x) \) be the cost of the attack \( x \) to the defender.
+
+Let \( P(D,x) \) be \( D \)'s belief that he will suffer the attack \( x \).
+
+There are three notions: absolute, probable, subjective.
+The objective probability cannot be known?
+
+Security is relative, contextual, and dynamic.
+For example, it botnets suddenly became cheap, then many previously secure systems would become insecure.
+
+Security is rational paranoia?
+
+How can a function be attacked?
+
+The composition of secure parts does not always produce a secure system?
+
+How do we make the computer understand the cost of attacks?
+* On computer security
+(Citation needed.)
+Security:
+It does what the programmer intends it to do, and nothing else.
+
+Does the programmer intend out-of-memory, network disruption, out of disk space, exception, error, unbounded input, etc?
+
+For example, when writing an HTTP server, for robustness, the programmer must limit the request size, number of connection per IP address, etc.
+There are so many things to consider.
+It is so hard to design a secure system.
