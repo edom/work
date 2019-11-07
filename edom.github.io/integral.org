@@ -1,0 +1,116 @@
+#+TITLE: On integrals
+#+DATE: 2017-06-27 00:00:00 +0700
+* Notation 1
+(Archimedes? Riemann?)
+
+A simple closed path divides a space into two: the space inside the shape and the space outside the shape.
+
+We want to compute the amount of space inside the shape (the area enclosed by the shape).
+
+To approximate the area inside a shape, there are two approaches:
+- place increasingly-smaller rectangles into the shape, or
+- carve out increasingly-smaller rectangles from the outside the shape.
+
+One does not have to use rectangles; any simple shape of a known area will do.
+
+What is the history of the word "integral" in mathematics?
+What was the reason for choosing that word?
+Wikipedia has a history of the concept but not a history of the word.
+ [fn::<2019-11-07> not about the history of the word https://en.wikipedia.org/wiki/Integral#History]
+
+The syntax and types of the concepts involved are:
+- If \( f : A \to B \) (the integrand) is a function
+- and \( A \) (the domain of the integrand) is a metric space with metric \( M \)
+- and \( V \) (the domain of integration) is a subset of \( A \)
+- and addition is defined for \( B \) (the codomain of the integrand)
+- then \( I_V f : B \) is called "the integral of \(f\) in \(V\)".
+
+There is an alternative syntax for \( I_V f \):
+we can write \( [I f](V) \) when we want to think of integration as an operator.
+
+Here we define \( I_V f \).
+
+First, we pick a function \(P\) that divides a given set into a given number of partitions.
+That is, \( P(S,n) \) is a set of \(n\) partitions of the set \(S\).
+
+\begin{align*}
+I_V f &= \lim_{n \to \infty} \sum_{p \in P(V,n)} f(R(p)) \cdot M(p)
+\end{align*}
+
+\( R(p) \) is any point in partition \( p \).
+
+\( M(p) \) is the measure of partition according to the domain of the integrand.
+(Recall that the domain of the integrand is a metric space.)
+
+Do not confuse between "the measure of a set according to a metric" and "the cardinality of a set".
+
+We write it \( I_V f \) to mean the integral of \( f \) in \( V \).
+
+Example: Evaluate \( I_{[1,2]} (x \mapsto x^2) \).
+
+Observe that a line segment \( [a,b] \) can be divided into \( n \) segments
+\( [p_0,p_1], ~ [p_1,p_2], ~ \ldots, ~ [p_n,p_{n+1}] \)
+by defining these \( n + 1 \) points (including the endpoints):
+\[
+p_k = a + k \cdot \frac{b-a}{n+1}
+\]
+for \( k = 0, 1, 2, \ldots, {n+1} \).
+
+Thus we define \( P([a,b],n) = \Set{[p_1,p_2], [p_2,p_3], \ldots, [p_n,p_{n+1}]} \)
+where \( p_k = a + k \cdot \frac{b-a}{n+1} \).
+
+We define \( R([a,b]) = a \).
+
+We define \( M([a,b]) = b-a \).
+
+Here we are going to appreciate the fundamental theorem of calculus.
+
+Imagine the hardship:
+
+\begin{align*}
+I_{[1,2]} (x \mapsto x^2) &= \lim_{n \to \infty} \sum_{p \in P([1,2],n)} (x \mapsto x^2)(R(p)) \cdot M(p)
+\\ &= \ldots
+\end{align*}
+
+Imagine even more hardship in evaluating integrals of higher-power monomial functions such as \( I_{[2,3]} (x \to x^9) \).
+
+The fundamental theorem of calculus relates integral and derivative:
+\( I_{[a,b]}(Df) = f(b) - f(a) \).
+
+The fundamental theorem of calculus makes integration so much easier that integrating monomial functions
+become embarrassingly trivial because the theorem enables us to derive the power rule for integrals from the power rule for derivatives.
+The theorem enables technologies that reduce many problems from complicated algebraic juggling to simple pattern matching.
+
+A mathematical theorem is a technology too, because it increases productivity
+(it makes life easier, it reduces the effort required to accomplish something).
+
+We take this for granted, but we should not forget that for hundreds of years
+people did not know that and they painstakingly did things so that we do not have to,
+and for that we should be grateful.
+* Notation 2
+Let $(\Real,m)$ be a measure space.
+
+Let $f : \Real \to \Real$ be a function.
+
+Let $X \subseteq \Real$ and $Y = \{ f(x) ~\vert~ x \in X\}$.
+
+Let $X_1,\ldots,X_{n+1}$ be a partitioning of $X$ and $Y_1,\ldots,Y_{n+1}$ be a partitioning of $Y$.
+
+For each $k$, let $x_k \in X_k$ and $y_k \in Y_k$.
+(Pick a point from each partition.)
+
+An /integral of function \( f \) in space \( X \)/
+is $I_X f = \lim_{n\to\infty} \sum_{k=1}^{n} a_k$
+where each $a_k = m(X_k) \cdot m(Y_k)$ is a rectangular part of the total area.
+There are several kinds of integrals depending on how the area is divided.
+See the table.
+
+| Name                                    | $X_k$                              | $Y_k$           |
+|-----------------------------------------+------------------------------------+-----------------|
+| Riemann integral                        | $[x_k,x_{k+1}]$                    | $[0,f(x_k)]$    |
+| Stieltjes integral with respect to $g$? | $[g(x_k),g(x_{k+1})]$              | $[0,f(x_k)]$    |
+| Lebesgue integral                       | \( \{x ~\vert~ f(x) \in Y_k\} \)   | $[y_k,y_{k+1}]$ |
+
+In Riemann integral, you divide $X$ freely.
+
+In Lebesgue integral, you divide $Y$ freely.

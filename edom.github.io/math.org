@@ -1160,30 +1160,3 @@ $\mu \left( \prod_{i=1}^n X_i \right) = \prod_{i=1}^n m(X_i)$.
 A /measure space/ is a set and a measure on that set.
 
 A /measurable function/ is ...
-** Integral
-Let $(\Real,m)$ be a measure space.
-
-Let $f : \Real \to \Real$ be a function.
-
-Let $X \subseteq \Real$ and $Y = \{ f(x) ~\vert~ x \in X\}$.
-
-Let $X_1,\ldots,X_{n+1}$ be a partitioning of $X$ and $Y_1,\ldots,Y_{n+1}$ be a partitioning of $Y$.
-
-For each $k$, let $x_k \in X_k$ and $y_k \in Y_k$.
-(Pick a point from each partition.)
-
-An /integral of function $f$ in space $X$/
-is $\int_X f = \lim_{n\to\infty} \sum_{k=1}^{n} a_k$
-where each $a_k = m(X_k) \cdot m(Y_k)$ is a rectangular part of the total area.
-There are several kinds of integrals depending on how the area is divided.
-See the table.
-
-| Name                                    | $X_k$                              | $Y_k$           |
-|-----------------------------------------+------------------------------------+-----------------|
-| Riemann integral                        | $[x_k,x_{k+1}]$                    | $[0,f(x_k)]$    |
-| Stieltjes integral with respect to $g$? | $[g(x_k),g(x_{k+1})]$              | $[0,f(x_k)]$    |
-| Lebesgue integral                       | \( \{x ~\vert~ f(x) \in Y_k\} \)   | $[y_k,y_{k+1}]$ |
-
-In Riemann integral, you divide $X$ freely.
-
-In Lebesgue integral, you divide $Y$ freely.

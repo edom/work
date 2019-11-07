@@ -40,6 +40,8 @@ A plan of the table of contents:
 
 What?
 
+"scientific techniques for attaining direct personal experience of God"[fn::<2019-11-08> https://en.wikipedia.org/wiki/Paramahansa_Yogananda]
+
 - I have some [[file:question.html][unanswered questions]].
 - Minds and brains [[file:mind-brain.html][interact]],
   but we [[file:mind.html][don't really know how]].
@@ -74,10 +76,7 @@ Human consciousness can interfere in consciousness experiments.
 Perhaps we prayed because it will rain; perhaps the future affects the past.
 * Programming
 A plan of the table of contents:
-- Programmers [[file:program.html][program]] Programmees.
-  - Programs are communication mediums.
-    - Programmers create Programs.
-    - Programmees execute Programs.
+- Basic concepts. On the word [[file:program.html]["program"]] and its variants.
   - Programmers [[file:program-model.html][model]] Programmees.
     Programmee is usually Computer.
     Programmers also model reality. See also [[file:model.html]].
@@ -94,20 +93,8 @@ A plan of the table of contents:
     - Personal Computer:
       People used to wait for their turn to use computers.
       Now everyone has computers at home.
-  - Servers, centralization, oppression, inequality
-  - Insanely Generous Investors and money laundering?
-  - Programmers get paid insane salaries, but companies still have bigger profits.
-    That means companies are extracting even bigger values.
-- [[file:program-draft.html][Programming?]]
-  - [[file:software.html][Towards a philosophy of software]]
-  - [[file:software-science.html][Towards software science]]
-  - [[file:softeng.html][Towards software engineering]]
+- Programming languages
   - [[file:parse.html][On parsing formal languages]]
-  - [[file:intelligence.html][On intelligence]]
-    - [[file:endo.html][The endofunction model of worlds and agents, and its philosophical implications]]
-    - Is cybernetics/practopoiesis the next step in AI after deep neural networks?[fn::<2019-11-04> http://www.danko-nikolic.com/practopoiesis/]
-      \cite{nikolic2017deep}[fn::<2019-11-04> https://link.springer.com/content/pdf/10.1007%2Fs11633-017-1093-8.pdf]
-      Is practopoiesis the key to strong AI?
   - [[file:proglang.html][Programming languages]]?
   - I am thinking of sketching some programming languages.
     One is designed top-down (from math down to reality).
@@ -118,12 +105,32 @@ A plan of the table of contents:
       - [[file:program-text.html][On models of text in programming]]
     - [[file:pl-bottom-up.html][A programming language designed from the bottom up]]
     - [[file:software-system-model.html][Towards a comprehensive software system modeling language]]
-  - [[file:semantics.html][Semantics Research Group]] (of programming languages)
+  - [[file:semantics.html][Semantics Research Group]] (of programming languages) (needs rewrite, should be merged)
+- [[file:program-draft.html][Programming?]]
+  - Dead ends, futile endeavors
+    - [[file:software-science.html][Towards software science]]
+    - [[file:software.html][Towards a philosophy of software]]
+    - [[file:softeng.html][Towards software engineering]]
+    - <2019-11-07> I have tried and failed to define "software".
+      I will write "program" instead.
   - Needs rewrite
     - [[file:math.html][Mathematics]]
     - [[file:compsci.html][Computer science]]
     - [[file:modeldata.html][Modeling all data]]
+- Programming big systems, helping machines help us
 - [[file:secure.html][On the word "secure"]] (see also [[file:power.html]]).
+- Borderline crackpot territory
+  - [[file:intelligence.html][On intelligence]]
+    - [[file:endo.html][The endofunction model of worlds and agents, and its philosophical implications]]
+    - Is cybernetics/practopoiesis the next step in AI after deep neural networks?[fn::<2019-11-04> http://www.danko-nikolic.com/practopoiesis/]
+      \cite{nikolic2017deep}[fn::<2019-11-04> https://link.springer.com/content/pdf/10.1007%2Fs11633-017-1093-8.pdf]
+      Is practopoiesis the key to strong AI?
+      Is it related to "Weight-agnostic neural networks"[fn::<2019-11-06> https://twitter.com/hardmaru/status/1138600152048910336]?
+  - Morality, ethics, politics
+    - Servers, centralization, oppression, inequality
+    - Insanely Generous Investors and money laundering?
+    - Programmers get paid insane salaries, but companies still have bigger profits.
+      That means companies are extracting even bigger values.
 
 On programming by examples.
 Erik Meijer has an interesting presentation about machine learning, that is, programming computers by examples.
@@ -131,6 +138,28 @@ Can we create a programming language in which programming by examples is elegant
 
 If it is impossible to invent better primitives,
 then the only way to make programming easier is to make computers program themselves more.
+** <2019-11-07> Digression: Modeling is common to physics and programming
+Physics is about modeling reality.
+
+Programming is about modeling computers and reality.
+** <2019-11-07> Distinguishing between modules, namespaces, and compilation units
+A namespace is a mapping.
+
+A compilation unit is the smallest thing that can be compiled.
+
+They are often conflated into a module, in the sense that a module
+often serves multiple functions like separate namespace, separate compilation, and dependency management,
+but perhaps it is time that we distinguish between them.
+
+Racket units are namespaces (in my sense) and Racket namespaces are namespaces (in my sense) too.
+Confusing.
+** <2019-11-07> How do we judge or measure the quality of a programming language?
+Do not confuse between a programming language and a programming language /implementation/ (interpreters, compilers, etc.).
+
+A language is judged by how it promotes (or impedes) communication,
+that is, by how efficiently it transfers the intentions of the writer to the reader.
+
+An implementation is judged by its efficiency of execution, its speed, its resource usage, its faithfulness to the language it implements.
 ** Why are programs called "applications"?
 What is applied?
 
