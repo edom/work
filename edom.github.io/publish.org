@@ -59,6 +59,8 @@ I think I will need to reimplement some of Jekyll + Pandoc + Org in Prolog.
 Example 24 "Markdown citations"
 https://pandoc.org/demos.html
 ** Input
+It has to work with all my old documents: some Markdown, some LaTeX, some Org Mode.
+
 The input may have Unicode characters, mathematics, physical quantities with units, and chemical equations.
 
 The input encoding is UTF-8.
@@ -67,6 +69,8 @@ The input may be Org Mode or Modified LaTeX.
 
 The input must be as semantic as possible (content, not presentation).
 Consider sTeX[fn::https://kwarc.info/systems/sTeX/] \cite{kohlhase2008using}.
+
+Fortunately, most of my LaTeX files are already in such semantic/declarative orientation and oblivious to formatting.
 ** Output
 The output may be HTML, possibly with CSS and JavaScript.
 

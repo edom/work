@@ -1,0 +1,99 @@
+#+TITLE: On programming language quality
+#+DATE: 2018-12-15 01:35:00 +0700
+* How should we judge the quality of a language?
+Because the purpose of language is to communicate,
+a language should be judged by how much it makes communication efficient.
+
+Let \( L \) be a language.
+
+Let \( T \) be a proficient transmitter of \( L \).
+
+Let \( R \) be a proficient receiver of \( L \).
+
+\begin{align*}
+\text{quality of language \( L \)} = \frac{\text{amount of meaning communicated successfully}}{\text{effort of \( T \)} + \text{effort of \( R \)}}
+\end{align*}
+
+But how do we measure the amount of meaning?
+
+Secondary criteria:
+
+- expressivity
+- learnability (for example, English orthography sucks so bad that native English speakers have difficulty spelling English words)
+
+One can choose to convey meaning by syntax or by vocabulary.
+
+My hypothesis:
+- If the early speakers of a language need to communicate a concept, they will invent a word for it.
+- If the early speakers of a language need to communicate a concept /very/ much, they will invent a /syntax/ (a grammatical construct) for it.
+
+For example, I think the early English speakers judged that the quantity of a noun is important and when something happens is important,
+so they embedded those concepts in the syntax instead of in the vocabulary.
+German speakers judge that the gender of nouns is important.
+The morphological features of a language reflects what its early speakers think is important to communicate.
+Hypothesis: The genders of nouns reflect the early speakers' idea of what male is and what female is.
+
+Does it make sense to ask which one is better between English, French, German, Spanish, and Chinese?
+Of course anyone can contrive a criterion that puts his own language at the top position.
+
+As someone whose first language is Indonesian and second language is English,
+I find it more convenient to use English for technical communication and Indonesian for jokes.
+
+C promotes memory manipulation.
+Haskell promotes functional programming.
+Prolog promotes database and inference.
+
+There is always a trade-off.
+If something is made easier, something else must be made harder.
+If something is encoded shorter, something else must be encoded longer.
+Language is like Huffman coding built into the brain.
+* <2019-11-07> How do we judge or measure the quality of a programming language?
+Do not confuse between a programming language and a programming language /implementation/ (interpreters, compilers, etc.).
+
+It seems to me that most programming language designers neglect the human--human communication aspect of programming languages.
+
+But how does one /narrate/ a computer program?
+
+But how does one make machines understand English?
+
+Should we write programs in Attempto Controlled English?
+
+A language is judged by how it promotes (or impedes) communication,
+that is, by how efficiently it transfers the intentions of the writer to the reader.
+
+An implementation is judged by its efficiency of execution, its speed, its resource usage, its faithfulness to the language it implements.
+* How do we read/understand a program?
+How do we construct an internal mental model of what a program does?
+
+First we ask, what does this program do (what does it compute)?
+We expect one sentence that explains it.
+
+For example, an explanation for a retail-chain's supply-chain-management program may be:
+
+#+BEGIN_QUOTE
+This program computes (answers the question) "Which things should be sent to which stores, in what quantity, at what time, by which route?"
+#+END_QUOTE
+* Promoting program analysis/understanding by machines?
+A programming language (implementation?) should make it easy for people to write programs that read/write/analyze programs.
+* What?
+Is there a programming language scoring system?
+Should we make one?
+
+- Minimum IQ required to understand the language?
+- Developer feeling/enjoyment
+- Learnability, masterability, usability
+- Maintenance cost: Cost due to runtime defects (defects discovered while the program is running in production environment)
+- https://en.wikipedia.org/wiki/Goodhart%27s_law
+- https://medium.com/@richardeng/how-to-measure-programming-language-complexity-afe4f7e75786
+- https://medium.com/concerning-pharo/elegant-pharo-code-bb590f0856d0
+- Development cost:
+  - Length of program
+  - Development effort; number of people; amount of time
+* Rosetta Stone: comparing programs that do the same thing in different languages
+https://medium.com/concerning-pharo/elegant-pharo-code-bb590f0856d0
+* Measuring programming language quality by how easy is it to do the right thing?
+What is the right thing?
+
+By probability of error of random programs?
+
+How do we measure the probability that a program, uniformly randomly taken from the set of all legal programs in language L, contains an error?

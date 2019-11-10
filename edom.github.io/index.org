@@ -95,15 +95,15 @@ A plan of the table of contents:
       Now everyone has computers at home.
 - Programming languages
   - [[file:parse.html][On parsing formal languages]]
-  - [[file:proglang.html][Programming languages]]?
+  - [[file:proglang.html][Programming languages]]? (A mess.)
+    - [[file:pl-quality.html][On programming language quality]]
   - I am thinking of sketching some programming languages.
     One is designed top-down (from math down to reality).
     Another one is designed bottom-up (from reality up to math).
     It is possible that the outcome is neither of them, but a third middle-way language.
-    - [[file:program-sketch.html][A sketch]] (of a programming language designed from the top down)
+    - [[file:pl-0.html][Sketch of a programming language]]
       - [[file:group.html][On grouping things]]: How should we group functions?
       - [[file:program-text.html][On models of text in programming]]
-    - [[file:pl-bottom-up.html][A programming language designed from the bottom up]]
     - [[file:software-system-model.html][Towards a comprehensive software system modeling language]]
   - [[file:semantics.html][Semantics Research Group]] (of programming languages) (needs rewrite, should be merged)
 - [[file:program-draft.html][Programming?]]
@@ -153,13 +153,6 @@ but perhaps it is time that we distinguish between them.
 
 Racket units are namespaces (in my sense) and Racket namespaces are namespaces (in my sense) too.
 Confusing.
-** <2019-11-07> How do we judge or measure the quality of a programming language?
-Do not confuse between a programming language and a programming language /implementation/ (interpreters, compilers, etc.).
-
-A language is judged by how it promotes (or impedes) communication,
-that is, by how efficiently it transfers the intentions of the writer to the reader.
-
-An implementation is judged by its efficiency of execution, its speed, its resource usage, its faithfulness to the language it implements.
 ** Why are programs called "applications"?
 What is applied?
 
@@ -363,7 +356,7 @@ because it is rather rare to encounter trailers.
 - [[file:usecom.html][Use computers]]
   - Leo Editor[fn::http://leoeditor.com]: personal information manager + integrated development environment;
     via akkartik.name[fn::http://akkartik.name/post/literate-programming]
-** What
+** Make a system for publishing this website
 - [[file:publish.html][Make a system for publishing this website]]
   - [[file:parse.html][Find an elegant parsing method]]
     - I am looking for the best technique for specifying formal grammars, parsing formal languages, and unparsing formal languages.

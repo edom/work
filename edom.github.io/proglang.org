@@ -318,21 +318,6 @@ They share semantics.
 
 Programming languages have wildly varying semantics.
 Some doesn't even have clear semantics.
-** How should we judge the quality of languages in general and programming languages in particular?
-For example, English speakers judge that the quantity of a noun is important, when something happens is improtant.
-German speakers judge that the gender of nouns is important.
-The morphological features of a language reflects what its early speakers think is important to communicate.
-Hypothesis: The genders of nouns reflect the early speakers' idea of what male is and what female is.
-
-C makes memory manipulation easy.
-Haskell makes functions easy.
-Prolog makes database and inference easy.
-Java is supposed to make working in big teams easy.
-
-There is always a trade-off.
-If something is made easier, something else must be made harder.
-If something is encoded shorter, something else must be encoded longer.
-Language is like Huffman coding built into the brain.
 ** When are programmers happy?
 Happiness happens when what the programmer thinks is important coincides with what the language designer thinks is important.
 For example, when I'm writing an accounting software, I don't care about the registers, pointers, memory addresses, and so on.
@@ -4008,4 +3993,166 @@ https://twitter.com/ErikDominikus/status/1074009681553707008
 1 in Haskell / ML / Ocaml / F# / Scheme / JavaScript / untyped lambda-calculus
 
 2 in Idris / Lean / GHC Core / System F / Coq
+** Taxonomy of programming languages?
+- Dichotomies
+- Having denotational semantics vs not
+- With vs without runtime type information
+- Curry-style, implicit typing, optional typing, gradual typing
+- Church-style suggestive typing, meaningful typing
+- Statement vs expression
+- Imperative vs declarative
+- Value vs reference (referentially transparent vs not)
+- By value spaces?
+- Principled vs unprincipled
+- Designed by person vs by committee
+** What should a programming language be?
+How should [[file:haskell.html][Haskell]] be improved?
+- How do we use Haskell without fmap, ap, and other annoying syntactic baggages? How do we have Maybe(A) = A union {Nothing}? (The original question that started it all.)
+- What does a set-theoretic type system look like? (The consequence of wanting Maybe(A) = A union {Nothing}.)
+- What if the denotational semantics directly involve functors and monads?
+- Why should we use that language / write programs that way?
+- Is there an efficient implementation?
+
+How should lambda calculus be implemented?
+What is an optimal implementation?
+
+** What is the essence of programming language constructs?
+*** Records, dictionaries, ordering, function model
+A record's components are ordered.
+A dictionary's entries are unordered.
+Both can be /modeled/ by a function from the set of keys to the set of values.
+
+A record ={a:1, b:2}= can be modeled by the function \((K,V,F)\) where \(K = \Set{a,b}\) and \(V = \Set{1,2}\) and \(F = \Set{(a,1), (b,2)}\).
+*** The essence of dictionary is finite function
+Clojure gets this right?
+
+Left-hand side of an application may be:
+- a dictionary,
+- a lambda, or
+- a finite left-biased union of arbitrarily many dictionaries and lambdas, or
+- a union like that but right-biased.
+*** Dictionary, map, associative array, record, finite function, hash table
+**** Clojure maps are applicable like functions.
+A very interesting fundamental idea.
+
+#+BEGIN_SRC lisp
+({:a 1 :b 2 :c 3} :a)
+=> 1
+({:a 1 :b 2 :c 3} :b)
+=> 2
+#+END_SRC
+
+Clojure has nice map syntax: =(m k)= for accessing k.
+
+Maps are isomorphic to functions.
+We update a map.
+Updating a function is simple:
+#+BEGIN_SRC haskell
+update nk nv f = \ k -> if k == nk then nv else f k
+-- and then beta-normalize the lambda body
+#+END_SRC
+
+A Prolog deterministic binary predicate is like a Clojure map.
+
+*** What is an array?
+What is the difference between an array, a string (byte string vs character string), and a sequence?
+
+C does not have built-in arrays; it has pointer arithmetics.
+An "array access" expression p[i] is a syntactic sugar for the pointer arithmetic dereference expression *(p+i).
+
+Is a C++ vector an array?
+
+*** Comments
+Humans and machines should understand the same thing.
+Comments should not be used very much.
+All explanations should be understood by both humans and machines.
+If a programmer has to resort to comments, then the language has failed to be expressive enough to express that comment.
+
+We require less comments in languages with static type-checking.
+
+A variable's type is a partial answer to "What does this variable mean", "What is this variable", and "What are the possible values of this variable".
+It formalizes the programmer's assumptions.
+** Growing a programming language?
+2006, "A growable language"
+"programming language designers should plan for such growth, along with the growth of a user community"
+https://dl.acm.org/citation.cfm?id=1176621
+
+Racket manifesto?
+Racket language-oriented programming?
+** What is a paradigm?
+A mindset.
+A way of thinking.
+A way of looking at things.
+A lens through which we look at everything.
+** Leverage existing infrastructures instead of creating from scratch
+Instead of creating a programming language from scratch, we should leverage existing programming language infrastructures.
+
+So far we think Prolog is the best for sketching languages with abstract syntax
+(that is, when we care about the semantics and do not care about the concrete syntax).
+The concrete syntax can always come later.
+Pretty concrete syntax will not console the programmers traumatized by ugly semantics.
+It would be like marrying a handsome but rotten man:
+the hype turns into regret after a few weeks.
+** Logic programming
+Prolog is at least second-order, as exemplified by its call/2.
+
+We should program in logic because logic is the nternal language of thought?
+** What is the best programming language?
+This is what I think the best programming language would is like, as of <2018-12-30>.
+
+general feel: Prolog + Haskell
+
+Katahdin - runtime syntax manipulation
+
+supercompilation + partial evaluation + compilation by abstract interpretation
+
+user-extensible unification?
+
+Type system: Curry-style, not Church-style.
+More like Erlang Dialyzer or TypeScript than Haskell.
+Users should be able to write their own program checkers and program transformations.
+
+Module and import system: ld linker script, JavaScript, Nix import by lambda parameter name, Dhall, OCaml local import.
+
+Syntax: Landin offside rule?
+
+Pure + nondeterminism + JavaScript module system
+** What are some interesting programming languages?
+   :PROPERTIES:
+   :CUSTOM_ID: what-are-some-interesting-programming-languages
+   :END:
+
+- Interesting functional programming languages tailored for web programming.
+  Perhaps related to data modeling.
+
+  - Ur/Web
+
+    - [[http://www.impredicative.com/ur/faq.html][FAQ]]
+
+      - "Why would I prefer to use Ur/Web over OPA?"
+
+    - [[http://www.impredicative.com/ur/resources.html][How to Get Started Learning Ur/Web]]
+
+  - [[http://links-lang.org/][The Links Programming Language]]
+  - [[http://opalang.org/][The Opa Language]]
+
+- Moving logic into SQL stored procedures
+
+  - [[https://sivers.org/pg][Simplify: move code into database functions | Derek Sivers]]
+
+    - A legitimate concern: How do we version-control (and release, and rollback) stored procedures, triggers, and other database logics?
+
+  - [[https://news.ycombinator.com/item?id=11802917][Andl, a relational language that is not SQL, is coming to Postgres | Hacker News]]
+
+- https://www.microsoft.com/en-us/research/publication/convenient-explicit-effects-using-type-inference-with-subeffects/
+- [[https://nikita-volkov.github.io/if-haskell-were-strict/][If Haskell were strict, what would the laziness be like?]]
+- http://homepages.inf.ed.ac.uk/wadler/papers/free-rectypes/free-rectypes.txt
+
+*** Do we really have to read these fragmented sources?
+    :PROPERTIES:
+    :CUSTOM_ID: do-we-really-have-to-read-these-fragmented-sources
+    :END:
+
+- [[http://www.cse.chalmers.se/edu/year/2015/course/DAT150/lectures/proglang-12.html][Lecture 12: Design and Evolution of Programming Languages]]
+
 * Bibliography

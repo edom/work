@@ -1,7 +1,5 @@
-#+TITLE: Sketches of a programming language
+#+TITLE: Sketch of a programming language
 #+DATE: 2019-02-07 00:00:00 +0700
-#+PERMALINK: /program-sketch.html
-#+OPTIONS: ^:nil
 * Milestone planning?
 Version, milestone, man-day
 ** 0
@@ -24,186 +22,21 @@ Version, milestone, man-day
 Read-only storage
 
 Writable storage
-* Ideas and reading list
-Perhaps the easiest way to make a programming language is to extend lambda calculus?
+* Designing the implementation
+The implementation is probably an interpreter.
+** Implementation requirements
+The interpreter must be ready to accept user input in less than 500 ms since the user starts the interpreter on a typical 2019 machine.
 
-The easiest extension is some constants.
-
-How do we let the programmers choose the reduction strategy?
-
-1982
-A consistent extension of the lambda-calculus as a base for functional programming languages
-https://www.sciencedirect.com/science/article/pii/S0019995882904582
-* Programming languages
-** Taxonomy of programming languages?
-- Dichotomies
-- Having denotational semantics vs not
-- With vs without runtime type information
-- Curry-style, implicit typing, optional typing, gradual typing
-- Church-style suggestive typing, meaningful typing
-- Statement vs expression
-- Imperative vs declarative
-- Value vs reference (referentially transparent vs not)
-- By value spaces?
-- Principled vs unprincipled
-- Designed by person vs by committee
-** What should a programming language be?
-How should [[file:haskell.html][Haskell]] be improved?
-- How do we use Haskell without fmap, ap, and other annoying syntactic baggages? How do we have Maybe(A) = A union {Nothing}? (The original question that started it all.)
-- What does a set-theoretic type system look like? (The consequence of wanting Maybe(A) = A union {Nothing}.)
-- What if the denotational semantics directly involve functors and monads?
-- Why should we use that language / write programs that way?
-- Is there an efficient implementation?
-
-How should lambda calculus be implemented?
-What is an optimal implementation?
-
-** What is the essence of programming language constructs?
-*** Records, dictionaries, ordering, function model
-A record's components are ordered.
-A dictionary's entries are unordered.
-Both can be /modeled/ by a function from the set of keys to the set of values.
-
-A record ={a:1, b:2}= can be modeled by the function \((K,V,F)\) where \(K = \Set{a,b}\) and \(V = \Set{1,2}\) and \(F = \Set{(a,1), (b,2)}\).
-*** The essence of dictionary is finite function
-Clojure gets this right?
-
-Left-hand side of an application may be:
-- a dictionary,
-- a lambda, or
-- a finite left-biased union of arbitrarily many dictionaries and lambdas, or
-- a union like that but right-biased.
-*** Dictionary, map, associative array, record, finite function, hash table
-**** Clojure maps are applicable like functions.
-A very interesting fundamental idea.
-
-#+BEGIN_SRC lisp
-({:a 1 :b 2 :c 3} :a)
-=> 1
-({:a 1 :b 2 :c 3} :b)
-=> 2
-#+END_SRC
-
-Clojure has nice map syntax: =(m k)= for accessing k.
-
-Maps are isomorphic to functions.
-We update a map.
-Updating a function is simple:
-#+BEGIN_SRC haskell
-update nk nv f = \ k -> if k == nk then nv else f k
--- and then beta-normalize the lambda body
-#+END_SRC
-
-A Prolog deterministic binary predicate is like a Clojure map.
-
-*** What is an array?
-What is the difference between an array, a string (byte string vs character string), and a sequence?
-
-C does not have built-in arrays; it has pointer arithmetics.
-An "array access" expression p[i] is a syntactic sugar for the pointer arithmetic dereference expression *(p+i).
-
-Is a C++ vector an array?
-
-*** Comments
-Humans and machines should understand the same thing.
-Comments should not be used very much.
-All explanations should be understood by both humans and machines.
-If a programmer has to resort to comments, then the language has failed to be expressive enough to express that comment.
-
-We require less comments in languages with static type-checking.
-
-A variable's type is a partial answer to "What does this variable mean", "What is this variable", and "What are the possible values of this variable".
-It formalizes the programmer's assumptions.
-** Growing a programming language?
-2006, "A growable language"
-"programming language designers should plan for such growth, along with the growth of a user community"
-https://dl.acm.org/citation.cfm?id=1176621
-
-Racket manifesto?
-Racket language-oriented programming?
-** What is a paradigm?
-A mindset.
-A way of thinking.
-A way of looking at things.
-A lens through which we look at everything.
-** Leverage existing infrastructures instead of creating from scratch
-Instead of creating a programming language from scratch, we should leverage existing programming language infrastructures.
-
-So far we think Prolog is the best for sketching languages with abstract syntax
-(that is, when we care about the semantics and do not care about the concrete syntax).
-The concrete syntax can always come later.
-Pretty concrete syntax will not console the programmers traumatized by ugly semantics.
-It would be like marrying a handsome but rotten man:
-the hype turns into regret after a few weeks.
-** Logic programming
-Prolog is at least second-order, as exemplified by its call/2.
-
-We should program in logic because logic is the nternal language of thought?
-** What is the best programming language?
-This is what I think the best programming language would is like, as of <2018-12-30>.
-
-general feel: Prolog + Haskell
-
-Katahdin - runtime syntax manipulation
-
-supercompilation + partial evaluation + compilation by abstract interpretation
-
-user-extensible unification?
-
-Type system: Curry-style, not Church-style.
-More like Erlang Dialyzer or TypeScript than Haskell.
-Users should be able to write their own program checkers and program transformations.
-
-Module and import system: ld linker script, JavaScript, Nix import by lambda parameter name, Dhall, OCaml local import.
-
-Syntax: Landin offside rule?
-
-Pure + nondeterminism + JavaScript module system
-** What are some interesting programming languages?
-   :PROPERTIES:
-   :CUSTOM_ID: what-are-some-interesting-programming-languages
-   :END:
-
-- Interesting functional programming languages tailored for web programming.
-  Perhaps related to data modeling.
-
-  - Ur/Web
-
-    - [[http://www.impredicative.com/ur/faq.html][FAQ]]
-
-      - "Why would I prefer to use Ur/Web over OPA?"
-
-    - [[http://www.impredicative.com/ur/resources.html][How to Get Started Learning Ur/Web]]
-
-  - [[http://links-lang.org/][The Links Programming Language]]
-  - [[http://opalang.org/][The Opa Language]]
-
-- Moving logic into SQL stored procedures
-
-  - [[https://sivers.org/pg][Simplify: move code into database functions | Derek Sivers]]
-
-    - A legitimate concern: How do we version-control (and release, and rollback) stored procedures, triggers, and other database logics?
-
-  - [[https://news.ycombinator.com/item?id=11802917][Andl, a relational language that is not SQL, is coming to Postgres | Hacker News]]
-
-- https://www.microsoft.com/en-us/research/publication/convenient-explicit-effects-using-type-inference-with-subeffects/
-- [[https://nikita-volkov.github.io/if-haskell-were-strict/][If Haskell were strict, what would the laziness be like?]]
-- http://homepages.inf.ed.ac.uk/wadler/papers/free-rectypes/free-rectypes.txt
-
-*** Do we really have to read these fragmented sources?
-    :PROPERTIES:
-    :CUSTOM_ID: do-we-really-have-to-read-these-fragmented-sources
-    :END:
-
-- [[http://www.cse.chalmers.se/edu/year/2015/course/DAT150/lectures/proglang-12.html][Lecture 12: Design and Evolution of Programming Languages]]
-
-* Programming language implementation
-** How should we make programming tools such as compilers, interpreters, and editors?
-** What meta-programming tools exist?
-*** Rascal MPL
+It is also important to have fast build if there is a build step.
+** Sketch
+I am thinking of building the interpreter on top of Racket or Scheme or Lisp or Prolog.
+** Programming language implementation?
+*** How should we make programming tools such as compilers, interpreters, and editors?
+*** What meta-programming tools exist?
+**** Rascal MPL
 https://www.rascal-mpl.org/
-*** Eclipse Xtext
-*** JetBrains MPS
+**** Eclipse Xtext
+**** JetBrains MPS
 MPS is "Meta Programming System".
 
 A concept can have properties. Each property has a type.
@@ -226,7 +59,7 @@ External links:
 - [[https://confluence.jetbrains.com/display/MPSD20172/Using+MPS+inside+IntelliJ+IDEA][Using MPS inside IntelliJ IDEA]]
 - [[https://confluence.jetbrains.com/pages/viewpage.action?pageId=93128576][MPS user guide for Java developers (IntelliJ IDEA)]] (long)
 - [[https://confluence.jetbrains.com/display/MPSD20172/Finding+your+way+out][What to do when there is a problem]]
-** Meta-programming and language-oriented programming?
+*** Meta-programming and language-oriented programming?
 The Racket manifesto[fn::http://felleisen.org/matthias/manifesto/index.html]: programming-language programming language
 
 miniKanren, scheme logic programming
@@ -266,8 +99,8 @@ Language workbenches (such as Spoofax) deal with conventional syntax for DSLs bu
 A 2015 report suggests, however, these tool chains are also converging toward the idea of language creation as language modification.
 We conjecture that, given sufficient time, development of Racket and language workbenches will converge on similar designs.
 #+END_QUOTE
-** Implementing programming languages
-** Should we use Prolog?
+*** Implementing programming languages
+*** Should we use Prolog?
 We should prototype our language in Prolog.
 
 We should implement our language in Prolog.
@@ -301,9 +134,7 @@ My previous answers:
 
 Other people?
 - https://hackernoon.com/the-programming-language-im-looking-for-948d93f7a396
-** Principles?
-Fast build time is important.
-** Write abstract interpreters, not compilers?
+*** Write abstract interpreters, not compilers?
 <2018-12-30>
 
 The same code fragment can be interpreted in several ways.
@@ -313,7 +144,7 @@ Example: a Python interpreter interprets the Python program "print 'foo'" as pri
 
 Write an abstract interpreter that emits code when interpreting.
 An interpreter that interprets the Python program "print 'foo'" as "emit a Ruby statement that prints 'foo' to screen when executed".
-** Begin with an interpreter, not a compiler
+*** Begin with an interpreter, not a compiler
 
 - Don't make a compiler?
   Make an interpreter instead, and stage it?
@@ -326,7 +157,7 @@ An interpreter that interprets the Python program "print 'foo'" as "emit a Ruby 
 - multi-stage programming for Scala https://scala-lms.github.io/
 - 2006 article "A Verified Staged Interpreter is a Verified Compiler" [[https://www.researchgate.net/profile/Kevin_Hammond/publication/221108683_A_verified_staged_interpreter_is_a_verified_compiler/links/00b7d517ede725c057000000.pdf][pdf]]
 
-** Making compilers?
+*** Making compilers?
    :PROPERTIES:
    :CUSTOM_ID: making-compilers
    :END:
@@ -349,10 +180,10 @@ Is there a compiler that doesn't do that?
 
     - https://en.wikipedia.org/wiki/A-normal_form
 
-** Piggybacking a host language
-** How should lambda-calculus be implemented?
-*** What is an operational semantics of lambda calculus?
-*** How?
+*** Piggybacking a host language
+*** How should lambda-calculus be implemented?
+**** What is an operational semantics of lambda calculus?
+**** How?
 Normal-order reduction enables us to write fixed points.
 Should we let the programmer choose the evaluation strategy?
 Currying simplifies reasoning but complicates implementation (because applications may then nest deeply to the left).
@@ -377,34 +208,18 @@ Reading queue:
 - https://www.reddit.com/r/haskell/comments/2zqtfk/why_isnt_anyone_talking_about_optimal_lambda/
 - compiling monads https://www.irif.fr/~mellies/mpri/mpri-ens/articles/danvy-koslowski-malmkjaer-compiling-monads.pdf
 - modular monadic semantics http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.136.1656&rep=rep1&type=pdf
-* Parsing
-Each stage must be reversible (must preserve enough information from the previous stage).
 
-The first stage is character + file path + line + column + byte offset.
+** Ideas and reading list
+Perhaps the easiest way to make a programming language is to extend lambda calculus?
 
-The next stage is tokenization.
+The easiest extension is some constants.
 
-A token has type and a list of characters.
+How do we let the programmers choose the reduction strategy?
 
-The next stage is concrete syntax tree (CST).
-
-The concrete syntax tree is required for formatting and refactoring, because those activities should preserve comments.
-
-In Lisp syntax, a CST node is a token?
-They coincide?
-
-The next stage is abstract syntax tree.
-
-An AST node has a "main" CST node.
-
-An AST node has a "preceding-whites" (a list of whitespace CST nodes that precede that AST node)
-so that the AST node can be turned back into CST node (and so on until we reach the original substring that constitutes the CST node).
-* Macros
-Scheme's magic ellipsis comes from Kohlbecker & Wand 1987 \cite{kohlbecker1987macro}
- [fn::<2019-11-04> https://www.cs.indiana.edu/ftp/techreports/TR206.pdf]
- [fn::<2019-11-04> backup link ftp://jcmc.indiana.edu/pub/techreports/TR206.pdf].
-\cite{culpepper2007advanced}[fn::<2019-11-04> https://thomas.gilray.org/scheme-2019/culpepper.pdf].
-* Embed lambda calculus
+1982
+A consistent extension of the lambda-calculus as a base for functional programming languages
+https://www.sciencedirect.com/science/article/pii/S0019995882904582
+** Embed lambda calculus
 (What is this?
 Design and implementation.)
 
@@ -438,10 +253,236 @@ The reader should produce a syntax object, not just a datum, because we want err
 I think it is unfortunate in Scheme/Racket that =read= ignores comments.
 I think =read= should produce a =#%comment= node for a comment.
 That is, there should be a variant of =read= that reads concrete-syntax-tree nodes and not abstract-syntax-tree nodes.
+* Maintainability?
+Related topics:
+- interactive programming
+- inspectability, traceability, debuggability
+- serialization, state restoration
+- reverse-engineerability. documentability, literate programming
+* Interactive programming, serialization, and state restoration
+Like some Lisp/Smalltalk images, save/dump and restore/resume.
+
+Is it wise to change some parts of the program that the machine is running,
+like changing the wheels while the car is running?
+
+Terms: interactive programming, online programming (may be confused with Web editor?)
+** Why have state restoration?
+State restoration is for interactive programming.
+
+Also for packaging and distributing stand-alone applications, as in Prolog and Racket.
+** Naïvely restoring states causes security problems
+State restoration can be abused to break encapsulation by modifying the internal state of an object.
+
+State restoration must be designed to be secure against all cases in which the attacker
+fully controls the dump and can tell the program to restore arbitrarily
+but in which the attacker does not have access to the binary/source/OS-running-process address space,
+that is, in which the attacker cannot attach a debugger.
+
+Or we tell users to only restore from dumps they themselves created.
+
+But we let users do it anyway.
+If we make a wrench, it is not our responsibility if the user chooses to hit his own head with it;
+he is free to hurt himself; but we share some blame if he chooses to hit /others'/ heads with it.
+If we dislike those consequences, we should not make a wrench.
+
+(Ramble.)
+
+A technology not only solves problems but also /creates its own problems/.
+
+(End ramble.)
+** Storing graphs without naming conflicts
+The problem with =#0#= is that the string representation cannot be naïvely concatenated?
+(Can it?)
+
+With local binding like lambda, the string representation can be naïvely concatenated.
+
+Cyclic data are much prettier in non-strict languages.
+
+#+BEGIN_EXAMPLE
+(named a (cons 1 a))
+;; or
+(μ a (cons 1 a))
+;; represents
+a = (cons 1 a) = (1 1 1 ...)
+#+END_EXAMPLE
+
+(Compare: fixed point operator, μ-regular expressions)
+
+The meaning of \( \mu x . y \) is the \( z \) that is \( y \) but with all bound occurrence of \( x \) replaced with \( z \).
+By "bound", we mean that \( \mu \) binds the same way \( \lambda \) does.
+
+\( \mu x . y \) can be thought of as =(named x y)= where
+every bound occurrence of =x= in =y= refers to (is the name of) the entire expression =(named x y)= itself.
+
+That is, \( \mu x . y = fix (\lambda x . y) \)
+where fix is a fixed-point combinator[fn::<2019-11-10> https://en.wikipedia.org/wiki/Fixed-point_combinator] (fix(f) = f(fix(f))).
+** For interactive programming, all states must be serializable
+All states must be serializable (dumpable and restorable).
+
+Each global variable should declare how to initialize and snapshot itself.
+* Threading
+The programmer should be able to choose between cooperative and preemptive multithreading,
+but the default should be preemptive.
+* Parsing
+Each stage must be reversible (must preserve enough information from the previous stage).
+
+The first stage is character + file path + line + column + byte offset.
+
+The next stage is tokenization.
+
+A token has type and a list of characters.
+
+The next stage is concrete syntax tree (CST).
+
+The concrete syntax tree is required for formatting and refactoring, because those activities should preserve comments.
+
+In Lisp syntax, a CST node is a token?
+They coincide?
+
+The next stage is abstract syntax tree.
+
+An AST node has a "main" CST node.
+
+An AST node has a "preceding-whites" (a list of whitespace CST nodes that precede that AST node)
+so that the AST node can be turned back into CST node (and so on until we reach the original substring that constitutes the CST node).
+* Binding
+The syntax tree is enriched with location and binding information.
+
+Then, bindings are computed.
+
+A bound name = local name + definition site (the original name and where it is defined).
+
+#+BEGIN_EXAMPLE
+compute-bindings : Cst-Node → Bound-Cst-Node
+#+END_EXAMPLE
+
+To determine whether two names refer to the same referent, use ~referent=?~.
+This is similar to Scheme's unfortunately named ~free-identifier=?~.
+
+- determine whether two names refer to the same thing
+- get definition site (get where a name is defined)
+
+Question:
+Should the binding information also include types, for overloading (ad-hoc polymorphism)?
+Do we want overloading?
+* Macros
+Macros are replaced with explicit program transformations?
+
+Scheme's magic ellipsis comes from Kohlbecker & Wand 1987 \cite{kohlbecker1987macro}
+ [fn::<2019-11-04> https://www.cs.indiana.edu/ftp/techreports/TR206.pdf]
+ [fn::<2019-11-04> backup link ftp://jcmc.indiana.edu/pub/techreports/TR206.pdf].
+\cite{culpepper2007advanced}[fn::<2019-11-04> https://thomas.gilray.org/scheme-2019/culpepper.pdf].
+* Namespaces
+I want namespaces to be first-class, that is, a value,
+that can be manipulated like other values, that can be named by =define=,
+like integers, strings, etc.
+
+In principle, a namespace can be represented by a lambda that maps a name to its meaning.
+
+Necessary operations:
+- =namespace-lookup=: Look-up an exported name in a namespace.
+- =namespace-list-exports=: List the names exported by a namespace.
+- =namespace-exports?=: Determine whether a name is exported by a namespace.
+
+More operations?
+- =namespace-imports=: Analyze the imports of a namespace?
+** Naïve lambda representation of namespaces
+For example:
+
+#+BEGIN_EXAMPLE
+;;  A namespace expression form
+
+(namespace
+  (import ns1 [a b c])
+  (export [num inc])
+  (define num (+ a b))
+  (define (inc x) (+ x 1)))
+
+;;  translates to a plain lambda form
+
+(lambda (name)
+  ;; (import ns1 [a b c])
+  (define a (ns1 'a))
+  (define b (ns1 'b))
+  (define c (ns1 'c))
+  ;; internal definitions
+  (define num (+ a b))
+  (define (inc x) (+ x 1))
+  ;; (export [num inc])
+  (case name
+    [(num) num]
+    [(inc) inc]
+    [($imports) '( (ns1 [a b c]) )]
+    [($exports) '(x inc)]
+    [else (error)]))
+#+END_EXAMPLE
+
+We rely on partial evaluation to inline namespace access such as =(ns 'inc)=.
+
+Problem:
+I worry that partial evaluation may increase compilation time too much.
+
+Problem:
+Perhaps =$imports= and =$exports= should be placed /out of band/ (not mixed with the symbols exported by the namespace).
+Also, perhaps imports and exports should be opaque structs.
+But then we have to resort to Scheme structs.
+* Documentation system
+Comments are first-class in the sense that =read= does not discard comments;
+it is just that comments are interpreted as no-operations and may be discarded by compilation.
+#+BEGIN_EXAMPLE
+($comment "This strange code exists because ...")
+#+END_EXAMPLE
+
+Problem: I don't want to repeat the name.
+#+BEGIN_EXAMPLE
+($doc foo "The var.")
+(define foo 1)
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+(define (fun)
+  ($doc "The function.")
+  1)
+#+END_EXAMPLE
+
+Literate programming?
 * Modules
 Loading/requiring a file or module should not have any side effects.
 Like Haskell.
 Unlike Scheme, Racket, Prolog.
+
+Racket tips:
+
+Avoid side-effects in modules
+
+It is evil to have side-effects when loading modules.
+
+Instead, it is better to make a module that exports a mutable struct.
+
+=racket/gui= is particularly evil: it cannot be required in different phases in the same OS process.
+But that is because the underlying wxWidgets is evil (global variables).
+* Proper tail calls, and continuations
+If you want to implement proper tail calls, you may as well implement continuations?
+
+They complicate implementation and analysis?
+Or do they simplify?
+
+They don't interact nicely with other language features?
+They have difficult corner cases?
+
+Why do we want continuations?
+What benefit does it bring that justifies its cost?
+
+Continuations enable us to give meaning to imperative control constructs
+using denotational semantics which were commonly used to give meaning to functional programs?
+\cite{reynolds1993discoveries}[fn::<2019-11-11> http://www.cs.ru.nl/~freek/courses/tt-2011/papers/cps/histcont.pdf]
+
+But is that good enough?
+* Multi-processing and isolation?
+If you have a C program that has global variables, and you need to run two instances of it,
+then you may run two OS processes from the same binary, if the program does not write any files.
+
+Can a program have no absolute file system paths?
 * Example fragment?
 This is similar to, if not inspired by, Moseley & Marks 2006 \cite{moseley2006out}.
 
@@ -1642,24 +1683,6 @@ A markup language adds some semantics to text.
 #+BEGIN_EXAMPLE
     a.b().c().d() = ((a.b()).c()).d()
 #+END_EXAMPLE
-** Measuring programming language quality
-- https://en.wikipedia.org/wiki/Goodhart%27s_law
-*** Minimum IQ required to understand the language
-*** Development cost
-**** Length of program
-**** Development effort; number of people; amount of time
-*** Developer feeling/enjoyment
-*** Maintenance cost
-**** Cost due to runtime defects (defects discovered while the program is running in production environment)
-*** Rosetta Stone: comparing programs that do the same thing in different languages
-https://medium.com/concerning-pharo/elegant-pharo-code-bb590f0856d0
-*** Learnability, masterability, usability
-*** Measuring programming language quality by how easy is it to do the right thing
-What is the right thing?
-
-By probability of error of random programs?
-
-How do we measure the probability that a program, uniformly randomly taken from the set of all legal programs in language L, contains an error?
 ** Intersection between programming language search and software engineering: The effect of programming language on software quality
 - https://developers.slashdot.org/story/14/11/05/0530228/the-effect-of-programming-language-on-software-quality
   - 2014 article "A Large Scale Study of Programming Languages and Code Quality in Github" [[http://web.cs.ucdavis.edu/~filkov/papers/lang_github.pdf][pdf]]
@@ -1854,7 +1877,6 @@ Let \(G = (F \times A, B, g)\) be a function where \( g(f,x) = f(x) \).
 ** How do we know that our language is perfect?
 "How to determine your new language is perfect?"
 http://lambda-the-ultimate.org/node/4395
-
 * What
 ** Prolog implementation?
 Predicate type(Name,TypeExp) defines types
@@ -1939,7 +1961,14 @@ But this distribution of state is /accidental/, not essential.
 The specification language must have the same syntax for both updating a local in-memory relation and updating a relation in a remote database.
 ** Caching expensive intermediate result?
 How do we do that?
-** A vision?
+** Easy things: generating Java data-transfer-object classes from specification
+** Hard things: generating Java programs from specification
+
+* A business-oriented variant
+Important features:
+- website or web application user interface
+- SQL join across several PostgreSQL instances
+
 HTTP, HTML, JavaScript, AJAX, client-server, and network connections are accidental complexity.
 What is essential is that the user wants to do something quickly.
 The programmer should care about what the user cares about.
@@ -1952,6 +1981,65 @@ The language user should only care about what the end user cares about.
 The main task of the language user is to formalize the ontology implied by the mental model of the end user.
 
 strcpy does what we want: it copies strings, but that is not all: it may overwrite a memory region it should not touch.
-** Easy things: generating Java data-transfer-object classes from specification
-** Hard things: generating Java programs from specification
-* Bibliography
+
+* Bottom-up design?
+** Example
+- Example of bottom-up language design and how each level reduces cognitive load:
+  - Begin with machine code.
+  - Provide mnemonics for instructions.
+  - Provide the illusion of infinite custom-named registers and orthogonal operands.
+  - Provide macros subroutines as extensible instructions.
+  - Provide the illusion of infinite custom-named registers and orthogonal operands.
+  - Provide macros and subroutines as extensible instructions.
+  - Provide named locations.
+  - Provide the illusion of infinite memory.
+  - Abstract away processor registers.
+  - Abstract away pointers.
+  - Expression.
+  - Infix expression syntax.
+  - First-class functions.
+  - The program itself is a procedural program that tells the interpreter what code to generate.
+  - End up with something like Randall Hyde's High Level Assembly?
+** Starting with assembly
+We may begin from x86 assembly.
+
+First we abstract away locations, registers, memory,
+so that we can write something like this:
+#+BEGIN_EXAMPLE
+mov dword ptr [var_1], [var_2]
+#+END_EXAMPLE
+
+Macro Assembler (MASM)?
+TASM, NASM, what?
+
+There does not exist a computer with infinite memory.
+Why do we pretend, with garbage collection, that the computer had infinite memory?
+Because it simplifies most problems?
+
+What is the problem with these:
+High-Level Assembly,
+typed assembly languages such as TALx86 \cite{crary1999talx86}[fn::<2019-11-04> https://www.cis.upenn.edu/~stevez/papers/MCGG99.pdf],
+LLVM IR,
+MSIL,
+JVM bytecodes?
+
+We can add a type system to assembly language to enforce constraints like these:
+- "Add-integer" takes two integers.
+- "Add-pointer" takes a pointer of alignment N and an integer that is an integral multiple of N.
+- It is illegal to add two pointers.
+
+For example, a type may be:
+- =Integer N= where N is 1, 2, 4, or 8
+- =Pointer A= where A is the alignment (1, 2, 4, or 8)
+
+One difficulty is that the same register may sometimes contain an integer and sometimes contain a pointer.
+
+We can "solve" that with Static Single Assignment (SSA) Form and automatic register allocation.
+
+But perhaps the bigger issue is to abstract away the difference between processors;
+why should we care if it is an Intel processor, a Motorola processor, a Symbolics Lisp machine, or something else?
+
+Even though the machine does not know about subroutines,
+we organize our programs into subroutines;
+we find it more convenient to work with subroutines than to work with instructions.
+We feel that the instructions are too finely-grained, unnecessarily detailed.
