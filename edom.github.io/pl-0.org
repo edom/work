@@ -2,7 +2,7 @@
 #+DATE: 2019-02-07 00:00:00 +0700
 * Milestone planning?
 Version, milestone, man-day
-** 0
+
 - 0.0.0: Capture essential complexity
   - Type definitions
   - Use-case expression language / feature expression language, something like ML?
@@ -18,10 +18,207 @@ Version, milestone, man-day
   - Query cost guesser
 - 0.4.0
   - Google OAuth.
-** Unplanned
-Read-only storage
 
-Writable storage
+Unplanned:
+
+- Read-only storage
+- Writable storage
+* The lazy implementor's language
+PL-0 (not to be confused with PL/0[fn::<2019-11-18> https://en.wikipedia.org/wiki/PL/0]) is a lazy implementor's programming language.
+
+Our motto is "we only do easy things".
+
+Closures, continuations, proper tail calls, and type checking are hard to implement, so we don't implement them.
+
+Parsing is hard, so we use recursive descent parsing with Lisp-like syntax.
+
+Writing a compiler is hard, so we write an interpreter,
+but it's still hard, so we write a stack machine.
+
+Rewriting or lambda-calculus substitution is hard, so we use stack machine, concatenative language, and postfix notation, like Forth?
+
+Garbage collection is hard, so we don't have it.
+
+I think we will eventually end up reimplementing Forth[fn::<2019-11-18> https://en.wikipedia.org/wiki/Forth_(programming_language)] or PostScript
+or something very similar to them?
+
+#+BEGIN_EXAMPLE
+% A B C muladd -> A*B+C
+
+quote muladd { mul add } def
+
+define (muladd x y z)
+  x y mul z add
+end
+#+END_EXAMPLE
+
+Curly braces delimit a token list?
+
+Macros are ordinary functions.
+
+=quote= reads the token right after the token currently being interpreted but does not execute it.
+
+#+BEGIN_EXAMPLE
+1 2 quote add -> 1 2 add
+1 2 add -> 3
+#+END_EXAMPLE
+
+Type information can be attached to value (Scheme), variable (C++), or function (Assembly).
+If we want function polymorphism (Scheme display), then we must choose to attach type information at either value or variable.
+
+Why choose?
+Why not attach type information everywhere (to values, variables, and functions)?
+
+If we want =read= to produce a value (not a type-value pair), then values must carry type information.
+
+In mathematics, it is natural to overload functions (such as +). Otherwise we would have +N, +Q, +R, etc. which is ugly.
+Do we care about what something is, or about what can we do with it?
+
+PostScript enables the programmer to choose between early binding and late binding.
+* Prior arts
+Should we just use the Mozart/Oz language?[fn::<2019-11-15> https://www.ercim.eu/publication/Ercim_News/enw36/haridi.html]
+ [fn::<2019-11-15> http://dream.inf.ed.ac.uk/computing/installed/mozart/doc/tutorial/index.html]
+ [fn::<2019-11-15> https://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf]
+
+The Racket language?
+* Syntax and parsing
+** Reversibility, information-preservation
+I insist that the parser be reversible, because I want traceability and debuggability.
+
+Each stage must be reversible:
+it must either be a bijection or preserve enough information from the previous stage.
+
+The first stage is character + location (defined later).
+
+The next stage is tokenization.
+
+A token has type and a list of characters.
+
+The next stage is concrete syntax tree (CST).
+
+The concrete syntax tree is required for formatting and refactoring, because those activities should preserve comments.
+
+In Lisp syntax, a token coincides with an AST node.
+
+The next stage is abstract syntax tree.
+
+An AST node has a "main" CST node.
+
+An AST node has a "preceding-whites" (a list of whitespace CST nodes that precede that AST node)
+so that the AST node can be turned back into CST node (and so on until we reach the original substring that constitutes the CST node).
+
+The parser is a recursive descent parser because I don't know how to parse.
+** Locations
+A /location/ is a tuple of path, line (0-based), column (0-based), byte-offset.
+This is like Racket srcloc.
+
+=current-location= parameter
+
+=read= from current location
+
+=raise-parse-error= at current location
+** Macro, reflection, reification, quoting
+The language should be a model of itself.
+
+The language should be able to describe itself.
+
+Does that cause a paradox?
+** Annotations: user-defined metadata attached to concrete syntax tree nodes
+(Is this a good idea?)
+
+We add these expression syntax rules:
+
+- If M is an expression and E is an expression, then =E : M= (read: data E annotated with metadata M) is an /annotated expression/.
+  - Alternative syntax: =E : M= can also be written =meta M E=.
+
+This generalizes type systems.
+With type systems, you annotate an expression with a type expression.
+With general annotations, you annotate an expression with another expression (some of which are type expressions).
+
+We assume that the outermost metadata update wins:
+
+- meta M (meta N E) = meta M E
+
+We add metadata extraction function symbol =meta-of=.
+
+We add these beta-reduction rules:
+
+- reduce (meta M E) = reduce E
+- reduce (meta-of (meta M E)) = reduce M
+- reduce (meta-of E) = #<empty-record> (for expressions without metadata)
+
+This is like Java/C# annotation but more principled?
+
+Annotations are not types.
+
+This is an example of type annotation that our annotation above can't handle: =\ (x : T) -> y=,
+because =x= is not an expression.
+* Pure expression evaluation
+The meaning of a /pure expression/ does not depend its evaluation order (reduction strategy).
+
+But, what about \( (\lambda x y . x) ~ 2 ~ \frac{1}{0} \)?
+Is that expression pure?
+It reduces to 2 in normal-order, but it reduces to bottom in applicative-order.
+The answer is: we should not even talk about reducing that expression because it is /ill-typed/:
+the type of division should have been =Number → Number → Maybe Number=
+because division has a side-effect:
+exceptions and non-terminations are side-effects; /bottom is a side-effect/.
+Therefore a division expression is not a pure expression.
+* Object-property system
+An object has zero or more properties.
+Mutable.
+* GUI programming
+Listeners eventually produce spaghetti code in big GUI applications;
+the interaction logic is all over the place.
+
+What is prone to modification in a GUI application?
+The appearance?
+The behavior?
+
+Explicit actions: undo-redo requires that actions be reified.
+
+Explicit actions ameliorate listeners?
+
+Event buses reduce the number of connections (compared to star / direct-point-to-point connection) from quadratic to linear.
+
+Functional reactive programming (FRP) does not obviate explicit actions for undo-redo.
+* Idea: Explicit evaluation
+The meaning of =(define X Y)= is:
+If the prefix of the /current expression/ matches =X=, then replace that prefix with =Y=.
+
+The expression =(normalize E)= reduces to the value that results from beta-normalizing the expression =E=.
+
+The expression =(apply-normal (lambda Param Body) Arg)= reduces to Body with each bound occurrence of Param replaced with Arg.
+(Should Param/Arg be shared or not?)
+
+The expression =(apply-strict (lambda Param Body) Arg)= evaluates Arg to Val and reduces to Body with each bound occurrence of Param replaced with Val.
+
+Should the evaluation strategy be attached to apply or lambda or both?
+
+If it is both, then should the outer annotation override the inner annotation, or the other way around?
+
+#+BEGIN_EXAMPLE
+(apply-normal (lambda Param Body) Arg)
+;; or
+(apply (lambda-normal Param Body) Arg)
+
+;; Here apply's strategy overrides lambda's strategy.
+(apply-strict (lambda-normal Param Body) Arg)
+
+;; The default strategy should be adjustable,
+;; but should the default-strategy-setting be lexically scoped or dynamically scoped?
+(apply (lambda Param Body) Arg)
+#+END_EXAMPLE
+
+The current expression is initially =(main)=.
+#+BEGIN_EXAMPLE
+;; rewrite
+(define (f x y) (+ x y))
+(define (g x y) (normalize (+ x y)))
+(define (h x y) (normalize-head (+ x y)))
+#+END_EXAMPLE
+
+Alternative: explicit =delay= and =force=.
 * Designing the implementation
 The implementation is probably an interpreter.
 ** Implementation requirements
@@ -323,28 +520,6 @@ Each global variable should declare how to initialize and snapshot itself.
 * Threading
 The programmer should be able to choose between cooperative and preemptive multithreading,
 but the default should be preemptive.
-* Parsing
-Each stage must be reversible (must preserve enough information from the previous stage).
-
-The first stage is character + file path + line + column + byte offset.
-
-The next stage is tokenization.
-
-A token has type and a list of characters.
-
-The next stage is concrete syntax tree (CST).
-
-The concrete syntax tree is required for formatting and refactoring, because those activities should preserve comments.
-
-In Lisp syntax, a CST node is a token?
-They coincide?
-
-The next stage is abstract syntax tree.
-
-An AST node has a "main" CST node.
-
-An AST node has a "preceding-whites" (a list of whitespace CST nodes that precede that AST node)
-so that the AST node can be turned back into CST node (and so on until we reach the original substring that constitutes the CST node).
 * Binding
 The syntax tree is enriched with location and binding information.
 
@@ -372,6 +547,12 @@ Scheme's magic ellipsis comes from Kohlbecker & Wand 1987 \cite{kohlbecker1987ma
  [fn::<2019-11-04> https://www.cs.indiana.edu/ftp/techreports/TR206.pdf]
  [fn::<2019-11-04> backup link ftp://jcmc.indiana.edu/pub/techreports/TR206.pdf].
 \cite{culpepper2007advanced}[fn::<2019-11-04> https://thomas.gilray.org/scheme-2019/culpepper.pdf].
+
+Scheme macros are call-by-name;
+Scheme procedures are call-by-value.
+
+Perhaps macros should be replaced with explicit evaluation;
+perhaps the language should enable the programmer to choose evaluation strategies such as normal-order and applicative-order.
 * Namespaces
 I want namespaces to be first-class, that is, a value,
 that can be manipulated like other values, that can be named by =define=,
@@ -567,7 +748,7 @@ Our goals:
 - Generate a Java program and a PostgreSQL database implementing the specification.
 
 What is XL[fn::https://en.wikipedia.org/wiki/XL_(programming_language)]?
-* Core language
+* Kernel/core language
 The core language is intended for machines.
 Humans should use the convenient language.
 
@@ -686,14 +867,6 @@ Questionable types.
 =function(Map)= finite function expression, with domain and codomain inferred to be the smallest possible that encompasses the mapping.
 Example: =function([1-a, 2-b, 3-c])=.
 * Concepts?
-** Then, design the concrete syntax
-The concrete syntax of \( \Gamma \vdash A \) is \( with(\Gamma,A) \).
-** Macro, reflection, reification, quoting
-The language should be a model of itself.
-
-The language should be able to describe itself.
-
-Does that cause a paradox?
 ** What program, execution, and termination mean in declarative paradigms
 
 In functional paradigm:
@@ -777,35 +950,6 @@ If the label doesn't contain funny characters, it doesn't have to be quoted.
 For example, ={"a":1;}= and ={a:1;}= are the same thing.
 
 Should we generalize label to expression?
-** Annotations: user-defined metadata attached to concrete syntax tree nodes
-
-We add these expression syntax rules:
-
-- If M is an expression and E is an expression, then =E : M= (read: data E annotated with metadata M) is an /annotated expression/.
-  - Alternative syntax: =E : M= can also be written =meta M E=.
-
-This generalizes type systems.
-With type systems, you annotate an expression with a type expression.
-With general annotations, you annotate an expression with another expression (some of which are type expressions).
-
-We assume that the outermost metadata update wins:
-
-- meta M (meta N E) = meta M E
-
-We add metadata extraction function symbol =meta-of=.
-
-We add these beta-reduction rules:
-
-- reduce (meta M E) = reduce E
-- reduce (meta-of (meta M E)) = reduce M
-- reduce (meta-of E) = #<empty-record> (for expressions without metadata)
-
-This is like Java/C# annotation but more principled?
-
-*** Annotation is not type
-
-This is an example of type annotation that our annotation above can't handle: =\ (x : T) -> y=,
-because =x= is not an expression.
 ** Modeling all data
 
 *** Hypothesis: data = ADTs + records + row polymorphism
@@ -1965,9 +2109,14 @@ How do we do that?
 ** Hard things: generating Java programs from specification
 
 * A business-oriented variant
+Prior arts:
+Ur/Web, Opa language.
+
 Important features:
 - website or web application user interface
 - SQL join across several PostgreSQL instances
+- check that SQL table exists
+- check that page URL exists
 
 HTTP, HTML, JavaScript, AJAX, client-server, and network connections are accidental complexity.
 What is essential is that the user wants to do something quickly.
@@ -1982,6 +2131,32 @@ The main task of the language user is to formalize the ontology implied by the m
 
 strcpy does what we want: it copies strings, but that is not all: it may overwrite a memory region it should not touch.
 
+translate.rkt: Translator state opaque struct.
+Exports:
+- (var-set! state name value) -> void
+- (var-get state name) -> value
+
+An interaction is either a command or a query.
+
+#+BEGIN_EXAMPLE
+(query q1
+  (SELECT [d.a d.b d.c e.y e.z] FROM [JOIN d e] WHERE [= d.a e.x])
+)
+(page
+  (url "/foo")
+  (title "FOO")
+  (body
+    q1
+  ))
+#+END_EXAMPLE
+
+TODO: Queries are shown with automatic AJAX pagination and editing (update, delete, insert)?
+
+Requirement: accounting/tracing/logging of database modifications.
+
+Thus, a query has to be mapped to a URL.
+
+If ID is not given, then the ID is the URL.
 * Bottom-up design?
 ** Example
 - Example of bottom-up language design and how each level reduces cognitive load:
