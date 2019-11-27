@@ -1,5 +1,31 @@
 #+TITLE: Sketch of PL-0 programming language
 #+DATE: 2019-02-07 00:00:00 +0700
+* <2019-11-27> Thought
+It is easy to process a byte list into a token list.
+
+The question is:
+How should we interpret that token list?
+How should we ascribe meaning to that token list?
+How should we map tokens to values?
+
+The lowest layer is more like a library for manipulating tokens than a language.
+
+A stream of bytes is translated into a stream of tokens.
+A token is either /white/ or /black/.
+A token has /location/.
+A token list has /location/.
+
+I want to use the same name "append" for appending lists and appending strings;
+I don't want "list-append" and "string-append".
+We can implement this with types or namespaces.
+I'm fine with explicitly-prefixed namespaces like this:
+#+BEGIN_EXAMPLE
+(define (example)
+  (import list)
+  (import string)
+  (list:append '(1) '(2))
+  (string:append "a" "b"))
+#+END_EXAMPLE
 * The goals
 PL-0 programs should be translatable to native code.
 
@@ -122,6 +148,19 @@ In mathematics, it is natural to overload functions (such as +). Otherwise we wo
 Do we care about what something is, or about what can we do with it?
 
 PostScript enables the programmer to choose between early binding and late binding.
+* <2019-11-28> The problem is not binding; the problem is closures
+If we don't have closures, then it does not matter whether we use static (lexical) or dynamic binding; the result will be the same.
+
+The problem is not static vs dynamic binding.
+The problem is: Should we have closures or not?
+
+Why do we bother having closures if programmers can do explicit closure conversion?
+For example:
+#+BEGIN_EXAMPLE
+f x = \ y -> x + y
+-- gets closure-converted to
+f x = (\ x y -> x + y) x
+#+END_EXAMPLE
 * Syntax and parsing
 ** Reversibility, information-preservation
 I insist that the parser be reversible, because I want traceability and debuggability.

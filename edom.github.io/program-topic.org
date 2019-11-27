@@ -1,0 +1,684 @@
+#+TITLE: Topics in programming
+#+DATE: 2019-11-28 00:00:00 +0700
+* A plan of the table of contents
+- Basic concepts. On the word [[file:program.html]["program"]] and its variants.
+  - Programmers [[file:program-model.html][model]] Programmees.
+    Programmee is usually Computer.
+    Programmers also model reality. See also [[file:model.html]].
+    Programmers /restate/ or /translate/ a model of reality to a model of programmee.
+    Programmers create a model of a model: that is, a programmer creates the programmee's model of the programmer's model of reality.
+  - Programmee [[file:compute.html][computes]] Function.
+    - Theory of computation: What can be computed?
+      - Theory of computational complexity: How fast can they be computed?
+  - Major programmability boosts
+    - Code-As-Data, Stored-Program Computers.
+    - Code-as-data and Lisp, in hindsight?
+    - Integrated circuits and miniaturization: Smaller, cheaper, and faster; Moore's observation
+    - Time-sharing, multi-processing, concurrency, parallelism.
+    - Personal Computer:
+      People used to wait for their turn to use computers.
+      Now everyone has computers at home.
+- Programming languages
+  - [[file:parse.html][On parsing formal languages]]
+  - [[file:proglang.html][Programming languages]]? (A mess.)
+    - [[file:pl-quality.html][On programming language quality]]
+  - I am thinking of sketching some programming languages.
+    One is designed top-down (from math down to reality).
+    Another one is designed bottom-up (from reality up to math).
+    It is possible that the outcome is neither of them, but a third middle-way language.
+    - [[file:pl-0.html][Sketch of PL-0 programming language]]
+      - [[file:group.html][On grouping things]]: How should we group functions?
+      - [[file:program-text.html][On models of text in programming]]
+    - [[file:pl-1.html][Sketch of PL-1 programming language]]
+    - [[file:software-system-model.html][Towards a comprehensive software system modeling language]]
+  - [[file:semantics.html][Semantics Research Group]] (of programming languages) (needs rewrite, should be merged)
+- [[file:program-draft.html][Programming?]]
+  - Dead ends, futile endeavors
+    - [[file:software-science.html][Towards software science]]
+    - [[file:software.html][Towards a philosophy of software]]
+    - [[file:softeng.html][Towards software engineering]]
+    - <2019-11-07> I have tried and failed to define "software".
+      I will write "program" instead.
+  - Needs rewrite
+    - [[file:math.html][Mathematics]]
+    - [[file:compsci.html][Computer science]]
+    - [[file:modeldata.html][Modeling all data]]
+- Programming big systems, helping machines help us
+- [[file:secure.html][On the word "secure"]] (see also [[file:power.html]]).
+- Borderline crackpot territory
+  - [[file:intelligence.html][On intelligence]]
+    - [[file:endo.html][The endofunction model of worlds and agents, and its philosophical implications]]
+    - Is cybernetics/practopoiesis the next step in AI after deep neural networks?[fn::<2019-11-04> http://www.danko-nikolic.com/practopoiesis/]
+      \cite{nikolic2017deep}[fn::<2019-11-04> https://link.springer.com/content/pdf/10.1007%2Fs11633-017-1093-8.pdf]
+      Is practopoiesis the key to strong AI?
+      Is it related to "Weight-agnostic neural networks"[fn::<2019-11-06> https://twitter.com/hardmaru/status/1138600152048910336]?
+  - Morality, ethics, politics
+    - Servers, centralization, oppression, inequality
+    - Insanely Generous Investors and money laundering?
+    - Programmers get paid insane salaries, but companies still have bigger profits.
+      That means companies are extracting even bigger values.
+
+On programming by examples.
+Erik Meijer has an interesting presentation about machine learning, that is, programming computers by examples.
+Can we create a programming language in which programming by examples is elegantly expressible?
+
+If it is impossible to invent better primitives,
+then the only way to make programming easier is to make computers program themselves more.
+
+What is the significance of the Ballerina programming language[fn::<2019-11-27> https://blog.ballerina.io/posts/ballerina-a-cloud-native-programming-language/]?
+* <2019-11-27> Some hints from Norvig's PAIP
+Some of the hints from Norvig's PAIP[fn::https://norvig.com/Lisp-retro.html] is still relevant:
+- "#8 Whenever you develop a complex data structure, develop a corresponding consistency checker. (p. 90)"
+- "#22 We can write a compiler as a set of macros. (p. 277)"
+- "#28 Prolog is similar to Lisp on the main points. (p. 381)"
+I can attest to this. I wrote Prolog interpreters and Racket macros, and they feel quite similar; Prolog clauses and Racket match clauses feel similar.
+- "#52 A word to the wise: don't get carried away with macros. (p. 855)" Indeed, don't get carried away with anything.
+* <2019-11-27> On learning, approximation, and machine learning
+Approximation error \( \sum_{x \in D} d(f(x),\hat{f}(x)) \)
+where \(d\) is the discrete metric[fn::<2019-11-27> https://en.wikipedia.org/wiki/Metric_(mathematics)#Examples][fn::<2019-11-27> https://en.wikipedia.org/wiki/Discrete_space]
+(equality comparison): \( d(x,y) = 0 \) iff \( x = y \) and \( d(x,y) = 1 \) iff \( x \neq y \).
+
+Connectionist machine learning is the art of giving machines feelings,
+because feelings can hardly be explained by language,
+which is used for thinking and not feeling.
+
+\( I_D(x \mapsto d(f(x),\hat{f}(x))) \).
+
+\( d \) is a distance function.
+
+Is there machine learning on finite fields?
+Boolean functions?
+Unit interval?
+
+\( f : D \to C \).
+
+\( f : \Real^\infty \to \Real \)?
+
+\( f : A^\infty \to A \)?
+
+\( f : A^n \to A \) where \( A \) is a finite field?
+
+Define learning.
+What does it mean to learn something?
+What does it mean to learn a function?
+
+How do we measure generalizability?
+
+Machine learning is about finding the shape of the approximating function?
+* <2019-11-27> On adaptive systems and boredom
+The law of adaptive systems:
+"Every adaptive system converges to a state in which all kind of stimulation ceases."
+ [fn::<2019-11-27> https://en.wikipedia.org/wiki/Adaptive_system]
+
+Corollary: All jobs eventually become boring.
+
+If something excites us, we will eventually get used to it.
+
+But how come we don't get bored of sex?
+Do we?
+* <2019-11-07> Digression: Modeling is common to physics and programming
+Physics is about modeling reality.
+
+Programming is about modeling computers and reality.
+* <2019-11-07> Distinguishing between modules, namespaces, and compilation units
+A namespace is a mapping.
+
+A compilation unit is the smallest thing that can be compiled.
+
+They are often conflated into a module, in the sense that a module
+often serves multiple functions like separate namespace, separate compilation, and dependency management,
+but perhaps it is time that we distinguish between them.
+
+Racket units are namespaces (in my sense) and Racket namespaces are namespaces (in my sense) too.
+Confusing.
+* Make machine work more?
+These old contents should be rewritten.
+** Improve machine intelligence
+- Find how to make machine understand causation, in principle; find the theory
+  - See also: causation in [[file:program.html]]
+  - How do we make a machine that understands causation?
+    - "Causal Cognition in Human and Nonhuman Animals: A Comparative, Critical Review", 2007[fn::http://derekcpenn.com/Penn_2007-Causal_Cognition_in_Human_and_Nonhuman_Animals.pdf]
+    - "Causal Reasoning in Rats", 2006[fn::https://www.psych.uni-goettingen.de/de/cognition/publikationen-dateien-waldmann/2006_science.pdf]
+    - "Causal knowledge in animals", 1995
+    - Understand reality, the world, the Universe
+      - [[file:philo.html][Philosophy]]: armchair philosophy; should be rewritten to focus on causation
+        - [[file:mind.html][Mind]]: philosophy of mind
+      - [[file:nature.html][Nature Research Group]]: physics and its philosophy
+- Demonstrate that a machine understands causation
+  - How do we know whether X understands causation?
+** Multiply software engineer productivity by 20?
+- [[file:softeng.html][Software engineering]]: come up with a science to underlie software engineering
+  - [[file:increase.html][Increase software engineer productivity?]]
+    - Measure programmer productivity
+      - [[file:economics.html][Understand economics]], especially productivity
+- [[file:prolog.html][Use the Prolog programming language]]
+  - Make Prolog more suitable for programming in the large
+    - Make a module system for Prolog
+  - [[file:enterprise.html][Use Prolog for model-driven software engineering]]
+  - Make an untyped Haskell/ML-like language in Prolog
+  - Seamlessly interoperate programming languages
+    [fn::I desire more than Will Crichton; I do not want to add annotations to the original code http://willcrichton.net/notes/the-coming-age-of-the-polyglot-programmer/]
+    - 1996 \cite{barrett1996automated}
+- [[file:opensrc.html][Making contributable open-source projects]]
+  - [[file:community.html][Building online communities]]
+
+* <2019-08-17> On programs and software
+I find it easier to define "program" than to define "software".
+
+Perhaps we should focus on /programs/ instead of software.
+We can talk about computer programs without talking about software.
+After all, Tukey 1958 intended "software" to mean computer programs.
+* "Computer science" should be renamed
+<2019-08-11>
+
+Our "computer science" label has misled people into thinking that we can fix their computers.
+
+Although the first computer scientists did study computers,
+computer scientists now don't study computers anymore because software has grown too big;
+now computer scientists study mostly software,
+and the hardware is supposed to be studied by /computer engineers/.
+
+A honestly-named computer-science student should study both hardware and software
+because a computer has a hardware part and a software part,
+But, in fact, a computer-science student studies much more software than hardware,
+and will often work with software while taking hardware for granted in their jobs.
+
+Perhaps universities should also merge law departments and computer science departments into /software departments/.
+
+On second thought, perhaps we should not call ourselves "software scientists"
+because we don't even know what software is.
+Perhaps we should just call ourselves "computer programmers".
+* Software research
+This should be moved to the "Programming" section above.
+** <2019-08-27> A direction for software engineering
+Two things have to be addressed in software engineering:
+the lack of /science/, and the lack of /tools/.
+
+/Software engineering lacks an underlying branch of science/.
+Remember that engineering is an application of science
+
+/Software engineering lacks tools./
+Building an enterprise application with Java is like building a 20-story building with only shovel.
+
+One of those tools is a /whole-system programming language/
+with support for /persistent states/ (that outlive one run of the application).
+Every time the program starts, it has to /initialize/ all persistent states that are not already initialized.
+A software system is not only the program, but also the database, the files, the documentation, etc.
+Current programming languages focus too much on the application and not on the /whole system/.
+We need a language that can also capture the persistent states.
+** <2019-08-23> Software engineers need better tools
+We want to build a skyscraper, but all we have is a spade.
+
+Java is too low level for making business applications.
+** Software structural engineering
+<2019-08-15>
+
+Here we transplant /civil structural engineering/ to /software structural engineering/ by analogy.
+
+Both civil structural engineers and software structural engineers do /capacity planning/ and /load testing/.
+
+Civil structural engineers deal with the /strength of materials/, whereas software structural engineers deal with the /emptying rate of queues/.
+
+The science of civil structural engineering is based on /continuum mechanics/,
+whereas the science of software structural engineering is based on /queuing theory/.
+
+Material breakage is analogous to /full queue/.
+
+When a civil structure fails, the /building/ collapses.
+When a software structure fails, the /system performance/ collapses: latency skyrockets and throughput drops.
+
+Structural engineers design structures to /withstand probable adversities/ according to cost-benefit analysis.
+Civil structural engineers design structures to withstand /heat, wind, earthquakes, etc./
+Software structural engineers design systems to withstand /load spikes, network disruptions, disk failures, etc./
+If we are building a skyscraper in an earthquake-prone region, we must seriously consider earthquakes.
+If we are building a system for 1,000,000 concurrent users, we must seriously consider traffic spikes, network disruptions, and other adversities.
+If we are merely building a system with 10,000 lines of code for 10 users,
+and it will stay that way for 100 years, then it is a waste of resources to bake in a grandiose architecture.
+If you need a shack, and it will satisfy you for 1,000 years, then perhaps don't build a skyscraper.
+** <2019-08-20> On writing numerical algorithms for humans, and on the semantic shift of the word "computer"
+We can assume that humans implement these primitive operations:
+addition, subtraction, multiplication, exponentiation, and division, for small numbers below ten, rounding, comparison.
+
+Any average person could execute such an algorithm,
+because it is /unambiguous/ and is built on common primitive operations.
+
+All those primitive operations also happens to be implementable in electronic computers.
+That is, electronic computers can do some human operations.
+** <2019-09-04> On defining languages in other languages
+There are two languages: the /host/ language and the /guest/ language.
+In linguistics, they are called the /meta/-language[fn::https://en.wikipedia.org/wiki/Metalanguage] and the /object/ language, respectively.
+For example, when we teach German to someone who only knows English,
+we use English as the host language and German as the guest language.
+
+We can borrow the host language's concrete syntax,
+so that we can reuse =read-syntax=, but specify different semantics, with an interpretation function.
+
+We can borrow the host language's semantics.
+* Use computers
+- [[file:usecom.html][Use computers]]
+  - Leo Editor[fn::http://leoeditor.com]: personal information manager + integrated development environment;
+    via akkartik.name[fn::http://akkartik.name/post/literate-programming]
+** <2019-08-20> Howto: Send gmail as namesilo email
+namesilo: "Please note that we do not offer a service for sending email."[fn::https://www.namesilo.com/Support/What-Email-Service-is-right-for-me%3F]
+Follow these instructions to set up gmail[fn::https://www.namesilo.com/Support/Gmail-Instructions-for-Reply~to-Using-Custom-Domain].
+
+There are two SMTP servers.
+Receiving and sending use /different/ SMTP servers.
+Receiving email uses Emailowl SMTP, /but/ sending email uses Gmail SMTP.
+Set up Gmail "app password".
+* Make a system for publishing this website
+- [[file:publish.html][Make a system for publishing this website]]
+  - [[file:parse.html][Find an elegant parsing method]]
+    - I am looking for the best technique for specifying formal grammars, parsing formal languages, and unparsing formal languages.
+      Parsing is the common thing between programming language and publishing system, and I want both.
+    - [[file:division.html][Generalizing division]]: Brzozowski quotient and set division
+  - Write a Racket parser or Prolog DCG for a declarative subset of LaTeX
+  - Write a Racket parser or Prolog DCG for Org Mode
+  - Write a Racket/Prolog program for generating sitemap.xml
+  - (I moved from Prolog to Racket.)
+* On the P vs NP problem?
+- [[file:pnptry.html][On the P vs NP problem]]
+  - Computing Research Group: define computation
+    - [[file:logic.html][Logic]]?
+      Should we rewrite this article from theory-oriented to programming-oriented?
+* <2019-11-27> DrRacket software archeology
+What can DrRacket browser do? Can it render some static HTML?
+
+Ask in the mailing list?
+
+How does DrRacket find the Scribble documentation URL for a syntax-object?
+
+The entry point is in drracket/drracket.rkt.
+* Politics, rants, and complaints
+** <2019-07-06> Network Address Translation contributes to oppression
+NAT is unholy: It contributes to the oppression of dissidents and journalists, because it hampers peer-to-peer technologies.
+It precludes peer-to-peer truly distributed Web.
+But P2P (peer-to-peer) over NAT may be possible with UDP/TCP/ICMP hole-punching.
+Require an intermediary server only for initial handshake and then the connection is "handed over".
+
+Really no 3rd party in this NAT traversal?[fn::https://github.com/samyk/pwnat]
+
+** On Tesla autopilot crashes
+The question is:
+Where do they get their training data from?
+What are their samples?
+What does their training data represent?
+
+My guess is that they have few scenarios involving trailers, if any, in their training data,
+because it is rather rare to encounter trailers.
+** Bloated websites
+<2019-10-30> bigthink.com, your website eats up 1.5 GB RAM in Chromium.
+That is unacceptably excessive if your content is just some text and images.
+** <2018-09-19> GitHub is trying machine learning
+- I think GitHub should be like StackOverflow but for open-source codes/libraries/programs instead of questions.
+  Prevent people from reinventing the wheel.
+  Help people find things that already exist.
+  - <2018-09-19>
+    Google is doing a better job at what GitHub should be doing:
+    finding existing open-source software, that does something we want, that we can reuse.
+    It's a hard problem.
+- [[https://githubengineering.com/towards-natural-language-semantic-code-search/][Towards Natural Language Semantic Code Search | GitHub Engineering]]
+- I think StackOverflow can use machine learning to comprehend user query and recommend related questions/answers/information.
+** <2018-09-17> Open source Heroku/PaaS/dashboard alternative?
+We don't even know what such things are called.
+
+Google search "open source heroku clone".
+
+As usual, there are too many open source options.
+
+- From [[https://www.quora.com/What-are-some-open-source-Heroku-alternatives][What are some open source Heroku alternatives? - Quora]]:
+  Dokku, Flynn, Convox?, Globo.com Tsuru, Apache Stratos, cloudify-cosmo, lastbackend, CaptainDuckDuck.
+** <2019-08-20> Decentralized routing? Replacement to phone numbers?
+How to keep in touch with public key cryptography without phone numbers:
+
+Key idea: To use public key as mailbox address, and to use gossip to spread.
+
+Everyone has a key pair.
+
+Suppose Alice wants to send message M to Bob.
+
+Alice encrypts M with Bob's public key, into E.
+
+Alice broadcasts E to all her friends (a friend is a node she knows).
+
+Her friends broadcast E to all their friends who have not yet received E.
+
+(What?)
+
+What about mesh networks?
+How do we install routers at our neighbors' homes?
+** <2019-07-06> AWS RDS automated backup doesn't always work
+AWS RDS PostgreSQL point-in-time recovery (PITR) does not always work.
+
+The error message is only the phrase "Incompatible-restore", and no more information.
+What the hell?
+
+Always routinely test the restorability of your backups.
+
+In a company with 50 engineers,
+there is one potentially business-ending accident per year,
+like an accidental deletion of a production database.
+
+A good system is not designed by wishing that people are smart.
+Scripts have shitty user interfaces.
+Smart people make mistakes.
+
+Meanwhile, accidents do happen elsewhere in the cloud.
+ [fn::GOTO 2017 • Debugging Under Fire: Keep your Head when Systems have Lost their Mind • Bryan Cantrill https://www.youtube.com/watch?v=30jNsCVLpAE]
+Joyent, Heroku, AWS, Gitlab.
+Accidental reboots.
+Accidental table droppings.
+Other costly software accidents are
+Ariane-5[fn::https://iansommerville.com/software-engineering-book/case-studies/ariane5/]
+and Therac-25[fn::https://en.wikipedia.org/wiki/Therac-25] (but is it really a software accident?).
+It's just a matter time before there is a software accident as massive as Chernobyl.
+
+I think most software accidents can be attributed to the hubris of some humans,
+be it of managers, engineers, or operators, or a combination of them.
+* Databases? Designing databases?
+Datafun[fn::https://www.youtube.com/watch?v=gC295d3V9gE]
+ [fn::http://www.rntz.net/datafun/]
+
+What Datomic brings to businesses[fn::https://medium.com/@val.vvalval/what-datomic-brings-to-businesses-e2238a568e1c]:
+Interesting: inherent versioning, internally log-structured, internally append-only.
+My only objection: database should be a library, not a separate operating system process.
+
+What[fn::https://augustl.com/blog/2018/datomic_look_at_all_the_things_i_am_not_doing/]
+
+Database design boils down to these questions:
+- how do we store (arrange, lay out) data on disk?
+- how do we make the database replicate automatically just by adding a node to a cluster?
+  etcd?
+
+Why do we store data?
+Because we will need it later.
+- accounting
+- As a person, I don't need convenience store receipts. But a company needs them for accounting.
+
+The stored data has to be findable/discoverable/rediscoverable.
+
+* Models, meta-models, and ontologies?
+2006 article "On Relationships among Models, Meta Models and Ontologies" http://dsmforum.org/events/DSM06/Papers/14-saeki.pdf
+
+2007 presentation "Models versus Ontologies - What's the Difference and where does it Matter?"
+http://www.cs.bham.ac.uk/~bxb/news/Colin.pdf
+
+2006 article "On the Relationship of Ontologies and Models"
+https://pdfs.semanticscholar.org/07d3/0822dd03a46bf25131baa0b72007df6d0e27.pdf
+
+2004 article "How Models Are Used to Represent Reality"
+http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.433.860&rep=rep1&type=pdf
+
+* Causal inference and machine learning?
+- Judea Pearl 2018 article "Theoretical Impediments to Machine Learning With Seven Sparks from the Causal Revolution" summarizes
+seven tasks that causal modeling can do but current machine learning can't.
+https://arxiv.org/abs/1801.04016
+
+It would be interesting to combine Schmidhuber et al.'s algorithmic probability/universal intelligence and Pearl et al.'s causal modeling.
+* Can we make memory a compressible resource?
+Yes, by indirection, but it requires change in the programming language level, and not in the operating system level.
+
+#+BEGIN_EXAMPLE
+struct mblk {
+    // Assume 4-byte alignment; bitwise-and by -4 before dereferencing the pointer.
+    uintptr_t ptr_and_flags; // pointer, GC pin flag, GC mark flag
+};
+
+// Rewrite
+void* ptr = malloc(size);
+// to
+mblk_id ptr = machine_alloc(&state, size);
+
+// Rewrite
+T* ptr;
+T val;
+val = *(ptr+offset);
+*(ptr+offset) = val;
+// to
+mblk_id ptr;
+T val;
+machine_read(&state, ptr, offset*sizeof(T), &val);
+machine_write(&state, ptr, offset*sizeof(T), &val);
+#+END_EXAMPLE
+
+Then, forbid casting between pointers and integers.
+Or, auto-pin such cast pointers.
+* Programming?
+** Intelligence
+- Doing the last work we will ever need
+  - Making machines understand language
+  - How do we make machines curious?
+    How do we make them get bored?
+    - We know that intelligent people get bored quickly.
+      - Why shouldn't intelligent machines get bored?
+          - About intelligence research
+            - How can I become an AI researcher?
+            - How are others' works progressing?
+          - Approximating functions
+            - Are all approximations truncation?
+              Are there other approximation schemes beside series truncation?
+              Are probabilistic approximations such as Monte Carlo approximations also truncation?
+** latency, throughput, and port usage information for instructions on recent intel microarchitectures
+http://uops.info/
+** Java
+- http://tech.jonathangardner.net/wiki/Why_Java_Sucks#Speaking_of_the_JVM...
+- [[http://www.jsweet.org/][JSweet: a transpiler to write JavaScript programs in Java]]
+- [[http://sparkjava.com/documentation.html][Spark Framework: An expressive web framework for Kotlin and Java - Documentation]]
+- [[https://github.com/webfolderio/ui4j][webfolderio/ui4j: Web Automation for Java]]
+
+Compile a Java class to an ELF native binary?
+Use DWARF to help reconstruct stack trace?
+** CSS
+- CSS programming
+  - https://css-tricks.com/autoprefixer/
+  - [[https://css-tricks.com/snippets/css/a-guide-to-flexbox/][CSS flexbox cheat sheet]]
+** Setting up and running a X.509 certificate authority (for TLS, for example)
+Practically everyone uses OpenSSL.
+
+What servers do we have to setup?
+OCSP responder?
+*** What software are other certificate authorities using?
+*** Guides of varying qualities other have written
+**** Probably helpful
+- [[http://pages.cs.wisc.edu/~zmiller/ca-howto/][How To Setup a CA]], Ian Alderman and Zach Miller
+- [[https://www.wikihow.com/Be-Your-Own-Certificate-Authority][How to Be Your Own Certificate Authority (with Pictures) - wikiHow]]
+- [[https://ericlemes.com/2018/05/17/ssl-part-3/][SSL – part 3 – How to run your own Certificate Authority – Eric Lemes' Blog]]
+- [[https://workaround.org/certificate-authority/][How do I create my own Certificate Authority (CA) – workaround.org]]
+- [[https://www.davidpashley.com/articles/becoming-a-x-509-certificate-authority/][Becoming a X.509 Certificate Authority - David Pashley.comDavid Pashley.com]]
+- [[https://ssl.comodo.com/support/ssl-validation-faqs/what-standards-do-certification-authorities-have-to-comply-with.php][What standards do certification authorities have to comply with?]]
+**** What
+- [[https://www.esecurityplanet.com/network-security/how-to-run-your-own-certificate-authority.html][esecurityplanet.com]]
+- [[https://fabrictestdocs.readthedocs.io/en/stable/Setup/ca-setup.html][Certificate Authority (CA) Setup — fabrictestdocs stable documentation]]
+*** Tools of varying qualities others have made
+- https://en.wikipedia.org/wiki/Certificate_authority#Software
+- OpenSSL
+- [[https://github.com/google/easypki][google/easypki: Creating a certificate authority the easy way]]
+- https://github.com/recursecenter/ca-tools, requires ruby
+** Making a search engine?
+- Stop words (word ignore list) deal with index construction, not about query comprehension.
+  The search may ignore stop words when crawling, but it should not ignore stop words in queries.
+
+  - [[https://en.wikipedia.org/wiki/Stop_words][WP:Stop words]]
+  - query comprehension
+
+    - Every word changes the intention/meaning of the query.
+    - We need contextual search engine.
+
+- Google: 1998, article, "The Anatomy of a Large-Scale Hypertextual Web Search Engine", Sergey Brin, Lawrence Page, [[http://ilpubs.stanford.edu:8090/361/1/1998-8.pdf][pdf]]
+- https://en.wikipedia.org/wiki/Search_engine_indexing
+- 2018, early access book draft, "Deep learning for search", [[https://www.manning.com/books/deep-learning-for-search][paywall]]
+
+  - I guess that one who masters this book should be able to build a Google.
+
+- [[https://wiki.apache.org/lucene-java/InformationRetrieval][The theory behind Apache Lucene]]
+- What is Apache Lucene?
+
+  - 2018-08-12
+
+    - "Apache Lucene is a high-performance, full-featured text search engine library." ([[http://lucene.apache.org/core/7_4_0/core/overview-summary.html#overview.description][source]])
+    - "Lucene is a text search engine API. Specifically, Lucene is the guts of a search engine - the hard stuff.
+      You write the easy stuff, the UI and the process of selecting and parsing your data files to pump them into the search engine, yourself."
+      ([[https://wiki.apache.org/lucene-java/FrontPage?action=show&redirect=FrontPageEN][source]])
+
+- How did people search libraries before computers were invented?
+
+  - https://en.wikipedia.org/wiki/Concordance_(publishing)
+  - https://en.wikipedia.org/wiki/Index_(publishing)
+  - https://en.wikipedia.org/wiki/Library_catalog
+
+- Is there a distributed search engine, something as good as Google, but not owned by a company?
+
+  - https://en.wikipedia.org/wiki/Distributed_search_engine
+  - https://fourweekmba.com/distributed-search-engines-vs-google/
+  - 2011, article, "'Sciencenet'---towards a global search and share engine for all scientific knowledge", [[https://academic.oup.com/bioinformatics/article/27/12/1734/255451][html]]
+  - 2004, article, "Web search engine based on DNS", [[https://arxiv.org/abs/cs/0405099][arxiv]]
+
+    - hierarchical distributed search engine
+
+  - 2013, patent, "Pervasive search architecture", [[https://patents.google.com/patent/US20180181603A1/en][patent]]
+  - YaCy, [[https://yacy.net/en/index.html][homepage]], [[https://github.com/yacy/yacy_search_server][GitHub]], [[https://en.wikipedia.org/wiki/YaCy][WP]]
+
+    - 2014, article, "Description of the YaCy Distributed Web Search Engine", [[https://www.esat.kuleuven.be/cosic/publications/article-2459.pdf][pdf]]
+
+      - What operation does the RWI (reverse word index) speed up?
+
+        - RWI is a hash table that maps a word to a URL.
+          An entry (k,v) in the RWI means that the word k is found in the document at the URL v.
+        - What is the relationship between RWI and inverted index?
+
+          - An RWI is an inverted index.
+          - [[https://en.wikipedia.org/wiki/Inverted_index][WP:Inverted index]]
+
+    - YaCy doesn't have DHT (distributed hash table) routing.
+      What does that mean?
+      Why would one want DHT routing?
+      Why would DHT imply routing?
+
+      - 2017, Michael Dufel, "Because DHT nodes don't store all the data, there needs to be a routing layer so that any node can locate the node that stores a particular key."
+        ([[https://medium.com/@michael.dufel_10220/distributed-hash-tables-and-why-they-are-better-than-blockchain-for-exchanging-health-records-d469534cc2a5][source]])
+
+    - [[https://lwn.net/Articles/469972/][2011 article, LWN]]
+    - [[https://www.pcmag.com/article2/0,2817,2397267,00.asp][2011 article, pcmag review]]
+    - Setting up YaCy
+
+      - Clone YaCy GitHub
+      - Prepare isolation
+
+        - =sudo adduser --system --group yacy=
+        - =sudo adduser $SUDO_USER yacy=, replace =$SUDO_USER= with your non-yacy user
+        - =sudo chown -R yacy:yacy=
+
+      - Build YaCy
+
+        - =sudo -u yacy -H /bin/bash= for shell
+        - In that shell:
+
+          - =ant clean all=
+
+      - Start YaCy
+
+        - Still in the yacy shell:
+
+          - =./startYACY.sh -f= to start YaCy in foreground
+
+      - Use YaCy
+
+        - Open [[http://localhost:8090/]]
+
+      - Can we make it easier to setup YaCy peer network?
+
+        - My scenario is typical:
+
+          - I'm behind two layers of NAT: my ISP's router, and my USB-tethered Android phone.
+          - Overlay network? VPN? Hosting on cloud?
+
+      - Should we host YaCy on GCP (Google Cloud Platform)?
+        It's cheap (USD 4.28 per month in us-west-1/us-central-1/us-east-1? Really? What about network data transfer costs into?).
+        It might be even cheaper (GCP free tier).
+
+        - Even cheaper: Run YaCy on GCE preemptible instances?
+        - alternative: DigitalOcean? https://www.digitalocean.com/pricing/
+
+      - https://www.reddit.com/r/privacy/comments/1gbtlf/can_someone_please_explain_how_yacy_and_seeks/
+
+    - Problems
+
+      - YaCy, Solr, who knows what, sometimes runs out of memory.
+        How come?
+      - Does YaCy deal with stemming and synonyms?
+        For example, compare the results for "using media in politics", "use media in politics", and "usage of media in politics".
+
+    - How does YaCy use Solr?
+
+      - http://www.yacy-websearch.net/wiki/index.php/Dev:Solr
+
+    - If YaCy can have an overlay network (if public YaCy nodes can function as forwarders), it can have more nodes.
+    - https://en.wikipedia.org/wiki/Dooble
+    - https://yacy.net/en/index.html
+
+      - How do I use it?
+      - What can I use it for?
+
+    - How many people use YaCy?
+    - There is [[https://yacy.net/en/Searchportal.html][online demo]].
+      It may fail.
+    - What are YaCy alternatives?
+      It is the most widely used?
+      What is the future?
+      How many developers?
+    - Are there text (non-video) tutorials?
+      There is a [[http://www.yacy-websearch.net/wiki/index.php/En:Start][wiki]].
+    - How does YaCy handle adversarial/malicious peers?
+
+      - https://yacy.net/en/Technology.html
+
+    - How do you make YaCy your personal search engine?
+      How do you tailor YaCy to your needs?
+    - Is YaCy the state of the art?
+    - How do Lucene, Solr, and Elasticsearch compare?
+
+      - 2016, [[https://www.quora.com/How-do-Lucene-Elasticsearch-and-Solr-compare][quora]]
+      - 2013, [[https://stackoverflow.com/questions/15704644/difference-between-solr-and-lucene][SO 15704644]]
+      - https://logz.io/blog/solr-vs-elasticsearch/
+      - http://solr-vs-elasticsearch.com/
+      - http://lucene.apache.org/solr/
+
+    - http://www.yacy-websearch.net/wiki/index.php/En:Features
+    - http://www.yacy-websearch.net/wiki/index.php/En:Use_cases
+    - How does Lucene work?
+    - How does Solr work?
+    - https://en.bitcoinwiki.org/wiki/YaCy
+    - What is a DHT (distributed hash table)?
+      How does it work?
+    - Operating YaCy
+
+      - Crawling
+
+        - Regular expressions
+
+          - For syntax, see [[https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html][java.util.regex.Pattern javadoc]].
+          - http://localhost:8090/RegexTest.html
+
+            - Match all non-English Wikipedia URL paths: =(?!en)...wikipedia.*=
+
+          - https://stackoverflow.com/questions/5319840/greedy-vs-reluctant-vs-possessive-quantifiers
+          - https://www.regular-expressions.info/lookaround.html
+          - https://www.regular-expressions.info/refadv.html
+
+- https://www.quora.com/What-approaches-do-state-of-the-art-search-engines-use-for-stemming
+- 2013, article, "The Next-Generation Search Engine: Challenges and Key Technologies", [[https://link.springer.com/chapter/10.1007/978-3-642-28807-4_34][paywall]]
+- dead search engines
+
+  - https://en.wikipedia.org/wiki/Seeks
+  - succumbed to money
+
+    - https://en.wikipedia.org/wiki/Blekko
+
+- 1999 article [[http://www.tk421.net/essays/babel.html][Indexing the Internet]]
+** android termux: can have bash, ssh, git, vim, emacs, and more on android
+  - 2018-09-08: Too bad there is no clear way for android to charge while OTG (hosting) USB.
+    Otherwise phones could kill netbooks.
+  - 2018-09-08: a problem: can't close session with android keyboard (requires a physical keyboard plugged in via OTG USB)
+** What is TurnKey GNU/Linux?
+[[https://www.turnkeylinux.org/][
+TurnKey GNU/Linux: 100+ free ready-to-use system images for virtual machines, the cloud, and bare metal.]]
