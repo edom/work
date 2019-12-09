@@ -1,5 +1,65 @@
 #+TITLE: Sketch of PL-0 programming language
 #+DATE: 2019-02-07 00:00:00 +0700
+* Overview
+** What we are going to do here
+Here we design a [[https://en.wikipedia.org/wiki/Lisp_(programming_language)][Lisp]] and design its interpreter.
+(Note that Lisp now[fn::<2019-12-10>] means a family of languages, not a particular language.)
+
+We name our language "PL-0" (not to be confused with Wirth's PL/0[fn::<2019-11-18> https://en.wikipedia.org/wiki/PL/0]).
+
+We want a programming language for implementing programming languages.
+
+We choose C++ as the implementation language because we don't know any better.
+We considered Rust and Go but we could not make up our minds.
+We refuse C because we want namespaces; we refuse to manually prefix every procedure name.
+** The lazy implementor's language
+PL-0 is a lazy implementor's programming language,
+where the language designers do not strive to please language users.
+
+The focus is on implementability, not usability.
+
+The implementation tries to be stupid, simple, predictable, understandable, not smart.
+
+Our motto is "we only do what we understand" (read: "we only do easy things").
+
+Here are examples of our incompetence:
+- We don't implement many modern language features like closures, continuations, proper tail calls, and type checking,
+  because we think they are hard to implement.
+  We have not tried to actually implement them; we are spooked by the mere thought of having to implement them.
+- Parsing is hard, so we only do lexical analysis.
+  The token list becomes the degenerate concrete syntax tree.
+- Writing a compiler is hard, so we write an interpreter.
+
+We thought of making a stack-based language such as
+Forth[fn::<2019-11-18> https://en.wikipedia.org/wiki/Forth_(programming_language)] or PostScript,
+but we don't know how to implement /implicit arguments/ (optional arguments) in a stack-based language,
+other than by explicitly passing a possibly empty list, so we choose to make a Lisp instead.
+
+The question of Forth vs Lisp is:
+How hard do we allow the user to crash without foreign procedures:
+just an exit due to an unhandled exception (Lisp), or an abort due to a segmentation fault (Forth)?
+* Low-level run-time system
+** Memory management
+We use a /garbage collector/ because we believe that that garbage collection greatly simplifies the language semantics.
+Also, we don't know how to implement a Lisp without garbage collection
+like [[https://github.com/wolfgangj/bone-lisp/][Bone Lisp]], Pre-Scheme, Carp, newLISP, Linear Lisp, and ThinLisp.
+
+We use a /copying garbage collector/
+because we are convinced by
+Appel 1987 \cite{appel1987garbage}
+ [fn::via [[https://softwareengineering.stackexchange.com/questions/364371/type-based-memory-safety-without-manual-memory-manage-or-runtime-garbage-collect][Basile Starynkevitch]]]
+that "[naïve copying] garbage collection can be faster than stack allocation".
+
+The drawbacks of our simple choices are:
+- We have to overprovision physical memory if we want our programs to run at a reasonable speed.
+- We lose real-time guarantee; the program may pause for an unpredictable duration at inopportune times.
+
+We may wish to do these later:
+- Improve the garbage collector to be generational and concurrent.
+  Currently we stop the world while we collect garbage because we don't know how to do it concurrently.
+- Implement alternative garbage collectors and let the programmer choose.
+- Write a compiler for, say, PL-1, a language with manual memory management, and probably also static typing, on top of PL-0.
+  Thus the real-time part of the program can be written in PL-1 while seamlessly interoperating with PL-0.
 * <2019-11-27> Thought
 It is easy to process a byte list into a token list.
 
@@ -29,36 +89,6 @@ I'm fine with explicitly-prefixed namespaces like this:
 
 Peter Van Roy's "Programming Paradigms for Dummies: What Every Programmer Should Know"
 https://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf
-* The goals
-PL-0 programs should be translatable to native code.
-
-Foreign function interface should be easy.
-* The lazy implementor's language
-PL-0 (not to be confused with Wirth's PL/0[fn::<2019-11-18> https://en.wikipedia.org/wiki/PL/0]) is a lazy implementor's programming language,
-where the language designers do not strive to please language users.
-
-The focus is on implementability, not usability.
-
-The implementation tries to be stupid, simple, predictable, understandable, not smart.
-
-Our motto is "we only do what we understand" (read: "we only do easy things").
-Here are examples of our incompetence:
-- We don't implement many modern language features like closures, continuations, proper tail calls, and type checking,
-  because we think they are hard to implement.
-  We have not tried to actually implement them; we are spooked by the mere thought of having to implement them.
-- Parsing is hard, so we only do lexical analysis.
-  The token list becomes the degenerate concrete syntax tree.
-- Writing a compiler is hard, so we write an interpreter.
-
-We think we will end up reimplementing Forth[fn::<2019-11-18> https://en.wikipedia.org/wiki/Forth_(programming_language)] or PostScript
-or something very similar to them.
-
-PL-0 is a stack-based virtual machine.
-
-PL-0 enables you to write unsafe programs that can crash.
-(This is not something to brag about?)
-
-PL-0 is like an interpreted assembly language, a scripting assembly language.
 * Guide for embedding PL-0 in C++ programs
 ** PL-0 C++ conventions
 The C++ namespace is =stc_pl_0=.
