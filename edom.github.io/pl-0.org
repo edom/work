@@ -60,6 +60,209 @@ We may wish to do these later:
 - Implement alternative garbage collectors and let the programmer choose.
 - Write a compiler for, say, PL-1, a language with manual memory management, and probably also static typing, on top of PL-0.
   Thus the real-time part of the program can be written in PL-1 while seamlessly interoperating with PL-0.
+** Values
+A /value/ (an /object/) is any of these:
+- an /integer/
+- a /byte string/
+- a /pair/ (a /cons cell/)
+- a /list/
+- a /vector/ (a /heterogenous array/)
+- a /hash table/
+
+Lists and pairs should not be conflated.
+** Representation of values
+=read-cst= is similar to Racket's =read-syntax=,
+but =read-cst= reads comments, and the result of =read-cst= can be turned back to source code (textual representation).
+
+=read= is implemented by calling =read-cst= and recursively discarding location information and comment nodes.
+* Semantics
+What should a symbol mean?
+It usually means a hash-table lookup,
+where the symbol is the key and the environment is the hash table.
+But is there a better semantics?
+
+In human languages, the meaning of a symbol is usually determined by agreement/consensus between the users of the symbol.
+For example, I can define "foobar" to mean "table" in a document,
+and the readers will be able to understand the document if they play along.
+
+The meaning of a symbol may be defined in terms of the meaning of other symbols.
+For example, "/chair/" may be defined as a "/seat/ with /back rest/".
+
+In human languages, the irreducible meanings are the /direct experiences/ (such as the concepts represented by "red", "sweet", "happy").
+For other examples of irreducible meanings,
+see [[https://en.wikipedia.org/wiki/Semantic_primes][Semantic primitives]]
+and [[https://en.wikipedia.org/wiki/Natural_semantic_metalanguage][Natural semantic metalanguage]].
+
+In Assembly, the irreducible meanings are the meaning of the execution of an instruction;
+such meanings can be formalized as state transformers.
+For example, the meaning of executing =inc rax= is to mutate the machine state such that =rax= now contains the previous value of =rax= incremented by one, modulo \( 2^{64} \).
+
+Perhaps we want something like [[https://en.wikipedia.org/wiki/Refal][Refal]] but in Lisp syntax?
+
+How do we build meaning in mathematics?
+We may start from logic, axioms, natural numbers.
+
+[[https://en.wikipedia.org/wiki/Jakobson%27s_functions_of_language][Jakobson's functions of language]]
+
+In Lisps, the irreducible meanings are the meaning of the values, including the side-effects.
+
+How do we distinguish between "Print 2 + 3" and "Print /the result of calculating/ 2 + 3"?
+We use [[https://en.wikipedia.org/wiki/Use%E2%80%93mention_distinction][Use-mention distinction]].
+See also B. C. Smith's PhD thesis.
+
+A quoted word means itself.
+
+Therefore, to design a programming language is to decide /how to build meanings from a finite set of irreducible meanings/.
+That is, how to build values.
+
+However, meanings are inseparable from pragmatics.
+For example, the expected answer to "Can you pass me the salt?" is not the /utterance/ "Yes", but the /action/ of passing the salt.
+
+#+BEGIN_EXAMPLE
+interpret : Internal-Form -> Meaning
+interpret : Abstract-Syntax -> Semantics
+#+END_EXAMPLE
+
+We must distinguish between an /internal form/ and its /external representation/.
+
+The =read= function transforms an external representation into an internal form?
+
+#+BEGIN_EXAMPLE
+(calculate (+ 1 2)) -> 3
+(calculate (+ 1 2) into x) ???
+#+END_EXAMPLE
+
+A procedure can be thought of as a term rewriting rule (a reduction rule).
+
+Should a =define= be interpreted as a =hash-set!= or as a /rule definition/?
+
+Which syntax should we use to define a rule?
+
+#+BEGIN_EXAMPLE
+(rewrite x 1)
+
+(rewrite (x) (f x) (+ x x))
+
+(define-rewrite (forall (x) [(f x) (+ x x)]))
+
+(rewrite (f :lit x :var) :to (+ x x))
+
+(with-variables (x)
+  (with-literals (f +)
+    (with-undefined-symbols-as-literals
+      (with-numeric-symbols-as-numbers
+        (defrule (f 0) 1)
+        (defrule (f x) (* x (f (- x 1))))
+      ))))
+
+(define-function (f x) (+ x x))
+#+END_EXAMPLE
+
+Should /numeric symbols/ (symbols that look like numbers: symbols that consist of only digits) be treated as /numbers/?
+I think yes, because we have the vertical-bar syntax like =|123|= to mean arbitrarily named symbols, including non-number numeric symbols.
+
+The meaning of a /rule/ \( A \to B \) is to /replace/ every /matching/ occurrence of \(A\) with \(B\) in the /current expression/.
+
+A /function/ can be thought of as a rewriting rule;
+the function name matches literally;
+the function arguments match everything (are wildcards).
+
+A symbol may be treated as a /literal/ or a /variable/.
+
+For example, in =(define-function (f x) ...)=, the symbol =f= is a literal, and =x= is a variable.
+
+In a function header, the pattern =(head arg1 ... argN)= matches every list that:
+
+1. has length N+1, and
+2. begins with something that has the same binding as =head=.
+
+What should a list such as =(x)= mean?
+
+What should a list such as =(x y)= mean?
+** Term rewriting semantics?
+For efficiency, we require that the head of a rule begins with a /literal/,
+so that we can /index/ the rules for fast matching/retrieval.
+
+The programmers are responsible for ensuring confluence by avoiding ambiguous/overlapping rules.
+** Graph reduction semantics?
+Should the semantics be formulated in terms of expression graph reductions/transformations?
+
+An S-expression can be thought of representing a /tree/ (or, more precisely, a /graph/).
+
+A value can be thought of as an irreducible one-vertex graph.
+* Syntax and parsing
+We use a recursive descent parser because we don't know any better.
+** Reversibility, information-preservation
+I insist that the parser be reversible, because I want traceability and debuggability.
+
+Each stage must be reversible:
+it must either be a bijection or preserve enough information from the previous stage.
+
+The first stage is character + location (defined later).
+
+The next stage is tokenization.
+
+A token has type and a list of characters.
+
+The next stage is concrete syntax tree (CST).
+
+The concrete syntax tree is required for formatting and refactoring, because those activities should preserve comments.
+
+In Lisp syntax, a token coincides with an AST node.
+
+The next stage is abstract syntax tree.
+
+An AST node has a "main" CST node.
+
+An AST node has a "preceding-whites" (a list of whitespace CST nodes that precede that AST node)
+so that the AST node can be turned back into CST node (and so on until we reach the original substring that constitutes the CST node).
+
+The parser is a recursive descent parser because I don't know how to parse.
+** Locations
+A /location/ is a tuple of path, line (0-based), column (0-based), byte-offset.
+This is like Racket srcloc.
+
+=current-location= parameter
+
+=read= from current location
+
+=raise-parse-error= at current location
+** Macro, reflection, reification, quoting
+The language should be a model of itself.
+
+The language should be able to describe itself.
+
+Does that cause a paradox?
+** Annotations: user-defined metadata attached to concrete syntax tree nodes
+(Is this a good idea?)
+
+We add these expression syntax rules:
+
+- If M is an expression and E is an expression, then =E : M= (read: data E annotated with metadata M) is an /annotated expression/.
+  - Alternative syntax: =E : M= can also be written =meta M E=.
+
+This generalizes type systems.
+With type systems, you annotate an expression with a type expression.
+With general annotations, you annotate an expression with another expression (some of which are type expressions).
+
+We assume that the outermost metadata update wins:
+
+- meta M (meta N E) = meta M E
+
+We add metadata extraction function symbol =meta-of=.
+
+We add these beta-reduction rules:
+
+- reduce (meta M E) = reduce E
+- reduce (meta-of (meta M E)) = reduce M
+- reduce (meta-of E) = #<empty-record> (for expressions without metadata)
+
+This is like Java/C# annotation but more principled?
+
+Annotations are not types.
+
+This is an example of type annotation that our annotation above can't handle: =\ (x : T) -> y=,
+because =x= is not an expression.
 * <2019-11-27> Thought
 It is easy to process a byte list into a token list.
 
@@ -194,78 +397,6 @@ f x = \ y -> x + y
 -- gets closure-converted to
 f x = (\ x y -> x + y) x
 #+END_EXAMPLE
-* Syntax and parsing
-** Reversibility, information-preservation
-I insist that the parser be reversible, because I want traceability and debuggability.
-
-Each stage must be reversible:
-it must either be a bijection or preserve enough information from the previous stage.
-
-The first stage is character + location (defined later).
-
-The next stage is tokenization.
-
-A token has type and a list of characters.
-
-The next stage is concrete syntax tree (CST).
-
-The concrete syntax tree is required for formatting and refactoring, because those activities should preserve comments.
-
-In Lisp syntax, a token coincides with an AST node.
-
-The next stage is abstract syntax tree.
-
-An AST node has a "main" CST node.
-
-An AST node has a "preceding-whites" (a list of whitespace CST nodes that precede that AST node)
-so that the AST node can be turned back into CST node (and so on until we reach the original substring that constitutes the CST node).
-
-The parser is a recursive descent parser because I don't know how to parse.
-** Locations
-A /location/ is a tuple of path, line (0-based), column (0-based), byte-offset.
-This is like Racket srcloc.
-
-=current-location= parameter
-
-=read= from current location
-
-=raise-parse-error= at current location
-** Macro, reflection, reification, quoting
-The language should be a model of itself.
-
-The language should be able to describe itself.
-
-Does that cause a paradox?
-** Annotations: user-defined metadata attached to concrete syntax tree nodes
-(Is this a good idea?)
-
-We add these expression syntax rules:
-
-- If M is an expression and E is an expression, then =E : M= (read: data E annotated with metadata M) is an /annotated expression/.
-  - Alternative syntax: =E : M= can also be written =meta M E=.
-
-This generalizes type systems.
-With type systems, you annotate an expression with a type expression.
-With general annotations, you annotate an expression with another expression (some of which are type expressions).
-
-We assume that the outermost metadata update wins:
-
-- meta M (meta N E) = meta M E
-
-We add metadata extraction function symbol =meta-of=.
-
-We add these beta-reduction rules:
-
-- reduce (meta M E) = reduce E
-- reduce (meta-of (meta M E)) = reduce M
-- reduce (meta-of E) = #<empty-record> (for expressions without metadata)
-
-This is like Java/C# annotation but more principled?
-
-Annotations are not types.
-
-This is an example of type annotation that our annotation above can't handle: =\ (x : T) -> y=,
-because =x= is not an expression.
 * Bottom-up design?
 ** Example
 - Example of bottom-up language design and how each level reduces cognitive load:
