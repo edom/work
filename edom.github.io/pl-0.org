@@ -1,17 +1,33 @@
 #+TITLE: Sketch of PL-0 programming language
 #+DATE: 2019-02-07 00:00:00 +0700
 * Overview
+Alternative title: "Exploring the programming language design space"
 ** What we are going to do here
-Here we design a [[https://en.wikipedia.org/wiki/Lisp_(programming_language)][Lisp]] and design its interpreter.
-(Note that Lisp now[fn::<2019-12-10>] means a family of languages, not a particular language.)
+Here we design a [[https://en.wikipedia.org/wiki/Lisp_(programming_language)][Lisp]], its semantics, and its interpreter.
+(Note that, in the 21st century, Lisp means a family of languages, not a particular language.)
 
-We name our language "PL-0" (not to be confused with Wirth's PL/0[fn::<2019-11-18> https://en.wikipedia.org/wiki/PL/0]).
+We design a Lisp because we want to focus on semantics;
+we can always dress up the syntax later.
+
+We name our language "PL-0" (not to be confused with [[https://en.wikipedia.org/wiki/PL/0][Wirth's PL/0]]).
 
 We want a programming language for implementing programming languages.
 
 We choose C++ as the implementation language because we don't know any better.
 We considered Rust and Go but we could not make up our minds.
 We refuse C because we want namespaces; we refuse to manually prefix every procedure name.
+
+To consider: [[http://tomasp.net/blog/2017/design-side-of-pl/][Petricek 2017]] (about programming language design).
+\cite{ingalls1981design}
+ [fn::<2019-12-11> [[https://www.cs.virginia.edu/~evans/cs655/readings/smalltalk.html][mirror 1 (html)]]]
+ [fn::<2019-12-11> [[https://cs.pomona.edu/classes/cs131/readings/ingalls.pdf][mirror 2 (pdf)]]].
+\cite{coblenz2018interdisciplinary}
+ [fn::<2019-12-11> [[http://www.cs.cmu.edu/~NatProg/papers/onward18essays-p7-p-682d101-38832-final.pdf][mirror (pdf)]]].
+[[https://leastfixedpoint.com/tonyg/kcbbs/projects/thing.html][Tony's Programming Language Experiments]].
+[[http://lisp-univ-etc.blogspot.com/2012/04/lisp-hackers-pascal-costanza.html][3-Lisp's tower of interpreters]].
+
+We can begin designing from the semantics (our desire) or from the run-time system (our constraints).
+All design is a compromise between the ideal and the practical.
 ** The lazy implementor's language
 PL-0 is a lazy implementor's programming language,
 where the language designers do not strive to please language users.
@@ -38,7 +54,8 @@ other than by explicitly passing a possibly empty list, so we choose to make a L
 The question of Forth vs Lisp is:
 How hard do we allow the user to crash without foreign procedures:
 just an exit due to an unhandled exception (Lisp), or an abort due to a segmentation fault (Forth)?
-* Low-level run-time system
+* Run-time system
+[[https://drops.dagstuhl.de/opus/volltexte/2015/5475/pdf/4.pdf][Belikov 2015]] \cite{belikov2015language}
 ** Memory management
 We use a /garbage collector/ because we believe that that garbage collection greatly simplifies the language semantics.
 Also, we don't know how to implement a Lisp without garbage collection
@@ -60,21 +77,117 @@ We may wish to do these later:
 - Implement alternative garbage collectors and let the programmer choose.
 - Write a compiler for, say, PL-1, a language with manual memory management, and probably also static typing, on top of PL-0.
   Thus the real-time part of the program can be written in PL-1 while seamlessly interoperating with PL-0.
-** Values
-A /value/ (an /object/) is any of these:
-- an /integer/
-- a /byte string/
-- a /pair/ (a /cons cell/)
-- a /list/
-- a /vector/ (a /heterogenous array/)
-- a /hash table/
+** Converting C types
+void, uintN_t, intN_t, intptr_t, for N in {8,16,32,64}.
+** Foreign interface, mostly C
+We do not expect users to use this directly.
+The ideal thing for user is to make PL-0 understand C header files.
+That is, PL-0 should come with a C parser and preprocessor
+that translate signatures to PL-0 bridges.
+Compare: [[http://www.swig.org/][SWIG]].
+(But why stop there; why not go all the way and write a C interpreter/compiler in PL-0?)
 
-Lists and pairs should not be conflated.
+We should use [[https://sourceware.org/libffi/][libffi]] for portability.
+
+Compare: [[https://docs.racket-lang.org/foreign/index.html][Racket Foreign Interface]].
+
+Suppose there is a C procedure whose declaration is
+#+BEGIN_EXAMPLE
+Ret proc(Arg-1, ..., Arg-n)
+#+END_EXAMPLE
+and we want to call it from PL-0.
+
+With power comes responsibility:
+The foreign interface enables users to crash the program.
+
+We must represent the /type/ and construct the /reference/.
+
+A =Type= is any of these:
+#+BEGIN_EXAMPLE
+char
+int
+(unsigned int)
+int32_t
+uint32_t
+(procedure Type (Type-1 ... Type-n))
+(struct (Field-1 ... Field-k))
+    where each Field-k is a list [name Type]
+(union (Type-1 ... Type-n))
+#+END_EXAMPLE
+
+Reference constructors:
+#+BEGIN_EXAMPLE
+(ref Type Address)
+#+END_EXAMPLE
+
+Actions:
+#+BEGIN_EXAMPLE
+(read Ref) -> Val
+(write Ref) -> Val
+(call Ref) -> Val
+#+END_EXAMPLE
+
+We can obtain symbol addresses with =dlsym=.
+** Values
+What should the set of values (the irreducible meanings) in a programming language be?
+
+Perhaps we all agree that the set of values must include at least some integers.
+
+A /value/ (an /object/) is any of these:
+- a representation of a mathematical object:
+  - an /integer/ (of arbitrary precision)
+  - a /pair/ (a /cons cell/)
+  - a /unit/ (like C void)
+  - a /boolean/ (false or true)
+  - a /byte string/
+- a generic data structure:
+  - a /list/
+  - a /vector/ (a /heterogenous array/)
+  - a /hash table/
+- a structure used by the interpreter:
+  - a /namespace/
+  - an /environment/ (a /context/)
+  - a /rule/, function, macro, AST transformer
+  - a /type/
+- a structure used by the parser:
+  - a /location/
+  - a /concrete syntax tree/ (CST)
+  - an /abstract syntax tree/ (AST)
+- a structure used by the C interface
+  - a C type representation
+  - a C reference (a type and an address)
+
+There are so many values; are we sure that all of them should be primitives?
+
+Difference from common Lisps:
+- In PL-0, lists and pairs are different things.
+- PL-0 does not have /nil/.
+** Do we need generic functions? The case of "append"
+I want to write just =append= instead of =list-append=, =vector-append=, =bytestring-append=, etc.
+In other words, want =append= to be /polymorphic/.
+
+What are my choices?
+
+I can define =append= with =cond=.
+
+But what if users also want to customize =append=?
+
+They can define their own =append= using =cond= in their own namespaces and fall-back to the standard =append=.
+
+Or I can define =append= to be a generic function.
+
+But generic function becomes extremely tricky with subtyping.
+Julia solves this with a complete lattice of types.
+But do we have to deal with the unholy interaction between generics/polymorphism/multiple-dispatch and subtyping?
+
+A combination of namespaces and =cond= is simpler than generic functions, and achieves closed ad-hoc polymorphism, but is it better?
 ** Representation of values
 =read-cst= is similar to Racket's =read-syntax=,
 but =read-cst= reads comments, and the result of =read-cst= can be turned back to source code (textual representation).
 
 =read= is implemented by calling =read-cst= and recursively discarding location information and comment nodes.
+
+Unlike in other Lisps, in PL-0, the external representation of a pair is =#pair(head tail)=, not =(head . tail)=.
 * Semantics
 What should a symbol mean?
 It usually means a hash-table lookup,
