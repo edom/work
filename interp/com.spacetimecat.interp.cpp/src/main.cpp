@@ -10,6 +10,8 @@
 
 #include <cassert>
 
+#include "rts.hpp"
+
 namespace Interp_Test {
 
     //  Test for GC_Object::mark().
@@ -178,5 +180,6 @@ R"(
 }
 
 int main (int argc, char* argv[]) {
-    return Interp_Impl::main(argc, argv);
+    // return Interp_Impl::main(argc, argv);
+    return stc_rts::main(argc, argv);
 }

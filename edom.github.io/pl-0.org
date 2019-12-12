@@ -12,6 +12,7 @@ we can always dress up the syntax later.
 We name our language "PL-0" (not to be confused with [[https://en.wikipedia.org/wiki/PL/0][Wirth's PL/0]]).
 
 We want a programming language for implementing programming languages.
+We want to easily specify alternative semantics.
 
 We choose C++ as the implementation language because we don't know any better.
 We considered Rust and Go but we could not make up our minds.
@@ -26,26 +27,15 @@ To consider: [[http://tomasp.net/blog/2017/design-side-of-pl/][Petricek 2017]] (
 [[https://leastfixedpoint.com/tonyg/kcbbs/projects/thing.html][Tony's Programming Language Experiments]].
 [[http://lisp-univ-etc.blogspot.com/2012/04/lisp-hackers-pascal-costanza.html][3-Lisp's tower of interpreters]].
 
-We can begin designing from the semantics (our desire) or from the run-time system (our constraints).
+[[https://en.wikipedia.org/wiki/Subject-oriented_programming][Subject-Oriented Programming]]
+\cite{harrison1993subject}?
+** How do we design a programming language?
+TODO:
+- What is a good language.
+
+We can begin designing from the semantics (our desires) or from the run-time system (our constraints).
 All design is a compromise between the ideal and the practical.
-** The lazy implementor's language
-PL-0 is a lazy implementor's programming language,
-where the language designers do not strive to please language users.
-
-The focus is on implementability, not usability.
-
-The implementation tries to be stupid, simple, predictable, understandable, not smart.
-
-Our motto is "we only do what we understand" (read: "we only do easy things").
-
-Here are examples of our incompetence:
-- We don't implement many modern language features like closures, continuations, proper tail calls, and type checking,
-  because we think they are hard to implement.
-  We have not tried to actually implement them; we are spooked by the mere thought of having to implement them.
-- Parsing is hard, so we only do lexical analysis.
-  The token list becomes the degenerate concrete syntax tree.
-- Writing a compiler is hard, so we write an interpreter.
-
+** Forth or Lisp?
 We thought of making a stack-based language such as
 Forth[fn::<2019-11-18> https://en.wikipedia.org/wiki/Forth_(programming_language)] or PostScript,
 but we don't know how to implement /implicit arguments/ (optional arguments) in a stack-based language,
@@ -54,6 +44,146 @@ other than by explicitly passing a possibly empty list, so we choose to make a L
 The question of Forth vs Lisp is:
 How hard do we allow the user to crash without foreign procedures:
 just an exit due to an unhandled exception (Lisp), or an abort due to a segmentation fault (Forth)?
+** <2019-12-12> For hygiene, resolve references before expanding macros
+For hygiene, references must be resolved (bound) before macros are expanded.
+
+Example:
+#+BEGIN_EXAMPLE
+A = "There is Andrew."
+B = "There is Bob. He is talking."
+A B = "There is Andrew. There is Bob. He is talking."
+#+END_EXAMPLE
+
+Naïve syntactical concatenation of and A and B causes ambiguity.
+
+But not if we resolve the references first.
+#+BEGIN_EXAMPLE
+RA = "There is Andrew."
+RB = "There is Bob. He(Bob) is talking."
+RA RB = "There is Andrew. There is Bob. He(Bob) is talking."
+#+END_EXAMPLE
+
+Ambiguity:
+The expression =(f x)= is ambiguous.
+If =f= refers to a procedure, the expression means "evaluate x to ex and then compute f(ex)".
+If =f= refers to a macro, the expression means "expand (f y) where y is a reference to x".
+
+Term-rewriting rules / fexprs unify procedures and macros?
+The problem is we want to let the programmers how and when a fragment is expanded?
+
+But it is possible to write an AST transformer that produces an invalid AST.
+For example, one can pull out a lexically scoped variable out of its scope.
+
+We let the programmers decide.
+If they want hygiene, they can use AST transformers.
+If they don't want hygiene, they can use CST transformers.
+* An example of building a programming language
+There are several starting point candidates: machine code or mathematics.
+Where should we begin?
+
+Should we bet our future on the engineers, the scientists, the philosophers, or the mathematicians?
+
+Originally, computers were invented to help people do arithmetics,
+which is a part of mathematics.
+Does it mean that we should start from mathematics?
+
+Another point of view is that programming languages are invented to make it easier to generate machine code.
+
+Suppose that we start with an arithmetic expression evaluator.
+
+#+BEGIN_EXAMPLE
+(evaluate (* (+ 2 3) (+ 2 3)))
+#+END_EXAMPLE
+
+We don't want to repeat ourselves, so we add these features to our language: factoring, references, and substitutions.
+
+#+BEGIN_EXAMPLE
+(evaluate
+  (let [(x 2)
+        (y 3)
+        (z (+ x y))]
+    (* z z)))
+#+END_EXAMPLE
+
+Not only do we want the computer to compute, but we also want it to /show/ the result:
+
+#+BEGIN_EXAMPLE
+(print (evaluate (+ 1 2)))
+#+END_EXAMPLE
+
+We want to "solve" a differential equation.
+
+We create some things: a representation for differential equations, and a compiler (a translator) that,
+given a differential equation and its initial conditions, generates what?
+A procedure? A generator? A list of numbers?
+
+#+BEGIN_EXAMPLE
+;; 0 = Df(x) + 2 * f(x)
+(approximate
+  (differential-equation
+    (= 0 (+ ([d f] x) (* 2 [f x])))
+    functions (f)
+    variables (x))
+  method [euler
+    initial-conditions [(x 0)]
+    step-size 1.0e-6])
+#+END_EXAMPLE
+
+But the form is rather inflexible:
+What if the users want to implement their own methods?
+With if the users want to approximate other things, such as a system of equations?
+
+We also want to plot the result...
+
+We also want to implement iterative approximation algorithms, etc.
+
+Then we want to parse.
+
+Note the reference to =my-char= in the =parse:interpret= block.
+#+BEGIN_EXAMPLE
+(define-function (f port)
+  (define-local-variables my-char my-string)
+  (parse:interpret program (sequence
+      (char) ;; read any char
+      (set! my-char char) ;; read any char and store it to my-char
+      (set! my-string (string of length 8))
+      (char y)
+      (char #\z)
+      (char 0)
+      (char code 32)
+      (set! my-choice (choose (char x) (char y)))
+      eof)
+    with-input-from port))
+#+END_EXAMPLE
+
+Can we generate a pretty printer and a parser from a common description?
+
+Informally, a printer is an inverse parser.
+For example:
+In a parser, the program =(set! x char)= reads a char from the stream and mutates x to refer to the char.
+In a printer, the same program dereferences a char from x and writes the char to the stream.
+
+Note that in =(define x 1)=, we do not set =x= to /contain/ 1, but we set =x= to /refer/ to 1.
+
+Then we also want computers to store data, etc.
+
+Computers are machines that help us do mathematics.
+
+Mathematics is not limited to numbers.
+Mathematics is about unambiguous abstract thinking.
+
+Computer manipulates bits; humans give meaning to computation (what a computer does).
+
+I am impressed by how van Roy & Haridi 2004 \cite{van2004concepts} come up with alternative semantics.
+
+We should not only make computers /do/ something, but we should also make computers /understand/ something,
+so that they can help us make them do something.
+When I first saw the delayed concurrent variable assignment semantics, I was amazed.
+
+...
+
+Finally, after all that hard work, we want to share our work.
+We want to improve our lives together.
 * Run-time system
 [[https://drops.dagstuhl.de/opus/volltexte/2015/5475/pdf/4.pdf][Belikov 2015]] \cite{belikov2015language}
 ** Memory management
@@ -77,6 +207,45 @@ We may wish to do these later:
 - Implement alternative garbage collectors and let the programmer choose.
 - Write a compiler for, say, PL-1, a language with manual memory management, and probably also static typing, on top of PL-0.
   Thus the real-time part of the program can be written in PL-1 while seamlessly interoperating with PL-0.
+
+How do we trace the references?
+
+What is a reasonably simple implementation?
+
+#+BEGIN_EXAMPLE
+class Object {
+    // How do we maintain iterator state without new/malloc?
+    // Can we just assume that the iterator state is always an intptr_t?
+    // That holds for pair, list, vector, hash-table, but it does not hold for all types (CST)?
+
+    What_Should_This_Be begin_tracing_references();
+
+    // Or should we just abort when there is not enough C++ stack space?
+
+    trace_references(Stack&);
+
+    // Or should we invert the control?
+    // In action, copy the object if it has not been visited.
+
+    void for_each_reachable_object_do(Consumer<Object_Id> action);
+};
+
+class Pair : public Object {
+    Pair_Tracing_Iterator_State tracing_iterator_state;
+};
+#+END_EXAMPLE
+
+If we assume that garbage collection is single-threaded, we can put the iterator state in each instance of Object.
+
+Perhaps it is obvious that, for simplicity, /the garbage collection process itself should never allocate any heap memory/.
+
+I can't think how to do garbage collection (with depth-first search) without stack memory,
+so the program should just abort if it runs out of stack.
+
+We want precise garbage collection.
+The price to pay is an extra level of indirection:
+Objects can only be indirectly accessed by passing an Object_Id to a World method,
+and cannot be directly accessed by raw C pointers.
 ** Converting C types
 void, uintN_t, intN_t, intptr_t, for N in {8,16,32,64}.
 ** Foreign interface, mostly C
