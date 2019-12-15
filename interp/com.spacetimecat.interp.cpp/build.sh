@@ -81,7 +81,6 @@ lib_sofile=$build_dir/$lib_soname
 lib_libs=()
 lib_srcs=(
     src/library.cpp
-    src/rts.cpp
 )
 
 # -------------------- configuration
