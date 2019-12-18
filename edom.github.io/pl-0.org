@@ -31,14 +31,14 @@ To consider: [[http://tomasp.net/blog/2017/design-side-of-pl/][Petricek 2017]] (
 \cite{harrison1993subject}?
 ** How do we design a programming language?
 TODO:
-- What is a good language.
+What is a good language?
 
 We can begin designing from the semantics (our desires) or from the run-time system (our constraints).
 All design is a compromise between the ideal and the practical.
 ** Forth or Lisp?
 We thought of making a stack-based language such as
 Forth[fn::<2019-11-18> https://en.wikipedia.org/wiki/Forth_(programming_language)] or PostScript,
-but we don't know how to implement /implicit arguments/ (optional arguments) in a stack-based language,
+but we don't know how to implement /optional arguments/ in a stack-based language,
 other than by explicitly passing a possibly empty list, so we choose to make a Lisp instead.
 
 The question of Forth vs Lisp is:
@@ -77,7 +77,355 @@ For example, one can pull out a lexically scoped variable out of its scope.
 We let the programmers decide.
 If they want hygiene, they can use AST transformers.
 If they don't want hygiene, they can use CST transformers.
-* An example of building a programming language
+* Semantics
+How should we define the semantics?
+
+<2019-12-19>
+
+In this section, we motivate and define this:
+#+BEGIN_EXAMPLE
+meaning : (Expr,State) -> (Expr,State)
+#+END_EXAMPLE
+** Motivation: Generalizing calculator expressions
+/Computers can be thought of as calculators with state./
+By "state", we mean "memory" or "storage".
+So, we model a stateless calculator, and then we add state.
+
+We begin by writing function to evaluate calculator expressions, and then we generalize that.
+
+Let us name the function "meaning : Exp -> Val".
+
+#+BEGIN_EXAMPLE
+Val = Int
+
+x:Val   => x:Exp
+x,y:Exp => x+y : Exp
+x,y:Exp => x*y : Exp
+
+x:Val   => meaning x = x
+x,y:Exp => meaning (x+y) = meaning x + meaning y
+x,y:Exp => meaning (x*y) = meaning x * meaning y
+...
+#+END_EXAMPLE
+
+For example, meaning(2+3) = 5.
+
+We add bindings/variables/substitutions and generalize "meaning"
+to "meaning : Bindings -> Exp -> Val".
+
+#+BEGIN_EXAMPLE
+meaning bindings (Let1 name expr body) =
+  let val = meaning bindings expr
+      bindings_1 = bindings LEFT-UNION {name => val}
+  in  meaning bindings_1 body
+#+END_EXAMPLE
+
+Because Val is a subset of Exp, we generalize "Val" to "Exp".
+
+We generalize "Bindings" to "State".
+
+We can rearrange "meaning : State -> Exp -> Val" to "meaning : (State,Exp) -> (State,Exp)".
+Then we can rearrange it further to "meaning : State -> State" with "current-expression : State -> Exp".
+** An interpreter is a state endofunction
+When you interpret a paragraph, you interpret each sentence sequentially.
+When you interpret a sentence, you change your internal state.
+
+#+BEGIN_QUOTE
+Let X be 10.
+Compute 2*X.
+Forget it.
+Let X be 20.
+Compute 3*X.
+#+END_QUOTE
+
+Interpreting a program fragment changes the interpreter state and produces a residual program,
+which is then again interpreted to change the interpreter state, and so on.
+
+#+BEGIN_EXAMPLE
+-- An implementation in Scheme?
+(define (interpret s)
+  (match (get-expression s)
+    ((sequence x y ...)
+     (define s' (interpret (set-expression s x)))
+     (interpret (set-expression s (sequence y ...))))))
+#+END_EXAMPLE
+
+An /interpreter state/ has a /global mapping/, a /current expression/,
+and perhaps many other things not directly exposed to the program.
+
+The meaning of an expression E is a State endofunction.
+
+I think I'm going to be convenient with that formalism.
+Let's try building a Lisp interpreter from the semantic function (Expr -> State -> (Expr,State)).
+
+Expr is first parameter so we can write the curried expression meaning(E).
+
+#+BEGIN_EXAMPLE
+State = (Expr,Other_State)
+
+meaning : Expr -> Other_State -> (Expr,Other_State)
+
+meaning Current_State s = (s, s)
+meaning (Calculate e) s = (calculate e, s)
+meaning (Interpret e) s = meaning e s
+meaning (Quote e) s = (e, s)
+meaning (Define name expr) s = (Unit, ???)
+meaning (Let name expr body) s = (Unit, ???)
+meaning (Car e) s = car (meaning e s)
+meaning (Cdr e) s = cdr (meaning e s)
+meaning (Namespace e ...) = (ns???, s')
+meaning (Before x y) s =
+  let (_, s') = meaning x s
+  in  meaning y s'
+
+...
+#+END_EXAMPLE
+
+To find the primitives, instead ask "What is the syntax of /fully expanded expressions/?"
+
+What are the primitives in McCarthy's original LISP?
+
+What is Racket's syntax of its fully expanded programs?
+
+What are GHC's primitives?
+
+Scheme?
+Kernel language?
+Qi/Shen?
+
+I think we want these forms, and there is no other way to implement these forms other than by primitives:
+#+BEGIN_EXAMPLE
+(current-state) ;; This is where we differ from other Lisps?
+(quote Expr) ;; We also differ by making (quote 1) not equal to 1
+(interpret Expr) ;; How does this differ from the eval in other Lisps?
+(car Expr) ;; pair-first
+(cdr Expr) ;; pair-second
+(cons Expr Expr) ;; make-pair
+(calculate Expr)
+(let1 Name Expr Body) or (lambda1 Param Body)
+(before Expr Expr)
+(equal? Expr Expr)
+(read-syntax)
+(read-concrete)
+#+END_EXAMPLE
+
+Should "interpret" be called "normalize" instead?
+Should we provide the programmers the means to "reduce" an expression one step instead of "normalizing" the expression?
+
+The =progn= form can be derived by either left-folding or right-folding =before=.
+#+BEGIN_EXAMPLE
+(progn x y z) = (before x (before y z))
+(progn x y z) = (before (before x y) z)
+#+END_EXAMPLE
+
+Which of these forms should be primitive, and what should they mean?
+#+BEGIN_EXAMPLE
+(define Name Expr) ;; global binding if occurs on top-level
+(vector Expr ...)
+(delimit-scope Expr ...) ???
+(namespace Expr ...) ???
+(apply Func Arg ...)
+(list Expr ...) ;; can be stated in terms of cons
+#+END_EXAMPLE
+
+First-class interpreter state:
+There is an expression whose interpretation is the interpreter state.
+
+An expression e is a /value/ iff meaning(e,s) = s.
+
+A state s is /terminal/ iff interpret(s) = s.
+
+#+BEGIN_EXAMPLE
+(define x y)
+=
+(hash-table-set!
+  (current-interpreter-state)
+  (quote x)
+  (interpret y))
+#+END_EXAMPLE
+
+When should an expression be rewritten?
+
+Perhaps we all agree that =(calculate (+ 1 2))= should evaluate to =3=.
+** How should we delimit scopes?
+TODO:
+- Constructs for delimiting scope/context
+- First-class scope
+** Quoting, language, semantics
+How to design language:
+Ask /critical questions/ and find /corner cases/.
+The answers constrain the language and justify the design.
+
+Quoting is not only a feature of written language, but also of spoken language,
+although it is more pronounced in written language.
+In spoken language, quoting is indicated by intonation, gestures, or additional clarifying words.
+For example:
+When we say if John says to Mary "write the name of your dog", and Mary's dog's name is "Doggy",
+then Mary usually interprets the utterance as "Write 'Doggy'" and not "Write 'the name of your dog'",
+unless Mary is joking or uncooperative.
+However, if John says "write as i dictate <pause> the name of your dog", then he may mean it literally.
+In spoken language, pragmatics plays more role than syntax.
+In written language, we elaborate syntax to compensate for missing intonation and gestures.
+
+Example:
+Suppose Alice says to Bob, "Management hates it."
+If Bob writes "Alice said to me that management isn't too fond of it", he is not lying,
+although he could use another word like "hinted" or "suggested" instead of "said".
+If Bob writes "Alice said to me, 'Management isn't too fond of it'", he is lying.
+
+Critical thoughts:
+- I think =(equal? (quote 1) 1)= should evaluate to =#f=, because "1" is not equivalent to 1.
+- I think =(eq? (quote 1) 1)= should evaluate to =#f=, because "1" is not identical to 1.
+- Indeed, I think =(equal? (quote x) x)= should evaluate to =#f= for all =x=, except in evaluation errors.
+
+That is, =quote= should just quote, and not do anything else, let alone evaluate its argument.
+
+The interpretation of =(quote x)= is =x=?
+
+Quotation is not totally opaque.
+For example: It makes sense to say "The first letter in 'XYZ' is X",
+and thus the quoted "XYZ" is not an opaque entity that can only either be passed around or be unquoted.
+
+The question is: What should =(quote (1 2))= be?
+
+It is confusing to talk about quotations.
+For example: =(quasiquote (x (unquote y) z))= is =(quote x y' z)= where y' is the meaning of y.
+
+Should =equal?= evaluate its arguments before comparing them? Yes, because "equal" does not mean "identical".
+1+2 and 3 are equal in decimal arithmetics, but they are not identical.
+Two different names may refer to the same referent and thus be equal, but those different names are never identical.
+
+#+BEGIN_EXAMPLE
+Q: Calculate 1+2.
+A: 3.
+(calculate (+ 1 2))
+
+Q: Calculate "1+2".
+A: "1+2".
+(calculate (quote (+ 1 2)))
+
+Q: Calculate X+X where X=10.
+A: 20.
+(calculate (let ((x 10)) (+ x x)))
+different from: (let ((x 10)) (calculate (+ x x)))
+(calculate (let ((f (lambda (x) (+ x 1)))) (f (f x))))
+#+END_EXAMPLE
+** Semantics
+What should a symbol mean?
+It usually means a hash-table lookup,
+where the symbol is the key and the environment is the hash table.
+But is there a better semantics?
+
+In human languages, the meaning of a symbol is usually determined by agreement/consensus between the users of the symbol.
+For example, I can define "foobar" to mean "table" in a document,
+and the readers will be able to understand the document if they play along.
+
+The meaning of a symbol may be defined in terms of the meaning of other symbols.
+For example, "/chair/" may be defined as a "/seat/ with /back rest/".
+
+In human languages, the irreducible meanings are the /direct experiences/ (such as the concepts represented by "red", "sweet", "happy").
+For other examples of irreducible meanings,
+see [[https://en.wikipedia.org/wiki/Semantic_primes][Semantic primitives]]
+and [[https://en.wikipedia.org/wiki/Natural_semantic_metalanguage][Natural semantic metalanguage]].
+
+In Assembly, the irreducible meanings are the meaning of the execution of an instruction;
+such meanings can be formalized as state transformers.
+For example, the meaning of executing =inc rax= is to mutate the machine state such that =rax= now contains the previous value of =rax= incremented by one, modulo \( 2^{64} \).
+
+Perhaps we want something like [[https://en.wikipedia.org/wiki/Refal][Refal]] but in Lisp syntax?
+
+How do we build meaning in mathematics?
+We may start from logic, axioms, natural numbers.
+
+[[https://en.wikipedia.org/wiki/Jakobson%27s_functions_of_language][Jakobson's functions of language]]
+
+In Lisps, the irreducible meanings are the meaning of the values, including the side-effects.
+
+How do we distinguish between "Print 2 + 3" and "Print /the result of calculating/ 2 + 3"?
+We use [[https://en.wikipedia.org/wiki/Use%E2%80%93mention_distinction][Use-mention distinction]].
+See also B. C. Smith's PhD thesis.
+
+A quoted word means itself.
+
+Therefore, to design a programming language is to decide /how to build meanings from a finite set of irreducible meanings/.
+That is, how to build values.
+
+However, meanings are inseparable from pragmatics.
+For example, the expected answer to "Can you pass me the salt?" is not the /utterance/ "Yes", but the /action/ of passing the salt.
+
+#+BEGIN_EXAMPLE
+interpret : Internal-Form -> Meaning
+interpret : Abstract-Syntax -> Semantics
+#+END_EXAMPLE
+
+We must distinguish between an /internal form/ and its /external representation/.
+
+The =read= function transforms an external representation into an internal form?
+
+#+BEGIN_EXAMPLE
+(calculate (+ 1 2)) -> 3
+(calculate (+ 1 2) into x) ???
+#+END_EXAMPLE
+
+A procedure can be thought of as a term rewriting rule (a reduction rule).
+
+Should a =define= be interpreted as a =hash-set!= or as a /rule definition/?
+
+Which syntax should we use to define a rule?
+
+#+BEGIN_EXAMPLE
+(rewrite x 1)
+
+(rewrite (x) (f x) (+ x x))
+
+(define-rewrite (forall (x) [(f x) (+ x x)]))
+
+(rewrite (f :lit x :var) :to (+ x x))
+
+(with-variables (x)
+  (with-literals (f +)
+    (with-undefined-symbols-as-literals
+      (with-numeric-symbols-as-numbers
+        (defrule (f 0) 1)
+        (defrule (f x) (* x (f (- x 1))))
+      ))))
+
+(define-function (f x) (+ x x))
+#+END_EXAMPLE
+
+Should /numeric symbols/ (symbols that look like numbers: symbols that consist of only digits) be treated as /numbers/?
+I think yes, because we have the vertical-bar syntax like =|123|= to mean arbitrarily named symbols, including non-number numeric symbols.
+
+The meaning of a /rule/ \( A \to B \) is to /replace/ every /matching/ occurrence of \(A\) with \(B\) in the /current expression/.
+
+A /function/ can be thought of as a rewriting rule;
+the function name matches literally;
+the function arguments match everything (are wildcards).
+
+A symbol may be treated as a /literal/ or a /variable/.
+
+For example, in =(define-function (f x) ...)=, the symbol =f= is a literal, and =x= is a variable.
+
+In a function header, the pattern =(head arg1 ... argN)= matches every list that:
+
+1. has length N+1, and
+2. begins with something that has the same binding as =head=.
+
+What should a list such as =(x)= mean?
+
+What should a list such as =(x y)= mean?
+*** Term rewriting semantics?
+For efficiency, we require that the head of a rule begins with a /literal/,
+so that we can /index/ the rules for fast matching/retrieval.
+
+The programmers are responsible for ensuring confluence by avoiding ambiguous/overlapping rules.
+*** Graph reduction semantics?
+Should the semantics be formulated in terms of expression graph reductions/transformations?
+
+An S-expression can be thought of representing a /tree/ (or, more precisely, a /graph/).
+
+A value can be thought of as an irreducible one-vertex graph.
+** An example of building a programming language
 There are several starting point candidates: machine code or mathematics.
 Where should we begin?
 
@@ -357,121 +705,6 @@ but =read-cst= reads comments, and the result of =read-cst= can be turned back t
 =read= is implemented by calling =read-cst= and recursively discarding location information and comment nodes.
 
 Unlike in other Lisps, in PL-0, the external representation of a pair is =#pair(head tail)=, not =(head . tail)=.
-* Semantics
-What should a symbol mean?
-It usually means a hash-table lookup,
-where the symbol is the key and the environment is the hash table.
-But is there a better semantics?
-
-In human languages, the meaning of a symbol is usually determined by agreement/consensus between the users of the symbol.
-For example, I can define "foobar" to mean "table" in a document,
-and the readers will be able to understand the document if they play along.
-
-The meaning of a symbol may be defined in terms of the meaning of other symbols.
-For example, "/chair/" may be defined as a "/seat/ with /back rest/".
-
-In human languages, the irreducible meanings are the /direct experiences/ (such as the concepts represented by "red", "sweet", "happy").
-For other examples of irreducible meanings,
-see [[https://en.wikipedia.org/wiki/Semantic_primes][Semantic primitives]]
-and [[https://en.wikipedia.org/wiki/Natural_semantic_metalanguage][Natural semantic metalanguage]].
-
-In Assembly, the irreducible meanings are the meaning of the execution of an instruction;
-such meanings can be formalized as state transformers.
-For example, the meaning of executing =inc rax= is to mutate the machine state such that =rax= now contains the previous value of =rax= incremented by one, modulo \( 2^{64} \).
-
-Perhaps we want something like [[https://en.wikipedia.org/wiki/Refal][Refal]] but in Lisp syntax?
-
-How do we build meaning in mathematics?
-We may start from logic, axioms, natural numbers.
-
-[[https://en.wikipedia.org/wiki/Jakobson%27s_functions_of_language][Jakobson's functions of language]]
-
-In Lisps, the irreducible meanings are the meaning of the values, including the side-effects.
-
-How do we distinguish between "Print 2 + 3" and "Print /the result of calculating/ 2 + 3"?
-We use [[https://en.wikipedia.org/wiki/Use%E2%80%93mention_distinction][Use-mention distinction]].
-See also B. C. Smith's PhD thesis.
-
-A quoted word means itself.
-
-Therefore, to design a programming language is to decide /how to build meanings from a finite set of irreducible meanings/.
-That is, how to build values.
-
-However, meanings are inseparable from pragmatics.
-For example, the expected answer to "Can you pass me the salt?" is not the /utterance/ "Yes", but the /action/ of passing the salt.
-
-#+BEGIN_EXAMPLE
-interpret : Internal-Form -> Meaning
-interpret : Abstract-Syntax -> Semantics
-#+END_EXAMPLE
-
-We must distinguish between an /internal form/ and its /external representation/.
-
-The =read= function transforms an external representation into an internal form?
-
-#+BEGIN_EXAMPLE
-(calculate (+ 1 2)) -> 3
-(calculate (+ 1 2) into x) ???
-#+END_EXAMPLE
-
-A procedure can be thought of as a term rewriting rule (a reduction rule).
-
-Should a =define= be interpreted as a =hash-set!= or as a /rule definition/?
-
-Which syntax should we use to define a rule?
-
-#+BEGIN_EXAMPLE
-(rewrite x 1)
-
-(rewrite (x) (f x) (+ x x))
-
-(define-rewrite (forall (x) [(f x) (+ x x)]))
-
-(rewrite (f :lit x :var) :to (+ x x))
-
-(with-variables (x)
-  (with-literals (f +)
-    (with-undefined-symbols-as-literals
-      (with-numeric-symbols-as-numbers
-        (defrule (f 0) 1)
-        (defrule (f x) (* x (f (- x 1))))
-      ))))
-
-(define-function (f x) (+ x x))
-#+END_EXAMPLE
-
-Should /numeric symbols/ (symbols that look like numbers: symbols that consist of only digits) be treated as /numbers/?
-I think yes, because we have the vertical-bar syntax like =|123|= to mean arbitrarily named symbols, including non-number numeric symbols.
-
-The meaning of a /rule/ \( A \to B \) is to /replace/ every /matching/ occurrence of \(A\) with \(B\) in the /current expression/.
-
-A /function/ can be thought of as a rewriting rule;
-the function name matches literally;
-the function arguments match everything (are wildcards).
-
-A symbol may be treated as a /literal/ or a /variable/.
-
-For example, in =(define-function (f x) ...)=, the symbol =f= is a literal, and =x= is a variable.
-
-In a function header, the pattern =(head arg1 ... argN)= matches every list that:
-
-1. has length N+1, and
-2. begins with something that has the same binding as =head=.
-
-What should a list such as =(x)= mean?
-
-What should a list such as =(x y)= mean?
-** Term rewriting semantics?
-For efficiency, we require that the head of a rule begins with a /literal/,
-so that we can /index/ the rules for fast matching/retrieval.
-
-The programmers are responsible for ensuring confluence by avoiding ambiguous/overlapping rules.
-** Graph reduction semantics?
-Should the semantics be formulated in terms of expression graph reductions/transformations?
-
-An S-expression can be thought of representing a /tree/ (or, more precisely, a /graph/).
-
-A value can be thought of as an irreducible one-vertex graph.
 * Syntax and parsing
 We use a recursive descent parser because we don't know any better.
 ** Reversibility, information-preservation
@@ -813,7 +1046,8 @@ The result of an interpreter's interpretation of a program is then /interpreted/
 
 Both the example compiler and the example interpreter are written in the same host language H.
 
-Good news from \cite{gluck2009there}?
+Good news from [[https://www.gwern.net/docs/cs/2009-gluck.pdf][Gluck 2009]] \cite{gluck2009there}?
+
 #+BEGIN_QUOTE
 Practical specializers that
 can perform all three Futamura projections and that can automatically convert programs into non-trivial generating extensions and
