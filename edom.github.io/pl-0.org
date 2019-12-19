@@ -2,21 +2,21 @@
 #+DATE: 2019-02-07 00:00:00 +0700
 * Overview
 Alternative title: "Exploring the programming language design space"
-** What we are going to do here
-Here we design a [[https://en.wikipedia.org/wiki/Lisp_(programming_language)][Lisp]], its semantics, and its interpreter.
-(Note that, in the 21st century, Lisp means a family of languages, not a particular language.)
+** How do we design a programming language?
+How should we design programming languages?
 
-We design a Lisp because we want to focus on semantics;
-we can always dress up the syntax later.
+Start by designing the /semantics/ (meanings).
 
-We name our language "PL-0" (not to be confused with [[https://en.wikipedia.org/wiki/PL/0][Wirth's PL/0]]).
+What is a good language?
 
-We want a programming language for implementing programming languages.
-We want to easily specify alternative semantics.
+It efficiently represents meanings.
 
-We choose C++ as the implementation language because we don't know any better.
-We considered Rust and Go but we could not make up our minds.
-We refuse C because we want namespaces; we refuse to manually prefix every procedure name.
+We can begin designing from the semantics (our desires) or from the run-time system (our constraints).
+All design is a compromise between the ideal and the practical.
+But if the ideal needs to be compromised, is it truly ideal?
+
+When DSL?
+Mernik et al. 2005 \cite{mernik2005and}[fn::<2019-12-20> http://people.cs.ksu.edu/~schmidt/505f14/Lectures/WhenDSL.pdf]
 
 To consider: [[http://tomasp.net/blog/2017/design-side-of-pl/][Petricek 2017]] (about programming language design).
 \cite{ingalls1981design}
@@ -29,58 +29,48 @@ To consider: [[http://tomasp.net/blog/2017/design-side-of-pl/][Petricek 2017]] (
 
 [[https://en.wikipedia.org/wiki/Subject-oriented_programming][Subject-Oriented Programming]]
 \cite{harrison1993subject}?
-** How do we design a programming language?
-TODO:
-What is a good language?
+** What are some recent developments?
+What are some recent innovations in programming languages?
 
-We can begin designing from the semantics (our desires) or from the run-time system (our constraints).
-All design is a compromise between the ideal and the practical.
-** Forth or Lisp?
+What are some recent innovations in In programming-language semantics?
+
+???
+https://www.semanticscholar.org/paper/Practical-partial-evaluation-for-high-performance-W%C3%BCrthinger-Wimmer/1d4c0211549a8fe259a273da88c63e8f00fef463
+** What we are going to do here
+Here we design a [[https://en.wikipedia.org/wiki/Lisp_(programming_language)][Lisp]], its semantics, and its interpreter.
+(Note that, in the 21st century, Lisp means a family of languages, not a particular language.)
+
+We design a Lisp because we want to focus on semantics;
+the syntax can always be improved later.
+
+We name our language "PL-0" (not to be confused with [[https://en.wikipedia.org/wiki/PL/0][Wirth's PL/0]]).
+
+We want a programming language for implementing programming languages.
+We want to easily specify alternative semantics.
+There are many prior arts, such as Racket;
+Felleisen et al. 2008 \cite{felleisen2018programmable} discusses some problems of Racket.
+** Should we make a Forth or a Lisp?
+The question is wrong.
+The answer is: we should begin from mathematics.
+
 We thought of making a stack-based language such as
-Forth[fn::<2019-11-18> https://en.wikipedia.org/wiki/Forth_(programming_language)] or PostScript,
+[[https://en.wikipedia.org/wiki/Forth_(programming_language)][Forth]] or PostScript,
 but we don't know how to implement /optional arguments/ in a stack-based language,
 other than by explicitly passing a possibly empty list, so we choose to make a Lisp instead.
 
+But, why not both?
+Why not make a Lisp interpreter on Forth?
+
 The question of Forth vs Lisp is:
-How hard do we allow the user to crash without foreign procedures:
+How hard should we allow the user to crash without foreign procedures:
 just an exit due to an unhandled exception (Lisp), or an abort due to a segmentation fault (Forth)?
-** <2019-12-12> For hygiene, resolve references before expanding macros
-For hygiene, references must be resolved (bound) before macros are expanded.
-
-Example:
-#+BEGIN_EXAMPLE
-A = "There is Andrew."
-B = "There is Bob. He is talking."
-A B = "There is Andrew. There is Bob. He is talking."
-#+END_EXAMPLE
-
-Naïve syntactical concatenation of and A and B causes ambiguity.
-
-But not if we resolve the references first.
-#+BEGIN_EXAMPLE
-RA = "There is Andrew."
-RB = "There is Bob. He(Bob) is talking."
-RA RB = "There is Andrew. There is Bob. He(Bob) is talking."
-#+END_EXAMPLE
-
-Ambiguity:
-The expression =(f x)= is ambiguous.
-If =f= refers to a procedure, the expression means "evaluate x to ex and then compute f(ex)".
-If =f= refers to a macro, the expression means "expand (f y) where y is a reference to x".
-
-Term-rewriting rules / fexprs unify procedures and macros?
-The problem is we want to let the programmers how and when a fragment is expanded?
-
-But it is possible to write an AST transformer that produces an invalid AST.
-For example, one can pull out a lexically scoped variable out of its scope.
-
-We let the programmers decide.
-If they want hygiene, they can use AST transformers.
-If they don't want hygiene, they can use CST transformers.
+** Important psychological issues
+The language /must/ come with a /benevolent dictator/ and an /official formatter/ (like =gofmt=).
+Otherwise people will waste energy bickering about code style.
 * Semantics
 How should we define the semantics?
-
-<2019-12-19>
+What properties do we want?
+Composability/compositionality?
 
 In this section, we motivate and define this:
 #+BEGIN_EXAMPLE
@@ -89,11 +79,13 @@ meaning : (Expr,State) -> (Expr,State)
 ** Motivation: Generalizing calculator expressions
 /Computers can be thought of as calculators with state./
 By "state", we mean "memory" or "storage".
-So, we model a stateless calculator, and then we add state.
+So, we begin by modeling a stateless calculator,
+and then we gradually add features.
 
-We begin by writing function to evaluate calculator expressions, and then we generalize that.
+We begin by writing a function that evaluates calculator expressions, and then we generalize that.
 
 Let us name the function "meaning : Exp -> Val".
+That function may be defined like this:
 
 #+BEGIN_EXAMPLE
 Val = Int
@@ -110,8 +102,9 @@ x,y:Exp => meaning (x*y) = meaning x * meaning y
 
 For example, meaning(2+3) = 5.
 
-We add bindings/variables/substitutions and generalize "meaning"
-to "meaning : Bindings -> Exp -> Val".
+We add bindings/variables/substitutions.
+This generalizes "meaning"
+to "meaning : (Bindings,Exp) -> Val".
 
 #+BEGIN_EXAMPLE
 meaning bindings (Let1 name expr body) =
@@ -122,10 +115,11 @@ meaning bindings (Let1 name expr body) =
 
 Because Val is a subset of Exp, we generalize "Val" to "Exp".
 
-We generalize "Bindings" to "State".
+Then we add state.
+This generalizes "Bindings" to "State".
 
 We can rearrange "meaning : State -> Exp -> Val" to "meaning : (State,Exp) -> (State,Exp)".
-Then we can rearrange it further to "meaning : State -> State" with "current-expression : State -> Exp".
+Then we can rearrange it further to "meaning : State' -> State'" with "current-expression : State' -> Exp".
 ** An interpreter is a state endofunction
 When you interpret a paragraph, you interpret each sentence sequentially.
 When you interpret a sentence, you change your internal state.
@@ -185,13 +179,21 @@ To find the primitives, instead ask "What is the syntax of /fully expanded expre
 
 What are the primitives in McCarthy's original LISP?
 
-What is Racket's syntax of its fully expanded programs?
+From McCarthy 1959 \cite{McCarthy1959RecursiveFO}:
+- "the universal S-function 'apply' which plays the theoretical role of a universal Turing machine and the practical role of an interpreter"
+- Primitive functions: atom, eq, car, cdr, cons
+
+[[https://docs.racket-lang.org/reference/syntax-model.html#%28part._fully-expanded%29][Racket's syntax of its fully expanded programs]]
 
 What are GHC's primitives?
 
 Scheme?
 Kernel language?
 Qi/Shen?
+
+[[https://web.cs.wpi.edu/~jshutt/kernel.html][John N. Shutt]]
+"Kernel is a conservative, Scheme-like dialect of Lisp in which everything is a first-class object."
+What does he mean by "everything"?
 
 I think we want these forms, and there is no other way to implement these forms other than by primitives:
 #+BEGIN_EXAMPLE
@@ -201,12 +203,76 @@ I think we want these forms, and there is no other way to implement these forms 
 (car Expr) ;; pair-first
 (cdr Expr) ;; pair-second
 (cons Expr Expr) ;; make-pair
-(calculate Expr)
+(bind Expr) ;; compute lexical binding
 (let1 Name Expr Body) or (lambda1 Param Body)
-(before Expr Expr)
+(before Expr Expr) ;; for ordering/sequencing evaluation
+(eq? Expr Expr)
 (equal? Expr Expr)
 (read-syntax)
 (read-concrete)
+(calculate Expr) ;; ???
+#+END_EXAMPLE
+
+The "lambda" construct does two things:
+it both /delimits a scope/ and /binds occurrences/.
+Can we separate them into two separate constructs?
+
+(λx. [(λx. x) 1]) 2
+
+#+BEGIN_EXAMPLE
+;; (let1 Name Expr Body) delimits scope
+(let1 'x 1 (let1 'x 2 x))
+#+END_EXAMPLE
+
+The =let1= form is used by =bind= for lexical scoping.
+
+The =let1= form should use maximal sharing?
+
+Note: =(define (quote one) (quote 1))=, not =(define one 1)=.
+
+#+BEGIN_EXAMPLE
+meaning (Define name expr) s0 =
+  let (s1,iname) = meaning name s0
+      (s2,iexpr) = meaning expr s1
+      s3 = s2 LEFT-UNION { iname => iexpr }
+  in  (s3,iexpr)
+#+END_EXAMPLE
+
+Another question: should (define Name Expr) normalize to unit or to the value of Expr?
+
+We agree that =(define Name Expr)= modifies the interpreter state.
+What we don't agree on is how =Expr= should be evaluated: lazily, eagerly, or not evaluated at all.
+
+Consider the difference:
+#+BEGIN_QUOTE
+Let X be 1+2.
+
+Let X be /the result of/ 1+2.
+
+Let "X" be "1+2".
+
+Let X /be/ John.
+
+Let X /refer to/ John.
+
+Define "chair" as a seat that has back rest.
+
+Define "chair" as a "seat" that has "back rest".
+
+Find a chair, and sit on it.
+
+(Not: Find a "chair".)
+#+END_QUOTE
+
+Quotes are also used for hedging, connotation, innuendo, codewords, humor, etc.
+
+When we encounter "let X be <a complex expression>" while reading mathematics,
+we do not evaluate the complex expression.
+
+#+BEGIN_EXAMPLE
+(let x be (+ 1 2))
+(let (quote x) be (quote (+ 1 2)))
+(define chair as (extend seat with back-rest))
 #+END_EXAMPLE
 
 Should "interpret" be called "normalize" instead?
@@ -532,8 +598,90 @@ When I first saw the delayed concurrent variable assignment semantics, I was ama
 
 Finally, after all that hard work, we want to share our work.
 We want to improve our lives together.
+** Security considerations
+See [[file:secure.html]].
+
+The situation:
+
+- The programmer is who /creates/ the program.
+- The user is who /runs/ the program.
+- The programmer and the user may be two different people.
+
+The problem:
+How does the user limit the maximum damage doable by the programmer?
+
+If we want security, it cannot be an afterthought?
+
+Performance considerations -> cost/performance model
+
+Security considerations -> security/damage model
+
+But the model is not the reality; we risk modeling the wrong thing.
+
+Thus, in making claims about security, we prefer false negatives (the system is actually secure, but the model says it is insecure)
+to false positives (the system is actually insecure, but the model says it is secure).
+
+In the end, a human has to verify whether the model's simplifying assumptions actually hold for the case at hand.
+
+It is impractical for users to inspect the source code of every program they run.
+It is more practical for them to periodically backup their data periodically into an airgapped storage
+and periodically verify that those backups work.
+
+However, what about data "theft": unwanted leakage of data?
+
+You are buying a book for your child.
+How can you be sure that the book does not contain any material not suitable for children?
+We can hypothesize a language called Familyspeak with these properties:
+- Congress defines a set of allowed words in Familyspeak.
+  Every other word is forbidden.
+- The police enforces that law: it goes to the store and verifies that every book
+  that claims to be written in Familyspeak indeed complies to the law.
+
+However, even though Familyspeak prevents /words/ inappropriate for children, it does not prevent /ideas/ inappropriate for children.
+For example, Familyspeak syntax may allow the words "eat", "your", and "parents", but the idea "eat your parents" is inappropriate for children.
+Appropriate words can be arranged to convey inappropriate ideas.
+
+We assume that user U's running programmer P's program proves that user U trusts programmer P.
+(What if U runs P's program accidentally or unknowingly?)
+** <2019-12-12> For hygiene, resolve references before expanding macros
+For hygiene, references must be resolved (bound) before macros are expanded.
+
+Example:
+#+BEGIN_EXAMPLE
+A = "There is Andrew."
+B = "There is Bob. He is talking."
+A B = "There is Andrew. There is Bob. He is talking."
+#+END_EXAMPLE
+
+Naïve syntactical concatenation of and A and B causes ambiguity.
+
+But not if we resolve the references first.
+#+BEGIN_EXAMPLE
+RA = "There is Andrew."
+RB = "There is Bob. He(Bob) is talking."
+RA RB = "There is Andrew. There is Bob. He(Bob) is talking."
+#+END_EXAMPLE
+
+Ambiguity:
+The expression =(f x)= is ambiguous.
+If =f= refers to a procedure, the expression means "evaluate x to ex and then compute f(ex)".
+If =f= refers to a macro, the expression means "expand (f y) where y is a reference to x".
+
+Term-rewriting rules / fexprs unify procedures and macros?
+The problem is we want to let the programmers how and when a fragment is expanded?
+
+But it is possible to write an AST transformer that produces an invalid AST.
+For example, one can pull out a lexically scoped variable out of its scope.
+
+We let the programmers decide.
+If they want hygiene, they can use AST transformers.
+If they don't want hygiene, they can use CST transformers.
 * Run-time system
 [[https://drops.dagstuhl.de/opus/volltexte/2015/5475/pdf/4.pdf][Belikov 2015]] \cite{belikov2015language}
+** On choosing the implementation language
+We choose C++ as the implementation language because we don't know any better.
+We considered Rust and Go but we could not make up our minds.
+We refuse C because we want namespaces; we refuse to manually prefix every procedure name.
 ** Memory management
 We use a /garbage collector/ because we believe that that garbage collection greatly simplifies the language semantics.
 Also, we don't know how to implement a Lisp without garbage collection
