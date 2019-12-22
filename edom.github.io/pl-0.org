@@ -3,13 +3,9 @@
 * Overview
 Alternative title: "Exploring the programming language design space"
 ** How do we design a programming language?
-How should we design programming languages?
+I think we should begin by designing the /semantics/ (meanings).
 
-Start by designing the /semantics/ (meanings).
-
-What is a good language?
-
-It efficiently represents meanings.
+A good language efficiently represents meanings.
 
 We can begin designing from the semantics (our desires) or from the run-time system (our constraints).
 All design is a compromise between the ideal and the practical.
@@ -65,25 +61,45 @@ The question of Forth vs Lisp is:
 How hard should we allow the user to crash without foreign procedures:
 just an exit due to an unhandled exception (Lisp), or an abort due to a segmentation fault (Forth)?
 ** Important psychological issues
-The language /must/ come with a /benevolent dictator/ and an /official formatter/ (like =gofmt=).
+The language must come with a /benevolent dictator/.
+
+The language must come with  an /official formatter/ (like =gofmt=).
 Otherwise people will waste energy bickering about code style.
-* Semantics
+With an official formatter, we can use authority to nip such wasteful debates in the bud.
+
+The official formatter does not have to be the best, but should be /good enough/
+to prevent others from wasting energy writing competing formatters.
+* Collecting the semantic design puzzle pieces
 How should we define the semantics?
 What properties do we want?
 Composability/compositionality?
+
+How to design language:
+Ask /critical questions/ and find /corner cases/.
+The answers constrain the language and justify the design.
+
+Here we collect pieces of the semantic design puzzle.
+
+There are several starting point candidates: machine code or mathematics.
+Where should we begin?
+
+Should we bet our future on the engineers, the scientists, the philosophers, or the mathematicians?
 
 In this section, we motivate and define this:
 #+BEGIN_EXAMPLE
 meaning : (Expr,State) -> (Expr,State)
 #+END_EXAMPLE
-** Motivation: Generalizing calculator expressions
+** Motivation: From a humble calculator
 /Computers can be thought of as calculators with state./
 By "state", we mean "memory" or "storage".
 So, we begin by modeling a stateless calculator,
 and then we gradually add features.
 
-We begin by writing a function that evaluates calculator expressions, and then we generalize that.
+Originally, computers were invented to help people do arithmetics,
+which is a part of mathematics.
+Thus we should start from mathematics.
 
+We begin by writing a function that evaluates calculator expressions, and then we generalize that.
 Let us name the function "meaning : Exp -> Val".
 That function may be defined like this:
 
@@ -120,6 +136,14 @@ This generalizes "Bindings" to "State".
 
 We can rearrange "meaning : State -> Exp -> Val" to "meaning : (State,Exp) -> (State,Exp)".
 Then we can rearrange it further to "meaning : State' -> State'" with "current-expression : State' -> Exp".
+** An example of building a programming language
+Another point of view is that programming languages are invented to make it easier to generate machine code.
+
+Suppose that we start with an arithmetic expression evaluator.
+
+#+BEGIN_EXAMPLE
+(evaluate (* (+ 2 3) (+ 2 3)))
+#+END_EXAMPLE
 ** An interpreter is a state endofunction
 When you interpret a paragraph, you interpret each sentence sequentially.
 When you interpret a sentence, you change your internal state.
@@ -194,6 +218,8 @@ Qi/Shen?
 [[https://web.cs.wpi.edu/~jshutt/kernel.html][John N. Shutt]]
 "Kernel is a conservative, Scheme-like dialect of Lisp in which everything is a first-class object."
 What does he mean by "everything"?
+
+[[https://eighty-twenty.org/2011/09/29/fexprs-remain-inscrutable][Problems with the Kernel language]]
 
 I think we want these forms, and there is no other way to implement these forms other than by primitives:
 #+BEGIN_EXAMPLE
@@ -317,11 +343,7 @@ Perhaps we all agree that =(calculate (+ 1 2))= should evaluate to =3=.
 TODO:
 - Constructs for delimiting scope/context
 - First-class scope
-** Quoting, language, semantics
-How to design language:
-Ask /critical questions/ and find /corner cases/.
-The answers constrain the language and justify the design.
-
+** Quotation
 Quoting is not only a feature of written language, but also of spoken language,
 although it is more pronounced in written language.
 In spoken language, quoting is indicated by intonation, gestures, or additional clarifying words.
@@ -376,6 +398,181 @@ A: 20.
 different from: (let ((x 10)) (calculate (+ x x)))
 (calculate (let ((f (lambda (x) (+ x 1)))) (f (f x))))
 #+END_EXAMPLE
+** Let, binding, substitution, maximal sharing, graphs, factoring
+Here we motivate why =let= should be lazy and should introduce maximal sharing.
+
+We begin by the problem in which a meaningful expression L(x,1/0) has a meaningless subexpression 1/0.
+
+Suppose we have defined L(x,y) = x.
+The question: What should be the meaning of L(x,1/0)?
+We know that 1/0 is syntactically valid but is meaningless.
+Solution: We add a /bottom value/ (⊥) to the Universe.
+The bottom value represents errors.
+A bottom means an error, but the details of the error is ignored by the "meaning" function.
+
+#+BEGIN_EXAMPLE
+L x y = x
+L x (1/0) = ?
+let y = 1/0 in L(x,y)
+#+END_EXAMPLE
+
+I think we expect these to have the same meaning:
+
+#+BEGIN_EXAMPLE
+f x
+let x' = x in f x'
+#+END_EXAMPLE
+
+That is, "f(x)" should have the same meaning as "let x' = x in f(x')".
+Therefore, "let" must do substitution, not evaluation.
+But naïve substitution is inefficient.
+But maximal sharing has the same semantics as substitution and is efficient.
+
+However, we don't always want "let" to introduce maximal sharing.
+Sometimes we want "let" to evaluate the binding before evaluating the body.
+We have two choices: do strictness analysis like GHC, or let the programmers choose which one they want.
+
+Thus, =let= should internalize the expression into a graph with maximal sharing.
+Each variable is evaluated at most once.
+At-most-once semantics.
+"before" can be used to order evaluation.
+Note that ordering evaluation does not mean forcing evaluation.
+
+#+BEGIN_EXAMPLE
+meaning(x/0) = ⊥
+if L(x,y) = x then
+  meaning(L(x,y)) = meaning(x)
+  meaning(L(x,⊥)) = meaning(x)
+  meaning(L) = (U2,U,SetBuilder ((x,y),x) x,y in U)?
+  meaning(L(x)) = ??? Currying?
+??? (normalize-in-normal-order (L x y)) ???
+#+END_EXAMPLE
+
+[[https://en.wikipedia.org/wiki/Church%E2%80%93Rosser_theorem][Church--Rosser theorem]]?
+In total functional programming, both eager and lazy evaluation produces the same result?
+
+We don't want to repeat ourselves, so we add these features to our language: factoring, references, and substitutions.
+
+#+BEGIN_EXAMPLE
+(evaluate
+  (let [(x 2)
+        (y 3)
+        (z (+ x y))]
+    (* z z)))
+#+END_EXAMPLE
+** Printing, externalization, representation
+Not only do we want the computer to compute, but we also want it to /show/ the result:
+
+#+BEGIN_EXAMPLE
+(print (evaluate (+ 1 2)))
+#+END_EXAMPLE
+** What?
+We want to "solve" a differential equation.
+
+We create some things: a representation for differential equations, and a compiler (a translator) that,
+given a differential equation and its initial conditions, generates what?
+A procedure? A generator? A list of numbers?
+
+#+BEGIN_EXAMPLE
+;; 0 = Df(x) + 2 * f(x)
+(approximate
+  (differential-equation
+    (= 0 (+ ([d f] x) (* 2 [f x])))
+    functions (f)
+    variables (x))
+  method [euler
+    initial-conditions [(x 0)]
+    step-size 1.0e-6])
+#+END_EXAMPLE
+
+But the form is rather inflexible:
+What if the users want to implement their own methods?
+With if the users want to approximate other things, such as a system of equations?
+
+We also want to plot the result...
+
+We also want to implement iterative approximation algorithms, etc.
+
+Then we want to parse.
+
+Note the reference to =my-char= in the =parse:interpret= block.
+#+BEGIN_EXAMPLE
+(define-function (f port)
+  (define-local-variables my-char my-string)
+  (parse:interpret program (sequence
+      (char) ;; read any char
+      (set! my-char char) ;; read any char and store it to my-char
+      (set! my-string (string of length 8))
+      (char y)
+      (char #\z)
+      (char 0)
+      (char code 32)
+      (set! my-choice (choose (char x) (char y)))
+      eof)
+    with-input-from port))
+#+END_EXAMPLE
+
+Can we generate a pretty printer and a parser from a common description?
+
+Informally, a printer is an inverse parser.
+For example:
+In a parser, the program =(set! x char)= reads a char from the stream and mutates x to refer to the char.
+In a printer, the same program dereferences a char from x and writes the char to the stream.
+
+Note that in =(define x 1)=, we do not set =x= to /contain/ 1, but we set =x= to /refer/ to 1.
+
+Then we also want computers to store data, etc.
+
+Computers are machines that help us do mathematics.
+
+Mathematics is not limited to numbers.
+Mathematics is about unambiguous abstract thinking.
+
+Computer manipulates bits; humans give meaning to computation (what a computer does).
+
+I am impressed by how van Roy & Haridi 2004 \cite{van2004concepts} come up with alternative semantics.
+
+We should not only make computers /do/ something, but we should also make computers /understand/ something,
+so that they can help us make them do something.
+When I first saw the delayed concurrent variable assignment semantics, I was amazed.
+
+...
+
+Finally, after all that hard work, we want to share our work.
+We want to improve our lives together.
+** <2019-12-12> For hygiene, resolve references before expanding macros
+For hygiene, references must be resolved (bound) before macros are expanded.
+
+Example:
+#+BEGIN_EXAMPLE
+A = "There is Andrew."
+B = "There is Bob. He is talking."
+A B = "There is Andrew. There is Bob. He is talking."
+#+END_EXAMPLE
+
+Naïve syntactical concatenation of and A and B causes ambiguity.
+
+But not if we resolve the references first.
+#+BEGIN_EXAMPLE
+RA = "There is Andrew."
+RB = "There is Bob. He(Bob) is talking."
+RA RB = "There is Andrew. There is Bob. He(Bob) is talking."
+#+END_EXAMPLE
+
+Ambiguity:
+The expression =(f x)= is ambiguous.
+If =f= refers to a procedure, the expression means "evaluate x to ex and then compute f(ex)".
+If =f= refers to a macro, the expression means "expand (f y) where y is a reference to x".
+
+Term-rewriting rules / fexprs unify procedures and macros?
+The problem is we want to let the programmers how and when a fragment is expanded?
+
+But it is possible to write an AST transformer that produces an invalid AST.
+For example, one can pull out a lexically scoped variable out of its scope.
+
+We let the programmers decide.
+If they want hygiene, they can use AST transformers.
+If they don't want hygiene, they can use CST transformers.
 ** Semantics
 What should a symbol mean?
 It usually means a hash-table lookup,
@@ -491,113 +688,6 @@ Should the semantics be formulated in terms of expression graph reductions/trans
 An S-expression can be thought of representing a /tree/ (or, more precisely, a /graph/).
 
 A value can be thought of as an irreducible one-vertex graph.
-** An example of building a programming language
-There are several starting point candidates: machine code or mathematics.
-Where should we begin?
-
-Should we bet our future on the engineers, the scientists, the philosophers, or the mathematicians?
-
-Originally, computers were invented to help people do arithmetics,
-which is a part of mathematics.
-Does it mean that we should start from mathematics?
-
-Another point of view is that programming languages are invented to make it easier to generate machine code.
-
-Suppose that we start with an arithmetic expression evaluator.
-
-#+BEGIN_EXAMPLE
-(evaluate (* (+ 2 3) (+ 2 3)))
-#+END_EXAMPLE
-
-We don't want to repeat ourselves, so we add these features to our language: factoring, references, and substitutions.
-
-#+BEGIN_EXAMPLE
-(evaluate
-  (let [(x 2)
-        (y 3)
-        (z (+ x y))]
-    (* z z)))
-#+END_EXAMPLE
-
-Not only do we want the computer to compute, but we also want it to /show/ the result:
-
-#+BEGIN_EXAMPLE
-(print (evaluate (+ 1 2)))
-#+END_EXAMPLE
-
-We want to "solve" a differential equation.
-
-We create some things: a representation for differential equations, and a compiler (a translator) that,
-given a differential equation and its initial conditions, generates what?
-A procedure? A generator? A list of numbers?
-
-#+BEGIN_EXAMPLE
-;; 0 = Df(x) + 2 * f(x)
-(approximate
-  (differential-equation
-    (= 0 (+ ([d f] x) (* 2 [f x])))
-    functions (f)
-    variables (x))
-  method [euler
-    initial-conditions [(x 0)]
-    step-size 1.0e-6])
-#+END_EXAMPLE
-
-But the form is rather inflexible:
-What if the users want to implement their own methods?
-With if the users want to approximate other things, such as a system of equations?
-
-We also want to plot the result...
-
-We also want to implement iterative approximation algorithms, etc.
-
-Then we want to parse.
-
-Note the reference to =my-char= in the =parse:interpret= block.
-#+BEGIN_EXAMPLE
-(define-function (f port)
-  (define-local-variables my-char my-string)
-  (parse:interpret program (sequence
-      (char) ;; read any char
-      (set! my-char char) ;; read any char and store it to my-char
-      (set! my-string (string of length 8))
-      (char y)
-      (char #\z)
-      (char 0)
-      (char code 32)
-      (set! my-choice (choose (char x) (char y)))
-      eof)
-    with-input-from port))
-#+END_EXAMPLE
-
-Can we generate a pretty printer and a parser from a common description?
-
-Informally, a printer is an inverse parser.
-For example:
-In a parser, the program =(set! x char)= reads a char from the stream and mutates x to refer to the char.
-In a printer, the same program dereferences a char from x and writes the char to the stream.
-
-Note that in =(define x 1)=, we do not set =x= to /contain/ 1, but we set =x= to /refer/ to 1.
-
-Then we also want computers to store data, etc.
-
-Computers are machines that help us do mathematics.
-
-Mathematics is not limited to numbers.
-Mathematics is about unambiguous abstract thinking.
-
-Computer manipulates bits; humans give meaning to computation (what a computer does).
-
-I am impressed by how van Roy & Haridi 2004 \cite{van2004concepts} come up with alternative semantics.
-
-We should not only make computers /do/ something, but we should also make computers /understand/ something,
-so that they can help us make them do something.
-When I first saw the delayed concurrent variable assignment semantics, I was amazed.
-
-...
-
-Finally, after all that hard work, we want to share our work.
-We want to improve our lives together.
 ** Security considerations
 See [[file:secure.html]].
 
@@ -643,39 +733,8 @@ Appropriate words can be arranged to convey inappropriate ideas.
 
 We assume that user U's running programmer P's program proves that user U trusts programmer P.
 (What if U runs P's program accidentally or unknowingly?)
-** <2019-12-12> For hygiene, resolve references before expanding macros
-For hygiene, references must be resolved (bound) before macros are expanded.
-
-Example:
-#+BEGIN_EXAMPLE
-A = "There is Andrew."
-B = "There is Bob. He is talking."
-A B = "There is Andrew. There is Bob. He is talking."
-#+END_EXAMPLE
-
-Naïve syntactical concatenation of and A and B causes ambiguity.
-
-But not if we resolve the references first.
-#+BEGIN_EXAMPLE
-RA = "There is Andrew."
-RB = "There is Bob. He(Bob) is talking."
-RA RB = "There is Andrew. There is Bob. He(Bob) is talking."
-#+END_EXAMPLE
-
-Ambiguity:
-The expression =(f x)= is ambiguous.
-If =f= refers to a procedure, the expression means "evaluate x to ex and then compute f(ex)".
-If =f= refers to a macro, the expression means "expand (f y) where y is a reference to x".
-
-Term-rewriting rules / fexprs unify procedures and macros?
-The problem is we want to let the programmers how and when a fragment is expanded?
-
-But it is possible to write an AST transformer that produces an invalid AST.
-For example, one can pull out a lexically scoped variable out of its scope.
-
-We let the programmers decide.
-If they want hygiene, they can use AST transformers.
-If they don't want hygiene, they can use CST transformers.
+** Arranging the puzzle pieces?
+Now that we have the pieces of the puzzle (quotation, maximal sharing), how do we arrange them into a coherent picture?
 * Run-time system
 [[https://drops.dagstuhl.de/opus/volltexte/2015/5475/pdf/4.pdf][Belikov 2015]] \cite{belikov2015language}
 ** On choosing the implementation language
