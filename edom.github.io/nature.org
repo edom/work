@@ -186,30 +186,7 @@ Hence it comes early in this book.
 - Physics with /conviction/;
   Physics with confidence
 - (something else?)
-* Reintroduction to mathematics
-** Dispelling the fear of mathematics
-Fear mathematics not, because it is just abbreviated English.
-For example, instead of repeating the cumbersome "where the ball is at a given time",
-we may write the much shorter "\( h(t) \)".
-Instead of writing the long and hard-to-parse phrase
-"a number that equals zero when multiplied by itself and then subtracted by one",
-we write "a number \(x\) such that \(x^2 - 1 = 0\)".
-
-Mathematics originated as a way of modeling reality.
-
-People did math because they wanted to do something in the real world.
-Shepherds want to make sure that they don't lose cattle, so they count their cattles.
-Carpenters want to cut woods for the diagonal braces of a roof, so they use the Pythagorean theorem.
-Merchants want to profit, so they subtract expenses from income, and use exponentials to calculate interests.
-Train operators want to profit, so they calculate the quantity of coal they should carry for a given distance.
-Nations want to avoid famine, so they calculate how much crop they should plant.
-And so on.
-People did math to avoid wasting things.
-
-The numerical operations used in these applications are mostly simple.
-The difficulty lies in collecting the facts and justifying the assumptions
-that connect the mathematical world and the physical world.
-** Mathematical modeling
+* ? Mathematical modeling
 What is the minimum number of parameters needed to model a physical system?
 How many parameters are required to capture the aspects we are interested in?
 
@@ -425,67 +402,6 @@ Theoretical physics advances by removing simplifying assumptions.
 
 Lagrangian and Hamiltonian are mathematical things.
 Do they have physical meaning?
-** Coordinate transformations
-A coordinate transformation is a mapping between from one coordinate system to another.
-*** Some coordinate systems
-A \emph{coordinate system} maps a coordinate tuple to a vector.
-**** The rectangular coordinate system
-\(R(x,y) = x e_1 + y e_2\).
-
-\(R(x) = x_1 e_1 + x_2 e_2\).
-
-In this system, the coordinates are the scalar coefficients in the linear combination of basis vectors.
-The coordinates describe how the basis vectors should be linearly combined to form the described vector.
-
-Let \(T : V^2 \to V^2\) be a linear transformation.
-Then \(T(R(x)) = T(x_1 e_1 + x_2 e_2) = x_1 \cdot T(e_1) + x_2 \cdot T(e_2) = x_1 e_1' + x_2 e_2' = R'(x) \).
-**** The polar coordinate system
-\(P(r,t) = r e_1 \text{ rotated } t \text{ radians counterclockwise}\).
-
-\section{Locating the same point with different coordinate systems}
-
-Example of coordinate transformation:
-The same point in the same two-dimensional Euclidean space
-is described by
-both the polar coordinates \( (r,\theta) \)
-and the rectangular coordinates \( (r \cos \theta, r \sin \theta) \).
-The transformation is \( (r,\theta) \to (r \cos \theta, r \sin \theta) \).
-
-What
- \footnote{\url{https://en.wikipedia.org/wiki/Real_coordinate_space}}
- \footnote{\url{https://en.wikipedia.org/wiki/Real_coordinate_space}}
- \footnote{\url{https://en.wikipedia.org/wiki/Mathematical_analysis}}
-
-A \emph{coordinate system} $M : C \to S$ is a surjective mapping from
-\emph{coordinate space} $C$ to \emph{target space} $S$.
-
-A \emph{coordinate} is a point in \(C\).
-The coordinate system tells us how to get to a point.
-
-The \(n\)-dimensional real coordinate space is $\mathbb{R}^n$.
-It is also called the real $n$-space.
-A point in the real $n$-space is an $n$-tuple of real numbers $(x_1,\ldots,x_n)$.
-
-$(x,y)$ is the tuple of coordinates,
-$x$ is the x-coordinate, and $y$ is the y-coordinate.
-
-Coordinate systems unify geometry and
-mathematical analysis.
-With coordinates,
-we can solve geometric problems by
-numbers, calculus, and algebra,
-so that computers can
-find the intersection of geometric objects
-by solving the corresponding system of equations,
-and find the size of a geometric object by solving the corresponding integral.
-*** Converting polar coordinate tuples to rectangular coordinate tuples
-Both the rectangular coordinate $(r\cos\theta, r\sin\theta)$ and the polar coordinate $(r,\theta)$
-describe the same point in two-dimensional Euclidean space.
-\[
-R(r\cos\theta, r\sin\theta) = P(r,\theta)
-\]
-
-A point in a space can have different coordinates in different coordinate systems.
 ** Gases?
 The gas flows according to the pressure difference.
 
@@ -794,17 +710,6 @@ Think of instantaneous velocity.
 The /derivative of $f$ at $x$/ is the slope of the tangent line of $f$ at $x$.
 Reminder: The line $y = mx + c$ has slope $m$.
 
-** Coordinates
-** Coordinate systems
-A coordinate system is a way of /naming/ points in a space.
-
-A coordinate system over E describes how to /name/ each point in E, how to locate those points.
-The name of a point is a tuple of numbers.
-
-How does Newton's equation work with generalized coordinates?
-
-Example of generalized coordinates x(q) = (q,q2,0).
-Bead on a rail on xy-plane.
 ** Mechanics?
 2017-12-18 05:29:06.343592295 +0700
 

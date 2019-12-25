@@ -1,31 +1,135 @@
-#+TITLE: On motion
+#+TITLE: On mathematical modeling of motion
 #+DATE: 2018-04-11 04:00 +0700
 \(
 \newcommand\der{\operatorname{der}}
+\newcommand\Der{\mathrm{D}}
 \newcommand\dd{\operatorname{d}}
 \newcommand\ang[1]{#1^\circ}
 \newcommand\parenthesize[1]{\left(#1\right)}
+\newcommand\dif{\mathrm{d}}
+\newcommand\Dif{\Delta}
 \)
-* Overview
-Here is what we are going to do.
-We start with a simple model, and then we gradually generalize the hell out of it.
+(Scope has expanded. New title: "Physics with emphasis on mathematical modeling")
+* The language of mathematics
+This chapter is required for understanding all next chapters.
 
-The purpose of this activity is not to understand all models,
-but to build enough habit of /mathematical thinking/
-so that we are /able/ to understand models /as necessary/,
-in the same way the purpose of learning to punch is not to punch everything all the time,
-but to build enough habit so that we are /able/ to punch /as necessary/.
+There shouldn't be anything we don't already know,
+so we could glance through it, just to be aware of the book's idiosyncrasies.
 
-Drill down / flesh out / detail some of [[http://www.goodtheorist.science/][t'Hooft's advice]].
-* Modeling space and objects with geometry
+If you program computers, you can think of mathematics as a
+[[https://en.wikipedia.org/wiki/Domain-specific_language][domain-specific language]]
+for concise and precise thinking.
+** Dispelling the fear of mathematics
+Fear mathematics not, because it is just abbreviated English.
+For example, instead of repeating the cumbersome "where the ball is at a given time",
+we may write the much shorter "\( h(t) \)".
+Instead of writing the long and hard-to-parse phrase
+"a number that equals zero when multiplied by itself and then subtracted by one",
+we write "a number \(x\) such that \(x^2 - 1 = 0\)".
+
+We have just seen mathematics speed up our thinking!
+
+Mathematics originated as a way of modeling reality.
+
+People did math because they wanted to do something in the real world.
+Shepherds want to avoid losing cattle, so they count their cattles.
+Carpenters want to cut woods for the diagonal braces of a roof, so they use the Pythagorean theorem.
+Merchants want to profit, so they subtract expenses from income, and use exponentials to calculate interests.
+Train operators want to profit, so they calculate the quantity of coal they should carry for a given distance.
+Nations want to avoid famine, so they calculate how much crop they should plant.
+And so on.
+People originally did math to avoid wastage, mistakes, and pain.
+
+People also did math to plan.
+For example, if a bush can feed one person,
+and there are three people in my family,
+then I would need to forage three bushes to feed my family.
+** Digression: From "because we must" to "because we want"
+(This may be false. Perhaps farming did not give people more leisure time, but it enabled people to build bigger and denser settlements.)
+
+At first we did math because we had to survive.
+
+We /counted/ the things that determine our survival: animals, plants, people, weapons.
+We had /numbers/, but they were tied to units:
+we understood "one cow", but we did not understand "one".
+
+We found /linear relationships/ between the number of family members and the rate of resource consumption.
+
+We wanted to survive, so we thought about /optimization/: to get maximum result with minimum effort.
+We built tools, farmed crops, trapped animals, built houses, settled down, simplified survival, and got much leisure time.
+It was futile to work harder than what was necessary for survival, because the surplus harvest would be wasted;
+Nature does not reward material possession beyond what is necessary to survive.
+We were wealthy in the sense that we had everything we wanted without working,
+because everything we wanted was to survive; crops gave themselves for us to eat;
+they didn't fight back like animals; what else could we want other than free food?
+It was heaven; we didn't know what else there was to want.
+We didn't know what to do with all that leisure time,
+so we began doing things for fun: painting cave walls, making statues, etc.
+
+With so much leisure time,
+we began doing things because we /could/, not because we /had to/,
+because there was nothing we had to do.
+
+Curiosity, not necessity.
+
+We have moved from doing what we /must/ to doing what we /want/.
+** Expressions
+An /expression/ is something like \(1+2\), or \(x + y \cdot z\), and so on.
+** Equations
+An /equation/ \(x = y\) (read "\(x\) is equal to \(y\)") means that
+every occurrence of \(x\) can be /replaced/ with \(y\),
+and also the other way around:
+every occurrence of \(y\) can be replaced with \(x\).
+** Sets
+A set is a collection without duplicates.
+
+Example: \( \Set{1,2,3} \) is a set of three things.
+
+Example: \( \Real \) is the set of all real numbers.
+(Perhaps for now it suffices to know that \(\Real\) at least contains every number that you can type into a simple calculator.)
+** Functions
+(Should we just use the domain-codomain-pairing triplet formalism?)
+
+A /function/ \(f\) is usually defined by an equation like \( f(x) = \text{something} \).
+See the following example.
+
+Suppose that we have defined \(f(x) = x+1\) and we want to /evaluate/ \(f(2)\).
+We do this by /assuming/ \(x=2\) (because we want to evaluate \(f(2)\)).
+Here is how we do it:
+
+\begin{align*}
+f(x) &= x+1 & \text{by definition}
+\\ f(2) &= 2+1 & \text{by assuming \(x = 2\)}
+\\ f(2) &= 3 & \text{because \(2+1 = 3\)}
+\end{align*}
+Therefore, \(f(2) = 3\).
+
+As you become more proficient in math-speak, you will be able to skip the intermediate steps.
+
+Note that, in the above example, the function is \(f\), not the expression \(f(x)\).
+People often mistakenly say "the function \(f(x)\)".
+Do not confuse a function and its application.
+
+Sometimes we write \(f(x)\) as \(fx\).
+
+We rarely do these, but we can write \(f(x)\) as \(f~x\),
+and we can write \(f(x) = x+1\) as \(f = (x \mapsto x+1)\).
+(This probably only makes sense to functional programmers.)
+
+A function can represent the relationship between two quantities in which one quantity determines the other quantity.
+* Geometry of space and objects; coordinate systems
 - Model space as a three-dimensional Euclidean space.
 - Model space as a three-dimensional real tuple space.
 - Model a rigid object as a point mass.
+- ? Triangles, trigonometry.
 ** Modeling space as a three-dimensional Euclidean space
 The title means "Modeling /physical space/ as a /mathematical space/".
 There are two different meanings of "space".
 Physical space is often thought of as the volume occupied by objects.
 A mathematical space is a set of points.
+
+Most likely, you already understand a three-dimensional Euclidean space,
+because it is your internal mental model of the space around you.
 
 How do we know how many /dimensions/ a space has?
 
@@ -42,15 +146,33 @@ We know that two lines are orthogonal if all the four angles formed by their int
 
 Other terms for "orthogonal" are "perpendicular" and "at a right angle".
 
-You already understand a three-dimensional Euclidean space:
-it is most likely your internal mental model of the space around you.
-
 An [[https://en.wikipedia.org/wiki/Euclidean_space][Euclidean space]] is a set of points, not a set of coordinates.
 
 We usually draw a point as a dot, but a point is a zero-dimensional geometric object that occupies no space at all.
 
 [[https://commons.wikimedia.org/wiki/File:Coord_system_CA_0.svg#][This picture]] may help you visualize a three-dimensional real tuple space.
-** Modeling space as a real tuple space
+** Modeling a rigid object as a point mass
+We can model a [[https://en.wikipedia.org/wiki/Rigid_body][rigid body]] as a [[https://en.wikipedia.org/wiki/Point_particle][point mass]], that is,
+as if all the mass of that body is concentrated at one geometrical zero-dimensional point that occupies no space at all.
+This mathematical fiction is philosophically unsound, but works well as long as the body does not disintegrate.
+
+For example, in most situations, we only care about where a car is;
+we don't care where the wheels are, where the wipers are, etc.
+We just assume that the car is one point.
+** Naming points with coordinate systems
+We need to name points because we need to refer to them.
+With the alphabet we can only name a very limited number of points.
+We want to name /all/ points in a space.
+
+A /coordinate system/ maps a coordinate tuple to a vector?
+
+A /coordinate system/ is a way of /naming/ points in a space.
+
+A coordinate system over E describes how to /name/ each point in E, how to locate those points.
+The name of a point is a tuple of numbers.
+
+? Modeling a space as a real tuple space?
+
 A real tuple space can be obtained by imposing a coordinate system on an Euclidean space.
 
 Here is how we can imagine a three-dimensional Euclidean real tuple space:
@@ -94,9 +216,109 @@ However, without numbers, we cannot express \(d(A,B)\) as a square root, because
 We have just witnessed the usefulness of analytic geometry.
 
 The "sythetic geometry" style of computing \(d(A,B)\) is to use a ruler to measure the length.
-** Digression: On analytic geometry
+** Modeling position with coordinates
+We pick a point called the /origin/, and pick three directions.
+Then, each point in space can be described as a tuple \((x,y,z)\) of three numbers;
+that tuple means "From the origin, go \(x\) steps east, \(y\) steps north, and \(z\) steps up."
+
+A tuple is a bunch of numbers.
+
+A coordinate system gives meaning to such tuples.
+
+Cartesian coordinate systems?
+
+A coordinate system is a method of naming every point.
+
+Let \(E^n\) mean the \(n\)-dimensional Euclidean space.
+
+A Cartesian coordinate system is a geometric interpretation of a real tuple space.
+Such system uses
+a tuple in \(\Real^n\) and three orthogonal axes
+to describe a point in \(E^n\).
+"Axes" here is plural of "axis", not of "axe".
+
+For an example of a two-dimensional Cartesian coordinate system, see [[https://en.wikipedia.org/wiki/File:Cartesian-coordinate-system.svg?][picture]].
+The positive x-axis points right.
+The positive y-axis points up.
+
+In three dimensions:
+(A picture would be nice.)
+
+The standard three-dimensional Cartesian coordinate system is right-handed.
+With your right hand, form an L with the thumb and the index finger,
+and form another L with the index and the middle finger.
+Then see this table.
+
+#+CAPTION: Standard directions
+| direction | right hand finger | XYZ        |
+|-----------+-------------------+------------|
+| rightward | right thumb       | X positive |
+| forward   | right index       | Y positive |
+| leftward  |                   | X negative |
+| backward  |                   | Y negative |
+| upward    | right middle      | Z positive |
+| downward  |                   | Z negative |
+
+See also [[https://en.wikipedia.org/wiki/Cartesian_coordinate_system][Cartesian coordinate system]]
+and [[https://en.wikipedia.org/wiki/Right-hand_rule][right-hand rule]].
+** ? Why are we talking about these?
+*** The rectangular coordinate system
+\(R(x,y) = x e_1 + y e_2\).
+
+\(R(x) = x_1 e_1 + x_2 e_2\).
+
+In this system, the coordinates are the scalar coefficients in the linear combination of basis vectors.
+The coordinates describe how the basis vectors should be linearly combined to form the described vector.
+
+Let \(T : V^2 \to V^2\) be a linear transformation.
+Then \(T(R(x)) = T(x_1 e_1 + x_2 e_2) = x_1 \cdot T(e_1) + x_2 \cdot T(e_2) = x_1 e_1' + x_2 e_2' = R'(x) \).
+*** The polar coordinate system
+\(P(r,t) = r e_1 \text{ rotated } t \text{ radians counterclockwise}\).
+
+\section{Locating the same point with different coordinate systems}
+
+Example of coordinate transformation:
+The same point in the same two-dimensional Euclidean space
+is described by
+both the polar coordinates \( (r,\theta) \)
+and the rectangular coordinates \( (r \cos \theta, r \sin \theta) \).
+The transformation is \( (r,\theta) \to (r \cos \theta, r \sin \theta) \).
+
+What
+ \footnote{\url{https://en.wikipedia.org/wiki/Real_coordinate_space}}
+ \footnote{\url{https://en.wikipedia.org/wiki/Real_coordinate_space}}
+ \footnote{\url{https://en.wikipedia.org/wiki/Mathematical_analysis}}
+
+A \emph{coordinate system} $M : C \to S$ is a surjective mapping from
+\emph{coordinate space} $C$ to \emph{target space} $S$.
+
+A \emph{coordinate} is a point in \(C\).
+The coordinate system tells us how to get to a point.
+
+The \(n\)-dimensional real coordinate space is $\mathbb{R}^n$.
+It is also called the real $n$-space.
+A point in the real $n$-space is an $n$-tuple of real numbers $(x_1,\ldots,x_n)$.
+
+$(x,y)$ is the tuple of coordinates,
+$x$ is the x-coordinate, and $y$ is the y-coordinate.
+
+Coordinate systems unify geometry and
+mathematical analysis.
+With coordinates,
+we can solve geometric problems by
+numbers, calculus, and algebra,
+so that computers can
+find the intersection of geometric objects
+by solving the corresponding system of equations,
+and find the size of a geometric object by solving the corresponding integral.
+*** Digression: What is position?
+Position is the relative place of things.
+Is position a property of a thing?
+Position is relative.
+The position of a thing is measured with respect to another thing.
+*** Digression: On analytic geometry
 A coordinate system marries points and numbers,
-so that we can manipulate points as easily as we manipulate numbers.
+so that we can refer to every point as easily as we manipulate numbers.
 This enables computers to do geometry.
 This enables geometry with calculator without drawing.
 This speeds up computation.
@@ -115,38 +337,93 @@ that it permits the methods of the calculus, and, more generally, of
 mathematical analysis, to be introduced into geometry."
  [fn::page 1 in "Two Approaches to Modelling the Universe: Synthetic Differential Geometry and Frame-Valued Sets" by John L. Bell
 http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.114.1930&amp;rep=rep1&amp;type=pdf]
+* Simple models
+Quantities, numbers, and variables.
 
-** Modeling a rigid object as a point mass
-We can model a [[https://en.wikipedia.org/wiki/Rigid_body][rigid body]] as a [[https://en.wikipedia.org/wiki/Point_particle][point mass]], that is,
-as if all the mass of that body is concentrated at one geometrical zero-dimensional point that occupies no space at all.
-This mathematical fiction is philosophically unsound, but works well as long as the body does not disintegrate.
+We can still compute something even if we don't have any numbers to plug into the variables.
+** Digression: On Galileo
+Galileo was an enemy of unjustified beliefs.
+ [fn::<2019-12-25> https://owlcation.com/humanities/Biography-of-Galileo-Galilei]
+It must have been lonely to be the only thinking person among mindless people.
 
-For example, in most situations, we only care about where a car is;
-we don't care where the wheels are, where the wipers are, etc.
-We just assume that the car is one point.
-* Modeling motion with numbers and vectors
-- Model free falls with numbers and vectors.
-- Model constant linear motion with vectors.
-
-This model is commonly used in most video games, which don't have to be realistic,
-but do have to be realistic /enough/ to immerse the players.
-
-This model is very philosophically unsound, but /it works amazingly well/ for everyday situations.
-We use this model to make cars, airplanes, and other machines.
+([[https://en.wikipedia.org/wiki/Two_New_Sciences][Galileo 1638]] studied falling objects, among other things.
+We now concisely write his discovery as a quadratic equation that relates the height of fall and the time of fall,
+but he did not have that luxury.
+He only had numbers and Euclidean geometry.
+Analytic geometry had not been widespread.
+** Digression: Measuring force with a spring
+[[https://en.wikipedia.org/wiki/Hooke%27s_law][Hooke's law]] enables us to use springs to measure forces.
+First, we calibrate the spring by measuring its stiffness \(k\) using a standard weight (such as a kilogram or a liter of water).
+Then, the magnitude of the pulling force \(F = k \cdot x\) is calculated from the observed elongation \(x\).
+Other names for this tool are "spring scale", "force gauge", "force meter", "dynamometer".
+See [[https://commons.wikimedia.org/wiki/File:Silom%C4%9Br_25.png?][picture]].
 ** Modeling free falls with numbers
-Galileo's falling objects and inclined planes
+Galileo (or was it someone else?) dropped two heavy solid things with different masses from the same height,
+and he found that both of them reached the ground at the same time, regardless of the height from which they fell.
 
-Let \( h \) be the /height of fall/: the height from which an object is dropped, as measured from the ground below it.
+Galileo found a quadratic relationship \( h = k t^2 \) where:
 
-Let \( t \) be the /time of fall/: the time the object takes to reach the ground from its height of fall.
+- \( h \) is the /height of fall/: the height from which an object is dropped, as measured from the ground below it.
+- \( t \) is the /time of fall/: the time the object takes to reach the ground from its height of fall.
+- \( k \) is a constant.
 
-Galileo found \( h = k t^2 \) where \( k \) is a constant.
+(Did Galileo found that or \( h = k \cdot \sin \theta \cdot t^2 \)? Inclined planes?)
 
 (Digression about history: Was this due to [[https://www.geogebra.org/m/c7gqnpNf][Galileo]]
 or [[https://en.wikipedia.org/wiki/Newton%27s_law_of_universal_gravitation#Early_history][Grimaldi and Riccioli]]?)
+** Finding power laws with logarithms
+I suspect that this method was probably used, in the 16th century,
+by Galileo to find the relationship between height of fall and time of fall,
+and by Kepler to formulate some of his laws of planetary motion,
+and by many others.
 
-Galileo (or was it someone else?) dropped two heavy solid things with different masses from the same height,
-and he found that both of them reached the ground at the same time, regardless of the height from which they fell.
+Suppose that we suspect that the quantity \(x\) and the quantity \(y\)
+have the relationship \( y = mx^p \),
+and we want to find out \(m\) and \(p\).
+
+First we use logarithms to turn the equation into a linear combination of \( \log m \) and \( p \):
+\begin{align*}
+y &= mx^p
+\\ \log y &= \log(mx^p)
+\\ \log y &= \log m + p \log x
+\end{align*}
+
+Then we make \(n\) measurements, we plot the graph,
+we see if we can fit a straight line to the points,
+and calculate the slope.
+
+If we want to be more modern, we can use the method of least squares.
+
+See also [[http://www.personal.psu.edu/tcr2/textbook/scaling.html][Reluga 2019]].
+* Digression: An example of a circle in differential geometry?
+Curious:
+
+\begin{align*}
+x^2 + y^2 &= r^2
+\\ (x + \Dif x)^2 + (y + \Dif y)^2 &= r^2
+\end{align*}
+
+Subtract both equations, and change \( \Dif \) to \( \dif \), with non-standard analysis.
+What do we get?
+* Vectors
+- Model free falls with numbers and vectors.
+- Model constant linear motion with vectors.
+** Modeling movement with vectors
+The vector AB is the shortest path from point A (its origin) to point B (its destination).
+Thus a vector has magnitude and direction.
+
+A vector is usually drawn as a straight line with an arrowhead on its destination end.
+
+In everyday situation, the shortest path connecting two points is a straight line.
+However, in a long-haul flight, the shortest path is an arc, unless we drill through the Earth.
+
+A coordinate is a tuple (a bunch, a group) of numbers.
+
+The question "Where is something?" can be answered systematically, such as with postal addresses.
+
+"Where is that point P?"
+The Cartesian coordinate system answers "P is at \((1,2)\)"
+to mean "from the point A, go 1 step east, then go 2 steps north, and then you will be at P".
 ** Modeling free falls with vectors
 Newton found that an apple and the moon are falling toward the Earth in the same way.
 But why stop at apples and moons?
@@ -231,6 +508,8 @@ The conservation of momentum can be [[https://en.wikipedia.org/wiki/Momentum#Con
 *Forces come in pairs.* Forces are an interaction between two objects.
 This means that if object A pushes on object B, then object B pushes on A with the same force but in the opposite direction.
 #+END_QUOTE
+* Coordinate transformations
+A coordinate transformation (a coordinate system transformation) is a mapping between from one coordinate system to another.
 ** Modeling a pendulum with a non-Cartesian coordinate system
 Imagine a pendulum.
 
@@ -289,7 +568,15 @@ This is to zero out the constraint forces.
 ... such that the number of parameters matches the degree of freedom ...
 
 For example, the pendulum has one degree of freedom, but we superfluously used two parameters ...
-* Modeling motion with functions
+** Converting polar coordinate tuples to rectangular coordinate tuples
+Both the rectangular coordinate $(r\cos\theta, r\sin\theta)$ and the polar coordinate $(r,\theta)$
+describe the same point in two-dimensional Euclidean space.
+\[
+R(r\cos\theta, r\sin\theta) = P(r,\theta)
+\]
+
+A point in a space can have different coordinates in different coordinate systems.
+* Functions, and differential calculus
 - Model a trajectory as a function from time to space, or, as a time-parameterized curve in space.
 - Generalization 1: function to relation
   - Model the motion of a point mass as a relation between time to space.
@@ -299,6 +586,202 @@ For example, the pendulum has one degree of freedom, but we superfluously used t
   - Example: Model a pendulum a la Newton, Lagrange, and Hamilton.
   - Generalize: Model a system a la Newton, Lagrange, and Hamilton.
 - ??? Model a mechanical linkage (such as a crankshaft and a piston), its motion, its constraint forces, and its stresses
+** Generalizing movement to motion; introducing time
+Not only do we want to model /movement/; we also want to model /motion/.
+
+What is the difference between "movement" and "motion"?
+
+In short, a /movement/ is a change in position,
+and a /motion/ is a continuous movement.
+
+Both movement and [[https://en.wikipedia.org/wiki/Motion_%28physics%29][motion]] mean a change of position,
+but there is a subtle difference.
+When we say "movement", we care only about whether an object has changed its position.
+When we say "motion", we care about the trajectory, the details, how the object changed its position over time.
+
+What is change?
+Change is inequality, non-identity, non-sameness.
+Change happens over /time/.
+
+How do we know that an object moved?
+By observing a change in its position.
+A thing /moves/ iff its position changes.
+Its /position/ is where it is in space.
+
+/Displacement/ is relative position.
+
+** Abstracting a path into a function
+A /path/ is a one-dimensional geometric object, usually smooth.
+
+A /[[https://en.wikipedia.org/wiki/Path_(topology)][path]] in space \(X\)/ is a function \( T \to X \)
+whose domain \(T\) is a [[https://en.wikipedia.org/wiki/Interval_(mathematics)][real interval]].
+
+A /[[https://en.wikipedia.org/wiki/Trajectory][trajectory]]/ is a path
+whose domain represents an interval of time and whose codomain represents physical space.
+
+A trajectory \(x\) means "At time \(t\), the object of interest is at position \(x(t)\)".
+** Modeling velocity with derivatives
+We can /derive/ the velocity function \(v\) from the trajectory \(x\), with differential calculus.
+
+If we record that a body was at position \(x(t_0)\) at time \(t_0\) and that it was at position \(x(t_1)\) at time \(t_1\),
+then we say that the body moved between time \(t_0\) and \(t_1\) with the /average velocity/ \(\bar{v}(t_0,t_1) = \frac{x(t_1)-x(t_0)}{t_1-t_0}\).
+
+If we endeavor to record the movement more frequently that \(t_1\) approaches \(t_0\),
+we approximate the /instantaneous velocity/ of the body at \(t_0\), that is
+\( v(t_0) = \lim_{t_1 \to t_0} v(t_0,t_1) = \lim_{t_1 \to t_0} \frac{x(t_1) - x(t_0)}{t_1 - t_0} \).
+
+We define "the /derivative/ of \(f\) at \(x\)" as \( [Df](x) \) where:
+\begin{align*}
+[Df](x) = \lim_{h \to 0} \frac{f(x+h)-f(x)}{h}
+\end{align*}
+
+Note that here \(Df\) notates a function, read "derivative of \(f\)", not "\(D\) multiplied by \(f\)".
+
+Note that \([Df](x)\) notates the output produced by function \(Df\) for input \(x\).
+
+Some derivatives can easily be computed using [[https://en.wikipedia.org/wiki/Derivative#Rules_of_computation][many shortcuts]] found by our ancestors.
+
+Exercise: If \(f(x) = x^2\), evaluate \([Df](5)\), using the power rule.
+** Modeling the motion of a system of several bodies, with several functions
+Consider a system of \(n\) bodies.
+
+The Newton model of that system is \( (x_1,\ldots,x_n) \) where \( x_k : \Real \to \Real^3 \) for each \(k\).
+The interpretation is "At time \(t\), body \(1\) is at \(x_1(t)\), ..., and body \(n\) is at \( x_n(t) \)".
+The model is further constrained by a set of \(n\) equations, each of the shape \( F_k = m \cdot \ddot{x}_k(t) \),
+where the shape of \(F_k\) depends on the details of the physical system that is being modeled.
+For example, if body \(k\) experiences friction, then \(F_k\) may depend on \(\dot{x}_k\).
+Another example: if all bodies are celestial bodies, then \( F_k(t) = \sum_{i \neq k} \frac{G \cdot m_k \cdot m_i}{\norm{x_i(t) - x_k(t)}^2} \),
+from Newton's law of universal gravitation.
+
+\(F_k\) may involve the time parameter \(t\),
+the position \(x_k\), its derivatives, and its retardations such as \(x_k(t-1)\), etc.,
+but only a tiny subset of those expressions have solutions that can be computed manually.
+
+Why stop at the first derivative?
+
+Inertia of an object preserves the object's motion.
+
+Force acting on an object changes the object's motion.
+
+Hooke's law:
+Hang a spring of length \( L \).
+Attach a unit of weight \( w \), to the free end of the spring, and the length of the spring changes to \( L + x \).
+Attach another unit of weight, and the length of the spring changes to \( L + 2 x \).
+
+Attaching a weight of \( n w \) to the free end elongates the spring by \( n k x \) from its resting length.
+
+If an object changes its motion, then the resultant force acting on that object is nonzero.
+
+We know forces only by their effects.
+We don't know forces.
+
+It is very intuitive to posit that all objects would rather rest than move, as Aristotle posited.
+
+But we can directly feel forces by the tension in our muscles?
+Thus we can know forces?
+
+/Dynamic friction/ is modeled as the force \( F = - k \vec{v} \).
+
+???
+The position of a body at a given time is represented by a vector in the observer's vector space.
+** Modeling transverse waves or surface waves
+A wave is represented by a function
+
+f : Position × Time → Amplitude
+
+The interpretation is: "At time \(t\), the amplitude of the part of the wave at point \(x\) is \(f(x,t)\)".
+
+Amplitude is displacement from resting position.
+
+That is, a wave is often represented as an /amplitude field/.
+(In mathematical physics, an "X field" is a function from position to X.)
+
+Example phenomena that can be represented by periodic functions:
+the motion of a pendulum,
+the surface waves of water in a pond,
+the oscillation of a guitar string.
+
+Often, the wave is extrapolated to infinity.
+For example, when modeling a pond, we often assume that the pond is infinite, it has no edges, and waves do not reflect off the edges.
+We assume that wave propagate freely without hitting any obstacles, without reflection, without diffraction.
+
+If we use the simplifying assumption that a wave repeats infinitely in both space and time,
+then we can define wavelength and period:
+
+A wave has /wavelength/ \( |dx| \) iff \( dx \) is a shortest vector (the shortest vector) such that \(f(x+dx,t) = f(x,t)\) for all \( t \).
+
+A wave has /period/ \( dt \) iff \( dt \) is the smallest positive number such that \(f(x,t+dt) = f(x,t)\) for all \( x \).
+
+That is, wavelength is spatial periodicity, and period is temporal periodicity.
+** Modeling the cause of motion
+A force is defined as the cause of motion.
+
+If we observe that an object is accelerating, then we take it to mean that a non-zero resultant force is acting on the object.
+
+Newton's second law:
+Iff \(F(t)\) is the sum of all forces acting on an object at time \(t\),
+and iff \( p(t) \) is the object's momentum at time \(t\),
+then \( F = Dp \).
+** Modeling an object as a gravitational field
+A /time-invariant gravitational field/ \( g \) is a function
+such that a point mass \(m\) at position \(x\) would feel a gravitational force of \( F = m \cdot g(x) \).
+
+Digression: Philosophy (is this correct?).
+By modeling an object as a gravitational field, we sidestep an ontological question (about what the object is),
+and deal with an epistemological question (how do we know the object, that is by its effects).
+By modeling the object as a field, we ignore what the object actually is, and we focus on the effects caused by the object.
+** Modeling the usefulness of a steam engine
+See [[file:energy.html]].
+** ? Modeling motion with functions with non-time domains?
+The domain of the position function does not have to be time.
+
+We can use any relation that has physical meaning.
+** ? Modeling a trajectory as a relation between time and space
+What for? Doesn't this produce the same result as four-dimensional spacetime does?
+* Higher-order functions, and variational calculus
+** ? Modeling motion in Lagrangian kinematics?
+Let O be the fixed point of the pendulum, that is, the point where the rope is fixed to the frame/stand/fixture.
+
+For example, instead of representing the position of a pendulum bob by three real numbers \((x,y,z)\) relative to the point O,
+one may choose to represent the position of that pendulum bob by one real number \(\theta\)
+that represents the angle from the normal line (a line that is perpendicular to the floor and passes the point O).
+
+If you are already familiar with Newtonian mechanics, and you want to understand analytical mechanics, perhaps read \cite{lanczos2012variational}.
+
+Lagrangian mechanics exploits the conservation of energy to simplify the mathematical description of a dynamical system?
+** What is the justification for the principle of stationary action?
+An example of a variational principle is Fermat's principle:
+the path taken by light in free space is such that the time of travel is minimized.
+
+Another example:
+If an object moves from \((x_0,t_0)\) to \((x_1,t_1)\) in a conservative force field,
+then the motion (the path) is such that energy (the sum of potential energy and kinetic energy) is conserved,
+that is, the force does zero work on the object at every point of the object's actual trajectory in spacetime.
+
+Given a hypothetical path, we can compute the work the force /would/ do to the object if the object followed that path.
+** Work done by a force on an object through a path
+Why does an object choose a particular path among all possible paths?
+
+Suppose that an object is moving in a conservative force field?
+
+Recall that \( W = F \cdot s \).
+
+If a force \(F\) acts on a point mass \(m\) that is moving with velocity \(v\),
+then, in a very short time \(dt\), the work done by the force on the mass is \(dW = F \cdot ds = F \cdot (v \cdot dt)\).
+
+... ???
+
+Suppose that an object is moving in a force field?
+
+Let \((T_k,v_k,F_k)\) represent an observation that means "In time interval \(T_k\), the object has an average velocity \(v_k\)
+and the force \(F_k\) is acting on the object".
+
+Let \(\mu(T_k)\) be the length of the time interval \(T_k\).
+That is, \(\mu([a,b]) = b-a\).
+
+Because \( s_k = v_k \cdot \mu(T_k) \) ...
+
+If we make several such observations, we can approximate the work done by the force as \( W = \sum_k F_k \cdot v_k \cdot \mu(T_k) \).
 ** Modeling motion without time, with the conservation of energy
 Consider this scenario.
 An apple of mass \(m\) is free falling.
@@ -349,172 +832,7 @@ Digression: History.
 Galileo found the conservation of energy, by an /interrupted pendulum/.
 
 Did he found the conservation of energy, or did he just found that a pendulum returns to the height it was released from?
-** Modeling a trajectory as a function from time to space
-The /trajectory/ of an object is modeled by a /function/ \( x : \Real \to \Real^3 \).
-The interpretation is "At time \(t\), the object of interest is at position \(x(t)\)".
-
-We can /derive/ the velocity function \(v\) from the position function \(x\).
-
-Modeling instantaneous velocity with derivatives:
-
-If we record that a body was at position \(x(t_0)\) at time \(t_0\) and that it was at position \(x(t_1)\) at time \(t_1\),
-then we say that the body moved between time \(t_0\) and \(t_1\) with the /average velocity/ \(\bar{v}(t_0,t_1) = \frac{x(t_1)-x(t_0)}{t_1-t_0}\).
-
-If we endeavor to record the movement more frequently that \(t_1\) approaches \(t_0\),
-we approximate the /instantaneous velocity/ of the body at \(t_0\), that is
-\( v(t_0) = \lim_{t_1 \to t_0} v(t_0,t_1) = \lim_{t_1 \to t_0} \frac{x(t_1) - x(t_0)}{t_1 - t_0} \).
-
-We define "the /derivative/ of \(f\) at \(x\)" as \( [Df](x) \) where:
-\begin{align*}
-[Df](x) = \lim_{h \to 0} \frac{f(x+h)-f(x)}{h}
-\end{align*}
-
-Note that here \(Df\) notates a function, read "derivative of \(f\)", not "\(D\) multiplied by \(f\)".
-
-Note that \([Df](x)\) notates the output produced by function \(Df\) for input \(x\).
-
-[[https://en.wikipedia.org/wiki/Derivative#Rules_of_computation][Many shortcuts]] for computing the derivative have been found.
-
-Exercise: If \(f(x) = x^2\), evaluate \([Df](5)\).
-** Modeling a trajectory as a relation between time and space
-** Modeling the motion of a system of several bodies, with several functions
-Consider a system of \(n\) bodies.
-
-The Newton model of that system is \( (x_1,\ldots,x_n) \) where \( x_k : \Real \to \Real^3 \) for each \(k\).
-The interpretation is "At time \(t\), body \(1\) is at \(x_1(t)\), ..., and body \(n\) is at \( x_n(t) \)".
-The model is further constrained by a set of \(n\) equations, each of the shape \( F_k = m \cdot \ddot{x}_k(t) \),
-where the shape of \(F_k\) depends on the details of the physical system that is being modeled.
-For example, if body \(k\) experiences friction, then \(F_k\) may depend on \(\dot{x}_k\).
-Another example: if all bodies are celestial bodies, then \( F_k(t) = \sum_{i \neq k} \frac{G \cdot m_k \cdot m_i}{\norm{x_i(t) - x_k(t)}^2} \),
-from Newton's law of universal gravitation.
-
-\(F_k\) may involve the time parameter \(t\),
-the position \(x_k\), its derivatives, and its retardations such as \(x_k(t-1)\), etc.,
-but only a tiny subset of those expressions have solutions that can be computed manually.
-
-Why stop at the first derivative?
-
-Inertia of an object preserves the object's motion.
-
-Force acting on an object changes the object's motion.
-
-Hooke's law:
-Hang a spring of length \( L \).
-Attach a unit of weight \( w \), to the free end of the spring, and the length of the spring changes to \( L + x \).
-Attach another unit of weight, and the length of the spring changes to \( L + 2 x \).
-
-Attaching a weight of \( n w \) to the free end elongates the spring by \( n k x \) from its resting length.
-
-If an object changes its motion, then the resultant force acting on that object is nonzero.
-
-We know forces only by their effects.
-We don't know forces.
-
-It is very intuitive to posit that all objects would rather rest than move, as Aristotle posited.
-
-But we can directly feel forces by the tension in our muscles?
-Thus we can know forces?
-
-/Dynamic friction/ is modeled as the force \( F = - k \vec{v} \).
-
-???
-The position of a body at a given time is represented by a vector in the observer's vector space.
-** Modeling motion in Lagrangian kinematics?
-Let O be the fixed point of the pendulum, that is, the point where the rope is fixed to the frame/stand/fixture.
-
-For example, instead of representing the position of a pendulum bob by three real numbers \((x,y,z)\) relative to the point O,
-one may choose to represent the position of that pendulum bob by one real number \(\theta\)
-that represents the angle from the normal line (a line that is perpendicular to the floor and passes the point O).
-
-If you are already familiar with Newtonian mechanics, and you want to understand analytical mechanics, perhaps read \cite{lanczos2012variational}.
-
-Lagrangian mechanics exploits the conservation of energy to simplify the mathematical description of a dynamical system?
-** Modeling transverse waves or surface waves
-A wave is represented by a function
-
-f : Position × Time → Amplitude
-
-The interpretation is: "At time \(t\), the amplitude of the part of the wave at point \(x\) is \(f(x,t)\)".
-
-Amplitude is displacement from resting position.
-
-That is, a wave is often represented as an /amplitude field/.
-(In mathematical physics, an "X field" is a function from position to X.)
-
-Example phenomena that can be represented by periodic functions:
-the motion of a pendulum,
-the surface waves of water in a pond,
-the oscillation of a guitar string.
-
-Often, the wave is extrapolated to infinity.
-For example, when modeling a pond, we often assume that the pond is infinite, it has no edges, and waves do not reflect off the edges.
-We assume that wave propagate freely without hitting any obstacles, without reflection, without diffraction.
-
-If we use the simplifying assumption that a wave repeats infinitely in both space and time,
-then we can define wavelength and period:
-
-A wave has /wavelength/ \( |dx| \) iff \( dx \) is a shortest vector (the shortest vector) such that \(f(x+dx,t) = f(x,t)\) for all \( t \).
-
-A wave has /period/ \( dt \) iff \( dt \) is the smallest positive number such that \(f(x,t+dt) = f(x,t)\) for all \( x \).
-
-That is, wavelength is spatial periodicity, and period is temporal periodicity.
-** What is the justification for the principle of stationary action?
-An example of a variational principle is Fermat's principle:
-the path taken by light in free space is such that the time of travel is minimized.
-
-Another example:
-If an object moves from \((x_0,t_0)\) to \((x_1,t_1)\) in a conservative force field,
-then the motion (the path) is such that energy (the sum of potential energy and kinetic energy) is conserved,
-that is, the force does zero work on the object at every point of the object's actual trajectory in spacetime.
-
-Given a hypothetical path, we can compute the work the force /would/ do to the object if the object followed that path.
-** Modeling the cause of motion
-A force is defined as the cause of motion.
-
-If we observe that an object is accelerating, then we take it to mean that a non-zero resultant force is acting on the object.
-
-Newton's second law:
-Iff \(F(t)\) is the sum of all forces acting on an object at time \(t\),
-and iff \( p(t) \) is the object's momentum at time \(t\),
-then \( F = Dp \).
-** Modeling an object as a gravitational field
-A /time-invariant gravitational field/ \( g \) is a function
-such that a point mass \(m\) at position \(x\) would feel a gravitational force of \( F = m \cdot g(x) \).
-
-Digression: Philosophy (is this correct?).
-By modeling an object as a gravitational field, we sidestep an ontological question (about what the object is),
-and deal with an epistemological question (how do we know the object, that is by its effects).
-By modeling the object as a field, we ignore what the object actually is, and we focus on the effects caused by the object.
-** Modeling the usefulness of a steam engine
-See [[file:energy.html]].
-** Work done by a force on an object through a path
-Why does an object choose a particular path among all possible paths?
-
-Suppose that an object is moving in a conservative force field?
-
-Recall that \( W = F \cdot s \).
-
-If a force \(F\) acts on a point mass \(m\) that is moving with velocity \(v\),
-then, in a very short time \(dt\), the work done by the force on the mass is \(dW = F \cdot ds = F \cdot (v \cdot dt)\).
-
-... ???
-
-Suppose that an object is moving in a force field?
-
-Let \((T_k,v_k,F_k)\) represent an observation that means "In time interval \(T_k\), the object has an average velocity \(v_k\)
-and the force \(F_k\) is acting on the object".
-
-Let \(\mu(T_k)\) be the length of the time interval \(T_k\).
-That is, \(\mu([a,b]) = b-a\).
-
-Because \( s_k = v_k \cdot \mu(T_k) \) ...
-
-If we make several such observations, we can approximate the work done by the force as \( W = \sum_k F_k \cdot v_k \cdot \mu(T_k) \).
-** Modeling motion with functions with non-time domains?
-The domain of the position function does not have to be time.
-
-We can use any relation that has physical meaning.
-* Modeling spacetime with geometry
+* Geometry of spacetime
 ** Modeling space and time as a four-dimensional Euclidean space
 In this model, time is no longer a parameter;
 time is now modeled as an axis of a four-dimensional mathematical space that we call "spacetime".
@@ -664,7 +982,7 @@ What is the minimal way to derive/infer Lorentz transformation, length contracti
   - How should we learn general relativity?
     - How should we learn differential geometry?
       - Should we use spherical trigonometry as an introduction to differential geometry?
-* Modeling motion with uncertainty
+* Probability: Modeling motion with uncertainty
 Sometimes used in robots.
 
 Probabilistic mechanics is not statistical mechanics.
@@ -728,6 +1046,24 @@ https://en.wikipedia.org/wiki/Wave_function
 Complications
 
 https://physics.stackexchange.com/questions/53980/second-law-of-newton-for-variable-mass-systems
+* Symmetry in analytic geometry
+Symmetry = invariant?
+
+What are symmetrical functions?
+
+Iff x is a square, then it is still a square when it is translated.
+
+We can express symmetry in logic
+
+phi predicate
+
+\( \forall x, c \in \Real : \phi(x+c) \iff phi(x) \)
+
+\( f(x+c) = f(x)\)
+
+phi(R theta x) iff phi x for all theta, x
+
+f(cx) = c f(x)
 * To-do?
 - Circular motion
   - Model circular motion.
@@ -766,25 +1102,6 @@ https://physics.stackexchange.com/questions/53980/second-law-of-newton-for-varia
 "In the 14th century, Nicholas Oresme represented time and velocity by lengths."[fn::<2019-12-22> https://amsi.org.au/ESA_Senior_Years/SeniorTopic3/3i/3i_4history_1.html]
 * A preliminary on the mathematics of the motion of medium-sized objects
 By "medium-sized", we mean "about as large as a human hand".
-** Movement and motion: The difference between
-In short, a /movement/ is a change in position,
-and a /motion/ is a continuous movement.
-
-Both movement and [[https://en.wikipedia.org/wiki/Motion_%28physics%29][motion]] mean a change of position,
-but there is a subtle difference.
-When we say "movement", we care only about whether an object has changed its position.
-When we say "motion", we care about the trajectory, the details, how the object changed its position over time.
-
-What is change?
-Change is inequality, non-identity, non-sameness.
-Change happens over /time/.
-
-How do we know that an object moved?
-By observing a change in its position.
-A thing /moves/ iff its position changes.
-Its /position/ is where it is in space.
-
-/Displacement/ is relative position.
 ** Motion: Its measurement by sampling
 We can measure the motion of an object by sampling its position at various times.
 
@@ -797,76 +1114,6 @@ We get a stopwatch, a pen, and a sheet of paper.
 Then we make an observation sample by simultaneously recording where the tennis ball is and what time the stopwatch is showing.
 Then we repeat that sampling.
 Then we have an observation.
-** Movement, described with vectors
-The vector AB is the shortest path from point A (its origin) to point B (its destination).
-Thus a vector has magnitude and direction.
-
-A vector is usually drawn as a straight line with an arrowhead on its destination end.
-
-In everyday situation, the shortest path connecting two points is a straight line.
-However, in a long-haul flight, the shortest path is an arc, unless we drill through the Earth.
-
-A coordinate is a tuple (a bunch, a group) of numbers.
-
-The question "Where is something?" can be answered systematically, such as with postal addresses.
-
-"Where is that point P?"
-The Cartesian coordinate system answers "P is at \((1,2)\)"
-to mean "from the point A, go 1 step east, then go 2 steps north, and then you will be at P".
-** Position, described with coordinates
-What is position?
-Position is the relative place of things.
-Is position a property of a thing?
-Position is relative.
-The position of a thing is measured with respect to another thing.
-
-How do we describe the position of a thing?
-By a coordinate system.
-We pick a point called the /origin/, and pick three directions.
-Then, each point in space can be described as a tuple \((x,y,z)\) of three numbers;
-that tuple means "From the origin, go \(x\) steps east, \(y\) steps north, and \(z\) steps up."
-
-A tuple is a bunch of numbers.
-
-A coordinate system gives meaning to such tuples.
-
-Cartesian coordinate systems?
-
-A coordinate system is a method of naming every point.
-
-Let \(E^n\) mean the \(n\)-dimensional Euclidean space.
-
-A Cartesian coordinate system is a geometric interpretation of a real tuple space.
-Such system uses
-a tuple in \(\Real^n\) and three orthogonal axes
-to describe a point in \(E^n\).
-"Axes" here is plural of "axis", not of "axe".
-
-For an example of a two-dimensional Cartesian coordinate system, see the Wikipedia picture
- \footnote{\url{https://en.wikipedia.org/wiki/File:Cartesian-coordinate-system.svg}}.
-The positive x-axis points right.
-The positive y-axis points up.
-
-In three dimensions:
-(A picture would be nice.)
-
-The standard three-dimensional Cartesian coordinate system is right-handed.
-With your right hand, form an L with the thumb and the index finger,
-and form another L with the index and the middle finger.
-Then see this table.
-
-#+CAPTION: Standard directions
-| direction | right hand finger | XYZ        |
-|-----------+-------------------+------------|
-| rightward | right thumb       | X positive |
-| forward   | right index       | Y positive |
-| leftward  |                   | X negative |
-| backward  |                   | Y negative |
-| upward    | right middle      | Z positive |
-| downward  |                   | Z negative |
-
-See also [[https://en.wikipedia.org/wiki/Cartesian_coordinate_system][Cartesian coordinate system]]
-and [[https://en.wikipedia.org/wiki/Right-hand_rule][right-hand rule]].
 ** Speed/velocity: Their measurement
 Speed: How do we measure it?
 
@@ -1263,30 +1510,6 @@ The rolling ball hits different bells at different times.
 Galileo's law of falling body[fn::https://en.wikipedia.org/wiki/Equations_for_a_falling_body]?
 In year? Galileo \( h = k t^2 \).
 
-* Aside: Finding relationships with logarithms
-I suspect that this method was probably used, in the 16th century,
-by Galileo to find the relationship between height of fall and time of fall,
-and by Kepler to formulate some of his laws of planetary motion,
-and by many others.
-
-Suppose that we suspect that the quantity \(x\) and the quantity \(y\)
-have the relationship \( y = mx^p \),
-and we want to find out \(m\) and \(p\).
-
-First we use logarithms to turn the equation into a linear combination of \( \log m \) and \( p \):
-\begin{align*}
-y &= mx^p
-\\ \log y &= \log(mx^p)
-\\ \log y &= \log m + p \log x
-\end{align*}
-
-Then we make \(n\) measurements, we plot the graph,
-we see if we can fit a straight line to the points,
-and calculate the slope.
-
-If we want to be more modern, we can use the method of least squares.
-
-See also [[http://www.personal.psu.edu/tcr2/textbook/scaling.html][Reluga 2019]].
 * Modeling the evolution of a many-body system
 Consider a system that consists of several tiny bodies in motion.
 
