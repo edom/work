@@ -10,6 +10,75 @@
 \newcommand\Dif{\Delta}
 \)
 (Scope has expanded. New title: "Physics with emphasis on mathematical modeling")
+* Introduction to theoretical physics
+** Mathematical language
+Humans have invented a mathematical notation that greatly increases information density;
+thus such notation also increases information transfer rate.
+Such notation speeds up thought, after an initial learning curve.
+** Making theories: measure-model-abduce
+This is how we make a theory:
+1. We begin with a measurement (an observation).
+2. We create a [[https://en.wikipedia.org/wiki/Phenomenological_model][phenomenological model]].
+3. We [[https://en.wikipedia.org/wiki/Abductive_reasoning][abduce]]
+   a [[https://en.wikipedia.org/wiki/First_principle][metaphysical principle]]
+   while assuming as little as possible
+   [fn::https://en.wikipedia.org/wiki/Occam%27s_razor]
+   [fn::https://en.wikipedia.org/wiki/Ontological_commitment#Ontological_parsimony],
+   and derive the phenomenological model from that principle.
+
+The motto is "measure-model-abduce".
+
+The cycle is "measurement-phenomenology-metaphysics".
+
+For example:
+1. We measure the motion of things by sampling their positions at various points in time.
+2. We model it phenomenologically with Newton's laws of motion.
+3. We abduce the principle of stationary action, and derive Newton's laws of motion from that principle.
+
+A /principle/ is a reasoned assumption.
+
+We must always remember that models and principles are not the reality,
+and that falling in love with them will halt progress.
+We must always be ready to discard them.
+
+(Can principles be tested?
+How do we test the principle of stationary action?)
+** Which one of two theories is more general?
+Let \(T\) be a theory.
+
+Let \(U\) be a theory.
+
+We write \( T \leq U \) to mean "\(T\) is /derivable/ from \(U\)"
+or "\(T\) is /implied/ by \(U\)".
+
+We write \( T < U \) to mean "\(T\) is /less general than/ \(U\)"
+or "\(T\) is /subsumed/ by \(U\)" or "\(T\) is /included/ in \(U\)".
+
+We choose that notation to make it easier to remember the relationship between subsumption and derivability:
+\[ T < U \iff T \leq U \wedge U \nleq T \]
+which reads "\(T\) is less general than \(U\) iff \(T\) is derivable from \(U\) but \(U\) is not derivable from \(T\)".
+
+For example, Snell's law is derivable from Fermat's principle, but Fermat's principle is not derivable from Snell's law.
+Therefore, Snell's law is less general than Fermat's principle.
+(Really?)
+
+Derivability imposes a partial order on theories.
+
+It may be useful to order physical theories ascending by derivability,
+and make a learning sequence according to that order.
+
+Theories form a poset.
+Do theories also form a lattice?
+
+If the lattice of theories is bounded, then the maximum of the lattice is the grand unified theory;
+otherwise there is no such grand unified theory.
+
+We say "\(T\) and \(U\) are /equivalent/" to mean "\( T \leq U \) and \( U \leq T \)".
+(For what?)
+** Which one of two models is more accurate?
+We write \( T \le U \) to mean "every correct prediction of \(T\) is also a correct prediction of \(U\)".
+
+We write \( T < U \) to mean "\(T\) is less accurate than \(U\)".
 * The language of mathematics
 This chapter is required for understanding all next chapters.
 
@@ -117,6 +186,142 @@ and we can write \(f(x) = x+1\) as \(f = (x \mapsto x+1)\).
 (This probably only makes sense to functional programmers.)
 
 A function can represent the relationship between two quantities in which one quantity determines the other quantity.
+* Deriving the concept of momentum
+Let us derive "momentum".
+(See also [[http://www.cleonis.nl/physics/phys256/quantity_of_motion.php][Teunissen 2017]].)
+
+We define "momentum" as having "amount of motion" and "direction of motion".
+
+We assume that it only makes sense to define the direction of motion to coincide with the direction of velocity.
+
+Suppose that \(f(m,v)\) is the momentum of a point mass \(m\) with velocity \(v\).
+
+We expect that changing the direction of motion does not change the amount of motion.
+Thus, if \(R\) is a rotation, then
+\[ f(m,Rv) = Rf(m,v) \]
+
+We observe that a body colliding with an immovable wall changes its direction of motion but not its amount of motion:
+
+\[ f(m,-v) = -f(m,v) \]
+
+???
+
+We assume that two colliding bodies preserve the total amount of motion:
+
+\[ f(m_1,v_1) + f(m_2,v_2) = f(m_1,v_1') + f(m_2,v_2') \]
+
+???
+
+??? We expect that an object's amount of motion is linearly proportional to its mass (its amount of matter).
+
+\begin{align*}
+f(cm,v) &= c f(m,v)
+\\ f(m_1+m_2,v) &= f(m_1,v) + f(m_2,v)
+\end{align*}
+
+One possibility is \( f(m,v) = mv \), but is that the only possibility?
+
+
+Infer that \( f(m,v) = m v \).
+
+???
+
+Let \([Nx](t) = x(-t)\).
+
+Both \((m_1,x_1,m_2,x_2)\) and \((m_1,Nx_1,m_2,Nx_2)\) describe the same collision.
+If we reverse the time, we will see the same collision.
+
+* "F = ma" implies "W = ΔK": Work is equal to the change in kinetic energy
+Here we show that \( F = m \vec{a} \) implies \( W = \Dif K \).
+
+(What is the importance of this insight?)
+
+Suppose that a force \( \vec{F} \) is acting on an object of mass \(m\)
+at initial position \(\vec{x}\) and initial velocity \(\vec{v}\).
+By initial, we mean at time zero.
+
+The object's velocity at time \(t\) is \(\vec{v}' = \vec{v} + \vec{a} t\).
+
+The object's position at time \(t\) is \(\vec{x}' = \vec{x} + \vec{v} t + \vec{a} t^2 / 2\).
+
+Recall that \( \vec{F} = m \vec{a} \) and \( \vec{a} \cdot \vec{a} = a^2 \).
+
+The work done by the force on the object is
+\begin{align*}
+W &= \vec{F} \cdot (\vec{x}' - \vec{x})
+\\ &= m\vec{a} \cdot (\vec{v} t + \vec{a} t^2 / 2)
+\\ &= mt \vec{a} \cdot \vec{v} + ma^2t^2/2
+\end{align*}
+
+The object's initial kinetic energy is \(K = mv^2/2\).
+
+The object's kinetic energy at time \(t\) is
+\begin{align*}
+K' &= m \norm{\vec{v} + \vec{a}t}^2/2
+\\ &= mv^2/2 + mt \vec{v} \cdot \vec{a} + ma^2t^2/2
+\end{align*}
+
+Therefore the change in kinetic energy is
+\begin{align*}
+\Dif K &= K' - K = mt \vec{v} \cdot \vec{a} + ma^2t^2/2
+\end{align*}
+
+Observe that \(W\) and \(\Dif K\) are equal.
+Recall that the dot product is commutative: \( \vec{a} \cdot \vec{v} = \vec{v} \cdot \vec{a} \).
+\begin{align*}
+W &= mt \vec{a} \cdot \vec{v} + ma^2t^2/2
+\\ \Dif K &= mt \vec{v} \cdot \vec{a} + ma^2t^2/2
+\end{align*}
+
+Therefore, the work done by a force on an object is equal to the change in that object's kinetic energy.
+\[ W = \Dif K \]
+
+???
+
+Now suppose that the time elapsed is infinitesimal \( \dif t \).
+
+???
+
+Power \(W'\) is rate of work?
+
+\[
+\int_{t_1}^{t_2} W'(t) ~ \dif t = K(t_2) - K(t_1)
+\]
+* Symmetries and invariants
+Here we define "invariant".
+
+Let \(\phi : D \to C\) be a function.
+
+Let \(T : D \to D\) be a function, usually called a "transformation".
+
+We say
+"\(\phi\) is /unaffected/ by \(T\)"
+or "\( \phi \) is /\(T\)-invariant/"
+or "\( T \) is an /invariant/ (a /symmetry/) of \( \phi \)"
+iff, for all \(x \in D\):
+\[ \phi(x) = \phi(T(x)) \]
+
+Here are some examples.
+
+Let \( Tx = x + c \) represent translation.
+
+Example:
+If \(\phi(x,o,r)\) means "\(x\) is a point on a circle with center \(o\) and radius \(r\)",
+then \(\phi(x,o,r) = \phi(Tx,To,r)\).
+(A predicate is a function whose codomain is the set of booleans.)
+
+Example:
+If \(V\) is a vector space, then \(\SetBuilder{Tv}{v \in V} = V\).
+If we follow the "auto-lifting" convention, we can write the equation more prettily as \( TV = V \).
+
+Example:
+Even functions exhibit mirror symmetry.
+(A function \( f \) is /even/ iff \( f(x) = f(-x) \) for all applicable \(x\).)
+
+Example:
+Periodicity is a special case of translation-invariance.
+(A function \(f\) has /period/ \(p\) iff \(p\) is the smallest positive number such that \( f(x+p) = f(x) \) for all applicable \(x\).
+A function is /periodic/ iff it has a period.)
 * Geometry of space and objects; coordinate systems
 - Model space as a three-dimensional Euclidean space.
 - Model space as a three-dimensional real tuple space.
@@ -689,7 +894,7 @@ A wave is represented by a function
 
 f : Position × Time → Amplitude
 
-The interpretation is: "At time \(t\), the amplitude of the part of the wave at point \(x\) is \(f(x,t)\)".
+The interpretation is: "At time \(t\), the amplitude at point \(x\) is \(f(x,t)\)".
 
 Amplitude is displacement from resting position.
 
@@ -701,16 +906,14 @@ the motion of a pendulum,
 the surface waves of water in a pond,
 the oscillation of a guitar string.
 
-Often, the wave is extrapolated to infinity.
+In steady-state modeling, the wave is extrapolated to infinity in both space and time.
 For example, when modeling a pond, we often assume that the pond is infinite, it has no edges, and waves do not reflect off the edges.
 We assume that wave propagate freely without hitting any obstacles, without reflection, without diffraction.
+Thus we can define wavelength and period:
 
-If we use the simplifying assumption that a wave repeats infinitely in both space and time,
-then we can define wavelength and period:
+A wave has /wavelength/ \( |\lambda| \) iff \( \lambda \) is a shortest vector such that \(f(x+\lambda,t) = f(x,t)\) for all \( t \).
 
-A wave has /wavelength/ \( |dx| \) iff \( dx \) is a shortest vector (the shortest vector) such that \(f(x+dx,t) = f(x,t)\) for all \( t \).
-
-A wave has /period/ \( dt \) iff \( dt \) is the smallest positive number such that \(f(x,t+dt) = f(x,t)\) for all \( x \).
+A wave has /period/ \( T \) iff \( T \) is the smallest positive number such that \(f(x,t+T) = f(x,t)\) for all \( x \).
 
 That is, wavelength is spatial periodicity, and period is temporal periodicity.
 ** Modeling the cause of motion
@@ -1046,24 +1249,6 @@ https://en.wikipedia.org/wiki/Wave_function
 Complications
 
 https://physics.stackexchange.com/questions/53980/second-law-of-newton-for-variable-mass-systems
-* Symmetry in analytic geometry
-Symmetry = invariant?
-
-What are symmetrical functions?
-
-Iff x is a square, then it is still a square when it is translated.
-
-We can express symmetry in logic
-
-phi predicate
-
-\( \forall x, c \in \Real : \phi(x+c) \iff phi(x) \)
-
-\( f(x+c) = f(x)\)
-
-phi(R theta x) iff phi x for all theta, x
-
-f(cx) = c f(x)
 * To-do?
 - Circular motion
   - Model circular motion.

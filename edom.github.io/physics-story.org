@@ -1,5 +1,9 @@
 #+TITLE: (Draft) A story of physics
 #+DATE: 2019-11-05 00:00:00 +0700
+\(
+\newcommand\dif{\mathrm{d}}
+\newcommand\Dif{\Delta}
+\)
 * Note: This book is not a history book
 Historically, the development of physics and mathematics were intertwined, but, in hindsight,
 it is more efficient to develop mathematics first, and then do physics in it,
@@ -96,13 +100,11 @@ The plot serves as a plan/draft/sketch for/of the content of this book.
 The plot also serves to establish an optimal learning sequence, and as a table of contents for this book.
 
 The plot is /not/ necessarily historical.
-* Act: Classical mechanics
-** ? Turning point: Settling down
+* ? Act: Settling down
 (Does this go back too far away to the past?)
 
 They invent language.
 
-They do mathematics, but only as much as necessary for survival.
 They count people and animals.
 
 They begin manipulating Nature to simplify their survival.
@@ -128,17 +130,33 @@ Survival no longer occupies their mind.
 They begin doing what they /want/, not what they /must/.
 
 They begin doing mathematics out of /curiosity/, not /necessity/.
+* What
+They shift their thinking from /how/ to /why/,
+from "How do we model this" to "suppose that we have a model; what properties should it satisfy?"
 
-They do mathematics gratuitously.
-** Turning point: Mathematical language
-They invent a mathematical notation that greatly increases information density;
-thus such notation also increases information transfer rate.
-Such notation speeds up thought, after an initial learning curve.
+They make up /principles/: reasonable assumptions with some philosophical justification.
+
+They say light travels in a straight line, but they are not content with that.
+They say that if we know that light travels from point P to point Q in free space,
+then the length of line PQ is the shortest distance between P and Q.
+
+They switch from unprincipled modeling to principled modeling.
+They invoke reason and philosophical justification.
+
+They unify their models of motion of matter and motion of light.
+They come up with variational principles.
+* Act: Classical mechanics
+** Turning point: Momentum
+They measure the amount of motion.
+
+They collide things, elastic and inelastic.
 ** ? Turning point: Buoyancy, mass, and weight
 They discover /buoyancy/: things are easier to lift in water than on land.
 This concept enables them to /distinguish between mass and weight/.
 They define that the /mass/ of a thing is the /amount of matter/ in it,
 whereas its /weight/ is /what has to be overcome in order to lift/ it.
+** Turning point: Levers, pulleys, simple machines?
+They exploit string tension to invent pulleys to help weightlifting.
 ** Turning point: Analytic geometry
 They want to name every point in space, because they want to answer where something is.
 
@@ -156,7 +174,7 @@ They invent Cartesian coordinate systems.
 They invent non-Cartesian coordinate systems.
 
 They invent coordinate transformations.
-** Turning point: Calculus, real analysis
+** Turning point: Calculus, real analysis, differential equations
 They know real numbers, arithmetics, measurements, and algebra (variables).
 
 They model falling objects with a /quadratic equation/.
@@ -197,6 +215,9 @@ Coordinate transform.
 Optimization problems.
 Fermat's method of adequality.
 Variational calculus.
+
+They solve the differential equation in the two-body problem.
+They discover that two celestial bodies orbit each other elliptically.
 ** Turning point: The electrochemical cell
 The invention of the electrochemical cell is pivotal.
 
@@ -211,15 +232,19 @@ Enables electrochemistry, which enables the isolation of many chemical elements 
 Enables the discovery of subatomic particles, such as the discovery of electron by Crookes.
 
 Enables electrodynamics, Hertz's experiments, Faraday's experiments, and Maxwell's equations.
-* Act: Analytic mechanics
+** Turning point: Force, work, and kinetic energy
+They discover that the work done by a force on an object is equal to the change in the object's kinetic energy.
+** Thermodynamics?
+They measure temperature indirectly by the expansion of the length of a piece of metal.
+** Turning point: Lagrange writes "Analytical mechanics"
 ** Turning point: Principle of stationary action
 They come up with the concept of /conservative/ forces and /potential gradients/.
 
 They model /collisions/.
 
-They find some conserved quantities.
-They find that Galileo's interrupted pendulum conserves energy?
-They find that Newton's cradle conserves momentum.
+They find out some conserved quantities.
+They find out that Galileo's interrupted pendulum conserves energy?
+They find out that Newton's cradle conserves momentum.
 Galileo's interrupted pendulum[fn::<2019-11-06> https://en.wikipedia.org/wiki/Conservation_of_energy#History].
 How does one find a conserved quantity?[fn::<2019-11-06> https://en.wikipedia.org/wiki/Conserved_quantity]
 Conservation of kinetic energy, vis viva, elastic collisions.
@@ -255,7 +280,7 @@ They state that more fancifully: Light takes the path that requires the least ti
 
 They generalize/unify the disparate variational principles?
 
-They propose Friston's [[free energy principle][https://en.wikipedia.org/wiki/Free_energy_principle]].
+They propose Friston's [[https://en.wikipedia.org/wiki/Free_energy_principle][free energy principle]].
 It is a variational principle.
 
 It becomes in vogue to derive physical laws from variational principles.
@@ -269,7 +294,7 @@ Of whose ass was the "principle of stationary action" pulled out?
 Hamilton's?
 What was the justification?
 
-They find that they are lazy.
+They find out that they are lazy.
 They surmise that this laziness pervades Nature:
 everything spends minimum effort to get maximum result.
 They are eager to overgeneralize.
@@ -284,6 +309,11 @@ They solve the brachistochrone problem, just because they can.
 Then comes Lagrangian mechanics.
 The form of "Lagrangian mechanics" we know today was actually invented by Hamilton?
 Stigler's law of eponymy.
+** Turning point: Unified theory of motion of light and matter
+They introduce the [[https://en.wikipedia.org/wiki/Hamilton%E2%80%93Jacobi_equation][Hamilton--Jacobi equation]],
+which unifies several variational principles and provides a unified theory of the motion of light and matter.
+
+They seek the most general variational principle.
 * Act: 20th century physics
 ** Turning point: Symmetry, Erlangen program, Noether's theorem
 What?
@@ -291,8 +321,12 @@ What?
 They formalize symmetry using logic?
 
 They formalize the symmetry of functions?
+
+They begin the Erlangen program.
+They formalize the symmetries/invariants into groups of transformations.
+They hierarchicalize geometries based on their invariants?
 ** Turning point: Mass-energy equivalence
-They find that mass is congealed energy.[fn::https://www.ted.com/talks/david_christian_big_history/transcript?language=en]
+They discover that mass is congealed energy.[fn::https://www.ted.com/talks/david_christian_big_history/transcript?language=en]
 ** Turning point: CP-violation / symmetry breaking
 ** ? Act: quantum mechanics
 Then comes quantum mechanics.
