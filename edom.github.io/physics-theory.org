@@ -1,0 +1,760 @@
+#+TITLE: (Draft) On theoretical physics
+#+DATE: 2019-12-28 00:00 +0700
+\(
+\newcommand\der{\operatorname{der}}
+\newcommand\Der{\mathrm{D}}
+\newcommand\dd{\operatorname{d}}
+\newcommand\ang[1]{#1^\circ}
+\newcommand\parenthesize[1]{\left(#1\right)}
+\newcommand\dif{\mathrm{d}}
+\newcommand\Dif{\Delta}
+\)
+* Introduction to theoretical physics
+** Mathematical language
+Humans have invented a mathematical notation that greatly increases information density;
+thus such notation also increases information transfer rate.
+Such notation speeds up thought, after an initial learning curve.
+** Making theories: measure-model-abduce
+This is how we make a theory:
+1. We begin with a measurement (an observation).
+2. We create a [[https://en.wikipedia.org/wiki/Phenomenological_model][phenomenological model]].
+3. We [[https://en.wikipedia.org/wiki/Abductive_reasoning][abduce]]
+   a [[https://en.wikipedia.org/wiki/First_principle][metaphysical principle]]
+   while assuming as little as possible
+   [fn::https://en.wikipedia.org/wiki/Occam%27s_razor]
+   [fn::https://en.wikipedia.org/wiki/Ontological_commitment#Ontological_parsimony],
+   and derive the phenomenological model from that principle.
+
+The motto is "measure-model-abduce".
+
+The cycle is "measurement-phenomenology-metaphysics".
+
+For example:
+1. We measure the motion of things by sampling their positions at various points in time.
+2. We model it phenomenologically with Newton's laws of motion.
+3. We abduce the principle of stationary action, and derive Newton's laws of motion from that principle.
+
+A /principle/ is a reasoned assumption.
+
+We must always remember that models and principles are not the reality,
+and that falling in love with them will halt progress.
+We must always be ready to discard them.
+
+Can experiments test principles?
+
+Criteria for evaluating a scientific theory http://www.nytud.mta.hu/depts/tlp/gaertner/publ/schoemaker_huygens_fermat.pdf
+** Which one of two theories is more general?
+Let \(T\) be a theory.
+
+Let \(U\) be a theory.
+
+We write \( T \leq U \) to mean "\(T\) is /derivable/ from \(U\)"
+or "\(T\) is /implied/ by \(U\)".
+
+We write \( T < U \) to mean "\(T\) is /less general than/ \(U\)"
+or "\(T\) is /subsumed/ by \(U\)" or "\(T\) is /included/ in \(U\)".
+
+We choose that notation to make it easier to remember the relationship between subsumption and derivability:
+\[ T < U \iff T \leq U \wedge U \nleq T \]
+which reads "\(T\) is less general than \(U\) iff \(T\) is derivable from \(U\) but \(U\) is not derivable from \(T\)".
+
+For example, Snell's law is derivable from Fermat's principle, but Fermat's principle is not derivable from Snell's law.
+Therefore, Snell's law is less general than Fermat's principle.
+(Really?)
+
+Derivability imposes a partial order on theories.
+
+It may be useful to order physical theories ascending by derivability,
+and make a learning sequence according to that order.
+
+Theories form a poset.
+Do theories also form a lattice?
+
+If the lattice of theories is bounded, then the maximum of the lattice is the grand unified theory;
+otherwise there is no such grand unified theory.
+
+We say "\(T\) and \(U\) are /equivalent/" to mean "\( T \leq U \) and \( U \leq T \)".
+(For what?)
+** Which one of two models is more accurate?
+We write \( T \le U \) to mean "every correct prediction of \(T\) is also a correct prediction of \(U\)".
+
+We write \( T < U \) to mean "\(T\) is less accurate than \(U\)".
+
+** Unification
+By "X /unifies/ Y and Z", we mean "X provides an /unified explanation/ for Y and Z",
+that is, "both Y and Z are derivable from X".
+* The language of mathematics
+This chapter is required for understanding all next chapters.
+
+Even if there is nothing you don't already know,
+at least glance through this chapter,
+just to be aware of the book's idiosyncrasies.
+
+If you program computers, you can think of mathematics as a
+[[https://en.wikipedia.org/wiki/Domain-specific_language][domain-specific language]]
+for concise and precise thinking.
+** Dispelling the fear of mathematics
+Fear mathematics not, because it is just abbreviated English.
+For example, instead of repeating the cumbersome "where the ball is at a given time",
+we may write the much shorter "\( h(t) \)".
+Instead of writing the long and hard-to-parse phrase
+"a number that equals zero when multiplied by itself and then subtracted by one",
+we write "a number \(x\) such that \(x^2 - 1 = 0\)".
+
+We have just seen mathematics speed up our thinking!
+
+Mathematics originated as a way of modeling reality.
+
+People did math because they wanted to do something in the real world.
+Shepherds want to avoid losing cattle, so they count their cattles.
+Carpenters want to cut woods for the diagonal braces of a roof, so they use the Pythagorean theorem.
+Merchants want to profit, so they subtract expenses from income, and use exponentials to calculate interests.
+Train operators want to profit, so they calculate the quantity of coal they should carry for a given distance.
+Nations want to avoid famine, so they calculate how much crop they should plant.
+And so on.
+People originally did math to avoid wastage, mistakes, and pain.
+
+People also did math to plan.
+For example, if a bush can feed one person,
+and there are three people in my family,
+then I would need to forage three bushes to feed my family.
+** The time required
+Even with the necessary background knowledge,
+we often take any time from /several seconds/ to /several minutes/ in order to read an equation.
+
+It does not help if we can 600 words per minute,
+because the difficulty of understanding mathematics is not in translating the notation into English,
+but in reconstructing the writer's understanding back from the notation.
+
+The writers have a picture in mind when they write an equation.
+The readers have to reconstruct that picture, given only the equation.
+** Digression: From "because we must" to "because we want"
+(This may be false. Perhaps farming did not give people more leisure time, but it enabled people to build bigger and denser settlements.)
+
+At first we did math because we had to survive.
+
+We /counted/ the things that determine our survival: animals, plants, people, weapons.
+We had /numbers/, but they were tied to units:
+we understood "one cow", but we did not understand "one".
+
+We found /linear relationships/ between the number of family members and the rate of resource consumption.
+
+We wanted to survive, so we thought about /optimization/: to get maximum result with minimum effort.
+We built tools, farmed crops, trapped animals, built houses, settled down, simplified survival, and got much leisure time.
+It was futile to work harder than what was necessary for survival, because the surplus harvest would be wasted;
+Nature does not reward material possession beyond what is necessary to survive.
+We were wealthy in the sense that we had everything we wanted without working,
+because everything we wanted was to survive; crops gave themselves for us to eat;
+they didn't fight back like animals; what else could we want other than free food?
+It was heaven; we didn't know what else there was to want.
+We didn't know what to do with all that leisure time,
+so we began doing things for fun: painting cave walls, making statues, etc.
+
+With so much leisure time,
+we began doing things because we /could/, not because we /had to/,
+because there was nothing we had to do.
+
+Curiosity, not necessity.
+
+We have moved from doing what we /must/ to doing what we /want/.
+** Expressions
+An /expression/ is something like \(1+2\), or \(x + y \cdot z\), and so on.
+** Equations
+An /equation/ \(x = y\) (read "\(x\) is equal to \(y\)") means that
+every occurrence of \(x\) can be /replaced/ with \(y\),
+and also the other way around:
+every occurrence of \(y\) can be replaced with \(x\).
+** Sets
+A set is a collection without duplicates.
+
+Example: \( \Set{1,2,3} \) is a set of three things.
+
+Example: \( \Real \) is the set of all real numbers.
+(Perhaps for now it suffices to know that \(\Real\) at least contains every number that you can type into a simple calculator.)
+** Functions
+(Should we just use the domain-codomain-pairing triplet formalism?)
+
+A /function/ \(f\) is usually defined by an equation like \( f(x) = \text{something} \).
+See the following example.
+
+Suppose that we have defined \(f(x) = x+1\) and we want to /evaluate/ \(f(2)\).
+We do this by /assuming/ \(x=2\) (because we want to evaluate \(f(2)\)).
+Here is how we do it:
+
+\begin{align*}
+f(x) &= x+1 & \text{by definition}
+\\ f(2) &= 2+1 & \text{by assuming \(x = 2\)}
+\\ f(2) &= 3 & \text{because \(2+1 = 3\)}
+\end{align*}
+Therefore, \(f(2) = 3\).
+
+As you become more proficient in math-speak, you will be able to skip the intermediate steps.
+
+Note that, in the above example, the function is \(f\), not the expression \(f(x)\).
+People often mistakenly say "the function \(f(x)\)".
+Do not confuse a function and its application.
+
+Sometimes we write \(f(x)\) as \(fx\).
+
+We rarely do these, but we can write \(f(x)\) as \(f~x\),
+and we can write \(f(x) = x+1\) as \(f = (x \mapsto x+1)\).
+(This probably only makes sense to functional programmers.)
+
+A function can represent the relationship between two quantities in which one quantity determines the other quantity.
+** Integrals
+See [[file:integral.html]].
+** Algebra
+A letter (a variable) represents a number (something) that is not yet known.
+
+Example: \(x+2 = 3\) means "What number, if added by 2, equals 3?".
+* Geometry
+** Synthetic geometry
+A [[https://en.wikipedia.org/wiki/Space_(mathematics)][space]] (a mathematical space) is a set.
+
+A /point/ is an element of a space (a set).
+
+| geometry | set theory |
+|----------+------------|
+| space    | set        |
+| point    | element    |
+
+We write \(d(x,y)\) to mean "the /distance/ between point \(x\) and point \(y\)".
+"[[https://en.wikipedia.org/wiki/Metric_(mathematics)][Metric]]" is another term for "distance".
+
+See also [[https://en.wikipedia.org/wiki/Vector_(mathematics_and_physics)][a brief history of vectors]].
+
+An /[[https://en.wikipedia.org/wiki/Euclidean_vector][Euclidean vector]]/ is something with magnitude and direction.
+
+A /vector/ is an element of a [[https://en.wikipedia.org/wiki/Vector_space][vector space]].
+
+A /[[https://en.wikipedia.org/wiki/Manifold][manifold]]/ is a "space that locally resembles Euclidean space near each point".
+
+The /[[https://en.wikipedia.org/wiki/Tangent_space][tangent space]]/ of \(S\) at \(p\), written \(T_p S\),
+is the vector space of every vector that is tangent to \(S\) at \(p\).
+
+TODO: Relativity
+
+Einstein's summation convention.
+
+Tensors are covariant/contravariant /with respect to what/?
+** Motivating stress tensor
+See [[https://en.wikipedia.org/wiki/Stress_(mechanics)][Wikipedia]].
+
+Generalize
+/uniaxial normal stress/ \( \sigma = F/A \)
+and /simple shear stress/ \( \tau = F/A \)
+to [[https://en.wikipedia.org/wiki/Cauchy_stress_tensor][Cauchy stress tensor]]
+** Invariants
+Let \(\phi : D \to C\) be a function.
+
+Let \(T : D \to D\) be a function, usually called a "transformation".
+
+We say
+"\(\phi\) is /unaffected/ by \(T\)"
+or "\( \phi \) is /\(T\)-invariant/"
+or "\( T \) is an /invariant/ (a /symmetry/) of \( \phi \)"
+iff, for all \(x \in D\):
+\[ \phi(x) = \phi(T(x)) \]
+
+Here are some examples of invariants.
+
+Let \( Tx = x + c \) represent translation.
+
+Example:
+If \(\phi(x,o,r)\) means "\(x\) is a point on a circle with center \(o\) and radius \(r\)",
+then \(\phi(x,o,r) = \phi(Tx,To,r)\).
+(A predicate is a function whose codomain is the set of booleans.)
+
+Example:
+If \(V\) is a vector space, then \(\SetBuilder{Tv}{v \in V} = V\).
+If we follow the "auto-lifting" convention, we can write the equation more prettily as \( TV = V \).
+
+Example:
+Even functions exhibit mirror symmetry.
+(A function \( f \) is /even/ iff \( f(x) = f(-x) \) for all applicable \(x\).)
+
+Example:
+Periodicity is a special case of translation-invariance.
+(A function \(f\) has /period/ \(p\) iff \(p\) is the smallest positive number such that \( f(x+p) = f(x) \) for all applicable \(x\).
+A function is /periodic/ iff it has a period.)
+** Symmetries
+Example: let \(S\) be the set of points of an unlabeled square.
+
+Let \(T\) be a rotation about the square's center by a right angle.
+
+We write \(TS\) to mean "the result of rotating \(S\) about its center by a right angle".
+
+We write \(TS = S\) to mean "rotating \(S\) about its center by a right angle produces \(S\) itself".
+** Analytic geometry
+See also [[https://en.wikipedia.org/wiki/Analytic_geometry][Wikipedia]].
+
+Let \(S\) be a space.
+
+A /[[https://en.wikipedia.org/wiki/Coordinate_system][coordinate system]]/ for \(S\) is a surjective function \(C \to S\)
+where \(C \subseteq \Real^n\).
+
+Let \(s : C \to S\) be a coordinate system.
+
+Let \(s' : C' \to S\) be a coordinate system.
+
+We say that \(x\) /names/ \(s(x)\).
+
+We say that \(x\) /refers to/ \(s(x)\).
+
+We say that \(x\) /references/ \(s(x)\).
+
+We say that \(x\) is an /\(s\)-name/ of \(s(x)\).
+
+We say that \(x\) is a /\(C\)-name/ of \(s(x)\).
+
+We say that \(s(x)\) is the /referent/ of \(x\).
+
+We say that \(s(x)\) is the \(s\)-/referent/ of \(x\).
+
+We say that \(s(x)\) is the \(C\)-/referent/ of \(x\).
+
+A /[[https://en.wikipedia.org/wiki/Coordinate_system#Transformations][coordinate transformation]]/ from \(s\) to \(s'\)
+is a function \(T : C \to C'\) such that \(s(x) = s'(x')\) where \(x' = T(x)\) for all \(x \in C\).
+
+A coordinate transformation changes the names but preserves the point.
+
+"Coordinate system transformation" means "coordinate transformation".
+
+A /[[https://en.wikipedia.org/wiki/Atlas_(topology)][chart]]/ (a /coordinate chart/) for \(S\)
+is a [[https://en.wikipedia.org/wiki/Homeomorphism][homeomorphism]] between a subspace of \(S\) and a subspace of an Euclidean space.
+
+An /atlas/ is a collection of charts.
+** ? Converting polar coordinate tuples to rectangular coordinate tuples
+Both the rectangular coordinate $(r\cos\theta, r\sin\theta)$ and the polar coordinate $(r,\theta)$
+describe the same point in two-dimensional Euclidean space.
+\[
+R(r\cos\theta, r\sin\theta) = P(r,\theta)
+\]
+
+A point in a space can have different coordinates in different coordinate systems.
+* Operators
+It amazes me that the formal power series of \((1+\Der)^{-1}\) works.
+Penrose 2006 \cite{penrose2006road} attributes it to Oliver Heaviside.
+
+In quantum mechanics, why do bother calling a matrix an "operator"?
+* ? Mechanics
+** ? Deriving the concept of momentum
+To get a taste of a principled approach, let us exercise by deriving "momentum".
+(See also [[http://www.cleonis.nl/physics/phys256/quantity_of_motion.php][Teunissen 2017]].)
+
+We define "momentum" as having "amount of motion" and "direction of motion",
+so it is a vector.
+
+We expect that the direction of motion coincides with the direction of velocity.
+
+Suppose that \(f(m,v)\) is a vector that is the momentum of a point mass \(m\) with velocity \(v\).
+
+We expect that changing the direction of motion does not change the amount of motion.
+Thus, if \(R\) is a rotation, then
+\[ f(m,Rv) = Rf(m,v) \]
+
+We observe that a body colliding with an immovable wall changes its direction of motion but not its amount of motion:
+
+\[ f(m,-v) = -f(m,v) \]
+
+???
+
+We assume that two colliding bodies preserve the total amount of motion:
+
+\[ f(m_1,v_1) + f(m_2,v_2) = f(m_1,v_1') + f(m_2,v_2') \]
+
+???
+
+??? We expect that an object's amount of motion is linearly proportional to its mass (its amount of matter).
+
+\begin{align*}
+f(cm,v) &= c f(m,v)
+\\ f(m_1+m_2,v) &= f(m_1,v) + f(m_2,v)
+\end{align*}
+
+One possibility is \( f(m,v) = mv \), but is that the only possibility?
+
+Infer that \( f(m,v) = m v \).
+
+???
+
+Let \([Nx](t) = x(-t)\).
+
+Both \((m_1,x_1,m_2,x_2)\) and \((m_1,Nx_1,m_2,Nx_2)\) describe the same collision.
+If we reverse the time, we will see the same collision.
+
+** ? special fields, conservative forces, potential energy
+Let \( \hat{x} \) mean \( \vec{x} / \norm{x} \).
+
+A time-invariant vector field \(F\) is [[https://en.wikipedia.org/wiki/Central_force][central]] iff \( F(\vec{x}) = F(x) \cdot \hat{x} \),
+where \(\vec{x}\) is the displacement from the /center/ of the field.
+The strength of a central field at \(x\) depends only on the distance between \(x\) and the center of the field.
+
+A force is /conservative/ iff it conserves the mechanical energy of the object it acts upon.
+What is the importance of the fact that the work done by a conservative force does not depend on path?
+
+Consider a spring and a mass.
+Pull the spring, and release it.
+Why is the sum of potential energy and kinetic energy conserved?
+** ? "F = ma" implies "W = ΔK": Work is equal to the change in kinetic energy
+Here we show that \( F = m \vec{a} \) implies \( W = \Dif K \).
+
+(What is the importance of this insight?)
+
+Suppose that a force \( \vec{F} \) is acting on an object of mass \(m\)
+at initial position \(\vec{x}\) and initial velocity \(\vec{v}\).
+By initial, we mean at time zero.
+
+The object's velocity at time \(t\) is \(\vec{v}' = \vec{v} + \vec{a} t\).
+
+The object's position at time \(t\) is \(\vec{x}' = \vec{x} + \vec{v} t + \vec{a} t^2 / 2\).
+
+Recall that \( \vec{F} = m \vec{a} \) and \( \vec{a} \cdot \vec{a} = a^2 \).
+
+The work done by the force on the object is
+\begin{align*}
+W &= \vec{F} \cdot (\vec{x}' - \vec{x})
+\\ &= m\vec{a} \cdot (\vec{v} t + \vec{a} t^2 / 2)
+\\ &= mt \vec{a} \cdot \vec{v} + ma^2t^2/2
+\end{align*}
+
+The object's initial kinetic energy is \(K = mv^2/2\).
+
+The object's kinetic energy at time \(t\) is
+\begin{align*}
+K' &= m \norm{\vec{v} + \vec{a}t}^2/2
+\\ &= mv^2/2 + mt \vec{v} \cdot \vec{a} + ma^2t^2/2
+\end{align*}
+
+Therefore the change in kinetic energy is
+\begin{align*}
+\Dif K &= K' - K = mt \vec{v} \cdot \vec{a} + ma^2t^2/2
+\end{align*}
+
+Observe that \(W\) and \(\Dif K\) are equal.
+Recall that the dot product is commutative: \( \vec{a} \cdot \vec{v} = \vec{v} \cdot \vec{a} \).
+\begin{align*}
+W &= mt \vec{a} \cdot \vec{v} + ma^2t^2/2
+\\ \Dif K &= mt \vec{v} \cdot \vec{a} + ma^2t^2/2
+\end{align*}
+
+Therefore, the work done by a force on an object is equal to the change in that object's kinetic energy.
+\[ W = \Dif K \]
+
+???
+
+Now suppose that the time elapsed is infinitesimal \( \dif t \).
+
+???
+
+Power \(W'\) is rate of work?
+
+\[
+\int_{t_1}^{t_2} W'(t) ~ \dif t = K(t_2) - K(t_1)
+\]
+** ? The surprising mechanical advantage of movable pulleys
+It is surprising that a movable pulley has a [[https://en.wikipedia.org/wiki/Mechanical_advantage][mechanical advantage]] of 2.
+The magic is in the string tension.
+This is one among [[https://www.reddit.com/r/Physics/comments/3qxnog/what_are_some_of_the_most_counterintuitive/][many]]
+cases where habit fails us.
+
+Engineering idea:
+We can use \(n\) ropes with a movable pulley attached to a weight \(F\),
+and ask \(n\) people to pull the free ends of the ropes,
+and each person will only need to exert a force of \(F/(2n)\) to balance the weight.
+However, the people exert unequal forces, tilting the weight.
+* Variational principles
+Prerequisites: line integrals (see [[file:integral.html]]).
+** ? Predictions, explanations, how to make principles
+Think backwards?
+
+Example:
+Newton's laws /predict/: given masses and positions (inputs), Newton's laws give the trajectories.
+Principle of stationary action /explains/: given a trajectory (an observed reality), find the properties of the trajectory?
+** Variational principles
+[[https://en.wikipedia.org/wiki/Variational_principle][Examples]] of variational principles:
+[[https://en.wikipedia.org/wiki/Maupertuis%27s_principle][Maupertuis's principle]].
+
+Prediction: Given \(x\) and \(f\), compute \(f(x)\).
+
+Explanation: Given \(x\) and \(f(x)\), compute the properties of \(f\).
+
+? A /variational principle/ is a /constraint/ on trajectories.
+** Discrete variational principles?
+Example candidates?
+- The sequence of actions of a lazy agent is that which minimizes the total effort.
+- The sequence of actions of an adaptive agent is that which minimizes the total surprise.
+- The sequence of actions of an agent is that which maximizes its utility function.
+** ? Example: hills
+For example problems, see [[https://en.wikipedia.org/wiki/Calculus_of_variations][Wikipedia]].
+
+Let \( z : \Real^2 \to \Real \) be a height map.
+
+Let P and Q be two known points.
+
+A man wants to go from P to Q, but there are hills between them.
+
+Suppose that he does not care about time, and he wants the least effort,
+where the total effort to move from \(x\) to \(y\) is \(h(y) - h(x)\).
+
+Suppose the path is \(p:\Real\to\Real^2\).
+
+The path's total effort is \(E(p(t_k))\).
+** ? Other principles
+** Trajectory
+A /path/ is a one-dimensional geometric object, usually smooth.
+
+A /[[https://en.wikipedia.org/wiki/Path_(topology)][path]] in space \(X\)/ is a function \( [0,1] \to X \).
+
+A /[[https://en.wikipedia.org/wiki/Trajectory][trajectory]]/ (in space \(X\)) is a function \( T \to X \)
+whose domain \(T\) is a [[https://en.wikipedia.org/wiki/Interval_(mathematics)][real interval]]
+that represents an interval of time and whose codomain represents physical space.
+
+A trajectory can be thought of as a path in spacetime.
+
+A trajectory \(x\) means "At time \(t\), the object of interest is at position \(x(t)\)".
+** Minimum
+Let \(f:D\to C\) be a function.
+
+The /range/ of \(f\) is the set \(\SetBuilder{f(x)}{x \in D}\).
+
+A /[[https://en.wikipedia.org/wiki/Partially_ordered_set][poset]]/ (partially ordered set) is a set and a partial order.
+
+A /minimum/ of a poset \((S,\le)\) is an \(x\in S\) such that \(x \le y\) for all \(y \in S\).
+
+A /minimum/ of \(f\) is a minimum of the range of \(f\).
+** Problem
+A /problem/ \(p\) is a question (a logical predicate).
+
+An /answer/ to problem \(p\) is an \(x\) that satisfies \(p(x)\) (such that \(p(x)\) is true).
+
+An /[[https://en.wikipedia.org/wiki/Mathematical_optimization][optimization]] problem/ is the problem of finding a minimum of \(f\) subject to some constraints.
+For example: Find an \(x \in \Real\) such that \(x \le 0\) and \(x^2-1\) is minimal.
+
+
+** Example: pre-variational-calculus: the path traversed by light
+Let \(p\) be a path traversed by light.
+
+Let \(v\) be the light's speed field.
+
+The question: How much time does light take to traverse that path?
+
+The time light takes to move from \(q\) to \(q+\dif q\) is \( \dif t(q) \) such that
+\[ v(q) ~ \dif t(q) = \dif q \]
+
+The time light takes to move from \(p(q)\) to \(p(q+\dif q)\) is \( \dif t(q) \) such that
+\[ v(p(q)) ~ \dif t(q) = p(q+\dif q) - p(q) \]
+
+Divide both sides by \(v(p(q)) ~ \dif q\):
+\begin{align*}
+\frac{\dif t(q)}{\dif q} &= \frac{1}{v(p(q))} ~ \frac{p(q+\dif q) - p(q)}{\dif q}
+\\ \dot{t}(q) &= \frac{1}{v(p(q))} ~ \dot{p}(q)
+\end{align*}
+
+Integrate both sides with respect to \(q\):
+\begin{align*}
+\int_0^1 v(p(q)) ~ \dot{t}(q) ~ \dif q &= \int_0^1 \dot{p}(q) ~ \dif q
+\end{align*}
+
+???
+
+In virtual time span \(\dif u\), light has traversed \( v(p(u))~\dif u \).
+
+(Isn't this just arc length?
+ [fn::<2019-12-28> https://en.wikipedia.org/wiki/Fermat%27s_principle#Modern_version]
+ [fn::<2019-12-28> https://en.wikipedia.org/wiki/Differentiable_curve#arc-length_parametrization])
+
+Divide the path into \(n\) subpaths:
+\[ p_k = p(u_{k+1}) - p(u_k) \]
+
+The time light takes to traverse the subpath \(p_k\) is:
+\[ t_k = \norm{p_k} / v_k \]
+
+Thus the total time is:
+\[ \lim_{n\to\infty} \sum_k t_k \]
+
+Let \(\dif p(k)\) be the infinitesimal subpath \(p(k+\dif k) - p(k)\).
+
+The time light takes to traverse \(\dif p(k)\)
+is \(\dif t(k)\) such that
+\[
+\norm{\dif p(k)} = v(p(k)) ~ \dif t(k)
+\]
+
+The time light takes to traverse \(p\) is
+\begin{align*}
+\int_0^1 \dif t(k) ~ \dif k
+&= \int_0^1 \frac{\norm{\dif p(k)}}{v(p(k))} ~ \dif k
+\\ &= \int_0^1 \frac{\norm{\dif p(k)}}{v(p(k))} ~ \dif k
+\end{align*}
+** Fermat's principle
+[[https://en.wikipedia.org/wiki/Fermat%27s_principle][Fermat's principle]] (of least time) is:
+If light traverses the path AP with velocity v1 and the path PB with velocity v2,
+then light traverses APB in the least amount of time;
+that is, there is no other P' such that t(AP'B) < t(APB).
+
+Fermat's principle unifies reflection and refraction (Snell's law).[fn::<2019-12-28> http://electron6.phys.utk.edu/optics421/modules/m1/Fermat's%20principle.htm]
+
+To approximate /point source/, /enclose/ an ordinary light source (such as a fire, torch, candle, or lamp)
+with a solid opaque container with a small aperture.
+
+? How did Fermat think that light travels with different speeds in different mediums?
+
+In his time (1607--1665),
+light was thought to be ...[fn::<2019-12-28> https://en.wikipedia.org/wiki/Light#Historical_theories_about_light,_in_chronological_order],
+the speed of light had not been known[fn::<2019-12-28> https://en.wikipedia.org/wiki/Speed_of_light#History],
+but the wave theory of light was being invented.
+
+/But how can that principle be used to compute B from A and P?/
+
+How do we test the principle of stationary action?
+** Hamilton's principle
+Hamilton's principle unifies the motion of light and the motion of matter?
+* Continuum mechanics
+** ? From Newtonian mechanics to continuum mechanics
+The first step is to replace the fictional concept of "point mass" with the less fictional concept of "mass density".
+
+\( \rho : \Real^3 \to \Real \)
+
+\[ m = \int_V \rho(x) ~ \dif x \]
+
+What do Newton's laws of motion become?
+
+What do the variational principles become?
+** ? Self-gravitation
+(Newtonian) gravitational field of a fluid or a non-point mass?
+
+https://en.wikipedia.org/wiki/Newton%27s_law_of_universal_gravitation#Bodies_with_spatial_extent
+
+Let \( \rho(x,t) \) be the mass density at point \(x\) at time \(t\).
+
+The gravitational field at point \(x\) at time \(t\) is
+\begin{align*}
+g(x,t) &= \int_{X - \Set{x}} - G ~ \rho(v^*,t) ~ \frac{x-v^*}{\norm{x-v^*}^3} ~ \dif v
+\end{align*}
+
+Should we have used Gauss's law instead of Newton's?
+Gauss's law for gravity is more general than Newton's, because
+"Gauss's law for gravity can be derived from Newton's law of universal gravitation"
+but "It is impossible to mathematically prove Newton's law from Gauss's law /alone/"?
+ [fn::<2019-12-28> https://en.wikipedia.org/wiki/Gauss%27s_law_for_gravity]
+
+The resultant force acting at point \(x^*\) at time \(t\) is
+\begin{align*}
+F(x^*,t) &= m(x^*,t) ~ g(x,t)
+\end{align*}
+
+TODO: Learn some continuum mechanics first.
+
+https://en.wikipedia.org/wiki/Momentum#In_deformable_bodies_and_fluids
+
+https://en.wikipedia.org/wiki/Cauchy_momentum_equation
+
+? The momentum of a volume \(x\) at time \(t\) is
+\[ p(x,t) = \rho(x^*,t) ~ v(x,t) \]
+
+We are interested in the time-evolution of \(\rho\).
+
+What are the criteria for the solution?
+
+We want the solution to conserve the total mass:
+\[
+\int_X \rho(x^*,t) ~ \dif x = m
+\]
+where \(m\) is a constant.
+Thus the total mass is conserved (does not change over time).
+* Waves
+The [[https://en.wikipedia.org/wiki/Wave_equation][wave equation]] can be derived from Newton's laws of motion?
+
+The second-order differential equation of an oscillating spring can be derived from Newton's laws of motion.
+** Waves in steady state
+A /waveform/ \(f\) is a function, usually periodic.
+
+A /wave/ \(w\) is a waveform traveling/propagating with velocity \(v\).
+
+The relationship between a wave and its waveform:
+
+\[ w(x,t) = f(x - vt) \]
+
+A wave has /wavelength/ \( |\lambda| \) iff \( \lambda \) is a shortest vector such that \(f(x+\lambda,t) = f(x,t)\) for all \( t \).
+
+A wave has /period/ \( T \) iff \( T \) is the smallest positive number such that \(f(x,t+T) = f(x,t)\) for all \( x \).
+
+That is, wavelength is spatial periodicity, and period is temporal periodicity.
+
+The wavelength of a wave is the period of its waveform.
+** Traveling waveform
+Let \( i : \Real^3 \to \Real \) be the shape of the disturbance.
+
+Suppose that the disturbance is traveling with velocity \(v\).
+
+Let \(f(x,t)\) be the displacement/disturbance/amplitude in the propagation medium at point \(x\) at time \(t\).
+
+Initially the impulse is at the origin:
+\[ f(x,0) = i(x) \]
+
+After time \(t\) elapses, the impulse has moved in space by \(v t\).
+\[ f(x+vt,t) = i(x) \]
+
+Rearrange:
+\[ f(x,t) = i(x-vt) \]
+** Radially traveling disturbance
+Let \( s(t) \) be the amplitude of the source oscillation at time \(t\).
+
+The oscillation happens at the origin.
+
+The disturbance propagates out radially with speed \(v\).
+
+Assume isotropy and homogeneity of medium?
+
+After time h, what was at (x,t) is at (x+hv,t+h)?
+
+Thus f(x,t) = ... ?
+
+Wave propagation velocity?
+
+f(x - v t, t + Dif t) = f(x,t) ?
+** Modeling transverse waves or surface waves?
+A wave is represented by a function
+
+f : Position × Time → Amplitude
+
+The interpretation is: "At time \(t\), the amplitude at point \(x\) is \(f(x,t)\)".
+
+Amplitude is displacement from resting position.
+
+That is, a wave is often represented as an /amplitude field/.
+(In mathematical physics, an "X field" is a function from position to X.)
+
+Example phenomena that can be represented by periodic functions:
+the motion of a pendulum,
+the surface waves of water in a pond,
+the oscillation of a guitar string.
+
+In steady-state modeling, the wave is extrapolated to infinity in both space and time.
+For example, when modeling a pond, we often assume that the pond is infinite, it has no edges, and waves do not reflect off the edges.
+We assume that wave propagate freely without hitting any obstacles, without reflection, without diffraction.
+Thus we can define wavelength and period:
+* Digression: An example of a circle in differential geometry?
+Curious:
+
+\begin{align*}
+x^2 + y^2 &= r^2
+\\ (x + \Dif x)^2 + (y + \Dif y)^2 &= r^2
+\end{align*}
+
+Subtract both equations, and change \( \Dif \) to \( \dif \), with non-standard analysis.
+What do we get?
+
+...
+
+But that is only a circle in a space with /Euclidean metric/.
+
+In synthetic geometry, a circle with center \(c\) and radius \(r\) is
+\( \SetBuilder{x}{d(c,x) = r}\), that is, the set of all points \(x\) such that the distance between the center and \(x\) is the radius.
+
+Synthetic geometry is more abstract/general.
+For example, a square is a circle in a space with taxicab metric.
+
+Is a circle about the shape, or about the equidistance of points?
+* Bibliography

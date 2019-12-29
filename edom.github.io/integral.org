@@ -1,6 +1,215 @@
 #+TITLE: On integrals
 #+DATE: 2017-06-27 00:00:00 +0700
-* Notation 1
+\(
+\newcommand\der{\operatorname{der}}
+\newcommand\Der{\mathrm{D}}
+\newcommand\dd{\operatorname{d}}
+\newcommand\ang[1]{#1^\circ}
+\newcommand\parenthesize[1]{\left(#1\right)}
+\newcommand\dif{\mathrm{d}}
+\newcommand\Dif{\Delta}
+\newcommand\LinearInterpolation{\text{LInterp}}
+\)
+* Prerequisites
+** ? Linear interpolation
+[[https://en.wikipedia.org/wiki/Linear_interpolation][Linear interpolation]]:
+\begin{align*}
+\LinearInterpolation(a,b,0) &= a
+\\ \LinearInterpolation(a,b,1) &= b
+\\ \LinearInterpolation(a,b,p) &= (1-p)a + pb
+\end{align*}
+** Measure
+A /measure space/ \((S,\mu)\) is a space \(S\) and a measure \(\mu : S \to \Real\).
+
+"Measure" generalizes the concept of length, area, volume, and hypervolume.
+
+Usually, at least in physics:
+\begin{align*}
+\mu([a,b]) &= b-a
+\\ \mu([a,b)) &= b-a
+\\ \mu((a,b]) &= b-a
+\\ \mu((a,b)) &= b-a
+\\ \mu(A \times B) &= \mu(A) \times \mu(B)
+\\ \mu(A \cup B) &= \mu(A) + \mu(B) - \mu(A \cap B)
+\\ \mu\left(\prod_k A_k\right) &= \prod_k \mu(A_k)
+\end{align*}
+
+If we allow infinities, \( \mu(\Real) = \infty \);
+otherwise \( \mu(\Real) \) is undefined.
+* Riemann integrals
+** In one dimension
+Let \( (\Real,\mu) \) be a /measure space/.
+
+Let \( f : \Real \to \Real \) be the /integrand/.
+
+Let \( X = [a,b] \) be the /domain of integration/.
+
+Let \(n\) be the number of partitions.
+
+Partition \(X\) evenly into \(n\) partitions \(p_0, \ldots, p_{n-1}\)
+such that, for each \(k\):
+\[ \mu(p_k) = \frac{\mu(X)}{n} = \frac{b-a}{n} \]
+
+We write \( p_k^* \) to mean "any point in \(p_k\)".
+
+A /Riemann summand/ is the area of a rectangle:
+\[ s_k = f(p_k^*) \cdot \mu(p_k) \]
+
+The /Riemann sum/ is the sequence \( S_1, S_2, \ldots \) where:
+\[ S_n = \sum_{k=0}^{n-1} s_k \]
+
+The /Riemann integral/ is the limit of the Riemann sum:
+\[ I_X f = \int_X f(x)~\dif x = \int_a^b f(x) ~ \dif x = \lim_{n\to\infty} S_n \]
+
+As \(n\) grows unbounded, the sum involves more numerous but smaller partitions,
+and the sum approaches the area under the curve.
+
+The integral sign \(\int\) is a stylized letter "S" that stands for "sum".
+
+The notation \(\int_a^b f(x)~\dif x\) means
+"the area enclosed by the line \(x=a\), the line \(x=b\), the line \(y=0\), and the curve \(y=f(x)\)".
+Negative area means that the curve \(y=f(x)\) goes below the line \(y=0\).
+See [[https://commons.wikimedia.org/wiki/File:Integral_example.svg?][picture]].
+See [[https://en.wikipedia.org/wiki/Integral][Wikipedia]].
+** In many dimensions
+Let \( f : \Real^r \to \Real \) replace the integrand.
+
+Let \( X = X_1 \times \ldots \times X_r \) replace the domain of integration.
+
+Let \( X_i = [a_i,b_i] \) for each \(i\).
+
+Then the Riemann integral is replaced by:
+\begin{align*}
+I_X f &= \int_X f(x)~\dif x
+\\ &= \int_{X_r} \ldots \int_{X_1} f(x_1,\ldots,x_r) ~ \dif x_1 ~ \ldots ~ \dif x_r
+\\ &= \int_{a_r}^{b_r} \ldots \int_{a_1}^{b_1} f(x_1,\ldots,x_r) ~ \dif x_1 ~ \ldots ~ \dif x_r
+\end{align*}
+* Arc length
+See [[https://en.wikipedia.org/wiki/Arc_length#Finding_arc_lengths_by_integrating][Wikipedia]].
+
+Let \(f : [a,b] \to \Real\).
+
+Let \(f'\) be the derivative of \(f\).
+
+The arc length of the curve described by the [[https://en.wikipedia.org/wiki/Graph_of_a_function][graph]] of \(f\) is
+\[ \int_a^b \sqrt{1 + (f'(x))^2}~\dif x \]
+* Line integral
+** Of scalar fields
+See [[https://en.wikipedia.org/wiki/Line_integral#Derivation][derivation]].
+
+See the picture in [[https://en.wikipedia.org/wiki/Line_integral][Wikipedia]].
+
+Begin with the basic case.
+
+Let \(X = [a,b]\).
+
+Let \(c : X \to Y\) be a curve.
+
+Let \(f : Y \to \Real\) be the integrand (a scalar field).
+
+Partition \(X\) evenly to \(n\) subintervals \( p_0, \ldots, p_{n-1} \).
+
+We write \(c[A]\) to mean \(\SetBuilder{c(x)}{x \in A}\).
+
+If we compare a line integral summand and a Riemann summand as follows,
+we see that a Riemann integral is a line integral along an identity curve described by \(c(x) = x\) for all \(x \in X\):
+\begin{align*}
+s_k &= f(p_k^*) \cdot \mu(c[p_k]) & \text{(line integral summand)}
+\\ s_k &= f(p_k^*) \cdot \mu(p_k) & \text{(Riemann summand)}
+\end{align*}
+
+By \(\mu(c[p_k])\), we mean "the arc length of the subcurve \(c[p_k]\)"?
+
+The magical step is the application of the mean value theorem?
+
+We write \( I_c f \) to mean "the line integral of \(f\) /along/ \(c\)".
+
+[[https://en.wikipedia.org/wiki/Line_integral#Applications][Example]]: work done by force on a particle?
+
+If \(X=[a,b]\), then "Riemann integral of \(f\) in \(X\)" is the same as "line integral of \(f\) along \(\text{id}_X\)",
+where \( \text{id}_X : X \to X \) and \( \text{id}_X(x) = x \).
+
+This table compares a Riemann integral and a line integral:
+
+| term                           | Riemann integral                           | line integral                  |
+|--------------------------------+--------------------------------------------+--------------------------------|
+|                                | of \(f\) in \(X\)                          | of \(f\) along \(c\)           |
+| notation                       | \( I_{[a,b]} f = \int_a^b f(x) ~ \dif x \) | \(I_c f\)                      |
+| type of integrand \(f\)        | \(X \to \Real\)                            | \(Y \to \Real\)                |
+| type of curve \(c\)            | \(X \to X\)                                | \(X \to Y\)                    |
+| curve \(c\)                    | \(c(x)=x\)                                 | anything                       |
+| domain of integration \(X\)    | \([a,b]\)                                  | \([a,b]\)                      |
+| partition \(p_k\)              | \(X_k\)                                    | \(c[X_k]\)                     |
+| partition measure \(\mu(p_k)\) | \(\frac{b-a}{n}\)                          | arc length of \(p_k\)          |
+| summand \(s_k\)                | \(f(p_k^*) \cdot \mu(p_k)\)                | \(f(p_k^*) \cdot \mu(c[p_k])\) |
+** ? Of vector fields
+* ? Hypervolume integral
+Surface integral, volume integral, etc.
+* Notation for multiple integrals
+I propose another notation for [[https://en.wikipedia.org/wiki/Multiple_integral][multiple integrals]] at the end of this section.
+
+Suppose that \(f : \Real^3 \to \Real\).
+
+We write \(f(x,y,z)\) to mean \(f(xi+yj+zk)\) where \(i,j,k\) are the standard Cartesian basis vectors.
+
+Let \( V = X \times Y \times Z \).
+
+The common notation for multiple integrals exposes too much detail:
+\[
+\iiint_V f(x,y,z) ~ \dif x ~ \dif y ~ \dif z
+= \int_Z \int_Y \int_X f(x,y,z) ~ \dif x ~ \dif y ~ \dif z
+\]
+
+The integral sign should work with all measure spaces, not only with \( \Real \),
+because the Riemann integral
+(the following equation) accepts all measure spaces:
+\[
+I_V f = \int_V f(x) ~ \dif x = \lim_{n \to \infty} \sum_{p \in P(V,n)} f(p^*) \cdot \mu(p)
+\]
+where \(P(V,n)\) is a set of \(n\) partitions of \(V\),
+and \( p^* \) is a point in partition \(p\),
+and \( \mu \) is the measure in context.
+
+(See [[https://en.wikipedia.org/wiki/Riemann_sum#Generalization][generalized Riemann sum]].
+A Riemann integral is the limit of a Riemann sum as the partitions vanish.)
+
+I propose this notation, which treats all measure spaces such as \(V\) uniformly:
+\[
+\int_V f(v^*) ~ \dif v
+\]
+where \(v^*\) mean a point in an infinitesimal subspace \(\dif v\) of \(V\).
+* ? Comparison of some integrals
+Let $(\Real,\mu)$ be a measure space.
+
+Let $f : \Real \to \Real$ be a function (the "integrand").
+
+Let $X \subseteq \Real$ be the domain of integration.
+
+Let $Y = \{ f(x) ~\vert~ x \in X\}$.
+
+Let $X_1,\ldots,X_{n+1}$ be a partitioning of $X$.
+
+Let $Y_1,\ldots,Y_{n+1}$ be a partitioning of $Y$.
+
+For each $k$, let $x_k \in X_k$ and $y_k \in Y_k$.
+(Pick a point from each partition.)
+
+An /integral of function \( f \) in space \( X \)/
+is $I_X f = \lim_{n\to\infty} \sum_{k=1}^{n} a_k$
+where each $a_k = \mu(X_k) \cdot \mu(Y_k)$ is a rectangular part of the total area.
+There are several kinds of integrals depending on how the area is divided.
+See the table.
+
+| Name                                    | $X_k$                              | $Y_k$           |
+|-----------------------------------------+------------------------------------+-----------------|
+| Riemann integral                        | $[x_k,x_{k+1}]$                    | $[0,f(x_k)]$    |
+| Stieltjes integral with respect to $g$? | $[g(x_k),g(x_{k+1})]$              | $[0,f(x_k)]$    |
+| Lebesgue integral                       | \( \{x ~\vert~ f(x) \in Y_k\} \)   | $[y_k,y_{k+1}]$ |
+
+In Riemann integral, you divide $X$ freely.
+
+In Lebesgue integral, you divide $Y$ freely.
+* Digression
 (Archimedes? Riemann?)
 
 A simple closed path divides a space into two: the space inside the shape and the space outside the shape.
@@ -87,30 +296,3 @@ A mathematical theorem is a technology too, because it increases productivity
 We take this for granted, but we should not forget that for hundreds of years
 people did not know that and they painstakingly did things so that we do not have to,
 and for that we should be grateful.
-* Notation 2
-Let $(\Real,m)$ be a measure space.
-
-Let $f : \Real \to \Real$ be a function.
-
-Let $X \subseteq \Real$ and $Y = \{ f(x) ~\vert~ x \in X\}$.
-
-Let $X_1,\ldots,X_{n+1}$ be a partitioning of $X$ and $Y_1,\ldots,Y_{n+1}$ be a partitioning of $Y$.
-
-For each $k$, let $x_k \in X_k$ and $y_k \in Y_k$.
-(Pick a point from each partition.)
-
-An /integral of function \( f \) in space \( X \)/
-is $I_X f = \lim_{n\to\infty} \sum_{k=1}^{n} a_k$
-where each $a_k = m(X_k) \cdot m(Y_k)$ is a rectangular part of the total area.
-There are several kinds of integrals depending on how the area is divided.
-See the table.
-
-| Name                                    | $X_k$                              | $Y_k$           |
-|-----------------------------------------+------------------------------------+-----------------|
-| Riemann integral                        | $[x_k,x_{k+1}]$                    | $[0,f(x_k)]$    |
-| Stieltjes integral with respect to $g$? | $[g(x_k),g(x_{k+1})]$              | $[0,f(x_k)]$    |
-| Lebesgue integral                       | \( \{x ~\vert~ f(x) \in Y_k\} \)   | $[y_k,y_{k+1}]$ |
-
-In Riemann integral, you divide $X$ freely.
-
-In Lebesgue integral, you divide $Y$ freely.

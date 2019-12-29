@@ -1,5 +1,87 @@
 #+TITLE: Topics in programming
 #+DATE: 2019-11-28 00:00:00 +0700
+* Theory
+A programming language should be /derived/ from observations and principles,
+in the same way physical theories are derived from observations and principles?
+** Mathematics of programming languages?
+(Hofstadter's [[https://en.wikipedia.org/wiki/BlooP_and_FlooP][BlooP and FlooP]]?)
+
+A programming language is a formal system:
+
+| prog. lang. theory   | formal logic                                                   |
+|----------------------+----------------------------------------------------------------|
+| syntax               | formal language                                                |
+| program              | formula                                                        |
+| primitive value      | axiom                                                          |
+| primitive combinator | inference rule                                                 |
+| programming language | [[https://en.wikipedia.org/wiki/Formal_system][formal system]] |
+
+Another point of view is the [[https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence][Curry--Howard isomorphism]]:
+
+| prog. lang. theory   | intuitionistic logic |
+|----------------------+----------------------|
+| program              | constructive proof   |
+| type                 | proposition          |
+| programming language | logic system         |
+
+See also [[https://ncatlab.org/nlab/show/computational+trinitarianism][Curry--Howard--Lambek isomorphism]]
+(called "computational trinitarianism" by Harper 2011).
+
+Recall that:
+
+#+BEGIN_EXAMPLE
+formal system        = formal language + interpretation
+programming language = syntax          + semantics
+#+END_EXAMPLE
+
+A formula does not have to be a string, but may be a /graph/, for example.
+Syntax does not have to be one-dimensional;
+the only restriction is that the syntax is finitely describable.
+
+The semantics (the meaning) of a formula is a mathematical object, such as a number, a set, a state transformer (a special case of functions).
+
+The semantics of a processor instruction is usually a state transformer.
+
+We can map a state transformer to a number by /forgetting/ the parts of state that are preserved by the transformer. (Compare "forgetful functors" in category theory.)
+
+A computation is /pure/ iff its state transformer semantics can be reduced to value semantics???
+
+Let \(P\) be the set of programs.
+
+An example value semantics (calculator): \(S : P \to \Nat\).
+\[ S(a+b) = S(a)+S(b) \]
+\[ S(f(x)) = [S(f)](S(x)) \]
+
+We add /errors/.
+
+Let \(V = \Nat \cup \Set{\bot}\).
+
+\[ S(n/0) = \bot \]
+
+Let \(N\) be the set of /names/.
+
+Let \(V = \Nat\) be the set of /values/.
+
+Let \(C = N \to V\) be the set of /contexts/.
+
+We add /binders/ (basic math expression with eager dynamic binding): \(S : C \times P \to \Nat\).
+
+\[ S(c,\text{var}(v)) = c(v) \]
+\[ S(c,\text{let}(n,e,b)) = S(c + \Set{(n,S(n,e))},b) \]
+
+What use is mathematics, if the mathematics ends up looking like a Lisp/Prolog/Haskell program!?
+
+The argument for eager "let": If you don't use a variable, simply don't define it.
+
+The argument for lazy "let": Immutable cyclic data cannot be done with eager "let".
+
+We add mutable binders.
+
+An example state-transformer semantics: \(M : (P \times E \to \Nat) \to (P \times E \to \Nat)\).
+** Garbage collection
+Garbage collection simplifies the semantics.
+* Complexity of logical formulas?
+complexity measure of logic formulas, and thus of computer system specifications?
 * Overview of computer programming
 <2019-12-04>
 
