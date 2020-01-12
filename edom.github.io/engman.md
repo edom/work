@@ -40,9 +40,6 @@ date: 2018-05-15 02:31:00 +0700
         and ensuring that processes and systems aligned with company goals."
         ([HBR](https://hbr.org/2013/12/how-google-sold-its-engineers-on-management))
     - [Google then carried out Project Oxygen.](https://www.thestreet.com/story/12328981/1/googles-project-oxygen-pumps-fresh-air-into-management.html)
-- social pitfalls
-    - https://en.wikipedia.org/wiki/Sayre%27s_law
-    - https://en.wikipedia.org/wiki/Law_of_triviality
 - [Amazon jobs came down to 3 questions, according to 1998 Bezos letter - INSIDER](https://www.thisisinsider.com/amazon-jobs-executive-questions-2018-8)
 - Software engineering career?
     - recruiters?

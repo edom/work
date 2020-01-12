@@ -4,6 +4,12 @@ permalink: /jakarta.html
 date: 2017-09-03 23:52:00 +0700
 ---
 
+<2020-01-07> Masalah terbesar Jakarta
+
+Masalah terbesar Jakarta bukan banjir atau macet.
+
+Masalah terbesar Jakarta adalah orang-orang yang beragama tapi tidak bertuhan.
+
 - Jakarta is unwalkable.
 We need to fix this.
     - https://www.nytimes.com/2017/08/20/world/asia/jakarta-walking-study-sidewalks.html

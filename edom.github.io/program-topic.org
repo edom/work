@@ -90,10 +90,13 @@ It is surprising that higher-level languages are more complex to implement but s
 
 If all we have is machine code (that is, if we are writing the /first/ electronic computer program ever),
 is it harder to implement a minimal assembler or a minimal Lisp interpreter?
-* On measuring the complexity of specifications
-** Motivation
-A /specification/ (of a computer system) is a logical formula.
+* Informal program complexity
+The complexity of a program is the difficulty of describing what it does.
 
+The complexity of a program is the length of the description of what it does.
+
+* Specification and complexity
+** Motivation
 We want to define a complexity measure of specifications.
 
 We want to be able to determine whether specification X is easier to implement than specification Y.
@@ -102,31 +105,37 @@ But isn't this NP-hard?
 What are our chances?
 If it is impossible to determine whether specification X is easier to implement than specification Y,
 then is "software engineering" possible at all?
-** Syntax
-The abstract syntax of logical formulas (expressions) is:
+** The syntax of specifications
+A /specification/ is a positive first-order logic formula.
+
+Informally, a positive formula is a formula that does not contain negation.
+
+In the rest of this document,
+by "formula" we usually mean "positive first-order logic formula".
+
+The abstract syntax of formulas (expressions) is:
 - Each /atom/ is an expression.
   An atom is an identifier such as \(p\),  =name_123=, \(\wedge\), \(\forall\), etc.
 - If each of \(\beta,\alpha_1,\ldots,\alpha_n\) is an expression,
-  then the /application/ \((\beta,\alpha_1,\ldots,\alpha_n)\) is an expression.
+  then the /application/ \(\beta(\alpha_1,\ldots,\alpha_n)\) is an expression.
 
 Should we have these?
 - An atom is a zero-arity functor: \( \alpha = \alpha() \).
 - Currying: \( [\alpha(\beta_1,\ldots,\beta_n)](\gamma,\ldots) = \alpha(\beta_1,\ldots,\beta_n,\gamma,\ldots) \).
 ** Syntactic complexity partial order
-What do we mean that X is less complex than Y?
+What do we mean by "X is less complex than Y"?
 
 The key idea of the /syntactic-complexity partial-order/ \(\le\) is
-"If \(\alpha\) occurs in \(\beta\), then \(\alpha \le \beta\)."
-
+"If \(\alpha\) occurs in \(\beta\), then \(\alpha \le \beta\)":
 \begin{align*}
 \alpha &\le \beta(\ldots, \alpha, \ldots)
+\\ \alpha &\le \alpha(\ldots)
 \end{align*}
 
 Examples:
 \begin{align*}
 A &\le \wedge(A,B)
 \\ B &\le \wedge(A,B)
-\\ A &\le \neg(A)
 \\ A &\le f(A)
 \\ A &\le [A(B)](C)
 \\ x &\le +(x,y)
@@ -135,16 +144,16 @@ A &\le \wedge(A,B)
 \\ A(x) &\le \forall(x,A(x))
 \end{align*}
 ** Syntactic complexity measure
-The /syntactic complexity/ \(c : E \to \Nat\) is:
+The /syntactic complexity/ of a formula \(x\) is a natural number \(c(x)\) where:
 \begin{align*}
 c(x) &= 1 & \text{if \(x\) is an atom}
 \\ c(\beta(\alpha_1,\ldots,\alpha_n)) &= c(\beta) + c(\alpha_1) + \ldots + c(\alpha_n)
 \end{align*}
 
-Numbers are encoded as Peano numerals like \(z,s(z),s(s(z)), \ldots\)
+Numbers are encoded as Peano numerals like \(z,s(z),s(s(z))\), etc.,
 because we want bigger numbers to have bigger syntactic complexity.
 ** Semantic complexity measure
-The /semantic complexity/ of \(x\) is \(C(x) = c(y)\)
+The /semantic complexity/ of a formula \(x\) is \(C(x) = c(y)\)
 where \(y\) is the simplest (the least syntactically complex) formula that is /equivalent/ to \(x\).
 \[ C(\alpha) = \min_{\alpha \equiv \beta} c(\beta) \]
 
@@ -161,10 +170,85 @@ The semantic complexity of a formula is the syntactic complexity of its simplest
 ? "accidental complexity" = "reducible complexity" = "syntactic complexity"
 
 (Brooks et al.?)
+** Specification complexity
+Let x, y be positive literals.
+
+It is easier to do less:
+
+c(x) leq c(x wedge y)
+c(y) ...
+
+c(y) leq c(x to y)
+
+c(x) leq c(x to y)
+
+The complexity of a formula is its proof complexity?
+
+A specification is a logical formula in conjunctive normal form in which negation is only allowed in the antecedent of implications.
+(Conjunction of Horn clauses?)
+
+Example of specification of state/memory using discrete-time logic?
+This assumes a temporal ordering of commands.
+
+Forall t in nat: if command(t) = increment then state(t+1) = state(t) + 1
 ** Problems
 It does not make sense that \(\forall(x,p(x))\) and \(q(x,y,z)\) have the same semantic complexity?
 
 Similar issue: [[https://cs.stackexchange.com/questions/48329/size-of-propositional-formula][CS SE 48329]].
+** What?
+1982
+A measure of logical complexity of programs
+Iyengar et al.
+https://www.sciencedirect.com/science/article/abs/pii/0096055182900030
+
+Some second-order logic can be embedded into first-order logic with this trick:
+p(x, ...) can always be rewritten to apply(p, x, ...)
+
+Rijnders 2008
+First-Order Logic as a Lightweight Software Specification Language
+https://homepages.cwi.nl/~paulk/thesesMasterSoftwareEngineering/2008/MichelRijnders.pdf
+* Racket syntax objects in Common Lisp and Scheme?
+Racket's syntax object represents abstract syntax and not concrete syntax.
+If it had concrete syntax object, it would enable refactoring tools.
+
+A Lisp should come with its own /parser/ (about concrete syntax, not only about abstract syntax).
+* Lisp "format" but more user-friendly?
+=format= should use proper forms instead of format strings.
+
+#+BEGIN_EXAMPLE
+(format Fragment ...)
+#+END_EXAMPLE
+
+A string fragment is printed literally.
+
+=(display X)= is Racket =~a=.
+
+=(write X)= is Racket =~s=.
+
+=(print X)= is Racket =~v=.
+
+=newline= is Racket =~n=.
+
+=(max-width L F)= is =F= but its width is truncated to =L= characters
+
+=(fixed-width L F)=.
+
+See also: Racket [[https://docs.racket-lang.org/reference/Writing.html#%28def._%28%28quote._~23~25kernel%29._fprintf%29%29][fprintf]]
+
+#+BEGIN_EXAMPLE
+(format "Foo" (write 1) (print 2) newline)
+#+END_EXAMPLE
+* Translators, programmers, managers, and their measurements
+A translator is measured by the faithfulness of translation and speed of translation?
+
+If programmers /translate/ human desire to computer program, then ... the same measure.
+
+Managers also /translate/ from abstract desire to concrete implementation?
+Or is that directors?
+
+Programming ability, how able they are to make machines do what they want.
+
+A programmer may be measured in the same way we measure animal trainers, formal translators, and government legislators.
 * Overview of computer programming
 <2019-12-04>
 
@@ -249,6 +333,7 @@ A technology solves a problem but it also [[https://en.wikipedia.org/wiki/Uninte
     - [[file:pl-1.html][Sketch of PL-1 programming language]]
     - [[file:software-system-model.html][Towards a comprehensive software system modeling language]]
   - [[file:semantics.html][Semantics Research Group]] (of programming languages) (needs rewrite, should be merged)
+- [[file:common-lisp.html][On Common Lisp]]
 - [[file:program-draft.html][Programming?]]
   - Dead ends, futile endeavors
     - [[file:software-science.html][Towards software science]]
@@ -263,12 +348,6 @@ A technology solves a problem but it also [[https://en.wikipedia.org/wiki/Uninte
 - Programming big systems, helping machines help us
 - [[file:secure.html][On the word "secure"]] (see also [[file:power.html]]).
 - Borderline crackpot territory
-  - [[file:intelligence.html][On intelligence]]
-    - [[file:endo.html][The endofunction model of worlds and agents, and its philosophical implications]]
-    - Is cybernetics/practopoiesis the next step in AI after deep neural networks?[fn::<2019-11-04> http://www.danko-nikolic.com/practopoiesis/]
-      \cite{nikolic2017deep}[fn::<2019-11-04> https://link.springer.com/content/pdf/10.1007%2Fs11633-017-1093-8.pdf]
-      Is practopoiesis the key to strong AI?
-      Is it related to "Weight-agnostic neural networks"[fn::<2019-11-06> https://twitter.com/hardmaru/status/1138600152048910336]?
   - Morality, ethics, politics
     - Servers, centralization, oppression, inequality
     - Insanely Generous Investors and money laundering?
@@ -290,49 +369,6 @@ Some of the hints from Norvig's PAIP[fn::https://norvig.com/Lisp-retro.html] is 
 - "#28 Prolog is similar to Lisp on the main points. (p. 381)"
 I can attest to this. I wrote Prolog interpreters and Racket macros, and they feel quite similar; Prolog clauses and Racket match clauses feel similar.
 - "#52 A word to the wise: don't get carried away with macros. (p. 855)" Indeed, don't get carried away with anything.
-* <2019-11-27> On learning, approximation, and machine learning
-Approximation error \( \sum_{x \in D} d(f(x),\hat{f}(x)) \)
-where \(d\) is the discrete metric[fn::<2019-11-27> https://en.wikipedia.org/wiki/Metric_(mathematics)#Examples][fn::<2019-11-27> https://en.wikipedia.org/wiki/Discrete_space]
-(equality comparison): \( d(x,y) = 0 \) iff \( x = y \) and \( d(x,y) = 1 \) iff \( x \neq y \).
-
-Connectionist machine learning is the art of giving machines feelings,
-because feelings can hardly be explained by language,
-which is used for thinking and not feeling.
-
-\( I_D(x \mapsto d(f(x),\hat{f}(x))) \).
-
-\( d \) is a distance function.
-
-Is there machine learning on finite fields?
-Boolean functions?
-Unit interval?
-
-\( f : D \to C \).
-
-\( f : \Real^\infty \to \Real \)?
-
-\( f : A^\infty \to A \)?
-
-\( f : A^n \to A \) where \( A \) is a finite field?
-
-Define learning.
-What does it mean to learn something?
-What does it mean to learn a function?
-
-How do we measure generalizability?
-
-Machine learning is about finding the shape of the approximating function?
-* <2019-11-27> On adaptive systems and boredom
-The law of adaptive systems:
-"Every adaptive system converges to a state in which all kind of stimulation ceases."
- [fn::<2019-11-27> https://en.wikipedia.org/wiki/Adaptive_system]
-
-Corollary: All jobs eventually become boring.
-
-If something excites us, we will eventually get used to it.
-
-But how come we don't get bored of sex?
-Do we?
 * <2019-11-07> Digression: Modeling is common to physics and programming
 Physics is about modeling reality.
 
@@ -899,3 +935,4 @@ OCSP responder?
 ** What is TurnKey GNU/Linux?
 [[https://www.turnkeylinux.org/][
 TurnKey GNU/Linux: 100+ free ready-to-use system images for virtual machines, the cloud, and bare metal.]]
+* Bibliography

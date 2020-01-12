@@ -1,0 +1,94 @@
+#+TITLE: On probability
+#+DATE: 2020-01-13 00:00:00 +0700
+\(
+\newcommand\Der{\mathrm{D}}
+\newcommand\dif{\mathrm{d}}
+\newcommand\Pmf{\mathrm{p}}% probability mass function
+\newcommand\Prm{\mathrm{P}}% probability measure
+\)
+* Some philosophical notes
+Probability usually arises from our ignorance;
+we /model/ a fair coin; there are no known fair coins in reality.
+
+If free will exists, then randomness exists and Nature is probabilistic.
+
+Probability enables us to reason with ignorance.
+* Probability spaces, probability measures, and their common properties
+This formalism is a special case of [[https://en.wikipedia.org/wiki/Probability_axioms][Kolmogorov 1933]].
+
+A /probability space/ is a tuple \( (U,\Prm) \) where \(U\) is the /sample space/ (a set)
+and \(\Prm : 2^U \to \Real\) is the /probability measure/ where, for all \(A\) and \(B\):
+\begin{align*}
+\Prm(\emptyset) &= 0
+\\ \Prm(U) &= 1
+\\ \Prm(A) &\in [0,1]
+\\ A \subseteq B &\implies \Prm(A) \le \Prm(B)
+\end{align*}
+
+We read \(\Prm(A)\) as "the probability of observing \(A\)".
+
+The [[https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle][inclusion--exclusion principle]]
+can be derived from [[https://en.wikipedia.org/wiki/Combinatorics][combinatorics]] (counting) and set theory.
+\[ \Prm(A \cup B) = \Prm(A) + \Prm(B) - \Prm(A \cap B) \]
+* Conditional probability spaces
+We read \( \Prm(A|B) \) as "the probability of observing \(A\) if \(B\) is assumed/known/observed".
+
+\[ \Prm(A|B) = \frac{\Prm(A \cap B)}{\Prm(B)} \]
+
+Alternatively,
+
+\[ \Prm(A \cap B) = \Prm(A|B) \cdot \Prm(B) \]
+
+An illustration is in the [[https://en.wikipedia.org/wiki/Conditional_probability][Wikipedia article]].
+
+This alternative notation emphasizes that \(\Prm_B\) is also a probability measure:
+\[ \Prm_B(A) = \Prm(A|B) \]
+
+If \(X=(U,\Prm)\) is a probability space and \(V \subseteq U\), then \(Y=(V,\Prm_V)\) is also a probability space.
+In that case, we say "\(Y\) is \(X\) /conditionalized to/ \(V\)"
+or "\(Y\) is the /\(V\)-conditionalization/ of \(X\)"
+or "\(Y\) is the /\(V\)-conditionalized/ \(X\)".
+
+Because all conditional probability measures are also probability measures,
+all common properties apply, such as the inclusion--exclusion principle:
+\begin{align*}
+\Prm(A \cup B) &= \Prm(A) + \Prm(B) - \Prm(A \cap B)
+\\
+\Prm_V(A \cup B) &= \Prm_V(A) + \Prm_V(B) - \Prm_V(A \cap B)
+\\
+\Prm(A \cup B | V) &= \Prm(A|V) + \Prm(B|V) - \Prm(A \cap B | V)
+\end{align*}
+* Independently joint probability spaces
+Let \(X = (S_X, \Prm_X)\) be a probability space.
+
+Let \(Y = (S_Y, \Prm_Y)\) be a probability space.
+
+Define their /independently joint probability space/ \(Z = X \times Y\) as \( (S_Z, \Prm_Z) \) where
+\[ S_Z = S_X \times S_Y \]
+
+\[ \Prm_Z(A \times B) = \Prm_X(A) \cdot \Prm_Y(B) \]
+
+This is a generalization of Cartesian product to probability spaces.
+* ? Probability mass functions
+"pmf" abbreviates "probability mass function".
+
+We write \( \Pmf(x) \) to mean \( \Prm(\Set{x}) \).
+
+For real numbers?
+
+\( \Pmf(x) = \delta \)
+
+\( \sum_{x \in [0,1]} \delta = 1 \) !?
+* Bayes's theorem
+I find this form of Bayes's theorem easier to remember
+because both sides are equal to \( \Prm(A \cap B) \):
+\[ \Prm(A|B) \cdot \Prm(B) = \Prm(B|A) \cdot \Prm(A) \]
+
+Another form should be in the [[https://en.wikipedia.org/wiki/Bayes%27_theorem][Wikipedia article]].
+
+See also [[http://pillowlab.princeton.edu/teaching/mathtools16/slides/lec13_BayesRule.pdf][Pillow 2016]].
+* More
+https://en.wikipedia.org/wiki/Probability_theory
+
+https://en.wikipedia.org/wiki/Dempster%E2%80%93Shafer_theory
+* Bibliography

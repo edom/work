@@ -1,0 +1,552 @@
+#+TITLE: On the operating systems I use
+#+DATE: 2016-05-02 03:31:20 +0700
+* Desired file system layout for personal computer?
+- /boot: 1 GB primary partition (Linux kernel is getting fatter)
+- /usr: 128 GB LVM logical volume
+- /mess: 256 GB LVM logical volume
+- /: 64 GB encrypted LVM logical volume
+- /rescue: 8 GB LVM logical volume, minimal Debian installation
+
+To avoid problems with early boot, we don't symlink.
+
+But if I encrypt all of /home/, sshd authorized_keys may not work.
+ [fn::<2020-01-11> https://security.stackexchange.com/questions/135499/what-is-the-point-of-encrypting-the-home-directory]
+* <2019-01-08> Debian 10: Turn off bell/beep
+https://www.linuxquestions.org/questions/linuxquestions-org-member-success-stories-23/turn-off-the-annoying-bell-pc-speaker-in-debian-etch-594405/
+
+Several options:
+
+- xset b off
+- /etc/inputrc
+- rmmod pcspkr and blacklist it; the nuclear option
+* <2018-12-11> Prepare OS upgrade?
+** What
+Move from Ubuntu 14.04 to Debian unstable
+https://www.reddit.com/r/linux/comments/40peeb/security_debian_vs_ubuntu/
+
+Don't buy any laptop outside this list.
+https://www.linux-on-laptops.com/
+
+Make moving easy.
+
+Burn a Debian Live CD.
+
+Debian is huge.
+The Debian community is huge.
+It's overwhelming.
+It's unclear where to start.
+The Debian project needs to delete things.
+The [Debian front page](https://www.debian.org/) has too much information.
+
+"several Debian developers advise people to not use testing. Why is that?"
+https://raphaelhertzog.com/2010/10/04/can-debian-offer-a-constantly-usable-testing-distribution/
+
+- https://www.debian.org/doc/manuals/debian-reference/apa.en.html#_the_debian_maze
+  - "The Debian Reference was initiated by me, Osamu Aoki [...], as a personal system administration memo."
+  - "I hope this [...] provides a good starting direction for people in the Debian maze."
+- Debian Documentation Project https://www.debian.org/doc/ddp
+  - "The Debian Documentation Project was formed to coordinate and unify all efforts to write more and better documentation for the Debian system."
+- Debian testing gets no security updates.
+  debsecan + Debian unstable + APT pinning?
+- Debian testing freezes some time before stable release and after stable release.
+- Debian unstable + get in touch with Debian community + APT pinning.
+- Do not apt-get upgrade if you have no time to fix problems.
+
+Prerequisites?
+- Understand advanced APT usage.
+- Read the Debian manual.
+- Always read the Release Notes before installing Debian stable. (Where?)
+
+As we get older, we set up rules to simplify our lives.
+Example of rules:
+- Never sudo make. Only use sudo with the part that comes from Debian.
+- Always put house keys and car keys in the front pocket of the bag when not using those keys.
+- Never pick up a call from an unknown number.
+
+Enable Magic SysRq key:
+- Read /etc/sysctl.d/README.
+- Symlink /etc/sysctl.d/10-magic-sysrq.conf.
+
+How to install Debian unstable:
+- Minimal-install Debian latest stable, upgrade to testing, install GUI, pin APT, upgrade to unstable.
+
+Always check apt-get install plan.
+Don't just answer "yes".
+If the plan doesn't look sane, wait for a few days.
+
+Dump and backup LVM metadata to GitHub?
+Is this not sensitive data?
+
+Why must APT binary packages be installed to a fixed location?
+Because ELF hardcodes "rpath".
+NixOS patches ELF rpath.
+
+Buy an SSD?
+
+Use "brasero" to burn ISO to DVD.
+https://wiki.debian.org/BurnCd#Burn_the_image_file_to_CD.2C_DVD.2C_or_BD
+
+How a Debian user is supposed to install a recent version of some packages:
+A Debian user is not supposed to install any recent version of packages.
+
+How an advanced Debian user is supposed to install a recent version of some packages:
+- Install Debian stable.
+- Add testing repository.
+- Set up APT pinning:
+  - Most things come from stable.
+  - System packages come from stable.
+  - GHC comes from testing.
+- Always check APT install plan.
+  Avoid reinstalling system packages such as libc, python, perl, gnome, xorg, and so on.
+  If installing something from testing requires removing something from stable, then say no to the apt prompt.
+- Does anything break?
+** Unanswered questions
+Which distro has the best governance (the best social system, and the most trustworthy and competent people)?
+
+Which distro has the most packages?
+
+Which distro has the most volunteers?
+
+Fedora ships with SELinux enabled?
+
+My university used Debian and Ubuntu.
+* Woes upgrading to Debian 9
+** GCC 6 PIE breaks GHC
+GCC 6 PIE defaulting breaks GHC.
+Should Debian package ghc as several packages such as ghc-7.6, ghc-8.4, not as one package ghc with several versions?
+One Debian package per GHC minor version?
+Alternatives system?
+Like openjdk-6 and openjdk-7?
+Like python2 and python3?
+** No GNOME Night Light
+GNOME Night Light is not in Debian 9 (gnome-shell 3.22).[fn::https://www.omgubuntu.co.uk/2017/02/gnome-night-light-blue-light-filter-linux]
+** Massive Debian 9 Chromium privacy violation
+On 2018-12-20, I fresh-install Debian 9.6.
+Chromium enables "Allow Chromium sign-in" without asking user consent.
+ [fn::https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=916320]
+ [fn::https://blog.cryptographyengineering.com/2018/09/23/why-im-leaving-chrome/]
+
+That's the last straw.
+I'm switching to firefox.
+I'm using chromium for privacy violators and shady companies:
+- google, youtube
+- facebook
+** GNOME 3 woes
+*** Totem video player
+Toem used to display playlist but it was removed because it was deemed "too complex"
+https://bugs.launchpad.net/ubuntu/+source/totem/+bug/1600606
+*** Fix GNOME 3 counterproductive defaults
+gsettings set org.gnome.shell.app-switcher current-workspace-only true
+https://coderwall.com/p/m5mhoq/gnome-3-how-to-alt-tab-windows-on-current-workspace-only
+https://askubuntu.com/questions/653436/totem-sidebar-gone-after-upgrade-playlist
+*** Nautilus replaces type-ahead search with recursive search
+** git gui breaks
+Ctrl+T no longer works with multiple files.
+
+<2019-02-10>
+gitk gobbles insane amount of RAM.
+** Change network DNS; NetworkManager broken
+Nuke /etc/NetworkManager/system-connections and recreate that directory.
+https://askubuntu.com/questions/979939/network-manager-keeps-creating-new-profiles-for-the-same-network
+
+Then connect to network.
+
+Then stop.
+
+sudo service NetworkManager stop
+
+sudo nm-connection-edit
+
+Use the GUI to manualize the DNS.
+
+sudo service NetworkManager start
+
+https://wiki.debian.org/NetworkManager
+** Automatic install of updates, including security updates, should be disabled
+I want to see it first before it is installed.
+
+#+BEGIN_EXAMPLE
+apt purge unattended-upgrades
+#+END_EXAMPLE
+* <2019-04-23> Create Debian Live USB
+Get an 8 GB USB disk.
+
+Download the Debian 9 Live ISO file.
+
+Use dd/cp to copy the ISO file into the disk.
+
+The Debian 9 Live ISO file is a horrible hack.[fn::https://lists.debian.org/debian-live/2017/06/msg00070.html]
+
+<2019-04-23>
+I am trying machma.nl guide[fn::https://www.machma.nl/DebianonUSB.html].
+
+* Administering a personal GNU/Linux installation (mostly Ubuntu)
+#+TOC: headlines 2 local
+** Bash shell programming
+*** Articles
+   :PROPERTIES:
+   :CUSTOM_ID: articles
+   :END:
+
+- Bash has associative arrays
+
+  - https://www.artificialworlds.net/blog/2012/10/17/bash-associative-array-examples/
+
+- [[https://github.com/SierraSoftworks/bash-cli][SierraSoftworks/bash-cli: A command line framework built using nothing but Bash and compatible with anything]]
+- [[http://wiki.bash-hackers.org/syntax/pe][parameter expansion]]
+- [[https://github.com/dylanaraps/pure-bash-bible][pure bash bible]]
+
+*** Error handling
+   :PROPERTIES:
+   :CUSTOM_ID: error-handling
+   :END:
+
+I set these bash options in my script to make it fail fast:
+
+#+BEGIN_SRC sh
+    set -o errexit
+    set -o nounset
+    set -o pipefail
+#+END_SRC
+
+*** Bash pitfalls
+   :PROPERTIES:
+   :CUSTOM_ID: bash-pitfalls
+   :END:
+
+This is bash version =GNU bash, version 4.3.11(1)-release (x86_64-pc-linux-gnu)= that comes with Ubuntu 14.04.
+
+**** Local variable definition ignores command substitution result
+    :PROPERTIES:
+    :CUSTOM_ID: local-variable-definition-ignores-command-substitution-result
+    :END:
+
+At first this seems like an unexpected interaction between function, =local= variable, =set -e (set -o errexit)=, and command substitution =$(cmd)=.
+
+The word =local= is a shell command that has an exit status, not a keyword like =var= in JavaScript.
+Bash is behaving as documented.
+See the documentation for =local= in =man bash=.
+
+#+BEGIN_SRC sh
+    fun_0() {
+        local var
+        var=$(false)
+        echo fun_0
+    }
+
+    fun_1() {
+        local var=$(false)
+        echo fun_1
+    }
+
+    fun_2() {
+        local var=$1
+        echo fun_2
+    }
+
+    echo $(set -o errexit; fun_0) # Expected: This doesn't print fun_0.
+    echo $(set -o errexit; fun_1) # PITFALL: This prints fun_1 !!!
+    echo $(set -o nounset; fun_2) # Pitfall: This doesn't print fun_2, and aborts with "bash: $1: unbound variable".
+#+END_SRC
+*** Others
+- https://github.com/koalaman/shellcheck
+  - <2018-11-03> I'm not going back to Haskell until GHC compiles faster.
+** Installing remote graphical user interface
+*** Goal, background, and failures
+I need to run Java VisualVM on my server to profile my application.
+
+I tried =ssh -X=, but it was unacceptably slow.
+SSH compression doesn't help; the problem is latency, not throughput.
+
+I don't want to run an X server on the remote machine.
+I don't want a display server running all the time.
+I want to start it only when I need it.
+
+Ubuntu help is not helpful.
+It doesn't even mention VNC or RDP.
+https://help.ubuntu.com/community/ServerGUI
+
+VNC seems promising.
+Let's run VNC at the server's localhost, and connect through SSH tunneling.
+Let's go with TightVNC.
+
+"VNC: A Faster Alternative to X11"
+https://www.nas.nasa.gov/hecc/support/kb/vnc-a-faster-alternative-to-x11_257.html
+*** Plan of action
+We assume two machines:
+- The /local machine/ is the machine that we use to start SSH connection.
+- The /remote machine/ is the machine that accepts SSH connections.
+
+What we need to do on the remote machine:
+- Install VNC server.
+- Start VNC server.
+- Stop VNC server.
+
+What we need to do on the local machine:
+- Install VNC client/viewer.
+*** Installing, starting, and stopping TightVNC server on the remote machine
+sudo apt-get install --no-install-recommends xfce4 tightvncserver
+
+To start VNC server at remote localhost port 5901.
+1920x1080.
+vncserver -localhost -nolisten tcp -geometry 1920x960 -depth 24 :1
+
+Configure SSH LocalForward.
+If you have a jumpbox, you may need to forward twice.
+
+To stop
+vncserver -kill :1
+
+Start remmina. It seems to have been installed by default. The GUI should be obvious.
+
+Sources:
+- "-nolisten tcp" http://mail.nylug.org/pipermail/nylug-talk/2009-April/013377.html
+- "vncserver :1 -geometry 800x600 -depth 24" https://blog.ssdnodes.com/blog/remote-linux-desktop-vps-ssh-vnc/
+- helpful https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-on-ubuntu-14-04
+*** Installing TightVNC client on the local/development machine
+*** Path not taken
+I saw these, but I did not try these.
+- https://wiki.x2go.org/doku.php/doc:newtox2go
+- https://www.tecmint.com/best-remote-linux-desktop-sharing-software/
+- https://serverfault.com/questions/36381/best-fastest-way-to-access-desktop-gui-on-a-remote-ubuntu-server
+** Autotools
+- I add =--prefix=$HOME/.local= to configure.
+  For installing things, I only sudo apt.
+  I never sudo make.
+- Cargo-cult programming
+  - Sometimes fixes things
+    - Add =-I /usr/share/aclocal= to =ACLOCAL_AMFLAGS= in =Makefile.am=.
+- [[http://voices.canonical.com/jussi.pakkanen/2011/09/13/autotools/][Why GNU Autotools is not my favorite build system | Jussi Pakkanen's development blog]]
+
+** Running X client applications on Docker on Linux
+#+BEGIN_EXAMPLE
+    docker \
+        -e DISPLAY \
+        -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
+        -u <user> <image> <command>
+#+END_EXAMPLE
+
+Replace =<user>= with a non-root user.
+You need a non-root user because the X server rejects connection from the root user by default.
+You can change this with =xhost=, but it's better to connect with a non-root user.
+
+The =<command>= argument is optional.
+
+The =-e DISPLAY= parameter reexports the =DISPLAY= environment variable to the application inside the container.
+X client applications will read from this environment variable to determine which server to connect to.
+
+The =-v HOST:CONT:ro= option mounts =HOST= directory to =CONT= directory read-only.
+This is so that the application in the container can connect to the host X server's Unix socket.
+
+On Linux, display =:0= corresponds to the Unix socket =/tmp/.X11-unix/X0=.
+Everyone who can connect to that Unix socket will
+be able to run X client applications on the machine;
+it is not specific to Docker.
+
+If X complains about shared memory, try:
+
+#+BEGIN_EXAMPLE
+    docker \
+        -e DISPLAY=unix$DISPLAY \
+        -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
+        -u <user> <image> <command>
+#+END_EXAMPLE
+** Habits learned the hard way
+- I check the time at [[https://time.gov/][time.gov]] because Ubuntu 14.04 NTP once betrayed me.
+  - 2018-01-16: I had always thought that it was dependable, but it betrayed me:
+    It showed 2 a.m. while the actual time was 4 a.m..
+    I missed some hours of sleep.
+- I sometimes run =sync=, hoping to make sure my changes are written to disk.
+** What
+- Why use swap partitions and not swap files?
+
+  - Defragmenting swap files might have undesirable effects.
+
+    - https://lwn.net/Articles/317787/
+
+- ext4 defragmentation tools
+
+  - https://askubuntu.com/questions/221079/how-to-defrag-an-ext4-filesystem
+
+    - e2freefrag DEV, e4defrag -c FILE
+
+- SATA 3 Gbps controller problem?
+
+  - https://github.com/zfsonlinux/zfs/issues/4873
+
+- Security
+
+  - Isolating (sandboxing) an application
+
+    - Creating a dedicated limited user for an application
+
+      - =adduser --system=, or just use the =nobody= user?
+
+  - Many methods of isolation
+
+    - https://unix.stackexchange.com/questions/384117/linux-isolate-process-without-containers
+    - https://www.engineyard.com/blog/linux-containers-isolation
+    - https://opensourceforu.com/2016/07/many-approaches-sandboxing-linux/
+
+- Why isn't ssh fail2ban the default?
+  Why is security not the default?
+- 2014, "Is there any solution to make OpenVPN authentication with Google ID?", [[https://serverfault.com/questions/597833/is-there-any-solution-to-make-openvpn-authentication-with-google-id][SF 597833]]
+- man page usability, terminal usability, reducing cognitive load
+
+  - [[https://tldr.sh/][tldr.sh]]: "The TLDR pages are a community effort to simplify the beloved man pages with practical examples."
+
+- [[https://stackoverflow.com/questions/22697049/what-is-the-difference-between-google-app-engine-and-google-compute-engine][SO 22697049: difference between Google App Engine and Google Compute Engine]]
+- A good OS (operating system) is invisible like a good design.
+
+  - The user can't tell whether an OS is good.
+    If the OS is good, everything runs smoothly.
+  - But the user can tell whether an OS is bad.
+    Crashes due to non-hardware problems.
+    Things that don't just work.
+
+- https://felipec.wordpress.com/2011/06/16/after-two-weeks-of-using-gnome-3-i-officially-hate-it/
+
+  - Why does the author disapprove of GNOME 3?
+
+- https://libcloud.apache.org/
+
+  - "One Interface To Rule Them All: Python library for interacting with many of the popular cloud service providers using a unified API."
+
+- Systems should be secure by default.
+
+  - UNIX/Linux woes
+
+    - Why is SSH fail2ban not installed by default?
+    - Why does an application run as the user?
+
+      - I think this is a design flaw.
+        It's a big gaping security hole.
+        It allows an application to access all your files.
+        But how do we fix this without sacrificing convenience?
+      - Why is sandboxing not the default?
+
+    - How do we understand SELinux?
+
+      - [[https://www.computernetworkingnotes.com/rhce-study-guide/selinux-explained-with-examples-in-easy-language.html][SELinux Explained with Examples in Easy Language]]
+      - NSA made SELinux. How trustworthy is it? Does it have NSA backdoors?
+
+        - [[https://security.stackexchange.com/questions/42383/how-trustworthy-is-selinux][linux - How trustworthy is SELinux? - Information Security Stack Exchange]]
+        - 2017, [[https://www.reddit.com/r/linux/comments/54in5s/the_nsa_has_tried_to_backdoor_linux_three_times/][The NSA has tried to backdoor linux three times : linux]]
+
+    - What is the relationship/difference between MAC (mandatory access control) and DAC (discretionary access control)?
+      Are they antonyms? Complements?
+
+      - [[https://security.stackexchange.com/questions/63518/mac-vs-dac-vs-rbac][access control - MAC vs DAC vs RBAC - Information Security Stack Exchange]]
+
+  - The only real secure way to run an untrusted application is on a different machine with no network connection.
+
+- [[https://linux.die.net/man/1/pv][pv(1): monitor progress of data through pipe - Linux man page]]
+- [[https://stedolan.github.io/jq/][jq]], [[https://en.wikipedia.org/wiki/Jq_(programming_language)][WP:jq (programming language)]]
+** sudo security hole mitigation: Don't reuse the terminal you use for sudo.
+   :PROPERTIES:
+   :CUSTOM_ID: sudo-security-hole-mitigation-dont-reuse-the-terminal-you-use-for-sudo.
+   :END:
+
+The problem:
+If you run sudo in a terminal,
+then every program you run in the same terminal shortly after can become root without asking for your password,
+(You may not have this problem if your system disables credential caching.)
+
+To see how, save this into =evil.sh=, and then =chmod 755 evil.sh=, and then =sudo echo login=, and then =./evil.sh=.
+
+#+BEGIN_SRC sh
+    #!/bin/bash
+    # If you run this script not long after sudoing in the same terminal,
+    # then this script can become root without prompting for your password.
+    sudo echo PWNED # could be a malicious program
+#+END_SRC
+
+The security hole is by design for convenience because people don't like typing their passwords.
+This hole is not fatal; the user can control this.
+It seems that this hole won't be closed;
+there doesn't seem to be any way of closing this hole without annoying the user.
+
+The mitigation is simple disciplined behavior:
+
+- Do as few things as necessary in an elevated terminal.
+- Run only trusted programs and scripts.
+- Close the terminal as soon as possible.
+  Alternatively, you can also run =sudo -K= to remove the cache.
+
+** Probably relevant Twitters
+   :PROPERTIES:
+   :CUSTOM_ID: probably-relevant-twitters
+   :END:
+
+- [[https://twitter.com/nixcraft][nixcraft]]: some humor, some important
+
+** Building software for old Ubuntu
+   :PROPERTIES:
+   :CUSTOM_ID: building-software-for-old-ubuntu
+   :END:
+
+Suppose:
+
+- You are using Ubuntu 14.04.
+- Ubuntu 14.04 comes with Emacs 24.
+- You want to build Emacs 26 (because you want Spacemacs).
+
+You may be able to do that.
+Install the build dependencies, and hope that emacs 26 doesn't get too edgy with its libraries.
+
+#+BEGIN_EXAMPLE
+    sudo apt-get build-dep emacs24
+#+END_EXAMPLE
+
+That is from [[http://ergoemacs.org/emacs/building_emacs_on_linux.html][How to Build Emacs on Linux]].
+
+You can do that for other software, as long as they don't require dependencies that are too recent.
+
+** What
+- https://medium.com/netflix-techblog/linux-performance-analysis-in-60-000-milliseconds-accc10403c55
+
+<2019-01-16> Ubuntu 14.04.
+Okular is better than Evince.
+Okular's "Trim Margins" feature is helpful.
+Okular also feels more responsive.
+** Security
+  :PROPERTIES:
+  :CUSTOM_ID: security
+  :END:
+
+- Bastion hosts, aka jump boxes
+
+  - Does a jump box add any security?
+
+    - http://cloudacademy.com/blog/aws-bastion-host-nat-instances-vpc-peering-security/
+    - http://www.infoworld.com/article/2612700/security/-jump-boxes--improve-security--if-you-set-them-up-right.html
+
+- Check your HTTPS
+
+  - [[https://www.ssllabs.com/ssltest/][Test your HTTPS implementation]]; it's too easy to do security wrong.
+
+- [[https://www.vaultproject.io/][HashiCorp Vault]]
+
+  - [[https://github.com/hashicorp/vault][source code]], language Go, license MPL 2.0
+  - What is Vault? "Vault is a tool for securely accessing /secrets/." ([[https://www.vaultproject.io/intro/index.html][Introduction]])
+  - What can it do?
+  - How do I install it?
+  - How do I run it?
+  - How do I interact with it?
+  - [[https://www.hashicorp.com/][HashiCorp]]
+
+- [[https://stackoverflow.com/questions/5930529/how-is-revocation-of-a-root-certificate-handled][SE 5930529: How is revocation of a root certificate handled?]]
+- [[https://en.wikipedia.org/wiki/Online_Certificate_Status_Protocol][WP: Online Certificate Status Protocol]]
+- [[https://en.wikipedia.org/wiki/OCSP_stapling][WP: OCSP Stapling]] moves the cost from client to server.
+- Zero trust security model (ZTSM)
+
+  - "How would I design my system without any firewalls?"
+  - https://www.scaleft.com/beyondcorp/
+
+    - old approach: perimeter security, medieval castle, weak core, strong perimeter
+    - https://storage.googleapis.com/pub-tools-public-publication-data/pdf/43231.pdf
+
+      - "The perimeter security model works well enough when all employees work exclusively in buildings owned by an enterprise."
+      - "access depends solely on device and user credentials, regardless of a user's network location"
+      - "All access to enterprise resources is fully authenticated, fully authorized, and fully encrypted based upon device state and user credentials."
+      - ZTSM obviates VPN (virtual private network).

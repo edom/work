@@ -1,0 +1,385 @@
+#+TITLE: On learning
+#+DATE: 2017-06-22 03:57:00 +0700
+\(
+\newcommand\Der{\mathrm{D}}
+\newcommand\dif{\mathrm{d}}
+\newcommand\Pmf{\mathrm{p}}% probability mass function
+\newcommand\Prm{\mathrm{P}}% probability measure
+\)
+* To learn something is to get better at it
+** Extrinsic/black-box/operational/test-score model
+"Better" implies an ordering of goodness,
+and "get better" implies time,
+so we may model learning as an /increasing test scores/.
+
+Caution:
+The agent maximizes the test score without necessarily understanding anything;
+the agent may learn the /dataset bias/ instead of the desired feature;
+but here we do not discuss about making good tests.
+
+Let \(s(t)\) be the agent's /test score/ at time \(t\).
+
+The agent's /learning rate/ is \( \Der s \).
+* Too philosophical?
+** Learning
+Learner /learns/ Thing iff Learner /causes/ itself to /get better/ at Thing.
+A teacher may /contribute/ to the improvement, but the learner itself /causes/ that improvement.[fn::X /causes/ Y iff the absence of X causes the absence of Y.
+On the other hand, X /contributes/ to Y iff the existence of X changes the severity of Y.]
+Learning is self-improvement.[fn::"Learning is a an area of AI that focuses on processes of self-improvement." http://users.cs.cf.ac.uk/Dave.Marshall/AI2/node131.html#SECTION000151000000000000000]
+"To /learn/ Thing" is to /become more intelligent/ in Thing; remember that intelligence is relative.
+For example, "they learn to cook" means that they are trying to get better in cooking, that is, how to cook more tasty food with less effort in less time.
+"Learning X" means finding a way to use the brain more efficiently for X so that X feels more effortless.
+** On the prerequisites of learning
+In order for learning to be possible at all, there has to be an intersection between the learner's architecture and the learnee's inherent structure.
+We can learn some laws of Nature because there is an intersection between the way we learn/think and the way Nature works.
+
+What is the absolute minimum requirements for learning?
+
+Learning requires feedback and changeable internal state.
+How do we formalize "experience"?
+"Experience" can be modeled by a sequence?
+experience?
+mistakes?
+memory?
+** Philosophy of learning?
+[[http://learning.media.mit.edu/content/publications/EA.Piaget%20_%20Papert.pdf][Piaget's constructivism vs Papert's constructionism]], Edith Ackermann
+** Intelligence without learning
+What is the relationship between intelligence and learning?
+Can we have one without the other?
+Yes.
+A system that stops learning after it obtains intelligence is still intelligent.
+A computer program with sufficiently many conditionals is intelligent, but it never learns.
+An intelligent system does not have to learn.
+A non-learning intelligent system will continue to satisfy its goal as long as the system stays in the environments it is familiar with.
+
+Both intelligence and learning requires measuring /how well/ something is done.
+* Teaching, autodidactism, and metalearning
+What is teaching?
+"Teacher /teaches/ Thing to Learner" iff Teacher /helps/ Learner learn Thing.
+Teaching is mostly about sequencing lessons to maximize learning speed.
+
+What is the relationship between teaching and learning?
+Teachers needs learners, because otherwise there is no one to teach.
+If learning is the shaping of belief, then teaching is the spreading of belief.
+Belief is software: belief can be duplicated but not be moved.
+Language enables some belief transfer and capture.
+If we know how to learn, then we know how to teach, and also the converse.
+"Learn" is a transitive verb that takes one object: one learns /something/.
+"Teach" is a transitive verb that takes /two/ objects: one teaches /something/ to /someone/, possibly to thonself in case of autodidactism.
+But "autodidactism" ("self-teaching") is somewhat nonsensical: you can't tell yourself something that you don't know.
+When you read a book, the book /teaches/ you, and you /learn/ from the book.
+But you may speed up your learning using some metalearning techniques.
+Thus, when we say "autodidactism", we actually mean "metalearning".
+Of human learning, the most important ideas seem to be
+goal-directed learning, the forgetting curve[fn::https://en.wikipedia.org/wiki/Forgetting_curve],
+and Bloom's taxonomy of learning[fn::https://en.wikipedia.org/wiki/Bloom%27s_taxonomy].
+* Learning complexity
+How complex is something to learn?
+Every computable thing is learnable, in principle.
+Formal language with lower descriptive complexity is more learnable.
+Smoother functions are more learnable.
+This suggests that computation theory : computation-complexity theory = learning theory : learning-complexity theory.
+
+Smoother functions are more learnable (easier to learn).
+Convex boundary is more learnable than concave boundary.
+A polyhedron is a three-dimensional polygon.
+A polytope is a higher-dimensional polyhedron.
+The analogy is polytope : polyhedron : polygon = hypercube : cube : square.
+The boundary of a cluster is a polytope.
+A cluster with convex polytope boundary is more learnable than a cluster with concave polytope boundary.
+* COLT: measuring intelligence
+- [[https://en.wikipedia.org/wiki/Computational_learning_theory][Wikipedia: Computational learning theory]]
+  - What is the goal of computational learning theory?
+    - "Give a rigorous, computationally detailed and plausible account of how learning can be done." [Angluin1992]
+  - "a subfield of Artificial Intelligence devoted to studying the design and analysis of machine learning algorithms"
+- Supervised learning is extrapolating a function from finite samples.
+  Usually, the function is high-dimensional, and the samples are few.
+- It is simple to measure learning success in perfect information games such as chess.
+  Chess also doesn't require any sensors and motors.
+
+What COLT?
+- 2000, György Turán, [[https://link.springer.com/article/10.1023%2FA%3A1018948021083][Remarks on COLT]]
+- 2016, Krendzelak, Jakab, [[https://ieeexplore.ieee.org/document/7802092/][Fundamental principals of Computational Learning Theory]]
+  - Reading queue:
+    - D. Angluin, C. Smith, "Inductive inference: theory and methods", A.C.M. Computing Surveys, vol. 15, pp. 237-269, 1983.
+    - M. Anthony, N. Biggs, "Computational Learning Theory" in , Cambridge university press, 1992.
+    - M.J. Kearns, "The computational Complexity of Machine Learning" in , The MIT Press, May 1990.
+    - L. Pitt, L.G. Valiant, "Computational limitations on learning from examples", Journal of the A.C.M., vol. 35, no. 4, pp. 965-984, 1988.
+- helpful slides
+  https://cs.uwaterloo.ca/~klarson/teaching/W15-486/lectures/22Colt.pdf
+- Bertoni et
+  al. http://elearning.unimib.it/pluginfile.php/283303/mod_resource/content/1/Apprendimento_Automatico/Computational_Learning.pdf
+- https://stats.stackexchange.com/questions/142906/what-does-pac-learning-theory-mean
+- https://pdfs.semanticscholar.org/presentation/fbbd/65646c8a81094864d4e0b0dfb9c1f22181af.pdf
+- http://web.cs.iastate.edu/~honavar/colt-tutorial.pdf
+- http://www.cis.upenn.edu/~mkearns/
+  the computational complexity of machine learning
+  http://www.cis.upenn.edu/~mkearns/papers/thesis.pdf
+  https://www.worldscientific.com/worldscibooks/10.1142/10175
+- 2015
+  http://www.cs.tufts.edu/~roni/Teaching/CLT/
+- probably link to this
+  http://bactra.org/notebooks/learning-theory.html
+- semantics-first
+  https://pdfs.semanticscholar.org/83e7/b615c165209af54dd0fe05c850bb08232625.pdf
+- discrete approximation theory
+  see the references of this paper
+  https://www.worldscientific.com/doi/suppl/10.1142/10175/suppl_file/10175_chap01.pdf
+- https://profs.info.uaic.ro/~ciortuz/SLIDES/ml7.pdf
+
+Optimal learning for humans
+https://www.kqed.org/mindshift/37289
+
+Curate from this
+https://thesecondprinciple.com/optimal-learning/
+
+Boston dynamics dog robots
+
+Tesla car autopilots
+
+Google and Uber self-driving cars
+
+https://www.quora.com/Will-we-ever-have-a-rigorous-and-robust-definition-for-intelligence
+
+rigorous definition of intelligence
+The new ai is general and rigorous, idsia
+Toward a theory of intelligence,RAND
+
+A system responds to a stimulus.
+Define: a system is /adapting/ to a stimulus if the same stimulus level elicits decreasing response level from the system.
+The stimulus level has to be increased to maintain the response level.
+
+Is learning = adapting?
+Is intelligence = adaptiveness?
+
+* Toward a unified theory of learning?
+What is learning?
+Shallow definitions.
+To learn is to avoid repeating past mistakes.
+
+TODO Unify learning, prediction, modeling, approximation, control, hysteresis, memory.
+These things are similar:
+- hysteresis
+- memory
+- smoothing
+- infinite-impulse-response filter
+
+/Optimal reverse prediction/ unifies supervised and unsupervised learning \cite{xu2009optimal}.
+Then \cite{white2012generalized} generalizes \cite{xu2009optimal} to non-linear predictors.
+
+Is hysteresis[fn::https://en.wikipedia.org/wiki/Hysteresis#Models_of_hysteresis]] learning?
+Is hysteresis memory?
+Does intelligence require learning?
+
+Is it possible to accomplish the same goal in different environments without learning?
+
+Use discrete sequences
+
+Gradient descent
+
+https://forum.azimuthproject.org/discussion/1538/machine-learning
+* Adversarial learning?
+How do we learn amid lies, deception, disinformation, misinformation?
+Related to adversarial learning? https://en.wikipedia.org/wiki/Adversarial_machine_learning ?
+
+$P$ tries to predict $G$.
+$G$ tries to make $P$ wrong.
+* Neural networks?
+Neural networks is one architecture that makes machine trainable.
+Neural network is not necessarily the best architecture for intelligence.
+Evolution is a greedy optimization algorithm.
+
+Topologically, a neural network layer is a continuous map.
+It transforms the input space into a more separable space.
+Consider the set of points that satisfy the classifier.
+This set is a manifold.
+A neural network layer stretches, rotates, manipulates that manifold.
+The output wants to be box-shaped.
+But isn't this just the idea of Kohonen's self-organizing maps?
+* Models of learning
+Most mathematical statements in this chapter are to be interpreted probabilistically (truth value continuum; non-binary truth value).
+
+There should be one theory of learning that can explain the learning done by humans, animals, plants, microbes, machines, etc.
+** Teaching is not a dual of learning
+Both "agent X /teaches/ agent Y Z" and "agent Y learns Z from agent X" mean the same thing:
+"X speeds up Y's learning Z".
+
+Teaching makes learning more efficient.
+
+A teacher /multiplies/ a learner's productivity.
+No teacher can help a learner who produces zero (a learner who is unwilling to learn).
+** More intrinsic model
+Let \(Input\) be the agent's input type.
+
+Let \(Output\) be the agent's output type.
+
+Let \(S : Input \times Output \to \Real\) be the /scoring function/.
+
+A /learning process/ is a function from time to test score.
+
+Let \(x(t)\) be the agent's input at time \(t\).
+
+Let \(y(t)\) be the agent's output at time \(t\).
+
+Let \( s(t) = S(x(t),y(t)) \).
+** Discrete-time learning
+Let \(x\) be the agent's /input sequence/ where each \(x_k \in Input\).
+
+Let \(y\) be the agent's /output sequence/ where each \(y_k \in Output\).
+
+Let \(s\) be a sequence of /test scores/ where each \(s_k = S(x_k,y_k)\).
+
+The agent /learns \(S\)/ iff the sequence \(s\) is increasing.
+
+The agent is /\(m\)-proficient at \(S\) after time \(t\)/ iff \(s_k \ge m\) for all \(k \ge t\).
+
+The agent's /degree of mastery/ (/degree of expertise/) is the minimum score it can reliably achieve.
+
+The agent's /learning rate/ at time \(k\) is \(r_k = s_k - s_{k-1}\).
+
+If there exists \(f\) such that \(S(x,y) = \norm{y - f(x)}\),
+then the learning problem is also an optimization problem.
+** Meta-learning
+Meta-learning can be thought of optimization/maximization of learning rate.
+** Sobolev space approximation
+Learning can be seen as /approximation in Sobolev spaces/.
+
+(See also: approximation theory, optimization theory, and functional analysis.)
+
+Another possibility: In 1984 Valiant proposed the PAC (probably approximately correct) learning model \cite{valiant1984theory},
+but it is limited to learning propositional logic formulas.
+It is one piece of the theory that we need to build intelligent systems.
+** Convergence
+Learning can be defined as /convergence/.
+
+Sequence, learning, and approximation:
+
+Here an /agent/ is a sequence.
+
+The agent \(a : \Nat \to T\) /learns/ the target \(t : T\) iff the sequence \(a\) converges to \(t\).
+
+Formally, the agent \(a\) learns the target \(t\) iff \(\lim_{n\to\infty} a_n = t\).
+
+Let there be a system.
+Devise a test.
+Let the system do the test several times.
+Let the test results be the sequence \(x\).
+We say that the system is /getting better/ at that test iff, mostly,
+\[ i < k \implies x_i < x_k \]
+that is, iff the sequence of test scores is /mostly increasing/.
+** Other models of learning
+(Why do we bother discussing this if we won't use this further?)
+Psychology sees learning as adaptation and habituation.
+Formal education sees learning as /getting high grades/ in exams.
+Epistemology sees learning as /acquisition of knowledge/.
+YouTube sees learning as /maximizing/ people's addiction to YouTube so that they linger on YouTube,
+with the hope that they click more ads.
+Each of those models is about getting better in something.
+
+Preece 1984 \cite{preece1984mathematical}[fn::<2020-01-12> https://onlinelibrary.wiley.com/doi/pdf/10.1002/tea.3660210910]:
+differential equation model of learning:
+"Hicklin [1976] envisaged that learning resulted from a dynamic equilibrium between information acquisition and loss".
+
+ML stands for "machine learning".
+"Machine learning addresses the question of how to build computers that improve automatically through experience."\cite{jordan2015machine}
+However, we are not only interested in humans and machines, but in all intelligent beings.
+
+Machine learning is finding a function fitting a data list, minimizing
+error on unseen data. Machine learning is about how program improves
+with experience.
+
+Find a function fitting the data and minimizing the /loss function/.
+
+Given $[(x_1,y_1),\ldots,(x_n,y_n)]$, find $f$ minimizing
+$\sum_k \norm{f(x_k) - y_k}^2$.
+
+A /model/ is a constrained optimization problem: Given $C$, compute
+$\min_{x \in C} f(x)$ or $\argmin_{x \in C} f(x)$. If $C$ is discrete,
+use dynamic programming. If $C$ is continuous, use gradient descent.
+
+A /learner/ inhabits $[(a,b)] \to (a \to b)$.
+
+A /loss function/ inhabits $(a,b,\Real^\infty) \to \Real$.
+
+The /training loss/ of $g(x) = w \cdot f(x)$ with respect to $D$ is
+$\frac{1}{|D|} \sum_{(x,y) \in D} L(x,y,w)$ where $L$ is the loss
+function.
+
+Learning is finding $w$ that minimizes the training loss.
+
+Let $y \in \{-1,+1\}$. The /score/ of $f$ for $(x,y)$ is $f(x)$. The
+/margin/ of $f$ for $(x,y)$ is $f(x) \cdot y$.
+
+Binarization of $f$ is $\sgn \circ f$.
+
+Least-squares linear regression
+
+Minimize training loss
+
+Gradient descent training with initial weight $w_1$, iteration count
+$T$, and step size $\eta$: Let $K : \Real^n \to \Real$ be the training
+loss function. Let $\nabla K$ be the gradient of $K$. The weight update
+equation is $w_{t+1} = w_t - \eta \cdot (\nabla K)(w_t)$ where $w_1$ may
+be random. The training result is $w_T$.
+
+Stochastic gradient descent (SGD) training:
+$w_{t+1} = w_t - \eta \cdot (\nabla(L~x_t~y_t))(w_t)$. Note the usage of
+the loss function $L$ instead of the training loss function $K$.
+
+SGD is /online/ or /incremental/ training.
+
+Classification is regression with zero-one loss function. Every
+classification can be turned into regression by using /hinge loss/ or
+/logistic regression/.
+
+The /logistic function/ is $f(x) = \frac{1}{1 + e^{-x}}$.
+
+Nearest neighbor with training data list $D$: $g(x') = y$ where
+$(x,y) \in D$ minimizing $\norm{f(x') - f(x)}^2$.
+
+Seminal papers?[fn::https://www.quora.com/What-are-the-most-important-foundational-papers-in-artificial-intelligence-machine-learning]
+
+TODO Read?
+- [[https://arxiv.org/abs/1405.1513][Ibrahim Alabdulmohsin: A Mathematical Theory of Learning]]
+- 1999: [[http://www.cis.syr.edu/people/royer/stl2e/][Sanjay Jain et al.: Systems that learn]]
+- 2017, [[https://www.cambridge.org/core/journals/behavioral-and-brain-sciences/article/building-machines-that-learn-and-think-for-themselves/E28DBFEC380D4189FB7754B50066A96F][Building machines that learn and think for themselves]]
+- \cite{geffner2018model}
+** More about learning
+https://en.wikipedia.org/wiki/Learning
+
+https://en.wikipedia.org/wiki/Machine_learning
+
+* <2019-11-27> On learning, approximation, and machine learning
+Approximation error \( \sum_{x \in D} d(f(x),\hat{f}(x)) \)
+where \(d\) is the discrete metric[fn::<2019-11-27> https://en.wikipedia.org/wiki/Metric_(mathematics)#Examples][fn::<2019-11-27> https://en.wikipedia.org/wiki/Discrete_space]
+(equality comparison): \( d(x,y) = 0 \) iff \( x = y \) and \( d(x,y) = 1 \) iff \( x \neq y \).
+
+Connectionist machine learning is the art of giving machines feelings,
+because feelings can hardly be explained by language,
+which is used for thinking and not feeling.
+
+\( I_D(x \mapsto d(f(x),\hat{f}(x))) \).
+
+\( d \) is a distance function.
+
+Is there machine learning on finite fields?
+Boolean functions?
+Unit interval?
+
+\( f : D \to C \).
+
+\( f : \Real^\infty \to \Real \)?
+
+\( f : A^\infty \to A \)?
+
+\( f : A^n \to A \) where \( A \) is a finite field?
+
+Define learning.
+What does it mean to learn something?
+What does it mean to learn a function?
+
+How do we measure generalizability?
+
+Machine learning is about finding the shape of the approximating function?
+
+* Bibliography
