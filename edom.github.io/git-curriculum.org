@@ -1,0 +1,106 @@
+#+TITLE: A Git curriculum for team members
+#+DATE: 2020-01-14 00:00 +0700
+* Set up
+- We assume GNU/Linux.
+- Understand that =git config --global= usually modifies the file =~/.gitconfig=.
+- Understand that =git config= usually modifies the file =.git/config=.
+- Understand that Git stores data in the =.git= directory.
+* Inspecting history
+- Read the output of programs that show the newest commit on top.
+  - Read the output of =git log=.
+  - Read the output of =git log -p= (that generates diffs).
+  - Read the output of =git log --graph --oneline --decorate=.
+  - Read the output of =gitk=.
+  - Read the output of =gitk Ref1 ... RefN=.
+  - Understand options that are common to =git log= and =gitk=:
+    - refs
+    - =--all=
+* Referring to commits
+- Understand that a reference (a ref) labels a commit.
+* Working in a team
+** Synchronizing with others
+- Understand =git fetch=.
+- Understand =git push=.
+- Understand =git push -f=.
+** Coordinating with others
+- Avoid trivial merge conflicts.
+  - Avoid renaming files that others are working on.
+  - Avoid working on the same fragment that others are working on.
+- Avoid noise.
+  - Avoid changing whitespace/formatting.
+** Merging
+- Understand that a merge commit is a commit with more than one parents.
+- Understand that Git merges are /textual/; Git does not understand programming.
+- Understand that =git merge Ref= merges Ref /to the current branch/.
+  - The current branch will be the first parent; X will be the second parent.
+- Develop good habits.
+  - Before =git merge=, ensure that the working directory is /clean/ according to =git status=.
+  - Avoid editing a merge other than what is necessary to resolve conflicts.
+  - Avoid amending a merge commit.
+  - Avoid rebasing a merge commit.
+  - If you feel bad while merging, you can =git merge --abort= to restore the repository state to what it was before the merge began.
+- Resolve merge conflicts.
+  - Understand the three trees/versions: /ours/, /base/, and /theirs/.
+  - Resolve merge conflicts with =meld= and =git gui=.
+  - Understand that =meld= shows three panes in this order: /ours/ (first parent), /base/, /theirs/ (second parent).
+* Doing your work
+** Developing programs
+- Do one thing at a time.
+  - Write the first line of the commit message /before/ working.
+    For example, the first line can be a to-do item title, or
+    an issue identifier and the issue title.
+  - Do not refactor while adding feature.
+  - Do not add another feature while adding a feature.
+- Have a feeling for commit granularity.
+  A commit may correspond to one code review, an issue in an issue tracker, or something else.
+- Every commit should leave the tree in a working state.
+  If your commit breaks something, you may be biting more than you can chew.
+- Avoid big conflicts.
+  - Synchronize often, at least daily.
+** Switching context
+- Avoid using =git stash= for context-switching,
+  because we don't want a merge conflict while doing =git stash pop=.
+  Instead, just make an /ordinary/ commit with =git commit=,
+  because we can always amend and rebase normal commits and resolve merge conflicts in the usual way.
+** Discarding uncommited changes
+- Discard uncommited changes /irrecoverably/ with =git reset --hard=.
+  Note that /they cannot be recovered/.
+  If you discard them accidentally, you will have to manually type them again.
+  There is no warning.
+* Rewriting history
+** Commit-as-diff mental model
+This mental model is /wrong but useful/
+ [fn::<2020-01-14> https://en.wikipedia.org/wiki/Lie-to-children]
+ [fn::<2020-01-14> https://en.wikipedia.org/wiki/All_models_are_wrong]
+ [fn::<2020-01-14> Knuth TeXbook preface https://twitter.com/johnregehr/status/1060251915777232896]
+for rewriting history.
+
+- Pretend that a commit is a delta, a diff, a patch.
+- Understand cherry-pick as replay.
+- Understand rebase as automated/programmatic cherry-pick.
+** Visualizing operations
+If visualization doesn't help you, skip this.
+
+- Think that an operation (commit, rebase, merge, etc.) /transforms the picture/ shown by =gitk=.
+  - Visualize a commit as a /circle/ in =gitk=.
+  - Visualize the history as a /tree/ of commits (visualize the data structure, not the plant).
+  - Visualize rebasing as /grafting/.
+** Rebasing
+- Understand rebase as automated cherry-picking.
+- Understand what three-argument rebase does with the tree.
+- Understand =git merge-base= nearest common ancestor (assuming that the repository has only one root).
+  - Understand “nearest common ancestor”.
+    - Understand the ancestors of a commit.
+    - Understand the common ancestors of two commits.
+    - Understand the nearest common ancestors of two commits.
+- Explain one- and two-argument rebase as special cases of three-argument rebase.
+- Amend the last commit.
+- Use interactive rebase.
+  - Read the commit list (oldest commit on top, reverse of =git log=).
+- Understand =--continue=, =--skip=, and =--abort=.
+- Join/squash commits.
+- Split commits.
+- Resolve merge conflicts with =meld=.
+- Resolve rebase conflicts with =meld=.
+- Tidy up commit history before pushing.
+- Discard commits.

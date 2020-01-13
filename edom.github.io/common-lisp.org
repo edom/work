@@ -1,5 +1,6 @@
-#+TITLE: On Common Lisp
+#+TITLE: On Lisps, especially ANSI Common Lisp
 #+DATE: 2020-01-11 00:00 +0700
+* What
 - Why are there two sites: [[https://common-lisp.net/][common-lisp.net]] and [[https://lisp-lang.org/][lisp-lang.net]]?
   The former seems to have more content.
 - [[http://www.lispworks.com/documentation/lw50/CLHS/Front/index.htm][CLHS]] (Common Lisp HyperSpec)
@@ -19,3 +20,39 @@ https://www.cliki.net/Scribble
 
 Meta, parsing on Lisp
 https://www.cliki.net/Meta
+
+[[https://legacy.cs.indiana.edu/~dyb/pubs/hocs.pdf][Dybvig 2006]] tells the history of Chez Scheme.
+* Tricky stuff
+** Keyword vs symbol
+https://stackoverflow.com/questions/23969203/what-is-the-difference-between-a-keyword-symbol-and-a-quoted-symbol
+
+In the toplevel:
+- ='a= evaluates to a symbol in the package =common-lisp-user=.
+- =:a= evaluates to a symbol in the package =keyword=; this package is special.
+
+See also: =symbol-package=.
+** Equality comparison
+In mathematics, X and Y are /equal/
+iff every X can be replaced with Y
+without changing the truth value of the containing statement.
+
+Two things are /identical/ iff ...
+
+In Common Lisp:
+- =eq= is identity comparison.
+- =eql= is =eq= or something?
+- =equal= is about structural similarity / isomorphism?
+- =equalp= is =equal= or something?
+- ===
+- =string==
+- =char==
+
+In Scheme:
+- =eq?= is identity comparison.
+- =eqv?= is ???
+- =equal?= is deep/recursive comparison?
+- === is numeric comparison?
+* Namespaces?
+https://www.emacswiki.org/emacs/Namespaces
+
+"Debuggable" https://endlessparentheses.com/introducing-names-practical-namespaces-for-emacs-lisp.html
