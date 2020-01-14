@@ -3,11 +3,25 @@
 * What
 - Why are there two sites: [[https://common-lisp.net/][common-lisp.net]] and [[https://lisp-lang.org/][lisp-lang.net]]?
   The former seems to have more content.
-- [[http://www.lispworks.com/documentation/lw50/CLHS/Front/index.htm][CLHS]] (Common Lisp HyperSpec)
+- [[http://www.lispworks.com/documentation/lw50/CLHS/Front/index.htm][CLHS]] (Common Lisp HyperSpec),
+  can also be installed with =apt install hyperspec= in Debian 10.
 - [[http://www.gigamonkeys.com/book/][Practical Common Lisp]] book
 - Steve Losh's [[https://stevelosh.com/blog/2018/08/a-road-to-common-lisp/][A road to Common Lisp]]
+- rlwrap sbcl https://lispcookbook.github.io/cl-cookbook/getting-started.html
 - SBCL + Emacs + SLIME (but is it secure?)
+- [[https://common-lisp.net/project/asdf/][ASDF]] (Another System Definition Facility), like npm's package.json
+  - ASDF + Quicklisp ~ npm
 - [[http://community.schemewiki.org/?scheme-vs-common-lisp][Scheme vs Common Lisp]]
+- [[http://hyperpolyglot.org/lisp][Hyperpolyglot's inter-Lisp comparison table]] may be incomplete but may help porting.
+- Quicklisp and [[http://quickdocs.org/][Quickdocs]]
+- Run =rlwrap sbcl=.
+  - Suppress license banner with =--noinform=.
+  - Load file with =--load Path=.
+- Match pattern with =trivia=.
+- Use ASDF to describe, but use Quicklisp to load.
+  Create an =asd= file, but use =(ql:quickload :asdf-system-name)=
+  instead of =(asdf:load-system "asdf-system-name")=.
+  https://www.darkchestnut.com/2016/quicklisp-load-personal-projects-from-arbitrary-locations/
 
 Gerbil/Gambit Scheme process migration?
 Why I haven't jumped ship from Common Lisp to Racket (just yet)?
@@ -22,7 +36,35 @@ Meta, parsing on Lisp
 https://www.cliki.net/Meta
 
 [[https://legacy.cs.indiana.edu/~dyb/pubs/hocs.pdf][Dybvig 2006]] tells the history of Chez Scheme.
+
+"[[https://nikodemus.github.io/screamer/][Screamer]] provides a nondeterministic choice-point operator, a backtracking mechanism, and a forward propagation facility. "
+
+"[[https://common-lisp.net/project/ucw/features.html][UnCommon Web]] provides developers with the illusion that web pages are nothing more than function calls."
+
+[[http://www.nhplace.com/kent/Papers/Special-Forms.html][Pitman 1980]] argues that fexprs preclude compilation.
+* Legalese
+Why do all those important projects like ASDF and Quicklisp don't have any LICENSE information in their source code repository!?
+* Managing projects
+** Show dpeendency tree
+At first glance, =(ql-dist:dependency-tree SYSTEM)=, but
+[[https://lispblog.xach.com/post/105043399223/the-unknown-dependency-tree][problem]]:
+#+BEGIN_QUOTE
+Quicklisp has an idea about the dependencies of Quicklisp-provided systems, but not of any other systems available through ASDF.
+#+END_QUOTE
+* Using SLIME
+- Open an inferior-lisp buffer with =M-x slime=.
+- List keybindings with =C-c C-d ?=.
+- Load file with =C-c C-l=.
+- Load current buffer's file with =C-c C-k=.
+- History with =M-p= and =M-n=.
+- https://stackoverflow.com/questions/33003993/how-to-get-emacs-slime-sbcl-to-recognize-quicklisp-packages
+* Know some FORMAT
+http://www.lispworks.com/documentation/lw50/CLHS/Body/22_c.htm
+* Know some LOOP
 * Tricky stuff
+** eval vs load
+- "SBCL processes initialization files with =read= and =eval=, not =load="
+  http://www.sbcl.org/manual/#Initialization-Files
 ** Keyword vs symbol
 https://stackoverflow.com/questions/23969203/what-is-the-difference-between-a-keyword-symbol-and-a-quoted-symbol
 
@@ -41,6 +83,7 @@ Two things are /identical/ iff ...
 In Common Lisp:
 - =eq= is identity comparison.
 - =eql= is =eq= or something?
+  =eql= is the default for make-hash-table.
 - =equal= is about structural similarity / isomorphism?
 - =equalp= is =equal= or something?
 - ===
@@ -52,6 +95,13 @@ In Scheme:
 - =eqv?= is ???
 - =equal?= is deep/recursive comparison?
 - === is numeric comparison?
+** Nil vs false
+https://www.google.com/amp/s/lispchronicles.wordpress.com/2017/03/16/the-truth-about-nothing/amp/
+** Printing
+- =prin1= for machines (=read=).
+- =princ= for humans.
+- =pprint= for pretty-printing.
+- Avoid =write= and =print=?
 * Namespaces?
 https://www.emacswiki.org/emacs/Namespaces
 
