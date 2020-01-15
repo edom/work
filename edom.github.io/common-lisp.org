@@ -1,7 +1,8 @@
-#+TITLE: On Lisps, especially ANSI Common Lisp
+#+TITLE: Toward a curriculum for ANSI Common Lisp
 #+DATE: 2020-01-11 00:00 +0700
 * What
-- Why are there two sites: [[https://common-lisp.net/][common-lisp.net]] and [[https://lisp-lang.org/][lisp-lang.net]]?
+- Too many cooks spoil the broth.
+  Why are there two sites: [[https://common-lisp.net/][common-lisp.net]] and [[https://lisp-lang.org/][lisp-lang.net]]?
   The former seems to have more content.
 - [[http://www.lispworks.com/documentation/lw50/CLHS/Front/index.htm][CLHS]] (Common Lisp HyperSpec),
   can also be installed with =apt install hyperspec= in Debian 10.
@@ -11,8 +12,6 @@
 - SBCL + Emacs + SLIME (but is it secure?)
 - [[https://common-lisp.net/project/asdf/][ASDF]] (Another System Definition Facility), like npm's package.json
   - ASDF + Quicklisp ~ npm
-- [[http://community.schemewiki.org/?scheme-vs-common-lisp][Scheme vs Common Lisp]]
-- [[http://hyperpolyglot.org/lisp][Hyperpolyglot's inter-Lisp comparison table]] may be incomplete but may help porting.
 - Quicklisp and [[http://quickdocs.org/][Quickdocs]]
 - Run =rlwrap sbcl=.
   - Suppress license banner with =--noinform=.
@@ -22,45 +21,164 @@
   Create an =asd= file, but use =(ql:quickload :asdf-system-name)=
   instead of =(asdf:load-system "asdf-system-name")=.
   https://www.darkchestnut.com/2016/quicklisp-load-personal-projects-from-arbitrary-locations/
+- Reader case-sensitivity is [[https://www.cliki.net/Case%20sensitivity][adjustable]].
 
-Gerbil/Gambit Scheme process migration?
-Why I haven't jumped ship from Common Lisp to Racket (just yet)?
-https://fare.livejournal.com/188429.html
+Some people have written getting-started guides: [[https://common-lisp.net/downloads][common-lisp.net]].
 
-Reader case-sensitivity is adjustable
-https://www.cliki.net/Case%20sensitivity
+<2020-01-16>
+[[https://common-lisp.net/libraries][common-lisp.net]]'s library recommendation list
+seems to be taken from [[https://github.com/CodyReichert/awesome-cl][CodyReichert/awesome-cl]].
+There is also [[https://borretti.me/article/common-lisp-sotu-2015][Borretti 2015 consolidation]].
+[[https://lisp-lang.org/wiki/article/recommended-libraries][lisp-lang.org]]'s list seems shorter.
+
+[[http://quickdocs.org/][quickdocs.org]]: centralized Common Lisp libraries documentation and popularity.
+
+There are no GitHub trends[fn::<2020-01-16> https://github.com/trending/common-lisp] for Common Lisp!?
+Is CL that unpopular!?
+
+https://stackoverflow.com/questions/33848241/most-recent-standard-of-common-lisp
+
+https://common-lisp.net/project/cdr/final.html
 
 https://www.cliki.net/Scribble
 
-Meta, parsing on Lisp
-https://www.cliki.net/Meta
-
-[[https://legacy.cs.indiana.edu/~dyb/pubs/hocs.pdf][Dybvig 2006]] tells the history of Chez Scheme.
-
 "[[https://nikodemus.github.io/screamer/][Screamer]] provides a nondeterministic choice-point operator, a backtracking mechanism, and a forward propagation facility. "
 
-"[[https://common-lisp.net/project/ucw/features.html][UnCommon Web]] provides developers with the illusion that web pages are nothing more than function calls."
-
-[[http://www.nhplace.com/kent/Papers/Special-Forms.html][Pitman 1980]] argues that fexprs preclude compilation.
-* Legalese
+No legalese?
 Why do all those important projects like ASDF and Quicklisp don't have any LICENSE information in their source code repository!?
-* Managing projects
-** Show dpeendency tree
-At first glance, =(ql-dist:dependency-tree SYSTEM)=, but
-[[https://lispblog.xach.com/post/105043399223/the-unknown-dependency-tree][problem]]:
-#+BEGIN_QUOTE
-Quicklisp has an idea about the dependencies of Quicklisp-provided systems, but not of any other systems available through ASDF.
-#+END_QUOTE
-* Using SLIME
+* SLIME
 - Open an inferior-lisp buffer with =M-x slime=.
 - List keybindings with =C-c C-d ?=.
 - Load file with =C-c C-l=.
 - Load current buffer's file with =C-c C-k=.
 - History with =M-p= and =M-n=.
 - https://stackoverflow.com/questions/33003993/how-to-get-emacs-slime-sbcl-to-recognize-quicklisp-packages
-* Know some FORMAT
+* Naming conventions
+- =(defconstant +Name+ Value Docstring)=
+- =(defvar *Name* Value Docstring)=
+* Projects
+** Writing ASDF systems
+- Write an =asd= file.
+  - Write a =defsystem= form.
+  - See also [[https://common-lisp.net/project/asdf/asdf/The-defsystem-grammar.html][the defsystem grammar]].
+- Quickproject? http://articulate-lisp.com/project/new-project.html
+** Packages
+- =defpackage=
+- Use uninterned symbols for names in =defpackage=.
+- =in-package=
+
+Tricky stuff:
+
+#+BEGIN_EXAMPLE
+(defpackage my-package) ;; wrong
+(defpackage :my-package) ;; less OK
+(defpackage #:my-package) ;; OK
+#+END_EXAMPLE
+
+The first causes an unintended /interning/ in the =*package*= (usually =common-lisp-user=) when the =defpackage= form is being read.
+
+The second adds noise to SLIME autocompletion?
+SLIME does not auto-complete uninterned symbols?[fn::https://www.reddit.com/r/learnlisp/comments/7a48i7/foo/dp7gr7i?utm_source=share&utm_medium=web2x]
+
+https://stackoverflow.com/questions/7894548/why-are-uninterned-symbols-used-for-package-names-and-exports-in-common-lisp
+
+:export + use-package + uninterned symbols = conflict.
+
+#+BEGIN_EXAMPLE
+(defpackage temp (:export a))
+(use-package 'temp) ;; conflicts because A is already interned in *PACKAGE* when the above DEFPACKAGE was read.
+#+END_EXAMPLE
+
+This uses keywords http://www.gigamonkeys.com/book/programming-in-the-large-packages-and-symbols.html
+
+Should we use =:keywords= or =#:uninterned-symbols=?
+
+https://stackoverflow.com/questions/46981477/variations-in-invocation-of-defpackage-and-in-package
+
+Is an interned symbol never garbage-collected?
+
+Tricky stuff: If =read= interns symbols, and symbols are never garbage-collected,
+then we can make the interpreter run out of memory by making it =read= too many distinct symbols?
+** Show dependency graph as tree
+- [[https://github.com/guicho271828/asdf-viz][asdf-viz]]? But we want text output.
+- =(ql-dist:dependency-tree SYSTEM)= [[https://lispblog.xach.com/post/105043399223/the-unknown-dependency-tree][does not work]] for non-quicklisp libraries:
+#+BEGIN_QUOTE
+Quicklisp has an idea about the dependencies of Quicklisp-provided systems, but not of any other systems available through ASDF.
+#+END_QUOTE
+* DEFSTRUCT vs DEFCLASS
+- [[http://www.lispworks.com/documentation/HyperSpec/Body/m_defstr.htm][CLHS: DEFSTRUCT]]
+- =defstruct= vs =defclass= is record vs class.
+- =defstruct= defines a product type.
+- https://stackoverflow.com/questions/34244855/difference-between-struct-and-class-in-common-lisp
+* FORMAT language
+- Format to standard output with =(format t Format Arg...)=.
+- Format to string with =(format nil Format Arg...)=.
+- =~a=
+- =~s=
+- =~%= newline.
 http://www.lispworks.com/documentation/lw50/CLHS/Body/22_c.htm
-* Know some LOOP
+* LOOP language
+http://www.lispworks.com/documentation/HyperSpec/Body/06_aac.htm
+
+- [[http://www.lispworks.com/documentation/HyperSpec/Body/06_aaaa.htm][Simple loop form]]
+  - Loop with =(loop Form ...)= where each Form is a compound form (list form).
+    - Break with =(return)= or =(return Value)=, similar to C =break=.
+  - Loop forever like =(loop (princ "A"))=.
+- =(loop repeat Count do ...)=
+- =(loop for Var from Lower to Upper Action*)=
+- [[http://www.lispworks.com/documentation/HyperSpec/Body/06_aaeb.htm][Summary of Value Accumulation Clauses]]
+- [[http://www.lispworks.com/documentation/HyperSpec/Body/06_aaec.htm][Summary of Termination Test Clauses]]
+- [[http://www.lispworks.com/documentation/HyperSpec/Body/06_aaf.htm][Order of Execution]]
+- [[http://www.lispworks.com/documentation/HyperSpec/Body/06_aag.htm][Destructuring]]
+- Build a list.
+- Loop with several variables.
+- Know the pitfall: =finally= seems to be executed only if the loop body is terminated by =for= and not by =return=, =always=, =never=, etc.
+
+#+BEGIN_EXAMPLE
+(loop for i from 0 to 9
+      if Cond
+        if Cond
+          do Form ...
+        end
+      end)
+#+END_EXAMPLE
+
+From http://www.lispworks.com/documentation/HyperSpec/Body/06_aha.htm
+
+#+BEGIN_EXAMPLE
+(loop for i from 0 to 9
+      if (evenp i)
+        collect i into evens
+      else
+        collect i into odds
+      end
+      finally (return (list evens odds)))
+=> ((0 2 4 6 8) (1 3 5 7 9))
+
+(loop for i from 0
+      for j in '(a b c)
+      collect (list i j))
+=> ((0 A) (1 B) (2 C))
+#+END_EXAMPLE
+
+[[http://www.lispworks.com/documentation/HyperSpec/Body/m_loop.htm][Syntax]].
+
+=repeat X= translates to =for Gensym in 0 to (- X 1)=
+* CLOS (Common Lisp Object System)
+- =defclass=
+- =defgeneric=
+- =defmethod=
+- =make-instance=
+* MATCH languages
+- Know some [[https://github.com/guicho271828/trivia/wiki/Various-Patterns][trivia MATCH patterns]].
+- Use EMATCH instead of MATCH, because, if no patterns match, the former raises an error and the latter returns NIL.
+* Web application development
+HTTP is too low-level for web application development.
+
+"[[https://common-lisp.net/project/ucw/features.html][UnCommon Web]] provides developers with the illusion that web pages are nothing more than function calls."
+* Parsing
+Meta, parsing on Lisp
+https://www.cliki.net/Meta
 * Tricky stuff
 ** eval vs load
 - "SBCL processes initialization files with =read= and =eval=, not =load="
@@ -102,6 +220,16 @@ https://www.google.com/amp/s/lispchronicles.wordpress.com/2017/03/16/the-truth-a
 - =princ= for humans.
 - =pprint= for pretty-printing.
 - Avoid =write= and =print=?
+** map
+- Common Lisp =map= takes 3 arguments and works with lists and vectors.
+- Scheme =map= takes 2 arguments and works with lists only.
+* Other Lisps
+- [[http://community.schemewiki.org/?scheme-vs-common-lisp][Scheme vs Common Lisp]]
+- [[http://hyperpolyglot.org/lisp][Hyperpolyglot's inter-Lisp comparison table]] may be incomplete but may help porting.
+- [[https://legacy.cs.indiana.edu/~dyb/pubs/hocs.pdf][Dybvig 2006]] tells the history of Chez Scheme.
+- [[http://www.nhplace.com/kent/Papers/Special-Forms.html][Pitman 1980]] argues that fexprs preclude compilation.
+- Gerbil/Gambit Scheme process migration?
+   [fn::<2020-01-15> "Why I haven't jumped ship from Common Lisp to Racket (just yet)?" https://fare.livejournal.com/188429.html]
 * Namespaces?
 https://www.emacswiki.org/emacs/Namespaces
 

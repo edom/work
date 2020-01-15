@@ -1,1 +1,1 @@
-(ql:quickload :my-system)
+(ql:quickload "my-system")
