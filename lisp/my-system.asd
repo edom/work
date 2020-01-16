@@ -3,12 +3,16 @@
   :author "Erik Dominikus <software@spacetimecat.com>"
   :depends-on (
     (:version "asdf" "3.0.0")
-    "trivia"
+    (:version "trivia" "0.1")
+    "clack"
+    "clack-handler-hunchentoot"
+    "cl-dbi"
+    "dbd-postgres"
   )
   :components (
-    (:file "lisp0")
-    (:file "match" :depends-on ("lisp0"))
-    (:file "asdf" :depends-on ("lisp0" "match"))
-    (:file "lisp1" :depends-on ("lisp0" "match"))
+    (:file "namespace")
+    (:file "lisp0" :depends-on ("namespace"))
+    (:file "asdf" :depends-on ("lisp0"))
+    (:file "lisp1" :depends-on ("lisp0"))
     (:file "main" :depends-on ("lisp1" "asdf"))
   ))

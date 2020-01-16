@@ -1,7 +1,6 @@
 (defpackage+ #:stc/asdf
   (:documentation "some ASDF enhancements")
-  (:use #:common-lisp #:stc/lisp0)
-  (:import-from #:stc/match #:match)
+  (:use #:stc/lisp0)
   (:export #:print-dependency-tree))
 
 ;;  Debian 9 comes with ASDF 3.1.7.
@@ -13,21 +12,25 @@
   (slot-value system 'asdf/system::name))
 
 (defun system-version (system)
-  ;; This is supposed to work in ASDF 3.3?
+"This is supposed to work in ASDF 3.3?"
   (slot-value system 'asdf/system::version))
 
 (defun asdf-dep-name (d)
+"We don't know whether ASDF already provides a function like this."
   (match d
-    ((list :version name _) name)
+    ((list :version name _) (asdf-dep-name name))
+    ((list :feature _ name) (asdf-dep-name name))
+    ((list :require name) (asdf-dep-name name)) ;; ???
+    ((type symbol) d)
     ((type string) d)))
 
 (defstruct item
-  "Represents an ASDF system.
-  DEPENDS-ON is a list of ITEM."
+"Represents an ASDF system.
+DEPENDS-ON is a list of ITEM."
   name version license depends-on)
 
 (defun compute-dependency-tree (name)
-  "This takes a string and returns an ITEM."
+"This takes a string and returns an ITEM."
   (let* ((system (asdf:find-system name))
          (deps (asdf:system-depends-on system)))
     (make-item
@@ -51,5 +54,5 @@
     (doit 0 item)))
 
 (defun print-dependency-tree (name)
-  "Print the dependency tree of an ASDF system."
+"Print the dependency tree of an ASDF system."
   (pretty-print (compute-dependency-tree name)))

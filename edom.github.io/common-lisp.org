@@ -1,13 +1,42 @@
 #+TITLE: Toward a curriculum for ANSI Common Lisp
 #+DATE: 2020-01-11 00:00 +0700
-* What
+* Community
 - Too many cooks spoil the broth.
-  Why are there two sites: [[https://common-lisp.net/][common-lisp.net]] and [[https://lisp-lang.org/][lisp-lang.net]]?
-  The former seems to have more content.
+- <2020-01-16>
+  There are several "community" sites [[https://common-lisp.net/][common-lisp.net]] and [[https://lisp-lang.org/][lisp-lang.net]].
+  The former seems to have more content, but the latter seems to be more recent?
+  lisp-lang.net is on [[https://news.ycombinator.com/item?id=17036497][HackerNews]].
+  common-lisp.net is a static website that can be community-edited by sending Git patches/pull-requests?
+  We have duplication because, it seems to me, every Common Lisp community has at least one toxic authority.
+- It seems that =comp.lang.lisp= is toxic, uncivilized, and newcomer-unfriendly.
+  It seems that Lisp-related Reddits are more civilized.
+- https://github.com/exercism/common-lisp/issues/206
+- On Reddit: [[https://www.reddit.com/r/Common_Lisp/][r/Common_Lisp]] (~4k members), [[https://www.reddit.com/r/lisp/][r/lisp]] (~26k members).
+- Some ideas:
+  - SWI-Prolog has a [[https://swi-prolog.discourse.group/Discourse][group]].
+    Perhaps Common Lisp should follow suit.
+  - Here is how to change toxic people:
+    /Alienate/ them until they change:
+    Do these three steps in order:
+    - Tell the offender politely in one short sentence that his/her behavior is unacceptable (remember: the behavior, not the person).
+    - /Do not respond any further/ to that toxic behavior.
+    - /Prevent/ others from responding to that toxic behavior.
+    - But the damage has been done to the offended newbie?
+      Both the offender and offendee have bad habits due to some problems growing up.
+      the offendee writes poorly and is too easily offended.
+      Pathological behaviors are reinforced by attention,
+      because the attention of others rewards one's brain.
+      Hypothesis: The offender has learned that he/she has to misbehave
+      in order to attract his/her negligent parents' attention.
+    Giving them attention sparks up their brain's reward circuitry.
+- annoying glibc version change since sbcl 1.5.6 https://sourceforge.net/p/sbcl/mailman/message/36780098/
+* References
 - [[http://www.lispworks.com/documentation/lw50/CLHS/Front/index.htm][CLHS]] (Common Lisp HyperSpec),
-  can also be installed with =apt install hyperspec= in Debian 10.
+  can also be installed with =apt install hyperspec= in Debian 9 or 10.
+* Guides
 - [[http://www.gigamonkeys.com/book/][Practical Common Lisp]] book
 - Steve Losh's [[https://stevelosh.com/blog/2018/08/a-road-to-common-lisp/][A road to Common Lisp]]
+* Setup
 - rlwrap sbcl https://lispcookbook.github.io/cl-cookbook/getting-started.html
 - SBCL + Emacs + SLIME (but is it secure?)
 - [[https://common-lisp.net/project/asdf/][ASDF]] (Another System Definition Facility), like npm's package.json
@@ -16,7 +45,6 @@
 - Run =rlwrap sbcl=.
   - Suppress license banner with =--noinform=.
   - Load file with =--load Path=.
-- Match pattern with =trivia=.
 - Use ASDF to describe, but use Quicklisp to load.
   Create an =asd= file, but use =(ql:quickload :asdf-system-name)=
   instead of =(asdf:load-system "asdf-system-name")=.
@@ -52,10 +80,29 @@ Why do all those important projects like ASDF and Quicklisp don't have any LICEN
 - Load file with =C-c C-l=.
 - Load current buffer's file with =C-c C-k=.
 - History with =M-p= and =M-n=.
+- Restart inferior Lisp process with =M-x slime-restart-inferior-lisp=.
+- Open symbol documentation with =C-c C-d d=.
 - https://stackoverflow.com/questions/33003993/how-to-get-emacs-slime-sbcl-to-recognize-quicklisp-packages
+* Timing, coarse profiling
+- [[http://www.lispworks.com/documentation/HyperSpec/Body/m_time.htm][TIME]]: =(time FORM)=
 * Naming conventions
 - =(defconstant +Name+ Value Docstring)=
 - =(defvar *Name* Value Docstring)=
+* Gensyms
+Gensyms are theoretically disgusting but practically amazing.
+
+Gensyms require that programmers don't name their variables like gensyms (=G<number>=).
+
+Do not call gensym too much.
+Assume that they are not garbage collected.
+
+It is unknown whether =gensym= is thread-safe.
+ANSI CL does not specify concurrency.
+* Conditions, exceptions, restarts
+- =cerror= signals a correctable/continuable/restartable error?
+- =catch= and =throw=
+- Should we use =throw= or =signal=?
+- =unwind-protect=, like Java's try-finally.
 * Projects
 ** Writing ASDF systems
 - Write an =asd= file.
@@ -220,9 +267,19 @@ https://www.google.com/amp/s/lispchronicles.wordpress.com/2017/03/16/the-truth-a
 - =princ= for humans.
 - =pprint= for pretty-printing.
 - Avoid =write= and =print=?
+** macro-function, symbol-function, fdefinition, apply, funcall
+- =(setf (macro-function 'foo) ...)=
+- Understand FUNCTION vs CLOSURE.
+  - Closure = Function + Lexical environment.
+- =#'= (=function=) can access lexical environment;
+  =symbol-function= can only access global environment (what about dynamic environment?)
+- Expand macro form with MACROEXPAND.
+- Evaluate macro form with EVAL.
 ** map
 - Common Lisp =map= takes 3 arguments and works with lists and vectors.
 - Scheme =map= takes 2 arguments and works with lists only.
+* Advanced?
+- AP5? Datalog? https://www.reddit.com/r/programming/comments/9b9mq/lisp_prolog_model_driven_dev_aop_from_1989_please/
 * Other Lisps
 - [[http://community.schemewiki.org/?scheme-vs-common-lisp][Scheme vs Common Lisp]]
 - [[http://hyperpolyglot.org/lisp][Hyperpolyglot's inter-Lisp comparison table]] may be incomplete but may help porting.
