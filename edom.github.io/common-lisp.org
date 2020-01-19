@@ -1,6 +1,8 @@
 #+TITLE: Toward a curriculum for ANSI Common Lisp
 #+DATE: 2020-01-11 00:00 +0700
-* Community
+#+OPTIONS: ^:nil
+* Beginner
+** Community
 - Too many cooks spoil the broth.
 - <2020-01-16>
   There are several "community" sites [[https://common-lisp.net/][common-lisp.net]] and [[https://lisp-lang.org/][lisp-lang.net]].
@@ -13,26 +15,31 @@
 - https://github.com/exercism/common-lisp/issues/206
 - On Reddit: [[https://www.reddit.com/r/Common_Lisp/][r/Common_Lisp]] (~4k members), [[https://www.reddit.com/r/lisp/][r/lisp]] (~26k members).
 - Some ideas:
-  - SWI-Prolog has a [[https://swi-prolog.discourse.group/Discourse][group]].
-    Perhaps Common Lisp should follow suit.
-  - Here is how to change toxic people:
-    /Alienate/ them until they change:
-    Do these three steps in order:
-    - Tell the offender politely in one short sentence that his/her behavior is unacceptable (remember: the behavior, not the person).
-    - /Do not respond any further/ to that toxic behavior.
-    - /Prevent/ others from responding to that toxic behavior.
-    - But the damage has been done to the offended newbie?
-      Both the offender and offendee have bad habits due to some problems growing up.
-      the offendee writes poorly and is too easily offended.
-      Pathological behaviors are reinforced by attention,
-      because the attention of others rewards one's brain.
-      Hypothesis: The offender has learned that he/she has to misbehave
-      in order to attract his/her negligent parents' attention.
-    Giving them attention sparks up their brain's reward circuitry.
+  - SWI-Prolog has a [[https://swi-prolog.discourse.group/][Discourse group]].
+    Common Lisp should follow suit.
 - annoying glibc version change since sbcl 1.5.6 https://sourceforge.net/p/sbcl/mailman/message/36780098/
-* References
-- [[http://www.lispworks.com/documentation/lw50/CLHS/Front/index.htm][CLHS]] (Common Lisp HyperSpec),
-  can also be installed with =apt install hyperspec= in Debian 9 or 10.
+** SBCL
+- Enable debugging to get stack traces?
+** References
+- Know that the reference is [[http://www.lispworks.com/documentation/lw50/CLHS/Front/index.htm][CLHS]] (Common Lisp HyperSpec).
+  It can also be installed with =apt install hyperspec= in Debian 9 or 10.
+** Dynamic and lexical variables
+- Temporarily binding a dynamic (special) variable: =(let ((*print-escape* t)) ...)=
+- Temporarily binding a lexical variable: =(let ((foo t)) ...)=
+- =(declare (special Name))=: see [[http://www.lispworks.com/documentation/HyperSpec/Body/d_specia.htm][example]] in CLHS
+* Problems
+- =read= can execute arbitrary code.
+  Theoretically, Lisp is unparseable.
+  Practically, people keep their sanity by not touching readtables.
+- Cannot shadow built-in symbols.
+
+#+BEGIN_EXAMPLE
+(flet ((replace ...)) ...)
+#+END_EXAMPLE
+* Types
+- =(declare (type Type Var*))=.
+- See the [[http://www.lispworks.com/documentation/HyperSpec/Body/04_bc.htm][list of type specifiers]].
+- But the interpreter is not required to check the types?
 * Guides
 - [[http://www.gigamonkeys.com/book/][Practical Common Lisp]] book
 - Steve Losh's [[https://stevelosh.com/blog/2018/08/a-road-to-common-lisp/][A road to Common Lisp]]
@@ -83,6 +90,21 @@ Why do all those important projects like ASDF and Quicklisp don't have any LICEN
 - Restart inferior Lisp process with =M-x slime-restart-inferior-lisp=.
 - Open symbol documentation with =C-c C-d d=.
 - https://stackoverflow.com/questions/33003993/how-to-get-emacs-slime-sbcl-to-recognize-quicklisp-packages
+* Strings
+- Concatenate several strings: =(concatenate 'string "foo" "bar" "baz")=.
+* Compilation
+- The compiler must at least do [[http://www.lispworks.com/documentation/HyperSpec/Body/03_bbb.htm][the minimal compilation]].
+- Programs must conform to [[http://www.lispworks.com/documentation/HyperSpec/Body/03_bbc.htm][some constraints]] in order to make compilation semantics = interpretation semantics.
+- Understand the [[http://www.lispworks.com/documentation/HyperSpec/Body/03_bca.htm][compilation of top-level forms]] and the [[http://www.lispworks.com/documentation/HyperSpec/Body/03_bcaa.htm][compilation of defining macros]].
+- Compile time is before run time.
+- Run time spans from load time to execution time.
+- "At compile time, only the compilation environment and the evaluation environment are available."
+- "At run time, only the run-time environment is available."
+- "The compilation environment inherits from the evaluation environment, [...]."
+- "The evaluation environment inherits from the startup environment, [...]."
+- The /not-compile-time/ mode means that the form is evaluated at load time.
+- The /compile-time-too/ mode means that the form is evaluated at both compile time and load time.
+- "=eval-when= forms cause compile-time evaluation only at top level."
 * Timing, coarse profiling
 - [[http://www.lispworks.com/documentation/HyperSpec/Body/m_time.htm][TIME]]: =(time FORM)=
 * Naming conventions
@@ -157,6 +179,11 @@ Quicklisp has an idea about the dependencies of Quicklisp-provided systems, but 
 - =defstruct= vs =defclass= is record vs class.
 - =defstruct= defines a product type.
 - https://stackoverflow.com/questions/34244855/difference-between-struct-and-class-in-common-lisp
+* CLOS (Common Lisp Object System)
+- =defclass=
+- =defgeneric=
+- =defmethod=
+- =make-instance=
 * FORMAT language
 - Format to standard output with =(format t Format Arg...)=.
 - Format to string with =(format nil Format Arg...)=.
@@ -211,11 +238,6 @@ From http://www.lispworks.com/documentation/HyperSpec/Body/06_aha.htm
 [[http://www.lispworks.com/documentation/HyperSpec/Body/m_loop.htm][Syntax]].
 
 =repeat X= translates to =for Gensym in 0 to (- X 1)=
-* CLOS (Common Lisp Object System)
-- =defclass=
-- =defgeneric=
-- =defmethod=
-- =make-instance=
 * MATCH languages
 - Know some [[https://github.com/guicho271828/trivia/wiki/Various-Patterns][trivia MATCH patterns]].
 - Use EMATCH instead of MATCH, because, if no patterns match, the former raises an error and the latter returns NIL.

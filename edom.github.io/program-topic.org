@@ -362,6 +362,11 @@ If it is impossible to invent better primitives,
 then the only way to make programming easier is to make computers program themselves more.
 
 What is the significance of the Ballerina programming language[fn::<2019-11-27> https://blog.ballerina.io/posts/ballerina-a-cloud-native-programming-language/]?
+* Linear logic and garbage collection
+- Linear Lisp can obviate garbage collection, but what's the catch? http://home.pipeline.com/~hbaker1/LinearLisp.html
+  - from https://github.com/fare/moll
+- https://wiki.c2.com/?LinearTypes
+- Wadler's "Linear types can change the world!" https://pdfs.semanticscholar.org/24c8/50390fba27fc6f3241cb34ce7bc6f3765627.pdf
 * <2019-11-27> Some hints from Norvig's PAIP
 Some of the hints from Norvig's PAIP[fn::https://norvig.com/Lisp-retro.html] is still relevant:
 - "#8 Whenever you develop a complex data structure, develop a corresponding consistency checker. (p. 90)"
@@ -937,4 +942,21 @@ OCSP responder?
 ** What is TurnKey GNU/Linux?
 [[https://www.turnkeylinux.org/][
 TurnKey GNU/Linux: 100+ free ready-to-use system images for virtual machines, the cloud, and bare metal.]]
+* Self-composable programming?
+- [[https://arxiv.org/abs/1612.02547][1612.02547 - Self-composable Programming]]
+* Generate REST API from database
+- [[https://github.com/PostgREST/postgrest][PostgREST/postgrest: REST API for any Postgres database]]
+  - https://restifydb.com/
+  - https://www.progress.com/blogs/restify-databases-expose-your-database-to-rest-web-services
+  - http://www.odata.org/getting-started/understand-odata-in-6-steps/
+* Software and law
+Creating a law without caring about how it will be enforced is like creating a program without caring about how it will be executed.
+The result: both the nation and the machine feel slow.
+
+<2020-01-19>
+
+Perhaps the theory of how to make reliable software on unreliable hardware
+can be applied to how to make laws on unreliable governments.
+The primary means of achieving that is redundancy.
+Perhaps there should be three independent governments executing in [[https://en.wikipedia.org/wiki/Lockstep_(computing)][lockstep]].
 * Bibliography

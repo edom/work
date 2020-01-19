@@ -1,29 +1,4 @@
-(uiop:define-package #:stc/lisp0
-  (:documentation "COMMON-LISP and some customizations.")
-  (:use-reexport #:common-lisp
-                 #:stc/namespace)
-  (:export #:defpackage+
-           #:define-package+
-           #:fset
-           #:fdefalias
-           #:list-map
-           #:match))
-(use-package '#:stc/lisp0)
-(in-package #:stc/lisp0)
-
-(defmacro defpackage+ (name &body body)
-  "DEFPACKAGE and then IN-PACKAGE."
-  `(progn
-    (defpackage ,name ,@body)
-    (in-package ,name)
-  ))
-
-(defmacro define-package+ (name &body body)
-  "UIOP:DEFINE-PACKAGE and then IN-PACKAGE."
-  `(progn
-    (uiop:define-package ,name ,@body)
-    (in-package ,name)
-  ))
+(in-package #:stc-lisp)
 
 (defun fset (symbol definition)
   "All arguments are evaluated.

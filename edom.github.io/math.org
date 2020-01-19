@@ -1160,3 +1160,58 @@ $\mu \left( \prod_{i=1}^n X_i \right) = \prod_{i=1}^n m(X_i)$.
 A /measure space/ is a set and a measure on that set.
 
 A /measurable function/ is ...
+* Writing mathematics
+- 1989, article, "Mathematical writing", Donald E. Knuth, Tracy Larrabee, and Paul M. Roberts, [pdf](http://jmlr.csail.mit.edu/reviewing-papers/knuth_mathematical_writing.pdf)
+  - "Many readers will skim over formulas on their first reading of your exposition.
+    Therefore, your sentences should flow smoothly when all but the simplest formulas are replaced by 'blah' or some other grunting noise. (p. 3)
+* Which is more primitive: function or relation?
+- Which point of view should we use?
+  - We can see a function as a special kind of relation.
+  - We can see a relation from \( A \) to \( B \) as a function from \( A \) to \( 2^B \).
+    - Every binary relation \((A,B,r)\) is a function \((A,2^B,f)\)
+      where \(f(x) = \{ y ~\|~ r(x,y) \}\).
+  - Which is more primitive: function or relation?
+* Math, learning, and brain?
+https://dyske.com/paper/825
+"When I was in 7th grade, my math teacher answered an obvious but difficult question:
+Why do we have to study advanced math, if we are never going to use it in our adult lives?
+He said it’s because the same parts of our brains used for math can be used for many other things in life.
+With this short explanation, he utterly convinced me the importance of studying math, and of any other subjects for that matter."
+* Mathematical modeling?
+- [[https://en.wikipedia.org/wiki/Mathematical_model][WP:Mathematical model]]
+- [[https://en.wikipedia.org/wiki/Many-body_problem][WP:Many-body problem]]
+- [[https://en.wikipedia.org/wiki/Few-body_systems][WP:Few-body systems]]
+- [[https://en.wikipedia.org/wiki/N-body_problem][WP:N-body problem]]
+- Articles
+  - [[https://aip.scitation.org/doi/10.1063/1.533319][The quantum N-body problem]]
+- What is the difference between variable and parameter?
+- How many parameters do we need to model a system?
+- Discrete Newtonian kinematical model
+  - A /system at time \( t \)/ is a set of particles ( { 1, \ldots, n } ).
+    - Time is a real number: \( t \in \Real \).
+    - The number of particle is constant \( n \in \Nat \).
+    - For each particle \( k \):
+      - It has /position/ \( x_k \in \Real^3 \).
+      - Simplifying assumptions
+        - particle
+          - It is a point.
+            - It doesn't occupy any space.
+          - Its mass is not modeled.
+        - Time is global and absolute (the same everywhere).
+- Discrete Newtonian dynamical model (N-body problem) extends discrete Newtonian kinematical model.
+  - A /system at time \( t \)/ is all that above, plus:
+    - For each particle \( k \):
+      - It has /mass/ \( m_k \in \Real \).
+      - It has /resultant force/ \( F_k \) acting on it.
+      - Simplifying assumptions about the particle
+        - It is rigid.
+          - It doesn't deform.
+          - It doesn't break.
+        - Its mass is constant.
+        - It don't interact with other particles.
+          - Particles don't merge or collide.
+- [[https://en.wikipedia.org/wiki/Continuum_mechanics][WP:Continuum mechanics]]
+- Skippable philosophical issues?
+  - Does "the same particle at different times" make sense?
+    - What is "same"?
+  - [[https://en.wikipedia.org/wiki/Heraclitus#Panta_rhei,_%22everything_flows%22][WP:"Panta rhei" ("Everything flows"), Heraclitus]]

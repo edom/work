@@ -1,6 +1,6 @@
 (defpackage+ #:stc/asdf
   (:documentation "some ASDF enhancements")
-  (:use #:stc/lisp0)
+  (:use #:stc-lisp)
   (:export #:print-dependency-tree))
 
 ;;  Debian 9 comes with ASDF 3.1.7.

@@ -1,3 +1,6 @@
+;; Doesn't work? Shouldn't be put here?
+(declaim (optimize (debug 2)))
+
 (ql:quickload "uiop")
 
 (let ((args (uiop:command-line-arguments))

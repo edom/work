@@ -1,11 +1,4 @@
-(uiop:define-package #:stc/lisp1
-  (:use-reexport #:stc/lisp0)
-  (:export #:newline
-           #:writeln
-           #:println
-           #:hash-ref))
-
-(in-package #:stc/lisp1)
+(in-package #:stc-lisp)
 
 ;;;;    Scheme conventions.
 
