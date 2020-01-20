@@ -1,0 +1,104 @@
+#+TITLE: Toward a curriculum for computer programming
+#+DATE: 2020-01-20 00:00:00 +0700
+* Principles
+- Programmers /translate/ human desires into computer systems.
+- Programmer metrics measure translation quality.
+  An example of translation quality measurement is that of [[https://unbabel.com/blog/measuring-translation-performance/][unbabel.com]]
+  (its speed-effort-quality framework is also applicable to formal translations).
+  - The primary measurement is faithfulness/fidelity: Translate a desire into a program that does what is intended and does /only/ what is intended.
+  - The secondary measurements are speed and effort.
+  - Some items from [[https://www.atanet.org/certification/aboutexams_overview.php][American Translators Association]][fn::<2020-01-20>] are also applicable:
+    - "Everything integral to the source text is included in the target text and nothing that is not implicitly or explicitly stated by the author is added."
+    - "Syntax is appropriate to the target language; the target text does not necessarily imitate the sentence structure of the source text."
+    - "The target text flows smoothly and does not contain awkward expressions that mark it distinctly as a translation."
+    - [[https://www.atanet.org/certification/aboutexams_error.php][Explanation of Error Categories]]
+- AI/ML can be thought of as a subset of computer programming,
+  in the same way intimidation can be thought of a subset of human programming.
+- Translate what is meant, not only what is said.
+  Translate the intention, not the utterance.
+  - Uncover implicit/hidden desires (non-functional requirements).
+  - Uncover some probable hidden future desires.
+  - Ask/clarify/confirm back in the dialog with the client.
+** Translators, programmers, managers, and their measurements
+A translator is measured by the faithfulness of translation and speed of translation?
+
+If programmers /translate/ human desire to computer program, then ... the same measure.
+
+Managers also /translate/ from abstract desire to concrete implementation?
+Or is that directors?
+
+Programming ability, how able they are to make machines do what they want.
+
+A programmer may be measured in the same way we measure animal trainers, formal translators, and government legislators.
+* Appetizers
+- Translate simple desires into programs in JavaScript in a common browser's JavaScript console (because everybody has a browser).
+* Beginners
+- Translate simple desires into programs in these languages: Assembly, C, Scheme, Haskell, Prolog.
+- Understand the abstraction from computer programs down to electronic logic gates.
+- Prove the correctness of simple programs, but be aware that "correctness"
+  is relative to a model; there is no absolute correctness; there is no correctness in reality.
+- Read/maintain/change programs.
+- Understand evaluation order.
+  - Understand normal-order and applicative-order lambda-calculus reduction strategies.
+- Programming without caring about time/ordering/sequentiality.
+- Understand hard (NP-complete) problems, and understand whether to give up, to approximate, or to do something else.
+- Understand performance; have a mental model of cost.
+- [[file:git-curriculum.html][Use Git]].
+- Know what you are doing.
+  Manipulate code in well-defined steps/operations, not haphazardly.
+  - Create a function with simplifying assumptions.
+  - Relax a simplifying assumption.
+- Understand HTML and CSS.
+- Understand basic HTTP.
+- Understand Ethernet.
+- Understand Wi-Fi.
+- Understand electromagnetism.
+- Understand how materials reflect electromagnetic waves, for various wavelengths/frequencies.
+- Understand the Internet Protocol stack.
+- Understand the OSI 7-layer model and the Internet 5-layer model.
+** Testing
+- Test functions.
+- Test programs.
+- Test systems.
+- Property-based testing with QuickCheck.
+- Fuzzing.
+* Intermediate
+- Translate simple desires into programs in these languages: C++, Java, Kotlin, Go.
+- Translate complex desires into systems in these languages: Common Lisp, Scheme, Racket.
+- Design application programming interfaces (APIs).
+- Understand backward-compatibility.
+- Formalize requirements.
+  - Begin by designing the data model or the ontology of the information system being built.
+- Interoperate several programming language implementations.
+- van Roy & Haridi: alternative semantics https://www.info.ucl.ac.be/~pvr/book.html
+** Algebraic modeling
+- Model some systems algebraically.
+  - Come up with a set.
+  - Come up with a /closed/ operation on that set.
+  - Example: shape algebra:
+    - constructors
+      - circle : Radius -> Shape
+      - square : Side -> Shape
+    - algebraic operations
+      - juxtapose : Shape -> Shape -> Shape
+      - on : Shape -> Shape -> Shape
+    - combinators
+      - translate : DX -> DY -> Shape -> Shape
+* Advanced
+- Decompose systems such that the difficulty of a change is proportional to the change's probability.
+- Automate the translation of desires.
+  Model-driven development.
+  Make computers help translate desires.
+  Teach computer how to reason.
+- Design a programming language, probably domain-specific, beginning from the language's semantics.
+- Make interpreters.
+- Make compilers.
+- Trade-offs, constraints.
+* Even more advanced
+** Critical-system programmer
+- It is OK to be disiniterested in this; few people like this.
+- https://en.wikipedia.org/wiki/Critical_system
+- Program computers without assuming that hardware is 100% reliable.
+- Define failure modes.
+* Post-scarcity spirituality and actualization
+- Make things with love, for beauty and simplicity, because we want to, not because we have to.

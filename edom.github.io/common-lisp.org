@@ -121,6 +121,7 @@ Assume that they are not garbage collected.
 It is unknown whether =gensym= is thread-safe.
 ANSI CL does not specify concurrency.
 * Conditions, exceptions, restarts
+- http://www.gigamonkeys.com/book/beyond-exception-handling-conditions-and-restarts.html
 - =cerror= signals a correctable/continuable/restartable error?
 - =catch= and =throw=
 - Should we use =throw= or =signal=?
@@ -131,6 +132,7 @@ ANSI CL does not specify concurrency.
   - Write a =defsystem= form.
   - See also [[https://common-lisp.net/project/asdf/asdf/The-defsystem-grammar.html][the defsystem grammar]].
 - Quickproject? http://articulate-lisp.com/project/new-project.html
+- http://notes.eatonphil.com/starting-a-minimal-common-lisp-project.html
 ** Packages
 - =defpackage=
 - Use uninterned symbols for names in =defpackage=.
@@ -302,6 +304,29 @@ https://www.google.com/amp/s/lispchronicles.wordpress.com/2017/03/16/the-truth-a
 - Scheme =map= takes 2 arguments and works with lists only.
 * Advanced?
 - AP5? Datalog? https://www.reddit.com/r/programming/comments/9b9mq/lisp_prolog_model_driven_dev_aop_from_1989_please/
+- Clojure contender? https://chriskohlhepp.wordpress.com/advanced-c-lisp/embedding-lisp-in-cplusplus-a-recipe/
+- PowerLoom; model-driven? https://www.isi.edu/isd/LOOM/PowerLoom/documentation/documentation.html
+- Create a language Lisp1 on top of Common Lisp (CL), that translates to CL, and fully interoperates with CL.
+  - Reuse CL =read= and =with-standard-io-syntax=.
+  - =(my-read Stream) => My-File-Content=
+  - =(translate My-File-Content) => CL-File-Content=
+  - Output with =pprint=.
+  - 1:1 mapping between CL+ file and CL file.
+  - Convenience method: =(translate-my-file :from Src :to Dst)=.
+  - Generate ASDF =defsystem=.
+  - Consider [[https://srfi.schemers.org/srfi-83/srfi-83.html][SRFI 83]] (R6RS library syntax).
+    Separate compilation.
+    Parseability.
+  - Minimal additions; I just want a one-file-one-package package system. But doesn't ASDF already have that?
+    https://common-lisp.net/project/asdf/asdf/The-package_002dinferred_002dsystem-extension.html
+  - But I want =(require File)= like TypeScript.
+    I don't want to repeat any package prefix.
+  - For ASDF interoperation, see also https://common-lisp.net/project/asdf/asdf/How-do-I-work-with-readtables_003f.html
+- Emacs Lisp (EL) to Common Lisp (CL) embedding: translator or perhaps /interpreter/?
+  - Reuse CL =read=, manipulate readtable.
+  - =(set-macro-character C #'emacs-lisp-on-common-lisp:read t)= for each character C
+  - See also [[https://yoo2080.wordpress.com/2013/08/16/differences-between-common-lisp-and-emacs-lisp/][pitfalls]]
+    and [[https://www.gnu.org/software/emacs/manual/html_node/cl/Porting-Common-Lisp.html][porting Common Lisp to Emacs Lisp]]
 * Other Lisps
 - [[http://community.schemewiki.org/?scheme-vs-common-lisp][Scheme vs Common Lisp]]
 - [[http://hyperpolyglot.org/lisp][Hyperpolyglot's inter-Lisp comparison table]] may be incomplete but may help porting.
