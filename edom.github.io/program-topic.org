@@ -206,37 +206,6 @@ p(x, ...) can always be rewritten to apply(p, x, ...)
 Rijnders 2008
 First-Order Logic as a Lightweight Software Specification Language
 https://homepages.cwi.nl/~paulk/thesesMasterSoftwareEngineering/2008/MichelRijnders.pdf
-* Racket syntax objects in Common Lisp and Scheme?
-Racket's syntax object represents abstract syntax and not concrete syntax.
-If it had concrete syntax object, it would enable refactoring tools.
-
-A Lisp should come with its own /parser/ (about concrete syntax, not only about abstract syntax).
-* Lisp "format" but more user-friendly?
-=format= should use proper forms instead of format strings.
-
-#+BEGIN_EXAMPLE
-(format Fragment ...)
-#+END_EXAMPLE
-
-A string fragment is printed literally.
-
-=(display X)= is Racket =~a=.
-
-=(write X)= is Racket =~s=.
-
-=(print X)= is Racket =~v=.
-
-=newline= is Racket =~n=.
-
-=(max-width L F)= is =F= but its width is truncated to =L= characters
-
-=(fixed-width L F)=.
-
-See also: Racket [[https://docs.racket-lang.org/reference/Writing.html#%28def._%28%28quote._~23~25kernel%29._fprintf%29%29][fprintf]]
-
-#+BEGIN_EXAMPLE
-(format "Foo" (write 1) (print 2) newline)
-#+END_EXAMPLE
 * Overview of computer programming
 <2019-12-04>
 
@@ -321,7 +290,6 @@ A technology solves a problem but it also [[https://en.wikipedia.org/wiki/Uninte
     - [[file:pl-1.html][Sketch of PL-1 programming language]]
     - [[file:software-system-model.html][Towards a comprehensive software system modeling language]]
   - [[file:semantics.html][Semantics Research Group]] (of programming languages) (needs rewrite, should be merged)
-- [[file:common-lisp.html][On Common Lisp]]
 - [[file:program-draft.html][Programming?]]
   - Dead ends, futile endeavors
     - [[file:software-science.html][Towards software science]]

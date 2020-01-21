@@ -12,13 +12,7 @@
     - "Syntax is appropriate to the target language; the target text does not necessarily imitate the sentence structure of the source text."
     - "The target text flows smoothly and does not contain awkward expressions that mark it distinctly as a translation."
     - [[https://www.atanet.org/certification/aboutexams_error.php][Explanation of Error Categories]]
-- AI/ML can be thought of as a subset of computer programming,
-  in the same way intimidation can be thought of a subset of human programming.
-- Translate what is meant, not only what is said.
-  Translate the intention, not the utterance.
-  - Uncover implicit/hidden desires (non-functional requirements).
-  - Uncover some probable hidden future desires.
-  - Ask/clarify/confirm back in the dialog with the client.
+- AI/ML can be thought of as a subset of computer programming (i.e. making computers do what we want).
 ** Translators, programmers, managers, and their measurements
 A translator is measured by the faithfulness of translation and speed of translation?
 
@@ -30,9 +24,18 @@ Or is that directors?
 Programming ability, how able they are to make machines do what they want.
 
 A programmer may be measured in the same way we measure animal trainers, formal translators, and government legislators.
-* Appetizers
+
+/Everyone/ can be measured by their ability to translate their desires into reality.
+Everyone can be measured by their ability to manifest their desires.
+* General Aspirant
 - Translate simple desires into programs in JavaScript in a common browser's JavaScript console (because everybody has a browser).
-* Beginners
+* General Beginner
+- Understand modeling (abstraction).
+  - Understand simplifying assumptions.
+  - Understand when models break down.
+  - Understand layers of abstraction.
+  - Understand that troubleshooting often digging down through layers of abstraction.
+  - Understand that even though one may not know the lower layers, one must know that he does not know the lower layers.
 - Translate simple desires into programs in these languages: Assembly, C, Scheme, Haskell, Prolog.
 - Understand the abstraction from computer programs down to electronic logic gates.
 - Prove the correctness of simple programs, but be aware that "correctness"
@@ -42,27 +45,44 @@ A programmer may be measured in the same way we measure animal trainers, formal 
   - Understand normal-order and applicative-order lambda-calculus reduction strategies.
 - Programming without caring about time/ordering/sequentiality.
 - Understand hard (NP-complete) problems, and understand whether to give up, to approximate, or to do something else.
-- Understand performance; have a mental model of cost.
 - [[file:git-curriculum.html][Use Git]].
 - Know what you are doing.
   Manipulate code in well-defined steps/operations, not haphazardly.
   - Create a function with simplifying assumptions.
   - Relax a simplifying assumption.
-- Understand HTML and CSS.
-- Understand basic HTTP.
-- Understand Ethernet.
-- Understand Wi-Fi.
-- Understand electromagnetism.
-- Understand how materials reflect electromagnetic waves, for various wavelengths/frequencies.
-- Understand the Internet Protocol stack.
-- Understand the OSI 7-layer model and the Internet 5-layer model.
+- Understand some philosophical jargon, especially epistemology and ontology.
+- Understand accidental complexity and essential complexity.
 ** Testing
 - Test functions.
 - Test programs.
 - Test systems.
 - Property-based testing with QuickCheck.
 - Fuzzing.
-* Intermediate
+* General Requirement Analysis
+- Understand analytical philosophy: how to define terms.
+- Understand how to use a language, a dictionary, an etymology dictionary, and a thesaurus.
+- Translate what is meant, not only what is said.
+  Translate the intention, not the utterance.
+  - Uncover implicit/hidden desires (non-functional requirements).
+  - Uncover some probable hidden future desires.
+  - Ask/clarify/confirm back in the dialog with the client.
+* General Mathematics
+- Understand that mathematical notation is a shorthand for natural languages such as English.
+- Read mathematical notation in a natural language such as English.
+  For example, read "\( x + 1 = 2 \)" as "there is something called '\(x\)' such that \(x\) plus one equals two.".
+* General Network
+- Understand Ethernet.
+- Understand Wi-Fi.
+- Understand electromagnetism.
+- Understand how materials reflect electromagnetic waves, for various wavelengths/frequencies.
+- Understand the Internet Protocol stack.
+- Understand the OSI 7-layer model and the Internet 5-layer model.
+* General Web
+- Understand HTML and CSS.
+- Understand basic HTTP.
+- Understand that client--server separation introduces accidental complexity that can be hidden with model-driven architecture.
+  - Apply the Request--Response / Command--Response abstraction to command-line applications and web applications.
+* General Intermediate
 - Translate simple desires into programs in these languages: C++, Java, Kotlin, Go.
 - Translate complex desires into systems in these languages: Common Lisp, Scheme, Racket.
 - Design application programming interfaces (APIs).
@@ -71,6 +91,24 @@ A programmer may be measured in the same way we measure animal trainers, formal 
   - Begin by designing the data model or the ontology of the information system being built.
 - Interoperate several programming language implementations.
 - van Roy & Haridi: alternative semantics https://www.info.ucl.ac.be/~pvr/book.html
+- Understand performance.
+  - Have a mental model of resource usage (time complexity).
+  - Understand practical benchmarking.
+  - Understand performance measurement, CPU profiling, memory profiling, disk profiling.
+  - Find bottlenecks.
+  - Predict bottlenecks.
+  - Understand some queuing theory.
+- Design systems according to expected number of users and expected lifetime.
+- Understand deductive databases.
+  - Understand Prolog, backward chaining, SLDNF resolution, how Kowalski relates sequence of procedure calls and conjunction of Horn clauses.
+  - Understand Datalog, forward chaining.
+  - Understand SQL databases as almost-deductive databases.
+  - Understand the relationship between relation (extension) and predicate (intension).
+  - Understand that standard SQL cannot compute transitive closure.
+  - I decided not to /mainly/ use Prolog because Prolog lacks these things that would help maintaining large programs:
+    scoping (local variable), anonymous (first-class) modules.
+    However, I may decide to /embed/ Prolog;
+    For databases, I love Prolog/Datalog much more than I like SQL.
 ** Algebraic modeling
 - Model some systems algebraically.
   - Come up with a set.
@@ -84,7 +122,7 @@ A programmer may be measured in the same way we measure animal trainers, formal 
       - on : Shape -> Shape -> Shape
     - combinators
       - translate : DX -> DY -> Shape -> Shape
-* Advanced
+* General Advanced
 - Decompose systems such that the difficulty of a change is proportional to the change's probability.
 - Automate the translation of desires.
   Model-driven development.
@@ -94,11 +132,12 @@ A programmer may be measured in the same way we measure animal trainers, formal 
 - Make interpreters.
 - Make compilers.
 - Trade-offs, constraints.
-* Even more advanced
-** Critical-system programmer
+- Program humans and machines.
+- Program human--machine hybrid systems (which is all practical systems).
+* Special Critical Systems
 - It is OK to be disiniterested in this; few people like this.
 - https://en.wikipedia.org/wiki/Critical_system
 - Program computers without assuming that hardware is 100% reliable.
 - Define failure modes.
-* Post-scarcity spirituality and actualization
+* General Culmination: post-scarcity, spirituality, actualization, apotheosis
 - Make things with love, for beauty and simplicity, because we want to, not because we have to.
