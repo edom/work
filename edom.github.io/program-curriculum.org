@@ -1,6 +1,7 @@
 #+TITLE: Toward a curriculum for computer programming
 #+DATE: 2020-01-20 00:00:00 +0700
 * Principles
+** What
 - Programmers /translate/ human desires into computer systems.
 - Programmer metrics measure translation quality.
   An example of translation quality measurement is that of [[https://unbabel.com/blog/measuring-translation-performance/][unbabel.com]]
@@ -27,8 +28,102 @@ A programmer may be measured in the same way we measure animal trainers, formal 
 
 /Everyone/ can be measured by their ability to translate their desires into reality.
 Everyone can be measured by their ability to manifest their desires.
+** Overview of computer programming
+<2019-12-04>
+
+What is to program a computer?
+
+To program a computer is to make it do what we want.
+
+How?
+
+We have to break down our desire in terms of what the computer knows.
+
+What does the computer know?
+
+An empty computer innately knows the [[https://en.wikipedia.org/wiki/Machine_code][primitive instructions]] built into it by the computer hardware designer.
+
+So, how do we program a computer?
+
+We program a computer by translating our desire into those primitive instructions.
+
+Over time, humans have written programs for computers to help translate our desires.
+With programming languages, we communicate our desires to the computer.
+However, we have not been able to make the computer read our minds.
+
+The computer does what we tell it to do, not what we want it to do.
+
+You can try to program your computer right now.
+Open your browser's JavaScript console (in [[https://developer.mozilla.org/en-US/docs/Tools/Web_Console/Opening_the_Web_Console][Firefox]]
+or [[https://developers.google.com/web/tools/chrome-devtools/open][Chrome]]),
+type "2 + 3" without quotes, press Enter,
+and the browser should answer "5".
+You have just made the computer do what you want,
+via your browser's JavaScript interpreter.
+
+As you desire the computer to do more things,
+your programs will grow,
+you will suffer,
+you will make mistakes that harm others,
+and your work will be used to harm others,
+intentionally or not.
+
+Of course we can program computers to do something.
+But the question is: /should/ we?
+
+Should we create Facebook, if we knew that it would cause mental problems and help political manipulation, although unintentionally?
+
+Should we create Google, if we knew that it would cause filter bubble, bias, extremism, segregation, and help political manipulation, although unintentionally?
+
+Sometimes yes, sometimes no.
+The answer is less important than your awareness of the issue:
+by programming computers, you are making moral decisions, even if you don't realize it.
+
+A technology solves a problem but it also [[https://en.wikipedia.org/wiki/Unintended_consequences][creates new problems]].
 * General Aspirant
+** What
 - Translate simple desires into programs in JavaScript in a common browser's JavaScript console (because everybody has a browser).
+- Basic concepts. On the word [[file:program.html]["program"]] and its variants.
+  - Programmers [[file:program-model.html][model]] Programmees.
+    Programmee is usually Computer.
+    Programmers also model reality. See also [[file:model.html]].
+    Programmers /restate/ or /translate/ a model of reality to a model of programmee.
+    Programmers create a model of a model: that is, a programmer creates the programmee's model of the programmer's model of reality.
+  - Programmee [[file:compute.html][computes]] Function.
+    - Theory of computation: What can be computed?
+      - Theory of computational complexity: How fast can they be computed?
+  - Major programmability boosts
+    - Code-As-Data, Stored-Program Computers.
+    - Code-as-data and Lisp, in hindsight?
+    - Integrated circuits and miniaturization: Smaller, cheaper, and faster; Moore's observation
+    - Time-sharing, multi-processing, concurrency, parallelism.
+    - Personal Computer:
+      People used to wait for their turn to use computers.
+      Now everyone has computers at home.
+- Programming languages
+  - [[file:parse.html][On parsing formal languages]]
+  - [[file:proglang.html][Programming languages]]? (A mess.)
+    - [[file:pl-quality.html][On programming language quality]]
+  - [[file:semantics.html][Semantics Research Group]] (of programming languages) (needs rewrite, should be merged)
+- [[file:program-draft.html][Programming?]]
+  - Dead ends, futile endeavors
+    - [[file:software-science.html][Towards software science]]
+    - [[file:software.html][Towards a philosophy of software]]
+    - [[file:softeng.html][Towards software engineering]]
+    - <2019-11-07> I have tried and failed to define "software".
+      I will write "program" instead.
+  - Needs rewrite
+    - [[file:math.html][Mathematics]]
+    - [[file:compsci.html][Computer science]]
+    - [[file:modeldata.html][Modeling all data]]
+- Programming big systems, helping machines help us
+- [[file:secure.html][On the word "secure"]] (see also [[file:power.html]]).
+- Borderline crackpot territory
+  - Morality, ethics, politics
+    - Servers, centralization, oppression, inequality
+    - Insanely Generous Investors and money laundering?
+    - Programmers get paid insane salaries, but companies still have bigger profits.
+      That means companies are extracting even bigger values.
 * General Beginner
 - Understand modeling (abstraction).
   - Understand simplifying assumptions.
