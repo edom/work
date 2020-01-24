@@ -1,0 +1,259 @@
+#+TITLE: Toward a curriculum for thinking
+#+DATE: 2020-01-24 00:00:00 +0700
+* Using language
+- Understand how to [[https://en.wikipedia.org/wiki/Definition][define]] a term.
+- Find the /origin/ of words with an [[https://www.etymonline.com/][etymology dictionary]].
+- Find /synonyms/ with a [[https://www.thesaurus.com/][thesaurus]].
+* Using mathematics
+- Understand that mathematical notation is an /abbreviation/ for natural language.
+- /Read/ mathematical notation.
+  - /Mentally expand/ a prose that contains mathematical symbols into a prose in natural language without mathematical symbols.
+- Understand that "to understand X" means "to have a useful internal mental model of X" or "to be able to manipulate X".
+- Understand that a /theorem/ is a /technology/, because it increases productivity:
+  it reduces the effort required to prove something.
+- Understand naïve set theory, functions, logic, variables, algebra, arithmetics.
+- Understand /function composition/: \( (f\circ g)(x) = f(g(x)) \).
+- Understand /real numbers/.
+- Understand the relationship between set theory and logic.
+* The language of mathematics?
+** Mathematical language
+Even if there is nothing you don't already know,
+at least glance through this chapter,
+just to be aware of our idiosyncrasies.
+
+If you program computers, you can think of mathematics as a
+[[https://en.wikipedia.org/wiki/Domain-specific_language][domain-specific language]]
+for concise and precise thinking.
+
+Humans have invented a mathematical notation that greatly increases information density;
+thus such notation also increases information transfer rate.
+Such notation speeds up thought, after an initial learning curve.
+** Dispelling the fear of mathematics
+Fear mathematics not, because it is just abbreviated English.
+For example, instead of repeating the cumbersome "where the ball is at a given time",
+we may write the much shorter "\( h(t) \)".
+Instead of writing the long and hard-to-parse phrase
+"a number that equals zero when multiplied by itself and then subtracted by one",
+we write "a number \(x\) such that \(x^2 - 1 = 0\)".
+
+We have just seen mathematics speed up our thinking!
+
+Mathematics originated as a way of modeling reality.
+
+People did math because they wanted to do something in the real world.
+Shepherds want to avoid losing cattle, so they count their cattles.
+Carpenters want to cut woods for the diagonal braces of a roof, so they use the Pythagorean theorem.
+Merchants want to profit, so they subtract expenses from income, and use exponentials to calculate interests.
+Train operators want to profit, so they calculate the quantity of coal they should carry for a given distance.
+Nations want to avoid famine, so they calculate how much crop they should plant.
+And so on.
+People originally did math to avoid wastage, mistakes, and pain.
+
+People also did math to plan.
+For example, if a bush can feed one person,
+and there are three people in my family,
+then I would need to forage three bushes to feed my family.
+** The time required
+Even with the necessary background knowledge,
+we often take any time from /several seconds/ to /several minutes/ in order to read an equation.
+
+It does not help if we can 600 words per minute,
+because the difficulty of understanding mathematics is not in translating the notation into English,
+but in reconstructing the writer's understanding back from the notation.
+
+The writers have a picture in mind when they write an equation.
+The readers have to reconstruct that picture, given only the equation.
+** Digression: From "because we must" to "because we want"
+(This may be false. Perhaps farming did not give people more leisure time, but it enabled people to build bigger and denser settlements.)
+
+At first we did math because we had to survive.
+
+We /counted/ the things that determine our survival: animals, plants, people, weapons.
+We had /numbers/, but they were tied to units:
+we understood "one cow", but we did not understand "one".
+
+We found /linear relationships/ between the number of family members and the rate of resource consumption.
+
+We wanted to survive, so we thought about /optimization/: to get maximum result with minimum effort.
+We built tools, farmed crops, trapped animals, built houses, settled down, simplified survival, and got much leisure time.
+It was futile to work harder than what was necessary for survival, because the surplus harvest would be wasted;
+Nature does not reward material possession beyond what is necessary to survive.
+We were wealthy in the sense that we had everything we wanted without working,
+because everything we wanted was to survive; crops gave themselves for us to eat;
+they didn't fight back like animals; what else could we want other than free food?
+It was heaven; we didn't know what else there was to want.
+We didn't know what to do with all that leisure time,
+so we began doing things for fun: painting cave walls, making statues, etc.
+
+With so much leisure time,
+we began doing things because we /could/, not because we /had to/,
+because there was nothing we had to do.
+
+Curiosity, not necessity.
+
+We have moved from doing what we /must/ to doing what we /want/.
+** Expressions
+An /expression/ is something like \(1+2\), or \(x + y \cdot z\), and so on.
+** Equations
+An /equation/ \(x = y\) (read "\(x\) is equal to \(y\)") means that
+every occurrence of \(x\) can be /replaced/ with \(y\),
+and also the other way around:
+every occurrence of \(y\) can be replaced with \(x\).
+** Sets
+A set is a collection without duplicates.
+
+Example: \( \Set{1,2,3} \) is a set of three things.
+
+Example: \( \Real \) is the set of all real numbers.
+(Perhaps for now it suffices to know that \(\Real\) at least contains every number that you can type into a simple calculator.)
+** Functions
+(Should we just use the domain-codomain-pairing triplet formalism?)
+
+A /function/ \(f\) is usually defined by an equation like \( f(x) = \text{something} \).
+See the following example.
+
+Suppose that we have defined \(f(x) = x+1\) and we want to /evaluate/ \(f(2)\).
+We do this by /assuming/ \(x=2\) (because we want to evaluate \(f(2)\)).
+Here is how we do it:
+
+\begin{align*}
+f(x) &= x+1 & \text{by definition}
+\\ f(2) &= 2+1 & \text{by assuming \(x = 2\)}
+\\ f(2) &= 3 & \text{because \(2+1 = 3\)}
+\end{align*}
+Therefore, \(f(2) = 3\).
+
+As you become more proficient in math-speak, you will be able to skip the intermediate steps.
+
+Note that, in the above example, the function is \(f\), not the expression \(f(x)\).
+People often mistakenly say "the function \(f(x)\)".
+Do not confuse a function and its application.
+
+Sometimes we write \(f(x)\) as \(fx\).
+
+We rarely do these, but we can write \(f(x)\) as \(f~x\),
+and we can write \(f(x) = x+1\) as \(f = (x \mapsto x+1)\).
+(This probably only makes sense to functional programmers.)
+
+A function can represent the relationship between two quantities in which one quantity determines the other quantity.
+** Integrals
+See [[file:integral.html]].
+** Algebra
+A letter (a variable) represents a number (something) that is not yet known.
+
+Example: \(x+2 = 3\) means "What number, if added by 2, equals 3?".
+* Theorizing and reasoning
+** Theories
+- Understand that a /theory/ is a logical formula.
+- Understand that theories usually have /assumptions/.
+- Understand /reasoning/ (how to /create theories/).
+  - Understand [[https://en.wikipedia.org/wiki/Abductive_reasoning][abduction]]:
+    given /observations/ E, find the simplest theory T that implies E.
+    - Invent concepts if necessary.
+    - Name things that you need to talk about often.
+  - Understand /induction/: observing \( p(x) \) for /some/ \(x\), hypothesize \( p(x) \) for /all/ \(x\).
+  - Understand /relaxation/:
+    - Remove an assumption.
+    - Given a theory \( A \wedge B \to C \), produce theory \( B \to C' \), such that \( (B \to C') \to (A \wedge B \to C) \).
+  - Understand /subsumption/:
+    - Given theory X and theory Y, find the simplest theory U that subsumes X and Y.
+      Find U, derive X from U, and derive Y from U.
+      By "/derive/ X from U", we mean "show that U /implies/ X".
+    - Find a unified theory \(U\).
+    - Show \(U \to X\).
+    - Show \(U \to Y\).
+    - Understand that if X and Y contain incompatible assumptions (e.g. \(X \wedge Y\) is false), then those assumptions may have to be relaxed first.
+- Understand how to /uncover the assumptions/ of a theory with corner cases (extreme values of model variables).
+- Examples of theory creation:
+  - Relaxation:
+    - From Newton's model of point-mass motion to continuum mechanics.
+  - Subsumption/unification:
+    - From the law of reflection and Snell's law of refraction to Fermat's principle of least time.
+    - From the [[https://en.wikipedia.org/wiki/Gas_laws][gas laws]] to the ideal gas law.
+    - From various laws of electromagnetism to Maxwell's equations.
+** Making theories: measure-model-abduce
+This is how we make a theory:
+1. We begin with a measurement (an observation).
+2. We create a [[https://en.wikipedia.org/wiki/Phenomenological_model][phenomenological model]].
+3. We [[https://en.wikipedia.org/wiki/Abductive_reasoning][abduce]]
+   a [[https://en.wikipedia.org/wiki/First_principle][metaphysical principle]]
+   while assuming as little as possible
+   [fn::https://en.wikipedia.org/wiki/Occam%27s_razor]
+   [fn::https://en.wikipedia.org/wiki/Ontological_commitment#Ontological_parsimony],
+   and derive the phenomenological model from that principle.
+
+The motto is "measure-model-abduce".
+
+The cycle is "measurement-phenomenology-metaphysics".
+
+For example:
+1. We measure the motion of things by sampling their positions at various points in time.
+2. We model it phenomenologically with Newton's laws of motion.
+3. We abduce the principle of stationary action, and derive Newton's laws of motion from that principle.
+
+A /principle/ is a reasoned assumption.
+
+We must always remember that models and principles are not the reality,
+and that falling in love with them will halt progress.
+We must always be ready to discard them.
+
+Can experiments test principles?
+
+Criteria for evaluating a scientific theory http://www.nytud.mta.hu/depts/tlp/gaertner/publ/schoemaker_huygens_fermat.pdf
+** Which one of two theories is more general?
+Let \(T\) be a theory.
+
+Let \(U\) be a theory.
+
+We write \( T \leq U \) to mean "\(T\) is /derivable/ from \(U\)"
+or "\(T\) is /implied/ by \(U\)".
+
+We write \( T < U \) to mean "\(T\) is /less general than/ \(U\)"
+or "\(T\) is /subsumed/ by \(U\)" or "\(T\) is /included/ in \(U\)".
+
+We choose that notation to make it easier to remember the relationship between subsumption and derivability:
+\[ T < U \iff T \leq U \wedge U \nleq T \]
+which reads "\(T\) is less general than \(U\) iff \(T\) is derivable from \(U\) but \(U\) is not derivable from \(T\)".
+
+For example, Snell's law is derivable from Fermat's principle, but Fermat's principle is not derivable from Snell's law.
+Therefore, Snell's law is less general than Fermat's principle.
+(Really?)
+
+Derivability imposes a partial order on theories.
+
+It may be useful to order physical theories ascending by derivability,
+and make a learning sequence according to that order.
+
+Theories form a poset.
+Do theories also form a lattice?
+
+If the lattice of theories is bounded, then the maximum of the lattice is the grand unified theory;
+otherwise there is no such grand unified theory.
+
+We say "\(T\) and \(U\) are /equivalent/" to mean "\( T \leq U \) and \( U \leq T \)".
+(For what?)
+** Which one of two models is more accurate?
+We write \( T \le U \) to mean "every correct prediction of \(T\) is also a correct prediction of \(U\)".
+
+We write \( T < U \) to mean "\(T\) is less accurate than \(U\)".
+
+** Unification
+By "X /unifies/ Y and Z", we mean "X provides an /unified explanation/ for Y and Z",
+that is, "both Y and Z are derivable from X".
+
+* Meta-learning
+- Understand how to /uncover gaps in your understanding/.
+  - Create a /curriculum/ (a sequence of competencies).
+    - A gap in your understanding will show up as a gap in your curriculum.
+  - /Teach/.
+    - The parts you find hard to teach are your gaps.
+    - If you don't know how to teach it, perhaps you don't understand it.
+  - Creating a curriculum is one way to find out our /unknown unknowns/ (what we don't know we don't know).
+* How to help newbies: commands, not options
+- /Commands/, not options.
+- [[http://www.goodtheorist.science/][t'Hooft's advice]] does not /command/ enough.
+  It is more like a syllabus (what) than a curriculum (how).
+  Newbies need /commands/, /instructions/, not suggestions, let alone options.
+- Options confuse newbies because they don't know which ones are better.
+- Newbies must be given explicit commands, clear sequences, no branching, no options, no choices.
+- Do not present options to someone who does not have sufficient knowledge to decide which option is better.
