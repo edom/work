@@ -1,15 +1,22 @@
 #+TITLE: Toward a curriculum for physics
 #+DATE: 2020-01-24 00:00:00 +0700
-* Thinking
-- See [[file:think-curriculum.html]].
+* Prerequisites
+- [[file:think-curriculum.html][Thinking]]
+- [[file:geometry.html][Geometry]]
 * Quantities
 - Understand that a [[https://en.wikipedia.org/wiki/Physical_quantity][physical quantity]] is a magnitude and a unit.
 * Energy, work, thermodynamics, chemistry
 - Understand that /work/ is weight lifted through a height.
 - Understand that /energy/ is the ability to work.
 - Understand that /heat/ is energy.
-- Understand that /temperature/ is what an analog [[https://en.wikipedia.org/wiki/Thermometer][thermometer]] measures indirectly by
-  [[https://en.wikipedia.org/wiki/Thermal_expansion][thermal expansion]].
+- Macrothermodynamics
+  - Understand that /temperature/ is what an analog [[https://en.wikipedia.org/wiki/Thermometer][thermometer]] measures indirectly by
+    [[https://en.wikipedia.org/wiki/Thermal_expansion][thermal expansion]].
+- Microthermodynamics
+  - Understand Joule's experiment and the relationship between heat and kinetic energy
+    - https://en.wikipedia.org/wiki/Mechanical_equivalent_of_heat
+- ???
+- Understand and justify the conservation of energy.
 - ???
 - Understand [[https://en.wikipedia.org/wiki/Avogadro_constant][Avogadro constant]].
 - Understand [[https://en.wikipedia.org/wiki/Avogadro%27s_law][Avogadro's law]].
@@ -28,6 +35,9 @@
   - Predict /how fast/ a chemical reaction will happen.
     - Kinetics: Predict the reaction rate?
       - <2020-01-25> https://en.wikipedia.org/wiki/Chemical_reaction#Kinetics
+- Understand that matter is /congealed/ energy?
+  - But what are the properties of energy!? Can we touch it!?
+- Understand the relationship between "entropy" in classical thermodynamics, statistical mechanics, and information theory.
 * Atomic theory, electricity, electrochemistry
 - Understand /atoms/.
 - Understand /electricity/.
@@ -37,46 +47,6 @@
 - Understand steady-state models of water surface waves.
 - Understand steady-state models of spring oscillation.
 * Mechanics, motion
-** Geometry
-- Understand /geometry/.
-  - Understand that a /space/ is a set of points.
-  - Understand that a /point/ is an element in a set.
-  - Understand that a /vector/ is a magnitude and a direction.
-  - Understand the addition of a point and a vector, producing a point.
-  - Understand the subtraction of a point and a point, producing a vector.
-  - Understand the addition of a vector and a vector, producing a vector.
-  - Understand the /Pythagorean theorem/.
-- Understand /analytical geometry/.
-  - Conflate an /Euclidean space/ and its corresponding /real tuple space/.
-  - Understand the /\(n\)-dimensional Euclidean metric/:
-    \( d(x,y) = \sqrt{\sum_{k=1}^n (x_k-y_k)^2} \).
-  - Understand that a /coordinate system/ is a scheme for naming points with tuples of real numbers.
-    - A coordinate system is a function whose domain is the set of real \(n\)-tuples and whose codomain is an \(n\)-dimensional space.
-    - Understand /basis vectors/ (coordinate axes?).
-    - Understand /span/.
-    - Understand /collinearity/.
-    - Understand /linear operators/?
-    - Understand the intersection of two spaces.
-      - Understand /systems of linear equations/?
-        - Understand /matrices/.
-      - \( P \cap Q = \SetBuilder{x}{p(x) \wedge q(x)} \)
-  - Understand /coordinate transformations/.
-    - Change the coordinates while preserving the referred point.
-    - \(s(c) = s'(c')\).
-    - We are interested in \(t\) such that \(c' = t(c)\).
-    - \(s(c) = s'(t(c)) \) ; \(s = s' \circ t\); \((s')^{-1} \circ s = t\).
-  - ? covariance and contravariance with respect to what?
-- Understand some /algebraic geometry/.
-  - Understand how to /algebraically/ describe a /curved space/.
-    - Example:
-      - Consider a circle with origin \(O = (0,0)\) and radius \(r\).
-      - Its /analytic-algebraic/ description is \( \SetBuilder{(x,y)}{x^2+y^2=r^2} \).
-      - Its /synthetic-algebraic/ description is \( \SetBuilder{x}{d(O,x) = r} \).
-- Understand some /differential geometry/.
-  - Understand that a /manifold/ is a /locally Euclidean space/.
-  - Understand /tangent spaces/.
-  - Understand /curvature/.
-    - Understand /osculating circles/ (kissing circles).
 ** Variational principles
 - Understand mathematical optimization, /variational principles/, and /unification/ or /subsumption/.
   - Understand how Fermat's principle of least time /subsumes/ the law of reflection and Snell's law of refraction.
@@ -98,6 +68,9 @@
   - Understand its significance.
   - Understand how Poincaré, Lorentz, Einstein, etc. understood it.
 - ???
+- Einstein's summation convention.
+- Tensors are covariant/contravariant /with respect to what/?
+- Walters 2016 "How Einstein Got His Field Equations" https://arxiv.org/abs/1608.05752
 ** Quantum mechanics
 - Relax the assumption of definite time-position relationship into a probabilistic relationship.
 - Model the double-slit light experiment.

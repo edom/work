@@ -13,8 +13,13 @@
   it reduces the effort required to prove something.
 - Understand naïve set theory, functions, logic, variables, algebra, arithmetics.
 - Understand /function composition/: \( (f\circ g)(x) = f(g(x)) \).
-- Understand /real numbers/.
 - Understand the relationship between set theory and logic.
+- https://en.wikipedia.org/wiki/Change_of_variables
+** Real numbers
+- Understand /real numbers/.
+- Understand /sequences/.
+- Understand the /limit/ of a sequence.
+- Understand the [[https://en.wikipedia.org/wiki/Interval_(mathematics)#Notations_for_intervals][interval notation]][fn::<2020-01-26>].
 * The language of mathematics?
 ** Mathematical language
 Even if there is nothing you don't already know,
@@ -151,8 +156,8 @@ Example: \(x+2 = 3\) means "What number, if added by 2, equals 3?".
     given /observations/ E, find the simplest theory T that implies E.
     - Invent concepts if necessary.
     - Name things that you need to talk about often.
-  - Understand /induction/: observing \( p(x) \) for /some/ \(x\), hypothesize \( p(x) \) for /all/ \(x\).
-  - Understand /relaxation/:
+  - Understand /induction/ (hasty generalization): observing \( p(x) \) for /some/ \(x\), hypothesize \( p(x) \) for /all/ \(x\).
+  - Understand /relaxation/ (generalization):
     - Remove an assumption.
     - Given a theory \( A \wedge B \to C \), produce theory \( B \to C' \), such that \( (B \to C') \to (A \wedge B \to C) \).
   - Understand /subsumption/:
@@ -249,11 +254,3 @@ that is, "both Y and Z are derivable from X".
     - The parts you find hard to teach are your gaps.
     - If you don't know how to teach it, perhaps you don't understand it.
   - Creating a curriculum is one way to find out our /unknown unknowns/ (what we don't know we don't know).
-* How to help newbies: commands, not options
-- /Commands/, not options.
-- [[http://www.goodtheorist.science/][t'Hooft's advice]] does not /command/ enough.
-  It is more like a syllabus (what) than a curriculum (how).
-  Newbies need /commands/, /instructions/, not suggestions, let alone options.
-- Options confuse newbies because they don't know which ones are better.
-- Newbies must be given explicit commands, clear sequences, no branching, no options, no choices.
-- Do not present options to someone who does not have sufficient knowledge to decide which option is better.

@@ -363,22 +363,6 @@ Here is one way of measuring volume:
 
 But what if the thing is not solid, or absorbs water, or reacts with water?
 * TODO (Replace emphasis from math to epistemology)
-** An example basis?
-Imagine a flat sheet of paper.
-
-Draw a point \(A\).
-
-Draw a vector named \(i\), from \(A\), \SI{1}{cm} long, pointing right.
-
-Draw another vector named \(j\), also from \(A\), 1 cm long, but pointing up.
-
-Thus, the vectors \(i\) and \(j\) are /orthogonal/.
-
-Then, we declare the basis
-\( e : \Real^2 \to E^2 \) as \( e(x,y) = xi + yj \).
-
-A real tuple space on its own has no geometric meaning.
-One way to visualize a real tuple space is a Cartesian coordinate system.
 ** Field?
 Does a gravitational field have material existence?
 Is gravitational field physical or mathematical?
@@ -420,105 +404,6 @@ Why does this assumption not invalidate the model?
 https://www.quora.com/What-is-the-most-misunderstood-thing-in-physics
 
 See "You can never actually fall into a black hole."
-** Spherical coordinate systems
-(Why do we bring this up?)
-*** Mathematician's heading
-To simplify the explanation of the coming spherical coordinate system,
-we introduce "heading".
-
-Our definition of heading begins with \ang{0} pointing east (positive x-axis),
-and then goes counterclockwise,
-so \ang{90} is north (positive y-axis), \ang{180} is west (negative x-axis),
-and \ang{270} is south (negative y-axis).
-
-Note that our heading differs from the navigator's heading,
-which begins with \ang{0} pointing north and then goes clockwise.
- \footnote{\url{https://en.wikipedia.org/wiki/Cardinal_direction\#Additional_points}}
-*** The spherical coordinate system
-The spherical coordinates \((r,a,b)\) mean
-"set heading to \(a\), set elevation to \(b\), and then go the distance \(r\)".
-
-The spherical coordinate system adds another angle component to the polar coordinate system.
-
-We now describe how to map the spherical coordinates \(S(r,a,b)\) to Cartesian coordinates \(C(x,y,z)\).
-The slogan to remember is that \(S(r,a,b)\) means
-\enquote{set heading to \(a\),
-set elevation to \(b\),
-and then go the distance \(r\)}.
-Another slogan is \enquote{face east, turn your head left by angle \(a\),
-turn your head up by angle \(b\), and then look at distance \(r\)}.
-
-Let's read slower as we imagine the drawing.
-
-Let \(O\) be the center of both the spherical coordinate system and the Cartesian coordinate system.
-Let their centers coincide.
-
-A negative angle \(-a\) means the angle \(a\) but in the reverse direction.
-
-Draw the point \(D\) at \(C(r,0,0)\),
-which means that \(D\) lies on the positive x-axis,
-at distance \(r\) from \(O\).
-
-With the positive z-axis as the axis of rotation,
-rotate the vector \(OD\), by angle \(a\) toward the positive y-axis
-(or toward the negative y-axis if \(a\) is negative).
-Call the resulting vector \(OE\).
-Thus, the point \(E\) is at \(C(r \cos a, r \sin a, 0)\),
-which is still on the xy-plane.
-
-Then, rotate the vector \(OE\), by angle \(b\),
-out of the xy-plane, toward the positive z-axis
-(or toward the negative z-axis if \(b\) is negative).
-Call the resulting vector \(OF\).
-
-Then \(F\) is the point described by \(S(r,a,b)\).
-*** Relationship with Cartesian coordinate systems
-Let's say that the point \(F\) is at \(S(r,a,b)\), which is equal to \(C(x,y,z)\).
-By the definition of rotation and the congruence of triangles,
-we can convert spherical coordinates to Cartesian coordinates as follows:
-\begin{align}
-    x &= r \cos a \cos b
-    \\
-    y &= r \sin a \cos b
-    \\
-    z &= r \sin b
-\end{align}
-
-We can convert Cartesian coordinates to spherical coordinates as follows:
-\begin{align}
-    r &= \sqrt{x^2 + y^2 + z^2}
-    \\
-    \tan a &= y/x
-    \\
-    \sin b &= z/r
-\end{align}
-but we have to pick the angles that make the signs correct.
-
-Thus, we have just explained what is meant by the slogan
-\enquote{set heading to \(a\),
-set elevation to \(b\),
-and then go the distance \(r\)}.
-*** Which spherical coordinate system?
-Note that our \(b\) is elevation, not azimuth.
-The relationship between elevation and azimuth is
-\[
-    \text{azimuth} = \ang{90} - \text{elevation}.
-\]
-
-If the elevation is zero, then the spherical coordinate system reduces
-to the polar coordinate system on the xy-plane.
-That method embeds the polar coordinate system into the xy-plane.
-Thus the angle \(a\) is called heading angle, polar angle, or longitude.
-The angle \(b\) is called elevation angle or latitude.
-
-Azimuth is angle from zenith.
-In this case, zenith is the z-axis.
-
-ISO standard?
-Azimuth?
-Elevation?
-
-What\footnote{\url{https://en.wikipedia.org/wiki/Spherical_coordinate_system}}
 ** Statics?
 *** What
 \footnote{\url{https://en.wikipedia.org/wiki/Timeline_of_fundamental_physics_discoveries}}
