@@ -1,0 +1,182 @@
+#+TITLE: Geometry 1: Axioms and drawings
+#+DATE: 2020-01-26 00:00:00 +0700
+* Metric spaces
+- A [[https://en.wikipedia.org/wiki/Space_(mathematics)][space]] (a mathematical space) is a set of points.
+- A /point/ is an element in a set.
+- "[[https://en.wikipedia.org/wiki/Metric_(mathematics)][Metric]]" is another term for "distance".
+  - We usually write \(d(x,y)\) to mean "the /distance/ between point \(x\) and point \(y\)".
+- A /metric space/ is a space and a metric.
+- Relationship:
+  | geometry | set theory |
+  |----------+------------|
+  | space    | set        |
+  | point    | element    |
+* Normed vector spaces
+- An /[[https://en.wikipedia.org/wiki/Euclidean_vector][Euclidean vector]]/ is something with magnitude and direction.
+- A /vector/ is an element of a vector space.
+- Understand /scalar--vector multiplication/:
+  - If \(k\) is a scalar (a real number) and \(x\) is a vector,
+    then \(kx\) is a vector whose direction is the same as \(x\) but whose length is \(k\) times the length of \(x\).
+- A [[https://en.wikipedia.org/wiki/Vector_space][vector space]] is a set of vectors plus some structures?
+- Notation
+  - \(\norm{x}\) ("the norm of \(x\)") means the length of vector \(x\).
+  - "Norm" means "length".
+  - The /norm/ of a vector is the /length/ (the magnitude) of that vector.
+- Understand vector addition.
+- Understand vector negation.
+- Understand point--vector addition.
+  | operation   | left argument | right argument | result |
+  |-------------+---------------+----------------+--------|
+  | addition    | vector        | vector         | vector |
+  | addition    | point         | vector         | point  |
+  | subtraction | vector        | vector         | vector |
+  | subtraction | point         | point          | vector |
+- Derive subtraction from addition and negation.
+  - Subtraction can be derived from addition and negation: \(x-y = x+(-y)\).
+  - Negation: \(-x\) is something such that \(x+(-x) = 0\).
+  - If \(p+v=r\), then, subtract both sides by \(v\) to get \(p=r-v\).
+- See also [[https://en.wikipedia.org/wiki/Vector_(mathematics_and_physics)][a brief history of vectors]].
+- An /Euclidean vector space/ is a set of vectors with Euclidean metric.
+  A metric is a function that maps each vector to its length.
+  An Euclidean metric is distance as we know it in everyday situation.
+- Euclidean distance can be derived from the [[https://en.wikipedia.org/wiki/Pythagorean_theorem][Pythagorean theorem]]
+  that relates the lengths of the sides of a right triangle.
+* Relationship between metric and norm
+- Because a vector can be obtained by subtracting two points:
+  - A metric space can be derived from a normed vector space.
+\[ d(x,y) = \norm{y-x} \]
+* Relationship between spaces: embedding, projection, homeomorphism
+- Understand [[https://en.wikipedia.org/wiki/Ambient_space][ambient spaces]].
+- Understand /embedding/.
+  - Example: A line may be embedded in a three-dimensional space.
+- Understand /projection/.
+  - Example: A cube may be projected onto a plane.
+  - Understand that /shadows/ can be modeled by geometric projections.
+- Understand /homeomorphism/.
+* Circles, pi, angles, radian
+- A /[[https://en.wikipedia.org/wiki/Circle][circle]] with center \(c\) and radius \(r\)/ is \( \SetBuilder{x}{d(c,x) = r} \)
+  (the set of every point whose distance from \(c\) is \(r\)).
+  - A [[https://en.wikipedia.org/wiki/Circular_sector][/sector/]] is ...
+- [[https://en.wikipedia.org/wiki/Pi][\( \pi \)]] is the ratio of a circle's circumference to its diameter.
+  - All circles have that ratio.
+  - The first few digits of π are 3.141659...
+  - π is sometimes approximated as 22/7.
+- An [[https://en.wikipedia.org/wiki/Angle][/angle/]] is ...?
+- An /angle/ may be thought of as one revolution, half revolution, quarter revolution, 3/4 revolution, etc.,
+  but [[https://en.wikipedia.org/wiki/Radian][/radian/]] is the natural unit for angles.
+  - 360 degrees = 2π radian = 1 revolution
+  - Understand [[https://en.wikipedia.org/wiki/Radian#Advantages_of_measuring_in_radians][why]][fn::<2020-01-26>] radian is the natural unit for angles.
+- Understand that a /positive/ angle usually means /counterclockwise/ rotation.
+- Circle, sector, angle, congruence
+  - Consider a circle of radius \(r\).
+  - Consider a sector of angle \(\alpha\) in that circle.
+  - The circumference of that sector is \( r \cdot \alpha \).
+  - An angle is the "radius-independent size" of a sector.
+* Basic shapes
+- A [[https://en.wikipedia.org/wiki/Polygon][/polygon/]] (an \(n\)-gon) is a shape with \(n\) vertices / edges / internal angles.
+  - A /vertex/ is a point.
+  - An /edge/ is a straight line that connects two vertices.
+  - An /internal angle/ is ...
+- A [[https://en.wikipedia.org/wiki/Triangle][/triangle/]] is a shape with three vertices / three edges / three internal angles.
+  - triangle = three-angle
+  - quadrangle = four-angle, etc.
+- A /circle/ is \( \SetBuilder{x}{d(c,x) = r} \) (see above).
+* Basic solids
+- A /sphere/ is \( \SetBuilder{x}{d(c,x) = r} \).
+  - A [[https://en.wikipedia.org/wiki/Sphere][sphere]] is the surface of a ball.
+* Right triangles and trigonometry
+- A /right triangle/ is a triangle with one right angle.
+  - The /hypothenuse/ is the side across the right angle.
+- The [[https://en.wikipedia.org/wiki/Pythagorean_theorem][Pythagorean theorem]] relates the length of the sides of every right triangle.
+- [[https://en.wikipedia.org/wiki/Trigonometry][Trigonometry]]
+  - [[https://en.wikipedia.org/wiki/Trigonometric_functions][Trigonometric functions]]
+    - ? sine of an angle, cosine of an angle, tangent of an angle, ...
+* More dimensions
+** Modeling physical space as a three-dimensional Euclidean space
+There are two different meanings of "space".
+Physical space is often thought of as the volume occupied by objects.
+
+Most likely, you already understand a three-dimensional Euclidean space,
+because it is your internal mental model of the space around you.
+
+An [[https://en.wikipedia.org/wiki/Euclidean_space][Euclidean space]] is a set of points, not a set of coordinates.
+
+We usually draw a point as a dot, but a point is a zero-dimensional geometric object that occupies no space at all.
+
+[[https://commons.wikimedia.org/wiki/File:Coord_system_CA_0.svg#][This picture]] may help you visualize a three-dimensional real tuple space.
+** Dimension
+- The /number of dimensions/ of a space is the /maximum number of mutually orthogonal lines/ that can coexist in that space.
+  - For example, we know no way to arrange more than three mutually orthogonal rulers in physical space.
+    Therefore, we think our physical space has three dimensions.
+- The number of dimensions of every /subset/ of \( \Real^n \) is \(n\).
+  - Do not confuse embeddings and subsets.
+    - \( \Real^m \) is not a /subset/ of \( \Real^n \) if \( m \neq n \).
+  - We do not define \(\Real^0\).
+  - We do not define the number of dimensions of the empty set.
+
+How do we know how many /dimensions/ a space has?
+
+We know that a space has dimension \(n\) if we cannot simultaneously place more than \(n\) mutually orthogonal lines in that space.
+We infer that our space has three dimensions because we have not found how to arrange more than three mutually orthogonal lines in our space.
+For example, if we pick three rulers, we can arrange them so that they are orthogonal to each other.
+But, if we pick four rulers, we know no way to arrange them so that they are orthogonal to each other.
+That is why we think that space is three-dimensional.
+** Orthogonality, perpendicularity
+How do we know that two lines are /orthogonal/?
+By a protractor?
+
+We know that two lines are orthogonal if all the four angles formed by their intersection are equal.
+
+Other terms for "orthogonal" are "perpendicular" and "at a right angle".
+** Hypersolids
+- [[https://en.wikipedia.org/wiki/Polygon][polygon]] (many-corner)
+  → [[https://en.wikipedia.org/wiki/Polyhedron][polyhedron]] (many-seat)
+  → [[https://en.wikipedia.org/wiki/Polytope][polytope]] (many-place)
+- shape → solid → hypersolid
+- A /line/ is \( \SetBuilder{x}{x = a + tb, ~ t \in \Real} \).
+- A /hyperplane/ is \( \SetBuilder{x}{a \cdot x = b} \).
+- Understand two-dimensional geometric objects: line, circle, square.
+- Understand three-dimensional geometric objects: plane, sphere, cube.
+- Understand higher-dimensional geometric objects: hyperplane, hypersphere, hypercube, "hyper-" + <the name of a three-dimensional object>.
+* Transformations, symmetries, and invariants
+** Invariants
+Let \(\phi : D \to C\) be a function.
+
+Let \(T : D \to D\) be a function, usually called a "transformation".
+
+We say
+"\(\phi\) is /unaffected/ by \(T\)"
+or "\( \phi \) is /\(T\)-invariant/"
+or "\( T \) is an /invariant/ (a /symmetry/) of \( \phi \)"
+iff, for all \(x \in D\):
+\[ \phi(x) = \phi(T(x)) \]
+
+Here are some examples of invariants.
+
+Let \( Tx = x + c \) represent translation.
+
+Example:
+If \(\phi(x,o,r)\) means "\(x\) is a point on a circle with center \(o\) and radius \(r\)",
+then \(\phi(x,o,r) = \phi(Tx,To,r)\).
+(A predicate is a function whose codomain is the set of booleans.)
+
+Example:
+If \(V\) is a vector space, then \(\SetBuilder{Tv}{v \in V} = V\).
+If we follow the "auto-lifting" convention, we can write the equation more prettily as \( TV = V \).
+
+Example:
+Even functions exhibit mirror symmetry.
+(A function \( f \) is /even/ iff \( f(x) = f(-x) \) for all applicable \(x\).)
+
+Example:
+Periodicity is a special case of translation-invariance.
+(A function \(f\) has /period/ \(p\) iff \(p\) is the smallest positive number such that \( f(x+p) = f(x) \) for all applicable \(x\).
+A function is /periodic/ iff it has a period.)
+** Symmetries
+Example: let \(S\) be the set of points of an unlabeled square.
+
+Let \(T\) be a rotation about the square's center by a right angle.
+
+We write \(TS\) to mean "the result of rotating \(S\) about its center by a right angle".
+
+We write \(TS = S\) to mean "rotating \(S\) about its center by a right angle produces \(S\) itself".

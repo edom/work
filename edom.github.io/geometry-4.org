@@ -1,0 +1,248 @@
+#+TITLE: Geometry 4: Spheres
+#+DATE: 2020-01-26 00:00:00 +0700
+\(
+\newcommand\der{\operatorname{der}}
+\newcommand\Der{\mathrm{D}}
+\newcommand\dd{\operatorname{d}}
+\newcommand\ang[1]{#1^\circ}
+\newcommand\parenthesize[1]{\left(#1\right)}
+\newcommand\dif{\mathrm{d}}
+\newcommand\Dif{\Delta}
+\)
+* Visualization
+- Visualize the surface of the Earth as a sphere.
+- Visualize a person at a point on the surface of the Earth.
+- Visualize yourself looking at that person and the Earth from outer space.
+- This document has been designed to be understandable by replacing "manifold" with "sphere".
+* Spherical coordinate systems
+** Mathematician's heading
+To simplify the explanation of the coming spherical coordinate system,
+we introduce "heading".
+
+Our definition of heading begins with \ang{0} pointing east (positive x-axis),
+and then goes counterclockwise,
+so \ang{90} is north (positive y-axis), \ang{180} is west (negative x-axis),
+and \ang{270} is south (negative y-axis).
+
+Note that our heading differs from the navigator's heading,
+which begins with \ang{0} pointing north and then goes clockwise.
+ \footnote{\url{https://en.wikipedia.org/wiki/Cardinal_direction\#Additional_points}}
+** ? The spherical coordinate system
+The spherical coordinates \((r,a,b)\) mean
+"set heading to \(a\), set elevation to \(b\), and then go the distance \(r\)".
+
+The spherical coordinate system adds another angle component to the polar coordinate system.
+
+We now describe how to map the spherical coordinates \(S(r,a,b)\) to Cartesian coordinates \(C(x,y,z)\).
+The slogan to remember is that \(S(r,a,b)\) means
+\enquote{set heading to \(a\),
+set elevation to \(b\),
+and then go the distance \(r\)}.
+Another slogan is \enquote{face east with your entire body,
+then turn your entire body left by angle \(a\),
+then turn your head up by angle \(b\), and then look at distance \(r\)}.
+
+Let's read slower as we imagine the drawing.
+
+Let \(O\) be the center of both the spherical coordinate system and the Cartesian coordinate system.
+Let their centers coincide.
+
+A negative angle \(-a\) means the angle \(a\) but in the reverse direction.
+
+Draw the point \(D\) at \(C(r,0,0)\),
+which means that \(D\) lies on the positive x-axis,
+at distance \(r\) from \(O\).
+
+With the positive z-axis as the axis of rotation,
+rotate the vector \(OD\), by angle \(a\) toward the positive y-axis
+(or toward the negative y-axis if \(a\) is negative).
+Call the resulting vector \(OE\).
+Thus, the point \(E\) is at \(C(r \cos a, r \sin a, 0)\),
+which is still on the xy-plane.
+
+Then, rotate the vector \(OE\), by angle \(b\),
+out of the xy-plane, toward the positive z-axis
+(or toward the negative z-axis if \(b\) is negative).
+Call the resulting vector \(OF\).
+
+Then \(F\) is the point described by \(S(r,a,b)\).
+** Relationship with Cartesian coordinate systems
+Let's say that the point \(F\) is at \(S(r,a,b)\), which is equal to \(C(x,y,z)\).
+By the definition of rotation and the congruence of triangles,
+we can convert spherical coordinates to Cartesian coordinates as follows:
+\begin{align}
+    x &= r \cos a \cos b
+    \\
+    y &= r \sin a \cos b
+    \\
+    z &= r \sin b
+\end{align}
+
+We can convert Cartesian coordinates to spherical coordinates as follows:
+\begin{align}
+    r &= \sqrt{x^2 + y^2 + z^2}
+    \\
+    \tan a &= y/x
+    \\
+    \sin b &= z/r
+\end{align}
+but we have to pick the angles that make the signs correct.
+
+Thus, we have just explained what is meant by the slogan
+\enquote{set heading to \(a\),
+set elevation to \(b\),
+and then go the distance \(r\)}.
+** Which spherical coordinate system?
+Note that our \(b\) is elevation, not azimuth.
+The relationship between elevation and azimuth is
+\[
+    \text{azimuth} = \ang{90} - \text{elevation}.
+\]
+
+If the elevation is zero, then the spherical coordinate system reduces
+to the polar coordinate system on the xy-plane.
+That method embeds the polar coordinate system into the xy-plane.
+Thus the angle \(a\) is called heading angle, polar angle, or longitude.
+The angle \(b\) is called elevation angle or latitude.
+
+Azimuth is angle from zenith.
+In this case, zenith is the z-axis.
+
+ISO standard?
+Azimuth?
+Elevation?
+
+What\footnote{\url{https://en.wikipedia.org/wiki/Spherical_coordinate_system}}
+
+* Solid angles
+- Generalize angle to [[https://en.wikipedia.org/wiki/Solid_angle][solid angle]].
+* Distance on sphere, great circles, geodesics
+- Generalize /straight lines/ to /geodesics/: shortest one-dimensional object connecting two points.
+  - Let there be a sphere of radius \(r\).
+  - Let X be a point on the sphere.
+  - Let Y be a point on the sphere.
+  - ? the sphere's shortest one-dimensional subspace that connects X and Y.
+  - The metric (which determines "shortest") is implied from context.
+* Manifold
+- A /manifold/ is a /locally Euclidean space/.
+  - "Manifold" generalizes "smooth surface".
+  - For now, think of "manifold" as "smooth surface".
+  - Example manifold: a sphere.
+  - Another example: a smooth two-dimensional surface in three-dimensional ambient Euclidean space, such as a curved sheet of paper.
+  - A /[[https://en.wikipedia.org/wiki/Manifold][manifold]]/ is a "space that locally resembles Euclidean space near each point".
+  - The manifold's /ambient space/ is implied from context.
+  - Formally, every manifold is a space (a set of points).
+* An important shift in thinking
+- To begin studying differential geometry, we /shift our thinking/ from global to local:
+  - Previously: We associate some things with /the entire space/.
+  - Now: We associate some things with /each point in a manifold/.
+  - Previously, we have a space:
+    - A metric is associated with /the entire space/.
+    - A coordinate system is associated with the entire space.
+  - Now, we have a manifold (which is also a space) but:
+    - A /local/ metric is associated with /each point of a manifold/.
+    - A /local/ coordinate system is associated with each point of a manifold.
+    - A manifold can be globally non-Euclidean but is /locally/[fn::https://en.wikipedia.org/wiki/Local_property] Euclidean.
+* Tangent spaces
+- Definitions for this section:
+  - We can /derive/ a vector space \(V(A)\) from a space \(A\)
+    by collecting every possible subtraction of every pair of elements of \(A\).
+    - An \(A\)-vector is a member of \( V(A) = \SetBuilder{x-y}{x,y\in A} \).
+    - A vector can be created by /subtracting two points/.
+  - Let \(S\) be a space whose ambient space is \(A\).
+  - Let \(p\) be a point in \(S\).
+  - A /plane/ in ambient space \(A\) is \( \SetBuilder{x}{n \cdot (x-b) = 0, ~ x \in A} \),
+    where \(n \in V(A)\) is a vector that is /normal/ to the plane, and \(b \in A\) is any point on the plane.
+- Understand that \(T_p(S)\), the /[[https://en.wikipedia.org/wiki/Tangent_space][tangent space]] of \(S\) at \(p\)/,
+  is a vector space of every \(A\)-vector that is tangent to \(S\) at \(p\).
+  - The /ambient space/ is implied from context.
+* Curvature
+- Understand [[https://en.wikipedia.org/wiki/Osculating_circle][/osculating circles/]] (kissing circles).
+- Understand that the [[https://en.wikipedia.org/wiki/Curvature][/curvature/]] (/scalar curvature/ or /Gaussian curvature/)
+  of a curve at a point is the reciprocal of the radius of the circle that osculates the curve at that point.
+  Formally, \( K = 1/R \).
+  - A straight line has zero curvature everywhere.
+- Osculating circles readily generalize to /osculating hyperspheres/:
+  - Replace normal lines with normal hyperplanes.
+- Understand /Riemann curvature tensor/ \cite{arnold1989mathematical}?
+- Ricci curvature function
+* Local coordinate systems
+- Understand /local coordinate systems/.
+- A local basis at \(p\) is a basis for the tangent space at \(p\).
+  - Recall:
+    - Such tangent space is a vector space.
+    - A basis corresponds to a linear coordinate system.
+- geodesic normal coordinate system?
+** Local coordinate systems on a sphere
+- Consider a sphere with center \(O = (0,0,0)\) and radius \(r\).
+- At point \((r,0,0)\), we can have these local coordinate axes (local basis vectors):
+  \((0,1,0)\) and \((0,0,1)\).
+  The sphere's tangent space at \((r,0,0)\) is a linear combination of those two local basis vectors.
+  Thus a \((r,0,0)\)-local Cartesian coordinate tuple \((u,v)\) corresponds to the ambient Cartesian coordinate tuple \((r,u,v)\).
+* What does "parallel" mean?
+- What does it mean for two lines to be [[https://www.etymonline.com/word/parallel][parallel]] ("beside one another")?
+  - In Euclidean geometry, two lines are parallel iff either they are the same line or they never meet.
+    (Recall that a line extends infinitely in both directions.)
+  - Generalize: two vectors are parallel if they have the same direction.
+- What does it mean for two vectors to have the same direction?
+- ? https://en.wikipedia.org/wiki/Vector_field#Vector_fields_on_manifolds
+- Deforming a manifold deforms its vector field in the same way?
+  - Draw two different parallel horizontal lines on a sheet of paper.
+  - Roll the paper into a cylinder.
+  - The lines becomes circles!
+- Two great circles of a sphere are "parallel" in what sense?
+- Generalize "parallel" to "[[https://en.wikipedia.org/wiki/Parallel_transport][parallel transport]]".
+  - An explanation of parallel transport https://physics.stackexchange.com/a/232119
+- [[https://en.wikipedia.org/wiki/Affine_connection#Motivation_from_surface_theory][affine connection]][fn::<2020-01-27>]
+  - /Roll/ a plane along a manifold such that the plane is always /touching/ the manifold.
+    (Recall: tangent = touching)
+* Local metrics
+- The /local metric at point \(p\)/ is \( g(p) \).
+  - Note that \( g \) is a function that takes a point and produces a function that takes two tangent vectors.
+    We follow currying convention: \( [g(p)](u,v) = g(p,u,v) \).
+- Difference from ordinary metrics:
+  - A metric takes two points, but a local metric takes two /tangent vectors/.
+  - Interpret \(g(p,u,v)\) as the local distance between point \(p+u\) and point \(p+v\).
+    - Remember point--vector addition.
+    - The points \(p+u\) and \(p+v\) often lie /outside/ the manifold,
+      although this error is small for short tangent vectors.
+  - \( d(p+u,p+v) \) and \( g(p,u,v) \) may differ.
+    The ambient space's global metric and the manifold's local metric may not coincide.
+    For example, the distance between two opposite points on a sphere is:
+    - \(2r\) if we drill through the sphere (this is the ambient space's metric);
+    - \(\pi r\) if we stay on the sphere (this is the sphere's metric).
+- If \(g(p)\) is linear (with respect to what?), we can state it as a /metric tensor/.
+  - \( g(p,\dif u,\dif v) = \sum_i \sum_k g_{ik} (\dif u_i) (\dif v_k) \)
+- The differential form of the three-dimensional Euclidean metric?
+  \[ (\dif s)^2 = (\dif x)^2 + (\dif y)^2 + (\dif z)^2 \]
+* Cartography (mapmaking)
+- [[https://en.wikipedia.org/wiki/Tissot%27s_indicatrix][Tissot's indicatrices]] visualize a metric tensor by scattering
+  many circles throughout a space
+  so that we can see how the space's metric tensor distorts them.
+  This method tells us how much our map is distorted.
+  - [[https://en.wikipedia.org/wiki/Fuller_projection][WP:Fuller projection, Dymaxion map]]
+  - [[https://en.wikipedia.org/wiki/Map%E2%80%93territory_relation][WP:Map--territory relation]]
+* Local trajectory?
+** The length of a curve in a manifold; integral of local metric?
+* Tensor notation and terminology
+- Understand that \(g_{ij}\) /notates/ a tensor, not /is/ a tensor.
+  - \(g\) is the tensor.
+  - \(g_{ij}\) is a real number.
+- ? covariance and contravariance with respect to what?
+* Synthetic differential geometry?
+- Synthetic differential geometry http://home.sandiego.edu/~shulman/papers/sdg-pizza-seminar.pdf
+  - Key idea of /nilsquare infinitesimals/: \(d \neq 0\) but \(d^2 = 0\).
+    - That's quite a statement of faith.
+    - https://en.wikipedia.org/wiki/Smooth_infinitesimal_analysis
+      - "smooth infinitesimal analysis differs from non-standard analysis in [that smooth infinitesimal analysis uses] nonclassical logic"
+- Synthetic Differential Geometry: An application to Einstein’s Equivalence Principle http://www.math.ru.nl/~landsman/scriptieTim.pdf
+- See the references in
+  - https://ncatlab.org/nlab/show/synthetic+differential+geometry
+  - https://mathoverflow.net/questions/186851/synthetic-vs-classical-differential-geometry
+* Chart, atlas?
+- Are we interested in this detail?
+- A /[[https://en.wikipedia.org/wiki/Atlas_(topology)][chart]]/ (a /coordinate chart/) for \(S\)
+  is a [[https://en.wikipedia.org/wiki/Homeomorphism][homeomorphism]] between a subspace of \(S\) and a subspace of an Euclidean space.
+- An /atlas/ is a collection of charts.
+- "There are ways of describing curves without coordinates [...]"[fn::<2020-01-26> https://en.wikipedia.org/wiki/Coordinate_system]
+* Bibliography

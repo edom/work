@@ -1,0 +1,47 @@
+#+TITLE: Geometry 3: Curves
+#+DATE: 2020-01-26 00:00:00 +0700
+* Describing curved spaces
+- Various ways to describe curved surfaces.
+- How do we describe a curved surface?
+  - By /functions/ (remember that functions are /mappings/).
+  - By /how it differs/ from a reference Euclidean space: by how it is bent.
+- https://en.wikipedia.org/wiki/Hypersurface
+** Deformation functions
+- By /[[https://en.wikipedia.org/wiki/Deformation_(mechanics)][deformation]] functions/.
+  - Curved surfaces can be described by a /homeomorphism/ from an Euclidean subspace.
+  - A function whose domain is an Euclidean subspace and whose codomain is a curved subspace of that domain.
+    - The domain's ambient space is implied from context.
+- https://math.stackexchange.com/questions/493075/is-it-correct-to-think-about-homeomorphisms-as-deformations
+- Understand how to /algebraically/ describe a /curved space/.
+  - Example:
+    - Consider a circle with origin \(O = (0,0)\) and radius \(r\).
+    - Its /analytic-algebraic/ description is \( \SetBuilder{(x,y)}{x^2+y^2=r^2} \).
+    - Its /synthetic-algebraic/ description is \( \SetBuilder{x}{d(O,x) = r} \).
+- Example ways of describing a circle with origin \(O = (0,0)\) and radius \(r\):
+  - /synthetic description/: the set of every point \(x\) where \( d(O,x) = r \).
+  - /parametric description/: the set of every coordinate tuple \((x(t),y(t))\) for all \(t \in [0,2\pi]\) where:
+    \begin{align*}
+    x(t) &= r \cos t
+    \\ y(t) &= r \sin t
+    \end{align*}
+    - See also these Wikipedia articles:
+      - [[https://en.wikipedia.org/wiki/Parametric_equation][parametric equations]]
+      - [[https://en.wikipedia.org/wiki/Parametric_surface][parametric surface]]
+  - /algebraic description/: the set of every coordinate tuple \((x,y) \in \Real^2\) where
+    \begin{align*}
+    x^2 + y^2 &= r^2
+    \end{align*}
+** Surface of revolution
+- Understand [[https://en.wikipedia.org/wiki/Surface_of_revolution][surfaces of revolution]].
+* Conic sections
+- history or conic sections, definition of ellipse, parabola, hyperbola; by the angle of intersection
+  - [[https://www.etymonline.com/word/ellipse][ellipse]] = fall short, deficit
+  - [[https://www.etymonline.com/word/parable][parabola]] = alongside-throw
+  - [[https://www.etymonline.com/word/hyperbole][hyperbola]] = over-throw
+  - [[https://en.wikipedia.org/wiki/Parabola][WP:Parabola]]
+  - Put a [[https://commons.wikimedia.org/wiki/File:DoubleCone.png#][double cone]] upright on a table, and intersect it with a plane.
+    - Ellipse results if the plane is less steep than the double cone.
+    - Parabola results if the plane is parallel to the double cone.
+    - Hyperbola results if the plane is more steep than the double cone.
+    - An ellipse and a parabola intersect one [[https://en.wikipedia.org/wiki/Cone][cone]] of the double cone.
+    - A hyperbola intersect both cones of the double cone.
