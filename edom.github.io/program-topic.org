@@ -1,85 +1,489 @@
 #+TITLE: Topics in programming
 #+DATE: 2019-11-28 00:00:00 +0700
-* Current interests
-** <2020-02-09> Model-based development
-** <2020-02-09> Alternative Lisp macros
+* <2020-02-27> How should we design a programming/modeling language?
+- A programming language interpreter is a program.
+  Therefore, how should we design a program?
+- Because compilers/interpreters are programs, the principles of designing good compilers/interpreters
+  must include the principles of designing good programs.
+- Compilers are excellent candidates for "pure" programs (data transformation with minimal state and side-effects).
+- Which of these?
+  - Start with a small and reasonable language (such as arithmetic expression),
+    and improve/minimize/generalize it while trying to preserve reasonability.
+  - Start with requirements/constraints, including implementation requirements.
+    - Resolve conflicting requirements.
+  - Start with user's pain points.
+    - Do not try to please everyone.
+      First try to please yourself.
+      Scratch your own itch.
+      - But then the scope creeps into designing computer user interface/experience and not only a programming language!
+  - A combination of them.
+- Nanopass has an interesting problem: designing/naming significant intermediate languages and keeping them stable.
+- When should we be concerned with implementation?
+  Early, late, or never?
+  What is the point of creating a programming language that cannot be implemented?
+- There are always problems.
+  Sometimes the right solution is to redefine a problem as a /deliberate consequence/,
+  a well-thought engineering trade-off, and be honest about it?
+* <2020-02-27> Meaningful expressions with meaningless subexpressions
+Here we are arguing for the laziest possible evaluation strategy.
+
+If \( f(x,y) := x \), what should \( f(0, 1/0) \) be?
+
+\( f(0,1/0) = 0 \)
+
+\( f(1/0,0) = 1/0 \)
+
+An expression is /meaningful/ iff it has a meaning, that is, iff the expression is in the domain of the chosen semantic function.
+
+\( 1/0 \) /is/ an expression, although meaningless.
+It is OK syntactically, but not semantically.
+
+Should a function evaluate its arguments?
+Both answers make sense.
+The language users are in a better position to answer that than the language designers are,
+so /the language users should decide/ which of their functions evaluate their arguments and which do not.
+That is, those decisions should be made at language usage time, not at language design time.
+
+Thus, a language should not be either applicative-order or normal-order;
+it should be all of them, programmer-defined evaluation order.
+If the programmer does not care about the order,
+then the language should choose the laziest evaluation order
+to maximize the meaningfulness of expressions with meaningless subexpressions.
+
+But won't this make the language harder to analyze?
+
+Aren't we reinventing Lisp fexprs here, with all its strengths and problems?
+
+If an expression has a meaningless subexpression, should the entire expression be meaningless?
+
+No.
+
+For example, the expression "\(1/0\) is meaningless" is meaningful although it has a meaningless expression.
+
+Conversely, the expression "If X then Y" where X and Y are unrelated is perhaps meaningless although it has meaningful clauses.
+
+What is the difference between "meaningless" and "false"?
+
+A meaningful sentence is either true or false.
+A meaningless sentence is neither true nor false.
+But is the distinction between meaningfulness and meaninglessness even meaningful?
+
+A meaningless expression does not necessarily poison its containing expression.
+
+When does interpretation occur?
+When and where is meaning created?
+
+Should we allow non-sensical expressions?
+
+It is not illegal to write [[https://en.wikipedia.org/wiki/Colorless_green_ideas_sleep_furiously]["colorless green ideas sleep furiously"]];
+it is just meaningless.
+But it may be meaningful to some [[https://en.wikipedia.org/wiki/Synesthesia][synesthetes]]!
+Thus the question is: meaningless /to whom/?
+Is the problem with the expression or the interpreter?
+
+We can trivially totalize the semantic function by declaring that each previously meaningless expression now means itself.
+However, in practice, we often want errors to be raised as early as possible.
+
+Example:
+(=$x= means evaluate =x= before calling the head of the expression being evaluated.)
+
+#+BEGIN_EXAMPLE
+(define (f x y) x) ;; callee does minimum evaluation
+(define (g $x $y) x) ;; callee does maximum evaluation
+
+(f 0 (/ 1 0)) ;; 0; caller does minimum evaluation
+(f 0 $(/ 1 0)) ;; error, blame (/ 1 0)
+(g 0 (/ 1 0)) ;; error, blame the y argument of g
+
+;; How do we make this work?
+;; Should we make this work?
+(define x (cons 1 x))
+(nth x 0)
+(nth x 1)
+(nth x 2)
+#+END_EXAMPLE
+
+But, in practice, Lisp programmers don't have much problem with the applicative order, so why are we making a big deal out of this issue?
+* <2020-02-27> Idea: run time, compile time, language design time
+- Before run time, there is compile time.
+- Before compile time, there is /language design time/.
+* <2020-02-09> Model-based development, transformation-oriented programming
+- Not necessarily Java http://cs.ioc.ee/mbjsdt/files/Model_based_java_project_final.pdf
+- transformation-oriented programming https://www.semanticscholar.org/paper/Transformation-oriented-programming%3A-A-development-Winter-Roach/e59652ca0373311a27bc4a420e1bb080ce35b8fa
+- too much UML? https://modeling-languages.com/
+- All programming languages can function as modeling languages and code generators.
+* <2020-02-09> Alternative Lisp macros
 - expander-passing-style
 - fexpr
-** <2020-02-09> Object-functional programming
-** <2020-02-09> C parser/interpreter/transformer
-* Linear logic and garbage collection
-- Linear Lisp can obviate garbage collection, but what's the catch? http://home.pipeline.com/~hbaker1/LinearLisp.html
-  - from https://github.com/fare/moll
-- https://wiki.c2.com/?LinearTypes
-- Wadler's "Linear types can change the world!" https://pdfs.semanticscholar.org/24c8/50390fba27fc6f3241cb34ce7bc6f3765627.pdf
-* <2019-11-27> Some hints from Norvig's PAIP
-Some of the hints from Norvig's PAIP[fn::https://norvig.com/Lisp-retro.html] is still relevant:
-- "#8 Whenever you develop a complex data structure, develop a corresponding consistency checker. (p. 90)"
-- "#22 We can write a compiler as a set of macros. (p. 277)"
-- "#28 Prolog is similar to Lisp on the main points. (p. 381)"
-I can attest to this. I wrote Prolog interpreters and Racket macros, and they feel quite similar; Prolog clauses and Racket match clauses feel similar.
-- "#52 A word to the wise: don't get carried away with macros. (p. 855)" Indeed, don't get carried away with anything.
-* <2019-11-07> Digression: Modeling is common to physics and programming
-Physics is about modeling reality.
 
-Programming is about modeling computers and reality.
-* Make machine work more?
-These old contents should be rewritten.
-** Improve machine intelligence
-- Find how to make machine understand causation, in principle; find the theory
-  - See also: causation in [[file:program.html]]
-  - How do we make a machine that understands causation?
-    - "Causal Cognition in Human and Nonhuman Animals: A Comparative, Critical Review", 2007[fn::http://derekcpenn.com/Penn_2007-Causal_Cognition_in_Human_and_Nonhuman_Animals.pdf]
-    - "Causal Reasoning in Rats", 2006[fn::https://www.psych.uni-goettingen.de/de/cognition/publikationen-dateien-waldmann/2006_science.pdf]
-    - "Causal knowledge in animals", 1995
-    - Understand reality, the world, the Universe
-      - [[file:philo.html][Philosophy]]: armchair philosophy; should be rewritten to focus on causation
-        - [[file:mind.html][Mind]]: philosophy of mind
-      - [[file:nature.html][Nature Research Group]]: physics and its philosophy
-- Demonstrate that a machine understands causation
-  - How do we know whether X understands causation?
-** Multiply software engineer productivity by 20?
-- [[file:softeng.html][Software engineering]]: come up with a science to underlie software engineering
-  - [[file:increase.html][Increase software engineer productivity?]]
-    - Measure programmer productivity
-      - [[file:economics.html][Understand economics]], especially productivity
-- [[file:prolog.html][Use the Prolog programming language]]
-  - Make Prolog more suitable for programming in the large
-    - Make a module system for Prolog
-  - [[file:enterprise.html][Use Prolog for model-driven software engineering]]
-  - Make an untyped Haskell/ML-like language in Prolog
-  - Seamlessly interoperate programming languages
-    [fn::I desire more than Will Crichton; I do not want to add annotations to the original code http://willcrichton.net/notes/the-coming-age-of-the-polyglot-programmer/]
-    - 1996 \cite{barrett1996automated}
-- [[file:opensrc.html][Making contributable open-source projects]]
-  - [[file:community.html][Building online communities]]
+Lisp macros: expander-passing style
+They say "expansion-passing", but I think "expander-passing" is more suggestive.
+https://legacy.cs.indiana.edu/~dyb/pubs/LaSC-1-1-pp53-75.pdf
 
+More flexible and powerful than conventional Lisp macros.
+
+https://www.reddit.com/r/lisp/comments/y4xfq/expansionpassing_style_a_general_macro_mechanism/
+
+What?
+
+- https://www.reddit.com/r/scheme/comments/e0lj08/lambda_eval_and_macros/
+- https://www.reddit.com/r/lisp/comments/74tty4/why_common_lisp_instead_of_scheme_or_a_dialect/
+
+But /who needs macros if we have model-driven development/?
+We transform model (code that describes code) into code.
+We generate code.
+
+Macros cons:
+- Macros complicate analysis.
+- Macro calls look like function calls but don't behave like function calls.
+
+Macros /are/ functions that take ASTs and give ASTs.
+
+Macros are restricted program transformations.
+
+Perhaps those who think macros are beautiful have never written a program analyzer.
+
+Reader macros complicate parsing: the parser has to include the entire interpreter.
+
+Lisp without macros; write program transformers
+https://news.ycombinator.com/item?id=14335360
+* <2020-02-09> Unifying objects and functions
+** Object = Value
+In function programming, everything is a value.
+
+In object programming, everything is an object.
+
+Therefore, in an objectal-functional language, the set of values and the set of objects are equal.
+
+Formally:
+
+#+BEGIN_EXAMPLE
+Object ⊆ Value
+Value  ⊆ Object
+-----------------
+∴ Object = Value
+#+END_EXAMPLE
+** Object-as-function and function-as-object
+Object as function: An object is a function : message → value.
+
+Method as function: A method is a function : object × message → value.
+
+Function as object: A function is an object that only understands an anonymous message.
+
+This C++ type unifies method-calls, macros, and lambdas:
+#+BEGIN_EXAMPLE
+using Func = Value(World,Value);
+#+END_EXAMPLE
+
+We can apply evaluator-passing-style, similar to Dybvig--Friedman--Haynes 1988 expander-passing-style
+\cite{dybvig1988expansion}[fn::<2020-02-11> https://www.researchgate.net/profile/Christopher_Haynes/publication/2727860_Expansion-Passing_Style_A_General_Macro_Mechanism/links/02bfe5119056cc275d000000/Expansion-Passing-Style-A-General-Macro-Mechanism.pdf],
+but with no separation between expansion-time and run-time.
+
+(Isn't this just Lisp fexprs?)
+
+http://www.dalnefre.com/wp/2011/11/fexpr-the-ultimate-lambda/
+
+Key idea: The callee controls evaluation.
+
+The essence of continuation-passing-style is that the /callee/ controls evaluation.
+Normally, the /caller/ controls evaluation.
+Which should control evaluation: the caller or the callee?
+Are there cases for both, or is one of them superior?
+
+Remember that a Value can be a Pair (a cons cell, a list).
+
+#+BEGIN_EXAMPLE
+(f 0) ;; lambda
+(m 0) ;; macro
+(window set-visible true) ;; method call
+#+END_EXAMPLE
+
+What?
+
+#+BEGIN_EXAMPLE
+Error subset Object
+Thus Value = Value -> Value
+Function = Value -> Value
+but Function subset Value
+Predicate = Object -> Boolean
+Array = Nat -> Value
+Hashtable = Value -> Value
+eval : Value -> Value
+#+END_EXAMPLE
+** The compiled language and the interpreted language do not have to be the same language
+The compiled language can be a subset of the interpreted language.
+
+The /freely-compilable subset/ is a subset of the language
+that can be compiled without having to have the compiler at runtime.
+** Domains?
+Dana Scott solved \( D^D = D \)?
+https://mathoverflow.net/questions/256870/relationship-of-lambda-calculus-to-the-rest-of-math
+** Meta-object protocol?
+#+BEGIN_EXAMPLE
+Class = Object
+#+END_EXAMPLE
+
+- get the methods understood by an object
+
++ relational
+Value = Object = Relation = Predicate?
+Relation (multirelation) = Value -> List
+List subset Value
+(rel forall (x) (or (equal x john) (equal x mary)))
+(rel exists (x) (print (person x)) (fail))
+* <2020-02-09> We should make a C parser/interpreter/transformer/compiler in Lisp
+Create a Lisp sublanguage like this:
+#+BEGIN_EXAMPLE
+(defvar *parser*
+  '(
+    (token (or (keyword) (identifier) (constant) (string-literal) (punctuator)))
+    ...
+  ))
+
+(interpret *parser* stream)
+#+END_EXAMPLE
+
+Expression:
+- (and A B C) is sequence
+- (or A B C) is choice
+
+Then translate Annex A ("Language syntax summary") of [[http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf][C11 standard draft]] into that Lisp sublanguage.
+
+We should be able to interoperate with C because it is a common language.
+
+S-expression representation of a rule?
+
+C11 standard; syntax; Annex A; p. 74?
+#+BEGIN_EXAMPLE
+  (pp-number (or
+    (digit)
+    ("." digit)
+    (pp-number digit)
+    (pp-number identifier-nondigit)
+    (pp-number "e" sign)
+    (pp-number "E" sign)
+    (pp-number "p" sign)
+    (pp-number "P" sign)
+    (pp-number ".")
+  ))
+#+END_EXAMPLE
+
+From that, generate:
+
+#+BEGIN_EXAMPLE
+(defun (parse-pp-number stream)
+  (parse-first
+    (parse-digit stream)
+    (parse-const "." stream)
+)
+#+END_EXAMPLE
+* <2020-02-21> Generic functions vs message passing
+Let a be an array.
+Let h be a hash-table.
+
+The problem: we do not want array-get and hash-get.
+
+We want to be able to replace an associative list with a hash table without changing the codes that use it.
+
+Three solutions:
+
+GET special form
+
+Problem: user cannot extend (but we can DEFGET; but special forms are ugly; they complicate program analysis)
+
+#+BEGIN_EXAMPLE
+(get a 0)
+(get h 'key)
+#+END_EXAMPLE
+
+GET generic function
+
+Problem: requires type information; does not interact nicely with subtyping
+https://stackoverflow.com/questions/9544137/how-to-specialize-generic-function-for-subclasses-of-given-class
+
+#+BEGIN_EXAMPLE
+(get a 0)
+(get h 'key)
+#+END_EXAMPLE
+
+GET message
+
+Problem: less efficient (perhaps the least grave problem)
+
+#+BEGIN_EXAMPLE
+(a get 0)
+(h get 'key)
+#+END_EXAMPLE
 * <2019-08-17> On programs and software
 I find it easier to define "program" than to define "software".
 
 Perhaps we should focus on /programs/ instead of software.
 We can talk about computer programs without talking about software.
 After all, Tukey 1958 intended "software" to mean computer programs.
-* "Computer science" should be renamed
-<2019-08-11>
+* <2020-02-15> A Lisp that unifies function application, macro expansion, and message passing
+#+BEGIN_EXAMPLE
+(macro exp ...)
+(function arg ...)
+(object command arg ...)
+#+END_EXAMPLE
 
-Our "computer science" label has misled people into thinking that we can fix their computers.
+#+BEGIN_EXAMPLE
+using Dispatch = void(World&, Value* result, Value& self, Value& args);
+#+END_EXAMPLE
+* <2020-02-16> Subtyping imposes order
+Due to subtyping, the clauses of =cond= are not interchangeable.
+#+BEGIN_EXAMPLE
+(cond
+  ((vectorp x) "vector")
+  ((stringp x) "string"))
+#+END_EXAMPLE
 
-Although the first computer scientists did study computers,
-computer scientists now don't study computers anymore because software has grown too big;
-now computer scientists study mostly software,
-and the hardware is supposed to be studied by /computer engineers/.
+Is rearranging the program supposed to change its meaning?
 
-A honestly-named computer-science student should study both hardware and software
-because a computer has a hardware part and a software part,
-But, in fact, a computer-science student studies much more software than hardware,
-and will often work with software while taking hardware for granted in their jobs.
+Why does order matter?
 
-Perhaps universities should also merge law departments and computer science departments into /software departments/.
+Does computation require order?
 
-On second thought, perhaps we should not call ourselves "software scientists"
-because we don't even know what software is.
-Perhaps we should just call ourselves "computer programmers".
+In total functional programming, the evaluation order may change performance but does not change result.
+
+Why is English grammar ordered?
+Why does "a dog bites a man" and "a man bites a dog" mean different things?
+Latin does not require this.
+
+Why do the logical terms bite(man,dog) and bite(dog,man) differ?
+
+Why does the verb create an asymmetry between the subject and the object?
+* <2020-02-21> Source code should be optimized for what?
+Source code may be optimized for reading, writing, or changing.
+
+Implementation details should be optimized for change?
+
+Interface should be optimized for reading?
+* <2020-02-21> Do all Common Lisp implementations have unhelpful error messages?
+https://www.snellman.net/blog/archive/2007-12-19-pretty-sbcl-backtraces.html
+* <2020-02-21> On quote and eval
+It does not make sense that (equal (quote 1) 1) evaluates to false but (quote 1) evaluates to 1;
+how would equal evaluate its arguments!?
+Thus eval != unquote, and (quote x) evaluates to itself, i.e. (quote x).
+
+But why should quote satisfy (quote x) != x for all x?
+* <2020-02-21> On errors
+An error is an unintended behavior, unexpected outcome?
+
+Unintended behavior?
+How do we measure intention?
+
+Error is like weed.
+They are subjective concepts.
+An error is an undesirable condition.
+Why are errors undesirable?
+Because they complicate programs.
+
+We expect operating systems to run forever.
+We expect them to never err.
+We expect them to flawlessly reclaim the resources leaked by dead processes.
+We expect them to be stable in spite of badly written user programs.
+
+An operating system has to prepare for the worst.
+Some difficult errors to recover from are out of disk space, out of memory, and disk failure.
+They tend to happen at the most inconvenient time.
+
+Some errors such as stack overflow are fundamental assumption violations.
+The only sensible thing to do here is to produce diagnostics and abort the program.
+
+Error handling has diminishing return.
+It pays off to handle common errors.
+It does not pay off to handle uncommon errors.
+
+Error model:
+- cost incurred by the error when it happens in an unhandled manner
+- cost incurred by the error when it happens in a handled manner
+- cost of writing the code that handles the error;
+  this should include the increased maintenance burden due to reduced readability
+- probability of the error to happen
+
+Sometimes the cost is emotional and not monetary.
+It is hard to quantify emotional costs.
+But it is real.
+Users hate programs that crash.
+
+Since 1726, an error is a "difference between observed value and true value".[fn::https://www.etymonline.com/word/error]
+
+An error is a difference between what is and what should be.
+
+Midori programming language
+ [fn::http://joeduffyblog.com/2015/11/03/blogging-about-midori/]
+ [fn::http://joeduffyblog.com/2016/02/07/the-error-model/].
+
+Is an error a side-effect?
+Both errors and side-effects are unintended.
+
+Let \(f'\) be what we think a system does.
+Let \(f\) be what the system actually does.
+Then our error is \(f' - f\) which has to be equal to \(- (f - f')\).
+If each of \(f\) and \(f'\) is a logic formula in a structure with domain \(D\) and interpretation \(I\),
+then \(-\) is symmetric difference, and negation is made with respect to \(D\).
+
+For example, we think the system implements \( a \).
+It turns out that the system implements \( b \).
+Then the error is \((a \wedge \neg b) \vee (b \wedge \neg a)\).
+Let each of \(a\) and \(b\) be a formula.
+Define their symmetric difference \(a - b\) as \((a \wedge \neg b) \vee (b \wedge \neg a)\),
+similar to set-theoretic symmetric difference[fn::https://en.wikipedia.org/wiki/Symmetric_difference].
+
+For example, we think the system implements \( x \mapsto x + 3 \).
+It turns out that the system implements \( x \mapsto x + 2 \).
+Then the error is \(x \mapsto 1\).
+* <2020-02-21> Associations
+A modeling language should expose associations.
+
+Associations can be implemented as association lists or hash tables.
+Hash tables are implementation details.
+
+Associations should also be applicable like lambdas/procedures/functions.
+* <2020-02-21> Unifying interpretation and compilation?
+#+BEGIN_EXAMPLE
+M = semantic (a model)
+interpret L1 : S1 -> M
+interpret L2 : S2 -> M
+compile L1 L2 : S1 -> S2
+Semantic preservation constraint:
+interpret L2 (compile L1 L2 s1) = interpret L1 s1
+#+END_EXAMPLE
+
+The processor is a hardware /interpreter/ for machine-code language.
+All languages are interpreted!
+Hardware vs software interpreter
+
+The compiler takes the interpreter's internal state at the time the compiler is called.
+The compiler itself is an interpreted procedure.
+But the compiler should not always be included in the output.
+But then the program cannot use eval.
+
+read should not allow arbitrary evaluation. Otherwise the parser requires the whole interpreter!
+
+#+BEGIN_EXAMPLE
+interpret : Data -> Meaning
+#+END_EXAMPLE
+
+Data is interpreted into meaning
+Code is also interpreted into meaning
+Code is executable data?
+* <2020-02-21> Intelligence = Correlation + Curiosity?
+Curiosity must be built-in. Otherwise a baby would just sit idle.
+
+The strength of the belief that X causes Y is modified by correlating X and Y over a short period of time.
+
+Prediction = temporal correlation (correlation across time)
+
+Pattern-recognition = spatial correlation (correlation across space)
+
+Causation = correlation over short temporal distance
+* <2020-02-21> What is a character?
+The language does not define "character".
+There are no character strings; there are only buffers (byte strings).
+
+The user is responsible for defining "character".
 * Software research
 This should be moved to the "Programming" section above.
 ** <2019-08-27> A direction for software engineering
@@ -165,19 +569,6 @@ We can borrow the host language's semantics.
   - Some backward compatibility: TeX2 (semantic TeX markup)?
   - <2020-01-20> I used to like GHC/Cabal, but now I hate them because they have become bloated.
     I think 100 MB is too much for Pandoc.
-* On the P vs NP problem?
-- [[file:pnptry.html][On the P vs NP problem]]
-  - Computing Research Group: define computation
-    - [[file:logic.html][Logic]]?
-      Should we rewrite this article from theory-oriented to programming-oriented?
-* <2019-11-27> DrRacket software archeology
-What can DrRacket browser do? Can it render some static HTML?
-
-Ask in the mailing list?
-
-How does DrRacket find the Scribble documentation URL for a syntax-object?
-
-The entry point is in drracket/drracket.rkt.
 * Politics, rants, and complaints
 ** <2019-07-06> Network Address Translation contributes to oppression
 NAT is unholy: It contributes to the oppression of dissidents and journalists, because it hampers peer-to-peer technologies.
@@ -264,74 +655,6 @@ It's just a matter time before there is a software accident as massive as Cherno
 
 I think most software accidents can be attributed to the hubris of some humans,
 be it of managers, engineers, or operators, or a combination of them.
-* Databases? Designing databases?
-Datafun[fn::https://www.youtube.com/watch?v=gC295d3V9gE]
- [fn::http://www.rntz.net/datafun/]
-
-What Datomic brings to businesses[fn::https://medium.com/@val.vvalval/what-datomic-brings-to-businesses-e2238a568e1c]:
-Interesting: inherent versioning, internally log-structured, internally append-only.
-My only objection: database should be a library, not a separate operating system process.
-
-What[fn::https://augustl.com/blog/2018/datomic_look_at_all_the_things_i_am_not_doing/]
-
-Database design boils down to these questions:
-- how do we store (arrange, lay out) data on disk?
-- how do we make the database replicate automatically just by adding a node to a cluster?
-  etcd?
-
-Why do we store data?
-Because we will need it later.
-- accounting
-- As a person, I don't need convenience store receipts. But a company needs them for accounting.
-
-The stored data has to be findable/discoverable/rediscoverable.
-
-* Models, meta-models, and ontologies?
-2006 article "On Relationships among Models, Meta Models and Ontologies" http://dsmforum.org/events/DSM06/Papers/14-saeki.pdf
-
-2007 presentation "Models versus Ontologies - What's the Difference and where does it Matter?"
-http://www.cs.bham.ac.uk/~bxb/news/Colin.pdf
-
-2006 article "On the Relationship of Ontologies and Models"
-https://pdfs.semanticscholar.org/07d3/0822dd03a46bf25131baa0b72007df6d0e27.pdf
-
-2004 article "How Models Are Used to Represent Reality"
-http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.433.860&rep=rep1&type=pdf
-
-* Causal inference and machine learning?
-- Judea Pearl 2018 article "Theoretical Impediments to Machine Learning With Seven Sparks from the Causal Revolution" summarizes
-seven tasks that causal modeling can do but current machine learning can't.
-https://arxiv.org/abs/1801.04016
-
-It would be interesting to combine Schmidhuber et al.'s algorithmic probability/universal intelligence and Pearl et al.'s causal modeling.
-* Can we make memory a compressible resource?
-Yes, by indirection, but it requires change in the programming language level, and not in the operating system level.
-
-#+BEGIN_EXAMPLE
-struct mblk {
-    // Assume 4-byte alignment; bitwise-and by -4 before dereferencing the pointer.
-    uintptr_t ptr_and_flags; // pointer, GC pin flag, GC mark flag
-};
-
-// Rewrite
-void* ptr = malloc(size);
-// to
-mblk_id ptr = machine_alloc(&state, size);
-
-// Rewrite
-T* ptr;
-T val;
-val = *(ptr+offset);
-*(ptr+offset) = val;
-// to
-mblk_id ptr;
-T val;
-machine_read(&state, ptr, offset*sizeof(T), &val);
-machine_write(&state, ptr, offset*sizeof(T), &val);
-#+END_EXAMPLE
-
-Then, forbid casting between pointers and integers.
-Or, auto-pin such cast pointers.
 * Programming?
 ** Intelligence
 - Doing the last work we will ever need
@@ -383,7 +706,23 @@ OCSP responder?
 - OpenSSL
 - [[https://github.com/google/easypki][google/easypki: Creating a certificate authority the easy way]]
 - https://github.com/recursecenter/ca-tools, requires ruby
-** Making a search engine?
+** android termux: can have bash, ssh, git, vim, emacs, and more on android
+  - 2018-09-08: Too bad there is no clear way for android to charge while OTG (hosting) USB.
+    Otherwise phones could kill netbooks.
+  - 2018-09-08: a problem: can't close session with android keyboard (requires a physical keyboard plugged in via OTG USB)
+** What is TurnKey GNU/Linux?
+[[https://www.turnkeylinux.org/][
+TurnKey GNU/Linux: 100+ free ready-to-use system images for virtual machines, the cloud, and bare metal.]]
+* <2020-02-10> Making a search engine?
+** <2020-02-10> Probabilistic relational model?
+- Idea:
+  - Scan the character string into list of terms.
+  - If term X and term Y occur in the same attention window, increase r(X,Y).
+  - 16-term attention window.
+** <2020-02-10> Existing implementations?
+- [[https://lucene.apache.org/core/][Apache Lucene]]?
+- PostgreSQL full text index?
+** <2020-02-10> What
 - Stop words (word ignore list) deal with index construction, not about query comprehension.
   The search may ignore stop words when crawling, but it should not ignore stop words in queries.
 
@@ -564,21 +903,165 @@ OCSP responder?
     - https://en.wikipedia.org/wiki/Blekko
 
 - 1999 article [[http://www.tk421.net/essays/babel.html][Indexing the Internet]]
-** android termux: can have bash, ssh, git, vim, emacs, and more on android
-  - 2018-09-08: Too bad there is no clear way for android to charge while OTG (hosting) USB.
-    Otherwise phones could kill netbooks.
-  - 2018-09-08: a problem: can't close session with android keyboard (requires a physical keyboard plugged in via OTG USB)
-** What is TurnKey GNU/Linux?
-[[https://www.turnkeylinux.org/][
-TurnKey GNU/Linux: 100+ free ready-to-use system images for virtual machines, the cloud, and bare metal.]]
-* Self-composable programming?
+* Databases? Designing databases?
+What I want:
+- Simple backup: just add a node to the cluster.
+- A library linked into the application.
+  Not a separate server.
+
+Datafun[fn::https://www.youtube.com/watch?v=gC295d3V9gE]
+ [fn::http://www.rntz.net/datafun/]
+
+What Datomic brings to businesses[fn::https://medium.com/@val.vvalval/what-datomic-brings-to-businesses-e2238a568e1c]:
+Interesting: inherent versioning, internally log-structured, internally append-only.
+My only objection: database should be a library, not a separate operating system process.
+
+What[fn::https://augustl.com/blog/2018/datomic_look_at_all_the_things_i_am_not_doing/]
+
+Database design boils down to these questions:
+- how do we store (arrange, lay out) data on disk?
+- how do we make the database replicate automatically just by adding a node to a cluster?
+  etcd?
+
+Why do we store data?
+Because we will need it later.
+- accounting
+- As a person, I don't need convenience store receipts. But a company needs them for accounting.
+
+The stored data has to be findable/discoverable/rediscoverable.
+* Messy article seeds
+** Linear logic and garbage collection
+- Linear Lisp can obviate garbage collection, but what's the catch? http://home.pipeline.com/~hbaker1/LinearLisp.html
+  - from https://github.com/fare/moll
+- https://wiki.c2.com/?LinearTypes
+- Wadler's "Linear types can change the world!" https://pdfs.semanticscholar.org/24c8/50390fba27fc6f3241cb34ce7bc6f3765627.pdf
+** <2019-11-27> Some hints from Norvig's PAIP
+Some of the hints from Norvig's PAIP[fn::https://norvig.com/Lisp-retro.html] is still relevant:
+- "#8 Whenever you develop a complex data structure, develop a corresponding consistency checker. (p. 90)"
+- "#22 We can write a compiler as a set of macros. (p. 277)"
+- "#28 Prolog is similar to Lisp on the main points. (p. 381)"
+I can attest to this. I wrote Prolog interpreters and Racket macros, and they feel quite similar; Prolog clauses and Racket match clauses feel similar.
+- "#52 A word to the wise: don't get carried away with macros. (p. 855)" Indeed, don't get carried away with anything.
+** <2019-11-07> Digression: Modeling is common to physics and programming
+Physics is about modeling reality.
+
+Programming is about modeling computers and reality.
+** Make machine work more?
+These old contents should be rewritten.
+*** Improve machine intelligence
+- Find how to make machine understand causation, in principle; find the theory
+  - See also: causation in [[file:program.html]]
+  - How do we make a machine that understands causation?
+    - "Causal Cognition in Human and Nonhuman Animals: A Comparative, Critical Review", 2007[fn::http://derekcpenn.com/Penn_2007-Causal_Cognition_in_Human_and_Nonhuman_Animals.pdf]
+    - "Causal Reasoning in Rats", 2006[fn::https://www.psych.uni-goettingen.de/de/cognition/publikationen-dateien-waldmann/2006_science.pdf]
+    - "Causal knowledge in animals", 1995
+    - Understand reality, the world, the Universe
+      - [[file:philo.html][Philosophy]]: armchair philosophy; should be rewritten to focus on causation
+        - [[file:mind.html][Mind]]: philosophy of mind
+      - [[file:nature.html][Nature Research Group]]: physics and its philosophy
+- Demonstrate that a machine understands causation
+  - How do we know whether X understands causation?
+*** Multiply software engineer productivity by 20?
+- [[file:softeng.html][Software engineering]]: come up with a science to underlie software engineering
+  - [[file:increase.html][Increase software engineer productivity?]]
+    - Measure programmer productivity
+      - [[file:economics.html][Understand economics]], especially productivity
+- [[file:prolog.html][Use the Prolog programming language]]
+  - Make Prolog more suitable for programming in the large
+    - Make a module system for Prolog
+  - [[file:enterprise.html][Use Prolog for model-driven software engineering]]
+  - Make an untyped Haskell/ML-like language in Prolog
+  - Seamlessly interoperate programming languages
+    [fn::I desire more than Will Crichton; I do not want to add annotations to the original code http://willcrichton.net/notes/the-coming-age-of-the-polyglot-programmer/]
+    - 1996 \cite{barrett1996automated}
+- [[file:opensrc.html][Making contributable open-source projects]]
+  - [[file:community.html][Building online communities]]
+** "Computer science" should be renamed
+<2019-08-11>
+
+Our "computer science" label has misled people into thinking that we can fix their computers.
+
+Although the first computer scientists did study computers,
+computer scientists now don't study computers anymore because software has grown too big;
+now computer scientists study mostly software,
+and the hardware is supposed to be studied by /computer engineers/.
+
+A honestly-named computer-science student should study both hardware and software
+because a computer has a hardware part and a software part,
+But, in fact, a computer-science student studies much more software than hardware,
+and will often work with software while taking hardware for granted in their jobs.
+
+Perhaps universities should also merge law departments and computer science departments into /software departments/.
+
+On second thought, perhaps we should not call ourselves "software scientists"
+because we don't even know what software is.
+Perhaps we should just call ourselves "computer programmers".
+** On the P vs NP problem?
+- [[file:pnptry.html][On the P vs NP problem]]
+  - Computing Research Group: define computation
+    - [[file:logic.html][Logic]]?
+      Should we rewrite this article from theory-oriented to programming-oriented?
+** <2019-11-27> DrRacket software archeology
+What can DrRacket browser do? Can it render some static HTML?
+
+Ask in the mailing list?
+
+How does DrRacket find the Scribble documentation URL for a syntax-object?
+
+The entry point is in drracket/drracket.rkt.
+** Models, meta-models, and ontologies?
+2006 article "On Relationships among Models, Meta Models and Ontologies" http://dsmforum.org/events/DSM06/Papers/14-saeki.pdf
+
+2007 presentation "Models versus Ontologies - What's the Difference and where does it Matter?"
+http://www.cs.bham.ac.uk/~bxb/news/Colin.pdf
+
+2006 article "On the Relationship of Ontologies and Models"
+https://pdfs.semanticscholar.org/07d3/0822dd03a46bf25131baa0b72007df6d0e27.pdf
+
+2004 article "How Models Are Used to Represent Reality"
+http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.433.860&rep=rep1&type=pdf
+** Causal inference and machine learning?
+- Judea Pearl 2018 article "Theoretical Impediments to Machine Learning With Seven Sparks from the Causal Revolution" summarizes
+seven tasks that causal modeling can do but current machine learning can't.
+https://arxiv.org/abs/1801.04016
+
+It would be interesting to combine Schmidhuber et al.'s algorithmic probability/universal intelligence and Pearl et al.'s causal modeling.
+** Can we make memory a compressible resource?
+Yes, by indirection, but it requires change in the programming language level, and not in the operating system level.
+
+#+BEGIN_EXAMPLE
+struct mblk {
+    // Assume 4-byte alignment; bitwise-and by -4 before dereferencing the pointer.
+    uintptr_t ptr_and_flags; // pointer, GC pin flag, GC mark flag
+};
+
+// Rewrite
+void* ptr = malloc(size);
+// to
+mblk_id ptr = machine_alloc(&state, size);
+
+// Rewrite
+T* ptr;
+T val;
+val = *(ptr+offset);
+*(ptr+offset) = val;
+// to
+mblk_id ptr;
+T val;
+machine_read(&state, ptr, offset*sizeof(T), &val);
+machine_write(&state, ptr, offset*sizeof(T), &val);
+#+END_EXAMPLE
+
+Then, forbid casting between pointers and integers.
+Or, auto-pin such cast pointers.
+** Self-composable programming?
 - [[https://arxiv.org/abs/1612.02547][1612.02547 - Self-composable Programming]]
-* Generate REST API from database
+** Generate REST API from database
 - [[https://github.com/PostgREST/postgrest][PostgREST/postgrest: REST API for any Postgres database]]
   - https://restifydb.com/
   - https://www.progress.com/blogs/restify-databases-expose-your-database-to-rest-web-services
   - http://www.odata.org/getting-started/understand-odata-in-6-steps/
-* Software and law
+** Software and law
 Creating a law without caring about how it will be enforced is like creating a program without caring about how it will be executed.
 The result: both the nation and the machine feel slow.
 

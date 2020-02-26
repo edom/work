@@ -88,7 +88,7 @@ This inserts verbatim "a" followed by text "b=":
 Is this still true in org 9?
 [[https://stackoverflow.com/questions/27284913/how-to-escape-square-bracket-in-org-mode-links][emacs - How to escape square bracket in org mode links? - Stack Overflow]]
 **** <2018-09-16> org-ref: "References" heading should be h2, but is h1
-*** Are you willing to work around some Org Mode annoyances?
+*** Are you willing to work around some annoyances?
 **** <2018-09-17> Publishing moves the cursor to the beginning of buffer
 In short, =org-publish= clobbers excursion.
 
@@ -563,7 +563,9 @@ For someone used to Scheme, Emacs Lisp is unpleasant.
       However, =cl= is a big package; it's a waste of dependencies if you only use =flet=.
 - Warts for historical reasons
   - Lexical scoping is not the default, probably because it's easier to write a dynamic-binding interpreter than a .
+- Things that are not a big deal in practice
   - Emacs Lisp doesn't have proper tail calls.
+    However, in practice, I have needed proper tail calls to customize Emacs.
 - Contentious
   - Lisp macro is simpler than Scheme macro, but Lisp macro is unhygienic.
 - [[http://xahlee.info/comp/Common_Lisp_quotations.html][Famous Programers on How Common Lisp Sucks]]

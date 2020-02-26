@@ -1,5 +1,91 @@
 #+TITLE: Sketch of PL-0 programming language
 #+DATE: 2019-02-07 00:00:00 +0700
+* Requirements for the language?
+** Interoperation
+- Must be able to work with C.
+  - Must be able to preprocess/parse/read/translate/compile C code.
+- <2020-02-21> Try to target an existing intermediate representation instead of proliferating new ones:
+  - LLVM IR, most probable choice
+  - C11
+  - Racket fully-expanded programs
+  - Guile?
+  - CIL/MSIL
+  - JVM
+  - GHC Core, System F
+  - x86-64
+  - Parrot
+  - GraalVM
+** Numbers
+- Numbers should be as in mathematics, unless the programmers declare that they want a variable to have a machine-optimized type.
+  - Not all real numbers can be represented in a finite computer.
+  - Should =(sqrt 2)= evaluate to a rational number or a symbolic expression?
+    - Should expressions be evaluated symbolically?
+    - Do we want a computer algebra system, a programming language, or a modeling-and-transformation language?
+      - Should we target programmers, scientists, businesspeople, all of them, some of them, or none of them?
+** Modeling
+- The programming language must be convenient for specifying models, model-to-model transformations, and model-to-code transformations?
+- The modeling language should not require mutation.
+- Model transformations should be stateless. Running the same model transformation with the same input should produce the same output.
+** Names
+- Multiple programmers must be able to use the same short name without clashing.
+- Overloading must be supported. E.g. a "get" function should work with lists, arrays, and byte strings. The user should be able to extend overloads?
+- The importer must be able to rename all importees.
+- A file must not name its own package/namespace.
+- There is no global namespace. Piggyback on the operating system's file system namespace.
+- Consequence: moving a code into another file requires changing all of its users.
+** Structured documentation
+- Document a file.
+- The language must have a form for documenting forms. Documentation should be in a structured form, not in an unstructured string, let alone comments.
+- The documenting forms should capture the intentions.
+- The Abstract Syntax Tree must include comments.
+- "comment" special form, not evaluated
+- "doc" special form, not evaluated
+
+#+BEGIN_EXAMPLE
+(comment "FOOBAR")
+(comment foo bar qux)
+
+(define (f x)
+  ;; doc in definition
+  (doc :summary "Print something.")
+  (println x))
+
+;; doc outside definition
+(doc f :summary "Print something.")
+#+END_EXAMPLE
+** Strings
+- The source code is a byte string, not a character string.
+- The source code character encoding is 8-bit ASCII in the following sense:
+  - Inside a byte string literal, the bit 7 of a byte may be one.
+  - Outside a byte string literal, the bit 7 of every byte must be zero.
+  - A byte string literal may contain literal (unescaped) line-feed characters.
+- Programmers should not use non-ASCII characters for identifiers in source code. See https://en.wikipedia.org/wiki/IDN_homograph_attack.
+- If programmers insist on using non-ASCII characters for identifiers, they are responsible for encoding and normalization.
+** Parsing, read, and write
+- The abstract syntax tree must not depend on indentation.
+- For analyzability, the parser must not execute arbitrary code. The grammar must not be arbitrarily customizable. The parser must not require the evaluator. The parser should contain as little state as possible.
+- All errors, including run time errors, must blame a precise location (to the column number), unless the programmers explicitly specify that they prefer performance to traceability.
+- Line numbers begin from zero.
+- Column numbers begin from zero.
+- "read" must be an inverse of "write".
+- "read" must accept every output of "write".
+  Unreadable things must be unwritable as well.
+- "read" must not  execute arbitrary code.
+- "write" is intended for machine consumption by "read".
+- "print" is intended for human consumption.
+** Compiler
+- The compiler must not take more than one minute clock time and 2 GB RAM to compile itself on my modest amd64 machine.
+- The bootstrapping (stage-0) interpreter should be written in a reasonably portable language implementation such as C.
+- The bootstrapping (stage-0) interpreter must be optimized for simplicity, portability, conciseness, shortness, minimality, understandability. It can be naive (mark-and-sweep GC algorithm, linked list for everything, etc.)
+- The stage-1 interpreter must be written in its own input language.
+- The compiler must be self-hosting: it must be written in its own input language.
+- The bootstrapping interpreter runs the stage-0 interpreter that runs the compiler.
+** Polymorphism
+- For run-time speed, it must be possible to resolve some polymorphic parts when the program is compiled so that those polymorphic parts are monomorphic at run time.
+** Security
+- There should be a way to limit the time and memory used by every program, including "read".
+- There should be a way to limit everything, including file-system access?
+
 * Collecting the semantic design puzzle pieces
 How should we define the semantics?
 What properties do we want?
